@@ -1,169 +1,106 @@
+"use client";
+
 import Image from "next/image";
 import FreeConsultationForm from "@/components/blocks/free-consultation-form";
+import { cn } from "@/lib/utils";
 
 export default function FreeConsultationPage() {
   return (
-    <main className="relative pt-32 pb-24">
-      {/* Hero Section */}
-      <section className="max-w-screen-2xl mx-auto px-8 py-12 lg:py-24 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-        <div className="col-span-12 lg:col-span-7">
-          <span className="text-primary font-bold tracking-[0.2em] uppercase text-sm mb-6 block">
-            Academic Atelier Guidance
-          </span>
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-headline font-extrabold tracking-tight text-secondary mb-8 leading-[1.1]">
-            Expert Guidance for Your <span className="text-primary">Academic Journey</span>
-          </h1>
-          <p className="text-lg text-slate-500 max-w-xl leading-relaxed mb-10">
-            Navigate the complexities of global assessments with personalized insights from TEPTH's master consultants. Your success starts with a conversation.
-          </p>
-          <div className="flex flex-wrap gap-4">
-            <button className="bg-primary text-white px-8 py-4 rounded-lg font-bold text-lg hover:opacity-90 transition-all flex items-center gap-2 shadow-lg shadow-primary/10 cursor-pointer">
-              Schedule Call <span className="material-symbols-outlined">calendar_today</span>
-            </button>
-            <button className="text-primary font-bold px-8 py-4 flex items-center gap-2 group cursor-pointer hover:bg-red-50 rounded-lg transition-colors">
-              Watch How We Help <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform">play_circle</span>
-            </button>
-          </div>
-        </div>
-        <div className="col-span-12 lg:col-span-5 relative mt-12 lg:mt-0">
-          <div className="aspect-[4/5] rounded-xl overflow-hidden shadow-2xl relative z-10 border border-slate-100">
-            <Image
-              alt="Consultant in meeting"
-              className="w-full h-full object-cover"
-              src="/images/about-us/infrastructure-center.png"
-              width={600}
-              height={750}
-              priority
-            />
-          </div>
-          <div className="absolute -bottom-8 -left-4 md:-left-8 bg-white/70 backdrop-blur-xl p-8 rounded-xl z-20 shadow-xl max-w-xs border border-white">
-            <p className="text-primary font-black text-3xl mb-1">15k+</p>
-            <p className="text-sm font-semibold text-slate-600">
-              Successful Student Consultations Conducted Worldwide
+    <main className="min-h-screen bg-background pt-24 pb-32">
+      {/* ── Hero Spotlight ── */}
+      <section className="relative px-8 py-20 lg:py-24 overflow-hidden border-b border-outline/5 bg-secondary/[0.02]">
+        <div className="max-w-7xl mx-auto relative z-10 grid lg:grid-cols-12 gap-20 items-center">
+          <div className="lg:col-span-7">
+            <span className="text-primary font-black tracking-[0.4em] uppercase text-[10px] mb-6 block">
+              Academic Navigation
+            </span>
+            <h1 className="text-5xl lg:text-7xl font-headline font-black text-secondary tracking-tighter leading-none mb-6">
+              Expert Guidance for Your <br />
+              <span className="text-primary italic">Academic Journey</span>
+            </h1>
+            <p className="text-lg text-on-surface-variant/70 max-w-xl font-light leading-relaxed mb-10">
+              Navigate the complexities of global assessments with personalized insights from TEPTH's master consultants. Your success starts with a conversation.
             </p>
-          </div>
-          <div className="absolute -top-12 -right-12 w-64 h-64 bg-primary/5 rounded-full blur-3xl -z-10"></div>
-        </div>
-      </section>
-
-      {/* Consultation Options */}
-      <section className="bg-slate-50 py-32 px-8 border-y border-slate-100">
-        <div className="max-w-screen-2xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
-            <div className="max-w-2xl">
-              <h2 className="text-4xl font-headline font-extrabold text-secondary mb-4">Select Your Focus</h2>
-              <p className="text-slate-500 text-lg">
-                Choose the consultation path that aligns with your current academic goals and book your preferred slot.
-              </p>
-            </div>
-            <div className="h-px bg-slate-200 flex-grow mx-8 hidden lg:block mb-4"></div>
-          </div>
-
-          <FreeConsultationForm />
-        </div>
-      </section>
-
-      {/* CTA Section: Free 15-Minute Consultation */}
-      <section className="py-24 px-8 relative overflow-hidden">
-        <div className="max-w-screen-2xl mx-auto bg-secondary text-white rounded-xl p-12 md:p-24 relative z-10 flex flex-col lg:flex-row items-center justify-between gap-12 overflow-hidden shadow-2xl">
-          <div className="absolute inset-0 crimson-gradient opacity-20 pointer-events-none"></div>
-          <div className="max-w-2xl relative z-10">
-            <h2 className="text-4xl md:text-5xl font-headline font-black mb-6 leading-tight">
-              Start with a Free 15-Minute Discovery Session
-            </h2>
-            <p className="text-slate-300 text-lg mb-8 leading-relaxed">
-              No obligations. Just expert advice to help you understand your options and the best path forward for your academic or professional certification.
-            </p>
-            <div className="flex items-center gap-6">
-              <div className="flex -space-x-4">
-                <div className="w-14 h-14 rounded-full border-4 border-secondary flex items-center justify-center bg-blue-100 text-blue-700 font-bold text-xl">
-                  E
+            <div className="flex flex-wrap gap-6">
+              <a href="#booking-form" className="px-12 py-5 bg-secondary text-white font-headline font-bold text-xs uppercase tracking-[0.3em] rounded-2xl hover:bg-primary transition-all shadow-xl shadow-secondary/10">
+                Schedule Session
+              </a>
+              <div className="flex items-center gap-4 p-4 rounded-2xl bg-white shadow-lg shadow-secondary/5 border border-outline/5">
+                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                  <span className="material-symbols-outlined text-xl">timer</span>
                 </div>
-                <div className="w-14 h-14 rounded-full border-4 border-secondary flex items-center justify-center bg-red-100 text-red-700 font-bold text-xl">
-                  M
-                </div>
-                <div className="w-14 h-14 rounded-full border-4 border-secondary flex items-center justify-center bg-amber-100 text-amber-700 font-bold text-xl">
-                  S
+                <div>
+                  <p className="text-[10px] font-black uppercase tracking-widest text-secondary/30">Next Available</p>
+                  <p className="text-xs font-bold text-secondary">Today, 04:30 PM (GST)</p>
                 </div>
               </div>
-              <p className="text-sm font-semibold tracking-wide">Available consultants online now</p>
             </div>
           </div>
-          <div className="w-full md:w-auto relative z-10 flex flex-col items-center">
-            <button className="inline-flex items-center justify-center bg-white text-secondary px-10 py-5 rounded-lg font-black text-xl hover:bg-gray-100 transition-all w-full shadow-xl active:scale-95 cursor-pointer">
-              Schedule Free Now
-              <span className="material-symbols-outlined ml-3 text-primary">arrow_forward</span>
-            </button>
-            <p className="text-center mt-4 text-sm text-slate-400">Slots refresh daily at 9:00 AM GST</p>
+          <div className="lg:col-span-5 relative hidden lg:block">
+            <div className="aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl skew-y-1 hover:skew-y-0 transition-transform duration-700 bg-surface-container-low border border-outline/5">
+              <Image
+                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                alt="Expert consultant provide guidance"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDj8w-vwgG-NJORfSXuHFah4aZUndRiONmk1ag3cGH8osj2gB70L1gVnt2tuTe7o5XFnzMakIX7lx86z8ucpHFNJaHY9jK0atH8VOfVHAmuVLbNt8fRTIGeiZlzh2h-fqlDWjq7oTprJamb8Y0LYgqdAJlfzB8EjaBTlibKxsWt-ns2KA1AbDKhGhsviaq4tqmumMkC7ZkuIe7rb8J0AKhM_nxgYyo4hG20LeN9TU_88D99JwwNS49Lcan9rML0zT7HdznGfuXJAg"
+                width={600}
+                height={750}
+                priority
+              />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Resources Section */}
-      <section className="py-24 px-8 top-0 relative">
-        <div className="absolute h-1/2 bg-slate-50 w-full inset-0 -z-10"></div>
-        <div className="max-w-screen-2xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-headline font-extrabold mb-4 text-secondary">Academic Resources</h2>
-            <p className="text-slate-500 max-w-xl mx-auto text-lg">
-              Download our curated guides and preparation checklists to start your journey today.
+      {/* ── Step 1: Select Track ── */}
+      <section className="px-8 pt-32 pb-20">
+        <div className="max-w-7xl mx-auto">
+          <div className="max-w-2xl mb-16 space-y-4">
+            <h2 className="text-4xl font-headline font-black text-secondary tracking-tight">Select Your Path</h2>
+            <p className="text-on-surface-variant/60 font-medium text-lg">Choose a specialized consultation track to ensure we match you with the right advisor.</p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              { title: "Academic Path", desc: "For students focusing on university admissions and language benchmarks.", icon: "school", color: "primary" },
+              { title: "Migration Hub", desc: "Guidance for residency exams and immigration language requirements.", icon: "public", color: "secondary" },
+              { title: "Professional Suite", desc: "Executive training and corporate language certification strategy.", icon: "business_center", color: "secondary" }
+            ].map((track) => (
+              <div key={track.title} className="p-10 rounded-[2.5rem] bg-surface-container-low border border-outline/5 hover:border-primary/20 hover:bg-white transition-all group scale-100 hover:scale-[1.02] duration-500 cursor-pointer shadow-sm hover:shadow-2xl hover:shadow-primary/5">
+                <div className={cn(
+                  "w-16 h-16 rounded-3xl mb-8 flex items-center justify-center transition-all",
+                  track.color === "primary" ? "bg-primary text-white shadow-xl shadow-primary/20" : "bg-white text-secondary shadow-lg"
+                )}>
+                  <span className="material-symbols-outlined text-3xl font-light">{track.icon}</span>
+                </div>
+                <h3 className="text-2xl font-headline font-black text-secondary mb-4 group-hover:text-primary transition-colors">{track.title}</h3>
+                <p className="text-sm text-on-surface-variant/60 leading-relaxed font-medium mb-8">{track.desc}</p>
+                <div className="flex items-center gap-2 text-[10px] font-black text-primary uppercase tracking-[0.2em] opacity-0 group-hover:opacity-100 transition-opacity">
+                  Select Track <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Form Section ── */}
+      <section id="booking-form" className="px-8 pb-32">
+        <div className="max-w-4xl mx-auto">
+          <div className="bg-white rounded-[3rem] p-12 md:p-20 shadow-2xl shadow-secondary/5 border border-outline/5">
+            <div className="text-center mb-16 space-y-2">
+              <span className="text-[10px] font-black text-primary uppercase tracking-[0.4em]">Reservation</span>
+              <h2 className="text-3xl font-headline font-black text-secondary tracking-tight">Confirm Your Session</h2>
+            </div>
+            <FreeConsultationForm />
+          </div>
+          
+          <div className="mt-12 text-center">
+            <p className="text-[10px] font-black text-secondary/30 uppercase tracking-[0.2em]">
+              *Our consultations are strictly advisory. Final decisions remain with the candidate.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Resource 1 */}
-            <div className="group relative bg-white p-8 rounded-xl border border-slate-200 hover:border-primary transition-all duration-300 shadow-sm hover:shadow-lg">
-              <div className="flex items-start justify-between mb-8">
-                <span className="material-symbols-outlined text-4xl text-primary drop-shadow-sm">picture_as_pdf</span>
-                <span className="text-[10px] font-bold text-primary uppercase tracking-widest bg-red-50 px-3 py-1 rounded-full">
-                  PDF 2.4 MB
-                </span>
-              </div>
-              <h4 className="text-xl font-bold mb-2 text-secondary group-hover:text-primary transition-colors">2024 Exam Roadmap</h4>
-              <p className="text-sm text-slate-500 mb-8 min-h-[2.5rem]">
-                A comprehensive timeline for all major global academic assessments.
-              </p>
-              <button className="flex items-center text-primary font-bold text-sm group-hover:underline cursor-pointer">
-                Download Now <span className="material-symbols-outlined ml-1 text-sm">download</span>
-              </button>
-            </div>
-
-            {/* Resource 2 */}
-            <div className="group relative bg-white p-8 rounded-xl border border-slate-200 hover:border-primary transition-all duration-300 shadow-sm hover:shadow-lg">
-              <div className="flex items-start justify-between mb-8">
-                <span className="material-symbols-outlined text-4xl text-primary drop-shadow-sm">fact_check</span>
-                <span className="text-[10px] font-bold text-primary uppercase tracking-widest bg-red-50 px-3 py-1 rounded-full">
-                  PDF 1.1 MB
-                </span>
-              </div>
-              <h4 className="text-xl font-bold mb-2 text-secondary group-hover:text-primary transition-colors">Prep Checklist</h4>
-              <p className="text-sm text-slate-500 mb-8 min-h-[2.5rem]">
-                Essential steps to take 30 days before your scheduled exam date.
-              </p>
-              <button className="flex items-center text-primary font-bold text-sm group-hover:underline cursor-pointer">
-                Download Now <span className="material-symbols-outlined ml-1 text-sm">download</span>
-              </button>
-            </div>
-
-            {/* Resource 3 */}
-            <div className="group relative bg-white p-8 rounded-xl border border-slate-200 hover:border-primary transition-all duration-300 shadow-sm hover:shadow-lg">
-              <div className="flex items-start justify-between mb-8">
-                <span className="material-symbols-outlined text-4xl text-primary drop-shadow-sm">library_books</span>
-                <span className="text-[10px] font-bold text-primary uppercase tracking-widest bg-red-50 px-3 py-1 rounded-full">
-                  PDF 5.8 MB
-                </span>
-              </div>
-              <h4 className="text-xl font-bold mb-2 text-secondary group-hover:text-primary transition-colors">Course Brochure</h4>
-              <p className="text-sm text-slate-500 mb-8 min-h-[2.5rem]">
-                Detailed syllabus and pricing for all TEPTH preparation courses.
-              </p>
-              <button className="flex items-center text-primary font-bold text-sm group-hover:underline cursor-pointer">
-                Download Now <span className="material-symbols-outlined ml-1 text-sm">download</span>
-              </button>
-            </div>
-          </div>
         </div>
       </section>
-
     </main>
   );
 }

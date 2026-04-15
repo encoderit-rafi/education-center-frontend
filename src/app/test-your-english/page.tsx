@@ -1,88 +1,70 @@
+"use client";
 
 import Image from "next/image";
 import TestYourEnglishForm from "@/components/blocks/test-your-english-form";
+import { cn } from "@/lib/utils";
 
 export default function TestYourEnglishPage() {
   return (
-    <main>
-      {/* Hero Section */}
-      <section className="relative pt-24 pb-16 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          <div className="lg:col-span-7 z-10">
-            <span className="inline-block px-4 py-1.5 rounded-full bg-red-100 text-red-900 text-xs font-bold uppercase tracking-widest mb-6">
-              Proficiency Check
+    <main className="min-h-screen bg-background pt-24 pb-32">
+      {/* ── Hero Spotlight ── */}
+      <section className="relative px-8 py-20 lg:py-24 overflow-hidden border-b border-outline/5 bg-secondary/[0.02]">
+        <div className="max-w-7xl mx-auto relative z-10 grid lg:grid-cols-12 gap-20 items-center">
+          <div className="lg:col-span-7">
+            <span className="text-primary font-black tracking-[0.4em] uppercase text-[10px] mb-6 block">
+              Proficiency Benchmark
             </span>
-            <h1 className="text-5xl lg:text-7xl font-extrabold font-headline text-slate-900 leading-[1.1] tracking-tighter mb-6">
-              Test Your <span className="text-primary italic">English</span> Skills
+            <h1 className="text-5xl lg:text-7xl font-headline font-black text-secondary tracking-tighter leading-none mb-6">
+              Test Your <br />
+              <span className="text-primary italic">English Skills</span>
             </h1>
-            <p className="text-xl text-slate-600 leading-relaxed max-w-xl mb-8">
+            <p className="text-lg text-on-surface-variant/70 max-w-xl font-light leading-relaxed mb-10">
               Evaluate your proficiency in minutes and get personalized course recommendations. Our assessment is designed by academic experts to map your current level to global standards.
             </p>
-            <div className="flex items-center gap-6">
+            <div className="flex flex-wrap items-center gap-8">
               <a
-                className="bg-primary text-white px-8 py-4 rounded-lg font-bold text-lg hover:shadow-xl hover:bg-red-800 transition-all active:scale-[0.98]"
-                href="#assessment-form"
+                href="#assessment-journey"
+                className="px-12 py-5 bg-secondary text-white font-headline font-bold text-xs uppercase tracking-[0.3em] rounded-2xl hover:bg-primary transition-all shadow-xl shadow-secondary/10"
               >
-                Start Test
+                Start Assessment
               </a>
-              <div className="flex -space-x-3">
-                <div className="w-10 h-10 rounded-full border-2 border-white flex items-center justify-center bg-blue-100 text-blue-700 font-bold text-sm">
-                  A
+              <div className="flex items-center gap-4">
+                <div className="flex -space-x-3">
+                  {[1, 2, 3].map((i) => (
+                    <div key={i} className="w-10 h-10 rounded-full border-4 border-white bg-surface-container-high flex items-center justify-center text-[10px] font-black text-secondary/30">
+                      {String.fromCharCode(64 + i)}
+                    </div>
+                  ))}
                 </div>
-                <div className="w-10 h-10 rounded-full border-2 border-white flex items-center justify-center bg-red-100 text-red-700 font-bold text-sm">
-                  B
-                </div>
-                <div className="w-10 h-10 rounded-full border-2 border-white flex items-center justify-center bg-amber-100 text-amber-700 font-bold text-sm">
-                  C
-                </div>
-                <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-[10px] font-bold border-2 border-white text-slate-700">
-                  15k+
-                </div>
+                <p className="text-[10px] font-black text-secondary/40 uppercase tracking-widest">
+                  15k+ Candidates Evaluated
+                </p>
               </div>
-              <p className="text-sm text-slate-500 font-medium hidden sm:block">Joined the assessment</p>
             </div>
           </div>
-          <div className="lg:col-span-5 relative">
-            <div className="aspect-square rounded-xl overflow-hidden shadow-2xl relative z-10 transform rotate-3 hover:rotate-0 transition-transform duration-500">
+          <div className="lg:col-span-5 relative hidden lg:block">
+            <div className="aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl skew-y-1 hover:skew-y-0 transition-transform duration-700 bg-surface-container-low border border-outline/5">
               <Image
-                className="w-full h-full object-cover"
-                alt="Library setting with pen and paper"
-                src="/images/about-us/mission-student.png"
+                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                alt="Academic assessment environment"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDj8w-vwgG-NJORfSXuHFah4aZUndRiONmk1ag3cGH8osj2gB70L1gVnt2tuTe7o5XFnzMakIX7lx86z8ucpHFNJaHY9jK0atH8VOfVHAmuVLbNt8fRTIGeiZlzh2h-fqlDWjq7oTprJamb8Y0LYgqdAJlfzB8EjaBTlibKxsWt-ns2KA1AbDKhGhsviaq4tqmumMkC7ZkuIe7rb8J0AKhM_nxgYyo4hG20LeN9TU_88D99JwwNS49Lcan9rML0zT7HdznGfuXJAg"
                 width={600}
-                height={600}
+                height={750}
                 priority
               />
             </div>
-            <div className="absolute -top-6 -right-6 w-64 h-64 bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
-            <div className="absolute -bottom-12 -left-12 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl pointer-events-none"></div>
+            <div className="absolute -bottom-10 -left-10 w-64 h-64 bg-primary/5 rounded-full blur-3xl -z-10" />
           </div>
         </div>
       </section>
 
-      {/* Assessment Form Section */}
-      <section className="py-24 bg-red-50/50" id="assessment-form">
-        <div className="max-w-4xl mx-auto px-8">
-          {/* Progress Header */}
-          <div className="mb-12">
-            <div className="flex justify-between items-end mb-4">
-              <div>
-                <h2 className="text-3xl font-extrabold tracking-tight text-slate-900 font-headline">
-                  Assessment Journey
-                </h2>
-                <p className="text-slate-500 mt-1">Complete all sections for an accurate evaluation.</p>
-              </div>
-              <div className="text-right">
-                <span className="text-primary font-black text-2xl">Step 3</span>
-                <span className="text-slate-400 font-medium"> of 3</span>
-              </div>
-            </div>
-            {/* Academic Progress Bar */}
-            <div className="h-3 w-full bg-slate-200 rounded-full overflow-hidden">
-              <div className="h-full bg-primary rounded-full transition-all duration-1000 w-full"></div>
-            </div>
+      {/* ── Assessment Journey ── */}
+      <section id="assessment-journey" className="px-8 pt-32">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-16 space-y-4">
+            <h2 className="text-3xl font-headline font-black text-secondary tracking-tight">Your Assessment Journey</h2>
+            <div className="w-24 h-1 crimson-gradient mx-auto rounded-full" />
           </div>
-
-          {/* Form Container */}
           <TestYourEnglishForm />
         </div>
       </section>

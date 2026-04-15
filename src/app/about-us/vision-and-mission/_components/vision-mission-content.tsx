@@ -1,81 +1,27 @@
-import Image from "next/image";
-import { Flag, Eye, Circle } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export function VisionMissionContent() {
   return (
-    <section className="py-20 bg-white">
-      <div className="container px-6 mx-auto sm:px-12 lg:px-24">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          
-          {/* Our Mission Block */}
-          <div className="lg:col-span-8 bg-[#FFF8F8] rounded-2xl p-8 md:p-12 flex flex-col justify-between">
-            <div>
-              <div className="flex items-center gap-3 mb-8">
-                <Flag className="w-6 h-6 text-[#8A1818]" fill="currentColor" />
-                <h2 className="text-2xl font-bold text-[#1F1F1F] font-heading">Our Mission</h2>
-              </div>
-              <p className="text-xl md:text-2xl text-[#4A4A4A] leading-relaxed mb-12">
-                To empower <span className="text-[#8A1818] font-semibold">students and professionals</span> by providing unparalleled access to globally recognized language proficiency assessments and developmental resources.
-              </p>
-            </div>
-            
-            <div className="flex flex-wrap gap-12 mt-auto">
-              <div>
-                <div className="text-2xl font-bold text-[#8A1818]">98%</div>
-                <div className="text-xs font-bold text-[#8E8E8E] tracking-widest uppercase">Success Rate</div>
-              </div>
-              <div>
-                <div className="text-2xl font-bold text-[#8A1818]">50k+</div>
-                <div className="text-xs font-bold text-[#8E8E8E] tracking-widest uppercase">Alumni Base</div>
-              </div>
-            </div>
-          </div>
+    <section className="px-8 py-32">
+      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-center">
+        {/* Mission Card */}
+        <div className="p-16 rounded-[3rem] bg-surface-container-low border border-outline/5 relative overflow-hidden group hover:bg-white hover:shadow-2xl hover:shadow-primary/5 transition-all duration-700">
+          <div className="absolute right-0 top-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl -mr-16 -mt-16" />
+          <span className="text-[10px] font-black text-primary uppercase tracking-[0.4em] mb-6 block">Our Mission</span>
+          <h2 className="text-4xl font-headline font-black text-secondary tracking-tight mb-8">Empowering Futures Through <span className="text-primary italic">Precision</span></h2>
+          <p className="text-lg text-on-surface-variant/70 font-light leading-relaxed">
+            To provide high-integrity evaluation and preparation services that bridge the gap between regional talent and global opportunity. We commit to the highest standards of proctoring and academic ethical conduct.
+          </p>
+        </div>
 
-          {/* Student Image */}
-          <div className="lg:col-span-4 relative h-[300px] lg:h-auto rounded-2xl overflow-hidden">
-            <Image
-              src="/images/about-us/mission-student.png"
-              alt="Focused student"
-              fill
-              className="object-cover"
-            />
-          </div>
-
-          {/* World Map Image */}
-          <div className="lg:col-span-4 relative h-[300px] lg:h-auto rounded-2xl overflow-hidden order-4 lg:order-3">
-            <Image
-              src="/images/about-us/vision-map.png"
-              alt="Global connectivity map"
-              fill
-              className="object-cover"
-            />
-          </div>
-
-          {/* Our Vision Block */}
-          <div className="lg:col-span-8 bg-[#131722] rounded-2xl p-8 md:p-12 text-white order-3 lg:order-4">
-            <div className="flex items-center gap-3 mb-8">
-              <Eye className="w-6 h-6 text-white" />
-              <h2 className="text-2xl font-bold font-heading">Our Vision</h2>
-            </div>
-            <p className="text-xl md:text-2xl text-white/90 leading-relaxed mb-12">
-              To become the <span className="text-white font-semibold">global leader in assessment services</span>, pioneering digital-first solutions that transcend borders and set the gold standard for educational certification.
-            </p>
-            
-            <ul className="space-y-4">
-              {[
-                "Innovation in delivery",
-                "Integrity in results",
-                "Excellence in access"
-              ].map((item, idx) => (
-                <li key={idx} className="flex items-center gap-3 text-xs font-bold tracking-widest uppercase text-white/70">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#8A1818]" />
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-
+        {/* Vision Card */}
+        <div className="p-16 rounded-[3rem] bg-secondary text-white relative overflow-hidden group hover:scale-[1.02] transition-all duration-700 shadow-2xl shadow-secondary/20">
+          <div className="absolute left-0 top-0 w-32 h-32 bg-primary/20 rounded-full blur-2xl -ml-16 -mt-16 opacity-50" />
+          <span className="text-[10px] font-black text-primary uppercase tracking-[0.4em] mb-6 block">Our Vision</span>
+          <h2 className="text-4xl font-headline font-black text-white tracking-tight mb-8 leading-none">To be the <span className="text-primary">Ecosystem</span> for Life-Long Learning</h2>
+          <p className="text-lg text-white/70 font-light leading-relaxed">
+            Becoming the primary regional hub for all international certification requirements, recognized for innovation in digital testing and excellence in academic preparation.
+          </p>
         </div>
       </div>
     </section>
