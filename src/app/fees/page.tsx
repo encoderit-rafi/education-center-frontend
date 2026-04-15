@@ -95,7 +95,7 @@ export default function FeesPage() {
                   <span className="text-[10px] text-[#4B5563] font-bold uppercase tracking-widest">Incl. VAT</span>
                 </div>
                 <Link
-                  href="/book-exam"
+                  href="/book-a-test"
                   className="block w-full text-center bg-[#F3F4F6] text-[#111827] py-4 rounded-2xl font-headline font-bold text-sm group-hover:bg-[#991B1B] group-hover:text-white transition-all duration-300"
                 >
                   Book Now
@@ -142,7 +142,7 @@ export default function FeesPage() {
                   <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Incl. VAT</span>
                 </div>
                 <Link
-                  href="/book-exam"
+                  href="/book-a-test"
                   className="block w-full text-center bg-gradient-to-br from-[#991B1B] to-[#7F1D1D] text-white py-5 rounded-2xl font-headline font-bold text-sm tracking-wide shadow-[0_20px_40px_rgba(153,27,27,0.4)] hover:scale-[1.02] transition-all"
                 >
                   Book Priority Slot
@@ -184,7 +184,7 @@ export default function FeesPage() {
                   <span className="text-[10px] text-[#4B5563] font-bold uppercase tracking-widest">Incl. VAT</span>
                 </div>
                 <Link
-                  href="/book-exam"
+                  href="/book-a-test"
                   className="block w-full text-center bg-[#F3F4F6] text-[#111827] py-4 rounded-2xl font-headline font-bold text-sm group-hover:bg-[#991B1B] group-hover:text-white transition-all duration-300"
                 >
                   Book Now
@@ -327,7 +327,7 @@ export default function FeesPage() {
             </div>
             <div className="flex flex-col sm:flex-row gap-6 w-full md:w-auto">
               <Link
-                href="/book-exam"
+                href="/book-a-test"
                 className="bg-white text-[#991B1B] px-12 py-6 rounded-2xl font-headline font-black text-sm tracking-widest uppercase shadow-2xl hover:scale-105 transition-all text-center"
               >
                 Book Your Seat

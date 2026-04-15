@@ -184,9 +184,12 @@ export default function TopNavBar() {
           />
         </div>
         <div className="flex items-center gap-4">
-          <button className="crimson-gradient text-white font-headline font-bold px-6 py-2.5 rounded-lg shadow-md active:scale-95 transition-transform duration-200 whitespace-nowrap cursor-pointer">
+          <Link 
+            href="/book-a-test"
+            className="crimson-gradient text-white font-headline font-bold px-6 py-2.5 rounded-lg shadow-md active:scale-95 transition-transform duration-200 whitespace-nowrap cursor-pointer block text-center"
+          >
             Enroll Now
-          </button>
+          </Link>
         </div>
       </div>
       <div className="bg-slate-100 dark:bg-slate-900 h-[1px]"></div>

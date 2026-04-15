@@ -1,412 +1,229 @@
 "use client";
 
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-import { Field, FieldError } from "@/components/ui/field";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 
-const bookingSchema = z.object({
-  examType: z.enum(["IELTS", "OET", "PTE"], {
-    message: "Please select an examination type.",
-  }),
-  date: z.string().min(1, { message: "Please select a test date." }),
-  timeSlot: z.string().min(1, { message: "Please select a time slot." }),
-  paymentMethod: z.enum(["credit_card", "digital_wallet"], {
-    message: "Please select a secure payment method.",
-  }),
-});
-
-type BookingFormValues = z.infer<typeof bookingSchema>;
+const MOCK_TESTS = [
+  {
+    id: "ielts",
+    title: "IELTS Mock Test",
+    description: "Full academic simulation including all four modules.",
+    price: 45,
+    icon: "edit_note",
+    badge: "Most Popular",
+  },
+  {
+    id: "oet",
+    title: "OET Mock Test",
+    description: "Profession-specific English test for medical workers.",
+    price: 60,
+    icon: "medical_services",
+    badge: "Healthcare",
+  },
+  {
+    id: "pte",
+    title: "PTE Mock Test",
+    description: "AI-scored academic English proficiency test simulation.",
+    price: 50,
+    icon: "computer",
+    badge: "Pearson",
+  },
+];
 
 export default function MockTestBookingForm() {
+  const [selectedId, setSelectedId] = useState(MOCK_TESTS[0].id);
+  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedTime, setSelectedTime] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const {
-    handleSubmit,
-    setValue,
-    watch,
-    formState: { errors, isSubmitting },
-  } = useForm<BookingFormValues>({
-    resolver: zodResolver(bookingSchema),
-    defaultValues: {
-      date: "",
-      timeSlot: "",
-    },
-  });
+  const selectedMock = MOCK_TESTS.find((m) => m.id === selectedId);
 
-  const selectedExam = watch("examType");
-  const selectedDate = watch("date");
-  const selectedTimeSlot = watch("timeSlot");
-  const selectedPayment = watch("paymentMethod");
-
-  const getExamPrice = (exam?: string) => {
-    switch (exam) {
-      case "IELTS":
-        return 45;
-      case "OET":
-        return 60;
-      case "PTE":
-        return 50;
-      default:
-        return 0;
-    }
-  };
-
-  const totalPrice = getExamPrice(selectedExam).toFixed(2);
-
-  const onSubmit = async (data: BookingFormValues) => {
-    console.log("Booking processed:", data);
-    await new Promise((resolve) => setTimeout(resolve, 800));
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
     setIsSuccess(true);
   };
 
   if (isSuccess) {
     return (
-      <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-3xl p-16 text-center space-y-6 max-w-2xl mx-auto shadow-sm">
-        <span className="material-symbols-outlined text-7xl text-emerald-500">task_alt</span>
-        <h2 className="text-3xl font-headline font-extrabold text-emerald-900">Booking Confirmed!</h2>
-        <p className="text-emerald-700 text-lg">
-          Your mock test has been successfully scheduled. We've sent a detailed confirmation email and calendar invite.
-        </p>
+      <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-[3rem] p-16 text-center space-y-8 max-w-2xl mx-auto shadow-2xl shadow-emerald-500/5 animate-in zoom-in-95 duration-500">
+        <div className="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mx-auto">
+          <span className="material-symbols-outlined text-4xl text-emerald-600 font-bold">check</span>
+        </div>
+        <div className="space-y-4">
+          <h2 className="text-4xl font-headline font-black text-emerald-900 tracking-tight">Booking Confirmed</h2>
+          <p className="text-emerald-700/80 text-lg leading-relaxed font-medium">
+            Your academic simulation has been successfully scheduled. Check your email for the preparation guide and access credentials.
+          </p>
+        </div>
+        <button 
+          onClick={() => setIsSuccess(false)}
+          className="px-12 py-4 bg-emerald-600 text-white font-headline font-bold text-xs uppercase tracking-widest rounded-2xl hover:bg-emerald-700 transition-all shadow-xl shadow-emerald-600/20"
+        >
+          Book Another Test
+        </button>
       </div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-      {/* Left Column: Course Selection & Payment */}
-      <div className="lg:col-span-7 space-y-12">
-        {/* Section: Course Selection */}
-        <section>
-          <div className="flex items-center gap-3 mb-6">
-            <span className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm">
+    <form onSubmit={handleSubmit} className="grid lg:grid-cols-12 gap-16 items-start">
+      {/* Left Column: Form Steps */}
+      <div className="lg:col-span-8 space-y-20">
+        
+        {/* Step 1: Selection */}
+        <div>
+          <div className="flex items-center gap-6 mb-12">
+            <span className="w-12 h-12 rounded-2xl bg-primary text-white flex items-center justify-center font-black text-xl shadow-lg shadow-primary/20">
               1
             </span>
-            <h2 className="text-2xl font-bold">Select Examination</h2>
+            <h2 className="text-3xl font-headline font-extrabold text-secondary tracking-tight">Select Test Category</h2>
           </div>
-          <Field data-invalid={!!errors.examType}>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {/* IELTS Card */}
+          <div className="grid md:grid-cols-3 gap-6">
+            {MOCK_TESTS.map((test) => (
               <div
-                onClick={() => setValue("examType", "IELTS", { shouldValidate: true })}
+                key={test.id}
+                onClick={() => setSelectedId(test.id)}
                 className={cn(
-                  "p-6 rounded-xl transition-all duration-300 cursor-pointer border-2",
-                  selectedExam === "IELTS"
-                    ? "bg-red-50 border-primary ring-4 ring-primary/10"
-                    : "bg-surface border-transparent hover:bg-slate-50"
+                  "p-8 rounded-[2rem] border-2 cursor-pointer transition-all duration-300 relative group",
+                  selectedId === test.id
+                    ? "border-primary bg-white shadow-2xl shadow-primary/5"
+                    : "border-outline/5 bg-surface-container-low hover:border-primary/20"
                 )}
               >
-                <div className={cn("font-bold text-xs tracking-widest uppercase mb-2", selectedExam === "IELTS" ? "text-primary" : "text-slate-400")}>
-                  Most Popular
+                <div className="flex justify-between items-start mb-6">
+                  <div className={cn(
+                    "w-12 h-12 rounded-xl flex items-center justify-center transition-colors",
+                    selectedId === test.id ? "bg-primary text-white" : "bg-primary/10 text-primary"
+                  )}>
+                    <span className="material-symbols-outlined">{test.icon}</span>
+                  </div>
                 </div>
-                <h3 className="text-xl font-bold text-secondary mb-1">IELTS</h3>
-                <div className="text-3xl font-black text-secondary mb-4">$45.00</div>
-                <p className="text-sm text-slate-500 mb-6 leading-relaxed">
-                  Full academic simulation including all four modules.
-                </p>
-                <div
-                  className={cn(
-                    "w-full font-bold py-3 rounded-lg flex items-center justify-center transition-colors text-sm",
-                    selectedExam === "IELTS"
-                      ? "bg-primary text-white gap-2"
-                      : "bg-slate-100 text-slate-500 hover:bg-slate-200"
-                  )}
-                >
-                  {selectedExam === "IELTS" ? (
-                    <>
-                      <span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>
-                        check_circle
-                      </span>
-                      Selected
-                    </>
-                  ) : (
-                    "Select"
-                  )}
-                </div>
+                <h3 className="text-xl font-headline font-black text-secondary mb-2 group-hover:text-primary transition-colors">{test.title}</h3>
+                <p className="text-[10px] text-secondary/40 font-black uppercase tracking-widest mb-4">{test.badge}</p>
+                <p className="text-[11px] text-on-surface-variant/60 font-medium leading-relaxed">{test.description}</p>
+                
+                {selectedId === test.id && (
+                  <div className="absolute -top-2 -right-2 w-8 h-8 bg-primary rounded-full flex items-center justify-center border-4 border-white text-white shadow-lg">
+                    <span className="material-symbols-outlined text-sm font-bold">check</span>
+                  </div>
+                )}
               </div>
+            ))}
+          </div>
+        </div>
 
-              {/* OET Card */}
-              <div
-                onClick={() => setValue("examType", "OET", { shouldValidate: true })}
-                className={cn(
-                  "p-6 rounded-xl transition-all duration-300 cursor-pointer border-2",
-                  selectedExam === "OET"
-                    ? "bg-red-50 border-primary ring-4 ring-primary/10"
-                    : "bg-surface border-transparent hover:bg-slate-50"
-                )}
-              >
-                <div className={cn("font-bold text-xs tracking-widest uppercase mb-2", selectedExam === "OET" ? "text-primary" : "text-slate-400")}>
-                  Healthcare
-                </div>
-                <h3 className="text-xl font-bold text-secondary mb-1">OET</h3>
-                <div className="text-3xl font-black text-secondary mb-4">$60.00</div>
-                <p className="text-sm text-slate-500 mb-6 leading-relaxed">
-                  Profession-specific English test for medical workers.
-                </p>
-                <div
-                  className={cn(
-                    "w-full font-bold py-3 rounded-lg flex items-center justify-center transition-colors text-sm",
-                    selectedExam === "OET"
-                      ? "bg-primary text-white gap-2"
-                      : "bg-slate-100 text-slate-500 hover:bg-slate-200"
-                  )}
-                >
-                  {selectedExam === "OET" ? (
-                    <>
-                      <span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>
-                        check_circle
-                      </span>
-                      Selected
-                    </>
-                  ) : (
-                    "Select"
-                  )}
-                </div>
-              </div>
-
-              {/* PTE Card */}
-              <div
-                onClick={() => setValue("examType", "PTE", { shouldValidate: true })}
-                className={cn(
-                  "p-6 rounded-xl transition-all duration-300 cursor-pointer border-2",
-                  selectedExam === "PTE"
-                    ? "bg-red-50 border-primary ring-4 ring-primary/10"
-                    : "bg-surface border-transparent hover:bg-slate-50"
-                )}
-              >
-                <div className={cn("font-bold text-xs tracking-widest uppercase mb-2", selectedExam === "PTE" ? "text-primary" : "text-slate-400")}>
-                  Pearson
-                </div>
-                <h3 className="text-xl font-bold text-secondary mb-1">PTE</h3>
-                <div className="text-3xl font-black text-secondary mb-4">$50.00</div>
-                <p className="text-sm text-slate-500 mb-6 leading-relaxed">
-                  AI-scored academic English proficiency test.
-                </p>
-                <div
-                  className={cn(
-                    "w-full font-bold py-3 rounded-lg flex items-center justify-center transition-colors text-sm",
-                    selectedExam === "PTE"
-                      ? "bg-primary text-white gap-2"
-                      : "bg-slate-100 text-slate-500 hover:bg-slate-200"
-                  )}
-                >
-                  {selectedExam === "PTE" ? (
-                    <>
-                      <span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>
-                        check_circle
-                      </span>
-                      Selected
-                    </>
-                  ) : (
-                    "Select"
-                  )}
-                </div>
+        {/* Step 2: Schedule */}
+        <div>
+          <div className="flex items-center gap-6 mb-12">
+            <span className="w-12 h-12 rounded-2xl bg-surface-container-highest text-secondary flex items-center justify-center font-black text-xl">
+              2
+            </span>
+            <h2 className="text-3xl font-headline font-extrabold text-secondary tracking-tight">Pick Date & Time</h2>
+          </div>
+          <div className="grid md:grid-cols-2 gap-12">
+            <div className="space-y-4">
+              <label className="text-[10px] font-black uppercase tracking-[0.2em] text-secondary/40 ml-1">Preferred Date</label>
+              <div className="grid grid-cols-4 gap-3">
+                {["Nov 12", "Nov 14", "Nov 16", "Nov 18"].map((date) => (
+                  <button
+                    key={date}
+                    type="button"
+                    onClick={() => setSelectedDate(date)}
+                    className={cn(
+                      "p-4 rounded-xl border-2 text-[10px] font-black uppercase tracking-widest transition-all",
+                      selectedDate === date ? "border-primary bg-white text-secondary scale-105 shadow-md" : "border-outline/5 bg-surface-container-low text-secondary/30"
+                    )}
+                  >
+                    {date}
+                  </button>
+                ))}
               </div>
             </div>
-            {errors.examType && <FieldError className="mt-2">{errors.examType.message}</FieldError>}
-          </Field>
-        </section>
+            <div className="space-y-4">
+              <label className="text-[10px] font-black uppercase tracking-[0.2em] text-secondary/40 ml-1">Available Slots</label>
+              <div className="grid grid-cols-2 gap-3">
+                {["09:00 AM", "02:00 PM"].map((time) => (
+                  <button
+                    key={time}
+                    type="button"
+                    onClick={() => setSelectedTime(time)}
+                    className={cn(
+                      "p-4 rounded-xl border-2 text-[10px] font-black uppercase tracking-widest transition-all",
+                      selectedTime === time ? "border-primary bg-white text-secondary scale-105 shadow-md" : "border-outline/5 bg-surface-container-low text-secondary/30"
+                    )}
+                  >
+                    {time}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
 
-        {/* Section: Payment Methods */}
-        <section>
-          <div className="flex items-center gap-3 mb-6">
-            <span className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm">
+        {/* Step 3: Payment Type */}
+        <div>
+          <div className="flex items-center gap-6 mb-12">
+            <span className="w-12 h-12 rounded-2xl bg-surface-container-highest text-secondary flex items-center justify-center font-black text-xl">
               3
             </span>
-            <h2 className="text-2xl font-bold">Secure Payment</h2>
+            <h2 className="text-3xl font-headline font-extrabold text-secondary tracking-tight">Secure Payment</h2>
           </div>
-          <div className="bg-slate-50 p-8 rounded-xl space-y-6">
-            <Field data-invalid={!!errors.paymentMethod}>
-              <div className="grid grid-cols-2 gap-4">
-                <div
-                  onClick={() => setValue("paymentMethod", "credit_card", { shouldValidate: true })}
-                  className={cn(
-                    "p-6 rounded-lg border-2 transition-all flex flex-col items-center gap-3 cursor-pointer",
-                    selectedPayment === "credit_card"
-                      ? "border-primary bg-white ring-2 ring-primary/10"
-                      : "border-transparent bg-white hover:border-slate-300"
-                  )}
-                >
-                  <img
-                    alt="Stripe"
-                    className={cn("h-8 transition-all", selectedPayment === "credit_card" ? "grayscale-0" : "grayscale")}
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtc74ic5afrunBrWiUmBpb2se_7U_oPpX4vuh9Uy1p9w0qfbNuBldu14CBon1S9hHGKaw1TuhIz8JvHwxlap5U2gwlsLmpEdCwn_FH1_xiPfhp3ybI_KSEK19gahsU5z_7Eu_b4PwWEcFJdS4kM52LBRf4HWPvnspArBO4_1iFsjtDLkdKhBtqaOuQJZUxfVKfeMBKiPKsObdymkK8TxR23UCQPDuCV4t1KWK8XYjShdW8adssIn_0MeJ_iDBYC_SxlMiOMWRJwr98"
-                  />
-                  <span className="text-xs font-bold text-slate-500 uppercase tracking-widest">
-                    Credit Card
-                  </span>
-                </div>
-                <div
-                  onClick={() => setValue("paymentMethod", "digital_wallet", { shouldValidate: true })}
-                  className={cn(
-                    "p-6 rounded-lg border-2 transition-all flex flex-col items-center gap-3 cursor-pointer",
-                    selectedPayment === "digital_wallet"
-                      ? "border-primary bg-white ring-2 ring-primary/10"
-                      : "border-transparent bg-white hover:border-slate-300"
-                  )}
-                >
-                  <img
-                    alt="PayPal"
-                    className={cn("h-8 transition-all", selectedPayment === "digital_wallet" ? "grayscale-0" : "grayscale")}
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4adgOoSa5jNfJOyss8El_UyWRWArAhCv-vtBe2A4iEHySu2Q56oMSi0Zd1SeGIyiPMDW89TAN3oJyuBo6myYhFDIqwCKf8LCajsVCQ8op_jrfp3jZXC93A1L4PgSwkYbzcp0ciC528834k3_8NSD69Ye2r60pqba45gmpKkrbw09Ikfa1VKR_Fzvd4jsiGXwdDAo8XW156tY4WwpEKFe3EbfNo4s_rFTFkqbMUPkPQErY9xvyweTGj4oRSPbvbyhNhJ2QKBmDqovN"
-                  />
-                  <span className="text-xs font-bold text-slate-500 uppercase tracking-widest">
-                    Digital Wallet
-                  </span>
-                </div>
-              </div>
-              {errors.paymentMethod && <FieldError>{errors.paymentMethod.message}</FieldError>}
-            </Field>
-
-            <div className="p-4 bg-white rounded-lg flex items-center gap-4 border border-slate-100 shadow-sm">
-              <span className="material-symbols-outlined text-primary">lock</span>
-              <p className="text-sm text-slate-500 leading-tight">
-                Your payment information is encrypted and processed through secure
-                PCI-compliant gateways.
-              </p>
-            </div>
-            
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full crimson-gradient text-white font-bold py-5 rounded-lg text-lg shadow-xl shadow-primary/20 hover:shadow-primary/40 transition-all flex items-center justify-center gap-3 active:scale-[0.98] disabled:opacity-75 disabled:cursor-not-allowed"
-            >
-              {isSubmitting ? "Processing..." : "Proceed to Checkout"}
-              <span className="material-symbols-outlined">arrow_forward</span>
+          <div className="grid grid-cols-2 gap-6">
+            <button type="button" className="p-8 rounded-3xl bg-surface-container-low border-2 border-transparent hover:border-primary/20 hover:bg-white transition-all group grayscale hover:grayscale-0">
+              <img className="h-6 mb-4 mx-auto transition-transform group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKpt2YNzUZodOb0woUQcp6GQ_iZGyBCFnV2YOm2qp64zoGqJaB1GjPB81W0idLohdr9lTncEjotpCXL7E9ouZgGAdqTMmsRDmeTm75jTkumjiPyO3IHfEgQLWjIJJcsFHFVVHy0rFuzxV3C0La9oC1In-16U0RcZgdqhy-G6ppLBn6RAuis7BsZEnnuO-lJEy5L4VknJi79AKZKtX0njJmeVYMSOuUag-mWukmaNEkEuiVgq4MQ69jo8SCGlWrG6jTDE852elNgQ" alt="Stripe" />
+              <span className="text-[10px] font-black text-secondary/40 uppercase tracking-widest text-center block">Credit Card</span>
+            </button>
+            <button type="button" className="p-8 rounded-3xl bg-surface-container-low border-2 border-transparent hover:border-primary/20 hover:bg-white transition-all group grayscale hover:grayscale-0">
+              <img className="h-6 mb-4 mx-auto transition-transform group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsLOBAWlddkR9xGMwNfgUak9iWjLYPARNYaGaqnh3R-TZIcQBRDGmKyEi-5Tg7V35E5hCW9cMQo3fxAkaje9HR-I4WfCb-eMYY2NhXxErgzFM-hbFJZiHrbOfd6pfeXzepxlFHEcibH40augUrQ_TjZyk7xGXXEfEr5JR7cnYEHe3WNq4IPl5Yr2eT-7kmAd20jEf14Iyffq4qTtNd1QldQRXLSo6mUN0PC5LrGdrqy6NTWFndqXMogskX1Um6BeMqceq1lMSG7A" alt="PayPal" />
+              <span className="text-[10px] font-black text-secondary/40 uppercase tracking-widest text-center block">Digital Wallet</span>
             </button>
           </div>
-        </section>
+        </div>
       </div>
 
-      {/* Right Column: Date Selection & Summary */}
-      <div className="lg:col-span-5">
-        <div className="sticky top-28 space-y-8">
-          {/* Section: Date Selection */}
-          <section className="bg-white border border-slate-100 p-8 rounded-xl shadow-sm">
-            <div className="flex items-center gap-3 mb-8">
-              <span className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm">
-                2
-              </span>
-              <h2 className="text-2xl font-bold">Select Date & Time</h2>
+      {/* Right Column: Order Summary Sidebar */}
+      <div className="lg:col-span-4 sticky top-32">
+        <div className="bg-secondary rounded-[3rem] p-10 text-white relative overflow-hidden shadow-2xl shadow-secondary/20">
+          <div className="absolute right-0 top-0 w-32 h-32 bg-primary/20 rounded-full blur-[60px] -mr-16 -mt-16" />
+          
+          <h3 className="text-2xl font-headline font-black mb-10 tracking-tight">Order Summary</h3>
+          
+          <div className="space-y-6 mb-12 relative z-10">
+            <div className="flex flex-col gap-1 pb-6 border-b border-white/10">
+              <span className="text-[10px] font-black text-white/40 uppercase tracking-widest">Selected Session</span>
+              <span className="text-lg font-bold text-white leading-tight">{selectedMock?.title}</span>
             </div>
             
-            {/* Interactive Calendar (Static Repr) */}
-            <div className="mb-8">
-              <div className="flex items-center justify-between mb-6">
-                <h3 className="font-bold text-lg text-secondary">November 2024</h3>
-                <div className="flex gap-2">
-                  <button type="button" className="p-2 rounded-full hover:bg-slate-100 transition-colors">
-                    <span className="material-symbols-outlined text-sm">chevron_left</span>
-                  </button>
-                  <button type="button" className="p-2 rounded-full hover:bg-slate-100 transition-colors">
-                    <span className="material-symbols-outlined text-sm">chevron_right</span>
-                  </button>
-                </div>
+            <div className="grid grid-cols-2 gap-8 pb-6 border-b border-white/10">
+              <div className="flex flex-col gap-1">
+                <span className="text-[10px] font-black text-white/40 uppercase tracking-widest">Date</span>
+                <span className="text-sm font-bold">{selectedDate || "-"}</span>
               </div>
-              <div className="grid grid-cols-7 gap-2 text-center text-xs font-bold text-slate-400 mb-2">
-                <span>MON</span>
-                <span>TUE</span>
-                <span>WED</span>
-                <span>THU</span>
-                <span>FRI</span>
-                <span>SAT</span>
-                <span>SUN</span>
+              <div className="flex flex-col gap-1 text-right">
+                <span className="text-[10px] font-black text-white/40 uppercase tracking-widest">Time</span>
+                <span className="text-sm font-bold">{selectedTime || "-"}</span>
               </div>
-              <Field data-invalid={!!errors.date}>
-                <div className="grid grid-cols-7 gap-2">
-                  <div className="p-3 text-slate-300 text-center">28</div>
-                  <div className="p-3 text-slate-300 text-center">29</div>
-                  <div className="p-3 text-slate-300 text-center">30</div>
-                  <div className="p-3 text-slate-300 text-center">31</div>
-                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28].map(
-                    (day) => {
-                      const isPast = day > 19;
-                      const dateStr = `Nov ${day.toString().padStart(2, '0')}, 2024`;
-                      const isSelected = selectedDate === dateStr;
-
-                      return (
-                        <button
-                          key={day}
-                          type="button"
-                          onClick={() => {
-                            if (!isPast) setValue("date", dateStr, { shouldValidate: true });
-                          }}
-                          className={cn(
-                            "p-3 font-bold rounded-lg transition-colors",
-                            isSelected
-                              ? "bg-primary text-white"
-                              : isPast
-                              ? "text-primary hover:bg-slate-50 cursor-pointer"
-                              : "hover:bg-slate-100 cursor-pointer text-slate-700"
-                          )}
-                        >
-                          {day}
-                        </button>
-                      );
-                    }
-                  )}
-                </div>
-                {errors.date && <FieldError className="mt-2">{errors.date.message}</FieldError>}
-              </Field>
             </div>
-
-            {/* Time Slot Selection */}
-            <div>
-              <h3 className="font-bold mb-4 text-secondary">Available Time Slots</h3>
-              <Field data-invalid={!!errors.timeSlot}>
-                <div className="grid grid-cols-2 gap-3">
-                  {["09:00 AM", "11:30 AM", "02:00 PM", "04:30 PM"].map((time) => (
-                    <button
-                      key={time}
-                      type="button"
-                      onClick={() => setValue("timeSlot", time, { shouldValidate: true })}
-                      className={cn(
-                        "py-3 px-4 border rounded-lg text-sm transition-colors cursor-pointer",
-                        selectedTimeSlot === time
-                          ? "border-primary bg-primary text-white font-bold"
-                          : "border-slate-200 font-medium hover:bg-slate-50 text-slate-700"
-                      )}
-                    >
-                      {time}
-                    </button>
-                  ))}
-                </div>
-                {errors.timeSlot && <FieldError className="mt-2">{errors.timeSlot.message}</FieldError>}
-              </Field>
-            </div>
-          </section>
-
-          {/* Order Summary Floating Card */}
-          <div className="bg-secondary text-white p-8 rounded-xl shadow-2xl relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-2xl -mr-16 -mt-16"></div>
-            <h3 className="text-xl font-bold mb-6 flex items-center justify-between relative z-10">
-              Order Summary
-              <span className="text-xs px-2 py-1 bg-white/10 rounded uppercase tracking-widest font-normal">
-                Details
-              </span>
-            </h3>
-            <div className="space-y-4 mb-8 relative z-10">
-              <div className="flex justify-between text-slate-400">
-                <span>{selectedExam ? `${selectedExam} Academic Mock` : "Selecting Exam..."}</span>
-                <span className="text-white font-bold">${totalPrice}</span>
-              </div>
-              <div className="flex justify-between text-slate-400">
-                <span>Test Date</span>
-                <span className="text-white font-bold">{selectedDate || "-"}</span>
-              </div>
-              <div className="flex justify-between text-slate-400">
-                <span>Time Slot</span>
-                <span className="text-white font-bold">{selectedTimeSlot || "-"}</span>
-              </div>
-              <div className="h-px bg-white/10 my-4"></div>
-              <div className="flex justify-between text-xl font-black">
-                <span>Total Amount</span>
-                <span className="text-red-400">${totalPrice}</span>
+            
+            <div className="flex justify-between items-end pt-4">
+              <span className="text-sm font-extrabold text-white/60">Investment</span>
+              <div className="flex items-baseline gap-1">
+                <span className="text-sm font-bold">$</span>
+                <span className="text-5xl font-headline font-black text-primary animate-in zoom-in-50 duration-500">{selectedMock?.price}.00</span>
               </div>
             </div>
           </div>
+
+          <button 
+            type="submit"
+            className="w-full py-5 bg-primary text-white font-headline font-extrabold text-sm rounded-2xl hover:bg-white hover:text-secondary transition-all shadow-xl shadow-primary/20 uppercase tracking-[0.2em]"
+          >
+            Confirm & Pay
+          </button>
+          
+          <p className="text-[10px] text-center text-white/30 mt-8 leading-relaxed font-medium">
+            *Official test board results are not included. All mock test results are for preparation purposes only.
+          </p>
         </div>
       </div>
     </form>
