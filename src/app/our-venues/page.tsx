@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 const venues = [
   {
@@ -92,180 +93,260 @@ export default function OurVenues() {
 
   return (
     <main className="pt-24 bg-background">
-      {/* ── Hero Banner ── */}
-      <section className="relative crimson-gradient overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-20 w-64 h-64 bg-white/5 rounded-full translate-y-1/2 blur-3xl pointer-events-none" />
+      {/* ── Hero Section ── */}
+      <section className="max-w-7xl mx-auto px-8 pt-12 mb-20">
+        <div className="flex flex-col lg:flex-row gap-16 items-end">
+          <div className="flex-1">
+            {/* Breadcrumb */}
+            <nav aria-label="Breadcrumb" className="flex items-center gap-2 mb-8">
+              <Link href="/" className="text-on-surface-variant/70 hover:text-primary text-xs font-semibold tracking-widest uppercase transition-colors">
+                Home
+              </Link>
+              <span className="material-symbols-outlined text-on-surface-variant/40 text-sm">chevron_right</span>
+              <span className="text-primary text-xs font-semibold tracking-widest uppercase">Our Venues</span>
+            </nav>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-8 py-20">
-          {/* Breadcrumb */}
-          <nav aria-label="Breadcrumb" className="flex items-center gap-2 mb-8">
-            <Link href="/" className="text-white/70 hover:text-white text-xs font-semibold tracking-widest uppercase transition-colors">
-              Home
-            </Link>
-            <span className="material-symbols-outlined text-white/40 text-sm">chevron_right</span>
-            <span className="text-white text-xs font-semibold tracking-widest uppercase">Our Venues</span>
-          </nav>
+            <span className="text-primary font-bold tracking-widest uppercase text-xs mb-4 block font-headline">
+              Our Campus Locations
+            </span>
+            <h1 className="text-6xl md:text-8xl font-extrabold text-secondary tracking-tighter leading-[0.9] mb-10 font-headline">
+              The TEPTH <br />
+              <span className="text-primary italic">Academic Atelier.</span>
+            </h1>
+            <p className="text-xl text-on-surface-variant max-w-xl leading-relaxed font-medium">
+              Step into an environment engineered for intellectual excellence.
+              Our venues are designed to provide the focus and clarity required
+              for high-stakes academic preparation.
+            </p>
+          </div>
+          
+          <div className="w-full lg:w-1/3 aspect-square bg-surface-container-high rounded-3xl overflow-hidden relative shadow-2xl group">
+            <img
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6j62bZiM3haunuDp6-Ys-ckV2LNirbOFpV-gPvfMkVbAXUcHHLPpVIAtQ6ju7hSeIZhPOLrNUG5eZHcwWJRtCvkHeT8BZBoj_2WKfUNECFRk6EAG_pqjLl5noyEswpJ4J0uQ4bxP2x_tSxQEoHFu11NYuCthmU93t3l8Hi_wgmTpVgNAgIJpTEwvM6WtIQtMWNR2NDIccDsjtH819JpGo7HBml-FpJ7E85yqarev4rWGpEnc2oGQCTkneJpy4Rl4tXKimIHyaHg"
+              alt="TEPTH Modern Interior"
+              className="w-full h-full object-cover grayscale-[0.2] group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent mix-blend-multiply" />
+          </div>
+        </div>
 
-          <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-10">
-            <div className="space-y-6 max-w-3xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/20 text-white rounded-full text-xs font-semibold tracking-wider uppercase border border-white/30">
-                <span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>location_on</span>
-                3 UAE Locations
+        {/* Quick Stats Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20 border-t border-outline/10 pt-12">
+          {stats.map((s) => (
+            <div key={s.label} className="space-y-2">
+              <span className="material-symbols-outlined text-primary text-3xl" style={{ fontVariationSettings: "'FILL' 1" }}>
+                {s.icon}
+              </span>
+              <div>
+                <p className="text-3xl font-headline font-extrabold text-secondary leading-none">{s.value}</p>
+                <p className="text-on-surface-variant/70 text-[10px] font-bold tracking-widest uppercase mt-1">{s.label}</p>
               </div>
-              <h1 className="text-5xl md:text-7xl font-headline font-extrabold text-white leading-[1.1] tracking-tight">
-                Our <span className="italic">Venues</span>
-              </h1>
-              <p className="text-xl text-white/80 leading-relaxed max-w-xl">
-                State-of-the-art testing and preparation centres across the UAE — designed so you can focus entirely on performing your best.
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── Virtual Tour Section ── */}
+      <section className="bg-surface-container-low py-24 mb-20">
+        <div className="max-w-7xl mx-auto px-8">
+          <div className="flex justify-between items-end mb-16">
+            <div>
+              <h2 className="text-4xl font-headline font-extrabold text-secondary tracking-tight mb-4">
+                360° TEPTH Virtual Tour
+              </h2>
+              <p className="text-on-surface-variant text-lg">
+                Explore our world-class facilities from the comfort of your home.
               </p>
             </div>
-
-            {/* Stats row */}
-            <div className="grid grid-cols-2 gap-4 shrink-0">
-              {stats.map((s) => (
-                <div key={s.label} className="bg-white/10 border border-white/20 rounded-2xl px-5 py-4 text-white text-center backdrop-blur-sm">
-                  <span className="material-symbols-outlined text-2xl mb-1 block" style={{ fontVariationSettings: "'FILL' 1" }}>{s.icon}</span>
-                  <p className="text-2xl font-headline font-extrabold leading-none">{s.value}</p>
-                  <p className="text-white/70 text-[10px] font-semibold tracking-widest uppercase mt-1">{s.label}</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            {[
+              {
+                id: "suite-703",
+                name: "Suite 703",
+                subtitle: "The Executive Learning Center",
+                image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCxDRK-BH-2DK89iAKy1D3EKzVZo3ttDS3PnJCxnXzeOiPdlvp7KHAZKE-wAsX40Q_aAYvR7ivJdtJKPXSGPQ1qhM3nCSv9k1-3J6G3Q2Y3Ver1nwyCYTTwzilVsVXXdNdDhdNwfHv6_NrWl8B0-ZbYMEfJXboARwIrWI8Wo1i3w79kXxrXjoFNLCpsAt54wt15kMo11mkrMPXSJu5aPwOSnbrKZ2HbwzxixtCrx7aorOAYkcnkJYBkIays_pBURXFJ1rhn-_na3w",
+              },
+              {
+                id: "suite-308",
+                name: "Suite 308",
+                subtitle: "The Collaborative Studio",
+                image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBklKDmIMym7pUrAyQc3N5xqLMRr_tqSx5rViFi6_6MbO-3Pb3PLyvEuvZ7VPL-BLB_4lS8iXmfOkc7sFEXjkkP3qBaFCx4ey55eraMjyMWi_5FDAd1dLxDyirh94y8NrmEVblpdgSoREQ6vixgfwi6X12I7Dg-Vn1peN962waVtqJRwRpZoDknEa146xXVb_vDxNG3UxDz4MM0aLYmReeoK2b-Ao9CsBEFrNHlVvMx2-SPmiI4wbgfR668pLKp59P0WYw7uEPD-Q",
+              },
+            ].map((tour) => (
+              <div
+                key={tour.id}
+                className="group relative bg-surface rounded-3xl overflow-hidden shadow-lg transition-all duration-500 hover:-translate-y-2"
+              >
+                <div className="aspect-[16/9] relative overflow-hidden">
+                  <img
+                    src={tour.image}
+                    alt={tour.name}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-secondary/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <button className="bg-white/90 backdrop-blur-md p-6 rounded-full text-primary flex items-center justify-center shadow-2xl scale-90 group-hover:scale-100 transition-transform">
+                      <span className="material-symbols-outlined text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>play_arrow</span>
+                    </button>
+                  </div>
                 </div>
-              ))}
-            </div>
+                <div className="p-8">
+                  <div className="flex justify-between items-start mb-4">
+                    <div>
+                      <h3 className="text-2xl font-headline font-extrabold text-secondary">{tour.name}</h3>
+                      <p className="text-on-surface-variant font-medium">{tour.subtitle}</p>
+                    </div>
+                    <button className="flex items-center gap-2 text-primary font-bold text-sm uppercase tracking-wider group/btn">
+                      Explore
+                      <span className="material-symbols-outlined text-lg transition-transform group-hover/btn:translate-x-1">arrow_forward</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ── Venue Selector + Detail ── */}
-      <section className="py-16 px-8">
+      {/* ── Venue Selection + Detail ── */}
+      <section className="py-24 px-8 border-t border-outline/10">
         <div className="max-w-7xl mx-auto">
-          {/* Venue Tabs */}
-          <div className="flex flex-col sm:flex-row gap-3 mb-10">
-            {venues.map((v) => (
-              <button
-                key={v.id}
-                id={`venue-tab-${v.id}`}
-                onClick={() => { setActiveVenueId(v.id); setActiveTab("overview"); }}
-                className={`flex-1 flex items-center gap-3 px-5 py-4 rounded-2xl border font-headline font-bold text-sm transition-all cursor-pointer ${
-                  activeVenueId === v.id
-                    ? "crimson-gradient text-white border-transparent shadow-xl"
-                    : "bg-white text-secondary border-outline/20 hover:border-primary/30 hover:shadow-md"
-                }`}
-              >
-                <span
-                  className="material-symbols-outlined text-lg shrink-0"
-                  style={{ fontVariationSettings: "'FILL' 1" }}
+          <div className="mb-12">
+            <h2 className="text-sm font-bold text-primary tracking-widest uppercase mb-4">Select Location</h2>
+            <div className="flex flex-wrap gap-4">
+              {venues.map((v) => (
+                <button
+                  key={v.id}
+                  onClick={() => { setActiveVenueId(v.id); setActiveTab("overview"); }}
+                  className={cn(
+                    "px-8 py-3 rounded-full font-headline font-bold text-sm transition-all shadow-sm border",
+                    activeVenueId === v.id
+                      ? "bg-primary text-white border-primary"
+                      : "bg-surface text-secondary border-outline/20 hover:border-primary/40"
+                  )}
                 >
-                  location_on
-                </span>
-                <span className="text-left leading-tight">{v.name}</span>
-              </button>
-            ))}
+                  {v.name}
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* Venue Detail Card */}
-          <div className="bg-white rounded-3xl shadow-xl border border-outline/10 overflow-hidden">
+          <div className="bg-white rounded-[2.5rem] shadow-2xl border border-outline/5 overflow-hidden">
             {/* Featured image */}
-            <div className="relative w-full aspect-[21/7] overflow-hidden">
+            <div className="relative w-full aspect-[21/9] lg:aspect-[21/6] overflow-hidden group">
               <img
                 src={venue.image}
                 alt={venue.name}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-secondary/70 via-secondary/20 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-secondary/80 via-secondary/20 to-transparent" />
 
               {/* Badge */}
-              <div className="absolute top-5 left-5">
-                <span className="inline-flex items-center gap-1.5 bg-white text-primary text-[10px] font-extrabold tracking-widest uppercase px-3 py-1.5 rounded-full shadow-lg">
-                  <span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>{venue.badgeIcon}</span>
+              <div className="absolute top-8 left-8">
+                <span className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-md text-primary text-[11px] font-extrabold tracking-widest uppercase px-4 py-2 rounded-full shadow-xl border border-white/50">
+                  <span className="material-symbols-outlined text-base" style={{ fontVariationSettings: "'FILL' 1" }}>{venue.badgeIcon}</span>
                   {venue.badge}
                 </span>
               </div>
 
               {/* Capacity + Rooms */}
-              <div className="absolute bottom-5 left-5 flex gap-3">
-                <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl px-4 py-2 text-white text-center">
-                  <p className="text-xl font-headline font-extrabold">{venue.capacity}</p>
-                  <p className="text-[9px] font-semibold tracking-widest uppercase text-white/70">Capacity</p>
+              <div className="absolute bottom-8 left-8 flex gap-4">
+                <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl px-6 py-3 text-white">
+                  <p className="text-2xl font-headline font-extrabold leading-none">{venue.capacity}</p>
+                  <p className="text-[10px] font-bold tracking-widest uppercase text-white/60 mt-1">Capacity</p>
                 </div>
-                <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl px-4 py-2 text-white text-center">
-                  <p className="text-xl font-headline font-extrabold">{venue.rooms.split(" ")[0]}</p>
-                  <p className="text-[9px] font-semibold tracking-widest uppercase text-white/70">Rooms</p>
+                <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl px-6 py-3 text-white">
+                  <p className="text-2xl font-headline font-extrabold leading-none">{venue.rooms.split(" ")[0]}</p>
+                  <p className="text-[10px] font-bold tracking-widest uppercase text-white/60 mt-1">Testing Rooms</p>
                 </div>
               </div>
             </div>
 
             {/* Inner tab bar */}
-            <div className="border-b border-outline/10 px-8">
-              <div className="flex gap-0">
+            <div className="border-b border-outline/5 px-10 bg-surface-bright">
+              <div className="flex gap-8">
                 {(["overview", "tour", "map"] as TabType[]).map((tab) => (
                   <button
                     key={tab}
-                    id={`detail-tab-${tab}`}
                     onClick={() => setActiveTab(tab)}
-                    className={`flex items-center gap-2 px-6 py-4 text-xs font-extrabold tracking-widest uppercase border-b-2 transition-all cursor-pointer ${
+                    className={cn(
+                      "flex items-center gap-2 px-2 py-6 text-[11px] font-extrabold tracking-widest uppercase border-b-2 transition-all relative",
                       activeTab === tab
                         ? "border-primary text-primary"
-                        : "border-transparent text-on-surface-variant hover:text-secondary"
-                    }`}
+                        : "border-transparent text-on-surface-variant/60 hover:text-secondary"
+                    )}
                   >
-                    <span className="material-symbols-outlined text-base">
+                    <span className="material-symbols-outlined text-lg">
                       {tab === "overview" ? "info" : tab === "tour" ? "360" : "map"}
                     </span>
-                    {tab === "tour" ? "Virtual Tour" : tab.charAt(0).toUpperCase() + tab.slice(1)}
+                    {tab === "tour" ? "Virtual Tour" : tab}
+                    {activeTab === tab && (
+                      <span className="absolute bottom-0 left-0 w-full h-0.5 bg-primary animate-in fade-in slide-in-from-left-full duration-500" />
+                    )}
                   </button>
                 ))}
               </div>
             </div>
 
             {/* Tab Content */}
-            <div className="p-8">
+            <div className="p-10 lg:p-14">
               {activeTab === "overview" && (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-20">
                   {/* Contact info */}
-                  <div className="space-y-5">
-                    <h2 className="text-xs font-extrabold text-primary tracking-widest uppercase">Contact & Hours</h2>
-                    {[
-                      { icon: "location_on", text: venue.address },
-                      { icon: "phone", text: venue.phone },
-                      { icon: "mail", text: venue.email },
-                      { icon: "schedule", text: venue.hours },
-                    ].map(({ icon, text }) => (
-                      <div key={icon} className="flex items-start gap-3">
-                        <span className="material-symbols-outlined text-primary text-lg mt-0.5 shrink-0" style={{ fontVariationSettings: "'FILL' 1" }}>{icon}</span>
-                        <p className="text-on-surface-variant text-sm leading-relaxed">{text}</p>
-                      </div>
-                    ))}
+                  <div className="space-y-8">
+                    <h2 className="text-[11px] font-extrabold text-primary tracking-[0.2em] uppercase">Contact & Directions</h2>
+                    <div className="space-y-6">
+                      {[
+                        { icon: "location_on", text: venue.address },
+                        { icon: "phone", text: venue.phone },
+                        { icon: "mail", text: venue.email },
+                        { icon: "schedule", text: venue.hours },
+                      ].map(({ icon, text }) => (
+                        <div key={icon} className="flex items-start gap-4 group">
+                          <div className="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center shrink-0 group-hover:bg-primary/10 transition-colors">
+                            <span className="material-symbols-outlined text-primary text-xl" style={{ fontVariationSettings: "'FILL' 1" }}>{icon}</span>
+                          </div>
+                          <p className="text-on-surface-variant text-[15px] leading-relaxed font-medium pt-2">{text}</p>
+                        </div>
+                      ))}
+                    </div>
                     <Link
                       href="/contact-us"
-                      className="inline-flex items-center gap-2 crimson-gradient text-white font-headline font-bold px-5 py-3 rounded-xl text-sm shadow-md hover:shadow-lg transition-shadow mt-2"
+                      className="inline-flex items-center gap-3 bg-secondary text-white font-headline font-bold px-8 py-4 rounded-2xl text-sm shadow-xl hover:bg-primary transition-all mt-4 group"
                     >
                       Get Directions
-                      <span className="material-symbols-outlined text-sm">near_me</span>
+                      <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">near_me</span>
                     </Link>
                   </div>
 
                   {/* Tests available */}
-                  <div className="space-y-5">
-                    <h2 className="text-xs font-extrabold text-primary tracking-widest uppercase">Tests Available</h2>
-                    <div className="flex flex-wrap gap-2">
+                  <div className="space-y-8">
+                    <h2 className="text-[11px] font-extrabold text-primary tracking-[0.2em] uppercase">Official Lab Status</h2>
+                    <div className="flex flex-wrap gap-2.5">
                       {venue.tests.map((t) => (
-                        <span key={t} className="inline-flex items-center px-3 py-1.5 bg-red-50 text-primary text-[10px] font-extrabold tracking-widest uppercase rounded-full border border-red-100">
+                        <span key={t} className="inline-flex items-center px-4 py-2 bg-surface-container text-secondary text-[11px] font-bold tracking-wider uppercase rounded-xl border border-outline/5">
                           {t}
                         </span>
                       ))}
                     </div>
-                    <p className="text-on-surface-variant text-sm leading-relaxed">
-                      All tests administered by certified examiners in full compliance with official testing body protocols.
+                    <p className="text-on-surface-variant text-[15px] leading-relaxed font-medium italic opacity-80">
+                      "All testing environments at {venue.name} are optimized for maximum concentration and security."
                     </p>
+                    <div className="p-6 bg-surface-container-low rounded-2xl border border-outline/5">
+                      <p className="text-xs text-on-surface-variant leading-relaxed">
+                        Authorized by international testing bodies for computer-based and paper-based examinations.
+                      </p>
+                    </div>
                   </div>
 
                   {/* Venue features */}
-                  <div className="space-y-5">
-                    <h2 className="text-xs font-extrabold text-primary tracking-widest uppercase">Venue Features</h2>
-                    <ul className="space-y-3">
+                  <div className="space-y-8">
+                    <h2 className="text-[11px] font-extrabold text-primary tracking-[0.2em] uppercase">Premium Amenities</h2>
+                    <ul className="space-y-4">
                       {venue.features.map((f) => (
-                        <li key={f} className="flex items-start gap-3 text-sm text-on-surface-variant">
-                          <span className="material-symbols-outlined text-primary text-base shrink-0 mt-0.5" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
+                        <li key={f} className="flex items-start gap-4 text-[15px] text-on-surface-variant font-medium group">
+                          <span className="material-symbols-outlined text-primary text-xl shrink-0 mt-0.5 group-hover:scale-110 transition-transform" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
                           {f}
                         </li>
                       ))}
@@ -275,17 +356,17 @@ export default function OurVenues() {
               )}
 
               {activeTab === "tour" && (
-                <div className="space-y-4">
-                  <div className="flex items-center gap-3 p-4 bg-red-50 rounded-2xl border border-red-100">
-                    <span className="material-symbols-outlined text-primary text-xl shrink-0" style={{ fontVariationSettings: "'FILL' 1" }}>360</span>
+                <div className="space-y-8 animate-in fade-in duration-700">
+                  <div className="flex items-center gap-4 p-6 bg-surface-container-low rounded-[2rem] border border-outline/5">
+                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                      <span className="material-symbols-outlined text-primary text-2xl" style={{ fontVariationSettings: "'FILL' 1" }}>360</span>
+                    </div>
                     <div>
-                      <p className="text-sm font-bold text-secondary">360° Virtual Tour</p>
-                      <p className="text-xs text-on-surface-variant">Explore {venue.name} from your browser. Use your mouse or touch to look around.</p>
+                      <p className="text-lg font-headline font-extrabold text-secondary">Interactive Venue Explorer</p>
+                      <p className="text-sm text-on-surface-variant">Experience {venue.name} in high-definition virtual reality.</p>
                     </div>
                   </div>
-                  {/* Virtual tour video player (using a real embed-friendly placeholder) */}
-                  <div className="relative w-full aspect-video rounded-2xl overflow-hidden border border-outline/10 bg-secondary">
-                    {/* We embed the map as the tour stand-in since we don't have a 360 tour URL */}
+                  <div className="relative w-full aspect-video rounded-[2.5rem] overflow-hidden border border-outline/5 shadow-inner bg-secondary">
                     <iframe
                       title={`Virtual tour of ${venue.name}`}
                       src={venue.tourEmbed}
@@ -294,41 +375,33 @@ export default function OurVenues() {
                       loading="lazy"
                       referrerPolicy="no-referrer-when-downgrade"
                     />
-                    {/* Play overlay (visual only — clicking will interact with iframe) */}
-                    <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
-                      <div className="bg-white/20 backdrop-blur-sm rounded-full px-6 py-3 border border-white/30 flex items-center gap-2">
-                        <span className="material-symbols-outlined text-white" style={{ fontVariationSettings: "'FILL' 1" }}>360</span>
-                        <span className="text-white text-xs font-bold tracking-widest uppercase">Interactive View</span>
-                      </div>
-                    </div>
                   </div>
-                  <p className="text-xs text-on-surface-variant text-center">
-                    Want a personal walkthrough? <Link href="/contact-us" className="text-primary font-bold hover:underline">Contact us</Link> to schedule an in-person visit.
-                  </p>
                 </div>
               )}
 
               {activeTab === "map" && (
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between flex-wrap gap-3">
-                    <div className="flex items-center gap-3">
-                      <span className="material-symbols-outlined text-primary text-xl" style={{ fontVariationSettings: "'FILL' 1" }}>map</span>
+                <div className="space-y-8 animate-in fade-in duration-700">
+                  <div className="flex items-center justify-between flex-wrap gap-6">
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                        <span className="material-symbols-outlined text-primary text-2xl" style={{ fontVariationSettings: "'FILL' 1" }}>map</span>
+                      </div>
                       <div>
-                        <p className="text-sm font-bold text-secondary">{venue.name}</p>
-                        <p className="text-xs text-on-surface-variant">{venue.address}</p>
+                        <p className="text-lg font-headline font-extrabold text-secondary">{venue.name}</p>
+                        <p className="text-sm text-on-surface-variant">{venue.address}</p>
                       </div>
                     </div>
                     <a
                       href={`https://maps.google.com/maps?q=${encodeURIComponent(venue.address)}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-primary font-extrabold text-[11px] tracking-widest uppercase hover:gap-3 transition-all"
+                      className="inline-flex items-center gap-3 text-primary font-extrabold text-[12px] tracking-[0.2em] uppercase hover:gap-4 transition-all"
                     >
                       Open in Google Maps
-                      <span className="material-symbols-outlined text-sm">open_in_new</span>
+                      <span className="material-symbols-outlined text-base">open_in_new</span>
                     </a>
                   </div>
-                  <div className="w-full aspect-video rounded-2xl overflow-hidden border border-outline/10 shadow-sm">
+                  <div className="w-full aspect-video rounded-[2.5rem] overflow-hidden border border-outline/5 shadow-inner">
                     <iframe
                       title={`Map of ${venue.name}`}
                       src={venue.mapEmbed}
@@ -345,72 +418,68 @@ export default function OurVenues() {
         </div>
       </section>
 
-      {/* ── World-Class Facilities ── */}
-      <section className="py-24 px-8 bg-surface-container-low">
-        <div className="max-w-7xl mx-auto">
-          <div className="mb-14 max-w-2xl">
-            <h2 className="text-sm font-bold text-primary tracking-widest uppercase mb-4">Why Our Venues</h2>
-            <h3 className="text-4xl font-headline font-extrabold text-secondary leading-tight mb-4">
-              Purpose-Built for Peak Performance
-            </h3>
-            <p className="text-on-surface-variant text-lg leading-relaxed">
-              Every detail of our testing environments is engineered to help you concentrate, stay comfortable, and perform at your highest level on test day.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {facilities.map((f) => (
-              <div
-                key={f.title}
-                className="group bg-white rounded-2xl p-6 border border-outline/10 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
-              >
-                <div className="w-12 h-12 bg-red-50 rounded-xl flex items-center justify-center mb-5 group-hover:bg-primary transition-colors duration-300">
-                  <span
-                    className="material-symbols-outlined text-primary group-hover:text-white text-2xl transition-colors duration-300"
-                    style={{ fontVariationSettings: "'FILL' 1" }}
-                  >
-                    {f.icon}
-                  </span>
-                </div>
-                <h4 className="font-headline font-bold text-secondary text-lg mb-2 group-hover:text-primary transition-colors">{f.title}</h4>
-                <p className="text-on-surface-variant text-sm leading-relaxed">{f.desc}</p>
-              </div>
-            ))}
-          </div>
+      {/* ── Facilities Grid (Editorial Feel) ── */}
+      <section className="max-w-7xl mx-auto px-8 mb-24 pt-24 border-t border-outline/10">
+        <div className="mb-14 max-w-2xl">
+          <h2 className="text-sm font-bold text-primary tracking-widest uppercase mb-4">The TEPTH Advantage</h2>
+          <h3 className="text-4xl font-headline font-extrabold text-secondary leading-tight">
+            Infrastructure Engineered for Success
+          </h3>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {[
+            {
+              icon: "location_on",
+              title: "Downtown Campus",
+              desc: "Centrally located for easy access with public transport links and premium parking.",
+            },
+            {
+              icon: "wifi",
+              title: "Fiber Connectivity",
+              desc: "Redundant high-speed fiber lines ensuring zero interruption during digital exams.",
+            },
+            {
+              icon: "verified_user",
+              title: "Secure & Proctored",
+              desc: "Full biometric security and international standard proctoring protocols.",
+            },
+          ].map((f) => (
+            <div key={f.title} className="p-10 bg-surface-container-high rounded-3xl transition-all hover:shadow-xl hover:-translate-y-1">
+              <span className="material-symbols-outlined text-primary text-4xl mb-6 block" style={{ fontVariationSettings: "'FILL' 1" }}>
+                {f.icon}
+              </span>
+              <h4 className="text-2xl font-headline font-extrabold text-secondary mb-3">{f.title}</h4>
+              <p className="text-on-surface-variant leading-relaxed">
+                {f.desc}
+              </p>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* ── Book a Test CTA ── */}
-      <section className="py-24 px-8">
-        <div className="max-w-5xl mx-auto crimson-gradient rounded-3xl p-16 text-center text-white shadow-2xl relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl pointer-events-none" />
-          <div className="relative z-10 space-y-8">
-            <span
-              className="material-symbols-outlined text-5xl mx-auto block"
-              style={{ fontVariationSettings: "'FILL' 1" }}
-            >
-              event_available
-            </span>
-            <h3 className="text-4xl md:text-5xl font-headline font-extrabold tracking-tight">
-              Ready to book your test?
-            </h3>
-            <p className="text-xl max-w-2xl mx-auto font-medium opacity-90">
-              Secure your seat at your nearest TEPTH venue. Available dates fill fast — don't miss yours.
+      {/* ── Book Exam Venue CTA ── */}
+      <section className="max-w-7xl mx-auto px-8 mb-32">
+        <div className="bg-primary rounded-[2rem] p-12 md:p-20 relative overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-12 shadow-2xl">
+          <div className="absolute inset-0 opacity-20 pointer-events-none">
+            <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl -mr-48 -mt-48" />
+            <div className="absolute bottom-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl -ml-48 -mb-48" />
+          </div>
+          <div className="relative z-10 max-w-2xl text-center lg:text-left">
+            <h2 className="text-4xl md:text-6xl font-headline font-extrabold text-white tracking-tight mb-6">
+              Ready to secure your future?
+            </h2>
+            <p className="text-white/80 text-xl font-medium mb-0 leading-relaxed">
+              Our venues are officially certified for international exams.
+              Experience the TEPTH standard in comfort and technology.
             </p>
-            <div className="flex flex-wrap justify-center gap-6">
-              <Link
-                href="/book-a-test"
-                className="bg-white text-primary font-headline font-bold px-10 py-4 rounded-xl shadow-xl active:scale-95 transition-transform flex items-center gap-2 hover:bg-gray-50"
-              >
-                Book a Test <span className="material-symbols-outlined">arrow_forward</span>
-              </Link>
-              <Link
-                href="/free-consultation"
-                className="bg-transparent text-white font-headline font-bold px-10 py-4 rounded-xl border-2 border-white/30 hover:bg-white/10 transition-colors shadow-sm border-solid"
-              >
-                Free Consultation
-              </Link>
-            </div>
+          </div>
+          <div className="relative z-10 shrink-0">
+            <Link
+              href="/book-a-test"
+              className="inline-block bg-white text-primary px-10 py-5 rounded-2xl font-headline font-extrabold text-lg shadow-xl hover:bg-surface-bright transition-all duration-300 transform hover:scale-105 active:scale-95 uppercase tracking-widest"
+            >
+              Book an Exam Venue
+            </Link>
           </div>
         </div>
       </section>
