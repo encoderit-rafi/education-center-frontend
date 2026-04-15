@@ -100,7 +100,7 @@ export default function ContactForm() {
             <Input
               placeholder="John Doe"
               {...register("fullName")}
-              className="bg-slate-50 border-slate-200 focus-visible:ring-primary h-12 rounded-full px-6"
+              className="bg-slate-50 border-slate-200 focus-visible:ring-primary h-12 rounded-md px-6 placeholder:text-gray-500"
             />
           </FieldContent>
           {errors.fullName && (
@@ -117,13 +117,13 @@ export default function ContactForm() {
               type="email"
               placeholder="john@university.edu"
               {...register("email")}
-              className="bg-slate-50 border-slate-200 focus-visible:ring-primary h-12 rounded-full px-6"
+              className="bg-slate-50 border-slate-200 focus-visible:ring-primary h-12 rounded-md px-6 placeholder:text-gray-500"
             />
           </FieldContent>
           {errors.email && <FieldError>{errors.email.message}</FieldError>}
         </Field>
 
-        <Field data-invalid={!!errors.inquiryType}>
+        <Field data-invalid={!!errors.inquiryType} className="col-span-full">
           <FieldLabel className="text-xs font-bold text-secondary uppercase tracking-wider ml-1">
             Inquiry Type
           </FieldLabel>
@@ -134,12 +134,12 @@ export default function ContactForm() {
               }
               value={inquiryValue}
             >
-              <SelectTrigger className="bg-slate-50 border-slate-200 focus-visible:ring-primary h-12 w-full rounded-full px-6">
+              <SelectTrigger className="bg-slate-50 border-slate-200 focus-visible:ring-primary h-12! w-full rounded-md px-6 data-placeholder:text-gray-500">
                 <SelectValue placeholder="Select service..." />
               </SelectTrigger>
               <SelectContent className="rounded-2xl">
                 {INQUIRY_TYPES.map((type) => (
-                  <SelectItem key={type.value} value={type.value} className="rounded-xl">
+                  <SelectItem key={type.value} value={type.value} className="rounded-md spcar-y-2">
                     {type.label}
                   </SelectItem>
                 ))}
@@ -161,7 +161,7 @@ export default function ContactForm() {
             placeholder="How can we help illuminate your path?"
             rows={5}
             {...register("message")}
-            className="bg-slate-50 border-slate-200 focus-visible:ring-primary rounded-2xl p-6"
+            className="bg-slate-50 border-slate-200 focus-visible:ring-primary rounded-md p-6 placeholder:text-gray-500"
           />
         </FieldContent>
         {errors.message && <FieldError>{errors.message.message}</FieldError>}
