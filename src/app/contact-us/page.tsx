@@ -54,20 +54,6 @@ export default function ContactUs() {
                     Dubai, United Arab Emirates.<br />
                   </p>
                 </div>
-
-                {/* Email Card */}
-                {/* <div className="group p-6 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                  <div className="w-14 h-14 rounded-xl bg-red-50 flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
-                    <span className="material-symbols-outlined text-3xl">
-                      mail
-                    </span>
-                  </div>
-                  <h4 className="text-xl font-bold text-secondary mb-3">Email Us</h4>
-                  <p className="text-sm text-primary font-semibold text-on-surface-variant leading-relaxed">
-                    info@tepth.net
-                  </p>
-                </div> */}
-
                 {/* Working Hours Card */}
                 <div className="group p-6 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                   <div className="w-14 h-14 rounded-xl bg-red-50 flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
