@@ -123,16 +123,16 @@
 }
 
 @theme inline {
-  --color-primary: #991B1B; /* Red-800 */
-  --color-primary-variant: #7F1D1D; /* Red-900 */
+  --color-primary: #991b1b; /* Red-800 */
+  --color-primary-variant: #7f1d1d; /* Red-900 */
   --color-secondary: #111827; /* Gray-900 */
   --color-on-surface: #111827;
-  --color-on-surface-variant: #4B5563;
-  --color-background: #F9FAFB;
-  --color-surface: #FFFFFF;
-  --color-surface-container-low: #F3F4F6;
-  --color-surface-container: #E5E7EB;
-  --color-outline: #D1D5DB;
+  --color-on-surface-variant: #4b5563;
+  --color-background: #f9fafb;
+  --color-surface: #ffffff;
+  --color-surface-container-low: #f3f4f6;
+  --color-surface-container: #e5e7eb;
+  --color-outline: #d1d5db;
 
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -167,7 +167,7 @@
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
   --font-serif: var(--font-serif);
-  
+
   --font-headline: var(--font-headline), var(--font-sans);
   --font-body: var(--font-sans);
   --font-label: var(--font-sans);
@@ -187,7 +187,6 @@
   --shadow-2xl: var(--shadow-2xl);
 }
 
-
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -198,16 +197,23 @@
 }
 
 @layer utilities {
-    .crimson-gradient {
-        background: linear-gradient(135deg, #991B1B 0%, #7F1D1D 100%);
-    }
-    .glass-nav {
-        backdrop-filter: blur(24px);
-    }
-    .dropdown:hover .dropdown-menu {
-        display: block;
-    }
-    .material-symbols-outlined {
-        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-    }
+  .crimson-gradient {
+    background: linear-gradient(135deg, #991b1b 0%, #7f1d1d 100%);
+  }
+  .glass-nav {
+    backdrop-filter: blur(24px);
+  }
+  .dropdown:hover .dropdown-menu {
+    display: block;
+  }
+  .material-symbols-outlined {
+    font-variation-settings:
+      "FILL" 0,
+      "wght" 400,
+      "GRAD" 0,
+      "opsz" 24;
+  }
+}
+@utility base-gap {
+  @apply flex items-center gap-4;
 }
