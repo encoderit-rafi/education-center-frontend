@@ -3,7 +3,7 @@ import React from "react";
 
 export default function page() {
   return (
-    <main className="min-h-screen bg-background pt-24 pb-32">
+    <div className="min-h-screen bg-background pb-32">
       {/* ── Hero Section ── */}
       <section className="relative px-8 py-20 lg:py-24 overflow-hidden border-b border-outline/5 bg-secondary/[0.02]">
         <div className="max-w-7xl mx-auto relative z-10 text-center space-y-6">
@@ -27,6 +27,6 @@ export default function page() {
           <MockTestBookingForm />
         </div>
       </section>
-    </main>
+    </div>
   );
 }

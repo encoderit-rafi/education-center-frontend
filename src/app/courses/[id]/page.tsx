@@ -202,9 +202,6 @@ export default function CourseDetails() {
                   >
                     Enroll in this Course
                   </Link>
-                  <p className="text-center text-[10px] font-bold text-on-surface-variant/40 uppercase tracking-widest mt-6">
-                    Next Intakes: Monday & Wednesday Morning
-                  </p>
                 </div>
               </div>
 

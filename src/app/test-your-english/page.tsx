@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 
 export default function TestYourEnglishPage() {
   return (
-    <main className="min-h-screen bg-background pt-24 pb-32">
+    <div className="min-h-screen bg-background pb-32">
       {/* ── Hero Spotlight ── */}
       <section className="relative px-8 py-20 lg:py-24 overflow-hidden border-b border-outline/5 bg-secondary/[0.02]">
         <div className="max-w-7xl mx-auto relative z-10 grid lg:grid-cols-12 gap-20 items-center">
@@ -19,7 +19,9 @@ export default function TestYourEnglishPage() {
               <span className="text-primary italic">English Skills</span>
             </h1>
             <p className="text-lg text-on-surface-variant/70 max-w-xl font-light leading-relaxed mb-10">
-              Evaluate your proficiency in minutes and get personalized course recommendations. Our assessment is designed by academic experts to map your current level to global standards.
+              Evaluate your proficiency in minutes and get personalized course
+              recommendations. Our assessment is designed by academic experts to
+              map your current level to global standards.
             </p>
             <div className="flex flex-wrap items-center gap-8">
               <a
@@ -31,7 +33,10 @@ export default function TestYourEnglishPage() {
               <div className="flex items-center gap-4">
                 <div className="flex -space-x-3">
                   {[1, 2, 3].map((i) => (
-                    <div key={i} className="w-10 h-10 rounded-full border-4 border-white bg-surface-container-high flex items-center justify-center text-[10px] font-black text-secondary/30">
+                    <div
+                      key={i}
+                      className="w-10 h-10 rounded-full border-4 border-white bg-surface-container-high flex items-center justify-center text-[10px] font-black text-secondary/30"
+                    >
                       {String.fromCharCode(64 + i)}
                     </div>
                   ))}
@@ -62,12 +67,14 @@ export default function TestYourEnglishPage() {
       <section id="assessment-journey" className="px-8 pt-32">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16 space-y-4">
-            <h2 className="text-3xl font-headline font-black text-secondary tracking-tight">Your Assessment Journey</h2>
+            <h2 className="text-3xl font-headline font-black text-secondary tracking-tight">
+              Your Assessment Journey
+            </h2>
             <div className="w-24 h-1 crimson-gradient mx-auto rounded-full" />
           </div>
           <TestYourEnglishForm />
         </div>
       </section>
-    </main>
+    </div>
   );
 }
