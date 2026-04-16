@@ -35,7 +35,7 @@ export const COURSES: Course[] = [
     investment: "$499",
     level: "Advanced",
     format: "Hybrid (Online + In-Person)",
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuB2JKuFQvxih1YabzrGVhPAMZUJasC224jlpywcKydWwCDWGhvxsN2XfujkewaKqscJfebVlOzM2q6DuimEzsaR6ngDvE-V6JE5faEYOEjygJMq6hPBH5P1nCw7NLETBWnKaZX-lbRhF8qvSLxoOWdCc0GZtWjcRWMg3_d4IqMqClth-NiKly5ueIY1IgTyQWgorNRk6Bn0iMLD5wE74qqmmicjdcRWobkcMRM5Iu_fQF7yLKLudQ4u8gnf9h5B26lrpIgP886_Fg",
+    image: "/images/exams/ielts.png",
     curriculum: [
       { title: "Module 1: The Foundations of Academic English", description: "Standardizing your grammar and vocabulary for the formal IELTS context." },
       { title: "Module 2: Analytical Reading Strategies", description: "Mastering skim-scanning and inference in complex academic texts." },
@@ -51,7 +51,7 @@ export const COURSES: Course[] = [
       name: "Dr. Elizabeth Sterling",
       role: "Senior IELTS Lead Examiner",
       bio: "With over 15 years of experience in British Council examination standards, Dr. Sterling has helped thousands of students achieve Band 8.5+.",
-      image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDf5RQQYIjazajJIpuK2ZZ-w1DG3p0xEZ0le74ybuAi8wiWD3tRkQU8RmCv26BTTWUz_vqqlm4uCDuLOdhq89nmM3LGG_lZ0bufDTCS-m4Cp8JV3Ljq4X66s7X5XrWORRge3CdV2kgqTe7YgP_qoHxbSX04KOhE9M_gMGvPYcze7wZmqQfr7T1m5lwLbL_d3rnINWEY0I568M-b0cYFEgXZtTJNaTxhHqHJN40okNkT5APFhu5X-Esk6qRD-30CR2WQa47Ewkcv5w",
+      image: "/images/student-study.png",
     },
   },
   {
@@ -64,7 +64,7 @@ export const COURSES: Course[] = [
     investment: "$550",
     level: "Professional",
     format: "Online Proctored",
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCzhlJ5BZoGrLIlwQ95AE_MOhf8xDBx_WoYjlRa1OKkpA03pN7jzvuwKhpygzp69Di22tr8G3FgjkUVuPpWi2cfwyskrpjszdTLRW1DHEtpdoAu5-sNVYH1J9XctMrl8TQO-N4VJltzZvmzlqnyuhOdqhVEm8UFEgigxoDyowh2LT_jQYO-7gF41M_nyuEVbR0D3FK-VPj1BZGmlLKNFrz3uzozzKFI9vOlJRfsKb2eef_cMYLVjSmd_vU2HTHabRLkXTuz7iAO5A",
+    image: "/images/exams/oet.png",
     curriculum: [
       { title: "Module 1: Clinical Communication Skills", description: "Patient-centered communication and rapport building." },
       { title: "Module 2: Professional Medical Writing", description: "Mastering referral letters and clinical discharge summaries." },
@@ -78,7 +78,7 @@ export const COURSES: Course[] = [
       name: "Marcus Thorne",
       role: "Medical Linguistics Expert",
       bio: "Marcus specializes in the intersection of healthcare professional standards and English language assessment.",
-      image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDf5RQQYIjazajJIpuK2ZZ-w1DG3p0xEZ0le74ybuAi8wiWD3tRkQU8RmCv26BTTWUz_vqqlm4uCDuLOdhq89nmM3LGG_lZ0bufDTCS-m4Cp8JV3Ljq4X66s7X5XrWORRge3CdV2kgqTe7YgP_qoHxbSX04KOhE9M_gMGvPYcze7wZmqQfr7T1m5lwLbL_d3rnINWEY0I568M-b0cYFEgXZtTJNaTxhHqHJN40okNkT5APFhu5X-Esk6qRD-30CR2WQa47Ewkcv5w",
+      image: "/images/student-study.png",
     },
   },
   {
@@ -91,7 +91,7 @@ export const COURSES: Course[] = [
     investment: "$299",
     level: "Intermediate+",
     format: "In-Person Workshop",
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBqxmx8PThX49cLQoH9XIClXkTVc-ZtgmqenJwnOGcaYHdjuS2blxFzpwFkEDN30Dr2rMLRITFEZ53lnuZeDLsdZp9T1vqdKoCgCTdcY-fkG_LfvR0yZn2Kx6lsEACx27atWucHRaiYbpYKD0vFSLJotrS1fmHVYOrNETPvO_C0-KTISNsDphCswTpFM-4AqnIOS3n1FaJWbS3EPhkpsy2HITKVLdjYuN6cmD7R5i8I2z8EA82Gwo8K_Vso5Br9VWs_ex6SabDrpw",
+    image: "/images/about-us/mission-student.png",
     curriculum: [
       { title: "Module 1: Phonetics & Intonation", description: "Reducing native-language interference and mastering sentence stress." },
       { title: "Module 2: The Art of Impromptu Speech", description: "Thinking on your feet and structuring thoughts instantly." },
@@ -105,7 +105,7 @@ export const COURSES: Course[] = [
       name: "Sarah Jenkins",
       role: "Public Speaking Coach",
       bio: "Sarah is a former TEDx speaker coach with a focus on non-native English speaker empowerment.",
-      image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDf5RQQYIjazajJIpuK2ZZ-w1DG3p0xEZ0le74ybuAi8wiWD3tRkQU8RmCv26BTTWUz_vqqlm4uCDuLOdhq89nmM3LGG_lZ0bufDTCS-m4Cp8JV3Ljq4X66s7X5XrWORRge3CdV2kgqTe7YgP_qoHxbSX04KOhE9M_gMGvPYcze7wZmqQfr7T1m5lwLbL_d3rnINWEY0I568M-b0cYFEgXZtTJNaTxhHqHJN40okNkT5APFhu5X-Esk6qRD-30CR2WQa47Ewkcv5w",
+      image: "/images/student-study.png",
     },
   },
   {
@@ -118,7 +118,7 @@ export const COURSES: Course[] = [
     investment: "$350",
     level: "Mixed",
     format: "Online Intensive",
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuApToKIe3jnZMfPPznyWTzE1eZeyTKLgwYkj5TcOlT5LsJnzClzudH__2qDiW6b_a4OPMwpR2F7BXk_qps0cQbOiEH8x8sjWiphrK-vHevVuQZMkijKLK2uUWmEAa--gAyA_um5WDT_X4tE5B-YEKKUp7dgnWemM1dPHCUNIekGs1fhgnJoW96zhUgeX-I-XmIzy-uqvxKzszh_dHU1lR-Sxjmg4w830wheDVhMTwGWFC_DIGQbq0XqQGPJTdTOZ8E2ZCNxBfr_ww",
+    image: "/images/exams/pte.png",
     curriculum: [
       { title: "Module 1: AI Scoring Mechanics", description: "Understanding how the PTE algorithm evaluates spoken fluency." },
       { title: "Module 2: Integrated Task Mastery", description: "Optimizing Read Aloud and Repeat Sentence performance." },
@@ -131,7 +131,7 @@ export const COURSES: Course[] = [
       name: "David Chen",
       role: "PTE Specialist",
       bio: "David has assisted over 500 students in achieving a perfect 90 in PTE Academic.",
-      image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDf5RQQYIjazajJIpuK2ZZ-w1DG3p0xEZ0le74ybuAi8wiWD3tRkQU8RmCv26BTTWUz_vqqlm4uCDuLOdhq89nmM3LGG_lZ0bufDTCS-m4Cp8JV3Ljq4X66s7X5XrWORRge3CdV2kgqTe7YgP_qoHxbSX04KOhE9M_gMGvPYcze7wZmqQfr7T1m5lwLbL_d3rnINWEY0I568M-b0cYFEgXZtTJNaTxhHqHJN40okNkT5APFhu5X-Esk6qRD-30CR2WQa47Ewkcv5w",
+      image: "/images/student-study.png",
     },
   },
   {
@@ -144,7 +144,7 @@ export const COURSES: Course[] = [
     investment: "$599",
     level: "Executive",
     format: "Corporate Group / One-on-One",
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAHKSKDcpn4tFaXKqUZmyu4yCa1XYhcYyK6yX5nu0mPIBDyQ8lIC1vYfkCMfO5mxX0LOvqQyQO-cdbXw_W4R-KeMpqH5H3KYZ-3gT4x6J4U5HgYZBP3bvdhOVj4pjLj_bLu-fkZOcH1ds_wYM0Y0lFj8KFpSWftVRdZFW91t2ly4ZRtdLeGeriFjJa0_B_6JpTcG5bmQtcrFaVK4Dq3nua0On0XEXifhBsJ3RCWkf0ENBa4sZ9ZMIxiCcf-V2D_PNPflKHbBRAr6A",
+    image: "/images/about-us/experience-student.png",
     curriculum: [
       { title: "Module 1: Strategic Emailing", description: "Clarity, brevity, and tone management in professional correspondence." },
       { title: "Module 2: High-Stakes Negotiation", description: "Persuasive language and tactical communication in boardrooms." },
@@ -157,7 +157,7 @@ export const COURSES: Course[] = [
       name: "Olivia Vane",
       role: "Corporate Coach",
       bio: "Olivia has consulted for Fortune 500 companies on cross-cultural communication efficiency.",
-      image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDf5RQQYIjazajJIpuK2ZZ-w1DG3p0xEZ0le74ybuAi8wiWD3tRkQU8RmCv26BTTWUz_vqqlm4uCDuLOdhq89nmM3LGG_lZ0bufDTCS-m4Cp8JV3Ljq4X66s7X5XrWORRge3CdV2kgqTe7YgP_qoHxbSX04KOhE9M_gMGvPYcze7wZmqQfr7T1m5lwLbL_d3rnINWEY0I568M-b0cYFEgXZtTJNaTxhHqHJN40okNkT5APFhu5X-Esk6qRD-30CR2WQa47Ewkcv5w",
+      image: "/images/student-study.png",
     },
   },
   {
@@ -170,7 +170,7 @@ export const COURSES: Course[] = [
     investment: "$650",
     level: "Postgraduate",
     format: "Mentorship Lab",
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCGClr147e9nNf6T1oF_HXFPuiHDGvGhR_9Pc9ZR4aG69IDT5Vs7bebFSIz29h-hGNuuWlVtjoK1SZmHFznHlpe89d9yBD2k8XVjXgh2QOXSQto8mYjDCe937ysgaQ9NdaB-tqiosyBu0R_RTdb9nn-zBO9Oj3CniBhP2nBbuzTevSfoZhit7L7P2gPU6buhbxv920zQcExrJPlH4zjruju_1Tcol8-7Y0Kba_t5GzWZ5Qwyfq_8ngOkUabEjaSvNR7Sphd17Lhig",
+    image: "/images/about-us/vision-hero.png",
     curriculum: [
       { title: "Module 1: The Anatomy of a Research Paper", description: "Structuring IMRAD sections for maximum impact." },
       { title: "Module 2: Advanced Coherence & Flow", description: "Linking complex ideas with sophisticated transitionals." },
@@ -183,7 +183,7 @@ export const COURSES: Course[] = [
       name: "Prof. Arthur Penhaligon",
       role: "Academic Editor",
       bio: "Arthur is a frequent contributor to international linguistics journals and an expert in academic stylistic standards.",
-      image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDf5RQQYIjazajJIpuK2ZZ-w1DG3p0xEZ0le74ybuAi8wiWD3tRkQU8RmCv26BTTWUz_vqqlm4uCDuLOdhq89nmM3LGG_lZ0bufDTCS-m4Cp8JV3Ljq4X66s7X5XrWORRge3CdV2kgqTe7YgP_qoHxbSX04KOhE9M_gMGvPYcze7wZmqQfr7T1m5lwLbL_d3rnINWEY0I568M-b0cYFEgXZtTJNaTxhHqHJN40okNkT5APFhu5X-Esk6qRD-30CR2WQa47Ewkcv5w",
+      image: "/images/student-study.png",
     },
   },
 ];

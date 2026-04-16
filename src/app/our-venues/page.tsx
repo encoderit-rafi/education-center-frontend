@@ -16,8 +16,7 @@ const venues = [
     badgeIcon: "star",
     capacity: "240",
     rooms: "12 Testing Rooms",
-    image:
-      "https://lh3.googleusercontent.com/aida/ADBb0uhLyklKIzZM0ZSqv8iCO4JbHXKFbha76pI9f3dsTBzTS1wNlG0_nn4yMWFmQ8ROHKPmuJNkC5FPRMR_9o8K4Jj3e8jRUnOf8ehrZmwV6EcbujMH_-n4dGA6qyQEU7l4yL0m8J4gGnNjch0GyMDSdFTUn0CkqUP9XbVCoyzb2CRJ_SsYexYXxwpunQoUDRvEnVUcudGFD1kM38vFvpaSRlWlv_8t2iA4sOq0dtHfxVe7BzAD5t0O1Z-Pdoby40vJ7BT7Y8yjYbOgSg",
+    image: "/images/about-us/infrastructure-center.png",
     tourEmbed:
       "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3631.7948621826657!2d54.35476927492266!3d24.45023677872042!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5e665e9a7d6bcf%3A0x4b9d0d6e7a4a0c3d!2sAbu%20Dhabi!5e0!3m2!1sen!2sae!4v1681000000000!5m2!1sen!2sae",
     mapEmbed:
@@ -36,8 +35,7 @@ const venues = [
     badgeIcon: "schedule",
     capacity: "180",
     rooms: "9 Testing Rooms",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuAWXHdGau6iQlOeNEwykCuBlbJdgCSo6dr42jSl07i2PrRSUOPBTZBmGz4Qphc85krPG2OLI7CPeVnFcpbX4JCP1A26rekjgiF7KlL0J4soKE5174DgdSg48QZf8OWCQbzJjfvB6WmXaEZ1lN5BbotXPGn9m8Xi7CCeQAWt0-DlBcYYMjtBXRG4tYjAnqBGm3sqEA_1VSxmQr-VZLFvGcgyFmxgsxErMLbCRFfwA1oiO770wbKw4s7-LKL5cSmc4bns5PyDrtAmLcFC",
+    image: "/images/about-us/vision-map.png",
     tourEmbed:
       "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3610.0484126440234!2d55.30747397493774!3d25.26102707756397!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f43b23a44c0a1%3A0x0!2sBur%20Dubai!5e0!3m2!1sen!2sae!4v1681000000001!5m2!1sen!2sae",
     mapEmbed:
@@ -56,8 +54,7 @@ const venues = [
     badgeIcon: "school",
     capacity: "120",
     rooms: "6 Testing Rooms",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuCHpmVML5-gGfYKi5pLJ0PYp8J_yW4p1mOliSIEUUohUiYnxbnjIkYnuv3HTEkUrW-evfbexnzvYobLE-RrsIVVI2uAr1oFuKEHdps-p-AUcsFnVgiUmFjOKpiKBZjiOmMz3gG0eZeCXccsOuoauX3RffwdYJhkbG8fbG6rAEWnqHxt8PU8AqAjRoM56aOF_S33zNEySCj9jMwg7N7HPwFDcnUVmUGHDGSJPTHeWasXfoX_qifVGQVlhFOPqNrPU-T6YXo9PDB3FC6_",
+    image: "/images/about-us/experience-student.png",
     tourEmbed:
       "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3607.3214821660636!2d55.51234567493774!3d25.33456789756397!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f5c0d6e9e9a41%3A0x0!2sSharjah!5e0!3m2!1sen!2sae!4v1681000000002!5m2!1sen!2sae",
     mapEmbed:
@@ -122,7 +119,7 @@ export default function OurVenues() {
           
           <div className="w-full lg:w-1/3 aspect-square bg-surface-container-high rounded-3xl overflow-hidden relative shadow-2xl group">
             <img
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6j62bZiM3haunuDp6-Ys-ckV2LNirbOFpV-gPvfMkVbAXUcHHLPpVIAtQ6ju7hSeIZhPOLrNUG5eZHcwWJRtCvkHeT8BZBoj_2WKfUNECFRk6EAG_pqjLl5noyEswpJ4J0uQ4bxP2x_tSxQEoHFu11NYuCthmU93t3l8Hi_wgmTpVgNAgIJpTEwvM6WtIQtMWNR2NDIccDsjtH819JpGo7HBml-FpJ7E85yqarev4rWGpEnc2oGQCTkneJpy4Rl4tXKimIHyaHg"
+              src="/images/about-us/infrastructure-center.png"
               alt="TEPTH Modern Interior"
               className="w-full h-full object-cover grayscale-[0.2] group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
             />
@@ -165,13 +162,13 @@ export default function OurVenues() {
                 id: "suite-703",
                 name: "Suite 703",
                 subtitle: "The Executive Learning Center",
-                image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCxDRK-BH-2DK89iAKy1D3EKzVZo3ttDS3PnJCxnXzeOiPdlvp7KHAZKE-wAsX40Q_aAYvR7ivJdtJKPXSGPQ1qhM3nCSv9k1-3J6G3Q2Y3Ver1nwyCYTTwzilVsVXXdNdDhdNwfHv6_NrWl8B0-ZbYMEfJXboARwIrWI8Wo1i3w79kXxrXjoFNLCpsAt54wt15kMo11mkrMPXSJu5aPwOSnbrKZ2HbwzxixtCrx7aorOAYkcnkJYBkIays_pBURXFJ1rhn-_na3w",
+                image: "/images/about-us/vision-hero.png",
               },
               {
                 id: "suite-308",
                 name: "Suite 308",
                 subtitle: "The Collaborative Studio",
-                image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBklKDmIMym7pUrAyQc3N5xqLMRr_tqSx5rViFi6_6MbO-3Pb3PLyvEuvZ7VPL-BLB_4lS8iXmfOkc7sFEXjkkP3qBaFCx4ey55eraMjyMWi_5FDAd1dLxDyirh94y8NrmEVblpdgSoREQ6vixgfwi6X12I7Dg-Vn1peN962waVtqJRwRpZoDknEa146xXVb_vDxNG3UxDz4MM0aLYmReeoK2b-Ao9CsBEFrNHlVvMx2-SPmiI4wbgfR668pLKp59P0WYw7uEPD-Q",
+                image: "/images/about-us/mission-student.png",
               },
             ].map((tour) => (
               <div

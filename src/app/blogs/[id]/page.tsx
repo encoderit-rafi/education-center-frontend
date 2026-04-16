@@ -12,8 +12,7 @@ const blogs = [
     authorRole: "Senior IELTS Instructor",
     title: "Mastering the IELTS Speaking Section: Expert Tips",
     desc: "Discover the key strategies used by top scorers to articulate their thoughts clearly and confidently during the IELTS interview.",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuAWXHdGau6iQlOeNEwykCuBlbJdgCSo6dr42jSl07i2PrRSUOPBTZBmGz4Qphc85krPG2OLI7CPeVnFcpbX4JCP1A26rekjgiF7KlL0J4soKE5174DgdSg48QZf8OWCQbzJjfvB6WmXaEZ1lN5BbotXPGn9m8Xi7CCeQAWt0-DlBcYYMjtBXRG4tYjAnqBGm3sqEA_1VSxmQr-VZLFvGcgyFmxgsxErMLbCRFfwA1oiO770wbKw4s7-LKL5cSmc4bns5PyDrtAmLcFC",
+    image: "/images/blogs/ielts-speaking.png",
     content: [
       {
         type: "paragraph",
@@ -72,8 +71,7 @@ const blogs = [
     authorRole: "PTE Academic Specialist",
     title: "Why Pearson PTE is the Future of English Testing",
     desc: "An in-depth look at the computer-based testing methodology and why it's becoming the preferred choice for students.",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuCHpmVML5-gGfYKi5pLJ0PYp8J_yW4p1mOliSIEUUohUiYnxbnjIkYnuv3HTEkUrW-evfbexnzvYobLE-RrsIVVI2uAr1oFuKEHdps-p-AUcsFnVgiUmFjOKpiKBZjiOmMz3gG0eZeCXccsOuoauX3RffwdYJhkbG8fbG6rAEWnqHxt8PU8AqAjRoM56aOF_S33zNEySCj9jMwg7N7HPwFDcnUVmUGHDGSJPTHeWasXfoX_qifVGQVlhFOPqNrPU-T6YXo9PDB3FC6_",
+    image: "/images/blogs/pte-future.png",
     content: [
       {
         type: "paragraph",
@@ -120,8 +118,7 @@ const blogs = [
     authorRole: "TOEFL & Academic English Coach",
     title: "TOEFL iBT Home Edition: What You Need to Know",
     desc: "Everything from technical requirements to proctoring protocols for taking your TOEFL exam from the comfort of home.",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuCYYOgJ_iVdtTvSU0bDu6odGH_qcpv46mmqg3VNi0uah8HHzK0XOG6SO38V1b1QjWcdafTCwORZ-MnRp3Q3vO2FmJwXftPJ4-GsI4nlU50VKaGpTLdsTyarCQXsOt_Xm89YI8I8osK0IypOfrR2fSqu2ecVQb0Zeh2B-tU3r9E3QhkV0RJ_QSNubJosLlM1dLzXnrZu27Br8oZssN7z8qHnP-tK7cjxLV_5oSM26l4tvE4dJhg3GlckyLQqvtrLDLNFGS8beKuHeAVO",
+    image: "/images/blogs/toefl-home.png",
     content: [
       {
         type: "paragraph",
@@ -168,8 +165,7 @@ const blogs = [
     authorRole: "OET Preparation Lead",
     title: "How Nurses Can Excel in the OET Writing Subset",
     desc: "Practical guidance on writing referral letters and discharge summaries that meet professional clinical standards.",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuACWhkov_Do5kApLipiPZbUiJI7KBfRnzARnlPfDwc-gV2cKVXvrTpHQs4Fz1E8MZAhdVlrNVp_4VGFJwJzNa1YkAgYsAXqxkAmF5BWe7D7Msqi_p56P-MpVikTgh6audkk0hzLCsd_7Ptm1utELGPmrP4G-COnSx0nQ88VP4kqBfC11bwIPHRukUIMEFRJVHtwVANZPD_6iMR-TfSqG9G-zI7binfR9ZucL5PJ9uhlZtfbS-vLlpL1rYVjL_rxUVoEuLvfwxUC_-Pf",
+    image: "/images/blogs/oet-nurses.png",
     content: [
       {
         type: "paragraph",
@@ -216,8 +212,7 @@ const blogs = [
     authorRole: "Canadian Immigration Advisor & CELPIP Trainer",
     title: "The Complete Roadmap to Canadian PR via CELPIP",
     desc: "Step-by-step instructions on how to leverage your CELPIP scores for a successful immigration application to Canada.",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuBZciRkqwqTj2iPOZLBfTncKATDEU8HWxjIbnPliMesGboHh79py6Ts5GWCBgJ1cjFmRhGePGdgfuR0SSJDLlv1d_1f600LmPdgeteE6OdGgzQAShxdjgyipxA0qW92f_brrszekMgkqa61ZLDNoZEa_QLEBxSvVpNsv4w0e_JGvk5cqFuxsg9EO7NIWO0y_Tsi9M3C_elV3Hqf4nfkcRVYG2ojIYuvk7M_tJgAKiZmCg4XrULbmE8T172vA5aLz3u7SrZN6hwtJ8DF",
+    image: "/images/blogs/celpip-roadmap.png",
     content: [
       {
         type: "paragraph",
@@ -264,8 +259,7 @@ const blogs = [
     authorRole: "Academic English & CAEL Specialist",
     title: "Understanding the Integrated Nature of CAEL Tasks",
     desc: "Learn how CAEL simulates the real-world university experience by integrating reading, listening, and writing into single tasks.",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuB0uNLcr7UOl2MVxDdEjpioBhsdJHuUWv3qI5x0LPjNWPusBRLF4dEp_vg6vSGCyLWHc_kUQAu1Q06QGcUVtKSU25vbNyJCXWfLRSPEnlCQd8k4w6IWiyEJAVUrt2KeUg28N44ave2d9_hZ0bmF1S3CCbnRQ-Wk3GVvXO5OqArl_5khzN6RrXh8-8OzBwDz818mrB4tL1I0dGT6ACi0XwfxKXSfWLuB87BmGwV3tgnKVeE3xjnppHOkSZzoQcU7n7BNxzjyWvV2-gBP",
+    image: "/images/blogs/cael-integrated.png",
     content: [
       {
         type: "paragraph",

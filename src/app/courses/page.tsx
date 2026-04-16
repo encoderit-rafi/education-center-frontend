@@ -13,7 +13,7 @@ export default function Courses() {
         <div className="absolute inset-0 bg-primary/40 mix-blend-multiply z-10" />
         <img
           className="absolute inset-0 w-full h-full object-cover grayscale-[0.3]"
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuCh_K4LTn32Y9p-TKMoauU8QQAN6AKDJH2OG1fxURk6rhXt3mnZrzUvlJjpHPikuJzgIE0ansb7auUxsahSbj8AftSTLQg-0CCenwTy1Fy5kQM25Q-Ouclzrdgd6xu5LcgZF4h5cB3Kz07lgF0h3JTgt5gKZFrIBQuf3fgKj8aBpgm8dR80z27xLGhro2mK1C6P6kJruiOiH9c8hl-Y8Dlkc_oVpR4VCUz60BGd6OtUnlD9cmZEUIXx7g6ZpmHUFfCKf3ZLSQaPOg"
+          src="/images/student-study.png"
           alt="TEPTH Academic Environment"
         />
         <div className="relative z-20 px-8 max-w-7xl mx-auto w-full">
@@ -130,7 +130,7 @@ export default function Courses() {
             <div className="absolute inset-0 bg-primary/10 rounded-3xl blur-2xl group-hover:blur-3xl transition-all" />
             <img
               className="w-80 h-[450px] object-cover rounded-[2rem] shadow-2xl relative transition-transform duration-700 group-hover:scale-105"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDf5RQQYIjazajJIpuK2ZZ-w1DG3p0xEZ0le74ybuAi8wiWD3tRkQU8RmCv26BTTWUz_vqqlm4uCDuLOdhq89nmM3LGG_lZ0bufDTCS-m4Cp8JV3Ljq4X66s7X5XrWORRge3CdV2kgqTe7YgP_qoHxbSX04KOhE9M_gMGvPYcze7wZmqQfr7T1m5lwLbL_d3rnINWEY0I568M-b0cYFEgXZtTJNaTxhHqHJN40okNkT5APFhu5X-Esk6qRD-30CR2WQa47Ewkcv5w"
+              src="/images/about-us/experience-student.png"
               alt="TEPTH Academic Advisor"
             />
           </div>

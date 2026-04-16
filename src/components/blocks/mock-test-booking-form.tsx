@@ -139,22 +139,14 @@ export default function MockTestBookingForm() {
                 type="button" 
                 className="bg-white p-8 rounded-[2rem] border-2 border-transparent hover:border-primary transition-all flex flex-col items-center gap-4 group shadow-sm hover:shadow-xl hover:shadow-primary/5"
               >
-                <img 
-                  alt="Stripe" 
-                  className="h-8 grayscale group-hover:grayscale-0 transition-all opacity-40 group-hover:opacity-100" 
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtc74ic5afrunBrWiUmBpb2se_7U_oPpX4vuh9Uy1p9w0qfbNuBldu14CBon1S9hHGKaw1TuhIz8JvHwxlap5U2gwlsLmpEdCwn_FH1_xiPfhp3ybI_KSEK19gahsU5z_7Eu_b4PwWEcFJdS4kM52LBRf4HWPvnspArBO4_1iFsjtDLkdKhBtqaOuQJZUxfVKfeMBKiPKsObdymkK8TxR23UCQPDuCV4t1KWK8XYjShdW8adssIn_0MeJ_iDBYC_SxlMiOMWRJwr98" 
-                />
+                <span className="material-symbols-outlined text-4xl text-secondary/30 group-hover:text-primary transition-colors">credit_card</span>
                 <span className="text-[10px] font-black text-secondary/40 uppercase tracking-widest group-hover:text-secondary transition-colors">Credit Card</span>
               </button>
               <button 
                 type="button" 
                 className="bg-white p-8 rounded-[2rem] border-2 border-transparent hover:border-primary transition-all flex flex-col items-center gap-4 group shadow-sm hover:shadow-xl hover:shadow-primary/5"
               >
-                <img 
-                  alt="PayPal" 
-                  className="h-8 grayscale group-hover:grayscale-0 transition-all opacity-40 group-hover:opacity-100" 
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4adgOoSa5jNfJOyss8El_UyWRWArAhCv-vtBe2A4iEHySu2Q56oMSi0Zd1SeGIyiPMDW89TAN3oJyuBo6myYhFDIqwCKf8LCajsVCQ8op_jrfp3jZXC93A1L4PgSwkYbzcp0ciC528834k3_8NSD69Ye2r60pqba45gmpKkrbw09Ikfa1VKR_Fzvd4jsiGXwdDAo8XW156tY4WwpEKFe3EbfNo4s_rFTFkqbMUPkPQErY9xvyweTGj4oRSPbvbyhNhJ2QKBmDqovN" 
-                />
+                <span className="material-symbols-outlined text-4xl text-secondary/30 group-hover:text-primary transition-colors">account_balance_wallet</span>
                 <span className="text-[10px] font-black text-secondary/40 uppercase tracking-widest group-hover:text-secondary transition-colors">Digital Wallet</span>
               </button>
             </div>
