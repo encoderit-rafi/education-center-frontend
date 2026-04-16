@@ -21,17 +21,24 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn("h-full antialiased", manrope.variable, inter.variable, "font-sans")}
+      className={cn(
+        "h-full antialiased",
+        manrope.variable,
+        inter.variable,
+        "font-sans",
+      )}
     >
       <head>
-        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+          rel="stylesheet"
+        />
       </head>
       <body className="min-h-full flex flex-col bg-background text-on-surface font-body selection:bg-red-100 selection:text-red-900">
         <TopNavBar />
-        {children}
+        <main>{children}</main>
         <Footer />
       </body>
     </html>
   );
 }
-

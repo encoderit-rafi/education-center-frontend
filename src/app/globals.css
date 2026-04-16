@@ -217,3 +217,9 @@
 @utility base-gap {
   @apply flex items-center gap-4;
 }
+@utility base-px {
+  @apply px-3;
+}
+@utility base-py {
+  @apply py-8 md:py-12 lg:py-16;
+}

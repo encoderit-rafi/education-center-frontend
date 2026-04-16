@@ -8,7 +8,7 @@ import CTASection from "@/components/blocks/cta-section";
 
 export default function Home() {
   return (
-    <main className="pt-24">
+    <div>
       <HeroSection />
       <GlobalTestPartners />
       <CoreServices />
@@ -16,6 +16,6 @@ export default function Home() {
       <LatestBlogs />
       <Testimonials />
       <CTASection />
-    </main>
+    </div>
   );
 }
