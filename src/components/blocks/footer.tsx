@@ -34,9 +34,9 @@ export default function Footer() {
               <li>
                 <Link
                   className="text-slate-400 text-sm hover:text-red-400 transition-colors"
-                  href="/services/preparation"
+                  href="/exam-proctoring-services"
                 >
-                  Exam Preparation Courses
+                  Exam Proctoring
                 </Link>
               </li>
               <li>
@@ -50,7 +50,7 @@ export default function Footer() {
               <li>
                 <Link
                   className="text-slate-400 text-sm hover:text-red-400 transition-colors"
-                  href="/services/delivery"
+                  href="/exam-delivery"
                 >
                   Exam Delivery
                 </Link>
