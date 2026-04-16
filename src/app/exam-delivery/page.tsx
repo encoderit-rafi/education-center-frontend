@@ -32,7 +32,7 @@ export default function ExamDeliveryPage() {
       {/* Solutions Section */}
       <section className="relative px-8 py-24 bg-white overflow-hidden">
         <div className="max-w-screen-2xl mx-auto relative z-10">
-          <Tabs defaultValue="institutions" className="w-full flex-col">
+          <Tabs defaultValue="provider" className="w-full flex-col">
             {/* Header + Tab Switcher */}
             <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-10 mb-20 pb-10 border-b border-slate-100">
               <h2 className="text-5xl font-black text-slate-900 tracking-tighter font-headline leading-tight">
@@ -40,19 +40,21 @@ export default function ExamDeliveryPage() {
               </h2>
 
               <TabsList variant="default" className="bg-slate-100/80 backdrop-blur-md p-1.5 rounded-2xl border border-slate-200/50 shadow-sm">
-                <TabsTrigger value="institutions" className="px-10 py-3 text-xs font-bold uppercase tracking-widest rounded-xl data-active:bg-white data-active:shadow-lg data-active:text-red-800 transition-all duration-300">
-                  Delivery Centres
+                <TabsTrigger value="provider" className="px-10 py-3 text-xs font-bold uppercase tracking-widest rounded-xl data-active:bg-white data-active:shadow-lg data-active:text-red-800 transition-all duration-300">
+                  Exam Provider
                 </TabsTrigger>
-                <TabsTrigger value="test-taker" className="px-10 py-3 text-xs font-bold uppercase tracking-widest rounded-xl data-active:bg-white data-active:shadow-lg data-active:text-red-800 transition-all duration-300">
-                  Candidate Journey
+                <TabsTrigger value="vendor" className="px-10 py-3 text-xs font-bold uppercase tracking-widest rounded-xl data-active:bg-white data-active:shadow-lg data-active:text-red-800 transition-all duration-300">
+                  Vendor
+                </TabsTrigger>
+                <TabsTrigger value="test-takers" className="px-10 py-3 text-xs font-bold uppercase tracking-widest rounded-xl data-active:bg-white data-active:shadow-lg data-active:text-red-800 transition-all duration-300">
+                  Test-takers
                 </TabsTrigger>
               </TabsList>
             </div>
 
-            {/* ── INSTITUTIONS TAB ── */}
-            <TabsContent value="institutions" className="mt-0">
+            {/* ── EXAM PROVIDER TAB ── */}
+            <TabsContent value="provider" className="mt-0">
               <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
-
                 {/* CBT Infrastructure Hero Card */}
                 <div className="md:col-span-8 group relative bg-white rounded-3xl border border-slate-200/60 p-12 overflow-hidden transition-all duration-700 shadow-[0_4px_24px_rgba(0,0,0,0.03)] hover:shadow-[0_32px_64px_rgba(0,0,0,0.08)]">
                   <div className="relative z-20 flex flex-col h-full justify-between">
@@ -64,15 +66,14 @@ export default function ExamDeliveryPage() {
                         CBT Centre Infrastructure
                       </h3>
                       <p className="text-slate-500 text-lg leading-relaxed max-w-xl">
-                        Dual redundant 1 Gbps fibre feeds and high-capacity workstations ensure a seamless digital testing experience with zero latency.
+                        Dual redundant 1 Gbps fibre feeds and high-capacity workstations ensure a seamless digital testing experience with zero latency and full hardware certification.
                       </p>
                     </div>
                     <div className="mt-14 flex gap-3 flex-wrap">
                       <span className="px-5 py-2 rounded-full bg-slate-900 text-white text-[10px] font-bold uppercase tracking-widest shadow-lg">1Gbps Redundancy</span>
-                      <span className="px-5 py-2 rounded-full bg-red-800 text-white text-[10px] font-bold uppercase tracking-widest shadow-lg">Lockdown Tech</span>
+                      <span className="px-5 py-2 rounded-full bg-red-800 text-white text-[10px] font-bold uppercase tracking-widest shadow-lg">Hardware Verified</span>
                     </div>
                   </div>
-                  {/* Decorative background overlay */}
                   <div className="absolute right-0 bottom-0 w-1/2 h-full opacity-[0.03] grayscale pointer-events-none group-hover:opacity-[0.08] transition-opacity duration-700">
                     <Image
                       src="/images/about-us/infrastructure-center.png"
@@ -84,58 +85,59 @@ export default function ExamDeliveryPage() {
                 </div>
 
                 {/* Security Card */}
-                <div className="md:col-span-4 bg-slate-950 p-12 rounded-3xl text-white relative overflow-hidden group hover:-translate-y-1 transition-all duration-500 shadow-2xl">
-                  <div className="relative z-10">
-                    <span className="material-symbols-outlined text-4xl mb-8 text-red-500">security</span>
-                    <h3 className="text-2xl font-bold mb-5 font-headline tracking-tight">Zero-Failure Security</h3>
-                    <p className="text-slate-400 leading-relaxed text-base">
-                      Certified lockdown browsers paired with automatic 30-second response syncing for absolute data integrity.
-                    </p>
-                  </div>
-                  <div className="absolute -bottom-10 -right-10 opacity-[0.05] group-hover:opacity-[0.15] transition-opacity duration-700">
-                    <span className="material-symbols-outlined text-[140px]">admin_panel_settings</span>
-                  </div>
-                  <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-red-800 to-transparent" />
-                </div>
-
-                {/* Acoustic Control Card */}
-                <div className="md:col-span-4 bg-slate-50 p-12 rounded-3xl border border-slate-100 group hover:bg-white hover:shadow-xl transition-all duration-500">
-                  <span className="material-symbols-outlined text-red-800 text-4xl mb-8 block group-hover:scale-110 transition-transform">volume_up</span>
-                  <h3 className="text-2xl font-bold mb-5 text-slate-900 font-headline tracking-tight">Acoustic Precision</h3>
-                  <p className="text-slate-500 leading-relaxed">
-                    Calibrated PA-grade audio delivery and noise-cancelling equipment for all Listening and Speaking components.
+                <div className="md:col-span-4 bg-slate-950 p-12 rounded-3xl text-white relative overflow-hidden group shadow-2xl">
+                  <span className="material-symbols-outlined text-4xl mb-8 text-red-500">security</span>
+                  <h3 className="text-2xl font-bold mb-5 font-headline tracking-tight">Zero-Failure Security</h3>
+                  <p className="text-slate-400 leading-relaxed text-base">
+                    Certified lockdown browsers paired with automatic 30-second response syncing for absolute data integrity during international high-stakes delivery.
                   </p>
-                </div>
-
-                {/* Compliance & Monitoring Card */}
-                <div className="md:col-span-8 bg-slate-900 p-12 rounded-3xl text-white flex flex-col lg:flex-row gap-12 items-center relative overflow-hidden group">
-                  <div className="flex-1 relative z-10">
-                    <h3 className="text-2xl font-bold mb-5 text-red-400 font-headline tracking-tight">Real-Time Site Monitoring</h3>
-                    <p className="text-slate-400 leading-relaxed text-lg">
-                      Every venue is centrally managed via a dashboard that tracks active sessions, environmental conditions, and technical health.
-                    </p>
-                  </div>
-                  <div className="grid grid-cols-2 gap-3 relative z-10 shrink-0">
-                    {["Monitoring", "Compliance", "Redundancy", "Reporting"].map((item) => (
-                      <div key={item} className="bg-white/5 border border-white/10 px-6 py-4 rounded-xl flex items-center gap-3 backdrop-blur-sm">
-                        <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
-                        <span className="text-[10px] font-black uppercase tracking-widest text-slate-300">{item}</span>
-                      </div>
-                    ))}
-                  </div>
-                  {/* Subtle Grid pattern */}
-                  <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
-                    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-                      <defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" strokeWidth="0.5" /></pattern></defs>
-                      <rect width="100%" height="100%" fill="url(#grid)" />
-                    </svg>
+                  <div className="absolute -bottom-10 -right-10 opacity-[0.05]">
+                    <span className="material-symbols-outlined text-[140px]">admin_panel_settings</span>
                   </div>
                 </div>
               </div>
             </TabsContent>
 
-            {/* ── TEST-TAKER TAB ── */}
-            <TabsContent value="test-taker" className="mt-0">
+            {/* ── VENDOR TAB ── */}
+            <TabsContent value="vendor" className="mt-0">
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+                {/* Monitoring & Compliance */}
+                <div className="md:col-span-8 bg-slate-900 p-12 rounded-3xl text-white flex flex-col lg:flex-row gap-12 items-center relative overflow-hidden group">
+                  <div className="flex-1 relative z-10">
+                    <h3 className="text-2xl font-bold mb-5 text-red-400 font-headline tracking-tight">Real-Time Site Monitoring</h3>
+                    <p className="text-slate-400 leading-relaxed text-lg">
+                      Every venue is centrally managed via a dashboard that tracks active sessions, environmental conditions, and technical health for seamless vendor data flow.
+                    </p>
+                  </div>
+                  <div className="grid grid-cols-2 gap-3 relative z-10 shrink-0">
+                    {["Compliance", "API Audit", "Live Feed", "Data Sync"].map((item) => (
+                      <div key={item} className="bg-white/5 border border-white/10 px-6 py-4 rounded-xl flex items-center gap-3 backdrop-blur-sm hover:bg-white/10 transition-colors">
+                        <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
+                        <span className="text-[10px] font-black uppercase tracking-widest text-slate-300">{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
+                    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                      <defs><pattern id="vendor-grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" strokeWidth="0.5" /></pattern></defs>
+                      <rect width="100%" height="100%" fill="url(#vendor-grid)" />
+                    </svg>
+                  </div>
+                </div>
+
+                {/* Acoustic Standards Card */}
+                <div className="md:col-span-4 bg-slate-50 p-12 rounded-3xl border border-slate-100 group hover:bg-white hover:shadow-xl transition-all duration-500">
+                  <span className="material-symbols-outlined text-red-800 text-4xl mb-8 block group-hover:rotate-12 transition-transform">volume_up</span>
+                  <h3 className="text-2xl font-bold mb-5 text-slate-900 font-headline tracking-tight">Acoustic Precision</h3>
+                  <p className="text-slate-500 leading-relaxed">
+                    PA-grade audio delivery systems meeting strict vendor specifications for all listening-based international examinations.
+                  </p>
+                </div>
+              </div>
+            </TabsContent>
+
+            {/* ── TEST-TAKERS TAB ── */}
+            <TabsContent value="test-takers" className="mt-0">
               <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
                 {/* Journey card */}
                 <div className="md:col-span-8 bg-white border border-slate-100 rounded-3xl p-12 shadow-sm relative overflow-hidden group">
@@ -156,7 +158,6 @@ export default function ExamDeliveryPage() {
                       </div>
                     ))}
                   </div>
-                  {/* Decorative number or logo */}
                   <div className="absolute right-[-20px] bottom-[-20px] opacity-[0.02] group-hover:opacity-[0.05] transition-opacity duration-700">
                     <span className="material-symbols-outlined text-[240px]">event_available</span>
                   </div>
@@ -173,7 +174,7 @@ export default function ExamDeliveryPage() {
 
                   <div className="bg-slate-900 p-10 rounded-3xl text-slate-400 group relative">
                     <h4 className="text-white font-bold text-xl mb-4 font-headline tracking-tight">365-Day Cycle</h4>
-                    <p className="text-sm leading-relaxed">Continuous testing cycles across the UAE ensuring you find a date that fits your personal schedule.</p>
+                    <p className="text-sm leading-relaxed text-slate-400">Continuous testing cycles ensuring you find a date that fits your personal schedule.</p>
                     <div className="mt-8 flex items-center justify-between">
                       <span className="text-[10px] font-black uppercase tracking-widest text-red-500">Year-round availability</span>
                       <span className="material-symbols-outlined text-red-800 group-hover:translate-x-1 transition-transform">arrow_forward</span>
