@@ -8,13 +8,15 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1">
             <div className="text-lg font-bold text-white mb-4 font-headline flex items-center gap-2">
-              <Link href="/" className="flex items-center bg-white rounded-md px-2 py-1.5">
+              <Link
+                href="/"
+                className="flex items-center bg-white rounded-md px-2 py-1.5"
+              >
                 <Image
                   alt="TEPTH Logo"
                   height={80}
                   width={80}
                   src="/images/tepth-logo.png"
-           
                 />
               </Link>
             </div>
@@ -23,25 +25,35 @@ export default function Footer() {
               the global academic elite.
             </p>
           </div>
+
           <div>
             <h4 className="font-bold text-white mb-4 text-sm uppercase tracking-wider">
-              Company
+              Services
             </h4>
             <ul className="space-y-2">
               <li>
-                <a className="text-slate-400 text-sm hover:text-red-400 transition-colors" href="/about-us">
-                  About Us
-                </a>
+                <Link
+                  className="text-slate-400 text-sm hover:text-red-400 transition-colors"
+                  href="/services/preparation"
+                >
+                  Exam Preparation Courses
+                </Link>
               </li>
               <li>
-                <a className="text-slate-400 text-sm hover:text-red-400 transition-colors" href="#">
-                  Our Experts
-                </a>
+                <Link
+                  className="text-slate-400 text-sm hover:text-red-400 transition-colors"
+                  href="/assessment-solutions"
+                >
+                  Assessment Solutions
+                </Link>
               </li>
               <li>
-                <a className="text-slate-400 text-sm hover:text-red-400 transition-colors" href="/about-us/accreditation">
-                  Accreditation
-                </a>
+                <Link
+                  className="text-slate-400 text-sm hover:text-red-400 transition-colors"
+                  href="/services/delivery"
+                >
+                  Exam Delivery
+                </Link>
               </li>
             </ul>
           </div>
@@ -51,19 +63,28 @@ export default function Footer() {
             </h4>
             <ul className="space-y-2">
               <li>
-                <a className="text-slate-400 text-sm hover:text-red-400 transition-colors" href="/contact-us">
+                <Link
+                  className="text-slate-400 text-sm hover:text-red-400 transition-colors"
+                  href="/contact-us"
+                >
                   Contact Us
-                </a>
+                </Link>
               </li>
               <li>
-                <a className="text-slate-400 text-sm hover:text-red-400 transition-colors" href="#">
+                <Link
+                  className="text-slate-400 text-sm hover:text-red-400 transition-colors"
+                  href="#"
+                >
                   Privacy Policy
-                </a>
+                </Link>
               </li>
               <li>
-                <a className="text-slate-400 text-sm hover:text-red-400 transition-colors" href="#">
+                <Link
+                  className="text-slate-400 text-sm hover:text-red-400 transition-colors"
+                  href="#"
+                >
                   Terms of Service
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -72,12 +93,18 @@ export default function Footer() {
               Connect
             </h4>
             <div className="flex gap-4">
-              <a className="text-slate-400 hover:text-red-400 transition-colors" href="#">
+              <Link
+                className="text-slate-400 hover:text-red-400 transition-colors"
+                href="#"
+              >
                 <span className="material-symbols-outlined">public</span>
-              </a>
-              <a className="text-slate-400 hover:text-red-400 transition-colors" href="#">
+              </Link>
+              <Link
+                className="text-slate-400 hover:text-red-400 transition-colors"
+                href="#"
+              >
                 <span className="material-symbols-outlined">share</span>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -86,12 +113,18 @@ export default function Footer() {
             © 2024 TEPTH Academic Atelier. All rights reserved.
           </p>
           <div className="flex gap-6">
-            <a className="text-slate-400 text-sm hover:text-red-400 font-semibold" href="#">
+            <Link
+              className="text-slate-400 text-sm hover:text-red-400 font-semibold"
+              href="#"
+            >
               Privacy
-            </a>
-            <a className="text-slate-400 text-sm hover:text-red-400 font-semibold" href="#">
+            </Link>
+            <Link
+              className="text-slate-400 text-sm hover:text-red-400 font-semibold"
+              href="#"
+            >
               Terms
-            </a>
+            </Link>
           </div>
         </div>
       </div>
