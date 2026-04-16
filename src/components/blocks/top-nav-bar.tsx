@@ -70,7 +70,7 @@ export default function TopNavBar() {
             </button>
             <div className="dropdown-menu hidden absolute top-full left-0 w-64 bg-white dark:bg-slate-950 shadow-xl rounded-xl border border-slate-100 dark:border-slate-800 p-2 mt-1">
               <Link
-                href="/services/preparation"
+                href="/preparation"
                 className="block px-4 py-2.5 hover:bg-slate-50 dark:hover:bg-slate-900 rounded-lg text-slate-700 dark:text-slate-300"
               >
                 Exam Preparation Courses
@@ -82,13 +82,13 @@ export default function TopNavBar() {
                 Assessment Solutions
               </Link>
               <Link
-                href="/services/proctoring"
+                href="/exam-proctoring-services"
                 className="block px-4 py-2.5 hover:bg-slate-50 dark:hover:bg-slate-900 rounded-lg text-slate-700 dark:text-slate-300"
               >
                 Exam Proctoring
               </Link>
               <Link
-                href="/services/delivery"
+                href="/exam-delivery"
                 className="block px-4 py-2.5 hover:bg-slate-50 dark:hover:bg-slate-900 rounded-lg text-slate-700 dark:text-slate-300"
               >
                 Exam Delivery
@@ -184,7 +184,7 @@ export default function TopNavBar() {
           />
         </div>
         <div className="flex items-center gap-4">
-          <Link 
+          <Link
             href="/book-a-test"
             className="crimson-gradient text-white font-headline font-bold px-6 py-2.5 rounded-lg shadow-md active:scale-95 transition-transform duration-200 whitespace-nowrap cursor-pointer block text-center"
           >
