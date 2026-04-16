@@ -6,6 +6,9 @@ import {
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { ChevronDown, Menu } from "lucide-react";
@@ -68,7 +71,7 @@ export default function TopNavBar() {
                     <DropdownMenuContent className="w-40" align="start">
                       <DropdownMenuGroup>
                         {item.children.map((child) => (
-                          <DropdownMenuItem key={child.href}>
+                          <DropdownMenuItem key={child.label}>
                             <Link href={child.href}>{child.label}</Link>
                           </DropdownMenuItem>
                         ))}
@@ -101,13 +104,35 @@ export default function TopNavBar() {
           <DropdownMenuTrigger className="md:hidden">
             <Menu className="size-5 text-primary" />
           </DropdownMenuTrigger>
-          <DropdownMenuContent>
+          <DropdownMenuContent className="w-56">
             <DropdownMenuGroup>
-              {navItems.map((item) => (
-                <DropdownMenuItem key={item.label}>
-                  <Link href={item.href || "#"}>{item.label}</Link>
-                </DropdownMenuItem>
-              ))}
+              {navItems.map((item) => {
+                if (item.children) {
+                  return (
+                    <DropdownMenuSub key={item.label}>
+                      <DropdownMenuSubTrigger>
+                        {item.label}
+                      </DropdownMenuSubTrigger>
+                      <DropdownMenuSubContent>
+                        {item.children.map((child) => (
+                          <DropdownMenuItem key={child.label}>
+                            <Link href={child.href} className="w-full">
+                              {child.label}
+                            </Link>
+                          </DropdownMenuItem>
+                        ))}
+                      </DropdownMenuSubContent>
+                    </DropdownMenuSub>
+                  );
+                }
+                return (
+                  <DropdownMenuItem key={item.label}>
+                    <Link href={item.href || "#"} className="w-full">
+                      {item.label}
+                    </Link>
+                  </DropdownMenuItem>
+                );
+              })}
             </DropdownMenuGroup>
           </DropdownMenuContent>
         </DropdownMenu>
