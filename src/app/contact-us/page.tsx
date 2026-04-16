@@ -1,5 +1,4 @@
-import Image from "next/image";
-import ContactForm from "@/components/blocks/contact-form";
+import ContactForm from "@/components/blocks/form-contact";
 
 export default function ContactUs() {
   return (

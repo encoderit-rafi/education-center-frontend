@@ -172,19 +172,19 @@ export default function BookATestPage() {
                   <div className="grid md:grid-cols-2 gap-8">
                     <div className="space-y-2">
                       <label className="text-[10px] font-black uppercase tracking-[0.2em] text-secondary/40 ml-1">Given Name</label>
-                      <input type="text" className="w-full px-6 py-4 bg-surface-container-low rounded-2xl border-none focus:ring-2 focus:ring-primary/20 transition-all font-medium text-secondary" placeholder="First Name" />
+                      <input type="text" className="w-full px-6 py-4 bg-surface-container-low rounded-2xl border-none focus:ring-2 focus:ring-primary/20 transition-all font-medium text-secondary placeholder:text-slate-500" placeholder="First Name" />
                     </div>
                     <div className="space-y-2">
                       <label className="text-[10px] font-black uppercase tracking-[0.2em] text-secondary/40 ml-1">Family Name</label>
-                      <input type="text" className="w-full px-6 py-4 bg-surface-container-low rounded-2xl border-none focus:ring-2 focus:ring-primary/20 transition-all font-medium text-secondary" placeholder="Surname" />
+                      <input type="text" className="w-full px-6 py-4 bg-surface-container-low rounded-2xl border-none focus:ring-2 focus:ring-primary/20 transition-all font-medium text-secondary placeholder:text-slate-500" placeholder="Surname" />
                     </div>
                     <div className="space-y-2 md:col-span-2">
                       <label className="text-[10px] font-black uppercase tracking-[0.2em] text-secondary/40 ml-1">Email Address</label>
-                      <input type="email" className="w-full px-6 py-4 bg-surface-container-low rounded-2xl border-none focus:ring-2 focus:ring-primary/20 transition-all font-medium text-secondary" placeholder="email@address.com" />
+                      <input type="email" className="w-full px-6 py-4 bg-surface-container-low rounded-2xl border-none focus:ring-2 focus:ring-primary/20 transition-all font-medium text-secondary placeholder:text-slate-500" placeholder="email@address.com" />
                     </div>
                     <div className="space-y-2">
                       <label className="text-[10px] font-black uppercase tracking-[0.2em] text-secondary/40 ml-1">ID Number (Passport/Emirates ID)</label>
-                      <input type="text" className="w-full px-6 py-4 bg-surface-container-low rounded-2xl border-none focus:ring-2 focus:ring-primary/20 transition-all font-medium text-secondary" placeholder="Type here..." />
+                      <input type="text" className="w-full px-6 py-4 bg-surface-container-low rounded-2xl border-none focus:ring-2 focus:ring-primary/20 transition-all font-medium text-secondary placeholder:text-slate-500" placeholder="Type here..." />
                     </div>
                     <div className="space-y-2">
                       <label className="text-[10px] font-black uppercase tracking-[0.2em] text-secondary/40 ml-1">Reason for Test</label>

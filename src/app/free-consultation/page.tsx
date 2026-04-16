@@ -41,7 +41,7 @@ export default function FreeConsultationPage() {
               <Image
                 className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
                 alt="Expert consultant provide guidance"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDj8w-vwgG-NJORfSXuHFah4aZUndRiONmk1ag3cGH8osj2gB70L1gVnt2tuTe7o5XFnzMakIX7lx86z8ucpHFNJaHY9jK0atH8VOfVHAmuVLbNt8fRTIGeiZlzh2h-fqlDWjq7oTprJamb8Y0LYgqdAJlfzB8EjaBTlibKxsWt-ns2KA1AbDKhGhsviaq4tqmumMkC7ZkuIe7rb8J0AKhM_nxgYyo4hG20LeN9TU_88D99JwwNS49Lcan9rML0zT7HdznGfuXJAg"
+                src="/images/about-us/mission-student.png"
                 width={600}
                 height={750}
                 priority

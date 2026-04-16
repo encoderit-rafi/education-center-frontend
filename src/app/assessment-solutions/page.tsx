@@ -1,24 +1,35 @@
-import PartnershipRequestForm from "@/components/blocks/partnership-request-form";
 import Image from "next/image";
+import ContactForm from "@/components/blocks/form-contact";
+
+
+const assessmentServices = [
+  {
+    "id": 1,
+    "title": "Exam Proctoring",
+    "description": "Hybrid proctoring combining advanced AI monitoring with elite human invigilators for maximum integrity.",
+    "image": "/images/about-us/infrastructure-center.png"
+  },
+  {
+    "id": 2,
+    "title": "Secure Delivery",
+    "description": "Proprietary lockdown browsers ensuring that your intellectual property remains protected at every terminal.",
+    "image": "/images/about-us/vision-hero.png"
+  },
+  {
+    "id": 3,
+    "title": "Special Accommodations",
+    "description": "Inclusive testing environments supporting WCAG standards and specialized hardware for diverse requirements.",
+    "image": "/images/about-us/experience-student.png"
+  }
+]
+
 
 export default function AssessmentSolutionsPage() {
   return (
-    <main className="pt-24 pb-12">
+    <main className="pb-12">
       {/* Hero Section */}
       <section className="relative px-8 py-32 min-h-[600px] flex items-center bg-white">
-        <div className="absolute inset-0 z-0">
-          <Image
-            className="w-full h-full object-cover opacity-5"
-            src="/images/about-us/vision-hero.png"
-            alt="Background pattern"
-            fill
-            priority
-          />
-        </div>
         <div className="relative z-10 max-w-6xl mx-auto text-left w-full">
-          <span className="inline-block py-1 px-3 bg-red-800 text-white text-[10px] font-bold tracking-[0.2em] uppercase mb-8">
-            Institutional Excellence
-          </span>
           <h1 className="text-6xl md:text-7xl font-extrabold text-slate-900 leading-[1.1] tracking-tighter mb-8 font-headline">
             Global Standards in <br />
             <span className="text-red-800 italic">Assessment Intelligence.</span>
@@ -26,14 +37,6 @@ export default function AssessmentSolutionsPage() {
           <p className="text-lg text-slate-600 max-w-2xl leading-relaxed mb-12">
             Empowering higher education institutions with bespoke testing frameworks, rigorous proctoring standards, and deep analytical insights for the modern academic landscape.
           </p>
-          <div className="flex flex-wrap gap-6">
-            <button className="bg-red-800 text-white px-10 py-4 font-bold text-sm shadow-xl shadow-red-900/10 hover:bg-red-900 transition-all uppercase tracking-wider">
-              Request Institutional Deck
-            </button>
-            <button className="border-b border-red-800 text-red-800 px-4 py-4 font-bold text-sm hover:text-red-900 transition-colors uppercase tracking-wider">
-              Our Global Partners
-            </button>
-          </div>
         </div>
       </section>
 
@@ -44,15 +47,6 @@ export default function AssessmentSolutionsPage() {
             <h2 className="text-4xl font-extrabold text-slate-900 tracking-tight font-headline">
               Assessment Solutions for Universities
             </h2>
-            <div className="flex gap-4">
-              <button className="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center text-red-800 hover:bg-slate-50 transition-colors">
-                <span className="material-symbols-outlined">chat</span>
-              </button>
-              <button className="bg-red-800 text-white px-6 py-3 rounded-md flex items-center gap-2 text-sm font-bold shadow-sm hover:bg-red-900 transition-colors">
-                <span className="material-symbols-outlined text-sm">smart_toy</span>
-                AI Advisor
-              </button>
-            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
@@ -144,54 +138,23 @@ export default function AssessmentSolutionsPage() {
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            {/* Proctoring */}
-            <div className="text-center group">
-              <div className="aspect-square bg-white rounded-3xl mb-10 p-10 shadow-sm border border-slate-100 group-hover:shadow-xl transition-all duration-500 overflow-hidden relative">
-                <Image
-                  className="w-full h-full object-cover rounded-2xl group-hover:scale-105 transition-transform duration-700"
-                  src="/images/about-us/infrastructure-center.png"
-                  alt="Exam Proctoring"
-                  width={500}
-                  height={500}
-                />
+            {assessmentServices.map((service) => (
+              <div key={service.id} className="text-center group">
+                <div className="aspect-square bg-white rounded-3xl mb-10 p-2 shadow-sm border border-slate-100 group-hover:shadow-xl transition-all duration-500 overflow-hidden relative">
+                  <Image
+                    className="w-full h-full object-cover rounded-2xl group-hover:scale-105 transition-transform duration-700"
+                    src={service.image}
+                    alt={service.title}
+                    width={500}
+                    height={500}
+                  />
+                </div>
+                <h3 className="text-2xl font-bold mb-4 text-slate-900 font-headline">{service.title}</h3>
+                <p className="text-slate-600 leading-relaxed text-sm max-w-xs mx-auto">
+                  {service.description}
+                </p>
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-slate-900 font-headline">Exam Proctoring</h3>
-              <p className="text-slate-600 leading-relaxed text-sm max-w-xs mx-auto">
-                Hybrid proctoring combining advanced AI monitoring with elite human invigilators for maximum integrity.
-              </p>
-            </div>
-            {/* Secure Delivery */}
-            <div className="text-center group">
-              <div className="aspect-square bg-white rounded-3xl mb-10 p-10 shadow-sm border border-slate-100 group-hover:shadow-xl transition-all duration-500 overflow-hidden relative">
-                <Image
-                  className="w-full h-full object-cover rounded-2xl group-hover:scale-105 transition-transform duration-700"
-                  src="/images/about-us/vision-hero.png"
-                  alt="Secure Delivery"
-                  width={500}
-                  height={500}
-                />
-              </div>
-              <h3 className="text-2xl font-bold mb-4 text-slate-900 font-headline">Secure Delivery</h3>
-              <p className="text-slate-600 leading-relaxed text-sm max-w-xs mx-auto">
-                Proprietary lockdown browsers ensuring that your intellectual property remains protected at every terminal.
-              </p>
-            </div>
-            {/* Special Accoms */}
-            <div className="text-center group">
-              <div className="aspect-square bg-white rounded-3xl mb-10 p-10 shadow-sm border border-slate-100 group-hover:shadow-xl transition-all duration-500 overflow-hidden relative">
-                <Image
-                  className="w-full h-full object-cover rounded-2xl group-hover:scale-105 transition-transform duration-700"
-                  src="/images/about-us/experience-student.png"
-                  alt="Special Accommodations"
-                  width={500}
-                  height={500}
-                />
-              </div>
-              <h3 className="text-2xl font-bold mb-4 text-slate-900 font-headline">Special Accommodations</h3>
-              <p className="text-slate-600 leading-relaxed text-sm max-w-xs mx-auto">
-                Inclusive testing environments supporting WCAG standards and specialized hardware for diverse requirements.
-              </p>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -230,7 +193,7 @@ export default function AssessmentSolutionsPage() {
           </div>
 
           <div className="bg-white p-8 md:p-12 rounded-2xl shadow-xl shadow-red-900/5 border border-slate-100">
-            <PartnershipRequestForm />
+            <ContactForm />
           </div>
         </div>
       </section>

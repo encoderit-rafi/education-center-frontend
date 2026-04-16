@@ -13,7 +13,7 @@ export default function FeesPage() {
           <img
             className="w-full h-full object-cover"
             alt="serene high-end university library interior"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCB_EzxdZD7VmTxWnhgG2Yz5hd6MU9511vqitJUoW9as32exQWE5gzjhVclGF5ma3IAUdA8Lx8rn6Oc5x5p1UQ3DepGWfaswTkiPdhOWDADqI0iZFmwUOKBy6mpQr3TyutmvcCpEFVfuKPZxretF51mt3qyB6xuKwrmvL2vZKc3kTzAqGlaPsX2cIp9g-B9YgeZ6hQdxp6Ii3PEnCF08bATWxZWkA2wUnXC91IlCH__aTZYTNlWm-nkP2lIwLboqWAVtIYmFKEOdGtP"
+            src="/images/about-us/vision-hero.png"
           />
         </div>
         <div className="absolute inset-0 bg-gradient-to-r from-[#111827] via-[#111827]/80 to-transparent"></div>
@@ -311,9 +311,9 @@ export default function FeesPage() {
         <div className="max-w-7xl mx-auto rounded-[3rem] overflow-hidden relative min-h-[450px] flex items-center bg-[#991B1B] shadow-[0_40px_80px_rgba(153,27,27,0.4)]">
           <div className="absolute inset-0">
             <img
-              className="w-full h-full object-cover opacity-20 mix-blend-overlay rotate-12 scale-125"
-              alt="crimson cardstock pattern"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAyA_531Jx4MrPPjMz7csLMMUe8KoIt9fi5SxMp-xGuZWDY7aYje8jL45mEUn6Clyw6Zd5YrwMBOyPh1-o5Ystsv_OewvpIgtWEwE1qa0toW20kROCU2ETxYQ91LOa1jSdxfUOCwh9_y7kFSx_V69GifcOl6VdptdIDRpXEA2tPLKiy2Iyt9cSbLVGyi3DbNWujE44wR0lXWKpRSf4e0PYmFwcPlRAUw7DBU4Vxwl9v3KIB2guQjk2z4rbLgER8Akp96eklZJoThyB"
+              className="w-full h-full object-cover opacity-10 mix-blend-overlay rotate-12 scale-125"
+              alt="academic background pattern"
+              src="/images/about-us/vision-map.png"
             />
           </div>
           <div className="relative z-10 w-full p-16 md:p-24 flex flex-col md:flex-row justify-between items-center gap-16">

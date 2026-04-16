@@ -56,7 +56,7 @@ export default function WorkshopsPage() {
             <div className="aspect-square rounded-[2.5rem] overflow-hidden shadow-[0_48px_96px_-24px_rgba(118,0,9,0.12)] border border-outline/5 bg-surface-container-high relative">
               <img
                 className="w-full h-full object-cover"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDj8w-vwgG-NJORfSXuHFah4aZUndRiONmk1ag3cGH8osj2gB70L1gVnt2tuTe7o5XFnzMakIX7lx86z8ucpHFNJaHY9jK0atH8VOfVHAmuVLbNt8fRTIGeiZlzh2h-fqlDWjq7oTprJamb8Y0LYgqdAJlfzB8EjaBTlibKxsWt-ns2KA1AbDKhGhsviaq4tqmumMkC7ZkuIe7rb8J0AKhM_nxgYyo4hG20LeN9TU_88D99JwwNS49Lcan9rML0zT7HdznGfuXJAg"
+                src="/images/about-us/infrastructure-center.png"
                 alt="Workshop Collaboration"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-secondary/40 to-transparent" />
@@ -196,19 +196,11 @@ export default function WorkshopsPage() {
                 
                 <div className="grid grid-cols-2 gap-6">
                   <button className="group relative flex flex-col items-center justify-center gap-4 p-8 rounded-3xl bg-surface-container-low border-2 border-transparent hover:border-primary/20 hover:bg-white transition-all duration-300">
-                    <img
-                      className="h-8 group-hover:scale-110 transition-transform"
-                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKpt2YNzUZodOb0woUQcp6GQ_iZGyBCFnV2YOm2qp64zoGqJaB1GjPB81W0idLohdr9lTncEjotpCXL7E9ouZgGAdqTMmsRDmeTm75jTkumjiPyO3IHfEgQLWjIJJcsFHFVVHy0rFuzxV3C0La9oC1In-16U0RcZgdqhy-G6ppLBn6RAuis7BsZEnnuO-lJEy5L4VknJi79AKZKtX0njJmeVYMSOuUag-mWukmaNEkEuiVgq4MQ69jo8SCGlWrG6jTDE852elNgQ"
-                      alt="Stripe"
-                    />
+                    <span className="material-symbols-outlined text-4xl text-secondary/30 group-hover:text-primary transition-colors">credit_card</span>
                     <span className="text-[10px] font-black text-secondary/40 uppercase tracking-widest">Pay with Card</span>
                   </button>
                   <button className="group relative flex flex-col items-center justify-center gap-4 p-8 rounded-3xl bg-surface-container-low border-2 border-transparent hover:border-primary/20 hover:bg-white transition-all duration-300">
-                    <img
-                      className="h-8 group-hover:scale-110 transition-transform"
-                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsLOBAWlddkR9xGMwNfgUak9iWjLYPARNYaGaqnh3R-TZIcQBRDGmKyEi-5Tg7V35E5hCW9cMQo3fxAkaje9HR-I4WfCb-eMYY2NhXxErgzFM-hbFJZiHrbOfd6pfeXzepxlFHEcibH40augUrQ_TjZyk7xGXXEfEr5JR7cnYEHe3WNq4IPl5Yr2eT-7kmAd20jEf14Iyffq4qTtNd1QldQRXLSo6mUN0PC5LrGdrqy6NTWFndqXMogskX1Um6BeMqceq1lMSG7A"
-                      alt="PayPal"
-                    />
+                    <span className="material-symbols-outlined text-4xl text-secondary/30 group-hover:text-primary transition-colors">account_balance_wallet</span>
                     <span className="text-[10px] font-black text-secondary/40 uppercase tracking-widest">Pay with PayPal</span>
                   </button>
                 </div>

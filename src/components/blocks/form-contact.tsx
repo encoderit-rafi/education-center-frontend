@@ -11,33 +11,15 @@ import {
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { useState } from "react";
 
-const INQUIRY_TYPES = [
-  { value: "IELTS", label: "IELTS Preparation & Testing" },
-  { value: "TOEFL", label: "TOEFL iBT" },
-  { value: "OET", label: "OET (Occupational English Test)" },
-  { value: "PTE", label: "PTE Academic" },
-  { value: "CELPIP", label: "CELPIP" },
-  { value: "Cambridge", label: "Cambridge English" },
-  { value: "Editorial", label: "Academic Editorial Review" },
-  { value: "Partnership", label: "Institutional Partnership" },
-  { value: "Other", label: "Other Inquiry" },
-];
+
 
 const contactSchema = z.object({
   fullName: z
     .string()
     .min(2, { message: "Name must be at least 2 characters" }),
   email: z.string().email({ message: "Please enter a valid email address" }),
-  inquiryType: z.string().min(1, { message: "Please select an inquiry type" }),
   message: z
     .string()
     .min(10, { message: "Message must be at least 10 characters" }),
@@ -53,20 +35,15 @@ export default function ContactForm() {
   const {
     register,
     handleSubmit,
-    setValue,
-    watch,
     formState: { errors, isSubmitting },
   } = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
     defaultValues: {
       fullName: "",
       email: "",
-      inquiryType: "",
       message: "",
     },
   });
-
-  const inquiryValue = watch("inquiryType");
 
   const onSubmit = async (data: ContactFormValues) => {
     // Simulate API call
@@ -123,33 +100,7 @@ export default function ContactForm() {
           {errors.email && <FieldError>{errors.email.message}</FieldError>}
         </Field>
 
-        <Field data-invalid={!!errors.inquiryType} className="col-span-full">
-          <FieldLabel className="text-xs font-bold text-secondary uppercase tracking-wider ml-1">
-            Inquiry Type
-          </FieldLabel>
-          <FieldContent>
-            <Select
-              onValueChange={(val) =>
-                setValue("inquiryType", val || "", { shouldValidate: true })
-              }
-              value={inquiryValue}
-            >
-              <SelectTrigger className="bg-slate-50 border-slate-200 focus-visible:ring-primary h-12! w-full rounded-md px-6 data-placeholder:text-gray-500">
-                <SelectValue placeholder="Select service..." />
-              </SelectTrigger>
-              <SelectContent className="rounded-2xl">
-                {INQUIRY_TYPES.map((type) => (
-                  <SelectItem key={type.value} value={type.value} className="rounded-md spcar-y-2">
-                    {type.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </FieldContent>
-          {errors.inquiryType && (
-            <FieldError>{errors.inquiryType.message}</FieldError>
-          )}
-        </Field>
+
       </div>
 
       <Field data-invalid={!!errors.message}>
@@ -159,9 +110,9 @@ export default function ContactForm() {
         <FieldContent>
           <Textarea
             placeholder="How can we help illuminate your path?"
-            rows={5}
+            rows={6}
             {...register("message")}
-            className="bg-slate-50 border-slate-200 focus-visible:ring-primary rounded-md p-6 placeholder:text-gray-500"
+            className="bg-slate-50 border-slate-200 focus-visible:ring-primary rounded-md p-4 placeholder:text-gray-500"
           />
         </FieldContent>
         {errors.message && <FieldError>{errors.message.message}</FieldError>}
