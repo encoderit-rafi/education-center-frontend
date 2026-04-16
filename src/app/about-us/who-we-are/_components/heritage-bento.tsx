@@ -19,11 +19,17 @@ export function HeritageBento() {
           {/* Main Content Block */}
           <div className="lg:col-span-7 bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
             <div>
+              <div className="mb-8 p-6 bg-red-50/50 rounded-xl border-l-4 border-[#A11D1D]">
+                <p className="text-lg italic text-gray-700 leading-relaxed">
+                  "Education is not preparation for life; education is life itself." 
+                  <span className="block mt-2 font-bold text-[#A11D1D] not-italic">— John Dewey</span>
+                </p>
+              </div>
               <h3 className="text-2xl font-bold text-[#A11D1D] font-heading mb-6 tracking-tight">
-                Founding Excellence
+                A Visionary Foundation
               </h3>
               <p className="text-xl leading-relaxed text-gray-600 mb-12">
-                Established to bridge the gap in international communication standards, TEPTH began as a boutique consultancy for higher education. Today, we represent the gold standard in English proficiency testing across the region, partnering with globally recognized institutions to deliver seamless examination experiences.
+                As a visionary organization that values students as the guardians of a successful society, TEPTH caters to contemporary educational requirements across the Arab World. We believe in offering professional career services that turn dreams into reality, bridging the gap between national talent and global opportunity through unrivaled high-quality services.
               </p>
             </div>
             

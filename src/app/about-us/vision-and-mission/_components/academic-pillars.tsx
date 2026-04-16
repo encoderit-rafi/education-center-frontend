@@ -1,7 +1,7 @@
 import Image from "next/image";
-import { BarChart3, Accessibility, Lightbulb } from "lucide-react";
+import { BarChart3, Accessibility, Lightbulb, Users } from "lucide-react";
 
-export function AcademicSolutions() {
+export function AcademicPillars() {
   return (
     <section className="py-24 bg-white">
       <div className="container px-6 mx-auto sm:px-12 lg:px-24">
@@ -16,7 +16,7 @@ export function AcademicSolutions() {
               <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
                 <Image
                   src="/images/about-us/infrastructure-center.png"
-                  alt="Students in a modern learning environment"
+                  alt="Modern testing infrastructure"
                   fill
                   className="object-cover"
                 />
@@ -30,20 +30,20 @@ export function AcademicSolutions() {
           {/* Text Side */}
           <div className="w-full lg:w-1/2">
             <h2 className="text-4xl font-bold text-[#1F1F1F] font-heading tracking-tight mb-10 leading-tight">
-              Specialized <br />
-              Academic Solutions
+              Our Core <br />
+              Academic Pillars
             </h2>
             
             <div className="space-y-10">
               {/* Feature 1 */}
               <div className="flex gap-6">
                 <div className="flex-shrink-0 w-14 h-14 bg-[#A11D1D]/5 rounded-xl flex items-center justify-center text-[#A11D1D]">
-                  <BarChart3 className="w-7 h-7" />
+                  <Lightbulb className="w-7 h-7" />
                 </div>
                 <div>
-                  <h4 className="text-xl font-bold text-[#1F1F1F] font-heading mb-2">Mastery in Performance</h4>
+                  <h4 className="text-xl font-bold text-[#1F1F1F] font-heading mb-2">Cognitive Clarity</h4>
                   <p className="text-gray-600 leading-relaxed">
-                    Our trained professionals are equipped with the latest techniques for high-stakes preparation including <strong>GMAT</strong>, <strong>GRE</strong>, <strong>SAT</strong>, and <strong>TOEFL</strong>. We ensure you pass with flying colors at the best price.
+                    To simplify the complexities in a test’s procedure that hinder the examinee’s comprehension skills. We employ unique resources and technology to make students understand tough tasks easily.
                   </p>
                 </div>
               </div>
@@ -51,12 +51,12 @@ export function AcademicSolutions() {
               {/* Feature 2 */}
               <div className="flex gap-6">
                 <div className="flex-shrink-0 w-14 h-14 bg-[#A11D1D]/5 rounded-xl flex items-center justify-center text-[#A11D1D]">
-                  <Accessibility className="w-7 h-7" />
+                  <BarChart3 className="w-7 h-7" />
                 </div>
                 <div>
-                  <h4 className="text-xl font-bold text-[#1F1F1F] font-heading mb-2">Technological Edge</h4>
+                  <h4 className="text-xl font-bold text-[#1F1F1F] font-heading mb-2">Shaping Futures</h4>
                   <p className="text-gray-600 leading-relaxed">
-                    With innovative IT support and learning procedures, we make it expedient for students to pass online exams such as <strong>IELTS</strong>, <strong>CELPIP</strong>, <strong>PTE-A</strong>, <strong>CAEL CE</strong>, and <strong>OET</strong>.
+                    TEPTH aims to shape a better future. We believe that quality education for youth translates into a more enlightened and prosperous society.
                   </p>
                 </div>
               </div>
@@ -64,12 +64,12 @@ export function AcademicSolutions() {
               {/* Feature 3 */}
               <div className="flex gap-6">
                 <div className="flex-shrink-0 w-14 h-14 bg-[#A11D1D]/5 rounded-xl flex items-center justify-center text-[#A11D1D]">
-                  <Lightbulb className="w-7 h-7" />
+                  <Accessibility className="w-7 h-7" />
                 </div>
                 <div>
-                  <h4 className="text-xl font-bold text-[#1F1F1F] font-heading mb-2">The Pedagogical Benchmark</h4>
+                  <h4 className="text-xl font-bold text-[#1F1F1F] font-heading mb-2">The Torch Bearer</h4>
                   <p className="text-gray-600 leading-relaxed">
-                    Our latest learning techniques allow you to score more with less effort. TEPTH is your <strong>one pit stop</strong> for all exam preparation needs, setting the standard for unrivaled academic services.
+                    By aiding students in picking a suitable Exam Preparation Course, TEPTH stands as the torch bearer of knowledge and skills in the region.
                   </p>
                 </div>
               </div>

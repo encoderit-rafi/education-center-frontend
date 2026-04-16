@@ -39,14 +39,14 @@ export default function ExamDeliveryPage() {
                 Delivery Solutions
               </h2>
 
-              <TabsList variant="default" className="bg-slate-100/80 backdrop-blur-md p-1.5 rounded-2xl border border-slate-200/50 shadow-sm">
-                <TabsTrigger value="provider" className="px-10 py-3 text-xs font-bold uppercase tracking-widest rounded-xl data-active:bg-white data-active:shadow-lg data-active:text-red-800 transition-all duration-300">
+              <TabsList variant="default" className="w-full lg:w-auto bg-slate-100/80 backdrop-blur-md p-1.5 rounded-2xl border border-slate-200/50 shadow-sm flex items-center">
+                <TabsTrigger value="provider" className="flex-1 lg:flex-none px-4 md:px-10 py-3 text-[10px] md:text-xs font-bold uppercase tracking-widest rounded-xl data-active:bg-white data-active:shadow-lg data-active:text-red-800 transition-all duration-300">
                   Exam Provider
                 </TabsTrigger>
-                <TabsTrigger value="vendor" className="px-10 py-3 text-xs font-bold uppercase tracking-widest rounded-xl data-active:bg-white data-active:shadow-lg data-active:text-red-800 transition-all duration-300">
+                <TabsTrigger value="vendor" className="flex-1 lg:flex-none px-4 md:px-10 py-3 text-[10px] md:text-xs font-bold uppercase tracking-widest rounded-xl data-active:bg-white data-active:shadow-lg data-active:text-red-800 transition-all duration-300">
                   Vendor
                 </TabsTrigger>
-                <TabsTrigger value="test-takers" className="px-10 py-3 text-xs font-bold uppercase tracking-widest rounded-xl data-active:bg-white data-active:shadow-lg data-active:text-red-800 transition-all duration-300">
+                <TabsTrigger value="test-takers" className="flex-1 lg:flex-none px-4 md:px-10 py-3 text-[10px] md:text-xs font-bold uppercase tracking-widest rounded-xl data-active:bg-white data-active:shadow-lg data-active:text-red-800 transition-all duration-300">
                   Test-takers
                 </TabsTrigger>
               </TabsList>

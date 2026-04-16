@@ -44,11 +44,11 @@ export default function ExamProctoringServicesPage() {
                 </h2>
               </div>
 
-              <TabsList variant="default" className="bg-slate-100/80 backdrop-blur-md p-1.5 rounded-2xl border border-slate-200/50 shadow-sm">
-                <TabsTrigger value="institutions" className="px-10 py-3 text-xs font-bold uppercase tracking-widest rounded-xl data-active:bg-white data-active:shadow-lg data-active:text-red-800 transition-all duration-300">
+              <TabsList variant="default" className="w-full lg:w-auto bg-slate-100/80 backdrop-blur-md p-1.5 rounded-2xl border border-slate-200/50 shadow-sm flex items-center">
+                <TabsTrigger value="institutions" className="flex-1 lg:flex-none px-4 md:px-10 py-3 text-[10px] md:text-xs font-bold uppercase tracking-widest rounded-xl data-active:bg-white data-active:shadow-lg data-active:text-red-800 transition-all duration-300">
                   Institutions
                 </TabsTrigger>
-                <TabsTrigger value="test-taker" className="px-10 py-3 text-xs font-bold uppercase tracking-widest rounded-xl data-active:bg-white data-active:shadow-lg data-active:text-red-800 transition-all duration-300">
+                <TabsTrigger value="test-taker" className="flex-1 lg:flex-none px-4 md:px-10 py-3 text-[10px] md:text-xs font-bold uppercase tracking-widest rounded-xl data-active:bg-white data-active:shadow-lg data-active:text-red-800 transition-all duration-300">
                   Test-taker
                 </TabsTrigger>
               </TabsList>

@@ -21,11 +21,7 @@ export function CertificationBento() {
                 Our data management systems and physical test centers are fully compliant with ISO/IEC 27001 standards for Information Security Management, ensuring candidate data remains confidential and secure.
               </p>
             </div>
-            <div className="relative z-10 pt-10">
-              <Button className="bg-white text-[#A11D1D] hover:bg-white/90 px-8 py-6 font-bold rounded-xl shadow-lg h-auto text-lg transition-transform hover:scale-105">
-                Download Certificate
-              </Button>
-            </div>
+
             {/* Background Accent */}
             <div className="absolute -right-24 -bottom-24 w-96 h-96 bg-white/5 rounded-full blur-[100px] pointer-events-none" />
           </div>

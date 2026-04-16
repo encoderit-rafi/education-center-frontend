@@ -27,7 +27,7 @@ export function PartnershipGrid() {
       <div className="container px-6 mx-auto sm:px-12 lg:px-24">
         {/* Header */}
         <div className="text-center mb-20 max-w-2xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-[#1F1F1F] font-heading mb-4">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-[#A11D1D] font-heading mb-4">
             Official Testing Partners
           </h2>
           <p className="text-gray-600 text-lg leading-relaxed">
@@ -38,20 +38,20 @@ export function PartnershipGrid() {
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {partners.map((partner, idx) => (
-            <div 
-              key={idx} 
+            <div
+              key={idx}
               className="bg-gray-50/50 p-10 rounded-2xl border border-gray-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group text-center"
             >
               {/* Logo Placeholder */}
               <div className="h-20 mb-8 flex items-center justify-center">
                 <div className={cn(
-                  "text-3xl font-black tracking-tighter grayscale group-hover:grayscale-0 transition-all duration-300",
+                  "text-3xl tracking-tighter grayscale group-hover:grayscale-0 transition-all duration-300",
                   partner.logoColor
                 )}>
                   {partner.logo}
                 </div>
               </div>
-              
+
               <h3 className="text-xl font-bold text-[#1F1F1F] font-heading mb-4">
                 {partner.name}
               </h3>
