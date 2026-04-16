@@ -8,7 +8,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Menu } from "lucide-react";
 import { Button, buttonVariants } from "../ui/button";
 import SearchCommand from "./search-command";
 
@@ -46,7 +46,7 @@ const navItems = [
 
 export default function TopNavBar() {
   return (
-    <header className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-xl shadow-sm">
+    <header className="sticky top-0 w-full z-50 bg-white/80 backdrop-blur-xl shadow-sm">
       <div className="flex items-center justify-between p-3 max-w-7xl mx-auto">
         <div className="base-gap gap-10">
           <Link href="/">
@@ -97,7 +97,21 @@ export default function TopNavBar() {
             })}
           </nav>
         </div>
-        <div className="base-gap">
+        <DropdownMenu>
+          <DropdownMenuTrigger className="md:hidden">
+            <Menu className="size-5 text-primary" />
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuGroup>
+              {navItems.map((item) => (
+                <DropdownMenuItem key={item.label}>
+                  <Link href={item.href || "#"}>{item.label}</Link>
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
+        <div className="hidden lg:base-gap">
           {/* Search */}
           <SearchCommand />
           {/* Enroll Now */}
@@ -117,4 +131,3 @@ export default function TopNavBar() {
     </header>
   );
 }
-
