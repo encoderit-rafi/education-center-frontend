@@ -55,6 +55,14 @@ export default function Footer() {
                   Exam Delivery
                 </Link>
               </li>
+              <li>
+                <Link
+                  className="text-slate-400 text-sm hover:text-red-400 transition-colors"
+                  href="/special-accommodation"
+                >
+                  Special Accommodation
+                </Link>
+              </li>
             </ul>
           </div>
           <div>
