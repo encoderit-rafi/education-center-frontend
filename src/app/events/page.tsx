@@ -4,12 +4,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { 
-    Calendar, 
-    Clock, 
-    MapPin, 
-    CheckCircle, 
-    Video, 
+import {
+    Calendar,
+    Clock,
+    MapPin,
+    CheckCircle,
+    Video,
     Users,
     Phone,
     Mail
@@ -43,9 +43,6 @@ export default function EventsPage() {
 
                 <div className="container relative z-10 px-6 mx-auto sm:px-12 lg:px-24">
                     <div className="max-w-4xl space-y-6">
-                        <Badge className="bg-[#A11D1D] text-white border-none py-1.5 px-4 text-[10px] font-bold tracking-widest uppercase rounded-none">
-                            Upcoming Workshops
-                        </Badge>
                         <h1 className={cn(
                             "text-6xl md:text-8xl font-black text-white tracking-tighter leading-[0.9]",
                             "font-heading"
@@ -76,28 +73,28 @@ export default function EventsPage() {
 
                         {/* 2. Large Diagonal Red Shapes (The "Glue") */}
                         {/* Top Left Shape */}
-                        <div 
-                            className="absolute top-0 left-0 w-1/2 h-full bg-gradient-to-br from-black via-[#450a0a] to-transparent z-10 opacity-90" 
+                        <div
+                            className="absolute top-0 left-0 w-1/2 h-full bg-gradient-to-br from-black via-[#450a0a] to-transparent z-10 opacity-90"
                             style={{ clipPath: 'polygon(0 0, 100% 0, 0 50%)' }}
                         />
-                        <div 
-                            className="absolute top-0 left-0 w-2/3 h-1/2 bg-[#A11D1D] z-20 opacity-80" 
+                        <div
+                            className="absolute top-0 left-0 w-2/3 h-1/2 bg-[#A11D1D] z-20 opacity-80"
                             style={{ clipPath: 'polygon(0 0, 60% 0, 0 100%)' }}
                         />
 
                         {/* Bottom Right Shape */}
-                        <div 
-                            className="absolute bottom-0 right-0 w-full lg:w-2/3 h-full bg-gradient-to-tl from-[#7f1d1d] via-[#A11D1D] to-[#A11D1D] z-10" 
+                        <div
+                            className="absolute bottom-0 right-0 w-full lg:w-2/3 h-full bg-gradient-to-tl from-[#7f1d1d] via-[#A11D1D] to-[#A11D1D] z-10"
                             style={{ clipPath: 'polygon(100% 20%, 100% 100%, 0 100%, 40% 100%)' }}
                         />
-                        <div 
-                            className="absolute bottom-0 right-0 w-full lg:w-1/2 h-3/4 bg-[#A11D1D] z-20" 
+                        <div
+                            className="absolute bottom-0 right-0 w-full lg:w-1/2 h-3/4 bg-[#A11D1D] z-20"
                             style={{ clipPath: 'polygon(100% 0, 100% 100%, 0 100%)' }}
                         />
 
                         {/* 3. Main Content Grid (Overlays) */}
                         <div className="relative z-30 h-full w-full grid grid-cols-1 lg:grid-cols-12 items-center p-8 lg:p-16">
-                            
+
                             {/* LEFT: Branding & Agenda */}
                             <div className="lg:col-span-12 xl:col-span-7 space-y-12">
                                 {/* Branding Hook */}
@@ -140,7 +137,7 @@ export default function EventsPage() {
                                     <div className="relative z-10">
                                         <h3 className="text-2xl font-black mb-1 font-heading tracking-tight underline decoration-[#A11D1D] decoration-4 underline-offset-8">Register Now</h3>
                                         <p className="text-gray-400 text-[10px] mb-10 uppercase tracking-[0.2em] font-bold">Secure your session entry</p>
-                                        
+
                                         <form className="space-y-5">
                                             <div className="space-y-2">
                                                 <Label className="text-[10px] font-black uppercase tracking-widest text-[#A11D1D]">Full Name:*</Label>
@@ -154,7 +151,7 @@ export default function EventsPage() {
                                                 <Label className="text-[10px] font-black uppercase tracking-widest text-[#A11D1D]">Email Address:*</Label>
                                                 <Input className="bg-white/5 border-white/10 rounded-none h-12 text-[13px] focus:border-[#A11D1D] focus:ring-[#A11D1D]" placeholder="email@example.com" />
                                             </div>
-                                            
+
                                             <Button className="w-full h-16 bg-[#A11D1D] hover:bg-white hover:text-black transition-all rounded-none font-black text-xs uppercase tracking-[0.3em] mt-4">
                                                 Join Session
                                             </Button>
@@ -168,8 +165,8 @@ export default function EventsPage() {
                         {/* 4. Bottom Branding Footer (within poster) */}
                         <div className="absolute bottom-0 left-0 w-full z-40 flex items-end justify-between px-8 lg:px-16 pb-8 pointer-events-none">
                             {/* TEPTH Logo area */}
-                            <div 
-                                className="bg-white px-8 py-4 flex items-center shadow-lg pointer-events-auto" 
+                            <div
+                                className="bg-white px-8 py-4 flex items-center shadow-lg pointer-events-auto"
                                 style={{ clipPath: 'polygon(0 0, 90% 0, 100% 100%, 0 100%)' }}
                             >
                                 <div className="relative w-32 h-14">
