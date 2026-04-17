@@ -27,19 +27,11 @@ export default function CoreServices() {
                 Test Administration
               </h4>
               <p className="text-on-surface-variant text-lg leading-relaxed max-w-md">
-                Secure, streamlined, and globally recognized testing environments
-                for IELTS, TOEFL, and Cambridge English assessments.
+                Secure, streamlined, and globally recognized testing
+                environments for IELTS, TOEFL, and Cambridge English
+                assessments.
               </p>
             </div>
-            <a
-              className="inline-flex items-center gap-2 text-primary font-bold mt-8 group w-fit"
-              href="#"
-            >
-              Learn more
-              <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform">
-                arrow_right_alt
-              </span>
-            </a>
           </div>
 
           <div className="bg-secondary text-white rounded-3xl p-10 flex flex-col justify-between shadow-xl">
@@ -60,13 +52,6 @@ export default function CoreServices() {
                 strategy and performance.
               </p>
             </div>
-            <a
-              className="inline-flex items-center gap-2 text-red-400 font-bold mt-8 hover:text-red-300 transition-colors w-fit"
-              href="#"
-            >
-              Meet coaches
-              <span className="material-symbols-outlined">north_east</span>
-            </a>
           </div>
 
           <div className="bg-surface rounded-3xl p-10 shadow-sm border border-outline/10 group hover:border-red-200 transition-colors">
@@ -101,9 +86,7 @@ export default function CoreServices() {
 
           <div className="bg-surface rounded-3xl p-10 shadow-sm border border-outline/10 group hover:border-red-200 transition-colors">
             <div className="w-12 h-12 rounded-xl bg-gray-50 mb-6 flex items-center justify-center text-secondary group-hover:bg-red-800 group-hover:text-white transition-colors">
-              <span className="material-symbols-outlined text-2xl">
-                public
-              </span>
+              <span className="material-symbols-outlined text-2xl">public</span>
             </div>
             <h4 className="text-xl font-headline font-bold text-secondary mb-3">
               Global Placement

@@ -1,6 +1,9 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { ChevronRight } from "lucide-react";
+import Image from "next/image";
+import { cn } from "@/lib/utils";
 
 const blogs = [
   {
@@ -329,71 +332,11 @@ export default async function BlogDetailPage({
   const related = blogs.filter((b) => b.id !== blog.id).slice(0, 3);
 
   return (
-    <main className="pt-24 bg-background">
+    <div className="bg-background">
       {/* ── Hero Banner ── */}
-      <section className="relative crimson-gradient overflow-hidden">
-        {/* decorative blobs */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2 blur-3xl pointer-events-none" />
-
-        <div className="relative z-10 max-w-7xl mx-auto px-8 py-20">
-          {/* Breadcrumb */}
-          <nav aria-label="Breadcrumb" className="flex items-center gap-2 mb-8">
-            <Link
-              href="/"
-              className="text-white/70 hover:text-white text-xs font-semibold tracking-widest uppercase transition-colors"
-            >
-              Home
-            </Link>
-            <span className="material-symbols-outlined text-white/40 text-sm">
-              chevron_right
-            </span>
-            <span className="text-white/70 text-xs font-semibold tracking-widest uppercase">
-              Blogs
-            </span>
-            <span className="material-symbols-outlined text-white/40 text-sm">
-              chevron_right
-            </span>
-            <span className="text-white text-xs font-semibold tracking-widest uppercase truncate max-w-xs">
-              {blog.tag}
-            </span>
-          </nav>
-
-          {/* Tag + date row */}
-          <div className="flex flex-wrap items-center gap-3 mb-6">
-            <span className="inline-flex items-center px-3 py-1 bg-white/20 text-white text-[10px] font-extrabold tracking-widest uppercase rounded-full border border-white/30">
-              {blog.tag}
-            </span>
-            <span className="text-white/60 text-xs font-medium">{blog.date}</span>
-            <span className="text-white/40 text-xs">·</span>
-            <span className="text-white/60 text-xs font-medium">{blog.readTime}</span>
-          </div>
-
-          {/* Title */}
-          <h1 className="text-4xl md:text-6xl font-headline font-extrabold text-white leading-[1.1] tracking-tight max-w-4xl mb-8">
-            {blog.title}
-          </h1>
-
-          {/* Author chip */}
-          <div className="flex items-center gap-4">
-            <div className="w-10 h-10 rounded-full bg-white/20 border-2 border-white/30 flex items-center justify-center">
-              <span
-                className="material-symbols-outlined text-white text-base"
-                style={{ fontVariationSettings: "'FILL' 1" }}
-              >
-                person
-              </span>
-            </div>
-            <div>
-              <p className="text-white text-sm font-bold">{blog.author}</p>
-              <p className="text-white/60 text-xs">{blog.authorRole}</p>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* ── Body ── */}
-      <section className="px-8 py-16">
+      <section className="px-8 pt-8 pb-16">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-12">
           {/* ── Article ── */}
           <article>
@@ -416,7 +359,10 @@ export default async function BlogDetailPage({
               {blog.content.map((block, idx) => {
                 if (block.type === "paragraph") {
                   return (
-                    <p key={idx} className="text-base text-on-surface-variant leading-[1.85]">
+                    <p
+                      key={idx}
+                      className="text-base text-on-surface-variant leading-[1.85]"
+                    >
                       {block.text}
                     </p>
                   );
@@ -454,7 +400,10 @@ export default async function BlogDetailPage({
                   return (
                     <ul key={idx} className="space-y-3 mt-2">
                       {block.items.map((item, ii) => (
-                        <li key={ii} className="flex items-start gap-3 text-on-surface-variant text-base">
+                        <li
+                          key={ii}
+                          className="flex items-start gap-3 text-on-surface-variant text-base"
+                        >
                           <span
                             className="material-symbols-outlined text-primary text-base mt-0.5 shrink-0"
                             style={{ fontVariationSettings: "'FILL' 1" }}
@@ -470,37 +419,10 @@ export default async function BlogDetailPage({
                 return null;
               })}
             </div>
-
-            {/* Back link */}
-            <div className="mt-14 pt-8 border-t border-outline/30">
-              <Link
-                href="/"
-                className="inline-flex items-center gap-2 text-primary font-extrabold text-[11px] tracking-widest uppercase hover:gap-3 transition-all"
-              >
-                <span className="material-symbols-outlined text-sm">arrow_back</span>
-                Back to All Blogs
-              </Link>
-            </div>
           </article>
 
           {/* ── Sidebar ── */}
           <aside className="space-y-8">
-            {/* Tag Badge */}
-            <div className="bg-white rounded-2xl shadow-sm border border-outline/10 p-6">
-              <p className="text-xs font-extrabold text-primary tracking-widest uppercase mb-3">
-                Category
-              </p>
-              <span className="inline-flex items-center gap-2 px-4 py-2 bg-red-50 text-primary text-sm font-bold rounded-full border border-red-100">
-                <span
-                  className="material-symbols-outlined text-sm"
-                  style={{ fontVariationSettings: "'FILL' 1" }}
-                >
-                  label
-                </span>
-                {blog.tag}
-              </span>
-            </div>
-
             {/* Author Card */}
             <div className="bg-white rounded-2xl shadow-sm border border-outline/10 p-6 space-y-4">
               <p className="text-xs font-extrabold text-primary tracking-widest uppercase">
@@ -516,8 +438,12 @@ export default async function BlogDetailPage({
                   </span>
                 </div>
                 <div>
-                  <p className="font-headline font-bold text-secondary text-base">{blog.author}</p>
-                  <p className="text-on-surface-variant text-xs mt-0.5">{blog.authorRole}</p>
+                  <p className="font-headline font-bold text-secondary text-base">
+                    {blog.author}
+                  </p>
+                  <p className="text-on-surface-variant text-xs mt-0.5">
+                    {blog.authorRole}
+                  </p>
                 </div>
               </div>
             </div>
@@ -539,8 +465,12 @@ export default async function BlogDetailPage({
                     title={label}
                     className="flex-1 flex flex-col items-center gap-1 px-3 py-3 rounded-xl bg-surface-container-low hover:bg-red-50 hover:text-primary text-on-surface-variant transition-colors border border-outline/10 cursor-pointer"
                   >
-                    <span className="material-symbols-outlined text-lg">{icon}</span>
-                    <span className="text-[9px] font-semibold tracking-wider uppercase">{label}</span>
+                    <span className="material-symbols-outlined text-lg">
+                      {icon}
+                    </span>
+                    <span className="text-[9px] font-semibold tracking-wider uppercase">
+                      {label}
+                    </span>
                   </button>
                 ))}
               </div>
@@ -567,98 +497,13 @@ export default async function BlogDetailPage({
                   className="inline-flex items-center gap-2 bg-white text-primary font-headline font-bold px-5 py-3 rounded-xl text-sm hover:bg-gray-50 transition-colors shadow-sm"
                 >
                   Book Free Consultation
-                  <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                  <ChevronRight />
                 </Link>
               </div>
             </div>
           </aside>
         </div>
       </section>
-
-      {/* ── Related Blogs ── */}
-      {related.length > 0 && (
-        <section className="py-20 px-8 bg-surface-container-low">
-          <div className="max-w-7xl mx-auto">
-            <div className="mb-10">
-              <h2 className="text-sm font-bold text-primary tracking-widest uppercase mb-3">
-                Keep Reading
-              </h2>
-              <h3 className="text-3xl font-headline font-extrabold text-secondary">
-                Related Articles
-              </h3>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {related.map((b) => (
-                <Link
-                  key={b.id}
-                  href={`/blogs/${b.id}`}
-                  className="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col border border-outline/10"
-                >
-                  <div className="w-full aspect-video overflow-hidden rounded-t-2xl">
-                    <img
-                      alt={b.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      src={b.image}
-                    />
-                  </div>
-                  <div className="p-6 flex flex-col flex-grow space-y-3">
-                    <div className="flex items-center gap-3">
-                      <span className="text-[10px] font-extrabold text-primary tracking-widest uppercase bg-red-50 px-2 py-0.5 rounded">
-                        {b.tag}
-                      </span>
-                      <span className="text-[10px] font-medium text-slate-500 uppercase">
-                        {b.date}
-                      </span>
-                    </div>
-                    <h4 className="text-lg font-headline font-bold text-secondary leading-tight group-hover:text-primary transition-colors">
-                      {b.title}
-                    </h4>
-                    <p className="text-on-surface-variant text-sm leading-relaxed line-clamp-2">
-                      {b.desc}
-                    </p>
-                    <div className="pt-2 mt-auto">
-                      <span className="inline-flex items-center gap-2 text-primary font-extrabold text-[11px] tracking-widest group-hover:gap-3 transition-all uppercase">
-                        Read More
-                        <span className="material-symbols-outlined text-sm">arrow_forward</span>
-                      </span>
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* ── CTA ── */}
-      <section className="py-24 px-8">
-        <div className="max-w-5xl mx-auto crimson-gradient rounded-3xl p-16 text-center text-white shadow-2xl relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl pointer-events-none" />
-          <div className="relative z-10 space-y-8">
-            <h3 className="text-4xl md:text-5xl font-headline font-extrabold tracking-tight">
-              Ready to begin your journey?
-            </h3>
-            <p className="text-xl max-w-2xl mx-auto font-medium opacity-90">
-              Join over 50,000 students who have achieved their dreams with our guidance.
-            </p>
-            <div className="flex flex-wrap justify-center gap-6">
-              <Link
-                href="/free-consultation"
-                className="bg-white text-primary font-headline font-bold px-10 py-4 rounded-xl shadow-xl active:scale-95 transition-transform flex items-center gap-2 hover:bg-gray-50"
-              >
-                Get Started Now{" "}
-                <span className="material-symbols-outlined">arrow_forward</span>
-              </Link>
-              <Link
-                href="/contact-us"
-                className="bg-transparent text-white font-headline font-bold px-10 py-4 rounded-xl border-2 border-white/30 hover:bg-white/10 transition-colors shadow-sm border-solid"
-              >
-                Contact Sales
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
+    </div>
   );
 }
