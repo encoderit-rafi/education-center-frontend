@@ -4,6 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import TopNavBar from "@/components/blocks/top-nav-bar";
 import Footer from "@/components/blocks/footer";
+import FloatingChatbot from "@/components/blocks/floating-chatbot";
 
 const manrope = Manrope({ subsets: ["latin"], variable: "--font-headline" });
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
@@ -38,6 +39,7 @@ export default function RootLayout({
         <TopNavBar />
         <main>{children}</main>
         <Footer />
+        <FloatingChatbot />
       </body>
     </html>
   );
