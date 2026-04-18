@@ -114,7 +114,7 @@ export default function FreeConsultationForm() {
         <RadioGroup
           value={selectedContext}
           onValueChange={(val) => setValue("context", val)}
-          className="grid grid-cols-2 gap-4"
+          className="grid grid-cols-1 sm:grid-cols-2 gap-4"
         >
           {CONTEXTS.map((ctx) => (
             <Field key={ctx.id} className="relative">
