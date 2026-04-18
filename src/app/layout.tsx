@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Manrope, Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import TopNavBar from "@/components/blocks/top-nav-bar";
+import NavBar from "@/components/blocks/nav-bar";
 import Footer from "@/components/blocks/footer";
 import FloatingChatbot from "@/components/blocks/floating-chatbot";
 
@@ -36,7 +36,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col bg-background text-on-surface font-body selection:bg-red-100 selection:text-red-900">
-        <TopNavBar />
+        <NavBar />
         <main>{children}</main>
         <Footer />
         <FloatingChatbot />

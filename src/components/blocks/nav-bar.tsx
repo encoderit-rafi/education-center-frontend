@@ -46,7 +46,7 @@ const navItems = [
   { label: "Contact Us", href: "/contact-us" },
 ];
 
-export default function TopNavBar() {
+export default function NavBar() {
   return (
     <header className="sticky top-0 w-full z-50 bg-white/80 backdrop-blur-xl shadow-sm">
       <div className="flex items-center justify-between p-3 max-w-7xl mx-auto">
@@ -138,18 +138,6 @@ export default function TopNavBar() {
         <div className="hidden lg:base-gap">
           {/* Search */}
           <SearchCommand />
-          {/* Enroll Now */}
-          <Link
-            href="/book-a-test"
-            className={buttonVariants({
-              variant: "default",
-              size: "lg",
-              className:
-                "max-lg:hidden font-headline font-bold! px-6 py-2.5 rounded-lg shadow-md whitespace-nowrap",
-            })}
-          >
-            Book a Test
-          </Link>
         </div>
       </div>
     </header>
