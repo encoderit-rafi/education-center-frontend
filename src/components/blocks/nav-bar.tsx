@@ -44,6 +44,7 @@ const navItems = [
     ],
   },
   { label: "Contact Us", href: "/contact-us" },
+  { label: "Free Consultation", href: "/free-consultation" },
 ];
 
 export default function NavBar() {
