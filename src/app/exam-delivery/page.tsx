@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import ContactForm from "@/components/blocks/form-contact";
+import ContactForm from "@/app/contact-us/_components/form-contact";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 
 export const metadata: Metadata = {
@@ -24,7 +24,9 @@ export default function ExamDeliveryPage() {
             In <span className="text-red-800 italic">Exam Delivery.</span>
           </h1>
           <p className="text-lg text-slate-600 max-w-2xl leading-relaxed mb-12">
-            TEPTH administers internationally recognised English proficiency exams through a network of high-spec computer-based centres and secure paper-based facilities across the UAE.
+            TEPTH administers internationally recognised English proficiency
+            exams through a network of high-spec computer-based centres and
+            secure paper-based facilities across the UAE.
           </p>
         </div>
       </section>
@@ -39,14 +41,26 @@ export default function ExamDeliveryPage() {
                 Delivery Solutions
               </h2>
 
-              <TabsList variant="default" className="w-full lg:w-auto bg-slate-100/80 backdrop-blur-md p-1.5 rounded-2xl border border-slate-200/50 shadow-sm flex items-center">
-                <TabsTrigger value="provider" className="flex-1 lg:flex-none px-4 md:px-10 py-3 text-[10px] md:text-xs font-bold uppercase tracking-widest rounded-xl data-active:bg-white data-active:shadow-lg data-active:text-red-800 transition-all duration-300">
+              <TabsList
+                variant="default"
+                className="w-full lg:w-auto bg-slate-100/80 backdrop-blur-md p-1.5 rounded-2xl border border-slate-200/50 shadow-sm flex items-center"
+              >
+                <TabsTrigger
+                  value="provider"
+                  className="flex-1 lg:flex-none px-4 md:px-10 py-3 text-[10px] md:text-xs font-bold uppercase tracking-widest rounded-xl data-active:bg-white data-active:shadow-lg data-active:text-red-800 transition-all duration-300"
+                >
                   Exam Provider
                 </TabsTrigger>
-                <TabsTrigger value="vendor" className="flex-1 lg:flex-none px-4 md:px-10 py-3 text-[10px] md:text-xs font-bold uppercase tracking-widest rounded-xl data-active:bg-white data-active:shadow-lg data-active:text-red-800 transition-all duration-300">
+                <TabsTrigger
+                  value="vendor"
+                  className="flex-1 lg:flex-none px-4 md:px-10 py-3 text-[10px] md:text-xs font-bold uppercase tracking-widest rounded-xl data-active:bg-white data-active:shadow-lg data-active:text-red-800 transition-all duration-300"
+                >
                   Vendor
                 </TabsTrigger>
-                <TabsTrigger value="test-takers" className="flex-1 lg:flex-none px-4 md:px-10 py-3 text-[10px] md:text-xs font-bold uppercase tracking-widest rounded-xl data-active:bg-white data-active:shadow-lg data-active:text-red-800 transition-all duration-300">
+                <TabsTrigger
+                  value="test-takers"
+                  className="flex-1 lg:flex-none px-4 md:px-10 py-3 text-[10px] md:text-xs font-bold uppercase tracking-widest rounded-xl data-active:bg-white data-active:shadow-lg data-active:text-red-800 transition-all duration-300"
+                >
                   Test-takers
                 </TabsTrigger>
               </TabsList>
@@ -60,18 +74,27 @@ export default function ExamDeliveryPage() {
                   <div className="relative z-20 flex flex-col h-full justify-between">
                     <div>
                       <div className="w-14 h-14 rounded-2xl bg-red-50 flex items-center justify-center mb-8">
-                        <span className="material-symbols-outlined text-red-800 text-2xl">computer</span>
+                        <span className="material-symbols-outlined text-red-800 text-2xl">
+                          computer
+                        </span>
                       </div>
                       <h3 className="text-3xl font-extrabold mb-5 text-slate-900 font-headline tracking-tight">
                         CBT Centre Infrastructure
                       </h3>
                       <p className="text-slate-500 text-lg leading-relaxed max-w-xl">
-                        Dual redundant 1 Gbps fibre feeds and high-capacity workstations ensure a seamless digital testing experience with zero latency and full hardware certification.
+                        Dual redundant 1 Gbps fibre feeds and high-capacity
+                        workstations ensure a seamless digital testing
+                        experience with zero latency and full hardware
+                        certification.
                       </p>
                     </div>
                     <div className="mt-14 flex gap-3 flex-wrap">
-                      <span className="px-5 py-2 rounded-full bg-slate-900 text-white text-[10px] font-bold uppercase tracking-widest shadow-lg">1Gbps Redundancy</span>
-                      <span className="px-5 py-2 rounded-full bg-red-800 text-white text-[10px] font-bold uppercase tracking-widest shadow-lg">Hardware Verified</span>
+                      <span className="px-5 py-2 rounded-full bg-slate-900 text-white text-[10px] font-bold uppercase tracking-widest shadow-lg">
+                        1Gbps Redundancy
+                      </span>
+                      <span className="px-5 py-2 rounded-full bg-red-800 text-white text-[10px] font-bold uppercase tracking-widest shadow-lg">
+                        Hardware Verified
+                      </span>
                     </div>
                   </div>
                   <div className="absolute right-0 bottom-0 w-1/2 h-full opacity-[0.03] grayscale pointer-events-none group-hover:opacity-[0.08] transition-opacity duration-700">
@@ -86,13 +109,21 @@ export default function ExamDeliveryPage() {
 
                 {/* Security Card */}
                 <div className="md:col-span-4 bg-slate-950 p-12 rounded-3xl text-white relative overflow-hidden group shadow-2xl">
-                  <span className="material-symbols-outlined text-4xl mb-8 text-red-500">security</span>
-                  <h3 className="text-2xl font-bold mb-5 font-headline tracking-tight">Zero-Failure Security</h3>
+                  <span className="material-symbols-outlined text-4xl mb-8 text-red-500">
+                    security
+                  </span>
+                  <h3 className="text-2xl font-bold mb-5 font-headline tracking-tight">
+                    Zero-Failure Security
+                  </h3>
                   <p className="text-slate-400 leading-relaxed text-base">
-                    Certified lockdown browsers paired with automatic 30-second response syncing for absolute data integrity during international high-stakes delivery.
+                    Certified lockdown browsers paired with automatic 30-second
+                    response syncing for absolute data integrity during
+                    international high-stakes delivery.
                   </p>
                   <div className="absolute -bottom-10 -right-10 opacity-[0.05]">
-                    <span className="material-symbols-outlined text-[140px]">admin_panel_settings</span>
+                    <span className="material-symbols-outlined text-[140px]">
+                      admin_panel_settings
+                    </span>
                   </div>
                 </div>
               </div>
@@ -104,33 +135,72 @@ export default function ExamDeliveryPage() {
                 {/* Monitoring & Compliance */}
                 <div className="md:col-span-8 bg-slate-900 p-12 rounded-3xl text-white flex flex-col lg:flex-row gap-12 items-center relative overflow-hidden group">
                   <div className="flex-1 relative z-10">
-                    <h3 className="text-2xl font-bold mb-5 text-red-400 font-headline tracking-tight">Real-Time Site Monitoring</h3>
+                    <h3 className="text-2xl font-bold mb-5 text-red-400 font-headline tracking-tight">
+                      Real-Time Site Monitoring
+                    </h3>
                     <p className="text-slate-400 leading-relaxed text-lg">
-                      Every venue is centrally managed via a dashboard that tracks active sessions, environmental conditions, and technical health for seamless vendor data flow.
+                      Every venue is centrally managed via a dashboard that
+                      tracks active sessions, environmental conditions, and
+                      technical health for seamless vendor data flow.
                     </p>
                   </div>
                   <div className="grid grid-cols-2 gap-3 relative z-10 shrink-0">
-                    {["Compliance", "API Audit", "Live Feed", "Data Sync"].map((item) => (
-                      <div key={item} className="bg-white/5 border border-white/10 px-6 py-4 rounded-xl flex items-center gap-3 backdrop-blur-sm hover:bg-white/10 transition-colors">
-                        <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
-                        <span className="text-[10px] font-black uppercase tracking-widest text-slate-300">{item}</span>
-                      </div>
-                    ))}
+                    {["Compliance", "API Audit", "Live Feed", "Data Sync"].map(
+                      (item) => (
+                        <div
+                          key={item}
+                          className="bg-white/5 border border-white/10 px-6 py-4 rounded-xl flex items-center gap-3 backdrop-blur-sm hover:bg-white/10 transition-colors"
+                        >
+                          <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
+                          <span className="text-[10px] font-black uppercase tracking-widest text-slate-300">
+                            {item}
+                          </span>
+                        </div>
+                      ),
+                    )}
                   </div>
                   <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
-                    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-                      <defs><pattern id="vendor-grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" strokeWidth="0.5" /></pattern></defs>
-                      <rect width="100%" height="100%" fill="url(#vendor-grid)" />
+                    <svg
+                      width="100%"
+                      height="100%"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <defs>
+                        <pattern
+                          id="vendor-grid"
+                          width="40"
+                          height="40"
+                          patternUnits="userSpaceOnUse"
+                        >
+                          <path
+                            d="M 40 0 L 0 0 0 40"
+                            fill="none"
+                            stroke="white"
+                            strokeWidth="0.5"
+                          />
+                        </pattern>
+                      </defs>
+                      <rect
+                        width="100%"
+                        height="100%"
+                        fill="url(#vendor-grid)"
+                      />
                     </svg>
                   </div>
                 </div>
 
                 {/* Acoustic Standards Card */}
                 <div className="md:col-span-4 bg-slate-50 p-12 rounded-3xl border border-slate-100 group hover:bg-white hover:shadow-xl transition-all duration-500">
-                  <span className="material-symbols-outlined text-red-800 text-4xl mb-8 block group-hover:rotate-12 transition-transform">volume_up</span>
-                  <h3 className="text-2xl font-bold mb-5 text-slate-900 font-headline tracking-tight">Acoustic Precision</h3>
+                  <span className="material-symbols-outlined text-red-800 text-4xl mb-8 block group-hover:rotate-12 transition-transform">
+                    volume_up
+                  </span>
+                  <h3 className="text-2xl font-bold mb-5 text-slate-900 font-headline tracking-tight">
+                    Acoustic Precision
+                  </h3>
                   <p className="text-slate-500 leading-relaxed">
-                    PA-grade audio delivery systems meeting strict vendor specifications for all listening-based international examinations.
+                    PA-grade audio delivery systems meeting strict vendor
+                    specifications for all listening-based international
+                    examinations.
                   </p>
                 </div>
               </div>
@@ -141,43 +211,85 @@ export default function ExamDeliveryPage() {
               <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
                 {/* Journey card */}
                 <div className="md:col-span-8 bg-white border border-slate-100 rounded-3xl p-12 shadow-sm relative overflow-hidden group">
-                  <h3 className="text-3xl font-extrabold mb-12 text-slate-900 font-headline tracking-tight">The Test Day Experience</h3>
+                  <h3 className="text-3xl font-extrabold mb-12 text-slate-900 font-headline tracking-tight">
+                    The Test Day Experience
+                  </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-16 relative z-10">
                     {[
-                      { step: "01", title: "Arrival & Check-in", desc: "Digital verification of your registration and biometric document check." },
-                      { step: "02", title: "The Briefing", desc: "Detailed orientation on exam protocols and technical workstation usage." },
-                      { step: "03", title: "Active Delivery", desc: "Sit your exam in a climate-controlled, professionally invigilated silence." },
-                      { step: "04", title: "Instant Sync", desc: "Your results are encrypted and transmitted directly to the test body." },
+                      {
+                        step: "01",
+                        title: "Arrival & Check-in",
+                        desc: "Digital verification of your registration and biometric document check.",
+                      },
+                      {
+                        step: "02",
+                        title: "The Briefing",
+                        desc: "Detailed orientation on exam protocols and technical workstation usage.",
+                      },
+                      {
+                        step: "03",
+                        title: "Active Delivery",
+                        desc: "Sit your exam in a climate-controlled, professionally invigilated silence.",
+                      },
+                      {
+                        step: "04",
+                        title: "Instant Sync",
+                        desc: "Your results are encrypted and transmitted directly to the test body.",
+                      },
                     ].map((item) => (
                       <div key={item.step} className="relative group/item">
-                        <span className="text-5xl font-black text-slate-100 group-hover:text-red-50 transition-colors absolute -top-8 -left-2 z-0">{item.step}</span>
+                        <span className="text-5xl font-black text-slate-100 group-hover:text-red-50 transition-colors absolute -top-8 -left-2 z-0">
+                          {item.step}
+                        </span>
                         <div className="relative z-10">
-                          <h4 className="font-bold text-lg text-slate-900 mb-2 group-hover/item:text-red-800 transition-colors tracking-tight">{item.title}</h4>
-                          <p className="text-slate-500 text-sm leading-relaxed">{item.desc}</p>
+                          <h4 className="font-bold text-lg text-slate-900 mb-2 group-hover/item:text-red-800 transition-colors tracking-tight">
+                            {item.title}
+                          </h4>
+                          <p className="text-slate-500 text-sm leading-relaxed">
+                            {item.desc}
+                          </p>
                         </div>
                       </div>
                     ))}
                   </div>
                   <div className="absolute right-[-20px] bottom-[-20px] opacity-[0.02] group-hover:opacity-[0.05] transition-opacity duration-700">
-                    <span className="material-symbols-outlined text-[240px]">event_available</span>
+                    <span className="material-symbols-outlined text-[240px]">
+                      event_available
+                    </span>
                   </div>
                 </div>
 
                 {/* Benefits / Support card */}
                 <div className="md:col-span-4 space-y-8">
                   <div className="bg-red-800 p-10 rounded-3xl text-white shadow-xl hover:-translate-y-1 transition-transform duration-500 relative overflow-hidden group">
-                    <span className="material-symbols-outlined text-4xl mb-6 text-red-200">support_agent</span>
-                    <h4 className="text-2xl font-bold font-headline mb-4 tracking-tight">On-Call Support</h4>
-                    <p className="text-red-100/70 text-sm leading-relaxed mb-6">A dedicated tech support engineer is assigned to every session for instant resolution.</p>
+                    <span className="material-symbols-outlined text-4xl mb-6 text-red-200">
+                      support_agent
+                    </span>
+                    <h4 className="text-2xl font-bold font-headline mb-4 tracking-tight">
+                      On-Call Support
+                    </h4>
+                    <p className="text-red-100/70 text-sm leading-relaxed mb-6">
+                      A dedicated tech support engineer is assigned to every
+                      session for instant resolution.
+                    </p>
                     <div className="h-1 w-12 bg-red-400 group-hover:w-full transition-all duration-700" />
                   </div>
 
                   <div className="bg-slate-900 p-10 rounded-3xl text-slate-400 group relative">
-                    <h4 className="text-white font-bold text-xl mb-4 font-headline tracking-tight">365-Day Cycle</h4>
-                    <p className="text-sm leading-relaxed text-slate-400">Continuous testing cycles ensuring you find a date that fits your personal schedule.</p>
+                    <h4 className="text-white font-bold text-xl mb-4 font-headline tracking-tight">
+                      365-Day Cycle
+                    </h4>
+                    <p className="text-sm leading-relaxed text-slate-400">
+                      Continuous testing cycles ensuring you find a date that
+                      fits your personal schedule.
+                    </p>
                     <div className="mt-8 flex items-center justify-between">
-                      <span className="text-[10px] font-black uppercase tracking-widest text-red-500">Year-round availability</span>
-                      <span className="material-symbols-outlined text-red-800 group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                      <span className="text-[10px] font-black uppercase tracking-widest text-red-500">
+                        Year-round availability
+                      </span>
+                      <span className="material-symbols-outlined text-red-800 group-hover:translate-x-1 transition-transform">
+                        arrow_forward
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -196,25 +308,39 @@ export default function ExamDeliveryPage() {
               Academic Network
             </h2>
             <p className="text-xl text-slate-600 mb-16 leading-relaxed">
-              TEPTH Academic Atelier partners with forward-thinking institutions to redefine the value of certification. Let's discuss your organization's specific needs.
+              TEPTH Academic Atelier partners with forward-thinking institutions
+              to redefine the value of certification. Let's discuss your
+              organization's specific needs.
             </p>
             <div className="space-y-10">
               <div className="flex items-start gap-6">
                 <div className="w-12 h-12 rounded bg-red-800 flex items-center justify-center shrink-0 shadow-md">
-                  <span className="material-symbols-outlined text-white text-xl">contact_mail</span>
+                  <span className="material-symbols-outlined text-white text-xl">
+                    contact_mail
+                  </span>
                 </div>
                 <div>
-                  <h4 className="font-bold text-lg text-slate-900">Direct Inquiries</h4>
-                  <p className="text-slate-500 font-semibold">partnerships@tepth.academy</p>
+                  <h4 className="font-bold text-lg text-slate-900">
+                    Direct Inquiries
+                  </h4>
+                  <p className="text-slate-500 font-semibold">
+                    partnerships@tepth.academy
+                  </p>
                 </div>
               </div>
               <div className="flex items-start gap-6">
                 <div className="w-12 h-12 rounded bg-red-800 flex items-center justify-center shrink-0 shadow-md">
-                  <span className="material-symbols-outlined text-white text-xl">phone_callback</span>
+                  <span className="material-symbols-outlined text-white text-xl">
+                    phone_callback
+                  </span>
                 </div>
                 <div>
-                  <h4 className="font-bold text-lg text-slate-900">Institutional Support</h4>
-                  <p className="text-slate-500 font-semibold">+971 4 000 0000</p>
+                  <h4 className="font-bold text-lg text-slate-900">
+                    Institutional Support
+                  </h4>
+                  <p className="text-slate-500 font-semibold">
+                    +971 4 000 0000
+                  </p>
                 </div>
               </div>
             </div>
