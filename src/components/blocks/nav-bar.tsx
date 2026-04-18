@@ -11,7 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { ChevronDown, Menu } from "lucide-react";
-import { buttonVariants } from "../ui/button";
+// import { buttonVariants } from "../ui/button";
 import SearchCommand from "./search-command";
 
 const navItems = [
@@ -34,6 +34,13 @@ const navItems = [
     ],
   },
   {
+    label: "Services",
+    children: [
+      { label: "Free Consultation", href: "/free-consultation" },
+      { label: "Assessment Solutions", href: "/assessment-solutions" },
+    ],
+  },
+  {
     label: "About Us",
     children: [
       { label: "Who We Are", href: "/about-us/who-we-are" },
@@ -44,7 +51,6 @@ const navItems = [
     ],
   },
   { label: "Contact Us", href: "/contact-us" },
-  { label: "Free Consultation", href: "/free-consultation" },
 ];
 
 export default function NavBar() {
