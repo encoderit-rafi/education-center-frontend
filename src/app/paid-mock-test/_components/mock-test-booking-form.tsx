@@ -15,6 +15,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Calendar } from "@/components/ui/calendar";
+import Payment from "@/components/blocks/payment";
 
 const MOCK_TESTS = [
   {
@@ -53,9 +54,7 @@ const bookingSchema = z.object({
     error: "Please select a testing date",
   }),
   timeSlot: z.string().min(1, "Please select a time slot"),
-  paymentMethod: z.enum(["card", "wallet"], {
-    error: "Please select a payment method",
-  }),
+  paymentMethod: z.literal("card"),
 });
 
 type BookingValues = z.infer<typeof bookingSchema>;
@@ -318,97 +317,7 @@ export default function MockTestBookingForm() {
           </div>
 
           <div className="bg-surface-container p-8 rounded-[3rem] space-y-8">
-            <Field>
-              <RadioGroup
-                value={watch("paymentMethod")}
-                onValueChange={(val) => setValue("paymentMethod", val as any)}
-                className="grid grid-cols-2 gap-6"
-              >
-                <Field className="relative">
-                  <RadioGroupItem value="card" id="card" className="sr-only" />
-                  <label
-                    htmlFor="card"
-                    className={cn(
-                      "bg-white p-8 rounded-[2rem] border-2 cursor-pointer transition-all flex flex-col items-center gap-4 group shadow-sm hover:shadow-xl hover:shadow-primary/5 w-full",
-                      watch("paymentMethod") === "card"
-                        ? "border-primary"
-                        : "border-transparent",
-                    )}
-                  >
-                    <span
-                      className={cn(
-                        "material-symbols-outlined text-4xl transition-colors",
-                        watch("paymentMethod") === "card"
-                          ? "text-primary"
-                          : "text-secondary/30 group-hover:text-primary",
-                      )}
-                    >
-                      credit_card
-                    </span>
-                    <span
-                      className={cn(
-                        "text-[10px] font-black uppercase tracking-widest transition-colors",
-                        watch("paymentMethod") === "card"
-                          ? "text-secondary"
-                          : "text-secondary/40 group-hover:text-secondary",
-                      )}
-                    >
-                      Credit Card
-                    </span>
-                  </label>
-                </Field>
-
-                <Field className="relative">
-                  <RadioGroupItem
-                    value="wallet"
-                    id="wallet"
-                    className="sr-only"
-                  />
-                  <label
-                    htmlFor="wallet"
-                    className={cn(
-                      "bg-white p-8 rounded-[2rem] border-2 cursor-pointer transition-all flex flex-col items-center gap-4 group shadow-sm hover:shadow-xl hover:shadow-primary/5 w-full",
-                      watch("paymentMethod") === "wallet"
-                        ? "border-primary"
-                        : "border-transparent",
-                    )}
-                  >
-                    <span
-                      className={cn(
-                        "material-symbols-outlined text-4xl transition-colors",
-                        watch("paymentMethod") === "wallet"
-                          ? "text-primary"
-                          : "text-secondary/30 group-hover:text-primary",
-                      )}
-                    >
-                      account_balance_wallet
-                    </span>
-                    <span
-                      className={cn(
-                        "text-[10px] font-black uppercase tracking-widest transition-colors",
-                        watch("paymentMethod") === "wallet"
-                          ? "text-secondary"
-                          : "text-secondary/40 group-hover:text-secondary",
-                      )}
-                    >
-                      Digital Wallet
-                    </span>
-                  </label>
-                </Field>
-              </RadioGroup>
-              <FieldError errors={[errors.paymentMethod]} />
-            </Field>
-
-            <div className="p-6 bg-white/50 rounded-2xl flex items-center gap-4">
-              <span className="material-symbols-outlined text-primary text-xl">
-                encrypted
-              </span>
-              <p className="text-xs text-on-surface-variant font-medium leading-snug">
-                Your credentials are encrypted via 256-bit AES and processed
-                through PCI-compliant gateways.
-              </p>
-            </div>
-
+            <Payment />
             <button
               type="submit"
               className="w-full bg-primary text-white font-headline font-black py-6 rounded-[2rem] text-sm uppercase tracking-[0.3em] shadow-2xl shadow-primary/20 hover:bg-secondary transition-all active:scale-[0.98] flex items-center justify-center gap-3"

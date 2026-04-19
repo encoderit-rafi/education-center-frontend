@@ -61,50 +61,29 @@ export default function Courses() {
           {COURSES.map((course) => (
             <div
               key={course.id}
-              className="group bg-surface-container-lowest rounded-[2rem] overflow-hidden flex flex-col transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 border border-outline/5"
+              className="group bg-surface-container-lowest rounded-lg overflow-hidden flex flex-col transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 border border-outline/5"
             >
-              <div className="h-64 relative overflow-hidden">
+              <div className="relative overflow-hidden">
                 <img
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="aspect-video object-cover transition-transform duration-700 group-hover:scale-110"
                   src={course.image}
                   alt={course.title}
                 />
                 <span className="absolute top-6 left-6 px-4 py-1.5 bg-primary/90 backdrop-blur-sm text-white text-[10px] font-extrabold uppercase tracking-widest rounded-full shadow-lg">
                   {course.category}
                 </span>
-                <div className="absolute inset-0 bg-gradient-to-t from-secondary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </div>
 
-              <div className="p-10 flex-1 flex flex-col">
+              <div className="p-2 flex-1 flex flex-col">
                 <h3 className="text-2xl font-headline font-extrabold text-secondary mb-4 leading-tight group-hover:text-primary transition-colors">
                   {course.title}
                 </h3>
                 <p className="text-on-surface-variant text-[15px] leading-relaxed mb-8 font-medium">
                   {course.description}
                 </p>
-
-                <div className="mt-auto flex items-center justify-between pt-8 border-t border-outline/10">
-                  <div className="flex flex-col">
-                    <span className="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/60 font-bold mb-1">
-                      Duration
-                    </span>
-                    <span className="text-sm font-extrabold text-secondary">
-                      {course.duration}
-                    </span>
-                  </div>
-                  <div className="text-right">
-                    <span className="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/60 font-bold mb-1">
-                      Investment
-                    </span>
-                    <span className="text-xl font-black text-primary font-headline">
-                      {course.investment}
-                    </span>
-                  </div>
-                </div>
-
                 <Link
                   href={`/courses/${course.id}`}
-                  className="mt-8 w-full py-4 text-center text-secondary font-headline font-extrabold text-sm border-2 border-outline/20 rounded-2xl hover:bg-primary hover:text-white hover:border-primary transition-all duration-300 uppercase tracking-widest"
+                  className="mt-2 w-full py-4 text-center text-secondary font-headline font-extrabold text-sm border-2 border-outline/20 rounded-2xl hover:bg-primary hover:text-white hover:border-primary transition-all duration-300 uppercase tracking-widest"
                 >
                   View Details
                 </Link>
