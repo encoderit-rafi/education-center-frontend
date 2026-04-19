@@ -11,13 +11,18 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { ChevronDown, Menu } from "lucide-react";
-// import { buttonVariants } from "../ui/button";
 import SearchCommand from "./search-command";
 
 const navItems = [
   { label: "Courses", href: "/courses" },
   { label: "Fees", href: "/fees" },
-  { label: "Our Venues", href: "/our-venues" },
+  {
+    label: "Our Venues",
+    children: [
+      { label: "360° Virtual Tour", href: "/our-venues" },
+      { label: "Book An Exam Venue", href: "/paid-mock-test" },
+    ],
+  },
   {
     label: "Test Your English",
     href: "/test-your-english",

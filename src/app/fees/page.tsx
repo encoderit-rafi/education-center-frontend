@@ -5,6 +5,7 @@ import { CoursePricingGrid } from "./_components/course-pricing-grid";
 import { WorkshopPricingGrid } from "./_components/workshop-pricing-grid";
 import { Button } from "@base-ui/react";
 import FreeConsultation from "../free-consultation/_components/free-consultation";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function FeesPage() {
   return (
@@ -36,35 +37,71 @@ export default function FeesPage() {
         </div>
       </header>
 
-      {/* ── Examination Preparation Courses ── */}
-      <section className="py-32 bg-white px-8" id="course-pricing">
+      {/* ── Tabs for Courses ── */}
+      <section className="py-24 bg-white px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="mb-20 text-center space-y-4">
-            <h2 className="text-[#111827] text-4xl md:text-5xl font-headline font-black tracking-tight">
-              Examination Preparation Courses
-            </h2>
-            <p className="text-[#4B5563] max-w-xl mx-auto text-lg leading-relaxed">
-              Tailored classroom and online training programs designed to ensure
-              your peak performance.
-            </p>
-          </div>
-          <CoursePricingGrid />
-        </div>
-      </section>
+          <Tabs defaultValue="ielts" className="w-full flex flex-col">
+            {/* <div className="flex justify-center mb-16"> */}
+            <TabsList className="bg-[#F3F4F6] p-1 rounded-2xl border border-[#E5E7EB]">
+              {["ielts", "oet", "pte", "general"].map((tab) => (
+                <TabsTrigger
+                  key={tab}
+                  value={tab}
+                  className="px-8 py-3 rounded-xl text-sm font-black uppercase tracking-widest transition-all data-[state=active]:bg-white data-[state=active]:text-[#991B1B] data-[state=active]:shadow-lg text-[#4B5563]"
+                >
+                  {tab === "general" ? "General English" : tab}
+                </TabsTrigger>
+              ))}
+            </TabsList>
+            {/* </div> */}
 
-      {/* ── Exam Workshops ── */}
-      <section className="py-32 bg-[#F9FAFB] px-8" id="workshops">
-        <div className="max-w-7xl mx-auto">
-          <div className="mb-20 text-center space-y-4">
-            <h2 className="text-[#111827] text-4xl md:text-5xl font-headline font-black tracking-tight">
-              Intensive Exam Workshops
-            </h2>
-            <p className="text-[#4B5563] max-w-xl mx-auto text-lg leading-relaxed">
-              Targeted, high-impact sessions focused on examination techniques
-              and full simulation.
-            </p>
-          </div>
-          <WorkshopPricingGrid />
+            {["ielts", "oet", "pte", "general"].map((tab) => (
+              <TabsContent
+                key={tab}
+                value={tab}
+                className="space-y-0 animate-in fade-in zoom-in-95 duration-500"
+              >
+                {/* ── Examination Preparation Courses ── */}
+                <section
+                  className="py-20 bg-white"
+                  id={`course-pricing-${tab}`}
+                >
+                  <div className="max-w-7xl mx-auto">
+                    <div className="mb-20 text-center space-y-4">
+                      <h2 className="text-[#111827] text-4xl md:text-5xl font-headline font-black tracking-tight">
+                        {tab.toUpperCase()} Preparation Courses
+                      </h2>
+                      <p className="text-[#4B5563] max-w-xl mx-auto text-lg leading-relaxed">
+                        Tailored classroom and online training programs designed
+                        to ensure your peak performance in {tab.toUpperCase()}{" "}
+                        examinations.
+                      </p>
+                    </div>
+                    <CoursePricingGrid />
+                  </div>
+                </section>
+
+                {/* ── Exam Workshops ── */}
+                <section
+                  className="py-24 bg-[#F9FAFB] px-8 rounded-[3rem]"
+                  id={`workshops-${tab}`}
+                >
+                  <div className="max-w-7xl mx-auto">
+                    <div className="mb-20 text-center space-y-4">
+                      <h2 className="text-[#111827] text-4xl md:text-5xl font-headline font-black tracking-tight">
+                        Intensive {tab.toUpperCase()} Workshops
+                      </h2>
+                      <p className="text-[#4B5563] max-w-xl mx-auto text-lg leading-relaxed">
+                        Targeted, high-impact sessions focused on examination
+                        techniques and full simulation for {tab.toUpperCase()}.
+                      </p>
+                    </div>
+                    <WorkshopPricingGrid />
+                  </div>
+                </section>
+              </TabsContent>
+            ))}
+          </Tabs>
         </div>
       </section>
 
