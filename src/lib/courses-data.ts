@@ -1,6 +1,9 @@
-export interface Module {
-  title: string;
-  description: string;
+export interface Section {
+  title?: string;
+  content?: string;
+  list?: { text: string; href?: string }[];
+  type?: "text" | "links" | "cards";
+  cardIds?: string[];
 }
 
 export interface Course {
@@ -11,6 +14,7 @@ export interface Course {
   extendedDescription: string;
   duration: string;
   investment: string;
+  previousInvestment?: string;
   level: string;
   format: string;
   image: string;
@@ -22,168 +26,365 @@ export interface Course {
     bio: string;
     image: string;
   };
+  sections?: Section[];
 }
 
 export const COURSES: Course[] = [
+  // --- TOEFL ---
   {
-    id: "ielts-excellence",
-    category: "IELTS",
-    title: "IELTS Academic Excellence",
-    description: "Comprehensive preparation focusing on all four components: Listening, Reading, Writing, and Speaking with expert tutors.",
-    extendedDescription: "This masterclass is designed for high-achieving students aiming for a Band 8.0 or higher. We combine rigorous linguistic training with advanced test-taking strategies. You will engage in daily mock speaking sessions, detailed writing feedback loops, and intensive listening drills using authentic academic materials.",
-    duration: "12 Weeks",
-    investment: "$499",
-    level: "Advanced",
-    format: "Hybrid (Online + In-Person)",
-    image: "/images/exams/ielts.png",
-    curriculum: [
-      { title: "Module 1: The Foundations of Academic English", description: "Standardizing your grammar and vocabulary for the formal IELTS context." },
-      { title: "Module 2: Analytical Reading Strategies", description: "Mastering skim-scanning and inference in complex academic texts." },
-      { title: "Module 3: Structured Argumentative Writing", description: "Developing Task 2 essays with logical cohesion and lexical resource." },
-      { title: "Module 4: Eloquent Speaking & Fluency", description: "Enhancing part 2 and 3 speaking responses with natural idiomatic language." },
-    ],
-    eligibility: [
-      "Minimum CEFR B2 Level",
-      "Standard laptop/tablet for mock tests",
-      "Commitment to 10 hours of weekly self-study",
-    ],
-    instructor: {
-      name: "Dr. Elizabeth Sterling",
-      role: "Senior IELTS Lead Examiner",
-      bio: "With over 15 years of experience in British Council examination standards, Dr. Sterling has helped thousands of students achieve Band 8.5+.",
-      image: "/images/student-study.png",
-    },
+    id: "toefl-ibt-prep",
+    category: "TOEFL",
+    title: "TOEFL IBT Test Preparation Course",
+    description: "Master the skills and strategies required to achieve your target TOEFL score.",
+    extendedDescription: "Crafted by experienced English native speaking instructors to unlock global opportunities.",
+    duration: "Various",
+    investment: "Starting from AED 1,850",
+    level: "Intermediate/Advanced",
+    format: "Classroom & Online",
+    image: "/images/study-group.png",
+    curriculum: [],
+    eligibility: ["Intermediate skills required"],
+    instructor: { name: "", role: "", bio: "", image: "" },
+    sections: [
+      {
+        title: "What is the TOEFL IBT Test?",
+        content: "TOEFL stands for Test of English as a Foreign Language. TOEFL Test is a way of evaluating your proficiency in spoken and written English as a non-native English speaker. It is important as US educational institutions use results from the test during their evaluation of foreign student applications. So, if you wish to study in the United States, you need to have good scores to show them. TOEFL IBT test preparation course Crafted by experienced English native speaking instructor. This course will give you the skills and understanding to achieve scores that will unlock the opportunities you desire in English-speaking countries."
+      },
+      {
+        title: "Who can take TOEFL IBT Test?",
+        content: "If you are looking to pursue work opportunities or any academic career within an English-speaking country. Non-native students must have intermediate or advanced English language skills, to do this course you should take. TEPTH’s TOEFL IBT exam Preparation Course is run by specialized teaching staff who understand what you need to do to get the scores you need.\n\nThey will teach students the skills required and provide highly effective test-taking strategies and tactics to get the results they want. After completing the TOEFL IBT Test Preparation Course, each student takes a complete practice exam. The TOEFL Practice test result will give you a great guide to understanding where your weaknesses and overcome that."
+      },
+      {
+        title: "Course Options",
+        type: "cards",
+        cardIds: ["toefl-classroom", "toefl-online"]
+      }
+    ]
   },
   {
-    id: "oet-healthcare",
-    category: "OET",
-    title: "OET for Healthcare Pros",
-    description: "Specialized English language test for healthcare professionals who wish to register and practice in English-speaking environments.",
-    extendedDescription: "The Occupational English Test (OET) requires more than just language proficiency; it requires clinical communication competence. This course uses real-world healthcare scenarios to refine your professional language skills across all 12 OET sub-tests.",
-    duration: "8 Weeks",
-    investment: "$550",
-    level: "Professional",
-    format: "Online Proctored",
-    image: "/images/exams/oet.png",
-    curriculum: [
-      { title: "Module 1: Clinical Communication Skills", description: "Patient-centered communication and rapport building." },
-      { title: "Module 2: Professional Medical Writing", description: "Mastering referral letters and clinical discharge summaries." },
-      { title: "Module 3: Medical Listening in Context", description: "Decoding complex interactions between medical staff and patients." },
-    ],
-    eligibility: [
-      "Qualified healthcare professional",
-      "Intermediate to Advanced English proficiency",
-    ],
-    instructor: {
-      name: "Marcus Thorne",
-      role: "Medical Linguistics Expert",
-      bio: "Marcus specializes in the intersection of healthcare professional standards and English language assessment.",
-      image: "/images/student-study.png",
-    },
-  },
-  {
-    id: "spoken-english",
-    category: "Spoken",
-    title: "Advanced Spoken English",
-    description: "Master the art of conversation and public speaking. Focus on pronunciation, intonation, and cultural nuances.",
-    extendedDescription: "Step beyond textbook English. This program focuses on 'Active Fluency'—the ability to articulate complex ideas with precision and confidence in both social and high-stakes professional settings.",
+    id: "toefl-classroom",
+    category: "TOEFL",
+    title: "TOEFL Classroom Course",
+    description: "Evaluates proficiency in spoken and written English for academic success in the US.",
+    extendedDescription: "Intensive face-to-face preparation for the TOEFL IBT exam with native speakers.",
     duration: "6 Weeks",
-    investment: "$299",
-    level: "Intermediate+",
-    format: "In-Person Workshop",
-    image: "/images/about-us/mission-student.png",
-    curriculum: [
-      { title: "Module 1: Phonetics & Intonation", description: "Reducing native-language interference and mastering sentence stress." },
-      { title: "Module 2: The Art of Impromptu Speech", description: "Thinking on your feet and structuring thoughts instantly." },
-      { title: "Module 3: Cultural Nuance & Idioms", description: "Using natural English placeholders and idiomatic expressions correctly." },
-    ],
-    eligibility: [
-      "Open to all learners above A2 level",
-      "Willingness to participate in group debates",
-    ],
-    instructor: {
-      name: "Sarah Jenkins",
-      role: "Public Speaking Coach",
-      bio: "Sarah is a former TEDx speaker coach with a focus on non-native English speaker empowerment.",
-      image: "/images/student-study.png",
-    },
+    investment: "AED 4,850.00",
+    level: "Intermediate/Advanced",
+    format: "Classroom",
+    image: "/images/exams/toefl.png",
+    curriculum: [],
+    eligibility: ["Intermediate or Advanced English skills"],
+    instructor: { name: "Native Expert", role: "TOEFL Specialist", bio: "", image: "/images/student-study.png" },
   },
   {
-    id: "pte-core",
-    category: "PTE",
-    title: "PTE Academic Core",
-    description: "Intensive training for the Pearson Test of English Academic. Learn strategies for the AI-based scoring system.",
-    extendedDescription: "PTE Academic is scored by advanced AI algorithms. Our course reverse-engineers the assessment criteria to ensure you maximize your score in speaking, writing, and integrated tasks.",
+    id: "toefl-online",
+    category: "TOEFL",
+    title: "TOEFL IBT Online Course",
+    description: "Flexible online preparation with the same high-quality instruction.",
+    extendedDescription: "Master the skills and understanding to achieve scores that will unlock opportunities globally.",
     duration: "4 Weeks",
-    investment: "$350",
+    investment: "AED 3,850.00",
+    previousInvestment: "AED 4,000.00",
+    level: "Intermediate/Advanced",
+    format: "Online",
+    image: "/images/exams/toefl.png",
+    curriculum: [],
+    eligibility: ["Computer with internet"],
+    instructor: { name: "TEPTH Online", role: "Instructor", bio: "", image: "/images/student-study.png" },
+  },
+
+  // --- IELTS ---
+  {
+    id: "ielts-prep",
+    category: "IELTS",
+    title: "IELTS Preparation Course",
+    description: "Prepare for the world's most popular English test for higher education.",
+    extendedDescription: "Expert-led guidance for both Academic and General Training modules.",
+    duration: "Various",
+    investment: "Starting from AED 2,850",
+    level: "All Levels",
+    format: "Classroom & Online",
+    image: "/images/exams/ielts.png",
+    curriculum: [],
+    eligibility: ["Basic English proficiency"],
+    instructor: { name: "", role: "", bio: "", image: "" },
+    sections: [
+      {
+        title: "What is IELTS?",
+        content: "IELTS (International English Language Testing System) is designed to help you work, study or migrate to a country where English is the native language."
+      },
+      {
+        title: "IELTS Course Options",
+        type: "cards",
+        cardIds: ["ielts-classroom", "ielts-online"]
+      }
+    ]
+  },
+  {
+    id: "ielts-classroom",
+    category: "IELTS",
+    title: "IELTS Classroom Course",
+    description: "Face-to-face preparation focusing on all four test components.",
+    extendedDescription: "Listening, Reading, Writing, and Speaking mastery with former examiners.",
+    duration: "12 Weeks",
+    investment: "AED 3,850.00",
+    level: "All Levels",
+    format: "Classroom",
+    image: "/images/exams/ielts.png",
+    curriculum: [],
+    eligibility: ["Basic English proficiency"],
+    instructor: { name: "IELTS Expert Team", role: "Examiners", bio: "", image: "/images/student-study.png" },
+  },
+  {
+    id: "ielts-online",
+    category: "IELTS",
+    title: "IELTS Online Masterclass",
+    description: "Flexible digital training with real-time feedback.",
+    extendedDescription: "Learn strategic writing and speaking fluency from anywhere.",
+    duration: "8 Weeks",
+    investment: "AED 2,850.00",
+    previousInvestment: "AED 3,500.00",
+    level: "All Levels",
+    format: "Online",
+    image: "/images/exams/ielts.png",
+    curriculum: [],
+    eligibility: ["Computer with internet"],
+    instructor: { name: "TEPTH Online Staff", role: "Online Tutors", bio: "", image: "/images/student-study.png" },
+  },
+
+  // --- OET ---
+  {
+    id: "oet-prep",
+    category: "OET",
+    title: "OET Preparation Course",
+    description: "The English test specifically designed for healthcare professionals.",
+    extendedDescription: "Prove you have the right level of English for healthcare work.",
+    duration: "Various",
+    investment: "Starting from AED 3,500",
+    level: "Professional",
+    format: "Online & Classroom",
+    image: "/images/exams/oet.png",
+    curriculum: [],
+    eligibility: ["Healthcare degree required"],
+    instructor: { name: "", role: "", bio: "", image: "" },
+    sections: [
+      {
+        title: "Why OET?",
+        content: "OET uses real healthcare scenarios so you'll feel more confident on test day."
+      },
+      {
+        title: "OET Course Options",
+        type: "cards",
+        cardIds: ["oet-classroom", "oet-online"]
+      }
+    ]
+  },
+  {
+    id: "oet-classroom",
+    category: "OET",
+    title: "OET Classroom Training",
+    description: "Hands-on clinical communication training in person.",
+    extendedDescription: "Specialized face-to-face sessions focusing on healthcare sub-tests.",
+    duration: "8 Weeks",
+    investment: "AED 4,500.00",
+    level: "Professional",
+    format: "Classroom",
+    image: "/images/exams/oet.png",
+    curriculum: [],
+    eligibility: ["Healthcare professional"],
+    instructor: { name: "Marcus Thorne", role: "Linguistics Expert", bio: "", image: "/images/student-study.png" },
+  },
+  {
+    id: "oet-online",
+    category: "OET",
+    title: "OET Online Pro",
+    description: "Flexible online prep focusing on clinical writing.",
+    extendedDescription: "Master referral letters and discharge summaries with our digital modules.",
+    duration: "6 Weeks",
+    investment: "AED 3,500.00",
+    previousInvestment: "AED 4,200.00",
+    level: "Professional",
+    format: "Online",
+    image: "/images/exams/oet.png",
+    curriculum: [],
+    eligibility: ["Healthcare professional"],
+    instructor: { name: "TEPTH Med-Staff", role: "Certified Tutors", bio: "", image: "/images/student-study.png" },
+  },
+
+  // --- PTE ---
+  {
+    id: "pte-prep",
+    category: "PTE",
+    title: "PTE Preparation Course",
+    description: "Master the Pearson Test of English with AI-based scoring strategies.",
+    extendedDescription: "Learn how to optimize your performance for the PTE algorithm.",
+    duration: "Various",
+    investment: "Starting from AED 1,850",
     level: "Mixed",
-    format: "Online Intensive",
+    format: "Classroom & Online",
     image: "/images/exams/pte.png",
-    curriculum: [
-      { title: "Module 1: AI Scoring Mechanics", description: "Understanding how the PTE algorithm evaluates spoken fluency." },
-      { title: "Module 2: Integrated Task Mastery", description: "Optimizing Read Aloud and Repeat Sentence performance." },
-    ],
-    eligibility: [
-      "Basic computer literacy",
-      "Stable internet connection",
-    ],
-    instructor: {
-      name: "David Chen",
-      role: "PTE Specialist",
-      bio: "David has assisted over 500 students in achieving a perfect 90 in PTE Academic.",
-      image: "/images/student-study.png",
-    },
+    curriculum: [],
+    eligibility: ["Basic computer literacy"],
+    instructor: { name: "", role: "", bio: "", image: "" },
+    sections: [
+      {
+        title: "Master the AI",
+        content: "Because PTE is scored by a machine, there are specific patterns that can boost your score."
+      },
+      {
+        title: "PTE Course Options",
+        type: "cards",
+        cardIds: ["pte-classroom", "pte-online"]
+      }
+    ]
   },
   {
-    id: "corporate-pro",
-    category: "Business",
-    title: "Corporate English Pro",
-    description: "Tailored for the professional world. Focus on email etiquette, presentation skills, and high-level negotiation.",
-    extendedDescription: "Effective leadership requires effective communication. This program is designed for executives and managers who need to project authority and clarity in global business environments.",
-    duration: "10 Weeks",
-    investment: "$599",
-    level: "Executive",
-    format: "Corporate Group / One-on-One",
-    image: "/images/about-us/experience-student.png",
-    curriculum: [
-      { title: "Module 1: Strategic Emailing", description: "Clarity, brevity, and tone management in professional correspondence." },
-      { title: "Module 2: High-Stakes Negotiation", description: "Persuasive language and tactical communication in boardrooms." },
-    ],
-    eligibility: [
-      "Current professional role",
-      "B1+ English level",
-    ],
-    instructor: {
-      name: "Olivia Vane",
-      role: "Corporate Coach",
-      bio: "Olivia has consulted for Fortune 500 companies on cross-cultural communication efficiency.",
-      image: "/images/student-study.png",
-    },
+    id: "pte-classroom",
+    category: "PTE",
+    title: "PTE Classroom Intensive",
+    description: "Deep dive into the PTE with machine-scored practice in-person.",
+    extendedDescription: "Intensive training to trigger the PTE AI for maximum scores.",
+    duration: "4 Weeks",
+    investment: "AED 2,500.00",
+    level: "Mixed",
+    format: "Classroom",
+    image: "/images/exams/pte.png",
+    curriculum: [],
+    eligibility: ["Basic computer literacy"],
+    instructor: { name: "David Chen", role: "PTE Specialist", bio: "", image: "/images/student-study.png" },
   },
   {
-    id: "academic-writing",
-    category: "Research",
-    title: "Academic Writing Masterclass",
-    description: "Learn the structural and linguistic requirements for published academic papers and graduate-level dissertations.",
-    extendedDescription: "Publishing in high-impact journals requires a specific stylistic rigor. This masterclass guides you through the entire writing process, from abstract construction to handling peer-review responses.",
-    duration: "14 Weeks",
-    investment: "$650",
-    level: "Postgraduate",
-    format: "Mentorship Lab",
-    image: "/images/about-us/vision-hero.png",
-    curriculum: [
-      { title: "Module 1: The Anatomy of a Research Paper", description: "Structuring IMRAD sections for maximum impact." },
-      { title: "Module 2: Advanced Coherence & Flow", description: "Linking complex ideas with sophisticated transitionals." },
-    ],
-    eligibility: [
-      "Currently enrolled in or completed a degree program",
-      "Fluent academic reading proficiency",
-    ],
-    instructor: {
-      name: "Prof. Arthur Penhaligon",
-      role: "Academic Editor",
-      bio: "Arthur is a frequent contributor to international linguistics journals and an expert in academic stylistic standards.",
-      image: "/images/student-study.png",
-    },
+    id: "pte-online",
+    category: "PTE",
+    title: "PTE Online Core",
+    description: "Focus on AI scoring mechanics from your own computer.",
+    extendedDescription: "Reverse-engineering the PTE assessment criteria remotely.",
+    duration: "4 Weeks",
+    investment: "AED 1,850.00",
+    previousInvestment: "AED 2,200.00",
+    level: "Mixed",
+    format: "Online",
+    image: "/images/exams/pte.png",
+    curriculum: [],
+    eligibility: ["Stable internet"],
+    instructor: { name: "TEPTH PTE Staff", role: "Online Tutors", bio: "", image: "/images/student-study.png" },
+  },
+
+  // --- CELPIP ---
+  {
+    id: "celpip-prep",
+    category: "CELPIP",
+    title: "CELPIP Preparation Course",
+    description: "Master the Canadian English Language Proficiency Index Program.",
+    extendedDescription: "Comprehensive training for Canadian permanent residency and citizenship.",
+    duration: "Various",
+    investment: "Starting from AED 1,500",
+    level: "All Levels",
+    format: "Classroom & Online",
+    image: "/images/exams/celpip.png",
+    curriculum: [],
+    eligibility: ["Intending Canadian migrants"],
+    instructor: { name: "", role: "", bio: "", image: "" },
+    sections: [
+      {
+        title: "Canadian Context",
+        content: "The CELPIP Test allows you to demonstrate your ability to function in Canada."
+      },
+      {
+        title: "CELPIP Course Options",
+        type: "cards",
+        cardIds: ["celpip-classroom", "celpip-online"]
+      }
+    ]
+  },
+  {
+    id: "celpip-classroom",
+    category: "CELPIP",
+    title: "CELPIP Classroom Training",
+    description: "Preparation for Canadian permanent residency in person.",
+    extendedDescription: "Face-to-face sessions focusing on Canadian accents and social contexts.",
+    duration: "4 Weeks",
+    investment: "AED 2,200.00",
+    level: "All Levels",
+    format: "Classroom",
+    image: "/images/exams/celpip.png",
+    curriculum: [],
+    eligibility: ["Canadian migrants"],
+    instructor: { name: "Canadian Prep Team", role: "Specialists", bio: "", image: "/images/student-study.png" },
+  },
+  {
+    id: "celpip-online",
+    category: "CELPIP",
+    title: "CELPIP Online Express",
+    description: "Convenient online preparation for the CELPIP test.",
+    extendedDescription: "Learn Canadian workplace context through our digital portal.",
+    duration: "3 Weeks",
+    investment: "AED 1,500.00",
+    previousInvestment: "AED 1,850.00",
+    level: "All Levels",
+    format: "Online",
+    image: "/images/exams/celpip.png",
+    curriculum: [],
+    eligibility: ["Computer and internet"],
+    instructor: { name: "TEPTH Online Staff", role: "Digital Instructors", bio: "", image: "/images/student-study.png" },
+  },
+
+  // --- CAEL ---
+  {
+    id: "cael-prep",
+    category: "CAEL",
+    title: "CAEL Preparation Course",
+    description: "Master the Canadian Academic English Language test.",
+    extendedDescription: "Prepare for academic success in Canadian universities.",
+    duration: "Various",
+    investment: "Starting from AED 2,000",
+    level: "Intermediate/Advanced",
+    format: "Classroom & Online",
+    image: "/images/exams/cael.png",
+    curriculum: [],
+    eligibility: ["Academic English required"],
+    instructor: { name: "", role: "", bio: "", image: "" },
+    sections: [
+      {
+        title: "Academic Canada",
+        content: "CAEL is the definitive academic test for study in Canada."
+      },
+      {
+        title: "CAEL Course Options",
+        type: "cards",
+        cardIds: ["cael-classroom", "cael-online"]
+      }
+    ]
+  },
+  {
+    id: "cael-classroom",
+    category: "CAEL",
+    title: "CAEL Classroom Intensive",
+    description: "Academic-focused preparation in a classroom setting.",
+    extendedDescription: "Simulate university-level tasks like lectures and discussions.",
+    duration: "6 Weeks",
+    investment: "AED 2,800.00",
+    level: "Intermediate/Advanced",
+    format: "Classroom",
+    image: "/images/exams/cael.png",
+    curriculum: [],
+    eligibility: ["Academic students"],
+    instructor: { name: "CAEL Expert", role: "Academic Tutor", bio: "", image: "/images/student-study.png" },
+  },
+  {
+    id: "cael-online",
+    category: "CAEL",
+    title: "CAEL Online Prep",
+    description: "Flexible digital training for the CAEL test.",
+    extendedDescription: "Master integrated tasks of the CAEL exam from anywhere.",
+    duration: "5 Weeks",
+    investment: "AED 2,000.00",
+    previousInvestment: "AED 2,400.00",
+    level: "Intermediate/Advanced",
+    format: "Online",
+    image: "/images/exams/cael.png",
+    curriculum: [],
+    eligibility: ["Stable internet"],
+    instructor: { name: "TEPTH Academic Staff", role: "Online Tutors", bio: "", image: "/images/student-study.png" },
   },
 ];

@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import { BLOGS } from "@/lib/blogs-data";
+import Link from "next/link";
 
 export default function LatestBlogs() {
 
@@ -48,7 +49,7 @@ export default function LatestBlogs() {
                 <div className="pt-2 mt-auto">
                   <a
                     className="inline-flex items-center gap-2 text-primary font-extrabold text-[11px] tracking-widest hover:gap-3 transition-all uppercase"
-                    href="#"
+                    href="/blogs"
                   >
                     Read More
                     <span className="material-symbols-outlined text-sm">
@@ -59,6 +60,12 @@ export default function LatestBlogs() {
               </div>
             </div>
           ))}
+        </div>
+        <div className="flex justify-center mt-12">
+          <Link
+            href="/blogs"
+            className="inline-flex items-center gap-2 text-primary font-extrabold text-lg tracking-widest hover:gap-3 transition-all uppercase"
+          >View All Blogs</Link>
         </div>
       </div>
     </section>

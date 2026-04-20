@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 
 import { COURSES } from "@/lib/courses-data";
 import Image from "next/image";
+import CourseCard from "@/components/blocks/course-card";
 
 export default function Courses() {
   return (
@@ -57,38 +58,9 @@ export default function Courses() {
           </h3>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {COURSES.map((course) => (
-            <div
-              key={course.id}
-              className="group bg-surface-container-lowest rounded-lg overflow-hidden flex flex-col transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 border border-outline/5"
-            >
-              <div className="relative overflow-hidden">
-                <img
-                  className="aspect-video object-cover transition-transform duration-700 group-hover:scale-110"
-                  src={course.image}
-                  alt={course.title}
-                />
-                <span className="absolute top-6 left-6 px-4 py-1.5 bg-primary/90 backdrop-blur-sm text-white text-[10px] font-extrabold uppercase tracking-widest rounded-full shadow-lg">
-                  {course.category}
-                </span>
-              </div>
-
-              <div className="p-2 flex-1 flex flex-col">
-                <h3 className="text-2xl font-headline font-extrabold text-secondary mb-4 leading-tight group-hover:text-primary transition-colors">
-                  {course.title}
-                </h3>
-                <p className="text-on-surface-variant text-[15px] leading-relaxed mb-8 font-medium">
-                  {course.description}
-                </p>
-                <Link
-                  href={`/courses/${course.id}`}
-                  className="mt-2 w-full py-4 text-center text-secondary font-headline font-extrabold text-sm border-2 border-outline/20 rounded-2xl hover:bg-primary hover:text-white hover:border-primary transition-all duration-300 uppercase tracking-widest"
-                >
-                  View Details
-                </Link>
-              </div>
-            </div>
+            <CourseCard key={course.id} course={course} />
           ))}
         </div>
       </section>

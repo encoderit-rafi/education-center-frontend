@@ -1,4 +1,4 @@
-"use client";
+ "use client";
 
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -44,14 +44,49 @@ const MOCK_TESTS = [
   },
 ];
 
+const COURSE_OPTIONS = [
+  {
+    id: "group",
+    title: "Group Course",
+    description: "Learn in a collaborative environment with fellow students and live feedback.",
+    price: 1850,
+    badge: "Best Value",
+    category: "Classroom",
+  },
+  {
+    id: "private",
+    title: "Private Course",
+    description: "One-on-one intensive sessions tailored perfectly to your individual pace.",
+    price: 4850,
+    badge: "Premium",
+    category: "Classroom",
+  },
+  {
+    id: "semi-private",
+    title: "Semi-Private",
+    description: "Focused learning in an intimate small group for maximum interaction.",
+    price: 2850,
+    badge: "Balanced",
+    category: "Classroom",
+  },
+  {
+    id: "online",
+    title: "Online Course",
+    description: "Flexible digital learning with full access to our virtual classroom suite.",
+    price: 3850,
+    badge: "Remote",
+    category: "Online",
+  },
+];
+
 const TIME_SLOTS = ["09:00 AM", "11:30 AM", "02:00 PM", "04:30 PM"];
 
 const bookingSchema = z.object({
-  mockTestId: z.string().min(1, "Please select an examination"),
+  selectionId: z.string().min(1, "Please make a selection"),
   fullName: z.string().min(2, "Full name must be at least 2 characters"),
   email: z.string().email("Please enter a valid email address"),
   date: z.date({
-    error: "Please select a testing date",
+    error: "Please select a date",
   }),
   timeSlot: z.string().min(1, "Please select a time slot"),
   paymentMethod: z.literal("card"),
@@ -59,8 +94,23 @@ const bookingSchema = z.object({
 
 type BookingValues = z.infer<typeof bookingSchema>;
 
-export default function MockTestBookingForm() {
+interface MockTestBookingFormProps {
+  courseTitle?: string;
+  mode?: string;
+  className?: string;
+}
+
+export default function MockTestBookingForm({ courseTitle, mode, className }: MockTestBookingFormProps) {
   const [isSuccess, setIsSuccess] = useState(false);
+  const isCourseMode = !!courseTitle;
+
+  // Determine which options to show
+  const availableOptions = isCourseMode 
+    ? COURSE_OPTIONS.filter(opt => {
+        if (mode?.toLowerCase().includes("online")) return opt.category === "Online";
+        return opt.category === "Classroom";
+      })
+    : MOCK_TESTS;
 
   const {
     register,
@@ -71,21 +121,28 @@ export default function MockTestBookingForm() {
   } = useForm<BookingValues>({
     resolver: zodResolver(bookingSchema),
     defaultValues: {
-      mockTestId: MOCK_TESTS[0].id,
+      selectionId: isCourseMode 
+        ? availableOptions[0]?.id 
+        : (courseTitle?.toLowerCase().includes("ielts") ? "ielts" : 
+           courseTitle?.toLowerCase().includes("oet") ? "oet" : 
+           courseTitle?.toLowerCase().includes("pte") ? "pte" : 
+           availableOptions[0]?.id),
       paymentMethod: "card",
     },
   });
 
-  const selectedId = watch("mockTestId");
+  const selectedId = watch("selectionId");
   const selectedDate = watch("date");
   const selectedTime = watch("timeSlot");
 
-  const selectedMock = MOCK_TESTS.find((m) => m.id === selectedId);
+  const selectedItem = availableOptions.find((m) => m.id === selectedId);
 
   const onSubmit = (data: BookingValues) => {
     console.log("Booking Data:", data);
     setIsSuccess(true);
   };
+
+  const currency = isCourseMode ? "AED" : "$";
 
   if (isSuccess) {
     return (
@@ -100,7 +157,7 @@ export default function MockTestBookingForm() {
             Booking Confirmed
           </h2>
           <p className="text-emerald-700/80 text-lg leading-relaxed font-medium">
-            Your {selectedMock?.title} mock test has been successfully scheduled
+            Your {isCourseMode ? courseTitle : ""} {selectedItem?.title} has been successfully scheduled
             for {selectedDate ? format(selectedDate, "PPP") : ""} at{" "}
             {selectedTime}. Check your email for access credentials.
           </p>
@@ -109,7 +166,7 @@ export default function MockTestBookingForm() {
           onClick={() => setIsSuccess(false)}
           className="px-12 py-4 bg-emerald-600 text-white font-headline font-bold text-xs uppercase tracking-widest rounded-2xl hover:bg-emerald-700 transition-all shadow-xl shadow-emerald-600/20"
         >
-          Book Another Test
+          Close
         </button>
       </div>
     );
@@ -118,39 +175,39 @@ export default function MockTestBookingForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start"
+      className={cn("grid grid-cols-1 lg:grid-cols-12 gap-12 items-start", className)}
     >
       {/* Left Column: Selection & Payment */}
       <div className="lg:col-span-8 space-y-16">
-        {/* Section 1: Examination Selection */}
+        {/* Section 1: Selection */}
         <section>
           <div className="flex items-center gap-4 mb-8">
             <span className="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-black text-sm shadow-lg shadow-primary/20">
               1
             </span>
             <h2 className="text-2xl font-headline font-black text-secondary tracking-tight">
-              Select Examination
+              {isCourseMode ? "Select Enrollment Option" : "Select Examination"}
             </h2>
           </div>
 
           <Field>
             <RadioGroup
               value={selectedId}
-              onValueChange={(val) => setValue("mockTestId", val)}
+              onValueChange={(val) => setValue("selectionId", val)}
               className="grid md:grid-cols-3 gap-6"
             >
-              {MOCK_TESTS.map((test) => (
-                <Field key={test.id} className="relative">
+              {availableOptions.map((item) => (
+                <Field key={item.id} className="relative">
                   <RadioGroupItem
-                    value={test.id}
-                    id={test.id}
+                    value={item.id}
+                    id={item.id}
                     className="sr-only"
                   />
                   <label
-                    htmlFor={test.id}
+                    htmlFor={item.id}
                     className={cn(
                       "p-8 rounded-[2rem] border-2 cursor-pointer transition-all duration-300 relative group h-full flex flex-col",
-                      selectedId === test.id
+                      selectedId === item.id
                         ? "border-primary bg-white shadow-2xl shadow-primary/5 ring-4 ring-primary/5"
                         : "border-outline/5 bg-surface-container-low hover:border-primary/20 hover:bg-white",
                     )}
@@ -158,43 +215,43 @@ export default function MockTestBookingForm() {
                     <div
                       className={cn(
                         "text-[10px] font-black uppercase tracking-[0.2em] mb-3 transition-colors",
-                        selectedId === test.id
+                        selectedId === item.id
                           ? "text-primary"
                           : "text-secondary/40",
                       )}
                     >
-                      {test.badge}
+                      {item.badge}
                     </div>
-                    <h3 className="text-2xl font-headline font-black text-secondary mb-2 group-hover:text-primary transition-colors">
-                      {test.title}
+                    <h3 className="text-xl font-headline font-black text-secondary mb-2 group-hover:text-primary transition-colors">
+                      {item.title}
                     </h3>
-                    <div className="text-3xl font-headline font-black text-secondary mb-4 leading-none">
-                      ${test.price}.00
+                    <div className="text-2xl font-headline font-black text-secondary mb-4 leading-none">
+                      {currency} {item.price.toLocaleString()}
                     </div>
                     <p className="text-[11px] text-on-surface-variant/60 font-medium leading-relaxed mb-8 flex-1">
-                      {test.description}
+                      {item.description}
                     </p>
 
                     <div
                       className={cn(
                         "w-full py-4 rounded-xl font-headline font-black text-[10px] uppercase tracking-widest transition-all flex items-center justify-center gap-2",
-                        selectedId === test.id
+                        selectedId === item.id
                           ? "bg-primary text-white shadow-xl shadow-primary/20"
                           : "bg-surface-container-high text-secondary/40 group-hover:bg-primary group-hover:text-white",
                       )}
                     >
-                      {selectedId === test.id && (
+                      {selectedId === item.id && (
                         <span className="material-symbols-outlined text-sm">
                           check_circle
                         </span>
                       )}
-                      {selectedId === test.id ? "Selected" : "Select"}
+                      {selectedId === item.id ? "Selected" : "Select"}
                     </div>
                   </label>
                 </Field>
               ))}
             </RadioGroup>
-            <FieldError errors={[errors.mockTestId]} />
+            <FieldError errors={[errors.selectionId]} />
           </Field>
         </section>
 
@@ -213,7 +270,7 @@ export default function MockTestBookingForm() {
             <div className="space-y-8">
               <Field>
                 <FieldLabel className="text-[10px] font-black uppercase tracking-[0.2em] text-secondary/40 ml-1">
-                  Examination Date
+                  Start Date
                 </FieldLabel>
                 <FieldContent>
                   <Calendar
@@ -297,7 +354,7 @@ export default function MockTestBookingForm() {
                   info
                 </span>
                 <p className="text-xs text-on-surface-variant font-medium leading-relaxed">
-                  We will send your testing credentials and access link to this
+                  We will send your {isCourseMode ? "access" : "testing"} credentials and link to this
                   email address 24 hours before your selected slot.
                 </p>
               </div>
@@ -322,7 +379,7 @@ export default function MockTestBookingForm() {
               type="submit"
               className="w-full bg-primary text-white font-headline font-black py-6 rounded-[2rem] text-sm uppercase tracking-[0.3em] shadow-2xl shadow-primary/20 hover:bg-secondary transition-all active:scale-[0.98] flex items-center justify-center gap-3"
             >
-              Confirm Enrollment & Pay
+              Confirm & Pay
               <span className="material-symbols-outlined">arrow_forward</span>
             </button>
           </div>
@@ -345,10 +402,10 @@ export default function MockTestBookingForm() {
           <div className="space-y-6 mb-12">
             <div className="flex flex-col gap-1 pb-6 border-b border-white/5">
               <span className="text-[10px] font-black text-white/30 uppercase tracking-[0.2em]">
-                Selected Test
+                {isCourseMode ? "Selection" : "Selected Test"}
               </span>
               <span className="text-xl font-bold tracking-tight">
-                {selectedMock?.title} Mock Exam
+                {isCourseMode ? courseTitle : ""} {selectedItem?.title}
               </span>
             </div>
 
@@ -376,9 +433,9 @@ export default function MockTestBookingForm() {
                 Total Investment
               </span>
               <div className="flex items-baseline gap-1">
-                <span className="text-sm font-bold text-primary">$</span>
+                <span className="text-sm font-bold text-primary">{currency}</span>
                 <span className="text-5xl font-headline font-black text-white tracking-tighter">
-                  {selectedMock?.price}.00
+                  {selectedItem?.price.toLocaleString()}
                 </span>
               </div>
             </div>

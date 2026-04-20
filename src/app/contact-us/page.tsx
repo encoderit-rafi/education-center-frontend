@@ -1,4 +1,9 @@
 import ContactForm from "@/app/contact-us/_components/form-contact";
+import FormIELTSRegistration from "@/components/forms/ielts-exam-registration/form-ielts-exam-registration";
+import FormPTEAcademicRegistration from "@/components/forms/pte-academic-registration/form-pte-academic-registration";
+import FormPTECoreRegistration from "@/components/forms/pte-core-registration/form-pte-core-registration";
+import FormPTEHomeRegistration from "@/components/forms/pte-home-registration/form-pte-home-registration";
+
 
 export default function ContactUs() {
   return (
@@ -79,6 +84,18 @@ export default function ContactUs() {
           </div>
         </div>
       </div>
+      <section className="mt-40">
+        <FormPTEHomeRegistration />
+      </section>
+      <section className="mt-40">
+        <FormPTECoreRegistration />
+      </section>
+      <section className="mt-40">
+        <FormPTEAcademicRegistration />
+      </section>
+      <section className="mt-40">
+        <FormIELTSRegistration />
+      </section>
     </section>
   );
 }

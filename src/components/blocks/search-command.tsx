@@ -1,24 +1,105 @@
 "use client";
 
-import { Search } from "lucide-react";
+import * as React from "react";
+import { useRouter } from "next/navigation";
+import { Search, Laptop, GraduationCap, MapPin, Phone, HelpCircle, FileText, Globe } from "lucide-react";
 
-import { Input } from "../ui/input";
+import {
+  CommandDialog,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+  CommandSeparator,
+} from "@/components/ui/command";
+import { cn } from "@/lib/utils";
 
 export default function SearchCommand() {
+  const [open, setOpen] = React.useState(false);
+  const router = useRouter();
+
+  React.useEffect(() => {
+    const down = (e: KeyboardEvent) => {
+      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        setOpen((open) => !open);
+      }
+    };
+    document.addEventListener("keydown", down);
+    return () => document.removeEventListener("keydown", down);
+  }, []);
+
+  const runCommand = React.useCallback((command: () => void) => {
+    setOpen(false);
+    command();
+  }, []);
+
   return (
-    <div className="flex ">
-      <Input
-        className="-me-px rounded-s-md flex-1 rounded-e-none shadow-none focus-visible:z-10"
-        placeholder="Search..."
-        type="text"
-      />
+    <>
       <button
-        aria-label="Subscribe"
-        className="inline-flex w-9 items-center justify-center rounded-e-md border border-input bg-background text-sm outline-none transition-[color,box-shadow] hover:bg-accent focus:z-10 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 text-primary hover:text-primary"
-        type="button"
+        onClick={() => setOpen(true)}
+        className="inline-flex size-9 items-center justify-center rounded-md text-sm outline-none transition-[color,box-shadow] hover:bg-slate-50 focus-visible:border-ring focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 text-primary hover:text-primary cursor-pointer group"
+        aria-label="Search"
       >
-        <Search aria-hidden="true" className="size-4" />
+        <Search className="size-4.5 group-hover:scale-110 transition-transform" />
       </button>
-    </div>
+
+      <CommandDialog open={open} onOpenChange={setOpen}>
+        <CommandInput placeholder="Type a command or search..." />
+        <CommandList className="max-h-[70vh]">
+          <CommandEmpty>No results found.</CommandEmpty>
+
+          <CommandGroup heading="Exams & Registration">
+            <CommandItem onSelect={() => runCommand(() => router.push("/contact-us"))}>
+              <GraduationCap className="mr-2 h-4 w-4 text-primary" />
+              <span>IELTS Registration</span>
+            </CommandItem>
+            <CommandItem onSelect={() => runCommand(() => router.push("/contact-us"))}>
+              <Laptop className="mr-2 h-4 w-4 text-primary" />
+              <span>PTE Core Registration</span>
+            </CommandItem>
+            <CommandItem onSelect={() => runCommand(() => router.push("/contact-us"))}>
+              <Globe className="mr-2 h-4 w-4 text-primary" />
+              <span>PTE Academic Registration</span>
+            </CommandItem>
+            <CommandItem onSelect={() => runCommand(() => router.push("/contact-us"))}>
+              <FileText className="mr-2 h-4 w-4 text-primary" />
+              <span>PTE Home Registration</span>
+            </CommandItem>
+          </CommandGroup>
+
+          <CommandSeparator />
+
+          <CommandGroup heading="Services">
+            <CommandItem onSelect={() => runCommand(() => router.push("/free-consultation"))}>
+              <HelpCircle className="mr-2 h-4 w-4 text-blue-500" />
+              <span>Free Consultation</span>
+            </CommandItem>
+            <CommandItem onSelect={() => runCommand(() => router.push("/our-venues"))}>
+              <MapPin className="mr-2 h-4 w-4 text-green-500" />
+              <span>Explore Our Venues</span>
+            </CommandItem>
+            <CommandItem onSelect={() => runCommand(() => router.push("/paid-mock-test"))}>
+              <Laptop className="mr-2 h-4 w-4 text-orange-500" />
+              <span>Book a Mock Test</span>
+            </CommandItem>
+          </CommandGroup>
+
+          <CommandSeparator />
+
+          <CommandGroup heading="Support">
+            <CommandItem onSelect={() => runCommand(() => router.push("/contact-us"))}>
+              <Phone className="mr-2 h-4 w-4" />
+              <span>Contact Support</span>
+            </CommandItem>
+            <CommandItem onSelect={() => runCommand(() => router.push("/about-us/who-we-are"))}>
+              <HelpCircle className="mr-2 h-4 w-4" />
+              <span>Frequently Asked Questions</span>
+            </CommandItem>
+          </CommandGroup>
+        </CommandList>
+      </CommandDialog>
+    </>
   );
 }
