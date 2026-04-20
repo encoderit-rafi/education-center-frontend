@@ -7,6 +7,7 @@ import { COURSES } from "@/lib/courses-data";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { buttonVariants } from "@/components/ui/button";
+import FreeConsultation from "@/app/free-consultation/_components/free-consultation";
 
 export default function CourseDetails() {
   const params = useParams();
@@ -86,45 +87,6 @@ export default function CourseDetails() {
                 <p className="text-on-surface-variant text-lg leading-relaxed font-normal">
                   {course.extendedDescription}
                 </p>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
-                <div className="bg-surface-container-low p-8 rounded-[2rem] border border-outline/5 hover:border-primary/20 transition-colors group">
-                  <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-all">
-                    <span className="material-symbols-outlined">target</span>
-                  </div>
-                  <h4 className="text-xl font-headline font-extrabold text-secondary mb-4 tracking-tight">
-                    Learning Objectives
-                  </h4>
-                  <ul className="space-y-3">
-                    <li className="flex gap-3 items-start text-on-surface-variant/80 text-sm font-medium">
-                      <span className="text-primary font-bold">01.</span> Master
-                      formal academic tone and register.
-                    </li>
-                    <li className="flex gap-3 items-start text-on-surface-variant/80 text-sm font-medium">
-                      <span className="text-primary font-bold">02.</span> Apply
-                      analytical frameworks to complex texts.
-                    </li>
-                    <li className="flex gap-3 items-start text-on-surface-variant/80 text-sm font-medium">
-                      <span className="text-primary font-bold">03.</span>{" "}
-                      Construct logically tight argumentative structures.
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="bg-surface-container-low p-8 rounded-[2rem] border border-outline/5 hover:border-primary/20 transition-colors group">
-                  <div className="w-12 h-12 rounded-2xl bg-secondary/10 flex items-center justify-center text-secondary mb-6 group-hover:bg-secondary group-hover:text-white transition-all">
-                    <span className="material-symbols-outlined">verified</span>
-                  </div>
-                  <h4 className="text-xl font-headline font-extrabold text-secondary mb-4 tracking-tight">
-                    Certification
-                  </h4>
-                  <p className="text-on-surface-variant/80 text-sm font-medium leading-relaxed">
-                    Upon successful completion, students receive a TEPTH Gold
-                    Standard Certification, recognized by 40+ leading regional
-                    institutions.
-                  </p>
-                </div>
               </div>
             </div>
           </div>
@@ -235,6 +197,9 @@ export default function CourseDetails() {
           </div>
         </div>
       </section>
+      <div className="py-12 bg-white">
+        <FreeConsultation />
+      </div>
     </main>
   );
 }

@@ -4,6 +4,8 @@ import Image from "next/image";
 import { CoursePricingGrid } from "./_components/course-pricing-grid";
 import { WorkshopPricingGrid } from "./_components/workshop-pricing-grid";
 import { Button } from "@base-ui/react";
+import FreeConsultation from "../free-consultation/_components/free-consultation";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function FeesPage() {
   return (
@@ -27,39 +29,79 @@ export default function FeesPage() {
               <span className="text-[#991B1B] italic">Exam Fees</span>
             </h1>
             <p className="text-slate-300 text-lg md:text-xl leading-relaxed mb-10 font-light max-w-xl">
-              Transparent pricing for world-class certifications. TEPTH provides a streamlined pathway to your global academic and professional ambitions.
+              Transparent pricing for world-class certifications. TEPTH provides
+              a streamlined pathway to your global academic and professional
+              ambitions.
             </p>
           </div>
         </div>
       </header>
 
-      {/* ── Examination Preparation Courses ── */}
-      <section className="py-32 bg-white px-8" id="course-pricing">
+      {/* ── Tabs for Courses ── */}
+      <section className="py-24 bg-white px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="mb-20 text-center space-y-4">
-            <h2 className="text-[#111827] text-4xl md:text-5xl font-headline font-black tracking-tight">
-              Examination Preparation Courses
-            </h2>
-            <p className="text-[#4B5563] max-w-xl mx-auto text-lg leading-relaxed">
-              Tailored classroom and online training programs designed to ensure your peak performance.
-            </p>
-          </div>
-          <CoursePricingGrid />
-        </div>
-      </section>
+          <Tabs defaultValue="ielts" className="w-full flex flex-col">
+            {/* <div className="flex justify-center mb-16"> */}
+            <TabsList className="bg-[#F3F4F6] p-1 rounded-2xl border border-[#E5E7EB]">
+              {["ielts", "oet", "pte", "general"].map((tab) => (
+                <TabsTrigger
+                  key={tab}
+                  value={tab}
+                  className="px-8 py-3 rounded-xl text-sm font-black uppercase tracking-widest transition-all data-[state=active]:bg-white data-[state=active]:text-[#991B1B] data-[state=active]:shadow-lg text-[#4B5563]"
+                >
+                  {tab === "general" ? "General English" : tab}
+                </TabsTrigger>
+              ))}
+            </TabsList>
+            {/* </div> */}
 
-      {/* ── Exam Workshops ── */}
-      <section className="py-32 bg-[#F9FAFB] px-8" id="workshops">
-        <div className="max-w-7xl mx-auto">
-          <div className="mb-20 text-center space-y-4">
-            <h2 className="text-[#111827] text-4xl md:text-5xl font-headline font-black tracking-tight">
-              Intensive Exam Workshops
-            </h2>
-            <p className="text-[#4B5563] max-w-xl mx-auto text-lg leading-relaxed">
-              Targeted, high-impact sessions focused on examination techniques and full simulation.
-            </p>
-          </div>
-          <WorkshopPricingGrid />
+            {["ielts", "oet", "pte", "general"].map((tab) => (
+              <TabsContent
+                key={tab}
+                value={tab}
+                className="space-y-0 animate-in fade-in zoom-in-95 duration-500"
+              >
+                {/* ── Examination Preparation Courses ── */}
+                <section
+                  className="py-20 bg-white"
+                  id={`course-pricing-${tab}`}
+                >
+                  <div className="max-w-7xl mx-auto">
+                    <div className="mb-20 text-center space-y-4">
+                      <h2 className="text-[#111827] text-4xl md:text-5xl font-headline font-black tracking-tight">
+                        {tab.toUpperCase()} Preparation Courses
+                      </h2>
+                      <p className="text-[#4B5563] max-w-xl mx-auto text-lg leading-relaxed">
+                        Tailored classroom and online training programs designed
+                        to ensure your peak performance in {tab.toUpperCase()}{" "}
+                        examinations.
+                      </p>
+                    </div>
+                    <CoursePricingGrid />
+                  </div>
+                </section>
+
+                {/* ── Exam Workshops ── */}
+                <section
+                  className="py-24 bg-[#F9FAFB] px-8 rounded-[3rem]"
+                  id={`workshops-${tab}`}
+                >
+                  <div className="max-w-7xl mx-auto">
+                    <div className="mb-20 text-center space-y-4">
+                      <h2 className="text-[#111827] text-4xl md:text-5xl font-headline font-black tracking-tight">
+                        Intensive {tab.toUpperCase()} Workshops
+                      </h2>
+                      <p className="text-[#4B5563] max-w-xl mx-auto text-lg leading-relaxed">
+                        Targeted, high-impact sessions focused on examination
+                        techniques and full simulation for {tab.toUpperCase()}.
+                      </p>
+                    </div>
+                    <WorkshopPricingGrid />
+                  </div>
+                </section>
+              </TabsContent>
+            ))}
+          </Tabs>
         </div>
       </section>
 
@@ -120,37 +162,8 @@ export default function FeesPage() {
           </div>
         </div>
       </section>
-      {/* ── Final Crimson Conversion Banner ── */}
       <section className="py-16 px-4 md:py-32 md:px-8">
-        <div className="max-w-7xl mx-auto rounded-2xl md:rounded-[3rem] overflow-hidden relative min-h-[380px] md:min-h-[450px] flex items-center bg-[#991B1B]">
-          <div className="absolute inset-0">
-            <Image
-              src="/images/about-us/vision-map.png"
-              alt="academic background pattern"
-              fill
-              className="object-cover opacity-10 mix-blend-overlay rotate-12 scale-125"
-            />
-          </div>
-          <div className="relative z-10 w-full p-8 sm:p-12 md:p-16 lg:p-24 flex flex-col md:flex-row justify-between items-center gap-8 md:gap-16">
-            <div className="w-full max-w-xl space-y-4 md:space-y-6 text-center md:text-left">
-              <h2 className="text-white text-4xl sm:text-5xl md:text-6xl font-headline font-black tracking-tight leading-none">
-                Ready to start <br />your journey?
-              </h2>
-              <p className="text-white/80 text-base sm:text-lg md:text-xl leading-relaxed font-light py-2 md:py-4">
-                Our academic counselors are available to guide you through the
-                selection and booking process.
-              </p>
-              <div className="flex justify-center md:justify-start">
-                <Link
-                  href="/free-consultation"
-                  className="bg-white text-[#991B1B] px-12 py-6 rounded-2xl font-headline font-black text-sm tracking-widest uppercase shadow-2xl hover:scale-105 transition-all text-center"
-                >
-                  Consult an Expert
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
+        <FreeConsultation />
       </section>
     </main>
   );

@@ -4,7 +4,7 @@ import CoreServices from "@/components/blocks/core-services";
 import ExperienceExcellence from "@/components/blocks/experience-excellence";
 import LatestBlogs from "@/components/blocks/latest-blogs";
 import Testimonials from "@/components/blocks/testimonials";
-import CTASection from "@/components/blocks/cta-section";
+import FreeConsultation from "./free-consultation/_components/free-consultation";
 
 export default function Home() {
   return (
@@ -15,7 +15,9 @@ export default function Home() {
       <ExperienceExcellence />
       <LatestBlogs />
       <Testimonials />
-      <CTASection />
+      <section className="py-16 px-4 md:py-32 md:px-8">
+        <FreeConsultation />
+      </section>
     </div>
   );
 }

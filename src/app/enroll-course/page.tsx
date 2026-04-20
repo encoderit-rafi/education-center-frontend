@@ -1,4 +1,4 @@
-import MockTestBookingForm from "@/components/blocks/mock-test-booking-form";
+import MockTestBookingForm from "@/app/paid-mock-test/_components/mock-test-booking-form";
 import React from "react";
 
 export default function page() {
