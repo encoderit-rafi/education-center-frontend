@@ -83,7 +83,7 @@ const navItems = [
 export default function NavBar() {
   return (
     <header className="sticky top-0 w-full z-50 bg-white/90 backdrop-blur-xl border-b border-slate-100 shadow-sm overflow-hidden">
-      <div className="flex items-center justify-between p-3 max-w-7xl mx-auto gap-4">
+      <div className="flex items-center justify-between p-3 mx-auto gap-4">
         {/* Logo */}
         <div className="shrink-0">
           <Link href="/">
@@ -140,8 +140,8 @@ export default function NavBar() {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="hidden md:flex h-8 w-8 hover:bg-red-50 hover:text-red-900 absolute left-0 top-1/2 !translate-y-[-50%] active:!translate-y-[-50%] z-10 bg-white/90 backdrop-blur-sm border-none shadow-md opacity-0 group-hover:opacity-100 disabled:hidden transition-opacity" />
-            <CarouselNext className="hidden md:flex h-8 w-8 hover:bg-red-50 hover:text-red-900 absolute right-0 top-1/2 !translate-y-[-50%] active:!translate-y-[-50%] z-10 bg-white/90 backdrop-blur-sm border-none shadow-md opacity-0 group-hover:opacity-100 disabled:hidden transition-opacity" />
+            <CarouselPrevious className="flex h-8 w-8 hover:bg-red-50 hover:text-red-900 absolute left-0 top-1/2 !translate-y-[-50%] active:!translate-y-[-50%] z-10 bg-white/90 border-none shadow-md opacity-100 disabled:hidden transition-opacity" />
+            <CarouselNext className="flex h-8 w-8 hover:bg-red-50 hover:text-red-900 absolute right-0 top-1/2 !translate-y-[-50%] active:!translate-y-[-50%] z-10 bg-white/90 border-none shadow-md opacity-100 disabled:hidden transition-opacity" />
           </Carousel>
         </div>
 

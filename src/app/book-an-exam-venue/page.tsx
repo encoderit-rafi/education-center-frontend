@@ -1,6 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 export default function BookAnExamVenuePage() {
   return (
@@ -20,7 +26,7 @@ export default function BookAnExamVenuePage() {
               infrastructure designed specifically for high-stakes testing
               environments. Professional, secure, and fully equipped.
             </p>
-            <div className="bg-surface border-l-4 border-primary p-8 rounded-r-xl shadow-sm animate-in fade-in slide-in-from-bottom-10 duration-1000">
+            <div className="bg-white/50 backdrop-blur-sm border-l-4 border-primary p-8 rounded-r-xl shadow-sm animate-in fade-in slide-in-from-bottom-10 duration-1000">
               <div className="flex flex-col gap-6">
                 <p className="text-xl font-bold text-on-surface italic leading-tight">
                   If you want to book an exam venue, please contact us.
@@ -63,37 +69,46 @@ export default function BookAnExamVenuePage() {
         </div>
       </section>
 
-      {/* Features Bento Grid */}
-      <section className="py-24 bg-surface">
-        <div className="container mx-auto px-6 lg:px-12">
-          <div className="text-center mb-20 max-w-2xl mx-auto">
-            <h2 className="text-4xl font-bold tracking-tight text-on-surface font-headline mb-4">
+      {/* Comprehensive Exam Infrastructure Accordion */}
+      <section className="py-24 bg-surface container-lowest">
+        <div className="max-w-4xl mx-auto px-6 lg:px-12">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-on-surface font-headline">
               Comprehensive Exam Infrastructure
             </h2>
-            <div className="h-1.5 w-24 bg-primary mx-auto rounded-full"></div>
+            <div className="h-1.5 w-24 bg-primary mx-auto mt-6 rounded-full"></div>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {features.map((feature, index) => (
-              <div
+
+          <Accordion className="space-y-4 border-none">
+            {infrastructureItems.map((item, index) => (
+              <AccordionItem
                 key={index}
-                className="p-8 bg-surface-container-low border border-outline/5 rounded-2xl hover:bg-surface-container transition-all duration-300 group flex flex-col items-start gap-4"
+                value={`item-${index}`}
+                className="bg-surface-container-low rounded-xl overflow-hidden border border-transparent transition-all duration-300 data-[state=open]:border-primary/20 data-[state=open]:shadow-md border-none"
               >
-                <div className="bg-surface p-3 rounded-xl shadow-sm border border-outline/5 group-hover:scale-110 group-hover:bg-primary/5 transition-all duration-300">
-                  <span className="material-symbols-outlined text-primary text-3xl" style={{ fontVariationSettings: "'FILL' 0" }}>
-                    {feature.icon}
-                  </span>
-                </div>
-                <h3 className="font-bold text-on-surface text-lg leading-tight">
-                  {feature.title}
-                </h3>
-              </div>
+                <AccordionTrigger className="flex items-center justify-between p-6 cursor-pointer hover:no-underline group/trigger">
+                  <div className="flex items-center gap-4">
+                    <span className={cn("material-symbols-outlined text-2xl transition-transform group-hover/trigger:scale-110", item.iconColor)}>
+                      {item.icon}
+                    </span>
+                    <h3 className={cn("text-lg font-bold transition-colors", item.textColor)}>
+                      {item.title}
+                    </h3>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="px-6 pb-6 pt-0">
+                  <p className={cn("leading-relaxed border-t border-primary/10 pt-4", item.textColor)}>
+                    {item.description}
+                  </p>
+                </AccordionContent>
+              </AccordionItem>
             ))}
-          </div>
+          </Accordion>
         </div>
       </section>
 
       {/* Why Choose TEPTH Section */}
-      <section className="py-24 bg-surface-container-low overflow-hidden">
+      <section className="py-24 bg-surface-container-high overflow-hidden">
         <div className="container mx-auto px-6 lg:px-12">
           <div className="flex flex-col lg:flex-row gap-20 items-center">
             <div className="lg:w-1/2">
@@ -154,16 +169,16 @@ export default function BookAnExamVenuePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 container mx-auto px-6 lg:px-12">
+      <section className="py-24 max-w-5xl mx-auto px-6 lg:px-12">
         <div className="bg-primary rounded-[2rem] p-12 lg:p-20 text-center text-white shadow-2xl relative overflow-hidden group">
           <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 opacity-5 -mr-48 -mt-48 rounded-full group-hover:scale-110 transition-transform duration-1000"></div>
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 opacity-5 -ml-32 -mb-32 rounded-full group-hover:scale-110 transition-transform duration-1000 delay-200"></div>
           
-          <div className="relative z-10 max-w-3xl mx-auto">
-            <h2 className="text-4xl lg:text-6xl font-extrabold mb-8 font-headline leading-tight">
+          <div className="relative z-10">
+            <h2 className="text-4xl lg:text-5xl font-extrabold mb-8 font-headline leading-tight">
               Secure Your Exam Venue Today
             </h2>
-            <p className="text-white/80 text-xl mb-12 leading-relaxed">
+            <p className="text-white/80 text-xl mb-12 leading-relaxed max-w-3xl mx-auto">
               Contact our academic team to discuss capacity requirements, technical
               specifications, and custom scheduling for your organization.
             </p>
@@ -185,19 +200,91 @@ export default function BookAnExamVenuePage() {
   );
 }
 
-const features = [
-  { icon: "description", title: "Service License" },
-  { icon: "computer", title: "Computer-based Exams" },
-  { icon: "volume_off", title: "Noise Free Environment" },
-  { icon: "article", title: "Paper-based Exams" },
-  { icon: "videocam", title: "CCTV" },
-  { icon: "settings_suggest", title: "Exam Delivery Machines" },
-  { icon: "near_me", title: "Strategic Location" },
-  { icon: "accessible", title: "Wheelchair Accessible" },
-  { icon: "domain", title: "Top-Notch Premises" },
-  { icon: "badge", title: "Experienced Invigilators" },
-  { icon: "room_service", title: "Special Accommodation" },
-  { icon: "groups", title: "Seating Capacity" },
+const infrastructureItems = [
+  {
+    icon: "description",
+    title: "Service License",
+    iconColor: "text-red-800",
+    textColor: "text-red-600",
+    description: "The Exam Preparation & Testing House is a well-formed organization in Dubai with vast experience in test delivery and exam prep. services. TEPTH is licensed by Dubai Silicon Oasis Authority and permitted by KHDA with Testing Centre activity."
+  },
+  {
+    icon: "computer",
+    title: "Computer-based Exams",
+    iconColor: "text-red-800",
+    textColor: "text-blue-600",
+    description: "Three 40-seat computer rooms and 20-seat classroom to administer computer-based exams."
+  },
+  {
+    icon: "volume_off",
+    title: "Noise Free Environment",
+    iconColor: "text-red-800",
+    textColor: "text-orange-500",
+    description: "Fabric acoustic panels are fixed onto the partitions of workstations to help reduce the noise level. Our floors at the testing rooms are carpeted to eliminate distraction. We have also spaced out our workstations as this helps in reducing the noise. Additionally, we are using white noise machines in our computer labs to help reduce noise. We also use quiet keyboards and high-quality headsets to further minimize distractions."
+  },
+  {
+    icon: "article",
+    title: "Paper-based Exams",
+    iconColor: "text-red-800",
+    textColor: "text-orange-500",
+    description: "We provide a dedicated 20-seat classroom specifically designed to accommodate paper-based examination formats."
+  },
+  {
+    icon: "videocam",
+    title: "CCTV Surveillance",
+    iconColor: "text-red-800",
+    textColor: "text-green-600",
+    description: "To maintain exam security and integrity, we have implemented a comprehensive CCTV system in our computer labs. Each workstation is monitored by a security camera, and exam providers may be granted access to recordings upon request."
+  },
+  {
+    icon: "settings_suggest",
+    title: "Exam Delivery Machines",
+    iconColor: "text-red-800",
+    textColor: "text-purple-600",
+    description: "Our venues are equipped with high-specification computers that meet or exceed all official exam provider requirements for performance and security."
+  },
+  {
+    icon: "near_me",
+    title: "Strategic Location",
+    iconColor: "text-red-800",
+    textColor: "text-cyan-600",
+    description: "Our center is conveniently located in Dubai Silicon Oasis, one of the most strategic areas in Dubai, and in close proximity to Academic City."
+  },
+  {
+    icon: "accessible",
+    title: "Wheelchair Accessible",
+    iconColor: "text-red-800",
+    textColor: "text-amber-800",
+    description: "All our facilities are fully wheelchair accessible. We also provide adjustable chairs to ensure comfort for all candidates during their exams."
+  },
+  {
+    icon: "domain",
+    title: "Top-Notch Premises",
+    iconColor: "text-red-800",
+    textColor: "text-yellow-500",
+    description: "Our modern, air-conditioned venues are professionally built and well-equipped with waiting areas and secure lockers for test-takers. Features include built-in ceiling speakers for events and specialized training."
+  },
+  {
+    icon: "badge",
+    title: "Experienced Invigilators",
+    iconColor: "text-red-800",
+    textColor: "text-gray-600",
+    description: "All administrators and proctors at TEPTH are certified and highly trained to supervise various types of international exams with the highest level of professionalism."
+  },
+  {
+    icon: "room_service",
+    title: "Special Accommodation",
+    iconColor: "text-red-800",
+    textColor: "text-indigo-600",
+    description: "We can accommodate test-takers requiring extra time or private rooms for special needs, ensuring a fair and supportive testing environment for everyone."
+  },
+  {
+    icon: "groups",
+    title: "Seating Capacity",
+    iconColor: "text-red-800",
+    textColor: "text-red-600",
+    description: "With a total capacity of 140 workstations across three 40-seat computer rooms and a 20-seat classroom, we can administer exams for up to 140 candidates in a single session."
+  }
 ];
 
 const reasons = [
