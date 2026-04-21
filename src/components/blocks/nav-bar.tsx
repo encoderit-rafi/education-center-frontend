@@ -50,11 +50,7 @@ const navItems = [
     label: "Test Dates", href: "/test-dates"
   },
   {
-    label: "Book Exam",
-    children: [
-      { label: "Book Exam", href: "/book-a-test" },
-      { label: "Test Day Guidelines", href: "/test-day-guidelines" },
-    ],
+    label: "Book Exam", href: "/book-a-test"
   },
   {
     label: "Free Consultation", href: "/free-consultation"
@@ -66,10 +62,15 @@ const navItems = [
     label: "Exam Special Accommodation", href: "/special-accommodation"
   },
   {
-    label: "Exam Proctoring Services", href: "/exam-proctoring-services"
+    label: "Exam Delivery", href: "/exam-delivery"
   },
   {
-    label: "Exam Delivery", href: "/exam-delivery"
+    label: "Exam Proctoring Services",
+    children: [
+      { label: "Institutions", href: "/exam-proctoring-services/institutions" },
+      { label: "Test-Takers", href: "/exam-proctoring-services/test-takers" },
+    ],
+
   },
   {
     label: "About Us",
@@ -86,7 +87,7 @@ const navItems = [
 
 export default function NavBar() {
   return (
-    <header className="sticky top-0 w-full z-50 bg-white/95 border-b border-slate-100 shadow-sm overflow-hidden backdrop-blur-xl">
+    <header className="sticky top-0 w-full z-50 bg-white/90 backdrop-blur-xl border-b border-slate-100 shadow-sm overflow-hidden">
       <div className="flex items-center justify-between p-3 mx-auto gap-4">
         {/* Logo */}
         <div className="shrink-0">
@@ -144,8 +145,8 @@ export default function NavBar() {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="flex h-8 w-8 hover:bg-red-50 hover:text-red-900 absolute left-0 top-1/2 !translate-y-[-50%] active:!translate-y-[-50%] z-10 bg-white/90 backdrop-blur-sm border-none shadow-md disabled:hidden transition-opacity" />
-            <CarouselNext className="flex h-8 w-8 hover:bg-red-50 hover:text-red-900 absolute right-0 top-1/2 !translate-y-[-50%] active:!translate-y-[-50%] z-10 bg-white/90 backdrop-blur-sm border-none shadow-md disabled:hidden transition-opacity" />
+            <CarouselPrevious className="flex h-8 w-8 hover:bg-red-50 hover:text-red-900 absolute left-0 top-1/2 !translate-y-[-50%] active:!translate-y-[-50%] z-10 bg-white/90 border-none shadow-md opacity-100 disabled:hidden transition-opacity" />
+            <CarouselNext className="flex h-8 w-8 hover:bg-red-50 hover:text-red-900 absolute right-0 top-1/2 !translate-y-[-50%] active:!translate-y-[-50%] z-10 bg-white/90 border-none shadow-md opacity-100 disabled:hidden transition-opacity" />
           </Carousel>
         </div>
 

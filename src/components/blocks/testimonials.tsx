@@ -47,7 +47,7 @@ export default function Testimonials() {
           Trusted by Tomorrow's Leaders
         </h3>
       </div>
-      <div className="relative max-w-7xl mx-auto px-12">
+      <div className="relative max-w-7xl mx-auto px-12 group">
         <Carousel
           opts={{
             align: "start",
@@ -58,7 +58,7 @@ export default function Testimonials() {
           <CarouselContent className="-ml-8">
             {testimonials.map((t, i) => (
               <CarouselItem key={i} className="pl-8 md:basis-1/2 lg:basis-1/3">
-                <div className="h-full bg-surface p-10 rounded-3xl shadow-sm relative group hover:-translate-y-2 transition-transform duration-300">
+                <div className="h-full bg-surface p-10 rounded-3xl shadow-sm relative hover:-translate-y-2 transition-transform duration-300">
                   <span className="material-symbols-outlined text-6xl text-gray-100 absolute -top-4 left-6 opacity-50">
                     format_quote
                   </span>
@@ -80,8 +80,8 @@ export default function Testimonials() {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="hidden md:flex -left-12 hover:bg-primary hover:text-white transition-colors" />
-          <CarouselNext className="hidden md:flex -right-12 hover:bg-primary hover:text-white transition-colors" />
+          <CarouselPrevious className="flex h-10 w-10 hover:bg-red-50 hover:text-red-900 absolute -left-12 top-1/2 !translate-y-[-50%] active:!translate-y-[-50%] z-10 bg-white/90 border-none shadow-md opacity-100 transition-opacity" />
+          <CarouselNext className="flex h-10 w-10 hover:bg-red-50 hover:text-red-900 absolute -right-12 top-1/2 !translate-y-[-50%] active:!translate-y-[-50%] z-10 bg-white/90 border-none shadow-md opacity-100 transition-opacity" />
         </Carousel>
       </div>
     </section>
