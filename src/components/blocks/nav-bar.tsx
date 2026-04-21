@@ -50,13 +50,26 @@ const navItems = [
     label: "Test Dates", href: "/test-dates"
   },
   {
-    label: "Book a Test", href: "/book-a-test"
+    label: "Book Exam",
+    children: [
+      { label: "Book Exam", href: "/book-a-test" },
+      { label: "Test Day Guidelines", href: "/test-day-guidelines" },
+    ],
   },
   {
     label: "Free Consultation", href: "/free-consultation"
   },
   {
     label: "Assessment Solutions", href: "/assessment-solutions"
+  },
+  {
+    label: "Exam Special Accommodation", href: "/special-accommodation"
+  },
+  {
+    label: "Exam Proctoring Services", href: "/exam-proctoring-services"
+  },
+  {
+    label: "Exam Delivery", href: "/exam-delivery"
   },
   {
     label: "About Us",
@@ -73,8 +86,8 @@ const navItems = [
 
 export default function NavBar() {
   return (
-    <header className="sticky top-0 w-full z-50 bg-white/90 backdrop-blur-xl border-b border-slate-100 shadow-sm overflow-hidden">
-      <div className="flex items-center justify-between p-3 max-w-7xl mx-auto gap-4">
+    <header className="sticky top-0 w-full z-50 bg-white/95 border-b border-slate-100 shadow-sm overflow-hidden backdrop-blur-xl">
+      <div className="flex items-center justify-between p-3 mx-auto gap-4">
         {/* Logo */}
         <div className="shrink-0">
           <Link href="/">

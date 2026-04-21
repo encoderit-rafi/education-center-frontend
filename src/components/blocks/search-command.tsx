@@ -42,12 +42,12 @@ export default function SearchCommand() {
         className="inline-flex size-9 items-center justify-center rounded-md text-sm outline-none transition-[color,box-shadow] hover:bg-slate-50 focus-visible:border-ring focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 text-primary hover:text-primary cursor-pointer group"
         aria-label="Search"
       >
-        <Search className="size-4.5 group-hover:scale-110 transition-transform" />
+        <Search className="size-4.5 group-hover:scale-110" />
       </button>
 
       <CommandDialog open={open} onOpenChange={setOpen}>
         <CommandInput placeholder="Type a command or search..." />
-        <CommandList className="max-h-[70vh]">
+        <CommandList className="">
           <CommandEmpty>No results found.</CommandEmpty>
 
           <CommandGroup heading="Exams & Registration">

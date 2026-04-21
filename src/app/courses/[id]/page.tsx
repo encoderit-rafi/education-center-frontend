@@ -1,15 +1,10 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { useParams, notFound } from "next/navigation";
-import { COURSES, Course, Section } from "@/lib/courses-data";
-import { cn } from "@/lib/utils";
-import Image from "next/image";
-import { CheckCircle2 } from "lucide-react";
+import { COURSES } from "@/lib/courses-data";
 import CourseCard from "@/components/blocks/course-card";
 import FreeConsultation from "@/app/free-consultation/_components/free-consultation";
-import BookingForm from "@/components/blocks/booking-form";
 import MockTestBookingForm from "@/app/paid-mock-test/_components/mock-test-booking-form";
 
 const CheckIcon = () => (
