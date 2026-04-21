@@ -35,7 +35,7 @@ const navItems = [
     label: "Our Venues",
     children: [
       { label: "360° Virtual Tour", href: "/our-venues" },
-      { label: "Book An Exam Venue", href: "/paid-mock-test" },
+      { label: "Book An Exam Venue", href: "/book-an-exam-venue" },
     ],
   },
   {
