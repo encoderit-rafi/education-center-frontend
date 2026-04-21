@@ -129,7 +129,7 @@ export default function FAQPage() {
                                 <AccordionTrigger className="px-8 py-7 text-lg md:text-xl font-black text-gray-900 hover:text-[#A11D1D] hover:no-underline text-left leading-tight group">
                                     {faq.question}
                                 </AccordionTrigger>
-                                <AccordionContent className="px-8 pb-8 text-gray-600 text-sm md:text-lg leading-relaxed bg-gray-50/20">
+                                <AccordionContent className="px-8 pb-8 text-gray-900 text-sm md:text-lg leading-relaxed bg-gray-50/20">
                                     <div className="border-l-2 border-[#A11D1D]/10 pl-6">
                                         {faq.answer}
                                     </div>

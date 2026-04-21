@@ -65,7 +65,12 @@ const navItems = [
     label: "Exam Delivery", href: "/exam-delivery"
   },
   {
-    label: "Exam Proctoring Services", href: "/exam-proctoring-services"
+    label: "Exam Proctoring Services",
+    children: [
+      { label: "Institutions", href: "/exam-proctoring-services/institutions" },
+      { label: "Test-Takers", href: "/exam-proctoring-services/test-takers" },
+    ],
+
   },
   {
     label: "About Us",

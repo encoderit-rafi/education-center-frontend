@@ -91,13 +91,13 @@ export default function BookAnExamVenuePage() {
                     <span className={cn("material-symbols-outlined text-2xl transition-transform group-hover/trigger:scale-110", item.iconColor)}>
                       {item.icon}
                     </span>
-                    <h3 className={cn("text-lg font-bold transition-colors", item.textColor)}>
+                    <h3 className="text-lg font-bold text-on-surface transition-colors">
                       {item.title}
                     </h3>
                   </div>
                 </AccordionTrigger>
                 <AccordionContent className="px-6 pb-6 pt-0">
-                  <p className={cn("leading-relaxed border-t border-primary/10 pt-4", item.textColor)}>
+                  <p className="text-on-surface leading-relaxed border-t border-primary/10 pt-4">
                     {item.description}
                   </p>
                 </AccordionContent>
@@ -205,87 +205,76 @@ const infrastructureItems = [
     icon: "description",
     title: "Service License",
     iconColor: "text-red-800",
-    textColor: "text-red-600",
     description: "The Exam Preparation & Testing House is a well-formed organization in Dubai with vast experience in test delivery and exam prep. services. TEPTH is licensed by Dubai Silicon Oasis Authority and permitted by KHDA with Testing Centre activity."
   },
   {
     icon: "computer",
     title: "Computer-based Exams",
     iconColor: "text-red-800",
-    textColor: "text-blue-600",
     description: "Three 40-seat computer rooms and 20-seat classroom to administer computer-based exams."
   },
   {
     icon: "volume_off",
     title: "Noise Free Environment",
     iconColor: "text-red-800",
-    textColor: "text-orange-500",
     description: "Fabric acoustic panels are fixed onto the partitions of workstations to help reduce the noise level. Our floors at the testing rooms are carpeted to eliminate distraction. We have also spaced out our workstations as this helps in reducing the noise. Additionally, we are using white noise machines in our computer labs to help reduce noise. We also use quiet keyboards and high-quality headsets to further minimize distractions."
   },
   {
     icon: "article",
     title: "Paper-based Exams",
     iconColor: "text-red-800",
-    textColor: "text-orange-500",
     description: "We provide a dedicated 20-seat classroom specifically designed to accommodate paper-based examination formats."
   },
   {
     icon: "videocam",
     title: "CCTV Surveillance",
     iconColor: "text-red-800",
-    textColor: "text-green-600",
     description: "To maintain exam security and integrity, we have implemented a comprehensive CCTV system in our computer labs. Each workstation is monitored by a security camera, and exam providers may be granted access to recordings upon request."
   },
   {
     icon: "settings_suggest",
     title: "Exam Delivery Machines",
     iconColor: "text-red-800",
-    textColor: "text-purple-600",
     description: "Our venues are equipped with high-specification computers that meet or exceed all official exam provider requirements for performance and security."
   },
   {
     icon: "near_me",
     title: "Strategic Location",
     iconColor: "text-red-800",
-    textColor: "text-cyan-600",
     description: "Our center is conveniently located in Dubai Silicon Oasis, one of the most strategic areas in Dubai, and in close proximity to Academic City."
   },
   {
     icon: "accessible",
     title: "Wheelchair Accessible",
     iconColor: "text-red-800",
-    textColor: "text-amber-800",
     description: "All our facilities are fully wheelchair accessible. We also provide adjustable chairs to ensure comfort for all candidates during their exams."
   },
   {
     icon: "domain",
     title: "Top-Notch Premises",
     iconColor: "text-red-800",
-    textColor: "text-yellow-500",
     description: "Our modern, air-conditioned venues are professionally built and well-equipped with waiting areas and secure lockers for test-takers. Features include built-in ceiling speakers for events and specialized training."
   },
   {
     icon: "badge",
     title: "Experienced Invigilators",
     iconColor: "text-red-800",
-    textColor: "text-gray-600",
     description: "All administrators and proctors at TEPTH are certified and highly trained to supervise various types of international exams with the highest level of professionalism."
   },
   {
     icon: "room_service",
     title: "Special Accommodation",
     iconColor: "text-red-800",
-    textColor: "text-indigo-600",
     description: "We can accommodate test-takers requiring extra time or private rooms for special needs, ensuring a fair and supportive testing environment for everyone."
   },
   {
     icon: "groups",
     title: "Seating Capacity",
     iconColor: "text-red-800",
-    textColor: "text-red-600",
     description: "With a total capacity of 140 workstations across three 40-seat computer rooms and a 20-seat classroom, we can administer exams for up to 140 candidates in a single session."
   }
 ];
+
 
 const reasons = [
   "Well-formed organization in Dubai licensed by Dubai Silicon Oasis Authority and permitted by KHDA.",
