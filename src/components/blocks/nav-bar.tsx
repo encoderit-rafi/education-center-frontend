@@ -144,8 +144,8 @@ export default function NavBar() {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="hidden md:flex h-8 w-8 hover:bg-red-50 hover:text-red-900 absolute left-0 top-1/2 !translate-y-[-50%] active:!translate-y-[-50%] z-10 bg-white/90 backdrop-blur-sm border-none shadow-md opacity-0 group-hover:opacity-100 disabled:hidden transition-opacity" />
-            <CarouselNext className="hidden md:flex h-8 w-8 hover:bg-red-50 hover:text-red-900 absolute right-0 top-1/2 !translate-y-[-50%] active:!translate-y-[-50%] z-10 bg-white/90 backdrop-blur-sm border-none shadow-md opacity-0 group-hover:opacity-100 disabled:hidden transition-opacity" />
+            <CarouselPrevious className="flex h-8 w-8 hover:bg-red-50 hover:text-red-900 absolute left-0 top-1/2 !translate-y-[-50%] active:!translate-y-[-50%] z-10 bg-white/90 backdrop-blur-sm border-none shadow-md disabled:hidden transition-opacity" />
+            <CarouselNext className="flex h-8 w-8 hover:bg-red-50 hover:text-red-900 absolute right-0 top-1/2 !translate-y-[-50%] active:!translate-y-[-50%] z-10 bg-white/90 backdrop-blur-sm border-none shadow-md disabled:hidden transition-opacity" />
           </Carousel>
         </div>
 
