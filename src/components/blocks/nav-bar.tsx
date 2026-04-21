@@ -50,7 +50,7 @@ const navItems = [
     label: "Test Dates", href: "/test-dates"
   },
   {
-    label: "Book a Test", href: "/book-a-test"
+    label: "Book Exam", href: "/book-a-test"
   },
   {
     label: "Free Consultation", href: "/free-consultation"
