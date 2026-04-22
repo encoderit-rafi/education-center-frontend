@@ -6,6 +6,11 @@ export interface Section {
   cardIds?: string[];
 }
 
+export interface Module {
+  title: string;
+  description: string;
+}
+
 export interface Course {
   id: string;
   category: string;
