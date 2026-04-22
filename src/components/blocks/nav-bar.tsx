@@ -34,8 +34,8 @@ const navItems = [
   {
     label: "Our Venues",
     children: [
-      { label: "360° Virtual Tour", href: "/our-venues" },
-      { label: "Book An Exam Venue", href: "/book-an-exam-venue" },
+      { label: "360° Virtual Tour", href: "/our-venues/360-degree-virtual-tour" },
+      { label: "Book An Exam Venue", href: "/our-venues/book-an-exam-venue" },
     ],
   },
   {
@@ -62,7 +62,13 @@ const navItems = [
     label: "Exam Special Accommodation", href: "/special-accommodation"
   },
   {
-    label: "Exam Delivery", href: "/exam-delivery"
+    label: "Exam Delivery",
+    children: [
+      { label: "Exam Provider", href: "/exam-delivery/exam-provider" },
+      { label: "Test Takers", href: "/exam-delivery/test-takers" },
+      { label: "Vendor", href: "/exam-delivery/vendor" },
+
+    ]
   },
   {
     label: "Exam Proctoring Services",
