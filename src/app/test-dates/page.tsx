@@ -141,12 +141,11 @@ export default function TestDatesPage() {
         <div className="max-w-7xl mx-auto">
           <div className="bg-white rounded-[2.5rem] overflow-hidden shadow-2xl shadow-secondary/5 border border-outline/5 transition-all">
             {/* Desktop Table Header */}
-            <div className="hidden md:grid grid-cols-6 gap-4 p-8 bg-secondary/[0.02] border-b border-outline/5 text-[10px] font-black text-secondary/30 uppercase tracking-[0.2em]">
+            <div className="hidden md:grid grid-cols-5 gap-4 p-8 bg-secondary/[0.02] border-b border-outline/5 text-[10px] font-black text-secondary/30 uppercase tracking-[0.2em]">
               <div className="col-span-2">Examination</div>
               <div>Date & Time</div>
               <div>Venue</div>
-              <div>Status</div>
-              <div className="text-right">Action</div>
+              <div className="text-right pr-4">Status</div>
             </div>
 
             <div className="divide-y divide-outline/5">
@@ -157,7 +156,7 @@ export default function TestDatesPage() {
                 return (
                   <div
                     key={slot.id}
-                    className="grid md:grid-cols-6 gap-6 md:gap-4 p-8 items-center group hover:bg-surface-container-lowest transition-colors"
+                    className="grid md:grid-cols-5 gap-6 md:gap-4 p-8 items-center group hover:bg-surface-container-lowest transition-colors"
                   >
                     {/* Exam Column */}
                     <div className="md:col-span-2 flex items-center gap-4">
@@ -196,7 +195,7 @@ export default function TestDatesPage() {
                     </div>
 
                     {/* Status Column */}
-                    <div>
+                    <div className="text-right pr-4">
                       <span
                         className={cn(
                           "text-[9px] font-black px-3 py-1.5 rounded-full uppercase tracking-widest",
@@ -210,32 +209,10 @@ export default function TestDatesPage() {
                         {slot.status}
                       </span>
                     </div>
-
-                    {/* Action Column */}
-                    <div className="text-right">
-                      <Link
-                        href={
-                          slot.status === "Closed"
-                            ? "#"
-                            : `/book-a-test?exam=${slot.examId}`
-                        }
-                        className={cn(
-                          "inline-block px-6 py-3 rounded-xl font-headline font-bold text-[10px] uppercase tracking-widest transition-all",
-                          slot.status === "Closed"
-                            ? "bg-slate-100 text-slate-300 cursor-not-allowed"
-                            : "bg-surface-container-low text-secondary hover:bg-primary hover:text-white shadow-sm",
-                        )}
-                      >
-                        {slot.status === "Closed"
-                          ? "Unavailable"
-                          : "Book This Seat"}
-                      </Link>
-                    </div>
                   </div>
                 );
               })}
             </div>
-
             {filteredSchedule.length === 0 && (
               <div className="p-20 text-center space-y-4">
                 <Calendar className="w-12 h-12 text-secondary/10 mx-auto" />
