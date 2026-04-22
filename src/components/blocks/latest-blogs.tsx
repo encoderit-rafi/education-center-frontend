@@ -2,6 +2,7 @@ import Image from "next/image";
 
 import { BLOGS } from "@/lib/blogs-data";
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 export default function LatestBlogs() {
 
@@ -9,10 +10,10 @@ export default function LatestBlogs() {
     <section className="py-24 px-8 bg-background">
       <div className="max-w-7xl mx-auto">
         <div className="mb-12">
-          <h2 className="text-sm font-bold text-primary tracking-widest uppercase mb-4">
+          <h2 className="text-sm font-bold text-[#A11D1D] tracking-widest uppercase mb-4">
             Latest from TEPTH
           </h2>
-          <h3 className="text-3xl font-headline font-extrabold text-secondary">
+          <h3 className="text-4xl font-headline font-extrabold text-slate-900 tracking-tight">
             Blogs
           </h3>
         </div>
@@ -47,15 +48,13 @@ export default function LatestBlogs() {
                   {blog.desc}
                 </p>
                 <div className="pt-2 mt-auto">
-                  <a
-                    className="inline-flex items-center gap-2 text-primary font-extrabold text-[11px] tracking-widest hover:gap-3 transition-all uppercase"
+                  <Link
+                    className="inline-flex items-center gap-2 text-primary font-extrabold text-sm tracking-widest hover:gap-3 transition-all uppercase"
                     href="/blogs"
                   >
                     Read More
-                    <span className="material-symbols-outlined text-sm">
-                      arrow_forward
-                    </span>
-                  </a>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                  </Link>
                 </div>
               </div>
             </div>

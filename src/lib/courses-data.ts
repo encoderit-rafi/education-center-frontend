@@ -46,7 +46,7 @@ export const COURSES: Course[] = [
     investment: "Starting from AED 1,850",
     level: "Intermediate/Advanced",
     format: "Classroom & Online",
-    image: "/images/study-group.png",
+    image: "/images/blogs/toefl-home.png",
     curriculum: [],
     eligibility: ["Intermediate skills required"],
     instructor: { name: "", role: "", bio: "", image: "" },

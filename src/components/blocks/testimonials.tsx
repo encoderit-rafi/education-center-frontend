@@ -12,38 +12,43 @@ export default function Testimonials() {
       name: "Elena Rodriguez",
       role: "Oxford Graduate Candidate",
       quote: `"TEPTH transformed my approach to the TOEFL. Their editorial insights into the reading section were a game changer for my score."`,
-      color: "bg-blue-100 text-blue-700"
+      color: "bg-blue-100 text-blue-700",
+      rating: 5
     },
     {
       name: "Marcus Chen",
       role: "LSE Scholarship Winner",
       quote: `"Finally a service that treats you like a person, not a number. The personalized feedback sessions gave me the confidence I needed to succeed."`,
-      color: "bg-red-100 text-red-700"
+      color: "bg-red-100 text-red-700",
+      rating: 4
     },
     {
       name: "Sarah Jenkins",
       role: "International MBA Applicant",
       quote: `"Professional, punctual, and premium. TEPTH is the gold standard for testing services. Highly recommended."`,
-      color: "bg-amber-100 text-amber-700"
+      color: "bg-amber-100 text-amber-700",
+      rating: 3
     },
     {
       name: "Marah belt",
       role: "International MBA Applicant",
       quote: `"Professional, punctual, and premium. TEPTH is the gold standard for testing services. Highly recommended."`,
-      color: "bg-amber-100 text-amber-700"
+      color: "bg-amber-100 text-amber-700",
+      rating: 5
     },
     {
       name: "Sarah jeams",
       role: "International MBA Applicant",
       quote: `"Professional, punctual, and premium. TEPTH is the gold standard for testing services. Highly recommended."`,
-      color: "bg-amber-100 text-amber-700"
+      color: "bg-amber-100 text-amber-700",
+      rating: 5
     }
   ];
 
   return (
     <section className="py-32 px-8 bg-surface-container-low overflow-hidden">
       <div className="max-w-7xl mx-auto text-center mb-16">
-        <h3 className="text-3xl font-headline font-bold text-secondary">
+        <h3 className="text-3xl font-headline font-bold text-primary">
           Trusted by Tomorrow's Leaders
         </h3>
       </div>
@@ -57,14 +62,21 @@ export default function Testimonials() {
         >
           <CarouselContent className="-ml-8">
             {testimonials.map((t, i) => (
-              <CarouselItem key={i} className="pl-8 md:basis-1/2 lg:basis-1/3">
-                <div className="h-full bg-surface p-10 rounded-3xl shadow-sm relative hover:-translate-y-2 transition-transform duration-300">
+              <CarouselItem key={i} className="pl-8 md:basis-1/2 lg:basis-1/3 mt-4 mb-4">
+                <div className="h-full bg-surface p-8  rounded-3xl shadow-sm relative hover:-translate-y-2 transition-transform duration-300">
                   <span className="material-symbols-outlined text-6xl text-gray-100 absolute -top-4 left-6 opacity-50">
                     format_quote
                   </span>
                   <p className="text-on-surface text-lg italic leading-relaxed mb-8 relative z-10">
                     {t.quote}
                   </p>
+                  <div className="flex gap-0.5 mb-6 relative z-10">
+                    {[...Array(t.rating)].map((_, i) => (
+                      <span key={i} className="material-symbols-outlined text-amber-400 text-xl" style={{ fontVariationSettings: "'FILL' 1" }}>
+                        star
+                      </span>
+                    ))}
+                  </div>
                   <div className="flex items-center gap-4">
                     <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg ${t.color}`}>
                       {t.name.charAt(0)}
