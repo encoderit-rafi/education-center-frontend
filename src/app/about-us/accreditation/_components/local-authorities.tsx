@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { Cpu, GraduationCap, CheckCircle2 } from "lucide-react";
 
 export function LocalAuthorities() {
   return (
@@ -9,9 +10,14 @@ export function LocalAuthorities() {
           {/* Dubai Silicon Oasis Authority (DSOA) */}
           <div className="space-y-8">
             <div className="flex flex-col gap-6">
-              <h2 className="text-2xl font-bold text-[#111827] font-heading tracking-tight">
-                DUBAI SILICON OASIS AUTHORITY (DSOA)
-              </h2>
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-[#00A3E0]/10 rounded-xl flex items-center justify-center">
+                  <Cpu className="w-6 h-6 text-[#00A3E0]" />
+                </div>
+                <h2 className="text-2xl font-bold text-[#111827] font-heading tracking-tight">
+                  DUBAI SILICON OASIS AUTHORITY (DSOA)
+                </h2>
+              </div>
               {/* Logo Placeholder - Modern Abstract Version */}
               <div className="flex items-center gap-2">
                 <div className="flex gap-2">
@@ -35,7 +41,8 @@ export function LocalAuthorities() {
               <p>
                 A full package of incentives and benefits are provided to companies operating within the free zone. Dubai Silicon Oasis is designed as a hi-tech ecosystem which offers businesses a plethora of advantages including a state-of-the-art infrastructure, in-house business services and strong business support such as technology investment incentives for large enterprises, entrepreneurial support, an incubation center and venture capital funding.
               </p>
-              <p className="font-bold text-[#A11D1D]">
+              <p className="font-bold text-[#A11D1D] flex items-center gap-2">
+                <CheckCircle2 className="w-5 h-5" />
                 We are proud at TEPTH to be accredited with this high tech ecosystem.
               </p>
             </div>
@@ -44,10 +51,17 @@ export function LocalAuthorities() {
           {/* Knowledge & Human Development Authority (KHDA) */}
           <div className="space-y-8">
             <div className="space-y-4">
-              <h2 className="text-3xl md:text-4xl font-extrabold text-[#A11D1D] font-heading leading-tight tracking-tight">
-                KNOWLEDGE & HUMAN <br />
-                DEVELOPMENT AUTHORITY (KHDA)
-              </h2>
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-12 h-12 bg-[#A11D1D]/10 rounded-xl flex items-center justify-center">
+                  <GraduationCap className="w-6 h-6 text-[#A11D1D]" />
+                </div>
+                <h2 className="text-3xl md:text-4xl font-extrabold text-[#A11D1D] font-heading leading-tight tracking-tight">
+                  KHDA ACCREDITED
+                </h2>
+              </div>
+              <h3 className="text-xl font-bold text-[#1F1F1F] font-heading">
+                KNOWLEDGE & HUMAN DEVELOPMENT AUTHORITY
+              </h3>
             </div>
             
             <div className="space-y-6 text-gray-600 leading-relaxed text-sm md:text-base">
@@ -57,7 +71,8 @@ export function LocalAuthorities() {
               <p>
                 The KHDA has set high standards of quality of education and it ensures that they are met in the Dubai region. The KHDA supports schools, universities, students, parents, investors and educators to give birth to a high quality education sector that is highly focused on wellbeing and happiness.
               </p>
-              <p>
+              <p className="flex items-center gap-2 font-medium">
+                <CheckCircle2 className="w-5 h-5 text-[#A11D1D]" />
                 We feel honored to be accredited by KHDA and this only makes us even more credible and trustworthy.
               </p>
             </div>
@@ -66,7 +81,7 @@ export function LocalAuthorities() {
             <div className="pt-8 flex items-center gap-6">
               <div className="w-20 h-20 rounded-full border-2 border-[#A11D1D]/20 flex items-center justify-center">
                 <div className="w-14 h-14 rounded-full bg-[#A11D1D]/10 flex items-center justify-center">
-                  <div className="text-[#A11D1D] font-black text-xl italic font-heading">KHDA</div>
+                  <GraduationCap className="w-8 h-8 text-[#A11D1D]" />
                 </div>
               </div>
               <div>

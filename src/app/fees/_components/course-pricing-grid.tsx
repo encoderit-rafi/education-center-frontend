@@ -4,14 +4,25 @@ import React from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
-const COURSE_DATA = [
+import { Users, UserRound, User, CheckCircle2, type LucideIcon } from "lucide-react";
+
+const COURSE_DATA: {
+  id: string;
+  name: string;
+  category: string;
+  description: string;
+  price: string;
+  icon: LucideIcon;
+  details: string[];
+  theme: "light" | "dark";
+}[] = [
   {
     id: "group",
     name: "Group Course",
     category: "Standard Training",
     description: "Standardized classroom training for collective excellence.",
     price: "1,850",
-    icon: "groups",
+    icon: Users,
     details: [
       "Delivery Type: Classroom",
       "Term/Duration: 6 Weeks",
@@ -26,7 +37,7 @@ const COURSE_DATA = [
     category: "Small Group",
     description: "Personalized attention in small focused groups.",
     price: "2,850",
-    icon: "group",
+    icon: UserRound,
     details: [
       "Delivery Type: Classroom",
       "Term/Duration: 3 Weeks",
@@ -41,7 +52,7 @@ const COURSE_DATA = [
     category: "1-on-1 Focus",
     description: "Exclusive 1-on-1 tutoring tailored to your pace.",
     price: "4,850",
-    icon: "person",
+    icon: User,
     details: [
       "Delivery Type: Classroom",
       "Term/Duration: 3 Weeks",
@@ -74,15 +85,12 @@ export function CoursePricingGrid() {
                 "p-4 rounded-2xl",
                 plan.theme === "dark" ? "bg-[#991B1B]" : "bg-[#991B1B]/5"
               )}>
-                <span
+                <plan.icon
                   className={cn(
-                    "material-symbols-outlined text-4xl",
+                    "w-8 h-8",
                     plan.theme === "dark" ? "text-white" : "text-[#991B1B]"
                   )}
-                  style={{ fontVariationSettings: "'FILL' 1" }}
-                >
-                  {plan.icon}
-                </span>
+                />
               </div>
             </div>
 
@@ -106,9 +114,7 @@ export function CoursePricingGrid() {
             )}>
               {plan.details.map((detail, index) => (
                 <li key={index} className="flex items-center gap-3 text-sm font-medium">
-                  <span className="text-[#991B1B] material-symbols-outlined text-xl" style={plan.theme === "dark" ? { fontVariationSettings: "'FILL' 1" } : {}}>
-                    check_circle
-                  </span>
+                  <CheckCircle2 className="text-[#991B1B] w-5 h-5" />
                   <span className={plan.theme === "dark" ? "text-slate-300" : "text-[#4B5563]"}>
                     {detail}
                   </span>

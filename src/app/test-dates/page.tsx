@@ -4,6 +4,7 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { TEST_SCHEDULE, VENUES, EXAMS } from "@/lib/exams-data";
 import Link from "next/link";
+import { CheckCircle2, X, Calendar, FileQuestion } from "lucide-react";
 
 export default function TestDatesPage() {
   const [filter, setFilter] = useState("All");
@@ -85,9 +86,7 @@ export default function TestDatesPage() {
               >
                 {selectedExamId === exam.id && (
                   <div className="absolute top-0 right-0 p-4">
-                    <span className="material-symbols-outlined text-primary text-xl font-black">
-                      check_circle
-                    </span>
+                    <CheckCircle2 className="text-primary w-5 h-5" />
                   </div>
                 )}
                 <div
@@ -98,9 +97,7 @@ export default function TestDatesPage() {
                       : "bg-white text-secondary group-hover:bg-primary group-hover:text-white group-hover:rotate-3 shadow-sm",
                   )}
                 >
-                  <span className="material-symbols-outlined text-2xl">
-                    {exam.icon}
-                  </span>
+                  <exam.icon className="w-7 h-7" />
                 </div>
                 <h3
                   className={cn(
@@ -132,7 +129,7 @@ export default function TestDatesPage() {
               onClick={() => setSelectedExamId(null)}
               className="text-[10px] font-black text-primary uppercase tracking-widest hover:underline flex items-center gap-2"
             >
-              <span className="material-symbols-outlined text-sm">close</span>
+              <X className="w-3 h-3" />
               Clear Filter
             </button>
           )}
@@ -165,9 +162,11 @@ export default function TestDatesPage() {
                     {/* Exam Column */}
                     <div className="md:col-span-2 flex items-center gap-4">
                       <div className="w-12 h-12 rounded-2xl bg-primary/5 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
-                        <span className="material-symbols-outlined">
-                          {exam?.icon || "quiz"}
-                        </span>
+                        {exam ? (
+                          <exam.icon className="w-5 h-5" />
+                        ) : (
+                          <FileQuestion className="w-5 h-5" />
+                        )}
                       </div>
                       <div>
                         <h4 className="font-extrabold text-secondary text-base leading-tight group-hover:text-primary transition-colors">
@@ -239,9 +238,7 @@ export default function TestDatesPage() {
 
             {filteredSchedule.length === 0 && (
               <div className="p-20 text-center space-y-4">
-                <span className="material-symbols-outlined text-5xl text-secondary/10">
-                  calendar_today
-                </span>
+                <Calendar className="w-12 h-12 text-secondary/10 mx-auto" />
                 <p className="text-secondary/40 font-bold uppercase tracking-widest text-xs">
                   No sessions found for this category
                 </p>

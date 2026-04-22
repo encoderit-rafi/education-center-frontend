@@ -6,6 +6,7 @@ import * as z from "zod";
 import { Field, FieldError } from "@/components/ui/field";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { CheckCircle2, UploadCloud, Loader2 } from "lucide-react";
 
 const inquirySchema = z.object({
   name: z.string().min(2, { message: "Name is required." }),
@@ -50,7 +51,7 @@ export default function SpecialAccommodationForm() {
   if (isSuccess) {
     return (
       <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl p-10 text-center space-y-4 shadow-sm h-full flex flex-col items-center justify-center">
-        <span className="material-symbols-outlined text-6xl text-emerald-500">check_circle</span>
+        <CheckCircle2 className="w-16 h-16 text-emerald-500" />
         <h2 className="text-2xl font-bold font-headline text-secondary">Inquiry Received</h2>
         <p className="text-emerald-700 text-sm">
           We have securely received your special accommodation request. Our support team will review your requirements and reach out within 48 hours.
@@ -113,9 +114,7 @@ export default function SpecialAccommodationForm() {
       </Field>
 
       <div className="relative my-8 p-6 border-2 border-dashed border-red-200 hover:border-primary transition-colors rounded-xl flex flex-col items-center text-center bg-white/50 group cursor-pointer overflow-hidden">
-        <span className="material-symbols-outlined text-4xl text-neutral-300 group-hover:text-primary transition-colors mb-2">
-          cloud_upload
-        </span>
+        <UploadCloud className="w-10 h-10 text-neutral-300 group-hover:text-primary transition-colors mb-2" />
         <p className="font-bold text-on-surface text-sm mb-1 truncate max-w-full">
           {fileName ? <span className="text-primary">{fileName}</span> : "Secure Document Portal"}
         </p>
@@ -142,7 +141,7 @@ export default function SpecialAccommodationForm() {
         className="w-full bg-primary text-white font-bold py-3 rounded-lg hover:bg-red-800 transition-colors text-sm shadow-md disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center"
       >
         {isSubmitting ? (
-          <span className="material-symbols-outlined animate-spin mr-2">progress_activity</span>
+          <Loader2 className="w-5 h-5 animate-spin mr-2" />
         ) : null}
         {isSubmitting ? "Sending Inquiry..." : "Send Inquiry"}
       </button>

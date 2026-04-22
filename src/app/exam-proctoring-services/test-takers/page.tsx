@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { ArrowRight, MapPin, CheckCircle2, Monitor, Phone, Mail } from "lucide-react";
 
 export default function TestTakers() {
   return (
@@ -30,7 +31,7 @@ export default function TestTakers() {
               </Link>
               <button className="text-primary font-bold px-8 py-4 flex items-center gap-2 group transition-all hover:translate-x-1">
                 View Requirements
-                <span className="material-symbols-outlined transition-transform group-hover:translate-x-1">arrow_forward</span>
+                <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
               </button>
             </div>
           </div>
@@ -59,8 +60,8 @@ export default function TestTakers() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* On-site */}
               <div className="bg-surface p-12 rounded-xl flex flex-col gap-8 hover:shadow-xl transition-all duration-300 border border-outline/5">
-                <div className="w-16 h-16 bg-surface-container-high rounded-lg flex items-center justify-center text-primary">
-                  <span className="material-symbols-outlined text-3xl">location_on</span>
+               <div className="w-16 h-16 bg-surface-container-high rounded-lg flex items-center justify-center text-primary">
+                  <MapPin className="w-8 h-8" />
                 </div>
                 <div>
                   <h3 className="text-2xl font-bold mb-4 font-headline text-on-surface">On-site Proctoring</h3>
@@ -68,21 +69,21 @@ export default function TestTakers() {
                     Our physical testing centers offer a secure, quiet, and professional environment. Equipped with high-speed internet, premium workstations, and continuous surveillance, we ensure every test is conducted under optimal academic conditions.
                   </p>
                 </div>
-                <ul className="space-y-4">
+                 <ul className="space-y-4">
                   <li className="flex items-center gap-3 text-sm font-semibold text-on-surface">
-                    <span className="material-symbols-outlined text-primary text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
+                    <CheckCircle2 className="text-primary w-4 h-4" />
                     Distraction-free workstations
                   </li>
                   <li className="flex items-center gap-3 text-sm font-semibold text-on-surface">
-                    <span className="material-symbols-outlined text-primary text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
+                    <CheckCircle2 className="text-primary w-4 h-4" />
                     Biometric identity verification
                   </li>
                 </ul>
               </div>
               {/* Live Online */}
-              <div className="bg-primary text-white p-12 rounded-xl flex flex-col gap-8 shadow-xl shadow-primary/20">
+               <div className="bg-primary text-white p-12 rounded-xl flex flex-col gap-8 shadow-xl shadow-primary/20">
                 <div className="w-16 h-16 bg-white/10 rounded-lg flex items-center justify-center">
-                  <span className="material-symbols-outlined text-3xl">monitor</span>
+                  <Monitor className="w-8 h-8" />
                 </div>
                 <div>
                   <h3 className="text-2xl font-bold mb-4 font-headline">Live Online Proctoring</h3>
@@ -90,13 +91,13 @@ export default function TestTakers() {
                     Global flexibility meets local security. Our AI-enhanced live remote proctoring allows candidates to take their exams from anywhere in the world while maintaining the highest levels of integrity via real-time audiovisual monitoring.
                   </p>
                 </div>
-                <ul className="space-y-4">
+                 <ul className="space-y-4">
                   <li className="flex items-center gap-3 text-sm font-semibold">
-                    <span className="material-symbols-outlined text-white/60 text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
+                    <CheckCircle2 className="text-white/60 w-4 h-4" />
                     Multi-cam desktop monitoring
                   </li>
                   <li className="flex items-center gap-3 text-sm font-semibold">
-                    <span className="material-symbols-outlined text-white/60 text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
+                    <CheckCircle2 className="text-white/60 w-4 h-4" />
                     Intelligent fraud detection
                   </li>
                 </ul>
@@ -183,7 +184,7 @@ export default function TestTakers() {
                 <div className="space-y-6">
                   <div className="flex items-center gap-6 text-white group p-4 rounded-xl hover:bg-white/5 transition-colors">
                     <div className="bg-primary/20 p-3 rounded-full">
-                      <span className="material-symbols-outlined text-primary-fixed">call</span>
+                      <Phone className="w-6 h-6 text-primary-fixed" />
                     </div>
                     <div>
                       <p className="text-xs uppercase tracking-widest text-primary-fixed font-bold mb-1">Call Us</p>
@@ -192,7 +193,7 @@ export default function TestTakers() {
                   </div>
                   <div className="flex items-center gap-6 text-white group p-4 rounded-xl hover:bg-white/5 transition-colors">
                     <div className="bg-primary/20 p-3 rounded-full">
-                      <span className="material-symbols-outlined text-primary-fixed">mail</span>
+                      <Mail className="w-6 h-6 text-primary-fixed" />
                     </div>
                     <div>
                       <p className="text-xs uppercase tracking-widest text-primary-fixed font-bold mb-1">Email Us</p>

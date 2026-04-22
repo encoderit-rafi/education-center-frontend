@@ -1,4 +1,4 @@
- "use client";
+"use client";
 
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -16,6 +16,8 @@ import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Calendar } from "@/components/ui/calendar";
 import Payment from "@/components/blocks/payment";
+
+import { CheckCircle2, Info, ArrowRight } from "lucide-react";
 
 const MOCK_TESTS = [
   {
@@ -105,11 +107,11 @@ export default function MockTestBookingForm({ courseTitle, mode, className }: Mo
   const isCourseMode = !!courseTitle;
 
   // Determine which options to show
-  const availableOptions = isCourseMode 
+  const availableOptions = isCourseMode
     ? COURSE_OPTIONS.filter(opt => {
-        if (mode?.toLowerCase().includes("online")) return opt.category === "Online";
-        return opt.category === "Classroom";
-      })
+      if (mode?.toLowerCase().includes("online")) return opt.category === "Online";
+      return opt.category === "Classroom";
+    })
     : MOCK_TESTS;
 
   const {
@@ -121,12 +123,12 @@ export default function MockTestBookingForm({ courseTitle, mode, className }: Mo
   } = useForm<BookingValues>({
     resolver: zodResolver(bookingSchema),
     defaultValues: {
-      selectionId: isCourseMode 
-        ? availableOptions[0]?.id 
-        : (courseTitle?.toLowerCase().includes("ielts") ? "ielts" : 
-           courseTitle?.toLowerCase().includes("oet") ? "oet" : 
-           courseTitle?.toLowerCase().includes("pte") ? "pte" : 
-           availableOptions[0]?.id),
+      selectionId: isCourseMode
+        ? availableOptions[0]?.id
+        : (courseTitle?.toLowerCase().includes("ielts") ? "ielts" :
+          courseTitle?.toLowerCase().includes("oet") ? "oet" :
+            courseTitle?.toLowerCase().includes("pte") ? "pte" :
+              availableOptions[0]?.id),
       paymentMethod: "card",
     },
   });
@@ -142,15 +144,13 @@ export default function MockTestBookingForm({ courseTitle, mode, className }: Mo
     setIsSuccess(true);
   };
 
-  const currency = isCourseMode ? "AED" : "$";
+  const currency = "AED";
 
   if (isSuccess) {
     return (
       <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-[3rem] p-16 text-center space-y-8 max-w-2xl mx-auto shadow-2xl animate-in zoom-in-95 duration-500">
         <div className="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mx-auto">
-          <span className="material-symbols-outlined text-4xl text-emerald-600 font-bold">
-            check_circle
-          </span>
+          <CheckCircle2 className="w-10 h-10 text-emerald-600" />
         </div>
         <div className="space-y-4">
           <h2 className="text-4xl font-headline font-black text-emerald-900 tracking-tight">
@@ -241,9 +241,7 @@ export default function MockTestBookingForm({ courseTitle, mode, className }: Mo
                       )}
                     >
                       {selectedId === item.id && (
-                        <span className="material-symbols-outlined text-sm">
-                          check_circle
-                        </span>
+                        <CheckCircle2 className="w-4 h-4" />
                       )}
                       {selectedId === item.id ? "Selected" : "Select"}
                     </div>
@@ -350,9 +348,7 @@ export default function MockTestBookingForm({ courseTitle, mode, className }: Mo
               </Field>
 
               <div className="p-6 bg-primary/5 rounded-2xl flex items-start gap-4 mt-12">
-                <span className="material-symbols-outlined text-primary text-xl mt-0.5">
-                  info
-                </span>
+                <Info className="text-primary w-5 h-5 mt-0.5" />
                 <p className="text-xs text-on-surface-variant font-medium leading-relaxed">
                   We will send your {isCourseMode ? "access" : "testing"} credentials and link to this
                   email address 24 hours before your selected slot.
@@ -380,7 +376,7 @@ export default function MockTestBookingForm({ courseTitle, mode, className }: Mo
               className="w-full bg-primary text-white font-headline font-black py-6 rounded-[2rem] text-sm uppercase tracking-[0.3em] shadow-2xl shadow-primary/20 hover:bg-secondary transition-all active:scale-[0.98] flex items-center justify-center gap-3"
             >
               Confirm & Pay
-              <span className="material-symbols-outlined">arrow_forward</span>
+              <ArrowRight className="w-5 h-5" />
             </button>
           </div>
         </section>
@@ -433,7 +429,7 @@ export default function MockTestBookingForm({ courseTitle, mode, className }: Mo
                 Total Investment
               </span>
               <div className="flex items-baseline gap-1">
-                <span className="text-sm font-bold text-primary">{currency}</span>
+                <span className="text-xl font-bold text-primary">AED</span>
                 <span className="text-5xl font-headline font-black text-white tracking-tighter">
                   {selectedItem?.price.toLocaleString()}
                 </span>

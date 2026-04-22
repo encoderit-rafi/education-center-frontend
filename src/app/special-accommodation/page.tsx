@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import SpecialAccommodationForm from "@/components/blocks/special-accommodation-form";
+import { BadgeCheck, Timer, ArrowRight, Eye, DoorOpen, Users } from "lucide-react";
 
 export default function SpecialAccommodation() {
   return (
@@ -42,7 +43,7 @@ export default function SpecialAccommodation() {
               </div>
               <div className="absolute -bottom-8 -left-8 bg-white p-6 rounded-xl shadow-xl max-w-[240px] z-20">
                 <div className="flex items-center gap-3 mb-2">
-                  <span className="material-symbols-outlined text-primary">verified</span>
+                  <BadgeCheck className="text-primary w-5 h-5" />
                   <span className="font-bold text-sm text-secondary">Certified Support</span>
                 </div>
                 <p className="text-xs text-slate-500 leading-relaxed">
@@ -68,9 +69,7 @@ export default function SpecialAccommodation() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="md:col-span-2 bg-white shadow-sm p-10 rounded-xl flex flex-col justify-between group hover:bg-primary transition-colors duration-500 border border-slate-100 hover:border-primary">
               <div>
-                <span className="material-symbols-outlined text-4xl text-primary group-hover:text-white transition-colors mb-6">
-                  schedule
-                </span>
+                <Timer className="w-10 h-10 mb-6 text-primary group-hover:text-white transition-colors" />
                 <h3 className="text-2xl font-bold mb-4 group-hover:text-white transition-colors text-secondary">
                   Additional Time
                 </h3>
@@ -80,12 +79,12 @@ export default function SpecialAccommodation() {
               </div>
               <div className="mt-8">
                 <a className="text-primary font-bold group-hover:text-white flex items-center gap-2" href="#">
-                  Learn more <span className="material-symbols-outlined">arrow_forward</span>
+                  Learn more <ArrowRight className="w-4 h-4" />
                 </a>
               </div>
             </div>
             <div className="bg-red-50 p-10 rounded-xl flex flex-col group hover:shadow-xl transition-all border border-red-100">
-              <span className="material-symbols-outlined text-4xl text-primary mb-6">visibility</span>
+              <Eye className="w-10 h-10 mb-6 text-primary" />
               <h3 className="text-2xl font-bold mb-4 text-secondary">Visual Aids</h3>
               <p className="text-slate-600 leading-relaxed mb-6">
                 Large print papers, Braille versions, and screen magnifier software for candidates with varying degrees of visual impairment.
@@ -95,7 +94,7 @@ export default function SpecialAccommodation() {
               </div>
             </div>
             <div className="bg-white p-10 rounded-xl shadow-sm flex flex-col group border border-slate-100 border-b-4 border-b-transparent hover:border-b-primary transition-all">
-              <span className="material-symbols-outlined text-4xl text-primary mb-6">door_front</span>
+              <DoorOpen className="w-10 h-10 mb-6 text-primary" />
               <h3 className="text-2xl font-bold mb-4 text-secondary">Private Room</h3>
               <p className="text-slate-500 leading-relaxed">
                 Distraction-free environments for candidates requiring specialized medical equipment or frequent breaks.
@@ -121,9 +120,7 @@ export default function SpecialAccommodation() {
                   </div>
                 </div>
               </div>
-              <span className="material-symbols-outlined absolute -right-8 -bottom-8 text-[200px] opacity-10 rotate-12">
-                groups
-              </span>
+              <Users className="absolute -right-8 -bottom-8 w-40 h-40 opacity-10 rotate-12" />
             </div>
           </div>
         </div>

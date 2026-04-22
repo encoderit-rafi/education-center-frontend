@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { ShieldCheck, Monitor, BrainCircuit, Headphones, Globe2 } from "lucide-react";
 
 export default function ExamProviderPage() {
   return (
@@ -50,7 +51,7 @@ export default function ExamProviderPage() {
               <div className="absolute bottom-6 left-6 right-6 bg-white/70 backdrop-blur-xl p-6 rounded-xl border border-white/40">
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white">
-                    <span className="material-symbols-outlined">verified_user</span>
+                    <ShieldCheck className="w-6 h-6" />
                   </div>
                   <div>
                     <h4 className="font-bold text-slate-900">ISO 27001 Certified</h4>
@@ -73,7 +74,7 @@ export default function ExamProviderPage() {
           {/* Large Feature */}
           <div className="md:col-span-2 bg-white p-12 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between">
             <div>
-              <span className="material-symbols-outlined text-5xl text-primary mb-6">desktop_windows</span>
+              <Monitor className="w-12 h-12 text-primary mb-6" />
               <h3 className="text-3xl font-bold mb-4 text-slate-900">Scale Without Compromise</h3>
               <p className="text-lg text-slate-600 max-w-lg">
                 Our primary testing atelier features 140 high-performance workstations, each equipped with noise-canceling peripherals and privacy-optimized spatial design.
@@ -96,7 +97,7 @@ export default function ExamProviderPage() {
           </div>
           {/* Secondary Feature */}
           <div className="bg-primary p-12 rounded-2xl text-white flex flex-col justify-center shadow-xl shadow-primary/10">
-            <span className="material-symbols-outlined text-6xl mb-8">psychology</span>
+            <BrainCircuit className="w-14 h-14 mb-8" />
             <h3 className="text-2xl font-bold mb-4">AI-Powered Proctoring</h3>
             <p className="opacity-80 leading-relaxed">
               Integrate cutting-edge biometrics and behavioral AI monitoring that meet the most rigorous international integrity standards for high-stakes examinations.
@@ -104,17 +105,17 @@ export default function ExamProviderPage() {
           </div>
           {/* Three Small Service Highlight Cards */}
           <div className="bg-slate-50 p-8 rounded-2xl border border-primary/5">
-            <span className="material-symbols-outlined text-primary text-3xl mb-4">support_agent</span>
+            <Headphones className="text-primary w-8 h-8 mb-4" />
             <h4 className="font-bold text-xl mb-2 text-slate-900">24/7 Tech Support</h4>
             <p className="text-sm text-slate-600">Round-the-clock specialized engineering teams standing by for every session.</p>
           </div>
           <div className="bg-slate-50 p-8 rounded-2xl border border-primary/5">
-            <span className="material-symbols-outlined text-primary text-3xl mb-4">security</span>
+            <ShieldCheck className="text-primary w-8 h-8 mb-4" />
             <h4 className="font-bold text-xl mb-2 text-slate-900">Military-Grade Security</h4>
             <p className="text-sm text-slate-600">End-to-end encryption and physical security protocols that exceed global norms.</p>
           </div>
           <div className="bg-slate-50 p-8 rounded-2xl border border-primary/5">
-            <span className="material-symbols-outlined text-primary text-3xl mb-4">public</span>
+            <Globe2 className="text-primary w-8 h-8 mb-4" />
             <h4 className="font-bold text-xl mb-2 text-slate-900">Global Accreditation</h4>
             <p className="text-sm text-slate-600">Recognized by major international exam boards and academic accreditation bodies.</p>
           </div>

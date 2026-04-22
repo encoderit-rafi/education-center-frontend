@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { BadgeCheck, CalendarCheck, ArrowRight, CreditCard, MapPin, Monitor, Armchair, Headphones, ChevronDown } from "lucide-react";
 
 export default function TestTakersPage() {
     return (
@@ -41,9 +42,7 @@ export default function TestTakersPage() {
                             />
                         </div>
                         <div className="absolute -bottom-8 -left-8 bg-white p-6 rounded-xl shadow-xl flex items-center gap-4 border border-slate-100">
-                            <span className="material-symbols-outlined text-primary text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>
-                                verified
-                            </span>
+                            <BadgeCheck className="text-primary w-10 h-10" />
                             <div>
                                 <p className="font-bold text-slate-900 text-sm">98% Success Rate</p>
                                 <p className="text-xs text-slate-500">Candidate Satisfaction Score</p>
@@ -58,24 +57,22 @@ export default function TestTakersPage() {
                 <div className="max-w-screen-2xl mx-auto px-8">
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                         <div className="md:col-span-2 bg-white p-10 rounded-xl group hover:bg-primary transition-all duration-500 border border-slate-100">
-                            <span className="material-symbols-outlined text-primary text-5xl mb-6 group-hover:text-white transition-colors">
-                                event_available
-                            </span>
+                            <CalendarCheck className="w-12 h-12 text-primary group-hover:text-white transition-colors mb-6" />
                             <h3 className="text-2xl font-bold mb-4 group-hover:text-white">Seamless Booking</h3>
                             <p className="text-slate-600 group-hover:text-white/80 mb-6">
                                 Choose from over 50 global locations with real-time slot availability and instant confirmation.
                             </p>
                             <Link href="#" className="text-primary font-bold group-hover:text-white flex items-center gap-2">
-                                Find a slot <span className="material-symbols-outlined">arrow_forward</span>
+                                Find a slot <ArrowRight className="w-4 h-4" />
                             </Link>
                         </div>
                         <div className="bg-white p-10 rounded-xl hover:shadow-xl transition-all border border-slate-100">
-                            <span className="material-symbols-outlined text-primary text-4xl mb-4">payments</span>
+                            <CreditCard className="w-10 h-10 text-primary mb-4" />
                             <h3 className="text-xl font-bold mb-2 text-slate-900">Transparent Fees</h3>
                             <p className="text-sm text-slate-600">No hidden costs. All-inclusive pricing for tests and initial results.</p>
                         </div>
                         <div className="bg-white p-10 rounded-xl hover:shadow-xl transition-all border border-slate-100">
-                            <span className="material-symbols-outlined text-primary text-4xl mb-4">location_on</span>
+                            <MapPin className="w-10 h-10 text-primary mb-4" />
                             <h3 className="text-xl font-bold mb-2 text-slate-900">Premium Venues</h3>
                             <p className="text-sm text-slate-600">Strategically located centers with excellent transport links.</p>
                         </div>
@@ -107,7 +104,9 @@ export default function TestTakersPage() {
                                 />
                             </div>
                             <h4 className="text-2xl font-bold flex items-center gap-3 text-slate-900">
-                                <span className="bg-primary/5 p-2 rounded-lg material-symbols-outlined text-primary">desktop_windows</span>
+                                <div className="bg-primary/5 p-2 rounded-lg">
+                                    <Monitor className="w-6 h-6 text-primary" />
+                                </div>
                                 Advanced Technology
                             </h4>
                             <p className="text-slate-600 leading-relaxed">
@@ -124,7 +123,9 @@ export default function TestTakersPage() {
                                 />
                             </div>
                             <h4 className="text-2xl font-bold flex items-center gap-3 text-slate-900">
-                                <span className="bg-primary/5 p-2 rounded-lg material-symbols-outlined text-primary">chair</span>
+                                <div className="bg-primary/5 p-2 rounded-lg">
+                                    <Armchair className="w-6 h-6 text-primary" />
+                                </div>
                                 Ergonomic Excellence
                             </h4>
                             <p className="text-slate-600 leading-relaxed">
@@ -141,7 +142,9 @@ export default function TestTakersPage() {
                                 />
                             </div>
                             <h4 className="text-2xl font-bold flex items-center gap-3 text-slate-900">
-                                <span className="bg-primary/5 p-2 rounded-lg material-symbols-outlined text-primary">concierge</span>
+                                <div className="bg-primary/5 p-2 rounded-lg">
+                                    <Headphones className="w-6 h-6 text-primary" />
+                                </div>
                                 Instant Concierge
                             </h4>
                             <p className="text-slate-600 leading-relaxed">
@@ -163,7 +166,7 @@ export default function TestTakersPage() {
                         <div className="bg-white p-8 rounded-xl border border-slate-100 shadow-sm">
                             <h4 className="text-lg font-bold text-primary mb-2 flex items-center justify-between">
                                 What ID is required?
-                                <span className="material-symbols-outlined">expand_more</span>
+                                <ChevronDown className="w-5 h-5" />
                             </h4>
                             <p className="text-slate-600 leading-relaxed">
                                 You must bring a valid, original government-issued ID (Passport or National Identity Card). Digital copies or photocopies are strictly not accepted.
@@ -172,7 +175,7 @@ export default function TestTakersPage() {
                         <div className="bg-white p-8 rounded-xl border border-slate-100 shadow-sm">
                             <h4 className="text-lg font-bold text-primary mb-2 flex items-center justify-between">
                                 When should I arrive?
-                                <span className="material-symbols-outlined">expand_more</span>
+                                <ChevronDown className="w-5 h-5" />
                             </h4>
                             <p className="text-slate-600 leading-relaxed">
                                 We recommend arriving at least 45 minutes before your scheduled start time. This allows for mandatory security checks and orientation.
@@ -181,7 +184,7 @@ export default function TestTakersPage() {
                         <div className="bg-white p-8 rounded-xl border border-slate-100 shadow-sm">
                             <h4 className="text-lg font-bold text-primary mb-2 flex items-center justify-between">
                                 Are lockers provided?
-                                <span className="material-symbols-outlined">expand_more</span>
+                                <ChevronDown className="w-5 h-5" />
                             </h4>
                             <p className="text-slate-600 leading-relaxed">
                                 Yes, individual secure lockers are provided for personal belongings. No electronics or study materials are permitted inside the testing hall.

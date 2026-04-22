@@ -7,26 +7,27 @@ import {
     CardFooter,
     CardHeader,
 } from "@/components/ui/card";
+import { FileText, XCircle, ClipboardList, Download } from "lucide-react";
 
 const FORMS = [
     {
         title: "PTE-A",
         subtitle: "Registration Form",
-        icon: "description",
+        icon: FileText,
         href: "#",
         description: "Download the official Pearson Test of English Academic registration forms.",
     },
     {
         title: "TEPTH CANCELLATION",
         subtitle: "Request Form",
-        icon: "cancel",
+        icon: XCircle,
         href: "#",
         description: "Official form for course or exam cancellation and refund requests.",
     },
     {
         title: "TOEFL IBT REGISTRATION",
         subtitle: "Registration Form",
-        icon: "assignment",
+        icon: ClipboardList,
         href: "#",
         description: "Complete your TOEFL iBT registration with the official TEPTH documentation.",
     },
@@ -93,9 +94,7 @@ export default function DownloadFormsPage() {
 
                                 <CardHeader className="pt-10 pb-2">
                                     <div className="w-14 h-14 bg-gray-50 rounded-full flex items-center justify-center mb-8 group-hover:bg-red-50 transition-colors">
-                                        <span className="material-symbols-outlined text-3xl text-gray-400 group-hover:text-[#A11D1D]">
-                                            {form.icon}
-                                        </span>
+                                        <form.icon className="w-7 h-7 text-gray-400 group-hover:text-[#A11D1D]" />
                                     </div>
                                     <h3 className="text-sm font-black text-[#A11D1D] uppercase tracking-widest mb-1">
                                         {form.subtitle}
@@ -116,7 +115,7 @@ export default function DownloadFormsPage() {
                                         href={form.href}
                                         className="w-full inline-flex items-center justify-center gap-2 px-6 py-4 bg-gray-900 text-white text-xs font-black uppercase tracking-widest rounded-sm transition-all hover:bg-[#A11D1D] hover:shadow-lg"
                                     >
-                                        <span className="material-symbols-outlined text-lg">download</span>
+                                        <Download className="w-4 h-4" />
                                         Download PDF
                                     </Link>
                                 </CardFooter>

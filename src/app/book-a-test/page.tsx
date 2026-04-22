@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { EXAMS, VENUES, Exam } from "@/lib/exams-data";
+import { Check, ArrowLeft, UploadCloud, ShieldCheck, HelpCircle } from "lucide-react";
 
 export default function BookATestPage() {
   const [step, setStep] = useState(1);
@@ -69,7 +70,7 @@ export default function BookATestPage() {
                             "w-12 h-12 rounded-2xl flex items-center justify-center transition-colors",
                             selectedExamId === exam.id ? "bg-primary text-white scale-110" : "bg-primary/10 text-primary"
                           )}>
-                            <span className="material-symbols-outlined">{exam.icon}</span>
+                            <exam.icon className="w-6 h-6" />
                           </div>
                           <span className="text-[10px] font-black uppercase tracking-widest text-secondary/30">{exam.category}</span>
                         </div>
@@ -84,7 +85,7 @@ export default function BookATestPage() {
 
                         {selectedExamId === exam.id && (
                           <div className="absolute -top-2 -right-2 w-8 h-8 bg-primary rounded-full flex items-center justify-center border-4 border-white text-white shadow-lg shadow-primary/20">
-                            <span className="material-symbols-outlined text-sm font-bold">check</span>
+                            <Check className="w-4 h-4 font-bold" />
                           </div>
                         )}
                       </div>
@@ -104,7 +105,7 @@ export default function BookATestPage() {
                 <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
                   <div className="flex items-center gap-4 mb-10">
                     <button onClick={() => setStep(1)} className="w-10 h-10 rounded-full border border-outline/20 flex items-center justify-center text-secondary/40 hover:text-primary hover:border-primary transition-all">
-                      <span className="material-symbols-outlined text-sm">arrow_back</span>
+                      <ArrowLeft className="w-4 h-4" />
                     </button>
                     <h2 className="text-3xl font-headline font-black text-secondary tracking-tight">Session & Venue</h2>
                   </div>
@@ -164,7 +165,7 @@ export default function BookATestPage() {
                 <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
                   <div className="flex items-center gap-4 mb-10">
                     <button onClick={() => setStep(2)} className="w-10 h-10 rounded-full border border-outline/20 flex items-center justify-center text-secondary/40 hover:text-primary hover:border-primary transition-all">
-                      <span className="material-symbols-outlined text-sm">arrow_back</span>
+                      <ArrowLeft className="w-4 h-4" />
                     </button>
                     <h2 className="text-3xl font-headline font-black text-secondary tracking-tight">Candidate Details</h2>
                   </div>
@@ -198,7 +199,7 @@ export default function BookATestPage() {
 
                   <div className="mt-12 p-8 rounded-3xl bg-primary/5 border border-primary/10 border-dashed">
                     <div className="flex gap-4 items-start">
-                      <span className="material-symbols-outlined text-primary">cloud_upload</span>
+                      <UploadCloud className="text-primary w-6 h-6" />
                       <div>
                         <h4 className="font-bold text-secondary text-base mb-1">Upload ID Copy</h4>
                         <p className="text-[10px] text-secondary/50 font-medium uppercase tracking-widest leading-relaxed">Please provide a clear scan of your ID documents (JPG or PDF, max 5MB).</p>
@@ -222,7 +223,7 @@ export default function BookATestPage() {
                   <div className="space-y-1">
                     <span className="text-[10px] font-black text-white/30 uppercase tracking-[0.2em]">Selected Test</span>
                     <div className="text-lg font-bold flex items-center gap-3">
-                      <span className="material-symbols-outlined text-primary">{selectedExam?.icon}</span>
+                      {selectedExam && <selectedExam.icon className="text-primary w-5 h-5" />}
                       {selectedExam?.title}
                     </div>
                   </div>
@@ -262,7 +263,7 @@ export default function BookATestPage() {
                   </button>
                   
                   <div className="flex items-center justify-center gap-3 text-[10px] font-black text-white/20 uppercase tracking-widest">
-                    <span className="material-symbols-outlined text-sm">shield_check</span>
+                    <ShieldCheck className="w-4 h-4" />
                     Secure SSL Payment
                   </div>
                 </div>
@@ -270,7 +271,7 @@ export default function BookATestPage() {
               
               <div className="mt-8 p-8 bg-surface-container-low rounded-3xl border border-outline/5 flex items-center gap-4">
                 <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
-                  <span className="material-symbols-outlined text-xl">help</span>
+                  <HelpCircle className="w-5 h-5" />
                 </div>
                 <p className="text-[10px] font-medium text-secondary/60 leading-relaxed uppercase tracking-widest">
                   Need help? Contact our academic support at <span className="text-primary font-black">+971 4 333 3333</span>

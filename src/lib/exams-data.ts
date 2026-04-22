@@ -1,10 +1,12 @@
+import { Monitor, FileEdit, Stethoscope, LineChart, type LucideIcon } from "lucide-react";
+
 export interface Exam {
   id: string;
   category: "IELTS" | "OET" | "PTE";
   title: string;
   description: string;
   fee: number;
-  icon: string;
+  icon: LucideIcon;
   modules: string[];
   duration: string;
   featured?: boolean;
@@ -17,7 +19,7 @@ export const EXAMS: Exam[] = [
     title: "IELTS on Computer",
     description: "Faster results (3-5 days) and modern testing interface. Ideal for tech-savvy candidates.",
     fee: 1150,
-    icon: "computer",
+    icon: Monitor,
     modules: ["Listening", "Reading", "Writing", "Speaking"],
     duration: "2h 45m",
     featured: true,
@@ -28,7 +30,7 @@ export const EXAMS: Exam[] = [
     title: "IELTS on Paper",
     description: "The traditional format using pen and paper. Results available in 13 days.",
     fee: 1150,
-    icon: "edit_note",
+    icon: FileEdit,
     modules: ["Listening", "Reading", "Writing", "Speaking"],
     duration: "2h 45m",
   },
@@ -38,7 +40,7 @@ export const EXAMS: Exam[] = [
     title: "OET Medicine",
     description: "Specifically designed for doctors. Widely accepted by healthcare boards globally.",
     fee: 1650,
-    icon: "medical_services",
+    icon: Stethoscope,
     modules: ["Listening", "Reading", "Writing", "Speaking"],
     duration: "3h",
   },
@@ -48,7 +50,7 @@ export const EXAMS: Exam[] = [
     title: "PTE Academic",
     description: "AI-based scoring with incredibly fast turnaround. Results often in 48 hours.",
     fee: 980,
-    icon: "analytics",
+    icon: LineChart,
     modules: ["Speaking & Writing", "Reading", "Listening"],
     duration: "2h",
   },

@@ -1,5 +1,6 @@
 import Image from 'next/image';
 
+
 const options = [
   {
     title: "By Taxicab:",
@@ -14,6 +15,7 @@ const options = [
   },
   {
     title: "By Dubai Metro:",
+
     content: (
       <>
         <p>From your place, Take the Metro to Rashidiya Metro Station that is located near Rashidiya Park.</p>
@@ -25,6 +27,7 @@ const options = [
   },
   {
     title: "By Public Bus:",
+
     content: (
       <>
         <p>From Ghubaiba Bus Station R, Dubai, it will take half an hour to reach Silicon Oasis. With less traffic, you can reach in just 25 minutes.</p>

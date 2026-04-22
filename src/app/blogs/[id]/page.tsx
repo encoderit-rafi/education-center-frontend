@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Quote, CheckCircle2, User, Share2, Mail, MessageCircle, GraduationCap } from "lucide-react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
@@ -383,13 +383,10 @@ export default async function BlogDetailPage({
                       key={idx}
                       className="relative my-10 pl-8 pr-6 py-6 bg-red-50 rounded-2xl border-l-4 border-primary"
                     >
-                      <span
-                        className="material-symbols-outlined text-primary text-4xl absolute -top-4 left-4 opacity-30"
-                        style={{ fontVariationSettings: "'FILL' 1" }}
+                      <Quote
+                        className="text-primary w-10 h-10 absolute -top-4 left-4 opacity-30 fill-primary"
                         aria-hidden
-                      >
-                        format_quote
-                      </span>
+                      />
                       <p className="text-lg font-headline font-semibold text-primary leading-relaxed italic">
                         {block.text}
                       </p>
@@ -404,12 +401,7 @@ export default async function BlogDetailPage({
                           key={ii}
                           className="flex items-start gap-3 text-on-surface-variant text-base"
                         >
-                          <span
-                            className="material-symbols-outlined text-primary text-base mt-0.5 shrink-0"
-                            style={{ fontVariationSettings: "'FILL' 1" }}
-                          >
-                            check_circle
-                          </span>
+                          <CheckCircle2 className="w-5 h-5 text-primary shrink-0 mt-0.5 fill-primary/10" />
                           <span className="leading-[1.75]">{item}</span>
                         </li>
                       ))}
@@ -430,12 +422,7 @@ export default async function BlogDetailPage({
               </p>
               <div className="flex items-center gap-4">
                 <div className="w-14 h-14 rounded-full crimson-gradient flex items-center justify-center shadow-lg shrink-0">
-                  <span
-                    className="material-symbols-outlined text-white text-2xl"
-                    style={{ fontVariationSettings: "'FILL' 1" }}
-                  >
-                    person
-                  </span>
+                  <User className="text-white w-7 h-7" />
                 </div>
                 <div>
                   <p className="font-headline font-bold text-secondary text-base">
@@ -465,9 +452,9 @@ export default async function BlogDetailPage({
                     title={label}
                     className="flex-1 flex flex-col items-center gap-1 px-3 py-3 rounded-xl bg-surface-container-low hover:bg-red-50 hover:text-primary text-on-surface-variant transition-colors border border-outline/10 cursor-pointer"
                   >
-                    <span className="material-symbols-outlined text-lg">
-                      {icon}
-                    </span>
+                    {icon === "share" && <Share2 className="w-5 h-5" />}
+                    {icon === "mail" && <Mail className="w-5 h-5" />}
+                    {icon === "forum" && <MessageCircle className="w-5 h-5" />}
                     <span className="text-[9px] font-semibold tracking-wider uppercase">
                       {label}
                     </span>
@@ -480,12 +467,7 @@ export default async function BlogDetailPage({
             <div className="crimson-gradient rounded-2xl p-6 text-white relative overflow-hidden shadow-xl">
               <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl pointer-events-none" />
               <div className="relative z-10 space-y-4">
-                <span
-                  className="material-symbols-outlined text-3xl"
-                  style={{ fontVariationSettings: "'FILL' 1" }}
-                >
-                  school
-                </span>
+                <GraduationCap className="w-10 h-10 text-white" />
                 <h3 className="font-headline font-extrabold text-lg leading-tight">
                   Start your {blog.tag} preparation today
                 </h3>

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import ContactForm from "@/app/contact-us/_components/form-contact";
+import { Building2, CheckCircle2, Globe2, LineChart, BarChart3, ScrollText, Zap, ShieldCheck, Mail, PhoneForwarded } from "lucide-react";
 
 const assessmentServices = [
   {
@@ -58,9 +59,7 @@ export default function AssessmentSolutionsPage() {
             {/* Large Institutional Card */}
             <div className="md:col-span-8 bg-slate-50 p-12 rounded-xl border border-slate-100 relative overflow-hidden flex flex-col justify-between">
               <div className="relative z-10">
-                <span className="material-symbols-outlined text-red-800 text-4xl mb-8">
-                  account_balance
-                </span>
+                <Building2 className="text-red-800 w-10 h-10 mb-8" />
                 <h3 className="text-3xl font-bold mb-6 text-slate-900 font-headline">
                   Large-Scale Testing Frameworks
                 </h3>
@@ -72,15 +71,11 @@ export default function AssessmentSolutionsPage() {
               </div>
               <div className="mt-12 flex gap-4 flex-wrap relative z-10">
                 <div className="flex items-center gap-2 bg-red-50 text-red-800 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider">
-                  <span className="material-symbols-outlined text-sm">
-                    check_circle
-                  </span>
+                  <CheckCircle2 className="w-4 h-4" />
                   ISO 27001 Certified
                 </div>
                 <div className="flex items-center gap-2 bg-red-50 text-red-800 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider">
-                  <span className="material-symbols-outlined text-sm">
-                    public
-                  </span>
+                  <Globe2 className="w-4 h-4" />
                   Global Access
                 </div>
               </div>
@@ -96,9 +91,7 @@ export default function AssessmentSolutionsPage() {
             {/* Analytical Insights */}
             <div className="md:col-span-4 bg-red-900 p-12 rounded-xl text-white relative overflow-hidden group">
               <div className="relative z-10">
-                <span className="material-symbols-outlined text-4xl mb-8 text-red-200">
-                  analytics
-                </span>
+                <LineChart className="w-10 h-10 mb-8 text-red-200" />
                 <h3 className="text-2xl font-bold mb-6 font-headline">
                   Advanced Psychometrics
                 </h3>
@@ -109,17 +102,13 @@ export default function AssessmentSolutionsPage() {
                 </p>
               </div>
               <div className="absolute bottom-4 right-4 opacity-10 group-hover:opacity-20 transition-opacity group-hover:scale-110 duration-500">
-                <span className="material-symbols-outlined text-[120px]">
-                  bar_chart
-                </span>
+                <BarChart3 className="w-[120px] h-[120px]" />
               </div>
             </div>
 
             {/* Reporting */}
             <div className="md:col-span-4 bg-slate-50 p-12 rounded-xl border border-slate-100 hover:shadow-md transition-shadow">
-              <span className="material-symbols-outlined text-red-800 text-3xl mb-8">
-                history_edu
-              </span>
+              <ScrollText className="text-red-800 w-8 h-8 mb-8" />
               <h3 className="text-2xl font-bold mb-6 text-slate-900 font-headline">
                 Institutional Reporting
               </h3>
@@ -142,17 +131,13 @@ export default function AssessmentSolutionsPage() {
               </div>
               <div className="flex flex-wrap gap-4">
                 <div className="bg-white/5 border border-white/10 p-5 rounded-lg flex items-center gap-4 min-w-[160px] hover:bg-white/10 transition-colors">
-                  <span className="material-symbols-outlined text-red-400">
-                    api
-                  </span>
+                  <Zap className="text-red-400 w-6 h-6" />
                   <span className="text-[10px] font-bold uppercase tracking-widest">
                     LTI Core
                   </span>
                 </div>
                 <div className="bg-white/5 border border-white/10 p-5 rounded-lg flex items-center gap-4 min-w-[160px] hover:bg-white/10 transition-colors">
-                  <span className="material-symbols-outlined text-red-400">
-                    security
-                  </span>
+                  <ShieldCheck className="text-red-400 w-6 h-6" />
                   <span className="text-[10px] font-bold uppercase tracking-widest">
                     SSO Auth
                   </span>
@@ -214,9 +199,7 @@ export default function AssessmentSolutionsPage() {
             <div className="space-y-10">
               <div className="flex items-start gap-6">
                 <div className="w-12 h-12 rounded bg-red-800 flex items-center justify-center shrink-0 shadow-md">
-                  <span className="material-symbols-outlined text-white text-xl">
-                    contact_mail
-                  </span>
+                  <Mail className="text-white w-5 h-5" />
                 </div>
                 <div>
                   <h4 className="font-bold text-lg text-slate-900">
@@ -229,9 +212,7 @@ export default function AssessmentSolutionsPage() {
               </div>
               <div className="flex items-start gap-6">
                 <div className="w-12 h-12 rounded bg-red-800 flex items-center justify-center shrink-0 shadow-md">
-                  <span className="material-symbols-outlined text-white text-xl">
-                    phone_callback
-                  </span>
+                  <PhoneForwarded className="text-white w-5 h-5" />
                 </div>
                 <div>
                   <h4 className="font-bold text-lg text-slate-900">

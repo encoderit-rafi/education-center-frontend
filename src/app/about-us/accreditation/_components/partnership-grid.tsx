@@ -1,3 +1,4 @@
+import { ShieldCheck, Globe, Award } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const partners = [
@@ -6,18 +7,21 @@ const partners = [
     description: "As a Select Partner, TEPTH maintains the rigorous security protocols required to deliver Pearson's high-stakes professional certifications.",
     logo: "PEARSON VUE",
     logoColor: "text-blue-600",
+    icon: ShieldCheck,
   },
   {
     name: "IDP IELTS Center",
     description: "Official testing venue for IELTS, providing the gold standard in English proficiency testing for global migration and higher education.",
     logo: "idp | IELTS",
     logoColor: "text-red-600",
+    icon: Globe,
   },
   {
     name: "ETS Global Partner",
     description: "TEPTH is fully accredited to conduct TOEFL iBT and GRE assessments, adhering to strict international standards for test delivery.",
     logo: "ETS",
     logoColor: "text-blue-800",
+    icon: Award,
   },
 ];
 
@@ -40,12 +44,17 @@ export function PartnershipGrid() {
           {partners.map((partner, idx) => (
             <div
               key={idx}
-              className="bg-gray-50/50 p-10 rounded-2xl border border-gray-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group text-center"
+              className="bg-gray-50/50 p-10 rounded-2xl border border-gray-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group text-center flex flex-col items-center"
             >
+              {/* Icon / Logo Area */}
+              <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mb-8 shadow-sm border border-gray-100 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
+                <partner.icon className="w-8 h-8 text-[#A11D1D]" />
+              </div>
+
               {/* Logo Placeholder */}
-              <div className="h-20 mb-8 flex items-center justify-center">
+              <div className="h-12 mb-6 flex items-center justify-center">
                 <div className={cn(
-                  "text-3xl tracking-tighter grayscale group-hover:grayscale-0 transition-all duration-300",
+                  "text-2xl font-black tracking-tighter grayscale group-hover:grayscale-0 transition-all duration-300",
                   partner.logoColor
                 )}>
                   {partner.logo}

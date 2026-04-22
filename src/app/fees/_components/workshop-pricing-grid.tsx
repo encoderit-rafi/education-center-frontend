@@ -3,13 +3,15 @@
 import React from "react";
 import Link from "next/link";
 
+import { Timer, Clock, History, Sparkles, type LucideIcon } from "lucide-react";
+
 interface Workshop {
   id: string;
   name: string;
   category: string;
   description: string;
   price: string;
-  icon: string;
+  icon: LucideIcon;
   details: string[];
   theme: string;
 }
@@ -21,7 +23,7 @@ const WORKSHOP_DATA: Workshop[] = [
     category: "Quick Review",
     description: "Ideal for a final high-impact strategy refresh before your test date.",
     price: "600",
-    icon: "timer",
+    icon: Timer,
     details: [
       "Duration: 2 Hours",
       "Intensive Review",
@@ -36,7 +38,7 @@ const WORKSHOP_DATA: Workshop[] = [
     category: "Standard Workshop",
     description: "A comprehensive session covering all modules with proven techniques.",
     price: "1,000",
-    icon: "schedule",
+    icon: Clock,
     details: [
       "Duration: 4 Hours",
       "Comprehensive Strategy",
@@ -51,7 +53,7 @@ const WORKSHOP_DATA: Workshop[] = [
     category: "Extended Session",
     description: "In-depth analysis and practice for complex examination tasks.",
     price: "1,350",
-    icon: "event_repeat",
+    icon: History,
     details: [
       "Duration: 6 Hours",
       "In-depth Analysis",
@@ -66,7 +68,7 @@ const WORKSHOP_DATA: Workshop[] = [
     category: "Masterclass",
     description: "The ultimate preparation experience with full exam simulation.",
     price: "1,600",
-    icon: "auto_awesome",
+    icon: Sparkles,
     details: [
       "Duration: 8 Hours",
       "Full Exam Simulation",
@@ -84,11 +86,9 @@ export function WorkshopPricingGrid() {
         <Link
           key={item.id}
           href="/book-a-test"
-          className="p-10 bg-[#F9FAFB] hover:bg-white border border-[#E5E7EB]/40 rounded-[2rem] transition-all duration-500 hover:shadow-2xl hover:translate-y-[-8px] group block"
+          className="p-10 bg-[#F9FAFB] hover:bg-white border border-[#E5E7EB]/40 hover:border-[#991B1B]/30 rounded-[2rem] transition-all duration-500 hover:shadow-2xl hover:translate-y-[-8px] group block"
         >
-          <span className="material-symbols-outlined text-[#991B1B] mb-8 text-4xl block transition-transform group-hover:scale-110">
-            {item.icon}
-          </span>
+          <item.icon className="text-[#991B1B] mb-8 w-10 h-10 block transition-transform group-hover:scale-110" />
           <h5 className="font-headline font-black text-[#111827] text-lg mb-3 tracking-tight">
             {item.name}
           </h5>

@@ -6,6 +6,7 @@ import * as z from "zod";
 import { Field, FieldError } from "@/components/ui/field";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { CheckCircle2, Loader2 } from "lucide-react";
 
 const partnershipSchema = z.object({
     fullName: z.string().min(2, { message: "Full Name is required." }),
@@ -42,7 +43,7 @@ export default function FormPartnershipRequest() {
     if (isSuccess) {
         return (
             <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl p-10 text-center space-y-4 shadow-sm h-full flex flex-col items-center justify-center min-h-[400px]">
-                <span className="material-symbols-outlined text-6xl text-emerald-500">check_circle</span>
+                <CheckCircle2 className="w-16 h-16 text-emerald-500" />
                 <h2 className="text-2xl font-bold font-headline text-secondary">Request Received</h2>
                 <p className="text-emerald-700 text-sm">
                     Thank you for reaching out. Our partnership team will review your inquiry and connect with your institution within 24-48 business hours.
@@ -129,7 +130,7 @@ export default function FormPartnershipRequest() {
                 className="w-full bg-red-800 text-white py-5 rounded-md font-extrabold text-sm uppercase tracking-widest hover:bg-red-900 transition-all shadow-lg shadow-red-900/20 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center"
             >
                 {isSubmitting ? (
-                    <span className="material-symbols-outlined animate-spin mr-2">progress_activity</span>
+                    <Loader2 className="w-5 h-5 animate-spin mr-2" />
                 ) : null}
                 {isSubmitting ? "Submitting..." : "Submit Partnership Request"}
             </button>

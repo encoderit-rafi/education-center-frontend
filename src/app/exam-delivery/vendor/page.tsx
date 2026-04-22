@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { ArrowRight, ShieldCheck, CreditCard, CalendarCheck, Award } from "lucide-react";
 
 export default function VendorPartnershipsPage() {
   return (
@@ -24,7 +25,7 @@ export default function VendorPartnershipsPage() {
             <div className="flex flex-wrap gap-4">
               <button className="bg-primary text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-primary-variant transition-all flex items-center gap-2 group shadow-lg shadow-primary/10">
                 Become a Partner
-                <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
               <button className="px-8 py-4 text-primary font-bold hover:underline">View Site Standards</button>
             </div>
@@ -60,7 +61,7 @@ export default function VendorPartnershipsPage() {
             <div className="md:col-span-2 bg-white p-10 rounded-xl flex flex-col justify-between group hover:shadow-xl transition-all duration-500 border border-slate-100">
               <div>
                 <div className="w-12 h-12 bg-primary/5 flex items-center justify-center rounded-lg mb-8">
-                  <span className="material-symbols-outlined text-primary">security</span>
+                  <ShieldCheck className="w-6 h-6 text-primary" />
                 </div>
                 <h3 className="text-2xl font-bold mb-4 text-slate-900">Secure LAN Architecture</h3>
                 <p className="text-slate-600 leading-relaxed">Proprietary encrypted local area network configurations that isolate test environments from external threats while maintaining 99.9% uptime for exam delivery.</p>
@@ -78,7 +79,7 @@ export default function VendorPartnershipsPage() {
             {/* Revenue Sharing */}
             <div className="bg-primary p-10 rounded-xl flex flex-col justify-between text-white shadow-xl shadow-primary/10">
               <div>
-                <span className="material-symbols-outlined text-4xl mb-8">payments</span>
+                <CreditCard className="w-10 h-10 text-white mb-8" />
                 <h3 className="text-2xl font-bold mb-4">Revenue Sharing</h3>
                 <p className="text-primary-foreground/80 leading-relaxed">Tiered commission models that reward facility quality and high-throughput operational efficiency.</p>
               </div>
@@ -90,7 +91,7 @@ export default function VendorPartnershipsPage() {
 
             {/* Automated Scheduling */}
             <div className="bg-white p-10 rounded-xl flex flex-col border border-slate-100 hover:shadow-xl transition-all duration-500">
-              <span className="material-symbols-outlined text-primary text-4xl mb-8">event_available</span>
+              <CalendarCheck className="w-10 h-10 text-primary mb-8" />
               <h3 className="text-2xl font-bold mb-4 text-slate-900">Automated Scheduling</h3>
               <p className="text-slate-600 leading-relaxed mb-6">Integration with global test-taker demand forecasts to maximize seat utilization.</p>
               <div className="mt-auto overflow-hidden rounded-lg">
@@ -105,7 +106,7 @@ export default function VendorPartnershipsPage() {
             {/* Staff Certification */}
             <div className="bg-white p-10 rounded-xl flex flex-col justify-between border border-slate-100 hover:shadow-xl transition-all duration-500">
               <div>
-                <span className="material-symbols-outlined text-primary text-4xl mb-8">workspace_premium</span>
+                <Award className="w-10 h-10 text-primary mb-8" />
                 <h3 className="text-2xl font-bold mb-4 text-slate-900">Staff Certification</h3>
                 <p className="text-slate-600 leading-relaxed">Mandatory TEPTH Proctor certification for all floor staff, ensuring global integrity standards are upheld locally.</p>
               </div>

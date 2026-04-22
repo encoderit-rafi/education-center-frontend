@@ -15,6 +15,8 @@ import { useState } from "react";
 
 
 
+import { CheckCircle2 } from "lucide-react";
+
 const contactSchema = z.object({
   fullName: z
     .string()
@@ -26,8 +28,6 @@ const contactSchema = z.object({
 });
 
 type ContactFormValues = z.infer<typeof contactSchema>;
-
-
 
 export default function ContactForm() {
   const [isSuccess, setIsSuccess] = useState(false);
@@ -55,9 +55,7 @@ export default function ContactForm() {
   if (isSuccess) {
     return (
       <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-md p-8 text-center space-y-4">
-        <span className="material-symbols-outlined text-5xl text-emerald-500">
-          check_circle
-        </span>
+        <CheckCircle2 className="w-12 h-12 text-emerald-500 mx-auto" />
         <h3 className="text-2xl font-headline font-bold">Message Sent!</h3>
         <p className="text-emerald-700">
           Thank you for reaching out. Our team will get back to you shortly.

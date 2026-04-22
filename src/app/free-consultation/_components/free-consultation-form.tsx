@@ -23,10 +23,11 @@ import { COURSES } from "@/lib/courses-data";
 
 import { Calendar } from "@/components/ui/calendar";
 import { Textarea } from "@/components/ui/textarea";
+import { GraduationCap, Briefcase, CalendarCheck, Check } from "lucide-react";
 
 const CONTEXTS = [
-  { id: "academic", label: "Academic Guidance", icon: "school" },
-  { id: "professional", label: "Career Strategy", icon: "business_center" },
+  { id: "academic", label: "Academic Guidance", icon: GraduationCap },
+  { id: "professional", label: "Career Strategy", icon: Briefcase },
 ];
 
 const formSchema = z.object({
@@ -75,9 +76,7 @@ export default function FreeConsultationForm() {
     return (
       <div className="text-center space-y-8 py-10 animate-in zoom-in-95 duration-500">
         <div className="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mx-auto">
-          <span className="material-symbols-outlined text-4xl text-emerald-600 font-bold">
-            event_available
-          </span>
+          <CalendarCheck className="w-10 h-10 text-emerald-600" />
         </div>
         <div className="space-y-4">
           <h2 className="text-4xl font-headline font-black text-secondary tracking-tight">
@@ -136,9 +135,7 @@ export default function FreeConsultationForm() {
                       : "bg-primary/5 text-primary",
                   )}
                 >
-                  <span className="material-symbols-outlined text-xl">
-                    {ctx.icon}
-                  </span>
+                  <ctx.icon className="w-5 h-5" />
                 </div>
                 <span
                   className={cn(
@@ -152,9 +149,7 @@ export default function FreeConsultationForm() {
                 </span>
                 {selectedContext === ctx.id && (
                   <div className="ml-auto w-5 h-5 bg-primary rounded-full flex items-center justify-center text-white scale-110">
-                    <span className="material-symbols-outlined text-[10px] font-bold">
-                      check
-                    </span>
+                    <Check className="w-3 h-3 font-bold" />
                   </div>
                 )}
               </label>
@@ -211,9 +206,7 @@ export default function FreeConsultationForm() {
                 </span>
                 {watch("courseId") === course.id && (
                   <div className="absolute top-6 right-6 w-5 h-5 bg-primary rounded-full flex items-center justify-center text-white scale-110">
-                    <span className="material-symbols-outlined text-[10px] font-bold">
-                      check
-                    </span>
+                    <Check className="w-3 h-3 font-bold" />
                   </div>
                 )}
               </label>

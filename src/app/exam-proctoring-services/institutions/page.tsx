@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowRight, ShieldCheck, UserRound, Eye, MonitorUp, Mic2, Flag, Building2, MapPin, BadgeCheck } from "lucide-react";
 
 export default function InstitutionsPage() {
     return (
@@ -25,7 +26,7 @@ export default function InstitutionsPage() {
                                     className="bg-primary text-white px-8 py-4 rounded-lg font-bold text-lg transition-transform hover:scale-105 active:scale-95 flex items-center shadow-lg shadow-primary/20"
                                 >
                                     Partner with TEPTH
-                                    <span className="material-symbols-outlined ml-2">arrow_forward</span>
+                                    <ArrowRight className="w-5 h-5 ml-2" />
                                 </Link>
                                 <Link
                                     href="/our-venues"
@@ -49,9 +50,7 @@ export default function InstitutionsPage() {
                             </div>
                             <div className="absolute -bottom-8 -left-8 z-30 p-8 backdrop-blur-xl bg-white/40 rounded-2xl shadow-xl max-w-[280px] border border-white/20">
                                 <div className="flex items-center gap-4 mb-2">
-                                    <span className="material-symbols-outlined text-primary text-3xl" style={{ fontVariationSettings: "'FILL' 1" }}>
-                                        verified_user
-                                    </span>
+                                    <ShieldCheck className="text-primary w-8 h-8" />
                                     <div className="font-bold text-2xl text-primary">99.9%</div>
                                 </div>
                                 <div className="text-sm font-semibold text-on-background">System Uptime & Proctoring Accuracy</div>
@@ -72,7 +71,7 @@ export default function InstitutionsPage() {
                             <div className="md:col-span-2 md:row-span-2 bg-white rounded-2xl p-10 flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow group border border-outline/5">
                                 <div className="max-w-md">
                                     <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6 text-primary group-hover:scale-110 transition-transform">
-                                        <span className="material-symbols-outlined text-3xl">face</span>
+                                        <UserRound className="w-8 h-8" />
                                     </div>
                                     <h3 className="text-2xl font-bold mb-4 font-headline">Facial Recognition & Verification</h3>
                                     <p className="text-on-surface-variant leading-relaxed">Continuous biometric monitoring throughout the session to ensure the candidate's identity remains consistent, using high-resolution neural network validation.</p>
@@ -85,22 +84,22 @@ export default function InstitutionsPage() {
                             </div>
                             {/* Small Features */}
                             <div className="bg-surface-container-high rounded-2xl p-8 flex flex-col group hover:bg-primary transition-all duration-500 cursor-default">
-                                <span className="material-symbols-outlined text-3xl mb-4 text-primary group-hover:text-white transition-colors">visibility</span>
+                                <Eye className="w-8 h-8 mb-4 text-primary group-hover:text-white transition-colors" />
                                 <h3 className="text-xl font-bold mb-2 group-hover:text-white transition-colors font-headline">Behavioral Analysis</h3>
                                 <p className="text-sm text-on-surface-variant group-hover:text-white/80 transition-colors">AI identifies suspicious eye movements, head turns, or unexpected presence of secondary individuals.</p>
                             </div>
                             <div className="bg-white rounded-2xl p-8 flex flex-col group hover:shadow-lg transition-all border border-outline/5 hover:border-primary/20">
-                                <span className="material-symbols-outlined text-3xl mb-4 text-primary">screen_share</span>
+                                <MonitorUp className="w-8 h-8 mb-4 text-primary" />
                                 <h3 className="text-xl font-bold mb-2 font-headline">Screen Monitoring</h3>
                                 <p className="text-sm text-on-surface-variant">Lockdown browser tech prevents navigation away from the exam environment while recording all on-screen activity.</p>
                             </div>
                             <div className="bg-white rounded-2xl p-8 flex flex-col group hover:shadow-lg transition-all border border-outline/5 hover:border-primary/20">
-                                <span className="material-symbols-outlined text-3xl mb-4 text-primary">record_voice_over</span>
+                                <Mic2 className="w-8 h-8 mb-4 text-primary" />
                                 <h3 className="text-xl font-bold mb-2 font-headline">Audio Analysis</h3>
                                 <p className="text-sm text-on-surface-variant">Intelligent noise filtration detects whispering, unauthorized speech, or hidden audio devices during assessments.</p>
                             </div>
                             <div className="bg-primary text-white rounded-2xl p-8 flex flex-col justify-center items-center text-center shadow-xl shadow-primary/20 group">
-                                <span className="material-symbols-outlined text-5xl mb-4 group-hover:scale-110 transition-transform" style={{ fontVariationSettings: "'FILL' 1" }}>flag</span>
+                                <Flag className="w-12 h-12 mb-4 group-hover:scale-110 transition-transform" />
                                 <h3 className="text-xl font-bold mb-2 font-headline">Real-time Flagging</h3>
                                 <p className="text-sm text-white/80 leading-relaxed">Immediate notifications to human proctors for intervention within 5 seconds of an anomaly detection.</p>
                             </div>
@@ -178,8 +177,10 @@ export default function InstitutionsPage() {
                                     { icon: "location_city", title: "DSOA Authority", desc: "Dubai Silicon Oasis Operations" },
                                     { icon: "verified", title: "ISO Certified", desc: "Information Security Management" }
                                 ].map((item, i) => (
-                                    <div key={i} className="bg-white/5 border border-white/10 p-8 rounded-2xl flex flex-col items-center text-center group hover:bg-primary transition-all duration-300">
-                                        <span className="material-symbols-outlined text-5xl mb-6 text-primary group-hover:text-white transition-colors">{item.icon}</span>
+                                <div key={i} className="bg-white/5 border border-white/10 p-8 rounded-2xl flex flex-col items-center text-center group hover:bg-primary transition-all duration-300">
+                                    {item.icon === "account_balance" ? <Building2 className="w-12 h-12 mb-6 text-primary group-hover:text-white transition-colors" /> :
+                                     item.icon === "location_city" ? <MapPin className="w-12 h-12 mb-6 text-primary group-hover:text-white transition-colors" /> :
+                                     <BadgeCheck className="w-12 h-12 mb-6 text-primary group-hover:text-white transition-colors" />}
                                         <div className="font-bold text-xl mb-2 font-headline">{item.title}</div>
                                         <div className="text-sm text-white/50 group-hover:text-white/80 transition-colors font-medium">{item.desc}</div>
                                     </div>

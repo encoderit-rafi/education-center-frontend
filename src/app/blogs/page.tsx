@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { BLOGS } from "@/lib/blogs-data";
+import { ArrowRight } from "lucide-react";
 
 export default function BlogsPage() {
   return (
@@ -93,9 +94,7 @@ export default function BlogsPage() {
                     className="flex items-center gap-2 text-primary font-extrabold text-[12px] tracking-widest hover:gap-3 transition-all uppercase"
                   >
                     Read Full Article
-                    <span className="material-symbols-outlined text-sm">
-                      arrow_forward
-                    </span>
+                    <ArrowRight className="w-4 h-4" />
                   </Link>
                 </div>
               </div>

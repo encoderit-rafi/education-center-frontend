@@ -1,5 +1,7 @@
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { Badge } from "@/components/ui/badge";
+import { Building2 } from "lucide-react";
 
 export function WhoWeAreHero() {
   return (
@@ -20,6 +22,14 @@ export function WhoWeAreHero() {
       {/* Content */}
       <div className="container relative z-10 px-6 mx-auto sm:px-12 lg:px-24">
         <div className="max-w-4xl space-y-8">
+          <Badge 
+            variant="default" 
+            className="bg-[#A11D1D] hover:bg-[#8A1818] text-white border-none py-1.5 px-4 text-[10px] font-bold tracking-widest uppercase rounded-sm flex items-center gap-2 w-fit"
+          >
+            <Building2 className="w-3.5 h-3.5" />
+            Visionary Foundation
+          </Badge>
+
           <h1
             className={cn(
               "text-6xl md:text-8xl lg:text-[100px] font-black text-white tracking-tighter leading-[0.9]",

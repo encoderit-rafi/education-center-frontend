@@ -3,6 +3,31 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import {
+  Download,
+  BadgeCheck,
+  IdCard,
+  CheckCircle2,
+  Smartphone,
+  Watch,
+  Keyboard,
+  BookOpen,
+  Ban,
+  Clock,
+  Fingerprint,
+  Monitor,
+  UserRound,
+  UserCheck,
+  ShieldCheck,
+  FileEdit,
+  LogOut,
+  VolumeX,
+  HeartPulse,
+  Gavel,
+  Headset,
+  Phone,
+  MessageSquare,
+} from "lucide-react";
 
 interface Protocol {
   id: string;
@@ -67,14 +92,14 @@ export default function TestDayGuidelinesClient() {
                 environment for all candidates across our global venues.
               </p>
               <div className="flex gap-4">
-                <button className="bg-[#760009] text-white px-8 py-4 rounded-lg font-bold flex items-center gap-2 hover:opacity-90 transition-all shadow-lg">
+                <button className="bg-[#760009] text-white px-8 py-4 rounded-lg font-bold flex items-center gap-2 hover:opacity-90 transition-all shadow-lg text-sm">
                   Download PDF Guide
-                  <span className="material-symbols-outlined text-sm">download</span>
+                  <Download className="w-4 h-4" />
                 </button>
               </div>
             </div>
             <div className="relative">
-              <div className="rounded-2xl overflow-hidden shadow-2xl transform lg:rotate-3">
+              <div className="rounded-2xl overflow-hidden shadow-2xl transform">
                 <Image
                   alt="Testing Center"
                   className="w-full h-[500px] object-cover"
@@ -86,12 +111,7 @@ export default function TestDayGuidelinesClient() {
               </div>
               <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-xl shadow-xl max-w-xs border border-[#e1bfbb]/10">
                 <div className="flex items-center gap-3 mb-2">
-                  <span
-                    className="material-symbols-outlined text-[#760009]"
-                    style={{ fontVariationSettings: "'FILL' 1" }}
-                  >
-                    verified
-                  </span>
+                  <BadgeCheck className="w-5 h-5 text-[#760009]" />
                   <span className="font-bold text-[#261817]">Certified Venues</span>
                 </div>
                 <p className="text-sm text-[#575e70]">
@@ -114,24 +134,19 @@ export default function TestDayGuidelinesClient() {
               <div className="md:col-span-2 bg-[#ffffff] p-8 rounded-xl flex flex-col justify-between group hover:shadow-xl transition-all duration-500">
                 <div>
                   <div className="bg-[#991b1b]/10 w-12 h-12 rounded-lg flex items-center justify-center mb-6">
-                    <span
-                      className="material-symbols-outlined text-[#760009]"
-                      style={{ fontVariationSettings: "'FILL' 1" }}
-                    >
-                      id_card
-                    </span>
+                    <IdCard className="w-6 h-6 text-[#760009]" />
                   </div>
                   <h3 className="text-2xl font-bold mb-4">Mandatory Documents</h3>
                   <ul className="space-y-4">
                     <li className="flex items-start gap-3">
-                      <span className="material-symbols-outlined text-[#760009] mt-1">check_circle</span>
+                      <CheckCircle2 className="w-5 h-5 text-[#760009] shrink-0 mt-0.5" />
                       <span>
                         <strong className="text-[#261817]">Original Passport or National ID:</strong> Must be the same
                         document used during registration. Copies are not accepted.
                       </span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <span className="material-symbols-outlined text-[#760009] mt-1">check_circle</span>
+                      <CheckCircle2 className="w-5 h-5 text-[#760009] shrink-0 mt-0.5" />
                       <span>
                         <strong className="text-[#261817]">Test Confirmation Email:</strong> A printed or digital copy
                         of your booking confirmation.
@@ -153,30 +168,25 @@ export default function TestDayGuidelinesClient() {
                   <p className="text-[#ffaaa1] mb-8">The following items are strictly forbidden inside the testing room:</p>
                   <div className="grid grid-cols-2 gap-4">
                     <div className="flex flex-col items-center p-3 bg-white/10 rounded-lg">
-                      <span className="material-symbols-outlined mb-2">smartphone</span>
+                      <Smartphone className="w-6 h-6 mb-2" />
                       <span className="text-xs font-semibold">Mobiles</span>
                     </div>
                     <div className="flex flex-col items-center p-3 bg-white/10 rounded-lg">
-                      <span className="material-symbols-outlined mb-2">watch</span>
+                      <Watch className="w-6 h-6 mb-2" />
                       <span className="text-xs font-semibold">Watches</span>
                     </div>
                     <div className="flex flex-col items-center p-3 bg-white/10 rounded-lg">
-                      <span className="material-symbols-outlined mb-2">keyboard</span>
+                      <Keyboard className="w-6 h-6 mb-2" />
                       <span className="text-xs font-semibold">Devices</span>
                     </div>
                     <div className="flex flex-col items-center p-3 bg-white/10 rounded-lg">
-                      <span className="material-symbols-outlined mb-2">menu_book</span>
+                      <BookOpen className="w-6 h-6 mb-2" />
                       <span className="text-xs font-semibold">Notes</span>
                     </div>
                   </div>
                 </div>
                 <div className="absolute -right-8 -bottom-8 opacity-10">
-                  <span
-                    className="material-symbols-outlined text-9xl"
-                    style={{ fontVariationSettings: "'wght' 700" }}
-                  >
-                    block
-                  </span>
+                  <Ban className="w-32 h-32 rotate-12" />
                 </div>
               </div>
             </div>
@@ -193,11 +203,10 @@ export default function TestDayGuidelinesClient() {
                   <button
                     key={protocol.id}
                     onClick={() => setActiveTab(protocol.id)}
-                    className={`px-6 py-2 rounded-lg font-bold transition-all ${
-                      activeTab === protocol.id
+                    className={`px-6 py-2 rounded-lg font-bold transition-all ${activeTab === protocol.id
                         ? "bg-[#760009] text-white"
                         : "text-[#59413e] hover:text-[#760009]"
-                    }`}
+                      }`}
                   >
                     {protocol.label}
                   </button>
@@ -208,7 +217,7 @@ export default function TestDayGuidelinesClient() {
               {/* Protocol 1 */}
               <div className="bg-[#fff0ef] p-8 rounded-xl border-l-4 border-[#760009]">
                 <h4 className="text-[#760009] font-bold mb-4 flex items-center gap-2">
-                  <span className="material-symbols-outlined">schedule</span>
+                  <Clock className="w-5 h-5" />
                   Arrival Window
                 </h4>
                 <div className="text-[#261817] leading-relaxed">
@@ -224,21 +233,21 @@ export default function TestDayGuidelinesClient() {
               {/* Protocol 2 */}
               <div className="bg-[#fff0ef] p-8 rounded-xl border-l-4 border-[#760009]">
                 <h4 className="text-[#760009] font-bold mb-4 flex items-center gap-2">
-                  <span className="material-symbols-outlined">fingerprint</span>
+                  <Fingerprint className="w-5 h-5" />
                   Identification Check
                 </h4>
                 <p className="text-[#261817] leading-relaxed">
-                   {activeProtocol.content.biometric}
+                  {activeProtocol.content.biometric}
                 </p>
               </div>
               {/* Protocol 3 */}
               <div className="bg-[#fff0ef] p-8 rounded-xl border-l-4 border-[#760009]">
                 <h4 className="text-[#760009] font-bold mb-4 flex items-center gap-2">
-                  <span className="material-symbols-outlined">laptop_mac</span>
+                  <Monitor className="w-5 h-5" />
                   Equipment Setup
                 </h4>
                 <p className="text-[#261817] leading-relaxed">
-                   {activeProtocol.content.equipment}
+                  {activeProtocol.content.equipment}
                 </p>
               </div>
             </div>
@@ -259,7 +268,7 @@ export default function TestDayGuidelinesClient() {
                 {/* Step 1 */}
                 <div className="relative flex flex-col items-center text-center group">
                   <div className="w-16 h-16 rounded-full bg-white border-4 border-[#ffdad6] flex items-center justify-center mb-6 z-10 transition-transform group-hover:scale-110 shadow-sm">
-                    <span className="material-symbols-outlined text-[#760009]">directions_walk</span>
+                    <UserRound className="w-8 h-8 text-[#760009]" />
                   </div>
                   <h5 className="font-bold text-lg mb-2">Arrival</h5>
                   <p className="text-sm text-[#575e70]">Check-in at the reception desk early.</p>
@@ -267,7 +276,7 @@ export default function TestDayGuidelinesClient() {
                 {/* Step 2 */}
                 <div className="relative flex flex-col items-center text-center group">
                   <div className="w-16 h-16 rounded-full bg-white border-4 border-[#ffdad6] flex items-center justify-center mb-6 z-10 transition-transform group-hover:scale-110 shadow-sm">
-                    <span className="material-symbols-outlined text-[#760009]">person_check</span>
+                    <UserCheck className="w-8 h-8 text-[#760009]" />
                   </div>
                   <h5 className="font-bold text-lg mb-2">Check-in</h5>
                   <p className="text-sm text-[#575e70]">Document verification and biometric data collection.</p>
@@ -275,7 +284,7 @@ export default function TestDayGuidelinesClient() {
                 {/* Step 3 */}
                 <div className="relative flex flex-col items-center text-center group">
                   <div className="w-16 h-16 rounded-full bg-white border-4 border-[#ffdad6] flex items-center justify-center mb-6 z-10 transition-transform group-hover:scale-110 shadow-sm">
-                    <span className="material-symbols-outlined text-[#760009]">security</span>
+                    <ShieldCheck className="w-8 h-8 text-[#760009]" />
                   </div>
                   <h5 className="font-bold text-lg mb-2">Security</h5>
                   <p className="text-sm text-[#575e70]">Storage of personal items and metal detection scan.</p>
@@ -283,7 +292,7 @@ export default function TestDayGuidelinesClient() {
                 {/* Step 4 */}
                 <div className="relative flex flex-col items-center text-center group">
                   <div className="w-16 h-16 rounded-full bg-[#760009] border-4 border-[#ffdad6] flex items-center justify-center mb-6 z-10 transition-transform group-hover:scale-110 shadow-lg">
-                    <span className="material-symbols-outlined text-white">edit_square</span>
+                    <FileEdit className="w-8 h-8 text-white" />
                   </div>
                   <h5 className="font-bold text-lg mb-2 text-[#760009]">The Test</h5>
                   <p className="text-sm text-[#575e70]">Undertaking your exam in our secure, quiet lab.</p>
@@ -291,7 +300,7 @@ export default function TestDayGuidelinesClient() {
                 {/* Step 5 */}
                 <div className="relative flex flex-col items-center text-center group">
                   <div className="w-16 h-16 rounded-full bg-white border-4 border-[#ffdad6] flex items-center justify-center mb-6 z-10 transition-transform group-hover:scale-110 shadow-sm">
-                    <span className="material-symbols-outlined text-[#760009]">logout</span>
+                    <LogOut className="w-8 h-8 text-[#760009]" />
                   </div>
                   <h5 className="font-bold text-lg mb-2">Departure</h5>
                   <p className="text-sm text-[#575e70]">Collection of personal items and check-out.</p>
@@ -308,7 +317,7 @@ export default function TestDayGuidelinesClient() {
               <h2 className="text-4xl font-extrabold text-[#261817] tracking-tight mb-8">Venue Rules & Conduct</h2>
               <div className="space-y-8">
                 <div className="flex gap-4">
-                  <span className="material-symbols-outlined text-[#760009] text-3xl">quiet_time</span>
+                  <VolumeX className="w-8 h-8 text-[#760009] shrink-0" />
                   <div>
                     <h6 className="font-bold text-lg mb-1">Strict Silence Policy</h6>
                     <p className="text-[#575e70] leading-relaxed">
@@ -318,7 +327,7 @@ export default function TestDayGuidelinesClient() {
                   </div>
                 </div>
                 <div className="flex gap-4">
-                  <span className="material-symbols-outlined text-[#760009] text-3xl">health_and_safety</span>
+                  <HeartPulse className="w-8 h-8 text-[#760009] shrink-0" />
                   <div>
                     <h6 className="font-bold text-lg mb-1">Health & Safety Protocols</h6>
                     <p className="text-[#575e70] leading-relaxed">
@@ -328,7 +337,7 @@ export default function TestDayGuidelinesClient() {
                   </div>
                 </div>
                 <div className="flex gap-4">
-                  <span className="material-symbols-outlined text-[#760009] text-3xl">policy</span>
+                  <Gavel className="w-8 h-8 text-[#760009] shrink-0" />
                   <div>
                     <h6 className="font-bold text-lg mb-1">Proctoring Standards</h6>
                     <p className="text-[#575e70] leading-relaxed">
@@ -340,8 +349,8 @@ export default function TestDayGuidelinesClient() {
               </div>
             </div>
             <div className="bg-[#ffe9e6] rounded-3xl p-12 flex flex-col justify-center items-center text-center">
-              <div className="bg-white p-4 rounded-full mb-6 shadow-sm">
-                <span className="material-symbols-outlined text-[#760009] text-5xl">support_agent</span>
+              <div className="bg-white p-6 rounded-full mb-6 shadow-sm">
+                <Headset className="w-12 h-12 text-[#760009]" />
               </div>
               <h3 className="text-3xl font-extrabold mb-4">Running Late?</h3>
               <p className="text-[#575e70] mb-8 text-lg">
@@ -353,14 +362,14 @@ export default function TestDayGuidelinesClient() {
                   className="flex items-center justify-center gap-3 bg-white text-[#261817] py-4 rounded-xl font-bold border border-[#e1bfbb]/30 hover:border-[#760009] transition-all shadow-sm"
                   href="tel:+1234567890"
                 >
-                  <span className="material-symbols-outlined text-[#760009]">call</span>
+                  <Phone className="w-5 h-5 text-[#760009]" />
                   Emergency Hotline
                 </Link>
                 <Link
                   className="flex items-center justify-center gap-3 bg-[#760009] text-white py-4 rounded-xl font-bold hover:opacity-90 transition-all shadow-md"
                   href="#"
                 >
-                  <span className="material-symbols-outlined">chat</span>
+                  <MessageSquare className="w-5 h-5" />
                   Live Support Chat
                 </Link>
               </div>

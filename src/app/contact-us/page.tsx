@@ -3,6 +3,7 @@ import FormIELTSRegistration from "@/components/forms/ielts-exam-registration/fo
 import FormPTEAcademicRegistration from "@/components/forms/pte-academic-registration/form-pte-academic-registration";
 import FormPTECoreRegistration from "@/components/forms/pte-core-registration/form-pte-core-registration";
 import FormPTEHomeRegistration from "@/components/forms/pte-home-registration/form-pte-home-registration";
+import { MapPin, Clock } from "lucide-react";
 
 
 export default function ContactUs() {
@@ -45,9 +46,7 @@ export default function ContactUs() {
               {/* Headquarters Card */}
               <div className="group p-6 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                 <div className="w-14 h-14 rounded-xl bg-red-50 flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
-                  <span className="material-symbols-outlined text-3xl">
-                    location_on
-                  </span>
+                  <MapPin className="w-7 h-7" />
                 </div>
                 <h4 className="text-xl font-bold text-secondary mb-3">
                   Headquarters
@@ -64,9 +63,7 @@ export default function ContactUs() {
               {/* Working Hours Card */}
               <div className="group p-6 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                 <div className="w-14 h-14 rounded-xl bg-red-50 flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
-                  <span className="material-symbols-outlined text-3xl">
-                    schedule
-                  </span>
+                  <Clock className="w-7 h-7" />
                 </div>
                 <h4 className="text-xl font-bold text-secondary mb-3">
                   Working Hours
