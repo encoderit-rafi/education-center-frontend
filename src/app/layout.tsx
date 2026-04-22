@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import NavBar from "@/components/blocks/nav-bar";
 import Footer from "@/components/blocks/footer";
 import FloatingChatbot from "@/components/blocks/floating-chatbot";
+import WhatsAppSupport from "@/components/blocks/whatsapp-support";
 
 const manrope = Manrope({ subsets: ["latin"], variable: "--font-headline" });
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
@@ -40,6 +41,7 @@ export default function RootLayout({
         <main>{children}</main>
         <Footer />
         <FloatingChatbot />
+        <WhatsAppSupport />
       </body>
     </html>
   );
