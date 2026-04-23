@@ -30,7 +30,18 @@ const navItems = [
       href: `/courses/${course.id}`,
     }))
   },
-  { label: "Fees", href: "/fees" },
+  {
+    label: "Fees",
+    children: [
+      { label: "IELTS Fees", href: "/fees/ielts" },
+      { label: "PTE Fees", href: "/fees/pte" },
+      { label: "CELPIP Fees", href: "/fees/celpip" },
+      { label: "CAEL Fees", href: "/fees/cael" },
+      { label: "TOEFL Fees", href: "/fees/toefl" },
+      { label: "OET Fees", href: "/fees/oet" },
+      { label: "Exam Workshop", href: "/fees/exam-workshop" },
+    ],
+  },
   {
     label: "Our Venues",
     children: [

@@ -1,21 +1,17 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { CoursePricingGrid } from "./_components/course-pricing-grid";
-import { WorkshopPricingGrid } from "./_components/workshop-pricing-grid";
-import { Button } from "@base-ui/react";
 import FreeConsultation from "../free-consultation/_components/free-consultation";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function FeesPage() {
   return (
     <main className="font-sans selection:bg-red-100 selection:text-red-900">
-      {/* ── Hero Section: Editorial Focus ── */}
+      {/* ── Hero Section ── */}
       <header className="relative min-h-[550px] flex items-center bg-[#111827] overflow-hidden">
         <div className="absolute inset-0 opacity-40">
           <Image
             src="/images/about-us/vision-hero.png"
-            alt="serene high-end university library interior"
+            alt="TEPTH Academic Investment"
             fill
             className="object-cover"
             priority
@@ -37,71 +33,48 @@ export default function FeesPage() {
         </div>
       </header>
 
-      {/* ── Tabs for Courses ── */}
+      {/* ── Course Selection Grid ── */}
       <section className="py-24 bg-white px-8">
         <div className="max-w-7xl mx-auto">
-          <Tabs defaultValue="ielts" className="w-full flex flex-col">
-            {/* <div className="flex justify-center mb-16"> */}
-            <TabsList className="bg-[#F3F4F6] p-1 rounded-2xl border border-[#E5E7EB]">
-              {["ielts", "oet", "pte", "general"].map((tab) => (
-                <TabsTrigger
-                  key={tab}
-                  value={tab}
-                  className="px-8 py-3 rounded-xl text-sm font-black uppercase tracking-widest transition-all data-[state=active]:bg-white data-[state=active]:text-[#991B1B] data-[state=active]:shadow-lg text-[#4B5563]"
-                >
-                  {tab === "general" ? "General English" : tab}
-                </TabsTrigger>
-              ))}
-            </TabsList>
-            {/* </div> */}
+          <div className="mb-20 text-center space-y-4">
+            <h2 className="text-[#111827] text-4xl md:text-5xl font-headline font-black tracking-tight">
+              Select Your Course
+            </h2>
+            <p className="text-[#4B5563] max-w-xl mx-auto text-lg leading-relaxed">
+              Explore detailed pricing and plans for each of our examination preparation programs.
+            </p>
+          </div>
 
-            {["ielts", "oet", "pte", "general"].map((tab) => (
-              <TabsContent
-                key={tab}
-                value={tab}
-                className="space-y-0 animate-in fade-in zoom-in-95 duration-500"
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              { name: "Workshops", fullName: "Intensive Exam Workshops", href: "/fees/exam-workshop" },
+              { name: "IELTS", fullName: "IELTS Preparation", href: "/fees/ielts" },
+              { name: "PTE", fullName: "PTE Preparation", href: "/fees/pte" },
+              { name: "CELPIP", fullName: "CELPIP Preparation", href: "/fees/celpip" },
+              { name: "CAEL", fullName: "CAEL Preparation", href: "/fees/cael" },
+              { name: "TOEFL", fullName: "TOEFL Preparation", href: "/fees/toefl" },
+              { name: "OET", fullName: "OET Preparation", href: "/fees/oet" },
+            ].map((course) => (
+              <Link
+                key={course.name}
+                href={course.href}
+                className="group relative p-8 bg-[#F9FAFB] rounded-[2rem] border border-[#E5E7EB]/50 transition-all duration-300 hover:bg-white hover:shadow-2xl hover:shadow-[#991B1B]/10 hover:-translate-y-1"
               >
-                {/* ── Examination Preparation Courses ── */}
-                <section
-                  className="py-20 bg-white"
-                  id={`course-pricing-${tab}`}
-                >
-                  <div className="max-w-7xl mx-auto">
-                    <div className="mb-20 text-center space-y-4">
-                      <h2 className="text-[#111827] text-4xl md:text-5xl font-headline font-black tracking-tight">
-                        {tab.toUpperCase()} Preparation Courses
-                      </h2>
-                      <p className="text-[#4B5563] max-w-xl mx-auto text-lg leading-relaxed">
-                        Tailored classroom and online training programs designed
-                        to ensure your peak performance in {tab.toUpperCase()}{" "}
-                        examinations.
-                      </p>
-                    </div>
-                    <CoursePricingGrid />
+                <div className="flex justify-between items-center mb-6">
+                  <span className="text-3xl font-headline font-black text-[#111827] group-hover:text-[#991B1B] transition-colors">
+                    {course.name}
+                  </span>
+                  <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:bg-[#991B1B] group-hover:text-white transition-all">
+                    <span className="material-symbols-outlined text-xl">arrow_forward</span>
                   </div>
-                </section>
-
-                {/* ── Exam Workshops ── */}
-                <section
-                  className="py-24 bg-[#F9FAFB] px-8 rounded-[3rem]"
-                  id={`workshops-${tab}`}
-                >
-                  <div className="max-w-7xl mx-auto">
-                    <div className="mb-20 text-center space-y-4">
-                      <h2 className="text-[#111827] text-4xl md:text-5xl font-headline font-black tracking-tight">
-                        Intensive {tab.toUpperCase()} Workshops
-                      </h2>
-                      <p className="text-[#4B5563] max-w-xl mx-auto text-lg leading-relaxed">
-                        Targeted, high-impact sessions focused on examination
-                        techniques and full simulation for {tab.toUpperCase()}.
-                      </p>
-                    </div>
-                    <WorkshopPricingGrid />
-                  </div>
-                </section>
-              </TabsContent>
+                </div>
+                <p className="text-[#4B5563] font-medium">{course.fullName}</p>
+                <div className="mt-8 pt-6 border-t border-[#E5E7EB]">
+                  <span className="text-xs font-black uppercase tracking-widest text-[#991B1B]">View Detailed Plans</span>
+                </div>
+              </Link>
             ))}
-          </Tabs>
+          </div>
         </div>
       </section>
 
