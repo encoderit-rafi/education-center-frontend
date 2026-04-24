@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/command";
 import { cn } from "@/lib/utils";
 
-export default function SearchCommand() {
+export default function SearchCommand({ className }: { className?: string }) {
   const [open, setOpen] = React.useState(false);
   const router = useRouter();
 
@@ -39,7 +39,7 @@ export default function SearchCommand() {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="inline-flex size-9 items-center justify-center rounded-md text-sm outline-none transition-[color,box-shadow] hover:bg-slate-50 focus-visible:border-ring focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 text-primary hover:text-primary cursor-pointer group"
+        className="inline-flex size-9 items-center justify-center rounded-full text-sm outline-none transition-[color,box-shadow] hover:bg-slate-50 focus-visible:border-rounded focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 text-primary hover:text-primary cursor-pointer group"
         aria-label="Search"
       >
         <Search className="size-4.5 group-hover:scale-110" />

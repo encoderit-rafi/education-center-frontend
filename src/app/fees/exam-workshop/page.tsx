@@ -17,6 +17,7 @@ interface WorkshopPlan {
 interface WorkshopSection {
   title: string;
   subtitle: string;
+  course: string;
   plans: WorkshopPlan[];
 }
 
@@ -24,6 +25,7 @@ const WORKSHOP_SECTIONS: WorkshopSection[] = [
   {
     title: "IELTS Intensive Workshop",
     subtitle: "Targeted strategies and full simulation for IELTS success.",
+    course: "ielts",
     plans: [
       { duration: "2 Hours", price: "600" },
       { duration: "4 Hours", price: "1,000" },
@@ -34,6 +36,7 @@ const WORKSHOP_SECTIONS: WorkshopSection[] = [
   {
     title: "PTE-A Intensive Workshop",
     subtitle: "Master the PTE Academic format with rapid-fire techniques.",
+    course: "pte",
     plans: [
       { duration: "2 Hours", price: "600" },
       { duration: "4 Hours", price: "1,000" },
@@ -44,6 +47,7 @@ const WORKSHOP_SECTIONS: WorkshopSection[] = [
   {
     title: "CELPIP Private Workshop",
     subtitle: "One-on-one focused sessions for CELPIP achievement.",
+    course: "celpip",
     plans: [
       { duration: "2 Hours", price: "600" },
       { duration: "4 Hours", price: "1,000" },
@@ -54,6 +58,7 @@ const WORKSHOP_SECTIONS: WorkshopSection[] = [
   {
     title: "CAEL Intensive Workshop",
     subtitle: "Sharpen your CAEL skills with intensive practice.",
+    course: "cael",
     plans: [
       { duration: "2 Hours", price: "600" },
       { duration: "4 Hours", price: "1,000" },
@@ -64,6 +69,7 @@ const WORKSHOP_SECTIONS: WorkshopSection[] = [
   {
     title: "TOEFL-IBT Workshop",
     subtitle: "Comprehensive test-taking strategies for TOEFL.",
+    course: "toefl",
     plans: [
       { duration: "2 Hours", price: "600" },
       { duration: "4 Hours", price: "1,000" },
@@ -74,6 +80,7 @@ const WORKSHOP_SECTIONS: WorkshopSection[] = [
   {
     title: "OET Writing Workshop",
     subtitle: "Specialized focus on OET Writing sub-test criteria.",
+    course: "oet",
     plans: [
       { duration: "2 Hours", price: "600" },
       { duration: "4 Hours", price: "1,000" },
@@ -84,6 +91,7 @@ const WORKSHOP_SECTIONS: WorkshopSection[] = [
   {
     title: "OET Reading Workshop",
     subtitle: "Proven techniques to master OET Reading complexity.",
+    course: "oet",
     plans: [
       { duration: "2 Hours", price: "600" },
       { duration: "4 Hours", price: "1,000" },
@@ -165,8 +173,10 @@ export default function ExamWorkshopPage() {
                       "Flexible Scheduling"
                     ]}
                     buttonText="Book Workshop"
-                    buttonHref="/book-a-test"
+                    buttonHref="/enroll-workshop"
                     isPopular={plan.isPopular}
+                    course={section.course}
+                    planId={plan.duration}
                   />
                 ))}
               </div>

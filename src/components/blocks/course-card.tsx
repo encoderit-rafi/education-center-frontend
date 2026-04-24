@@ -47,7 +47,7 @@ export default function CourseCard({ course }: { course: Course }) {
 
         <div className="mt-auto">
           <Link
-            href={`/courses/${course.id}`}
+            href={`/fees/${course.category.toLowerCase()}`}
             className="inline-block px-8 py-3 bg-[#A11D1D] text-white font-bold text-sm rounded shadow-md hover:bg-red-900 transition-all uppercase tracking-wider"
           >
             BOOK

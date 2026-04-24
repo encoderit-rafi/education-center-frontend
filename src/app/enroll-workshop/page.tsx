@@ -4,7 +4,7 @@ import MockTestBookingForm from "@/app/paid-mock-test/_components/mock-test-book
 import React, { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 
-function EnrollmentContent() {
+function WorkshopEnrollmentContent() {
   const searchParams = useSearchParams();
   const course = searchParams.get("course");
   const type = searchParams.get("type");
@@ -15,15 +15,15 @@ function EnrollmentContent() {
       <section className="relative px-8 py-20 lg:py-24 overflow-hidden border-b border-outline/5 bg-secondary/[0.02]">
         <div className="max-w-7xl mx-auto relative z-10 text-center space-y-6">
           <span className="text-primary font-black tracking-[0.4em] uppercase text-[10px] mb-4 block">
-            Enroll Course
+            Workshop Enrollment
           </span>
           <h1 className="text-5xl md:text-7xl font-headline font-black text-secondary tracking-tighter leading-none">
             Enroll <br />
-            <span className="text-primary italic">Course</span>
+            <span className="text-primary italic">Workshop</span>
           </h1>
           <p className="text-slate-500 max-w-2xl mx-auto text-lg leading-relaxed font-light">
-            Complete the form below to secure your spot. You can change your course 
-            selection or training plan directly on this page.
+            Fast-track your exam preparation with intensive, focused workshop sessions. 
+            Select your preferred duration and schedule below.
           </p>
         </div>
         <div className="absolute left-1/2 top-0 h-full w-full opacity-5 blur-3xl bg-secondary/20 -z-10 rounded-full -translate-x-1/2 -translate-y-1/2" />
@@ -34,7 +34,7 @@ function EnrollmentContent() {
           <MockTestBookingForm 
             initialCourse={course || undefined} 
             initialType={type || undefined}
-            mode="course"
+            mode="workshop"
           />
         </div>
       </section>
@@ -42,10 +42,10 @@ function EnrollmentContent() {
   );
 }
 
-export default function EnrollCoursePage() {
+export default function EnrollWorkshopPage() {
   return (
     <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
-      <EnrollmentContent />
+      <WorkshopEnrollmentContent />
     </Suspense>
   );
 }

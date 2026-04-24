@@ -11,7 +11,8 @@ import {
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { useState } from "react";
+import { useState, useRef } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
 
 
 
@@ -20,8 +21,11 @@ import { CheckCircle2 } from "lucide-react";
 const contactSchema = z.object({
   fullName: z
     .string()
-    .min(2, { message: "Name must be at least 2 characters" }),
+    .min(2, { message: "Name must be at least 3 characters" }),
   email: z.string().email({ message: "Please enter a valid email address" }),
+  subject: z
+    .string()
+    .min(3, { message: "Subject must be at least 3 characters" }),
   message: z
     .string()
     .min(10, { message: "Message must be at least 10 characters" }),
@@ -31,6 +35,8 @@ type ContactFormValues = z.infer<typeof contactSchema>;
 
 export default function ContactForm() {
   const [isSuccess, setIsSuccess] = useState(false);
+  const [captchaError, setCaptchaError] = useState<string | null>(null);
+  const captchaRef = useRef<ReCAPTCHA>(null);
 
   const {
     register,
@@ -41,15 +47,26 @@ export default function ContactForm() {
     defaultValues: {
       fullName: "",
       email: "",
+      subject: "",
       message: "",
     },
   });
 
   const onSubmit = async (data: ContactFormValues) => {
+    const token = captchaRef.current?.getValue();
+
+    if (!token) {
+      setCaptchaError("Please verify that you are not a robot.");
+      return;
+    }
+
+    setCaptchaError(null);
+
     // Simulate API call
-    console.log("Submitting:", data);
+    console.log("Submitting:", { ...data, recaptchaToken: token });
     await new Promise((resolve) => setTimeout(resolve, 800));
     setIsSuccess(true);
+    captchaRef.current?.reset();
   };
 
   if (isSuccess) {
@@ -69,7 +86,7 @@ export default function ContactForm() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Field data-invalid={!!errors.fullName}>
           <FieldLabel className="text-xs font-bold text-secondary uppercase tracking-wider ml-1">
-            Full Name
+            Full Name <span className="text-red-500">*</span>
           </FieldLabel>
           <FieldContent>
             <Input
@@ -85,7 +102,7 @@ export default function ContactForm() {
 
         <Field data-invalid={!!errors.email}>
           <FieldLabel className="text-xs font-bold text-secondary uppercase tracking-wider ml-1">
-            Email Address
+            Email Address <span className="text-red-500 font-extrabold">*</span>
           </FieldLabel>
           <FieldContent>
             <Input
@@ -97,9 +114,21 @@ export default function ContactForm() {
           </FieldContent>
           {errors.email && <FieldError>{errors.email.message}</FieldError>}
         </Field>
-
-
       </div>
+
+      <Field data-invalid={!!errors.subject}>
+        <FieldLabel className="text-xs font-bold text-secondary uppercase tracking-wider ml-1">
+          Subject <span className="text-red-500 font-extrabold">*</span>
+        </FieldLabel>
+        <FieldContent>
+          <Input
+            placeholder="How can we help you?"
+            {...register("subject")}
+            className="bg-slate-50 border-slate-200 focus-visible:ring-primary h-12 rounded-md px-6 placeholder:text-gray-500"
+          />
+        </FieldContent>
+        {errors.subject && <FieldError>{errors.subject.message}</FieldError>}
+      </Field>
 
       <Field data-invalid={!!errors.message}>
         <FieldLabel className="text-xs font-bold text-secondary uppercase tracking-wider ml-1">
@@ -115,6 +144,17 @@ export default function ContactForm() {
         </FieldContent>
         {errors.message && <FieldError>{errors.message.message}</FieldError>}
       </Field>
+
+      <div className="space-y-2">
+        <ReCAPTCHA
+          ref={captchaRef}
+          sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
+          onChange={() => setCaptchaError(null)}
+        />
+        {captchaError && (
+          <p className="text-red-500 text-sm font-medium">{captchaError}</p>
+        )}
+      </div>
 
       <button
         type="submit"

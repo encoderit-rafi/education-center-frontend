@@ -145,6 +145,8 @@ export function PricingTemplate({ courseName, courseAbbr }: PricingTemplateProps
                 details={plan.details}
                 buttonText="Register Now"
                 buttonHref="/enroll-course"
+                course={courseAbbr}
+                planId={plan.id}
               />
             ))}
           </div>

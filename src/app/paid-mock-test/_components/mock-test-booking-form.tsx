@@ -48,42 +48,88 @@ const MOCK_TESTS = [
 
 const COURSE_OPTIONS = [
   {
-    id: "group",
-    title: "Group Course",
-    description: "Learn in a collaborative environment with fellow students and live feedback.",
-    price: 1850,
-    badge: "Best Value",
-    category: "Classroom",
+    id: "virtual",
+    title: "Virtual Classroom",
+    description: "Interactive online sessions from the comfort of your home.",
+    price: 1250,
+    badge: "Most Flexible",
+    category: "Online Training",
   },
   {
-    id: "private",
-    title: "Private Course",
-    description: "One-on-one intensive sessions tailored perfectly to your individual pace.",
-    price: 4850,
-    badge: "Premium",
-    category: "Classroom",
+    id: "group",
+    title: "Group Course",
+    description: "Standardized classroom training for collective excellence.",
+    price: 1850,
+    badge: "Best Value",
+    category: "Standard Training",
   },
   {
     id: "semi-private",
     title: "Semi-Private",
-    description: "Focused learning in an intimate small group for maximum interaction.",
+    description: "Personalized attention in small focused groups.",
     price: 2850,
     badge: "Balanced",
-    category: "Classroom",
+    category: "Small Group",
   },
   {
-    id: "online",
-    title: "Online Course",
-    description: "Flexible digital learning with full access to our virtual classroom suite.",
-    price: 3850,
-    badge: "Remote",
-    category: "Online",
+    id: "private",
+    title: "Private Course",
+    description: "Exclusive 1-on-1 tutoring tailored to your pace.",
+    price: 4850,
+    badge: "Premium",
+    category: "1-on-1 Focus",
   },
+];
+
+const WORKSHOP_OPTIONS = [
+  {
+    id: "2 hours",
+    title: "2 Hours",
+    description: "Rapid focus session for immediate strategy adjustment.",
+    price: 600,
+    badge: "Quick Fix",
+    category: "Workshop",
+  },
+  {
+    id: "4 hours",
+    title: "4 Hours",
+    description: "Deep dive into specific modules with intensive practice.",
+    price: 1000,
+    badge: "Popular",
+    category: "Workshop",
+  },
+  {
+    id: "6 hours",
+    title: "6 Hours",
+    description: "Comprehensive workshop covering multiple test areas.",
+    price: 1350,
+    badge: "Best Value",
+    category: "Workshop",
+  },
+  {
+    id: "8 hours",
+    title: "8 Hours",
+    description: "Full-day mastery session for complete confidence.",
+    price: 1600,
+    badge: "Mastery",
+    category: "Workshop",
+  },
+];
+
+const EXAMS = [
+  // ...
+  { id: "ielts", name: "IELTS" },
+  { id: "pte", name: "PTE" },
+  { id: "celpip", name: "CELPIP" },
+  { id: "cael", name: "CAEL" },
+  { id: "toefl", name: "TOEFL" },
+  { id: "oet", name: "OET" },
 ];
 
 const TIME_SLOTS = ["09:00 AM", "11:30 AM", "02:00 PM", "04:30 PM"];
 
 const bookingSchema = z.object({
+  courseId: z.string().min(1, "Please select a course"),
   selectionId: z.string().min(1, "Please make a selection"),
   fullName: z.string().min(2, "Full name must be at least 2 characters"),
   email: z.string().email("Please enter a valid email address"),
@@ -97,22 +143,22 @@ const bookingSchema = z.object({
 type BookingValues = z.infer<typeof bookingSchema>;
 
 interface MockTestBookingFormProps {
-  courseTitle?: string;
-  mode?: string;
+  initialCourse?: string;
+  initialType?: string;
+  mode?: "course" | "mock-test" | "workshop";
   className?: string;
 }
 
-export default function MockTestBookingForm({ courseTitle, mode, className }: MockTestBookingFormProps) {
+export default function MockTestBookingForm({
+  initialCourse,
+  initialType,
+  mode = "course",
+  className
+}: MockTestBookingFormProps) {
   const [isSuccess, setIsSuccess] = useState(false);
-  const isCourseMode = !!courseTitle;
-
-  // Determine which options to show
-  const availableOptions = isCourseMode
-    ? COURSE_OPTIONS.filter(opt => {
-      if (mode?.toLowerCase().includes("online")) return opt.category === "Online";
-      return opt.category === "Classroom";
-    })
-    : MOCK_TESTS;
+  const isCourseMode = mode === "course";
+  const isWorkshopMode = mode === "workshop";
+  const isMockTestMode = mode === "mock-test";
 
   const {
     register,
@@ -123,20 +169,19 @@ export default function MockTestBookingForm({ courseTitle, mode, className }: Mo
   } = useForm<BookingValues>({
     resolver: zodResolver(bookingSchema),
     defaultValues: {
-      selectionId: isCourseMode
-        ? availableOptions[0]?.id
-        : (courseTitle?.toLowerCase().includes("ielts") ? "ielts" :
-          courseTitle?.toLowerCase().includes("oet") ? "oet" :
-            courseTitle?.toLowerCase().includes("pte") ? "pte" :
-              availableOptions[0]?.id),
+      courseId: initialCourse || EXAMS[0].id,
+      selectionId: initialType?.toLowerCase() || (isCourseMode ? COURSE_OPTIONS[1].id : isWorkshopMode ? WORKSHOP_OPTIONS[2].id : MOCK_TESTS[0].id),
       paymentMethod: "card",
     },
   });
 
+  const selectedCourseId = watch("courseId");
   const selectedId = watch("selectionId");
   const selectedDate = watch("date");
   const selectedTime = watch("timeSlot");
 
+  const availableOptions = isWorkshopMode ? WORKSHOP_OPTIONS : isCourseMode ? COURSE_OPTIONS : MOCK_TESTS;
+  const selectedCourse = EXAMS.find(e => e.id === selectedCourseId);
   const selectedItem = availableOptions.find((m) => m.id === selectedId);
 
   const onSubmit = (data: BookingValues) => {
@@ -154,10 +199,10 @@ export default function MockTestBookingForm({ courseTitle, mode, className }: Mo
         </div>
         <div className="space-y-4">
           <h2 className="text-4xl font-headline font-black text-emerald-900 tracking-tight">
-            Booking Confirmed
+            {isWorkshopMode ? "Workshop Confirmed" : "Booking Confirmed"}
           </h2>
           <p className="text-emerald-700/80 text-lg leading-relaxed font-medium">
-            Your {isCourseMode ? courseTitle : ""} {selectedItem?.title} has been successfully scheduled
+            Your {isCourseMode || isWorkshopMode ? selectedCourse?.name : ""} {selectedItem?.title} {isWorkshopMode ? "Workshop" : ""} has been successfully scheduled
             for {selectedDate ? format(selectedDate, "PPP") : ""} at{" "}
             {selectedTime}. Check your email for access credentials.
           </p>
@@ -179,14 +224,46 @@ export default function MockTestBookingForm({ courseTitle, mode, className }: Mo
     >
       {/* Left Column: Selection & Payment */}
       <div className="lg:col-span-8 space-y-16">
-        {/* Section 1: Selection */}
+        {/* Section 1: Course Selection (Only in Course/Workshop Mode) */}
+        {(isCourseMode || isWorkshopMode) && (
+          <section>
+            <div className="flex items-center gap-4 mb-8">
+              <span className="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-black text-sm shadow-lg shadow-primary/20">
+                1
+              </span>
+              <h2 className="text-2xl font-headline font-black text-secondary tracking-tight">
+                {isWorkshopMode ? "Select Workshop Category" : "Select Your Course"}
+              </h2>
+            </div>
+
+            <div className="flex flex-wrap gap-3">
+              {EXAMS.filter(exam => !initialCourse || exam.id === initialCourse).map((exam) => (
+                <button
+                  key={exam.id}
+                  type="button"
+                  onClick={() => setValue("courseId", exam.id)}
+                  className={cn(
+                    "px-8 py-3 rounded-full border-2 text-xs font-black uppercase tracking-widest transition-all",
+                    selectedCourseId === exam.id
+                      ? "border-[#991B1B] bg-white text-secondary shadow-md"
+                      : "border-outline/5 bg-surface-container-low text-secondary/30 hover:border-[#991B1B]/20",
+                  )}
+                >
+                  {exam.name}
+                </button>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Section 2: Selection */}
         <section>
           <div className="flex items-center gap-4 mb-8">
             <span className="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-black text-sm shadow-lg shadow-primary/20">
-              1
+              {isCourseMode || isWorkshopMode ? "2" : "1"}
             </span>
             <h2 className="text-2xl font-headline font-black text-secondary tracking-tight">
-              {isCourseMode ? "Select Enrollment Option" : "Select Examination"}
+              {isWorkshopMode ? "Select Workshop Duration" : isCourseMode ? "Select Training Plan" : "Select Examination"}
             </h2>
           </div>
 
@@ -206,42 +283,42 @@ export default function MockTestBookingForm({ courseTitle, mode, className }: Mo
                   <label
                     htmlFor={item.id}
                     className={cn(
-                      "p-8 rounded-[2rem] border-2 cursor-pointer transition-all duration-300 relative group h-full flex flex-col",
+                      "p-10 rounded-[2.5rem] border-2 cursor-pointer transition-all duration-300 relative group h-full flex flex-col items-center text-center",
                       selectedId === item.id
-                        ? "border-primary bg-white shadow-2xl shadow-primary/5 ring-4 ring-primary/5"
-                        : "border-outline/5 bg-surface-container-low hover:border-primary/20 hover:bg-white",
+                        ? "border-[#991B1B] bg-white shadow-2xl shadow-red-900/5"
+                        : "border-transparent bg-slate-50 hover:bg-slate-100",
                     )}
                   >
                     <div
                       className={cn(
-                        "text-[10px] font-black uppercase tracking-[0.2em] mb-3 transition-colors",
+                        "text-[10px] font-black uppercase tracking-[0.2em] mb-4 transition-colors",
                         selectedId === item.id
-                          ? "text-primary"
-                          : "text-secondary/40",
+                          ? "text-[#991B1B]"
+                          : "text-secondary/30",
                       )}
                     >
                       {item.badge}
                     </div>
-                    <h3 className="text-xl font-headline font-black text-secondary mb-2 group-hover:text-primary transition-colors">
+                    <h3 className="text-2xl font-headline font-black text-secondary mb-1">
                       {item.title}
                     </h3>
-                    <div className="text-2xl font-headline font-black text-secondary mb-4 leading-none">
+                    <div className="text-3xl font-headline font-black text-secondary mb-6 leading-none">
                       {currency} {item.price.toLocaleString()}
                     </div>
-                    <p className="text-[11px] text-on-surface-variant/60 font-medium leading-relaxed mb-8 flex-1">
+                    <p className="text-xs text-on-surface-variant/50 font-medium leading-relaxed mb-10 max-w-[200px]">
                       {item.description}
                     </p>
 
                     <div
                       className={cn(
-                        "w-full py-4 rounded-xl font-headline font-black text-[10px] uppercase tracking-widest transition-all flex items-center justify-center gap-2",
+                        "mt-auto w-full max-w-[160px] py-4 rounded-2xl font-headline font-black text-[10px] uppercase tracking-widest transition-all flex items-center justify-center gap-2",
                         selectedId === item.id
-                          ? "bg-primary text-white shadow-xl shadow-primary/20"
-                          : "bg-surface-container-high text-secondary/40 group-hover:bg-primary group-hover:text-white",
+                          ? "bg-[#991B1B] text-white shadow-xl shadow-red-900/20"
+                          : "text-secondary/40",
                       )}
                     >
                       {selectedId === item.id && (
-                        <CheckCircle2 className="w-4 h-4" />
+                        <CheckCircle2 className="w-3.5 h-3.5" />
                       )}
                       {selectedId === item.id ? "Selected" : "Select"}
                     </div>
@@ -253,11 +330,11 @@ export default function MockTestBookingForm({ courseTitle, mode, className }: Mo
           </Field>
         </section>
 
-        {/* Section 2: Schedule & Information */}
+        {/* Section 3: Schedule & Information */}
         <section>
           <div className="flex items-center gap-4 mb-8">
             <span className="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-black text-sm shadow-lg shadow-primary/20">
-              2
+              {isCourseMode || isWorkshopMode ? "3" : "2"}
             </span>
             <h2 className="text-2xl font-headline font-black text-secondary tracking-tight">
               Schedule & Information
@@ -358,11 +435,11 @@ export default function MockTestBookingForm({ courseTitle, mode, className }: Mo
           </div>
         </section>
 
-        {/* Section 3: Secure Payment */}
+        {/* Section 4: Secure Payment */}
         <section>
           <div className="flex items-center gap-4 mb-8">
             <span className="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-black text-sm shadow-lg shadow-primary/20">
-              3
+              {isCourseMode || isWorkshopMode ? "4" : "3"}
             </span>
             <h2 className="text-2xl font-headline font-black text-secondary tracking-tight">
               Secure Payment
@@ -398,10 +475,10 @@ export default function MockTestBookingForm({ courseTitle, mode, className }: Mo
           <div className="space-y-6 mb-12">
             <div className="flex flex-col gap-1 pb-6 border-b border-white/5">
               <span className="text-[10px] font-black text-white/30 uppercase tracking-[0.2em]">
-                {isCourseMode ? "Selection" : "Selected Test"}
+                {isWorkshopMode ? "Selected Workshop" : isCourseMode ? "Selected Course" : "Selected Test"}
               </span>
               <span className="text-xl font-bold tracking-tight">
-                {isCourseMode ? courseTitle : ""} {selectedItem?.title}
+                {isCourseMode || isWorkshopMode ? selectedCourse?.name : ""} {selectedItem?.title} {isWorkshopMode ? "Workshop" : ""}
               </span>
             </div>
 

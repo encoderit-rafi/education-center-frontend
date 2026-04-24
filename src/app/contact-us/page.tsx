@@ -43,23 +43,6 @@ export default function ContactUs() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
-              {/* Headquarters Card */}
-              <div className="group p-6 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                <div className="w-14 h-14 rounded-xl bg-red-50 flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
-                  <MapPin className="w-7 h-7" />
-                </div>
-                <h4 className="text-xl font-bold text-secondary mb-3">
-                  Headquarters
-                </h4>
-                <p className="text-sm text-primary leading-relaxed">
-                  Suite 703, Apricot Tower, Dubai
-                  <br />
-                  Silicon Oasis, P.O.Box 300109,
-                  <br />
-                  Dubai, United Arab Emirates.
-                  <br />
-                </p>
-              </div>
               {/* Working Hours Card */}
               <div className="group p-6 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                 <div className="w-14 h-14 rounded-xl bg-red-50 flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
@@ -81,18 +64,6 @@ export default function ContactUs() {
           </div>
         </div>
       </div>
-      <section className="mt-40">
-        <FormPTEHomeRegistration />
-      </section>
-      <section className="mt-40">
-        <FormPTECoreRegistration />
-      </section>
-      <section className="mt-40">
-        <FormPTEAcademicRegistration />
-      </section>
-      <section className="mt-40">
-        <FormIELTSRegistration />
-      </section>
     </section>
   );
 }

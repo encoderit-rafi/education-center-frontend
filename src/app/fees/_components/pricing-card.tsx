@@ -16,6 +16,8 @@ interface PricingCardProps {
   buttonText: string;
   buttonHref: string;
   isPopular?: boolean;
+  course?: string;
+  planId?: string;
 }
 
 export function PricingCard({
@@ -29,7 +31,13 @@ export function PricingCard({
   buttonText,
   buttonHref,
   isPopular,
+  course,
+  planId,
 }: PricingCardProps) {
+  const finalHref = course && planId 
+    ? `${buttonHref}?course=${course.toLowerCase()}&type=${planId.toLowerCase()}`
+    : buttonHref;
+
   return (
     <div className="p-8 rounded-[2.5rem] flex flex-col justify-between group transition-all duration-500 hover:shadow-2xl relative overflow-hidden h-full bg-white border border-slate-200 hover:bg-[#111827] hover:border-[#111827] text-[#111827] hover:text-white">
       {isPopular && (
@@ -83,7 +91,7 @@ export function PricingCard({
         </div>
 
         <Link
-          href={buttonHref}
+          href={finalHref}
           className="block w-full text-center py-4 rounded-xl font-headline font-bold text-xs transition-all duration-500 tracking-widest uppercase bg-[#F3F4F6] text-[#111827] group-hover:bg-gradient-to-br group-hover:from-[#991B1B] group-hover:to-[#7F1D1D] group-hover:text-white group-hover:shadow-xl group-hover:shadow-[#991B1B]/20"
         >
           {buttonText}
