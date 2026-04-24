@@ -119,8 +119,9 @@ export default function CourseDetails() {
       <section className="max-w-7xl mx-auto px-6 py-12 lg:py-16">
         <div className="bg-slate-50/50 rounded-[3rem] p-8 lg:p-12 border border-slate-100 shadow-sm">
           <MockTestBookingForm
-            courseTitle={course.title}
-            mode={course.format.toLowerCase().includes("online") ? "online" : "classroom"}
+            initialCourse={course.category.toLowerCase()}
+            mode="course"
+            initialType={course.format.toLowerCase().includes("online") ? "virtual" : "group"}
           />
         </div>
       </section>

@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/select";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 export default function FormIELTSRegistration() {
     const [formData, setFormData] = useState({
@@ -74,7 +75,7 @@ export default function FormIELTSRegistration() {
             {/* Hero Section */}
             <section className="relative h-[400px] flex items-center justify-center overflow-hidden bg-slate-900">
                 <div className="absolute inset-0 z-0 opacity-40">
-                    <img
+                    <Image
                         className="w-full h-full object-cover"
                         alt="Modern university library"
                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuAr4MVsRUAf7ZsJAIO9JeORu68_2FAzAvcF-_yI7jbx0w-xiabblmgx6otP5lt2kFnaDKe_Q89HH8kcVwhhwADijkL-yMaBmEqYpsfbGpCoOLZyYIBXSHNggVKmv4s3A4OVIytI1HhCa1cOUQpQJJ6aBj27UJAaqgH_7ZwhdPd57fOp6BKgCvOecAXymMOiUQd54zPB28OAp7wmM8ndZ-mpmWlN1xjxYn188BxiecgkCw-y_YL45q2UxusCGu4TVNldzVzx_CUlffBT"
