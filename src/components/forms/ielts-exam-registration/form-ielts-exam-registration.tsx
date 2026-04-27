@@ -24,109 +24,26 @@ import {
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { cn } from "@/lib/utils";
 import { Label } from "@/components/ui/label";
-import { 
-    CheckCircle2, 
-    UploadCloud, 
-    Gavel, 
-    Info, 
-    Globe, 
-    User, 
-    CreditCard, 
-    BookOpen, 
-    School, 
+import {
+    CheckCircle2,
+    UploadCloud,
+    Gavel,
+    Info,
+    Globe,
+    User,
+    CreditCard,
+    BookOpen,
+    School,
     Languages,
     ArrowRight
 } from "lucide-react";
+import { RefinedIeltsSchema, type TIeltsFormSchema } from "./-type";
 
-// --- Schema Definition ---
-const ieltsFormSchema = z.object({
-    testModule: z.string().min(1, "Please select a test module"),
-    givenNames: z.string().min(1, "Given names are required"),
-    surnames: z.string().min(1, "Surnames are required"),
-    dobDay: z.string().min(1, "Day is required"),
-    dobMonth: z.string().min(1, "Month is required"),
-    dobYear: z.string().min(1, "Year is required"),
-    gender: z.string().min(1, "Gender is required"),
-    testTiming: z.string().min(1, "Test timing is required"),
-    takenBefore: z.string().min(1, "Please select an option"),
-    lessThan2Years: z.string().optional(),
-    existingAccount: z.string().optional(),
-    educationLevel: z.string().min(1, "Education level is required"),
-    occupationLevel: z.string().min(1, "Occupation level is required"),
-    occupationSector: z.string().min(1, "Occupation sector is required"),
-    reasonForTest: z.string().min(1, "Reason for test is required"),
-    destinationCountry: z.string().min(1, "Destination country is required"),
-    firstLanguage: z.string().min(1, "First language is required"),
-    yearsStudyingEnglish: z.string().min(1, "Years studying English is required"),
-    countryOfBirth: z.string().min(1, "Country of birth is required"),
-    countryOfCitizenship: z.string().min(1, "Country of citizenship is required"),
-    selectedCourse: z.boolean(),
-    selectedWorkshop: z.boolean(),
-    workshopHours: z.string(),
-    termsAccepted: z.boolean(),
-    permissionLogIntoAccount: z.boolean(),
-    infoCorrect: z.boolean(),
-});
 
-const refinedIeltsSchema = ieltsFormSchema.refine((data) => {
-    if (data.takenBefore === "yes") {
-        return !!data.lessThan2Years && !!data.existingAccount;
-    }
-    return true;
-}, {
-    message: "Required fields for previous test takers",
-    path: ["lessThan2Years"],
-}).refine((data) => {
-    if (data.selectedWorkshop) {
-        return !!data.workshopHours;
-    }
-    return true;
-}, {
-    message: "Please select workshop hours",
-    path: ["workshopHours"],
-}).refine(data => data.termsAccepted === true, {
-    message: "You must accept terms",
-    path: ["termsAccepted"],
-}).refine(data => data.permissionLogIntoAccount === true, {
-    message: "Permission is required",
-    path: ["permissionLogIntoAccount"],
-}).refine(data => data.infoCorrect === true, {
-    message: "Please confirm info is correct",
-    path: ["infoCorrect"],
-});
-
-interface IIeltsForm {
-    testModule: string;
-    givenNames: string;
-    surnames: string;
-    dobDay: string;
-    dobMonth: string;
-    dobYear: string;
-    gender: string;
-    testTiming: string;
-    takenBefore: string;
-    lessThan2Years?: string;
-    existingAccount?: string;
-    educationLevel: string;
-    occupationLevel: string;
-    occupationSector: string;
-    reasonForTest: string;
-    destinationCountry: string;
-    firstLanguage: string;
-    yearsStudyingEnglish: string;
-    countryOfBirth: string;
-    countryOfCitizenship: string;
-    selectedCourse: boolean;
-    selectedWorkshop: boolean;
-    workshopHours: string;
-    termsAccepted: boolean;
-    permissionLogIntoAccount: boolean;
-    infoCorrect: boolean;
-}
 
 export default function FormIELTSRegistration() {
-    const form = useForm<IIeltsForm>({
-        resolver: zodResolver(refinedIeltsSchema),
+    const form = useForm<TIeltsFormSchema>({
+        resolver: zodResolver(RefinedIeltsSchema),
         defaultValues: {
             testModule: "",
             givenNames: "",
@@ -181,7 +98,7 @@ export default function FormIELTSRegistration() {
         const cPrice = selectedCourse ? COURSE_BASE_PRICE : 0;
         const disc = selectedCourse ? (cPrice * DISCOUNT_RATE) : 0;
         const wPrice = selectedWorkshop ? (workshopPriceMap[workshopHours] || 0) : 0;
-        
+
         const taxable = SERVICE_FEE + (cPrice - disc) + wPrice;
         const vatAmount = taxable * VAT_RATE;
         const totalAmount = EXAM_FEE + taxable + vatAmount;
@@ -196,9 +113,8 @@ export default function FormIELTSRegistration() {
         };
     }, [selectedCourse, selectedWorkshop, workshopHours]);
 
-    const onSubmit: SubmitHandler<IIeltsForm> = (data) => {
+    const onSubmit: SubmitHandler<TIeltsFormSchema> = (data) => {
         console.log("Form Data:", data);
-        // Handle submission logic
     };
 
     return (
@@ -228,7 +144,7 @@ export default function FormIELTSRegistration() {
                 <div className="bg-white rounded-xl shadow-[0_24px_48px_-12px_rgba(38,24,23,0.08)] p-8 md:p-12 border border-outline-variant/10">
                     <Form {...form}>
                         <form className="space-y-12" onSubmit={handleSubmit(onSubmit)}>
-                            
+
                             {/* Registration Stepper Preview */}
                             <div className="flex items-center justify-between mb-12 overflow-x-auto pb-4 no-scrollbar border-b border-slate-100">
                                 {[
@@ -898,7 +814,7 @@ export default function FormIELTSRegistration() {
                                                 <FormItem className="flex items-start space-x-3 space-y-0 cursor-pointer group">
                                                     <FormControl>
                                                         <div className="relative flex items-center justify-center mt-1">
-                                                            <input 
+                                                            <input
                                                                 type="checkbox"
                                                                 className="peer appearance-none w-5 h-5 border-2 border-[#A11D1D] rounded bg-white checked:bg-[#A11D1D] transition-all cursor-pointer"
                                                                 checked={field.value}

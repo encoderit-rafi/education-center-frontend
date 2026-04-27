@@ -36,60 +36,8 @@ import {
     Search
 } from "lucide-react";
 
-// --- Schema & Interface ---
-const pteHomeSchema = z.object({
-    givenNames: z.string().min(1, "Given names are required"),
-    surnames: z.string().min(1, "Surnames are required"),
-    dobDay: z.string().min(1, "Day is required"),
-    dobMonth: z.string().min(1, "Month is required"),
-    dobYear: z.string().min(1, "Year is required"),
-    gender: z.string().min(1, "Gender is required"),
-    countryOfIssue: z.string().min(1, "Country of issue is required"),
-    countryOfBirth: z.string().min(1, "Country of birth is required"),
-    countryOfCitizenship: z.string().min(1, "Country of citizenship is required"),
-    countryOfResidence: z.string().min(1, "Country of residence is required"),
-    languageSpoken: z.string().min(1, "Language spoken is required"),
-    idType: z.string().min(1, "ID type is required"),
-    documentNumber: z.string().min(1, "Document number is required"),
-    fullAddress: z.string().min(1, "Address is required"),
-    city: z.string().min(1, "City is required"),
-    countryCode: z.string().min(1, "Code is required"),
-    telephone: z.string().min(1, "Telephone is required"),
-    email: z.string().email("Invalid email address"),
-    referralSource: z.string().min(1, "Referral source is required"),
-    receiveUpdates: z.string().min(1, "Please select an option"),
-    workshop: z.string(),
-    termsAccepted: z.boolean(),
-    permissionLogIntoAccount: z.boolean(),
-    infoCorrect: z.boolean(),
-});
+import { RefinedPteHomeSchema, type TPteHomeFormSchema } from "./-type";
 
-interface IPteHomeForm {
-    givenNames: string;
-    surnames: string;
-    dobDay: string;
-    dobMonth: string;
-    dobYear: string;
-    gender: string;
-    countryOfIssue: string;
-    countryOfBirth: string;
-    countryOfCitizenship: string;
-    countryOfResidence: string;
-    languageSpoken: string;
-    idType: string;
-    documentNumber: string;
-    fullAddress: string;
-    city: string;
-    countryCode: string;
-    telephone: string;
-    email: string;
-    referralSource: string;
-    receiveUpdates: string;
-    workshop: string;
-    termsAccepted: boolean;
-    permissionLogIntoAccount: boolean;
-    infoCorrect: boolean;
-}
 
 const workshops = [
     { label: "2 hours workshop", price: 600 },
@@ -99,8 +47,8 @@ const workshops = [
 ];
 
 export default function FormPTEHomeRegistration() {
-    const form = useForm<IPteHomeForm>({
-        resolver: zodResolver(pteHomeSchema),
+    const form = useForm<TPteHomeFormSchema>({
+        resolver: zodResolver(RefinedPteHomeSchema),
         defaultValues: {
             givenNames: "",
             surnames: "",
@@ -152,7 +100,7 @@ export default function FormPTEHomeRegistration() {
         };
     }, [selectedWorkshopLabel]);
 
-    const onSubmit: SubmitHandler<IPteHomeForm> = (data) => {
+    const onSubmit: SubmitHandler<TPteHomeFormSchema> = (data) => {
         console.log("PTE Home Form Data:", data);
     };
 
