@@ -65,13 +65,13 @@ export default function ContactUs() {
           </div>
         </div>
       </div>
-      {/* <section className="mt-16">
-        <FormTOEFLIBTRegistration />
+      <section className="mt-16">
+        {/* <FormTOEFLIBTRegistration />
         <FormIELTSRegistration />
-        <FormPTEAcademicRegistration />
+        <FormPTEAcademicRegistration /> */}
         <FormPTECoreRegistration />
         <FormPTEHomeRegistration />
-      </section> */}
+      </section>
     </section>
   );
 }
