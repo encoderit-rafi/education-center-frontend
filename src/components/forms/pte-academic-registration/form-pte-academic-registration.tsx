@@ -1,8 +1,18 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo } from "react";
+import { useForm, useWatch, SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import {
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import {
     Select,
@@ -14,14 +24,106 @@ import {
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
+import { Label } from "@/components/ui/label";
+import { 
+    User, 
+    Globe, 
+    Badge as BadgeIcon, 
+    UploadCloud, 
+    Info, 
+    History, 
+    MapPin, 
+    Gavel, 
+    CreditCard, 
+    ArrowRight,
+    School
+} from "lucide-react";
 
-type CourseOption = {
-    id: string;
-    label: string;
-    price: number;
-};
+// --- Schema & Interface ---
+const pteAcademicSchema = z.object({
+    givenNames: z.string().min(1, "Given names are required"),
+    surnames: z.string().min(1, "Surnames are required"),
+    dobDay: z.string().min(1, "Day is required"),
+    dobMonth: z.string().min(1, "Month is required"),
+    dobYear: z.string().min(1, "Year is required"),
+    gender: z.string().min(1, "Gender is required"),
+    testTiming: z.string().min(1, "Test timing is required"),
+    countryOfBirth: z.string().min(1, "Country of birth is required"),
+    countryOfCitizenship: z.string().min(1, "Country of citizenship is required"),
+    countryOfResidence: z.string().min(1, "Country of residence is required"),
+    languageSpoken: z.string().min(1, "Language spoken is required"),
+    idType: z.string().min(1, "ID type is required"),
+    documentNumber: z.string().min(1, "Document number is required"),
+    fullAddress: z.string().min(1, "Address is required"),
+    city: z.string().min(1, "City is required"),
+    countryCode: z.string().min(1, "Code is required"),
+    telephone: z.string().min(1, "Telephone is required"),
+    email: z.string().email("Invalid email address"),
+    planningCountry: z.string().min(1, "Planning country is required"),
+    currentSituation: z.string().min(1, "Current situation is required"),
+    occupationSector: z.string().min(1, "Occupation sector is required"),
+    referralSource: z.string().min(1, "Referral source is required"),
+    hasTakenPTE: z.string().min(1, "Please select an option"),
+    lessThan2Years: z.string().optional(),
+    existingAccount: z.string().optional(),
+    selectedCourse: z.string(),
+    termsAccepted: z.boolean(),
+    permissionLogIntoAccount: z.boolean(),
+    infoCorrect: z.boolean(),
+});
 
-const courses: CourseOption[] = [
+const refinedPteAcademicSchema = pteAcademicSchema.refine((data) => {
+    if (data.hasTakenPTE === "yes") {
+        return !!data.lessThan2Years && !!data.existingAccount;
+    }
+    return true;
+}, {
+    message: "Required for previous test takers",
+    path: ["lessThan2Years"],
+}).refine(data => data.termsAccepted === true, {
+    message: "You must accept terms",
+    path: ["termsAccepted"],
+}).refine(data => data.permissionLogIntoAccount === true, {
+    message: "Permission is required",
+    path: ["permissionLogIntoAccount"],
+}).refine(data => data.infoCorrect === true, {
+    message: "Please confirm info is correct",
+    path: ["infoCorrect"],
+});
+
+interface IPteAcademicForm {
+    givenNames: string;
+    surnames: string;
+    dobDay: string;
+    dobMonth: string;
+    dobYear: string;
+    gender: string;
+    testTiming: string;
+    countryOfBirth: string;
+    countryOfCitizenship: string;
+    countryOfResidence: string;
+    languageSpoken: string;
+    idType: string;
+    documentNumber: string;
+    fullAddress: string;
+    city: string;
+    countryCode: string;
+    telephone: string;
+    email: string;
+    planningCountry: string;
+    currentSituation: string;
+    occupationSector: string;
+    referralSource: string;
+    hasTakenPTE: string;
+    lessThan2Years?: string;
+    existingAccount?: string;
+    selectedCourse: string;
+    termsAccepted: boolean;
+    permissionLogIntoAccount: boolean;
+    infoCorrect: boolean;
+}
+
+const courses = [
     { id: "group", label: "Group (In-person classroom-based course)", price: 1850 },
     { id: "semi-private", label: "Semi-Private (In-person classroom-based)", price: 2850 },
     { id: "private", label: "Private one-to-one (In-person classroom)", price: 4850 },
@@ -29,68 +131,84 @@ const courses: CourseOption[] = [
 ];
 
 export default function FormPTEAcademicRegistration() {
-    const [formData, setFormData] = useState({
-        givenNames: "",
-        surnames: "",
-        dobDay: "",
-        dobMonth: "",
-        dobYear: "",
-        gender: "",
-        testTiming: "", // Ported from Core design
-        countryOfIssue: "",
-        countryOfBirth: "",
-        countryOfCitizenship: "",
-        countryOfResidence: "",
-        languageSpoken: "",
-        idType: "Passport",
-        documentNumber: "",
-        fullAddress: "",
-        city: "",
-        countryCode: "+971",
-        telephone: "",
-        email: "",
-        planningCountry: "",
-        currentSituation: "",
-        occupationSector: "",
-        referralSource: "",
-        hasTakenPTE: "",
-        lessThan2Years: "",
-        existingAccount: "",
-        receiveUpdates: "",
-        selectedCourse: "",
-        termsAccepted: false,
-        permissionLogIntoAccount: false,
-        infoCorrect: false,
+    const form = useForm<IPteAcademicForm>({
+        resolver: zodResolver(refinedPteAcademicSchema),
+        defaultValues: {
+            givenNames: "",
+            surnames: "",
+            dobDay: "",
+            dobMonth: "",
+            dobYear: "",
+            gender: "",
+            testTiming: "",
+            countryOfBirth: "",
+            countryOfCitizenship: "",
+            countryOfResidence: "",
+            languageSpoken: "",
+            idType: "Passport",
+            documentNumber: "",
+            fullAddress: "",
+            city: "",
+            countryCode: "+971",
+            telephone: "",
+            email: "",
+            planningCountry: "",
+            currentSituation: "",
+            occupationSector: "",
+            referralSource: "",
+            hasTakenPTE: "",
+            lessThan2Years: "",
+            existingAccount: "",
+            selectedCourse: "",
+            termsAccepted: false,
+            permissionLogIntoAccount: false,
+            infoCorrect: false,
+        },
     });
+
+    const { control, handleSubmit } = form;
+
+    // Watchers
+    const hasTakenPTE = useWatch({ control, name: "hasTakenPTE" });
+    const selectedCourseId = useWatch({ control, name: "selectedCourse" });
 
     const EXAM_FEE = 1230;
     const SERVICE_FEE = 100;
     const VAT_RATE = 0.05;
 
-    const selectedCourse = courses.find((c) => c.id === formData.selectedCourse);
-    const coursePrice = selectedCourse?.price || 0;
-    const serviceVAT = SERVICE_FEE * VAT_RATE;
-    const courseVAT = coursePrice * VAT_RATE;
-    
-    // Total calculation: Exam (No VAT) + Service (+ VAT) + Course (+ VAT)
-    const total = EXAM_FEE + SERVICE_FEE + serviceVAT + coursePrice + courseVAT;
+    // Calculations
+    const { total, serviceVAT, coursePrice, courseVAT } = useMemo(() => {
+        const selected = courses.find(c => c.id === selectedCourseId);
+        const cPrice = selected?.price || 0;
+        const sVAT = SERVICE_FEE * VAT_RATE;
+        const cVAT = cPrice * VAT_RATE;
+        const totalAmount = EXAM_FEE + SERVICE_FEE + sVAT + cPrice + cVAT;
 
-    const updateField = (key: string, value: any) => {
-        setFormData((prev) => ({ ...prev, [key]: value }));
+        return {
+            total: totalAmount,
+            serviceVAT: sVAT,
+            coursePrice: cPrice,
+            courseVAT: cVAT
+        };
+    }, [selectedCourseId]);
+
+    const onSubmit: SubmitHandler<IPteAcademicForm> = (data) => {
+        console.log("PTE Academic Form Data:", data);
     };
 
     return (
         <div className="bg-surface font-body text-on-surface min-h-screen pb-20 selection:bg-red-100 selection:text-red-900">
             {/* Hero Section */}
-            <section className="relative h-[400px] flex items-center justify-center overflow-hidden bg-slate-900">
+            <section className="relative h-[400px] flex items-center justify-center overflow-hidden bg-[#111827]">
                 <div className="absolute inset-0 z-0 opacity-40">
                     <img
                         className="w-full h-full object-cover"
-                        alt="Modern university library"
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAr4MVsRUAf7ZsJAIO9JeORu68_2FAzAvcF-_yI7jbx0w-xiabblmgx6otP5lt2kFnaDKe_Q89HH8kcVwhhwADijkL-yMaBmEqYpsfbGpCoOLZyYIBXSHNggVKmv4s3A4OVIytI1HhCa1cOUQpQJJ6aBj27UJAaqgH_7ZwhdPd57fOp6BKgCvOecAXymMOiUQd54zPB28OAp7wmM8ndZ-mpmWlN1xjxYn188BxiecgkCw-y_YL45q2UxusCGu4TVNldzVzx_CUlffBT"
+                        alt="Academic environment"
+                        src="/images/about-us/infrastructure-center.png"
                     />
                 </div>
                 <div className="relative z-10 text-center px-6">
+                    <span className="text-[#A11D1D] text-sm font-black uppercase tracking-[0.3em] mb-4 block">Official Registration</span>
                     <h1 className="text-white text-5xl md:text-7xl font-extrabold tracking-tighter mb-4 font-headline uppercase">
                         PTE Academic Registration
                     </h1>
@@ -103,569 +221,690 @@ export default function FormPTEAcademicRegistration() {
             {/* Form Section */}
             <section className="max-w-5xl mx-auto px-6 py-20 -mt-20 relative z-20">
                 <div className="bg-white rounded-xl shadow-[0_24px_48px_-12px_rgba(38,24,23,0.08)] p-8 md:p-12 border border-outline-variant/10">
-                    
-                    {/* Registration Stepper */}
-                    <div className="flex items-center justify-between mb-12 overflow-x-auto pb-4 no-scrollbar">
-                        {[
-                            { step: 1, label: "Personal", active: true },
-                            { step: 2, label: "Identity", active: false },
-                            { step: 3, label: "Background", active: false },
-                            { step: 4, label: "Review", active: false },
-                        ].map((item, idx, arr) => (
-                            <div key={item.step} className="flex items-center flex-1 last:flex-none">
-                                <div className="flex flex-col items-center min-w-[120px]">
-                                    <div className={cn(
-                                        "w-10 h-10 rounded-full flex items-center justify-center font-bold mb-2 transition-all duration-300",
-                                        item.active ? "bg-primary text-white scale-110 shadow-lg shadow-primary/20" : "bg-surface-container-high text-on-surface-variant"
-                                    )}>
-                                        {item.step}
-                                    </div>
-                                    <span className={cn(
-                                        "text-xs uppercase tracking-widest font-bold transition-colors duration-300",
-                                        item.active ? "text-primary" : "text-on-surface-variant"
-                                    )}>
-                                        {item.label}
-                                    </span>
-                                </div>
-                                {idx < arr.length - 1 && (
-                                    <div className="flex-1 h-[2px] bg-outline-variant opacity-30 min-w-[40px] mb-6 mx-4"></div>
-                                )}
-                            </div>
-                        ))}
-                    </div>
-
-                    <form className="space-y-12" onSubmit={(e) => e.preventDefault()}>
-                        {/* Personal Details */}
-                        <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
-                            <h2 className="text-2xl font-bold tracking-tight text-on-surface flex items-center gap-3">
-                                <span className="material-symbols-outlined text-primary text-3xl">person</span>
-                                Personal Details
-                            </h2>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                <div className="flex flex-col gap-2">
-                                    <Label className="text-xs font-bold uppercase tracking-wider text-on-surface-variant">Given name(s)</Label>
-                                    <Input 
-                                        className="bg-slate-50 border-none rounded-lg h-14 focus:ring-2 focus:ring-primary/20 transition-all px-4" 
-                                        placeholder="As per your identification document"
-                                        value={formData.givenNames}
-                                        onChange={(e) => updateField("givenNames", e.target.value)}
-                                    />
-                                </div>
-                                <div className="flex flex-col gap-2">
-                                    <Label className="text-xs font-bold uppercase tracking-wider text-on-surface-variant">Surname(s)</Label>
-                                    <Input 
-                                        className="bg-slate-50 border-none rounded-lg h-14 focus:ring-2 focus:ring-primary/20 transition-all px-4" 
-                                        placeholder="Family name"
-                                        value={formData.surnames}
-                                        onChange={(e) => updateField("surnames", e.target.value)}
-                                    />
-                                </div>
-                            </div>
-
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-end">
-                                <div className="flex flex-col gap-2">
-                                    <Label className="text-xs font-bold uppercase tracking-wider text-on-surface-variant">Date of Birth</Label>
-                                    <Select onValueChange={(v) => updateField("dobDay", v)}>
-                                        <SelectTrigger className="bg-slate-50 border-none rounded-lg h-14 focus:ring-2 focus:ring-primary/20">
-                                            <SelectValue placeholder="Day" />
-                                        </SelectTrigger>
-                                        <SelectContent>
-                                            {Array.from({ length: 31 }, (_, i) => (
-                                                <SelectItem key={i + 1} value={String(i + 1)}>{i + 1}</SelectItem>
-                                            ))}
-                                        </SelectContent>
-                                    </Select>
-                                </div>
-                                <div className="flex flex-col gap-2">
-                                    <Select onValueChange={(v) => updateField("dobMonth", v)}>
-                                        <SelectTrigger className="bg-slate-50 border-none rounded-lg h-14 focus:ring-2 focus:ring-primary/20">
-                                            <SelectValue placeholder="Month" />
-                                        </SelectTrigger>
-                                        <SelectContent>
-                                            {["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"].map((m) => (
-                                                <SelectItem key={m} value={m}>{m}</SelectItem>
-                                            ))}
-                                        </SelectContent>
-                                    </Select>
-                                </div>
-                                <div className="flex flex-col gap-2">
-                                    <Select onValueChange={(v) => updateField("dobYear", v)}>
-                                        <SelectTrigger className="bg-slate-50 border-none rounded-lg h-14 focus:ring-2 focus:ring-primary/20">
-                                            <SelectValue placeholder="Year" />
-                                        </SelectTrigger>
-                                        <SelectContent>
-                                            {Array.from({ length: 100 }, (_, i) => (
-                                                <SelectItem key={2024 - i} value={String(2024 - i)}>{2024 - i}</SelectItem>
-                                            ))}
-                                        </SelectContent>
-                                    </Select>
-                                </div>
-                            </div>
-
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                                <div className="flex flex-col gap-4">
-                                    <Label className="text-xs font-bold uppercase tracking-wider text-on-surface-variant">Gender</Label>
-                                    <RadioGroup 
-                                        className="flex gap-8" 
-                                        onValueChange={(v) => updateField("gender", v)}
-                                        value={formData.gender}
-                                    >
-                                        {["Male", "Female", "X/Other"].map((g) => (
-                                            <div key={g} className="flex items-center space-x-2 group cursor-pointer">
-                                                <RadioGroupItem value={g} id={`gender-${g}`} className="border-primary text-primary" />
-                                                <Label htmlFor={`gender-${g}`} className="font-medium group-hover:text-primary transition-colors cursor-pointer">{g}</Label>
+                    <Form {...form}>
+                        <form className="space-y-12" onSubmit={handleSubmit(onSubmit)}>
+                            
+                            {/* Stepper Preview */}
+                            <div className="flex items-center justify-between mb-12 overflow-x-auto pb-4 no-scrollbar border-b border-slate-100">
+                                {[
+                                    { step: 1, label: "Personal", active: true },
+                                    { step: 2, label: "Identity", active: false },
+                                    { step: 3, label: "Background", active: false },
+                                    { step: 4, label: "Review", active: false },
+                                ].map((item, idx, arr) => (
+                                    <div key={item.step} className="flex items-center flex-1 last:flex-none">
+                                        <div className="flex flex-col items-center min-w-[100px]">
+                                            <div className={cn(
+                                                "w-10 h-10 rounded-full flex items-center justify-center font-bold mb-2 transition-all duration-300",
+                                                item.active ? "bg-[#A11D1D] text-white scale-110 shadow-lg shadow-[#A11D1D]/20" : "bg-slate-100 text-slate-400"
+                                            )}>
+                                                {item.step}
                                             </div>
-                                        ))}
-                                    </RadioGroup>
-                                </div>
-
-                                <div className="flex flex-col gap-2">
-                                    <Label className="text-xs font-bold uppercase tracking-wider text-on-surface-variant">Select Test Timing</Label>
-                                    <Select onValueChange={(v) => updateField("testTiming", v)}>
-                                        <SelectTrigger className="bg-slate-50 border-none rounded-lg h-14 focus:ring-2 focus:ring-primary/20">
-                                            <SelectValue placeholder="--- Select Time ---" />
-                                        </SelectTrigger>
-                                        <SelectContent>
-                                            <SelectItem value="10:00 AM">10:00 AM</SelectItem>
-                                            <SelectItem value="12:45 PM">12:45 PM</SelectItem>
-                                            <SelectItem value="03:30 PM">03:30 PM</SelectItem>
-                                            <SelectItem value="06:15 PM">06:15 PM</SelectItem>
-                                        </SelectContent>
-                                    </Select>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Identity & Origin */}
-                        <div className="pt-8 border-t border-outline-variant/10 space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-150">
-                            <h2 className="text-2xl font-bold tracking-tight text-on-surface flex items-center gap-3">
-                                <span className="material-symbols-outlined text-primary text-3xl">public</span>
-                                Identity & Origin
-                            </h2>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                {[
-                                    { label: "Country of birth", key: "countryOfBirth" },
-                                    { label: "Country of citizenship", key: "countryOfCitizenship" },
-                                    { label: "Country of residence", key: "countryOfResidence" },
-                                    { label: "Language mostly spoken at home", key: "languageSpoken" },
-                                ].map((field) => (
-                                    <div key={field.key} className="flex flex-col gap-2">
-                                        <Label className="text-xs font-bold uppercase tracking-wider text-on-surface-variant">{field.label}</Label>
-                                        <Select onValueChange={(v) => updateField(field.key, v)}>
-                                            <SelectTrigger className="bg-slate-50 border-none rounded-lg h-14 focus:ring-2 focus:ring-primary/20">
-                                                <SelectValue placeholder={field.key === "languageSpoken" ? "Select Language" : "Select Country"} />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                {field.key === "languageSpoken" ? (
-                                                    ["English", "Arabic", "Hindi", "Urdu", "Spanish", "French"].map(l => (
-                                                        <SelectItem key={l} value={l}>{l}</SelectItem>
-                                                    ))
-                                                ) : (
-                                                    ["UAE", "India", "Pakistan", "UK", "USA"].map(c => (
-                                                        <SelectItem key={c} value={c}>{c}</SelectItem>
-                                                    ))
-                                                )}
-                                            </SelectContent>
-                                        </Select>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Identification Document */}
-                        <div className="pt-8 border-t border-outline-variant/10 space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-300">
-                            <h2 className="text-2xl font-bold tracking-tight text-on-surface flex items-center gap-3">
-                                <span className="material-symbols-outlined text-primary text-3xl">badge</span>
-                                Identification Document
-                            </h2>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                <div className="flex flex-col gap-2">
-                                    <Label className="text-xs font-bold uppercase tracking-wider text-on-surface-variant">ID Type</Label>
-                                    <Select defaultValue="Passport" onValueChange={(v) => updateField("idType", v)}>
-                                        <SelectTrigger className="bg-slate-50 border-none rounded-lg h-14 focus:ring-2 focus:ring-primary/20">
-                                            <SelectValue placeholder="Passport" />
-                                        </SelectTrigger>
-                                        <SelectContent>
-                                            <SelectItem value="Passport">Passport</SelectItem>
-                                            <SelectItem value="National ID Card">National ID Card</SelectItem>
-                                            <SelectItem value="Government Issued ID">Government Issued ID</SelectItem>
-                                        </SelectContent>
-                                    </Select>
-                                </div>
-                                <div className="flex flex-col gap-2">
-                                    <Label className="text-xs font-bold uppercase tracking-wider text-on-surface-variant">Document Number</Label>
-                                    <Input 
-                                        className="bg-slate-50 border-none rounded-lg h-14 focus:ring-2 focus:ring-primary/20 transition-all px-4" 
-                                        placeholder="Enter ID number"
-                                        value={formData.documentNumber}
-                                        onChange={(e) => updateField("documentNumber", e.target.value)}
-                                    />
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Upload Your Documents */}
-                        <div className="pt-8 border-t border-outline-variant/10 space-y-8">
-                            <h2 className="text-2xl font-bold tracking-tight text-on-surface flex items-center gap-3">
-                                <span className="material-symbols-outlined text-primary text-3xl">cloud_upload</span>
-                                Upload Your Documents
-                            </h2>
-                            <div className="flex flex-col gap-4">
-                                <Label className="text-xs font-bold uppercase tracking-wider text-on-surface-variant">Upload Your Passport Copy</Label>
-                                <div className="flex flex-col gap-3">
-                                    <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-slate-200 rounded-xl bg-slate-50 hover:bg-slate-100/80 hover:border-primary/30 cursor-pointer transition-all group">
-                                        <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                                            <span className="material-symbols-outlined text-slate-400 mb-2 group-hover:text-primary transition-colors">upload_file</span>
-                                            <p className="text-sm font-bold text-primary">Choose File</p>
-                                        </div>
-                                        <input className="hidden" type="file" />
-                                    </label>
-                                    <p className="text-[10px] text-on-surface-variant font-medium">(max file size 128 MB) (pdf, docx, doc, png, jpeg)</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Background Information */}
-                        <div className="pt-8 border-t border-outline-variant/10 space-y-8">
-                            <h2 className="text-2xl font-bold tracking-tight text-on-surface flex items-center gap-3">
-                                <span className="material-symbols-outlined text-primary text-3xl">info</span>
-                                Background Information
-                            </h2>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                <div className="flex flex-col gap-2">
-                                    <Label className="text-xs font-bold uppercase tracking-wider text-on-surface-variant">Which country or region are you planning to study in?</Label>
-                                    <Select onValueChange={(v) => updateField("planningCountry", v)}>
-                                        <SelectTrigger className="bg-slate-50 border-none rounded-lg h-14 focus:ring-2 focus:ring-primary/20">
-                                            <SelectValue placeholder="Select Country" />
-                                        </SelectTrigger>
-                                        <SelectContent>
-                                            {["In my own country", "Australia", "Canada", "Finland", "France", "Germany", "Hong Kong", "Ireland", "Italy", "Malaysia", "New Zealand", "Norway", "Singapore", "Spain", "Sweden", "The Netherlands", "United Kingdom", "United States", "Vietnam"].map(c => (
-                                                <SelectItem key={c} value={c}>{c}</SelectItem>
-                                            ))}
-                                        </SelectContent>
-                                    </Select>
-                                </div>
-                                <div className="flex flex-col gap-2">
-                                    <Label className="text-xs font-bold uppercase tracking-wider text-on-surface-variant">What best describes your current situation?</Label>
-                                    <Select onValueChange={(v) => updateField("currentSituation", v)}>
-                                        <SelectTrigger className="bg-slate-50 border-none rounded-lg h-14 focus:ring-2 focus:ring-primary/20">
-                                            <SelectValue placeholder="Select Situation" />
-                                        </SelectTrigger>
-                                        <SelectContent>
-                                            {["Student - in High School", "Student - High School graduate", "Student - English language", "Student - in University / College", "Student - University / College graduate", "Working - full time", "Working - part time", "Not studying or working", "Other - specify below"].map(s => (
-                                                <SelectItem key={s} value={s}>{s}</SelectItem>
-                                            ))}
-                                        </SelectContent>
-                                    </Select>
-                                </div>
-                                <div className="flex flex-col gap-2">
-                                    <Label className="text-xs font-bold uppercase tracking-wider text-on-surface-variant">What is your occupation sector?</Label>
-                                    <Select onValueChange={(v) => updateField("occupationSector", v)}>
-                                        <SelectTrigger className="bg-slate-50 border-none rounded-lg h-14 focus:ring-2 focus:ring-primary/20">
-                                            <SelectValue placeholder="Select Sector" />
-                                        </SelectTrigger>
-                                        <SelectContent>
-                                            {["Agriculture, Fishing, Forestry, Mining", "Architecture", "Arts and Entertainment", "Banking and Finance", "Catering and Leisure", "Communications and Media", "Construction Industries", "Craft and Design", "Education", "Health and Social Services", "Installation, Maintenance and Repair Services", "Law and Legal Services", "Manufacturing and Assembly Services", "Personal Services", "Retail Trade", "Technical and Scientific", "Telecommunications and Media", "Transport", "Utilities (Gas, Water, Electricity etc)"].map(o => (
-                                                <SelectItem key={o} value={o}>{o}</SelectItem>
-                                            ))}
-                                        </SelectContent>
-                                    </Select>
-                                </div>
-                                <div className="flex flex-col gap-2">
-                                    <Label className="text-xs font-bold uppercase tracking-wider text-on-surface-variant">How did you hear about the test?</Label>
-                                    <Select onValueChange={(v) => updateField("referralSource", v)}>
-                                        <SelectTrigger className="bg-slate-50 border-none rounded-lg h-14 focus:ring-2 focus:ring-primary/20">
-                                            <SelectValue placeholder="Select Source" />
-                                        </SelectTrigger>
-                                        <SelectContent>
-                                            <SelectItem value="Social Media">Social Media</SelectItem>
-                                            <SelectItem value="Google Search">Google Search</SelectItem>
-                                            <SelectItem value="Friend or Colleague">Friend or Colleague</SelectItem>
-                                            <SelectItem value="Education Agent">Education Agent</SelectItem>
-                                            <SelectItem value="Institution Website">Institution Website</SelectItem>
-                                        </SelectContent>
-                                    </Select>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* PTE History Questions */}
-                        <div className="pt-8 border-t border-outline-variant/10 space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
-                             <div className="flex flex-col gap-4">
-                                <Label className="text-xs font-bold uppercase tracking-wider text-on-surface-variant">Have you taken the PTE Academic Test before?</Label>
-                                <RadioGroup 
-                                    className="flex gap-8" 
-                                    onValueChange={(v) => updateField("hasTakenPTE", v)}
-                                    value={formData.hasTakenPTE}
-                                >
-                                    <div className="flex items-center space-x-2 group cursor-pointer">
-                                        <RadioGroupItem value="yes" id="pte-yes" className="border-primary text-primary" />
-                                        <Label htmlFor="pte-yes" className="font-medium group-hover:text-primary transition-colors cursor-pointer">Yes</Label>
-                                    </div>
-                                    <div className="flex items-center space-x-2 group cursor-pointer">
-                                        <RadioGroupItem value="no" id="pte-no" className="border-primary text-primary" />
-                                        <Label htmlFor="pte-no" className="font-medium group-hover:text-primary transition-colors cursor-pointer">No</Label>
-                                    </div>
-                                </RadioGroup>
-
-                                {/* Conditional Questions */}
-                                {formData.hasTakenPTE === "yes" && (
-                                    <div className="animate-in slide-in-from-left-4 duration-500 space-y-8 pl-6 border-l-2 border-primary/20 mt-4">
-                                        <div className="flex flex-col gap-4">
-                                            <Label className="text-xs font-bold uppercase tracking-wider text-on-surface-variant">Was it less than 2 years?</Label>
-                                            <RadioGroup 
-                                                className="flex flex-wrap gap-6" 
-                                                onValueChange={(v) => updateField("lessThan2Years", v)}
-                                            >
-                                                {["Yes", "No", "I do not know"].map(opt => (
-                                                    <div key={opt} className="flex items-center space-x-2 group cursor-pointer">
-                                                        <RadioGroupItem value={opt} id={`years-${opt}`} className="border-primary text-primary" />
-                                                        <Label htmlFor={`years-${opt}`} className="font-medium group-hover:text-primary transition-colors cursor-pointer">{opt}</Label>
-                                                    </div>
-                                                ))}
-                                            </RadioGroup>
-                                        </div>
-                                        <div className="flex flex-col gap-4">
-                                            <Label className="text-xs font-bold uppercase tracking-wider text-on-surface-variant">Do you have an existing PTE account?</Label>
-                                            <RadioGroup 
-                                                className="flex flex-wrap gap-6" 
-                                                onValueChange={(v) => updateField("existingAccount", v)}
-                                            >
-                                                {["Yes", "No", "I forgot my PTE account details"].map(opt => (
-                                                    <div key={opt} className="flex items-center space-x-2 group cursor-pointer">
-                                                        <RadioGroupItem value={opt} id={`acc-${opt}`} className="border-primary text-primary" />
-                                                        <Label htmlFor={`acc-${opt}`} className="font-medium group-hover:text-primary transition-colors cursor-pointer">{opt}</Label>
-                                                    </div>
-                                                ))}
-                                            </RadioGroup>
-                                        </div>
-                                    </div>
-                                )}
-                            </div>
-                        </div>
-
-                        {/* Contact Info */}
-                        <div className="pt-8 border-t border-outline-variant/10 space-y-8">
-                            <h2 className="text-2xl font-bold tracking-tight text-on-surface flex items-center gap-3">
-                                <span className="material-symbols-outlined text-primary text-3xl">contact_phone</span>
-                                Contact Information
-                            </h2>
-                            <div className="grid grid-cols-1 gap-8">
-                                <div className="flex flex-col gap-2">
-                                    <Label className="text-xs font-bold uppercase tracking-wider text-on-surface-variant">Full Address</Label>
-                                    <Textarea 
-                                        className="bg-slate-50 border-none rounded-lg focus:ring-2 focus:ring-primary/20 transition-all p-4 resize-none" 
-                                        placeholder="Street name, building, apartment..." 
-                                        rows={3} 
-                                        value={formData.fullAddress}
-                                        onChange={(e) => updateField("fullAddress", e.target.value)}
-                                    />
-                                </div>
-                            </div>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                <div className="flex flex-col gap-2">
-                                    <Label className="text-xs font-bold uppercase tracking-wider text-on-surface-variant">City</Label>
-                                    <Input 
-                                        className="bg-slate-50 border-none rounded-lg h-14 focus:ring-2 focus:ring-primary/20 transition-all px-4" 
-                                        placeholder="Your city"
-                                        value={formData.city}
-                                        onChange={(e) => updateField("city", e.target.value)}
-                                    />
-                                </div>
-                                <div className="grid grid-cols-4 gap-4">
-                                    <div className="col-span-1 flex flex-col gap-2">
-                                        <Label className="text-xs font-bold uppercase tracking-wider text-on-surface-variant">Code</Label>
-                                        <Input 
-                                            className="bg-slate-50 border-none rounded-lg h-14 focus:ring-2 focus:ring-primary/20 transition-all px-4" 
-                                            placeholder="+971"
-                                            value={formData.countryCode}
-                                            onChange={(e) => updateField("countryCode", e.target.value)}
-                                        />
-                                    </div>
-                                    <div className="col-span-3 flex flex-col gap-2">
-                                        <Label className="text-xs font-bold uppercase tracking-wider text-on-surface-variant">Telephone number</Label>
-                                        <Input 
-                                            className="bg-slate-50 border-none rounded-lg h-14 focus:ring-2 focus:ring-primary/20 transition-all px-4" 
-                                            placeholder="Mobile for SMS" 
-                                            type="tel"
-                                            value={formData.telephone}
-                                            onChange={(e) => updateField("telephone", e.target.value)}
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="flex flex-col gap-2">
-                                <Label className="text-xs font-bold uppercase tracking-wider text-on-surface-variant">Email / Username</Label>
-                                <Input 
-                                    className="bg-slate-50 border-none rounded-lg h-14 focus:ring-2 focus:ring-primary/20 transition-all px-4" 
-                                    placeholder="example@domain.com" 
-                                    type="email"
-                                    value={formData.email}
-                                    onChange={(e) => updateField("email", e.target.value)}
-                                />
-                            </div>
-                        </div>
-
-                        {/* Terms & Conditions */}
-                        <div className="pt-8 border-t border-outline-variant/10 space-y-8">
-                            <h2 className="text-2xl font-bold tracking-tight text-on-surface flex items-center gap-3">
-                                <span className="material-symbols-outlined text-primary text-3xl">gavel</span>
-                                Terms & Conditions
-                            </h2>
-                            <div className="space-y-6">
-                                {[
-                                    { key: "termsAccepted", label: "I hereby acknowledge that I have read and understood the terms and conditions outlined above." },
-                                    { key: "permissionLogIntoAccount", label: "I hereby give permission to the center to log into my account to complete my registration." },
-                                    { key: "infoCorrect", label: "I hereby acknowledge that all information written above is correct and true. I understand that any incorrect information I have provided above is my own responsibility and not of the test center." },
-                                ].map((item) => (
-                                    <div key={item.key} className="flex items-start space-x-3 group cursor-pointer">
-                                        <div className="relative flex items-center justify-center mt-1">
-                                            <input 
-                                                type="checkbox"
-                                                id={item.key}
-                                                className="peer appearance-none w-5 h-5 border-2 border-primary rounded bg-white checked:bg-primary transition-all cursor-pointer"
-                                                checked={(formData as any)[item.key]}
-                                                onChange={(e) => updateField(item.key, e.target.checked)}
-                                            />
-                                            <span className="material-symbols-outlined absolute text-white text-xs opacity-0 peer-checked:opacity-100 pointer-events-none transition-opacity select-none font-black">
-                                                check
+                                            <span className={cn(
+                                                "text-[10px] uppercase tracking-widest font-bold",
+                                                item.active ? "text-[#A11D1D]" : "text-slate-400"
+                                            )}>
+                                                {item.label}
                                             </span>
                                         </div>
-                                        <Label 
-                                            htmlFor={item.key} 
-                                            className="text-sm text-on-surface-variant leading-relaxed group-hover:text-on-surface transition-colors cursor-pointer select-none"
-                                        >
-                                            {item.label}
-                                        </Label>
+                                        {idx < arr.length - 1 && (
+                                            <div className="flex-1 h-[2px] bg-slate-100 mx-4"></div>
+                                        )}
                                     </div>
                                 ))}
                             </div>
-                        </div>
 
-                        {/* Fee Summary */}
-                        <div className="pt-8 border-t border-outline-variant/10">
-                            <div className="bg-slate-50 rounded-2xl p-8 space-y-8 border border-slate-200">
-                                <h3 className="text-lg font-extrabold uppercase tracking-widest text-primary flex items-center gap-2">
-                                    <span className="material-symbols-outlined">payments</span>
-                                    Fee Summary
-                                </h3>
-                                
-                                <div className="space-y-4">
-                                    <div className="flex justify-between items-start">
-                                        <div className="flex flex-col">
-                                            <span className="font-bold text-on-surface">PTE Academic Exam Fee</span>
-                                            <span className="text-xs text-on-surface-variant italic">(No VAT added on exam fee)</span>
-                                        </div>
-                                        <span className="font-bold text-on-surface text-lg">AED {EXAM_FEE.toLocaleString()}</span>
-                                    </div>
-
-                                    <div className="flex justify-between items-center">
-                                        <div className="flex flex-col">
-                                            <span className="font-medium text-on-surface-variant">Test Registration Service Fee</span>
-                                            <span className="text-[10px] text-on-surface-variant">(Inc. 5% VAT)</span>
-                                        </div>
-                                        <span className="font-bold text-on-surface text-lg">AED {(SERVICE_FEE + serviceVAT).toFixed(2)}</span>
-                                    </div>
+                            {/* 1. Personal Details */}
+                            <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+                                <h2 className="text-2xl font-bold tracking-tight text-[#111827] flex items-center gap-3">
+                                    <User className="text-[#A11D1D] w-6 h-6" />
+                                    Personal Details
+                                </h2>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                    <FormField
+                                        control={control}
+                                        name="givenNames"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Given name(s) *</FormLabel>
+                                                <FormControl>
+                                                    <Input className="bg-slate-50 border-none rounded-lg h-14" placeholder="As per identification" {...field} />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                    <FormField
+                                        control={control}
+                                        name="surnames"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Surname(s) *</FormLabel>
+                                                <FormControl>
+                                                    <Input className="bg-slate-50 border-none rounded-lg h-14" placeholder="Family name" {...field} />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
                                 </div>
 
-                                {/* Courses & Add-on Services */}
-                                <div className="space-y-4 pt-6 border-t border-slate-200">
-                                    <h4 className="text-xs font-extrabold uppercase tracking-widest text-secondary flex items-center gap-2">
-                                        <span className="material-symbols-outlined text-sm">school</span>
-                                        Courses & Add-on Services
-                                    </h4>
-                                    
-                                    <div className="overflow-hidden border border-slate-200 rounded-xl bg-white shadow-sm">
-                                        <table className="w-full text-sm text-left">
-                                            <thead className="bg-blue-50 text-blue-900 font-bold">
-                                                <tr>
-                                                    <th className="p-4 border-r border-slate-200">COURSES</th>
-                                                    <th className="p-4 w-32 text-center border-r border-slate-200">Fees</th>
-                                                    <th className="p-4 w-24 text-center">Select</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody className="divide-y divide-slate-100 text-on-surface">
-                                                {courses.map((course) => (
-                                                    <tr 
-                                                        key={course.id} 
-                                                        className={cn(
-                                                            "transition-colors cursor-pointer",
-                                                            formData.selectedCourse === course.id ? "bg-primary/5" : "hover:bg-slate-50"
-                                                        )}
-                                                        onClick={() => updateField("selectedCourse", formData.selectedCourse === course.id ? "" : course.id)}
-                                                    >
-                                                        <td className="p-4 border-r border-slate-200 font-medium">{course.label}</td>
-                                                        <td className="p-4 text-center font-bold border-r border-slate-200 text-blue-900">AED {course.price.toLocaleString()}</td>
-                                                        <td className="p-4 text-center">
-                                                            <div className={cn(
-                                                                "w-6 h-6 rounded-full border-2 mx-auto flex items-center justify-center transition-all",
-                                                                formData.selectedCourse === course.id ? "bg-primary border-primary" : "border-slate-300"
-                                                            )}>
-                                                                {formData.selectedCourse === course.id && (
-                                                                    <span className="material-symbols-outlined text-white text-xs">check</span>
-                                                                )}
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-end">
+                                    <div className="flex flex-col gap-2">
+                                        <Label className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Date of Birth *</Label>
+                                        <div className="grid grid-cols-3 gap-2">
+                                            <FormField
+                                                control={control}
+                                                name="dobDay"
+                                                render={({ field }) => (
+                                                    <FormItem>
+                                                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                                            <FormControl>
+                                                                <SelectTrigger className="bg-slate-50 border-none rounded-lg h-14 px-2">
+                                                                    <SelectValue placeholder="Day" />
+                                                                </SelectTrigger>
+                                                            </FormControl>
+                                                            <SelectContent>
+                                                                {Array.from({ length: 31 }, (_, i) => (
+                                                                    <SelectItem key={i + 1} value={String(i + 1)}>{i + 1}</SelectItem>
+                                                                ))}
+                                                            </SelectContent>
+                                                        </Select>
+                                                        <FormMessage />
+                                                    </FormItem>
+                                                )}
+                                            />
+                                            <FormField
+                                                control={control}
+                                                name="dobMonth"
+                                                render={({ field }) => (
+                                                    <FormItem>
+                                                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                                            <FormControl>
+                                                                <SelectTrigger className="bg-slate-50 border-none rounded-lg h-14 px-2">
+                                                                    <SelectValue placeholder="Month" />
+                                                                </SelectTrigger>
+                                                            </FormControl>
+                                                            <SelectContent>
+                                                                {["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"].map((m) => (
+                                                                    <SelectItem key={m} value={m}>{m}</SelectItem>
+                                                                ))}
+                                                            </SelectContent>
+                                                        </Select>
+                                                        <FormMessage />
+                                                    </FormItem>
+                                                )}
+                                            />
+                                            <FormField
+                                                control={control}
+                                                name="dobYear"
+                                                render={({ field }) => (
+                                                    <FormItem>
+                                                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                                            <FormControl>
+                                                                <SelectTrigger className="bg-slate-50 border-none rounded-lg h-14 px-2">
+                                                                    <SelectValue placeholder="Year" />
+                                                                </SelectTrigger>
+                                                            </FormControl>
+                                                            <SelectContent>
+                                                                {Array.from({ length: 100 }, (_, i) => (
+                                                                    <SelectItem key={2024 - i} value={String(2024 - i)}>{2024 - i}</SelectItem>
+                                                                ))}
+                                                            </SelectContent>
+                                                        </Select>
+                                                        <FormMessage />
+                                                    </FormItem>
+                                                )}
+                                            />
+                                        </div>
+                                    </div>
+                                    <FormField
+                                        control={control}
+                                        name="gender"
+                                        render={({ field }) => (
+                                            <FormItem className="col-span-1 md:col-span-1">
+                                                <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Gender *</FormLabel>
+                                                <FormControl>
+                                                    <RadioGroup className="flex gap-8 h-14 items-center" onValueChange={field.onChange} defaultValue={field.value}>
+                                                        {["Male", "Female", "Other"].map((g) => (
+                                                            <div key={g} className="flex items-center space-x-2 group cursor-pointer">
+                                                                <RadioGroupItem value={g} id={`gender-${g}`} className="border-[#A11D1D] text-[#A11D1D]" />
+                                                                <Label htmlFor={`gender-${g}`} className="font-bold group-hover:text-[#A11D1D] cursor-pointer text-sm">{g}</Label>
                                                             </div>
-                                                        </td>
-                                                    </tr>
-                                                ))}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <p className="text-[10px] italic text-on-surface-variant">* Courses and workshops VAT applies (5%)</p>
+                                                        ))}
+                                                    </RadioGroup>
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                    <FormField
+                                        control={control}
+                                        name="testTiming"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Test Timing *</FormLabel>
+                                                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                                    <FormControl>
+                                                        <SelectTrigger className="bg-slate-50 border-none rounded-lg h-14">
+                                                            <SelectValue placeholder="Select Time" />
+                                                        </SelectTrigger>
+                                                    </FormControl>
+                                                    <SelectContent>
+                                                        <SelectItem value="10:00 AM">10:00 AM</SelectItem>
+                                                        <SelectItem value="12:45 PM">12:45 PM</SelectItem>
+                                                        <SelectItem value="03:30 PM">03:30 PM</SelectItem>
+                                                        <SelectItem value="06:15 PM">06:15 PM</SelectItem>
+                                                    </SelectContent>
+                                                </Select>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                </div>
+                            </div>
+
+                            {/* 2. Identity & Documents */}
+                            <div className="pt-8 border-t border-slate-100 space-y-8">
+                                <h2 className="text-2xl font-bold tracking-tight text-[#111827] flex items-center gap-3">
+                                    <Globe className="text-[#A11D1D] w-6 h-6" />
+                                    Identity & Origin
+                                </h2>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                    <FormField
+                                        control={control}
+                                        name="countryOfBirth"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Country of Birth *</FormLabel>
+                                                <FormControl>
+                                                    <Input className="bg-slate-50 border-none rounded-lg h-14" placeholder="Enter country" {...field} />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                    <FormField
+                                        control={control}
+                                        name="countryOfCitizenship"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Country of Citizenship *</FormLabel>
+                                                <FormControl>
+                                                    <Input className="bg-slate-50 border-none rounded-lg h-14" placeholder="Enter citizenship" {...field} />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                    <FormField
+                                        control={control}
+                                        name="countryOfResidence"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Country of Residence *</FormLabel>
+                                                <FormControl>
+                                                    <Input className="bg-slate-50 border-none rounded-lg h-14" placeholder="Enter residence" {...field} />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                    <FormField
+                                        control={control}
+                                        name="languageSpoken"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Language Spoken *</FormLabel>
+                                                <FormControl>
+                                                    <Input className="bg-slate-50 border-none rounded-lg h-14" placeholder="Mostly spoken at home" {...field} />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
                                 </div>
 
-                                {/* Total Calculation */}
-                                <div className="pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4">
-                                    <div className="flex flex-col gap-1 items-center md:items-start">
-                                        <span className="text-sm font-bold text-on-surface-variant uppercase tracking-wider">Total Amount Due</span>
-                                        <span className="text-[10px] text-on-surface-variant italic">All fees are in UAE Dirhams</span>
-                                    </div>
-                                    <div className="text-4xl font-black text-primary tracking-tighter">
-                                        AED {total.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
+                                    <FormField
+                                        control={control}
+                                        name="idType"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">ID Type *</FormLabel>
+                                                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                                    <FormControl>
+                                                        <SelectTrigger className="bg-slate-50 border-none rounded-lg h-14">
+                                                            <SelectValue placeholder="Passport" />
+                                                        </SelectTrigger>
+                                                    </FormControl>
+                                                    <SelectContent>
+                                                        <SelectItem value="Passport">Passport</SelectItem>
+                                                        <SelectItem value="National ID Card">National ID Card</SelectItem>
+                                                        <SelectItem value="Government Issued ID">Government Issued ID</SelectItem>
+                                                    </SelectContent>
+                                                </Select>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                    <FormField
+                                        control={control}
+                                        name="documentNumber"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Document Number *</FormLabel>
+                                                <FormControl>
+                                                    <Input className="bg-slate-50 border-none rounded-lg h-14" placeholder="Enter ID number" {...field} />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                </div>
+
+                                <div className="flex flex-col gap-4 pt-4">
+                                    <Label className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Upload Passport Copy *</Label>
+                                    <div className="flex flex-col gap-3">
+                                        <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-slate-200 rounded-xl bg-slate-50 hover:bg-slate-100/80 hover:border-[#A11D1D]/30 cursor-pointer transition-all group">
+                                            <div className="flex flex-col items-center justify-center">
+                                                <UploadCloud className="text-slate-400 mb-2 group-hover:text-[#A11D1D] transition-colors w-8 h-8" />
+                                                <p className="text-sm font-bold text-[#A11D1D]">Choose File</p>
+                                            </div>
+                                            <input className="hidden" type="file" />
+                                        </label>
+                                        <p className="text-[10px] text-slate-400 font-medium">Max 128 MB (PDF, DOCX, PNG, JPEG)</p>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        {/* Form Actions */}
-                        <div className="pt-12 flex flex-col md:flex-row justify-between items-center gap-6">
-                            <button 
-                                className="text-on-surface-variant font-bold hover:text-primary hover:underline underline-offset-8 transition-all px-4 py-2" 
-                                type="button"
-                            >
-                                Save as Draft
-                            </button>
-                            <Button 
-                                type="submit"
-                                className="bg-primary text-white px-12 py-7 rounded-xl font-extrabold text-lg active:scale-95 transform transition-all hover:bg-[#8e1214] hover:shadow-2xl hover:shadow-primary/20 flex items-center gap-3 w-full md:w-auto group"
-                            >
-                                Proceed to Review
-                                <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
-                            </Button>
-                        </div>
-                    </form>
-                </div>
+                            {/* 3. Background Info */}
+                            <div className="pt-8 border-t border-slate-100 space-y-8">
+                                <h2 className="text-2xl font-bold tracking-tight text-[#111827] flex items-center gap-3">
+                                    <Info className="text-[#A11D1D] w-6 h-6" />
+                                    Background Information
+                                </h2>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                    <FormField
+                                        control={control}
+                                        name="planningCountry"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Country planned for study *</FormLabel>
+                                                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                                    <FormControl>
+                                                        <SelectTrigger className="bg-slate-50 border-none rounded-lg h-14">
+                                                            <SelectValue placeholder="Select Country" />
+                                                        </SelectTrigger>
+                                                    </FormControl>
+                                                    <SelectContent>
+                                                        {["Australia", "Canada", "United Kingdom", "United States", "New Zealand", "Ireland", "Other"].map(c => (
+                                                            <SelectItem key={c} value={c}>{c}</SelectItem>
+                                                        ))}
+                                                    </SelectContent>
+                                                </Select>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                    <FormField
+                                        control={control}
+                                        name="currentSituation"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Current Situation *</FormLabel>
+                                                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                                    <FormControl>
+                                                        <SelectTrigger className="bg-slate-50 border-none rounded-lg h-14">
+                                                            <SelectValue placeholder="Select Situation" />
+                                                        </SelectTrigger>
+                                                    </FormControl>
+                                                    <SelectContent>
+                                                        {["Student", "Working Full-time", "Working Part-time", "Not working", "Other"].map(s => (
+                                                            <SelectItem key={s} value={s}>{s}</SelectItem>
+                                                        ))}
+                                                    </SelectContent>
+                                                </Select>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                    <FormField
+                                        control={control}
+                                        name="occupationSector"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Occupation Sector *</FormLabel>
+                                                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                                    <FormControl>
+                                                        <SelectTrigger className="bg-slate-50 border-none rounded-lg h-14">
+                                                            <SelectValue placeholder="Select Sector" />
+                                                        </SelectTrigger>
+                                                    </FormControl>
+                                                    <SelectContent>
+                                                        {["Agriculture", "Arts", "Banking", "Construction", "Education", "Health", "Law", "Manufacturing", "Retail", "Technology", "Other"].map(o => (
+                                                            <SelectItem key={o} value={o}>{o}</SelectItem>
+                                                        ))}
+                                                    </SelectContent>
+                                                </Select>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                    <FormField
+                                        control={control}
+                                        name="referralSource"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">How did you hear about us? *</FormLabel>
+                                                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                                    <FormControl>
+                                                        <SelectTrigger className="bg-slate-50 border-none rounded-lg h-14">
+                                                            <SelectValue placeholder="Select Source" />
+                                                        </SelectTrigger>
+                                                    </FormControl>
+                                                    <SelectContent>
+                                                        {["Social Media", "Google Search", "Friend", "Education Agent", "Website", "Other"].map(r => (
+                                                            <SelectItem key={r} value={r}>{r}</SelectItem>
+                                                        ))}
+                                                    </SelectContent>
+                                                </Select>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                </div>
 
-                {/* Trust Indicators Bento Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
-                    <div className="bg-white p-8 rounded-2xl flex items-start gap-6 border border-slate-100 shadow-sm hover:shadow-md transition-shadow group">
-                        <div className="p-4 bg-primary/5 rounded-xl group-hover:bg-primary/10 transition-colors">
-                            <span className="material-symbols-outlined text-primary text-3xl" style={{ fontVariationSettings: "'FILL' 1" }}>lock</span>
-                        </div>
-                        <div>
-                            <h4 className="font-bold text-xl text-slate-900 mb-2">Secure Registration</h4>
-                            <p className="text-slate-500 leading-relaxed text-sm">Your data is encrypted and handled according to international academic integrity standards.</p>
-                        </div>
-                    </div>
-                    <div className="bg-white p-8 rounded-2xl flex items-start gap-6 border border-slate-100 shadow-sm hover:shadow-md transition-shadow group">
-                        <div className="p-4 bg-primary/5 rounded-xl group-hover:bg-primary/10 transition-colors">
-                            <span className="material-symbols-outlined text-primary text-3xl" style={{ fontVariationSettings: "'FILL' 1" }}>support_agent</span>
-                        </div>
-                        <div>
-                            <h4 className="font-bold text-xl text-slate-900 mb-2">Need Assistance?</h4>
-                            <p className="text-slate-500 leading-relaxed text-sm">Our support team is available 24/7 to help you with your registration process.</p>
-                        </div>
-                    </div>
+                                <div className="bg-slate-50 p-8 rounded-2xl border border-slate-100 space-y-8 mt-8">
+                                    <FormField
+                                        control={control}
+                                        name="hasTakenPTE"
+                                        render={({ field }) => (
+                                            <FormItem className="space-y-4">
+                                                <FormLabel className="text-sm font-bold text-[#111827]">Have you taken the PTE Academic Test before? *</FormLabel>
+                                                <FormControl>
+                                                    <RadioGroup className="flex gap-8" onValueChange={field.onChange} defaultValue={field.value}>
+                                                        <div className="flex items-center space-x-2 group cursor-pointer">
+                                                            <RadioGroupItem value="yes" id="pte-yes" className="border-[#A11D1D] text-[#A11D1D]" />
+                                                            <Label htmlFor="pte-yes" className="font-bold group-hover:text-[#A11D1D] cursor-pointer text-sm">Yes</Label>
+                                                        </div>
+                                                        <div className="flex items-center space-x-2 group cursor-pointer">
+                                                            <RadioGroupItem value="no" id="pte-no" className="border-[#A11D1D] text-[#A11D1D]" />
+                                                            <Label htmlFor="pte-no" className="font-bold group-hover:text-[#A11D1D] cursor-pointer text-sm">No</Label>
+                                                        </div>
+                                                    </RadioGroup>
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+
+                                    {hasTakenPTE === "yes" && (
+                                        <div className="space-y-8 animate-in slide-in-from-left-4 duration-500 pl-6 border-l-2 border-[#A11D1D]/20">
+                                            <FormField
+                                                control={control}
+                                                name="lessThan2Years"
+                                                render={({ field }) => (
+                                                    <FormItem className="space-y-4">
+                                                        <FormLabel className="text-xs font-bold text-slate-500 uppercase tracking-widest">Was it less than 2 years? *</FormLabel>
+                                                        <FormControl>
+                                                            <RadioGroup className="flex flex-wrap gap-8" onValueChange={field.onChange} defaultValue={field.value}>
+                                                                {["Yes", "No", "I do not know"].map(opt => (
+                                                                    <div key={opt} className="flex items-center space-x-2 group cursor-pointer">
+                                                                        <RadioGroupItem value={opt} id={`years-${opt}`} className="border-[#A11D1D] text-[#A11D1D]" />
+                                                                        <Label htmlFor={`years-${opt}`} className="font-bold group-hover:text-[#A11D1D] cursor-pointer text-sm">{opt}</Label>
+                                                                    </div>
+                                                                ))}
+                                                            </RadioGroup>
+                                                        </FormControl>
+                                                        <FormMessage />
+                                                    </FormItem>
+                                                )}
+                                            />
+                                            <FormField
+                                                control={control}
+                                                name="existingAccount"
+                                                render={({ field }) => (
+                                                    <FormItem className="space-y-4">
+                                                        <FormLabel className="text-xs font-bold text-slate-500 uppercase tracking-widest">Do you have an existing account? *</FormLabel>
+                                                        <FormControl>
+                                                            <RadioGroup className="flex flex-wrap gap-8" onValueChange={field.onChange} defaultValue={field.value}>
+                                                                {["Yes", "No", "I forgot details"].map(opt => (
+                                                                    <div key={opt} className="flex items-center space-x-2 group cursor-pointer">
+                                                                        <RadioGroupItem value={opt} id={`acc-${opt}`} className="border-[#A11D1D] text-[#A11D1D]" />
+                                                                        <Label htmlFor={`acc-${opt}`} className="font-bold group-hover:text-[#A11D1D] cursor-pointer text-sm">{opt}</Label>
+                                                                    </div>
+                                                                ))}
+                                                            </RadioGroup>
+                                                        </FormControl>
+                                                        <FormMessage />
+                                                    </FormItem>
+                                                )}
+                                            />
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+
+                            {/* 4. Contact Information */}
+                            <div className="pt-8 border-t border-slate-100 space-y-8">
+                                <h2 className="text-2xl font-bold tracking-tight text-[#111827] flex items-center gap-3">
+                                    <MapPin className="text-[#A11D1D] w-6 h-6" />
+                                    Contact Information
+                                </h2>
+                                <FormField
+                                    control={control}
+                                    name="fullAddress"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Full Address *</FormLabel>
+                                            <FormControl>
+                                                <Textarea className="bg-slate-50 border-none rounded-lg p-4 min-h-[100px]" placeholder="Street name, building..." {...field} />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                    <FormField
+                                        control={control}
+                                        name="city"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">City *</FormLabel>
+                                                <FormControl>
+                                                    <Input className="bg-slate-50 border-none rounded-lg h-14" placeholder="Enter city" {...field} />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                    <div className="grid grid-cols-4 gap-4">
+                                        <FormField
+                                            control={control}
+                                            name="countryCode"
+                                            render={({ field }) => (
+                                                <FormItem className="col-span-1">
+                                                    <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Code *</FormLabel>
+                                                    <FormControl>
+                                                        <Input className="bg-slate-50 border-none rounded-lg h-14" {...field} />
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+                                        <FormField
+                                            control={control}
+                                            name="telephone"
+                                            render={({ field }) => (
+                                                <FormItem className="col-span-3">
+                                                    <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Telephone *</FormLabel>
+                                                    <FormControl>
+                                                        <Input className="bg-slate-50 border-none rounded-lg h-14" placeholder="Mobile for SMS" {...field} />
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+                                    </div>
+                                </div>
+                                <FormField
+                                    control={control}
+                                    name="email"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Email Address *</FormLabel>
+                                            <FormControl>
+                                                <Input type="email" className="bg-slate-50 border-none rounded-lg h-14" placeholder="example@domain.com" {...field} />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                            </div>
+
+                            {/* 5. Course Add-ons */}
+                            <div className="pt-8 border-t border-slate-100 space-y-8">
+                                <h3 className="text-lg font-extrabold uppercase tracking-widest text-[#A11D1D] flex items-center gap-2">
+                                    <School className="w-5 h-5" />
+                                    Preparation Courses
+                                </h3>
+                                <FormField
+                                    control={control}
+                                    name="selectedCourse"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormControl>
+                                                <RadioGroup className="grid grid-cols-1 gap-4" onValueChange={field.onChange} defaultValue={field.value}>
+                                                    {courses.map(course => (
+                                                        <label key={course.id} className={cn(
+                                                            "flex items-center justify-between p-5 rounded-xl border transition-all cursor-pointer group/item",
+                                                            field.value === course.id ? "bg-[#A11D1D]/5 border-[#A11D1D]/30" : "bg-white border-slate-200 hover:border-[#A11D1D]/20"
+                                                        )}>
+                                                            <div className="flex items-center gap-4">
+                                                                <RadioGroupItem value={course.id} id={`course-${course.id}`} className="border-[#A11D1D] text-[#A11D1D]" />
+                                                                <div className="flex flex-col">
+                                                                    <span className="text-sm font-extrabold text-slate-700">{course.label}</span>
+                                                                    <span className="text-xs text-slate-400">PTE Academic Preparation</span>
+                                                                </div>
+                                                            </div>
+                                                            <span className="font-bold text-[#A11D1D]">AED {course.price.toLocaleString()}</span>
+                                                        </label>
+                                                    ))}
+                                                    <label className={cn(
+                                                        "flex items-center justify-between p-5 rounded-xl border transition-all cursor-pointer group/item",
+                                                        field.value === "" ? "bg-[#A11D1D]/5 border-[#A11D1D]/30" : "bg-white border-slate-200 hover:border-[#A11D1D]/20"
+                                                    )}>
+                                                        <div className="flex items-center gap-4">
+                                                            <RadioGroupItem value="" id="course-none" className="border-[#A11D1D] text-[#A11D1D]" />
+                                                            <span className="text-sm font-extrabold text-slate-700">No course required</span>
+                                                        </div>
+                                                    </label>
+                                                </RadioGroup>
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                            </div>
+
+                            {/* 6. Fee Summary */}
+                            <div className="pt-8 border-t border-slate-100">
+                                <div className="bg-[#111827] rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden group border-l-[6px] border-[#A11D1D]">
+                                    <div className="absolute top-0 right-0 w-80 h-80 bg-[#A11D1D]/10 rounded-full blur-[100px] -mr-40 -mt-40"></div>
+                                    <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-10 relative z-10">
+                                        <div className="space-y-6 flex-1 w-full">
+                                            <h4 className="text-lg font-black uppercase tracking-widest text-[#A11D1D]">Booking Summary</h4>
+                                            <div className="space-y-3">
+                                                <div className="flex justify-between items-center text-slate-300 text-sm">
+                                                    <span className="font-medium uppercase tracking-tighter">PTE Academic Exam Fee</span>
+                                                    <span className="font-bold text-white tracking-widest">AED {EXAM_FEE.toLocaleString()}</span>
+                                                </div>
+                                                <div className="flex justify-between items-center text-slate-300 text-sm">
+                                                    <span className="font-medium uppercase tracking-tighter">Registration Service Fee</span>
+                                                    <span className="font-bold text-white tracking-widest">AED {SERVICE_FEE.toLocaleString()}</span>
+                                                </div>
+                                                {coursePrice > 0 && (
+                                                    <div className="flex justify-between items-center text-slate-300 text-sm">
+                                                        <span className="font-medium uppercase tracking-tighter">Preparation Course</span>
+                                                        <span className="font-bold text-white tracking-widest">AED {coursePrice.toLocaleString()}</span>
+                                                    </div>
+                                                )}
+                                                <div className="flex justify-between items-center text-slate-300 text-sm border-t border-slate-800 pt-3">
+                                                    <span className="font-medium uppercase tracking-tighter">VAT 5% (Service & Course)</span>
+                                                    <span className="font-bold text-white tracking-widest">AED {(serviceVAT + courseVAT).toFixed(2)}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="text-right w-full md:w-auto flex flex-col justify-end">
+                                            <div className="text-xs text-slate-500 uppercase tracking-[0.2em] font-black mb-2">Total Fees Due</div>
+                                            <div className="text-5xl font-black text-white tracking-tighter">
+                                                AED {total.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                                            </div>
+                                            <p className="text-[10px] text-slate-600 mt-4 uppercase font-black tracking-widest leading-none">
+                                                * VAT is applicable to service fee and courses
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* 7. Terms & Conditions */}
+                            <div className="pt-8 border-t border-slate-100 space-y-6">
+                                <h2 className="text-lg font-bold text-[#A11D1D] flex items-center gap-2">
+                                    <Gavel className="w-5 h-5" />
+                                    Agree Terms & Conditions
+                                </h2>
+                                <div className="space-y-6">
+                                    {[
+                                        { key: "termsAccepted", label: "I hereby acknowledge that I have read and understood the terms and conditions outlined above." },
+                                        { key: "permissionLogIntoAccount", label: "I hereby give permission to the center to log into my account to complete my registration." },
+                                        { key: "infoCorrect", label: "I hereby acknowledge that all information written above is correct and true." },
+                                    ].map((item) => (
+                                        <FormField
+                                            key={item.key}
+                                            control={control}
+                                            name={item.key as any}
+                                            render={({ field }) => (
+                                                <FormItem className="flex items-start space-x-3 space-y-0 cursor-pointer group">
+                                                    <FormControl>
+                                                        <div className="relative flex items-center justify-center mt-1">
+                                                            <input 
+                                                                type="checkbox"
+                                                                className="peer appearance-none w-5 h-5 border-2 border-[#A11D1D] rounded bg-white checked:bg-[#A11D1D] transition-all cursor-pointer"
+                                                                checked={field.value}
+                                                                onChange={field.onChange}
+                                                            />
+                                                            <span className="absolute text-white text-[10px] pointer-events-none opacity-0 peer-checked:opacity-100 font-black">✓</span>
+                                                        </div>
+                                                    </FormControl>
+                                                    <FormLabel className="text-sm text-slate-600 leading-relaxed group-hover:text-[#111827] transition-colors cursor-pointer select-none">
+                                                        {item.label}
+                                                    </FormLabel>
+                                                </FormItem>
+                                            )}
+                                        />
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Actions */}
+                            <div className="pt-12 flex flex-col md:flex-row justify-between items-center gap-6">
+                                <button className="text-[#A11D1D] font-bold hover:underline underline-offset-8 transition-all px-4 py-2" type="button">Save for Later</button>
+                                <div className="flex flex-col md:flex-row gap-4 w-full md:w-auto">
+                                    <Button type="button" variant="outline" className="h-16 px-8 text-slate-600 font-extrabold rounded-xl">Previous</Button>
+                                    <Button
+                                        type="submit"
+                                        className="bg-[#A11D1D] text-white px-12 h-16 rounded-xl font-black text-lg active:scale-95 transform transition-all hover:bg-[#8e1214] hover:shadow-2xl hover:shadow-[#A11D1D]/20 flex items-center gap-3"
+                                    >
+                                        Proceed to Identity
+                                        <ArrowRight className="w-5 h-5" />
+                                    </Button>
+                                </div>
+                            </div>
+                        </form>
+                    </Form>
                 </div>
             </section>
         </div>

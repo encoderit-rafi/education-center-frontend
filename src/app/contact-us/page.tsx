@@ -3,6 +3,7 @@ import FormIELTSRegistration from "@/components/forms/ielts-exam-registration/fo
 import FormPTEAcademicRegistration from "@/components/forms/pte-academic-registration/form-pte-academic-registration";
 import FormPTECoreRegistration from "@/components/forms/pte-core-registration/form-pte-core-registration";
 import FormPTEHomeRegistration from "@/components/forms/pte-home-registration/form-pte-home-registration";
+import FormTOEFLIBTRegistration from "@/components/forms/toefl-ibt-exam-registration/form-toefl-ibt-registration";
 import { MapPin, Clock } from "lucide-react";
 
 
@@ -64,6 +65,13 @@ export default function ContactUs() {
           </div>
         </div>
       </div>
+      <section className="mt-16">
+        <FormTOEFLIBTRegistration />
+        <FormIELTSRegistration />
+        <FormPTEAcademicRegistration />
+        <FormPTECoreRegistration />
+        <FormPTEHomeRegistration />
+      </section>
     </section>
   );
 }
