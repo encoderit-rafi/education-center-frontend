@@ -112,7 +112,7 @@ export default function FreeConsultationForm() {
 
         <RadioGroup
           value={selectedContext}
-          onValueChange={(val) => setValue("context", val)}
+          onValueChange={(val) => setValue("context", val as string)}
           className="grid grid-cols-1 sm:grid-cols-2 gap-4"
         >
           {CONTEXTS.map((ctx) => (
@@ -172,7 +172,7 @@ export default function FreeConsultationForm() {
 
         <RadioGroup
           value={watch("courseId")}
-          onValueChange={(val) => setValue("courseId", val)}
+          onValueChange={(val) => setValue("courseId", val as string)}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
         >
           {COURSES.map((course) => (
@@ -307,7 +307,7 @@ export default function FreeConsultationForm() {
               <FieldContent>
                 <RadioGroup
                   value={selectedTime}
-                  onValueChange={(val) => setValue("preferredTime", val)}
+                  onValueChange={(val) => setValue("preferredTime", val as string)}
                   className="grid grid-cols-2 gap-3"
                 >
                   {["09:00 AM", "02:00 PM"].map((t) => (

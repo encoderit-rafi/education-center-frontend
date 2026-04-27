@@ -270,7 +270,7 @@ export default function MockTestBookingForm({
           <Field>
             <RadioGroup
               value={selectedId}
-              onValueChange={(val) => setValue("selectionId", val)}
+              onValueChange={(val) => setValue("selectionId", val as string)}
               className="grid md:grid-cols-3 gap-6"
             >
               {availableOptions.map((item) => (
@@ -365,7 +365,7 @@ export default function MockTestBookingForm({
                 <FieldContent>
                   <RadioGroup
                     value={selectedTime}
-                    onValueChange={(val) => setValue("timeSlot", val)}
+                    onValueChange={(val) => setValue("timeSlot", val as string)}
                     className="grid grid-cols-2 gap-3"
                   >
                     {TIME_SLOTS.map((time) => (

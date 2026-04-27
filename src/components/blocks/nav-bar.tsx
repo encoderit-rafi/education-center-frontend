@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -206,7 +207,7 @@ export default function NavBar() {
         {/* Row 2: Secondary Nav */}
         <div className="hidden lg:block bg-[#111827] border-b border-black shadow-sm">
           <div className="flex justify-end pr-6">
-            <nav className="flex items-center justify-center gap-x-6 gap-y-2 px-8 py-3 flex-wrap">
+            <nav className="flex items-center justify-center lg:justify-end gap-x-4 xl:gap-x-6 gap-y-2 pl-40 pr-8 py-3 flex-wrap">
               {secondaryNav.map((item) => (
                 <NavItem key={item.label} item={item} isWhite />
               ))}
