@@ -5,45 +5,19 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { BLOGS } from "@/lib/blogs-data";
 import { ArrowRight } from "lucide-react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 export default function BlogsPage() {
   return (
     <main className="min-h-screen">
-      {/* ── Hero Section ── */}
-      <section className="relative w-full h-[65vh] min-h-[500px] flex items-center overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/images/about-us/infrastructure-center.png"
-            alt="TEPTH Academic Environment"
-            fill
-            priority
-            className="object-cover"
-          />
-          {/* Dark Overlay */}
-          <div className="absolute inset-0 bg-black/65" />
-        </div>
-
-        {/* Content */}
-        <div className="container relative z-10 px-6 mx-auto sm:px-12 lg:px-24">
-          <div className="max-w-4xl space-y-8">
-            <h1
-              className={cn(
-                "text-6xl md:text-8xl lg:text-[100px] font-black text-white tracking-tighter leading-[0.9]",
-                "font-heading",
-              )}
-            >
-              Cultures of <br />
-              <span className="italic text-[#A11D1D]">Knowledge.</span>
-            </h1>
-
-            <p className="text-xl md:text-2xl text-white/90 max-w-xl leading-relaxed font-medium">
-              Exploring the frontiers of language assessment and academic excellence through expert-led research, tips, and global educational storytelling.
-            </p>
-          </div>
-        </div>
-      </section>
-
       {/* ── Blog Grid Section ── */}
       <section className="max-w-7xl mx-auto px-8 py-24">
         <div className="mb-16">
@@ -57,9 +31,9 @@ export default function BlogsPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {BLOGS.map((blog) => (
-            <div
+            <Card
               key={blog.id}
-              className="group bg-white rounded-[2rem] overflow-hidden flex flex-col transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 border border-outline/10"
+              className="group flex flex-col bg-white rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 border border-outline/10 p-0"
             >
               <div className="h-64 relative overflow-hidden">
                 <Image
@@ -69,26 +43,31 @@ export default function BlogsPage() {
                   width={600}
                   height={400}
                 />
-                <span className="absolute top-6 left-6 px-4 py-1.5 bg-primary/90 backdrop-blur-sm text-white text-[10px] font-extrabold uppercase tracking-widest rounded-full shadow-lg">
+                <Badge className="absolute top-6 left-6 px-4 py-1.5 bg-primary/90 backdrop-blur-sm text-white text-[10px] font-extrabold uppercase tracking-widest rounded-full shadow-lg border-none h-auto">
                   {blog.tag}
-                </span>
+                </Badge>
                 <div className="absolute inset-0 bg-gradient-to-t from-secondary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </div>
 
-              <div className="p-10 flex-1 flex flex-col">
-                <div className="flex items-center gap-2 mb-4">
-                   <span className="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/60 font-bold">
-                    {blog.date}
-                  </span>
-                </div>
-                <h3 className="text-2xl font-headline font-extrabold text-secondary mb-4 leading-tight group-hover:text-primary transition-colors line-clamp-2">
-                  {blog.title}
-                </h3>
-                <p className="text-on-surface-variant text-[15px] leading-relaxed mb-8 font-medium line-clamp-3">
-                  {blog.desc}
-                </p>
+              <div className="flex-1 flex flex-col">
+                <CardHeader>
+                  <div className="flex items-center gap-2 mb-4">
+                    <span className="text-xs uppercase tracking-[0.2em] text-on-surface-variant/60 font-bold">
+                      {blog.date}
+                    </span>
+                  </div>
+                  <CardTitle className="text-2xl font-headline font-extrabold text-secondary mb-4 leading-tight group-hover:text-primary transition-colors line-clamp-2">
+                    {blog.title}
+                  </CardTitle>
+                </CardHeader>
 
-                <div className="mt-auto pt-8 border-t border-outline/10">
+                <CardContent>
+                  <CardDescription className="text-on-surface-variant mb-2 text-base leading-relaxed font-medium line-clamp-3">
+                    {blog.desc}
+                  </CardDescription>
+                </CardContent>
+
+                <CardFooter className="mt-auto p-6 border-t border-outline/10">
                   <Link
                     href={`/blogs/${blog.id}`}
                     className="flex items-center gap-2 text-primary font-extrabold text-[12px] tracking-widest hover:gap-3 transition-all uppercase"
@@ -96,9 +75,9 @@ export default function BlogsPage() {
                     Read Full Article
                     <ArrowRight className="w-4 h-4" />
                   </Link>
-                </div>
+                </CardFooter>
               </div>
-            </div>
+            </Card>
           ))}
         </div>
       </section>

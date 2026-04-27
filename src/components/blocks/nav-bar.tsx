@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -14,8 +15,16 @@ import { ChevronDown, Menu } from "lucide-react";
 import SearchCommand from "./search-command";
 import { COURSES } from "@/lib/courses-data";
 import { cn } from "@/lib/utils";
+import { Badge } from "../ui/badge";
 
-const navItems = [
+interface NavItem {
+  label: string;
+  href?: string;
+  badge?: string;
+  children?: { label: string; href: string }[];
+}
+
+const navItems: NavItem[] = [
   {
     label: "Exam Preparation Courses",
     children: COURSES.filter(course => course.id.endsWith("-prep")).map((course) => ({
@@ -155,7 +164,7 @@ export default function NavBar() {
                       if (item.children) {
                         return (
                           <DropdownMenuSub key={item.label}>
-                            <DropdownMenuSubTrigger className="rounded-lg focus:bg-slate-50 focus:text-red-900">
+                            <DropdownMenuSubTrigger className="rounded-lg focus:bg-red-50 focus:text-red-900">
                               <div className="w-full py-2 px-1 text-sm font-medium">
                                 {item.label}
                               </div>
@@ -165,7 +174,7 @@ export default function NavBar() {
                                 <DropdownMenuItem
                                   key={child.label}
                                   render={<Link href={child.href} />}
-                                  className="focus:bg-slate-50 focus:text-red-900 rounded-lg transition-all duration-200"
+                                  className="focus:bg-red-50 focus:text-red-900 rounded-lg transition-all duration-200"
                                 >
                                   <div className="w-full px-4 py-2 text-sm font-medium">
                                     {child.label}
@@ -180,7 +189,7 @@ export default function NavBar() {
                         <DropdownMenuItem
                           key={item.label}
                           render={item.href ? <Link href={item.href} /> : undefined}
-                          className="focus:bg-slate-50 focus:text-red-900 rounded-lg transition-all duration-200"
+                          className="focus:bg-red-50 focus:text-red-900 rounded-lg transition-all duration-200"
                         >
                           <div className="w-full py-2 px-1 text-sm font-medium">
                             {item.label}
@@ -198,25 +207,9 @@ export default function NavBar() {
         {/* Row 2: Secondary Nav */}
         <div className="hidden lg:block bg-[#111827] border-b border-black shadow-sm">
           <div className="flex justify-end pr-6">
-            <nav className="flex items-center justify-center gap-x-6 gap-y-2 px-8 py-3 flex-wrap">
+            <nav className="flex items-center justify-center lg:justify-end gap-x-4 xl:gap-x-6 gap-y-2 pl-40 pr-8 py-3 flex-wrap">
               {secondaryNav.map((item) => (
-                <Link
-                  key={item.label}
-                  href={item.href || "#"}
-                  className={cn(
-                    "whitespace-nowrap text-sm font-bold transition-all duration-300 flex items-center gap-2 py-1 text-white hover:text-red-300"
-                  )}
-                >
-                  {item.label === "Test Your English" && (
-                    <span className="w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse" />
-                  )}
-                  {item.label}
-                  {item.badge && (
-                    <span className="ml-1 px-1.5 py-0.5 bg-red-600 text-[9px] font-bold text-white rounded-md uppercase tracking-wider shadow-sm">
-                      {item.badge}
-                    </span>
-                  )}
-                </Link>
+                <NavItem key={item.label} item={item} isWhite />
               ))}
             </nav>
           </div>
@@ -226,7 +219,7 @@ export default function NavBar() {
   );
 }
 
-function NavItem({ item, isWhite }: { item: (typeof navItems)[0], isWhite?: boolean }) {
+function NavItem({ item, isWhite }: { item: NavItem, isWhite?: boolean }) {
   if (item.children) {
     return (
       <DropdownMenu>
@@ -235,6 +228,11 @@ function NavItem({ item, isWhite }: { item: (typeof navItems)[0], isWhite?: bool
           isWhite ? "text-white hover:text-red-200" : "text-slate-600 hover:text-red-900"
         )}>
           {item.label}
+          {item.badge && (
+            <Badge className="ml-1 px-1.5 py-0.5 bg-red-600 text-[9px] font-bold text-white rounded-md uppercase tracking-wider shadow-sm border-none h-auto">
+              {item.badge}
+            </Badge>
+          )}
           <ChevronDown className="w-4 h-4 opacity-70 group-hover:opacity-100 transition-opacity" />
         </DropdownMenuTrigger>
         <DropdownMenuContent className="min-w-[240px] bg-white border-slate-200 p-2 shadow-2xl rounded-xl z-[60]">
@@ -243,7 +241,7 @@ function NavItem({ item, isWhite }: { item: (typeof navItems)[0], isWhite?: bool
               <DropdownMenuItem
                 key={child.label}
                 render={<Link href={child.href} />}
-                className="focus:bg-slate-50 focus:text-red-900 rounded-lg transition-all duration-200"
+                className="focus:bg-red-50 focus:text-red-900 rounded-lg transition-all duration-200"
               >
                 <div className="w-full px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-red-900">
                   {child.label}
@@ -260,11 +258,19 @@ function NavItem({ item, isWhite }: { item: (typeof navItems)[0], isWhite?: bool
     <Link
       href={item.href || "#"}
       className={cn(
-        "text-sm font-bold transition-all duration-300",
+        "text-sm font-bold transition-all duration-300 flex items-center gap-2",
         isWhite ? "text-white hover:text-red-200" : "text-slate-600 hover:text-red-900"
       )}
     >
+      {item.label === "Test Your English" && (
+        <span className="w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse" />
+      )}
       {item.label}
+      {item.badge && (
+        <Badge className="ml-1 px-1.5 py-0.5 bg-red-600 text-[9px] font-bold text-white rounded-md uppercase tracking-wider shadow-sm border-none h-auto">
+          {item.badge}
+        </Badge>
+      )}
     </Link>
   );
 }

@@ -316,7 +316,7 @@ You said: *"${content}"*`;
 
     // ── Render ──────────────────────────────────────────────────────────────────
     return (
-        <div className="flex flex-col h-[600px] w-full max-w-[500px] mx-auto border border-border rounded-2xl overflow-hidden bg-background shadow-lg">
+        <div className="flex flex-col h-[500px] md:h-[600px] w-full max-w-full md:max-w-[500px] mx-auto border border-border rounded-2xl overflow-hidden bg-background shadow-lg">
 
             {/* ── Header ── */}
             <div className="flex items-center gap-3 px-4 py-3 border-b border-border bg-muted/50">
@@ -344,20 +344,20 @@ You said: *"${content}"*`;
 
             {/* ── Messages ── */}
             <ScrollArea className="flex-1">
-                <div className="px-4 py-6">
+                <div className="px-3 py-4 md:px-4 md:py-6">
                     {messages.length === 0 ? (
                         // Empty state
-                        <div className="flex flex-col items-center justify-center min-h-[400px] gap-6 text-center animate-in fade-in duration-700">
-                            <div className="w-16 h-16 rounded-3xl bg-purple-50 flex items-center justify-center text-3xl">✦</div>
-                            <div className="space-y-2">
-                                <h3 className="text-lg font-bold text-foreground">
+                        <div className="flex flex-col items-center justify-center min-h-[350px] md:min-h-[400px] gap-6 text-center animate-in fade-in duration-700">
+                            <div className="w-14 h-14 md:w-16 md:h-16 rounded-3xl bg-purple-50 flex items-center justify-center text-2xl md:text-3xl">✦</div>
+                            <div className="space-y-2 px-4">
+                                <h3 className="text-base md:text-lg font-bold text-foreground">
                                     How can I help you today?
                                 </h3>
-                                <p className="text-sm text-muted-foreground max-w-[280px] mx-auto leading-relaxed">
+                                <p className="text-xs md:text-sm text-muted-foreground max-w-[240px] md:max-w-[280px] mx-auto leading-relaxed">
                                     Ask me anything or choose a starting point from below to get started.
                                 </p>
                             </div>
-                            <div className="flex flex-wrap justify-center gap-2 max-w-[320px]">
+                            <div className="flex flex-wrap justify-center gap-2 max-w-full md:max-w-[320px] px-4">
                                 {SUGGESTIONS.map((s) => (
                                     <button
                                         key={s}
@@ -404,7 +404,7 @@ You said: *"${content}"*`;
             </ScrollArea>
 
             {/* ── Input ── */}
-            <div className="p-4 border-t border-border bg-background">
+            <div className="p-3 md:p-4 border-t border-border bg-background">
                 <div className="flex items-end gap-2 bg-muted/30 border border-border rounded-2xl px-3 py-2 focus-within:ring-2 focus-within:ring-purple-500/20 focus-within:border-purple-500/50 transition-all duration-300">
                     <Textarea
                         ref={textareaRef}
