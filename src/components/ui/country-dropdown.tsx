@@ -10,11 +10,7 @@ import {
     CommandItem,
     CommandList,
 } from "@/components/ui/command";
-import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from "@/components/ui/popover";
+import * as PopoverPrimitive from "@radix-ui/react-popover";
 
 // utils
 import { cn } from "@/lib/utils";
@@ -40,14 +36,12 @@ export interface Country {
 }
 
 // Dropdown props
-interface CountryDropdownProps {
+interface CountryDropdownProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "onChange"> {
     options?: Country[];
     onChange?: (country: Country) => void;
-    defaultValue?: string;
-    disabled?: boolean;
-    placeholder?: string;
+    value?: string;
     slim?: boolean;
-    className?: string;
+    placeholder?: string;
 }
 
 const CountryDropdownComponent = (
@@ -57,7 +51,7 @@ const CountryDropdownComponent = (
                 country.emoji && country.status !== "deleted" && country.ioc !== "PRK"
         ),
         onChange,
-        defaultValue,
+        value,
         disabled = false,
         placeholder = "Select a country",
         slim = false,
@@ -72,24 +66,24 @@ const CountryDropdownComponent = (
     );
 
     useEffect(() => {
-        if (defaultValue) {
+        if (value) {
             const initialCountry = options.find(
                 (country) => 
-                    country.alpha3 === defaultValue || 
-                    country.alpha2 === defaultValue || 
-                    country.name === defaultValue
+                    country.alpha3 === value || 
+                    country.alpha2 === value || 
+                    country.name === value
             );
             if (initialCountry) {
                 setSelectedCountry(initialCountry);
             } else {
-                // Reset selected country if defaultValue is not found
+                // Reset selected country if value is not found
                 setSelectedCountry(undefined);
             }
         } else {
-            // Reset selected country if defaultValue is undefined or null
+            // Reset selected country if value is undefined or null
             setSelectedCountry(undefined);
         }
-    }, [defaultValue, options]);
+    }, [value, options]);
 
     const handleSelect = useCallback(
         (country: Country) => {
@@ -102,89 +96,97 @@ const CountryDropdownComponent = (
     );
 
     const triggerClasses = cn(
-        "flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1",
+        "flex h-12 w-full items-center justify-between whitespace-nowrap rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm text-slate-700 shadow-none ring-offset-background focus:outline-none focus:ring-2 focus:ring-slate-300 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50 hover:border-slate-300 transition-colors [&>span]:line-clamp-1",
+        open && "ring-2 ring-slate-300 border-slate-300",
         slim === true && "w-20",
         className
     );
 
     return (
-        <Popover open={open} onOpenChange={setOpen} modal={false}>
-            <PopoverTrigger
-                ref={ref}
-                className={triggerClasses}
-                disabled={disabled}
-                {...props}
-            >
-                {selectedCountry ? (
-                    <div className="flex items-center flex-grow w-0 gap-2 overflow-hidden">
-                        <div className="inline-flex items-center justify-center w-5 h-5 shrink-0 overflow-hidden rounded-full">
-                            <CircleFlag
-                                countryCode={selectedCountry.alpha2.toLowerCase()}
-                                height={20}
-                            />
+        <PopoverPrimitive.Root open={open} onOpenChange={setOpen}>
+            <PopoverPrimitive.Trigger asChild>
+                <button
+                    ref={ref}
+                    type="button"
+                    className={triggerClasses}
+                    disabled={disabled}
+                    {...props}
+                >
+                    {selectedCountry ? (
+                        <div className="flex items-center flex-1 w-0 gap-2 overflow-hidden text-left">
+                            <div className="inline-flex items-center justify-center w-5 h-5 shrink-0 overflow-hidden rounded-full">
+                                <CircleFlag
+                                    countryCode={selectedCountry.alpha2.toLowerCase()}
+                                    height={20}
+                                />
+                            </div>
+                            {slim === false && (
+                                <span className="truncate font-medium">
+                                    {selectedCountry.name}
+                                </span>
+                            )}
                         </div>
-                        {slim === false && (
-                            <span className="overflow-hidden text-ellipsis whitespace-nowrap">
-                                {selectedCountry.name}
-                            </span>
-                        )}
-                    </div>
-                ) : (
-                    <span>
-                        {slim === false ? (
-                            placeholder
-                        ) : (
-                            <Globe size={20} />
-                        )}
-                    </span>
-                )}
-                <ChevronDown size={16} />
-            </PopoverTrigger>
-            <PopoverContent
-                side="bottom"
-                className="min-w-[--radix-popper-anchor-width] p-0"
-            >
-                <Command className="w-full max-h-[200px] sm:max-h-[270px]">
-                    <CommandList>
-                        <div className="sticky top-0 z-10 bg-popover">
-                            <CommandInput placeholder="Search country..." />
+                    ) : (
+                        <span className="text-slate-400">
+                            {slim === false ? (
+                                placeholder
+                            ) : (
+                                <Globe size={20} />
+                            )}
+                        </span>
+                    )}
+                    <ChevronDown size={16} className={cn("shrink-0 text-slate-500 transition-transform duration-200", open && "rotate-180")} />
+                </button>
+            </PopoverPrimitive.Trigger>
+            <PopoverPrimitive.Portal>
+                <PopoverPrimitive.Content
+                    side="bottom"
+                    align="start"
+                    sideOffset={4}
+                    className={cn(
+                        "z-50 w-[var(--radix-popover-trigger-width)] min-w-[12rem] rounded-md border border-slate-200 bg-white p-1 text-slate-700 shadow-md outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
+                    )}
+                >
+                    <Command className="w-full max-h-[300px] overflow-hidden bg-white text-slate-700">
+                        <div className="p-1 border-b border-slate-100">
+                            <CommandInput placeholder="Search country..." className="h-9 px-2 outline-none w-full bg-slate-50 rounded" />
                         </div>
-                        <CommandEmpty>No country found.</CommandEmpty>
-                        <CommandGroup>
-                            {options
-                                .filter((x) => x.name)
-                                .map((option, key: number) => (
-                                    <CommandItem
-                                        className="flex items-center w-full gap-2"
-                                        key={key}
-                                        onSelect={() => handleSelect(option)}
-                                    >
-                                        <div className="flex flex-grow w-0 space-x-2 overflow-hidden">
-                                            <div className="inline-flex items-center justify-center w-5 h-5 shrink-0 overflow-hidden rounded-full">
-                                                <CircleFlag
-                                                    countryCode={option.alpha2.toLowerCase()}
-                                                    height={20}
-                                                />
+                        <CommandList className="overflow-y-auto no-scrollbar p-1">
+                            <CommandEmpty className="py-6 text-center text-sm text-slate-500">No country found.</CommandEmpty>
+                            <CommandGroup>
+                                {options
+                                    .filter((x) => x.name)
+                                    .map((option, key: number) => (
+                                        <CommandItem
+                                            key={key}
+                                            onSelect={() => handleSelect(option)}
+                                            className="flex items-center gap-2 rounded px-2 py-2 text-sm outline-none cursor-default select-none hover:bg-slate-50 focus:bg-slate-50 data-[selected=true]:bg-slate-50"
+                                        >
+                                            <CheckIcon
+                                                className={cn(
+                                                    "h-4 w-4 shrink-0 text-[#A11D1D]",
+                                                    option.name === selectedCountry?.name
+                                                        ? "opacity-100"
+                                                        : "opacity-0"
+                                                )}
+                                            />
+                                            <div className="flex items-center gap-2 flex-1 truncate text-slate-700">
+                                                <div className="inline-flex items-center justify-center w-5 h-5 shrink-0 overflow-hidden rounded-full">
+                                                    <CircleFlag
+                                                        countryCode={option.alpha2.toLowerCase()}
+                                                        height={20}
+                                                    />
+                                                </div>
+                                                <span className="truncate font-medium">{option.name}</span>
                                             </div>
-                                            <span className="overflow-hidden text-ellipsis whitespace-nowrap">
-                                                {option.name}
-                                            </span>
-                                        </div>
-                                        <CheckIcon
-                                            className={cn(
-                                                "ml-auto h-4 w-4 shrink-0",
-                                                option.name === selectedCountry?.name
-                                                    ? "opacity-100"
-                                                    : "opacity-0"
-                                            )}
-                                        />
-                                    </CommandItem>
-                                ))}
-                        </CommandGroup>
-                    </CommandList>
-                </Command>
-            </PopoverContent>
-        </Popover>
+                                        </CommandItem>
+                                    ))}
+                            </CommandGroup>
+                        </CommandList>
+                    </Command>
+                </PopoverPrimitive.Content>
+            </PopoverPrimitive.Portal>
+        </PopoverPrimitive.Root>
     );
 };
 
