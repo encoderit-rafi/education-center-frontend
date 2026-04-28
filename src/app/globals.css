@@ -223,3 +223,9 @@
 @utility base-py {
   @apply py-8 md:py-12 lg:py-16;
 }
+@utility nav-px {
+  @apply px-2 lg:px-4;
+}
+@utility nav-py {
+  @apply py-4;
+}
