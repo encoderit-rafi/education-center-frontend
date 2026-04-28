@@ -1,9 +1,7 @@
 "use client";
-
 import { useMemo } from "react";
 import { useForm, useWatch, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
 import {
     Form,
     FormControl,
@@ -14,29 +12,33 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import {
-    Select,
-    SelectTrigger,
-    SelectValue,
-    SelectContent,
-    SelectItem,
-} from "@/components/ui/select";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import { Label } from "@/components/ui/label";
-import { 
-    User, 
-    Globe, 
-    Badge as BadgeIcon, 
-    UploadCloud, 
-    Info, 
-    MapPin, 
-    Gavel, 
+import {
+    User,
+    Globe,
+    Badge as BadgeIcon,
+    UploadCloud,
+    Info,
+    MapPin,
+    Gavel,
     ArrowRight,
     School,
-    FileQuestion as QuizIcon
+    FileQuestion as QuizIcon,
+    Calendar as CalendarIcon
 } from "lucide-react";
+import { PhoneInput } from "@/components/ui/phone-input";
+import { CountryDropdown } from "@/components/ui/country-dropdown";
+import { DateTimePicker } from "@/components/ui/date-time-picker";
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { ChevronDownIcon } from "lucide-react";
 
 import { RefinedPteCoreSchema, type TPteCoreFormSchema } from "./-type";
 
@@ -54,9 +56,7 @@ export default function FormPTECoreRegistration() {
         defaultValues: {
             givenNames: "",
             surnames: "",
-            dobDay: "",
-            dobMonth: "",
-            dobYear: "",
+            dob: undefined,
             gender: "",
             testTiming: "",
             countryOfBirth: "",
@@ -69,7 +69,6 @@ export default function FormPTECoreRegistration() {
             occupation: "",
             fullAddress: "",
             city: "",
-            countryCode: "+971",
             telephone: "",
             email: "",
             selectedCourse: "",
@@ -129,13 +128,13 @@ export default function FormPTECoreRegistration() {
             </section>
 
             {/* Form Section */}
-            <section className="max-w-5xl mx-auto px-6 py-20 -mt-20 relative z-20">
+            <section className="max-w-5xl mx-auto px-6 py-20 mt-20 relative z-20">
                 <div className="bg-white rounded-xl shadow-[0_24px_48px_-12px_rgba(38,24,23,0.08)] p-8 md:p-12 border border-outline-variant/10">
                     <Form {...form}>
                         <form className="space-y-12" onSubmit={handleSubmit(onSubmit)}>
-                            
+
                             {/* Stepper Preview */}
-                            <div className="flex items-center justify-between mb-12 overflow-x-auto pb-4 no-scrollbar border-b border-slate-100">
+                            {/* <div className="flex items-center justify-between mb-12 overflow-x-auto pb-4 no-scrollbar border-b border-slate-100">
                                 {[
                                     { step: 1, label: "Personal", active: true },
                                     { step: 2, label: "Identity", active: false },
@@ -162,7 +161,7 @@ export default function FormPTECoreRegistration() {
                                         )}
                                     </div>
                                 ))}
-                            </div>
+                            </div> */}
 
                             {/* 1. Personal Details */}
                             <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
@@ -199,114 +198,81 @@ export default function FormPTECoreRegistration() {
                                     />
                                 </div>
 
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-end">
-                                    <div className="flex flex-col gap-2">
-                                        <Label className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Date of Birth *</Label>
-                                        <div className="grid grid-cols-3 gap-2">
-                                            <FormField
-                                                control={control}
-                                                name="dobDay"
-                                                render={({ field }) => (
-                                                    <FormItem>
-                                                        <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                                            <FormControl>
-                                                                <SelectTrigger className="bg-slate-50 border-none rounded-lg h-14 px-2">
-                                                                    <SelectValue placeholder="Day" />
-                                                                </SelectTrigger>
-                                                            </FormControl>
-                                                            <SelectContent>
-                                                                {Array.from({ length: 31 }, (_, i) => (
-                                                                    <SelectItem key={i + 1} value={String(i + 1)}>{i + 1}</SelectItem>
-                                                                ))}
-                                                            </SelectContent>
-                                                        </Select>
-                                                        <FormMessage />
-                                                    </FormItem>
-                                                )}
-                                            />
-                                            <FormField
-                                                control={control}
-                                                name="dobMonth"
-                                                render={({ field }) => (
-                                                    <FormItem>
-                                                        <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                                            <FormControl>
-                                                                <SelectTrigger className="bg-slate-50 border-none rounded-lg h-14 px-2">
-                                                                    <SelectValue placeholder="Month" />
-                                                                </SelectTrigger>
-                                                            </FormControl>
-                                                            <SelectContent>
-                                                                {["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"].map((m) => (
-                                                                    <SelectItem key={m} value={m}>{m}</SelectItem>
-                                                                ))}
-                                                            </SelectContent>
-                                                        </Select>
-                                                        <FormMessage />
-                                                    </FormItem>
-                                                )}
-                                            />
-                                            <FormField
-                                                control={control}
-                                                name="dobYear"
-                                                render={({ field }) => (
-                                                    <FormItem>
-                                                        <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                                            <FormControl>
-                                                                <SelectTrigger className="bg-slate-50 border-none rounded-lg h-14 px-2">
-                                                                    <SelectValue placeholder="Year" />
-                                                                </SelectTrigger>
-                                                            </FormControl>
-                                                            <SelectContent>
-                                                                {Array.from({ length: 100 }, (_, i) => (
-                                                                    <SelectItem key={2024 - i} value={String(2024 - i)}>{2024 - i}</SelectItem>
-                                                                ))}
-                                                            </SelectContent>
-                                                        </Select>
-                                                        <FormMessage />
-                                                    </FormItem>
-                                                )}
-                                            />
-                                        </div>
-                                    </div>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                                    <DateTimePicker
+                                        mode="date"
+                                        label="Date of Birth *"
+                                        control={control}
+                                        name="dob"
+                                        fromYear={1950}
+                                        toYear={2050}
+                                        className="bg-slate-50 border-none rounded-lg h-14 font-bold px-4"
+                                    />
                                     <FormField
                                         control={control}
                                         name="gender"
                                         render={({ field }) => (
                                             <FormItem>
                                                 <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Gender *</FormLabel>
-                                                <FormControl>
-                                                    <RadioGroup className="flex gap-8 h-14 items-center" onValueChange={field.onChange} defaultValue={field.value}>
+                                                <DropdownMenu>
+                                                    <DropdownMenuTrigger
+                                                        render={
+                                                            <Button
+                                                                variant="outline"
+                                                                className="flex w-full items-center justify-between bg-slate-50 border-none rounded-lg h-14 px-4 font-bold"
+                                                            >
+                                                                <span>{field.value || "Select Gender"}</span>
+                                                                <ChevronDownIcon className="size-4 opacity-50" />
+                                                            </Button>
+                                                        }
+                                                    />
+                                                    <DropdownMenuContent align="start" className="min-w-[200px]">
                                                         {["Male", "Female", "Other"].map((g) => (
-                                                            <div key={g} className="flex items-center space-x-2 group cursor-pointer">
-                                                                <RadioGroupItem value={g} id={`gender-${g}`} className="border-[#A11D1D] text-[#A11D1D]" />
-                                                                <Label htmlFor={`gender-${g}`} className="font-bold group-hover:text-[#A11D1D] cursor-pointer text-sm">{g}</Label>
-                                                            </div>
+                                                            <DropdownMenuItem
+                                                                key={g}
+                                                                onSelect={() => field.onChange(g)}
+                                                            >
+                                                                {g}
+                                                            </DropdownMenuItem>
                                                         ))}
-                                                    </RadioGroup>
-                                                </FormControl>
+                                                    </DropdownMenuContent>
+                                                </DropdownMenu>
                                                 <FormMessage />
                                             </FormItem>
                                         )}
                                     />
+
+                                </div>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
                                     <FormField
                                         control={control}
                                         name="testTiming"
                                         render={({ field }) => (
                                             <FormItem>
                                                 <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Test Timing *</FormLabel>
-                                                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                                    <FormControl>
-                                                        <SelectTrigger className="bg-slate-50 border-none rounded-lg h-14">
-                                                            <SelectValue placeholder="Select Time" />
-                                                        </SelectTrigger>
-                                                    </FormControl>
-                                                    <SelectContent>
-                                                        <SelectItem value="10:00 AM">10:00 AM</SelectItem>
-                                                        <SelectItem value="12:45 PM">12:45 PM</SelectItem>
-                                                        <SelectItem value="03:30 PM">03:30 PM</SelectItem>
-                                                        <SelectItem value="06:15 PM">06:15 PM</SelectItem>
-                                                    </SelectContent>
-                                                </Select>
+                                                <DropdownMenu>
+                                                    <DropdownMenuTrigger
+                                                        render={
+                                                            <Button
+                                                                variant="outline"
+                                                                className="flex w-full items-center justify-between bg-slate-50 border-none rounded-lg h-14 px-4 font-bold"
+                                                            >
+                                                                <span>{field.value || "Select Time"}</span>
+                                                                <ChevronDownIcon className="size-4 opacity-50" />
+                                                            </Button>
+                                                        }
+                                                    />
+                                                    <DropdownMenuContent align="start" className="min-w-[200px]">
+                                                        {["10:00 AM", "12:45 PM", "03:30 PM", "06:15 PM"].map((t) => (
+                                                            <DropdownMenuItem
+                                                                key={t}
+                                                                onSelect={() => field.onChange(t)}
+                                                            >
+                                                                {t}
+                                                            </DropdownMenuItem>
+                                                        ))}
+                                                    </DropdownMenuContent>
+                                                </DropdownMenu>
                                                 <FormMessage />
                                             </FormItem>
                                         )}
@@ -328,7 +294,12 @@ export default function FormPTECoreRegistration() {
                                             <FormItem>
                                                 <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Country of Birth *</FormLabel>
                                                 <FormControl>
-                                                    <Input className="bg-slate-50 border-none rounded-lg h-14" placeholder="Enter country" {...field} />
+                                                    <CountryDropdown
+                                                        className="bg-slate-50 border-none rounded-lg h-14 font-bold px-4"
+                                                        placeholder="Select country"
+                                                        onChange={(country) => field.onChange(country.name)}
+                                                        defaultValue={field.value}
+                                                    />
                                                 </FormControl>
                                                 <FormMessage />
                                             </FormItem>
@@ -341,7 +312,12 @@ export default function FormPTECoreRegistration() {
                                             <FormItem>
                                                 <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Country of Citizenship *</FormLabel>
                                                 <FormControl>
-                                                    <Input className="bg-slate-50 border-none rounded-lg h-14" placeholder="Enter citizenship" {...field} />
+                                                    <CountryDropdown
+                                                        className="bg-slate-50 border-none rounded-lg h-14 font-bold px-4"
+                                                        placeholder="Select citizenship"
+                                                        onChange={(country) => field.onChange(country.name)}
+                                                        defaultValue={field.value}
+                                                    />
                                                 </FormControl>
                                                 <FormMessage />
                                             </FormItem>
@@ -354,7 +330,12 @@ export default function FormPTECoreRegistration() {
                                             <FormItem>
                                                 <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Country of Residence *</FormLabel>
                                                 <FormControl>
-                                                    <Input className="bg-slate-50 border-none rounded-lg h-14" placeholder="Enter residence" {...field} />
+                                                    <CountryDropdown
+                                                        className="bg-slate-50 border-none rounded-lg h-14 font-bold px-4"
+                                                        placeholder="Select residence"
+                                                        onChange={(country) => field.onChange(country.name)}
+                                                        defaultValue={field.value}
+                                                    />
                                                 </FormControl>
                                                 <FormMessage />
                                             </FormItem>
@@ -366,9 +347,29 @@ export default function FormPTECoreRegistration() {
                                         render={({ field }) => (
                                             <FormItem>
                                                 <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Language Spoken *</FormLabel>
-                                                <FormControl>
-                                                    <Input className="bg-slate-50 border-none rounded-lg h-14" placeholder="Mostly spoken at home" {...field} />
-                                                </FormControl>
+                                                <DropdownMenu>
+                                                    <DropdownMenuTrigger
+                                                        render={
+                                                            <Button
+                                                                variant="outline"
+                                                                className="flex w-full items-center justify-between bg-slate-50 border-none rounded-lg h-14 px-4 font-bold"
+                                                            >
+                                                                <span>{field.value || "Select Language"}</span>
+                                                                <ChevronDownIcon className="size-4 opacity-50" />
+                                                            </Button>
+                                                        }
+                                                    />
+                                                    <DropdownMenuContent align="start" className="min-w-[200px]">
+                                                        {["English", "Arabic", "Hindi", "Urdu", "Bengali", "Other"].map((lang) => (
+                                                            <DropdownMenuItem
+                                                                key={lang}
+                                                                onSelect={() => field.onChange(lang)}
+                                                            >
+                                                                {lang}
+                                                            </DropdownMenuItem>
+                                                        ))}
+                                                    </DropdownMenuContent>
+                                                </DropdownMenu>
                                                 <FormMessage />
                                             </FormItem>
                                         )}
@@ -382,18 +383,29 @@ export default function FormPTECoreRegistration() {
                                         render={({ field }) => (
                                             <FormItem>
                                                 <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">ID Type *</FormLabel>
-                                                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                                    <FormControl>
-                                                        <SelectTrigger className="bg-slate-50 border-none rounded-lg h-14">
-                                                            <SelectValue placeholder="Passport" />
-                                                        </SelectTrigger>
-                                                    </FormControl>
-                                                    <SelectContent>
-                                                        <SelectItem value="Passport">Passport</SelectItem>
-                                                        <SelectItem value="National ID Card">National ID Card</SelectItem>
-                                                        <SelectItem value="Government Issued ID">Government Issued ID</SelectItem>
-                                                    </SelectContent>
-                                                </Select>
+                                                <DropdownMenu>
+                                                    <DropdownMenuTrigger
+                                                        render={
+                                                            <Button
+                                                                variant="outline"
+                                                                className="flex w-full items-center justify-between bg-slate-50 border-none rounded-lg h-14 px-4 font-bold"
+                                                            >
+                                                                <span>{field.value || "Passport"}</span>
+                                                                <ChevronDownIcon className="size-4 opacity-50" />
+                                                            </Button>
+                                                        }
+                                                    />
+                                                    <DropdownMenuContent align="start" className="min-w-[200px]">
+                                                        {["Passport", "National ID Card", "Government Issued ID"].map((type) => (
+                                                            <DropdownMenuItem
+                                                                key={type}
+                                                                onSelect={() => field.onChange(type)}
+                                                            >
+                                                                {type}
+                                                            </DropdownMenuItem>
+                                                        ))}
+                                                    </DropdownMenuContent>
+                                                </DropdownMenu>
                                                 <FormMessage />
                                             </FormItem>
                                         )}
@@ -441,18 +453,33 @@ export default function FormPTECoreRegistration() {
                                         render={({ field }) => (
                                             <FormItem>
                                                 <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Why are you taking the test? *</FormLabel>
-                                                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                                    <FormControl>
-                                                        <SelectTrigger className="bg-slate-50 border-none rounded-lg h-14">
-                                                            <SelectValue placeholder="Select Purpose" />
-                                                        </SelectTrigger>
-                                                    </FormControl>
-                                                    <SelectContent>
-                                                        <SelectItem value="Immigration">Immigration / Permanent Residency</SelectItem>
-                                                        <SelectItem value="Work Visa">Work Visa</SelectItem>
-                                                        <SelectItem value="Higher Education">Higher Education</SelectItem>
-                                                    </SelectContent>
-                                                </Select>
+                                                <DropdownMenu>
+                                                    <DropdownMenuTrigger
+                                                        render={
+                                                            <Button
+                                                                variant="outline"
+                                                                className="flex w-full items-center justify-between bg-slate-50 border-none rounded-lg h-14 px-4 font-bold"
+                                                            >
+                                                                <span>{field.value || "Select Purpose"}</span>
+                                                                <ChevronDownIcon className="size-4 opacity-50" />
+                                                            </Button>
+                                                        }
+                                                    />
+                                                    <DropdownMenuContent align="start" className="min-w-[200px]">
+                                                        {[
+                                                            { value: "Immigration", label: "Immigration / Permanent Residency" },
+                                                            { value: "Work Visa", label: "Work Visa" },
+                                                            { value: "Higher Education", label: "Higher Education" }
+                                                        ].map((item) => (
+                                                            <DropdownMenuItem
+                                                                key={item.value}
+                                                                onSelect={() => field.onChange(item.value)}
+                                                            >
+                                                                {item.label}
+                                                            </DropdownMenuItem>
+                                                        ))}
+                                                    </DropdownMenuContent>
+                                                </DropdownMenu>
                                                 <FormMessage />
                                             </FormItem>
                                         )}
@@ -463,9 +490,29 @@ export default function FormPTECoreRegistration() {
                                         render={({ field }) => (
                                             <FormItem>
                                                 <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Current Occupation *</FormLabel>
-                                                <FormControl>
-                                                    <Input className="bg-slate-50 border-none rounded-lg h-14" placeholder="e.g. Software Engineer" {...field} />
-                                                </FormControl>
+                                                <DropdownMenu>
+                                                    <DropdownMenuTrigger
+                                                        render={
+                                                            <Button
+                                                                variant="outline"
+                                                                className="flex w-full items-center justify-between bg-slate-50 border-none rounded-lg h-14 px-4 font-bold"
+                                                            >
+                                                                <span>{field.value || "Select Occupation"}</span>
+                                                                <ChevronDownIcon className="size-4 opacity-50" />
+                                                            </Button>
+                                                        }
+                                                    />
+                                                    <DropdownMenuContent align="start" className="min-w-[200px]">
+                                                        {["Professional", "Student", "Business Owner", "Unemployed", "Retired", "Other"].map((occ) => (
+                                                            <DropdownMenuItem
+                                                                key={occ}
+                                                                onSelect={() => field.onChange(occ)}
+                                                            >
+                                                                {occ}
+                                                            </DropdownMenuItem>
+                                                        ))}
+                                                    </DropdownMenuContent>
+                                                </DropdownMenu>
                                                 <FormMessage />
                                             </FormItem>
                                         )}
@@ -506,34 +553,24 @@ export default function FormPTECoreRegistration() {
                                             </FormItem>
                                         )}
                                     />
-                                    <div className="grid grid-cols-4 gap-4">
-                                        <FormField
-                                            control={control}
-                                            name="countryCode"
-                                            render={({ field }) => (
-                                                <FormItem className="col-span-1">
-                                                    <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Code *</FormLabel>
-                                                    <FormControl>
-                                                        <Input className="bg-slate-50 border-none rounded-lg h-14" {...field} />
-                                                    </FormControl>
-                                                    <FormMessage />
-                                                </FormItem>
-                                            )}
-                                        />
-                                        <FormField
-                                            control={control}
-                                            name="telephone"
-                                            render={({ field }) => (
-                                                <FormItem className="col-span-3">
-                                                    <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Telephone *</FormLabel>
-                                                    <FormControl>
-                                                        <Input className="bg-slate-50 border-none rounded-lg h-14" placeholder="Mobile for SMS" {...field} />
-                                                    </FormControl>
-                                                    <FormMessage />
-                                                </FormItem>
-                                            )}
-                                        />
-                                    </div>
+                                    <FormField
+                                        control={control}
+                                        name="telephone"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Telephone *</FormLabel>
+                                                <FormControl>
+                                                    <PhoneInput
+                                                        {...field}
+                                                        defaultCountry="AE"
+                                                        placeholder="Enter phone number"
+                                                        className="bg-slate-50 border-none rounded-lg h-14"
+                                                    />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
                                 </div>
                                 <FormField
                                     control={control}
@@ -645,19 +682,19 @@ export default function FormPTECoreRegistration() {
                                 </h2>
                                 <div className="space-y-6">
                                     {[
-                                        { key: "termsAccepted", label: "I hereby acknowledge that I have read and understood the terms and conditions outlined above." },
-                                        { key: "permissionLogIntoAccount", label: "I hereby give permission to the center to log into my account to complete my registration." },
-                                        { key: "infoCorrect", label: "I hereby acknowledge that all information written above is correct and true." },
+                                        { key: "termsAccepted" as const, label: "I hereby acknowledge that I have read and understood the terms and conditions outlined above." },
+                                        { key: "permissionLogIntoAccount" as const, label: "I hereby give permission to the center to log into my account to complete my registration." },
+                                        { key: "infoCorrect" as const, label: "I hereby acknowledge that all information written above is correct and true." },
                                     ].map((item) => (
                                         <FormField
                                             key={item.key}
                                             control={control}
-                                            name={item.key as any}
+                                            name={item.key}
                                             render={({ field }) => (
                                                 <FormItem className="flex items-start space-x-3 space-y-0 cursor-pointer group">
                                                     <FormControl>
                                                         <div className="relative flex items-center justify-center mt-1">
-                                                            <input 
+                                                            <input
                                                                 type="checkbox"
                                                                 className="peer appearance-none w-5 h-5 border-2 border-[#A11D1D] rounded bg-white checked:bg-[#A11D1D] transition-all cursor-pointer"
                                                                 checked={field.value}
