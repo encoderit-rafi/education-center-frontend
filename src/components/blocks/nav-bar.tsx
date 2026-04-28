@@ -29,7 +29,7 @@ interface NavItem {
 
 const navItems: NavItem[] = [
   {
-    label: "Exam Preparation Courses",
+    label: "Courses",
     children: COURSES.filter((course) => course.id.endsWith("-prep")).map(
       (course) => ({
         label: course.title,
@@ -125,7 +125,7 @@ const navItems: NavItem[] = [
 export default function NavBar() {
   const primaryNav = navItems.filter((item) =>
     [
-      "Exam Preparation Courses",
+      "Courses",
       "Exam Proctoring Services",
       "Exam Delivery",
       "Fees",
@@ -137,7 +137,7 @@ export default function NavBar() {
   const secondaryNav = navItems.filter(
     (item) =>
       ![
-        "Exam Preparation Courses",
+        "Courses",
         "Exam Proctoring Services",
         "Exam Delivery",
         "Fees",
