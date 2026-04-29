@@ -39,7 +39,7 @@ export const COURSES: Course[] = [
   {
     id: "toefl-ibt-prep",
     category: "TOEFL",
-    title: "TOEFL IBT Test Preparation Course",
+    title: "TOEFL Preparation Course",
     description: "Master the skills and strategies required to achieve your target TOEFL score.",
     extendedDescription: "Crafted by experienced English native speaking instructors to unlock global opportunities.",
     duration: "Various",
@@ -155,124 +155,6 @@ export const COURSES: Course[] = [
     curriculum: [],
     eligibility: ["Computer with internet"],
     instructor: { name: "TEPTH Online Staff", role: "Online Tutors", bio: "", image: "/images/student-study.png" },
-  },
-
-  // --- OET ---
-  {
-    id: "oet-prep",
-    category: "OET",
-    title: "OET Preparation Course",
-    description: "The English test specifically designed for healthcare professionals.",
-    extendedDescription: "Prove you have the right level of English for healthcare work.",
-    duration: "Various",
-    investment: "Starting from AED 3,500",
-    level: "Professional",
-    format: "Online & Classroom",
-    image: "/images/exams/oet.png",
-    curriculum: [],
-    eligibility: ["Healthcare degree required"],
-    instructor: { name: "", role: "", bio: "", image: "" },
-    sections: [
-      {
-        title: "Why OET?",
-        content: "OET uses real healthcare scenarios so you'll feel more confident on test day."
-      },
-      {
-        title: "OET Course Options",
-        type: "cards",
-        cardIds: ["oet-classroom", "oet-online"]
-      }
-    ]
-  },
-  {
-    id: "oet-classroom",
-    category: "OET",
-    title: "OET Classroom Training",
-    description: "Hands-on clinical communication training in person.",
-    extendedDescription: "Specialized face-to-face sessions focusing on healthcare sub-tests.",
-    duration: "8 Weeks",
-    investment: "AED 4,500.00",
-    level: "Professional",
-    format: "Classroom",
-    image: "/images/exams/oet.png",
-    curriculum: [],
-    eligibility: ["Healthcare professional"],
-    instructor: { name: "Marcus Thorne", role: "Linguistics Expert", bio: "", image: "/images/student-study.png" },
-  },
-  {
-    id: "oet-online",
-    category: "OET",
-    title: "OET Online Pro",
-    description: "Flexible online prep focusing on clinical writing.",
-    extendedDescription: "Master referral letters and discharge summaries with our digital modules.",
-    duration: "6 Weeks",
-    investment: "AED 3,500.00",
-    previousInvestment: "AED 4,200.00",
-    level: "Professional",
-    format: "Online",
-    image: "/images/exams/oet.png",
-    curriculum: [],
-    eligibility: ["Healthcare professional"],
-    instructor: { name: "TEPTH Med-Staff", role: "Certified Tutors", bio: "", image: "/images/student-study.png" },
-  },
-
-  // --- PTE ---
-  {
-    id: "pte-prep",
-    category: "PTE",
-    title: "PTE Preparation Course",
-    description: "Master the Pearson Test of English with AI-based scoring strategies.",
-    extendedDescription: "Learn how to optimize your performance for the PTE algorithm.",
-    duration: "Various",
-    investment: "Starting from AED 1,850",
-    level: "Mixed",
-    format: "Classroom & Online",
-    image: "/images/exams/pte.png",
-    curriculum: [],
-    eligibility: ["Basic computer literacy"],
-    instructor: { name: "", role: "", bio: "", image: "" },
-    sections: [
-      {
-        title: "Master the AI",
-        content: "Because PTE is scored by a machine, there are specific patterns that can boost your score."
-      },
-      {
-        title: "PTE Course Options",
-        type: "cards",
-        cardIds: ["pte-classroom", "pte-online"]
-      }
-    ]
-  },
-  {
-    id: "pte-classroom",
-    category: "PTE",
-    title: "PTE Classroom Intensive",
-    description: "Deep dive into the PTE with machine-scored practice in-person.",
-    extendedDescription: "Intensive training to trigger the PTE AI for maximum scores.",
-    duration: "4 Weeks",
-    investment: "AED 2,500.00",
-    level: "Mixed",
-    format: "Classroom",
-    image: "/images/exams/pte.png",
-    curriculum: [],
-    eligibility: ["Basic computer literacy"],
-    instructor: { name: "David Chen", role: "PTE Specialist", bio: "", image: "/images/student-study.png" },
-  },
-  {
-    id: "pte-online",
-    category: "PTE",
-    title: "PTE Online Core",
-    description: "Focus on AI scoring mechanics from your own computer.",
-    extendedDescription: "Reverse-engineering the PTE assessment criteria remotely.",
-    duration: "4 Weeks",
-    investment: "AED 1,850.00",
-    previousInvestment: "AED 2,200.00",
-    level: "Mixed",
-    format: "Online",
-    image: "/images/exams/pte.png",
-    curriculum: [],
-    eligibility: ["Stable internet"],
-    instructor: { name: "TEPTH PTE Staff", role: "Online Tutors", bio: "", image: "/images/student-study.png" },
   },
 
   // --- CELPIP ---
@@ -391,5 +273,145 @@ export const COURSES: Course[] = [
     curriculum: [],
     eligibility: ["Stable internet"],
     instructor: { name: "TEPTH Academic Staff", role: "Online Tutors", bio: "", image: "/images/student-study.png" },
+  },
+
+
+  // --- PTE ---
+  {
+    id: "pte-prep",
+    category: "PTE",
+    title: "PTE-A Preparation Course",
+    description: "Master the Pearson Test of English with AI-based scoring strategies.",
+    extendedDescription: "Learn how to optimize your performance for the PTE algorithm.",
+    duration: "Various",
+    investment: "Starting from AED 1,850",
+    level: "Mixed",
+    format: "Classroom & Online",
+    image: "/images/exams/pte.png",
+    curriculum: [],
+    eligibility: ["Basic computer literacy"],
+    instructor: { name: "", role: "", bio: "", image: "" },
+    sections: [
+      {
+        title: "Master the AI",
+        content: "Because PTE is scored by a machine, there are specific patterns that can boost your score."
+      },
+      {
+        title: "PTE Course Options",
+        type: "cards",
+        cardIds: ["pte-classroom", "pte-online"]
+      }
+    ]
+  },
+  {
+    id: "pte-classroom",
+    category: "PTE",
+    title: "PTE Classroom Intensive",
+    description: "Deep dive into the PTE with machine-scored practice in-person.",
+    extendedDescription: "Intensive training to trigger the PTE AI for maximum scores.",
+    duration: "4 Weeks",
+    investment: "AED 2,500.00",
+    level: "Mixed",
+    format: "Classroom",
+    image: "/images/exams/pte.png",
+    curriculum: [],
+    eligibility: ["Basic computer literacy"],
+    instructor: { name: "David Chen", role: "PTE Specialist", bio: "", image: "/images/student-study.png" },
+  },
+  {
+    id: "pte-online",
+    category: "PTE",
+    title: "PTE Online Core",
+    description: "Focus on AI scoring mechanics from your own computer.",
+    extendedDescription: "Reverse-engineering the PTE assessment criteria remotely.",
+    duration: "4 Weeks",
+    investment: "AED 1,850.00",
+    previousInvestment: "AED 2,200.00",
+    level: "Mixed",
+    format: "Online",
+    image: "/images/exams/pte.png",
+    curriculum: [],
+    eligibility: ["Stable internet"],
+    instructor: { name: "TEPTH PTE Staff", role: "Online Tutors", bio: "", image: "/images/student-study.png" },
+  },
+
+  // --- OET ---
+  {
+    id: "oet-prep",
+    category: "OET",
+    title: "OET Preparation Course",
+    description: "The English test specifically designed for healthcare professionals.",
+    extendedDescription: "Prove you have the right level of English for healthcare work.",
+    duration: "Various",
+    investment: "Starting from AED 3,500",
+    level: "Professional",
+    format: "Online & Classroom",
+    image: "/images/exams/oet.png",
+    curriculum: [],
+    eligibility: ["Healthcare degree required"],
+    instructor: { name: "", role: "", bio: "", image: "" },
+    sections: [
+      {
+        title: "Why OET?",
+        content: "OET uses real healthcare scenarios so you'll feel more confident on test day."
+      },
+      {
+        title: "OET Course Options",
+        type: "cards",
+        cardIds: ["oet-classroom", "oet-online"]
+      }
+    ]
+  },
+  {
+    id: "oet-classroom",
+    category: "OET",
+    title: "OET Classroom Training",
+    description: "Hands-on clinical communication training in person.",
+    extendedDescription: "Specialized face-to-face sessions focusing on healthcare sub-tests.",
+    duration: "8 Weeks",
+    investment: "AED 4,500.00",
+    level: "Professional",
+    format: "Classroom",
+    image: "/images/exams/oet.png",
+    curriculum: [],
+    eligibility: ["Healthcare professional"],
+    instructor: { name: "Marcus Thorne", role: "Linguistics Expert", bio: "", image: "/images/student-study.png" },
+  },
+  {
+    id: "oet-online",
+    category: "OET",
+    title: "OET Online Pro",
+    description: "Flexible online prep focusing on clinical writing.",
+    extendedDescription: "Master referral letters and discharge summaries with our digital modules.",
+    duration: "6 Weeks",
+    investment: "AED 3,500.00",
+    previousInvestment: "AED 4,200.00",
+    level: "Professional",
+    format: "Online",
+    image: "/images/exams/oet.png",
+    curriculum: [],
+    eligibility: ["Healthcare professional"],
+    instructor: { name: "TEPTH Med-Staff", role: "Certified Tutors", bio: "", image: "/images/student-study.png" },
+  },
+  // --- EXAM WORKSHOP ---
+  {
+    id: "exam-workshop-prep",
+    category: "Exam Workshop",
+    title: "Exam Workshop Course",
+    description: "A focused session designed to provide final tips, strategies, and practice before your big exam.",
+    extendedDescription: "Boost your confidence with our expert-led workshop focusing on time management, question analysis, and common pitfalls.",
+    duration: "1 Day",
+    investment: "AED 500.00",
+    level: "All Levels",
+    format: "Classroom & Online",
+    image: "/images/student-study.png",
+    curriculum: [],
+    eligibility: ["Open to all exam candidates"],
+    instructor: {
+      name: "TEPTH Expert Panel",
+      role: "Senior Trainers",
+      bio: "",
+      image: "/images/student-study.png",
+    },
   },
 ];

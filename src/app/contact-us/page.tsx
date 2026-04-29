@@ -33,7 +33,7 @@ export default function ContactUs() {
                 style={{ border: 0 }}
                 allowFullScreen={true}
                 loading="lazy"
-                title="TEPTH Dubai Silicon Oasis Location"
+                title="The Exam Preparation and Testing House(TEPTH)"
               />
               <div className="absolute top-4 right-4">
                 <span className="bg-white/95 backdrop-blur-md px-4 py-2 rounded-full text-xs font-bold text-secondary flex items-center gap-2 shadow-sm border border-slate-100">
