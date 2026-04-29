@@ -1,5 +1,50 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
+import { Badge } from "@/components/ui/badge";
+import { toast } from "sonner";
+
+function CopyBadge({
+  icon,
+  value,
+  copyText,
+  isLocation = false,
+}: {
+  icon: string;
+  value: React.ReactNode;
+  copyText: string;
+  isLocation?: boolean;
+}) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = (e: React.MouseEvent) => {
+    e.preventDefault();
+    try {
+      navigator.clipboard.writeText(copyText);
+      setCopied(true);
+      toast.success("Copied to clipboard!");
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error("Failed to copy text: ", err);
+    }
+  };
+
+  return (
+    <Badge
+      variant="secondary"
+      onClick={handleCopy}
+      className={`flex items-start justify-start gap-3 px-4 py-3 bg-red-50 hover:bg-red-100 text-red-800 transition-colors cursor-pointer w-full text-left rounded-xl border border-transparent shadow-sm h-auto ${isLocation ? "whitespace-normal" : "whitespace-nowrap"
+        }`}
+    >
+      <span className="material-symbols-outlined text-red-700 font-bold shrink-0 mt-0.5">
+        {copied ? "check" : icon}
+      </span>
+      <span className="text-sm font-bold leading-snug flex-1">{value}</span>
+    </Badge>
+  );
+}
 
 export default function Footer() {
   const usefulLinks = [
@@ -51,43 +96,33 @@ export default function Footer() {
                 />
               </Link>
 
-              <div className="space-y-6">
-                <a
-                  href="mailto:info@tepth.net"
-                  className="flex items-center gap-4 group/link"
-                >
-                  <span className="material-symbols-outlined text-red-700 font-bold">
-                    mail
-                  </span>
-                  <span className="text-sm font-bold text-red-800 transition-colors group-hover/link:text-red-600">
-                    info@tepth.net
-                  </span>
-                </a>
+              <div className="space-y-2">
+                <CopyBadge
+                  icon="location_on"
+                  isLocation
+                  copyText="Tabarak Tower, Suite 701, 7th Floor, Corniche Rd - AL Mamzar - Sharjah"
+                  value={
+                    <>
+                      Tabarak Tower
+                      <br />
+                      Suite 701, 7th Floor
+                      <br />
+                      Corniche Rd - AL Mamzar - Sharjah
+                    </>
+                  }
+                />
 
-                <a
-                  href="tel:+97143333616"
-                  className="flex items-center gap-4 group/link"
-                >
-                  <span className="material-symbols-outlined text-red-700 font-bold rotate-90">
-                    call
-                  </span>
-                  <span className="text-sm font-bold text-red-800 transition-colors group-hover/link:text-red-600">
-                    +97143333616
-                  </span>
-                </a>
+                <CopyBadge
+                  icon="mail"
+                  copyText="info@tepth.net"
+                  value="info@tepth.net"
+                />
 
-                <div className="flex items-start gap-4">
-                  <span className="material-symbols-outlined text-red-700 font-bold mt-0.5">
-                    location_on
-                  </span>
-                  <p className="text-xs font-bold text-red-800 leading-relaxed uppercase tracking-tight">
-                    Suite 703, Apricot Tower, Dubai
-                    <br />
-                    Silicon Oasis, P.O.Box 300109,
-                    <br />
-                    Dubai, United Arab Emirates.
-                  </p>
-                </div>
+                <CopyBadge
+                  icon="call"
+                  copyText="+97143333616"
+                  value="+97143333616"
+                />
               </div>
             </div>
             {/* Subtle shadow glow */}

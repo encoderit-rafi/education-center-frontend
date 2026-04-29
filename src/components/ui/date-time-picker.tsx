@@ -38,6 +38,7 @@ interface BaseDateTimePickerProps<TFieldValues extends FieldValues = FieldValues
   control?: Control<TFieldValues>;
   name?: string;
   className?: string;
+  labelClassName?: string;
   disabled?: boolean;
   disablePast?: boolean;
   fromYear?: number;
@@ -75,6 +76,7 @@ export function DateTimePicker<TFieldValues extends FieldValues = FieldValues>(
     control,
     name = "datetime",
     className,
+    labelClassName,
     disabled = false,
     disablePast = false,
     fromYear,
@@ -519,7 +521,7 @@ export function DateTimePicker<TFieldValues extends FieldValues = FieldValues>(
         name={name as any}
         render={({ field }) => (
           <FormItem className={cn("flex flex-col", className)}>
-            {label && <FormLabel>{label}</FormLabel>}
+            {label && <FormLabel className={labelClassName}>{label}</FormLabel>}
             <Popover>
               <PopoverTrigger
                 render={

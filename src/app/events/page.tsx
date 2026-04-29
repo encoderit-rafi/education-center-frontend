@@ -1,13 +1,35 @@
+"use client";
+
 import Image from "next/image";
-import { cn } from "@/lib/utils";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import {
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { PhoneInput } from "@/components/ui/phone-input";
 import {
     CheckCircle,
     Phone,
-    Mail
+    Mail,
+    CheckCircle2
 } from "lucide-react";
+import React, { useState } from "react";
+
+const eventSchema = z.object({
+    fullName: z.string().min(3, "Full name must be at least 3 characters"),
+    mobile: z.string().min(7, "Please enter a valid mobile number"),
+    email: z.string().email("Please enter a valid email address"),
+});
+
+type EventFormValues = z.infer<typeof eventSchema>;
 
 const AGENDA_ITEMS = [
     "CELPIP Basics",
@@ -20,41 +42,42 @@ const AGENDA_ITEMS = [
 ];
 
 export default function EventsPage() {
+    const [isSubmitted, setIsSubmitted] = useState(false);
+
+    const form = useForm<EventFormValues>({
+        resolver: zodResolver(eventSchema),
+        defaultValues: {
+            fullName: "",
+            mobile: "",
+            email: "",
+        },
+    });
+
+    const onSubmit = async (data: EventFormValues) => {
+        console.log("Event Registration Data:", data);
+        // Simulate API call
+        await new Promise((resolve) => setTimeout(resolve, 1500));
+        setIsSubmitted(true);
+    };
+
     return (
         <div className="flex flex-col min-h-screen bg-white">
-            {/* Hero Section */}
-            <section className="relative w-full h-[55vh] min-h-[450px] flex items-center overflow-hidden">
-                <div className="absolute inset-0 z-0">
-                    <Image
-                        src="/images/about-us/infrastructure-center.png"
-                        alt="TEPTH Events"
-                        fill
-                        priority
-                        className="object-cover"
-                    />
-                    <div className="absolute inset-0 bg-black/80" />
-                </div>
-
-                <div className="container relative z-10 px-6 mx-auto sm:px-12 lg:px-24">
-                    <div className="max-w-4xl space-y-6">
-                        <h1 className={cn(
-                            "text-6xl md:text-8xl font-black text-white tracking-tighter leading-[0.9]",
-                            "font-heading"
-                        )}>
-                            Events & <br />
-                            <span className="italic text-[#A11D1D]">Training.</span>
-                        </h1>
-                        <p className="text-xl md:text-2xl text-white/80 max-w-2xl leading-relaxed font-medium">
-                            Empowering your academic journey through expert-led information sessions and immersive technical workshops.
-                        </p>
-                    </div>
+            {/* Header Title (Added after hero removal) */}
+            <section className="pt-24 pb-12 bg-white">
+                <div className="container px-6 mx-auto sm:px-12 lg:px-24 text-center">
+                    <h1 className="text-4xl md:text-6xl font-black text-gray-900 tracking-tighter uppercase leading-none mb-4">
+                        Upcoming <span className="text-[#A11D1D]">Events</span>
+                    </h1>
+                    <p className="text-gray-500 text-lg max-w-2xl mx-auto font-medium">
+                        Empowering your academic journey through expert-led information sessions and immersive workshops.
+                    </p>
                 </div>
             </section>
 
             {/* Featured Event Section */}
-            <section className="py-24 bg-gray-50/50">
-                <div className="container px-6 mx-auto sm:px-12 lg:px-24">
-                    <div className="relative aspect-auto min-h-[700px] lg:aspect-[21/9] overflow-hidden bg-white shadow-3xl border border-gray-100 rounded-sm">
+            <section className="py-24 bg-white flex flex-col items-center justify-center">
+                <div className="container px-6 mx-auto sm:px-12 lg:px-24 flex justify-center">
+                    <div className="relative w-full max-w-7xl aspect-auto min-h-[700px] lg:aspect-[21/9] overflow-hidden bg-white shadow-3xl border border-gray-100 rounded-sm">
                         {/* 1. Background Image */}
                         <div className="absolute inset-0">
                             <Image
@@ -127,31 +150,92 @@ export default function EventsPage() {
 
                             {/* RIGHT: Registration Form */}
                             <div className="lg:col-span-12 xl:col-span-5 flex justify-end">
-                                <div className="w-full max-w-md bg-[#111827] text-white p-10 lg:p-14 shadow-2xl relative overflow-hidden border border-white/5">
+                                <div className="w-full max-w-md bg-white text-gray-900 p-10 lg:p-14 shadow-2xl relative overflow-hidden border border-gray-100">
                                     <div className="relative z-10">
-                                        <h3 className="text-2xl font-black mb-1 font-heading tracking-tight underline decoration-[#A11D1D] decoration-4 underline-offset-8">Register Now</h3>
-                                        <p className="text-gray-400 text-[10px] mb-10 uppercase tracking-[0.2em] font-bold">Secure your session entry</p>
+                                        {isSubmitted ? (
+                                            <div className="flex flex-col items-center justify-center py-12 text-center animate-in fade-in zoom-in duration-500">
+                                                <div className="w-20 h-20 bg-[#A11D1D]/10 rounded-full flex items-center justify-center mb-6">
+                                                    <CheckCircle2 className="w-10 h-10 text-[#A11D1D]" />
+                                                </div>
+                                                <h3 className="text-2xl font-black mb-2 uppercase tracking-tight">Registration Sent!</h3>
+                                                <p className="text-gray-500 text-sm leading-relaxed mb-8">
+                                                    Thank you for registering. Our team will contact you shortly with the session details.
+                                                </p>
+                                                <Button
+                                                    onClick={() => setIsSubmitted(false)}
+                                                    variant="outline"
+                                                    className="rounded-none border-gray-200 text-gray-900 hover:bg-gray-900 hover:text-white font-bold uppercase tracking-widest text-[10px]"
+                                                >
+                                                    New Registration
+                                                </Button>
+                                            </div>
+                                        ) : (
+                                            <>
+                                                <h3 className="text-2xl font-black mb-1 font-heading tracking-tight underline decoration-[#A11D1D] decoration-4 underline-offset-8">Register Now</h3>
+                                                <p className="text-gray-500 text-[10px] mb-10 uppercase tracking-[0.2em] font-bold">Secure your session entry</p>
 
-                                        <form className="space-y-5">
-                                            <div className="space-y-2">
-                                                <Label className="text-[10px] font-black uppercase tracking-widest text-[#A11D1D]">Full Name:*</Label>
-                                                <Input className="bg-white/5 border-white/10 rounded-none h-12 text-[13px] focus:border-[#A11D1D] focus:ring-[#A11D1D]" placeholder="Enter your name" />
-                                            </div>
-                                            <div className="space-y-2">
-                                                <Label className="text-[10px] font-black uppercase tracking-widest text-[#A11D1D]">Mobile No:*</Label>
-                                                <Input className="bg-white/5 border-white/10 rounded-none h-12 text-[13px] focus:border-[#A11D1D] focus:ring-[#A11D1D]" placeholder="+971 -- --- ----" />
-                                            </div>
-                                            <div className="space-y-2">
-                                                <Label className="text-[10px] font-black uppercase tracking-widest text-[#A11D1D]">Email Address:*</Label>
-                                                <Input className="bg-white/5 border-white/10 rounded-none h-12 text-[13px] focus:border-[#A11D1D] focus:ring-[#A11D1D]" placeholder="email@example.com" />
-                                            </div>
+                                                <Form {...form}>
+                                                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+                                                        <FormField
+                                                            control={form.control}
+                                                            name="fullName"
+                                                            render={({ field }) => (
+                                                                <FormItem className="space-y-2">
+                                                                    <FormLabel className="text-[10px] font-black uppercase tracking-widest text-[#A11D1D]">Full Name:*</FormLabel>
+                                                                    <FormControl>
+                                                                        <Input className="bg-white border-gray-200 rounded-none h-12 text-[13px] focus:border-[#A11D1D] focus:ring-[#A11D1D]" placeholder="Enter your name" {...field} />
+                                                                    </FormControl>
+                                                                    <FormMessage className="text-[10px]" />
+                                                                </FormItem>
+                                                            )}
+                                                        />
 
-                                            <Button className="w-full h-16 bg-[#A11D1D] hover:bg-white hover:text-black transition-all rounded-none font-black text-xs uppercase tracking-[0.3em] mt-4">
-                                                Join Session
-                                            </Button>
-                                        </form>
+                                                        <FormField
+                                                            control={form.control}
+                                                            name="mobile"
+                                                            render={({ field }) => (
+                                                                <FormItem className="space-y-2">
+                                                                    <FormLabel className="text-[10px] font-black uppercase tracking-widest text-[#A11D1D]">Mobile No:*</FormLabel>
+                                                                    <FormControl>
+                                                                        <PhoneInput
+                                                                            {...field}
+                                                                            defaultCountry="AE"
+                                                                            placeholder="Enter phone number"
+                                                                            className="bg-white border-gray-200 rounded-none h-12 text-[13px] focus-within:border-[#A11D1D] focus-within:ring-1 focus-within:ring-[#A11D1D]"
+                                                                        />
+                                                                    </FormControl>
+                                                                    <FormMessage className="text-[10px]" />
+                                                                </FormItem>
+                                                            )}
+                                                        />
+
+                                                        <FormField
+                                                            control={form.control}
+                                                            name="email"
+                                                            render={({ field }) => (
+                                                                <FormItem className="space-y-2">
+                                                                    <FormLabel className="text-[10px] font-black uppercase tracking-widest text-[#A11D1D]">Email Address:*</FormLabel>
+                                                                    <FormControl>
+                                                                        <Input className="bg-white border-gray-200 rounded-none h-12 text-[13px] focus:border-[#A11D1D] focus:ring-[#A11D1D]" placeholder="email@example.com" {...field} />
+                                                                    </FormControl>
+                                                                    <FormMessage className="text-[10px]" />
+                                                                </FormItem>
+                                                            )}
+                                                        />
+
+                                                        <Button
+                                                            type="submit"
+                                                            disabled={form.formState.isSubmitting}
+                                                            className="w-full h-16 bg-[#A11D1D] hover:bg-[#111827] transition-all rounded-none font-black text-xs uppercase tracking-[0.3em] mt-4"
+                                                        >
+                                                            {form.formState.isSubmitting ? "Processing..." : "Join Session"}
+                                                        </Button>
+                                                    </form>
+                                                </Form>
+                                            </>
+                                        )}
                                     </div>
-                                    <div className="absolute top-0 right-0 w-32 h-32 bg-[#A11D1D]/20 blur-[80px] -mr-16 -mt-16" />
+                                    <div className="absolute top-0 right-0 w-32 h-32 bg-[#A11D1D]/5 blur-[80px] -mr-16 -mt-16" />
                                 </div>
                             </div>
                         </div>
@@ -170,18 +254,6 @@ export default function EventsPage() {
                                         fill
                                         className="object-contain"
                                     />
-                                </div>
-                            </div>
-
-                            {/* Contact Support info area */}
-                            <div className="flex flex-col lg:flex-row items-end lg:items-center gap-4 lg:gap-10 text-white pointer-events-auto pb-4">
-                                <div className="flex items-center gap-3 group">
-                                    <Phone className="w-4 h-4 text-white" />
-                                    <span className="text-sm font-black tracking-tight drop-shadow-md">04 333 3616</span>
-                                </div>
-                                <div className="flex items-center gap-3 group">
-                                    <Mail className="w-4 h-4 text-white" />
-                                    <span className="text-sm font-black tracking-tight drop-shadow-md uppercase">info@tepth.net</span>
                                 </div>
                             </div>
                         </div>

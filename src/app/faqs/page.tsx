@@ -1,6 +1,3 @@
-import Image from "next/image";
-import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
 import {
     Accordion,
     AccordionContent,
@@ -66,47 +63,15 @@ const FAQS = [
 export default function FAQPage() {
     return (
         <div className="flex flex-col min-h-screen">
-            {/* Hero Section */}
-            <section className="relative w-full h-[65vh] min-h-[500px] flex items-center overflow-hidden">
-                {/* Background Image */}
-                <div className="absolute inset-0 z-0">
-                    <Image
-                        src="/images/about-us/infrastructure-center.png"
-                        alt="TEPTH Information House"
-                        fill
-                        priority
-                        className="object-cover"
-                    />
-                    {/* Dark Overlay */}
-                    <div className="absolute inset-0 bg-black/70" />
-                </div>
-
-                {/* Content */}
-                <div className="container relative z-10 px-6 mx-auto sm:px-12 lg:px-24">
-                    <div className="max-w-4xl space-y-6">
-                        <h1 className={cn(
-                            "text-6xl md:text-8xl font-black text-white tracking-tighter leading-[0.95]",
-                            "font-heading"
-                        )}>
-                            Answers to your <br />
-                            <span className="italic text-[#A11D1D]">Common Queries.</span>
-                        </h1>
-
-                        <p className="text-xl md:text-2xl text-white/90 max-w-2xl leading-relaxed mb-10">
-                            Everything you need to know about our registration process, courses, and premium facilities in Dubai Silicon Oasis.
-                        </p>
-
-                        <div className="flex gap-12 pt-8 border-t border-white/20 max-w-lg">
-                            <div className="flex flex-col">
-                                <span className="text-4xl md:text-5xl font-black text-[#A11D1D] font-heading">24/7</span>
-                                <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-white/70">Online Access</span>
-                            </div>
-                            <div className="flex flex-col">
-                                <span className="text-4xl md:text-5xl font-black text-[#A11D1D] font-heading">95%</span>
-                                <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-white/70">Instant Help</span>
-                            </div>
-                        </div>
-                    </div>
+            {/* Header Section */}
+            <section className="pt-24 pb-12 bg-white">
+                <div className="container px-6 mx-auto sm:px-12 lg:px-24 text-center">
+                    <h1 className="text-4xl md:text-6xl font-black text-gray-900 tracking-tighter uppercase leading-none mb-4">
+                        FREQUENTLY ASKED <span className="text-[#A11D1D]">QUESTIONS</span>
+                    </h1>
+                    <p className="text-gray-500 text-lg max-w-2xl mx-auto font-medium">
+                        Everything you need to know about our registration process, courses, and premium facilities in Dubai Silicon Oasis.
+                    </p>
                 </div>
             </section>
 
@@ -137,19 +102,6 @@ export default function FAQPage() {
                             </AccordionItem>
                         ))}
                     </Accordion>
-
-                    {/* Further Help CTA */}
-                    <div className="mt-24 p-12 bg-[#111827] rounded-sm text-center relative overflow-hidden group">
-                        <div className="absolute inset-0 bg-red-600 opacity-0 group-hover:opacity-5 transition-opacity" />
-                        <h3 className="text-2xl font-black text-white mb-3">Still have questions?</h3>
-                        <p className="text-gray-400 mb-10 max-w-md mx-auto">Our specialized support team is ready to assist you with any further inquiries.</p>
-                        <a
-                            href="mailto:info@tepth.net"
-                            className="inline-flex items-center justify-center px-10 py-5 bg-[#A11D1D] text-white font-black text-sm uppercase tracking-widest rounded-sm transition-all hover:bg-[#8A1818] hover:shadow-2xl hover:-translate-y-1"
-                        >
-                            Email Support House
-                        </a>
-                    </div>
                 </div>
             </section>
         </div>

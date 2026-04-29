@@ -38,32 +38,15 @@ const FACILITIES = [
 export default function FacilitiesPage() {
     return (
         <div className="flex flex-col min-h-screen bg-white">
-            {/* Hero Section */}
-            <section className="relative w-full h-[65vh] min-h-[500px] flex items-center overflow-hidden">
-                <div className="absolute inset-0 z-0">
-                    <Image
-                        src="/images/about-us/infrastructure-center.png"
-                        alt="TEPTH Facilities"
-                        fill
-                        priority
-                        className="object-cover"
-                    />
-                    <div className="absolute inset-0 bg-black/80" />
-                </div>
-
-                <div className="container relative z-10 px-6 mx-auto sm:px-12 lg:px-24">
-                    <div className="max-w-4xl space-y-6">
-                        <h1 className={cn(
-                            "text-6xl md:text-8xl font-black text-white tracking-tighter leading-[0.95]",
-                            "font-heading"
-                        )}>
-                            World-Class <br />
-                            <span className="italic text-[#A11D1D]">Facilities.</span>
-                        </h1>
-                        <p className="text-xl md:text-2xl text-white/90 max-w-2xl leading-relaxed">
-                            A purpose-built ecosystem designed to empower learners with the environment and technology they need to excel.
-                        </p>
-                    </div>
+            {/* Header Section */}
+            <section className="pt-24 pb-12 bg-white">
+                <div className="container px-6 mx-auto sm:px-12 lg:px-24 text-center">
+                    <h1 className="text-4xl md:text-6xl font-black text-gray-900 tracking-tighter uppercase leading-none mb-4">
+                        WORLD-CLASS <span className="text-[#A11D1D]">FACILITIES</span>
+                    </h1>
+                    <p className="text-gray-500 text-lg max-w-2xl mx-auto font-medium">
+                        A purpose-built ecosystem designed to empower learners with the environment and technology they need to excel.
+                    </p>
                 </div>
             </section>
 
@@ -110,15 +93,10 @@ export default function FacilitiesPage() {
             </section>
 
             {/* Visual Callout */}
-            <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center">
-                <div className="absolute inset-0">
-                    <Image
-                        src="/images/about-us/infrastructure-center.png"
-                        alt="Infrastructure Close-up"
-                        fill
-                        className="object-cover"
-                    />
-                    <div className="absolute inset-0 bg-[#A11D1D]/90 mix-blend-multiply" />
+            <section className="relative h-[40vh] min-h-[300px] flex items-center justify-center bg-[#A11D1D]">
+                <div className="absolute inset-0 overflow-hidden">
+                    <div className="absolute -top-24 -left-24 w-96 h-96 bg-white/5 rounded-full blur-3xl" />
+                    <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-black/10 rounded-full blur-3xl" />
                 </div>
                 
                 <div className="container relative z-10 px-6 mx-auto text-center">

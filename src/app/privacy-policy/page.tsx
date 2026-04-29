@@ -1,5 +1,3 @@
-import Image from "next/image";
-import { cn } from "@/lib/utils";
 import Link from "next/link";
 const SECTIONS = [
     { id: "intro", title: "Introduction" },
@@ -15,38 +13,19 @@ const SECTIONS = [
 export default function PrivacyPolicyPage() {
     return (
         <div className="flex flex-col min-h-screen bg-white">
-            {/* Hero Section */}
-            <section className="relative w-full h-[50vh] min-h-[400px] flex items-center overflow-hidden">
-                <div className="absolute inset-0 z-0">
-                    <Image
-                        src="/images/about-us/infrastructure-center.png"
-                        alt="TEPTH Privacy Center"
-                        fill
-                        priority
-                        className="object-cover"
-                    />
-                    <div className="absolute inset-0 bg-black/80" />
-                </div>
 
-                <div className="container relative z-10 px-6 mx-auto sm:px-12 lg:px-24">
-                    <div className="max-w-4xl space-y-6">
-                        <h1 className={cn(
-                            "text-5xl md:text-7xl font-black text-white tracking-tighter leading-[1.1]",
-                            "font-heading"
-                        )}>
-                            Privacy <br />
-                            <span className="italic text-[#A11D1D]">Policy.</span>
-                        </h1>
-                        <p className="text-xl text-white/80 max-w-2xl leading-relaxed">
-                            Our commitment to demonstrating concern for maintaining your secrecy and data integrity.
-                        </p>
-                    </div>
-                </div>
-            </section>
 
             {/* Content Section */}
             <section className="py-24">
                 <div className="container px-6 mx-auto sm:px-12 lg:px-24">
+                    <div className="text-center mb-20">
+                        <h1 className="text-4xl md:text-6xl font-black text-gray-900 tracking-tighter mb-4 uppercase leading-none">
+                            Privacy <span className="text-[#A11D1D]">Policy</span>
+                        </h1>
+                        <p className="text-gray-500 text-lg max-w-2xl mx-auto font-medium leading-relaxed">
+                            Our commitment to demonstrating concern for maintaining your secrecy and data integrity.
+                        </p>
+                    </div>
                     <div className="flex flex-col lg:flex-row gap-16">
                         
                         {/* Sticky Sidebar */}

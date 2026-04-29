@@ -1,5 +1,3 @@
-import Image from "next/image";
-import { cn } from "@/lib/utils";
 import {
     Accessibility,
     BrainCircuit,
@@ -22,40 +20,14 @@ const SUPPORT_SERVICES = [
 export default function DisabilityPolicyPage() {
     return (
         <div className="flex flex-col min-h-screen bg-white">
-            {/* Hero Section */}
-            <section className="relative w-full h-[60vh] min-h-[500px] flex items-center overflow-hidden">
-                <div className="absolute inset-0 z-0">
-                    <Image
-                        src="/images/about-us/infrastructure-center.png"
-                        alt="TEPTH Campus"
-                        fill
-                        priority
-                        className="object-cover"
-                    />
-                    <div className="absolute inset-0 bg-black/80" />
-                </div>
-
-                <div className="container relative z-10 px-6 mx-auto sm:px-12 lg:px-24">
-                    <div className="max-w-4xl space-y-6 text-left">
-                        <h1 className={cn(
-                            "text-6xl md:text-8xl font-black text-white tracking-tighter leading-[0.9]",
-                            "font-heading"
-                        )}>
-                            Disability <br />
-                            <span className="italic text-[#A11D1D]">Policy.</span>
-                        </h1>
-                        <p className="text-xl md:text-2xl text-white/90 max-w-2xl leading-relaxed">
-                            Creating an accommodating environment that enables everyone to participate fully in mainstream scholastic life.
-                        </p>
-                    </div>
-                </div>
-            </section>
-
             {/* Intro Statement Section */}
             <section className="py-24 border-b border-gray-100">
                 <div className="container px-6 mx-auto sm:px-12 lg:px-24">
                     <div className="max-w-4xl mx-auto text-center">
-                        <h2 className="text-sm font-black uppercase tracking-[0.2em] text-[#A11D1D] mb-6">Our Commitment</h2>
+                        <h1 className="text-4xl md:text-6xl font-black text-gray-900 tracking-tighter mb-4 uppercase">
+                            Disability <span className="text-[#A11D1D]">Policy</span>
+                        </h1>
+                        <h2 className="text-sm font-black uppercase tracking-[0.2em] text-[#A11D1D] mb-8">Our Commitment</h2>
                         <p className="text-2xl md:text-3xl font-black text-gray-900 leading-tight mb-8">
                             "TEPTH aims to create an environment that enables disabled faculty staff and students to realize their individual potential."
                         </p>
