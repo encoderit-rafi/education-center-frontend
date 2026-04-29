@@ -1,9 +1,12 @@
-export default function Logo() {
+import { cn } from "@/lib/utils";
+import { ComponentProps } from "react";
+
+type Props = ComponentProps<"svg">;
+export default function Logo({ className, ...props }: Props) {
   return (
     <svg
-      fill="currentColor"
-      height="33"
-      width="33"
+      {...props}
+      className={cn("", className)}
       xmlns="http://www.w3.org/2000/svg"
     >
       <path d="M20.46 1.766 17.303.923l-2.66 9.896-2.403-8.934-3.157.843 2.595 9.652-6.464-6.442-2.311 2.304 7.09 7.066-8.83-2.358-.846 3.146 9.648 2.577a6.516 6.516 0 0 1-.169-1.478c0-3.598 2.927-6.515 6.537-6.515s6.537 2.917 6.537 6.515c0 .505-.057.997-.167 1.468l8.768 2.342.846-3.147-9.686-2.586 8.83-2.358-.845-3.147-9.686 2.587 6.464-6.442-2.311-2.304-6.992 6.969 2.369-8.81Z" />
