@@ -518,24 +518,30 @@ export function DateTimePicker<TFieldValues extends FieldValues = FieldValues>(
         control={control}
         name={name as any}
         render={({ field }) => (
-          <FormItem className="flex flex-col gap-2">
-            {label && <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">{label}</FormLabel>}
-            <Popover modal={false}>
+          <FormItem className={cn("flex flex-col", className)}>
+            {label && <FormLabel>{label}</FormLabel>}
+            <Popover>
               <PopoverTrigger
                 render={
-                  <FormControl>
-                    <Button
-                      variant="outline"
-                      disabled={disabled}
-                      className={cn(
-                        "w-full h-11 pl-3 text-left font-normal",
-                        className
-                      )}
-                    >
-                      <span className="truncate">{formatDisplay(field.value)}</span>
-                      <CalendarIcon className="ml-auto h-4 w-4 text-custom-header-text shrink-0" />
-                    </Button>
-                  </FormControl>
+                  <Button
+                    variant="outline"
+                    className={cn(
+                      "w-full justify-start text-left font-normal",
+                      !field.value && "text-muted-foreground",
+                      className
+                    )}
+                  >
+                    <CalendarIcon className="mr-2 h-4 w-4" />
+                    {field.value ? (
+                      mode === "date" ? (
+                        format(field.value, "PPP")
+                      ) : (
+                        format(field.value, "PPP HH:mm:ss")
+                      )
+                    ) : (
+                      <span>{placeholder || "Pick a date"}</span>
+                    )}
+                  </Button>
                 }
               />
               <PopoverContent className="w-auto p-0" align="start">

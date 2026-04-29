@@ -22,6 +22,7 @@ import {
     SelectItem,
 } from "@/components/ui/select";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { CountryDropdown } from "@/components/ui/country-dropdown";
 import { cn } from "@/lib/utils";
 import { Label } from "@/components/ui/label";
 import {
@@ -38,6 +39,15 @@ import {
     ArrowRight
 } from "lucide-react";
 import { RefinedIeltsSchema, type TIeltsFormSchema } from "./-type";
+import { SearchableDropdown } from "@/components/ui/searchable-dropdown";
+import { DateTimePicker } from "@/components/ui/date-time-picker";
+import { Checkbox } from "@/components/ui/checkbox";
+import {
+    Calendar as CalendarIcon,
+    AlertCircle,
+    Check
+} from "lucide-react";
+import Image from "next/image";
 
 
 
@@ -65,7 +75,14 @@ export default function FormIELTSRegistration() {
             yearsStudyingEnglish: "",
             countryOfBirth: "",
             countryOfCitizenship: "",
-            selectedCourse: false,
+            specialRequirements: "no",
+            specialRequirementsDetails: "",
+            firstPreferredDate: "",
+            secondPreferredDate: "",
+            selectedOneToOneCourse: false,
+            selectedGroupCourse: false,
+            selectedSemiPrivateCourse: false,
+            selectedPrivateCourse: false,
             selectedWorkshop: false,
             workshopHours: "",
             termsAccepted: false,
@@ -78,13 +95,24 @@ export default function FormIELTSRegistration() {
 
     // Watch fields for dynamic calculations and conditional logic
     const takenBefore = useWatch({ control, name: "takenBefore" });
-    const selectedCourse = useWatch({ control, name: "selectedCourse" });
+    const specialRequirements = useWatch({ control, name: "specialRequirements" });
+    const selectedOneToOneCourse = useWatch({ control, name: "selectedOneToOneCourse" });
+    const selectedGroupCourse = useWatch({ control, name: "selectedGroupCourse" });
+    const selectedSemiPrivateCourse = useWatch({ control, name: "selectedSemiPrivateCourse" });
+    const selectedPrivateCourse = useWatch({ control, name: "selectedPrivateCourse" });
     const selectedWorkshop = useWatch({ control, name: "selectedWorkshop" });
     const workshopHours = useWatch({ control, name: "workshopHours" });
 
     const EXAM_FEE = 1400;
     const SERVICE_FEE = 100;
-    const COURSE_BASE_PRICE = 4000;
+    // Course Prices
+    const PRICES = {
+        ONE_TO_ONE: 4000,
+        GROUP: 2500,
+        SEMI_PRIVATE: 3200,
+        PRIVATE: 3800,
+    };
+
     const DISCOUNT_RATE = 0.30;
     const VAT_RATE = 0.05;
 
@@ -95,23 +123,36 @@ export default function FormIELTSRegistration() {
 
     // Derived calculations
     const { total, vat, coursePrice, discount, workshopPrice, taxableAmount } = useMemo(() => {
-        const cPrice = selectedCourse ? COURSE_BASE_PRICE : 0;
-        const disc = selectedCourse ? (cPrice * DISCOUNT_RATE) : 0;
-        const wPrice = selectedWorkshop ? (workshopPriceMap[workshopHours] || 0) : 0;
+        let totalCoursesPrice = 0;
+        if (selectedOneToOneCourse) totalCoursesPrice += PRICES.ONE_TO_ONE;
+        if (selectedGroupCourse) totalCoursesPrice += PRICES.GROUP;
+        if (selectedSemiPrivateCourse) totalCoursesPrice += PRICES.SEMI_PRIVATE;
+        if (selectedPrivateCourse) totalCoursesPrice += PRICES.PRIVATE;
 
-        const taxable = SERVICE_FEE + (cPrice - disc) + wPrice;
+        const wPrice = selectedWorkshop ? (workshopPriceMap[workshopHours] || 0) : 0;
+        const disc = totalCoursesPrice * DISCOUNT_RATE;
+
+        // Taxable amount is service fee + discounted course price + workshop price
+        const taxable = SERVICE_FEE + (totalCoursesPrice - disc) + wPrice;
         const vatAmount = taxable * VAT_RATE;
         const totalAmount = EXAM_FEE + taxable + vatAmount;
 
         return {
             total: totalAmount,
             vat: vatAmount,
-            coursePrice: cPrice,
+            coursePrice: totalCoursesPrice,
             discount: disc,
             workshopPrice: wPrice,
             taxableAmount: taxable
         };
-    }, [selectedCourse, selectedWorkshop, workshopHours]);
+    }, [
+        selectedOneToOneCourse,
+        selectedGroupCourse,
+        selectedSemiPrivateCourse,
+        selectedPrivateCourse,
+        selectedWorkshop,
+        workshopHours
+    ]);
 
     const onSubmit: SubmitHandler<TIeltsFormSchema> = (data) => {
         console.log("Form Data:", data);
@@ -122,7 +163,9 @@ export default function FormIELTSRegistration() {
             {/* Hero Section */}
             <section className="relative h-[400px] flex items-center justify-center overflow-hidden bg-[#111827]">
                 <div className="absolute inset-0 z-0 opacity-40">
-                    <img
+                    <Image
+                        width={1920}
+                        height={1080}
                         className="w-full h-full object-cover"
                         alt="Academic environment"
                         src="/images/about-us/infrastructure-center.png"
@@ -190,7 +233,7 @@ export default function FormIELTSRegistration() {
                                                 <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">IELTS Test Module *</FormLabel>
                                                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                                                     <FormControl>
-                                                        <SelectTrigger className="bg-slate-50 border-none rounded-lg h-14">
+                                                        <SelectTrigger >
                                                             <SelectValue placeholder="Select Module" />
                                                         </SelectTrigger>
                                                     </FormControl>
@@ -211,7 +254,7 @@ export default function FormIELTSRegistration() {
                                                 <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Select Test Timing *</FormLabel>
                                                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                                                     <FormControl>
-                                                        <SelectTrigger className="bg-slate-50 border-none rounded-lg h-14">
+                                                        <SelectTrigger >
                                                             <SelectValue placeholder="Select Preferred Time" />
                                                         </SelectTrigger>
                                                     </FormControl>
@@ -243,7 +286,7 @@ export default function FormIELTSRegistration() {
                                             <FormItem>
                                                 <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Given name(s) *</FormLabel>
                                                 <FormControl>
-                                                    <Input className="bg-slate-50 border-none rounded-lg h-14" placeholder="As per passport" {...field} />
+                                                    <Input placeholder="As per passport" {...field} />
                                                 </FormControl>
                                                 <FormMessage />
                                             </FormItem>
@@ -256,7 +299,7 @@ export default function FormIELTSRegistration() {
                                             <FormItem>
                                                 <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Surname(s) *</FormLabel>
                                                 <FormControl>
-                                                    <Input className="bg-slate-50 border-none rounded-lg h-14" placeholder="As per passport" {...field} />
+                                                    <Input placeholder="As per passport" {...field} />
                                                 </FormControl>
                                                 <FormMessage />
                                             </FormItem>
@@ -275,7 +318,7 @@ export default function FormIELTSRegistration() {
                                                     <FormItem>
                                                         <Select onValueChange={field.onChange} defaultValue={field.value}>
                                                             <FormControl>
-                                                                <SelectTrigger className="bg-slate-50 border-none rounded-lg h-14 px-2">
+                                                                <SelectTrigger >
                                                                     <SelectValue placeholder="Day" />
                                                                 </SelectTrigger>
                                                             </FormControl>
@@ -296,7 +339,7 @@ export default function FormIELTSRegistration() {
                                                     <FormItem>
                                                         <Select onValueChange={field.onChange} defaultValue={field.value}>
                                                             <FormControl>
-                                                                <SelectTrigger className="bg-slate-50 border-none rounded-lg h-14 px-2">
+                                                                <SelectTrigger >
                                                                     <SelectValue placeholder="Month" />
                                                                 </SelectTrigger>
                                                             </FormControl>
@@ -317,7 +360,7 @@ export default function FormIELTSRegistration() {
                                                     <FormItem>
                                                         <Select onValueChange={field.onChange} defaultValue={field.value}>
                                                             <FormControl>
-                                                                <SelectTrigger className="bg-slate-50 border-none rounded-lg h-14 px-2">
+                                                                <SelectTrigger >
                                                                     <SelectValue placeholder="Year" />
                                                                 </SelectTrigger>
                                                             </FormControl>
@@ -430,6 +473,57 @@ export default function FormIELTSRegistration() {
                                         </div>
                                     )}
                                 </div>
+
+                                {/* Special Requirements */}
+                                <div className="bg-slate-50 p-8 rounded-2xl border border-slate-100 space-y-8 mt-8">
+                                    <FormField
+                                        control={control}
+                                        name="specialRequirements"
+                                        render={({ field }) => (
+                                            <FormItem className="space-y-4">
+                                                <div className="flex items-start gap-2">
+                                                    <AlertCircle className="w-5 h-5 text-[#A11D1D] mt-0.5" />
+                                                    <FormLabel className="text-sm font-bold text-[#111827]">
+                                                        Do You Have Any Special Requirements Due to Ill Health/Medical Conditions? *
+                                                    </FormLabel>
+                                                </div>
+                                                <FormControl>
+                                                    <RadioGroup className="flex gap-8" onValueChange={field.onChange} defaultValue={field.value}>
+                                                        <div className="flex items-center space-x-2 group cursor-pointer">
+                                                            <RadioGroupItem value="yes" id="special-yes" className="border-[#A11D1D] text-[#A11D1D]" />
+                                                            <Label htmlFor="special-yes" className="font-bold group-hover:text-[#A11D1D] transition-colors cursor-pointer text-sm">Yes</Label>
+                                                        </div>
+                                                        <div className="flex items-center space-x-2 group cursor-pointer">
+                                                            <RadioGroupItem value="no" id="special-no" className="border-[#A11D1D] text-[#A11D1D]" />
+                                                            <Label htmlFor="special-no" className="font-bold group-hover:text-[#A11D1D] transition-colors cursor-pointer text-sm">No</Label>
+                                                        </div>
+                                                    </RadioGroup>
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+
+                                    {specialRequirements === "yes" && (
+                                        <FormField
+                                            control={control}
+                                            name="specialRequirementsDetails"
+                                            render={({ field }) => (
+                                                <FormItem className="animate-in slide-in-from-left-4 duration-500 pl-6 border-l-2 border-[#A11D1D]/20">
+                                                    <FormLabel className="text-xs font-bold text-slate-500 uppercase tracking-widest">If please mention *</FormLabel>
+                                                    <FormControl>
+                                                        <Input
+                                                            {...field}
+                                                            placeholder="Please describe your requirements"
+                                                            className="bg-white border-slate-200 h-14 rounded-xl"
+                                                        />
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+                                    )}
+                                </div>
                             </div>
 
                             {/* 3. Background Information */}
@@ -443,10 +537,10 @@ export default function FormIELTSRegistration() {
                                     name="educationLevel"
                                     render={({ field }) => (
                                         <FormItem className="space-y-4">
-                                            <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Level of education completed *</FormLabel>
+                                            <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">What level of education have you completed? *</FormLabel>
                                             <FormControl>
                                                 <RadioGroup
-                                                    className="grid grid-cols-1 md:grid-cols-2 gap-4"
+                                                    className="flex flex-col gap-4"
                                                     onValueChange={field.onChange}
                                                     defaultValue={field.value}
                                                 >
@@ -456,15 +550,12 @@ export default function FormIELTSRegistration() {
                                                         "Degree (or equivalent)",
                                                         "Post-graduate"
                                                     ].map(edu => (
-                                                        <label key={edu} className={cn(
-                                                            "flex items-center gap-3 p-4 rounded-xl cursor-pointer transition-all border group",
-                                                            field.value === edu ? "bg-[#A11D1D]/5 border-[#A11D1D]/20" : "bg-slate-50 border-transparent hover:border-[#A11D1D]/20"
-                                                        )}>
+                                                        <div key={edu} className="flex items-center space-x-3 group cursor-pointer">
                                                             <RadioGroupItem value={edu} id={`edu-${edu}`} className="border-[#A11D1D] text-[#A11D1D]" />
-                                                            <Label htmlFor={`edu-${edu}`} className="text-sm font-bold text-slate-700 group-hover:text-[#A11D1D] transition-colors cursor-pointer">
+                                                            <Label htmlFor={`edu-${edu}`} className="font-bold group-hover:text-[#A11D1D] transition-colors cursor-pointer text-sm text-slate-600">
                                                                 {edu}
                                                             </Label>
-                                                        </label>
+                                                        </div>
                                                     ))}
                                                 </RadioGroup>
                                             </FormControl>
@@ -479,19 +570,26 @@ export default function FormIELTSRegistration() {
                                         name="occupationLevel"
                                         render={({ field }) => (
                                             <FormItem>
-                                                <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Occupation level *</FormLabel>
-                                                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                                    <FormControl>
-                                                        <SelectTrigger className="bg-slate-50 border-none rounded-lg h-14">
-                                                            <SelectValue placeholder="Select Level" />
-                                                        </SelectTrigger>
-                                                    </FormControl>
-                                                    <SelectContent>
-                                                        {["Student", "Self-employed", "Employer/Partner", "Employee (Senior level)", "Employee (Middle/Junior level)", "Homeworker", "Retired", "Other"].map(o => (
-                                                            <SelectItem key={o} value={o}>{o}</SelectItem>
-                                                        ))}
-                                                    </SelectContent>
-                                                </Select>
+                                                <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">What is your occupation level? *</FormLabel>
+                                                <FormControl>
+                                                    <SearchableDropdown
+                                                        options={[
+                                                            { label: "Self-employed", value: "Self-employed" },
+                                                            { label: "Employer/Partner", value: "Employer/Partner" },
+                                                            { label: "Employee (Senior level)", value: "Employee (Senior level)" },
+                                                            { label: "Employee (Middle/Junior level)", value: "Employee (Middle/Junior level)" },
+                                                            { label: "Homeworker", value: "Homeworker" },
+                                                            { label: "Retired", value: "Retired" },
+                                                            { label: "Student", value: "Student" },
+                                                            { label: "Other", value: "Other" },
+                                                        ]}
+                                                        placeholder="Select Level"
+                                                        searchPlaceholder="Search level..."
+                                                        value={field.value}
+                                                        onChange={field.onChange}
+
+                                                    />
+                                                </FormControl>
                                                 <FormMessage />
                                             </FormItem>
                                         )}
@@ -501,19 +599,30 @@ export default function FormIELTSRegistration() {
                                         name="occupationSector"
                                         render={({ field }) => (
                                             <FormItem>
-                                                <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Occupation sector *</FormLabel>
-                                                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                                    <FormControl>
-                                                        <SelectTrigger className="bg-slate-50 border-none rounded-lg h-14">
-                                                            <SelectValue placeholder="Select Sector" />
-                                                        </SelectTrigger>
-                                                    </FormControl>
-                                                    <SelectContent>
-                                                        {["Administrative Services", "Banking and Finance", "Construction Industries", "Education", "Arts and Entertainment"].map(s => (
-                                                            <SelectItem key={s} value={s}>{s}</SelectItem>
-                                                        ))}
-                                                    </SelectContent>
-                                                </Select>
+                                                <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">What is your occupation sector? *</FormLabel>
+                                                <FormControl>
+                                                    <SearchableDropdown
+                                                        options={[
+                                                            { label: "Administrative Services", value: "Administrative Services" },
+                                                            { label: "Agriculture, Fishing, Forestry, Mining", value: "Agriculture, Fishing, Forestry, Mining" },
+                                                            { label: "Arts and Entertainment", value: "Arts and Entertainment" },
+                                                            { label: "Banking and Finance", value: "Banking and Finance" },
+                                                            { label: "Catering and Leisure", value: "Catering and Leisure" },
+                                                            { label: "Construction Industries", value: "Construction Industries" },
+                                                            { label: "Craft and Design", value: "Craft and Design" },
+                                                            { label: "Education", value: "Education" },
+                                                            { label: "Health and Social Services", value: "Health and Social Services" },
+                                                            { label: "Hospitality", value: "Hospitality" },
+                                                            { label: "Manufacturing and Blue Collar", value: "Manufacturing and Blue Collar" },
+                                                            { label: "Other", value: "Other" },
+                                                        ]}
+                                                        placeholder="Select Sector"
+                                                        searchPlaceholder="Search sector..."
+                                                        value={field.value}
+                                                        onChange={field.onChange}
+
+                                                    />
+                                                </FormControl>
                                                 <FormMessage />
                                             </FormItem>
                                         )}
@@ -527,18 +636,25 @@ export default function FormIELTSRegistration() {
                                         render={({ field }) => (
                                             <FormItem>
                                                 <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Why are you taking the test? *</FormLabel>
-                                                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                                    <FormControl>
-                                                        <SelectTrigger className="bg-slate-50 border-none rounded-lg h-14">
-                                                            <SelectValue placeholder="Select Reason" />
-                                                        </SelectTrigger>
-                                                    </FormControl>
-                                                    <SelectContent>
-                                                        {["Higher education extended course", "Immigration", "Employment", "Personal reasons"].map(r => (
-                                                            <SelectItem key={r} value={r}>{r}</SelectItem>
-                                                        ))}
-                                                    </SelectContent>
-                                                </Select>
+                                                <FormControl>
+                                                    <SearchableDropdown
+                                                        options={[
+                                                            { label: "Higher education extended course (3 months or more)", value: "Higher education extended course" },
+                                                            { label: "Higher education short course (3 months or less)", value: "Higher education short course" },
+                                                            { label: "Other educational purposes", value: "Other educational purposes" },
+                                                            { label: "Registration as a doctor", value: "Registration as a doctor" },
+                                                            { label: "Immigration", value: "Immigration" },
+                                                            { label: "Employment", value: "Employment" },
+                                                            { label: "Professional registration (not medical)", value: "Professional registration" },
+                                                            { label: "Personal reasons", value: "Personal reasons" },
+                                                        ]}
+                                                        placeholder="Select Reason"
+                                                        searchPlaceholder="Search reason..."
+                                                        value={field.value}
+                                                        onChange={field.onChange}
+
+                                                    />
+                                                </FormControl>
                                                 <FormMessage />
                                             </FormItem>
                                         )}
@@ -548,19 +664,28 @@ export default function FormIELTSRegistration() {
                                         name="destinationCountry"
                                         render={({ field }) => (
                                             <FormItem>
-                                                <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Destination Country *</FormLabel>
-                                                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                                    <FormControl>
-                                                        <SelectTrigger className="bg-slate-50 border-none rounded-lg h-14">
-                                                            <SelectValue placeholder="Select Country" />
-                                                        </SelectTrigger>
-                                                    </FormControl>
-                                                    <SelectContent>
-                                                        {["Australia", "Canada", "United Kingdom", "United States of America"].map(c => (
-                                                            <SelectItem key={c} value={c}>{c}</SelectItem>
-                                                        ))}
-                                                    </SelectContent>
-                                                </Select>
+                                                <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Which country / territory do you want to study / work / live in? *</FormLabel>
+                                                <FormControl>
+                                                    <SearchableDropdown
+                                                        options={[
+                                                            { label: "Australia", value: "Australia" },
+                                                            { label: "Canada", value: "Canada" },
+                                                            { label: "New Zealand", value: "New Zealand" },
+                                                            { label: "Republic of Ireland", value: "Republic of Ireland" },
+                                                            { label: "United Kingdom", value: "United Kingdom" },
+                                                            { label: "United States of America", value: "United States of America" },
+                                                            { label: "Afghanistan", value: "Afghanistan" },
+                                                            { label: "Aland Islands", value: "Aland Islands" },
+                                                            { label: "Albania", value: "Albania" },
+                                                            { label: "Algeria", value: "Algeria" },
+                                                        ]}
+                                                        placeholder="Select Country"
+                                                        searchPlaceholder="Search country..."
+                                                        value={field.value}
+                                                        onChange={field.onChange}
+
+                                                    />
+                                                </FormControl>
                                                 <FormMessage />
                                             </FormItem>
                                         )}
@@ -581,18 +706,23 @@ export default function FormIELTSRegistration() {
                                         render={({ field }) => (
                                             <FormItem>
                                                 <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">First language *</FormLabel>
-                                                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                                    <FormControl>
-                                                        <SelectTrigger className="bg-slate-50 border-none rounded-lg h-14">
-                                                            <SelectValue placeholder="Select Language" />
-                                                        </SelectTrigger>
-                                                    </FormControl>
-                                                    <SelectContent>
-                                                        {["Arabic", "English", "French", "Spanish"].map(l => (
-                                                            <SelectItem key={l} value={l}>{l}</SelectItem>
-                                                        ))}
-                                                    </SelectContent>
-                                                </Select>
+                                                <FormControl>
+                                                    <SearchableDropdown
+                                                        options={[
+                                                            { label: "Arabic", value: "Arabic" },
+                                                            { label: "Bengali", value: "Bengali" },
+                                                            { label: "Chinese", value: "Chinese" },
+                                                            { label: "English", value: "English" },
+                                                            { label: "French", value: "French" },
+                                                            { label: "Spanish", value: "Spanish" },
+                                                        ]}
+                                                        placeholder="Select Language"
+                                                        searchPlaceholder="Search language..."
+                                                        value={field.value}
+                                                        onChange={field.onChange}
+
+                                                    />
+                                                </FormControl>
                                                 <FormMessage />
                                             </FormItem>
                                         )}
@@ -603,18 +733,26 @@ export default function FormIELTSRegistration() {
                                         render={({ field }) => (
                                             <FormItem>
                                                 <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Years studying English *</FormLabel>
-                                                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                                    <FormControl>
-                                                        <SelectTrigger className="bg-slate-50 border-none rounded-lg h-14">
-                                                            <SelectValue placeholder="Select Years" />
-                                                        </SelectTrigger>
-                                                    </FormControl>
-                                                    <SelectContent>
-                                                        {["Less than 1", "2", "3", "4+"].map(y => (
-                                                            <SelectItem key={y} value={y}>{y}</SelectItem>
-                                                        ))}
-                                                    </SelectContent>
-                                                </Select>
+                                                <FormControl>
+                                                    <SearchableDropdown
+                                                        options={[
+                                                            { label: "1 (less than)", value: "1" },
+                                                            { label: "2", value: "2" },
+                                                            { label: "3", value: "3" },
+                                                            { label: "4", value: "4" },
+                                                            { label: "5", value: "5" },
+                                                            { label: "6", value: "6" },
+                                                            { label: "7", value: "7" },
+                                                            { label: "8", value: "8" },
+                                                            { label: "9 or more years", value: "9+" },
+                                                        ]}
+                                                        placeholder="Select Years"
+                                                        searchPlaceholder="Search years..."
+                                                        value={field.value}
+                                                        onChange={field.onChange}
+
+                                                    />
+                                                </FormControl>
                                                 <p className="text-[10px] text-slate-400 italic mt-1 font-medium px-1">Your answer has no impact on your test score</p>
                                                 <FormMessage />
                                             </FormItem>
@@ -630,7 +768,11 @@ export default function FormIELTSRegistration() {
                                             <FormItem>
                                                 <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Country of Birth *</FormLabel>
                                                 <FormControl>
-                                                    <Input className="bg-slate-50 border-none rounded-lg h-14" placeholder="Enter country" {...field} />
+                                                    <CountryDropdown
+                                                        value={field.value}
+                                                        onChange={(country) => field.onChange(country.name)}
+
+                                                    />
                                                 </FormControl>
                                                 <FormMessage />
                                             </FormItem>
@@ -643,7 +785,11 @@ export default function FormIELTSRegistration() {
                                             <FormItem>
                                                 <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Country of Citizenship *</FormLabel>
                                                 <FormControl>
-                                                    <Input className="bg-slate-50 border-none rounded-lg h-14" placeholder="Enter citizenship" {...field} />
+                                                    <CountryDropdown
+                                                        value={field.value}
+                                                        onChange={(country) => field.onChange(country.name)}
+
+                                                    />
                                                 </FormControl>
                                                 <FormMessage />
                                             </FormItem>
@@ -652,94 +798,131 @@ export default function FormIELTSRegistration() {
                                 </div>
                             </div>
 
+                            {/* Preferred Dates */}
+                            <div className="pt-8 border-t border-slate-100 space-y-8">
+                                <h2 className="text-2xl font-bold tracking-tight text-[#111827] flex items-center gap-3">
+                                    <CalendarIcon className="text-[#A11D1D] w-6 h-6" />
+                                    Preferred Dates
+                                </h2>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 bg-slate-50 p-8 rounded-2xl border border-slate-100">
+                                    <DateTimePicker
+                                        control={control}
+                                        name="firstPreferredDate"
+                                        label="First preferred date *"
+                                        mode="date"
+                                        placeholder="dd/mm/yyyy"
+                                        className="bg-white border-slate-200 h-14 rounded-xl"
+                                    />
+                                    <DateTimePicker
+                                        control={control}
+                                        name="secondPreferredDate"
+                                        label="Second preferred date *"
+                                        mode="date"
+                                        placeholder="dd/mm/yyyy"
+                                        className="bg-white border-slate-200 h-14 rounded-xl"
+                                    />
+                                </div>
+                                <p className="text-xs text-slate-500 flex items-center gap-2 px-2">
+                                    <Info className="w-4 h-4 text-[#A11D1D]" />
+                                    Note: All Sundays except holidays and deactivated Sundays. It should be easy for us to update the date or add additional days and past Sundays to be inactive.
+                                </p>
+                            </div>
+
                             {/* 5. Add-on services */}
                             <div className="pt-8 border-t border-slate-100 space-y-8">
-                                <div className="bg-slate-50 rounded-2xl p-8 space-y-8 border border-slate-100 relative group overflow-hidden">
-                                    <h3 className="text-lg font-extrabold uppercase tracking-widest text-[#A11D1D] flex items-center gap-2 relative z-10">
-                                        <CreditCard className="w-5 h-5" />
+                                <div className="bg-slate-50 p-8 rounded-3xl border border-slate-100">
+                                    <h2 className="text-2xl font-bold tracking-tight text-[#111827] flex items-center gap-3 mb-8">
+                                        <BookOpen className="text-[#A11D1D] w-6 h-6" />
                                         Add-on services
-                                    </h3>
-                                    <div className="space-y-4 relative z-10">
-                                        <FormField
-                                            control={control}
-                                            name="selectedCourse"
-                                            render={({ field }) => (
-                                                <FormItem className={cn(
-                                                    "flex items-center space-x-3 space-y-0 p-5 rounded-xl border transition-all cursor-pointer group/item",
-                                                    field.value ? "bg-[#A11D1D]/5 border-[#A11D1D]/30" : "bg-white border-slate-200 hover:border-[#A11D1D]/20"
-                                                )}>
-                                                    <FormControl>
-                                                        <div className="relative flex items-center justify-center">
-                                                            <input
-                                                                className="peer appearance-none w-6 h-6 rounded-md border-2 border-slate-300 checked:bg-[#A11D1D] checked:border-[#A11D1D] transition-all cursor-pointer"
-                                                                type="checkbox"
-                                                                checked={field.value}
-                                                                onChange={field.onChange}
-                                                            />
-                                                            <span className="absolute text-white text-xs pointer-events-none opacity-0 peer-checked:opacity-100 font-black">✓</span>
-                                                        </div>
-                                                    </FormControl>
-                                                    <div className="flex flex-col flex-1 cursor-pointer">
-                                                        <FormLabel className="text-sm font-extrabold text-slate-700 cursor-pointer">TEPTH IELTS (One-to-One Course)</FormLabel>
-                                                        <span className="text-xs font-bold text-[#A11D1D]">AED {COURSE_BASE_PRICE.toLocaleString()}</span>
-                                                    </div>
-                                                </FormItem>
-                                            )}
-                                        />
+                                    </h2>
 
-                                        <div className={cn(
-                                            "grid grid-cols-1 md:grid-cols-3 gap-6 p-5 rounded-xl border transition-all",
-                                            selectedWorkshop ? "bg-[#A11D1D]/5 border-[#A11D1D]/30" : "bg-white border-slate-200 hover:border-[#A11D1D]/20"
-                                        )}>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        {([
+                                            { name: "selectedOneToOneCourse", label: "TEPTH IELTS (One-to-One Course)", price: PRICES.ONE_TO_ONE },
+                                            { name: "selectedGroupCourse", label: "TEPTH IELTS (Group Course)", price: PRICES.GROUP },
+                                            { name: "selectedSemiPrivateCourse", label: "TEPTH IELTS (Semi-Private Course)", price: PRICES.SEMI_PRIVATE },
+                                            { name: "selectedPrivateCourse", label: "TEPTH IELTS (Private One-to-One Course)", price: PRICES.PRIVATE },
+                                        ] as const).map((course) => (
+                                            <FormField
+                                                key={course.name}
+                                                control={control}
+                                                name={course.name}
+                                                render={({ field }) => (
+                                                    <FormItem className={cn(
+                                                        "flex flex-row items-center space-x-3 space-y-0 p-5 rounded-xl border transition-all cursor-pointer bg-white",
+                                                        field.value ? "border-[#A11D1D] ring-1 ring-[#A11D1D]/10" : "border-slate-200 hover:border-[#A11D1D]/20"
+                                                    )}>
+                                                        <FormControl>
+                                                            <Checkbox
+                                                                checked={field.value}
+                                                                onCheckedChange={field.onChange}
+                                                                className="data-[state=checked]:bg-[#A11D1D] data-[state=checked]:border-[#A11D1D]"
+                                                            />
+                                                        </FormControl>
+                                                        <div className="flex flex-col w-full">
+                                                            <FormLabel className="font-bold text-slate-700 cursor-pointer text-sm">{course.label}</FormLabel>
+                                                            <span className="text-xs font-bold text-[#A11D1D] mt-1">AED {course.price.toLocaleString()}.00</span>
+                                                        </div>
+                                                    </FormItem>
+                                                )}
+                                            />
+                                        ))}
+
+                                        <div className="md:col-span-2 space-y-4">
                                             <FormField
                                                 control={control}
                                                 name="selectedWorkshop"
                                                 render={({ field }) => (
-                                                    <FormItem className="flex items-center space-x-3 space-y-0 cursor-pointer md:col-span-1">
+                                                    <FormItem className={cn(
+                                                        "flex flex-row items-center space-x-3 space-y-0 p-5 rounded-xl border transition-all cursor-pointer bg-white",
+                                                        field.value ? "border-[#A11D1D] ring-1 ring-[#A11D1D]/10" : "border-slate-200 hover:border-[#A11D1D]/20"
+                                                    )}>
                                                         <FormControl>
-                                                            <div className="relative flex items-center justify-center">
-                                                                <input
-                                                                    className="peer appearance-none w-6 h-6 rounded-md border-2 border-slate-300 checked:bg-[#A11D1D] checked:border-[#A11D1D] transition-all cursor-pointer"
-                                                                    type="checkbox"
-                                                                    checked={field.value}
-                                                                    onChange={field.onChange}
-                                                                />
-                                                                <span className="absolute text-white text-xs pointer-events-none opacity-0 peer-checked:opacity-100 font-black">✓</span>
-                                                            </div>
+                                                            <Checkbox
+                                                                checked={field.value}
+                                                                onCheckedChange={field.onChange}
+                                                                className="data-[state=checked]:bg-[#A11D1D] data-[state=checked]:border-[#A11D1D]"
+                                                            />
                                                         </FormControl>
-                                                        <FormLabel className="text-sm font-extrabold text-slate-700 cursor-pointer">IELTS Exam Workshop</FormLabel>
+                                                        <FormLabel className="font-bold text-slate-700 cursor-pointer">IELTS Exam Workshop</FormLabel>
                                                     </FormItem>
                                                 )}
                                             />
-                                            <FormField
-                                                control={control}
-                                                name="workshopHours"
-                                                render={({ field }) => (
-                                                    <FormItem className="md:col-span-2">
-                                                        <Select
-                                                            disabled={!selectedWorkshop}
-                                                            onValueChange={field.onChange}
-                                                            defaultValue={field.value}
-                                                        >
-                                                            <FormControl>
-                                                                <SelectTrigger className="bg-white border-slate-200 h-10">
-                                                                    <SelectValue placeholder="Select number of hours" />
-                                                                </SelectTrigger>
-                                                            </FormControl>
-                                                            <SelectContent>
-                                                                <SelectItem value="5 Hours">5 Hours (AED 250)</SelectItem>
-                                                                <SelectItem value="10 Hours">10 Hours (AED 500)</SelectItem>
-                                                            </SelectContent>
-                                                        </Select>
-                                                        <FormMessage />
-                                                    </FormItem>
-                                                )}
-                                            />
+
+                                            {selectedWorkshop && (
+                                                <FormField
+                                                    control={control}
+                                                    name="workshopHours"
+                                                    render={({ field }) => (
+                                                        <FormItem className="animate-in slide-in-from-top-2 duration-300">
+                                                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                                                <FormControl>
+                                                                    <SelectTrigger className="bg-white border-slate-200 rounded-xl h-14 w-full shadow-sm px-6">
+                                                                        <SelectValue placeholder="Select number of hours" />
+                                                                    </SelectTrigger>
+                                                                </FormControl>
+                                                                <SelectContent>
+                                                                    {Object.keys(workshopPriceMap).map(h => (
+                                                                        <SelectItem key={h} value={h}>
+                                                                            <div className="flex justify-between w-full min-w-[200px]">
+                                                                                <span>{h}</span>
+                                                                                <span className="font-bold text-[#A11D1D]">AED {workshopPriceMap[h]}</span>
+                                                                            </div>
+                                                                        </SelectItem>
+                                                                    ))}
+                                                                </SelectContent>
+                                                            </Select>
+                                                            <FormMessage />
+                                                        </FormItem>
+                                                    )}
+                                                />
+                                            )}
                                         </div>
-                                        <p className="text-[11px] text-[#A11D1D] font-black italic tracking-wide mt-2">
-                                            * A 30% discount is granted on the course fee (not workshop) when selecting one of our courses.
-                                        </p>
                                     </div>
+                                    <p className="text-[11px] text-[#A11D1D] font-bold italic tracking-wide mt-6 flex items-center gap-2">
+                                        <AlertCircle className="w-3.5 h-3.5" />
+                                        * A 30% discount is granted on the course fee (not workshop) when selecting one of our courses.
+                                    </p>
                                 </div>
                             </div>
 
@@ -752,7 +935,7 @@ export default function FormIELTSRegistration() {
                                             <h4 className="text-lg font-black uppercase tracking-widest text-[#A11D1D]">Booking Summary</h4>
                                             <div className="space-y-3">
                                                 <div className="flex justify-between items-center text-slate-300 text-sm">
-                                                    <span className="font-medium uppercase tracking-tighter">IELTS {form.getValues("testModule") || ""} Fee</span>
+                                                    <span className="font-medium uppercase tracking-tighter">IELTS {form.getValues("testModule") || "Exam"} Fee</span>
                                                     <span className="font-bold text-white tracking-widest">AED {EXAM_FEE.toLocaleString()}</span>
                                                 </div>
                                                 <div className="flex justify-between items-center text-slate-300 text-sm">
@@ -760,70 +943,67 @@ export default function FormIELTSRegistration() {
                                                     <span className="font-bold text-white tracking-widest">AED {SERVICE_FEE.toLocaleString()}</span>
                                                 </div>
 
-                                                {selectedCourse && (
-                                                    <div className="flex justify-between items-center text-[#A11D1D] text-sm font-black">
-                                                        <span className="uppercase tracking-tighter">Course Add-on (30% Discount)</span>
-                                                        <span className="tracking-widest">AED {(coursePrice - discount).toLocaleString()}</span>
+                                                {coursePrice > 0 && (
+                                                    <div className="space-y-2 pt-2 border-t border-white/10">
+                                                        <div className="flex justify-between items-center text-slate-300 text-sm">
+                                                            <span className="font-medium uppercase tracking-tighter">Selected Courses</span>
+                                                            <span className="font-bold text-white tracking-widest">AED {coursePrice.toLocaleString()}</span>
+                                                        </div>
+                                                        <div className="flex justify-between items-center text-emerald-400 text-xs font-bold bg-emerald-400/10 px-3 py-1 rounded-lg">
+                                                            <span className="uppercase tracking-tighter">30% Course Discount</span>
+                                                            <span className="tracking-widest">- AED {discount.toLocaleString()}</span>
+                                                        </div>
                                                     </div>
                                                 )}
 
-                                                {selectedWorkshop && workshopPrice > 0 && (
-                                                    <div className="flex justify-between items-center text-slate-300 text-sm">
-                                                        <span className="font-medium uppercase tracking-tighter">Workshop ({workshopHours})</span>
+                                                {workshopPrice > 0 && (
+                                                    <div className="flex justify-between items-center text-slate-300 text-sm pt-2 border-t border-white/10">
+                                                        <span className="font-medium uppercase tracking-tighter">IELTS Workshop ({workshopHours})</span>
                                                         <span className="font-bold text-white tracking-widest">AED {workshopPrice.toLocaleString()}</span>
                                                     </div>
                                                 )}
 
-                                                <div className="flex justify-between items-center text-slate-300 text-sm border-t border-slate-800 pt-3">
-                                                    <span className="font-medium uppercase tracking-tighter">VAT 5%</span>
+                                                <div className="flex justify-between items-center text-slate-300 text-sm pt-4 border-t border-white/10">
+                                                    <span className="font-medium uppercase tracking-tighter">VAT (5% Applicable to all)</span>
                                                     <span className="font-bold text-white tracking-widest">AED {vat.toFixed(2)}</span>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div className="text-right w-full md:w-auto flex flex-col justify-end">
-                                            <div className="text-xs text-slate-500 uppercase tracking-[0.2em] font-black mb-2">Total Fees Due</div>
-                                            <div className="text-5xl font-black text-white tracking-tighter">
-                                                AED {total.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                                        <div className="text-right flex flex-col items-end">
+                                            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#A11D1D] mb-1">Total Amount</span>
+                                            <div className="text-5xl md:text-6xl font-black text-white tracking-tighter">
+                                                <span className="text-xl align-top mr-2 text-slate-500">AED</span>
+                                                {Math.round(total).toLocaleString()}
                                             </div>
-                                            <p className="text-[10px] text-slate-600 mt-4 uppercase font-black tracking-widest leading-none">
-                                                * VAT is applicable to registration, courses and workshops
-                                            </p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
                             {/* 7. Terms & Conditions */}
-                            <div className="pt-8 border-t border-slate-100 space-y-6">
-                                <h2 className="text-lg font-bold text-[#A11D1D] flex items-center gap-2">
-                                    <Gavel className="w-5 h-5" />
-                                    Agree Terms & Conditions
-                                </h2>
-                                <div className="space-y-6">
+                            <div className="pt-12 border-t border-slate-100 space-y-8">
+                                <h3 className="text-sm font-bold text-slate-400 uppercase tracking-[0.2em] px-4">* Agree Terms & Conditions</h3>
+                                <div className="space-y-4 bg-slate-50/50 p-6 rounded-2xl border border-slate-100">
                                     {[
-                                        { key: "termsAccepted", label: "I hereby acknowledge that I have read and understood the terms and conditions outlined above." },
-                                        { key: "permissionLogIntoAccount", label: "I hereby give permission to the center to log into my account to complete my registration." },
-                                        { key: "infoCorrect", label: "I hereby acknowledge that all information written above is correct and true." },
+                                        { name: "termsAccepted", label: "I hereby acknowledge that I have read and understood the terms and conditions outlined above." },
+                                        { name: "permissionLogIntoAccount", label: "I hereby give permission to the center to log into my account to complete my registration." },
+                                        { name: "infoCorrect", label: "I hereby acknowledge that all information written above is correct and true. I understand that any incorrect information I have provided above is my own responsibility and not of the test center." }
                                     ].map((item) => (
                                         <FormField
-                                            key={item.key}
+                                            key={item.name}
                                             control={control}
-                                            name={item.key as any}
+                                            name={item.name as any}
                                             render={({ field }) => (
-                                                <FormItem className="flex items-start space-x-3 space-y-0 cursor-pointer group">
+                                                <FormItem className="flex flex-row items-start space-x-3 space-y-0 group">
                                                     <FormControl>
-                                                        <div className="relative flex items-center justify-center mt-1">
-                                                            <input
-                                                                type="checkbox"
-                                                                className="peer appearance-none w-5 h-5 border-2 border-[#A11D1D] rounded bg-white checked:bg-[#A11D1D] transition-all cursor-pointer"
-                                                                checked={field.value}
-                                                                onChange={field.onChange}
-                                                            />
-                                                            <span className="absolute text-white text-[10px] pointer-events-none opacity-0 peer-checked:opacity-100 font-black">✓</span>
-                                                        </div>
+                                                        <Checkbox
+                                                            checked={field.value}
+                                                            onCheckedChange={field.onChange}
+                                                            className="mt-1 data-[state=checked]:bg-[#A11D1D] data-[state=checked]:border-[#A11D1D]"
+                                                        />
                                                     </FormControl>
-                                                    <FormLabel className="text-sm text-slate-600 leading-relaxed group-hover:text-[#111827] transition-colors cursor-pointer select-none">
+                                                    <FormLabel className="text-sm text-slate-600 leading-relaxed group-hover:text-[#111827] transition-colors cursor-pointer select-none font-medium">
                                                         {item.label}
                                                     </FormLabel>
                                                 </FormItem>

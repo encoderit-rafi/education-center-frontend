@@ -215,17 +215,15 @@ export default function FormPTECoreRegistration() {
                                             <FormItem>
                                                 <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Gender *</FormLabel>
                                                 <DropdownMenu>
-                                                    <DropdownMenuTrigger
-                                                        render={
-                                                            <Button
-                                                                variant="outline"
-                                                                className="flex w-full items-center justify-between bg-slate-50 border-none rounded-lg h-14 px-4 font-bold"
-                                                            >
-                                                                <span>{field.value || "Select Gender"}</span>
-                                                                <ChevronDownIcon className="size-4 opacity-50" />
-                                                            </Button>
-                                                        }
-                                                    />
+                                                    <DropdownMenuTrigger asChild>
+                                                        <Button
+                                                            variant="outline"
+                                                            className="flex w-full items-center justify-between bg-slate-50 border-none rounded-lg h-14 px-4 font-bold"
+                                                        >
+                                                            <span>{field.value || "Select Gender"}</span>
+                                                            <ChevronDownIcon className="size-4 opacity-50" />
+                                                        </Button>
+                                                    </DropdownMenuTrigger>
                                                     <DropdownMenuContent align="start" className="min-w-[200px]">
                                                         {["Male", "Female", "Other"].map((g) => (
                                                             <DropdownMenuItem
@@ -251,17 +249,15 @@ export default function FormPTECoreRegistration() {
                                             <FormItem>
                                                 <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Test Timing *</FormLabel>
                                                 <DropdownMenu>
-                                                    <DropdownMenuTrigger
-                                                        render={
-                                                            <Button
-                                                                variant="outline"
-                                                                className="flex w-full items-center justify-between bg-slate-50 border-none rounded-lg h-14 px-4 font-bold"
-                                                            >
-                                                                <span>{field.value || "Select Time"}</span>
-                                                                <ChevronDownIcon className="size-4 opacity-50" />
-                                                            </Button>
-                                                        }
-                                                    />
+                                                    <DropdownMenuTrigger asChild>
+                                                        <Button
+                                                            variant="outline"
+                                                            className="flex w-full items-center justify-between bg-slate-50 border-none rounded-lg h-14 px-4 font-bold"
+                                                        >
+                                                            <span>{field.value || "Select Time"}</span>
+                                                            <ChevronDownIcon className="size-4 opacity-50" />
+                                                        </Button>
+                                                    </DropdownMenuTrigger>
                                                     <DropdownMenuContent align="start" className="min-w-[200px]">
                                                         {["10:00 AM", "12:45 PM", "03:30 PM", "06:15 PM"].map((t) => (
                                                             <DropdownMenuItem
@@ -348,17 +344,15 @@ export default function FormPTECoreRegistration() {
                                             <FormItem>
                                                 <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Language Spoken *</FormLabel>
                                                 <DropdownMenu>
-                                                    <DropdownMenuTrigger
-                                                        render={
-                                                            <Button
-                                                                variant="outline"
-                                                                className="flex w-full items-center justify-between bg-slate-50 border-none rounded-lg h-14 px-4 font-bold"
-                                                            >
-                                                                <span>{field.value || "Select Language"}</span>
-                                                                <ChevronDownIcon className="size-4 opacity-50" />
-                                                            </Button>
-                                                        }
-                                                    />
+                                                    <DropdownMenuTrigger asChild>
+                                                        <Button
+                                                            variant="outline"
+                                                            className="flex w-full items-center justify-between bg-slate-50 border-none rounded-lg h-14 px-4 font-bold"
+                                                        >
+                                                            <span>{field.value || "Select Language"}</span>
+                                                            <ChevronDownIcon className="size-4 opacity-50" />
+                                                        </Button>
+                                                    </DropdownMenuTrigger>
                                                     <DropdownMenuContent align="start" className="min-w-[200px]">
                                                         {["English", "Arabic", "Hindi", "Urdu", "Bengali", "Other"].map((lang) => (
                                                             <DropdownMenuItem
@@ -384,17 +378,15 @@ export default function FormPTECoreRegistration() {
                                             <FormItem>
                                                 <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">ID Type *</FormLabel>
                                                 <DropdownMenu>
-                                                    <DropdownMenuTrigger
-                                                        render={
-                                                            <Button
-                                                                variant="outline"
-                                                                className="flex w-full items-center justify-between bg-slate-50 border-none rounded-lg h-14 px-4 font-bold"
-                                                            >
-                                                                <span>{field.value || "Passport"}</span>
-                                                                <ChevronDownIcon className="size-4 opacity-50" />
-                                                            </Button>
-                                                        }
-                                                    />
+                                                    <DropdownMenuTrigger asChild>
+                                                        <Button
+                                                            variant="outline"
+                                                            className="flex w-full items-center justify-between bg-slate-50 border-none rounded-lg h-14 px-4 font-bold"
+                                                        >
+                                                            <span>{field.value || "Passport"}</span>
+                                                            <ChevronDownIcon className="size-4 opacity-50" />
+                                                        </Button>
+                                                    </DropdownMenuTrigger>
                                                     <DropdownMenuContent align="start" className="min-w-[200px]">
                                                         {["Passport", "National ID Card", "Government Issued ID"].map((type) => (
                                                             <DropdownMenuItem
@@ -454,17 +446,15 @@ export default function FormPTECoreRegistration() {
                                             <FormItem>
                                                 <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Why are you taking the test? *</FormLabel>
                                                 <DropdownMenu>
-                                                    <DropdownMenuTrigger
-                                                        render={
-                                                            <Button
-                                                                variant="outline"
-                                                                className="flex w-full items-center justify-between bg-slate-50 border-none rounded-lg h-14 px-4 font-bold"
-                                                            >
-                                                                <span>{field.value || "Select Purpose"}</span>
-                                                                <ChevronDownIcon className="size-4 opacity-50" />
-                                                            </Button>
-                                                        }
-                                                    />
+                                                    <DropdownMenuTrigger asChild>
+                                                        <Button
+                                                            variant="outline"
+                                                            className="flex w-full items-center justify-between bg-slate-50 border-none rounded-lg h-14 px-4 font-bold"
+                                                        >
+                                                            <span>{field.value || "Select Purpose"}</span>
+                                                            <ChevronDownIcon className="size-4 opacity-50" />
+                                                        </Button>
+                                                    </DropdownMenuTrigger>
                                                     <DropdownMenuContent align="start" className="min-w-[200px]">
                                                         {[
                                                             { value: "Immigration", label: "Immigration / Permanent Residency" },
@@ -491,17 +481,15 @@ export default function FormPTECoreRegistration() {
                                             <FormItem>
                                                 <FormLabel className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Current Occupation *</FormLabel>
                                                 <DropdownMenu>
-                                                    <DropdownMenuTrigger
-                                                        render={
-                                                            <Button
-                                                                variant="outline"
-                                                                className="flex w-full items-center justify-between bg-slate-50 border-none rounded-lg h-14 px-4 font-bold"
-                                                            >
-                                                                <span>{field.value || "Select Occupation"}</span>
-                                                                <ChevronDownIcon className="size-4 opacity-50" />
-                                                            </Button>
-                                                        }
-                                                    />
+                                                    <DropdownMenuTrigger asChild>
+                                                        <Button
+                                                            variant="outline"
+                                                            className="flex w-full items-center justify-between bg-slate-50 border-none rounded-lg h-14 px-4 font-bold"
+                                                        >
+                                                            <span>{field.value || "Select Occupation"}</span>
+                                                            <ChevronDownIcon className="size-4 opacity-50" />
+                                                        </Button>
+                                                    </DropdownMenuTrigger>
                                                     <DropdownMenuContent align="start" className="min-w-[200px]">
                                                         {["Professional", "Student", "Business Owner", "Unemployed", "Retired", "Other"].map((occ) => (
                                                             <DropdownMenuItem

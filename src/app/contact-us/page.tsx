@@ -66,11 +66,11 @@ export default function ContactUs() {
         </div>
       </div>
       <section className="mt-16">
-        {/* <FormTOEFLIBTRegistration />
         <FormIELTSRegistration />
-        <FormPTEAcademicRegistration /> */}
+        {/* <FormTOEFLIBTRegistration />
+        <FormPTEAcademicRegistration />
         <FormPTECoreRegistration />
-        <FormPTEHomeRegistration />
+        <FormPTEHomeRegistration /> */}
       </section>
     </section>
   );
