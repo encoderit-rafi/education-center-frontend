@@ -21,14 +21,20 @@ import { COURSES } from "@/lib/courses-data";
 import { Badge } from "../ui/badge";
 
 interface NavItem {
+  type: "primary" | "secondary";
   label: string;
   href?: string;
   badge?: string;
   children?: { label: string; href: string }[];
 }
-
-const navItems: NavItem[] = [
+const navigations: NavItem[] = [
   {
+    type: "primary",
+    label: "Exams",
+    href: "/exams",
+  },
+  {
+    type: "primary",
     label: "Courses",
     children: COURSES.filter((course) => course.id.endsWith("-prep")).map(
       (course) => ({
@@ -38,18 +44,80 @@ const navItems: NavItem[] = [
     ),
   },
   {
-    label: "Fees",
+    type: "secondary",
+    label: "Free Consultation",
+    href: "/free-consultation",
+  },
+  {
+    type: "secondary",
+
+    label: "Assessment Solutions",
+    href: "/assessment-solutions",
+  },
+  {
+    type: "primary",
+    label: "Book Exam",
     children: [
-      { label: "IELTS Fees", href: "/fees/ielts" },
-      { label: "PTE Fees", href: "/fees/pte" },
-      { label: "CELPIP Fees", href: "/fees/celpip" },
-      { label: "CAEL Fees", href: "/fees/cael" },
-      { label: "TOEFL Fees", href: "/fees/toefl" },
-      { label: "OET Fees", href: "/fees/oet" },
-      { label: "Exam Workshop", href: "/fees/exam-workshop" },
+      { label: "IELTS", href: "/book-a-test" },
+      { label: "TOEFL iBT", href: "/book-a-test" },
+      { label: "PTE", href: "/book-a-test" },
+      { label: "CELPIP General", href: "/book-a-test" },
+      { label: "CAEL", href: "/book-a-test" },
+      { label: "Skills for English (SELT)", href: "/book-a-test" },
+      {
+        label: "Test Day Guidelines",
+        href: "/book-a-test/test-day-guidelines",
+      },
     ],
   },
   {
+    type: "primary",
+    label: "Test Dates",
+    children: [
+      { label: "IELTS", href: "/test-dates" },
+      { label: "TOEFL iBT", href: "/test-dates" },
+      { label: "PTE", href: "/test-dates" },
+      { label: "CELPIP General", href: "/test-dates" },
+      { label: "CAEL", href: "/test-dates" },
+      { label: "Skills for English (SELT)", href: "/test-dates" },
+    ],
+  },
+  {
+    type: "primary",
+    label: "Paid Mock Test",
+    // candidates can purchase them online and we email them within 72 hours
+    children: [
+      { label: "IELTS", href: "/paid-mock-test" },
+      { label: "TOEFL iBT", href: "/paid-mock-test" },
+      { label: "PTE Academic", href: "/paid-mock-test" },
+    ],
+  },
+  {
+    type: "secondary",
+    label: "Fees",
+    children: [
+      { label: "IELTS", href: "/fees/ielts" },
+      { label: "PTE", href: "/fees/pte" },
+      { label: "CELPIP", href: "/fees/celpip" },
+      { label: "CAEL", href: "/fees/cael" },
+      { label: "TOEFL", href: "/fees/toefl" },
+      { label: "OET", href: "/fees/oet" },
+    ],
+  },
+  {
+    type: "secondary",
+    label: "Workshop",
+    children: [
+      { label: "IELTS", href: "/workshop/ielts" },
+      { label: "PTE", href: "/workshop/pte" },
+      { label: "CELPIP", href: "/workshop/celpip" },
+      { label: "CAEL", href: "/workshop/cael" },
+      { label: "TOEFL", href: "/workshop/toefl" },
+      { label: "OET", href: "/workshop/oet" },
+    ],
+  },
+  {
+    type: "secondary",
     label: "Our Venues",
     children: [
       {
@@ -60,41 +128,20 @@ const navItems: NavItem[] = [
     ],
   },
   {
+    type: "primary",
     label: "Test Your English",
     href: "/test-your-english",
     badge: "FREE",
   },
   {
-    label: "Paid Mock Test",
-    href: "/paid-mock-test",
-  },
-  {
-    label: "Test Dates",
-    href: "/test-dates",
-  },
-  {
-    label: "Book Exam",
-    children: [
-      { label: "Book Test", href: "/book-a-test" },
-      {
-        label: "Test Day Guidelines",
-        href: "/book-a-test/test-day-guidelines",
-      },
-    ],
-  },
-  {
-    label: "Free Consultation",
-    href: "/free-consultation",
-  },
-  {
-    label: "Assessment Solutions",
-    href: "/assessment-solutions",
-  },
-  {
+    type: "secondary",
+
     label: "Exam Special Accommodation",
     href: "/special-accommodation",
   },
   {
+    type: "secondary",
+
     label: "Exam Delivery",
     children: [
       { label: "Exam Provider", href: "/exam-delivery/exam-provider" },
@@ -103,6 +150,8 @@ const navItems: NavItem[] = [
     ],
   },
   {
+    type: "secondary",
+
     label: "Exam Proctoring Services",
     children: [
       { label: "Institutions", href: "/exam-proctoring-services/institutions" },
@@ -110,6 +159,7 @@ const navItems: NavItem[] = [
     ],
   },
   {
+    type: "primary",
     label: "About Us",
     children: [
       { label: "Who We Are", href: "/about-us/who-we-are" },
@@ -119,33 +169,131 @@ const navItems: NavItem[] = [
       { label: "How to Find Us", href: "/about-us/how-to-find-us" },
     ],
   },
-  { label: "Contact Us", href: "/contact-us" },
+  {
+    type: "primary",
+    label: "Contact Us",
+    href: "/contact-us",
+  },
 ];
+// const navItems: NavItem[] = [
+//   {
+//     label: "Courses",
+//     children: COURSES.filter((course) => course.id.endsWith("-prep")).map(
+//       (course) => ({
+//         label: course.title,
+//         href: `/courses/${course.id}`,
+//       }),
+//     ),
+//   },
+//   // {
+//   //   label: "Fees",
+//   //   children: [
+//   //     { label: "IELTS", href: "/fees/ielts" },
+//   //     { label: "PTE", href: "/fees/pte" },
+//   //     { label: "CELPIP", href: "/fees/celpip" },
+//   //     { label: "CAEL", href: "/fees/cael" },
+//   //     { label: "TOEFL", href: "/fees/toefl" },
+//   //     { label: "OET", href: "/fees/oet" },
+//   //     { label: "Exam Workshop", href: "/fees/exam-workshop" },
+//   //   ],
+//   // },
+//   // {
+//   //   label: "Our Venues",
+//   //   children: [
+//   //     {
+//   //       label: "360° Virtual Tour",
+//   //       href: "/our-venues/360-degree-virtual-tour",
+//   //     },
+//   //     { label: "Book An Exam Venue", href: "/our-venues/book-an-exam-venue" },
+//   //   ],
+//   // },
+//   // {
+//   //   label: "Test Your English",
+//   //   href: "/test-your-english",
+//   //   badge: "FREE",
+//   // },
+//   // {
+//   //   label: "Paid Mock Test",
+//   //   href: "/paid-mock-test",
+//   // },
+//   // {
+//   //   label: "Test Dates",
+//   //   href: "/test-dates",
+//   // },
+//   // {
+//   //   label: "Book Exam",
+//   //   children: [
+//   //     { label: "Book Test", href: "/book-a-test" },
+//   //     {
+//   //       label: "Test Day Guidelines",
+//   //       href: "/book-a-test/test-day-guidelines",
+//   //     },
+//   //   ],
+//   // },
+//   // {
+//   //   label: "Free Consultation",
+//   //   href: "/free-consultation",
+//   // },
+//   // {
+//   //   label: "Assessment Solutions",
+//   //   href: "/assessment-solutions",
+//   // },
+//   // {
+//   //   label: "Exam Special Accommodation",
+//   //   href: "/special-accommodation",
+//   // },
+//   // {
+//   //   label: "Exam Delivery",
+//   //   children: [
+//   //     { label: "Exam Provider", href: "/exam-delivery/exam-provider" },
+//   //     { label: "Test Takers", href: "/exam-delivery/test-takers" },
+//   //     { label: "Vendor", href: "/exam-delivery/vendor" },
+//   //   ],
+//   // },
+//   // {
+//   //   label: "Exam Proctoring Services",
+//   //   children: [
+//   //     { label: "Institutions", href: "/exam-proctoring-services/institutions" },
+//   //     { label: "Test-Takers", href: "/exam-proctoring-services/test-takers" },
+//   //   ],
+//   // },
+//   // {
+//   //   label: "About Us",
+//   //   children: [
+//   //     { label: "Who We Are", href: "/about-us/who-we-are" },
+//   //     { label: "Mission & Vision", href: "/about-us/vision-and-mission" },
+//   //     { label: "Why Choose Us", href: "/about-us/why-choose-us" },
+//   //     { label: "Accreditation", href: "/about-us/accreditation" },
+//   //     { label: "How to Find Us", href: "/about-us/how-to-find-us" },
+//   //   ],
+//   // },
+//   // { label: "Contact Us", href: "/contact-us" },
+// ];
 
 export default function NavBar() {
-  const primaryNav = navItems.filter((item) =>
-    [
-      "Courses",
-      "Exam Proctoring Services",
-      "Exam Delivery",
-      "Fees",
-      "Our Venues",
-      "About Us",
-      "Contact Us",
-    ].includes(item.label),
-  );
-  const secondaryNav = navItems.filter(
-    (item) =>
-      ![
-        "Courses",
-        "Exam Proctoring Services",
-        "Exam Delivery",
-        "Fees",
-        "Our Venues",
-        "About Us",
-        "Contact Us",
-      ].includes(item.label),
-  );
+  // const primaryNav = navItems.filter((item) =>
+  //   [
+  //     "Courses",
+  //     "Exam Proctoring Services",
+  //     "Exam Delivery",
+  //     "Fees",
+  //     "Our Venues",
+  //     "About Us",
+  //     "Contact Us",
+  //   ].includes(item.label),
+  // );
+  // const secondaryNav = navItems.filter(
+  //   (item) =>
+  //     ![
+  //       "Courses",
+  //       "Exam Proctoring Services",
+  //       "Exam Delivery",
+  //       "Fees",
+  //       "Our Venues",
+  //       "About Us",
+  //       "Contact Us",
+  //     ].includes(item.label),
+  // );
 
   return (
     <header className="sticky top-0 z-50 overflow-visible">
@@ -177,42 +325,44 @@ export default function NavBar() {
           {/* Desktop Primary Nav */}
           <NavigationMenu className="hidden lg:flex" viewport={false}>
             <NavigationMenuList className="gap-2">
-              {primaryNav.map((item) => (
-                <NavigationMenuItem key={item.label}>
-                  {item.children ? (
-                    <>
-                      <NavigationMenuTrigger className="bg-transparent px-2 py-1.5 text-sm font-bold text-white hover:bg-black/10 hover:text-white border-none outline-none focus:bg-white/10 transition-all rounded-lg">
-                        {item.label}
-                      </NavigationMenuTrigger>
-                      <NavigationMenuContent className="z-50 p-1 min-w-48 !bg-[#AD1010] !text-white border border-red-700 shadow-2xl rounded-xl">
-                        <ul className="flex flex-col">
-                          {item.children.map((child) => (
-                            <li key={child.label}>
-                              <NavigationMenuLink asChild>
-                                <Link
-                                  href={child.href}
-                                  className="px-4 py-2.5 text-sm font-medium text-white hover:bg-white/20 rounded-lg transition-colors w-full flex items-center"
-                                >
-                                  {child.label}
-                                </Link>
-                              </NavigationMenuLink>
-                            </li>
-                          ))}
-                        </ul>
-                      </NavigationMenuContent>
-                    </>
-                  ) : (
-                    <NavigationMenuLink asChild>
-                      <Link
-                        href={item.href || "#"}
-                        className="px-2 py-1.5 text-sm font-bold text-white hover:bg-white/10 transition-all rounded-lg"
-                      >
-                        {item.label}
-                      </Link>
-                    </NavigationMenuLink>
-                  )}
-                </NavigationMenuItem>
-              ))}
+              {navigations
+                .filter((item) => item.type === "primary")
+                .map((item) => (
+                  <NavigationMenuItem key={item.label}>
+                    {item.children ? (
+                      <>
+                        <NavigationMenuTrigger className="bg-transparent px-2 py-1.5 text-sm font-bold text-white hover:bg-black/10 hover:text-white border-none outline-none focus:bg-white/10 transition-all rounded-lg">
+                          {item.label}
+                        </NavigationMenuTrigger>
+                        <NavigationMenuContent className="z-50 p-1 min-w-48 !bg-[#AD1010] !text-white border border-red-700 shadow-2xl rounded-xl">
+                          <ul className="flex flex-col">
+                            {item.children.map((child) => (
+                              <li key={child.label}>
+                                <NavigationMenuLink asChild>
+                                  <Link
+                                    href={child.href}
+                                    className="px-4 py-2.5 text-sm font-medium text-white hover:bg-white/20 rounded-lg transition-colors w-full flex items-center"
+                                  >
+                                    {child.label}
+                                  </Link>
+                                </NavigationMenuLink>
+                              </li>
+                            ))}
+                          </ul>
+                        </NavigationMenuContent>
+                      </>
+                    ) : (
+                      <NavigationMenuLink asChild>
+                        <Link
+                          href={item.href || "#"}
+                          className="px-2 py-1.5 text-sm font-bold text-white hover:bg-white/10 transition-all rounded-lg"
+                        >
+                          {item.label}
+                        </Link>
+                      </NavigationMenuLink>
+                    )}
+                  </NavigationMenuItem>
+                ))}
             </NavigationMenuList>
           </NavigationMenu>
 
@@ -239,7 +389,7 @@ export default function NavBar() {
               >
                 <NavigationMenu className="max-w-none *:w-full">
                   <NavigationMenuList className="flex-col items-start gap-0">
-                    {navItems.map((item, index) => (
+                    {navigations.map((item, index) => (
                       <NavigationMenuItem className="w-full" key={item.label}>
                         {item.children ? (
                           <>
@@ -271,7 +421,7 @@ export default function NavBar() {
                             </Link>
                           </NavigationMenuLink>
                         )}
-                        {index < navItems.length - 1 && (
+                        {index < navigations.length - 1 && (
                           <div className="mx-2 my-1 h-px bg-slate-100" />
                         )}
                       </NavigationMenuItem>
@@ -287,60 +437,62 @@ export default function NavBar() {
         <div className="hidden lg:flex bg-secondary text-white nav-px nav-py items-center justify-end gap-2">
           <NavigationMenu viewport={false}>
             <NavigationMenuList className="gap-2">
-              {secondaryNav.map((item) => (
-                <NavigationMenuItem key={item.label}>
-                  {item.children ? (
-                    <>
-                      {" "}
-                      <NavigationMenuTrigger className="bg-transparent px-2 py-1.5 text-sm font-bold text-white hover:bg-white/10 hover:text-white border-none outline-none focus:bg-white/10 transition-all rounded-lg">
-                        <div className="flex items-center gap-1.5">
-                          {item.label}
-                          {item.badge && (
-                            <Badge className="bg-red-600 text-[9px] px-1.5 py-0 border-none text-white">
-                              {item.badge}
-                            </Badge>
-                          )}
-                        </div>
-                      </NavigationMenuTrigger>
-                      <NavigationMenuContent className="z-50 p-1 min-w-48 !bg-[#AD1010] !text-white border border-red-700 shadow-2xl rounded-xl">
-                        <ul className="flex flex-col">
-                          {item.children.map((child) => (
-                            <li key={child.label}>
-                              <NavigationMenuLink asChild>
-                                <Link
-                                  href={child.href}
-                                  className="px-4 py-2.5 text-sm font-medium text-white hover:bg-white/20 rounded-lg transition-colors w-full flex items-center"
-                                >
-                                  {child.label}
-                                </Link>
-                              </NavigationMenuLink>
-                            </li>
-                          ))}
-                        </ul>
-                      </NavigationMenuContent>
-                    </>
-                  ) : (
-                    <NavigationMenuLink asChild>
-                      <Link
-                        href={item.href || "#"}
-                        className="px-2 py-1.5 text-sm font-bold text-white hover:bg-white/10 hover:text-white transition-all rounded-lg"
-                      >
-                        <div className="flex items-center gap-2">
-                          {item.label === "Test Your English" && (
-                            <span className="w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse" />
-                          )}
-                          {item.label}
-                          {item.badge && (
-                            <Badge className="bg-red-600 text-[9px] px-1.5 py-0 border-none text-white">
-                              {item.badge}
-                            </Badge>
-                          )}
-                        </div>
-                      </Link>
-                    </NavigationMenuLink>
-                  )}
-                </NavigationMenuItem>
-              ))}
+              {navigations
+                .filter((item) => item.type === "secondary")
+                .map((item) => (
+                  <NavigationMenuItem key={item.label}>
+                    {item.children ? (
+                      <>
+                        {" "}
+                        <NavigationMenuTrigger className="bg-transparent px-2 py-1.5 text-sm font-bold text-white hover:bg-white/10 hover:text-white border-none outline-none focus:bg-white/10 transition-all rounded-lg">
+                          <div className="flex items-center gap-1.5">
+                            {item.label}
+                            {item.badge && (
+                              <Badge className="bg-red-600 text-[9px] px-1.5 py-0 border-none text-white">
+                                {item.badge}
+                              </Badge>
+                            )}
+                          </div>
+                        </NavigationMenuTrigger>
+                        <NavigationMenuContent className="z-50 p-1 min-w-48 !bg-[#AD1010] !text-white border border-red-700 shadow-2xl rounded-xl">
+                          <ul className="flex flex-col">
+                            {item.children.map((child) => (
+                              <li key={child.label}>
+                                <NavigationMenuLink asChild>
+                                  <Link
+                                    href={child.href}
+                                    className="px-4 py-2.5 text-sm font-medium text-white hover:bg-white/20 rounded-lg transition-colors w-full flex items-center"
+                                  >
+                                    {child.label}
+                                  </Link>
+                                </NavigationMenuLink>
+                              </li>
+                            ))}
+                          </ul>
+                        </NavigationMenuContent>
+                      </>
+                    ) : (
+                      <NavigationMenuLink asChild>
+                        <Link
+                          href={item.href || "#"}
+                          className="px-2 py-1.5 text-sm font-bold text-white hover:bg-white/10 hover:text-white transition-all rounded-lg"
+                        >
+                          <div className="flex items-center gap-2">
+                            {item.label === "Test Your English" && (
+                              <span className="w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse" />
+                            )}
+                            {item.label}
+                            {item.badge && (
+                              <Badge className="bg-red-600 text-[9px] px-1.5 py-0 border-none text-white">
+                                {item.badge}
+                              </Badge>
+                            )}
+                          </div>
+                        </Link>
+                      </NavigationMenuLink>
+                    )}
+                  </NavigationMenuItem>
+                ))}
             </NavigationMenuList>
           </NavigationMenu>
         </div>

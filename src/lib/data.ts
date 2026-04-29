@@ -1,0 +1,376 @@
+export const workshops = [
+  {
+    id: "workshop_1",
+    name: "Workshop 2 Hours",
+    duration: "2 hours",
+    price: 600,
+    currency: "AED",
+    vat: 0,
+  },
+  {
+    id: "workshop_2",
+    name: "Workshop 4 Hours",
+    duration: "4 hours",
+    price: 1000,
+    currency: "AED",
+    vat: 0,
+  },
+  {
+    id: "workshop_3",
+    name: "Workshop 6 Hours",
+    duration: "6 hours",
+    price: 1350,
+    currency: "AED",
+    vat: 0,
+  },
+  {
+    id: "workshop_4",
+    name: "Workshop 8 Hours",
+    duration: "8 hours",
+    price: 1600,
+    currency: "AED",
+    vat: 0,
+  },
+];
+
+export const courses = [
+  {
+    id: "course_1",
+    name: "Group Classroom",
+    type: "Group",
+    mode: "Classroom",
+    price: 1850,
+    currency: "AED",
+    vat: 0,
+  },
+  {
+    id: "course_2",
+    name: "Semi-Private Classroom",
+    type: "Semi-Private",
+    mode: "Classroom",
+    price: 2850,
+    currency: "AED",
+    vat: 0,
+  },
+  {
+    id: "course_3",
+    name: "VIP Classroom",
+    type: "VIP",
+    mode: "Classroom",
+    price: 4850,
+    currency: "AED",
+    vat: 0,
+  },
+  {
+    id: "course_4",
+    name: "Private Online",
+    type: "Private",
+    mode: "Online",
+    price: 4850,
+    currency: "AED",
+    vat: 0,
+  },
+];
+
+export const exams = [
+  {
+    id: "ielts",
+    name: "IELTS",
+    is_bookable: true,
+    exam_fees: [
+      {
+        id: "ielts_academic",
+        currency: "AED",
+        service_fee: 100,
+        fee: 1500,
+        additional_fees: [],
+      },
+      {
+        id: "ielts_general_training",
+        currency: "AED",
+        service_fee: 100,
+        fee: 1500,
+        additional_fees: [],
+      },
+    ],
+    course_types: ["classroom", "online"],
+    courses: courses,
+    workshops: workshops,
+    mock_tests: [
+      {
+        id: "ielts_academic",
+        currency: "AED",
+        service_fee: 1500,
+      },
+    ],
+    children: [
+      { id: "ielts_academic", name: "IELTS Academic" },
+      { id: "ielts_general_training", name: "IELTS General Training" },
+      {
+        id: "ielts_ukvi",
+        name: "IELTS UKVI",
+        children: [
+          { id: "ielts_ukvi_academic", name: "IELTS for UKVI Academic" },
+          {
+            id: "ielts_ukvi_general_training",
+            name: "IELTS for UKVI General Training",
+          },
+          {
+            id: "ielts_ukvi_life_skills_a1",
+            name: "IELTS for UKVI Life Skills A1",
+          },
+          {
+            id: "ielts_ukvi_life_skills_a2",
+            name: "IELTS for UKVI Life Skills A2",
+          },
+          {
+            id: "ielts_ukvi_life_skills_b1",
+            name: "IELTS for UKVI Life Skills B1",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: "toefl_ibt",
+    name: "TOEFL iBT",
+    is_bookable: true,
+    exam_fees: [
+      {
+        id: "toefl_ibt",
+        currency: "AED",
+        service_fee: 100,
+        fee: 340,
+        additional_fees: [
+          {
+            name: "Standard",
+            amount: 0,
+            currency: "USD",
+          },
+          {
+            name: "Express Shipping ",
+            amount: 35,
+            currency: "USD",
+          },
+          {
+            name: "Late fees ( 7 days before exam date ) ",
+            amount: 49,
+            currency: "USD",
+          },
+        ],
+      },
+    ],
+    course_types: ["classroom", "online"],
+    courses: courses,
+    workshops: workshops,
+    mock_tests: [
+      {
+        id: "toefl_ibt",
+        currency: "AED",
+        service_fee: 1500,
+      },
+    ],
+  },
+  {
+    id: "pte",
+    name: "PTE",
+    is_bookable: true,
+    exam_fees: [
+      {
+        id: "pte_academic",
+        currency: "AED",
+        service_fee: 100,
+        fee: 1500,
+        additional_fees: [],
+      },
+      {
+        id: "pte_core",
+        currency: "AED",
+        service_fee: 100,
+        fee: 1500,
+        additional_fees: [],
+      },
+      {
+        id: "pte_ukvi",
+        currency: "AED",
+        service_fee: 100,
+        fee: 1500,
+        additional_fees: [],
+      },
+      {
+        id: "pte_ukvi_a1",
+        currency: "AED",
+        service_fee: 100,
+        fee: 1330,
+        additional_fees: [],
+      },
+      {
+        id: "pte_ukvi_a2",
+        currency: "AED",
+        service_fee: 100,
+        fee: 1330,
+        additional_fees: [],
+      },
+      {
+        id: "pte_ukvi_b1",
+        currency: "AED",
+        service_fee: 100,
+        fee: 1330,
+        additional_fees: [],
+      },
+    ],
+    course_types: ["classroom", "online"],
+    courses: courses,
+    workshops: workshops,
+    children: [
+      { id: "pte_academic", name: "PTE Academic" },
+      { id: "pte_core", name: "PTE Core" },
+      {
+        id: "pte_ukvi",
+        name: "PTE UKVI (SELT)",
+        children: [
+          { id: "pte_ukvi_academic", name: "PTE Academic UKVI" },
+          { id: "pte_ukvi_a1", name: "PTE Home A1" },
+          { id: "pte_ukvi_a2", name: "PTE Home A2" },
+          { id: "pte_ukvi_b1", name: "PTE Home B1" },
+        ],
+      },
+    ],
+  },
+  {
+    id: "celpip",
+    name: "CELPIP",
+    is_bookable: false,
+    course_types: ["classroom", "online"],
+    courses: courses,
+    workshops: workshops,
+    children: [
+      { id: "celpip_general", name: "CELPIP General" },
+      { id: "celpip_general_ls", name: "CELPIP General LS" },
+    ],
+  },
+  {
+    id: "cael",
+    name: "CAEL",
+    is_bookable: false,
+    course_types: ["classroom", "online"],
+    courses: courses,
+    workshops: workshops,
+  },
+  {
+    id: "selt",
+    name: "Skills for English (SELT)",
+    is_bookable: false,
+    course_types: ["classroom", "online"],
+    courses: courses,
+    workshops: workshops,
+    children: [
+      { id: "selt_a1", name: "UKVI Speaking and listening at level A1" },
+      { id: "selt_a2", name: "UKVI Speaking and listening at level A2" },
+      { id: "selt_b1_sl", name: "UKVI Speaking and listening at level B1" },
+      {
+        id: "selt_b1_wl",
+        name: "UKVI Speaking, listening, reading, and writing at level B1",
+      },
+      {
+        id: "selt_b2",
+        name: "UKVI Speaking, listening, reading, and writing at level B2",
+      },
+      {
+        id: "selt_c1",
+        name: "UKVI Speaking, listening, reading, and writing at level C1",
+      },
+      {
+        id: "selt_c2",
+        name: "UKVI Speaking, listening, reading, and writing at level C2",
+      },
+    ],
+  },
+  {
+    id: "psi",
+    name: "PSI",
+    is_bookable: true,
+    exams_fees: [
+      {
+        id: "ukvi_sl_a1",
+        currency: "USD",
+        service_fee: 100,
+        fee: 175,
+        additional_fees: [],
+      },
+      {
+        id: "ukvi_sl_b1",
+        currency: "USD",
+        service_fee: 100,
+        fee: 175,
+        additional_fees: [],
+      },
+      {
+        id: "ukvi_slrw_b1",
+        currency: "USD",
+        service_fee: 100,
+        fee: 235,
+        additional_fees: [],
+      },
+      {
+        id: "ukvi_slrw_b2",
+        currency: "USD",
+        service_fee: 100,
+        fee: 235,
+        additional_fees: [],
+      },
+      {
+        id: "ukvi_slrw_c1",
+        currency: "USD",
+        service_fee: 100,
+        fee: 235,
+        additional_fees: [],
+      },
+      {
+        id: "ukvi_slrw_c2",
+        currency: "USD",
+        service_fee: 100,
+        fee: 235,
+        additional_fees: [],
+      },
+    ],
+    course_types: ["classroom", "online"],
+    courses: courses,
+    workshops: workshops,
+    mock_tests: [
+      {
+        id: "ielts_academic",
+        currency: "AED",
+        service_fee: 1500,
+      },
+    ],
+    children: [
+      { id: "ukvi_sl_a1", name: "UKVI Speaking and listening at level A1" },
+      { id: "ukvi_sl_b1", name: "UKVI Speaking and listening at level B1" },
+      {
+        id: "ukvi_slrw_b1",
+        name: "UKVI Speaking, listening, reading, and writing at level B1",
+      },
+      {
+        id: "ukvi_slrw_b2",
+        name: "UKVI Speaking, listening, reading, and writing at level B2",
+      },
+      {
+        id: "ukvi_slrw_c1",
+        name: "UKVI Speaking, listening, reading, and writing at level C1",
+      },
+      {
+        id: "ukvi_slrw_c2",
+        name: "UKVI Speaking, listening, reading, and writing at level C2",
+      },
+    ],
+  },
+  {
+    id: "oet",
+    name: "OET",
+    is_bookable: false,
+    course_types: ["classroom"],
+    courses: [courses[0], courses[1], courses[2]],
+    workshops: [workshops[1], workshops[2], workshops[3]],
+  },
+];
