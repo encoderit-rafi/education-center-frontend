@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
+import { toast } from "sonner";
 
 function CopyBadge({
   icon,
@@ -23,6 +24,7 @@ function CopyBadge({
     try {
       navigator.clipboard.writeText(copyText);
       setCopied(true);
+      toast.success("Copied to clipboard!");
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
       console.error("Failed to copy text: ", err);

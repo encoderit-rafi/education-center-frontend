@@ -1,5 +1,3 @@
-import Image from "next/image";
-import { cn } from "@/lib/utils";
 import Link from "next/link";
 import {
     Card,
@@ -36,53 +34,19 @@ const FORMS = [
 export default function DownloadFormsPage() {
     return (
         <div className="flex flex-col min-h-screen">
-            {/* Hero Section */}
-            <section className="relative w-full h-[65vh] min-h-[500px] flex items-center overflow-hidden">
-                {/* Background Image */}
-                <div className="absolute inset-0 z-0">
-                    <Image
-                        src="/images/about-us/infrastructure-center.png"
-                        alt="TEPTH Resource Center"
-                        fill
-                        priority
-                        className="object-cover"
-                    />
-                    {/* Dark Overlay */}
-                    <div className="absolute inset-0 bg-black/75" />
-                </div>
 
-                {/* Content */}
-                <div className="container relative z-10 px-6 mx-auto sm:px-12 lg:px-24">
-                    <div className="max-w-4xl space-y-6">
-                        <h1 className={cn(
-                            "text-6xl md:text-8xl font-black text-white tracking-tighter leading-[0.95]",
-                            "font-heading"
-                        )}>
-                            Registration <br />
-                            <span className="italic text-[#A11D1D]">Official Forms.</span>
-                        </h1>
-
-                        <p className="text-xl md:text-2xl text-white/90 max-w-2xl leading-relaxed mb-10">
-                            Access and download the necessary documentation for your exam registrations, cancellations, and administrative requests.
-                        </p>
-
-                        <div className="flex gap-12 pt-8 border-t border-white/20 max-w-lg">
-                            <div className="flex flex-col">
-                                <span className="text-4xl md:text-5xl font-black text-[#A11D1D] font-heading">PDF</span>
-                                <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-white/70">Format Ready</span>
-                            </div>
-                            <div className="flex flex-col">
-                                <span className="text-4xl md:text-5xl font-black text-[#A11D1D] font-heading">100%</span>
-                                <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-white/70">Official Docs</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
 
             {/* Forms Section */}
-            <section className="py-24 bg-gray-50/50">
+            <section className="py-24 bg-white">
                 <div className="max-w-7xl mx-auto px-6">
+                    <div className="text-center mb-20">
+                        <h1 className="text-4xl md:text-6xl font-black text-gray-900 tracking-tighter mb-4 uppercase leading-none">
+                            Download <span className="text-[#A11D1D]">Official Forms</span>
+                        </h1>
+                        <p className="text-gray-500 text-lg max-w-2xl mx-auto font-medium">
+                            Access and download the necessary documentation for your exam registrations, cancellations, and administrative requests.
+                        </p>
+                    </div>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                         {FORMS.map((form) => (
                             <Card
@@ -113,7 +77,7 @@ export default function DownloadFormsPage() {
                                 <CardFooter className="pt-6 pb-10 mt-auto">
                                     <Link
                                         href={form.href}
-                                        className="w-full inline-flex items-center justify-center gap-2 px-6 py-4 bg-gray-900 text-white text-xs font-black uppercase tracking-widest rounded-sm transition-all hover:bg-[#A11D1D] hover:shadow-lg"
+                                        className="w-full inline-flex items-center justify-center gap-2 px-6 py-4 bg-[#A11D1D] text-white text-xs font-black uppercase tracking-widest rounded-sm transition-all hover:bg-[#111827] hover:shadow-lg"
                                     >
                                         <Download className="w-4 h-4" />
                                         Download PDF
@@ -121,13 +85,6 @@ export default function DownloadFormsPage() {
                                 </CardFooter>
                             </Card>
                         ))}
-                    </div>
-
-                    {/* Help Note */}
-                    <div className="mt-20 text-center">
-                        <p className="text-gray-400 text-sm italic">
-                            Can&apos;t find the form you need? Please contact our administrative office at <a href="mailto:info@tepth.net" className="text-[#A11D1D] font-bold hover:underline">info@tepth.net</a>
-                        </p>
                     </div>
                 </div>
             </section>
