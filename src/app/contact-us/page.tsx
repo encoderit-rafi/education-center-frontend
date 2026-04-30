@@ -1,4 +1,5 @@
 import ContactForm from "@/app/contact-us/_components/form-contact";
+import FormIELTSAcademicRegistration from "@/components/forms/ielts-academic-exam-registration/ielts-academic-exam-registration";
 import FormIELTSRegistration from "@/components/forms/ielts-exam-registration/form-ielts-exam-registration";
 import FormPTEAcademicRegistration from "@/components/forms/pte-academic-registration/form-pte-academic-registration";
 import FormPTECoreRegistration from "@/components/forms/pte-core-registration/form-pte-core-registration";
@@ -66,8 +67,9 @@ export default function ContactUs() {
         </div>
       </div>
       <section className="mt-16">
-        <FormIELTSRegistration />
-        {/* <FormTOEFLIBTRegistration />
+        <FormIELTSAcademicRegistration />
+        {/* <FormIELTSRegistration />
+        <FormTOEFLIBTRegistration />
         <FormPTEAcademicRegistration />
         <FormPTECoreRegistration />
         <FormPTEHomeRegistration /> */}
