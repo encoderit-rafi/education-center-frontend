@@ -229,7 +229,7 @@ export default async function ExamDetailPage({
                           <div key={ws.id} className="flex flex-col p-6 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">
                             <span className="text-slate-500 text-[10px] font-black uppercase tracking-[0.2em] mb-2">{ws.duration}</span>
                             <span className="text-white font-bold text-lg mb-2">{ws.name}</span>
-                            <span className="text-primary text-xl font-black">{ws.currency} {ws.fee || ws.price}</span>
+                            <span className="text-primary text-xl font-black">{ws.currency} {ws.price}</span>
                           </div>
                         ))}
                       </div>

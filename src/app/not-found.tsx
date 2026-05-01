@@ -25,17 +25,22 @@ export default function NotFound() {
       </p>
 
       <div className="flex flex-col sm:flex-row gap-4">
-        <Button asChild size="lg" className="rounded-full px-8">
-          <Link href="/" className="inline-flex items-center justify-center">
-            <Home className="mr-2 size-5" />
-            Back to Home
-          </Link>
-        </Button>
-        <Button asChild variant="outline" size="lg" className="rounded-full px-8">
-          <Link href="/contact-us">
-            Contact Support
-          </Link>
-        </Button>
+        <Button
+          size="lg"
+          className="rounded-full px-8"
+          render={
+            <Link href="/" className="inline-flex items-center justify-center">
+              <Home className="mr-2 size-5" />
+              Back to Home
+            </Link>
+          }
+        />
+        <Button
+          variant="outline"
+          size="lg"
+          className="rounded-full px-8"
+          render={<Link href="/contact-us">Contact Support</Link>}
+        />
       </div>
       
       {/* Decorative background elements */}
