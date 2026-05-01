@@ -1,3 +1,72 @@
+const class_modes = [
+  {
+    id: "group",
+    name: "Group",
+    max_students: 5,
+  },
+  {
+    id: "semi_private",
+    name: "Semi-Private",
+    max_students: 3,
+  },
+  {
+    id: "vip",
+    name: "VIP",
+    max_students: 1,
+  },
+];
+const class_types = [
+  {
+    id: "classroom",
+    name: "Classroom",
+  },
+  {
+    id: "online",
+    name: "Online",
+  },
+];
+export const courses = [
+  {
+    id: "course_1",
+    name: "Group Classroom",
+    class_mode_id: "group",
+    class_type_id: "classroom",
+    price: 1850,
+    currency: "AED",
+    general_discount: 5,
+    special_discount: 10,
+  },
+  {
+    id: "course_2",
+    name: "Semi-Private Classroom",
+    class_mode_id: "semi_private",
+    class_type_id: "classroom",
+    price: 2850,
+    currency: "AED",
+    general_discount: 5,
+    special_discount: 10,
+  },
+  {
+    id: "course_3",
+    name: "VIP Classroom",
+    class_mode_id: "vip",
+    class_type_id: "classroom",
+    price: 4850,
+    currency: "AED",
+    general_discount: 5,
+    special_discount: 10,
+  },
+  {
+    id: "course_4",
+    name: "Private Online",
+    class_mode_id: "vip",
+    class_type_id: "online",
+    price: 4850,
+    currency: "AED",
+    general_discount: 5,
+    special_discount: 10,
+  },
+];
 export const workshops = [
   {
     id: "workshop_1",
@@ -5,7 +74,6 @@ export const workshops = [
     duration: "2 hours",
     price: 600,
     currency: "AED",
-    vat: 0,
   },
   {
     id: "workshop_2",
@@ -13,7 +81,6 @@ export const workshops = [
     duration: "4 hours",
     price: 1000,
     currency: "AED",
-    vat: 0,
   },
   {
     id: "workshop_3",
@@ -21,7 +88,6 @@ export const workshops = [
     duration: "6 hours",
     price: 1350,
     currency: "AED",
-    vat: 0,
   },
   {
     id: "workshop_4",
@@ -29,348 +95,410 @@ export const workshops = [
     duration: "8 hours",
     price: 1600,
     currency: "AED",
-    vat: 0,
   },
 ];
-
-export const courses = [
+export const paid_mock_tests = [
   {
-    id: "course_1",
-    name: "Group Classroom",
-    type: "Group",
-    mode: "Classroom",
-    price: 1850,
-    currency: "AED",
-    vat: 0,
-  },
-  {
-    id: "course_2",
-    name: "Semi-Private Classroom",
-    type: "Semi-Private",
-    mode: "Classroom",
-    price: 2850,
-    currency: "AED",
-    vat: 0,
-  },
-  {
-    id: "course_3",
-    name: "VIP Classroom",
-    type: "VIP",
-    mode: "Classroom",
-    price: 4850,
-    currency: "AED",
-    vat: 0,
-  },
-  {
-    id: "course_4",
-    name: "Private Online",
-    type: "Private",
-    mode: "Online",
-    price: 4850,
-    currency: "AED",
-    vat: 0,
+    exam: {
+      id: "ielts",
+      name: "IELTS",
+    },
+    image: "/images/ielts.png",
+    content:
+      "Mock Test Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
+    price: { currency: "AED", fee: 350 },
   },
 ];
-
-export const exams = [
+export const exams_workshops = [
   {
-    id: "ielts",
-    name: "IELTS",
-    is_bookable: true,
-    exam_fees: [
-      {
-        id: "ielts_academic",
-        currency: "AED",
-        service_fee: 100,
-        fee: 1500,
-        additional_fees: [],
-      },
-      {
-        id: "ielts_general_training",
-        currency: "AED",
-        service_fee: 100,
-        fee: 1500,
-        additional_fees: [],
-      },
-    ],
-    course_types: ["classroom", "online"],
-    courses: courses,
+    exam: {
+      id: "ielts",
+      name: "IELTS",
+    },
+    image: "/images/ielts.png",
+    content:
+      "Workshop Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
     workshops: workshops,
-    mock_tests: [
+  },
+];
+export const exams_courses = [
+  {
+    exam: {
+      id: "ielts",
+      name: "IELTS",
+    },
+    class_type_id: "classroom",
+    image: "/images/ielts.png",
+    content:
+      "Classroom Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
+    courses: [courses[0], courses[1], courses[2]],
+  },
+  {
+    exam: {
+      id: "ielts",
+      name: "IELTS",
+    },
+    class_type_id: "online",
+    image: "/images/ielts.png",
+    content:
+      "Online Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
+    courses: [courses[3]],
+  },
+];
+export const exams_dates = [
+  {
+    exam: {
+      id: "ielts",
+      name: "IELTS",
+    },
+    image: "/images/ielts.png",
+    content: "Dates content",
+    // dates
+  },
+];
+export const exams_types = [
+  {
+    exam: {
+      id: "ielts",
+      name: "IELTS",
+    },
+    types: [
       {
         id: "ielts_academic",
-        currency: "AED",
-        service_fee: 1500,
+        name: "IELTS Academic",
+        image: "/images/ielts.png",
+        content: "Academic Content",
+        types: [],
       },
-    ],
-    children: [
-      { id: "ielts_academic", name: "IELTS Academic" },
-      { id: "ielts_general_training", name: "IELTS General Training" },
+      {
+        id: "ielts_general",
+        name: "IELTS General",
+        image: "/images/ielts.png",
+        content: "General Content",
+        types: [],
+      },
       {
         id: "ielts_ukvi",
         name: "IELTS UKVI",
-        children: [
-          { id: "ielts_ukvi_academic", name: "IELTS for UKVI Academic" },
+        image: "/images/ielts.png",
+        content: "UKVI Content",
+        types: [
           {
-            id: "ielts_ukvi_general_training",
+            id: "ielts_ukvi_academic",
+            name: "IELTS for UKVI Academic",
+            image: "/images/ielts.png",
+            content: "IELTS for UKVI Academic Content",
+            types: [],
+          },
+          {
+            id: "ielts_ukvi_general",
             name: "IELTS for UKVI General Training",
+            image: "/images/ielts.png",
+            content: "IELTS for UKVI General Training Content",
+            types: [],
           },
           {
-            id: "ielts_ukvi_life_skills_a1",
-            name: "IELTS for UKVI Life Skills A1",
+            id: "ielts_life_skills_a1",
+            name: "IELTS Life Skills A1",
+            image: "/images/ielts.png",
+            content: "IELTS Life Skills A1 Content",
+            types: [],
           },
           {
-            id: "ielts_ukvi_life_skills_a2",
-            name: "IELTS for UKVI Life Skills A2",
+            id: "ielts_life_skills_a2",
+            name: "IELTS Life Skills A2",
+            image: "/images/ielts.png",
+            content: "IELTS Life Skills A2 Content",
+            types: [],
           },
           {
-            id: "ielts_ukvi_life_skills_b1",
-            name: "IELTS for UKVI Life Skills B1",
+            id: "ielts_life_skills_b1",
+            name: "IELTS Life Skills B1",
+            image: "/images/ielts.png",
+            content: "IELTS Life Skills B1 Content",
+            types: [],
           },
         ],
       },
     ],
   },
   {
-    id: "toefl_ibt",
-    name: "TOEFL iBT",
-    is_bookable: true,
-    exam_fees: [
-      {
-        id: "toefl_ibt",
-        currency: "AED",
-        service_fee: 100,
-        fee: 340,
-        additional_fees: [
-          {
-            name: "Standard",
-            amount: 0,
-            currency: "USD",
-          },
-          {
-            name: "Express Shipping ",
-            amount: 35,
-            currency: "USD",
-          },
-          {
-            name: "Late fees ( 7 days before exam date ) ",
-            amount: 49,
-            currency: "USD",
-          },
-        ],
-      },
-    ],
-    course_types: ["classroom", "online"],
-    courses: courses,
-    workshops: workshops,
-    mock_tests: [
-      {
-        id: "toefl_ibt",
-        currency: "AED",
-        service_fee: 1500,
-      },
-    ],
+    exam: {
+      id: "toefl_ibt",
+      name: "TOEFL iBT",
+    },
+    types: [],
   },
   {
-    id: "pte",
-    name: "PTE",
-    is_bookable: true,
-    exam_fees: [
+    exam: {
+      id: "pte",
+      name: "PTE",
+    },
+    types: [
       {
         id: "pte_academic",
-        currency: "AED",
-        service_fee: 100,
-        fee: 1500,
-        additional_fees: [],
+        name: "PTE Academic",
+        image: "/images/pte.png",
+        content: "PTE Academic Content",
+        types: [],
       },
       {
         id: "pte_core",
-        currency: "AED",
-        service_fee: 100,
-        fee: 1500,
-        additional_fees: [],
+        name: "PTE Core",
+        image: "/images/pte.png",
+        content: "PTE Core Content",
+        types: [],
       },
-      {
-        id: "pte_ukvi",
-        currency: "AED",
-        service_fee: 100,
-        fee: 1500,
-        additional_fees: [],
-      },
-      {
-        id: "pte_ukvi_a1",
-        currency: "AED",
-        service_fee: 100,
-        fee: 1330,
-        additional_fees: [],
-      },
-      {
-        id: "pte_ukvi_a2",
-        currency: "AED",
-        service_fee: 100,
-        fee: 1330,
-        additional_fees: [],
-      },
-      {
-        id: "pte_ukvi_b1",
-        currency: "AED",
-        service_fee: 100,
-        fee: 1330,
-        additional_fees: [],
-      },
-    ],
-    course_types: ["classroom", "online"],
-    courses: courses,
-    workshops: workshops,
-    children: [
-      { id: "pte_academic", name: "PTE Academic" },
-      { id: "pte_core", name: "PTE Core" },
       {
         id: "pte_ukvi",
         name: "PTE UKVI (SELT)",
-        children: [
-          { id: "pte_ukvi_academic", name: "PTE Academic UKVI" },
-          { id: "pte_ukvi_a1", name: "PTE Home A1" },
-          { id: "pte_ukvi_a2", name: "PTE Home A2" },
-          { id: "pte_ukvi_b1", name: "PTE Home B1" },
+        image: "/images/pte.png",
+        content: "PTE UKVI (SELT) Content",
+        types: [
+          {
+            id: "pte_academic_ukvi",
+            name: "PTE Academic UKVI",
+            image: "/images/pte.png",
+            content: "PTE Academic UKVI Content",
+            types: [],
+          },
+          {
+            id: "pte_home_a1",
+            name: "PTE Home A1",
+            image: "/images/pte.png",
+            content: "PTE Home A1 Content",
+            types: [],
+          },
+          {
+            id: "pte_home_a2",
+            name: "PTE Home A2",
+            image: "/images/pte.png",
+            content: "PTE Home A2 Content",
+            types: [],
+          },
+          {
+            id: "pte_home_b1",
+            name: "PTE Home B1",
+            image: "/images/pte.png",
+            content: "PTE Home B1 Content",
+            types: [],
+          },
         ],
       },
     ],
   },
   {
-    id: "celpip",
-    name: "CELPIP",
-    is_bookable: false,
-    course_types: ["classroom", "online"],
-    courses: courses,
-    workshops: workshops,
-    children: [
-      { id: "celpip_general", name: "CELPIP General" },
-      { id: "celpip_general_ls", name: "CELPIP General LS" },
+    exam: {
+      id: "celpip",
+      name: "CELPIP",
+    },
+    types: [
+      {
+        id: "celpip_general",
+        name: "CELPIP General",
+        image: "/images/celpip.png",
+        content: "CELPIP General Content",
+        types: [],
+      },
+      {
+        id: "celpip_general_ls",
+        name: "CELPIP General LS",
+        image: "/images/celpip.png",
+        content: "CELPIP General LS Content",
+        types: [],
+      },
     ],
   },
   {
-    id: "cael",
-    name: "CAEL",
-    is_bookable: false,
-    course_types: ["classroom", "online"],
-    courses: courses,
-    workshops: workshops,
+    exam: {
+      id: "cael",
+      name: "CAEL",
+    },
+    types: [],
   },
   {
-    id: "selt",
-    name: "Skills for English (SELT)",
-    is_bookable: false,
-    course_types: ["classroom", "online"],
-    courses: courses,
-    workshops: workshops,
-    children: [
-      { id: "selt_a1", name: "UKVI Speaking and listening at level A1" },
-      { id: "selt_a2", name: "UKVI Speaking and listening at level A2" },
-      { id: "selt_b1_sl", name: "UKVI Speaking and listening at level B1" },
+    exam: {
+      id: "selt",
+      name: "Skills for English (SELT)",
+    },
+    types: [
       {
-        id: "selt_b1_wl",
+        id: "selt_a1",
+        name: "UKVI Speaking and listening at level A1",
+        image: "/images/selt.png",
+        content: "UKVI Speaking and listening at level A1 Content",
+        types: [],
+      },
+      {
+        id: "selt_a2",
+        name: "UKVI Speaking and listening at level A2",
+        image: "/images/selt.png",
+        content: "UKVI Speaking and listening at level A2 Content",
+        types: [],
+      },
+      {
+        id: "selt_b1",
+        name: "UKVI Speaking and listening at level B1",
+        image: "/images/selt.png",
+        content: "UKVI Speaking and listening at level B1 Content",
+        types: [],
+      },
+      {
+        id: "selt_b1_r_w",
         name: "UKVI Speaking, listening, reading, and writing at level B1",
+        image: "/images/selt.png",
+        content:
+          "UKVI Speaking, listening, reading, and writing at level B1 Content",
+        types: [],
       },
       {
         id: "selt_b2",
         name: "UKVI Speaking, listening, reading, and writing at level B2",
+        image: "/images/selt.png",
+        content:
+          "UKVI Speaking, listening, reading, and writing at level B2 Content",
+        types: [],
       },
       {
         id: "selt_c1",
         name: "UKVI Speaking, listening, reading, and writing at level C1",
+        image: "/images/selt.png",
+        content:
+          "UKVI Speaking, listening, reading, and writing at level C1 Content",
+        types: [],
       },
       {
         id: "selt_c2",
         name: "UKVI Speaking, listening, reading, and writing at level C2",
+        image: "/images/selt.png",
+        content:
+          "UKVI Speaking, listening, reading, and writing at level C2 Content",
+        types: [],
       },
     ],
+  },
+];
+export const exams_bookings = [
+  {
+    exam: {
+      id: "ielts",
+      name: "IELTS",
+    },
+    image: "/images/ielts.png",
+    content: "Booking Content",
+    exam_types: [
+      {
+        id: "academic",
+        name: "Academic",
+        image: "/images/ielts.png",
+        content: "Academic Content",
+        booking_fees: [
+          {
+            id: "ielts_academic",
+            name: "IELTS Academic",
+            currency: "AED",
+            service_fee: 100,
+            fee: 1330,
+            additional_fees: [
+              {
+                name: "Express Shipping ",
+                amount: 35,
+                currency: "USD",
+              },
+              {
+                name: "Late fees ( 7 days before exam date ) ",
+                amount: 49,
+                currency: "USD",
+              },
+            ],
+          },
+        ],
+      },
+      {
+        id: "general",
+        name: "General",
+        image: "/images/ielts.png",
+        content: "General Content",
+        booking_fees: [
+          {
+            id: "ielts_general",
+            name: "IELTS General",
+            currency: "AED",
+            service_fee: 100,
+            fee: 1330,
+            additional_fees: [
+              {
+                name: "Express Shipping ",
+                amount: 35,
+                currency: "USD",
+              },
+              {
+                name: "Late fees ( 7 days before exam date ) ",
+                amount: 49,
+                currency: "USD",
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+];
+export const exams = [
+  {
+    id: "ielts",
+    name: "IELTS",
+    image: "/images/ielts.png",
+    content:
+      "Main Content Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
+  },
+  {
+    id: "toefl_ibt",
+    name: "TOEFL iBT",
+    image: "/images/toefl_ibt.png",
+    content:
+      "Main Content Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
+  },
+  {
+    id: "pte",
+    name: "PTE",
+    image: "/images/pte.png",
+    content:
+      "Main Content Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
+  },
+  {
+    id: "celpip",
+    name: "CELPIP",
+    image: "/images/celpip.png",
+    content:
+      "Main Content Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
+  },
+  {
+    id: "cael",
+    name: "CAEL",
+    image: "/images/cael.png",
+    content:
+      "Main Content Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
+  },
+  {
+    id: "selt",
+    name: "Skills for English (SELT)",
+    image: "/images/selt.png",
+    content:
+      "Main Content Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
   },
   {
     id: "psi",
     name: "PSI",
-    is_bookable: true,
-    exams_fees: [
-      {
-        id: "ukvi_sl_a1",
-        currency: "USD",
-        service_fee: 100,
-        fee: 175,
-        additional_fees: [],
-      },
-      {
-        id: "ukvi_sl_b1",
-        currency: "USD",
-        service_fee: 100,
-        fee: 175,
-        additional_fees: [],
-      },
-      {
-        id: "ukvi_slrw_b1",
-        currency: "USD",
-        service_fee: 100,
-        fee: 235,
-        additional_fees: [],
-      },
-      {
-        id: "ukvi_slrw_b2",
-        currency: "USD",
-        service_fee: 100,
-        fee: 235,
-        additional_fees: [],
-      },
-      {
-        id: "ukvi_slrw_c1",
-        currency: "USD",
-        service_fee: 100,
-        fee: 235,
-        additional_fees: [],
-      },
-      {
-        id: "ukvi_slrw_c2",
-        currency: "USD",
-        service_fee: 100,
-        fee: 235,
-        additional_fees: [],
-      },
-    ],
-    course_types: ["classroom", "online"],
-    courses: courses,
-    workshops: workshops,
-    mock_tests: [
-      {
-        id: "ielts_academic",
-        currency: "AED",
-        service_fee: 1500,
-      },
-    ],
-    children: [
-      { id: "ukvi_sl_a1", name: "UKVI Speaking and listening at level A1" },
-      { id: "ukvi_sl_b1", name: "UKVI Speaking and listening at level B1" },
-      {
-        id: "ukvi_slrw_b1",
-        name: "UKVI Speaking, listening, reading, and writing at level B1",
-      },
-      {
-        id: "ukvi_slrw_b2",
-        name: "UKVI Speaking, listening, reading, and writing at level B2",
-      },
-      {
-        id: "ukvi_slrw_c1",
-        name: "UKVI Speaking, listening, reading, and writing at level C1",
-      },
-      {
-        id: "ukvi_slrw_c2",
-        name: "UKVI Speaking, listening, reading, and writing at level C2",
-      },
-    ],
+    image: "/images/psi.png",
+    content:
+      "Main Content Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
   },
   {
     id: "oet",
     name: "OET",
-    is_bookable: false,
-    course_types: ["classroom"],
-    courses: [courses[0], courses[1], courses[2]],
-    workshops: [workshops[1], workshops[2], workshops[3]],
+    image: "/images/oet.png",
+    content:
+      "Main Content Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
   },
 ];

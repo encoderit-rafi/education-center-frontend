@@ -175,129 +175,74 @@ const navigations: NavItem[] = [
     href: "/contact-us",
   },
 ];
-// const navItems: NavItem[] = [
-//   {
-//     label: "Courses",
-//     children: COURSES.filter((course) => course.id.endsWith("-prep")).map(
-//       (course) => ({
-//         label: course.title,
-//         href: `/courses/${course.id}`,
-//       }),
-//     ),
-//   },
-//   // {
-//   //   label: "Fees",
-//   //   children: [
-//   //     { label: "IELTS", href: "/fees/ielts" },
-//   //     { label: "PTE", href: "/fees/pte" },
-//   //     { label: "CELPIP", href: "/fees/celpip" },
-//   //     { label: "CAEL", href: "/fees/cael" },
-//   //     { label: "TOEFL", href: "/fees/toefl" },
-//   //     { label: "OET", href: "/fees/oet" },
-//   //     { label: "Exam Workshop", href: "/fees/exam-workshop" },
-//   //   ],
-//   // },
-//   // {
-//   //   label: "Our Venues",
-//   //   children: [
-//   //     {
-//   //       label: "360° Virtual Tour",
-//   //       href: "/our-venues/360-degree-virtual-tour",
-//   //     },
-//   //     { label: "Book An Exam Venue", href: "/our-venues/book-an-exam-venue" },
-//   //   ],
-//   // },
-//   // {
-//   //   label: "Test Your English",
-//   //   href: "/test-your-english",
-//   //   badge: "FREE",
-//   // },
-//   // {
-//   //   label: "Paid Mock Test",
-//   //   href: "/paid-mock-test",
-//   // },
-//   // {
-//   //   label: "Test Dates",
-//   //   href: "/test-dates",
-//   // },
-//   // {
-//   //   label: "Book Exam",
-//   //   children: [
-//   //     { label: "Book Test", href: "/book-a-test" },
-//   //     {
-//   //       label: "Test Day Guidelines",
-//   //       href: "/book-a-test/test-day-guidelines",
-//   //     },
-//   //   ],
-//   // },
-//   // {
-//   //   label: "Free Consultation",
-//   //   href: "/free-consultation",
-//   // },
-//   // {
-//   //   label: "Assessment Solutions",
-//   //   href: "/assessment-solutions",
-//   // },
-//   // {
-//   //   label: "Exam Special Accommodation",
-//   //   href: "/special-accommodation",
-//   // },
-//   // {
-//   //   label: "Exam Delivery",
-//   //   children: [
-//   //     { label: "Exam Provider", href: "/exam-delivery/exam-provider" },
-//   //     { label: "Test Takers", href: "/exam-delivery/test-takers" },
-//   //     { label: "Vendor", href: "/exam-delivery/vendor" },
-//   //   ],
-//   // },
-//   // {
-//   //   label: "Exam Proctoring Services",
-//   //   children: [
-//   //     { label: "Institutions", href: "/exam-proctoring-services/institutions" },
-//   //     { label: "Test-Takers", href: "/exam-proctoring-services/test-takers" },
-//   //   ],
-//   // },
-//   // {
-//   //   label: "About Us",
-//   //   children: [
-//   //     { label: "Who We Are", href: "/about-us/who-we-are" },
-//   //     { label: "Mission & Vision", href: "/about-us/vision-and-mission" },
-//   //     { label: "Why Choose Us", href: "/about-us/why-choose-us" },
-//   //     { label: "Accreditation", href: "/about-us/accreditation" },
-//   //     { label: "How to Find Us", href: "/about-us/how-to-find-us" },
-//   //   ],
-//   // },
-//   // { label: "Contact Us", href: "/contact-us" },
-// ];
 
 export default function NavBar() {
-  // const primaryNav = navItems.filter((item) =>
-  //   [
-  //     "Courses",
-  //     "Exam Proctoring Services",
-  //     "Exam Delivery",
-  //     "Fees",
-  //     "Our Venues",
-  //     "About Us",
-  //     "Contact Us",
-  //   ].includes(item.label),
-  // );
-  // const secondaryNav = navItems.filter(
-  //   (item) =>
-  //     ![
-  //       "Courses",
-  //       "Exam Proctoring Services",
-  //       "Exam Delivery",
-  //       "Fees",
-  //       "Our Venues",
-  //       "About Us",
-  //       "Contact Us",
-  //     ].includes(item.label),
-  // );
-
   return (
     <header className="sticky top-0 z-50 overflow-visible shadow-lg">
-      {/* Row 1: Red Row with Logo, Primary Nav & Search */}
+      {/* Row 1 */}
+      <div className="hidden lg:flex bg-primary text-white nav-px nav-py items-center justify-center gap-2">
+        <NavigationMenu viewport={false}>
+          <NavigationMenuList className="gap-2">
+            {navigations
+              .filter((item) => item.type === "secondary")
+              .map((item) => (
+                <NavigationMenuItem key={item.label}>
+                  {item.children ? (
+                    <>
+                      {" "}
+                      <NavigationMenuTrigger className="bg-transparent px-2 py-1.5 text-sm border-none outline-none hover:bg-black/10! data-[state=open]:bg-black/10 hover:text-white! focus:text-white! active:text-white! data-[state=open]:text-white transition-all rounded-lg">
+                        <div className="flex items-center gap-1.5">
+                          {item.label}
+                          {item.badge && (
+                            <Badge className="bg-red-600 text-[9px] px-1.5 py-0 border-none text-white">
+                              {item.badge}
+                            </Badge>
+                          )}
+                        </div>
+                      </NavigationMenuTrigger>
+                      <NavigationMenuContent className="z-50 p-1 min-w-48 border-none! bg-primary! text-white!">
+                        <ul className="flex flex-col">
+                          {item.children.map((child) => (
+                            <li key={child.label}>
+                              <NavigationMenuLink asChild>
+                                <Link
+                                  href={child.href}
+                                  className="px-4 py-2.5 text-sm  hover:bg-black/10 rounded-lg transition-colors w-full "
+                                >
+                                  {child.label}
+                                </Link>
+                              </NavigationMenuLink>
+                            </li>
+                          ))}
+                        </ul>
+                      </NavigationMenuContent>
+                    </>
+                  ) : (
+                    <NavigationMenuLink asChild>
+                      <Link
+                        href={item.href || "#"}
+                        className="px-2 py-1.5 text-sm  text-white hover:bg-black/10 hover:text-white transition-all rounded-lg"
+                      >
+                        <div className="flex items-center gap-2">
+                          {item.label === "Test Your English" && (
+                            <span className="w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse" />
+                          )}
+                          {item.label}
+                          {item.badge && (
+                            <Badge className="bg-red-600 text-[9px] px-1.5 py-0 border-none text-white">
+                              {item.badge}
+                            </Badge>
+                          )}
+                        </div>
+                      </Link>
+                    </NavigationMenuLink>
+                  )}
+                </NavigationMenuItem>
+              ))}
+          </NavigationMenuList>
+        </NavigationMenu>
+      </div>
+      {/* Row 2 */}
       <div className="nav-px nav-py flex items-center justify-between  gap-2 bg-white">
         <Link href="/">
           <Image
@@ -417,70 +362,6 @@ export default function NavBar() {
             </PopoverContent>
           </Popover>
         </div>
-      </div>
-
-      {/* Row 2: Dark Row with Secondary Nav */}
-      <div className="hidden lg:flex bg-primary text-white nav-px nav-py items-center justify-center gap-2">
-        <NavigationMenu viewport={false}>
-          <NavigationMenuList className="gap-2">
-            {navigations
-              .filter((item) => item.type === "secondary")
-              .map((item) => (
-                <NavigationMenuItem key={item.label}>
-                  {item.children ? (
-                    <>
-                      {" "}
-                      <NavigationMenuTrigger className="bg-transparent px-2 py-1.5 text-sm border-none outline-none hover:bg-black/10! data-[state=open]:bg-black/10 hover:text-white! focus:text-white! active:text-white! data-[state=open]:text-white transition-all rounded-lg">
-                        <div className="flex items-center gap-1.5">
-                          {item.label}
-                          {item.badge && (
-                            <Badge className="bg-red-600 text-[9px] px-1.5 py-0 border-none text-white">
-                              {item.badge}
-                            </Badge>
-                          )}
-                        </div>
-                      </NavigationMenuTrigger>
-                      <NavigationMenuContent className="z-50 p-1 min-w-48 border-none! bg-primary! text-white!">
-                        <ul className="flex flex-col">
-                          {item.children.map((child) => (
-                            <li key={child.label}>
-                              <NavigationMenuLink asChild>
-                                <Link
-                                  href={child.href}
-                                  className="px-4 py-2.5 text-sm  hover:bg-black/10 rounded-lg transition-colors w-full "
-                                >
-                                  {child.label}
-                                </Link>
-                              </NavigationMenuLink>
-                            </li>
-                          ))}
-                        </ul>
-                      </NavigationMenuContent>
-                    </>
-                  ) : (
-                    <NavigationMenuLink asChild>
-                      <Link
-                        href={item.href || "#"}
-                        className="px-2 py-1.5 text-sm  text-white hover:bg-black/10 hover:text-white transition-all rounded-lg"
-                      >
-                        <div className="flex items-center gap-2">
-                          {item.label === "Test Your English" && (
-                            <span className="w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse" />
-                          )}
-                          {item.label}
-                          {item.badge && (
-                            <Badge className="bg-red-600 text-[9px] px-1.5 py-0 border-none text-white">
-                              {item.badge}
-                            </Badge>
-                          )}
-                        </div>
-                      </Link>
-                    </NavigationMenuLink>
-                  )}
-                </NavigationMenuItem>
-              ))}
-          </NavigationMenuList>
-        </NavigationMenu>
       </div>
     </header>
   );
