@@ -35,7 +35,7 @@ const navigations: NavItem[] = [
     // href: "/exams",
     children: exams.map((exam) => ({
       label: exam.name,
-      href: `/exam/${exam.id}`,
+      href: `/exams/${exam.id}`,
     })),
   },
   {
