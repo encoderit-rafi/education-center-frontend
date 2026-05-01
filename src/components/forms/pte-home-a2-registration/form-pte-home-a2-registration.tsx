@@ -34,7 +34,7 @@ import { CountryDropdown } from "@/components/ui/country-dropdown";
 import { DateTimePicker } from "@/components/ui/date-time-picker";
 import { SearchableDropdown } from "@/components/ui/searchable-dropdown";
 
-import { RefinedPteCoreSchema, type TPteCoreFormSchema } from "./-type";
+import { RefinedPteHomeA2Schema, type TPteHomeA2FormSchema } from "./-type";
 
 const courses = [
     { id: "group", label: "Group (In-person classroom-based course)", price: 1850 },
@@ -43,11 +43,11 @@ const courses = [
     { id: "online", label: "Private one-to-one (Online course)", price: 3850 },
 ];
 
-export default function FormPTECoreRegistration() {
+export default function FormPTEHomeA2Registration() {
     const [currentStep, setCurrentStep] = useState(1);
 
-    const form = useForm<TPteCoreFormSchema>({
-        resolver: zodResolver(RefinedPteCoreSchema),
+    const form = useForm<TPteHomeA2FormSchema>({
+        resolver: zodResolver(RefinedPteHomeA2Schema),
         mode: "onChange",
         defaultValues: {
             givenNames: "",
@@ -65,14 +65,17 @@ export default function FormPTECoreRegistration() {
             studyLevel: "",
             occupationSector: "",
             referralSource: "",
-            scoreAllocationAU: false,
-            scoreAllocationNZ: false,
+            takenBefore: "",
+            takenWithinTwoYears: "",
+            hasExistingAccount: "",
             dataSharingAgreed: false,
             bookingTermsAgreed: false,
             marketingConsent: "",
             testTiming: "",
+            idPolicyRead: false,
             idType: "",
             idCountryOfIssue: "",
+            documentNumberConfirmed: false,
             documentNumber: "",
             passportCopy: undefined,
             userPhoto: undefined,
@@ -87,8 +90,8 @@ export default function FormPTECoreRegistration() {
     const getFieldsForStep = (currentStep: number) => {
         switch (currentStep) {
             case 1: return ["givenNames", "noGivenNames", "surnames", "noSurname", "emailUsername", "dateOfBirth", "gender", "placeOfBirth", "countryOfBirth", "countryOfCitizenship", "countryOfResidence", "address", "city", "mobileNumber", "readyToBook"];
-            case 2: return ["homeLanguage", "planningCountry", "currentSituation", "reasonForTaking", "studyLevel", "occupationSector", "referralSource", "scoreAllocationAU", "scoreAllocationNZ", "dataSharingAgreed", "bookingTermsAgreed", "marketingConsent"];
-            case 3: return ["testTiming", "idType", "idCountryOfIssue", "documentNumber", "passportCopy", "infoCorrect"];
+            case 2: return ["homeLanguage", "planningCountry", "currentSituation", "reasonForTaking", "studyLevel", "occupationSector", "referralSource", "takenBefore", "takenWithinTwoYears", "hasExistingAccount", "dataSharingAgreed", "bookingTermsAgreed", "marketingConsent"];
+            case 3: return ["idPolicyRead", "idType", "idCountryOfIssue", "documentNumberConfirmed", "documentNumber", "testTiming", "passportCopy", "infoCorrect"];
             default: return [];
         }
     };
@@ -107,7 +110,7 @@ export default function FormPTECoreRegistration() {
         window.scrollTo({ top: 400, behavior: "smooth" });
     };
 
-    const EXAM_FEE = 1450;
+    const EXAM_FEE = 1150; 
     const SERVICE_FEE = 5;
     const VAT_RATE = 0.05;
 
@@ -115,27 +118,27 @@ export default function FormPTECoreRegistration() {
         const selected = courses.find(c => c.id === formData.selectedCourse);
         const cPrice = selected?.price || 0;
         const sVAT = SERVICE_FEE * VAT_RATE;
-        const cVAT = cPrice * VAT_RATE;
-        const totalAmount = EXAM_FEE + SERVICE_FEE + sVAT + cPrice + cVAT;
+        const wVAT = cPrice * VAT_RATE;
+        const totalAmount = EXAM_FEE + SERVICE_FEE + sVAT + cPrice + wVAT;
 
         return {
             total: totalAmount,
             serviceVAT: sVAT,
             coursePrice: cPrice,
-            courseVAT: cVAT
+            courseVAT: wVAT
         };
     }, [formData.selectedCourse]);
 
-    const onSubmit = (data: TPteCoreFormSchema) => {
-        console.log("PTE Core Form Data:", data);
+    const onSubmit: SubmitHandler<TPteHomeA2FormSchema> = (data) => {
+        console.log("PTE Home A2 Form Data:", data);
     };
 
     return (
         <div className="bg-[#fcfcfc] font-body text-slate-900 min-h-screen pb-20 selection:bg-red-50">
-            {/* Hero Section - Identical Branding */}
+            {/* Hero Section */}
             <section className="relative h-[450px] flex items-center justify-center overflow-hidden bg-[#111827]">
                 <div className="absolute inset-0 z-0">
-                    <img className="w-full h-full object-cover opacity-30 grayscale scale-105" alt="PTE Core" src="/images/about-us/infrastructure-center.png" />
+                    <img className="w-full h-full object-cover opacity-30 grayscale scale-105" alt="PTE Home A2" src="/images/about-us/infrastructure-center.png" />
                     <div className="absolute inset-0 bg-gradient-to-b from-[#111827]/80 via-transparent to-[#111827]"></div>
                 </div>
                 <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
@@ -144,10 +147,10 @@ export default function FormPTECoreRegistration() {
                         <span className="text-[#A11D1D] text-[10px] font-black uppercase tracking-[0.2em]">Official Registration Portal</span>
                     </div>
                     <h1 className="text-white text-5xl md:text-8xl font-black tracking-tighter mb-6 font-headline uppercase leading-[0.9]">
-                        PTE Core <span className="text-[#A11D1D]">Exam</span>
+                        PTE Home <span className="text-[#A11D1D]">A2</span>
                     </h1>
                     <p className="text-slate-300 text-lg md:text-xl font-medium max-w-2xl mx-auto leading-relaxed">
-                        Secure your Canadian immigration and professional journey with the world's most trusted computer-based English test.
+                        Secure your journey to UK visa extension with the trusted PTE Home A2 English test registration.
                     </p>
                 </div>
             </section>
@@ -155,7 +158,7 @@ export default function FormPTECoreRegistration() {
             {/* Main Form Section */}
             <section className="max-w-6xl mx-auto px-6 -mt-24 relative z-20">
                 <div className="bg-white rounded-[2.5rem] shadow-[0_40px_100px_-20px_rgba(0,0,0,0.1)] overflow-hidden border border-slate-100">
-                    {/* Stepper Logic */}
+                    {/* Stepper */}
                     <div className="bg-slate-50/50 border-b border-slate-100 px-8 py-6">
                         <div className="flex items-center justify-between max-w-3xl mx-auto">
                             {[
@@ -245,8 +248,8 @@ export default function FormPTECoreRegistration() {
                                                             <RadioGroup className="flex gap-8 pt-2" onValueChange={field.onChange} value={field.value ?? ""}>
                                                                 {["Male", "Female", "Other"].map(g => (
                                                                     <div key={g} className="flex items-center space-x-3 group cursor-pointer">
-                                                                        <RadioGroupItem value={g.toLowerCase()} id={`g-core-${g}`} className="w-5 h-5 border-red-200 text-[#A11D1D]" />
-                                                                        <Label htmlFor={`g-core-${g}`} className="font-bold text-slate-600 group-hover:text-[#A11D1D] transition-colors cursor-pointer">{g === "Other" ? "X/Other" : g}</Label>
+                                                                        <RadioGroupItem value={g.toLowerCase()} id={`g-home-${g}`} className="w-5 h-5 border-red-200 text-[#A11D1D]" />
+                                                                        <Label htmlFor={`g-home-${g}`} className="font-bold text-slate-600 group-hover:text-[#A11D1D] transition-colors cursor-pointer">{g === "Other" ? "X/Other" : g}</Label>
                                                                     </div>
                                                                 ))}
                                                             </RadioGroup>
@@ -337,19 +340,19 @@ export default function FormPTECoreRegistration() {
                                     </div>
                                 )}
 
-                                {/* Step 2: Booking Questions (Background & Consents) */}
+                                {/* Step 2: Booking & History */}
                                 {currentStep === 2 && (
                                     <div className="space-y-12 animate-in fade-in slide-in-from-right-8 duration-500">
                                         <div className="space-y-2">
                                             <h3 className="text-3xl font-black text-slate-900 tracking-tight uppercase italic">Booking <span className="text-[#A11D1D]">Questions</span></h3>
-                                            <p className="text-slate-500 text-sm font-medium">Help us understand your goals and background for better score reporting.</p>
+                                            <p className="text-slate-500 text-sm font-medium">Please provide your language background and previous test history.</p>
                                         </div>
 
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                                             <div className="space-y-10">
                                                 <FormField control={control} name="homeLanguage" render={({ field }) => (
                                                     <FormItem className="space-y-3">
-                                                        <FormLabel className="text-sm font-bold text-slate-700">*What is your first (home) language?</FormLabel>
+                                                        <FormLabel className="text-sm font-bold text-slate-700 italic">*What language do you speak mostly at home?</FormLabel>
                                                         <FormControl><SearchableDropdown options={[
                                                             {label: "Arabic", value: "arabic"},
                                                             {label: "Bengali", value: "bengali"},
@@ -364,7 +367,7 @@ export default function FormPTECoreRegistration() {
 
                                                 <FormField control={control} name="planningCountry" render={({ field }) => (
                                                     <FormItem className="space-y-3">
-                                                        <FormLabel className="text-sm font-bold text-slate-700">*Which country or region are you planning to study, work or settle in?</FormLabel>
+                                                        <FormLabel className="text-sm font-bold text-slate-700">*Which country or region are you planning to settle in?</FormLabel>
                                                         <FormControl><CountryDropdown placeholder="Select one..." value={field.value} onChange={(val) => field.onChange(val.name)} /></FormControl>
                                                         <FormMessage />
                                                     </FormItem>
@@ -374,11 +377,6 @@ export default function FormPTECoreRegistration() {
                                                     <FormItem className="space-y-3">
                                                         <FormLabel className="text-sm font-bold text-slate-700">*Which best describes your current situation?</FormLabel>
                                                         <FormControl><SearchableDropdown options={[
-                                                            {label: "Student - in High School", value: "student_hs"},
-                                                            {label: "Student - High School graduate", value: "student_hs_grad"},
-                                                            {label: "Student - English language", value: "student_english"},
-                                                            {label: "Student - in University / College", value: "student_uni"},
-                                                            {label: "Student - University / College graduate", value: "student_uni_grad"},
                                                             {label: "Working - full time", value: "work_full"},
                                                             {label: "Working - part time", value: "work_part"},
                                                             {label: "Not studying or working", value: "not_working"},
@@ -390,30 +388,12 @@ export default function FormPTECoreRegistration() {
 
                                                 <FormField control={control} name="reasonForTaking" render={({ field }) => (
                                                     <FormItem className="space-y-3">
-                                                        <FormLabel className="text-sm font-bold text-slate-700">*Why are you taking PTE Core?</FormLabel>
+                                                        <FormLabel className="text-sm font-bold text-slate-700">*Why are you taking PTE Home A2?</FormLabel>
                                                         <FormControl><SearchableDropdown options={[
-                                                            {label: "Economic immigration (Federal)", value: "fed_eco"},
-                                                            {label: "Economic immigration (Provincial)", value: "prov_eco"},
-                                                            {label: "Work Visa", value: "work_visa"},
-                                                            {label: "Study", value: "study"},
-                                                            {label: "Other - specify below", value: "other"}
-                                                        ]} placeholder="Select one..." value={field.value} onChange={(val) => field.onChange(val)} /></FormControl>
-                                                        <FormMessage />
-                                                    </FormItem>
-                                                )} />
-
-                                                <FormField control={control} name="studyLevel" render={({ field }) => (
-                                                    <FormItem className="space-y-3">
-                                                        <FormLabel className="text-sm font-bold text-slate-700">*If you are taking PTE Core for study, which level are you applying for?</FormLabel>
-                                                        <FormControl><SearchableDropdown options={[
-                                                            {label: "Pre-degree / Foundation course", value: "pre_degree"},
-                                                            {label: "Undergraduate degree", value: "undergrad"},
-                                                            {label: "(Post) Graduate / Masters degree", value: "postgrad"},
-                                                            {label: "Doctorate / PhD", value: "phd"},
-                                                            {label: "MBA (Master of Business Administration)", value: "mba"},
-                                                            {label: "English Language Course", value: "english_course"},
-                                                            {label: "Professional qualification", value: "professional"},
-                                                            {label: "Other - specify below", value: "other"}
+                                                            {label: "Settlement (ILR)", value: "settlement"},
+                                                            {label: "Family Visa", value: "family_visa"},
+                                                            {label: "Spouse Visa", value: "spouse_visa"},
+                                                            {label: "Other", value: "other"}
                                                         ]} placeholder="Select one..." value={field.value} onChange={(val) => field.onChange(val)} /></FormControl>
                                                         <FormMessage />
                                                     </FormItem>
@@ -423,25 +403,12 @@ export default function FormPTECoreRegistration() {
                                                     <FormItem className="space-y-3">
                                                         <FormLabel className="text-sm font-bold text-slate-700">*What is your occupation sector?</FormLabel>
                                                         <FormControl><SearchableDropdown options={[
-                                                            {label: "Agriculture, Fishing, Forestry, Mining", value: "agri"},
-                                                            {label: "Architecture", value: "arch"},
-                                                            {label: "Arts and Entertainment", value: "arts"},
+                                                            {label: "Agriculture", value: "agri"},
                                                             {label: "Banking and Finance", value: "banking"},
-                                                            {label: "Catering and Leisure", value: "catering"},
-                                                            {label: "Communications and Media", value: "comm"},
-                                                            {label: "Construction Industries", value: "construction"},
-                                                            {label: "Craft and Design", value: "craft"},
                                                             {label: "Education", value: "edu"},
                                                             {label: "Health and Social Services", value: "health"},
-                                                            {label: "Installation, Maintenance and Repair Services", value: "install"},
-                                                            {label: "Law and Legal Services", value: "law"},
-                                                            {label: "Manufacturing and Assembly Services", value: "mfg"},
-                                                            {label: "Personal Services", value: "personal"},
                                                             {label: "Retail Trade", value: "retail"},
-                                                            {label: "Technical and Scientific", value: "tech"},
-                                                            {label: "Telecommunications and Media", value: "telecom"},
-                                                            {label: "Transport", value: "transport"},
-                                                            {label: "Utilities (Gas, Water, Electricity etc)", value: "utilities"},
+                                                            {label: "Personal Services", value: "personal"},
                                                             {label: "Other", value: "other"}
                                                         ]} placeholder="Select one..." value={field.value} onChange={(val) => field.onChange(val)} /></FormControl>
                                                         <FormMessage />
@@ -450,36 +417,74 @@ export default function FormPTECoreRegistration() {
                                             </div>
 
                                             <div className="space-y-10">
-                                                <FormField control={control} name="referralSource" render={({ field }) => (
-                                                    <FormItem className="space-y-3">
-                                                        <FormLabel className="text-sm font-bold text-slate-700">*How did you hear about PTE Core?</FormLabel>
-                                                        <FormControl><SearchableDropdown options={[{label: "Internet Search", value: "search"}, {label: "Social Media", value: "social"}, {label: "Friend/Family", value: "referral"}, {label: "Agent", value: "agent"}]} placeholder="Select one..." value={field.value} onChange={(val) => field.onChange(val)} /></FormControl>
-                                                        <FormMessage />
-                                                    </FormItem>
-                                                )} />
-
-                                                <div className="p-8 rounded-[2rem] bg-slate-50 border border-slate-100 space-y-6">
+                                                <div className="p-8 rounded-[2rem] bg-slate-50 border border-slate-100 space-y-8">
                                                     <div className="flex items-center gap-2 text-[#A11D1D] mb-4">
                                                         <Info className="w-4 h-4" />
-                                                        <span className="text-[10px] font-black uppercase tracking-widest">Score Allocation</span>
+                                                        <span className="text-[10px] font-black uppercase tracking-widest italic">Previous Test History</span>
                                                     </div>
-                                                    <p className="text-xs text-slate-500 font-medium leading-relaxed italic">
-                                                        Pearson can send your scores to government bodies. Please select if you require this:
-                                                    </p>
-                                                    <div className="space-y-4">
-                                                        <FormField control={control} name="scoreAllocationAU" render={({ field }) => (
-                                                            <div className="flex items-center gap-3">
-                                                                <input type="checkbox" className="w-5 h-5 rounded border-slate-300 text-[#A11D1D] focus:ring-[#A11D1D] cursor-pointer" checked={field.value} onChange={field.onChange} id="au_score" />
-                                                                <label htmlFor="au_score" className="text-xs font-bold text-slate-700 cursor-pointer">Australian Department of Home Affairs</label>
-                                                            </div>
-                                                        )} />
-                                                        <FormField control={control} name="scoreAllocationNZ" render={({ field }) => (
-                                                            <div className="flex items-center gap-3">
-                                                                <input type="checkbox" className="w-5 h-5 rounded border-slate-300 text-[#A11D1D] focus:ring-[#A11D1D] cursor-pointer" checked={field.value} onChange={field.onChange} id="nz_score" />
-                                                                <label htmlFor="nz_score" className="text-xs font-bold text-slate-700 cursor-pointer">Immigration New Zealand</label>
-                                                            </div>
-                                                        )} />
-                                                    </div>
+
+                                                    <FormField control={control} name="takenBefore" render={({ field }) => (
+                                                        <FormItem className="space-y-4">
+                                                            <FormLabel className="text-sm font-black text-slate-900 uppercase tracking-tighter">*Have you taken the PTE Home A2 Test before?</FormLabel>
+                                                            <FormControl>
+                                                                <RadioGroup className="flex gap-8" onValueChange={field.onChange} value={field.value ?? ""}>
+                                                                    {["yes", "no"].map(v => (
+                                                                        <div key={v} className="flex items-center space-x-3 group cursor-pointer">
+                                                                            <RadioGroupItem value={v} id={`taken-${v}`} className="w-5 h-5 border-red-200 text-[#A11D1D]" />
+                                                                            <Label htmlFor={`taken-${v}`} className="font-bold text-slate-600 group-hover:text-[#A11D1D] transition-colors cursor-pointer capitalize">{v}</Label>
+                                                                        </div>
+                                                                    ))}
+                                                                </RadioGroup>
+                                                            </FormControl>
+                                                            <FormMessage />
+                                                        </FormItem>
+                                                    )} />
+
+                                                    {formData.takenBefore === "yes" && (
+                                                        <div className="space-y-8 pt-4 animate-in fade-in slide-in-from-top-4 duration-300">
+                                                            <FormField control={control} name="takenWithinTwoYears" render={({ field }) => (
+                                                                <FormItem className="space-y-4">
+                                                                    <FormLabel className="text-sm font-black text-slate-900 uppercase tracking-tighter">*Was it less than 2 years?</FormLabel>
+                                                                    <FormControl>
+                                                                        <RadioGroup className="flex flex-wrap gap-6" onValueChange={field.onChange} value={field.value ?? ""}>
+                                                                            {[
+                                                                                {label: "Yes", value: "yes"},
+                                                                                {label: "No", value: "no"},
+                                                                                {label: "I do not know", value: "dont_know"}
+                                                                            ].map(v => (
+                                                                                <div key={v.value} className="flex items-center space-x-3 group cursor-pointer">
+                                                                                    <RadioGroupItem value={v.value} id={`2yrs-${v.value}`} className="w-5 h-5 border-red-200 text-[#A11D1D]" />
+                                                                                    <Label htmlFor={`2yrs-${v.value}`} className="font-bold text-slate-600 group-hover:text-[#A11D1D] transition-colors cursor-pointer">{v.label}</Label>
+                                                                                </div>
+                                                                            ))}
+                                                                        </RadioGroup>
+                                                                    </FormControl>
+                                                                    <FormMessage />
+                                                                </FormItem>
+                                                            )} />
+
+                                                            <FormField control={control} name="hasExistingAccount" render={({ field }) => (
+                                                                <FormItem className="space-y-4">
+                                                                    <FormLabel className="text-sm font-black text-slate-900 uppercase tracking-tighter">*Do you have an existing PTE account?</FormLabel>
+                                                                    <FormControl>
+                                                                        <RadioGroup className="flex flex-wrap gap-6" onValueChange={field.onChange} value={field.value ?? ""}>
+                                                                            {[
+                                                                                {label: "Yes", value: "yes"},
+                                                                                {label: "No", value: "no"},
+                                                                                {label: "I forgot details", value: "forgot"}
+                                                                            ].map(v => (
+                                                                                <div key={v.value} className="flex items-center space-x-3 group cursor-pointer">
+                                                                                    <RadioGroupItem value={v.value} id={`acc-${v.value}`} className="w-5 h-5 border-red-200 text-[#A11D1D]" />
+                                                                                    <Label htmlFor={`acc-${v.value}`} className="font-bold text-slate-600 group-hover:text-[#A11D1D] transition-colors cursor-pointer">{v.label}</Label>
+                                                                                </div>
+                                                                            ))}
+                                                                        </RadioGroup>
+                                                                    </FormControl>
+                                                                    <FormMessage />
+                                                                </FormItem>
+                                                            )} />
+                                                        </div>
+                                                    )}
                                                 </div>
 
                                                 <div className="space-y-6 pt-4">
@@ -497,23 +502,22 @@ export default function FormPTECoreRegistration() {
                                                             <FormControl><input type="checkbox" className="mt-1 w-5 h-5 rounded border-slate-300 text-[#A11D1D] focus:ring-[#A11D1D]" checked={field.value} onChange={field.onChange} /></FormControl>
                                                             <div className="space-y-1 leading-none">
                                                                 <FormLabel className="text-xs font-bold text-slate-700">Accept terms & conditions</FormLabel>
-                                                                <p className="text-[10px] text-slate-400">I have read and agree to the PTE Core booking terms.</p>
+                                                                <p className="text-[10px] text-slate-400">I have read and agree to the PTE Home booking terms.</p>
                                                             </div>
                                                         </FormItem>
                                                     )} />
-
                                                     <FormField control={control} name="marketingConsent" render={({ field }) => (
                                                         <FormItem className="space-y-6 pt-4">
                                                             <FormLabel className="text-sm font-bold text-slate-700">* Would you like to receive updates and special offers?:</FormLabel>
                                                             <FormControl>
                                                                 <RadioGroup className="flex gap-8 pt-2" onValueChange={field.onChange} value={field.value ?? ""}>
                                                                     <div className="flex items-center space-x-3 group cursor-pointer">
-                                                                        <RadioGroupItem value="yes" id="m_yes_core" className="w-5 h-5 border-2 border-slate-300 text-[#A11D1D] focus:border-[#A11D1D]" />
-                                                                        <Label htmlFor="m_yes_core" className="text-sm font-bold text-slate-600 group-hover:text-[#A11D1D] transition-colors cursor-pointer">Yes</Label>
+                                                                        <RadioGroupItem value="yes" id="m_yes_home" className="w-5 h-5 border-2 border-slate-300 text-[#A11D1D] focus:border-[#A11D1D]" />
+                                                                        <Label htmlFor="m_yes_home" className="text-sm font-bold text-slate-600 group-hover:text-[#A11D1D] transition-colors cursor-pointer">Yes</Label>
                                                                     </div>
                                                                     <div className="flex items-center space-x-3 group cursor-pointer">
-                                                                        <RadioGroupItem value="no" id="m_no_core" className="w-5 h-5 border-2 border-slate-300 text-[#A11D1D] focus:border-[#A11D1D]" />
-                                                                        <Label htmlFor="m_no_core" className="text-sm font-bold text-slate-600 group-hover:text-[#A11D1D] transition-colors cursor-pointer">No</Label>
+                                                                        <RadioGroupItem value="no" id="m_no_home" className="w-5 h-5 border-2 border-slate-300 text-[#A11D1D] focus:border-[#A11D1D]" />
+                                                                        <Label htmlFor="m_no_home" className="text-sm font-bold text-slate-600 group-hover:text-[#A11D1D] transition-colors cursor-pointer">No</Label>
                                                                     </div>
                                                                 </RadioGroup>
                                                             </FormControl>
@@ -526,7 +530,7 @@ export default function FormPTECoreRegistration() {
                                     </div>
                                 )}
 
-                                {/* Step 3: Confirmation & Specialized ID */}
+                                {/* Step 3: Identity & Review */}
                                 {currentStep === 3 && (
                                     <div className="space-y-16 animate-in fade-in slide-in-from-right-8 duration-500">
                                         <div className="space-y-2">
@@ -535,7 +539,6 @@ export default function FormPTECoreRegistration() {
                                         </div>
 
                                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
-                                            {/* ID Details Section - PTE CORE SPECIFIC */}
                                             <div className="lg:col-span-2 space-y-12">
                                                 <div className="bg-white rounded-3xl border border-slate-200 p-8 md:p-12 space-y-10 shadow-sm">
                                                     <div className="flex items-center gap-3 text-[#A11D1D]">
@@ -543,42 +546,61 @@ export default function FormPTECoreRegistration() {
                                                         <h4 className="text-xl font-black uppercase tracking-tight">Identification Details</h4>
                                                     </div>
 
-                                                    <div className="space-y-8">
-                                                        <FormField control={control} name="idType" render={({ field }) => (
-                                                            <FormItem className="space-y-3">
-                                                                <FormLabel className="text-sm font-bold text-slate-700">*ID Type</FormLabel>
-                                                                <FormControl><SearchableDropdown options={[
-                                                                    {label: "Valid Passport", value: "passport"},
-                                                                    {label: "Canadian Permanent Resident Card", value: "can_pr"},
-                                                                    {label: "Other ID listed in the PTE Core ID policy", value: "other_policy"}
-                                                                ]} placeholder="Select your identification document" value={field.value} onChange={(val) => field.onChange(val)} /></FormControl>
+                                                    <div className="space-y-10">
+                                                        {/* A2 Policy Checkbox */}
+                                                        <FormField control={control} name="idPolicyRead" render={({ field }) => (
+                                                            <FormItem className="space-y-4 p-6 rounded-2xl bg-slate-50 border border-slate-100">
+                                                                <FormLabel className="text-sm font-black text-slate-900 uppercase tracking-tighter italic">*Your identification document</FormLabel>
+                                                                <p className="text-xs text-slate-500 leading-relaxed italic">You must bring a valid ID on test day. If you don't have a passport, please read our <span className="text-[#A11D1D] underline cursor-pointer">ID Policy</span> to see if we can accept your ID.</p>
+                                                                <div className="flex items-start gap-3 pt-2">
+                                                                    <FormControl><input type="checkbox" className="mt-1 w-5 h-5 rounded border-slate-300 text-[#A11D1D] focus:ring-[#A11D1D] cursor-pointer" checked={field.value} onChange={field.onChange} id="id_policy" /></FormControl>
+                                                                    <Label htmlFor="id_policy" className="text-xs font-bold text-slate-600 cursor-pointer leading-relaxed italic">I have read the ID Policy and understand I can only take the test if I bring a valid ID on the day.</Label>
+                                                                </div>
                                                                 <FormMessage />
                                                             </FormItem>
                                                         )} />
 
-                                                        <FormField control={control} name="idCountryOfIssue" render={({ field }) => (
-                                                            <FormItem className="space-y-3">
-                                                                <FormLabel className="text-sm font-bold text-slate-700">*Country of issue</FormLabel>
-                                                                <FormControl><CountryDropdown placeholder="Select the country your ID is from" value={field.value} onChange={(val) => field.onChange(val.name)} /></FormControl>
-                                                                <FormMessage />
-                                                            </FormItem>
-                                                        )} />
+                                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                                                            <FormField control={control} name="idType" render={({ field }) => (
+                                                                <FormItem className="space-y-3">
+                                                                    <FormLabel className="text-sm font-bold text-slate-700">*ID Type</FormLabel>
+                                                                    <FormControl><SearchableDropdown options={[
+                                                                        {label: "Valid Passport", value: "passport"},
+                                                                        {label: "National ID Card", value: "nat_id"},
+                                                                        {label: "Other ID in Policy", value: "other_id"}
+                                                                    ]} placeholder="Select your identification document" value={field.value} onChange={(val) => field.onChange(val)} /></FormControl>
+                                                                    <FormMessage />
+                                                                </FormItem>
+                                                            )} />
 
-                                                        <FormField control={control} name="documentNumber" render={({ field }) => (
-                                                            <FormItem className="space-y-3">
-                                                                <FormLabel className="text-sm font-bold text-slate-700">*ID number</FormLabel>
-                                                                <FormControl><Input className="h-14 rounded-xl border-slate-200" placeholder="Enter the unique number on your ID" {...field} /></FormControl>
-                                                                <FormMessage />
-                                                            </FormItem>
-                                                        )} />
+                                                            <FormField control={control} name="idCountryOfIssue" render={({ field }) => (
+                                                                <FormItem className="space-y-3">
+                                                                    <FormLabel className="text-sm font-bold text-slate-700">*Country of issue</FormLabel>
+                                                                    <FormControl><CountryDropdown placeholder="Select the country your ID is from" value={field.value} onChange={(val) => field.onChange(val.name)} /></FormControl>
+                                                                    <FormMessage />
+                                                                </FormItem>
+                                                            )} />
+                                                        </div>
 
-                                                        <FormField control={control} name="testTiming" render={({ field }) => (
-                                                            <FormItem className="space-y-3">
-                                                                <FormLabel className="text-sm font-bold text-slate-700">Preferred Test Timing</FormLabel>
-                                                                <FormControl><SearchableDropdown options={[{label: "10:00 AM", value: "10am"}, {label: "12:45 PM", value: "12pm"}, {label: "03:30 PM", value: "3pm"}, {label: "06:15 PM", value: "6pm"}]} placeholder="Select time..." value={field.value} onChange={(val) => field.onChange(val)} /></FormControl>
-                                                                <FormMessage />
-                                                            </FormItem>
-                                                        )} />
+                                                        {/* Document Number Section */}
+                                                        <div className="space-y-6">
+                                                            <FormField control={control} name="documentNumberConfirmed" render={({ field }) => (
+                                                                <FormItem className="flex items-center gap-3">
+                                                                    <FormControl><input type="checkbox" className="w-5 h-5 rounded border-slate-300 text-[#A11D1D] focus:ring-[#A11D1D] cursor-pointer" checked={field.value} onChange={field.onChange} id="doc_confirm" /></FormControl>
+                                                                    <Label htmlFor="doc_confirm" className="text-xs font-bold text-slate-600 cursor-pointer italic">I confirm I have entered the document number from my ID below.</Label>
+                                                                    <FormMessage />
+                                                                </FormItem>
+                                                            )} />
+
+                                                            <FormField control={control} name="documentNumber" render={({ field }) => (
+                                                                <FormItem className="space-y-3">
+                                                                    <FormLabel className="text-sm font-black text-slate-900 uppercase tracking-tighter italic">*ID number e.g. passport number or eVisa share code</FormLabel>
+                                                                    <p className="text-[10px] text-slate-400 italic">Enter the unique number on your ID:</p>
+                                                                    <FormControl><Input className="h-14 rounded-xl border-slate-200" placeholder="Enter number" {...field} /></FormControl>
+                                                                    <FormMessage />
+                                                                </FormItem>
+                                                            )} />
+                                                        </div>
                                                     </div>
                                                 </div>
 
@@ -658,7 +680,7 @@ export default function FormPTECoreRegistration() {
                                                 <div className="p-8 rounded-[2.5rem] bg-slate-50 border border-slate-100 space-y-8 shadow-sm">
                                                     <div className="flex items-center gap-2 text-slate-400 mb-4">
                                                         <School className="w-4 h-4" />
-                                                        <span className="text-[10px] font-black uppercase tracking-widest">Prep Course</span>
+                                                        <span className="text-[10px] font-black uppercase tracking-widest italic">Preparation Course</span>
                                                     </div>
                                                     
                                                     <RadioGroup onValueChange={(val) => form.setValue("selectedCourse", val)} value={formData.selectedCourse ?? ""} className="space-y-3">
@@ -680,26 +702,26 @@ export default function FormPTECoreRegistration() {
                                                             !formData.selectedCourse ? "bg-white border-[#A11D1D]" : "bg-white/50 border-slate-200"
                                                         )}>
                                                             <RadioGroupItem value="" className="sr-only" />
-                                                            <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">No Prep Course</span>
+                                                            <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 italic">No Prep Course</span>
                                                         </label>
                                                     </RadioGroup>
 
                                                     <div className="pt-8 border-t border-slate-200 space-y-4">
-                                                        <div className="flex justify-between text-xs font-bold text-slate-400 uppercase tracking-widest">
+                                                        <div className="flex justify-between text-xs font-bold text-slate-400 uppercase tracking-widest italic">
                                                             <span>Exam Fee</span>
-                                                            <span className="text-slate-900">AED {EXAM_FEE.toLocaleString()}</span>
+                                                            <span className="text-slate-900 italic">AED {EXAM_FEE.toLocaleString()}</span>
                                                         </div>
-                                                        <div className="flex justify-between text-xs font-bold text-slate-400 uppercase tracking-widest">
+                                                        <div className="flex justify-between text-xs font-bold text-slate-400 uppercase tracking-widest italic">
                                                             <span>Service Fee</span>
-                                                            <span className="text-slate-900">AED {SERVICE_FEE.toLocaleString()}</span>
+                                                            <span className="text-slate-900 italic">AED {SERVICE_FEE.toLocaleString()}</span>
                                                         </div>
                                                         {coursePrice > 0 && (
-                                                            <div className="flex justify-between text-xs font-bold text-slate-400 uppercase tracking-widest">
+                                                            <div className="flex justify-between text-xs font-bold text-slate-400 uppercase tracking-widest italic">
                                                                 <span>Course</span>
-                                                                <span className="text-slate-900">AED {coursePrice.toLocaleString()}</span>
+                                                                <span className="text-slate-900 italic">AED {coursePrice.toLocaleString()}</span>
                                                             </div>
                                                         )}
-                                                        <div className="flex justify-between text-lg font-black text-[#A11D1D] pt-4 border-t-2 border-dashed border-slate-200">
+                                                        <div className="flex justify-between text-lg font-black text-[#A11D1D] pt-4 border-t-2 border-dashed border-slate-200 italic">
                                                             <span>TOTAL</span>
                                                             <span>AED {total.toLocaleString(undefined, { minimumFractionDigits: 2 })}</span>
                                                         </div>
@@ -708,7 +730,7 @@ export default function FormPTECoreRegistration() {
 
                                                 <div className="p-6 rounded-3xl bg-[#A11D1D]/5 border border-[#A11D1D]/10 flex gap-4">
                                                     <Lock className="w-5 h-5 text-[#A11D1D] shrink-0" />
-                                                    <p className="text-[10px] text-[#A11D1D] font-bold uppercase tracking-widest leading-relaxed">
+                                                    <p className="text-[10px] text-[#A11D1D] font-bold uppercase tracking-widest leading-relaxed italic">
                                                         Secure 256-bit SSL encrypted registration portal. Your data is protected by Pearson global security standards.
                                                     </p>
                                                 </div>

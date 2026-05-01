@@ -9,7 +9,7 @@ const stringOrObject = z.union([z.string(), z.any()]).transform(val => {
     return "";
 });
 
-export const PteAcademicSchema = z.object({
+export const PteHomeUkviSchema = z.object({
     // Step 1: Personal Information
     givenNames: z.string().optional(),
     noGivenNames: z.boolean(),
@@ -36,15 +36,11 @@ export const PteAcademicSchema = z.object({
     occupationSector: stringOrObject.refine(val => val.length > 0, "Please select your occupation sector"),
     referralSource: stringOrObject.refine(val => val.length > 0, "Please select how you heard about us"),
     
-    // NEW FIELDS
+    // Previous Test History (PTE Home UKVI specific labels)
     takenBefore: z.string().min(1, "Please select if you have taken the test before"),
     takenWithinTwoYears: z.string().optional(),
     hasExistingAccount: z.string().optional(),
     
-    // Score Allocation (Checkboxes)
-    scoreAllocationAU: z.boolean(),
-    scoreAllocationNZ: z.boolean(),
-
     // Consents
     dataSharingAgreed: z.boolean().refine(val => val === true, "You must agree to data sharing"),
     bookingTermsAgreed: z.boolean().refine(val => val === true, "You must agree to the terms and conditions"),
@@ -52,9 +48,11 @@ export const PteAcademicSchema = z.object({
 
     // Step 3: Final Details & Documents
     testTiming: z.string().optional(),
-    idType: z.string().optional(),
-    idCountryOfIssue: stringOrObject.optional(),
-    documentNumber: z.string().optional(),
+    idPolicyRead: z.boolean().refine(val => val === true, "You must read the ID policy"),
+    idType: z.string().min(1, "ID type is required"),
+    idCountryOfIssue: stringOrObject.refine(val => val.length > 0, "Country of issue is required"),
+    documentNumberConfirmed: z.boolean().refine(val => val === true, "Please confirm your document number"),
+    documentNumber: z.string().min(1, "ID number is required"),
     selectedCourse: z.string().optional(),
     
     // Document Uploads
@@ -65,7 +63,7 @@ export const PteAcademicSchema = z.object({
     infoCorrect: z.boolean(),
 });
 
-export const RefinedPteAcademicSchema = PteAcademicSchema.refine((data) => {
+export const RefinedPteHomeUkviSchema = PteHomeUkviSchema.refine((data) => {
     if (!data.noGivenNames && !data.givenNames) return false;
     return true;
 }, {
@@ -100,4 +98,4 @@ export const RefinedPteAcademicSchema = PteAcademicSchema.refine((data) => {
     path: ["hasExistingAccount"],
 });
 
-export type TPteAcademicFormSchema = z.infer<typeof RefinedPteAcademicSchema>;
+export type TPteHomeUkviFormSchema = z.infer<typeof RefinedPteHomeUkviSchema>;
