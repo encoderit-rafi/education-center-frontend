@@ -1,9 +1,12 @@
 import ContactForm from "@/app/contact-us/_components/form-contact";
 import FormIELTSAcademicRegistration from "@/components/forms/ielts-academic-exam-registration/ielts-academic-exam-registration";
 import FormIELTSRegistration from "@/components/forms/ielts-exam-registration/form-ielts-exam-registration";
+import FormIELTSGeneralRegistration from "@/components/forms/ielts-general-registration/ielts-general-registration";
 import FormPTEAcademicRegistration from "@/components/forms/pte-academic-registration/form-pte-academic-registration";
 import FormPTECoreRegistration from "@/components/forms/pte-core-registration/form-pte-core-registration";
-import FormPTEHomeRegistration from "@/components/forms/pte-home-registration/form-pte-home-registration";
+import FormPTEHomeA1Registration from "@/components/forms/pte-home-a1-registration/form-pte-home-a1-registration";
+import FormPTEHomeRegistration from "@/components/forms/pte-home-a1-registration/form-pte-home-a1-registration";
+import FormPTEHomeA2Registration from "@/components/forms/pte-home-a2-registration/form-pte-home-a2-registration";
 import FormTOEFLIBTRegistration from "@/components/forms/toefl-ibt-exam-registration/form-toefl-ibt-registration";
 import { MapPin, Clock } from "lucide-react";
 
@@ -67,12 +70,14 @@ export default function ContactUs() {
         </div>
       </div>
       <section className="mt-16">
-        <FormIELTSAcademicRegistration />
-        {/* <FormIELTSRegistration />
-        <FormTOEFLIBTRegistration />
-        <FormPTEAcademicRegistration />
-        <FormPTECoreRegistration />
-        <FormPTEHomeRegistration /> */}
+        {/* <FormPTEAcademicRegistration /> */}
+        {/* <FormIELTSAcademicRegistration /> */}
+        {/* <FormIELTSRegistration /> */}
+        {/* <FormTOEFLIBTRegistration /> */}
+        {/* <FormIELTSGeneralRegistration /> */}
+        {/* <FormPTECoreRegistration /> */}
+        {/* <FormPTEHomeA1Registration /> */}
+        <FormPTEHomeA2Registration />
       </section>
     </section>
   );

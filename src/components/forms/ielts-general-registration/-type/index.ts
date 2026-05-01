@@ -1,11 +1,11 @@
 import { z } from "zod";
 
-export const IeltsAcademicSchema = z.object({
+export const IeltsGeneralSchema = z.object({
     // Step 1: Personal Details
     bookingFor: z.enum(["myself", "child"], {
         message: "Please select who you are booking for",
     }).or(z.literal("")),
-    givenNames: z.string().min(1, "Given names are required"),
+    givenNames: z.string().min(1, "First / given names are required"),
     surnames: z.string().optional(),
     noSurname: z.boolean(),
     dateOfBirth: z.any().refine((val) => !!val, "Date of birth is required"),
@@ -28,27 +28,29 @@ export const IeltsAcademicSchema = z.object({
 
     // Step 2: Identification Details
     idType: z.enum(["passport", "emirates_id"]).or(z.literal("")),
-    idNumber: z.string().optional(),
-    idExpiryDate: z.any().optional(),
-    issuingAuthority: z.string().optional(),
-    nationality: z.string().optional(),
+    idNumber: z.string().min(1, "ID number is required"),
+    idExpiryDate: z.any().refine((val) => !!val, "ID expiry date is required"),
+    issuingAuthority: z.string().min(1, "Issuing authority is required"),
+    nationality: z.string().min(1, "Nationality is required"),
 
-    // Step 3: Your Profile
-    firstLanguage: z.string().optional(),
-    yearsStudyingEnglish: z.string().optional(),
-    educationLevel: z.string().optional(),
-    occupationLevel: z.string().optional(),
-    occupationSector: z.string().optional(),
-    reasonForTakingTest: z.string().optional(),
-    destinationCountry: z.string().optional(),
+    // Step 3: Profile & Interests
+    firstLanguage: z.string().min(1, "First language is required"),
+    yearsStudyingEnglish: z.string().min(1, "Years studying English is required"),
+    educationLevel: z.string().min(1, "Education level is required"),
+    occupationLevel: z.string().min(1, "Occupation level is required"),
+    occupationSector: z.string().min(1, "Occupation sector is required"),
+    reasonForTakingTest: z.string().min(1, "Reason for taking test is required"),
+    destinationCountry: z.string().min(1, "Destination country is required"),
 
-    // Step 4: Review & Payment
+    // Step 4: Review (no specific fields, just display)
+    
+    // Step 5: Final
     confirmationRecipient: z.enum(["myself", "other", "company"]).or(z.literal("")),
     vatNumber: z.string().optional(),
-    termsAgreed: z.boolean().optional(),
+    termsAgreed: z.boolean().refine((val) => val === true, "You must agree to terms"),
 }).refine((data) => data.email === data.confirmEmail, {
     message: "Emails do not match",
     path: ["confirmEmail"],
 });
 
-export type TIeltsAcademicSchema = z.infer<typeof IeltsAcademicSchema>;
+export type TIeltsGeneralSchema = z.infer<typeof IeltsGeneralSchema>;
