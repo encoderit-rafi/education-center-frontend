@@ -205,9 +205,7 @@ export default function ExamWorkshopPage() {
         </div>
       </section>
 
-      <section className="py-16 px-4 md:py-32 md:px-8 bg-white">
-        <FreeConsultation />
-      </section>
+      <FreeConsultation />
     </main>
   );
 }

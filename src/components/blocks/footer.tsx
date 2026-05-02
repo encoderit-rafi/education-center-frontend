@@ -11,7 +11,7 @@ function ContactItem({
   value,
   copyText,
 }: {
-  icon: string;
+  icon: React.ReactNode;
   value: React.ReactNode;
   copyText: string;
 }) {
@@ -32,12 +32,18 @@ function ContactItem({
   return (
     <div
       onClick={handleCopy}
-      className="flex items-start gap-3 text-red-800 hover:text-red-900 transition-colors cursor-pointer group/item"
+      className="flex items-start gap-4 text-gray-600 transition-colors cursor-pointer group/item"
     >
-      <span className="material-symbols-outlined text-red-700 font-bold shrink-0 mt-0.5 group-hover/item:scale-110 transition-transform">
-        {copied ? "check" : icon}
+      <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-red-50 text-red-700 group-hover/item:bg-red-100 transition-colors">
+        {copied ? (
+          <span className="material-symbols-outlined text-sm font-bold">check</span>
+        ) : (
+          icon
+        )}
       </span>
-      <span className="text-sm font-bold leading-snug flex-1">{value}</span>
+      <div className="pt-1.5 text-sm font-medium leading-relaxed flex-1">
+        {value}
+      </div>
     </div>
   );
 }
@@ -77,51 +83,52 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 pt-20 pb-10">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
           {/* Column 1: Info Card */}
-          <Card className="relative group overflow-visible bg-white border-none">
-            <CardContent className="p-8 md:p-10 relative z-10">
+          <Card className="w-full rounded-2xl bg-white p-2 border-none shadow-2xl relative group overflow-visible">
+            <CardContent className="p-8 relative z-10">
               <Link
                 href="/"
-                className="inline-block mb-6 transition-transform hover:scale-105 duration-300"
+                className="inline-block mb-8 transition-transform hover:scale-105 duration-300"
               >
                 <Image
                   alt="TEPTH Logo"
-                  height={100}
-                  width={180}
+                  height={80}
+                  width={200}
                   src="/images/tepth-logo.png"
-                  className="h-auto w-40"
+                  className="h-20 w-auto object-contain"
                 />
               </Link>
 
-              <div className="bg-white p-4 rounded-2xl space-y-4 border border-slate-100">
+              <div className="space-y-5">
                 <ContactItem
-                  icon="location_on"
-                  copyText="Tabarak Tower, Suite 701, 7th Floor, Corniche Rd - AL Mamzar - Sharjah"
-                  value={
-                    <>
-                      Tabarak Tower
-                      <br />
-                      Suite 701, 7th Floor
-                      <br />
-                      Corniche Rd - AL Mamzar - Sharjah
-                    </>
+                  icon={
+                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                    </svg>
                   }
+                  copyText="Tabarak Tower, Suite 701, 7th Floor, Corniche Rd - AL Mamzar - Sharjah"
+                  value={<span className="leading-relaxed">Tabarak Tower, Suite 701, 7th Floor, Corniche Rd - AL Mamzar - Sharjah</span>}
                 />
-
-                <div className="h-px bg-red-200/50" />
-
                 <ContactItem
-                  icon="mail"
+                  icon={
+                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                    </svg>
+                  }
                   copyText="info@tepth.net"
-                  value="info@tepth.net"
+                  value={<span>info@tepth.net</span>}
                 />
-
-                <div className="h-px bg-red-200/50" />
-
                 <ContactItem
-                  icon="call"
+                  icon={
+                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+                    </svg>
+                  }
                   copyText="+97143333616"
-                  value="+97143333616"
+                  value={<span>+97143333616</span>}
                 />
+
+
               </div>
             </CardContent>
             {/* Subtle shadow glow */}

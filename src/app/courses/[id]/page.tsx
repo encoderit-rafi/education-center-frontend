@@ -105,9 +105,7 @@ export default function CourseDetails() {
           </div>
         </div>
 
-        <div className="py-12 bg-white">
-          <FreeConsultation />
-        </div>
+        <FreeConsultation />
       </main>
     );
   }
@@ -157,11 +155,7 @@ export default function CourseDetails() {
         </div>
       </section>
 
-      <div className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <FreeConsultation />
-        </div>
-      </div>
+      <FreeConsultation />
     </main>
   );
 }
