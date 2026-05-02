@@ -1,90 +1,117 @@
-import { FilePenLine, GraduationCap, Brain, LibraryBig, TrendingUp, Globe } from "lucide-react";
+import Link from "next/link";
+import {
+  ClipboardList,
+  CheckCircle2,
+  MessageSquare,
+  Lock,
+  Globe,
+  Users,
+  BarChart3,
+  Building2,
+  MapPin,
+} from "lucide-react";
+import { cn } from "@/lib/utils";
+
+const SERVICES = [
+  {
+    title: "Paid Mock Tests",
+    description:
+      "Sit a full scored mock exam in our centre or receive it online within 72 hours.",
+    href: "/mock-tests",
+    icon: ClipboardList,
+  },
+  {
+    title: "Test Your English",
+    description:
+      "Take a free multiple-choice assessment and receive your level result by email instantly.",
+    href: "/test-your-english",
+    icon: CheckCircle2,
+  },
+  {
+    title: "Free Consultation",
+    description:
+      "15 minutes with one of our teachers — ask about exams, courses, or preparation strategies.",
+    href: "/free-consultation",
+    icon: MessageSquare,
+  },
+  {
+    title: "Exam Proctoring",
+    description:
+      "Professional proctoring services for institutions and remote test takers.",
+    href: "/proctoring",
+    icon: Lock,
+  },
+  {
+    title: "Exam Delivery",
+    description:
+      "End-to-end exam delivery solutions for providers, vendors, and test-takers.",
+    href: "/exam-delivery",
+    icon: Globe,
+  },
+  {
+    title: "Special Accommodation",
+    description:
+      "Tailored exam conditions for candidates with disabilities or special requirements.",
+    href: "/special-accommodation",
+    icon: Users,
+  },
+  {
+    title: "Assessment Solutions",
+    description:
+      "Customised language assessment services for organisations and institutions.",
+    href: "/assessment-solutions",
+    icon: BarChart3,
+  },
+  {
+    title: "Our Venues",
+    description:
+      "Noise-free, professional exam environment. Take a 360° virtual tour before you visit.",
+    href: "/our-venues",
+    icon: Building2,
+  },
+  {
+    title: "Contact Us",
+    description:
+      "Reach our team via WhatsApp, Telegram, or our contact form. We reply within 24 hours.",
+    href: "/contact",
+    icon: MapPin,
+  },
+];
 
 export default function CoreServices() {
   return (
-    <section className="bg-surface-container-low py-32 px-8">
+    <section className="bg-white py-24 lg:py-32 px-4">
       <div className="max-w-7xl mx-auto">
         <div className="mb-16">
-          <h2 className="text-sm font-bold text-[#A11D1D] tracking-widest uppercase mb-4">
-            Our Core Services
-          </h2>
-          <h3 className="text-4xl font-headline font-extrabold text-slate-900 tracking-tight">
-            Personalized Academic Solutions
+          <p className="text-primary text-[11px] font-bold uppercase tracking-[0.3em] lg:text-xs mb-4">
+            Our Services
+          </p>
+          <h3 className="text-4xl md:text-5xl font-headline font-black text-slate-900 tracking-tight uppercase">
+            More Than Just an{" "}
+            <span className="text-primary italic">Exam Centre</span>
           </h3>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="md:col-span-2 bg-surface rounded-3xl p-10 flex flex-col justify-between shadow-sm relative overflow-hidden group">
-            <div className="absolute top-0 right-0 p-12 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity">
-              <GraduationCap size={120} className="text-[#A11D1D]" strokeWidth={1.5} />
-            </div>
-            <div className="space-y-6 relative z-10">
-              <div className="w-14 h-14 rounded-2xl bg-red-50 flex items-center justify-center text-primary">
-                <FilePenLine />
+
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+          {SERVICES.map((service, i) => (
+            <Link
+              key={i}
+              href={service.href}
+              className="group flex items-start gap-4 rounded-2xl border border-slate-100 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/20 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+            >
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-white group-hover:scale-110">
+                <service.icon className="h-6 w-6" />
+              </span>
+              <div className="min-w-0 flex-1">
+                <h3 className="text-base font-bold text-slate-900 group-hover:text-primary transition-colors">
+                  {service.title}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-slate-500">
+                  {service.description}
+                </p>
               </div>
-              <h4 className="text-3xl font-headline font-extrabold text-secondary">
-                Test Administration
-              </h4>
-              <p className="text-on-surface-variant text-lg leading-relaxed max-w-md">
-                Secure, streamlined, and globally recognized testing
-                environments for IELTS, TOEFL, and Cambridge English
-                assessments.
-              </p>
-            </div>
-          </div>
-
-          <div className="bg-secondary text-white rounded-3xl p-10 flex flex-col justify-between shadow-xl">
-            <div className="space-y-6">
-              <div className="w-14 h-14 rounded-2xl bg-red-800 flex items-center justify-center text-white">
-                <Brain className="w-8 h-8" />
-              </div>
-              <h4 className="text-2xl font-headline font-bold">
-                Expert Coaching
-              </h4>
-              <p className="text-gray-400 opacity-90 leading-relaxed">
-                One-on-one sessions with certified examiners to refine your
-                strategy and performance.
-              </p>
-            </div>
-          </div>
-
-          <div className="bg-surface rounded-3xl p-10 shadow-sm border border-outline/10 group hover:border-red-200 transition-colors">
-            <div className="w-12 h-12 rounded-xl bg-gray-50 mb-6 flex items-center justify-center text-secondary group-hover:bg-red-800 group-hover:text-white transition-colors">
-              <LibraryBig className="w-6 h-6" />
-            </div>
-            <h4 className="text-xl font-headline font-bold text-secondary mb-3">
-              Study Resources
-            </h4>
-            <p className="text-on-surface-variant text-sm leading-relaxed">
-              Access our curated library of past papers, practice tests, and
-              exclusive editorial guides.
-            </p>
-          </div>
-
-          <div className="bg-surface rounded-3xl p-10 shadow-sm border border-outline/10 group hover:border-red-200 transition-colors">
-            <div className="w-12 h-12 rounded-xl bg-gray-50 mb-6 flex items-center justify-center text-secondary group-hover:bg-red-800 group-hover:text-white transition-colors">
-              <TrendingUp className="w-6 h-6" />
-            </div>
-            <h4 className="text-xl font-headline font-bold text-secondary mb-3">
-              Score Analysis
-            </h4>
-            <p className="text-on-surface-variant text-sm leading-relaxed">
-              Detailed performance reports to identify your strengths and areas
-              needing tactical improvement.
-            </p>
-          </div>
-
-          <div className="bg-surface rounded-3xl p-10 shadow-sm border border-outline/10 group hover:border-red-200 transition-colors">
-            <div className="w-12 h-12 rounded-xl bg-gray-50 mb-6 flex items-center justify-center text-secondary group-hover:bg-red-800 group-hover:text-white transition-colors">
-              <Globe className="w-6 h-6" />
-            </div>
-            <h4 className="text-xl font-headline font-bold text-secondary mb-3">
-              Global Placement
-            </h4>
-            <p className="text-on-surface-variant text-sm leading-relaxed">
-              Guidance on university requirements and direct integration with
-              international application systems.
-            </p>
-          </div>
+            </Link>
+          ))}
         </div>
       </div>
     </section>

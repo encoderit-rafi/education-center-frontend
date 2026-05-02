@@ -15,7 +15,7 @@ interface ExamCardProps {
 
 export default function CourseCard({ exam, types }: ExamCardProps) {
   return (
-    <div className="group flex flex-col rounded-2xl border border-slate-100 bg-white p-8  transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:border-primary/20">
+    <div className="group flex flex-col rounded-2xl border border-slate-100 bg-white p-8  transition-all duration-300 hover:-translate-y-2 hover:border-primary/20">
       <div className="mb-6 flex items-start justify-between">
         <h3 className="text-xl font-black text-slate-900 group-hover:text-primary transition-colors uppercase tracking-tight">
           {exam.name}

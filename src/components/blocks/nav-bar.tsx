@@ -111,18 +111,6 @@ const navigations: NavItem[] = [
   },
   {
     type: "secondary",
-    label: "Workshop",
-    children: [
-      { label: "IELTS", href: "/workshop/ielts" },
-      { label: "PTE", href: "/workshop/pte" },
-      { label: "CELPIP", href: "/workshop/celpip" },
-      { label: "CAEL", href: "/workshop/cael" },
-      { label: "TOEFL", href: "/workshop/toefl" },
-      { label: "OET", href: "/workshop/oet" },
-    ],
-  },
-  {
-    type: "secondary",
     label: "Our Venues",
     children: [
       {
