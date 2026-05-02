@@ -13,6 +13,8 @@ import {
 } from "@/components/ui/carousel";
 import { cn } from "@/lib/utils";
 
+import Marquee from "react-fast-marquee";
+
 const GoogleLogo = () => (
   <svg viewBox="0 0 24 24" className="w-6 h-6">
     <path
@@ -176,22 +178,22 @@ export default function Testimonials() {
       </div>
 
       {/* Desktop Version: Two-Row Marquee */}
-      <div className="hidden lg:flex flex-col gap-12">
-        <div className="flex overflow-hidden group py-4">
-          <div className="flex gap-8 animate-marquee pause-group-hover">
-            {[...firstRow, ...firstRow, ...firstRow].map((t, i) => (
+      <div className="hidden lg:flex flex-col gap-8">
+        <Marquee gradient={false} speed={40} pauseOnHover={true} className="py-10">
+          <div className="flex gap-8 mr-8">
+            {firstRow.map((t, i) => (
               <TestimonialCard key={i} t={t} isMarquee />
             ))}
           </div>
-        </div>
+        </Marquee>
 
-        <div className="flex overflow-hidden group py-4">
-          <div className="flex gap-8 animate-marquee-reverse pause-group-hover">
-            {[...secondRow, ...secondRow, ...secondRow].map((t, i) => (
+        <Marquee gradient={false} speed={40} pauseOnHover={true} direction="right" className="py-10">
+          <div className="flex gap-8 mr-8">
+            {secondRow.map((t, i) => (
               <TestimonialCard key={i} t={t} isMarquee />
             ))}
           </div>
-        </div>
+        </Marquee>
       </div>
 
       {/* Mobile/Tablet Version: Carousel */}
