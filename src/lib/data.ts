@@ -384,13 +384,13 @@ export const exams_bookings = [
       id: "ielts",
       name: "IELTS",
     },
-    image: "/images/ielts.png",
+    image: "/images/brands/ielts.png",
     content: "Booking Content",
     exam_types: [
       {
         id: "academic",
         name: "Academic",
-        image: "/images/ielts.png",
+        image: "/images/brands/ielts.png",
         content: "Academic Content",
         booking_fees: [
           {
@@ -417,7 +417,7 @@ export const exams_bookings = [
       {
         id: "general",
         name: "General",
-        image: "/images/ielts.png",
+        image: "/images/brands/ielts.png",
         content: "General Content",
         booking_fees: [
           {
@@ -448,42 +448,42 @@ export const exams = [
   {
     id: "ielts",
     name: "IELTS",
-    image: "/images/ielts.png",
+    image: "/images/brands/ielts.png",
     content:
       "Main Content Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
   },
   {
     id: "toefl_ibt",
     name: "TOEFL iBT",
-    image: "/images/toefl_ibt.png",
+    image: "/images/brands/toefl.png",
     content:
       "Main Content Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
   },
   {
     id: "pte",
     name: "PTE",
-    image: "/images/pte.png",
+    image: "/images/exams/pte.png",
     content:
       "Main Content Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
   },
   {
     id: "celpip",
     name: "CELPIP",
-    image: "/images/celpip.png",
+    image: "/images/brands/celpip.png",
     content:
       "Main Content Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
   },
   {
     id: "cael",
     name: "CAEL",
-    image: "/images/cael.png",
+    image: "/images/brands/cael.png",
     content:
       "Main Content Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
   },
   {
     id: "selt",
     name: "Skills for English (SELT)",
-    image: "/images/selt.png",
+    image: "/images/brands/skills-for-english.png",
     content:
       "Main Content Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
   },
@@ -497,7 +497,7 @@ export const exams = [
   {
     id: "oet",
     name: "OET",
-    image: "/images/oet.png",
+    image: "/images/exams/oet.png",
     content:
       "Main Content Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
   },
