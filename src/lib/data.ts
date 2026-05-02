@@ -384,13 +384,13 @@ export const exams_bookings = [
       id: "ielts",
       name: "IELTS",
     },
-    image: "/images/ielts.png",
+    image: "/images/brands/ielts.png",
     content: "Booking Content",
     exam_types: [
       {
         id: "academic",
         name: "Academic",
-        image: "/images/ielts.png",
+        image: "/images/brands/ielts.png",
         content: "Academic Content",
         booking_fees: [
           {
@@ -417,7 +417,7 @@ export const exams_bookings = [
       {
         id: "general",
         name: "General",
-        image: "/images/ielts.png",
+        image: "/images/brands/ielts.png",
         content: "General Content",
         booking_fees: [
           {
@@ -448,57 +448,548 @@ export const exams = [
   {
     id: "ielts",
     name: "IELTS",
-    image: "/images/ielts.png",
+    provider: "British Council / IDP",
+    image: "/images/brands/ielts.png",
     content:
-      "Main Content Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
+      "The world's most popular English proficiency test — accepted for university admissions, migration, and UK visas. Choose the IELTS variant that matches your goal below.",
+    overview:
+      "IELTS (International English Language Testing System) is the world's most popular English language proficiency test for higher education and global migration. It is accepted by more than 11,000 organizations worldwide, including universities, employers, professional bodies, and governments.",
+    stats: [
+      { label: "Test Duration", value: "~2.5 hours" },
+      { label: "Score Scale", value: "0–9 Bands" },
+      { label: "Results In", value: "3–5 days" },
+      { label: "Validity", value: "2 years" },
+    ],
+    sections: [
+      {
+        name: "Listening",
+        duration: "30 min",
+        details:
+          "4 sections, 40 items. Tasks include multiple choice, matching, plan/map/diagram labeling, and more.",
+        icon: "listening",
+      },
+      {
+        name: "Reading",
+        duration: "60 min",
+        details:
+          "3 sections, 40 items. Tasks include identifying information, matching headings, and sentence completion.",
+        icon: "reading",
+      },
+      {
+        name: "Writing",
+        duration: "60 min",
+        details:
+          "2 tasks. Task 1: Describe visual information. Task 2: Write an essay in response to a point of view.",
+        icon: "writing",
+      },
+      {
+        name: "Speaking",
+        duration: "11–14 min",
+        details:
+          "3 parts. Face-to-face interview including short questions, speaking on a familiar topic, and a structured discussion.",
+        icon: "speaking",
+      },
+    ],
+    whoShouldTake: [
+      "University applicants worldwide",
+      "Migration applicants (Australia, Canada, New Zealand, UK)",
+      "Professional registration for healthcare workers",
+      "International job seekers",
+    ],
+    acceptedFor: [
+      "University admissions (Undergraduate & Postgraduate)",
+      "Skilled migration and permanent residency",
+      "UKVI visa requirements",
+      "Professional certification",
+    ],
+    faqs: [
+      {
+        question: "What is the difference between Academic and General Training?",
+        answer:
+          "Academic is for university study or professional registration. General Training is for migration, work experience, or secondary education.",
+      },
+      {
+        question: "How long does it take to get results?",
+        answer:
+          "Computer-delivered IELTS results are usually available in 3-5 days. Paper-based results take 13 days.",
+      },
+      {
+        question: "Is the speaking test on the same day?",
+        answer:
+          "Usually yes, but it can be scheduled up to 7 days before or after your other test components.",
+      },
+    ],
+  },
+  {
+    id: "ielts_academic",
+    name: "IELTS Academic",
+    provider: "British Council / IDP",
+    subtitle: "For higher education and professional registration",
+    image: "/images/brands/ielts.png",
+    content: "The world's most popular English test for higher education and professional registration.",
+    overview: "IELTS Academic measures whether your level of English language proficiency is suitable for an academic environment. It reflects aspects of academic language and evaluates whether you’re ready to begin training or studying.",
+    stats: [
+      { label: "Test Duration", value: "2 hours 45 mins" },
+      { label: "Score Scale", value: "0–9 Bands" },
+      { label: "Results In", value: "3–5 days" },
+      { label: "Validity", value: "2 years" },
+    ],
+    sections: [
+      {
+        name: "Listening",
+        duration: "30 min",
+        details: "4 recorded monologues and conversations.",
+        icon: "listening",
+      },
+      {
+        name: "Academic Reading",
+        duration: "60 min",
+        details: "3 long texts which range from the descriptive and factual to the discursive and analytical.",
+        icon: "reading",
+      },
+      {
+        name: "Academic Writing",
+        duration: "60 min",
+        details: "Task 1: describe a chart, graph, or diagram. Task 2: write an essay in response to a point of view.",
+        icon: "writing",
+      },
+      {
+        name: "Speaking",
+        duration: "11–14 min",
+        details: "A face-to-face interview with an examiner.",
+        icon: "speaking",
+      },
+    ],
+    whoShouldTake: [
+      "Prospective undergraduate students",
+      "Prospective postgraduate students",
+      "Medical professionals (Doctors, Nurses, etc.)",
+      "Professional registration applicants",
+    ],
+    acceptedFor: [
+      "University admissions worldwide",
+      "Medical board registration",
+      "Student visa applications",
+    ],
+    faqs: [
+      {
+        question: "Is the Academic test harder than General Training?",
+        answer: "The Reading and Writing sections are more complex as they are geared towards academic study. Listening and Speaking are the same.",
+      },
+    ],
+  },
+  {
+    id: "ielts_general",
+    name: "IELTS General Training",
+    provider: "British Council / IDP",
+    subtitle: "For migration, work experience, or secondary education",
+    image: "/images/brands/ielts.png",
+    content: "The world's most popular English test for migration, secondary education, and work experience.",
+    overview: "IELTS General Training measures English language proficiency in a practical, everyday context. The tasks and tests reflect both workplace and social situations.",
+    stats: [
+      { label: "Test Duration", value: "2 hours 45 mins" },
+      { label: "Score Scale", value: "0–9 Bands" },
+      { label: "Results In", value: "3–5 days" },
+      { label: "Validity", value: "2 years" },
+    ],
+    sections: [
+      {
+        name: "Listening",
+        duration: "30 min",
+        details: "4 recorded monologues and conversations.",
+        icon: "listening",
+      },
+      {
+        name: "General Reading",
+        duration: "60 min",
+        details: "Extracts from books, magazines, newspapers, notices, advertisements, company handbooks and guidelines.",
+        icon: "reading",
+      },
+      {
+        name: "General Writing",
+        duration: "60 min",
+        details: "Task 1: write a letter requesting information or explaining a situation. Task 2: write an essay in response to a point of view.",
+        icon: "writing",
+      },
+      {
+        name: "Speaking",
+        duration: "11–14 min",
+        details: "A face-to-face interview with an examiner.",
+        icon: "speaking",
+      },
+    ],
+    whoShouldTake: [
+      "Migrants to Australia, Canada, New Zealand, and the UK",
+      "Secondary school students",
+      "Job seekers in English-speaking countries",
+      "Vocational training applicants",
+    ],
+    acceptedFor: [
+      "Skilled migration visas",
+      "Permanent residency applications",
+      "Secondary education admissions",
+      "Work permits",
+    ],
+    faqs: [
+      {
+        question: "Can I use General Training for university study?",
+        answer: "Usually no. Most universities require IELTS Academic. Always check with the institution you are applying to.",
+      },
+    ],
   },
   {
     id: "toefl_ibt",
     name: "TOEFL iBT",
-    image: "/images/toefl_ibt.png",
+    provider: "Educational Testing Service (ETS)",
+    subtitle: "Test of English as a Foreign Language — Internet-Based Test",
+    image: "/images/partners/toefl.png",
     content:
-      "Main Content Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
+      "Internet-based English proficiency test used for academic admissions, immigration, and professional certification worldwide.",
+    overview:
+      "The TOEFL iBT is an Internet-based English proficiency test that measures reading, listening, speaking, and writing skills in an academic context. It takes approximately 2 hours to complete in one sitting and is used primarily for academic admissions, immigration, and professional certification. The TOEFL iBT is accepted by over 12,000 universities and institutions in 160+ countries.",
+    stats: [
+      { label: "Test Duration", value: "~2 hours" },
+      { label: "Score Scale", value: "0–120" },
+      { label: "Results In", value: "3 days" },
+      { label: "Validity", value: "2 years" },
+    ],
+    sections: [
+      {
+        name: "Reading",
+        duration: "~30 min",
+        details:
+          "50 items. Task types: Complete the Words, Read in Daily Life, Read an Academic Passage.",
+        icon: "reading",
+      },
+      {
+        name: "Listening",
+        duration: "~29 min",
+        details:
+          "47 items. Task types: Listen and Choose a Response, Listen to a Conversation, Listen to an Announcement, Listen to an Academic Talk.",
+        icon: "listening",
+      },
+      {
+        name: "Writing",
+        duration: "~23 min",
+        details:
+          "12 items. Task types: Build a Sentence, Write an Email, Write for an Academic Discussion.",
+        icon: "writing",
+      },
+      {
+        name: "Speaking",
+        duration: "~8 min",
+        details:
+          "11 items. Task types: Listen and Repeat, Take an Interview. Test time does not include directions.",
+        icon: "speaking",
+      },
+    ],
+    whoShouldTake: [
+      "University applicants in the USA, Canada, UK, and Australia",
+      "Scholarship and fellowship applicants",
+      "Students applying to graduate programmes",
+      "Immigration and professional certification requirements",
+    ],
+    acceptedFor: [
+      "US/Canadian/UK/Australian university admissions",
+      "Graduate programme applications",
+      "Immigration purposes",
+      "Professional certification",
+    ],
+    faqs: [
+      {
+        question: "What score do I need for a US university?",
+        answer:
+          "Most US universities require a TOEFL iBT score of 80–100+. Top universities may require 100–110.",
+      },
+      {
+        question: "Can I get a hard copy of my score report?",
+        answer:
+          "Yes. If requested before your test, it will be mailed 11–15 days after your test date. Express shipping (2–5 days) is available.",
+      },
+      {
+        question: "How is TOEFL different from IELTS?",
+        answer:
+          "TOEFL is fully Internet-based and is primarily used in North America. IELTS includes a face-to-face speaking component.",
+      },
+    ],
   },
   {
     id: "pte",
-    name: "PTE",
-    image: "/images/pte.png",
+    name: "PTE Academic",
+    provider: "Pearson PLC",
+    image: "/images/exams/pte.png",
     content:
-      "Main Content Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
+      "Fast, computer-based English test for study and migration — accepted by thousands of institutions and governments worldwide.",
+    overview:
+      "PTE Academic is a computer-based English language test that provides a measure of a candidate's language ability in an academic context. The test is accepted by universities, colleges, and governments around the world, including Australia, Canada, New Zealand, the UK, and the USA.",
+    stats: [
+      { label: "Test Duration", value: "~2 hours" },
+      { label: "Score Scale", value: "10–90" },
+      { label: "Results In", value: "48 hours" },
+      { label: "Validity", value: "2 years" },
+    ],
+    sections: [
+      {
+        name: "Speaking & Writing",
+        duration: "54–67 min",
+        details:
+          "Personal introduction, read aloud, repeat sentence, describe image, re-tell lecture, answer short question, summarize written text, essay.",
+        icon: "speaking",
+      },
+      {
+        name: "Reading",
+        duration: "29–30 min",
+        details:
+          "Reading & writing: Fill in the blanks, multiple-choice, re-order paragraphs, reading: Fill in the blanks.",
+        icon: "reading",
+      },
+      {
+        name: "Listening",
+        duration: "30–43 min",
+        details:
+          "Summarize spoken text, multiple-choice, fill in the blanks, highlight correct summary, select missing word, highlight incorrect words, write from dictation.",
+        icon: "listening",
+      },
+    ],
+    whoShouldTake: [
+      "Students applying to universities in Australia, New Zealand, and the UK",
+      "Skilled migration applicants for Australia and New Zealand",
+      "UK visa applicants (Academic and General)",
+    ],
+    acceptedFor: [
+      "University admissions worldwide",
+      "Visa applications (Australia, New Zealand, UK)",
+      "Professional registration",
+    ],
+    faqs: [
+      {
+        question: "When will I get my PTE results?",
+        answer: "Typically within 48 hours, often much faster.",
+      },
+      {
+        question: "Is PTE easier than IELTS?",
+        answer:
+          "Both tests are rigorous. PTE is fully computer-based, which some students prefer over human-led speaking components.",
+      },
+    ],
   },
   {
     id: "celpip",
     name: "CELPIP",
-    image: "/images/celpip.png",
+    provider: "Prometric",
+    image: "/images/brands/celpip.png",
     content:
-      "Main Content Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
+      "The Canadian English Language Proficiency Index Program — the leading English test for permanent residency and citizenship in Canada.",
+    overview:
+      "CELPIP is a general English language proficiency test. It is the only test designed specifically for Canadian English, and is accepted by Immigration, Refugees and Citizenship Canada (IRCC) for permanent resident status and citizenship.",
+    stats: [
+      { label: "Test Duration", value: "~3 hours" },
+      { label: "Score Scale", value: "M–12" },
+      { label: "Results In", value: "4–5 days" },
+      { label: "Validity", value: "2 years" },
+    ],
+    sections: [
+      {
+        name: "Listening",
+        duration: "47–55 min",
+        details:
+          "Listening to problem solving, daily life conversations, information, news items, discussions, and viewpoints.",
+        icon: "listening",
+      },
+      {
+        name: "Reading",
+        duration: "55–60 min",
+        details:
+          "Reading correspondence, applied information, for information, and for viewpoints.",
+        icon: "reading",
+      },
+      {
+        name: "Writing",
+        duration: "53–60 min",
+        details: "Task 1: Writing an email. Task 2: Responding to survey questions.",
+        icon: "writing",
+      },
+      {
+        name: "Speaking",
+        duration: "15–20 min",
+        details: "Giving advice, talking about personal experiences, describing scenes, and making predictions.",
+        icon: "speaking",
+      },
+    ],
+    whoShouldTake: [
+      "Canadian permanent residency applicants",
+      "Canadian citizenship applicants",
+      "Professional registration in Canada",
+    ],
+    acceptedFor: [
+      "IRCC Permanent Resident Status",
+      "Canadian Citizenship",
+      "Professional registration (e.g., real estate, nursing)",
+    ],
+    faqs: [
+      {
+        question: "What is the difference between CELPIP General and General LS?",
+        answer: "General is for residency (all 4 skills). General LS is for citizenship (only Listening and Speaking).",
+      },
+    ],
   },
   {
     id: "cael",
     name: "CAEL",
-    image: "/images/cael.png",
+    provider: "Prometric",
+    image: "/images/brands/cael.png",
     content:
-      "Main Content Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
+      "The Canadian Academic English Language Test — specifically designed for study and professional registration in Canada.",
+    overview:
+      "The CAEL Test measures the English language proficiency of students planning to study in Canadian post-secondary institutions. CAEL is one of the best tools for identifying students with the right English skills for academic success.",
+    stats: [
+      { label: "Test Duration", value: "~3.5 hours" },
+      { label: "Score Scale", value: "10–90" },
+      { label: "Results In", value: "8 business days" },
+      { label: "Validity", value: "2 years" },
+    ],
+    sections: [
+      {
+        name: "Listening",
+        duration: "50 min",
+        details: "Listening to various types of academic information.",
+        icon: "listening",
+      },
+      {
+        name: "Reading",
+        duration: "50 min",
+        details: "Reading academic articles and responding to questions.",
+        icon: "reading",
+      },
+      {
+        name: "Writing",
+        duration: "35 min",
+        details: "Writing academic essays based on provided information.",
+        icon: "writing",
+      },
+      {
+        name: "Speaking",
+        duration: "25 min",
+        details: "Academic speaking tasks and interview format.",
+        icon: "speaking",
+      },
+    ],
+    whoShouldTake: [
+      "Students applying to Canadian universities and colleges",
+      "Professional registration applicants in Canada",
+    ],
+    acceptedFor: [
+      "University admissions in Canada",
+      "Professional certification",
+    ],
+    faqs: [
+      {
+        question: "Is CAEL only for Canada?",
+        answer: "Yes, it is specifically designed for the Canadian academic context.",
+      },
+    ],
   },
   {
     id: "selt",
     name: "Skills for English (SELT)",
-    image: "/images/selt.png",
+    provider: "PSI Services",
+    image: "/images/brands/skills-for-english.png",
     content:
-      "Main Content Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
+      "Home Office-approved Secure English Language Tests (SELT) for UK visa applications.",
+    overview:
+      "Skills for English (UKVI) is a Secure English Language Test (SELT) that has been approved by the UK Home Office for use in UK visa applications. The test is available at various levels from A1 to C2.",
+    stats: [
+      { label: "Test Duration", value: "Varies by level" },
+      { label: "Score Scale", value: "Pass/Fail" },
+      { label: "Results In", value: "3–5 days" },
+      { label: "Validity", value: "2 years" },
+    ],
+    sections: [
+      {
+        name: "Speaking & Listening",
+        duration: "Varies",
+        details: "Core components for lower level visas (A1/A2).",
+        icon: "speaking",
+      },
+      {
+        name: "Reading & Writing",
+        duration: "Varies",
+        details: "Added for higher level academic or work visas (B1/B2/C1/C2).",
+        icon: "reading",
+      },
+    ],
+    whoShouldTake: [
+      "UK Visa applicants (Family, Spouse, Work, Study)",
+    ],
+    acceptedFor: [
+      "UK Visas and Immigration (UKVI)",
+    ],
+    faqs: [
+      {
+        question: "Which level do I need?",
+        answer: "The level required depends on the specific visa you are applying for. Please check the UK Home Office website.",
+      },
+    ],
   },
   {
     id: "psi",
     name: "PSI",
+    provider: "PSI Services",
     image: "/images/psi.png",
     content:
-      "Main Content Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
+      "Global leader in assessment and certification across healthcare, IT, and professional sectors.",
+    overview: "PSI offers comprehensive testing solutions for licensing, certification, and corporate talent assessment.",
+    stats: [
+      { label: "Format", value: "Computer-based" },
+      { label: "Availability", value: "Global" },
+    ],
+    sections: [],
+    whoShouldTake: ["Professional certification seekers", "Licensing applicants"],
+    acceptedFor: ["Industry certifications", "Professional licensing"],
+    faqs: [],
   },
   {
     id: "oet",
     name: "OET",
-    image: "/images/oet.png",
+    provider: "CBLA",
+    image: "/images/exams/oet.png",
     content:
-      "Main Content Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
+      "The Occupational English Test — the English language test specifically for healthcare professionals.",
+    overview: "OET is designed specifically for 12 healthcare professions. It assesses the English language communication skills of healthcare professionals who wish to register and practise in an English-speaking environment.",
+    stats: [
+      { label: "Test Duration", value: "~3 hours" },
+      { label: "Score Scale", value: "0–500" },
+      { label: "Results In", value: "16 business days" },
+      { label: "Validity", value: "2 years" },
+    ],
+    sections: [
+      {
+        name: "Listening",
+        duration: "45 min",
+        details: "Healthcare-related listening tasks.",
+        icon: "listening",
+      },
+      {
+        name: "Reading",
+        duration: "60 min",
+        details: "Health-related reading materials.",
+        icon: "reading",
+      },
+      {
+        name: "Writing",
+        duration: "45 min",
+        details: "Writing a referral letter based on case notes.",
+        icon: "writing",
+      },
+      {
+        name: "Speaking",
+        duration: "20 min",
+        details: "Profession-specific role-plays.",
+        icon: "speaking",
+      },
+    ],
+    whoShouldTake: ["Doctors", "Nurses", "Healthcare professionals"],
+    acceptedFor: ["Healthcare registration", "Migration for health professionals"],
+    faqs: [],
   },
 ];
