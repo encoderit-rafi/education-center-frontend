@@ -2,36 +2,82 @@ import React from "react";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  exams,
-  exams_types,
-} from "@/lib/data";
+import { exams, exams_types } from "@/lib/data";
 import { cn } from "@/lib/utils";
+import { ArrowRight, Calendar } from "lucide-react";
 
 const IconTile = ({ icon }: { icon: string }) => {
   switch (icon) {
     case "reading":
       return (
-        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+        <svg
+          width="18"
+          height="18"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth="1.8"
+          aria-hidden="true"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+          />
         </svg>
       );
     case "listening":
       return (
-        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+        <svg
+          width="18"
+          height="18"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth="1.8"
+          aria-hidden="true"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"
+          />
         </svg>
       );
     case "writing":
       return (
-        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+        <svg
+          width="18"
+          height="18"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth="1.8"
+          aria-hidden="true"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+          />
         </svg>
       );
     case "speaking":
       return (
-        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+        <svg
+          width="18"
+          height="18"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth="1.8"
+          aria-hidden="true"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"
+          />
         </svg>
       );
     default:
@@ -56,26 +102,25 @@ export default async function ExamDetailPage({
 
   if (hasTypes) {
     return (
-      <main className="pt-20">
+      <div>
         <section className="relative overflow-hidden bg-white">
-          <div className="pointer-events-none absolute -top-24 -right-24 h-80 w-80 rounded-full bg-red-50 blur-3xl opacity-60" aria-hidden="true"></div>
-          <div className="pointer-events-none absolute top-1/2 -left-32 h-64 w-64 rounded-full bg-red-50 blur-3xl opacity-40" aria-hidden="true"></div>
+          <div
+            className="pointer-events-none absolute -top-24 -right-24 h-80 w-80 rounded-full bg-red-50 blur-3xl opacity-60"
+            aria-hidden="true"
+          ></div>
+          <div
+            className="pointer-events-none absolute top-1/2 -left-32 h-64 w-64 rounded-full bg-red-50 blur-3xl opacity-40"
+            aria-hidden="true"
+          ></div>
           <div className="container relative mx-auto px-4 py-16 lg:px-8 lg:py-24 max-w-7xl">
-            <nav className="mb-8 flex items-center gap-2 text-xs text-gray-500" aria-label="Breadcrumb">
-              <Link className="transition-colors hover:text-primary" href="/">Home</Link>
-              <svg className="h-3 w-3 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7"></path></svg>
-              <Link className="transition-colors hover:text-primary" href="/exams">Exams</Link>
-              <svg className="h-3 w-3 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7"></path></svg>
-              <span className="font-medium text-gray-700">{exam.name}</span>
-            </nav>
-
             <div className="flex items-center gap-4 mb-6">
               <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary text-xl font-extrabold text-white shadow-lg">
                 {exam.name.charAt(0)}
               </span>
               <div>
-                <p className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400">{exam.provider}</p>
-                <h1 className="text-3xl font-bold text-gray-900 lg:text-4xl xl:text-5xl">{exam.name} Exams</h1>
+                <h1 className="text-3xl font-bold text-gray-900 lg:text-4xl xl:text-5xl">
+                  {exam.name} Exams
+                </h1>
               </div>
             </div>
 
@@ -84,11 +129,30 @@ export default async function ExamDetailPage({
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/book-exam" className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-8 py-3.5 text-sm font-bold text-white shadow-lg transition-all duration-300 hover:bg-red-800">
-                Book an Exam 
-                <svg className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+              <Link
+                href="/book-exam"
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-8 py-3.5 text-sm font-bold text-white shadow-lg transition-all duration-300 hover:bg-red-800"
+              >
+                Book an Exam
+                <svg
+                  className="h-4 w-4 ml-1"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  ></path>
+                </svg>
               </Link>
-              <Link href="/free-consultation" className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-gray-200 px-8 py-3.5 text-sm font-bold text-gray-700 transition-all duration-300 hover:border-primary hover:text-primary">
+              <Link
+                href="/free-consultation"
+                className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-gray-200 px-8 py-3.5 text-sm font-bold text-gray-700 transition-all duration-300 hover:border-primary hover:text-primary"
+              >
                 Free Consultation
               </Link>
             </div>
@@ -98,31 +162,55 @@ export default async function ExamDetailPage({
         <section className="bg-[#F9FAFB] py-20">
           <div className="container mx-auto px-4 lg:px-8 max-w-7xl">
             <div className="mb-12 text-center">
-              <span className="inline-block px-3 py-1 text-xs font-bold uppercase tracking-widest text-primary bg-red-50 rounded-full mb-4">All {exam.name} Tests</span>
-              <h2 className="text-3xl font-bold text-gray-900 md:text-4xl">Choose Your {exam.name} Test</h2>
-              <p className="mt-4 text-gray-600 max-w-2xl mx-auto">Each {exam.name} variant is designed for a specific purpose. Select the one that matches your visa, academic, or professional goal.</p>
+              <span className="inline-block px-3 py-1 text-xs font-bold uppercase tracking-widest text-primary bg-red-50 rounded-full mb-4">
+                All {exam.name} Tests
+              </span>
+              <h2 className="text-3xl font-bold text-gray-900 md:text-4xl">
+                Choose Your {exam.name} Test
+              </h2>
+              <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
+                Each {exam.name} variant is designed for a specific purpose.
+                Select the one that matches your visa, academic, or professional
+                goal.
+              </p>
             </div>
 
             <div className="mx-auto grid max-w-5xl gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {examTypesData.types.map((type) => (
-                <Link key={type.id} className="group relative overflow-hidden rounded-2xl border border-gray-100 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-red-100 hover:shadow-xl" href={`/book-exam/${type.id}`}>
-                  <span aria-hidden="true" className="absolute left-0 top-0 h-full w-[3px] origin-top scale-y-0 bg-primary transition-transform duration-300 group-hover:scale-y-100"></span>
+              {examTypesData.types.map((type, index) => (
+                <Link
+                  key={type.id}
+                  className="group relative overflow-hidden rounded-2xl border border-gray-100 bg-white p-6  transition-all duration-300 hover:-translate-y-1 hover:border-red-100 hover:shadow-xl"
+                  href={`/book-exam/${type.id}`}
+                >
+                  {/* <span
+                    aria-hidden="true"
+                    className="absolute left-0 top-0 h-full w-[3px] origin-top scale-y-0 bg-primary transition-transform duration-300 group-hover:scale-y-100"
+                  ></span> */}
                   <div className="mb-4 flex items-center gap-3">
-                    <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-sm font-bold text-white">{exam.name.charAt(0)}</span>
+                    <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-sm font-bold text-white">
+                      {/* {exam.name.charAt(0)} */}
+                      {index + 1}
+                    </span>
                     <div className="h-px flex-1 bg-red-50"></div>
                   </div>
-                  <h3 className="mb-2 text-base font-bold text-gray-900 group-hover:text-primary transition-colors duration-300">{type.name}</h3>
-                  <p className="text-sm leading-relaxed text-gray-600">{type.content}</p>
-                  
+                  <h3 className="text-base font-bold text-gray-900 group-hover:text-primary transition-colors duration-300">
+                    {type.name}
+                  </h3>
+                  <p className="text-sm leading-relaxed text-gray-600">
+                    {type.content}
+                  </p>
+
                   {type.types && type.types.length > 0 && (
                     <p className="mt-2 text-[11px] font-medium text-primary opacity-80">
-                      {type.types.map(st => st.name).join(" · ")}
+                      {type.types.map((st) => st.name).join(" · ")}
                     </p>
                   )}
 
                   <div className="mt-4 flex items-center gap-1 text-xs font-semibold text-primary opacity-0 transition-all duration-300 group-hover:opacity-100">
-                    {type.types && type.types.length > 0 ? "View exam types" : "View details"}
-                    <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7"></path></svg>
+                    {type.types && type.types.length > 0
+                      ? "View exam types"
+                      : "View details"}
+                    <ArrowRight size={14} />
                   </div>
                 </Link>
               ))}
@@ -135,59 +223,91 @@ export default async function ExamDetailPage({
             <div className="overflow-hidden rounded-3xl bg-gradient-to-br from-red-700 via-red-800 to-red-900 px-8 py-14 shadow-xl md:px-14 md:py-16">
               <div className="flex flex-col items-center justify-between gap-8 text-center lg:flex-row lg:text-left">
                 <div className="max-w-xl">
-                  <h2 className="text-3xl font-bold tracking-tight text-white lg:text-4xl">Not sure which {exam.name} test you need?</h2>
-                  <p className="mt-4 text-lg leading-relaxed text-red-100">Our team will help you choose the right {exam.name} variant for your visa, study, or migration goal — free of charge.</p>
+                  <h2 className="text-3xl font-bold tracking-tight text-white lg:text-4xl">
+                    Not sure which {exam.name} test you need?
+                  </h2>
+                  <p className="mt-4 text-lg leading-relaxed text-red-100">
+                    Our team will help you choose the right {exam.name} variant
+                    for your visa, study, or migration goal — free of charge.
+                  </p>
                 </div>
                 <div className="flex flex-col gap-3 sm:flex-row">
-                  <Link className="group inline-flex items-center justify-center gap-2 rounded-lg bg-white px-8 py-3.5 text-sm font-bold text-primary shadow-lg transition-all duration-300 hover:bg-red-50" href="/free-consultation">
+                  <Link
+                    className="group inline-flex items-center justify-center gap-2 rounded-lg bg-white px-8 py-3.5 text-sm font-bold text-primary shadow-lg transition-all duration-300 hover:bg-red-50"
+                    href="/free-consultation"
+                  >
                     Free Consultation
-                    <svg className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    <svg
+                      className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      aria-hidden="true"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                      ></path>
+                    </svg>
                   </Link>
-                  <Link className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-white/40 px-8 py-3.5 text-sm font-bold text-white transition-all duration-300 hover:border-white hover:bg-white/10" href="/book-exam">Book an Exam</Link>
+                  <Link
+                    className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-white/40 px-8 py-3.5 text-sm font-bold text-white transition-all duration-300 hover:border-white hover:bg-white/10"
+                    href="/book-exam"
+                  >
+                    Book an Exam
+                  </Link>
                 </div>
               </div>
             </div>
           </div>
         </section>
-      </main>
+      </div>
     );
   }
 
   // Layout for single exams (e.g. TOEFL iBT)
   return (
-    <main className="pt-20">
+    <div>
       <section className="relative overflow-hidden bg-white">
-        <div className="pointer-events-none absolute -top-32 right-0 h-96 w-96 rounded-full bg-red-50 blur-3xl opacity-60" aria-hidden="true"></div>
-        <div className="pointer-events-none absolute top-1/3 -left-32 h-64 w-64 rounded-full bg-red-50 blur-3xl opacity-40" aria-hidden="true"></div>
         <div className="container relative mx-auto px-4 py-16 lg:px-8 lg:py-24 max-w-7xl">
-          <nav className="mb-8 flex items-center gap-2 text-xs text-gray-500" aria-label="Breadcrumb">
-            <Link className="transition-colors hover:text-primary" href="/">Home</Link>
-            <svg className="h-3 w-3 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7"></path></svg>
-            <Link className="transition-colors hover:text-primary" href="/exams">Exams</Link>
-            <svg className="h-3 w-3 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7"></path></svg>
-            <span className="font-medium text-gray-700">{exam.name}</span>
-          </nav>
-
           <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between">
             <div className="max-w-2xl">
-              <span className="inline-block px-3 py-1 text-xs font-bold uppercase tracking-widest text-primary bg-red-50 rounded-full mb-5">{exam.provider}</span>
-              <h1 className="text-4xl font-bold leading-[1.05] tracking-tight text-gray-900 lg:text-5xl xl:text-6xl">{exam.name}</h1>
-              {exam.subtitle && <p className="mt-3 text-lg font-medium text-gray-500">{exam.subtitle}</p>}
-              <p className="mt-5 text-base leading-relaxed text-gray-600">{exam.content}</p>
-              
+              <h1 className="text-4xl font-bold leading-[1.05] tracking-tight text-gray-900 lg:text-5xl xl:text-6xl">
+                {exam.name}
+              </h1>
+              {exam.subtitle && (
+                <p className="mt-3 text-lg font-medium text-gray-500">
+                  {exam.subtitle}
+                </p>
+              )}
+              <p className="mt-5 text-base leading-relaxed text-gray-600">
+                {exam.content}
+              </p>
+
               <div className="mt-8 flex flex-wrap gap-3">
-                <Link className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-8 py-3.5 text-sm font-bold text-white shadow-lg transition-all duration-300 hover:bg-red-800" href="/book-exam">
-                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                <Link
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-8 py-3.5 text-sm font-bold text-white shadow-lg transition-all duration-300 hover:bg-red-800"
+                  href="/book-exam"
+                >
+                  <Calendar />
                   Book This Exam
                 </Link>
-                <Link className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-gray-200 px-8 py-3.5 text-sm font-bold text-gray-700 transition-all duration-300 hover:border-primary hover:text-primary" href="/free-consultation">
+                <Link
+                  className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-gray-200 px-8 py-3.5 text-sm font-bold text-gray-700 transition-all duration-300 hover:border-primary hover:text-primary"
+                  href="/free-consultation"
+                >
                   Free Consultation
                 </Link>
               </div>
             </div>
 
             <div className="relative">
-              <div className="absolute -bottom-4 -right-4 hidden h-full w-full rounded-2xl bg-red-50/60 lg:block" aria-hidden="true"></div>
+              <div
+                className="absolute -bottom-4 -right-4 hidden h-full w-full rounded-2xl bg-red-50/60 lg:block"
+                aria-hidden="true"
+              ></div>
               <div className="relative flex h-40 w-48 shrink-0 items-center justify-center rounded-2xl border border-gray-100 bg-white p-8 shadow-xl">
                 <Image
                   src={exam.image}
@@ -208,9 +328,16 @@ export default async function ExamDetailPage({
           <div className="relative -mt-10 rounded-2xl border border-gray-100 bg-white p-4 shadow-xl md:p-6 lg:p-8">
             <div className="grid gap-4 grid-cols-2 lg:grid-cols-4 md:gap-0 md:divide-x md:divide-gray-100">
               {exam.stats?.map((stat, i) => (
-                <div key={i} className="flex flex-col items-center gap-2 px-4 py-4 text-center md:px-6">
-                  <p className="text-2xl font-bold leading-none text-gray-900 lg:text-3xl">{stat.value}</p>
-                  <p className="text-[12px] font-medium uppercase tracking-wider text-gray-500">{stat.label}</p>
+                <div
+                  key={i}
+                  className="flex flex-col items-center gap-2 px-4 py-4 text-center md:px-6"
+                >
+                  <p className="text-2xl font-bold leading-none text-gray-900 lg:text-3xl">
+                    {stat.value}
+                  </p>
+                  <p className="text-[12px] font-medium uppercase tracking-wider text-gray-500">
+                    {stat.label}
+                  </p>
                 </div>
               ))}
             </div>
@@ -223,26 +350,43 @@ export default async function ExamDetailPage({
         <div className="container mx-auto px-4 lg:px-8 max-w-7xl">
           <div className="grid gap-12 lg:grid-cols-3 lg:gap-16">
             <div className="lg:col-span-2">
-              <span className="inline-block px-3 py-1 text-xs font-bold uppercase tracking-widest text-primary bg-red-50 rounded-full mb-4">About the Exam</span>
-              <h2 className="mb-5 text-2xl font-bold text-gray-900 lg:text-3xl">{exam.name} Overview</h2>
+              <span className="inline-block px-3 py-1 text-xs font-bold uppercase tracking-widest text-primary bg-red-50 rounded-full mb-4">
+                About the Exam
+              </span>
+              <h2 className="mb-5 text-2xl font-bold text-gray-900 lg:text-3xl">
+                {exam.name} Overview
+              </h2>
               <p className="leading-relaxed text-gray-600">{exam.overview}</p>
 
               {exam.sections && exam.sections.length > 0 && (
                 <div className="mt-12">
-                  <span className="inline-block px-3 py-1 text-xs font-bold uppercase tracking-widest text-primary bg-red-50 rounded-full mb-4">Test Format</span>
-                  <h3 className="mb-6 text-xl font-bold text-gray-900 lg:text-2xl">What to Expect on Test Day</h3>
+                  <span className="inline-block px-3 py-1 text-xs font-bold uppercase tracking-widest text-primary bg-red-50 rounded-full mb-4">
+                    Test Format
+                  </span>
+                  <h3 className="mb-6 text-xl font-bold text-gray-900 lg:text-2xl">
+                    What to Expect on Test Day
+                  </h3>
                   <div className="space-y-4">
                     {exam.sections.map((section, i) => (
-                      <div key={i} className="flex gap-4 p-5 rounded-xl border border-gray-50 bg-white shadow-sm transition-all hover:shadow-md">
+                      <div
+                        key={i}
+                        className="flex gap-4 p-5 rounded-xl border border-gray-50 bg-white shadow-sm transition-all hover:shadow-md"
+                      >
                         <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-red-50 text-primary">
                           <IconTile icon={section.icon} />
                         </span>
                         <div className="min-w-0 flex-1">
                           <div className="flex flex-wrap items-center gap-3">
-                            <h4 className="font-semibold text-gray-900">{section.name}</h4>
-                            <span className="rounded-full border border-gray-100 bg-gray-50 px-2.5 py-0.5 text-xs font-medium text-gray-600">{section.duration}</span>
+                            <h4 className="font-semibold text-gray-900">
+                              {section.name}
+                            </h4>
+                            <span className="rounded-full border border-gray-100 bg-gray-50 px-2.5 py-0.5 text-xs font-medium text-gray-600">
+                              {section.duration}
+                            </span>
                           </div>
-                          <p className="mt-1.5 text-sm leading-relaxed text-gray-600">{section.details}</p>
+                          <p className="mt-1.5 text-sm leading-relaxed text-gray-600">
+                            {section.details}
+                          </p>
                         </div>
                       </div>
                     ))}
@@ -254,12 +398,30 @@ export default async function ExamDetailPage({
             {/* Sidebar */}
             <div className="space-y-6">
               <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
-                <h3 className="mb-4 text-xs font-bold uppercase tracking-[0.18em] text-gray-400">Who Should Take This?</h3>
+                <h3 className="mb-4 text-xs font-bold uppercase tracking-[0.18em] text-gray-400">
+                  Who Should Take This?
+                </h3>
                 <ul className="space-y-3">
                   {exam.whoShouldTake?.map((item, i) => (
-                    <li key={i} className="flex items-start gap-3 text-sm text-gray-700">
+                    <li
+                      key={i}
+                      className="flex items-start gap-3 text-sm text-gray-700"
+                    >
                       <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-red-50 text-primary">
-                        <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7"></path></svg>
+                        <svg
+                          className="h-3 w-3"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          strokeWidth="2.5"
+                          aria-hidden="true"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M5 13l4 4L19 7"
+                          ></path>
+                        </svg>
                       </span>
                       {item}
                     </li>
@@ -268,22 +430,34 @@ export default async function ExamDetailPage({
               </div>
 
               <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
-                <h3 className="mb-4 text-xs font-bold uppercase tracking-[0.18em] text-gray-400">Scores & Results</h3>
+                <h3 className="mb-4 text-xs font-bold uppercase tracking-[0.18em] text-gray-400">
+                  Scores & Results
+                </h3>
                 <div className="space-y-3 text-sm">
                   {exam.stats?.map((stat, i) => (
-                    <div key={i} className="flex items-start justify-between gap-4 border-b border-dashed border-gray-100 pb-2.5 last:border-0 last:pb-0">
+                    <div
+                      key={i}
+                      className="flex items-start justify-between gap-4 border-b border-dashed border-gray-100 pb-2.5 last:border-0 last:pb-0"
+                    >
                       <span className="text-gray-500">{stat.label}</span>
-                      <span className="text-right font-semibold text-gray-900">{stat.value}</span>
+                      <span className="text-right font-semibold text-gray-900">
+                        {stat.value}
+                      </span>
                     </div>
                   ))}
                 </div>
               </div>
 
               <div className="rounded-2xl border border-red-100 bg-red-50 p-6 shadow-sm">
-                <h3 className="mb-4 text-xs font-bold uppercase tracking-[0.18em] text-primary">Accepted For</h3>
+                <h3 className="mb-4 text-xs font-bold uppercase tracking-[0.18em] text-primary">
+                  Accepted For
+                </h3>
                 <ul className="space-y-2.5">
                   {exam.acceptedFor?.map((item, i) => (
-                    <li key={i} className="flex items-center gap-2.5 text-sm text-red-900">
+                    <li
+                      key={i}
+                      className="flex items-center gap-2.5 text-sm text-red-900"
+                    >
                       <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-primary"></span>
                       {item}
                     </li>
@@ -292,11 +466,28 @@ export default async function ExamDetailPage({
               </div>
 
               <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-red-700 to-red-900 p-6 text-center shadow-lg">
-                <div className="pointer-events-none absolute -right-6 -top-6 h-24 w-24 rounded-full bg-white/10" aria-hidden="true"></div>
-                <p className="relative mb-1 text-xs font-semibold uppercase tracking-widest text-red-200">Ready to Register?</p>
-                <p className="relative mb-4 text-lg font-bold text-white">Book {exam.name} at TEPTH</p>
-                <Link className="relative block rounded-lg bg-white px-4 py-2.5 text-sm font-bold text-primary shadow-sm transition-all duration-300 hover:bg-red-50" href="/book-exam">Book Now</Link>
-                <Link className="relative mt-3 block text-xs font-medium text-red-200 transition-colors hover:text-white" href="/test-dates">View upcoming test dates →</Link>
+                <div
+                  className="pointer-events-none absolute -right-6 -top-6 h-24 w-24 rounded-full bg-white/10"
+                  aria-hidden="true"
+                ></div>
+                <p className="relative mb-1 text-xs font-semibold uppercase tracking-widest text-red-200">
+                  Ready to Register?
+                </p>
+                <p className="relative mb-4 text-lg font-bold text-white">
+                  Book {exam.name} at TEPTH
+                </p>
+                <Link
+                  className="relative block rounded-lg bg-white px-4 py-2.5 text-sm font-bold text-primary shadow-sm transition-all duration-300 hover:bg-red-50"
+                  href="/book-exam"
+                >
+                  Book Now
+                </Link>
+                <Link
+                  className="relative mt-3 block text-xs font-medium text-red-200 transition-colors hover:text-white"
+                  href="/test-dates"
+                >
+                  View upcoming test dates →
+                </Link>
               </div>
             </div>
           </div>
@@ -308,14 +499,25 @@ export default async function ExamDetailPage({
         <section className="bg-white py-20">
           <div className="container mx-auto px-4 lg:px-8 max-w-3xl">
             <div className="mb-10 text-center">
-              <span className="inline-block px-3 py-1 text-xs font-bold uppercase tracking-widest text-primary bg-red-50 rounded-full mb-5">Frequently Asked</span>
-              <h2 className="text-3xl font-bold text-gray-900">Common Questions About {exam.name}</h2>
+              <span className="inline-block px-3 py-1 text-xs font-bold uppercase tracking-widest text-primary bg-red-50 rounded-full mb-5">
+                Frequently Asked
+              </span>
+              <h2 className="text-3xl font-bold text-gray-900">
+                Common Questions About {exam.name}
+              </h2>
             </div>
             <div className="space-y-4">
               {exam.faqs.map((faq, i) => (
-                <div key={i} className="p-6 rounded-xl border border-gray-50 bg-white shadow-sm transition-all hover:shadow-md">
-                  <h3 className="mb-2 font-semibold text-gray-900">{faq.question}</h3>
-                  <p className="text-sm leading-relaxed text-gray-600">{faq.answer}</p>
+                <div
+                  key={i}
+                  className="p-6 rounded-xl border border-gray-50 bg-white shadow-sm transition-all hover:shadow-md"
+                >
+                  <h3 className="mb-2 font-semibold text-gray-900">
+                    {faq.question}
+                  </h3>
+                  <p className="text-sm leading-relaxed text-gray-600">
+                    {faq.answer}
+                  </p>
                 </div>
               ))}
             </div>
@@ -327,26 +529,55 @@ export default async function ExamDetailPage({
       <section className="relative overflow-hidden bg-[#F9FAFB] py-20">
         <div className="container relative mx-auto px-4 lg:px-8 max-w-7xl">
           <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-red-700 via-red-800 to-red-900 px-8 py-14 shadow-xl md:px-14 md:py-16">
-            <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+            <div
+              className="pointer-events-none absolute inset-0"
+              aria-hidden="true"
+            >
               <div className="absolute -right-24 -top-24 h-80 w-80 rounded-full bg-white/5"></div>
               <div className="absolute -bottom-16 -left-16 h-64 w-64 rounded-full bg-white/5"></div>
             </div>
             <div className="relative flex flex-col items-center justify-between gap-8 text-center lg:flex-row lg:text-left">
               <div className="max-w-xl">
-                <h2 className="text-3xl font-bold tracking-tight text-white lg:text-4xl">Register for {exam.name} at TEPTH</h2>
-                <p className="mt-4 text-lg leading-relaxed text-red-100">Book online in minutes. Secure payment and instant confirmation.</p>
+                <h2 className="text-3xl font-bold tracking-tight text-white lg:text-4xl">
+                  Register for {exam.name} at TEPTH
+                </h2>
+                <p className="mt-4 text-lg leading-relaxed text-red-100">
+                  Book online in minutes. Secure payment and instant
+                  confirmation.
+                </p>
               </div>
               <div className="flex flex-col gap-3 sm:flex-row">
-                <Link className="group inline-flex items-center justify-center gap-2 rounded-lg bg-white px-8 py-3.5 text-sm font-bold text-primary shadow-lg transition-all duration-300 hover:bg-red-50" href="/book-exam">
+                <Link
+                  className="group inline-flex items-center justify-center gap-2 rounded-lg bg-white px-8 py-3.5 text-sm font-bold text-primary shadow-lg transition-all duration-300 hover:bg-red-50"
+                  href="/book-exam"
+                >
                   Book an Exam
-                  <svg className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                  <svg
+                    className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    aria-hidden="true"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M17 8l4 4m0 0l-4 4m4-4H3"
+                    ></path>
+                  </svg>
                 </Link>
-                <Link className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-white/40 px-8 py-3.5 text-sm font-bold text-white transition-all duration-300 hover:border-white hover:bg-white/10" href="/free-consultation">Free Consultation</Link>
+                <Link
+                  className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-white/40 px-8 py-3.5 text-sm font-bold text-white transition-all duration-300 hover:border-white hover:bg-white/10"
+                  href="/free-consultation"
+                >
+                  Free Consultation
+                </Link>
               </div>
             </div>
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }
