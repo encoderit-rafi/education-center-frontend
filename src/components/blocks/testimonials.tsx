@@ -40,67 +40,83 @@ const testimonials = [
   {
     name: "Elena Rodriguez",
     date: "a month ago",
-    quote: "TEPTH transformed my approach to the TOEFL. Their editorial insights into the reading section were a game changer for my score.",
+    quote:
+      "TEPTH transformed my approach to the TOEFL. Their editorial insights into the reading section were a game changer for my score.",
     color: "bg-blue-600",
     rating: 5,
   },
   {
     name: "Marcus Chen",
     date: "2 months ago",
-    quote: "Finally a service that treats you like a person, not a number. The personalized feedback sessions gave me the confidence I needed to succeed.",
+    quote:
+      "Finally a service that treats you like a person, not a number. The personalized feedback sessions gave me the confidence I needed to succeed.",
     color: "bg-red-600",
     rating: 5,
   },
   {
     name: "Sarah Jenkins",
     date: "3 months ago",
-    quote: "Professional, punctual, and premium. TEPTH is the gold standard for testing services. Highly recommended for any international applicant.",
+    quote:
+      "Professional, punctual, and premium. TEPTH is the gold standard for testing services. Highly recommended for any international applicant.",
     color: "bg-amber-600",
     rating: 5,
   },
   {
     name: "Abdullah Al Noman",
     date: "a month ago",
-    quote: "I lots of thanks bhai. Specially i got to know about my friend 'a' and 'and'. This is absolutely a life hack! I really appreciate your efforts.",
+    quote:
+      "I lots of thanks bhai. Specially i got to know about my friend 'a' and 'and'. This is absolutely a life hack! I really appreciate your efforts.",
     color: "bg-purple-600",
     rating: 5,
   },
   {
     name: "Prear Hasnan",
     date: "5 months ago",
-    quote: "In my belief, One day I will be able to Fly For my dream insha'Allah. In my hardest and depressed time you were the excellent motivation.",
+    quote:
+      "In my belief, One day I will be able to Fly For my dream insha'Allah. In my hardest and depressed time you were the excellent motivation.",
     color: "bg-orange-600",
     rating: 5,
   },
   {
     name: "Arefin Ahmed",
     date: "2 months ago",
-    quote: "This place is more beautiful from my side, i trully appreciated with the place. Whenever you go to any tourists spot, you will know every specific.",
+    quote:
+      "This place is more beautiful from my side, i trully appreciated with the place. Whenever you go to any tourists spot, you will know every specific.",
     color: "bg-teal-500",
     rating: 5,
   },
   {
     name: "All About Saudi Arab",
     date: "2 months ago",
-    quote: "Rashed bin Ibrahim is a highly inspiring, knowledgeable, and dedicated IELTS online instructor whose teaching style is clear, structured.",
+    quote:
+      "Rashed bin Ibrahim is a highly inspiring, knowledgeable, and dedicated IELTS online instructor whose teaching style is clear, structured.",
     color: "bg-orange-500",
     rating: 5,
   },
   {
     name: "Shomik Explores",
     date: "10 months ago",
-    quote: "If you're planning to take the IELTS exam and looking for a supportive environment where everything is explained in your native language.",
+    quote:
+      "If you're planning to take the IELTS exam and looking for a supportive environment where everything is explained in your native language.",
     color: "bg-indigo-500",
     rating: 5,
   },
 ];
 
-function TestimonialCard({ t, isMarquee = false }: { t: (typeof testimonials)[0], isMarquee?: boolean }) {
+function TestimonialCard({
+  t,
+  isMarquee = false,
+}: {
+  t: (typeof testimonials)[0];
+  isMarquee?: boolean;
+}) {
   return (
-    <div className={cn(
-      "bg-white p-8 rounded-[2rem] shadow-xl border border-gray-50 flex flex-col gap-6 transition-all duration-300",
-      isMarquee ? "w-[350px] sm:w-[450px] shrink-0" : "w-full mx-auto max-w-[500px]"
-    )}>
+    <div
+      className={cn(
+        "bg-white p-6 rounded-lg  border flex flex-col gap-6 transition-all duration-300",
+        isMarquee ? "w-sm sm:w-md shrink-0" : "w-full mx-auto max-w-md",
+      )}
+    >
       <div className="flex justify-between items-center">
         <div className="flex gap-0.5">
           {[...Array(5)].map((_, i) => (
@@ -116,7 +132,7 @@ function TestimonialCard({ t, isMarquee = false }: { t: (typeof testimonials)[0]
         <GoogleLogo />
       </div>
 
-      <p className="text-gray-800 text-lg font-bold leading-relaxed line-clamp-4">
+      <p className="text-gray-800 text-lg font-medium leading-relaxed line-clamp-4">
         "{t.quote}"
       </p>
 
@@ -169,7 +185,8 @@ export default function Testimonials() {
     <section className="py-32 bg-[#F8F9FA] overflow-hidden border-y border-gray-100">
       <div className="max-w-7xl mx-auto text-center mb-20 px-6">
         <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6 uppercase tracking-tight">
-          Trusted by Tomorrow's Leaders
+          Trusted by Tomorrow's{" "}
+          <span className="text-primary italic">Leaders</span>
         </h2>
         <p className="text-gray-500 text-lg max-w-2xl mx-auto font-medium">
           See what our global community has to say about their journey with
@@ -184,54 +201,9 @@ export default function Testimonials() {
             <TestimonialCard key={i} t={t} isMarquee />
           ))}
         </Marquee>
-
-        <Marquee reverse pauseOnHover className="py-10 [--duration:40s] [--gap:2rem]">
-          {secondRow.map((t, i) => (
-            <TestimonialCard key={i} t={t} isMarquee />
-          ))}
-        </Marquee>
       </div>
 
       {/* Mobile/Tablet Version: Carousel */}
-      <div className="lg:hidden px-6 relative max-w-2xl mx-auto">
-        <Carousel
-          setApi={setApi}
-          opts={{
-            align: "center",
-            loop: true,
-          }}
-          className="w-full"
-        >
-          <CarouselContent>
-            {testimonials.map((t, i) => (
-              <CarouselItem key={i} className="basis-full py-4">
-                <TestimonialCard t={t} />
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-
-          {/* Navigation Controls */}
-          <div className="flex items-center justify-center gap-8 mt-12">
-            <CarouselPrevious className="static translate-y-0 h-14 w-14 bg-white border-none shadow-xl hover:bg-gray-50 transition-all text-gray-400" />
-
-            <div className="flex items-center gap-3">
-              {Array.from({ length: count }).map((_, i) => (
-                <div
-                  key={i}
-                  className={cn(
-                    "h-2.5 rounded-full transition-all duration-300",
-                    current === i
-                      ? "w-10 bg-[#AD1010]"
-                      : "w-2.5 bg-gray-200"
-                  )}
-                />
-              ))}
-            </div>
-
-            <CarouselNext className="static translate-y-0 h-14 w-14 bg-white border-none shadow-xl hover:bg-gray-50 transition-all text-gray-400" />
-          </div>
-        </Carousel>
-      </div>
     </section>
   );
 }
