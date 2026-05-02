@@ -521,6 +521,123 @@ export const exams = [
     ],
   },
   {
+    id: "ielts_academic",
+    name: "IELTS Academic",
+    provider: "British Council / IDP",
+    subtitle: "For higher education and professional registration",
+    image: "/images/brands/ielts.png",
+    content: "The world's most popular English test for higher education and professional registration.",
+    overview: "IELTS Academic measures whether your level of English language proficiency is suitable for an academic environment. It reflects aspects of academic language and evaluates whether you’re ready to begin training or studying.",
+    stats: [
+      { label: "Test Duration", value: "2 hours 45 mins" },
+      { label: "Score Scale", value: "0–9 Bands" },
+      { label: "Results In", value: "3–5 days" },
+      { label: "Validity", value: "2 years" },
+    ],
+    sections: [
+      {
+        name: "Listening",
+        duration: "30 min",
+        details: "4 recorded monologues and conversations.",
+        icon: "listening",
+      },
+      {
+        name: "Academic Reading",
+        duration: "60 min",
+        details: "3 long texts which range from the descriptive and factual to the discursive and analytical.",
+        icon: "reading",
+      },
+      {
+        name: "Academic Writing",
+        duration: "60 min",
+        details: "Task 1: describe a chart, graph, or diagram. Task 2: write an essay in response to a point of view.",
+        icon: "writing",
+      },
+      {
+        name: "Speaking",
+        duration: "11–14 min",
+        details: "A face-to-face interview with an examiner.",
+        icon: "speaking",
+      },
+    ],
+    whoShouldTake: [
+      "Prospective undergraduate students",
+      "Prospective postgraduate students",
+      "Medical professionals (Doctors, Nurses, etc.)",
+      "Professional registration applicants",
+    ],
+    acceptedFor: [
+      "University admissions worldwide",
+      "Medical board registration",
+      "Student visa applications",
+    ],
+    faqs: [
+      {
+        question: "Is the Academic test harder than General Training?",
+        answer: "The Reading and Writing sections are more complex as they are geared towards academic study. Listening and Speaking are the same.",
+      },
+    ],
+  },
+  {
+    id: "ielts_general",
+    name: "IELTS General Training",
+    provider: "British Council / IDP",
+    subtitle: "For migration, work experience, or secondary education",
+    image: "/images/brands/ielts.png",
+    content: "The world's most popular English test for migration, secondary education, and work experience.",
+    overview: "IELTS General Training measures English language proficiency in a practical, everyday context. The tasks and tests reflect both workplace and social situations.",
+    stats: [
+      { label: "Test Duration", value: "2 hours 45 mins" },
+      { label: "Score Scale", value: "0–9 Bands" },
+      { label: "Results In", value: "3–5 days" },
+      { label: "Validity", value: "2 years" },
+    ],
+    sections: [
+      {
+        name: "Listening",
+        duration: "30 min",
+        details: "4 recorded monologues and conversations.",
+        icon: "listening",
+      },
+      {
+        name: "General Reading",
+        duration: "60 min",
+        details: "Extracts from books, magazines, newspapers, notices, advertisements, company handbooks and guidelines.",
+        icon: "reading",
+      },
+      {
+        name: "General Writing",
+        duration: "60 min",
+        details: "Task 1: write a letter requesting information or explaining a situation. Task 2: write an essay in response to a point of view.",
+        icon: "writing",
+      },
+      {
+        name: "Speaking",
+        duration: "11–14 min",
+        details: "A face-to-face interview with an examiner.",
+        icon: "speaking",
+      },
+    ],
+    whoShouldTake: [
+      "Migrants to Australia, Canada, New Zealand, and the UK",
+      "Secondary school students",
+      "Job seekers in English-speaking countries",
+      "Vocational training applicants",
+    ],
+    acceptedFor: [
+      "Skilled migration visas",
+      "Permanent residency applications",
+      "Secondary education admissions",
+      "Work permits",
+    ],
+    faqs: [
+      {
+        question: "Can I use General Training for university study?",
+        answer: "Usually no. Most universities require IELTS Academic. Always check with the institution you are applying to.",
+      },
+    ],
+  },
+  {
     id: "toefl_ibt",
     name: "TOEFL iBT",
     provider: "Educational Testing Service (ETS)",
