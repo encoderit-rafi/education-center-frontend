@@ -97,8 +97,22 @@ export default async function ExamDetailPage({
     notFound();
   }
 
-  const examTypesData = exams_types.find((et) => et.exam.id === id);
-  const hasTypes = examTypesData && examTypesData.types.length > 0;
+  // Helper to find exam types in the hierarchy
+  const findExamTypes = (data: any[], targetId: string): any => {
+    for (const item of data) {
+      if (item.exam && item.exam.id === targetId) return item;
+      if (item.id === targetId) return item;
+      if (item.types && item.types.length > 0) {
+        const found = findExamTypes(item.types, targetId);
+        if (found) return found;
+      }
+    }
+    return null;
+  };
+
+  const examTypesData = findExamTypes(exams_types, id);
+  const hasTypes =
+    examTypesData && examTypesData.types && examTypesData.types.length > 0;
 
   if (hasTypes) {
     return (
@@ -176,11 +190,11 @@ export default async function ExamDetailPage({
             </div>
 
             <div className="mx-auto grid max-w-5xl gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {examTypesData.types.map((type, index) => (
+              {examTypesData.types.map((type: any, index: number) => (
                 <Link
                   key={type.id}
                   className="group relative overflow-hidden rounded-2xl border border-gray-100 bg-white p-6  transition-all duration-300 hover:-translate-y-1 hover:border-red-100 hover:shadow-xl"
-                  href={`/book-exam/${type.id}`}
+                  href={`/exams/${type.id}`}
                 >
                   {/* <span
                     aria-hidden="true"
@@ -202,7 +216,7 @@ export default async function ExamDetailPage({
 
                   {type.types && type.types.length > 0 && (
                     <p className="mt-2 text-[11px] font-medium text-primary opacity-80">
-                      {type.types.map((st) => st.name).join(" · ")}
+                      {type.types.map((st: any) => st.name).join(" · ")}
                     </p>
                   )}
 

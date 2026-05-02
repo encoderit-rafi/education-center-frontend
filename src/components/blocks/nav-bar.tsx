@@ -19,7 +19,7 @@ import { Menu } from "lucide-react";
 import SearchCommand from "./search-command";
 import { COURSES } from "@/lib/courses-data";
 import { Badge } from "../ui/badge";
-import { exams } from "@/lib/data";
+import { exams, exams_types } from "@/lib/data";
 import { cn } from "@/lib/utils";
 
 interface NavItem {
@@ -34,9 +34,9 @@ const navigations: NavItem[] = [
     type: "primary",
     label: "Exams",
     // href: "/exams",
-    children: exams.map((exam) => ({
-      label: exam.name,
-      href: `/exams/${exam.id}`,
+    children: exams_types.map((et) => ({
+      label: et.exam.name,
+      href: `/exams/${et.exam.id}`,
     })),
   },
   {
