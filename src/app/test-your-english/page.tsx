@@ -8,7 +8,7 @@ export default function TestYourEnglishPage() {
   return (
     <div className="min-h-screen bg-background pb-32">
       {/* ── Hero Spotlight ── */}
-      <section className="relative px-8 py-20 lg:py-24 overflow-hidden border-b border-outline/5 bg-secondary/[0.02]">
+      {/* <section className="relative px-8 py-20 lg:py-24 overflow-hidden border-b border-outline/5 bg-secondary/[0.02]">
         <div className="max-w-7xl mx-auto relative z-10 grid lg:grid-cols-12 gap-20 items-center">
           <div className="lg:col-span-7">
             <span className="text-primary font-black tracking-[0.4em] uppercase text-[10px] mb-6 block">
@@ -61,14 +61,14 @@ export default function TestYourEnglishPage() {
             <div className="absolute -bottom-10 -left-10 w-64 h-64 bg-primary/5 rounded-full blur-3xl -z-10" />
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* ── Assessment Journey ── */}
-      <section id="assessment-journey" className="px-8 pt-32">
+      <section id="assessment-journey" className="px-8 pt-12">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16 space-y-4">
             <h2 className="text-3xl font-headline font-black text-secondary tracking-tight">
-              Your Assessment Journey
+              Test your english level
             </h2>
             <div className="w-24 h-1 crimson-gradient mx-auto rounded-full" />
           </div>

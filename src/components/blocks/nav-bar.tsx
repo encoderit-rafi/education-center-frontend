@@ -185,7 +185,125 @@ export default function NavBar() {
   return (
     <header className="sticky top-0 z-50 overflow-visible shadow-lg">
       {/* Row 1 */}
-      <div className="hidden lg:flex bg-primary text-white nav-px nav-py items-center justify-center gap-2">
+      <div className="nav-px nav-py flex items-center justify-between  gap-2 bg-white/90 backdrop-blur-sm">
+        <Link href="/">
+          <Image
+            alt="TEPTH Logo"
+            width={150}
+            height={150}
+            src="/images/tepth-logo.png"
+            className="w-24"
+          />
+        </Link>
+        {/* Desktop Primary Nav */}
+        <NavigationMenu className="hidden lg:flex" viewport={false}>
+          <NavigationMenuList className="gap-2">
+            {navigations
+              .filter((item) => item.type === "primary")
+              .map((item) => (
+                <NavigationMenuItem key={item.label}>
+                  {item.children ? (
+                    <>
+                      <NavigationMenuTrigger className="bg-transparent px-2 py-1.5 text-sm border-none outline-none transition-all rounded-lg">
+                        {item.label}
+                      </NavigationMenuTrigger>
+                      <NavigationMenuContent className="z-50 p-1 min-w-48 border-none! bg-primary! text-white!">
+                        <ul className="flex flex-col">
+                          {item.children.map((child) => (
+                            <li key={child.label}>
+                              <NavigationMenuLink asChild>
+                                <Link
+                                  href={child.href}
+                                  className="px-4 py-2.5 text-sm  hover:bg-black/10 rounded-lg transition-colors w-full "
+                                >
+                                  {child.label}
+                                </Link>
+                              </NavigationMenuLink>
+                            </li>
+                          ))}
+                        </ul>
+                      </NavigationMenuContent>
+                    </>
+                  ) : (
+                    <NavigationMenuLink asChild>
+                      <Link
+                        href={item.href || "#"}
+                        className="px-2 py-1.5 text-sm hover:bg-white/10 transition-all rounded-lg"
+                      >
+                        {item.label}
+                      </Link>
+                    </NavigationMenuLink>
+                  )}
+                </NavigationMenuItem>
+              ))}
+          </NavigationMenuList>
+        </NavigationMenu>
+
+        <div className="w-24  flex items-center justify-end gap-2">
+          <SearchCommand />
+          {/* Mobile Menu Trigger */}
+          <Popover>
+            <PopoverTrigger
+              render={
+                <Button
+                  className="lg:hidden p-2 text-primary hover:text-primary transition-colors"
+                  variant="ghost"
+                />
+              }
+            >
+              <Menu className="w-6 h-6" />
+            </PopoverTrigger>
+            <PopoverContent
+              align="end"
+              className="w-64 bg-white border-slate-200 p-1 shadow-2xl rounded-xl z-[60]"
+            >
+              <NavigationMenu className="max-w-none *:w-full">
+                <NavigationMenuList className="flex-col items-start gap-0">
+                  {navigations.map((item, index) => (
+                    <NavigationMenuItem className="w-full" key={item.label}>
+                      {item.children ? (
+                        <>
+                          <div className="px-2 py-1.5 font-bold text-slate-400 text-[10px] uppercase tracking-wider">
+                            {item.label}
+                          </div>
+                          <ul className="mb-2">
+                            {item.children.map((child) => (
+                              <li key={child.label}>
+                                <NavigationMenuLink asChild>
+                                  <Link
+                                    href={child.href}
+                                    className="px-3 py-2 text-sm text-slate-700 hover:bg-primary/10 rounded-lg transition-colors w-full flex items-center"
+                                  >
+                                    {child.label}
+                                  </Link>
+                                </NavigationMenuLink>
+                              </li>
+                            ))}
+                          </ul>
+                        </>
+                      ) : (
+                        <NavigationMenuLink asChild>
+                          <Link
+                            href={item.href || "#"}
+                            className="px-3 py-2 text-sm font-bold text-slate-700 hover:bg-red-50 hover:text-red-900 rounded-lg transition-colors w-full flex items-center"
+                          >
+                            {item.label}
+                          </Link>
+                        </NavigationMenuLink>
+                      )}
+                      {index < navigations.length - 1 && (
+                        <div className="mx-2 my-1 h-px bg-slate-100" />
+                      )}
+                    </NavigationMenuItem>
+                  ))}
+                </NavigationMenuList>
+              </NavigationMenu>
+            </PopoverContent>
+          </Popover>
+        </div>
+      </div>
+      {/* Row 2 */}
+      <div className="hidden lg:flex bg-primary text-white nav-px py-1 items-center justify-center gap-2">
         <NavigationMenu viewport={false}>
           <NavigationMenuList className="gap-2">
             {navigations
@@ -246,127 +364,6 @@ export default function NavBar() {
               ))}
           </NavigationMenuList>
         </NavigationMenu>
-      </div>
-      {/* Row 2 */}
-      <div className="nav-px nav-py flex items-center justify-between  gap-2 bg-white">
-        <Link href="/">
-          <Image
-            alt="TEPTH Logo"
-            width={150}
-            height={150}
-            src="/images/tepth-logo.png"
-            className="w-36"
-          />
-        </Link>
-        {/* Desktop Primary Nav */}
-        <NavigationMenu className="hidden lg:flex" viewport={false}>
-          <NavigationMenuList className="gap-2">
-            {navigations
-              .filter((item) => item.type === "primary")
-              .map((item) => (
-                <NavigationMenuItem key={item.label}>
-                  {item.children ? (
-                    <>
-                      <NavigationMenuTrigger className="bg-transparent px-2 py-1.5 text-sm border-none outline-none transition-all rounded-lg">
-                        {item.label}
-                      </NavigationMenuTrigger>
-                      <NavigationMenuContent className="z-50 p-1 min-w-48 border-none! bg-primary! text-white!">
-                        <ul className="flex flex-col">
-                          {item.children.map((child) => (
-                            <li key={child.label}>
-                              <NavigationMenuLink asChild>
-                                <Link
-                                  href={child.href}
-                                  className="px-4 py-2.5 text-sm  hover:bg-black/10 rounded-lg transition-colors w-full "
-                                >
-                                  {child.label}
-                                </Link>
-                              </NavigationMenuLink>
-                            </li>
-                          ))}
-                        </ul>
-                      </NavigationMenuContent>
-                    </>
-                  ) : (
-                    <NavigationMenuLink asChild>
-                      <Link
-                        href={item.href || "#"}
-                        className="px-2 py-1.5 text-sm hover:bg-white/10 transition-all rounded-lg"
-                      >
-                        {item.label}
-                      </Link>
-                    </NavigationMenuLink>
-                  )}
-                </NavigationMenuItem>
-              ))}
-          </NavigationMenuList>
-        </NavigationMenu>
-
-        <div className="hidden md:block bg-white rounded-full">
-          <SearchCommand />
-        </div>
-
-        {/* Mobile Menu Trigger */}
-        <div className="lg:hidden">
-          <Popover>
-            <PopoverTrigger
-              render={
-                <Button
-                  className="p-2 text-white hover:text-red-200 transition-colors"
-                  variant="ghost"
-                />
-              }
-            >
-              <Menu className="w-6 h-6" />
-            </PopoverTrigger>
-            <PopoverContent
-              align="end"
-              className="w-64 bg-white border-slate-200 p-1 shadow-2xl rounded-xl z-[60]"
-            >
-              <NavigationMenu className="max-w-none *:w-full">
-                <NavigationMenuList className="flex-col items-start gap-0">
-                  {navigations.map((item, index) => (
-                    <NavigationMenuItem className="w-full" key={item.label}>
-                      {item.children ? (
-                        <>
-                          <div className="px-2 py-1.5 font-bold text-slate-400 text-[10px] uppercase tracking-wider">
-                            {item.label}
-                          </div>
-                          <ul className="mb-2">
-                            {item.children.map((child) => (
-                              <li key={child.label}>
-                                <NavigationMenuLink asChild>
-                                  <Link
-                                    href={child.href}
-                                    className="px-3 py-2 text-sm text-slate-700 hover:bg-primary/10 rounded-lg transition-colors w-full flex items-center"
-                                  >
-                                    {child.label}
-                                  </Link>
-                                </NavigationMenuLink>
-                              </li>
-                            ))}
-                          </ul>
-                        </>
-                      ) : (
-                        <NavigationMenuLink asChild>
-                          <Link
-                            href={item.href || "#"}
-                            className="px-3 py-2 text-sm font-bold text-slate-700 hover:bg-red-50 hover:text-red-900 rounded-lg transition-colors w-full flex items-center"
-                          >
-                            {item.label}
-                          </Link>
-                        </NavigationMenuLink>
-                      )}
-                      {index < navigations.length - 1 && (
-                        <div className="mx-2 my-1 h-px bg-slate-100" />
-                      )}
-                    </NavigationMenuItem>
-                  ))}
-                </NavigationMenuList>
-              </NavigationMenu>
-            </PopoverContent>
-          </Popover>
-        </div>
       </div>
     </header>
   );
