@@ -20,6 +20,7 @@ import SearchCommand from "./search-command";
 import { COURSES } from "@/lib/courses-data";
 import { Badge } from "../ui/badge";
 import { exams } from "@/lib/data";
+import { cn } from "@/lib/utils";
 
 interface NavItem {
   type: "primary" | "secondary";
@@ -171,7 +172,7 @@ const navigations: NavItem[] = [
 
 export default function NavBar() {
   return (
-    <header className="sticky top-0 z-100 overflow-visible shadow-lg">
+    <header className="sticky top-0 z-50 overflow-visible shadow-lg">
       {/* Row 1 */}
       <div className="relative z-20 nav-px nav-py flex items-center justify-between gap-2 bg-white/90 backdrop-blur-sm">
         <Link href="/">
@@ -195,7 +196,7 @@ export default function NavBar() {
                       <NavigationMenuTrigger className="bg-transparent px-2 py-1.5 text-sm border-none outline-none transition-all rounded-lg">
                         {item.label}
                       </NavigationMenuTrigger>
-                      <NavigationMenuContent className="z-50 p-1 min-w-48 border-none! bg-primary! text-white!">
+                      <NavigationMenuContent className="z-50 p-1 min-w-48 border-none bg-primary! text-white! rounded-xl shadow-2xl">
                         <ul className="flex flex-col">
                           {item.children.map((child) => (
                             <li key={child.label}>
@@ -216,7 +217,7 @@ export default function NavBar() {
                     <NavigationMenuLink asChild>
                       <Link
                         href={item.href || "#"}
-                        className="px-2 py-1.5 text-sm hover:bg-white/10 transition-all rounded-lg"
+                        className="px-2 py-1.5 text-sm hover:bg-black/5 transition-all rounded-lg"
                       >
                         {item.label}
                       </Link>
@@ -234,16 +235,17 @@ export default function NavBar() {
             <PopoverTrigger
               render={
                 <Button
-                  className="lg:hidden p-2 text-primary hover:text-primary transition-colors"
+                  className="lg:hidden p-0 h-9 w-9 flex items-center justify-center text-primary hover:bg-primary/5 transition-colors"
                   variant="ghost"
-                />
+                  size="icon"
+                >
+                  <Menu className="w-6 h-6" />
+                </Button>
               }
-            >
-              <Menu className="w-6 h-6" />
-            </PopoverTrigger>
+            />
             <PopoverContent
               align="end"
-              className="w-64 bg-white border-slate-200 p-1 shadow-2xl rounded-xl z-[60]"
+              className="w-64 bg-primary border-none p-1 shadow-2xl rounded-xl z-[60] text-white"
             >
               <NavigationMenu className="max-w-none *:w-full">
                 <NavigationMenuList className="flex-col items-start gap-0">
@@ -251,7 +253,7 @@ export default function NavBar() {
                     <NavigationMenuItem className="w-full" key={item.label}>
                       {item.children ? (
                         <>
-                          <div className="px-2 py-1.5 font-bold text-slate-400 text-[10px] uppercase tracking-wider">
+                          <div className="px-2 py-1.5 font-bold text-white/50 text-[10px] uppercase tracking-wider">
                             {item.label}
                           </div>
                           <ul className="mb-2">
@@ -260,7 +262,7 @@ export default function NavBar() {
                                 <NavigationMenuLink asChild>
                                   <Link
                                     href={child.href}
-                                    className="px-3 py-2 text-sm text-slate-700 hover:bg-primary/10 rounded-lg transition-colors w-full flex items-center"
+                                    className="px-3 py-2 text-sm text-white hover:bg-black/10 rounded-lg transition-colors w-full flex items-center"
                                   >
                                     {child.label}
                                   </Link>
@@ -273,14 +275,14 @@ export default function NavBar() {
                         <NavigationMenuLink asChild>
                           <Link
                             href={item.href || "#"}
-                            className="px-3 py-2 text-sm font-bold text-slate-700 hover:bg-red-50 hover:text-red-900 rounded-lg transition-colors w-full flex items-center"
+                            className="px-3 py-2 text-sm font-bold text-white hover:bg-black/10 rounded-lg transition-colors w-full flex items-center"
                           >
                             {item.label}
                           </Link>
                         </NavigationMenuLink>
                       )}
                       {index < navigations.length - 1 && (
-                        <div className="mx-2 my-1 h-px bg-slate-100" />
+                        <div className="mx-2 my-1 h-px bg-white/10" />
                       )}
                     </NavigationMenuItem>
                   ))}
