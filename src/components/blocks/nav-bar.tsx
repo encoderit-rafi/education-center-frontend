@@ -183,16 +183,16 @@ const navigations: NavItem[] = [
 
 export default function NavBar() {
   return (
-    <header className="sticky top-0 z-50 overflow-visible shadow-lg">
+    <header className="sticky top-0 z-100 overflow-visible shadow-lg">
       {/* Row 1 */}
-      <div className="nav-px nav-py flex items-center justify-between  gap-2 bg-white/90 backdrop-blur-sm">
+      <div className="relative z-20 nav-px nav-py flex items-center justify-between gap-2 bg-white/90 backdrop-blur-sm">
         <Link href="/">
           <Image
             alt="TEPTH Logo"
             width={150}
             height={150}
             src="/images/tepth-logo.png"
-            className="w-24"
+            className="w-28"
           />
         </Link>
         {/* Desktop Primary Nav */}
@@ -303,7 +303,7 @@ export default function NavBar() {
         </div>
       </div>
       {/* Row 2 */}
-      <div className="hidden lg:flex bg-primary text-white nav-px py-1 items-center justify-center gap-2">
+      <div className="relative z-10 hidden lg:flex bg-primary text-white nav-px py-1 items-center justify-center gap-2">
         <NavigationMenu viewport={false}>
           <NavigationMenuList className="gap-2">
             {navigations
