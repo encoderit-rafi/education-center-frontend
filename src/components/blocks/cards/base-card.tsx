@@ -11,7 +11,7 @@ const BaseCardTitle = ({
   return (
     <h3
       className={cn(
-        "text-xl font-black text-slate-900 group-hover:text-primary transition-colors uppercase tracking-tight",
+        "text-xl font-black text-slate-900 text-nowrap group-hover:text-primary transition-colors tracking-tight",
         className,
       )}
       {...props}
@@ -37,6 +37,40 @@ const BaseCardDescription = ({
     </p>
   );
 };
+const BaseCardImportantInfo = ({
+  children,
+  className,
+  ...props
+}: PropsWithChildren & ComponentProps<"p">) => {
+  return (
+    <p
+      className={cn(
+        "rounded-md border border-dashed border-primary/40 bg-primary/5 p-3 text-xs leading-relaxed text-primary",
+        className,
+      )}
+      {...props}
+    >
+      {children}
+    </p>
+  );
+};
+const BaseCardIcon = ({
+  children,
+  className,
+  ...props
+}: PropsWithChildren & ComponentProps<"span">) => {
+  return (
+    <span
+      className={cn(
+        "flex size-12 shrink-0 items-center justify-center rounded-md bg-primary/10 text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-white group-hover:scale-110 [&_svg]:size-6",
+        className,
+      )}
+      {...props}
+    >
+      {children}
+    </span>
+  );
+};
 const BaseCard = ({
   className,
   children,
@@ -45,7 +79,7 @@ const BaseCard = ({
   return (
     <div
       className={cn(
-        "group flex flex-col space-y-6 rounded-xl border border-slate-300 bg-white p-8  transition-all duration-300 hover:-translate-y-2 hover:border-primary hover:shadow-lg",
+        "group flex flex-col space-y-6 rounded-xl border border-slate-300 bg-white overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:border-primary hover:shadow-lg",
         className,
       )}
       {...props}
@@ -55,4 +89,10 @@ const BaseCard = ({
   );
 };
 
-export { BaseCard, BaseCardTitle, BaseCardDescription };
+export {
+  BaseCard,
+  BaseCardTitle,
+  BaseCardDescription,
+  BaseCardImportantInfo,
+  BaseCardIcon,
+};

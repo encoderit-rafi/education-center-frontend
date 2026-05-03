@@ -27,7 +27,7 @@ export default function CourseList() {
 
             return (
               <Link href={`/exams/${exam.id}`}>
-                <BaseCard className="h-full">
+                <BaseCard className="h-full p-8">
                   <div className="flex items-start justify-between">
                     <BaseCardTitle>{exam.name}</BaseCardTitle>
                     <ArrowRight className="size-5 text-slate-300 transition-all duration-300 group-hover:text-primary group-hover:translate-x-1" />

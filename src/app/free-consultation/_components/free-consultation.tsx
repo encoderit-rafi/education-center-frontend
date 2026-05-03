@@ -7,8 +7,8 @@ export default function FreeConsultation() {
   return (
     <GradientBox>
       <div className="relative mx-auto px-6 py-16 lg:px-12 lg:py-20">
-        <div className="flex flex-col items-center justify-between gap-10 text-center lg:flex-row lg:text-left">
-          <div className="max-w-xl">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 text-center  lg:text-left">
+          <div>
             <p className="mb-4 text-xs font-bold uppercase tracking-[0.3em] text-white/70">
               Start Today
             </p>
@@ -20,24 +20,41 @@ export default function FreeConsultation() {
               Our academic counselors are available to guide you through the
               selection and booking process.
             </p>
-          </div>
-
-          <div className="flex flex-col gap-4 sm:flex-row w-full sm:w-auto">
             <Link
               href="/free-consultation"
               className={buttonVariants({
                 size: "lg",
                 variant: "light",
+                className: "mt-6",
               })}
             >
               <Calendar className="h-5 w-5" />
               Get Free Consultation
             </Link>
           </div>
+
+          <div className="flex flex-col!  justify-around gap-4 sm:flex-row w-full sm:w-auto">
+            {[
+              "Expert academic guidance",
+              "Personalized course selection",
+              "No commitment required",
+              "Quick response time",
+            ].map((feature, i) => (
+              <span
+                key={i}
+                className="flex items-center gap-3 text-sm font-medium text-white/70"
+              >
+                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white/10">
+                  <Check className="h-3 w-3 text-white" />
+                </span>
+                {feature}
+              </span>
+            ))}
+          </div>
         </div>
 
         {/* Features list */}
-        <div className="mt-16 flex flex-wrap items-center justify-center gap-6 border-t border-white/10 pt-10 lg:justify-start">
+        {/* <div className="mt-16 flex flex-wrap items-center justify-center gap-6 border-t border-white/10 pt-10 lg:justify-start">
           {[
             "Expert academic guidance",
             "Personalized course selection",
@@ -54,7 +71,7 @@ export default function FreeConsultation() {
               {feature}
             </span>
           ))}
-        </div>
+        </div> */}
       </div>
     </GradientBox>
   );
