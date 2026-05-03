@@ -117,7 +117,7 @@ export default async function ExamDetailPage({
   if (hasTypes) {
     return (
       <div>
-        <section className="relative overflow-hidden bg-white">
+        {/* <section className="relative overflow-hidden bg-white">
           <div
             className="pointer-events-none absolute -top-24 -right-24 h-80 w-80 rounded-full bg-red-50 blur-3xl opacity-60"
             aria-hidden="true"
@@ -144,7 +144,7 @@ export default async function ExamDetailPage({
 
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
-                href="/book-exam"
+                href="/book-exams"
                 className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-8 py-3.5 text-sm font-bold text-white shadow-lg transition-all duration-300 hover:bg-red-800"
               >
                 Book an Exam
@@ -171,16 +171,13 @@ export default async function ExamDetailPage({
               </Link>
             </div>
           </div>
-        </section>
+        </section> */}
 
         <section className="bg-[#F9FAFB] py-20">
           <div className="container mx-auto px-4 lg:px-8 max-w-7xl">
             <div className="mb-12 text-center">
-              <span className="inline-block px-3 py-1 text-xs font-bold uppercase tracking-widest text-primary bg-red-50 rounded-full mb-4">
-                All {exam.name} Tests
-              </span>
-              <h2 className="text-3xl font-bold text-gray-900 md:text-4xl">
-                Choose Your {exam.name} Test
+              <h2 className="section-title">
+                Choose Your <span>{exam.name}</span> Test
               </h2>
               <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
                 Each {exam.name} variant is designed for a specific purpose.
@@ -268,7 +265,7 @@ export default async function ExamDetailPage({
                   </Link>
                   <Link
                     className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-white/40 px-8 py-3.5 text-sm font-bold text-white transition-all duration-300 hover:border-white hover:bg-white/10"
-                    href="/book-exam"
+                    href="/book-exams"
                   >
                     Book an Exam
                   </Link>
@@ -303,10 +300,10 @@ export default async function ExamDetailPage({
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link
                   className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-8 py-3.5 text-sm font-bold text-white shadow-lg transition-all duration-300 hover:bg-red-800"
-                  href="/book-exam"
+                  href={`/book-exams/${exam.id}`}
                 >
                   <Calendar />
-                  Book This Exam
+                  Book Exam
                 </Link>
                 <Link
                   className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-gray-200 px-8 py-3.5 text-sm font-bold text-gray-700 transition-all duration-300 hover:border-primary hover:text-primary"
@@ -492,7 +489,7 @@ export default async function ExamDetailPage({
                 </p>
                 <Link
                   className="relative block rounded-lg bg-white px-4 py-2.5 text-sm font-bold text-primary shadow-sm transition-all duration-300 hover:bg-red-50"
-                  href="/book-exam"
+                  href="/book-exams"
                 >
                   Book Now
                 </Link>
@@ -563,7 +560,7 @@ export default async function ExamDetailPage({
               <div className="flex flex-col gap-3 sm:flex-row">
                 <Link
                   className="group inline-flex items-center justify-center gap-2 rounded-lg bg-white px-8 py-3.5 text-sm font-bold text-primary shadow-lg transition-all duration-300 hover:bg-red-50"
-                  href="/book-exam"
+                  href="/book-exams"
                 >
                   Book an Exam
                   <svg

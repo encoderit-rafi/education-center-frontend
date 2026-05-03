@@ -80,15 +80,12 @@ const SERVICES = [
 
 export default function CoreServices() {
   return (
-    <section className="bg-white py-24 lg:py-32 px-4">
-      <div className="max-w-7xl mx-auto">
-        <div className="mb-16">
-          <p className="text-primary text-[11px] font-bold uppercase tracking-[0.3em] lg:text-xs mb-4">
-            Our Services
-          </p>
-          <h3 className="text-4xl md:text-5xl font-headline font-black text-slate-900 tracking-tight uppercase">
-            More Than Just an{" "}
-            <span className="text-primary italic">Exam Centre</span>
+    <section className="base-py">
+      <div className="base-px section-container">
+        <div>
+          <span className="section-label">Our Services</span>
+          <h3 className="section-title">
+            More Than Just an <span>Exam Centre</span>
           </h3>
         </div>
 

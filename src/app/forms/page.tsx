@@ -1,6 +1,6 @@
 "use client";
-import FormIELTSAcademicRegistration from "@/components/forms/ielts-academic-exam-registration/ielts-academic-exam-registration";
-import FormIELTSGeneralRegistration from "@/components/forms/ielts-general-registration/ielts-general-registration";
+import FormIELTSAcademicRegistration from "@/components/forms/ielts/ielts-academic-registration/form-ielts-academic-registration";
+import FormIELTSGeneralRegistration from "@/components/forms/ielts/ielts-general-registration/form-ielts-general-registration";
 import FormPTEAcademicRegistration from "@/components/forms/pte-academic-registration/form-pte-academic-registration";
 import FormPTECoreRegistration from "@/components/forms/pte-core-registration/form-pte-core-registration";
 import FormPTEHomeA1Registration from "@/components/forms/pte-home-a1-registration/form-pte-home-a1-registration";

@@ -135,7 +135,7 @@ export default function FeesPage() {
               ].map((item) => (
                 <Link
                   key={item.name}
-                  href="/book-exam"
+                  href="/book-exams"
                   className="bg-white p-8 rounded-3xl flex justify-between items-center transition-all duration-300 border border-[#E5E7EB]/50 border-l-[12px] border-l-[#991B1B] shadow-2xl shadow-[#991B1B]/10 hover:translate-x-1"
                 >
                   <div className="space-y-1">
