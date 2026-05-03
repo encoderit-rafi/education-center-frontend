@@ -19,7 +19,8 @@ import { Menu } from "lucide-react";
 import SearchCommand from "./search-command";
 import { COURSES } from "@/lib/courses-data";
 import { Badge } from "../ui/badge";
-import { exams } from "@/lib/data";
+import { exams, exams_types } from "@/lib/data";
+import { cn } from "@/lib/utils";
 
 interface NavItem {
   type: "primary" | "secondary";
@@ -33,9 +34,9 @@ const navigations: NavItem[] = [
     type: "primary",
     label: "Exams",
     // href: "/exams",
-    children: exams.map((exam) => ({
-      label: exam.name,
-      href: `/exams/${exam.id}`,
+    children: exams_types.map((et) => ({
+      label: et.exam.name,
+      href: `/exams/${et.exam.id}`,
     })),
   },
   {
@@ -63,15 +64,15 @@ const navigations: NavItem[] = [
     type: "primary",
     label: "Book Exam",
     children: [
-      { label: "IELTS", href: "/book-a-test" },
-      { label: "TOEFL iBT", href: "/book-a-test" },
-      { label: "PTE", href: "/book-a-test" },
-      { label: "CELPIP General", href: "/book-a-test" },
-      { label: "CAEL", href: "/book-a-test" },
-      { label: "Skills for English (SELT)", href: "/book-a-test" },
+      { label: "IELTS", href: "/book-exam" },
+      { label: "TOEFL iBT", href: "/book-exam" },
+      { label: "PTE", href: "/book-exam" },
+      { label: "CELPIP General", href: "/book-exam" },
+      { label: "CAEL", href: "/book-exam" },
+      { label: "Skills for English (SELT)", href: "/book-exam" },
       {
         label: "Test Day Guidelines",
-        href: "/book-a-test/test-day-guidelines",
+        href: "/book-exam/test-day-guidelines",
       },
     ],
   },
@@ -107,18 +108,6 @@ const navigations: NavItem[] = [
       { label: "CAEL", href: "/fees/cael" },
       { label: "TOEFL", href: "/fees/toefl" },
       { label: "OET", href: "/fees/oet" },
-    ],
-  },
-  {
-    type: "secondary",
-    label: "Workshop",
-    children: [
-      { label: "IELTS", href: "/workshop/ielts" },
-      { label: "PTE", href: "/workshop/pte" },
-      { label: "CELPIP", href: "/workshop/celpip" },
-      { label: "CAEL", href: "/workshop/cael" },
-      { label: "TOEFL", href: "/workshop/toefl" },
-      { label: "OET", href: "/workshop/oet" },
     ],
   },
   {
@@ -185,14 +174,14 @@ export default function NavBar() {
   return (
     <header className="sticky top-0 z-50 overflow-visible shadow-lg">
       {/* Row 1 */}
-      <div className="nav-px nav-py flex items-center justify-between  gap-2 bg-white/90 backdrop-blur-sm">
+      <div className="relative z-20 nav-px nav-py flex items-center justify-between gap-2 bg-white/90 backdrop-blur-sm">
         <Link href="/">
           <Image
             alt="TEPTH Logo"
             width={150}
             height={150}
             src="/images/tepth-logo.png"
-            className="w-24"
+            className="w-28"
           />
         </Link>
         {/* Desktop Primary Nav */}
@@ -207,7 +196,7 @@ export default function NavBar() {
                       <NavigationMenuTrigger className="bg-transparent px-2 py-1.5 text-sm border-none outline-none transition-all rounded-lg">
                         {item.label}
                       </NavigationMenuTrigger>
-                      <NavigationMenuContent className="z-50 p-1 min-w-48 border-none! bg-primary! text-white!">
+                      <NavigationMenuContent className="z-50 p-1 min-w-48 border-none bg-primary! text-white! rounded-xl shadow-2xl">
                         <ul className="flex flex-col">
                           {item.children.map((child) => (
                             <li key={child.label}>
@@ -228,7 +217,7 @@ export default function NavBar() {
                     <NavigationMenuLink asChild>
                       <Link
                         href={item.href || "#"}
-                        className="px-2 py-1.5 text-sm hover:bg-white/10 transition-all rounded-lg"
+                        className="px-2 py-1.5 text-sm hover:bg-black/5 transition-all rounded-lg"
                       >
                         {item.label}
                       </Link>
@@ -246,16 +235,17 @@ export default function NavBar() {
             <PopoverTrigger
               render={
                 <Button
-                  className="lg:hidden p-2 text-primary hover:text-primary transition-colors"
+                  className="lg:hidden p-0 h-9 w-9 flex items-center justify-center text-primary hover:bg-primary/5 transition-colors"
                   variant="ghost"
-                />
+                  size="icon"
+                >
+                  <Menu className="w-6 h-6" />
+                </Button>
               }
-            >
-              <Menu className="w-6 h-6" />
-            </PopoverTrigger>
+            />
             <PopoverContent
               align="end"
-              className="w-64 bg-white border-slate-200 p-1 shadow-2xl rounded-xl z-[60]"
+              className="w-64 bg-primary border-none p-1 shadow-2xl rounded-xl z-[60] text-white"
             >
               <NavigationMenu className="max-w-none *:w-full">
                 <NavigationMenuList className="flex-col items-start gap-0">
@@ -263,7 +253,7 @@ export default function NavBar() {
                     <NavigationMenuItem className="w-full" key={item.label}>
                       {item.children ? (
                         <>
-                          <div className="px-2 py-1.5 font-bold text-slate-400 text-[10px] uppercase tracking-wider">
+                          <div className="px-2 py-1.5 font-bold text-white/50 text-[10px] uppercase tracking-wider">
                             {item.label}
                           </div>
                           <ul className="mb-2">
@@ -272,7 +262,7 @@ export default function NavBar() {
                                 <NavigationMenuLink asChild>
                                   <Link
                                     href={child.href}
-                                    className="px-3 py-2 text-sm text-slate-700 hover:bg-primary/10 rounded-lg transition-colors w-full flex items-center"
+                                    className="px-3 py-2 text-sm text-white hover:bg-black/10 rounded-lg transition-colors w-full flex items-center"
                                   >
                                     {child.label}
                                   </Link>
@@ -285,14 +275,14 @@ export default function NavBar() {
                         <NavigationMenuLink asChild>
                           <Link
                             href={item.href || "#"}
-                            className="px-3 py-2 text-sm font-bold text-slate-700 hover:bg-red-50 hover:text-red-900 rounded-lg transition-colors w-full flex items-center"
+                            className="px-3 py-2 text-sm font-bold text-white hover:bg-black/10 rounded-lg transition-colors w-full flex items-center"
                           >
                             {item.label}
                           </Link>
                         </NavigationMenuLink>
                       )}
                       {index < navigations.length - 1 && (
-                        <div className="mx-2 my-1 h-px bg-slate-100" />
+                        <div className="mx-2 my-1 h-px bg-white/10" />
                       )}
                     </NavigationMenuItem>
                   ))}
@@ -303,7 +293,7 @@ export default function NavBar() {
         </div>
       </div>
       {/* Row 2 */}
-      <div className="hidden lg:flex bg-primary text-white nav-px py-1 items-center justify-center gap-2">
+      <div className="relative z-10 hidden lg:flex bg-primary text-white nav-px py-1 items-center justify-center gap-2">
         <NavigationMenu viewport={false}>
           <NavigationMenuList className="gap-2">
             {navigations

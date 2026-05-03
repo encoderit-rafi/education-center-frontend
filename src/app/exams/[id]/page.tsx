@@ -2,24 +2,88 @@ import React from "react";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  exams,
-  exams_types,
-  exams_courses,
-  exams_workshops,
-  paid_mock_tests,
-} from "@/lib/data";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button, buttonVariants } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-import {
-  CheckCircle2,
-  ArrowRight,
-  Clock,
-  GraduationCap,
-  BookOpen,
-} from "lucide-react";
+import { exams, exams_types } from "@/lib/data";
+import { cn } from "@/lib/utils";
+import { ArrowRight, Calendar } from "lucide-react";
+
+const IconTile = ({ icon }: { icon: string }) => {
+  switch (icon) {
+    case "reading":
+      return (
+        <svg
+          width="18"
+          height="18"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth="1.8"
+          aria-hidden="true"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+          />
+        </svg>
+      );
+    case "listening":
+      return (
+        <svg
+          width="18"
+          height="18"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth="1.8"
+          aria-hidden="true"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"
+          />
+        </svg>
+      );
+    case "writing":
+      return (
+        <svg
+          width="18"
+          height="18"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth="1.8"
+          aria-hidden="true"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+          />
+        </svg>
+      );
+    case "speaking":
+      return (
+        <svg
+          width="18"
+          height="18"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth="1.8"
+          aria-hidden="true"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"
+          />
+        </svg>
+      );
+    default:
+      return null;
+  }
+};
 
 export default async function ExamDetailPage({
   params,
@@ -29,326 +93,505 @@ export default async function ExamDetailPage({
   const { id } = await params;
 
   const exam = exams.find((e) => e.id === id);
-  // if (!exam) {
-  //   notFound();
-  // }
+  if (!exam) {
+    notFound();
+  }
 
-  const examTypesData = exams_types.find((et) => et.exam.id === id);
-  // const examCoursesData = exams_courses.filter((ec) => ec.exam.id === id);
-  // const examWorkshopsData = exams_workshops.find((ew) => ew.exam.id === id);
-  // const examMockTests = paid_mock_tests.filter((mt) => mt.exam.id === id);
+  // Helper to find exam types in the hierarchy
+  const findExamTypes = (data: any[], targetId: string): any => {
+    for (const item of data) {
+      if (item.exam && item.exam.id === targetId) return item;
+      if (item.id === targetId) return item;
+      if (item.types && item.types.length > 0) {
+        const found = findExamTypes(item.types, targetId);
+        if (found) return found;
+      }
+    }
+    return null;
+  };
 
-  return (
-    <div className="min-h-screen bg-slate-50/50">
-      {/* Hero Section */}
-      <section className="relative h-full min-h-96 flex items-center overflow-hidden">
-        <div className="absolute inset-0 bg-slate-900/60 z-10" />
-        <Image
-          src={exam?.image || ""}
-          alt={exam?.name || ""}
-          fill
-          className="object-cover"
-          priority
-        />
-        <div className="container relative z-20 px-4 md:px-8 max-w-7xl mx-auto">
-          <div>
-            <h1 className="text-4xl md:text-7xl font-bold text-white mb-6 tracking-tight leading-[1.1]">
-              {exam?.name}
-            </h1>
-            <p className="text-lg md:text-xl text-slate-200 mb-10 leading-relaxed font-light">
-              {exam?.content}
+  const examTypesData = findExamTypes(exams_types, id);
+  const hasTypes =
+    examTypesData && examTypesData.types && examTypesData.types.length > 0;
+
+  if (hasTypes) {
+    return (
+      <div>
+        <section className="relative overflow-hidden bg-white">
+          <div
+            className="pointer-events-none absolute -top-24 -right-24 h-80 w-80 rounded-full bg-red-50 blur-3xl opacity-60"
+            aria-hidden="true"
+          ></div>
+          <div
+            className="pointer-events-none absolute top-1/2 -left-32 h-64 w-64 rounded-full bg-red-50 blur-3xl opacity-40"
+            aria-hidden="true"
+          ></div>
+          <div className="container relative mx-auto px-4 py-16 lg:px-8 lg:py-24 max-w-7xl">
+            <div className="flex items-center gap-4 mb-6">
+              <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary text-xl font-extrabold text-white shadow-lg">
+                {exam.name.charAt(0)}
+              </span>
+              <div>
+                <h1 className="text-3xl font-bold text-gray-900 lg:text-4xl xl:text-5xl">
+                  {exam.name} Exams
+                </h1>
+              </div>
+            </div>
+
+            <p className="max-w-2xl text-lg leading-relaxed text-gray-600">
+              {exam.content}
             </p>
-            <Button
-              // size="lg"
-              className={"py-2! font-medium! text-base max-w-sm w-full"}
-              // className="bg-primary hover:bg-red-800 text-white px-10 h-14 font-bold rounded-xl text-lg transition-all shadow-lg shadow-primary/20"
-            >
-              Book Exam
-            </Button>
+
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link
+                href="/book-exam"
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-8 py-3.5 text-sm font-bold text-white shadow-lg transition-all duration-300 hover:bg-red-800"
+              >
+                Book an Exam
+                <svg
+                  className="h-4 w-4 ml-1"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  ></path>
+                </svg>
+              </Link>
+              <Link
+                href="/free-consultation"
+                className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-gray-200 px-8 py-3.5 text-sm font-bold text-gray-700 transition-all duration-300 hover:border-primary hover:text-primary"
+              >
+                Free Consultation
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-[#F9FAFB] py-20">
+          <div className="container mx-auto px-4 lg:px-8 max-w-7xl">
+            <div className="mb-12 text-center">
+              <span className="inline-block px-3 py-1 text-xs font-bold uppercase tracking-widest text-primary bg-red-50 rounded-full mb-4">
+                All {exam.name} Tests
+              </span>
+              <h2 className="text-3xl font-bold text-gray-900 md:text-4xl">
+                Choose Your {exam.name} Test
+              </h2>
+              <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
+                Each {exam.name} variant is designed for a specific purpose.
+                Select the one that matches your visa, academic, or professional
+                goal.
+              </p>
+            </div>
+
+            <div className="mx-auto grid max-w-5xl gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {examTypesData.types.map((type: any, index: number) => (
+                <Link
+                  key={type.id}
+                  className="group relative overflow-hidden rounded-2xl border border-gray-100 bg-white p-6  transition-all duration-300 hover:-translate-y-1 hover:border-red-100 hover:shadow-xl"
+                  href={`/exams/${type.id}`}
+                >
+                  {/* <span
+                    aria-hidden="true"
+                    className="absolute left-0 top-0 h-full w-[3px] origin-top scale-y-0 bg-primary transition-transform duration-300 group-hover:scale-y-100"
+                  ></span> */}
+                  <div className="mb-4 flex items-center gap-3">
+                    <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-sm font-bold text-white">
+                      {/* {exam.name.charAt(0)} */}
+                      {index + 1}
+                    </span>
+                    <div className="h-px flex-1 bg-red-50"></div>
+                  </div>
+                  <h3 className="text-base font-bold text-gray-900 group-hover:text-primary transition-colors duration-300">
+                    {type.name}
+                  </h3>
+                  <p className="text-sm leading-relaxed text-gray-600">
+                    {type.content}
+                  </p>
+
+                  {type.types && type.types.length > 0 && (
+                    <p className="mt-2 text-[11px] font-medium text-primary opacity-80">
+                      {type.types.map((st: any) => st.name).join(" · ")}
+                    </p>
+                  )}
+
+                  <div className="mt-4 flex items-center gap-1 text-xs font-semibold text-primary opacity-0 transition-all duration-300 group-hover:opacity-100">
+                    {type.types && type.types.length > 0
+                      ? "View exam types"
+                      : "View details"}
+                    <ArrowRight size={14} />
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-white py-20">
+          <div className="container mx-auto px-4 lg:px-8 max-w-7xl">
+            <div className="overflow-hidden rounded-3xl bg-gradient-to-br from-red-700 via-red-800 to-red-900 px-8 py-14 shadow-xl md:px-14 md:py-16">
+              <div className="flex flex-col items-center justify-between gap-8 text-center lg:flex-row lg:text-left">
+                <div className="max-w-xl">
+                  <h2 className="text-3xl font-bold tracking-tight text-white lg:text-4xl">
+                    Not sure which {exam.name} test you need?
+                  </h2>
+                  <p className="mt-4 text-lg leading-relaxed text-red-100">
+                    Our team will help you choose the right {exam.name} variant
+                    for your visa, study, or migration goal — free of charge.
+                  </p>
+                </div>
+                <div className="flex flex-col gap-3 sm:flex-row">
+                  <Link
+                    className="group inline-flex items-center justify-center gap-2 rounded-lg bg-white px-8 py-3.5 text-sm font-bold text-primary shadow-lg transition-all duration-300 hover:bg-red-50"
+                    href="/free-consultation"
+                  >
+                    Free Consultation
+                    <svg
+                      className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      aria-hidden="true"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                      ></path>
+                    </svg>
+                  </Link>
+                  <Link
+                    className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-white/40 px-8 py-3.5 text-sm font-bold text-white transition-all duration-300 hover:border-white hover:bg-white/10"
+                    href="/book-exam"
+                  >
+                    Book an Exam
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    );
+  }
+
+  // Layout for single exams (e.g. TOEFL iBT)
+  return (
+    <div>
+      <section className="relative overflow-hidden bg-white">
+        <div className="container relative mx-auto px-4 py-16 lg:px-8 lg:py-24 max-w-7xl">
+          <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between">
+            <div className="max-w-2xl">
+              <h1 className="text-4xl font-bold leading-[1.05] tracking-tight text-gray-900 lg:text-5xl xl:text-6xl">
+                {exam.name}
+              </h1>
+              {exam.subtitle && (
+                <p className="mt-3 text-lg font-medium text-gray-500">
+                  {exam.subtitle}
+                </p>
+              )}
+              <p className="mt-5 text-base leading-relaxed text-gray-600">
+                {exam.content}
+              </p>
+
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Link
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-8 py-3.5 text-sm font-bold text-white shadow-lg transition-all duration-300 hover:bg-red-800"
+                  href="/book-exam"
+                >
+                  <Calendar />
+                  Book This Exam
+                </Link>
+                <Link
+                  className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-gray-200 px-8 py-3.5 text-sm font-bold text-gray-700 transition-all duration-300 hover:border-primary hover:text-primary"
+                  href="/free-consultation"
+                >
+                  Free Consultation
+                </Link>
+              </div>
+            </div>
+
+            <div className="relative">
+              <div
+                className="absolute -bottom-4 -right-4 hidden h-full w-full rounded-2xl bg-red-50/60 lg:block"
+                aria-hidden="true"
+              ></div>
+              <div className="relative flex h-40 w-48 shrink-0 items-center justify-center rounded-2xl border border-gray-100 bg-white p-8 shadow-xl">
+                <Image
+                  src={exam.image}
+                  alt={exam.name}
+                  width={140}
+                  height={70}
+                  className="h-14 w-auto object-contain"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <div className="container py-20 px-4 md:px-8 max-w-7xl mx-auto">
-        <div className="lg:col-span-8 space-y-24">
-          <p>
-            {exam?.content}
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
-            quod.
-          </p>
-          {/* Exam Types Section */}
-          {examTypesData && examTypesData.types.length > 0 && (
-            <section id="exam-types" className="scroll-mt-24">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {examTypesData.types.map((type) => (
-                  <Card
-                    key={type.id}
-                    className="group overflow-hidden border-slate-100 shadow-sm transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 rounded-[2rem] bg-white"
-                  >
-                    <div className="h-56 relative overflow-hidden">
-                      <Image
-                        src={type.image}
-                        alt={type.name}
-                        fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-110"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent" />
-                      <div className="absolute bottom-6 left-6">
-                        <h3 className="text-2xl font-bold text-white tracking-tight">
-                          {type.name}
-                        </h3>
-                      </div>
-                    </div>
-                    <CardContent className="p-8">
-                      <p className="text-slate-600 mb-8 leading-relaxed">
-                        {type.content}
-                      </p>
-
-                      <Link
-                        href={`/exams/${type.id}`}
-                        className={buttonVariants({
-                          variant: "ghost",
-                          className:
-                            "w-full justify-between text-primary font-bold hover:text-red-800 hover:bg-primary/5 p-0 h-auto group text-md py-2",
-                        })}
-                      >
-                        View Details{" "}
-                        <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-2" />
-                      </Link>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </section>
-          )}
-
-          {/* Courses Section */}
-          {/* {examCoursesData.length > 0 && (
-            <section id="courses" className="scroll-mt-24">
-              <div className="space-y-10">
-                {examCoursesData.map((ec, idx) => (
-                  <div
-                    key={idx}
-                    // className="bg-white rounded-[2.5rem] border border-slate-100 shadow-xl overflow-hidden group"
-                  >
-                    <div className="flex flex-wrap items-start justify-between gap-8 mb-10">
-                      <div className="flex items-start gap-6">
-                        <div className="h-16 w-16 bg-primary/10 rounded-[1.25rem] flex items-center justify-center shrink-0 transition-colors group-hover:bg-primary group-hover:text-white">
-                          <GraduationCap className="w-9 h-9 text-primary group-hover:text-white transition-colors" />
-                        </div>
-                        <div>
-                          <Badge className="mb-2 bg-slate-100 text-slate-600 border-none font-bold">
-                            {ec.class_type_id.charAt(0).toUpperCase() +
-                              ec.class_type_id.slice(1)}{" "}
-                            Preparation
-                          </Badge>
-                          <h3 className="text-3xl font-bold text-slate-900 tracking-tight leading-none">
-                            Comprehensive Coaching
-                          </h3>
-                        </div>
-                      </div>
-                      <div className="bg-slate-50 px-8 py-4 rounded-2xl border border-slate-100">
-                        <p className="text-slate-400 text-[10px] font-bold uppercase tracking-widest mb-1 text-center">
-                          Starting from
-                        </p>
-                        <p className="text-3xl font-black text-primary">
-                          AED {Math.min(...ec.courses.map((c) => c.price))}
-                        </p>
-                      </div>
-                    </div>
-                    <p className="text-lg text-slate-600 mb-12 leading-relaxed max-w-3xl">
-                      {ec.content}
-                    </p>
-                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mb-12">
-                      {ec.courses.map((course) => (
-                        <div
-                          key={course.id}
-                          className="p-6 rounded-3xl bg-slate-50 border border-slate-100 flex flex-col justify-between hover:bg-white hover:shadow-lg transition-all duration-300"
-                        >
-                          <div>
-                            <h4 className="font-bold text-slate-800 text-lg mb-3">
-                              {course.name}
-                            </h4>
-                            <div className="flex items-center gap-3 mb-6">
-                              <span className="text-2xl font-black text-slate-900">
-                                {course.currency} {course.price}
-                              </span>
-                              {course.general_discount > 0 && (
-                                <Badge
-                                  variant="destructive"
-                                  className="bg-red-500 text-[10px] font-bold px-2 py-0.5"
-                                >
-                                  -{course.general_discount}% OFF
-                                </Badge>
-                              )}
-                            </div>
-                          </div>
-                          <Button className="w-full bg-white text-slate-900 border-2 border-slate-100 hover:bg-primary hover:text-white hover:border-primary transition-all font-bold h-12 rounded-xl">
-                            Select Plan
-                          </Button>
-                        </div>
-                      ))}
-                    </div>
-                    <div className="flex flex-wrap items-center gap-x-10 gap-y-4 py-8 border-t border-slate-50">
-                      {[
-                        "Certified Native Trainers",
-                        "Premium Study Materials",
-                        "Unlimited Practice Tests",
-                        "Performance Analytics",
-                      ].map((feature, fidx) => (
-                        <div
-                          key={fidx}
-                          className="flex items-center gap-2 text-slate-500 font-medium text-sm"
-                        >
-                          <CheckCircle2 className="w-5 h-5 text-green-500" />
-                          {feature}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-          )} */}
-
-          {/* Workshops Section */}
-          {/* {examWorkshopsData && (
-            <section id="workshops" className="scroll-mt-24">
-              <div className="flex flex-col mb-10">
-                <div className="flex items-center gap-3 mb-2">
-                  <span className="text-primary font-bold text-sm uppercase tracking-widest">
-                    Intensive
-                  </span>
-                  <div className="h-[1px] flex-1 bg-slate-200" />
+      {/* Stats Section */}
+      <section className="relative bg-[#F9FAFB] pb-6 pt-2">
+        <div className="container mx-auto px-4 lg:px-8 max-w-7xl">
+          <div className="relative -mt-10 rounded-2xl border border-gray-100 bg-white p-4 shadow-xl md:p-6 lg:p-8">
+            <div className="grid gap-4 grid-cols-2 lg:grid-cols-4 md:gap-0 md:divide-x md:divide-gray-100">
+              {exam.stats?.map((stat, i) => (
+                <div
+                  key={i}
+                  className="flex flex-col items-center gap-2 px-4 py-4 text-center md:px-6"
+                >
+                  <p className="text-2xl font-bold leading-none text-gray-900 lg:text-3xl">
+                    {stat.value}
+                  </p>
+                  <p className="text-[12px] font-medium uppercase tracking-wider text-gray-500">
+                    {stat.label}
+                  </p>
                 </div>
-                <h2 className="text-4xl font-bold text-slate-900 tracking-tight">
-                  Rapid Skill Boost
-                </h2>
-              </div>
-              <div className="bg-slate-900 rounded-[3rem] overflow-hidden shadow-2xl relative group">
-                <div className="grid grid-cols-1 md:grid-cols-12 min-h-[500px]">
-                  <div className="md:col-span-5 relative overflow-hidden">
-                    <Image
-                      src={examWorkshopsData.image}
-                      alt="Workshop"
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-1000"
-                    />
-                    <div className="absolute inset-0 bg-primary/20 mix-blend-overlay" />
-                  </div>
-                  <div className="md:col-span-7 p-10 md:p-16 flex flex-col justify-center">
-                    <Badge className="bg-primary text-white border-none mb-6 w-fit px-4 py-1.5 font-bold uppercase tracking-widest text-[10px]">
-                      Fast-Track Workshop
-                    </Badge>
-                    <h3 className="text-3xl md:text-5xl font-bold text-white mb-8 tracking-tight">
-                      Master Everything in a Day
-                    </h3>
-                    <p className="text-slate-400 text-lg mb-12 leading-relaxed font-light">
-                      {examWorkshopsData.content}
-                    </p>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-12">
-                      {examWorkshopsData.workshops.map((ws) => (
-                        <div
-                          key={ws.id}
-                          className="flex flex-col p-6 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors"
-                        >
-                          <span className="text-slate-500 text-[10px] font-black uppercase tracking-[0.2em] mb-2">
-                            {ws.duration}
-                          </span>
-                          <span className="text-white font-bold text-lg mb-2">
-                            {ws.name}
-                          </span>
-                          <span className="text-primary text-xl font-black">
-                            {ws?.currency} {ws?.price}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                    <Button className="w-full sm:w-fit bg-primary hover:bg-red-800 text-white px-12 h-14 font-bold rounded-xl text-lg shadow-xl shadow-primary/20 transition-all">
-                      Register for Workshop
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </section>
-          )} */}
-
-          {/* Mock Tests Section */}
-          {/* {examMockTests.length > 0 && (
-            <section id="mock-tests" className="scroll-mt-24">
-              <div className="flex flex-col mb-10">
-                <div className="flex items-center gap-3 mb-2">
-                  <span className="text-primary font-bold text-sm uppercase tracking-widest">
-                    Practice
-                  </span>
-                  <div className="h-[1px] flex-1 bg-slate-200" />
-                </div>
-                <h2 className="text-4xl font-bold text-slate-900 tracking-tight">
-                  Mock Evaluation
-                </h2>
-              </div>
-              <div className="grid grid-cols-1 gap-10">
-                {examMockTests.map((mt, idx) => (
-                  <Card
-                    key={idx}
-                    className="border-none bg-gradient-to-br from-slate-50 to-white shadow-xl p-10 md:p-16 flex flex-col md:flex-row gap-12 items-center rounded-[3rem] relative overflow-hidden group"
-                  >
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -mr-32 -mt-32" />
-                    <div className="w-40 h-40 relative shrink-0 z-10">
-                      <div className="absolute inset-0 bg-white rounded-[2rem] shadow-lg -rotate-6 group-hover:rotate-0 transition-transform duration-500" />
-                      <Image
-                        src={mt.image}
-                        alt="Mock Test"
-                        fill
-                        className="object-contain p-6 relative z-20"
-                      />
-                    </div>
-                    <div className="flex-1 text-center md:text-left z-10">
-                      <Badge
-                        variant="outline"
-                        className="mb-4 text-primary border-primary/20 bg-primary/5 px-4 py-1 font-bold uppercase tracking-widest text-[10px]"
-                      >
-                        Official Test Format
-                      </Badge>
-                      <h3 className="text-3xl font-bold text-slate-900 mb-6 tracking-tight">
-                        Get Your Projected Score
-                      </h3>
-                      <p className="text-lg text-slate-600 mb-10 leading-relaxed font-light">
-                        {mt.content}
-                      </p>
-                      <div className="flex flex-wrap items-center justify-center md:justify-start gap-10">
-                        <div className="flex items-center gap-3 text-slate-700 font-bold">
-                          <div className="h-10 w-10 bg-white rounded-xl shadow-sm flex items-center justify-center">
-                            <Clock className="w-5 h-5 text-primary" />
-                          </div>
-                          Timed Simulation
-                        </div>
-                        <div className="flex items-center gap-3 text-slate-700 font-bold">
-                          <div className="h-10 w-10 bg-white rounded-xl shadow-sm flex items-center justify-center">
-                            <BookOpen className="w-5 h-5 text-primary" />
-                          </div>
-                          Detailed Feedback
-                        </div>
-                      </div>
-                    </div>
-                    <div className="shrink-0 bg-slate-900 p-10 rounded-[2.5rem] shadow-2xl text-center w-full md:w-[280px] z-10">
-                      <p className="text-slate-500 text-[10px] font-black mb-2 uppercase tracking-[0.2em]">
-                        Booking Fee
-                      </p>
-                      <p className="text-4xl font-black text-white mb-8">
-                        {mt.price.currency} {mt.price.fee}
-                      </p>
-                      <Button className="w-full bg-primary hover:bg-red-800 text-white h-14 font-bold rounded-2xl text-lg shadow-lg shadow-primary/20">
-                        Book Session
-                      </Button>
-                    </div>
-                  </Card>
-                ))}
-              </div>
-            </section>
-          )} */}
+              ))}
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
+
+      {/* Content Section */}
+      <section className="bg-[#F9FAFB] py-20">
+        <div className="container mx-auto px-4 lg:px-8 max-w-7xl">
+          <div className="grid gap-12 lg:grid-cols-3 lg:gap-16">
+            <div className="lg:col-span-2">
+              <span className="inline-block px-3 py-1 text-xs font-bold uppercase tracking-widest text-primary bg-red-50 rounded-full mb-4">
+                About the Exam
+              </span>
+              <h2 className="mb-5 text-2xl font-bold text-gray-900 lg:text-3xl">
+                {exam.name} Overview
+              </h2>
+              <p className="leading-relaxed text-gray-600">{exam.overview}</p>
+
+              {exam.sections && exam.sections.length > 0 && (
+                <div className="mt-12">
+                  <span className="inline-block px-3 py-1 text-xs font-bold uppercase tracking-widest text-primary bg-red-50 rounded-full mb-4">
+                    Test Format
+                  </span>
+                  <h3 className="mb-6 text-xl font-bold text-gray-900 lg:text-2xl">
+                    What to Expect on Test Day
+                  </h3>
+                  <div className="space-y-4">
+                    {exam.sections.map((section, i) => (
+                      <div
+                        key={i}
+                        className="flex gap-4 p-5 rounded-xl border border-gray-50 bg-white shadow-sm transition-all hover:shadow-md"
+                      >
+                        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-red-50 text-primary">
+                          <IconTile icon={section.icon} />
+                        </span>
+                        <div className="min-w-0 flex-1">
+                          <div className="flex flex-wrap items-center gap-3">
+                            <h4 className="font-semibold text-gray-900">
+                              {section.name}
+                            </h4>
+                            <span className="rounded-full border border-gray-100 bg-gray-50 px-2.5 py-0.5 text-xs font-medium text-gray-600">
+                              {section.duration}
+                            </span>
+                          </div>
+                          <p className="mt-1.5 text-sm leading-relaxed text-gray-600">
+                            {section.details}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Sidebar */}
+            <div className="space-y-6">
+              <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+                <h3 className="mb-4 text-xs font-bold uppercase tracking-[0.18em] text-gray-400">
+                  Who Should Take This?
+                </h3>
+                <ul className="space-y-3">
+                  {exam.whoShouldTake?.map((item, i) => (
+                    <li
+                      key={i}
+                      className="flex items-start gap-3 text-sm text-gray-700"
+                    >
+                      <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-red-50 text-primary">
+                        <svg
+                          className="h-3 w-3"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          strokeWidth="2.5"
+                          aria-hidden="true"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M5 13l4 4L19 7"
+                          ></path>
+                        </svg>
+                      </span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+                <h3 className="mb-4 text-xs font-bold uppercase tracking-[0.18em] text-gray-400">
+                  Scores & Results
+                </h3>
+                <div className="space-y-3 text-sm">
+                  {exam.stats?.map((stat, i) => (
+                    <div
+                      key={i}
+                      className="flex items-start justify-between gap-4 border-b border-dashed border-gray-100 pb-2.5 last:border-0 last:pb-0"
+                    >
+                      <span className="text-gray-500">{stat.label}</span>
+                      <span className="text-right font-semibold text-gray-900">
+                        {stat.value}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="rounded-2xl border border-red-100 bg-red-50 p-6 shadow-sm">
+                <h3 className="mb-4 text-xs font-bold uppercase tracking-[0.18em] text-primary">
+                  Accepted For
+                </h3>
+                <ul className="space-y-2.5">
+                  {exam.acceptedFor?.map((item, i) => (
+                    <li
+                      key={i}
+                      className="flex items-center gap-2.5 text-sm text-red-900"
+                    >
+                      <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-primary"></span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-red-700 to-red-900 p-6 text-center shadow-lg">
+                <div
+                  className="pointer-events-none absolute -right-6 -top-6 h-24 w-24 rounded-full bg-white/10"
+                  aria-hidden="true"
+                ></div>
+                <p className="relative mb-1 text-xs font-semibold uppercase tracking-widest text-red-200">
+                  Ready to Register?
+                </p>
+                <p className="relative mb-4 text-lg font-bold text-white">
+                  Book {exam.name} at TEPTH
+                </p>
+                <Link
+                  className="relative block rounded-lg bg-white px-4 py-2.5 text-sm font-bold text-primary shadow-sm transition-all duration-300 hover:bg-red-50"
+                  href="/book-exam"
+                >
+                  Book Now
+                </Link>
+                <Link
+                  className="relative mt-3 block text-xs font-medium text-red-200 transition-colors hover:text-white"
+                  href="/test-dates"
+                >
+                  View upcoming test dates →
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQs Section */}
+      {exam.faqs && exam.faqs.length > 0 && (
+        <section className="bg-white py-20">
+          <div className="container mx-auto px-4 lg:px-8 max-w-3xl">
+            <div className="mb-10 text-center">
+              <span className="inline-block px-3 py-1 text-xs font-bold uppercase tracking-widest text-primary bg-red-50 rounded-full mb-5">
+                Frequently Asked
+              </span>
+              <h2 className="text-3xl font-bold text-gray-900">
+                Common Questions About {exam.name}
+              </h2>
+            </div>
+            <div className="space-y-4">
+              {exam.faqs.map((faq, i) => (
+                <div
+                  key={i}
+                  className="p-6 rounded-xl border border-gray-50 bg-white shadow-sm transition-all hover:shadow-md"
+                >
+                  <h3 className="mb-2 font-semibold text-gray-900">
+                    {faq.question}
+                  </h3>
+                  <p className="text-sm leading-relaxed text-gray-600">
+                    {faq.answer}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Final CTA */}
+      <section className="relative overflow-hidden bg-[#F9FAFB] py-20">
+        <div className="container relative mx-auto px-4 lg:px-8 max-w-7xl">
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-red-700 via-red-800 to-red-900 px-8 py-14 shadow-xl md:px-14 md:py-16">
+            <div
+              className="pointer-events-none absolute inset-0"
+              aria-hidden="true"
+            >
+              <div className="absolute -right-24 -top-24 h-80 w-80 rounded-full bg-white/5"></div>
+              <div className="absolute -bottom-16 -left-16 h-64 w-64 rounded-full bg-white/5"></div>
+            </div>
+            <div className="relative flex flex-col items-center justify-between gap-8 text-center lg:flex-row lg:text-left">
+              <div className="max-w-xl">
+                <h2 className="text-3xl font-bold tracking-tight text-white lg:text-4xl">
+                  Register for {exam.name} at TEPTH
+                </h2>
+                <p className="mt-4 text-lg leading-relaxed text-red-100">
+                  Book online in minutes. Secure payment and instant
+                  confirmation.
+                </p>
+              </div>
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <Link
+                  className="group inline-flex items-center justify-center gap-2 rounded-lg bg-white px-8 py-3.5 text-sm font-bold text-primary shadow-lg transition-all duration-300 hover:bg-red-50"
+                  href="/book-exam"
+                >
+                  Book an Exam
+                  <svg
+                    className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    aria-hidden="true"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M17 8l4 4m0 0l-4 4m4-4H3"
+                    ></path>
+                  </svg>
+                </Link>
+                <Link
+                  className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-white/40 px-8 py-3.5 text-sm font-bold text-white transition-all duration-300 hover:border-white hover:bg-white/10"
+                  href="/free-consultation"
+                >
+                  Free Consultation
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

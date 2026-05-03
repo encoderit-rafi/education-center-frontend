@@ -1,5 +1,5 @@
 import { exams, exams_types } from "@/lib/data";
-import CourseCard from "./course-card";
+import ExamCard from "./exam-card";
 
 export default function CourseList() {
   return (
@@ -21,7 +21,7 @@ export default function CourseList() {
             const types = examTypeData?.types || [];
 
             return (
-              <CourseCard 
+              <ExamCard 
                 key={exam.id} 
                 exam={exam} 
                 types={types} 

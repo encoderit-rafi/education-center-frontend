@@ -41,18 +41,39 @@ export default function FeesPage() {
               Select Your Course
             </h2>
             <p className="text-[#4B5563] max-w-xl mx-auto text-lg leading-relaxed">
-              Explore detailed pricing and plans for each of our examination preparation programs.
+              Explore detailed pricing and plans for each of our examination
+              preparation programs.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { name: "Workshops", fullName: "Intensive Exam Workshops", href: "/fees/exam-workshop" },
-              { name: "IELTS", fullName: "IELTS Preparation", href: "/fees/ielts" },
+              {
+                name: "Workshops",
+                fullName: "Intensive Exam Workshops",
+                href: "/fees/exam-workshop",
+              },
+              {
+                name: "IELTS",
+                fullName: "IELTS Preparation",
+                href: "/fees/ielts",
+              },
               { name: "PTE", fullName: "PTE Preparation", href: "/fees/pte" },
-              { name: "CELPIP", fullName: "CELPIP Preparation", href: "/fees/celpip" },
-              { name: "CAEL", fullName: "CAEL Preparation", href: "/fees/cael" },
-              { name: "TOEFL", fullName: "TOEFL Preparation", href: "/fees/toefl" },
+              {
+                name: "CELPIP",
+                fullName: "CELPIP Preparation",
+                href: "/fees/celpip",
+              },
+              {
+                name: "CAEL",
+                fullName: "CAEL Preparation",
+                href: "/fees/cael",
+              },
+              {
+                name: "TOEFL",
+                fullName: "TOEFL Preparation",
+                href: "/fees/toefl",
+              },
               { name: "OET", fullName: "OET Preparation", href: "/fees/oet" },
             ].map((course) => (
               <Link
@@ -65,12 +86,16 @@ export default function FeesPage() {
                     {course.name}
                   </span>
                   <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:bg-[#991B1B] group-hover:text-white transition-all">
-                    <span className="material-symbols-outlined text-xl">arrow_forward</span>
+                    <span className="material-symbols-outlined text-xl">
+                      arrow_forward
+                    </span>
                   </div>
                 </div>
                 <p className="text-[#4B5563] font-medium">{course.fullName}</p>
                 <div className="mt-8 pt-6 border-t border-[#E5E7EB]">
-                  <span className="text-xs font-black uppercase tracking-widest text-[#991B1B]">View Detailed Plans</span>
+                  <span className="text-xs font-black uppercase tracking-widest text-[#991B1B]">
+                    View Detailed Plans
+                  </span>
                 </div>
               </Link>
             ))}
@@ -110,7 +135,7 @@ export default function FeesPage() {
               ].map((item) => (
                 <Link
                   key={item.name}
-                  href="/book-a-test"
+                  href="/book-exam"
                   className="bg-white p-8 rounded-3xl flex justify-between items-center transition-all duration-300 border border-[#E5E7EB]/50 border-l-[12px] border-l-[#991B1B] shadow-2xl shadow-[#991B1B]/10 hover:translate-x-1"
                 >
                   <div className="space-y-1">
