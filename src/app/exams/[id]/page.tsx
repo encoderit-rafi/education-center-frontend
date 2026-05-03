@@ -193,12 +193,8 @@ export default async function ExamDetailPage({
                   className="group relative overflow-hidden rounded-2xl border border-gray-100 bg-white p-6  transition-all duration-300 hover:-translate-y-1 hover:border-red-100 hover:shadow-xl"
                   href={`/exams/${type.id}`}
                 >
-                  {/* <span
-                    aria-hidden="true"
-                    className="absolute left-0 top-0 h-full w-[3px] origin-top scale-y-0 bg-primary transition-transform duration-300 group-hover:scale-y-100"
-                  ></span> */}
                   <div className="mb-4 flex items-center gap-3">
-                    <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-sm font-bold text-white">
+                    <span className="flex h-9 w-9 items-center justify-center rounded-full bg-primary text-sm font-bold text-white">
                       {/* {exam.name.charAt(0)} */}
                       {index + 1}
                     </span>
@@ -218,9 +214,7 @@ export default async function ExamDetailPage({
                   )}
 
                   <div className="mt-4 flex items-center gap-1 text-xs font-semibold text-primary opacity-0 transition-all duration-300 group-hover:opacity-100">
-                    {type.types && type.types.length > 0
-                      ? "View exam types"
-                      : "View details"}
+                    View Details
                     <ArrowRight size={14} />
                   </div>
                 </Link>

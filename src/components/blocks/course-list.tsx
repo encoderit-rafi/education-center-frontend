@@ -1,31 +1,49 @@
 import { exams, exams_types } from "@/lib/data";
-import ExamCard from "./exam-card";
+import {
+  BaseCard,
+  BaseCardDescription,
+  BaseCardTitle,
+} from "./cards/base-card";
+import { ArrowRight } from "lucide-react";
+import { Badge } from "../ui/badge";
+import { buttonVariants } from "../ui/button";
+import Link from "next/link";
 
 export default function CourseList() {
   return (
-    <section className="py-24 px-8 bg-slate-50/50 border-y border-slate-100">
-      <div className="max-w-7xl mx-auto">
-        <div className="mb-16">
-          <p className="text-primary text-[11px] font-bold uppercase tracking-[0.3em] lg:text-xs mb-4">
-            Curriculum
-          </p>
-          <h3 className="text-4xl md:text-5xl font-headline font-black text-slate-900 tracking-tight uppercase">
-            Explore <span className="text-primary italic">Exams</span>
+    <section className="base-px base-py">
+      <div className="section-container">
+        <div className="space-y-4 mb-12">
+          <span className="section-label">Curriculum</span>
+          <h3 className="section-title">
+            Explore <span>Exams</span>
           </h3>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {exams.map((exam) => {
-            // Find types for this exam
             const examTypeData = exams_types.find((t) => t.exam.id === exam.id);
             const types = examTypeData?.types || [];
 
             return (
-              <ExamCard 
-                key={exam.id} 
-                exam={exam} 
-                types={types} 
-              />
+              <Link href={`/exams/${exam.id}`}>
+                <BaseCard className="h-full">
+                  <div className="flex items-start justify-between">
+                    <BaseCardTitle>{exam.name}</BaseCardTitle>
+                    <ArrowRight className="size-5 text-slate-300 transition-all duration-300 group-hover:text-primary group-hover:translate-x-1" />
+                  </div>
+                  <BaseCardDescription>{exam.content}</BaseCardDescription>
+                  {types && types.length > 0 && (
+                    <div className="no-scrollbar flex flex-nowrap overflow-x-auto gap-2">
+                      {types.map((type, idx) => (
+                        <Badge variant={"destructive"} key={idx}>
+                          {type.name}
+                        </Badge>
+                      ))}
+                    </div>
+                  )}
+                </BaseCard>
+              </Link>
             );
           })}
         </div>

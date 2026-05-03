@@ -1,5 +1,5 @@
-import FormIELTSAcademicRegistration from "@/components/forms/ielts/ielts-academic-registration/form-ielts-academic-registration";
-import FormIELTSGeneralRegistration from "@/components/forms/ielts/ielts-general-registration/form-ielts-general-registration";
+import FormIELTSAcademicRegistration from "@/components/blocks/forms/ielts/ielts-academic-registration/form-ielts-academic-registration";
+import FormIELTSGeneralRegistration from "@/components/blocks/forms/ielts/ielts-general-registration/form-ielts-general-registration";
 
 export default async function BookExamsId({
   params,
