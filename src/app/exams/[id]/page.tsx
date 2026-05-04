@@ -5,6 +5,15 @@ import Link from "next/link";
 import { exams, exams_types } from "@/lib/data";
 import { cn } from "@/lib/utils";
 import { ArrowRight, Calendar } from "lucide-react";
+import {
+  BaseCard,
+  BaseCardDescription,
+  BaseCardIcon,
+  BaseCardTitle,
+} from "@/components/blocks/cards/base-card";
+import { Badge } from "@/components/ui/badge";
+import GradientBox from "@/components/blocks/gradient-box";
+import { buttonVariants } from "@/components/ui/button";
 
 const IconTile = ({ icon }: { icon: string }) => {
   switch (icon) {
@@ -117,64 +126,8 @@ export default async function ExamDetailPage({
   if (hasTypes) {
     return (
       <div>
-        {/* <section className="relative overflow-hidden bg-white">
-          <div
-            className="pointer-events-none absolute -top-24 -right-24 h-80 w-80 rounded-full bg-red-50 blur-3xl opacity-60"
-            aria-hidden="true"
-          ></div>
-          <div
-            className="pointer-events-none absolute top-1/2 -left-32 h-64 w-64 rounded-full bg-red-50 blur-3xl opacity-40"
-            aria-hidden="true"
-          ></div>
-          <div className="container relative mx-auto px-4 py-16 lg:px-8 lg:py-24 max-w-7xl">
-            <div className="flex items-center gap-4 mb-6">
-              <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary text-xl font-extrabold text-white shadow-lg">
-                {exam.name.charAt(0)}
-              </span>
-              <div>
-                <h1 className="text-3xl font-bold text-gray-900 lg:text-4xl xl:text-5xl">
-                  {exam.name} Exams
-                </h1>
-              </div>
-            </div>
-
-            <p className="max-w-2xl text-lg leading-relaxed text-gray-600">
-              {exam.content}
-            </p>
-
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link
-                href="/book-exams"
-                className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-8 py-3.5 text-sm font-bold text-white shadow-lg transition-all duration-300 hover:bg-red-800"
-              >
-                Book an Exam
-                <svg
-                  className="h-4 w-4 ml-1"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M17 8l4 4m0 0l-4 4m4-4H3"
-                  ></path>
-                </svg>
-              </Link>
-              <Link
-                href="/free-consultation"
-                className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-gray-200 px-8 py-3.5 text-sm font-bold text-gray-700 transition-all duration-300 hover:border-primary hover:text-primary"
-              >
-                Free Consultation
-              </Link>
-            </div>
-          </div>
-        </section> */}
-
-        <section className="bg-[#F9FAFB] py-20">
-          <div className="container mx-auto px-4 lg:px-8 max-w-7xl">
+        <section className="base-py bg-[#F9FAFB] base-px">
+          <div className="section-container">
             <div className="mb-12 text-center">
               <h2 className="section-title">
                 Choose Your <span>{exam.name}</span> Test
@@ -186,88 +139,79 @@ export default async function ExamDetailPage({
               </p>
             </div>
 
-            <div className="mx-auto grid max-w-5xl gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {examTypesData.types.map((type: any, index: number) => (
                 <Link
                   key={type.id}
-                  className="group relative overflow-hidden rounded-2xl border border-gray-100 bg-white p-6  transition-all duration-300 hover:-translate-y-1 hover:border-red-100 hover:shadow-xl"
+                  // className="group relative overflow-hidden rounded-2xl border border-gray-100 bg-white p-6  transition-all duration-300 hover:-translate-y-1 hover:border-red-100 hover:shadow-xl"
                   href={`/exams/${type.id}`}
                 >
-                  <div className="mb-4 flex items-center gap-3">
-                    <span className="flex h-9 w-9 items-center justify-center rounded-full bg-primary text-sm font-bold text-white">
-                      {/* {exam.name.charAt(0)} */}
-                      {index + 1}
-                    </span>
-                    <div className="h-px flex-1 bg-red-50"></div>
-                  </div>
-                  <h3 className="text-base font-bold text-gray-900 group-hover:text-primary transition-colors duration-300">
-                    {type.name}
-                  </h3>
-                  <p className="text-sm leading-relaxed text-gray-600">
-                    {type.content}
-                  </p>
+                  <BaseCard className="p-6 h-full">
+                    <div className="flex items-center gap-3">
+                      <BaseCardIcon className="rounded-full size-9 text-lg font-bold">
+                        {/* {exam.name.charAt(0)} */}
+                        {index + 1}
+                      </BaseCardIcon>
+                      <div className="h-px flex-1 bg-red-50"></div>
+                    </div>
+                    <BaseCardTitle>{type.name}</BaseCardTitle>
+                    <BaseCardDescription>{type.content}</BaseCardDescription>
+                    {/* {type.types && type.types.length > 0 && (
+                      <div className="no-scrollbar flex flex-nowrap overflow-x-auto gap-2 max-w-full">
+                        {type.types.map((type: any, idx: number) => (
+                          <Badge variant={"destructive"} key={idx}>
+                            {type.name}
+                          </Badge>
+                        ))}
+                      </div>
+                    )} */}
 
-                  {type.types && type.types.length > 0 && (
-                    <p className="mt-2 text-[11px] font-medium text-primary opacity-80">
-                      {type.types.map((st: any) => st.name).join(" · ")}
-                    </p>
-                  )}
-
-                  <div className="mt-4 flex items-center gap-1 text-xs font-semibold text-primary opacity-0 transition-all duration-300 group-hover:opacity-100">
-                    View Details
-                    <ArrowRight size={14} />
-                  </div>
+                    <div className="mt-auto flex items-center gap-1 text-xs font-semibold text-primary opacity-0 transition-all duration-300 group-hover:opacity-100">
+                      View Details
+                      <ArrowRight size={14} />
+                    </div>
+                  </BaseCard>
                 </Link>
               ))}
             </div>
           </div>
         </section>
-
-        <section className="bg-white py-20">
-          <div className="container mx-auto px-4 lg:px-8 max-w-7xl">
-            <div className="overflow-hidden rounded-3xl bg-gradient-to-br from-red-700 via-red-800 to-red-900 px-8 py-14 shadow-xl md:px-14 md:py-16">
-              <div className="flex flex-col items-center justify-between gap-8 text-center lg:flex-row lg:text-left">
-                <div className="max-w-xl">
-                  <h2 className="text-3xl font-bold tracking-tight text-white lg:text-4xl">
-                    Not sure which {exam.name} test you need?
-                  </h2>
-                  <p className="mt-4 text-lg leading-relaxed text-red-100">
-                    Our team will help you choose the right {exam.name} variant
-                    for your visa, study, or migration goal — free of charge.
-                  </p>
-                </div>
-                <div className="flex flex-col gap-3 sm:flex-row">
-                  <Link
-                    className="group inline-flex items-center justify-center gap-2 rounded-lg bg-white px-8 py-3.5 text-sm font-bold text-primary shadow-lg transition-all duration-300 hover:bg-red-50"
-                    href="/free-consultation"
-                  >
-                    Free Consultation
-                    <svg
-                      className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      aria-hidden="true"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M17 8l4 4m0 0l-4 4m4-4H3"
-                      ></path>
-                    </svg>
-                  </Link>
-                  <Link
-                    className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-white/40 px-8 py-3.5 text-sm font-bold text-white transition-all duration-300 hover:border-white hover:bg-white/10"
-                    href="/book-exams"
-                  >
-                    Book an Exam
-                  </Link>
-                </div>
-              </div>
+        <GradientBox className="base-py base-px">
+          <div className="section-container p-6 flex flex-col items-center justify-between gap-8 text-center lg:flex-row lg:text-left">
+            <div className="max-w-xl">
+              <h2 className="text-3xl font-bold tracking-tight text-white lg:text-4xl">
+                Not sure which {exam.name} test you need?
+              </h2>
+              <p className="mt-4 text-lg leading-relaxed text-red-100">
+                Our team will help you choose the right {exam.name} variant for
+                your visa, study, or migration goal — free of charge.
+              </p>
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              <Link
+                // className="group inline-flex items-center justify-center gap-2 rounded-lg bg-white px-8 py-3.5 text-sm font-bold text-primary shadow-lg transition-all duration-300 hover:bg-red-50"
+                className={buttonVariants({
+                  variant: "light",
+                  className: "group px-5",
+                })}
+                href="/free-consultation"
+              >
+                Free Consultation
+                <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </Link>
+              <Link
+                // className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-white/40 px-8 py-3.5 text-sm font-bold text-white transition-all duration-300 hover:border-white hover:bg-white/10"
+                className={buttonVariants({
+                  variant: "secondary",
+                  className: "group px-5",
+                })}
+                href="/book-exams"
+              >
+                Book an Exam
+              </Link>
             </div>
           </div>
-        </section>
+        </GradientBox>
       </div>
     );
   }
@@ -309,10 +253,6 @@ export default async function ExamDetailPage({
             </div>
 
             <div className="relative">
-              <div
-                className="absolute -bottom-4 -right-4 hidden h-full w-full rounded-2xl bg-red-50/60 lg:block"
-                aria-hidden="true"
-              ></div>
               <div className="relative flex h-40 w-48 shrink-0 items-center justify-center rounded-2xl border border-gray-100 bg-white p-8 shadow-xl">
                 <Image
                   src={exam.image}
