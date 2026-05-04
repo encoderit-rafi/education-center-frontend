@@ -37,6 +37,8 @@ import { languages } from "@/lib/languages-data";
 import { courses, workshops } from "@/lib/data";
 import { BookOpen, Calendar as CalendarIcon, CheckSquare, Building2, Banknote } from "lucide-react";
 import Payment from "../../../payment";
+import { ExamDateSelector } from "@/components/blocks/calendar-booking/exam-date-selector";
+
 
 export default function FormIELTSAcademicRegistration() {
   const [step, setStep] = useState(1);
@@ -91,6 +93,8 @@ export default function FormIELTSAcademicRegistration() {
       vatNumber: "",
       paymentMethod: "online",
       termsAgreed: false,
+      examDate: undefined,
+      examTime: "",
     },
   });
 
@@ -114,17 +118,17 @@ export default function FormIELTSAcademicRegistration() {
   const total = subtotal + tax;
 
   const onSubmit: SubmitHandler<TIeltsAcademicSchema> = (data) => {
-    if (step === 5) {
+    if (step === 6) {
       if (data.paymentMethod === "online") {
-        setStep(6);
-      } else {
         setStep(7);
+      } else {
+        setStep(8);
       }
       window.scrollTo({ top: 0, behavior: "smooth" });
       return;
     }
 
-    if (step < 7) {
+    if (step < 8) {
       handleNext();
       return;
     }
@@ -143,6 +147,8 @@ export default function FormIELTSAcademicRegistration() {
   const getFieldsForStep = (currentStep: number): (keyof TIeltsAcademicSchema)[] => {
     switch (currentStep) {
       case 1:
+        return ["examDate", "examTime"];
+      case 2:
         return [
           "testModule",
           "bookingFor",
@@ -161,7 +167,7 @@ export default function FormIELTSAcademicRegistration() {
           "postcode",
           "marketingPreference",
         ];
-      case 2:
+      case 3:
         return [
           "idType",
           "idNumber",
@@ -169,7 +175,7 @@ export default function FormIELTSAcademicRegistration() {
           "issuingAuthority",
           "nationality",
         ];
-      case 3:
+      case 4:
         return [
           "takenBefore",
           "lessThanTwoYears",
@@ -184,9 +190,9 @@ export default function FormIELTSAcademicRegistration() {
           "reasonForTakingTest",
           "destinationCountry",
         ];
-      case 4:
-        return ["selectedCourse", "selectedWorkshop"];
       case 5:
+        return ["selectedCourse", "selectedWorkshop"];
+      case 6:
         return ["confirmationRecipient", "paymentMethod", "termsAgreed"];
       default:
         return [];
@@ -198,39 +204,32 @@ export default function FormIELTSAcademicRegistration() {
       {/* Header Section */}
       <div className="max-w-4xl mx-auto base-px ">
         <div className="flex flex-col mb-8">
-          <span className="section-label">Step {step} of 7</span>
-          {/* <h1 className="section-title flex items-center gap-2">
-            {step === 1
-              ? "Personal details"
-              : step === 2
-                ? "Identification details"
-                : step === 3
-                  ? "Your profile"
-                  : "Review"}
-          </h1> */}
+          <span className="section-label">Step {step} of 8</span>
           <div className="flex items-center gap-4">
             <span className="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-black text-sm shadow-lg shadow-primary/20">
               {step}
             </span>
             <h2 className="text-2xl font-headline font-black text-secondary tracking-tight">
               {step === 1
-                ? "Personal details"
+                ? "Select Exam Date"
                 : step === 2
+                ? "Personal details"
+                : step === 3
                   ? "Identification details"
-                  : step === 3
+                  : step === 4
                     ? "Your profile"
-                    : step === 4
+                    : step === 5
                       ? "Courses & Workshops"
-                      : step === 5
+                      : step === 6
                         ? "Review"
-                        : step === 6
+                        : step === 7
                           ? "Payment"
                           : "Confirmation"}
             </h2>
           </div>
           <div
             className="w-12 h-1 bg-[#A11D1D] mt-4 transition-all duration-500"
-            style={{ width: `${(step / 7) * 100}%` }}
+            style={{ width: `${(step / 8) * 100}%` }}
           ></div>
         </div>
 
@@ -238,6 +237,34 @@ export default function FormIELTSAcademicRegistration() {
         <Form {...form}>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-12">
             {step === 1 && (
+              <div className="animate-in fade-in slide-in-from-right-8 duration-500">
+                <FormField
+                  control={control}
+                  name="examDate"
+                  render={({ field: dateField }) => (
+                    <FormField
+                      control={control}
+                      name="examTime"
+                      render={({ field: timeField }) => (
+                        <FormItem>
+                          <FormControl>
+                            <ExamDateSelector
+                              selectedDate={dateField.value}
+                              onDateSelect={dateField.onChange}
+                              selectedTime={timeField.value}
+                              onTimeSelect={timeField.onChange}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  )}
+                />
+              </div>
+            )}
+
+            {step === 2 && (
               <>
                 {/* Note Box */}
                 <div className="bg-orange-50/50 border border-orange-100 rounded-2xl p-6 md:p-8 space-y-4">
@@ -754,7 +781,7 @@ export default function FormIELTSAcademicRegistration() {
               </>
             )}
 
-            {step === 2 && (
+            {step === 3 && (
               <div className="space-y-12">
                 {/* Identification type */}
                 <div className="space-y-6">
@@ -907,7 +934,7 @@ export default function FormIELTSAcademicRegistration() {
               </div>
             )}
 
-            {step === 3 && (
+            {step === 4 && (
               <div className="space-y-12">
                 {/* Yellow Note Box */}
                 <div className="bg-amber-50/50 border border-amber-100 rounded-2xl p-6 md:p-8 flex items-start gap-4">
@@ -1422,7 +1449,7 @@ export default function FormIELTSAcademicRegistration() {
               </div>
             )}
 
-            {step === 4 && (
+            {step === 5 && (
               <div className="space-y-12 animate-in fade-in slide-in-from-right-4 duration-500">
                 {/* Header Info */}
                 <div className="bg-[#A11D1D]/5 border border-[#A11D1D]/10 rounded-2xl p-6 md:p-8 flex items-start gap-4">
@@ -1593,7 +1620,7 @@ export default function FormIELTSAcademicRegistration() {
               </div>
             )}
 
-            {step === 5 && (
+            {step === 6 && (
               <div className="space-y-12">
                 {/* Yellow Note Box */}
                 <div className="bg-amber-50/50 border border-amber-100 rounded-2xl p-6 md:p-8 flex items-start gap-4">
@@ -2312,7 +2339,7 @@ export default function FormIELTSAcademicRegistration() {
                 </div>
               </div>
             )}
-            {step === 6 && (
+            {step === 7 && (
               <div className="space-y-12 animate-in fade-in slide-in-from-right-4 duration-500">
                 <div className="text-center space-y-4">
                   <h2 className="text-3xl font-black text-gray-900 tracking-tight">Complete Your Payment</h2>
@@ -2328,7 +2355,7 @@ export default function FormIELTSAcademicRegistration() {
                 <div className="pt-8 flex justify-center">
                   <Button
                     onClick={() => {
-                      setStep(7);
+                      setStep(8);
                       window.scrollTo({ top: 0, behavior: "smooth" });
                     }}
                     className="px-16 py-8 bg-[#A11D1D] hover:bg-[#8A1818] text-white font-black text-xs uppercase tracking-[0.2em] rounded-lg shadow-lg hover:shadow-xl transition-all"
@@ -2339,7 +2366,7 @@ export default function FormIELTSAcademicRegistration() {
               </div>
             )}
 
-            {step === 7 && (
+            {step === 8 && (
               <div className="text-center py-20 space-y-8 animate-in fade-in zoom-in duration-700">
                 <div className="w-24 h-24 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-8 shadow-xl shadow-emerald-100/50">
                   <CheckCircle2 className="w-12 h-12" />
@@ -2398,7 +2425,7 @@ export default function FormIELTSAcademicRegistration() {
             )}
 
             {/* Footer Actions */}
-            {step < 7 && (
+            {step < 8 && (
               <div className="pt-12 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-6 mt-8">
                 {step > 1 && (
                   <button
@@ -2411,11 +2438,11 @@ export default function FormIELTSAcademicRegistration() {
                 )}
                 <div className="flex gap-4 ml-auto">
                   <Button
-                    type={step === 5 ? "submit" : "button"}
-                    onClick={step === 5 ? undefined : handleNext}
+                    type={step === 6 ? "submit" : "button"}
+                    onClick={step === 6 ? undefined : handleNext}
                     className="px-12 py-8 bg-[#A11D1D] hover:bg-[#8A1818] text-white font-black text-xs uppercase tracking-[0.2em] rounded-lg shadow-lg hover:shadow-xl transition-all flex items-center gap-4 group"
                   >
-                    {step === 5 ? "Submit Registration" : "Save and continue"}
+                    {step === 6 ? "Submit Registration" : "Save and continue"}
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </div>

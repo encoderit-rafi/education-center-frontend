@@ -57,6 +57,8 @@ export const IeltsAcademicSchema = z.object({
     vatNumber: z.string().optional(),
     paymentMethod: z.enum(["online", "bank_transfer", "at_center"]).or(z.literal("")),
     termsAgreed: z.boolean().optional(),
+    examDate: z.any().refine((val) => !!val, "Please select an exam date"),
+    examTime: z.string().min(1, "Please select an exam time"),
 }).refine((data) => data.email === data.confirmEmail, {
     message: "Emails do not match",
     path: ["confirmEmail"],
