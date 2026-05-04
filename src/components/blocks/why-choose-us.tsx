@@ -9,6 +9,12 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import {
+  BaseCard,
+  BaseCardDescription,
+  BaseCardIcon,
+  BaseCardTitle,
+} from "./cards/base-card";
 
 const WhyChooseUs = () => {
   const stats = [
@@ -70,15 +76,12 @@ const WhyChooseUs = () => {
   ];
 
   return (
-    <section className="py-24 px-4 bg-white">
-      <div className="max-w-7xl mx-auto">
+    <section className="base-px base-py bg-white">
+      <div className="section-container">
         <div className="mb-16">
-          <p className="text-primary text-[11px] font-bold uppercase tracking-[0.3em] lg:text-xs mb-4">
-            Why Choose Us
-          </p>
-          <h3 className="text-4xl md:text-5xl font-headline font-black text-slate-900 tracking-tight uppercase">
-            Everything You Need, in{" "}
-            <span className="text-primary italic">One Place</span>
+          <span className="section-label">Why Choose Us</span>
+          <h3 className="section-title">
+            Everything You Need, in <span>One Place</span>
           </h3>
         </div>
 
@@ -86,7 +89,7 @@ const WhyChooseUs = () => {
         <div className="mt-10 grid grid-cols-2 gap-3 border-t border-slate-100 pt-8 lg:gap-4">
           {stats.map((stat, i) => (
             <div key={i} className="flex items-center gap-3">
-              <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+              <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
                 <stat.icon className="h-4 w-4" />
               </div>
               <p className="text-sm font-semibold leading-tight text-slate-800">
@@ -99,24 +102,13 @@ const WhyChooseUs = () => {
         {/* Features Grid */}
         <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:gap-5">
           {features.map((feature, i) => (
-            <div
-              key={i}
-              className="group relative overflow-hidden rounded-xl border border-slate-100 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/20 hover:shadow-xl"
-            >
-              <span
-                aria-hidden="true"
-                className="absolute left-0 top-0 h-full w-[3px] origin-top scale-y-0 bg-primary transition-transform duration-300 group-hover:scale-y-100"
-              ></span>
-              <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-primary/10 text-primary transition-colors duration-300 group-hover:bg-primary/20">
-                <feature.icon className="h-5 w-5" />
-              </div>
-              <h3 className="mb-2 text-sm font-bold text-slate-900 lg:text-base">
-                {feature.title}
-              </h3>
-              <p className="text-xs leading-relaxed text-slate-500 lg:text-[13px]">
-                {feature.description}
-              </p>
-            </div>
+            <BaseCard key={i} className="p-6 space-y-3">
+              <BaseCardIcon>
+                <feature.icon />
+              </BaseCardIcon>
+              <BaseCardTitle>{feature.title}</BaseCardTitle>
+              <BaseCardDescription>{feature.description}</BaseCardDescription>
+            </BaseCard>
           ))}
         </div>
       </div>

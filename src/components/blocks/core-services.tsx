@@ -11,6 +11,12 @@ import {
   MapPin,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import {
+  BaseCard,
+  BaseCardDescription,
+  BaseCardIcon,
+  BaseCardTitle,
+} from "./cards/base-card";
 
 const SERVICES = [
   {
@@ -80,15 +86,12 @@ const SERVICES = [
 
 export default function CoreServices() {
   return (
-    <section className="bg-white py-24 lg:py-32 px-4">
-      <div className="max-w-7xl mx-auto">
-        <div className="mb-16">
-          <p className="text-primary text-[11px] font-bold uppercase tracking-[0.3em] lg:text-xs mb-4">
-            Our Services
-          </p>
-          <h3 className="text-4xl md:text-5xl font-headline font-black text-slate-900 tracking-tight uppercase">
-            More Than Just an{" "}
-            <span className="text-primary italic">Exam Centre</span>
+    <section className="base-py">
+      <div className="base-px section-container space-y-10">
+        <div>
+          <span className="section-label">Our Services</span>
+          <h3 className="section-title">
+            More Than Just an <span>Exam Centre</span>
           </h3>
         </div>
 
@@ -97,19 +100,21 @@ export default function CoreServices() {
             <Link
               key={i}
               href={service.href}
-              className="group flex items-start gap-4 rounded-2xl border border-slate-100 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/20 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              // className="group flex items-start gap-4 rounded-2xl border border-slate-100 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/20 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
             >
-              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-white group-hover:scale-110">
-                <service.icon className="h-6 w-6" />
-              </span>
-              <div className="min-w-0 flex-1">
-                <h3 className="text-base font-bold text-slate-900 group-hover:text-primary transition-colors">
-                  {service.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-500">
-                  {service.description}
-                </p>
-              </div>
+              <BaseCard key={i} className="p-6">
+                <div className="flex items-start gap-4">
+                  <BaseCardIcon>
+                    <service.icon />
+                  </BaseCardIcon>
+                  <div className="">
+                    <BaseCardTitle>{service.title}</BaseCardTitle>
+                    <BaseCardDescription className="mt-2">
+                      {service.description}
+                    </BaseCardDescription>
+                  </div>
+                </div>
+              </BaseCard>
             </Link>
           ))}
         </div>
