@@ -1,0 +1,43 @@
+export const courses = [
+  {
+    id: "group_classroom",
+    name: "Group Classroom",
+    class_mode_id: "group",
+    class_type_id: "classroom",
+    price: 1850,
+    currency: "AED",
+    general_discount: 5,
+    special_discount: 10,
+  },
+  {
+    id: "semi_private_classroom",
+    name: "Semi-Private Classroom",
+    class_mode_id: "semi_private",
+    class_type_id: "classroom",
+    price: 2850,
+    currency: "AED",
+    general_discount: 5,
+    special_discount: 10,
+  },
+  {
+    id: "vip_classroom",
+    name: "VIP Classroom",
+    class_mode_id: "vip",
+    class_type_id: "classroom",
+    price: 4850,
+    currency: "AED",
+    general_discount: 5,
+    special_discount: 10,
+  },
+  {
+    id: "vip_online",
+    name: "Private Online",
+    class_mode_id: "vip",
+    class_type_id: "online",
+    price: 4850,
+    currency: "AED",
+    general_discount: 5,
+    special_discount: 10,
+  },
+];
+export default courses;

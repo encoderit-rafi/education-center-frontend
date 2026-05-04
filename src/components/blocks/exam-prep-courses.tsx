@@ -20,7 +20,7 @@ const COURSES = [
     discount:
       "Save 10% off when you book your exam and register for the course with TEPTH and pay online on our website.",
     image: "/images/hero/image-3.jpg",
-    href: "/courses/group",
+    href: "/exam-preparation-courses/group",
   },
   {
     title: "Semi-Private",
@@ -30,7 +30,7 @@ const COURSES = [
     discount:
       "Save 15% off when you book your exam and register for the course with TEPTH and pay online on our website.",
     image: "/images/hero/image-6.png",
-    href: "/courses/semi-private",
+    href: "/exam-preparation-courses/semi-private",
   },
   {
     title: "1-to-1 In-Class",
@@ -40,7 +40,7 @@ const COURSES = [
     discount:
       "Save 20% off when you book your exam and register for the course with TEPTH and pay online on our website.",
     image: "/images/hero/image-7.png",
-    href: "/courses/1-to-1-in-class",
+    href: "/exam-preparation-courses/1-to-1-in-class",
   },
   // {
   //   title: "1-to-1 Online",
@@ -50,7 +50,7 @@ const COURSES = [
   //   discount:
   //     "Save 20% off when you book your exam and register for the course with TEPTH and pay online on our website.",
   //   image: "/images/hero/image-8.png",
-  //   href: "/courses/1-to-1-online",
+  //   href: "/exam-preparation-courses/1-to-1-online",
   // },
 ];
 
@@ -89,7 +89,7 @@ export default function ExamPrepCourses() {
           {COURSES.map((course, i) => (
             <Link
               key={i}
-              href={"/courses"}
+              href={"/exam-preparation-courses"}
               // className="group relative flex flex-col overflow-hidden rounded-3xl border border-slate-100 bg-white shadow-sm transition-all duration-500 hover:-translate-y-2 hover:border-primary/20 hover:shadow-2xl"
             >
               <BaseCard className="h-full">
@@ -133,7 +133,7 @@ export default function ExamPrepCourses() {
             </p>
           </div>
           <Link
-            href="/courses"
+            href="/exam-preparation-courses"
             className={buttonVariants({
               variant: "default",
               className:

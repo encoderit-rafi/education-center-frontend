@@ -1,4 +1,4 @@
-const class_modes = [
+const course_modes = [
   {
     id: "group",
     name: "Group",
@@ -15,7 +15,7 @@ const class_modes = [
     max_students: 1,
   },
 ];
-const class_types = [
+const course_types = [
   {
     id: "classroom",
     name: "Classroom",
@@ -504,7 +504,8 @@ export const exams = [
     ],
     faqs: [
       {
-        question: "What is the difference between Academic and General Training?",
+        question:
+          "What is the difference between Academic and General Training?",
         answer:
           "Academic is for university study or professional registration. General Training is for migration, work experience, or secondary education.",
       },
@@ -526,8 +527,10 @@ export const exams = [
     provider: "British Council / IDP",
     subtitle: "For higher education and professional registration",
     image: "/images/brands/ielts.png",
-    content: "The world's most popular English test for higher education and professional registration.",
-    overview: "IELTS Academic measures whether your level of English language proficiency is suitable for an academic environment. It reflects aspects of academic language and evaluates whether you’re ready to begin training or studying.",
+    content:
+      "The world's most popular English test for higher education and professional registration.",
+    overview:
+      "IELTS Academic measures whether your level of English language proficiency is suitable for an academic environment. It reflects aspects of academic language and evaluates whether you’re ready to begin training or studying.",
     stats: [
       { label: "Test Duration", value: "2 hours 45 mins" },
       { label: "Score Scale", value: "0–9 Bands" },
@@ -544,13 +547,15 @@ export const exams = [
       {
         name: "Academic Reading",
         duration: "60 min",
-        details: "3 long texts which range from the descriptive and factual to the discursive and analytical.",
+        details:
+          "3 long texts which range from the descriptive and factual to the discursive and analytical.",
         icon: "reading",
       },
       {
         name: "Academic Writing",
         duration: "60 min",
-        details: "Task 1: describe a chart, graph, or diagram. Task 2: write an essay in response to a point of view.",
+        details:
+          "Task 1: describe a chart, graph, or diagram. Task 2: write an essay in response to a point of view.",
         icon: "writing",
       },
       {
@@ -574,7 +579,8 @@ export const exams = [
     faqs: [
       {
         question: "Is the Academic test harder than General Training?",
-        answer: "The Reading and Writing sections are more complex as they are geared towards academic study. Listening and Speaking are the same.",
+        answer:
+          "The Reading and Writing sections are more complex as they are geared towards academic study. Listening and Speaking are the same.",
       },
     ],
   },
@@ -584,8 +590,10 @@ export const exams = [
     provider: "British Council / IDP",
     subtitle: "For migration, work experience, or secondary education",
     image: "/images/brands/ielts.png",
-    content: "The world's most popular English test for migration, secondary education, and work experience.",
-    overview: "IELTS General Training measures English language proficiency in a practical, everyday context. The tasks and tests reflect both workplace and social situations.",
+    content:
+      "The world's most popular English test for migration, secondary education, and work experience.",
+    overview:
+      "IELTS General Training measures English language proficiency in a practical, everyday context. The tasks and tests reflect both workplace and social situations.",
     stats: [
       { label: "Test Duration", value: "2 hours 45 mins" },
       { label: "Score Scale", value: "0–9 Bands" },
@@ -602,13 +610,15 @@ export const exams = [
       {
         name: "General Reading",
         duration: "60 min",
-        details: "Extracts from books, magazines, newspapers, notices, advertisements, company handbooks and guidelines.",
+        details:
+          "Extracts from books, magazines, newspapers, notices, advertisements, company handbooks and guidelines.",
         icon: "reading",
       },
       {
         name: "General Writing",
         duration: "60 min",
-        details: "Task 1: write a letter requesting information or explaining a situation. Task 2: write an essay in response to a point of view.",
+        details:
+          "Task 1: write a letter requesting information or explaining a situation. Task 2: write an essay in response to a point of view.",
         icon: "writing",
       },
       {
@@ -633,7 +643,8 @@ export const exams = [
     faqs: [
       {
         question: "Can I use General Training for university study?",
-        answer: "Usually no. Most universities require IELTS Academic. Always check with the institution you are applying to.",
+        answer:
+          "Usually no. Most universities require IELTS Academic. Always check with the institution you are applying to.",
       },
     ],
   },
@@ -806,13 +817,15 @@ export const exams = [
       {
         name: "Writing",
         duration: "53–60 min",
-        details: "Task 1: Writing an email. Task 2: Responding to survey questions.",
+        details:
+          "Task 1: Writing an email. Task 2: Responding to survey questions.",
         icon: "writing",
       },
       {
         name: "Speaking",
         duration: "15–20 min",
-        details: "Giving advice, talking about personal experiences, describing scenes, and making predictions.",
+        details:
+          "Giving advice, talking about personal experiences, describing scenes, and making predictions.",
         icon: "speaking",
       },
     ],
@@ -828,8 +841,10 @@ export const exams = [
     ],
     faqs: [
       {
-        question: "What is the difference between CELPIP General and General LS?",
-        answer: "General is for residency (all 4 skills). General LS is for citizenship (only Listening and Speaking).",
+        question:
+          "What is the difference between CELPIP General and General LS?",
+        answer:
+          "General is for residency (all 4 skills). General LS is for citizenship (only Listening and Speaking).",
       },
     ],
   },
@@ -885,7 +900,8 @@ export const exams = [
     faqs: [
       {
         question: "Is CAEL only for Canada?",
-        answer: "Yes, it is specifically designed for the Canadian academic context.",
+        answer:
+          "Yes, it is specifically designed for the Canadian academic context.",
       },
     ],
   },
@@ -918,16 +934,13 @@ export const exams = [
         icon: "reading",
       },
     ],
-    whoShouldTake: [
-      "UK Visa applicants (Family, Spouse, Work, Study)",
-    ],
-    acceptedFor: [
-      "UK Visas and Immigration (UKVI)",
-    ],
+    whoShouldTake: ["UK Visa applicants (Family, Spouse, Work, Study)"],
+    acceptedFor: ["UK Visas and Immigration (UKVI)"],
     faqs: [
       {
         question: "Which level do I need?",
-        answer: "The level required depends on the specific visa you are applying for. Please check the UK Home Office website.",
+        answer:
+          "The level required depends on the specific visa you are applying for. Please check the UK Home Office website.",
       },
     ],
   },
@@ -938,13 +951,17 @@ export const exams = [
     image: "/images/psi.png",
     content:
       "Global leader in assessment and certification across healthcare, IT, and professional sectors.",
-    overview: "PSI offers comprehensive testing solutions for licensing, certification, and corporate talent assessment.",
+    overview:
+      "PSI offers comprehensive testing solutions for licensing, certification, and corporate talent assessment.",
     stats: [
       { label: "Format", value: "Computer-based" },
       { label: "Availability", value: "Global" },
     ],
     sections: [],
-    whoShouldTake: ["Professional certification seekers", "Licensing applicants"],
+    whoShouldTake: [
+      "Professional certification seekers",
+      "Licensing applicants",
+    ],
     acceptedFor: ["Industry certifications", "Professional licensing"],
     faqs: [],
   },
@@ -955,7 +972,8 @@ export const exams = [
     image: "/images/exams/oet.png",
     content:
       "The Occupational English Test — the English language test specifically for healthcare professionals.",
-    overview: "OET is designed specifically for 12 healthcare professions. It assesses the English language communication skills of healthcare professionals who wish to register and practise in an English-speaking environment.",
+    overview:
+      "OET is designed specifically for 12 healthcare professions. It assesses the English language communication skills of healthcare professionals who wish to register and practise in an English-speaking environment.",
     stats: [
       { label: "Test Duration", value: "~3 hours" },
       { label: "Score Scale", value: "0–500" },
@@ -989,7 +1007,10 @@ export const exams = [
       },
     ],
     whoShouldTake: ["Doctors", "Nurses", "Healthcare professionals"],
-    acceptedFor: ["Healthcare registration", "Migration for health professionals"],
+    acceptedFor: [
+      "Healthcare registration",
+      "Migration for health professionals",
+    ],
     faqs: [],
   },
 ];

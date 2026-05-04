@@ -17,11 +17,11 @@ import {
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
 import SearchCommand from "./search-command";
-import { COURSES } from "@/lib/courses-data";
+
 import { Badge } from "../ui/badge";
 import { exams, exams_types } from "@/lib/data";
 import { cn } from "@/lib/utils";
-
+import EXAM_PREPARATION_COURSES from "@/lib/demo-data/exam-preparation-courses";
 interface NavItem {
   type: "primary" | "secondary";
   label: string;
@@ -41,13 +41,11 @@ const navigations: NavItem[] = [
   },
   {
     type: "primary",
-    label: "Courses",
-    children: COURSES.filter((course) => course.id.endsWith("-prep")).map(
-      (course) => ({
-        label: course.title,
-        href: `/courses/${course.id}`,
-      }),
-    ),
+    label: "Exam Preparation Courses",
+    children: EXAM_PREPARATION_COURSES.map((course) => ({
+      label: course.name,
+      href: `/exam-preparation-courses/${course.id}`,
+    })),
   },
   {
     type: "secondary",
@@ -90,8 +88,7 @@ const navigations: NavItem[] = [
   },
   {
     type: "primary",
-    label: "Paid Mock Test",
-    // candidates can purchase them online and we email them within 72 hours
+    label: "Paid Mock Test", // candidates can purchase them online and we email them within 72 hours
     children: [
       { label: "IELTS", href: "/paid-mock-test" },
       { label: "TOEFL iBT", href: "/paid-mock-test" },

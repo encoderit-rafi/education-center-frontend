@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, CalendarDays } from "lucide-react";
 import { buttonVariants } from "../ui/button";
-import { Course } from "@/lib/courses-data";
+import { Course } from "@/lib/exam-preparation-courses-data";
 import { cn } from "@/lib/utils";
 
 interface CourseCardProps {
@@ -33,9 +33,10 @@ export default function CourseCard({ course }: CourseCardProps) {
             className={cn(
               buttonVariants({
                 variant: "default",
-                className: "h-11 rounded-md font-bold uppercase tracking-widest text-xs",
+                className:
+                  "h-11 rounded-md font-bold uppercase tracking-widest text-xs",
               }),
-              "w-full bg-primary! hover:bg-primary/90!"
+              "w-full bg-primary! hover:bg-primary/90!",
             )}
           >
             Register

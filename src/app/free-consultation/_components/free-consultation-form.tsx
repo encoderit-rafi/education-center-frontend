@@ -19,7 +19,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { COURSES } from "@/lib/courses-data";
+import { COURSES } from "@/lib/exam-preparation-courses-data";
 
 import { Calendar } from "@/components/ui/calendar";
 import { Textarea } from "@/components/ui/textarea";
@@ -307,7 +307,9 @@ export default function FreeConsultationForm() {
               <FieldContent>
                 <RadioGroup
                   value={selectedTime}
-                  onValueChange={(val) => setValue("preferredTime", val as string)}
+                  onValueChange={(val) =>
+                    setValue("preferredTime", val as string)
+                  }
                   className="grid grid-cols-2 gap-3"
                 >
                   {["09:00 AM", "02:00 PM"].map((t) => (

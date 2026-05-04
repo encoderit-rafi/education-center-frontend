@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { COURSES } from "@/lib/courses-data";
+import { COURSES } from "@/lib/exam-preparation-courses-data";
 import {
   BaseCard,
   BaseCardTitle,
@@ -55,7 +55,7 @@ export default function Courses() {
                     Register
                   </Link>
                   <Link
-                    href={`/courses/${course.id}`}
+                    href={`/exam-preparation-courses/${course.id}`}
                     className={cn(
                       buttonVariants({
                         variant: "outline",

@@ -90,7 +90,7 @@ export default function HeroSection() {
               <ArrowRight className="max-md:hidden ml-2 size-4 group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link
-              href="/courses"
+              href="/exam-preparation-courses"
               className={buttonVariants({
                 variant: "light",
                 size: "lg",

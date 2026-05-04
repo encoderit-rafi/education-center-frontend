@@ -181,7 +181,7 @@ export default function BookExamPage() {
                       variant: "outline",
                       className: "rounded-md h-10!",
                     })}
-                    href={`/courses/:ID`}
+                    href={`/exam-preparation-courses/:ID`}
                   >
                     View Details
                   </Link>
@@ -227,7 +227,7 @@ export default function BookExamPage() {
                       variant: "outline",
                       className: "rounded-md h-10!",
                     })}
-                    href={`/courses/:ID`}
+                    href={`/exam-preparation-courses/:ID`}
                   >
                     View Details
                   </Link>
@@ -275,7 +275,7 @@ function ExamCard({
               variant: "outline",
               className: "rounded-md h-10!",
             })}
-            href={`/courses/${id}`}
+            href={`/exam-preparation-courses/${id}`}
           >
             View Details
           </Link>
