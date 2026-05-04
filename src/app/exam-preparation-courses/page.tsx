@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { COURSES } from "@/lib/exam-preparation-courses-data";
+import EXAM_PREPARATION_COURSES from "@/lib/demo-data/exam-preparation-courses";
 import {
   BaseCard,
   BaseCardTitle,
@@ -28,48 +28,30 @@ export default function Courses() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {COURSES.map((course) => (
-              <BaseCard key={course.id} className="p-7">
-                <div className="flex-1 flex flex-col space-y-2">
-                  <BaseCardTitle className="uppercase tracking-tight text-lg leading-snug">
-                    {course.title}
-                  </BaseCardTitle>
-                  <BaseCardDescription className="mb-4">
-                    {course.description}
-                  </BaseCardDescription>
-                </div>
-
-                <div className="grid grid-cols-2 gap-2">
-                  <Link
-                    href={`/course-registration?course=${course.id}`}
-                    className={cn(
-                      buttonVariants({
-                        variant: "default",
-                        className:
-                          "h-11 rounded-md font-bold uppercase tracking-widest text-xs",
-                      }),
-                      "w-full bg-primary! hover:bg-primary/90!",
-                    )}
-                  >
-                    Register
-                  </Link>
-                  <Link
-                    href={`/exam-preparation-courses/${course.id}`}
-                    className={cn(
-                      buttonVariants({
-                        variant: "outline",
-                        className:
-                          "h-11 rounded-md font-bold uppercase tracking-widest text-xs",
-                      }),
-                      "w-full",
-                    )}
-                  >
-                    View Details
-                    <ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />
-                  </Link>
-                </div>
-              </BaseCard>
+          <div className="grid grid-cols-1 gap-6 max-w-3xl mx-auto">
+            {EXAM_PREPARATION_COURSES.map((course) => (
+              <Link
+                key={course.id}
+                href={`/exam-preparation-courses/${course.id}`}
+              >
+                <BaseCard className="p-7">
+                  <div className="flex-1 flex flex-col space-y-3">
+                    <div className="flex items-center justify-between">
+                      <BaseCardTitle className="uppercase tracking-tight text-lg leading-snug">
+                        {course.name}
+                      </BaseCardTitle>
+                      <ArrowRight
+                        className="size-6 
+                      text-slate-300
+                      group-hover:text-primary group-hover:translate-x-1 transition-transform duration-300"
+                      />
+                    </div>
+                    <BaseCardDescription className="mb-4 line-clamp-2">
+                      {course.description}
+                    </BaseCardDescription>
+                  </div>
+                </BaseCard>
+              </Link>
             ))}
           </div>
         </div>

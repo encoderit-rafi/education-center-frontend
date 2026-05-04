@@ -19,7 +19,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { COURSES } from "@/lib/exam-preparation-courses-data";
+// import { COURSES } from "@/lib/exam-preparation-courses-data";
 
 import { Calendar } from "@/components/ui/calendar";
 import { Textarea } from "@/components/ui/textarea";
@@ -169,8 +169,8 @@ export default function FreeConsultationForm() {
             Select Course
           </h4>
         </div>
-
-        <RadioGroup
+        CODE HERE
+        {/* <RadioGroup
           value={watch("courseId")}
           onValueChange={(val) => setValue("courseId", val as string)}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
@@ -212,7 +212,7 @@ export default function FreeConsultationForm() {
               </label>
             </Field>
           ))}
-        </RadioGroup>
+        </RadioGroup> */}
         {errors.courseId && <FieldError errors={[errors.courseId]} />}
       </div>
 

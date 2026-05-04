@@ -1,14 +1,14 @@
 import Link from "next/link";
 import { ArrowRight, CalendarDays } from "lucide-react";
 import { buttonVariants } from "../ui/button";
-import { Course } from "@/lib/exam-preparation-courses-data";
+// import { Course } from "@/lib/exam-preparation-courses-data";
 import { cn } from "@/lib/utils";
 
-interface CourseCardProps {
-  course: Course;
-}
+// interface CourseCardProps {
+//   course: Course;
+// }
 
-export default function CourseCard({ course }: CourseCardProps) {
+export default function CourseCard({ course }: any) {
   return (
     <div
       id={course.id}
