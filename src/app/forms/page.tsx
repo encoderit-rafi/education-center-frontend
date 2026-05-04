@@ -14,7 +14,7 @@ export default function FormsPage() {
   return (
     <div>
       <FormIELTSAcademicRegistration />
-      <FormIELTSGeneralRegistration />
+      {/* <FormIELTSGeneralRegistration />
       <FormPTEAcademicRegistration />
       <FormPTECoreRegistration />
       <FormPTEHomeA1Registration />
@@ -22,7 +22,7 @@ export default function FormsPage() {
       <FormPTEHomeB1Registration />
       <FormPTEHomeUkviRegistration />
       <FormSELTRegistration />
-      <FormTOEFLIBTRegistration />
+      <FormTOEFLIBTRegistration /> */}
     </div>
   );
 }

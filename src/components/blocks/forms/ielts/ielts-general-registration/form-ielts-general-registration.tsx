@@ -42,11 +42,14 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { PhoneInput } from "@/components/ui/phone-input";
+import { languages } from "@/lib/languages-data";
 import { DateTimePicker } from "@/components/ui/date-time-picker";
 import { format } from "date-fns";
 
 export default function FormIELTSGeneralRegistration() {
     const [step, setStep] = useState(1);
+    const [showNotice, setShowNotice] = useState(false);
+    const [showTermsNotice, setShowTermsNotice] = useState(false);
 
     const form = useForm<TIeltsGeneralSchema>({
         resolver: zodResolver(IeltsGeneralSchema),
@@ -204,11 +207,11 @@ export default function FormIELTSGeneralRegistration() {
                                                     </p>
                                                     <FormControl>
                                                         <RadioGroup className="flex flex-col gap-4" onValueChange={field.onChange} value={field.value}>
-                                                            <div className="flex items-center space-x-4 p-5 rounded-2xl border border-slate-100 hover:border-[#A11D1D]/30 transition-all cursor-pointer bg-slate-50/50 group">
+                                                            <div className="flex items-center space-x-4 p-5 rounded-2xl border border-slate-100 hover:border-[#A11D1D]/30 transition-all cursor-pointer bg-white group">
                                                                 <RadioGroupItem value="myself" id="myself" className="w-5 h-5 border-slate-300 data-[state=checked]:bg-[#A11D1D] data-[state=checked]:border-[#A11D1D]" />
                                                                 <Label htmlFor="myself" className="font-bold text-slate-700 cursor-pointer group-hover:text-[#A11D1D] transition-colors">Myself</Label>
                                                             </div>
-                                                            <div className="flex items-center space-x-4 p-5 rounded-2xl border border-slate-100 hover:border-[#A11D1D]/30 transition-all cursor-pointer bg-slate-50/50 group">
+                                                            <div className="flex items-center space-x-4 p-5 rounded-2xl border border-slate-100 hover:border-[#A11D1D]/30 transition-all cursor-pointer bg-white group">
                                                                 <RadioGroupItem value="child" id="child" className="w-5 h-5 border-slate-300 data-[state=checked]:bg-[#A11D1D] data-[state=checked]:border-[#A11D1D]" />
                                                                 <div className="flex flex-col cursor-pointer group-hover:text-[#A11D1D] transition-colors">
                                                                     <Label htmlFor="child" className="font-bold text-slate-700 cursor-pointer">My child</Label>
@@ -306,13 +309,13 @@ export default function FormIELTSGeneralRegistration() {
                                             <FormField control={control} name="mobileNumber" render={({ field }) => (
                                                 <FormItem className="space-y-3">
                                                     <FormLabel className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">Mobile number:</FormLabel>
-                                                    <FormControl><PhoneInput value={field.value} onChange={field.onChange} className="h-14 rounded-xl border-slate-200" /></FormControl>
+                                                    <FormControl><PhoneInput defaultCountry="AE" value={field.value} onChange={field.onChange} className="h-14 rounded-xl border-slate-200" /></FormControl>
                                                     <FormMessage />
                                                 </FormItem>
                                             )} />
                                             
                                             <FormField control={control} name="smsConsent" render={({ field }) => (
-                                                <FormItem className="flex items-start space-x-4 space-y-0 p-6 rounded-3xl bg-slate-50/50 border border-slate-100">
+                                                <FormItem className="flex items-start space-x-4 space-y-0 p-6 rounded-3xl bg-white border border-slate-100">
                                                     <FormControl><Checkbox checked={field.value} onCheckedChange={field.onChange} className="w-5 h-5 border-slate-300 data-[state=checked]:bg-[#A11D1D] mt-1" /></FormControl>
                                                     <div className="space-y-2">
                                                         <Label className="text-sm font-bold text-slate-600 leading-relaxed cursor-pointer">I agree to receive notifications or to be contacted about my test registration to this telephone number via SMS, WhatsApp, etc.</Label>
@@ -462,7 +465,7 @@ export default function FormIELTSGeneralRegistration() {
                                                 <FormField control={control} name="firstLanguage" render={({ field }) => (
                                                     <FormItem className="space-y-3">
                                                         <FormLabel className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">What is your first language?</FormLabel>
-                                                        <FormControl><SearchableDropdown options={[{label: "English", value: "English"}, {label: "Bengali", value: "Bengali"}, {label: "Arabic", value: "Arabic"}]} placeholder="Select language" value={field.value} onChange={field.onChange} className="h-14 bg-white" /></FormControl>
+                                                        <FormControl><SearchableDropdown options={languages} placeholder="Select language" value={field.value} onChange={field.onChange} className="h-14 bg-white" /></FormControl>
                                                         <FormMessage />
                                                     </FormItem>
                                                 )} />
@@ -698,12 +701,31 @@ export default function FormIELTSGeneralRegistration() {
                                     <div className="space-y-8">
                                         <h2 className="text-2xl font-black text-gray-900 tracking-tight uppercase border-b border-slate-100 pb-4">Our terms and conditions</h2>
                                         <FormField control={control} name="termsAgreed" render={({ field }) => (
-                                            <FormItem className="flex items-start space-x-5 space-y-0 p-8 rounded-[2rem] bg-slate-50/50 border border-slate-100">
+                                            <FormItem className="flex items-start space-x-5 space-y-0 p-8 rounded-[2rem] bg-white border border-slate-100">
                                                 <FormControl><Checkbox checked={field.value} onCheckedChange={field.onChange} className="w-6 h-6 border-slate-300 data-[state=checked]:bg-[#A11D1D] mt-1" /></FormControl>
                                                 <div className="space-y-4 text-sm">
                                                     <Label className="font-bold text-slate-700 leading-relaxed cursor-pointer">I agree to the IELTS <button type="button" className="text-[#A11D1D] hover:underline">terms and conditions</button> and <button type="button" className="text-[#A11D1D] hover:underline">cancellation policy</button></Label>
                                                     <p className="text-slate-400 font-medium leading-relaxed">The British Council will use the information that you are providing in connection with processing your registration. The legal basis for processing your information is agreement with our terms and conditions of registration (contract).</p>
-                                                    <button type="button" className="text-[#A11D1D] text-[10px] font-black uppercase tracking-widest hover:underline">+ Read full notice</button>
+                                                    {showTermsNotice && (
+                                                        <div className="space-y-4 pt-2 animate-in fade-in slide-in-from-top-1 duration-300">
+                                                            <p className="text-xs text-gray-400 font-medium leading-relaxed">
+                                                                You may unsubscribe at any time from our emails within your ‘My Account’ area in the Test Taker Portal.
+                                                            </p>
+                                                            <p className="text-xs text-gray-400 font-medium leading-relaxed">
+                                                                Or you can <a href="#" className="text-blue-600 hover:underline inline-flex items-center gap-1">contact us <ExternalLink className="w-3 h-3" /></a>
+                                                            </p>
+                                                            <p className="text-xs text-gray-400 font-medium leading-relaxed">
+                                                                We will process your personal information based on your consent.
+                                                            </p>
+                                                        </div>
+                                                    )}
+                                                    <button 
+                                                        type="button" 
+                                                        onClick={() => setShowTermsNotice(!showTermsNotice)}
+                                                        className="text-[#A11D1D] text-[10px] font-black uppercase tracking-widest hover:underline"
+                                                    >
+                                                        {showTermsNotice ? "- Hide full notice" : "+ Read full notice"}
+                                                    </button>
                                                 </div>
                                             </FormItem>
                                         )} />

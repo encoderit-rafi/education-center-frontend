@@ -447,7 +447,7 @@ export default function MockTestBookingForm({
           </div>
 
           <div className="bg-surface-container p-8 rounded-[3rem] space-y-8">
-            <Payment />
+            <Payment amount={selectedItem?.price || 0} currency="aed" />
             <button
               type="submit"
               className="w-full bg-primary text-white font-headline font-black py-6 rounded-[2rem] text-sm uppercase tracking-[0.3em] shadow-2xl shadow-primary/20 hover:bg-secondary transition-all active:scale-[0.98] flex items-center justify-center gap-3"

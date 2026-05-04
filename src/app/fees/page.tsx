@@ -160,9 +160,7 @@ export default function FeesPage() {
           </div>
         </div>
       </section>
-      <section className="py-16 px-4 md:py-32 md:px-8">
-        <FreeConsultation />
-      </section>
+      <FreeConsultation />
     </main>
   );
 }

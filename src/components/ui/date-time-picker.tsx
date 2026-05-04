@@ -520,7 +520,7 @@ export function DateTimePicker<TFieldValues extends FieldValues = FieldValues>(
         control={control}
         name={name as any}
         render={({ field }) => (
-          <FormItem className={cn("flex flex-col", className)}>
+          <FormItem className="flex flex-col">
             {label && <FormLabel className={labelClassName}>{label}</FormLabel>}
             <Popover>
               <PopoverTrigger
