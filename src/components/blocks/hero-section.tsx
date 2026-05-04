@@ -78,26 +78,28 @@ export default function HeroSection() {
 
           <div className="max-w-md grid grid-cols-2 gap-3 pt-4 animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-500">
             <Link
-              href="/enroll-course"
+              href="/book-exams"
               className={buttonVariants({
                 size: "lg",
-                className:
-                  "h-16 px-10 rounded-2xl font-bold text-lg shadow-2xl shadow-primary/40 bg-primary hover:bg-primary/90 text-white transition-all hover:scale-105 active:scale-95 ease-in-out",
+                className: "group py-4",
+                // className:
+                //   "h-16 px-10 rounded-2xl font-bold text-lg shadow-2xl shadow-primary/40 bg-primary hover:bg-primary/90 text-white transition-all hover:scale-105 active:scale-95 ease-in-out",
               })}
             >
-              Start Your Journey
-              <ArrowRight className="max-md:hidden ml-2 size-6 group-hover:translate-x-2 transition-transform" />
+              Book Exam
+              <ArrowRight className="max-md:hidden ml-2 size-4 group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link
-              href="/paid-mock-test"
+              href="/courses"
               className={buttonVariants({
-                variant: "outline",
+                variant: "light",
                 size: "lg",
-                className:
-                  "h-16 px-10 rounded-2xl font-bold text-lg bg-white text-primary hover:text-primary border-white hover:bg-white transition-all hover:scale-105 active:scale-95 ease-in-out",
+                className: "py-4",
+                // className:
+                //   "h-16 px-10 rounded-2xl font-bold text-lg bg-white text-primary hover:text-primary border-white hover:bg-white transition-all hover:scale-105 active:scale-95 ease-in-out",
               })}
             >
-              Take a Mock Test
+              Our Courses
             </Link>
           </div>
         </div>

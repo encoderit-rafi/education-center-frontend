@@ -1,16 +1,14 @@
 export default function ExperienceExcellence() {
   return (
-    <section className="py-32 px-8 bg-background relative overflow-hidden border-b border-outline/10">
-      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 items-center">
+    <section className="base-px base-py relative overflow-hidden ">
+      <div className="section-container flex flex-col lg:flex-row gap-16 items-center">
         {/* Left Content Block */}
         <div className="flex-1 space-y-8">
-          <h2 className="text-sm font-bold text-primary tracking-widest uppercase">
-            Experience Our Excellence
-          </h2>
+          <h2 className="section-label">Experience Our Excellence</h2>
           <div className="space-y-6">
-            <h3 className="text-4xl md:text-5xl font-headline font-extrabold text-secondary leading-tight">
+            <h2 className="text-4xl md:text-5xl font-headline font-extrabold text-secondary leading-tight">
               Comprehensive Exam Services from Highly-Qualified Instructors
-            </h3>
+            </h2>
             <p className="text-lg text-on-surface-variant leading-relaxed">
               TEPTH is a renowned UAE-based institution that helps students in
               preparing for and undertaking different international aptitude
@@ -23,7 +21,6 @@ export default function ExperienceExcellence() {
               Ace the Test, Secure Your Future.
             </p>
           </div>
-        
         </div>
         {/* Right Media Block */}
         <div className="flex-1 w-full space-y-6">
