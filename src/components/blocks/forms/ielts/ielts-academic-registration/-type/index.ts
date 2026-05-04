@@ -2,6 +2,7 @@ import { z } from "zod";
 
 export const IeltsAcademicSchema = z.object({
     // Step 1: Personal Details
+    testModule: z.enum(["Academic", "General Training"]).or(z.literal("")),
     bookingFor: z.enum(["myself", "child"], {
         message: "Please select who you are booking for",
     }).or(z.literal("")),
@@ -34,6 +35,11 @@ export const IeltsAcademicSchema = z.object({
     nationality: z.string().optional(),
 
     // Step 3: Your Profile
+    takenBefore: z.enum(["Yes", "No"]).or(z.literal("")),
+    lessThanTwoYears: z.enum(["Yes", "No", "I do not know"]).or(z.literal("")),
+    existingAccount: z.enum(["Yes", "No", "I forgot my IELTS account details"]).or(z.literal("")),
+    specialRequirements: z.enum(["Yes", "No"]).or(z.literal("")),
+    specialRequirementsMention: z.string().optional(),
     firstLanguage: z.string().optional(),
     yearsStudyingEnglish: z.string().optional(),
     educationLevel: z.string().optional(),
@@ -42,10 +48,17 @@ export const IeltsAcademicSchema = z.object({
     reasonForTakingTest: z.string().optional(),
     destinationCountry: z.string().optional(),
 
-    // Step 4: Review & Payment
+    // Step 4: Add-ons (Courses & Workshops)
+    selectedCourse: z.string().optional(),
+    selectedWorkshop: z.string().optional(),
+
+    // Step 5: Review & Payment
     confirmationRecipient: z.enum(["myself", "other", "company"]).or(z.literal("")),
     vatNumber: z.string().optional(),
+    paymentMethod: z.enum(["online", "bank_transfer", "at_center"]).or(z.literal("")),
     termsAgreed: z.boolean().optional(),
+    examDate: z.any().refine((val) => !!val, "Please select an exam date"),
+    examTime: z.string().min(1, "Please select an exam time"),
 }).refine((data) => data.email === data.confirmEmail, {
     message: "Emails do not match",
     path: ["confirmEmail"],

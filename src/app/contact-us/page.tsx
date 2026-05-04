@@ -1,67 +1,84 @@
 import ContactForm from "@/app/contact-us/_components/form-contact";
-import { MapPin, Clock } from "lucide-react";
-
+import { MapPin, Clock, Phone, Mail } from "lucide-react";
 
 export default function ContactUs() {
   return (
-    <section className="bg-white py-12">
-      <div className="max-w-7xl mx-auto px-8">
-        <div className="flex flex-col lg:flex-row gap-16">
-          {/* Form Side */}
-          <div className="flex-1">
-            <h2 className="text-4xl font-headline font-bold text-secondary tracking-tight mb-4">
+    <section className="bg-white py-20 md:py-32">
+      <div className="max-w-7xl mx-auto px-6 md:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-20 md:gap-x-32 gap-y-12">
+          {/* Row 1: Headings */}
+          <div className="space-y-6">
+            <h2 className="text-4xl md:text-6xl font-black text-[#A11D1D] tracking-tight">
               Get in Touch
             </h2>
-            <p className="text-on-surface-variant mb-12">
+            <p className="text-xl text-slate-600 leading-relaxed font-medium">
               Whether you're preparing for an entrance exam or need deep
               editorial review, we're here to guide you.
             </p>
+          </div>
+
+          <div className="space-y-6 lg:pt-6">
+            <h3 className="text-3xl font-black text-slate-900 tracking-tight">Our Contact Info</h3>
+            <div className="h-2 w-24 bg-[#A11D1D] rounded-full" />
+          </div>
+
+          {/* Row 2: Cards (Aligned perfectly) */}
+          <div className="bg-white p-8 md:p-12 h-full">
             <ContactForm />
           </div>
-          {/* Map & Info Side */}
-          <div className="flex-1 space-y-12">
-            <div className="rounded-lg overflow-hidden shadow-lg h-80 relative group border border-slate-200">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3612.3787723223!2d55.384274999999995!3d25.11196800848383!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDA2JzQzLjEiTiA1NcKwMjMnMDMuNCJF!5e0!3m2!1sen!2sae!4v1600000000000!5m2!1sen!2sae"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen={true}
-                loading="lazy"
-                title="The Exam Preparation and Testing House(TEPTH)"
-              />
-              <div className="absolute top-4 right-4">
-                <span className="bg-white/95 backdrop-blur-md px-4 py-2 rounded-full text-xs font-bold text-secondary flex items-center gap-2 shadow-sm border border-slate-100">
-                  <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-                  Office Open
-                </span>
+
+          <div className="p-10 md:p-14 space-y-16 h-full flex flex-col justify-between">
+            <div className="space-y-12">
+              {/* Working Hours Section */}
+              <div className="flex items-start gap-8">
+                <div className="w-16 h-16 rounded-2xl bg-white flex items-center justify-center shadow-md text-[#A11D1D] shrink-0">
+                  <Clock className="w-8 h-8" />
+                </div>
+                <div className="space-y-3">
+                  <h4 className="text-xl font-black text-slate-900">Working Hours</h4>
+                  <div className="space-y-1">
+                    <p className="text-slate-500 font-bold uppercase text-xs tracking-widest">Saturday to Thursday</p>
+                    <p className="text-2xl font-black text-[#A11D1D]">9:00 AM – 9:00 PM</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Address Section */}
+              <div className="flex items-start gap-8">
+                <div className="w-16 h-16 rounded-2xl bg-white flex items-center justify-center shadow-md text-[#A11D1D] shrink-0">
+                  <MapPin className="w-8 h-8" />
+                </div>
+                <div className="space-y-4">
+                  <h4 className="text-xl font-black text-slate-900">Our Address</h4>
+                  <div className="space-y-2">
+                    <p className="text-lg font-black text-slate-900 border-b-2 border-[#A11D1D] inline-block pb-0.5">The Exam Preparation & Testing House L.L.C</p>
+                    <div className="text-slate-600 font-medium leading-relaxed">
+                      <p>Suite 701, 7th Floor, Tabarak Tower,</p>
+                      <p>Corniche Road, Al Mamzar, Sharjah, UAE.</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
-              {/* Working Hours Card */}
-              <div className="group p-6 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                <div className="w-14 h-14 rounded-xl bg-red-50 flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
-                  <Clock className="w-7 h-7" />
+            {/* Contact Links */}
+            <div className="pt-10 border-t border-slate-200 space-y-8">
+              <div className="flex items-center gap-6">
+                <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-sm text-[#A11D1D]">
+                  <Phone className="w-5 h-5" />
                 </div>
-                <h4 className="text-xl font-bold text-secondary mb-3">
-                  Working Hours
-                </h4>
-                <div className="text-sm text-on-surface-variant leading-relaxed space-y-1">
-                  <p className="text-sm text-primary leading-relaxed">
-                    Saturday to Thursday
-                  </p>
-                  <p className="text-sm text-primary leading-relaxed">
-                    9:00 AM to 9:00 PM
-                  </p>
+                <span className="text-xl font-black text-slate-900">+971 6 553 1250</span>
+              </div>
+              <div className="flex items-center gap-6">
+                <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-sm text-[#A11D1D]">
+                  <Mail className="w-5 h-5" />
                 </div>
+                <span className="text-xl font-black text-slate-900">info@tepth.org</span>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <section className="mt-16">
-      </section>
     </section>
   );
 }

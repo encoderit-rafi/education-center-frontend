@@ -26,7 +26,7 @@ export default function CourseList() {
             const types = examTypeData?.types || [];
 
             return (
-              <Link href={`/exams/${exam.id}`}>
+              <Link key={exam.id} href={`/exams/${exam.id}`}>
                 <BaseCard className="h-full p-8">
                   <div className="flex items-start justify-between">
                     <BaseCardTitle>{exam.name}</BaseCardTitle>
