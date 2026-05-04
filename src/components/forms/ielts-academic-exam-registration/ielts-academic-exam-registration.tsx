@@ -36,6 +36,8 @@ import { PhoneInput } from "@/components/ui/phone-input";
 
 export default function FormIELTSAcademicRegistration() {
     const [step, setStep] = useState(1);
+    const [showNotice, setShowNotice] = useState(false);
+    const [showTermsNotice, setShowTermsNotice] = useState(false);
 
     const form = useForm<TIeltsAcademicSchema>({
         resolver: zodResolver(IeltsAcademicSchema),
@@ -349,7 +351,7 @@ export default function FormIELTSAcademicRegistration() {
                                                             <FormLabel className="text-xs font-black uppercase tracking-widest text-gray-500">Mobile number:*</FormLabel>
                                                             <FormControl>
                                                                 <div className="relative h-12">
-                                                                    <PhoneInput
+                                                                    <PhoneInput defaultCountry="AE"
                                                                         value={field.value as any}
                                                                         onChange={field.onChange}
                                                                         className="rounded-lg border-slate-200 focus-within:border-slate-400 focus-within:ring-4 focus-within:ring-[#A11D1D]/5 transition-all h-full"
@@ -514,7 +516,26 @@ export default function FormIELTSAcademicRegistration() {
                                             <p className="text-xs text-gray-400 font-medium leading-relaxed">
                                                 The British Council would like to use the information you provide to send details of activities, services and events (including social events) which we think are of interest.
                                             </p>
-                                            <button type="button" className="text-[#A11D1D] text-xs font-black uppercase tracking-widest hover:underline">+ Read full notice</button>
+                                            {showNotice && (
+                                                <div className="space-y-4 pt-2 animate-in fade-in slide-in-from-top-1 duration-300">
+                                                    <p className="text-xs text-gray-400 font-medium leading-relaxed">
+                                                        You may unsubscribe at any time from our emails within your ‘My Account’ area in the Test Taker Portal.
+                                                    </p>
+                                                    <p className="text-xs text-gray-400 font-medium leading-relaxed">
+                                                        Or you can <a href="#" className="text-blue-600 hover:underline inline-flex items-center gap-1">contact us <ExternalLink className="w-3 h-3" /></a>
+                                                    </p>
+                                                    <p className="text-xs text-gray-400 font-medium leading-relaxed">
+                                                        We will process your personal information based on your consent.
+                                                    </p>
+                                                </div>
+                                            )}
+                                            <button 
+                                                type="button" 
+                                                onClick={() => setShowNotice(!showNotice)}
+                                                className="text-[#A11D1D] text-xs font-black uppercase tracking-widest hover:underline transition-all"
+                                            >
+                                                {showNotice ? "- Hide full notice" : "+ Read full notice"}
+                                            </button>
                                         </div>
                                     </div>
 
@@ -1105,7 +1126,26 @@ export default function FormIELTSAcademicRegistration() {
                                                         <p className="text-xs text-gray-500 leading-relaxed font-medium">
                                                             The British Council will use the information that you are providing in connection with processing your registration. The legal basis for processing your information is agreement with our terms and conditions of registration (contract).
                                                         </p>
-                                                        <button type="button" className="text-[#A11D1D] text-[10px] font-black uppercase tracking-widest hover:underline">+ Read full notice</button>
+                                                        {showTermsNotice && (
+                                                            <div className="space-y-4 pt-2 animate-in fade-in slide-in-from-top-1 duration-300">
+                                                                <p className="text-xs text-gray-500 leading-relaxed font-medium">
+                                                                    You may unsubscribe at any time from our emails within your ‘My Account’ area in the Test Taker Portal.
+                                                                </p>
+                                                                <p className="text-xs text-gray-500 leading-relaxed font-medium">
+                                                                    Or you can <a href="#" className="text-blue-600 hover:underline inline-flex items-center gap-1">contact us <ExternalLink className="w-3 h-3" /></a>
+                                                                </p>
+                                                                <p className="text-xs text-gray-500 leading-relaxed font-medium">
+                                                                    We will process your personal information based on your consent.
+                                                                </p>
+                                                            </div>
+                                                        )}
+                                                        <button 
+                                                            type="button" 
+                                                            onClick={() => setShowTermsNotice(!showTermsNotice)}
+                                                            className="text-[#A11D1D] text-[10px] font-black uppercase tracking-widest hover:underline"
+                                                        >
+                                                            {showTermsNotice ? "- Hide full notice" : "+ Read full notice"}
+                                                        </button>
                                                     </div>
                                                 </FormItem>
                                             )}

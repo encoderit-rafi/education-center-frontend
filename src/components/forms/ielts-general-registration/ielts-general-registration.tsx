@@ -47,6 +47,8 @@ import { format } from "date-fns";
 
 export default function FormIELTSGeneralRegistration() {
     const [step, setStep] = useState(1);
+    const [showNotice, setShowNotice] = useState(false);
+    const [showTermsNotice, setShowTermsNotice] = useState(false);
 
     const form = useForm<TIeltsGeneralSchema>({
         resolver: zodResolver(IeltsGeneralSchema),
@@ -306,7 +308,7 @@ export default function FormIELTSGeneralRegistration() {
                                             <FormField control={control} name="mobileNumber" render={({ field }) => (
                                                 <FormItem className="space-y-3">
                                                     <FormLabel className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">Mobile number:</FormLabel>
-                                                    <FormControl><PhoneInput value={field.value} onChange={field.onChange} className="h-14 rounded-xl border-slate-200" /></FormControl>
+                                                    <FormControl><PhoneInput defaultCountry="AE" value={field.value} onChange={field.onChange} className="h-14 rounded-xl border-slate-200" /></FormControl>
                                                     <FormMessage />
                                                 </FormItem>
                                             )} />
@@ -703,7 +705,26 @@ export default function FormIELTSGeneralRegistration() {
                                                 <div className="space-y-4 text-sm">
                                                     <Label className="font-bold text-slate-700 leading-relaxed cursor-pointer">I agree to the IELTS <button type="button" className="text-[#A11D1D] hover:underline">terms and conditions</button> and <button type="button" className="text-[#A11D1D] hover:underline">cancellation policy</button></Label>
                                                     <p className="text-slate-400 font-medium leading-relaxed">The British Council will use the information that you are providing in connection with processing your registration. The legal basis for processing your information is agreement with our terms and conditions of registration (contract).</p>
-                                                    <button type="button" className="text-[#A11D1D] text-[10px] font-black uppercase tracking-widest hover:underline">+ Read full notice</button>
+                                                    {showTermsNotice && (
+                                                        <div className="space-y-4 pt-2 animate-in fade-in slide-in-from-top-1 duration-300">
+                                                            <p className="text-xs text-gray-400 font-medium leading-relaxed">
+                                                                You may unsubscribe at any time from our emails within your ‘My Account’ area in the Test Taker Portal.
+                                                            </p>
+                                                            <p className="text-xs text-gray-400 font-medium leading-relaxed">
+                                                                Or you can <a href="#" className="text-blue-600 hover:underline inline-flex items-center gap-1">contact us <ExternalLink className="w-3 h-3" /></a>
+                                                            </p>
+                                                            <p className="text-xs text-gray-400 font-medium leading-relaxed">
+                                                                We will process your personal information based on your consent.
+                                                            </p>
+                                                        </div>
+                                                    )}
+                                                    <button 
+                                                        type="button" 
+                                                        onClick={() => setShowTermsNotice(!showTermsNotice)}
+                                                        className="text-[#A11D1D] text-[10px] font-black uppercase tracking-widest hover:underline"
+                                                    >
+                                                        {showTermsNotice ? "- Hide full notice" : "+ Read full notice"}
+                                                    </button>
                                                 </div>
                                             </FormItem>
                                         )} />

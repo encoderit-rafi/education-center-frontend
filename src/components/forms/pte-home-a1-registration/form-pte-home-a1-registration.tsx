@@ -312,7 +312,7 @@ export default function FormPTEHomeA1Registration() {
                                                 <FormField control={control} name="mobileNumber" render={({ field }) => (
                                                     <FormItem className="space-y-2">
                                                         <FormLabel className="text-xs font-bold text-slate-500 uppercase tracking-wider">Mobile Number</FormLabel>
-                                                        <FormControl><PhoneInput {...field} defaultCountry="AE" className="h-14" /></FormControl>
+                                                        <FormControl><PhoneInput defaultCountry="AE" {...field} defaultCountry="AE" className="h-14" /></FormControl>
                                                         <FormMessage />
                                                     </FormItem>
                                                 )} />
