@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, CalendarDays } from "lucide-react";
 import { buttonVariants } from "../ui/button";
 import { Course } from "@/lib/courses-data";
+import { cn } from "@/lib/utils";
 
 interface CourseCardProps {
   course: Course;
@@ -9,33 +10,36 @@ interface CourseCardProps {
 
 export default function CourseCard({ course }: CourseCardProps) {
   return (
-    <div className="group flex flex-col rounded-2xl border border-slate-100 bg-white p-8  transition-all duration-300 hover:-translate-y-2 hover:border-primary/20 shadow-sm hover:shadow-xl">
-      <div className="mb-6 flex items-start justify-between">
-        <h3 className="text-xl font-black text-slate-900 group-hover:text-primary transition-colors uppercase tracking-tight">
+    <div
+      id={course.id}
+      className="scroll-mt-32 group relative flex flex-col overflow-hidden rounded-xl border border-[#EEE] bg-white transition-all duration-300 hover:-translate-y-1 hover:border-maroon-200 hover:shadow-[0_18px_38px_-10px_rgba(139,0,0,0.14)]"
+    >
+      <div className="flex flex-1 flex-col p-7">
+        <h3 className="mb-1 text-base font-bold text-gray-900 uppercase tracking-tight group-hover:text-primary transition-colors">
           {course.title}
         </h3>
-        <ArrowRight className="h-5 w-5 text-slate-300 transition-all duration-300 group-hover:text-primary group-hover:translate-x-1" />
-      </div>
+        <p className="mb-4 mt-2 flex-1 text-sm leading-relaxed text-gray-600 line-clamp-3">
+          {course.description}
+        </p>
 
-      <p className="mb-6 text-sm leading-relaxed text-slate-500 line-clamp-3">
-        {course.description}
-      </p>
+        <div className="mt-auto pt-4 border-t border-slate-50 flex flex-col gap-4">
+          <div className="flex items-center justify-between text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">
+            <span>{course.duration}</span>
+            <span>{course.format}</span>
+          </div>
 
-      <div className="mt-auto flex flex-col gap-3">
-        <div className="flex items-center justify-between text-xs font-bold text-slate-400 uppercase tracking-wider border-t border-slate-50 pt-4">
-          <span>{course.duration}</span>
-          <span>{course.format}</span>
-        </div>
-        <div className="grid grid-cols-1 gap-2">
           <Link
-            href={`/courses/${course.id}`}
-            className={buttonVariants({
-              variant: "default",
-              className: "h-12 rounded-md font-semibold transition-all duration-300 bg-primary! hover:bg-primary/90!",
-            })}
+            href={`/enroll-course?course=${course.id}`}
+            className={cn(
+              buttonVariants({
+                variant: "default",
+                className: "h-11 rounded-md font-bold uppercase tracking-widest text-xs",
+              }),
+              "w-full bg-primary! hover:bg-primary/90!"
+            )}
           >
-            View Details
-            <ArrowRight className="w-5 ml-2" />
+            Register
+            <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
           </Link>
         </div>
       </div>
