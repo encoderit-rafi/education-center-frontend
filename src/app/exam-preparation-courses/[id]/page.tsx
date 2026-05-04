@@ -59,40 +59,51 @@ export default async function ExamPreparationCourseDetailPage({
 
       {/* Content Section */}
       <section className="bg-[#F9FAFB] py-20">
-        <div className="container mx-auto px-4 lg:px-8 max-w-7xl">
-          <div className="grid gap-12 lg:grid-cols-3 lg:gap-16">
-            <div className="lg:col-span-2">
-              <span className="section-label">Available Courses</span>
-              <h2 className="section-title">
-                Choose Your <span>Preparation Format</span>
-              </h2>
-              <p className="leading-relaxed text-gray-600 mb-8 mt-4">
-                We offer multiple course formats to suit your learning style,
-                schedule, and goals. Choose from our specialized programs below.
-              </p>
-              <div className="grid grid-cols-2 gap-6">
-                {exam.course_formats &&
-                  exam.course_formats.length > 0 &&
-                  exam.course_formats.map((course, i) => (
-                    <Link
-                      key={i}
-                      href={`/course-registration?course=${exam.id}&format=${course.course_type_id}`}
-                    >
-                      <BaseCard className="group  p-4 lg:p-6">
-                        <div className="flex justify-between items-center">
-                          <BaseCardTitle>{course.title}</BaseCardTitle>
-                          <ArrowRight className="w-5 h-5 group-hover:translate-x-1 group-hover:text-primary transition-transform" />
-                        </div>
-                        <BaseCardDescription>
-                          {course.description}
-                        </BaseCardDescription>
-                      </BaseCard>
-                    </Link>
-                  ))}
-              </div>
-            </div>
-
-            {/* Sidebar */}
+        <div className="section-container base-px base-py">
+          <span className="section-label">Available Courses</span>
+          <h2 className="section-title">
+            Choose Your <span>Preparation Format</span>
+          </h2>
+          <p className="leading-relaxed text-gray-600 mb-8 mt-4">
+            We offer multiple course formats to suit your learning style,
+            schedule, and goals. Choose from our specialized programs below.
+          </p>
+          <div className="flex flex-col gap-10">
+            {exam.course_formats &&
+              exam.course_formats.length > 0 &&
+              exam.course_formats.map((format, i) => (
+                <div key={i}>
+                  <h3 className="text-xl font-bold text-gray-900 mb-6">
+                    {format.title}
+                  </h3>
+                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {format.courses &&
+                      format.courses.map((course, j) => (
+                        <Link
+                          key={j}
+                          href={`/course-registration?course=${exam.id}&format=${format.course_type_id}&type=${course.course_id}`}
+                        >
+                          <BaseCard className="group h-full p-4 lg:p-6 flex flex-col">
+                            <div className="flex justify-between items-start mb-2">
+                              <div>
+                                <BaseCardTitle className="mb-1">
+                                  {course.title}
+                                </BaseCardTitle>
+                                <p className="text-sm font-medium text-primary">
+                                  {course.subtitle}
+                                </p>
+                              </div>
+                              <ArrowRight className="w-5 h-5 mt-1 group-hover:translate-x-1 group-hover:text-primary transition-transform shrink-0" />
+                            </div>
+                            <BaseCardDescription className="mt-2 flex-grow">
+                              {course.overview}
+                            </BaseCardDescription>
+                          </BaseCard>
+                        </Link>
+                      ))}
+                  </div>
+                </div>
+              ))}
           </div>
         </div>
       </section>
