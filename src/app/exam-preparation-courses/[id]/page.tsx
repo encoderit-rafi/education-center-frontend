@@ -89,14 +89,14 @@ export default async function ExamPreparationCourseDetailPage({
                                 <BaseCardTitle className="mb-1">
                                   {course.title}
                                 </BaseCardTitle>
-                                <p className="text-sm font-medium text-primary">
+                                {/* <p className="text-sm font-medium text-primary">
                                   {course.subtitle}
-                                </p>
+                                </p> */}
                               </div>
                               <ArrowRight className="w-5 h-5 mt-1 group-hover:translate-x-1 group-hover:text-primary transition-transform shrink-0" />
                             </div>
-                            <BaseCardDescription className="mt-2 flex-grow">
-                              {course.overview}
+                            <BaseCardDescription className="mt-2 flex-grow line-clamp-4">
+                              {course.description}
                             </BaseCardDescription>
                           </BaseCard>
                         </Link>

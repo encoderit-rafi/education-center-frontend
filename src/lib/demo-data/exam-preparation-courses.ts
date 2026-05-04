@@ -46,187 +46,93 @@ assessments worldwide.`,
           {
             course_id: "vip_classroom",
             title: "Private One-to-One Course",
-            subtitle: "VIP Preparation Program",
-
-            overview:
-              "The most personalized and intensive exam preparation program at TEPTH, designed for focused attention, faster progress, and a fully customized learning plan.",
-
-            description: {
-              intro:
-                "Every session is tailored to the candidate’s current level, target score, and exam deadline.",
-              learningApproach:
-                "Candidates are evaluated before starting to identify strengths and weaknesses, followed by a structured preparation plan.",
-              methodology:
-                "Training adapts continuously based on progress instead of following a fixed syllabus.",
-            },
-
-            benefits: [
-              "Fully personalized learning",
-              "Maximum instructor attention",
-              "Fast-track improvement",
-              "Flexible pacing",
-            ],
-
-            focusAreas: [
-              "Writing correction",
-              "Speaking practice",
-              "Reading strategies",
-              "Listening accuracy",
-            ],
-
-            trainingIncludes: [
-              "Realistic exam tasks",
-              "Section-wise strategies",
-              "Detailed writing feedback",
-              "Intensive speaking practice",
-              "Time-management techniques",
-            ],
-
-            suitableFor: [
-              "High band score seekers",
-              "Limited time candidates",
-              "One-to-one learners",
-              "Fast improvement needs",
-            ],
-
-            courseDetails: {
-              totalDurationHours: 24,
-              completionTime: "6 Weeks",
-              schedule: "Flexible",
-              classSize: "1",
-              format: "Offline",
-              location: {
-                name: "TEPTH",
-                address: "Suite 703, Apricot Tower, Dubai Silicon Oasis",
-              },
-            },
-
-            tags: ["premium", "personalized", "fast-track"],
-            outcome:
-              "Maximizes efficiency with personalized guidance to achieve target scores.",
+            description: `The Private One-to-One Course, also known as our VIP preparation program, offers the most
+personalized and intensive exam preparation available at TEPTH.
+This course is designed for candidates who want focused attention, faster progress, and a preparation
+plan built entirely around their individual needs. Every session is tailored to the candidate’s current
+level, target score, and exam deadline.
+Before the course begins, we evaluate the candidate’s strengths and weaknesses across the exam
+sections. Based on this analysis, the instructor develops a structured preparation plan that targets the
+specific areas that need improvement.
+Instead of following a fixed classroom syllabus, the training evolves according to the candidate’s
+progress. More time can be dedicated to writing correction, speaking practice, reading strategies, or
+listening accuracy, depending on what will have the greatest impact on the final score.
+During the course, candidates work on:
+• Realistic exam tasks from previous and simulated test materials
+• Proven strategies for each section of the exam
+• Detailed feedback on writing tasks, including structure, coherence, grammar, and vocabulary
+• Intensive speaking practice with professional evaluation and improvement strategies
+• Time-management techniques that help candidates perform confidently under exam conditions
+Because of its personalized nature, this course is particularly suitable for candidates who:
+• Need to achieve a high band score
+• Have a limited preparation timeframe
+• Prefer learning with individual attention and continuous feedback
+• Want to improve specific exam sections quickly
+Course Details
+Total Duration: 24 Hours
+Typical Completion Time: 6 Weeks
+Location: TEPTH – Suite 703, Apricot Tower, Dubai Silicon Oasis
+Schedule: Flexible
+This format allows candidates to maximize every hour of preparation and move toward their target
+score with clear direction and expert guidance.`,
           },
           {
             course_id: "semi_private_classroom",
             title: "Semi-Private Course",
-            subtitle: "Two Students Only",
-
-            overview:
-              "A small-group course combining personalized instruction with collaborative learning.",
-
-            description: {
-              intro:
-                "Designed for candidates who want focused learning with peer interaction.",
-              learningApproach:
-                "Instructor provides detailed guidance while encouraging discussion and collaboration.",
-              methodology:
-                "Enhances speaking practice and idea exchange through peer interaction.",
-            },
-
-            benefits: [
-              "Focused instructor attention",
-              "Peer learning",
-              "Better speaking practice",
-              "Different perspectives",
-            ],
-
-            focusAreas: [
-              "Speaking collaboration",
-              "Idea development",
-              "Writing feedback",
-              "Listening & reading",
-            ],
-
-            trainingIncludes: [
-              "Structured section training",
-              "Speaking practice",
-              "Writing correction",
-              "Reading & listening strategies",
-              "Exam simulations",
-            ],
-
-            suitableFor: [
-              "Friends/colleagues",
-              "Family members",
-              "Small group learners",
-            ],
-
-            courseDetails: {
-              totalDurationHours: 24,
-              completionTime: "6 Weeks",
-              schedule: "Flexible",
-              classSize: "2",
-              format: "Offline",
-              location: {
-                name: "TEPTH",
-                address: "Suite 703, Apricot Tower, Dubai Silicon Oasis",
-              },
-            },
-
-            tags: ["collaborative", "balanced", "interactive"],
-            outcome:
-              "Balances personalized learning with collaboration for effective progress.",
+            description: `The Semi-Private Course is designed for candidates who prefer a small learning environment while still
+benefiting from collaboration with another student.
+With only two students in the class, the instructor can provide detailed guidance and feedback while
+also creating opportunities for interaction, discussion, and peer learning. Many students find this format
+both productive and motivating.
+The presence of a second learner creates a natural environment for speaking practice, idea exchange,
+and collaborative problem-solving, especially for exam sections that require communication and
+discussion.
+Both students receive focused attention from the instructor while also benefiting from hearing different
+perspectives and approaches to exam tasks.
+During the course, students work on:
+• Structured training for each exam section
+• Guided speaking practice and feedback
+• Writing task analysis and correction
+• Reading and listening strategies to improve accuracy and speed
+• Exam simulations that build familiarity and confidence
+This format is often chosen by friends, colleagues, or family members preparing for the same exam,
+but it also works very well for students who simply prefer learning in a small, supportive environment.
+Course Details:
+Total Duration: 24 Hours
+Typical Completion Time: 6 Weeks
+Location: TEPTH – Suite 703, Apricot Tower, Dubai Silicon Oasis
+Class Size: 2 Students Only
+Schedule: Flexible
+The semi-private format offers an excellent balance between personalized instruction and interactive
+learning.`,
           },
           {
             course_id: "group_classroom",
             title: "Group Course",
-            subtitle: "Minimum Three Students",
-
-            overview:
-              "A dynamic classroom program designed for collaborative and structured learning.",
-
-            description: {
-              intro:
-                "Small group classes ensure active participation and engagement.",
-              learningApproach:
-                "Encourages discussion, speaking practice, and interaction.",
-              methodology:
-                "Peer learning builds motivation and accountability.",
-            },
-
-            benefits: [
-              "Interactive environment",
-              "Peer motivation",
-              "Regular speaking practice",
-              "Structured guidance",
-            ],
-
-            focusAreas: [
-              "Reading strategies",
-              "Listening techniques",
-              "Writing structures",
-              "Speaking fluency",
-            ],
-
-            trainingIncludes: [
-              "Reading strategies",
-              "Listening techniques",
-              "Writing structures",
-              "Speaking fluency practice",
-              "Exam-style questions",
-              "Expert strategies",
-            ],
-
-            suitableFor: [
-              "Group learners",
-              "Motivation seekers",
-              "Structured preparation candidates",
-            ],
-
-            courseDetails: {
-              totalDurationHours: 24,
-              completionTime: "6 Weeks",
-              schedule: "Flexible",
-              classSize: "3+",
-              format: "Offline",
-              location: {
-                name: "TEPTH",
-                address: "Suite 703, Apricot Tower, Dubai Silicon Oasis",
-              },
-            },
-
-            tags: ["popular", "interactive", "structured"],
-            outcome:
-              "Combines structured learning with collaboration and expert guidance.",
+            description: `he Group Course is designed for candidates who benefit from a dynamic classroom environment while
+still receiving meaningful instructor support.
+Group classes are intentionally kept small, starting from a minimum of three candidates, so that every
+student remains actively involved throughout the training. The classroom atmosphere encourages
+discussion, participation, and regular speaking practice, which are essential for exam success.
+Many candidates find that learning alongside others with similar goals creates a sense of motivation and
+accountability that keeps them focused throughout the preparation process.
+The course follows a carefully structured program that covers all exam sections, including:
+• Reading strategies that improve speed and comprehension
+• Listening techniques for identifying key information under time pressure
+• Writing structures that meet official exam scoring criteria
+• Speaking practice that develops fluency, coherence, and confidence
+Students regularly work with authentic exam-style questions, helping them become familiar with the
+format, timing, and expectations of the test.
+Instructors also provide practical strategies and insights gained from extensive experience in exam
+preparation, allowing students to avoid common mistakes and approach the exam more strategically.
+Course Details:
+Total Duration: 24 Hours
+Typical Completion Time: 6 Weeks
+Location: TEPTH – Suite 703, Apricot Tower, Dubai Silicon Oasis
+Class Size: Small Groups
+Schedule: Flexible
+For many candidates, this format offers the perfect combination of structured learning, collaborative
+practice, and professional guidance.`,
           },
         ],
       },
@@ -238,62 +144,27 @@ assessments worldwide.`,
           {
             course_id: "vip_online",
             title: "Online Preparation Course",
-            subtitle: "Live Interactive Training",
-
-            overview:
-              "A flexible online program delivering classroom-quality training through live sessions.",
-
-            description: {
-              intro: "Ideal for students who prefer learning from home.",
-              learningApproach:
-                "Live sessions with instructors allow real-time interaction and feedback.",
-              methodology:
-                "Focus on real exam tasks and performance improvement.",
-            },
-
-            benefits: [
-              "Learn from anywhere",
-              "Flexible schedule",
-              "Live interaction",
-              "Same quality as offline",
-            ],
-
-            focusAreas: [
-              "Full exam coverage",
-              "Speaking practice",
-              "Writing improvement",
-              "Strategy building",
-            ],
-
-            trainingIncludes: [
-              "Live classes",
-              "Full exam training",
-              "Speaking practice",
-              "Writing feedback",
-              "Strategy development",
-            ],
-
-            suitableFor: [
-              "Remote learners",
-              "Busy professionals",
-              "Flexible schedule seekers",
-            ],
-
-            courseDetails: {
-              totalDurationHours: 20,
-              completionTime: "Flexible",
-              schedule: "Flexible",
-              classSize: "Varies",
-              format: "Online",
-              location: {
-                name: "Online",
-                address: "Remote",
-              },
-            },
-
-            tags: ["online", "flexible", "remote"],
-            outcome:
-              "Enables effective preparation from anywhere with structured guidance.",
+            description: `Our Online Preparation Course provides the same high-quality exam training as our classroom
+programs, delivered through live interactive sessions.
+This option is ideal for candidates who prefer studying from home or have demanding work schedules
+that make commuting difficult.
+Lessons are conducted in real time with experienced instructors, allowing students to ask questions,
+participate in discussions, and receive feedback just as they would in a physical classroom.
+Despite being delivered online, the course maintains a strong practical focus. Students work on real
+exam tasks, strategy development, and performance improvement, ensuring that each session
+contributes directly to exam readiness.
+Participants benefit from:
+• Live instructor-led sessions
+• Structured training across all exam sections
+• Speaking practice with feedback
+• Writing evaluation and improvement guidance
+• Flexible scheduling options
+Course Details:
+Total Duration: 20 Hours
+Format: Live Online Classes
+Schedule: Flexible
+This format allows candidates to prepare effectively from anywhere while maintaining the structure
+and discipline of a guided course.`,
           },
         ],
       },
