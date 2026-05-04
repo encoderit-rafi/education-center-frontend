@@ -42,7 +42,7 @@ export default function Courses() {
 
                 <div className="grid grid-cols-2 gap-2">
                   <Link
-                    href={`/enroll-course?course=${course.id}`}
+                    href={`/course-registration?course=${course.id}`}
                     className={cn(
                       buttonVariants({
                         variant: "default",

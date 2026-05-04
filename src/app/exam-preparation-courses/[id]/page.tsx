@@ -2,8 +2,21 @@ import React from "react";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { Calendar, Users, Clock, MapPin, Target } from "lucide-react";
+import {
+  Calendar,
+  Users,
+  Clock,
+  MapPin,
+  Target,
+  ArrowRight,
+} from "lucide-react";
 import exam_preparation_courses from "@/lib/demo-data/exam-preparation-courses";
+import GradientBox from "@/components/blocks/gradient-box";
+import {
+  BaseCard,
+  BaseCardDescription,
+  BaseCardTitle,
+} from "@/components/blocks/cards/base-card";
 
 // Helper to format text with basic markdown-like bolding
 const formatText = (text: string) => {
@@ -49,18 +62,35 @@ export default async function ExamPreparationCourseDetailPage({
         <div className="container mx-auto px-4 lg:px-8 max-w-7xl">
           <div className="grid gap-12 lg:grid-cols-3 lg:gap-16">
             <div className="lg:col-span-2">
-              <span className="inline-block px-3 py-1 text-xs font-bold uppercase tracking-widest text-primary bg-red-50 rounded-full mb-4">
-                Available Courses
-              </span>
-              <h2 className="mb-5 text-2xl font-bold text-gray-900 lg:text-3xl">
-                Choose Your Preparation Format
+              <span className="section-label">Available Courses</span>
+              <h2 className="section-title">
+                Choose Your <span>Preparation Format</span>
               </h2>
-              <p className="leading-relaxed text-gray-600 mb-8">
+              <p className="leading-relaxed text-gray-600 mb-8 mt-4">
                 We offer multiple course formats to suit your learning style,
                 schedule, and goals. Choose from our specialized programs below.
               </p>
-
-              {exam.course_formats && exam.course_formats.length > 0 && (
+              <div className="grid grid-cols-2 gap-6">
+                {exam.course_formats &&
+                  exam.course_formats.length > 0 &&
+                  exam.course_formats.map((course, i) => (
+                    <Link
+                      key={i}
+                      href={`/course-registration?course=${exam.id}&format=${course.course_type_id}`}
+                    >
+                      <BaseCard className="group  p-4 lg:p-6">
+                        <div className="flex justify-between items-center">
+                          <BaseCardTitle>{course.title}</BaseCardTitle>
+                          <ArrowRight className="w-5 h-5 group-hover:translate-x-1 group-hover:text-primary transition-transform" />
+                        </div>
+                        <BaseCardDescription>
+                          {course.description}
+                        </BaseCardDescription>
+                      </BaseCard>
+                    </Link>
+                  ))}
+              </div>
+              {/* {exam.course_formats && exam.course_formats.length > 0 && (
                 <div className="space-y-6">
                   {exam.course_formats.map((course, i) => (
                     <div
@@ -120,7 +150,7 @@ export default async function ExamPreparationCourseDetailPage({
 
                       <div className="mt-6 pt-6 border-t border-gray-100">
                         <Link
-                          href={`/enroll-course?course=${exam.id}&format=${course.id}`}
+                          href={`/course-registration?course=${exam.id}&format=${course.id}`}
                           className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-gray-900 px-6 py-3 text-sm font-bold text-white transition-all hover:bg-gray-800 md:w-auto"
                         >
                           Enroll in {course.type} Course
@@ -129,7 +159,7 @@ export default async function ExamPreparationCourseDetailPage({
                     </div>
                   ))}
                 </div>
-              )}
+              )} */}
             </div>
 
             {/* Sidebar */}
@@ -138,58 +168,48 @@ export default async function ExamPreparationCourseDetailPage({
       </section>
 
       {/* Final CTA */}
-      <section className="relative overflow-hidden bg-[#F9FAFB] py-20">
-        <div className="container relative mx-auto px-4 lg:px-8 max-w-7xl">
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-red-700 via-red-800 to-red-900 px-8 py-14 shadow-xl md:px-14 md:py-16">
-            <div
-              className="pointer-events-none absolute inset-0"
-              aria-hidden="true"
+
+      <GradientBox className="px-8 py-14 shadow-xl md:px-14 md:py-16 bg-gradient-to-br from-red-700 via-red-800 to-red-900">
+        <div className="relative flex flex-col items-center justify-between gap-8 text-center lg:flex-row lg:text-left">
+          <div className="max-w-xl">
+            <h2 className="text-3xl font-bold tracking-tight text-white lg:text-4xl">
+              Register for {exam.name} at TEPTH
+            </h2>
+            <p className="mt-4 text-lg leading-relaxed text-red-100">
+              Start your journey today. Secure your spot in our upcoming
+              sessions and achieve your target score.
+            </p>
+          </div>
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <Link
+              className="group inline-flex items-center justify-center gap-2 rounded-lg bg-white px-8 py-3.5 text-sm font-bold text-primary shadow-lg transition-all duration-300 hover:bg-red-50"
+              href={`/course-registration?course=${exam.id}`}
             >
-              <div className="absolute -right-24 -top-24 h-80 w-80 rounded-full bg-white/5"></div>
-              <div className="absolute -bottom-16 -left-16 h-64 w-64 rounded-full bg-white/5"></div>
-            </div>
-            <div className="relative flex flex-col items-center justify-between gap-8 text-center lg:flex-row lg:text-left">
-              <div className="max-w-xl">
-                <h2 className="text-3xl font-bold tracking-tight text-white lg:text-4xl">
-                  Register for {exam.name} at TEPTH
-                </h2>
-                <p className="mt-4 text-lg leading-relaxed text-red-100">
-                  Start your journey today. Secure your spot in our upcoming
-                  sessions and achieve your target score.
-                </p>
-              </div>
-              <div className="flex flex-col gap-3 sm:flex-row">
-                <Link
-                  className="group inline-flex items-center justify-center gap-2 rounded-lg bg-white px-8 py-3.5 text-sm font-bold text-primary shadow-lg transition-all duration-300 hover:bg-red-50"
-                  href={`/enroll-course?course=${exam.id}`}
-                >
-                  Enroll Now
-                  <svg
-                    className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    aria-hidden="true"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M17 8l4 4m0 0l-4 4m4-4H3"
-                    ></path>
-                  </svg>
-                </Link>
-                <Link
-                  className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-white/40 px-8 py-3.5 text-sm font-bold text-white transition-all duration-300 hover:border-white hover:bg-white/10"
-                  href="/free-consultation"
-                >
-                  Free Consultation
-                </Link>
-              </div>
-            </div>
+              Enroll Now
+              <svg
+                className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth="2"
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                ></path>
+              </svg>
+            </Link>
+            <Link
+              className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-white/40 px-8 py-3.5 text-sm font-bold text-white transition-all duration-300 hover:border-white hover:bg-white/10"
+              href="/free-consultation"
+            >
+              Free Consultation
+            </Link>
           </div>
         </div>
-      </section>
+      </GradientBox>
     </div>
   );
 }

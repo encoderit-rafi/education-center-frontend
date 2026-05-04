@@ -29,7 +29,7 @@ export default function CourseCard({ course }: CourseCardProps) {
           </div>
 
           <Link
-            href={`/enroll-course?course=${course.id}`}
+            href={`/course-registration?course=${course.id}`}
             className={cn(
               buttonVariants({
                 variant: "default",

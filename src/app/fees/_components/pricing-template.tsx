@@ -10,7 +10,7 @@ import {
   User,
   CheckCircle2,
   Globe,
-  type LucideIcon
+  type LucideIcon,
 } from "lucide-react";
 import FreeConsultation from "@/app/free-consultation/_components/free-consultation";
 import { PricingCard } from "./pricing-card";
@@ -81,7 +81,7 @@ const DEFAULT_PLANS: PricingPlan[] = [
       "Number of Hours: 16 (4 hrs/week)",
       "Days Per Week: 3 days/week (flexible)",
     ],
-  }
+  },
 ];
 
 interface PricingTemplateProps {
@@ -89,7 +89,10 @@ interface PricingTemplateProps {
   courseAbbr: string;
 }
 
-export function PricingTemplate({ courseName, courseAbbr }: PricingTemplateProps) {
+export function PricingTemplate({
+  courseName,
+  courseAbbr,
+}: PricingTemplateProps) {
   return (
     <main className="font-sans selection:bg-red-100 selection:text-red-900">
       {/* ── Hero Section ── */}
@@ -114,8 +117,9 @@ export function PricingTemplate({ courseName, courseAbbr }: PricingTemplateProps
               <span className="text-[#991B1B] italic">Preparation</span>
             </h1>
             <p className="text-slate-300 text-lg leading-relaxed mb-10 font-light max-w-xl">
-              Achieve your target score with our expertly designed {courseAbbr} training programs.
-              Transparent pricing for world-class certification preparation.
+              Achieve your target score with our expertly designed {courseAbbr}{" "}
+              training programs. Transparent pricing for world-class
+              certification preparation.
             </p>
           </div>
         </div>
@@ -129,7 +133,8 @@ export function PricingTemplate({ courseName, courseAbbr }: PricingTemplateProps
               Choose Your Plan
             </h2>
             <p className="text-[#4B5563] max-w-xl mx-auto text-lg leading-relaxed">
-              Select the training format that best suits your learning style and schedule.
+              Select the training format that best suits your learning style and
+              schedule.
             </p>
           </div>
 
@@ -144,7 +149,7 @@ export function PricingTemplate({ courseName, courseAbbr }: PricingTemplateProps
                 icon={plan.icon}
                 details={plan.details}
                 buttonText="Register Now"
-                buttonHref="/enroll-course"
+                buttonHref="/course-registration"
                 course={courseAbbr}
                 planId={plan.id}
               />
@@ -160,10 +165,12 @@ export function PricingTemplate({ courseName, courseAbbr }: PricingTemplateProps
             <div className="absolute top-0 right-0 w-64 h-64 bg-[#991B1B]/20 blur-[120px] rounded-full translate-x-1/2 -translate-y-1/2" />
             <div className="relative z-10">
               <h2 className="text-white text-4xl md:text-5xl font-headline font-black tracking-tight mb-4">
-                Still have questions about <span className="text-[#991B1B]">{courseAbbr}</span>?
+                Still have questions about{" "}
+                <span className="text-[#991B1B]">{courseAbbr}</span>?
               </h2>
               <p className="text-slate-400 text-lg max-w-2xl mx-auto mb-10">
-                Our academic advisors are ready to help you choose the right plan for your goals.
+                Our academic advisors are ready to help you choose the right
+                plan for your goals.
               </p>
               <Link
                 href="/free-consultation"
