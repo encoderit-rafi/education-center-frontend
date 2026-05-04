@@ -110,7 +110,7 @@ export default function FormPTEHomeUkviRegistration() {
         window.scrollTo({ top: 400, behavior: "smooth" });
     };
 
-    const EXAM_FEE = 1150; 
+    const EXAM_FEE = 1150;
     const SERVICE_FEE = 5;
     const VAT_RATE = 0.05;
 
@@ -190,7 +190,7 @@ export default function FormPTEHomeUkviRegistration() {
                     <div className="p-8 md:p-16">
                         <Form {...form}>
                             <form className="space-y-16" onSubmit={handleSubmit(onSubmit)}>
-                                
+
                                 {/* Step 1: Personal Details */}
                                 {currentStep === 1 && (
                                     <div className="space-y-12 animate-in fade-in slide-in-from-right-8 duration-500">
@@ -312,7 +312,7 @@ export default function FormPTEHomeUkviRegistration() {
                                                 <FormField control={control} name="mobileNumber" render={({ field }) => (
                                                     <FormItem className="space-y-2">
                                                         <FormLabel className="text-xs font-bold text-slate-500 uppercase tracking-wider">Mobile Number</FormLabel>
-                                                        <FormControl><PhoneInput defaultCountry="AE" {...field} defaultCountry="AE" className="h-14" /></FormControl>
+                                                        <FormControl><PhoneInput defaultCountry="AE" {...field} className="h-14" /></FormControl>
                                                         <FormMessage />
                                                     </FormItem>
                                                 )} />
@@ -354,12 +354,12 @@ export default function FormPTEHomeUkviRegistration() {
                                                     <FormItem className="space-y-3">
                                                         <FormLabel className="text-sm font-bold text-slate-700 italic">*What language do you speak mostly at home?</FormLabel>
                                                         <FormControl><SearchableDropdown options={[
-                                                            {label: "Arabic", value: "arabic"},
-                                                            {label: "Bengali", value: "bengali"},
-                                                            {label: "English", value: "english"},
-                                                            {label: "Hindi", value: "hindi"},
-                                                            {label: "Urdu", value: "urdu"},
-                                                            {label: "Other", value: "other"}
+                                                            { label: "Arabic", value: "arabic" },
+                                                            { label: "Bengali", value: "bengali" },
+                                                            { label: "English", value: "english" },
+                                                            { label: "Hindi", value: "hindi" },
+                                                            { label: "Urdu", value: "urdu" },
+                                                            { label: "Other", value: "other" }
                                                         ]} placeholder="Select one..." value={field.value} onChange={(val) => field.onChange(val)} /></FormControl>
                                                         <FormMessage />
                                                     </FormItem>
@@ -377,10 +377,10 @@ export default function FormPTEHomeUkviRegistration() {
                                                     <FormItem className="space-y-3">
                                                         <FormLabel className="text-sm font-bold text-slate-700">*Which best describes your current situation?</FormLabel>
                                                         <FormControl><SearchableDropdown options={[
-                                                            {label: "Working - full time", value: "work_full"},
-                                                            {label: "Working - part time", value: "work_part"},
-                                                            {label: "Not studying or working", value: "not_working"},
-                                                            {label: "Other - specify below", value: "other"}
+                                                            { label: "Working - full time", value: "work_full" },
+                                                            { label: "Working - part time", value: "work_part" },
+                                                            { label: "Not studying or working", value: "not_working" },
+                                                            { label: "Other - specify below", value: "other" }
                                                         ]} placeholder="Select one..." value={field.value} onChange={(val) => field.onChange(val)} /></FormControl>
                                                         <FormMessage />
                                                     </FormItem>
@@ -390,10 +390,10 @@ export default function FormPTEHomeUkviRegistration() {
                                                     <FormItem className="space-y-3">
                                                         <FormLabel className="text-sm font-bold text-slate-700">*Why are you taking PTE Home UKVI?</FormLabel>
                                                         <FormControl><SearchableDropdown options={[
-                                                            {label: "Settlement (ILR)", value: "settlement"},
-                                                            {label: "Family Visa", value: "family_visa"},
-                                                            {label: "Spouse Visa", value: "spouse_visa"},
-                                                            {label: "Other", value: "other"}
+                                                            { label: "Settlement (ILR)", value: "settlement" },
+                                                            { label: "Family Visa", value: "family_visa" },
+                                                            { label: "Spouse Visa", value: "spouse_visa" },
+                                                            { label: "Other", value: "other" }
                                                         ]} placeholder="Select one..." value={field.value} onChange={(val) => field.onChange(val)} /></FormControl>
                                                         <FormMessage />
                                                     </FormItem>
@@ -403,13 +403,13 @@ export default function FormPTEHomeUkviRegistration() {
                                                     <FormItem className="space-y-3">
                                                         <FormLabel className="text-sm font-bold text-slate-700">*What is your occupation sector?</FormLabel>
                                                         <FormControl><SearchableDropdown options={[
-                                                            {label: "Agriculture", value: "agri"},
-                                                            {label: "Banking and Finance", value: "banking"},
-                                                            {label: "Education", value: "edu"},
-                                                            {label: "Health and Social Services", value: "health"},
-                                                            {label: "Retail Trade", value: "retail"},
-                                                            {label: "Personal Services", value: "personal"},
-                                                            {label: "Other", value: "other"}
+                                                            { label: "Agriculture", value: "agri" },
+                                                            { label: "Banking and Finance", value: "banking" },
+                                                            { label: "Education", value: "edu" },
+                                                            { label: "Health and Social Services", value: "health" },
+                                                            { label: "Retail Trade", value: "retail" },
+                                                            { label: "Personal Services", value: "personal" },
+                                                            { label: "Other", value: "other" }
                                                         ]} placeholder="Select one..." value={field.value} onChange={(val) => field.onChange(val)} /></FormControl>
                                                         <FormMessage />
                                                     </FormItem>
@@ -448,9 +448,9 @@ export default function FormPTEHomeUkviRegistration() {
                                                                     <FormControl>
                                                                         <RadioGroup className="flex flex-wrap gap-6" onValueChange={field.onChange} value={field.value ?? ""}>
                                                                             {[
-                                                                                {label: "Yes", value: "yes"},
-                                                                                {label: "No", value: "no"},
-                                                                                {label: "I do not know", value: "dont_know"}
+                                                                                { label: "Yes", value: "yes" },
+                                                                                { label: "No", value: "no" },
+                                                                                { label: "I do not know", value: "dont_know" }
                                                                             ].map(v => (
                                                                                 <div key={v.value} className="flex items-center space-x-3 group cursor-pointer">
                                                                                     <RadioGroupItem value={v.value} id={`2yrs-${v.value}`} className="w-5 h-5 border-red-200 text-[#A11D1D]" />
@@ -469,9 +469,9 @@ export default function FormPTEHomeUkviRegistration() {
                                                                     <FormControl>
                                                                         <RadioGroup className="flex flex-wrap gap-6" onValueChange={field.onChange} value={field.value ?? ""}>
                                                                             {[
-                                                                                {label: "Yes", value: "yes"},
-                                                                                {label: "No", value: "no"},
-                                                                                {label: "I forgot details", value: "forgot"}
+                                                                                { label: "Yes", value: "yes" },
+                                                                                { label: "No", value: "no" },
+                                                                                { label: "I forgot details", value: "forgot" }
                                                                             ].map(v => (
                                                                                 <div key={v.value} className="flex items-center space-x-3 group cursor-pointer">
                                                                                     <RadioGroupItem value={v.value} id={`acc-${v.value}`} className="w-5 h-5 border-red-200 text-[#A11D1D]" />
@@ -565,9 +565,9 @@ export default function FormPTEHomeUkviRegistration() {
                                                                 <FormItem className="space-y-3">
                                                                     <FormLabel className="text-sm font-bold text-slate-700">*ID Type</FormLabel>
                                                                     <FormControl><SearchableDropdown options={[
-                                                                        {label: "Valid Passport", value: "passport"},
-                                                                        {label: "National ID Card", value: "nat_id"},
-                                                                        {label: "Other ID in Policy", value: "other_id"}
+                                                                        { label: "Valid Passport", value: "passport" },
+                                                                        { label: "National ID Card", value: "nat_id" },
+                                                                        { label: "Other ID in Policy", value: "other_id" }
                                                                     ]} placeholder="Select your identification document" value={field.value} onChange={(val) => field.onChange(val)} /></FormControl>
                                                                     <FormMessage />
                                                                 </FormItem>
@@ -682,7 +682,7 @@ export default function FormPTEHomeUkviRegistration() {
                                                         <School className="w-4 h-4" />
                                                         <span className="text-[10px] font-black uppercase tracking-widest italic">Preparation Course</span>
                                                     </div>
-                                                    
+
                                                     <RadioGroup onValueChange={(val) => form.setValue("selectedCourse", val)} value={formData.selectedCourse ?? ""} className="space-y-3">
                                                         {courses.map(course => (
                                                             <label key={course.id} className={cn(

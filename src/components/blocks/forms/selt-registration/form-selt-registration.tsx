@@ -693,7 +693,7 @@ export default function FormSELTRegistration() {
                                                         <FormItem className="space-y-2">
                                                             <FormLabel className="text-xs font-bold text-slate-500 uppercase tracking-wider italic">Telephone</FormLabel>
                                                             <p className="text-[10px] text-slate-400 font-medium italic">Give us the best number to contact you in case there is a problem.</p>
-                                                            <FormControl><PhoneInput defaultCountry="AE" {...field} defaultCountry="AE" className="h-14" /></FormControl>
+                                                            <FormControl><PhoneInput {...field} defaultCountry="AE" className="h-14" /></FormControl>
                                                             <FormMessage />
                                                         </FormItem>
                                                     )} />

@@ -42,6 +42,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { PhoneInput } from "@/components/ui/phone-input";
+import { languages } from "@/lib/languages-data";
 import { DateTimePicker } from "@/components/ui/date-time-picker";
 import { format } from "date-fns";
 
@@ -206,11 +207,11 @@ export default function FormIELTSGeneralRegistration() {
                                                     </p>
                                                     <FormControl>
                                                         <RadioGroup className="flex flex-col gap-4" onValueChange={field.onChange} value={field.value}>
-                                                            <div className="flex items-center space-x-4 p-5 rounded-2xl border border-slate-100 hover:border-[#A11D1D]/30 transition-all cursor-pointer bg-slate-50/50 group">
+                                                            <div className="flex items-center space-x-4 p-5 rounded-2xl border border-slate-100 hover:border-[#A11D1D]/30 transition-all cursor-pointer bg-white group">
                                                                 <RadioGroupItem value="myself" id="myself" className="w-5 h-5 border-slate-300 data-[state=checked]:bg-[#A11D1D] data-[state=checked]:border-[#A11D1D]" />
                                                                 <Label htmlFor="myself" className="font-bold text-slate-700 cursor-pointer group-hover:text-[#A11D1D] transition-colors">Myself</Label>
                                                             </div>
-                                                            <div className="flex items-center space-x-4 p-5 rounded-2xl border border-slate-100 hover:border-[#A11D1D]/30 transition-all cursor-pointer bg-slate-50/50 group">
+                                                            <div className="flex items-center space-x-4 p-5 rounded-2xl border border-slate-100 hover:border-[#A11D1D]/30 transition-all cursor-pointer bg-white group">
                                                                 <RadioGroupItem value="child" id="child" className="w-5 h-5 border-slate-300 data-[state=checked]:bg-[#A11D1D] data-[state=checked]:border-[#A11D1D]" />
                                                                 <div className="flex flex-col cursor-pointer group-hover:text-[#A11D1D] transition-colors">
                                                                     <Label htmlFor="child" className="font-bold text-slate-700 cursor-pointer">My child</Label>
@@ -314,7 +315,7 @@ export default function FormIELTSGeneralRegistration() {
                                             )} />
                                             
                                             <FormField control={control} name="smsConsent" render={({ field }) => (
-                                                <FormItem className="flex items-start space-x-4 space-y-0 p-6 rounded-3xl bg-slate-50/50 border border-slate-100">
+                                                <FormItem className="flex items-start space-x-4 space-y-0 p-6 rounded-3xl bg-white border border-slate-100">
                                                     <FormControl><Checkbox checked={field.value} onCheckedChange={field.onChange} className="w-5 h-5 border-slate-300 data-[state=checked]:bg-[#A11D1D] mt-1" /></FormControl>
                                                     <div className="space-y-2">
                                                         <Label className="text-sm font-bold text-slate-600 leading-relaxed cursor-pointer">I agree to receive notifications or to be contacted about my test registration to this telephone number via SMS, WhatsApp, etc.</Label>
@@ -464,7 +465,7 @@ export default function FormIELTSGeneralRegistration() {
                                                 <FormField control={control} name="firstLanguage" render={({ field }) => (
                                                     <FormItem className="space-y-3">
                                                         <FormLabel className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">What is your first language?</FormLabel>
-                                                        <FormControl><SearchableDropdown options={[{label: "English", value: "English"}, {label: "Bengali", value: "Bengali"}, {label: "Arabic", value: "Arabic"}]} placeholder="Select language" value={field.value} onChange={field.onChange} className="h-14 bg-white" /></FormControl>
+                                                        <FormControl><SearchableDropdown options={languages} placeholder="Select language" value={field.value} onChange={field.onChange} className="h-14 bg-white" /></FormControl>
                                                         <FormMessage />
                                                     </FormItem>
                                                 )} />
@@ -700,7 +701,7 @@ export default function FormIELTSGeneralRegistration() {
                                     <div className="space-y-8">
                                         <h2 className="text-2xl font-black text-gray-900 tracking-tight uppercase border-b border-slate-100 pb-4">Our terms and conditions</h2>
                                         <FormField control={control} name="termsAgreed" render={({ field }) => (
-                                            <FormItem className="flex items-start space-x-5 space-y-0 p-8 rounded-[2rem] bg-slate-50/50 border border-slate-100">
+                                            <FormItem className="flex items-start space-x-5 space-y-0 p-8 rounded-[2rem] bg-white border border-slate-100">
                                                 <FormControl><Checkbox checked={field.value} onCheckedChange={field.onChange} className="w-6 h-6 border-slate-300 data-[state=checked]:bg-[#A11D1D] mt-1" /></FormControl>
                                                 <div className="space-y-4 text-sm">
                                                     <Label className="font-bold text-slate-700 leading-relaxed cursor-pointer">I agree to the IELTS <button type="button" className="text-[#A11D1D] hover:underline">terms and conditions</button> and <button type="button" className="text-[#A11D1D] hover:underline">cancellation policy</button></Label>

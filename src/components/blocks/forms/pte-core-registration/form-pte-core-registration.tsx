@@ -187,7 +187,7 @@ export default function FormPTECoreRegistration() {
                     <div className="p-8 md:p-16">
                         <Form {...form}>
                             <form className="space-y-16" onSubmit={handleSubmit(onSubmit)}>
-                                
+
                                 {/* Step 1: Personal Details */}
                                 {currentStep === 1 && (
                                     <div className="space-y-12 animate-in fade-in slide-in-from-right-8 duration-500">
@@ -309,7 +309,7 @@ export default function FormPTECoreRegistration() {
                                                 <FormField control={control} name="mobileNumber" render={({ field }) => (
                                                     <FormItem className="space-y-2">
                                                         <FormLabel className="text-xs font-bold text-slate-500 uppercase tracking-wider">Mobile Number</FormLabel>
-                                                        <FormControl><PhoneInput defaultCountry="AE" {...field} defaultCountry="AE" className="h-14" /></FormControl>
+                                                        <FormControl><PhoneInput defaultCountry="AE" {...field} className="h-14" /></FormControl>
                                                         <FormMessage />
                                                     </FormItem>
                                                 )} />
@@ -351,12 +351,12 @@ export default function FormPTECoreRegistration() {
                                                     <FormItem className="space-y-3">
                                                         <FormLabel className="text-sm font-bold text-slate-700">*What is your first (home) language?</FormLabel>
                                                         <FormControl><SearchableDropdown options={[
-                                                            {label: "Arabic", value: "arabic"},
-                                                            {label: "Bengali", value: "bengali"},
-                                                            {label: "English", value: "english"},
-                                                            {label: "Hindi", value: "hindi"},
-                                                            {label: "Urdu", value: "urdu"},
-                                                            {label: "Other", value: "other"}
+                                                            { label: "Arabic", value: "arabic" },
+                                                            { label: "Bengali", value: "bengali" },
+                                                            { label: "English", value: "english" },
+                                                            { label: "Hindi", value: "hindi" },
+                                                            { label: "Urdu", value: "urdu" },
+                                                            { label: "Other", value: "other" }
                                                         ]} placeholder="Select one..." value={field.value} onChange={(val) => field.onChange(val)} /></FormControl>
                                                         <FormMessage />
                                                     </FormItem>
@@ -374,15 +374,15 @@ export default function FormPTECoreRegistration() {
                                                     <FormItem className="space-y-3">
                                                         <FormLabel className="text-sm font-bold text-slate-700">*Which best describes your current situation?</FormLabel>
                                                         <FormControl><SearchableDropdown options={[
-                                                            {label: "Student - in High School", value: "student_hs"},
-                                                            {label: "Student - High School graduate", value: "student_hs_grad"},
-                                                            {label: "Student - English language", value: "student_english"},
-                                                            {label: "Student - in University / College", value: "student_uni"},
-                                                            {label: "Student - University / College graduate", value: "student_uni_grad"},
-                                                            {label: "Working - full time", value: "work_full"},
-                                                            {label: "Working - part time", value: "work_part"},
-                                                            {label: "Not studying or working", value: "not_working"},
-                                                            {label: "Other - specify below", value: "other"}
+                                                            { label: "Student - in High School", value: "student_hs" },
+                                                            { label: "Student - High School graduate", value: "student_hs_grad" },
+                                                            { label: "Student - English language", value: "student_english" },
+                                                            { label: "Student - in University / College", value: "student_uni" },
+                                                            { label: "Student - University / College graduate", value: "student_uni_grad" },
+                                                            { label: "Working - full time", value: "work_full" },
+                                                            { label: "Working - part time", value: "work_part" },
+                                                            { label: "Not studying or working", value: "not_working" },
+                                                            { label: "Other - specify below", value: "other" }
                                                         ]} placeholder="Select one..." value={field.value} onChange={(val) => field.onChange(val)} /></FormControl>
                                                         <FormMessage />
                                                     </FormItem>
@@ -392,11 +392,11 @@ export default function FormPTECoreRegistration() {
                                                     <FormItem className="space-y-3">
                                                         <FormLabel className="text-sm font-bold text-slate-700">*Why are you taking PTE Core?</FormLabel>
                                                         <FormControl><SearchableDropdown options={[
-                                                            {label: "Economic immigration (Federal)", value: "fed_eco"},
-                                                            {label: "Economic immigration (Provincial)", value: "prov_eco"},
-                                                            {label: "Work Visa", value: "work_visa"},
-                                                            {label: "Study", value: "study"},
-                                                            {label: "Other - specify below", value: "other"}
+                                                            { label: "Economic immigration (Federal)", value: "fed_eco" },
+                                                            { label: "Economic immigration (Provincial)", value: "prov_eco" },
+                                                            { label: "Work Visa", value: "work_visa" },
+                                                            { label: "Study", value: "study" },
+                                                            { label: "Other - specify below", value: "other" }
                                                         ]} placeholder="Select one..." value={field.value} onChange={(val) => field.onChange(val)} /></FormControl>
                                                         <FormMessage />
                                                     </FormItem>
@@ -406,14 +406,14 @@ export default function FormPTECoreRegistration() {
                                                     <FormItem className="space-y-3">
                                                         <FormLabel className="text-sm font-bold text-slate-700">*If you are taking PTE Core for study, which level are you applying for?</FormLabel>
                                                         <FormControl><SearchableDropdown options={[
-                                                            {label: "Pre-degree / Foundation course", value: "pre_degree"},
-                                                            {label: "Undergraduate degree", value: "undergrad"},
-                                                            {label: "(Post) Graduate / Masters degree", value: "postgrad"},
-                                                            {label: "Doctorate / PhD", value: "phd"},
-                                                            {label: "MBA (Master of Business Administration)", value: "mba"},
-                                                            {label: "English Language Course", value: "english_course"},
-                                                            {label: "Professional qualification", value: "professional"},
-                                                            {label: "Other - specify below", value: "other"}
+                                                            { label: "Pre-degree / Foundation course", value: "pre_degree" },
+                                                            { label: "Undergraduate degree", value: "undergrad" },
+                                                            { label: "(Post) Graduate / Masters degree", value: "postgrad" },
+                                                            { label: "Doctorate / PhD", value: "phd" },
+                                                            { label: "MBA (Master of Business Administration)", value: "mba" },
+                                                            { label: "English Language Course", value: "english_course" },
+                                                            { label: "Professional qualification", value: "professional" },
+                                                            { label: "Other - specify below", value: "other" }
                                                         ]} placeholder="Select one..." value={field.value} onChange={(val) => field.onChange(val)} /></FormControl>
                                                         <FormMessage />
                                                     </FormItem>
@@ -423,26 +423,26 @@ export default function FormPTECoreRegistration() {
                                                     <FormItem className="space-y-3">
                                                         <FormLabel className="text-sm font-bold text-slate-700">*What is your occupation sector?</FormLabel>
                                                         <FormControl><SearchableDropdown options={[
-                                                            {label: "Agriculture, Fishing, Forestry, Mining", value: "agri"},
-                                                            {label: "Architecture", value: "arch"},
-                                                            {label: "Arts and Entertainment", value: "arts"},
-                                                            {label: "Banking and Finance", value: "banking"},
-                                                            {label: "Catering and Leisure", value: "catering"},
-                                                            {label: "Communications and Media", value: "comm"},
-                                                            {label: "Construction Industries", value: "construction"},
-                                                            {label: "Craft and Design", value: "craft"},
-                                                            {label: "Education", value: "edu"},
-                                                            {label: "Health and Social Services", value: "health"},
-                                                            {label: "Installation, Maintenance and Repair Services", value: "install"},
-                                                            {label: "Law and Legal Services", value: "law"},
-                                                            {label: "Manufacturing and Assembly Services", value: "mfg"},
-                                                            {label: "Personal Services", value: "personal"},
-                                                            {label: "Retail Trade", value: "retail"},
-                                                            {label: "Technical and Scientific", value: "tech"},
-                                                            {label: "Telecommunications and Media", value: "telecom"},
-                                                            {label: "Transport", value: "transport"},
-                                                            {label: "Utilities (Gas, Water, Electricity etc)", value: "utilities"},
-                                                            {label: "Other", value: "other"}
+                                                            { label: "Agriculture, Fishing, Forestry, Mining", value: "agri" },
+                                                            { label: "Architecture", value: "arch" },
+                                                            { label: "Arts and Entertainment", value: "arts" },
+                                                            { label: "Banking and Finance", value: "banking" },
+                                                            { label: "Catering and Leisure", value: "catering" },
+                                                            { label: "Communications and Media", value: "comm" },
+                                                            { label: "Construction Industries", value: "construction" },
+                                                            { label: "Craft and Design", value: "craft" },
+                                                            { label: "Education", value: "edu" },
+                                                            { label: "Health and Social Services", value: "health" },
+                                                            { label: "Installation, Maintenance and Repair Services", value: "install" },
+                                                            { label: "Law and Legal Services", value: "law" },
+                                                            { label: "Manufacturing and Assembly Services", value: "mfg" },
+                                                            { label: "Personal Services", value: "personal" },
+                                                            { label: "Retail Trade", value: "retail" },
+                                                            { label: "Technical and Scientific", value: "tech" },
+                                                            { label: "Telecommunications and Media", value: "telecom" },
+                                                            { label: "Transport", value: "transport" },
+                                                            { label: "Utilities (Gas, Water, Electricity etc)", value: "utilities" },
+                                                            { label: "Other", value: "other" }
                                                         ]} placeholder="Select one..." value={field.value} onChange={(val) => field.onChange(val)} /></FormControl>
                                                         <FormMessage />
                                                     </FormItem>
@@ -453,7 +453,7 @@ export default function FormPTECoreRegistration() {
                                                 <FormField control={control} name="referralSource" render={({ field }) => (
                                                     <FormItem className="space-y-3">
                                                         <FormLabel className="text-sm font-bold text-slate-700">*How did you hear about PTE Core?</FormLabel>
-                                                        <FormControl><SearchableDropdown options={[{label: "Internet Search", value: "search"}, {label: "Social Media", value: "social"}, {label: "Friend/Family", value: "referral"}, {label: "Agent", value: "agent"}]} placeholder="Select one..." value={field.value} onChange={(val) => field.onChange(val)} /></FormControl>
+                                                        <FormControl><SearchableDropdown options={[{ label: "Internet Search", value: "search" }, { label: "Social Media", value: "social" }, { label: "Friend/Family", value: "referral" }, { label: "Agent", value: "agent" }]} placeholder="Select one..." value={field.value} onChange={(val) => field.onChange(val)} /></FormControl>
                                                         <FormMessage />
                                                     </FormItem>
                                                 )} />
@@ -548,9 +548,9 @@ export default function FormPTECoreRegistration() {
                                                             <FormItem className="space-y-3">
                                                                 <FormLabel className="text-sm font-bold text-slate-700">*ID Type</FormLabel>
                                                                 <FormControl><SearchableDropdown options={[
-                                                                    {label: "Valid Passport", value: "passport"},
-                                                                    {label: "Canadian Permanent Resident Card", value: "can_pr"},
-                                                                    {label: "Other ID listed in the PTE Core ID policy", value: "other_policy"}
+                                                                    { label: "Valid Passport", value: "passport" },
+                                                                    { label: "Canadian Permanent Resident Card", value: "can_pr" },
+                                                                    { label: "Other ID listed in the PTE Core ID policy", value: "other_policy" }
                                                                 ]} placeholder="Select your identification document" value={field.value} onChange={(val) => field.onChange(val)} /></FormControl>
                                                                 <FormMessage />
                                                             </FormItem>
@@ -575,7 +575,7 @@ export default function FormPTECoreRegistration() {
                                                         <FormField control={control} name="testTiming" render={({ field }) => (
                                                             <FormItem className="space-y-3">
                                                                 <FormLabel className="text-sm font-bold text-slate-700">Preferred Test Timing</FormLabel>
-                                                                <FormControl><SearchableDropdown options={[{label: "10:00 AM", value: "10am"}, {label: "12:45 PM", value: "12pm"}, {label: "03:30 PM", value: "3pm"}, {label: "06:15 PM", value: "6pm"}]} placeholder="Select time..." value={field.value} onChange={(val) => field.onChange(val)} /></FormControl>
+                                                                <FormControl><SearchableDropdown options={[{ label: "10:00 AM", value: "10am" }, { label: "12:45 PM", value: "12pm" }, { label: "03:30 PM", value: "3pm" }, { label: "06:15 PM", value: "6pm" }]} placeholder="Select time..." value={field.value} onChange={(val) => field.onChange(val)} /></FormControl>
                                                                 <FormMessage />
                                                             </FormItem>
                                                         )} />
@@ -660,7 +660,7 @@ export default function FormPTECoreRegistration() {
                                                         <School className="w-4 h-4" />
                                                         <span className="text-[10px] font-black uppercase tracking-widest">Prep Course</span>
                                                     </div>
-                                                    
+
                                                     <RadioGroup onValueChange={(val) => form.setValue("selectedCourse", val)} value={formData.selectedCourse ?? ""} className="space-y-3">
                                                         {courses.map(course => (
                                                             <label key={course.id} className={cn(
