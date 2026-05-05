@@ -26,7 +26,7 @@ import {
   X,
   AlertCircle
 } from "lucide-react";
-import { RefinedPteHomeA1Schema, type TPteHomeA1FormSchema } from "./-type";
+import { RefinedPteHomeB1Schema, type TPteHomeB1FormSchema } from "./-type";
 import { SearchableDropdown } from "@/components/ui/searchable-dropdown";
 import { CountryDropdown } from "@/components/ui/country-dropdown";
 import { DateTimePicker } from "@/components/ui/date-time-picker";
@@ -42,11 +42,11 @@ const pteCourses = [
   { id: "online", label: "Private one-to-one (Online course)", price: 3850 },
 ];
 
-export default function FormPTEHomeA1Registration() {
+export default function FormPTEHomeB1Registration() {
   const [step, setStep] = useState(1);
 
-  const form = useForm<TPteHomeA1FormSchema>({
-    resolver: zodResolver(RefinedPteHomeA1Schema),
+  const form = useForm<TPteHomeB1FormSchema>({
+    resolver: zodResolver(RefinedPteHomeB1Schema),
     defaultValues: {
       givenNames: "",
       noGivenNames: false,
@@ -106,7 +106,7 @@ export default function FormPTEHomeA1Registration() {
   const tax = subtotal * VAT_RATE;
   const total = subtotal + tax;
 
-  const onSubmit: SubmitHandler<TPteHomeA1FormSchema> = (data) => {
+  const onSubmit: SubmitHandler<TPteHomeB1FormSchema> = (data) => {
     if (step === 6) {
       setStep(7);
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -118,7 +118,7 @@ export default function FormPTEHomeA1Registration() {
   const handleNext = async () => {
     const fieldsToValidate = getFieldsForStep(step);
     const isValid = await trigger(fieldsToValidate as any);
-
+    
     if (isValid) {
       setStep(step + 1);
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -128,7 +128,7 @@ export default function FormPTEHomeA1Registration() {
     }
   };
 
-  const getFieldsForStep = (currentStep: number): (keyof TPteHomeA1FormSchema)[] => {
+  const getFieldsForStep = (currentStep: number): (keyof TPteHomeB1FormSchema)[] => {
     switch (currentStep) {
       case 1: return ["examDate", "examTime"];
       case 2: return ["givenNames", "noGivenNames", "surnames", "noSurname", "emailUsername", "dateOfBirth", "gender", "placeOfBirth", "countryOfBirth", "countryOfCitizenship", "countryOfResidence", "address", "city", "mobileNumber", "readyToBook"];
@@ -150,13 +150,13 @@ export default function FormPTEHomeA1Registration() {
               {step}
             </span>
             <h2 className="text-2xl font-headline font-black text-secondary tracking-tight">
-              {step === 1 ? "Select Exam Date" :
-                step === 2 ? "Personal details" :
-                  step === 3 ? "Identification details" :
-                    step === 4 ? "Your profile" :
-                      step === 5 ? "Courses" :
-                        step === 6 ? "Review" :
-                          step === 7 ? "Payment" : "Confirmation"}
+              {step === 1 ? "Select Exam Date" : 
+               step === 2 ? "Personal details" : 
+               step === 3 ? "Identification details" : 
+               step === 4 ? "Your profile" : 
+               step === 5 ? "Courses" : 
+               step === 6 ? "Review" : 
+               step === 7 ? "Payment" : "Confirmation"}
             </h2>
           </div>
           <div className="w-12 h-1 bg-[#A11D1D] mt-4 transition-all duration-500" style={{ width: `${(step / 8) * 100}%` }}></div>
@@ -228,8 +228,8 @@ export default function FormPTEHomeA1Registration() {
                             <RadioGroup className="flex gap-8 h-12 items-center" onValueChange={field.onChange} value={field.value}>
                               {["Male", "Female", "Other"].map(s => (
                                 <div key={s} className="flex items-center space-x-2 group cursor-pointer">
-                                  <RadioGroupItem value={s.toLowerCase()} id={`g-home-a1-${s}`} className="border-[#A11D1D]" />
-                                  <Label htmlFor={`g-home-a1-${s}`} className="text-sm font-bold capitalize cursor-pointer">{s}</Label>
+                                  <RadioGroupItem value={s.toLowerCase()} id={`g-home-b1-${s}`} className="border-[#A11D1D]" />
+                                  <Label htmlFor={`g-home-b1-${s}`} className="text-sm font-bold capitalize cursor-pointer">{s}</Label>
                                 </div>
                               ))}
                             </RadioGroup>
@@ -362,7 +362,7 @@ export default function FormPTEHomeA1Registration() {
                       <FormLabel className="text-sm font-bold text-gray-700">Why are you taking PTE Home?*</FormLabel>
                       <FormControl>
                         <RadioGroup onValueChange={field.onChange} value={field.value} className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                          {["Visa (Family)", "Citizenship", "Other"].map(r => (
+                          {["Visa (A2/B1)", "Citizenship", "Other"].map(r => (
                             <div key={r} onClick={() => field.onChange(r.toLowerCase())} className={cn("flex items-center space-x-4 p-4 rounded-xl border border-slate-100 hover:border-slate-200 transition-all cursor-pointer group bg-white", field.value === r.toLowerCase() ? "border-[#A11D1D] bg-[#A11D1D]/5" : "")}>
                               <RadioGroupItem value={r.toLowerCase()} id={`reason-${r}`} className="border-[#A11D1D] text-[#A11D1D]" />
                               <Label htmlFor={`reason-${r}`} className="font-bold text-gray-900 cursor-pointer">{r}</Label>

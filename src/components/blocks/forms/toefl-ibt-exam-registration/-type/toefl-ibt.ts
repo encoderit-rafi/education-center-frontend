@@ -19,7 +19,7 @@ export const ToeflIbtSchema = z.object({
     city: z.string().min(1, "City is required"),
     state: z.string().optional(),
     postalCode: z.string().optional(),
-    countryCode: z.string().min(1, "Country Code is required"),
+    countryCode: z.string().optional(),
     phoneNumber: z.string().min(1, "Phone Number is required"),
     agentCode: z.string().optional(),
 });
