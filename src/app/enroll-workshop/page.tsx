@@ -1,6 +1,6 @@
 "use client";
 
-import MockTestBookingForm from "@/app/paid-mock-test/_components/mock-test-booking-form";
+import WorkshopBookingForm from "./_components/workshop-booking-form";
 import React, { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 
@@ -31,10 +31,9 @@ function WorkshopEnrollmentContent() {
 
       <section className="px-8 pt-16">
         <div className="max-w-7xl mx-auto">
-          <MockTestBookingForm 
+          <WorkshopBookingForm 
             initialCourse={course || undefined} 
             initialType={type || undefined}
-            mode="workshop"
           />
         </div>
       </section>
