@@ -38,7 +38,7 @@ export default async function PaidMockTestDetailPage({
             </p>
             
             <Link
-              href={`/book-exam`}
+              href={`/paid-mock-test/${test.id}/registration`}
               className={cn(
                 buttonVariants({ size: "lg" }),
                 "group font-bold shadow-lg shadow-primary/20 transition-all duration-300 hover:shadow-primary/40 hover:-translate-y-1 rounded-full px-8"
@@ -112,7 +112,7 @@ export default async function PaidMockTestDetailPage({
             Experience the real exam environment and get accurate score predictions before the actual test day.
           </p>
           <Link
-            href={`/book-exam`}
+            href={`/paid-mock-test/${test.id}/registration`}
             className={cn(
               buttonVariants({ size: "lg" }),
               "bg-primary hover:bg-primary/90 text-white group font-bold shadow-lg shadow-primary/20 transition-all duration-300 hover:-translate-y-1 rounded-full px-10 py-6 text-lg"

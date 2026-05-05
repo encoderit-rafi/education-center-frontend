@@ -43,10 +43,16 @@ const navigations: NavItem[] = [
   {
     type: "primary",
     label: "Exam Preparation Courses",
-    children: EXAM_PREPARATION_COURSES.map((course) => ({
-      label: course.name,
-      href: `/exam-preparation-courses/${course.id}`,
-    })),
+    children: [
+      ...EXAM_PREPARATION_COURSES.map((course) => ({
+        label: course.name,
+        href: `/exam-preparation-courses/${course.id}`,
+      })),
+      {
+        label: "Exam Workshops",
+        href: "/exam-workshops",
+      },
+    ],
   },
   {
     type: "secondary",
