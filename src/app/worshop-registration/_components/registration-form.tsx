@@ -42,7 +42,10 @@ interface RegistrationFormProps {
   initialDurationId?: string;
 }
 
-export default function RegistrationForm({ initialExamId, initialDurationId }: RegistrationFormProps) {
+export default function RegistrationForm({
+  initialExamId,
+  initialDurationId,
+}: RegistrationFormProps) {
   const [isSuccess, setIsSuccess] = useState(false);
 
   const {
@@ -65,8 +68,10 @@ export default function RegistrationForm({ initialExamId, initialDurationId }: R
   const selectedDate = watch("date");
   const selectedTime = watch("timeSlot");
 
-  const selectedExam = exam_workshops.find(e => e.id === selectedExamId) || exam_workshops[0];
-  const selectedDuration = workshops.find(w => w.id === selectedDurationId) || workshops[0];
+  const selectedExam =
+    exam_workshops.find((e) => e.id === selectedExamId) || exam_workshops[0];
+  const selectedDuration =
+    workshops.find((w) => w.id === selectedDurationId) || workshops[0];
 
   const onSubmit = (data: BookingValues) => {
     console.log("Registration Data:", data);
@@ -84,9 +89,9 @@ export default function RegistrationForm({ initialExamId, initialDurationId }: R
             Registration Confirmed
           </h2>
           <p className="text-emerald-700/80 text-lg leading-relaxed font-medium">
-            Your registration for the <strong>{selectedExam.title}</strong> ({selectedDuration.duration}) has been successfully scheduled
-            for {selectedDate ? format(selectedDate, "PPP") : ""} at{" "}
-            {selectedTime}.
+            Your registration for the <strong>{selectedExam.title}</strong> (
+            {selectedDuration.duration}) has been successfully scheduled for{" "}
+            {selectedDate ? format(selectedDate, "PPP") : ""} at {selectedTime}.
           </p>
         </div>
         <button
@@ -100,7 +105,10 @@ export default function RegistrationForm({ initialExamId, initialDurationId }: R
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start"
+    >
       {/* Left Column */}
       <div className="lg:col-span-8 space-y-16">
         {/* Section 1: Exam Workshop */}
@@ -124,16 +132,20 @@ export default function RegistrationForm({ initialExamId, initialDurationId }: R
                   "px-6 py-5 rounded-2xl border-2 text-left transition-all",
                   selectedExamId === exam.id
                     ? "border-[#991B1B] bg-white shadow-xl shadow-red-900/5"
-                    : "border-outline/5 bg-surface-container-low hover:bg-white hover:border-[#991B1B]/20"
+                    : "border-outline/5 bg-surface-container-low hover:bg-white hover:border-[#991B1B]/20",
                 )}
               >
-                <div className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-2">
-                  {exam.category}
-                </div>
-                <div className={cn(
-                  "font-bold text-sm",
-                  selectedExamId === exam.id ? "text-[#991B1B]" : "text-secondary"
-                )}>
+                {/* <div className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-2">
+                  {exam.exam}
+                </div> */}
+                <div
+                  className={cn(
+                    "font-bold text-sm",
+                    selectedExamId === exam.id
+                      ? "text-[#991B1B]"
+                      : "text-secondary",
+                  )}
+                >
                   {exam.title}
                 </div>
               </button>
@@ -160,20 +172,28 @@ export default function RegistrationForm({ initialExamId, initialDurationId }: R
             >
               {workshops.map((item) => (
                 <Field key={item.id} className="relative">
-                  <RadioGroupItem value={item.id} id={item.id} className="sr-only" />
+                  <RadioGroupItem
+                    value={item.id}
+                    id={item.id}
+                    className="sr-only"
+                  />
                   <label
                     htmlFor={item.id}
                     className={cn(
                       "p-6 rounded-[2rem] border-2 cursor-pointer transition-all duration-300 relative group h-full flex flex-col items-center text-center",
                       selectedDurationId === item.id
                         ? "border-[#991B1B] bg-white shadow-xl shadow-red-900/5"
-                        : "border-transparent bg-slate-50 hover:bg-slate-100"
+                        : "border-transparent bg-slate-50 hover:bg-slate-100",
                     )}
                   >
-                    <div className={cn(
-                      "text-xl font-headline font-black mb-2",
-                      selectedDurationId === item.id ? "text-secondary" : "text-secondary/70"
-                    )}>
+                    <div
+                      className={cn(
+                        "text-xl font-headline font-black mb-2",
+                        selectedDurationId === item.id
+                          ? "text-secondary"
+                          : "text-secondary/70",
+                      )}
+                    >
                       {item.duration}
                     </div>
                     <div className="text-lg font-bold text-[#991B1B]">
@@ -227,14 +247,18 @@ export default function RegistrationForm({ initialExamId, initialDurationId }: R
                   >
                     {TIME_SLOTS.map((time) => (
                       <div key={time}>
-                        <RadioGroupItem value={time} id={time} className="sr-only" />
+                        <RadioGroupItem
+                          value={time}
+                          id={time}
+                          className="sr-only"
+                        />
                         <label
                           htmlFor={time}
                           className={cn(
                             "flex items-center justify-center py-4 rounded-xl border-2 text-[10px] font-black uppercase tracking-widest transition-all cursor-pointer w-full text-center",
                             selectedTime === time
                               ? "border-primary bg-white text-secondary scale-105 shadow-md"
-                              : "border-outline/5 bg-surface-container-low text-secondary/30"
+                              : "border-outline/5 bg-surface-container-low text-secondary/30",
                           )}
                         >
                           {time}
@@ -280,7 +304,8 @@ export default function RegistrationForm({ initialExamId, initialDurationId }: R
               <div className="p-6 bg-primary/5 rounded-2xl flex items-start gap-4 mt-12">
                 <Info className="text-primary w-5 h-5 mt-0.5 shrink-0" />
                 <p className="text-xs text-on-surface-variant font-medium leading-relaxed">
-                  We will send your schedule confirmation and access link to this email address within 24 hours.
+                  We will send your schedule confirmation and access link to
+                  this email address within 24 hours.
                 </p>
               </div>
             </div>
@@ -360,7 +385,9 @@ export default function RegistrationForm({ initialExamId, initialDurationId }: R
                 Total Amount
               </span>
               <div className="flex items-baseline gap-1">
-                <span className="text-xl font-bold text-primary">{selectedDuration.currency}</span>
+                <span className="text-xl font-bold text-primary">
+                  {selectedDuration.currency}
+                </span>
                 <span className="text-5xl font-headline font-black text-white tracking-tighter">
                   {selectedDuration.price.toLocaleString()}
                 </span>
