@@ -288,7 +288,7 @@ This format allows candidates to prepare effectively from anywhere while maintai
   },
   {
     id: "pte",
-    name:"PTE",
+    name:"PTE ACADEMIC",
 
     description: `The PTE Academic is a fully computer-based English proficiency exam developed by Pearson. It
 is widely accepted by thousands of universities and governments around the world, including
