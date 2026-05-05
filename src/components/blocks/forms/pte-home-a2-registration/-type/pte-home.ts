@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 // Helper to handle both strings and objects from dropdowns
-const stringOrObject = z.union([z.string(), z.any()]).transform(val => {
+const stringOrObject = z.union([z.string(), z.any(), z.null(), z.undefined()]).transform(val => {
     if (typeof val === 'string') return val;
     if (val && typeof val === 'object') {
         return val.name || val.value || val.label || "";
@@ -9,13 +9,16 @@ const stringOrObject = z.union([z.string(), z.any()]).transform(val => {
     return "";
 });
 
+const requiredString = (message: string) => z.string().min(1, message).or(z.any().transform(v => String(v || ""))).pipe(z.string().min(1, message));
+const optionalString = z.string().optional().or(z.any().transform(v => String(v || ""))).transform(v => v || "");
+
 export const PteHomeA2Schema = z.object({
     // Step 1: Personal Information
     givenNames: z.string().optional(),
     noGivenNames: z.boolean(),
     surnames: z.string().optional(),
     noSurname: z.boolean(),
-    emailUsername: z.string().email("Invalid email/username"),
+    emailUsername: z.string().email("Invalid email/username").or(z.any().transform(v => String(v || ""))).pipe(z.string().email("Invalid email/username")),
     dateOfBirth: z.any().refine((val) => !!val, "Date of birth is required"),
     gender: z.string().min(1, "Gender is required"),
     placeOfBirth: z.string().min(1, "Place of birth is required"),
@@ -24,8 +27,12 @@ export const PteHomeA2Schema = z.object({
     countryOfResidence: stringOrObject.refine(val => val.length > 0, "Country of residence is required"),
     address: z.string().min(1, "Address is required"),
     city: z.string().min(1, "City is required"),
-    mobileNumber: z.string().min(1, "Mobile number is required"),
+    mobileNumber: z.string().min(1, "Mobile number is required").or(z.any().transform(v => String(v || ""))).pipe(z.string().min(1, "Mobile number is required")),
     readyToBook: z.string().min(1, "Please select an option"),
+
+    // New Fields for Step 1 alignment
+    examDate: z.any().refine((val) => !!val, "Exam date is required"),
+    examTime: z.string().min(1, "Exam time is required"),
 
     // Step 2: Booking Questions & Preferences
     homeLanguage: stringOrObject.refine(val => val.length > 0, "Please select your language"),
@@ -49,10 +56,10 @@ export const PteHomeA2Schema = z.object({
     // Step 3: Final Details & Documents
     testTiming: z.string().optional(),
     idPolicyRead: z.boolean().refine(val => val === true, "You must read the ID policy"),
-    idType: z.string().min(1, "ID type is required"),
+    idType: requiredString("ID type is required"),
     idCountryOfIssue: stringOrObject.refine(val => val.length > 0, "Country of issue is required"),
     documentNumberConfirmed: z.boolean().refine(val => val === true, "Please confirm your document number"),
-    documentNumber: z.string().min(1, "ID number is required"),
+    documentNumber: requiredString("ID number is required"),
     selectedCourse: z.string().optional(),
     
     // Document Uploads

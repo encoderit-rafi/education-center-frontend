@@ -864,7 +864,7 @@ export default function FormIELTSAcademicRegistration() {
                     render={({ field }) => (
                       <FormItem className="space-y-2">
                         <FormLabel className="text-xs font-black uppercase tracking-widest text-gray-500">
-                          Passport number:*
+                          {formData.idType === "emirates_id" ? "ID number:*" : "Passport number:*"}
                         </FormLabel>
                         <FormControl>
                           <Input
@@ -880,7 +880,7 @@ export default function FormIELTSAcademicRegistration() {
                   <DateTimePicker
                     control={control}
                     name="idExpiryDate"
-                    label="Passport expiry date:*"
+                    label={formData.idType === "emirates_id" ? "ID expiry date:*" : "Passport expiry date:*"}
                     labelClassName="text-xs font-black uppercase tracking-widest text-gray-500"
                     mode="date"
                     placeholder="dd/mm/yyyy"

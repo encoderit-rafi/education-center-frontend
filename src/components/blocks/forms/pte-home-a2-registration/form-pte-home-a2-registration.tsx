@@ -1,14 +1,15 @@
 "use client";
-import React, { useMemo, useState } from "react";
-import { useForm, useWatch, SubmitHandler } from "react-hook-form";
+
+import { useState } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -16,765 +17,522 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { cn } from "@/lib/utils";
 import { Label } from "@/components/ui/label";
 import {
-    User,
-    Globe,
-    Info,
-    ArrowRight,
-    School,
-    CheckCircle2,
-    Lock,
-    ShieldCheck,
-    CreditCard,
-    UploadCloud,
-    Camera,
-    X
+  CheckCircle2,
+  Info,
+  Check,
+  ArrowRight,
+  BookOpen,
+  UploadCloud,
+  X,
+  AlertCircle
 } from "lucide-react";
-import { PhoneInput } from "@/components/ui/phone-input";
+import { RefinedPteHomeA2Schema, type TPteHomeA2FormSchema } from "./-type";
+import { SearchableDropdown } from "@/components/ui/searchable-dropdown";
 import { CountryDropdown } from "@/components/ui/country-dropdown";
 import { DateTimePicker } from "@/components/ui/date-time-picker";
-import { SearchableDropdown } from "@/components/ui/searchable-dropdown";
+import { PhoneInput } from "@/components/ui/phone-input";
+import { Checkbox } from "@/components/ui/checkbox";
+import Payment from "../../payment";
+import { ExamDateSelector } from "@/components/blocks/calendar-booking/exam-date-selector";
 
-import { RefinedPteHomeA2Schema, type TPteHomeA2FormSchema } from "./-type";
-
-const courses = [
-    { id: "group", label: "Group (In-person classroom-based course)", price: 1850 },
-    { id: "semi-private", label: "Semi-Private (In-person classroom-based)", price: 2850 },
-    { id: "private", label: "Private one-to-one (In-person classroom)", price: 4850 },
-    { id: "online", label: "Private one-to-one (Online course)", price: 3850 },
+const pteCourses = [
+  { id: "group", label: "Group (In-person classroom-based course)", price: 1850 },
+  { id: "semi-private", label: "Semi-Private (In-person classroom-based)", price: 2850 },
+  { id: "private", label: "Private one-to-one (In-person classroom)", price: 4850 },
+  { id: "online", label: "Private one-to-one (Online course)", price: 3850 },
 ];
 
 export default function FormPTEHomeA2Registration() {
-    const [currentStep, setCurrentStep] = useState(1);
+  const [step, setStep] = useState(1);
 
-    const form = useForm<TPteHomeA2FormSchema>({
-        resolver: zodResolver(RefinedPteHomeA2Schema),
-        mode: "onChange",
-        defaultValues: {
-            givenNames: "",
-            noGivenNames: false,
-            surnames: "",
-            noSurname: false,
-            emailUsername: "",
-            dateOfBirth: undefined,
-            gender: "",
-            readyToBook: "" as any,
-            homeLanguage: "",
-            planningCountry: "",
-            currentSituation: "",
-            reasonForTaking: "",
-            studyLevel: "",
-            occupationSector: "",
-            referralSource: "",
-            takenBefore: "",
-            takenWithinTwoYears: "",
-            hasExistingAccount: "",
-            dataSharingAgreed: false,
-            bookingTermsAgreed: false,
-            marketingConsent: "",
-            testTiming: "",
-            idPolicyRead: false,
-            idType: "",
-            idCountryOfIssue: "",
-            documentNumberConfirmed: false,
-            documentNumber: "",
-            passportCopy: undefined,
-            userPhoto: undefined,
-            selectedCourse: "",
-            infoCorrect: false,
-        },
-    });
+  const form = useForm<TPteHomeA2FormSchema>({
+    resolver: zodResolver(RefinedPteHomeA2Schema),
+    defaultValues: {
+      givenNames: "",
+      noGivenNames: false,
+      surnames: "",
+      noSurname: false,
+      emailUsername: "",
+      dateOfBirth: undefined,
+      gender: "",
+      placeOfBirth: "",
+      countryOfBirth: "",
+      countryOfCitizenship: "",
+      countryOfResidence: "",
+      address: "",
+      city: "",
+      mobileNumber: "",
+      readyToBook: "",
+      homeLanguage: "",
+      planningCountry: "",
+      currentSituation: "",
+      reasonForTaking: "",
+      studyLevel: "",
+      occupationSector: "",
+      referralSource: "",
+      takenBefore: "",
+      takenWithinTwoYears: "",
+      hasExistingAccount: "",
+      dataSharingAgreed: false,
+      bookingTermsAgreed: false,
+      marketingConsent: "",
+      testTiming: "",
+      idPolicyRead: false,
+      idType: "",
+      idCountryOfIssue: "",
+      documentNumberConfirmed: false,
+      documentNumber: "",
+      selectedCourse: "",
+      passportCopy: undefined,
+      userPhoto: undefined,
+      infoCorrect: false,
+      examDate: undefined,
+      examTime: "",
+    },
+  });
 
-    const { control, handleSubmit, trigger, setValue, formState: { errors } } = form;
-    const formData = useWatch({ control });
+  const { control, handleSubmit, watch, trigger, setValue } = form;
+  const formData = watch();
+  const watchTakenBefore = watch("takenBefore");
 
-    const getFieldsForStep = (currentStep: number) => {
-        switch (currentStep) {
-            case 1: return ["givenNames", "noGivenNames", "surnames", "noSurname", "emailUsername", "dateOfBirth", "gender", "placeOfBirth", "countryOfBirth", "countryOfCitizenship", "countryOfResidence", "address", "city", "mobileNumber", "readyToBook"];
-            case 2: return ["homeLanguage", "planningCountry", "currentSituation", "reasonForTaking", "studyLevel", "occupationSector", "referralSource", "takenBefore", "takenWithinTwoYears", "hasExistingAccount", "dataSharingAgreed", "bookingTermsAgreed", "marketingConsent"];
-            case 3: return ["idPolicyRead", "idType", "idCountryOfIssue", "documentNumberConfirmed", "documentNumber", "testTiming", "passportCopy", "infoCorrect"];
-            default: return [];
-        }
-    };
+  const selectedCourseData = pteCourses.find(c => c.id === formData.selectedCourse);
 
-    const handleNext = async () => {
-        const fields = getFieldsForStep(currentStep);
-        const isValid = await trigger(fields as any);
-        if (isValid) {
-            setCurrentStep(prev => prev + 1);
-            window.scrollTo({ top: 400, behavior: "smooth" });
-        }
-    };
+  const EXAM_FEE = 1450;
+  const SERVICE_FEE = 5;
+  const VAT_RATE = 0.05;
 
-    const handleBack = () => {
-        setCurrentStep(prev => prev - 1);
-        window.scrollTo({ top: 400, behavior: "smooth" });
-    };
+  const coursePrice = selectedCourseData?.price || 0;
+  const subtotal = EXAM_FEE + SERVICE_FEE + coursePrice;
+  const tax = subtotal * VAT_RATE;
+  const total = subtotal + tax;
 
-    const EXAM_FEE = 1150;
-    const SERVICE_FEE = 5;
-    const VAT_RATE = 0.05;
+  const onSubmit: SubmitHandler<TPteHomeA2FormSchema> = (data) => {
+    if (step === 6) {
+      setStep(7);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+    handleNext();
+  };
 
-    const { total, serviceVAT, coursePrice, courseVAT } = useMemo(() => {
-        const selected = courses.find(c => c.id === formData.selectedCourse);
-        const cPrice = selected?.price || 0;
-        const sVAT = SERVICE_FEE * VAT_RATE;
-        const wVAT = cPrice * VAT_RATE;
-        const totalAmount = EXAM_FEE + SERVICE_FEE + sVAT + cPrice + wVAT;
+  const handleNext = async () => {
+    const fieldsToValidate = getFieldsForStep(step);
+    const isValid = await trigger(fieldsToValidate as any);
+    
+    if (isValid) {
+      setStep(step + 1);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      console.log("Validation failed for fields:", fieldsToValidate);
+      console.log("Form errors:", form.formState.errors);
+    }
+  };
 
-        return {
-            total: totalAmount,
-            serviceVAT: sVAT,
-            coursePrice: cPrice,
-            courseVAT: wVAT
-        };
-    }, [formData.selectedCourse]);
+  const getFieldsForStep = (currentStep: number): (keyof TPteHomeA2FormSchema)[] => {
+    switch (currentStep) {
+      case 1: return ["examDate", "examTime"];
+      case 2: return ["givenNames", "noGivenNames", "surnames", "noSurname", "emailUsername", "dateOfBirth", "gender", "placeOfBirth", "countryOfBirth", "countryOfCitizenship", "countryOfResidence", "address", "city", "mobileNumber", "readyToBook"];
+      case 3: return ["idType", "idCountryOfIssue", "documentNumber", "passportCopy", "idPolicyRead", "documentNumberConfirmed"];
+      case 4: return ["homeLanguage", "planningCountry", "currentSituation", "reasonForTaking", "studyLevel", "occupationSector", "referralSource", "takenBefore", "takenWithinTwoYears", "hasExistingAccount", "dataSharingAgreed", "bookingTermsAgreed", "marketingConsent"];
+      case 5: return ["selectedCourse"];
+      case 6: return ["infoCorrect"];
+      default: return [];
+    }
+  };
 
-    const onSubmit: SubmitHandler<TPteHomeA2FormSchema> = (data) => {
-        console.log("PTE Home A2 Form Data:", data);
-    };
-
-    return (
-        <div className="bg-[#fcfcfc] font-body text-slate-900 min-h-screen pb-20 selection:bg-red-50">
-            {/* Hero Section */}
-            <section className="relative h-[450px] flex items-center justify-center overflow-hidden bg-[#111827]">
-                <div className="absolute inset-0 z-0">
-                    <img className="w-full h-full object-cover opacity-30 grayscale scale-105" alt="PTE Home A2" src="/images/about-us/infrastructure-center.png" />
-                    <div className="absolute inset-0 bg-gradient-to-b from-[#111827]/80 via-transparent to-[#111827]"></div>
-                </div>
-                <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#A11D1D]/10 border border-[#A11D1D]/20 mb-6">
-                        <span className="w-2 h-2 rounded-full bg-[#A11D1D] animate-pulse"></span>
-                        <span className="text-[#A11D1D] text-[10px] font-black uppercase tracking-[0.2em]">Official Registration Portal</span>
-                    </div>
-                    <h1 className="text-white text-5xl md:text-8xl font-black tracking-tighter mb-6 font-headline uppercase leading-[0.9]">
-                        PTE Home <span className="text-[#A11D1D]">A2</span>
-                    </h1>
-                    <p className="text-slate-300 text-lg md:text-xl font-medium max-w-2xl mx-auto leading-relaxed">
-                        Secure your journey to UK visa extension with the trusted PTE Home A2 English test registration.
-                    </p>
-                </div>
-            </section>
-
-            {/* Main Form Section */}
-            <section className="max-w-6xl mx-auto px-6 -mt-24 relative z-20">
-                <div className="bg-white rounded-[2.5rem] shadow-[0_40px_100px_-20px_rgba(0,0,0,0.1)] overflow-hidden border border-slate-100">
-                    {/* Stepper */}
-                    <div className="bg-slate-50/50 border-b border-slate-100 px-8 py-6">
-                        <div className="flex items-center justify-between max-w-3xl mx-auto">
-                            {[
-                                { step: 1, label: "Identity", icon: User },
-                                { step: 2, label: "Booking", icon: Globe },
-                                { step: 3, label: "Review", icon: ShieldCheck },
-                            ].map((item) => (
-                                <div key={item.step} className="flex flex-col items-center gap-2 group relative">
-                                    <div className={cn(
-                                        "w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-500 shadow-sm",
-                                        currentStep >= item.step ? "bg-[#A11D1D] text-white rotate-[10deg] scale-110 shadow-[#A11D1D]/20 shadow-xl" : "bg-white text-slate-300 border border-slate-200"
-                                    )}>
-                                        <item.icon className="w-5 h-5" />
-                                    </div>
-                                    <span className={cn(
-                                        "text-[9px] font-black uppercase tracking-[0.2em] transition-colors duration-300",
-                                        currentStep >= item.step ? "text-[#A11D1D]" : "text-slate-400"
-                                    )}>{item.label}</span>
-                                    {item.step < 3 && (
-                                        <div className="absolute left-[calc(100%+1rem)] top-6 w-16 md:w-32 h-[2px] bg-slate-100 hidden sm:block">
-                                            <div className={cn("h-full bg-[#A11D1D] transition-all duration-700 ease-in-out", currentStep > item.step ? "w-full" : "w-0")}></div>
-                                        </div>
-                                    )}
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
-                    <div className="p-8 md:p-16">
-                        <Form {...form}>
-                            <form className="space-y-16" onSubmit={handleSubmit(onSubmit)}>
-
-                                {/* Step 1: Personal Details */}
-                                {currentStep === 1 && (
-                                    <div className="space-y-12 animate-in fade-in slide-in-from-right-8 duration-500">
-                                        <div className="space-y-2">
-                                            <h3 className="text-3xl font-black text-slate-900 tracking-tight uppercase italic">Personal <span className="text-[#A11D1D]">Details</span></h3>
-                                            <p className="text-slate-500 text-sm font-medium">Please enter your information exactly as it appears on your passport.</p>
-                                        </div>
-
-                                        <div className="space-y-10">
-                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                                                <FormField control={control} name="givenNames" render={({ field }) => (
-                                                    <FormItem className="space-y-2">
-                                                        <FormLabel className="text-xs font-bold text-slate-500 uppercase tracking-wider">Given name(s)</FormLabel>
-                                                        <FormControl><Input className="h-14 rounded-xl border-slate-200 focus:ring-[#A11D1D]/10 focus:border-[#A11D1D] transition-all" placeholder="Enter first names" disabled={formData.noGivenNames} {...field} /></FormControl>
-                                                        <FormField control={control} name="noGivenNames" render={({ field }) => (
-                                                            <div className="flex items-center gap-2 mt-2 cursor-pointer group">
-                                                                <input type="checkbox" className="w-4 h-4 rounded border-slate-300 text-[#A11D1D] focus:ring-[#A11D1D]" checked={field.value} onChange={field.onChange} id="noGivenNames" />
-                                                                <label htmlFor="noGivenNames" className="text-[10px] font-bold text-slate-400 group-hover:text-slate-600 transition-colors uppercase tracking-widest">I do not have a given name</label>
-                                                            </div>
-                                                        )} />
-                                                        <FormMessage />
-                                                    </FormItem>
-                                                )} />
-                                                <FormField control={control} name="surnames" render={({ field }) => (
-                                                    <FormItem className="space-y-2">
-                                                        <FormLabel className="text-xs font-bold text-slate-500 uppercase tracking-wider">Surname(s) / Family name</FormLabel>
-                                                        <FormControl><Input className="h-14 rounded-xl border-slate-200" placeholder="Enter family name" disabled={formData.noSurname} {...field} /></FormControl>
-                                                        <FormField control={control} name="noSurname" render={({ field }) => (
-                                                            <div className="flex items-center gap-2 mt-2 cursor-pointer group">
-                                                                <input type="checkbox" className="w-4 h-4 rounded border-slate-300 text-[#A11D1D] focus:ring-[#A11D1D]" checked={field.value} onChange={field.onChange} id="noSurname" />
-                                                                <label htmlFor="noSurname" className="text-[10px] font-bold text-slate-400 group-hover:text-slate-600 transition-colors uppercase tracking-widest">I do not have a surname</label>
-                                                            </div>
-                                                        )} />
-                                                        <FormMessage />
-                                                    </FormItem>
-                                                )} />
-                                            </div>
-
-                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                                                <FormField control={control} name="emailUsername" render={({ field }) => (
-                                                    <FormItem className="space-y-2">
-                                                        <FormLabel className="text-xs font-bold text-slate-500 uppercase tracking-wider">Email / Username</FormLabel>
-                                                        <FormControl><Input className="h-14 rounded-xl border-slate-200" placeholder="yourname@example.com" {...field} /></FormControl>
-                                                        <FormMessage />
-                                                    </FormItem>
-                                                )} />
-                                                <DateTimePicker mode="date" label="Date of Birth" control={control} name="dateOfBirth" fromYear={1950} toYear={2024} className="h-14 rounded-xl border-slate-200" />
-                                            </div>
-
-                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                                                <FormField control={control} name="gender" render={({ field }) => (
-                                                    <FormItem className="space-y-6">
-                                                        <FormLabel className="text-xs font-bold text-slate-500 uppercase tracking-wider block">Gender, as it appears on your Identification.</FormLabel>
-                                                        <FormControl>
-                                                            <RadioGroup className="flex gap-8 pt-2" onValueChange={field.onChange} value={field.value ?? ""}>
-                                                                {["Male", "Female", "Other"].map(g => (
-                                                                    <div key={g} className="flex items-center space-x-3 group cursor-pointer">
-                                                                        <RadioGroupItem value={g.toLowerCase()} id={`g-home-${g}`} className="w-5 h-5 border-red-200 text-[#A11D1D]" />
-                                                                        <Label htmlFor={`g-home-${g}`} className="font-bold text-slate-600 group-hover:text-[#A11D1D] transition-colors cursor-pointer">{g === "Other" ? "X/Other" : g}</Label>
-                                                                    </div>
-                                                                ))}
-                                                            </RadioGroup>
-                                                        </FormControl>
-                                                        <FormMessage />
-                                                    </FormItem>
-                                                )} />
-                                                <FormField control={control} name="placeOfBirth" render={({ field }) => (
-                                                    <FormItem className="space-y-2">
-                                                        <FormLabel className="text-xs font-bold text-slate-500 uppercase tracking-wider">Place of birth</FormLabel>
-                                                        <FormControl><Input className="h-14 rounded-xl border-slate-200" {...field} /></FormControl>
-                                                        <FormMessage />
-                                                    </FormItem>
-                                                )} />
-                                            </div>
-
-                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                                                <FormField control={control} name="countryOfBirth" render={({ field }) => (
-                                                    <FormItem className="space-y-2">
-                                                        <FormLabel className="text-xs font-bold text-slate-500 uppercase tracking-wider">Country of birth</FormLabel>
-                                                        <FormControl><CountryDropdown placeholder="Select country" value={field.value} onChange={(c) => field.onChange(c.name)} className="h-14 bg-white" /></FormControl>
-                                                        <FormMessage />
-                                                    </FormItem>
-                                                )} />
-                                                <FormField control={control} name="countryOfCitizenship" render={({ field }) => (
-                                                    <FormItem className="space-y-2">
-                                                        <FormLabel className="text-xs font-bold text-slate-500 uppercase tracking-wider">Country of citizenship</FormLabel>
-                                                        <FormControl><CountryDropdown placeholder="Select country" value={field.value} onChange={(c) => field.onChange(c.name)} className="h-14 bg-white" /></FormControl>
-                                                        <FormMessage />
-                                                    </FormItem>
-                                                )} />
-                                            </div>
-
-                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                                                <FormField control={control} name="countryOfResidence" render={({ field }) => (
-                                                    <FormItem className="space-y-2">
-                                                        <FormLabel className="text-xs font-bold text-slate-500 uppercase tracking-wider">Country of residence</FormLabel>
-                                                        <FormControl><CountryDropdown placeholder="Select country" value={field.value} onChange={(c) => field.onChange(c.name)} className="h-14 bg-white" /></FormControl>
-                                                        <FormMessage />
-                                                    </FormItem>
-                                                )} />
-                                                <FormField control={control} name="city" render={({ field }) => (
-                                                    <FormItem className="space-y-2">
-                                                        <FormLabel className="text-xs font-bold text-slate-500 uppercase tracking-wider">City / Town</FormLabel>
-                                                        <FormControl><Input className="h-14 rounded-xl border-slate-200" {...field} /></FormControl>
-                                                        <FormMessage />
-                                                    </FormItem>
-                                                )} />
-                                            </div>
-
-                                            <FormField control={control} name="address" render={({ field }) => (
-                                                <FormItem className="space-y-2">
-                                                    <FormLabel className="text-xs font-bold text-slate-500 uppercase tracking-wider">Address</FormLabel>
-                                                    <FormControl><Input className="h-14 rounded-xl border-slate-200" {...field} /></FormControl>
-                                                    <FormMessage />
-                                                </FormItem>
-                                            )} />
-
-                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                                                <FormField control={control} name="mobileNumber" render={({ field }) => (
-                                                    <FormItem className="space-y-2">
-                                                        <FormLabel className="text-xs font-bold text-slate-500 uppercase tracking-wider">Mobile Number</FormLabel>
-                                                        <FormControl><PhoneInput defaultCountry="AE" {...field} className="h-14" /></FormControl>
-                                                        <FormMessage />
-                                                    </FormItem>
-                                                )} />
-                                                <FormField control={control} name="readyToBook" render={({ field }) => (
-                                                    <FormItem className="space-y-2">
-                                                        <FormLabel className="text-xs font-bold text-slate-500 uppercase tracking-wider">Are you ready to book?</FormLabel>
-                                                        <FormControl>
-                                                            <RadioGroup onValueChange={field.onChange} value={field.value ?? ""} className="flex gap-4">
-                                                                {["yes", "no"].map(opt => (
-                                                                    <label key={opt} className={cn(
-                                                                        "flex-1 flex items-center justify-center h-14 rounded-xl border-2 transition-all cursor-pointer capitalize font-bold",
-                                                                        field.value === opt ? "border-[#A11D1D] bg-red-50 text-[#A11D1D]" : "border-slate-100 text-slate-400 hover:border-slate-200"
-                                                                    )}>
-                                                                        <RadioGroupItem value={opt} className="sr-only" />
-                                                                        {opt}
-                                                                    </label>
-                                                                ))}
-                                                            </RadioGroup>
-                                                        </FormControl>
-                                                        <FormMessage />
-                                                    </FormItem>
-                                                )} />
-                                            </div>
-                                        </div>
-                                    </div>
-                                )}
-
-                                {/* Step 2: Booking & History */}
-                                {currentStep === 2 && (
-                                    <div className="space-y-12 animate-in fade-in slide-in-from-right-8 duration-500">
-                                        <div className="space-y-2">
-                                            <h3 className="text-3xl font-black text-slate-900 tracking-tight uppercase italic">Booking <span className="text-[#A11D1D]">Questions</span></h3>
-                                            <p className="text-slate-500 text-sm font-medium">Please provide your language background and previous test history.</p>
-                                        </div>
-
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                                            <div className="space-y-10">
-                                                <FormField control={control} name="homeLanguage" render={({ field }) => (
-                                                    <FormItem className="space-y-3">
-                                                        <FormLabel className="text-sm font-bold text-slate-700 italic">*What language do you speak mostly at home?</FormLabel>
-                                                        <FormControl><SearchableDropdown options={[
-                                                            { label: "Arabic", value: "arabic" },
-                                                            { label: "Bengali", value: "bengali" },
-                                                            { label: "English", value: "english" },
-                                                            { label: "Hindi", value: "hindi" },
-                                                            { label: "Urdu", value: "urdu" },
-                                                            { label: "Other", value: "other" }
-                                                        ]} placeholder="Select one..." value={field.value} onChange={(val) => field.onChange(val)} /></FormControl>
-                                                        <FormMessage />
-                                                    </FormItem>
-                                                )} />
-
-                                                <FormField control={control} name="planningCountry" render={({ field }) => (
-                                                    <FormItem className="space-y-3">
-                                                        <FormLabel className="text-sm font-bold text-slate-700">*Which country or region are you planning to settle in?</FormLabel>
-                                                        <FormControl><CountryDropdown placeholder="Select one..." value={field.value} onChange={(val) => field.onChange(val.name)} /></FormControl>
-                                                        <FormMessage />
-                                                    </FormItem>
-                                                )} />
-
-                                                <FormField control={control} name="currentSituation" render={({ field }) => (
-                                                    <FormItem className="space-y-3">
-                                                        <FormLabel className="text-sm font-bold text-slate-700">*Which best describes your current situation?</FormLabel>
-                                                        <FormControl><SearchableDropdown options={[
-                                                            { label: "Working - full time", value: "work_full" },
-                                                            { label: "Working - part time", value: "work_part" },
-                                                            { label: "Not studying or working", value: "not_working" },
-                                                            { label: "Other - specify below", value: "other" }
-                                                        ]} placeholder="Select one..." value={field.value} onChange={(val) => field.onChange(val)} /></FormControl>
-                                                        <FormMessage />
-                                                    </FormItem>
-                                                )} />
-
-                                                <FormField control={control} name="reasonForTaking" render={({ field }) => (
-                                                    <FormItem className="space-y-3">
-                                                        <FormLabel className="text-sm font-bold text-slate-700">*Why are you taking PTE Home A2?</FormLabel>
-                                                        <FormControl><SearchableDropdown options={[
-                                                            { label: "Settlement (ILR)", value: "settlement" },
-                                                            { label: "Family Visa", value: "family_visa" },
-                                                            { label: "Spouse Visa", value: "spouse_visa" },
-                                                            { label: "Other", value: "other" }
-                                                        ]} placeholder="Select one..." value={field.value} onChange={(val) => field.onChange(val)} /></FormControl>
-                                                        <FormMessage />
-                                                    </FormItem>
-                                                )} />
-
-                                                <FormField control={control} name="occupationSector" render={({ field }) => (
-                                                    <FormItem className="space-y-3">
-                                                        <FormLabel className="text-sm font-bold text-slate-700">*What is your occupation sector?</FormLabel>
-                                                        <FormControl><SearchableDropdown options={[
-                                                            { label: "Agriculture", value: "agri" },
-                                                            { label: "Banking and Finance", value: "banking" },
-                                                            { label: "Education", value: "edu" },
-                                                            { label: "Health and Social Services", value: "health" },
-                                                            { label: "Retail Trade", value: "retail" },
-                                                            { label: "Personal Services", value: "personal" },
-                                                            { label: "Other", value: "other" }
-                                                        ]} placeholder="Select one..." value={field.value} onChange={(val) => field.onChange(val)} /></FormControl>
-                                                        <FormMessage />
-                                                    </FormItem>
-                                                )} />
-                                            </div>
-
-                                            <div className="space-y-10">
-                                                <div className="p-8 rounded-[2rem] bg-slate-50 border border-slate-100 space-y-8">
-                                                    <div className="flex items-center gap-2 text-[#A11D1D] mb-4">
-                                                        <Info className="w-4 h-4" />
-                                                        <span className="text-[10px] font-black uppercase tracking-widest italic">Previous Test History</span>
-                                                    </div>
-
-                                                    <FormField control={control} name="takenBefore" render={({ field }) => (
-                                                        <FormItem className="space-y-4">
-                                                            <FormLabel className="text-sm font-black text-slate-900 uppercase tracking-tighter">*Have you taken the PTE Home A2 Test before?</FormLabel>
-                                                            <FormControl>
-                                                                <RadioGroup className="flex gap-8" onValueChange={field.onChange} value={field.value ?? ""}>
-                                                                    {["yes", "no"].map(v => (
-                                                                        <div key={v} className="flex items-center space-x-3 group cursor-pointer">
-                                                                            <RadioGroupItem value={v} id={`taken-${v}`} className="w-5 h-5 border-red-200 text-[#A11D1D]" />
-                                                                            <Label htmlFor={`taken-${v}`} className="font-bold text-slate-600 group-hover:text-[#A11D1D] transition-colors cursor-pointer capitalize">{v}</Label>
-                                                                        </div>
-                                                                    ))}
-                                                                </RadioGroup>
-                                                            </FormControl>
-                                                            <FormMessage />
-                                                        </FormItem>
-                                                    )} />
-
-                                                    {formData.takenBefore === "yes" && (
-                                                        <div className="space-y-8 pt-4 animate-in fade-in slide-in-from-top-4 duration-300">
-                                                            <FormField control={control} name="takenWithinTwoYears" render={({ field }) => (
-                                                                <FormItem className="space-y-4">
-                                                                    <FormLabel className="text-sm font-black text-slate-900 uppercase tracking-tighter">*Was it less than 2 years?</FormLabel>
-                                                                    <FormControl>
-                                                                        <RadioGroup className="flex flex-wrap gap-6" onValueChange={field.onChange} value={field.value ?? ""}>
-                                                                            {[
-                                                                                { label: "Yes", value: "yes" },
-                                                                                { label: "No", value: "no" },
-                                                                                { label: "I do not know", value: "dont_know" }
-                                                                            ].map(v => (
-                                                                                <div key={v.value} className="flex items-center space-x-3 group cursor-pointer">
-                                                                                    <RadioGroupItem value={v.value} id={`2yrs-${v.value}`} className="w-5 h-5 border-red-200 text-[#A11D1D]" />
-                                                                                    <Label htmlFor={`2yrs-${v.value}`} className="font-bold text-slate-600 group-hover:text-[#A11D1D] transition-colors cursor-pointer">{v.label}</Label>
-                                                                                </div>
-                                                                            ))}
-                                                                        </RadioGroup>
-                                                                    </FormControl>
-                                                                    <FormMessage />
-                                                                </FormItem>
-                                                            )} />
-
-                                                            <FormField control={control} name="hasExistingAccount" render={({ field }) => (
-                                                                <FormItem className="space-y-4">
-                                                                    <FormLabel className="text-sm font-black text-slate-900 uppercase tracking-tighter">*Do you have an existing PTE account?</FormLabel>
-                                                                    <FormControl>
-                                                                        <RadioGroup className="flex flex-wrap gap-6" onValueChange={field.onChange} value={field.value ?? ""}>
-                                                                            {[
-                                                                                { label: "Yes", value: "yes" },
-                                                                                { label: "No", value: "no" },
-                                                                                { label: "I forgot details", value: "forgot" }
-                                                                            ].map(v => (
-                                                                                <div key={v.value} className="flex items-center space-x-3 group cursor-pointer">
-                                                                                    <RadioGroupItem value={v.value} id={`acc-${v.value}`} className="w-5 h-5 border-red-200 text-[#A11D1D]" />
-                                                                                    <Label htmlFor={`acc-${v.value}`} className="font-bold text-slate-600 group-hover:text-[#A11D1D] transition-colors cursor-pointer">{v.label}</Label>
-                                                                                </div>
-                                                                            ))}
-                                                                        </RadioGroup>
-                                                                    </FormControl>
-                                                                    <FormMessage />
-                                                                </FormItem>
-                                                            )} />
-                                                        </div>
-                                                    )}
-                                                </div>
-
-                                                <div className="space-y-6 pt-4">
-                                                    <FormField control={control} name="dataSharingAgreed" render={({ field }) => (
-                                                        <FormItem className="flex items-start space-x-3 space-y-0">
-                                                            <FormControl><input type="checkbox" className="mt-1 w-5 h-5 rounded border-slate-300 text-[#A11D1D] focus:ring-[#A11D1D]" checked={field.value} onChange={field.onChange} /></FormControl>
-                                                            <div className="space-y-1 leading-none">
-                                                                <FormLabel className="text-xs font-bold text-slate-700">Consent for data sharing</FormLabel>
-                                                                <p className="text-[10px] text-slate-400">I agree to Pearson sharing my score with relevant authorities.</p>
-                                                            </div>
-                                                        </FormItem>
-                                                    )} />
-                                                    <FormField control={control} name="bookingTermsAgreed" render={({ field }) => (
-                                                        <FormItem className="flex items-start space-x-3 space-y-0">
-                                                            <FormControl><input type="checkbox" className="mt-1 w-5 h-5 rounded border-slate-300 text-[#A11D1D] focus:ring-[#A11D1D]" checked={field.value} onChange={field.onChange} /></FormControl>
-                                                            <div className="space-y-1 leading-none">
-                                                                <FormLabel className="text-xs font-bold text-slate-700">Accept terms & conditions</FormLabel>
-                                                                <p className="text-[10px] text-slate-400">I have read and agree to the PTE Home booking terms.</p>
-                                                            </div>
-                                                        </FormItem>
-                                                    )} />
-                                                    <FormField control={control} name="marketingConsent" render={({ field }) => (
-                                                        <FormItem className="space-y-6 pt-4">
-                                                            <FormLabel className="text-sm font-bold text-slate-700">* Would you like to receive updates and special offers?:</FormLabel>
-                                                            <FormControl>
-                                                                <RadioGroup className="flex gap-8 pt-2" onValueChange={field.onChange} value={field.value ?? ""}>
-                                                                    <div className="flex items-center space-x-3 group cursor-pointer">
-                                                                        <RadioGroupItem value="yes" id="m_yes_home" className="w-5 h-5 border-2 border-slate-300 text-[#A11D1D] focus:border-[#A11D1D]" />
-                                                                        <Label htmlFor="m_yes_home" className="text-sm font-bold text-slate-600 group-hover:text-[#A11D1D] transition-colors cursor-pointer">Yes</Label>
-                                                                    </div>
-                                                                    <div className="flex items-center space-x-3 group cursor-pointer">
-                                                                        <RadioGroupItem value="no" id="m_no_home" className="w-5 h-5 border-2 border-slate-300 text-[#A11D1D] focus:border-[#A11D1D]" />
-                                                                        <Label htmlFor="m_no_home" className="text-sm font-bold text-slate-600 group-hover:text-[#A11D1D] transition-colors cursor-pointer">No</Label>
-                                                                    </div>
-                                                                </RadioGroup>
-                                                            </FormControl>
-                                                            <FormMessage />
-                                                        </FormItem>
-                                                    )} />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                )}
-
-                                {/* Step 3: Identity & Review */}
-                                {currentStep === 3 && (
-                                    <div className="space-y-16 animate-in fade-in slide-in-from-right-8 duration-500">
-                                        <div className="space-y-2">
-                                            <h3 className="text-3xl font-black text-slate-900 tracking-tight uppercase italic italic">Final <span className="text-[#A11D1D]">Confirmation</span></h3>
-                                            <p className="text-slate-500 text-sm font-medium">Verify your identification and finalize your registration.</p>
-                                        </div>
-
-                                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
-                                            <div className="lg:col-span-2 space-y-12">
-                                                <div className="bg-white rounded-3xl border border-slate-200 p-8 md:p-12 space-y-10 shadow-sm">
-                                                    <div className="flex items-center gap-3 text-[#A11D1D]">
-                                                        <CreditCard className="w-6 h-6" />
-                                                        <h4 className="text-xl font-black uppercase tracking-tight">Identification Details</h4>
-                                                    </div>
-
-                                                    <div className="space-y-10">
-                                                        {/* A2 Policy Checkbox */}
-                                                        <FormField control={control} name="idPolicyRead" render={({ field }) => (
-                                                            <FormItem className="space-y-4 p-6 rounded-2xl bg-slate-50 border border-slate-100">
-                                                                <FormLabel className="text-sm font-black text-slate-900 uppercase tracking-tighter italic">*Your identification document</FormLabel>
-                                                                <p className="text-xs text-slate-500 leading-relaxed italic">You must bring a valid ID on test day. If you don't have a passport, please read our <span className="text-[#A11D1D] underline cursor-pointer">ID Policy</span> to see if we can accept your ID.</p>
-                                                                <div className="flex items-start gap-3 pt-2">
-                                                                    <FormControl><input type="checkbox" className="mt-1 w-5 h-5 rounded border-slate-300 text-[#A11D1D] focus:ring-[#A11D1D] cursor-pointer" checked={field.value} onChange={field.onChange} id="id_policy" /></FormControl>
-                                                                    <Label htmlFor="id_policy" className="text-xs font-bold text-slate-600 cursor-pointer leading-relaxed italic">I have read the ID Policy and understand I can only take the test if I bring a valid ID on the day.</Label>
-                                                                </div>
-                                                                <FormMessage />
-                                                            </FormItem>
-                                                        )} />
-
-                                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                                                            <FormField control={control} name="idType" render={({ field }) => (
-                                                                <FormItem className="space-y-3">
-                                                                    <FormLabel className="text-sm font-bold text-slate-700">*ID Type</FormLabel>
-                                                                    <FormControl><SearchableDropdown options={[
-                                                                        { label: "Valid Passport", value: "passport" },
-                                                                        { label: "National ID Card", value: "nat_id" },
-                                                                        { label: "Other ID in Policy", value: "other_id" }
-                                                                    ]} placeholder="Select your identification document" value={field.value} onChange={(val) => field.onChange(val)} /></FormControl>
-                                                                    <FormMessage />
-                                                                </FormItem>
-                                                            )} />
-
-                                                            <FormField control={control} name="idCountryOfIssue" render={({ field }) => (
-                                                                <FormItem className="space-y-3">
-                                                                    <FormLabel className="text-sm font-bold text-slate-700">*Country of issue</FormLabel>
-                                                                    <FormControl><CountryDropdown placeholder="Select the country your ID is from" value={field.value} onChange={(val) => field.onChange(val.name)} /></FormControl>
-                                                                    <FormMessage />
-                                                                </FormItem>
-                                                            )} />
-                                                        </div>
-
-                                                        {/* Document Number Section */}
-                                                        <div className="space-y-6">
-                                                            <FormField control={control} name="documentNumberConfirmed" render={({ field }) => (
-                                                                <FormItem className="flex items-center gap-3">
-                                                                    <FormControl><input type="checkbox" className="w-5 h-5 rounded border-slate-300 text-[#A11D1D] focus:ring-[#A11D1D] cursor-pointer" checked={field.value} onChange={field.onChange} id="doc_confirm" /></FormControl>
-                                                                    <Label htmlFor="doc_confirm" className="text-xs font-bold text-slate-600 cursor-pointer italic">I confirm I have entered the document number from my ID below.</Label>
-                                                                    <FormMessage />
-                                                                </FormItem>
-                                                            )} />
-
-                                                            <FormField control={control} name="documentNumber" render={({ field }) => (
-                                                                <FormItem className="space-y-3">
-                                                                    <FormLabel className="text-sm font-black text-slate-900 uppercase tracking-tighter italic">*ID number e.g. passport number or eVisa share code</FormLabel>
-                                                                    <p className="text-[10px] text-slate-400 italic">Enter the unique number on your ID:</p>
-                                                                    <FormControl><Input className="h-14 rounded-xl border-slate-200" placeholder="Enter number" {...field} /></FormControl>
-                                                                    <FormMessage />
-                                                                </FormItem>
-                                                            )} />
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div className="bg-white rounded-3xl border border-slate-200 p-8 md:p-12 space-y-10 shadow-sm">
-                                                    <div className="flex items-center gap-3 text-[#A11D1D]">
-                                                        <UploadCloud className="w-6 h-6" />
-                                                        <h4 className="text-xl font-black uppercase tracking-tight">Document Uploads</h4>
-                                                    </div>
-
-                                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                                        <FormField control={control} name="passportCopy" render={({ field }) => (
-                                                            <FormItem className="space-y-4">
-                                                                <FormLabel className="text-sm font-bold text-slate-700">* Upload Your Passport Copy</FormLabel>
-                                                                <FormControl>
-                                                                    <div className="relative group h-48 rounded-2xl border-2 border-dashed border-slate-200 hover:border-[#A11D1D]/50 hover:bg-red-50/30 transition-all flex flex-col items-center justify-center gap-3 cursor-pointer overflow-hidden">
-                                                                        <UploadCloud className="w-8 h-8 text-slate-300 group-hover:text-[#A11D1D] transition-colors" />
-                                                                        <div className="text-center">
-                                                                            <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 group-hover:text-[#A11D1D] block mb-1">Choose File</span>
-                                                                            <span className="text-[9px] text-slate-400 block">(pdf, docx, doc, png, jpeg)</span>
-                                                                            <span className="text-[9px] text-slate-300 block">max file size 128 MB</span>
-                                                                        </div>
-                                                                        <input type="file" className="absolute inset-0 opacity-0 cursor-pointer" onChange={(e) => field.onChange(e.target.files?.[0])} accept=".pdf,.docx,.doc,.png,.jpg,.jpeg" />
-                                                                        {field.value && <div className="absolute inset-0 bg-white flex items-center justify-center p-4">
-                                                                            <span className="text-[10px] font-bold text-slate-600 truncate max-w-full">{(field.value as File).name}</span>
-                                                                            <button type="button" onClick={() => field.onChange(undefined)} className="absolute top-2 right-2 p-1 bg-red-100 text-[#A11D1D] rounded-full hover:bg-red-200 transition-all"><X className="w-3 h-3" /></button>
-                                                                        </div>}
-                                                                    </div>
-                                                                </FormControl>
-                                                                <FormMessage />
-                                                            </FormItem>
-                                                        )} />
-
-                                                        <FormField control={control} name="userPhoto" render={({ field }) => (
-                                                            <FormItem className="space-y-4">
-                                                                <FormLabel className="text-sm font-bold text-slate-700">Recent Photograph</FormLabel>
-                                                                <FormControl>
-                                                                    <div className="relative group h-48 rounded-2xl border-2 border-dashed border-slate-200 hover:border-[#A11D1D]/50 hover:bg-red-50/30 transition-all flex flex-col items-center justify-center gap-3 cursor-pointer overflow-hidden">
-                                                                        <Camera className="w-8 h-8 text-slate-300 group-hover:text-[#A11D1D] transition-colors" />
-                                                                        <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 group-hover:text-[#A11D1D]">Upload Photograph</span>
-                                                                        <input type="file" className="absolute inset-0 opacity-0 cursor-pointer" onChange={(e) => field.onChange(e.target.files?.[0])} accept="image/*" />
-                                                                        {field.value && <div className="absolute inset-0 bg-white flex items-center justify-center p-4">
-                                                                            <span className="text-[10px] font-bold text-slate-600 truncate max-w-full">{(field.value as File).name}</span>
-                                                                            <button type="button" onClick={() => field.onChange(undefined)} className="absolute top-2 right-2 p-1 bg-red-100 text-[#A11D1D] rounded-full hover:bg-red-200 transition-all"><X className="w-3 h-3" /></button>
-                                                                        </div>}
-                                                                    </div>
-                                                                </FormControl>
-                                                                <FormMessage />
-                                                            </FormItem>
-                                                        )} />
-                                                    </div>
-                                                </div>
-
-                                                <div className="p-8 md:p-12 rounded-3xl bg-[#111827] text-white space-y-8 border-l-[8px] border-[#A11D1D] shadow-2xl relative overflow-hidden group">
-                                                    <div className="absolute top-0 right-0 w-64 h-64 bg-[#A11D1D]/10 rounded-full blur-[100px] -mr-32 -mt-32"></div>
-                                                    <div className="flex items-center gap-3 text-[#A11D1D] relative z-10">
-                                                        <ShieldCheck className="w-6 h-6" />
-                                                        <h4 className="text-xl font-black uppercase tracking-tight tracking-widest">Final Declaration</h4>
-                                                    </div>
-                                                    <FormField control={control} name="infoCorrect" render={({ field }) => (
-                                                        <FormItem className="flex items-start space-x-4 space-y-0 cursor-pointer relative z-10 group">
-                                                            <FormControl>
-                                                                <div className="relative flex items-center justify-center mt-1">
-                                                                    <input type="checkbox" className="peer appearance-none w-6 h-6 border-2 border-[#A11D1D] rounded bg-white/5 checked:bg-[#A11D1D] transition-all cursor-pointer" checked={field.value} onChange={field.onChange} />
-                                                                    <CheckCircle2 className="absolute text-white w-4 h-4 opacity-0 peer-checked:opacity-100 transition-opacity" />
-                                                                </div>
-                                                            </FormControl>
-                                                            <FormLabel className="text-sm font-bold text-slate-300 leading-relaxed group-hover:text-white transition-colors cursor-pointer select-none">
-                                                                I hereby acknowledge that all information written above is correct and true. I understand that any discrepancy may affect my registration.
-                                                            </FormLabel>
-                                                        </FormItem>
-                                                    )} />
-                                                </div>
-                                            </div>
-
-                                            {/* Summary Sidebar */}
-                                            <div className="space-y-8">
-                                                <div className="p-8 rounded-[2.5rem] bg-slate-50 border border-slate-100 space-y-8 shadow-sm">
-                                                    <div className="flex items-center gap-2 text-slate-400 mb-4">
-                                                        <School className="w-4 h-4" />
-                                                        <span className="text-[10px] font-black uppercase tracking-widest italic">Preparation Course</span>
-                                                    </div>
-
-                                                    <RadioGroup onValueChange={(val) => form.setValue("selectedCourse", val)} value={formData.selectedCourse ?? ""} className="space-y-3">
-                                                        {courses.map(course => (
-                                                            <label key={course.id} className={cn(
-                                                                "flex flex-col p-4 rounded-2xl border transition-all cursor-pointer group",
-                                                                formData.selectedCourse === course.id ? "bg-white border-[#A11D1D] shadow-md shadow-[#A11D1D]/5" : "bg-white/50 border-slate-200 hover:border-[#A11D1D]/20"
-                                                            )}>
-                                                                <div className="flex items-center justify-between mb-1">
-                                                                    <RadioGroupItem value={course.id} className="sr-only" />
-                                                                    <span className={cn("text-xs font-black uppercase tracking-tighter transition-colors", formData.selectedCourse === course.id ? "text-[#A11D1D]" : "text-slate-600")}>{course.label.split('(')[0]}</span>
-                                                                    {formData.selectedCourse === course.id && <CheckCircle2 className="w-4 h-4 text-[#A11D1D]" />}
-                                                                </div>
-                                                                <span className="text-lg font-black text-slate-900 tracking-tighter">AED {course.price.toLocaleString()}</span>
-                                                            </label>
-                                                        ))}
-                                                        <label className={cn(
-                                                            "flex items-center gap-3 p-4 rounded-2xl border transition-all cursor-pointer",
-                                                            !formData.selectedCourse ? "bg-white border-[#A11D1D]" : "bg-white/50 border-slate-200"
-                                                        )}>
-                                                            <RadioGroupItem value="" className="sr-only" />
-                                                            <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 italic">No Prep Course</span>
-                                                        </label>
-                                                    </RadioGroup>
-
-                                                    <div className="pt-8 border-t border-slate-200 space-y-4">
-                                                        <div className="flex justify-between text-xs font-bold text-slate-400 uppercase tracking-widest italic">
-                                                            <span>Exam Fee</span>
-                                                            <span className="text-slate-900 italic">AED {EXAM_FEE.toLocaleString()}</span>
-                                                        </div>
-                                                        <div className="flex justify-between text-xs font-bold text-slate-400 uppercase tracking-widest italic">
-                                                            <span>Service Fee</span>
-                                                            <span className="text-slate-900 italic">AED {SERVICE_FEE.toLocaleString()}</span>
-                                                        </div>
-                                                        {coursePrice > 0 && (
-                                                            <div className="flex justify-between text-xs font-bold text-slate-400 uppercase tracking-widest italic">
-                                                                <span>Course</span>
-                                                                <span className="text-slate-900 italic">AED {coursePrice.toLocaleString()}</span>
-                                                            </div>
-                                                        )}
-                                                        <div className="flex justify-between text-lg font-black text-[#A11D1D] pt-4 border-t-2 border-dashed border-slate-200 italic">
-                                                            <span>TOTAL</span>
-                                                            <span>AED {total.toLocaleString(undefined, { minimumFractionDigits: 2 })}</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div className="p-6 rounded-3xl bg-[#A11D1D]/5 border border-[#A11D1D]/10 flex gap-4">
-                                                    <Lock className="w-5 h-5 text-[#A11D1D] shrink-0" />
-                                                    <p className="text-[10px] text-[#A11D1D] font-bold uppercase tracking-widest leading-relaxed italic">
-                                                        Secure 256-bit SSL encrypted registration portal. Your data is protected by Pearson global security standards.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                )}
-
-                                {/* Form Navigation Actions */}
-                                <div className="pt-12 flex flex-col md:flex-row justify-between items-center gap-8 border-t border-slate-100">
-                                    {currentStep > 1 ? (
-                                        <Button type="button" onClick={handleBack} variant="ghost" className="text-slate-400 font-black uppercase tracking-[0.2em] text-xs hover:text-[#A11D1D] transition-colors">
-                                            ← Back to {currentStep === 2 ? "Identity" : "Booking"}
-                                        </Button>
-                                    ) : (
-                                        <div />
-                                    )}
-
-                                    <div className="flex gap-4 w-full md:w-auto">
-                                        {currentStep < 3 ? (
-                                            <Button
-                                                type="button"
-                                                onClick={handleNext}
-                                                className="bg-[#111827] text-white px-12 h-20 rounded-[1.5rem] font-black text-lg hover:bg-slate-800 transition-all shadow-xl shadow-slate-200 group"
-                                            >
-                                                Save & Continue
-                                                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-2 transition-transform" />
-                                            </Button>
-                                        ) : (
-                                            <Button
-                                                type="submit"
-                                                className="bg-[#A11D1D] text-white px-16 h-20 rounded-[1.5rem] font-black text-xl hover:bg-[#8e1214] transition-all shadow-2xl shadow-[#A11D1D]/30 active:scale-95 transform group"
-                                            >
-                                                Finalize Registration
-                                                <CheckCircle2 className="w-6 h-6 ml-3 group-hover:scale-125 transition-transform" />
-                                            </Button>
-                                        )}
-                                    </div>
-                                </div>
-                            </form>
-                        </Form>
-                    </div>
-                </div>
-            </section>
+  return (
+    <div className="section base-py">
+      <div className="max-w-4xl mx-auto base-px">
+        <div className="flex flex-col mb-8">
+          <span className="section-label text-[#A11D1D] font-black uppercase tracking-widest text-[10px] mb-2">Step {step} of 8</span>
+          <div className="flex items-center gap-4">
+            <span className="w-10 h-10 rounded-full bg-[#A11D1D] text-white flex items-center justify-center font-black text-sm shadow-lg shadow-[#A11D1D]/20">
+              {step}
+            </span>
+            <h2 className="text-2xl font-headline font-black text-secondary tracking-tight">
+              {step === 1 ? "Select Exam Date" : 
+               step === 2 ? "Personal details" : 
+               step === 3 ? "Identification details" : 
+               step === 4 ? "Your profile" : 
+               step === 5 ? "Courses" : 
+               step === 6 ? "Review" : 
+               step === 7 ? "Payment" : "Confirmation"}
+            </h2>
+          </div>
+          <div className="w-12 h-1 bg-[#A11D1D] mt-4 transition-all duration-500" style={{ width: `${(step / 8) * 100}%` }}></div>
         </div>
-    );
+
+        <Form {...form}>
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-12">
+            {step === 1 && (
+              <div className="animate-in fade-in slide-in-from-right-8 duration-500">
+                <FormItem>
+                  <FormControl>
+                    <div className="space-y-4">
+                      <FormField
+                        control={control}
+                        name="examDate"
+                        render={({ field: dateField }) => (
+                          <FormField
+                            control={control}
+                            name="examTime"
+                            render={({ field: timeField }) => (
+                              <ExamDateSelector
+                                selectedDate={dateField.value}
+                                onDateSelect={dateField.onChange}
+                                selectedTime={timeField.value}
+                                onTimeSelect={timeField.onChange}
+                              />
+                            )}
+                          />
+                        )}
+                      />
+                    </div>
+                  </FormControl>
+                  <div className="space-y-1 mt-4">
+                    {form.formState.errors.examDate && (
+                      <p className="text-sm font-medium text-destructive flex items-center gap-2">
+                        <AlertCircle className="w-4 h-4" /> {form.formState.errors.examDate.message as string}
+                      </p>
+                    )}
+                    {form.formState.errors.examTime && (
+                      <p className="text-sm font-medium text-destructive flex items-center gap-2">
+                        <AlertCircle className="w-4 h-4" /> {form.formState.errors.examTime.message as string}
+                      </p>
+                    )}
+                  </div>
+                </FormItem>
+              </div>
+            )}
+
+            {step === 2 && (
+              <div className="space-y-12 animate-in fade-in slide-in-from-right-8 duration-500">
+                <div className="bg-orange-50/50 border border-orange-100 rounded-2xl p-6 md:p-8 space-y-4">
+                  <h3 className="text-gray-900 font-bold flex items-center gap-2 text-sm uppercase tracking-widest"><Info className="w-4 h-4 text-orange-500" /> Please note:</h3>
+                  <p className="text-gray-600 text-sm leading-relaxed font-medium">Please ensure all details exactly match your passport or official identification.</p>
+                </div>
+
+                <div className="space-y-8">
+                  <h2 className="text-xl font-black text-gray-900 tracking-tight">About you</h2>
+                  <div className="grid grid-cols-1 gap-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                      <FormField control={control} name="givenNames" render={({ field }) => (<FormItem className="space-y-2"><FormLabel className="text-xs font-black uppercase tracking-widest text-gray-500">Given name(s):*</FormLabel><FormControl><Input placeholder="As per passport" className="h-12" {...field} /></FormControl><FormMessage /></FormItem>)} />
+                      <FormField control={control} name="surnames" render={({ field }) => (<FormItem className="space-y-2"><FormLabel className="text-xs font-black uppercase tracking-widest text-gray-500">Surname / family name:*</FormLabel><FormControl><Input placeholder="As per passport" className="h-12" {...field} /></FormControl><FormMessage /></FormItem>)} />
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                      <DateTimePicker control={control} name="dateOfBirth" label="Date of birth:*" mode="date" className="h-12" fromYear={1950} toYear={2024} />
+                      <FormField control={control} name="gender" render={({ field }) => (
+                        <FormItem className="space-y-2">
+                          <FormLabel className="text-xs font-black uppercase tracking-widest text-gray-500">Sex:*</FormLabel>
+                          <FormControl>
+                            <RadioGroup className="flex gap-8 h-12 items-center" onValueChange={field.onChange} value={field.value}>
+                              {["Male", "Female", "Other"].map(s => (
+                                <div key={s} className="flex items-center space-x-2 group cursor-pointer">
+                                  <RadioGroupItem value={s.toLowerCase()} id={`g-home-a2-${s}`} className="border-[#A11D1D]" />
+                                  <Label htmlFor={`g-home-a2-${s}`} className="text-sm font-bold capitalize cursor-pointer">{s}</Label>
+                                </div>
+                              ))}
+                            </RadioGroup>
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )} />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-8 pt-8 border-t border-slate-100">
+                  <h2 className="text-xl font-black text-gray-900 tracking-tight">Birth Info</h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <FormField control={control} name="placeOfBirth" render={({ field }) => (<FormItem className="space-y-2"><FormLabel className="text-xs font-black uppercase tracking-widest text-gray-500">City of birth:*</FormLabel><FormControl><Input placeholder="City / Town" className="h-12" {...field} /></FormControl><FormMessage /></FormItem>)} />
+                    <FormField control={control} name="countryOfBirth" render={({ field }) => (<FormItem className="space-y-2"><FormLabel className="text-xs font-black uppercase tracking-widest text-gray-500">Country of birth:*</FormLabel><FormControl><CountryDropdown placeholder="Select country" value={field.value} onChange={(c) => field.onChange(c.name)} className="h-12" /></FormControl><FormMessage /></FormItem>)} />
+                  </div>
+                </div>
+
+                <div className="space-y-8 pt-8 border-t border-slate-100">
+                  <h2 className="text-xl font-black text-gray-900 tracking-tight">Citizenship & Residence</h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <FormField control={control} name="countryOfCitizenship" render={({ field }) => (<FormItem className="space-y-2"><FormLabel className="text-xs font-black uppercase tracking-widest text-gray-500">Country of citizenship:*</FormLabel><FormControl><CountryDropdown placeholder="Select country" value={field.value} onChange={(c) => field.onChange(c.name)} className="h-12" /></FormControl><FormMessage /></FormItem>)} />
+                    <FormField control={control} name="countryOfResidence" render={({ field }) => (<FormItem className="space-y-2"><FormLabel className="text-xs font-black uppercase tracking-widest text-gray-500">Country of residence:*</FormLabel><FormControl><CountryDropdown placeholder="Select country" value={field.value} onChange={(c) => field.onChange(c.name)} className="h-12" /></FormControl><FormMessage /></FormItem>)} />
+                  </div>
+                </div>
+
+                <div className="space-y-8 pt-8 border-t border-slate-100">
+                  <h2 className="text-xl font-black text-gray-900 tracking-tight">Contact & Location</h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <FormField control={control} name="emailUsername" render={({ field }) => (<FormItem className="space-y-2"><FormLabel className="text-xs font-black uppercase tracking-widest text-gray-500">Email:*</FormLabel><FormControl><Input placeholder="example@email.com" className="h-12" {...field} /></FormControl><FormMessage /></FormItem>)} />
+                    <FormField control={control} name="mobileNumber" render={({ field }) => (<FormItem className="space-y-2"><FormLabel className="text-xs font-black uppercase tracking-widest text-gray-500">Mobile number:*</FormLabel><FormControl><PhoneInput {...field} defaultCountry="AE" className="h-12" /></FormControl><FormMessage /></FormItem>)} />
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <FormField control={control} name="address" render={({ field }) => (<FormItem className="space-y-2"><FormLabel className="text-xs font-black uppercase tracking-widest text-gray-500">Full Address:*</FormLabel><FormControl><Input placeholder="Building, Street, Area" className="h-12" {...field} /></FormControl><FormMessage /></FormItem>)} />
+                    <FormField control={control} name="city" render={({ field }) => (<FormItem className="space-y-2"><FormLabel className="text-xs font-black uppercase tracking-widest text-gray-500">Town / City:*</FormLabel><FormControl><Input placeholder="Current city" className="h-12" {...field} /></FormControl><FormMessage /></FormItem>)} />
+                  </div>
+                </div>
+
+                <div className="space-y-8 pt-8 border-t border-slate-100">
+                  <h2 className="text-xl font-black text-gray-900 tracking-tight">Readiness</h2>
+                  <FormField control={control} name="readyToBook" render={({ field }) => (
+                    <FormItem className="space-y-6">
+                      <FormLabel className="text-sm font-bold text-gray-700 leading-relaxed">Are you ready to book your PTE test?*</FormLabel>
+                      <FormControl>
+                        <RadioGroup onValueChange={field.onChange} value={field.value} className="flex gap-8">
+                          {[{ label: "Yes", value: "yes" }, { label: "No", value: "no" }].map(opt => (
+                            <div key={opt.value} className="flex items-center space-x-2">
+                              <RadioGroupItem value={opt.value} id={`ready-${opt.value}`} className="border-[#A11D1D]" />
+                              <Label htmlFor={`ready-${opt.value}`} className="text-sm font-bold text-gray-700 cursor-pointer">{opt.label}</Label>
+                            </div>
+                          ))}
+                        </RadioGroup>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )} />
+                </div>
+              </div>
+            )}
+
+            {step === 3 && (
+              <div className="space-y-12 animate-in fade-in slide-in-from-right-8 duration-500">
+                <div className="space-y-8">
+                  <h2 className="text-xl font-black text-gray-900 tracking-tight">Identification Details</h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <FormField control={control} name="idType" render={({ field }) => (<FormItem className="space-y-2"><FormLabel className="text-xs font-black uppercase tracking-widest text-gray-500">ID Type*</FormLabel><FormControl><SearchableDropdown options={[{ label: "Passport", value: "passport" }, { label: "National ID", value: "national_id" }]} placeholder="Select ID" value={field.value} onChange={field.onChange} className="h-12" /></FormControl><FormMessage /></FormItem>)} />
+                    <FormField control={control} name="idCountryOfIssue" render={({ field }) => (<FormItem className="space-y-2"><FormLabel className="text-xs font-black uppercase tracking-widest text-gray-500">Country of issue*</FormLabel><FormControl><CountryDropdown placeholder="Select country" value={field.value} onChange={(c) => field.onChange(c.name)} className="h-12" /></FormControl><FormMessage /></FormItem>)} />
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <FormField control={control} name="documentNumber" render={({ field }) => (<FormItem className="space-y-2"><FormLabel className="text-xs font-black uppercase tracking-widest text-gray-500">ID Number*</FormLabel><FormControl><Input className="h-12" {...field} /></FormControl><FormMessage /></FormItem>)} />
+                  </div>
+                </div>
+
+                <div className="bg-slate-50 p-8 rounded-2xl border border-slate-100 space-y-4">
+                  <FormField control={control} name="passportCopy" render={({ field }) => (
+                    <FormItem className="space-y-4">
+                      <FormLabel className="text-xs font-bold text-slate-500 uppercase tracking-widest">* Upload ID Copy</FormLabel>
+                      <FormControl>
+                        <div className="relative group h-40 rounded-2xl border-2 border-dashed border-slate-200 hover:border-[#A11D1D]/50 flex flex-col items-center justify-center gap-2 cursor-pointer">
+                          <UploadCloud className="w-8 h-8 text-slate-300" />
+                          <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Choose File</span>
+                          <input type="file" className="absolute inset-0 opacity-0 cursor-pointer" onChange={(e) => field.onChange(e.target.files?.[0])} />
+                          {field.value && <div className="absolute inset-0 bg-white flex items-center justify-center p-4"><span className="text-[10px] font-bold text-slate-600">{(field.value as File).name}</span><button type="button" onClick={() => field.onChange(undefined)} className="absolute top-2 right-2 p-1 bg-red-100 text-[#A11D1D] rounded-full"><X className="w-3 h-3" /></button></div>}
+                        </div>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )} />
+                </div>
+
+                <div className="space-y-6">
+                  <FormField control={control} name="idPolicyRead" render={({ field }) => (
+                    <FormItem className="flex items-start space-x-4 p-6 rounded-2xl bg-[#A11D1D]/5 border border-[#A11D1D]/10">
+                      <FormControl><Checkbox checked={field.value} onCheckedChange={field.onChange} className="data-[state=checked]:bg-[#A11D1D] mt-1" /></FormControl>
+                      <Label className="text-sm font-bold text-gray-900 cursor-pointer">I have read the PTE Home ID Policy and understand which IDs are acceptable.*</Label>
+                    </FormItem>
+                  )} />
+
+                  <FormField control={control} name="documentNumberConfirmed" render={({ field }) => (
+                    <FormItem className="flex items-start space-x-4 p-6 rounded-2xl bg-[#A11D1D]/5 border border-[#A11D1D]/10">
+                      <FormControl><Checkbox checked={field.value} onCheckedChange={field.onChange} className="data-[state=checked]:bg-[#A11D1D] mt-1" /></FormControl>
+                      <Label className="text-sm font-bold text-gray-900 cursor-pointer">I confirm that the ID number entered above matches my identification document exactly.*</Label>
+                    </FormItem>
+                  )} />
+                </div>
+              </div>
+            )}
+
+            {step === 4 && (
+              <div className="space-y-12 animate-in fade-in slide-in-from-right-8 duration-500">
+                <div className="space-y-8">
+                  <h2 className="text-xl font-black text-gray-900 tracking-tight">Your background</h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <FormField control={control} name="homeLanguage" render={({ field }) => (<FormItem className="space-y-2"><FormLabel className="text-xs font-black uppercase tracking-widest text-gray-500">First language?*</FormLabel><FormControl><SearchableDropdown options={[{ label: "Arabic", value: "arabic" }, { label: "English", value: "english" }, { label: "Hindi", value: "hindi" }, { label: "Urdu", value: "urdu" }, { label: "Bengali", value: "bengali" }]} placeholder="Select language" value={field.value} onChange={field.onChange} className="h-12" /></FormControl><FormMessage /></FormItem>)} />
+                    <FormField control={control} name="planningCountry" render={({ field }) => (<FormItem className="space-y-2"><FormLabel className="text-xs font-black uppercase tracking-widest text-gray-500">Target country?*</FormLabel><FormControl><CountryDropdown placeholder="Select country" value={field.value} onChange={(c) => field.onChange(c.name)} className="h-12" /></FormControl><FormMessage /></FormItem>)} />
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <FormField control={control} name="currentSituation" render={({ field }) => (<FormItem className="space-y-2"><FormLabel className="text-xs font-black uppercase tracking-widest text-gray-500">Current Situation?*</FormLabel><FormControl><SearchableDropdown options={[{ label: "Employed Full-time", value: "employed_full" }, { label: "Employed Part-time", value: "employed_part" }, { label: "Self-employed", value: "self_employed" }, { label: "Student", value: "student" }, { label: "Unemployed", value: "unemployed" }]} placeholder="Select situation" value={field.value} onChange={field.onChange} className="h-12" /></FormControl><FormMessage /></FormItem>)} />
+                    <FormField control={control} name="occupationSector" render={({ field }) => (<FormItem className="space-y-2"><FormLabel className="text-xs font-black uppercase tracking-widest text-gray-500">Occupation Sector?*</FormLabel><FormControl><SearchableDropdown options={[{ label: "Accounting/Finance", value: "accounting" }, { label: "Agriculture", value: "agriculture" }, { label: "Architecture", value: "architecture" }, { label: "Business/Management", value: "business" }, { label: "Construction", value: "construction" }, { label: "Education", value: "education" }, { label: "Engineering", value: "engineering" }, { label: "Healthcare", value: "healthcare" }, { label: "IT/Communications", value: "it" }, { label: "Law", value: "law" }, { label: "Marketing", value: "marketing" }, { label: "Other", value: "other" }]} placeholder="Select sector" value={field.value} onChange={field.onChange} className="h-12" /></FormControl><FormMessage /></FormItem>)} />
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <FormField control={control} name="referralSource" render={({ field }) => (<FormItem className="space-y-2"><FormLabel className="text-xs font-black uppercase tracking-widest text-gray-500">How did you hear about us?*</FormLabel><FormControl><SearchableDropdown options={[{ label: "Social Media", value: "social_media" }, { label: "Search Engine", value: "search_engine" }, { label: "Friend/Family", value: "referral" }, { label: "Advertisement", value: "ads" }, { label: "Other", value: "other" }]} placeholder="Select source" value={field.value} onChange={field.onChange} className="h-12" /></FormControl><FormMessage /></FormItem>)} />
+                  </div>
+
+                  <FormField control={control} name="reasonForTaking" render={({ field }) => (
+                    <FormItem className="space-y-6">
+                      <FormLabel className="text-sm font-bold text-gray-700">Why are you taking PTE Home?*</FormLabel>
+                      <FormControl>
+                        <RadioGroup onValueChange={field.onChange} value={field.value} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          {["Visa (A2/B1)", "Citizenship", "Other"].map(r => (
+                            <div key={r} onClick={() => field.onChange(r.toLowerCase())} className={cn("flex items-center space-x-4 p-4 rounded-xl border border-slate-100 hover:border-slate-200 transition-all cursor-pointer group bg-white", field.value === r.toLowerCase() ? "border-[#A11D1D] bg-[#A11D1D]/5" : "")}>
+                              <RadioGroupItem value={r.toLowerCase()} id={`reason-${r}`} className="border-[#A11D1D] text-[#A11D1D]" />
+                              <Label htmlFor={`reason-${r}`} className="font-bold text-gray-900 cursor-pointer">{r}</Label>
+                            </div>
+                          ))}
+                        </RadioGroup>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )} />
+                </div>
+
+                <div className="space-y-8 pt-8 border-t border-slate-100">
+                  <h2 className="text-xl font-black text-gray-900 tracking-tight">Previous test history</h2>
+                  <FormField control={control} name="takenBefore" render={({ field }) => (
+                    <FormItem className="space-y-6">
+                      <FormLabel className="text-sm font-bold text-gray-700">Have you taken PTE Home before?*</FormLabel>
+                      <FormControl>
+                        <RadioGroup onValueChange={field.onChange} value={field.value} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          {[{ label: "Yes", value: "yes" }, { label: "No", value: "no" }].map(opt => (
+                            <div key={opt.value} onClick={() => field.onChange(opt.value)} className={cn("flex items-center space-x-4 p-4 rounded-xl border border-slate-100 hover:border-slate-200 transition-all cursor-pointer group bg-white", field.value === opt.value ? "border-[#A11D1D] bg-[#A11D1D]/5" : "")}>
+                              <RadioGroupItem value={opt.value} id={`taken-${opt.value}`} className="border-[#A11D1D] text-[#A11D1D]" />
+                              <Label htmlFor={`taken-${opt.value}`} className="font-bold text-gray-900 cursor-pointer">{opt.label}</Label>
+                            </div>
+                          ))}
+                        </RadioGroup>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )} />
+
+                  {watchTakenBefore === "yes" && (
+                    <div className="space-y-8 animate-in fade-in slide-in-from-top-4 duration-300">
+                      <FormField control={control} name="takenWithinTwoYears" render={({ field }) => (
+                        <FormItem className="space-y-4">
+                          <FormLabel className="text-sm font-bold text-gray-700">Have you taken the test in the last 2 years?*</FormLabel>
+                          <FormControl>
+                            <RadioGroup onValueChange={field.onChange} value={field.value} className="flex gap-8">
+                              {["Yes", "No"].map(opt => (
+                                <div key={opt} className="flex items-center space-x-2">
+                                  <RadioGroupItem value={opt.toLowerCase()} id={`recent-${opt}`} />
+                                  <Label htmlFor={`recent-${opt}`}>{opt}</Label>
+                                </div>
+                              ))}
+                            </RadioGroup>
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )} />
+                      <FormField control={control} name="hasExistingAccount" render={({ field }) => (
+                        <FormItem className="space-y-4">
+                          <FormLabel className="text-sm font-bold text-gray-700">Do you have a Pearson VUE account?*</FormLabel>
+                          <FormControl>
+                            <RadioGroup onValueChange={field.onChange} value={field.value} className="flex gap-8">
+                              {["Yes", "No"].map(opt => (
+                                <div key={opt} className="flex items-center space-x-2">
+                                  <RadioGroupItem value={opt.toLowerCase()} id={`account-${opt}`} />
+                                  <Label htmlFor={`account-${opt}`}>{opt}</Label>
+                                </div>
+                              ))}
+                            </RadioGroup>
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )} />
+                    </div>
+                  )}
+                </div>
+
+                <div className="space-y-8 pt-8 border-t border-slate-100">
+                  <h2 className="text-xl font-black text-gray-900 tracking-tight">Consents & Agreements</h2>
+                  <div className="space-y-6">
+                    <FormField control={control} name="dataSharingAgreed" render={({ field }) => (
+                      <FormItem className="flex items-start space-x-4 p-6 rounded-2xl bg-[#A11D1D]/5 border border-[#A11D1D]/10">
+                        <FormControl><Checkbox checked={field.value} onCheckedChange={field.onChange} className="data-[state=checked]:bg-[#A11D1D] mt-1" /></FormControl>
+                        <div className="space-y-1">
+                          <Label className="text-sm font-bold text-gray-900 cursor-pointer">I agree to Pearson sharing my data with the score users I have selected above.*</Label>
+                          <p className="text-xs text-gray-500">Your data will be handled according to our privacy policy.</p>
+                        </div>
+                      </FormItem>
+                    )} />
+
+                    <FormField control={control} name="bookingTermsAgreed" render={({ field }) => (
+                      <FormItem className="flex items-start space-x-4 p-6 rounded-2xl bg-[#A11D1D]/5 border border-[#A11D1D]/10">
+                        <FormControl><Checkbox checked={field.value} onCheckedChange={field.onChange} className="data-[state=checked]:bg-[#A11D1D] mt-1" /></FormControl>
+                        <div className="space-y-1">
+                          <Label className="text-sm font-bold text-gray-900 cursor-pointer">I have read and agree to the PTE Home Test Taker Handbook and Booking Terms and Conditions.*</Label>
+                        </div>
+                      </FormItem>
+                    )} />
+
+                    <FormField control={control} name="marketingConsent" render={({ field }) => (
+                      <FormItem className="space-y-6 pt-4">
+                        <FormLabel className="text-sm font-bold text-gray-700 leading-relaxed">Would you like to receive information about products, services and special offers from Pearson?*</FormLabel>
+                        <FormControl>
+                          <RadioGroup onValueChange={field.onChange} value={field.value} className="flex gap-8">
+                            {[{ label: "Yes", value: "yes" }, { label: "No", value: "no" }].map(opt => (
+                              <div key={opt.value} className="flex items-center space-x-2">
+                                <RadioGroupItem value={opt.value} id={`marketing-${opt.value}`} className="border-[#A11D1D]" />
+                                <Label htmlFor={`marketing-${opt.value}`} className="text-sm font-bold text-gray-700 cursor-pointer">{opt.label}</Label>
+                              </div>
+                            ))}
+                          </RadioGroup>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )} />
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {step === 5 && (
+              <div className="space-y-12 animate-in fade-in slide-in-from-right-8 duration-500">
+                <div className="space-y-8">
+                  <h2 className="text-xl font-black text-gray-900 tracking-tight">Preparation Courses</h2>
+                  <FormField control={control} name="selectedCourse" render={({ field }) => (
+                    <FormItem className="space-y-6">
+                      <FormControl>
+                        <RadioGroup onValueChange={field.onChange} value={field.value} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          {pteCourses.map(course => (
+                            <div key={course.id} onClick={() => field.onChange(course.id)} className={cn("relative p-6 rounded-2xl border-2 transition-all cursor-pointer group flex flex-col items-center text-center gap-4", field.value === course.id ? "border-[#A11D1D] bg-[#A11D1D]/5" : "border-slate-100 bg-white hover:border-slate-200")}>
+                              <div className={cn("w-12 h-12 rounded-full flex items-center justify-center transition-all", field.value === course.id ? "bg-[#A11D1D] text-white shadow-lg shadow-[#A11D1D]/20" : "bg-slate-50 text-slate-400 group-hover:bg-slate-100")}>
+                                <BookOpen className="w-6 h-6" />
+                              </div>
+                              <div><h4 className="font-black text-gray-900 mb-1">{course.label}</h4><p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">AED {course.price.toLocaleString()}</p></div>
+                              <RadioGroupItem value={course.id} className="sr-only" />
+                            </div>
+                          ))}
+                        </RadioGroup>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )} />
+                </div>
+              </div>
+            )}
+
+            {step === 6 && (
+              <div className="space-y-12 animate-in fade-in slide-in-from-right-8 duration-500">
+                <div className="space-y-8">
+                  <h2 className="text-xl font-black text-gray-900 tracking-tight">Review your registration</h2>
+                  <div className="bg-slate-50 rounded-2xl p-8 space-y-6">
+                    <div className="flex justify-between text-sm"><span className="text-gray-500 font-medium">Exam Fee:</span><span className="font-black text-gray-900">AED {EXAM_FEE.toLocaleString()}.00</span></div>
+                    {coursePrice > 0 && (<div className="flex justify-between text-sm"><span className="text-gray-500 font-medium">Preparation Course:</span><span className="font-black text-gray-900">AED {coursePrice.toLocaleString()}.00</span></div>)}
+                    <div className="flex justify-between text-sm pt-4 border-t border-slate-200 font-black"><span className="text-lg text-gray-900">Total:</span><span className="text-2xl text-[#A11D1D]">AED {total.toLocaleString(undefined, { minimumFractionDigits: 2 })}</span></div>
+                  </div>
+                  <FormField control={control} name="infoCorrect" render={({ field }) => (
+                    <FormItem className="flex items-start space-x-4 p-6 rounded-2xl bg-[#A11D1D]/5 border border-[#A11D1D]/10">
+                      <FormControl><Checkbox checked={field.value} onCheckedChange={field.onChange} className="data-[state=checked]:bg-[#A11D1D] mt-1" /></FormControl>
+                      <Label className="text-sm font-bold text-gray-700 cursor-pointer">I confirm that all information is correct.</Label>
+                    </FormItem>
+                  )} />
+                </div>
+              </div>
+            )}
+
+            {step === 7 && (<Payment amount={total} currency="aed" />)}
+
+            {step < 8 && (
+              <div className="pt-12 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-6 mt-8">
+                {step > 1 && (<button onClick={() => setStep(step - 1)} className="text-gray-400 font-black text-xs uppercase tracking-widest hover:text-[#A11D1D] px-4 py-2" type="button">Previous</button>)}
+                <Button type={step === 6 ? "submit" : "button"} onClick={step === 6 ? undefined : handleNext} className="px-12 py-8 bg-[#A11D1D] hover:bg-[#8A1818] text-white font-black text-xs uppercase tracking-[0.2em] rounded-lg shadow-lg hover:shadow-xl transition-all flex items-center gap-4 group ml-auto">
+                  {step === 6 ? "Submit Registration" : "Save and continue"}<ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </div>
+            )}
+          </form>
+        </Form>
+      </div>
+    </div>
+  );
 }

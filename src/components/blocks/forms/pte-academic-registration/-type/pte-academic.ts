@@ -1,7 +1,6 @@
 import { z } from "zod";
 
-// Helper to handle both strings and objects from dropdowns
-const stringOrObject = z.union([z.string(), z.any()]).transform(val => {
+const stringOrObject = z.union([z.string(), z.any(), z.null(), z.undefined()]).transform(val => {
     if (typeof val === 'string') return val;
     if (val && typeof val === 'object') {
         return val.name || val.value || val.label || "";
@@ -9,13 +8,16 @@ const stringOrObject = z.union([z.string(), z.any()]).transform(val => {
     return "";
 });
 
+const optionalString = z.string().optional().or(z.literal("")).transform(v => v || "");
+const requiredString = z.string().min(1, "Required").or(z.literal("")).transform(v => v || "").refine(v => v.length > 0, "Required");
+
 export const PteAcademicSchema = z.object({
     // Step 1: Personal Information
     givenNames: z.string().optional(),
     noGivenNames: z.boolean(),
     surnames: z.string().optional(),
     noSurname: z.boolean(),
-    emailUsername: z.string().email("Invalid email/username"),
+    emailUsername: z.string().email("Invalid email/username").or(z.any().transform(v => String(v || ""))).pipe(z.string().email("Invalid email/username")),
     dateOfBirth: z.any().refine((val) => !!val, "Date of birth is required"),
     gender: z.string().min(1, "Gender is required"),
     placeOfBirth: z.string().min(1, "Place of birth is required"),
@@ -24,8 +26,12 @@ export const PteAcademicSchema = z.object({
     countryOfResidence: stringOrObject.refine(val => val.length > 0, "Country of residence is required"),
     address: z.string().min(1, "Address is required"),
     city: z.string().min(1, "City is required"),
-    mobileNumber: z.string().min(1, "Mobile number is required"),
+    mobileNumber: z.string().min(1, "Mobile number is required").or(z.any().transform(v => String(v || ""))).pipe(z.string().min(1, "Mobile number is required")),
     readyToBook: z.string().min(1, "Please select an option"),
+
+    // New Fields for Step 1 alignment
+    examDate: z.any().refine((val) => !!val, "Exam date is required"),
+    examTime: z.string().min(1, "Exam time is required"),
 
     // Step 2: Booking Questions & Preferences
     homeLanguage: stringOrObject.refine(val => val.length > 0, "Please select your language"),

@@ -27,7 +27,7 @@ import {
   ExternalLink,
   ArrowRight,
 } from "lucide-react";
-import { IeltsGeneralSchema, type TIeltsGeneralSchema } from "./-type";
+import { IeltsUkviSchema, type TIeltsUkviSchema } from "./-type";
 import { SearchableDropdown } from "@/components/ui/searchable-dropdown";
 import { CountryDropdown } from "@/components/ui/country-dropdown";
 import { DateTimePicker } from "@/components/ui/date-time-picker";
@@ -40,13 +40,13 @@ import Payment from "../../../payment";
 import { ExamDateSelector } from "@/components/blocks/calendar-booking/exam-date-selector";
 
 
-export default function FormIELTSGeneralRegistration() {
+export default function FormIELTSUKVIRegistration() {
   const [step, setStep] = useState(1);
   const [showMarketingNotice, setShowMarketingNotice] = useState(false);
   const [showTermsNotice, setShowTermsNotice] = useState(false);
 
-  const form = useForm<TIeltsGeneralSchema>({
-    resolver: zodResolver(IeltsGeneralSchema),
+  const form = useForm<TIeltsUkviSchema>({
+    resolver: zodResolver(IeltsUkviSchema),
     defaultValues: {
       testModule: "",
       bookingFor: "",
@@ -117,7 +117,7 @@ export default function FormIELTSGeneralRegistration() {
   const tax = subtotal * 0.05;
   const total = subtotal + tax;
 
-  const onSubmit: SubmitHandler<TIeltsGeneralSchema> = (data) => {
+  const onSubmit: SubmitHandler<TIeltsUkviSchema> = (data) => {
     if (step === 6) {
       if (data.paymentMethod === "online") {
         setStep(7);
@@ -144,7 +144,7 @@ export default function FormIELTSGeneralRegistration() {
     }
   };
 
-  const getFieldsForStep = (currentStep: number): (keyof TIeltsGeneralSchema)[] => {
+  const getFieldsForStep = (currentStep: number): (keyof TIeltsUkviSchema)[] => {
     switch (currentStep) {
       case 1:
         return ["examDate", "examTime"];
@@ -1644,7 +1644,7 @@ export default function FormIELTSGeneralRegistration() {
                   </h2>
                   <div className="bg-slate-50/50 rounded-2xl border border-slate-100 p-8 space-y-8">
                     <h3 className="text-lg font-black text-gray-900">
-                      IELTS General Training
+                      IELTS UKVI
                     </h3>
 
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -2374,7 +2374,7 @@ export default function FormIELTSGeneralRegistration() {
                 <div className="space-y-4">
                   <h2 className="text-4xl font-black text-gray-900 tracking-tight">Registration Submitted!</h2>
                   <p className="text-gray-500 max-w-md mx-auto font-medium leading-relaxed">
-                    Thank you for choosing our center. Your IELTS General Training registration has been successfully recorded.
+                    Thank you for choosing our center. Your IELTS UKVI registration has been successfully recorded.
                   </p>
                 </div>
 

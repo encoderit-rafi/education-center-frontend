@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const IeltsGeneralSchema = z.object({
+export const IeltsUkviSchema = z.object({
     // Step 1: Personal Details
     testModule: z.enum(["Academic", "General Training"]).or(z.literal("")),
     bookingFor: z.enum(["myself", "child"], {
@@ -64,4 +64,4 @@ export const IeltsGeneralSchema = z.object({
     path: ["confirmEmail"],
 });
 
-export type TIeltsGeneralSchema = z.infer<typeof IeltsGeneralSchema>;
+export type TIeltsUkviSchema = z.infer<typeof IeltsUkviSchema>;
