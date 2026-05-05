@@ -1,28 +1,3 @@
-/*
-
-TOEFL iBT Preparation Course
- TOEFL iBT Classroom-based Course
- TOEFL iBT Online Course
-- IELTS Preparation Course (IELTS Academic & IELTS General Training)
- IELTS Classroom-based Course
- IELTS Online Course
-- PTE Preparation Course (PTE Academic & PTE Core)
- PTE Classroom-based Course
- PTE Online Course
-- CELPIP Preparation Course
- CELPIP General Classroom-based Course
- CELPIP General Online Course
-- CAEL Preparation Course
- CAEL Classroom-based Course
- CAEL Online Course
-- Skills for English (SELT) Preparation Course
- Skills for English (SELT) Classroom-based Course
- Skills for English (SELT) Online Course
-- OET Preparation Course
- OET Classroom-based Course
- OET Online Course
-*/
-
 const exam_preparation_courses = [
   {
     id: "ielts",
