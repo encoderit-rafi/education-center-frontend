@@ -201,9 +201,43 @@ export default function Testimonials() {
             <TestimonialCard key={i} t={t} isMarquee />
           ))}
         </Marquee>
+        <Marquee
+          reverse
+          pauseOnHover
+          className="py-10 [--duration:40s] [--gap:2rem]"
+        >
+          {secondRow.map((t, i) => (
+            <TestimonialCard key={i} t={t} isMarquee />
+          ))}
+        </Marquee>
       </div>
 
       {/* Mobile/Tablet Version: Carousel */}
+      <div className="lg:hidden px-6">
+        <Carousel setApi={setApi} className="w-full max-w-lg mx-auto">
+          <CarouselContent>
+            {testimonials.map((t, i) => (
+              <CarouselItem key={i}>
+                <div className="p-1">
+                  <TestimonialCard t={t} />
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <div className="flex justify-center gap-2 mt-12">
+            {Array.from({ length: count }).map((_, i) => (
+              <button
+                key={i}
+                className={cn(
+                  "w-2.5 h-2.5 rounded-full transition-all duration-300",
+                  current === i ? "bg-primary w-8" : "bg-gray-300",
+                )}
+                onClick={() => api?.scrollTo(i)}
+              />
+            ))}
+          </div>
+        </Carousel>
+      </div>
     </section>
   );
 }

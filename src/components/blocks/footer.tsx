@@ -3,15 +3,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
 import { toast } from "sonner";
+import { Clock, MapPin, Mail, Phone, LucideIcon } from "lucide-react";
 
 function ContactItem({
-  icon,
+  icon: Icon,
   value,
   copyText,
 }: {
-  icon: string;
+  icon: LucideIcon;
   value: React.ReactNode;
   copyText: string;
 }) {
@@ -32,13 +32,10 @@ function ContactItem({
   return (
     <div
       onClick={handleCopy}
-      className="flex items-start gap-3 text-red-800 hover:text-red-900 transition-colors cursor-pointer group/item"
+      className="flex items-start gap-3 text-primary hover:opacity-80 transition-all cursor-pointer group/item"
     >
-      <span className="material-symbols-outlined text-red-700 font-bold shrink-0 mt-0.5  transition-transform">
-        {/* {copied ? "check" : icon} */}
-        {icon}
-      </span>
-      <span className="text-sm font-bold leading-snug flex-1">{value}</span>
+      <Icon className="w-5 h-5 text-primary shrink-0 transition-transform group-hover/item:scale-110" />
+      <span className="text-sm font-medium leading-snug flex-1">{value}</span>
     </div>
   );
 }
@@ -93,28 +90,43 @@ export default function Footer() {
             </Link>
             <div className="space-y-5">
               <ContactItem
-                icon="location_on"
-                copyText="Tabarak Tower, Suite 701, 7th Floor, Corniche Rd - AL Mamzar - Sharjah"
+                icon={Clock}
+                copyText="Saturday to Thursday (9:00 AM - 9:00 PM)"
                 value={
                   <>
-                    Tabarak Tower
+                    Working Hours:
                     <br />
-                    Suite 701, 7th Floor
+                    Saturday to Thursday
                     <br />
-                    Corniche Rd - AL Mamzar - Sharjah
+                    (9:00 AM - 9:00 PM)
                   </>
                 }
               />
               <ContactItem
-                icon="mail"
-                copyText="info@tepth.net"
-                value="info@tepth.net"
+                icon={MapPin}
+                copyText="The Exam Preparation & Testing House L.L.C, Suite 701, 7th Floor, Tabarak Tower, Corniche Road, Al Mamzar, Sharjah, United Arab Emirates."
+                value={
+                  <>
+                    Our Address:
+                    <br />
+                    The Exam Preparation & Testing House L.L.C
+                    <br />
+                    Suite 701, 7th Floor, Tabarak Tower, Corniche Road,
+                    <br />
+                    Al Mamzar, Sharjah, United Arab Emirates.
+                  </>
+                }
+              />
+              <ContactItem
+                icon={Mail}
+                copyText="info@tepth.org"
+                value="Email. info@tepth.org"
               />
 
               <ContactItem
-                icon="call"
-                copyText="+97143333616"
-                value="+97143333616"
+                icon={Phone}
+                copyText="+97165531250"
+                value="Tel. +97165531250"
               />
             </div>
             {/* <div className="bg-white p-4 rounded-2xl space-y-4 border border-slate-100">
