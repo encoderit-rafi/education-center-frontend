@@ -17,6 +17,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
 import SearchCommand from "./search-command";
+import paid_mock_tests from "@/lib/demo-data/paid-mock-tests";
 
 import { Badge } from "../ui/badge";
 import { exams, exams_types } from "@/lib/data";
@@ -89,11 +90,12 @@ const navigations: NavItem[] = [
   {
     type: "primary",
     label: "Paid Mock Test", // candidates can purchase them online and we email them within 72 hours
-    children: [
-      { label: "IELTS", href: "/paid-mock-test" },
-      { label: "TOEFL iBT", href: "/paid-mock-test" },
-      { label: "PTE Academic", href: "/paid-mock-test" },
-    ],
+    children: paid_mock_tests.map((test) => {
+      return {
+        label: test.exam_name,
+        href: `/paid-mock-test/${test.id}`,
+      };
+    }),
   },
   {
     type: "secondary",
