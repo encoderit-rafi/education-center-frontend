@@ -178,7 +178,7 @@ export default function PaidMockTestIELTS() {
         </div>
       </section>
       <section id="booking-section" className="base-py bg-white">
-        <div className="section-container">
+        <div className="section-container base-px">
           <h2 className="section-title text-center mb-10">
             Book Your <span className="text-primary">IELTS Test</span>
           </h2>

@@ -96,12 +96,11 @@ const navigations: NavItem[] = [
   {
     type: "primary",
     label: "Paid Mock Test", // candidates can purchase them online and we email them within 72 hours
-    children: paid_mock_tests.map((test) => {
-      return {
-        label: test.exam_name,
-        href: `/paid-mock-test/${test.id}`,
-      };
-    }),
+    children: [
+      { label: "IELTS", href: "/paid-mock-test/ielts" },
+      { label: "PTE Academic", href: "/paid-mock-test/pte-academic" },
+      { label: "TOEFL iBT", href: "/paid-mock-test/toefl" },
+    ],
   },
   {
     type: "secondary",
