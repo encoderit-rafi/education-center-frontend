@@ -1,6 +1,4 @@
-import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { buttonVariants } from "../../ui/button";
 import { ComponentProps, PropsWithChildren } from "react";
 import { cn } from "@/lib/utils";
 const BaseCardTitle = ({
@@ -71,6 +69,17 @@ const BaseCardIcon = ({
     </span>
   );
 };
+const BaseCardArrow = ({ className, ...props }: ComponentProps<"svg">) => {
+  return (
+    <ArrowRight
+      className={cn(
+        "size-6 text-slate-300 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-primary",
+        className,
+      )}
+      {...props}
+    />
+  );
+};
 const BaseCard = ({
   className,
   children,
@@ -95,4 +104,5 @@ export {
   BaseCardDescription,
   BaseCardImportantInfo,
   BaseCardIcon,
+  BaseCardArrow,
 };

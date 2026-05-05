@@ -19,6 +19,7 @@ import Payment from "@/components/blocks/payment";
 import paid_mock_tests from "@/lib/demo-data/paid-mock-tests";
 
 import { CheckCircle2, Info, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const TIME_SLOTS = ["09:00 AM", "11:30 AM", "02:00 PM", "04:30 PM"];
 
@@ -42,7 +43,7 @@ interface MockTestBookingFormProps {
 
 export default function MockTestBookingForm({
   initialMockTestId,
-  className
+  className,
 }: MockTestBookingFormProps) {
   const [isSuccess, setIsSuccess] = useState(false);
 
@@ -64,7 +65,8 @@ export default function MockTestBookingForm({
   const selectedDate = watch("date");
   const selectedTime = watch("timeSlot");
 
-  const selectedItem = paid_mock_tests.find((m) => m.id === selectedId) || paid_mock_tests[0];
+  const selectedItem =
+    paid_mock_tests.find((m) => m.id === selectedId) || paid_mock_tests[0];
 
   const onSubmit = (data: BookingValues) => {
     console.log("Booking Data:", data);
@@ -84,8 +86,8 @@ export default function MockTestBookingForm({
             Booking Confirmed
           </h2>
           <p className="text-emerald-700/80 text-lg leading-relaxed font-medium">
-            Your {selectedItem.exam_name} Mock Test has been successfully scheduled
-            for {selectedDate ? format(selectedDate, "PPP") : ""} at{" "}
+            Your {selectedItem.exam_name} Mock Test has been successfully
+            scheduled for {selectedDate ? format(selectedDate, "PPP") : ""} at{" "}
             {selectedTime}. Check your email for testing credentials.
           </p>
         </div>
@@ -102,89 +104,13 @@ export default function MockTestBookingForm({
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className={cn("grid grid-cols-1 lg:grid-cols-12 gap-12 items-start", className)}
+      className={cn("space-y-16 max-w-5xl mx-auto", className)}
     >
-      {/* Left Column: Selection & Payment */}
-      <div className="lg:col-span-8 space-y-16">
-        {/* Section 1: Selection */}
+      <div className="space-y-16">
         <section>
           <div className="flex items-center gap-4 mb-8">
             <span className="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-black text-sm shadow-lg shadow-primary/20">
               1
-            </span>
-            <h2 className="text-2xl font-headline font-black text-secondary tracking-tight">
-              Select Mock Test
-            </h2>
-          </div>
-
-          <Field>
-            <RadioGroup
-              value={selectedId}
-              onValueChange={(val) => setValue("mockTestId", val as string)}
-              className="grid md:grid-cols-3 gap-6"
-            >
-              {paid_mock_tests.map((item) => (
-                <Field key={item.id} className="relative">
-                  <RadioGroupItem
-                    value={item.id}
-                    id={item.id}
-                    className="sr-only"
-                  />
-                  <label
-                    htmlFor={item.id}
-                    className={cn(
-                      "p-8 rounded-3xl border-2 cursor-pointer transition-all duration-300 relative group h-full flex flex-col text-left",
-                      selectedId === item.id
-                        ? "border-[#991B1B] bg-white shadow-2xl shadow-red-900/5"
-                        : "border-transparent bg-slate-50 hover:bg-slate-100",
-                    )}
-                  >
-                    <div
-                      className={cn(
-                        "text-[10px] font-black uppercase tracking-[0.2em] mb-4 transition-colors",
-                        selectedId === item.id
-                          ? "text-[#991B1B]"
-                          : "text-secondary/30",
-                      )}
-                    >
-                      {item.exam_name}
-                    </div>
-                    <h3 className="text-xl font-headline font-black text-secondary mb-2 leading-tight">
-                      {item.title}
-                    </h3>
-                    <div className="text-2xl font-headline font-black text-secondary mb-4">
-                      {item.price.currency} {item.price.fee}
-                    </div>
-                    <p className="text-xs text-on-surface-variant/70 font-medium leading-relaxed mb-8 line-clamp-3">
-                      {item.description}
-                    </p>
-
-                    <div
-                      className={cn(
-                        "mt-auto w-full py-3 rounded-xl font-headline font-black text-[10px] uppercase tracking-widest transition-all flex items-center justify-center gap-2",
-                        selectedId === item.id
-                          ? "bg-[#991B1B] text-white shadow-lg shadow-red-900/20"
-                          : "text-secondary/40 bg-white/50",
-                      )}
-                    >
-                      {selectedId === item.id && (
-                        <CheckCircle2 className="w-3.5 h-3.5" />
-                      )}
-                      {selectedId === item.id ? "Selected" : "Select"}
-                    </div>
-                  </label>
-                </Field>
-              ))}
-            </RadioGroup>
-            <FieldError errors={[errors.mockTestId]} />
-          </Field>
-        </section>
-
-        {/* Section 2: Schedule & Information */}
-        <section>
-          <div className="flex items-center gap-4 mb-8">
-            <span className="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-black text-sm shadow-lg shadow-primary/20">
-              2
             </span>
             <h2 className="text-2xl font-headline font-black text-secondary tracking-tight">
               Schedule & Information
@@ -277,92 +203,29 @@ export default function MockTestBookingForm({
               <div className="p-6 bg-primary/5 rounded-2xl flex items-start gap-4 mt-12">
                 <Info className="text-primary w-5 h-5 mt-0.5" />
                 <p className="text-xs text-on-surface-variant font-medium leading-relaxed">
-                  We will send your testing credentials and link to this
-                  email address 24 hours before your selected slot.
+                  We will send your testing credentials and link to this email
+                  address 24 hours before your selected slot.
                 </p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Section 3: Secure Payment */}
         <section>
           <div className="flex items-center gap-4 mb-8">
             <span className="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-black text-sm shadow-lg shadow-primary/20">
-              3
+              2
             </span>
             <h2 className="text-2xl font-headline font-black text-secondary tracking-tight">
               Secure Payment
             </h2>
           </div>
 
-          <div className="bg-surface-container p-8 rounded-[3rem] space-y-8">
-            <Payment amount={selectedItem?.price?.fee || 0} currency="aed" />
-            <button
-              type="submit"
-              className="w-full bg-primary text-white font-headline font-black py-6 rounded-[2rem] text-sm uppercase tracking-[0.3em] shadow-2xl shadow-primary/20 hover:bg-secondary transition-all active:scale-[0.98] flex items-center justify-center gap-3"
-            >
-              Confirm & Pay
-              <ArrowRight className="w-5 h-5" />
-            </button>
-          </div>
-        </section>
-      </div>
-
-      {/* Right Column: Summary */}
-      <div className="lg:col-span-4 sticky top-28 space-y-8">
-        {/* Dynamic Order Summary */}
-        <section className="bg-secondary p-10 rounded-xl text-white shadow-2xl shadow-secondary/20 overflow-hidden">
-          <div className="flex items-center justify-between mb-10">
-            <h3 className="text-2xl font-headline font-black tracking-tight">
-              Order Summary
-            </h3>
-            <span className="text-[10px] font-black uppercase tracking-widest bg-white/10 px-3 py-1 rounded-full">
-              Secure
-            </span>
-          </div>
-
-          <div className="space-y-6 mb-12">
-            <div className="flex flex-col gap-1 pb-6 border-b border-white/5">
-              <span className="text-[10px] font-black text-white/30 uppercase tracking-[0.2em]">
-                Selected Test
-              </span>
-              <span className="text-xl font-bold tracking-tight">
-                {selectedItem?.exam_name} Mock Test
-              </span>
-            </div>
-
-            <div className="grid grid-cols-2 gap-8 pb-6 border-b border-white/5">
-              <div className="flex flex-col gap-1">
-                <span className="text-[10px] font-black text-white/30 uppercase tracking-[0.2em]">
-                  Test Date
-                </span>
-                <span className="text-sm font-bold">
-                  {selectedDate ? format(selectedDate, "PPP") : "Not selected"}
-                </span>
-              </div>
-              <div className="flex flex-col gap-1 text-right">
-                <span className="text-[10px] font-black text-white/30 uppercase tracking-[0.2em]">
-                  Time Slot
-                </span>
-                <span className="text-sm font-bold uppercase">
-                  {selectedTime || "Not selected"}
-                </span>
-              </div>
-            </div>
-
-            <div className="flex justify-between items-end pt-4">
-              <span className="text-sm font-black text-white/40 uppercase tracking-widest">
-                Total Fee
-              </span>
-              <div className="flex items-baseline gap-1">
-                <span className="text-xl font-bold text-primary">AED</span>
-                <span className="text-5xl font-headline font-black text-white tracking-tighter">
-                  {selectedItem?.price?.fee}
-                </span>
-              </div>
-            </div>
-          </div>
+          <Payment amount={selectedItem?.price?.fee || 0} currency="aed" />
+          <Button type="submit" className="w-full mt-6 py-3">
+            Confirm & Pay
+            <ArrowRight className="w-5 h-5" />
+          </Button>
         </section>
       </div>
     </form>
