@@ -43,7 +43,7 @@ function Calendar({
       endMonth={endMonth}
       formatters={{
         formatMonthDropdown: (date) =>
-          date.toLocaleString("default", { month: "short" }),
+          date.toLocaleString("en-US", { month: "short" }),
         ...formatters,
       }}
       classNames={{
@@ -186,20 +186,32 @@ function CalendarDayButton({
   day,
   modifiers,
   ...props
-}: React.ComponentProps<typeof DayButton>) {
-  const defaultClassNames = getDefaultClassNames()
+}: React.ComponentProps<typeof DayPicker> & {
+  day: { date: Date };
+  modifiers: {
+    selected?: boolean;
+    range_start?: boolean;
+    range_end?: boolean;
+    range_middle?: boolean;
+    focused?: boolean;
+  };
+} & React.ComponentProps<typeof Button>) {
+  const defaultClassNames = getDefaultClassNames();
+  const [mounted, setMounted] = React.useState(false);
 
-  const ref = React.useRef<HTMLButtonElement>(null)
+  const ref = React.useRef<HTMLButtonElement>(null);
+
   React.useEffect(() => {
-    if (modifiers.focused) ref.current?.focus()
-  }, [modifiers.focused])
+    setMounted(true);
+    if (modifiers.focused) ref.current?.focus();
+  }, [modifiers.focused]);
 
   return (
     <Button
       ref={ref}
       variant="ghost"
       size="icon"
-      data-day={day.date.toLocaleDateString()}
+      data-day={mounted ? day.date.toLocaleDateString() : undefined}
       data-selected-single={
         modifiers.selected &&
         !modifiers.range_start &&
@@ -216,7 +228,7 @@ function CalendarDayButton({
       )}
       {...props}
     />
-  )
+  );
 }
 
 export { Calendar, CalendarDayButton }

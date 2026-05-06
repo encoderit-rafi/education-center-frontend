@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -76,7 +76,7 @@ const COURSE_PLANS = [
   },
 ];
 
-export default function ExamPreparationForm({
+function ExamPreparationFormInner({
   initialExam,
   initialPlan,
 }: {
@@ -351,5 +351,16 @@ export default function ExamPreparationForm({
         </section>
       </div>
     </form>
+  );
+}
+
+export default function ExamPreparationForm(props: {
+  initialExam?: string;
+  initialPlan?: string;
+}) {
+  return (
+    <Suspense fallback={<div className="h-[600px] w-full animate-pulse bg-slate-50 rounded-[3rem]" />}>
+      <ExamPreparationFormInner {...props} />
+    </Suspense>
   );
 }

@@ -22,7 +22,7 @@ import paid_mock_tests from "@/lib/demo-data/paid-mock-tests";
 import { Badge } from "../ui/badge";
 import { exams, exams_types } from "@/lib/data";
 import { cn } from "@/lib/utils";
-import { EXAM_PREPARATION_COURSES } from "@/app/exam-preparation-courses/page";
+import { EXAM_PREPARATION_COURSES_LINKS } from "@/lib/constants/exams";
 
 interface NavItem {
   type: "primary" | "secondary";
@@ -45,7 +45,7 @@ const navigations: NavItem[] = [
     type: "primary",
     label: "Exam Preparation Courses",
     children: [
-      ...EXAM_PREPARATION_COURSES,
+      ...EXAM_PREPARATION_COURSES_LINKS,
       {
         label: "Exam Workshops",
         href: "/exam-workshops",
