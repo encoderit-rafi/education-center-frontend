@@ -178,9 +178,6 @@ export default function Testimonials() {
     return () => clearInterval(intervalId);
   }, [api]);
 
-  const firstRow = testimonials.slice(0, 4);
-  const secondRow = testimonials.slice(4, 8);
-
   return (
     <section className="py-32 bg-[#F8F9FA] overflow-hidden border-y border-gray-100">
       <div className="max-w-7xl mx-auto text-center mb-20 px-6">
@@ -194,19 +191,10 @@ export default function Testimonials() {
         </p>
       </div>
 
-      {/* Desktop Version: Two-Row Marquee */}
+      {/* Desktop Version: Single Row Marquee */}
       <div className="hidden lg:flex flex-col gap-8">
         <Marquee pauseOnHover className="py-10 [--duration:40s] [--gap:2rem]">
-          {firstRow.map((t, i) => (
-            <TestimonialCard key={i} t={t} isMarquee />
-          ))}
-        </Marquee>
-        <Marquee
-          reverse
-          pauseOnHover
-          className="py-10 [--duration:40s] [--gap:2rem]"
-        >
-          {secondRow.map((t, i) => (
+          {testimonials.map((t, i) => (
             <TestimonialCard key={i} t={t} isMarquee />
           ))}
         </Marquee>
