@@ -7,7 +7,7 @@ import {
 import {
   DayPicker,
   getDefaultClassNames,
-  type DayButton,
+  type DayButtonProps,
 } from "react-day-picker"
 
 import { cn } from "@/lib/utils"
@@ -186,16 +186,7 @@ function CalendarDayButton({
   day,
   modifiers,
   ...props
-}: React.ComponentProps<typeof DayPicker> & {
-  day: { date: Date };
-  modifiers: {
-    selected?: boolean;
-    range_start?: boolean;
-    range_end?: boolean;
-    range_middle?: boolean;
-    focused?: boolean;
-  };
-} & React.ComponentProps<typeof Button>) {
+}: DayButtonProps) {
   const defaultClassNames = getDefaultClassNames();
   const [mounted, setMounted] = React.useState(false);
 
