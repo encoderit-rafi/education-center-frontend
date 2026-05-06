@@ -179,10 +179,11 @@ export default function NavBar() {
         <Link href="/">
           <Image
             alt="TEPTH Logo"
-            width={150}
-            height={150}
+            width={112}
+            height={112}
             src="/images/tepth-logo.png"
-            className="w-28"
+            className="w-28 h-auto"
+            priority
           />
         </Link>
         {/* Desktop Primary Nav */}
