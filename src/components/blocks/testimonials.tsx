@@ -1,14 +1,9 @@
 "use client";
-
-import Image from "next/image";
-import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
   type CarouselApi,
 } from "@/components/ui/carousel";
 import { cn } from "@/lib/utils";
@@ -185,7 +180,7 @@ export default function Testimonials() {
           Trusted by Tomorrow's{" "}
           <span className="text-primary italic">Leaders</span>
         </h2>
-        <p className="text-gray-500 text-lg max-w-2xl mx-auto font-medium">
+        <p className="text-gray-500 text-base max-w-2xl mx-auto font-medium">
           See what our global community has to say about their journey with
           TEPTH.
         </p>

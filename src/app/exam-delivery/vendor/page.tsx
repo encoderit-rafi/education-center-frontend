@@ -1,16 +1,15 @@
 "use client";
 
-import React from "react";
 import Image from "next/image";
-import Link from "next/link";
-import { cn } from "@/lib/utils";
 import { ArrowRight, ShieldCheck, CreditCard, CalendarCheck, Award } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function VendorPartnershipsPage() {
   return (
     <div className="min-h-screen font-headline antialiased tracking-tight">
       {/* Hero Section: Editorial Asymmetry */}
-      <section className="relative pt-24 pb-32 overflow-hidden px-8 max-w-screen-2xl mx-auto">
+      {/* <section className="relative pt-24 pb-32 overflow-hidden px-8 max-w-screen-2xl mx-auto">
         <div className="grid lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-7 z-10">
             <span className="inline-block py-1 px-3 bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase mb-6 rounded-sm">
@@ -32,14 +31,15 @@ export default function VendorPartnershipsPage() {
           </div>
           <div className="lg:col-span-5 relative">
             <div className="aspect-[4/5] rounded-xl overflow-hidden shadow-2xl relative">
-              <img
+              <Image
                 className="w-full h-full object-cover"
                 alt="Modern high-end minimal office architectural space"
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZevxYdInGS6otVk2wN89d4GFcXoEnqi_Wr_r-xY3vzxHkfV9pzYKs755txw2yIJKBzMNhVJI8homr-9epDeC8nBHlYlmtt8xEVYgKLhR79GTLcVte-eeinz2bXqYU7Ah42MFhtoWjtqe_o5ejqj4_r-g8pBSJSOtZwJPS0MVX34XPCHmQdJkTzZF0e6-rnJBkVB6wj8PpXv8gYQ-kqagxYaFAqw3Vj3I9mcRBWrIWwo3KHw3EAVhN7QvZlDXebC-cSfunuCTa7kO0"
+                fill
+                priority
               />
               <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent"></div>
             </div>
-            {/* Overlapping Card */}
             <div className="absolute -bottom-10 -left-10 bg-white/80 backdrop-blur-xl p-8 rounded-xl shadow-xl max-w-xs border border-white/40">
               <div className="text-primary font-black text-4xl mb-1 tracking-tight">120+</div>
               <div className="text-slate-900 font-bold text-lg mb-2">Facility Standards</div>
@@ -47,7 +47,7 @@ export default function VendorPartnershipsPage() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Bento Grid: Core Value Pillars */}
       <section className="bg-slate-50 py-24 px-8">
@@ -67,10 +67,12 @@ export default function VendorPartnershipsPage() {
                 <p className="text-slate-600 leading-relaxed">Proprietary encrypted local area network configurations that isolate test environments from external threats while maintaining 99.9% uptime for exam delivery.</p>
               </div>
               <div className="mt-12 flex items-center gap-4">
-                <img
+                <Image
                   className="w-24 h-16 object-cover rounded-lg"
                   alt="Modern data center server rack"
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKx-UsK1-gPh9Aq6cBZVH8DPm828Jx7rMLhpNV5aYdeoRow5fEen1av06ur_5HQqNy7pROkcmmGdQf2N6oXWnLi1d5CPbbYGO3kC-lzoKenkUhMpzntEEggebOGIlot-__N1UxjO2G_-HjfoRaJru7nJBko048PG1T821PGusU4dQ3DvU5b059An_eLV-Su6Tk3qA1n-bW2oK7jbIy1K14G2A24daR2Te9Fji82YJJme7fUwvswXq9wsFRxn9uEip-TNx0iPUVsvE_"
+                  width={96}
+                  height={64}
                 />
                 <span className="text-sm font-semibold uppercase tracking-wider text-primary">Standard Compliant</span>
               </div>
@@ -95,10 +97,13 @@ export default function VendorPartnershipsPage() {
               <h3 className="text-2xl font-bold mb-4 text-slate-900">Automated Scheduling</h3>
               <p className="text-slate-600 leading-relaxed mb-6">Integration with global test-taker demand forecasts to maximize seat utilization.</p>
               <div className="mt-auto overflow-hidden rounded-lg">
-                <img
+                <Image
                   className="w-full grayscale opacity-50"
                   alt="Minimalist desktop showing a calendar"
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuCa6TQeR2imA0vGQcU0SdocVIvQJwr0fivFCqcQVAGjy-yY7HMwtinNoJqQg7AUfwBSpeLZO3k7XXP0BujL2Zuno3FYw1ytgaP0KjFc2X6nCL8xTD4SODODxdiBRk6HMWerrxwGCotVQX52Ffay5cEFb3_l6kkauxq85iT2MOgybezG7rBtWdf7BTpJ9pRtNQXye0uLoVgjv1-nZfJVrnIX_dgbzm6VyN8ZkuqpGG2sFXqgVwcwQvLW8fuIlugUFeM0trxjBOnpvxNh"
+                  width={400}
+                  height={200}
+                  layout="responsive"
                 />
               </div>
             </div>
@@ -117,13 +122,13 @@ export default function VendorPartnershipsPage() {
               <div className="md:w-1/2">
                 <h3 className="text-3xl font-bold mb-4">Facility Standards Upgrade</h3>
                 <p className="text-slate-400 leading-relaxed mb-6">Our architects work with you to retrofit existing office spaces into high-performance testing ateliers with specific acoustic and ergonomic requirements.</p>
-                <button className="px-6 py-3 border border-slate-700 rounded-lg font-bold hover:bg-slate-800 transition-colors">Request Site Assessment</button>
               </div>
-              <div className="md:w-1/2 aspect-video rounded-lg overflow-hidden">
-                <img
+              <div className="md:w-1/2 aspect-video rounded-lg overflow-hidden relative">
+                <Image
                   className="w-full h-full object-cover"
                   alt="Interior view of a modern clean workspace"
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUU7fJYm1fI_859fqOymjIDX1Y45xzekBaVVMme1r0VCttp3_njt4OMXy3v7Z7IPy7xIN-HNJesFoYm8_QYHzwsWjvvXFHeruiWcFX9Tw7D0gsHC294Q1iK2nM6Kk7We_1G1VwV2PvscnhAlItzzrObm0o0kBDN6aX7voUy78rfJWQ8raAaenEi8iGEHzyDNng5QcclZ2is0Pt81-efpcssJdMR_Eo3WHBPjw-bw7eHKQIyPoz86SyKa5IZi0HIDhed3lLLr65rtU-"
+                  fill
                 />
               </div>
             </div>
@@ -132,15 +137,19 @@ export default function VendorPartnershipsPage() {
               <h3 className="text-xl font-bold mb-2 text-slate-900">Regional Support</h3>
               <p className="text-slate-600 text-sm">Dedicated account managers for logistics partners in 42 countries.</p>
               <div className="mt-6 flex -space-x-2">
-                <img
+                <Image
                   className="w-10 h-10 rounded-full border-2 border-white object-cover"
                   alt="Professional"
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_07JKxzB8c-i6cu9xmeUWGjD-ZrjHSKro7XFNdFH8xE_7HefMxm6aHIXaBJc7tfmFE6KOTo43M7G3wVoO7kZlrLKj2iBAsGa1pv1opk5yKgjNj83Za9Na6CKJ_t7G9Uz9Ms_PpgCAJtmCLwKNLEnQYuevsK67-36VOPa2fgGomIwXusTjB9yiPZoxE0GZZONqccmgBVjqNcXIszEQ4zyoNhfoGFsqc5uRvz6qejpyiaCwExByTuPEI2_8VHpLOXcpecJB7A4q3YoG"
+                  width={40}
+                  height={40}
                 />
-                <img
+                <Image
                   className="w-10 h-10 rounded-full border-2 border-white object-cover"
                   alt="Professional"
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1r_MGk5stkJcwzb2a3QqFA4ApJMsVu47kEuGP3_VDD_qQC2C6l8_YQUSXXAkpHOBLUVjDF0-XYlemnaqfE2OIL-rm6XTvybUw_WzdoxKniMQbDpCDFq-URVwI7UiIYi4wz4ujnLWyYUHC4lKOj3tOOrQStm-h55FikOYBUlDPVwcKjEWVzeJvvTr31DwD0JeDarNIMXa_26cP_k_v2cZh1F_NWB2wk76nQkvCWXNen9ayR3mkwfyHctMj6dz5d_6wYtUJU76R5Rb-"
+                  width={40}
+                  height={40}
                 />
                 <div className="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center text-xs font-bold border-2 border-white">+18</div>
               </div>
@@ -156,16 +165,16 @@ export default function VendorPartnershipsPage() {
           <span className="text-primary">Academic Atelier Standards?</span>
         </h2>
         <p className="text-xl text-slate-600 mb-12">Submit your facility blueprints today for a preliminary partnership evaluation.</p>
-        <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
-          <button className="w-full md:w-auto bg-primary text-white px-10 py-5 rounded-lg font-black text-xl hover:bg-primary-variant transition-all shadow-xl shadow-primary/20">
-            Become a Partner
-          </button>
-          <button className="w-full md:w-auto bg-white border border-slate-200 px-10 py-5 rounded-lg font-bold text-xl hover:bg-slate-50 transition-all">
-            Download Partner Kit
-          </button>
+        <div className="justify-center items-center">
+          <Link href="/contact-us">
+            <Button className="w-full md:w-auto bg-primary text-white px-10 py-5 rounded-lg font-black text-xl hover:bg-primary-variant transition-all shadow-xl shadow-primary/20">
+              Become a Partner
+            </Button>
+          </Link>
         </div>
       </section>
 
     </div>
   );
 }
+

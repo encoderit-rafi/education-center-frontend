@@ -49,7 +49,7 @@ export default function Footer() {
     { label: "Terms & Conditions", href: "/terms-and-conditions" },
     { label: "Disability Policy", href: "/disability-policy" },
     { label: "Facilities", href: "/facilities" },
-    { label: "Book an Exam Venue", href: "/book-an-exam-venue" },
+    { label: "Book an Exam Venue", href: "our-venues/book-an-exam-venue" },
     { label: "Privacy Policy", href: "/privacy-policy" },
     { label: "Career", href: "/career" },
   ];

@@ -1,76 +1,146 @@
+"use client";
+
 import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight, Award, ShieldCheck } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export default function Accreditation() {
   return (
-    <main className="py-20 bg-white">
-      <div className="container mx-auto px-6 max-w-4xl">
-        <div className="space-y-16">
-          <div className="space-y-8">
-            <div className="space-y-4">
-              <h1 className="text-4xl md:text-6xl font-black text-[#A11D1D] tracking-tight mb-2">
-                Accreditation
-              </h1>
-              <div className="h-2 w-24 bg-[#A11D1D] rounded-full" />
+    <main className="bg-white min-h-screen">
+      {/* Hero Section */}
+      <section className="py-16 md:py-24 px-8 max-w-screen-2xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+          {/* Left Content */}
+          <div className="space-y-8 animate-fade-up">
+            {/* Section Badge */}
+            <div className="flex items-center gap-3">
+              <div className="w-6 h-[2px] bg-primary" />
+              <span className="text-primary text-xs font-black uppercase tracking-[0.3em]">
+                ACCREDITATION
+              </span>
             </div>
 
-            <p className="text-xl text-slate-700 leading-relaxed font-medium">
-              <strong className="font-black text-[#A11D1D]">The Exam Preparation & Testing House L.L.C</strong> is officially licensed and regulated by the leading educational authorities in Sharjah, ensuring the highest standards of academic excellence and institutional integrity.
+            {/* Main Heading */}
+            <h1 className="text-3xl md:text-5xl font-black text-slate-900 leading-[1.1] tracking-tight uppercase">
+              Licensed & <br />
+              <span className="text-primary">Regulated Excellence</span>
+            </h1>
+
+            {/* Description */}
+            <p className="text-base text-slate-600 leading-relaxed max-w-xl font-sans">
+              The Exam Preparation & Testing House L.L.C is officially licensed and regulated by leading educational authorities, ensuring institutional integrity.
             </p>
+
+            {/* Action Buttons */}
+            <div className="flex flex-wrap gap-4 pt-4">
+              <Link href="/book-exams">
+                <Button className="h-14 w-52 text-sm rounded-lg flex items-center justify-center gap-2">
+                  Book an Exam <ArrowRight className="w-5 h-5" />
+                </Button>
+              </Link>
+              <Link href="/contact-us">
+                <Button className="h-14 w-52 text-sm rounded-lg flex items-center justify-center gap-2" variant="destructive">
+                  Contact Us
+                </Button>
+              </Link>
+            </div>
           </div>
 
-          <div className="space-y-20">
-            {/* SEDD Section */}
-            <div className="group space-y-8">
-              <div className="flex flex-col md:flex-row md:items-center gap-8 pb-8 border-b border-slate-100">
-                <div className="relative w-full md:w-80 h-48 flex items-center justify-center overflow-hidden shrink-0">
-                  <Image
-                    src="/images/about-us/government-of-sharjah.png"
-                    alt="Government of Sharjah - SEDD Logo"
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-                <div className="space-y-3">
-                  <h3 className="text-3xl font-black text-slate-900 leading-tight">
-                    Government of Sharjah
-                  </h3>
-                  <p className="text-[#A11D1D] font-black text-lg uppercase tracking-[0.2em]">
-                    Economic Development Department (SEDD)
-                  </p>
-                </div>
-              </div>
-              <p className="text-lg text-slate-600 leading-relaxed md:text-xl">
-                <strong className="font-black text-slate-900">The Exam Preparation & Testing House L.L.C</strong> is licensed by Sharjah Economic Development Department (SEDD). Sharjah is firmly established as a premier educational hub in the UAE, known for top-tier institutions and high-quality educational centres. Driven by government support, the emirate offers extensive academic facilities and significant investment in the education sector.
-              </p>
+          {/* Right Visual */}
+          <div className="relative group">
+            <div className="absolute -inset-4 bg-primary/5 rounded-xl blur-3xl opacity-50 transition-opacity group-hover:opacity-100"></div>
+            <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
+              <Image
+                src="/images/vision-mission-hero.png"
+                alt="Accreditation Hero"
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Narrative Section */}
+      <section className="py-32 px-8 max-w-screen-2xl mx-auto border-t border-slate-50">
+        <div className="grid lg:grid-cols-2 gap-20 items-start">
+          {/* Left Narrative */}
+          <div className="space-y-12">
+            {/* Section Badge */}
+            <div className="flex items-center gap-3">
+              <div className="w-6 h-[2px] bg-primary" />
+              <span className="text-primary text-xs font-black uppercase tracking-[0.3em]">
+                GOVERNING BODIES
+              </span>
             </div>
 
-            {/* SPEA Section */}
-            <div className="group space-y-8">
-              <div className="flex flex-col md:flex-row md:items-center gap-8 pb-8 border-b border-slate-100">
-                <div className="relative w-full md:w-80 h-48 flex items-center justify-center overflow-hidden shrink-0">
+            {/* Feature Blocks */}
+            <div className="space-y-10">
+              {/* SEDD */}
+              <div className="group space-y-6">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-primary/5 rounded-xl flex items-center justify-center">
+                    <Award className="w-6 h-6 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-black text-slate-900 uppercase">Government of Sharjah</h3>
+                    <p className="text-primary text-[10px] font-black uppercase tracking-widest">Economic Development Department (SEDD)</p>
+                  </div>
+                </div>
+                <p className="text-slate-600 text-base leading-relaxed font-medium">
+                  Licensed by Sharjah Economic Development Department (SEDD). Sharjah is firmly established as a premier educational hub in the UAE, known for top-tier institutions and high-quality educational centres.
+                </p>
+                <div className="relative w-64 h-24 bg-slate-50 rounded-xl p-4 border border-slate-100 transition-all group-hover:border-primary/20">
+                  <Image
+                    src="/images/about-us/government-of-sharjah.png"
+                    alt="SEDD Logo"
+                    fill
+                    className="object-contain p-4"
+                  />
+                </div>
+              </div>
+
+              {/* SPEA */}
+              <div className="group space-y-6">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-primary/5 rounded-xl flex items-center justify-center">
+                    <ShieldCheck className="w-6 h-6 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-black text-slate-900 uppercase">Sharjah Private Education</h3>
+                    <p className="text-primary text-[10px] font-black uppercase tracking-widest">Official Regulatory Body (SPEA)</p>
+                  </div>
+                </div>
+                <p className="text-slate-600 text-base leading-relaxed font-medium">
+                  Regulated by Sharjah Private Education Authority (SPEA), the official body responsible for overseeing private education, established by Emiri Decree No. 45 of 2018.
+                </p>
+                <div className="relative w-64 h-24 bg-slate-50 rounded-xl p-4 border border-slate-100 transition-all group-hover:border-primary/20">
                   <Image
                     src="/images/about-us/sharjah-private.png"
                     alt="SPEA Logo"
                     fill
-                    className="object-contain"
+                    className="object-contain p-4"
                   />
                 </div>
-                <div className="space-y-3">
-                  <h3 className="text-3xl font-black text-slate-900 leading-tight">
-                    Sharjah Private Education Authority
-                  </h3>
-                  <p className="text-[#A11D1D] font-black text-lg uppercase tracking-[0.2em]">
-                    Official Regulatory Body (SPEA)
-                  </p>
-                </div>
               </div>
-              <p className="text-lg text-slate-600 leading-relaxed md:text-xl">
-                <strong className="font-black text-slate-900">The Exam Preparation & Testing House L.L.C</strong> is regulated by Sharjah Private Education Authority (SPEA). SPEA is the official body responsible for overseeing and regulating private education in the Emirate of Sharjah. SPEA was established by Emiri Decree No. 45 of 2018 issued by H.H. Sheikh Dr. Sultan Bin Mohammed Al Qasimi, Ruler of Sharjah with core responsibilities including Licensing private schools and educational centre and monitoring quality through inspection and performance ratings.
-              </p>
+            </div>
+          </div>
+
+          {/* Right Visual - Reusing collaboration image */}
+          <div className="relative pt-12 lg:pt-0">
+            <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
+              <Image
+                src="/images/who-we-are-collaboration.png"
+                alt="Institutional Quality"
+                fill
+                className="object-cover"
+              />
             </div>
           </div>
         </div>
-      </div>
+      </section>
     </main>
   );
 }
