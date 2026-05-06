@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronRight, ArrowRight, MapPin, Car, Bus, Train, Info, ExternalLink } from "lucide-react";
+import { ArrowRight, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function HowToFindUs() {
@@ -13,13 +13,6 @@ export default function HowToFindUs() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
           {/* Left Content */}
           <div className="space-y-8 animate-fade-up">
-            {/* Breadcrumbs */}
-            <nav className="flex items-center gap-2 text-xs font-bold text-slate-400 mb-4">
-              <Link href="/" className="hover:text-primary transition-colors">Home</Link>
-              <ChevronRight className="w-3 h-3" />
-              <span className="text-slate-900">About Us</span>
-            </nav>
-
             {/* Section Badge */}
             <div className="flex items-center gap-3">
               <div className="w-6 h-[2px] bg-primary" />
@@ -270,16 +263,16 @@ export default function HowToFindUs() {
               </div>
               <div className="space-y-8">
                 <div className="space-y-2">
-                  <p className="text-primary font-black uppercase text-xs tracking-widest">On-Site Parking</p>
+                  <p className="text-primary font-black uppercase text-base tracking-widest">On-Site Parking</p>
                   <p className="text-slate-400 text-sm leading-relaxed">There are visitor parking spaces available at the back of Tabarak Tower.</p>
                 </div>
                 <div className="space-y-2 border-t border-white/10 pt-8">
-                  <p className="text-primary font-black uppercase text-xs tracking-widest">Public Parking</p>
+                  <p className="text-primary font-black uppercase text-base tracking-widest">Public Parking</p>
                   <div className="space-y-4">
                     <p className="text-slate-400 text-sm leading-relaxed">
                       Metered parking is also available near the tower at a rate of AED 2 per hour. Please check with SRTA in Sharjah for any recent updates on metered parking and payment options.
                     </p>
-                    <p className="text-white/80 text-xs italic font-medium leading-relaxed">
+                    <p className="text-white/80 text-base italic font-medium leading-relaxed">
                       This guide is aimed at helping you reach <span className="text-white font-black">The Exam Preparation & Testing House L.L.C</span> in Sharjah with ease.
                     </p>
                   </div>

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronRight, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function VisionAndMission() {
@@ -13,13 +13,6 @@ export default function VisionAndMission() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
           {/* Left Content */}
           <div className="space-y-8 animate-fade-up">
-            {/* Breadcrumbs */}
-            <nav className="flex items-center gap-2 text-xs font-bold text-slate-400 mb-4">
-              <Link href="/" className="hover:text-primary transition-colors">Home</Link>
-              <ChevronRight className="w-3 h-3" />
-              <span className="text-slate-900">About Us</span>
-            </nav>
-
             {/* Section Badge */}
             <div className="flex items-center gap-3">
               <div className="w-6 h-[2px] bg-primary" />
@@ -103,9 +96,9 @@ export default function VisionAndMission() {
 
             {/* Core Values List */}
             <div className="space-y-6">
-               <h3 className="text-lg font-black text-slate-900 uppercase tracking-wider">Core Values</h3>
-               <div className="grid gap-6">
-                 {[
+              <h3 className="text-lg font-black text-slate-900 uppercase tracking-wider">Core Values</h3>
+              <div className="grid gap-6">
+                {[
                   {
                     title: "Simplify Complexity",
                     text: "To simplify the complexities in a test’s procedure that hinder the examinee’s comprehension skills. We employ unique resources and technology to make students understand tough tasks easily."
@@ -118,18 +111,18 @@ export default function VisionAndMission() {
                     title: "Torch Bearer",
                     text: "By aiding students in picking a suitable Exam Preparation Course, TEPTH ought to be the torch bearer of knowledge and skills."
                   }
-                 ].map((value, idx) => (
-                   <div key={idx} className="flex gap-6 items-start p-6 bg-slate-50 rounded-2xl border border-slate-100 hover:border-primary/20 transition-colors group">
-                     <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center text-primary font-black shrink-0 group-hover:bg-primary group-hover:text-white transition-colors">
-                       0{idx + 1}
-                     </div>
-                     <div className="space-y-2">
-                       <h4 className="font-black text-slate-900 uppercase text-sm tracking-widest">{value.title}</h4>
-                       <p className="text-slate-500 text-sm leading-relaxed">{value.text}</p>
-                     </div>
-                   </div>
-                 ))}
-               </div>
+                ].map((value, idx) => (
+                  <div key={idx} className="flex gap-6 items-start p-6 bg-slate-50 rounded-2xl border border-slate-100 hover:border-primary/20 transition-colors group">
+                    <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center text-primary font-black shrink-0 group-hover:bg-primary group-hover:text-white transition-colors">
+                      0{idx + 1}
+                    </div>
+                    <div className="space-y-2">
+                      <h4 className="font-black text-slate-900 uppercase text-sm tracking-widest">{value.title}</h4>
+                      <p className="text-slate-500 text-sm leading-relaxed">{value.text}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 

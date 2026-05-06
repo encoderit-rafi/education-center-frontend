@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronRight, ArrowRight, Award, ShieldCheck } from "lucide-react";
+import { ArrowRight, Award, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function Accreditation() {
@@ -13,13 +13,6 @@ export default function Accreditation() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
           {/* Left Content */}
           <div className="space-y-8 animate-fade-up">
-            {/* Breadcrumbs */}
-            <nav className="flex items-center gap-2 text-xs font-bold text-slate-400 mb-4">
-              <Link href="/" className="hover:text-primary transition-colors">Home</Link>
-              <ChevronRight className="w-3 h-3" />
-              <span className="text-slate-900">About Us</span>
-            </nav>
-
             {/* Section Badge */}
             <div className="flex items-center gap-3">
               <div className="w-6 h-[2px] bg-primary" />

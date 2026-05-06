@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronRight, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function WhyChooseUs() {
@@ -13,13 +13,6 @@ export default function WhyChooseUs() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
           {/* Left Content */}
           <div className="space-y-8 animate-fade-up">
-            {/* Breadcrumbs */}
-            <nav className="flex items-center gap-2 text-xs font-bold text-slate-400 mb-4">
-              <Link href="/" className="hover:text-primary transition-colors">Home</Link>
-              <ChevronRight className="w-3 h-3" />
-              <span className="text-slate-900">About Us</span>
-            </nav>
-
             {/* Section Badge */}
             <div className="flex items-center gap-3">
               <div className="w-6 h-[2px] bg-primary" />
@@ -31,7 +24,7 @@ export default function WhyChooseUs() {
             {/* Main Heading */}
             <h1 className="text-3xl md:text-5xl font-black text-slate-900 leading-[1.1] tracking-tight uppercase">
               Invest Less & <br />
-              Gain More <span className="text-primary italic">From TEPTH.</span>
+              Gain More <span className="text-primary">From TEPTH.</span>
             </h1>
 
             {/* Description */}
@@ -87,7 +80,7 @@ export default function WhyChooseUs() {
             <div className="space-y-4">
               <h2 className="text-3xl md:text-5xl font-black text-slate-900 leading-tight tracking-tight uppercase">
                 Your Success <br />
-                Is <span className="text-primary italic">Ours.</span>
+                Is <span className="text-primary">Ours.</span>
               </h2>
             </div>
 
@@ -104,7 +97,7 @@ export default function WhyChooseUs() {
             {/* Feature Block */}
             <div className="bg-primary/5 border border-primary/10 rounded-[2rem] p-10 md:p-14 shadow-sm group hover:bg-primary transition-colors duration-500">
               <p className="text-lg md:text-xl text-slate-800 leading-relaxed font-black group-hover:text-white">
-                <span className="text-primary italic group-hover:text-white transition-colors">TEPTH</span> works on an adaptive approach, offering flexible and convenient prep options analyzed through performance custom-learning plans to ensure good results.
+                <span className="text-primary group-hover:text-white transition-colors">TEPTH</span> works on an adaptive approach, offering flexible and convenient prep options analyzed through performance custom-learning plans to ensure good results.
               </p>
             </div>
           </div>
