@@ -23,21 +23,22 @@ import FreeConsultation from "@/app/free-consultation/_components/free-consultat
 
 const seltCourse = {
   id: "selt",
-  title: "SELT (Skills for English) Preparation",
+  title: "Skills for English - SELT",
   exam: {
     name: "SELT",
     fullName: "Skills for English (SELT)",
     description:
-      "Skills for English (SELT) is an English test approved by the UK Home Office for visa and immigration applications to the United Kingdom. It is required for various UK visa categories, including work visas, family visas, and settlement applications.",
+      "Skills for English (SELT) is an English test approved by the UK Home Office for visa and immigration applications to the United Kingdom. It is required for various UK visa categories, including work visas, family visas, and settlement applications. Only specific approved exams fall under the SELT category, such as certain versions of IELTS or language tests provided by authorized testing providers.",
     usage: [
       "UK Work Visas",
-      "UK Family Visas",
+      "UK Family and Spouse Visas",
       "UK Settlement (Indefinite Leave to Remain)",
+      "UK Home Office approved",
     ],
     types: [
       {
-        name: "SELT A1/A2/B1/B2/C1/C2",
-        purpose: "UK Visa and Immigration compliance",
+        name: "SELT A1-C2",
+        purpose: "Visa and immigration applications",
       },
     ],
   },
@@ -49,11 +50,12 @@ const seltCourse = {
       price: 4850,
       currency: "AED",
       description:
-        "Personalized UK visa-focused preparation. Master the specific level (A1 to C2) required for your visa category with intensive one-to-one coaching.",
+        "The Skills for English (SELT) Private One-to-One Course, also known as our VIP preparation program, offers the most personalized and intensive exam preparation available at TEPTH. Every session is tailored to your current level, target score, and exam deadline.",
       bestFor: [
-        "Urgent UK visa applications",
-        "Specific CEFR level requirements",
-        "Focused attention on UK-specific exam tasks",
+        "Need to achieve a high score CLB 8+",
+        "Limited preparation timeframe",
+        "Prefer individual attention & feedback",
+        "Improve specific exam sections quickly",
       ],
       details: {
         duration: "24 Hours",
@@ -68,16 +70,18 @@ const seltCourse = {
       price: 2850,
       currency: "AED",
       description:
-        "Small group sessions for candidates applying for the same UK visa level. Interactive practice for speaking and listening modules.",
+        "Designed for candidates who prefer a small learning environment while still benefiting from collaboration. With only two students, the instructor provides detailed guidance while creating opportunities for peer learning and discussion.",
       bestFor: [
-        "Couples or colleagues applying together",
-        "Interactive communicative practice",
-        "Cost-effective expert coaching",
+        "Interactive learning preference",
+        "Collaborative problem solving",
+        "Small, supportive environment",
+        "Friends or family preparing together",
       ],
       details: {
         duration: "24 Hours",
         completionTime: "6 Weeks",
         schedule: "Flexible",
+        classSize: "2 Students Only",
       },
     },
     {
@@ -87,30 +91,33 @@ const seltCourse = {
       price: 1850,
       currency: "AED",
       description:
-        "Structured group training for common SELT levels. Covers all required components with expert guidance on UK Home Office standards.",
+        "A dynamic classroom environment that covers all exam sections. Small groups ensure every student remains actively involved, fostering motivation and accountability alongside others with similar goals.",
       bestFor: [
-        "Structured learning path",
-        "Peer motivation and engagement",
-        "Affordable high-quality preparation",
+        "Dynamic classroom preference",
+        "Motivation through peer engagement",
+        "Structured collaborative learning",
+        "Structured program coverage",
       ],
       details: {
         duration: "24 Hours",
         completionTime: "6 Weeks",
         schedule: "Flexible",
+        classSize: "Small Groups",
       },
     },
     {
       id: "online",
-      title: "Online Preparation Course",
+      title: "Online One-to-One Preparation Course",
       type: "Online",
       price: 4850,
       currency: "AED",
       description:
-        "Live interactive SELT training delivered online. Ideal for international candidates preparing for their UK visa requirements from abroad.",
+        "High-quality exam training delivered through live interactive sessions. Ideal for candidates who prefer studying from home or have demanding work schedules that make commuting difficult.",
       bestFor: [
-        "Preparing from outside the UAE",
-        "Flexible study schedules",
-        "Direct access to SELT experts online",
+        "Studying from home preference",
+        "Demanding work schedules",
+        "Live instructor interaction",
+        "Flexible scheduling options",
       ],
       details: {
         duration: "20 Hours",
@@ -144,7 +151,7 @@ export default function ExamPreparationSELT() {
                 <div>
                   <h3 className="text-xs font-black uppercase tracking-widest text-slate-400 mb-4 flex items-center gap-2">
                     <Target className="size-4 text-primary" />
-                    Key Usage
+                    Key Benefits
                   </h3>
                   <ul className="space-y-3">
                     {seltCourse.exam.usage.map((item, i) => (
@@ -161,7 +168,7 @@ export default function ExamPreparationSELT() {
                 <div>
                   <h3 className="text-xs font-black uppercase tracking-widest text-slate-400 mb-4 flex items-center gap-2">
                     <Zap className="size-4 text-primary" />
-                    Available Levels
+                    Focus Area
                   </h3>
                   <ul className="space-y-3">
                     {seltCourse.exam.types.map((type, i) => (
@@ -170,7 +177,7 @@ export default function ExamPreparationSELT() {
                         className="flex items-start gap-2 text-sm font-bold text-slate-700"
                       >
                         <CheckCircle2 className="size-4 text-primary shrink-0 mt-0.5" />
-                        {type.name}
+                        {type.purpose}
                       </li>
                     ))}
                   </ul>
@@ -203,10 +210,10 @@ export default function ExamPreparationSELT() {
         <div className="container mx-auto px-4 lg:px-8 max-w-7xl">
           <div className="mb-20 text-center max-w-3xl mx-auto space-y-4">
             <h2 className="text-4xl font-black text-slate-900 tracking-tight leading-tight">
-              SELT <span className="text-primary">Preparation Path</span>
+              Skills for English <span className="text-primary">Preparation Path</span>
             </h2>
             <p className="text-slate-600 text-lg font-medium leading-relaxed">
-              Ensure your UK visa success with our specialized Skills for English (SELT) programs. Choose the format that best fits your visa timeline and level requirements.
+              Achieve your UK visa goals with our specialized Secure English Language Test (SELT) preparation programs.
             </p>
           </div>
 
@@ -286,7 +293,7 @@ export default function ExamPreparationSELT() {
                   </div>
 
                   <Link
-                    href="#booking-section"
+                    href={`#booking-section?plan=${course.id}`}
                     className={cn(
                       buttonVariants({
                         variant: index === 0 ? "default" : "outline",

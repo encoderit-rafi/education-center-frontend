@@ -28,11 +28,11 @@ const toeflCourse = {
     name: "TOEFL iBT",
     fullName: "Test of English as a Foreign Language",
     description:
-      "The TOEFL iBT is one of the most respected English proficiency exams, widely used for university admission, especially in the United States and Canada. It is accepted by more than 11,500 institutions in over 160 countries.",
+      "The TOEFL iBT is one of the most respected English proficiency exams, widely used for university admission, especially in the United States and Canada. It is accepted by more than 11,500 institutions in over 160 countries. The exam measures academic English skills needed for studying in an English-speaking environment.",
     usage: [
       "University admission in USA & Canada",
       "Postgraduate studies abroad",
-      "Professional licensing",
+      "Academic English communication",
     ],
     types: [
       {
@@ -49,11 +49,12 @@ const toeflCourse = {
       price: 4850,
       currency: "AED",
       description:
-        "The most personalized and intensive TOEFL preparation available. Every session is tailored to your target score and specific weaknesses in academic communication.",
+        "The TOEFL iBT Private One-to-One Course offers the most personalized and intensive preparation available. Every session is tailored to your current level, target score, and exam deadline, focusing on realistic tasks and proven strategies.",
       bestFor: [
-        "Candidates aiming for high scores (100+)",
+        "Need to achieve a high score",
         "Limited preparation timeframe",
-        "Focused attention on specific modules",
+        "Prefer individual attention & feedback",
+        "Improve specific sections quickly",
       ],
       details: {
         duration: "24 Hours",
@@ -68,16 +69,18 @@ const toeflCourse = {
       price: 2850,
       currency: "AED",
       description:
-        "A small-group format combining personalized instruction with collaboration. Ideal for practicing academic discussions and peer evaluation.",
+        "Designed for candidates who prefer a small learning environment while benefiting from collaboration. With only two students, the instructor provides detailed guidance while creating opportunities for peer learning and discussion.",
       bestFor: [
         "Interactive learning preference",
         "Collaborative problem solving",
-        "Balanced peer and instructor focus",
+        "Small, supportive environment",
+        "Friends or family preparing together",
       ],
       details: {
         duration: "24 Hours",
         completionTime: "6 Weeks",
         schedule: "Flexible",
+        classSize: "2 Students Only",
       },
     },
     {
@@ -87,16 +90,18 @@ const toeflCourse = {
       price: 1850,
       currency: "AED",
       description:
-        "A dynamic classroom experience with structured learning and expert guidance in a collaborative academic environment.",
+        "A dynamic classroom environment that covers all exam sections. Small groups ensure every student remains actively involved, fostering motivation and accountability alongside others with similar goals.",
       bestFor: [
         "Dynamic classroom preference",
         "Motivation through peer engagement",
-        "Structured group academic training",
+        "Structured collaborative learning",
+        "Practical strategies & peer practice",
       ],
       details: {
         duration: "24 Hours",
         completionTime: "6 Weeks",
         schedule: "Flexible",
+        classSize: "Small Groups",
       },
     },
     {
@@ -106,11 +111,12 @@ const toeflCourse = {
       price: 4850,
       currency: "AED",
       description:
-        "Live interactive TOEFL training delivered online. Same high-quality strategies and feedback from the comfort of your home.",
+        "High-quality exam training delivered through live interactive sessions. Ideal for candidates who prefer studying from home or have demanding schedules that make commuting difficult.",
       bestFor: [
-        "Busy professional schedules",
         "Studying from home preference",
+        "Demanding work schedules",
         "Live interaction without commuting",
+        "Flexible real-time instruction",
       ],
       details: {
         duration: "20 Hours",
@@ -161,7 +167,7 @@ export default function ExamPreparationTOEFL() {
                 <div>
                   <h3 className="text-xs font-black uppercase tracking-widest text-slate-400 mb-4 flex items-center gap-2">
                     <Zap className="size-4 text-primary" />
-                    Available Types
+                    Focus Area
                   </h3>
                   <ul className="space-y-3">
                     {toeflCourse.exam.types.map((type, i) => (
@@ -170,7 +176,7 @@ export default function ExamPreparationTOEFL() {
                         className="flex items-start gap-2 text-sm font-bold text-slate-700"
                       >
                         <CheckCircle2 className="size-4 text-primary shrink-0 mt-0.5" />
-                        {type.name}
+                        {type.purpose}
                       </li>
                     ))}
                   </ul>
@@ -286,7 +292,7 @@ export default function ExamPreparationTOEFL() {
                   </div>
 
                   <Link
-                    href="#booking-section"
+                    href={`#booking-section?plan=${course.id}`}
                     className={cn(
                       buttonVariants({
                         variant: index === 0 ? "default" : "outline",

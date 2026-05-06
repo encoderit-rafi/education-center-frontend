@@ -22,17 +22,18 @@ import ExamPreparationForm from "../_components/exam-preparation-form";
 import FreeConsultation from "@/app/free-consultation/_components/free-consultation";
 
 const pteCourse = {
-  id: "pte",
-  title: "PTE Academic Preparation",
+  id: "pte-academic",
+  title: "PTE Academic",
   exam: {
     name: "PTE Academic",
     fullName: "Pearson Test of English",
     description:
-      "The PTE Academic is a fully computer-based English proficiency exam developed by Pearson. It is widely accepted by thousands of universities and governments, including Australia, Canada, and New Zealand. Results are typically available within 48 hours.",
+      "The PTE Academic is a fully computer-based English proficiency exam developed by Pearson. It is widely accepted by thousands of universities and governments around the world, including Australia, Canada, and New Zealand. Results are typically available within 48 hours. The test uses advanced AI scoring technology to evaluate speaking, writing, listening, and reading skills objectively.",
     usage: [
-      "Fast result turnaround (48 hours)",
-      "Immigration to Australia & New Zealand",
+      "Fast results turnaround (48 hours)",
+      "Immigration to Australia, Canada & NZ",
       "Global university admission",
+      "Advanced AI scoring technology",
     ],
     types: [
       {
@@ -49,11 +50,12 @@ const pteCourse = {
       price: 4850,
       currency: "AED",
       description:
-        "Intensive, AI-focused preparation built around PTE's unique computer-based scoring system. Personalized attention to master every question type.",
+        "The PTE Private One-to-One Course, also known as our VIP preparation program, offers the most personalized and intensive exam preparation available at TEPTH. Every session is tailored to your current level, target score, and exam deadline.",
       bestFor: [
-        "Candidates aiming for high scores (79+)",
-        "Fast preparation requirements",
-        "Mastering AI-driven scoring criteria",
+        "Need to achieve a high score 79+",
+        "Limited preparation timeframe",
+        "Prefer individual attention & feedback",
+        "Improve specific exam sections quickly",
       ],
       details: {
         duration: "24 Hours",
@@ -68,16 +70,18 @@ const pteCourse = {
       price: 2850,
       currency: "AED",
       description:
-        "Small group training focusing on collaborative practice and real-time feedback. Balanced focus on all four communicative skills.",
+        "Designed for candidates who prefer a small learning environment while still benefiting from collaboration. With only two students, the instructor provides detailed guidance while creating opportunities for peer learning and discussion.",
       bestFor: [
-        "Learning with a partner",
-        "Interactive practice sessions",
-        "Focused feedback in a small group",
+        "Interactive learning preference",
+        "Collaborative problem solving",
+        "Small, supportive environment",
+        "Friends or family preparing together",
       ],
       details: {
         duration: "24 Hours",
         completionTime: "6 Weeks",
         schedule: "Flexible",
+        classSize: "2 Students Only",
       },
     },
     {
@@ -87,16 +91,18 @@ const pteCourse = {
       price: 1850,
       currency: "AED",
       description:
-        "Structured classroom training covering proven PTE strategies, time-management, and high-frequency exam questions.",
+        "A dynamic classroom environment that covers all exam sections. Small groups ensure every student remains actively involved, fostering motivation and accountability alongside others with similar goals.",
       bestFor: [
-        "Structured learning environment",
-        "Collaborative group motivation",
-        "Affordable expert-led preparation",
+        "Dynamic classroom preference",
+        "Motivation through peer engagement",
+        "Structured collaborative learning",
+        "Structured program coverage",
       ],
       details: {
         duration: "24 Hours",
         completionTime: "6 Weeks",
         schedule: "Flexible",
+        classSize: "Small Groups",
       },
     },
     {
@@ -106,11 +112,12 @@ const pteCourse = {
       price: 4850,
       currency: "AED",
       description:
-        "Live interactive PTE training. Access expert coaching and simulation materials from anywhere with flexible scheduling.",
+        "High-quality exam training delivered through live interactive sessions. Ideal for candidates who prefer studying from home or have demanding work schedules that make commuting difficult.",
       bestFor: [
-        "Remote preparation preference",
-        "Flexible study hours",
-        "Live interaction with PTE experts",
+        "Studying from home preference",
+        "Demanding work schedules",
+        "Live instructor interaction",
+        "Flexible scheduling options",
       ],
       details: {
         duration: "20 Hours",
@@ -121,7 +128,7 @@ const pteCourse = {
   ],
 };
 
-export default function ExamPreparationPTE() {
+export default function ExamPreparationPTEAcademic() {
   return (
     <div className="min-h-screen bg-white">
       {/* ── Hero Section ── */}
@@ -144,7 +151,7 @@ export default function ExamPreparationPTE() {
                 <div>
                   <h3 className="text-xs font-black uppercase tracking-widest text-slate-400 mb-4 flex items-center gap-2">
                     <Target className="size-4 text-primary" />
-                    Key Usage
+                    Key Benefits
                   </h3>
                   <ul className="space-y-3">
                     {pteCourse.exam.usage.map((item, i) => (
@@ -161,7 +168,7 @@ export default function ExamPreparationPTE() {
                 <div>
                   <h3 className="text-xs font-black uppercase tracking-widest text-slate-400 mb-4 flex items-center gap-2">
                     <Zap className="size-4 text-primary" />
-                    Available Types
+                    Focus Area
                   </h3>
                   <ul className="space-y-3">
                     {pteCourse.exam.types.map((type, i) => (
@@ -170,7 +177,7 @@ export default function ExamPreparationPTE() {
                         className="flex items-start gap-2 text-sm font-bold text-slate-700"
                       >
                         <CheckCircle2 className="size-4 text-primary shrink-0 mt-0.5" />
-                        {type.name}
+                        {type.purpose}
                       </li>
                     ))}
                   </ul>
@@ -203,10 +210,10 @@ export default function ExamPreparationPTE() {
         <div className="container mx-auto px-4 lg:px-8 max-w-7xl">
           <div className="mb-20 text-center max-w-3xl mx-auto space-y-4">
             <h2 className="text-4xl font-black text-slate-900 tracking-tight leading-tight">
-              PTE <span className="text-primary">Preparation Path</span>
+              PTE Academic <span className="text-primary">Preparation Path</span>
             </h2>
             <p className="text-slate-600 text-lg font-medium leading-relaxed">
-              Master the computer-based PTE exam with our strategic preparation programs. Choose the format that maximizes your practice and potential.
+              Master the computer-based PTE exam with our specialized training programs. Choose the format that suits your goals.
             </p>
           </div>
 
@@ -286,7 +293,7 @@ export default function ExamPreparationPTE() {
                   </div>
 
                   <Link
-                    href="#booking-section"
+                    href={`#booking-section?plan=${course.id}`}
                     className={cn(
                       buttonVariants({
                         variant: index === 0 ? "default" : "outline",
@@ -308,7 +315,7 @@ export default function ExamPreparationPTE() {
         <div className="container mx-auto px-4 max-w-5xl">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-black text-slate-900 lg:text-5xl mb-6">
-              Enroll in <span className="text-primary">PTE Preparation</span>
+              Enroll in <span className="text-primary">PTE Academic Preparation</span>
             </h2>
             <p className="text-slate-600 text-lg">
               Secure your spot in our premium preparation program. Select your preferred start date and finalize your enrollment below.

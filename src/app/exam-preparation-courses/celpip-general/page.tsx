@@ -22,22 +22,23 @@ import ExamPreparationForm from "../_components/exam-preparation-form";
 import FreeConsultation from "@/app/free-consultation/_components/free-consultation";
 
 const celpipCourse = {
-  id: "celpip",
-  title: "CELPIP General Preparation",
+  id: "celpip-general",
+  title: "CELPIP General",
   exam: {
-    name: "CELPIP",
+    name: "CELPIP General",
     fullName: "Canadian English Language Proficiency Index Program",
     description:
-      "The CELPIP test is specifically designed for Canadian immigration and citizenship. Approved by IRCC, it uses Canadian English and real-life scenarios, making it highly practical for candidates planning to live and work in Canada.",
+      "The CELPIP test is specifically designed for Canadian immigration and citizenship applications. It is approved by Immigration, Refugees and Citizenship Canada (IRCC) and is widely used for permanent residency and citizenship processes. Unlike some other exams, CELPIP uses Canadian English accents and real-life scenarios, making it highly practical for candidates planning to live and work in Canada.",
     usage: [
-      "Canadian Permanent Residency",
+      "Permanent Residency in Canada",
       "Canadian Citizenship applications",
-      "Professional certification in Canada",
+      "Work permits and professional registration",
+      "Approved by IRCC",
     ],
     types: [
       {
-        name: "CELPIP-General",
-        purpose: "Immigration and citizenship",
+        name: "CELPIP General",
+        purpose: "Immigration and citizenship purposes",
       },
     ],
   },
@@ -49,11 +50,12 @@ const celpipCourse = {
       price: 4850,
       currency: "AED",
       description:
-        "The most personalized CELPIP preparation program. Focused attention on Canadian English accents and practical communication scenarios required for CLB 8+.",
+        "The CELPIP Private One-to-One Course, also known as our VIP preparation program, offers the most personalized and intensive exam preparation available at TEPTH. Every session is tailored to your current level, target score, and exam deadline.",
       bestFor: [
-        "Candidates aiming for high CLB levels (8+)",
-        "Limited timeframe for immigration",
-        "Personalized attention on specific modules",
+        "Need to achieve a high score CLB 8+",
+        "Limited preparation timeframe",
+        "Prefer individual attention & feedback",
+        "Improve specific exam sections quickly",
       ],
       details: {
         duration: "24 Hours",
@@ -68,16 +70,18 @@ const celpipCourse = {
       price: 2850,
       currency: "AED",
       description:
-        "Small group training for Canadian immigration candidates. Collaborative practice focusing on real-life speaking and writing tasks.",
+        "Designed for candidates who prefer a small learning environment while still benefiting from collaboration. With only two students, the instructor provides detailed guidance while creating opportunities for peer learning and discussion.",
       bestFor: [
-        "Interactive practice preference",
-        "Collaborative peer learning",
-        "Balanced instructor focus",
+        "Interactive learning preference",
+        "Collaborative problem solving",
+        "Small, supportive environment",
+        "Friends or family preparing together",
       ],
       details: {
         duration: "24 Hours",
         completionTime: "6 Weeks",
         schedule: "Flexible",
+        classSize: "2 Students Only",
       },
     },
     {
@@ -87,16 +91,18 @@ const celpipCourse = {
       price: 1850,
       currency: "AED",
       description:
-        "Structured classroom training covering all CELPIP modules. Master the computer-based format with expert-led group sessions.",
+        "A dynamic classroom environment that covers all exam sections. Small groups ensure every student remains actively involved, fostering motivation and accountability alongside others with similar goals.",
       bestFor: [
-        "Structured group motivation",
-        "Dynamic classroom interaction",
-        "Comprehensive CELPIP strategy training",
+        "Dynamic classroom preference",
+        "Motivation through peer engagement",
+        "Structured collaborative learning",
+        "Practical strategies & peer practice",
       ],
       details: {
         duration: "24 Hours",
         completionTime: "6 Weeks",
         schedule: "Flexible",
+        classSize: "Small Groups",
       },
     },
     {
@@ -106,11 +112,12 @@ const celpipCourse = {
       price: 4850,
       currency: "AED",
       description:
-        "Live interactive CELPIP training delivered online. Perfect for busy candidates preparing for their Canadian journey from home.",
+        "High-quality exam training delivered through live interactive sessions. Ideal for candidates who prefer studying from home or have demanding work schedules that make commuting difficult.",
       bestFor: [
-        "Remote preparation preference",
-        "Busy work or travel schedules",
-        "Live instructor guidance online",
+        "Studying from home preference",
+        "Demanding work schedules",
+        "Live instructor interaction",
+        "Flexible scheduling options",
       ],
       details: {
         duration: "20 Hours",
@@ -121,7 +128,7 @@ const celpipCourse = {
   ],
 };
 
-export default function ExamPreparationCELPIP() {
+export default function ExamPreparationCELPIPGeneral() {
   return (
     <div className="min-h-screen bg-white">
       {/* ── Hero Section ── */}
@@ -144,7 +151,7 @@ export default function ExamPreparationCELPIP() {
                 <div>
                   <h3 className="text-xs font-black uppercase tracking-widest text-slate-400 mb-4 flex items-center gap-2">
                     <Target className="size-4 text-primary" />
-                    Key Usage
+                    Key Benefits
                   </h3>
                   <ul className="space-y-3">
                     {celpipCourse.exam.usage.map((item, i) => (
@@ -161,7 +168,7 @@ export default function ExamPreparationCELPIP() {
                 <div>
                   <h3 className="text-xs font-black uppercase tracking-widest text-slate-400 mb-4 flex items-center gap-2">
                     <Zap className="size-4 text-primary" />
-                    Available Types
+                    Focus Area
                   </h3>
                   <ul className="space-y-3">
                     {celpipCourse.exam.types.map((type, i) => (
@@ -170,7 +177,7 @@ export default function ExamPreparationCELPIP() {
                         className="flex items-start gap-2 text-sm font-bold text-slate-700"
                       >
                         <CheckCircle2 className="size-4 text-primary shrink-0 mt-0.5" />
-                        {type.name}
+                        {type.purpose}
                       </li>
                     ))}
                   </ul>
@@ -203,10 +210,10 @@ export default function ExamPreparationCELPIP() {
         <div className="container mx-auto px-4 lg:px-8 max-w-7xl">
           <div className="mb-20 text-center max-w-3xl mx-auto space-y-4">
             <h2 className="text-4xl font-black text-slate-900 tracking-tight leading-tight">
-              CELPIP <span className="text-primary">Preparation Path</span>
+              CELPIP General <span className="text-primary">Preparation Path</span>
             </h2>
             <p className="text-slate-600 text-lg font-medium leading-relaxed">
-              Achieve your Canadian goals with our focused CELPIP programs. Choose the training format that best supports your target CLB score.
+              Master the CELPIP exam with our strategic preparation programs tailored for Canadian immigration success.
             </p>
           </div>
 
@@ -286,7 +293,7 @@ export default function ExamPreparationCELPIP() {
                   </div>
 
                   <Link
-                    href="#booking-section"
+                    href={`#booking-section?plan=${course.id}`}
                     className={cn(
                       buttonVariants({
                         variant: index === 0 ? "default" : "outline",
@@ -308,7 +315,7 @@ export default function ExamPreparationCELPIP() {
         <div className="container mx-auto px-4 max-w-5xl">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-black text-slate-900 lg:text-5xl mb-6">
-              Enroll in <span className="text-primary">CELPIP Preparation</span>
+              Enroll in <span className="text-primary">CELPIP General Preparation</span>
             </h2>
             <p className="text-slate-600 text-lg">
               Secure your spot in our premium preparation program. Select your preferred start date and finalize your enrollment below.
