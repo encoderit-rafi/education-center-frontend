@@ -93,7 +93,10 @@ const exams = [
     icon: CheckCircle2,
   },
 ];
-
+export const EXAM_PREPARATION_COURSES = exams.map((item) => ({
+  label: item.title,
+  href: `/exam-preparation-courses/${item.id}`,
+}));
 export default function ExamPreparationCoursesPage() {
   return (
     <main className="min-h-screen bg-white">
