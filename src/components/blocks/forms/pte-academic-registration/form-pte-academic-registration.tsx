@@ -32,7 +32,7 @@ import {
   CreditCard,
   ExternalLink
 } from "lucide-react";
-import { RefinedPteAcademicSchema, type TPteAcademicFormSchema } from "./-type";
+import { RefinedPteAcademicSchema, type TPteAcademicFormSchema } from "./_type";
 import { SearchableDropdown } from "@/components/ui/searchable-dropdown";
 import { CountryDropdown } from "@/components/ui/country-dropdown";
 import { DateTimePicker } from "@/components/ui/date-time-picker";

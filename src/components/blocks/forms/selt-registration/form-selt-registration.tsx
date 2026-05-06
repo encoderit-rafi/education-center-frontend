@@ -36,7 +36,7 @@ import { CountryDropdown } from "@/components/ui/country-dropdown";
 import { SearchableDropdown } from "@/components/ui/searchable-dropdown";
 import { Textarea } from "@/components/ui/textarea";
 
-import { RefinedSeltSchema, type TSeltFormSchema } from "./-type";
+import { RefinedSeltSchema, type TSeltFormSchema } from "./_type";
 
 export default function FormSELTRegistration() {
     const [currentStep, setCurrentStep] = useState(1);

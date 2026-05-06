@@ -27,7 +27,7 @@ import {
   ExternalLink,
   ArrowRight,
 } from "lucide-react";
-import { IeltsAcademicSchema, type TIeltsAcademicSchema } from "./-type";
+import { IeltsAcademicSchema, type TIeltsAcademicSchema } from "./_type";
 import { SearchableDropdown } from "@/components/ui/searchable-dropdown";
 import { CountryDropdown } from "@/components/ui/country-dropdown";
 import { DateTimePicker } from "@/components/ui/date-time-picker";
