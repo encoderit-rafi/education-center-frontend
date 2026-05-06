@@ -39,9 +39,9 @@ const BaseCardImportantInfo = ({
   children,
   className,
   ...props
-}: PropsWithChildren & ComponentProps<"p">) => {
+}: PropsWithChildren & ComponentProps<"div">) => {
   return (
-    <p
+    <div
       className={cn(
         "rounded-md border border-dashed border-primary/40 bg-primary/5 p-3 text-xs leading-relaxed text-primary",
         className,
@@ -49,7 +49,7 @@ const BaseCardImportantInfo = ({
       {...props}
     >
       {children}
-    </p>
+    </div>
   );
 };
 const BaseCardIcon = ({

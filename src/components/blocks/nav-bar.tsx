@@ -23,6 +23,7 @@ import { Badge } from "../ui/badge";
 import { exams, exams_types } from "@/lib/data";
 import { cn } from "@/lib/utils";
 import { EXAM_PREPARATION_COURSES_LINKS } from "@/lib/constants/exams";
+import { EXAM_FEES } from "@/app/fees/page";
 
 interface NavItem {
   type: "primary" | "secondary";
@@ -103,14 +104,12 @@ const navigations: NavItem[] = [
   {
     type: "secondary",
     label: "Fees",
-    children: [
-      { label: "IELTS", href: "/fees/ielts" },
-      { label: "PTE", href: "/fees/pte" },
-      { label: "CELPIP", href: "/fees/celpip" },
-      { label: "CAEL", href: "/fees/cael" },
-      { label: "TOEFL", href: "/fees/toefl" },
-      { label: "OET", href: "/fees/oet" },
-    ],
+    children: EXAM_FEES.map((exam) => {
+      return {
+        label: exam.name,
+        href: `/fees#${exam.id}`,
+      };
+    }),
   },
   {
     type: "secondary",
