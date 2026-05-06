@@ -178,9 +178,6 @@ export default function Testimonials() {
     return () => clearInterval(intervalId);
   }, [api]);
 
-  const firstRow = testimonials.slice(0, 4);
-  const secondRow = testimonials.slice(4, 8);
-
   return (
     <section className="py-32 bg-[#F8F9FA] overflow-hidden border-y border-gray-100">
       <div className="max-w-7xl mx-auto text-center mb-20 px-6">
@@ -194,16 +191,41 @@ export default function Testimonials() {
         </p>
       </div>
 
-      {/* Desktop Version: Two-Row Marquee */}
+      {/* Desktop Version: Single Row Marquee */}
       <div className="hidden lg:flex flex-col gap-8">
         <Marquee pauseOnHover className="py-10 [--duration:40s] [--gap:2rem]">
-          {firstRow.map((t, i) => (
+          {testimonials.map((t, i) => (
             <TestimonialCard key={i} t={t} isMarquee />
           ))}
         </Marquee>
       </div>
 
       {/* Mobile/Tablet Version: Carousel */}
+      <div className="lg:hidden px-6">
+        <Carousel setApi={setApi} className="w-full max-w-lg mx-auto">
+          <CarouselContent>
+            {testimonials.map((t, i) => (
+              <CarouselItem key={i}>
+                <div className="p-1">
+                  <TestimonialCard t={t} />
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <div className="flex justify-center gap-2 mt-12">
+            {Array.from({ length: count }).map((_, i) => (
+              <button
+                key={i}
+                className={cn(
+                  "w-2.5 h-2.5 rounded-full transition-all duration-300",
+                  current === i ? "bg-primary w-8" : "bg-gray-300",
+                )}
+                onClick={() => api?.scrollTo(i)}
+              />
+            ))}
+          </div>
+        </Carousel>
+      </div>
     </section>
   );
 }
