@@ -9,61 +9,6 @@ import { ShieldCheck, Monitor, BrainCircuit, Headphones, Globe2 } from "lucide-r
 export default function ExamProviderPage() {
   return (
     <div className="min-h-screen font-headline antialiased tracking-tight">
-      {/* Hero Section */}
-      <section className="relative w-full min-h-[870px] flex items-center overflow-hidden bg-slate-50">
-        <div className="absolute inset-0 z-0">
-          <img
-            className="w-full h-full object-cover opacity-20 filter grayscale"
-            alt="Modern high-stakes academic testing center"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUhsnQPDR9wjsMWqPqv6bhwK0035d9W3lCLPxy1BA7jRVLXjmYECZ5AgmaGDJdTzSGEGcPQUbpiESKfuUDQc6_ZyxMcJ9GxYuqfLe2_2CoHmaV5xPKAMh1JJnDc7qNDzSrbqyaIDSsZhBy40KfsZXrD5Pu8UIGQaR2TvUxCG6myMky0NUfQ5Ycsk7zsBuPPpZAqBJqpmJ5Uq3g0b2jvwNP8K51KdPwbWERW_1rwNgqYrCRxW2tQIfnUt3B7ZQlNkEvFwAGncl7IiFu"
-          />
-        </div>
-        <div className="relative z-10 max-w-screen-2xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          <div className="lg:col-span-7">
-            <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary font-bold text-xs uppercase tracking-[0.2em] mb-6">
-              Partnership Excellence
-            </span>
-            <h1 className="text-5xl md:text-7xl font-extrabold text-slate-900 leading-[1.1] tracking-tight mb-8">
-              The Global Standard for <br />
-              <span className="bg-gradient-to-r from-primary to-primary-variant bg-clip-text text-transparent">
-                Exam Delivery.
-              </span>
-            </h1>
-            <p className="text-xl text-slate-600 max-w-xl leading-relaxed mb-10">
-              Join an elite network of institutions leveraging TEPTH's state-of-the-art infrastructure, AI-powered security, and global accreditation framework.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <button className="bg-primary text-white px-10 py-5 rounded-lg font-extrabold text-lg shadow-2xl shadow-primary/20 hover:bg-primary-variant transition-all transform hover:-translate-y-1">
-                Partner With Us
-              </button>
-              <button className="px-10 py-5 rounded-lg font-bold text-lg text-primary border-b-2 border-transparent hover:border-primary transition-all">
-                View Tech Specs
-              </button>
-            </div>
-          </div>
-          <div className="lg:col-span-5 relative">
-            <div className="aspect-square bg-white rounded-2xl overflow-hidden shadow-2xl relative group">
-              <img
-                className="w-full h-full object-cover"
-                alt="Focused professional examiner"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0vfAK9sD2AA8j-EXMUzz-xS95jGKqb2hsRuBl-L2U0R-mVkZXoeZpWhGRStr88uORGg1jcxjoejWaYbZG_DAACSztXxGH6RDhbM3K3XMN1quhq_VF-O-YLrVBSOZDIzvRJ0_qkpgtrZefCqcFIxMjUlZEtFYYrwga3o1ZZdzUS4JxqIkPrSefl_XFMV05EvLQ2HldYp3ldNPg8wlfXdqHg107UtLyh-gRIjOi3Rv2ogdPNpfURxw1jmNZ0jVAaWjwc08DisR9kXyS"
-              />
-              <div className="absolute bottom-6 left-6 right-6 bg-white/70 backdrop-blur-xl p-6 rounded-xl border border-white/40">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white">
-                    <ShieldCheck className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-slate-900">ISO 27001 Certified</h4>
-                    <p className="text-sm text-slate-500">Global Security Standards</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Infrastructure Bento Grid */}
       <section className="py-24 px-8 max-w-screen-2xl mx-auto">
         <div className="mb-16">
@@ -123,7 +68,7 @@ export default function ExamProviderPage() {
       </section>
 
       {/* Partnership CTA Section */}
-      <section className="py-24 bg-slate-900 text-white relative overflow-hidden">
+      {/* <section className="py-24 bg-slate-900 text-white relative overflow-hidden">
         <div className="absolute right-0 top-0 w-1/3 h-full opacity-10 pointer-events-none">
           <svg className="w-full h-full fill-white" viewBox="0 0 100 100">
             <path d="M0,0 L100,0 L100,100 L0,100 Z" fill="none" stroke="currentColor" strokeWidth="0.1"></path>
@@ -144,20 +89,26 @@ export default function ExamProviderPage() {
               </button>
               <div className="flex items-center gap-4 px-4">
                 <div className="flex -space-x-4">
-                  <img
+                  <Image
                     className="w-12 h-12 rounded-full border-4 border-slate-900 object-cover"
                     alt="Corporate partner"
                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRMO1j96NKTuJHoyngBzOyqHfDc6ULKiaSbaN4pLgV1cpGts8P16jSQsAQKTHyzMKF-HD--7N53NQfVn9UvkalLDTZuJQjHQtsGUafpcRXdW5P2xy9y1NF6HjVs_HY6tzC3Y_ZnKH60nn31Ifkq6QDuz6hrC0DGH5xgS58ngJfvHMHuC_8lEUAwuuIdjylXpg44_U9RHtfTadZ7R9lN5C_QYJUP9j7p0TBDUh0up0GcadcPqTTWq9vN40JWoKprCAUMfTUzR6DcTm4"
+                    width={48}
+                    height={48}
                   />
-                  <img
+                  <Image
                     className="w-12 h-12 rounded-full border-4 border-slate-900 object-cover"
                     alt="University representative"
                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6cl9M0QyEa3MGlYe-Hk-L3xN4GVYkdihyws7xRCxV5ubVJg0vG84k6C9O5QHTqKMRwhGotvjvIY5FdUzNasdEzzQkTeQ7CEn51j5RQjgmuZQeygqqIfi2BjCpWczS9lJ_nr9-sJdcUBpdZuVrhuJoIamaPB2D7dHjQB2bya6VFkfXEa9CUJCkfkxaVfBClVS6EWxgmItsuvLyLV2LfbuxYPu4C1LYOQ27ysSlqb9li576UHHvdWUGoQEYDN2q5BjHqRtdias3Evh1"
+                    width={48}
+                    height={48}
                   />
-                  <img
+                  <Image
                     className="w-12 h-12 rounded-full border-4 border-slate-900 object-cover"
                     alt="Exam board official"
                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2zZQsKq2If9NqcaTG_VmTGylKJfbr21rqeziF7Y8291Ydo7Tv68HKYg3B3czRDW_w8bn1QGsu9kSIjVjNw6kmHT04hRK6V_JyKg7je9eHwFC8k2s80mChTKQuKY23ugkLBQmVdMTYawfHiPMYop_zivjY8U26wcfXju2var8nn2lcIFJEt9_Qx3VXYu9MSxSz9tHJxO2tK07OGF_sC0NO938QbhQKA302D5UkBsgduwWixzb9hJsyqpwVZsIVN8yUoNsdHPP912Vq"
+                    width={48}
+                    height={48}
                   />
                 </div>
                 <span className="text-sm font-medium text-slate-400 italic">Trusted by top-tier institutions worldwide</span>
@@ -165,7 +116,8 @@ export default function ExamProviderPage() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 }
+

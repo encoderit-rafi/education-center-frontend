@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function Accreditation() {
   return (
     <main className="py-20 bg-white">
-      <div className="container mx-auto px-6 max-w-4xl">
+      <div className="max-w-screen-2xl mx-auto px-8">
         <div className="space-y-16">
           <div className="space-y-8">
             <div className="space-y-4">

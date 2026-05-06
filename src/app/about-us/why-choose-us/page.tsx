@@ -1,7 +1,7 @@
 export default function WhyChooseUs() {
   return (
     <main className="py-20 bg-white">
-      <div className="container mx-auto px-6 max-w-4xl">
+      <div className="max-w-screen-2xl mx-auto px-8">
         <div className="space-y-16">
           {/* Main Section */}
           <div className="space-y-12">

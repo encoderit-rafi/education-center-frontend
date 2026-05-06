@@ -2,7 +2,7 @@
 export default function WhoWeAre() {
   return (
     <main className="py-20 bg-white">
-      <div className="container mx-auto px-6 max-w-4xl">
+      <div className="max-w-screen-2xl mx-auto px-8">
         <div className="space-y-12">
           {/* Header */}
           <div className="space-y-4">
