@@ -13,8 +13,8 @@ import FreeConsultation from "../free-consultation/_components/free-consultation
 
 export const workshopCards = [
   {
-    id: "ielts-workshop",
-    title: "IELTS Workshops",
+    id: "ielts",
+    title: "IELTS",
     description:
       "Prepare smart with focused IELTS workshops designed for fast improvement and exam readiness.",
     important:
@@ -56,8 +56,8 @@ export const workshopCards = [
   },
 
   {
-    id: "toefl-workshop",
-    title: "TOEFL iBT Workshops",
+    id: "toefl",
+    title: "TOEFL iBT",
     description:
       "Master the fast-paced and adaptive TOEFL with structured, high-impact workshops.",
     important:
@@ -99,8 +99,8 @@ export const workshopCards = [
   },
 
   {
-    id: "celpip-workshop",
-    title: "CELPIP Workshops",
+    id: "celpip-general",
+    title: "CELPIP General",
     description:
       "Build confidence and improve performance with focused CELPIP preparation sessions.",
     important:
@@ -153,7 +153,8 @@ export default function ExamWorkshopsPage() {
         <p className="text-center text-secondary mb-12 text-lg">
           Each workshop is designed around the specific format and scoring
           criteria of its exam. Delivered by certified instructors with deep
-          exam experience, our workshops target your specific weaknesses for rapid improvement.
+          exam experience, our workshops target your specific weaknesses for
+          rapid improvement.
         </p>
       </div>
 
@@ -165,7 +166,9 @@ export default function ExamWorkshopsPage() {
               <BaseCard className="p-8 flex flex-col h-full group">
                 {/* Top Section */}
                 <div className="flex items-center justify-between mb-8">
-                  <BaseCardIcon className="font-black text-sm">0{index + 1}</BaseCardIcon>
+                  <BaseCardIcon className="font-black text-sm">
+                    0{index + 1}
+                  </BaseCardIcon>
                   <BaseCardArrow />
                 </div>
 
@@ -174,7 +177,9 @@ export default function ExamWorkshopsPage() {
                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/5 text-primary text-[10px] font-black uppercase tracking-widest">
                     {card.type} Workshop
                   </div>
-                  <BaseCardTitle className="text-2xl">{card.title}</BaseCardTitle>
+                  <BaseCardTitle className="text-2xl">
+                    {card.title}
+                  </BaseCardTitle>
                   <BaseCardDescription className="text-slate-600 line-clamp-none">
                     {card.description}
                   </BaseCardDescription>
