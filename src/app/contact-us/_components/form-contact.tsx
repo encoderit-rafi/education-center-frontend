@@ -17,6 +17,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 
 
 import { CheckCircle2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const contactSchema = z.object({
   fullName: z
@@ -71,10 +72,10 @@ export default function ContactForm() {
 
   if (isSuccess) {
     return (
-      <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-md p-8 text-center space-y-4">
+      <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-2xl p-8 text-center space-y-4 animate-fade-up">
         <CheckCircle2 className="w-12 h-12 text-emerald-500 mx-auto" />
-        <h3 className="text-2xl font-headline font-bold">Message Sent!</h3>
-        <p className="text-emerald-700">
+        <h3 className="text-2xl font-black uppercase tracking-tight">Message Sent!</h3>
+        <p className="text-emerald-700 font-medium">
           Thank you for reaching out. Our team will get back to you shortly.
         </p>
       </div>
@@ -85,14 +86,14 @@ export default function ContactForm() {
     <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Field data-invalid={!!errors.fullName}>
-          <FieldLabel className="text-xs font-bold text-secondary uppercase tracking-wider ml-1">
-            Full Name <span className="text-red-500">*</span>
+          <FieldLabel className="text-xs font-black text-slate-500 uppercase tracking-[0.2em] ml-1">
+            Full Name <span className="text-primary">*</span>
           </FieldLabel>
           <FieldContent>
             <Input
               placeholder="John Doe"
               {...register("fullName")}
-              className="bg-slate-50 border-slate-200 focus-visible:ring-primary h-12 rounded-md px-6 placeholder:text-gray-500"
+              className="bg-slate-50/50 border-slate-200 focus-visible:ring-primary h-14 rounded-xl px-6 placeholder:text-slate-400 font-medium"
             />
           </FieldContent>
           {errors.fullName && (
@@ -101,15 +102,15 @@ export default function ContactForm() {
         </Field>
 
         <Field data-invalid={!!errors.email}>
-          <FieldLabel className="text-xs font-bold text-secondary uppercase tracking-wider ml-1">
-            Email Address <span className="text-red-500 font-extrabold">*</span>
+          <FieldLabel className="text-xs font-black text-slate-500 uppercase tracking-[0.2em] ml-1">
+            Email Address <span className="text-primary">*</span>
           </FieldLabel>
           <FieldContent>
             <Input
               type="email"
-              placeholder="john@university.edu"
+              placeholder="john@example.com"
               {...register("email")}
-              className="bg-slate-50 border-slate-200 focus-visible:ring-primary h-12 rounded-md px-6 placeholder:text-gray-500"
+              className="bg-slate-50/50 border-slate-200 focus-visible:ring-primary h-14 rounded-xl px-6 placeholder:text-slate-400 font-medium"
             />
           </FieldContent>
           {errors.email && <FieldError>{errors.email.message}</FieldError>}
@@ -117,52 +118,55 @@ export default function ContactForm() {
       </div>
 
       <Field data-invalid={!!errors.subject}>
-        <FieldLabel className="text-xs font-bold text-secondary uppercase tracking-wider ml-1">
-          Subject <span className="text-red-500 font-extrabold">*</span>
+        <FieldLabel className="text-xs font-black text-slate-500 uppercase tracking-[0.2em] ml-1">
+          Subject <span className="text-primary">*</span>
         </FieldLabel>
         <FieldContent>
           <Input
             placeholder="How can we help you?"
             {...register("subject")}
-            className="bg-slate-50 border-slate-200 focus-visible:ring-primary h-12 rounded-md px-6 placeholder:text-gray-500"
+            className="bg-slate-50/50 border-slate-200 focus-visible:ring-primary h-14 rounded-xl px-6 placeholder:text-slate-400 font-medium"
           />
         </FieldContent>
         {errors.subject && <FieldError>{errors.subject.message}</FieldError>}
       </Field>
 
       <Field data-invalid={!!errors.message}>
-        <FieldLabel className="text-xs font-bold text-secondary uppercase tracking-wider ml-1">
-          Message
+        <FieldLabel className="text-xs font-black text-slate-500 uppercase tracking-[0.2em] ml-1">
+          Message <span className="text-primary">*</span>
         </FieldLabel>
         <FieldContent>
           <Textarea
-            placeholder="How can we help illuminate your path?"
-            rows={6}
+            placeholder="Tell us more about your inquiry..."
+            rows={5}
             {...register("message")}
-            className="bg-slate-50 border-slate-200 focus-visible:ring-primary rounded-md p-4 placeholder:text-gray-500"
+            className="bg-slate-50/50 border-slate-200 focus-visible:ring-primary rounded-xl p-6 placeholder:text-slate-400 font-medium resize-none"
           />
         </FieldContent>
         {errors.message && <FieldError>{errors.message.message}</FieldError>}
       </Field>
 
-      <div className="space-y-2">
-        <ReCAPTCHA
-          ref={captchaRef}
-          sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
-          onChange={() => setCaptchaError(null)}
-        />
+      <div className="space-y-4">
+        <div className="scale-90 origin-left">
+          <ReCAPTCHA
+            ref={captchaRef}
+            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
+            onChange={() => setCaptchaError(null)}
+          />
+        </div>
         {captchaError && (
-          <p className="text-red-500 text-sm font-medium">{captchaError}</p>
+          <p className="text-red-500 text-xs font-bold uppercase tracking-wider">{captchaError}</p>
         )}
       </div>
 
-      <button
+      <Button
         type="submit"
         disabled={isSubmitting}
-        className="crimson-gradient text-white w-full md:w-auto px-12 py-4 rounded-md font-headline font-bold text-lg active:scale-95 duration-200 flex justify-center items-center gap-2 cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
+        className="h-14 px-12 rounded-xl font-black uppercase tracking-widest text-xs w-full md:w-auto transition-all active:scale-95"
       >
         {isSubmitting ? "Sending..." : "Send Message"}
-      </button>
+      </Button>
     </form>
   );
 }
+

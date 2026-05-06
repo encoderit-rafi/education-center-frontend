@@ -9,7 +9,7 @@ export default function ExperienceExcellence() {
             <h2 className="text-4xl md:text-5xl font-headline font-extrabold text-secondary leading-tight">
               Comprehensive Exam Services from Highly-Qualified Instructors
             </h2>
-            <p className="text-lg text-on-surface-variant leading-relaxed">
+            <p className="text-base text-on-surface-variant leading-relaxed">
               TEPTH is a renowned UAE-based institution that helps students in
               preparing for and undertaking different international aptitude
               tests in order to meet admission requirements. We provide expert

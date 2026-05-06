@@ -139,14 +139,14 @@ export default function HowToFindUs() {
                 </div>
               </div>
               <div className="relative aspect-[4/3] rounded-[3rem] overflow-hidden shadow-2xl order-1 lg:order-2">
-                <Image src="/images/about-us/taxi.png" alt="Sharjah Taxi" fill className="object-cover hover:scale-105 transition-transform duration-1000" />
+                <Image src="/images/about-us/taxi.png" alt="Sharjah Taxi" fill className="object-cover" />
               </div>
             </div>
 
             {/* 02. Public Bus */}
             <div className="grid lg:grid-cols-2 gap-16 lg:gap-32 items-center">
               <div className="relative aspect-[4/3] rounded-[3rem] overflow-hidden shadow-2xl">
-                <Image src="/images/about-us/public-bus.png" alt="Sharjah Public Bus" fill className="object-cover hover:scale-105 transition-transform duration-1000" />
+                <Image src="/images/about-us/public-bus.png" alt="Sharjah Public Bus" fill className="object-cover" />
               </div>
               <div className="space-y-8">
                 <div className="flex items-center gap-4">
@@ -219,7 +219,7 @@ export default function HowToFindUs() {
                 </div>
               </div>
               <div className="relative aspect-[4/3] rounded-[3rem] overflow-hidden shadow-2xl order-1 lg:order-2">
-                <Image src="/images/about-us/metro.png" alt="Dubai Metro" fill className="object-cover hover:scale-105 transition-transform duration-1000" />
+                <Image src="/images/about-us/metro.png" alt="Dubai Metro" fill className="object-cover" />
               </div>
             </div>
           </div>
@@ -240,7 +240,7 @@ export default function HowToFindUs() {
             <div className="space-y-10">
               {[
                 { from: "Dubai", text: "Take Al Ittihad Road (E11) towards Sharjah. Follow the signs towards Al Mamzar. Turn right onto Al Mamzar Road and continue until you reach Tabarak Tower on your right." },
-                { from: "Ajman, UAQ, or RAK", text: "Drive towards Sharjah on Sheikh Mohammed Bin Zayed Road (E311). Take the exit for Al Mamzar, and follow the signs to reach Al Mamzar Road. Tabarak Tower will be on your right." },
+                { from: "Ajman, Umm Al Quwain, or Ras Al Khaimah", text: "Drive towards Sharjah on Sheikh Mohammed Bin Zayed Road (E311). Take the exit for Al Mamzar, and follow the signs to reach Al Mamzar Road. Tabarak Tower will be on your right." },
                 { from: "Abu Dhabi", text: "Head towards Dubai on Sheikh Zayed Road (E11). Continue towards Al Ittihad Road (E11) into Sharjah. Follow the signs to Al Mamzar, and turn right onto Al Mamzar Road. Tabarak Tower will be on your right." }
               ].map((route, idx) => (
                 <div key={idx} className="flex gap-6 group">
