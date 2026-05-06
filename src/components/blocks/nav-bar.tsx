@@ -15,7 +15,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
-import { Menu } from "lucide-react";
+import { Menu, Search, ChevronRight, ChevronDown } from "lucide-react";
 import SearchCommand from "./search-command";
 import paid_mock_tests from "@/lib/demo-data/paid-mock-tests";
 
@@ -25,12 +25,18 @@ import { cn } from "@/lib/utils";
 import { EXAM_PREPARATION_COURSES_LINKS } from "@/lib/constants/exams";
 import { EXAM_FEES } from "@/app/fees/page";
 
+interface NavChild {
+  label: string;
+  href?: string;
+  children?: { label: string; href: string }[];
+}
+
 interface NavItem {
   type: "primary" | "secondary";
   label: string;
   href?: string;
   badge?: string;
-  children?: { label: string; href: string }[];
+  children?: NavChild[];
 }
 const navigations: NavItem[] = [
   {
@@ -68,12 +74,26 @@ const navigations: NavItem[] = [
     type: "primary",
     label: "Book Exam",
     children: [
-      { label: "IELTS", href: "/book-exams" },
-      { label: "TOEFL iBT", href: "/book-exams" },
-      { label: "PTE", href: "/book-exams" },
-      { label: "CELPIP General", href: "/book-exams" },
-      { label: "CAEL", href: "/book-exams" },
-      { label: "Skills for English (SELT)", href: "/book-exams" },
+      {
+        label: "IELTS",
+        children: [
+          { label: "IELTS Academic", href: "/book-exams/ielts_academic" },
+          { label: "IELTS General", href: "/book-exams/ielts_general" },
+          {
+            label: "IELTS UKVI",
+            href: "/book-exams/ielts_ukvi",
+          },
+          {
+            label: "IELTS Life Skills",
+            href: "/book-exams/ielts_life_skills_a1",
+          },
+        ],
+      },
+      { label: "TOEFL iBT", href: "/book-exams/toefl_ibt" },
+      { label: "PTE", href: "/book-exams/pte_academic" },
+      { label: "CELPIP General", href: "/book-exams/celpip_general" },
+      { label: "CAEL", href: "/book-exams/cael" },
+      { label: "Skills for English (SELT)", href: "/book-exams/selt" },
       {
         label: "Test Day Guidelines",
         href: "/book-exams/test-day-guidelines",
@@ -123,10 +143,17 @@ const navigations: NavItem[] = [
     ],
   },
   {
-    type: "primary",
+    type: "secondary",
     label: "Test Your English",
     href: "/test-your-english",
-    badge: "FREE",
+  },
+  {
+    type: "primary",
+    label: "Exam Proctoring Services",
+    children: [
+      { label: "Institutions", href: "/exam-proctoring-services/institutions" },
+      { label: "Test-Takers", href: "/exam-proctoring-services/test-takers" },
+    ],
   },
   {
     type: "secondary",
@@ -142,15 +169,6 @@ const navigations: NavItem[] = [
       { label: "Exam Provider", href: "/exam-delivery/exam-provider" },
       { label: "Test Takers", href: "/exam-delivery/test-takers" },
       { label: "Vendor", href: "/exam-delivery/vendor" },
-    ],
-  },
-  {
-    type: "secondary",
-
-    label: "Exam Proctoring Services",
-    children: [
-      { label: "Institutions", href: "/exam-proctoring-services/institutions" },
-      { label: "Test-Takers", href: "/exam-proctoring-services/test-takers" },
     ],
   },
   {
@@ -201,15 +219,42 @@ export default function NavBar() {
                       <NavigationMenuContent className="z-50 p-1 min-w-48 border-none bg-primary! text-white! rounded-xl shadow-2xl">
                         <ul className="flex flex-col">
                           {item.children.map((child) => (
-                            <li key={child.label}>
-                              <NavigationMenuLink asChild>
-                                <Link
-                                  href={child.href}
-                                  className="px-4 py-2.5 text-sm  hover:bg-black/10 rounded-lg transition-colors w-full "
-                                >
-                                  {child.label}
-                                </Link>
-                              </NavigationMenuLink>
+                            <li
+                              key={child.label}
+                              className="group/child relative"
+                            >
+                              {child.children ? (
+                                <>
+                                  <div className="flex items-center justify-between px-4 py-2.5 text-sm hover:bg-black/10 rounded-lg transition-colors cursor-default">
+                                    {child.label}
+                                    <ChevronRight className="size-4 ml-2" />
+                                  </div>
+                                  {/* Sub-menu on hover */}
+                                  <div className="absolute left-full top-0 hidden group-hover/child:block p-1 min-w-48 bg-primary text-white rounded-xl shadow-2xl -ml-1 border-l border-white/10">
+                                    <ul className="flex flex-col">
+                                      {child.children.map((sub) => (
+                                        <li key={sub.label}>
+                                          <Link
+                                            href={sub.href}
+                                            className="px-4 py-2.5 text-sm hover:bg-black/10 rounded-lg transition-colors w-full flex"
+                                          >
+                                            {sub.label}
+                                          </Link>
+                                        </li>
+                                      ))}
+                                    </ul>
+                                  </div>
+                                </>
+                              ) : (
+                                <NavigationMenuLink asChild>
+                                  <Link
+                                    href={child.href || "#"}
+                                    className="px-4 py-2.5 text-sm hover:bg-black/10 rounded-lg transition-colors w-full flex"
+                                  >
+                                    {child.label}
+                                  </Link>
+                                </NavigationMenuLink>
+                              )}
                             </li>
                           ))}
                         </ul>
@@ -247,7 +292,7 @@ export default function NavBar() {
             />
             <PopoverContent
               align="end"
-              className="w-64 bg-primary border-none p-1 shadow-2xl rounded-xl z-[60] text-white"
+              className="w-64 bg-primary border-none p-1 shadow-2xl rounded-xl z-[60] text-white overflow-y-auto max-h-[80vh]"
             >
               <NavigationMenu className="max-w-none *:w-full">
                 <NavigationMenuList className="flex-col items-start gap-0">
@@ -261,14 +306,36 @@ export default function NavBar() {
                           <ul className="mb-2">
                             {item.children.map((child) => (
                               <li key={child.label}>
-                                <NavigationMenuLink asChild>
-                                  <Link
-                                    href={child.href}
-                                    className="px-3 py-2 text-sm text-white hover:bg-black/10 rounded-lg transition-colors w-full flex items-center"
-                                  >
-                                    {child.label}
-                                  </Link>
-                                </NavigationMenuLink>
+                                {child.children ? (
+                                  <>
+                                    <div className="px-3 py-2 text-sm text-white/70 font-bold uppercase tracking-widest text-[9px]">
+                                      {child.label}
+                                    </div>
+                                    <ul className="pl-4 mb-2">
+                                      {child.children.map((sub) => (
+                                        <li key={sub.label}>
+                                          <NavigationMenuLink asChild>
+                                            <Link
+                                              href={sub.href}
+                                              className="px-3 py-1.5 text-sm text-white hover:bg-black/10 rounded-lg transition-colors w-full flex items-center"
+                                            >
+                                              {sub.label}
+                                            </Link>
+                                          </NavigationMenuLink>
+                                        </li>
+                                      ))}
+                                    </ul>
+                                  </>
+                                ) : (
+                                  <NavigationMenuLink asChild>
+                                    <Link
+                                      href={child.href || "#"}
+                                      className="px-3 py-2 text-sm text-white hover:bg-black/10 rounded-lg transition-colors w-full flex items-center"
+                                    >
+                                      {child.label}
+                                    </Link>
+                                  </NavigationMenuLink>
+                                )}
                               </li>
                             ))}
                           </ul>
@@ -318,15 +385,42 @@ export default function NavBar() {
                       <NavigationMenuContent className="z-50 p-1 min-w-48 border-none! bg-primary! text-white!">
                         <ul className="flex flex-col">
                           {item.children.map((child) => (
-                            <li key={child.label}>
-                              <NavigationMenuLink asChild>
-                                <Link
-                                  href={child.href}
-                                  className="px-4 py-2.5 text-sm  hover:bg-black/10 rounded-lg transition-colors w-full "
-                                >
-                                  {child.label}
-                                </Link>
-                              </NavigationMenuLink>
+                            <li
+                              key={child.label}
+                              className="group/child relative"
+                            >
+                              {child.children ? (
+                                <>
+                                  <div className="flex items-center justify-between px-4 py-2.5 text-sm hover:bg-black/10 rounded-lg transition-colors cursor-default">
+                                    {child.label}
+                                    <ChevronRight className="size-4 ml-2" />
+                                  </div>
+                                  {/* Sub-menu on hover */}
+                                  <div className="absolute left-full top-0 hidden group-hover/child:block p-1 min-w-48 bg-primary text-white rounded-xl shadow-2xl -ml-1 border-l border-white/10">
+                                    <ul className="flex flex-col">
+                                      {child.children.map((sub) => (
+                                        <li key={sub.label}>
+                                          <Link
+                                            href={sub.href}
+                                            className="px-4 py-2.5 text-sm hover:bg-black/10 rounded-lg transition-colors w-full flex"
+                                          >
+                                            {sub.label}
+                                          </Link>
+                                        </li>
+                                      ))}
+                                    </ul>
+                                  </div>
+                                </>
+                              ) : (
+                                <NavigationMenuLink asChild>
+                                  <Link
+                                    href={child.href || "#"}
+                                    className="px-4 py-2.5 text-sm hover:bg-black/10 rounded-lg transition-colors w-full flex"
+                                  >
+                                    {child.label}
+                                  </Link>
+                                </NavigationMenuLink>
+                              )}
                             </li>
                           ))}
                         </ul>
