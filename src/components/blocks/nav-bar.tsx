@@ -15,7 +15,13 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
-import { Menu, Search, ChevronRight, ChevronDown } from "lucide-react";
+import {
+  Menu,
+  Search,
+  ChevronRight,
+  ChevronDown,
+  BadgeCheck,
+} from "lucide-react";
 import SearchCommand from "./search-command";
 import paid_mock_tests from "@/lib/demo-data/paid-mock-tests";
 
@@ -24,6 +30,7 @@ import { exams, exams_types } from "@/lib/data";
 import { cn } from "@/lib/utils";
 import { EXAM_PREPARATION_COURSES_LINKS } from "@/lib/constants/exams";
 import { EXAM_FEES } from "@/app/fees/page";
+import Banner from "./banner";
 
 interface NavChild {
   label: string;
@@ -192,6 +199,7 @@ const navigations: NavItem[] = [
 export default function NavBar() {
   return (
     <header className="sticky top-0 z-50 overflow-visible shadow-lg">
+      <Banner />
       {/* Row 1 */}
       <div className="relative z-20 nav-px nav-py flex items-center justify-between gap-2 bg-white/90 backdrop-blur-sm">
         <Link href="/">
@@ -200,7 +208,7 @@ export default function NavBar() {
             width={112}
             height={112}
             src="/images/tepth-logo.png"
-            className="w-28 h-auto"
+            className="w-32 h-auto"
             priority
           />
         </Link>
