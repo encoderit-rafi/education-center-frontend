@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { toast } from "sonner";
 import { Clock, MapPin, Mail, Phone, LucideIcon } from "lucide-react";
+import WaveDivider from "./wave-divider";
 
 function ContactItem({
   icon: Icon,
@@ -70,7 +71,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="relative w-full text-white overflow-hidden bg-gray-900">
+    <footer className="relative w-full text-white overflow-hidden bg-secondary">
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-6 pt-20 pb-10">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
@@ -150,7 +151,7 @@ export default function Footer() {
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="flex items-center gap-2 text-sm font-medium text-gray-300 hover:text-white transition-all hover:translate-x-1 group"
+                    className="flex items-center gap-2 text-sm font-medium text-gray-100 hover:text-white transition-all hover:translate-x-1 group"
                   >
                     <span className="text-gray-500 scale-75 group-hover:text-red-500 transition-colors">
                       <span className="material-symbols-outlined text-xs">
@@ -176,7 +177,7 @@ export default function Footer() {
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="flex items-center gap-2 text-sm font-medium text-gray-300 hover:text-white transition-all hover:translate-x-1 group"
+                    className="flex items-center gap-2 text-sm font-medium text-gray-100 hover:text-white transition-all hover:translate-x-1 group"
                   >
                     <span className="text-gray-500 scale-75 group-hover:text-red-500 transition-colors">
                       <span className="material-symbols-outlined text-xs">
@@ -191,7 +192,7 @@ export default function Footer() {
           </div>
         </div>
       </div>
-
+      <WaveDivider className="text-primary" />
       {/* Bottom Section */}
       <div className="relative z-10 border-t border-white/10 bg-[#0a0a0a]">
         <div className="container mx-auto px-4 py-8 text-center lg:px-8">

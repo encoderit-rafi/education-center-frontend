@@ -32,7 +32,15 @@ import { EXAM_PREPARATION_COURSES_LINKS } from "@/lib/constants/exams";
 import { EXAM_FEES } from "@/app/fees/page";
 import Banner from "./banner";
 import AppNavigation, { AppNavigationItem } from "./app-navigation";
-import { EXAMS_DATA } from "@/data";
+import {
+  NAV_BOOK_EXAMS_DATA,
+  NAV_EXAM_PREPARATION_COURSES_DATA,
+  NAV_EXAMS_DATA,
+  NAV_FEES,
+  NAV_PAID_MOCK_TESTS,
+  PRIMARY_NAV,
+  SECONDARY_NAV,
+} from "@/data";
 
 interface NavChild {
   label: string;
@@ -48,171 +56,285 @@ interface NavItem {
   children?: NavChild[];
 }
 const navigations: NavItem[] = [
-  {
-    type: "primary",
-    label: "Exams",
-    href: "/exams",
-    children: exams_types.map((et) => ({
-      label: et.exam.name,
-      href: `/exams/${et.exam.id}`,
-    })),
-  },
-  {
-    type: "primary",
-    label: "Exam Preparation Courses",
-    children: [
-      ...EXAM_PREPARATION_COURSES_LINKS,
-      {
-        label: "Exam Workshops",
-        href: "/exam-workshops",
-      },
-    ],
-  },
-  {
-    type: "secondary",
-    label: "Free Consultation",
-    href: "/free-consultation",
-  },
-  {
-    type: "secondary",
-
-    label: "Assessment Solutions",
-    href: "/assessment-solutions",
-  },
-  {
-    type: "primary",
-    label: "Book Exam",
-    children: [
-      {
-        label: "IELTS",
-        children: [
-          { label: "IELTS Academic", href: "/book-exams/ielts_academic" },
-          { label: "IELTS General", href: "/book-exams/ielts_general" },
-          {
-            label: "IELTS UKVI",
-            href: "/book-exams/ielts_ukvi",
-          },
-          {
-            label: "IELTS Life Skills",
-            href: "/book-exams/ielts_life_skills_a1",
-          },
-        ],
-      },
-      { label: "TOEFL iBT", href: "/book-exams/toefl_ibt" },
-      { label: "PTE", href: "/book-exams/pte_academic" },
-      { label: "CELPIP General", href: "/book-exams/celpip_general" },
-      { label: "CAEL", href: "/book-exams/cael" },
-      { label: "Skills for English (SELT)", href: "/book-exams/selt" },
-      {
-        label: "Test Day Guidelines",
-        href: "/book-exams/test-day-guidelines",
-      },
-    ],
-  },
-  {
-    type: "primary",
-    label: "Test Dates",
-    children: [
-      { label: "IELTS", href: "/test-dates" },
-      { label: "TOEFL iBT", href: "/test-dates" },
-      { label: "PTE", href: "/test-dates" },
-      { label: "CELPIP General", href: "/test-dates" },
-      { label: "CAEL", href: "/test-dates" },
-      { label: "Skills for English (SELT)", href: "/test-dates" },
-    ],
-  },
-  {
-    type: "primary",
-    label: "Paid Mock Test", // candidates can purchase them online and we email them within 72 hours
-    children: [
-      { label: "IELTS", href: "/paid-mock-test/ielts" },
-      { label: "PTE Academic", href: "/paid-mock-test/pte-academic" },
-      { label: "TOEFL iBT", href: "/paid-mock-test/toefl" },
-    ],
-  },
-  {
-    type: "secondary",
-    label: "Fees",
-    children: EXAM_FEES.map((exam) => {
-      return {
-        label: exam.name,
-        href: `/fees#${exam.id}`,
-      };
-    }),
-  },
-  {
-    type: "secondary",
-    label: "Our Venues",
-    children: [
-      {
-        label: "360° Virtual Tour",
-        href: "/our-venues/360-degree-virtual-tour",
-      },
-      { label: "Book An Exam Venue", href: "/our-venues/book-an-exam-venue" },
-    ],
-  },
-  {
-    type: "secondary",
-    label: "Test Your English",
-    href: "/test-your-english",
-  },
-  {
-    type: "primary",
-    label: "Exam Proctoring Services",
-    children: [
-      { label: "Institutions", href: "/exam-proctoring-services/institutions" },
-      { label: "Test-Takers", href: "/exam-proctoring-services/test-takers" },
-    ],
-  },
-  {
-    type: "secondary",
-
-    label: "Exam Special Accommodation",
-    href: "/special-accommodation",
-  },
-  {
-    type: "secondary",
-
-    label: "Exam Delivery",
-    children: [
-      { label: "Exam Provider", href: "/exam-delivery/exam-provider" },
-      { label: "Test Takers", href: "/exam-delivery/test-takers" },
-      { label: "Vendor", href: "/exam-delivery/vendor" },
-    ],
-  },
-  {
-    type: "primary",
-    label: "About Us",
-    children: [
-      { label: "Who We Are", href: "/about-us/who-we-are" },
-      { label: "Mission & Vision", href: "/about-us/vision-and-mission" },
-      { label: "Why Choose Us", href: "/about-us/why-choose-us" },
-      { label: "Accreditation", href: "/about-us/accreditation" },
-      { label: "How to Find Us", href: "/about-us/how-to-find-us" },
-    ],
-  },
-  {
-    type: "primary",
-    label: "Contact Us",
-    href: "/contact-us",
-  },
+  // {
+  //   type: "primary",
+  //   label: "Exams",
+  //   href: "/exams",
+  //   children: exams_types.map((et) => ({
+  //     label: et.exam.name,
+  //     href: `/exams/${et.exam.id}`,
+  //   })),
+  // },
+  // {
+  //   type: "primary",
+  //   label: "Exam Preparation Courses",
+  //   children: [
+  //     ...EXAM_PREPARATION_COURSES_LINKS,
+  //     {
+  //       label: "Exam Workshops",
+  //       href: "/exam-workshops",
+  //     },
+  //   ],
+  // },
+  // {
+  //   type: "secondary",
+  //   label: "Free Consultation",
+  //   href: "/free-consultation",
+  // },
+  // {
+  //   type: "secondary",
+  //   label: "Assessment Solutions",
+  //   href: "/assessment-solutions",
+  // },
+  // {
+  //   type: "primary",
+  //   label: "Book Exam",
+  //   children: [
+  //     {
+  //       label: "IELTS",
+  //       children: [
+  //         { label: "IELTS Academic", href: "/book-exams/ielts_academic" },
+  //         { label: "IELTS General", href: "/book-exams/ielts_general" },
+  //         {
+  //           label: "IELTS UKVI",
+  //           href: "/book-exams/ielts_ukvi",
+  //         },
+  //         {
+  //           label: "IELTS Life Skills",
+  //           href: "/book-exams/ielts_life_skills_a1",
+  //         },
+  //       ],
+  //     },
+  //     { label: "TOEFL iBT", href: "/book-exams/toefl_ibt" },
+  //     { label: "PTE", href: "/book-exams/pte_academic" },
+  //     { label: "CELPIP General", href: "/book-exams/celpip_general" },
+  //     { label: "CAEL", href: "/book-exams/cael" },
+  //     { label: "Skills for English (SELT)", href: "/book-exams/selt" },
+  //     {
+  //       label: "Test Day Guidelines",
+  //       href: "/book-exams/test-day-guidelines",
+  //     },
+  //   ],
+  // },
+  // {
+  //   type: "primary",
+  //   label: "Test Dates",
+  //   children: [
+  //     { label: "IELTS", href: "/test-dates" },
+  //     { label: "TOEFL iBT", href: "/test-dates" },
+  //     { label: "PTE", href: "/test-dates" },
+  //     { label: "CELPIP General", href: "/test-dates" },
+  //     { label: "CAEL", href: "/test-dates" },
+  //     { label: "Skills for English (SELT)", href: "/test-dates" },
+  //   ],
+  // },
+  // {
+  //   type: "primary",
+  //   label: "Paid Mock Test", // candidates can purchase them online and we email them within 72 hours
+  //   children: [
+  //     { label: "IELTS", href: "/paid-mock-test/ielts" },
+  //     { label: "PTE Academic", href: "/paid-mock-test/pte-academic" },
+  //     { label: "TOEFL iBT", href: "/paid-mock-test/toefl" },
+  //   ],
+  // },
+  // {
+  //   type: "secondary",
+  //   label: "Fees",
+  //   children: EXAM_FEES.map((exam) => {
+  //     return {
+  //       label: exam.name,
+  //       href: `/fees#${exam.id}`,
+  //     };
+  //   }),
+  // },
+  // {
+  //   type: "secondary",
+  //   label: "Our Venues",
+  //   children: [
+  //     {
+  //       label: "360° Virtual Tour",
+  //       href: "/our-venues/360-degree-virtual-tour",
+  //     },
+  //     { label: "Book An Exam Venue", href: "/our-venues/book-an-exam-venue" },
+  //   ],
+  // },
+  // {
+  //   type: "secondary",
+  //   label: "Test Your English",
+  //   href: "/test-your-english",
+  // },
+  // {
+  //   type: "primary",
+  //   label: "Exam Proctoring Services",
+  //   children: [
+  //     { label: "Institutions", href: "/exam-proctoring-services/institutions" },
+  //     { label: "Test-Takers", href: "/exam-proctoring-services/test-takers" },
+  //   ],
+  // },
+  // {
+  //   type: "secondary",
+  //   label: "Exam Special Accommodation",
+  //   href: "/special-accommodation",
+  // },
+  // {
+  //   type: "secondary",
+  //   label: "Exam Delivery",
+  //   children: [
+  //     { label: "Exam Provider", href: "/exam-delivery/exam-provider" },
+  //     { label: "Test Takers", href: "/exam-delivery/test-takers" },
+  //     { label: "Vendor", href: "/exam-delivery/vendor" },
+  //   ],
+  // },
+  // {
+  //   type: "primary",
+  //   label: "About Us",
+  //   children: [
+  //     { label: "Who We Are", href: "/about-us/who-we-are" },
+  //     { label: "Mission & Vision", href: "/about-us/vision-and-mission" },
+  //     { label: "Why Choose Us", href: "/about-us/why-choose-us" },
+  //     { label: "Accreditation", href: "/about-us/accreditation" },
+  //     { label: "How to Find Us", href: "/about-us/how-to-find-us" },
+  //   ],
+  // },
+  // {
+  //   type: "primary",
+  //   label: "Contact Us",
+  //   href: "/contact-us",
+  // },
 ];
-const PRIMARY_NAV: AppNavigationItem[] = [
-  { type: "single", name: "home", href: "/" },
-  {
-    type: "dropdown",
-    name: "Exams",
-    href: "/exams",
-    items: EXAMS_DATA.map((exam) => ({
-      name: exam.name,
-      href: `/exams/${exam.id}`,
-    })),
-  },
-];
-const secondaryNav = [
-  { name: "Fees", href: "/fees" },
-  { name: "Our Venues", href: "/our-venues" },
-];
+
+// const PRIMARY_NAV: AppNavigationItem[] = [
+//   { type: "single", name: "home", href: "/" },
+//   {
+//     type: "dropdown",
+//     name: "Exams",
+//     href: "/exams",
+//     items: NAV_EXAMS_DATA.map((exam) => ({
+//       name: exam.name,
+//       href: `/exams/${exam.id}`,
+//     })),
+//   },
+//   {
+//     type: "dropdown",
+//     name: "Exam Preparation Courses",
+//     href: "/exam-preparation-courses",
+//     items: NAV_EXAM_PREPARATION_COURSES_DATA.map((exam) => ({
+//       name: exam.name,
+//       href: `/exam-preparation-courses/${exam.id}`,
+//     })),
+//   },
+//   {
+//     type: "single",
+//     name: "Test Your English",
+//     href: "/test-your-english",
+//   },
+//   {
+//     type: "dropdown",
+//     name: "Book Exams",
+//     href: "/book-exams",
+//     items: NAV_BOOK_EXAMS_DATA.map((exam) => ({
+//       name: exam.name,
+//       href: `/book-exams/${exam.id}`,
+//     })),
+//   },
+//   {
+//     type: "dropdown",
+//     name: "Fees",
+//     href: "/fees",
+//     items: NAV_FEES.map((fee) => ({
+//       name: fee.name,
+//       href: `/fees#${fee.id}`,
+//     })),
+//   },
+//   {
+//     type: "dropdown",
+//     name: "Paid Mock Tests",
+//     href: "/paid-mock-tests",
+//     items: NAV_PAID_MOCK_TESTS.map((item) => ({
+//       name: item.name,
+//       href: `/paid-mock-tests/${item.id}`,
+//     })),
+//   },
+// ];
+// const SECONDARY_NAV: AppNavigationItem[] = [
+//   {
+//     type: "single",
+//     name: "Free Consultation",
+//     href: "/free-consultation",
+//   },
+//   {
+//     type: "single",
+//     name: "Assessment Solutions",
+//     href: "/assessment-solutions",
+//   },
+//   {
+//     type: "dropdown",
+//     name: "Test Dates",
+//     href: "/test-dates",
+//     items: [
+//       { name: "IELTS", href: "/test-dates" },
+//       { name: "TOEFL iBT", href: "/test-dates" },
+//       { name: "PTE", href: "/test-dates" },
+//       { name: "CELPIP General", href: "/test-dates" },
+//       { name: "CAEL", href: "/test-dates" },
+//       { name: "Skills for English (SELT)", href: "/test-dates" },
+//     ],
+//   },
+//   {
+//     type: "single",
+//     name: "Exam Special Accommodation",
+//     href: "/special-accommodation",
+//   },
+//   {
+//     type: "dropdown",
+//     name: "Exam Proctoring Services",
+//     href: "/exam-proctoring-services",
+//     items: [
+//       { name: "Institutions", href: "/exam-proctoring-services/institutions" },
+//       { name: "Test-Takers", href: "/exam-proctoring-services/test-takers" },
+//     ],
+//   },
+//   {
+//     type: "dropdown",
+//     name: "Exam Delivery",
+//     href: "/exam-delivery",
+//     items: [
+//       { name: "Exam Provider", href: "/exam-delivery/exam-provider" },
+//       { name: "Test Takers", href: "/exam-delivery/test-takers" },
+//       { name: "Vendor", href: "/exam-delivery/vendor" },
+//     ],
+//   },
+//   {
+//     type: "dropdown",
+//     name: "Our Venues",
+//     href: "/our-venues",
+//     items: [
+//       {
+//         name: "360° Virtual Tour",
+//         href: "/our-venues/360-degree-virtual-tour",
+//       },
+//       { name: "Book An Exam Venue", href: "/our-venues/book-an-exam-venue" },
+//     ],
+//   },
+//   {
+//     type: "dropdown",
+//     name: "About Us",
+//     href: "/about-us",
+//     items: [
+//       { name: "Who We Are", href: "/about-us/who-we-are" },
+//       { name: "Mission & Vision", href: "/about-us/vision-and-mission" },
+//       { name: "Why Choose Us", href: "/about-us/why-choose-us" },
+//       { name: "Accreditation", href: "/about-us/accreditation" },
+//       { name: "How to Find Us", href: "/about-us/how-to-find-us" },
+//     ],
+//   },
+//   {
+//     type: "single",
+//     name: "Contact Us",
+//     href: "/contact-us",
+//   },
+// ];
+
 export default function NavBar() {
   return (
     <header className="sticky top-0 z-50 overflow-visible shadow-lg">
@@ -228,80 +350,14 @@ export default function NavBar() {
           priority
         />
         {/* Desktop Primary Nav */}
-        <AppNavigation navigations={PRIMARY_NAV} />
-        {/* <NavigationMenu className="hidden lg:flex" viewport={false}>
-          <NavigationMenuList className="gap-2">
-            {navigations
-              .filter((item) => item.type === "primary")
-              .map((item) => (
-                <NavigationMenuItem key={item.label}>
-                  {item.children ? (
-                    <>
-                      <NavigationMenuTrigger className="bg-transparent px-2 py-1.5 text-sm border-none outline-none transition-all rounded-lg">
-                        {item.label}
-                      </NavigationMenuTrigger>
-                      <NavigationMenuContent className="z-50 p-1 min-w-48 border-none bg-primary! text-white! rounded-xl shadow-2xl">
-                        <ul className="flex flex-col">
-                          {item.children.map((child) => (
-                            <li
-                              key={child.label}
-                              className="group/child relative"
-                            >
-                              {child.children ? (
-                                <>
-                                  <div className="flex items-center justify-between px-4 py-2.5 text-sm hover:bg-black/10 rounded-lg transition-colors cursor-default">
-                                    {child.label}
-                                    <ChevronRight className="size-4 ml-2" />
-                                  </div>
-                                  <div className="absolute left-full top-0 hidden group-hover/child:block p-1 min-w-48 bg-primary text-white rounded-xl shadow-2xl -ml-1 border-l border-white/10">
-                                    <ul className="flex flex-col">
-                                      {child.children.map((sub) => (
-                                        <li key={sub.label}>
-                                          <Link
-                                            href={sub.href}
-                                            className="px-4 py-2.5 text-sm hover:bg-black/10 rounded-lg transition-colors w-full flex"
-                                          >
-                                            {sub.label}
-                                          </Link>
-                                        </li>
-                                      ))}
-                                    </ul>
-                                  </div>
-                                </>
-                              ) : (
-                                <NavigationMenuLink asChild>
-                                  <Link
-                                    href={child.href || "#"}
-                                    className="px-4 py-2.5 text-sm hover:bg-black/10 rounded-lg transition-colors w-full flex"
-                                  >
-                                    {child.label}
-                                  </Link>
-                                </NavigationMenuLink>
-                              )}
-                            </li>
-                          ))}
-                        </ul>
-                      </NavigationMenuContent>
-                    </>
-                  ) : (
-                    <NavigationMenuLink asChild>
-                      <Link
-                        href={item.href || "#"}
-                        className="px-2 py-1.5 text-sm hover:bg-black/5 transition-all rounded-lg"
-                      >
-                        {item.label}
-                      </Link>
-                    </NavigationMenuLink>
-                  )}
-                </NavigationMenuItem>
-              ))}
-          </NavigationMenuList>
-        </NavigationMenu> */}
+        <div className="max-lg:hidden">
+          <AppNavigation navigations={PRIMARY_NAV} />
+        </div>
 
         <div className="w-24  flex items-center justify-end gap-2">
           <SearchCommand />
           {/* Mobile Menu Trigger */}
-          <Popover>
+          {/* <Popover>
             <PopoverTrigger
               render={
                 <Button
@@ -381,98 +437,12 @@ export default function NavBar() {
                 </NavigationMenuList>
               </NavigationMenu>
             </PopoverContent>
-          </Popover>
+          </Popover> */}
         </div>
       </div>
       {/* Row 2 */}
-      <div className="relative z-10 hidden lg:flex bg-primary text-white nav-px py-1 items-center justify-center gap-2">
-        <NavigationMenu viewport={false}>
-          <NavigationMenuList className="gap-2">
-            {navigations
-              .filter((item) => item.type === "secondary")
-              .map((item) => (
-                <NavigationMenuItem key={item.label}>
-                  {item.children ? (
-                    <>
-                      {" "}
-                      <NavigationMenuTrigger className="bg-transparent px-2 py-1.5 text-sm border-none outline-none hover:bg-black/10! data-[state=open]:bg-black/10 hover:text-white! focus:text-white! active:text-white! data-[state=open]:text-white transition-all rounded-lg">
-                        <div className="flex items-center gap-1.5">
-                          {item.label}
-                          {item.badge && (
-                            <Badge className="bg-red-600 text-[9px] px-1.5 py-0 border-none text-white">
-                              {item.badge}
-                            </Badge>
-                          )}
-                        </div>
-                      </NavigationMenuTrigger>
-                      <NavigationMenuContent className="z-50 p-1 min-w-48 border-none! bg-primary! text-white!">
-                        <ul className="flex flex-col">
-                          {item.children.map((child) => (
-                            <li
-                              key={child.label}
-                              className="group/child relative"
-                            >
-                              {child.children ? (
-                                <>
-                                  <div className="flex items-center justify-between px-4 py-2.5 text-sm hover:bg-black/10 rounded-lg transition-colors cursor-default">
-                                    {child.label}
-                                    <ChevronRight className="size-4 ml-2" />
-                                  </div>
-                                  {/* Sub-menu on hover */}
-                                  <div className="absolute left-full top-0 hidden group-hover/child:block p-1 min-w-48 bg-primary text-white rounded-xl shadow-2xl -ml-1 border-l border-white/10">
-                                    <ul className="flex flex-col">
-                                      {child.children.map((sub) => (
-                                        <li key={sub.label}>
-                                          <Link
-                                            href={sub.href}
-                                            className="px-4 py-2.5 text-sm hover:bg-black/10 rounded-lg transition-colors w-full flex"
-                                          >
-                                            {sub.label}
-                                          </Link>
-                                        </li>
-                                      ))}
-                                    </ul>
-                                  </div>
-                                </>
-                              ) : (
-                                <NavigationMenuLink asChild>
-                                  <Link
-                                    href={child.href || "#"}
-                                    className="px-4 py-2.5 text-sm hover:bg-black/10 rounded-lg transition-colors w-full flex"
-                                  >
-                                    {child.label}
-                                  </Link>
-                                </NavigationMenuLink>
-                              )}
-                            </li>
-                          ))}
-                        </ul>
-                      </NavigationMenuContent>
-                    </>
-                  ) : (
-                    <NavigationMenuLink asChild>
-                      <Link
-                        href={item.href || "#"}
-                        className="px-2 py-1.5 text-sm  text-white hover:bg-black/10 hover:text-white transition-all rounded-lg"
-                      >
-                        <div className="flex items-center gap-2">
-                          {item.label === "Test Your English" && (
-                            <span className="w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse" />
-                          )}
-                          {item.label}
-                          {item.badge && (
-                            <Badge className="bg-red-600 text-[9px] px-1.5 py-0 border-none text-white">
-                              {item.badge}
-                            </Badge>
-                          )}
-                        </div>
-                      </Link>
-                    </NavigationMenuLink>
-                  )}
-                </NavigationMenuItem>
-              ))}
-          </NavigationMenuList>
-        </NavigationMenu>
+      <div className="relative z-10 hidden lg:flex bg-secondary text-white nav-px py-1.5 items-center justify-center gap-2">
+        <AppNavigation navigations={SECONDARY_NAV} />
       </div>
     </header>
   );
