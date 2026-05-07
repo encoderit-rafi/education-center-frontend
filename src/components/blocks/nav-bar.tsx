@@ -31,6 +31,8 @@ import { cn } from "@/lib/utils";
 import { EXAM_PREPARATION_COURSES_LINKS } from "@/lib/constants/exams";
 import { EXAM_FEES } from "@/app/fees/page";
 import Banner from "./banner";
+import AppNavigation, { AppNavigationItem } from "./app-navigation";
+import { EXAMS_DATA } from "@/data";
 
 interface NavChild {
   label: string;
@@ -49,7 +51,7 @@ const navigations: NavItem[] = [
   {
     type: "primary",
     label: "Exams",
-    // href: "/exams",
+    href: "/exams",
     children: exams_types.map((et) => ({
       label: et.exam.name,
       href: `/exams/${et.exam.id}`,
@@ -195,25 +197,39 @@ const navigations: NavItem[] = [
     href: "/contact-us",
   },
 ];
-
+const PRIMARY_NAV: AppNavigationItem[] = [
+  { type: "single", name: "home", href: "/" },
+  {
+    type: "dropdown",
+    name: "Exams",
+    href: "/exams",
+    items: EXAMS_DATA.map((exam) => ({
+      name: exam.name,
+      href: `/exams/${exam.id}`,
+    })),
+  },
+];
+const secondaryNav = [
+  { name: "Fees", href: "/fees" },
+  { name: "Our Venues", href: "/our-venues" },
+];
 export default function NavBar() {
   return (
     <header className="sticky top-0 z-50 overflow-visible shadow-lg">
       <Banner />
       {/* Row 1 */}
-      <div className="relative z-20 nav-px nav-py flex items-center justify-between gap-2 bg-white/90 backdrop-blur-sm">
-        <Link href="/">
-          <Image
-            alt="TEPTH Logo"
-            width={112}
-            height={112}
-            src="/images/tepth-logo.png"
-            className="w-32 h-auto"
-            priority
-          />
-        </Link>
+      <div className="relative z-20 nav-px nav-py flex items-center justify-between gap-2 bg-white backdrop-blur-sm">
+        <Image
+          alt="TEPTH Logo"
+          width={112}
+          height={112}
+          src="/images/tepth-logo.png"
+          className="w-32 h-auto"
+          priority
+        />
         {/* Desktop Primary Nav */}
-        <NavigationMenu className="hidden lg:flex" viewport={false}>
+        <AppNavigation navigations={PRIMARY_NAV} />
+        {/* <NavigationMenu className="hidden lg:flex" viewport={false}>
           <NavigationMenuList className="gap-2">
             {navigations
               .filter((item) => item.type === "primary")
@@ -237,7 +253,6 @@ export default function NavBar() {
                                     {child.label}
                                     <ChevronRight className="size-4 ml-2" />
                                   </div>
-                                  {/* Sub-menu on hover */}
                                   <div className="absolute left-full top-0 hidden group-hover/child:block p-1 min-w-48 bg-primary text-white rounded-xl shadow-2xl -ml-1 border-l border-white/10">
                                     <ul className="flex flex-col">
                                       {child.children.map((sub) => (
@@ -281,7 +296,7 @@ export default function NavBar() {
                 </NavigationMenuItem>
               ))}
           </NavigationMenuList>
-        </NavigationMenu>
+        </NavigationMenu> */}
 
         <div className="w-24  flex items-center justify-end gap-2">
           <SearchCommand />
