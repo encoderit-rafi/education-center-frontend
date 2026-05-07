@@ -74,10 +74,10 @@ export default function WhoWeAre() {
               <p className="text-primary">
                 TEPTH derives its objective from John Dewey's quote. Being an experienced enterprise in the areas of education and exam preparation courses, TEPTH strives to offer students high quality services. We have been in the education industry for years now, catering to the contemporary competent educational requirements across the Arab World. TEPTH is a visionary organization that values students as the guardians of a successful society. We believe in offering you professional career services so that you can turn your dreams into reality.
               </p>
-              <p className="text-slate-600">
+              <p>
                 Preparing for an international exam could get tricky at times. TEPTH has trained professionals who are well-equipped with the latest knowledge and techniques for the preparation of IELTS, TOEFL, PTE, CELPIP, CAEL, and Skills for English (SELT) courses. With their expertise and dedication, you are likely to pass these tests with flying colours — at the best price.
               </p>
-              <p className="text-slate-600">
+              <p>
                 TEPTH envisions to be a leader in exam preparation and testing, as we look forward to set a benchmark by our unrivaled services. We have set long term goals that will benefit both the education system and the society. With innovative IT support and learning procedures, TEPTH has made it quite expedient for the students to pass online exams. Our latest learning techniques allow you to score more with less effort. Whether you are preparing for IELTS, CELPIP G, CAEL, PTE, TOEFL iBT and OET, TEPTH is your one pit stop for all your exam preparation needs.
               </p>
             </div>
