@@ -41,7 +41,7 @@ export default function ContactUs() {
             <div className="absolute -inset-4 bg-primary/5 rounded-xl blur-3xl opacity-50 transition-opacity group-hover:opacity-100"></div>
             <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
               <Image
-                src="/images/about-us/infrastructure-center.png"
+                src="/images/about-us/contact.png"
                 alt="TEPTH Support Center"
                 fill
                 className="object-cover"
@@ -59,7 +59,7 @@ export default function ContactUs() {
           <div className="relative overflow-hidden rounded-[2.5rem] p-10 md:p-16 group h-full flex flex-col justify-start gap-12">
             {/* Header */}
             <div className="space-y-4 animate-fade-up">
-              <span className="section-badge text-primary">
+              <span className="section-label">
                 STAY CONNECTED
               </span>
               <h2 className="section-title">
@@ -164,7 +164,7 @@ export default function ContactUs() {
             <div className="absolute -inset-10 bg-primary/5 rounded-[4rem] blur-3xl opacity-30 pointer-events-none"></div>
             <div className="relative bg-white rounded-[2.5rem] p-8 md:p-16 h-full flex flex-col">
               <div className="mb-12 space-y-4">
-                <span className="section-badge text-primary">
+                <span className="section-label">
                   ENQUIRY FORM
                 </span>
                 <h3 className="section-title">

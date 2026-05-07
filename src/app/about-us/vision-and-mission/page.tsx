@@ -14,11 +14,10 @@ export default function VisionAndMission() {
           {/* Left Content */}
           <div className="space-y-8 animate-fade-up">
             {/* Section Badge */}
-            <div className="flex items-center gap-3">
-              <span className="section-badge text-primary">
-                OUR VISION & MISSION
-              </span>
-            </div>
+            <span className="section-label">
+              OUR VISION & MISSION
+            </span>
+
 
             {/* Main Heading */}
             <h2 className="section-title">
@@ -54,12 +53,9 @@ export default function VisionAndMission() {
           {/* Left Narrative */}
           <div className="space-y-12">
             {/* Section Badge */}
-            <div className="flex items-center gap-3">
-              <span className="section-badge text-primary">
-                OUR PHILOSOPHY
-              </span>
-            </div>
-
+            <span className="section-label">
+              OUR PHILOSOPHY
+            </span>
             {/* Sub Heading */}
             <div className="space-y-4">
               <h2 className="section-title">

@@ -14,37 +14,21 @@ export default function WhyChooseUs() {
           {/* Left Content */}
           <div className="space-y-8 animate-fade-up">
             {/* Section Badge */}
-            <div className="flex items-center gap-3">
-              <div className="w-6 h-[2px] bg-primary" />
-              <span className="text-primary text-xs font-black uppercase tracking-[0.3em]">
-                WHY CHOOSE US
-              </span>
-            </div>
+            <span className="section-label">
+              WHY CHOOSE US
+            </span>
+
 
             {/* Main Heading */}
-            <h1 className="text-3xl md:text-5xl font-black text-slate-900 leading-[1.1] tracking-tight uppercase">
+            <h1 className="section-title">
               Invest Less & <br />
               Gain More <span className="text-primary">From TEPTH.</span>
             </h1>
 
             {/* Description */}
-            <p className="text-base text-slate-600 leading-relaxed max-w-xl font-sans">
+            <p className="section-description">
               Preparing for college or university is an emotional rollercoaster; TEPTH provides the expert guidance and strategies to make you feel confident and well-prepared.
             </p>
-
-            {/* Action Buttons */}
-            <div className="flex flex-wrap gap-4 pt-4">
-              <Link href="/book-exams">
-                <Button className="h-14 w-52 text-sm rounded-lg flex items-center justify-center gap-2">
-                  Book an Exam <ArrowRight className="w-5 h-5" />
-                </Button>
-              </Link>
-              <Link href="/contact-us">
-                <Button className="h-14 w-52 text-sm rounded-lg flex items-center justify-center gap-2" variant="destructive">
-                  Contact Us
-                </Button>
-              </Link>
-            </div>
           </div>
 
           {/* Right Visual */}
@@ -52,7 +36,7 @@ export default function WhyChooseUs() {
             <div className="absolute -inset-4 bg-primary/5 rounded-xl blur-3xl opacity-50 transition-opacity group-hover:opacity-100"></div>
             <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
               <Image
-                src="/images/why-choose-us-hero.png"
+                src="/images/about-us/why-choose-us.jpg"
                 alt="Student Confidence"
                 fill
                 className="object-cover"
@@ -69,16 +53,14 @@ export default function WhyChooseUs() {
           {/* Left Narrative */}
           <div className="space-y-12">
             {/* Section Badge */}
-            <div className="flex items-center gap-3">
-              <div className="w-6 h-[2px] bg-primary" />
-              <span className="text-primary text-xs font-black uppercase tracking-[0.3em]">
-                OUR PROMISE
-              </span>
-            </div>
+            <span className="section-label">
+              OUR PROMISE
+            </span>
+
 
             {/* Sub Heading */}
             <div className="space-y-4">
-              <h2 className="text-3xl md:text-5xl font-black text-slate-900 leading-tight tracking-tight uppercase">
+              <h2 className="section-title">
                 Your Success <br />
                 Is <span className="text-primary">Ours.</span>
               </h2>
@@ -86,10 +68,10 @@ export default function WhyChooseUs() {
 
             {/* Detailed Text */}
             <div className="space-y-8 text-base leading-relaxed font-medium">
-              <p className="text-primary">
+              <p className="section-description text-primary">
                 The Exam Preparation & Testing House L.L.C understands just how perplexing the endeavor can be to gain admission in your top-choice college. For this reason, we have crafted ingenious study plans to enhance your skills and score exceptionally well.
               </p>
-              <p className="text-slate-600">
+              <p className="section-description">
                 We bring into play the right tools and strategies for focused learning and outstanding results. With us, you will be able to improve your weak areas through expert professionals’ feedback, helping you steer your energies in the right direction.
               </p>
             </div>
