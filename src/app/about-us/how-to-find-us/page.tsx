@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Info } from "lucide-react";
+import { ArrowRight, Car, CircleParking, ExternalLink, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function HowToFindUs() {
@@ -14,15 +14,12 @@ export default function HowToFindUs() {
           {/* Left Content */}
           <div className="space-y-8 animate-fade-up">
             {/* Section Badge */}
-            <div className="flex items-center gap-3">
-              <div className="w-6 h-[2px] bg-primary" />
-              <span className="text-primary text-xs font-black uppercase tracking-[0.3em]">
-                LOCATION GUIDE
-              </span>
-            </div>
+            <span className="section-label">
+              LOCATION GUIDE
+            </span>
 
             {/* Main Heading */}
-            <h1 className="text-3xl md:text-5xl font-black text-slate-900 leading-[1.1] tracking-tight uppercase">
+            <h1 className="section-title">
               How to <br />
               <span className="text-primary">Find Our Center</span>
             </h1>
@@ -33,18 +30,6 @@ export default function HowToFindUs() {
             </p>
 
             {/* Action Buttons */}
-            <div className="flex flex-wrap gap-4 pt-4">
-              <Link href="/book-exams">
-                <Button className="h-14 w-52 text-sm rounded-lg flex items-center justify-center gap-2">
-                  Book an Exam <ArrowRight className="w-5 h-5" />
-                </Button>
-              </Link>
-              <Link href="/contact-us">
-                <Button className="h-14 w-52 text-sm rounded-lg flex items-center justify-center gap-2" variant="destructive">
-                  Contact Us
-                </Button>
-              </Link>
-            </div>
           </div>
 
           {/* Right Visual */}
@@ -67,14 +52,14 @@ export default function HowToFindUs() {
       <section className="py-24 px-8 max-w-screen-2xl mx-auto border-t border-slate-50">
         <div className="grid lg:grid-cols-2 gap-20 items-center">
           <div className="space-y-8">
-            <div className="flex items-center gap-3">
-              <div className="w-6 h-[2px] bg-primary" />
-              <span className="text-primary text-xs font-black uppercase tracking-[0.3em]">
-                LOCATION MAP
-              </span>
-            </div>
-            <h2 className="text-3xl md:text-4xl font-black text-slate-900 uppercase">Interactive Navigation</h2>
-            <div className="space-y-4 text-base text-slate-600 leading-relaxed font-medium">
+            <span className="section-label">
+              LOCATION MAP
+            </span>
+            <h2 className="section-title">
+              Interactive <br />
+              <span className="text-primary">Navigation</span>
+            </h2>
+            <div className="space-y-4 text-base leading-relaxed font-medium">
               <p>
                 Route to our centre is too easy to follow and reach the destination. We have incorporated Google Location Map to make it more understandable for you.
               </p>
@@ -97,19 +82,54 @@ export default function HowToFindUs() {
         </div>
       </section>
 
+      {/* Visit Our Centre Section */}
+      <section className="py-24 px-8 max-w-screen-2xl mx-auto border-t border-slate-50" id="map">
+        <div className="max-w-4xl mx-auto text-center space-y-6 mb-16">
+          <h2 className="section-title">Visit Our Centre</h2>
+          <p className="section-description mx-auto">
+            Al Mamzar, Sharjah — located in the strategic Tabarak Tower, close to all major transport links.
+            All facilities are wheelchair accessible.
+          </p>
+        </div>
+
+        <div className="relative group rounded-xl overflow-hidden shadow-2xl border border-slate-100">
+          <div className="absolute top-6 right-6 z-20">
+            <Link
+              href="https://www.google.com/maps/dir//The+Exam+Preparation+and+Testing+House(TEPTH),+Tabarak+Tower+Suite+701+,+7th+Floor+-+Corniche+Rd+-+Al+Mamzar+-+Sharjah+-+United+Arab+Emirates/@25.313693,55.361475,15z"
+              target="_blank"
+              className="bg-white/90 backdrop-blur-md px-6 py-3 rounded-xl flex items-center gap-2 text-sm font-black text-slate-900 shadow-xl hover:bg-white transition-all group/btn"
+            >
+              Open in Maps <ExternalLink className="w-4 h-4 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
+            </Link>
+          </div>
+          <div className="relative aspect-[21/9] min-h-[450px]">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3606.2843818318043!2d55.3589000751671!3d25.31369297763539!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f5bdc6cfb106d%3A0x26ff2a834eecd8fe!2sThe%20Exam%20Preparation%20and%20Testing%20House(TEPTH)!5e0!3m2!1sen!2sae!4v1715083800000!5m2!1sen!2sae"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen={true}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="absolute inset-0 w-full h-full"
+            ></iframe>
+          </div>
+        </div>
+      </section>
+
       {/* Transportation Options */}
       <section className="py-32 bg-white px-8 relative overflow-hidden">
         <div className="max-w-screen-2xl mx-auto">
           {/* Section Header */}
           <div className="max-w-3xl mb-32">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-[1px] bg-primary" />
-              <span className="text-primary text-xs font-black uppercase tracking-[0.4em]">Movement & Access</span>
-            </div>
-            <h4 className="text-3xl md:text-5xl font-black text-slate-900 uppercase leading-[0.9] mb-8">
-              Ways to <span className="text-primary text-outline-primary">Reach Us</span>
-            </h4>
-            <p className="text-slate-500 text-lg font-medium leading-relaxed">
+            <span className="section-label">
+              MOVEMENT & ACCESS
+            </span>
+            <h2 className="section-title">
+              Ways to <br />
+              <span className="text-primary">Reach Us</span>
+            </h2>
+            <p className="section-description">
               We have mapped out the most efficient routes to ensure your journey to our center is as smooth as possible.
             </p>
           </div>
@@ -122,55 +142,29 @@ export default function HowToFindUs() {
                   <span className="text-7xl font-black text-primary/10">01</span>
                   <h5 className="text-primary text-3xl font-black uppercase tracking-tight">By Taxicab</h5>
                 </div>
-                <div className="space-y-6 text-slate-600 text-base leading-relaxed">
-                  <p>From anywhere in Sharjah, you can hire a taxi and it will take you to your final destination.</p>
-                  <div className="p-8 bg-slate-50 rounded-3xl border border-slate-100 relative overflow-hidden group">
-                    <div className="absolute top-0 right-0 w-32 h-full bg-primary/5 -skew-x-12 translate-x-16 group-hover:translate-x-8 transition-transform duration-700"></div>
-                    <div className="relative z-10">
-                      <p className="text-[10px] font-black uppercase tracking-widest text-primary mb-2">Instant Booking</p>
-                      <p className="text-3xl font-black text-slate-900 mb-1">600-525-252</p>
-                      <p className="text-sm text-slate-400 font-bold uppercase tracking-tighter">Sharjah Taxi Corporation</p>
-                    </div>
-                  </div>
-                  <p>Drivers will pick you up from your specified location and take you directly to our centre. For your convenience, you can access our location map below.</p>
-                  <Link href="#" className="inline-flex items-center gap-2 text-primary font-black uppercase text-xs tracking-widest hover:gap-4 transition-all group">
-                    View Location Map <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-                  </Link>
+                <div className="space-y-6 text-base leading-relaxed font-medium">
+                  <p>
+                    From anywhere in Sharjah, you can hire a taxi and it will take you to your final destination.<br /> Call <span className="text-primary font-semibold">600-525-252</span> to book a taxicab with Sharjah Taxi Corporation. Taxicab drivers will pick you up from your specified location and take you to our centre. For location map, please <Link href="#map" className="text-primary font-black hover:underline">click here</Link>.
+                  </p>
                 </div>
               </div>
-              <div className="relative aspect-[4/3] rounded-[3rem] overflow-hidden shadow-2xl order-1 lg:order-2">
-                <Image src="/images/about-us/taxi.png" alt="Sharjah Taxi" fill className="object-cover" />
+              <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl order-1 lg:order-2">
+                <Image src="/images/about-us/taxi.jpg" alt="Sharjah Taxi" fill className="object-cover" />
               </div>
             </div>
 
             {/* 02. Public Bus */}
             <div className="grid lg:grid-cols-2 gap-16 lg:gap-32 items-center">
-              <div className="relative aspect-[4/3] rounded-[3rem] overflow-hidden shadow-2xl">
-                <Image src="/images/about-us/public-bus.png" alt="Sharjah Public Bus" fill className="object-cover" />
+              <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
+                <Image src="/images/about-us/bus.jpg" alt="Sharjah Public Bus" fill className="object-cover" />
               </div>
               <div className="space-y-8">
                 <div className="flex items-center gap-4">
                   <span className="text-7xl font-black text-primary/10">02</span>
                   <h5 className="text-primary text-3xl font-black uppercase tracking-tight">Public Bus</h5>
                 </div>
-                <div className="space-y-6 text-slate-600 text-base leading-relaxed">
-                  <div className="space-y-4">
-                    <p className="font-bold text-slate-900 uppercase text-xs tracking-[0.2em] text-primary">Service Routes</p>
-                    <div className="flex flex-wrap gap-3">
-                      {["AL MAMZAR", "AL TAAWUN"].map((route) => (
-                        <div key={route} className="px-6 py-3 bg-white border border-slate-200 rounded-2xl font-black text-slate-900 text-xs shadow-sm">
-                          {route}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  <p>Take a Sharjah public bus towards your preferred destination and disembark at the nearest bus stop to <strong className="text-slate-900">Tabarak Tower</strong>.</p>
-                  <div className="flex gap-4 p-6 bg-primary/5 rounded-3xl border-l-4 border-primary">
-                    <Info className="w-6 h-6 text-primary shrink-0" />
-                    <p className="text-slate-700 font-bold text-sm leading-snug">
-                      The bus ride will get you within a short walking distance of the center.
-                    </p>
-                  </div>
+                <div className="space-y-6 text-base leading-relaxed">
+                  <p>Take a Sharjah public bus towards Al Mamzar or Al Taawun, disembarking at the nearest bus stop to Tabarak Tower. The bus ride will get you within a short walking distance of the center.</p>
                 </div>
               </div>
             </div>
@@ -182,44 +176,38 @@ export default function HowToFindUs() {
                   <span className="text-7xl font-black text-primary/10">03</span>
                   <h5 className="text-3xl font-black text-primary uppercase tracking-tight">Metro & Bus</h5>
                 </div>
-                <div className="space-y-8 text-slate-600 text-base leading-relaxed">
-                  <p>Although Sharjah does not have its own metro, you can combine the Dubai Metro with bus services to reach our Sharjah office efficiently.</p>
+                <div className="space-y-6 text-base leading-relaxed font-medium">
+                  <p>Although Sharjah does not have its own metro, you can combine the Dubai Metro with bus services to reach our Sharjah office.</p>
 
-                  <div className="space-y-6 relative before:absolute before:left-4 before:top-2 before:bottom-2 before:w-[2px] before:bg-slate-100">
-                    {[
-                      { step: "Take the Dubai Metro", desc: "Board the Red Line and alight at Union Metro Station." },
-                      { step: "Transfer to a Bus", desc: "Board the E303 bus at Union Square Bus Station to Al Jubail Station." },
-                      { step: "Final Connection", desc: "From Al Jubail, hire a taxi to reach Tabarak Tower in Al Mamzar." }
-                    ].map((item, idx) => (
-                      <div key={idx} className="relative pl-12 group">
-                        <div className="absolute left-0 top-0 w-8 h-8 rounded-full bg-white border-2 border-slate-200 flex items-center justify-center group-hover:border-primary transition-colors z-10">
-                          <div className="w-2 h-2 rounded-full bg-slate-200 group-hover:bg-primary transition-colors"></div>
-                        </div>
-                        <h6 className="font-black text-slate-900 uppercase text-xs tracking-widest mb-1">{item.step}</h6>
-                        <p className="text-sm font-medium">{item.desc}</p>
-                      </div>
-                    ))}
+                  <div className="space-y-4">
+                    <p className="font-bold">1. Take the Dubai Metro:</p>
+                    <p>— Board the Red Line and alight at Union Metro Station.</p>
                   </div>
 
-                  {/* Alternative Routes */}
-                  <div className="pt-6 grid sm:grid-cols-2 gap-6">
-                    <div className="p-6 bg-slate-900 rounded-3xl text-white">
-                      <p className="text-primary text-base font-black uppercase tracking-widest mb-2">E306 Service</p>
-                      <p className="text-xs text-slate-200 font-medium">Al Ghubaiba to Al Jubail Station.</p>
-                    </div>
-                    <div className="p-6 bg-slate-900 rounded-3xl text-white">
-                      <p className="text-primary text-base font-black uppercase tracking-widest mb-2">E307 Service</p>
-                      <p className="text-xs text-slate-200 font-medium">Deira City Centre to Al Jubail.</p>
-                    </div>
+                  <div className="space-y-4">
+                    <p className="font-bold">2. Transfer to a Bus:</p>
+                    <p>— From Union Metro Station, proceed to the adjacent Union Square Bus Station.</p>
+                    <p>— Board the E303 bus, which operates between Union Square Bus Station in Dubai and Al Jubail Bus Station in Sharjah.</p>
                   </div>
 
-                  <p className="text-primary font-black text-base uppercase  flex items-center gap-2">
-                    <Info className="w-4 h-4" /> Note: Please allow extra travel time for traffic.
-                  </p>
+                  <div className="space-y-4">
+                    <p className="font-bold">3. From Al Jubail Bus Station:</p>
+                    <p>— Upon arrival at Al Jubail Bus Station in Sharjah, you can hire a taxi to reach Tabarak Tower in Al Mamzar, Sharjah.</p>
+                  </div>
+
+                  <div className="pt-4 border-t border-slate-100">
+                    <p className="font-bold mb-2">Alternative Bus Routes:</p>
+                    <ul className="list-disc pl-5 space-y-2">
+                      <li>E306 Bus Service: Departs from Al Ghubaiba Bus Station in Dubai and arrives at Al Jubail Bus Station in Sharjah.</li>
+                      <li>E307 Bus Service: Departs from Deira City Centre Bus Station in Dubai and arrives at Al Jubail Bus Station in Sharjah.</li>
+                    </ul>
+                  </div>
+
+                  <p className="text-[#d12c2c] font-bold">Note: Please allow extra travel time as bus routes can be affected by traffic conditions.</p>
                 </div>
               </div>
-              <div className="relative aspect-[4/3] rounded-[3rem] overflow-hidden shadow-2xl order-1 lg:order-2">
-                <Image src="/images/about-us/metro.png" alt="Dubai Metro" fill className="object-cover" />
+              <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl order-1 lg:order-2">
+                <Image src="/images/about-us/metro.jpg" alt="Dubai Metro" fill className="object-cover" />
               </div>
             </div>
           </div>
@@ -227,16 +215,12 @@ export default function HowToFindUs() {
       </section>
 
       {/* Driving Directions */}
-      <section className="py-32 px-8 max-w-screen-2xl mx-auto">
+      <section className="py-16 px-8 max-w-screen-2xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-20 items-start">
           <div className="space-y-12">
-            <div className="flex items-center gap-3">
-              <div className="w-6 h-[2px] bg-primary" />
-              <span className="text-primary text-base font-black uppercase tracking-[0.3em]">
-                DRIVING DIRECTIONS
-              </span>
-            </div>
-
+            <span className="section-label">
+              DRIVING DIRECTIONS
+            </span>
             <div className="space-y-10">
               {[
                 { from: "Dubai", text: "Take Al Ittihad Road (E11) towards Sharjah. Follow the signs towards Al Mamzar. Turn right onto Al Mamzar Road and continue until you reach Tabarak Tower on your right." },
@@ -246,42 +230,63 @@ export default function HowToFindUs() {
                 <div key={idx} className="flex gap-6 group">
                   <span className="text-slate-200 text-5xl font-black group-hover:text-primary/20 transition-colors">0{idx + 1}</span>
                   <div className="space-y-2">
-                    <h6 className="font-black text-slate-900 uppercase text-sm tracking-widest">From {route.from}</h6>
-                    <p className="text-slate-500 text-sm leading-relaxed font-medium">{route.text}</p>
+                    <h6 className="text-primary font-black uppercase text-base">From {route.from}</h6>
+                    <p className="text-base leading-relaxed font-medium">{route.text}</p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="bg-slate-900 rounded-[2.5rem] p-10 md:p-14 text-white space-y-10 shadow-2xl relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-            <div className="relative z-10 space-y-8">
-              <div className="flex items-center gap-4">
-                <Info className="w-8 h-8 text-primary" />
-                <h3 className="text-2xl font-black uppercase">Parking Information</h3>
-              </div>
-              <div className="space-y-8">
-                <div className="space-y-2">
-                  <p className="text-primary font-black uppercase text-base tracking-widest">On-Site Parking</p>
-                  <p className="text-slate-400 text-sm leading-relaxed">There are visitor parking spaces available at the back of Tabarak Tower.</p>
+          <div className="bg-primary rounded-[2.5rem] p-10 md:p-14 text-white space-y-10 shadow-2xl relative overflow-hidden group">
+            <div className="absolute top-0 right-0 w-80 h-80 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:scale-110 transition-transform duration-700"></div>
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-black/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 group-hover:scale-110 transition-transform duration-700"></div>
+
+            <div className="relative z-10 space-y-10">
+              <div className="flex items-center gap-5">
+                <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center backdrop-blur-sm border border-white/20">
+                  <Car className="w-8 h-8 text-white" />
                 </div>
-                <div className="space-y-2 border-t border-white/10 pt-8">
-                  <p className="text-primary font-black uppercase text-base tracking-widest">Public Parking</p>
-                  <div className="space-y-4">
-                    <p className="text-slate-400 text-sm leading-relaxed">
-                      Metered parking is also available near the tower at a rate of AED 2 per hour. Please check with SRTA in Sharjah for any recent updates on metered parking and payment options.
+                <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tight">Parking <br />Information</h3>
+              </div>
+
+              <div className="space-y-4">
+                <div className="space-y-2">
+                  <div className="flex items-center gap-3">
+                    <div className="w-2 h-2 rounded-full bg-white"></div>
+                    <p className="text-white font-black uppercase text-sm tracking-[0.2em]">On-Site Parking</p>
+                  </div>
+                  <p className="text-white/80 text-base leading-relaxed font-medium pl-5">
+                    There are visitor parking spaces available at the back of <span className="text-white font-black">Tabarak Tower</span>.
+                  </p>
+                </div>
+
+                <div className="h-px bg-white/20 w-full"></div>
+
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-2 h-2 rounded-full bg-white"></div>
+                    <p className="text-white font-black uppercase text-sm tracking-[0.2em]">Public Parking</p>
+                  </div>
+                  <div className="space-y-5 pl-5">
+                    <p className="text-white/80 text-base leading-relaxed font-medium">
+                      Metered parking is also available near the tower at a rate of <span className="text-white font-black">AED 2 per hour</span>. Please check with SRTA in Sharjah for recent updates.
                     </p>
-                    <p className="text-white/80 text-base italic font-medium leading-relaxed">
-                      This guide is aimed at helping you reach <span className="text-white font-black">The Exam Preparation & Testing House L.L.C</span> in Sharjah with ease.
-                    </p>
+                    <div className="bg-white/10 p-5 rounded-2xl border border-white/10 backdrop-blur-sm">
+                      <p className="text-white font-medium leading-relaxed italic">
+                        "This guide is aimed at helping you reach The Exam Preparation & Testing House L.L.C in Sharjah with ease."
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div className="pt-8 border-t border-white/10">
-                <p className="text-xs font-bold text-white/40 uppercase tracking-widest mb-2">For Further Assistance</p>
-                <Link href="tel:+97165531250" className="text-2xl font-black text-primary hover:underline transition-all block">
-                  +971 6 553 1250
+
+              <div className="p-4 border-t border-white/20">
+                <p className="text-base text-white mb-6">For Further Assistance</p>
+                <Link href="tel:+97165531250" className="group/phone flex items-center gap-4">
+                  <span className="text-2xl md:text-3xl font-black text-white hover:text-white/80 transition-all">
+                    +971 6 553 1250
+                  </span>
                 </Link>
               </div>
             </div>

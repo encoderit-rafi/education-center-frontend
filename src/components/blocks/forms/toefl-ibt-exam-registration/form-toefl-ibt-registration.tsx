@@ -27,7 +27,7 @@ import {
     Phone,
     Briefcase
 } from "lucide-react";
-import { ToeflIbtSchema, type TToeflIbtSchema } from "./-type";
+import { ToeflIbtSchema, type TToeflIbtSchema } from "./_type";
 import { SearchableDropdown } from "@/components/ui/searchable-dropdown";
 import { CountryDropdown } from "@/components/ui/country-dropdown";
 import { Checkbox } from "@/components/ui/checkbox";

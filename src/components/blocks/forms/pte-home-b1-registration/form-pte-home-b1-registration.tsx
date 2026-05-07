@@ -26,7 +26,7 @@ import {
   X,
   AlertCircle
 } from "lucide-react";
-import { RefinedPteHomeB1Schema, type TPteHomeB1FormSchema } from "./-type";
+import { RefinedPteHomeB1Schema, type TPteHomeB1FormSchema } from "./_type";
 import { SearchableDropdown } from "@/components/ui/searchable-dropdown";
 import { CountryDropdown } from "@/components/ui/country-dropdown";
 import { DateTimePicker } from "@/components/ui/date-time-picker";

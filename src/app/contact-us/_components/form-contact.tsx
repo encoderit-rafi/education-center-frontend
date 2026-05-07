@@ -13,20 +13,31 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useState, useRef } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
+import { Controller } from "react-hook-form";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { PhoneInput } from "@/components/ui/phone-input";
+import { CountryDropdown } from "@/components/ui/country-dropdown";
 
 
 
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, ChevronDown, SendHorizontal, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const contactSchema = z.object({
   fullName: z
     .string()
-    .min(2, { message: "Name must be at least 3 characters" }),
+    .min(2, { message: "Name must be at least 2 characters" }),
   email: z.string().email({ message: "Please enter a valid email address" }),
-  subject: z
-    .string()
-    .min(3, { message: "Subject must be at least 3 characters" }),
+  phoneNumber: z.string().min(5, { message: "Please enter a valid phone number" }),
+  country: z.string().min(1, { message: "Please select your country" }),
+  emiratesCity: z.string().optional(),
+  enquiryTopic: z.string().min(1, { message: "Please select an enquiry topic" }),
   message: z
     .string()
     .min(10, { message: "Message must be at least 10 characters" }),
@@ -41,6 +52,7 @@ export default function ContactForm() {
 
   const {
     register,
+    control,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<ContactFormValues>({
@@ -48,7 +60,10 @@ export default function ContactForm() {
     defaultValues: {
       fullName: "",
       email: "",
-      subject: "",
+      phoneNumber: "",
+      country: "",
+      emiratesCity: "",
+      enquiryTopic: "",
       message: "",
     },
   });
@@ -86,14 +101,14 @@ export default function ContactForm() {
     <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Field data-invalid={!!errors.fullName}>
-          <FieldLabel className="text-xs font-black text-slate-500 uppercase tracking-[0.2em] ml-1">
-            Full Name <span className="text-primary">*</span>
+          <FieldLabel className="text-sm font-medium">
+            Full Name <span className="text-primary font-bold">*</span>
           </FieldLabel>
           <FieldContent>
             <Input
               placeholder="John Doe"
               {...register("fullName")}
-              className="bg-slate-50/50 border-slate-200 focus-visible:ring-primary h-14 rounded-xl px-6 placeholder:text-slate-400 font-medium"
+              className="bg-slate-50/50 border-slate-200 focus-visible:ring-primary h-12 rounded-xl px-6 placeholder:text-slate-400 font-medium"
             />
           </FieldContent>
           {errors.fullName && (
@@ -102,8 +117,8 @@ export default function ContactForm() {
         </Field>
 
         <Field data-invalid={!!errors.email}>
-          <FieldLabel className="text-xs font-black text-slate-500 uppercase tracking-[0.2em] ml-1">
-            Email Address <span className="text-primary">*</span>
+          <FieldLabel className="text-sm font-medium">
+            Email Address <span className="text-primary font-bold">*</span>
           </FieldLabel>
           <FieldContent>
             <Input
@@ -117,23 +132,173 @@ export default function ContactForm() {
         </Field>
       </div>
 
-      <Field data-invalid={!!errors.subject}>
-        <FieldLabel className="text-xs font-black text-slate-500 uppercase tracking-[0.2em] ml-1">
-          Subject <span className="text-primary">*</span>
+      <div className="w-full h-px bg-slate-100/80 my-4" />
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <Field data-invalid={!!errors.phoneNumber}>
+          <FieldLabel className="text-sm font-medium">
+            Phone number <span className="text-primary font-bold">*</span>
+          </FieldLabel>
+          <FieldContent>
+            <div className="relative h-14 rounded-xl bg-slate-50/50 border border-slate-200 focus-within:border-slate-400 focus-within:ring-4 focus-within:ring-primary/5 transition-all overflow-hidden">
+              <Controller
+                control={control}
+                name="phoneNumber"
+                render={({ field }) => (
+                  <PhoneInput
+                    value={field.value}
+                    onChange={field.onChange}
+                    defaultCountry="AE"
+                    className="h-full w-full border-none focus-within:ring-0 font-medium"
+                  />
+                )}
+              />
+            </div>
+          </FieldContent>
+          {errors.phoneNumber && (
+            <FieldError>{errors.phoneNumber.message}</FieldError>
+          )}
+        </Field>
+
+        <Field data-invalid={!!errors.emiratesCity}>
+          <FieldLabel className="text-sm font-medium">
+            Emirates City <span className="text-primary font-bold">*</span>
+          </FieldLabel>
+          <FieldContent>
+            <Controller
+              control={control}
+              name="emiratesCity"
+              render={({ field }) => (
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      variant="outline"
+                      className="bg-slate-50/50 border-slate-200 focus:ring-4 focus:ring-primary/5 h-14 rounded-xl px-6 text-slate-700 font-medium w-full text-left flex items-center justify-between outline-hidden border transition-all"
+                    >
+                      <span className={!field.value ? "text-slate-400" : ""}>
+                        {field.value || "Select city"}
+                      </span>
+                      <ChevronDown className="w-4 h-4 text-slate-500" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="w-[var(--radix-dropdown-menu-trigger-width)]">
+                    <DropdownMenuRadioGroup
+                      value={field.value}
+                      onValueChange={field.onChange}
+                    >
+                      {[
+                        "Abu Dhabi",
+                        "Dubai",
+                        "Sharjah",
+                        "Ajman",
+                        "Umm Al Quwain",
+                        "Ras Al Khaimah",
+                        "Fujairah",
+                      ].map((city) => (
+                        <DropdownMenuRadioItem key={city} value={city}>
+                          {city}
+                        </DropdownMenuRadioItem>
+                      ))}
+                    </DropdownMenuRadioGroup>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              )}
+            />
+          </FieldContent>
+          {errors.emiratesCity && (
+            <FieldError>{errors.emiratesCity.message}</FieldError>
+          )}
+        </Field>
+      </div>
+
+      <div className="w-full h-px bg-slate-100/80 my-4" />
+
+      <Field data-invalid={!!errors.country}>
+        <FieldLabel className="text-sm font-medium">
+          Country <span className="text-primary font-bold">*</span>
         </FieldLabel>
         <FieldContent>
-          <Input
-            placeholder="How can we help you?"
-            {...register("subject")}
-            className="bg-slate-50/50 border-slate-200 focus-visible:ring-primary h-14 rounded-xl px-6 placeholder:text-slate-400 font-medium"
+          <Controller
+            control={control}
+            name="country"
+            render={({ field }) => (
+              <CountryDropdown
+
+                value={field.value}
+                onChange={(c) => field.onChange(c.name)}
+                className="bg-slate-50/50 border-slate-200 focus:ring-primary h-14 rounded-xl px-6 font-medium"
+              />
+            )}
           />
         </FieldContent>
-        {errors.subject && <FieldError>{errors.subject.message}</FieldError>}
+        {errors.country && <FieldError>{errors.country.message}</FieldError>}
       </Field>
 
+      <div className="w-full h-px bg-slate-100/80 my-4" />
+
+      <Field data-invalid={!!errors.enquiryTopic}>
+        <FieldLabel className="text-sm font-medium">
+          Enquiry Topic <span className="text-primary font-bold">*</span>
+        </FieldLabel>
+        <FieldContent>
+          <Controller
+            control={control}
+            name="enquiryTopic"
+            render={({ field }) => (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="outline"
+                    className="bg-slate-50/50 border-slate-200 focus:ring-4 focus:ring-primary/5 h-14 rounded-xl px-6 text-slate-700 font-medium w-full text-left flex items-center justify-between outline-hidden border transition-all"
+                  >
+                    <span className={!field.value ? "text-slate-400" : ""}>
+                      {field.value || "Select a topic"}
+                    </span>
+                    <ChevronDown className="w-4 h-4 text-slate-500" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-[var(--radix-dropdown-menu-trigger-width)]">
+                  <DropdownMenuRadioGroup
+                    value={field.value}
+                    onValueChange={field.onChange}
+                  >
+                    <DropdownMenuRadioItem value="Exam Registration">
+                      Exam Registration
+                    </DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="Exam Preparation Courses">
+                      Exam Preparation Courses
+                    </DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="Exam Proctoring">
+                      Exam Proctoring
+                    </DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="Special Accommodation">
+                      Special Accommodation
+                    </DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="Test Dates & Availability">
+                      Test Dates & Availability
+                    </DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="Fees & Payment">
+                      Fees & Payment
+                    </DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="General Enquiry">
+                      General Enquiry
+                    </DropdownMenuRadioItem>
+                  </DropdownMenuRadioGroup>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )}
+          />
+        </FieldContent>
+        {errors.enquiryTopic && (
+          <FieldError>{errors.enquiryTopic.message}</FieldError>
+        )}
+      </Field>
+
+      <div className="w-full h-px bg-slate-100/80 my-4" />
+
       <Field data-invalid={!!errors.message}>
-        <FieldLabel className="text-xs font-black text-slate-500 uppercase tracking-[0.2em] ml-1">
-          Message <span className="text-primary">*</span>
+        <FieldLabel className="text-sm font-medium">
+          Message <span className="text-primary font-bold">*</span>
         </FieldLabel>
         <FieldContent>
           <Textarea
@@ -159,13 +324,23 @@ export default function ContactForm() {
         )}
       </div>
 
-      <Button
-        type="submit"
-        disabled={isSubmitting}
-        className="h-14 px-12 rounded-xl font-black uppercase tracking-widest text-xs w-full md:w-auto transition-all active:scale-95"
-      >
-        {isSubmitting ? "Sending..." : "Send Message"}
-      </Button>
+      <div className="space-y-4">
+        <Button
+          type="submit"
+          disabled={isSubmitting}
+          className="h-14 px-12 rounded-xl font-black uppercase tracking-widest text-xs w-full md:w-auto transition-all active:scale-95"
+        >
+          <div className="flex items-center gap-3">
+            {isSubmitting ? "Sending..." : "Send Enquiry"}
+            {!isSubmitting && <SendHorizontal className="w-4 h-4" />}
+          </div>
+        </Button>
+
+        <p className="flex items-center gap-1 text-sm">
+          <ShieldCheck className="w-4 h-4 text-primary" />
+          <span className="font-medium">We'll get back to you within 24 hours. Your information is kept confidential.</span>
+        </p>
+      </div>
     </form>
   );
 }
