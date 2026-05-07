@@ -1,10 +1,14 @@
 "use client";
+import React from "react";
 
 import Image from "next/image";
 import Link from "next/link";
-import { MapPin, Clock, Phone, Mail, ArrowRight, Info } from "lucide-react";
+import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import ContactForm from "@/app/contact-us/_components/form-contact";
-import { Button } from "@/components/ui/button";
+import { MessageCircle } from "lucide-react";
+import { BaseCard, BaseCardDescription, BaseCardIcon, BaseCardTitle } from "@/components/blocks/cards/base-card";
+
+
 
 export default function ContactUs() {
   return (
@@ -13,40 +17,23 @@ export default function ContactUs() {
       <section className="py-16 md:py-24 px-8 max-w-screen-2xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
           {/* Left Content */}
-          <div className="space-y-8 animate-fade-up">
+          <div className="space-y-4 animate-fade-up">
             {/* Section Badge */}
-            <div className="flex items-center gap-3">
-              <div className="w-6 h-[2px] bg-primary" />
-              <span className="text-primary text-xs font-black uppercase tracking-[0.3em]">
-                SUPPORT CENTER
-              </span>
-            </div>
+            <span className="section-label">
+              CONTACT US
+            </span>
 
             {/* Main Heading */}
-            <h1 className="text-3xl md:text-5xl font-black text-slate-900 leading-[1.1] tracking-tight uppercase">
+            <h1 className="section-title">
               Get in <br />
-              <span className="text-primary">Touch With Us</span>
+              <span>Touch With Us</span>
             </h1>
 
             {/* Description */}
-            <p className="text-base text-slate-600 leading-relaxed max-w-xl font-sans">
+            <p className="section-description">
               Whether you're preparing for an entrance exam or need deep
               editorial review, we're here to guide you. Our expert team is ready to assist you at every step of your journey.
             </p>
-
-            {/* Quick Links */}
-            <div className="flex flex-wrap gap-4 pt-4">
-              <Link href="/book-exams">
-                <Button className="h-14 w-52 text-sm rounded-lg flex items-center justify-center gap-2">
-                  Book an Exam <ArrowRight className="w-5 h-5" />
-                </Button>
-              </Link>
-              <Link href="/faqs">
-                <Button className="h-14 w-52 text-sm rounded-lg flex items-center justify-center gap-2" variant="destructive">
-                  View FAQs
-                </Button>
-              </Link>
-            </div>
           </div>
 
           {/* Right Visual */}
@@ -66,84 +53,127 @@ export default function ContactUs() {
       </section>
 
       {/* Contact Details & Form Section */}
-      <section className="py-24 px-8 max-w-screen-2xl mx-auto border-t border-slate-50">
-        <div className="grid lg:grid-cols-2 gap-20 items-start">
+      <section className="px-8 max-w-screen-2xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-20">
           {/* Left Side: Contact Details */}
-          <div className="space-y-12">
-            <div className="flex items-center gap-3">
-              <div className="w-6 h-[2px] bg-primary" />
-              <span className="text-primary text-xs font-black uppercase tracking-[0.3em]">
-                CONTACT INFORMATION
+          <div className="relative overflow-hidden rounded-[2.5rem] p-10 md:p-16 group h-full flex flex-col justify-start gap-12">
+            {/* Header */}
+            <div className="space-y-4 animate-fade-up">
+              <span className="section-badge text-primary">
+                STAY CONNECTED
               </span>
+              <h2 className="section-title">
+                Reach out <br />
+                <span className="text-primary">to the experts</span>
+              </h2>
             </div>
 
-            <div className="space-y-10">
-              {/* Working Hours */}
-              <div className="flex gap-6 group">
-                <div className="w-14 h-14 rounded-2xl bg-primary/5 flex items-center justify-center text-primary shrink-0 group-hover:bg-primary group-hover:text-white transition-all duration-300">
-                  <Clock className="w-6 h-6" />
-                </div>
-                <div className="space-y-2">
-                  <h4 className="text-sm font-black text-slate-900 uppercase tracking-widest">Working Hours</h4>
-                  <div className="space-y-1">
-                    <p className="text-slate-500 font-bold uppercase text-[10px] tracking-[0.2em]">Saturday to Thursday</p>
-                    <p className="text-xl font-black text-primary">9:00 AM – 9:00 PM</p>
-                  </div>
-                </div>
-              </div>
+            <div className="relative z-10 space-y-4 animate-fade-up">
+              <Link href="tel:+97165531250" className="block group/card-link">
+                <BaseCard className="flex flex-row items-start gap-4 p-5 ">
+                  <BaseCardIcon >
+                    <Phone className="w-6 h-6" />
 
-              {/* Address */}
-              <div className="flex gap-6 group">
-                <div className="w-14 h-14 rounded-2xl bg-primary/5 flex items-center justify-center text-primary shrink-0 group-hover:bg-primary group-hover:text-white transition-all duration-300">
-                  <MapPin className="w-6 h-6" />
-                </div>
-                <div className="space-y-2">
-                  <h4 className="text-sm font-black text-slate-900 uppercase tracking-widest">Our Office</h4>
+                  </BaseCardIcon>
+                  <div className="space-y-1">
+                    <BaseCardTitle>
+                      +971 4 333 3616
+                    </BaseCardTitle>
+                    <BaseCardDescription>
+                      Available Sunday – Thursday, 9am – 6pm
+                    </BaseCardDescription>
+                  </div>
+                </BaseCard>
+              </Link>
+
+              <Link href="mailto:info@tepth.net" className="block group/card-link">
+                <BaseCard className="flex flex-row items-start gap-4 p-5 ">
+                  <BaseCardIcon >
+                    <Mail className="w-6 h-6" />
+                  </BaseCardIcon>
+                  <div className="space-y-1">
+                    <BaseCardTitle>
+                      info@tepth.net
+                    </BaseCardTitle>
+                    <BaseCardDescription>
+                      We typically respond within 24 hours
+                    </BaseCardDescription>
+                  </div>
+                </BaseCard>
+              </Link>
+
+              <Link href="/about-us/how-to-find-us" className="block group/card-link">
+                <BaseCard className="flex flex-row items-start gap-4 p-5 ">
+                  <BaseCardIcon >
+                    <MapPin className="w-6 h-6" />
+                  </BaseCardIcon>
+                  <div className="space-y-1">
+                    <BaseCardTitle>
+                      Dubai Silicon Oasis, Dubai, UAE
+                    </BaseCardTitle>
+                    <BaseCardDescription>
+                      Close to Academic City — wheelchair accessible
+                    </BaseCardDescription>
+                  </div>
+                </BaseCard>
+              </Link>
+
+              <Link href="https://wa.me/97165531250" target="_blank" className="block group/card-link">
+                <BaseCard className="flex flex-row items-start gap-4 p-5 ">
+                  <BaseCardIcon >
+                    <MessageCircle className="w-6 h-6" />
+                  </BaseCardIcon>
+                  <div className="space-y-1">
+                    <BaseCardTitle>
+                      Chat with us
+                    </BaseCardTitle>
+                    <BaseCardDescription>
+                      Quick answers via WhatsApp
+                    </BaseCardDescription>
+                  </div>
+                </BaseCard>
+              </Link>
+
+              {/* Office Hours Card */}
+              <BaseCard className="bg-rose-50/30 border border-rose-100/50 shadow-none  rounded-xl flex flex-row gap-4 p-5 hover:translate-y-0 hover:shadow-none hover:border-rose-100/50">
+                <BaseCardIcon>
+                  <Clock className="w-6 h-6" />
+                </BaseCardIcon>
+
+                <div className="flex-1 space-y-2">
+                  <BaseCardTitle className="text-lg font-black uppercase tracking-tight text-[#7d1c1c] pt-2 group-hover:text-[#7d1c1c]">Office Hours</BaseCardTitle>
+
                   <div className="space-y-2">
-                    <p className="text-base font-black text-slate-900 border-b border-primary/20 inline-block pb-1">
-                      The Exam Preparation & Testing House L.L.C
-                    </p>
-                    <div className="text-slate-600 text-sm font-medium leading-relaxed">
-                      <p>Suite 701, 7th Floor, Tabarak Tower,</p>
-                      <p>Corniche Road, Al Mamzar, Sharjah, UAE.</p>
+                    <div className="flex justify-between items-center">
+                      <span>Sunday – Thursday</span>
+                      <span className="text-base text-slate-900 font-black">9:00 AM – 9:00 PM</span>
+                    </div>
+                    <div className="w-full h-px bg-rose-200/40" />
+                    <div className="flex justify-between items-center">
+                      <span>Friday</span>
+                      <span className="text-[#d12c2c] font-black uppercase text-base">Closed</span>
                     </div>
                   </div>
                 </div>
-              </div>
-
-              {/* Direct Links */}
-              <div className="pt-10 border-t border-slate-100 space-y-6">
-                <Link href="tel:+97165531250" className="flex items-center gap-6 group hover:translate-x-2 transition-transform duration-300">
-                  <div className="w-12 h-12 rounded-full bg-slate-900 flex items-center justify-center text-white group-hover:bg-primary transition-colors">
-                    <Phone className="w-5 h-5" />
-                  </div>
-                  <span className="text-xl font-black text-slate-900">+971 6 553 1250</span>
-                </Link>
-                <Link href="mailto:info@tepth.org" className="flex items-center gap-6 group hover:translate-x-2 transition-transform duration-300">
-                  <div className="w-12 h-12 rounded-full bg-slate-900 flex items-center justify-center text-white group-hover:bg-primary transition-colors">
-                    <Mail className="w-5 h-5" />
-                  </div>
-                  <span className="text-xl font-black text-slate-900">info@tepth.org</span>
-                </Link>
-              </div>
-
-              {/* Helpful Note */}
-              <div className="flex gap-4 p-8 mr-4 bg-primary/5 rounded-3xl border-l-4 border-primary mt-8">
-                <Info className="w-6 h-6 text-primary shrink-0" />
-                <p className="text-slate-700 font-bold text-sm leading-snug">
-                  Need directions? Check our <Link href="/about-us/how-to-find-us" className="text-primary underline">Location Guide</Link> for transportation options and parking information.
-                </p>
-              </div>
+              </BaseCard>
             </div>
           </div>
 
           {/* Right Side: Form */}
-          <div className="relative">
-            <div className="absolute -inset-4 bg-primary/5 rounded-[2.5rem] blur-2xl opacity-50"></div>
-            <div className="relative bg-white rounded-xl p-8 md:p-12">
-              <div className="mb-10 space-y-2">
-                <h3 className="text-2xl font-black text-slate-900 uppercase tracking-tight">Send a Message</h3>
-                <p className="text-slate-500 text-sm font-medium">We'll respond to your inquiry within 24 hours.</p>
+          <div className="relative h-full">
+            <div className="absolute -inset-10 bg-primary/5 rounded-[4rem] blur-3xl opacity-30 pointer-events-none"></div>
+            <div className="relative bg-white rounded-[2.5rem] p-8 md:p-16 h-full flex flex-col">
+              <div className="mb-12 space-y-4">
+                <span className="section-badge text-primary">
+                  ENQUIRY FORM
+                </span>
+                <h3 className="section-title">
+                  Send a <br />
+                  <span className="text-primary">Direct Message</span>
+                </h3>
+                <p className="section-description">
+                  Have a specific question? Fill out the form below and our team will get back to you within 24 business hours.
+                </p>
               </div>
               <ContactForm />
             </div>
