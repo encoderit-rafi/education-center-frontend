@@ -1,20 +1,5 @@
-import React from "react";
 import { notFound } from "next/navigation";
-import Image from "next/image";
-import Link from "next/link";
-import { exams, exams_types } from "@/lib/data";
-import { cn } from "@/lib/utils";
-import { ArrowRight, Calendar } from "lucide-react";
-import {
-  BaseCard,
-  BaseCardDescription,
-  BaseCardIcon,
-  BaseCardTitle,
-} from "@/components/blocks/cards/base-card";
-import { Badge } from "@/components/ui/badge";
-import GradientBox from "@/components/blocks/gradient-box";
-import { buttonVariants } from "@/components/ui/button";
-import { EXAM_IDS_DATA, NAV_EXAMS_DATA } from "@/data";
+import { EXAM_IDS_DATA } from "@/data";
 import ExamIELTS from "../_components/exam-ielts";
 import ExamIELTSAcademic from "../_components/exam-ielts-academic";
 import ExamIELTSGeneral from "../_components/exam-ielts-general";
@@ -24,6 +9,7 @@ import ExamCELPIP from "../_components/exam-celpip";
 import ExamCelpipGeneralLS from "../_components/exam-celpip-general-ls";
 import ExamCAEL from "../_components/exam-cael";
 import ExamTOEFL from "../_components/exam-toefl";
+import ExamSELT from "../_components/exam-selt";
 
 export default async function ExamDetailPage({
   params,
@@ -51,5 +37,9 @@ export default async function ExamDetailPage({
       return <ExamCelpipGeneralLS />;
     case EXAM_IDS_DATA.cael.id:
       return <ExamCAEL />;
+    case EXAM_IDS_DATA.selt.id:
+      return <ExamSELT />;
+    default:
+      notFound();
   }
 }
