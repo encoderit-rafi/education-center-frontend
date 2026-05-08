@@ -70,7 +70,7 @@ export default function BookAnExamVenuePage() {
 
       {/* Comprehensive Exam Infrastructure Accordion */}
       <section className="py-24 bg-surface container-lowest">
-        <div className="max-w-6xl mx-auto px-6 lg:px-12">
+        <div className="max-w-4xl mx-auto px-6 lg:px-12">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-on-surface font-headline">
               Comprehensive Exam Infrastructure
@@ -78,57 +78,29 @@ export default function BookAnExamVenuePage() {
             <div className="h-1.5 w-24 bg-primary mx-auto mt-6 rounded-full"></div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
-            {/* Left Column (Even indices) */}
-            <Accordion type="multiple" className="flex flex-col gap-6 border-none space-y-0">
-              {infrastructureItems.filter((_, i) => i % 2 === 0).map((item, index) => (
-                <AccordionItem
-                  key={index}
-                  value={`item-${index}`}
-                  className="bg-white rounded-xl overflow-hidden border border-outline/100 transition-all duration-300 data-[state=open]:border-primary data-[state=open]:shadow-lg h-fit"
-                >
-                  <AccordionTrigger className="flex items-center justify-between p-6 cursor-pointer hover:no-underline group/trigger">
-                    <div className="flex items-center gap-4">
-                      <item.icon className={cn("w-6 h-6 transition-transform group-hover/trigger:scale-110 text-on-surface-variant group-data-[state=open]/trigger:text-primary", item.iconColor)} />
-                      <h3 className="text-lg font-bold text-on-surface transition-colors group-data-[state=open]/trigger:text-primary">
-                        {item.title}
-                      </h3>
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent className="px-6 pb-6 pt-0">
-                    <p className="text-on-surface leading-relaxed border-t border-primary/10 pt-4">
-                      {item.description}
-                    </p>
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-
-            {/* Right Column (Odd indices) */}
-            <Accordion type="multiple" className="flex flex-col gap-6 border-none space-y-0">
-              {infrastructureItems.filter((_, i) => i % 2 !== 0).map((item, index) => (
-                <AccordionItem
-                  key={index}
-                  value={`item-${index}`}
-                  className="bg-white rounded-xl overflow-hidden border border-outline/100 transition-all duration-300 data-[state=open]:border-primary data-[state=open]:shadow-lg h-fit"
-                >
-                  <AccordionTrigger className="flex items-center justify-between p-6 cursor-pointer hover:no-underline group/trigger">
-                    <div className="flex items-center gap-4">
-                      <item.icon className={cn("w-6 h-6 transition-transform group-hover/trigger:scale-110 text-on-surface-variant group-data-[state=open]/trigger:text-primary", item.iconColor)} />
-                      <h3 className="text-lg font-bold text-on-surface transition-colors group-data-[state=open]/trigger:text-primary">
-                        {item.title}
-                      </h3>
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent className="px-6 pb-6 pt-0">
-                    <p className="text-on-surface leading-relaxed border-t border-primary/10 pt-4">
-                      {item.description}
-                    </p>
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </div>
+          <Accordion className="space-y-4 border-none">
+            {infrastructureItems.map((item, index) => (
+              <AccordionItem
+                key={index}
+                value={`item-${index}`}
+                className="bg-surface-container-low rounded-xl overflow-hidden border border-transparent transition-all duration-300 data-[state=open]:border-primary/20 data-[state=open]:shadow-md border-none"
+              >
+                <AccordionTrigger className="flex items-center justify-between p-6 cursor-pointer hover:no-underline group/trigger">
+                  <div className="flex items-center gap-4">
+                    <item.icon className={cn("w-6 h-6 transition-transform group-hover/trigger:scale-110", item.iconColor)} />
+                    <h3 className="text-lg font-bold text-on-surface transition-colors">
+                      {item.title}
+                    </h3>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="px-6 pb-6 pt-0">
+                  <p className="text-on-surface leading-relaxed border-t border-primary/10 pt-4">
+                    {item.description}
+                  </p>
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </div>
       </section>
 
@@ -196,7 +168,7 @@ export default function BookAnExamVenuePage() {
         <div className="bg-primary rounded-[2rem] p-12 lg:p-20 text-center text-white shadow-2xl relative overflow-hidden group">
           <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 opacity-5 -mr-48 -mt-48 rounded-full group-hover:scale-110 transition-transform duration-1000"></div>
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 opacity-5 -ml-32 -mb-32 rounded-full group-hover:scale-110 transition-transform duration-1000 delay-200"></div>
-
+          
           <div className="relative z-10">
             <h2 className="text-4xl lg:text-5xl font-extrabold mb-8 font-headline leading-tight">
               Secure Your Exam Venue Today

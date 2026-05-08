@@ -30,7 +30,7 @@ export default function AssessmentSolutionsPage() {
   return (
     <main className="pb-12">
       {/* Hero Section */}
-      {/* <section className="relative px-8 py-32 min-h-[600px] flex items-center bg-white">
+      <section className="relative px-8 py-32 min-h-[600px] flex items-center bg-white">
         <div className="relative z-10 max-w-6xl mx-auto text-left w-full">
           <h1 className="text-6xl md:text-7xl font-extrabold text-slate-900 leading-[1.1] tracking-tighter mb-8 font-headline">
             Global Standards in <br />
@@ -44,7 +44,7 @@ export default function AssessmentSolutionsPage() {
             insights for the modern academic landscape.
           </p>
         </div>
-      </section> */}
+      </section>
 
       {/* Assessment Solutions for Universities */}
       <section className="px-8 py-24 bg-white">

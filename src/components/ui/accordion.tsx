@@ -3,15 +3,10 @@ import { Accordion as AccordionPrimitive } from "@base-ui/react/accordion"
 import { cn } from "@/lib/utils"
 import { ChevronDownIcon, ChevronUpIcon } from "lucide-react"
 
-function Accordion({
-  className,
-  type,
-  ...props
-}: AccordionPrimitive.Root.Props & { type?: "single" | "multiple" }) {
+function Accordion({ className, ...props }: AccordionPrimitive.Root.Props) {
   return (
     <AccordionPrimitive.Root
       data-slot="accordion"
-      multiple={type === "multiple" || props.multiple}
       className={cn(
         "flex w-full flex-col overflow-hidden rounded-2xl border",
         className

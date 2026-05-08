@@ -5,54 +5,67 @@ import { BadgeCheck, Timer, ArrowRight, Eye, DoorOpen, Users } from "lucide-reac
 
 export default function SpecialAccommodation() {
   return (
-    <main className="bg-white min-h-screen">
+    <main>
       {/* Hero Section */}
-      <section className="py-16 md:py-24 px-8 max-w-screen-2xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
-          {/* Left Content */}
-          <div className="space-y-8 animate-fade-up">
-            {/* Section Badge */}
-            <span className="section-label">
-              ACCESSIBILITY FIRST
-            </span>
-
-            {/* Main Heading */}
-            <h2 className="section-title">
-              Empowering <span className="text-primary italic">Every</span> Learner.
-            </h2>
-
-            {/* Description */}
-            <p className="section-description">
-              TEPTH is committed to ensuring that all candidates have equal opportunity to demonstrate their abilities. We provide a range of reasonable adjustments tailored to specific needs.
-            </p>
-          </div>
-
-          {/* Right Visual */}
-          <div className="relative group">
-            <div className="absolute -inset-4 bg-primary/5 rounded-xl blur-3xl opacity-50 transition-opacity group-hover:opacity-100"></div>
-            <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
-              <Image
-                src="/images/about-us/experience-student.png"
-                alt="A focused student using specialized academic tools"
-                fill
-                className="object-cover"
-                priority
-              />
+      <section className="relative overflow-hidden pt-32 pb-32">
+        <div className="max-w-screen-2xl mx-auto px-8 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div className="lg:col-span-7">
+              <span className="inline-block bg-primary/10 text-primary px-4 py-1.5 rounded-full text-xs font-bold mb-6 tracking-widest uppercase">
+                Accessibility First
+              </span>
+              <h1 className="text-5xl lg:text-7xl font-headline font-extrabold text-secondary tracking-tight leading-[1.1] mb-8">
+                Empowering <span className="text-primary italic">Every</span> Learner.
+              </h1>
+              <p className="text-lg text-slate-500 leading-relaxed max-w-xl mb-10">
+                TEPTH is committed to ensuring that all candidates have equal opportunity to demonstrate their abilities. We provide a range of reasonable adjustments tailored to specific needs.
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <button className="bg-primary text-white px-8 py-4 rounded-lg font-bold shadow-lg shadow-primary/20 hover:scale-105 transition-transform">
+                  Start Application
+                </button>
+                <button className="px-8 py-4 text-primary font-bold border-b-2 border-transparent hover:border-primary transition-all">
+                  Download Guidelines
+                </button>
+              </div>
+            </div>
+            <div className="lg:col-span-5 relative">
+              <div className="aspect-[4/5] rounded-xl overflow-hidden shadow-2xl relative z-10">
+                <Image
+                  alt="A focused student using specialized academic tools"
+                  className="w-full h-full object-cover"
+                  src="/images/about-us/experience-student.png"
+                  width={600}
+                  height={750}
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent"></div>
+              </div>
+              <div className="absolute -bottom-8 -left-8 bg-white p-6 rounded-xl shadow-xl max-w-[240px] z-20">
+                <div className="flex items-center gap-3 mb-2">
+                  <BadgeCheck className="text-primary w-5 h-5" />
+                  <span className="font-bold text-sm text-secondary">Certified Support</span>
+                </div>
+                <p className="text-xs text-slate-500 leading-relaxed">
+                  Our accommodations are aligned with international accessibility standards and exam board regulations.
+                </p>
+              </div>
             </div>
           </div>
         </div>
+        {/* Decorative Elements */}
+        <div className="absolute top-0 right-0 w-1/3 h-full bg-red-50 -z-0 rounded-l-[100px]"></div>
       </section>
 
       {/* Types of Accommodations - Bento Grid */}
       <section className="py-24 bg-red-50/30">
         <div className="max-w-screen-2xl mx-auto px-8">
-          <h2 className="section-title">Available
-            <span className="text-primary">Accommodations</span>
-          </h2>
-          <p className="section-description py-4">
-            We offer various modifications based on documented medical conditions, disabilities, or specific learning requirements.
-          </p>
-
+          <div className="mb-16">
+            <h2 className="text-3xl font-headline font-extrabold text-secondary mb-4">Available Accommodations</h2>
+            <p className="text-slate-500 max-w-2xl text-lg">
+              We offer various modifications based on documented medical conditions, disabilities, or specific learning requirements.
+            </p>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="md:col-span-2 bg-white shadow-sm p-10 rounded-xl flex flex-col justify-between group hover:bg-primary transition-colors duration-500 border border-slate-100 hover:border-primary">
               <div>
@@ -158,12 +171,12 @@ export default function SpecialAccommodation() {
                 </div>
               </div>
             </div>
-
-            <div className="border border-slate-200 shadow-sm rounded-xl p-8">
+            
+            <div className="bg-slate-50 border border-slate-100 rounded-xl p-12 shadow-sm">
               <h2 className="text-3xl font-headline font-extrabold mb-8 text-secondary">Accommodation Inquiry</h2>
               <SpecialAccommodationForm />
             </div>
-
+            
           </div>
         </div>
       </section>
