@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { buttonVariants } from "../ui/button";
@@ -26,7 +26,7 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="relative h-[95vh] flex items-center overflow-hidden bg-slate-900">
+    <section className="relative h-[80vh] flex items-center overflow-hidden bg-slate-900">
       {/* Background Slider */}
       <div className="absolute inset-0 z-0">
         {HERO_IMAGES.map((src, index) => (
@@ -57,12 +57,7 @@ export default function HeroSection() {
       {/* Content */}
       <div className="container relative z-20 px-4 md:px-8 max-w-7xl mx-auto">
         <div className="max-w-3xl space-y-8">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/20 text-white rounded-full text-xs font-bold tracking-[0.2em] uppercase border border-white/10 backdrop-blur-md animate-in fade-in slide-in-from-bottom-4 duration-700">
-            <Sparkles className="size-4 text-primary" />
-            Excellence in Education
-          </div>
-
-          <h1 className="text-5xl md:text-8xl font-headline font-black text-white leading-[1.1] tracking-tight animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-150">
+          <h1 className="text-4xl md:text-7xl font-headline font-black text-white leading-[1.1] tracking-tight animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-150">
             Prep Smarter <br />
             <span className="text-primary italic relative">
               Score
@@ -71,7 +66,7 @@ export default function HeroSection() {
             Higher
           </h1>
 
-          <p className="text-xl md:text-2xl text-slate-200 max-w-2xl leading-relaxed font-light animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-300">
+          <p className="text-lg text-slate-200 max-w-2xl leading-relaxed font-light animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-300">
             Empowering students with skilled instructors and premium resources
             to achieve their language goals and global recognition.
           </p>
@@ -81,9 +76,7 @@ export default function HeroSection() {
               href="/book-exams"
               className={buttonVariants({
                 size: "lg",
-                className: "group py-4",
-                // className:
-                //   "h-16 px-10 rounded-2xl font-bold text-lg shadow-2xl shadow-primary/40 bg-primary hover:bg-primary/90 text-white transition-all hover:scale-105 active:scale-95 ease-in-out",
+                className: "group py-2.5",
               })}
             >
               Book Exam
@@ -94,9 +87,7 @@ export default function HeroSection() {
               className={buttonVariants({
                 variant: "light",
                 size: "lg",
-                className: "py-4",
-                // className:
-                //   "h-16 px-10 rounded-2xl font-bold text-lg bg-white text-primary hover:text-primary border-white hover:bg-white transition-all hover:scale-105 active:scale-95 ease-in-out",
+                className: "py-2.5",
               })}
             >
               Our Courses
