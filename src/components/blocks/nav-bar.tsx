@@ -341,16 +341,14 @@ export default function NavBar() {
       <Banner />
       {/* Row 1 */}
       <div className="relative z-20 nav-px nav-py flex items-center justify-between gap-2 bg-white backdrop-blur-sm">
-        <Link href={"/"}>
-          <Image
-            alt="TEPTH Logo"
-            width={112}
-            height={112}
-            src="/images/tepth-logo.png"
-            className="w-32 h-auto"
-            priority
-          />
-        </Link>
+        <Image
+          alt="TEPTH Logo"
+          width={112}
+          height={112}
+          src="/images/tepth-logo.png"
+          className="w-32 h-auto"
+          priority
+        />
         {/* Desktop Primary Nav */}
         <div className="max-lg:hidden">
           <AppNavigation navigations={PRIMARY_NAV} />
