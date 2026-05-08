@@ -130,7 +130,7 @@ export const NAV_EXAMS_DATA = [
   EXAM_IDS_DATA.ielts,
   EXAM_IDS_DATA.toefl,
   EXAM_IDS_DATA.pte,
-  EXAM_IDS_DATA.celpip_general,
+  EXAM_IDS_DATA.celpip,
   EXAM_IDS_DATA.cael,
   EXAM_IDS_DATA.selt,
 ];

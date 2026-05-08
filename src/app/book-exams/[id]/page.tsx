@@ -36,11 +36,36 @@ export default async function BookExamsId({
           <FormIELTSGeneralRegistration />
         </div>
       );
+    case EXAM_IDS_DATA.toefl.id:
+      return (
+        <div>
+          <h2 className="text-2xl font-bold my-8 text-center">
+            TOEFL iBT Registration
+          </h2>
+          <FormTOEFLIBTRegistration />
+        </div>
+      );
     case EXAM_IDS_DATA.celpip_general.id:
       return (
         <div>
           <h2 className="text-2xl font-bold my-8 text-center">
             CELPIP General Registration
+          </h2>
+        </div>
+      );
+    case EXAM_IDS_DATA.celpip_general_ls.id:
+      return (
+        <div>
+          <h2 className="text-2xl font-bold my-8 text-center">
+            CELPIP General LS Registration
+          </h2>
+        </div>
+      );
+    case EXAM_IDS_DATA.cael.id:
+      return (
+        <div>
+          <h2 className="text-2xl font-bold my-8 text-center">
+            CAEL Registration
           </h2>
         </div>
       );
@@ -113,15 +138,7 @@ export default async function BookExamsId({
           <FormPTEHomeUkviRegistration />
         </div>
       );
-    case "toefl_ibt":
-      return (
-        <div>
-          <h2 className="text-2xl font-bold my-8 text-center">
-            TOEFL iBT Registration
-          </h2>
-          <FormTOEFLIBTRegistration />
-        </div>
-      );
+
     case "selt":
     case "selt_a1":
     case "selt_a2":

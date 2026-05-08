@@ -11,6 +11,9 @@ import {
   Headphones,
   PenTool,
   Mic2,
+  Trophy,
+  Globe,
+  Zap,
 } from "lucide-react";
 import {
   BaseCard,
@@ -39,87 +42,81 @@ const IconTile = ({ icon }: { icon: string }) => {
   }
 };
 
-const celpipGeneralData = {
-  id: EXAM_IDS_DATA.celpip_general.id,
-  name: "CELPIP General",
-  image: "/images/exams/celpip/celpip-hero.jpg",
+const toeflData = {
+  id: EXAM_IDS_DATA.toefl.id,
+  name: "TOEFL iBT",
+  image: "/images/exams/toefl/toefl-hero.jpg",
   content:
-    "The Canadian English Language Proficiency Index Program (CELPIP) is a complete English proficiency test evaluating listening, reading, writing, and speaking skills.",
+    "The TOEFL iBT is an Internet-based English proficiency test that measures reading, listening, speaking, and writing skills in an academic context.",
   overview:
-    "The CELPIP – General evaluates test taker’s English listening, reading, writing, and speaking skills and is officially designated for permanent residence applications by Immigration, Refugees and Citizenship Canada (IRCC), visa purposes by the Australian Department of Home Affairs (DHA), and is also accepted for professional designations and by Universities, Colleges and Vocational Programs.\n\nIt is a computer-delivered test and it takes under 2 hours and 50 minutes to complete and can be done in one sitting with no separate speaking session. The Results are available online within 3-4 business days after the test date. The PDF score report is official and accepted by institutions.",
+    "The TOEFL iBT is used primarily for academic admissions, immigration, and professional certification. It takes about 1.5 hours to complete in one sitting, though test takers should allow approximately two hours for the entire process including directions.\n\nAs the test adapts to each individual, the specific items and exact timing may vary slightly. It is widely recognized as one of the most respected English-language tests in the world, accepted by more than 11,500 universities and other institutions in over 160 countries.",
   testFormatIntro:
-    "The CELPIP - General Test has four components: Listening, Reading, Writing, and Speaking. Test takers will be required to read answer choices in the Listening Test and questions in the Speaking Test.",
-  resultTimeline: "3-4 Days",
+    "The TOEFL iBT Format consists of four sections. Please note that test time does not include directions. As the test adapts, test time and items may vary.",
+  resultTimeline: "3 Days",
   stats: [
-    { label: "Total Duration", value: "2h 50m" },
-    { label: "Format", value: "Computer" },
-    { label: "Sitting", value: "Single" },
-    { label: "Availability", value: "Online" },
+    { label: "Total Duration", value: "~2 Hours" },
+    { label: "Format", value: "Internet-based" },
+    { label: "Validity", value: "2 Years" },
+    { label: "Acceptance", value: "Global" },
   ],
   whoShouldTake: [
-    "Permanent residence applicants (IRCC Canada)",
-    "Visa applicants for Australia (DHA)",
-    "Individuals seeking professional designations",
-    "Students applying to Universities and Colleges",
+    "Students planning to study at a higher education institution",
+    "English-language learning program admissions and exit",
+    "Scholarship and certification candidates",
+    "English-language learners who want to track their progress",
+    "Students and workers applying for visas",
   ],
   acceptedFor: [
-    "Permanent Residency",
-    "Professional Designation",
-    "Australian Visa",
     "Academic Admissions",
+    "Immigration",
+    "Professional Certification",
+    "Student Visas",
   ],
   sections: [
     {
-      icon: "listening",
-      name: "Listening Component",
-      duration: "47–55 minutes",
-      details:
-        "Listen to passages and answer questions. The Listening Test contains 6 parts designed to evaluate various real-life listening scenarios.",
+      icon: "reading",
+      name: "Reading",
+      duration: "Approx. 30 minutes",
+      questions: "50 items",
+      details: "Read academic and daily life texts to evaluate comprehension.",
       format:
-        "Part 1: Listening to Problem Solving\nPart 2: Listening to a Daily Life Conversation\nPart 3: Listening for Information\nPart 4: Listening to a News Item\nPart 5: Listening to a Discussion\nPart 6: Listening to Viewpoints",
-      questions: "38-40 questions",
-      taskTypes: "Multiple Choice",
-      marks:
-        "The test may contain unscored reading or listening items used for test development. These can be found anywhere and will have the same format as scored items.",
+        "• Complete the Words\n• Read in Daily Life\n• Read an Academic Passage",
     },
     {
-      icon: "reading",
-      name: "Reading Component",
-      duration: "55–60 minutes",
+      icon: "listening",
+      name: "Listening",
+      duration: "Approx. 29 minutes",
+      questions: "47 items",
       details:
-        "Read passages and answer questions. Evaluate your ability to understand written correspondence, diagrams, and discursive texts.",
+        "Evaluate your ability to understand conversations and lectures in English.",
       format:
-        "Part 1: Reading Correspondence\nPart 2: Reading to Apply a Diagram\nPart 3: Reading for Information\nPart 4: Reading for Viewpoints",
-      questions: "38-40 questions",
-      taskTypes: "Multiple Choice, Gap Fill",
+        "• Listen and Choose a Response\n• Listen to a Conversation\n• Listen to an Announcement\n• Listen to an Academic Talk",
     },
     {
       icon: "writing",
-      name: "Writing Component",
-      duration: "53–60 minutes",
-      details:
-        "Respond to questions with written answers. Focuses on practical communication such as email writing and responding to survey questions.",
+      name: "Writing",
+      duration: "Approx. 23 minutes",
+      questions: "12 items",
+      details: "Write responses to academic and practical prompts.",
       format:
-        "Task 1: Writing an Email\nTask 2: Responding to Survey Questions",
-      questions: "2 tasks",
+        "• Build a Sentence\n• Write an Email\n• Write for an Academic Discussion",
     },
     {
       icon: "speaking",
-      name: "Speaking Component",
-      duration: "15–20 minutes",
-      details:
-        "Reply to on-screen prompts verbally. This component is completed in the same sitting as the other tests.",
-      format:
-        "Task 1: Giving Advice\nTask 2: Talking about a Personal Experience\nTask 3: Describing a Scene\nTask 4: Making Predictions\nTask 5: Comparing and Persuading\nTask 6: Dealing with a Difficult Situation\nTask 7: Expressing Opinions\nTask 8: Describing an Unusual Situation",
+      name: "Speaking",
+      duration: "Approx. 8 minutes",
+      questions: "11 items",
+      details: "Respond to prompts verbally to demonstrate speaking proficiency.",
+      format: "• Listen and Repeat\n• Take an Interview",
     },
   ],
 };
 
-export default function ExamCelpipGeneral() {
+export default function ExamTOEFL() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <BaseHeroSection image={celpipGeneralData.image}>
+      <BaseHeroSection image={toeflData.image}>
         <div className="section-container space-y-6 base-px base-py">
           <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm">
             <span className="relative flex h-2 w-2">
@@ -129,14 +126,14 @@ export default function ExamCelpipGeneral() {
             Exam Details
           </div>
           <h1 className="base-hero-section-heading text-white">
-            {celpipGeneralData.name}{" "}
+            {toeflData.name}{" "}
             <span className="italic text-primary-foreground/80">Test</span>
           </h1>
           <p className="base-hero-section-description text-red-50 max-w-2xl">
-            {celpipGeneralData.content}
+            {toeflData.content}
           </p>
           <Link
-            href={`/book-exams/${celpipGeneralData.id}`}
+            href={`/book-exams/${toeflData.id}`}
             className={buttonVariants({ size: "lg", className: "gap-2" })}
           >
             <Calendar className="size-4" />
@@ -148,7 +145,7 @@ export default function ExamCelpipGeneral() {
       {/* Stats/Quick Info */}
       <div className="relative z-10 -mt-12 section-container base-px">
         <div className="grid grid-cols-2 gap-4 lg:grid-cols-5">
-          {celpipGeneralData.stats?.map((stat, i) => (
+          {toeflData.stats?.map((stat, i) => (
             <BaseCard
               key={i}
               className="flex flex-col items-center justify-center p-6 text-center shadow-xl"
@@ -161,10 +158,10 @@ export default function ExamCelpipGeneral() {
               </p>
             </BaseCard>
           ))}
-          {celpipGeneralData.resultTimeline && (
+          {toeflData.resultTimeline && (
             <BaseCard className="flex flex-col items-center bg-white justify-center p-6 text-center shadow-xl border-primary/20 ">
               <p className="text-2xl font-bold text-primary lg:text-3xl">
-                {celpipGeneralData.resultTimeline}
+                {toeflData.resultTimeline}
               </p>
               <p className="text-xs font-semibold uppercase tracking-wider text-primary mt-1">
                 Result Timeline
@@ -183,7 +180,7 @@ export default function ExamCelpipGeneral() {
               <h2 className="text-3xl font-bold text-gray-900">Overview</h2>
             </div>
             <div className="prose prose-red max-w-none text-gray-600 leading-relaxed space-y-4">
-              {celpipGeneralData.overview.split("\n\n").map((para, i) => (
+              {toeflData.overview.split("\n\n").map((para, i) => (
                 <p key={i}>{para}</p>
               ))}
             </div>
@@ -195,14 +192,14 @@ export default function ExamCelpipGeneral() {
               <div className="h-8 w-1 bg-primary rounded-full" />
               <h2 className="text-3xl font-bold text-gray-900">Test Format</h2>
             </div>
-            {celpipGeneralData.testFormatIntro && (
+            {toeflData.testFormatIntro && (
               <p className="text-gray-600 mb-8 leading-relaxed">
-                {celpipGeneralData.testFormatIntro}
+                {toeflData.testFormatIntro}
               </p>
             )}
 
             <div className="space-y-8">
-              {celpipGeneralData.sections.map((section, i) => (
+              {toeflData.sections.map((section, i) => (
                 <div
                   key={i}
                   className="group relative overflow-hidden rounded-2xl border border-gray-100 bg-white p-8 transition-all hover:border-primary/20 hover:shadow-lg"
@@ -231,7 +228,7 @@ export default function ExamCelpipGeneral() {
                           {section.format && (
                             <div className="space-y-1 sm:col-span-2">
                               <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">
-                                Format
+                                Task Types
                               </p>
                               <p className="text-sm font-medium text-gray-900 leading-relaxed whitespace-pre-line">
                                 {section.format}
@@ -248,28 +245,6 @@ export default function ExamCelpipGeneral() {
                               </p>
                             </div>
                           )}
-                          {section.taskTypes && (
-                            <div className="space-y-1 sm:col-span-2">
-                              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">
-                                Task Types
-                              </p>
-                              <p className="text-sm font-medium text-gray-900 leading-relaxed whitespace-pre-line">
-                                {Array.isArray(section.taskTypes)
-                                  ? section.taskTypes.join(", ")
-                                  : section.taskTypes}
-                              </p>
-                            </div>
-                          )}
-                          {section.marks && (
-                            <div className="space-y-1 sm:col-span-2">
-                              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">
-                                Marks & Scoring
-                              </p>
-                              <p className="text-sm font-medium text-gray-900 leading-relaxed whitespace-pre-line">
-                                {section.marks}
-                              </p>
-                            </div>
-                          )}
                         </div>
                       </div>
                     </div>
@@ -278,17 +253,94 @@ export default function ExamCelpipGeneral() {
               ))}
             </div>
           </section>
+
+          {/* Results & Score Reports */}
+          <section className="space-y-8">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="h-8 w-1 bg-primary rounded-full" />
+              <h2 className="text-3xl font-bold text-gray-900">
+                Results & Score Reports
+              </h2>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-2">
+              <BaseCard className="p-6 border-l-4 border-l-primary">
+                <div className="flex items-start gap-4">
+                  <div className="h-10 w-10 shrink-0 flex items-center justify-center rounded-xl bg-red-50 text-primary">
+                    <Trophy size={20} />
+                  </div>
+                  <div className="space-y-2">
+                    <h4 className="font-bold text-gray-900">Score Delivery</h4>
+                    <p className="text-sm text-gray-600 leading-relaxed">
+                      Scores are available in your ETS account 3 days after your
+                      test date. You will receive an email when they are ready.
+                    </p>
+                  </div>
+                </div>
+              </BaseCard>
+
+              <BaseCard className="p-6 border-l-4 border-l-blue-500">
+                <div className="flex items-start gap-4">
+                  <div className="h-10 w-10 shrink-0 flex items-center justify-center rounded-xl bg-blue-50 text-blue-600">
+                    <FileText size={20} />
+                  </div>
+                  <div className="space-y-2">
+                    <h4 className="font-bold text-gray-900">PDF Score Report</h4>
+                    <p className="text-sm text-gray-600 leading-relaxed">
+                      Downloadable PDF versions are available 24-48 hours after
+                      you receive your electronic scores.
+                    </p>
+                  </div>
+                </div>
+              </BaseCard>
+
+              <BaseCard className="p-6 border-l-4 border-l-amber-500">
+                <div className="flex items-start gap-4">
+                  <div className="h-10 w-10 shrink-0 flex items-center justify-center rounded-xl bg-amber-50 text-amber-600">
+                    <Globe size={20} />
+                  </div>
+                  <div className="space-y-2">
+                    <h4 className="font-bold text-gray-900">Hard Copy</h4>
+                    <p className="text-sm text-gray-600 leading-relaxed">
+                      Mailed 11–15 days after your test date if requested
+                      pre-test. Delivery times vary by local postal services.
+                    </p>
+                  </div>
+                </div>
+              </BaseCard>
+
+              <BaseCard className="p-6 border-l-4 border-l-green-500">
+                <div className="flex items-start gap-4">
+                  <div className="h-10 w-10 shrink-0 flex items-center justify-center rounded-xl bg-green-50 text-green-600">
+                    <Zap size={20} />
+                  </div>
+                  <div className="space-y-2">
+                    <h4 className="font-bold text-gray-900">Express Shipping</h4>
+                    <p className="text-sm text-gray-600 leading-relaxed">
+                      Available in 75 countries. Delivered only 2–5 business
+                      days after scores are confirmed for a small fee.
+                    </p>
+                  </div>
+                </div>
+              </BaseCard>
+            </div>
+
+            <div className="bg-gray-50 rounded-2xl p-6 text-sm text-gray-600 italic">
+              Note: Your designated score recipients will receive your scores
+              depending on what method of score delivery they use.
+            </div>
+          </section>
         </div>
 
         {/* Sidebar */}
         <aside className="space-y-8">
-          {celpipGeneralData.whoShouldTake && (
+          {toeflData.whoShouldTake && (
             <BaseCard className="p-8">
               <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 mb-6">
                 Who Should Take This?
               </h3>
               <ul className="space-y-4">
-                {celpipGeneralData.whoShouldTake.map((item, i) => (
+                {toeflData.whoShouldTake.map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <div className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-red-50 text-primary">
                       <CheckCircle2 size={14} />
@@ -302,13 +354,13 @@ export default function ExamCelpipGeneral() {
             </BaseCard>
           )}
 
-          {celpipGeneralData.acceptedFor && (
+          {toeflData.acceptedFor && (
             <BaseCard className="p-8 border-primary/10 bg-primary/5">
               <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-primary mb-6">
                 Accepted For
               </h3>
               <ul className="space-y-4">
-                {celpipGeneralData.acceptedFor.map((item, i) => (
+                {toeflData.acceptedFor.map((item, i) => (
                   <li key={i} className="flex items-center gap-3">
                     <div className="h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
                     <span className="text-sm font-medium text-gray-900">
@@ -330,11 +382,11 @@ export default function ExamCelpipGeneral() {
                   Ready to Start?
                 </h3>
                 <p className="text-sm text-red-100">
-                  Book your {celpipGeneralData.name} test date today at TEPTH.
+                  Book your {toeflData.name} test date today at TEPTH.
                 </p>
               </div>
               <Link
-                href={`/book-exams/${celpipGeneralData.id}`}
+                href={`/book-exams/${toeflData.id}`}
                 className={cn(
                   buttonVariants({ variant: "light", size: "lg" }),
                   "w-full font-bold shadow-lg",
@@ -343,8 +395,8 @@ export default function ExamCelpipGeneral() {
                 Book Now
               </Link>
               <p className="text-[11px] text-red-200">
-                Official CELPIP Test Centre partners ensuring high standards of
-                delivery.
+                Official TOEFL iBT Test Centre partners ensuring high standards
+                of delivery.
               </p>
             </div>
           </GradientBox>

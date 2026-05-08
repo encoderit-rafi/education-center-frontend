@@ -11,6 +11,7 @@ import {
   Headphones,
   PenTool,
   Mic2,
+  GraduationCap,
 } from "lucide-react";
 import {
   BaseCard,
@@ -34,92 +35,85 @@ const IconTile = ({ icon }: { icon: string }) => {
       return <PenTool size={24} />;
     case "speaking":
       return <Mic2 size={24} />;
+    case "academic":
+      return <GraduationCap size={24} />;
     default:
       return <Info size={24} />;
   }
 };
 
-const celpipGeneralData = {
-  id: EXAM_IDS_DATA.celpip_general.id,
-  name: "CELPIP General",
-  image: "/images/exams/celpip/celpip-hero.jpg",
+const caelData = {
+  id: EXAM_IDS_DATA.cael.id,
+  name: "CAEL",
+  image: "/images/exams/cael/cael-hero.jpg",
   content:
-    "The Canadian English Language Proficiency Index Program (CELPIP) is a complete English proficiency test evaluating listening, reading, writing, and speaking skills.",
+    "The CAEL Test measures the English language proficiency of students planning to study at Canadian universities and colleges.",
   overview:
-    "The CELPIP – General evaluates test taker’s English listening, reading, writing, and speaking skills and is officially designated for permanent residence applications by Immigration, Refugees and Citizenship Canada (IRCC), visa purposes by the Australian Department of Home Affairs (DHA), and is also accepted for professional designations and by Universities, Colleges and Vocational Programs.\n\nIt is a computer-delivered test and it takes under 2 hours and 50 minutes to complete and can be done in one sitting with no separate speaking session. The Results are available online within 3-4 business days after the test date. The PDF score report is official and accepted by institutions.",
+    "The CAEL Test (Canadian Academic English Language Test) is a computer-delivered test that evaluates your ability to use English in academic contexts. It is accepted by over 180 Canadian academic institutions and professional organizations.\n\nThe test is designed to reflect the language tasks you will perform in a university or college setting, such as reading articles, listening to lectures, and responding to academic prompts. The results provide an accurate representation of your English language skills in an educational environment.",
   testFormatIntro:
-    "The CELPIP - General Test has four components: Listening, Reading, Writing, and Speaking. Test takers will be required to read answer choices in the Listening Test and questions in the Speaking Test.",
-  resultTimeline: "3-4 Days",
+    "The CAEL Test is divided into five main components, all completed in a single computer-based session. The integrated nature of the test ensures that you are evaluated on your ability to combine skills just as you would in a real academic setting.",
+  resultTimeline: "8 Business Days",
   stats: [
-    { label: "Total Duration", value: "2h 50m" },
+    { label: "Total Duration", value: "3.5 Hours" },
     { label: "Format", value: "Computer" },
     { label: "Sitting", value: "Single" },
-    { label: "Availability", value: "Online" },
+    { label: "Acceptance", value: "180+ Inst." },
   ],
   whoShouldTake: [
-    "Permanent residence applicants (IRCC Canada)",
-    "Visa applicants for Australia (DHA)",
-    "Individuals seeking professional designations",
-    "Students applying to Universities and Colleges",
+    "Students applying for undergraduate or postgraduate programs in Canada",
+    "Professionals seeking registration with Canadian regulatory bodies",
+    "Individuals requiring proof of academic English proficiency for institutional admission",
   ],
   acceptedFor: [
-    "Permanent Residency",
-    "Professional Designation",
-    "Australian Visa",
-    "Academic Admissions",
+    "University Admissions (Canada)",
+    "College Admissions (Canada)",
+    "Professional Registration",
+    "Study Permit Applications",
   ],
   sections: [
     {
-      icon: "listening",
-      name: "Listening Component",
-      duration: "47–55 minutes",
-      details:
-        "Listen to passages and answer questions. The Listening Test contains 6 parts designed to evaluate various real-life listening scenarios.",
-      format:
-        "Part 1: Listening to Problem Solving\nPart 2: Listening to a Daily Life Conversation\nPart 3: Listening for Information\nPart 4: Listening to a News Item\nPart 5: Listening to a Discussion\nPart 6: Listening to Viewpoints",
-      questions: "38-40 questions",
-      taskTypes: "Multiple Choice",
-      marks:
-        "The test may contain unscored reading or listening items used for test development. These can be found anywhere and will have the same format as scored items.",
+      icon: "speaking",
+      name: "Speaking",
+      duration: "7–10 minutes",
+      details: "Reply to on-screen prompts verbally.",
+      format: "Test takers respond to three speaking tasks that reflect common university-level communication scenarios.",
     },
     {
       icon: "reading",
-      name: "Reading Component",
-      duration: "55–60 minutes",
-      details:
-        "Read passages and answer questions. Evaluate your ability to understand written correspondence, diagrams, and discursive texts.",
-      format:
-        "Part 1: Reading Correspondence\nPart 2: Reading to Apply a Diagram\nPart 3: Reading for Information\nPart 4: Reading for Viewpoints",
-      questions: "38-40 questions",
-      taskTypes: "Multiple Choice, Gap Fill",
+      name: "Integrated Reading",
+      duration: "35–50 minutes",
+      details: "Read passages and reply to questions.",
+      format: "Read one long academic text and answer questions, evaluating comprehension and information retrieval skills.",
     },
     {
-      icon: "writing",
-      name: "Writing Component",
-      duration: "53–60 minutes",
-      details:
-        "Respond to questions with written answers. Focuses on practical communication such as email writing and responding to survey questions.",
-      format:
-        "Task 1: Writing an Email\nTask 2: Responding to Survey Questions",
-      questions: "2 tasks",
+      icon: "listening",
+      name: "Integrated Listening",
+      duration: "25–35 minutes",
+      details: "Listen to passages and reply to questions.",
+      format: "Listen to one long academic lecture and answer questions based on the content and key details.",
     },
     {
-      icon: "speaking",
-      name: "Speaking Component",
-      duration: "15–20 minutes",
-      details:
-        "Reply to on-screen prompts verbally. This component is completed in the same sitting as the other tests.",
-      format:
-        "Task 1: Giving Advice\nTask 2: Talking about a Personal Experience\nTask 3: Describing a Scene\nTask 4: Making Predictions\nTask 5: Comparing and Persuading\nTask 6: Dealing with a Difficult Situation\nTask 7: Expressing Opinions\nTask 8: Describing an Unusual Situation",
+      icon: "academic",
+      name: "Academic Unit A",
+      duration: "60–70 minutes",
+      details: "Answer comprehension questions and write a reply.",
+      format: "Combines reading and listening materials on a specific academic topic, followed by a writing task that integrates information from both sources.",
+    },
+    {
+      icon: "academic",
+      name: "Academic Unit B",
+      duration: "40–45 minutes",
+      details: "Answer comprehension questions and write a reply.",
+      format: "Similar to Unit A, this section focuses on a different academic theme, requiring students to synthesize information through reading, listening, and writing.",
     },
   ],
 };
 
-export default function ExamCelpipGeneral() {
+export default function ExamCAEL() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <BaseHeroSection image={celpipGeneralData.image}>
+      <BaseHeroSection image={caelData.image}>
         <div className="section-container space-y-6 base-px base-py">
           <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm">
             <span className="relative flex h-2 w-2">
@@ -129,14 +123,14 @@ export default function ExamCelpipGeneral() {
             Exam Details
           </div>
           <h1 className="base-hero-section-heading text-white">
-            {celpipGeneralData.name}{" "}
+            {caelData.name}{" "}
             <span className="italic text-primary-foreground/80">Test</span>
           </h1>
           <p className="base-hero-section-description text-red-50 max-w-2xl">
-            {celpipGeneralData.content}
+            {caelData.content}
           </p>
           <Link
-            href={`/book-exams/${celpipGeneralData.id}`}
+            href={`/book-exams/${caelData.id}`}
             className={buttonVariants({ size: "lg", className: "gap-2" })}
           >
             <Calendar className="size-4" />
@@ -148,7 +142,7 @@ export default function ExamCelpipGeneral() {
       {/* Stats/Quick Info */}
       <div className="relative z-10 -mt-12 section-container base-px">
         <div className="grid grid-cols-2 gap-4 lg:grid-cols-5">
-          {celpipGeneralData.stats?.map((stat, i) => (
+          {caelData.stats?.map((stat, i) => (
             <BaseCard
               key={i}
               className="flex flex-col items-center justify-center p-6 text-center shadow-xl"
@@ -161,10 +155,10 @@ export default function ExamCelpipGeneral() {
               </p>
             </BaseCard>
           ))}
-          {celpipGeneralData.resultTimeline && (
+          {caelData.resultTimeline && (
             <BaseCard className="flex flex-col items-center bg-white justify-center p-6 text-center shadow-xl border-primary/20 ">
               <p className="text-2xl font-bold text-primary lg:text-3xl">
-                {celpipGeneralData.resultTimeline}
+                {caelData.resultTimeline}
               </p>
               <p className="text-xs font-semibold uppercase tracking-wider text-primary mt-1">
                 Result Timeline
@@ -183,7 +177,7 @@ export default function ExamCelpipGeneral() {
               <h2 className="text-3xl font-bold text-gray-900">Overview</h2>
             </div>
             <div className="prose prose-red max-w-none text-gray-600 leading-relaxed space-y-4">
-              {celpipGeneralData.overview.split("\n\n").map((para, i) => (
+              {caelData.overview.split("\n\n").map((para, i) => (
                 <p key={i}>{para}</p>
               ))}
             </div>
@@ -195,14 +189,14 @@ export default function ExamCelpipGeneral() {
               <div className="h-8 w-1 bg-primary rounded-full" />
               <h2 className="text-3xl font-bold text-gray-900">Test Format</h2>
             </div>
-            {celpipGeneralData.testFormatIntro && (
+            {caelData.testFormatIntro && (
               <p className="text-gray-600 mb-8 leading-relaxed">
-                {celpipGeneralData.testFormatIntro}
+                {caelData.testFormatIntro}
               </p>
             )}
 
             <div className="space-y-8">
-              {celpipGeneralData.sections.map((section, i) => (
+              {caelData.sections.map((section, i) => (
                 <div
                   key={i}
                   className="group relative overflow-hidden rounded-2xl border border-gray-100 bg-white p-8 transition-all hover:border-primary/20 hover:shadow-lg"
@@ -231,42 +225,10 @@ export default function ExamCelpipGeneral() {
                           {section.format && (
                             <div className="space-y-1 sm:col-span-2">
                               <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">
-                                Format
+                                Component Details
                               </p>
                               <p className="text-sm font-medium text-gray-900 leading-relaxed whitespace-pre-line">
                                 {section.format}
-                              </p>
-                            </div>
-                          )}
-                          {section.questions && (
-                            <div className="space-y-1">
-                              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">
-                                Questions
-                              </p>
-                              <p className="text-sm font-medium text-gray-900 whitespace-pre-line">
-                                {section.questions}
-                              </p>
-                            </div>
-                          )}
-                          {section.taskTypes && (
-                            <div className="space-y-1 sm:col-span-2">
-                              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">
-                                Task Types
-                              </p>
-                              <p className="text-sm font-medium text-gray-900 leading-relaxed whitespace-pre-line">
-                                {Array.isArray(section.taskTypes)
-                                  ? section.taskTypes.join(", ")
-                                  : section.taskTypes}
-                              </p>
-                            </div>
-                          )}
-                          {section.marks && (
-                            <div className="space-y-1 sm:col-span-2">
-                              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">
-                                Marks & Scoring
-                              </p>
-                              <p className="text-sm font-medium text-gray-900 leading-relaxed whitespace-pre-line">
-                                {section.marks}
                               </p>
                             </div>
                           )}
@@ -282,13 +244,13 @@ export default function ExamCelpipGeneral() {
 
         {/* Sidebar */}
         <aside className="space-y-8">
-          {celpipGeneralData.whoShouldTake && (
+          {caelData.whoShouldTake && (
             <BaseCard className="p-8">
               <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 mb-6">
                 Who Should Take This?
               </h3>
               <ul className="space-y-4">
-                {celpipGeneralData.whoShouldTake.map((item, i) => (
+                {caelData.whoShouldTake.map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <div className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-red-50 text-primary">
                       <CheckCircle2 size={14} />
@@ -302,13 +264,13 @@ export default function ExamCelpipGeneral() {
             </BaseCard>
           )}
 
-          {celpipGeneralData.acceptedFor && (
+          {caelData.acceptedFor && (
             <BaseCard className="p-8 border-primary/10 bg-primary/5">
               <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-primary mb-6">
                 Accepted For
               </h3>
               <ul className="space-y-4">
-                {celpipGeneralData.acceptedFor.map((item, i) => (
+                {caelData.acceptedFor.map((item, i) => (
                   <li key={i} className="flex items-center gap-3">
                     <div className="h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
                     <span className="text-sm font-medium text-gray-900">
@@ -330,11 +292,11 @@ export default function ExamCelpipGeneral() {
                   Ready to Start?
                 </h3>
                 <p className="text-sm text-red-100">
-                  Book your {celpipGeneralData.name} test date today at TEPTH.
+                  Book your {caelData.name} test date today at TEPTH.
                 </p>
               </div>
               <Link
-                href={`/book-exams/${celpipGeneralData.id}`}
+                href={`/book-exams/${caelData.id}`}
                 className={cn(
                   buttonVariants({ variant: "light", size: "lg" }),
                   "w-full font-bold shadow-lg",
@@ -343,7 +305,7 @@ export default function ExamCelpipGeneral() {
                 Book Now
               </Link>
               <p className="text-[11px] text-red-200">
-                Official CELPIP Test Centre partners ensuring high standards of
+                Official CAEL Test Centre partners ensuring high standards of
                 delivery.
               </p>
             </div>

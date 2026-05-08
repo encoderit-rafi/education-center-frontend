@@ -40,8 +40,8 @@ const IconTile = ({ icon }: { icon: string }) => {
 };
 
 const celpipGeneralData = {
-  id: EXAM_IDS_DATA.celpip_general.id,
-  name: "CELPIP General",
+  id: EXAM_IDS_DATA.celpip_general_ls.id,
+  name: "CELPIP General LS",
   image: "/images/exams/celpip/celpip-hero.jpg",
   content:
     "The Canadian English Language Proficiency Index Program (CELPIP) is a complete English proficiency test evaluating listening, reading, writing, and speaking skills.",
@@ -115,7 +115,7 @@ const celpipGeneralData = {
   ],
 };
 
-export default function ExamCelpipGeneral() {
+export default function ExamCelpipGeneralLS() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
