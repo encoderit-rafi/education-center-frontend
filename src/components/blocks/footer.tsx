@@ -4,7 +4,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { toast } from "sonner";
-import { Clock, MapPin, Mail, Phone, LucideIcon, ChevronDown, ChevronRight } from "lucide-react";
+import {
+  Clock,
+  MapPin,
+  Mail,
+  Phone,
+  LucideIcon,
+  ChevronDown,
+  ChevronRight,
+} from "lucide-react";
 import WaveDivider from "./wave-divider";
 import { PRIMARY_NAV, SECONDARY_NAV } from "@/data";
 import {
@@ -42,8 +50,8 @@ function ContactItem({
       onClick={handleCopy}
       className="flex items-start gap-3 text-primary hover:opacity-80 transition-all cursor-pointer group/item"
     >
-      <Icon className="w-5 h-5 text-primary shrink-0 transition-transform group-hover/item:scale-110" />
-      <span className="text-sm font-medium leading-snug flex-1">{value}</span>
+      <Icon className="size-4 text-primary shrink-0 transition-transform group-hover/item:scale-110" />
+      <span className="text-xs font-medium leading-snug flex-1">{value}</span>
     </div>
   );
 }
@@ -81,9 +89,9 @@ export default function Footer() {
     <footer className="relative w-full text-white overflow-hidden bg-secondary">
       {/* Main Content */}
       <div className="max-w-8xl mx-auto px-6 pt-20 pb-10">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-16">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-2">
           {/* Column 1: Info Card */}
-          <div className="p-8 md:p-10 rounded-lg relative z-10 bg-white hover:bg-white h-fit">
+          <div className="p-6 rounded-lg relative z-10 bg-white hover:bg-white h-fit">
             <Link
               href="/"
               className="inline-block mb-6 transition-transform hover:scale-105 duration-300"
@@ -112,7 +120,7 @@ export default function Footer() {
               />
               <ContactItem
                 icon={MapPin}
-                copyText="The Exam Preparation & Testing House L.L.C, Suite 701, 7th Floor, Tabarak Tower, Corniche Road, Al Mamzar, Sharjah, United Arab Emirates."
+                copyText={`The Exam Preparation & Testing House L.L.C \n Suite 701, 7th Floor, Tabarak Tower, Corniche Road, Al Mamzar, Sharjah, United Arab Emirates.`}
                 value={
                   <>
                     Our Address:
@@ -173,7 +181,11 @@ export default function Footer() {
                           className="bg-secondary border-white/10! text-white min-w-[220px] p-2 rounded-xl shadow-2xl animate-in fade-in slide-in-from-top-2 z-[60]"
                         >
                           {nav.items.map((item) => (
-                            <DropdownMenuItem key={item.name} asChild className="focus:bg-red-500/10 focus:text-white rounded-lg cursor-pointer outline-none">
+                            <DropdownMenuItem
+                              key={item.name}
+                              asChild
+                              className="focus:bg-red-500/10 focus:text-white rounded-lg cursor-pointer outline-none"
+                            >
                               <Link
                                 href={item.href}
                                 className="flex items-center gap-2 w-full px-2 py-2 text-sm font-medium text-gray-200 hover:text-white group"
