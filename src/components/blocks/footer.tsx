@@ -170,7 +170,7 @@ export default function Footer() {
                         <DropdownMenuContent
                           side="bottom"
                           align="start"
-                          className="bg-secondary border-white/10 text-white min-w-[220px] p-2 rounded-xl shadow-2xl animate-in fade-in slide-in-from-top-2 z-[60]"
+                          className="bg-secondary border-white/10! text-white min-w-[220px] p-2 rounded-xl shadow-2xl animate-in fade-in slide-in-from-top-2 z-[60]"
                         >
                           {nav.items.map((item) => (
                             <DropdownMenuItem key={item.name} asChild className="focus:bg-red-500/10 focus:text-white rounded-lg cursor-pointer outline-none">
