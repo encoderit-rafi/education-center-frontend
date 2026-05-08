@@ -224,10 +224,16 @@ export const PRIMARY_NAV: AppNavigationItem[] = [
     type: "dropdown",
     name: "Exams",
     href: "/exams",
-    items: NAV_EXAMS_DATA.map((exam) => ({
-      name: exam.name,
-      href: `/exams/${exam.id}`,
-    })),
+    items: [
+      ...NAV_EXAMS_DATA.map((exam) => ({
+        name: exam.name,
+        href: `/exams/${exam.id}`,
+      })),
+      {
+        name: "Other Exams",
+        href: "/exams/other-exams",
+      },
+    ],
   },
   {
     type: "dropdown",
