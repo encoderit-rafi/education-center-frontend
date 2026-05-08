@@ -14,6 +14,9 @@ import {
 import { Badge } from "@/components/ui/badge";
 import GradientBox from "@/components/blocks/gradient-box";
 import { buttonVariants } from "@/components/ui/button";
+import { EXAM_IDS_DATA, NAV_EXAMS_DATA } from "@/data";
+import ExamIELTS from "../_components/exam-ielts";
+import ExamIELTSAcademic from "../_components/exam-ielts-academic";
 
 const IconTile = ({ icon }: { icon: string }) => {
   switch (icon) {
@@ -101,11 +104,22 @@ export default async function ExamDetailPage({
 }) {
   const { id } = await params;
 
-  const exam = exams.find((e) => e.id === id);
-  if (!exam) {
-    notFound();
+  switch (id) {
+    case EXAM_IDS_DATA.ielts.id:
+      return <ExamIELTS />;
+    case EXAM_IDS_DATA.ielts_academic.id:
+      return <ExamIELTSAcademic />;
+    // case "toefl":
+    //   return <ToeflDetailPage />;
+    // case "pte":
+    //   return <PteDetailPage />;
+    // case "celpip":
+    //   return <CelpipDetailPage />;
+    // case "cael":
+    //   return <CaelDetailPage />;
+    // case "selt":
+    //   return <SeltDetailPage />;
   }
-
   // Helper to find exam types in the hierarchy
   // const findExamTypes = (data: any[], targetId: string): any => {
   //   for (const item of data) {
@@ -139,32 +153,32 @@ export default async function ExamDetailPage({
   //             </p>
   //           </div>
 
-  //           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-  //             {examTypesData.types.map((type: any, index: number) => (
-  //               <Link
-  //                 key={type.id}
-  //                 // className="group relative overflow-hidden rounded-2xl border border-gray-100 bg-white p-6  transition-all duration-300 hover:-translate-y-1 hover:border-red-100 hover:shadow-xl"
-  //                 href={`/exams/${type.id}`}
-  //               >
-  //                 <BaseCard className="p-6 h-full">
-  //                   <div className="flex items-center gap-3">
-  //                     <BaseCardIcon className="rounded-full size-9 text-lg font-bold">
-  //                       {/* {exam.name.charAt(0)} */}
-  //                       {index + 1}
-  //                     </BaseCardIcon>
-  //                     <div className="h-px flex-1 bg-red-50"></div>
-  //                   </div>
-  //                   <BaseCardTitle>{type.name}</BaseCardTitle>
-  //                   <BaseCardDescription>{type.content}</BaseCardDescription>
+  // <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+  //   {examTypesData.types.map((type: any, index: number) => (
+  //     <Link
+  //       key={type.id}
+  //       // className="group relative overflow-hidden rounded-2xl border border-gray-100 bg-white p-6  transition-all duration-300 hover:-translate-y-1 hover:border-red-100 hover:shadow-xl"
+  //       href={`/exams/${type.id}`}
+  //     >
+  //       <BaseCard className="p-6 h-full">
+  //         <div className="flex items-center gap-3">
+  //           <BaseCardIcon className="rounded-full size-9 text-lg font-bold">
+  //             {/* {exam.name.charAt(0)} */}
+  //             {index + 1}
+  //           </BaseCardIcon>
+  //           <div className="h-px flex-1 bg-red-50"></div>
+  //         </div>
+  //         <BaseCardTitle>{type.name}</BaseCardTitle>
+  //         <BaseCardDescription>{type.content}</BaseCardDescription>
 
-  //                   <div className="mt-auto flex items-center gap-1 text-xs font-semibold text-primary opacity-0 transition-all duration-300 group-hover:opacity-100">
-  //                     View Details
-  //                     <ArrowRight size={14} />
-  //                   </div>
-  //                 </BaseCard>
-  //               </Link>
-  //             ))}
-  //           </div>
+  //         <div className="mt-auto flex items-center gap-1 text-xs font-semibold text-primary opacity-0 transition-all duration-300 group-hover:opacity-100">
+  //           View Details
+  //           <ArrowRight size={14} />
+  //         </div>
+  //       </BaseCard>
+  //     </Link>
+  //   ))}
+  // </div>
   //         </div>
   //       </section>
   //       <GradientBox className="base-py base-px">
@@ -460,60 +474,6 @@ export default async function ExamDetailPage({
   //         </div>
   //       </section>
   //     )}
-
-  //     {/* Final CTA */}
-  //     <section className="relative overflow-hidden bg-[#F9FAFB] py-20">
-  //       <div className="container relative mx-auto px-4 lg:px-8 max-w-7xl">
-  //         <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-red-700 via-red-800 to-red-900 px-8 py-14 shadow-xl md:px-14 md:py-16">
-  //           <div
-  //             className="pointer-events-none absolute inset-0"
-  //             aria-hidden="true"
-  //           >
-  //             <div className="absolute -right-24 -top-24 h-80 w-80 rounded-full bg-white/5"></div>
-  //             <div className="absolute -bottom-16 -left-16 h-64 w-64 rounded-full bg-white/5"></div>
-  //           </div>
-  //           <div className="relative flex flex-col items-center justify-between gap-8 text-center lg:flex-row lg:text-left">
-  //             <div className="max-w-xl">
-  //               <h2 className="text-3xl font-bold tracking-tight text-white lg:text-4xl">
-  //                 Register for {exam.name} at TEPTH
-  //               </h2>
-  //               <p className="mt-4 text-lg leading-relaxed text-red-100">
-  //                 Book online in minutes. Secure payment and instant
-  //                 confirmation.
-  //               </p>
-  //             </div>
-  //             <div className="flex flex-col gap-3 sm:flex-row">
-  //               <Link
-  //                 className="group inline-flex items-center justify-center gap-2 rounded-lg bg-white px-8 py-3.5 text-sm font-bold text-primary shadow-lg transition-all duration-300 hover:bg-red-50"
-  //                 href="/book-exams"
-  //               >
-  //                 Book an Exam
-  //                 <svg
-  //                   className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
-  //                   fill="none"
-  //                   viewBox="0 0 24 24"
-  //                   stroke="currentColor"
-  //                   strokeWidth="2"
-  //                   aria-hidden="true"
-  //                 >
-  //                   <path
-  //                     strokeLinecap="round"
-  //                     strokeLinejoin="round"
-  //                     d="M17 8l4 4m0 0l-4 4m4-4H3"
-  //                   ></path>
-  //                 </svg>
-  //               </Link>
-  //               <Link
-  //                 className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-white/40 px-8 py-3.5 text-sm font-bold text-white transition-all duration-300 hover:border-white hover:bg-white/10"
-  //                 href="/free-consultation"
-  //               >
-  //                 Free Consultation
-  //               </Link>
-  //             </div>
-  //           </div>
-  //         </div>
-  //       </div>
-  //     </section>
   //   </div>
   // );
 }

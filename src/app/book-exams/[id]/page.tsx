@@ -10,7 +10,6 @@ import FormPTEHomeUkviRegistration from "@/components/blocks/forms/pte-home-ukvi
 import FormSELTRegistration from "@/components/blocks/forms/selt-registration/form-selt-registration";
 import FormTOEFLIBTRegistration from "@/components/blocks/forms/toefl-ibt-exam-registration/form-toefl-ibt-registration";
 import { EXAM_IDS_DATA } from "@/data";
-import { notFound } from "next/navigation";
 
 export default async function BookExamsId({
   params,
@@ -28,7 +27,7 @@ export default async function BookExamsId({
           <FormIELTSAcademicRegistration />
         </div>
       );
-    case EXAM_IDS_DATA.ielts_general.id:
+    case "ielts_general":
       return (
         <div>
           <h2 className="text-2xl font-bold my-8 text-center">
@@ -37,49 +36,22 @@ export default async function BookExamsId({
           <FormIELTSGeneralRegistration />
         </div>
       );
-    case EXAM_IDS_DATA.toefl.id:
+    case "ielts_ukvi":
+    case "ielts_ukvi_academic":
+    case "ielts_ukvi_general":
+    case "ielts_life_skills_a1":
+    case "ielts_life_skills_a2":
+    case "ielts_life_skills_b1":
       return (
         <div>
           <h2 className="text-2xl font-bold my-8 text-center">
-            TOEFL iBT Registration
+            IELTS UKVI Registration
           </h2>
-          <FormTOEFLIBTRegistration />
+          <FormIELTSUKVIRegistration />
         </div>
       );
-    case EXAM_IDS_DATA.celpip_general.id:
-      return (
-        <div>
-          <h2 className="text-2xl font-bold my-8 text-center">
-            CELPIP General Registration
-          </h2>
-        </div>
-      );
-    case EXAM_IDS_DATA.celpip_general_ls.id:
-      return (
-        <div>
-          <h2 className="text-2xl font-bold my-8 text-center">
-            CELPIP General LS Registration
-          </h2>
-        </div>
-      );
-    case EXAM_IDS_DATA.cael.id:
-      return (
-        <div>
-          <h2 className="text-2xl font-bold my-8 text-center">
-            CAEL Registration
-          </h2>
-        </div>
-      );
-    case EXAM_IDS_DATA.selt.id:
-      return (
-        <div>
-          <h2 className="text-2xl font-bold my-8 text-center">
-            SELT Registration
-          </h2>
-          <FormSELTRegistration />
-        </div>
-      );
-    case EXAM_IDS_DATA.pte_academic.id:
+    case "pte_academic":
+    case "pte_academic_ukvi":
       return (
         <div>
           <h2 className="text-2xl font-bold my-8 text-center">
@@ -88,7 +60,7 @@ export default async function BookExamsId({
           <FormPTEAcademicRegistration />
         </div>
       );
-    case EXAM_IDS_DATA.pte_core.id:
+    case "pte_core":
       return (
         <div>
           <h2 className="text-2xl font-bold my-8 text-center">
@@ -97,22 +69,7 @@ export default async function BookExamsId({
           <FormPTECoreRegistration />
         </div>
       );
-    // case "ielts_ukvi":
-    // case "ielts_ukvi_academic":
-    // case "ielts_ukvi_general":
-    // case "ielts_life_skills_a1":
-    // case "ielts_life_skills_a2":
-    // case "ielts_life_skills_b1":
-    //   return (
-    //     <div>
-    //       <h2 className="text-2xl font-bold my-8 text-center">
-    //         IELTS UKVI Registration
-    //       </h2>
-    //       <FormIELTSUKVIRegistration />
-    //     </div>
-    //   );
-
-    case EXAM_IDS_DATA.pte_home_a1.id:
+    case "pte_home_a1":
       return (
         <div>
           <h2 className="text-2xl font-bold my-8 text-center">
@@ -121,7 +78,7 @@ export default async function BookExamsId({
           <FormPTEHomeA1Registration />
         </div>
       );
-    case EXAM_IDS_DATA.pte_home_a2.id:
+    case "pte_home_a2":
       return (
         <div>
           <h2 className="text-2xl font-bold my-8 text-center">
@@ -130,7 +87,7 @@ export default async function BookExamsId({
           <FormPTEHomeA2Registration />
         </div>
       );
-    case EXAM_IDS_DATA.pte_home_b1.id:
+    case "pte_home_b1":
       return (
         <div>
           <h2 className="text-2xl font-bold my-8 text-center">
@@ -139,8 +96,7 @@ export default async function BookExamsId({
           <FormPTEHomeB1Registration />
         </div>
       );
-    case EXAM_IDS_DATA.pte_ukvi.id:
-    case EXAM_IDS_DATA.pte_academic_ukvi.id:
+    case "pte_ukvi":
       return (
         <div>
           <h2 className="text-2xl font-bold my-8 text-center">
@@ -149,25 +105,33 @@ export default async function BookExamsId({
           <FormPTEHomeUkviRegistration />
         </div>
       );
-
-    // case "selt":
-    // case "selt_a1":
-    // case "selt_a2":
-    // case "selt_b1":
-    // case "selt_b1_r_w":
-    // case "selt_b2":
-    // case "selt_c1":
-    // case "selt_c2":
-    //   return (
-    //     <div>
-    //       <h2 className="text-2xl font-bold my-8 text-center">
-    //         SELT Registration
-    //       </h2>
-    //       <FormSELTRegistration />
-    //     </div>
-    //   );
+    case "toefl_ibt":
+      return (
+        <div>
+          <h2 className="text-2xl font-bold my-8 text-center">
+            TOEFL iBT Registration
+          </h2>
+          <FormTOEFLIBTRegistration />
+        </div>
+      );
+    case "selt":
+    case "selt_a1":
+    case "selt_a2":
+    case "selt_b1":
+    case "selt_b1_r_w":
+    case "selt_b2":
+    case "selt_c1":
+    case "selt_c2":
+      return (
+        <div>
+          <h2 className="text-2xl font-bold my-8 text-center">
+            SELT Registration
+          </h2>
+          <FormSELTRegistration />
+        </div>
+      );
 
     default:
-      return notFound();
+      return <div className="min-h-screen">Not Found</div>;
   }
 }

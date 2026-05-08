@@ -1,10 +1,17 @@
+import { cn } from "@/lib/utils";
 import Image from "next/image";
-import React from "react";
+import React, { ComponentProps, PropsWithChildren } from "react";
 
-const BaseHeroSection = ({ image }: { image: string }) => {
+const BaseHeroSection = ({
+  image,
+  children,
+  className,
+  ...props
+}: PropsWithChildren & ComponentProps<"section"> & { image: string }) => {
   return (
     <section
-      className="relative min-h-[60vh]"
+      className={cn(`relative flex min-h-[70vh]`, className)}
+      {...props}
       style={{
         backgroundImage: `url(${image})`,
         backgroundSize: "cover",
@@ -25,7 +32,9 @@ const BaseHeroSection = ({ image }: { image: string }) => {
       {/* Overlays */}
       <div className="absolute inset-0 z-10 bg-linear-to-r from-slate-900/90 via-slate-900/60 to-transparent" />
       <div className="absolute inset-0 z-10 bg-black/20" />
-
+      <div className="relative z-20 flex-1 flex items-center justify-center">
+        {children}
+      </div>
       {/* Content */}
       {/* <div className="container relative z-20 px-4 md:px-8 max-w-7xl mx-auto">
         <div className="max-w-3xl space-y-8">
