@@ -79,6 +79,24 @@ export default async function BookExamsId({
           <FormSELTRegistration />
         </div>
       );
+    case EXAM_IDS_DATA.pte_academic.id:
+      return (
+        <div>
+          <h2 className="text-2xl font-bold my-8 text-center">
+            PTE Academic Registration
+          </h2>
+          <FormPTEAcademicRegistration />
+        </div>
+      );
+    case EXAM_IDS_DATA.pte_core.id:
+      return (
+        <div>
+          <h2 className="text-2xl font-bold my-8 text-center">
+            PTE Core Registration
+          </h2>
+          <FormPTECoreRegistration />
+        </div>
+      );
     // case "ielts_ukvi":
     // case "ielts_ukvi_academic":
     // case "ielts_ukvi_general":
@@ -93,26 +111,8 @@ export default async function BookExamsId({
     //       <FormIELTSUKVIRegistration />
     //     </div>
     //   );
-    case "pte_academic":
-    case "pte_academic_ukvi":
-      return (
-        <div>
-          <h2 className="text-2xl font-bold my-8 text-center">
-            PTE Academic Registration
-          </h2>
-          <FormPTEAcademicRegistration />
-        </div>
-      );
-    case "pte_core":
-      return (
-        <div>
-          <h2 className="text-2xl font-bold my-8 text-center">
-            PTE Core Registration
-          </h2>
-          <FormPTECoreRegistration />
-        </div>
-      );
-    case "pte_home_a1":
+
+    case EXAM_IDS_DATA.pte_home_a1.id:
       return (
         <div>
           <h2 className="text-2xl font-bold my-8 text-center">
@@ -121,7 +121,7 @@ export default async function BookExamsId({
           <FormPTEHomeA1Registration />
         </div>
       );
-    case "pte_home_a2":
+    case EXAM_IDS_DATA.pte_home_a2.id:
       return (
         <div>
           <h2 className="text-2xl font-bold my-8 text-center">
@@ -130,7 +130,7 @@ export default async function BookExamsId({
           <FormPTEHomeA2Registration />
         </div>
       );
-    case "pte_home_b1":
+    case EXAM_IDS_DATA.pte_home_b1.id:
       return (
         <div>
           <h2 className="text-2xl font-bold my-8 text-center">
@@ -139,7 +139,8 @@ export default async function BookExamsId({
           <FormPTEHomeB1Registration />
         </div>
       );
-    case "pte_ukvi":
+    case EXAM_IDS_DATA.pte_ukvi.id:
+    case EXAM_IDS_DATA.pte_academic_ukvi.id:
       return (
         <div>
           <h2 className="text-2xl font-bold my-8 text-center">
