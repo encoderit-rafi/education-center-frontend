@@ -27,7 +27,7 @@ export default function AppNavigation({ navigations }: AppNavigationProps) {
 
   return (
     <NavigationMenu viewport={false}>
-      <NavigationMenuList className="gap-2 ">
+      <NavigationMenuList className="gap-2">
         {navigations.map((item) => {
           const isMatch = (href: string) =>
             href === "/"
@@ -60,7 +60,7 @@ export default function AppNavigation({ navigations }: AppNavigationProps) {
                   >
                     <Link href={item.href}>{item.name}</Link>
                   </NavigationMenuTrigger>
-                  <NavigationMenuContent className="z-50 p-1 min-w-48 border bg-white text-primary rounded-xl shadow-2xl">
+                  <NavigationMenuContent className="z-50 p-1 min-w-36 border bg-white text-primary rounded-xl shadow-2xl">
                     <ul className="flex flex-col gap-1">
                       {item.items.map((child) => {
                         const isSubItemActive = isMatch(child.href);
@@ -70,7 +70,12 @@ export default function AppNavigation({ navigations }: AppNavigationProps) {
                               active={isSubItemActive}
                               asChild
                             >
-                              <Link href={child.href}>{child.name}</Link>
+                              <Link
+                                href={child.href}
+                                className="whitespace-nowrap"
+                              >
+                                {child.name}
+                              </Link>
                             </NavigationMenuLink>
                           </li>
                         );
