@@ -10,6 +10,7 @@ import FormPTEHomeUkviRegistration from "@/components/blocks/forms/pte-home-ukvi
 import FormSELTRegistration from "@/components/blocks/forms/selt-registration/form-selt-registration";
 import FormTOEFLIBTRegistration from "@/components/blocks/forms/toefl-ibt-exam-registration/form-toefl-ibt-registration";
 import { EXAM_IDS_DATA } from "@/data";
+import { notFound } from "next/navigation";
 
 export default async function BookExamsId({
   params,
@@ -67,6 +68,15 @@ export default async function BookExamsId({
           <h2 className="text-2xl font-bold my-8 text-center">
             CAEL Registration
           </h2>
+        </div>
+      );
+    case EXAM_IDS_DATA.selt.id:
+      return (
+        <div>
+          <h2 className="text-2xl font-bold my-8 text-center">
+            SELT Registration
+          </h2>
+          <FormSELTRegistration />
         </div>
       );
     // case "ielts_ukvi":
@@ -139,24 +149,24 @@ export default async function BookExamsId({
         </div>
       );
 
-    case "selt":
-    case "selt_a1":
-    case "selt_a2":
-    case "selt_b1":
-    case "selt_b1_r_w":
-    case "selt_b2":
-    case "selt_c1":
-    case "selt_c2":
-      return (
-        <div>
-          <h2 className="text-2xl font-bold my-8 text-center">
-            SELT Registration
-          </h2>
-          <FormSELTRegistration />
-        </div>
-      );
+    // case "selt":
+    // case "selt_a1":
+    // case "selt_a2":
+    // case "selt_b1":
+    // case "selt_b1_r_w":
+    // case "selt_b2":
+    // case "selt_c1":
+    // case "selt_c2":
+    //   return (
+    //     <div>
+    //       <h2 className="text-2xl font-bold my-8 text-center">
+    //         SELT Registration
+    //       </h2>
+    //       <FormSELTRegistration />
+    //     </div>
+    //   );
 
     default:
-      return <div className="min-h-screen">Not Found</div>;
+      return notFound();
   }
 }
