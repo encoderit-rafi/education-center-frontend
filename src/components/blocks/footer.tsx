@@ -4,8 +4,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { toast } from "sonner";
-import { Clock, MapPin, Mail, Phone, LucideIcon } from "lucide-react";
+import { Clock, MapPin, Mail, Phone, LucideIcon, ChevronDown, ChevronRight } from "lucide-react";
 import WaveDivider from "./wave-divider";
+import { PRIMARY_NAV, SECONDARY_NAV } from "@/data";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from "@/components/ui/dropdown-menu";
 
 function ContactItem({
   icon: Icon,
@@ -73,10 +80,10 @@ export default function Footer() {
   return (
     <footer className="relative w-full text-white overflow-hidden bg-secondary">
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-6 pt-20 pb-10">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
+      <div className="max-w-8xl mx-auto px-6 pt-20 pb-10">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-16">
           {/* Column 1: Info Card */}
-          <div className="p-8 md:p-10 rounded-lg relative z-10 bg-white hover:bg-white">
+          <div className="p-8 md:p-10 rounded-lg relative z-10 bg-white hover:bg-white h-fit">
             <Link
               href="/"
               className="inline-block mb-6 transition-transform hover:scale-105 duration-300"
@@ -139,7 +146,64 @@ export default function Footer() {
               </div> */}
           </div>
 
-          {/* Column 2: Useful Links */}
+          {/* Column 2: Our Services (Navbar Links) */}
+          <div className="lg:pl-10">
+            <h3 className="text-xl font-black uppercase tracking-wider mb-2">
+              Our Services
+            </h3>
+            <div className="w-14 h-1 bg-red-700 mb-8" />
+
+            <div className="flex flex-col gap-y-4">
+              {[...PRIMARY_NAV, ...SECONDARY_NAV]
+                .filter((nav) => nav.name.toLowerCase() !== "home")
+                .map((nav) => (
+                  <div key={nav.name}>
+                    {nav.type === "dropdown" ? (
+                      <DropdownMenu>
+                        <DropdownMenuTrigger className="flex items-center gap-2 text-sm font-medium text-gray-100 hover:text-white transition-all hover:translate-x-1 group outline-none text-left w-full">
+                          <span className="text-gray-500 scale-75 group-hover:text-red-500 transition-colors">
+                            <ChevronRight className="w-6 h-6" />
+                          </span>
+                          <span className="flex-1">{nav.name}</span>
+                          <ChevronDown className="w-3 h-3 text-gray-500 group-hover:text-red-500 transition-transform group-data-[state=open]:rotate-180" />
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent
+                          side="bottom"
+                          align="start"
+                          className="bg-secondary border-white/10! text-white min-w-[220px] p-2 rounded-xl shadow-2xl animate-in fade-in slide-in-from-top-2 z-[60]"
+                        >
+                          {nav.items.map((item) => (
+                            <DropdownMenuItem key={item.name} asChild className="focus:bg-red-500/10 focus:text-white rounded-lg cursor-pointer outline-none">
+                              <Link
+                                href={item.href}
+                                className="flex items-center gap-2 w-full px-2 py-2 text-sm font-medium text-gray-200 hover:text-white group"
+                              >
+                                <span className="text-gray-500 scale-75 group-hover:text-red-500 transition-colors">
+                                  <ChevronRight className="w-6 h-6" />
+                                </span>
+                                {item.name}
+                              </Link>
+                            </DropdownMenuItem>
+                          ))}
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    ) : (
+                      <Link
+                        href={nav.href || "#"}
+                        className="flex items-center gap-2 text-sm font-medium text-gray-100 hover:text-white transition-all hover:translate-x-1 group"
+                      >
+                        <span className="text-gray-500 scale-75 group-hover:text-red-500 transition-colors">
+                          <ChevronRight className="w-6 h-6" />
+                        </span>
+                        {nav.name}
+                      </Link>
+                    )}
+                  </div>
+                ))}
+            </div>
+          </div>
+
+          {/* Column 3: Useful Links */}
           <div className="lg:pl-10">
             <h3 className="text-xl font-black uppercase tracking-wider mb-2">
               Useful Link
@@ -154,9 +218,7 @@ export default function Footer() {
                     className="flex items-center gap-2 text-sm font-medium text-gray-100 hover:text-white transition-all hover:translate-x-1 group"
                   >
                     <span className="text-gray-500 scale-75 group-hover:text-red-500 transition-colors">
-                      <span className="material-symbols-outlined text-xs">
-                        arrow_forward_ios
-                      </span>
+                      <ChevronRight className="w-6 h-6" />
                     </span>
                     {link.label}
                   </Link>
@@ -165,7 +227,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 3: News & Updates */}
+          {/* Column 4: News & Updates */}
           <div className="lg:pl-10">
             <h3 className="text-xl font-black uppercase tracking-wider mb-2">
               News & Updates
@@ -180,9 +242,7 @@ export default function Footer() {
                     className="flex items-center gap-2 text-sm font-medium text-gray-100 hover:text-white transition-all hover:translate-x-1 group"
                   >
                     <span className="text-gray-500 scale-75 group-hover:text-red-500 transition-colors">
-                      <span className="material-symbols-outlined text-xs">
-                        arrow_forward_ios
-                      </span>
+                      <ChevronRight className="w-6 h-6" />
                     </span>
                     {link.label}
                   </Link>

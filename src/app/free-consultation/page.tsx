@@ -2,11 +2,11 @@ import FreeConsultationForm from "@/app/free-consultation/_components/free-consu
 
 export default function FreeConsultationPage() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen ">
       {/* ── Form Section ── */}
-      <section id="booking-form" className="px-8 pb-32">
-        <div className="max-w-4xl mx-auto">
-          <div className="p-12 md:p-20">
+      <section id="booking-form" className="px-4 md:px-8 pb-32 max-w-screen-2xl mx-auto">
+        <div className="w-full">
+          <div className="py-12 md:py-20">
             <div className="text-center mb-16 space-y-2">
               <span className="text-[10px] font-black text-primary uppercase tracking-[0.4em]">
                 Reservation
