@@ -27,7 +27,7 @@ export default async function BookExamsId({
           <FormIELTSAcademicRegistration />
         </div>
       );
-    case "ielts_general":
+    case EXAM_IDS_DATA.ielts_general.id:
       return (
         <div>
           <h2 className="text-2xl font-bold my-8 text-center">
@@ -36,20 +36,28 @@ export default async function BookExamsId({
           <FormIELTSGeneralRegistration />
         </div>
       );
-    case "ielts_ukvi":
-    case "ielts_ukvi_academic":
-    case "ielts_ukvi_general":
-    case "ielts_life_skills_a1":
-    case "ielts_life_skills_a2":
-    case "ielts_life_skills_b1":
+    case EXAM_IDS_DATA.celpip_general.id:
       return (
         <div>
           <h2 className="text-2xl font-bold my-8 text-center">
-            IELTS UKVI Registration
+            CELPIP General Registration
           </h2>
-          <FormIELTSUKVIRegistration />
         </div>
       );
+    // case "ielts_ukvi":
+    // case "ielts_ukvi_academic":
+    // case "ielts_ukvi_general":
+    // case "ielts_life_skills_a1":
+    // case "ielts_life_skills_a2":
+    // case "ielts_life_skills_b1":
+    //   return (
+    //     <div>
+    //       <h2 className="text-2xl font-bold my-8 text-center">
+    //         IELTS UKVI Registration
+    //       </h2>
+    //       <FormIELTSUKVIRegistration />
+    //     </div>
+    //   );
     case "pte_academic":
     case "pte_academic_ukvi":
       return (
