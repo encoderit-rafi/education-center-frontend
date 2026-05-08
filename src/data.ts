@@ -1,6 +1,6 @@
 import { AppNavigationItem } from "./components/blocks/app-navigation";
 
-export const EXAM_IDS_DATA = {
+export const EXAMS_DATA = {
   ielts: {
     id: "ielts",
     name: "IELTS",
@@ -127,12 +127,30 @@ export const EXAM_IDS_DATA = {
   },
 };
 export const NAV_EXAMS_DATA = [
-  EXAM_IDS_DATA.ielts,
-  EXAM_IDS_DATA.toefl,
-  EXAM_IDS_DATA.pte,
-  EXAM_IDS_DATA.celpip,
-  EXAM_IDS_DATA.cael,
-  EXAM_IDS_DATA.selt,
+  {
+    id: "ielts",
+    name: "IELTS",
+  },
+  {
+    id: "toefl",
+    name: "TOEFL iBT",
+  },
+  {
+    id: "pte",
+    name: "PTE",
+  },
+  {
+    id: "celpip",
+    name: "CELPIP",
+  },
+  {
+    id: "cael",
+    name: "CAEL",
+  },
+  {
+    id: "selt",
+    name: "Skills for English (SELT)",
+  },
 ];
 export const NAV_EXAM_PREPARATION_COURSES_DATA = [
   {
@@ -224,16 +242,10 @@ export const PRIMARY_NAV: AppNavigationItem[] = [
     type: "dropdown",
     name: "Exams",
     href: "/exams",
-    items: [
-      ...NAV_EXAMS_DATA.map((exam) => ({
-        name: exam.name,
-        href: `/exams/${exam.id}`,
-      })),
-      {
-        name: "Other Exams",
-        href: "/exams/other-exams",
-      },
-    ],
+    items: NAV_EXAMS_DATA.map((exam) => ({
+      name: exam.name,
+      href: `/exams/${exam.id}`,
+    })),
   },
   {
     type: "dropdown",
