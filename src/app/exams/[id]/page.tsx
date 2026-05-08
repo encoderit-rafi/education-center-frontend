@@ -20,6 +20,10 @@ import ExamIELTSAcademic from "../_components/exam-ielts-academic";
 import ExamIELTSGeneral from "../_components/exam-ielts-general";
 import ExamIELTSUKVI from "../_components/exam-ielts -ukvi";
 import ExamCelpipGeneral from "../_components/exam-celpip-general";
+import ExamCELPIP from "../_components/exam-celpip";
+import ExamCelpipGeneralLS from "../_components/exam-celpip-general-ls";
+import ExamCAEL from "../_components/exam-cael";
+import ExamTOEFL from "../_components/exam-toefl";
 
 export default async function ExamDetailPage({
   params,
@@ -37,7 +41,15 @@ export default async function ExamDetailPage({
       return <ExamIELTSGeneral />;
     case EXAM_IDS_DATA.ielts_ukvi.id:
       return <ExamIELTSUKVI />;
+    case EXAM_IDS_DATA.toefl.id:
+      return <ExamTOEFL />;
+    case EXAM_IDS_DATA.celpip.id:
+      return <ExamCELPIP />;
     case EXAM_IDS_DATA.celpip_general.id:
       return <ExamCelpipGeneral />;
+    case EXAM_IDS_DATA.celpip_general_ls.id:
+      return <ExamCelpipGeneralLS />;
+    case EXAM_IDS_DATA.cael.id:
+      return <ExamCAEL />;
   }
 }
