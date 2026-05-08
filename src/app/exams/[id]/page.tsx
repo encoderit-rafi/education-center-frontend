@@ -10,6 +10,10 @@ import ExamCelpipGeneralLS from "../_components/exam-celpip-general-ls";
 import ExamCAEL from "../_components/exam-cael";
 import ExamTOEFL from "../_components/exam-toefl";
 import ExamSELT from "../_components/exam-selt";
+import ExamPTE from "../_components/exam-pte";
+import ExamPTEAcademic from "../_components/exam-pte-academic";
+import ExamPTECore from "../_components/exam-pte-core";
+import ExamPTEUKVI from "../_components/exam-pte-ukvi";
 
 export default async function ExamDetailPage({
   params,
@@ -29,6 +33,14 @@ export default async function ExamDetailPage({
       return <ExamIELTSUKVI />;
     case EXAM_IDS_DATA.toefl.id:
       return <ExamTOEFL />;
+    case EXAM_IDS_DATA.pte.id:
+      return <ExamPTE />;
+    case EXAM_IDS_DATA.pte_academic.id:
+      return <ExamPTEAcademic />;
+    case EXAM_IDS_DATA.pte_core.id:
+      return <ExamPTECore />;
+    case EXAM_IDS_DATA.pte_ukvi.id:
+      return <ExamPTEUKVI />;
     case EXAM_IDS_DATA.celpip.id:
       return <ExamCELPIP />;
     case EXAM_IDS_DATA.celpip_general.id:
