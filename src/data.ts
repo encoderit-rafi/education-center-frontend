@@ -1,6 +1,6 @@
 import { AppNavigationItem } from "./components/blocks/app-navigation";
 
-export const EXAMS_DATA = {
+export const EXAM_IDS_DATA = {
   ielts: {
     id: "ielts",
     name: "IELTS",
@@ -127,30 +127,12 @@ export const EXAMS_DATA = {
   },
 };
 export const NAV_EXAMS_DATA = [
-  {
-    id: "ielts",
-    name: "IELTS",
-  },
-  {
-    id: "toefl",
-    name: "TOEFL iBT",
-  },
-  {
-    id: "pte",
-    name: "PTE",
-  },
-  {
-    id: "celpip",
-    name: "CELPIP",
-  },
-  {
-    id: "cael",
-    name: "CAEL",
-  },
-  {
-    id: "selt",
-    name: "Skills for English (SELT)",
-  },
+  EXAM_IDS_DATA.ielts,
+  EXAM_IDS_DATA.toefl,
+  EXAM_IDS_DATA.pte,
+  EXAM_IDS_DATA.celpip,
+  EXAM_IDS_DATA.cael,
+  EXAM_IDS_DATA.selt,
 ];
 export const NAV_EXAM_PREPARATION_COURSES_DATA = [
   {
