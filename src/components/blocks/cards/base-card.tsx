@@ -9,7 +9,7 @@ const BaseCardTitle = ({
   return (
     <h3
       className={cn(
-        "text-xl font-black text-secondary text-nowrap group-hover:text-primary transition-colors tracking-tight",
+        "text-lg font-black text-secondary text-nowrap group-hover:text-primary transition-colors tracking-tight",
         className,
       )}
       {...props}
@@ -26,7 +26,7 @@ const BaseCardDescription = ({
   return (
     <p
       className={cn(
-        "text-base font-normal text-secondary/90 line-clamp-3",
+        "text-sm font-normal text-secondary/90 line-clamp-3",
         className,
       )}
       {...props}
@@ -60,7 +60,7 @@ const BaseCardIcon = ({
   return (
     <span
       className={cn(
-        "flex size-8 shrink-0 items-center justify-center rounded-full font-bold bg-primary/10 text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-white group-hover:scale-110 [&_svg]:size-6",
+        "flex size-7 shrink-0 items-center justify-center rounded-full font-bold bg-primary/10 text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-white group-hover:scale-110 [&_svg]:size-4",
         className,
       )}
       {...props}
@@ -88,7 +88,7 @@ const BaseCard = ({
   return (
     <div
       className={cn(
-        "group flex flex-col space-y-6 rounded-lg p-6 border border-slate-300 bg-white overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:border-primary hover:shadow-lg h-full",
+        "group flex flex-col space-y-4 rounded-lg p-5 border border-slate-300 bg-white overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:border-primary hover:shadow-lg h-full",
         className,
       )}
       {...props}

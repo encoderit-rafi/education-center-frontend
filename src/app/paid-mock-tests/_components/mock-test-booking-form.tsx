@@ -77,15 +77,15 @@ export default function MockTestBookingForm({
 
   if (isSuccess) {
     return (
-      <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-[3rem] p-16 text-center space-y-8 max-w-2xl mx-auto shadow-2xl animate-in zoom-in-95 duration-500">
-        <div className="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mx-auto">
-          <CheckCircle2 className="w-10 h-10 text-emerald-600" />
+      <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-[2.5rem] p-10 text-center space-y-6 max-w-2xl mx-auto shadow-2xl animate-in zoom-in-95 duration-500">
+        <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto">
+          <CheckCircle2 className="w-8 h-8 text-emerald-600" />
         </div>
-        <div className="space-y-4">
-          <h2 className="text-4xl font-headline font-black text-emerald-900 tracking-tight">
+        <div className="space-y-3">
+          <h2 className="text-3xl font-headline font-black text-emerald-900 tracking-tight">
             Booking Confirmed
           </h2>
-          <p className="text-emerald-700/80 text-lg leading-relaxed font-medium">
+          <p className="text-emerald-700/80 text-base leading-relaxed font-medium">
             Your {selectedItem.exam_name} Mock Test has been successfully
             scheduled for {selectedDate ? format(selectedDate, "PPP") : ""} at{" "}
             {selectedTime}. Check your email for testing credentials.
@@ -93,7 +93,7 @@ export default function MockTestBookingForm({
         </div>
         <button
           onClick={() => setIsSuccess(false)}
-          className="px-12 py-4 bg-emerald-600 text-white font-headline font-bold text-xs uppercase tracking-widest rounded-2xl hover:bg-emerald-700 transition-all shadow-xl shadow-emerald-600/20"
+          className="px-10 py-3 bg-emerald-600 text-white font-headline font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-emerald-700 transition-all shadow-xl shadow-emerald-600/20"
         >
           Close
         </button>
@@ -104,21 +104,21 @@ export default function MockTestBookingForm({
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className={cn("space-y-16 max-w-5xl mx-auto", className)}
+      className={cn("space-y-10 max-w-5xl mx-auto", className)}
     >
-      <div className="space-y-16">
+      <div className="space-y-10">
         <section>
-          <div className="flex items-center gap-4 mb-8">
+          <div className="flex items-center gap-4 mb-6">
             <span className="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-black text-sm shadow-lg shadow-primary/20">
               1
             </span>
-            <h2 className="text-2xl font-headline font-black text-secondary tracking-tight">
+            <h2 className="text-xl font-headline font-black text-secondary tracking-tight">
               Schedule & Information
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-12">
-            <div className="space-y-8">
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="space-y-6">
               <Field>
                 <FieldLabel className="text-[10px] font-black uppercase tracking-[0.2em] text-secondary/40 ml-1">
                   Test Date
@@ -128,7 +128,7 @@ export default function MockTestBookingForm({
                     mode="single"
                     selected={selectedDate}
                     onSelect={(date) => setValue("date", date as Date)}
-                    className="rounded-3xl border border-outline/5 bg-surface-container-low p-6 h-fit"
+                    className="rounded-2xl border border-outline/5 bg-surface-container-low p-4 h-fit"
                   />
                   <FieldError errors={[errors.date]} />
                 </FieldContent>
@@ -154,7 +154,7 @@ export default function MockTestBookingForm({
                         <label
                           htmlFor={time}
                           className={cn(
-                            "flex items-center justify-center py-4 rounded-xl border-2 text-[10px] font-black uppercase tracking-widest transition-all cursor-pointer w-full text-center",
+                            "flex items-center justify-center py-3 rounded-xl border-2 text-[10px] font-black uppercase tracking-widest transition-all cursor-pointer w-full text-center",
                             selectedTime === time
                               ? "border-primary bg-white text-secondary scale-105 shadow-md"
                               : "border-outline/5 bg-surface-container-low text-secondary/30",
@@ -170,7 +170,7 @@ export default function MockTestBookingForm({
               </Field>
             </div>
 
-            <div className="space-y-8">
+            <div className="space-y-6">
               <Field>
                 <FieldLabel className="text-[10px] font-black uppercase tracking-[0.2em] text-secondary/40 ml-1">
                   Full Name
@@ -178,7 +178,7 @@ export default function MockTestBookingForm({
                 <FieldContent>
                   <Input
                     {...register("fullName")}
-                    className="w-full h-auto px-6 py-4 bg-surface-container-low rounded-2xl border-none focus:ring-2 focus:ring-primary/20 transition-all font-medium text-secondary placeholder:text-slate-500"
+                    className="w-full h-auto px-5 py-3 bg-surface-container-low rounded-xl border-none focus:ring-2 focus:ring-primary/20 transition-all font-medium text-secondary placeholder:text-slate-500"
                     placeholder="Candidate Name"
                   />
                   <FieldError errors={[errors.fullName]} />
@@ -193,16 +193,16 @@ export default function MockTestBookingForm({
                   <Input
                     {...register("email")}
                     type="email"
-                    className="w-full h-auto px-6 py-4 bg-surface-container-low rounded-2xl border-none focus:ring-2 focus:ring-primary/20 transition-all font-medium text-secondary placeholder:text-slate-500"
+                    className="w-full h-auto px-5 py-3 bg-surface-container-low rounded-xl border-none focus:ring-2 focus:ring-primary/20 transition-all font-medium text-secondary placeholder:text-slate-500"
                     placeholder="email@example.com"
                   />
                   <FieldError errors={[errors.email]} />
                 </FieldContent>
               </Field>
 
-              <div className="p-6 bg-primary/5 rounded-2xl flex items-start gap-4 mt-12">
-                <Info className="text-primary w-5 h-5 mt-0.5" />
-                <p className="text-xs text-on-surface-variant font-medium leading-relaxed">
+              <div className="p-5 bg-primary/5 rounded-xl flex items-start gap-3 mt-8">
+                <Info className="text-primary w-4 h-4 mt-0.5" />
+                <p className="text-[11px] text-on-surface-variant font-medium leading-relaxed">
                   We will send your testing credentials and link to this email
                   address 24 hours before your selected slot.
                 </p>
@@ -212,11 +212,11 @@ export default function MockTestBookingForm({
         </section>
 
         <section>
-          <div className="flex items-center gap-4 mb-8">
+          <div className="flex items-center gap-4 mb-6">
             <span className="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-black text-sm shadow-lg shadow-primary/20">
               2
             </span>
-            <h2 className="text-2xl font-headline font-black text-secondary tracking-tight">
+            <h2 className="text-xl font-headline font-black text-secondary tracking-tight">
               Secure Payment
             </h2>
           </div>
