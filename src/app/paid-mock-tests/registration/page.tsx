@@ -128,7 +128,7 @@ export default function PaidMockTestRegistration({
           >
             <section className="grid md:grid-cols-2 gap-5">
               <div className="">
-                <Stepper step={1} title="Select Test Date" />
+                <Stepper step={1}>Select Test Date</Stepper>
                 <Field>
                   <FieldContent>
                     <Calendar
@@ -143,23 +143,67 @@ export default function PaidMockTestRegistration({
                   </FieldContent>
                 </Field>
               </div>
-            </section>
-
-            <section>
-              <div className="flex items-center gap-4 mb-6">
-                <span className="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-black text-sm shadow-lg shadow-primary/20">
-                  2
-                </span>
-                <h2 className="text-xl font-headline font-black text-secondary tracking-tight">
-                  Secure Payment
-                </h2>
+              <div className="space-y-6">
+                <div className="space-y-3">
+                  <Stepper step={2}>Your Information</Stepper>
+                  <div className="grid grid-cols-2 gap-3">
+                    <Field>
+                      <FieldLabel required>First Name</FieldLabel>
+                      <FieldContent>
+                        <Input
+                          type="text"
+                          placeholder="Jhon"
+                          {...register("firstName")}
+                        />
+                        <FieldError errors={[errors.firstName]} />
+                      </FieldContent>
+                    </Field>
+                    <Field>
+                      <FieldLabel required>Last Name</FieldLabel>
+                      <FieldContent>
+                        <Input
+                          type="text"
+                          placeholder="Doe"
+                          {...register("lastName")}
+                        />
+                        <FieldError errors={[errors.lastName]} />
+                      </FieldContent>
+                    </Field>
+                  </div>
+                  <Field>
+                    <FieldLabel required>Email</FieldLabel>
+                    <FieldContent>
+                      <Input
+                        type="text"
+                        placeholder="example@gmail.com"
+                        {...register("email")}
+                      />
+                      <FieldError errors={[errors.email]} />
+                    </FieldContent>
+                  </Field>
+                  <div className="text-primary border border-dashed border-primary/40 p-3 bg-primary/5 rounded-md flex items-start gap-2">
+                    <Info className="w-4 h-4 mt-0.5" />
+                    <p className="text-[11px] font-medium leading-relaxed">
+                      We will send your testing credentials and link to this
+                      email address 24 hours before your selected slot.
+                    </p>
+                  </div>
+                </div>
+                <div className="space-y-3">
+                  <Stepper step={3}>
+                    Secure Payment{" "}
+                    <span className="bg-primary/10 px-3 py-1 rounded-full text-sm font-semibold text-primary">
+                      {PRICE}{" "}
+                      <span className="font-normal text-xs">{CURRENCY}</span>
+                    </span>
+                  </Stepper>
+                  <Payment amount={PRICE} currency={CURRENCY} />
+                  <Button type="submit" className="w-full mt-6 py-3">
+                    Register
+                    <ArrowRight className="w-5 h-5" />
+                  </Button>
+                </div>
               </div>
-
-              <Payment amount={PRICE} currency={CURRENCY} />
-              <Button type="submit" className="w-full mt-6 py-3">
-                Confirm & Pay
-                <ArrowRight className="w-5 h-5" />
-              </Button>
             </section>
           </form>
         </div>

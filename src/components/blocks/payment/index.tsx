@@ -24,19 +24,7 @@ export default function Payment({ amount, currency = "aed" }: PaymentProps) {
   }
 
   return (
-    <div className="space-y-6">
-      <div className="bg-primary/10 p-6 text-primary rounded-md border border-dashed border-primary/20 flex justify-between items-center">
-        <div>
-          <p className="text-xs font-black  uppercase tracking-widest mb-1">
-            Total to pay
-          </p>
-          <p className="text-2xl font-black ">
-            {amount.toLocaleString()}{" "}
-            <span className="text-sm">{currency.toUpperCase()}</span>
-          </p>
-        </div>
-      </div>
-
+    <div className="space-y-3">
       <Elements
         stripe={stripePromise}
         options={{
