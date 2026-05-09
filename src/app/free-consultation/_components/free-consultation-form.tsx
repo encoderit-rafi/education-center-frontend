@@ -89,7 +89,7 @@ export default function FreeConsultationForm() {
 
   if (isSuccess) {
     return (
-      <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-2xl p-10 text-center space-y-6 animate-fade-up">
+      <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-2xl p-6 text-center space-y-4 animate-fade-up">
         <CheckCircle2 className="w-16 h-16 text-emerald-500 mx-auto" />
         <div className="space-y-2">
           <h3 className="text-3xl font-black uppercase tracking-tight">Session Confirmed!</h3>
@@ -111,9 +111,9 @@ export default function FreeConsultationForm() {
   const isAcademic = selectedContext === "academic";
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-10 lg:space-y-16">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       {/* 1. Context Selection */}
-      <div className="space-y-6">
+      <div className="space-y-3">
         <div className="flex items-center gap-3">
           <span className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-xs font-black">1</span>
           <h4 className="text-lg font-black uppercase tracking-tight text-slate-900">Select Context</h4>
@@ -127,7 +127,7 @@ export default function FreeConsultationForm() {
               setValue("courseId", "");
             }
           }}
-          className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+          className="grid grid-cols-1 sm:grid-cols-2 gap-3"
         >
           {CONTEXTS.map((ctx) => (
             <Field key={ctx.id} className="relative">
@@ -135,7 +135,7 @@ export default function FreeConsultationForm() {
               <label
                 htmlFor={ctx.id}
                 className={cn(
-                  "p-4 md:p-6 rounded-xl border transition-all duration-300 cursor-pointer flex items-center gap-4 w-full",
+                  "p-3 md:p-4 rounded-xl border transition-all duration-300 cursor-pointer flex items-center gap-3 w-full",
                   selectedContext === ctx.id
                     ? "border-primary bg-primary/5 shadow-sm"
                     : "border-slate-200 bg-slate-50/30 hover:border-primary/30 hover:bg-slate-50/50",
@@ -143,13 +143,13 @@ export default function FreeConsultationForm() {
               >
                 <div
                   className={cn(
-                    "w-10 h-10 md:w-12 md:h-12 rounded-lg flex items-center justify-center transition-colors",
+                    "w-9 h-9 rounded-lg flex items-center justify-center transition-colors",
                     selectedContext === ctx.id
                       ? "bg-primary text-white"
                       : "bg-slate-100 text-slate-400",
                   )}
                 >
-                  <ctx.icon className="w-5 h-5 md:w-6 md:h-6" />
+                  <ctx.icon className="w-4 h-4" />
                 </div>
                 <span
                   className={cn(
@@ -176,7 +176,7 @@ export default function FreeConsultationForm() {
           <div className="w-full h-px bg-slate-100/80" />
 
           {/* 2. Course Selection */}
-          <div className="space-y-6">
+          <div className="space-y-3">
             <div className="flex items-center gap-3">
               <span className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-xs font-black">2</span>
               <h4 className="text-lg font-black uppercase tracking-tight text-slate-900">Target Course</h4>
@@ -192,7 +192,7 @@ export default function FreeConsultationForm() {
                   name="courseId"
                   render={({ field }) => (
                     <Select onValueChange={field.onChange} value={field.value}>
-                      <SelectTrigger className="bg-slate-50/50 border-slate-200 h-14 rounded-xl px-6 font-medium focus:ring-4 focus:ring-primary/5">
+                       <SelectTrigger className="bg-slate-50/50 border-slate-200 h-10 rounded-xl px-4 font-medium focus:ring-4 focus:ring-primary/5">
                         <SelectValue placeholder="Select an academic course" />
                       </SelectTrigger>
                       <SelectContent>
@@ -214,19 +214,19 @@ export default function FreeConsultationForm() {
 
       <div className="w-full h-px bg-slate-100/80" />
 
-      <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+      <div className="grid lg:grid-cols-2 gap-6 items-start">
         {/* 2 or 3. Scheduling */}
-        <div className="space-y-8">
+        <div className="space-y-4">
           <div className="flex items-center gap-3">
             <span className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-xs font-black">{isAcademic ? 3 : 2}</span>
             <h4 className="text-lg font-black uppercase tracking-tight text-slate-900">Scheduling</h4>
           </div>
 
-          <div className="space-y-6">
+          <div className="space-y-4">
             <Field data-invalid={!!errors.preferredDate}>
               <FieldLabel className="text-sm font-medium">Preferred Date <span className="text-primary font-bold">*</span></FieldLabel>
               <FieldContent>
-                <div className="bg-slate-50/50 border border-slate-200 rounded-xl p-0 sm:p-4 overflow-hidden">
+                <div className="bg-slate-50/50 border border-slate-200 rounded-xl p-0 sm:p-2 overflow-hidden">
                   <Calendar
                     mode="single"
                     selected={watch("preferredDate")}
@@ -244,7 +244,7 @@ export default function FreeConsultationForm() {
                 <RadioGroup
                   value={selectedTime}
                   onValueChange={(val) => setValue("preferredTime", val as string)}
-                  className="grid grid-cols-2 gap-2 sm:gap-3"
+                  className="grid grid-cols-2 gap-2"
                 >
                   {["09:00 AM", "02:00 PM"].map((t) => (
                     <div key={t}>
@@ -252,7 +252,7 @@ export default function FreeConsultationForm() {
                       <label
                         htmlFor={t}
                         className={cn(
-                          "flex items-center justify-center py-4 rounded-xl border font-bold text-[10px] sm:text-xs uppercase tracking-widest transition-all cursor-pointer w-full",
+                          "flex items-center justify-center py-2.5 rounded-xl border font-bold text-[10px] sm:text-xs uppercase tracking-widest transition-all cursor-pointer w-full",
                           selectedTime === t
                             ? "border-primary bg-primary/5 text-primary shadow-sm"
                             : "border-slate-200 bg-slate-50/30 text-slate-400 hover:bg-slate-50/50",
@@ -270,13 +270,13 @@ export default function FreeConsultationForm() {
         </div>
 
         {/* 3 or 4. Personal Details */}
-        <div className="space-y-8">
+        <div className="space-y-4">
           <div className="flex items-center gap-3">
             <span className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-xs font-black">{isAcademic ? 4 : 3}</span>
             <h4 className="text-lg font-black uppercase tracking-tight text-slate-900">Personal Details</h4>
           </div>
 
-          <div className="space-y-6 shadow-2xl shadow-primary/5 border border-slate-100 rounded-xl p-4 sm:p-6 md:p-10">
+          <div className="space-y-4 shadow-2xl shadow-primary/5 border border-slate-100 rounded-xl p-3 sm:p-4">
             <Field data-invalid={!!errors.fullName}>
               <FieldLabel className="text-sm font-medium">
                 Full Name <span className="text-primary font-bold">*</span>
@@ -284,7 +284,7 @@ export default function FreeConsultationForm() {
               <FieldContent>
                 <Input
                   {...register("fullName")}
-                  className="bg-slate-50/50 border-slate-200 h-14 rounded-xl px-6 placeholder:text-slate-400 font-medium"
+                  className="bg-slate-50/50 border-slate-200 h-10 rounded-xl px-4 placeholder:text-slate-400 font-medium"
                   placeholder="John Doe"
                 />
               </FieldContent>
@@ -299,7 +299,7 @@ export default function FreeConsultationForm() {
                 <Input
                   {...register("email")}
                   type="email"
-                  className="bg-slate-50/50 border-slate-200 h-14 rounded-xl px-6 placeholder:text-slate-400 font-medium"
+                  className="bg-slate-50/50 border-slate-200 h-10 rounded-xl px-4 placeholder:text-slate-400 font-medium"
                   placeholder="john@example.com"
                 />
               </FieldContent>
@@ -311,18 +311,18 @@ export default function FreeConsultationForm() {
               <FieldContent>
                 <Textarea
                   {...register("description")}
-                  rows={4}
-                  className="bg-slate-50/50 border-slate-200 rounded-xl p-6 placeholder:text-slate-400 font-medium resize-none"
+                  rows={3}
+                  className="bg-slate-50/50 border-slate-200 rounded-xl p-3 placeholder:text-slate-400 font-medium resize-none"
                   placeholder="Tell us about your academic goals..."
                 />
               </FieldContent>
             </Field>
 
-            <div className="pt-6 space-y-6">
+            <div className="pt-3 space-y-3">
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="h-16 px-12 rounded-xl font-black uppercase tracking-widest text-[10px] sm:text-sm w-full transition-all active:scale-95 shadow-xl shadow-primary/10"
+                className="h-11 px-8 rounded-xl font-black uppercase tracking-widest text-[10px] sm:text-sm w-full transition-all active:scale-95 shadow-xl shadow-primary/10"
               >
                 <div className="flex items-center gap-3">
                   {isSubmitting ? "Processing..." : "Confirm Discovery Session"}

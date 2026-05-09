@@ -9,14 +9,11 @@ export default function FreeConsultation() {
       <div className="relative mx-auto px-6 py-16 lg:px-12 lg:py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 text-center  lg:text-left">
           <div>
-            <p className="mb-4 text-xs font-bold uppercase tracking-[0.3em] text-white/70">
-              Start Today
-            </p>
-            <h2 className="text-4xl font-headline font-black text-white lg:text-5xl uppercase tracking-tight leading-[1.1]">
+            <h2 className="text-4xl font-black text-white lg:text-5xl tracking-tight">
               Ready to start <br className="hidden lg:block" />
               your journey?
             </h2>
-            <p className="mt-6 text-lg leading-relaxed text-white/80 max-w-lg">
+            <p className="mt-6 text-lg leading-relaxed text-white/90 max-w-lg">
               Our academic counselors are available to guide you through the
               selection and booking process.
             </p>
@@ -42,7 +39,7 @@ export default function FreeConsultation() {
             ].map((feature, i) => (
               <span
                 key={i}
-                className="flex items-center gap-3 text-sm font-medium text-white/70"
+                className="flex items-center gap-3 text-sm font-medium text-white/80"
               >
                 <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white/10">
                   <Check className="h-3 w-3 text-white" />

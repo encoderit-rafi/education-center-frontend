@@ -35,26 +35,6 @@ const BaseHeroSection = ({
       <div className="relative z-20 flex-1 flex items-center justify-center">
         {children}
       </div>
-      {/* Content */}
-      {/* <div className="container relative z-20 px-4 md:px-8 max-w-7xl mx-auto">
-        <div className="max-w-3xl space-y-8">
-          <h1 className="text-4xl md:text-7xl font-headline font-black text-white leading-[1.1] tracking-tight animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-150">
-            Prep Smarter <br />
-            <span className="text-primary italic relative">
-              Score
-              <div className="absolute -bottom-2 left-0 w-full h-1 bg-primary rounded-full opacity-50" />
-            </span>{" "}
-            Higher
-          </h1>
-
-          <p className="text-lg text-slate-200 max-w-2xl leading-relaxed font-light animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-300">
-            Empowering students with skilled instructors and premium resources
-            to achieve their language goals and global recognition.
-          </p>
-
-      
-        </div>
-      </div> */}
     </section>
   );
 };

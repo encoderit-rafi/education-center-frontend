@@ -1,4 +1,4 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { ComponentProps, PropsWithChildren } from "react";
 import { cn } from "@/lib/utils";
 const BaseCardTitle = ({
@@ -9,7 +9,7 @@ const BaseCardTitle = ({
   return (
     <h3
       className={cn(
-        "text-xl font-black text-slate-900 text-nowrap group-hover:text-primary transition-colors tracking-tight",
+        "text-xl font-black text-secondary text-nowrap group-hover:text-primary transition-colors tracking-tight",
         className,
       )}
       {...props}
@@ -26,7 +26,7 @@ const BaseCardDescription = ({
   return (
     <p
       className={cn(
-        "font-normal text-sm leading-relaxed text-slate-500 line-clamp-3",
+        "text-base font-normal text-secondary/90 line-clamp-3",
         className,
       )}
       {...props}
@@ -60,7 +60,7 @@ const BaseCardIcon = ({
   return (
     <span
       className={cn(
-        "flex size-12 shrink-0 items-center justify-center rounded-md bg-primary/10 text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-white group-hover:scale-110 [&_svg]:size-6",
+        "flex size-8 shrink-0 items-center justify-center rounded-full font-bold bg-primary/10 text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-white group-hover:scale-110 [&_svg]:size-6",
         className,
       )}
       {...props}
@@ -88,7 +88,7 @@ const BaseCard = ({
   return (
     <div
       className={cn(
-        "group flex flex-col space-y-6 rounded-xl border border-slate-300 bg-white overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:border-primary hover:shadow-lg",
+        "group flex flex-col space-y-6 rounded-lg p-6 border border-slate-300 bg-white overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:border-primary hover:shadow-lg h-full",
         className,
       )}
       {...props}
@@ -98,6 +98,32 @@ const BaseCard = ({
   );
 };
 
+const BaseCardList = ({
+  items,
+  checked = false,
+  className,
+}: {
+  items: string[];
+  checked?: boolean;
+  className?: string;
+}) => {
+  return (
+    <ul
+      className={cn("space-y-2 text-sm text-slate-700 line-clamp-1", className)}
+    >
+      {items.map((point, i) => (
+        <li key={i} className="flex items-center gap-2">
+          {checked ? (
+            <CheckCircle2 className="size-4 text-primary shrink-0" />
+          ) : (
+            <span className="size-1.5 rounded-full bg-primary shrink-0" />
+          )}
+          {point}
+        </li>
+      ))}
+    </ul>
+  );
+};
 export {
   BaseCard,
   BaseCardTitle,
@@ -105,4 +131,5 @@ export {
   BaseCardImportantInfo,
   BaseCardIcon,
   BaseCardArrow,
+  BaseCardList,
 };

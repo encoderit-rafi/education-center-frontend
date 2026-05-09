@@ -305,6 +305,9 @@
 @utility base-py {
   @apply py-8 md:py-12 lg:py-16;
 }
+@utility base-space-y {
+  @apply space-y-6;
+}
 @utility nav-px {
   @apply px-3 md:px-6;
 }
@@ -328,6 +331,15 @@
 }
 @utility base-hero-section-description {
   @apply text-lg text-slate-200 max-w-2xl leading-relaxed font-light  duration-1000 delay-300;
+}
+@utility page-heading {
+  @apply text-3xl md:text-4xl lg:text-5xl font-black text-secondary;
+}
+@utility page-description {
+  @apply text-base font-light text-secondary;
+}
+@utility highlight {
+  @apply text-primary italic;
 }
 .section-title span {
   @apply text-primary italic;
