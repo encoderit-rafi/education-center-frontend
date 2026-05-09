@@ -26,7 +26,6 @@ import {
   BaseCardTitle,
 } from "@/components/blocks/cards/base-card";
 import { buttonVariants } from "@/components/ui/button";
-import MockTestBookingForm from "../_components/mock-test-booking-form";
 import { PAID_MOCK_TESTS_DATA } from "@/data";
 
 // Icon mapping to handle dynamic icon rendering
@@ -71,7 +70,7 @@ export default async function PaidMockTestDynamicPage({ params }: PageProps) {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-slate-50 border-b border-slate-100">
+      <section className="relative overflow-hidden bg-slate-50">
         <div className="container relative mx-auto px-4 py-12 lg:px-8 lg:py-20 max-w-7xl">
           <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
             <div className="max-w-2xl">
@@ -83,7 +82,7 @@ export default async function PaidMockTestDynamicPage({ params }: PageProps) {
                 {data.hero.description}
               </p>
               <Link
-                href="#booking-section"
+                href={`/paid-mock-tests/registration?id=${data.id}`}
                 className={cn(
                   buttonVariants(),
                   "px-4 sm:px-8 py-3 text-sm font-bold shadow-xl shadow-primary/20 hover:-translate-y-1 transition-all duration-300",

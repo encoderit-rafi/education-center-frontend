@@ -401,10 +401,10 @@ export const PAID_MOCK_TEST_CARDS_DATA = [
 ];
 export const PAID_MOCK_TESTS_DATA = {
   ielts: {
-    id: "ielts",
+    ...EXAM_IDS_DATA.ielts,
     hero: {
-      title: "IELTS Paid",
-      titleHighlight: "Mock Test",
+      title: "IELTS",
+      titleHighlight: "Paid Mock Test",
       description:
         "The International English Language Testing System is heavily influenced by time pressure, question familiarity, and writing expectations. Our mock tests help in ways that normal practice cannot.",
     },
@@ -468,7 +468,7 @@ export const PAID_MOCK_TESTS_DATA = {
     },
   },
   pte_academic: {
-    id: "pte-academic",
+    ...EXAM_IDS_DATA.pte_academic,
     hero: {
       title: "PTE Academic",
       titleHighlight: "Mock Test",
@@ -551,7 +551,7 @@ export const PAID_MOCK_TESTS_DATA = {
     },
   },
   toefl: {
-    id: "toefl",
+    ...EXAM_IDS_DATA.toefl,
     hero: {
       title: "TOEFL iBT",
       titleHighlight: "Mock Test",
