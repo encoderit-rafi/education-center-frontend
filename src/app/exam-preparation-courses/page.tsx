@@ -17,11 +17,11 @@ export default function ExamPreparationCoursesPage() {
       {/* ── Hero Section ── */}
       <section className="relative overflow-hidden bg-slate-50 base-py base-px">
         <div className="max-w-4xl mx-auto text-center space-y-8  ">
-          <h1 className="page-heading">
+          <h1 className="section-title">
             Exam Preparation{" "}
             <span className="text-primary italic">Courses</span>
           </h1>
-          <p className="page-description">
+          <p className="section-subtitle max-w-3xl mx-auto">
             Master international proficiency standards with our elite
             preparation programs. We combine official pedagogy with intensive
             practice to guarantee your success.

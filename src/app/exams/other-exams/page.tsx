@@ -54,19 +54,6 @@ export default function OtherExamsPage() {
   return (
     <div className="min-h-screen">
       {/* ── Hero ── */}
-      <BaseHeroSection image={"/images/exams/ielts/ielts-1.jpg"}>
-        <div className="section-container space-y-6 base-px base-py">
-          <h1 className="base-hero-section-heading">
-            Other <span className="italic text-primary">Exams</span>
-          </h1>
-          <p className="base-hero-section-description">
-            Beyond our core language tests, TEPTH delivers a range of
-            professional certification and credentialing exams — including
-            Pearson VUE, ACCA, and Kryterion. Contact us to confirm availability
-            and current scheduling.
-          </p>
-        </div>
-      </BaseHeroSection>
 
       {/* ── Exam Cards ── */}
       <div className="section-container base-px base-py">
@@ -74,8 +61,10 @@ export default function OtherExamsPage() {
           Professional &amp; <span>Other</span> Exams
         </h2>
         <p className="mx-auto section-subtitle text-center">
-          Contact us to confirm current availability, scheduling, and fees for
-          any of the tests below.
+          Beyond our core language tests, TEPTH delivers a range of professional
+          certification and credentialing exams — including Pearson VUE, ACCA,
+          and Kryterion. Contact us to confirm availability and current
+          scheduling.
         </p>
 
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-2 mt-20 max-w-4xl mx-auto">
@@ -89,9 +78,6 @@ export default function OtherExamsPage() {
               </div>
 
               <div className="space-y-1">
-                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">
-                  {exam.provider}
-                </p>
                 <BaseCardTitle>{exam.name}</BaseCardTitle>
               </div>
 

@@ -9,6 +9,7 @@ import {
   Target,
   Users,
   UserCheck,
+  Calendar,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
@@ -105,7 +106,7 @@ export default async function ExamPreparationDynamicPage({
             </p>
           </div>
 
-          <div className="grid gap-8 lg:grid-cols-2">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {data.courses.map((course, index) => {
               const discountedPrice = course.general_discount
                 ? Math.round(course.price * (1 - course.general_discount / 100))
@@ -117,9 +118,15 @@ export default async function ExamPreparationDynamicPage({
                   //   className="p-8 flex flex-col h-full border-slate-200 group relative overflow-hidden hover:border-primary/30 hover:shadow-2xl transition-all duration-500 ease-out"
                 >
                   <div className="mb-6">
-                    <BaseCardTitle className="text-xl mb-4 leading-tight">
-                      {course.name}
-                    </BaseCardTitle>
+                    <div className="flex items-center justify-between">
+                      <BaseCardTitle className="text-xl mb-4 leading-tight">
+                        {course.name}
+                      </BaseCardTitle>
+
+                      <Badge className="py-0.5 px-2 font-semibold">
+                        SAVE {course.general_discount}%
+                      </Badge>
+                    </div>
                     <div className="flex items-baseline gap-3">
                       <div className="flex items-baseline gap-1">
                         <span className="text-3xl font-black text-primary">
@@ -139,7 +146,7 @@ export default async function ExamPreparationDynamicPage({
                   </BaseCardDescription>
 
                   <div className="space-y-4 mt-auto">
-                    <Badge>Best For</Badge>
+                    <Badge variant={"destructive"}>Best For</Badge>
                     <BaseCardList items={course.bestFor} checked />
                     <div className="grid grid-cols-2 gap-4">
                       <div>
@@ -160,10 +167,11 @@ export default async function ExamPreparationDynamicPage({
                       href={`/exam-preparation-courses/registration?examId=${id}&courseId=${course.id}&price=${discountedPrice}&currency=${course.currency}`}
                       className={cn(
                         buttonVariants(),
-                        "w-full font-bold h-12 shadow-sm mt-3",
+                        "font-bold h-10 shadow-sm mt-3 px-4",
                       )}
                     >
-                      Register Now
+                      <Calendar />
+                      Register
                     </Link>
                   </div>
                 </BaseCard>

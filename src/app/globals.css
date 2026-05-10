@@ -321,7 +321,7 @@
   @apply text-primary text-xs font-bold uppercase tracking-[0.3em] lg:text-xs mb-4 inline-block;
 }
 @utility section-title {
-  @apply text-xl md:text-2xl lg:text-3xl font-headline font-black text-slate-900 tracking-tight uppercase;
+  @apply text-xl md:text-2xl lg:text-3xl font-black text-slate-900;
 }
 @utility section-subtitle {
   @apply text-sm md:text-base lg:text-lg font-sans text-slate-700 mt-4 max-w-3xl leading-relaxed;
