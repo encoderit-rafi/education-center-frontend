@@ -125,6 +125,10 @@ export const EXAM_IDS_DATA = {
     id: "selt-c2",
     name: "UKVI Speaking, listening, reading, and writing at level C2",
   },
+  oet: {
+    id: "oet",
+    name: "OET",
+  },
 };
 export const NAV_EXAMS_DATA = [
   EXAM_IDS_DATA.ielts,
@@ -135,26 +139,13 @@ export const NAV_EXAMS_DATA = [
   EXAM_IDS_DATA.selt,
 ];
 export const NAV_EXAM_PREPARATION_COURSES_DATA = [
-  {
-    id: "ielts",
-    name: "IELTS",
-  },
-  {
-    id: "toefl",
-    name: "TOEFL iBT",
-  },
-  {
-    id: "pte-academic",
-    name: "PTE Academic",
-  },
-  {
-    id: "celpip-general",
-    name: "CELPIP General",
-  },
-  {
-    id: "selt",
-    name: "Skills for English (SELT)",
-  },
+  EXAM_IDS_DATA.ielts,
+  EXAM_IDS_DATA.toefl,
+  EXAM_IDS_DATA.pte_academic,
+  EXAM_IDS_DATA.celpip_general,
+  EXAM_IDS_DATA.cael,
+  EXAM_IDS_DATA.selt,
+  EXAM_IDS_DATA.oet,
 ];
 export const NAV_BOOK_EXAMS_DATA = [
   {
@@ -644,3 +635,743 @@ export const PAID_MOCK_TESTS_DATA = {
     },
   },
 };
+export const COURSES_DATA = {
+  group_classroom: {
+    id: "group_classroom",
+    name: "Group Classroom",
+    class_mode_id: "group",
+    class_type_id: "classroom",
+    price: 1850,
+    currency: "AED",
+    general_discount: 5,
+    special_discount: 10,
+  },
+
+  semi_private_classroom: {
+    id: "semi_private_classroom",
+    name: "Semi-Private Classroom",
+    class_mode_id: "semi_private",
+    class_type_id: "classroom",
+    price: 2850,
+    currency: "AED",
+    general_discount: 5,
+    special_discount: 15,
+  },
+
+  vip_classroom: {
+    id: "vip_classroom",
+    name: "VIP Classroom",
+    class_mode_id: "vip",
+    class_type_id: "classroom",
+    price: 4850,
+    currency: "AED",
+    general_discount: 5,
+    special_discount: 20,
+  },
+
+  vip_online: {
+    id: "vip_online",
+    name: "Private Online",
+    class_mode_id: "vip",
+    class_type_id: "online",
+    price: 4850,
+    currency: "AED",
+    general_discount: 5,
+    special_discount: 20,
+  },
+};
+export const EXAM_PREPARATION_COURSES_DATA = [
+  {
+    ...EXAM_IDS_DATA.ielts,
+    exam: {
+      name: "IELTS",
+      fullName: "International English Language Testing System",
+      description:
+        "The IELTS is one of the most widely recognized English proficiency exams in the world. It is accepted by over 11,000 universities, immigration authorities, and organizations across more than 140 countries.",
+      usage: [
+        "Immigration to Canada, the UK, Australia, and New Zealand",
+        "University admission",
+        "Professional registration",
+      ],
+      types: [
+        {
+          name: "IELTS Academic",
+          purpose: "University admission and higher education",
+        },
+        {
+          name: "IELTS General Training",
+          purpose: "Immigration and work purposes",
+        },
+      ],
+    },
+    courses: [
+      {
+        ...COURSES_DATA.vip_classroom,
+        description:
+          "The most personalized and intensive exam preparation program, designed for candidates who want focused attention, faster progress, and a fully customized preparation plan.",
+        bestFor: [
+          "Candidates aiming for high band scores",
+          "Limited preparation time",
+          "Individual attention preference",
+          "Fast improvement in specific sections",
+        ],
+        details: {
+          duration: "24 Hours",
+          completionTime: "6 Weeks",
+          schedule: "Flexible",
+        },
+      },
+      {
+        ...COURSES_DATA.semi_private_classroom,
+        description:
+          "A small-group format combining personalized instruction with collaboration and peer learning. Only 2 students per class.",
+        bestFor: [
+          "Friends or colleagues learning together",
+          "Students preferring interactive learning",
+          "Balanced peer and instructor focus",
+        ],
+        details: {
+          duration: "24 Hours",
+          completionTime: "6 Weeks",
+          schedule: "Flexible",
+        },
+      },
+      {
+        ...COURSES_DATA.group_classroom,
+        description:
+          "A dynamic classroom experience with structured learning, interaction, and instructor guidance in a collaborative environment.",
+        bestFor: [
+          "Interactive classroom preference",
+          "Motivation through peer engagement",
+          "Structured group dynamics",
+        ],
+        details: {
+          duration: "24 Hours",
+          completionTime: "6 Weeks",
+          schedule: "Flexible",
+        },
+      },
+      {
+        ...COURSES_DATA.vip_online,
+        description:
+          "High-quality exam training through live interactive sessions. Ideal for busy professionals or those studying from home.",
+        bestFor: [
+          "Studying from home preference",
+          "Busy professional schedules",
+          "Live interaction without commuting",
+        ],
+        details: {
+          duration: "20 Hours",
+          format: "Live Online Classes",
+          schedule: "Flexible",
+        },
+      },
+    ],
+  },
+  {
+    ...EXAM_IDS_DATA.celpip_general,
+    exam: {
+      name: "CELPIP General",
+      fullName: "Canadian English Language Proficiency Index Program",
+      description:
+        "The CELPIP test is specifically designed for Canadian immigration and citizenship applications. It is approved by Immigration, Refugees and Citizenship Canada (IRCC) and is widely used for permanent residency and citizenship processes. Unlike some other exams, CELPIP uses Canadian English accents and real-life scenarios, making it highly practical for candidates planning to live and work in Canada.",
+      usage: [
+        "Permanent Residency in Canada",
+        "Canadian Citizenship applications",
+        "Work permits and professional registration",
+        "Approved by IRCC",
+      ],
+      types: [
+        {
+          name: "CELPIP General",
+          purpose: "Immigration and citizenship purposes",
+        },
+      ],
+    },
+    courses: [
+      {
+        ...COURSES_DATA.vip_classroom,
+        description:
+          "The CELPIP Private One-to-One Course, also known as our VIP preparation program, offers the most personalized and intensive exam preparation available at TEPTH. Every session is tailored to your current level, target score, and exam deadline.",
+        bestFor: [
+          "Need to achieve a high score CLB 8+",
+          "Limited preparation timeframe",
+          "Prefer individual attention & feedback",
+          "Improve specific exam sections quickly",
+        ],
+        details: {
+          duration: "24 Hours",
+          completionTime: "6 Weeks",
+          schedule: "Flexible",
+        },
+      },
+      {
+        ...COURSES_DATA.semi_private_classroom,
+        description:
+          "Designed for candidates who prefer a small learning environment while still benefiting from collaboration. With only two students, the instructor provides detailed guidance while creating opportunities for peer learning and discussion.",
+        bestFor: [
+          "Interactive learning preference",
+          "Collaborative problem solving",
+          "Small, supportive environment",
+          "Friends or family preparing together",
+        ],
+        details: {
+          duration: "24 Hours",
+          completionTime: "6 Weeks",
+          schedule: "Flexible",
+          classSize: "2 Students Only",
+        },
+      },
+      {
+        ...COURSES_DATA.group_classroom,
+        description:
+          "A dynamic classroom environment that covers all exam sections. Small groups ensure every student remains actively involved, fostering motivation and accountability alongside others with similar goals.",
+        bestFor: [
+          "Dynamic classroom preference",
+          "Motivation through peer engagement",
+          "Structured collaborative learning",
+          "Practical strategies & peer practice",
+        ],
+        details: {
+          duration: "24 Hours",
+          completionTime: "6 Weeks",
+          schedule: "Flexible",
+          classSize: "Small Groups",
+        },
+      },
+      {
+        ...COURSES_DATA.vip_online,
+        description:
+          "High-quality exam training delivered through live interactive sessions. Ideal for candidates who prefer studying from home or have demanding work schedules that make commuting difficult.",
+        bestFor: [
+          "Studying from home preference",
+          "Demanding work schedules",
+          "Live instructor interaction",
+          "Flexible scheduling options",
+        ],
+        details: {
+          duration: "20 Hours",
+          format: "Live Online Classes",
+          schedule: "Flexible",
+        },
+      },
+    ],
+  },
+  {
+    ...EXAM_IDS_DATA.pte_academic,
+    exam: {
+      name: "PTE Academic",
+      fullName: "Pearson Test of English",
+      description:
+        "The PTE Academic is a fully computer-based English proficiency exam developed by Pearson. It is widely accepted by thousands of universities and governments around the world, including Australia, Canada, and New Zealand. Results are typically available within 48 hours. The test uses advanced AI scoring technology to evaluate speaking, writing, listening, and reading skills objectively.",
+      usage: [
+        "Fast results turnaround (48 hours)",
+        "Immigration to Australia, Canada & NZ",
+        "Global university admission",
+        "Advanced AI scoring technology",
+      ],
+      types: [
+        {
+          name: "PTE Academic",
+          purpose: "Academic and immigration purposes",
+        },
+      ],
+    },
+    courses: [
+      {
+        ...COURSES_DATA.vip_classroom,
+        description:
+          "The PTE Private One-to-One Course, also known as our VIP preparation program, offers the most personalized and intensive exam preparation available at TEPTH. Every session is tailored to your current level, target score, and exam deadline.",
+        bestFor: [
+          "Need to achieve a high score 79+",
+          "Limited preparation timeframe",
+          "Prefer individual attention & feedback",
+          "Improve specific exam sections quickly",
+        ],
+        details: {
+          duration: "24 Hours",
+          completionTime: "6 Weeks",
+          schedule: "Flexible",
+        },
+      },
+      {
+        ...COURSES_DATA.semi_private_classroom,
+        description:
+          "Designed for candidates who prefer a small learning environment while still benefiting from collaboration. With only two students, the instructor provides detailed guidance while creating opportunities for peer learning and discussion.",
+        bestFor: [
+          "Interactive learning preference",
+          "Collaborative problem solving",
+          "Small, supportive environment",
+          "Friends or family preparing together",
+        ],
+        details: {
+          duration: "24 Hours",
+          completionTime: "6 Weeks",
+          schedule: "Flexible",
+          classSize: "2 Students Only",
+        },
+      },
+      {
+        ...COURSES_DATA.group_classroom,
+        description:
+          "A dynamic classroom environment that covers all exam sections. Small groups ensure every student remains actively involved, fostering motivation and accountability alongside others with similar goals.",
+        bestFor: [
+          "Dynamic classroom preference",
+          "Motivation through peer engagement",
+          "Structured collaborative learning",
+          "Structured program coverage",
+        ],
+        details: {
+          duration: "24 Hours",
+          completionTime: "6 Weeks",
+          schedule: "Flexible",
+          classSize: "Small Groups",
+        },
+      },
+      {
+        ...COURSES_DATA.vip_online,
+        description:
+          "High-quality exam training delivered through live interactive sessions. Ideal for candidates who prefer studying from home or have demanding work schedules that make commuting difficult.",
+        bestFor: [
+          "Studying from home preference",
+          "Demanding work schedules",
+          "Live instructor interaction",
+          "Flexible scheduling options",
+        ],
+        details: {
+          duration: "20 Hours",
+          format: "Live Online Classes",
+          schedule: "Flexible",
+        },
+      },
+    ],
+  },
+  {
+    ...EXAM_IDS_DATA.toefl,
+    exam: {
+      name: "TOEFL iBT",
+      fullName: "Test of English as a Foreign Language",
+      description:
+        "The TOEFL iBT is one of the most respected English proficiency exams, widely used for university admission, especially in the United States and Canada. It is accepted by more than 11,500 institutions in over 160 countries. The exam measures academic English skills needed for studying in an English-speaking environment.",
+      usage: [
+        "University admission in USA & Canada",
+        "Postgraduate studies abroad",
+        "Academic English communication",
+      ],
+      types: [
+        {
+          name: "TOEFL iBT",
+          purpose: "Academic English communication",
+        },
+      ],
+    },
+    courses: [
+      {
+        ...COURSES_DATA.vip_classroom,
+        description:
+          "The TOEFL iBT Private One-to-One Course offers the most personalized and intensive preparation available. Every session is tailored to your current level, target score, and exam deadline, focusing on realistic tasks and proven strategies.",
+        bestFor: [
+          "Need to achieve a high score",
+          "Limited preparation timeframe",
+          "Prefer individual attention & feedback",
+          "Improve specific sections quickly",
+        ],
+        details: {
+          duration: "24 Hours",
+          completionTime: "6 Weeks",
+          schedule: "Flexible",
+        },
+      },
+      {
+        ...COURSES_DATA.semi_private_classroom,
+        description:
+          "Designed for candidates who prefer a small learning environment while benefiting from collaboration. With only two students, the instructor provides detailed guidance while creating opportunities for peer learning and discussion.",
+        bestFor: [
+          "Interactive learning preference",
+          "Collaborative problem solving",
+          "Small, supportive environment",
+          "Friends or family preparing together",
+        ],
+        details: {
+          duration: "24 Hours",
+          completionTime: "6 Weeks",
+          schedule: "Flexible",
+          classSize: "2 Students Only",
+        },
+      },
+      {
+        ...COURSES_DATA.group_classroom,
+        description:
+          "A dynamic classroom environment that covers all exam sections. Small groups ensure every student remains actively involved, fostering motivation and accountability alongside others with similar goals.",
+        bestFor: [
+          "Dynamic classroom preference",
+          "Motivation through peer engagement",
+          "Structured collaborative learning",
+          "Practical strategies & peer practice",
+        ],
+        details: {
+          duration: "24 Hours",
+          completionTime: "6 Weeks",
+          schedule: "Flexible",
+          classSize: "Small Groups",
+        },
+      },
+      {
+        ...COURSES_DATA.vip_online,
+        description:
+          "High-quality exam training delivered through live interactive sessions. Ideal for candidates who prefer studying from home or have demanding schedules that make commuting difficult.",
+        bestFor: [
+          "Studying from home preference",
+          "Demanding work schedules",
+          "Live interaction without commuting",
+          "Flexible real-time instruction",
+        ],
+        details: {
+          duration: "20 Hours",
+          format: "Live Online Classes",
+          schedule: "Flexible",
+        },
+      },
+    ],
+  },
+  {
+    ...EXAM_IDS_DATA.selt,
+    exam: {
+      name: "SELT",
+      fullName: "Skills for English (SELT)",
+      description:
+        "Skills for English (SELT) is an English test approved by the UK Home Office for visa and immigration applications to the United Kingdom. It is required for various UK visa categories, including work visas, family visas, and settlement applications. Only specific approved exams fall under the SELT category, such as certain versions of IELTS or language tests provided by authorized testing providers.",
+      usage: [
+        "UK Work Visas",
+        "UK Family and Spouse Visas",
+        "UK Settlement (Indefinite Leave to Remain)",
+        "UK Home Office approved",
+      ],
+      types: [
+        {
+          name: "SELT A1-C2",
+          purpose: "Visa and immigration applications",
+        },
+      ],
+    },
+    courses: [
+      {
+        ...COURSES_DATA.vip_classroom,
+        description:
+          "The Skills for English (SELT) Private One-to-One Course, also known as our VIP preparation program, offers the most personalized and intensive exam preparation available at TEPTH. Every session is tailored to your current level, target score, and exam deadline.",
+        bestFor: [
+          "Need to achieve a high score CLB 8+",
+          "Limited preparation timeframe",
+          "Prefer individual attention & feedback",
+          "Improve specific exam sections quickly",
+        ],
+        details: {
+          duration: "24 Hours",
+          completionTime: "6 Weeks",
+          schedule: "Flexible",
+        },
+      },
+      {
+        ...COURSES_DATA.semi_private_classroom,
+        description:
+          "Designed for candidates who prefer a small learning environment while still benefiting from collaboration. With only two students, the instructor provides detailed guidance while creating opportunities for peer learning and discussion.",
+        bestFor: [
+          "Interactive learning preference",
+          "Collaborative problem solving",
+          "Small, supportive environment",
+          "Friends or family preparing together",
+        ],
+        details: {
+          duration: "24 Hours",
+          completionTime: "6 Weeks",
+          schedule: "Flexible",
+          classSize: "2 Students Only",
+        },
+      },
+      {
+        ...COURSES_DATA.group_classroom,
+        description:
+          "A dynamic classroom environment that covers all exam sections. Small groups ensure every student remains actively involved, fostering motivation and accountability alongside others with similar goals.",
+        bestFor: [
+          "Dynamic classroom preference",
+          "Motivation through peer engagement",
+          "Structured collaborative learning",
+          "Structured program coverage",
+        ],
+        details: {
+          duration: "24 Hours",
+          completionTime: "6 Weeks",
+          schedule: "Flexible",
+          classSize: "Small Groups",
+        },
+      },
+      {
+        ...COURSES_DATA.vip_online,
+        description:
+          "High-quality exam training delivered through live interactive sessions. Ideal for candidates who prefer studying from home or have demanding work schedules that make commuting difficult.",
+        bestFor: [
+          "Studying from home preference",
+          "Demanding work schedules",
+          "Live instructor interaction",
+          "Flexible scheduling options",
+        ],
+        details: {
+          duration: "20 Hours",
+          format: "Live Online Classes",
+          schedule: "Flexible",
+        },
+      },
+    ],
+  },
+  {
+    ...EXAM_IDS_DATA.cael,
+    exam: {
+      name: "CAEL",
+      fullName: "Canadian Academic English Language Assessment",
+      description:
+        "The CAEL exam is designed primarily for students who want to study at Canadian universities and colleges. It evaluates English proficiency in an academic context, focusing on the type of language students encounter in lectures, classroom discussions, and academic assignments. CAEL is recognized by many Canadian universities and higher education institutions, making it an excellent option for candidates planning to pursue higher education in Canada.",
+      usage: [
+        "Canadian University Admissions",
+        "Canadian College Admissions",
+        "Academic English Proficiency Assessment",
+        "Higher Education in Canada",
+      ],
+      types: [
+        {
+          name: "CAEL",
+          purpose: "Academic study and university admissions in Canada",
+        },
+      ],
+    },
+
+    courses: [
+      {
+        ...COURSES_DATA.vip_classroom,
+        description:
+          "The CAEL Private One-to-One Course, also known as our VIP preparation program, offers the most personalized and intensive exam preparation available at TEPTH. Every session is tailored to the candidate’s current level, target score, and exam deadline.",
+        bestFor: [
+          "Need to achieve a high score CLB 8+",
+          "Limited preparation timeframe",
+          "Prefer individual attention & continuous feedback",
+          "Improve specific exam sections quickly",
+        ],
+        features: [
+          "Realistic CAEL exam tasks & simulations",
+          "Section-wise exam strategies",
+          "Detailed writing correction & feedback",
+          "Intensive speaking practice",
+          "Time-management techniques",
+        ],
+        details: {
+          duration: "24 Hours",
+          completionTime: "6 Weeks",
+          schedule: "Flexible",
+        },
+      },
+
+      {
+        ...COURSES_DATA.semi_private_classroom,
+        description:
+          "Designed for candidates who prefer a small learning environment while still benefiting from collaboration with another student. The instructor provides detailed guidance while encouraging discussion, interaction, and peer learning.",
+        bestFor: [
+          "Interactive learning preference",
+          "Collaborative problem solving",
+          "Small supportive environment",
+          "Friends or family preparing together",
+        ],
+        features: [
+          "Guided speaking practice",
+          "Writing analysis & correction",
+          "Reading & listening strategies",
+          "Structured section-wise training",
+          "Exam simulations & confidence building",
+        ],
+        details: {
+          duration: "24 Hours",
+          completionTime: "6 Weeks",
+          classSize: "2 Students Only",
+          schedule: "Flexible",
+        },
+      },
+
+      {
+        ...COURSES_DATA.group_classroom,
+        description:
+          "The CAEL Group Course is ideal for candidates who benefit from a dynamic classroom environment while still receiving meaningful instructor support. Small groups encourage active participation, discussion, and regular speaking practice.",
+        bestFor: [
+          "Dynamic classroom preference",
+          "Motivation through peer engagement",
+          "Structured collaborative learning",
+          "Consistent instructor guidance",
+        ],
+        features: [
+          "Reading comprehension strategies",
+          "Listening techniques under time pressure",
+          "Writing structures for scoring criteria",
+          "Speaking fluency & confidence practice",
+          "Authentic exam-style questions",
+        ],
+        details: {
+          duration: "24 Hours",
+          completionTime: "6 Weeks",
+          classSize: "Small Groups",
+          schedule: "Flexible",
+        },
+      },
+
+      {
+        ...COURSES_DATA.vip_online,
+        description:
+          "Our CAEL Online Preparation Course provides the same high-quality exam training as our classroom programs through live interactive sessions. Ideal for candidates who prefer studying from home or have demanding schedules.",
+        bestFor: [
+          "Studying from home preference",
+          "Busy work or study schedules",
+          "Flexible learning environment",
+          "Live instructor interaction",
+        ],
+        features: [
+          "Live instructor-led online sessions",
+          "Structured training for all sections",
+          "Speaking practice with feedback",
+          "Writing evaluation & improvement guidance",
+          "Flexible scheduling options",
+        ],
+        details: {
+          duration: "20 Hours",
+          format: "Live Online Classes",
+          schedule: "Flexible",
+        },
+      },
+    ],
+  },
+  {
+    ...EXAM_IDS_DATA.oet,
+    exam: {
+      name: "OET",
+      fullName: "Occupational English Test",
+      description:
+        "The OET is an English proficiency exam specifically designed for healthcare professionals. It is recognized by medical and healthcare regulatory bodies in countries such as the UK, Australia, New Zealand, Ireland, and Canada. Unlike general English exams, OET focuses on real healthcare communication scenarios, including patient consultations, medical documentation, and professional discussions.",
+      usage: [
+        "Healthcare Professional Registration",
+        "Medical & Nursing Licensing",
+        "Healthcare Migration Requirements",
+        "Professional Communication Assessment",
+      ],
+      professions: [
+        "Doctors",
+        "Nurses",
+        "Dentists",
+        "Pharmacists",
+        "Physiotherapists",
+        "Other Healthcare Specialists",
+      ],
+      types: [
+        {
+          name: "OET",
+          purpose:
+            "English proficiency assessment for healthcare professionals",
+        },
+      ],
+    },
+
+    courses: [
+      {
+        ...COURSES_DATA.vip_classroom,
+        description:
+          "The OET Private One-to-One Course, also known as our VIP preparation program, offers the most personalized and intensive exam preparation available at TEPTH. Every session is tailored to the candidate’s current level, target score, and exam deadline.",
+        bestFor: [
+          "Need to achieve a high score",
+          "Limited preparation timeframe",
+          "Prefer individual attention & continuous feedback",
+          "Improve specific exam sections quickly",
+        ],
+        features: [
+          "Realistic OET exam tasks & simulations",
+          "Section-wise exam strategies",
+          "Detailed writing correction & feedback",
+          "Intensive speaking practice",
+          "Time-management techniques",
+        ],
+        details: {
+          duration: "24 Hours",
+          completionTime: "6 Weeks",
+          schedule: "Flexible",
+        },
+      },
+
+      {
+        ...COURSES_DATA.semi_private_classroom,
+        description:
+          "Designed for candidates who prefer a small learning environment while still benefiting from collaboration with another student. The instructor provides detailed guidance while encouraging discussion, interaction, and peer learning.",
+        bestFor: [
+          "Interactive learning preference",
+          "Collaborative problem solving",
+          "Small supportive environment",
+          "Friends or colleagues preparing together",
+        ],
+        features: [
+          "Guided speaking practice",
+          "Writing analysis & correction",
+          "Reading & listening strategies",
+          "Structured section-wise training",
+          "Exam simulations & confidence building",
+        ],
+        details: {
+          duration: "24 Hours",
+          completionTime: "6 Weeks",
+          classSize: "2 Students Only",
+          schedule: "Flexible",
+        },
+      },
+
+      {
+        ...COURSES_DATA.group_classroom,
+        description:
+          "The OET Group Course is ideal for candidates who benefit from a dynamic classroom environment while still receiving meaningful instructor support. Small groups encourage active participation, discussion, and regular speaking practice.",
+        bestFor: [
+          "Dynamic classroom preference",
+          "Motivation through peer engagement",
+          "Structured collaborative learning",
+          "Consistent instructor guidance",
+        ],
+        features: [
+          "Reading comprehension strategies",
+          "Listening techniques under time pressure",
+          "Writing structures for scoring criteria",
+          "Speaking fluency & confidence practice",
+          "Authentic exam-style questions",
+        ],
+        details: {
+          duration: "24 Hours",
+          completionTime: "6 Weeks",
+          classSize: "Small Groups",
+          schedule: "Flexible",
+        },
+      },
+
+      {
+        ...COURSES_DATA.vip_online,
+        description:
+          "Our OET Online Preparation Course provides the same high-quality exam training as our classroom programs through live interactive sessions. Ideal for candidates who prefer studying from home or have demanding schedules.",
+        bestFor: [
+          "Studying from home preference",
+          "Busy work schedules",
+          "Flexible learning environment",
+          "Live instructor interaction",
+        ],
+        features: [
+          "Live instructor-led online sessions",
+          "Structured training for all sections",
+          "Speaking practice with feedback",
+          "Writing evaluation & improvement guidance",
+          "Flexible scheduling options",
+        ],
+        details: {
+          duration: "20 Hours",
+          format: "Live Online Classes",
+          schedule: "Flexible",
+        },
+      },
+    ],
+  },
+];
