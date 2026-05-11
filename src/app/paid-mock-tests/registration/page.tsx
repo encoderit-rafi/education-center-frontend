@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -38,7 +38,7 @@ const bookingSchema = z.object({
   mockTestId: z.string().min(1, "Please select a mock test"),
   firstName: z.string().min(2, "First name must be at least 2 characters"),
   lastName: z.string().min(2, "Last name must be at least 2 characters"),
-  email: z.email("Please enter a valid email address"),
+  email: z.string().email("Please enter a valid email address"),
   date: z.date({
     message: "Please select a date",
   }),
@@ -53,7 +53,7 @@ interface MockTestBookingFormProps {
   className?: string;
 }
 
-export default function PaidMockTestRegistration({
+function PaidMockTestRegistrationForm({
   initialMockTestId,
   className,
 }: MockTestBookingFormProps) {
@@ -244,5 +244,13 @@ export default function PaidMockTestRegistration({
         </div>
       </section>
     </div>
+  );
+}
+
+export default function PaidMockTestRegistration() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <PaidMockTestRegistrationForm />
+    </Suspense>
   );
 }
