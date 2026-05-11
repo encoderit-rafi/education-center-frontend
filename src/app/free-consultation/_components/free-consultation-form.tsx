@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import {
   Field,
@@ -11,7 +12,6 @@ import {
   FieldContent,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
   Select,
   SelectContent,
@@ -19,46 +19,63 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { COURSES } from "@/lib/courses-data";
 import { Calendar } from "@/components/ui/calendar";
 import { Textarea } from "@/components/ui/textarea";
-import { GraduationCap, Briefcase, CalendarCheck, Check, SendHorizontal, CheckCircle2, ShieldCheck, ChevronDown, Clock } from "lucide-react";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
+  Check,
+  SendHorizontal,
+  ShieldCheck,
+  Calendar as CalendarIcon,
+  ArrowRight,
+  ChevronDown,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Stepper from "@/components/stepper";
+import { PhoneInput } from "@/components/ui/phone-input";
+import { CountryDropdown } from "@/components/ui/country-dropdown";
+import { toast } from "sonner";
 
-const CONTEXTS = [
-  { id: "academic", label: "Academic Guidance", icon: GraduationCap },
-  { id: "professional", label: "Career Strategy", icon: Briefcase },
+const AREAS = [
+  "Exam Booking & Seat Availability",
+  "Exam Prep. Course",
 ];
 
-const formSchema = z
-  .object({
-    context: z.string().min(1, "Please select a context"),
-    fullName: z.string().min(2, "Full name must be at least 2 characters"),
-    email: z.string().email("Please enter a valid email address"),
-    courseId: z.string().optional(),
-    description: z.string().optional(),
-    preferredDate: z.date({
-      error: "Please select a preferred date",
-    }),
-    preferredTime: z.string().min(1, "Please select a preferred time"),
-  })
-  .refine(
-    (data) => {
-      if (data.context === "academic" && !data.courseId) {
-        return false;
-      }
-      return true;
-    },
-    {
-      message: "Please select a course",
-      path: ["courseId"],
-    }
-  );
+const TIMES = [
+  { label: "Morning (9:00 AM – 11:30 AM)", value: "Morning" },
+  { label: "Afternoon (12:00 PM – 5:30 PM)", value: "Afternoon" },
+  { label: "Evening (6:00 PM – 8:30 PM)", value: "Evening" },
+];
+
+const formSchema = z.object({
+  fullName: z.string().min(2, "Full name must be at least 2 characters"),
+  email: z.string().email("Please enter a valid email address"),
+  phone: z.string().min(5, "Please enter a valid phone number"),
+  country: z.string().min(1, "Please select a country"),
+  city: z.string().min(1, "Please enter your emirate/city"),
+  area: z.string().min(1, "Please select an area of consultation"),
+  date: z.date({
+    error: "Please select a preferred date",
+  }),
+  time: z.string().min(1, "Please select a preferred time"),
+  message: z.string().optional(),
+});
 
 type FormValues = z.infer<typeof formSchema>;
 
 export default function FreeConsultationForm() {
-  const [isSuccess, setIsSuccess] = useState(false);
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 
   const {
     register,
@@ -66,139 +83,138 @@ export default function FreeConsultationForm() {
     setValue,
     watch,
     control,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      context: CONTEXTS[0].id,
-      courseId: "",
-      preferredDate: undefined,
-      preferredTime: "",
+      fullName: "",
+      email: "",
+      phone: "",
+      country: "",
+      city: "",
+      area: "",
+      date: undefined,
+      time: "",
+      message: "",
     },
   });
 
-  const selectedContext = watch("context");
-  const selectedDate = watch("preferredDate");
-  const selectedTime = watch("preferredTime");
+  const selectedDate = watch("date");
 
   const onSubmit = async (data: FormValues) => {
     console.log("Submitting:", data);
-    await new Promise((resolve) => setTimeout(resolve, 800));
-    setIsSuccess(true);
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    toast.success("Enquiry Received", {
+      description: "Thank you for contacting us. We have received your enquiry and will respond to you within 1 to 2 business days. Our working hours: Saturday to Thursday (9:00 AM – 9:00 PM)",
+      duration: 6000,
+    });
+
+    reset();
   };
-
-  if (isSuccess) {
-    return (
-      <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-2xl p-6 text-center space-y-4 animate-fade-up">
-        <CheckCircle2 className="w-16 h-16 text-emerald-500 mx-auto" />
-        <div className="space-y-2">
-          <h3 className="text-3xl font-black uppercase tracking-tight">Session Confirmed!</h3>
-          <p className="text-emerald-700 font-medium text-lg">
-            Thank you! Your Discovery Session is booked. Check your inbox for the calendar invite.
-          </p>
-        </div>
-        <Button
-          variant="outline"
-          onClick={() => setIsSuccess(false)}
-          className="border-emerald-200 text-emerald-800 hover:bg-emerald-100/50"
-        >
-          Book Another Session
-        </Button>
-      </div>
-    );
-  }
-
-  const isAcademic = selectedContext === "academic";
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-      {/* 1. Context Selection */}
-      <div className="space-y-3">
-        <div className="flex items-center gap-3">
-          <span className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-xs font-black">1</span>
-          <h4 className="text-lg font-black uppercase tracking-tight text-slate-900">Select Context</h4>
-        </div>
-
-        <RadioGroup
-          value={selectedContext}
-          onValueChange={(val) => {
-            setValue("context", val as string);
-            if (val === "professional") {
-              setValue("courseId", "");
-            }
-          }}
-          className="grid grid-cols-1 sm:grid-cols-2 gap-3"
-        >
-          {CONTEXTS.map((ctx) => (
-            <Field key={ctx.id} className="relative">
-              <RadioGroupItem value={ctx.id} id={ctx.id} className="sr-only" />
-              <label
-                htmlFor={ctx.id}
-                className={cn(
-                  "p-3 md:p-4 rounded-xl border transition-all duration-300 cursor-pointer flex items-center gap-3 w-full",
-                  selectedContext === ctx.id
-                    ? "border-primary bg-primary/5 shadow-sm"
-                    : "border-slate-200 bg-slate-50/30 hover:border-primary/30 hover:bg-slate-50/50",
-                )}
-              >
-                <div
-                  className={cn(
-                    "w-9 h-9 rounded-lg flex items-center justify-center transition-colors",
-                    selectedContext === ctx.id
-                      ? "bg-primary text-white"
-                      : "bg-slate-100 text-slate-400",
-                  )}
-                >
-                  <ctx.icon className="w-4 h-4" />
-                </div>
-                <span
-                  className={cn(
-                    "text-sm md:text-base font-bold transition-colors",
-                    selectedContext === ctx.id ? "text-slate-900" : "text-slate-400",
-                  )}
-                >
-                  {ctx.label}
-                </span>
-                {selectedContext === ctx.id && (
-                  <div className="ml-auto w-5 h-5 bg-primary rounded-full flex items-center justify-center text-white">
-                    <Check className="w-3 h-3" />
-                  </div>
-                )}
-              </label>
+      <div className="grid md:grid-cols-2 gap-x-8 gap-y-8">
+        {/* Personal Information */}
+        <div className="space-y-6">
+          <Stepper step={1}>Your Information</Stepper>
+          <div className="space-y-4">
+            <Field data-invalid={!!errors.fullName}>
+              <FieldLabel required>Full Name</FieldLabel>
+              <FieldContent>
+                <Input
+                  {...register("fullName")}
+                  placeholder="John Doe"
+                />
+              </FieldContent>
+              <FieldError errors={[errors.fullName]} />
             </Field>
-          ))}
-        </RadioGroup>
-        {errors.context && <FieldError>{errors.context.message}</FieldError>}
-      </div>
 
-      {isAcademic && (
-        <>
-          <div className="w-full h-px bg-slate-100/80" />
+            <Field data-invalid={!!errors.email}>
+              <FieldLabel required>Email Address</FieldLabel>
+              <FieldContent>
+                <Input
+                  {...register("email")}
+                  type="email"
+                  placeholder="john@example.com"
+                />
+              </FieldContent>
+              <FieldError errors={[errors.email]} />
+            </Field>
 
-          {/* 2. Course Selection */}
-          <div className="space-y-3">
-            <div className="flex items-center gap-3">
-              <span className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-xs font-black">2</span>
-              <h4 className="text-lg font-black uppercase tracking-tight text-slate-900">Target Course</h4>
-            </div>
-
-            <Field data-invalid={!!errors.courseId}>
-              <FieldLabel className="text-sm font-medium">
-                Which course are you interested in? <span className="text-primary font-bold">*</span>
-              </FieldLabel>
+            <Field data-invalid={!!errors.phone}>
+              <FieldLabel required>Phone Number</FieldLabel>
               <FieldContent>
                 <Controller
                   control={control}
-                  name="courseId"
+                  name="phone"
+                  render={({ field }) => (
+                    <PhoneInput
+                      value={field.value}
+                      onChange={field.onChange}
+                      defaultCountry="AE"
+                      className="bg-slate-50 border border-slate-200 rounded-lg overflow-hidden  focus-within:ring-4 focus-within:ring-primary/5"
+                    />
+                  )}
+                />
+              </FieldContent>
+              <FieldError errors={[errors.phone]} />
+            </Field>
+
+            <div className="grid grid-cols-2 gap-4">
+              <Field data-invalid={!!errors.country}>
+                <FieldLabel required>Country</FieldLabel>
+                <FieldContent>
+                  <Controller
+                    control={control}
+                    name="country"
+                    render={({ field }) => (
+                      <CountryDropdown
+                        value={field.value}
+                        onChange={(country) => field.onChange(country.name)}
+
+                      />
+                    )}
+                  />
+                </FieldContent>
+                <FieldError errors={[errors.country]} />
+              </Field>
+
+              <Field data-invalid={!!errors.city}>
+                <FieldLabel required>Emirate / City</FieldLabel>
+                <FieldContent>
+                  <Input
+                    {...register("city")}
+                    placeholder="Dubai"
+                  />
+                </FieldContent>
+                <FieldError errors={[errors.city]} />
+              </Field>
+            </div>
+          </div>
+        </div>
+
+        {/* Consultation Details */}
+        <div className="space-y-6">
+          <Stepper step={2}>Consultation Details</Stepper>
+          <div className="space-y-4">
+            <Field data-invalid={!!errors.area}>
+              <FieldLabel required>Area of Consultation</FieldLabel>
+              <FieldContent>
+                <Controller
+                  control={control}
+                  name="area"
                   render={({ field }) => (
                     <Select onValueChange={field.onChange} value={field.value}>
-                       <SelectTrigger className="bg-slate-50/50 border-slate-200 h-10 rounded-xl px-4 font-medium focus:ring-4 focus:ring-primary/5">
-                        <SelectValue placeholder="Select an academic course" />
+                      <SelectTrigger className="bg-slate-50/50 border-slate-200 h-11 rounded-xl px-4 font-medium">
+                        <SelectValue placeholder="Select area" />
                       </SelectTrigger>
                       <SelectContent>
-                        {COURSES.map((course) => (
-                          <SelectItem key={course.id} value={course.id}>
-                            {course.category} - {course.title}
+                        {AREAS.map((area) => (
+                          <SelectItem key={area} value={area}>
+                            {area}
                           </SelectItem>
                         ))}
                       </SelectContent>
@@ -206,136 +222,123 @@ export default function FreeConsultationForm() {
                   )}
                 />
               </FieldContent>
-              {errors.courseId && <FieldError>{errors.courseId.message}</FieldError>}
+              <FieldError errors={[errors.area]} />
             </Field>
-          </div>
-        </>
-      )}
 
-      <div className="w-full h-px bg-slate-100/80" />
+            <div className="grid grid-cols-2 gap-1">
+              <Field data-invalid={!!errors.date}>
+                <FieldLabel required>Date Preference</FieldLabel>
+                <FieldContent>
+                  <Popover open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
+                    <PopoverTrigger
+                      render={
+                        <Button
+                          variant="ghost"
+                          className={cn(
+                            "w-full justify-start text-left font-normal rounded-md border border-slate-200  px-3 py-2 text-sm transition-all outline-none  focus-visible:border-primary focus-visible:ring-3 focus-visible:ring-ring/30 shadow-none hover:shadow-none hover:bg-transparent",
+                            !selectedDate && "text-slate-400"
+                          )}
+                        >
+                          <CalendarIcon className="mr-2 h-4 w-4 text-slate-400" />
+                          {selectedDate ? (
+                            format(selectedDate, "PPP")
+                          ) : (
+                            <span>Select date</span>
+                          )}
+                        </Button>
+                      }
+                    />
+                    <PopoverContent className="w-auto p-0" align="start">
+                      <Calendar
+                        mode="single"
+                        selected={selectedDate}
+                        onSelect={(date) => {
+                          setValue("date", date as Date);
+                          setIsCalendarOpen(false);
+                        }}
+                        disabled={(date) =>
+                          date <= new Date() || date < new Date("1900-01-01")
+                        }
+                      />
+                    </PopoverContent>
+                  </Popover>
+                </FieldContent>
+                <FieldError errors={[errors.date]} />
+              </Field>
 
-      <div className="grid lg:grid-cols-2 gap-6 items-start">
-        {/* 2 or 3. Scheduling */}
-        <div className="space-y-4">
-          <div className="flex items-center gap-3">
-            <span className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-xs font-black">{isAcademic ? 3 : 2}</span>
-            <h4 className="text-lg font-black uppercase tracking-tight text-slate-900">Scheduling</h4>
-          </div>
-
-          <div className="space-y-4">
-            <Field data-invalid={!!errors.preferredDate}>
-              <FieldLabel className="text-sm font-medium">Preferred Date <span className="text-primary font-bold">*</span></FieldLabel>
-              <FieldContent>
-                <div className="bg-slate-50/50 border border-slate-200 rounded-xl p-0 sm:p-2 overflow-hidden">
-                  <Calendar
-                    mode="single"
-                    selected={watch("preferredDate")}
-                    onSelect={(date) => setValue("preferredDate", date as Date)}
-                    className="mx-auto scale-[0.82] xs:scale-90 sm:scale-100 origin-top"
+              <Field data-invalid={!!errors.time}>
+                <FieldLabel required>Preferred Time</FieldLabel>
+                <FieldContent>
+                  <Controller
+                    control={control}
+                    name="time"
+                    render={({ field }) => (
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button
+                            variant="ghost"
+                            className={cn(
+                              "w-full justify-between font-medium shadow-none outline-none rounded-xl border border-slate-200 bg-slate-50/50 px-4 h-11",
+                              !field.value && "text-slate-400"
+                            )}
+                          >
+                            {field.value
+                              ? TIMES.find((t) => t.value === field.value)?.label
+                              : "Select time"}
+                            <ChevronDown className="h-4 w-4 text-slate-400" />
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent className="min-w-[var(--radix-dropdown-menu-trigger-width)] w-auto bg-white">
+                          <DropdownMenuRadioGroup
+                            value={field.value}
+                            onValueChange={field.onChange}
+                          >
+                            {TIMES.map((t) => (
+                              <DropdownMenuRadioItem key={t.value} value={t.value}>
+                                {t.label}
+                              </DropdownMenuRadioItem>
+                            ))}
+                          </DropdownMenuRadioGroup>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    )}
                   />
-                </div>
-              </FieldContent>
-              {errors.preferredDate && <FieldError>{errors.preferredDate.message}</FieldError>}
-            </Field>
+                </FieldContent>
+                <FieldError errors={[errors.time]} />
+              </Field>
+            </div>
 
-            <Field data-invalid={!!errors.preferredTime}>
-              <FieldLabel className="text-sm font-medium">Time (GST) <span className="text-primary font-bold">*</span></FieldLabel>
+            <Field>
+              <FieldLabel>Message/Comments</FieldLabel>
               <FieldContent>
-                <RadioGroup
-                  value={selectedTime}
-                  onValueChange={(val) => setValue("preferredTime", val as string)}
-                  className="grid grid-cols-2 gap-2"
-                >
-                  {["09:00 AM", "02:00 PM"].map((t) => (
-                    <div key={t}>
-                      <RadioGroupItem value={t} id={t} className="sr-only" />
-                      <label
-                        htmlFor={t}
-                        className={cn(
-                          "flex items-center justify-center py-2.5 rounded-xl border font-bold text-[10px] sm:text-xs uppercase tracking-widest transition-all cursor-pointer w-full",
-                          selectedTime === t
-                            ? "border-primary bg-primary/5 text-primary shadow-sm"
-                            : "border-slate-200 bg-slate-50/30 text-slate-400 hover:bg-slate-50/50",
-                        )}
-                      >
-                        {t}
-                      </label>
-                    </div>
-                  ))}
-                </RadioGroup>
+                <Textarea
+                  {...register("message")}
+                  rows={2}
+                  className="bg-slate-50/50 border-slate-200 rounded-xl p-4 placeholder:text-slate-400 font-medium resize-none focus:ring-4 focus:ring-primary/5"
+                  placeholder="Any specific questions?"
+                />
               </FieldContent>
-              {errors.preferredTime && <FieldError>{errors.preferredTime.message}</FieldError>}
             </Field>
           </div>
         </div>
+      </div>
 
-        {/* 3 or 4. Personal Details */}
-        <div className="space-y-4">
-          <div className="flex items-center gap-3">
-            <span className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-xs font-black">{isAcademic ? 4 : 3}</span>
-            <h4 className="text-lg font-black uppercase tracking-tight text-slate-900">Personal Details</h4>
-          </div>
+      <div className="pt-4 space-y-4 max-w-md mx-auto items-center justify-center">
+        <Button
+          type="submit"
+          disabled={isSubmitting}
+          size="lg"
+          className="w-full"
 
-          <div className="space-y-4 shadow-2xl shadow-primary/5 border border-slate-100 rounded-xl p-3 sm:p-4">
-            <Field data-invalid={!!errors.fullName}>
-              <FieldLabel className="text-sm font-medium">
-                Full Name <span className="text-primary font-bold">*</span>
-              </FieldLabel>
-              <FieldContent>
-                <Input
-                  {...register("fullName")}
-                  className="bg-slate-50/50 border-slate-200 h-10 rounded-xl px-4 placeholder:text-slate-400 font-medium"
-                  placeholder="John Doe"
-                />
-              </FieldContent>
-              {errors.fullName && <FieldError>{errors.fullName.message}</FieldError>}
-            </Field>
+        >
+          {isSubmitting ? "Processing..." : "Submit"}
+          {!isSubmitting && <ArrowRight className="w-5 h-5 ml-2" />}
 
-            <Field data-invalid={!!errors.email}>
-              <FieldLabel className="text-sm font-medium">
-                Email Address <span className="text-primary font-bold">*</span>
-              </FieldLabel>
-              <FieldContent>
-                <Input
-                  {...register("email")}
-                  type="email"
-                  className="bg-slate-50/50 border-slate-200 h-10 rounded-xl px-4 placeholder:text-slate-400 font-medium"
-                  placeholder="john@example.com"
-                />
-              </FieldContent>
-              {errors.email && <FieldError>{errors.email.message}</FieldError>}
-            </Field>
+        </Button>
 
-            <Field>
-              <FieldLabel className="text-sm font-medium">Additional Context / Goals</FieldLabel>
-              <FieldContent>
-                <Textarea
-                  {...register("description")}
-                  rows={3}
-                  className="bg-slate-50/50 border-slate-200 rounded-xl p-3 placeholder:text-slate-400 font-medium resize-none"
-                  placeholder="Tell us about your academic goals..."
-                />
-              </FieldContent>
-            </Field>
-
-            <div className="pt-3 space-y-3">
-              <Button
-                type="submit"
-                disabled={isSubmitting}
-                className="h-11 px-8 rounded-xl font-black uppercase tracking-widest text-[10px] sm:text-sm w-full transition-all active:scale-95 shadow-xl shadow-primary/10"
-              >
-                <div className="flex items-center gap-3">
-                  {isSubmitting ? "Processing..." : "Confirm Discovery Session"}
-                  {!isSubmitting && <SendHorizontal className="w-5 h-5" />}
-                </div>
-              </Button>
-
-              <p className="flex items-center gap-2 text-[10px] sm:text-sm text-slate-500 font-medium justify-center lg:justify-start">
-                <ShieldCheck className="w-5 h-5 text-primary" />
-                <span>Private and secure.</span>
-              </p>
-            </div>
-          </div>
+        <div className="flex items-center justify-center gap-2 text-xs text-slate-500 font-medium text-center">
+          <ShieldCheck className="w-4 h-4 text-primary shrink-0" />
+          <span>Response within 1-2 business days</span>
         </div>
       </div>
     </form>
