@@ -31,22 +31,24 @@ export default function ExamsPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
             {EXAM_CARDS_DATA.map((exam, index) => (
-              <BaseCard key={exam.id} className="p-7">
-                <div className="flex items-center justify-between gap-2">
-                  <BaseCardIcon>{index + 1}</BaseCardIcon>
-                  <BaseCardArrow />
-                </div>
-                <div className="flex-1 flex flex-col space-y-2">
-                  <BaseCardTitle className="uppercase tracking-tight text-lg leading-snug">
-                    {exam.name}
-                  </BaseCardTitle>
-                  <BaseCardDescription className="mb-4">
-                    {exam.description}
-                  </BaseCardDescription>
-                </div>
-              </BaseCard>
+              <Link href={`/exams/${exam.id}`}>
+                <BaseCard key={exam.id} className="p-6">
+                  <div className="flex items-center justify-between gap-2">
+                    <BaseCardIcon>{index + 1}</BaseCardIcon>
+                    <BaseCardArrow />
+                  </div>
+                  <div className="flex-1 flex flex-col space-y-2">
+                    <BaseCardTitle className="uppercase tracking-tight text-lg leading-snug">
+                      {exam.name}
+                    </BaseCardTitle>
+                    <BaseCardDescription className="mb-4">
+                      {exam.description}
+                    </BaseCardDescription>
+                  </div>
+                </BaseCard>
+              </Link>
             ))}
           </div>
         </div>

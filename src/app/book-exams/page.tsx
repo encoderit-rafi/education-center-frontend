@@ -15,6 +15,14 @@ import {
   CalendarDays,
 } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
+import { EXAM_CARDS_DATA } from "@/data";
+import {
+  BaseCard,
+  BaseCardArrow,
+  BaseCardDescription,
+  BaseCardIcon,
+  BaseCardTitle,
+} from "@/components/blocks/cards/base-card";
 
 const EXAMS = [
   {
@@ -137,103 +145,25 @@ export default function BookExamPage() {
             </h2>
           </div>
 
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {/* Exam Cards */}
-            {EXAMS.map((exam) => (
-              <ExamCard key={exam.id} {...exam} />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+            {EXAM_CARDS_DATA.map((exam, index) => (
+              <Link href={`/book-exams/${exam.id}`}>
+                <BaseCard key={exam.id} className="p-6">
+                  <div className="flex items-center justify-between gap-2">
+                    <BaseCardIcon>{index + 1}</BaseCardIcon>
+                    <BaseCardArrow />
+                  </div>
+                  <div className="flex-1 flex flex-col space-y-2">
+                    <BaseCardTitle className="uppercase tracking-tight text-lg leading-snug">
+                      {exam.name}
+                    </BaseCardTitle>
+                    <BaseCardDescription className="mb-4">
+                      {exam.description}
+                    </BaseCardDescription>
+                  </div>
+                </BaseCard>
+              </Link>
             ))}
-
-            {/* Special Note Card: IELTS UKVI */}
-            <div
-              id="ielts-ukvi-academic"
-              className="scroll-mt-32 group relative flex flex-col overflow-hidden rounded-xl border border-[#EEE] bg-white transition-all duration-300 hover:-translate-y-1 hover:border-maroon-200 hover:shadow-[0_18px_38px_-10px_rgba(139,0,0,0.14)]"
-            >
-              <div className="flex flex-1 flex-col p-7">
-                <h3 className="mb-1 text-base font-bold text-gray-900">
-                  IELTS UKVI
-                </h3>
-                <p className="mb-4 mt-2 flex-1 text-sm leading-relaxed text-gray-600">
-                  An IELTS test approved for UK visa and immigration
-                  applications, accepted by UK Visas and Immigration (UKVI).
-                </p>
-
-                <div className="mb-4 flex items-start gap-2 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2.5">
-                  <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-amber-600" />
-                  <p className="text-xs leading-relaxed text-amber-900">
-                    IELTS UKVI and Life Skills exams are not administered at the
-                    TEPTH centre — please register directly through the British
-                    Council.
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-2 gap-2">
-                  <Link
-                    href={`/book-exams/:ID`}
-                    className={buttonVariants({
-                      className: "rounded-md h-10!",
-                    })}
-                  >
-                    <CalendarDays className="h-3.5 w-3.5" />
-                    Book Now
-                  </Link>
-                  <Link
-                    className={buttonVariants({
-                      variant: "outline",
-                      className: "rounded-md h-10!",
-                    })}
-                    href={`/exam-preparation-courses/:ID`}
-                  >
-                    View Details
-                  </Link>
-                </div>
-              </div>
-            </div>
-
-            {/* Special Note Card: PTE Home */}
-            <div
-              id="pte-home-a1"
-              className="scroll-mt-32 group relative flex flex-col overflow-hidden rounded-xl border border-[#EEE] bg-white transition-all duration-300 hover:-translate-y-1 hover:border-maroon-200 hover:shadow-[0_18px_38px_-10px_rgba(139,0,0,0.14)]"
-            >
-              <div className="flex flex-1 flex-col p-7">
-                <h3 className="mb-1 text-base font-bold text-gray-900">
-                  PTE Home (A1, A2, B1)
-                </h3>
-
-                <p className="mb-4 mt-2 flex-1 text-sm leading-relaxed text-gray-600">
-                  UK Home Office-approved tests for family and settlement visa
-                  applications at A1, A2, and B1 levels.
-                </p>
-
-                <div className="mb-4 flex items-start gap-2 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2.5">
-                  <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-amber-600" />
-                  <p className="text-xs leading-relaxed text-amber-900">
-                    PTE Home tests are administered at TEPTH. Please contact us
-                    to confirm availability and book your session.
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-2 gap-2">
-                  <Link
-                    href={`/book-exams/:ID`}
-                    className={buttonVariants({
-                      className: "rounded-md h-10!",
-                    })}
-                  >
-                    <CalendarDays className="h-3.5 w-3.5" />
-                    Book Now
-                  </Link>
-                  <Link
-                    className={buttonVariants({
-                      variant: "outline",
-                      className: "rounded-md h-10!",
-                    })}
-                    href={`/exam-preparation-courses/:ID`}
-                  >
-                    View Details
-                  </Link>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
