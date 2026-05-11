@@ -1375,3 +1375,326 @@ export const EXAM_PREPARATION_COURSES_DATA = [
     ],
   },
 ];
+export const EXAM_CARDS_DATA = [
+  {
+    ...EXAM_IDS_DATA.ielts,
+    type: "items",
+    description:
+      "The world's most popular English proficiency test — accepted for university admissions, migration, and UK visas. Choose the IELTS variant that matches your goal below.",
+    items: [
+      { ...EXAM_IDS_DATA.ielts_academic, type: "description" },
+      { ...EXAM_IDS_DATA.ielts_general, type: "description" },
+      { ...EXAM_IDS_DATA.ielts_ukvi, type: "items" },
+    ],
+  },
+  // {
+  //   ...EXAM_IDS_DATA.ielts_academic,
+  //   type: "description",
+  //   data: {
+  //     content:
+  //       "The world's most popular English test for higher education and professional registration.",
+  //     overview:
+  //       "IELTS Academic measures whether your level of English language proficiency is suitable for an academic environment. It reflects aspects of academic language and evaluates whether you’re ready to begin training or studying.",
+  //     stats: [
+  //       { label: "Test Duration", value: "2 hours 45 mins" },
+  //       { label: "Score Scale", value: "0–9 Bands" },
+  //       { label: "Results In", value: "3–5 days" },
+  //       { label: "Validity", value: "2 years" },
+  //     ],
+  //     sections: [
+  //       {
+  //         name: "Listening",
+  //         duration: "30 min",
+  //         details: "4 recorded monologues and conversations.",
+  //         icon: "listening",
+  //       },
+  //       {
+  //         name: "Academic Reading",
+  //         duration: "60 min",
+  //         details:
+  //           "3 long texts which range from the descriptive and factual to the discursive and analytical.",
+  //         icon: "reading",
+  //       },
+  //       {
+  //         name: "Academic Writing",
+  //         duration: "60 min",
+  //         details:
+  //           "Task 1: describe a chart, graph, or diagram. Task 2: write an essay in response to a point of view.",
+  //         icon: "writing",
+  //       },
+  //       {
+  //         name: "Speaking",
+  //         duration: "11–14 min",
+  //         details: "A face-to-face interview with an examiner.",
+  //         icon: "speaking",
+  //       },
+  //     ],
+  //     whoShouldTake: [
+  //       "Prospective undergraduate students",
+  //       "Prospective postgraduate students",
+  //       "Medical professionals (Doctors, Nurses, etc.)",
+  //       "Professional registration applicants",
+  //     ],
+  //     acceptedFor: [
+  //       "University admissions worldwide",
+  //       "Medical board registration",
+  //       "Student visa applications",
+  //     ],
+  //     faqs: [
+  //       {
+  //         question: "Is the Academic test harder than General Training?",
+  //         answer:
+  //           "The Reading and Writing sections are more complex as they are geared towards academic study. Listening and Speaking are the same.",
+  //       },
+  //     ],
+  //   },
+  // },
+  // {
+  //   ...EXAM_IDS_DATA.ielts_general,
+  //   type: "description",
+  //   data: {
+  //     content:
+  //       "The world's most popular English test for migration, secondary education, and work experience.",
+  //     overview:
+  //       "IELTS General Training measures English language proficiency in a practical, everyday context. The tasks and tests reflect both workplace and social situations.",
+  //     stats: [
+  //       { label: "Test Duration", value: "2 hours 45 mins" },
+  //       { label: "Score Scale", value: "0–9 Bands" },
+  //       { label: "Results In", value: "3–5 days" },
+  //       { label: "Validity", value: "2 years" },
+  //     ],
+  //     sections: [
+  //       {
+  //         name: "Listening",
+  //         duration: "30 min",
+  //         details: "4 recorded monologues and conversations.",
+  //         icon: "listening",
+  //       },
+  //       {
+  //         name: "General Reading",
+  //         duration: "60 min",
+  //         details:
+  //           "Extracts from books, magazines, newspapers, notices, advertisements, company handbooks and guidelines.",
+  //         icon: "reading",
+  //       },
+  //       {
+  //         name: "General Writing",
+  //         duration: "60 min",
+  //         details:
+  //           "Task 1: write a letter requesting information or explaining a situation. Task 2: write an essay in response to a point of view.",
+  //         icon: "writing",
+  //       },
+  //       {
+  //         name: "Speaking",
+  //         duration: "11–14 min",
+  //         details: "A face-to-face interview with an examiner.",
+  //         icon: "speaking",
+  //       },
+  //     ],
+  //     whoShouldTake: [
+  //       "Migrants to Australia, Canada, New Zealand, and the UK",
+  //       "Secondary school students",
+  //       "Job seekers in English-speaking countries",
+  //       "Vocational training applicants",
+  //     ],
+  //     acceptedFor: [
+  //       "Skilled migration visas",
+  //       "Permanent residency applications",
+  //       "Secondary education admissions",
+  //       "Work permits",
+  //     ],
+  //     faqs: [
+  //       {
+  //         question: "Can I use General Training for university study?",
+  //         answer:
+  //           "Usually no. Most universities require IELTS Academic. Always check with the institution you are applying to.",
+  //       },
+  //     ],
+  //   },
+  // },
+  // {
+  //   ...EXAM_IDS_DATA.ielts_ukvi,
+  //   type: "items",
+  //   description:
+  //     "IELTS for UKVI is a Secure English Language Test (SELT) approved by the UK Home Office for visa applications to the UK.",
+  //   items: [
+  //     EXAM_IDS_DATA.ielts_ukvi_academic,
+  //     EXAM_IDS_DATA.ielts_ukvi_general,
+  //     EXAM_IDS_DATA.ielts_life_skills_a1,
+  //     EXAM_IDS_DATA.ielts_life_skills_a2,
+  //     EXAM_IDS_DATA.ielts_life_skills_b1,
+  //   ],
+  // },
+  {
+    ...EXAM_IDS_DATA.toefl,
+    type: "description",
+    description:
+      "Internet-based English proficiency test used for academic admissions, immigration, and professional certification worldwide.",
+    data: {
+      content:
+        "Internet-based English proficiency test used for academic admissions, immigration, and professional certification worldwide.",
+      overview:
+        "The TOEFL iBT is an Internet-based English proficiency test that measures reading, listening, speaking, and writing skills in an academic context. It takes approximately 2 hours to complete in one sitting and is used primarily for academic admissions, immigration, and professional certification. The TOEFL iBT is accepted by over 12,000 universities and institutions in 160+ countries.",
+      stats: [
+        { label: "Test Duration", value: "~2 hours" },
+        { label: "Score Scale", value: "0–120" },
+        { label: "Results In", value: "3 days" },
+        { label: "Validity", value: "2 years" },
+      ],
+      sections: [
+        {
+          name: "Reading",
+          duration: "~30 min",
+          details:
+            "50 items. Task types: Complete the Words, Read in Daily Life, Read an Academic Passage.",
+          icon: "reading",
+        },
+        {
+          name: "Listening",
+          duration: "~29 min",
+          details:
+            "47 items. Task types: Listen and Choose a Response, Listen to a Conversation, Listen to an Announcement, Listen to an Academic Talk.",
+          icon: "listening",
+        },
+        {
+          name: "Writing",
+          duration: "~23 min",
+          details:
+            "12 items. Task types: Build a Sentence, Write an Email, Write for an Academic Discussion.",
+          icon: "writing",
+        },
+        {
+          name: "Speaking",
+          duration: "~8 min",
+          details:
+            "11 items. Task types: Listen and Repeat, Take an Interview. Test time does not include directions.",
+          icon: "speaking",
+        },
+      ],
+      whoShouldTake: [
+        "University applicants in the USA, Canada, UK, and Australia",
+        "Scholarship and fellowship applicants",
+        "Students applying to graduate programmes",
+        "Immigration and professional certification requirements",
+      ],
+      acceptedFor: [
+        "US/Canadian/UK/Australian university admissions",
+        "Graduate programme applications",
+        "Immigration purposes",
+        "Professional certification",
+      ],
+      faqs: [
+        {
+          question: "What score do I need for a US university?",
+          answer:
+            "Most US universities require a TOEFL iBT score of 80–100+. Top universities may require 100–110.",
+        },
+        {
+          question: "Can I get a hard copy of my score report?",
+          answer:
+            "Yes. If requested before your test, it will be mailed 11–15 days after your test date. Express shipping (2–5 days) is available.",
+        },
+        {
+          question: "How is TOEFL different from IELTS?",
+          answer:
+            "TOEFL is fully Internet-based and is primarily used in North America. IELTS includes a face-to-face speaking component.",
+        },
+      ],
+    },
+  },
+  {
+    ...EXAM_IDS_DATA.pte,
+    type: "items",
+    description:
+      "PTE  is a computer-based English language proficiency test for non-native English speakers.",
+    items: [
+      { ...EXAM_IDS_DATA.pte_academic, type: "description" },
+      { ...EXAM_IDS_DATA.pte_core, type: "description" },
+      { ...EXAM_IDS_DATA.pte_ukvi, type: "items" },
+    ],
+  },
+  {
+    ...EXAM_IDS_DATA.celpip,
+    type: "items",
+    description:
+      "The Canadian English Language Proficiency Index Program — the leading English test for permanent residency and citizenship in Canada.",
+    items: [
+      { ...EXAM_IDS_DATA.celpip_general, type: "description" },
+      { ...EXAM_IDS_DATA.celpip_general_ls, type: "description" },
+    ],
+  },
+  {
+    ...EXAM_IDS_DATA.cael,
+    type: "description",
+    description:
+      "The Canadian Academic English Language Test — specifically designed for study and professional registration in Canada.",
+    data: {
+      content:
+        "The Canadian Academic English Language Test — specifically designed for study and professional registration in Canada.",
+      overview:
+        "The CAEL Test measures the English language proficiency of students planning to study in Canadian post-secondary institutions. CAEL is one of the best tools for identifying students with the right English skills for academic success.",
+      stats: [
+        { label: "Test Duration", value: "~3.5 hours" },
+        { label: "Score Scale", value: "10–90" },
+        { label: "Results In", value: "8 business days" },
+        { label: "Validity", value: "2 years" },
+      ],
+      sections: [
+        {
+          name: "Listening",
+          duration: "50 min",
+          details: "Listening to various types of academic information.",
+          icon: "listening",
+        },
+        {
+          name: "Reading",
+          duration: "50 min",
+          details: "Reading academic articles and responding to questions.",
+          icon: "reading",
+        },
+        {
+          name: "Writing",
+          duration: "35 min",
+          details: "Writing academic essays based on provided information.",
+          icon: "writing",
+        },
+        {
+          name: "Speaking",
+          duration: "25 min",
+          details: "Academic speaking tasks and interview format.",
+          icon: "speaking",
+        },
+      ],
+      whoShouldTake: [
+        "Students applying to Canadian universities and colleges",
+        "Professional registration applicants in Canada",
+      ],
+      acceptedFor: [
+        "University admissions in Canada",
+        "Professional certification",
+      ],
+      faqs: [
+        {
+          question: "Is CAEL only for Canada?",
+          answer:
+            "Yes, it is specifically designed for the Canadian academic context.",
+        },
+      ],
+    },
+  },
+  {
+    ...EXAM_IDS_DATA.selt,
+    type: "items",
+    description:
+      "Home Office-approved Secure English Language Tests (SELT) for UK visa applications.",
+    items: [
+      { ...EXAM_IDS_DATA.selt_a1, type: "description" },
+      { ...EXAM_IDS_DATA.selt_a2, type: "description" },
+      { ...EXAM_IDS_DATA.selt_b1, type: "description" },
+      { ...EXAM_IDS_DATA.selt_b1_r_w, type: "description" },
+      { ...EXAM_IDS_DATA.selt_b2, type: "description" },
+      { ...EXAM_IDS_DATA.selt_c1, type: "description" },
+      { ...EXAM_IDS_DATA.selt_c2, type: "description" },
+    ],
+  },
+];
