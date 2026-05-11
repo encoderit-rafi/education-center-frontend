@@ -193,8 +193,8 @@ export default function AssessmentSolutionsPage() {
             </h2>
             <p className="text-xl text-slate-600 mb-16 leading-relaxed">
               TEPTH Academic Atelier partners with forward-thinking institutions
-              to redefine the value of certification. Let's discuss your
-              organization's specific needs.
+              to redefine the value of certification. Let&apos;s discuss your
+              organization&apos;s specific needs.
             </p>
             <div className="space-y-10">
               <div className="flex items-start gap-6">

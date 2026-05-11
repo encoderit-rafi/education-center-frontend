@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 
 import Image from "next/image";
@@ -31,8 +30,8 @@ export default function ContactUs() {
 
             {/* Description */}
             <p className="section-description">
-              Whether you're preparing for an entrance exam or need deep
-              editorial review, we're here to guide you. Our expert team is ready to assist you at every step of your journey.
+              Whether you&apos;re preparing for an entrance exam or need deep
+              editorial review, we&apos;re here to guide you. Our expert team is ready to assist you at every step of your journey.
             </p>
           </div>
 

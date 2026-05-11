@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -31,7 +31,7 @@ const bookingSchema = z.object({
 
 type BookingValues = z.infer<typeof bookingSchema>;
 
-export default function CourseRegistration({
+function WorkshopRegistrationForm({
   className,
 }: {
   className?: string;
@@ -176,3 +176,12 @@ export default function CourseRegistration({
     </div>
   );
 }
+
+export default function WorkshopRegistration() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <WorkshopRegistrationForm />
+    </Suspense>
+  );
+}
+

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -45,9 +45,14 @@ const careerSchema = z.object({
 type CareerFormValues = z.infer<typeof careerSchema>;
 
 export default function CareerPage() {
+    const [mounted, setMounted] = useState(false);
     const [captchaError, setCaptchaError] = useState<string | null>(null);
     const [isSuccess, setIsSuccess] = useState(false);
     const captchaRef = useRef<ReCAPTCHA>(null);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     const form = useForm<CareerFormValues>({
         resolver: zodResolver(careerSchema),
@@ -282,11 +287,13 @@ export default function CareerPage() {
 
                                             {/* ReCAPTCHA */}
                                             <div className="md:col-span-2 space-y-2">
+                                            {mounted && (
                                                 <ReCAPTCHA
                                                     ref={captchaRef}
                                                     sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
                                                     onChange={() => setCaptchaError(null)}
                                                 />
+                                            )}
                                                 {captchaError && (
                                                     <p className="text-red-500 text-sm font-medium">{captchaError}</p>
                                                 )}

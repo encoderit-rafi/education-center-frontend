@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { Controller } from "react-hook-form";
 import {
@@ -47,8 +47,13 @@ const contactSchema = z.object({
 type ContactFormValues = z.infer<typeof contactSchema>;
 
 export default function ContactForm() {
+  const [mounted, setMounted] = useState(false);
   const [captchaError, setCaptchaError] = useState<string | null>(null);
   const captchaRef = useRef<ReCAPTCHA>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const {
     register,
@@ -266,13 +271,15 @@ export default function ContactForm() {
       </Field>
 
       <div className="space-y-4">
-        <div className="scale-90 origin-left">
-          <ReCAPTCHA
-            ref={captchaRef}
-            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
-            onChange={() => setCaptchaError(null)}
-          />
-        </div>
+        {mounted && (
+          <div className="scale-90 origin-left">
+            <ReCAPTCHA
+              ref={captchaRef}
+              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
+              onChange={() => setCaptchaError(null)}
+            />
+          </div>
+        )}
         {captchaError && (
           <p className="text-red-500 text-xs font-bold uppercase tracking-wider">{captchaError}</p>
         )}
