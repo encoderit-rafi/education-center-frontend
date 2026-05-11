@@ -316,7 +316,7 @@ export default function FreeConsultationForm() {
                 <Textarea
                   {...register("message")}
                   rows={4}
-                  className="bg-slate-50/50 border-slate-200 rounded-xl p-4 placeholder:text-slate-400 font-medium resize-none focus:ring-4 focus:ring-primary/5"
+                  className="bg-white border-slate-200 rounded-md px-3 py-2 placeholder:text-slate-400 font-medium resize-none transition-[color,box-shadow,background-color] outline-none focus-visible:border-primary focus-visible:ring-3 focus-visible:ring-ring/30"
                   placeholder="Any specific questions?"
                 />
               </FieldContent>
@@ -325,19 +325,19 @@ export default function FreeConsultationForm() {
         </div>
       </div>
 
-      <div className="pt-4 space-y-4 max-w-md mx-auto items-center justify-center">
+      <div className="pt-4 space-y-4 max-w-md mx-auto flex flex-col items-center justify-center">
         <Button
           type="submit"
           disabled={isSubmitting}
           size="lg"
-          className="w-full"
+          className="h-11 px-4 py-2 rounded-xl font-black uppercase tracking-widest text-xs w-full md:w-auto transition-all active:scale-95"
 
         >
-          {isSubmitting ? "Processing..." : "Submit"}
-          {!isSubmitting && <ArrowRight className="w-5 h-5 ml-2" />}
-
+          <div className="flex items-center gap-3">
+            {isSubmitting ? "Processing..." : "Submit"}
+            {!isSubmitting && <ArrowRight className="w-4 h-4" />}
+          </div>
         </Button>
-
         <div className="flex items-center justify-center gap-2 text-xs text-slate-500 font-medium text-center">
           <ShieldCheck className="w-4 h-4 text-primary shrink-0" />
           <span>Response within 1-2 business days</span>

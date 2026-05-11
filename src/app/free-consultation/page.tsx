@@ -63,7 +63,7 @@ export default function FreeConsultationPage() {
                   </ul>
 
                   <div className="pt-6 space-y-4">
-                    <p className="font-bold text-slate-900 uppercase tracking-widest text-xs">During your session, we will:</p>
+                    <p className="font-bold text-slate-900 uppercase text-xs">During your session, we will:</p>
                     <ul className="grid md:grid-cols-2 gap-6">
                       {[
                         "Assess your current English level",
@@ -71,7 +71,7 @@ export default function FreeConsultationPage() {
                         "Recommend the right course (IELTS, PTE, TOEFL iBT, CELPIP, CAEL, Skills for English – SELT & OET)",
                         "Suggest a realistic study plan based on your timeline"
                       ].map((item) => (
-                        <li key={item} className="flex items-start gap-3 text-slate-600">
+                        <li key={item} className="flex items-start gap-3">
                           <ArrowRightCircle className="w-5 h-5 text-primary/40 shrink-0 mt-1" />
                           <span className="text-sm font-medium">{item}</span>
                         </li>
@@ -81,7 +81,7 @@ export default function FreeConsultationPage() {
                 </div>
 
                 {/* Exam Bookings & Test Information */}
-                <div className="space-y-8 pt-12 border-t border-slate-100">
+                <div className="space-y-8 pt-12">
                   <div className="space-y-4">
                     <h3 className="text-3xl font-black text-slate-900">For Exam Bookings & Test Information</h3>
                     <div className="w-20 h-1.5 bg-primary rounded-full"></div>
@@ -108,7 +108,7 @@ export default function FreeConsultationPage() {
                     </ul>
 
                     <div className="pt-6 space-y-4">
-                      <p className="font-bold text-slate-900 uppercase tracking-widest text-xs">We will help you with:</p>
+                      <p className="font-bold text-slate-900 uppercase text-xs">We will help you with:</p>
                       <ul className="grid md:grid-cols-2 gap-6">
                         {[
                           "Understanding test requirements and eligibility",
@@ -125,10 +125,6 @@ export default function FreeConsultationPage() {
                     </div>
                   </div>
                 </div>
-
-                <p className="italic text-primary font-bold pt-8 border-t border-slate-50 text-xl text-center lg:text-left">
-                  This is a quick but focused session designed to give you clarity before you start.
-                </p>
               </div>
             </div>
           </div>
@@ -152,7 +148,7 @@ export default function FreeConsultationPage() {
       </section>
 
       {/* ── Section 2: Form ── */}
-      <section className="py-24 px-8 max-w-5xl mx-auto border-t border-slate-100">
+      <section className="py-24 px-8 max-w-5xl mx-auto">
         <div className="animate-fade-up">
           <div className="mb-12 text-center space-y-4">
             <span className="section-label">BOOK A SESSION</span>

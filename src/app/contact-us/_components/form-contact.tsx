@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { PhoneInput } from "@/components/ui/phone-input";
 import { CountryDropdown } from "@/components/ui/country-dropdown";
+import { toast } from "sonner";
 
 
 
@@ -46,7 +47,6 @@ const contactSchema = z.object({
 type ContactFormValues = z.infer<typeof contactSchema>;
 
 export default function ContactForm() {
-  const [isSuccess, setIsSuccess] = useState(false);
   const [captchaError, setCaptchaError] = useState<string | null>(null);
   const captchaRef = useRef<ReCAPTCHA>(null);
 
@@ -54,6 +54,7 @@ export default function ContactForm() {
     register,
     control,
     handleSubmit,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
@@ -81,21 +82,14 @@ export default function ContactForm() {
     // Simulate API call
     console.log("Submitting:", { ...data, recaptchaToken: token });
     await new Promise((resolve) => setTimeout(resolve, 800));
-    setIsSuccess(true);
+
+    toast.success("Enquiry Sent Successfully!", {
+      description: "Our team will get back to you within 24 business hours.",
+    });
+
+    reset();
     captchaRef.current?.reset();
   };
-
-  if (isSuccess) {
-    return (
-      <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-2xl p-8 text-center space-y-4 animate-fade-up">
-        <CheckCircle2 className="w-12 h-12 text-emerald-500 mx-auto" />
-        <h3 className="text-2xl font-black uppercase tracking-tight">Message Sent!</h3>
-        <p className="text-emerald-700 font-medium">
-          Thank you for reaching out. Our team will get back to you shortly.
-        </p>
-      </div>
-    );
-  }
 
   return (
     <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
@@ -130,7 +124,7 @@ export default function ContactForm() {
         </Field>
       </div>
 
-      <div className="w-full h-px bg-slate-100/80 my-4" />
+      <div className="w-full bg-slate-100/80 my-4" />
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Field data-invalid={!!errors.phoneNumber}>
@@ -172,7 +166,7 @@ export default function ContactForm() {
         </Field>
       </div>
 
-      <div className="w-full h-px bg-slate-100/80 my-4" />
+      <div className="w-full bg-slate-100/80 my-4" />
 
       <Field data-invalid={!!errors.country}>
         <FieldLabel className="text-sm font-medium">
@@ -194,7 +188,7 @@ export default function ContactForm() {
         {errors.country && <FieldError>{errors.country.message}</FieldError>}
       </Field>
 
-      <div className="w-full h-px bg-slate-100/80 my-4" />
+      <div className="w-full bg-slate-100/80 my-4" />
 
       <Field data-invalid={!!errors.enquiryTopic}>
         <FieldLabel className="text-sm font-medium">
@@ -254,7 +248,7 @@ export default function ContactForm() {
         )}
       </Field>
 
-      <div className="w-full h-px bg-slate-100/80 my-4" />
+      <div className="w-full bg-slate-100/80 my-4" />
 
       <Field data-invalid={!!errors.message}>
         <FieldLabel className="text-sm font-medium">
@@ -288,10 +282,10 @@ export default function ContactForm() {
         <Button
           type="submit"
           disabled={isSubmitting}
-          className="h-14 px-12 rounded-xl font-black uppercase tracking-widest text-xs w-full md:w-auto transition-all active:scale-95"
+          className="h-11 px-4 py-2 rounded-xl font-black uppercase tracking-widest text-xs w-full md:w-auto transition-all active:scale-95"
         >
           <div className="flex items-center gap-3">
-            {isSubmitting ? "Sending..." : "Send Enquiry"}
+            {isSubmitting ? "Sending..." : "Submit"}
             {!isSubmitting && <SendHorizontal className="w-4 h-4" />}
           </div>
         </Button>
