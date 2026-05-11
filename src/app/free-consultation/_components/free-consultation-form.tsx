@@ -155,7 +155,7 @@ export default function FreeConsultationForm() {
                       value={field.value}
                       onChange={field.onChange}
                       defaultCountry="AE"
-                      className="bg-slate-50 border border-slate-200 rounded-lg overflow-hidden  focus-within:ring-4 focus-within:ring-primary/5"
+                      className="bg-slate-50 border border-slate-200 rounded-md overflow-hidden h-11 focus-within:ring-4 focus-within:ring-primary/5"
                     />
                   )}
                 />
