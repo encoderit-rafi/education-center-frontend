@@ -133,6 +133,10 @@ export const EXAM_IDS_DATA = {
     id: "psi",
     name: "PSI",
   },
+  psi_ukvi: {
+    id: "psi-ukvi",
+    name: "PSI UKVI",
+  },
 };
 export const NAV_EXAMS_DATA = [
   EXAM_IDS_DATA.ielts,
@@ -178,34 +182,13 @@ export const NAV_BOOK_EXAMS_DATA = [
   },
 ];
 export const NAV_FEES = [
-  {
-    id: "ielts",
-    name: "IELTS",
-  },
-  {
-    id: "toefl",
-    name: "TOEFL",
-  },
-  {
-    id: "pte",
-    name: "PTE",
-  },
-  {
-    id: "psi-ukvi",
-    name: "PSI (UKVI)",
-  },
-  {
-    id: "celpip",
-    name: "CELPIP",
-  },
-  {
-    id: "cael",
-    name: "CAEL",
-  },
-  {
-    id: "oet",
-    name: "OET",
-  },
+  EXAM_IDS_DATA.ielts,
+  EXAM_IDS_DATA.toefl,
+  EXAM_IDS_DATA.pte,
+  EXAM_IDS_DATA.psi_ukvi,
+  EXAM_IDS_DATA.celpip,
+  EXAM_IDS_DATA.cael,
+  EXAM_IDS_DATA.oet,
 ];
 export const NAV_PAID_MOCK_TESTS = [
   EXAM_IDS_DATA.ielts,
@@ -277,7 +260,7 @@ export const PRIMARY_NAV: AppNavigationItem[] = [
     href: "/fees",
     items: NAV_FEES.map((fee) => ({
       name: fee.name,
-      href: `/fees#${fee.id}`,
+      href: `/fees/${fee.id}`,
     })),
   },
 
@@ -637,6 +620,36 @@ export const PAID_MOCK_TESTS_DATA = {
       titleHighlight: "TOEFL Mock Test",
       initialMockTestId: "toefl",
     },
+  },
+};
+export const WORKSHOPS_DATA = {
+  workshop_2_hours: {
+    id: "workshop_2_hours",
+    name: "Workshop 2 Hours",
+    duration: "2 hours",
+    price: 600,
+    currency: "AED",
+  },
+  workshop_4_hours: {
+    id: "workshop_4_hours",
+    name: "Workshop 4 Hours",
+    duration: "4 hours",
+    price: 1000,
+    currency: "AED",
+  },
+  workshop_6_hours: {
+    id: "workshop_6_hours",
+    name: "Workshop 6 Hours",
+    duration: "6 hours",
+    price: 1350,
+    currency: "AED",
+  },
+  workshop_8_hours: {
+    id: "workshop_8_hours",
+    name: "Workshop 8 Hours",
+    duration: "8 hours",
+    price: 1600,
+    currency: "AED",
   },
 };
 export const COURSES_DATA = {
@@ -1718,8 +1731,10 @@ export const EXAM_DETAILE_DATA = [
     ...EXAM_IDS_DATA.ielts_life_skills_a1,
     type: "details",
     subtitle: "For Family, Spouse or Partner visas",
-    description: "IELTS Life Skills A1 measures Speaking and Listening skills at CEFR Level A1.",
-    overview: "This test is for those who need to prove their English speaking and listening skills as part of their application to UK Visas and Immigration for 'family of a settled person' visas.",
+    description:
+      "IELTS Life Skills A1 measures Speaking and Listening skills at CEFR Level A1.",
+    overview:
+      "This test is for those who need to prove their English speaking and listening skills as part of their application to UK Visas and Immigration for 'family of a settled person' visas.",
     stats: [
       { label: "Duration", value: "16–18 mins" },
       { label: "Results In", value: "7 days" },
@@ -1729,7 +1744,8 @@ export const EXAM_DETAILE_DATA = [
       {
         name: "Speaking & Listening",
         duration: "16–18 min",
-        details: "Face-to-face interview with an examiner and another test taker.",
+        details:
+          "Face-to-face interview with an examiner and another test taker.",
         icon: "speaking",
       },
     ],
@@ -1740,8 +1756,10 @@ export const EXAM_DETAILE_DATA = [
     ...EXAM_IDS_DATA.ielts_life_skills_a2,
     type: "details",
     subtitle: "For Family visa extension",
-    description: "IELTS Life Skills A2 measures Speaking and Listening skills at CEFR Level A2.",
-    overview: "This test is for those who need to prove their English speaking and listening skills as part of their application to UK Visas and Immigration for extension to Family, Spouse or Partner visa.",
+    description:
+      "IELTS Life Skills A2 measures Speaking and Listening skills at CEFR Level A2.",
+    overview:
+      "This test is for those who need to prove their English speaking and listening skills as part of their application to UK Visas and Immigration for extension to Family, Spouse or Partner visa.",
     stats: [
       { label: "Duration", value: "18–20 mins" },
       { label: "Results In", value: "7 days" },
@@ -1751,7 +1769,8 @@ export const EXAM_DETAILE_DATA = [
       {
         name: "Speaking & Listening",
         duration: "18–20 min",
-        details: "Face-to-face interview with an examiner and another test taker.",
+        details:
+          "Face-to-face interview with an examiner and another test taker.",
         icon: "speaking",
       },
     ],
@@ -1762,8 +1781,10 @@ export const EXAM_DETAILE_DATA = [
     ...EXAM_IDS_DATA.ielts_life_skills_b1,
     type: "details",
     subtitle: "For Citizenship and Settlement",
-    description: "IELTS Life Skills B1 measures Speaking and Listening skills at CEFR Level B1.",
-    overview: "This test is for those who need to prove their English speaking and listening skills as part of their application to UK Visas and Immigration for indefinite leave to remain or citizenship.",
+    description:
+      "IELTS Life Skills B1 measures Speaking and Listening skills at CEFR Level B1.",
+    overview:
+      "This test is for those who need to prove their English speaking and listening skills as part of their application to UK Visas and Immigration for indefinite leave to remain or citizenship.",
     stats: [
       { label: "Duration", value: "22 mins" },
       { label: "Results In", value: "7 days" },
@@ -1773,7 +1794,8 @@ export const EXAM_DETAILE_DATA = [
       {
         name: "Speaking & Listening",
         duration: "22 min",
-        details: "Face-to-face interview with an examiner and another test taker.",
+        details:
+          "Face-to-face interview with an examiner and another test taker.",
         icon: "speaking",
       },
     ],
@@ -1801,7 +1823,8 @@ export const EXAM_DETAILE_DATA = [
         name: "Reading",
         duration: "Approx. 30 minutes",
         questions: "50 items",
-        details: "Read academic and daily life texts to evaluate comprehension.",
+        details:
+          "Read academic and daily life texts to evaluate comprehension.",
         format:
           "• Complete the Words\n• Read in Daily Life\n• Read an Academic Passage",
       },
@@ -1829,7 +1852,8 @@ export const EXAM_DETAILE_DATA = [
         name: "Speaking",
         duration: "Approx. 8 minutes",
         questions: "11 items",
-        details: "Respond to prompts verbally to demonstrate speaking proficiency.",
+        details:
+          "Respond to prompts verbally to demonstrate speaking proficiency.",
         format: "• Listen and Repeat\n• Take an Interview",
       },
     ],
@@ -2148,7 +2172,8 @@ export const EXAM_DETAILE_DATA = [
         duration: "53–60 minutes",
         details:
           "Respond to questions with written answers. Focuses on practical communication such as email writing and responding to survey questions.",
-        format: "Task 1: Writing an Email\nTask 2: Responding to Survey Questions",
+        format:
+          "Task 1: Writing an Email\nTask 2: Responding to Survey Questions",
         questions: "2 tasks",
       },
       {
@@ -2175,7 +2200,8 @@ export const EXAM_DETAILE_DATA = [
     ],
     faqs: [
       {
-        question: "What is the difference between CELPIP General and General LS?",
+        question:
+          "What is the difference between CELPIP General and General LS?",
         answer:
           "General is for residency (all 4 skills). General LS is for citizenship (only Listening and Speaking).",
       },
@@ -2240,28 +2266,33 @@ export const EXAM_DETAILE_DATA = [
         name: "Speaking",
         duration: "7–10 minutes",
         details: "Reply to on-screen prompts verbally.",
-        format: "Test takers respond to three speaking tasks that reflect common university-level communication scenarios.",
+        format:
+          "Test takers respond to three speaking tasks that reflect common university-level communication scenarios.",
       },
       {
         icon: "reading",
         name: "Integrated Reading",
         duration: "35–50 minutes",
         details: "Read passages and reply to questions.",
-        format: "Read one long academic text and answer questions, evaluating comprehension and information retrieval skills.",
+        format:
+          "Read one long academic text and answer questions, evaluating comprehension and information retrieval skills.",
       },
       {
         icon: "listening",
         name: "Integrated Listening",
         duration: "25–35 minutes",
         details: "Listen to passages and reply to questions.",
-        format: "Listen to one long academic lecture and answer questions based on the content and key details.",
+        format:
+          "Listen to one long academic lecture and answer questions based on the content and key details.",
       },
       {
         icon: "writing",
         name: "Academic Unit A & B",
         duration: "120–140 minutes",
-        details: "Integrated academic units combining reading, listening, and writing.",
-        format: "Combines reading and listening materials on specific academic topics, followed by a writing task that integrates information from both sources.",
+        details:
+          "Integrated academic units combining reading, listening, and writing.",
+        format:
+          "Combines reading and listening materials on specific academic topics, followed by a writing task that integrates information from both sources.",
       },
     ],
     whoShouldTake: [
@@ -2422,5 +2453,127 @@ export const EXAM_DETAILE_DATA = [
     ],
     whoShouldTake: ["UK Citizenship applicants", "UK Settlement applicants"],
     acceptedFor: ["UK Visas and Immigration (UKVI)"],
+  },
+];
+
+export const FEES_DATA = [
+  {
+    ...EXAM_IDS_DATA.ielts,
+    service_fee: 100,
+    exam_fee: 1500,
+    workshops: [
+      WORKSHOPS_DATA.workshop_2_hours,
+      WORKSHOPS_DATA.workshop_4_hours,
+      WORKSHOPS_DATA.workshop_6_hours,
+      WORKSHOPS_DATA.workshop_8_hours,
+    ],
+    courses: [
+      COURSES_DATA.group_classroom,
+      COURSES_DATA.semi_private_classroom,
+      COURSES_DATA.vip_classroom,
+      COURSES_DATA.vip_online,
+    ],
+  },
+  {
+    ...EXAM_IDS_DATA.toefl,
+    service_fee: 100,
+    exam_fee: 1500,
+    workshops: [
+      WORKSHOPS_DATA.workshop_2_hours,
+      WORKSHOPS_DATA.workshop_4_hours,
+      WORKSHOPS_DATA.workshop_6_hours,
+      WORKSHOPS_DATA.workshop_8_hours,
+    ],
+    courses: [
+      COURSES_DATA.group_classroom,
+      COURSES_DATA.semi_private_classroom,
+      COURSES_DATA.vip_classroom,
+      COURSES_DATA.vip_online,
+    ],
+  },
+  {
+    ...EXAM_IDS_DATA.pte,
+    service_fee: 100,
+    exam_fee: 1500,
+    workshops: [
+      WORKSHOPS_DATA.workshop_2_hours,
+      WORKSHOPS_DATA.workshop_4_hours,
+      WORKSHOPS_DATA.workshop_6_hours,
+      WORKSHOPS_DATA.workshop_8_hours,
+    ],
+    courses: [
+      COURSES_DATA.group_classroom,
+      COURSES_DATA.semi_private_classroom,
+      COURSES_DATA.vip_classroom,
+      COURSES_DATA.vip_online,
+    ],
+  },
+  {
+    ...EXAM_IDS_DATA.psi_ukvi,
+    service_fee: 100,
+    exam_fee: 1500,
+    workshops: [
+      WORKSHOPS_DATA.workshop_2_hours,
+      WORKSHOPS_DATA.workshop_4_hours,
+      WORKSHOPS_DATA.workshop_6_hours,
+      WORKSHOPS_DATA.workshop_8_hours,
+    ],
+    courses: [
+      COURSES_DATA.group_classroom,
+      COURSES_DATA.semi_private_classroom,
+      COURSES_DATA.vip_classroom,
+      COURSES_DATA.vip_online,
+    ],
+  },
+  {
+    ...EXAM_IDS_DATA.celpip,
+    service_fee: 100,
+    exam_fee: 1500,
+    workshops: [
+      WORKSHOPS_DATA.workshop_2_hours,
+      WORKSHOPS_DATA.workshop_4_hours,
+      WORKSHOPS_DATA.workshop_6_hours,
+      WORKSHOPS_DATA.workshop_8_hours,
+    ],
+    courses: [
+      COURSES_DATA.group_classroom,
+      COURSES_DATA.semi_private_classroom,
+      COURSES_DATA.vip_classroom,
+      COURSES_DATA.vip_online,
+    ],
+  },
+  {
+    ...EXAM_IDS_DATA.cael,
+    service_fee: 100,
+    exam_fee: 1500,
+    workshops: [
+      WORKSHOPS_DATA.workshop_2_hours,
+      WORKSHOPS_DATA.workshop_4_hours,
+      WORKSHOPS_DATA.workshop_6_hours,
+      WORKSHOPS_DATA.workshop_8_hours,
+    ],
+    courses: [
+      COURSES_DATA.group_classroom,
+      COURSES_DATA.semi_private_classroom,
+      COURSES_DATA.vip_classroom,
+      COURSES_DATA.vip_online,
+    ],
+  },
+  {
+    ...EXAM_IDS_DATA.oet,
+    service_fee: 100,
+    exam_fee: 1500,
+    workshops: [
+      WORKSHOPS_DATA.workshop_2_hours,
+      WORKSHOPS_DATA.workshop_4_hours,
+      WORKSHOPS_DATA.workshop_6_hours,
+      WORKSHOPS_DATA.workshop_8_hours,
+    ],
+    courses: [
+      COURSES_DATA.group_classroom,
+      COURSES_DATA.semi_private_classroom,
+      COURSES_DATA.vip_classroom,
+      COURSES_DATA.vip_online,
+    ],
   },
 ];
