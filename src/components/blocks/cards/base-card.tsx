@@ -9,7 +9,7 @@ const BaseCardTitle = ({
   return (
     <h3
       className={cn(
-        "text-lg font-black text-secondary text-nowrap group-hover:text-primary transition-colors tracking-tight",
+        "text-lg font-black text-secondary group-hover:text-primary transition-colors tracking-tight",
         className,
       )}
       {...props}

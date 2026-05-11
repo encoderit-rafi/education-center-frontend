@@ -155,6 +155,7 @@ export default function FreeConsultationForm() {
                       value={field.value}
                       onChange={field.onChange}
                       defaultCountry="AE"
+                      placeholder="Please Enter Your Number"
                       className="bg-slate-50 border border-slate-200 rounded-md overflow-hidden h-11 focus-within:ring-4 focus-within:ring-primary/5"
                     />
                   )}
@@ -188,6 +189,7 @@ export default function FreeConsultationForm() {
                   <Input
                     {...register("city")}
                     placeholder="Dubai"
+                    className="h-11"
                   />
                 </FieldContent>
                 <FieldError errors={[errors.city]} />
@@ -208,7 +210,7 @@ export default function FreeConsultationForm() {
                   name="area"
                   render={({ field }) => (
                     <Select onValueChange={field.onChange} value={field.value}>
-                      <SelectTrigger className="bg-slate-50/50 border-slate-200 h-11 rounded-xl px-4 font-medium">
+                      <SelectTrigger className="border-slate-200 h-10 rounded-md px-4 font-medium">
                         <SelectValue placeholder="Select area" />
                       </SelectTrigger>
                       <SelectContent>
@@ -235,7 +237,7 @@ export default function FreeConsultationForm() {
                         <Button
                           variant="ghost"
                           className={cn(
-                            "w-full justify-start text-left font-normal rounded-md border border-slate-200  px-3 py-2 text-sm transition-all outline-none  focus-visible:border-primary focus-visible:ring-3 focus-visible:ring-ring/30 shadow-none hover:shadow-none hover:bg-transparent",
+                            "w-full justify-start text-left font-normal rounded-md border border-slate-200  px-3 py-2 text-sm transition-all outline-none  focus-visible:border-primary focus-visible:ring-3 focus-visible:ring-ring/30 shadow-none hover:shadow-none hover:bg-transparent whitespace-nowrap",
                             !selectedDate && "text-slate-400"
                           )}
                         >
@@ -278,7 +280,7 @@ export default function FreeConsultationForm() {
                           <Button
                             variant="ghost"
                             className={cn(
-                              "w-full justify-between font-medium shadow-none outline-none rounded-xl border border-slate-200 bg-slate-50/50 px-4 h-11",
+                              "flex h-10 w-full items-center justify-between overflow-hidden whitespace-nowrap rounded-md border border-slate-200 bg-white px-3 text-base transition-[color,box-shadow,background-color] outline-none focus:border-primary focus:ring-3 focus:ring-ring/30 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm font-medium",
                               !field.value && "text-slate-400"
                             )}
                           >
@@ -313,7 +315,7 @@ export default function FreeConsultationForm() {
               <FieldContent>
                 <Textarea
                   {...register("message")}
-                  rows={2}
+                  rows={4}
                   className="bg-slate-50/50 border-slate-200 rounded-xl p-4 placeholder:text-slate-400 font-medium resize-none focus:ring-4 focus:ring-primary/5"
                   placeholder="Any specific questions?"
                 />

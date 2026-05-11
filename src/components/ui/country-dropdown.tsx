@@ -68,9 +68,9 @@ const CountryDropdownComponent = (
     useEffect(() => {
         if (value) {
             const initialCountry = options.find(
-                (country) => 
-                    country.alpha3 === value || 
-                    country.alpha2 === value || 
+                (country) =>
+                    country.alpha3 === value ||
+                    country.alpha2 === value ||
                     country.name === value
             );
             if (initialCountry) {
@@ -96,7 +96,7 @@ const CountryDropdownComponent = (
     );
 
     const triggerClasses = cn(
-        "flex h-11 w-full items-center justify-between whitespace-nowrap rounded-md border border-slate-200 bg-white px-3 py-2 text-sm text-slate-700 shadow-none transition-[color,box-shadow,background-color] outline-none focus-visible:border-primary focus-visible:ring-3 focus-visible:ring-ring/30 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive placeholder:text-slate-400 [&>span]:line-clamp-1",
+        "flex h-11 w-full items-center justify-between whitespace-nowrap rounded-md border border-slate-200 bg-white px-3 text-base transition-[color,box-shadow,background-color] outline-none focus-visible:border-primary focus-visible:ring-3 focus-visible:ring-ring/30 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive md:text-sm placeholder:text-slate-400 [&>span]:line-clamp-1",
         open && "border-primary ring-3 ring-ring/30",
         slim === true && "w-20",
         className

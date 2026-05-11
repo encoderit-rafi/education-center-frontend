@@ -14,7 +14,7 @@ export default function ContactUs() {
   return (
     <main className="bg-white min-h-screen">
       {/* Hero Section */}
-      <section className="py-16 md:py-24 px-8 max-w-screen-2xl mx-auto">
+      <section className="py-12 md:py-24 px-6 md:px-8 max-w-screen-2xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
           {/* Left Content */}
           <div className="space-y-4 animate-fade-up">
@@ -53,10 +53,10 @@ export default function ContactUs() {
       </section>
 
       {/* Contact Details & Form Section */}
-      <section className="px-8 max-w-screen-2xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-20">
+      <section className="px-6 md:px-8 max-w-screen-2xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
           {/* Left Side: Contact Details */}
-          <div className="relative overflow-hidden rounded-[2.5rem] p-10 md:p-16 group h-full flex flex-col justify-start gap-12">
+          <div className="relative overflow-hidden rounded-[2.5rem] p-6 md:p-16 group h-full flex flex-col justify-start gap-12">
             {/* Header */}
             <div className="space-y-4 animate-fade-up">
               <span className="section-label">
@@ -144,14 +144,14 @@ export default function ContactUs() {
                   <BaseCardTitle className="text-lg font-black uppercase tracking-tight text-[#7d1c1c] pt-2 group-hover:text-[#7d1c1c]">Office Hours</BaseCardTitle>
 
                   <div className="space-y-2">
-                    <div className="flex justify-between items-center">
-                      <span>Sunday – Thursday</span>
-                      <span className="text-base text-slate-900 font-black">9:00 AM – 9:00 PM</span>
+                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-1 sm:gap-4">
+                      <span className="text-sm sm:text-base font-medium">Sunday – Thursday</span>
+                      <span className="text-sm sm:text-base text-slate-900 font-black">9:00 AM – 9:00 PM</span>
                     </div>
                     <div className="w-full h-px bg-rose-200/40" />
-                    <div className="flex justify-between items-center">
-                      <span>Friday</span>
-                      <span className="text-[#d12c2c] font-black uppercase text-base">Closed</span>
+                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-1 sm:gap-4">
+                      <span className="text-sm sm:text-base font-medium">Friday</span>
+                      <span className="text-[#d12c2c] font-black uppercase text-sm sm:text-base">Closed</span>
                     </div>
                   </div>
                 </div>
@@ -162,7 +162,7 @@ export default function ContactUs() {
           {/* Right Side: Form */}
           <div className="relative h-full">
             <div className="absolute -inset-10 bg-primary/5 rounded-[4rem] blur-3xl opacity-30 pointer-events-none"></div>
-            <div className="relative bg-white rounded-[2.5rem] p-8 md:p-16 h-full flex flex-col">
+            <div className="relative bg-white rounded-[2.5rem] p-6 md:p-16 h-full flex flex-col">
               <div className="mb-12 space-y-4">
                 <span className="section-label">
                   ENQUIRY FORM

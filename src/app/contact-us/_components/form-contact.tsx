@@ -108,7 +108,6 @@ export default function ContactForm() {
             <Input
               placeholder="John Doe"
               {...register("fullName")}
-              className="bg-slate-50/50 border-slate-200 focus-visible:ring-primary h-12 rounded-xl px-6 placeholder:text-slate-400 font-medium"
             />
           </FieldContent>
           {errors.fullName && (
@@ -125,7 +124,6 @@ export default function ContactForm() {
               type="email"
               placeholder="john@example.com"
               {...register("email")}
-              className="g-slate-50/50 border-slate-200 focus-visible:ring-primary h-12 rounded-xl px-6 placeholder:text-slate-400 font-medium"
             />
           </FieldContent>
           {errors.email && <FieldError>{errors.email.message}</FieldError>}
@@ -140,20 +138,17 @@ export default function ContactForm() {
             Phone number <span className="text-primary font-bold">*</span>
           </FieldLabel>
           <FieldContent>
-            <div className="relative h-14 rounded-xl bg-slate-50/50 border border-slate-200 focus-within:border-slate-400 focus-within:ring-4 focus-within:ring-primary/5 transition-all overflow-hidden">
-              <Controller
-                control={control}
-                name="phoneNumber"
-                render={({ field }) => (
-                  <PhoneInput
-                    value={field.value}
-                    onChange={field.onChange}
-                    defaultCountry="AE"
-                    className="h-full w-full border-none focus-within:ring-0 font-medium"
-                  />
-                )}
-              />
-            </div>
+            <Controller
+              control={control}
+              name="phoneNumber"
+              render={({ field }) => (
+                <PhoneInput
+                  value={field.value}
+                  onChange={field.onChange}
+                  defaultCountry="AE"
+                />
+              )}
+            />
           </FieldContent>
           {errors.phoneNumber && (
             <FieldError>{errors.phoneNumber.message}</FieldError>
@@ -168,7 +163,7 @@ export default function ContactForm() {
             <Input
               placeholder="Select City"
               {...register("emiratesCity")}
-              className="bg-slate-50/50 border-slate-200 focus-visible:ring-primary h-12 rounded-xl px-6 placeholder:text-slate-400 font-medium"
+              className="h-11"
             />
           </FieldContent>
           {errors.emiratesCity && (
@@ -192,7 +187,6 @@ export default function ContactForm() {
 
                 value={field.value}
                 onChange={(c) => field.onChange(c.name)}
-                className="bg-slate-50/50 border-slate-200 focus:ring-primary h-14 rounded-xl px-6 font-medium"
               />
             )}
           />
@@ -215,7 +209,7 @@ export default function ContactForm() {
                 <DropdownMenuTrigger asChild>
                   <Button
                     variant="outline"
-                    className="bg-slate-50/50 border-slate-200 focus:ring-4 focus:ring-primary/5 h-14 rounded-xl px-6 text-slate-700 font-medium w-full text-left flex items-center justify-between outline-hidden border transition-all"
+                    className="flex h-11 w-full items-center justify-between whitespace-nowrap rounded-md border border-slate-200 bg-white px-3 py-2 text-base transition-[color,box-shadow,background-color] outline-none focus:border-primary focus:ring-3 focus:ring-ring/30 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm font-medium"
                   >
                     <span className={!field.value ? "text-slate-400" : ""}>
                       {field.value || "Select a topic"}
@@ -271,7 +265,7 @@ export default function ContactForm() {
             placeholder="Tell us more about your inquiry..."
             rows={5}
             {...register("message")}
-            className="bg-slate-50/50 border-slate-200 focus-visible:ring-primary rounded-xl p-6 placeholder:text-slate-400 font-medium resize-none"
+            className="bg-white border border-slate-200 focus-visible:border-primary focus-visible:ring-3 focus-visible:ring-ring/30 rounded-md px-3 py-2 placeholder:text-slate-400 font-medium resize-none transition-[color,box-shadow,background-color] outline-none"
           />
         </FieldContent>
         {errors.message && <FieldError>{errors.message.message}</FieldError>}
