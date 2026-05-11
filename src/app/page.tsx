@@ -16,7 +16,7 @@ export default function Home() {
       <InformationSection />
       <BrandsSection />
       <CourseList />
-      <ExamPrepCourses />
+      {/* <ExamPrepCourses /> */}
       <CoreServices />
       <WhyChooseUs />
       <ExperienceExcellence />

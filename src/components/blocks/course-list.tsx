@@ -1,13 +1,14 @@
 import { exams, exams_types } from "@/lib/data";
 import {
   BaseCard,
+  BaseCardArrow,
   BaseCardDescription,
   BaseCardTitle,
 } from "./cards/base-card";
 import { ArrowRight } from "lucide-react";
 import { Badge } from "../ui/badge";
-import { buttonVariants } from "../ui/button";
 import Link from "next/link";
+import { EXAM_CARDS_DATA } from "@/data";
 
 export default function CourseList() {
   return (
@@ -20,32 +21,24 @@ export default function CourseList() {
           </h3>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {exams.map((exam) => {
-            const examTypeData = exams_types.find((t) => t.exam.id === exam.id);
-            const types = examTypeData?.types || [];
-
-            return (
-              <Link key={exam.id} href={`/exams/${exam.id}`}>
-                <BaseCard className="h-full p-8">
-                  <div className="flex items-start justify-between">
-                    <BaseCardTitle>{exam.name}</BaseCardTitle>
-                    <ArrowRight className="size-5 text-slate-300 transition-all duration-300 group-hover:text-primary group-hover:translate-x-1" />
-                  </div>
-                  <BaseCardDescription>{exam.content}</BaseCardDescription>
-                  {types && types.length > 0 && (
-                    <div className="no-scrollbar flex flex-nowrap overflow-x-auto gap-2">
-                      {types.map((type, idx) => (
-                        <Badge variant={"destructive"} key={idx}>
-                          {type.name}
-                        </Badge>
-                      ))}
-                    </div>
-                  )}
-                </BaseCard>
-              </Link>
-            );
-          })}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+          {EXAM_CARDS_DATA.map((exam, index) => (
+            <Link href={`/exams/${exam.id}`}>
+              <BaseCard key={exam.id} className="p-6">
+                <div className="flex items-center justify-between gap-2">
+                  <BaseCardTitle className="uppercase tracking-tight text-lg leading-snug">
+                    {exam.name}
+                  </BaseCardTitle>
+                  <BaseCardArrow />
+                </div>
+                <div className="flex-1 flex flex-col space-y-2">
+                  <BaseCardDescription className="mb-4">
+                    {exam.description}
+                  </BaseCardDescription>
+                </div>
+              </BaseCard>
+            </Link>
+          ))}
         </div>
       </div>
     </section>
