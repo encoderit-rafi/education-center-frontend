@@ -23,7 +23,7 @@ const SERVICES = [
     title: "Paid Mock Tests",
     description:
       "Sit a full scored mock exam in our centre or receive it online within 72 hours.",
-    href: "/mock-tests",
+    href: "/paid-mock-tests/ielts",
     icon: ClipboardList,
   },
   {
@@ -41,17 +41,17 @@ const SERVICES = [
     icon: MessageSquare,
   },
   {
-    title: "Exam Proctoring",
+    title: "Exam Proctoring Services",
     description:
       "Professional proctoring services for institutions and remote test takers.",
-    href: "/proctoring",
+    href: "/exam-proctoring-services/institutions",
     icon: Lock,
   },
   {
     title: "Exam Delivery",
     description:
       "End-to-end exam delivery solutions for providers, vendors, and test-takers.",
-    href: "/exam-delivery",
+    href: "/exam-delivery/exam-provider",
     icon: Globe,
   },
   {
@@ -72,7 +72,7 @@ const SERVICES = [
     title: "Our Venues",
     description:
       "Noise-free, professional exam environment. Take a 360° virtual tour before you visit.",
-    href: "/our-venues",
+    href: "/our-venues/360-degree-virtual-tour",
     icon: Building2,
   },
   {
