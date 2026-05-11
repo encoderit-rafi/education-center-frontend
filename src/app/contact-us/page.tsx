@@ -41,7 +41,7 @@ export default function ContactUs() {
             <div className="absolute -inset-4 bg-primary/5 rounded-xl blur-3xl opacity-50 transition-opacity group-hover:opacity-100"></div>
             <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
               <Image
-                src="/images/about-us/contact.png"
+                src="/images/about-us/contact-us-01.png"
                 alt="TEPTH Support Center"
                 fill
                 className="object-cover"
@@ -135,7 +135,7 @@ export default function ContactUs() {
               </Link>
 
               {/* Office Hours Card */}
-              <BaseCard className="bg-rose-50/30 border border-rose-100/50 shadow-none  rounded-xl flex flex-row gap-4 p-5 hover:translate-y-0 hover:shadow-none hover:border-rose-100/50">
+              <BaseCard className="bg-rose-50/30 border border-rose-100/50 shadow-none h-fit rounded-xl flex flex-row gap-4 p-5 hover:translate-y-0 hover:shadow-none hover:border-rose-100/50">
                 <BaseCardIcon>
                   <Clock className="w-6 h-6" />
                 </BaseCardIcon>

@@ -125,7 +125,7 @@ export default function ContactForm() {
               type="email"
               placeholder="john@example.com"
               {...register("email")}
-              className="bg-slate-50/50 border-slate-200 focus-visible:ring-primary h-14 rounded-xl px-6 placeholder:text-slate-400 font-medium"
+              className="g-slate-50/50 border-slate-200 focus-visible:ring-primary h-12 rounded-xl px-6 placeholder:text-slate-400 font-medium"
             />
           </FieldContent>
           {errors.email && <FieldError>{errors.email.message}</FieldError>}
@@ -162,47 +162,13 @@ export default function ContactForm() {
 
         <Field data-invalid={!!errors.emiratesCity}>
           <FieldLabel className="text-sm font-medium">
-            Emirates City <span className="text-primary font-bold">*</span>
+            Emirate / City <span className="text-primary font-bold">*</span>
           </FieldLabel>
           <FieldContent>
-            <Controller
-              control={control}
-              name="emiratesCity"
-              render={({ field }) => (
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button
-                      variant="outline"
-                      className="bg-slate-50/50 border-slate-200 focus:ring-4 focus:ring-primary/5 h-14 rounded-xl px-6 text-slate-700 font-medium w-full text-left flex items-center justify-between outline-hidden border transition-all"
-                    >
-                      <span className={!field.value ? "text-slate-400" : ""}>
-                        {field.value || "Select city"}
-                      </span>
-                      <ChevronDown className="w-4 h-4 text-slate-500" />
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent className="w-[var(--radix-dropdown-menu-trigger-width)]">
-                    <DropdownMenuRadioGroup
-                      value={field.value}
-                      onValueChange={field.onChange}
-                    >
-                      {[
-                        "Abu Dhabi",
-                        "Dubai",
-                        "Sharjah",
-                        "Ajman",
-                        "Umm Al Quwain",
-                        "Ras Al Khaimah",
-                        "Fujairah",
-                      ].map((city) => (
-                        <DropdownMenuRadioItem key={city} value={city}>
-                          {city}
-                        </DropdownMenuRadioItem>
-                      ))}
-                    </DropdownMenuRadioGroup>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              )}
+            <Input
+              placeholder="Select City"
+              {...register("emiratesCity")}
+              className="bg-slate-50/50 border-slate-200 focus-visible:ring-primary h-12 rounded-xl px-6 placeholder:text-slate-400 font-medium"
             />
           </FieldContent>
           {errors.emiratesCity && (

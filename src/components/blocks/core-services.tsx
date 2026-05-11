@@ -79,7 +79,7 @@ const SERVICES = [
     title: "Contact Us",
     description:
       "Reach our team via WhatsApp, Telegram, or our contact form. We reply within 24 hours.",
-    href: "/contact",
+    href: "/contact-us",
     icon: MapPin,
   },
 ];
@@ -100,7 +100,7 @@ export default function CoreServices() {
             <Link
               key={i}
               href={service.href}
-              // className="group flex items-start gap-4 rounded-2xl border border-slate-100 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/20 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+            // className="group flex items-start gap-4 rounded-2xl border border-slate-100 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/20 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
             >
               <BaseCard key={i} className="p-6">
                 <div className="flex items-start gap-4">
