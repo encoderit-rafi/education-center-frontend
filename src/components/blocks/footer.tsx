@@ -88,7 +88,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="relative w-full text-white overflow-hidden bg-secondary">
+    <footer className="relative w-full text-white overflow-hidden bg-secondary ">
       {/* Main Content */}
       <div className="max-w-8xl mx-auto px-6 pt-20 pb-10">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-2">
@@ -269,7 +269,7 @@ export default function Footer() {
       {/* Bottom Section */}
       <div className="relative z-10 bg-secondary">
         <WaveDivider className="text-primary" />
-        <div className="bg-primary pb-12">
+        <div className="bg-primary pb-12 -mt-1">
           <div className="container mx-auto px-4 py-8 text-center lg:px-8">
             <p className="text-xs text-gray-100 font-medium">
               Copyright © 2026 by The Exam Preparation & Testing House LLC.
