@@ -64,8 +64,8 @@ export const SearchableDropdown = React.forwardRef<
             aria-expanded={open}
             disabled={disabled}
             className={cn(
-              "flex h-12 w-full items-center justify-between rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm text-slate-700 shadow-none transition-colors outline-none hover:border-slate-300 focus:ring-2 focus:ring-slate-300 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50",
-              open && "ring-2 ring-slate-300 border-slate-300",
+              "flex w-full items-center justify-between whitespace-nowrap rounded-md border border-slate-200 bg-white px-3 py-2 text-base transition-[color,box-shadow,background-color] outline-none focus-visible:border-primary focus-visible:ring-3 focus-visible:ring-ring/30 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 md:text-sm placeholder:text-slate-400 [&>span]:line-clamp-1",
+              open && "border-primary ring-3 ring-ring/30",
               className
             )}
           >
