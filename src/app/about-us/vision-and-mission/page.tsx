@@ -1,9 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { BaseCard, BaseCardDescription, BaseCardIcon, BaseCardTitle } from "@/components/blocks/cards/base-card";
+import { SectionHeader } from "@/components/ui/section-header";
 
 export default function VisionAndMission() {
   return (
@@ -12,31 +11,23 @@ export default function VisionAndMission() {
       <section className="py-16 md:py-24 px-8 max-w-screen-2xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
           {/* Left Content */}
-          <div className="space-y-8 animate-fade-up">
-            {/* Section Badge */}
-            <span className="section-label">
-              OUR VISION & MISSION
-            </span>
-
-
-            {/* Main Heading */}
-            <h2 className="section-title">
-              Shaping the <br />
-              <span className="text-primary">Future of Education</span>
-            </h2>
-
-            {/* Description */}
-            <p className="section-description">
-              TEPTH envisions becoming a top-notch global leader in exam counseling and service provision, empowering students with the tools to excel and contribute to society.
-            </p>
-          </div>
+          <SectionHeader
+            badge="OUR VISION & MISSION"
+            title={
+              <>
+                Shaping the Future of<span className="text-primary"> Education</span>
+              </>
+            }
+            description="Preparing for college or university is more like riding an emotional rollercoaster; therefore, TEPTH keeps on looking for apt ways to make students feel confident, psychologically in control and well-prepared for the challenges ahead."
+            className="space-y-4"
+          />
 
           {/* Right Visual */}
           <div className="relative group">
             <div className="absolute -inset-4 bg-primary/5 rounded-xl blur-3xl opacity-50 transition-opacity group-hover:opacity-100"></div>
             <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
               <Image
-                src="/images/about-us/business-meeting-office.jpg"
+                src="/images/about-us/about-us-1.jpg"
                 alt="Strategic Vision"
                 fill
                 className="object-cover"
@@ -51,31 +42,33 @@ export default function VisionAndMission() {
       <section className="py-32 px-8 max-w-screen-2xl mx-auto border-t border-slate-50">
         <div className="grid lg:grid-cols-2 gap-20 items-start">
           {/* Left Narrative */}
-          <div className="space-y-12">
+          <div className="space-y-8">
             {/* Section Badge */}
-            <span className="section-label">
-              OUR PHILOSOPHY
-            </span>
-            {/* Sub Heading */}
-            <div className="space-y-4">
-              <h2 className="section-title">
-                Dream, Prepare, <br />
-                and <span className="text-primary">Excel.</span>
-              </h2>
-            </div>
+            <SectionHeader
+              badge="OUR PHILOSOPHY"
+              title={
+                <>
+                  Dream, Prepare, and <span className="text-primary">Excel.</span>
+                </>
+              }
+              className="space-y-4"
+            />
 
             {/* Detailed Text */}
             <div className="space-y-8 text-base leading-relaxed">
               <p className="section-description text-primary">
-                The Exam Preparation and Testing House envisions to be a top-notch exam counselling and service provider across the globe. The enterprise was founded with the dream to offer students latest techniques and tools for exam preparation so that they can excel in their respective fields and contribute positively to the well-being of a society.
+                The Exam Preparation & Testing House L.L.C understands just how perplexing the endeavor can be to gain admission in your top-choice college. For this reason, we have crafted ingenious study plans to enhance your skills and score exceptionally well in any test you opt for. We believe that ‘Your Success Is Ours’ so we work earnestly towards the achievement of your educational goals.
               </p>
               <p className="section-description">
-                The inspirational philosophy behind TEPTH is to offer full-fledged testing and exam preparation services to students in United Arab Emirates and the Arab World. We are a team of enthusiasts who strive hard to facilitate students in every possible way for exam testing.
+                We bring into play the right tools and strategies for focused learning and outstanding results for build your career. With us, you will be able to improve your weak areas. Our expert professionals’ feedback will help you to reinforce your strong points and it will prove useful in steering your abilities and energies in the right direction.
+              </p>
+              <p className="section-description">
+                TEPTH works on adaptive approach and offers flexible and convenient prep options that will move with you and will fit in your hectic schedule. We analyze student’s performance and advise a custom-learning plan to ensure good results. Our proven test-taking strategies, e-learning solutions, and instructions from proficient coaches will sweep away any doubts of success. You will be confident on the test day for optimal performance.
               </p>
             </div>
 
             {/* Core Values List */}
-            <div className="space-y-6">
+            <div className="space-y-4">
               <h3 className="text-lg font-black text-slate-900 uppercase tracking-wider">Core Values</h3>
               <div className="grid gap-6">
                 {[
@@ -110,7 +103,7 @@ export default function VisionAndMission() {
           <div className="relative pt-12 lg:pt-0">
             <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
               <Image
-                src="/images/about-us/dream.png"
+                src="/images/about-us/about-us-3.jpg"
                 alt="Education Impact"
                 fill
                 className="object-cover"

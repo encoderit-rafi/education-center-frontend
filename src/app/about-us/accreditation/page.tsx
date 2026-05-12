@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Award, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { SectionHeader } from "@/components/ui/section-header";
 
 export default function Accreditation() {
   return (
@@ -12,23 +13,16 @@ export default function Accreditation() {
       <section className="py-12 md:py-24 px-6 md:px-8 max-w-screen-2xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-10 md:gap-24 items-center">
           {/* Left Content */}
-          <div className="space-y-8 animate-fade-up">
-            {/* Section Badge */}
-
-            <span className="section-label">
-              ACCREDITATION
-            </span>
-            {/* Main Heading */}
-            <h2 className="section-title">
-              Licensed & <br />
-              <span className="text-primary">Regulated Excellence</span>
-            </h2>
-
-            {/* Description */}
-            <p className="section-description">
-              The Exam Preparation & Testing House L.L.C is officially licensed and regulated by leading educational authorities, ensuring institutional integrity.
-            </p>
-          </div>
+          <SectionHeader
+            badge="ACCREDITATION"
+            title={
+              <>
+                Licensed & <span className="text-primary">Regulated Excellence</span>
+              </>
+            }
+            description="The Exam Preparation & Testing House L.L.C is officially licensed and regulated by leading educational authorities, ensuring institutional integrity."
+            className="space-y-8"
+          />
 
           {/* Right Visual */}
           <div className="relative group">

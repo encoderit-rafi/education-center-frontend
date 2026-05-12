@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { SectionHeader } from "@/components/ui/section-header";
 
 export default function WhyChooseUs() {
   return (
@@ -12,24 +13,16 @@ export default function WhyChooseUs() {
       <section className="py-16 md:py-24 px-8 max-w-screen-2xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
           {/* Left Content */}
-          <div className="space-y-8 animate-fade-up">
-            {/* Section Badge */}
-            <span className="section-label">
-              WHY CHOOSE US
-            </span>
-
-
-            {/* Main Heading */}
-            <h1 className="section-title">
-              Invest Less & <br />
-              Gain More <span className="text-primary">From TEPTH.</span>
-            </h1>
-
-            {/* Description */}
-            <p className="section-description">
-              Preparing for college or university is an emotional rollercoaster; TEPTH provides the expert guidance and strategies to make you feel confident and well-prepared.
-            </p>
-          </div>
+          <SectionHeader
+            badge="WHY CHOOSE US"
+            title={
+              <>
+                Invest Less & Gain More <span className="text-primary">From TEPTH.</span>
+              </>
+            }
+            description="Preparing for college or university is an emotional rollercoaster; TEPTH provides the expert guidance and strategies to make you feel confident and well-prepared."
+            className="space-y-4"
+          />
 
           {/* Right Visual */}
           <div className="relative group">
@@ -53,18 +46,15 @@ export default function WhyChooseUs() {
           {/* Left Narrative */}
           <div className="space-y-12">
             {/* Section Badge */}
-            <span className="section-label">
-              OUR PROMISE
-            </span>
-
-
-            {/* Sub Heading */}
-            <div className="space-y-4">
-              <h2 className="section-title">
-                Your Success <br />
-                Is <span className="text-primary">Ours.</span>
-              </h2>
-            </div>
+            <SectionHeader
+              badge="OUR PROMISE"
+              title={
+                <>
+                  Your Success is <span className="text-primary">Ours.</span>
+                </>
+              }
+              className="space-y-8"
+            />
 
             {/* Detailed Text */}
             <div className="space-y-8 text-base leading-relaxed font-medium">

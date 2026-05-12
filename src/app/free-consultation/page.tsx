@@ -1,6 +1,7 @@
 import FreeConsultationForm from "@/app/free-consultation/_components/free-consultation-form";
 import { CheckCircle2, ArrowRightCircle } from "lucide-react";
 import Image from "next/image";
+import { SectionHeader } from "@/components/ui/section-header";
 
 export default function FreeConsultationPage() {
   return (
@@ -11,24 +12,30 @@ export default function FreeConsultationPage() {
           {/* Left: Content Flow */}
           <div className="lg:col-span-5 space-y-16 animate-fade-up">
             {/* Header & Intro */}
-            <div className="space-y-8">
-              <span className="section-label">FREE CONSULTATION</span>
-              <h1 className="section-title">
-                Get the Right Guidance <br />
-                <span className="text-primary">Before You Decide</span>
-              </h1>
-              <p className="section-description text-lg">
-                Whether you are planning to book your exam or prepare for the test, the right advice at the beginning can save you time, money, and effort.
-                At TEPTH, we offer free consultations to help you make the right decision with confidence — no pressure, no obligation.
-              </p>
-            </div>
+            <SectionHeader
+              badge="FREE CONSULTATION"
+              title={
+                <>
+                  Get the Right Guidance <br />
+                  <span className="text-primary">Before You Decide</span>
+                </>
+              }
+              description="Whether you are planning to book your exam or prepare for the test, the right advice at the beginning can save you time, money, and effort. At TEPTH, we offer free consultations to help you make the right decision with confidence — no pressure, no obligation."
+              className="space-y-8"
+              descriptionClassName="text-lg"
+            />
 
             {/* Narrative Sub-heading */}
             <div className="space-y-4 pt-8 border-t border-slate-50">
-              <h2 className="section-title text-3xl">
-                Expert Advice is the <br />
-                <span className="text-primary">foundation of success.</span>
-              </h2>
+              <SectionHeader
+                title={
+                  <>
+                    Expert Advice is the <br />
+                    <span className="text-primary">foundation of success.</span>
+                  </>
+                }
+                titleClassName="text-3xl"
+              />
               <p className="italic text-sm font-bold">— TEPTH Academic Team</p>
             </div>
 
@@ -150,13 +157,20 @@ export default function FreeConsultationPage() {
       {/* ── Section 2: Form ── */}
       <section className="py-24 px-8 max-w-5xl mx-auto">
         <div className="animate-fade-up">
-          <div className="mb-12 text-center space-y-4">
-            <span className="section-label">BOOK A SESSION</span>
-            <h3 className="section-title text-4xl md:text-5xl">Confirm your <br /><span className="text-primary">Free Consultation</span></h3>
-            <p className="text-slate-500 max-w-lg mx-auto text-lg">
-              Please fill out the form below to book your session with our experts.
-            </p>
-          </div>
+          <SectionHeader
+            badge="BOOK A SESSION"
+            title={
+              <>
+                Confirm your <br />
+                <span className="text-primary">Free Consultation</span>
+              </>
+            }
+            description="Please fill out the form below to book your session with our experts."
+            align="center"
+            className="mb-12"
+            titleClassName="text-4xl md:text-5xl"
+            descriptionClassName="text-slate-500 max-w-lg text-lg"
+          />
           <FreeConsultationForm />
         </div>
       </section>
