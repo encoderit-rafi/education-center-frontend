@@ -6,172 +6,195 @@ import { SectionHeader } from "@/components/ui/section-header";
 export default function FreeConsultationPage() {
   return (
     <main className="bg-white min-h-screen">
-      {/* ── Section 1: Comprehensive Information ── */}
-      <section className="py-24 px-8 max-w-screen-2xl mx-auto">
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
-          {/* Left: Content Flow */}
-          <div className="lg:col-span-5 space-y-16 animate-fade-up">
-            {/* Header & Intro */}
-            <SectionHeader
-              badge="FREE CONSULTATION"
-              title={
-                <>
-                  Get the Right Guidance <br />
-                  <span className="text-primary">Before You Decide</span>
-                </>
-              }
-              description="Whether you are planning to book your exam or prepare for the test, the right advice at the beginning can save you time, money, and effort. At TEPTH, we offer free consultations to help you make the right decision with confidence — no pressure, no obligation."
-              className="space-y-8"
-              descriptionClassName="text-lg"
-            />
+      {/* ── Section 1: Hero ── */}
+      <section className="py-16 md:py-24 px-8 max-w-screen-2xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+          {/* Left Content */}
+          <SectionHeader
+            badge="FREE CONSULTATION"
+            title={
+              <>
+                Get the Right Guidance <span className="text-primary">Before You Decide</span>
+              </>
+            }
+            description={
+              <>
+                Whether you are planning to book your exam or prepare for the test, the right advice at the beginning
+                can save you time, money, and effort. <br /><br />
+                At TEPTH, we offer free consultations to help you make the right decision with confidence — no pressure,
+                no obligation.
+              </>
+            }
+            className="space-y-4"
+          />
 
-            {/* Narrative Sub-heading */}
-            <div className="space-y-4 pt-8 border-t border-slate-50">
-              <SectionHeader
-                title={
-                  <>
-                    Expert Advice is the <br />
-                    <span className="text-primary">foundation of success.</span>
-                  </>
-                }
-                titleClassName="text-3xl"
+          {/* Right Visual */}
+          <div className="relative group">
+            <div className="absolute -inset-4 bg-primary/5 rounded-xl blur-3xl opacity-50 transition-opacity group-hover:opacity-100"></div>
+            <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
+              <Image
+                src="/images/about-us/about-us-3.jpg"
+                alt="Expert Consultation Session"
+                fill
+                className="object-cover"
+                priority
               />
-              <p className="italic text-sm font-bold">— TEPTH Academic Team</p>
             </div>
+          </div>
+        </div>
+      </section>
 
-            {/* Detailed Content */}
-            <div className="space-y-16 text-base leading-relaxed">
-              {/* Exam Preparation Courses */}
-              <div className="space-y-8">
-                <div className="space-y-4">
-                  <h3 className="text-3xl font-black text-slate-900">For Exam Preparation Courses</h3>
-                  <div className="w-20 h-1.5 bg-primary rounded-full"></div>
-                </div>
-
-                <div className="space-y-6">
-                  <div>
-                    <h4 className="font-bold text-lg text-primary mb-2">15-Minute Free Consultation with Our Instructor</h4>
-                    <p className="text-slate-600">
-                      If you are unsure about your current level or which course to choose, speak directly with one of our experienced instructors. You can choose:
-                    </p>
-                  </div>
-
-                  <ul className="grid sm:grid-cols-2 gap-4">
-                    {[
-                      "In-person Consultation at our centre.",
-                      "Online Consultation via GoTo Application",
-                      "Phone Consultation via phone call"
-                    ].map((item) => (
-                      <li key={item} className="flex items-start gap-3 p-4 rounded-xl bg-slate-50 border border-slate-100 text-slate-700 font-medium">
-                        <CheckCircle2 className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div className="pt-6 space-y-4">
-                    <p className="font-bold text-slate-900 uppercase text-xs">During your session, we will:</p>
-                    <ul className="grid md:grid-cols-2 gap-6">
-                      {[
-                        "Assess your current English level",
-                        "Understand your target exam, review your score report if you have already taken a test and discuss your score goal.",
-                        "Recommend the right course (IELTS, PTE, TOEFL iBT, CELPIP, CAEL, Skills for English – SELT & OET)",
-                        "Suggest a realistic study plan based on your timeline"
-                      ].map((item) => (
-                        <li key={item} className="flex items-start gap-3">
-                          <ArrowRightCircle className="w-5 h-5 text-primary/40 shrink-0 mt-1" />
-                          <span className="text-sm font-medium">{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-
-                {/* Exam Bookings & Test Information */}
-                <div className="space-y-8 pt-12">
-                  <div className="space-y-4">
-                    <h3 className="text-3xl font-black text-slate-900">For Exam Bookings & Test Information</h3>
-                    <div className="w-20 h-1.5 bg-primary rounded-full"></div>
-                  </div>
-
-                  <div className="space-y-6">
-                    <div>
-                      <h4 className="font-bold text-lg text-primary mb-2">Free Consultation with Our Test Centre Team</h4>
-                      <p className="text-slate-600">
-                        If you are planning to book one of the English Proficiency tests administered at our centre, our staff members are available to guide you. You can consult:
-                      </p>
-                    </div>
-
-                    <ul className="grid sm:grid-cols-2 gap-4">
-                      {[
-                        "In-person Consultation at our centre.",
-                        "Phone Consultation visa phone call"
-                      ].map((item) => (
-                        <li key={item} className="flex items-start gap-3 p-4 rounded-xl bg-slate-50 border border-slate-100 text-slate-700 font-medium">
-                          <CheckCircle2 className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-
-                    <div className="pt-6 space-y-4">
-                      <p className="font-bold text-slate-900 uppercase text-xs">We will help you with:</p>
-                      <ul className="grid md:grid-cols-2 gap-6">
-                        {[
-                          "Understanding test requirements and eligibility",
-                          "Available test dates and booking process",
-                          "ID requirements and test day instructions",
-                          "Any exam registration-related questions"
-                        ].map((item) => (
-                          <li key={item} className="flex items-start gap-3 text-slate-600">
-                            <ArrowRightCircle className="w-5 h-5 text-primary/40 shrink-0 mt-1" />
-                            <span className="text-sm font-medium">{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
+      {/* ── Section 2: Exam Preparation Courses ── */}
+      <section className="py-32 px-8 max-w-screen-2xl mx-auto border-t border-slate-50">
+        <div className="grid lg:grid-cols-2 gap-20 items-start">
+          {/* Left Visual */}
+          <div className="relative pt-12 lg:pt-0">
+            <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
+              <Image
+                src="/images/about-us/about-us-5.jpg"
+                alt="Exam Preparation Consultation"
+                fill
+                className="object-cover"
+              />
             </div>
           </div>
 
-          {/* Right: Sticky Visual */}
-          <div className="lg:col-span-7 lg:sticky lg:top-32 animate-fade-up">
-            <div className="relative group">
-              <div className="absolute -inset-4 bg-primary/5 rounded-xl blur-3xl opacity-50 transition-opacity group-hover:opacity-100"></div>
-              <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
-                <Image
-                  src="/images/free-consutation-1.png"
-                  alt="Expert Consultation Session"
-                  fill
-                  className="object-cover"
-                  priority
-                />
+          {/* Right Content */}
+          <div className="space-y-12">
+            <SectionHeader
+              badge="FOR EXAM PREPARATION COURSES"
+              title={
+                <>
+                  15-Minute Free Consultation <span className="text-primary">with Our Instructor</span>
+                </>
+              }
+              description="If you are unsure about your current level or which course to choose, speak directly with one of our experienced instructors."
+            />
+
+            <div className="space-y-8">
+              <div className="space-y-4">
+                <p className="font-bold text-secondary uppercase tracking-widest text-xs">You can choose:</p>
+                <div className="grid gap-3">
+                  {[
+                    "In-person Consultation at our centre.",
+                    "Online Consultation via GoTo Application",
+                    "Phone Consultation via phone call"
+                  ].map((item) => (
+                    <div key={item} className="flex items-center gap-3 p-4 rounded-xl bg-slate-50 border border-slate-100 text-slate-700 font-medium">
+                      <CheckCircle2 className="w-5 h-5 text-primary shrink-0" />
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <p className="font-bold text-secondary uppercase tracking-widest text-xs">During your session, we will:</p>
+                <ul className="space-y-4">
+                  {[
+                    "Assess your current English level",
+                    "Understand your target exam, review your score report if you have already taken a test and discuss your score goal.",
+                    "Recommend the right course (IELTS, PTE, TOEFL iBT, CELPIP, CAEL, Skills for English – SELT & OET)",
+                    "Suggest a realistic study plan based on your timeline"
+                  ].map((item) => (
+                    <li key={item} className="flex items-start gap-3 group">
+                      <ArrowRightCircle className="w-5 h-5 text-primary/40 shrink-0 mt-1 group-hover:text-primary transition-colors" />
+                      <span className="text-slate-600 font-medium leading-relaxed">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="p-6 bg-primary/5 border border-primary/10 rounded-2xl italic text-primary font-medium">
+                This is a quick but focused session designed to give you clarity before you start.
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── Section 2: Form ── */}
-      <section className="py-24 px-8 max-w-5xl mx-auto">
-        <div className="animate-fade-up">
+      {/* ── Section 3: Exam Bookings & Test Information ── */}
+      <section className="py-32 px-8 max-w-screen-2xl mx-auto border-t border-slate-50 bg-slate-50/30">
+        <div className="grid lg:grid-cols-2 gap-20 items-start">
+          {/* Left Content */}
+          <div className="space-y-12">
+            <SectionHeader
+              badge="FOR EXAM BOOKINGS & TEST INFORMATION"
+              title={
+                <>
+                  Free Consultation with Our <span className="text-primary"> Test Centre Team</span>
+                </>
+              }
+              description="If you are planning to book one of the English Proficiency tests administered at our centre, our staff members are available to guide you."
+            />
+
+            <div className="space-y-8">
+              <div className="space-y-4">
+                <p className="font-bold text-secondary uppercase tracking-widest text-xs">You can consult:</p>
+                <div className="grid gap-3">
+                  {[
+                    "In-person Consultation at our centre.",
+                    "Phone Consultation visa phone call for quick support"
+                  ].map((item) => (
+                    <div key={item} className="flex items-center gap-3 p-4 rounded-xl bg-white border border-slate-100 text-slate-700 font-medium shadow-sm">
+                      <CheckCircle2 className="w-5 h-5 text-primary shrink-0" />
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <p className="font-bold text-secondary uppercase tracking-widest text-xs">We will help you with:</p>
+                <ul className="space-y-4">
+                  {[
+                    "Understanding test requirements and eligibility",
+                    "Available test dates and booking process",
+                    "ID requirements and test day instructions",
+                    "Any exam registration-related questions"
+                  ].map((item) => (
+                    <li key={item} className="flex items-start gap-3 group">
+                      <ArrowRightCircle className="w-5 h-5 text-primary/40 shrink-0 mt-1 group-hover:text-primary transition-colors" />
+                      <span className="text-slate-600 font-medium leading-relaxed">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Visual */}
+          <div className="relative group">
+            <div className="absolute -inset-4 bg-primary/5 rounded-xl blur-3xl opacity-50 transition-opacity group-hover:opacity-100"></div>
+            <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
+              <Image
+                src="/images/about-us/about-us-4.jpg"
+                alt="Test Centre Support"
+                fill
+                className="object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Section 4: Form ── */}
+      <section className="py-24 px-8 max-w-screen-2xl mx-auto border-t border-slate-50 bg-white">
+        <div className="max-w-4xl mx-auto">
           <SectionHeader
             badge="BOOK A SESSION"
             title={
               <>
-                Confirm your <br />
-                <span className="text-primary">Free Consultation</span>
+                Confirm your <span className="text-primary">Free Consultation</span>
               </>
             }
             description="Please fill out the form below to book your session with our experts."
             align="center"
             className="mb-12"
-            titleClassName="text-4xl md:text-5xl"
-            descriptionClassName="text-slate-500 max-w-lg text-lg"
           />
-          <FreeConsultationForm />
+          <div className="p-8 md:p-12">
+            <FreeConsultationForm />
+          </div>
         </div>
       </section>
     </main>
