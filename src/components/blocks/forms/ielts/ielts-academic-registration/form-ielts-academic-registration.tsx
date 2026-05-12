@@ -994,7 +994,7 @@ export default function FormIELTSAcademicRegistration() {
                       {Object.values(WORKSHOPS_DATA).map((workshop) => (
                         <div
                           key={workshop.id}
-                          className="flex items-center gap-3 p-4 border border-slate-100 rounded-xl hover:bg-slate-50 transition-colors"
+                          className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all cursor-pointer bg-white"
                         >
                           <Checkbox
                             id={workshop.id}
@@ -1010,7 +1010,7 @@ export default function FormIELTSAcademicRegistration() {
                           <div className="flex flex-col">
                             <Label
                               htmlFor={workshop.id}
-                              className="font-bold cursor-pointer text-sm"
+                              className="font-medium cursor-pointer text-sm"
                             >
                               {workshop.name}
                             </Label>
@@ -1031,7 +1031,7 @@ export default function FormIELTSAcademicRegistration() {
                       {Object.values(COURSES_DATA).map((course) => (
                         <div
                           key={course.id}
-                          className="flex items-center gap-3 p-4 border border-slate-100 rounded-xl hover:bg-slate-50 transition-colors"
+                          className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all cursor-pointer bg-white"
                         >
                           <Checkbox
                             id={course.id}
@@ -1047,7 +1047,7 @@ export default function FormIELTSAcademicRegistration() {
                           <div className="flex flex-col">
                             <Label
                               htmlFor={course.id}
-                              className="font-bold cursor-pointer text-sm"
+                              className="font-medium cursor-pointer text-sm"
                             >
                               {course.name}
                             </Label>
