@@ -106,7 +106,7 @@ export default function TestTakersPage() {
                 <div>
                   <h3 className="text-base font-black text-gray-900 uppercase tracking-wide mb-2">Inform Your Home Institution</h3>
                   <p className="text-sm text-gray-500 leading-relaxed font-medium">Provide them our contact details so they can send us your exam package. If no return envelope is provided, we can arrange a courier (extra charge).</p>
-                  <div className="mt-3 text-xs text-gray-400 italic">"We are not responsible for the package after courier collection."</div>
+                  <div className="mt-3 text-xs text-gray-400 italic">&quot;We are not responsible for the package after courier collection.&quot;</div>
                 </div>
               </div>
             </div>

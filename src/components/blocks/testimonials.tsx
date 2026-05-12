@@ -128,7 +128,7 @@ function TestimonialCard({
       </div>
 
       <p className="text-gray-800 text-lg font-medium leading-relaxed line-clamp-4">
-        "{t.quote}"
+        &quot;{t.quote}&quot;
       </p>
 
       <div className="flex items-center gap-4 mt-2">
@@ -177,7 +177,7 @@ export default function Testimonials() {
     <section className="py-32 bg-[#F8F9FA] overflow-hidden border-y border-gray-100">
       <div className="max-w-7xl mx-auto text-center mb-20 px-6">
         <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6 uppercase tracking-tight">
-          Trusted by Tomorrow's{" "}
+          Trusted by Tomorrow&apos;s{" "}
           <span className="text-primary italic">Leaders</span>
         </h2>
         <p className="text-gray-500 text-base max-w-2xl mx-auto font-medium">

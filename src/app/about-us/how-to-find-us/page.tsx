@@ -2,8 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Car, CircleParking, ExternalLink, Info } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Car, ExternalLink } from "lucide-react";
 import { SectionHeader } from "@/components/ui/section-header";
 
 export default function HowToFindUs() {
@@ -268,7 +267,7 @@ export default function HowToFindUs() {
                     </p>
                     <div className="bg-white/10 p-5 rounded-2xl border border-white/10 backdrop-blur-sm">
                       <p className="text-white font-medium leading-relaxed italic">
-                        "This guide is aimed at helping you reach The Exam Preparation & Testing House L.L.C in Sharjah with ease."
+                        &quot;This guide is aimed at helping you reach The Exam Preparation & Testing House L.L.C in Sharjah with ease.&quot;
                       </p>
                     </div>
                   </div>

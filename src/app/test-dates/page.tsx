@@ -228,7 +228,7 @@ export default function TestDatesPage() {
             <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-12 text-center md:text-left">
               <div>
                 <h3 className="text-3xl font-headline font-black mb-4 tracking-tight leading-none">
-                  Can't find your <br />
+                  Can&apos;t find your <br />
                   preferred date?
                 </h3>
                 <p className="text-white/60 font-light text-lg">

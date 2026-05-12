@@ -98,7 +98,7 @@ export default function FreeConsultationPage() {
                     "Suggest a realistic study plan based on your timeline"
                   ].map((item) => (
                     <li key={item} className="flex items-start gap-3 group">
-                      <ArrowRightCircle className="w-5 h-5 text-primary/40 shrink-0 mt-1 group-hover:text-primary transition-colors" />
+                      <CheckCircle2 className="w-5 h-5 text-primary/40 shrink-0 mt-1 group-hover:text-primary transition-colors" />
                       <span className="text-slate-600 font-medium leading-relaxed">{item}</span>
                     </li>
                   ))}

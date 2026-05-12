@@ -429,7 +429,7 @@ export default function FormIELTSAcademicRegistration() {
                                   htmlFor="noSurname"
                                   className="text-xs font-bold text-gray-500 cursor-pointer"
                                 >
-                                  I don't have a surname / family name
+                                  I don&apos;t have a surname / family name
                                 </FormLabel>
                               </div>
                             </FormItem>

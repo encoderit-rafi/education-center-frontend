@@ -75,13 +75,13 @@ export default function TermsAndConditionsPage() {
                                         This website is owned and operated by <strong>The Exam Preparation & Testing House FZCO</strong>, a company licensed by Dubai Silicon Oasis Authority whose registered office is at Suite 703, Apricot Tower, Dubai Silicon Oasis, Dubai, United Arab Emirates.
                                     </p>
                                     <p>
-                                        Our Terms and Conditions apply to your access to and use of our Website "https://www.tepth.net/". Please read these Terms and Conditions carefully.
+                                        Our Terms and Conditions apply to your access to and use of our Website &quot;https://www.tepth.net/&quot;. Please read these Terms and Conditions carefully.
                                     </p>
                                     <p>
                                         By continuing to access and use our website, you are deemed to have understood and agreed to all the terms & conditions contained here in. If you do not agree to these Terms & Conditions, you may not use this website.
                                     </p>
                                     <p>
-                                        For the purposes of these Terms and Conditions, "this Website" includes means all the webpages related to the tepth.net website excluding any links to third party sites.
+                                        For the purposes of these Terms and Conditions, &quot;this Website&quot; includes means all the webpages related to the tepth.net website excluding any links to third party sites.
                                     </p>
                                 </section>
 

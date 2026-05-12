@@ -181,7 +181,7 @@ export default function ExamWorkshopsIELTS() {
               {ieltsWorkshop.title}
             </h1>
             <p className="text-2xl font-bold text-slate-800 mb-6 italic">
-              "{ieltsWorkshop.tagline}"
+              &quot;{ieltsWorkshop.tagline}&quot;
             </p>
             <p className="text-lg text-slate-600 leading-relaxed mb-8">
               {ieltsWorkshop.description}

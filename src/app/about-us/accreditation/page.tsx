@@ -1,9 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
-import { ArrowRight, Award, ShieldCheck } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { SectionHeader } from "@/components/ui/section-header";
 
 export default function Accreditation() {

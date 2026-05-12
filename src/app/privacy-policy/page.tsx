@@ -75,7 +75,7 @@ export default function PrivacyPolicyPage() {
                                 <section id="statement" className="scroll-mt-24 mb-16">
                                     <h2 className="text-4xl mb-8">Statement</h2>
                                     <div className="bg-gray-50 p-8 border-l-4 border-[#A11D1D] mb-8 italic">
-                                        "TEPTH has created this privacy policy with the aim of demonstrating our concern and commitment towards maintaining customer secrecy."
+                                        &quot;TEPTH has created this privacy policy with the aim of demonstrating our concern and commitment towards maintaining customer secrecy.&quot;
                                     </div>
                                     <p>
                                         Our privacy policy holds great importance for us. It communicates our information collection process and dissemination practices for gathered information from our visitors and customers.

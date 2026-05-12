@@ -60,7 +60,7 @@ export default function InstitutionsPage() {
                             ADVANCED <span className="text-[#A11D1D]">PROCTORING</span>
                         </h1>
                         <p className="text-gray-500 text-base md:text-lg font-medium max-w-2xl leading-relaxed">
-                            Secure your academic integrity with TEPTH's state-of-the-art surveillance and proctoring ecosystem. Designed for the most rigorous certification examinations.
+                            Secure your academic integrity with TEPTH&apos;s state-of-the-art surveillance and proctoring ecosystem. Designed for the most rigorous certification examinations.
                         </p>
                     </div>
                 </div>

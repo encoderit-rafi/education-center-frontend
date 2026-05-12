@@ -181,7 +181,7 @@ export default function ExamWorkshopsCELPIP() {
               {celpipWorkshop.title}
             </h1>
             <p className="text-2xl font-bold text-slate-800 mb-6 italic">
-              "{celpipWorkshop.tagline}"
+              &quot;{celpipWorkshop.tagline}&quot;
             </p>
             <p className="text-lg text-slate-600 leading-relaxed mb-8">
               {celpipWorkshop.description}

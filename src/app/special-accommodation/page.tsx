@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import SpecialAccommodationForm from "@/components/blocks/special-accommodation-form";
-import { BadgeCheck, Timer, ArrowRight, Eye, DoorOpen, Users } from "lucide-react";
+import { Timer, ArrowRight, Eye, DoorOpen, Users } from "lucide-react";
 import { SectionHeader } from "@/components/ui/section-header";
 
 export default function SpecialAccommodation() {

@@ -29,7 +29,7 @@ export default function DisabilityPolicyPage() {
                         </h1>
                         <h2 className="text-sm font-black uppercase tracking-[0.2em] text-[#A11D1D] mb-8">Our Commitment</h2>
                         <p className="text-2xl md:text-3xl font-black text-gray-900 leading-tight mb-8">
-                            "TEPTH aims to create an environment that enables disabled faculty staff and students to realize their individual potential."
+                            &quot;TEPTH aims to create an environment that enables disabled faculty staff and students to realize their individual potential.&quot;
                         </p>
                         <div className="w-20 h-1 bg-[#A11D1D] mx-auto" />
                     </div>
