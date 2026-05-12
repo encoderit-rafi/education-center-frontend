@@ -50,6 +50,7 @@ import BaseNoteBox from "@/components/base-note-box";
 import {
   Field,
   FieldContent,
+  FieldDescription,
   FieldError,
   FieldLabel,
 } from "@/components/ui/field";
@@ -59,6 +60,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { format } from "date-fns";
+import { DatePicker } from "@/components/blocks/date-picker";
 const NOTICES: string[] = [
   "For your convenience, The Exam Preparation & Testing House FZCO offers the CD-IELTS test registration service. We hold no responsibility regarding any issues related to test results or scoring and we have no control or involvement in the test itself, the scoring of the test or the release of the results. This service is optional and candidates can book the exam directly on the exam provider’s website and select our venue and take the test.",
 
@@ -165,7 +167,7 @@ export default function FormIELTSAcademicRegistration() {
       <div className="max-w-4xl mx-auto base-px ">
         <div className="flex flex-col mb-12 text-center md:text-left space-y-4">
           <h2 className="text-3xl md:text-5xl font-black text-secondary tracking-tight">
-            IELTS Academic <span className="text-primary">Registration</span>
+            IELTS Academic <span className="text-primary">Exam Booking</span>
           </h2>
           <BaseNoteBox
             title="To continue with this booking you will need:"
@@ -175,256 +177,194 @@ export default function FormIELTSAcademicRegistration() {
 
         {/* Main Form Container */}
         {!isSubmitted ? (
-          <Form {...form}>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <Stepper step={1}>Personal details</Stepper>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <Field>
-                  <FieldLabel required>Test Date</FieldLabel>
-                  <FieldContent>
-                    <Popover>
-                      <PopoverTrigger
-                        render={
-                          <Button
-                            variant="ghost"
-                            className={cn(
-                              "w-full justify-start text-left font-normal rounded-md border border-slate-200  px-3 py-2 text-sm transition-all outline-none  focus-visible:border-primary focus-visible:ring-3 focus-visible:ring-ring/30 shadow-none hover:shadow-none hover:bg-transparent",
-                            )}
-                          >
-                            <CalendarIcon className="mr-2 h-4 w-4 text-slate-400" />
-                            {formData.examDate ? (
-                              format(formData.examDate, "PPP")
-                            ) : (
-                              <span>Select test date</span>
-                            )}
-                          </Button>
-                        }
-                      />
-                      <PopoverContent className="w-auto p-0" align="start">
-                        <Calendar
-                          mode="single"
-                          selected={formData.examDate}
-                          onSelect={(date) => {
-                            setValue("examDate", date as Date);
-                          }}
-                          disabled={(date) =>
-                            date <= new Date() || date < new Date("1900-01-01")
-                          }
-                        />
-                      </PopoverContent>
-                    </Popover>
-                    <FieldError errors={[errors.examDate]} />
-                  </FieldContent>
-                </Field>
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+            <Stepper step={1}>Personal details</Stepper>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <Field>
+                <FieldLabel required>Test Date</FieldLabel>
+                <FieldContent>
+                  <DatePicker
+                    value={formData.examDate}
+                    onChange={(date) => setValue("examDate", date as Date)}
+                    disabled={(date) => date <= new Date()}
+                    placeholder="Select test date"
+                  />
+                  <FieldError errors={[errors.examDate]} />
+                </FieldContent>
+              </Field>
 
-                <Field>
-                  <FieldLabel>Who are you booking the test for?</FieldLabel>
-                  <FieldContent className="mt-4">
-                    <RadioGroup
-                      onValueChange={(val) => setValue("bookingFor", val)}
-                      value={formData.bookingFor}
-                      className="flex items-center gap-4 "
-                    >
-                      <div className="flex items-center gap-2">
-                        <RadioGroupItem
-                          id={"myself"}
-                          value={"myself"}
-                          className={"border-[#A11D1D] text-[#A11D1D]"}
-                        />
-                        <Label htmlFor={"myself"}>Myself</Label>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <RadioGroupItem
-                          id={"child"}
-                          value={"child"}
-                          className={"border-[#A11D1D] text-[#A11D1D]"}
-                        />
-                        <Label htmlFor={"child"}>My Child</Label>
-                      </div>
-                    </RadioGroup>
-                    <FieldError errors={[errors.bookingFor]} />
-                  </FieldContent>
-                </Field>
+              <Field>
+                <FieldLabel required>
+                  First / given names (including middle name)
+                </FieldLabel>
+                <FieldContent>
+                  <Input
+                    placeholder="As per passport"
+                    {...control.register("givenNames")}
+                  />
+                  <FieldError errors={[errors.givenNames]} />
+                  <FieldDescription>
+                    This must match the name(s) on your identification document.
+                  </FieldDescription>
+                </FieldContent>
+              </Field>
 
+              <div className="space-y-4">
                 <Field>
-                  <FieldLabel required>First / given names</FieldLabel>
+                  <FieldLabel>Surname / family name</FieldLabel>
                   <FieldContent>
                     <Input
                       placeholder="As per passport"
-                      {...control.register("givenNames")}
+                      {...control.register("surnames")}
+                      disabled={formData.noSurname}
                     />
-                    <FieldError errors={[errors.givenNames]} />
-                  </FieldContent>
-                </Field>
-
-                <div className="space-y-4">
-                  <Field>
-                    <FieldLabel required>Surname / family name</FieldLabel>
-                    <FieldContent>
-                      <Input
-                        placeholder="As per passport"
-                        {...control.register("surnames")}
-                        disabled={formData.noSurname}
-                      />
-                      <FieldError errors={[errors.surnames]} />
-                    </FieldContent>
-                  </Field>
-                  <div className="flex items-center gap-2">
-                    <Checkbox
-                      id="noSurname"
-                      className={"border border-primary"}
-                      checked={formData.noSurname}
-                      onCheckedChange={(val) =>
-                        setValue("noSurname", val as boolean)
-                      }
-                    />
-                    <Label htmlFor="noSurname" className="text-sm">
-                      I don't have a surname / family name
-                    </Label>
-                  </div>
-                </div>
-
-                <Field>
-                  <FieldLabel required>Date of birth</FieldLabel>
-                  <FieldContent>
-                    <Popover>
-                      <PopoverTrigger
-                        render={
-                          <Button
-                            variant="ghost"
-                            className={cn(
-                              "w-full justify-start text-left font-normal rounded-md border border-slate-200  px-3 py-2 text-sm transition-all outline-none  focus-visible:border-primary focus-visible:ring-3 focus-visible:ring-ring/30 shadow-none hover:shadow-none hover:bg-transparent",
-                            )}
-                          >
-                            <CalendarIcon className="mr-2 h-4 w-4 text-slate-400" />
-                            {formData.dateOfBirth ? (
-                              format(formData.dateOfBirth, "PPP")
-                            ) : (
-                              <span>Select your date of birth</span>
-                            )}
-                          </Button>
+                    <FieldError errors={[errors.surnames]} />
+                    <FieldDescription className="flex items-center gap-2">
+                      <Checkbox
+                        id="noSurname"
+                        // className={"border border-primary"}
+                        checked={formData.noSurname}
+                        onCheckedChange={(val) =>
+                          setValue("noSurname", val as boolean)
                         }
                       />
-                      <PopoverContent className="w-auto p-0" align="start">
-                        <Calendar
-                          mode="single"
-                          selected={formData.dateOfBirth}
-                          onSelect={(date) => {
-                            setValue("dateOfBirth", date as Date);
-                          }}
-                          disabled={(date) =>
-                            date <= new Date() || date < new Date("1900-01-01")
-                          }
-                        />
-                      </PopoverContent>
-                    </Popover>
-                    <FieldError errors={[errors.dateOfBirth]} />
+                      <Label htmlFor="noSurname" className="text-xs font-light">
+                        I don't have a surname / family name
+                      </Label>
+                    </FieldDescription>
                   </FieldContent>
                 </Field>
+              </div>
 
-                <Field>
-                  <FieldLabel required>Sex</FieldLabel>
-                  <FieldContent className="mt-4">
-                    <RadioGroup
-                      onValueChange={(val) => setValue("sex", val)}
-                      value={formData.sex}
-                      className="flex items-center gap-4 "
-                    >
-                      <div className="flex items-center gap-2">
-                        <RadioGroupItem
-                          id={"Male"}
-                          value={"Male"}
-                          className={"border-[#A11D1D] text-[#A11D1D]"}
-                        />
-                        <Label htmlFor={"Male"}>Male</Label>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <RadioGroupItem
-                          id={"Female"}
-                          value={"Female"}
-                          className={"border-[#A11D1D] text-[#A11D1D]"}
-                        />
-                        <Label htmlFor={"Female"}>Female</Label>
-                      </div>
-                    </RadioGroup>
-                    <FieldError errors={[errors.sex]} />
-                  </FieldContent>
-                </Field>
+              <Field>
+                <FieldLabel required>Date of birth</FieldLabel>
+                <FieldContent>
+                  <DatePicker
+                    value={formData.dateOfBirth}
+                    onChange={(date) => setValue("dateOfBirth", date as Date)}
+                    disabled={(date) =>
+                      date <= new Date() || date < new Date("1900-01-01")
+                    }
+                    placeholder="Select your date of birth"
+                  />
+                  <FieldError errors={[errors.dateOfBirth]} />
+                </FieldContent>
+              </Field>
 
-                {/* <div className="h-px bg-slate-100"></div> */}
-                <Field>
-                  <FieldLabel required>Email address</FieldLabel>
-                  <FieldContent>
-                    <Input
-                      placeholder="example@email.com"
-                      {...control.register("email")}
-                    />
-                    <FieldError errors={[errors.email]} />
-                  </FieldContent>
-                </Field>
+              <Field>
+                <FieldLabel required>Sex</FieldLabel>
+                <FieldContent className="mt-4">
+                  <RadioGroup
+                    onValueChange={(val) => setValue("sex", val)}
+                    value={formData.sex}
+                    className="flex items-center gap-4 "
+                  >
+                    <div className="flex items-center gap-2">
+                      <RadioGroupItem id={"Male"} value={"Male"} />
+                      <Label htmlFor={"Male"}>Male</Label>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <RadioGroupItem id={"Female"} value={"Female"} />
+                      <Label htmlFor={"Female"}>Female</Label>
+                    </div>
+                  </RadioGroup>
+                  <FieldError errors={[errors.sex]} />
+                </FieldContent>
+              </Field>
 
-                <Field>
-                  <FieldLabel required>Confirm email address</FieldLabel>
-                  <FieldContent>
-                    <Input
-                      placeholder="example@email.com"
-                      {...control.register("confirmEmail")}
-                    />
-                    <FieldError errors={[errors.confirmEmail]} />
-                  </FieldContent>
-                </Field>
-
-                <Field>
-                  <FieldLabel required>Mobile number</FieldLabel>
-                  <FieldContent>
-                    <PhoneInput
-                      value={formData.mobileNumber}
-                      onChange={(val) => setValue("mobileNumber", val)}
-                      defaultCountry="AE"
-                    />
-                    <FieldError errors={[errors.mobileNumber]} />
-                  </FieldContent>
-                </Field>
-
-                <Field>
-                  <FieldLabel>SMS Consent</FieldLabel>
-                  <FieldContent className="flex items-start gap-2">
+              <Field>
+                <FieldLabel required>Mobile number</FieldLabel>
+                <FieldContent>
+                  <PhoneInput
+                    value={formData.mobileNumber}
+                    onChange={(val) => setValue("mobileNumber", val)}
+                    defaultCountry="AE"
+                  />
+                  <FieldError errors={[errors.mobileNumber]} />
+                  <FieldDescription className="flex items-center gap-2">
                     <Checkbox
+                      id="smsConsent"
+                      // className={"border border-primary"}
                       checked={formData.smsConsent}
                       onCheckedChange={(val) =>
                         setValue("smsConsent", val as boolean)
                       }
-                      className={"border border-primary mt-1"}
                     />
-                    <Label className="text-xs text-gray-500">
+                    <Label htmlFor="smsConsent" className="text-xs font-light">
                       I agree to receive notifications via SMS, WhatsApp, etc.
                     </Label>
-                    <FieldError errors={[errors.smsConsent]} />
-                  </FieldContent>
-                </Field>
+                  </FieldDescription>
+                </FieldContent>
+              </Field>
+              <Field>
+                <FieldLabel required>Email address</FieldLabel>
+                <FieldContent>
+                  <Input
+                    placeholder="example@email.com"
+                    {...control.register("email")}
+                  />
+                  <FieldError errors={[errors.email]} />
+                </FieldContent>
+              </Field>
 
-                <Field>
-                  <FieldLabel required>Country of residence</FieldLabel>
-                  <FieldContent>
-                    <CountryDropdown
-                      placeholder="Search country..."
-                      value={formData.residenceCountry}
-                      onChange={(country) =>
-                        setValue("residenceCountry", country.name)
-                      }
-                    />
-                    <FieldError errors={[errors.residenceCountry]} />
-                  </FieldContent>
-                </Field>
-                <Field>
-                  <FieldLabel required>Town / City</FieldLabel>
-                  <FieldContent>
-                    <Input {...control.register("city")} />
-                    <FieldError errors={[errors.city]} />
-                  </FieldContent>
-                </Field>
-                <Field>
-                  <FieldLabel required>Postal Address Line 1</FieldLabel>
+              <Field>
+                <FieldLabel required>Confirm email address</FieldLabel>
+                <FieldContent>
+                  <Input
+                    placeholder="example@email.com"
+                    {...control.register("confirmEmail")}
+                  />
+                  <FieldError errors={[errors.confirmEmail]} />
+                </FieldContent>
+              </Field>
+
+              {/* <Field>
+                <FieldLabel>SMS Consent</FieldLabel>
+                <FieldContent className="flex items-start gap-2">
+                  <Checkbox
+                    checked={formData.smsConsent}
+                    onCheckedChange={(val) =>
+                      setValue("smsConsent", val as boolean)
+                    }
+                    className={"border border-primary mt-1"}
+                  />
+                  <Label className="text-xs text-gray-500">
+                    I agree to receive notifications via SMS, WhatsApp, etc.
+                  </Label>
+                  <FieldError errors={[errors.smsConsent]} />
+                </FieldContent>
+              </Field> */}
+
+              <Field>
+                <FieldLabel required>Country of residence</FieldLabel>
+                <FieldContent>
+                  <CountryDropdown
+                    placeholder="Search country..."
+                    value={formData.residenceCountry}
+                    onChange={(country) =>
+                      setValue("residenceCountry", country.name)
+                    }
+                  />
+                  <FieldError errors={[errors.residenceCountry]} />
+                </FieldContent>
+              </Field>
+              <Field>
+                <FieldLabel required>Emirates/ City</FieldLabel>
+                <FieldContent>
+                  <Input {...control.register("city")} />
+                  <FieldError errors={[errors.city]} />
+                </FieldContent>
+              </Field>
+              <Field>
+                <FieldLabel required>Postcode / ZIP</FieldLabel>
+                <FieldContent>
+                  <Input {...control.register("postcode")} />
+                  <FieldError errors={[errors.postcode]} />
+                </FieldContent>
+              </Field>
+              <Field className="col-span-3">
+                <FieldLabel required>Postal Address Line 1</FieldLabel>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   <FieldContent>
                     <Input
                       placeholder="Address Line 1"
@@ -432,270 +372,202 @@ export default function FormIELTSAcademicRegistration() {
                     />
                     <FieldError errors={[errors.postalAddress1]} />
                   </FieldContent>
-                </Field>
-
-                <Field>
-                  <FieldLabel>Postal Address Line 2</FieldLabel>
                   <FieldContent>
                     <Input
                       placeholder="Address Line 2"
                       {...control.register("postalAddress2")}
                     />
                   </FieldContent>
-                </Field>
-
-                <Field>
-                  <FieldLabel>Postal Address Line 3</FieldLabel>
                   <FieldContent>
                     <Input
                       placeholder="Address Line 3"
                       {...control.register("postalAddress3")}
                     />
                   </FieldContent>
-                </Field>
+                </div>
+              </Field>
 
-                <Field>
-                  <FieldLabel required>Postcode / ZIP</FieldLabel>
-                  <FieldContent>
-                    <Input {...control.register("postcode")} />
-                    <FieldError errors={[errors.postcode]} />
-                  </FieldContent>
-                </Field>
-
-                <div className="h-px bg-slate-100"></div>
-
-                {/* Marketing Preferences */}
-                <Field className="md:col-span-2 lg:col-span-3">
-                  <FieldLabel>Marketing preferences</FieldLabel>
-                  <FieldContent className="mt-4">
-                    <RadioGroup
-                      onValueChange={(val) =>
-                        setValue("marketingPreference", val)
-                      }
-                      value={formData.marketingPreference}
-                      className="space-y-4"
-                    >
-                      {[
-                        {
-                          id: "all",
-                          label:
-                            "I am happy to receive updates about products, services and events organised by British Council.",
-                        },
-                        {
-                          id: "some",
-                          label:
-                            "I am happy to receive information from British Council and selected third parties.",
-                        },
-                        {
-                          id: "none",
-                          label: "Please do not send me any marketing updates.",
-                        },
-                      ].map((opt) => (
-                        <div key={opt.id} className="flex items-center gap-2">
-                          <RadioGroupItem
-                            value={opt.id}
-                            id={`mkt-${opt.id}`}
-                            className={"border-[#A11D1D] text-[#A11D1D]"}
-                          />
-                          <Label
-                            htmlFor={`mkt-${opt.id}`}
-                            className="text-sm cursor-pointer"
-                          >
-                            {opt.label}
-                          </Label>
-                        </div>
-                      ))}
-                    </RadioGroup>
-                    <FieldError errors={[errors.marketingPreference]} />
-                  </FieldContent>
-                </Field>
-
-                <Field>
-                  <FieldLabel required>Identification type</FieldLabel>
-                  <FieldContent className="mt-4">
-                    <RadioGroup
-                      onValueChange={(val) => setValue("idType", val)}
-                      value={formData.idType}
-                      className="flex gap-4"
-                    >
-                      <div className="flex items-center gap-2">
-                        <RadioGroupItem
-                          value="passport"
-                          id="passport"
-                          className={"border-[#A11D1D] text-[#A11D1D]"}
-                        />
-                        <Label htmlFor="passport">Passport</Label>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <RadioGroupItem
-                          value="emirates_id"
-                          id="emirates_id"
-                          className={"border-[#A11D1D] text-[#A11D1D]"}
-                        />
-                        <Label htmlFor="emirates_id">Emirates ID</Label>
-                      </div>
-                    </RadioGroup>
-                    <FieldError errors={[errors.idType]} />
-                  </FieldContent>
-                </Field>
-
-                <Field>
-                  <FieldLabel required>
-                    {formData.idType === "emirates_id"
-                      ? "ID number"
-                      : "Passport number"}
-                  </FieldLabel>
-                  <FieldContent>
-                    <Input {...control.register("idNumber")} />
-                    <FieldError errors={[errors.idNumber]} />
-                  </FieldContent>
-                </Field>
-
-                <Field>
-                  <FieldLabel required>
-                    {formData.idType === "emirates_id"
-                      ? "ID expiry date"
-                      : "Passport expiry date"}
-                  </FieldLabel>
-                  <FieldContent>
-                    <Popover>
-                      <PopoverTrigger
-                        render={
-                          <Button
-                            variant="ghost"
-                            className={cn(
-                              "w-full justify-start text-left font-normal rounded-md border border-slate-200 px-3 py-2 text-sm",
-                            )}
-                          >
-                            <CalendarIcon className="mr-2 h-4 w-4" />
-                            {formData.idExpiryDate ? (
-                              format(formData.idExpiryDate, "PPP")
-                            ) : (
-                              <span>Select date</span>
-                            )}
-                          </Button>
-                        }
+              <Field>
+                <FieldLabel required>Identification type</FieldLabel>
+                <FieldContent className="mt-4">
+                  <RadioGroup
+                    onValueChange={(val) => setValue("idType", val)}
+                    value={formData.idType}
+                    className="flex gap-4"
+                  >
+                    <div className="flex items-center gap-2">
+                      <RadioGroupItem
+                        value="passport"
+                        id="passport"
+                        className={"border-[#A11D1D] text-[#A11D1D]"}
                       />
-                      <PopoverContent className="w-auto p-0">
-                        <Calendar
-                          mode="single"
-                          selected={formData.idExpiryDate}
-                          onSelect={(date) =>
-                            setValue("idExpiryDate", date as Date)
-                          }
-                          disabled={(date) => date <= new Date()}
-                        />
-                      </PopoverContent>
-                    </Popover>
-                    <FieldError errors={[errors.idExpiryDate]} />
-                  </FieldContent>
-                </Field>
+                      <Label htmlFor="passport">Passport</Label>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <RadioGroupItem
+                        value="emirates_id"
+                        id="emirates_id"
+                        className={"border-[#A11D1D] text-[#A11D1D]"}
+                      />
+                      <Label htmlFor="emirates_id">Emirates ID</Label>
+                    </div>
+                  </RadioGroup>
+                  <FieldError errors={[errors.idType]} />
+                </FieldContent>
+              </Field>
 
-                <Field>
-                  <FieldLabel required>Issuing authority</FieldLabel>
-                  <FieldContent>
-                    <Input {...control.register("issuingAuthority")} />
-                    <FieldError errors={[errors.issuingAuthority]} />
-                  </FieldContent>
-                </Field>
+              <Field>
+                <FieldLabel required>
+                  {formData.idType === "emirates_id"
+                    ? "ID number"
+                    : "Passport number"}
+                </FieldLabel>
+                <FieldContent>
+                  <Input {...control.register("idNumber")} />
+                  <FieldError errors={[errors.idNumber]} />
+                </FieldContent>
+              </Field>
 
-                <Field>
-                  <FieldLabel required>Country of nationality</FieldLabel>
-                  <FieldContent>
-                    <CountryDropdown
-                      placeholder="Search country..."
-                      value={formData.nationality}
-                      onChange={(country) =>
-                        setValue("nationality", country.name)
+              <Field>
+                <FieldLabel required>
+                  {formData.idType === "emirates_id"
+                    ? "ID expiry date"
+                    : "Passport expiry date"}
+                </FieldLabel>
+                <FieldContent>
+                  <Popover>
+                    <PopoverTrigger
+                      render={
+                        <Button
+                          variant="ghost"
+                          className={cn(
+                            "w-full justify-start text-left font-normal rounded-md border border-slate-200 px-3 py-2 text-sm",
+                          )}
+                        >
+                          <CalendarIcon className="mr-2 h-4 w-4" />
+                          {formData.idExpiryDate ? (
+                            format(formData.idExpiryDate, "PPP")
+                          ) : (
+                            <span>Select date</span>
+                          )}
+                        </Button>
                       }
                     />
-                    <FieldError errors={[errors.nationality]} />
-                  </FieldContent>
-                </Field>
-                <Field className="md:col-span-2 lg:col-span-3">
-                  <FieldLabel required>
-                    Have you taken the CD-IELTS Test before?
-                  </FieldLabel>
-                  <FieldContent className="mt-2">
-                    <RadioGroup
-                      onValueChange={(val) => setValue("takenBefore", val)}
-                      value={formData.takenBefore}
-                      className="flex gap-6"
-                    >
-                      {["Yes", "No"].map((opt) => (
-                        <div key={opt} className="flex items-center space-x-2">
-                          <RadioGroupItem
-                            value={opt}
-                            id={`taken-${opt}`}
-                            className="border-[#A11D1D] text-[#A11D1D]"
-                          />
-                          <Label
-                            htmlFor={`taken-${opt}`}
-                            className="font-medium cursor-pointer"
+                    <PopoverContent className="w-auto p-0">
+                      <Calendar
+                        mode="single"
+                        selected={formData.idExpiryDate}
+                        onSelect={(date) =>
+                          setValue("idExpiryDate", date as Date)
+                        }
+                        disabled={(date) => date <= new Date()}
+                      />
+                    </PopoverContent>
+                  </Popover>
+                  <FieldError errors={[errors.idExpiryDate]} />
+                </FieldContent>
+              </Field>
+
+              <Field>
+                <FieldLabel required>Issuing authority</FieldLabel>
+                <FieldContent>
+                  <Input {...control.register("issuingAuthority")} />
+                  <FieldError errors={[errors.issuingAuthority]} />
+                </FieldContent>
+              </Field>
+
+              <Field>
+                <FieldLabel required>Country of nationality</FieldLabel>
+                <FieldContent>
+                  <CountryDropdown
+                    placeholder="Search country..."
+                    value={formData.nationality}
+                    onChange={(country) =>
+                      setValue("nationality", country.name)
+                    }
+                  />
+                  <FieldError errors={[errors.nationality]} />
+                </FieldContent>
+              </Field>
+              <Field className="md:col-span-2 lg:col-span-3">
+                <FieldLabel required>
+                  Have you taken the CD-IELTS Test before?
+                </FieldLabel>
+                <FieldContent className="mt-2">
+                  <RadioGroup
+                    onValueChange={(val) => setValue("takenBefore", val)}
+                    value={formData.takenBefore}
+                    className="flex gap-6"
+                  >
+                    {["Yes", "No"].map((opt) => (
+                      <div key={opt} className="flex items-center space-x-2">
+                        <RadioGroupItem
+                          value={opt}
+                          id={`taken-${opt}`}
+                          className="border-[#A11D1D] text-[#A11D1D]"
+                        />
+                        <Label
+                          htmlFor={`taken-${opt}`}
+                          className="font-medium cursor-pointer"
+                        >
+                          {opt}
+                        </Label>
+                      </div>
+                    ))}
+                  </RadioGroup>
+                  <FieldError errors={[errors.takenBefore]} />
+                </FieldContent>
+              </Field>
+
+              {formData.takenBefore === "Yes" && (
+                <>
+                  <Field className="md:col-span-2 lg:col-span-3">
+                    <FieldLabel required>Was it less than 2 years?</FieldLabel>
+                    <FieldContent className="mt-2">
+                      <RadioGroup
+                        onValueChange={(val) =>
+                          setValue("lessThanTwoYears", val)
+                        }
+                        value={formData.lessThanTwoYears}
+                        className="flex flex-wrap gap-6"
+                      >
+                        {["Yes", "No", "I do not know"].map((opt) => (
+                          <div
+                            key={opt}
+                            className="flex items-center space-x-2"
                           >
-                            {opt}
-                          </Label>
-                        </div>
-                      ))}
-                    </RadioGroup>
-                    <FieldError errors={[errors.takenBefore]} />
-                  </FieldContent>
-                </Field>
-
-                {formData.takenBefore === "Yes" && (
-                  <>
-                    <Field className="md:col-span-2 lg:col-span-3">
-                      <FieldLabel required>
-                        Was it less than 2 years?
-                      </FieldLabel>
-                      <FieldContent className="mt-2">
-                        <RadioGroup
-                          onValueChange={(val) =>
-                            setValue("lessThanTwoYears", val)
-                          }
-                          value={formData.lessThanTwoYears}
-                          className="flex flex-wrap gap-6"
-                        >
-                          {["Yes", "No", "I do not know"].map((opt) => (
-                            <div
-                              key={opt}
-                              className="flex items-center space-x-2"
+                            <RadioGroupItem
+                              value={opt}
+                              id={`less-${opt}`}
+                              className="border-[#A11D1D] text-[#A11D1D]"
+                            />
+                            <Label
+                              htmlFor={`less-${opt}`}
+                              className="font-medium cursor-pointer"
                             >
-                              <RadioGroupItem
-                                value={opt}
-                                id={`less-${opt}`}
-                                className="border-[#A11D1D] text-[#A11D1D]"
-                              />
-                              <Label
-                                htmlFor={`less-${opt}`}
-                                className="font-medium cursor-pointer"
-                              >
-                                {opt}
-                              </Label>
-                            </div>
-                          ))}
-                        </RadioGroup>
-                        <FieldError errors={[errors.lessThanTwoYears]} />
-                      </FieldContent>
-                    </Field>
+                              {opt}
+                            </Label>
+                          </div>
+                        ))}
+                      </RadioGroup>
+                      <FieldError errors={[errors.lessThanTwoYears]} />
+                    </FieldContent>
+                  </Field>
 
-                    <Field className="md:col-span-2 lg:col-span-3">
-                      <FieldLabel required>
-                        Do you have an existing IELTS account?
-                      </FieldLabel>
-                      <FieldContent className="mt-2">
-                        <RadioGroup
-                          onValueChange={(val) =>
-                            setValue("existingAccount", val)
-                          }
-                          value={formData.existingAccount}
-                          className="flex flex-col gap-4"
-                        >
-                          {[
-                            "Yes",
-                            "No",
-                            "I forgot my IELTS account details",
-                          ].map((opt) => (
+                  <Field className="md:col-span-2 lg:col-span-3">
+                    <FieldLabel required>
+                      Do you have an existing IELTS account?
+                    </FieldLabel>
+                    <FieldContent className="mt-2">
+                      <RadioGroup
+                        onValueChange={(val) =>
+                          setValue("existingAccount", val)
+                        }
+                        value={formData.existingAccount}
+                        className="flex flex-col gap-4"
+                      >
+                        {["Yes", "No", "I forgot my IELTS account details"].map(
+                          (opt) => (
                             <div
                               key={opt}
                               className="flex items-center space-x-2"
@@ -712,332 +584,371 @@ export default function FormIELTSAcademicRegistration() {
                                 {opt}
                               </Label>
                             </div>
-                          ))}
-                        </RadioGroup>
-                        <FieldError errors={[errors.existingAccount]} />
-                      </FieldContent>
-                    </Field>
-                  </>
-                )}
-
-                <Field className="md:col-span-2 lg:col-span-3">
-                  <FieldLabel required>
-                    Do you have any special requirements due to ill
-                    health/medical conditions?
-                  </FieldLabel>
-                  <FieldContent className="mt-2">
-                    <RadioGroup
-                      onValueChange={(val) =>
-                        setValue("specialRequirements", val)
-                      }
-                      value={formData.specialRequirements}
-                      className="flex gap-6"
-                    >
-                      {["Yes", "No"].map((opt) => (
-                        <div key={opt} className="flex items-center space-x-2">
-                          <RadioGroupItem
-                            value={opt}
-                            id={`special-${opt}`}
-                            className="border-[#A11D1D] text-[#A11D1D]"
-                          />
-                          <Label
-                            htmlFor={`special-${opt}`}
-                            className="font-medium cursor-pointer"
-                          >
-                            {opt}
-                          </Label>
-                        </div>
-                      ))}
-                    </RadioGroup>
-                    <FieldError errors={[errors.specialRequirements]} />
-                  </FieldContent>
-                </Field>
-
-                {formData.specialRequirements === "Yes" && (
-                  <Field className="md:col-span-2 lg:col-span-3">
-                    <FieldLabel required>
-                      Please mention your requirements
-                    </FieldLabel>
-                    <FieldContent>
-                      <Input
-                        {...control.register("specialRequirementsMention")}
-                        placeholder="Please mention your requirements"
-                      />
-                      <FieldError
-                        errors={[errors.specialRequirementsMention]}
-                      />
+                          ),
+                        )}
+                      </RadioGroup>
+                      <FieldError errors={[errors.existingAccount]} />
                     </FieldContent>
                   </Field>
-                )}
+                </>
+              )}
 
-                <Field>
-                  <FieldLabel required>What is your first language?</FieldLabel>
-                  <FieldContent>
-                    <SearchableDropdown
-                      options={languages}
-                      placeholder="-Select Language-"
-                      value={formData.firstLanguage}
-                      onChange={(val) => setValue("firstLanguage", val)}
-                    />
-                    <FieldError errors={[errors.firstLanguage]} />
-                  </FieldContent>
-                </Field>
-
-                <Field>
-                  <FieldLabel required>
-                    How many years have you been studying English?
-                  </FieldLabel>
-                  <FieldContent>
-                    <SearchableDropdown
-                      options={[
-                        { label: "1 (less than)", value: "1" },
-                        { label: "2", value: "2" },
-                        { label: "3", value: "3" },
-                        { label: "4", value: "4" },
-                        { label: "5", value: "5" },
-                        { label: "6", value: "6" },
-                        { label: "7", value: "7" },
-                        { label: "8", value: "8" },
-                        { label: "9", value: "9" },
-                      ]}
-                      placeholder="-Select Duration-"
-                      value={formData.yearsStudyingEnglish}
-                      onChange={(val) => setValue("yearsStudyingEnglish", val)}
-                    />
-                    <FieldError errors={[errors.yearsStudyingEnglish]} />
-                  </FieldContent>
-                </Field>
-
-                <Field className="md:col-span-2">
-                  <FieldLabel required>
-                    What level of education have you completed?
-                  </FieldLabel>
-                  <FieldContent>
-                    <RadioGroup
-                      onValueChange={(val) => setValue("educationLevel", val)}
-                      value={formData.educationLevel}
-                      className="grid grid-cols-1 md:grid-cols-2 gap-3"
-                    >
-                      {[
-                        {
-                          id: "secondary_up_to_16",
-                          label: "Secondary (up to 16 years)",
-                        },
-                        {
-                          id: "secondary_16_19",
-                          label: "Secondary (16-19 years)",
-                        },
-                        { id: "degree", label: "Degree (or equivalent)" },
-                        { id: "post_graduate", label: "Post-graduate" },
-                      ].map((opt) => (
-                        <div
-                          key={opt.id}
-                          className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all cursor-pointer bg-white"
+              <Field className="md:col-span-2 lg:col-span-3">
+                <FieldLabel required>
+                  Do you have any special requirements due to ill health/medical
+                  conditions?
+                </FieldLabel>
+                <FieldContent className="mt-2">
+                  <RadioGroup
+                    onValueChange={(val) =>
+                      setValue("specialRequirements", val)
+                    }
+                    value={formData.specialRequirements}
+                    className="flex gap-6"
+                  >
+                    {["Yes", "No"].map((opt) => (
+                      <div key={opt} className="flex items-center space-x-2">
+                        <RadioGroupItem
+                          value={opt}
+                          id={`special-${opt}`}
+                          className="border-[#A11D1D] text-[#A11D1D]"
+                        />
+                        <Label
+                          htmlFor={`special-${opt}`}
+                          className="font-medium cursor-pointer"
                         >
-                          <RadioGroupItem
-                            value={opt.id}
-                            id={opt.id}
-                            className="border-[#A11D1D] text-[#A11D1D]"
-                          />
-                          <Label
-                            htmlFor={opt.id}
-                            className="font-medium cursor-pointer"
-                          >
-                            {opt.label}
-                          </Label>
-                        </div>
-                      ))}
-                    </RadioGroup>
-                    <FieldError errors={[errors.educationLevel]} />
-                  </FieldContent>
-                </Field>
+                          {opt}
+                        </Label>
+                      </div>
+                    ))}
+                  </RadioGroup>
+                  <FieldError errors={[errors.specialRequirements]} />
+                </FieldContent>
+              </Field>
 
-                <Field>
+              {formData.specialRequirements === "Yes" && (
+                <Field className="md:col-span-2 lg:col-span-3">
                   <FieldLabel required>
-                    What is your occupation level?
+                    Please mention your requirements
                   </FieldLabel>
                   <FieldContent>
-                    <SearchableDropdown
-                      options={[
-                        { label: "Self-employed", value: "Self-employed" },
-                        {
-                          label: "Employer/Partner",
-                          value: "Employer/Partner",
-                        },
-                        {
-                          label: "Employee (Senior level)",
-                          value: "Employee (Senior level)",
-                        },
-                        {
-                          label: "Employee (Middle/Junior level)",
-                          value: "Employee (Middle/Junior level)",
-                        },
-                        { label: "Homeworker", value: "Homeworker" },
-                        { label: "Retired", value: "Retired" },
-                        { label: "Student", value: "Student" },
-                        { label: "Other", value: "Other" },
-                      ]}
-                      placeholder="-Select Level-"
-                      value={formData.occupationLevel}
-                      onChange={(val) => setValue("occupationLevel", val)}
+                    <Input
+                      {...control.register("specialRequirementsMention")}
+                      placeholder="Please mention your requirements"
                     />
-                    <FieldError errors={[errors.occupationLevel]} />
+                    <FieldError errors={[errors.specialRequirementsMention]} />
                   </FieldContent>
                 </Field>
+              )}
 
-                <Field>
-                  <FieldLabel required>
-                    What is your occupation sector?
-                  </FieldLabel>
-                  <FieldContent>
-                    <SearchableDropdown
-                      options={[
-                        {
-                          label: "Administrative Services",
-                          value: "Administrative Services",
-                        },
-                        {
-                          label: "Agriculture, Fishing, Forestry, Mining",
-                          value: "Agriculture, Fishing, Forestry, Mining",
-                        },
-                        {
-                          label: "Arts and Entertainment",
-                          value: "Arts and Entertainment",
-                        },
-                        {
-                          label: "Banking and Finance",
-                          value: "Banking and Finance",
-                        },
-                        {
-                          label: "Catering and Leisure",
-                          value: "Catering and Leisure",
-                        },
-                        {
-                          label: "Construction Industries",
-                          value: "Construction Industries",
-                        },
-                        {
-                          label: "Craft and Design",
-                          value: "Craft and Design",
-                        },
-                        { label: "Education", value: "Education" },
-                        {
-                          label: "Health and Social Services",
-                          value: "Health and Social Services",
-                        },
-                        {
-                          label:
-                            "Installation, Maintenance and Repair Services",
-                          value:
-                            "Installation, Maintenance and Repair Services",
-                        },
-                        {
-                          label: "Law and Legal Services",
-                          value: "Law and Legal Services",
-                        },
-                        {
-                          label: "Manufacturing and Assembly Services",
-                          value: "Manufacturing and Assembly Services",
-                        },
-                        {
-                          label: "Personal Services",
-                          value: "Personal Services",
-                        },
-                        { label: "Retail Trade", value: "Retail Trade" },
-                        {
-                          label: "Technical and Scientific",
-                          value: "Technical and Scientific",
-                        },
-                        {
-                          label: "Telecommunications and the Media",
-                          value: "Telecommunications and the Media",
-                        },
-                        { label: "Transport", value: "Transport" },
-                        {
-                          label: "Utilities (Gas, Water, Electricity etc)",
-                          value: "Utilities (Gas, Water, Electricity etc)",
-                        },
-                        {
-                          label: "Wholesale Trade",
-                          value: "Wholesale Trade",
-                        },
-                        { label: "Other", value: "Other" },
-                      ]}
-                      placeholder="-Select Sector-"
-                      value={formData.occupationSector}
-                      onChange={(val) => setValue("occupationSector", val)}
-                    />
-                    <FieldError errors={[errors.occupationSector]} />
-                  </FieldContent>
-                </Field>
+              <Field>
+                <FieldLabel required>What is your first language?</FieldLabel>
+                <FieldContent>
+                  <SearchableDropdown
+                    options={languages}
+                    placeholder="-Select Language-"
+                    value={formData.firstLanguage}
+                    onChange={(val) => setValue("firstLanguage", val)}
+                  />
+                  <FieldError errors={[errors.firstLanguage]} />
+                </FieldContent>
+              </Field>
 
-                <Field>
-                  <FieldLabel required>Why are you taking the test?</FieldLabel>
-                  <FieldContent>
-                    <SearchableDropdown
-                      options={[
-                        {
-                          label:
-                            "Higher education extended course (3 months or more)",
-                          value: "higher_edu_long",
-                        },
-                        {
-                          label:
-                            "Higher education short course (3 months or less)",
-                          value: "higher_edu_short",
-                        },
-                        {
-                          label: "Other educational purposes",
-                          value: "other_edu",
-                        },
-                        {
-                          label: "Registration as a doctor",
-                          value: "reg_doctor",
-                        },
-                        { label: "Immigration", value: "immigration" },
-                        { label: "Employment", value: "employment" },
-                        {
-                          label: "Professional registration (not medical)",
-                          value: "prof_reg_non_medical",
-                        },
-                        { label: "Personal reasons", value: "personal" },
-                        {
-                          label: "Registration as a nurse (including CGFNS)",
-                          value: "reg_nurse",
-                        },
-                        {
-                          label: "Registration as a dentist",
-                          value: "reg_dentist",
-                        },
-                        { label: "Missing/Invalid", value: "missing" },
-                        { label: "Other", value: "other" },
-                      ]}
-                      placeholder="-Select Reason-"
-                      value={formData.reasonForTakingTest}
-                      onChange={(val) => setValue("reasonForTakingTest", val)}
-                    />
-                    <FieldError errors={[errors.reasonForTakingTest]} />
-                  </FieldContent>
-                </Field>
+              <Field>
+                <FieldLabel required>
+                  How many years have you been studying English?
+                </FieldLabel>
+                <FieldContent>
+                  <SearchableDropdown
+                    options={[
+                      { label: "1 (less than)", value: "1" },
+                      { label: "2", value: "2" },
+                      { label: "3", value: "3" },
+                      { label: "4", value: "4" },
+                      { label: "5", value: "5" },
+                      { label: "6", value: "6" },
+                      { label: "7", value: "7" },
+                      { label: "8", value: "8" },
+                      { label: "9", value: "9" },
+                    ]}
+                    placeholder="-Select Duration-"
+                    value={formData.yearsStudyingEnglish}
+                    onChange={(val) => setValue("yearsStudyingEnglish", val)}
+                  />
+                  <FieldError errors={[errors.yearsStudyingEnglish]} />
+                </FieldContent>
+              </Field>
 
-                <Field>
-                  <FieldLabel required>
-                    Which country / territory do you want to study / work / live
-                    in?
-                  </FieldLabel>
-                  <FieldContent>
-                    <CountryDropdown
-                      placeholder="-Select Country-"
-                      value={formData.destinationCountry}
-                      onChange={(country) =>
-                        setValue("destinationCountry", country.name)
-                      }
-                    />
-                    <FieldError errors={[errors.destinationCountry]} />
-                  </FieldContent>
-                </Field>
-                {/* Step 4: Your profile */}
-                {/* <section id="profile" className="space-y-12">
+              <Field className="md:col-span-2">
+                <FieldLabel required>
+                  What level of education have you completed?
+                </FieldLabel>
+                <FieldContent>
+                  <RadioGroup
+                    onValueChange={(val) => setValue("educationLevel", val)}
+                    value={formData.educationLevel}
+                    className="grid grid-cols-1 md:grid-cols-2 gap-3"
+                  >
+                    {[
+                      {
+                        id: "secondary_up_to_16",
+                        label: "Secondary (up to 16 years)",
+                      },
+                      {
+                        id: "secondary_16_19",
+                        label: "Secondary (16-19 years)",
+                      },
+                      { id: "degree", label: "Degree (or equivalent)" },
+                      { id: "post_graduate", label: "Post-graduate" },
+                    ].map((opt) => (
+                      <div
+                        key={opt.id}
+                        className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all cursor-pointer bg-white"
+                      >
+                        <RadioGroupItem
+                          value={opt.id}
+                          id={opt.id}
+                          className="border-[#A11D1D] text-[#A11D1D]"
+                        />
+                        <Label
+                          htmlFor={opt.id}
+                          className="font-medium cursor-pointer"
+                        >
+                          {opt.label}
+                        </Label>
+                      </div>
+                    ))}
+                  </RadioGroup>
+                  <FieldError errors={[errors.educationLevel]} />
+                </FieldContent>
+              </Field>
+
+              <Field>
+                <FieldLabel required>What is your occupation level?</FieldLabel>
+                <FieldContent>
+                  <SearchableDropdown
+                    options={[
+                      { label: "Self-employed", value: "Self-employed" },
+                      {
+                        label: "Employer/Partner",
+                        value: "Employer/Partner",
+                      },
+                      {
+                        label: "Employee (Senior level)",
+                        value: "Employee (Senior level)",
+                      },
+                      {
+                        label: "Employee (Middle/Junior level)",
+                        value: "Employee (Middle/Junior level)",
+                      },
+                      { label: "Homeworker", value: "Homeworker" },
+                      { label: "Retired", value: "Retired" },
+                      { label: "Student", value: "Student" },
+                      { label: "Other", value: "Other" },
+                    ]}
+                    placeholder="-Select Level-"
+                    value={formData.occupationLevel}
+                    onChange={(val) => setValue("occupationLevel", val)}
+                  />
+                  <FieldError errors={[errors.occupationLevel]} />
+                </FieldContent>
+              </Field>
+
+              <Field>
+                <FieldLabel required>
+                  What is your occupation sector?
+                </FieldLabel>
+                <FieldContent>
+                  <SearchableDropdown
+                    options={[
+                      {
+                        label: "Administrative Services",
+                        value: "Administrative Services",
+                      },
+                      {
+                        label: "Agriculture, Fishing, Forestry, Mining",
+                        value: "Agriculture, Fishing, Forestry, Mining",
+                      },
+                      {
+                        label: "Arts and Entertainment",
+                        value: "Arts and Entertainment",
+                      },
+                      {
+                        label: "Banking and Finance",
+                        value: "Banking and Finance",
+                      },
+                      {
+                        label: "Catering and Leisure",
+                        value: "Catering and Leisure",
+                      },
+                      {
+                        label: "Construction Industries",
+                        value: "Construction Industries",
+                      },
+                      {
+                        label: "Craft and Design",
+                        value: "Craft and Design",
+                      },
+                      { label: "Education", value: "Education" },
+                      {
+                        label: "Health and Social Services",
+                        value: "Health and Social Services",
+                      },
+                      {
+                        label: "Installation, Maintenance and Repair Services",
+                        value: "Installation, Maintenance and Repair Services",
+                      },
+                      {
+                        label: "Law and Legal Services",
+                        value: "Law and Legal Services",
+                      },
+                      {
+                        label: "Manufacturing and Assembly Services",
+                        value: "Manufacturing and Assembly Services",
+                      },
+                      {
+                        label: "Personal Services",
+                        value: "Personal Services",
+                      },
+                      { label: "Retail Trade", value: "Retail Trade" },
+                      {
+                        label: "Technical and Scientific",
+                        value: "Technical and Scientific",
+                      },
+                      {
+                        label: "Telecommunications and the Media",
+                        value: "Telecommunications and the Media",
+                      },
+                      { label: "Transport", value: "Transport" },
+                      {
+                        label: "Utilities (Gas, Water, Electricity etc)",
+                        value: "Utilities (Gas, Water, Electricity etc)",
+                      },
+                      {
+                        label: "Wholesale Trade",
+                        value: "Wholesale Trade",
+                      },
+                      { label: "Other", value: "Other" },
+                    ]}
+                    placeholder="-Select Sector-"
+                    value={formData.occupationSector}
+                    onChange={(val) => setValue("occupationSector", val)}
+                  />
+                  <FieldError errors={[errors.occupationSector]} />
+                </FieldContent>
+              </Field>
+
+              <Field>
+                <FieldLabel required>Why are you taking the test?</FieldLabel>
+                <FieldContent>
+                  <SearchableDropdown
+                    options={[
+                      {
+                        label:
+                          "Higher education extended course (3 months or more)",
+                        value: "higher_edu_long",
+                      },
+                      {
+                        label:
+                          "Higher education short course (3 months or less)",
+                        value: "higher_edu_short",
+                      },
+                      {
+                        label: "Other educational purposes",
+                        value: "other_edu",
+                      },
+                      {
+                        label: "Registration as a doctor",
+                        value: "reg_doctor",
+                      },
+                      { label: "Immigration", value: "immigration" },
+                      { label: "Employment", value: "employment" },
+                      {
+                        label: "Professional registration (not medical)",
+                        value: "prof_reg_non_medical",
+                      },
+                      { label: "Personal reasons", value: "personal" },
+                      {
+                        label: "Registration as a nurse (including CGFNS)",
+                        value: "reg_nurse",
+                      },
+                      {
+                        label: "Registration as a dentist",
+                        value: "reg_dentist",
+                      },
+                      { label: "Missing/Invalid", value: "missing" },
+                      { label: "Other", value: "other" },
+                    ]}
+                    placeholder="-Select Reason-"
+                    value={formData.reasonForTakingTest}
+                    onChange={(val) => setValue("reasonForTakingTest", val)}
+                  />
+                  <FieldError errors={[errors.reasonForTakingTest]} />
+                </FieldContent>
+              </Field>
+
+              <Field>
+                <FieldLabel required>
+                  Which country / territory do you want to study / work / live
+                  in?
+                </FieldLabel>
+                <FieldContent>
+                  <CountryDropdown
+                    placeholder="-Select Country-"
+                    value={formData.destinationCountry}
+                    onChange={(country) =>
+                      setValue("destinationCountry", country.name)
+                    }
+                  />
+                  <FieldError errors={[errors.destinationCountry]} />
+                </FieldContent>
+              </Field>
+              <Field className="col-span-3">
+                <FieldLabel>Marketing preferences</FieldLabel>
+                <FieldContent className="mt-4">
+                  <RadioGroup
+                    onValueChange={(val) =>
+                      setValue("marketingPreference", val)
+                    }
+                    value={formData.marketingPreference}
+                    className="space-y-4"
+                  >
+                    {[
+                      {
+                        id: "all",
+                        label:
+                          "I am happy to receive updates about products, services and events organised by British Council.",
+                      },
+                      {
+                        id: "some",
+                        label:
+                          "I am happy to receive information from British Council and selected third parties.",
+                      },
+                      {
+                        id: "none",
+                        label: "Please do not send me any marketing updates.",
+                      },
+                    ].map((opt) => (
+                      <div key={opt.id} className="flex items-center gap-2">
+                        <RadioGroupItem
+                          value={opt.id}
+                          id={`mkt-${opt.id}`}
+                          className={"border-[#A11D1D] text-[#A11D1D]"}
+                        />
+                        <Label
+                          htmlFor={`mkt-${opt.id}`}
+                          className="text-sm cursor-pointer"
+                        >
+                          {opt.label}
+                        </Label>
+                      </div>
+                    ))}
+                  </RadioGroup>
+                  <FieldError errors={[errors.marketingPreference]} />
+                </FieldContent>
+              </Field>
+              {/* Step 4: Your profile */}
+              {/* <section id="profile" className="space-y-12">
                   <div className="flex items-center gap-4 border-b border-slate-100 pb-4">
                     <span className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary font-bold text-sm">
                       4
@@ -1501,9 +1412,8 @@ export default function FormIELTSAcademicRegistration() {
                     </Field>
                   </div>
                 </section> */}
-              </div>
-            </form>
-          </Form>
+            </div>
+          </form>
         ) : (
           <div className="animate-in fade-in zoom-in duration-700">
             {formData.paymentMethod === "online" && (
