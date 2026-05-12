@@ -334,16 +334,26 @@ export default function FormIELTSAcademicRegistration() {
                 <RadioGroup
                   onValueChange={(val) => setValue("sex", val)}
                   value={formData.sex}
-                  className="flex items-center gap-4 "
+                  className="grid grid-cols-2 gap-3"
                 >
-                  <div className="flex items-center gap-2">
-                    <RadioGroupItem id={"Male"} value={"Male"} />
-                    <Label htmlFor={"Male"}>Male</Label>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <RadioGroupItem id={"Female"} value={"Female"} />
-                    <Label htmlFor={"Female"}>Female</Label>
-                  </div>
+                  {["Male", "Female"].map((opt) => (
+                    <div
+                      key={opt}
+                      className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all cursor-pointer bg-white"
+                    >
+                      <RadioGroupItem
+                        value={opt}
+                        id={opt}
+                        className="border-[#A11D1D] text-[#A11D1D]"
+                      />
+                      <Label
+                        htmlFor={opt}
+                        className="font-medium cursor-pointer"
+                      >
+                        {opt}
+                      </Label>
+                    </div>
+                  ))}
                 </RadioGroup>
                 <FieldError errors={[errors.sex]} />
               </FieldContent>
@@ -388,7 +398,7 @@ export default function FormIELTSAcademicRegistration() {
               <FieldLabel required>Confirm email address</FieldLabel>
               <FieldContent>
                 <Input
-                  placeholder="example@email.com"
+                  placeholder="Confirm your email address"
                   {...control.register("confirmEmail")}
                 />
                 <FieldError errors={[errors.confirmEmail]} />
@@ -428,14 +438,20 @@ export default function FormIELTSAcademicRegistration() {
             <Field>
               <FieldLabel required>Emirates/ City</FieldLabel>
               <FieldContent>
-                <Input {...control.register("city")} />
+                <Input
+                  {...control.register("city")}
+                  placeholder="Enter your city"
+                />
                 <FieldError errors={[errors.city]} />
               </FieldContent>
             </Field>
             <Field>
               <FieldLabel required>Postcode / ZIP</FieldLabel>
               <FieldContent>
-                <Input {...control.register("postcode")} />
+                <Input
+                  {...control.register("postcode")}
+                  placeholder="Enter your postcode/zip"
+                />
                 <FieldError errors={[errors.postcode]} />
               </FieldContent>
             </Field>
@@ -470,24 +486,29 @@ export default function FormIELTSAcademicRegistration() {
                 <RadioGroup
                   onValueChange={(val) => setValue("idType", val)}
                   value={formData.idType}
-                  className="flex gap-4"
+                  className="grid grid-cols-2 gap-3"
                 >
-                  <div className="flex items-center gap-2">
-                    <RadioGroupItem
-                      value="passport"
-                      id="passport"
-                      className={"border-[#A11D1D] text-[#A11D1D]"}
-                    />
-                    <Label htmlFor="passport">Passport</Label>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <RadioGroupItem
-                      value="emirates_id"
-                      id="emirates_id"
-                      className={"border-[#A11D1D] text-[#A11D1D]"}
-                    />
-                    <Label htmlFor="emirates_id">Emirates ID</Label>
-                  </div>
+                  {[
+                    { id: "passport", label: "Passport" },
+                    { id: "emirates_id", label: "Emirates ID" },
+                  ].map((opt) => (
+                    <div
+                      key={opt.id}
+                      className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all cursor-pointer bg-white"
+                    >
+                      <RadioGroupItem
+                        value={opt.id}
+                        id={opt.id}
+                        className="border-[#A11D1D] text-[#A11D1D]"
+                      />
+                      <Label
+                        htmlFor={opt.id}
+                        className="font-medium cursor-pointer"
+                      >
+                        {opt.label}
+                      </Label>
+                    </div>
+                  ))}
                 </RadioGroup>
                 <FieldError errors={[errors.idType]} />
               </FieldContent>
@@ -500,7 +521,10 @@ export default function FormIELTSAcademicRegistration() {
                   : "Passport number"}
               </FieldLabel>
               <FieldContent>
-                <Input {...control.register("idNumber")} />
+                <Input
+                  {...control.register("idNumber")}
+                  placeholder={`Enter your ${formData.idType === "emirates_id" ? "ID" : "Passport"} number`}
+                />
                 <FieldError errors={[errors.idNumber]} />
               </FieldContent>
             </Field>
@@ -512,35 +536,14 @@ export default function FormIELTSAcademicRegistration() {
                   : "Passport expiry date"}
               </FieldLabel>
               <FieldContent>
-                <Popover>
-                  <PopoverTrigger
-                    render={
-                      <Button
-                        variant="ghost"
-                        className={cn(
-                          "w-full justify-start text-left font-normal rounded-md border border-slate-200 px-3 py-2 text-sm",
-                        )}
-                      >
-                        <CalendarIcon className="mr-2 h-4 w-4" />
-                        {formData.idExpiryDate ? (
-                          format(formData.idExpiryDate, "PPP")
-                        ) : (
-                          <span>Select date</span>
-                        )}
-                      </Button>
-                    }
-                  />
-                  <PopoverContent className="w-auto p-0">
-                    <Calendar
-                      mode="single"
-                      selected={formData.idExpiryDate}
-                      onSelect={(date) =>
-                        setValue("idExpiryDate", date as Date)
-                      }
-                      disabled={(date) => date <= new Date()}
-                    />
-                  </PopoverContent>
-                </Popover>
+                <DatePicker
+                  value={formData.idExpiryDate}
+                  onChange={(date) => setValue("idExpiryDate", date as Date)}
+                  disabled={(date) => date <= new Date()}
+                  placeholder={`Select ${
+                    formData.idType === "emirates_id" ? "ID" : "Passport"
+                  } expiry date`}
+                />
                 <FieldError errors={[errors.idExpiryDate]} />
               </FieldContent>
             </Field>
@@ -548,7 +551,10 @@ export default function FormIELTSAcademicRegistration() {
             <Field>
               <FieldLabel required>Issuing authority</FieldLabel>
               <FieldContent>
-                <Input {...control.register("issuingAuthority")} />
+                <Input
+                  {...control.register("issuingAuthority")}
+                  placeholder="Enter issuing authority"
+                />
                 <FieldError errors={[errors.issuingAuthority]} />
               </FieldContent>
             </Field>
@@ -572,10 +578,13 @@ export default function FormIELTSAcademicRegistration() {
                 <RadioGroup
                   onValueChange={(val) => setValue("takenBefore", val)}
                   value={formData.takenBefore}
-                  className="flex gap-6"
+                  className="grid grid-cols-2 gap-3"
                 >
                   {["Yes", "No"].map((opt) => (
-                    <div key={opt} className="flex items-center space-x-2">
+                    <div
+                      key={opt}
+                      className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all cursor-pointer bg-white"
+                    >
                       <RadioGroupItem
                         value={opt}
                         id={`taken-${opt}`}
@@ -602,10 +611,13 @@ export default function FormIELTSAcademicRegistration() {
                     <RadioGroup
                       onValueChange={(val) => setValue("lessThanTwoYears", val)}
                       value={formData.lessThanTwoYears}
-                      className="flex flex-wrap gap-6"
+                      className="grid grid-cols-1 md:grid-cols-3 gap-3"
                     >
                       {["Yes", "No", "I do not know"].map((opt) => (
-                        <div key={opt} className="flex items-center space-x-2">
+                        <div
+                          key={opt}
+                          className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all cursor-pointer bg-white"
+                        >
                           <RadioGroupItem
                             value={opt}
                             id={`less-${opt}`}
@@ -632,13 +644,13 @@ export default function FormIELTSAcademicRegistration() {
                     <RadioGroup
                       onValueChange={(val) => setValue("existingAccount", val)}
                       value={formData.existingAccount}
-                      className="flex flex-col gap-4"
+                      className="flex flex-col gap-3"
                     >
                       {["Yes", "No", "I forgot my IELTS account details"].map(
                         (opt) => (
                           <div
                             key={opt}
-                            className="flex items-center space-x-2"
+                            className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all cursor-pointer bg-white"
                           >
                             <RadioGroupItem
                               value={opt}
@@ -670,10 +682,13 @@ export default function FormIELTSAcademicRegistration() {
                 <RadioGroup
                   onValueChange={(val) => setValue("specialRequirements", val)}
                   value={formData.specialRequirements}
-                  className="flex gap-6"
+                  className="grid grid-cols-2 gap-3"
                 >
                   {["Yes", "No"].map((opt) => (
-                    <div key={opt} className="flex items-center space-x-2">
+                    <div
+                      key={opt}
+                      className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all cursor-pointer bg-white"
+                    >
                       <RadioGroupItem
                         value={opt}
                         id={`special-${opt}`}
