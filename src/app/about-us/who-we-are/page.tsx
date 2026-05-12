@@ -40,7 +40,19 @@ export default function WhoWeAre() {
       {/* Narrative Section */}
       <section className="py-32 px-8 max-w-screen-2xl mx-auto border-t border-slate-50">
         <div className="grid lg:grid-cols-2 gap-20 items-start">
-          {/* Left Narrative */}
+          {/* Left Visual Collaboration */}
+          <div className="relative pt-12 lg:pt-0">
+            <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
+              <Image
+                src="/images/about-us/who-we-are-2.jpg"
+                alt="Students Collaborating"
+                fill
+                className="object-cover"
+              />
+            </div>
+          </div>
+
+          {/* Right Narrative */}
           <div className="space-y-12">
             <SectionHeader
               badge="WHO WE ARE"
@@ -64,18 +76,6 @@ export default function WhoWeAre() {
               <p>
                 TEPTH envisions to be a leader in exam preparation and testing, as we look forward to set a benchmark by our unrivaled services. We have set long term goals that will benefit both the education system and the society. With innovative IT support and learning procedures, TEPTH has made it quite expedient for the students to pass online exams. Our latest learning techniques allow you to score more with less effort. Whether you are preparing for IELTS, CELPIP G, CAEL, PTE, TOEFL iBT and OET, TEPTH is your one pit stop for all your exam preparation needs.
               </p>
-            </div>
-          </div>
-
-          {/* Right Visual Collaboration */}
-          <div className="relative pt-12 lg:pt-0">
-            <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
-              <Image
-                src="/images/about-us/who-we-are-2.jpg"
-                alt="Students Collaborating"
-                fill
-                className="object-cover"
-              />
             </div>
           </div>
         </div>

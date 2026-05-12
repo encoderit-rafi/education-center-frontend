@@ -29,7 +29,7 @@ export default function HowToFindUs() {
             <div className="absolute -inset-4 bg-primary/5 rounded-xl blur-3xl opacity-50 transition-opacity group-hover:opacity-100"></div>
             <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
               <Image
-                src="/images/about-us/about-us-4.jpg"
+                src="/images/about-us/about-us-10.jpg"
                 alt="Our Center"
                 fill
                 className="object-cover"
@@ -198,7 +198,7 @@ export default function HowToFindUs() {
                 </div>
               </div>
               <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl order-1 lg:order-2">
-                <Image src="/images/about-us/metro-dubai.png" alt="Dubai Metro" fill className="object-cover" />
+                <Image src="/images/about-us/dubai-m.png" alt="Dubai Metro" fill className="object-cover" />
               </div>
             </div>
           </div>

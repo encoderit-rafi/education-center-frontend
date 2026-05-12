@@ -15,7 +15,7 @@ export default function SpecialAccommodation() {
             badge="ACCESSIBILITY FIRST"
             title={
               <>
-                Empowering <span className="text-primary italic">Every</span> Learner.
+                Empowering Every <span className="text-primary">Learner</span>
               </>
             }
             description="TEPTH is committed to ensuring that all candidates have equal opportunity to demonstrate their abilities. We provide a range of reasonable adjustments tailored to specific needs."

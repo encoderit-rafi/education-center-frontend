@@ -43,7 +43,19 @@ export default function WhyChooseUs() {
       {/* Narrative Section */}
       <section className="py-32 px-8 max-w-screen-2xl mx-auto border-t border-slate-50">
         <div className="grid lg:grid-cols-2 gap-20 items-start">
-          {/* Left Narrative */}
+          {/* Left Visual Collaboration */}
+          <div className="relative pt-12 lg:pt-0">
+            <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
+              <Image
+                src="/images/about-us/about-us-6.jpg"
+                alt="Proven Success"
+                fill
+                className="object-cover"
+              />
+            </div>
+          </div>
+
+          {/* Right Narrative */}
           <div className="space-y-12">
             {/* Section Badge */}
             <SectionHeader
@@ -71,18 +83,6 @@ export default function WhyChooseUs() {
               <p className="text-lg md:text-xl text-slate-800 leading-relaxed font-black group-hover:text-white">
                 <span className="text-primary group-hover:text-white transition-colors">TEPTH</span> works on adaptive approach and offers flexible and convenient prep options that will move with you and will fit in your hectic schedule. We analyze student’s performance and advise a custom-learning plan to ensure good results. Our proven test-taking strategies, e-learning solutions, and instructions from proficient coaches will sweep away any doubts of success. You will be confident on the test day for optimal performance.
               </p>
-            </div>
-          </div>
-
-          {/* Right Visual Collaboration */}
-          <div className="relative pt-12 lg:pt-0">
-            <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
-              <Image
-                src="/images/about-us/about-us-6.jpg"
-                alt="Proven Success"
-                fill
-                className="object-cover"
-              />
             </div>
           </div>
         </div>
