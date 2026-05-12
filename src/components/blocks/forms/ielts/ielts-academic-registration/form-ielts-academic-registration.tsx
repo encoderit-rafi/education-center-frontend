@@ -231,9 +231,8 @@ export default function FormIELTSAcademicRegistration() {
     : 0;
   const workshopPrice = selectedWorkshopData?.price || 0;
 
-  const subtotal = baseFee + coursePrice + workshopPrice;
-  const tax = subtotal * 0.05;
-  const total = subtotal + tax;
+  const serviceFee = 100;
+  const total = baseFee + coursePrice + workshopPrice + serviceFee;
 
   const onSubmit: SubmitHandler<TIeltsAcademicSchema> = (data) => {
     setIsSubmitted(true);
@@ -1563,29 +1562,27 @@ export default function FormIELTSAcademicRegistration() {
                   </div>
                 </section> */}
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
-            <div className="space-y-6">
-              <div className="space-y-3">
-                <Stepper step={2}>
-                  Secure Payment{" "}
-                  <span className="bg-primary/10 px-3 py-1 rounded-full text-sm font-semibold text-primary ml-2">
-                    {total.toFixed(2)}{" "}
-                    <span className="font-normal text-xs uppercase tracking-wider">
-                      AED
-                    </span>
-                  </span>
-                </Stepper>
-                <div className="bg-white rounded-2xl border border-slate-100 p-2">
-                  <Payment amount={total} currency={"aed"} />
-                </div>
-                <Button
-                  type="submit"
-                  className="w-full h-14 bg-primary hover:bg-primary/90 text-white font-bold text-lg rounded-xl shadow-lg shadow-primary/20 transition-all flex items-center justify-center gap-2 group mt-4"
-                >
-                  Submit
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </Button>
+          <Stepper step={2}>
+            Secure Payment{" "}
+            <span className="bg-primary/10 px-3 py-1 rounded-full text-sm font-semibold text-primary ml-2">
+              {total.toFixed(2)}{" "}
+              <span className="font-normal text-xs uppercase tracking-wider">
+                AED
+              </span>
+            </span>
+          </Stepper>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="space-y-3">
+              <div className="bg-white rounded-2xl border border-slate-100">
+                <Payment amount={total} currency={"aed"} />
               </div>
+              <Button
+                type="submit"
+                className="w-full h-14 bg-primary hover:bg-primary/90 text-white font-bold text-lg rounded-xl shadow-lg shadow-primary/20 transition-all flex items-center justify-center gap-2 group mt-4"
+              >
+                Submit
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </Button>
             </div>
 
             <div className="bg-slate-50/50 rounded-2xl p-6 border border-slate-100 space-y-6 h-fit md:sticky md:top-24">
@@ -1626,15 +1623,9 @@ export default function FormIELTSAcademicRegistration() {
 
                 <div className="pt-3 border-t border-slate-100 space-y-2">
                   <div className="flex justify-between text-sm">
-                    <span className="text-slate-500 font-medium">Subtotal</span>
-                    <span className="font-bold text-slate-700">
-                      {subtotal.toFixed(2)} AED
-                    </span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-slate-500">VAT (5%)</span>
+                    <span className="text-slate-500">Service Fee</span>
                     <span className="font-medium text-slate-600">
-                      {tax.toFixed(2)} AED
+                      {serviceFee.toFixed(2)} AED
                     </span>
                   </div>
                 </div>
@@ -1651,20 +1642,6 @@ export default function FormIELTSAcademicRegistration() {
                       AED
                     </span>
                   </span>
-                </div>
-              </div>
-
-              <div className="bg-white rounded-xl p-4 border border-slate-100 flex gap-3 shadow-sm">
-                <div className="w-8 h-8 rounded-full bg-emerald-50 flex items-center justify-center shrink-0">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-500" />
-                </div>
-                <div className="space-y-1">
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider leading-none">
-                    Guaranteed Safe Checkout
-                  </p>
-                  <p className="text-xs text-slate-500 leading-tight">
-                    Your registration and payment data are fully encrypted.
-                  </p>
                 </div>
               </div>
             </div>
