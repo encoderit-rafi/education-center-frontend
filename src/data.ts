@@ -290,7 +290,7 @@ export const SECONDARY_NAV: AppNavigationItem[] = [
   },
   {
     type: "single",
-    name: "Test Your English",
+    name: "Test Your English Level",
     href: "/test-your-english",
   },
   {
@@ -319,7 +319,6 @@ export const SECONDARY_NAV: AppNavigationItem[] = [
     href: "/exam-delivery",
     items: [
       { name: "Exam Provider", href: "/exam-delivery/exam-provider" },
-      { name: "Test Takers", href: "/exam-delivery/test-takers" },
       { name: "Vendor", href: "/exam-delivery/vendor" },
     ],
   },

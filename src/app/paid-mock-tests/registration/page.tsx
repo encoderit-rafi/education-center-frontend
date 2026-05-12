@@ -235,7 +235,7 @@ function PaidMockTestRegistrationForm({
                 </Stepper>
                 <Payment amount={PRICE} currency={CURRENCY} />
                 <Button type="submit" className="w-full mt-6 py-3">
-                  Register
+                  Purchase
                   <ArrowRight className="w-5 h-5" />
                 </Button>
               </div>

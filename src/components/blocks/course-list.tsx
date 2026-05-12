@@ -22,9 +22,9 @@ export default function CourseList() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-          {EXAM_CARDS_DATA.map((exam, index) => (
-            <Link href={`/exams/${exam.id}`}>
-              <BaseCard key={exam.id} className="p-6">
+          {EXAM_CARDS_DATA.map((exam) => (
+            <Link key={exam.id} href={`/exams/${exam.id}`}>
+              <BaseCard className="p-6">
                 <div className="flex items-center justify-between gap-2">
                   <BaseCardTitle className="uppercase tracking-tight text-lg leading-snug">
                     {exam.name}

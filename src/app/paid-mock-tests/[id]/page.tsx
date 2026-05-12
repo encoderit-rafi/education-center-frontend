@@ -88,7 +88,7 @@ export default async function PaidMockTestDynamicPage({ params }: PageProps) {
                   "px-4 sm:px-8 py-3 text-sm font-bold shadow-xl shadow-primary/20 hover:-translate-y-1 transition-all duration-300",
                 )}
               >
-                Register Now
+                Purchase
                 <ArrowRight className="ml-2 size-5" />
               </Link>
             </div>
@@ -162,13 +162,13 @@ export default async function PaidMockTestDynamicPage({ params }: PageProps) {
           <div className="h-1 w-16 bg-primary mx-auto mb-6"></div>
 
           <Link
-            href="#booking-section"
+            href={`/paid-mock-tests/registration?id=${data.id}`}
             className={cn(
               buttonVariants(),
               "px-4 sm:px-8 py-3 text-sm font-bold shadow-xl shadow-primary/20 hover:-translate-y-1 transition-all duration-300 ",
             )}
           >
-            Register Now
+            Purchase Now
             <ArrowRight className="ml-2 size-5" />
           </Link>
           <p className="text-slate-500 font-medium text-xs mt-3">
