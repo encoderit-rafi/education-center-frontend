@@ -34,7 +34,7 @@ import { DateTimePicker } from "@/components/ui/date-time-picker";
 import { Checkbox } from "@/components/ui/checkbox";
 import { PhoneInput } from "@/components/ui/phone-input";
 import { languages } from "@/lib/languages-data";
-import { courses, workshops } from "@/lib/data";
+
 import {
   BookOpen,
   Calendar as CalendarIcon,
@@ -61,6 +61,82 @@ import {
 } from "@/components/ui/popover";
 import { format } from "date-fns";
 import { DatePicker } from "@/components/blocks/date-picker";
+
+export const WORKSHOPS_DATA = {
+  workshop_2_hours: {
+    id: "workshop_2_hours",
+    name: "Workshop 2 Hours",
+    duration: "2 hours",
+    price: 600,
+    currency: "AED",
+  },
+  workshop_4_hours: {
+    id: "workshop_4_hours",
+    name: "Workshop 4 Hours",
+    duration: "4 hours",
+    price: 1000,
+    currency: "AED",
+  },
+  workshop_6_hours: {
+    id: "workshop_6_hours",
+    name: "Workshop 6 Hours",
+    duration: "6 hours",
+    price: 1350,
+    currency: "AED",
+  },
+  workshop_8_hours: {
+    id: "workshop_8_hours",
+    name: "Workshop 8 Hours",
+    duration: "8 hours",
+    price: 1600,
+    currency: "AED",
+  },
+};
+export const COURSES_DATA = {
+  group_classroom: {
+    id: "group_classroom",
+    name: "Group Classroom",
+    class_mode_id: "group",
+    class_type_id: "classroom",
+    price: 1850,
+    currency: "AED",
+    general_discount: 5,
+    special_discount: 10,
+  },
+
+  semi_private_classroom: {
+    id: "semi_private_classroom",
+    name: "Semi-Private Classroom",
+    class_mode_id: "semi_private",
+    class_type_id: "classroom",
+    price: 2850,
+    currency: "AED",
+    general_discount: 5,
+    special_discount: 15,
+  },
+
+  vip_classroom: {
+    id: "vip_classroom",
+    name: "VIP Classroom",
+    class_mode_id: "vip",
+    class_type_id: "classroom",
+    price: 4850,
+    currency: "AED",
+    general_discount: 5,
+    special_discount: 20,
+  },
+
+  vip_online: {
+    id: "vip_online",
+    name: "Private Online",
+    class_mode_id: "vip",
+    class_type_id: "online",
+    price: 4850,
+    currency: "AED",
+    general_discount: 5,
+    special_discount: 20,
+  },
+};
 const NOTICES: string[] = [
   "For your convenience, The Exam Preparation & Testing House FZCO offers the CD-IELTS test registration service. We hold no responsibility regarding any issues related to test results or scoring and we have no control or involvement in the test itself, the scoring of the test or the release of the results. This service is optional and candidates can book the exam directly on the exam provider’s website and select our venue and take the test.",
 
@@ -141,16 +217,20 @@ export default function FormIELTSAcademicRegistration() {
 
   const formData = watch();
 
-  const selectedCourseData = courses.find(
-    (c) => c.id === formData.selectedCourse,
-  );
-  const selectedWorkshopData = workshops.find(
-    (w) => w.id === formData.selectedWorkshop,
-  );
+  const selectedCourseData = formData.selectedCourse
+    ? COURSES_DATA[formData.selectedCourse as keyof typeof COURSES_DATA]
+    : null;
+  const selectedWorkshopData = formData.selectedWorkshop
+    ? WORKSHOPS_DATA[formData.selectedWorkshop as keyof typeof WORKSHOPS_DATA]
+    : null;
 
   const baseFee = 1400;
-  const coursePrice = selectedCourseData?.price || 0;
+  const coursePrice = selectedCourseData
+    ? selectedCourseData.price *
+      (1 - (selectedCourseData.special_discount || 0) / 100)
+    : 0;
   const workshopPrice = selectedWorkshopData?.price || 0;
+
   const subtotal = baseFee + coursePrice + workshopPrice;
   const tax = subtotal * 0.05;
   const total = subtotal + tax;
@@ -903,6 +983,97 @@ export default function FormIELTSAcademicRegistration() {
                   <FieldError errors={[errors.destinationCountry]} />
                 </FieldContent>
               </Field>
+              <Field className="col-span-3">
+                <FieldLabel>Add ons</FieldLabel>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-4">
+                  <div className="space-y-4">
+                    <h4 className="font-bold text-sm text-gray-700">
+                      Workshops
+                    </h4>
+                    <div className="grid grid-cols-1 gap-3">
+                      {Object.values(WORKSHOPS_DATA).map((workshop) => (
+                        <div
+                          key={workshop.id}
+                          className="flex items-center gap-3 p-4 border border-slate-100 rounded-xl hover:bg-slate-50 transition-colors"
+                        >
+                          <Checkbox
+                            id={workshop.id}
+                            checked={formData.selectedWorkshop === workshop.id}
+                            onCheckedChange={(checked) => {
+                              if (checked) {
+                                setValue("selectedWorkshop", workshop.id);
+                              } else {
+                                setValue("selectedWorkshop", "");
+                              }
+                            }}
+                          />
+                          <div className="flex flex-col">
+                            <Label
+                              htmlFor={workshop.id}
+                              className="font-bold cursor-pointer text-sm"
+                            >
+                              {workshop.name}
+                            </Label>
+                            <span className="text-[10px] text-gray-500">
+                              {workshop.duration} • {workshop.price}{" "}
+                              {workshop.currency}
+                            </span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="space-y-4">
+                    <h4 className="font-bold text-sm text-gray-700">
+                      Courses (Special Discount)
+                    </h4>
+                    <div className="grid grid-cols-1 gap-3">
+                      {Object.values(COURSES_DATA).map((course) => (
+                        <div
+                          key={course.id}
+                          className="flex items-center gap-3 p-4 border border-slate-100 rounded-xl hover:bg-slate-50 transition-colors"
+                        >
+                          <Checkbox
+                            id={course.id}
+                            checked={formData.selectedCourse === course.id}
+                            onCheckedChange={(checked) => {
+                              if (checked) {
+                                setValue("selectedCourse", course.id);
+                              } else {
+                                setValue("selectedCourse", "");
+                              }
+                            }}
+                          />
+                          <div className="flex flex-col">
+                            <Label
+                              htmlFor={course.id}
+                              className="font-bold cursor-pointer text-sm"
+                            >
+                              {course.name}
+                            </Label>
+                            <div className="flex items-center gap-2">
+                              <span className="text-[10px] text-gray-400 line-through">
+                                {course.price} {course.currency}
+                              </span>
+                              <span className="text-[10px] text-primary font-bold">
+                                {(
+                                  course.price *
+                                  (1 - course.special_discount / 100)
+                                ).toFixed(0)}{" "}
+                                {course.currency}
+                                <span className="ml-1 text-[8px] bg-primary/10 px-1 rounded">
+                                  -{course.special_discount}%
+                                </span>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </Field>
+
               <Field className="col-span-3">
                 <FieldLabel>Marketing preferences</FieldLabel>
                 <FieldContent className="mt-4">
