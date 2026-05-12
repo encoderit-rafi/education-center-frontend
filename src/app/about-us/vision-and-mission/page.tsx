@@ -18,7 +18,7 @@ export default function VisionAndMission() {
                 Shaping the Future of<span className="text-primary"> Education</span>
               </>
             }
-            description="Preparing for college or university is more like riding an emotional rollercoaster; therefore, TEPTH keeps on looking for apt ways to make students feel confident, psychologically in control and well-prepared for the challenges ahead."
+            description="TEPTH is an organization with high goals and high regards for the students. It is here to help students achieve their academic pursuits and support their professional growth."
             className="space-y-4"
           />
 
@@ -57,14 +57,12 @@ export default function VisionAndMission() {
             {/* Detailed Text */}
             <div className="space-y-8 text-base leading-relaxed">
               <p className="section-description text-primary">
-                The Exam Preparation & Testing House L.L.C understands just how perplexing the endeavor can be to gain admission in your top-choice college. For this reason, we have crafted ingenious study plans to enhance your skills and score exceptionally well in any test you opt for. We believe that ‘Your Success Is Ours’ so we work earnestly towards the achievement of your educational goals.
+                The Exam Preparation and Testing House envisions to be a top-notch exam counselling and service provider across the globe. The enterprise was founded with the dream to offer students latest techniques and tools for exam preparation so that they can excel in their respective fields and contribute positively to the well-being of a society. Our team believes in providing commendable services to you.
               </p>
               <p className="section-description">
-                We bring into play the right tools and strategies for focused learning and outstanding results for build your career. With us, you will be able to improve your weak areas. Our expert professionals’ feedback will help you to reinforce your strong points and it will prove useful in steering your abilities and energies in the right direction.
+                The inspirational philosophy behind TEPTH is to offer full-fledged testing and exam preparation services to students in United Arab Emirates and the Arab World. We are a team of enthusiasts who strive hard to facilitate students in every possible way for exam testing.
               </p>
-              <p className="section-description">
-                TEPTH works on adaptive approach and offers flexible and convenient prep options that will move with you and will fit in your hectic schedule. We analyze student’s performance and advise a custom-learning plan to ensure good results. Our proven test-taking strategies, e-learning solutions, and instructions from proficient coaches will sweep away any doubts of success. You will be confident on the test day for optimal performance.
-              </p>
+
             </div>
 
             {/* Core Values List */}

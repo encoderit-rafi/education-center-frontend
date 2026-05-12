@@ -289,7 +289,7 @@ export default function ContactForm() {
         <Button
           type="submit"
           disabled={isSubmitting}
-          className="h-11 px-4 py-2 rounded-xl font-black uppercase tracking-widest text-xs w-full md:w-auto transition-all active:scale-95"
+          className="h-11 px-4 py-2 rounded-md font-bold uppercase tracking-widest text-sm w-full md:w-auto transition-all active:scale-95"
         >
           <div className="flex items-center gap-3">
             {isSubmitting ? "Sending..." : "Submit"}

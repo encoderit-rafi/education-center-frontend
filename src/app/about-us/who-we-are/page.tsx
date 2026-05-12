@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-
+import { SectionHeader } from "@/components/ui/section-header";
 
 export default function WhoWeAre() {
   return (
@@ -10,33 +10,23 @@ export default function WhoWeAre() {
       <section className="py-16 md:py-24 px-8 max-w-screen-2xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
           {/* Left Content */}
-          <div className="space-y-8 animate-fade-up">
-            {/* Section Badge */}
-            <span className="section-label">
-              ABOUT TEPTH
-            </span>
-
-
-            {/* Main Heading */}
-            <h2 className="section-title">
-              UAE's Trusted Exam <br />
-              <span className="text-primary">Testing & Preparation</span> House
-            </h2>
-
-            {/* Description */}
-            <p className="section-description">
-              For over a decade, TEPTH has been the go-to destination for
-              international language exam registration, expert preparation courses,
-              and secure proctoring services across the UAE.
-            </p>
-          </div>
+          <SectionHeader
+            badge="ABOUT TEPTH"
+            title={
+              <>
+                UAE&apos;s Trusted Exam Testing
+                <span className="text-primary"> & Preparation House</span>
+              </>
+            }
+            description="For over a decade, TEPTH has been the go-to destination for international language exam registration, expert preparation courses, and secure proctoring services across the UAE."
+          />
 
           {/* Right Visual */}
           <div className="relative group">
             <div className="absolute -inset-4 bg-primary/5 rounded-xl blur-3xl opacity-50 transition-opacity group-hover:opacity-100"></div>
             <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
               <Image
-                src="/images/about-us/exam-center.png"
+                src="/images/about-us/who-we-are.jpg"
                 alt="TEPTH Lecture Hall"
                 fill
                 className="object-cover"
@@ -52,27 +42,24 @@ export default function WhoWeAre() {
         <div className="grid lg:grid-cols-2 gap-20 items-start">
           {/* Left Narrative */}
           <div className="space-y-12">
-            {/* Section Badge */}
-            <span className="section-label">
-              WHO WE ARE
-            </span>
-
-            {/* Sub Heading */}
-            <div className="space-y-4">
-              <h2 className="section-title">
-                Education is not preparation for <br />
-                life; education is <span className="text-primary">life itself.</span>
-              </h2>
-              <p className="italic text-sm font-bold">— John Dewey</p>
-            </div>
+            <SectionHeader
+              badge="WHO WE ARE"
+              title={
+                <>
+                  Education is not preparation
+                  <span className="text-primary"> for life; education is life itself.</span>
+                </>
+              }
+              description={<p className="italic text-sm font-bold">— John Dewey</p>}
+            />
 
             {/* Detailed Text */}
             <div className="space-y-8 text-base leading-relaxed">
               <p className="text-primary">
-                TEPTH derives its objective from John Dewey's quote. Being an experienced enterprise in the areas of education and exam preparation courses, TEPTH strives to offer students high quality services. We have been in the education industry for years now, catering to the contemporary competent educational requirements across the Arab World. TEPTH is a visionary organization that values students as the guardians of a successful society. We believe in offering you professional career services so that you can turn your dreams into reality.
+                TEPTH derives its objective from John Dewey’s quote, “Education is not preparation for life; education is life itself.” Being an experienced enterprise in the areas of education and exam preparation courses, TEPTH strives to offer students high quality services. We have been in the education industry for years now, catering to the contemporary competent educational requirements across the Arab World. TEPTH is a visionary organization that values students as the guardians of a successful society. We believe in offering you professional career services so that you can turn your dreams into reality.
               </p>
               <p>
-                Preparing for an international exam could get tricky at times. TEPTH has trained professionals who are well-equipped with the latest knowledge and techniques for the preparation of IELTS, TOEFL, PTE, CELPIP, CAEL, and Skills for English (SELT) courses. With their expertise and dedication, you are likely to pass these tests with flying colours — at the best price.
+                Preparing for an international exam could get tricky at times, TEPTH has trained professionals who are well-equipped with the latest knowledge and techniques for the preparation of GMAT, GRE, SAT and TOEFL courses. With their expertise and dedication, you are likely to pass these tests with flying colors. TEPTH offers you proficient services at the best price.
               </p>
               <p>
                 TEPTH envisions to be a leader in exam preparation and testing, as we look forward to set a benchmark by our unrivaled services. We have set long term goals that will benefit both the education system and the society. With innovative IT support and learning procedures, TEPTH has made it quite expedient for the students to pass online exams. Our latest learning techniques allow you to score more with less effort. Whether you are preparing for IELTS, CELPIP G, CAEL, PTE, TOEFL iBT and OET, TEPTH is your one pit stop for all your exam preparation needs.
@@ -84,7 +71,7 @@ export default function WhoWeAre() {
           <div className="relative pt-12 lg:pt-0">
             <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
               <Image
-                src="/images/about-us/exam-center-2.png"
+                src="/images/about-us/who-we-are-2.jpg"
                 alt="Students Collaborating"
                 fill
                 className="object-cover"

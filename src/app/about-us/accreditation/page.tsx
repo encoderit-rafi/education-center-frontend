@@ -21,7 +21,7 @@ export default function Accreditation() {
               </>
             }
             description="The Exam Preparation & Testing House L.L.C is officially licensed and regulated by leading educational authorities, ensuring institutional integrity."
-            className="space-y-8"
+            className="space-y-4"
           />
 
           {/* Right Visual */}
@@ -29,7 +29,7 @@ export default function Accreditation() {
             <div className="absolute -inset-4 bg-primary/5 rounded-xl blur-3xl opacity-50 transition-opacity group-hover:opacity-100"></div>
             <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
               <Image
-                src="/images/about-us/accreditation-image.png"
+                src="/images/about-us/about-us-9.jpg"
                 alt="Accreditation Hero"
                 fill
                 className="object-cover"
@@ -42,79 +42,48 @@ export default function Accreditation() {
 
       {/* Narrative Section */}
       <section className="py-16 md:py-32 px-6 md:px-8 max-w-screen-2xl mx-auto border-t border-slate-50">
-        <div className="grid lg:grid-cols-2 gap-12 md:gap-20 items-start">
+        <div className="flex flex-col lg:flex-row gap-12 md:gap-20 items-start">
           {/* Left Narrative */}
-          <div className="space-y-12">
-            {/* Section Badge */}
-            <span className="section-label">
-              GOVERNING BODIES
-            </span>
-
-
+          <div className="flex-1 space-y-12">
             {/* Feature Blocks */}
-            <div className="space-y-10">
+            <div className="space-y-16">
               {/* SEDD */}
-              <div className="group space-y-6">
-                <div className="relative w-full max-w-md aspect-[2/1] rounded-2xl border border-slate-100 overflow-hidden group-hover:border-primary/20 transition-all">
-                  <Image
-                    src="/images/about-us/government-of-sharjah.png"
-                    alt="SEDD Logo"
-                    fill
-                    className="object-contain"
-                  />
+              <div className="flex flex-col md:flex-row items-center gap-10 group">
+                <div className="flex-1 space-y-6 order-2 md:order-1">
+                  <p className="text-base leading-relaxed font-medium">
+                    The Exam Preparation & Testing House L.L.C is licensed by Sharjah Economic Development Department (SEDD). Sharjah is firmly established as a premier educational hub in the UAE, known for top-tier institutions and high-quality educational centres. Driven by government support, the emirate offers extensive academic facilities and significant investment in the education sector.
+                  </p>
                 </div>
-                <div className="flex items-center gap-4">
-
-                  <div className="w-12 h-12 bg-primary/5 rounded-xl flex items-center justify-center">
-                    <Award className="w-6 h-6 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl md:text-2xl font-black text-slate-900 uppercase">Government of Sharjah</h3>
-                    <p className="text-primary text-[10px] font-black uppercase tracking-widest">Economic Development Department (SEDD)</p>
+                <div className="w-full md:flex-1 order-1 md:order-2">
+                  <div className="relative w-full aspect-[2/1] overflow-hidden transition-all">
+                    <Image
+                      src="/images/about-us/goverment.png"
+                      alt="SEDD Logo"
+                      fill
+                      className="object-contain"
+                    />
                   </div>
                 </div>
-                <p className="text-base leading-relaxed font-medium">
-                  Licensed by Sharjah Economic Development Department (SEDD). Sharjah is firmly established as a premier educational hub in the UAE, known for top-tier institutions and high-quality educational centres.
-                </p>
-
               </div>
 
               {/* SPEA */}
-              <div className="group space-y-6">
-                <div className="relative w-full max-w-md aspect-[2/1] rounded-2xl border border-slate-100 overflow-hidden group-hover:border-primary/20 transition-all">
-                  <Image
-                    src="/images/about-us/sharjah-private.png"
-                    alt="SPEA Logo"
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-primary/5 rounded-xl flex items-center justify-center">
-                    <ShieldCheck className="w-6 h-6 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl md:text-2xl font-black text-slate-900 uppercase">Sharjah Private Education</h3>
-                    <p className="text-primary text-[10px] font-black uppercase tracking-widest">Official Regulatory Body (SPEA)</p>
+              <div className="flex flex-col md:flex-row items-center gap-10 group">
+                <div className="w-full md:flex-1 order-1">
+                  <div className="relative w-full aspect-[2/1] overflow-hidden transition-all">
+                    <Image
+                      src="/images/about-us/private.png"
+                      alt="SPEA Logo"
+                      fill
+                      className="object-contain"
+                    />
                   </div>
                 </div>
-                <p className="text-base leading-relaxed font-medium">
-                  Regulated by Sharjah Private Education Authority (SPEA), the official body responsible for overseeing private education, established by Emiri Decree No. 45 of 2018.
-                </p>
-
+                <div className="flex-1 space-y-6 order-2">
+                  <p className="text-base leading-relaxed font-medium">
+                    The Exam Preparation & Testing House L.L.C is regulated by Sharjah Private Education Authority (SPEA). SPEA is the official body responsible for overseeing and regulating private education in the Emirate of Sharjah. SPEA was established by Emiri Decree No. 45 of 2018 issued by H.H. Sheikh Dr. Sultan Bin Mohammed Al Qasimi, Ruler of Sharjah with core responsibilities including Licensing private schools and educational centre and monitoring quality through inspection and performance ratings.
+                  </p>
+                </div>
               </div>
-            </div>
-          </div>
-
-          {/* Right Visual - Reusing collaboration image */}
-          <div className="relative pt-12 lg:pt-0">
-            <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
-              <Image
-                src="/images/about-us/approve.png"
-                alt="Institutional Quality"
-                fill
-                className="object-cover"
-              />
             </div>
           </div>
         </div>

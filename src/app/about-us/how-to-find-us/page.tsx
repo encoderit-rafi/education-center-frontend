@@ -29,7 +29,7 @@ export default function HowToFindUs() {
             <div className="absolute -inset-4 bg-primary/5 rounded-xl blur-3xl opacity-50 transition-opacity group-hover:opacity-100"></div>
             <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
               <Image
-                src="/images/about-us/infrastructure-center.png"
+                src="/images/about-us/about-us-4.jpg"
                 alt="Our Center"
                 fill
                 className="object-cover"
@@ -140,14 +140,14 @@ export default function HowToFindUs() {
                 </div>
               </div>
               <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl order-1 lg:order-2">
-                <Image src="/images/about-us/taxi.jpg" alt="Sharjah Taxi" fill className="object-cover" />
+                <Image src="/images/about-us/taxi-sharjah.png" alt="Sharjah Taxi" fill className="object-cover" />
               </div>
             </div>
 
             {/* 02. Public Bus */}
             <div className="grid lg:grid-cols-2 gap-16 lg:gap-32 items-center">
               <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
-                <Image src="/images/about-us/bus.jpg" alt="Sharjah Public Bus" fill className="object-cover" />
+                <Image src="/images/about-us/s-bus.png" alt="Sharjah Public Bus" fill className="object-cover" />
               </div>
               <div className="space-y-8">
                 <div className="flex items-center gap-4">
@@ -198,7 +198,7 @@ export default function HowToFindUs() {
                 </div>
               </div>
               <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl order-1 lg:order-2">
-                <Image src="/images/about-us/metro.jpg" alt="Dubai Metro" fill className="object-cover" />
+                <Image src="/images/about-us/metro-dubai.png" alt="Dubai Metro" fill className="object-cover" />
               </div>
             </div>
           </div>

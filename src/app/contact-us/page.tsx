@@ -5,7 +5,6 @@ import Link from "next/link";
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import ContactForm from "@/app/contact-us/_components/form-contact";
 import { MessageCircle } from "lucide-react";
-import { BaseCard, BaseCardDescription, BaseCardIcon, BaseCardTitle } from "@/components/blocks/cards/base-card";
 import { SectionHeader } from "@/components/ui/section-header";
 
 
@@ -47,91 +46,82 @@ export default function ContactUs() {
       <section className="px-6 md:px-8 max-w-screen-2xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
           {/* Left Side: Contact Details */}
-          <div className="relative overflow-hidden rounded-[2.5rem] p-6 md:p-16 group h-full flex flex-col justify-start gap-12">
+          <div className="relative overflow-hidden rounded-[2.5rem] p-6 md:p-16 h-full flex flex-col justify-start gap-12">
             {/* Header */}
-            <SectionHeader
-              badge="STAY CONNECTED"
-              title={
-                <>
-                  Reach out to the <span className="text-primary">experts</span>
-                </>
-              }
-            />
 
             <div className="relative z-10 space-y-4 animate-fade-up">
-              <Link href="tel:+97165531250" className="block group/card-link">
-                <BaseCard className="flex flex-row items-start gap-4 p-5 ">
-                  <BaseCardIcon >
-                    <Phone className="w-6 h-6" />
-
-                  </BaseCardIcon>
+              <Link href="tel:+97143333616" className="block">
+                <div className="group flex flex-row items-start gap-4 p-5 rounded-lg border border-slate-300 bg-white transition-all duration-300 hover:-translate-y-1 hover:border-primary hover:shadow-lg">
+                  <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-white group-hover:scale-110">
+                    <Phone className="size-4" />
+                  </span>
                   <div className="space-y-1">
-                    <BaseCardTitle>
+                    <h3 className="text-lg font-black text-secondary group-hover:text-primary transition-colors tracking-tight">
                       +971 4 333 3616
-                    </BaseCardTitle>
-                    <BaseCardDescription>
+                    </h3>
+                    <p className="text-sm font-normal text-secondary/90">
                       Available Sunday – Thursday, 9am – 6pm
-                    </BaseCardDescription>
+                    </p>
                   </div>
-                </BaseCard>
+                </div>
               </Link>
 
-              <Link href="mailto:info@tepth.net" className="block group/card-link">
-                <BaseCard className="flex flex-row items-start gap-4 p-5 ">
-                  <BaseCardIcon >
-                    <Mail className="w-6 h-6" />
-                  </BaseCardIcon>
+              <Link href="mailto:info@tepth.net" className="block">
+                <div className="group flex flex-row items-start gap-4 p-5 rounded-lg border border-slate-300 bg-white transition-all duration-300 hover:-translate-y-1 hover:border-primary hover:shadow-lg">
+                  <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-white group-hover:scale-110">
+                    <Mail className="size-4" />
+                  </span>
                   <div className="space-y-1">
-                    <BaseCardTitle>
+                    <h3 className="text-lg font-black text-secondary group-hover:text-primary transition-colors tracking-tight">
                       info@tepth.net
-                    </BaseCardTitle>
-                    <BaseCardDescription>
+                    </h3>
+                    <p className="text-sm font-normal text-secondary/90">
                       We typically respond within 24 hours
-                    </BaseCardDescription>
+                    </p>
                   </div>
-                </BaseCard>
+                </div>
               </Link>
 
-              <Link href="/about-us/how-to-find-us" className="block group/card-link">
-                <BaseCard className="flex flex-row items-start gap-4 p-5 ">
-                  <BaseCardIcon >
-                    <MapPin className="w-6 h-6" />
-                  </BaseCardIcon>
+              <Link href="/about-us/how-to-find-us" className="block">
+                <div className="group flex flex-row items-start gap-4 p-5 rounded-lg border border-slate-300 bg-white transition-all duration-300 hover:-translate-y-1 hover:border-primary hover:shadow-lg">
+                  <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-white group-hover:scale-110">
+                    <MapPin className="size-4" />
+                  </span>
                   <div className="space-y-1">
-                    <BaseCardTitle>
+                    <h3 className="text-lg font-black text-secondary group-hover:text-primary transition-colors tracking-tight">
                       Dubai Silicon Oasis, Dubai, UAE
-                    </BaseCardTitle>
-                    <BaseCardDescription>
+                    </h3>
+                    <p className="text-sm font-normal text-secondary/90">
                       Close to Academic City — wheelchair accessible
-                    </BaseCardDescription>
+                    </p>
                   </div>
-                </BaseCard>
+                </div>
               </Link>
 
-              <Link href="https://wa.me/97165531250" target="_blank" className="block group/card-link">
-                <BaseCard className="flex flex-row items-start gap-4 p-5 ">
-                  <BaseCardIcon >
-                    <MessageCircle className="w-6 h-6" />
-                  </BaseCardIcon>
+              <Link href="https://wa.me/97165531250" target="_blank" className="block">
+                <div className="group flex flex-row items-start gap-4 p-5 rounded-lg border border-slate-300 bg-white transition-all duration-300 hover:-translate-y-1 hover:border-primary hover:shadow-lg">
+                  <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-white group-hover:scale-110">
+                    <MessageCircle className="size-4" />
+                  </span>
                   <div className="space-y-1">
-                    <BaseCardTitle>
+                    <h3 className="text-lg font-black text-secondary group-hover:text-primary transition-colors tracking-tight">
                       Chat with us
-                    </BaseCardTitle>
-                    <BaseCardDescription>
+                    </h3>
+                    <p className="text-sm font-normal text-secondary/90">
                       Quick answers via WhatsApp
-                    </BaseCardDescription>
+                    </p>
                   </div>
-                </BaseCard>
+                </div>
               </Link>
 
               {/* Office Hours Card */}
-              <BaseCard className="bg-rose-50/30 border border-rose-100/50 shadow-none h-fit rounded-xl flex flex-row gap-4 p-5 hover:translate-y-0 hover:shadow-none hover:border-rose-100/50">
-                <BaseCardIcon>
-                  <Clock className="w-6 h-6" />
-                </BaseCardIcon>
+              <div className="bg-rose-50/30 border border-rose-100/50 h-fit rounded-xl flex flex-row gap-4 p-5 transition-all duration-300">
+                <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                  <Clock className="size-4" />
+                </span>
 
-                <div className="flex-1 space-y-2">
-                  <BaseCardTitle className="text-lg font-black uppercase tracking-tight text-[#7d1c1c] pt-2 group-hover:text-[#7d1c1c]">Office Hours</BaseCardTitle>
+                <div className="flex-1 space-y-4">
+                  <h3 className="text-lg font-black uppercase tracking-tight text-[#7d1c1c] pt-0.5">Office Hours</h3>
 
                   <div className="space-y-2">
                     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-1 sm:gap-4">
@@ -145,7 +135,7 @@ export default function ContactUs() {
                     </div>
                   </div>
                 </div>
-              </BaseCard>
+              </div>
             </div>
           </div>
 
@@ -154,7 +144,6 @@ export default function ContactUs() {
             <div className="absolute -inset-10 bg-primary/5 rounded-[4rem] blur-3xl opacity-30 pointer-events-none"></div>
             <div className="relative bg-white rounded-[2.5rem] p-6 md:p-16 h-full flex flex-col">
               <SectionHeader
-                badge="ENQUIRY FORM"
                 title={
                   <>
                     Send a Direct<span className="text-primary"> Message</span>

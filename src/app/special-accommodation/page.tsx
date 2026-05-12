@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import SpecialAccommodationForm from "@/components/blocks/special-accommodation-form";
 import { BadgeCheck, Timer, ArrowRight, Eye, DoorOpen, Users } from "lucide-react";
+import { SectionHeader } from "@/components/ui/section-header";
 
 export default function SpecialAccommodation() {
   return (
@@ -10,29 +11,23 @@ export default function SpecialAccommodation() {
       <section className="py-16 md:py-24 px-8 max-w-screen-2xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
           {/* Left Content */}
-          <div className="space-y-8 animate-fade-up">
-            {/* Section Badge */}
-            <span className="section-label">
-              ACCESSIBILITY FIRST
-            </span>
-
-            {/* Main Heading */}
-            <h2 className="section-title">
-              Empowering <span className="text-primary italic">Every</span> Learner.
-            </h2>
-
-            {/* Description */}
-            <p className="section-description">
-              TEPTH is committed to ensuring that all candidates have equal opportunity to demonstrate their abilities. We provide a range of reasonable adjustments tailored to specific needs.
-            </p>
-          </div>
+          <SectionHeader
+            badge="ACCESSIBILITY FIRST"
+            title={
+              <>
+                Empowering <span className="text-primary italic">Every</span> Learner.
+              </>
+            }
+            description="TEPTH is committed to ensuring that all candidates have equal opportunity to demonstrate their abilities. We provide a range of reasonable adjustments tailored to specific needs."
+            className="space-y-4"
+          />
 
           {/* Right Visual */}
           <div className="relative group">
             <div className="absolute -inset-4 bg-primary/5 rounded-xl blur-3xl opacity-50 transition-opacity group-hover:opacity-100"></div>
             <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
               <Image
-                src="/images/about-us/experience-student.png"
+                src="/images/about-us/about-us-5.jpg"
                 alt="A focused student using specialized academic tools"
                 fill
                 className="object-cover"
@@ -46,12 +41,15 @@ export default function SpecialAccommodation() {
       {/* Types of Accommodations - Bento Grid */}
       <section className="py-24 bg-red-50/30">
         <div className="max-w-screen-2xl mx-auto px-8">
-          <h2 className="section-title">Available
-            <span className="text-primary">Accommodations</span>
-          </h2>
-          <p className="section-description py-4">
-            We offer various modifications based on documented medical conditions, disabilities, or specific learning requirements.
-          </p>
+          <SectionHeader
+            title={
+              <>
+                Available <span className="text-primary">Accommodations</span>
+              </>
+            }
+            description="We offer various modifications based on documented medical conditions, disabilities, or specific learning requirements."
+            className="mb-12"
+          />
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="md:col-span-2 bg-white shadow-sm p-10 rounded-xl flex flex-col justify-between group hover:bg-primary transition-colors duration-500 border border-slate-100 hover:border-primary">
@@ -171,10 +169,13 @@ export default function SpecialAccommodation() {
       {/* CTA Section */}
       <section className="py-20 bg-primary text-white">
         <div className="max-w-screen-2xl mx-auto px-8 text-center">
-          <h2 className="text-4xl font-headline font-bold mb-6 italic tracking-tight">Still have questions about accessibility?</h2>
-          <p className="text-white/80 max-w-2xl mx-auto mb-10 text-lg">
-            Our dedicated Student Support Team is available for 1-on-1 consultations to discuss your specific needs in total confidence.
-          </p>
+          <SectionHeader
+            title="Still have questions about accessibility?"
+            description="Our dedicated Student Support Team is available for 1-on-1 consultations to discuss your specific needs in total confidence."
+            align="center"
+            titleClassName="text-white text-4xl font-headline font-bold mb-6 italic tracking-tight"
+            descriptionClassName="text-white/80 max-w-2xl mx-auto mb-10 text-lg"
+          />
           <div className="flex justify-center flex-wrap gap-6">
             <button className="bg-white text-primary px-10 py-4 rounded-lg font-bold hover:bg-neutral-100 transition-colors shadow-lg active:scale-95">
               Book Free Consultation
