@@ -330,7 +330,7 @@ export default function FormIELTSAcademicRegistration() {
 
             <Field>
               <FieldLabel required>Sex</FieldLabel>
-              <FieldContent className="mt-4">
+              <FieldContent>
                 <RadioGroup
                   onValueChange={(val) => setValue("sex", val)}
                   value={formData.sex}
@@ -482,7 +482,7 @@ export default function FormIELTSAcademicRegistration() {
 
             <Field>
               <FieldLabel required>Identification type</FieldLabel>
-              <FieldContent className="mt-4">
+              <FieldContent>
                 <RadioGroup
                   onValueChange={(val) => setValue("idType", val)}
                   value={formData.idType}

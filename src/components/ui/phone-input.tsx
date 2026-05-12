@@ -32,7 +32,7 @@ const PhoneInput: React.ForwardRefExoticComponent<PhoneInputProps> =
                 <RPNInput.default
                     ref={ref}
                     className={cn(
-                        "flex w-full min-w-0 rounded-md border border-slate-200 bg-white px-0 py-0 text-base transition-[color,box-shadow,background-color] outline-none focus-within:border-primary focus-within:ring-3 focus-within:ring-ring/30 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
+                        "flex w-full min-w-0 rounded-md border border-slate-200 bg-transparent px-0 py-0 text-base transition-[color,box-shadow,background-color] outline-none focus-within:border-primary focus-within:ring-3 focus-within:ring-ring/30 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
                         className,
                     )}
                     flagComponent={FlagComponent}
@@ -100,7 +100,7 @@ const CountrySelect = ({
                 <Button
                     type="button"
                     variant="ghost"
-                    className="flex gap-1 rounded-e-none rounded-s-md px-3 focus:z-10 h-full bg-white hover:bg-white hover:shadow-none"
+                    className="flex gap-1 rounded-e-none rounded-s-md px-3 focus:z-10 h-full bg-transparent hover:bg-white hover:shadow-none"
                     disabled={disabled}
                 >
                     <FlagComponent
@@ -121,7 +121,7 @@ const CountrySelect = ({
                     side="bottom"
                     align="start"
                     sideOffset={4}
-                    className="z-50 w-[300px] rounded-md border border-slate-200 bg-white p-1 text-slate-700 shadow-md outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2"
+                    className="z-50 w-[300px] rounded-md border border-slate-200 bg-white text-slate-700 shadow-md outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2"
                 >
                     <Command className="bg-white text-slate-700">
                         <div className="p-1 border-b border-slate-100">
@@ -141,11 +141,11 @@ const CountrySelect = ({
                                     }, 0);
                                 }}
                                 placeholder="Search country..."
-                                className="h-9 px-2 outline-none w-full bg-white rounded"
+                                className="h-9 px-2 outline-none w-full bg-slate-50"
                             />
                         </div>
-                        <CommandList className="p-1">
-                            <ScrollArea ref={scrollAreaRef} className="h-72 no-scrollbar">
+                        <CommandList className="overflow-y-auto no-scrollbar">
+                            <ScrollArea ref={scrollAreaRef} className="h-72">
                                 <CommandEmpty className="py-6 text-center text-sm text-slate-500">No country found.</CommandEmpty>
                                 <CommandGroup>
                                     {countryList.map(({ value, label }) =>
@@ -191,12 +191,12 @@ const CountrySelectOption = ({
     return (
         <CommandItem
             value={countryName}
-            className="flex items-center gap-2 rounded px-2 py-2 text-sm outline-none cursor-default select-none hover:bg-slate-50 focus:bg-slate-50 data-[selected=true]:bg-slate-50"
+            className="flex items-center gap-2 rounded text-sm outline-none cursor-default select-none hover:bg-slate-50 focus:bg-slate-50 data-[selected=true]:bg-slate-50"
             onSelect={handleSelect}
         >
             <CheckIcon
                 className={cn(
-                    "h-4 w-4 shrink-0 text-[#A11D1D]",
+                    "h-4 w-4 shrink-0 text-primary",
                     country === selectedCountry ? "opacity-100" : "opacity-0"
                 )}
             />
