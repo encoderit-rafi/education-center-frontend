@@ -109,7 +109,7 @@ function PaidMockTestRegistrationForm({
             Booking Confirmed
           </h2>
           <p className="text-emerald-700/80 text-base leading-relaxed font-medium">
-            Your "CODE" Mock Test has been successfully scheduled for{" "}
+            Your &quot;CODE&quot; Mock Test has been successfully scheduled for{" "}
             {selectedDate ? format(selectedDate, "PPP") : ""} at {selectedTime}.
             Check your email for testing credentials.
           </p>

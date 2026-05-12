@@ -1,0 +1,646 @@
+
+> educational-center-website-react-node-nextjs-frontend@0.1.0 lint
+> eslint
+
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/refactor.js
+  1:12  error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+  2:14  error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/app/about-us/accreditation/page.tsx
+  4:8   warning  'Link' is defined but never used         @typescript-eslint/no-unused-vars
+  5:10  warning  'ArrowRight' is defined but never used   @typescript-eslint/no-unused-vars
+  5:22  warning  'Award' is defined but never used        @typescript-eslint/no-unused-vars
+  5:29  warning  'ShieldCheck' is defined but never used  @typescript-eslint/no-unused-vars
+  6:10  warning  'Button' is defined but never used       @typescript-eslint/no-unused-vars
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/app/about-us/how-to-find-us/_components/driving-routes.tsx
+  4:19  warning  'MapPin' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/app/about-us/how-to-find-us/page.tsx
+    5:10   warning  'ArrowRight' is defined but never used                           @typescript-eslint/no-unused-vars
+    5:27   warning  'CircleParking' is defined but never used                        @typescript-eslint/no-unused-vars
+    5:56   warning  'Info' is defined but never used                                 @typescript-eslint/no-unused-vars
+    6:10   warning  'Button' is defined but never used                               @typescript-eslint/no-unused-vars
+  271:25   error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  271:131  error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/app/about-us/why-choose-us/page.tsx
+  4:8   warning  'Link' is defined but never used        @typescript-eslint/no-unused-vars
+  5:10  warning  'ArrowRight' is defined but never used  @typescript-eslint/no-unused-vars
+  6:10  warning  'Button' is defined but never used      @typescript-eslint/no-unused-vars
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/app/book-exams/[id]/page.tsx
+  3:8  warning  'FormIELTSUKVIRegistration' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/app/book-exams/_components/book-exam-items.tsx
+   1:8   warning  'BaseHeroSection' is defined but never used      @typescript-eslint/no-unused-vars
+   5:3   warning  'BaseCardDescription' is defined but never used  @typescript-eslint/no-unused-vars
+   9:10  warning  'ArrowRight' is defined but never used           @typescript-eslint/no-unused-vars
+  12:57  error    Unexpected any. Specify a different type         @typescript-eslint/no-explicit-any
+  36:35  error    Unexpected any. Specify a different type         @typescript-eslint/no-explicit-any
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/app/book-exams/page.tsx
+    5:3   warning  'ChevronRight' is defined but never used                  @typescript-eslint/no-unused-vars
+   10:3   warning  'Phone' is defined but never used                         @typescript-eslint/no-unused-vars
+   11:3   warning  'Mail' is defined but never used                          @typescript-eslint/no-unused-vars
+   12:3   warning  'ArrowRight' is defined but never used                    @typescript-eslint/no-unused-vars
+   13:3   warning  'AlertTriangle' is defined but never used                 @typescript-eslint/no-unused-vars
+   14:3   warning  'Check' is defined but never used                         @typescript-eslint/no-unused-vars
+   27:7   warning  'EXAMS' is assigned a value but never used                @typescript-eslint/no-unused-vars
+   92:7   warning  'GUIDANCE_CATEGORIES' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  150:15  error    Missing "key" prop for element in iterator                react/jsx-key
+  174:10  warning  'ExamCard' is defined but never used                      @typescript-eslint/no-unused-vars
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/app/book-exams/test-day-guidelines/_components/test-day-guidelines-client.tsx
+  6:3  warning  'ChevronRight' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/app/career/page.tsx
+    3:8   warning  'Image' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  @typescript-eslint/no-unused-vars
+    9:10  warning  'cn' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     @typescript-eslint/no-unused-vars
+  124:71  error    Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/app/career/page.tsx:124:71
+  122 |
+  123 |                                 <Form {...form}>
+> 124 |                                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      |                                                                       ^^^^^^^^ Passing a ref to a function may read its value during render
+  125 |                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+  126 |                                             {/* Full Name */}
+  127 |                                             <FormField  react-hooks/refs
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/app/contact-us/_components/form-contact.tsx
+   30:10  warning  'CheckCircle2' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          @typescript-eslint/no-unused-vars
+  100:56  error    Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/app/contact-us/_components/form-contact.tsx:100:56
+   98 |
+   99 |   return (
+> 100 |     <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+      |                                                        ^^^^^^^^ Passing a ref to a function may read its value during render
+  101 |       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+  102 |         <Field data-invalid={!!errors.fullName}>
+  103 |           <FieldLabel className="text-sm font-medium">  react-hooks/refs
+  302:43  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   react/no-unescaped-entities
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/app/disability-policy/page.tsx
+  32:29   error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  32:153  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/app/events/page.tsx
+  20:5  warning  'Phone' is defined but never used  @typescript-eslint/no-unused-vars
+  21:5  warning  'Mail' is defined but never used   @typescript-eslint/no-unused-vars
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/app/exam-delivery/exam-provider/page.tsx
+  4:8   warning  'Image' is defined but never used  @typescript-eslint/no-unused-vars
+  5:8   warning  'Link' is defined but never used   @typescript-eslint/no-unused-vars
+  6:10  warning  'cn' is defined but never used     @typescript-eslint/no-unused-vars
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/app/exam-delivery/test-takers/page.tsx
+  6:10  warning  'cn' is defined but never used          @typescript-eslint/no-unused-vars
+  8:5   warning  'BadgeCheck' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/app/exam-delivery/vendor/page.tsx
+  4:10  warning  'ArrowRight' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/app/exam-preparation-courses/[id]/page.tsx
+   5:3  warning  'ArrowRight' is defined but never used        @typescript-eslint/no-unused-vars
+   6:3  warning  'MapPin' is defined but never used            @typescript-eslint/no-unused-vars
+   7:3  warning  'Award' is defined but never used             @typescript-eslint/no-unused-vars
+  10:3  warning  'Users' is defined but never used             @typescript-eslint/no-unused-vars
+  11:3  warning  'UserCheck' is defined but never used         @typescript-eslint/no-unused-vars
+  18:3  warning  'BaseCardIcon' is defined but never used      @typescript-eslint/no-unused-vars
+  23:8  warning  'FreeConsultation' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/app/exam-preparation-courses/registration/page.tsx
+  40:9  warning  'courseId' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/app/exam-proctoring-services/institutions/page.tsx
+  63:70  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/app/exam-proctoring-services/test-takers/page.tsx
+    3:30   warning  'Clock' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   @typescript-eslint/no-unused-vars
+    3:76   warning  'ExternalLink' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            @typescript-eslint/no-unused-vars
+   44:17   warning  Compilation Skipped: Use of incompatible library
+
+This API returns functions which cannot be memoized without leading to stale UI. To prevent this, by default React Compiler will skip memoizing this component/hook. However, you may see issues if values from this API are passed to other components/hooks that are memoized.
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/app/exam-proctoring-services/test-takers/page.tsx:44:17
+  42 |
+  43 | export default function TestTakersPage() {
+> 44 |   const table = useReactTable({
+     |                 ^^^^^^^^^^^^^ TanStack Table's `useReactTable()` API returns functions that cannot be memoized safely
+  45 |     data: FEES,
+  46 |     columns,
+  47 |     getCoreRowModel: getCoreRowModel(),  react-hooks/incompatible-library
+  109:70   error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     react/no-unescaped-entities
+  109:135  error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     react/no-unescaped-entities
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/app/exam-workshops/_components/exam-workshop-form.tsx
+  23:3   warning  'Info' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      @typescript-eslint/no-unused-vars
+  26:3   warning  'Award' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     @typescript-eslint/no-unused-vars
+  27:3   warning  'ShieldCheck' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               @typescript-eslint/no-unused-vars
+  28:3   warning  'CreditCard' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                @typescript-eslint/no-unused-vars
+  77:25  warning  Compilation Skipped: Use of incompatible library
+
+This API returns functions which cannot be memoized without leading to stale UI. To prevent this, by default React Compiler will skip memoizing this component/hook. However, you may see issues if values from this API are passed to other components/hooks that are memoized.
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/app/exam-workshops/_components/exam-workshop-form.tsx:77:25
+  75 |   });
+  76 |
+> 77 |   const selectedTitle = watch("workshopTitle");
+     |                         ^^^^^ React Hook Form's `useForm()` API returns a `watch()` function which cannot be memoized safely.
+  78 |   const selectedDate = watch("date");
+  79 |   const selectedTime = watch("timeSlot");
+  80 |  react-hooks/incompatible-library
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/app/exam-workshops/celpip-general/page.tsx
+    5:3   warning  'Target' is defined but never used                               @typescript-eslint/no-unused-vars
+    6:3   warning  'Zap' is defined but never used                                  @typescript-eslint/no-unused-vars
+    7:3   warning  'BookOpen' is defined but never used                             @typescript-eslint/no-unused-vars
+   19:3   warning  'BaseCardIcon' is defined but never used                         @typescript-eslint/no-unused-vars
+  184:15  error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  184:40  error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/app/exam-workshops/ielts/page.tsx
+    5:3   warning  'Target' is defined but never used                               @typescript-eslint/no-unused-vars
+    6:3   warning  'Zap' is defined but never used                                  @typescript-eslint/no-unused-vars
+    7:3   warning  'BookOpen' is defined but never used                             @typescript-eslint/no-unused-vars
+   19:3   warning  'BaseCardIcon' is defined but never used                         @typescript-eslint/no-unused-vars
+  184:15  error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  184:39  error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/app/exam-workshops/page.tsx
+  11:18  warning  'Clock' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/app/exam-workshops/toefl/page.tsx
+  133:15  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  133:39  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/app/exams/_components/exam-details.tsx
+    7:3   warning  'FileText' is defined but never used        @typescript-eslint/no-unused-vars
+   22:3   warning  'BaseCardTitle' is defined but never used   @typescript-eslint/no-unused-vars
+   23:3   warning  'BaseCardList' is defined but never used    @typescript-eslint/no-unused-vars
+   25:8   warning  'GradientBox' is defined but never used     @typescript-eslint/no-unused-vars
+   53:55  error    Unexpected any. Specify a different type    @typescript-eslint/no-explicit-any
+   65:9   warning  'image' is assigned a value but never used  @typescript-eslint/no-unused-vars
+   95:35  error    Unexpected any. Specify a different type    @typescript-eslint/no-explicit-any
+  138:45  error    Unexpected any. Specify a different type    @typescript-eslint/no-explicit-any
+  244:37  error    Unexpected any. Specify a different type    @typescript-eslint/no-explicit-any
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/app/exams/_components/exam-items.tsx
+   1:8   warning  'BaseHeroSection' is defined but never used      @typescript-eslint/no-unused-vars
+   5:3   warning  'BaseCardDescription' is defined but never used  @typescript-eslint/no-unused-vars
+   9:10  warning  'ArrowRight' is defined but never used           @typescript-eslint/no-unused-vars
+  12:53  error    Unexpected any. Specify a different type         @typescript-eslint/no-explicit-any
+  36:35  error    Unexpected any. Specify a different type         @typescript-eslint/no-explicit-any
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/app/exams/other-exams/page.tsx
+   1:8   warning  'BaseHeroSection' is defined but never used  @typescript-eslint/no-unused-vars
+   7:3   warning  'BaseCardArrow' is defined but never used    @typescript-eslint/no-unused-vars
+   9:8   warning  'GradientBox' is defined but never used      @typescript-eslint/no-unused-vars
+  10:10  warning  'buttonVariants' is defined but never used   @typescript-eslint/no-unused-vars
+  11:10  warning  'ArrowRight' is defined but never used       @typescript-eslint/no-unused-vars
+  12:8   warning  'Link' is defined but never used             @typescript-eslint/no-unused-vars
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/app/exams/page.tsx
+   4:10  warning  'cn' is defined but never used              @typescript-eslint/no-unused-vars
+   5:10  warning  'exams' is defined but never used           @typescript-eslint/no-unused-vars
+  13:8   warning  'GradientBox' is defined but never used     @typescript-eslint/no-unused-vars
+  14:10  warning  'ArrowRight' is defined but never used      @typescript-eslint/no-unused-vars
+  15:10  warning  'buttonVariants' is defined but never used  @typescript-eslint/no-unused-vars
+  36:15  error    Missing "key" prop for element in iterator  react/jsx-key
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/app/fees/[id]/page.tsx
+   3:3   warning  'BaseCardDescription' is defined but never used  @typescript-eslint/no-unused-vars
+   5:3   warning  'BaseCardList' is defined but never used         @typescript-eslint/no-unused-vars
+  11:10  warning  'cn' is defined but never used                   @typescript-eslint/no-unused-vars
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/app/fees/page.tsx
+   6:3   warning  'BadgePercent' is defined but never used           @typescript-eslint/no-unused-vars
+   7:3   warning  'GraduationCap' is defined but never used          @typescript-eslint/no-unused-vars
+   8:3   warning  'Clock' is defined but never used                  @typescript-eslint/no-unused-vars
+   9:3   warning  'UserCheck' is defined but never used              @typescript-eslint/no-unused-vars
+  10:3   warning  'CheckCircle2' is defined but never used           @typescript-eslint/no-unused-vars
+  11:3   warning  'ArrowRight' is defined but never used             @typescript-eslint/no-unused-vars
+  12:3   warning  'ShieldCheck' is defined but never used            @typescript-eslint/no-unused-vars
+  13:3   warning  'Sparkles' is defined but never used               @typescript-eslint/no-unused-vars
+  15:8   warning  'FreeConsultation' is defined but never used       @typescript-eslint/no-unused-vars
+  20:3   warning  'BaseCardImportantInfo' is defined but never used  @typescript-eslint/no-unused-vars
+  21:3   warning  'BaseCardDescription' is defined but never used    @typescript-eslint/no-unused-vars
+  25:21  warning  'NAV_FEES' is defined but never used               @typescript-eslint/no-unused-vars
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/app/forms/page.tsx
+   5:8  warning  'FormPTEAcademicRegistration' is defined but never used  @typescript-eslint/no-unused-vars
+   6:8  warning  'FormPTECoreRegistration' is defined but never used      @typescript-eslint/no-unused-vars
+   7:8  warning  'FormPTEHomeA1Registration' is defined but never used    @typescript-eslint/no-unused-vars
+   8:8  warning  'FormPTEHomeA2Registration' is defined but never used    @typescript-eslint/no-unused-vars
+  11:8  warning  'FormSELTRegistration' is defined but never used         @typescript-eslint/no-unused-vars
+  12:8  warning  'FormTOEFLIBTRegistration' is defined but never used     @typescript-eslint/no-unused-vars
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/app/free-consultation/_components/free-consultation-form.tsx
+   37:3   warning  'Check' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                @typescript-eslint/no-unused-vars
+   38:3   warning  'SendHorizontal' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       @typescript-eslint/no-unused-vars
+  103:24  warning  Compilation Skipped: Use of incompatible library
+
+This API returns functions which cannot be memoized without leading to stale UI. To prevent this, by default React Compiler will skip memoizing this component/hook. However, you may see issues if values from this API are passed to other components/hooks that are memoized.
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/app/free-consultation/_components/free-consultation-form.tsx:103:24
+  101 |   });
+  102 |
+> 103 |   const selectedDate = watch("date");
+      |                        ^^^^^ React Hook Form's `useForm()` API returns a `watch()` function which cannot be memoized safely.
+  104 |
+  105 |   const onSubmit = async (data: FormValues) => {
+  106 |     console.log("Submitting:", data);  react-hooks/incompatible-library
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/app/layout.tsx
+   7:8  warning  'FloatingChatbot' is defined but never used                                                                                                                      @typescript-eslint/no-unused-vars
+   8:8  warning  'SocialSupport' is defined but never used                                                                                                                        @typescript-eslint/no-unused-vars
+  35:9  warning  Custom fonts not added in `pages/_document.js` will only load for a single page. This is discouraged. See: https://nextjs.org/docs/messages/no-page-custom-font  @next/next/no-page-custom-font
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/app/our-venues/360-degree-virtual-tour/page.tsx
+  106:7   warning  'facilities' is assigned a value but never used                                                                                                                                                                                                                                          @typescript-eslint/no-unused-vars
+  142:25  warning  'setActiveVenueId' is assigned a value but never used                                                                                                                                                                                                                                    @typescript-eslint/no-unused-vars
+  143:10  warning  'activeTab' is assigned a value but never used                                                                                                                                                                                                                                           @typescript-eslint/no-unused-vars
+  143:21  warning  'setActiveTab' is assigned a value but never used                                                                                                                                                                                                                                        @typescript-eslint/no-unused-vars
+  145:9   warning  'venue' is assigned a value but never used                                                                                                                                                                                                                                               @typescript-eslint/no-unused-vars
+  175:13  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  186:26  warning  'idx' is defined but never used                                                                                                                                                                                                                                                          @typescript-eslint/no-unused-vars
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/app/our-venues/book-an-exam-venue/page.tsx
+  10:145  warning  'LucideIcon' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/app/page.tsx
+  10:8  warning  'ExamPrepCourses' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/app/paid-mock-tests/[id]/page.tsx
+  160:13  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  160:38  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/app/paid-mock-tests/page.tsx
+  10:8  warning  'FreeConsultation' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/app/paid-mock-tests/registration/page.tsx
+   16:10  warning  'RadioGroup' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           @typescript-eslint/no-unused-vars
+   16:22  warning  'RadioGroupItem' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       @typescript-eslint/no-unused-vars
+   33:31  warning  'PAID_MOCK_TESTS_DATA' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 @typescript-eslint/no-unused-vars
+   57:3   warning  'initialMockTestId' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    @typescript-eslint/no-unused-vars
+   86:9   warning  'selectedId' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  @typescript-eslint/no-unused-vars
+   86:22  warning  Compilation Skipped: Use of incompatible library
+
+This API returns functions which cannot be memoized without leading to stale UI. To prevent this, by default React Compiler will skip memoizing this component/hook. However, you may see issues if values from this API are passed to other components/hooks that are memoized.
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/app/paid-mock-tests/registration/page.tsx:86:22
+  84 |   });
+  85 |
+> 86 |   const selectedId = watch("mockTestId");
+     |                      ^^^^^ React Hook Form's `useForm()` API returns a `watch()` function which cannot be memoized safely.
+  87 |   const selectedDate = watch("date");
+  88 |   const selectedTime = watch("timeSlot");
+  89 |  react-hooks/incompatible-library
+  112:18  error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  react/no-unescaped-entities
+  112:23  error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  react/no-unescaped-entities
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/app/privacy-policy/page.tsx
+  78:41   error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  78:174  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/app/special-accommodation/page.tsx
+  4:10  warning  'BadgeCheck' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/app/terms-and-conditions/page.tsx
+  78:113  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  78:136  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  84:89   error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  84:102  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/app/test-dates/page.tsx
+  231:22  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/app/workshop-registration/page.tsx
+  19:10  warning  'EXAM_PREPARATION_COURSES_DATA' is defined but never used  @typescript-eslint/no-unused-vars
+  41:9   warning  'courseId' is assigned a value but never used              @typescript-eslint/no-unused-vars
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/components/base-hero-section.tsx
+  2:8  warning  'Image' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/components/blocks/ai-chat-bot.tsx
+  297:23  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/components/blocks/brands-section.tsx
+  1:10  warning  'cn' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/components/blocks/calendar-booking/exam-date-selector.tsx
+  6:10  warning  'useState' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/components/blocks/core-services.tsx
+  13:10  warning  'cn' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/components/blocks/course-card.tsx
+   2:22  warning  'CalendarDays' is defined but never used  @typescript-eslint/no-unused-vars
+  11:48  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/components/blocks/course-list.tsx
+   1:10  warning  'exams' is defined but never used           @typescript-eslint/no-unused-vars
+   1:17  warning  'exams_types' is defined but never used     @typescript-eslint/no-unused-vars
+   8:10  warning  'ArrowRight' is defined but never used      @typescript-eslint/no-unused-vars
+   9:10  warning  'Badge' is defined but never used           @typescript-eslint/no-unused-vars
+  25:39  warning  'index' is defined but never used           @typescript-eslint/no-unused-vars
+  26:13  error    Missing "key" prop for element in iterator  react/jsx-key
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/components/blocks/exam-prep-courses.tsx
+  4:10  warning  'cn' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/components/blocks/footer.tsx
+  34:10  warning  'copied' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/components/blocks/forms/ielts/ielts-academic-registration/form-ielts-academic-registration.tsx
+   45:10  warning  'showMarketingNotice' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    @typescript-eslint/no-unused-vars
+   45:31  warning  'setShowMarketingNotice' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 @typescript-eslint/no-unused-vars
+  108:20  warning  Compilation Skipped: Use of incompatible library
+
+This API returns functions which cannot be memoized without leading to stale UI. To prevent this, by default React Compiler will skip memoizing this component/hook. However, you may see issues if values from this API are passed to other components/hooks that are memoized.
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/components/blocks/forms/ielts/ielts-academic-registration/form-ielts-academic-registration.tsx:108:20
+  106 |   const { control, handleSubmit, watch, trigger } = form;
+  107 |
+> 108 |   const formData = watch();
+      |                    ^^^^^ React Hook Form's `useForm()` API returns a `watch()` function which cannot be memoized safely.
+  109 |
+  110 |   const selectedCourseData = courses.find(c => c.id === formData.selectedCourse);
+  111 |   const selectedWorkshopData = workshops.find(w => w.id === formData.selectedWorkshop);  react-hooks/incompatible-library
+  432:40  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             react/no-unescaped-entities
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/components/blocks/forms/ielts/ielts-general-registration/form-ielts-general-registration.tsx
+   45:10  warning  'showMarketingNotice' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  @typescript-eslint/no-unused-vars
+   45:31  warning  'setShowMarketingNotice' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               @typescript-eslint/no-unused-vars
+  108:20  warning  Compilation Skipped: Use of incompatible library
+
+This API returns functions which cannot be memoized without leading to stale UI. To prevent this, by default React Compiler will skip memoizing this component/hook. However, you may see issues if values from this API are passed to other components/hooks that are memoized.
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/components/blocks/forms/ielts/ielts-general-registration/form-ielts-general-registration.tsx:108:20
+  106 |   const { control, handleSubmit, watch, trigger } = form;
+  107 |
+> 108 |   const formData = watch();
+      |                    ^^^^^ React Hook Form's `useForm()` API returns a `watch()` function which cannot be memoized safely.
+  109 |
+  110 |   const selectedCourseData = courses.find(c => c.id === formData.selectedCourse);
+  111 |   const selectedWorkshopData = workshops.find(w => w.id === formData.selectedWorkshop);  react-hooks/incompatible-library
+  432:40  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           react/no-unescaped-entities
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/components/blocks/forms/ielts/ielts-ukvi-registration/form-ielts-ukvi-registration.tsx
+   45:10  warning  'showMarketingNotice' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            @typescript-eslint/no-unused-vars
+   45:31  warning  'setShowMarketingNotice' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         @typescript-eslint/no-unused-vars
+  108:20  warning  Compilation Skipped: Use of incompatible library
+
+This API returns functions which cannot be memoized without leading to stale UI. To prevent this, by default React Compiler will skip memoizing this component/hook. However, you may see issues if values from this API are passed to other components/hooks that are memoized.
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/components/blocks/forms/ielts/ielts-ukvi-registration/form-ielts-ukvi-registration.tsx:108:20
+  106 |   const { control, handleSubmit, watch, trigger } = form;
+  107 |
+> 108 |   const formData = watch();
+      |                    ^^^^^ React Hook Form's `useForm()` API returns a `watch()` function which cannot be memoized safely.
+  109 |
+  110 |   const selectedCourseData = courses.find(c => c.id === formData.selectedCourse);
+  111 |   const selectedWorkshopData = workshops.find(w => w.id === formData.selectedWorkshop);  react-hooks/incompatible-library
+  432:40  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     react/no-unescaped-entities
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/components/blocks/forms/pte-academic-registration/_type/pte-academic.ts
+  11:7  warning  'optionalString' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  12:7  warning  'requiredString' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/components/blocks/forms/pte-academic-registration/form-pte-academic-registration.tsx
+   20:3   warning  'CheckCircle2' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           @typescript-eslint/no-unused-vars
+   23:3   warning  'Check' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  @typescript-eslint/no-unused-vars
+   24:3   warning  'Clock' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  @typescript-eslint/no-unused-vars
+   27:3   warning  'Building2' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              @typescript-eslint/no-unused-vars
+   28:3   warning  'Banknote' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               @typescript-eslint/no-unused-vars
+   29:3   warning  'ShieldCheck' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            @typescript-eslint/no-unused-vars
+   32:3   warning  'CreditCard' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             @typescript-eslint/no-unused-vars
+   33:3   warning  'ExternalLink' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           @typescript-eslint/no-unused-vars
+   41:21  warning  'globalCourses' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          @typescript-eslint/no-unused-vars
+   54:10  warning  'showMarketingNotice' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           @typescript-eslint/no-unused-vars
+   54:31  warning  'setShowMarketingNotice' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        @typescript-eslint/no-unused-vars
+   55:10  warning  'showTermsNotice' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               @typescript-eslint/no-unused-vars
+   55:27  warning  'setShowTermsNotice' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            @typescript-eslint/no-unused-vars
+  103:50  warning  'setValue' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      @typescript-eslint/no-unused-vars
+  104:20  warning  Compilation Skipped: Use of incompatible library
+
+This API returns functions which cannot be memoized without leading to stale UI. To prevent this, by default React Compiler will skip memoizing this component/hook. However, you may see issues if values from this API are passed to other components/hooks that are memoized.
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/components/blocks/forms/pte-academic-registration/form-pte-academic-registration.tsx:104:20
+  102 |
+  103 |   const { control, handleSubmit, watch, trigger, setValue } = form;
+> 104 |   const formData = watch();
+      |                    ^^^^^ React Hook Form's `useForm()` API returns a `watch()` function which cannot be memoized safely.
+  105 |   const watchTakenBefore = watch("takenBefore");
+  106 |   const watchReason = watch("reasonForTaking");
+  107 |  react-hooks/incompatible-library
+  119:60  warning  'data' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   @typescript-eslint/no-unused-vars
+  130:55  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           @typescript-eslint/no-explicit-any
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/components/blocks/forms/pte-core-registration/_type/pte-core.ts
+  11:7  warning  'optionalString' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  12:7  warning  'requiredString' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/components/blocks/forms/pte-core-registration/form-pte-core-registration.tsx
+   20:3   warning  'CheckCircle2' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                @typescript-eslint/no-unused-vars
+   22:3   warning  'Check' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       @typescript-eslint/no-unused-vars
+   91:50  warning  'setValue' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           @typescript-eslint/no-unused-vars
+   92:20  warning  Compilation Skipped: Use of incompatible library
+
+This API returns functions which cannot be memoized without leading to stale UI. To prevent this, by default React Compiler will skip memoizing this component/hook. However, you may see issues if values from this API are passed to other components/hooks that are memoized.
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/components/blocks/forms/pte-core-registration/form-pte-core-registration.tsx:92:20
+  90 |
+  91 |   const { control, handleSubmit, watch, trigger, setValue } = form;
+> 92 |   const formData = watch();
+     |                    ^^^^^ React Hook Form's `useForm()` API returns a `watch()` function which cannot be memoized safely.
+  93 |   const watchTakenBefore = watch("takenBefore");
+  94 |
+  95 |   const selectedCourseData = pteCourses.find(c => c.id === formData.selectedCourse);  react-hooks/incompatible-library
+  106:56  warning  'data' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        @typescript-eslint/no-unused-vars
+  117:55  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                @typescript-eslint/no-explicit-any
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/components/blocks/forms/pte-home-a1-registration/_type/pte-home.ts
+  13:7  warning  'optionalString' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/components/blocks/forms/pte-home-a1-registration/form-pte-home-a1-registration.tsx
+   20:3   warning  'CheckCircle2' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      @typescript-eslint/no-unused-vars
+   22:3   warning  'Check' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             @typescript-eslint/no-unused-vars
+   94:50  warning  'setValue' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 @typescript-eslint/no-unused-vars
+   95:20  warning  Compilation Skipped: Use of incompatible library
+
+This API returns functions which cannot be memoized without leading to stale UI. To prevent this, by default React Compiler will skip memoizing this component/hook. However, you may see issues if values from this API are passed to other components/hooks that are memoized.
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/components/blocks/forms/pte-home-a1-registration/form-pte-home-a1-registration.tsx:95:20
+  93 |
+  94 |   const { control, handleSubmit, watch, trigger, setValue } = form;
+> 95 |   const formData = watch();
+     |                    ^^^^^ React Hook Form's `useForm()` API returns a `watch()` function which cannot be memoized safely.
+  96 |   const watchTakenBefore = watch("takenBefore");
+  97 |
+  98 |   const selectedCourseData = pteCourses.find(c => c.id === formData.selectedCourse);  react-hooks/incompatible-library
+  109:58  warning  'data' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              @typescript-eslint/no-unused-vars
+  120:55  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      @typescript-eslint/no-explicit-any
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/components/blocks/forms/pte-home-a2-registration/_type/pte-home.ts
+  13:7  warning  'optionalString' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/components/blocks/forms/pte-home-a2-registration/form-pte-home-a2-registration.tsx
+   20:3   warning  'CheckCircle2' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      @typescript-eslint/no-unused-vars
+   22:3   warning  'Check' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             @typescript-eslint/no-unused-vars
+   94:50  warning  'setValue' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 @typescript-eslint/no-unused-vars
+   95:20  warning  Compilation Skipped: Use of incompatible library
+
+This API returns functions which cannot be memoized without leading to stale UI. To prevent this, by default React Compiler will skip memoizing this component/hook. However, you may see issues if values from this API are passed to other components/hooks that are memoized.
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/components/blocks/forms/pte-home-a2-registration/form-pte-home-a2-registration.tsx:95:20
+  93 |
+  94 |   const { control, handleSubmit, watch, trigger, setValue } = form;
+> 95 |   const formData = watch();
+     |                    ^^^^^ React Hook Form's `useForm()` API returns a `watch()` function which cannot be memoized safely.
+  96 |   const watchTakenBefore = watch("takenBefore");
+  97 |
+  98 |   const selectedCourseData = pteCourses.find(c => c.id === formData.selectedCourse);  react-hooks/incompatible-library
+  109:58  warning  'data' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              @typescript-eslint/no-unused-vars
+  120:55  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      @typescript-eslint/no-explicit-any
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/components/blocks/forms/pte-home-b1-registration/_type/pte-home.ts
+  13:7  warning  'optionalString' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/components/blocks/forms/pte-home-b1-registration/form-pte-home-b1-registration.tsx
+   20:3   warning  'CheckCircle2' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      @typescript-eslint/no-unused-vars
+   22:3   warning  'Check' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             @typescript-eslint/no-unused-vars
+   94:50  warning  'setValue' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 @typescript-eslint/no-unused-vars
+   95:20  warning  Compilation Skipped: Use of incompatible library
+
+This API returns functions which cannot be memoized without leading to stale UI. To prevent this, by default React Compiler will skip memoizing this component/hook. However, you may see issues if values from this API are passed to other components/hooks that are memoized.
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/components/blocks/forms/pte-home-b1-registration/form-pte-home-b1-registration.tsx:95:20
+  93 |
+  94 |   const { control, handleSubmit, watch, trigger, setValue } = form;
+> 95 |   const formData = watch();
+     |                    ^^^^^ React Hook Form's `useForm()` API returns a `watch()` function which cannot be memoized safely.
+  96 |   const watchTakenBefore = watch("takenBefore");
+  97 |
+  98 |   const selectedCourseData = pteCourses.find(c => c.id === formData.selectedCourse);  react-hooks/incompatible-library
+  109:58  warning  'data' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              @typescript-eslint/no-unused-vars
+  120:55  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      @typescript-eslint/no-explicit-any
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/components/blocks/forms/pte-home-ukvi-registration/_type/pte-home.ts
+  13:7  warning  'optionalString' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/components/blocks/forms/pte-home-ukvi-registration/form-pte-home-ukvi-registration.tsx
+   20:3   warning  'CheckCircle2' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          @typescript-eslint/no-unused-vars
+   22:3   warning  'Check' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 @typescript-eslint/no-unused-vars
+   94:50  warning  'setValue' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     @typescript-eslint/no-unused-vars
+   95:20  warning  Compilation Skipped: Use of incompatible library
+
+This API returns functions which cannot be memoized without leading to stale UI. To prevent this, by default React Compiler will skip memoizing this component/hook. However, you may see issues if values from this API are passed to other components/hooks that are memoized.
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/components/blocks/forms/pte-home-ukvi-registration/form-pte-home-ukvi-registration.tsx:95:20
+  93 |
+  94 |   const { control, handleSubmit, watch, trigger, setValue } = form;
+> 95 |   const formData = watch();
+     |                    ^^^^^ React Hook Form's `useForm()` API returns a `watch()` function which cannot be memoized safely.
+  96 |   const watchTakenBefore = watch("takenBefore");
+  97 |
+  98 |   const selectedCourseData = pteCourses.find(c => c.id === formData.selectedCourse);  react-hooks/incompatible-library
+  109:60  warning  'data' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  @typescript-eslint/no-unused-vars
+  120:55  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          @typescript-eslint/no-explicit-any
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/components/blocks/forms/selt-registration/form-selt-registration.tsx
+    2:17  warning  'useMemo' is defined but never used       @typescript-eslint/no-unused-vars
+   23:5   warning  'School' is defined but never used        @typescript-eslint/no-unused-vars
+   25:5   warning  'Lock' is defined but never used          @typescript-eslint/no-unused-vars
+   29:5   warning  'Camera' is defined but never used        @typescript-eslint/no-unused-vars
+   32:5   warning  'Phone' is defined but never used         @typescript-eslint/no-unused-vars
+  103:49  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/components/blocks/forms/toefl-ibt-exam-registration/form-toefl-ibt-registration.tsx
+  18:5   warning  'CheckCircle2' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      @typescript-eslint/no-unused-vars
+  21:5   warning  'Globe' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             @typescript-eslint/no-unused-vars
+  24:5   warning  'BookOpen' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          @typescript-eslint/no-unused-vars
+  25:5   warning  'HelpCircle' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        @typescript-eslint/no-unused-vars
+  26:5   warning  'Info' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              @typescript-eslint/no-unused-vars
+  31:10  warning  'SearchableDropdown' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                @typescript-eslint/no-unused-vars
+  66:22  warning  Compilation Skipped: Use of incompatible library
+
+This API returns functions which cannot be memoized without leading to stale UI. To prevent this, by default React Compiler will skip memoizing this component/hook. However, you may see issues if values from this API are passed to other components/hooks that are memoized.
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/components/blocks/forms/toefl-ibt-exam-registration/form-toefl-ibt-registration.tsx:66:22
+  64 |
+  65 |     const { control, handleSubmit, trigger, watch } = form;
+> 66 |     const formData = watch();
+     |                      ^^^^^ React Hook Form's `useForm()` API returns a `watch()` function which cannot be memoized safely.
+  67 |
+  68 |     const onSubmit: SubmitHandler<TToeflIbtSchema> = (data) => {
+  69 |         if (step < 3) {  react-hooks/incompatible-library
+  78:59  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      @typescript-eslint/no-explicit-any
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/components/blocks/social-support.tsx
+   9:10  warning  'cn' is defined but never used    @typescript-eslint/no-unused-vars
+  10:25  warning  'Send' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/components/blocks/test-your-english-form.tsx
+  16:78   warning  'GraduationCap' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              @typescript-eslint/no-unused-vars
+  16:93   warning  'ClipboardCheck' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             @typescript-eslint/no-unused-vars
+  16:109  warning  'PenTool' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    @typescript-eslint/no-unused-vars
+  62:5    warning  'setValue' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          @typescript-eslint/no-unused-vars
+  69:26   warning  Compilation Skipped: Use of incompatible library
+
+This API returns functions which cannot be memoized without leading to stale UI. To prevent this, by default React Compiler will skip memoizing this component/hook. However, you may see issues if values from this API are passed to other components/hooks that are memoized.
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/components/blocks/test-your-english-form.tsx:69:26
+  67 |   } = form;
+  68 |
+> 69 |   const currentAnswers = watch("answers");
+     |                          ^^^^^ React Hook Form's `useForm()` API returns a `watch()` function which cannot be memoized safely.
+  70 |
+  71 |   const handleNext = async () => {
+  72 |     let fieldsToValidate: (keyof TestValues)[] = [];  react-hooks/incompatible-library
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/components/blocks/testimonials.tsx
+    2:17  warning  'useEffect' is defined but never used                            @typescript-eslint/no-unused-vars
+    2:28  warning  'useState' is defined but never used                             @typescript-eslint/no-unused-vars
+  131:9   error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  131:19  error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  180:30  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/components/blocks/whatsapp-support.tsx
+  4:10  warning  'cn' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/components/blocks/why-choose-us.tsx
+  11:10  warning  'cn' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/components/ui/date-time-picker.tsx
+    7:3   warning  'FormControl' is defined but never used             @typescript-eslint/no-unused-vars
+  158:9   error    'newDate' is never reassigned. Use 'const' instead  prefer-const
+  221:9   error    'newDate' is never reassigned. Use 'const' instead  prefer-const
+  521:23  error    Unexpected any. Specify a different type            @typescript-eslint/no-explicit-any
+  552:37  error    Unexpected any. Specify a different type            @typescript-eslint/no-explicit-any
+  585:45  error    Unexpected any. Specify a different type            @typescript-eslint/no-explicit-any
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/components/ui/dropdown-menu.tsx
+  3:39  warning  'CircleIcon' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/components/ui/phone-input.tsx
+   93:17  warning  Expected an assignment or function call and instead saw an expression  @typescript-eslint/no-unused-expressions
+  214:35  warning  'countryName' is defined but never used                                @typescript-eslint/no-unused-vars
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/components/ui/searchable-dropdown.tsx
+  63:13  warning  Elements with the ARIA role "combobox" must have the following attributes defined: aria-controls,aria-expanded  jsx-a11y/role-has-required-aria-props
+
+/Users/mollakhaledhossain/Desktop/office-projects/education-center-frontend/src/lib/data.ts
+   1:7  warning  'course_modes' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  18:7  warning  'course_types' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+✖ 289 problems (61 errors, 228 warnings)
+  2 errors and 0 warnings potentially fixable with the `--fix` option.
+

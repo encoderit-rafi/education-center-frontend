@@ -157,7 +157,7 @@ export default async function PaidMockTestDynamicPage({ params }: PageProps) {
       <section className="bg-slate-50 py-16 relative overflow-hidden">
         <div className="container mx-auto px-4 max-w-4xl text-center relative z-10">
           <h3 className="text-secondary text-2xl font-bold italic mb-6 leading-snug">
-            "{data.testimonial.quote}"
+            &quot;{data.testimonial.quote}&quot;
           </h3>
           <div className="h-1 w-16 bg-primary mx-auto mb-6"></div>
 

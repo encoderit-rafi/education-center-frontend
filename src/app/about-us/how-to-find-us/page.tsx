@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Car, CircleParking, ExternalLink, Info } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Car, ExternalLink } from "lucide-react";
+import { SectionHeader } from "@/components/ui/section-header";
 
 export default function HowToFindUs() {
   return (
@@ -12,32 +12,23 @@ export default function HowToFindUs() {
       <section className="py-16 md:py-24 px-8 max-w-screen-2xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
           {/* Left Content */}
-          <div className="space-y-8 animate-fade-up">
-            {/* Section Badge */}
-            <span className="section-label">
-              LOCATION GUIDE
-            </span>
-
-            {/* Main Heading */}
-            <h1 className="section-title">
-              How to <br />
-              <span className="text-primary">Find Our Center</span>
-            </h1>
-
-            {/* Description */}
-            <p className="text-base text-slate-600 leading-relaxed max-w-xl font-sans">
-              Reaching our center in Sharjah is straightforward. We've compiled this comprehensive guide to help you navigate your journey with ease.
-            </p>
-
-            {/* Action Buttons */}
-          </div>
+          <SectionHeader
+            badge="LOCATION GUIDE"
+            title={
+              <>
+                How to <span className="text-primary">Find Our Center</span>
+              </>
+            }
+            description="Reaching our center in Sharjah is straightforward. We've compiled this comprehensive guide to help you navigate your journey with ease."
+            className="space-y-4"
+          />
 
           {/* Right Visual */}
           <div className="relative group">
             <div className="absolute -inset-4 bg-primary/5 rounded-xl blur-3xl opacity-50 transition-opacity group-hover:opacity-100"></div>
             <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
               <Image
-                src="/images/about-us/infrastructure-center.png"
+                src="/images/about-us/about-us-10.jpg"
                 alt="Our Center"
                 fill
                 className="object-cover"
@@ -52,13 +43,15 @@ export default function HowToFindUs() {
       <section className="py-24 px-8 max-w-screen-2xl mx-auto border-t border-slate-50">
         <div className="grid lg:grid-cols-2 gap-20 items-center">
           <div className="space-y-8">
-            <span className="section-label">
-              LOCATION MAP
-            </span>
-            <h2 className="section-title">
-              Interactive <br />
-              <span className="text-primary">Navigation</span>
-            </h2>
+            <SectionHeader
+              badge="LOCATION MAP"
+              title={
+                <>
+                  Interactive <span className="text-primary">Navigation</span>
+                </>
+              }
+              className="space-y-4"
+            />
             <div className="space-y-4 text-base leading-relaxed font-medium">
               <p>
                 Route to our centre is too easy to follow and reach the destination. We have incorporated Google Location Map to make it more understandable for you.
@@ -84,13 +77,12 @@ export default function HowToFindUs() {
 
       {/* Visit Our Centre Section */}
       <section className="py-24 px-8 max-w-screen-2xl mx-auto border-t border-slate-50" id="map">
-        <div className="max-w-4xl mx-auto text-center space-y-6 mb-16">
-          <h2 className="section-title">Visit Our Centre</h2>
-          <p className="section-description mx-auto">
-            Al Mamzar, Sharjah — located in the strategic Tabarak Tower, close to all major transport links.
-            All facilities are wheelchair accessible.
-          </p>
-        </div>
+        <SectionHeader
+          title="Visit Our Centre"
+          description="Al Mamzar, Sharjah — located in the strategic Tabarak Tower, close to all major transport links. All facilities are wheelchair accessible."
+          align="center"
+          className="mb-16"
+        />
 
         <div className="relative group rounded-xl overflow-hidden shadow-2xl border border-slate-100">
           <div className="absolute top-6 right-6 z-20">
@@ -121,18 +113,16 @@ export default function HowToFindUs() {
       <section className="py-32 bg-white px-8 relative overflow-hidden">
         <div className="max-w-screen-2xl mx-auto">
           {/* Section Header */}
-          <div className="max-w-3xl mb-32">
-            <span className="section-label">
-              MOVEMENT & ACCESS
-            </span>
-            <h2 className="section-title">
-              Ways to <br />
-              <span className="text-primary">Reach Us</span>
-            </h2>
-            <p className="section-description">
-              We have mapped out the most efficient routes to ensure your journey to our center is as smooth as possible.
-            </p>
-          </div>
+          <SectionHeader
+            badge="MOVEMENT & ACCESS"
+            title={
+              <>
+                Ways to <span className="text-primary">Reach Us</span>
+              </>
+            }
+            description="We have mapped out the most efficient routes to ensure your journey to our center is as smooth as possible."
+            className="max-w-3xl mb-32"
+          />
 
           <div className="space-y-40">
             {/* 01. By Taxicab */}
@@ -149,14 +139,14 @@ export default function HowToFindUs() {
                 </div>
               </div>
               <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl order-1 lg:order-2">
-                <Image src="/images/about-us/taxi.jpg" alt="Sharjah Taxi" fill className="object-cover" />
+                <Image src="/images/about-us/taxi-sharjah.png" alt="Sharjah Taxi" fill className="object-cover" />
               </div>
             </div>
 
             {/* 02. Public Bus */}
             <div className="grid lg:grid-cols-2 gap-16 lg:gap-32 items-center">
               <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
-                <Image src="/images/about-us/bus.jpg" alt="Sharjah Public Bus" fill className="object-cover" />
+                <Image src="/images/about-us/s-bus.png" alt="Sharjah Public Bus" fill className="object-cover" />
               </div>
               <div className="space-y-8">
                 <div className="flex items-center gap-4">
@@ -207,7 +197,7 @@ export default function HowToFindUs() {
                 </div>
               </div>
               <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl order-1 lg:order-2">
-                <Image src="/images/about-us/metro.jpg" alt="Dubai Metro" fill className="object-cover" />
+                <Image src="/images/about-us/dubai-m.png" alt="Dubai Metro" fill className="object-cover" />
               </div>
             </div>
           </div>
@@ -218,9 +208,12 @@ export default function HowToFindUs() {
       <section className="py-16 px-8 max-w-screen-2xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-20 items-start">
           <div className="space-y-12">
-            <span className="section-label">
-              DRIVING DIRECTIONS
-            </span>
+            <SectionHeader
+              badge="DRIVING DIRECTIONS"
+              title="Get Directions"
+              className="mb-12"
+              titleClassName="text-3xl md:text-4xl"
+            />
             <div className="space-y-10">
               {[
                 { from: "Dubai", text: "Take Al Ittihad Road (E11) towards Sharjah. Follow the signs towards Al Mamzar. Turn right onto Al Mamzar Road and continue until you reach Tabarak Tower on your right." },
@@ -274,7 +267,7 @@ export default function HowToFindUs() {
                     </p>
                     <div className="bg-white/10 p-5 rounded-2xl border border-white/10 backdrop-blur-sm">
                       <p className="text-white font-medium leading-relaxed italic">
-                        "This guide is aimed at helping you reach The Exam Preparation & Testing House L.L.C in Sharjah with ease."
+                        &quot;This guide is aimed at helping you reach The Exam Preparation & Testing House L.L.C in Sharjah with ease.&quot;
                       </p>
                     </div>
                   </div>

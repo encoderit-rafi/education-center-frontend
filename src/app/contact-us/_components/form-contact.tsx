@@ -289,7 +289,7 @@ export default function ContactForm() {
         <Button
           type="submit"
           disabled={isSubmitting}
-          className="h-11 px-4 py-2 rounded-xl font-black uppercase tracking-widest text-xs w-full md:w-auto transition-all active:scale-95"
+          className="h-11 px-4 py-2 rounded-md font-bold uppercase tracking-widest text-sm w-full md:w-auto transition-all active:scale-95"
         >
           <div className="flex items-center gap-3">
             {isSubmitting ? "Sending..." : "Submit"}
@@ -299,7 +299,7 @@ export default function ContactForm() {
 
         <p className="flex items-center gap-1 text-sm">
           <ShieldCheck className="w-4 h-4 text-primary" />
-          <span className="font-medium">We'll get back to you within 24 hours. Your information is kept confidential.</span>
+          <span className="font-medium">We&apos;ll get back to you within 24 hours. Your information is kept confidential.</span>
         </p>
       </div>
     </form>

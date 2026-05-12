@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import { type FieldValues, type Control } from "react-hook-form";
+import { type FieldValues, type Control, type Path } from "react-hook-form";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -155,7 +155,7 @@ export function DateTimePicker<TFieldValues extends FieldValues = FieldValues>(
     onChangeCallback: (date: Date | undefined) => void
   ) => {
     const currentDate = currentValue || new Date();
-    let newDate = new Date(currentDate);
+    const newDate = new Date(currentDate);
 
     if (type === "hour") {
       const hour = parseInt(timeValue, 10);
@@ -218,7 +218,7 @@ export function DateTimePicker<TFieldValues extends FieldValues = FieldValues>(
   ) => {
     const range = currentRange || { from: undefined, to: undefined };
     const currentDate = (isEndTime ? range.to : range.from) || new Date();
-    let newDate = new Date(currentDate);
+    const newDate = new Date(currentDate);
 
     if (type === "hour") {
       const hour = parseInt(timeValue, 10);
@@ -518,7 +518,7 @@ export function DateTimePicker<TFieldValues extends FieldValues = FieldValues>(
     return (
       <FormField
         control={control}
-        name={name as any}
+        name={name as Path<TFieldValues>}
         render={({ field }) => (
           <FormItem className="flex flex-col">
             {label && <FormLabel className={labelClassName}>{label}</FormLabel>}
@@ -549,7 +549,7 @@ export function DateTimePicker<TFieldValues extends FieldValues = FieldValues>(
               <PopoverContent className="w-auto p-0" align="start">
                 {renderContent(field.value, (val) => {
                   field.onChange(val);
-                  onChange?.(val as any);
+                  onChange?.(val as Date & DateRange);
                 })}
               </PopoverContent>
             </Popover>
@@ -582,7 +582,7 @@ export function DateTimePicker<TFieldValues extends FieldValues = FieldValues>(
           }
         />
         <PopoverContent className="w-auto p-0" align="start">
-          {renderContent(value, onChange as any)}
+          {renderContent(value, onChange as (val: Date | DateRange | undefined) => void)}
         </PopoverContent>
       </Popover>
       {description && <p className="text-sm text-muted-foreground">{description}</p>}
