@@ -22,19 +22,20 @@ interface TermsStepProps {
 export function TermsStep({ onNext }: TermsStepProps) {
   return (
     <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-      <div className="bg-white rounded-2xl border border-slate-100 p-6 md:p-8 shadow-sm">
-        <h3 className="text-xl font-bold text-slate-800 mb-6">Terms and Conditions</h3>
-        <BaseNoteBox title="Important Notices:" notes={NOTICES} />
-        
-        <div className="mt-8 flex justify-end">
-          <Button 
-            onClick={onNext}
-            className="h-12 px-8 bg-primary hover:bg-primary/90 text-white font-bold rounded-xl shadow-lg shadow-primary/20 transition-all flex items-center gap-2 group"
-          >
-            I Agree & Continue
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </Button>
-        </div>
+      <BaseNoteBox
+        title="Terms and Conditions
+"
+        notes={NOTICES}
+      />
+
+      <div className="mt-8 flex justify-end">
+        <Button
+          onClick={onNext}
+          // className="h-12 px-8 bg-primary hover:bg-primary/90 text-white font-bold rounded-xl shadow-lg shadow-primary/20 transition-all flex items-center gap-2 group"
+        >
+          I Agree & Continue
+          {/* <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" /> */}
+        </Button>
       </div>
     </div>
   );

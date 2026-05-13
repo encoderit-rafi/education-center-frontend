@@ -4,7 +4,12 @@ import React from "react";
 import { ArrowRight, Calendar as CalendarIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { DatePicker } from "@/components/blocks/date-picker";
-import { Field, FieldContent, FieldLabel, FieldError } from "@/components/ui/field";
+import {
+  Field,
+  FieldContent,
+  FieldLabel,
+  FieldError,
+} from "@/components/ui/field";
 import Stepper from "@/components/stepper";
 
 interface DateStepProps {
@@ -15,15 +20,21 @@ interface DateStepProps {
   error?: any;
 }
 
-export function DateStep({ value, onChange, onNext, onBack, error }: DateStepProps) {
+export function DateStep({
+  value,
+  onChange,
+  onNext,
+  onBack,
+  error,
+}: DateStepProps) {
   return (
     <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
       <div className="bg-white rounded-2xl border border-slate-100 p-6 md:p-8 shadow-sm">
         <Stepper step={1}>Select Exam Date</Stepper>
-        
+
         <div className="mt-8 max-w-md mx-auto">
           <Field data-invalid={!!error}>
-            <FieldLabel required>Available Test Dates</FieldLabel>
+            {/* <FieldLabel required>Test Dates</FieldLabel> */}
             <FieldContent>
               <DatePicker
                 value={value}
@@ -38,20 +49,19 @@ export function DateStep({ value, onChange, onNext, onBack, error }: DateStepPro
         </div>
 
         <div className="mt-12 flex justify-between items-center pt-6 border-t border-slate-100">
-          <Button 
+          <Button
             variant="ghost"
             onClick={onBack}
             className="text-slate-500 hover:text-slate-700 font-medium"
           >
             Back
           </Button>
-          <Button 
+          <Button
             onClick={onNext}
             disabled={!value}
-            className="h-12 px-8 bg-primary hover:bg-primary/90 text-white font-bold rounded-xl shadow-lg shadow-primary/20 transition-all flex items-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed"
+            // className="h-12 px-8 bg-primary hover:bg-primary/90 text-white font-bold rounded-xl shadow-lg shadow-primary/20 transition-all flex items-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Next: Personal Details
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            Next
           </Button>
         </div>
       </div>

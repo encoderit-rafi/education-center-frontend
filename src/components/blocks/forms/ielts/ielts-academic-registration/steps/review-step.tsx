@@ -11,15 +11,26 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import Stepper from "@/components/stepper";
-// import Payment from "../../../payment";
+import { UseFormReturn } from "react-hook-form";
 import { TIeltsAcademicSchema } from "../_type";
 import Payment from "@/components/blocks/payment";
+import {
+  Field,
+  FieldLabel,
+  FieldContent,
+  FieldError,
+} from "@/components/ui/field";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import Stepper from "@/components/stepper";
 
 interface ReviewStepProps {
   data: TIeltsAcademicSchema;
+  form: UseFormReturn<TIeltsAcademicSchema>;
   onEdit: () => void;
-  onSubmit: () => void;
+  onSubmit: (e?: React.BaseSyntheticEvent) => Promise<void>;
+  onInvalid: (errors: any) => void;
   baseFee: number;
   total: number;
   selectedCourseData?: any;
@@ -28,15 +39,26 @@ interface ReviewStepProps {
 
 export function ReviewStep({
   data,
+  form,
   onEdit,
   onSubmit,
+  onInvalid,
   baseFee,
   total,
   selectedCourseData,
   selectedWorkshopData,
 }: ReviewStepProps) {
+  const {
+    register,
+    setValue,
+    watch,
+    formState: { errors },
+  } = form;
+
+  const formData = watch();
+
   return (
-    <div className="space-y-8 animate-in fade-in duration-500">
+    <form onSubmit={onSubmit} className="space-y-8">
       <div className="bg-white rounded-2xl border border-slate-100 p-6 md:p-8 shadow-sm">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 pb-6 border-b border-slate-100">
           <div>
@@ -51,6 +73,7 @@ export function ReviewStep({
           <Button
             variant="ghost"
             size="sm"
+            type="button"
             onClick={onEdit}
             className="text-primary hover:text-primary hover:bg-primary/5 font-bold flex items-center gap-2 px-4 py-2 self-start md:self-center"
           >
@@ -84,6 +107,7 @@ export function ReviewStep({
                   {data.dateOfBirth ? format(data.dateOfBirth, "PPP") : "N/A"}
                 </span>
               </div>
+
               <div className="flex flex-col">
                 <span className="text-[10px] text-slate-400 font-bold">
                   Gender
@@ -169,14 +193,16 @@ export function ReviewStep({
         </div>
       </div>
 
-      {/* Payment Section */}
-      <Stepper step={3}>
-        Secure Payment{" "}
-        <span className="bg-primary/10 px-3 py-1 rounded-full text-sm font-semibold text-primary ml-2">
-          {total.toFixed(2)}{" "}
-          <span className="font-normal text-xs tracking-wider">AED</span>
-        </span>
-      </Stepper>
+      {/* Secure Payment Stepper */}
+      <div className="flex items-center justify-between">
+        <Stepper step={3}>Secure Payment</Stepper>
+        <div className="text-right">
+          <span className="text-2xl font-black text-primary">
+            {total.toFixed(2)}{" "}
+            <span className="text-xs font-bold text-slate-400">AED</span>
+          </span>
+        </div>
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="space-y-3">
@@ -184,12 +210,11 @@ export function ReviewStep({
             <Payment amount={total} currency={"aed"} />
           </div>
           <Button
-            type="button"
-            onClick={onSubmit}
+            type="submit"
             className="w-full h-14 bg-primary hover:bg-primary/90 text-white font-bold text-lg rounded-xl shadow-lg shadow-primary/20 transition-all flex items-center justify-center gap-2 group mt-4"
           >
-            Confirm & Pay
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            Purshase
+            {/* <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" /> */}
           </Button>
         </div>
 
@@ -246,6 +271,6 @@ export function ReviewStep({
           </div>
         </div>
       </div>
-    </div>
+    </form>
   );
 }

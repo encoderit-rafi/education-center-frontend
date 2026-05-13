@@ -88,11 +88,11 @@ export const COURSES_DATA = {
 
 export default function FormIeltsAcademicRegistration() {
   const [currentStep, setCurrentStep] = useState(0); // 0: Terms, 1: Date, 2: Form, 3: Review
-  const [savedData, setSavedData] = useState<TIeltsAcademicSchema | null>(null);
 
   const form = useForm<TIeltsAcademicSchema>({
     resolver: zodResolver(IeltsAcademicSchema),
     defaultValues: {
+      testModule: "Academic",
       givenNames: "",
       middleName: "",
       surnames: "",
@@ -102,7 +102,9 @@ export default function FormIeltsAcademicRegistration() {
       email: "",
       confirmEmail: "",
       mobileNumber: "",
+      smsConsent: false,
       residenceCountry: "United Arab Emirates",
+      postalAddress1: "",
       city: "",
       idType: "passport",
       idNumber: "",
@@ -124,36 +126,52 @@ export default function FormIeltsAcademicRegistration() {
       marketingPreference: "none",
       selectedCourse: "",
       selectedWorkshop: "",
+      paymentMethod: "",
     },
   });
 
   const formData = form.watch();
 
-  const handleFormSubmit: SubmitHandler<TIeltsAcademicSchema> = (data) => {
-    console.log("Form Step Completed:", data);
-    setSavedData(data);
-    setCurrentStep(3);
+  const goToStep = (step: number) => {
+    setCurrentStep(step);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const finalSubmit = () => {
-    console.log("Final Submission and Payment:", savedData);
-    // Add final API call logic here
+  const calculateTotal = () => {
+    const base = 1250;
+    const course = formData.selectedCourse
+      ? (COURSES_DATA as any)[formData.selectedCourse].price *
+        (1 -
+          (COURSES_DATA as any)[formData.selectedCourse].special_discount / 100)
+      : 0;
+    const workshop = formData.selectedWorkshop
+      ? (WORKSHOPS_DATA as any)[formData.selectedWorkshop].price
+      : 0;
+    return base + course + workshop;
   };
 
-  const selectedCourseData = formData.selectedCourse
-    ? (COURSES_DATA as any)[formData.selectedCourse]
-    : null;
-  const selectedWorkshopData = formData.selectedWorkshop
-    ? (WORKSHOPS_DATA as any)[formData.selectedWorkshop]
-    : null;
+  const handleFormSubmit: SubmitHandler<TIeltsAcademicSchema> = (data) => {
+    if (currentStep < 3) {
+      console.log("Step completion data:", data);
+      goToStep(3);
+    } else {
+      console.log("Final submission data:", data);
+      // Final API call logic here
+      alert("Registration Successful!");
+    }
+  };
 
-  const baseFee = 1120;
-  const courseFee = selectedCourseData
-    ? selectedCourseData.price * (1 - selectedCourseData.special_discount / 100)
-    : 0;
-  const workshopFee = selectedWorkshopData ? selectedWorkshopData.price : 0;
-  const total = baseFee + courseFee + workshopFee;
+  const onInvalid = (errors: any) => {
+    console.error("Validation Errors:", errors);
+    const firstError = Object.keys(errors)[0];
+    const element = document.getElementsByName(firstError)[0];
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  };
+
+  const total = calculateTotal();
+  const baseFee = 1250;
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-12">
@@ -168,16 +186,14 @@ export default function FormIeltsAcademicRegistration() {
 
       <div className="max-w-4xl mx-auto">
         <Form {...form}>
-          {currentStep === 0 && (
-            <TermsStep onNext={() => setCurrentStep(1)} />
-          )}
+          {currentStep === 0 && <TermsStep onNext={() => goToStep(1)} />}
 
           {currentStep === 1 && (
             <DateStep
               value={formData.examDate}
               onChange={(date) => form.setValue("examDate", date)}
-              onNext={() => setCurrentStep(2)}
-              onBack={() => setCurrentStep(0)}
+              onNext={() => goToStep(2)}
+              onBack={() => goToStep(0)}
               error={form.formState.errors.examDate}
             />
           )}
@@ -186,22 +202,33 @@ export default function FormIeltsAcademicRegistration() {
             <RegistrationFormStep
               form={form}
               onSubmit={handleFormSubmit}
-              onBack={() => setCurrentStep(1)}
+              onInvalid={onInvalid}
+              onBack={() => goToStep(1)}
               languages={languages}
               coursesData={COURSES_DATA}
               workshopsData={WORKSHOPS_DATA}
             />
           )}
 
-          {currentStep === 3 && savedData && (
+          {currentStep === 3 && (
             <ReviewStep
-              data={savedData}
-              onEdit={() => setCurrentStep(2)}
-              onSubmit={finalSubmit}
+              data={formData}
+              form={form}
+              onEdit={() => goToStep(2)}
+              onSubmit={form.handleSubmit(handleFormSubmit, onInvalid)}
+              onInvalid={onInvalid}
               baseFee={baseFee}
               total={total}
-              selectedCourseData={selectedCourseData}
-              selectedWorkshopData={selectedWorkshopData}
+              selectedCourseData={
+                formData.selectedCourse
+                  ? (COURSES_DATA as any)[formData.selectedCourse]
+                  : undefined
+              }
+              selectedWorkshopData={
+                formData.selectedWorkshop
+                  ? (WORKSHOPS_DATA as any)[formData.selectedWorkshop]
+                  : undefined
+              }
             />
           )}
         </Form>
