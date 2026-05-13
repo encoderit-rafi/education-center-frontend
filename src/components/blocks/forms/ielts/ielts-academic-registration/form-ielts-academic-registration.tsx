@@ -166,7 +166,7 @@ export default function FormIELTSAcademicRegistration() {
       surnames: "",
       noSurname: false,
       dateOfBirth: undefined,
-      sex: "",
+      sex: "male",
       email: "",
       confirmEmail: "",
       mobileNumber: "",
@@ -238,6 +238,7 @@ export default function FormIELTSAcademicRegistration() {
 
   const onSubmit: SubmitHandler<TIeltsAcademicSchema> = (data) => {
     console.log("Final Form Data:", data);
+    window.scrollTo({ top: 0, behavior: "smooth" });
     setIsSubmitted(true);
     setSavedData(data);
   };
@@ -252,6 +253,7 @@ export default function FormIELTSAcademicRegistration() {
           </h2>
           <BaseNoteBox title="Tearms and Conditions:" notes={NOTICES} />
         </div>
+
         {isSubmitted && savedData ? (
           <div className="space-y-8">
             <div className="bg-white rounded-2xl border border-slate-100 p-6 md:p-8 shadow-sm">
@@ -268,7 +270,7 @@ export default function FormIELTSAcademicRegistration() {
                   variant="ghost"
                   size="sm"
                   onClick={() => setIsSubmitted(false)}
-                  className="text-primary hover:text-primary hover:bg-primary/5 font-bold flex items-center gap-2 px-4"
+                  className="text-primary hover:text-primary hover:bg-primary/5 font-bold flex items-center gap-2 px-4 py-2"
                 >
                   <Edit3 className="size-4" /> Edit Details
                 </Button>
@@ -279,13 +281,13 @@ export default function FormIELTSAcademicRegistration() {
                 <div className="space-y-6">
                   <div className="flex items-center gap-2 text-slate-400">
                     <User className="size-4" />
-                    <span className="text-xs font-bold uppercase tracking-widest">
+                    <span className="text-xs font-bold  tracking-widest">
                       Personal Details
                     </span>
                   </div>
                   <div className="space-y-4">
                     <div className="flex flex-col">
-                      <span className="text-[10px] text-slate-400 font-bold uppercase">
+                      <span className="text-[10px] text-slate-400 font-bold ">
                         Full Name
                       </span>
                       <span className="text-sm font-semibold text-slate-700">
@@ -294,7 +296,7 @@ export default function FormIELTSAcademicRegistration() {
                       </span>
                     </div>
                     <div className="flex flex-col">
-                      <span className="text-[10px] text-slate-400 font-bold uppercase">
+                      <span className="text-[10px] text-slate-400 font-bold ">
                         Date of Birth
                       </span>
                       <span className="text-sm font-semibold text-slate-700">
@@ -304,7 +306,7 @@ export default function FormIELTSAcademicRegistration() {
                       </span>
                     </div>
                     <div className="flex flex-col">
-                      <span className="text-[10px] text-slate-400 font-bold uppercase">
+                      <span className="text-[10px] text-slate-400 font-bold ">
                         Gender
                       </span>
                       <span className="text-sm font-semibold text-slate-700 capitalize">
@@ -318,13 +320,13 @@ export default function FormIELTSAcademicRegistration() {
                 <div className="space-y-6">
                   <div className="flex items-center gap-2 text-slate-400">
                     <ShieldCheck className="size-4" />
-                    <span className="text-xs font-bold uppercase tracking-widest">
+                    <span className="text-xs font-bold  tracking-widest">
                       Identity & Contact
                     </span>
                   </div>
                   <div className="space-y-4">
                     <div className="flex flex-col">
-                      <span className="text-[10px] text-slate-400 font-bold uppercase">
+                      <span className="text-[10px] text-slate-400 font-bold ">
                         {savedData.idType?.replace("_", " ")}
                       </span>
                       <span className="text-sm font-semibold text-slate-700">
@@ -332,7 +334,7 @@ export default function FormIELTSAcademicRegistration() {
                       </span>
                     </div>
                     <div className="flex flex-col">
-                      <span className="text-[10px] text-slate-400 font-bold uppercase">
+                      <span className="text-[10px] text-slate-400 font-bold ">
                         Email
                       </span>
                       <span className="text-sm font-semibold text-slate-700">
@@ -340,7 +342,7 @@ export default function FormIELTSAcademicRegistration() {
                       </span>
                     </div>
                     <div className="flex flex-col">
-                      <span className="text-[10px] text-slate-400 font-bold uppercase">
+                      <span className="text-[10px] text-slate-400 font-bold ">
                         Mobile
                       </span>
                       <span className="text-sm font-semibold text-slate-700">
@@ -354,13 +356,13 @@ export default function FormIELTSAcademicRegistration() {
                 <div className="space-y-6">
                   <div className="flex items-center gap-2 text-slate-400">
                     <Globe className="size-4" />
-                    <span className="text-xs font-bold uppercase tracking-widest">
+                    <span className="text-xs font-bold  tracking-widest">
                       Test Information
                     </span>
                   </div>
                   <div className="space-y-4">
                     <div className="flex flex-col">
-                      <span className="text-[10px] text-slate-400 font-bold uppercase">
+                      <span className="text-[10px] text-slate-400 font-bold ">
                         Exam Date
                       </span>
                       <span className="text-sm font-semibold text-primary">
@@ -370,7 +372,7 @@ export default function FormIELTSAcademicRegistration() {
                       </span>
                     </div>
                     <div className="flex flex-col">
-                      <span className="text-[10px] text-slate-400 font-bold uppercase">
+                      <span className="text-[10px] text-slate-400 font-bold ">
                         Location
                       </span>
                       <span className="text-sm font-semibold text-slate-700">
@@ -378,7 +380,7 @@ export default function FormIELTSAcademicRegistration() {
                       </span>
                     </div>
                     <div className="flex flex-col">
-                      <span className="text-[10px] text-slate-400 font-bold uppercase">
+                      <span className="text-[10px] text-slate-400 font-bold ">
                         Nationality
                       </span>
                       <span className="text-sm font-semibold text-slate-700">
@@ -393,9 +395,7 @@ export default function FormIELTSAcademicRegistration() {
               Secure Payment{" "}
               <span className="bg-primary/10 px-3 py-1 rounded-full text-sm font-semibold text-primary ml-2">
                 {total.toFixed(2)}{" "}
-                <span className="font-normal text-xs uppercase tracking-wider">
-                  AED
-                </span>
+                <span className="font-normal text-xs  tracking-wider">AED</span>
               </span>
             </Stepper>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -465,12 +465,12 @@ export default function FormIELTSAcademicRegistration() {
 
                 <div className="pt-4 border-t border-slate-200">
                   <div className="flex justify-between items-center">
-                    <span className="font-black text-slate-900 uppercase tracking-tight">
+                    <span className="font-black text-slate-900  tracking-tight">
                       Total Amount
                     </span>
                     <span className="text-3xl font-black text-primary">
                       {total.toFixed(2)}{" "}
-                      <span className="text-xs font-bold text-primary/60 uppercase">
+                      <span className="text-xs font-bold text-primary/60 ">
                         AED
                       </span>
                     </span>
@@ -484,13 +484,14 @@ export default function FormIELTSAcademicRegistration() {
             <div className="space-y-3">
               <Stepper step={1}>select date</Stepper>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <Field>
+                <Field data-invalid={!!errors.examDate}>
                   <FieldContent>
                     <DatePicker
                       value={formData.examDate}
                       onChange={(date) => setValue("examDate", date as Date)}
                       disabled={(date) => date <= new Date()}
-                      placeholder="Select your date of birth"
+                      placeholder="Select your exam date"
+                      aria-invalid={!!errors.examDate}
                     />
                     <FieldError errors={[errors.examDate]} />
                   </FieldContent>
@@ -500,11 +501,12 @@ export default function FormIELTSAcademicRegistration() {
             <div className="space-y-3">
               <Stepper step={2}>Personal details</Stepper>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <Field>
+                <Field data-invalid={!!errors.givenNames}>
                   <FieldLabel required>First / given names</FieldLabel>
                   <FieldContent>
                     <Input
                       placeholder="As per passport"
+                      aria-invalid={!!errors.givenNames}
                       {...control.register("givenNames")}
                     />
                     <FieldError errors={[errors.givenNames]} />
@@ -525,11 +527,12 @@ export default function FormIELTSAcademicRegistration() {
                 </Field>
 
                 <div className="space-y-4">
-                  <Field>
+                  <Field data-invalid={!!errors.surnames}>
                     <FieldLabel>Surname / family name</FieldLabel>
                     <FieldContent>
                       <Input
                         placeholder="As per passport"
+                        aria-invalid={!!errors.surnames}
                         {...control.register("surnames")}
                         disabled={formData.noSurname}
                       />
@@ -554,7 +557,7 @@ export default function FormIELTSAcademicRegistration() {
                   </Field>
                 </div>
 
-                <Field>
+                <Field data-invalid={!!errors.dateOfBirth}>
                   <FieldLabel required>Date of birth</FieldLabel>
                   <FieldContent>
                     <DatePicker
@@ -564,12 +567,13 @@ export default function FormIELTSAcademicRegistration() {
                         date <= new Date() || date < new Date("1900-01-01")
                       }
                       placeholder="Select your date of birth"
+                      aria-invalid={!!errors.dateOfBirth}
                     />
                     <FieldError errors={[errors.dateOfBirth]} />
                   </FieldContent>
                 </Field>
 
-                <Field>
+                <Field data-invalid={!!errors.sex}>
                   <FieldLabel required>Sex</FieldLabel>
                   <FieldContent>
                     <RadioGroup
@@ -577,11 +581,12 @@ export default function FormIELTSAcademicRegistration() {
                       value={formData.sex}
                       className="grid grid-cols-2 gap-3"
                     >
-                      {["Male", "Female"].map((opt) => (
+                      {["male", "female"].map((opt) => (
                         <Label
                           key={opt}
                           htmlFor={opt}
-                          className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer"
+                          data-invalid={!!errors.sex}
+                          className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructivem capitalize"
                         >
                           <RadioGroupItem value={opt} id={opt} />
                           {opt}
@@ -592,13 +597,14 @@ export default function FormIELTSAcademicRegistration() {
                   </FieldContent>
                 </Field>
 
-                <Field>
+                <Field data-invalid={!!errors.mobileNumber}>
                   <FieldLabel required>Mobile number</FieldLabel>
                   <FieldContent>
                     <PhoneInput
                       value={formData.mobileNumber}
                       onChange={(val) => setValue("mobileNumber", val)}
                       defaultCountry="AE"
+                      aria-invalid={!!errors.mobileNumber}
                     />
                     <FieldError errors={[errors.mobileNumber]} />
                     <FieldDescription className="flex items-center gap-2">
@@ -619,35 +625,38 @@ export default function FormIELTSAcademicRegistration() {
                     </FieldDescription>
                   </FieldContent>
                 </Field>
-                <Field>
+                <Field data-invalid={!!errors.email}>
                   <FieldLabel required>Email address</FieldLabel>
                   <FieldContent>
                     <Input
                       placeholder="example@email.com"
+                      aria-invalid={!!errors.email}
                       {...control.register("email")}
                     />
                     <FieldError errors={[errors.email]} />
                   </FieldContent>
                 </Field>
 
-                <Field>
+                <Field data-invalid={!!errors.confirmEmail}>
                   <FieldLabel required>Confirm email address</FieldLabel>
                   <FieldContent>
                     <Input
                       placeholder="Confirm your email address"
                       onPaste={(e) => e.preventDefault()}
+                      aria-invalid={!!errors.confirmEmail}
                       {...control.register("confirmEmail")}
                     />
                     <FieldError errors={[errors.confirmEmail]} />
                   </FieldContent>
                 </Field>
 
-                <Field>
+                <Field data-invalid={!!errors.residenceCountry}>
                   <FieldLabel required>Country of residence</FieldLabel>
                   <FieldContent>
                     <CountryDropdown
                       placeholder="Search country..."
                       value={formData.residenceCountry}
+                      aria-invalid={!!errors.residenceCountry}
                       onChange={(country) =>
                         setValue("residenceCountry", country.name)
                       }
@@ -655,12 +664,13 @@ export default function FormIELTSAcademicRegistration() {
                     <FieldError errors={[errors.residenceCountry]} />
                   </FieldContent>
                 </Field>
-                <Field>
+                <Field data-invalid={!!errors.city}>
                   <FieldLabel required>Emirates/ City</FieldLabel>
                   <FieldContent>
                     <Input
                       {...control.register("city")}
                       placeholder="Enter your city"
+                      aria-invalid={!!errors.city}
                     />
                     <FieldError errors={[errors.city]} />
                   </FieldContent>
@@ -708,7 +718,7 @@ export default function FormIELTSAcademicRegistration() {
                   </div>
                 </Field>
 
-                <Field>
+                <Field data-invalid={!!errors.idType}>
                   <FieldLabel required>Identification type</FieldLabel>
                   <FieldContent>
                     <RadioGroup
@@ -723,7 +733,8 @@ export default function FormIELTSAcademicRegistration() {
                         <Label
                           key={opt.id}
                           htmlFor={opt.id}
-                          className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer"
+                          data-invalid={!!errors.idType}
+                          className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive"
                         >
                           <RadioGroupItem value={opt.id} id={opt.id} />
                           {opt.label}
@@ -739,7 +750,7 @@ export default function FormIELTSAcademicRegistration() {
                   </FieldContent>
                 </Field>
 
-                <Field>
+                <Field data-invalid={!!errors.idNumber}>
                   <FieldLabel required>
                     {formData.idType === "emirates_id"
                       ? "ID number"
@@ -748,13 +759,14 @@ export default function FormIELTSAcademicRegistration() {
                   <FieldContent>
                     <Input
                       {...control.register("idNumber")}
+                      aria-invalid={!!errors.idNumber}
                       placeholder={`Enter your ${formData.idType === "emirates_id" ? "ID" : "Passport"} number`}
                     />
                     <FieldError errors={[errors.idNumber]} />
                   </FieldContent>
                 </Field>
 
-                <Field>
+                <Field data-invalid={!!errors.idExpiryDate}>
                   <FieldLabel required>
                     {formData.idType === "emirates_id"
                       ? "ID expiry date"
@@ -766,6 +778,7 @@ export default function FormIELTSAcademicRegistration() {
                       onChange={(date) =>
                         setValue("idExpiryDate", date as Date)
                       }
+                      aria-invalid={!!errors.idExpiryDate}
                       disabled={(date) => date <= new Date()}
                       placeholder={`Select ${
                         formData.idType === "emirates_id" ? "ID" : "Passport"
@@ -775,23 +788,25 @@ export default function FormIELTSAcademicRegistration() {
                   </FieldContent>
                 </Field>
 
-                <Field>
+                <Field data-invalid={!!errors.issuingAuthority}>
                   <FieldLabel required>Issuing authority</FieldLabel>
                   <FieldContent>
                     <Input
                       {...control.register("issuingAuthority")}
+                      aria-invalid={!!errors.issuingAuthority}
                       placeholder="Enter issuing authority"
                     />
                     <FieldError errors={[errors.issuingAuthority]} />
                   </FieldContent>
                 </Field>
 
-                <Field>
+                <Field data-invalid={!!errors.nationality}>
                   <FieldLabel required>Country of nationality</FieldLabel>
                   <FieldContent>
                     <CountryDropdown
                       placeholder="Search country..."
                       value={formData.nationality}
+                      aria-invalid={!!errors.nationality}
                       onChange={(country) =>
                         setValue("nationality", country.name)
                       }
@@ -799,7 +814,10 @@ export default function FormIELTSAcademicRegistration() {
                     <FieldError errors={[errors.nationality]} />
                   </FieldContent>
                 </Field>
-                <Field className="md:col-span-2 lg:col-span-3">
+                <Field
+                  className="md:col-span-2 lg:col-span-3"
+                  data-invalid={!!errors.takenBefore}
+                >
                   <FieldLabel required>
                     Have you taken the CD-IELTS Test before?
                   </FieldLabel>
@@ -813,7 +831,8 @@ export default function FormIELTSAcademicRegistration() {
                         <Label
                           key={opt}
                           htmlFor={`taken-${opt}`}
-                          className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer"
+                          data-invalid={!!errors.takenBefore}
+                          className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive"
                         >
                           <RadioGroupItem value={opt} id={`taken-${opt}`} />
                           {opt}
@@ -826,7 +845,10 @@ export default function FormIELTSAcademicRegistration() {
 
                 {formData.takenBefore === "Yes" && (
                   <>
-                    <Field className="md:col-span-2 lg:col-span-3">
+                    <Field
+                      className="md:col-span-2 lg:col-span-3"
+                      data-invalid={!!errors.lessThanTwoYears}
+                    >
                       <FieldLabel required>
                         Was it less than 2 years?
                       </FieldLabel>
@@ -842,7 +864,8 @@ export default function FormIELTSAcademicRegistration() {
                             <Label
                               key={opt}
                               htmlFor={`less-${opt}`}
-                              className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer"
+                              data-invalid={!!errors.lessThanTwoYears}
+                              className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive"
                             >
                               <RadioGroupItem value={opt} id={`less-${opt}`} />
                               {opt}
@@ -853,7 +876,10 @@ export default function FormIELTSAcademicRegistration() {
                       </FieldContent>
                     </Field>
 
-                    <Field className="md:col-span-2 lg:col-span-3">
+                    <Field
+                      className="md:col-span-2 lg:col-span-3"
+                      data-invalid={!!errors.existingAccount}
+                    >
                       <FieldLabel required>
                         Do you have an existing IELTS account?
                       </FieldLabel>
@@ -873,7 +899,8 @@ export default function FormIELTSAcademicRegistration() {
                             <Label
                               key={opt}
                               htmlFor={`acc-${opt}`}
-                              className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer"
+                              data-invalid={!!errors.existingAccount}
+                              className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive"
                             >
                               <RadioGroupItem value={opt} id={`acc-${opt}`} />
                               {opt}
@@ -886,7 +913,10 @@ export default function FormIELTSAcademicRegistration() {
                   </>
                 )}
 
-                <Field className="md:col-span-2 lg:col-span-3">
+                <Field
+                  className="md:col-span-2 lg:col-span-3"
+                  data-invalid={!!errors.specialRequirements}
+                >
                   <FieldLabel required>
                     Do you have any special requirements due to ill
                     health/medical conditions?
@@ -903,7 +933,8 @@ export default function FormIELTSAcademicRegistration() {
                         <Label
                           key={opt}
                           htmlFor={`special-${opt}`}
-                          className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer"
+                          data-invalid={!!errors.specialRequirements}
+                          className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive"
                         >
                           <RadioGroupItem value={opt} id={`special-${opt}`} />
                           {opt}
@@ -915,13 +946,17 @@ export default function FormIELTSAcademicRegistration() {
                 </Field>
 
                 {formData.specialRequirements === "Yes" && (
-                  <Field className="md:col-span-2 lg:col-span-3">
+                  <Field
+                    className="md:col-span-2 lg:col-span-3"
+                    data-invalid={!!errors.specialRequirementsMention}
+                  >
                     <FieldLabel required>
                       Please mention your requirements
                     </FieldLabel>
                     <FieldContent>
                       <Input
                         {...control.register("specialRequirementsMention")}
+                        aria-invalid={!!errors.specialRequirementsMention}
                         placeholder="Please mention your requirements"
                       />
                       <FieldError
@@ -931,20 +966,21 @@ export default function FormIELTSAcademicRegistration() {
                   </Field>
                 )}
 
-                <Field>
+                <Field data-invalid={!!errors.firstLanguage}>
                   <FieldLabel required>What is your first language?</FieldLabel>
                   <FieldContent>
                     <SearchableDropdown
                       options={languages}
                       placeholder="-Select Language-"
                       value={formData.firstLanguage}
+                      aria-invalid={!!errors.firstLanguage}
                       onChange={(val) => setValue("firstLanguage", val)}
                     />
                     <FieldError errors={[errors.firstLanguage]} />
                   </FieldContent>
                 </Field>
 
-                <Field>
+                <Field data-invalid={!!errors.yearsStudyingEnglish}>
                   <FieldLabel required>
                     How many years have you been studying English?
                   </FieldLabel>
@@ -963,13 +999,17 @@ export default function FormIELTSAcademicRegistration() {
                       ]}
                       placeholder="-Select Duration-"
                       value={formData.yearsStudyingEnglish}
+                      aria-invalid={!!errors.yearsStudyingEnglish}
                       onChange={(val) => setValue("yearsStudyingEnglish", val)}
                     />
                     <FieldError errors={[errors.yearsStudyingEnglish]} />
                   </FieldContent>
                 </Field>
 
-                <Field className="md:col-span-2">
+                <Field
+                  className="md:col-span-2"
+                  data-invalid={!!errors.educationLevel}
+                >
                   <FieldLabel required>
                     What level of education have you completed?
                   </FieldLabel>
@@ -994,7 +1034,8 @@ export default function FormIELTSAcademicRegistration() {
                         <Label
                           key={opt.id}
                           htmlFor={opt.id}
-                          className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer"
+                          data-invalid={!!errors.educationLevel}
+                          className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive"
                         >
                           <RadioGroupItem value={opt.id} id={opt.id} />
                           {opt.label}
@@ -1005,7 +1046,7 @@ export default function FormIELTSAcademicRegistration() {
                   </FieldContent>
                 </Field>
 
-                <Field>
+                <Field data-invalid={!!errors.occupationLevel}>
                   <FieldLabel required>
                     What is your occupation level?
                   </FieldLabel>
@@ -1032,13 +1073,14 @@ export default function FormIELTSAcademicRegistration() {
                       ]}
                       placeholder="-Select Level-"
                       value={formData.occupationLevel}
+                      aria-invalid={!!errors.occupationLevel}
                       onChange={(val) => setValue("occupationLevel", val)}
                     />
                     <FieldError errors={[errors.occupationLevel]} />
                   </FieldContent>
                 </Field>
 
-                <Field>
+                <Field data-invalid={!!errors.occupationSector}>
                   <FieldLabel required>
                     What is your occupation sector?
                   </FieldLabel>
@@ -1118,13 +1160,14 @@ export default function FormIELTSAcademicRegistration() {
                       ]}
                       placeholder="-Select Sector-"
                       value={formData.occupationSector}
+                      aria-invalid={!!errors.occupationSector}
                       onChange={(val) => setValue("occupationSector", val)}
                     />
                     <FieldError errors={[errors.occupationSector]} />
                   </FieldContent>
                 </Field>
 
-                <Field>
+                <Field data-invalid={!!errors.reasonForTakingTest}>
                   <FieldLabel required>Why are you taking the test?</FieldLabel>
                   <FieldContent>
                     <SearchableDropdown
@@ -1167,13 +1210,14 @@ export default function FormIELTSAcademicRegistration() {
                       ]}
                       placeholder="-Select Reason-"
                       value={formData.reasonForTakingTest}
+                      aria-invalid={!!errors.reasonForTakingTest}
                       onChange={(val) => setValue("reasonForTakingTest", val)}
                     />
                     <FieldError errors={[errors.reasonForTakingTest]} />
                   </FieldContent>
                 </Field>
 
-                <Field>
+                <Field data-invalid={!!errors.destinationCountry}>
                   <FieldLabel required>
                     Which country / territory do you want to study / work / live
                     in?
@@ -1182,6 +1226,7 @@ export default function FormIELTSAcademicRegistration() {
                     <CountryDropdown
                       placeholder="-Select Country-"
                       value={formData.destinationCountry}
+                      aria-invalid={!!errors.destinationCountry}
                       onChange={(country) =>
                         setValue("destinationCountry", country.name)
                       }
@@ -1199,13 +1244,15 @@ export default function FormIELTSAcademicRegistration() {
                           options={[
                             { label: "None", value: "" },
                             ...Object.values(COURSES_DATA).map((c) => ({
-                              label: `${c.name} (${(c.price * (1 - c.special_discount / 100)).toFixed(0)} ${c.currency})`,
+                              label: c.name,
+                              description: `${(c.price * (1 - c.special_discount / 100)).toFixed(0)} ${c.currency} (${c.special_discount}% OFF)`,
                               value: c.id,
                             })),
                           ]}
                           placeholder="Select a course"
                           value={formData.selectedCourse}
                           onChange={(val) => setValue("selectedCourse", val)}
+                          aria-invalid={!!errors.selectedCourse}
                         />
                       </FieldContent>
                     </Field>
@@ -1216,13 +1263,15 @@ export default function FormIELTSAcademicRegistration() {
                           options={[
                             { label: "None", value: "" },
                             ...Object.values(WORKSHOPS_DATA).map((w) => ({
-                              label: `${w.name} (${w.duration} • ${w.price} ${w.currency})`,
+                              label: w.name,
+                              description: `${w.duration} • ${w.price} ${w.currency}`,
                               value: w.id,
                             })),
                           ]}
                           placeholder="Select a workshop"
                           value={formData.selectedWorkshop}
                           onChange={(val) => setValue("selectedWorkshop", val)}
+                          aria-invalid={!!errors.selectedWorkshop}
                         />
                       </FieldContent>
                     </Field>
@@ -1230,14 +1279,18 @@ export default function FormIELTSAcademicRegistration() {
                   <BaseNoteBox
                     title="Enjoy These Free Benefits:"
                     notes={[
-                      "Free mock test",
-                      "Free consultation",
-                      "Free preparation materials",
+                      "Save 10% off when you book your exam and register for the course with TEPTH and pay online on our website.",
+                      "Free Prep. Material",
+                      "Free Consultation",
+                      "Free Mock Test",
                     ]}
                   />
                 </Field>
 
-                <Field className="col-span-3">
+                <Field
+                  className="col-span-3"
+                  data-invalid={!!errors.marketingPreference}
+                >
                   <FieldLabel>Marketing preferences</FieldLabel>
                   <FieldContent className="mt-4">
                     <RadioGroup
@@ -1266,7 +1319,8 @@ export default function FormIELTSAcademicRegistration() {
                         <Label
                           key={opt.id}
                           htmlFor={`mkt-${opt.id}`}
-                          className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer"
+                          data-invalid={!!errors.marketingPreference}
+                          className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive"
                         >
                           <RadioGroupItem value={opt.id} id={`mkt-${opt.id}`} />
                           <span className="text-sm">{opt.label}</span>
@@ -1276,7 +1330,7 @@ export default function FormIELTSAcademicRegistration() {
                     <FieldError errors={[errors.marketingPreference]} />
                   </FieldContent>
                 </Field>
-                <Button>
+                <Button type="submit">
                   {" "}
                   <Save /> Save and Procced
                 </Button>
@@ -1286,7 +1340,7 @@ export default function FormIELTSAcademicRegistration() {
             Secure Payment{" "}
             <span className="bg-primary/10 px-3 py-1 rounded-full text-sm font-semibold text-primary ml-2">
               {total.toFixed(2)}{" "}
-              <span className="font-normal text-xs uppercase tracking-wider">
+              <span className="font-normal text-xs  tracking-wider">
                 AED
               </span>
             </span>
@@ -1353,12 +1407,12 @@ export default function FormIELTSAcademicRegistration() {
 
               <div className="pt-4 border-t border-slate-200">
                 <div className="flex justify-between items-center">
-                  <span className="font-black text-slate-900 uppercase tracking-tight">
+                  <span className="font-black text-slate-900  tracking-tight">
                     Total Amount
                   </span>
                   <span className="text-3xl font-black text-primary">
                     {total.toFixed(2)}{" "}
-                    <span className="text-xs font-bold text-primary/60 uppercase">
+                    <span className="text-xs font-bold text-primary/60 ">
                       AED
                     </span>
                   </span>

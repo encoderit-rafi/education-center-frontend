@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils"
 import { Check, ChevronDown } from "lucide-react"
 
 interface SearchableDropdownProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "onChange"> {
-  options: { label: string; value: string }[]
+  options: { label: string; value: string; description?: string }[]
   placeholder?: string
   searchPlaceholder?: string
   emptyMessage?: string
@@ -113,7 +113,7 @@ export const SearchableDropdown = React.forwardRef<
                       key={option.value}
                       value={option.value}
                       onSelect={() => handleSelect(option.value)}
-                      className="flex items-center gap-2 rounded text-sm outline-none cursor-default select-none hover:bg-slate-50 focus:bg-slate-50 data-[selected=true]:bg-slate-50"
+                      className="flex items-center gap-2 rounded-md px-2 py-2 text-sm outline-none cursor-default select-none hover:bg-slate-50 focus:bg-slate-50 data-[selected=true]:bg-slate-50"
                     >
                       <Check
                         className={cn(
@@ -121,9 +121,16 @@ export const SearchableDropdown = React.forwardRef<
                           value === option.value ? "opacity-100" : "opacity-0",
                         )}
                       />
-                      <span className="flex-1 truncate font-medium">
-                        {option.label}
-                      </span>
+                      <div className="flex flex-col flex-1 min-w-0">
+                        <span className="truncate font-medium text-slate-700">
+                          {option.label}
+                        </span>
+                        {option.description && (
+                          <span className="truncate text-xs text-slate-500 font-normal">
+                            {option.description}
+                          </span>
+                        )}
+                      </div>
                     </CommandItem>
                   ))}
                 </CommandGroup>
