@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { UseFormReturn } from "react-hook-form";
 import { TIeltsAcademicSchema } from "../_type";
 import Payment from "@/components/blocks/payment";
+import { AED } from "@/components/ui/aed";
 import {
   Field,
   FieldLabel,
@@ -227,11 +228,10 @@ export function ReviewStep({
 
       {/* Secure Payment Stepper */}
       <div className="flex items-center justify-between">
-        <Stepper step={3}>Secure Payment</Stepper>
+        <Stepper step={3}>Payment</Stepper>
         <div className="text-right">
-          <span className="text-2xl font-black text-primary">
-            {total.toFixed(2)}{" "}
-            <span className="text-xs font-bold text-slate-400">AED</span>
+          <span className="text-2xl font-black text-primary flex items-center justify-end gap-1">
+            <AED className="w-8 h-4 opacity-50" /> {total.toFixed(2)}
           </span>
         </div>
       </div>
@@ -259,12 +259,16 @@ export function ReviewStep({
           <div className="space-y-3">
             <div className="flex justify-between text-sm">
               <span className="text-slate-500">IELTS Academic Exam</span>
-              <span className="font-medium">{baseFee.toFixed(2)} AED</span>
+              <span className="font-medium flex items-center gap-1">
+                <AED className="h-3 w-auto" /> {baseFee.toFixed(2)}
+              </span>
             </div>
 
             <div className="flex justify-between text-sm">
               <span className="text-slate-500">Registration Service Fee</span>
-              <span className="font-medium">{serviceFee.toFixed(2)} AED</span>
+              <span className="font-medium flex items-center gap-1">
+                <AED className="h-3 w-auto" /> {serviceFee.toFixed(2)}
+              </span>
             </div>
 
             {data.selectedCourse && selectedCourseData && (
@@ -272,13 +276,12 @@ export function ReviewStep({
                 <span className="text-slate-500">
                   Course: {selectedCourseData.name}
                 </span>
-                <span className="font-medium text-emerald-600">
-                  +
+                <span className="font-medium flex items-center gap-1">
+                  <AED className="h-3 w-auto" />
                   {(
                     selectedCourseData.price *
                     (1 - selectedCourseData.special_discount / 100)
-                  ).toFixed(2)}{" "}
-                  AED
+                  ).toFixed(2)}
                 </span>
               </div>
             )}
@@ -288,8 +291,8 @@ export function ReviewStep({
                 <span className="text-slate-500">
                   Workshop: {selectedWorkshopData.name}
                 </span>
-                <span className="font-medium text-emerald-600">
-                  +{selectedWorkshopData.price.toFixed(2)} AED
+                <span className="font-medium flex items-center gap-1">
+                  <AED className="h-3 w-auto" /> {selectedWorkshopData.price.toFixed(2)}
                 </span>
               </div>
             )}
@@ -299,9 +302,8 @@ export function ReviewStep({
                 <span className="font-black text-slate-900 tracking-tight">
                   Total Amount
                 </span>
-                <span className="text-3xl font-black text-primary">
-                  {total.toFixed(2)}{" "}
-                  <span className="text-xs font-bold text-primary/60">AED</span>
+                <span className="text-3xl font-black text-primary flex items-center gap-1">
+                  <AED className="h-5 w-auto opacity-60" /> {total.toFixed(2)}
                 </span>
               </div>
             </div>

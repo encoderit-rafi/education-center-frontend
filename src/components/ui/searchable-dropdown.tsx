@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils"
 import { Check, ChevronDown } from "lucide-react"
 
 interface SearchableDropdownProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "onChange"> {
-  options: { label: string; value: string; description?: string }[]
+  options: { label: string | React.ReactNode; value: string; description?: string | React.ReactNode }[]
   placeholder?: string
   searchPlaceholder?: string
   emptyMessage?: string
@@ -122,7 +122,7 @@ export const SearchableDropdown = React.forwardRef<
                         )}
                       />
                       <div className="flex flex-col flex-1 min-w-0">
-                        <span className="truncate font-medium text-slate-700">
+                        <span className="truncate font-medium ">
                           {option.label}
                         </span>
                         {option.description && (
