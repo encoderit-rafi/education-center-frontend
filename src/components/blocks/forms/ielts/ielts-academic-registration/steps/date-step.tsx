@@ -109,14 +109,14 @@ export function DateStep({
           <Button
             variant="ghost"
             onClick={onBack}
-            className="text-slate-500 hover:text-slate-700 font-medium"
+            className="bg-primary hover:bg-primary/90 text-white px-4 h-10 rounded-xl font-bold transition-all disabled:opacity-50"
           >
             Back
           </Button>
           <Button
             onClick={onNext}
             disabled={!value || !timeSlot}
-            className="bg-primary hover:bg-primary/90 text-white px-8 h-12 rounded-xl font-bold transition-all disabled:opacity-50"
+            className="bg-primary hover:bg-primary/90 text-white px-4 h-10 rounded-xl font-bold transition-all disabled:opacity-50"
           >
             Next
           </Button>

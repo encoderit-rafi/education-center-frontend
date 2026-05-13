@@ -854,11 +854,11 @@ export function RegistrationFormStep({
           variant="ghost"
           type="button"
           onClick={onBack}
-          className="text-slate-500 hover:text-slate-700 font-medium"
+          className="bg-primary hover:bg-primary/90 text-white px-4 h-10 rounded-xl font-bold transition-all disabled:opacity-50"
         >
           Back
         </Button>
-        <Button type="submit">Next</Button>
+        <Button type="submit" className="bg-primary hover:bg-primary/90 text-white px-4 h-10 rounded-xl font-bold transition-all disabled:opacity-50">Next</Button>
       </div>
     </form>
   );

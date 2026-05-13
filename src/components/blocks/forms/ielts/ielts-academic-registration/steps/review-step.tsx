@@ -245,7 +245,7 @@ export function ReviewStep({
             type="submit"
             className="w-full h-14 bg-primary hover:bg-primary/90 text-white font-bold text-lg rounded-xl shadow-lg shadow-primary/20 transition-all flex items-center justify-center gap-2 group mt-4"
           >
-            Purshase
+            Book
             {/* <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" /> */}
           </Button>
         </div>
