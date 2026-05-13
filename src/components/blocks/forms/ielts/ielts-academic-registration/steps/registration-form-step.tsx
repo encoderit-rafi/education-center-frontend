@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/field";
 import { TIeltsAcademicSchema } from "../_type";
 import { AED } from "@/components/ui/aed";
+import { PriceDisplay } from "@/components/ui/price-display";
 
 interface RegistrationFormStepProps {
   form: UseFormReturn<TIeltsAcademicSchema>;
@@ -764,8 +765,12 @@ export function RegistrationFormStep({
                     label: c.name,
                     description: (
                       <span className="flex items-center gap-1">
-                        <AED className="h-3 w-auto" />
-                        {(c.price * (1 - c.special_discount / 100)).toFixed(0)} ({c.special_discount}% OFF)
+                        <PriceDisplay 
+                          amount={c.price * (1 - c.special_discount / 100)} 
+                          minimumFractionDigits={0} 
+                          maximumFractionDigits={0} 
+                        />
+                        <span>({c.special_discount}% OFF)</span>
                       </span>
                     ),
                     value: c.id,
@@ -789,7 +794,7 @@ export function RegistrationFormStep({
                     label: w.name,
                     description: (
                       <span className="flex items-center gap-1">
-                        {w.duration} • <AED className="h-3 w-auto" /> {w.price}
+                        {w.duration} • <PriceDisplay amount={w.price} minimumFractionDigits={0} maximumFractionDigits={0} />
                       </span>
                     ),
                     value: w.id,
