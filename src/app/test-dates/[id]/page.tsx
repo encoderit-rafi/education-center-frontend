@@ -45,10 +45,10 @@ export default function TestDatesDetailPage() {
 
             {id === "ielts" && (
               <div className="bg-primary/5 border border-primary/10 rounded-2xl p-6 max-w-xl">
-                <p className="text-sm font-bold text-secondary flex items-center gap-2">
-                  <div className="w-2 h-2 bg-primary rounded-full" />
+                <div className="text-sm font-bold text-secondary flex items-center gap-2">
+                  <span className="w-2 h-2 bg-primary rounded-full" />
                   Testing occurs every Sunday
-                </p>
+                </div>
                 <p className="text-xs text-slate-500 mt-1 ml-4">
                   All Sundays are available for testing (public holidays falling
                   on Sundays will be deactivated separately).
@@ -61,7 +61,8 @@ export default function TestDatesDetailPage() {
               available: (date) => id === "ielts" && date.getDay() === 0,
             }}
             modifiersClassNames={{
-              available: "font-semibold text-primary underline underline-offset-4 decoration-primary",
+              available:
+                "font-semibold text-primary underline underline-offset-4 decoration-primary",
             }}
             disabled={(date) => {
               const isPast = date < new Date(new Date().setHours(0, 0, 0, 0));
