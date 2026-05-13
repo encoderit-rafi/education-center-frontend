@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -12,13 +12,22 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { CheckCircle2, SendHorizontal, ShieldCheck, UploadCloud, FileCheck, X } from "lucide-react";
+import {
+  CheckCircle2,
+  SendHorizontal,
+  ShieldCheck,
+  UploadCloud,
+  FileCheck,
+  X,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const inquirySchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters" }),
   email: z.string().email({ message: "Please enter a valid email address" }),
-  message: z.string().min(10, { message: "Message must be at least 10 characters" }),
+  message: z
+    .string()
+    .min(10, { message: "Message must be at least 10 characters" }),
   document: z.any().optional(),
 });
 
@@ -65,9 +74,12 @@ export default function SpecialAccommodationForm() {
       <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-2xl p-10 text-center space-y-6 animate-fade-up">
         <CheckCircle2 className="w-16 h-16 text-emerald-500 mx-auto" />
         <div className="space-y-2">
-          <h3 className="text-2xl font-black uppercase tracking-tight">Request Received</h3>
+          <h3 className="text-2xl font-black uppercase tracking-tight">
+            Request Received
+          </h3>
           <p className="text-emerald-700 font-medium">
-            Thank you! Your accommodation request has been securely received. Our support team will reach out within 48 hours.
+            Thank you! Your accommodation request has been securely received.
+            Our support team will reach out within 48 hours.
           </p>
         </div>
         <Button
@@ -116,7 +128,8 @@ export default function SpecialAccommodationForm() {
 
       <Field data-invalid={!!errors.message}>
         <FieldLabel className="text-sm font-medium">
-          Accommodation Details <span className="text-primary font-bold">*</span>
+          Accommodation Details{" "}
+          <span className="text-primary font-bold">*</span>
         </FieldLabel>
         <FieldContent>
           <Textarea
@@ -130,11 +143,17 @@ export default function SpecialAccommodationForm() {
       </Field>
 
       <div className="space-y-4">
-        <FieldLabel className="text-sm font-medium">Supporting Documentation</FieldLabel>
-        <div className={cn(
-          "relative p-8 border-2 border-dashed rounded-2xl transition-all flex flex-col items-center justify-center text-center group bg-slate-50/30",
-          fileName ? "border-primary/30 bg-primary/5" : "border-slate-200 hover:border-primary/50"
-        )}>
+        <FieldLabel className="text-sm font-medium">
+          Supporting Documentation
+        </FieldLabel>
+        <div
+          className={cn(
+            "relative p-8 border-2 border-dashed rounded-2xl transition-all flex flex-col items-center justify-center text-center group bg-slate-50/30",
+            fileName
+              ? "border-primary/30 bg-primary/5"
+              : "border-slate-200 hover:border-primary/50",
+          )}
+        >
           {fileName ? (
             <div className="flex flex-col items-center space-y-4 animate-in zoom-in-95">
               <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center text-primary">
@@ -155,7 +174,9 @@ export default function SpecialAccommodationForm() {
             <>
               <UploadCloud className="w-12 h-12 text-slate-300 group-hover:text-primary transition-colors mb-4" />
               <div className="space-y-1 mb-6">
-                <p className="font-bold text-slate-700">Drop your medical evidence here</p>
+                <p className="font-bold text-slate-700">
+                  Drop your medical evidence here
+                </p>
                 <p className="text-sm text-slate-400 font-medium">
                   PDF, JPG or PNG (Max 10MB)
                 </p>
@@ -182,7 +203,7 @@ export default function SpecialAccommodationForm() {
         <Button
           disabled={isSubmitting}
           type="submit"
-          className="h-14 px-12 rounded-xl font-black uppercase tracking-widest text-sm w-full md:w-auto transition-all active:scale-95 shadow-xl shadow-primary/10"
+          // className="h-14 px-12 rounded-xl font-black uppercase tracking-widest text-sm w-full md:w-auto transition-all active:scale-95 shadow-xl shadow-primary/10"
         >
           <div className="flex items-center gap-3">
             {isSubmitting ? "Sending Request..." : "Send Inquiry"}

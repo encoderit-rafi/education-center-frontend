@@ -7,10 +7,8 @@ import { SectionHeader } from "@/components/ui/section-header";
 export default function SpecialAccommodation() {
   return (
     <main className="bg-white min-h-screen">
-      {/* Hero Section */}
-      <section className="py-16 md:py-24 px-8 max-w-screen-2xl mx-auto">
+      {/* <section className="py-16 md:py-24 px-8 max-w-screen-2xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
-          {/* Left Content */}
           <SectionHeader
             badge="ACCESSIBILITY FIRST"
             title={
@@ -22,7 +20,6 @@ export default function SpecialAccommodation() {
             className="space-y-4"
           />
 
-          {/* Right Visual */}
           <div className="relative group">
             <div className="absolute -inset-4 bg-primary/5 rounded-xl blur-3xl opacity-50 transition-opacity group-hover:opacity-100"></div>
             <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
@@ -36,7 +33,7 @@ export default function SpecialAccommodation() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Types of Accommodations - Bento Grid */}
       <section className="py-24 bg-red-50/30">
@@ -59,38 +56,56 @@ export default function SpecialAccommodation() {
                   Additional Time
                 </h3>
                 <p className="text-slate-500 group-hover:text-white/80 transition-colors leading-relaxed">
-                  Standard 25% to 50% extra time for candidates with cognitive processing speeds, physical disabilities, or visual impairments that require more time to navigate materials.
+                  Standard 25% to 50% extra time for candidates with cognitive
+                  processing speeds, physical disabilities, or visual
+                  impairments that require more time to navigate materials.
                 </p>
               </div>
               <div className="mt-8">
-                <a className="text-primary font-bold group-hover:text-white flex items-center gap-2" href="#">
+                <a
+                  className="text-primary font-bold group-hover:text-white flex items-center gap-2"
+                  href="#"
+                >
                   Learn more <ArrowRight className="w-4 h-4" />
                 </a>
               </div>
             </div>
             <div className="bg-red-50 p-10 rounded-xl flex flex-col group hover:shadow-xl transition-all border border-red-100">
               <Eye className="w-10 h-10 mb-6 text-primary" />
-              <h3 className="text-2xl font-bold mb-4 text-secondary">Visual Aids</h3>
+              <h3 className="text-2xl font-bold mb-4 text-secondary">
+                Visual Aids
+              </h3>
               <p className="text-slate-600 leading-relaxed mb-6">
-                Large print papers, Braille versions, and screen magnifier software for candidates with varying degrees of visual impairment.
+                Large print papers, Braille versions, and screen magnifier
+                software for candidates with varying degrees of visual
+                impairment.
               </p>
               <div className="mt-auto">
-                <span className="text-xs font-bold uppercase tracking-widest text-primary">Customizable</span>
+                <span className="text-xs font-bold uppercase tracking-widest text-primary">
+                  Customizable
+                </span>
               </div>
             </div>
             <div className="bg-white p-10 rounded-xl shadow-sm flex flex-col group border border-slate-100 border-b-4 border-b-transparent hover:border-b-primary transition-all">
               <DoorOpen className="w-10 h-10 mb-6 text-primary" />
-              <h3 className="text-2xl font-bold mb-4 text-secondary">Private Room</h3>
+              <h3 className="text-2xl font-bold mb-4 text-secondary">
+                Private Room
+              </h3>
               <p className="text-slate-500 leading-relaxed">
-                Distraction-free environments for candidates requiring specialized medical equipment or frequent breaks.
+                Distraction-free environments for candidates requiring
+                specialized medical equipment or frequent breaks.
               </p>
             </div>
             <div className="md:col-span-2 bg-secondary text-white p-10 rounded-xl relative overflow-hidden">
               <div className="relative z-10 flex flex-col h-full justify-between">
                 <div>
-                  <h3 className="text-2xl font-bold mb-4">Assistive Personnel</h3>
+                  <h3 className="text-2xl font-bold mb-4">
+                    Assistive Personnel
+                  </h3>
                   <p className="text-white/80 leading-relaxed max-w-lg">
-                    Qualified scribes, readers, and sign-language interpreters can be provided to assist candidates in conveying their knowledge accurately.
+                    Qualified scribes, readers, and sign-language interpreters
+                    can be provided to assist candidates in conveying their
+                    knowledge accurately.
                   </p>
                 </div>
                 <div className="flex gap-4 mt-8 flex-wrap">
@@ -126,9 +141,13 @@ export default function SpecialAccommodation() {
                     1
                   </div>
                   <div>
-                    <h4 className="font-bold text-xl mb-2 text-secondary">Initial Request</h4>
+                    <h4 className="font-bold text-xl mb-2 text-secondary">
+                      Initial Request
+                    </h4>
                     <p className="text-slate-500 leading-relaxed">
-                      Submit your request during the initial exam registration phase. We recommend applying at least 6 weeks before your test date.
+                      Submit your request during the initial exam registration
+                      phase. We recommend applying at least 6 weeks before your
+                      test date.
                     </p>
                   </div>
                 </div>
@@ -137,9 +156,13 @@ export default function SpecialAccommodation() {
                     2
                   </div>
                   <div>
-                    <h4 className="font-bold text-xl mb-2 text-secondary">Documentation Upload</h4>
+                    <h4 className="font-bold text-xl mb-2 text-secondary">
+                      Documentation Upload
+                    </h4>
                     <p className="text-slate-500 leading-relaxed">
-                      Provide valid medical evidence from a registered practitioner outlining the nature of the requirement and recommended adjustments.
+                      Provide valid medical evidence from a registered
+                      practitioner outlining the nature of the requirement and
+                      recommended adjustments.
                     </p>
                   </div>
                 </div>
@@ -148,9 +171,12 @@ export default function SpecialAccommodation() {
                     3
                   </div>
                   <div>
-                    <h4 className="font-bold text-xl mb-2 text-secondary">Review & Approval</h4>
+                    <h4 className="font-bold text-xl mb-2 text-secondary">
+                      Review & Approval
+                    </h4>
                     <p className="text-slate-500 leading-relaxed">
-                      Our specialist board reviews the request against exam body criteria and issues a Formal Approval Notice via email.
+                      Our specialist board reviews the request against exam body
+                      criteria and issues a Formal Approval Notice via email.
                     </p>
                   </div>
                 </div>
@@ -158,10 +184,11 @@ export default function SpecialAccommodation() {
             </div>
 
             <div className="border border-slate-200 shadow-sm rounded-xl p-8">
-              <h2 className="text-3xl font-headline font-extrabold mb-8 text-secondary">Accommodation Inquiry</h2>
+              <h2 className="text-3xl font-headline font-extrabold mb-8 text-secondary">
+                Accommodation Inquiry
+              </h2>
               <SpecialAccommodationForm />
             </div>
-
           </div>
         </div>
       </section>
