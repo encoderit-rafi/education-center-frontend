@@ -116,7 +116,7 @@ export default function FreeConsultationForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-      <div className="grid md:grid-cols-2 gap-x-8 gap-y-8">
+      <div className="grid md:grid-cols-2 gap-x-10 gap-y-8">
         {/* Personal Information */}
         <div className="space-y-6">
           <Stepper step={1}>Your Information</Stepper>
@@ -189,7 +189,6 @@ export default function FreeConsultationForm() {
                   <Input
                     {...register("city")}
                     placeholder="Dubai"
-                    className="h-11"
                   />
                 </FieldContent>
                 <FieldError errors={[errors.city]} />
@@ -227,88 +226,88 @@ export default function FreeConsultationForm() {
               <FieldError errors={[errors.area]} />
             </Field>
 
-            <div className="grid grid-cols-2 gap-1">
-              <Field data-invalid={!!errors.date}>
-                <FieldLabel required>Date Preference</FieldLabel>
-                <FieldContent>
-                  <Popover open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
-                    <PopoverTrigger
-                      render={
+
+            <Field data-invalid={!!errors.date}>
+              <FieldLabel required>Date Preference</FieldLabel>
+              <FieldContent>
+                <Popover open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
+                  <PopoverTrigger
+                    render={
+                      <Button
+                        variant="ghost"
+                        className={cn(
+                          "w-full justify-start text-left font-normal rounded-md border border-slate-200  px-3 py-2 text-sm transition-all outline-none  focus-visible:border-primary focus-visible:ring-3 focus-visible:ring-ring/30 shadow-none hover:shadow-none hover:bg-transparent whitespace-nowrap",
+                          !selectedDate && "text-slate-400"
+                        )}
+                      >
+                        <CalendarIcon className="mr-2 h-4 w-4 text-slate-400" />
+                        {selectedDate ? (
+                          format(selectedDate, "PPP")
+                        ) : (
+                          <span>Select date</span>
+                        )}
+                      </Button>
+                    }
+                  />
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <Calendar
+                      mode="single"
+                      selected={selectedDate}
+                      onSelect={(date) => {
+                        setValue("date", date as Date);
+                        setIsCalendarOpen(false);
+                      }}
+                      disabled={(date) =>
+                        date <= new Date() || date < new Date("1900-01-01")
+                      }
+                    />
+                  </PopoverContent>
+                </Popover>
+              </FieldContent>
+              <FieldError errors={[errors.date]} />
+            </Field>
+
+            <Field data-invalid={!!errors.time}>
+              <FieldLabel required>Preferred Time</FieldLabel>
+              <FieldContent>
+                <Controller
+                  control={control}
+                  name="time"
+                  render={({ field }) => (
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
                         <Button
                           variant="ghost"
                           className={cn(
-                            "w-full justify-start text-left font-normal rounded-md border border-slate-200  px-3 py-2 text-sm transition-all outline-none  focus-visible:border-primary focus-visible:ring-3 focus-visible:ring-ring/30 shadow-none hover:shadow-none hover:bg-transparent whitespace-nowrap",
-                            !selectedDate && "text-slate-400"
+                            "flex h-10 w-full items-center justify-between overflow-hidden whitespace-nowrap rounded-md border border-slate-200 bg-white px-3 text-base transition-[color,box-shadow,background-color] outline-none focus:border-primary focus:ring-3 focus:ring-ring/30 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm font-medium",
+                            !field.value && "text-slate-400"
                           )}
                         >
-                          <CalendarIcon className="mr-2 h-4 w-4 text-slate-400" />
-                          {selectedDate ? (
-                            format(selectedDate, "PPP")
-                          ) : (
-                            <span>Select date</span>
-                          )}
+                          {field.value
+                            ? TIMES.find((t) => t.value === field.value)?.label
+                            : "Select time"}
+                          <ChevronDown className="h-4 w-4 text-slate-400" />
                         </Button>
-                      }
-                    />
-                    <PopoverContent className="w-auto p-0" align="start">
-                      <Calendar
-                        mode="single"
-                        selected={selectedDate}
-                        onSelect={(date) => {
-                          setValue("date", date as Date);
-                          setIsCalendarOpen(false);
-                        }}
-                        disabled={(date) =>
-                          date <= new Date() || date < new Date("1900-01-01")
-                        }
-                      />
-                    </PopoverContent>
-                  </Popover>
-                </FieldContent>
-                <FieldError errors={[errors.date]} />
-              </Field>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent className="min-w-[var(--radix-dropdown-menu-trigger-width)] w-auto bg-white">
+                        <DropdownMenuRadioGroup
+                          value={field.value}
+                          onValueChange={field.onChange}
+                        >
+                          {TIMES.map((t) => (
+                            <DropdownMenuRadioItem key={t.value} value={t.value}>
+                              {t.label}
+                            </DropdownMenuRadioItem>
+                          ))}
+                        </DropdownMenuRadioGroup>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  )}
+                />
+              </FieldContent>
+              <FieldError errors={[errors.time]} />
+            </Field>
 
-              <Field data-invalid={!!errors.time}>
-                <FieldLabel required>Preferred Time</FieldLabel>
-                <FieldContent>
-                  <Controller
-                    control={control}
-                    name="time"
-                    render={({ field }) => (
-                      <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                          <Button
-                            variant="ghost"
-                            className={cn(
-                              "flex h-10 w-full items-center justify-between overflow-hidden whitespace-nowrap rounded-md border border-slate-200 bg-white px-3 text-base transition-[color,box-shadow,background-color] outline-none focus:border-primary focus:ring-3 focus:ring-ring/30 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm font-medium",
-                              !field.value && "text-slate-400"
-                            )}
-                          >
-                            {field.value
-                              ? TIMES.find((t) => t.value === field.value)?.label
-                              : "Select time"}
-                            <ChevronDown className="h-4 w-4 text-slate-400" />
-                          </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent className="min-w-[var(--radix-dropdown-menu-trigger-width)] w-auto bg-white">
-                          <DropdownMenuRadioGroup
-                            value={field.value}
-                            onValueChange={field.onChange}
-                          >
-                            {TIMES.map((t) => (
-                              <DropdownMenuRadioItem key={t.value} value={t.value}>
-                                {t.label}
-                              </DropdownMenuRadioItem>
-                            ))}
-                          </DropdownMenuRadioGroup>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
-                    )}
-                  />
-                </FieldContent>
-                <FieldError errors={[errors.time]} />
-              </Field>
-            </div>
 
             <Field>
               <FieldLabel>Message/Comments</FieldLabel>
@@ -329,13 +328,10 @@ export default function FreeConsultationForm() {
         <Button
           type="submit"
           disabled={isSubmitting}
-          size="lg"
-          className="h-11 px-4 py-2 rounded-xl font-black uppercase tracking-widest text-xs w-full md:w-auto transition-all active:scale-95"
-
+          className="h-11 px-4 py-2 rounded-md font-bold uppercase tracking-widest text-sm w-full md:w-auto transition-all active:scale-95"
         >
           <div className="flex items-center gap-3">
-            {isSubmitting ? "Processing..." : "Submit"}
-            {!isSubmitting && <ArrowRight className="w-4 h-4" />}
+            {isSubmitting ? "Sending..." : "Submit"}
           </div>
         </Button>
         <div className="flex items-center justify-center gap-2 text-xs text-slate-500 font-medium text-center">

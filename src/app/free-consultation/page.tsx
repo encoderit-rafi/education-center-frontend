@@ -1,5 +1,5 @@
 import FreeConsultationForm from "@/app/free-consultation/_components/free-consultation-form";
-import { CheckCircle2, ArrowRightCircle } from "lucide-react";
+import { CheckCircle2, ArrowRightCircle, MapPin, Phone, Globe } from "lucide-react";
 import Image from "next/image";
 import { SectionHeader } from "@/components/ui/section-header";
 
@@ -7,8 +7,12 @@ export default function FreeConsultationPage() {
   return (
     <main className="bg-white min-h-screen">
       {/* ── Section 1: Hero ── */}
-      <section className="py-16 md:py-24 px-8 max-w-screen-2xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+      <section className="relative py-16 md:py-24 px-8 max-w-screen-2xl mx-auto overflow-hidden">
+        {/* Decorative Background */}
+        <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-96 h-96 bg-primary/5 rounded-full blur-3xl -z-10"></div>
+        <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/2 w-64 h-64 bg-secondary/5 rounded-full blur-3xl -z-10"></div>
+
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center relative z-10">
           {/* Left Content */}
           <SectionHeader
             badge="FREE CONSULTATION"
@@ -33,7 +37,7 @@ export default function FreeConsultationPage() {
             <div className="absolute -inset-4 bg-primary/5 rounded-xl blur-3xl opacity-50 transition-opacity group-hover:opacity-100"></div>
             <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
               <Image
-                src="/images/about-us/about-us-3.jpg"
+                src="/images/free-consultation-1.png"
                 alt="Expert Consultation Session"
                 fill
                 className="object-cover"
@@ -51,8 +55,8 @@ export default function FreeConsultationPage() {
           <div className="relative pt-12 lg:pt-0">
             <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
               <Image
-                src="/images/about-us/about-us-5.jpg"
-                alt="Exam Preparation Consultation"
+                src="/images/consultation-instructor.png"
+                alt="Exam Preparation Consultation with Instructor"
                 fill
                 className="object-cover"
               />
@@ -76,13 +80,13 @@ export default function FreeConsultationPage() {
                 <p className="font-bold text-secondary uppercase tracking-widest text-xs">You can choose:</p>
                 <div className="grid gap-3">
                   {[
-                    "In-person Consultation at our centre.",
-                    "Online Consultation via GoTo Application",
-                    "Phone Consultation via phone call"
+                    { text: "In-person Consultation at our centre.", icon: MapPin },
+                    { text: "Online Consultation via GoTo Application", icon: Globe },
+                    { text: "Phone Consultation via phone call", icon: Phone }
                   ].map((item) => (
-                    <div key={item} className="flex items-center gap-3 p-4 rounded-xl bg-slate-50 border border-slate-100 text-slate-700 font-medium">
-                      <CheckCircle2 className="w-5 h-5 text-primary shrink-0" />
-                      <span>{item}</span>
+                    <div key={item.text} className="flex items-center gap-3 p-4 rounded-xl bg-slate-50 border border-slate-100 text-slate-700 font-medium transition-all hover:bg-white hover:shadow-md group/item">
+                      <item.icon className="w-5 h-5 text-primary shrink-0 group-hover/item:scale-110 transition-transform" />
+                      <span>{item.text}</span>
                     </div>
                   ))}
                 </div>
@@ -99,7 +103,7 @@ export default function FreeConsultationPage() {
                   ].map((item) => (
                     <li key={item} className="flex items-start gap-3 group">
                       <CheckCircle2 className="w-5 h-5 text-primary/40 shrink-0 mt-1 group-hover:text-primary transition-colors" />
-                      <span className="text-slate-600 font-medium leading-relaxed">{item}</span>
+                      <span className="text-slate-600 font-medium leading-relaxed group-hover:translate-x-1 transition-transform">{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -114,8 +118,11 @@ export default function FreeConsultationPage() {
       </section>
 
       {/* ── Section 3: Exam Bookings & Test Information ── */}
-      <section className="py-32 px-8 max-w-screen-2xl mx-auto border-t border-slate-50 bg-slate-50/30">
-        <div className="grid lg:grid-cols-2 gap-20 items-start">
+      <section className="relative py-32 px-8 max-w-screen-2xl mx-auto border-t border-slate-50 bg-slate-50/30 overflow-hidden">
+        {/* Decorative Background */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(var(--primary-rgb),0.03)_0%,transparent_70%)] -z-10"></div>
+
+        <div className="grid lg:grid-cols-2 gap-20 items-start relative z-10">
           {/* Left Content */}
           <div className="space-y-12">
             <SectionHeader
@@ -133,12 +140,12 @@ export default function FreeConsultationPage() {
                 <p className="font-bold text-secondary uppercase tracking-widest text-xs">You can consult:</p>
                 <div className="grid gap-3">
                   {[
-                    "In-person Consultation at our centre.",
-                    "Phone Consultation visa phone call for quick support"
+                    { text: "In-person Consultation at our centre.", icon: MapPin },
+                    { text: "Phone Consultation via phone call for quick support", icon: Phone }
                   ].map((item) => (
-                    <div key={item} className="flex items-center gap-3 p-4 rounded-xl bg-white border border-slate-100 text-slate-700 font-medium shadow-sm">
-                      <CheckCircle2 className="w-5 h-5 text-primary shrink-0" />
-                      <span>{item}</span>
+                    <div key={item.text} className="flex items-center gap-3 p-4 rounded-xl bg-white border border-slate-100 text-slate-700 font-medium shadow-sm transition-all hover:shadow-md group/item">
+                      <item.icon className="w-5 h-5 text-primary shrink-0 group-hover/item:scale-110 transition-transform" />
+                      <span>{item.text}</span>
                     </div>
                   ))}
                 </div>
@@ -155,7 +162,7 @@ export default function FreeConsultationPage() {
                   ].map((item) => (
                     <li key={item} className="flex items-start gap-3 group">
                       <ArrowRightCircle className="w-5 h-5 text-primary/40 shrink-0 mt-1 group-hover:text-primary transition-colors" />
-                      <span className="text-slate-600 font-medium leading-relaxed">{item}</span>
+                      <span className="text-slate-600 font-medium leading-relaxed group-hover:translate-x-1 transition-transform">{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -168,7 +175,7 @@ export default function FreeConsultationPage() {
             <div className="absolute -inset-4 bg-primary/5 rounded-xl blur-3xl opacity-50 transition-opacity group-hover:opacity-100"></div>
             <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
               <Image
-                src="/images/about-us/about-us-4.jpg"
+                src="/images/free-consultation-2.png"
                 alt="Test Centre Support"
                 fill
                 className="object-cover"

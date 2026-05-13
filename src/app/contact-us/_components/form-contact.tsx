@@ -293,7 +293,6 @@ export default function ContactForm() {
         >
           <div className="flex items-center gap-3">
             {isSubmitting ? "Sending..." : "Submit"}
-            {!isSubmitting && <SendHorizontal className="w-4 h-4" />}
           </div>
         </Button>
 
