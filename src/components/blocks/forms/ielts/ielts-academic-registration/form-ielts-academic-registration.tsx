@@ -97,6 +97,8 @@ export default function FormIeltsAcademicRegistration() {
       middleName: "",
       surnames: "",
       noSurname: false,
+      postcode: "",
+      poBox: "",
       dateOfBirth: undefined,
       sex: "male",
       email: "",
@@ -111,6 +113,7 @@ export default function FormIeltsAcademicRegistration() {
       idExpiryDate: undefined,
       issuingAuthority: "",
       nationality: "",
+      idDocument: undefined,
       takenBefore: "No",
       lessThanTwoYears: "No",
       existingAccount: "No",
@@ -127,6 +130,7 @@ export default function FormIeltsAcademicRegistration() {
       selectedCourse: "",
       selectedWorkshop: "",
       paymentMethod: "",
+      examTimeSlot: "",
     },
   });
 
@@ -138,17 +142,33 @@ export default function FormIeltsAcademicRegistration() {
   };
 
   const calculateTotal = () => {
-    const base = 1250;
-    const course = formData.selectedCourse
+    const baseFee = 1400;
+    const serviceFee = 100;
+    const coursePrice = formData.selectedCourse
       ? (COURSES_DATA as any)[formData.selectedCourse].price *
         (1 -
           (COURSES_DATA as any)[formData.selectedCourse].special_discount / 100)
       : 0;
-    const workshop = formData.selectedWorkshop
+    const workshopPrice = formData.selectedWorkshop
       ? (WORKSHOPS_DATA as any)[formData.selectedWorkshop].price
       : 0;
-    return base + course + workshop;
+    
+    const subtotal = baseFee + serviceFee + coursePrice + workshopPrice;
+    const vat = subtotal * 0.05;
+    
+    return {
+      baseFee,
+      serviceFee,
+      coursePrice,
+      workshopPrice,
+      subtotal,
+      vat,
+      total: subtotal + vat
+    };
   };
+
+  const pricing = calculateTotal();
+  const total = pricing.total;
 
   const handleFormSubmit: SubmitHandler<TIeltsAcademicSchema> = (data) => {
     if (currentStep < 3) {
@@ -170,9 +190,6 @@ export default function FormIeltsAcademicRegistration() {
     }
   };
 
-  const total = calculateTotal();
-  const baseFee = 1250;
-
   return (
     <div className="max-w-7xl mx-auto px-4 py-12">
       <div className="text-center mb-12">
@@ -191,10 +208,13 @@ export default function FormIeltsAcademicRegistration() {
           {currentStep === 1 && (
             <DateStep
               value={formData.examDate}
+              timeSlot={formData.examTimeSlot}
               onChange={(date) => form.setValue("examDate", date)}
+              onTimeSlotChange={(slot) => form.setValue("examTimeSlot", slot as any)}
               onNext={() => goToStep(2)}
               onBack={() => goToStep(0)}
               error={form.formState.errors.examDate}
+              timeSlotError={form.formState.errors.examTimeSlot}
             />
           )}
 
@@ -217,7 +237,9 @@ export default function FormIeltsAcademicRegistration() {
               onEdit={() => goToStep(2)}
               onSubmit={form.handleSubmit(handleFormSubmit, onInvalid)}
               onInvalid={onInvalid}
-              baseFee={baseFee}
+              baseFee={pricing.baseFee}
+              serviceFee={pricing.serviceFee}
+              vat={pricing.vat}
               total={total}
               selectedCourseData={
                 formData.selectedCourse

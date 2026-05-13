@@ -224,10 +224,34 @@ export function RegistrationFormStep({
             <FieldContent>
               <Input
                 {...register("postalAddress1")}
-                placeholder="Street address, P.O. box, etc."
+                placeholder="Street address"
                 aria-invalid={!!errors.postalAddress1}
               />
               <FieldError errors={[errors.postalAddress1]} />
+            </FieldContent>
+          </Field>
+
+          <Field data-invalid={!!errors.poBox}>
+            <FieldLabel>P.O. Box number</FieldLabel>
+            <FieldContent>
+              <Input
+                {...register("poBox")}
+                placeholder="P.O. Box number"
+                aria-invalid={!!errors.poBox}
+              />
+              <FieldError errors={[errors.poBox]} />
+            </FieldContent>
+          </Field>
+
+          <Field data-invalid={!!errors.postcode}>
+            <FieldLabel>Postal Code (Zip Code)</FieldLabel>
+            <FieldContent>
+              <Input
+                {...register("postcode")}
+                placeholder="Postal code"
+                aria-invalid={!!errors.postcode}
+              />
+              <FieldError errors={[errors.postcode]} />
             </FieldContent>
           </Field>
 
@@ -331,6 +355,58 @@ export function RegistrationFormStep({
               <FieldError errors={[errors.nationality]} />
             </FieldContent>
           </Field>
+
+          <Field data-invalid={!!errors.idDocument}>
+            <FieldLabel required>
+              Attach a valid copy of Passport / Emirates ID:
+            </FieldLabel>
+            <FieldContent>
+              <div className="flex flex-col gap-2">
+                {!formData.idDocument ? (
+                  <Input
+                    type="file"
+                    accept=".pdf,.docx,.doc,.png,.jpg,.jpeg"
+                    className="h-auto py-2 px-3 border-2 border-dashed border-slate-200 hover:border-primary/50 transition-colors cursor-pointer file:mr-4 file:py-1 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (file) setValue("idDocument", file);
+                    }}
+                  />
+                ) : (
+                  <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-200">
+                    <div className="flex items-center gap-3">
+                      <div className="size-8 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-primary">
+                        <Save className="size-4" />
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="text-xs font-bold text-slate-700 truncate max-w-[200px]">
+                          {(formData.idDocument as File).name}
+                        </span>
+                        <span className="text-[10px] text-slate-400 font-medium">
+                          {((formData.idDocument as File).size / (1024 * 1024)).toFixed(2)} MB
+                        </span>
+                      </div>
+                    </div>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => setValue("idDocument", undefined)}
+                      className="size-8 p-0 rounded-full hover:bg-red-50 hover:text-red-600"
+                    >
+                      <span className="text-lg">×</span>
+                    </Button>
+                  </div>
+                )}
+                <p className="text-[12px] text-slate-900 font-medium">
+                  Supported formats: (pdf, docx, doc, png, jpeg)
+                </p>
+              </div>
+              <FieldError errors={[errors.idDocument]} />
+            </FieldContent>
+          </Field>
+
+
         </div>
       </div>
 

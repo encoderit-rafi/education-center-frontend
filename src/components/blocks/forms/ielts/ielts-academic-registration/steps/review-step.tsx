@@ -32,6 +32,8 @@ interface ReviewStepProps {
   onSubmit: (e?: React.BaseSyntheticEvent) => Promise<void>;
   onInvalid: (errors: any) => void;
   baseFee: number;
+  serviceFee: number;
+  vat: number;
   total: number;
   selectedCourseData?: any;
   selectedWorkshopData?: any;
@@ -44,6 +46,8 @@ export function ReviewStep({
   onSubmit,
   onInvalid,
   baseFee,
+  serviceFee,
+  vat,
   total,
   selectedCourseData,
   selectedWorkshopData,
@@ -152,6 +156,14 @@ export function ReviewStep({
                   {data.idExpiryDate ? format(data.idExpiryDate, "PPP") : "N/A"}
                 </span>
               </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] text-slate-400 font-bold">
+                  IDENTITY DOCUMENT
+                </span>
+                <span className="text-sm font-semibold text-slate-700">
+                  {data.idDocument ? (data.idDocument as File).name : "No file attached"}
+                </span>
+              </div>
             </div>
           </div>
 
@@ -174,10 +186,30 @@ export function ReviewStep({
               </div>
               <div className="flex flex-col">
                 <span className="text-[10px] text-slate-400 font-bold">
+                  Time Slot
+                </span>
+                <span className="text-sm font-semibold text-slate-700">
+                  {data.examTimeSlot === "9:00 AM"
+                    ? "Morning Session (09:00 AM)"
+                    : data.examTimeSlot === "11:00 AM"
+                      ? "Morning Session (11:00 AM)"
+                      : "Morning Session"}
+                </span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] text-slate-400 font-bold">
                   Location
                 </span>
                 <span className="text-sm font-semibold text-slate-700">
                   {data.city}, {data.residenceCountry}
+                </span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] text-slate-400 font-bold">
+                  P.O. BOX / POSTAL CODE
+                </span>
+                <span className="text-sm font-semibold text-slate-700">
+                  {data.poBox || "N/A"} / {data.postcode || "N/A"}
                 </span>
               </div>
               <div className="flex flex-col">
@@ -230,6 +262,11 @@ export function ReviewStep({
               <span className="font-medium">{baseFee.toFixed(2)} AED</span>
             </div>
 
+            <div className="flex justify-between text-sm">
+              <span className="text-slate-500">Registration Service Fee</span>
+              <span className="font-medium">{serviceFee.toFixed(2)} AED</span>
+            </div>
+
             {data.selectedCourse && selectedCourseData && (
               <div className="flex justify-between text-sm">
                 <span className="text-slate-500">
@@ -256,6 +293,11 @@ export function ReviewStep({
                 </span>
               </div>
             )}
+
+            <div className="flex justify-between text-sm pt-2 border-t border-slate-100">
+              <span className="text-slate-500">VAT (5%)</span>
+              <span className="font-medium">{vat.toFixed(2)} AED</span>
+            </div>
 
             <div className="pt-4 border-t border-slate-200">
               <div className="flex justify-between items-center">

@@ -113,11 +113,11 @@ export const SearchableDropdown = React.forwardRef<
                       key={option.value}
                       value={option.value}
                       onSelect={() => handleSelect(option.value)}
-                      className="flex items-center gap-2 rounded-md px-2 py-2 text-sm outline-none cursor-default select-none hover:bg-slate-50 focus:bg-slate-50 data-[selected=true]:bg-slate-50"
+                      className="flex items-center gap-2 rounded-none px-3 py-3 text-sm outline-none cursor-default select-none hover:bg-slate-50 focus:bg-slate-50 data-[selected=true]:bg-slate-50 border-b border-red-100 last:border-0"
                     >
                       <Check
                         className={cn(
-                          "h-4 w-4 text-primary shrink-0",
+                          "h-4 w-4 text-red-600 shrink-0",
                           value === option.value ? "opacity-100" : "opacity-0",
                         )}
                       />
