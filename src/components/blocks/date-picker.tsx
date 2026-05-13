@@ -19,6 +19,8 @@ export interface DatePickerProps {
   placeholder?: string;
   disabled?: (date: Date) => boolean;
   className?: string;
+  "aria-invalid"?: boolean;
+  name?: string;
 }
 
 export function DatePicker({
@@ -27,6 +29,8 @@ export function DatePicker({
   placeholder = "Select date",
   disabled,
   className,
+  "aria-invalid": ariaInvalid,
+  name,
 }: DatePickerProps) {
   return (
     <Popover>
@@ -34,8 +38,10 @@ export function DatePicker({
         render={
           <Button
             variant="ghost"
+            name={name}
+            aria-invalid={ariaInvalid}
             className={cn(
-              "w-full justify-start text-left font-normal rounded-md border border-slate-200 px-3 py-2 text-sm transition-all outline-none focus-visible:border-primary focus-visible:ring-3 focus-visible:ring-ring/30 shadow-none hover:shadow-none hover:bg-transparent",
+              "w-full justify-start text-left font-normal rounded-md border border-slate-200 px-3 py-2 text-sm transition-all outline-none focus-visible:border-primary focus-visible:ring-3 focus-visible:ring-ring/30 shadow-none hover:shadow-none hover:bg-transparent aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20",
               !value && "text-muted-foreground",
               className,
             )}

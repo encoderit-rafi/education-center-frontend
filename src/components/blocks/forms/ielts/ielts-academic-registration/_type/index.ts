@@ -1,18 +1,22 @@
 import { z } from "zod";
 
-export const IeltsAcademicSchema = z.object({
+export const IeltsAcademicSchema = z
+  .object({
     // Step 1: Personal Details
     testModule: z.enum(["Academic", "General Training"]).or(z.literal("")),
-    bookingFor: z.enum(["myself", "child"], {
-        message: "Please select who you are booking for",
-    }).or(z.literal("")),
+
     givenNames: z.string().min(1, "Given names are required"),
+    middleName: z.string().optional(),
     surnames: z.string().optional(),
+    postcode: z.string().optional(),
+    poBox: z.string().optional(),
     noSurname: z.boolean(),
     dateOfBirth: z.any().refine((val) => !!val, "Date of birth is required"),
-    sex: z.enum(["female", "male"], {
+    sex: z
+      .enum(["female", "male"], {
         message: "Please select your sex",
-    }).or(z.literal("")),
+      })
+      .or(z.literal("")),
     email: z.string().email("Invalid email address"),
     confirmEmail: z.string().email("Invalid email address"),
     mobileNumber: z.string().min(1, "Mobile number is required"),
@@ -22,10 +26,11 @@ export const IeltsAcademicSchema = z.object({
     postalAddress2: z.string().optional(),
     postalAddress3: z.string().optional(),
     city: z.string().min(1, "Town / City is required"),
-    postcode: z.string().min(1, "Postcode / ZIP is required"),
-    marketingPreference: z.enum(["all", "some", "none"], {
+    marketingPreference: z
+      .enum(["all", "some", "none"], {
         message: "Please select a marketing preference",
-    }).or(z.literal("")),
+      })
+      .or(z.literal("")),
 
     // Step 2: Identification Details
     idType: z.enum(["passport", "emirates_id"]).or(z.literal("")),
@@ -37,7 +42,9 @@ export const IeltsAcademicSchema = z.object({
     // Step 3: Your Profile
     takenBefore: z.enum(["Yes", "No"]).or(z.literal("")),
     lessThanTwoYears: z.enum(["Yes", "No", "I do not know"]).or(z.literal("")),
-    existingAccount: z.enum(["Yes", "No", "I forgot my IELTS account details"]).or(z.literal("")),
+    existingAccount: z
+      .enum(["Yes", "No", "I forgot my IELTS account details"])
+      .or(z.literal("")),
     specialRequirements: z.enum(["Yes", "No"]).or(z.literal("")),
     specialRequirementsMention: z.string().optional(),
     firstLanguage: z.string().optional(),
@@ -53,15 +60,55 @@ export const IeltsAcademicSchema = z.object({
     selectedWorkshop: z.string().optional(),
 
     // Step 5: Review & Payment
-    confirmationRecipient: z.enum(["myself", "other", "company"]).or(z.literal("")),
+    // confirmationRecipient: z
+    //   .enum(["myself", "other", "company"], {
+    //     message: "Please select a confirmation recipient",
+    //   })
+    //   .or(z.literal("")),
     vatNumber: z.string().optional(),
-    paymentMethod: z.enum(["online", "bank_transfer", "at_center"]).or(z.literal("")),
+    paymentMethod: z
+      .enum(["online", "bank_transfer", "at_center"], {
+        message: "Please select a payment method",
+      })
+      .or(z.literal("")),
     termsAgreed: z.boolean().optional(),
     examDate: z.any().refine((val) => !!val, "Please select an exam date"),
-    examTime: z.string().min(1, "Please select an exam time"),
-}).refine((data) => data.email === data.confirmEmail, {
+  })
+  .refine((data) => data.email === data.confirmEmail, {
     message: "Emails do not match",
     path: ["confirmEmail"],
-});
+  })
+  .superRefine((data, ctx) => {
+    // Conditional logic for Step 3: Your Profile
+    if (data.takenBefore === "Yes") {
+      if (!data.lessThanTwoYears) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Please specify if it was less than 2 years",
+          path: ["lessThanTwoYears"],
+        });
+      }
+      if (!data.existingAccount) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Please specify if you have an existing account",
+          path: ["existingAccount"],
+        });
+      }
+    }
+
+    if (data.specialRequirements === "Yes") {
+      if (
+        !data.specialRequirementsMention ||
+        data.specialRequirementsMention.trim() === ""
+      ) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Please mention your requirements",
+          path: ["specialRequirementsMention"],
+        });
+      }
+    }
+  });
 
 export type TIeltsAcademicSchema = z.infer<typeof IeltsAcademicSchema>;

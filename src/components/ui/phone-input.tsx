@@ -32,7 +32,7 @@ const PhoneInput: React.ForwardRefExoticComponent<PhoneInputProps> =
                 <RPNInput.default
                     ref={ref}
                     className={cn(
-                        "flex w-full min-w-0 rounded-md border border-slate-200 bg-transparent px-0 py-0 text-base transition-[color,box-shadow,background-color] outline-none focus-within:border-primary focus-within:ring-3 focus-within:ring-ring/30 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
+                        "flex w-full min-w-0 rounded-md border border-slate-200 bg-transparent px-0 py-0 text-base transition-[color,box-shadow,background-color] outline-none focus-within:border-primary focus-within:ring-3 focus-within:ring-ring/30 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
                         className,
                     )}
                     flagComponent={FlagComponent}
