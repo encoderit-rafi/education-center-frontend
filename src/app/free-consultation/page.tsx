@@ -33,7 +33,7 @@ export default function FreeConsultationPage() {
             <div className="absolute -inset-4 bg-primary/5 rounded-xl blur-3xl opacity-50 transition-opacity group-hover:opacity-100"></div>
             <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
               <Image
-                src="/images/about-us/about-us-3.jpg"
+                src="/images/free-consultation-1.png"
                 alt="Expert Consultation Session"
                 fill
                 className="object-cover"
@@ -168,7 +168,7 @@ export default function FreeConsultationPage() {
             <div className="absolute -inset-4 bg-primary/5 rounded-xl blur-3xl opacity-50 transition-opacity group-hover:opacity-100"></div>
             <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
               <Image
-                src="/images/about-us/about-us-4.jpg"
+                src="/images/free-consultation-2.png"
                 alt="Test Centre Support"
                 fill
                 className="object-cover"
