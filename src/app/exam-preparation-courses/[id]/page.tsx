@@ -107,72 +107,114 @@ export default async function ExamPreparationDynamicPage({
           </div>
 
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {data.courses.map((course, index) => {
-              const discountedPrice = course.general_discount
-                ? Math.round(course.price * (1 - course.general_discount / 100))
-                : course.price;
+            {[...data.courses]
+              .sort((a, b) => {
+                const order = [
+                  "group",
+                  "semi_private",
+                  "vip_classroom",
+                  "online",
+                ];
+                const aIndex = order.findIndex((id) => a.id.includes(id));
+                const bIndex = order.findIndex((id) => b.id.includes(id));
+                return aIndex - bIndex;
+              })
+              .map((course, index) => {
+                const discountedPrice = course.general_discount
+                  ? Math.round(
+                      course.price * (1 - course.general_discount / 100),
+                    )
+                  : course.price;
 
               return (
                 <BaseCard
                   key={index}
-                  //   className="p-8 flex flex-col h-full border-slate-200 group relative overflow-hidden hover:border-primary/30 hover:shadow-2xl transition-all duration-500 ease-out"
+                  className="flex flex-col h-full border-slate-200 group relative overflow-hidden hover:border-primary/30 hover:shadow-2xl transition-all duration-500 ease-out p-0"
                 >
-                  <div className="mb-6">
-                    <div className="flex items-center justify-between">
+                  <div className="relative h-48 overflow-hidden">
+                    <img
+                      src={
+                        course.id.includes("group")
+                          ? "/images/hero/image-3.jpg"
+                          : course.id.includes("semi_private")
+                            ? "/images/hero/image-6.png"
+                            : course.id.includes("vip") &&
+                                course.id.includes("classroom")
+                              ? "/images/hero/image-7.png"
+                              : course.id.includes("online")
+                                ? "/images/hero/image-8.png"
+                                : "/images/hero/image-3.jpg"
+                      }
+                      alt={course.name}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute top-4 right-4">
+                      <Badge className="py-1 px-3 font-bold shadow-lg">
+                        SAVE {course.general_discount}%
+                      </Badge>
+                    </div>
+                  </div>
+
+                  <div className="p-8 flex flex-col flex-1">
+                    <div className="mb-6">
                       <BaseCardTitle className="text-xl mb-4 leading-tight">
                         {course.name}
                       </BaseCardTitle>
 
-                      <Badge className="py-0.5 px-2 font-semibold">
-                        SAVE {course.general_discount}%
-                      </Badge>
-                    </div>
-                    <div className="flex items-baseline gap-3">
-                      <div className="flex items-baseline gap-1">
-                        <span className="text-3xl font-black text-primary">
-                          {discountedPrice}
-                        </span>
-                      </div>
-                      {course.general_discount > 0 && (
-                        <span className="text-sm text-slate-400 line-through decoration-slate-300">
-                          {course.price} {course.currency}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-
-                  <BaseCardDescription className="text-sm mb-4 line-clamp-none text-slate-600 font-medium">
-                    {course.description}
-                  </BaseCardDescription>
-
-                  <div className="space-y-4 mt-auto">
-                    <Badge variant={"destructive"}>Best For</Badge>
-                    <BaseCardList items={course.bestFor} checked />
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <p className="text-[11px]  text-slate-400 ">Duration</p>
-                        <p className="text-xs text-slate-900">
-                          {course.details.duration}
-                        </p>
-                      </div>
-                      <div>
-                        <p className="text-[11px]  text-slate-400">Schedule</p>
-                        <p className="text-xs  text-slate-900">
-                          {course.details.schedule}
-                        </p>
+                      <div className="flex items-baseline gap-3">
+                        <div className="flex items-baseline gap-1">
+                          <span className="text-3xl font-black text-primary">
+                            {discountedPrice}
+                          </span>
+                          <span className="text-xs font-bold text-primary/60 uppercase">
+                            {course.currency}
+                          </span>
+                        </div>
+                        {course.general_discount > 0 && (
+                          <span className="text-sm text-slate-400 line-through decoration-slate-300">
+                            {course.price} {course.currency}
+                          </span>
+                        )}
                       </div>
                     </div>
 
-                    <Link
-                      href={`/exam-preparation-courses/registration?examId=${id}&courseId=${course.id}&price=${discountedPrice}&currency=${course.currency}`}
-                      className={cn(
-                        buttonVariants(),
-                        "font-bold h-10 shadow-sm mt-3 px-4",
-                      )}
-                    >
-                      <Calendar />
-                      Register
-                    </Link>
+                    <BaseCardDescription className="text-sm mb-4 line-clamp-none text-slate-600 font-medium">
+                      {course.description}
+                    </BaseCardDescription>
+
+                    <div className="space-y-4 mt-auto">
+                      <Badge variant={"destructive"}>Best For</Badge>
+                      <BaseCardList items={course.bestFor} checked />
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <p className="text-[11px]  text-slate-400 ">
+                            Duration
+                          </p>
+                          <p className="text-xs text-slate-900">
+                            {course.details.duration}
+                          </p>
+                        </div>
+                        <div>
+                          <p className="text-[11px]  text-slate-400">
+                            Schedule
+                          </p>
+                          <p className="text-xs  text-slate-900">
+                            {course.details.schedule}
+                          </p>
+                        </div>
+                      </div>
+
+                      <Link
+                        href={`/exam-preparation-courses/registration?examId=${id}&courseId=${course.id}&price=${discountedPrice}&currency=${course.currency}`}
+                        className={cn(
+                          buttonVariants(),
+                          "font-bold h-10 shadow-sm mt-3 px-4",
+                        )}
+                      >
+                        <Calendar />
+                        Register
+                      </Link>
+                    </div>
                   </div>
                 </BaseCard>
               );
