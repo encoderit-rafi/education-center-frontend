@@ -2,8 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Car, ExternalLink } from "lucide-react";
+import { Car, ExternalLink, Printer } from "lucide-react";
 import { SectionHeader } from "@/components/ui/section-header";
+import { Button } from "@/components/ui/button";
 
 export default function HowToFindUs() {
   return (
@@ -63,6 +64,15 @@ export default function HowToFindUs() {
                 This visual representation will help you with the driving directions to arrive at <span className="text-primary">The Exam Preparation & Testing House L.L.C</span> in Sharjah.
               </p>
             </div>
+
+            <Button
+              onClick={() => window.print()}
+              variant="outline"
+              className="flex items-center gap-2 font-bold text-primary border-primary/20 hover:bg-primary/5 transition-all print:hidden"
+            >
+              <Printer className="w-4 h-4" />
+              Print Map & Directions
+            </Button>
           </div>
           <div className="relative aspect-[4/3] rounded-xl overflow-hidden">
             <Image
