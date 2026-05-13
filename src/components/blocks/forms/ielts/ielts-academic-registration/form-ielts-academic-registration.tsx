@@ -26,6 +26,15 @@ import {
   CreditCard,
   ExternalLink,
   ArrowRight,
+  Save,
+  Edit3,
+  User,
+  ShieldCheck,
+  Globe,
+  Mail,
+  Phone,
+  FileText,
+  Calendar as CalendarIcon,
 } from "lucide-react";
 import { IeltsAcademicSchema, type TIeltsAcademicSchema } from "./_type";
 import { SearchableDropdown } from "@/components/ui/searchable-dropdown";
@@ -35,13 +44,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { PhoneInput } from "@/components/ui/phone-input";
 import { languages } from "@/lib/languages-data";
 
-import {
-  BookOpen,
-  Calendar as CalendarIcon,
-  CheckSquare,
-  Building2,
-  Banknote,
-} from "lucide-react";
+import { Building2, Banknote, BookOpen, CheckSquare } from "lucide-react";
 import Payment from "../../../payment";
 import { ExamDateSelector } from "@/components/blocks/calendar-booking/exam-date-selector";
 import Stepper from "@/components/stepper";
@@ -138,7 +141,7 @@ export const COURSES_DATA = {
   },
 };
 const NOTICES: string[] = [
-  "For your convenience, The Exam Preparation & Testing House FZCO offers the CD-IELTS test registration service. We hold no responsibility regarding any issues related to test results or scoring and we have no control or involvement in the test itself, the scoring of the test or the release of the results. This service is optional and candidates can book the exam directly on the exam provider’s website and select our venue and take the test.",
+  "For your convenience, The Exam Preparation & Testing House L.L.C. offers the CD-IELTS test registration service. We hold no responsibility regarding any issues related to test results or scoring and we have no control or involvement in the test itself, the scoring of the test or the release of the results. This service is optional and candidates can book the exam directly on the exam provider’s website and select our venue and take the test.",
 
   "If there are insufficient candidate numbers, the test might not be held at our testing venue. If needed, candidates will be informed and moved to the nearest available testing venue as determined by the British Council. Please ensure you provide your current cellphone number and email address when you register.",
 
@@ -151,9 +154,8 @@ const NOTICES: string[] = [
   "Please note all personal details provided on this page must match the Test Taker's identification document used for registration and presented at the test location, as these will appear on the Test Taker's Test Report Form (TRF). Once registration is complete, the exam provider may charge a fee if you ask them to modify any of this information before they issue the TRF. Please note that no modifications can be made after the TRF is issued.",
 ];
 export default function FormIELTSAcademicRegistration() {
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [showMarketingNotice, setShowMarketingNotice] = useState(false);
-  const [showTermsNotice, setShowTermsNotice] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
+  const [savedData, setSavedData] = useState<TIeltsAcademicSchema | null>(null);
 
   const form = useForm<TIeltsAcademicSchema>({
     resolver: zodResolver(IeltsAcademicSchema),
@@ -204,7 +206,7 @@ export default function FormIELTSAcademicRegistration() {
       paymentMethod: "online",
       termsAgreed: false,
       examDate: undefined,
-      examTime: "",
+      // examTime: "",
     },
   });
 
@@ -235,9 +237,9 @@ export default function FormIELTSAcademicRegistration() {
   const total = baseFee + coursePrice + workshopPrice + serviceFee;
 
   const onSubmit: SubmitHandler<TIeltsAcademicSchema> = (data) => {
-    setIsSubmitted(true);
-    window.scrollTo({ top: 0, behavior: "smooth" });
     console.log("Final Form Data:", data);
+    setIsSubmitted(true);
+    setSavedData(data);
   };
 
   return (
@@ -248,1336 +250,1039 @@ export default function FormIELTSAcademicRegistration() {
           <h2 className="text-3xl md:text-5xl font-black text-secondary tracking-tight">
             IELTS Academic <span className="text-primary">Exam Booking</span>
           </h2>
-          <BaseNoteBox
-            title="To continue with this booking you will need:"
-            notes={NOTICES}
-          />
+          <BaseNoteBox title="Tearms and Conditions:" notes={NOTICES} />
         </div>
-
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-          <Stepper step={1}>Personal details</Stepper>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <Field>
-              <FieldLabel required>Test Date</FieldLabel>
-              <FieldContent>
-                <DatePicker
-                  value={formData.examDate}
-                  onChange={(date) => setValue("examDate", date as Date)}
-                  disabled={(date) => date <= new Date()}
-                  placeholder="Select test date"
-                />
-                <FieldError errors={[errors.examDate]} />
-              </FieldContent>
-            </Field>
-
-            <Field>
-              <FieldLabel required>
-                First / given names (including middle name)
-              </FieldLabel>
-              <FieldContent>
-                <Input
-                  placeholder="As per passport"
-                  {...control.register("givenNames")}
-                />
-                <FieldError errors={[errors.givenNames]} />
-                <FieldDescription>
-                  This must match the name(s) on your identification document.
-                </FieldDescription>
-              </FieldContent>
-            </Field>
-
-            <div className="space-y-4">
-              <Field>
-                <FieldLabel>Surname / family name</FieldLabel>
-                <FieldContent>
-                  <Input
-                    placeholder="As per passport"
-                    {...control.register("surnames")}
-                    disabled={formData.noSurname}
-                  />
-                  <FieldError errors={[errors.surnames]} />
-                  <FieldDescription className="flex items-center gap-2">
-                    <Checkbox
-                      id="noSurname"
-                      // className={"border border-primary"}
-                      checked={formData.noSurname}
-                      onCheckedChange={(val) =>
-                        setValue("noSurname", val as boolean)
-                      }
-                    />
-                    <Label htmlFor="noSurname" className="text-xs font-light">
-                      I don't have a surname / family name
-                    </Label>
-                  </FieldDescription>
-                </FieldContent>
-              </Field>
-            </div>
-
-            <Field>
-              <FieldLabel required>Date of birth</FieldLabel>
-              <FieldContent>
-                <DatePicker
-                  value={formData.dateOfBirth}
-                  onChange={(date) => setValue("dateOfBirth", date as Date)}
-                  disabled={(date) =>
-                    date <= new Date() || date < new Date("1900-01-01")
-                  }
-                  placeholder="Select your date of birth"
-                />
-                <FieldError errors={[errors.dateOfBirth]} />
-              </FieldContent>
-            </Field>
-
-            <Field>
-              <FieldLabel required>Sex</FieldLabel>
-              <FieldContent>
-                <RadioGroup
-                  onValueChange={(val) => setValue("sex", val)}
-                  value={formData.sex}
-                  className="grid grid-cols-2 gap-3"
+        {isSubmitted && savedData ? (
+          <div className="space-y-8">
+            <div className="bg-white rounded-2xl border border-slate-100 p-6 md:p-8 shadow-sm">
+              <div className="flex items-center justify-between border-b border-slate-100 pb-4 mb-6">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                    <FileText className="w-4 h-4 text-primary" />
+                  </div>
+                  <h3 className="text-xl font-black text-slate-800 tracking-tight">
+                    Review Your Details
+                  </h3>
+                </div>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setIsSubmitted(false)}
+                  className="text-primary hover:text-primary hover:bg-primary/5 font-bold flex items-center gap-2 px-4"
                 >
-                  {["Male", "Female"].map((opt) => (
-                    <div
-                      key={opt}
-                      className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all cursor-pointer bg-white"
-                    >
-                      <RadioGroupItem
-                        value={opt}
-                        id={opt}
-                        className="border-[#A11D1D] text-[#A11D1D]"
-                      />
-                      <Label
-                        htmlFor={opt}
-                        className="font-medium cursor-pointer"
-                      >
-                        {opt}
-                      </Label>
-                    </div>
-                  ))}
-                </RadioGroup>
-                <FieldError errors={[errors.sex]} />
-              </FieldContent>
-            </Field>
-
-            <Field>
-              <FieldLabel required>Mobile number</FieldLabel>
-              <FieldContent>
-                <PhoneInput
-                  value={formData.mobileNumber}
-                  onChange={(val) => setValue("mobileNumber", val)}
-                  defaultCountry="AE"
-                />
-                <FieldError errors={[errors.mobileNumber]} />
-                <FieldDescription className="flex items-center gap-2">
-                  <Checkbox
-                    id="smsConsent"
-                    // className={"border border-primary"}
-                    checked={formData.smsConsent}
-                    onCheckedChange={(val) =>
-                      setValue("smsConsent", val as boolean)
-                    }
-                  />
-                  <Label htmlFor="smsConsent" className="text-xs font-light">
-                    I agree to receive notifications via SMS, WhatsApp, etc.
-                  </Label>
-                </FieldDescription>
-              </FieldContent>
-            </Field>
-            <Field>
-              <FieldLabel required>Email address</FieldLabel>
-              <FieldContent>
-                <Input
-                  placeholder="example@email.com"
-                  {...control.register("email")}
-                />
-                <FieldError errors={[errors.email]} />
-              </FieldContent>
-            </Field>
-
-            <Field>
-              <FieldLabel required>Confirm email address</FieldLabel>
-              <FieldContent>
-                <Input
-                  placeholder="Confirm your email address"
-                  {...control.register("confirmEmail")}
-                />
-                <FieldError errors={[errors.confirmEmail]} />
-              </FieldContent>
-            </Field>
-
-            {/* <Field>
-                <FieldLabel>SMS Consent</FieldLabel>
-                <FieldContent className="flex items-start gap-2">
-                  <Checkbox
-                    checked={formData.smsConsent}
-                    onCheckedChange={(val) =>
-                      setValue("smsConsent", val as boolean)
-                    }
-                    className={"border border-primary mt-1"}
-                  />
-                  <Label className="text-xs text-gray-500">
-                    I agree to receive notifications via SMS, WhatsApp, etc.
-                  </Label>
-                  <FieldError errors={[errors.smsConsent]} />
-                </FieldContent>
-              </Field> */}
-
-            <Field>
-              <FieldLabel required>Country of residence</FieldLabel>
-              <FieldContent>
-                <CountryDropdown
-                  placeholder="Search country..."
-                  value={formData.residenceCountry}
-                  onChange={(country) =>
-                    setValue("residenceCountry", country.name)
-                  }
-                />
-                <FieldError errors={[errors.residenceCountry]} />
-              </FieldContent>
-            </Field>
-            <Field>
-              <FieldLabel required>Emirates/ City</FieldLabel>
-              <FieldContent>
-                <Input
-                  {...control.register("city")}
-                  placeholder="Enter your city"
-                />
-                <FieldError errors={[errors.city]} />
-              </FieldContent>
-            </Field>
-            <Field>
-              <FieldLabel required>Postcode / ZIP</FieldLabel>
-              <FieldContent>
-                <Input
-                  {...control.register("postcode")}
-                  placeholder="Enter your postcode/zip"
-                />
-                <FieldError errors={[errors.postcode]} />
-              </FieldContent>
-            </Field>
-            <Field className="col-span-3">
-              <FieldLabel required>Postal Address Line 1</FieldLabel>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <FieldContent>
-                  <Input
-                    placeholder="Address Line 1"
-                    {...control.register("postalAddress1")}
-                  />
-                  <FieldError errors={[errors.postalAddress1]} />
-                </FieldContent>
-                <FieldContent>
-                  <Input
-                    placeholder="Address Line 2"
-                    {...control.register("postalAddress2")}
-                  />
-                </FieldContent>
-                <FieldContent>
-                  <Input
-                    placeholder="Address Line 3"
-                    {...control.register("postalAddress3")}
-                  />
-                </FieldContent>
+                  <Edit3 className="size-4" /> Edit Details
+                </Button>
               </div>
-            </Field>
 
-            <Field>
-              <FieldLabel required>Identification type</FieldLabel>
-              <FieldContent>
-                <RadioGroup
-                  onValueChange={(val) => setValue("idType", val)}
-                  value={formData.idType}
-                  className="grid grid-cols-2 gap-3"
-                >
-                  {[
-                    { id: "passport", label: "Passport" },
-                    { id: "emirates_id", label: "Emirates ID" },
-                  ].map((opt) => (
-                    <div
-                      key={opt.id}
-                      className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all cursor-pointer bg-white"
-                    >
-                      <RadioGroupItem
-                        value={opt.id}
-                        id={opt.id}
-                        className="border-[#A11D1D] text-[#A11D1D]"
-                      />
-                      <Label
-                        htmlFor={opt.id}
-                        className="font-medium cursor-pointer"
-                      >
-                        {opt.label}
-                      </Label>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {/* Personal Category */}
+                <div className="space-y-6">
+                  <div className="flex items-center gap-2 text-slate-400">
+                    <User className="size-4" />
+                    <span className="text-xs font-bold uppercase tracking-widest">
+                      Personal Details
+                    </span>
+                  </div>
+                  <div className="space-y-4">
+                    <div className="flex flex-col">
+                      <span className="text-[10px] text-slate-400 font-bold uppercase">
+                        Full Name
+                      </span>
+                      <span className="text-sm font-semibold text-slate-700">
+                        {savedData.givenNames} {savedData.middleName}{" "}
+                        {savedData.surnames}
+                      </span>
                     </div>
-                  ))}
-                </RadioGroup>
-                <FieldError errors={[errors.idType]} />
-              </FieldContent>
-            </Field>
-
-            <Field>
-              <FieldLabel required>
-                {formData.idType === "emirates_id"
-                  ? "ID number"
-                  : "Passport number"}
-              </FieldLabel>
-              <FieldContent>
-                <Input
-                  {...control.register("idNumber")}
-                  placeholder={`Enter your ${formData.idType === "emirates_id" ? "ID" : "Passport"} number`}
-                />
-                <FieldError errors={[errors.idNumber]} />
-              </FieldContent>
-            </Field>
-
-            <Field>
-              <FieldLabel required>
-                {formData.idType === "emirates_id"
-                  ? "ID expiry date"
-                  : "Passport expiry date"}
-              </FieldLabel>
-              <FieldContent>
-                <DatePicker
-                  value={formData.idExpiryDate}
-                  onChange={(date) => setValue("idExpiryDate", date as Date)}
-                  disabled={(date) => date <= new Date()}
-                  placeholder={`Select ${
-                    formData.idType === "emirates_id" ? "ID" : "Passport"
-                  } expiry date`}
-                />
-                <FieldError errors={[errors.idExpiryDate]} />
-              </FieldContent>
-            </Field>
-
-            <Field>
-              <FieldLabel required>Issuing authority</FieldLabel>
-              <FieldContent>
-                <Input
-                  {...control.register("issuingAuthority")}
-                  placeholder="Enter issuing authority"
-                />
-                <FieldError errors={[errors.issuingAuthority]} />
-              </FieldContent>
-            </Field>
-
-            <Field>
-              <FieldLabel required>Country of nationality</FieldLabel>
-              <FieldContent>
-                <CountryDropdown
-                  placeholder="Search country..."
-                  value={formData.nationality}
-                  onChange={(country) => setValue("nationality", country.name)}
-                />
-                <FieldError errors={[errors.nationality]} />
-              </FieldContent>
-            </Field>
-            <Field className="md:col-span-2 lg:col-span-3">
-              <FieldLabel required>
-                Have you taken the CD-IELTS Test before?
-              </FieldLabel>
-              <FieldContent className="mt-2">
-                <RadioGroup
-                  onValueChange={(val) => setValue("takenBefore", val)}
-                  value={formData.takenBefore}
-                  className="grid grid-cols-2 gap-3"
-                >
-                  {["Yes", "No"].map((opt) => (
-                    <div
-                      key={opt}
-                      className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all cursor-pointer bg-white"
-                    >
-                      <RadioGroupItem
-                        value={opt}
-                        id={`taken-${opt}`}
-                        className="border-[#A11D1D] text-[#A11D1D]"
-                      />
-                      <Label
-                        htmlFor={`taken-${opt}`}
-                        className="font-medium cursor-pointer"
-                      >
-                        {opt}
-                      </Label>
+                    <div className="flex flex-col">
+                      <span className="text-[10px] text-slate-400 font-bold uppercase">
+                        Date of Birth
+                      </span>
+                      <span className="text-sm font-semibold text-slate-700">
+                        {savedData.dateOfBirth
+                          ? format(new Date(savedData.dateOfBirth), "PPP")
+                          : "N/A"}
+                      </span>
                     </div>
-                  ))}
-                </RadioGroup>
-                <FieldError errors={[errors.takenBefore]} />
-              </FieldContent>
-            </Field>
+                    <div className="flex flex-col">
+                      <span className="text-[10px] text-slate-400 font-bold uppercase">
+                        Gender
+                      </span>
+                      <span className="text-sm font-semibold text-slate-700 capitalize">
+                        {savedData.sex}
+                      </span>
+                    </div>
+                  </div>
+                </div>
 
-            {formData.takenBefore === "Yes" && (
-              <>
-                <Field className="md:col-span-2 lg:col-span-3">
-                  <FieldLabel required>Was it less than 2 years?</FieldLabel>
-                  <FieldContent className="mt-2">
-                    <RadioGroup
-                      onValueChange={(val) => setValue("lessThanTwoYears", val)}
-                      value={formData.lessThanTwoYears}
-                      className="grid grid-cols-1 md:grid-cols-3 gap-3"
-                    >
-                      {["Yes", "No", "I do not know"].map((opt) => (
-                        <div
-                          key={opt}
-                          className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all cursor-pointer bg-white"
-                        >
-                          <RadioGroupItem
-                            value={opt}
-                            id={`less-${opt}`}
-                            className="border-[#A11D1D] text-[#A11D1D]"
-                          />
-                          <Label
-                            htmlFor={`less-${opt}`}
-                            className="font-medium cursor-pointer"
-                          >
-                            {opt}
-                          </Label>
-                        </div>
-                      ))}
-                    </RadioGroup>
-                    <FieldError errors={[errors.lessThanTwoYears]} />
+                {/* Identity & Contact */}
+                <div className="space-y-6">
+                  <div className="flex items-center gap-2 text-slate-400">
+                    <ShieldCheck className="size-4" />
+                    <span className="text-xs font-bold uppercase tracking-widest">
+                      Identity & Contact
+                    </span>
+                  </div>
+                  <div className="space-y-4">
+                    <div className="flex flex-col">
+                      <span className="text-[10px] text-slate-400 font-bold uppercase">
+                        {savedData.idType?.replace("_", " ")}
+                      </span>
+                      <span className="text-sm font-semibold text-slate-700">
+                        {savedData.idNumber}
+                      </span>
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-[10px] text-slate-400 font-bold uppercase">
+                        Email
+                      </span>
+                      <span className="text-sm font-semibold text-slate-700">
+                        {savedData.email}
+                      </span>
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-[10px] text-slate-400 font-bold uppercase">
+                        Mobile
+                      </span>
+                      <span className="text-sm font-semibold text-slate-700">
+                        {savedData.mobileNumber}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Test Info */}
+                <div className="space-y-6">
+                  <div className="flex items-center gap-2 text-slate-400">
+                    <Globe className="size-4" />
+                    <span className="text-xs font-bold uppercase tracking-widest">
+                      Test Information
+                    </span>
+                  </div>
+                  <div className="space-y-4">
+                    <div className="flex flex-col">
+                      <span className="text-[10px] text-slate-400 font-bold uppercase">
+                        Exam Date
+                      </span>
+                      <span className="text-sm font-semibold text-primary">
+                        {savedData.examDate
+                          ? format(new Date(savedData.examDate), "PPPP")
+                          : "N/A"}
+                      </span>
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-[10px] text-slate-400 font-bold uppercase">
+                        Location
+                      </span>
+                      <span className="text-sm font-semibold text-slate-700">
+                        {savedData.residenceCountry}, {savedData.city}
+                      </span>
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-[10px] text-slate-400 font-bold uppercase">
+                        Nationality
+                      </span>
+                      <span className="text-sm font-semibold text-slate-700">
+                        {savedData.nationality}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <Stepper step={3}>
+              Secure Payment{" "}
+              <span className="bg-primary/10 px-3 py-1 rounded-full text-sm font-semibold text-primary ml-2">
+                {total.toFixed(2)}{" "}
+                <span className="font-normal text-xs uppercase tracking-wider">
+                  AED
+                </span>
+              </span>
+            </Stepper>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="space-y-3">
+                <div className="bg-white rounded-2xl border border-slate-100">
+                  <Payment amount={total} currency={"aed"} />
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <Button
+                    variant={"outline"}
+                    type="button"
+                    onClick={() => setIsSubmitted(false)}
+                  >
+                    Previous
+                  </Button>
+                  <Button type="button">Submit</Button>
+                </div>
+              </div>
+
+              <div className="bg-slate-50/50 rounded-2xl p-6 border border-slate-100 space-y-6 h-fit md:sticky md:top-24">
+                <div className="flex items-center gap-2 pb-4 border-b border-slate-200">
+                  <CreditCard className="w-5 h-5 text-primary" />
+                  <h3 className="font-bold text-lg text-slate-800">
+                    Order Summary
+                  </h3>
+                </div>
+
+                <div className="space-y-3">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-slate-500">IELTS Academic Exam</span>
+                    <span className="font-medium">
+                      {baseFee.toFixed(2)} AED
+                    </span>
+                  </div>
+
+                  {formData.selectedCourse && selectedCourseData && (
+                    <div className="flex justify-between text-sm">
+                      <span className="text-slate-500">
+                        Course: {selectedCourseData.name}
+                      </span>
+                      <span className="font-medium text-emerald-600">
+                        +{coursePrice.toFixed(2)} AED
+                      </span>
+                    </div>
+                  )}
+
+                  {formData.selectedWorkshop && selectedWorkshopData && (
+                    <div className="flex justify-between text-sm">
+                      <span className="text-slate-500">
+                        Workshop: {selectedWorkshopData.name}
+                      </span>
+                      <span className="font-medium text-emerald-600">
+                        +{workshopPrice.toFixed(2)} AED
+                      </span>
+                    </div>
+                  )}
+
+                  <div className="pt-3 border-t border-slate-100 space-y-2">
+                    <div className="flex justify-between text-sm">
+                      <span className="text-slate-500">Service Fee</span>
+                      <span className="font-medium text-slate-600">
+                        {serviceFee.toFixed(2)} AED
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-4 border-t border-slate-200">
+                  <div className="flex justify-between items-center">
+                    <span className="font-black text-slate-900 uppercase tracking-tight">
+                      Total Amount
+                    </span>
+                    <span className="text-3xl font-black text-primary">
+                      {total.toFixed(2)}{" "}
+                      <span className="text-xs font-bold text-primary/60 uppercase">
+                        AED
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+            <div className="space-y-3">
+              <Stepper step={1}>select date</Stepper>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <Field>
+                  <FieldContent>
+                    <DatePicker
+                      value={formData.examDate}
+                      onChange={(date) => setValue("examDate", date as Date)}
+                      disabled={(date) => date <= new Date()}
+                      placeholder="Select your date of birth"
+                    />
+                    <FieldError errors={[errors.examDate]} />
+                  </FieldContent>
+                </Field>
+              </div>
+            </div>
+            <div className="space-y-3">
+              <Stepper step={2}>Personal details</Stepper>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <Field>
+                  <FieldLabel required>First / given names</FieldLabel>
+                  <FieldContent>
+                    <Input
+                      placeholder="As per passport"
+                      {...control.register("givenNames")}
+                    />
+                    <FieldError errors={[errors.givenNames]} />
+                    <FieldDescription>
+                      This must match the name(s) on your identification
+                      document.
+                    </FieldDescription>
+                  </FieldContent>
+                </Field>
+                <Field>
+                  <FieldLabel>Middle names</FieldLabel>
+                  <FieldContent>
+                    <Input
+                      placeholder="As per passport"
+                      {...control.register("middleName")}
+                    />
                   </FieldContent>
                 </Field>
 
+                <div className="space-y-4">
+                  <Field>
+                    <FieldLabel>Surname / family name</FieldLabel>
+                    <FieldContent>
+                      <Input
+                        placeholder="As per passport"
+                        {...control.register("surnames")}
+                        disabled={formData.noSurname}
+                      />
+                      <FieldError errors={[errors.surnames]} />
+                      <FieldDescription className="flex items-center gap-2">
+                        <Checkbox
+                          id="noSurname"
+                          // className={"border border-primary"}
+                          checked={formData.noSurname}
+                          onCheckedChange={(val) =>
+                            setValue("noSurname", val as boolean)
+                          }
+                        />
+                        <Label
+                          htmlFor="noSurname"
+                          className="text-xs font-light"
+                        >
+                          I don't have a surname / family name
+                        </Label>
+                      </FieldDescription>
+                    </FieldContent>
+                  </Field>
+                </div>
+
+                <Field>
+                  <FieldLabel required>Date of birth</FieldLabel>
+                  <FieldContent>
+                    <DatePicker
+                      value={formData.dateOfBirth}
+                      onChange={(date) => setValue("dateOfBirth", date as Date)}
+                      disabled={(date) =>
+                        date <= new Date() || date < new Date("1900-01-01")
+                      }
+                      placeholder="Select your date of birth"
+                    />
+                    <FieldError errors={[errors.dateOfBirth]} />
+                  </FieldContent>
+                </Field>
+
+                <Field>
+                  <FieldLabel required>Sex</FieldLabel>
+                  <FieldContent>
+                    <RadioGroup
+                      onValueChange={(val) => setValue("sex", val)}
+                      value={formData.sex}
+                      className="grid grid-cols-2 gap-3"
+                    >
+                      {["Male", "Female"].map((opt) => (
+                        <Label
+                          key={opt}
+                          htmlFor={opt}
+                          className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer"
+                        >
+                          <RadioGroupItem value={opt} id={opt} />
+                          {opt}
+                        </Label>
+                      ))}
+                    </RadioGroup>
+                    <FieldError errors={[errors.sex]} />
+                  </FieldContent>
+                </Field>
+
+                <Field>
+                  <FieldLabel required>Mobile number</FieldLabel>
+                  <FieldContent>
+                    <PhoneInput
+                      value={formData.mobileNumber}
+                      onChange={(val) => setValue("mobileNumber", val)}
+                      defaultCountry="AE"
+                    />
+                    <FieldError errors={[errors.mobileNumber]} />
+                    <FieldDescription className="flex items-center gap-2">
+                      <Checkbox
+                        id="smsConsent"
+                        // className={"border border-primary"}
+                        checked={formData.smsConsent}
+                        onCheckedChange={(val) =>
+                          setValue("smsConsent", val as boolean)
+                        }
+                      />
+                      <Label
+                        htmlFor="smsConsent"
+                        className="text-xs font-light"
+                      >
+                        I agree to receive notifications via SMS, WhatsApp, etc.
+                      </Label>
+                    </FieldDescription>
+                  </FieldContent>
+                </Field>
+                <Field>
+                  <FieldLabel required>Email address</FieldLabel>
+                  <FieldContent>
+                    <Input
+                      placeholder="example@email.com"
+                      {...control.register("email")}
+                    />
+                    <FieldError errors={[errors.email]} />
+                  </FieldContent>
+                </Field>
+
+                <Field>
+                  <FieldLabel required>Confirm email address</FieldLabel>
+                  <FieldContent>
+                    <Input
+                      placeholder="Confirm your email address"
+                      onPaste={(e) => e.preventDefault()}
+                      {...control.register("confirmEmail")}
+                    />
+                    <FieldError errors={[errors.confirmEmail]} />
+                  </FieldContent>
+                </Field>
+
+                <Field>
+                  <FieldLabel required>Country of residence</FieldLabel>
+                  <FieldContent>
+                    <CountryDropdown
+                      placeholder="Search country..."
+                      value={formData.residenceCountry}
+                      onChange={(country) =>
+                        setValue("residenceCountry", country.name)
+                      }
+                    />
+                    <FieldError errors={[errors.residenceCountry]} />
+                  </FieldContent>
+                </Field>
+                <Field>
+                  <FieldLabel required>Emirates/ City</FieldLabel>
+                  <FieldContent>
+                    <Input
+                      {...control.register("city")}
+                      placeholder="Enter your city"
+                    />
+                    <FieldError errors={[errors.city]} />
+                  </FieldContent>
+                </Field>
+                <Field>
+                  <FieldLabel>Postcode</FieldLabel>
+                  <FieldContent>
+                    <Input
+                      {...control.register("postcode")}
+                      placeholder="Enter your postcode"
+                    />
+                  </FieldContent>
+                </Field>
+                <Field>
+                  <FieldLabel>P.O. Box</FieldLabel>
+                  <FieldContent>
+                    <Input
+                      {...control.register("poBox")}
+                      placeholder="Enter your P.O. Box"
+                    />
+                  </FieldContent>
+                </Field>
+                <Field className="col-span-3">
+                  <FieldLabel required>Postal Address Line 1</FieldLabel>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <FieldContent>
+                      <Input
+                        placeholder="Address Line 1"
+                        {...control.register("postalAddress1")}
+                      />
+                      <FieldError errors={[errors.postalAddress1]} />
+                    </FieldContent>
+                    <FieldContent>
+                      <Input
+                        placeholder="Address Line 2"
+                        {...control.register("postalAddress2")}
+                      />
+                    </FieldContent>
+                    <FieldContent>
+                      <Input
+                        placeholder="Address Line 3"
+                        {...control.register("postalAddress3")}
+                      />
+                    </FieldContent>
+                  </div>
+                </Field>
+
+                <Field>
+                  <FieldLabel required>Identification type</FieldLabel>
+                  <FieldContent>
+                    <RadioGroup
+                      onValueChange={(val) => setValue("idType", val)}
+                      value={formData.idType}
+                      className="grid grid-cols-2 gap-3"
+                    >
+                      {[
+                        { id: "passport", label: "Passport" },
+                        { id: "emirates_id", label: "Emirates ID" },
+                      ].map((opt) => (
+                        <Label
+                          key={opt.id}
+                          htmlFor={opt.id}
+                          className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer"
+                        >
+                          <RadioGroupItem value={opt.id} id={opt.id} />
+                          {opt.label}
+                        </Label>
+                      ))}
+                    </RadioGroup>
+                    <FieldError errors={[errors.idType]} />
+                    <FieldDescription>
+                      <strong>Note:</strong> On the test day, you will be
+                      required to bring the same identification document you are
+                      using for this registration.
+                    </FieldDescription>
+                  </FieldContent>
+                </Field>
+
+                <Field>
+                  <FieldLabel required>
+                    {formData.idType === "emirates_id"
+                      ? "ID number"
+                      : "Passport number"}
+                  </FieldLabel>
+                  <FieldContent>
+                    <Input
+                      {...control.register("idNumber")}
+                      placeholder={`Enter your ${formData.idType === "emirates_id" ? "ID" : "Passport"} number`}
+                    />
+                    <FieldError errors={[errors.idNumber]} />
+                  </FieldContent>
+                </Field>
+
+                <Field>
+                  <FieldLabel required>
+                    {formData.idType === "emirates_id"
+                      ? "ID expiry date"
+                      : "Passport expiry date"}
+                  </FieldLabel>
+                  <FieldContent>
+                    <DatePicker
+                      value={formData.idExpiryDate}
+                      onChange={(date) =>
+                        setValue("idExpiryDate", date as Date)
+                      }
+                      disabled={(date) => date <= new Date()}
+                      placeholder={`Select ${
+                        formData.idType === "emirates_id" ? "ID" : "Passport"
+                      } expiry date`}
+                    />
+                    <FieldError errors={[errors.idExpiryDate]} />
+                  </FieldContent>
+                </Field>
+
+                <Field>
+                  <FieldLabel required>Issuing authority</FieldLabel>
+                  <FieldContent>
+                    <Input
+                      {...control.register("issuingAuthority")}
+                      placeholder="Enter issuing authority"
+                    />
+                    <FieldError errors={[errors.issuingAuthority]} />
+                  </FieldContent>
+                </Field>
+
+                <Field>
+                  <FieldLabel required>Country of nationality</FieldLabel>
+                  <FieldContent>
+                    <CountryDropdown
+                      placeholder="Search country..."
+                      value={formData.nationality}
+                      onChange={(country) =>
+                        setValue("nationality", country.name)
+                      }
+                    />
+                    <FieldError errors={[errors.nationality]} />
+                  </FieldContent>
+                </Field>
                 <Field className="md:col-span-2 lg:col-span-3">
                   <FieldLabel required>
-                    Do you have an existing IELTS account?
+                    Have you taken the CD-IELTS Test before?
                   </FieldLabel>
                   <FieldContent className="mt-2">
                     <RadioGroup
-                      onValueChange={(val) => setValue("existingAccount", val)}
-                      value={formData.existingAccount}
-                      className="flex flex-col gap-3"
+                      onValueChange={(val) => setValue("takenBefore", val)}
+                      value={formData.takenBefore}
+                      className="grid grid-cols-2 gap-3"
                     >
-                      {["Yes", "No", "I forgot my IELTS account details"].map(
-                        (opt) => (
-                          <div
-                            key={opt}
-                            className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all cursor-pointer bg-white"
-                          >
-                            <RadioGroupItem
-                              value={opt}
-                              id={`acc-${opt}`}
-                              className="border-[#A11D1D] text-[#A11D1D]"
-                            />
-                            <Label
-                              htmlFor={`acc-${opt}`}
-                              className="font-medium cursor-pointer"
-                            >
-                              {opt}
-                            </Label>
-                          </div>
-                        ),
-                      )}
+                      {["Yes", "No"].map((opt) => (
+                        <Label
+                          key={opt}
+                          htmlFor={`taken-${opt}`}
+                          className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer"
+                        >
+                          <RadioGroupItem value={opt} id={`taken-${opt}`} />
+                          {opt}
+                        </Label>
+                      ))}
                     </RadioGroup>
-                    <FieldError errors={[errors.existingAccount]} />
+                    <FieldError errors={[errors.takenBefore]} />
                   </FieldContent>
                 </Field>
-              </>
-            )}
 
-            <Field className="md:col-span-2 lg:col-span-3">
-              <FieldLabel required>
-                Do you have any special requirements due to ill health/medical
-                conditions?
-              </FieldLabel>
-              <FieldContent className="mt-2">
-                <RadioGroup
-                  onValueChange={(val) => setValue("specialRequirements", val)}
-                  value={formData.specialRequirements}
-                  className="grid grid-cols-2 gap-3"
-                >
-                  {["Yes", "No"].map((opt) => (
-                    <div
-                      key={opt}
-                      className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all cursor-pointer bg-white"
-                    >
-                      <RadioGroupItem
-                        value={opt}
-                        id={`special-${opt}`}
-                        className="border-[#A11D1D] text-[#A11D1D]"
-                      />
-                      <Label
-                        htmlFor={`special-${opt}`}
-                        className="font-medium cursor-pointer"
-                      >
-                        {opt}
-                      </Label>
-                    </div>
-                  ))}
-                </RadioGroup>
-                <FieldError errors={[errors.specialRequirements]} />
-              </FieldContent>
-            </Field>
-
-            {formData.specialRequirements === "Yes" && (
-              <Field className="md:col-span-2 lg:col-span-3">
-                <FieldLabel required>
-                  Please mention your requirements
-                </FieldLabel>
-                <FieldContent>
-                  <Input
-                    {...control.register("specialRequirementsMention")}
-                    placeholder="Please mention your requirements"
-                  />
-                  <FieldError errors={[errors.specialRequirementsMention]} />
-                </FieldContent>
-              </Field>
-            )}
-
-            <Field>
-              <FieldLabel required>What is your first language?</FieldLabel>
-              <FieldContent>
-                <SearchableDropdown
-                  options={languages}
-                  placeholder="-Select Language-"
-                  value={formData.firstLanguage}
-                  onChange={(val) => setValue("firstLanguage", val)}
-                />
-                <FieldError errors={[errors.firstLanguage]} />
-              </FieldContent>
-            </Field>
-
-            <Field>
-              <FieldLabel required>
-                How many years have you been studying English?
-              </FieldLabel>
-              <FieldContent>
-                <SearchableDropdown
-                  options={[
-                    { label: "1 (less than)", value: "1" },
-                    { label: "2", value: "2" },
-                    { label: "3", value: "3" },
-                    { label: "4", value: "4" },
-                    { label: "5", value: "5" },
-                    { label: "6", value: "6" },
-                    { label: "7", value: "7" },
-                    { label: "8", value: "8" },
-                    { label: "9", value: "9" },
-                  ]}
-                  placeholder="-Select Duration-"
-                  value={formData.yearsStudyingEnglish}
-                  onChange={(val) => setValue("yearsStudyingEnglish", val)}
-                />
-                <FieldError errors={[errors.yearsStudyingEnglish]} />
-              </FieldContent>
-            </Field>
-
-            <Field className="md:col-span-2">
-              <FieldLabel required>
-                What level of education have you completed?
-              </FieldLabel>
-              <FieldContent>
-                <RadioGroup
-                  onValueChange={(val) => setValue("educationLevel", val)}
-                  value={formData.educationLevel}
-                  className="grid grid-cols-1 md:grid-cols-2 gap-3"
-                >
-                  {[
-                    {
-                      id: "secondary_up_to_16",
-                      label: "Secondary (up to 16 years)",
-                    },
-                    {
-                      id: "secondary_16_19",
-                      label: "Secondary (16-19 years)",
-                    },
-                    { id: "degree", label: "Degree (or equivalent)" },
-                    { id: "post_graduate", label: "Post-graduate" },
-                  ].map((opt) => (
-                    <div
-                      key={opt.id}
-                      className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all cursor-pointer bg-white"
-                    >
-                      <RadioGroupItem
-                        value={opt.id}
-                        id={opt.id}
-                        className="border-[#A11D1D] text-[#A11D1D]"
-                      />
-                      <Label
-                        htmlFor={opt.id}
-                        className="font-medium cursor-pointer"
-                      >
-                        {opt.label}
-                      </Label>
-                    </div>
-                  ))}
-                </RadioGroup>
-                <FieldError errors={[errors.educationLevel]} />
-              </FieldContent>
-            </Field>
-
-            <Field>
-              <FieldLabel required>What is your occupation level?</FieldLabel>
-              <FieldContent>
-                <SearchableDropdown
-                  options={[
-                    { label: "Self-employed", value: "Self-employed" },
-                    {
-                      label: "Employer/Partner",
-                      value: "Employer/Partner",
-                    },
-                    {
-                      label: "Employee (Senior level)",
-                      value: "Employee (Senior level)",
-                    },
-                    {
-                      label: "Employee (Middle/Junior level)",
-                      value: "Employee (Middle/Junior level)",
-                    },
-                    { label: "Homeworker", value: "Homeworker" },
-                    { label: "Retired", value: "Retired" },
-                    { label: "Student", value: "Student" },
-                    { label: "Other", value: "Other" },
-                  ]}
-                  placeholder="-Select Level-"
-                  value={formData.occupationLevel}
-                  onChange={(val) => setValue("occupationLevel", val)}
-                />
-                <FieldError errors={[errors.occupationLevel]} />
-              </FieldContent>
-            </Field>
-
-            <Field>
-              <FieldLabel required>What is your occupation sector?</FieldLabel>
-              <FieldContent>
-                <SearchableDropdown
-                  options={[
-                    {
-                      label: "Administrative Services",
-                      value: "Administrative Services",
-                    },
-                    {
-                      label: "Agriculture, Fishing, Forestry, Mining",
-                      value: "Agriculture, Fishing, Forestry, Mining",
-                    },
-                    {
-                      label: "Arts and Entertainment",
-                      value: "Arts and Entertainment",
-                    },
-                    {
-                      label: "Banking and Finance",
-                      value: "Banking and Finance",
-                    },
-                    {
-                      label: "Catering and Leisure",
-                      value: "Catering and Leisure",
-                    },
-                    {
-                      label: "Construction Industries",
-                      value: "Construction Industries",
-                    },
-                    {
-                      label: "Craft and Design",
-                      value: "Craft and Design",
-                    },
-                    { label: "Education", value: "Education" },
-                    {
-                      label: "Health and Social Services",
-                      value: "Health and Social Services",
-                    },
-                    {
-                      label: "Installation, Maintenance and Repair Services",
-                      value: "Installation, Maintenance and Repair Services",
-                    },
-                    {
-                      label: "Law and Legal Services",
-                      value: "Law and Legal Services",
-                    },
-                    {
-                      label: "Manufacturing and Assembly Services",
-                      value: "Manufacturing and Assembly Services",
-                    },
-                    {
-                      label: "Personal Services",
-                      value: "Personal Services",
-                    },
-                    { label: "Retail Trade", value: "Retail Trade" },
-                    {
-                      label: "Technical and Scientific",
-                      value: "Technical and Scientific",
-                    },
-                    {
-                      label: "Telecommunications and the Media",
-                      value: "Telecommunications and the Media",
-                    },
-                    { label: "Transport", value: "Transport" },
-                    {
-                      label: "Utilities (Gas, Water, Electricity etc)",
-                      value: "Utilities (Gas, Water, Electricity etc)",
-                    },
-                    {
-                      label: "Wholesale Trade",
-                      value: "Wholesale Trade",
-                    },
-                    { label: "Other", value: "Other" },
-                  ]}
-                  placeholder="-Select Sector-"
-                  value={formData.occupationSector}
-                  onChange={(val) => setValue("occupationSector", val)}
-                />
-                <FieldError errors={[errors.occupationSector]} />
-              </FieldContent>
-            </Field>
-
-            <Field>
-              <FieldLabel required>Why are you taking the test?</FieldLabel>
-              <FieldContent>
-                <SearchableDropdown
-                  options={[
-                    {
-                      label:
-                        "Higher education extended course (3 months or more)",
-                      value: "higher_edu_long",
-                    },
-                    {
-                      label: "Higher education short course (3 months or less)",
-                      value: "higher_edu_short",
-                    },
-                    {
-                      label: "Other educational purposes",
-                      value: "other_edu",
-                    },
-                    {
-                      label: "Registration as a doctor",
-                      value: "reg_doctor",
-                    },
-                    { label: "Immigration", value: "immigration" },
-                    { label: "Employment", value: "employment" },
-                    {
-                      label: "Professional registration (not medical)",
-                      value: "prof_reg_non_medical",
-                    },
-                    { label: "Personal reasons", value: "personal" },
-                    {
-                      label: "Registration as a nurse (including CGFNS)",
-                      value: "reg_nurse",
-                    },
-                    {
-                      label: "Registration as a dentist",
-                      value: "reg_dentist",
-                    },
-                    { label: "Missing/Invalid", value: "missing" },
-                    { label: "Other", value: "other" },
-                  ]}
-                  placeholder="-Select Reason-"
-                  value={formData.reasonForTakingTest}
-                  onChange={(val) => setValue("reasonForTakingTest", val)}
-                />
-                <FieldError errors={[errors.reasonForTakingTest]} />
-              </FieldContent>
-            </Field>
-
-            <Field>
-              <FieldLabel required>
-                Which country / territory do you want to study / work / live in?
-              </FieldLabel>
-              <FieldContent>
-                <CountryDropdown
-                  placeholder="-Select Country-"
-                  value={formData.destinationCountry}
-                  onChange={(country) =>
-                    setValue("destinationCountry", country.name)
-                  }
-                />
-                <FieldError errors={[errors.destinationCountry]} />
-              </FieldContent>
-            </Field>
-            <Field className="col-span-3">
-              <FieldLabel>Add ons</FieldLabel>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-4">
-                <div className="space-y-4">
-                  <h4 className="font-bold text-sm text-gray-700">Workshops</h4>
-                  <div className="grid grid-cols-1 gap-3">
-                    {Object.values(WORKSHOPS_DATA).map((workshop) => (
-                      <div
-                        key={workshop.id}
-                        className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all cursor-pointer bg-white"
-                      >
-                        <Checkbox
-                          id={workshop.id}
-                          checked={formData.selectedWorkshop === workshop.id}
-                          onCheckedChange={(checked) => {
-                            if (checked) {
-                              setValue("selectedWorkshop", workshop.id);
-                            } else {
-                              setValue("selectedWorkshop", "");
-                            }
-                          }}
-                        />
-                        <div className="flex flex-col">
-                          <Label
-                            htmlFor={workshop.id}
-                            className="font-medium cursor-pointer text-sm"
-                          >
-                            {workshop.name}
-                          </Label>
-                          <span className="text-[10px] text-gray-500">
-                            {workshop.duration} • {workshop.price}{" "}
-                            {workshop.currency}
-                          </span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                <div className="space-y-4">
-                  <h4 className="font-bold text-sm text-gray-700">
-                    Courses (Special Discount)
-                  </h4>
-                  <div className="grid grid-cols-1 gap-3">
-                    {Object.values(COURSES_DATA).map((course) => (
-                      <div
-                        key={course.id}
-                        className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all cursor-pointer bg-white"
-                      >
-                        <Checkbox
-                          id={course.id}
-                          checked={formData.selectedCourse === course.id}
-                          onCheckedChange={(checked) => {
-                            if (checked) {
-                              setValue("selectedCourse", course.id);
-                            } else {
-                              setValue("selectedCourse", "");
-                            }
-                          }}
-                        />
-                        <div className="flex flex-col">
-                          <Label
-                            htmlFor={course.id}
-                            className="font-medium cursor-pointer text-sm"
-                          >
-                            {course.name}
-                          </Label>
-                          <div className="flex items-center gap-2">
-                            <span className="text-[10px] text-gray-400 line-through">
-                              {course.price} {course.currency}
-                            </span>
-                            <span className="text-[10px] text-primary font-bold">
-                              {(
-                                course.price *
-                                (1 - course.special_discount / 100)
-                              ).toFixed(0)}{" "}
-                              {course.currency}
-                              <span className="ml-1 text-[8px] bg-primary/10 px-1 rounded">
-                                -{course.special_discount}%
-                              </span>
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </Field>
-
-            <Field className="col-span-3">
-              <FieldLabel>Marketing preferences</FieldLabel>
-              <FieldContent className="mt-4">
-                <RadioGroup
-                  onValueChange={(val) => setValue("marketingPreference", val)}
-                  value={formData.marketingPreference}
-                  className="space-y-4"
-                >
-                  {[
-                    {
-                      id: "all",
-                      label:
-                        "I am happy to receive updates about products, services and events organised by British Council.",
-                    },
-                    {
-                      id: "some",
-                      label:
-                        "I am happy to receive information from British Council and selected third parties.",
-                    },
-                    {
-                      id: "none",
-                      label: "Please do not send me any marketing updates.",
-                    },
-                  ].map((opt) => (
-                    <div key={opt.id} className="flex items-center gap-2">
-                      <RadioGroupItem
-                        value={opt.id}
-                        id={`mkt-${opt.id}`}
-                        className={"border-[#A11D1D] text-[#A11D1D]"}
-                      />
-                      <Label
-                        htmlFor={`mkt-${opt.id}`}
-                        className="text-sm cursor-pointer"
-                      >
-                        {opt.label}
-                      </Label>
-                    </div>
-                  ))}
-                </RadioGroup>
-                <FieldError errors={[errors.marketingPreference]} />
-              </FieldContent>
-            </Field>
-            {/* Step 4: Your profile */}
-            {/* <section id="profile" className="space-y-12">
-                  <div className="flex items-center gap-4 border-b border-slate-100 pb-4">
-                    <span className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary font-bold text-sm">
-                      4
-                    </span>
-                    <h3 className="text-xl font-black text-gray-900 tracking-tight">
-                      Your profile
-                    </h3>
-                  </div>
-
-                  <div className="bg-amber-50/50 border border-amber-100 rounded-2xl p-6 md:p-8 flex items-start gap-4">
-                    <div className="bg-amber-100 p-2 rounded-lg">
-                      <AlertCircle className="w-5 h-5 text-amber-600" />
-                    </div>
-                    <p className="text-amber-800 text-sm font-medium leading-relaxed">
-                      Answering these questions has no impact on your IELTS test
-                      results. These questions will help us improve our services
-                      to test takers like you.
-                    </p>
-                  </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pt-4">
+                {formData.takenBefore === "Yes" && (
+                  <>
                     <Field className="md:col-span-2 lg:col-span-3">
                       <FieldLabel required>
-                        Have you taken the CD-IELTS Test before?
-                      </FieldLabel>
-                      <FieldContent className="mt-2">
-                        <RadioGroup
-                          onValueChange={(val) => setValue("takenBefore", val)}
-                          value={formData.takenBefore}
-                          className="flex gap-6"
-                        >
-                          {["Yes", "No"].map((opt) => (
-                            <div
-                              key={opt}
-                              className="flex items-center space-x-2"
-                            >
-                              <RadioGroupItem
-                                value={opt}
-                                id={`taken-${opt}`}
-                                className="border-[#A11D1D] text-[#A11D1D]"
-                              />
-                              <Label
-                                htmlFor={`taken-${opt}`}
-                                className="font-medium cursor-pointer"
-                              >
-                                {opt}
-                              </Label>
-                            </div>
-                          ))}
-                        </RadioGroup>
-                        <FieldError errors={[errors.takenBefore]} />
-                      </FieldContent>
-                    </Field>
-
-                    {formData.takenBefore === "Yes" && (
-                      <>
-                        <Field className="md:col-span-2 lg:col-span-3">
-                          <FieldLabel required>
-                            Was it less than 2 years?
-                          </FieldLabel>
-                          <FieldContent className="mt-2">
-                            <RadioGroup
-                              onValueChange={(val) =>
-                                setValue("lessThanTwoYears", val)
-                              }
-                              value={formData.lessThanTwoYears}
-                              className="flex flex-wrap gap-6"
-                            >
-                              {["Yes", "No", "I do not know"].map((opt) => (
-                                <div
-                                  key={opt}
-                                  className="flex items-center space-x-2"
-                                >
-                                  <RadioGroupItem
-                                    value={opt}
-                                    id={`less-${opt}`}
-                                    className="border-[#A11D1D] text-[#A11D1D]"
-                                  />
-                                  <Label
-                                    htmlFor={`less-${opt}`}
-                                    className="font-medium cursor-pointer"
-                                  >
-                                    {opt}
-                                  </Label>
-                                </div>
-                              ))}
-                            </RadioGroup>
-                            <FieldError errors={[errors.lessThanTwoYears]} />
-                          </FieldContent>
-                        </Field>
-
-                        <Field className="md:col-span-2 lg:col-span-3">
-                          <FieldLabel required>
-                            Do you have an existing IELTS account?
-                          </FieldLabel>
-                          <FieldContent className="mt-2">
-                            <RadioGroup
-                              onValueChange={(val) =>
-                                setValue("existingAccount", val)
-                              }
-                              value={formData.existingAccount}
-                              className="flex flex-col gap-4"
-                            >
-                              {[
-                                "Yes",
-                                "No",
-                                "I forgot my IELTS account details",
-                              ].map((opt) => (
-                                <div
-                                  key={opt}
-                                  className="flex items-center space-x-2"
-                                >
-                                  <RadioGroupItem
-                                    value={opt}
-                                    id={`acc-${opt}`}
-                                    className="border-[#A11D1D] text-[#A11D1D]"
-                                  />
-                                  <Label
-                                    htmlFor={`acc-${opt}`}
-                                    className="font-medium cursor-pointer"
-                                  >
-                                    {opt}
-                                  </Label>
-                                </div>
-                              ))}
-                            </RadioGroup>
-                            <FieldError errors={[errors.existingAccount]} />
-                          </FieldContent>
-                        </Field>
-                      </>
-                    )}
-
-                    <Field className="md:col-span-2 lg:col-span-3">
-                      <FieldLabel required>
-                        Do you have any special requirements due to ill
-                        health/medical conditions?
+                        Was it less than 2 years?
                       </FieldLabel>
                       <FieldContent className="mt-2">
                         <RadioGroup
                           onValueChange={(val) =>
-                            setValue("specialRequirements", val)
+                            setValue("lessThanTwoYears", val)
                           }
-                          value={formData.specialRequirements}
-                          className="flex gap-6"
+                          value={formData.lessThanTwoYears}
+                          className="grid grid-cols-1 md:grid-cols-3 gap-3"
                         >
-                          {["Yes", "No"].map((opt) => (
-                            <div
+                          {["Yes", "No", "I do not know"].map((opt) => (
+                            <Label
                               key={opt}
-                              className="flex items-center space-x-2"
+                              htmlFor={`less-${opt}`}
+                              className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer"
                             >
-                              <RadioGroupItem
-                                value={opt}
-                                id={`special-${opt}`}
-                                className="border-[#A11D1D] text-[#A11D1D]"
-                              />
-                              <Label
-                                htmlFor={`special-${opt}`}
-                                className="font-medium cursor-pointer"
-                              >
-                                {opt}
-                              </Label>
-                            </div>
+                              <RadioGroupItem value={opt} id={`less-${opt}`} />
+                              {opt}
+                            </Label>
                           ))}
                         </RadioGroup>
-                        <FieldError errors={[errors.specialRequirements]} />
-                      </FieldContent>
-                    </Field>
-
-                    {formData.specialRequirements === "Yes" && (
-                      <Field className="md:col-span-2 lg:col-span-3">
-                        <FieldLabel required>
-                          Please mention your requirements
-                        </FieldLabel>
-                        <FieldContent>
-                          <Input
-                            {...control.register("specialRequirementsMention")}
-                            placeholder="Please mention your requirements"
-                          />
-                          <FieldError
-                            errors={[errors.specialRequirementsMention]}
-                          />
-                        </FieldContent>
-                      </Field>
-                    )}
-
-                    <Field>
-                      <FieldLabel required>
-                        What is your first language?
-                      </FieldLabel>
-                      <FieldContent>
-                        <SearchableDropdown
-                          options={languages}
-                          placeholder="-Select Language-"
-                          value={formData.firstLanguage}
-                          onChange={(val) => setValue("firstLanguage", val)}
-                        />
-                        <FieldError errors={[errors.firstLanguage]} />
-                      </FieldContent>
-                    </Field>
-
-                    <Field>
-                      <FieldLabel required>
-                        How many years have you been studying English?
-                      </FieldLabel>
-                      <FieldContent>
-                        <SearchableDropdown
-                          options={[
-                            { label: "1 (less than)", value: "1" },
-                            { label: "2", value: "2" },
-                            { label: "3", value: "3" },
-                            { label: "4", value: "4" },
-                            { label: "5", value: "5" },
-                            { label: "6", value: "6" },
-                            { label: "7", value: "7" },
-                            { label: "8", value: "8" },
-                            { label: "9", value: "9" },
-                          ]}
-                          placeholder="-Select Duration-"
-                          value={formData.yearsStudyingEnglish}
-                          onChange={(val) =>
-                            setValue("yearsStudyingEnglish", val)
-                          }
-                        />
-                        <FieldError errors={[errors.yearsStudyingEnglish]} />
+                        <FieldError errors={[errors.lessThanTwoYears]} />
                       </FieldContent>
                     </Field>
 
                     <Field className="md:col-span-2 lg:col-span-3">
                       <FieldLabel required>
-                        What level of education have you completed?
+                        Do you have an existing IELTS account?
                       </FieldLabel>
                       <FieldContent className="mt-2">
                         <RadioGroup
                           onValueChange={(val) =>
-                            setValue("educationLevel", val)
+                            setValue("existingAccount", val)
                           }
-                          value={formData.educationLevel}
-                          className="grid grid-cols-1 md:grid-cols-2 gap-3"
+                          value={formData.existingAccount}
+                          className="flex flex-col gap-3"
                         >
                           {[
-                            {
-                              id: "secondary_up_to_16",
-                              label: "Secondary (up to 16 years)",
-                            },
-                            {
-                              id: "secondary_16_19",
-                              label: "Secondary (16-19 years)",
-                            },
-                            { id: "degree", label: "Degree (or equivalent)" },
-                            { id: "post_graduate", label: "Post-graduate" },
+                            "Yes",
+                            "No",
+                            "I forgot my IELTS account details",
                           ].map((opt) => (
-                            <div
-                              key={opt.id}
-                              className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all cursor-pointer bg-white"
+                            <Label
+                              key={opt}
+                              htmlFor={`acc-${opt}`}
+                              className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer"
                             >
-                              <RadioGroupItem
-                                value={opt.id}
-                                id={opt.id}
-                                className="border-[#A11D1D] text-[#A11D1D]"
-                              />
-                              <Label
-                                htmlFor={opt.id}
-                                className="font-medium cursor-pointer"
-                              >
-                                {opt.label}
-                              </Label>
-                            </div>
+                              <RadioGroupItem value={opt} id={`acc-${opt}`} />
+                              {opt}
+                            </Label>
                           ))}
                         </RadioGroup>
-                        <FieldError errors={[errors.educationLevel]} />
+                        <FieldError errors={[errors.existingAccount]} />
                       </FieldContent>
                     </Field>
+                  </>
+                )}
 
+                <Field className="md:col-span-2 lg:col-span-3">
+                  <FieldLabel required>
+                    Do you have any special requirements due to ill
+                    health/medical conditions?
+                  </FieldLabel>
+                  <FieldContent className="mt-2">
+                    <RadioGroup
+                      onValueChange={(val) =>
+                        setValue("specialRequirements", val)
+                      }
+                      value={formData.specialRequirements}
+                      className="grid grid-cols-2 gap-3"
+                    >
+                      {["Yes", "No"].map((opt) => (
+                        <Label
+                          key={opt}
+                          htmlFor={`special-${opt}`}
+                          className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer"
+                        >
+                          <RadioGroupItem value={opt} id={`special-${opt}`} />
+                          {opt}
+                        </Label>
+                      ))}
+                    </RadioGroup>
+                    <FieldError errors={[errors.specialRequirements]} />
+                  </FieldContent>
+                </Field>
+
+                {formData.specialRequirements === "Yes" && (
+                  <Field className="md:col-span-2 lg:col-span-3">
+                    <FieldLabel required>
+                      Please mention your requirements
+                    </FieldLabel>
+                    <FieldContent>
+                      <Input
+                        {...control.register("specialRequirementsMention")}
+                        placeholder="Please mention your requirements"
+                      />
+                      <FieldError
+                        errors={[errors.specialRequirementsMention]}
+                      />
+                    </FieldContent>
+                  </Field>
+                )}
+
+                <Field>
+                  <FieldLabel required>What is your first language?</FieldLabel>
+                  <FieldContent>
+                    <SearchableDropdown
+                      options={languages}
+                      placeholder="-Select Language-"
+                      value={formData.firstLanguage}
+                      onChange={(val) => setValue("firstLanguage", val)}
+                    />
+                    <FieldError errors={[errors.firstLanguage]} />
+                  </FieldContent>
+                </Field>
+
+                <Field>
+                  <FieldLabel required>
+                    How many years have you been studying English?
+                  </FieldLabel>
+                  <FieldContent>
+                    <SearchableDropdown
+                      options={[
+                        { label: "1 (less than)", value: "1" },
+                        { label: "2", value: "2" },
+                        { label: "3", value: "3" },
+                        { label: "4", value: "4" },
+                        { label: "5", value: "5" },
+                        { label: "6", value: "6" },
+                        { label: "7", value: "7" },
+                        { label: "8", value: "8" },
+                        { label: "9", value: "9" },
+                      ]}
+                      placeholder="-Select Duration-"
+                      value={formData.yearsStudyingEnglish}
+                      onChange={(val) => setValue("yearsStudyingEnglish", val)}
+                    />
+                    <FieldError errors={[errors.yearsStudyingEnglish]} />
+                  </FieldContent>
+                </Field>
+
+                <Field className="md:col-span-2">
+                  <FieldLabel required>
+                    What level of education have you completed?
+                  </FieldLabel>
+                  <FieldContent>
+                    <RadioGroup
+                      onValueChange={(val) => setValue("educationLevel", val)}
+                      value={formData.educationLevel}
+                      className="grid grid-cols-1 md:grid-cols-2 gap-3"
+                    >
+                      {[
+                        {
+                          id: "secondary_up_to_16",
+                          label: "Secondary (up to 16 years)",
+                        },
+                        {
+                          id: "secondary_16_19",
+                          label: "Secondary (16-19 years)",
+                        },
+                        { id: "degree", label: "Degree (or equivalent)" },
+                        { id: "post_graduate", label: "Post-graduate" },
+                      ].map((opt) => (
+                        <Label
+                          key={opt.id}
+                          htmlFor={opt.id}
+                          className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer"
+                        >
+                          <RadioGroupItem value={opt.id} id={opt.id} />
+                          {opt.label}
+                        </Label>
+                      ))}
+                    </RadioGroup>
+                    <FieldError errors={[errors.educationLevel]} />
+                  </FieldContent>
+                </Field>
+
+                <Field>
+                  <FieldLabel required>
+                    What is your occupation level?
+                  </FieldLabel>
+                  <FieldContent>
+                    <SearchableDropdown
+                      options={[
+                        { label: "Self-employed", value: "Self-employed" },
+                        {
+                          label: "Employer/Partner",
+                          value: "Employer/Partner",
+                        },
+                        {
+                          label: "Employee (Senior level)",
+                          value: "Employee (Senior level)",
+                        },
+                        {
+                          label: "Employee (Middle/Junior level)",
+                          value: "Employee (Middle/Junior level)",
+                        },
+                        { label: "Homeworker", value: "Homeworker" },
+                        { label: "Retired", value: "Retired" },
+                        { label: "Student", value: "Student" },
+                        { label: "Other", value: "Other" },
+                      ]}
+                      placeholder="-Select Level-"
+                      value={formData.occupationLevel}
+                      onChange={(val) => setValue("occupationLevel", val)}
+                    />
+                    <FieldError errors={[errors.occupationLevel]} />
+                  </FieldContent>
+                </Field>
+
+                <Field>
+                  <FieldLabel required>
+                    What is your occupation sector?
+                  </FieldLabel>
+                  <FieldContent>
+                    <SearchableDropdown
+                      options={[
+                        {
+                          label: "Administrative Services",
+                          value: "Administrative Services",
+                        },
+                        {
+                          label: "Agriculture, Fishing, Forestry, Mining",
+                          value: "Agriculture, Fishing, Forestry, Mining",
+                        },
+                        {
+                          label: "Arts and Entertainment",
+                          value: "Arts and Entertainment",
+                        },
+                        {
+                          label: "Banking and Finance",
+                          value: "Banking and Finance",
+                        },
+                        {
+                          label: "Catering and Leisure",
+                          value: "Catering and Leisure",
+                        },
+                        {
+                          label: "Construction Industries",
+                          value: "Construction Industries",
+                        },
+                        {
+                          label: "Craft and Design",
+                          value: "Craft and Design",
+                        },
+                        { label: "Education", value: "Education" },
+                        {
+                          label: "Health and Social Services",
+                          value: "Health and Social Services",
+                        },
+                        {
+                          label:
+                            "Installation, Maintenance and Repair Services",
+                          value:
+                            "Installation, Maintenance and Repair Services",
+                        },
+                        {
+                          label: "Law and Legal Services",
+                          value: "Law and Legal Services",
+                        },
+                        {
+                          label: "Manufacturing and Assembly Services",
+                          value: "Manufacturing and Assembly Services",
+                        },
+                        {
+                          label: "Personal Services",
+                          value: "Personal Services",
+                        },
+                        { label: "Retail Trade", value: "Retail Trade" },
+                        {
+                          label: "Technical and Scientific",
+                          value: "Technical and Scientific",
+                        },
+                        {
+                          label: "Telecommunications and the Media",
+                          value: "Telecommunications and the Media",
+                        },
+                        { label: "Transport", value: "Transport" },
+                        {
+                          label: "Utilities (Gas, Water, Electricity etc)",
+                          value: "Utilities (Gas, Water, Electricity etc)",
+                        },
+                        {
+                          label: "Wholesale Trade",
+                          value: "Wholesale Trade",
+                        },
+                        { label: "Other", value: "Other" },
+                      ]}
+                      placeholder="-Select Sector-"
+                      value={formData.occupationSector}
+                      onChange={(val) => setValue("occupationSector", val)}
+                    />
+                    <FieldError errors={[errors.occupationSector]} />
+                  </FieldContent>
+                </Field>
+
+                <Field>
+                  <FieldLabel required>Why are you taking the test?</FieldLabel>
+                  <FieldContent>
+                    <SearchableDropdown
+                      options={[
+                        {
+                          label:
+                            "Higher education extended course (3 months or more)",
+                          value: "higher_edu_long",
+                        },
+                        {
+                          label:
+                            "Higher education short course (3 months or less)",
+                          value: "higher_edu_short",
+                        },
+                        {
+                          label: "Other educational purposes",
+                          value: "other_edu",
+                        },
+                        {
+                          label: "Registration as a doctor",
+                          value: "reg_doctor",
+                        },
+                        { label: "Immigration", value: "immigration" },
+                        { label: "Employment", value: "employment" },
+                        {
+                          label: "Professional registration (not medical)",
+                          value: "prof_reg_non_medical",
+                        },
+                        { label: "Personal reasons", value: "personal" },
+                        {
+                          label: "Registration as a nurse (including CGFNS)",
+                          value: "reg_nurse",
+                        },
+                        {
+                          label: "Registration as a dentist",
+                          value: "reg_dentist",
+                        },
+                        { label: "Missing/Invalid", value: "missing" },
+                        { label: "Other", value: "other" },
+                      ]}
+                      placeholder="-Select Reason-"
+                      value={formData.reasonForTakingTest}
+                      onChange={(val) => setValue("reasonForTakingTest", val)}
+                    />
+                    <FieldError errors={[errors.reasonForTakingTest]} />
+                  </FieldContent>
+                </Field>
+
+                <Field>
+                  <FieldLabel required>
+                    Which country / territory do you want to study / work / live
+                    in?
+                  </FieldLabel>
+                  <FieldContent>
+                    <CountryDropdown
+                      placeholder="-Select Country-"
+                      value={formData.destinationCountry}
+                      onChange={(country) =>
+                        setValue("destinationCountry", country.name)
+                      }
+                    />
+                    <FieldError errors={[errors.destinationCountry]} />
+                  </FieldContent>
+                </Field>
+                <Field className="col-span-3">
+                  <FieldLabel>Add-ons Services</FieldLabel>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <Field>
-                      <FieldLabel required>
-                        What is your occupation level?
-                      </FieldLabel>
+                      <FieldLabel>Courses</FieldLabel>
                       <FieldContent>
                         <SearchableDropdown
                           options={[
-                            { label: "Self-employed", value: "Self-employed" },
-                            {
-                              label: "Employer/Partner",
-                              value: "Employer/Partner",
-                            },
-                            {
-                              label: "Employee (Senior level)",
-                              value: "Employee (Senior level)",
-                            },
-                            {
-                              label: "Employee (Middle/Junior level)",
-                              value: "Employee (Middle/Junior level)",
-                            },
-                            { label: "Homeworker", value: "Homeworker" },
-                            { label: "Retired", value: "Retired" },
-                            { label: "Student", value: "Student" },
-                            { label: "Other", value: "Other" },
+                            { label: "None", value: "" },
+                            ...Object.values(COURSES_DATA).map((c) => ({
+                              label: `${c.name} (${(c.price * (1 - c.special_discount / 100)).toFixed(0)} ${c.currency})`,
+                              value: c.id,
+                            })),
                           ]}
-                          placeholder="-Select Level-"
-                          value={formData.occupationLevel}
-                          onChange={(val) => setValue("occupationLevel", val)}
+                          placeholder="Select a course"
+                          value={formData.selectedCourse}
+                          onChange={(val) => setValue("selectedCourse", val)}
                         />
-                        <FieldError errors={[errors.occupationLevel]} />
                       </FieldContent>
                     </Field>
-
                     <Field>
-                      <FieldLabel required>
-                        What is your occupation sector?
-                      </FieldLabel>
+                      <FieldLabel>Workshops</FieldLabel>
                       <FieldContent>
                         <SearchableDropdown
                           options={[
-                            {
-                              label: "Administrative Services",
-                              value: "Administrative Services",
-                            },
-                            {
-                              label: "Agriculture, Fishing, Forestry, Mining",
-                              value: "Agriculture, Fishing, Forestry, Mining",
-                            },
-                            {
-                              label: "Arts and Entertainment",
-                              value: "Arts and Entertainment",
-                            },
-                            {
-                              label: "Banking and Finance",
-                              value: "Banking and Finance",
-                            },
-                            {
-                              label: "Catering and Leisure",
-                              value: "Catering and Leisure",
-                            },
-                            {
-                              label: "Construction Industries",
-                              value: "Construction Industries",
-                            },
-                            {
-                              label: "Craft and Design",
-                              value: "Craft and Design",
-                            },
-                            { label: "Education", value: "Education" },
-                            {
-                              label: "Health and Social Services",
-                              value: "Health and Social Services",
-                            },
-                            {
-                              label:
-                                "Installation, Maintenance and Repair Services",
-                              value:
-                                "Installation, Maintenance and Repair Services",
-                            },
-                            {
-                              label: "Law and Legal Services",
-                              value: "Law and Legal Services",
-                            },
-                            {
-                              label: "Manufacturing and Assembly Services",
-                              value: "Manufacturing and Assembly Services",
-                            },
-                            {
-                              label: "Personal Services",
-                              value: "Personal Services",
-                            },
-                            { label: "Retail Trade", value: "Retail Trade" },
-                            {
-                              label: "Technical and Scientific",
-                              value: "Technical and Scientific",
-                            },
-                            {
-                              label: "Telecommunications and the Media",
-                              value: "Telecommunications and the Media",
-                            },
-                            { label: "Transport", value: "Transport" },
-                            {
-                              label: "Utilities (Gas, Water, Electricity etc)",
-                              value: "Utilities (Gas, Water, Electricity etc)",
-                            },
-                            {
-                              label: "Wholesale Trade",
-                              value: "Wholesale Trade",
-                            },
-                            { label: "Other", value: "Other" },
+                            { label: "None", value: "" },
+                            ...Object.values(WORKSHOPS_DATA).map((w) => ({
+                              label: `${w.name} (${w.duration} • ${w.price} ${w.currency})`,
+                              value: w.id,
+                            })),
                           ]}
-                          placeholder="-Select Sector-"
-                          value={formData.occupationSector}
-                          onChange={(val) => setValue("occupationSector", val)}
+                          placeholder="Select a workshop"
+                          value={formData.selectedWorkshop}
+                          onChange={(val) => setValue("selectedWorkshop", val)}
                         />
-                        <FieldError errors={[errors.occupationSector]} />
-                      </FieldContent>
-                    </Field>
-
-                    <Field>
-                      <FieldLabel required>
-                        Why are you taking the test?
-                      </FieldLabel>
-                      <FieldContent>
-                        <SearchableDropdown
-                          options={[
-                            {
-                              label:
-                                "Higher education extended course (3 months or more)",
-                              value: "higher_edu_long",
-                            },
-                            {
-                              label:
-                                "Higher education short course (3 months or less)",
-                              value: "higher_edu_short",
-                            },
-                            {
-                              label: "Other educational purposes",
-                              value: "other_edu",
-                            },
-                            {
-                              label: "Registration as a doctor",
-                              value: "reg_doctor",
-                            },
-                            { label: "Immigration", value: "immigration" },
-                            { label: "Employment", value: "employment" },
-                            {
-                              label: "Professional registration (not medical)",
-                              value: "prof_reg_non_medical",
-                            },
-                            { label: "Personal reasons", value: "personal" },
-                            {
-                              label:
-                                "Registration as a nurse (including CGFNS)",
-                              value: "reg_nurse",
-                            },
-                            {
-                              label: "Registration as a dentist",
-                              value: "reg_dentist",
-                            },
-                            { label: "Missing/Invalid", value: "missing" },
-                            { label: "Other", value: "other" },
-                          ]}
-                          placeholder="-Select Reason-"
-                          value={formData.reasonForTakingTest}
-                          onChange={(val) =>
-                            setValue("reasonForTakingTest", val)
-                          }
-                        />
-                        <FieldError errors={[errors.reasonForTakingTest]} />
-                      </FieldContent>
-                    </Field>
-
-                    <Field>
-                      <FieldLabel required>
-                        Which country / territory do you want to study / work /
-                        live in?
-                      </FieldLabel>
-                      <FieldContent>
-                        <CountryDropdown
-                          placeholder="-Select Country-"
-                          value={formData.destinationCountry}
-                          onChange={(country) =>
-                            setValue("destinationCountry", country.name)
-                          }
-                        />
-                        <FieldError errors={[errors.destinationCountry]} />
                       </FieldContent>
                     </Field>
                   </div>
-                </section> */}
-          </div>
-          <Stepper step={2}>
+                  <BaseNoteBox
+                    title="Enjoy These Free Benefits:"
+                    notes={[
+                      "Free mock test",
+                      "Free consultation",
+                      "Free preparation materials",
+                    ]}
+                  />
+                </Field>
+
+                <Field className="col-span-3">
+                  <FieldLabel>Marketing preferences</FieldLabel>
+                  <FieldContent className="mt-4">
+                    <RadioGroup
+                      onValueChange={(val) =>
+                        setValue("marketingPreference", val)
+                      }
+                      value={formData.marketingPreference}
+                      className="space-y-4"
+                    >
+                      {[
+                        {
+                          id: "all",
+                          label:
+                            "I am happy to receive updates about products, services and events organised by British Council.",
+                        },
+                        {
+                          id: "some",
+                          label:
+                            "I am happy to receive information from British Council and selected third parties.",
+                        },
+                        {
+                          id: "none",
+                          label: "Please do not send me any marketing updates.",
+                        },
+                      ].map((opt) => (
+                        <Label
+                          key={opt.id}
+                          htmlFor={`mkt-${opt.id}`}
+                          className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer"
+                        >
+                          <RadioGroupItem value={opt.id} id={`mkt-${opt.id}`} />
+                          <span className="text-sm">{opt.label}</span>
+                        </Label>
+                      ))}
+                    </RadioGroup>
+                    <FieldError errors={[errors.marketingPreference]} />
+                  </FieldContent>
+                </Field>
+                <Button>
+                  {" "}
+                  <Save /> Save and Procced
+                </Button>
+              </div>
+            </div>
+            {/* <Stepper step={2}>
             Secure Payment{" "}
             <span className="bg-primary/10 px-3 py-1 rounded-full text-sm font-semibold text-primary ml-2">
               {total.toFixed(2)}{" "}
@@ -1660,8 +1365,9 @@ export default function FormIELTSAcademicRegistration() {
                 </div>
               </div>
             </div>
-          </div>
-        </form>
+          </div> */}
+          </form>
+        )}
       </div>
     </div>
   );
