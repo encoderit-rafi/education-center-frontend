@@ -53,17 +53,6 @@ export default function BookAnExamVenuePage() {
                 priority
               />
             </div>
-            <div className="absolute -bottom-6 -left-6 bg-surface p-6 rounded-xl shadow-xl z-20 border border-outline/10 hidden lg:block animate-in fade-in slide-in-from-left-10 duration-1000 delay-500">
-              <div className="flex items-center gap-4">
-                <div className="bg-primary/10 p-3 rounded-full">
-                  <BadgeCheck className="text-primary w-6 h-6" />
-                </div>
-                <div>
-                  <p className="text-sm font-bold text-on-surface">KHDA Permitted</p>
-                  <p className="text-xs text-on-surface-variant font-medium">Dubai Silicon Oasis Authority</p>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -78,57 +67,29 @@ export default function BookAnExamVenuePage() {
             <div className="h-1.5 w-24 bg-primary mx-auto mt-6 rounded-full"></div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
-            {/* Left Column (Even indices) */}
-            <Accordion type="multiple" className="flex flex-col gap-6 border-none space-y-0">
-              {infrastructureItems.filter((_, i) => i % 2 === 0).map((item, index) => (
-                <AccordionItem
-                  key={index}
-                  value={`item-${index}`}
-                  className="bg-white rounded-xl overflow-hidden border border-outline/100 transition-all duration-300 data-[state=open]:border-primary data-[state=open]:shadow-lg h-fit"
-                >
-                  <AccordionTrigger className="flex items-center justify-between p-6 cursor-pointer hover:no-underline group/trigger">
-                    <div className="flex items-center gap-4">
-                      <item.icon className={cn("w-6 h-6 transition-transform group-hover/trigger:scale-110 text-on-surface-variant group-data-[state=open]/trigger:text-primary", item.iconColor)} />
-                      <h3 className="text-lg font-bold text-on-surface transition-colors group-data-[state=open]/trigger:text-primary">
-                        {item.title}
-                      </h3>
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent className="px-6 pb-6 pt-0">
-                    <p className="text-on-surface leading-relaxed border-t border-primary/10 pt-4">
-                      {item.description}
-                    </p>
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-
-            {/* Right Column (Odd indices) */}
-            <Accordion type="multiple" className="flex flex-col gap-6 border-none space-y-0">
-              {infrastructureItems.filter((_, i) => i % 2 !== 0).map((item, index) => (
-                <AccordionItem
-                  key={index}
-                  value={`item-${index}`}
-                  className="bg-white rounded-xl overflow-hidden border border-outline/100 transition-all duration-300 data-[state=open]:border-primary data-[state=open]:shadow-lg h-fit"
-                >
-                  <AccordionTrigger className="flex items-center justify-between p-6 cursor-pointer hover:no-underline group/trigger">
-                    <div className="flex items-center gap-4">
-                      <item.icon className={cn("w-6 h-6 transition-transform group-hover/trigger:scale-110 text-on-surface-variant group-data-[state=open]/trigger:text-primary", item.iconColor)} />
-                      <h3 className="text-lg font-bold text-on-surface transition-colors group-data-[state=open]/trigger:text-primary">
-                        {item.title}
-                      </h3>
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent className="px-6 pb-6 pt-0">
-                    <p className="text-on-surface leading-relaxed border-t border-primary/10 pt-4">
-                      {item.description}
-                    </p>
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </div>
+          <Accordion type="single" className="flex flex-col gap-4 border-none space-y-0 max-w-4xl mx-auto">
+            {infrastructureItems.map((item, index) => (
+              <AccordionItem
+                key={index}
+                value={`item-${index}`}
+                className="bg-white rounded-xl overflow-hidden border border-outline/100 transition-all duration-300 data-[state=open]:border-primary data-[state=open]:shadow-lg h-fit"
+              >
+                <AccordionTrigger className="flex items-center justify-between p-6 cursor-pointer hover:no-underline group/trigger text-left">
+                  <div className="flex items-center gap-4">
+                    <item.icon className={cn("w-6 h-6 transition-transform group-hover/trigger:scale-110 text-on-surface-variant group-data-[state=open]/trigger:text-primary", item.iconColor)} />
+                    <h3 className="text-lg font-bold text-on-surface transition-colors group-data-[state=open]/trigger:text-primary">
+                      {item.title}
+                    </h3>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="px-6 pb-6 pt-0">
+                  <p className="text-on-surface leading-relaxed border-t border-primary/10 pt-4">
+                    {item.description}
+                  </p>
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </div>
       </section>
 
