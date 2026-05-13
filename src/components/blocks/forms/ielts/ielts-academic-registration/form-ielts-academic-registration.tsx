@@ -143,7 +143,7 @@ export default function FormIeltsAcademicRegistration() {
 
   const calculateTotal = () => {
     const baseFee = 1400;
-    const serviceFee = 100;
+    const serviceFee = 150;
     const coursePrice = formData.selectedCourse
       ? (COURSES_DATA as any)[formData.selectedCourse].price *
         (1 -
@@ -154,7 +154,6 @@ export default function FormIeltsAcademicRegistration() {
       : 0;
     
     const subtotal = baseFee + serviceFee + coursePrice + workshopPrice;
-    const vat = subtotal * 0.05;
     
     return {
       baseFee,
@@ -162,8 +161,8 @@ export default function FormIeltsAcademicRegistration() {
       coursePrice,
       workshopPrice,
       subtotal,
-      vat,
-      total: subtotal + vat
+      vat: 0,
+      total: subtotal
     };
   };
 

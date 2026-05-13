@@ -32,9 +32,9 @@ export function ReviewStep({
             <div className="bg-slate-50/50 rounded-2xl border border-slate-100 p-8 md:p-10 space-y-8">
                 <div className="flex justify-between items-center border-b border-slate-200 pb-6">
                     <h3 className="text-xl font-black text-gray-900 tracking-tight uppercase">Review Your Details</h3>
-                    <button 
-                        type="button" 
-                        onClick={() => onEdit(1)} 
+                    <button
+                        type="button"
+                        onClick={() => onEdit(1)}
                         className="text-[#A11D1D] text-xs font-black uppercase tracking-widest hover:underline"
                     >
                         Edit
@@ -88,7 +88,7 @@ export function ReviewStep({
             <div className="space-y-8">
                 <div className="flex items-center gap-3">
                     <ShieldCheck className="w-6 h-6 text-[#A11D1D]" />
-                    <h2 className="text-xl font-black text-gray-900 tracking-tight uppercase">Secure Payment</h2>
+                    <h2 className="text-xl font-black text-gray-900 tracking-tight uppercase">Payment</h2>
                 </div>
                 <Payment amount={1260} currency="AED" />
             </div>

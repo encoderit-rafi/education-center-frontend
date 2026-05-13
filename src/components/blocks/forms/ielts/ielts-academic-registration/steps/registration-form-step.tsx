@@ -77,7 +77,7 @@ export function RegistrationFormStep({
           </Field>
 
           <Field>
-            <FieldLabel>Middle names</FieldLabel>
+            <FieldLabel>Middle Name</FieldLabel>
             <FieldContent>
               <Input
                 placeholder="As per passport"
@@ -256,7 +256,7 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.city}>
-            <FieldLabel required>Emirates/ City</FieldLabel>
+            <FieldLabel required>Emirate/ City</FieldLabel>
             <FieldContent>
               <Input
                 {...register("city")}
@@ -748,7 +748,7 @@ export function RegistrationFormStep({
         <div className="flex items-center gap-2 text-slate-400 mb-4">
           <BookOpen className="size-5" />
           <h3 className="text-lg font-bold tracking-tight text-slate-800">
-            Add-ons Services
+            Add-on Services
           </h3>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -797,7 +797,7 @@ export function RegistrationFormStep({
         <BaseNoteBox
           title="Enjoy These Free Benefits:"
           notes={[
-            "Save 10% off when you book your exam and register for the course with TEPTH and pay online on our website.",
+            "Save more when you book your exam and register for the course with TEPTH and pay online on our website.",
             "Free Prep. Material",
             "Free Consultation",
             "Free Mock Test",

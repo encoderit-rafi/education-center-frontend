@@ -113,7 +113,7 @@ export const SearchableDropdown = React.forwardRef<
                       key={option.value}
                       value={option.value}
                       onSelect={() => handleSelect(option.value)}
-                      className="flex items-center gap-2 rounded-none px-3 py-3 text-sm outline-none cursor-default select-none hover:bg-slate-50 focus:bg-slate-50 data-[selected=true]:bg-slate-50 border-b border-red-100 last:border-0"
+                      className="flex items-center gap-2 rounded-none px-3 py-3 text-md outline-none cursor-default select-none hover:bg-slate-50 focus:bg-slate-50 data-[selected=true]:bg-slate-50 border-b border-red-100 last:border-0"
                     >
                       <Check
                         className={cn(
@@ -126,7 +126,7 @@ export const SearchableDropdown = React.forwardRef<
                           {option.label}
                         </span>
                         {option.description && (
-                          <span className="truncate text-xs text-slate-500 font-normal">
+                          <span className="truncate text-sm font-semibold text-primary">
                             {option.description}
                           </span>
                         )}

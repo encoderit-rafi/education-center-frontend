@@ -294,11 +294,6 @@ export function ReviewStep({
               </div>
             )}
 
-            <div className="flex justify-between text-sm pt-2 border-t border-slate-100">
-              <span className="text-slate-500">VAT (5%)</span>
-              <span className="font-medium">{vat.toFixed(2)} AED</span>
-            </div>
-
             <div className="pt-4 border-t border-slate-200">
               <div className="flex justify-between items-center">
                 <span className="font-black text-slate-900 tracking-tight">
