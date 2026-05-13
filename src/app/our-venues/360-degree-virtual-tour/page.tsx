@@ -1,8 +1,20 @@
 "use client";
 
 import { useState } from "react";
-import { Star, Clock, GraduationCap, Users, BadgeCheck, Trophy, MapPin, Wifi, ShieldCheck, type LucideIcon } from "lucide-react";
+import {
+  Star,
+  Clock,
+  GraduationCap,
+  Users,
+  BadgeCheck,
+  Trophy,
+  MapPin,
+  Wifi,
+  ShieldCheck,
+  type LucideIcon,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
+import { CampusGallery } from "@/components/blocks/campus-gallery";
 
 const venues: {
   id: string;
@@ -21,80 +33,80 @@ const venues: {
   tests: string[];
   features: string[];
 }[] = [
-    {
-      id: "abu-dhabi-main",
-      name: "Abu Dhabi – Main Campus",
-      address:
-        "Level 3, Tower B, Al Bateen Executive Airport Area, Abu Dhabi, UAE",
-      phone: "+971 2 123 4567",
-      email: "abudhabi@tepth.ae",
-      hours: "Sun – Thu: 8:00 AM – 8:00 PM",
-      badge: "Flagship",
-      badgeIcon: Star,
-      capacity: "240",
-      rooms: "12 Testing Rooms",
-      image: "/images/about-us/infrastructure-center.png",
-      tourEmbed:
-        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3631.7948621826657!2d54.35476927492266!3d24.45023677872042!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5e665e9a7d6bcf%3A0x4b9d0d6e7a4a0c3d!2sAbu%20Dhabi!5e0!3m2!1sen!2sae!4v1681000000000!5m2!1sen!2sae",
-      mapEmbed:
-        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3631.7948621826657!2d54.35476927492266!3d24.45023677872042!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5e665e9a7d6bcf%3A0x4b9d0d6e7a4a0c3d!2sAbu%20Dhabi!5e0!3m2!1sen!2sae!4v1681000000000!5m2!1sen!2sae",
-      tests: ["IELTS", "PTE", "TOEFL", "OET", "CELPIP", "CAEL"],
-      features: [
-        "Soundproofed testing pods",
-        "High-speed fibre internet",
-        "Biometric check-in",
-        "Disability-friendly access",
-      ],
-    },
-    {
-      id: "dubai-bur",
-      name: "Dubai – Bur Dubai Centre",
-      address: "Suite 801, Oud Metha Tower, Bur Dubai, Dubai, UAE",
-      phone: "+971 4 987 6543",
-      email: "dubai@tepth.ae",
-      hours: "Sun – Thu: 8:00 AM – 9:00 PM",
-      badge: "Extended Hours",
-      badgeIcon: Clock,
-      capacity: "180",
-      rooms: "9 Testing Rooms",
-      image: "/images/about-us/vision-map.png",
-      tourEmbed:
-        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3610.0484126440234!2d55.30747397493774!3d25.26102707756397!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f43b23a44c0a1%3A0x0!2sBur%20Dubai!5e0!3m2!1sen!2sae!4v1681000000001!5m2!1sen!2sae",
-      mapEmbed:
-        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3610.0484126440234!2d55.30747397493774!3d25.26102707756397!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f43b23a44c0a1%3A0x0!2sBur%20Dubai!5e0!3m2!1sen!2sae!4v1681000000001!5m2!1sen!2sae",
-      tests: ["IELTS", "PTE", "TOEFL", "OET"],
-      features: [
-        "Evening testing slots",
-        "Metro-accessible location",
-        "Free parking",
-        "Prayer room on-site",
-      ],
-    },
-    {
-      id: "sharjah",
-      name: "Sharjah – University City Hub",
-      address: "Block 7, University City Road, Sharjah, UAE",
-      phone: "+971 6 555 0101",
-      email: "sharjah@tepth.ae",
-      hours: "Sun – Thu: 9:00 AM – 7:00 PM",
-      badge: "Student Friendly",
-      badgeIcon: GraduationCap,
-      capacity: "120",
-      rooms: "6 Testing Rooms",
-      image: "/images/about-us/experience-student.png",
-      tourEmbed:
-        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3607.3214821660636!2d55.51234567493774!3d25.33456789756397!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f5c0d6e9e9a41%3A0x0!2sSharjah!5e0!3m2!1sen!2sae!4v1681000000002!5m2!1sen!2sae",
-      mapEmbed:
-        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3607.3214821660636!2d55.51234567493774!3d25.33456789756397!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f5c0d6e9e9a41%3A0x0!2sSharjah!5e0!3m2!1sen!2sae!4v1681000000002!5m2!1sen!2sae",
-      tests: ["IELTS", "PTE", "CELPIP"],
-      features: [
-        "Student lounge",
-        "On-campus shuttle access",
-        "Printing & study resources",
-        "Affordable prep packages",
-      ],
-    },
-  ];
+  {
+    id: "abu-dhabi-main",
+    name: "Abu Dhabi – Main Campus",
+    address:
+      "Level 3, Tower B, Al Bateen Executive Airport Area, Abu Dhabi, UAE",
+    phone: "+971 2 123 4567",
+    email: "abudhabi@tepth.ae",
+    hours: "Sun – Thu: 8:00 AM – 8:00 PM",
+    badge: "Flagship",
+    badgeIcon: Star,
+    capacity: "240",
+    rooms: "12 Testing Rooms",
+    image: "/images/about-us/infrastructure-center.png",
+    tourEmbed:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3631.7948621826657!2d54.35476927492266!3d24.45023677872042!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5e665e9a7d6bcf%3A0x4b9d0d6e7a4a0c3d!2sAbu%20Dhabi!5e0!3m2!1sen!2sae!4v1681000000000!5m2!1sen!2sae",
+    mapEmbed:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3631.7948621826657!2d54.35476927492266!3d24.45023677872042!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5e665e9a7d6bcf%3A0x4b9d0d6e7a4a0c3d!2sAbu%20Dhabi!5e0!3m2!1sen!2sae!4v1681000000000!5m2!1sen!2sae",
+    tests: ["IELTS", "PTE", "TOEFL", "OET", "CELPIP", "CAEL"],
+    features: [
+      "Soundproofed testing pods",
+      "High-speed fibre internet",
+      "Biometric check-in",
+      "Disability-friendly access",
+    ],
+  },
+  {
+    id: "dubai-bur",
+    name: "Dubai – Bur Dubai Centre",
+    address: "Suite 801, Oud Metha Tower, Bur Dubai, Dubai, UAE",
+    phone: "+971 4 987 6543",
+    email: "dubai@tepth.ae",
+    hours: "Sun – Thu: 8:00 AM – 9:00 PM",
+    badge: "Extended Hours",
+    badgeIcon: Clock,
+    capacity: "180",
+    rooms: "9 Testing Rooms",
+    image: "/images/about-us/vision-map.png",
+    tourEmbed:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3610.0484126440234!2d55.30747397493774!3d25.26102707756397!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f43b23a44c0a1%3A0x0!2sBur%20Dubai!5e0!3m2!1sen!2sae!4v1681000000001!5m2!1sen!2sae",
+    mapEmbed:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3610.0484126440234!2d55.30747397493774!3d25.26102707756397!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f43b23a44c0a1%3A0x0!2sBur%20Dubai!5e0!3m2!1sen!2sae!4v1681000000001!5m2!1sen!2sae",
+    tests: ["IELTS", "PTE", "TOEFL", "OET"],
+    features: [
+      "Evening testing slots",
+      "Metro-accessible location",
+      "Free parking",
+      "Prayer room on-site",
+    ],
+  },
+  {
+    id: "sharjah",
+    name: "Sharjah – University City Hub",
+    address: "Block 7, University City Road, Sharjah, UAE",
+    phone: "+971 6 555 0101",
+    email: "sharjah@tepth.ae",
+    hours: "Sun – Thu: 9:00 AM – 7:00 PM",
+    badge: "Student Friendly",
+    badgeIcon: GraduationCap,
+    capacity: "120",
+    rooms: "6 Testing Rooms",
+    image: "/images/about-us/experience-student.png",
+    tourEmbed:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3607.3214821660636!2d55.51234567493774!3d25.33456789756397!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f5c0d6e9e9a41%3A0x0!2sSharjah!5e0!3m2!1sen!2sae!4v1681000000002!5m2!1sen!2sae",
+    mapEmbed:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3607.3214821660636!2d55.51234567493774!3d25.33456789756397!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f5c0d6e9e9a41%3A0x0!2sSharjah!5e0!3m2!1sen!2sae!4v1681000000002!5m2!1sen!2sae",
+    tests: ["IELTS", "PTE", "CELPIP"],
+    features: [
+      "Student lounge",
+      "On-campus shuttle access",
+      "Printing & study resources",
+      "Affordable prep packages",
+    ],
+  },
+];
 
 const stats = [
   // { icon: MapPin, value: "3", label: "UAE Locations" },
@@ -154,7 +166,7 @@ export default function OurVenues() {
         />
       </div> */}
       {/* ── Hero Section ── */}
-      <section className="max-w-7xl mx-auto px-8 pt-12 mb-20">
+      {/* <section className="max-w-7xl mx-auto px-8 pt-12 mb-20">
         <div className="flex flex-col lg:flex-row gap-16 items-end">
           <div className="flex-1">
             <span className="text-primary font-bold tracking-widest uppercase text-xs mb-4 block font-headline">
@@ -181,7 +193,6 @@ export default function OurVenues() {
           </div>
         </div>
 
-        {/* Quick Stats Grid */}
         <div className="grid grid-cols-3 gap-6 mt-20 border-t border-outline/10 pt-12 ">
           {stats.map((s, idx) => (
             <div
@@ -202,10 +213,10 @@ export default function OurVenues() {
             </div>
           ))}
         </div>
-      </section>
+      </section> */}
 
       {/* ── Virtual Tour Section ── */}
-      <section className="bg-surface-container-low py-24 mb-20">
+      <section className="bg-surface-container-low py-24">
         <div className="max-w-7xl mx-auto px-8">
           <div className="flex justify-between items-end mb-16">
             <div>
@@ -220,18 +231,15 @@ export default function OurVenues() {
           </div>
           <div className="grid grid-cols-1 gap-12">
             <iframe
-              src="https://my.matterport.com/show/?m=MkSss1iWkLp"
-              className="w-full aspect-video rounded-3xl border-0"
-              allowFullScreen
-            />
-            <iframe
-              src="https://my.matterport.com/show/?m=hhsCqZueTbf"
+              src="https://my.matterport.com/show/?m=J3Go7kFamvE"
               className="w-full aspect-video rounded-3xl border-0"
               allowFullScreen
             />
           </div>
         </div>
       </section>
+
+      <CampusGallery />
 
       {/* ── Venue Selection + Detail ── */}
 

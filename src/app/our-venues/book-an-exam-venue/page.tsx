@@ -7,20 +7,132 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { BadgeCheck, FileText, Monitor, VolumeX, Video, Cpu, MapPin, Accessibility, Building2, Award, HeartHandshake, Users, CheckCircle2, type LucideIcon } from "lucide-react";
+import {
+  BadgeCheck,
+  FileText,
+  Monitor,
+  VolumeX,
+  Video,
+  Cpu,
+  MapPin,
+  Accessibility,
+  Building2,
+  Award,
+  HeartHandshake,
+  Users,
+  CheckCircle2,
+  type LucideIcon,
+} from "lucide-react";
+import { CampusGallery } from "@/components/blocks/campus-gallery";
+
+const infrastructureItems = [
+  {
+    icon: FileText,
+    title: "Service License",
+    iconColor: "text-red-800",
+    description:
+      "The Exam Preparation & Testing House is a well-formed organization in Dubai with vast experience in test delivery and exam prep. services. TEPTH is licensed by Dubai Silicon Oasis Authority and permitted by KHDA with Testing Centre activity.",
+  },
+  {
+    icon: Monitor,
+    title: "Computer-based Exams",
+    iconColor: "text-red-800",
+    description:
+      "Three 40-seat computer rooms and 20-seat classroom to administer computer-based exams.",
+  },
+  {
+    icon: VolumeX,
+    title: "Noise Free Environment",
+    iconColor: "text-red-800",
+    description:
+      "Fabric acoustic panels are fixed onto the partitions of workstations to help reduce the noise level. Our floors at the testing rooms are carpeted to eliminate distraction. We have also spaced out our workstations as this helps in reducing the noise. Additionally, we are using white noise machines in our computer labs to help reduce noise. We also use quiet keyboards and high-quality headsets to further minimize distractions.",
+  },
+  {
+    icon: FileText,
+    title: "Paper-based Exams",
+    iconColor: "text-red-800",
+    description:
+      "We provide a dedicated 20-seat classroom specifically designed to accommodate paper-based examination formats.",
+  },
+  {
+    icon: Video,
+    title: "CCTV Surveillance",
+    iconColor: "text-red-800",
+    description:
+      "To maintain exam security and integrity, we have implemented a comprehensive CCTV system in our computer labs. Each workstation is monitored by a security camera, and exam providers may be granted access to recordings upon request.",
+  },
+  {
+    icon: Cpu,
+    title: "Exam Delivery Machines",
+    iconColor: "text-red-800",
+    description:
+      "Our venues are equipped with high-specification computers that meet or exceed all official exam provider requirements for performance and security.",
+  },
+  {
+    icon: MapPin,
+    title: "Strategic Location",
+    iconColor: "text-red-800",
+    description:
+      "Our center is conveniently located in Dubai Silicon Oasis, one of the most strategic areas in Dubai, and in close proximity to Academic City.",
+  },
+  {
+    icon: Accessibility,
+    title: "Wheelchair Accessible",
+    iconColor: "text-red-800",
+    description:
+      "All our facilities are fully wheelchair accessible. We also provide adjustable chairs to ensure comfort for all candidates during their exams.",
+  },
+  {
+    icon: Building2,
+    title: "Top-Notch Premises",
+    iconColor: "text-red-800",
+    description:
+      "Our modern, air-conditioned venues are professionally built and well-equipped with waiting areas and secure lockers for test-takers. Features include built-in ceiling speakers for events and specialized training.",
+  },
+  {
+    icon: Award,
+    title: "Experienced Invigilators",
+    iconColor: "text-red-800",
+    description:
+      "All administrators and proctors at TEPTH are certified and highly trained to supervise various types of international exams with the highest level of professionalism.",
+  },
+  {
+    icon: HeartHandshake,
+    title: "Special Accommodation",
+    iconColor: "text-red-800",
+    description:
+      "We can accommodate test-takers requiring extra time or private rooms for special needs, ensuring a fair and supportive testing environment for everyone.",
+  },
+  {
+    icon: Users,
+    title: "Seating Capacity",
+    iconColor: "text-red-800",
+    description:
+      "With a total capacity of 140 workstations across three 40-seat computer rooms and a 20-seat classroom, we can administer exams for up to 140 candidates in a single session.",
+  },
+];
+
+const reasons = [
+  "Well-formed organization in Dubai licensed by Dubai Silicon Oasis Authority and permitted by KHDA.",
+  "Three 40-seat computer rooms and a 20-seat classroom available for hire.",
+  "Fabric acoustic panels, carpeted floors, and white noise machines to reduce noise.",
+  "140 workstations total with state-of-the-art peripherals.",
+  "Certified and highly trained administrators and proctors for all exam types.",
+];
 
 export default function BookAnExamVenuePage() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
-      <section className="relative py-20 lg:py-32 overflow-hidden bg-surface-container-low">
+      {/* <section className="relative py-20 lg:py-32 overflow-hidden bg-surface-container-low">
         <div className="container mx-auto px-6 lg:px-12 grid md:grid-cols-2 gap-12 items-center relative z-10">
           <div className="max-w-xl">
             <span className="text-primary font-bold tracking-widest text-xs uppercase mb-4 block animate-in fade-in slide-in-from-bottom-4 duration-700">
               PREMIUM EXAM VENUE HIRE
             </span>
             <h1 className="text-5xl lg:text-7xl font-extrabold text-on-surface tracking-tight leading-[1.05] mb-8 font-headline animate-in fade-in slide-in-from-bottom-6 duration-1000">
-              Need to hire an <span className="text-primary">exam venue?</span> Try TEPTH
+              Need to hire an <span className="text-primary">exam venue?</span>{" "}
+              Try TEPTH
             </h1>
             <p className="text-lg text-on-surface-variant mb-10 leading-relaxed animate-in fade-in slide-in-from-bottom-8 duration-1000">
               We provide the best services in the region, offering world-class
@@ -55,7 +167,7 @@ export default function BookAnExamVenuePage() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Comprehensive Exam Infrastructure Accordion */}
       <section className="py-24 bg-surface container-lowest">
@@ -67,7 +179,10 @@ export default function BookAnExamVenuePage() {
             <div className="h-1.5 w-24 bg-primary mx-auto mt-6 rounded-full"></div>
           </div>
 
-          <Accordion type="single" className="flex flex-col gap-4 border-none space-y-0 max-w-4xl mx-auto">
+          <Accordion
+            type="single"
+            className="flex flex-col gap-4 border-none space-y-0 max-w-4xl mx-auto"
+          >
             {infrastructureItems.map((item, index) => (
               <AccordionItem
                 key={index}
@@ -76,7 +191,12 @@ export default function BookAnExamVenuePage() {
               >
                 <AccordionTrigger className="flex items-center justify-between p-6 cursor-pointer hover:no-underline group/trigger text-left">
                   <div className="flex items-center gap-4">
-                    <item.icon className={cn("w-6 h-6 transition-transform group-hover/trigger:scale-110 text-on-surface-variant group-data-[state=open]/trigger:text-primary", item.iconColor)} />
+                    <item.icon
+                      className={cn(
+                        "w-6 h-6 transition-transform group-hover/trigger:scale-110 text-on-surface-variant group-data-[state=open]/trigger:text-primary",
+                        item.iconColor,
+                      )}
+                    />
                     <h3 className="text-lg font-bold text-on-surface transition-colors group-data-[state=open]/trigger:text-primary">
                       {item.title}
                     </h3>
@@ -99,7 +219,8 @@ export default function BookAnExamVenuePage() {
           <div className="flex flex-col lg:flex-row gap-20 items-center">
             <div className="lg:w-1/2">
               <h2 className="text-4xl font-extrabold text-on-surface mb-10 tracking-tight font-headline">
-                Why Choose <span className="text-primary tracking-tighter">TEPTH?</span>
+                Why Choose{" "}
+                <span className="text-primary tracking-tighter">TEPTH?</span>
               </h2>
               <div className="grid gap-6">
                 {reasons.map((reason, index) => (
@@ -152,8 +273,10 @@ export default function BookAnExamVenuePage() {
         </div>
       </section>
 
+      <CampusGallery />
+
       {/* CTA Section */}
-      <section className="py-24 max-w-5xl mx-auto px-6 lg:px-12">
+      {/* <section className="py-24 max-w-5xl mx-auto px-6 lg:px-12">
         <div className="bg-primary rounded-[2rem] p-12 lg:p-20 text-center text-white shadow-2xl relative overflow-hidden group">
           <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 opacity-5 -mr-48 -mt-48 rounded-full group-hover:scale-110 transition-transform duration-1000"></div>
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 opacity-5 -ml-32 -mb-32 rounded-full group-hover:scale-110 transition-transform duration-1000 delay-200"></div>
@@ -163,8 +286,9 @@ export default function BookAnExamVenuePage() {
               Secure Your Exam Venue Today
             </h2>
             <p className="text-white/80 text-xl mb-12 leading-relaxed max-w-3xl mx-auto">
-              Contact our academic team to discuss capacity requirements, technical
-              specifications, and custom scheduling for your organization.
+              Contact our academic team to discuss capacity requirements,
+              technical specifications, and custom scheduling for your
+              organization.
             </p>
             <div className="flex flex-col items-center gap-8">
               <p className="text-2xl lg:text-3xl font-black text-white italic">
@@ -179,91 +303,7 @@ export default function BookAnExamVenuePage() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 }
-
-const infrastructureItems = [
-  {
-    icon: FileText,
-    title: "Service License",
-    iconColor: "text-red-800",
-    description: "The Exam Preparation & Testing House is a well-formed organization in Dubai with vast experience in test delivery and exam prep. services. TEPTH is licensed by Dubai Silicon Oasis Authority and permitted by KHDA with Testing Centre activity."
-  },
-  {
-    icon: Monitor,
-    title: "Computer-based Exams",
-    iconColor: "text-red-800",
-    description: "Three 40-seat computer rooms and 20-seat classroom to administer computer-based exams."
-  },
-  {
-    icon: VolumeX,
-    title: "Noise Free Environment",
-    iconColor: "text-red-800",
-    description: "Fabric acoustic panels are fixed onto the partitions of workstations to help reduce the noise level. Our floors at the testing rooms are carpeted to eliminate distraction. We have also spaced out our workstations as this helps in reducing the noise. Additionally, we are using white noise machines in our computer labs to help reduce noise. We also use quiet keyboards and high-quality headsets to further minimize distractions."
-  },
-  {
-    icon: FileText,
-    title: "Paper-based Exams",
-    iconColor: "text-red-800",
-    description: "We provide a dedicated 20-seat classroom specifically designed to accommodate paper-based examination formats."
-  },
-  {
-    icon: Video,
-    title: "CCTV Surveillance",
-    iconColor: "text-red-800",
-    description: "To maintain exam security and integrity, we have implemented a comprehensive CCTV system in our computer labs. Each workstation is monitored by a security camera, and exam providers may be granted access to recordings upon request."
-  },
-  {
-    icon: Cpu,
-    title: "Exam Delivery Machines",
-    iconColor: "text-red-800",
-    description: "Our venues are equipped with high-specification computers that meet or exceed all official exam provider requirements for performance and security."
-  },
-  {
-    icon: MapPin,
-    title: "Strategic Location",
-    iconColor: "text-red-800",
-    description: "Our center is conveniently located in Dubai Silicon Oasis, one of the most strategic areas in Dubai, and in close proximity to Academic City."
-  },
-  {
-    icon: Accessibility,
-    title: "Wheelchair Accessible",
-    iconColor: "text-red-800",
-    description: "All our facilities are fully wheelchair accessible. We also provide adjustable chairs to ensure comfort for all candidates during their exams."
-  },
-  {
-    icon: Building2,
-    title: "Top-Notch Premises",
-    iconColor: "text-red-800",
-    description: "Our modern, air-conditioned venues are professionally built and well-equipped with waiting areas and secure lockers for test-takers. Features include built-in ceiling speakers for events and specialized training."
-  },
-  {
-    icon: Award,
-    title: "Experienced Invigilators",
-    iconColor: "text-red-800",
-    description: "All administrators and proctors at TEPTH are certified and highly trained to supervise various types of international exams with the highest level of professionalism."
-  },
-  {
-    icon: HeartHandshake,
-    title: "Special Accommodation",
-    iconColor: "text-red-800",
-    description: "We can accommodate test-takers requiring extra time or private rooms for special needs, ensuring a fair and supportive testing environment for everyone."
-  },
-  {
-    icon: Users,
-    title: "Seating Capacity",
-    iconColor: "text-red-800",
-    description: "With a total capacity of 140 workstations across three 40-seat computer rooms and a 20-seat classroom, we can administer exams for up to 140 candidates in a single session."
-  }
-];
-
-
-const reasons = [
-  "Well-formed organization in Dubai licensed by Dubai Silicon Oasis Authority and permitted by KHDA.",
-  "Three 40-seat computer rooms and a 20-seat classroom available for hire.",
-  "Fabric acoustic panels, carpeted floors, and white noise machines to reduce noise.",
-  "140 workstations total with state-of-the-art peripherals.",
-  "Certified and highly trained administrators and proctors for all exam types.",
-];

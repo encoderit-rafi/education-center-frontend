@@ -8,6 +8,7 @@ import InformationSection from "@/components/blocks/information-section";
 import BrandsSection from "@/components/blocks/brands-section";
 import WhyChooseUs from "@/components/blocks/why-choose-us";
 import ExamPrepCourses from "@/components/blocks/exam-prep-courses";
+import { CampusGallery } from "@/components/blocks/campus-gallery";
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
       <CoreServices />
       <WhyChooseUs />
       <ExperienceExcellence />
+      <CampusGallery />
       <Testimonials />
       <FreeConsultation />
     </div>
