@@ -148,37 +148,136 @@ export default function TestDatesDetailPage() {
                 </div>
               </div>
             )}
+            {id === "cael" && (
+              <div className="bg-primary/5 border border-primary/10 rounded-2xl p-8 max-w-2xl">
+                <div className="text-sm font-bold text-secondary flex items-center gap-2 mb-4">
+                  <span className="w-2 h-2 bg-primary rounded-full" />
+                  Testing Center Information
+                </div>
+                <div className="space-y-4">
+                  <p className="text-sm leading-relaxed text-slate-600">
+                    The CAEL (Canadian Academic English Language) Test is a
+                    computer-based test designed to measure the English
+                    proficiency of students planning to study at Canadian
+                    universities and colleges. Unlike general English tests,
+                    CAEL simulates the language use required in a first-year
+                    Canadian post-secondary environment, involving tasks like
+                    listening to a lecture or writing an essay based on academic
+                    readings.
+                  </p>
+                  <div className="bg-white/50 rounded-xl p-4 border border-primary/10">
+                    <p className="text-xs font-bold text-secondary">
+                      IMPORTANT NOTICE:
+                    </p>
+                    <p className="text-xs text-slate-500 mt-1">
+                      The CAEL test is administered at **TEPTH Dubai**, not at
+                      our Sharjah centre.
+                    </p>
+                  </div>
+                  <div className="flex flex-col sm:flex-row gap-4 mt-6">
+                    <Link
+                      href="https://cael.ca/centre/tepth/"
+                      target="_blank"
+                      className="inline-flex items-center justify-center px-6 py-3 bg-primary text-white font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-secondary transition-colors"
+                    >
+                      Book Directly with Provider
+                    </Link>
+                    <div className="text-[10px] text-slate-400">
+                      Questions? Call{" "}
+                      <span className="text-secondary font-bold">
+                        +971 6 553 1250
+                      </span>{" "}
+                      <br />
+                      or email{" "}
+                      <span className="text-secondary font-bold">
+                        info@tepth.org
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+            {id === "celpip-general" && (
+              <div className="bg-primary/5 border border-primary/10 rounded-2xl p-8 max-w-2xl">
+                <div className="text-sm font-bold text-secondary flex items-center gap-2 mb-4">
+                  <span className="w-2 h-2 bg-primary rounded-full" />
+                  Testing Center Information
+                </div>
+                <div className="space-y-4">
+                  <p className="text-sm leading-relaxed text-slate-600">
+                    The CELPIP-General (Canadian English Language Proficiency
+                    Index Program) is a completely computer-delivered English
+                    test used primarily for permanent residence applications in
+                    Canada and Australia. It assesses your ability to use
+                    English in everyday, real-world situations through four key
+                    modules: Listening, Reading, Writing, and Speaking.
+                  </p>
+                  <div className="bg-white/50 rounded-xl p-4 border border-primary/10">
+                    <p className="text-xs font-bold text-secondary">
+                      IMPORTANT NOTICE:
+                    </p>
+                    <p className="text-xs text-slate-500 mt-1">
+                      The CELPIP General test is administered at **TEPTH
+                      Dubai**, not at our Sharjah centre.
+                    </p>
+                  </div>
+                  <div className="flex flex-col sm:flex-row gap-4 mt-6">
+                    <Link
+                      href="https://www.celpip.ca/centre/tepth/"
+                      target="_blank"
+                      className="inline-flex items-center justify-center px-6 py-3 bg-primary text-white font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-secondary transition-colors"
+                    >
+                      Book Directly with Provider
+                    </Link>
+                    <div className="text-[10px] text-slate-400">
+                      Questions? Call{" "}
+                      <span className="text-secondary font-bold">
+                        +971 6 553 1250
+                      </span>{" "}
+                      <br />
+                      or email{" "}
+                      <span className="text-secondary font-bold">
+                        info@tepth.org
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
-          <Calendar
-            modifiers={{
-              available: (date) =>
-                (id === "ielts" && date.getDay() === 0) ||
-                (id === "toefl" && date.getDay() === 3) ||
-                (id === "selt" && [1, 2, 3].includes(date.getDay())) ||
-                (id === "pte" && [0, 1, 2, 3, 4, 6].includes(date.getDay())),
-            }}
-            modifiersClassNames={{
-              available:
-                "font-semibold text-primary underline underline-offset-4 decoration-primary",
-            }}
-            disabled={(date) => {
-              const isPast = date < new Date(new Date().setHours(0, 0, 0, 0));
-              if (id === "ielts") {
-                return isPast || date.getDay() !== 0;
-              }
-              if (id === "toefl") {
-                return isPast || date.getDay() !== 3;
-              }
-              if (id === "selt") {
-                return isPast || ![1, 2, 3].includes(date.getDay());
-              }
-              if (id === "pte") {
-                return isPast || ![0, 1, 2, 3, 4, 6].includes(date.getDay());
-              }
-              return isPast;
-            }}
-            className="w-full max-w-xl mx-auto mt-8 border rounded-3xl p-8 bg-white shadow-xl"
-          />
+
+          {!["cael", "celpip-general"].includes(id) && (
+            <Calendar
+              modifiers={{
+                available: (date) =>
+                  (id === "ielts" && date.getDay() === 0) ||
+                  (id === "toefl" && date.getDay() === 3) ||
+                  (id === "selt" && [1, 2, 3].includes(date.getDay())) ||
+                  (id === "pte" && [0, 1, 2, 3, 4, 6].includes(date.getDay())),
+              }}
+              modifiersClassNames={{
+                available:
+                  "font-semibold text-primary underline underline-offset-4 decoration-primary",
+              }}
+              disabled={(date) => {
+                const isPast = date < new Date(new Date().setHours(0, 0, 0, 0));
+                if (id === "ielts") {
+                  return isPast || date.getDay() !== 0;
+                }
+                if (id === "toefl") {
+                  return isPast || date.getDay() !== 3;
+                }
+                if (id === "selt") {
+                  return isPast || ![1, 2, 3].includes(date.getDay());
+                }
+                if (id === "pte") {
+                  return isPast || ![0, 1, 2, 3, 4, 6].includes(date.getDay());
+                }
+                return isPast;
+              }}
+              className="w-full max-w-xl mx-auto mt-8 border rounded-3xl p-8 bg-white shadow-xl"
+            />
+          )}
         </div>
       </section>
     </main>
