@@ -14,8 +14,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { ArrowRight } from "lucide-react";
-import Link from "next/link";
 
 const OTHER_EXAMS = [
   {
@@ -25,7 +23,6 @@ const OTHER_EXAMS = [
     name: "Pearson Non-PTE Exams",
     description:
       "A broad portfolio of professional and academic exams delivered through Pearson VUE — including GED, GMAT, IT certifications, Professional, Healthcare, and Finance exams.",
-    href: "/contact",
   },
   {
     id: "acca",
@@ -34,7 +31,6 @@ const OTHER_EXAMS = [
     name: "ACCA",
     description:
       "Association of Chartered Certified Accountants — globally recognised professional accountancy qualification. Contact us to confirm current availability and scheduling.",
-    href: "/contact",
   },
   {
     id: "kryterion",
@@ -43,7 +39,6 @@ const OTHER_EXAMS = [
     name: "Kryterion Exams",
     description:
       "Various professional certification and credentialing exams delivered securely through Kryterion's testing network. Contact us for available titles and scheduling.",
-    href: "/contact",
   },
 ];
 
@@ -66,7 +61,6 @@ export default function OtherExamsPage() {
 
         <Accordion
           type="single"
-          collapsible
           className="w-full max-w-4xl mx-auto mt-20 space-y-4"
         >
           {OTHER_EXAMS.map((exam, index) => (
@@ -95,16 +89,6 @@ export default function OtherExamsPage() {
                   <p className="text-slate-500 leading-relaxed mb-8 max-w-2xl">
                     {exam.description}
                   </p>
-                  <Link
-                    href={exam.href}
-                    className={buttonVariants({
-                      variant: "outline",
-                      className: "rounded-full group px-6",
-                    })}
-                  >
-                    Learn More & Book
-                    <ArrowRight className="ml-2 size-4 group-hover:translate-x-1 transition-transform" />
-                  </Link>
                 </div>
               </AccordionContent>
             </AccordionItem>
