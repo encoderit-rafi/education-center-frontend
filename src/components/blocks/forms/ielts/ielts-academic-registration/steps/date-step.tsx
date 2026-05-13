@@ -3,7 +3,7 @@
 import React from "react";
 import { ArrowRight, Calendar as CalendarIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { DatePicker } from "@/components/blocks/date-picker";
+import { Calendar } from "@/components/ui/calendar";
 import {
   Field,
   FieldContent,
@@ -32,18 +32,17 @@ export function DateStep({
       <div className="bg-white rounded-2xl border border-slate-100 p-6 md:p-8 shadow-sm">
         <Stepper step={1}>Select Exam Date</Stepper>
 
-        <div className="mt-8 max-w-md mx-auto">
+        <div className="mt-8 flex justify-center">
           <Field data-invalid={!!error}>
-            {/* <FieldLabel required>Test Dates</FieldLabel> */}
-            <FieldContent>
-              <DatePicker
-                value={value}
-                onChange={(date) => onChange(date as Date)}
+            <FieldContent className="flex flex-col items-center">
+              <Calendar
+                mode="single"
+                selected={value}
+                onSelect={(date) => date && onChange(date)}
                 disabled={(date) => date <= new Date()}
-                placeholder="Choose your test date"
-                aria-invalid={!!error}
+                className="rounded-2xl border border-slate-100 shadow-sm p-4 bg-white"
               />
-              <FieldError errors={[error]} />
+              <FieldError errors={[error]} className="mt-4 text-center" />
             </FieldContent>
           </Field>
         </div>
