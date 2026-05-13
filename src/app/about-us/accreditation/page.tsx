@@ -14,7 +14,8 @@ export default function Accreditation() {
             badge="ACCREDITATION"
             title={
               <>
-                Licensed & <span className="text-primary">Regulated Excellence</span>
+                Licensed &{" "}
+                <span className="text-primary">Regulated Excellence</span>
               </>
             }
             description="The Exam Preparation & Testing House L.L.C is officially licensed and regulated by leading educational authorities, ensuring institutional integrity."
@@ -26,7 +27,7 @@ export default function Accreditation() {
             <div className="absolute -inset-4 bg-primary/5 rounded-xl blur-3xl opacity-50 transition-opacity group-hover:opacity-100"></div>
             <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
               <Image
-                src="/images/about-us/about-us-9.jpg"
+                src="/images/about-us/approve.png"
                 alt="Accreditation Hero"
                 fill
                 className="object-cover"
@@ -58,7 +59,13 @@ export default function Accreditation() {
                 </div>
                 <div className="flex-1 space-y-6">
                   <p className="text-base leading-relaxed font-medium">
-                    The Exam Preparation & Testing House L.L.C is licensed by Sharjah Economic Development Department (SEDD). Sharjah is firmly established as a premier educational hub in the UAE, known for top-tier institutions and high-quality educational centres. Driven by government support, the emirate offers extensive academic facilities and significant investment in the education sector.
+                    The Exam Preparation & Testing House L.L.C is licensed by
+                    Sharjah Economic Development Department (SEDD). Sharjah is
+                    firmly established as a premier educational hub in the UAE,
+                    known for top-tier institutions and high-quality educational
+                    centres. Driven by government support, the emirate offers
+                    extensive academic facilities and significant investment in
+                    the education sector.
                   </p>
                 </div>
               </div>
@@ -67,7 +74,15 @@ export default function Accreditation() {
               <div className="flex flex-col md:flex-row items-center gap-10 group">
                 <div className="flex-1 space-y-6">
                   <p className="text-base leading-relaxed font-medium">
-                    The Exam Preparation & Testing House L.L.C is regulated by Sharjah Private Education Authority (SPEA). SPEA is the official body responsible for overseeing and regulating private education in the Emirate of Sharjah. SPEA was established by Emiri Decree No. 45 of 2018 issued by H.H. Sheikh Dr. Sultan Bin Mohammed Al Qasimi, Ruler of Sharjah with core responsibilities including Licensing private schools and educational centre and monitoring quality through inspection and performance ratings.
+                    The Exam Preparation & Testing House L.L.C is regulated by
+                    Sharjah Private Education Authority (SPEA). SPEA is the
+                    official body responsible for overseeing and regulating
+                    private education in the Emirate of Sharjah. SPEA was
+                    established by Emiri Decree No. 45 of 2018 issued by H.H.
+                    Sheikh Dr. Sultan Bin Mohammed Al Qasimi, Ruler of Sharjah
+                    with core responsibilities including Licensing private
+                    schools and educational centre and monitoring quality
+                    through inspection and performance ratings.
                   </p>
                 </div>
                 <div className="w-full md:flex-1">

@@ -25,9 +25,12 @@ import { PhoneInput } from "@/components/ui/phone-input";
 import { CountryDropdown } from "@/components/ui/country-dropdown";
 import { toast } from "sonner";
 
-
-
-import { CheckCircle2, ChevronDown, SendHorizontal, ShieldCheck } from "lucide-react";
+import {
+  CheckCircle2,
+  ChevronDown,
+  SendHorizontal,
+  ShieldCheck,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const contactSchema = z.object({
@@ -35,10 +38,14 @@ const contactSchema = z.object({
     .string()
     .min(2, { message: "Name must be at least 2 characters" }),
   email: z.string().email({ message: "Please enter a valid email address" }),
-  phoneNumber: z.string().min(5, { message: "Please enter a valid phone number" }),
+  phoneNumber: z
+    .string()
+    .min(5, { message: "Please enter a valid phone number" }),
   country: z.string().min(1, { message: "Please select your country" }),
   emiratesCity: z.string().optional(),
-  enquiryTopic: z.string().min(1, { message: "Please select an enquiry topic" }),
+  enquiryTopic: z
+    .string()
+    .min(1, { message: "Please select an enquiry topic" }),
   message: z
     .string()
     .min(10, { message: "Message must be at least 10 characters" }),
@@ -104,10 +111,7 @@ export default function ContactForm() {
             Full Name <span className="text-primary font-bold">*</span>
           </FieldLabel>
           <FieldContent>
-            <Input
-              placeholder="John Doe"
-              {...register("fullName")}
-            />
+            <Input placeholder="John Doe" {...register("fullName")} />
           </FieldContent>
           {errors.fullName && (
             <FieldError>{errors.fullName.message}</FieldError>
@@ -183,7 +187,6 @@ export default function ContactForm() {
             name="country"
             render={({ field }) => (
               <CountryDropdown
-
                 value={field.value}
                 onChange={(c) => field.onChange(c.name)}
               />
@@ -242,6 +245,18 @@ export default function ContactForm() {
                     <DropdownMenuRadioItem value="General Enquiry">
                       General Enquiry
                     </DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="Free Consultation">
+                      Free Consultation
+                    </DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="Paid Mock Test">
+                      Paid Mock Test
+                    </DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="Request For Partnership">
+                      Request For Partnership
+                    </DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="Test English Proficiency">
+                      Test English Proficiency
+                    </DropdownMenuRadioItem>
                   </DropdownMenuRadioGroup>
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -270,7 +285,7 @@ export default function ContactForm() {
         {errors.message && <FieldError>{errors.message.message}</FieldError>}
       </Field>
 
-      <div className="space-y-4">
+      {/* <div className="space-y-4">
         {mounted && (
           <div className="scale-90 origin-left">
             <ReCAPTCHA
@@ -281,9 +296,11 @@ export default function ContactForm() {
           </div>
         )}
         {captchaError && (
-          <p className="text-red-500 text-xs font-bold uppercase tracking-wider">{captchaError}</p>
+          <p className="text-red-500 text-xs font-bold uppercase tracking-wider">
+            {captchaError}
+          </p>
         )}
-      </div>
+      </div> */}
 
       <div className="space-y-4">
         <Button
@@ -298,10 +315,12 @@ export default function ContactForm() {
 
         <p className="flex items-center gap-1 text-sm">
           <ShieldCheck className="w-4 h-4 text-primary" />
-          <span className="font-medium">We&apos;ll get back to you within 24 hours. Your information is kept confidential.</span>
+          <span className="font-medium">
+            We&apos;ll get back to you within 24 hours. Your information is kept
+            confidential.
+          </span>
         </p>
       </div>
     </form>
   );
 }
-
