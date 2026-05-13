@@ -1,15 +1,18 @@
 import { Info } from "lucide-react";
 import React from "react";
+import { cn } from "@/lib/utils";
 
 export default function BaseNoteBox({
   title = "To continue with this booking you will need:",
   notes = [],
+  className,
 }: {
   title: string;
   notes: string[];
+  className?: string;
 }) {
   return (
-    <div className="bg-primary/5 border border-primary/50  border-dashed rounded-md p-4">
+    <div className={cn("bg-primary/5 border border-primary/50  border-dashed rounded-md p-4", className)}>
       <h3 className="text-primary font-bold flex items-center gap-2 mb-4">
         <Info className="size-5" />
         {title}

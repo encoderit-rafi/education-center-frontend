@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils"
 import { Check, ChevronDown } from "lucide-react"
 
 interface SearchableDropdownProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "onChange"> {
-  options: { label: string; value: string; description?: string }[]
+  options: { label: string | React.ReactNode; value: string; description?: string | React.ReactNode }[]
   placeholder?: string
   searchPlaceholder?: string
   emptyMessage?: string
@@ -113,20 +113,20 @@ export const SearchableDropdown = React.forwardRef<
                       key={option.value}
                       value={option.value}
                       onSelect={() => handleSelect(option.value)}
-                      className="flex items-center gap-2 rounded-md px-2 py-2 text-sm outline-none cursor-default select-none hover:bg-slate-50 focus:bg-slate-50 data-[selected=true]:bg-slate-50"
+                      className="flex items-center gap-2 rounded-none px-3 py-3 text-md outline-none cursor-default select-none hover:bg-slate-50 focus:bg-slate-50 data-[selected=true]:bg-slate-50 border-b border-red-100 last:border-0"
                     >
                       <Check
                         className={cn(
-                          "h-4 w-4 text-primary shrink-0",
+                          "h-4 w-4 text-red-600 shrink-0",
                           value === option.value ? "opacity-100" : "opacity-0",
                         )}
                       />
                       <div className="flex flex-col flex-1 min-w-0">
-                        <span className="truncate font-medium text-slate-700">
+                        <span className="truncate font-medium ">
                           {option.label}
                         </span>
                         {option.description && (
-                          <span className="truncate text-xs text-slate-500 font-normal">
+                          <span className="truncate text-sm font-semibold text-primary">
                             {option.description}
                           </span>
                         )}

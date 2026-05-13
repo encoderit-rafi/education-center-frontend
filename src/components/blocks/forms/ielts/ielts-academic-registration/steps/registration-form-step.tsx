@@ -22,6 +22,8 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { TIeltsAcademicSchema } from "../_type";
+import { AED } from "@/components/ui/aed";
+import { PriceDisplay } from "@/components/ui/price-display";
 
 interface RegistrationFormStepProps {
   form: UseFormReturn<TIeltsAcademicSchema>;
@@ -77,7 +79,7 @@ export function RegistrationFormStep({
           </Field>
 
           <Field>
-            <FieldLabel>Middle names</FieldLabel>
+            <FieldLabel>Middle Name</FieldLabel>
             <FieldContent>
               <Input
                 placeholder="As per passport"
@@ -224,15 +226,39 @@ export function RegistrationFormStep({
             <FieldContent>
               <Input
                 {...register("postalAddress1")}
-                placeholder="Street address, P.O. box, etc."
+                placeholder="Street address"
                 aria-invalid={!!errors.postalAddress1}
               />
               <FieldError errors={[errors.postalAddress1]} />
             </FieldContent>
           </Field>
 
+          <Field data-invalid={!!errors.poBox}>
+            <FieldLabel>P.O. Box number</FieldLabel>
+            <FieldContent>
+              <Input
+                {...register("poBox")}
+                placeholder="P.O. Box number"
+                aria-invalid={!!errors.poBox}
+              />
+              <FieldError errors={[errors.poBox]} />
+            </FieldContent>
+          </Field>
+
+          <Field data-invalid={!!errors.postcode}>
+            <FieldLabel>Postal Code (Zip Code)</FieldLabel>
+            <FieldContent>
+              <Input
+                {...register("postcode")}
+                placeholder="Postal code"
+                aria-invalid={!!errors.postcode}
+              />
+              <FieldError errors={[errors.postcode]} />
+            </FieldContent>
+          </Field>
+
           <Field data-invalid={!!errors.city}>
-            <FieldLabel required>Emirates/ City</FieldLabel>
+            <FieldLabel required>Emirate/ City</FieldLabel>
             <FieldContent>
               <Input
                 {...register("city")}
@@ -331,6 +357,58 @@ export function RegistrationFormStep({
               <FieldError errors={[errors.nationality]} />
             </FieldContent>
           </Field>
+
+          <Field data-invalid={!!errors.idDocument}>
+            <FieldLabel required>
+              Attach a valid copy of Passport / Emirates ID:
+            </FieldLabel>
+            <FieldContent>
+              <div className="flex flex-col gap-2">
+                {!formData.idDocument ? (
+                  <Input
+                    type="file"
+                    accept=".pdf,.docx,.doc,.png,.jpg,.jpeg"
+                    className="h-auto py-2 px-3 border-2 border-dashed border-slate-200 hover:border-primary/50 transition-colors cursor-pointer file:mr-4 file:py-1 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (file) setValue("idDocument", file);
+                    }}
+                  />
+                ) : (
+                  <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-200">
+                    <div className="flex items-center gap-3">
+                      <div className="size-8 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-primary">
+                        <Save className="size-4" />
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="text-xs font-bold text-slate-700 truncate max-w-[200px]">
+                          {(formData.idDocument as File).name}
+                        </span>
+                        <span className="text-[10px] text-slate-400 font-medium">
+                          {((formData.idDocument as File).size / (1024 * 1024)).toFixed(2)} MB
+                        </span>
+                      </div>
+                    </div>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => setValue("idDocument", undefined)}
+                      className="size-8 p-0 rounded-full hover:bg-red-50 hover:text-red-600"
+                    >
+                      <span className="text-lg">×</span>
+                    </Button>
+                  </div>
+                )}
+                <p className="text-[12px] text-slate-900 font-medium">
+                  Supported formats: (pdf, docx, doc, png, jpeg)
+                </p>
+              </div>
+              <FieldError errors={[errors.idDocument]} />
+            </FieldContent>
+          </Field>
+
+
         </div>
       </div>
 
@@ -672,7 +750,7 @@ export function RegistrationFormStep({
         <div className="flex items-center gap-2 text-slate-400 mb-4">
           <BookOpen className="size-5" />
           <h3 className="text-lg font-bold tracking-tight text-slate-800">
-            Add-ons Services
+            Add-on Services
           </h3>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -685,7 +763,16 @@ export function RegistrationFormStep({
                   { label: "None", value: "" },
                   ...Object.values(coursesData).map((c: any) => ({
                     label: c.name,
-                    description: `${(c.price * (1 - c.special_discount / 100)).toFixed(0)} ${c.currency} (${c.special_discount}% OFF)`,
+                    description: (
+                      <span className="flex items-center gap-1">
+                        <PriceDisplay 
+                          amount={c.price * (1 - c.special_discount / 100)} 
+                          minimumFractionDigits={0} 
+                          maximumFractionDigits={0} 
+                        />
+                        <span>({c.special_discount}% OFF)</span>
+                      </span>
+                    ),
                     value: c.id,
                   })),
                 ]}
@@ -705,7 +792,11 @@ export function RegistrationFormStep({
                   { label: "None", value: "" },
                   ...Object.values(workshopsData).map((w: any) => ({
                     label: w.name,
-                    description: `${w.duration} • ${w.price} ${w.currency}`,
+                    description: (
+                      <span className="flex items-center gap-1">
+                        {w.duration} • <PriceDisplay amount={w.price} minimumFractionDigits={0} maximumFractionDigits={0} />
+                      </span>
+                    ),
                     value: w.id,
                   })),
                 ]}
@@ -721,7 +812,7 @@ export function RegistrationFormStep({
         <BaseNoteBox
           title="Enjoy These Free Benefits:"
           notes={[
-            "Save 10% off when you book your exam and register for the course with TEPTH and pay online on our website.",
+            "Save more when you book your exam and register for the course with TEPTH and pay online on our website.",
             "Free Prep. Material",
             "Free Consultation",
             "Free Mock Test",
@@ -778,11 +869,11 @@ export function RegistrationFormStep({
           variant="ghost"
           type="button"
           onClick={onBack}
-          className="text-slate-500 hover:text-slate-700 font-medium"
+          className="bg-primary hover:bg-primary/90 text-white px-4 h-10 rounded-xl font-bold transition-all disabled:opacity-50"
         >
           Back
         </Button>
-        <Button type="submit">Next</Button>
+        <Button type="submit" className="bg-primary hover:bg-primary/90 text-white px-4 h-10 rounded-xl font-bold transition-all disabled:opacity-50">Next</Button>
       </div>
     </form>
   );

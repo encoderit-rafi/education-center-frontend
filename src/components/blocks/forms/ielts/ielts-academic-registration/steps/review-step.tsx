@@ -14,6 +14,8 @@ import { Button } from "@/components/ui/button";
 import { UseFormReturn } from "react-hook-form";
 import { TIeltsAcademicSchema } from "../_type";
 import Payment from "@/components/blocks/payment";
+import { AED } from "@/components/ui/aed";
+import { PriceDisplay } from "@/components/ui/price-display";
 import {
   Field,
   FieldLabel,
@@ -32,6 +34,8 @@ interface ReviewStepProps {
   onSubmit: (e?: React.BaseSyntheticEvent) => Promise<void>;
   onInvalid: (errors: any) => void;
   baseFee: number;
+  serviceFee: number;
+  vat: number;
   total: number;
   selectedCourseData?: any;
   selectedWorkshopData?: any;
@@ -44,6 +48,8 @@ export function ReviewStep({
   onSubmit,
   onInvalid,
   baseFee,
+  serviceFee,
+  vat,
   total,
   selectedCourseData,
   selectedWorkshopData,
@@ -84,36 +90,67 @@ export function ReviewStep({
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Personal Details Summary */}
           <div className="space-y-6">
-            <div className="flex items-center gap-2 text-slate-400">
+            <div className="flex items-center gap-2 text-black">
               <User className="size-4" />
-              <span className="text-xs font-bold tracking-widest">
+              <span className="text-xs font-bold tracking-widest text-black">
                 PERSONAL DETAILS
               </span>
             </div>
             <div className="space-y-4">
               <div className="flex flex-col">
-                <span className="text-[10px] text-slate-400 font-bold">
-                  Full Name
+                <span className="text-[10px] text-black font-bold uppercase">
+                  Given Names
                 </span>
-                <span className="text-sm font-semibold text-slate-700">
-                  {data.givenNames} {data.middleName} {data.surnames}
+                <span className="text-sm font-semibold text-black">
+                  {data.givenNames}
                 </span>
               </div>
               <div className="flex flex-col">
-                <span className="text-[10px] text-slate-400 font-bold">
+                <span className="text-[10px] text-black font-bold uppercase">
+                  Middle Name
+                </span>
+                <span className="text-sm font-semibold text-black">
+                  {data.middleName || "N/A"}
+                </span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] text-black font-bold uppercase">
+                  Surnames
+                </span>
+                <span className="text-sm font-semibold text-black">
+                  {data.surnames || "N/A"}
+                </span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] text-black font-bold uppercase">
                   Date of Birth
                 </span>
-                <span className="text-sm font-semibold text-slate-700">
+                <span className="text-sm font-semibold text-black">
                   {data.dateOfBirth ? format(data.dateOfBirth, "PPP") : "N/A"}
                 </span>
               </div>
-
               <div className="flex flex-col">
-                <span className="text-[10px] text-slate-400 font-bold">
+                <span className="text-[10px] text-black font-bold uppercase">
                   Gender
                 </span>
-                <span className="text-sm font-semibold text-slate-700 capitalize">
-                  {data.sex}
+                <span className="text-sm font-semibold text-black capitalize">
+                  {data.sex || "N/A"}
+                </span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] text-black font-bold uppercase">
+                  Mobile Number
+                </span>
+                <span className="text-sm font-semibold text-black">
+                  {data.mobileNumber || "N/A"}
+                </span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] text-black font-bold uppercase">
+                  Nationality
+                </span>
+                <span className="text-sm font-semibold text-black">
+                  {data.nationality || "N/A"}
                 </span>
               </div>
             </div>
@@ -121,7 +158,7 @@ export function ReviewStep({
 
           {/* Identity & Contact Summary */}
           <div className="space-y-6">
-            <div className="flex items-center gap-2 text-slate-400">
+            <div className="flex items-center gap-2 text-black">
               <ShieldCheck className="size-4" />
               <span className="text-xs font-bold tracking-widest">
                 IDENTITY & CONTACT
@@ -129,27 +166,51 @@ export function ReviewStep({
             </div>
             <div className="space-y-4">
               <div className="flex flex-col">
-                <span className="text-[10px] text-slate-400 font-bold">
-                  {data.idType?.replace("_", " ").toUpperCase()}
+                <span className="text-[10px] text-black font-bold uppercase">
+                  ID Type
                 </span>
-                <span className="text-sm font-semibold text-slate-700">
-                  {data.idNumber}
+                <span className="text-sm font-semibold text-black capitalize">
+                  {data.idType?.replace("_", " ")}
                 </span>
               </div>
               <div className="flex flex-col">
-                <span className="text-[10px] text-slate-400 font-bold">
+                <span className="text-[10px] text-black font-bold uppercase">
+                  ID Number
+                </span>
+                <span className="text-sm font-semibold text-black">
+                  {data.idNumber || "N/A"}
+                </span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] text-black font-bold uppercase">
                   Email
                 </span>
-                <span className="text-sm font-semibold text-slate-700">
+                <span className="text-sm font-semibold text-black">
                   {data.email}
                 </span>
               </div>
               <div className="flex flex-col">
-                <span className="text-[10px] text-slate-400 font-bold">
-                  {data.idType?.replace("_", " ").toUpperCase()} EXPIRY
+                <span className="text-[10px] text-black font-bold uppercase">
+                  ID Expiry Date
                 </span>
-                <span className="text-sm font-semibold text-slate-700">
+                <span className="text-sm font-semibold text-black">
                   {data.idExpiryDate ? format(data.idExpiryDate, "PPP") : "N/A"}
+                </span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] text-black font-bold uppercase">
+                  Identity Document
+                </span>
+                <span className="text-sm font-semibold text-black">
+                  {data.idDocument ? (data.idDocument as File).name : "No file attached"}
+                </span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] text-black font-bold uppercase">
+                  Issuing Authority
+                </span>
+                <span className="text-sm font-semibold text-black">
+                  {data.issuingAuthority || "N/A"}
                 </span>
               </div>
             </div>
@@ -157,7 +218,7 @@ export function ReviewStep({
 
           {/* Test Info Summary */}
           <div className="space-y-6">
-            <div className="flex items-center gap-2 text-slate-400">
+            <div className="flex items-center gap-2 text-black">
               <Globe className="size-4" />
               <span className="text-xs font-bold tracking-widest">
                 TEST INFORMATION
@@ -165,7 +226,7 @@ export function ReviewStep({
             </div>
             <div className="space-y-4">
               <div className="flex flex-col">
-                <span className="text-[10px] text-slate-400 font-bold">
+                <span className="text-[10px] text-black font-bold uppercase">
                   Exam Date
                 </span>
                 <span className="text-sm font-semibold text-primary">
@@ -173,19 +234,71 @@ export function ReviewStep({
                 </span>
               </div>
               <div className="flex flex-col">
-                <span className="text-[10px] text-slate-400 font-bold">
-                  Location
+                <span className="text-[10px] text-black font-bold uppercase">
+                  Time Slot
                 </span>
-                <span className="text-sm font-semibold text-slate-700">
-                  {data.city}, {data.residenceCountry}
+                <span className="text-sm font-semibold text-black">
+                  {data.examTimeSlot === "9:00 AM"
+                    ? "Morning Session (09:00 AM)"
+                    : data.examTimeSlot === "11:00 AM"
+                      ? "Morning Session (11:00 AM)"
+                      : "Morning Session"}
                 </span>
               </div>
               <div className="flex flex-col">
-                <span className="text-[10px] text-slate-400 font-bold">
+                <span className="text-[10px] text-black font-bold uppercase">
+                  Postal Address
+                </span>
+                <span className="text-sm font-semibold text-black">
+                  {data.postalAddress1}
+                </span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] text-black font-bold uppercase">
+                  Town / City
+                </span>
+                <span className="text-sm font-semibold text-black">
+                  {data.city}
+                </span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] text-black font-bold uppercase">
+                  Country of Residence
+                </span>
+                <span className="text-sm font-semibold text-black">
+                  {data.residenceCountry}
+                </span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] text-black font-bold uppercase">
+                  P.O. Box
+                </span>
+                <span className="text-sm font-semibold text-black">
+                  {data.poBox || "N/A"}
+                </span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] text-black font-bold uppercase">
+                  Postal Code
+                </span>
+                <span className="text-sm font-semibold text-black">
+                  {data.postcode || "N/A"}
+                </span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] text-black font-bold uppercase">
                   First Language
                 </span>
-                <span className="text-sm font-semibold text-slate-700">
-                  {data.firstLanguage}
+                <span className="text-sm font-semibold text-black">
+                  {data.firstLanguage || "N/A"}
+                </span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] text-black font-bold uppercase">
+                  Education Level
+                </span>
+                <span className="text-sm font-semibold text-black">
+                  {data.educationLevel || "N/A"}
                 </span>
               </div>
             </div>
@@ -195,12 +308,13 @@ export function ReviewStep({
 
       {/* Secure Payment Stepper */}
       <div className="flex items-center justify-between">
-        <Stepper step={3}>Secure Payment</Stepper>
+        <Stepper step={3}>Payment</Stepper>
         <div className="text-right">
-          <span className="text-2xl font-black text-primary">
-            {total.toFixed(2)}{" "}
-            <span className="text-xs font-bold text-slate-400">AED</span>
-          </span>
+          <PriceDisplay
+            amount={total}
+            className="text-2xl font-black text-primary flex items-center justify-end"
+            iconClassName="w-8 h-4 opacity-50"
+          />
         </div>
       </div>
 
@@ -213,7 +327,7 @@ export function ReviewStep({
             type="submit"
             className="w-full h-14 bg-primary hover:bg-primary/90 text-white font-bold text-lg rounded-xl shadow-lg shadow-primary/20 transition-all flex items-center justify-center gap-2 group mt-4"
           >
-            Purshase
+            Book
             {/* <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" /> */}
           </Button>
         </div>
@@ -227,7 +341,12 @@ export function ReviewStep({
           <div className="space-y-3">
             <div className="flex justify-between text-sm">
               <span className="text-slate-500">IELTS Academic Exam</span>
-              <span className="font-medium">{baseFee.toFixed(2)} AED</span>
+              <PriceDisplay amount={baseFee} className="font-medium" />
+            </div>
+
+            <div className="flex justify-between text-sm">
+              <span className="text-slate-500">Registration Service Fee</span>
+              <PriceDisplay amount={serviceFee} className="font-medium" />
             </div>
 
             {data.selectedCourse && selectedCourseData && (
@@ -235,14 +354,10 @@ export function ReviewStep({
                 <span className="text-slate-500">
                   Course: {selectedCourseData.name}
                 </span>
-                <span className="font-medium text-emerald-600">
-                  +
-                  {(
-                    selectedCourseData.price *
-                    (1 - selectedCourseData.special_discount / 100)
-                  ).toFixed(2)}{" "}
-                  AED
-                </span>
+                <PriceDisplay
+                  amount={selectedCourseData.price * (1 - selectedCourseData.special_discount / 100)}
+                  className="font-medium"
+                />
               </div>
             )}
 
@@ -251,9 +366,7 @@ export function ReviewStep({
                 <span className="text-slate-500">
                   Workshop: {selectedWorkshopData.name}
                 </span>
-                <span className="font-medium text-emerald-600">
-                  +{selectedWorkshopData.price.toFixed(2)} AED
-                </span>
+                <PriceDisplay amount={selectedWorkshopData.price} className="font-medium" />
               </div>
             )}
 
@@ -262,10 +375,11 @@ export function ReviewStep({
                 <span className="font-black text-slate-900 tracking-tight">
                   Total Amount
                 </span>
-                <span className="text-3xl font-black text-primary">
-                  {total.toFixed(2)}{" "}
-                  <span className="text-xs font-bold text-primary/60">AED</span>
-                </span>
+                <PriceDisplay
+                  amount={total}
+                  className="text-3xl font-black text-primary"
+                  iconClassName="h-5 w-auto opacity-60"
+                />
               </div>
             </div>
           </div>

@@ -38,6 +38,7 @@ export const IeltsAcademicSchema = z
     idExpiryDate: z.any().optional(),
     issuingAuthority: z.string().optional(),
     nationality: z.string().optional(),
+    idDocument: z.any().refine((val) => !!val, "Please upload your ID document"),
 
     // Step 3: Your Profile
     takenBefore: z.enum(["Yes", "No"]).or(z.literal("")),
@@ -73,6 +74,11 @@ export const IeltsAcademicSchema = z
       .or(z.literal("")),
     termsAgreed: z.boolean().optional(),
     examDate: z.any().refine((val) => !!val, "Please select an exam date"),
+    examTimeSlot: z
+      .enum(["9:00 AM", "11:00 AM"], {
+        message: "Please select a time slot",
+      })
+      .or(z.literal("")),
   })
   .refine((data) => data.email === data.confirmEmail, {
     message: "Emails do not match",

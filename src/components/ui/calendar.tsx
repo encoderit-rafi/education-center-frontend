@@ -17,7 +17,7 @@ function Calendar({
   className,
   classNames,
   showOutsideDays = false,
-  captionLayout = "label",
+  captionLayout = "dropdown",
   buttonVariant = "ghost",
   startMonth = new Date(1950, 0),
   endMonth = new Date(2050, 11),
