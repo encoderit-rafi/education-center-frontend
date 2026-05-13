@@ -8,6 +8,12 @@ import {
 } from "@/components/blocks/cards/base-card";
 import GradientBox from "@/components/blocks/gradient-box";
 import { buttonVariants } from "@/components/ui/button";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
@@ -39,15 +45,6 @@ const OTHER_EXAMS = [
       "Various professional certification and credentialing exams delivered securely through Kryterion's testing network. Contact us for available titles and scheduling.",
     href: "/contact",
   },
-  {
-    id: "skills-for-english",
-    initial: "S",
-    provider: "Pearson",
-    name: "Skills for English (SELT)",
-    description:
-      "UK Home Office-approved Secure English Language Test for visa and immigration purposes. Available at levels A1 to C2, two-skill or four-skill.",
-    href: "/exams/skills-for-english",
-  },
 ];
 
 export default function OtherExamsPage() {
@@ -67,24 +64,52 @@ export default function OtherExamsPage() {
           scheduling.
         </p>
 
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-2 mt-20 max-w-4xl mx-auto">
+        <Accordion
+          type="single"
+          collapsible
+          className="w-full max-w-4xl mx-auto mt-20 space-y-4"
+        >
           {OTHER_EXAMS.map((exam, index) => (
-            <BaseCard key={exam.id} className="p-6 h-full">
-              <div className="flex items-center gap-3">
-                <BaseCardIcon className="rounded-full size-9 text-lg font-bold">
-                  {index + 1}
-                </BaseCardIcon>
-                <div className="h-px flex-1 bg-red-50" />
-              </div>
-
-              <div className="space-y-1">
-                <BaseCardTitle>{exam.name}</BaseCardTitle>
-              </div>
-
-              <BaseCardDescription>{exam.description}</BaseCardDescription>
-            </BaseCard>
+            <AccordionItem
+              key={exam.id}
+              value={exam.id}
+              className="bg-white border border-outline/10 rounded-2xl px-6 overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+            >
+              <AccordionTrigger className="hover:no-underline py-6">
+                <div className="flex items-center gap-6 text-left">
+                  <BaseCardIcon className="rounded-full size-12 text-lg font-bold shrink-0">
+                    {index + 1}
+                  </BaseCardIcon>
+                  <div className="space-y-1">
+                    <h3 className="font-bold text-secondary text-xl tracking-tight">
+                      {exam.name}
+                    </h3>
+                    <p className="text-[10px] text-primary font-black uppercase tracking-[0.2em]">
+                      Authorized Provider: {exam.provider}
+                    </p>
+                  </div>
+                </div>
+              </AccordionTrigger>
+              <AccordionContent className="pb-8">
+                <div className="pl-18">
+                  <p className="text-slate-500 leading-relaxed mb-8 max-w-2xl">
+                    {exam.description}
+                  </p>
+                  <Link
+                    href={exam.href}
+                    className={buttonVariants({
+                      variant: "outline",
+                      className: "rounded-full group px-6",
+                    })}
+                  >
+                    Learn More & Book
+                    <ArrowRight className="ml-2 size-4 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </div>
+              </AccordionContent>
+            </AccordionItem>
           ))}
-        </div>
+        </Accordion>
       </div>
     </div>
   );
