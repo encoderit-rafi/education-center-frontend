@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { FEES_DATA } from "@/data";
 import { cn } from "@/lib/utils";
+import { PriceDisplay } from "@/components/ui/price-display";
 import { ArrowRight, Calendar } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -63,14 +64,10 @@ export default async function page({
                         </Badge>
                       </div>
                       <div className="flex items-baseline gap-3">
-                        <div className="flex items-baseline gap-1">
-                          <span className="text-3xl font-black text-primary">
-                            {discountedPrice}
-                          </span>
-                        </div>
+                        <PriceDisplay amount={discountedPrice} className="text-3xl" />
                         {course.general_discount > 0 && (
-                          <span className="text-sm text-slate-400 line-through decoration-slate-300">
-                            {course.price} {course.currency}
+                          <span className="text-sm text-slate-400 line-through decoration-slate-300 flex items-center gap-1">
+                            <PriceDisplay amount={course.price} iconClassName="h-[0.7em]" />
                           </span>
                         )}
                       </div>

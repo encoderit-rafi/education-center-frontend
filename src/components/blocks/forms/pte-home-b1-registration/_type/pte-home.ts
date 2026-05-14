@@ -61,6 +61,7 @@ export const PteHomeB1Schema = z.object({
     documentNumberConfirmed: z.boolean().refine(val => val === true, "Please confirm your document number"),
     documentNumber: requiredString("ID number is required"),
     selectedCourse: z.string().optional(),
+    selectedWorkshop: z.string().optional(),
     
     // Document Uploads
     passportCopy: z.any().refine((val) => !!val, "Passport copy is required"),

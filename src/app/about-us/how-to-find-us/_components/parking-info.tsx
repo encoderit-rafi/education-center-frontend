@@ -1,11 +1,12 @@
 import { Info, Clock, CreditCard } from "lucide-react";
+import { PriceDisplay } from "@/components/ui/price-display";
 
 export function ParkingInfo() {
   return (
     <section className="py-24 bg-[#A11D1D] text-white relative overflow-hidden">
       {/* Decorative Background */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-[80px]" />
-      
+
       <div className="container px-6 mx-auto sm:px-12 lg:px-24 relative z-10">
         <div className="max-w-4xl mx-auto">
           <div className="space-y-4 mb-16 text-center">
@@ -44,7 +45,9 @@ export function ParkingInfo() {
                 </div>
                 <div className="flex items-center justify-between p-4 bg-gray-50 rounded-xl border border-gray-100">
                   <span className="font-bold text-[#1F1F1F]">Chargeable</span>
-                  <span className="text-gray-900 font-black uppercase text-xs tracking-widest">AED 11 / HR</span>
+                  <span className="text-gray-900 font-black uppercase text-xs tracking-widest flex items-center gap-1">
+                    <PriceDisplay amount={11} /> / HR
+                  </span>
                 </div>
                 <p className="text-sm italic opacity-80">Permits are given by the building security guard and paid on exit.</p>
               </div>
@@ -60,7 +63,12 @@ export function ParkingInfo() {
             <div className="space-y-2">
               <h5 className="text-xl font-bold font-heading">On-Street Parking</h5>
               <p className="text-white/70 leading-relaxed">
-                Paid on-street parking is available at <span className="text-white font-bold">AED 4 per hour</span>. Payment via SMS or coins. *Seasonal pre-paid parking cards are not accepted.
+                Paid on-street parking is available at{" "}
+                <span className="text-white font-bold flex items-center gap-1 inline-flex">
+                  <PriceDisplay amount={4} /> per hour
+                </span>
+                . Payment via SMS or coins. *Seasonal pre-paid parking cards are
+                not accepted.
               </p>
             </div>
           </div>

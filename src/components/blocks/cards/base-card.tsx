@@ -103,7 +103,7 @@ const BaseCardList = ({
   checked = false,
   className,
 }: {
-  items: string[];
+  items: (string | React.ReactNode)[];
   checked?: boolean;
   className?: string;
 }) => {

@@ -1,24 +1,21 @@
 "use client";
 
 import React from "react";
-import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import BaseNoteBox from "@/components/base-note-box";
-import Stepper from "@/components/stepper";
-
 import { PriceDisplay } from "@/components/ui/price-display";
 
-const NOTICES: (string | React.ReactNode)[] = [
-  "The PTE Core Test registration service is offered by The Exam Preparation & Testing House FZCO for the convenience of the test-takers. We hold no control or responsibility regarding any issues related to test results, scoring or other. We have no involvement in the test itself.",
+const A1_NOTICES: (string | React.ReactNode)[] = [
+  "The PTE Home A1 Test registration service is offered by The Exam Preparation & Testing House LLC for the convenience of the test-takers. We hold no control or responsibility regarding any issues related to test results, scoring or other. We have no involvement in the test itself.",
   <span key="1">
     The registration service is entirely voluntary and candidates can book
     their test at the center directly through Pearson without paying for the
-    additional fee.    Any candidate who wishes to use TEPTH registration
+    additional fee. Any candidate who wishes to use TEPTH registration
     service offered by our staff will be charged an additional{" "}
     <span className="font-bold text-primary">
       <PriceDisplay amount={100} /> (service charge)
     </span>{" "}
-    on top of the PTE Core Test fee.
+    on top of the PTE Home A1 Test fee.
   </span>,
   "The test center bears responsibility of any incorrect information filled out during registration by one of our staff.",
   "Candidates registering using this service and others who register themselves online will be treated the same while taking the test at our center.",
@@ -33,14 +30,12 @@ export function TermsStep({ onNext }: TermsStepProps) {
   return (
     <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
       <BaseNoteBox
-        title="Terms and Conditions"
-        notes={NOTICES}
+        title="PTE Home A1 Terms and Conditions"
+        notes={A1_NOTICES}
       />
 
       <div className="mt-8 flex justify-end">
-        <Button
-          onClick={onNext}
-        >
+        <Button onClick={onNext}>
           I Agree & Continue
         </Button>
       </div>

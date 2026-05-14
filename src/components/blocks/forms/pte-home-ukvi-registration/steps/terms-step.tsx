@@ -4,9 +4,20 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import BaseNoteBox from "@/components/base-note-box";
 
-const UKVI_NOTICES: string[] = [
-  "The PTE Academic UKVI Test registration service is offered by The Exam Preparation & Testing House FZCO for the convenience of the test-takers. We hold no control or responsibility regarding any issues related to test results, scoring or other. We have no involvement in the test itself.",
-  "The registration service is entirely voluntary and candidates can book their test at the center directly through Pearson without paying for the additional fee. Any candidate who wishes to use TEPTH registration service offered by our staff will be charged an additional AED 100 (service charge) on top of the PTE Academic UKVI Test fee.",
+import { PriceDisplay } from "@/components/ui/price-display";
+
+const UKVI_NOTICES: (string | React.ReactNode)[] = [
+  "The PTE Academic UKVI Test registration service is offered by The Exam Preparation & Testing House LLC for the convenience of the test-takers. We hold no control or responsibility regarding any issues related to test results, scoring or other. We have no involvement in the test itself.",
+  <span key="1">
+    The registration service is entirely voluntary and candidates can book
+    their test at the center directly through Pearson without paying for the
+    additional fee. Any candidate who wishes to use TEPTH registration
+    service offered by our staff will be charged an additional{" "}
+    <span className="font-bold text-primary">
+      <PriceDisplay amount={100} /> (service charge)
+    </span>{" "}
+    on top of the PTE Academic UKVI Test fee.
+  </span>,
   "The test center bears responsibility of any incorrect information filled out during registration by one of our staff.",
   "Candidates registering using this service and others who register themselves online will be treated the same while taking the test at our center.",
   "If you need special arrangements for the test, please do not complete this online form and contact us to assist your further.",

@@ -22,12 +22,12 @@ import {
   FieldError,
   FieldLabel,
 } from "@/components/ui/field";
-import { TPteHomeUkviFormSchema } from "../_type";
+import { TPteHomeA1FormSchema } from "../_type";
 import { PriceDisplay } from "@/components/ui/price-display";
 
 interface RegistrationFormStepProps {
-  form: UseFormReturn<TPteHomeUkviFormSchema>;
-  onSubmit: (data: TPteHomeUkviFormSchema) => void;
+  form: UseFormReturn<TPteHomeA1FormSchema>;
+  onSubmit: (data: TPteHomeA1FormSchema) => void;
   onInvalid: (errors: any) => void;
   onBack: () => void;
   languages: any[];
@@ -187,7 +187,7 @@ export function RegistrationFormStep({
       </div>
 
       {/* Section 2: Contact Details */}
-      <div className="pt-8 border-t border-slate-100 space-y-8">
+      <div className="pt-8 border-t border-slate-100 space-y-6">
         <div className="flex items-center gap-2 text-slate-400 mb-4">
           <User className="size-5" />
           <h3 className="text-lg font-bold tracking-tight text-slate-800">
@@ -278,8 +278,8 @@ export function RegistrationFormStep({
                     htmlFor={opt.id}
                     className={cn(
                       "flex items-center space-x-3 p-3 rounded-xl border transition-all bg-white font-medium cursor-pointer",
-                      formData.idType === opt.id
-                        ? "border-primary bg-primary/5 shadow-sm"
+                      formData.idType === opt.id 
+                        ? "border-primary bg-primary/5 shadow-sm" 
                         : "border-slate-100 hover:border-slate-200"
                     )}
                   >
@@ -323,6 +323,7 @@ export function RegistrationFormStep({
               <FieldError errors={[errors.countryOfCitizenship]} />
             </FieldContent>
           </Field>
+
           <Field data-invalid={!!errors.idDocument}>
             <FieldLabel required>
               Attach a valid copy of Passport / Emirates ID:
@@ -450,7 +451,7 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.reasonForTaking} className="md:col-span-2">
-            <FieldLabel required>Why are you taking PTE Academic UKVI?</FieldLabel>
+            <FieldLabel required>Why are you taking PTE Home A1?</FieldLabel>
             <FieldContent>
               <SearchableDropdown
                 options={[
@@ -486,7 +487,7 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.takenBefore}>
-            <FieldLabel required>Taken PTE Academic UKVI before?</FieldLabel>
+            <FieldLabel required>Taken PTE Home A1 before?</FieldLabel>
             <FieldContent className="mt-2">
               <RadioGroup
                 className="grid grid-cols-2 gap-3"
@@ -570,13 +571,56 @@ export function RegistrationFormStep({
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <Field>
+            <FieldLabel>Courses</FieldLabel>
+            <FieldContent>
+              <SearchableDropdown
+                options={[
+                  { label: "None", value: "" },
+                  ...coursesData.map((c: any) => ({
+                    label: c.label,
+                    description: (
+                      <PriceDisplay amount={c.price} minimumFractionDigits={0} maximumFractionDigits={0} />
+                    ),
+                    value: c.id,
+                  })),
+                ]}
+                placeholder="Select a course"
+                value={formData.selectedCourse}
+                onChange={(val) => setValue("selectedCourse", val)}
+              />
+            </FieldContent>
+          </Field>
+        </div>
+
+        <BaseNoteBox
+          title="Enjoy These Free Benefits:"
+          notes={[
+            "Save more when you book your exam and register for the course with TEPTH and pay online on our website.",
+            "Free Prep. Material",
+            "Free Consultation",
+            "Free Mock Test",
+          ]}
+        />
+      </div>
+
+      {/* Section 5: Add-on Services */}
+      <div className="pt-8 border-t border-slate-100 space-y-6">
+        <div className="flex items-center gap-2 text-slate-400 mb-4">
+          <BookOpen className="size-5" />
+          <h3 className="text-lg font-bold tracking-tight text-slate-800">
+            Add-on Services
+          </h3>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="space-y-2">
             <Label className="text-sm font-medium text-slate-700">Courses</Label>
             <SearchableDropdown
               options={[
                 { label: "None", value: "" },
                 ...coursesData.map((c: any) => ({
-                  label: c.name,
+                  label: c.name || c.label,
                   description: (
                     <PriceDisplay amount={c.price} minimumFractionDigits={0} maximumFractionDigits={0} />
                   ),
@@ -608,16 +652,6 @@ export function RegistrationFormStep({
             />
           </div>
         </div>
-
-        <BaseNoteBox
-          title="Enjoy These Free Benefits:"
-          notes={[
-            "Save more when you book your exam and register for the course with TEPTH and pay online on our website.",
-            "Free Prep. Material",
-            "Free Consultation",
-            "Free Mock Test",
-          ]}
-        />
       </div>
 
       <div className="pt-8 border-t border-slate-100 space-y-6">
@@ -650,7 +684,7 @@ export function RegistrationFormStep({
       </div>
 
       <div className="flex justify-between pt-12 border-t border-slate-100 mt-12">
-        <Button type="button" onClick={onBack}>
+        <Button type="button" variant="outline" onClick={onBack}>
           Back
         </Button>
         <Button type="submit">

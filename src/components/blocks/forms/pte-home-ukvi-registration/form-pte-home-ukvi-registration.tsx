@@ -23,6 +23,13 @@ const PTE_UKVI_COURSES = [
   { id: "online", name: "Private one-to-one (Online)", price: 3850 },
 ];
 
+const PTE_UKVI_WORKSHOPS = [
+  { id: "workshop_2", name: "Workshop 2 Hours", price: 600 },
+  { id: "workshop_4", name: "Workshop 4 Hours", price: 1000 },
+  { id: "workshop_6", name: "Workshop 6 Hours", price: 1350 },
+  { id: "workshop_8", name: "Workshop 8 Hours", price: 1600 },
+];
+
 const EXAM_FEE = 1450;
 const SERVICE_FEE = 100;
 
@@ -33,10 +40,12 @@ export default function FormPTEHomeUKVIRegistration() {
     resolver: zodResolver(RefinedPteHomeUkviSchema),
     defaultValues: {
       givenNames: "",
+      middleNames: "",
       noGivenNames: false,
       surnames: "",
       noSurname: false,
       emailUsername: "",
+      confirmEmail: "",
       dateOfBirth: undefined,
       gender: "",
       placeOfBirth: "",
@@ -64,7 +73,8 @@ export default function FormPTEHomeUKVIRegistration() {
       dataSharingAgreed: true,
       bookingTermsAgreed: true,
       selectedCourse: "",
-      passportCopy: undefined,
+      selectedWorkshop: "",
+      idDocument: undefined,
       infoCorrect: false,
       examDate: undefined,
       examTime: "",
@@ -85,13 +95,19 @@ export default function FormPTEHomeUKVIRegistration() {
       subtotal += selectedCourseData.price;
     }
     
+    const selectedWorkshopData = PTE_UKVI_WORKSHOPS.find(w => w.id === formData.selectedWorkshop);
+    if (selectedWorkshopData) {
+      subtotal += selectedWorkshopData.price;
+    }
+    
     const vat = subtotal * 0.05;
     return {
       baseFee: EXAM_FEE,
       serviceFee: SERVICE_FEE,
       vat: vat,
       total: subtotal + vat,
-      selectedCourseData
+      selectedCourseData,
+      selectedWorkshopData: PTE_UKVI_WORKSHOPS.find(w => w.id === formData.selectedWorkshop)
     };
   };
 
@@ -159,6 +175,7 @@ export default function FormPTEHomeUKVIRegistration() {
               onBack={() => goToStep(1)}
               languages={languages}
               coursesData={PTE_UKVI_COURSES}
+              workshopsData={PTE_UKVI_WORKSHOPS}
             />
           )}
 
@@ -174,6 +191,7 @@ export default function FormPTEHomeUKVIRegistration() {
               vat={pricing.vat}
               total={pricing.total}
               selectedCourseData={pricing.selectedCourseData}
+              selectedWorkshopData={pricing.selectedWorkshopData}
             />
           )}
         </Form>

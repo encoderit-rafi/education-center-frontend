@@ -11,14 +11,14 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { UseFormReturn } from "react-hook-form";
-import { TPteHomeUkviFormSchema } from "../_type";
+import { TPteHomeA1FormSchema } from "../_type";
 import Payment from "@/components/blocks/payment";
 import { PriceDisplay } from "@/components/ui/price-display";
 import Stepper from "@/components/stepper";
 
 interface ReviewStepProps {
-  data: TPteHomeUkviFormSchema;
-  form: UseFormReturn<TPteHomeUkviFormSchema>;
+  data: TPteHomeA1FormSchema;
+  form: UseFormReturn<TPteHomeA1FormSchema>;
   onEdit: () => void;
   onSubmit: (e?: React.BaseSyntheticEvent) => Promise<void>;
   onInvalid: (errors: any) => void;
@@ -302,7 +302,7 @@ export function ReviewStep({
 
             <div className="space-y-4">
               <div className="flex justify-between text-sm">
-                <span className="text-slate-500 font-medium">PTE Academic UKVI Exam</span>
+                <span className="text-slate-500 font-medium">PTE Home A1 Exam</span>
                 <PriceDisplay amount={baseFee} className="font-bold text-slate-900" />
               </div>
 
@@ -314,7 +314,7 @@ export function ReviewStep({
               {data.selectedCourse && selectedCourseData && (
                 <div className="flex justify-between text-sm">
                   <span className="text-slate-500 font-medium">
-                    Course: {selectedCourseData.name}
+                    Course: {selectedCourseData.name || selectedCourseData.label}
                   </span>
                   <PriceDisplay
                     amount={selectedCourseData.price}

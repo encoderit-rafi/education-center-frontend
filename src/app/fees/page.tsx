@@ -12,6 +12,8 @@ import {
   ShieldCheck,
   Sparkles,
 } from "lucide-react";
+import { PriceDisplay } from "@/components/ui/price-display";
+import { AED } from "@/components/ui/aed";
 import FreeConsultation from "../free-consultation/_components/free-consultation";
 import {
   BaseCard,
@@ -38,7 +40,7 @@ interface ExtraFee {
 }
 
 interface ExamInfo {
-  note?: string;
+  note?: string | React.ReactNode;
   acceptedIds?: string[];
   fees?: ExamFee[];
   extraFees?: {
@@ -72,7 +74,11 @@ export const EXAM_FEES: EXAM_FEES[] = [
     id: "ielts",
     name: "IELTS",
     exam: {
-      note: "Exams and fees (including 100 AED service fee)",
+      note: (
+        <span className="flex items-center gap-1">
+          Exams and fees (including <PriceDisplay amount={100} /> service fee)
+        </span>
+      ),
       acceptedIds: ["Passport", "Emirates ID (must match registration ID)"],
       fees: [
         {
@@ -133,7 +139,11 @@ export const EXAM_FEES: EXAM_FEES[] = [
     id: "pte",
     name: "PTE",
     exam: {
-      note: "Including 100 AED service fee",
+      note: (
+        <span className="flex items-center gap-1">
+          Including <PriceDisplay amount={100} /> service fee
+        </span>
+      ),
       acceptedIds: ["Passport"],
       fees: [
         {
@@ -572,8 +582,12 @@ export default function FeesPage() {
                 </div>
                 <BaseCardList
                   items={[
-                    `Exam Fee: ${card.exam_fee} AED`,
-                    `Service Charge: ${card.service_fee} AED`,
+                    <span key="1" className="flex items-center gap-1">
+                      Exam Fee: <PriceDisplay amount={card.exam_fee} />
+                    </span>,
+                    <span key="2" className="flex items-center gap-1">
+                      Service Charge: <PriceDisplay amount={card.service_fee} />
+                    </span>,
                   ]}
                 />
               </BaseCard>

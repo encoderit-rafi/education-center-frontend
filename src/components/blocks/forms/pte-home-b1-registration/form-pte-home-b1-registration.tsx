@@ -34,12 +34,20 @@ import { PhoneInput } from "@/components/ui/phone-input";
 import { Checkbox } from "@/components/ui/checkbox";
 import Payment from "../../payment";
 import { ExamDateSelector } from "@/components/blocks/calendar-booking/exam-date-selector";
+import { PriceDisplay } from "@/components/ui/price-display";
 
 const pteCourses = [
   { id: "group", label: "Group (In-person classroom-based course)", price: 1850 },
   { id: "semi-private", label: "Semi-Private (In-person classroom-based)", price: 2850 },
   { id: "private", label: "Private one-to-one (In-person classroom)", price: 4850 },
   { id: "online", label: "Private one-to-one (Online course)", price: 3850 },
+];
+
+const pteWorkshops = [
+  { id: "workshop_2", name: "Workshop 2 Hours", price: 600 },
+  { id: "workshop_4", name: "Workshop 4 Hours", price: 1000 },
+  { id: "workshop_6", name: "Workshop 6 Hours", price: 1350 },
+  { id: "workshop_8", name: "Workshop 8 Hours", price: 1600 },
 ];
 
 export default function FormPTEHomeB1Registration() {
@@ -83,6 +91,7 @@ export default function FormPTEHomeB1Registration() {
       documentNumberConfirmed: false,
       documentNumber: "",
       selectedCourse: "",
+      selectedWorkshop: "",
       passportCopy: undefined,
       userPhoto: undefined,
       infoCorrect: false,
@@ -96,13 +105,11 @@ export default function FormPTEHomeB1Registration() {
   const watchTakenBefore = watch("takenBefore");
 
   const selectedCourseData = pteCourses.find(c => c.id === formData.selectedCourse);
-
-  const EXAM_FEE = 1450;
-  const SERVICE_FEE = 5;
-  const VAT_RATE = 0.05;
-
+  const selectedWorkshopData = pteWorkshops.find(w => w.id === formData.selectedWorkshop);
   const coursePrice = selectedCourseData?.price || 0;
-  const subtotal = EXAM_FEE + SERVICE_FEE + coursePrice;
+  const workshopPrice = selectedWorkshopData?.price || 0;
+
+  const subtotal = EXAM_FEE + SERVICE_FEE + coursePrice + workshopPrice;
   const tax = subtotal * VAT_RATE;
   const total = subtotal + tax;
 
@@ -134,7 +141,7 @@ export default function FormPTEHomeB1Registration() {
       case 2: return ["givenNames", "noGivenNames", "surnames", "noSurname", "emailUsername", "dateOfBirth", "gender", "placeOfBirth", "countryOfBirth", "countryOfCitizenship", "countryOfResidence", "address", "city", "mobileNumber", "readyToBook"];
       case 3: return ["idType", "idCountryOfIssue", "documentNumber", "passportCopy", "idPolicyRead", "documentNumberConfirmed"];
       case 4: return ["homeLanguage", "planningCountry", "currentSituation", "reasonForTaking", "studyLevel", "occupationSector", "referralSource", "takenBefore", "takenWithinTwoYears", "hasExistingAccount", "dataSharingAgreed", "bookingTermsAgreed", "marketingConsent"];
-      case 5: return ["selectedCourse"];
+      case 5: return ["selectedCourse", "selectedWorkshop"];
       case 6: return ["infoCorrect"];
       default: return [];
     }
@@ -478,25 +485,50 @@ export default function FormPTEHomeB1Registration() {
             {step === 5 && (
               <div className="space-y-12 animate-in fade-in slide-in-from-right-8 duration-500">
                 <div className="space-y-8">
-                  <h2 className="text-xl font-black text-gray-900 tracking-tight">Preparation Courses</h2>
-                  <FormField control={control} name="selectedCourse" render={({ field }) => (
-                    <FormItem className="space-y-6">
-                      <FormControl>
-                        <RadioGroup onValueChange={field.onChange} value={field.value} className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                          {pteCourses.map(course => (
-                            <div key={course.id} onClick={() => field.onChange(course.id)} className={cn("relative p-6 rounded-2xl border-2 transition-all cursor-pointer group flex flex-col items-center text-center gap-4", field.value === course.id ? "border-[#A11D1D] bg-[#A11D1D]/5" : "border-slate-100 bg-white hover:border-slate-200")}>
-                              <div className={cn("w-12 h-12 rounded-full flex items-center justify-center transition-all", field.value === course.id ? "bg-[#A11D1D] text-white shadow-lg shadow-[#A11D1D]/20" : "bg-slate-50 text-slate-400 group-hover:bg-slate-100")}>
-                                <BookOpen className="w-6 h-6" />
-                              </div>
-                              <div><h4 className="font-black text-gray-900 mb-1">{course.label}</h4><p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">AED {course.price.toLocaleString()}</p></div>
-                              <RadioGroupItem value={course.id} className="sr-only" />
-                            </div>
-                          ))}
-                        </RadioGroup>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )} />
+                  <div className="flex items-center gap-2 text-slate-400 mb-4">
+                    <BookOpen className="size-5" />
+                    <h2 className="text-xl font-black text-gray-900 tracking-tight">Add-on Services</h2>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="space-y-2">
+                      <Label className="text-sm font-medium text-slate-700">Courses</Label>
+                      <SearchableDropdown
+                        options={[
+                          { label: "None", value: "" },
+                          ...pteCourses.map((c) => ({
+                            label: c.label,
+                            description: (
+                              <PriceDisplay amount={c.price} minimumFractionDigits={0} maximumFractionDigits={0} />
+                            ),
+                            value: c.id,
+                          })),
+                        ]}
+                        placeholder="None"
+                        value={formData.selectedCourse}
+                        onChange={(val) => setValue("selectedCourse", val)}
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label className="text-sm font-medium text-slate-700">Workshops</Label>
+                      <SearchableDropdown
+                        options={[
+                          { label: "None", value: "" },
+                          ...pteWorkshops.map((w) => ({
+                            label: w.name,
+                            description: (
+                              <PriceDisplay amount={w.price} minimumFractionDigits={0} maximumFractionDigits={0} />
+                            ),
+                            value: w.id,
+                          })),
+                        ]}
+                        placeholder="None"
+                        value={formData.selectedWorkshop}
+                        onChange={(val) => setValue("selectedWorkshop", val)}
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
             )}
@@ -506,9 +538,32 @@ export default function FormPTEHomeB1Registration() {
                 <div className="space-y-8">
                   <h2 className="text-xl font-black text-gray-900 tracking-tight">Review your registration</h2>
                   <div className="bg-slate-50 rounded-2xl p-8 space-y-6">
-                    <div className="flex justify-between text-sm"><span className="text-gray-500 font-medium">Exam Fee:</span><span className="font-black text-gray-900">AED {EXAM_FEE.toLocaleString()}.00</span></div>
-                    {coursePrice > 0 && (<div className="flex justify-between text-sm"><span className="text-gray-500 font-medium">Preparation Course:</span><span className="font-black text-gray-900">AED {coursePrice.toLocaleString()}.00</span></div>)}
-                    <div className="flex justify-between text-sm pt-4 border-t border-slate-200 font-black"><span className="text-lg text-gray-900">Total:</span><span className="text-2xl text-[#A11D1D]">AED {total.toLocaleString(undefined, { minimumFractionDigits: 2 })}</span></div>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-500 font-medium">Exam Fee:</span>
+                      <span className="font-black text-gray-900 flex items-center gap-1">
+                        <PriceDisplay amount={EXAM_FEE} />
+                      </span>
+                    </div>
+                    {coursePrice > 0 && (
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-500 font-medium">Preparation Course:</span>
+                        <span className="font-black text-gray-900 flex items-center gap-1">
+                          <PriceDisplay amount={coursePrice} />
+                        </span>
+                      </div>
+                    )}
+                    {workshopPrice > 0 && (
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-500 font-medium">Workshop:</span>
+                        <span className="font-black text-gray-900 flex items-center gap-1">
+                          <PriceDisplay amount={workshopPrice} />
+                        </span>
+                      </div>
+                    )}
+                    <div className="flex justify-between text-sm pt-4 border-t border-slate-200 font-black">
+                      <span className="text-lg text-gray-900">Total:</span>
+                      <PriceDisplay amount={total} className="text-2xl text-[#A11D1D]" />
+                    </div>
                   </div>
                   <FormField control={control} name="infoCorrect" render={({ field }) => (
                     <FormItem className="flex items-start space-x-4 p-6 rounded-2xl bg-[#A11D1D]/5 border border-[#A11D1D]/10">

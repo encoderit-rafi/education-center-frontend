@@ -8,7 +8,7 @@ export default function BaseNoteBox({
   className,
 }: {
   title: string;
-  notes: string[];
+  notes: (string | React.ReactNode)[];
   className?: string;
 }) {
   return (

@@ -1,4 +1,6 @@
+import { AED } from "@/components/ui/aed";
 import Link from "next/link";
+
 
 const SECTIONS = [
     { id: "intro", title: "Introduction" },
@@ -33,7 +35,7 @@ export default function TermsAndConditionsPage() {
             <section className="py-20">
                 <div className="container px-6 mx-auto sm:px-12 lg:px-24">
                     <div className="flex flex-col lg:flex-row gap-16">
-                        
+
                         {/* Sticky Sidebar */}
                         <aside className="lg:w-1/4">
                             <div className="sticky top-24 space-y-8">
@@ -67,7 +69,7 @@ export default function TermsAndConditionsPage() {
                         {/* Content Body */}
                         <div className="lg:w-3/4 max-w-none">
                             <div className="prose prose-slate prose-lg max-w-none prose-headings:font-heading prose-headings:font-black prose-headings:tracking-tighter prose-headings:text-gray-900 prose-p:text-gray-600 prose-p:leading-relaxed prose-li:text-gray-600 prose-strong:text-gray-900">
-                                
+
                                 <section id="intro" className="scroll-mt-24 mb-16">
                                     <h2 className="text-4xl mb-8">Introduction</h2>
                                     <p>Welcome to TEPTH Website.</p>
@@ -133,7 +135,7 @@ export default function TermsAndConditionsPage() {
                                     <ul>
                                         <li>Practice tests are non-refundable once purchased.</li>
                                         <li>Software language courses and practice tests cannot be exchanged or returned once a purchase order has been placed.</li>
-                                        <li>Registration fee of AED 100 is included in the course fee.</li>
+                                        <li>Registration fee of <AED className="h-3 inline-block" /> 100 is included in the course fee.</li>
                                     </ul>
                                 </section>
 

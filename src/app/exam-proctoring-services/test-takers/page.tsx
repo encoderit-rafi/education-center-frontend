@@ -16,6 +16,8 @@ import {
   flexRender,
   createColumnHelper,
 } from "@tanstack/react-table";
+import { AED } from "@/components/ui/aed";
+import { PriceDisplay } from "@/components/ui/price-display";
 
 type FeeEntry = {
   duration: string;
@@ -42,8 +44,11 @@ const columns = [
     header: "Fee",
     cell: (info) => (
       <div className="text-right">
-        <span className="text-xl font-black text-white">{info.getValue()}</span>
-        <span className="text-xs font-bold text-white ml-1">AED</span>
+        <PriceDisplay
+          amount={parseInt(info.getValue())}
+          className="text-xl font-black text-white"
+        />
+        <AED className="h-3 ml-1 text-white inline-block" />
       </div>
     ),
   }),

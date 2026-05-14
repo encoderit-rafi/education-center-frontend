@@ -16,6 +16,7 @@ import {
   BaseCardTitle,
 } from "@/components/blocks/cards/base-card";
 import { buttonVariants } from "@/components/ui/button";
+import { PriceDisplay } from "@/components/ui/price-display";
 import ExamWorkshopForm from "../_components/exam-workshop-form";
 
 export const toeflWorkshop = {
@@ -195,8 +196,7 @@ export default function ExamWorkshopsTOEFL() {
                 </BaseCardTitle>
                 
                 <div className="flex items-baseline gap-1 mb-6">
-                  <span className="text-sm font-bold text-slate-400">{w.currency}</span>
-                  <span className="text-3xl font-black text-slate-900">{w.price}</span>
+                  <PriceDisplay amount={w.price} />
                 </div>
 
                 <BaseCardDescription className="text-sm mb-6 line-clamp-none text-slate-600 font-medium">

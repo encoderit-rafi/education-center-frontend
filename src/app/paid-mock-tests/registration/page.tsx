@@ -44,6 +44,7 @@ import {
 } from "@/data";
 import { notFound, useSearchParams } from "next/navigation";
 import Stepper from "@/components/stepper";
+import { PriceDisplay } from "@/components/ui/price-display";
 
 const bookingSchema = z
   .object({
@@ -287,8 +288,7 @@ function PaidMockTestRegistrationForm({
                 <Stepper step={2}>
                   Payment{" "}
                   <span className="bg-primary/10 px-3 py-1 rounded-full text-sm font-semibold text-primary">
-                    {PRICE}{" "}
-                    <span className="font-normal text-xs">{CURRENCY}</span>
+                    <PriceDisplay amount={PRICE} />
                   </span>
                 </Stepper>
                 <Payment amount={PRICE} currency={CURRENCY} />
