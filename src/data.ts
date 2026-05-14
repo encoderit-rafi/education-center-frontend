@@ -333,7 +333,7 @@ export const SECONDARY_NAV: AppNavigationItem[] = [
     href: "/exam-proctoring-services",
     items: [
       { name: "Institutions", href: "/exam-proctoring-services/institutions" },
-      { name: "Test-Takers", href: "/exam-proctoring-services/test-takers" },
+      { name: "Candidates", href: "/exam-proctoring-services/candidates" },
     ],
   },
   {

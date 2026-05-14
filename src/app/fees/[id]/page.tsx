@@ -76,29 +76,19 @@ export default async function page({
                       </div>
                     </div>
 
-                    <BaseCardImportantInfo>
+                    {/* <BaseCardImportantInfo>
                       You get {course.special_discount}% on this course if you
                       book exam with TEPTH.
-                    </BaseCardImportantInfo>
+                    </BaseCardImportantInfo> */}
                     <div className="mt-3 grid grid-cols-2 gap-2">
                       <Link
-                        href={`/book-exams/${exam.id}`}
+                        href={`/exam-preparation-courses/registration?examId=${exam.id}&courseId=${course.id}&price=${course.price}&currency=${course.currency}`}
                         className={buttonVariants({
                           className: "w-full",
                         })}
                       >
                         <Calendar />
                         Register Now
-                      </Link>
-                      <Link
-                        href={`/exam-preparation-courses/registration?examId=${exam.id}&courseId=${course.id}&price=${course.price}&currency=${course.currency}`}
-                        className={buttonVariants({
-                          variant: "outline",
-                          className: "w-full",
-                        })}
-                      >
-                        Enroll in Course
-                        <ArrowRight />
                       </Link>
                     </div>
                   </BaseCard>

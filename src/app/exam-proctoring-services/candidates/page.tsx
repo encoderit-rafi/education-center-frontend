@@ -63,7 +63,7 @@ export default function TestTakersPage() {
         <div className="container px-6 mx-auto lg:px-24">
           <div className="max-w-4xl">
             <h1 className="text-4xl md:text-6xl font-black text-gray-900 tracking-tight uppercase leading-none mb-6">
-              FOR <span className="text-[#A11D1D]">TEST-TAKERS</span>
+              FOR <span className="text-primary">CANDIDATES</span>
             </h1>
             <p className="text-gray-500 text-base md:text-lg font-medium max-w-2xl leading-relaxed">
               Professional proctoring services for students from other
