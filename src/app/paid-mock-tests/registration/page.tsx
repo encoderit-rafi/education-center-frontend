@@ -59,7 +59,9 @@ const bookingSchema = z
     paymentMethod: z.literal("card"),
   })
   .superRefine((data, ctx) => {
-    const examDetail = EXAM_DETAILE_DATA.find((e) => e.id === data.mockTestId);
+    const examDetail = EXAM_DETAILE_DATA.find(
+      (e) => e.id === data.mockTestId,
+    ) as any;
     if (examDetail?.type === "items" && examDetail.items && !data.subExamId) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
@@ -106,9 +108,8 @@ function PaidMockTestRegistrationForm({
     },
   });
 
-  const examDetail = EXAM_DETAILE_DATA.find((e) => e.id === id);
-
   const selectedId = watch("mockTestId");
+  const examDetail = EXAM_DETAILE_DATA.find((e) => e.id === selectedId);
   const selectedDate = watch("date");
   const selectedTime = watch("timeSlot");
 
@@ -190,28 +191,36 @@ function PaidMockTestRegistrationForm({
                   </Field>
                 </div>
 
-                {examDetail?.type === "items" && examDetail.items && (
-                  <Field>
-                    <FieldLabel required>Exam Variant</FieldLabel>
-                    <FieldContent>
-                      <Select
-                        onValueChange={(val) => setValue("subExamId", val)}
-                      >
-                        <SelectTrigger className="w-full">
-                          <SelectValue placeholder="Select variant" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {examDetail.items.map((item) => (
-                            <SelectItem key={item.id} value={item.id}>
-                              {item.name}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                      <FieldError errors={[errors.subExamId]} />
-                    </FieldContent>
-                  </Field>
-                )}
+                {(() => {
+                  const items = (examDetail as any)?.items;
+                  if (examDetail?.type === "items" && Array.isArray(items)) {
+                    return (
+                      <Field>
+                        <FieldLabel required>Exam Variant</FieldLabel>
+                        <FieldContent>
+                          <Select
+                            onValueChange={(val: string | null) => {
+                              if (val) setValue("subExamId", val);
+                            }}
+                          >
+                            <SelectTrigger className="w-full">
+                              <SelectValue placeholder="Select variant" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              {items.map((item: any) => (
+                                <SelectItem key={item.id} value={item.id}>
+                                  {item.name}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                          <FieldError errors={[errors.subExamId]} />
+                        </FieldContent>
+                      </Field>
+                    );
+                  }
+                  return null;
+                })()}
 
                 <Field>
                   <FieldLabel required>Email</FieldLabel>
