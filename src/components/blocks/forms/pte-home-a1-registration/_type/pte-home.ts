@@ -15,10 +15,12 @@ const optionalString = z.string().optional().or(z.any().transform(v => String(v 
 export const PteHomeA1Schema = z.object({
     // Step 1: Personal Information
     givenNames: z.string().optional(),
+    middleNames: z.string().optional(),
     noGivenNames: z.boolean(),
     surnames: z.string().optional(),
     noSurname: z.boolean(),
     emailUsername: z.string().email("Invalid email/username").or(z.any().transform(v => String(v || ""))).pipe(z.string().email("Invalid email/username")),
+    confirmEmail: z.string().email("Please confirm your email").or(z.any().transform(v => String(v || ""))).pipe(z.string().email("Please confirm your email")),
     dateOfBirth: z.any().refine((val) => !!val, "Date of birth is required"),
     gender: z.string().min(1, "Gender is required"),
     placeOfBirth: z.string().min(1, "Place of birth is required"),
@@ -61,9 +63,10 @@ export const PteHomeA1Schema = z.object({
     documentNumberConfirmed: z.boolean().refine(val => val === true, "Please confirm your document number"),
     documentNumber: requiredString("ID number is required"),
     selectedCourse: z.string().optional(),
+    selectedWorkshop: z.string().optional(),
     
     // Document Uploads
-    passportCopy: z.any().refine((val) => !!val, "Passport copy is required"),
+    idDocument: z.any().refine((val) => !!val, "Passport copy is required"),
     userPhoto: z.any().optional(),
     
     // Final Confirmation
@@ -103,6 +106,9 @@ export const RefinedPteHomeA1Schema = PteHomeA1Schema.refine((data) => {
 }, {
     message: "Please select an option",
     path: ["hasExistingAccount"],
+}).refine((data) => data.emailUsername === data.confirmEmail, {
+    message: "Emails do not match",
+    path: ["confirmEmail"],
 });
 
 export type TPteHomeA1FormSchema = z.infer<typeof RefinedPteHomeA1Schema>;

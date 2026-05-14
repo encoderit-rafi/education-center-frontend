@@ -24,6 +24,7 @@ import FreeConsultation from "@/app/free-consultation/_components/free-consultat
 import { EXAM_PREPARATION_COURSES_DATA } from "@/data";
 import { notFound } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
+import { PriceDisplay } from "@/components/ui/price-display";
 
 export default async function ExamPreparationDynamicPage({
   params,
@@ -162,17 +163,10 @@ export default async function ExamPreparationDynamicPage({
                       </BaseCardTitle>
 
                       <div className="flex items-baseline gap-3">
-                        <div className="flex items-baseline gap-1">
-                          <span className="text-3xl font-black text-primary">
-                            {discountedPrice}
-                          </span>
-                          <span className="text-xs font-bold text-primary/60 uppercase">
-                            {course.currency}
-                          </span>
-                        </div>
+                        <PriceDisplay amount={discountedPrice} className="text-3xl" />
                         {course.general_discount > 0 && (
-                          <span className="text-sm text-slate-400 line-through decoration-slate-300">
-                            {course.price} {course.currency}
+                          <span className="text-sm text-slate-400 line-through decoration-slate-300 flex items-center gap-1">
+                            <PriceDisplay amount={course.price} iconClassName="h-[0.7em]" />
                           </span>
                         )}
                       </div>

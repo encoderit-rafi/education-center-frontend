@@ -121,8 +121,11 @@ export function RegistrationFormStep({
                 value={formData.dateOfBirth}
                 onChange={(date) => setValue("dateOfBirth", date as Date)}
                 disabled={(date) =>
-                  date <= new Date() || date < new Date("1900-01-01")
+                  date >= new Date() || date < new Date("1900-01-01")
                 }
+                fromYear={1900}
+                toYear={new Date().getFullYear()}
+                calendarClassName="[--calendar-accent:theme(colors.primary.DEFAULT)]"
                 placeholder="Select your date of birth"
                 aria-invalid={!!errors.dateOfBirth}
               />
@@ -222,14 +225,26 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.postalAddress1}>
-            <FieldLabel required>Postal Address</FieldLabel>
+            <FieldLabel required>Address Line 1</FieldLabel>
             <FieldContent>
               <Input
                 {...register("postalAddress1")}
-                placeholder="Street address"
+                placeholder="Street address, building, etc."
                 aria-invalid={!!errors.postalAddress1}
               />
               <FieldError errors={[errors.postalAddress1]} />
+            </FieldContent>
+          </Field>
+
+          <Field data-invalid={!!errors.postalAddress2}>
+            <FieldLabel>Address Line 2</FieldLabel>
+            <FieldContent>
+              <Input
+                {...register("postalAddress2")}
+                placeholder="Apartment, suite, unit, etc. (optional)"
+                aria-invalid={!!errors.postalAddress2}
+              />
+              <FieldError errors={[errors.postalAddress2]} />
             </FieldContent>
           </Field>
 
@@ -765,10 +780,10 @@ export function RegistrationFormStep({
                     label: c.name,
                     description: (
                       <span className="flex items-center gap-1">
-                        <PriceDisplay 
-                          amount={c.price * (1 - c.special_discount / 100)} 
-                          minimumFractionDigits={0} 
-                          maximumFractionDigits={0} 
+                        <PriceDisplay
+                          amount={c.price * (1 - c.special_discount / 100)}
+                          minimumFractionDigits={0}
+                          maximumFractionDigits={0}
                         />
                         <span>({c.special_discount}% OFF)</span>
                       </span>
@@ -866,14 +881,12 @@ export function RegistrationFormStep({
       {/* Form Actions */}
       <div className="mt-12 flex justify-between items-center pt-6 border-t border-slate-100">
         <Button
-          variant="ghost"
           type="button"
           onClick={onBack}
-          className="bg-primary hover:bg-primary/90 text-white px-4 h-10 rounded-xl font-bold transition-all disabled:opacity-50"
         >
           Back
         </Button>
-        <Button type="submit" className="bg-primary hover:bg-primary/90 text-white px-4 h-10 rounded-xl font-bold transition-all disabled:opacity-50">Next</Button>
+        <Button type="submit" >Next</Button>
       </div>
     </form>
   );

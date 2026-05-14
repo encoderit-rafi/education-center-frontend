@@ -38,6 +38,7 @@ import { courses, workshops } from "@/lib/data";
 import { BookOpen, Calendar as CalendarIcon, CheckSquare, Building2, Banknote } from "lucide-react";
 import Payment from "../../../payment";
 import { ExamDateSelector } from "@/components/blocks/calendar-booking/exam-date-selector";
+import { PriceDisplay } from "@/components/ui/price-display";
 
 
 export default function FormIELTSGeneralRegistration() {
@@ -1967,7 +1968,7 @@ export default function FormIELTSGeneralRegistration() {
                           <BookOpen className="w-4 h-4 text-indigo-600 mt-1" />
                           <div>
                             <p className="font-bold text-gray-900 text-sm">{selectedCourseData.name}</p>
-                            <p className="text-[10px] text-indigo-600 font-black uppercase tracking-widest">Selected Course • {selectedCourseData.price} {selectedCourseData.currency}</p>
+                            <p className="text-[10px] text-indigo-600 font-black uppercase tracking-widest flex items-center gap-1">Selected Course • <PriceDisplay amount={selectedCourseData.price} minimumFractionDigits={0} maximumFractionDigits={0} /></p>
                           </div>
                         </div>
                       ) : (
@@ -1979,7 +1980,7 @@ export default function FormIELTSGeneralRegistration() {
                           <CalendarIcon className="w-4 h-4 text-emerald-600 mt-1" />
                           <div>
                             <p className="font-bold text-gray-900 text-sm">{selectedWorkshopData.name}</p>
-                            <p className="text-[10px] text-emerald-600 font-black uppercase tracking-widest">Selected Workshop • {selectedWorkshopData.price} {selectedWorkshopData.currency}</p>
+                            <p className="text-[10px] text-emerald-600 font-black uppercase tracking-widest flex items-center gap-1">Selected Workshop • <PriceDisplay amount={selectedWorkshopData.price} minimumFractionDigits={0} maximumFractionDigits={0} /></p>
                           </div>
                         </div>
                       ) : (
@@ -1999,7 +2000,7 @@ export default function FormIELTSGeneralRegistration() {
                     <div className="flex justify-between text-sm">
                       <span className="text-gray-500 font-medium">IELTS Test Fee:</span>
                       <span className="font-black text-gray-900">
-                        {baseFee.toLocaleString()}.00 AED
+                        <PriceDisplay amount={baseFee} />
                       </span>
                     </div>
 
@@ -2007,7 +2008,7 @@ export default function FormIELTSGeneralRegistration() {
                       <div className="flex justify-between text-sm">
                         <span className="text-gray-500 font-medium">Preparation Course:</span>
                         <span className="font-black text-gray-900">
-                          {coursePrice.toLocaleString()}.00 AED
+                          <PriceDisplay amount={coursePrice} />
                         </span>
                       </div>
                     )}
@@ -2016,7 +2017,7 @@ export default function FormIELTSGeneralRegistration() {
                       <div className="flex justify-between text-sm">
                         <span className="text-gray-500 font-medium">Workshop Fee:</span>
                         <span className="font-black text-gray-900">
-                          {workshopPrice.toLocaleString()}.00 AED
+                          <PriceDisplay amount={workshopPrice} />
                         </span>
                       </div>
                     )}
@@ -2024,7 +2025,7 @@ export default function FormIELTSGeneralRegistration() {
                     <div className="flex justify-between text-sm">
                       <span className="text-gray-500 font-medium">Tax (5% VAT):</span>
                       <span className="font-black text-gray-900">
-                        {tax.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} AED
+                        <PriceDisplay amount={tax} />
                       </span>
                     </div>
 
@@ -2034,7 +2035,7 @@ export default function FormIELTSGeneralRegistration() {
                       </span>
                       <div className="text-right">
                         <span className="text-2xl font-black text-[#A11D1D]">
-                          {total.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} AED
+                          <PriceDisplay amount={total} />
                         </span>
                         <button
                           type="button"

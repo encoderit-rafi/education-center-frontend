@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { PriceDisplay } from "@/components/ui/price-display";
 import { Calendar } from "@/components/ui/calendar";
 import Payment from "@/components/blocks/payment";
 import exam_workshops from "@/lib/demo-data/exam-workshops";
@@ -163,7 +164,7 @@ export default function ExamWorkshopForm({
                   )}
                 </div>
                 <div className="text-2xl font-black text-slate-900">
-                  AED {w.price}
+                  <PriceDisplay amount={w.price} />
                 </div>
               </label>
             </div>

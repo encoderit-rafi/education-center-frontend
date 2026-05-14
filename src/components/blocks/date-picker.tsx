@@ -21,6 +21,9 @@ export interface DatePickerProps {
   className?: string;
   "aria-invalid"?: boolean;
   name?: string;
+  fromYear?: number;
+  toYear?: number;
+  calendarClassName?: string;
 }
 
 export function DatePicker({
@@ -31,6 +34,9 @@ export function DatePicker({
   className,
   "aria-invalid": ariaInvalid,
   name,
+  fromYear,
+  toYear,
+  calendarClassName,
 }: DatePickerProps) {
   return (
     <Popover>
@@ -61,6 +67,9 @@ export function DatePicker({
           selected={value}
           onSelect={onChange}
           disabled={disabled}
+          fromYear={fromYear}
+          toYear={toYear}
+          className={calendarClassName}
         />
       </PopoverContent>
     </Popover>

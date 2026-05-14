@@ -251,9 +251,9 @@ export const exams_types = [
       },
       {
         id: "pte_ukvi",
-        name: "PTE UKVI (SELT)",
+        name: "PTE UKVI",
         image: "/images/pte.png",
-        content: "PTE UKVI (SELT) Content",
+        content: "PTE UKVI Content",
         types: [
           {
             id: "pte_academic_ukvi",

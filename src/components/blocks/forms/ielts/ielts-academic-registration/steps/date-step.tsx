@@ -58,7 +58,7 @@ export function DateStep({
 
                   return isSunday || isPast;
                 }}
-                className="rounded-2xl border border-slate-100 shadow-sm p-4 bg-white"
+                className="rounded-2xl border border-slate-100 shadow-sm p-4 bg-white [--calendar-accent:theme(colors.primary.DEFAULT)]"
               />
               <FieldError errors={[error]} className="mt-4 text-center" />
             </FieldContent>
@@ -107,16 +107,14 @@ export function DateStep({
 
         <div className="mt-12 flex justify-between items-center pt-6 border-t border-slate-100">
           <Button
-            variant="ghost"
+
             onClick={onBack}
-            className="bg-primary hover:bg-primary/90 text-white px-4 h-10 rounded-xl font-bold transition-all disabled:opacity-50"
           >
             Back
           </Button>
           <Button
             onClick={onNext}
             disabled={!value || !timeSlot}
-            className="bg-primary hover:bg-primary/90 text-white px-4 h-10 rounded-xl font-bold transition-all disabled:opacity-50"
           >
             Next
           </Button>

@@ -19,13 +19,15 @@ function Calendar({
   showOutsideDays = false,
   captionLayout = "dropdown",
   buttonVariant = "ghost",
-  startMonth = new Date(1950, 0),
-  endMonth = new Date(2050, 11),
+  fromYear = 1900,
+  toYear = new Date().getFullYear() + 10,
   formatters,
   components,
   ...props
 }: React.ComponentProps<typeof DayPicker> & {
   buttonVariant?: React.ComponentProps<typeof Button>["variant"];
+  fromYear?: number;
+  toYear?: number;
 }) {
   const defaultClassNames = getDefaultClassNames();
 
@@ -39,8 +41,8 @@ function Calendar({
         className,
       )}
       captionLayout={captionLayout}
-      startMonth={startMonth}
-      endMonth={endMonth}
+      startMonth={new Date(fromYear, 0)}
+      endMonth={new Date(toYear, 11)}
       formatters={{
         formatMonthDropdown: (date) =>
           date.toLocaleString("en-US", { month: "short" }),
@@ -72,22 +74,22 @@ function Calendar({
           defaultClassNames.month_caption,
         ),
         dropdowns: cn(
-          "w-full flex items-center text-sm font-medium justify-center h-(--cell-size) gap-1.5",
+          "w-full flex items-center text-sm font-bold justify-center h-10 gap-2 mb-2 bg-slate-50 rounded-lg border border-slate-100",
           defaultClassNames.dropdowns,
         ),
         dropdown_root: cn(
-          "relative has-focus:border-ring border border-input shadow-xs has-focus:ring-ring/50 has-focus:ring-[3px] rounded-md",
+          "relative has-focus:border-primary border border-slate-200 shadow-sm has-focus:ring-primary/20 has-focus:ring-[3px] rounded-md bg-white transition-all",
           defaultClassNames.dropdown_root,
         ),
         dropdown: cn(
-          "absolute bg-popover inset-0 opacity-0",
+          "absolute inset-0 opacity-0 cursor-pointer z-10",
           defaultClassNames.dropdown,
         ),
         caption_label: cn(
-          "select-none font-medium",
+          "select-none font-bold text-slate-700",
           captionLayout === "label"
-            ? "text-sm"
-            : "rounded-md pl-2 pr-1 flex items-center gap-1 text-sm h-8 [&>svg]:text-muted-foreground [&>svg]:size-3.5",
+            ? "text-sm uppercase tracking-widest italic"
+            : "rounded-md px-2 flex items-center gap-1 text-xs h-7 [&>svg]:text-muted-foreground [&>svg]:size-3",
           defaultClassNames.caption_label,
         ),
         table: "w-full border-collapse",
@@ -213,7 +215,7 @@ function CalendarDayButton({
       data-range-end={modifiers.range_end}
       data-range-middle={modifiers.range_middle}
       className={cn(
-        "data-[selected-single=true]:bg-[#A11D1D] data-[selected-single=true]:text-white data-[range-middle=true]:bg-accent data-[range-middle=true]:text-accent-foreground data-[range-start=true]:bg-[#A11D1D] data-[range-start=true]:text-white data-[range-end=true]:bg-[#A11D1D] data-[range-end=true]:text-white group-data-[focused=true]/day:border-ring group-data-[focused=true]/day:ring-ring/50 flex aspect-square h-full w-full items-center justify-center gap-1 leading-none font-black text-base group-data-[focused=true]/day:relative group-data-[focused=true]/day:z-10 group-data-[focused=true]/day:ring-[3px] data-[range-end=true]:rounded-md data-[range-end=true]:rounded-r-md data-[range-middle=true]:rounded-none data-[range-start=true]:rounded-md data-[range-start=true]:rounded-l-md [&>span]:text-xs [&>span]:opacity-70",
+        "data-[selected-single=true]:bg-[var(--calendar-accent,#A11D1D)] data-[selected-single=true]:text-white data-[range-middle=true]:bg-accent data-[range-middle=true]:text-accent-foreground data-[range-start=true]:bg-[var(--calendar-accent,#A11D1D)] data-[range-start=true]:text-white data-[range-end=true]:bg-[var(--calendar-accent,#A11D1D)] data-[range-end=true]:text-white group-data-[focused=true]/day:border-ring group-data-[focused=true]/day:ring-ring/50 flex aspect-square h-full w-full items-center justify-center gap-1 leading-none font-black text-base group-data-[focused=true]/day:relative group-data-[focused=true]/day:z-10 group-data-[focused=true]/day:ring-[3px] data-[range-end=true]:rounded-md data-[range-end=true]:rounded-r-md data-[range-middle=true]:rounded-none data-[range-start=true]:rounded-md data-[range-start=true]:rounded-l-md [&>span]:text-xs [&>span]:opacity-70",
         defaultClassNames.day,
         className,
       )}

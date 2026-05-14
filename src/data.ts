@@ -54,7 +54,7 @@ export const EXAM_IDS_DATA = {
   },
   pte_ukvi: {
     id: "pte-ukvi",
-    name: "PTE UKVI (SELT)",
+    name: "PTE UKVI",
   },
   pte_academic_ukvi: {
     id: "pte-academic-ukvi",

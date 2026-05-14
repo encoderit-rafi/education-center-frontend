@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Car, ExternalLink, Printer } from "lucide-react";
 import { SectionHeader } from "@/components/ui/section-header";
 import { Button } from "@/components/ui/button";
+import { PriceDisplay } from "@/components/ui/price-display";
 
 export default function HowToFindUs() {
   return (
@@ -273,7 +274,11 @@ export default function HowToFindUs() {
                   </div>
                   <div className="space-y-5 pl-5">
                     <p className="text-white/80 text-base leading-relaxed font-medium">
-                      Metered parking is also available near the tower at a rate of <span className="text-white font-black">AED 2 per hour</span>. Please check with SRTA in Sharjah for recent updates.
+                      Metered parking is also available near the tower at a rate of{" "}
+                      <span className="text-white font-black flex items-center gap-1 inline-flex">
+                        <PriceDisplay amount={2} /> per hour
+                      </span>
+                      . Please check with SRTA in Sharjah for recent updates.
                     </p>
                     <div className="bg-white/10 p-5 rounded-2xl border border-white/10 backdrop-blur-sm">
                       <p className="text-white font-medium leading-relaxed italic">
