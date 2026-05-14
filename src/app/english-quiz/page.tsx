@@ -21,6 +21,7 @@ import {
   FieldContent,
   FieldError,
 } from "@/components/ui/field";
+import { cn } from "@/lib/utils";
 
 const QUIZ_QUESTIONS = [
   {
@@ -209,6 +210,7 @@ export default function EnglishQuizPage() {
                       {...register("fullName")}
                       className="pl-10"
                       placeholder="John Doe"
+                      aria-invalid={!!errors.fullName}
                     />
                   </div>
                   <FieldError errors={[errors.fullName]} />
@@ -227,6 +229,7 @@ export default function EnglishQuizPage() {
                       {...register("email")}
                       className="pl-10"
                       placeholder="john@example.com"
+                      aria-invalid={!!errors.email}
                     />
                   </div>
                   <FieldError errors={[errors.email]} />
@@ -240,7 +243,12 @@ export default function EnglishQuizPage() {
             {QUIZ_QUESTIONS.map((q, idx) => (
               <Field
                 key={q.id}
-                className="bg-white border border-slate-200 rounded-md p-8 shadow-sm"
+                data-invalid={!!errors.answers?.[q.id.toString()]}
+                className={cn(
+                  "bg-white border border-slate-200 rounded-md p-8 shadow-sm transition-colors",
+                  errors.answers?.[q.id.toString()] &&
+                    "border-destructive/50 ring-1 ring-destructive/10 bg-destructive/5",
+                )}
               >
                 <div className="flex gap-4">
                   <span className="flex-shrink-0 w-8 h-8 rounded-full bg-secondary text-white flex items-center justify-center font-bold text-sm">
@@ -262,22 +270,22 @@ export default function EnglishQuizPage() {
                             className="grid gap-3"
                           >
                             {q.options.map((option) => (
-                            <div key={option.id} className="relative">
-                              <Label
-                                htmlFor={`q${q.id}-${option.id}`}
-                                className="flex items-center px-5 py-4 border-2 border-slate-100 rounded-md cursor-pointer hover:bg-slate-50 has-data-checked:border-primary has-data-checked:bg-primary/5 transition-all"
-                              >
-                                <RadioGroupItem
-                                  value={option.id}
-                                  id={`q${q.id}-${option.id}`}
-                                  className="mr-3"
-                                />
-                                <span className="text-slate-700 font-medium">
-                                  {option.text}
-                                </span>
-                              </Label>
-                            </div>
-                          ))}
+                              <div key={option.id} className="relative">
+                                <Label
+                                  htmlFor={`q${q.id}-${option.id}`}
+                                  className="flex items-center px-5 py-4 border-2 border-slate-100 rounded-md cursor-pointer hover:bg-slate-50 has-data-checked:border-primary has-data-checked:bg-primary/5 transition-all"
+                                >
+                                  <RadioGroupItem
+                                    value={option.id}
+                                    id={`q${q.id}-${option.id}`}
+                                    className="mr-3"
+                                  />
+                                  <span className="text-slate-700 font-medium">
+                                    {option.text}
+                                  </span>
+                                </Label>
+                              </div>
+                            ))}
                           </RadioGroup>
                         )}
                       />
@@ -296,12 +304,8 @@ export default function EnglishQuizPage() {
           </div>
 
           <div className="flex justify-center pt-8">
-            <Button
-              size="lg"
-              className="px-12 h-14 text-lg font-bold rounded-md group"
-            >
+            <Button size="lg" type="submit">
               Submit Quiz
-              <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
             </Button>
           </div>
         </form>
