@@ -107,6 +107,7 @@ export default function FormIeltsAcademicRegistration() {
       smsConsent: false,
       residenceCountry: "United Arab Emirates",
       postalAddress1: "",
+      postalAddress2: "",
       city: "",
       idType: "passport",
       idNumber: "",

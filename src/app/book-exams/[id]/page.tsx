@@ -44,9 +44,6 @@ export default async function BookExamsId({
     case EXAM_IDS_DATA.toefl.id:
       return (
         <div>
-          <h2 className="text-2xl font-bold my-8 text-center">
-            TOEFL iBT Registration
-          </h2>
           <FormTOEFLIBTRegistration />
         </div>
       );
@@ -84,61 +81,19 @@ export default async function BookExamsId({
         </div>
       );
     case EXAM_IDS_DATA.pte_academic.id:
-      return (
-        <div>
-          <h2 className="text-2xl font-bold my-8 text-center">
-            PTE Academic Registration
-          </h2>
-          <FormPTEAcademicRegistration />
-        </div>
-      );
+      return <FormPTEAcademicRegistration />;
     case EXAM_IDS_DATA.pte_core.id:
-      return (
-        <div>
-          <h2 className="text-2xl font-bold my-8 text-center">
-            PTE Core Registration
-          </h2>
-          <FormPTECoreRegistration />
-        </div>
-      );
+      return <FormPTECoreRegistration />;
 
     case EXAM_IDS_DATA.pte_home_a1.id:
-      return (
-        <div>
-          <h2 className="text-2xl font-bold my-8 text-center">
-            PTE Home A1 Registration
-          </h2>
-          <FormPTEHomeA1Registration />
-        </div>
-      );
+      return <FormPTEHomeA1Registration />;
     case EXAM_IDS_DATA.pte_home_a2.id:
-      return (
-        <div>
-          <h2 className="text-2xl font-bold my-8 text-center">
-            PTE Home A2 Registration
-          </h2>
-          <FormPTEHomeA2Registration />
-        </div>
-      );
+      return <FormPTEHomeA2Registration />;
     case EXAM_IDS_DATA.pte_home_b1.id:
-      return (
-        <div>
-          <h2 className="text-2xl font-bold my-8 text-center">
-            PTE Home B1 Registration
-          </h2>
-          <FormPTEHomeB1Registration />
-        </div>
-      );
+      return <FormPTEHomeB1Registration />;
     case EXAM_IDS_DATA.pte_ukvi.id:
     case EXAM_IDS_DATA.pte_academic_ukvi.id:
-      return (
-        <div>
-          <h2 className="text-2xl font-bold my-8 text-center">
-            PTE UKVI Registration
-          </h2>
-          <FormPTEHomeUkviRegistration />
-        </div>
-      );
+      return <FormPTEHomeUkviRegistration />;
 
     default:
       return notFound();

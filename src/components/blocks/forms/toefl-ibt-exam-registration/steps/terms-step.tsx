@@ -20,20 +20,17 @@ interface TermsStepProps {
 
 export function TermsStep({ onNext }: TermsStepProps) {
     return (
-        <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+        <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
             <BaseNoteBox
-                title="Important Notices"
+                title="Terms and Conditions"
                 notes={NOTICES}
-                className="bg-slate-50/50"
             />
 
-            <div className="flex justify-end pt-4">
+            <div className="mt-8 flex justify-end">
                 <Button
                     onClick={onNext}
-                    className="bg-[#A11D1D] hover:bg-[#8A1818] text-white px-10 h-14 rounded-xl font-black text-xs uppercase tracking-[0.2em] shadow-xl shadow-[#A11D1D]/10 flex items-center gap-3 group transition-all"
                 >
                     I Agree & Continue
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
             </div>
         </div>
