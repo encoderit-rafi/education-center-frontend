@@ -106,6 +106,11 @@ export default function FormPTEHomeB1Registration() {
 
   const selectedCourseData = pteCourses.find(c => c.id === formData.selectedCourse);
   const selectedWorkshopData = pteWorkshops.find(w => w.id === formData.selectedWorkshop);
+
+  const EXAM_FEE = 1450;
+  const SERVICE_FEE = 5;
+  const VAT_RATE = 0.05;
+
   const coursePrice = selectedCourseData?.price || 0;
   const workshopPrice = selectedWorkshopData?.price || 0;
 
