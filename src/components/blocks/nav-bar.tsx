@@ -31,7 +31,9 @@ export default function NavBar() {
         </div>
         <div className="w-24  flex items-center justify-end gap-2">
           <SearchCommand />
-          <MobileNav />
+          <div className="block lg:hidden">
+            <MobileNav />
+          </div>
         </div>
       </div>
       {/* Row 2 */}
