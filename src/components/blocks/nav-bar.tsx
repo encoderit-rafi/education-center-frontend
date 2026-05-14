@@ -7,6 +7,8 @@ import SearchCommand from "./search-command";
 import Banner from "./banner";
 import AppNavigation from "./app-navigation";
 import { PRIMARY_NAV, SECONDARY_NAV } from "@/data";
+import MobileNav from "./mobile-nav";
+
 export default function NavBar() {
   return (
     <header className="sticky top-0 z-50 overflow-visible shadow-lg">
@@ -29,6 +31,7 @@ export default function NavBar() {
         </div>
         <div className="w-24  flex items-center justify-end gap-2">
           <SearchCommand />
+          <MobileNav />
         </div>
       </div>
       {/* Row 2 */}
