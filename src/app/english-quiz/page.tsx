@@ -10,11 +10,12 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Trophy, ArrowRight, User, Mail, Info } from "lucide-react";
+import { Trophy, ArrowRight, User, Mail, Info, XIcon } from "lucide-react";
 import {
   Field,
   FieldLabel,
@@ -22,6 +23,7 @@ import {
   FieldError,
 } from "@/components/ui/field";
 import { cn } from "@/lib/utils";
+import Stepper from "@/components/stepper";
 
 const QUIZ_QUESTIONS = [
   {
@@ -187,7 +189,7 @@ export default function EnglishQuizPage() {
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
           {/* Personal Info Card */}
-          <div className="bg-white border border-slate-200 rounded-md p-8 shadow-sm space-y-6">
+          <div className="bg-white border border-slate-200 rounded-md p-8 space-y-6">
             <div className="flex items-center gap-3 mb-2">
               <div className="p-2 bg-primary/10 rounded-lg text-primary">
                 <User size={20} />
@@ -245,19 +247,21 @@ export default function EnglishQuizPage() {
                 key={q.id}
                 data-invalid={!!errors.answers?.[q.id.toString()]}
                 className={cn(
-                  "bg-white border border-slate-200 rounded-md p-8 shadow-sm transition-colors",
+                  "bg-white border border-slate-200 rounded-md p-8 transition-colors",
                   errors.answers?.[q.id.toString()] &&
                     "border-destructive/50 ring-1 ring-destructive/10 bg-destructive/5",
                 )}
               >
                 <div className="flex gap-4">
-                  <span className="flex-shrink-0 w-8 h-8 rounded-full bg-secondary text-white flex items-center justify-center font-bold text-sm">
+                  {/* <span className="flex-shrink-0 w-8 h-8 rounded-full bg-secondary text-white flex items-center justify-center font-bold text-sm">
                     {idx + 1}
-                  </span>
+                  </span> */}
                   <div className="space-y-6 flex-1">
-                    <FieldLabel className="text-lg font-bold text-secondary leading-tight normal-case">
-                      {q.question}
-                    </FieldLabel>
+                    <Stepper step={idx + 1}>
+                      <FieldLabel className="text-lg font-bold text-secondary leading-tight normal-case">
+                        {q.question}
+                      </FieldLabel>
+                    </Stepper>
 
                     <FieldContent>
                       <Controller
@@ -313,8 +317,14 @@ export default function EnglishQuizPage() {
 
       {/* Result Dialog */}
       <Dialog open={showResult} onOpenChange={setShowResult}>
-        <DialogContent className="sm:max-w-[450px] p-0 overflow-hidden border-none rounded-md">
-          <div className="bg-primary p-8 text-white text-center space-y-4">
+        <DialogContent
+          showCloseButton={false}
+          className="sm:max-w-[450px] p-0 overflow-hidden border-none rounded-md"
+        >
+          <div className="bg-primary p-8 text-white text-center space-y-4 relative">
+            <DialogClose className="absolute top-4 right-4 p-2 rounded-md hover:bg-white/10 text-white transition-colors cursor-pointer">
+              <XIcon size={20} />
+            </DialogClose>
             <div className="mx-auto w-20 h-20 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
               <Trophy size={40} className="text-white" />
             </div>
