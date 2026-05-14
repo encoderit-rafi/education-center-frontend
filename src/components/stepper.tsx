@@ -11,11 +11,11 @@ function Stepper({
     <h3
       {...props}
       className={cn(
-        "flex items-center gap-3 text-lg capitalize font-black text-secondary tracking-tight",
+        "flex items-center gap-3 text-wrap text-lg capitalize font-black text-secondary tracking-tight",
         className,
       )}
     >
-      <span className="size-9  rounded-full bg-primary text-white flex items-center justify-center font-black text-sm shadow-lg shadow-primary/20">
+      <span className="size-9 shrink-0 rounded-full bg-primary text-white flex items-center justify-center font-black text-sm shadow-lg shadow-primary/20">
         {step}
       </span>
       {children}
