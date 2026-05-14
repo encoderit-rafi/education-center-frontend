@@ -318,6 +318,11 @@ export const SECONDARY_NAV: AppNavigationItem[] = [
   },
   {
     type: "single",
+    name: "English Quiz",
+    href: "/english-quiz",
+  },
+  {
+    type: "single",
     name: "Assessment Solutions",
     href: "/assessment-solutions",
   },
