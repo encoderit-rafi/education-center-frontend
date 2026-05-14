@@ -646,7 +646,7 @@ export default function TestYourEnglishForm() {
               >
                 <div className="space-y-6">
                   <Stepper step={idx + 1}>
-                    <FieldLabel className="text-lg  text-wrapfont-bold text-secondary leading-tight normal-case">
+                    <FieldLabel className="text-lg text-wrap font-bold text-secondary leading-tight normal-case">
                       {q.text}
                     </FieldLabel>
                   </Stepper>
@@ -678,7 +678,7 @@ export default function TestYourEnglishForm() {
                                   id={`${q.id}-${opt}`}
                                   className="mr-3"
                                 />
-                                <span className="text-slate-700 font-medium">
+                                <span className="text-slate-700 font-medium text-wrap">
                                   {opt}
                                 </span>
                               </Label>
@@ -695,88 +695,14 @@ export default function TestYourEnglishForm() {
               </Field>
             ))}
 
-            <div className="flex flex-col sm:flex-row gap-4 pt-6">
-              <Button
-                variant="outline"
-                type="button"
-                onClick={handlePrev}
-                size="lg"
-                className="px-8"
-              >
-                <ChevronLeft className="w-5 h-5" />
-              </Button>
-              <Button
-                type="button"
-                onClick={handleNext}
-                size="lg"
-                className="flex-grow"
-              >
-                Proceed to Writing Section
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Button>
-            </div>
-          </div>
-        )}
-
-        {step === 3 && (
-          <div className="bg-white border border-slate-200 rounded-md p-8 space-y-8">
-            <Stepper step={QUESTIONS.length + 1}>
-              <FieldLabel className="text-xl font-bold text-secondary tracking-tight normal-case">
-                Written Expression
-              </FieldLabel>
-            </Stepper>
-
-            <div className="space-y-6">
-              <div className="bg-slate-50 rounded-md p-4 border border-slate-100 flex items-start gap-3">
-                <Info className="text-primary flex-shrink-0 mt-0.5" size={18} />
-                <p className="text-sm text-slate-600 leading-relaxed font-medium">
-                  Describe your primary goal for improving your English in 2-3
-                  sentences. This helps us gauge your sentence structure and
-                  coherence.
-                </p>
-              </div>
-
-              <Field data-invalid={!!errors.writtenExpression}>
-                <FieldLabel required>Your Response</FieldLabel>
-                <FieldContent>
-                  <Textarea
-                    {...register("writtenExpression")}
-                    className="bg-slate-50/50 border-slate-200 rounded-md p-6 placeholder:text-slate-400 font-medium resize-none"
-                    rows={6}
-                    placeholder="Type your response here..."
-                  />
-                  {errors.writtenExpression && (
-                    <FieldError>{errors.writtenExpression.message}</FieldError>
-                  )}
-                </FieldContent>
-              </Field>
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Button
-                variant="outline"
-                type="button"
-                onClick={handlePrev}
-                size="lg"
-                className="px-8"
-              >
-                <ChevronLeft className="w-5 h-5" />
-              </Button>
-              <Button
-                type="submit"
-                disabled={isSubmitting}
-                size="lg"
-                className="flex-grow font-bold"
-              >
-                {isSubmitting ? "Processing..." : "Submit Assessment"}
-                {!isSubmitting && <SendHorizontal className="ml-2 w-5 h-5" />}
-              </Button>
-            </div>
-
-            <p className="flex items-center justify-center gap-2 text-[10px] text-slate-400 font-bold uppercase tracking-widest pt-4">
-              <ShieldCheck size={14} className="text-primary" />
-              <span>Academic Evaluation Secure</span>
-            </p>
+            <Button
+              type="button"
+              onClick={handleNext}
+              size="lg"
+              className="px-5"
+            >
+              Submit
+            </Button>
           </div>
         )}
       </form>
