@@ -515,9 +515,9 @@ export default function TestYourEnglishForm() {
       </Dialog>
 
       {/* Progress Indicator */}
-      <div className="flex items-center justify-between mb-8">
+      {/* <div className="flex items-center justify-between mb-8">
         <div className="flex items-center gap-3">
-          {[1, 2, 3].map((i) => (
+          {[1, 2].map((i) => (
             <div
               key={i}
               className={cn(
@@ -527,10 +527,8 @@ export default function TestYourEnglishForm() {
             />
           ))}
         </div>
-        {/* <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
-          Step {step} of 3
-        </span> */}
-      </div>
+     
+      </div> */}
 
       <form onSubmit={handleSubmit(onSubmit)} className="animate-fade-up">
         {step === 1 && (
@@ -592,10 +590,7 @@ export default function TestYourEnglishForm() {
               >
                 <FieldLabel required>Phone Number</FieldLabel>
                 <FieldContent>
-                  <div className="relative rounded-md border border-input focus-within:ring-1 focus-within:ring-ring overflow-hidden">
-                    <div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 z-10 pointer-events-none">
-                      <Phone size={16} />
-                    </div>
+                  <div className="rounded-md border border-input focus-within:ring-1 focus-within:ring-ring overflow-hidden">
                     <Controller
                       control={control}
                       name="phoneNumber"
@@ -604,7 +599,7 @@ export default function TestYourEnglishForm() {
                           value={field.value}
                           onChange={field.onChange}
                           defaultCountry="AE"
-                          className="pl-10 h-10 border-none focus-within:ring-0"
+                          className="h-10 border-none focus-within:ring-0"
                         />
                       )}
                     />
@@ -616,17 +611,14 @@ export default function TestYourEnglishForm() {
               </Field>
             </div>
 
-            <div className="flex justify-center pt-4">
-              <Button
-                type="button"
-                onClick={handleNext}
-                size="lg"
-                className="w-full md:w-auto"
-              >
-                Begin Proficiency Check
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Button>
-            </div>
+            <Button
+              type="button"
+              onClick={handleNext}
+              size="lg"
+              className="w-full md:w-auto px-5"
+            >
+              Start
+            </Button>
           </div>
         )}
 
@@ -700,7 +692,9 @@ export default function TestYourEnglishForm() {
                 size="lg"
                 className="px-10 font-bold"
               >
-                {form.formState.isSubmitting ? "Processing..." : "Submit Assessment"}
+                {form.formState.isSubmitting
+                  ? "Processing..."
+                  : "Submit Assessment"}
               </Button>
             </div>
           </div>
