@@ -22,7 +22,7 @@ function Command({
     <CommandPrimitive
       data-slot="command"
       className={cn(
-        "flex size-full flex-col overflow-hidden rounded-4xl bg-popover p-1 text-popover-foreground",
+        "flex size-full flex-col overflow-hidden rounded-md bg-popover p-1 text-popover-foreground",
         className,
       )}
       {...props}
@@ -54,13 +54,13 @@ function CommandDialog({
       </DialogHeader>
       <DialogContent
         className={cn(
-          "top-1/3 translate-y-0 overflow-hidden rounded-4xl! p-0",
+          "top-1/3 translate-y-0 overflow-hidden rounded-md p-0",
           className,
         )}
         overlayClassName={overlayClassName}
         showCloseButton={showCloseButton}
       >
-        <Command className="[&_[data-slot=command-input-wrapper]_input]:h-12 [&_[data-slot=command-input-wrapper]]:border-b [&_[data-slot=command-input-wrapper]]:px-3 [&_[data-slot=command-group]:not([hidden])_~_[data-slot=command-group]]:pt-0 [&_[data-slot=command-group]]:px-2 [&_[data-slot=command-input-wrapper]_svg]:size-5 [&_[data-slot=command-item]]:px-3 [&_[data-slot=command-item]]:py-3 [&_[data-slot=command-item]_svg]:size-5">
+        <Command className="[&_[data-slot=command-input-wrapper]_input]:h-12 [&_[data-slot=command-group]:not([hidden])_~_[data-slot=command-group]]:pt-0 [&_[data-slot=command-group]]:px-2 [&_[data-slot=command-input-wrapper]_svg]:size-5 [&_[data-slot=command-item]]:px-3 [&_[data-slot=command-item]]:py-3 [&_[data-slot=command-item]_svg]:size-5">
           {children}
         </Command>
       </DialogContent>
@@ -74,11 +74,11 @@ function CommandInput({
 }: React.ComponentProps<typeof CommandPrimitive.Input>) {
   return (
     <div data-slot="command-input-wrapper" className="p-1 pb-0">
-      <InputGroup className="h-9 bg-input/50">
+      <InputGroup className="rounded-md">
         <CommandPrimitive.Input
           data-slot="command-input"
           className={cn(
-            "w-full text-sm outline-hidden disabled:cursor-not-allowed disabled:opacity-50",
+            "w-full text-sm outline-hidden px-3 disabled:cursor-not-allowed disabled:opacity-50",
             className,
           )}
           {...props}
@@ -158,7 +158,7 @@ function CommandItem({
     <CommandPrimitive.Item
       data-slot="command-item"
       className={cn(
-        "group/command-item relative flex cursor-default items-center gap-2 rounded-2xl  py-2 text-sm font-medium outline-hidden select-none in-data-[slot=dialog-content]:rounded-3xl data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50 data-selected:bg-muted data-selected:text-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 data-selected:*:[svg]:text-foreground bg-transparent!",
+        "group/command-item relative flex cursor-default items-center gap-2 rounded-md py-2 text-sm font-medium outline-hidden select-none data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50 data-selected:bg-muted data-selected:text-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 data-selected:*:[svg]:text-foreground bg-transparent!",
         className,
       )}
       {...props}

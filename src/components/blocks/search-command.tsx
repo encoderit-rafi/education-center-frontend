@@ -49,7 +49,7 @@ export default function SearchCommand({ className }: { className?: string }) {
       <button
         onClick={() => setOpen(true)}
         className={cn(
-          "inline-flex size-9 items-center justify-center rounded-full text-sm outline-none transition-[color,box-shadow] focus-visible:border-rounded focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 text-primary hover:text-primary cursor-pointer group",
+          "inline-flex size-9 items-center justify-center rounded-md text-sm outline-none transition-[color,box-shadow] focus-visible:border-rounded focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 text-primary hover:text-primary cursor-pointer group",
           className,
         )}
         aria-label="Search"
@@ -58,7 +58,7 @@ export default function SearchCommand({ className }: { className?: string }) {
       </button>
 
       <CommandDialog open={open} onOpenChange={setOpen}>
-        <CommandInput placeholder="Type a command or search..." />
+        <CommandInput placeholder="Search..." />
         <CommandList className="">
           <CommandEmpty>No results found.</CommandEmpty>
 
