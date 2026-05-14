@@ -520,7 +520,7 @@ export default function FeesPage() {
     //     </div>
     //   </section>
 
-    //   {/* ── Secure Payment Footer ── */}
+    //   {/* ── Payment Footer ── */}
     //   <section className="py-24 bg-slate-950 text-center space-y-12 relative overflow-hidden">
     //     <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(var(--primary-rgb),0.1),transparent_70%)]" />
     //     <div className="container relative z-10 mx-auto px-4 max-w-4xl space-y-8">

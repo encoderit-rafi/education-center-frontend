@@ -202,7 +202,9 @@ export function ReviewStep({
                   Identity Document
                 </span>
                 <span className="text-sm font-semibold text-black">
-                  {data.idDocument ? (data.idDocument as File).name : "No file attached"}
+                  {data.idDocument
+                    ? (data.idDocument as File).name
+                    : "No file attached"}
                 </span>
               </div>
               <div className="flex flex-col">
@@ -306,7 +308,7 @@ export function ReviewStep({
         </div>
       </div>
 
-      {/* Secure Payment Stepper */}
+      {/* Payment Stepper */}
       <div className="flex items-center justify-between">
         <Stepper step={3}>Payment</Stepper>
         <div className="text-right">
@@ -355,7 +357,10 @@ export function ReviewStep({
                   Course: {selectedCourseData.name}
                 </span>
                 <PriceDisplay
-                  amount={selectedCourseData.price * (1 - selectedCourseData.special_discount / 100)}
+                  amount={
+                    selectedCourseData.price *
+                    (1 - selectedCourseData.special_discount / 100)
+                  }
                   className="font-medium"
                 />
               </div>
@@ -366,7 +371,10 @@ export function ReviewStep({
                 <span className="text-slate-500">
                   Workshop: {selectedWorkshopData.name}
                 </span>
-                <PriceDisplay amount={selectedWorkshopData.price} className="font-medium" />
+                <PriceDisplay
+                  amount={selectedWorkshopData.price}
+                  className="font-medium"
+                />
               </div>
             )}
 

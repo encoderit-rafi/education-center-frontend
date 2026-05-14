@@ -20,6 +20,13 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import Payment from "@/components/blocks/payment";
 // import paid_mock_tests from "@/lib/demo-data/paid-mock-tests";
 
@@ -30,21 +37,37 @@ import {
   Calendar as CalendarIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { NAV_PAID_MOCK_TESTS, PAID_MOCK_TESTS_DATA } from "@/data";
+import {
+  NAV_PAID_MOCK_TESTS,
+  PAID_MOCK_TESTS_DATA,
+  EXAM_DETAILE_DATA,
+} from "@/data";
 import { notFound, useSearchParams } from "next/navigation";
 import Stepper from "@/components/stepper";
 
-const bookingSchema = z.object({
-  mockTestId: z.string().min(1, "Please select a mock test"),
-  firstName: z.string().min(2, "First name must be at least 2 characters"),
-  lastName: z.string().min(2, "Last name must be at least 2 characters"),
-  email: z.string().email("Please enter a valid email address"),
-  date: z.date({
-    message: "Please select a date",
-  }),
-  timeSlot: z.string().min(1, "Please select a time slot"),
-  paymentMethod: z.literal("card"),
-});
+const bookingSchema = z
+  .object({
+    mockTestId: z.string().min(1, "Please select a mock test"),
+    subExamId: z.string().optional(),
+    firstName: z.string().min(2, "First name must be at least 2 characters"),
+    lastName: z.string().min(2, "Last name must be at least 2 characters"),
+    email: z.string().email("Please enter a valid email address"),
+    date: z.date({
+      message: "Please select a date",
+    }),
+    timeSlot: z.string().min(1, "Please select a time slot"),
+    paymentMethod: z.literal("card"),
+  })
+  .superRefine((data, ctx) => {
+    const examDetail = EXAM_DETAILE_DATA.find((e) => e.id === data.mockTestId);
+    if (examDetail?.type === "items" && examDetail.items && !data.subExamId) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Please select an exam variant",
+        path: ["subExamId"],
+      });
+    }
+  });
 
 type BookingValues = z.infer<typeof bookingSchema>;
 
@@ -78,10 +101,12 @@ function PaidMockTestRegistrationForm({
   } = useForm<BookingValues>({
     resolver: zodResolver(bookingSchema),
     defaultValues: {
-      // mockTestId: initialMockTestId || paid_mock_tests[0].id,
+      mockTestId: id || "",
       paymentMethod: "card",
     },
   });
+
+  const examDetail = EXAM_DETAILE_DATA.find((e) => e.id === id);
 
   const selectedId = watch("mockTestId");
   const selectedDate = watch("date");
@@ -164,6 +189,30 @@ function PaidMockTestRegistrationForm({
                     </FieldContent>
                   </Field>
                 </div>
+
+                {examDetail?.type === "items" && examDetail.items && (
+                  <Field>
+                    <FieldLabel required>Exam Variant</FieldLabel>
+                    <FieldContent>
+                      <Select
+                        onValueChange={(val) => setValue("subExamId", val)}
+                      >
+                        <SelectTrigger className="w-full">
+                          <SelectValue placeholder="Select variant" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {examDetail.items.map((item) => (
+                            <SelectItem key={item.id} value={item.id}>
+                              {item.name}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <FieldError errors={[errors.subExamId]} />
+                    </FieldContent>
+                  </Field>
+                )}
+
                 <Field>
                   <FieldLabel required>Email</FieldLabel>
                   <FieldContent>
@@ -227,7 +276,7 @@ function PaidMockTestRegistrationForm({
               </div>
               <div className="space-y-3">
                 <Stepper step={2}>
-                  Secure Payment{" "}
+                  Payment{" "}
                   <span className="bg-primary/10 px-3 py-1 rounded-full text-sm font-semibold text-primary">
                     {PRICE}{" "}
                     <span className="font-normal text-xs">{CURRENCY}</span>
@@ -236,7 +285,6 @@ function PaidMockTestRegistrationForm({
                 <Payment amount={PRICE} currency={CURRENCY} />
                 <Button type="submit" className="w-full mt-6 py-3">
                   Purchase
-                  <ArrowRight className="w-5 h-5" />
                 </Button>
               </div>
             </section>

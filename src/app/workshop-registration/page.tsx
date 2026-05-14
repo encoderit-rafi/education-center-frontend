@@ -31,11 +31,7 @@ const bookingSchema = z.object({
 
 type BookingValues = z.infer<typeof bookingSchema>;
 
-function WorkshopRegistrationForm({
-  className,
-}: {
-  className?: string;
-}) {
+function WorkshopRegistrationForm({ className }: { className?: string }) {
   const searchParams = useSearchParams();
   const examId = searchParams.get("examId");
   const courseId = searchParams.get("courseId");
@@ -157,7 +153,7 @@ function WorkshopRegistrationForm({
               </div>
               <div className="space-y-3">
                 <Stepper step={2}>
-                  Secure Payment{" "}
+                  Payment{" "}
                   <span className="bg-primary/10 px-3 py-1 rounded-full text-sm font-semibold text-primary">
                     {PRICE}{" "}
                     <span className="font-normal text-xs">{CURRENCY}</span>
@@ -184,4 +180,3 @@ export default function WorkshopRegistration() {
     </Suspense>
   );
 }
-

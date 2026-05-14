@@ -1,5 +1,4 @@
 import { AppNavigationItem } from "./components/blocks/app-navigation";
-
 export const EXAM_IDS_DATA = {
   ielts: {
     id: "ielts",
@@ -162,7 +161,6 @@ export const NAV_TEST_DATES_DATA = [
   EXAM_IDS_DATA.celpip_general,
   EXAM_IDS_DATA.cael,
   EXAM_IDS_DATA.selt,
-  EXAM_IDS_DATA.oet,
 ];
 
 export const TEST_DATES_CARDS_DATA = [
@@ -203,30 +201,12 @@ export const TEST_DATES_CARDS_DATA = [
   },
 ];
 export const NAV_BOOK_EXAMS_DATA = [
-  {
-    id: "ielts",
-    name: "IELTS",
-  },
-  {
-    id: "toefl",
-    name: "TOEFL iBT",
-  },
-  {
-    id: "pte-academic",
-    name: "PTE Academic",
-  },
-  {
-    id: "celpip-general",
-    name: "CELPIP General",
-  },
-  {
-    id: "cael",
-    name: "CAEL",
-  },
-  {
-    id: "selt",
-    name: "Skills for English (SELT)",
-  },
+  EXAM_IDS_DATA.ielts,
+  EXAM_IDS_DATA.toefl,
+  EXAM_IDS_DATA.pte_academic,
+  EXAM_IDS_DATA.celpip_general,
+  EXAM_IDS_DATA.cael,
+  EXAM_IDS_DATA.selt,
 ];
 export const NAV_FEES = [
   EXAM_IDS_DATA.ielts,
@@ -240,7 +220,7 @@ export const NAV_FEES = [
 export const NAV_PAID_MOCK_TESTS = [
   EXAM_IDS_DATA.ielts,
   EXAM_IDS_DATA.toefl,
-  EXAM_IDS_DATA.pte_academic,
+  EXAM_IDS_DATA.pte,
 ];
 
 export const PRIMARY_NAV: AppNavigationItem[] = [
@@ -487,10 +467,10 @@ export const PAID_MOCK_TESTS_DATA = {
       initialMockTestId: "ielts",
     },
   },
-  pte_academic: {
-    ...EXAM_IDS_DATA.pte_academic,
+  pte: {
+    ...EXAM_IDS_DATA.pte,
     hero: {
-      title: "PTE Academic",
+      title: "PTE",
       titleHighlight: "Mock Test",
       description:
         "The Pearson Test of English Academic is fully computer-scored. Understanding the scoring logic and mastering the digital interface is critical for achieving your target score.",

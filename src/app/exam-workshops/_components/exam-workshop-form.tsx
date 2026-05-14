@@ -294,14 +294,14 @@ export default function ExamWorkshopForm({
         </div>
       </section>
 
-      {/* Step 4: Secure Payment */}
+      {/* Step 4: Payment */}
       <section>
         <div className="flex items-center gap-4 mb-8">
           <span className="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-black text-sm shadow-lg shadow-primary/20">
             4
           </span>
           <h2 className="text-2xl font-headline font-black text-secondary tracking-tight">
-            Secure Payment
+            Payment
           </h2>
         </div>
 
