@@ -411,9 +411,7 @@ const testSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
   phoneNumber: z.string().min(5, "Please enter a valid phone number"),
   answers: z.record(z.string(), z.string().min(1, "Please select an answer")),
-  writtenExpression: z
-    .string()
-    .min(10, "Response must be at least 10 characters"),
+  writtenExpression: z.string().optional(),
 });
 
 type TestValues = z.infer<typeof testSchema>;
@@ -668,7 +666,7 @@ export default function TestYourEnglishForm() {
                           className="grid gap-3"
                         >
                           {q.options.map((opt) => (
-                            <div key={opt} className="relative">
+                            <div key={`${q.id}-${opt}`} className="relative">
                               <Label
                                 htmlFor={`${q.id}-${opt}`}
                                 className="flex items-center px-5 py-4 border-2 border-slate-100 rounded-md cursor-pointer hover:bg-slate-50 has-data-checked:border-primary has-data-checked:bg-primary/5 transition-all"
@@ -695,14 +693,16 @@ export default function TestYourEnglishForm() {
               </Field>
             ))}
 
-            <Button
-              type="button"
-              onClick={handleNext}
-              size="lg"
-              className="px-5"
-            >
-              Submit
-            </Button>
+            <div className="flex justify-end pt-6">
+              <Button
+                type="submit"
+                disabled={form.formState.isSubmitting}
+                size="lg"
+                className="px-10 font-bold"
+              >
+                {form.formState.isSubmitting ? "Processing..." : "Submit Assessment"}
+              </Button>
+            </div>
           </div>
         )}
       </form>
