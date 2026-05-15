@@ -8,28 +8,18 @@ import {
   Globe,
   CreditCard,
   Edit3,
-  ArrowRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { UseFormReturn } from "react-hook-form";
-import { TIeltsAcademicSchema } from "../_type";
+import { TPteCoreSchema } from "../_type";
 import Payment from "@/components/blocks/payment";
-import { AED } from "@/components/ui/aed";
 import { PriceDisplay } from "@/components/ui/price-display";
-import {
-  Field,
-  FieldLabel,
-  FieldContent,
-  FieldError,
-} from "@/components/ui/field";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
 import Stepper from "@/components/stepper";
 
+
 interface ReviewStepProps {
-  data: TIeltsAcademicSchema;
-  form: UseFormReturn<TIeltsAcademicSchema>;
+  data: TPteCoreSchema;
+  form: UseFormReturn<TPteCoreSchema>;
   onEdit: () => void;
   onSubmit: (e?: React.BaseSyntheticEvent) => Promise<void>;
   onInvalid: (errors: any) => void;
@@ -53,17 +43,16 @@ export function ReviewStep({
   selectedWorkshopData,
 }: ReviewStepProps) {
   const {
-    register,
-    setValue,
     watch,
+    setValue,
     formState: { errors },
   } = form;
 
   const formData = watch();
 
   return (
-    <form onSubmit={onSubmit} className="space-y-8">
-      <Stepper step={4}>Review Your Details</Stepper>
+    <form onSubmit={onSubmit} className="space-y-8 animate-in fade-in duration-500">
+      <Stepper step={3}>Review Your Details</Stepper>
       <div className="bg-white rounded-2xl border border-slate-100 p-6 md:p-8 shadow-sm">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 pb-6 border-b border-slate-100">
           <div>
@@ -71,8 +60,7 @@ export function ReviewStep({
               Review Your Details
             </h3>
             <p className="text-sm text-slate-500 mt-1">
-              Please confirm all information is correct before proceeding to
-              payment.
+              Please confirm all information is correct before proceeding to payment.
             </p>
           </div>
           <Button
@@ -91,7 +79,7 @@ export function ReviewStep({
           <div className="space-y-6">
             <div className="flex items-center gap-2 text-black">
               <User className="size-4" />
-              <span className="text-xs font-bold tracking-widest text-black">
+              <span className="text-xs font-bold tracking-widest text-black uppercase">
                 PERSONAL DETAILS
               </span>
             </div>
@@ -101,7 +89,7 @@ export function ReviewStep({
                   Given Names
                 </span>
                 <span className="text-sm font-semibold text-black">
-                  {data.givenNames}
+                  {data.noGivenNames ? "N/A" : data.givenNames}
                 </span>
               </div>
               <div className="flex flex-col">
@@ -117,7 +105,7 @@ export function ReviewStep({
                   Surnames
                 </span>
                 <span className="text-sm font-semibold text-black">
-                  {data.surnames || "N/A"}
+                  {data.noSurname ? "N/A" : data.surnames}
                 </span>
               </div>
               <div className="flex flex-col">
@@ -130,10 +118,10 @@ export function ReviewStep({
               </div>
               <div className="flex flex-col">
                 <span className="text-[10px] text-slate-400 font-bold uppercase">
-                  Gender
+                  Sex
                 </span>
                 <span className="text-sm font-semibold text-black capitalize">
-                  {data.sex || "N/A"}
+                  {data.gender || "N/A"}
                 </span>
               </div>
               <div className="flex flex-col">
@@ -149,7 +137,7 @@ export function ReviewStep({
                   Nationality
                 </span>
                 <span className="text-sm font-semibold text-black">
-                  {data.nationality || "N/A"}
+                  {data.countryOfCitizenship || "N/A"}
                 </span>
               </div>
             </div>
@@ -159,7 +147,7 @@ export function ReviewStep({
           <div className="space-y-6">
             <div className="flex items-center gap-2 text-black">
               <ShieldCheck className="size-4" />
-              <span className="text-xs font-bold tracking-widest">
+              <span className="text-xs font-bold tracking-widest uppercase">
                 IDENTITY & CONTACT
               </span>
             </div>
@@ -177,7 +165,7 @@ export function ReviewStep({
                   ID Number
                 </span>
                 <span className="text-sm font-semibold text-black">
-                  {data.idNumber || "N/A"}
+                  {data.documentNumber || "N/A"}
                 </span>
               </div>
               <div className="flex flex-col">
@@ -185,15 +173,7 @@ export function ReviewStep({
                   Email
                 </span>
                 <span className="text-sm font-semibold text-black">
-                  {data.email}
-                </span>
-              </div>
-              <div className="flex flex-col">
-                <span className="text-[10px] text-slate-400 font-bold uppercase">
-                  ID Expiry Date
-                </span>
-                <span className="text-sm font-semibold text-black">
-                  {data.idExpiryDate ? format(data.idExpiryDate, "PPP") : "N/A"}
+                  {data.emailUsername}
                 </span>
               </div>
               <div className="flex flex-col">
@@ -201,27 +181,19 @@ export function ReviewStep({
                   Identity Document
                 </span>
                 <span className="text-sm font-semibold text-black">
-                  {data.idDocument
-                    ? (data.idDocument as File).name
+                  {data.passportCopy
+                    ? (data.passportCopy as File).name
                     : "No file attached"}
-                </span>
-              </div>
-              <div className="flex flex-col">
-                <span className="text-[10px] text-slate-400 font-bold uppercase">
-                  Issuing Authority
-                </span>
-                <span className="text-sm font-semibold text-black">
-                  {data.issuingAuthority || "N/A"}
                 </span>
               </div>
             </div>
           </div>
 
-          {/* Test Info Summary */}
+          {/* Test Information Summary */}
           <div className="space-y-6">
             <div className="flex items-center gap-2 text-black">
               <Globe className="size-4" />
-              <span className="text-xs font-bold tracking-widest">
+              <span className="text-xs font-bold tracking-widest uppercase">
                 TEST INFORMATION
               </span>
             </div>
@@ -239,11 +211,7 @@ export function ReviewStep({
                   Time Slot
                 </span>
                 <span className="text-sm font-semibold text-black">
-                  {data.examTimeSlot === "9:00 AM"
-                    ? "Morning Session (09:00 AM)"
-                    : data.examTimeSlot === "11:00 AM"
-                      ? "Morning Session (11:00 AM)"
-                      : "Morning Session"}
+                  {data.examTime || "N/A"}
                 </span>
               </div>
               <div className="flex flex-col">
@@ -277,23 +245,7 @@ export function ReviewStep({
                   Country of Residence
                 </span>
                 <span className="text-sm font-semibold text-black">
-                  {data.residenceCountry}
-                </span>
-              </div>
-              <div className="flex flex-col">
-                <span className="text-[10px] text-slate-400 font-bold uppercase">
-                  P.O. Box
-                </span>
-                <span className="text-sm font-semibold text-black">
-                  {data.poBox || "N/A"}
-                </span>
-              </div>
-              <div className="flex flex-col">
-                <span className="text-[10px] text-slate-400 font-bold uppercase">
-                  Postal Code
-                </span>
-                <span className="text-sm font-semibold text-black">
-                  {data.postcode || "N/A"}
+                  {data.countryOfResidence}
                 </span>
               </div>
               <div className="flex flex-col">
@@ -301,15 +253,15 @@ export function ReviewStep({
                   First Language
                 </span>
                 <span className="text-sm font-semibold text-black">
-                  {data.firstLanguage || "N/A"}
+                  {data.homeLanguage || "N/A"}
                 </span>
               </div>
               <div className="flex flex-col">
                 <span className="text-[10px] text-slate-400 font-bold uppercase">
-                  Education Level
+                  Reason for Test
                 </span>
                 <span className="text-sm font-semibold text-black">
-                  {data.educationLevel || "N/A"}
+                  {data.reasonForTaking}
                 </span>
               </div>
             </div>
@@ -350,7 +302,7 @@ export function ReviewStep({
 
             <div className="space-y-4">
               <div className="flex justify-between text-sm">
-                <span className="text-slate-500 font-medium">IELTS Academic Exam</span>
+                <span className="text-slate-500 font-medium">PTE Core Exam</span>
                 <PriceDisplay amount={baseFee} className="font-bold text-slate-900" />
               </div>
 
@@ -365,10 +317,7 @@ export function ReviewStep({
                     Course: {selectedCourseData.name}
                   </span>
                   <PriceDisplay
-                    amount={
-                      selectedCourseData.price *
-                      (1 - selectedCourseData.special_discount / 100)
-                    }
+                    amount={selectedCourseData.price}
                     className="font-bold text-slate-900"
                   />
                 </div>

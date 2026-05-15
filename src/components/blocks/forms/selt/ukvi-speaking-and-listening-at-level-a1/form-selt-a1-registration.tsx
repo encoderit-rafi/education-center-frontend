@@ -5,7 +5,8 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "@/components/ui/form";
 import { languages } from "@/lib/languages-data";
-import { IeltsAcademicSchema, type TIeltsAcademicSchema } from "./_type";
+import { EXAM_IDS_DATA } from "@/data";
+import { SeltA1Schema, type TSeltA1Schema } from "./_type/selt";
 
 import { TermsStep } from "./steps/terms-step";
 import { DateStep } from "./steps/date-step";
@@ -86,13 +87,15 @@ export const COURSES_DATA = {
   },
 };
 
-export default function FormIeltsAcademicRegistration() {
+export default function FormSELTA1Registration({ initialId }: { initialId?: string }) {
   const [currentStep, setCurrentStep] = useState(0); // 0: Terms, 1: Date, 2: Form, 3: Review
 
-  const form = useForm<TIeltsAcademicSchema>({
-    resolver: zodResolver(IeltsAcademicSchema),
+  const examName = Object.values(EXAM_IDS_DATA).find(e => e.id === initialId)?.name || "SELT A1";
+
+  const form = useForm<TSeltA1Schema>({
+    resolver: zodResolver(SeltA1Schema) as any,
     defaultValues: {
-      testModule: "Academic",
+      testModule: initialId || "selt-a1",
       givenNames: "",
       middleName: "",
       surnames: "",
@@ -143,7 +146,7 @@ export default function FormIeltsAcademicRegistration() {
   };
 
   const calculateTotal = () => {
-    const baseFee = 1400;
+    const baseFee = 850;
     const serviceFee = 150;
     const coursePrice = formData.selectedCourse
       ? (COURSES_DATA as any)[formData.selectedCourse].price *
@@ -170,7 +173,7 @@ export default function FormIeltsAcademicRegistration() {
   const pricing = calculateTotal();
   const total = pricing.total;
 
-  const handleFormSubmit: SubmitHandler<TIeltsAcademicSchema> = (data) => {
+  const handleFormSubmit: SubmitHandler<TSeltA1Schema> = (data) => {
     if (currentStep < 3) {
       console.log("Step completion data:", data);
       goToStep(3);
@@ -193,11 +196,11 @@ export default function FormIeltsAcademicRegistration() {
   return (
     <div className="max-w-7xl mx-auto px-4 py-12">
       <div className="text-center mb-12">
-        <h1 className="text-4xl md:text-5xl font-black text-slate-900 mb-4 tracking-tight">
-          IELTS Academic <span className="text-primary">Registration</span>
+        <h1 className="text-4xl md:text-5xl font-black text-slate-900 mb-4 tracking-tight uppercase italic">
+          {examName.split(" (")[0]} <span className="text-[#A11D1D]">Registration</span>
         </h1>
-        <p className="text-slate-500 text-lg max-w-2xl mx-auto">
-          Complete your registration in a few easy steps.
+        <p className="text-slate-500 text-lg max-w-2xl mx-auto font-medium italic">
+          {examName.includes(" (") ? examName.split("(")[1].replace(")", "") : examName}
         </p>
       </div>
 
@@ -220,7 +223,7 @@ export default function FormIeltsAcademicRegistration() {
 
           {currentStep === 2 && (
             <RegistrationFormStep
-              form={form}
+              form={form as any}
               onSubmit={handleFormSubmit}
               onInvalid={onInvalid}
               onBack={() => goToStep(1)}
@@ -233,9 +236,9 @@ export default function FormIeltsAcademicRegistration() {
           {currentStep === 3 && (
             <ReviewStep
               data={formData}
-              form={form}
+              form={form as any}
               onEdit={() => goToStep(2)}
-              onSubmit={form.handleSubmit(handleFormSubmit, onInvalid)}
+              onSubmit={(e) => form.handleSubmit(handleFormSubmit, onInvalid)(e)}
               onInvalid={onInvalid}
               baseFee={pricing.baseFee}
               serviceFee={pricing.serviceFee}

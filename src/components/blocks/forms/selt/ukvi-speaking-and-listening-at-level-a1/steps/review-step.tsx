@@ -8,31 +8,20 @@ import {
   Globe,
   CreditCard,
   Edit3,
-  ArrowRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { UseFormReturn } from "react-hook-form";
-import { TIeltsAcademicSchema } from "../_type";
-import Payment from "@/components/blocks/payment";
-import { AED } from "@/components/ui/aed";
+import { TSeltA1Schema } from "../_type";
 import { PriceDisplay } from "@/components/ui/price-display";
-import {
-  Field,
-  FieldLabel,
-  FieldContent,
-  FieldError,
-} from "@/components/ui/field";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
 import Stepper from "@/components/stepper";
+import Payment from "@/components/blocks/payment";
 
 interface ReviewStepProps {
-  data: TIeltsAcademicSchema;
-  form: UseFormReturn<TIeltsAcademicSchema>;
+  data: TSeltA1Schema;
+  form: UseFormReturn<TSeltA1Schema>;
   onEdit: () => void;
   onSubmit: (e?: React.BaseSyntheticEvent) => Promise<void>;
-  onInvalid: (errors: any) => void;
+  onInvalid?: (errors: any) => void;
   baseFee: number;
   serviceFee: number;
   total: number;
@@ -53,16 +42,13 @@ export function ReviewStep({
   selectedWorkshopData,
 }: ReviewStepProps) {
   const {
-    register,
-    setValue,
     watch,
-    formState: { errors },
   } = form;
 
   const formData = watch();
 
   return (
-    <form onSubmit={onSubmit} className="space-y-8">
+    <form onSubmit={onSubmit} className="space-y-8 animate-in fade-in duration-500">
       <Stepper step={4}>Review Your Details</Stepper>
       <div className="bg-white rounded-2xl border border-slate-100 p-6 md:p-8 shadow-sm">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 pb-6 border-b border-slate-100">
@@ -71,8 +57,7 @@ export function ReviewStep({
               Review Your Details
             </h3>
             <p className="text-sm text-slate-500 mt-1">
-              Please confirm all information is correct before proceeding to
-              payment.
+              Please confirm all information is correct before proceeding.
             </p>
           </div>
           <Button
@@ -91,7 +76,7 @@ export function ReviewStep({
           <div className="space-y-6">
             <div className="flex items-center gap-2 text-black">
               <User className="size-4" />
-              <span className="text-xs font-bold tracking-widest text-black">
+              <span className="text-xs font-bold tracking-widest text-black uppercase">
                 PERSONAL DETAILS
               </span>
             </div>
@@ -159,7 +144,7 @@ export function ReviewStep({
           <div className="space-y-6">
             <div className="flex items-center gap-2 text-black">
               <ShieldCheck className="size-4" />
-              <span className="text-xs font-bold tracking-widest">
+              <span className="text-xs font-bold tracking-widest uppercase">
                 IDENTITY & CONTACT
               </span>
             </div>
@@ -221,8 +206,8 @@ export function ReviewStep({
           <div className="space-y-6">
             <div className="flex items-center gap-2 text-black">
               <Globe className="size-4" />
-              <span className="text-xs font-bold tracking-widest">
-                TEST INFORMATION
+              <span className="text-xs font-bold tracking-widest uppercase">
+                TEST & PROFILE
               </span>
             </div>
             <div className="space-y-4">
@@ -239,61 +224,15 @@ export function ReviewStep({
                   Time Slot
                 </span>
                 <span className="text-sm font-semibold text-black">
-                  {data.examTimeSlot === "9:00 AM"
-                    ? "Morning Session (09:00 AM)"
-                    : data.examTimeSlot === "11:00 AM"
-                      ? "Morning Session (11:00 AM)"
-                      : "Morning Session"}
+                  {data.examTimeSlot}
                 </span>
               </div>
               <div className="flex flex-col">
                 <span className="text-[10px] text-slate-400 font-bold uppercase">
-                  Address Line 1
+                  Address
                 </span>
                 <span className="text-sm font-semibold text-black">
-                  {data.postalAddress1}
-                </span>
-              </div>
-              {data.postalAddress2 && (
-                <div className="flex flex-col">
-                  <span className="text-[10px] text-slate-400 font-bold uppercase">
-                    Address Line 2
-                  </span>
-                  <span className="text-sm font-semibold text-black">
-                    {data.postalAddress2}
-                  </span>
-                </div>
-              )}
-              <div className="flex flex-col">
-                <span className="text-[10px] text-slate-400 font-bold uppercase">
-                  Emirate / City
-                </span>
-                <span className="text-sm font-semibold text-black">
-                  {data.city}
-                </span>
-              </div>
-              <div className="flex flex-col">
-                <span className="text-[10px] text-slate-400 font-bold uppercase">
-                  Country of Residence
-                </span>
-                <span className="text-sm font-semibold text-black">
-                  {data.residenceCountry}
-                </span>
-              </div>
-              <div className="flex flex-col">
-                <span className="text-[10px] text-slate-400 font-bold uppercase">
-                  P.O. Box
-                </span>
-                <span className="text-sm font-semibold text-black">
-                  {data.poBox || "N/A"}
-                </span>
-              </div>
-              <div className="flex flex-col">
-                <span className="text-[10px] text-slate-400 font-bold uppercase">
-                  Postal Code
-                </span>
-                <span className="text-sm font-semibold text-black">
-                  {data.postcode || "N/A"}
+                  {data.postalAddress1}, {data.city}
                 </span>
               </div>
               <div className="flex flex-col">
@@ -310,6 +249,22 @@ export function ReviewStep({
                 </span>
                 <span className="text-sm font-semibold text-black">
                   {data.educationLevel || "N/A"}
+                </span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] text-slate-400 font-bold uppercase">
+                  Course Add-on
+                </span>
+                <span className="text-sm font-semibold text-primary capitalize">
+                  {selectedCourseData?.name || "None"}
+                </span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] text-slate-400 font-bold uppercase">
+                  Workshop Add-on
+                </span>
+                <span className="text-sm font-semibold text-primary capitalize">
+                  {selectedWorkshopData?.name || "None"}
                 </span>
               </div>
             </div>
@@ -350,7 +305,7 @@ export function ReviewStep({
 
             <div className="space-y-4">
               <div className="flex justify-between text-sm">
-                <span className="text-slate-500 font-medium">IELTS Academic Exam</span>
+                <span className="text-slate-500 font-medium">SELT A1 Exam Fee</span>
                 <PriceDisplay amount={baseFee} className="font-bold text-slate-900" />
               </div>
 

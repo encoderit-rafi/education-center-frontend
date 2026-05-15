@@ -53,6 +53,7 @@ export function ReviewStep({
 
   return (
     <form onSubmit={onSubmit} className="space-y-8">
+      <Stepper step={3}>Review Your Details</Stepper>
       <div className="bg-white rounded-2xl border border-slate-100 p-6 md:p-8 shadow-sm">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 pb-6 border-b border-slate-100">
           <div>
@@ -77,6 +78,7 @@ export function ReviewStep({
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Personal Details Summary */}
+
           <div className="space-y-6">
             <div className="flex items-center gap-2 text-black">
               <User className="size-4" />

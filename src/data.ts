@@ -2407,6 +2407,10 @@ export const EXAM_DETAILE_DATA = [
       { ...EXAM_IDS_DATA.selt_a1 },
       { ...EXAM_IDS_DATA.selt_a2 },
       { ...EXAM_IDS_DATA.selt_b1 },
+      { ...EXAM_IDS_DATA.selt_b1_r_w },
+      { ...EXAM_IDS_DATA.selt_b2 },
+      { ...EXAM_IDS_DATA.selt_c1 },
+      { ...EXAM_IDS_DATA.selt_c2 },
     ],
   },
   {
@@ -2479,6 +2483,90 @@ export const EXAM_DETAILE_DATA = [
       },
     ],
     whoShouldTake: ["UK Citizenship applicants", "UK Settlement applicants"],
+    acceptedFor: ["UK Visas and Immigration (UKVI)"],
+  },
+  {
+    ...EXAM_IDS_DATA.selt_b1_r_w,
+    type: "details",
+    subtitle: "For UK Work and Student visas",
+    description:
+      "Skills for English (UKVI) B1 Speaking, Listening, Reading and Writing is for UK Work and Student visas.",
+    overview:
+      "This test measures all four language skills at level B1. It is approved for UK Work (Skilled Worker) and Student visa applications.",
+    stats: [
+      { label: "Results In", value: "3–5 days" },
+      { label: "Validity", value: "2 years" },
+      { label: "Skills", value: "All 4 Skills" },
+    ],
+    sections: [
+      { name: "Speaking & Listening", duration: "17–22 min", icon: "speaking" },
+      { name: "Reading", duration: "60 min", icon: "reading" },
+      { name: "Writing", duration: "60 min", icon: "writing" },
+    ],
+    whoShouldTake: ["Work visa applicants", "Student visa applicants"],
+    acceptedFor: ["UK Visas and Immigration (UKVI)"],
+  },
+  {
+    ...EXAM_IDS_DATA.selt_b2,
+    type: "details",
+    subtitle: "For UK Work and Professional visas",
+    description:
+      "Skills for English (UKVI) B2 is for those who need to demonstrate higher level proficiency for work or professional registration.",
+    overview:
+      "This test measures all four language skills at level B2. It is approved for various UK work visa categories and professional bodies.",
+    stats: [
+      { label: "Results In", value: "3–5 days" },
+      { label: "Validity", value: "2 years" },
+      { label: "Skills", value: "All 4 Skills" },
+    ],
+    sections: [
+      { name: "Speaking & Listening", duration: "17–22 min", icon: "speaking" },
+      { name: "Reading", duration: "60 min", icon: "reading" },
+      { name: "Writing", duration: "60 min", icon: "writing" },
+    ],
+    whoShouldTake: ["Professional registration seekers", "Advanced work visa applicants"],
+    acceptedFor: ["UK Visas and Immigration (UKVI)"],
+  },
+  {
+    ...EXAM_IDS_DATA.selt_c1,
+    type: "details",
+    subtitle: "For advanced UK academic and professional requirements",
+    description:
+      "Skills for English (UKVI) C1 measures advanced proficiency for complex academic or professional environments.",
+    overview:
+      "This test measures all four language skills at level C1, representing an advanced user of English.",
+    stats: [
+      { label: "Results In", value: "3–5 days" },
+      { label: "Validity", value: "2 years" },
+      { label: "Skills", value: "All 4 Skills" },
+    ],
+    sections: [
+      { name: "Speaking & Listening", duration: "17–22 min", icon: "speaking" },
+      { name: "Reading", duration: "60 min", icon: "reading" },
+      { name: "Writing", duration: "60 min", icon: "writing" },
+    ],
+    whoShouldTake: ["Advanced academic students", "Senior professional applicants"],
+    acceptedFor: ["UK Visas and Immigration (UKVI)"],
+  },
+  {
+    ...EXAM_IDS_DATA.selt_c2,
+    type: "details",
+    subtitle: "For near-native UK requirements",
+    description:
+      "Skills for English (UKVI) C2 is the highest level of English proficiency test available.",
+    overview:
+      "This test measures all four language skills at level C2, the highest level on the CEFR scale.",
+    stats: [
+      { label: "Results In", value: "3–5 days" },
+      { label: "Validity", value: "2 years" },
+      { label: "Skills", value: "All 4 Skills" },
+    ],
+    sections: [
+      { name: "Speaking & Listening", duration: "17–22 min", icon: "speaking" },
+      { name: "Reading", duration: "60 min", icon: "reading" },
+      { name: "Writing", duration: "60 min", icon: "writing" },
+    ],
+    whoShouldTake: ["Highest level academic seekers", "Native-equivalent proficiency seekers"],
     acceptedFor: ["UK Visas and Immigration (UKVI)"],
   },
 ];

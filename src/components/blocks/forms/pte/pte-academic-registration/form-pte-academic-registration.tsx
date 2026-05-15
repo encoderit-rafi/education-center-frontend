@@ -5,14 +5,45 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "@/components/ui/form";
 import { languages } from "@/lib/languages-data";
-import { IeltsAcademicSchema, type TIeltsAcademicSchema } from "./_type";
+import { PteAcademicSchema, type TPteAcademicSchema } from "./_type";
 
 import { TermsStep } from "./steps/terms-step";
 import { DateStep } from "./steps/date-step";
 import { RegistrationFormStep } from "./steps/registration-form-step";
 import { ReviewStep } from "./steps/review-step";
 
-export const WORKSHOPS_DATA = {
+export const PTE_COURSES = {
+  group: {
+    id: "group",
+    name: "Group Classroom",
+    label: "Group (In-person classroom-based course)",
+    price: 1850,
+    currency: "AED",
+  },
+  semi_private: {
+    id: "semi_private",
+    name: "Semi-Private Classroom",
+    label: "Semi-Private (In-person classroom-based)",
+    price: 2850,
+    currency: "AED",
+  },
+  private: {
+    id: "private",
+    name: "Private one-to-one",
+    label: "Private one-to-one (In-person classroom)",
+    price: 4850,
+    currency: "AED",
+  },
+  online: {
+    id: "online",
+    name: "Private Online",
+    label: "Private one-to-one (Online course)",
+    price: 3850,
+    currency: "AED",
+  },
+};
+
+export const PTE_WORKSHOPS = {
   workshop_2_hours: {
     id: "workshop_2_hours",
     name: "Workshop 2 Hours",
@@ -43,95 +74,51 @@ export const WORKSHOPS_DATA = {
   },
 };
 
-export const COURSES_DATA = {
-  group_classroom: {
-    id: "group_classroom",
-    name: "Group Classroom",
-    class_mode_id: "group",
-    class_type_id: "classroom",
-    price: 1850,
-    currency: "AED",
-    general_discount: 5,
-    special_discount: 10,
-  },
-  semi_private_classroom: {
-    id: "semi_private_classroom",
-    name: "Semi-Private Classroom",
-    class_mode_id: "semi_private",
-    class_type_id: "classroom",
-    price: 2850,
-    currency: "AED",
-    general_discount: 5,
-    special_discount: 15,
-  },
-  vip_classroom: {
-    id: "vip_classroom",
-    name: "VIP Classroom",
-    class_mode_id: "vip",
-    class_type_id: "classroom",
-    price: 4850,
-    currency: "AED",
-    general_discount: 5,
-    special_discount: 20,
-  },
-  vip_online: {
-    id: "vip_online",
-    name: "Private Online",
-    class_mode_id: "vip",
-    class_type_id: "online",
-    price: 4850,
-    currency: "AED",
-    general_discount: 5,
-    special_discount: 20,
-  },
-};
-
-export default function FormIeltsAcademicRegistration() {
+export default function FormPTEAcademicRegistration() {
   const [currentStep, setCurrentStep] = useState(0); // 0: Terms, 1: Date, 2: Form, 3: Review
 
-  const form = useForm<TIeltsAcademicSchema>({
-    resolver: zodResolver(IeltsAcademicSchema),
+  const form = useForm<TPteAcademicSchema>({
+    resolver: zodResolver(PteAcademicSchema),
     defaultValues: {
-      testModule: "Academic",
       givenNames: "",
+      noGivenNames: false,
       middleName: "",
       surnames: "",
       noSurname: false,
-      postcode: "",
-      poBox: "",
-      dateOfBirth: undefined,
-      sex: "male",
-      email: "",
+      emailUsername: "",
       confirmEmail: "",
-      mobileNumber: "",
-      smsConsent: false,
-      residenceCountry: "United Arab Emirates",
+      dateOfBirth: undefined,
+      gender: "",
+      placeOfBirth: "",
+      countryOfBirth: "",
+      countryOfCitizenship: "",
+      countryOfResidence: "",
       postalAddress1: "",
       postalAddress2: "",
+      poBox: "",
+      postcode: "",
       city: "",
-      idType: "passport",
-      idNumber: "",
-      idExpiryDate: undefined,
-      issuingAuthority: "",
-      nationality: "",
-      idDocument: undefined,
-      takenBefore: "No",
-      lessThanTwoYears: "No",
-      existingAccount: "No",
-      specialRequirements: "No",
-      specialRequirementsMention: "",
-      firstLanguage: "",
-      yearsStudyingEnglish: "",
-      educationLevel: "",
-      occupationLevel: "",
+      mobileNumber: "",
+      homeLanguage: "",
+      planningCountry: "",
+      currentSituation: "",
+      reasonForTaking: "",
+      studyLevel: "",
       occupationSector: "",
-      reasonForTakingTest: "",
-      destinationCountry: "",
+      referralSource: "",
+      takenBefore: "" as any,
+      takenWithinTwoYears: "" as any,
+      hasExistingAccount: "" as any,
       marketingPreference: "none",
+      idType: "",
+      idCountryOfIssue: "",
+      documentNumber: "",
       selectedCourse: "",
       selectedWorkshop: "",
-      paymentMethod: "",
-      examTimeSlot: "",
+      passportCopy: undefined,
+      infoCorrect: false,
+      examDate: undefined,
+      examTime: "",
     },
   });
 
@@ -143,19 +130,17 @@ export default function FormIeltsAcademicRegistration() {
   };
 
   const calculateTotal = () => {
-    const baseFee = 1400;
-    const serviceFee = 150;
-    const coursePrice = formData.selectedCourse
-      ? (COURSES_DATA as any)[formData.selectedCourse].price *
-      (1 -
-        (COURSES_DATA as any)[formData.selectedCourse].special_discount / 100)
-      : 0;
-    const workshopPrice = formData.selectedWorkshop
-      ? (WORKSHOPS_DATA as any)[formData.selectedWorkshop].price
-      : 0;
+    const baseFee = 1350;
+    const serviceFee = 100;
+    
+    const selectedCourseData = formData.selectedCourse ? (PTE_COURSES as any)[formData.selectedCourse] : null;
+    const coursePrice = selectedCourseData?.price || 0;
 
+    const selectedWorkshopData = formData.selectedWorkshop ? (PTE_WORKSHOPS as any)[formData.selectedWorkshop] : null;
+    const workshopPrice = selectedWorkshopData?.price || 0;
+    
     const subtotal = baseFee + serviceFee + coursePrice + workshopPrice;
-
+    
     return {
       baseFee,
       serviceFee,
@@ -170,14 +155,20 @@ export default function FormIeltsAcademicRegistration() {
   const pricing = calculateTotal();
   const total = pricing.total;
 
-  const handleFormSubmit: SubmitHandler<TIeltsAcademicSchema> = (data) => {
+  const handleFormSubmit: SubmitHandler<TPteAcademicSchema> = (data) => {
     if (currentStep < 3) {
       console.log("Step completion data:", data);
       goToStep(3);
     } else {
+      if (!data.infoCorrect) {
+        form.setError("infoCorrect", {
+          type: "manual",
+          message: "Please confirm that the information is correct"
+        });
+        return;
+      }
       console.log("Final submission data:", data);
-      // Final API call logic here
-      alert("Registration Successful!");
+      alert("PTE Registration Successful!");
     }
   };
 
@@ -194,10 +185,10 @@ export default function FormIeltsAcademicRegistration() {
     <div className="max-w-7xl mx-auto px-4 py-12">
       <div className="text-center mb-12">
         <h1 className="text-4xl md:text-5xl font-black text-slate-900 mb-4 tracking-tight">
-          IELTS Academic <span className="text-primary">Registration</span>
+          PTE Academic <span className="text-primary">Registration</span>
         </h1>
         <p className="text-slate-500 text-lg max-w-2xl mx-auto">
-          Complete your registration in a few easy steps.
+          Secure your Pearson Test of English booking today.
         </p>
       </div>
 
@@ -208,25 +199,25 @@ export default function FormIeltsAcademicRegistration() {
           {currentStep === 1 && (
             <DateStep
               value={formData.examDate}
-              timeSlot={formData.examTimeSlot}
+              timeSlot={formData.examTime}
               onChange={(date) => form.setValue("examDate", date)}
-              onTimeSlotChange={(slot) => form.setValue("examTimeSlot", slot as any)}
+              onTimeSlotChange={(slot) => form.setValue("examTime", slot)}
               onNext={() => goToStep(2)}
               onBack={() => goToStep(0)}
               error={form.formState.errors.examDate}
-              timeSlotError={form.formState.errors.examTimeSlot}
+              timeSlotError={form.formState.errors.examTime}
             />
           )}
 
           {currentStep === 2 && (
             <RegistrationFormStep
               form={form}
-              onSubmit={handleFormSubmit}
+              onSubmit={() => goToStep(3)}
               onInvalid={onInvalid}
               onBack={() => goToStep(1)}
               languages={languages}
-              coursesData={COURSES_DATA}
-              workshopsData={WORKSHOPS_DATA}
+              coursesData={PTE_COURSES}
+              workshopsData={PTE_WORKSHOPS}
             />
           )}
 
@@ -240,16 +231,8 @@ export default function FormIeltsAcademicRegistration() {
               baseFee={pricing.baseFee}
               serviceFee={pricing.serviceFee}
               total={total}
-              selectedCourseData={
-                formData.selectedCourse
-                  ? (COURSES_DATA as any)[formData.selectedCourse]
-                  : undefined
-              }
-              selectedWorkshopData={
-                formData.selectedWorkshop
-                  ? (WORKSHOPS_DATA as any)[formData.selectedWorkshop]
-                  : undefined
-              }
+              selectedCourseData={formData.selectedCourse ? (PTE_COURSES as any)[formData.selectedCourse] : null}
+              selectedWorkshopData={formData.selectedWorkshop ? (PTE_WORKSHOPS as any)[formData.selectedWorkshop] : null}
             />
           )}
         </Form>
