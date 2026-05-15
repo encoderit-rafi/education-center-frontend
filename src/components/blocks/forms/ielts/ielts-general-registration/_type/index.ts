@@ -2,43 +2,44 @@ import { z } from "zod";
 
 export const IeltsGeneralSchema = z.object({
     // Step 1: Personal Details
-    testModule: z.enum(["Academic", "General Training"]).or(z.literal("")),
-    bookingFor: z.enum(["myself", "child"], {
-        message: "Please select who you are booking for",
-    }).or(z.literal("")),
+    testModule: z.string().optional(),
+    bookingFor: z.string().optional(),
     givenNames: z.string().min(1, "Given names are required"),
+    middleName: z.string().optional(),
     surnames: z.string().optional(),
     noSurname: z.boolean(),
     dateOfBirth: z.any().refine((val) => !!val, "Date of birth is required"),
     sex: z.enum(["female", "male"], {
         message: "Please select your sex",
-    }).or(z.literal("")),
+    }).optional(),
     email: z.string().email("Invalid email address"),
     confirmEmail: z.string().email("Invalid email address"),
     mobileNumber: z.string().min(1, "Mobile number is required"),
     smsConsent: z.boolean(),
-    residenceCountry: z.string().min(1, "Country of residence is required"),
+    residenceCountry: z.string().optional(),
     postalAddress1: z.string().min(1, "Address is required"),
     postalAddress2: z.string().optional(),
     postalAddress3: z.string().optional(),
+    poBox: z.string().optional(),
     city: z.string().min(1, "Town / City is required"),
     postcode: z.string().min(1, "Postcode / ZIP is required"),
     marketingPreference: z.enum(["all", "some", "none"], {
         message: "Please select a marketing preference",
-    }).or(z.literal("")),
+    }).optional(),
 
     // Step 2: Identification Details
-    idType: z.enum(["passport", "emirates_id"]).or(z.literal("")),
+    idType: z.enum(["passport", "emirates_id"]).optional(),
     idNumber: z.string().optional(),
     idExpiryDate: z.any().optional(),
     issuingAuthority: z.string().optional(),
     nationality: z.string().optional(),
+    idDocument: z.any().refine((val) => !!val, "Please upload your ID document"),
 
     // Step 3: Your Profile
-    takenBefore: z.enum(["Yes", "No"]).or(z.literal("")),
-    lessThanTwoYears: z.enum(["Yes", "No", "I do not know"]).or(z.literal("")),
-    existingAccount: z.enum(["Yes", "No", "I forgot my IELTS account details"]).or(z.literal("")),
-    specialRequirements: z.enum(["Yes", "No"]).or(z.literal("")),
+    takenBefore: z.enum(["Yes", "No"]).optional(),
+    lessThanTwoYears: z.enum(["Yes", "No", "I do not know"]).optional(),
+    existingAccount: z.enum(["Yes", "No", "I forgot my IELTS account details"]).optional(),
+    specialRequirements: z.enum(["Yes", "No"]).optional(),
     specialRequirementsMention: z.string().optional(),
     firstLanguage: z.string().optional(),
     yearsStudyingEnglish: z.string().optional(),
@@ -58,7 +59,7 @@ export const IeltsGeneralSchema = z.object({
     paymentMethod: z.enum(["online", "bank_transfer", "at_center"]).or(z.literal("")),
     termsAgreed: z.boolean().optional(),
     examDate: z.any().refine((val) => !!val, "Please select an exam date"),
-    examTime: z.string().min(1, "Please select an exam time"),
+    examTimeSlot: z.string().min(1, "Please select an exam time"),
 }).refine((data) => data.email === data.confirmEmail, {
     message: "Emails do not match",
     path: ["confirmEmail"],
