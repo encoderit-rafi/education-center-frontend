@@ -128,6 +128,23 @@ export function RegistrationFormStep({
                 placeholder="Select your date of birth"
                 aria-invalid={!!errors.dateOfBirth}
               />
+              {formData.dateOfBirth && (() => {
+                const dob = new Date(formData.dateOfBirth);
+                const today = new Date();
+                let age = today.getFullYear() - dob.getFullYear();
+                const m = today.getMonth() - dob.getMonth();
+                if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+                  age--;
+                }
+                if (age < 16) {
+                  return (
+                    <p className="mt-2 text-xs text-red-600 font-bold animate-in fade-in slide-in-from-top-1">
+                      Candidates must be at least 16 years old.
+                    </p>
+                  );
+                }
+                return null;
+              })()}
               <FieldError errors={[errors.dateOfBirth]} />
             </FieldContent>
           </Field>
@@ -615,46 +632,6 @@ export function RegistrationFormStep({
             </FieldContent>
           </Field>
 
-          <Field data-invalid={!!errors.specialRequirements}>
-            <FieldLabel required>Do you have special requirements?</FieldLabel>
-            <FieldContent className="mt-2">
-              <RadioGroup
-                name="specialRequirements"
-                onValueChange={(val) => setValue("specialRequirements", val)}
-                value={formData.specialRequirements}
-                className="grid grid-cols-2 gap-3"
-              >
-                {["Yes", "No"].map((opt) => (
-                  <Label
-                    key={opt}
-                    htmlFor={`special-${opt}`}
-                    data-invalid={!!errors.specialRequirements}
-                    className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive"
-                  >
-                    <RadioGroupItem value={opt} id={`special-${opt}`} />
-                    {opt}
-                  </Label>
-                ))}
-              </RadioGroup>
-              <FieldError errors={[errors.specialRequirements]} />
-            </FieldContent>
-          </Field>
-
-          {formData.specialRequirements === "Yes" && (
-            <Field
-              className="md:col-span-2 lg:col-span-3"
-              data-invalid={!!errors.specialRequirementsMention}
-            >
-              <FieldLabel required>Please mention requirements</FieldLabel>
-              <FieldContent>
-                <Input
-                  {...register("specialRequirementsMention")}
-                  placeholder="Specify your requirements"
-                />
-                <FieldError errors={[errors.specialRequirementsMention]} />
-              </FieldContent>
-            </Field>
-          )}
         </div>
       </div>
 

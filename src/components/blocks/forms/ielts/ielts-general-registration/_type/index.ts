@@ -39,8 +39,6 @@ export const IeltsGeneralSchema = z.object({
     takenBefore: z.enum(["Yes", "No"]).optional(),
     lessThanTwoYears: z.enum(["Yes", "No", "I do not know"]).optional(),
     existingAccount: z.enum(["Yes", "No", "I forgot my IELTS account details"]).optional(),
-    specialRequirements: z.enum(["Yes", "No"]).optional(),
-    specialRequirementsMention: z.string().optional(),
     firstLanguage: z.string().optional(),
     yearsStudyingEnglish: z.string().optional(),
     educationLevel: z.string().optional(),

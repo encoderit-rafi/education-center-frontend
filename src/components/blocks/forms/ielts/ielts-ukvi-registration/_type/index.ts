@@ -38,8 +38,6 @@ export const IeltsUkviSchema = z.object({
     takenBefore: z.enum(["Yes", "No"]).or(z.literal("")),
     lessThanTwoYears: z.enum(["Yes", "No", "I do not know"]).or(z.literal("")),
     existingAccount: z.enum(["Yes", "No", "I forgot my IELTS account details"]).or(z.literal("")),
-    specialRequirements: z.enum(["Yes", "No"]).or(z.literal("")),
-    specialRequirementsMention: z.string().optional(),
     firstLanguage: z.string().optional(),
     yearsStudyingEnglish: z.string().optional(),
     educationLevel: z.string().optional(),

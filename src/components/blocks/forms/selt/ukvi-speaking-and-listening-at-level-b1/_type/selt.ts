@@ -46,8 +46,6 @@ export const SeltA1Schema = z
     existingAccount: z
       .enum(["Yes", "No", "I forgot my IELTS account details"])
       .or(z.literal("")),
-    specialRequirements: z.enum(["Yes", "No"]).or(z.literal("")),
-    specialRequirementsMention: z.string().optional(),
     firstLanguage: z.string().optional(),
     yearsStudyingEnglish: z.string().optional(),
     educationLevel: z.string().optional(),
@@ -98,18 +96,6 @@ export const SeltA1Schema = z
       }
     }
 
-    if (data.specialRequirements === "Yes") {
-      if (
-        !data.specialRequirementsMention ||
-        data.specialRequirementsMention.trim() === ""
-      ) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: "Please mention your requirements",
-          path: ["specialRequirementsMention"],
-        });
-      }
-    }
   });
 
 export const RefinedSeltA1Schema = SeltA1Schema;

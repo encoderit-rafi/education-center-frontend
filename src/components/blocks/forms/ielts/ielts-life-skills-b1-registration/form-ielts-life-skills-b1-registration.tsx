@@ -4,27 +4,27 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "@/components/ui/form";
-import { IeltsGeneralSchema, type TIeltsGeneralSchema } from "./_type";
+import { IeltsLifeSkillsB1Schema, type TIeltsLifeSkillsB1Schema } from "./_type";
 import { toast } from "sonner";
 import { languages } from "@/lib/languages-data";
 import { courses as coursesData, workshops as workshopsData } from "@/lib/data";
 
-// Import steps
-import { TermsStep } from "./steps/terms-step";
-import { DateStep } from "./steps/date-step";
-import { RegistrationFormStep } from "./steps/registration-form-step";
-import { ReviewStep } from "./steps/review-step";
+// Reuse IELTS General steps — identical structure
+import { TermsStep } from "../ielts-general-registration/steps/terms-step";
+import { DateStep } from "../ielts-general-registration/steps/date-step";
+import { RegistrationFormStep } from "../ielts-general-registration/steps/registration-form-step";
+import { ReviewStep } from "../ielts-general-registration/steps/review-step";
 
-const EXAM_FEE = 1400;
+const EXAM_FEE = 650;
 const SERVICE_FEE = 150;
 
-export default function FormIELTSGeneralRegistration() {
+export default function FormIELTSLifeSkillsB1Registration() {
   const [step, setStep] = useState(0);
 
-  const form = useForm<TIeltsGeneralSchema>({
-    resolver: zodResolver(IeltsGeneralSchema),
+  const form = useForm<TIeltsLifeSkillsB1Schema>({
+    resolver: zodResolver(IeltsLifeSkillsB1Schema),
     defaultValues: {
-      testModule: "General Training",
+      testModule: "ielts-life-skills-b1",
       bookingFor: "",
       givenNames: "",
       middleName: "",
@@ -74,28 +74,25 @@ export default function FormIELTSGeneralRegistration() {
   const { watch, trigger, setValue, handleSubmit } = form;
   const formData = watch();
 
-  // Pricing Logic
   const selectedCourse = coursesData.find((c) => c.id === formData.selectedCourse);
   const selectedWorkshop = workshopsData.find((w) => w.id === formData.selectedWorkshop);
 
-  const coursePrice = selectedCourse ? selectedCourse.price * (1 - (selectedCourse.special_discount || 0) / 100) : 0;
+  const coursePrice = selectedCourse
+    ? selectedCourse.price * (1 - (selectedCourse.special_discount || 0) / 100)
+    : 0;
   const workshopPrice = selectedWorkshop?.price || 0;
-
   const subtotal = EXAM_FEE + SERVICE_FEE + coursePrice + workshopPrice;
   const total = subtotal;
 
   const nextStep = async () => {
     let fieldsToValidate: any[] = [];
-
     if (step === 1) {
       fieldsToValidate = ["examDate", "examTimeSlot"];
     } else if (step === 2) {
-      // Validate the whole form before moving to review
       const isValid = await trigger();
       if (isValid) setStep(3);
       return;
     }
-
     if (fieldsToValidate.length > 0) {
       const isValid = await trigger(fieldsToValidate as any);
       if (isValid) setStep(step + 1);
@@ -106,10 +103,8 @@ export default function FormIELTSGeneralRegistration() {
 
   const prevStep = () => setStep(Math.max(0, step - 1));
 
-  const onSubmit = async (data: TIeltsGeneralSchema) => {
+  const onSubmit = async (data: TIeltsLifeSkillsB1Schema) => {
     console.log("Form Data:", data);
-    // Handle submission (e.g., API call)
-    // If successful, maybe show a success message or redirect
     alert("Registration Successful!");
   };
 

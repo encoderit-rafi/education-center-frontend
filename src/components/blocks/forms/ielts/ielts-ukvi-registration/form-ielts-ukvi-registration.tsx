@@ -77,8 +77,6 @@ export default function FormIELTSUKVIRegistration() {
       takenBefore: "",
       lessThanTwoYears: "",
       existingAccount: "",
-      specialRequirements: "",
-      specialRequirementsMention: "",
       firstLanguage: "",
       yearsStudyingEnglish: "",
       educationLevel: "",
@@ -181,8 +179,6 @@ export default function FormIELTSUKVIRegistration() {
           "takenBefore",
           "lessThanTwoYears",
           "existingAccount",
-          "specialRequirements",
-          "specialRequirementsMention",
           "firstLanguage",
           "yearsStudyingEnglish",
           "educationLevel",
@@ -214,18 +210,18 @@ export default function FormIELTSUKVIRegistration() {
               {step === 1
                 ? "Select Exam Date"
                 : step === 2
-                ? "Personal details"
-                : step === 3
-                  ? "Identification details"
-                  : step === 4
-                    ? "Your profile"
-                    : step === 5
-                      ? "Courses & Workshops"
-                      : step === 6
-                        ? "Review"
-                        : step === 7
-                          ? "Payment"
-                          : "Confirmation"}
+                  ? "Personal details"
+                  : step === 3
+                    ? "Identification details"
+                    : step === 4
+                      ? "Your profile"
+                      : step === 5
+                        ? "Courses & Workshops"
+                        : step === 6
+                          ? "Review"
+                          : step === 7
+                            ? "Payment"
+                            : "Confirmation"}
             </h2>
           </div>
           <div
@@ -294,6 +290,74 @@ export default function FormIELTSUKVIRegistration() {
                   </ul>
                 </div>
 
+                {/* Test Module / Category */}
+                <div className="space-y-6">
+                  <FormField
+                    control={control}
+                    name="testModule"
+                    render={({ field }) => (
+                      <FormItem className="space-y-6">
+                        <FormLabel className="text-lg font-black text-gray-900 tracking-tight">
+                          Which test are you booking?
+                        </FormLabel>
+                        <FormControl>
+                          <RadioGroup
+                            onValueChange={field.onChange}
+                            value={field.value}
+                            className="space-y-4"
+                          >
+                            <div
+                              onClick={() => field.onChange("Academic")}
+                              className="flex items-start space-x-4 p-4 rounded-xl border border-slate-100 hover:border-slate-200 transition-all cursor-pointer group bg-white shadow-sm"
+                            >
+                              <RadioGroupItem
+                                value="Academic"
+                                id="academic"
+                                className="border-[#A11D1D] text-[#A11D1D] mt-1"
+                              />
+                              <Label
+                                htmlFor="academic"
+                                className="flex flex-col cursor-pointer"
+                              >
+                                <span className="font-bold text-gray-900 group-hover:text-[#A11D1D] transition-colors">
+                                  IELTS for UKVI (Academic)
+                                </span>
+                                <span className="text-xs text-gray-400 font-medium">
+                                  For degree-level study or professional registration
+                                </span>
+                              </Label>
+                            </div>
+                            <div
+                              onClick={() => field.onChange("General Training")}
+                              className="flex items-start space-x-4 p-4 rounded-xl border border-slate-100 hover:border-slate-200 transition-all cursor-pointer group bg-white shadow-sm"
+                            >
+                              <RadioGroupItem
+                                value="General Training"
+                                id="general_training"
+                                className="border-[#A11D1D] text-[#A11D1D] mt-1"
+                              />
+                              <Label
+                                htmlFor="general_training"
+                                className="flex flex-col cursor-pointer"
+                              >
+                                <span className="font-bold text-gray-900 group-hover:text-[#A11D1D] transition-colors">
+                                  IELTS for UKVI (General Training)
+                                </span>
+                                <span className="text-xs text-gray-400 font-medium">
+                                  For work experience or training programmes below degree level
+                                </span>
+                              </Label>
+                            </div>
+                          </RadioGroup>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+                <div className="h-px bg-slate-100"></div>
+
                 {/* Who are you booking for */}
                 <div className="space-y-6">
                   <FormField
@@ -316,44 +380,44 @@ export default function FormIELTSUKVIRegistration() {
                             className="space-y-4"
                           >
                             <div
-                                onClick={() => field.onChange("myself")}
-                                className="flex items-start space-x-4 p-4 rounded-xl border border-slate-100 hover:border-slate-200 transition-all cursor-pointer group bg-white shadow-sm"
+                              onClick={() => field.onChange("myself")}
+                              className="flex items-start space-x-4 p-4 rounded-xl border border-slate-100 hover:border-slate-200 transition-all cursor-pointer group bg-white shadow-sm"
+                            >
+                              <RadioGroupItem
+                                value="myself"
+                                id="myself"
+                                className="border-[#A11D1D] text-[#A11D1D] mt-1"
+                              />
+                              <Label
+                                htmlFor="myself"
+                                className="flex flex-col cursor-pointer"
                               >
-                                <RadioGroupItem
-                                  value="myself"
-                                  id="myself"
-                                  className="border-[#A11D1D] text-[#A11D1D] mt-1"
-                                />
-                                <Label
-                                  htmlFor="myself"
-                                  className="flex flex-col cursor-pointer"
-                                >
-                                  <span className="font-bold text-gray-900 group-hover:text-[#A11D1D] transition-colors">
-                                    Myself
-                                  </span>
-                                </Label>
-                              </div>
-                              <div
-                                onClick={() => field.onChange("child")}
-                                className="flex items-start space-x-4 p-4 rounded-xl border border-slate-100 hover:border-slate-200 transition-all cursor-pointer group bg-white shadow-sm"
+                                <span className="font-bold text-gray-900 group-hover:text-[#A11D1D] transition-colors">
+                                  Myself
+                                </span>
+                              </Label>
+                            </div>
+                            <div
+                              onClick={() => field.onChange("child")}
+                              className="flex items-start space-x-4 p-4 rounded-xl border border-slate-100 hover:border-slate-200 transition-all cursor-pointer group bg-white shadow-sm"
+                            >
+                              <RadioGroupItem
+                                value="child"
+                                id="child"
+                                className="border-[#A11D1D] text-[#A11D1D] mt-1"
+                              />
+                              <Label
+                                htmlFor="child"
+                                className="flex flex-col items-start cursor-pointer"
                               >
-                                <RadioGroupItem
-                                  value="child"
-                                  id="child"
-                                  className="border-[#A11D1D] text-[#A11D1D] mt-1"
-                                />
-                                <Label
-                                  htmlFor="child"
-                                  className="flex flex-col items-start cursor-pointer"
-                                >
-                                  <span className="font-bold text-gray-900 group-hover:text-[#A11D1D] transition-colors">
-                                    My child
-                                  </span>
-                                  <span className="text-xs text-gray-400 font-medium">
-                                    (under 16 years old)
-                                  </span>
-                                </Label>
-                              </div>
+                                <span className="font-bold text-gray-900 group-hover:text-[#A11D1D] transition-colors">
+                                  My child
+                                </span>
+                                <span className="text-xs text-gray-400 font-medium">
+                                  (under 16 years old)
+                                </span>
+                              </Label>
+                            </div>
                           </RadioGroup>
                         </FormControl>
                         <FormMessage />
@@ -451,6 +515,23 @@ export default function FormIELTSUKVIRegistration() {
                         fromYear={1940}
                         toYear={2024}
                       />
+                      {formData.dateOfBirth && (() => {
+                        const dob = new Date(formData.dateOfBirth);
+                        const today = new Date();
+                        let age = today.getFullYear() - dob.getFullYear();
+                        const m = today.getMonth() - dob.getMonth();
+                        if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+                          age--;
+                        }
+                        if (age < 16) {
+                          return (
+                            <p className="mt-2 text-xs text-red-600 font-bold animate-in fade-in slide-in-from-top-1">
+                              Candidates must be at least 16 years old.
+                            </p>
+                          );
+                        }
+                        return null;
+                      })()}
 
                       <FormField
                         control={control}
@@ -801,9 +882,9 @@ export default function FormIELTSUKVIRegistration() {
                             className="space-y-4"
                           >
                             <div
-                                onClick={() => field.onChange("passport")}
-                                className="flex items-center space-x-4 p-4 rounded-xl border border-slate-100 hover:border-slate-200 transition-all cursor-pointer group bg-white"
-                              >
+                              onClick={() => field.onChange("passport")}
+                              className="flex items-center space-x-4 p-4 rounded-xl border border-slate-100 hover:border-slate-200 transition-all cursor-pointer group bg-white"
+                            >
                               <RadioGroupItem
                                 value="passport"
                                 id="passport"
@@ -819,9 +900,9 @@ export default function FormIELTSUKVIRegistration() {
                               </Label>
                             </div>
                             <div
-                                onClick={() => field.onChange("emirates_id")}
-                                className="flex items-center space-x-4 p-4 rounded-xl border border-slate-100 hover:border-slate-200 transition-all cursor-pointer group bg-white"
-                              >
+                              onClick={() => field.onChange("emirates_id")}
+                              className="flex items-center space-x-4 p-4 rounded-xl border border-slate-100 hover:border-slate-200 transition-all cursor-pointer group bg-white"
+                            >
                               <RadioGroupItem
                                 value="emirates_id"
                                 id="emirates_id"
@@ -1006,17 +1087,17 @@ export default function FormIELTSUKVIRegistration() {
                                     <RadioGroupItem value="Yes" id="less-yes" className="border-[#A11D1D] text-[#A11D1D]" />
                                     <Label htmlFor="less-yes" className="font-medium cursor-pointer">Yes</Label>
                                   </div>
-                                  <div 
-                                   onClick={() => field.onChange("Yes")}
-                                   className="flex items-center space-x-2 cursor-pointer p-2 rounded hover:bg-slate-50 transition-colors"
-                                 >
+                                  <div
+                                    onClick={() => field.onChange("Yes")}
+                                    className="flex items-center space-x-2 cursor-pointer p-2 rounded hover:bg-slate-50 transition-colors"
+                                  >
                                     <RadioGroupItem value="No" id="less-no" className="border-[#A11D1D] text-[#A11D1D]" />
                                     <Label htmlFor="less-no" className="font-medium cursor-pointer">No</Label>
                                   </div>
-                                  <div 
-                                   onClick={() => field.onChange("No")}
-                                   className="flex items-center space-x-2 cursor-pointer p-2 rounded hover:bg-slate-50 transition-colors"
-                                 >
+                                  <div
+                                    onClick={() => field.onChange("No")}
+                                    className="flex items-center space-x-2 cursor-pointer p-2 rounded hover:bg-slate-50 transition-colors"
+                                  >
                                     <RadioGroupItem value="I do not know" id="less-unknown" className="border-[#A11D1D] text-[#A11D1D]" />
                                     <Label htmlFor="less-unknown" className="font-medium cursor-pointer">I do not know</Label>
                                   </div>
@@ -1063,59 +1144,6 @@ export default function FormIELTSUKVIRegistration() {
                     )}
                   </div>
 
-                  {/* Special Requirements Section */}
-                  <div className="space-y-8 bg-slate-50/30 p-6 rounded-2xl border border-slate-100">
-                    <FormField
-                      control={control}
-                      name="specialRequirements"
-                      render={({ field }) => (
-                        <FormItem className="space-y-4">
-                          <FormLabel className="text-sm font-bold text-gray-700">
-                            *Do You Have Any Special Requirements Due to Ill Health/Medical Conditions?
-                          </FormLabel>
-                          <FormControl>
-                            <RadioGroup
-                              onValueChange={field.onChange}
-                              value={field.value}
-                              className="flex gap-6"
-                            >
-                              <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="Yes" id="special-yes" className="border-[#A11D1D] text-[#A11D1D]" />
-                                <Label htmlFor="special-yes" className="font-medium cursor-pointer">Yes</Label>
-                              </div>
-                              <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="No" id="special-no" className="border-[#A11D1D] text-[#A11D1D]" />
-                                <Label htmlFor="special-no" className="font-medium cursor-pointer">No</Label>
-                              </div>
-                            </RadioGroup>
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    {formData.specialRequirements === "Yes" && (
-                      <FormField
-                        control={control}
-                        name="specialRequirementsMention"
-                        render={({ field }) => (
-                          <FormItem className="space-y-2">
-                            <FormLabel className="text-xs font-black uppercase tracking-widest text-gray-500">
-                              * If please mention
-                            </FormLabel>
-                            <FormControl>
-                              <Input
-                                placeholder="Please mention your requirements"
-                                {...field}
-                                className="rounded-lg bg-white border-slate-200 focus:ring-4 focus:ring-[#A11D1D]/5 transition-all h-12"
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    )}
-                  </div>
 
                   <div className="space-y-8">
                     <FormField
@@ -1937,13 +1965,6 @@ export default function FormIELTSUKVIRegistration() {
                       </>
                     )}
 
-                    <div className="text-gray-500 font-bold uppercase tracking-widest text-[10px]">
-                      Special requirements:
-                    </div>
-                    <div className="font-bold text-gray-700">
-                      {formData.specialRequirements || "-"}
-                      {formData.specialRequirements === "Yes" && formData.specialRequirementsMention && ` (${formData.specialRequirementsMention})`}
-                    </div>
 
                     <div className="text-gray-500 font-bold uppercase tracking-widest text-[10px]">
                       First language:

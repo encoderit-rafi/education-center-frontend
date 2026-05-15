@@ -50,13 +50,13 @@ export function DateStep({
                 selected={value}
                 onSelect={(date) => date && onChange(date)}
                 disabled={(date) => {
-                  // Activate only Sunday (0)
+                  // Deactivate only Sunday (0)
                   const isSunday = date.getDay() === 0;
 
                   // Also deactivate past dates
                   const isPast = date < new Date();
 
-                  return !isSunday || isPast;
+                  return isSunday || isPast;
                 }}
                 className="rounded-2xl border border-slate-100 shadow-sm p-4 bg-white [--calendar-accent:theme(colors.primary.DEFAULT)]"
               />
@@ -75,24 +75,36 @@ export function DateStep({
                 >
                   {[
                     { id: "9:00 AM", label: "Morning Session", time: "09:00 AM" },
-                    { id: "11:00 AM", label: "Morning Session", time: "11:00 AM" },
+                    { id: "11:00 AM", label: "Afternoon Session", time: "11:00 AM" },
                   ].map((slot) => (
-                    <Label
-                      key={slot.id}
-                      htmlFor={slot.id}
-                      className={`flex items-center justify-between p-4 rounded-xl border-2 transition-all cursor-pointer ${timeSlot === slot.id
-                        ? "border-primary bg-primary/5 ring-1 ring-primary"
-                        : "border-slate-100 bg-white hover:border-slate-200"
-                        }`}
-                    >
-                      <div className="flex items-center gap-3">
-                        <RadioGroupItem value={slot.id} id={slot.id} />
-                        <div>
-                          <p className="font-bold text-slate-900">{slot.label}</p>
-                          <p className="text-xs text-slate-500 font-medium">Starts at {slot.time}</p>
+                    <div key={slot.id} className="space-y-3">
+                      <Label
+                        htmlFor={slot.id}
+                        className={`flex items-center justify-between p-4 rounded-xl border-2 transition-all cursor-pointer ${timeSlot === slot.id
+                          ? "border-primary bg-primary/5 ring-1 ring-primary"
+                          : "border-slate-100 bg-white hover:border-slate-200"
+                          }`}
+                      >
+                        <div className="flex items-center justify-between w-full overflow-hidden">
+                          <div className="flex items-center gap-3">
+                            <RadioGroupItem value={slot.id} id={slot.id} />
+                            <div>
+                              <p className="font-bold text-slate-900">{slot.label}</p>
+                              <p className="text-sm font-medium">Starts at {slot.time}</p>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    </Label>
+                      </Label>
+                      {timeSlot === slot.id && (
+                        <div className="p-3 rounded-xl bg-slate-50 border border-slate-100 animate-in slide-in-from-top-2 duration-300">
+                          <p className="text-sm font-medium leading-relaxed">
+                            {slot.id === "9:00 AM"
+                              ? "The Speaking Test usually takes place in the afternoon. This will be confirmed by the British Council."
+                              : "The Speaking Test usually takes place in the morning. This will be confirmed by the British Council."}
+                          </p>
+                        </div>
+                      )}
+                    </div>
                   ))}
                 </RadioGroup>
                 <FieldError errors={[timeSlotError]} className="mt-4" />
@@ -109,7 +121,6 @@ export function DateStep({
           <Button
 
             onClick={onBack}
-
           >
             Back
           </Button>
@@ -118,7 +129,6 @@ export function DateStep({
             disabled={!value || !timeSlot}
           >
             Next
-
           </Button>
         </div>
       </div>

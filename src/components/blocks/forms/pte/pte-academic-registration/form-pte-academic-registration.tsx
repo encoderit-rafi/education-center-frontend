@@ -109,7 +109,7 @@ export default function FormPTEAcademicRegistration() {
       takenBefore: "" as any,
       takenWithinTwoYears: "" as any,
       hasExistingAccount: "" as any,
-      marketingPreference: "none",
+      marketingPreference: "",
       idType: "",
       idCountryOfIssue: "",
       documentNumber: "",

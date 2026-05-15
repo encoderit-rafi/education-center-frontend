@@ -1,6 +1,11 @@
 import FormIELTSAcademicRegistration from "@/components/blocks/forms/ielts/ielts-academic-registration/form-ielts-academic-registration";
 import FormIELTSGeneralRegistration from "@/components/blocks/forms/ielts/ielts-general-registration/form-ielts-general-registration";
 import FormIELTSUKVIRegistration from "@/components/blocks/forms/ielts/ielts-ukvi-registration/form-ielts-ukvi-registration";
+import FormIELTSUKVIAcademicRegistration from "@/components/blocks/forms/ielts/ielts-ukvi-academic-registration/form-ielts-ukvi-academic-registration";
+import FormIELTSUKVIGeneralRegistration from "@/components/blocks/forms/ielts/ielts-ukvi-general-registration/form-ielts-ukvi-general-registration";
+import FormIELTSLifeSkillsA1Registration from "@/components/blocks/forms/ielts/ielts-life-skills-a1-registration/form-ielts-life-skills-a1-registration";
+import FormIELTSLifeSkillsA2Registration from "@/components/blocks/forms/ielts/ielts-life-skills-a2-registration/form-ielts-life-skills-a2-registration";
+import FormIELTSLifeSkillsB1Registration from "@/components/blocks/forms/ielts/ielts-life-skills-b1-registration/form-ielts-life-skills-b1-registration";
 import FormPTEAcademicRegistration from "@/components/blocks/forms/pte/pte-academic-registration/form-pte-academic-registration";
 import FormPTECoreRegistration from "@/components/blocks/forms/pte/pte-core-registration/form-pte-core-registration";
 import FormPTEHomeA1Registration from "@/components/blocks/forms/pte/pte-home-a1-registration/form-pte-home-a1-registration";
@@ -36,6 +41,16 @@ export default async function BookExamsId({
     return <BookExamItems data={exam} />;
   }
   switch (id) {
+    case EXAM_IDS_DATA.ielts_ukvi_academic.id:
+      return <FormIELTSUKVIAcademicRegistration />;
+    case EXAM_IDS_DATA.ielts_ukvi_general.id:
+      return <FormIELTSUKVIGeneralRegistration />;
+    case EXAM_IDS_DATA.ielts_life_skills_a1.id:
+      return <FormIELTSLifeSkillsA1Registration />;
+    case EXAM_IDS_DATA.ielts_life_skills_a2.id:
+      return <FormIELTSLifeSkillsA2Registration />;
+    case EXAM_IDS_DATA.ielts_life_skills_b1.id:
+      return <FormIELTSLifeSkillsB1Registration />;
     case EXAM_IDS_DATA.ielts_academic.id:
       return <FormIELTSAcademicRegistration />;
     case EXAM_IDS_DATA.ielts_general.id:

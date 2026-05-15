@@ -69,7 +69,7 @@ export default function FormPTECoreRegistration() {
       takenBefore: "" as any,
       takenWithinTwoYears: "" as any,
       hasExistingAccount: "" as any,
-      marketingPreference: "none",
+      marketingPreference: "",
       idType: undefined,
       idCountryOfIssue: "",
       documentNumber: "",

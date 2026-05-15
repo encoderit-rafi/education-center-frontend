@@ -137,6 +137,23 @@ export function RegistrationFormStep({
                 toYear={new Date().getFullYear()}
                 placeholder="Select date of birth"
               />
+              {formData.dateOfBirth && (() => {
+                const dob = new Date(formData.dateOfBirth);
+                const today = new Date();
+                let age = today.getFullYear() - dob.getFullYear();
+                const m = today.getMonth() - dob.getMonth();
+                if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+                  age--;
+                }
+                if (age < 16) {
+                  return (
+                    <p className="mt-2 text-xs text-red-600 font-bold animate-in fade-in slide-in-from-top-1">
+                      Candidates must be at least 16 years old.
+                    </p>
+                  );
+                }
+                return null;
+              })()}
               <FieldError errors={[errors.dateOfBirth]} />
             </FieldContent>
           </Field>
