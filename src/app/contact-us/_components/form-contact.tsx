@@ -242,20 +242,17 @@ export default function ContactForm() {
                     <DropdownMenuRadioItem value="Fees & Payment">
                       Fees & Payment
                     </DropdownMenuRadioItem>
-                    <DropdownMenuRadioItem value="General Enquiry">
-                      General Enquiry
-                    </DropdownMenuRadioItem>
                     <DropdownMenuRadioItem value="Free Consultation">
                       Free Consultation
                     </DropdownMenuRadioItem>
                     <DropdownMenuRadioItem value="Paid Mock Test">
                       Paid Mock Test
                     </DropdownMenuRadioItem>
-                    <DropdownMenuRadioItem value="Request For Partnership">
-                      Request For Partnership
+                    <DropdownMenuRadioItem value="Partnership">
+                      Partnership
                     </DropdownMenuRadioItem>
-                    <DropdownMenuRadioItem value="Test English Proficiency">
-                      Test English Proficiency
+                    <DropdownMenuRadioItem value="General Enquiry">
+                      General Enquiry
                     </DropdownMenuRadioItem>
                   </DropdownMenuRadioGroup>
                 </DropdownMenuContent>
@@ -316,8 +313,7 @@ export default function ContactForm() {
         <p className="flex items-center gap-1 text-sm">
           <ShieldCheck className="w-4 h-4 text-primary" />
           <span className="font-medium">
-            We&apos;ll get back to you within 24 hours. Your information is kept
-            confidential.
+            We&apos;ll get back to you within 1 to 2 working days.
           </span>
         </p>
       </div>

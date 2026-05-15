@@ -19,7 +19,7 @@ import FormSELTB1RWRegistration from "@/components/blocks/forms/selt/ukvi-speaki
 import FormSELTB2Registration from "@/components/blocks/forms/selt/ukvi-speaking-and-listening-at-level-b2/form-selt-b2-registration";
 import FormSELTC1Registration from "@/components/blocks/forms/selt/ukvi-speaking-and-listening-at-level-c1/form-selt-c1-registration";
 import FormSELTC2Registration from "@/components/blocks/forms/selt/ukvi-speaking-and-listening-at-level-c2/form-selt-c2-registration";
-import FormTOEFLIBTRegistration from "@/components/blocks/forms/toefl-ibt-exam-registration/form-toefl-ibt-registration";
+import FormTOEFLIBTRegistration from "@/components/blocks/forms/toefl/toefl-ibt-exam-registration/form-toefl-ibt-registration";
 import { EXAM_DETAILE_DATA, EXAM_IDS_DATA } from "@/data";
 import { notFound } from "next/navigation";
 import BookExamItems from "../_components/book-exam-items";

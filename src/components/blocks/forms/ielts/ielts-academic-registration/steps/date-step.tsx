@@ -43,7 +43,7 @@ export function DateStep({
 
         <div className="mt-8 grid md:grid-cols-2 gap-12 items-start">
           <Field data-invalid={!!error}>
-            <FieldLabel required>Select Date (Sundays Only)</FieldLabel>
+            <FieldLabel required>Select Date</FieldLabel>
             <FieldContent className="flex flex-col items-center">
               <Calendar
                 mode="single"

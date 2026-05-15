@@ -57,23 +57,23 @@ export default function ContactUs() {
                   </span>
                   <div className="space-y-1">
                     <h3 className="text-lg font-black text-secondary group-hover:text-primary transition-colors tracking-tight">
-                      +971 4 333 3616
+                      +971 6 553 1250
                     </h3>
                     <p className="text-sm font-normal text-secondary/90">
-                      Available Sunday – Thursday, 9am – 6pm
+                      Available Saturday – Thursday, 9:00 AM – 9:00 PM
                     </p>
                   </div>
                 </div>
               </Link>
 
-              <Link href="mailto:info@tepth.net" className="block">
+              <Link href="mailto:info@tepth.org" className="block">
                 <div className="group flex flex-row items-start gap-4 p-5 rounded-lg border border-slate-300 bg-white transition-all duration-300 hover:-translate-y-1 hover:border-primary hover:shadow-lg">
                   <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-white group-hover:scale-110">
                     <Mail className="size-4" />
                   </span>
                   <div className="space-y-1">
                     <h3 className="text-lg font-black text-secondary group-hover:text-primary transition-colors tracking-tight">
-                      info@tepth.net
+                      info@tepth.org
                     </h3>
                     <p className="text-sm font-normal text-secondary/90">
                       We typically respond within 24 hours
@@ -89,7 +89,9 @@ export default function ContactUs() {
                   </span>
                   <div className="space-y-1">
                     <h3 className="text-lg font-black text-secondary group-hover:text-primary transition-colors tracking-tight">
-                      Dubai Silicon Oasis, Dubai, UAE
+                      The Exam Preparation & Testing House L.L.C
+                      Suite 701, 7th Floor, Tabarak Tower, Corniche Road,
+                      Al Mamzar, Sharjah, United Arab Emirates.
                     </h3>
                     <p className="text-sm font-normal text-secondary/90">
                       Close to Academic City — wheelchair accessible
@@ -125,7 +127,7 @@ export default function ContactUs() {
 
                   <div className="space-y-2">
                     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-1 sm:gap-4">
-                      <span className="text-sm sm:text-base font-medium">Sunday – Thursday</span>
+                      <span className="text-sm sm:text-base font-medium">Saturday – Thursday</span>
                       <span className="text-sm sm:text-base text-slate-900 font-black">9:00 AM – 9:00 PM</span>
                     </div>
                     <div className="w-full h-px bg-rose-200/40" />
@@ -149,7 +151,7 @@ export default function ContactUs() {
                     Send a Direct<span className="text-primary"> Message</span>
                   </>
                 }
-                description="Have a specific question? Fill out the form below and our team will get back to you within 24 business hours."
+                description="We&apos;ll get back to you within 1 to 2 working days."
                 className="mb-12"
                 badgeClassName="tracking-[0.1em]"
               />

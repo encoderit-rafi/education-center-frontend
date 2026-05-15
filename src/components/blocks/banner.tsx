@@ -15,7 +15,7 @@ export default function Banner() {
           <span className="font-medium tracking-wide">
             Authorised Test Centre &nbsp;·&nbsp; IELTS &nbsp;·&nbsp; TOEFL iBT
             &nbsp;·&nbsp; PTE &nbsp;·&nbsp; CELPIP G &nbsp;·&nbsp; Skills for
-            English (SELT)
+            English (SELT) . Save up to 20% when you book your exam and register for the course with TEPTH and pay online on our website
           </span>
         </div>
       </Marquee>

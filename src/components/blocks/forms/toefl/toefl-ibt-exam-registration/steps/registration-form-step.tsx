@@ -266,7 +266,7 @@ export function RegistrationFormStep({
                     </Field>
 
                     <Field data-invalid={!!errors.city}>
-                        <FieldLabel required>Emirate/ City</FieldLabel>
+                        <FieldLabel required>Emirate / City</FieldLabel>
                         <FieldContent>
                             <Input
                                 {...register("city")}
