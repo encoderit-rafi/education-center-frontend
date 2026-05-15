@@ -7,6 +7,7 @@ import Footer from "@/components/blocks/footer";
 import FloatingChatbot from "@/components/blocks/floating-chatbot";
 import SocialSupport from "@/components/blocks/social-support";
 import { Toaster } from "sonner";
+import Providers from "@/components/providers";
 
 const manrope = Manrope({ subsets: ["latin"], variable: "--font-headline" });
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
@@ -38,12 +39,14 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col bg-background text-on-surface font-body selection:bg-red-100 selection:text-red-900">
-        <NavBar />
-        <main>{children}</main>
-        <Footer />
-        {/* <FloatingChatbot />
-        <SocialSupport /> */}
-        <Toaster position="top-right" richColors />
+        <Providers>
+          <NavBar />
+          <main>{children}</main>
+          <Footer />
+          {/* <FloatingChatbot />
+          <SocialSupport /> */}
+          <Toaster position="top-right" richColors />
+        </Providers>
       </body>
     </html>
   );

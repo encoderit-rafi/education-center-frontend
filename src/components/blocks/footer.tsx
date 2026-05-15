@@ -14,7 +14,8 @@ import {
   ChevronRight,
 } from "lucide-react";
 import WaveDivider from "./wave-divider";
-import { PRIMARY_NAV, SECONDARY_NAV } from "@/data";
+import { SECONDARY_NAV } from "@/data";
+import { usePrimaryNav } from "@/hooks/use-primary-nav";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -57,6 +58,8 @@ function ContactItem({
 }
 
 export default function Footer() {
+  const { primaryNav, isLoading } = usePrimaryNav();
+
   const usefulLinks = [
     { label: "Home", href: "/" },
     { label: "Contact Us", href: "/contact-us" },
@@ -164,9 +167,16 @@ export default function Footer() {
             <div className="w-14 h-1 bg-red-700 mb-8" />
 
             <div className="flex flex-col gap-y-4">
-              {[...PRIMARY_NAV, ...SECONDARY_NAV]
-                .filter((nav) => nav.name.toLowerCase() !== "home")
-                .map((nav) => (
+              {isLoading ? (
+                <div className="space-y-4">
+                  {[1, 2, 3, 4, 5].map((i) => (
+                    <div key={i} className="h-5 w-3/4 bg-white/10 animate-pulse rounded-md" />
+                  ))}
+                </div>
+              ) : (
+                [...primaryNav, ...SECONDARY_NAV]
+                  .filter((nav) => nav.name.toLowerCase() !== "home")
+                  .map((nav) => (
                   <div key={nav.name}>
                     {nav.type === "dropdown" ? (
                       <DropdownMenu>
@@ -213,7 +223,8 @@ export default function Footer() {
                       </Link>
                     )}
                   </div>
-                ))}
+                ))
+              )}
             </div>
           </div>
 
