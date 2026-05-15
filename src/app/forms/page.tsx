@@ -1,7 +1,7 @@
 "use client";
 import FormIELTSAcademicRegistration from "@/components/blocks/forms/ielts/ielts-academic-registration/form-ielts-academic-registration";
 import FormIELTSGeneralRegistration from "@/components/blocks/forms/ielts/ielts-general-registration/form-ielts-general-registration";
-import FormIELTSUKVIRegistration from "@/components/blocks/forms/ielts/ielts-ukvi-registration/form-ielts-ukvi-registration";
+// import FormIELTSUKVIRegistration from "@/components/blocks/forms/ielts/ielts-ukvi-registration/form-ielts-ukvi-registration";
 import FormPTEAcademicRegistration from "@/components/blocks/forms/pte/pte-academic-registration/form-pte-academic-registration";
 import FormPTECoreRegistration from "@/components/blocks/forms/pte/pte-core-registration/form-pte-core-registration";
 import FormPTEHomeA1Registration from "@/components/blocks/forms/pte/pte-home-a1-registration/form-pte-home-a1-registration";
@@ -22,7 +22,7 @@ export default function FormsPage() {
     <div>
       <FormIELTSAcademicRegistration />
       <FormIELTSGeneralRegistration />
-      <FormIELTSUKVIRegistration />
+      {/* <FormIELTSUKVIRegistration /> */}
       {/* <FormPTEAcademicRegistration />
       <FormPTECoreRegistration />
       <FormPTEHomeA1Registration />
