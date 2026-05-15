@@ -8,6 +8,12 @@ import FormPTEHomeA2Registration from "@/components/blocks/forms/pte/pte-home-a2
 import FormPTEHomeB1Registration from "@/components/blocks/forms/pte/pte-home-b1-registration/form-pte-home-b1-registration";
 import FormPTEHomeUkviRegistration from "@/components/blocks/forms/pte/pte-home-ukvi-registration/form-pte-home-ukvi-registration";
 import FormSELTA1Registration from "@/components/blocks/forms/selt/ukvi-speaking-and-listening-at-level-a1/form-selt-a1-registration";
+import FormSELTA2Registration from "@/components/blocks/forms/selt/ukvi-speaking-and-listening-at-level-a2/form-selt-a2-registration";
+import FormSELTB1Registration from "@/components/blocks/forms/selt/ukvi-speaking-and-listening-at-level-b1/form-selt-b1-registration";
+import FormSELTB1RWRegistration from "@/components/blocks/forms/selt/ukvi-speaking-and-listening-at-level-b1-r-w/form-selt-b1-r-w-registration";
+import FormSELTB2Registration from "@/components/blocks/forms/selt/ukvi-speaking-and-listening-at-level-b2/form-selt-b2-registration";
+import FormSELTC1Registration from "@/components/blocks/forms/selt/ukvi-speaking-and-listening-at-level-c1/form-selt-c1-registration";
+import FormSELTC2Registration from "@/components/blocks/forms/selt/ukvi-speaking-and-listening-at-level-c2/form-selt-c2-registration";
 import FormTOEFLIBTRegistration from "@/components/blocks/forms/toefl-ibt-exam-registration/form-toefl-ibt-registration";
 import { EXAM_DETAILE_DATA, EXAM_IDS_DATA } from "@/data";
 import { notFound } from "next/navigation";
@@ -72,23 +78,21 @@ export default async function BookExamsId({
         </div>
       );
     case EXAM_IDS_DATA.selt_a1.id:
-      return (
-        <div>
-          <FormSELTA1Registration />
-        </div>
-      );
-    case EXAM_IDS_DATA.selt.id:
+      return <FormSELTA1Registration />;
     case EXAM_IDS_DATA.selt_a2.id:
+      return <FormSELTA2Registration />;
     case EXAM_IDS_DATA.selt_b1.id:
+      return <FormSELTB1Registration />;
     case EXAM_IDS_DATA.selt_b1_r_w.id:
+      return <FormSELTB1RWRegistration />;
     case EXAM_IDS_DATA.selt_b2.id:
+      return <FormSELTB2Registration />;
     case EXAM_IDS_DATA.selt_c1.id:
+      return <FormSELTC1Registration />;
     case EXAM_IDS_DATA.selt_c2.id:
-      return (
-        <div>
-          <FormSELTA1Registration initialId={id} />
-        </div>
-      );
+      return <FormSELTC2Registration />;
+    case EXAM_IDS_DATA.selt.id:
+      return <FormSELTA1Registration initialId={id} />;
     case EXAM_IDS_DATA.pte_academic.id:
       return <FormPTEAcademicRegistration />;
     case EXAM_IDS_DATA.pte_core.id:

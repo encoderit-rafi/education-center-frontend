@@ -9,6 +9,12 @@ import FormPTEHomeA2Registration from "@/components/blocks/forms/pte/pte-home-a2
 // import FormPTEHomeB1Registration from "@/components/blocks/forms/pte-home-b1-registration/pte-home-b1-registration";
 // import FormPTEHomeUkviRegistration from "@/components/blocks/forms/pte-home-ukvi-registration/pte-home-ukvi-registration";
 import FormSELTA1Registration from "@/components/blocks/forms/selt/ukvi-speaking-and-listening-at-level-a1/form-selt-a1-registration";
+import FormSELTA2Registration from "@/components/blocks/forms/selt/ukvi-speaking-and-listening-at-level-a2/form-selt-a2-registration";
+import FormSELTB1Registration from "@/components/blocks/forms/selt/ukvi-speaking-and-listening-at-level-b1/form-selt-b1-registration";
+import FormSELTB1RWRegistration from "@/components/blocks/forms/selt/ukvi-speaking-and-listening-at-level-b1-r-w/form-selt-b1-r-w-registration";
+import FormSELTB2Registration from "@/components/blocks/forms/selt/ukvi-speaking-and-listening-at-level-b2/form-selt-b2-registration";
+import FormSELTC1Registration from "@/components/blocks/forms/selt/ukvi-speaking-and-listening-at-level-c1/form-selt-c1-registration";
+import FormSELTC2Registration from "@/components/blocks/forms/selt/ukvi-speaking-and-listening-at-level-c2/form-selt-c2-registration";
 import FormTOEFLIBTRegistration from "@/components/blocks/forms/toefl-ibt-exam-registration/form-toefl-ibt-registration";
 
 export default function FormsPage() {
@@ -24,6 +30,12 @@ export default function FormsPage() {
       {/* <FormPTEHomeB1Registration />
       <FormPTEHomeUkviRegistration /> */}
       <FormSELTA1Registration />
+      <FormSELTA2Registration />
+      <FormSELTB1Registration />
+      <FormSELTB1RWRegistration />
+      <FormSELTB2Registration />
+      <FormSELTC1Registration />
+      <FormSELTC2Registration />
       <FormTOEFLIBTRegistration />
     </div>
   );

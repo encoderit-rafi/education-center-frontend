@@ -146,7 +146,18 @@ export default function FormSELTA1Registration({ initialId }: { initialId?: stri
   };
 
   const calculateTotal = () => {
-    const baseFee = 850;
+    // Pricing mapping based on the provided fee structure
+    const levelFees: Record<string, number> = {
+      "selt-a1": 650,
+      "selt-a2": 650,
+      "selt-b1": 650,
+      "selt-b1-r-w": 870,
+      "selt-b2": 870,
+      "selt-c1": 870,
+      "selt-c2": 870,
+    };
+
+    const baseFee = levelFees[initialId || "selt-a1"] || 650;
     const serviceFee = 150;
     const coursePrice = formData.selectedCourse
       ? (COURSES_DATA as any)[formData.selectedCourse].price *
@@ -199,9 +210,6 @@ export default function FormSELTA1Registration({ initialId }: { initialId?: stri
         <h1 className="text-4xl md:text-5xl font-black text-slate-900 mb-4 tracking-tight uppercase italic">
           {examName.split(" (")[0]} <span className="text-[#A11D1D]">Registration</span>
         </h1>
-        <p className="text-slate-500 text-lg max-w-2xl mx-auto font-medium italic">
-          {examName.includes(" (") ? examName.split("(")[1].replace(")", "") : examName}
-        </p>
       </div>
 
       <div className="max-w-4xl mx-auto">
