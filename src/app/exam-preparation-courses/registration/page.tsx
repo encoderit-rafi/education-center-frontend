@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { cn } from "@/lib/utils";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import api from "@/axios";
 import {
   Field,
@@ -18,8 +18,7 @@ import Payment from "@/components/blocks/payment";
 
 import { CheckCircle2, Info, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { EXAM_PREPARATION_COURSES_DATA } from "@/data";
-import { notFound, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import Stepper from "@/components/stepper";
 import { PriceDisplay } from "@/components/ui/price-display";
 
@@ -39,16 +38,24 @@ type BookingValues = z.infer<typeof bookingSchema>;
 
 function CourseRegistrationForm({ className }: { className?: string }) {
   const searchParams = useSearchParams();
-  const examId = searchParams.get("examId");
-  const courseId = searchParams.get("courseId");
+  // examId = course slug (e.g. "ielts"), courseId = package UUID
+  const courseSlug = searchParams.get("examId");
+  const packageId = searchParams.get("courseId");
   const priceParam = searchParams.get("price");
-  const currencyParam = searchParams.get("currency");
 
-  const data = EXAM_PREPARATION_COURSES_DATA.find((item) => item.id === examId);
+  // Fetch course details from API
+  const { data: courseData } = useQuery({
+    queryKey: ["course", courseSlug],
+    queryFn: async () => {
+      const res = await api.get<{ data: { id: string; name: string } }>(
+        `/courses/${courseSlug}`,
+      );
+      return res.data.data;
+    },
+    enabled: !!courseSlug,
+  });
 
-  if (!data) {
-    notFound();
-  }
+  const courseName = courseData?.name ?? courseSlug?.toUpperCase() ?? "";
 
   const [isSuccess, setIsSuccess] = useState(false);
 
@@ -66,56 +73,41 @@ function CourseRegistrationForm({ className }: { className?: string }) {
 
   const selectedPaymentMethod = watch("paymentMethod");
 
-  const PRICE = Number(priceParam) || 0;
-
-  // Derive Fee Breakdown
-  const courseData = data?.courses.find((c) => c.id === courseId);
-  const base_price = PRICE;
-  const discountPercentage = courseData?.general_discount || 0;
-  const discount_amount = (base_price * discountPercentage) / 100;
-  const total_amount = base_price - discount_amount;
+  // Fee breakdown — price comes pre-calculated from the course page
+  const base_price = Number(priceParam) || 0;
+  const discount_amount = 0; // discount already applied upstream
+  const vat_amount = 0;
+  const total_amount = base_price - discount_amount + vat_amount;
 
   const mutation = useMutation({
-    mutationFn: (newBooking: Record<string, unknown>) => {
-      return api.post("/course-bookings", newBooking);
-    },
+    mutationFn: (newBooking: Record<string, unknown>) =>
+      api.post("/course-bookings", newBooking),
     onSuccess: () => {
       setIsSuccess(true);
     },
     onError: (error) => {
       console.error("Booking failed:", error);
-      // In a real scenario, you'd show a toast or error message here.
     },
   });
 
   const onSubmit = (formData: BookingValues) => {
-    console.log("Booking Data:", formData);
-
     const payload = {
-      ...formData,
+      course_id: courseData?.id || courseSlug || "",
+      sub_course_id: null,
+      package_id: packageId || "",
       first_name: formData.firstName,
-      middle_name: formData.middleName,
-      last_name: formData.lastName,
-      course_id: courseId || "",
-      sub_course_id: courseId || "", // Assuming sub_course_id is mapped from courseId or examId if missing
-      package_id: examId || "", // Using examId as package_id as a fallback
-      base_price: base_price,
-      discount_amount: discount_amount,
-      total_amount: total_amount,
+      last_name: formData.lastName || "",
+      email: formData.email,
+      phone: formData.phone || "",
+      country: formData.country || "",
+      base_price,
+      discount_amount,
+      vat_amount,
+      total_amount,
       payment_methods: formData.paymentMethod,
     };
 
-    mutation.mutate(payload, {
-      onSuccess: (res) => {
-        console.log("👉 ~ onSubmit ~ res:", res);
-        // setIsSuccess(true);
-        //CODE HERE
-      },
-      onError: (error) => {
-        console.error("Booking failed:", error);
-        // In a real scenario, you'd show a toast or error message here.
-      },
-    });
+    mutation.mutate(payload);
   };
 
   if (isSuccess) {
@@ -129,9 +121,10 @@ function CourseRegistrationForm({ className }: { className?: string }) {
             Booking Confirmed
           </h2>
           <p className="text-emerald-700/80 text-base leading-relaxed font-medium">
-            Your registration for the <strong>{data.name}</strong> preparation
-            course has been received. Check your email for further instructions
-            and your enrollment details.
+            Your registration for the{" "}
+            <strong>{courseName}</strong> preparation course has been received.
+            Check your email for further instructions and your enrollment
+            details.
           </p>
         </div>
         <button
@@ -150,7 +143,7 @@ function CourseRegistrationForm({ className }: { className?: string }) {
       <section className="relative overflow-hidden bg-slate-50 base-px base-py">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-3xl text-center font-black leading-[1.1] tracking-tight text-slate-900 lg:text-4xl xl:text-5xl mb-4">
-            {data.name}{" "}
+            {courseName}{" "}
             <span className="text-primary">Course Registration</span>
           </h1>
           <form
@@ -269,7 +262,21 @@ function CourseRegistrationForm({ className }: { className?: string }) {
                   <div className="flex justify-between items-center text-slate-600">
                     <span>Discount</span>
                     <span className="text-emerald-600">
-                      - <PriceDisplay amount={discount_amount} />
+                      {discount_amount > 0 ? (
+                        <>- <PriceDisplay amount={discount_amount} /></>
+                      ) : (
+                        <span className="text-slate-400">—</span>
+                      )}
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center text-slate-600">
+                    <span>VAT</span>
+                    <span>
+                      {vat_amount > 0 ? (
+                        <PriceDisplay amount={vat_amount} />
+                      ) : (
+                        <span className="text-slate-400">—</span>
+                      )}
                     </span>
                   </div>
 

@@ -155,8 +155,9 @@ export default async function ExamPreparationDynamicPage({
             </p>
           </div>
 
-          <div className="grid gap-x-8 gap-y-0 md:grid-cols-2 lg:grid-cols-4 [grid-template-rows:repeat(7,auto)]">
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 [grid-template-rows:repeat(7,auto)]">
             {packages.map((pkg, index) => {
+              console.log("👉 ~ ExamPreparationDynamicPage ~ pkg:", pkg);
               const basePrice = parseFloat(pkg.price);
               const discount = pkg.discountValue || 0;
               const discountedPrice =
