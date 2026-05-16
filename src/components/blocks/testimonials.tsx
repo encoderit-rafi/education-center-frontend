@@ -33,68 +33,76 @@ const GoogleLogo = () => (
 
 const testimonials = [
   {
-    name: "Elena Rodriguez",
-    date: "a month ago",
+    name: "Nadine Mustafa",
+    date: "a year ago",
     quote:
-      "TEPTH transformed my approach to the TOEFL. Their editorial insights into the reading section were a game changer for my score.",
+      "Very organised and polite",
     color: "bg-blue-600",
     rating: 5,
+    image: "/images/testimonials/nadine.png",
   },
   {
-    name: "Marcus Chen",
+    name: "Rahul Chauhan",
     date: "2 months ago",
     quote:
-      "Finally a service that treats you like a person, not a number. The personalized feedback sessions gave me the confidence I needed to succeed.",
+      "⭐⭐⭐⭐⭐ TEPTH Sharjah – Prep Smarter, Score Higher TEPTH Sharjah is the go‑to hub for mastering exams such as the IELTS, TOEFL, CELPIP, PTE‑A, OET, PearsonVUE, and CAEL.Expert trainers, a calm and modern test environment, and smooth check‑in make the whole process stress‑free. Their guidance and realistic practice sessions give you the confidence to hit your target score. If you’re serious about results, this is where you should be.",
     color: "bg-red-600",
     rating: 5,
+    image: "/images/testimonials/rahul.png",
   },
   {
-    name: "Sarah Jenkins",
-    date: "3 months ago",
-    quote:
-      "Professional, punctual, and premium. TEPTH is the gold standard for testing services. Highly recommended for any international applicant.",
-    color: "bg-amber-600",
-    rating: 5,
-  },
-  {
-    name: "Abdullah Al Noman",
+    name: "Sima Al Kanawati",
     date: "a month ago",
     quote:
-      "I lots of thanks bhai. Specially i got to know about my friend 'a' and 'and'. This is absolutely a life hack! I really appreciate your efforts.",
+      "Calm and clean examination test center Respectful staff Strict rules And has a great location away from highways",
+    color: "bg-amber-600",
+    rating: 5,
+    image: "/images/testimonials/sima.png",
+  },
+  {
+    name: "Rahimuddin Qureshi",
+    date: "9 months ago",
+    quote:
+      "It was an amazing experience. The staff, the ambience, the procedures all were professional and visitor friendly. Thanks for being part of my success.",
     color: "bg-purple-600",
     rating: 5,
+    image: "/images/testimonials/rahimuddin.png",
   },
   {
-    name: "Prear Hasnan",
-    date: "5 months ago",
+    name: "Ayan Ali khan",
+    date: "a year ago",
     quote:
-      "In my belief, One day I will be able to Fly For my dream insha'Allah. In my hardest and depressed time you were the excellent motivation.",
+      "Gave my GED exam there every thing went smoothly highly recommended !!",
     color: "bg-orange-600",
     rating: 5,
+    image: "/images/testimonials/ayan.png",
   },
   {
-    name: "Arefin Ahmed",
-    date: "2 months ago",
+    name: "Mydeen Basha",
+    date: "a year ago",
     quote:
-      "This place is more beautiful from my side, i trully appreciated with the place. Whenever you go to any tourists spot, you will know every specific.",
+      "I had a best experience in this center. Those guys in the centre were really helpful and they provide me the rules and regulations in the calm. The centre is very cool and we can't experience any background noise. Overall my experience in this center was very very good. Cheers to the team..!!!",
     color: "bg-teal-500",
     rating: 5,
+    image: "/images/testimonials/mydeen.png",
   },
   {
-    name: "All About Saudi Arab",
-    date: "2 months ago",
+    name: "Deepika Manoj",
+    date: "a year ago",
     quote:
-      "Rashed bin Ibrahim is a highly inspiring, knowledgeable, and dedicated IELTS online instructor whose teaching style is clear, structured.",
+      "TA made me comfortable and very polite in attitude. Test experience was seamless",
     color: "bg-orange-500",
     rating: 5,
+    image: "/images/testimonials/depika.png",
   },
   {
-    name: "Shomik Explores",
-    date: "10 months ago",
+    name: "Kafuka Mode",
+    date: "a year ago",
     quote:
-      "If you're planning to take the IELTS exam and looking for a supportive environment where everything is explained in your native language.",
+      "Had a great experience there for my examination, and the staff were all friendly and helpful. The place is calm and well-prepared to make the examinee feel stress-free.",
     color: "bg-indigo-500",
     rating: 5,
+    image: "/images/testimonials/kafuka.png",
   },
 ];
 
@@ -133,9 +141,20 @@ function TestimonialCard({
 
       <div className="flex items-center gap-4 mt-2">
         <div
-          className={`w-14 h-14 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg ${t.color}`}
+          className={cn(
+            "w-14 h-14 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg overflow-hidden shrink-0",
+            !t.image && t.color
+          )}
         >
-          {t.name.charAt(0)}
+          {t.image ? (
+            <img
+              src={t.image}
+              alt={t.name}
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            t.name.charAt(0)
+          )}
         </div>
         <div className="text-left">
           <div className="font-bold text-gray-900 text-lg">{t.name}</div>

@@ -58,7 +58,7 @@ export function DateStep({
 
                   return isSunday || isPast;
                 }}
-                className="rounded-2xl border border-slate-100 shadow-sm p-4 bg-white [--calendar-accent:theme(colors.primary.DEFAULT)]"
+                className="rounded-2xl border border-slate-100 shadow-sm p-4 bg-white [--calendar-accent:theme(colors.primary.DEFAULT)] [--calendar-available:theme(colors.primary.DEFAULT)] [--calendar-available-text:green-100]"
               />
               <FieldError errors={[error]} className="mt-4 text-center" />
             </FieldContent>

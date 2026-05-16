@@ -81,7 +81,7 @@ export default function ExamDetails({ data }: { data: any }) {
               href={`/book-exams/${data.id}`}
               className={cn(buttonVariants(), "w-fit")}
             >
-              <Calendar /> Register Now
+              <Calendar /> Register
             </Link>
           </div>
         </div>
@@ -324,7 +324,7 @@ export default function ExamDetails({ data }: { data: any }) {
                       "w-full font-black text-xs py-5 rounded-xl shadow-xl hover:scale-[1.02] transition-all",
                     )}
                   >
-                    Register Now
+                    Register
                   </Link>
                 </div>
               </div>

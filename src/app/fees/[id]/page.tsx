@@ -44,14 +44,14 @@ export default async function page({
               {exam.courses.map((course, index) => {
                 const discountedPrice = course.general_discount
                   ? Math.round(
-                      course.price * (1 - course.general_discount / 100),
-                    )
+                    course.price * (1 - course.general_discount / 100),
+                  )
                   : course.price;
 
                 return (
                   <BaseCard
                     key={index}
-                    //   className="p-8 flex flex-col h-full border-slate-200 group relative overflow-hidden hover:border-primary/30 hover:shadow-2xl transition-all duration-500 ease-out"
+                  //   className="p-8 flex flex-col h-full border-slate-200 group relative overflow-hidden hover:border-primary/30 hover:shadow-2xl transition-all duration-500 ease-out"
                   >
                     <div className="mb-6">
                       <div className="flex items-center justify-between">
@@ -85,7 +85,7 @@ export default async function page({
                         })}
                       >
                         <Calendar />
-                        Register Now
+                        Register
                       </Link>
                     </div>
                   </BaseCard>
@@ -102,11 +102,12 @@ export default async function page({
                 return (
                   <BaseCard
                     key={index}
-                    //   className="p-8 flex flex-col h-full border-slate-200 group relative overflow-hidden hover:border-primary/30 hover:shadow-2xl transition-all duration-500 ease-out"
+                  //   className="p-8 flex flex-col h-full border-slate-200 group relative overflow-hidden hover:border-primary/30 hover:shadow-2xl transition-all duration-500 ease-out"
                   >
                     <div className="flex flex-col gap-2">
                       <BaseCardTitle className="text-xl mb-4 leading-tight">
                         {course.name}
+                        <p className="font-medium"><PriceDisplay amount={course.price} iconClassName="h-[0.7em]" /></p>
                       </BaseCardTitle>
 
                       <Link
@@ -116,7 +117,7 @@ export default async function page({
                         })}
                       >
                         <Calendar />
-                        Register Now
+                        Register
                       </Link>
                     </div>
                   </BaseCard>

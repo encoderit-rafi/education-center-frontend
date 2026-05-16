@@ -171,7 +171,7 @@ export default function EventsPage() {
                                             </div>
                                         ) : (
                                             <>
-                                                <h3 className="text-2xl font-black mb-1 font-heading tracking-tight underline decoration-[#A11D1D] decoration-4 underline-offset-8">Register Now</h3>
+                                                <h3 className="text-2xl font-black mb-1 font-heading tracking-tight underline decoration-[#A11D1D] decoration-4 underline-offset-8">Register</h3>
                                                 <p className="text-gray-500 text-[10px] mb-10 uppercase tracking-[0.2em] font-bold">Secure your session entry</p>
 
                                                 <Form {...form}>
