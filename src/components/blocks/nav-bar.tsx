@@ -6,10 +6,13 @@ import SearchCommand from "./search-command";
 
 import Banner from "./banner";
 import AppNavigation from "./app-navigation";
-import { PRIMARY_NAV, SECONDARY_NAV } from "@/data";
+import { SECONDARY_NAV } from "@/data";
+import { usePrimaryNav } from "@/hooks/use-primary-nav";
 import MobileNav from "./mobile-nav";
 
 export default function NavBar() {
+  const { primaryNav, isLoading } = usePrimaryNav();
+
   return (
     <header className="sticky top-0 z-50 overflow-visible shadow-lg">
       <Banner />
@@ -25,9 +28,8 @@ export default function NavBar() {
             priority
           />
         </Link>
-        {/* Desktop Primary Nav */}
         <div className="max-lg:hidden">
-          <AppNavigation navigations={PRIMARY_NAV} />
+          <AppNavigation navigations={primaryNav} isLoading={isLoading} />
         </div>
         <div className="w-24  flex items-center justify-end gap-2">
           <SearchCommand />

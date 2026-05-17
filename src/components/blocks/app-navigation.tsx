@@ -20,10 +20,25 @@ export type AppNavigationItem = NavSingle | NavDropdown;
 
 export type AppNavigationProps = {
   navigations: AppNavigationItem[];
+  isLoading?: boolean;
 };
 
-export default function AppNavigation({ navigations }: AppNavigationProps) {
+export default function AppNavigation({ navigations, isLoading }: AppNavigationProps) {
   const pathname = usePathname();
+
+  if (isLoading) {
+    return (
+      <NavigationMenu viewport={false}>
+        <NavigationMenuList className="gap-2">
+          {[1, 2, 3, 4, 5, 6].map((i) => (
+            <NavigationMenuItem key={i}>
+              <div className="h-9 w-24 bg-slate-100 animate-pulse rounded-md"></div>
+            </NavigationMenuItem>
+          ))}
+        </NavigationMenuList>
+      </NavigationMenu>
+    );
+  }
 
   return (
     <NavigationMenu viewport={false}>

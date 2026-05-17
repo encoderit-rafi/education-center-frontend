@@ -11,7 +11,8 @@ import {
 import { Button } from "../ui/button";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
-import { PRIMARY_NAV, SECONDARY_NAV } from "@/data";
+import { SECONDARY_NAV } from "@/data";
+import { usePrimaryNav } from "@/hooks/use-primary-nav";
 import {
   Accordion,
   AccordionContent,
@@ -21,7 +22,8 @@ import {
 
 export default function MobileNav() {
   const [open, setOpen] = useState(false);
-  const allNavs = [...PRIMARY_NAV, ...SECONDARY_NAV];
+  const { primaryNav, isLoading } = usePrimaryNav();
+  const allNavs = [...primaryNav, ...SECONDARY_NAV];
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -48,42 +50,50 @@ export default function MobileNav() {
 
         <div className="flex-1 overflow-y-auto no-scrollbar py-2">
           <Accordion type="single" className="border-none rounded-none w-full">
-            {allNavs.map((item) => (
-              <React.Fragment key={item.name}>
-                {item.type === "single" ? (
-                  <Link
-                    href={item.href}
-                    onClick={() => setOpen(false)}
-                    className="flex items-center justify-between px-6 py-4 text-sm font-semibold text-secondary hover:bg-slate-50 transition-colors border-b border-slate-100/50"
-                  >
-                    <span className="capitalize">{item.name}</span>
-                  </Link>
-                ) : (
-                  <AccordionItem
-                    value={item.name}
-                    className="border-b border-slate-100/50"
-                  >
-                    <AccordionTrigger className="hover:no-underline px-6 py-4 text-sm font-semibold text-secondary border-none [&[data-state=open]]:bg-slate-50">
+            {isLoading ? (
+              <div className="flex flex-col gap-4 p-6">
+                {[1, 2, 3, 4, 5].map((i) => (
+                  <div key={i} className="h-6 w-full bg-slate-100 animate-pulse rounded-md" />
+                ))}
+              </div>
+            ) : (
+              allNavs.map((item) => (
+                <React.Fragment key={item.name}>
+                  {item.type === "single" ? (
+                    <Link
+                      href={item.href}
+                      onClick={() => setOpen(false)}
+                      className="flex items-center justify-between px-6 py-4 text-sm font-semibold text-secondary hover:bg-slate-50 transition-colors border-b border-slate-100/50"
+                    >
                       <span className="capitalize">{item.name}</span>
-                    </AccordionTrigger>
-                    <AccordionContent className="p-0 bg-slate-50/50">
-                      <div className="flex flex-col">
-                        {item.items.map((subItem) => (
-                          <Link
-                            key={subItem.name}
-                            href={subItem.href}
-                            onClick={() => setOpen(false)}
-                            className="px-10 py-3.5 text-sm font-medium text-slate-600 hover:text-primary hover:bg-white transition-all border-t border-slate-100 first:border-t-0"
-                          >
-                            {subItem.name}
-                          </Link>
-                        ))}
-                      </div>
-                    </AccordionContent>
-                  </AccordionItem>
-                )}
-              </React.Fragment>
-            ))}
+                    </Link>
+                  ) : (
+                    <AccordionItem
+                      value={item.name}
+                      className="border-b border-slate-100/50"
+                    >
+                      <AccordionTrigger className="hover:no-underline px-6 py-4 text-sm font-semibold text-secondary border-none [&[data-state=open]]:bg-slate-50">
+                        <span className="capitalize">{item.name}</span>
+                      </AccordionTrigger>
+                      <AccordionContent className="p-0 bg-slate-50/50">
+                        <div className="flex flex-col">
+                          {item.items.map((subItem) => (
+                            <Link
+                              key={subItem.name}
+                              href={subItem.href}
+                              onClick={() => setOpen(false)}
+                              className="px-10 py-3.5 text-sm font-medium text-slate-600 hover:text-primary hover:bg-white transition-all border-t border-slate-100 first:border-t-0"
+                            >
+                              {subItem.name}
+                            </Link>
+                          ))}
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
+                  )}
+                </React.Fragment>
+              ))
+            )}
           </Accordion>
         </div>
 

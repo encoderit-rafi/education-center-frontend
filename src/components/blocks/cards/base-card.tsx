@@ -108,11 +108,9 @@ const BaseCardList = ({
   className?: string;
 }) => {
   return (
-    <ul
-      className={cn("space-y-2 text-sm text-slate-700 line-clamp-1", className)}
-    >
+    <ul className={cn("space-y-2 text-sm text-slate-700", className)}>
       {items.map((point, i) => (
-        <li key={i} className="flex items-center gap-2">
+        <li key={i} className="flex items-center gap-2 ">
           {checked ? (
             <CheckCircle2 className="size-4 text-primary shrink-0" />
           ) : (
