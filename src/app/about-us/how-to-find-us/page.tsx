@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Car, ExternalLink, Printer } from "lucide-react";
+import { Car, ExternalLink, Printer, Clock, MapPin, Mail, Phone } from "lucide-react";
 import { SectionHeader } from "@/components/ui/section-header";
 import { Button } from "@/components/ui/button";
 import { PriceDisplay } from "@/components/ui/price-display";
@@ -10,8 +10,105 @@ import { PriceDisplay } from "@/components/ui/price-display";
 export default function HowToFindUs() {
   return (
     <main className="bg-white min-h-screen">
+      <style dangerouslySetInnerHTML={{ __html: `
+        @media print {
+          /* Force exact color adjustment to print backgrounds */
+          * {
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+          }
+          
+          /* Hide global headers, footers and navigation elements */
+          header, footer, nav, .global-header, .global-footer, [role="navigation"], #header, #footer {
+            display: none !important;
+          }
+
+          /* General layout adjustments for print page */
+          body, main {
+            background: white !important;
+            color: black !important;
+            padding: 0 !important;
+            margin: 0 !important;
+          }
+
+          /* Stack grid items vertically on print */
+          .print-grid {
+            display: block !important;
+          }
+
+          /* Spacing between vertically stacked printed items */
+          .print-grid > * {
+            margin-bottom: 2.5rem !important;
+          }
+
+          /* Ensure map image renders correctly in print layout */
+          .print-map-container {
+            position: relative !important;
+            width: 100% !important;
+            height: 380px !important;
+            display: block !important;
+          }
+
+          /* Prevent weird clipping by keeping components intact */
+          .print-avoid-break {
+            break-inside: avoid !important;
+            page-break-inside: avoid !important;
+            margin-bottom: 2.5rem !important;
+            page-break-after: always;
+          }
+          
+          .print-avoid-break:last-child {
+            page-break-after: auto;
+          }
+        }
+      `}} />
+
+      {/* Print-Only Header (Branded Contact Details) */}
+      <div className="hidden print:flex flex-col md:flex-row justify-between items-start gap-8 border-b-2 border-primary/20 pb-8 mb-8">
+        {/* Left: Logo & Company Name */}
+        <div className="space-y-4">
+          <Image
+            alt="TEPTH Logo"
+            height={100}
+            width={180}
+            src="/images/tepth-logo.png"
+            className="h-auto w-44"
+          />
+          <h2 className="text-xl font-bold text-slate-800 leading-tight">
+            The Exam Preparation & Testing House L.L.C
+          </h2>
+        </div>
+
+        {/* Right: Contact Information Grid */}
+        <div className="grid grid-cols-2 gap-x-8 gap-y-4 text-xs text-slate-600 font-medium">
+          <div className="space-y-1">
+            <p className="text-primary font-bold uppercase tracking-wider text-[10px] flex items-center gap-1.5">
+              <Clock className="w-3.5 h-3.5 text-primary shrink-0" /> Working Hours
+            </p>
+            <p>Saturday to Thursday</p>
+            <p>(9:00 AM - 9:00 PM)</p>
+          </div>
+          <div className="space-y-1">
+            <p className="text-primary font-bold uppercase tracking-wider text-[10px] flex items-center gap-1.5">
+              <Mail className="w-3.5 h-3.5 text-primary shrink-0" /> Contact Info
+            </p>
+            <p>Email: info@tepth.org</p>
+            <p>Tel: +971 6 553 1250</p>
+          </div>
+          <div className="space-y-1 col-span-2">
+            <p className="text-primary font-bold uppercase tracking-wider text-[10px] flex items-center gap-1.5">
+              <MapPin className="w-3.5 h-3.5 text-primary shrink-0" /> Our Address
+            </p>
+            <p className="leading-relaxed">
+              Suite 701, 7th Floor, Tabarak Tower, Corniche Road,<br />
+              Al Mamzar, Sharjah, United Arab Emirates.
+            </p>
+          </div>
+        </div>
+      </div>
+
       {/* Hero Section */}
-      <section className="py-16 md:py-24 px-8 max-w-screen-2xl mx-auto">
+      <section className="py-16 md:py-24 px-8 max-w-screen-2xl mx-auto print:hidden">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
           {/* Left Content */}
           <SectionHeader
@@ -42,8 +139,8 @@ export default function HowToFindUs() {
       </section>
 
       {/* Map Section */}
-      <section className="py-24 px-8 max-w-screen-2xl mx-auto border-t border-slate-50">
-        <div className="grid lg:grid-cols-2 gap-20 items-center">
+      <section className="py-24 px-8 max-w-screen-2xl mx-auto border-t border-slate-50 print-avoid-break">
+        <div className="grid lg:grid-cols-2 gap-20 items-center print-grid">
           <div className="space-y-8">
             <SectionHeader
               badge="LOCATION MAP"
@@ -75,7 +172,7 @@ export default function HowToFindUs() {
               Print Map & Directions
             </Button>
           </div>
-          <div className="relative aspect-[4/3] rounded-xl overflow-hidden">
+          <div className="relative aspect-[4/3] rounded-xl overflow-hidden print-map-container">
             <Image
               src="/images/about-us/TEPTH-Sharjah-Location-Map.jpg"
               alt="TEPTH Location Map"
@@ -87,7 +184,7 @@ export default function HowToFindUs() {
       </section>
 
       {/* Visit Our Centre Section */}
-      <section className="py-24 px-8 max-w-screen-2xl mx-auto border-t border-slate-50" id="map">
+      <section className="py-24 px-8 max-w-screen-2xl mx-auto border-t border-slate-50 print:hidden" id="map">
         <SectionHeader
           title="Visit Our Centre"
           description="Al Mamzar, Sharjah — located in the strategic Tabarak Tower, close to all major transport links. All facilities are wheelchair accessible."
@@ -121,7 +218,7 @@ export default function HowToFindUs() {
       </section>
 
       {/* Transportation Options */}
-      <section className="py-32 bg-white px-8 relative overflow-hidden">
+      <section className="py-32 bg-white px-8 relative overflow-hidden print:hidden">
         <div className="max-w-screen-2xl mx-auto">
           {/* Section Header */}
           <SectionHeader
@@ -216,8 +313,8 @@ export default function HowToFindUs() {
       </section>
 
       {/* Driving Directions */}
-      <section className="py-16 px-8 max-w-screen-2xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-20 items-start">
+      <section className="py-16 px-8 max-w-screen-2xl mx-auto print-avoid-break">
+        <div className="grid lg:grid-cols-2 gap-20 items-start print-grid">
           <div className="space-y-12">
             <SectionHeader
               badge="DRIVING DIRECTIONS"
