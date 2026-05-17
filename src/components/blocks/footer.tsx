@@ -93,7 +93,7 @@ export default function Footer() {
   return (
     <footer className="relative w-full text-white overflow-hidden bg-secondary ">
       {/* Main Content */}
-      <div className="max-w-8xl mx-auto px-6 pt-20 pb-10">
+      <div className="max-w-8xl mx-auto px-6 pt-20">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-2">
           {/* Column 1: Info Card */}
           <div className="p-6 rounded-lg relative z-10 bg-white hover:bg-white h-fit">
@@ -170,60 +170,63 @@ export default function Footer() {
               {isLoading ? (
                 <div className="space-y-4">
                   {[1, 2, 3, 4, 5].map((i) => (
-                    <div key={i} className="h-5 w-3/4 bg-white/10 animate-pulse rounded-md" />
+                    <div
+                      key={i}
+                      className="h-5 w-3/4 bg-white/10 animate-pulse rounded-md"
+                    />
                   ))}
                 </div>
               ) : (
                 [...primaryNav, ...SECONDARY_NAV]
                   .filter((nav) => nav.name.toLowerCase() !== "home")
                   .map((nav) => (
-                  <div key={nav.name}>
-                    {nav.type === "dropdown" ? (
-                      <DropdownMenu>
-                        <DropdownMenuTrigger className="flex items-center gap-2 text-sm font-medium text-gray-100 hover:text-white transition-all hover:translate-x-1 group outline-none text-left w-full">
+                    <div key={nav.name}>
+                      {nav.type === "dropdown" ? (
+                        <DropdownMenu>
+                          <DropdownMenuTrigger className="flex items-center gap-2 text-sm font-medium text-gray-100 hover:text-white transition-all hover:translate-x-1 group outline-none text-left w-full">
+                            <span className="text-gray-500 scale-75 group-hover:text-red-500 transition-colors">
+                              <ChevronRight className="w-6 h-6" />
+                            </span>
+                            <span className="flex-1">{nav.name}</span>
+                            <ChevronDown className="w-3 h-3 text-gray-500 group-hover:text-red-500 transition-transform group-data-[state=open]:rotate-180" />
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent
+                            side="bottom"
+                            align="start"
+                            className="bg-secondary border-white/10! text-white min-w-55 p-2 rounded-xl shadow-2xl animate-in fade-in slide-in-from-top-2 z-[60]"
+                          >
+                            {nav.items.map((item) => (
+                              <DropdownMenuItem
+                                key={item.name}
+                                asChild
+                                className="focus:bg-red-500/10 focus:text-white rounded-lg cursor-pointer outline-none"
+                              >
+                                <Link
+                                  href={item.href}
+                                  className="flex items-center gap-2 w-full px-2 py-2 text-sm font-medium text-gray-200 hover:text-white group"
+                                >
+                                  <span className="text-gray-500 scale-75 group-hover:text-red-500 transition-colors">
+                                    <ChevronRight className="w-6 h-6" />
+                                  </span>
+                                  {item.name}
+                                </Link>
+                              </DropdownMenuItem>
+                            ))}
+                          </DropdownMenuContent>
+                        </DropdownMenu>
+                      ) : (
+                        <Link
+                          href={nav.href || "#"}
+                          className="flex items-center gap-2 text-sm font-medium text-gray-100 hover:text-white transition-all hover:translate-x-1 group"
+                        >
                           <span className="text-gray-500 scale-75 group-hover:text-red-500 transition-colors">
                             <ChevronRight className="w-6 h-6" />
                           </span>
-                          <span className="flex-1">{nav.name}</span>
-                          <ChevronDown className="w-3 h-3 text-gray-500 group-hover:text-red-500 transition-transform group-data-[state=open]:rotate-180" />
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent
-                          side="bottom"
-                          align="start"
-                          className="bg-secondary border-white/10! text-white min-w-55 p-2 rounded-xl shadow-2xl animate-in fade-in slide-in-from-top-2 z-[60]"
-                        >
-                          {nav.items.map((item) => (
-                            <DropdownMenuItem
-                              key={item.name}
-                              asChild
-                              className="focus:bg-red-500/10 focus:text-white rounded-lg cursor-pointer outline-none"
-                            >
-                              <Link
-                                href={item.href}
-                                className="flex items-center gap-2 w-full px-2 py-2 text-sm font-medium text-gray-200 hover:text-white group"
-                              >
-                                <span className="text-gray-500 scale-75 group-hover:text-red-500 transition-colors">
-                                  <ChevronRight className="w-6 h-6" />
-                                </span>
-                                {item.name}
-                              </Link>
-                            </DropdownMenuItem>
-                          ))}
-                        </DropdownMenuContent>
-                      </DropdownMenu>
-                    ) : (
-                      <Link
-                        href={nav.href || "#"}
-                        className="flex items-center gap-2 text-sm font-medium text-gray-100 hover:text-white transition-all hover:translate-x-1 group"
-                      >
-                        <span className="text-gray-500 scale-75 group-hover:text-red-500 transition-colors">
-                          <ChevronRight className="w-6 h-6" />
-                        </span>
-                        {nav.name}
-                      </Link>
-                    )}
-                  </div>
-                ))
+                          {nav.name}
+                        </Link>
+                      )}
+                    </div>
+                  ))
               )}
             </div>
           </div>

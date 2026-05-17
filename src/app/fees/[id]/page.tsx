@@ -64,10 +64,16 @@ export default async function page({
                         </Badge>
                       </div>
                       <div className="flex items-baseline gap-3">
-                        <PriceDisplay amount={discountedPrice} className="text-3xl" />
+                        <PriceDisplay
+                          amount={discountedPrice}
+                          className="text-3xl"
+                        />
                         {course.general_discount > 0 && (
                           <span className="text-sm text-slate-400 line-through decoration-slate-300 flex items-center gap-1">
-                            <PriceDisplay amount={course.price} iconClassName="h-[0.7em]" />
+                            <PriceDisplay
+                              amount={course.price}
+                              iconClassName="h-[0.7em]"
+                            />
                           </span>
                         )}
                       </div>
@@ -77,17 +83,16 @@ export default async function page({
                       You get {course.special_discount}% on this course if you
                       book exam with TEPTH.
                     </BaseCardImportantInfo> */}
-                    <div className="mt-3 grid grid-cols-2 gap-2">
-                      <Link
-                        href={`/exam-preparation-courses/registration?examId=${exam.id}&courseId=${course.id}&price=${course.price}&currency=${course.currency}`}
-                        className={buttonVariants({
-                          className: "w-full",
-                        })}
-                      >
-                        <Calendar />
-                        Register Now
-                      </Link>
-                    </div>
+
+                    <Link
+                      href={`/exam-preparation-courses/registration?examId=${exam.id}&courseId=${course.id}&price=${course.price}&currency=${course.currency}`}
+                      className={buttonVariants({
+                        className: "w-full mt-3",
+                      })}
+                    >
+                      <Calendar />
+                      Register
+                    </Link>
                   </BaseCard>
                 );
               })}
@@ -116,7 +121,7 @@ export default async function page({
                         })}
                       >
                         <Calendar />
-                        Register Now
+                        Register
                       </Link>
                     </div>
                   </BaseCard>

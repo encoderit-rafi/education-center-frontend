@@ -76,8 +76,7 @@ function CourseRegistrationForm({ className }: { className?: string }) {
   // Fee breakdown — price comes pre-calculated from the course page
   const base_price = Number(priceParam) || 0;
   const discount_amount = 0; // discount already applied upstream
-  const vat_amount = 0;
-  const total_amount = base_price - discount_amount + vat_amount;
+  const total_amount = base_price - discount_amount;
 
   const mutation = useMutation({
     mutationFn: (newBooking: Record<string, unknown>) =>
@@ -102,7 +101,6 @@ function CourseRegistrationForm({ className }: { className?: string }) {
       country: formData.country || "",
       base_price,
       discount_amount,
-      vat_amount,
       total_amount,
       payment_methods: formData.paymentMethod,
     };
@@ -264,16 +262,6 @@ function CourseRegistrationForm({ className }: { className?: string }) {
                     <span className="text-emerald-600">
                       {discount_amount > 0 ? (
                         <>- <PriceDisplay amount={discount_amount} /></>
-                      ) : (
-                        <span className="text-slate-400">—</span>
-                      )}
-                    </span>
-                  </div>
-                  <div className="flex justify-between items-center text-slate-600">
-                    <span>VAT</span>
-                    <span>
-                      {vat_amount > 0 ? (
-                        <PriceDisplay amount={vat_amount} />
                       ) : (
                         <span className="text-slate-400">—</span>
                       )}
