@@ -103,7 +103,7 @@ export default async function PaidMockTestDynamicPage({ params }: PageProps) {
                 {data.description}
               </p>
               <Link
-                href={`/paid-mock-tests/registration?id=${data.id}`}
+                href={`/paid-mock-tests/registration?id=${data.slug}`}
                 className={cn(buttonVariants())}
               >
                 Purchase
@@ -189,7 +189,7 @@ export default async function PaidMockTestDynamicPage({ params }: PageProps) {
             </h3>
 
             <Link
-              href={`/paid-mock-tests/registration?id=${data.id}`}
+              href={`/paid-mock-tests/registration?id=${data.slug}`}
               className={cn(
                 buttonVariants(),
                 "px-4 sm:px-8 py-3 text-sm font-bold shadow-xl shadow-primary/20 hover:-translate-y-1 transition-all duration-300 ",

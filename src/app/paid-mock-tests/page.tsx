@@ -17,6 +17,10 @@ export default async function PaidMockTestPage() {
     const res = await api.get("/mock-tests");
     if (res.data?.success) {
       mockTests = res.data.data.data;
+      console.log(
+        "👉 ~ PaidMockTestPage ~ res.data.data.data:",
+        res.data.data.data,
+      );
     }
   } catch (error) {
     console.error("Failed to fetch paid mock tests:", error);

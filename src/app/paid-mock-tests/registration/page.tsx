@@ -4,7 +4,6 @@ import { Suspense, useState, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { format } from "date-fns";
 import { cn, omitEmpty } from "@/lib/utils";
 import {
   Field,
@@ -14,12 +13,6 @@ import {
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Calendar } from "@/components/ui/calendar";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 import {
   Select,
   SelectContent,
@@ -27,13 +20,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-// import paid_mock_tests from "@/lib/demo-data/paid-mock-tests";
 
-import {
-  CheckCircle2,
-  Info,
-  Calendar as CalendarIcon,
-} from "lucide-react";
+import { CheckCircle2, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { notFound, useSearchParams } from "next/navigation";
 import Stepper from "@/components/stepper";
@@ -43,14 +31,12 @@ import api from "@/axios";
 
 const baseBookingSchema = z.object({
   mockTestId: z.string().min(1, "Please select a mock test"),
-  subExamId: z.string().optional(),
+  varient: z.string().optional(),
   firstName: z.string().min(2, "First name must be at least 2 characters"),
   lastName: z.string().min(2, "Last name must be at least 2 characters"),
   email: z.string().email("Please enter a valid email address"),
-  date: z.date({
-    message: "Please select a date",
-  }),
-  timeSlot: z.string().min(1, "Please select a time slot"),
+  phone: z.string().min(6, "Please enter a valid phone number"),
+  country: z.string().min(1, "Please enter a country"),
   paymentMethod: z.enum(["stripe", "paypal"]),
 });
 
@@ -58,11 +44,11 @@ type BookingValues = z.infer<typeof baseBookingSchema>;
 
 const createBookingSchema = (variants?: string[] | null) =>
   baseBookingSchema.superRefine((data, ctx) => {
-    if (variants && variants.length > 0 && !data.subExamId) {
+    if (variants && variants.length > 0 && !data.varient) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         message: "Please select an exam variant",
-        path: ["subExamId"],
+        path: ["varient"],
       });
     }
   });
@@ -92,9 +78,11 @@ function PaidMockTestRegistrationForm({
   const data = apiResponse?.data;
 
   const [isSuccess, setIsSuccess] = useState(false);
-  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 
-  const schema = useMemo(() => createBookingSchema(data?.variant), [data?.variant]);
+  const schema = useMemo(
+    () => createBookingSchema(data?.variant),
+    [data?.variant],
+  );
 
   const {
     register,
@@ -106,12 +94,13 @@ function PaidMockTestRegistrationForm({
     resolver: zodResolver(schema),
     defaultValues: {
       mockTestId: id || "",
+      varient: "",
       paymentMethod: "stripe",
+      phone: "",
+      country: "",
     },
   });
 
-  const selectedDate = watch("date");
-  const selectedTime = watch("timeSlot");
   const selectedPaymentMethod = watch("paymentMethod");
 
   const PRICE = data ? parseFloat(data.price || "350") : 350;
@@ -153,16 +142,15 @@ function PaidMockTestRegistrationForm({
 
   const onSubmit = (formData: BookingValues) => {
     const payload = {
-      mock_test_id: id || formData.mockTestId || "",
-      sub_exam_id: formData.subExamId || null,
+      mock_test_id: data?.id || id || formData.mockTestId || "",
+      varient: formData.varient || "",
       first_name: formData.firstName,
       last_name: formData.lastName || "",
       email: formData.email,
-      date: formData.date ? format(formData.date, "yyyy-MM-dd") : null,
-      time_slot: formData.timeSlot,
-      base_price: PRICE,
-      discount_amount: 0,
+      phone: formData.phone,
+      country: formData.country,
       total_amount: PRICE,
+      price: PRICE,
       payment_methods: formData.paymentMethod,
     };
 
@@ -172,7 +160,9 @@ function PaidMockTestRegistrationForm({
   if (isLoading) {
     return (
       <div className="min-h-[400px] flex items-center justify-center bg-slate-50 animate-pulse">
-        <div className="text-slate-500 font-medium">Loading test details...</div>
+        <div className="text-slate-500 font-medium">
+          Loading test details...
+        </div>
       </div>
     );
   }
@@ -192,9 +182,8 @@ function PaidMockTestRegistrationForm({
             Booking Confirmed
           </h2>
           <p className="text-emerald-700/80 text-base leading-relaxed font-medium">
-            Your &quot;{data.name}&quot; Mock Test has been successfully scheduled for{" "}
-            {selectedDate ? format(selectedDate, "PPP") : ""} at {selectedTime}.
-            Check your email for testing credentials.
+            Your &quot;{data.name}&quot; Mock Test registration has been
+            successfully received. Check your email for testing credentials.
           </p>
         </div>
         <button
@@ -248,30 +237,32 @@ function PaidMockTestRegistrationForm({
                   </Field>
                 </div>
 
-                {data?.variant && Array.isArray(data.variant) && data.variant.length > 0 && (
-                  <Field>
-                    <FieldLabel required>Exam Variant</FieldLabel>
-                    <FieldContent>
-                      <Select
-                        onValueChange={(val: string | null) => {
-                          if (val) setValue("subExamId", val);
-                        }}
-                      >
-                        <SelectTrigger className="w-full">
-                          <SelectValue placeholder="Select variant" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {data.variant.map((variantName: string) => (
-                            <SelectItem key={variantName} value={variantName}>
-                              {variantName}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                      <FieldError errors={[errors.subExamId]} />
-                    </FieldContent>
-                  </Field>
-                )}
+                {data?.variant &&
+                  Array.isArray(data.variant) &&
+                  data.variant.length > 0 && (
+                    <Field>
+                      <FieldLabel required>Exam Variant</FieldLabel>
+                      <FieldContent>
+                        <Select
+                          onValueChange={(val: string | null) => {
+                            if (val) setValue("varient", val);
+                          }}
+                        >
+                          <SelectTrigger className="w-full">
+                            <SelectValue placeholder="Select variant" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {data.variant.map((variantName: string) => (
+                              <SelectItem key={variantName} value={variantName}>
+                                {variantName}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                        <FieldError errors={[errors.varient]} />
+                      </FieldContent>
+                    </Field>
+                  )}
 
                 <Field>
                   <FieldLabel required>Email</FieldLabel>
@@ -284,48 +275,32 @@ function PaidMockTestRegistrationForm({
                     <FieldError errors={[errors.email]} />
                   </FieldContent>
                 </Field>
-                <Field>
-                  <FieldLabel required>Test Date</FieldLabel>
-                  <FieldContent>
-                    <Popover
-                      open={isCalendarOpen}
-                      onOpenChange={setIsCalendarOpen}
-                    >
-                      <PopoverTrigger
-                        render={
-                          <Button
-                            variant="ghost"
-                            className={cn(
-                              "w-full justify-start text-left font-normal rounded-md border border-slate-200  px-3 py-2 text-sm transition-all outline-none  focus-visible:border-primary focus-visible:ring-3 focus-visible:ring-ring/30 shadow-none hover:shadow-none hover:bg-transparent",
-                              !selectedDate && "text-slate-400",
-                            )}
-                          >
-                            <CalendarIcon className="mr-2 h-4 w-4 text-slate-400" />
-                            {selectedDate ? (
-                              format(selectedDate, "PPP")
-                            ) : (
-                              <span>Select test date</span>
-                            )}
-                          </Button>
-                        }
+
+                <div className="grid grid-cols-2 gap-3">
+                  <Field>
+                    <FieldLabel required>Phone Number</FieldLabel>
+                    <FieldContent>
+                      <Input
+                        type="tel"
+                        placeholder="+1234567890"
+                        {...register("phone")}
                       />
-                      <PopoverContent className="w-auto p-0" align="start">
-                        <Calendar
-                          mode="single"
-                          selected={selectedDate}
-                          onSelect={(date) => {
-                            setValue("date", date as Date);
-                            setIsCalendarOpen(false);
-                          }}
-                          disabled={(date) =>
-                            date <= new Date() || date < new Date("1900-01-01")
-                          }
-                        />
-                      </PopoverContent>
-                    </Popover>
-                    <FieldError errors={[errors.date]} />
-                  </FieldContent>
-                </Field>
+                      <FieldError errors={[errors.phone]} />
+                    </FieldContent>
+                  </Field>
+                  <Field>
+                    <FieldLabel required>Country</FieldLabel>
+                    <FieldContent>
+                      <Input
+                        type="text"
+                        placeholder="US"
+                        {...register("country")}
+                      />
+                      <FieldError errors={[errors.country]} />
+                    </FieldContent>
+                  </Field>
+                </div>
+
                 <div className="text-primary border border-dashed border-primary/40 p-3 bg-primary/5 rounded-md flex items-start gap-2">
                   <Info className="w-4 h-4 mt-0.5" />
                   <p className="text-[11px] font-medium leading-relaxed">
@@ -346,7 +321,9 @@ function PaidMockTestRegistrationForm({
                   <FieldLabel required>Payment Method</FieldLabel>
                   <RadioGroup
                     value={selectedPaymentMethod}
-                    onValueChange={(val) => setValue("paymentMethod", val as "stripe" | "paypal")}
+                    onValueChange={(val) =>
+                      setValue("paymentMethod", val as "stripe" | "paypal")
+                    }
                     className="grid grid-cols-2 gap-3"
                   >
                     <label
@@ -358,10 +335,7 @@ function PaidMockTestRegistrationForm({
                           : "hover:bg-slate-50",
                       )}
                     >
-                      <RadioGroupItem
-                        value="stripe"
-                        id="payment-stripe"
-                      />
+                      <RadioGroupItem value="stripe" id="payment-stripe" />
                       <span className="font-semibold text-sm">
                         Credit Card (Stripe)
                       </span>
@@ -375,10 +349,7 @@ function PaidMockTestRegistrationForm({
                           : "hover:bg-slate-50",
                       )}
                     >
-                      <RadioGroupItem
-                        value="paypal"
-                        id="payment-paypal"
-                      />
+                      <RadioGroupItem value="paypal" id="payment-paypal" />
                       <span className="font-semibold text-sm">PayPal</span>
                     </label>
                   </RadioGroup>
