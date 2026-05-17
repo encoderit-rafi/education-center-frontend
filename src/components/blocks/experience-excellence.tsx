@@ -24,15 +24,12 @@ export default function ExperienceExcellence() {
         </div>
         {/* Right Media Block */}
         <div className="flex-1 w-full space-y-6">
-          <div className="relative rounded-3xl overflow-hidden shadow-2xl aspect-video border-4 border-white">
-            <iframe
-              className="w-full h-full absolute inset-0"
-              src="https://www.youtube.com/embed/Fg26wJ1lPOE"
-              title="TEPTH Testing Center"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-            ></iframe>
+          <div className="relative rounded-3xl overflow-hidden shadow-2xl aspect-video border-2 border-primary/50">
+            <img
+              src="/images/about-us/about-us-3.jpg"
+              alt="TEPTH Testing Center"
+              className="w-full h-full object-cover"
+            />
           </div>
         </div>
       </div>

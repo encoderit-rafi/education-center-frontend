@@ -200,19 +200,7 @@ export function RegistrationFormStep({
               <FieldError errors={[errors.countryOfBirth]} />
             </FieldContent>
           </Field>
-        </div>
-      </div>
 
-      {/* Section 2: Contact Details */}
-      <div className="pt-8 border-t border-slate-100 space-y-6">
-        <div className="flex items-center gap-2 text-slate-400 mb-4">
-          <User className="size-5" />
-          <h3 className="text-lg font-bold tracking-tight text-slate-800">
-            Contact Details
-          </h3>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <Field data-invalid={!!errors.emailUsername}>
             <FieldLabel required>Email address</FieldLabel>
             <FieldContent>
@@ -268,37 +256,25 @@ export function RegistrationFormStep({
               <FieldError errors={[errors.city]} />
             </FieldContent>
           </Field>
-        </div>
-      </div>
 
-      {/* Section 3: Identification Details */}
-      <div className="pt-8 border-t border-slate-100 space-y-6">
-        <div className="flex items-center gap-2 text-slate-400 mb-4">
-          <ShieldCheck className="size-5" />
-          <h3 className="text-lg font-bold tracking-tight text-slate-800">
-            Identification Details
-          </h3>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <Field data-invalid={!!errors.idType}>
             <FieldLabel required>Identification type</FieldLabel>
             <FieldContent>
               <RadioGroup
+                name="idType"
                 onValueChange={(val) => setValue("idType", val)}
                 value={formData.idType}
                 className="grid grid-cols-2 gap-3"
               >
-                {[{ id: "passport", label: "Passport" }, { id: "national_id", label: "National ID" }].map((opt) => (
+                {[
+                  { id: "passport", label: "Passport" },
+                  { id: "emirates_id", label: "Emirates ID" },
+                ].map((opt) => (
                   <Label
                     key={opt.id}
                     htmlFor={opt.id}
-                    className={cn(
-                      "flex items-center space-x-3 p-3 rounded-xl border transition-all bg-white font-medium cursor-pointer",
-                      formData.idType === opt.id
-                        ? "border-primary bg-primary/5 shadow-sm"
-                        : "border-slate-100 hover:border-slate-200"
-                    )}
+                    data-invalid={!!errors.idType}
+                    className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive"
                   >
                     <RadioGroupItem value={opt.id} id={opt.id} />
                     {opt.label}
@@ -309,23 +285,38 @@ export function RegistrationFormStep({
             </FieldContent>
           </Field>
 
-          <Field data-invalid={!!errors.documentNumber}>
-            <FieldLabel required>Document number</FieldLabel>
+          <Field data-invalid={!!errors.idNumber}>
+            <FieldLabel required>
+              {formData.idType === "emirates_id"
+                ? "ID number"
+                : "Passport number"}
+            </FieldLabel>
             <FieldContent>
-              <Input placeholder="Enter number" {...register("documentNumber")} />
-              <FieldError errors={[errors.documentNumber]} />
+              <Input
+                {...register("idNumber")}
+                aria-invalid={!!errors.idNumber}
+                placeholder={`Enter your ${formData.idType === "emirates_id" ? "ID" : "Passport"} number`}
+              />
+              <FieldError errors={[errors.idNumber]} />
             </FieldContent>
           </Field>
 
-          <Field data-invalid={!!errors.idCountryOfIssue}>
-            <FieldLabel required>Country of issue</FieldLabel>
+          <Field data-invalid={!!errors.idExpiryDate}>
+            <FieldLabel required>
+              {formData.idType === "emirates_id"
+                ? "ID expiry date"
+                : "Passport expiry date"}
+            </FieldLabel>
             <FieldContent>
-              <CountryDropdown
-                placeholder="Select country"
-                value={formData.idCountryOfIssue}
-                onChange={(c) => setValue("idCountryOfIssue", c.name)}
+              <DatePicker
+                name="idExpiryDate"
+                value={formData.idExpiryDate}
+                onChange={(date) => setValue("idExpiryDate", date as Date)}
+                aria-invalid={!!errors.idExpiryDate}
+                disabled={(date) => date <= new Date()}
+                placeholder={`Select ${formData.idType === "emirates_id" ? "ID" : "Passport"} expiry date`}
               />
-              <FieldError errors={[errors.idCountryOfIssue]} />
+              <FieldError errors={[errors.idExpiryDate]} />
             </FieldContent>
           </Field>
 
@@ -390,19 +381,7 @@ export function RegistrationFormStep({
               <FieldError errors={[errors.idDocument]} />
             </FieldContent>
           </Field>
-        </div>
-      </div>
 
-      {/* Section 4: Your Profile */}
-      <div className="pt-8 border-t border-slate-100 space-y-6">
-        <div className="flex items-center gap-2 text-slate-400 mb-4">
-          <Globe className="size-5" />
-          <h3 className="text-lg font-bold tracking-tight text-slate-800">
-            Additional Information
-          </h3>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <Field data-invalid={!!errors.homeLanguage}>
             <FieldLabel required>What is your first language?</FieldLabel>
             <FieldContent>

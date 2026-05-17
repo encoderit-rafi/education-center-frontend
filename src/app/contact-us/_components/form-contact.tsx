@@ -211,7 +211,7 @@ export default function ContactForm() {
                 <DropdownMenuTrigger asChild>
                   <Button
                     variant="outline"
-                    className="flex h-11 w-full items-center justify-between whitespace-nowrap rounded-md border border-slate-200 bg-white px-3 py-2 text-base transition-[color,box-shadow,background-color] outline-none focus:border-primary focus:ring-3 focus:ring-ring/30 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm font-medium"
+                    className="flex h-11 w-full bg-white items-center justify-between whitespace-nowrap rounded-md border border-slate-200 px-3 py-2 text-base outline-none focus:border-primary focus:ring-3 focus:ring-ring/30 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm font-medium hover:border-slate-200 hover:text-inherit hover:bg-white hover:shadow-none transition-none"
                   >
                     <span className={!field.value ? "text-slate-400" : ""}>
                       {field.value || "Select a topic"}
@@ -313,7 +313,8 @@ export default function ContactForm() {
         <p className="flex items-center gap-1 text-sm">
           <ShieldCheck className="w-4 h-4 text-primary" />
           <span className="font-medium">
-            We&apos;ll get back to you within 1 to 2 working days.
+            We&apos;ll get back to you within 1 to 2 working days. Your information is kept
+            confidential.
           </span>
         </p>
       </div>

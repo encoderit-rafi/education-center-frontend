@@ -111,6 +111,10 @@ export function DateStep({
               </FieldContent>
             </Field>
 
+            <div className="p-4 rounded-xl bg-blue-50 border border-blue-100 text-blue-800 text-sm font-medium">
+              Note: The speaking test might be conducted in-person or via video-call on exam day.
+            </div>
+
             <div className="p-4 rounded-xl bg-amber-50 border border-amber-100 text-amber-800 text-sm font-medium">
               Note: Please select your preferred test date. Public Holidays & Sunday will be deactivated separately.
             </div>

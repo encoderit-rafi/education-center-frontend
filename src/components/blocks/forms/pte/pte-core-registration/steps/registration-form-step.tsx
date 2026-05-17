@@ -199,19 +199,7 @@ export function RegistrationFormStep({
               <FieldError errors={[errors.countryOfBirth]} />
             </FieldContent>
           </Field>
-        </div>
-      </div>
 
-      {/* Section 2: Contact Details */}
-      <div className="pt-8 border-t border-slate-100 space-y-6">
-        <div className="flex items-center gap-2 text-slate-400 mb-4">
-          <User className="size-5" />
-          <h3 className="text-lg font-bold tracking-tight text-slate-800">
-            Contact Details
-          </h3>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <Field data-invalid={!!errors.emailUsername}>
             <FieldLabel required>Email address</FieldLabel>
             <FieldContent>
@@ -292,30 +280,19 @@ export function RegistrationFormStep({
               <FieldError errors={[errors.city]} />
             </FieldContent>
           </Field>
-        </div>
-      </div>
 
-      {/* Section 3: Identification Details */}
-      <div className="pt-8 border-t border-slate-100 space-y-6">
-        <div className="flex items-center gap-2 text-slate-400 mb-4">
-          <ShieldCheck className="size-5" />
-          <h3 className="text-lg font-bold tracking-tight text-slate-800">
-            Identification Details
-          </h3>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <Field data-invalid={!!errors.idType}>
             <FieldLabel required>Identification type</FieldLabel>
             <FieldContent>
               <RadioGroup
-                onValueChange={(val) => setValue("idType", val as any)}
+                name="idType"
+                onValueChange={(val) => setValue("idType", val)}
                 value={formData.idType}
                 className="grid grid-cols-2 gap-3"
               >
                 {[
                   { id: "passport", label: "Passport" },
-                  { id: "national_id", label: "National ID" }
+                  { id: "emirates_id", label: "Emirates ID" },
                 ].map((opt) => (
                   <Label
                     key={opt.id}
@@ -332,24 +309,38 @@ export function RegistrationFormStep({
             </FieldContent>
           </Field>
 
-          <Field data-invalid={!!errors.documentNumber}>
+          <Field data-invalid={!!errors.idNumber}>
             <FieldLabel required>
-              {formData.idType === "national_id" ? "ID number" : "Passport number"}
+              {formData.idType === "emirates_id"
+                ? "ID number"
+                : "Passport number"}
             </FieldLabel>
             <FieldContent>
-              <Input placeholder="Enter document number" {...register("documentNumber")} />
-              <FieldError errors={[errors.documentNumber]} />
+              <Input
+                {...register("idNumber")}
+                aria-invalid={!!errors.idNumber}
+                placeholder={`Enter your ${formData.idType === "emirates_id" ? "ID" : "Passport"} number`}
+              />
+              <FieldError errors={[errors.idNumber]} />
             </FieldContent>
           </Field>
 
-          <Field>
-            <FieldLabel>ID Country of issue</FieldLabel>
+          <Field data-invalid={!!errors.idExpiryDate}>
+            <FieldLabel required>
+              {formData.idType === "emirates_id"
+                ? "ID expiry date"
+                : "Passport expiry date"}
+            </FieldLabel>
             <FieldContent>
-              <CountryDropdown
-                placeholder="Select country"
-                value={formData.idCountryOfIssue}
-                onChange={(c) => setValue("idCountryOfIssue", c.name)}
+              <DatePicker
+                name="idExpiryDate"
+                value={formData.idExpiryDate}
+                onChange={(date) => setValue("idExpiryDate", date as Date)}
+                aria-invalid={!!errors.idExpiryDate}
+                disabled={(date) => date <= new Date()}
+                placeholder={`Select ${formData.idType === "emirates_id" ? "ID" : "Passport"} expiry date`}
               />
+              <FieldError errors={[errors.idExpiryDate]} />
             </FieldContent>
           </Field>
 
@@ -414,19 +405,7 @@ export function RegistrationFormStep({
               <FieldError errors={[errors.passportCopy]} />
             </FieldContent>
           </Field>
-        </div>
-      </div>
 
-      {/* Section 4: Your Profile */}
-      <div className="pt-8 border-t border-slate-100 space-y-6">
-        <div className="flex items-center gap-2 text-slate-400 mb-4">
-          <Globe className="size-5" />
-          <h3 className="text-lg font-bold tracking-tight text-slate-800">
-            Additional Information
-          </h3>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <Field data-invalid={!!errors.homeLanguage}>
             <FieldLabel required>What is your first language?</FieldLabel>
             <FieldContent>

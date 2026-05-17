@@ -38,10 +38,11 @@ export const PteCoreSchema = z.object({
     examTime: z.string().min(1, "Exam time is required"),
 
     // Step 2: Identification Details
-    idType: z.enum(["passport", "national_id"], {
+    idType: z.enum(["passport", "emirates_id"], {
         message: "Please select your identification type"
-    }),
-    documentNumber: z.string().min(1, "ID number is required"),
+    }).or(z.literal("")),
+    idNumber: z.string().min(1, "ID number is required"),
+    idExpiryDate: z.any().refine((val) => !!val, "Expiry date is required"),
     idCountryOfIssue: stringOrObject.optional(),
     passportCopy: z.any().refine((val) => !!val, "Passport copy is required"),
 

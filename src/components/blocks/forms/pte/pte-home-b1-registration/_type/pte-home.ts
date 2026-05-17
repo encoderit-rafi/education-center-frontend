@@ -56,10 +56,12 @@ export const PteHomeB1Schema = z.object({
     // Step 3: Final Details & Documents
     testTiming: z.string().optional(),
     idPolicyRead: z.boolean().refine(val => val === true, "You must read the ID policy"),
-    idType: requiredString("ID type is required"),
-    idCountryOfIssue: stringOrObject.refine(val => val.length > 0, "Country of issue is required"),
-    documentNumberConfirmed: z.boolean().refine(val => val === true, "Please confirm your document number"),
-    documentNumber: requiredString("ID number is required"),
+    idType: z.enum(["passport", "emirates_id"], { message: "ID type is required" }).or(z.literal("")),
+    idNumber: z.string().min(1, "ID number is required"),
+    idExpiryDate: z.any().refine((val) => !!val, "Expiry date is required"),
+    idCountryOfIssue: stringOrObject.optional(),
+    documentNumberConfirmed: z.boolean().optional(),
+    documentNumber: z.string().optional(),
     selectedCourse: z.string().optional(),
     selectedWorkshop: z.string().optional(),
     

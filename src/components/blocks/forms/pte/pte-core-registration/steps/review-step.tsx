@@ -165,7 +165,7 @@ export function ReviewStep({
                   ID Number
                 </span>
                 <span className="text-sm font-semibold text-black">
-                  {data.documentNumber || "N/A"}
+                  {data.idNumber || "N/A"}
                 </span>
               </div>
               <div className="flex flex-col">
@@ -174,6 +174,14 @@ export function ReviewStep({
                 </span>
                 <span className="text-sm font-semibold text-black">
                   {data.emailUsername}
+                </span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] text-slate-400 font-bold uppercase">
+                  ID Expiry Date
+                </span>
+                <span className="text-sm font-semibold text-black">
+                  {data.idExpiryDate ? format(data.idExpiryDate, "PPP") : "N/A"}
                 </span>
               </div>
               <div className="flex flex-col">
