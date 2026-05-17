@@ -3,7 +3,7 @@ import { PRIMARY_NAV } from "@/data";
 import api from "@/axios";
 import { AppNavigationItem } from "@/components/blocks/app-navigation";
 
-interface CourseApiResponse {
+interface ApiResponse {
   success: boolean;
   message: string;
   data: {
@@ -22,16 +22,27 @@ interface CourseApiResponse {
 export function usePrimaryNav() {
   const {
     data: coursesResponse,
-    isLoading,
-    isError,
-  } = useQuery<CourseApiResponse>({
+    isLoading: isLoadingCourses,
+    isError: isErrorCourses,
+  } = useQuery<ApiResponse>({
     queryKey: ["exam-preparation-courses"],
     queryFn: async () => {
       const response = await api.get("/courses");
       return response.data;
     },
   });
-  console.log("👉 ~ usePrimaryNav ~ coursesResponse:", coursesResponse);
+
+  const {
+    data: mockTestsResponse,
+    isLoading: isLoadingMockTests,
+    isError: isErrorMockTests,
+  } = useQuery<ApiResponse>({
+    queryKey: ["paid-mock-tests"],
+    queryFn: async () => {
+      const response = await api.get("/mock-tests");
+      return response.data;
+    },
+  });
 
   // Construct dynamic navigation
   const primaryNav: AppNavigationItem[] = PRIMARY_NAV.map((item) => {
@@ -45,11 +56,29 @@ export function usePrimaryNav() {
 
       return {
         ...item,
-        items: dynamicItems,
+        items: dynamicItems.length > 0 ? dynamicItems : item.items,
       };
     }
+    
+    // We target the Paid Mock Tests dropdown
+    if (item.name === "Paid Mock Tests" && item.type === "dropdown") {
+      const dynamicItems =
+        mockTestsResponse?.data?.data?.map((mockTest) => ({
+          name: mockTest.name,
+          href: `/paid-mock-tests/${mockTest.slug}`,
+        })) || [];
+
+      return {
+        ...item,
+        items: dynamicItems.length > 0 ? dynamicItems : item.items,
+      };
+    }
+
     return item;
   });
+
+  const isLoading = isLoadingCourses || isLoadingMockTests;
+  const isError = isErrorCourses || isErrorMockTests;
 
   return { primaryNav, isLoading, isError };
 }

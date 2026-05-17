@@ -14,6 +14,7 @@ import {
   FieldContent,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import Payment from "@/components/blocks/payment";
 
 import { CheckCircle2, Info, ArrowRight } from "lucide-react";
@@ -62,6 +63,7 @@ function CourseRegistrationForm({ className }: { className?: string }) {
   const {
     register,
     handleSubmit,
+    setValue,
     watch,
     formState: { errors },
   } = useForm<BookingValues>({
@@ -302,8 +304,13 @@ function CourseRegistrationForm({ className }: { className?: string }) {
 
                 <div className="space-y-3">
                   <FieldLabel required>Payment Method</FieldLabel>
-                  <div className="grid grid-cols-2 gap-3">
+                  <RadioGroup
+                    value={selectedPaymentMethod}
+                    onValueChange={(val) => setValue("paymentMethod", val as "stripe" | "paypal")}
+                    className="grid grid-cols-2 gap-3"
+                  >
                     <label
+                      htmlFor="payment-stripe"
                       className={cn(
                         "flex items-center gap-3 p-4 border rounded-lg cursor-pointer transition-colors",
                         selectedPaymentMethod === "stripe"
@@ -311,29 +318,16 @@ function CourseRegistrationForm({ className }: { className?: string }) {
                           : "hover:bg-slate-50",
                       )}
                     >
-                      <input
-                        type="radio"
+                      <RadioGroupItem
                         value="stripe"
-                        {...register("paymentMethod")}
-                        className="sr-only"
+                        id="payment-stripe"
                       />
-                      <div
-                        className={cn(
-                          "w-4 h-4 rounded-full border flex items-center justify-center",
-                          selectedPaymentMethod === "stripe"
-                            ? "border-primary"
-                            : "border-slate-300",
-                        )}
-                      >
-                        {selectedPaymentMethod === "stripe" && (
-                          <div className="w-2 h-2 rounded-full bg-primary" />
-                        )}
-                      </div>
                       <span className="font-semibold text-sm">
                         Credit Card (Stripe)
                       </span>
                     </label>
                     <label
+                      htmlFor="payment-paypal"
                       className={cn(
                         "flex items-center gap-3 p-4 border rounded-lg cursor-pointer transition-colors",
                         selectedPaymentMethod === "paypal"
@@ -341,27 +335,13 @@ function CourseRegistrationForm({ className }: { className?: string }) {
                           : "hover:bg-slate-50",
                       )}
                     >
-                      <input
-                        type="radio"
+                      <RadioGroupItem
                         value="paypal"
-                        {...register("paymentMethod")}
-                        className="sr-only"
+                        id="payment-paypal"
                       />
-                      <div
-                        className={cn(
-                          "w-4 h-4 rounded-full border flex items-center justify-center",
-                          selectedPaymentMethod === "paypal"
-                            ? "border-primary"
-                            : "border-slate-300",
-                        )}
-                      >
-                        {selectedPaymentMethod === "paypal" && (
-                          <div className="w-2 h-2 rounded-full bg-primary" />
-                        )}
-                      </div>
                       <span className="font-semibold text-sm">PayPal</span>
                     </label>
-                  </div>
+                  </RadioGroup>
                   <FieldError errors={[errors.paymentMethod]} />
                 </div>
 

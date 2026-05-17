@@ -1,11 +1,11 @@
 "use client";
 
-import { Suspense, useState } from "react";
+import { Suspense, useState, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { format } from "date-fns";
-import { cn } from "@/lib/utils";
+import { cn, omitEmpty } from "@/lib/utils";
 import {
   Field,
   FieldLabel,
@@ -27,43 +27,38 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import Payment from "@/components/blocks/payment";
 // import paid_mock_tests from "@/lib/demo-data/paid-mock-tests";
 
 import {
   CheckCircle2,
   Info,
-  ArrowRight,
   Calendar as CalendarIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  NAV_PAID_MOCK_TESTS,
-  PAID_MOCK_TESTS_DATA,
-  EXAM_DETAILE_DATA,
-} from "@/data";
 import { notFound, useSearchParams } from "next/navigation";
 import Stepper from "@/components/stepper";
 import { PriceDisplay } from "@/components/ui/price-display";
+import { useQuery, useMutation } from "@tanstack/react-query";
+import api from "@/axios";
 
-const bookingSchema = z
-  .object({
-    mockTestId: z.string().min(1, "Please select a mock test"),
-    subExamId: z.string().optional(),
-    firstName: z.string().min(2, "First name must be at least 2 characters"),
-    lastName: z.string().min(2, "Last name must be at least 2 characters"),
-    email: z.string().email("Please enter a valid email address"),
-    date: z.date({
-      message: "Please select a date",
-    }),
-    timeSlot: z.string().min(1, "Please select a time slot"),
-    paymentMethod: z.literal("card"),
-  })
-  .superRefine((data, ctx) => {
-    const examDetail = EXAM_DETAILE_DATA.find(
-      (e) => e.id === data.mockTestId,
-    ) as any;
-    if (examDetail?.type === "items" && examDetail.items && !data.subExamId) {
+const baseBookingSchema = z.object({
+  mockTestId: z.string().min(1, "Please select a mock test"),
+  subExamId: z.string().optional(),
+  firstName: z.string().min(2, "First name must be at least 2 characters"),
+  lastName: z.string().min(2, "Last name must be at least 2 characters"),
+  email: z.string().email("Please enter a valid email address"),
+  date: z.date({
+    message: "Please select a date",
+  }),
+  timeSlot: z.string().min(1, "Please select a time slot"),
+  paymentMethod: z.enum(["stripe", "paypal"]),
+});
+
+type BookingValues = z.infer<typeof baseBookingSchema>;
+
+const createBookingSchema = (variants?: string[] | null) =>
+  baseBookingSchema.superRefine((data, ctx) => {
+    if (variants && variants.length > 0 && !data.subExamId) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         message: "Please select an exam variant",
@@ -71,8 +66,6 @@ const bookingSchema = z
       });
     }
   });
-
-type BookingValues = z.infer<typeof bookingSchema>;
 
 interface MockTestBookingFormProps {
   initialMockTestId?: string;
@@ -85,15 +78,23 @@ function PaidMockTestRegistrationForm({
 }: MockTestBookingFormProps) {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-  const data = Object.values(NAV_PAID_MOCK_TESTS).find(
-    (item) => item.id === id,
-  );
 
-  if (!data) {
-    notFound();
-  }
+  const { data: apiResponse, isLoading } = useQuery({
+    queryKey: ["paid-mock-test", id],
+    queryFn: async () => {
+      if (!id) return null;
+      const res = await api.get(`/mock-tests/${id}`);
+      return res.data;
+    },
+    enabled: !!id,
+  });
+
+  const data = apiResponse?.data;
+
   const [isSuccess, setIsSuccess] = useState(false);
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+
+  const schema = useMemo(() => createBookingSchema(data?.variant), [data?.variant]);
 
   const {
     register,
@@ -102,28 +103,83 @@ function PaidMockTestRegistrationForm({
     watch,
     formState: { errors },
   } = useForm<BookingValues>({
-    resolver: zodResolver(bookingSchema),
+    resolver: zodResolver(schema),
     defaultValues: {
       mockTestId: id || "",
-      paymentMethod: "card",
+      paymentMethod: "stripe",
     },
   });
 
-  const selectedId = watch("mockTestId");
-  const examDetail = EXAM_DETAILE_DATA.find((e) => e.id === selectedId);
   const selectedDate = watch("date");
   const selectedTime = watch("timeSlot");
+  const selectedPaymentMethod = watch("paymentMethod");
 
-  // const selectedItem =
-  //   paid_mock_tests.find((m) => m.id === selectedId) || paid_mock_tests[0];
+  const PRICE = data ? parseFloat(data.price || "350") : 350;
+  const CURRENCY = "AED";
 
-  const onSubmit = (data: BookingValues) => {
-    console.log("Booking Data:", data);
-    setIsSuccess(true);
+  const paymentMutation = useMutation({
+    mutationFn: (body: Record<string, unknown>) =>
+      api.post("/payments/initiate", body),
+    onSuccess: (response) => {
+      const checkoutUrl = response.data?.data?.checkoutUrl;
+      if (checkoutUrl) {
+        window.location.href = checkoutUrl;
+      } else {
+        console.error("Checkout URL not found in response");
+      }
+    },
+    onError: (error) => {
+      console.error("Payment intent failed:", error);
+    },
+  });
+
+  const mutation = useMutation({
+    mutationFn: (newBooking: Record<string, unknown>) =>
+      api.post("/mock-test-bookings", newBooking),
+    onSuccess: (response) => {
+      const bookingId = response.data?.data?.id;
+      paymentMutation.mutate({
+        booking_type: "mock_test_booking",
+        booking_id: bookingId,
+        provider: selectedPaymentMethod,
+        amount: PRICE,
+        currency: "AED",
+      });
+    },
+    onError: (error) => {
+      console.error("Booking failed:", error);
+    },
+  });
+
+  const onSubmit = (formData: BookingValues) => {
+    const payload = {
+      mock_test_id: id || formData.mockTestId || "",
+      sub_exam_id: formData.subExamId || null,
+      first_name: formData.firstName,
+      last_name: formData.lastName || "",
+      email: formData.email,
+      date: formData.date ? format(formData.date, "yyyy-MM-dd") : null,
+      time_slot: formData.timeSlot,
+      base_price: PRICE,
+      discount_amount: 0,
+      total_amount: PRICE,
+      payment_methods: formData.paymentMethod,
+    };
+
+    mutation.mutate(omitEmpty(payload));
   };
 
-  const PRICE = 350;
-  const CURRENCY = "AED";
+  if (isLoading) {
+    return (
+      <div className="min-h-[400px] flex items-center justify-center bg-slate-50 animate-pulse">
+        <div className="text-slate-500 font-medium">Loading test details...</div>
+      </div>
+    );
+  }
+
+  if (!data) {
+    notFound();
+  }
 
   if (isSuccess) {
     return (
@@ -136,7 +192,7 @@ function PaidMockTestRegistrationForm({
             Booking Confirmed
           </h2>
           <p className="text-emerald-700/80 text-base leading-relaxed font-medium">
-            Your &quot;CODE&quot; Mock Test has been successfully scheduled for{" "}
+            Your &quot;{data.name}&quot; Mock Test has been successfully scheduled for{" "}
             {selectedDate ? format(selectedDate, "PPP") : ""} at {selectedTime}.
             Check your email for testing credentials.
           </p>
@@ -192,36 +248,30 @@ function PaidMockTestRegistrationForm({
                   </Field>
                 </div>
 
-                {(() => {
-                  const items = (examDetail as any)?.items;
-                  if (examDetail?.type === "items" && Array.isArray(items)) {
-                    return (
-                      <Field>
-                        <FieldLabel required>Exam Variant</FieldLabel>
-                        <FieldContent>
-                          <Select
-                            onValueChange={(val: string | null) => {
-                              if (val) setValue("subExamId", val);
-                            }}
-                          >
-                            <SelectTrigger className="w-full">
-                              <SelectValue placeholder="Select variant" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              {items.map((item: any) => (
-                                <SelectItem key={item.id} value={item.id}>
-                                  {item.name}
-                                </SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
-                          <FieldError errors={[errors.subExamId]} />
-                        </FieldContent>
-                      </Field>
-                    );
-                  }
-                  return null;
-                })()}
+                {data?.variant && Array.isArray(data.variant) && data.variant.length > 0 && (
+                  <Field>
+                    <FieldLabel required>Exam Variant</FieldLabel>
+                    <FieldContent>
+                      <Select
+                        onValueChange={(val: string | null) => {
+                          if (val) setValue("subExamId", val);
+                        }}
+                      >
+                        <SelectTrigger className="w-full">
+                          <SelectValue placeholder="Select variant" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {data.variant.map((variantName: string) => (
+                            <SelectItem key={variantName} value={variantName}>
+                              {variantName}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <FieldError errors={[errors.subExamId]} />
+                    </FieldContent>
+                  </Field>
+                )}
 
                 <Field>
                   <FieldLabel required>Email</FieldLabel>
@@ -291,10 +341,63 @@ function PaidMockTestRegistrationForm({
                     <PriceDisplay amount={PRICE} />
                   </span>
                 </Stepper>
-                <Payment amount={PRICE} currency={CURRENCY} />
-                <Button type="submit" className="w-full mt-6 py-3">
-                  Purchase
+
+                <div className="space-y-3">
+                  <FieldLabel required>Payment Method</FieldLabel>
+                  <RadioGroup
+                    value={selectedPaymentMethod}
+                    onValueChange={(val) => setValue("paymentMethod", val as "stripe" | "paypal")}
+                    className="grid grid-cols-2 gap-3"
+                  >
+                    <label
+                      htmlFor="payment-stripe"
+                      className={cn(
+                        "flex items-center gap-3 p-4 border rounded-lg cursor-pointer transition-colors",
+                        selectedPaymentMethod === "stripe"
+                          ? "border-primary bg-primary/5"
+                          : "hover:bg-slate-50",
+                      )}
+                    >
+                      <RadioGroupItem
+                        value="stripe"
+                        id="payment-stripe"
+                      />
+                      <span className="font-semibold text-sm">
+                        Credit Card (Stripe)
+                      </span>
+                    </label>
+                    <label
+                      htmlFor="payment-paypal"
+                      className={cn(
+                        "flex items-center gap-3 p-4 border rounded-lg cursor-pointer transition-colors",
+                        selectedPaymentMethod === "paypal"
+                          ? "border-primary bg-primary/5"
+                          : "hover:bg-slate-50",
+                      )}
+                    >
+                      <RadioGroupItem
+                        value="paypal"
+                        id="payment-paypal"
+                      />
+                      <span className="font-semibold text-sm">PayPal</span>
+                    </label>
+                  </RadioGroup>
+                  <FieldError errors={[errors.paymentMethod]} />
+                </div>
+
+                <Button
+                  type="submit"
+                  className="w-full mt-6 py-3"
+                  disabled={mutation.isPending}
+                >
+                  {mutation.isPending ? "Processing..." : "Purchase"}
                 </Button>
+                {mutation.isError && (
+                  <p className="text-red-500 text-sm mt-2">
+                    There was an error processing your booking. Please try
+                    again.
+                  </p>
+                )}
               </div>
             </section>
           </form>

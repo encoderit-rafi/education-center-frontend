@@ -9,9 +9,19 @@ import {
 } from "@/components/blocks/cards/base-card";
 import FreeConsultation from "../free-consultation/_components/free-consultation";
 import Link from "next/link";
-import { PAID_MOCK_TEST_CARDS_DATA } from "@/data";
+import api from "@/axios";
 
-export default function PaidMockTestPage() {
+export default async function PaidMockTestPage() {
+  let mockTests = [];
+  try {
+    const res = await api.get("/mock-tests");
+    if (res.data?.success) {
+      mockTests = res.data.data.data;
+    }
+  } catch (error) {
+    console.error("Failed to fetch paid mock tests:", error);
+  }
+
   return (
     <div className="min-h-screen bg-white">
       <div className="base-px base-py max-w-3xl mx-auto base-space-y">
@@ -26,8 +36,8 @@ export default function PaidMockTestPage() {
       </div>
       <div className="base-px base-py max-w-5xl mx-auto">
         <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
-          {PAID_MOCK_TEST_CARDS_DATA.map((card, index) => (
-            <Link key={card.id} href={`/paid-mock-tests/${card.id}`}>
+          {mockTests.map((card: any, index: number) => (
+            <Link key={card.id} href={`/paid-mock-tests/${card.slug}`}>
               <BaseCard>
                 <div className="flex items-center justify-between">
                   <BaseCardIcon>{index + 1}</BaseCardIcon>
@@ -35,11 +45,19 @@ export default function PaidMockTestPage() {
                 </div>
                 <div className="space-y-3">
                   <BaseCardTitle>{card.name}</BaseCardTitle>
-                  <BaseCardDescription>{card.description}</BaseCardDescription>
-                  <BaseCardList items={card.points} />
+                  <BaseCardDescription className="line-clamp-3">
+                    {card.description}
+                  </BaseCardDescription>
+                  <BaseCardList
+                    items={
+                      card.details?.content
+                        ?.map((c: any) => c.title)
+                        .slice(0, 4) || []
+                    }
+                  />
                 </div>
                 <BaseCardImportantInfo className="mt-auto">
-                  {card.important}
+                  {card.details?.description}
                 </BaseCardImportantInfo>
               </BaseCard>
             </Link>
