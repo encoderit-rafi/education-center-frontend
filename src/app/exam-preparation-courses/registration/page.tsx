@@ -4,7 +4,7 @@ import { Suspense, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { cn } from "@/lib/utils";
+import { cn, omitEmpty } from "@/lib/utils";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import api from "@/axios";
 import {
@@ -78,11 +78,34 @@ function CourseRegistrationForm({ className }: { className?: string }) {
   const discount_amount = 0; // discount already applied upstream
   const total_amount = base_price - discount_amount;
 
+  const paymentMutation = useMutation({
+    mutationFn: (body: Record<string, unknown>) =>
+      api.post("/payments/initiate", body),
+    onSuccess: (response) => {
+      const checkoutUrl = response.data?.data?.checkoutUrl;
+      if (checkoutUrl) {
+        window.location.href = checkoutUrl;
+      } else {
+        console.error("Checkout URL not found in response");
+      }
+    },
+    onError: (error) => {
+      console.error("Payment intent failed:", error);
+    },
+  });
+
   const mutation = useMutation({
     mutationFn: (newBooking: Record<string, unknown>) =>
       api.post("/course-bookings", newBooking),
-    onSuccess: () => {
-      setIsSuccess(true);
+    onSuccess: (response) => {
+      const bookingId = response.data?.data?.id;
+      paymentMutation.mutate({
+        booking_type: "course_booking",
+        booking_id: bookingId,
+        provider: selectedPaymentMethod,
+        amount: total_amount,
+        currency: "AED",
+      });
     },
     onError: (error) => {
       console.error("Booking failed:", error);
@@ -105,7 +128,7 @@ function CourseRegistrationForm({ className }: { className?: string }) {
       payment_methods: formData.paymentMethod,
     };
 
-    mutation.mutate(payload);
+    mutation.mutate(omitEmpty(payload));
   };
 
   if (isSuccess) {
@@ -119,10 +142,9 @@ function CourseRegistrationForm({ className }: { className?: string }) {
             Booking Confirmed
           </h2>
           <p className="text-emerald-700/80 text-base leading-relaxed font-medium">
-            Your registration for the{" "}
-            <strong>{courseName}</strong> preparation course has been received.
-            Check your email for further instructions and your enrollment
-            details.
+            Your registration for the <strong>{courseName}</strong> preparation
+            course has been received. Check your email for further instructions
+            and your enrollment details.
           </p>
         </div>
         <button
@@ -261,7 +283,9 @@ function CourseRegistrationForm({ className }: { className?: string }) {
                     <span>Discount</span>
                     <span className="text-emerald-600">
                       {discount_amount > 0 ? (
-                        <>- <PriceDisplay amount={discount_amount} /></>
+                        <>
+                          - <PriceDisplay amount={discount_amount} />
+                        </>
                       ) : (
                         <span className="text-slate-400">—</span>
                       )}
