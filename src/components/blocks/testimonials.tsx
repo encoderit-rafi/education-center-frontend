@@ -132,7 +132,6 @@ function TestimonialCard({
             </span>
           ))}
         </div>
-        <GoogleLogo />
       </div>
 
       <p className="text-gray-800 text-lg font-medium leading-relaxed line-clamp-4">
