@@ -61,35 +61,35 @@ export default function OtherExamsPage() {
 
         <Accordion
           type="single"
-          className="w-full max-w-4xl mx-auto mt-20 space-y-4"
+          className="w-full max-w-4xl mx-auto mt-20 space-y-8 rounded-none border-none"
         >
           {OTHER_EXAMS.map((exam, index) => (
             <AccordionItem
               key={exam.id}
               value={exam.id}
-              className="bg-white border border-outline/10 rounded-2xl px-6 overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+              className="bg-white! overflow-hidden rounded-none border-none"
             >
-              <AccordionTrigger className="hover:no-underline py-6">
-                <div className="flex items-center gap-6 text-left">
-                  <BaseCardIcon className="rounded-full size-12 text-lg font-bold shrink-0">
+              <AccordionTrigger className="bg-white rounded-md hover:no-underline  items-center">
+                <div className="flex items-center gap-3 text-left">
+                  <BaseCardIcon className="rounded-full size-10 text-lg font-bold shrink-0">
                     {index + 1}
                   </BaseCardIcon>
                   <div className="space-y-1">
-                    <h3 className="font-bold text-secondary text-xl tracking-tight">
+                    <h3 className="font-bold text-secondary text-lg tracking-tight">
                       {exam.name}
                     </h3>
-                    <p className="text-[10px] text-primary font-black uppercase tracking-[0.2em]">
+                    <p className="text-xs text-primary font-semibold">
                       Authorized Provider: {exam.provider}
                     </p>
                   </div>
                 </div>
               </AccordionTrigger>
-              <AccordionContent className="pb-8">
-                <div className="pl-18">
-                  <p className="text-slate-500 leading-relaxed mb-8 max-w-2xl">
-                    {exam.description}
-                  </p>
-                </div>
+              <AccordionContent>
+                {/* <div className="pl-18">
+                </div> */}
+                <p className="pl-12 pt-5 text-slate-600 leading-relaxed mb-8 max-w-2xl">
+                  {exam.description}
+                </p>
               </AccordionContent>
             </AccordionItem>
           ))}
