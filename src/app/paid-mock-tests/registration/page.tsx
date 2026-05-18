@@ -21,7 +21,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import { CheckCircle2, Info } from "lucide-react";
+import { CheckCircle2, Info, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { notFound, useSearchParams } from "next/navigation";
 import Stepper from "@/components/stepper";
@@ -202,7 +202,6 @@ function PaidMockTestRegistrationForm({
       <section className="relative overflow-hidden bg-slate-50 base-px base-py">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-3xl text-center font-black leading-[1.1] tracking-tight text-slate-900 lg:text-4xl xl:text-5xl mb-4">
-            {data.name}{" "}
             <span className="text-primary">Paid Mock Test Registration</span>
           </h1>
           <form
@@ -309,7 +308,55 @@ function PaidMockTestRegistrationForm({
                   </p>
                 </div>
               </div>
-              <div className="space-y-3">
+              <div className="space-y-4">
+                {/* Mock Test Details Card */}
+                {data && (
+                  <div className="bg-slate-50 border rounded-2xl p-5 space-y-4 shadow-sm">
+                    <h3 className="font-headline font-black text-xs text-slate-800 border-b pb-2 flex items-center gap-2">
+                      <Calendar className="w-4.5 h-4.5 text-primary" /> Mock
+                      Test Details
+                    </h3>
+                    <div className="space-y-3 text-sm">
+                      <div>
+                        <p className="text-xs text-slate-400">Mock Test</p>
+                        <p className="font-bold text-slate-900 text-base">
+                          {data.name}
+                        </p>
+                      </div>
+
+                      {data.type && (
+                        <div>
+                          <p className="text-xs text-slate-400">Type</p>
+                          <p className="font-semibold text-slate-700 capitalize">
+                            {data.type.replace("_", " ")}
+                          </p>
+                        </div>
+                      )}
+
+                      <div className="grid grid-cols-2 gap-3 pt-2">
+                        {data.duration && (
+                          <div className="bg-white border rounded-xl p-3 text-center">
+                            <p className="text-xs text-slate-400">Duration</p>
+                            <p className="font-extrabold text-slate-900 text-sm mt-0.5">
+                              {data.duration}
+                            </p>
+                          </div>
+                        )}
+                        {data.subTitle && (
+                          <div className="bg-white border rounded-xl p-3 text-center">
+                            <p className="text-xs text-slate-400">
+                              Exam Category
+                            </p>
+                            <p className="font-extrabold text-primary text-sm mt-0.5">
+                              {data.subTitle}
+                            </p>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                )}
+
                 <Stepper step={2}>
                   Payment{" "}
                   <span className="bg-primary/10 px-3 py-1 rounded-full text-sm font-semibold text-primary">
