@@ -22,9 +22,9 @@ const BaseCardDescription = ({
   children,
   className,
   ...props
-}: PropsWithChildren & ComponentProps<"p">) => {
+}: PropsWithChildren & ComponentProps<"div">) => {
   return (
-    <p
+    <div
       className={cn(
         "text-sm font-normal text-secondary/90 line-clamp-3",
         className,
@@ -32,7 +32,7 @@ const BaseCardDescription = ({
       {...props}
     >
       {children}
-    </p>
+    </div>
   );
 };
 const BaseCardImportantInfo = ({

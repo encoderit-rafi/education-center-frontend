@@ -56,7 +56,7 @@ export async function generateStaticParams() {
     console.log("👉 ~ generateStaticParams ~ res:", res);
     if (res.data?.success) {
       return res.data.data.data.map((item: any) => ({
-        id: item.id,
+        id: item.slug,
       }));
     }
   } catch (error) {
