@@ -10,6 +10,7 @@ import {
   Users,
   UserCheck,
   Calendar,
+  Sparkles,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
@@ -25,6 +26,38 @@ import { Badge } from "@/components/ui/badge";
 import { notFound } from "next/navigation";
 import { PriceDisplay } from "@/components/ui/price-display";
 import api from "@/axios";
+
+interface WorkshopDetail {
+  id: string;
+  courseId: string | null;
+  name: string;
+  slug: string;
+  title: string;
+  subTitle: string;
+  shortDescription: string | null;
+  description: string | null;
+  logo: string | null;
+  bannerImage: string | null;
+  startTime: string | null;
+  endTime: string | null;
+  type: string;
+  isActive: boolean;
+  duration: string;
+  price: string;
+  discountValue: string;
+  discountType: string;
+  vatRate: string;
+}
+
+const slugToExamId: Record<string, string> = {
+  ielts: "ielts",
+  toefl: "toefl",
+  pte: "pte",
+  selt: "psi",
+  cael: "celpip-cael",
+  celpip: "celpip-cael",
+  oet: "oet",
+};
 
 interface CourseDetail {
   id: string;
@@ -64,11 +97,13 @@ export default async function ExamPreparationDynamicPage({
 
   let course: CourseDetail | null = null;
   let packages: CoursePackage[] = [];
+  let workshops: WorkshopDetail[] = [];
 
   try {
-    const [courseRes, packagesRes] = await Promise.all([
+    const [courseRes, packagesRes, workshopsRes] = await Promise.all([
       api.get<ApiResponse<CourseDetail>>(`/courses/${slug}`),
       api.get<ApiResponse<CoursePackage[]>>(`/courses/${slug}/packages`),
+      api.get<ApiResponse<{ data: WorkshopDetail[] }>>("/workshops"),
     ]);
 
     if (courseRes.data.success) {
@@ -76,6 +111,9 @@ export default async function ExamPreparationDynamicPage({
     }
     if (packagesRes.data.success) {
       packages = packagesRes.data.data;
+    }
+    if (workshopsRes.data.success) {
+      workshops = workshopsRes.data.data.data || [];
     }
   } catch (error) {
     console.error("Error fetching course data:", error);
@@ -86,6 +124,29 @@ export default async function ExamPreparationDynamicPage({
   }
 
   const data = course; // For easier mapping
+
+  const mappedExamId = slugToExamId[slug.toLowerCase()] || slug;
+
+  const filteredWorkshops = workshops.filter((w) => {
+    if (!course) return false;
+
+    // Match by courseId if both exist
+    if (w.courseId && course.id && w.courseId === course.id) {
+      return true;
+    }
+
+    // Fallback: Match by subTitle vs slug or course name
+    const subTitleLower = w.subTitle?.toLowerCase() || "";
+    const slugLower = slug.toLowerCase();
+    const courseNameLower = course.name?.toLowerCase() || "";
+
+    return (
+      subTitleLower === slugLower ||
+      subTitleLower === courseNameLower ||
+      (slugLower === "toefl" && subTitleLower === "toefl-ibt") ||
+      (slugLower === "celpip" && subTitleLower === "celpip-general")
+    );
+  });
 
   return (
     <div className="min-h-screen bg-white">
@@ -272,6 +333,105 @@ export default async function ExamPreparationDynamicPage({
           </div>
         </div>
       </section>
+
+      {/* ── Workshops Section ── */}
+      {filteredWorkshops.length > 0 && (
+        <section
+          id="workshops"
+          className="base-py bg-slate-50 border-t border-slate-100"
+        >
+          <div className="container px-4 lg:px-8 max-w-7xl mx-auto space-y-16">
+            <div className="text-center max-w-3xl mx-auto space-y-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-black uppercase tracking-widest">
+                <Sparkles className="size-3" /> Targeted Skills Boost
+              </div>
+              <h2 className="text-4xl font-black text-slate-900 tracking-tight leading-tight lg:text-5xl">
+                Accelerated{" "}
+                <span className="text-primary">Skills Workshops</span>
+              </h2>
+              <p className="text-slate-600 text-base lg:text-lg font-medium leading-relaxed">
+                Need a targeted boost? Our high-intensity, topic-focused
+                workshops are engineered to deliver immediate results in
+                specific exam sections.
+              </p>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+              {filteredWorkshops.map((workshop) => {
+                const basePrice = parseFloat(workshop.price);
+                const discount = parseFloat(workshop.discountValue) || 0;
+                const discountedPrice =
+                  workshop.discountType === "PERCENTAGE"
+                    ? Math.round(basePrice * (1 - discount / 100))
+                    : basePrice - discount;
+
+                return (
+                  <BaseCard
+                    key={workshop.id}
+                    className="border-slate-200 group relative overflow-hidden hover:border-primary/30 hover:shadow-2xl transition-all duration-500 ease-out p-6 flex flex-col justify-between h-full bg-white"
+                  >
+                    <div className="space-y-6">
+                      <div className="flex items-center justify-between">
+                        <BaseCardIcon className="size-12 rounded-xl text-lg font-bold">
+                          {workshop.duration}h
+                        </BaseCardIcon>
+                        {discount > 0 && (
+                          <Badge className="py-1 px-3 font-bold shadow-lg">
+                            SAVE {discount}
+                            {workshop.discountType === "PERCENTAGE" ? "%" : ""}
+                          </Badge>
+                        )}
+                      </div>
+
+                      <div className="space-y-2">
+                        <BaseCardTitle className="text-xl leading-tight">
+                          {workshop.name}
+                        </BaseCardTitle>
+                        <p className="text-xs text-primary font-black uppercase tracking-widest">
+                          {workshop.subTitle} Specialization
+                        </p>
+                      </div>
+
+                      <p className="text-sm text-slate-600 font-medium leading-relaxed line-clamp-4">
+                        {workshop.description ||
+                          `Comprehensive ${workshop.duration}-hour intensive workshop focusing on core strategies, mock practice, and live feedback for the ${workshop.subTitle} exam.`}
+                      </p>
+                    </div>
+
+                    <div className="pt-6 space-y-4">
+                      <div className="flex items-baseline gap-2">
+                        <PriceDisplay
+                          amount={discountedPrice}
+                          className="text-3xl font-black text-slate-900"
+                        />
+                        {discount > 0 && (
+                          <span className="text-sm text-slate-400 line-through decoration-slate-300">
+                            <PriceDisplay
+                              amount={basePrice}
+                              iconClassName="h-[0.7em]"
+                            />
+                          </span>
+                        )}
+                      </div>
+
+                      <Link
+                        href={`/workshop-registration?examId=${mappedExamId}&courseId=${workshop.id}&price=${discountedPrice}&currency=AED`}
+                        className={cn(
+                          buttonVariants(),
+                          "font-bold h-11 shadow-sm px-4 w-full flex items-center justify-center gap-2 group-hover:bg-primary group-hover:text-white transition-all duration-300",
+                        )}
+                      >
+                        <Calendar className="size-4" />
+                        <span>Book</span>
+                      </Link>
+                    </div>
+                  </BaseCard>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      )}
     </div>
   );
 }
