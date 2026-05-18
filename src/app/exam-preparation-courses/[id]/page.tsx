@@ -293,7 +293,16 @@ export default async function ExamPreparationDynamicPage({
                   {/* Row 5 — Best For */}
                   <div className="px-3 pt-3 space-y-2">
                     <Badge variant={"destructive"}>Best For</Badge>
-                    <BaseCardList items={pkg.bestFor || []} checked />
+                    <BaseCardList
+                      items={
+                        Array.isArray(pkg.bestFor)
+                          ? pkg.bestFor
+                          : pkg.bestFor && typeof pkg.bestFor === "object"
+                            ? (pkg.bestFor as any).goals || []
+                            : []
+                      }
+                      checked
+                    />
                   </div>
 
                   {/* Row 6 — Duration / Schedule */}
