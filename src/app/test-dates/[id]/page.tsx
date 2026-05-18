@@ -263,7 +263,7 @@ export default function TestDatesDetailPage() {
                   modifiers={{
                     available: (date) =>
                       (id === "ielts" && date.getDay() !== 0) ||
-                      (id === "toefl" && date.getDay() === 3) ||
+                      (id === "toefl" && date.getDay() !== 3) ||
                       (id === "selt" && [1, 2, 3].includes(date.getDay())) ||
                       (id === "pte" &&
                         [0, 1, 2, 3, 4, 6].includes(date.getDay())),
@@ -279,7 +279,7 @@ export default function TestDatesDetailPage() {
                       return isPast || date.getDay() === 0;
                     }
                     if (id === "toefl") {
-                      return isPast || date.getDay() !== 3;
+                      return isPast || date.getDay() === 3;
                     }
                     if (id === "selt") {
                       return isPast || ![1, 2, 3].includes(date.getDay());

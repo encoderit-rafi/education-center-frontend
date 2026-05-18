@@ -98,6 +98,7 @@ export default async function ExamPreparationDynamicPage({
   let course: CourseDetail | null = null;
   let packages: CoursePackage[] = [];
   let workshops: WorkshopDetail[] = [];
+  console.log("👉 ~ ExamPreparationDynamicPage ~ workshops:", workshops);
 
   try {
     const [courseRes, packagesRes, workshopsRes] = await Promise.all([
@@ -126,7 +127,6 @@ export default async function ExamPreparationDynamicPage({
   const data = course; // For easier mapping
 
   const mappedExamId = slugToExamId[slug.toLowerCase()] || slug;
-
   const filteredWorkshops = workshops.filter((w) => {
     if (!course) return false;
 
@@ -146,9 +146,7 @@ export default async function ExamPreparationDynamicPage({
       (slugLower === "toefl" && subTitleLower === "toefl-ibt") ||
       (slugLower === "celpip" && subTitleLower === "celpip-general")
     );
-  });
-
-  return (
+  });  return (
     <div className="min-h-screen bg-white">
       {/* ── Hero Section ── */}
       <section className="relative overflow-hidden bg-slate-50 border-b border-slate-100">
