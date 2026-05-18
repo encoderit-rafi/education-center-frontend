@@ -1,10 +1,10 @@
 "use client";
 
-import { Suspense, useState } from "react";
+import { Suspense, useState, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { cn } from "@/lib/utils";
+import { cn, omitEmpty } from "@/lib/utils";
 import {
   Field,
   FieldLabel,
@@ -12,62 +12,197 @@ import {
   FieldContent,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import Payment from "@/components/blocks/payment";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
-import { CheckCircle2, Info, ArrowRight } from "lucide-react";
+import { CheckCircle2, Info, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { EXAM_PREPARATION_COURSES_DATA } from "@/data";
 import { notFound, useSearchParams } from "next/navigation";
 import Stepper from "@/components/stepper";
+import { PriceDisplay } from "@/components/ui/price-display";
+import { useQuery, useMutation } from "@tanstack/react-query";
+import api from "@/axios";
 import { EXAM_FEES } from "../fees/page";
 
+interface WorkshopDetail {
+  id: string;
+  courseId: string | null;
+  name: string;
+  slug: string;
+  title: string;
+  subTitle: string;
+  shortDescription: string | null;
+  description: string | null;
+  logo: string | null;
+  bannerImage: string | null;
+  startTime: string | null;
+  endTime: string | null;
+  type: string;
+  isActive: boolean;
+  duration: string;
+  price: string;
+  discountValue: string;
+  discountType: string;
+  vatRate: string;
+}
+
 const bookingSchema = z.object({
-  mockTestId: z.string().optional(),
   firstName: z.string().min(2, "First name must be at least 2 characters"),
-  lastName: z.string().min(2, "Last name must be at least 2 characters"),
+  middleName: z.string().optional(),
+  lastName: z.string().optional(),
   email: z.string().email("Please enter a valid email address"),
-  paymentMethod: z.literal("card"),
+  phone: z.string().min(6, "Please enter a valid phone number"),
+  country: z.string().min(1, "Please enter a country"),
+  address: z.string().optional(),
+  paymentMethod: z.enum(["stripe", "paypal"]),
 });
 
 type BookingValues = z.infer<typeof bookingSchema>;
 
 function WorkshopRegistrationForm({ className }: { className?: string }) {
   const searchParams = useSearchParams();
-  const examId = searchParams.get("examId");
-  const courseId = searchParams.get("courseId");
+  const examId = searchParams.get("examId"); // e.g. "ielts"
+  const courseId = searchParams.get("courseId"); // workshop ID (UUID)
   const priceParam = searchParams.get("price");
-  const currencyParam = searchParams.get("currency");
 
-  const data = EXAM_FEES.find((item) => item.id === examId);
+  // Fetch the selected workshop detail
+  const { data: workshops, isLoading } = useQuery({
+    queryKey: ["workshops"],
+    queryFn: async () => {
+      const res = await api.get<{ data: { data: WorkshopDetail[] } }>(
+        "/workshops",
+      );
+      return res.data.data.data;
+    },
+  });
 
-  if (!data) {
-    notFound();
-  }
+  // Fetch parent course details
+  const { data: courseData } = useQuery({
+    queryKey: ["course", examId],
+    queryFn: async () => {
+      const res = await api.get<{
+        data: { id: string; name: string; description?: string };
+      }>(`/courses/${examId}`);
+      return res.data.data;
+    },
+    enabled: !!examId,
+  });
+
+  const workshop = useMemo(() => {
+    return workshops?.find((w) => w.id === courseId);
+  }, [workshops, courseId]);
+
+  const fallbackData = useMemo(() => {
+    return EXAM_FEES.find((item) => item.id === examId);
+  }, [examId]);
 
   const [isSuccess, setIsSuccess] = useState(false);
 
   const {
     register,
     handleSubmit,
+    setValue,
+    watch,
     formState: { errors },
   } = useForm<BookingValues>({
     resolver: zodResolver(bookingSchema),
     defaultValues: {
-      paymentMethod: "card",
+      paymentMethod: "stripe",
+      phone: "",
+      country: "",
     },
   });
 
-  const onSubmit = (data: BookingValues) => {
-    console.log("Booking Data:", data);
-    setIsSuccess(true);
+  const selectedPaymentMethod = watch("paymentMethod");
+
+  // Calculate pricing based on dynamic workshop data
+  const base_price = workshop
+    ? parseFloat(workshop.price)
+    : Number(priceParam) || 0;
+  const discount_amount = workshop
+    ? parseFloat(workshop.discountValue) || 0
+    : 0;
+  const total_amount = workshop
+    ? workshop.discountType === "PERCENTAGE"
+      ? Math.round(base_price * (1 - discount_amount / 100))
+      : base_price - discount_amount
+    : base_price;
+
+  const paymentMutation = useMutation({
+    mutationFn: (body: Record<string, unknown>) =>
+      api.post("/payments/initiate", body),
+    onSuccess: (response) => {
+      const checkoutUrl = response.data?.data?.checkoutUrl;
+      if (checkoutUrl) {
+        window.location.href = checkoutUrl;
+      } else {
+        console.error("Checkout URL not found in response");
+      }
+    },
+    onError: (error) => {
+      console.error("Payment intent failed:", error);
+    },
+  });
+
+  const mutation = useMutation({
+    mutationFn: (newBooking: Record<string, unknown>) =>
+      api.post("/workshop-bookings", newBooking),
+    onSuccess: (response) => {
+      const bookingId = response.data?.data?.id;
+      paymentMutation.mutate({
+        booking_type: "workshop_booking",
+        booking_id: bookingId,
+        provider: selectedPaymentMethod,
+        amount: total_amount,
+        currency: "AED",
+      });
+    },
+    onError: (error) => {
+      console.error("Booking failed:", error);
+    },
+  });
+
+  const onSubmit = (formData: BookingValues) => {
+    const payload = {
+      workshop_id: workshop?.id || courseId || "",
+      first_name: formData.firstName,
+      middle_name: formData.middleName || "",
+      last_name: formData.lastName || "",
+      email: formData.email,
+      phone: formData.phone,
+      country: formData.country,
+      address: formData.address || "",
+      base_price,
+      discount_amount:
+        workshop?.discountType === "PERCENTAGE"
+          ? Math.round(base_price * (discount_amount / 100))
+          : discount_amount,
+      total_amount,
+      payment_methods: formData.paymentMethod,
+    };
+
+    mutation.mutate(omitEmpty(payload));
   };
 
-  const PRICE = Number(priceParam) || 0;
-  const CURRENCY = currencyParam || "AED";
+  if (isLoading) {
+    return (
+      <div className="min-h-[400px] flex items-center justify-center bg-slate-50 animate-pulse">
+        <div className="text-slate-500 font-medium">
+          Loading workshop details...
+        </div>
+      </div>
+    );
+  }
+
+  // If no workshop matches and no static fallback data matches, show notFound
+  if (!workshop && !fallbackData) {
+    notFound();
+  }
+
+  const titleName = workshop?.name || fallbackData?.name || "Workshop";
 
   if (isSuccess) {
     return (
-      <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-[2.5rem] p-10 text-center space-y-6 max-w-2xl mx-auto shadow-2xl animate-in zoom-in-95 duration-500">
+      <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-[2.5rem] p-10 text-center space-y-6 max-w-2xl mx-auto shadow-2xl animate-in zoom-in-95 duration-500 my-12">
         <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto">
           <CheckCircle2 className="w-8 h-8 text-emerald-600" />
         </div>
@@ -76,9 +211,9 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
             Booking Confirmed
           </h2>
           <p className="text-emerald-700/80 text-base leading-relaxed font-medium">
-            Your registration for the <strong>{data.name}</strong> preparation
-            course has been received. Check your email for further instructions
-            and your enrollment details.
+            Your registration for the <strong>{titleName}</strong> workshop has
+            been successfully received. Check your email for further
+            instructions.
           </p>
         </div>
         <button
@@ -97,7 +232,6 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
       <section className="relative overflow-hidden bg-slate-50 base-px base-py">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-3xl text-center font-black leading-[1.1] tracking-tight text-slate-900 lg:text-4xl xl:text-5xl mb-4">
-            {data.name}{" "}
             <span className="text-primary">Workshop Registration</span>
           </h1>
           <form
@@ -113,14 +247,25 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
                     <FieldContent>
                       <Input
                         type="text"
-                        placeholder="Jhon"
+                        placeholder="John"
                         {...register("firstName")}
                       />
                       <FieldError errors={[errors.firstName]} />
                     </FieldContent>
                   </Field>
                   <Field>
-                    <FieldLabel required>Last Name</FieldLabel>
+                    <FieldLabel>Middle Name</FieldLabel>
+                    <FieldContent>
+                      <Input
+                        type="text"
+                        placeholder="William"
+                        {...register("middleName")}
+                      />
+                      <FieldError errors={[errors.middleName]} />
+                    </FieldContent>
+                  </Field>
+                  <Field className="col-span-2">
+                    <FieldLabel>Last Name</FieldLabel>
                     <FieldContent>
                       <Input
                         type="text"
@@ -135,11 +280,46 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
                   <FieldLabel required>Email</FieldLabel>
                   <FieldContent>
                     <Input
-                      type="text"
+                      type="email"
                       placeholder="example@gmail.com"
                       {...register("email")}
                     />
                     <FieldError errors={[errors.email]} />
+                  </FieldContent>
+                </Field>
+                <div className="grid grid-cols-2 gap-3">
+                  <Field>
+                    <FieldLabel required>Phone Number</FieldLabel>
+                    <FieldContent>
+                      <Input
+                        type="tel"
+                        placeholder="+971 50 123 4567"
+                        {...register("phone")}
+                      />
+                      <FieldError errors={[errors.phone]} />
+                    </FieldContent>
+                  </Field>
+                  <Field>
+                    <FieldLabel required>Country</FieldLabel>
+                    <FieldContent>
+                      <Input
+                        type="text"
+                        placeholder="United Arab Emirates"
+                        {...register("country")}
+                      />
+                      <FieldError errors={[errors.country]} />
+                    </FieldContent>
+                  </Field>
+                </div>
+                <Field>
+                  <FieldLabel>Address</FieldLabel>
+                  <FieldContent>
+                    <Input
+                      type="text"
+                      placeholder="123 Main St, City"
+                      {...register("address")}
+                    />
+                    <FieldError errors={[errors.address]} />
                   </FieldContent>
                 </Field>
 
@@ -151,19 +331,146 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
                   </p>
                 </div>
               </div>
-              <div className="space-y-3">
+              <div className="space-y-4">
+                {/* Workshop & Course Details Card */}
+                <div className="bg-slate-50 border rounded-2xl p-5 space-y-4 shadow-sm">
+                  <h3 className="font-headline font-black text-xs text-slate-800  border-b pb-2 flex items-center gap-2">
+                    <Calendar className="w-4.5 h-4.5 text-primary" /> Workshop &
+                    Course Details
+                  </h3>
+                  <div className="space-y-3 text-sm">
+                    <div>
+                      <p className="text-xs text-slate-400 ">Workshop</p>
+                      <p className="font-bold text-slate-900 text-base">
+                        {workshop?.name || titleName}
+                      </p>
+                    </div>
+
+                    {courseData?.name && (
+                      <div>
+                        <p className="text-xs text-slate-400 ">
+                          Associated Course
+                        </p>
+                        <p className="font-semibold text-slate-700">
+                          {courseData.name}
+                        </p>
+                      </div>
+                    )}
+
+                    <div className="grid grid-cols-2 gap-3 pt-2">
+                      <div className="bg-white border rounded-xl p-3 text-center">
+                        <p className="text-xs text-slate-400  ">Duration</p>
+                        <p className="font-extrabold text-slate-900 text-sm mt-0.5">
+                          {workshop?.duration || "8"} Hours
+                        </p>
+                      </div>
+                      <div className="bg-white border rounded-xl p-3 text-center">
+                        <p className="text-xs text-slate-400 ">Focus</p>
+                        <p className="font-extrabold text-primary text-sm mt-0.5">
+                          {workshop?.subTitle || examId?.toUpperCase()}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
                 <Stepper step={2}>
                   Payment{" "}
                   <span className="bg-primary/10 px-3 py-1 rounded-full text-sm font-semibold text-primary">
-                    {PRICE}{" "}
-                    <span className="font-normal text-xs">{CURRENCY}</span>
+                    <PriceDisplay amount={total_amount} />
                   </span>
                 </Stepper>
-                <Payment amount={PRICE} currency={CURRENCY} />
-                <Button type="submit" className="w-full mt-6 py-3">
-                  Register
-                  <ArrowRight className="w-5 h-5" />
+
+                {/* Fee Breakdown */}
+                <div className="bg-white border rounded-lg p-4 space-y-2 mb-4 text-sm">
+                  <div className="flex justify-between items-center text-slate-600">
+                    <span>Base Price</span>
+                    <span>
+                      <PriceDisplay amount={base_price} />
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center text-slate-600">
+                    <span>Discount</span>
+                    <span className="text-emerald-600">
+                      {discount_amount > 0 ? (
+                        <>
+                          -{" "}
+                          <PriceDisplay
+                            amount={
+                              workshop?.discountType === "PERCENTAGE"
+                                ? Math.round(
+                                    base_price * (discount_amount / 100),
+                                  )
+                                : discount_amount
+                            }
+                          />
+                        </>
+                      ) : (
+                        <span className="text-slate-400">—</span>
+                      )}
+                    </span>
+                  </div>
+
+                  <div className="pt-2 mt-2 border-t flex justify-between items-center font-bold text-slate-900 text-base">
+                    <span>Total</span>
+                    <span>
+                      <PriceDisplay amount={total_amount} />
+                    </span>
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  <FieldLabel required>Payment Method</FieldLabel>
+                  <RadioGroup
+                    value={selectedPaymentMethod}
+                    onValueChange={(val) =>
+                      setValue("paymentMethod", val as "stripe" | "paypal")
+                    }
+                    className="grid grid-cols-2 gap-3"
+                  >
+                    <label
+                      htmlFor="payment-stripe"
+                      className={cn(
+                        "flex items-center gap-3 p-4 border rounded-lg cursor-pointer transition-colors",
+                        selectedPaymentMethod === "stripe"
+                          ? "border-primary bg-primary/5"
+                          : "hover:bg-slate-50",
+                      )}
+                    >
+                      <RadioGroupItem value="stripe" id="payment-stripe" />
+                      <span className="font-semibold text-sm">
+                        Credit Card (Stripe)
+                      </span>
+                    </label>
+                    <label
+                      htmlFor="payment-paypal"
+                      className={cn(
+                        "flex items-center gap-3 p-4 border rounded-lg cursor-pointer transition-colors",
+                        selectedPaymentMethod === "paypal"
+                          ? "border-primary bg-primary/5"
+                          : "hover:bg-slate-50",
+                      )}
+                    >
+                      <RadioGroupItem value="paypal" id="payment-paypal" />
+                      <span className="font-semibold text-sm">PayPal</span>
+                    </label>
+                  </RadioGroup>
+                  <FieldError errors={[errors.paymentMethod]} />
+                </div>
+
+                <Button
+                  type="submit"
+                  className="w-full mt-6 py-3"
+                  disabled={mutation.isPending}
+                >
+                  {mutation.isPending ? "Processing..." : "Purchase"}
                 </Button>
+                {mutation.isError && (
+                  <p className="text-red-500 text-sm mt-2">
+                    There was an error processing your booking. Please try
+                    again.
+                  </p>
+                )}
               </div>
             </section>
           </form>

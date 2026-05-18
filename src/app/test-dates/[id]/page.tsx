@@ -46,18 +46,18 @@ export default function TestDatesDetailPage() {
                 <div className="bg-primary/5 border border-primary/10 rounded-md p-5 max-w-xl">
                   <div className="text-sm font-bold text-secondary flex items-center gap-2">
                     <span className="w-2 h-2 bg-primary rounded-full" />
-                    Testing occurs every Sunday
+                    Testing occurs Mon to Sat (Sundays closed)
                   </div>
                   <p className="text-xs text-slate-500 mt-1 ml-4">
-                    All Sundays are available for testing (public holidays
-                    falling on Sundays will be deactivated separately).
+                    All Sundays are closed for testing (public holidays
+                    will be deactivated separately).
                   </p>
                   <div className="mt-4 pt-3 border-t border-primary/10">
                     <p className="text-[10px] font-bold text-primary">
                       Available Time Slots
                     </p>
                     <p className="text-sm font-bold text-secondary mt-1 ml-4">
-                      Morning Session (AM)
+                      Morning & Afternoon Sessions (AM / PM)
                     </p>
                   </div>
                 </div>
@@ -66,11 +66,11 @@ export default function TestDatesDetailPage() {
                 <div className="bg-primary/5 border border-primary/10 rounded-md p-5 max-w-xl">
                   <div className="text-sm font-bold text-secondary flex items-center gap-2">
                     <span className="w-2 h-2 bg-primary rounded-full" />
-                    Testing occurs every Wednesday
+                    Testing occurs Mon, Tue, Thu, Fri, Sat (Wednesdays closed)
                   </div>
                   <p className="text-xs text-slate-500 mt-1 ml-4">
-                    All Wednesdays are available for testing dates that do not
-                    participate will be deactivated separately.
+                    All Wednesdays are closed for testing (public holidays
+                    will be deactivated separately).
                   </p>
                   <div className="mt-4 pt-3 border-t border-primary/10">
                     <p className="text-[10px] font-bold text-primary">
@@ -262,7 +262,7 @@ export default function TestDatesDetailPage() {
                 <Calendar
                   modifiers={{
                     available: (date) =>
-                      (id === "ielts" && date.getDay() === 0) ||
+                      (id === "ielts" && date.getDay() !== 0) ||
                       (id === "toefl" && date.getDay() === 3) ||
                       (id === "selt" && [1, 2, 3].includes(date.getDay())) ||
                       (id === "pte" &&
@@ -276,7 +276,7 @@ export default function TestDatesDetailPage() {
                     const isPast =
                       date < new Date(new Date().setHours(0, 0, 0, 0));
                     if (id === "ielts") {
-                      return isPast || date.getDay() !== 0;
+                      return isPast || date.getDay() === 0;
                     }
                     if (id === "toefl") {
                       return isPast || date.getDay() !== 3;
@@ -291,7 +291,7 @@ export default function TestDatesDetailPage() {
                     }
                     return isPast;
                   }}
-                  className="w-full max-w-xl mx-auto mt-8 border rounded-md p-8 bg-white shadow-xl"
+                  className="w-full max-w-xl mx-auto border rounded-md p-8 bg-white shadow-xl"
                 />
               )}
             </div>
