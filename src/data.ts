@@ -272,7 +272,7 @@ export const PRIMARY_NAV: AppNavigationItem[] = [
     name: "Exam Preparation Courses",
     href: "/exam-preparation-courses",
     items: NAV_EXAM_PREPARATION_COURSES_DATA.map((exam) => ({
-      name: exam.name,
+      name: exam.name === "PTE Academic" ? "PTE" : exam.name,
       href: `/exam-preparation-courses/${exam.id}`,
     })),
   },
@@ -680,48 +680,59 @@ export const WORKSHOPS_DATA = {
   },
 };
 export const COURSES_DATA = {
-  group_classroom: {
-    id: "group_classroom",
-    name: "Group Classroom",
+  group_course: {
+    id: "group_course",
+    name: "Group Course",
     class_mode_id: "group",
-    class_type_id: "classroom",
+    class_type_id: "course",
     price: 1850,
     currency: "AED",
     general_discount: 5,
     special_discount: 10,
   },
 
-  semi_private_classroom: {
-    id: "semi_private_classroom",
-    name: "Semi-Private Classroom",
+  semi_private_course: {
+    id: "semi_private_course",
+    name: "Semi-Private Course",
     class_mode_id: "semi_private",
-    class_type_id: "classroom",
+    class_type_id: "course",
     price: 2850,
     currency: "AED",
     general_discount: 5,
     special_discount: 15,
   },
 
-  vip_classroom: {
-    id: "vip_classroom",
-    name: "VIP Classroom",
+  inperson_one_to_one_course: {
+    id: "inperson_one_to_one_course",
+    name: "In-Person One-to-One Course",
     class_mode_id: "vip",
-    class_type_id: "classroom",
+    class_type_id: "course",
     price: 4850,
     currency: "AED",
     general_discount: 5,
     special_discount: 20,
   },
 
-  vip_online: {
-    id: "vip_online",
-    name: "Private Online",
+  online_one_to_one_course: {
+    id: "online_one_to_one_course",
+    name: "Online One-to-One Course",
     class_mode_id: "vip",
     class_type_id: "online",
     price: 4850,
     currency: "AED",
     general_discount: 5,
     special_discount: 20,
+  },
+
+  hybrid_one_to_one_course: {
+    id: "hybrid_one_to_one_course",
+    name: "Hybrid One-to-One Course (Online & In-Person)",
+    class_mode_id: "vip",
+    class_type_id: "hybrid",
+    price: 5850,
+    currency: "AED",
+    general_discount: 5,
+    special_discount: 25,
   },
 };
 export const EXAM_PREPARATION_COURSES_DATA = [
@@ -750,7 +761,7 @@ export const EXAM_PREPARATION_COURSES_DATA = [
     },
     courses: [
       {
-        ...COURSES_DATA.vip_classroom,
+        ...COURSES_DATA.inperson_one_to_one_course,
         description:
           "The most personalized and intensive exam preparation program, designed for candidates who want focused attention, faster progress, and a fully customized preparation plan.",
         bestFor: [
@@ -766,7 +777,7 @@ export const EXAM_PREPARATION_COURSES_DATA = [
         },
       },
       {
-        ...COURSES_DATA.semi_private_classroom,
+        ...COURSES_DATA.semi_private_course,
         description:
           "A small-group format combining personalized instruction with collaboration and peer learning. Only 2 students per class.",
         bestFor: [
@@ -781,7 +792,7 @@ export const EXAM_PREPARATION_COURSES_DATA = [
         },
       },
       {
-        ...COURSES_DATA.group_classroom,
+        ...COURSES_DATA.group_course,
         description:
           "A dynamic classroom experience with structured learning, interaction, and instructor guidance in a collaborative environment.",
         bestFor: [
@@ -796,7 +807,7 @@ export const EXAM_PREPARATION_COURSES_DATA = [
         },
       },
       {
-        ...COURSES_DATA.vip_online,
+        ...COURSES_DATA.online_one_to_one_course,
         description:
           "High-quality exam training through live interactive sessions. Ideal for busy professionals or those studying from home.",
         bestFor: [
@@ -808,6 +819,22 @@ export const EXAM_PREPARATION_COURSES_DATA = [
           duration: "20 Hours",
           format: "Live Online Classes",
           schedule: "Flexible",
+        },
+      },
+      {
+        ...COURSES_DATA.hybrid_one_to_one_course,
+        description:
+          "The IELTS Hybrid One-to-One Course combines the flexibility of online instruction with the personal touch of on-campus sessions. Customize your learning path with a dedicated instructor.",
+        bestFor: [
+          "Prefer both online & classroom instruction",
+          "High schedule adaptability requirement",
+          "Fully customized preparation pace",
+          "One-on-one professional coaching",
+        ],
+        details: {
+          duration: "24 Hours",
+          completionTime: "6 Weeks",
+          schedule: "Flexible (Hybrid)",
         },
       },
     ],
@@ -834,7 +861,7 @@ export const EXAM_PREPARATION_COURSES_DATA = [
     },
     courses: [
       {
-        ...COURSES_DATA.vip_classroom,
+        ...COURSES_DATA.inperson_one_to_one_course,
         description:
           "The CELPIP Private One-to-One Course, also known as our VIP preparation program, offers the most personalized and intensive exam preparation available at TEPTH. Every session is tailored to your current level, target score, and exam deadline.",
         bestFor: [
@@ -850,7 +877,7 @@ export const EXAM_PREPARATION_COURSES_DATA = [
         },
       },
       {
-        ...COURSES_DATA.semi_private_classroom,
+        ...COURSES_DATA.semi_private_course,
         description:
           "Designed for candidates who prefer a small learning environment while still benefiting from collaboration. With only two students, the instructor provides detailed guidance while creating opportunities for peer learning and discussion.",
         bestFor: [
@@ -867,7 +894,7 @@ export const EXAM_PREPARATION_COURSES_DATA = [
         },
       },
       {
-        ...COURSES_DATA.group_classroom,
+        ...COURSES_DATA.group_course,
         description:
           "A dynamic classroom environment that covers all exam sections. Small groups ensure every student remains actively involved, fostering motivation and accountability alongside others with similar goals.",
         bestFor: [
@@ -884,7 +911,7 @@ export const EXAM_PREPARATION_COURSES_DATA = [
         },
       },
       {
-        ...COURSES_DATA.vip_online,
+        ...COURSES_DATA.online_one_to_one_course,
         description:
           "High-quality exam training delivered through live interactive sessions. Ideal for candidates who prefer studying from home or have demanding work schedules that make commuting difficult.",
         bestFor: [
@@ -897,6 +924,22 @@ export const EXAM_PREPARATION_COURSES_DATA = [
           duration: "20 Hours",
           format: "Live Online Classes",
           schedule: "Flexible",
+        },
+      },
+      {
+        ...COURSES_DATA.hybrid_one_to_one_course,
+        description:
+          "The CELPIP Hybrid One-to-One Course combines the flexibility of online instruction with the personal touch of on-campus sessions. Customize your learning path with a dedicated instructor.",
+        bestFor: [
+          "Prefer both online & classroom instruction",
+          "High schedule adaptability requirement",
+          "Fully customized preparation pace",
+          "One-on-one professional coaching",
+        ],
+        details: {
+          duration: "24 Hours",
+          completionTime: "6 Weeks",
+          schedule: "Flexible (Hybrid)",
         },
       },
     ],
@@ -923,7 +966,7 @@ export const EXAM_PREPARATION_COURSES_DATA = [
     },
     courses: [
       {
-        ...COURSES_DATA.vip_classroom,
+        ...COURSES_DATA.inperson_one_to_one_course,
         description:
           "The PTE Private One-to-One Course, also known as our VIP preparation program, offers the most personalized and intensive exam preparation available at TEPTH. Every session is tailored to your current level, target score, and exam deadline.",
         bestFor: [
@@ -939,7 +982,7 @@ export const EXAM_PREPARATION_COURSES_DATA = [
         },
       },
       {
-        ...COURSES_DATA.semi_private_classroom,
+        ...COURSES_DATA.semi_private_course,
         description:
           "Designed for candidates who prefer a small learning environment while still benefiting from collaboration. With only two students, the instructor provides detailed guidance while creating opportunities for peer learning and discussion.",
         bestFor: [
@@ -956,7 +999,7 @@ export const EXAM_PREPARATION_COURSES_DATA = [
         },
       },
       {
-        ...COURSES_DATA.group_classroom,
+        ...COURSES_DATA.group_course,
         description:
           "A dynamic classroom environment that covers all exam sections. Small groups ensure every student remains actively involved, fostering motivation and accountability alongside others with similar goals.",
         bestFor: [
@@ -973,7 +1016,7 @@ export const EXAM_PREPARATION_COURSES_DATA = [
         },
       },
       {
-        ...COURSES_DATA.vip_online,
+        ...COURSES_DATA.online_one_to_one_course,
         description:
           "High-quality exam training delivered through live interactive sessions. Ideal for candidates who prefer studying from home or have demanding work schedules that make commuting difficult.",
         bestFor: [
@@ -986,6 +1029,22 @@ export const EXAM_PREPARATION_COURSES_DATA = [
           duration: "20 Hours",
           format: "Live Online Classes",
           schedule: "Flexible",
+        },
+      },
+      {
+        ...COURSES_DATA.hybrid_one_to_one_course,
+        description:
+          "The PTE Hybrid One-to-One Course combines the flexibility of online instruction with the personal touch of on-campus sessions. Customize your learning path with a dedicated instructor.",
+        bestFor: [
+          "Prefer both online & classroom instruction",
+          "High schedule adaptability requirement",
+          "Fully customized preparation pace",
+          "One-on-one professional coaching",
+        ],
+        details: {
+          duration: "24 Hours",
+          completionTime: "6 Weeks",
+          schedule: "Flexible (Hybrid)",
         },
       },
     ],
@@ -1011,7 +1070,7 @@ export const EXAM_PREPARATION_COURSES_DATA = [
     },
     courses: [
       {
-        ...COURSES_DATA.vip_classroom,
+        ...COURSES_DATA.inperson_one_to_one_course,
         description:
           "The TOEFL iBT Private One-to-One Course offers the most personalized and intensive preparation available. Every session is tailored to your current level, target score, and exam deadline, focusing on realistic tasks and proven strategies.",
         bestFor: [
@@ -1027,7 +1086,7 @@ export const EXAM_PREPARATION_COURSES_DATA = [
         },
       },
       {
-        ...COURSES_DATA.semi_private_classroom,
+        ...COURSES_DATA.semi_private_course,
         description:
           "Designed for candidates who prefer a small learning environment while benefiting from collaboration. With only two students, the instructor provides detailed guidance while creating opportunities for peer learning and discussion.",
         bestFor: [
@@ -1044,7 +1103,7 @@ export const EXAM_PREPARATION_COURSES_DATA = [
         },
       },
       {
-        ...COURSES_DATA.group_classroom,
+        ...COURSES_DATA.group_course,
         description:
           "A dynamic classroom environment that covers all exam sections. Small groups ensure every student remains actively involved, fostering motivation and accountability alongside others with similar goals.",
         bestFor: [
@@ -1061,7 +1120,7 @@ export const EXAM_PREPARATION_COURSES_DATA = [
         },
       },
       {
-        ...COURSES_DATA.vip_online,
+        ...COURSES_DATA.online_one_to_one_course,
         description:
           "High-quality exam training delivered through live interactive sessions. Ideal for candidates who prefer studying from home or have demanding schedules that make commuting difficult.",
         bestFor: [
@@ -1074,6 +1133,22 @@ export const EXAM_PREPARATION_COURSES_DATA = [
           duration: "20 Hours",
           format: "Live Online Classes",
           schedule: "Flexible",
+        },
+      },
+      {
+        ...COURSES_DATA.hybrid_one_to_one_course,
+        description:
+          "The TOEFL Hybrid One-to-One Course combines the flexibility of online instruction with the personal touch of on-campus sessions. Customize your learning path with a dedicated instructor.",
+        bestFor: [
+          "Prefer both online & classroom instruction",
+          "High schedule adaptability requirement",
+          "Fully customized preparation pace",
+          "One-on-one professional coaching",
+        ],
+        details: {
+          duration: "24 Hours",
+          completionTime: "6 Weeks",
+          schedule: "Flexible (Hybrid)",
         },
       },
     ],
@@ -1100,7 +1175,7 @@ export const EXAM_PREPARATION_COURSES_DATA = [
     },
     courses: [
       {
-        ...COURSES_DATA.vip_classroom,
+        ...COURSES_DATA.inperson_one_to_one_course,
         description:
           "The Skills for English (SELT) Private One-to-One Course, also known as our VIP preparation program, offers the most personalized and intensive exam preparation available at TEPTH. Every session is tailored to your current level, target score, and exam deadline.",
         bestFor: [
@@ -1116,7 +1191,7 @@ export const EXAM_PREPARATION_COURSES_DATA = [
         },
       },
       {
-        ...COURSES_DATA.semi_private_classroom,
+        ...COURSES_DATA.semi_private_course,
         description:
           "Designed for candidates who prefer a small learning environment while still benefiting from collaboration. With only two students, the instructor provides detailed guidance while creating opportunities for peer learning and discussion.",
         bestFor: [
@@ -1133,7 +1208,7 @@ export const EXAM_PREPARATION_COURSES_DATA = [
         },
       },
       {
-        ...COURSES_DATA.group_classroom,
+        ...COURSES_DATA.group_course,
         description:
           "A dynamic classroom environment that covers all exam sections. Small groups ensure every student remains actively involved, fostering motivation and accountability alongside others with similar goals.",
         bestFor: [
@@ -1150,7 +1225,7 @@ export const EXAM_PREPARATION_COURSES_DATA = [
         },
       },
       {
-        ...COURSES_DATA.vip_online,
+        ...COURSES_DATA.online_one_to_one_course,
         description:
           "High-quality exam training delivered through live interactive sessions. Ideal for candidates who prefer studying from home or have demanding work schedules that make commuting difficult.",
         bestFor: [
@@ -1163,6 +1238,22 @@ export const EXAM_PREPARATION_COURSES_DATA = [
           duration: "20 Hours",
           format: "Live Online Classes",
           schedule: "Flexible",
+        },
+      },
+      {
+        ...COURSES_DATA.hybrid_one_to_one_course,
+        description:
+          "The SELT Hybrid One-to-One Course combines the flexibility of online instruction with the personal touch of on-campus sessions. Customize your learning path with a dedicated instructor.",
+        bestFor: [
+          "Prefer both online & classroom instruction",
+          "High schedule adaptability requirement",
+          "Fully customized preparation pace",
+          "One-on-one professional coaching",
+        ],
+        details: {
+          duration: "24 Hours",
+          completionTime: "6 Weeks",
+          schedule: "Flexible (Hybrid)",
         },
       },
     ],
@@ -1190,7 +1281,7 @@ export const EXAM_PREPARATION_COURSES_DATA = [
 
     courses: [
       {
-        ...COURSES_DATA.vip_classroom,
+        ...COURSES_DATA.inperson_one_to_one_course,
         description:
           "The CAEL Private One-to-One Course, also known as our VIP preparation program, offers the most personalized and intensive exam preparation available at TEPTH. Every session is tailored to the candidate’s current level, target score, and exam deadline.",
         bestFor: [
@@ -1214,7 +1305,7 @@ export const EXAM_PREPARATION_COURSES_DATA = [
       },
 
       {
-        ...COURSES_DATA.semi_private_classroom,
+        ...COURSES_DATA.semi_private_course,
         description:
           "Designed for candidates who prefer a small learning environment while still benefiting from collaboration with another student. The instructor provides detailed guidance while encouraging discussion, interaction, and peer learning.",
         bestFor: [
@@ -1239,7 +1330,7 @@ export const EXAM_PREPARATION_COURSES_DATA = [
       },
 
       {
-        ...COURSES_DATA.group_classroom,
+        ...COURSES_DATA.group_course,
         description:
           "The CAEL Group Course is ideal for candidates who benefit from a dynamic classroom environment while still receiving meaningful instructor support. Small groups encourage active participation, discussion, and regular speaking practice.",
         bestFor: [
@@ -1264,7 +1355,7 @@ export const EXAM_PREPARATION_COURSES_DATA = [
       },
 
       {
-        ...COURSES_DATA.vip_online,
+        ...COURSES_DATA.online_one_to_one_course,
         description:
           "Our CAEL Online Preparation Course provides the same high-quality exam training as our classroom programs through live interactive sessions. Ideal for candidates who prefer studying from home or have demanding schedules.",
         bestFor: [
@@ -1284,6 +1375,22 @@ export const EXAM_PREPARATION_COURSES_DATA = [
           duration: "20 Hours",
           format: "Live Online Classes",
           schedule: "Flexible",
+        },
+      },
+      {
+        ...COURSES_DATA.hybrid_one_to_one_course,
+        description:
+          "The CAEL Hybrid One-to-One Course combines the flexibility of online instruction with the personal touch of on-campus sessions. Customize your learning path with a dedicated instructor.",
+        bestFor: [
+          "Prefer both online & classroom instruction",
+          "High schedule adaptability requirement",
+          "Fully customized preparation pace",
+          "One-on-one professional coaching",
+        ],
+        details: {
+          duration: "24 Hours",
+          completionTime: "6 Weeks",
+          schedule: "Flexible (Hybrid)",
         },
       },
     ],
@@ -1320,7 +1427,7 @@ export const EXAM_PREPARATION_COURSES_DATA = [
 
     courses: [
       {
-        ...COURSES_DATA.vip_classroom,
+        ...COURSES_DATA.inperson_one_to_one_course,
         description:
           "The OET Private One-to-One Course, also known as our VIP preparation program, offers the most personalized and intensive exam preparation available at TEPTH. Every session is tailored to the candidate’s current level, target score, and exam deadline.",
         bestFor: [
@@ -1344,7 +1451,7 @@ export const EXAM_PREPARATION_COURSES_DATA = [
       },
 
       {
-        ...COURSES_DATA.semi_private_classroom,
+        ...COURSES_DATA.semi_private_course,
         description:
           "Designed for candidates who prefer a small learning environment while still benefiting from collaboration with another student. The instructor provides detailed guidance while encouraging discussion, interaction, and peer learning.",
         bestFor: [
@@ -1369,7 +1476,7 @@ export const EXAM_PREPARATION_COURSES_DATA = [
       },
 
       {
-        ...COURSES_DATA.group_classroom,
+        ...COURSES_DATA.group_course,
         description:
           "The OET Group Course is ideal for candidates who benefit from a dynamic classroom environment while still receiving meaningful instructor support. Small groups encourage active participation, discussion, and regular speaking practice.",
         bestFor: [
@@ -1394,7 +1501,7 @@ export const EXAM_PREPARATION_COURSES_DATA = [
       },
 
       {
-        ...COURSES_DATA.vip_online,
+        ...COURSES_DATA.online_one_to_one_course,
         description:
           "Our OET Online Preparation Course provides the same high-quality exam training as our classroom programs through live interactive sessions. Ideal for candidates who prefer studying from home or have demanding schedules.",
         bestFor: [
@@ -1414,6 +1521,30 @@ export const EXAM_PREPARATION_COURSES_DATA = [
           duration: "20 Hours",
           format: "Live Online Classes",
           schedule: "Flexible",
+        },
+      },
+
+      {
+        ...COURSES_DATA.hybrid_one_to_one_course,
+        description:
+          "The OET Hybrid One-to-One Course combines the flexibility of online instruction with the personal touch of on-campus sessions. Customize your learning path with a dedicated instructor.",
+        bestFor: [
+          "Prefer both online & classroom instruction",
+          "High schedule adaptability requirement",
+          "Fully customized preparation pace",
+          "One-on-one professional coaching",
+        ],
+        features: [
+          "Both online & in-person tutoring sessions",
+          "Personalized OET study plan",
+          "Comprehensive section training",
+          "Realistic speaking & writing practice",
+          "Flexible scheduling options",
+        ],
+        details: {
+          duration: "24 Hours",
+          completionTime: "6 Weeks",
+          schedule: "Flexible (Hybrid)",
         },
       },
     ],
@@ -2583,10 +2714,11 @@ export const FEES_DATA = [
       WORKSHOPS_DATA.workshop_8_hours,
     ],
     courses: [
-      COURSES_DATA.group_classroom,
-      COURSES_DATA.semi_private_classroom,
-      COURSES_DATA.vip_classroom,
-      COURSES_DATA.vip_online,
+      COURSES_DATA.group_course,
+      COURSES_DATA.semi_private_course,
+      COURSES_DATA.inperson_one_to_one_course,
+      COURSES_DATA.online_one_to_one_course,
+      COURSES_DATA.hybrid_one_to_one_course,
     ],
   },
   {
@@ -2600,10 +2732,11 @@ export const FEES_DATA = [
       WORKSHOPS_DATA.workshop_8_hours,
     ],
     courses: [
-      COURSES_DATA.group_classroom,
-      COURSES_DATA.semi_private_classroom,
-      COURSES_DATA.vip_classroom,
-      COURSES_DATA.vip_online,
+      COURSES_DATA.group_course,
+      COURSES_DATA.semi_private_course,
+      COURSES_DATA.inperson_one_to_one_course,
+      COURSES_DATA.online_one_to_one_course,
+      COURSES_DATA.hybrid_one_to_one_course,
     ],
   },
   {
@@ -2617,10 +2750,11 @@ export const FEES_DATA = [
       WORKSHOPS_DATA.workshop_8_hours,
     ],
     courses: [
-      COURSES_DATA.group_classroom,
-      COURSES_DATA.semi_private_classroom,
-      COURSES_DATA.vip_classroom,
-      COURSES_DATA.vip_online,
+      COURSES_DATA.group_course,
+      COURSES_DATA.semi_private_course,
+      COURSES_DATA.inperson_one_to_one_course,
+      COURSES_DATA.online_one_to_one_course,
+      COURSES_DATA.hybrid_one_to_one_course,
     ],
   },
   {
@@ -2634,10 +2768,11 @@ export const FEES_DATA = [
       WORKSHOPS_DATA.workshop_8_hours,
     ],
     courses: [
-      COURSES_DATA.group_classroom,
-      COURSES_DATA.semi_private_classroom,
-      COURSES_DATA.vip_classroom,
-      COURSES_DATA.vip_online,
+      COURSES_DATA.group_course,
+      COURSES_DATA.semi_private_course,
+      COURSES_DATA.inperson_one_to_one_course,
+      COURSES_DATA.online_one_to_one_course,
+      COURSES_DATA.hybrid_one_to_one_course,
     ],
   },
   {
@@ -2651,10 +2786,11 @@ export const FEES_DATA = [
       WORKSHOPS_DATA.workshop_8_hours,
     ],
     courses: [
-      COURSES_DATA.group_classroom,
-      COURSES_DATA.semi_private_classroom,
-      COURSES_DATA.vip_classroom,
-      COURSES_DATA.vip_online,
+      COURSES_DATA.group_course,
+      COURSES_DATA.semi_private_course,
+      COURSES_DATA.inperson_one_to_one_course,
+      COURSES_DATA.online_one_to_one_course,
+      COURSES_DATA.hybrid_one_to_one_course,
     ],
   },
   {
@@ -2668,10 +2804,11 @@ export const FEES_DATA = [
       WORKSHOPS_DATA.workshop_8_hours,
     ],
     courses: [
-      COURSES_DATA.group_classroom,
-      COURSES_DATA.semi_private_classroom,
-      COURSES_DATA.vip_classroom,
-      COURSES_DATA.vip_online,
+      COURSES_DATA.group_course,
+      COURSES_DATA.semi_private_course,
+      COURSES_DATA.inperson_one_to_one_course,
+      COURSES_DATA.online_one_to_one_course,
+      COURSES_DATA.hybrid_one_to_one_course,
     ],
   },
   {
@@ -2685,10 +2822,11 @@ export const FEES_DATA = [
       WORKSHOPS_DATA.workshop_8_hours,
     ],
     courses: [
-      COURSES_DATA.group_classroom,
-      COURSES_DATA.semi_private_classroom,
-      COURSES_DATA.vip_classroom,
-      COURSES_DATA.vip_online,
+      COURSES_DATA.group_course,
+      COURSES_DATA.semi_private_course,
+      COURSES_DATA.inperson_one_to_one_course,
+      COURSES_DATA.online_one_to_one_course,
+      COURSES_DATA.hybrid_one_to_one_course,
     ],
   },
 ];

@@ -25,6 +25,7 @@ import { Badge } from "@/components/ui/badge";
 import { notFound } from "next/navigation";
 import { PriceDisplay } from "@/components/ui/price-display";
 import api from "@/axios";
+import { EXAM_PREPARATION_COURSES_DATA } from "@/data";
 
 interface CourseDetail {
   id: string;
@@ -81,9 +82,118 @@ export default async function ExamPreparationDynamicPage({
     console.error("Error fetching course data:", error);
   }
 
+  const localExamPrep = EXAM_PREPARATION_COURSES_DATA.find((item) => {
+    const s = slug.toLowerCase();
+    const itemId = item.id.toLowerCase();
+    return (
+      itemId === s ||
+      (s === "pte" && itemId === "pte-academic") ||
+      (s === "celpip" && itemId === "celpip-general") ||
+      (s === "celpip-general" && itemId === "celpip-general") ||
+      (s === "toefl" && itemId === "toefl") ||
+      (s === "toefl-ibt" && itemId === "toefl")
+    );
+  });
+
+  if (!course && localExamPrep) {
+    course = {
+      id: localExamPrep.id,
+      name: localExamPrep.exam.name,
+      slug: slug,
+      description: localExamPrep.exam.description,
+      keyBenefits: localExamPrep.exam.usage || [],
+      focusArea: localExamPrep.exam.types?.map((t: any) => t.name) || [],
+      bannerImage: null,
+    };
+  }
+
   if (!course) {
     notFound();
   }
+
+  if (localExamPrep && localExamPrep.courses) {
+    const mergedPackages = localExamPrep.courses.map((c: any, index: number) => {
+      // Find if there is a matching package from the database
+      const dbMatch = packages.find((dbPkg) => {
+        const dbSlug = dbPkg.slug.toLowerCase();
+        const localId = (c.id || "").toLowerCase();
+
+        if (localId.includes("inperson_one_to_one") || localId.includes("vip")) {
+          return dbSlug.includes("vip") || dbSlug.includes("inperson") || dbSlug.includes("in-person");
+        }
+        if (localId.includes("semi_private") || localId.includes("semi-private")) {
+          return dbSlug.includes("semi-private") || dbSlug.includes("semi_private");
+        }
+        if (localId.includes("group")) {
+          return dbSlug.includes("group");
+        }
+        if (localId.includes("online")) {
+          return dbSlug.includes("online");
+        }
+        if (localId.includes("hybrid")) {
+          return dbSlug.includes("hybrid");
+        }
+        return false;
+      });
+
+      if (dbMatch) {
+        return dbMatch;
+      }
+
+      // Fallback to local static course mapping
+      return {
+        id: c.id || `local-course-${index}`,
+        name: c.name,
+        slug: c.id || `local-course-${index}`,
+        description: c.description || "",
+        price: (c.price || 0).toString(),
+        discountType: "PERCENTAGE" as const,
+        discountValue: c.general_discount || 0,
+        duration: c.details?.duration?.replace(" Hours", "") || "24",
+        scheduleInfo: c.details?.format || c.details?.schedule || "Flexible",
+        bestFor: c.bestFor || [],
+      };
+    });
+
+    packages = mergedPackages;
+  }
+
+  // Standardize naming and order of course packages as requested
+  const getCourseTypeScore = (name: string = "", slug: string = "") => {
+    const n = (name || "").toLowerCase();
+    const s = (slug || "").toLowerCase();
+    if (n.includes("group") || s.includes("group")) return 1;
+    if (n.includes("semi") || s.includes("semi")) return 2;
+    if (
+      n.includes("in-person one-to-one") || 
+      n.includes("inperson one-to-one") || 
+      n.includes("in-person 1-to-1") ||
+      n.includes("inperson") || 
+      s.includes("inperson") || 
+      s.includes("in-person") ||
+      (s.includes("vip") && !n.includes("online") && !s.includes("online") && !n.includes("hybrid") && !s.includes("hybrid"))
+    ) return 3;
+    if (n.includes("online") || s.includes("online")) return 4;
+    if (n.includes("hybrid") || s.includes("hybrid")) return 5;
+    return 6;
+  };
+
+  const getStandardizedName = (name: string = "", slug: string = "") => {
+    const score = getCourseTypeScore(name, slug);
+    if (score === 1) return "Group Course";
+    if (score === 2) return "Semi-Private Course";
+    if (score === 3) return "In-Person One-to-One Course";
+    if (score === 4) return "Online One-to-One Course";
+    if (score === 5) return "Hybrid One-to-One Course";
+    return name;
+  };
+
+  packages = packages.map((pkg) => ({
+    ...pkg,
+    name: getStandardizedName(pkg.name, pkg.slug),
+  })).sort((a, b) => {
+    return getCourseTypeScore(a.name, a.slug) - getCourseTypeScore(b.name, b.slug);
+  });
 
   const data = course; // For easier mapping
 
@@ -182,7 +292,9 @@ export default async function ExamPreparationDynamicPage({
                               ? "/images/hero/image-7.png"
                               : pkg.slug.includes("online")
                                 ? "/images/hero/image-8.png"
-                                : "/images/hero/image-3.jpg"
+                                : pkg.slug.includes("hybrid")
+                                  ? "/images/hero/image-2.jpg"
+                                  : "/images/hero/image-3.jpg"
                       }
                       alt={pkg.name}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
