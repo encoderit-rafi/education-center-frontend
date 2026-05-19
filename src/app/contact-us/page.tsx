@@ -44,7 +44,7 @@ export default function ContactUs() {
       <section className="p-6 md:px-8 max-w-screen-2xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
           {/* Left Side: Contact Details */}
-          <div className="relative overflow-hidden h-full flex flex-col justify-start gap-8">
+          <div className="relative h-full flex flex-col justify-start gap-8">
             {/* Header */}
 
             <div className="relative z-10 space-y-4 animate-fade-up">

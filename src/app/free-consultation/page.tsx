@@ -1,7 +1,14 @@
 import FreeConsultationForm from "@/app/free-consultation/_components/free-consultation-form";
-import { CheckCircle2, ArrowRightCircle, MapPin, Phone, Globe } from "lucide-react";
+import {
+  CheckCircle2,
+  ArrowRightCircle,
+  MapPin,
+  Phone,
+  Globe,
+} from "lucide-react";
 import Image from "next/image";
 import { SectionHeader } from "@/components/ui/section-header";
+import ContactForm from "../contact-us/_components/form-contact";
 
 export default function FreeConsultationPage() {
   return (
@@ -18,15 +25,18 @@ export default function FreeConsultationPage() {
             badge="FREE CONSULTATION"
             title={
               <>
-                Get the Right Guidance <span className="text-primary">Before You Decide</span>
+                Get the Right Guidance{" "}
+                <span className="text-primary">Before You Decide</span>
               </>
             }
             description={
               <>
-                Whether you are planning to book your exam or prepare for the test, the right advice at the beginning
-                can save you time, money, and effort. <br /><br />
-                At TEPTH, we offer free consultations to help you make the right decision with confidence — no pressure,
-                no obligation.
+                Whether you are planning to book your exam or prepare for the
+                test, the right advice at the beginning can save you time,
+                money, and effort. <br />
+                <br />
+                At TEPTH, we offer free consultations to help you make the right
+                decision with confidence — no pressure, no obligation.
               </>
             }
             className="space-y-4"
@@ -69,7 +79,8 @@ export default function FreeConsultationPage() {
               badge="FOR EXAM PREPARATION COURSES"
               title={
                 <>
-                  15-Minute Free Consultation <span className="text-primary">with Our Instructor</span>
+                  15-Minute Free Consultation{" "}
+                  <span className="text-primary">with Our Instructor</span>
                 </>
               }
               description="If you are unsure about your current level or which course to choose, speak directly with one of our experienced instructors."
@@ -77,14 +88,25 @@ export default function FreeConsultationPage() {
 
             <div className="space-y-8">
               <div className="space-y-4">
-                <p className="font-bold text-secondary uppercase tracking-widest text-xs">You can choose:</p>
+                <p className="font-bold text-secondary uppercase tracking-widest text-xs">
+                  You can choose:
+                </p>
                 <div className="grid gap-3">
                   {[
-                    { text: "In-person Consultation at our centre.", icon: MapPin },
-                    { text: "Online Consultation via GoTo Application", icon: Globe },
-                    { text: "Phone Consultation via phone call", icon: Phone }
+                    {
+                      text: "In-person Consultation at our centre.",
+                      icon: MapPin,
+                    },
+                    {
+                      text: "Online Consultation via GoTo Application",
+                      icon: Globe,
+                    },
+                    { text: "Phone Consultation via phone call", icon: Phone },
                   ].map((item) => (
-                    <div key={item.text} className="flex items-center gap-3 p-4 rounded-xl bg-slate-50 border border-slate-100 text-slate-700 font-medium transition-all hover:bg-white hover:shadow-md group/item">
+                    <div
+                      key={item.text}
+                      className="flex items-center gap-3 p-4 rounded-xl bg-slate-50 border border-slate-100 text-slate-700 font-medium transition-all hover:bg-white hover:shadow-md group/item"
+                    >
                       <item.icon className="w-5 h-5 text-primary shrink-0 group-hover/item:scale-110 transition-transform" />
                       <span>{item.text}</span>
                     </div>
@@ -93,24 +115,29 @@ export default function FreeConsultationPage() {
               </div>
 
               <div className="space-y-4">
-                <p className="font-bold text-secondary uppercase tracking-widest text-xs">During your session, we will:</p>
+                <p className="font-bold text-secondary uppercase tracking-widest text-xs">
+                  During your session, we will:
+                </p>
                 <ul className="space-y-4">
                   {[
                     "Assess your current English level",
                     "Understand your target exam, review your score report if you have already taken a test and discuss your score goal.",
                     "Recommend the right course (IELTS, PTE, TOEFL iBT, CELPIP, CAEL, Skills for English – SELT & OET)",
-                    "Suggest a realistic study plan based on your timeline"
+                    "Suggest a realistic study plan based on your timeline",
                   ].map((item) => (
                     <li key={item} className="flex items-start gap-3 group">
                       <CheckCircle2 className="w-5 h-5 text-primary/40 shrink-0 mt-1 group-hover:text-primary transition-colors" />
-                      <span className="text-slate-600 font-medium leading-relaxed group-hover:translate-x-1 transition-transform">{item}</span>
+                      <span className="text-slate-600 font-medium leading-relaxed group-hover:translate-x-1 transition-transform">
+                        {item}
+                      </span>
                     </li>
                   ))}
                 </ul>
               </div>
 
               <div className="p-6 bg-primary/5 border border-primary/10 rounded-2xl italic text-primary font-medium">
-                This is a quick but focused session designed to give you clarity before you start.
+                This is a quick but focused session designed to give you clarity
+                before you start.
               </div>
             </div>
           </div>
@@ -129,7 +156,8 @@ export default function FreeConsultationPage() {
               badge="FOR EXAM BOOKINGS & TEST INFORMATION"
               title={
                 <>
-                  Free Consultation with Our <span className="text-primary"> Test Centre Team</span>
+                  Free Consultation with Our{" "}
+                  <span className="text-primary"> Test Centre Team</span>
                 </>
               }
               description="If you are planning to book one of the English Proficiency tests administered at our centre, our staff members are available to guide you."
@@ -137,13 +165,24 @@ export default function FreeConsultationPage() {
 
             <div className="space-y-8">
               <div className="space-y-4">
-                <p className="font-bold text-secondary uppercase tracking-widest text-xs">You can consult:</p>
+                <p className="font-bold text-secondary uppercase tracking-widest text-xs">
+                  You can consult:
+                </p>
                 <div className="grid gap-3">
                   {[
-                    { text: "In-person Consultation at our centre.", icon: MapPin },
-                    { text: "Phone Consultation via phone call for quick support", icon: Phone }
+                    {
+                      text: "In-person Consultation at our centre.",
+                      icon: MapPin,
+                    },
+                    {
+                      text: "Phone Consultation via phone call for quick support",
+                      icon: Phone,
+                    },
                   ].map((item) => (
-                    <div key={item.text} className="flex items-center gap-3 p-4 rounded-xl bg-white border border-slate-100 text-slate-700 font-medium shadow-sm transition-all hover:shadow-md group/item">
+                    <div
+                      key={item.text}
+                      className="flex items-center gap-3 p-4 rounded-xl bg-white border border-slate-100 text-slate-700 font-medium shadow-sm transition-all hover:shadow-md group/item"
+                    >
                       <item.icon className="w-5 h-5 text-primary shrink-0 group-hover/item:scale-110 transition-transform" />
                       <span>{item.text}</span>
                     </div>
@@ -152,17 +191,21 @@ export default function FreeConsultationPage() {
               </div>
 
               <div className="space-y-4">
-                <p className="font-bold text-secondary uppercase tracking-widest text-xs">We will help you with:</p>
+                <p className="font-bold text-secondary uppercase tracking-widest text-xs">
+                  We will help you with:
+                </p>
                 <ul className="space-y-4">
                   {[
                     "Understanding test requirements and eligibility",
                     "Available test dates and booking process",
                     "ID requirements and test day instructions",
-                    "Any exam registration-related questions"
+                    "Any exam registration-related questions",
                   ].map((item) => (
                     <li key={item} className="flex items-start gap-3 group">
                       <ArrowRightCircle className="w-5 h-5 text-primary/40 shrink-0 mt-1 group-hover:text-primary transition-colors" />
-                      <span className="text-slate-600 font-medium leading-relaxed group-hover:translate-x-1 transition-transform">{item}</span>
+                      <span className="text-slate-600 font-medium leading-relaxed group-hover:translate-x-1 transition-transform">
+                        {item}
+                      </span>
                     </li>
                   ))}
                 </ul>
@@ -186,7 +229,7 @@ export default function FreeConsultationPage() {
       </section>
 
       {/* ── Section 4: Form ── */}
-      <section className="py-24 px-8 max-w-screen-2xl mx-auto border-t border-slate-50 bg-white">
+      {/* <section className="py-24 px-8 max-w-screen-2xl mx-auto border-t border-slate-50 bg-white">
         <div className="max-w-4xl mx-auto">
           <SectionHeader
             badge="BOOK A SESSION"
@@ -203,7 +246,23 @@ export default function FreeConsultationPage() {
             <FreeConsultationForm />
           </div>
         </div>
-      </section>
+      </section> */}
+      <div className="relative h-full bg-white base-px base-py">
+        <div className=" max-w-3xl mx-auto flex flex-col">
+          <SectionHeader
+            title={
+              <>
+                Confirm your{" "}
+                <span className="text-primary">Free Consultation</span>
+              </>
+            }
+            description="Please fill out the form below to book your session with our experts."
+            className="mb-12"
+            badgeClassName="tracking-[0.1em]"
+          />
+          <ContactForm />
+        </div>
+      </div>
     </main>
   );
 }
