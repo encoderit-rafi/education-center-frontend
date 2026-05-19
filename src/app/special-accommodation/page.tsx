@@ -3,6 +3,7 @@ import Image from "next/image";
 import SpecialAccommodationForm from "@/components/blocks/special-accommodation-form";
 import { Timer, ArrowRight, Eye, DoorOpen, Users } from "lucide-react";
 import { SectionHeader } from "@/components/ui/section-header";
+import ContactForm from "../contact-us/_components/form-contact";
 
 export default function SpecialAccommodation() {
   return (
@@ -36,8 +37,8 @@ export default function SpecialAccommodation() {
       </section> */}
 
       {/* Types of Accommodations - Bento Grid */}
-      <section className="py-24 bg-red-50/30">
-        <div className="max-w-screen-2xl mx-auto px-8">
+      <section className="py-12 md:py-16 bg-red-50/30">
+        <div className="max-w-screen-2xl mx-auto px-6 md:px-8">
           <SectionHeader
             title={
               <>
@@ -45,136 +46,136 @@ export default function SpecialAccommodation() {
               </>
             }
             description="We offer various modifications based on documented medical conditions, disabilities, or specific learning requirements."
-            className="mb-12"
+            className="mb-8"
           />
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="md:col-span-2 bg-white shadow-sm p-10 rounded-xl flex flex-col justify-between group hover:bg-primary transition-colors duration-500 border border-slate-100 hover:border-primary">
+            <div className="md:col-span-2 bg-white shadow-sm p-6 md:p-8 rounded-xl flex flex-col justify-between group hover:bg-primary transition-colors duration-500 border border-slate-100 hover:border-primary">
               <div>
-                <Timer className="w-10 h-10 mb-6 text-primary group-hover:text-white transition-colors" />
-                <h3 className="text-2xl font-bold mb-4 group-hover:text-white transition-colors text-secondary">
+                <Timer className="w-8 h-8 mb-4 text-primary group-hover:text-white transition-colors" />
+                <h3 className="text-lg md:text-xl font-bold mb-3 group-hover:text-white transition-colors text-secondary">
                   Additional Time
                 </h3>
-                <p className="text-slate-500 group-hover:text-white/80 transition-colors leading-relaxed">
+                <p className="text-slate-500 group-hover:text-white/80 transition-colors text-sm leading-relaxed">
                   Standard 25% to 50% extra time for candidates with cognitive
                   processing speeds, physical disabilities, or visual
                   impairments that require more time to navigate materials.
                 </p>
               </div>
-              <div className="mt-8">
+              <div className="mt-6">
                 <a
-                  className="text-primary font-bold group-hover:text-white flex items-center gap-2"
+                  className="text-primary font-bold group-hover:text-white flex items-center gap-2 text-sm"
                   href="#"
                 >
                   Learn more <ArrowRight className="w-4 h-4" />
                 </a>
               </div>
             </div>
-            <div className="bg-red-50 p-10 rounded-xl flex flex-col group hover:shadow-xl transition-all border border-red-100">
-              <Eye className="w-10 h-10 mb-6 text-primary" />
-              <h3 className="text-2xl font-bold mb-4 text-secondary">
+            <div className="bg-red-50 p-6 md:p-8 rounded-xl flex flex-col group hover:shadow-xl transition-all border border-red-100">
+              <Eye className="w-8 h-8 mb-4 text-primary" />
+              <h3 className="text-lg md:text-xl font-bold mb-3 text-secondary">
                 Visual Aids
               </h3>
-              <p className="text-slate-600 leading-relaxed mb-6">
+              <p className="text-slate-600 text-sm leading-relaxed mb-4">
                 Large print papers, Braille versions, and screen magnifier
                 software for candidates with varying degrees of visual
                 impairment.
               </p>
               <div className="mt-auto">
-                <span className="text-xs font-bold uppercase tracking-widest text-primary">
+                <span className="text-[10px] font-bold uppercase tracking-widest text-primary">
                   Customizable
                 </span>
               </div>
             </div>
-            <div className="bg-white p-10 rounded-xl shadow-sm flex flex-col group border border-slate-100 border-b-4 border-b-transparent hover:border-b-primary transition-all">
-              <DoorOpen className="w-10 h-10 mb-6 text-primary" />
-              <h3 className="text-2xl font-bold mb-4 text-secondary">
+            <div className="bg-white p-6 md:p-8 rounded-xl shadow-sm flex flex-col group border border-slate-100 border-b-4 border-b-transparent hover:border-b-primary transition-all">
+              <DoorOpen className="w-8 h-8 mb-4 text-primary" />
+              <h3 className="text-lg md:text-xl font-bold mb-3 text-secondary">
                 Private Room
               </h3>
-              <p className="text-slate-500 leading-relaxed">
+              <p className="text-slate-500 text-sm leading-relaxed">
                 Distraction-free environments for candidates requiring
                 specialized medical equipment or frequent breaks.
               </p>
             </div>
-            <div className="md:col-span-2 bg-secondary text-white p-10 rounded-xl relative overflow-hidden">
+            <div className="md:col-span-2 bg-secondary text-white p-6 md:p-8 rounded-xl relative overflow-hidden">
               <div className="relative z-10 flex flex-col h-full justify-between">
                 <div>
-                  <h3 className="text-2xl font-bold mb-4">
+                  <h3 className="text-lg md:text-xl font-bold mb-3">
                     Assistive Personnel
                   </h3>
-                  <p className="text-white/80 leading-relaxed max-w-lg">
+                  <p className="text-white/80 text-sm leading-relaxed max-w-lg">
                     Qualified scribes, readers, and sign-language interpreters
                     can be provided to assist candidates in conveying their
                     knowledge accurately.
                   </p>
                 </div>
-                <div className="flex gap-4 mt-8 flex-wrap">
-                  <div className="bg-white/10 px-4 py-2 rounded-lg text-sm backdrop-blur-md border border-white/20">
+                <div className="flex gap-3 mt-6 flex-wrap">
+                  <div className="bg-white/10 px-3.5 py-1.5 rounded-lg text-xs backdrop-blur-md border border-white/20">
                     Amanuensis
                   </div>
-                  <div className="bg-white/10 px-4 py-2 rounded-lg text-sm backdrop-blur-md border border-white/20">
+                  <div className="bg-white/10 px-3.5 py-1.5 rounded-lg text-xs backdrop-blur-md border border-white/20">
                     Oral Transcribers
                   </div>
-                  <div className="bg-white/10 px-4 py-2 rounded-lg text-sm backdrop-blur-md border border-white/20">
+                  <div className="bg-white/10 px-3.5 py-1.5 rounded-lg text-xs backdrop-blur-md border border-white/20">
                     Invigilators
                   </div>
                 </div>
               </div>
-              <Users className="absolute -right-8 -bottom-8 w-40 h-40 opacity-10 rotate-12" />
+              <Users className="absolute -right-8 -bottom-8 w-32 h-32 opacity-10 rotate-12" />
             </div>
           </div>
         </div>
       </section>
 
       {/* How to Apply & Documentation */}
-      <section className="py-24">
-        <div className="max-w-screen-2xl mx-auto px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
+      <section className="py-12 md:py-16">
+        <div className="max-w-screen-2xl mx-auto px-6 md:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
             <div>
-              <h2 className="text-3xl font-headline font-extrabold mb-12 flex items-center gap-4 text-secondary">
+              <h2 className="text-2xl font-headline font-bold mb-8 flex items-center gap-4 text-secondary">
                 How to Apply
-                <div className="h-1 w-20 bg-primary/20"></div>
+                <div className="h-1 w-16 bg-primary/20"></div>
               </h2>
-              <div className="space-y-12">
-                <div className="flex gap-6">
-                  <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg">
+              <div className="space-y-6">
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0 w-9 h-9 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm">
                     1
                   </div>
                   <div>
-                    <h4 className="font-bold text-xl mb-2 text-secondary">
+                    <h4 className="font-bold text-base mb-1 text-secondary">
                       Initial Request
                     </h4>
-                    <p className="text-slate-500 leading-relaxed">
+                    <p className="text-slate-500 text-xs md:text-sm leading-relaxed">
                       Submit your request during the initial exam registration
                       phase. We recommend applying at least 6 weeks before your
                       test date.
                     </p>
                   </div>
                 </div>
-                <div className="flex gap-6">
-                  <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg">
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0 w-9 h-9 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm">
                     2
                   </div>
                   <div>
-                    <h4 className="font-bold text-xl mb-2 text-secondary">
+                    <h4 className="font-bold text-base mb-1 text-secondary">
                       Documentation Upload
                     </h4>
-                    <p className="text-slate-500 leading-relaxed">
+                    <p className="text-slate-500 text-xs md:text-sm leading-relaxed">
                       Provide valid medical evidence from a registered
                       practitioner outlining the nature of the requirement and
                       recommended adjustments.
                     </p>
                   </div>
                 </div>
-                <div className="flex gap-6">
-                  <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg">
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0 w-9 h-9 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm">
                     3
                   </div>
                   <div>
-                    <h4 className="font-bold text-xl mb-2 text-secondary">
+                    <h4 className="font-bold text-base mb-1 text-secondary">
                       Review & Approval
                     </h4>
-                    <p className="text-slate-500 leading-relaxed">
+                    <p className="text-slate-500 text-xs md:text-sm leading-relaxed">
                       Our specialist board reviews the request against exam body
                       criteria and issues a Formal Approval Notice via email.
                     </p>
@@ -183,33 +184,12 @@ export default function SpecialAccommodation() {
               </div>
             </div>
 
-            <div className="border border-slate-200 shadow-sm rounded-xl p-8">
-              <h2 className="text-3xl font-headline font-extrabold mb-8 text-secondary">
+            <div className="border border-slate-100 shadow-sm rounded-xl p-4 md:p-6 bg-white">
+              <h2 className="text-xl font-headline font-bold mb-4 text-secondary">
                 Accommodation Inquiry
               </h2>
-              <SpecialAccommodationForm />
+              <ContactForm />
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 bg-primary text-white">
-        <div className="max-w-screen-2xl mx-auto px-8 text-center">
-          <SectionHeader
-            title="Still have questions about accessibility?"
-            description="Our dedicated Student Support Team is available for 1-on-1 consultations to discuss your specific needs in total confidence."
-            align="center"
-            titleClassName="text-white text-4xl font-headline font-bold mb-6 italic tracking-tight"
-            descriptionClassName="text-white/80 max-w-2xl mx-auto mb-10 text-lg"
-          />
-          <div className="flex justify-center flex-wrap gap-6">
-            <button className="bg-white text-primary px-10 py-4 rounded-lg font-bold hover:bg-neutral-100 transition-colors shadow-lg active:scale-95">
-              Book Free Consultation
-            </button>
-            <button className="border-2 border-white/30 text-white px-10 py-4 rounded-lg font-bold hover:bg-white/10 transition-colors active:scale-95">
-              Contact Support
-            </button>
           </div>
         </div>
       </section>
