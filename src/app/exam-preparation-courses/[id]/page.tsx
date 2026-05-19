@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   CheckCircle2,
   ArrowRight,
@@ -73,6 +74,7 @@ interface CourseDetail {
 
 interface CoursePackage {
   id: string;
+  image: string;
   name: string;
   slug: string;
   description: string;
@@ -104,6 +106,7 @@ export default async function ExamPreparationDynamicPage({
     const courseRes = await api.get<ApiResponse<CourseDetail>>(
       `/courses/${slug}`,
     );
+    console.log("👉 ~ ExamPreparationDynamicPage ~ courseRes:", courseRes);
 
     if (courseRes.data.success) {
       course = courseRes.data.data;
@@ -226,20 +229,12 @@ export default async function ExamPreparationDynamicPage({
                 >
                   {/* Row 1 — Image */}
                   <div className="relative h-48 overflow-hidden">
-                    <img
-                      src={
-                        pkg.slug.includes("group")
-                          ? "/images/hero/image-3.jpg"
-                          : pkg.slug.includes("semi-private")
-                            ? "/images/hero/image-6.png"
-                            : pkg.slug.includes("vip")
-                              ? "/images/hero/image-7.png"
-                              : pkg.slug.includes("online")
-                                ? "/images/hero/image-8.png"
-                                : "/images/hero/image-3.jpg"
-                      }
+                    <Image
+                      src={pkg.image || ""}
                       alt={pkg.name}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                     {discount > 0 && (
                       <div className="absolute top-4 right-4">
