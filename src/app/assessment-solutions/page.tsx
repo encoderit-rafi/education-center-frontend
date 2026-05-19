@@ -1,6 +1,18 @@
 import Image from "next/image";
 import ContactForm from "@/app/contact-us/_components/form-contact";
-import { Building2, CheckCircle2, Globe2, LineChart, BarChart3, ScrollText, Zap, ShieldCheck, Mail, PhoneForwarded } from "lucide-react";
+import {
+  Building2,
+  CheckCircle2,
+  Globe2,
+  LineChart,
+  BarChart3,
+  ScrollText,
+  Zap,
+  ShieldCheck,
+  Mail,
+  PhoneForwarded,
+} from "lucide-react";
+import { BaseCard } from "@/components/blocks/cards/base-card";
 
 const assessmentServices = [
   {
@@ -161,8 +173,11 @@ export default function AssessmentSolutionsPage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {assessmentServices.map((service) => (
-              <div key={service.id} className="text-center group">
-                <div className="aspect-square bg-white rounded-3xl mb-10 p-2 shadow-sm border border-slate-100 group-hover:shadow-xl transition-all duration-500 overflow-hidden relative">
+              <BaseCard
+                key={service.id}
+                className="text-center group bg-transparent"
+              >
+                {/* <div className="aspect-square bg-white rounded-3xl mb-10 p-2 shadow-sm border border-slate-100 group-hover:shadow-xl transition-all duration-500 overflow-hidden relative">
                   <Image
                     className="w-full h-full object-cover rounded-2xl group-hover:scale-105 transition-transform duration-700"
                     src={service.image}
@@ -170,14 +185,14 @@ export default function AssessmentSolutionsPage() {
                     width={500}
                     height={500}
                   />
-                </div>
+                </div> */}
                 <h3 className="text-2xl font-bold mb-4 text-slate-900 font-headline">
                   {service.title}
                 </h3>
                 <p className="text-slate-600 leading-relaxed text-sm max-w-xs mx-auto">
                   {service.description}
                 </p>
-              </div>
+              </BaseCard>
             ))}
           </div>
         </div>
@@ -226,7 +241,7 @@ export default function AssessmentSolutionsPage() {
             </div>
           </div>
 
-          <div className="bg-white p-8 md:p-12 rounded-2xl shadow-xl shadow-red-900/5 border border-slate-100">
+          <div className="bg-white p-4 md:p-8 rounded-xl border border-slate-100">
             <ContactForm />
           </div>
         </div>

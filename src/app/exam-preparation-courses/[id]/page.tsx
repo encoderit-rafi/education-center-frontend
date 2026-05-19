@@ -74,7 +74,7 @@ interface CourseDetail {
 
 interface CoursePackage {
   id: string;
-  image: string;
+  image: string | null;
   name: string;
   slug: string;
   description: string;
@@ -230,7 +230,21 @@ export default async function ExamPreparationDynamicPage({
                   {/* Row 1 — Image */}
                   <div className="relative h-48 overflow-hidden">
                     <Image
-                      src={pkg.image || ""}
+                      src={
+                        pkg.image
+                          ? pkg.image.startsWith("http")
+                            ? pkg.image
+                            : `https://vote.encoder-test-vpn.space/${pkg.image.startsWith("/") ? pkg.image.slice(1) : pkg.image}`
+                          : pkg.slug.includes("group")
+                            ? "/images/hero/image-3.jpg"
+                            : pkg.slug.includes("semi-private")
+                              ? "/images/hero/image-6.png"
+                              : pkg.slug.includes("vip")
+                                ? "/images/hero/image-7.png"
+                                : pkg.slug.includes("online")
+                                  ? "/images/hero/image-8.png"
+                                  : "/images/hero/image-3.jpg"
+                      }
                       alt={pkg.name}
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
