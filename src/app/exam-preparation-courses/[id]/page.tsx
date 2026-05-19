@@ -146,7 +146,8 @@ export default async function ExamPreparationDynamicPage({
       (slugLower === "toefl" && subTitleLower === "toefl-ibt") ||
       (slugLower === "celpip" && subTitleLower === "celpip-general")
     );
-  });  return (
+  });
+  return (
     <div className="min-h-screen bg-white">
       {/* ── Hero Section ── */}
       <section className="relative overflow-hidden bg-slate-50 border-b border-slate-100">
@@ -214,7 +215,7 @@ export default async function ExamPreparationDynamicPage({
             </p>
           </div>
 
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 [grid-template-rows:repeat(7,auto)]">
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 [grid-template-rows:repeat(7,auto)]">
             {packages.map((pkg, index) => {
               console.log("👉 ~ ExamPreparationDynamicPage ~ pkg:", pkg);
               const basePrice = parseFloat(pkg.price);
