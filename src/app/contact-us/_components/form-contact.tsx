@@ -89,14 +89,14 @@ export default function ContactForm() {
   console.log("👉 ~ ContactForm ~ errors:", errors);
 
   const onSubmit = async (data: ContactFormValues) => {
-    const token = captchaRef.current?.getValue();
+    // const token = captchaRef.current?.getValue();
 
-    if (!token) {
-      setCaptchaError("Please verify that you are not a robot.");
-      return;
-    }
+    // if (!token) {
+    //   setCaptchaError("Please verify that you are not a robot.");
+    //   return;
+    // }
 
-    setCaptchaError(null);
+    // setCaptchaError(null);
 
     try {
       const payload = {
