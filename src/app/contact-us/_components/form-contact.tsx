@@ -21,28 +21,22 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { PhoneInput } from "@/components/ui/phone-input";
 import { CountryDropdown } from "@/components/ui/country-dropdown";
 import { toast } from "sonner";
+import api from "@/axios";
 
-import {
-  CheckCircle2,
-  ChevronDown,
-  SendHorizontal,
-  ShieldCheck,
-} from "lucide-react";
+import { ChevronDown, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const contactSchema = z.object({
-  fullName: z
+  firstName: z
     .string()
-    .min(2, { message: "Name must be at least 2 characters" }),
+    .min(2, { message: "First name must be at least 2 characters" }),
+  lastName: z
+    .string()
+    .min(2, { message: "Last name must be at least 2 characters" }),
   email: z.string().email({ message: "Please enter a valid email address" }),
-  phoneNumber: z
-    .string()
-    .min(5, { message: "Please enter a valid phone number" }),
   country: z.string().min(1, { message: "Please select your country" }),
-  emiratesCity: z.string().optional(),
   enquiryTopic: z
     .string()
     .min(1, { message: "Please select an enquiry topic" }),
@@ -52,6 +46,19 @@ const contactSchema = z.object({
 });
 
 type ContactFormValues = z.infer<typeof contactSchema>;
+
+const ENQUIRY_TOPICS = [
+  "Exam Registration",
+  "Exam Preparation Courses",
+  "Exam Proctoring",
+  "Special Accommodation",
+  "Test Dates & Availability",
+  "Fees & Payment",
+  "Free Consultation",
+  "Paid Mock Test",
+  "Partnership",
+  "General Enquiry",
+];
 
 export default function ContactForm() {
   const [mounted, setMounted] = useState(false);
@@ -71,15 +78,15 @@ export default function ContactForm() {
   } = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
     defaultValues: {
-      fullName: "",
+      firstName: "",
+      lastName: "",
       email: "",
-      phoneNumber: "",
       country: "",
-      emiratesCity: "",
       enquiryTopic: "",
       message: "",
     },
   });
+  console.log("👉 ~ ContactForm ~ errors:", errors);
 
   const onSubmit = async (data: ContactFormValues) => {
     const token = captchaRef.current?.getValue();
@@ -91,37 +98,64 @@ export default function ContactForm() {
 
     setCaptchaError(null);
 
-    // Simulate API call
-    console.log("Submitting:", { ...data, recaptchaToken: token });
-    await new Promise((resolve) => setTimeout(resolve, 800));
+    try {
+      const payload = {
+        first_name: data.firstName,
+        last_name: data.lastName,
+        email: data.email,
+        country: data.country,
+        category: data.enquiryTopic
+          ? data.enquiryTopic.toLowerCase().replace(/[^a-z0-9]+/g, "_")
+          : "general",
+        subject: data.enquiryTopic || "Inquiry",
+        message: data.message,
+      };
 
-    toast.success("Enquiry Sent Successfully!", {
-      description: "Our team will get back to you within 24 business hours.",
-    });
+      await api.post("/contact", payload);
 
-    reset();
-    captchaRef.current?.reset();
+      toast.success("Enquiry Sent Successfully!", {
+        description: "Our team will get back to you within 24 business hours.",
+      });
+
+      reset();
+      captchaRef.current?.reset();
+    } catch (error) {
+      console.error("Error submitting contact form:", error);
+      toast.error("Failed to Send Enquiry", {
+        description: "An error occurred while submitting. Please try again.",
+      });
+    }
   };
 
   return (
     <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <Field data-invalid={!!errors.fullName}>
-          <FieldLabel className="text-sm font-medium">
-            Full Name <span className="text-primary font-bold">*</span>
-          </FieldLabel>
+        <Field data-invalid={!!errors.firstName}>
+          <FieldLabel required>First Name</FieldLabel>
           <FieldContent>
-            <Input placeholder="John Doe" {...register("fullName")} />
+            <Input placeholder="John" {...register("firstName")} />
           </FieldContent>
-          {errors.fullName && (
-            <FieldError>{errors.fullName.message}</FieldError>
+          {errors.firstName && (
+            <FieldError>{errors.firstName.message}</FieldError>
           )}
         </Field>
 
+        <Field data-invalid={!!errors.lastName}>
+          <FieldLabel required>Last Name</FieldLabel>
+          <FieldContent>
+            <Input placeholder="Doe" {...register("lastName")} />
+          </FieldContent>
+          {errors.lastName && (
+            <FieldError>{errors.lastName.message}</FieldError>
+          )}
+        </Field>
+      </div>
+
+      <div className="w-full bg-slate-100/80 my-4" />
+
+      <div className="grid grid-cols-1 gap-6">
         <Field data-invalid={!!errors.email}>
-          <FieldLabel className="text-sm font-medium">
-            Email Address <span className="text-primary font-bold">*</span>
-          </FieldLabel>
+          <FieldLabel required>Email Address</FieldLabel>
           <FieldContent>
             <Input
               type="email"
@@ -130,48 +164,6 @@ export default function ContactForm() {
             />
           </FieldContent>
           {errors.email && <FieldError>{errors.email.message}</FieldError>}
-        </Field>
-      </div>
-
-      <div className="w-full bg-slate-100/80 my-4" />
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <Field data-invalid={!!errors.phoneNumber}>
-          <FieldLabel className="text-sm font-medium">
-            Phone number <span className="text-primary font-bold">*</span>
-          </FieldLabel>
-          <FieldContent>
-            <Controller
-              control={control}
-              name="phoneNumber"
-              render={({ field }) => (
-                <PhoneInput
-                  value={field.value}
-                  onChange={field.onChange}
-                  defaultCountry="AE"
-                />
-              )}
-            />
-          </FieldContent>
-          {errors.phoneNumber && (
-            <FieldError>{errors.phoneNumber.message}</FieldError>
-          )}
-        </Field>
-
-        <Field data-invalid={!!errors.emiratesCity}>
-          <FieldLabel className="text-sm font-medium">
-            Emirate / City <span className="text-primary font-bold">*</span>
-          </FieldLabel>
-          <FieldContent>
-            <Input
-              placeholder="Select City"
-              {...register("emiratesCity")}
-              className="h-11"
-            />
-          </FieldContent>
-          {errors.emiratesCity && (
-            <FieldError>{errors.emiratesCity.message}</FieldError>
-          )}
         </Field>
       </div>
 
@@ -224,36 +216,11 @@ export default function ContactForm() {
                     value={field.value}
                     onValueChange={field.onChange}
                   >
-                    <DropdownMenuRadioItem value="Exam Registration">
-                      Exam Registration
-                    </DropdownMenuRadioItem>
-                    <DropdownMenuRadioItem value="Exam Preparation Courses">
-                      Exam Preparation Courses
-                    </DropdownMenuRadioItem>
-                    <DropdownMenuRadioItem value="Exam Proctoring">
-                      Exam Proctoring
-                    </DropdownMenuRadioItem>
-                    <DropdownMenuRadioItem value="Special Accommodation">
-                      Special Accommodation
-                    </DropdownMenuRadioItem>
-                    <DropdownMenuRadioItem value="Test Dates & Availability">
-                      Test Dates & Availability
-                    </DropdownMenuRadioItem>
-                    <DropdownMenuRadioItem value="Fees & Payment">
-                      Fees & Payment
-                    </DropdownMenuRadioItem>
-                    <DropdownMenuRadioItem value="Free Consultation">
-                      Free Consultation
-                    </DropdownMenuRadioItem>
-                    <DropdownMenuRadioItem value="Paid Mock Test">
-                      Paid Mock Test
-                    </DropdownMenuRadioItem>
-                    <DropdownMenuRadioItem value="Partnership">
-                      Partnership
-                    </DropdownMenuRadioItem>
-                    <DropdownMenuRadioItem value="General Enquiry">
-                      General Enquiry
-                    </DropdownMenuRadioItem>
+                    {ENQUIRY_TOPICS.map((topic) => (
+                      <DropdownMenuRadioItem key={topic} value={topic}>
+                        {topic}
+                      </DropdownMenuRadioItem>
+                    ))}
                   </DropdownMenuRadioGroup>
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -268,9 +235,7 @@ export default function ContactForm() {
       <div className="w-full bg-slate-100/80 my-4" />
 
       <Field data-invalid={!!errors.message}>
-        <FieldLabel className="text-sm font-medium">
-          Message <span className="text-primary font-bold">*</span>
-        </FieldLabel>
+        <FieldLabel required>Message</FieldLabel>
         <FieldContent>
           <Textarea
             placeholder="Tell us more about your inquiry..."
@@ -282,28 +247,11 @@ export default function ContactForm() {
         {errors.message && <FieldError>{errors.message.message}</FieldError>}
       </Field>
 
-      {/* <div className="space-y-4">
-        {mounted && (
-          <div className="scale-90 origin-left">
-            <ReCAPTCHA
-              ref={captchaRef}
-              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
-              onChange={() => setCaptchaError(null)}
-            />
-          </div>
-        )}
-        {captchaError && (
-          <p className="text-red-500 text-xs font-bold uppercase tracking-wider">
-            {captchaError}
-          </p>
-        )}
-      </div> */}
-
       <div className="space-y-4">
         <Button
           type="submit"
           disabled={isSubmitting}
-          className="h-11 px-4 py-2 rounded-md font-bold uppercase tracking-widest text-sm w-full md:w-auto transition-all active:scale-95"
+          className="h-11 px-4 py-2 rounded-md font-semibold text-sm w-full md:w-auto transition-all active:scale-95"
         >
           <div className="flex items-center gap-3">
             {isSubmitting ? "Sending..." : "Submit"}
@@ -313,8 +261,8 @@ export default function ContactForm() {
         <p className="flex items-center gap-1 text-sm">
           <ShieldCheck className="w-4 h-4 text-primary" />
           <span className="font-medium">
-            We&apos;ll get back to you within 1 to 2 working days. Your information is kept
-            confidential.
+            We&apos;ll get back to you within 1 to 2 working days. Your
+            information is kept confidential.
           </span>
         </p>
       </div>
