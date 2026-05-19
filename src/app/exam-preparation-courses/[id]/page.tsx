@@ -81,6 +81,8 @@ interface CoursePackage {
   price: string;
   discountType: "PERCENTAGE" | "FIXED" | null;
   discountValue: number | null;
+  specialDiscountType?: "PERCENTAGE" | "FIXED" | null;
+  specialDiscount?: string | number | null;
   duration: string;
   scheduleInfo: string;
   bestFor: string[];
@@ -215,10 +217,36 @@ export default async function ExamPreparationDynamicPage({
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 [grid-template-rows:repeat(7,auto)]">
             {packages.map((pkg, index) => {
               console.log("👉 ~ ExamPreparationDynamicPage ~ pkg:", pkg);
-              const basePrice = parseFloat(pkg.price);
-              const discount = pkg.discountValue || 0;
+              const basePrice = parseFloat(pkg.price) || 0;
+              let discount = 0;
+              let discountType: "PERCENTAGE" | "FIXED" | null =
+                pkg.discountType;
+
+              if (
+                pkg.discountValue !== null &&
+                pkg.discountValue !== undefined
+              ) {
+                discount =
+                  typeof pkg.discountValue === "string"
+                    ? parseFloat(pkg.discountValue)
+                    : pkg.discountValue;
+              } else if (
+                pkg.specialDiscount !== null &&
+                pkg.specialDiscount !== undefined
+              ) {
+                discount =
+                  typeof pkg.specialDiscount === "string"
+                    ? parseFloat(pkg.specialDiscount)
+                    : pkg.specialDiscount;
+                if (pkg.specialDiscountType) {
+                  discountType = pkg.specialDiscountType as
+                    | "PERCENTAGE"
+                    | "FIXED";
+                }
+              }
+
               const discountedPrice =
-                pkg.discountType === "PERCENTAGE"
+                discountType === "PERCENTAGE"
                   ? Math.round(basePrice * (1 - discount / 100))
                   : basePrice - discount;
 
@@ -254,7 +282,7 @@ export default async function ExamPreparationDynamicPage({
                       <div className="absolute top-4 right-4">
                         <Badge className="py-1 px-3 font-bold shadow-lg">
                           SAVE {discount}
-                          {pkg.discountType === "PERCENTAGE" ? "%" : ""}
+                          {discountType === "PERCENTAGE" ? "%" : ""}
                         </Badge>
                       </div>
                     )}
