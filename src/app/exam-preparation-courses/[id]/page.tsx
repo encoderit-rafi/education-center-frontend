@@ -67,6 +67,8 @@ interface CourseDetail {
   keyBenefits: string[];
   focusArea: string[];
   bannerImage: string | null;
+  packages?: CoursePackage[];
+  workshops?: WorkshopDetail[];
 }
 
 interface CoursePackage {
@@ -98,23 +100,15 @@ export default async function ExamPreparationDynamicPage({
   let course: CourseDetail | null = null;
   let packages: CoursePackage[] = [];
   let workshops: WorkshopDetail[] = [];
-  console.log("👉 ~ ExamPreparationDynamicPage ~ workshops:", workshops);
-
   try {
-    const [courseRes, packagesRes, workshopsRes] = await Promise.all([
-      api.get<ApiResponse<CourseDetail>>(`/courses/${slug}`),
-      api.get<ApiResponse<CoursePackage[]>>(`/courses/${slug}/packages`),
-      api.get<ApiResponse<{ data: WorkshopDetail[] }>>("/workshops"),
-    ]);
+    const courseRes = await api.get<ApiResponse<CourseDetail>>(
+      `/courses/${slug}`,
+    );
 
     if (courseRes.data.success) {
       course = courseRes.data.data;
-    }
-    if (packagesRes.data.success) {
-      packages = packagesRes.data.data;
-    }
-    if (workshopsRes.data.success) {
-      workshops = workshopsRes.data.data.data || [];
+      packages = course.packages || [];
+      workshops = course.workshops || [];
     }
   } catch (error) {
     console.error("Error fetching course data:", error);
@@ -258,14 +252,14 @@ export default async function ExamPreparationDynamicPage({
                   </div>
 
                   {/* Row 2 — Title */}
-                  <div className="px-3 pt-4">
+                  <div className="px-3">
                     <BaseCardTitle className="text-xl leading-tight">
                       {pkg.name}
                     </BaseCardTitle>
                   </div>
 
                   {/* Row 3 — Price */}
-                  <div className="px-3 pt-2">
+                  <div className="px-3">
                     <div className="flex items-baseline gap-3">
                       <PriceDisplay
                         amount={discountedPrice}
@@ -283,14 +277,14 @@ export default async function ExamPreparationDynamicPage({
                   </div>
 
                   {/* Row 4 — Description */}
-                  <div className="px-3 pt-3">
+                  <div className="px-3">
                     <BaseCardDescription className="text-sm line-clamp-none text-slate-600 font-medium">
                       {pkg.description}
                     </BaseCardDescription>
                   </div>
 
                   {/* Row 5 — Best For */}
-                  <div className="px-3 pt-3 space-y-2">
+                  <div className="px-3 space-y-2">
                     <Badge variant={"destructive"}>Best For</Badge>
                     <BaseCardList
                       items={
@@ -305,7 +299,7 @@ export default async function ExamPreparationDynamicPage({
                   </div>
 
                   {/* Row 6 — Duration / Schedule */}
-                  <div className="px-3 pt-3">
+                  <div className="px-3">
                     <div className="grid grid-cols-2 gap-4">
                       <div>
                         <p className="text-[11px] text-slate-400">Duration</p>
@@ -323,7 +317,7 @@ export default async function ExamPreparationDynamicPage({
                   </div>
 
                   {/* Row 7 — CTA */}
-                  <div className="px-3 pt-3 pb-4">
+                  <div className="px-3 pb-4">
                     <Link
                       href={`/exam-preparation-courses/registration?examId=${slug}&courseId=${pkg.id}&price=${discountedPrice}&currency=AED`}
                       className={cn(
@@ -374,43 +368,29 @@ export default async function ExamPreparationDynamicPage({
                     : basePrice - discount;
 
                 return (
-                  <BaseCard
-                    key={workshop.id}
-                    className="border-slate-200 group relative overflow-hidden hover:border-primary/30 hover:shadow-2xl transition-all duration-500 ease-out p-6 flex flex-col justify-between h-full bg-white"
-                  >
+                  <BaseCard key={workshop.id}>
                     <div className="space-y-6">
-                      <div className="flex items-center justify-between">
-                        <BaseCardIcon className="size-12 rounded-xl text-lg font-bold">
+                      <div className="flex items-center gap-3">
+                        <BaseCardIcon className="size-9">
                           {workshop.duration}h
                         </BaseCardIcon>
-                        {discount > 0 && (
-                          <Badge className="py-1 px-3 font-bold shadow-lg">
-                            SAVE {discount}
-                            {workshop.discountType === "PERCENTAGE" ? "%" : ""}
-                          </Badge>
-                        )}
+
+                        <BaseCardTitle>{workshop.name}</BaseCardTitle>
                       </div>
 
-                      <div className="space-y-2">
-                        <BaseCardTitle className="text-xl leading-tight">
-                          {workshop.name}
-                        </BaseCardTitle>
-                        <p className="text-xs text-primary font-black uppercase tracking-widest">
-                          {workshop.subTitle} Specialization
-                        </p>
-                      </div>
+                      <div className="space-y-2"></div>
 
-                      <p className="text-sm text-slate-600 font-medium leading-relaxed line-clamp-4">
+                      <p className="text-xs text-slate-600 font-medium leading-relaxed line-clamp-4">
                         {workshop.description ||
                           `Comprehensive ${workshop.duration}-hour intensive workshop focusing on core strategies, mock practice, and live feedback for the ${workshop.subTitle} exam.`}
                       </p>
                     </div>
 
-                    <div className="pt-6 space-y-4">
+                    <div className=" my-3 space-y-4">
                       <div className="flex items-baseline gap-2">
                         <PriceDisplay
                           amount={discountedPrice}
-                          className="text-3xl font-black text-slate-900"
+                          className="text-xl font-black text-primary"
                         />
                         {discount > 0 && (
                           <span className="text-sm text-slate-400 line-through decoration-slate-300">
@@ -429,7 +409,7 @@ export default async function ExamPreparationDynamicPage({
                           "font-bold h-11 shadow-sm px-4 w-full flex items-center justify-center gap-2 group-hover:bg-primary group-hover:text-white transition-all duration-300",
                         )}
                       >
-                        <Calendar className="size-4" />
+                        {/* <Calendar className="size-4" /> */}
                         <span>Book</span>
                       </Link>
                     </div>
