@@ -14,27 +14,72 @@ import FormSELTB2Registration from "@/components/blocks/forms/selt/ukvi-speaking
 import FormSELTC1Registration from "@/components/blocks/forms/selt/ukvi-speaking-and-listening-at-level-c1/form-selt-c1-registration";
 import FormSELTC2Registration from "@/components/blocks/forms/selt/ukvi-speaking-and-listening-at-level-c2/form-selt-c2-registration";
 import FormTOEFLIBTRegistration from "@/components/blocks/forms/toefl/toefl-ibt-exam-registration/form-toefl-ibt-registration";
-import { EXAM_DETAILE_DATA, EXAM_IDS_DATA } from "@/data";
+import { EXAM_IDS_DATA } from "@/data";
 import { notFound } from "next/navigation";
 import BookExamItems from "../_components/book-exam-items";
+
+import api from "@/axios";
 
 export default async function BookExamsId({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const { id } = await params;
-  console.log("👉 ~ ExamDetailPage ~ id:", id);
+  const { id: slug } = await params;
+  console.log("👉 ~ BookExamsId ~ id/slug:", slug);
 
-  // const exam = EXAM_DETAILE_DATA.find((item) => item.id === id);
+  let exam: any = null;
+  let childExams: any[] = [];
 
-  // if (!exam) {
-  //   notFound();
-  // }
-  // if (exam?.type == "items") {
-  //   return <BookExamItems data={exam} />;
-  // }
-  switch (id) {
+  try {
+    // 1. Try to fetch the exam by slug directly
+    const response = await api.get(`/exams/${slug}`);
+    if (response.data?.success && response.data?.data) {
+      exam = response.data.data;
+    }
+  } catch (error) {
+    console.error("Error fetching exam in BookExamsId:", error);
+  }
+
+  // 2. Fetch all exams to resolve UUID or find children
+  try {
+    const listResponse = await api.get("/exams?limit=100");
+    const allExams = listResponse.data?.data?.data || [];
+
+    if (!exam) {
+      exam = allExams.find(
+        (e: any) => e.id === slug || e.slug === slug
+      );
+    }
+
+    if (exam) {
+      childExams = allExams.filter((e: any) => e.parentId === exam.id);
+    }
+  } catch (error) {
+    console.error("Error fetching all exams list in BookExamsId:", error);
+  }
+
+  if (!exam) {
+    notFound();
+  }
+
+  // 3. Determine if it is a parent group (has child items or is labeled group/item) or a detail page
+  const hasGroupType = exam.examType?.some(
+    (et: any) => et.name === "group" || et.name === "item"
+  );
+  const isGroup = hasGroupType && childExams.length > 0;
+
+  if (isGroup) {
+    const examWithItems = {
+      ...exam,
+      type: "items",
+      items: childExams,
+    };
+    return <BookExamItems data={examWithItems} />;
+  }
+
+  // Otherwise, it is a specific exam. Render the appropriate form based on slug or database UUID
+  switch (exam.slug || exam.id) {
     // case EXAM_IDS_DATA.ielts_ukvi_academic.id:
     //   return <FormIELTSUKVIAcademicRegistration />;
     // case EXAM_IDS_DATA.ielts_ukvi_general.id:
