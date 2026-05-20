@@ -25,6 +25,7 @@ import { Badge } from "@/components/ui/badge";
 import { notFound } from "next/navigation";
 import { PriceDisplay } from "@/components/ui/price-display";
 import api from "@/axios";
+import Image from "next/image";
 
 interface WorkshopDetail {
   id: string;
@@ -83,6 +84,7 @@ interface CoursePackage {
   duration: string;
   scheduleInfo: string;
   bestFor: string[];
+  image?: string | null;
 }
 
 interface ApiResponse<T> {
@@ -198,21 +200,27 @@ export default async function FeesDynamicPage({
                   >
                     {/* Row 1 — Image & Save Badge */}
                     <div className="relative h-48 overflow-hidden">
-                      <img
-                        src={
-                          pkg.slug.includes("group")
-                            ? "/images/hero/image-3.jpg"
-                            : pkg.slug.includes("semi-private")
-                              ? "/images/hero/image-6.png"
-                              : pkg.slug.includes("vip")
-                                ? "/images/hero/image-7.png"
-                                : pkg.slug.includes("online")
-                                  ? "/images/hero/image-8.png"
-                                  : "/images/hero/image-3.jpg"
-                        }
-                        alt={pkg.name}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                      />
+                  <Image
+                                        src={
+                                          pkg.image
+                                            ? pkg.image.startsWith("http")
+                                              ? pkg.image
+                                              : `https://vote.encoder-test-vpn.space/${pkg.image.startsWith("/") ? pkg.image.slice(1) : pkg.image}`
+                                            : pkg.slug.includes("group")
+                                              ? "/images/hero/image-3.jpg"
+                                              : pkg.slug.includes("semi-private")
+                                                ? "/images/hero/image-6.png"
+                                                : pkg.slug.includes("vip")
+                                                  ? "/images/hero/image-7.png"
+                                                  : pkg.slug.includes("online")
+                                                    ? "/images/hero/image-8.png"
+                                                    : "/images/hero/image-3.jpg"
+                                        }
+                                        alt={pkg.name}
+                                        fill
+                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                        className="object-cover transition-transform duration-500 group-hover:scale-110 "
+                                      />
                       {discount > 0 && (
                         <div className="absolute top-4 right-4">
                           <Badge className="py-1 px-3 font-bold shadow-lg bg-primary text-white">

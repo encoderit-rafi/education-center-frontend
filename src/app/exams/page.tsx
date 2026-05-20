@@ -1,8 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { cn } from "@/lib/utils";
-import { exams } from "@/lib/data";
 import {
   BaseCard,
   BaseCardTitle,
@@ -10,12 +8,43 @@ import {
   BaseCardIcon,
   BaseCardArrow,
 } from "@/components/blocks/cards/base-card";
-import GradientBox from "@/components/blocks/gradient-box";
-import { ArrowRight } from "lucide-react";
-import { buttonVariants } from "@/components/ui/button";
-import { EXAM_CARDS_DATA } from "@/data";
+import { useQuery } from "@tanstack/react-query";
+import api from "@/axios";
+
+interface ExamType {
+  id: string;
+  name: string;
+}
+
+interface Exam {
+  id: string;
+  name: string;
+  slug: string;
+  description: string | null;
+  examType: ExamType[];
+}
+
+interface ApiResponse {
+  success: boolean;
+  data: {
+    data: Exam[];
+  };
+}
 
 export default function ExamsPage() {
+  const { data: examsResponse, isLoading } = useQuery<ApiResponse>({
+    queryKey: ["exams", { limit: 100 }],
+    queryFn: async () => {
+      const response = await api.get("/exams?limit=100");
+      return response.data;
+    },
+  });
+
+  const exams =
+    examsResponse?.data?.data?.filter((exam) =>
+      exam.examType?.some((et) => et.name === "group")
+    ) ?? [];
+
   return (
     <main className="bg-white">
       {/* ── Exam Grid ── */}
@@ -31,26 +60,37 @@ export default function ExamsPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-            {EXAM_CARDS_DATA.map((exam, index) => (
-              <Link href={`/exams/${exam.id}`}>
-                <BaseCard key={exam.id} className="p-6">
-                  <div className="flex items-center justify-between gap-2">
-                    <BaseCardIcon>{index + 1}</BaseCardIcon>
-                    <BaseCardArrow />
-                  </div>
-                  <div className="flex-1 flex flex-col space-y-2">
-                    <BaseCardTitle className="uppercase tracking-tight text-lg leading-snug">
-                      {exam.name}
-                    </BaseCardTitle>
-                    <BaseCardDescription className="mb-4">
-                      {exam.description}
-                    </BaseCardDescription>
-                  </div>
-                </BaseCard>
-              </Link>
-            ))}
-          </div>
+          {isLoading ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+              {Array.from({ length: 6 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="h-40 rounded-2xl bg-slate-100 animate-pulse"
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+              {exams.map((exam, index) => (
+                <Link key={exam.id} href={`/exams/${exam.slug}`}>
+                  <BaseCard className="p-6">
+                    <div className="flex items-center justify-between gap-2">
+                      <BaseCardIcon>{index + 1}</BaseCardIcon>
+                      <BaseCardArrow />
+                    </div>
+                    <div className="flex-1 flex flex-col space-y-2">
+                      <BaseCardTitle className="uppercase tracking-tight text-lg leading-snug">
+                        {exam.name}
+                      </BaseCardTitle>
+                      <BaseCardDescription className="mb-4">
+                        {exam.description}
+                      </BaseCardDescription>
+                    </div>
+                  </BaseCard>
+                </Link>
+              ))}
+            </div>
+          )}
         </div>
       </section>
     </main>
