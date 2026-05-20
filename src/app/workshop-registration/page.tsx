@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useState, useMemo } from "react";
+import { Suspense, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -45,6 +45,13 @@ interface WorkshopDetail {
   vatRate: string;
 }
 
+interface CourseDetail {
+  id: string;
+  name: string;
+  description?: string;
+  workshops: WorkshopDetail[];
+}
+
 const bookingSchema = z.object({
   firstName: z.string().min(2, "First name must be at least 2 characters"),
   middleName: z.string().optional(),
@@ -61,35 +68,21 @@ type BookingValues = z.infer<typeof bookingSchema>;
 function WorkshopRegistrationForm({ className }: { className?: string }) {
   const searchParams = useSearchParams();
   const examId = searchParams.get("examId"); // e.g. "ielts"
-  const courseId = searchParams.get("courseId"); // workshop ID (UUID)
+  const workshopId = searchParams.get("workshopId"); // workshop ID (UUID)
   const priceParam = searchParams.get("price");
 
-  // Fetch the selected workshop detail
-  const { data: workshops, isLoading } = useQuery({
-    queryKey: ["workshops"],
-    queryFn: async () => {
-      const res = await api.get<{ data: { data: WorkshopDetail[] } }>(
-        "/workshops",
-      );
-      return res.data.data.data;
-    },
-  });
-
-  // Fetch parent course details
-  const { data: courseData } = useQuery({
+  // Fetch course details (includes workshops array)
+  const { data: courseData, isLoading } = useQuery({
     queryKey: ["course", examId],
     queryFn: async () => {
-      const res = await api.get<{
-        data: { id: string; name: string; description?: string };
-      }>(`/courses/${examId}`);
+      const res = await api.get<{ data: CourseDetail }>(`/courses/${examId}`);
       return res.data.data;
     },
     enabled: !!examId,
   });
 
-  const workshop = useMemo(() => {
-    return workshops?.find((w) => w.id === courseId);
-  }, [workshops, courseId]);
+  // Derive the specific workshop from course's embedded workshops
+  const workshop = courseData?.workshops?.find((w) => w.id === workshopId);
 
   // const fallbackData = useMemo(() => {
   //   return EXAM_FEES.find((item) => item.id === examId);
@@ -163,7 +156,8 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
 
   const onSubmit = (formData: BookingValues) => {
     const payload = {
-      workshop_id: workshop?.id || courseId || "",
+      course_id: courseData?.id || "",
+      workshop_id: workshop?.id || "",
       first_name: formData.firstName,
       middle_name: formData.middleName || "",
       last_name: formData.lastName || "",
@@ -194,9 +188,9 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
   }
 
   // If no workshop matches and no static fallback data matches, show notFound
-  if (!workshop) {
-    notFound();
-  }
+  // if (!workshop) {
+  //   notFound();
+  // }
 
   const titleName = workshop?.name || "Workshop";
 
