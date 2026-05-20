@@ -29,8 +29,10 @@ import {
   MessageSquare,
   Clock,
   ChevronDown,
+  BookOpen,
 } from "lucide-react";
 import { PhoneInput } from "@/components/ui/phone-input";
+import { Textarea } from "@/components/ui/textarea";
 import Stepper from "@/components/stepper";
 import { CountryDropdown } from "@/components/ui/country-dropdown";
 import {
@@ -421,6 +423,19 @@ const CONTACT_METHODS = [
   { label: "WhatsApp / Telegram", value: "WhatsApp / Telegram" },
 ];
 
+const EXAM_PREP_COURSES = [
+  { label: "IELTS", value: "IELTS" },
+  { label: "PTE", value: "PTE" },
+  { label: "TOEFL iBT", value: "TOEFL iBT" },
+  { label: "CELPIP G", value: "CELPIP G" },
+  { label: "CAEL", value: "CAEL" },
+  { label: "Skills for English (SELT)", value: "Skills for English (SELT)" },
+  { label: "OET", value: "OET" },
+  { label: "Other", value: "Other" },
+  { label: "Workshop", value: "Workshop" },
+  { label: "None", value: "None" },
+];
+
 const testSchema = z.object({
   fullName: z.string().min(2, "Full name must be at least 2 characters"),
   email: z.string().email("Please enter a valid email address"),
@@ -429,8 +444,22 @@ const testSchema = z.object({
   city: z.string().min(1, "Please enter your emirate/city"),
   preferredContactMethod: z.string().min(1, "Please select your preferred contact method"),
   preferredTime: z.string().min(1, "Please select your preferred time"),
+  requiredScore: z.string().min(1, "Please enter the required score"),
+  examPrepCourse: z.string().min(1, "Please select an exam prep course"),
+  examPrepCourseOther: z.string().optional(),
+  additionalDetails: z.string().optional(),
   answers: z.record(z.string(), z.string().min(1, "Please select an answer")),
   writtenExpression: z.string().optional(),
+}).superRefine((data, ctx) => {
+  if (data.examPrepCourse === "Other") {
+    if (!data.examPrepCourseOther || data.examPrepCourseOther.trim().length === 0) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Please specify the course name",
+        path: ["examPrepCourseOther"],
+      });
+    }
+  }
 });
 
 type TestValues = z.infer<typeof testSchema>;
@@ -449,6 +478,10 @@ export default function TestYourEnglishForm() {
       city: "",
       preferredContactMethod: "",
       preferredTime: "",
+      requiredScore: "",
+      examPrepCourse: "",
+      examPrepCourseOther: "",
+      additionalDetails: "",
       answers: {},
       writtenExpression: "",
     },
@@ -476,6 +509,10 @@ export default function TestYourEnglishForm() {
         "city",
         "preferredContactMethod",
         "preferredTime",
+        "requiredScore",
+        "examPrepCourse",
+        "examPrepCourseOther",
+        "additionalDetails",
       ];
     } else if (step === 2) {
       const allAnswered = QUESTIONS.every((q) => currentAnswers[q.id]);
@@ -771,6 +808,115 @@ export default function TestYourEnglishForm() {
                     <FieldError>{errors.preferredTime.message}</FieldError>
                   )}
                 </FieldContent>
+              </Field>
+
+              <Field data-invalid={!!errors.requiredScore} className="md:col-span-2">
+                <FieldLabel required className="normal-case">What is the required Score?</FieldLabel>
+                <FieldContent>
+                  <div className="relative">
+                    <Trophy
+                      className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+                      size={16}
+                    />
+                    <Input
+                      {...register("requiredScore")}
+                      className="pl-10 h-10"
+                      placeholder="e.g. 7.5 or 79"
+                    />
+                  </div>
+                  {errors.requiredScore && (
+                    <FieldError>{errors.requiredScore.message}</FieldError>
+                  )}
+                </FieldContent>
+              </Field>
+
+              <Field data-invalid={!!errors.examPrepCourse} className="md:col-span-2">
+                <FieldLabel required className="normal-case">What exam prep. course are you planning to register for?</FieldLabel>
+                <FieldContent>
+                  <Controller
+                    control={control}
+                    name="examPrepCourse"
+                    render={({ field }) => (
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button
+                            variant="ghost"
+                            className={cn(
+                              "flex h-10 w-full items-center justify-between overflow-hidden whitespace-nowrap rounded-md border border-slate-200 bg-white px-3 text-base transition-[color,box-shadow,background-color] outline-none focus:border-primary focus:ring-1 focus:ring-ring disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm font-medium",
+                              !field.value && "text-slate-400"
+                            )}
+                          >
+                            <div className="flex items-center gap-2">
+                              <BookOpen className="text-slate-400 shrink-0" size={16} />
+                              <span className="truncate">
+                                {field.value
+                                  ? EXAM_PREP_COURSES.find((c) => c.value === field.value)?.label
+                                  : "Select exam prep course"}
+                              </span>
+                            </div>
+                            <ChevronDown className="h-4 w-4 text-slate-400 shrink-0" />
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent className="min-w-[var(--radix-dropdown-menu-trigger-width)] w-auto bg-white">
+                          <DropdownMenuRadioGroup
+                            value={field.value}
+                            onValueChange={field.onChange}
+                          >
+                            {EXAM_PREP_COURSES.map((c) => (
+                              <DropdownMenuRadioItem key={c.value} value={c.value}>
+                                {c.label}
+                              </DropdownMenuRadioItem>
+                            ))}
+                          </DropdownMenuRadioGroup>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    )}
+                  />
+                  {errors.examPrepCourse && (
+                    <FieldError>{errors.examPrepCourse.message}</FieldError>
+                  )}
+                </FieldContent>
+              </Field>
+
+              {watch("examPrepCourse") === "Other" && (
+                <Field data-invalid={!!errors.examPrepCourseOther} className="md:col-span-2">
+                  <FieldLabel required className="normal-case">Please specify</FieldLabel>
+                  <FieldContent>
+                    <div className="relative">
+                      <Info
+                        className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+                        size={16}
+                      />
+                      <Input
+                        {...register("examPrepCourseOther")}
+                        className="pl-10 h-10"
+                        placeholder="Specify the exam preparation course"
+                      />
+                    </div>
+                    {errors.examPrepCourseOther && (
+                      <FieldError>{errors.examPrepCourseOther.message}</FieldError>
+                    )}
+                  </FieldContent>
+                </Field>
+              )}
+
+              <Field data-invalid={!!errors.additionalDetails} className="md:col-span-2">
+                <FieldLabel className="normal-case">Additional Details (Optional)</FieldLabel>
+                <FieldContent>
+                  <div className="relative">
+                    <MessageSquare
+                      className="absolute left-3 top-3 text-slate-400"
+                      size={16}
+                    />
+                    <Textarea
+                      placeholder="Tell us more about your inquiry..."
+                      rows={5}
+                      {...register("additionalDetails")}
+                      className="pl-10 pr-3 py-2 bg-white border border-slate-200 focus-visible:border-primary focus-visible:ring-3 focus-visible:ring-ring/30 rounded-md placeholder:text-slate-400 font-medium resize-none transition-[color,box-shadow,background-color] outline-none"
+                    />
+                  </div>
+                </FieldContent>
+                {errors.additionalDetails && <FieldError>{errors.additionalDetails.message}</FieldError>}
               </Field>
             </div>
 
