@@ -79,6 +79,22 @@ export function usePrimaryNav() {
         items: dynamicItems.length > 0 ? [...dynamicItems,{name:"Other Exams",href:"/exams/other-exams"}] : item.items,
       };
     }
+    if (item.name === "Book Exams" && item.type === "dropdown") {
+      const dynamicItems =
+        examsResponse?.data?.data
+          ?.filter((exam) =>
+            exam.examType?.some((et) => et.name === "group")
+          )
+          ?.map((exam) => ({
+            name: exam.name,
+            href: `/book-exams/${exam.slug}`,
+          })) || [];
+
+      return {
+        ...item,
+        items: dynamicItems.length > 0 ?  dynamicItems : item.items,
+      };
+    }
 
     // We target the Exam Preparation Courses dropdown
     if (item.name === "Exam Preparation Courses" && item.type === "dropdown") {
