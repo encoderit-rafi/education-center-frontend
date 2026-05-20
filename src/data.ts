@@ -1457,17 +1457,17 @@ export const EXAM_CARDS_DATA = [
   },
 ];
 export const EXAM_DETAILE_DATA = [
-  {
-    ...EXAM_IDS_DATA.ielts,
-    type: "items",
-    description:
-      "The world's most popular English proficiency test — accepted for university admissions, migration, and UK visas. Choose the IELTS variant that matches your goal below.",
-    items: [
-      { ...EXAM_IDS_DATA.ielts_academic },
-      { ...EXAM_IDS_DATA.ielts_general },
-      { ...EXAM_IDS_DATA.ielts_ukvi },
-    ],
-  },
+  // {
+  //   ...EXAM_IDS_DATA.ielts,
+  //   type: "items",
+  //   description:
+  //     "The world's most popular English proficiency test — accepted for university admissions, migration, and UK visas. Choose the IELTS variant that matches your goal below.",
+  //   items: [
+  //     { ...EXAM_IDS_DATA.ielts_academic },
+  //     { ...EXAM_IDS_DATA.ielts_general },
+  //     { ...EXAM_IDS_DATA.ielts_ukvi },
+  //   ],
+  // },
   {
     ...EXAM_IDS_DATA.ielts_academic,
     type: "details",
@@ -1650,19 +1650,19 @@ export const EXAM_DETAILE_DATA = [
       },
     ],
   },
-  {
-    ...EXAM_IDS_DATA.ielts_ukvi,
-    type: "items",
-    description:
-      "IELTS for UKVI is a Secure English Language Test (SELT) approved by the UK Home Office for visa applications to the UK.",
-    items: [
-      { ...EXAM_IDS_DATA.ielts_ukvi_academic },
-      { ...EXAM_IDS_DATA.ielts_ukvi_general },
-      { ...EXAM_IDS_DATA.ielts_life_skills_a1 },
-      { ...EXAM_IDS_DATA.ielts_life_skills_a2 },
-      { ...EXAM_IDS_DATA.ielts_life_skills_b1 },
-    ],
-  },
+  // {
+  //   ...EXAM_IDS_DATA.ielts_ukvi,
+  //   type: "items",
+  //   description:
+  //     "IELTS for UKVI is a Secure English Language Test (SELT) approved by the UK Home Office for visa applications to the UK.",
+  //   items: [
+  //     { ...EXAM_IDS_DATA.ielts_ukvi_academic },
+  //     { ...EXAM_IDS_DATA.ielts_ukvi_general },
+  //     { ...EXAM_IDS_DATA.ielts_life_skills_a1 },
+  //     { ...EXAM_IDS_DATA.ielts_life_skills_a2 },
+  //     { ...EXAM_IDS_DATA.ielts_life_skills_b1 },
+  //   ],
+  // },
   {
     ...EXAM_IDS_DATA.ielts_ukvi_academic,
     type: "details",
@@ -1899,17 +1899,17 @@ export const EXAM_DETAILE_DATA = [
       },
     ],
   },
-  {
-    ...EXAM_IDS_DATA.pte,
-    type: "items",
-    description:
-      "Fast, computer-based English test for study and migration — accepted by thousands of institutions and governments worldwide.",
-    items: [
-      { ...EXAM_IDS_DATA.pte_academic },
-      { ...EXAM_IDS_DATA.pte_core },
-      { ...EXAM_IDS_DATA.pte_ukvi },
-    ],
-  },
+  // {
+  //   ...EXAM_IDS_DATA.pte,
+  //   type: "items",
+  //   description:
+  //     "Fast, computer-based English test for study and migration — accepted by thousands of institutions and governments worldwide.",
+  //   items: [
+  //     { ...EXAM_IDS_DATA.pte_academic },
+  //     { ...EXAM_IDS_DATA.pte_core },
+  //     { ...EXAM_IDS_DATA.pte_ukvi },
+  //   ],
+  // },
   {
     ...EXAM_IDS_DATA.pte_academic,
     type: "details",
@@ -2018,17 +2018,17 @@ export const EXAM_DETAILE_DATA = [
       "All Economic Class Applications",
     ],
   },
-  {
-    ...EXAM_IDS_DATA.pte_ukvi,
-    type: "items",
-    description: "Secure English Language Test (SELT) for UK Visas",
-    items: [
-      { ...EXAM_IDS_DATA.pte_academic_ukvi },
-      { ...EXAM_IDS_DATA.pte_home_a1 },
-      { ...EXAM_IDS_DATA.pte_home_a2 },
-      { ...EXAM_IDS_DATA.pte_home_b1 },
-    ],
-  },
+  // {
+  //   ...EXAM_IDS_DATA.pte_ukvi,
+  //   type: "items",
+  //   description: "Secure English Language Test (SELT) for UK Visas",
+  //   items: [
+  //     { ...EXAM_IDS_DATA.pte_academic_ukvi },
+  //     { ...EXAM_IDS_DATA.pte_home_a1 },
+  //     { ...EXAM_IDS_DATA.pte_home_a2 },
+  //     { ...EXAM_IDS_DATA.pte_home_b1 },
+  //   ],
+  // },
   {
     ...EXAM_IDS_DATA.pte_academic_ukvi,
     type: "details",
@@ -2138,16 +2138,16 @@ export const EXAM_DETAILE_DATA = [
     whoShouldTake: ["UK Citizenship and Settlement applicants"],
     acceptedFor: ["UK Visas and Immigration (UKVI)"],
   },
-  {
-    ...EXAM_IDS_DATA.celpip,
-    type: "items",
-    description:
-      "The Canadian English Language Proficiency Index Program — the leading English test for permanent residency and citizenship in Canada.",
-    items: [
-      { ...EXAM_IDS_DATA.celpip_general },
-      { ...EXAM_IDS_DATA.celpip_general_ls },
-    ],
-  },
+  // {
+  //   ...EXAM_IDS_DATA.celpip,
+  //   type: "items",
+  //   description:
+  //     "The Canadian English Language Proficiency Index Program — the leading English test for permanent residency and citizenship in Canada.",
+  //   items: [
+  //     { ...EXAM_IDS_DATA.celpip_general },
+  //     { ...EXAM_IDS_DATA.celpip_general_ls },
+  //   ],
+  // },
   {
     ...EXAM_IDS_DATA.celpip_general,
     type: "details",
