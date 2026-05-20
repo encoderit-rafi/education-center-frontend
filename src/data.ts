@@ -262,10 +262,7 @@ export const PRIMARY_NAV: AppNavigationItem[] = [
     type: "dropdown",
     name: "Paid Mock Tests",
     href: "/paid-mock-tests",
-    items: NAV_PAID_MOCK_TESTS.map((item) => ({
-      name: item.name,
-      href: `/paid-mock-tests/${item.id}`,
-    })),
+    items: [],
   },
   {
     type: "dropdown",
@@ -282,10 +279,7 @@ export const PRIMARY_NAV: AppNavigationItem[] = [
     type: "dropdown",
     name: "Fees",
     href: "/fees",
-    items: NAV_FEES.map((fee) => ({
-      name: fee.name,
-      href: `/fees/${fee.id}`,
-    })),
+    items: [],
   },
 
   {
