@@ -26,14 +26,14 @@ export default async function BookExamsId({
   const { id } = await params;
   console.log("👉 ~ ExamDetailPage ~ id:", id);
 
-  const exam = EXAM_DETAILE_DATA.find((item) => item.id === id);
+  // const exam = EXAM_DETAILE_DATA.find((item) => item.id === id);
 
-  if (!exam) {
-    notFound();
-  }
-  if (exam?.type == "items") {
-    return <BookExamItems data={exam} />;
-  }
+  // if (!exam) {
+  //   notFound();
+  // }
+  // if (exam?.type == "items") {
+  //   return <BookExamItems data={exam} />;
+  // }
   switch (id) {
     // case EXAM_IDS_DATA.ielts_ukvi_academic.id:
     //   return <FormIELTSUKVIAcademicRegistration />;
@@ -56,7 +56,7 @@ export default async function BookExamsId({
           <FormIELTSGeneralRegistration />
         </div>
       );
-    case EXAM_IDS_DATA.toefl.id:
+    case "toefl-ibt":
       return (
         <div>
           <FormTOEFLIBTRegistration />

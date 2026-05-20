@@ -51,7 +51,7 @@ export default async function ExamDetailPage({
   const hasGroupType = exam.examType?.some(
     (et: any) => et.name === "group" || et.name === "item"
   );
-  const isGroup = hasGroupType || childExams.length > 0;
+  const isGroup = hasGroupType && childExams.length > 0;
 
   if (isGroup) {
     const examWithItems = {
