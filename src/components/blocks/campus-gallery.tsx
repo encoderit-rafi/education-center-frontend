@@ -11,57 +11,52 @@ import {
 
 const carouselImages = [
   {
-    src: "/images/about-us/about-us-1.jpg",
-    name: "Main Reception & Welcome Desk",
+    src: "/images/about-us/Classroom.jpg",
+    name: "Classroom",
   },
   {
-    src: "/images/about-us/about-us-2.jpg",
-    name: "Shoe Rack Area",
+    src: "/images/about-us/Classroom_1.jpg",
+    name: "Classroom",
+  },
+   {
+    src: "/images/about-us/Lockers.jpg",
+    name: "Lockers",
   },
   {
-    src: "/images/about-us/about-us-3.jpg",
+    src: "/images/about-us/Building_Lobby.jpg",
+    name: "Building Lobby",
+  },
+  {
+    src: "/images/about-us/Building_Lobby_1.jpg",
     name: "Computer Lab",
   },
+  
   {
-    src: "/images/about-us/about-us-4.jpg",
-    name: "Computer Lab",
+    src: "/images/about-us/Computer_Room_2.jpg",
+    name: "Computer Room",
   },
   {
-    src: "/images/about-us/about-us-5.jpg",
-    name: "High-Tech Test Delivery Center",
+    src: "/images/about-us/Computer_Room_3.jpg",
+    name: "Computer Room",
   },
   {
-    src: "/images/about-us/about-us-6.jpg",
-    name: "Smart Classroom & Learning Studio",
+    src: "/images/about-us/Computer_Room_4.jpg",
+    name: "Computer Room",
   },
   {
-    src: "/images/about-us/about-us-7.jpg",
-    name: "Smart Classroom & Learning Studio",
+    src: "/images/about-us/Entrance.jpg",
+    name: "Entrance",
   },
   {
-    src: "/images/about-us/about-us-8.jpg",
-    name: "Interactive Group Discussion Area",
+    src: "/images/about-us/Exterior_Building.jpg",
+    name: "Exterior Building View",
   },
+
   {
-    src: "/images/about-us/about-us-9.jpg",
-    name: "Lobby",
-  },
-  {
-    src: "/images/about-us/about-us-10.jpg",
-    name: "Extrior Building View",
-  },
-  {
-    src: "/images/about-us/about-us-11.jpg",
-    name: "Car Parking Zone",
-  },
-  {
-    src: "/images/about-us/who-we-are-1.jpg",
+    src: "/images/about-us/Parking_Area.jpg",
     name: "Reception Area",
   },
-  {
-    src: "/images/about-us/who-we-are-2.jpg",
-    name: "Advanced Multimedia Training Room",
-  },
+ 
 ];
 
 export function CampusGallery() {
