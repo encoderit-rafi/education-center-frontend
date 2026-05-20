@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -276,7 +277,7 @@ export default async function ExamPreparationDynamicPage({
                       alt={pkg.name}
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                      className="object-cover transition-transform duration-500 group-hover:scale-110 "
                     />
                     {discount > 0 && (
                       <div className="absolute top-4 right-4">
@@ -321,7 +322,9 @@ export default async function ExamPreparationDynamicPage({
                   </div>
 
                   {/* Row 5 — Best For */}
-                  <div className="px-3 space-y-2">
+                  <div className="px-3 space-y-2
+                  
+                  ">
                     <Badge variant={"destructive"}>Best For</Badge>
                     <BaseCardList
                       items={
