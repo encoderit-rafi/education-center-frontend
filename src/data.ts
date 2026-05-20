@@ -271,10 +271,11 @@ export const PRIMARY_NAV: AppNavigationItem[] = [
     type: "dropdown",
     name: "Exam Preparation Courses",
     href: "/exam-preparation-courses",
-    items: NAV_EXAM_PREPARATION_COURSES_DATA.map((exam) => ({
-      name: exam.name,
-      href: `/exam-preparation-courses/${exam.id}`,
-    })),
+    // items: NAV_EXAM_PREPARATION_COURSES_DATA.map((exam) => ({
+    //   name: exam.name,
+    //   href: `/exam-preparation-courses/${exam.id}`,
+    // })),
+    items: [],
   },
 
   {
@@ -2524,7 +2525,10 @@ export const EXAM_DETAILE_DATA = [
       { name: "Reading", duration: "60 min", icon: "reading" },
       { name: "Writing", duration: "60 min", icon: "writing" },
     ],
-    whoShouldTake: ["Professional registration seekers", "Advanced work visa applicants"],
+    whoShouldTake: [
+      "Professional registration seekers",
+      "Advanced work visa applicants",
+    ],
     acceptedFor: ["UK Visas and Immigration (UKVI)"],
   },
   {
@@ -2545,7 +2549,10 @@ export const EXAM_DETAILE_DATA = [
       { name: "Reading", duration: "60 min", icon: "reading" },
       { name: "Writing", duration: "60 min", icon: "writing" },
     ],
-    whoShouldTake: ["Advanced academic students", "Senior professional applicants"],
+    whoShouldTake: [
+      "Advanced academic students",
+      "Senior professional applicants",
+    ],
     acceptedFor: ["UK Visas and Immigration (UKVI)"],
   },
   {
@@ -2566,7 +2573,10 @@ export const EXAM_DETAILE_DATA = [
       { name: "Reading", duration: "60 min", icon: "reading" },
       { name: "Writing", duration: "60 min", icon: "writing" },
     ],
-    whoShouldTake: ["Highest level academic seekers", "Native-equivalent proficiency seekers"],
+    whoShouldTake: [
+      "Highest level academic seekers",
+      "Native-equivalent proficiency seekers",
+    ],
     acceptedFor: ["UK Visas and Immigration (UKVI)"],
   },
 ];
