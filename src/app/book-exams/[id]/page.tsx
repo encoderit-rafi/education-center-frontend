@@ -45,9 +45,9 @@ export default async function BookExamsId({
     //   return <FormIELTSLifeSkillsA2Registration />;
     // case EXAM_IDS_DATA.ielts_life_skills_b1.id:
     //   return <FormIELTSLifeSkillsB1Registration />;
-    case EXAM_IDS_DATA.ielts_academic.id:
+    case "ielts-academic":
       return <FormIELTSAcademicRegistration />;
-    case EXAM_IDS_DATA.ielts_general.id:
+    case "ielts-general":
       return (
         <div>
           <h2 className="text-2xl font-bold my-8 text-center">
@@ -62,7 +62,7 @@ export default async function BookExamsId({
           <FormTOEFLIBTRegistration />
         </div>
       );
-    case EXAM_IDS_DATA.celpip_general.id:
+    case "celpip-general":
       return (
         <div>
           <h2 className="text-2xl font-bold my-8 text-center">
@@ -70,7 +70,7 @@ export default async function BookExamsId({
           </h2>
         </div>
       );
-    case EXAM_IDS_DATA.celpip_general_ls.id:
+    case "celpip-general-ls":
       return (
         <div>
           <h2 className="text-2xl font-bold my-8 text-center">
@@ -86,35 +86,34 @@ export default async function BookExamsId({
           </h2>
         </div>
       );
-    case EXAM_IDS_DATA.selt_a1.id:
+    case "ukvi-speaking-and-listening-at-level-a1":
       return <FormSELTA1Registration />;
-    case EXAM_IDS_DATA.selt_a2.id:
+    case "ukvi-speaking-and-listening-at-level-a2":
       return <FormSELTA2Registration />;
-    case EXAM_IDS_DATA.selt_b1.id:
+    case "ukvi-speaking-and-listening-at-level-b1":
       return <FormSELTB1Registration />;
-    case EXAM_IDS_DATA.selt_b1_r_w.id:
+    case "ukvi-speaking-and-listening-at-level-b1-r-w":
       return <FormSELTB1RWRegistration />;
-    case EXAM_IDS_DATA.selt_b2.id:
+    case "ukvi-speaking-and-listening-at-level-b2":
       return <FormSELTB2Registration />;
-    case EXAM_IDS_DATA.selt_c1.id:
+    case "ukvi-speaking-and-listening-at-level-c1":
       return <FormSELTC1Registration />;
-    case EXAM_IDS_DATA.selt_c2.id:
+    case "ukvi-speaking-and-listening-at-level-c2":
       return <FormSELTC2Registration />;
-    case EXAM_IDS_DATA.selt.id:
-      return <FormSELTA1Registration initialId={id} />;
-    case EXAM_IDS_DATA.pte_academic.id:
+ 
+    case "pte-academic":
       return <FormPTEAcademicRegistration />;
-    case EXAM_IDS_DATA.pte_core.id:
+    case "pte-core":
       return <FormPTECoreRegistration />;
 
-    case EXAM_IDS_DATA.pte_home_a1.id:
+    case "pte-home-a1":
       return <FormPTEHomeA1Registration />;
-    case EXAM_IDS_DATA.pte_home_a2.id:
+    case "pte-home-a2":
       return <FormPTEHomeA2Registration />;
-    case EXAM_IDS_DATA.pte_home_b1.id:
+    case "pte-home-b1":
       return <FormPTEHomeB1Registration />;
-    case EXAM_IDS_DATA.pte_ukvi.id:
-    case EXAM_IDS_DATA.pte_academic_ukvi.id:
+    case "pte-ukvi":
+    case "pte-academic-ukvi":
       return <FormPTEHomeUkviRegistration />;
 
     default:
