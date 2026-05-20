@@ -84,6 +84,7 @@ interface CoursePackage {
   duration: string;
   scheduleInfo: string;
   bestFor: string[];
+  image?: string | null;
 }
 
 interface ApiResponse<T> {
