@@ -10,7 +10,6 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 export default function BookExamItems({ data }: { data: any }) {
-  console.log("🚀 ~ BookExamItems ~ data:", data);
   return (
     <div className="min-h-screen bg-white">
       <div className="bg-slate-50">
@@ -25,7 +24,7 @@ export default function BookExamItems({ data }: { data: any }) {
       <div className="section-container base-px base-py">
         <div className="mb-14 text-center space-y-4">
           <h2 className="section-title">
-            Choose Your <span>{data.name}</span> Test
+            Choose Your <span>{data.name}</span> Exam
           </h2>
           <p className="section-subtitle text-center mx-auto">
             Each {data.name} variant is designed for a specific purpose. Select
@@ -37,7 +36,7 @@ export default function BookExamItems({ data }: { data: any }) {
           {data.items?.map((item: any, index: number) => (
             <Link
               key={item.id}
-              href={item?.examFormRedirectUrl || `/book-exams/${item.id}`}
+              href={item?.link || `/book-exams/${item.id}`}
               className="group"
             >
               <BaseCard className="p-8 h-full flex flex-col transition-all duration-300 hover:shadow-2xl hover:border-primary/20">
@@ -48,6 +47,10 @@ export default function BookExamItems({ data }: { data: any }) {
 
                 <div className="flex-1 space-y-3">
                   <BaseCardTitle>{item.name}</BaseCardTitle>
+                  {/* <BaseCardDescription>
+                    Professional certification and international recognition for
+                    your future career and migration goals.
+                  </BaseCardDescription> */}
                 </div>
               </BaseCard>
             </Link>
@@ -57,4 +60,3 @@ export default function BookExamItems({ data }: { data: any }) {
     </div>
   );
 }
-

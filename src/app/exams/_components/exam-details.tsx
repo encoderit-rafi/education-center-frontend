@@ -25,8 +25,6 @@ import {
 import GradientBox from "@/components/blocks/gradient-box";
 import { buttonVariants } from "@/components/ui/button";
 
-import { EXAM_DETAILE_DATA } from "@/data";
-
 const IconTile = ({ icon, size = 20 }: { icon: string; size?: number }) => {
   switch (icon) {
     case "reading":
@@ -53,19 +51,8 @@ const IconTile = ({ icon, size = 20 }: { icon: string; size?: number }) => {
 };
 
 export default function ExamDetails({ data }: { data: any }) {
-  // Find matching static metadata to enrich the dynamic backend data
-  const staticMeta = EXAM_DETAILE_DATA.find(
-    (item: any) =>
-      item.id === data.id ||
-      item.slug === data.slug ||
-      item.name?.toLowerCase() === data.name?.toLowerCase()
-  );
-
-  const detailData = {
-    ...staticMeta,
-    ...data,
-  };
-
+  // Support both old nested structure and new flat structure
+  const detailData = data.data || data;
   const stats = detailData.stats || [];
   const sections = detailData.sections || [];
   const whoShouldTake = detailData.whoShouldTake || [];
@@ -75,7 +62,7 @@ export default function ExamDetails({ data }: { data: any }) {
     detailData.description || detailData.content || data.description;
   const subtitle = detailData.subtitle || "";
   const overview = detailData.overview || description;
-  const image = detailData.image || "/images/exams/ielts/ielts-1.jpg";
+  const image = data.image || "/images/exams/ielts/ielts-1.jpg";
 
   return (
     <div className="min-h-screen bg-[#FDFDFD]">
@@ -91,7 +78,7 @@ export default function ExamDetails({ data }: { data: any }) {
               </p>
             )}
             <Link
-              href={`/book-exams/${data.slug}`}
+              href={`/book-exams/${data.id}`}
               className={cn(buttonVariants(), "w-fit")}
             >
               <Calendar /> Register
@@ -331,7 +318,7 @@ export default function ExamDetails({ data }: { data: any }) {
                     </p>
                   </div>
                   <Link
-                    href={`/book-exams/${data.slug}`}
+                    href={`/book-exams/${data.id}`}
                     className={cn(
                       buttonVariants({ variant: "light", size: "sm" }),
                       "w-full font-black text-xs py-5 rounded-xl shadow-xl hover:scale-[1.02] transition-all",
