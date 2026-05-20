@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function ExperienceExcellence() {
   return (
     <section className="base-px base-py relative overflow-hidden ">
@@ -24,11 +26,12 @@ export default function ExperienceExcellence() {
         </div>
         {/* Right Media Block */}
         <div className="flex-1 w-full space-y-6">
-          <div className="relative rounded-3xl overflow-hidden shadow-2xl aspect-video border-2 border-primary/50">
-            <img
-              src="/images/about-us/about-us-3.jpg"
+          <div className="relative aspect-4/3 rounded-xl overflow-hidden shadow-2xl">
+            <Image
+              src="/images/about-us/classroom.jpg"
               alt="TEPTH Testing Center"
-              className="w-full h-full object-cover"
+              fill
+              className="object-cover"
             />
           </div>
         </div>

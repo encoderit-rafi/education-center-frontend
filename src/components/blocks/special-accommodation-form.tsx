@@ -97,29 +97,20 @@ export default function SpecialAccommodationForm() {
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Field data-invalid={!!errors.name}>
-          <FieldLabel className="text-sm font-medium">
-            Full Name <span className="text-primary font-bold">*</span>
-          </FieldLabel>
+          <FieldLabel required>Full Name</FieldLabel>
           <FieldContent>
-            <Input
-              {...register("name")}
-              placeholder="John Doe"
-              className="bg-slate-50/50 border-slate-200 h-14 rounded-xl px-6 placeholder:text-slate-400 font-medium"
-            />
+            <Input {...register("name")} placeholder="John Doe" />
           </FieldContent>
           {errors.name && <FieldError>{errors.name.message}</FieldError>}
         </Field>
 
         <Field data-invalid={!!errors.email}>
-          <FieldLabel className="text-sm font-medium">
-            Email Address <span className="text-primary font-bold">*</span>
-          </FieldLabel>
+          <FieldLabel required>Email Address</FieldLabel>
           <FieldContent>
             <Input
               {...register("email")}
               type="email"
               placeholder="john@example.com"
-              className="bg-slate-50/50 border-slate-200 h-14 rounded-xl px-6 placeholder:text-slate-400 font-medium"
             />
           </FieldContent>
           {errors.email && <FieldError>{errors.email.message}</FieldError>}
@@ -127,25 +118,20 @@ export default function SpecialAccommodationForm() {
       </div>
 
       <Field data-invalid={!!errors.message}>
-        <FieldLabel className="text-sm font-medium">
-          Accommodation Details{" "}
-          <span className="text-primary font-bold">*</span>
-        </FieldLabel>
+        <FieldLabel required>Accommodation Details</FieldLabel>
         <FieldContent>
           <Textarea
             {...register("message")}
             placeholder="Please describe your specific requirements in detail..."
             rows={5}
-            className="bg-slate-50/50 border-slate-200 rounded-xl p-6 placeholder:text-slate-400 font-medium resize-none"
+            className="bg-transparent border border-slate-200 rounded-md px-3 py-2 focus-visible:border-primary focus-visible:ring-3 focus-visible:ring-ring/30 placeholder:text-slate-400 placeholder:text-sm"
           />
         </FieldContent>
         {errors.message && <FieldError>{errors.message.message}</FieldError>}
       </Field>
 
       <div className="space-y-4">
-        <FieldLabel className="text-sm font-medium">
-          Supporting Documentation
-        </FieldLabel>
+        <FieldLabel>Supporting Documentation</FieldLabel>
         <div
           className={cn(
             "relative p-8 border-2 border-dashed rounded-2xl transition-all flex flex-col items-center justify-center text-center group bg-slate-50/30",
@@ -207,7 +193,6 @@ export default function SpecialAccommodationForm() {
         >
           <div className="flex items-center gap-3">
             {isSubmitting ? "Sending Request..." : "Send Inquiry"}
-            {!isSubmitting && <SendHorizontal className="w-4 h-4" />}
           </div>
         </Button>
 

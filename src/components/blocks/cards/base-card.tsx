@@ -88,7 +88,7 @@ const BaseCard = ({
   return (
     <div
       className={cn(
-        "group flex flex-col space-y-4 rounded-lg p-5 border border-slate-300 bg-white overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:border-primary hover:shadow-lg h-full",
+        "group flex flex-col rounded-lg p-5 border border-slate-300 bg-white overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:border-primary hover:shadow-lg h-full",
         className,
       )}
       {...props}

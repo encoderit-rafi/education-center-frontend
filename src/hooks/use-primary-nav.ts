@@ -75,7 +75,19 @@ export function usePrimaryNav() {
         items: dynamicItems,
       };
     }
-    
+    if (item.name === "Fees" && item.type === "dropdown") {
+      const dynamicItems =
+        coursesResponse?.data?.data?.map((course) => ({
+          name: course.name,
+          href: `/fees/${course.slug}`,
+        })) || [];
+
+      return {
+        ...item,
+        items: dynamicItems.length > 0 ? dynamicItems : item.items,
+      };
+    }
+
     // We target the Paid Mock Tests dropdown
     if (item.name === "Paid Mock Tests" && item.type === "dropdown") {
       const dynamicItems =

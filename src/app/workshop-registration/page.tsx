@@ -21,7 +21,7 @@ import Stepper from "@/components/stepper";
 import { PriceDisplay } from "@/components/ui/price-display";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import api from "@/axios";
-import { EXAM_FEES } from "../fees/page";
+// import { EXAM_FEES } from "../fees/page";
 
 interface WorkshopDetail {
   id: string;
@@ -91,9 +91,9 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
     return workshops?.find((w) => w.id === courseId);
   }, [workshops, courseId]);
 
-  const fallbackData = useMemo(() => {
-    return EXAM_FEES.find((item) => item.id === examId);
-  }, [examId]);
+  // const fallbackData = useMemo(() => {
+  //   return EXAM_FEES.find((item) => item.id === examId);
+  // }, [examId]);
 
   const [isSuccess, setIsSuccess] = useState(false);
 
@@ -194,11 +194,11 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
   }
 
   // If no workshop matches and no static fallback data matches, show notFound
-  if (!workshop && !fallbackData) {
+  if (!workshop) {
     notFound();
   }
 
-  const titleName = workshop?.name || fallbackData?.name || "Workshop";
+  const titleName = workshop?.name || "Workshop";
 
   if (isSuccess) {
     return (

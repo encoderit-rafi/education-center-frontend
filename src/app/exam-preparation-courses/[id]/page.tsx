@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   CheckCircle2,
   ArrowRight,
@@ -68,16 +69,21 @@ interface CourseDetail {
   keyBenefits: string[];
   focusArea: string[];
   bannerImage: string | null;
+  packages?: CoursePackage[];
+  workshops?: WorkshopDetail[];
 }
 
 interface CoursePackage {
   id: string;
+  image: string | null;
   name: string;
   slug: string;
   description: string;
   price: string;
   discountType: "PERCENTAGE" | "FIXED" | null;
   discountValue: number | null;
+  specialDiscountType?: "PERCENTAGE" | "FIXED" | null;
+  specialDiscount?: string | number | null;
   duration: string;
   scheduleInfo: string;
   bestFor: string[];
@@ -99,23 +105,16 @@ export default async function ExamPreparationDynamicPage({
   let course: CourseDetail | null = null;
   let packages: CoursePackage[] = [];
   let workshops: WorkshopDetail[] = [];
-  console.log("👉 ~ ExamPreparationDynamicPage ~ workshops:", workshops);
-
   try {
-    const [courseRes, packagesRes, workshopsRes] = await Promise.all([
-      api.get<ApiResponse<CourseDetail>>(`/courses/${slug}`),
-      api.get<ApiResponse<CoursePackage[]>>(`/courses/${slug}/packages`),
-      api.get<ApiResponse<{ data: WorkshopDetail[] }>>("/workshops"),
-    ]);
+    const courseRes = await api.get<ApiResponse<CourseDetail>>(
+      `/courses/${slug}`,
+    );
+    console.log("👉 ~ ExamPreparationDynamicPage ~ courseRes:", courseRes);
 
     if (courseRes.data.success) {
       course = courseRes.data.data;
-    }
-    if (packagesRes.data.success) {
-      packages = packagesRes.data.data;
-    }
-    if (workshopsRes.data.success) {
-      workshops = workshopsRes.data.data.data || [];
+      packages = course.packages || [];
+      workshops = course.workshops || [];
     }
   } catch (error) {
     console.error("Error fetching course data:", error);
@@ -151,48 +150,62 @@ export default async function ExamPreparationDynamicPage({
   }
 
   if (localExamPrep && localExamPrep.courses) {
-    const mergedPackages = localExamPrep.courses.map((c: any, index: number) => {
-      // Find if there is a matching package from the database
-      const dbMatch = packages.find((dbPkg) => {
-        const dbSlug = dbPkg.slug.toLowerCase();
-        const localId = (c.id || "").toLowerCase();
+    const mergedPackages = localExamPrep.courses.map(
+      (c: any, index: number) => {
+        // Find if there is a matching package from the database
+        const dbMatch = packages.find((dbPkg) => {
+          const dbSlug = dbPkg.slug.toLowerCase();
+          const localId = (c.id || "").toLowerCase();
 
-        if (localId.includes("inperson_one_to_one") || localId.includes("vip")) {
-          return dbSlug.includes("vip") || dbSlug.includes("inperson") || dbSlug.includes("in-person");
-        }
-        if (localId.includes("semi_private") || localId.includes("semi-private")) {
-          return dbSlug.includes("semi-private") || dbSlug.includes("semi_private");
-        }
-        if (localId.includes("group")) {
-          return dbSlug.includes("group");
-        }
-        if (localId.includes("online")) {
-          return dbSlug.includes("online");
-        }
-        if (localId.includes("hybrid")) {
-          return dbSlug.includes("hybrid");
-        }
-        return false;
-      });
+          if (
+            localId.includes("inperson_one_to_one") ||
+            localId.includes("vip")
+          ) {
+            return (
+              dbSlug.includes("vip") ||
+              dbSlug.includes("inperson") ||
+              dbSlug.includes("in-person")
+            );
+          }
+          if (
+            localId.includes("semi_private") ||
+            localId.includes("semi-private")
+          ) {
+            return (
+              dbSlug.includes("semi-private") || dbSlug.includes("semi_private")
+            );
+          }
+          if (localId.includes("group")) {
+            return dbSlug.includes("group");
+          }
+          if (localId.includes("online")) {
+            return dbSlug.includes("online");
+          }
+          if (localId.includes("hybrid")) {
+            return dbSlug.includes("hybrid");
+          }
+          return false;
+        });
 
-      if (dbMatch) {
-        return dbMatch;
-      }
+        if (dbMatch) {
+          return dbMatch;
+        }
 
-      // Fallback to local static course mapping
-      return {
-        id: c.id || `local-course-${index}`,
-        name: c.name,
-        slug: c.id || `local-course-${index}`,
-        description: c.description || "",
-        price: (c.price || 0).toString(),
-        discountType: "PERCENTAGE" as const,
-        discountValue: c.general_discount || 0,
-        duration: c.details?.duration?.replace(" Hours", "") || "24",
-        scheduleInfo: c.details?.format || c.details?.schedule || "Flexible",
-        bestFor: c.bestFor || [],
-      };
-    });
+        // Fallback to local static course mapping
+        return {
+          id: c.id || `local-course-${index}`,
+          name: c.name,
+          slug: c.id || `local-course-${index}`,
+          description: c.description || "",
+          price: (c.price || 0).toString(),
+          discountType: "PERCENTAGE" as const,
+          discountValue: c.general_discount || 0,
+          duration: c.details?.duration?.replace(" Hours", "") || "24",
+          scheduleInfo: c.details?.format || c.details?.schedule || "Flexible",
+          bestFor: c.bestFor || [],
+        };
+      },
+    );
 
     packages = mergedPackages;
   }
@@ -204,14 +217,19 @@ export default async function ExamPreparationDynamicPage({
     if (n.includes("group") || s.includes("group")) return 1;
     if (n.includes("semi") || s.includes("semi")) return 2;
     if (
-      n.includes("in-person one-to-one") || 
-      n.includes("inperson one-to-one") || 
+      n.includes("in-person one-to-one") ||
+      n.includes("inperson one-to-one") ||
       n.includes("in-person 1-to-1") ||
-      n.includes("inperson") || 
-      s.includes("inperson") || 
+      n.includes("inperson") ||
+      s.includes("inperson") ||
       s.includes("in-person") ||
-      (s.includes("vip") && !n.includes("online") && !s.includes("online") && !n.includes("hybrid") && !s.includes("hybrid"))
-    ) return 3;
+      (s.includes("vip") &&
+        !n.includes("online") &&
+        !s.includes("online") &&
+        !n.includes("hybrid") &&
+        !s.includes("hybrid"))
+    )
+      return 3;
     if (n.includes("online") || s.includes("online")) return 4;
     if (n.includes("hybrid") || s.includes("hybrid")) return 5;
     return 6;
@@ -227,12 +245,16 @@ export default async function ExamPreparationDynamicPage({
     return name;
   };
 
-  packages = packages.map((pkg) => ({
-    ...pkg,
-    name: getStandardizedName(pkg.name, pkg.slug),
-  })).sort((a, b) => {
-    return getCourseTypeScore(a.name, a.slug) - getCourseTypeScore(b.name, b.slug);
-  });
+  packages = packages
+    .map((pkg) => ({
+      ...pkg,
+      name: getStandardizedName(pkg.name, pkg.slug),
+    }))
+    .sort((a, b) => {
+      return (
+        getCourseTypeScore(a.name, a.slug) - getCourseTypeScore(b.name, b.slug)
+      );
+    });
 
   const data = course; // For easier mapping
 
@@ -256,7 +278,8 @@ export default async function ExamPreparationDynamicPage({
       (slugLower === "toefl" && subTitleLower === "toefl-ibt") ||
       (slugLower === "celpip" && subTitleLower === "celpip-general")
     );
-  });  return (
+  });
+  return (
     <div className="min-h-screen bg-white">
       {/* ── Hero Section ── */}
       <section className="relative overflow-hidden bg-slate-50 border-b border-slate-100">
@@ -324,13 +347,39 @@ export default async function ExamPreparationDynamicPage({
             </p>
           </div>
 
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 [grid-template-rows:repeat(7,auto)]">
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 [grid-template-rows:repeat(7,auto)]">
             {packages.map((pkg, index) => {
               console.log("👉 ~ ExamPreparationDynamicPage ~ pkg:", pkg);
-              const basePrice = parseFloat(pkg.price);
-              const discount = pkg.discountValue || 0;
+              const basePrice = parseFloat(pkg.price) || 0;
+              let discount = 0;
+              let discountType: "PERCENTAGE" | "FIXED" | null =
+                pkg.discountType;
+
+              if (
+                pkg.discountValue !== null &&
+                pkg.discountValue !== undefined
+              ) {
+                discount =
+                  typeof pkg.discountValue === "string"
+                    ? parseFloat(pkg.discountValue)
+                    : pkg.discountValue;
+              } else if (
+                pkg.specialDiscount !== null &&
+                pkg.specialDiscount !== undefined
+              ) {
+                discount =
+                  typeof pkg.specialDiscount === "string"
+                    ? parseFloat(pkg.specialDiscount)
+                    : pkg.specialDiscount;
+                if (pkg.specialDiscountType) {
+                  discountType = pkg.specialDiscountType as
+                    | "PERCENTAGE"
+                    | "FIXED";
+                }
+              }
+
               const discountedPrice =
-                pkg.discountType === "PERCENTAGE"
+                discountType === "PERCENTAGE"
                   ? Math.round(basePrice * (1 - discount / 100))
                   : basePrice - discount;
 
@@ -341,42 +390,46 @@ export default async function ExamPreparationDynamicPage({
                 >
                   {/* Row 1 — Image */}
                   <div className="relative h-48 overflow-hidden">
-                    <img
+                    <Image
                       src={
-                        pkg.slug.includes("group")
-                          ? "/images/hero/image-3.jpg"
-                          : pkg.slug.includes("semi-private")
-                            ? "/images/hero/image-6.png"
-                            : pkg.slug.includes("vip")
-                              ? "/images/hero/image-7.png"
-                              : pkg.slug.includes("online")
-                                ? "/images/hero/image-8.png"
-                                : pkg.slug.includes("hybrid")
-                                  ? "/images/hero/image-2.jpg"
+                        pkg.image
+                          ? pkg.image.startsWith("http")
+                            ? pkg.image
+                            : `https://vote.encoder-test-vpn.space/${pkg.image.startsWith("/") ? pkg.image.slice(1) : pkg.image}`
+                          : pkg.slug.includes("group")
+                            ? "/images/hero/image-3.jpg"
+                            : pkg.slug.includes("semi-private")
+                              ? "/images/hero/image-6.png"
+                              : pkg.slug.includes("vip")
+                                ? "/images/hero/image-7.png"
+                                : pkg.slug.includes("online")
+                                  ? "/images/hero/image-8.png"
                                   : "/images/hero/image-3.jpg"
                       }
                       alt={pkg.name}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                     {discount > 0 && (
                       <div className="absolute top-4 right-4">
                         <Badge className="py-1 px-3 font-bold shadow-lg">
                           SAVE {discount}
-                          {pkg.discountType === "PERCENTAGE" ? "%" : ""}
+                          {discountType === "PERCENTAGE" ? "%" : ""}
                         </Badge>
                       </div>
                     )}
                   </div>
 
                   {/* Row 2 — Title */}
-                  <div className="px-3 pt-4">
+                  <div className="px-3">
                     <BaseCardTitle className="text-xl leading-tight">
                       {pkg.name}
                     </BaseCardTitle>
                   </div>
 
                   {/* Row 3 — Price */}
-                  <div className="px-3 pt-2">
+                  <div className="px-3">
                     <div className="flex items-baseline gap-3">
                       <PriceDisplay
                         amount={discountedPrice}
@@ -394,14 +447,14 @@ export default async function ExamPreparationDynamicPage({
                   </div>
 
                   {/* Row 4 — Description */}
-                  <div className="px-3 pt-3">
+                  <div className="px-3">
                     <BaseCardDescription className="text-sm line-clamp-none text-slate-600 font-medium">
                       {pkg.description}
                     </BaseCardDescription>
                   </div>
 
                   {/* Row 5 — Best For */}
-                  <div className="px-3 pt-3 space-y-2">
+                  <div className="px-3 space-y-2">
                     <Badge variant={"destructive"}>Best For</Badge>
                     <BaseCardList
                       items={
@@ -416,7 +469,7 @@ export default async function ExamPreparationDynamicPage({
                   </div>
 
                   {/* Row 6 — Duration / Schedule */}
-                  <div className="px-3 pt-3">
+                  <div className="px-3">
                     <div className="grid grid-cols-2 gap-4">
                       <div>
                         <p className="text-[11px] text-slate-400">Duration</p>
@@ -434,7 +487,7 @@ export default async function ExamPreparationDynamicPage({
                   </div>
 
                   {/* Row 7 — CTA */}
-                  <div className="px-3 pt-3 pb-4">
+                  <div className="px-3 pb-4">
                     <Link
                       href={`/exam-preparation-courses/registration?examId=${slug}&courseId=${pkg.id}&price=${discountedPrice}&currency=AED`}
                       className={cn(
@@ -485,43 +538,29 @@ export default async function ExamPreparationDynamicPage({
                     : basePrice - discount;
 
                 return (
-                  <BaseCard
-                    key={workshop.id}
-                    className="border-slate-200 group relative overflow-hidden hover:border-primary/30 hover:shadow-2xl transition-all duration-500 ease-out p-6 flex flex-col justify-between h-full bg-white"
-                  >
+                  <BaseCard key={workshop.id}>
                     <div className="space-y-6">
-                      <div className="flex items-center justify-between">
-                        <BaseCardIcon className="size-12 rounded-xl text-lg font-bold">
+                      <div className="flex items-center gap-3">
+                        <BaseCardIcon className="size-9">
                           {workshop.duration}h
                         </BaseCardIcon>
-                        {discount > 0 && (
-                          <Badge className="py-1 px-3 font-bold shadow-lg">
-                            SAVE {discount}
-                            {workshop.discountType === "PERCENTAGE" ? "%" : ""}
-                          </Badge>
-                        )}
+
+                        <BaseCardTitle>{workshop.name}</BaseCardTitle>
                       </div>
 
-                      <div className="space-y-2">
-                        <BaseCardTitle className="text-xl leading-tight">
-                          {workshop.name}
-                        </BaseCardTitle>
-                        <p className="text-xs text-primary font-black uppercase tracking-widest">
-                          {workshop.subTitle} Specialization
-                        </p>
-                      </div>
+                      <div className="space-y-2"></div>
 
-                      <p className="text-sm text-slate-600 font-medium leading-relaxed line-clamp-4">
+                      <p className="text-xs text-slate-600 font-medium leading-relaxed line-clamp-4">
                         {workshop.description ||
                           `Comprehensive ${workshop.duration}-hour intensive workshop focusing on core strategies, mock practice, and live feedback for the ${workshop.subTitle} exam.`}
                       </p>
                     </div>
 
-                    <div className="pt-6 space-y-4">
+                    <div className=" my-3 space-y-4">
                       <div className="flex items-baseline gap-2">
                         <PriceDisplay
                           amount={discountedPrice}
-                          className="text-3xl font-black text-slate-900"
+                          className="text-xl font-black text-primary"
                         />
                         {discount > 0 && (
                           <span className="text-sm text-slate-400 line-through decoration-slate-300">
@@ -540,7 +579,7 @@ export default async function ExamPreparationDynamicPage({
                           "font-bold h-11 shadow-sm px-4 w-full flex items-center justify-center gap-2 group-hover:bg-primary group-hover:text-white transition-all duration-300",
                         )}
                       >
-                        <Calendar className="size-4" />
+                        {/* <Calendar className="size-4" /> */}
                         <span>Book</span>
                       </Link>
                     </div>

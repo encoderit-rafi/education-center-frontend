@@ -7,8 +7,6 @@ import ContactForm from "@/app/contact-us/_components/form-contact";
 import { MessageCircle } from "lucide-react";
 import { SectionHeader } from "@/components/ui/section-header";
 
-
-
 export default function ContactUs() {
   return (
     <main className="bg-white min-h-screen">
@@ -43,23 +41,23 @@ export default function ContactUs() {
       </section>
 
       {/* Contact Details & Form Section */}
-      <section className="px-6 md:px-8 max-w-screen-2xl mx-auto">
+      <section className="p-6 md:px-8 max-w-screen-2xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
           {/* Left Side: Contact Details */}
-          <div className="relative overflow-hidden rounded-[2.5rem] p-6 md:p-16 h-full flex flex-col justify-start gap-12">
+          <div className="relative h-full flex flex-col justify-start gap-8">
             {/* Header */}
 
             <div className="relative z-10 space-y-4 animate-fade-up">
               <Link href="tel:+97143333616" className="block">
-                <div className="group flex flex-row items-start gap-4 p-5 rounded-lg border border-slate-300 bg-white transition-all duration-300 hover:-translate-y-1 hover:border-primary hover:shadow-lg">
-                  <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-white group-hover:scale-110">
+                <div className="group flex flex-row items-center gap-4 p-4 rounded-xl border border-slate-200 bg-white transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-md">
+                  <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-slate-50 text-slate-600 transition-all duration-300 group-hover:bg-primary group-hover:text-white">
                     <Phone className="size-4" />
                   </span>
-                  <div className="space-y-1">
-                    <h3 className="text-lg font-black text-secondary group-hover:text-primary transition-colors tracking-tight">
+                  <div className="space-y-0.5">
+                    <h3 className="text-base font-semibold text-slate-800 group-hover:text-primary transition-colors tracking-tight">
                       +971 6 553 1250
                     </h3>
-                    <p className="text-sm font-normal text-secondary/90">
+                    <p className="text-xs font-normal text-slate-500">
                       Available Saturday – Thursday, 9:00 AM – 9:00 PM
                     </p>
                   </div>
@@ -67,15 +65,15 @@ export default function ContactUs() {
               </Link>
 
               <Link href="mailto:info@tepth.org" className="block">
-                <div className="group flex flex-row items-start gap-4 p-5 rounded-lg border border-slate-300 bg-white transition-all duration-300 hover:-translate-y-1 hover:border-primary hover:shadow-lg">
-                  <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-white group-hover:scale-110">
+                <div className="group flex flex-row items-center gap-4 p-4 rounded-xl border border-slate-200 bg-white transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-md">
+                  <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-slate-50 text-slate-600 transition-all duration-300 group-hover:bg-primary group-hover:text-white">
                     <Mail className="size-4" />
                   </span>
-                  <div className="space-y-1">
-                    <h3 className="text-lg font-black text-secondary group-hover:text-primary transition-colors tracking-tight">
+                  <div className="space-y-0.5">
+                    <h3 className="text-base font-semibold text-slate-800 group-hover:text-primary transition-colors tracking-tight">
                       info@tepth.org
                     </h3>
-                    <p className="text-sm font-normal text-secondary/90">
+                    <p className="text-xs font-normal text-slate-500">
                       We typically respond within 24 hours
                     </p>
                   </div>
@@ -83,33 +81,37 @@ export default function ContactUs() {
               </Link>
 
               <Link href="/about-us/how-to-find-us" className="block">
-                <div className="group flex flex-row items-start gap-4 p-5 rounded-lg border border-slate-300 bg-white transition-all duration-300 hover:-translate-y-1 hover:border-primary hover:shadow-lg">
-                  <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-white group-hover:scale-110">
+                <div className="group flex flex-row items-start gap-4 p-4 rounded-xl border border-slate-200 bg-white transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-md">
+                  <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-slate-50 text-slate-600 transition-all duration-300 group-hover:bg-primary group-hover:text-white mt-0.5">
                     <MapPin className="size-4" />
                   </span>
-                  <div className="space-y-1">
-                    <h3 className="text-lg font-black text-secondary group-hover:text-primary transition-colors tracking-tight">
-                      The Exam Preparation & Testing House L.L.C
-                      Suite 701, 7th Floor, Tabarak Tower, Corniche Road,
-                      Al Mamzar, Sharjah, United Arab Emirates.
+                  <div className="space-y-0.5">
+                    <h3 className="text-sm font-semibold text-slate-800 leading-relaxed group-hover:text-primary transition-colors tracking-tight">
+                      The Exam Preparation & Testing House L.L.C Suite 701, 7th
+                      Floor, Tabarak Tower, Corniche Road, Al Mamzar, Sharjah,
+                      UAE.
                     </h3>
-                    <p className="text-sm font-normal text-secondary/90">
+                    <p className="text-xs font-normal text-slate-500">
                       Close to Academic City — wheelchair accessible
                     </p>
                   </div>
                 </div>
               </Link>
 
-              <Link href="https://wa.me/97165531250" target="_blank" className="block">
-                <div className="group flex flex-row items-start gap-4 p-5 rounded-lg border border-slate-300 bg-white transition-all duration-300 hover:-translate-y-1 hover:border-primary hover:shadow-lg">
-                  <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-white group-hover:scale-110">
+              <Link
+                href="https://wa.me/97165531250"
+                target="_blank"
+                className="block"
+              >
+                <div className="group flex flex-row items-center gap-4 p-4 rounded-xl border border-slate-200 bg-white transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-md">
+                  <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-slate-50 text-slate-600 transition-all duration-300 group-hover:bg-primary group-hover:text-white">
                     <MessageCircle className="size-4" />
                   </span>
-                  <div className="space-y-1">
-                    <h3 className="text-lg font-black text-secondary group-hover:text-primary transition-colors tracking-tight">
+                  <div className="space-y-0.5">
+                    <h3 className="text-base font-semibold text-slate-800 group-hover:text-primary transition-colors tracking-tight">
                       Chat with us
                     </h3>
-                    <p className="text-sm font-normal text-secondary/90">
+                    <p className="text-xs font-normal text-slate-500">
                       Quick answers via WhatsApp
                     </p>
                   </div>
@@ -117,23 +119,33 @@ export default function ContactUs() {
               </Link>
 
               {/* Office Hours Card */}
-              <div className="bg-rose-50/30 border border-rose-100/50 h-fit rounded-xl flex flex-row gap-4 p-5 transition-all duration-300">
-                <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+              <div className="bg-slate-50/50 border border-slate-200/60 h-fit rounded-xl flex flex-row gap-4 p-5 transition-all duration-300">
+                <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-white border border-slate-100 text-slate-500 mt-0.5">
                   <Clock className="size-4" />
                 </span>
 
-                <div className="flex-1 space-y-4">
-                  <h3 className="text-lg font-black uppercase tracking-tight text-[#7d1c1c] pt-0.5">Office Hours</h3>
+                <div className="flex-1 space-y-3">
+                  <h3 className="text-xs font-bold uppercase tracking-widest text-slate-500 pt-0.5">
+                    Office Hours
+                  </h3>
 
                   <div className="space-y-2">
                     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-1 sm:gap-4">
-                      <span className="text-sm sm:text-base font-medium">Saturday – Thursday</span>
-                      <span className="text-sm sm:text-base text-slate-900 font-black">9:00 AM – 9:00 PM</span>
+                      <span className="text-sm font-medium text-slate-600">
+                        Saturday – Thursday
+                      </span>
+                      <span className="text-sm text-slate-800 font-semibold">
+                        9:00 AM – 9:00 PM
+                      </span>
                     </div>
-                    <div className="w-full h-px bg-rose-200/40" />
+                    <div className="w-full h-px bg-slate-200/40" />
                     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-1 sm:gap-4">
-                      <span className="text-sm sm:text-base font-medium">Friday</span>
-                      <span className="text-[#d12c2c] font-black uppercase text-sm sm:text-base">Closed</span>
+                      <span className="text-sm font-medium text-slate-600">
+                        Friday
+                      </span>
+                      <span className="text-rose-600 font-bold uppercase text-xs tracking-wider">
+                        Closed
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -144,14 +156,14 @@ export default function ContactUs() {
           {/* Right Side: Form */}
           <div className="relative h-full">
             <div className="absolute -inset-10 bg-primary/5 rounded-[4rem] blur-3xl opacity-30 pointer-events-none"></div>
-            <div className="relative bg-white rounded-[2.5rem] p-6 md:p-16 h-full flex flex-col">
+            <div className="relative bg-white rounded-[2.5rem] h-full flex flex-col">
               <SectionHeader
                 title={
                   <>
                     Send a Direct<span className="text-primary"> Message</span>
                   </>
                 }
-                description="We&apos;ll get back to you within 1 to 2 working days."
+                description="We'll get back to you within 1 to 2 working days."
                 className="mb-12"
                 badgeClassName="tracking-[0.1em]"
               />
@@ -163,4 +175,3 @@ export default function ContactUs() {
     </main>
   );
 }
-

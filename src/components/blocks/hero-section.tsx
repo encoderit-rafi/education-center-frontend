@@ -8,11 +8,11 @@ import { buttonVariants } from "../ui/button";
 import { cn } from "@/lib/utils";
 
 const HERO_IMAGES = [
-  "/images/hero/image-1.jpg",
-  "/images/hero/image-2.jpg",
-  "/images/hero/image-3.jpg",
-  "/images/hero/image-4.jpg",
-  "/images/hero/image-5.jpg",
+  "/images/about-us/Classroom.jpg",
+  "/images/about-us/Classroom_1.jpg",
+  "/images/about-us/Building_Lobby.jpg",
+  "/images/about-us/Computer_Room_2.jpg",
+  "/images/about-us/Computer_Room_4.jpg",
 ];
 
 export default function HeroSection() {
