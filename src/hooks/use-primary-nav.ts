@@ -76,7 +76,7 @@ export function usePrimaryNav() {
 
       return {
         ...item,
-        items: dynamicItems.length > 0 ? dynamicItems : item.items,
+        items: dynamicItems.length > 0 ? [...dynamicItems,{name:"Other Exams",href:"/exams/other-exams"}] : item.items,
       };
     }
 
