@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { PRIMARY_NAV, NAV_EXAM_PREPARATION_COURSES_DATA } from "@/data";
+import { PRIMARY_NAV } from "@/data";
 import api from "@/axios";
 import { AppNavigationItem } from "@/components/blocks/app-navigation";
 
@@ -82,31 +82,15 @@ export function usePrimaryNav() {
 
     // We target the Exam Preparation Courses dropdown
     if (item.name === "Exam Preparation Courses" && item.type === "dropdown") {
-      const dynamicItems = NAV_EXAM_PREPARATION_COURSES_DATA.map((exam) => {
-        // Find if there is a matching course in the database response to get its exact slug
-        const dbCourse = coursesResponse?.data?.data?.find((c) => {
-          const dbSlug = c.slug.toLowerCase();
-          const sId = exam.id.toLowerCase();
-          return (
-            dbSlug === sId ||
-            (sId === "pte-academic" && dbSlug === "pte") ||
-            (sId === "celpip-general" && dbSlug === "celpip") ||
-            (sId === "toefl" && dbSlug === "toefl") ||
-            dbSlug.includes(sId) ||
-            sId.includes(dbSlug)
-          );
-        });
-
-        const name = exam.name === "PTE Academic" ? "PTE" : exam.name;
-        return {
-          name,
-          href: `/exam-preparation-courses/${dbCourse ? dbCourse.slug : exam.id}`,
-        };
-      });
+      const dynamicItems =
+        coursesResponse?.data?.data?.map((course) => ({
+          name: course.name,
+          href: `/exam-preparation-courses/${course.slug}`,
+        })) || [];
 
       return {
         ...item,
-        items: dynamicItems,
+        items: dynamicItems.length > 0 ? dynamicItems : item.items,
       };
     }
     if (item.name === "Fees" && item.type === "dropdown") {
