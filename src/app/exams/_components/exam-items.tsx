@@ -10,8 +10,6 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 export default function ExamItems({ data }: { data: any }) {
-  console.log("🚀 ~ ExamItems ~ data:", data)
-  // return <div>Exam Items</div>
   return (
     <div className="min-h-screen bg-white">
       <div className="bg-slate-50">
@@ -38,7 +36,7 @@ export default function ExamItems({ data }: { data: any }) {
           {data.items?.map((item: any, index: number) => (
             <Link
               key={item.id}
-              href={item?.examFormRedirectUrl || `/exams/${item.id}`}
+              href={item?.link || `/exams/${item.id}`}
               className="group"
             >
               <BaseCard className="p-8 h-full flex flex-col transition-all duration-300 hover:shadow-2xl hover:border-primary/20">
@@ -49,7 +47,10 @@ export default function ExamItems({ data }: { data: any }) {
 
                 <div className="flex-1 space-y-3">
                   <BaseCardTitle>{item.name}</BaseCardTitle>
-               
+                  {/* <BaseCardDescription>
+                    Professional certification and international recognition for
+                    your future career and migration goals.
+                  </BaseCardDescription> */}
                 </div>
               </BaseCard>
             </Link>

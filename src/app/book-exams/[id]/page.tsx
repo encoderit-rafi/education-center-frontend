@@ -14,72 +14,27 @@ import FormSELTB2Registration from "@/components/blocks/forms/selt/ukvi-speaking
 import FormSELTC1Registration from "@/components/blocks/forms/selt/ukvi-speaking-and-listening-at-level-c1/form-selt-c1-registration";
 import FormSELTC2Registration from "@/components/blocks/forms/selt/ukvi-speaking-and-listening-at-level-c2/form-selt-c2-registration";
 import FormTOEFLIBTRegistration from "@/components/blocks/forms/toefl/toefl-ibt-exam-registration/form-toefl-ibt-registration";
-import { EXAM_IDS_DATA } from "@/data";
+import { EXAM_DETAILE_DATA, EXAM_IDS_DATA } from "@/data";
 import { notFound } from "next/navigation";
 import BookExamItems from "../_components/book-exam-items";
-
-import api from "@/axios";
 
 export default async function BookExamsId({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const { id: slug } = await params;
-  console.log("👉 ~ BookExamsId ~ id/slug:", slug);
+  const { id } = await params;
+  console.log("👉 ~ ExamDetailPage ~ id:", id);
 
-  let exam: any = null;
-  let childExams: any[] = [];
-
-  try {
-    // 1. Try to fetch the exam by slug directly
-    const response = await api.get(`/exams/${slug}`);
-    if (response.data?.success && response.data?.data) {
-      exam = response.data.data;
-    }
-  } catch (error) {
-    console.error("Error fetching exam in BookExamsId:", error);
-  }
-
-  // 2. Fetch all exams to resolve UUID or find children
-  try {
-    const listResponse = await api.get("/exams?limit=100");
-    const allExams = listResponse.data?.data?.data || [];
-
-    if (!exam) {
-      exam = allExams.find(
-        (e: any) => e.id === slug || e.slug === slug
-      );
-    }
-
-    if (exam) {
-      childExams = allExams.filter((e: any) => e.parentId === exam.id);
-    }
-  } catch (error) {
-    console.error("Error fetching all exams list in BookExamsId:", error);
-  }
+  const exam = EXAM_DETAILE_DATA.find((item) => item.id === id);
 
   if (!exam) {
     notFound();
   }
-
-  // 3. Determine if it is a parent group (has child items or is labeled group/item) or a detail page
-  const hasGroupType = exam.examType?.some(
-    (et: any) => et.name === "group" || et.name === "item"
-  );
-  const isGroup = hasGroupType && childExams.length > 0;
-
-  if (isGroup) {
-    const examWithItems = {
-      ...exam,
-      type: "items",
-      items: childExams,
-    };
-    return <BookExamItems data={examWithItems} />;
+  if (exam?.type == "items") {
+    return <BookExamItems data={exam} />;
   }
-
-  // Otherwise, it is a specific exam. Render the appropriate form based on slug or database UUID
-  switch (exam.slug || exam.id) {
+  switch (id) {
     // case EXAM_IDS_DATA.ielts_ukvi_academic.id:
     //   return <FormIELTSUKVIAcademicRegistration />;
     // case EXAM_IDS_DATA.ielts_ukvi_general.id:
@@ -90,9 +45,9 @@ export default async function BookExamsId({
     //   return <FormIELTSLifeSkillsA2Registration />;
     // case EXAM_IDS_DATA.ielts_life_skills_b1.id:
     //   return <FormIELTSLifeSkillsB1Registration />;
-    case "ielts-academic":
+    case EXAM_IDS_DATA.ielts_academic.id:
       return <FormIELTSAcademicRegistration />;
-    case "ielts-general":
+    case EXAM_IDS_DATA.ielts_general.id:
       return (
         <div>
           <h2 className="text-2xl font-bold my-8 text-center">
@@ -101,13 +56,13 @@ export default async function BookExamsId({
           <FormIELTSGeneralRegistration />
         </div>
       );
-    case "toefl-ibt":
+    case EXAM_IDS_DATA.toefl.id:
       return (
         <div>
           <FormTOEFLIBTRegistration />
         </div>
       );
-    case "celpip-general":
+    case EXAM_IDS_DATA.celpip_general.id:
       return (
         <div>
           <h2 className="text-2xl font-bold my-8 text-center">
@@ -115,7 +70,7 @@ export default async function BookExamsId({
           </h2>
         </div>
       );
-    case "celpip-general-ls":
+    case EXAM_IDS_DATA.celpip_general_ls.id:
       return (
         <div>
           <h2 className="text-2xl font-bold my-8 text-center">
@@ -131,34 +86,35 @@ export default async function BookExamsId({
           </h2>
         </div>
       );
-    case "ukvi-speaking-and-listening-at-level-a1":
+    case EXAM_IDS_DATA.selt_a1.id:
       return <FormSELTA1Registration />;
-    case "ukvi-speaking-and-listening-at-level-a2":
+    case EXAM_IDS_DATA.selt_a2.id:
       return <FormSELTA2Registration />;
-    case "ukvi-speaking-and-listening-at-level-b1":
+    case EXAM_IDS_DATA.selt_b1.id:
       return <FormSELTB1Registration />;
-    case "ukvi-speaking-and-listening-at-level-b1-r-w":
+    case EXAM_IDS_DATA.selt_b1_r_w.id:
       return <FormSELTB1RWRegistration />;
-    case "ukvi-speaking-and-listening-at-level-b2":
+    case EXAM_IDS_DATA.selt_b2.id:
       return <FormSELTB2Registration />;
-    case "ukvi-speaking-and-listening-at-level-c1":
+    case EXAM_IDS_DATA.selt_c1.id:
       return <FormSELTC1Registration />;
-    case "ukvi-speaking-and-listening-at-level-c2":
+    case EXAM_IDS_DATA.selt_c2.id:
       return <FormSELTC2Registration />;
- 
-    case "pte-academic":
+    case EXAM_IDS_DATA.selt.id:
+      return <FormSELTA1Registration initialId={id} />;
+    case EXAM_IDS_DATA.pte_academic.id:
       return <FormPTEAcademicRegistration />;
-    case "pte-core":
+    case EXAM_IDS_DATA.pte_core.id:
       return <FormPTECoreRegistration />;
 
-    case "pte-home-a1":
+    case EXAM_IDS_DATA.pte_home_a1.id:
       return <FormPTEHomeA1Registration />;
-    case "pte-home-a2":
+    case EXAM_IDS_DATA.pte_home_a2.id:
       return <FormPTEHomeA2Registration />;
-    case "pte-home-b1":
+    case EXAM_IDS_DATA.pte_home_b1.id:
       return <FormPTEHomeB1Registration />;
-    case "pte-ukvi":
-    case "pte-academic-ukvi":
+    case EXAM_IDS_DATA.pte_ukvi.id:
+    case EXAM_IDS_DATA.pte_academic_ukvi.id:
       return <FormPTEHomeUkviRegistration />;
 
     default:
