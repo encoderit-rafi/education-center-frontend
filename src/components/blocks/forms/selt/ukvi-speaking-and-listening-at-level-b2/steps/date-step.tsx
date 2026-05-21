@@ -49,17 +49,21 @@ export function DateStep({
                 mode="single"
                 selected={value}
                 onSelect={(date) => date && onChange(date)}
+                modifiers={{
+                  available: (date) => [1, 2, 3].includes(date.getDay()),
+                }}
+                modifiersClassNames={{
+                  available:
+                    "font-semibold text-primary underline underline-offset-4 decoration-primary",
+                }}
                 disabled={(date) => {
-                  // Allow only Monday (1), Tuesday (2), Wednesday (3)
                   const day = date.getDay();
                   const isAllowed = day >= 1 && day <= 3;
-
-                  // Also deactivate past dates
-                  const isPast = date < new Date();
-
+                  const isPast =
+                    date < new Date(new Date().setHours(0, 0, 0, 0));
                   return !isAllowed || isPast;
                 }}
-                className="rounded-2xl border border-slate-100 shadow-sm p-4 bg-white [--calendar-accent:theme(colors.primary.DEFAULT)]"
+                className="w-full max-w-xl mx-auto border rounded-md p-8 bg-white shadow-xl"
               />
               <FieldError errors={[error]} className="mt-4 text-center" />
             </FieldContent>
@@ -79,22 +83,32 @@ export function DateStep({
                     { id: "1:30 PM", label: "Afternoon Session", time: "01:30 PM" },
                     { id: "5:30 PM", label: "Evening Session", time: "05:30 PM" },
                   ].map((slot) => (
-                    <Label
-                      key={slot.id}
-                      htmlFor={slot.id}
-                      className={`flex items-center justify-between p-4 rounded-xl border-2 transition-all cursor-pointer ${timeSlot === slot.id
-                        ? "border-primary bg-primary/5 ring-1 ring-primary"
-                        : "border-slate-100 bg-white hover:border-slate-200"
-                        }`}
-                    >
-                      <div className="flex items-center gap-3">
-                        <RadioGroupItem value={slot.id} id={slot.id} />
-                        <div>
-                          <p className="font-bold text-slate-900">{slot.label}</p>
-                          <p className="text-xs text-slate-500 font-medium">Starts at {slot.time}</p>
+                    <div key={slot.id} className="space-y-3">
+                      <Label
+                        htmlFor={slot.id}
+                        className={`flex items-center justify-between p-4 rounded-xl border-2 transition-all cursor-pointer ${timeSlot === slot.id
+                          ? "border-primary bg-primary/5 ring-1 ring-primary"
+                          : "border-slate-100 bg-white hover:border-slate-200"
+                          }`}
+                      >
+                        <div className="flex items-center gap-3">
+                          <RadioGroupItem value={slot.id} id={slot.id} />
+                          <div>
+                            <p className="font-bold text-slate-900">{slot.label}</p>
+                            <p className="text-xs text-slate-500 font-medium">Starts at {slot.time}</p>
+                          </div>
                         </div>
-                      </div>
-                    </Label>
+                      </Label>
+                      {timeSlot === slot.id && (
+                        <div className="p-3 rounded-xl bg-slate-50 border border-slate-100 animate-in slide-in-from-top-2 duration-300">
+                          <p className="text-sm font-medium leading-relaxed">
+                            {slot.id.includes("AM")
+                              ? "The Speaking Test usually takes place in the afternoon. This will be confirmed by the British Council."
+                              : "The Speaking Test usually takes place in the morning. This will be confirmed by the British Council."}
+                          </p>
+                        </div>
+                      )}
+                    </div>
                   ))}
                 </RadioGroup>
                 <FieldError errors={[timeSlotError]} className="mt-4" />

@@ -62,6 +62,17 @@ export function DateStep({
                   onChange(date);
                   onTimeSlotChange(""); // Reset time slot on date change
                 }}
+                modifiers={{
+                  available: (date) => {
+                    const day = date.getDay();
+                    const slots = B1_SCHEDULE[day] || [];
+                    return slots.length > 0;
+                  },
+                }}
+                modifiersClassNames={{
+                  available:
+                    "font-semibold text-primary underline underline-offset-4 decoration-primary",
+                }}
                 disabled={(date) => {
                   const day = date.getDay();
                   const slots = B1_SCHEDULE[day] || [];
@@ -69,7 +80,7 @@ export function DateStep({
                   const isPast = date < new Date(new Date().setHours(0, 0, 0, 0));
                   return isClosed || isPast;
                 }}
-                className="rounded-2xl border border-slate-100 shadow-sm p-4 bg-white [--calendar-accent:theme(colors.primary.DEFAULT)]"
+                className="w-full max-w-xl mx-auto border rounded-md p-8 bg-white shadow-xl"
               />
               <FieldError errors={[error]} className="mt-4 text-center" />
             </FieldContent>
@@ -86,26 +97,36 @@ export function DateStep({
                     className="grid gap-4"
                   >
                     {availableSlots.map((slot) => (
-                      <Label
-                        key={slot}
-                        htmlFor={slot}
-                        className={cn(
-                          "flex items-center justify-between p-4 rounded-xl border-2 transition-all cursor-pointer",
-                          timeSlot === slot
-                            ? "border-primary bg-primary/5 ring-1 ring-primary"
-                            : "border-slate-100 bg-white hover:border-slate-200"
-                        )}
-                      >
-                        <div className="flex items-center gap-3">
-                          <RadioGroupItem value={slot} id={slot} />
-                          <div>
-                            <p className="font-bold text-slate-900">
-                              {getSessionLabel(slot)}
-                            </p>
-                            <p className="text-xs text-slate-500 font-medium">Starts at {slot}</p>
+                      <div key={slot} className="space-y-3">
+                        <Label
+                          htmlFor={slot}
+                          className={cn(
+                            "flex items-center justify-between p-4 rounded-xl border-2 transition-all cursor-pointer",
+                            timeSlot === slot
+                              ? "border-primary bg-primary/5 ring-1 ring-primary"
+                              : "border-slate-100 bg-white hover:border-slate-200"
+                          )}
+                        >
+                          <div className="flex items-center gap-3">
+                            <RadioGroupItem value={slot} id={slot} />
+                            <div>
+                              <p className="font-bold text-slate-900">
+                                {getSessionLabel(slot)}
+                              </p>
+                              <p className="text-xs text-slate-500 font-medium">Starts at {slot}</p>
+                            </div>
                           </div>
-                        </div>
-                      </Label>
+                        </Label>
+                        {timeSlot === slot && (
+                          <div className="p-3 rounded-xl bg-slate-50 border border-slate-100 animate-in slide-in-from-top-2 duration-300">
+                            <p className="text-sm font-medium leading-relaxed">
+                              {slot.includes("AM")
+                                ? "The Speaking Test usually takes place in the afternoon. This will be confirmed by the British Council."
+                                : "The Speaking Test usually takes place in the morning. This will be confirmed by the British Council."}
+                            </p>
+                          </div>
+                        )}
+                      </div>
                     ))}
                   </RadioGroup>
                 ) : (

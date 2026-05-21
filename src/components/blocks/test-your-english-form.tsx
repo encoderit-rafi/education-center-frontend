@@ -928,6 +928,8 @@ export default function TestYourEnglishForm() {
             >
               Start
             </Button>
+            <p>Please allocate a few minutes to complete our online English Level Test. We take your English Language
+              assessment seriously.</p>
           </div>
         )}
 

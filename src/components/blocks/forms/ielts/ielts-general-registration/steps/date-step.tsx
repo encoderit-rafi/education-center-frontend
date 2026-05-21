@@ -49,16 +49,19 @@ export function DateStep({
                 mode="single"
                 selected={value}
                 onSelect={(date) => date && onChange(date)}
-                disabled={(date) => {
-                  // Deactivate only Sunday (0)
-                  const isSunday = date.getDay() === 0;
-
-                  // Also deactivate past dates
-                  const isPast = date < new Date();
-
-                  return isSunday || isPast;
+                modifiers={{
+                  available: (date) => date.getDay() !== 0,
                 }}
-                className="rounded-2xl border border-slate-100 shadow-sm p-4 bg-white [--calendar-accent:theme(colors.primary.DEFAULT)]"
+                modifiersClassNames={{
+                  available:
+                    "font-semibold text-primary underline underline-offset-4 decoration-primary",
+                }}
+                disabled={(date) => {
+                  const isPast =
+                    date < new Date(new Date().setHours(0, 0, 0, 0));
+                  return isPast || date.getDay() === 0;
+                }}
+                className="w-full max-w-xl mx-auto border rounded-md p-8 bg-white shadow-xl"
               />
               <FieldError errors={[error]} className="mt-4 text-center" />
             </FieldContent>

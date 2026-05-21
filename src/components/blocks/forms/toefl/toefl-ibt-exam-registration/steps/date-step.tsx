@@ -49,18 +49,21 @@ export function DateStep({
                                 mode="single"
                                 selected={value}
                                 onSelect={(date) => date && onChange(date)}
+                                modifiers={{
+                                    available: (date) => date.getDay() === 3,
+                                }}
+                                modifiersClassNames={{
+                                    available:
+                                        "font-semibold text-primary underline underline-offset-4 decoration-primary",
+                                }}
                                 disabled={(date) => {
-                                    // Enable only Wednesdays (3)
                                     const isWednesday = date.getDay() === 3;
-
-                                    // Also deactivate past dates
                                     const today = new Date();
                                     today.setHours(0, 0, 0, 0);
                                     const isPast = date < today;
-
                                     return !isWednesday || isPast;
                                 }}
-                                className="rounded-2xl border border-slate-100 shadow-sm p-4 bg-white"
+                                className="w-full max-w-xl mx-auto border rounded-md p-8 bg-white shadow-xl"
                             />
                             <FieldError errors={[error]} className="mt-4 text-center" />
                         </FieldContent>
@@ -79,22 +82,32 @@ export function DateStep({
                                         { id: "AM", label: "Morning Session", time: "AM" },
                                         { id: "PM", label: "Afternoon Session", time: "PM" },
                                     ].map((slot) => (
-                                        <Label
-                                            key={slot.id}
-                                            htmlFor={slot.id}
-                                            className={`flex items-center justify-between p-4 rounded-xl border-2 transition-all cursor-pointer ${timeSlot === slot.id
-                                                ? "border-[#A11D1D] bg-[#A11D1D]/5 ring-1 ring-[#A11D1D]"
-                                                : "border-slate-100 bg-white hover:border-slate-200"
-                                                }`}
-                                        >
-                                            <div className="flex items-center gap-3">
-                                                <RadioGroupItem value={slot.id} id={slot.id} />
-                                                <div>
-                                                    <p className="font-bold text-slate-900">{slot.label}</p>
-                                                    <p className="text-xs text-slate-500 font-medium">{slot.time} Session</p>
+                                        <div key={slot.id} className="space-y-3">
+                                            <Label
+                                                htmlFor={slot.id}
+                                                className={`flex items-center justify-between p-4 rounded-xl border-2 transition-all cursor-pointer ${timeSlot === slot.id
+                                                    ? "border-[#A11D1D] bg-[#A11D1D]/5 ring-1 ring-[#A11D1D]"
+                                                    : "border-slate-100 bg-white hover:border-slate-200"
+                                                    }`}
+                                            >
+                                                <div className="flex items-center gap-3">
+                                                    <RadioGroupItem value={slot.id} id={slot.id} />
+                                                    <div>
+                                                        <p className="font-bold text-slate-900">{slot.label}</p>
+                                                        <p className="text-xs text-slate-500 font-medium">{slot.time} Session</p>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </Label>
+                                            </Label>
+                                            {timeSlot === slot.id && (
+                                                <div className="p-3 rounded-xl bg-slate-50 border border-slate-100 animate-in slide-in-from-top-2 duration-300">
+                                                    <p className="text-sm font-medium leading-relaxed">
+                                                        {slot.id === "AM"
+                                                            ? "The Speaking Test usually takes place in the afternoon. This will be confirmed by the British Council."
+                                                            : "The Speaking Test usually takes place in the morning. This will be confirmed by the British Council."}
+                                                    </p>
+                                                </div>
+                                            )}
+                                        </div>
                                     ))}
                                 </RadioGroup>
                                 <FieldError errors={[timeSlotError]} className="mt-4" />
