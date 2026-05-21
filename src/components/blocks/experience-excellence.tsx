@@ -24,9 +24,9 @@ export default function ExperienceExcellence() {
         </div>
         {/* Right Media Block */}
         <div className="flex-1 w-full space-y-6">
-          <div className="relative rounded-3xl overflow-hidden shadow-2xl aspect-video border-2 border-primary/50">
+          <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
             <img
-              src="/images/about-us/about-us-3.jpg"
+              src="/images/about-us/Classroom.jpg"
               alt="TEPTH Testing Center"
               className="w-full h-full object-cover"
             />
