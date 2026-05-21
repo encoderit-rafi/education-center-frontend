@@ -205,7 +205,7 @@ export default async function ExamPreparationDynamicPage({
       </section>
 
       {/* ── Gorgeous Discount Banner ── */}
-      <section className="relative overflow-hidden max-w-6xl mx-auto bg-primary py-14 md:py-20">
+      <section className="relative overflow-hidden  mx-auto bg-primary py-14 md:py-20">
         {/* Decorative blobs */}
         <div className="pointer-events-none absolute -top-20 -left-20 h-72 w-72 rounded-full bg-white/5 blur-3xl" />
         <div className="pointer-events-none absolute -bottom-20 -right-20 h-96 w-96 rounded-full bg-white/5 blur-3xl" />
