@@ -74,7 +74,6 @@ interface CourseDetail {
 interface CoursePackage {
   id: string;
   name: string;
-  image: string;
   slug: string;
   description: string;
   price: string;
@@ -85,6 +84,7 @@ interface CoursePackage {
   duration: string;
   scheduleInfo: string;
   bestFor: string[];
+  image?: string | null;
 }
 
 interface ApiResponse<T> {
@@ -154,8 +154,9 @@ export default async function FeesDynamicPage({
             {data.name} <span className="text-primary italic">Fees</span>
           </h1>
           <p className="text-slate-600 text-lg font-medium leading-relaxed max-w-2xl mx-auto">
-            Here is the complete pricing structure for the {data.name} packages and skills workshops. 
-            Choose the track that fits your goals and begin your journey.
+            Here is the complete pricing structure for the {data.name} packages
+            and skills workshops. Choose the track that fits your goals and
+            begin your journey.
           </p>
         </div>
       </section>
@@ -169,7 +170,8 @@ export default async function FeesDynamicPage({
                 Course Packages <span className="text-primary">Pricing</span>
               </h2>
               <p className="text-slate-600 text-base font-medium">
-                Comprehensive training courses built for maximum preparation quality and structured success.
+                Comprehensive training courses built for maximum preparation
+                quality and structured success.
               </p>
             </div>
 
@@ -177,14 +179,29 @@ export default async function FeesDynamicPage({
               {packages.map((pkg, index) => {
                 const basePrice = parseFloat(pkg.price) || 0;
                 let discount = 0;
-                let discountType: "PERCENTAGE" | "FIXED" | null = pkg.discountType;
+                let discountType: "PERCENTAGE" | "FIXED" | null =
+                  pkg.discountType;
 
-                if (pkg.discountValue !== null && pkg.discountValue !== undefined) {
-                  discount = typeof pkg.discountValue === "string" ? parseFloat(pkg.discountValue) : pkg.discountValue;
-                } else if (pkg.specialDiscount !== null && pkg.specialDiscount !== undefined) {
-                  discount = typeof pkg.specialDiscount === "string" ? parseFloat(pkg.specialDiscount) : pkg.specialDiscount;
+                if (
+                  pkg.discountValue !== null &&
+                  pkg.discountValue !== undefined
+                ) {
+                  discount =
+                    typeof pkg.discountValue === "string"
+                      ? parseFloat(pkg.discountValue)
+                      : pkg.discountValue;
+                } else if (
+                  pkg.specialDiscount !== null &&
+                  pkg.specialDiscount !== undefined
+                ) {
+                  discount =
+                    typeof pkg.specialDiscount === "string"
+                      ? parseFloat(pkg.specialDiscount)
+                      : pkg.specialDiscount;
                   if (pkg.specialDiscountType) {
-                    discountType = pkg.specialDiscountType as "PERCENTAGE" | "FIXED";
+                    discountType = pkg.specialDiscountType as
+                      | "PERCENTAGE"
+                      | "FIXED";
                   }
                 }
 
@@ -200,27 +217,27 @@ export default async function FeesDynamicPage({
                   >
                     {/* Row 1 — Image & Save Badge */}
                     <div className="relative h-48 overflow-hidden">
-                        <Image
-                                          src={
-                                            pkg.image
-                                              ? pkg.image.startsWith("http")
-                                                ? pkg.image
-                                                : `https://vote.encoder-test-vpn.space/${pkg.image.startsWith("/") ? pkg.image.slice(1) : pkg.image}`
-                                              : pkg.slug.includes("group")
-                                                ? "/images/hero/image-3.jpg"
-                                                : pkg.slug.includes("semi-private")
-                                                  ? "/images/hero/image-6.png"
-                                                  : pkg.slug.includes("vip")
-                                                    ? "/images/hero/image-7.png"
-                                                    : pkg.slug.includes("online")
-                                                      ? "/images/hero/image-8.png"
-                                                      : "/images/hero/image-3.jpg"
-                                          }
-                                          alt={pkg.name}
-                                          fill
-                                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                          className="object-cover transition-transform duration-500 group-hover:scale-110"
-                                        />
+                      <Image
+                        src={
+                          pkg.image
+                            ? pkg.image.startsWith("http")
+                              ? pkg.image
+                              : `https://vote.encoder-test-vpn.space/${pkg.image.startsWith("/") ? pkg.image.slice(1) : pkg.image}`
+                            : pkg.slug.includes("group")
+                              ? "/images/hero/image-3.jpg"
+                              : pkg.slug.includes("semi-private")
+                                ? "/images/hero/image-6.png"
+                                : pkg.slug.includes("vip")
+                                  ? "/images/hero/image-7.png"
+                                  : pkg.slug.includes("online")
+                                    ? "/images/hero/image-8.png"
+                                    : "/images/hero/image-3.jpg"
+                        }
+                        alt={pkg.name}
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        className="object-cover transition-transform duration-500 group-hover:scale-110 "
+                      />
                       {discount > 0 && (
                         <div className="absolute top-4 right-4">
                           <Badge className="py-1 px-3 font-bold shadow-lg bg-primary text-white">
@@ -265,7 +282,12 @@ export default async function FeesDynamicPage({
 
                     {/* Row 5 — Best For */}
                     <div className="px-5 space-y-2">
-                      <Badge variant={"destructive"} className="text-[10px] font-bold tracking-wider uppercase">Best For</Badge>
+                      <Badge
+                        variant={"destructive"}
+                        className="text-[10px] font-bold tracking-wider uppercase"
+                      >
+                        Best For
+                      </Badge>
                       <BaseCardList
                         items={
                           Array.isArray(pkg.bestFor)
@@ -282,13 +304,17 @@ export default async function FeesDynamicPage({
                     <div className="px-5">
                       <div className="grid grid-cols-2 gap-4 border-t border-slate-100 pt-3">
                         <div>
-                          <p className="text-[10px] uppercase font-bold text-slate-400">Duration</p>
+                          <p className="text-[10px] uppercase font-bold text-slate-400">
+                            Duration
+                          </p>
                           <p className="text-xs font-semibold text-slate-900">
                             {pkg.duration} Hours
                           </p>
                         </div>
                         <div>
-                          <p className="text-[10px] uppercase font-bold text-slate-400">Schedule</p>
+                          <p className="text-[10px] uppercase font-bold text-slate-400">
+                            Schedule
+                          </p>
                           <p className="text-xs font-semibold text-slate-900">
                             {pkg.scheduleInfo}
                           </p>
@@ -302,7 +328,7 @@ export default async function FeesDynamicPage({
                         href={`/exam-preparation-courses/registration?examId=${slug}&courseId=${pkg.id}&price=${discountedPrice}&currency=AED`}
                         className={cn(
                           buttonVariants(),
-                          "font-bold h-10 shadow-sm px-4 w-full flex items-center justify-center gap-2"
+                          "font-bold h-10 shadow-sm px-4 w-full flex items-center justify-center gap-2",
                         )}
                       >
                         <Calendar className="size-4" />
@@ -329,10 +355,12 @@ export default async function FeesDynamicPage({
                 <Sparkles className="size-3" /> Targeted Skills Boost
               </div>
               <h2 className="text-3xl font-black text-slate-900 tracking-tight lg:text-4xl">
-                Accelerated <span className="text-primary">Skills Workshops</span>
+                Accelerated{" "}
+                <span className="text-primary">Skills Workshops</span>
               </h2>
               <p className="text-slate-600 text-base font-medium max-w-2xl mx-auto">
-                Need a targeted boost? High-intensity, section-focused workshops designed to maximize scores in specific areas.
+                Need a targeted boost? High-intensity, section-focused workshops
+                designed to maximize scores in specific areas.
               </p>
             </div>
 
@@ -346,13 +374,18 @@ export default async function FeesDynamicPage({
                     : basePrice - discount;
 
                 return (
-                  <BaseCard key={workshop.id} className="flex flex-col justify-between h-full bg-white border border-slate-200">
+                  <BaseCard
+                    key={workshop.id}
+                    className="flex flex-col justify-between h-full bg-white border border-slate-200"
+                  >
                     <div className="space-y-4">
                       <div className="flex items-center gap-3">
                         <BaseCardIcon className="size-9 bg-primary/10 text-primary text-xs">
                           {workshop.duration}h
                         </BaseCardIcon>
-                        <BaseCardTitle className="text-lg leading-tight font-black">{workshop.name}</BaseCardTitle>
+                        <BaseCardTitle className="text-lg leading-tight font-black">
+                          {workshop.name}
+                        </BaseCardTitle>
                       </div>
 
                       <p className="text-xs text-slate-600 font-medium leading-relaxed line-clamp-4 pt-2">
@@ -381,7 +414,7 @@ export default async function FeesDynamicPage({
                         href={`/workshop-registration?examId=${mappedExamId}&courseId=${workshop.id}&price=${discountedPrice}&currency=AED`}
                         className={cn(
                           buttonVariants(),
-                          "font-bold h-11 shadow-sm px-4 w-full flex items-center justify-center gap-2 transition-all duration-300"
+                          "font-bold h-11 shadow-sm px-4 w-full flex items-center justify-center gap-2 transition-all duration-300",
                         )}
                       >
                         <Calendar className="size-4" />

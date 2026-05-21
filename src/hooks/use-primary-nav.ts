@@ -11,6 +11,10 @@ interface ApiResponse {
       id: string;
       name: string;
       slug: string;
+      examType?: {
+        id: string;
+        name: string;
+      }[];
       [key: string]: unknown;
     }[];
     total: number;
@@ -44,8 +48,54 @@ export function usePrimaryNav() {
     },
   });
 
+  const {
+    data: examsResponse,
+    isLoading: isLoadingExams,
+    isError: isErrorExams,
+  } = useQuery<ApiResponse>({
+    queryKey: ["exams", { limit: 100 }],
+    queryFn: async () => {
+      const response = await api.get("/exams?limit=100");
+      return response.data;
+    },
+  });
+
   // Construct dynamic navigation
   const primaryNav: AppNavigationItem[] = PRIMARY_NAV.map((item) => {
+    // We target the Exams dropdown
+    if (item.name === "Exams" && item.type === "dropdown") {
+      const dynamicItems =
+        examsResponse?.data?.data
+          ?.filter((exam) =>
+            exam.examType?.some((et) => et.name === "group")
+          )
+          ?.map((exam) => ({
+            name: exam.name,
+            href: `/exams/${exam.slug}`,
+          })) || [];
+
+      return {
+        ...item,
+        items: dynamicItems.length > 0 ? [...dynamicItems,{name:"Other Exams",href:"/exams/other-exams"}] : item.items,
+      };
+    }
+    if (item.name === "Book Exams" && item.type === "dropdown") {
+      const dynamicItems =
+        examsResponse?.data?.data
+          ?.filter((exam) =>
+            exam.examType?.some((et) => et.name === "group")
+          )
+          ?.map((exam) => ({
+            name: exam.name,
+            href: `/book-exams/${exam.slug}`,
+          })) || [];
+
+      return {
+        ...item,
+        items: dynamicItems.length > 0 ?  dynamicItems : item.items,
+      };
+    }
+
     // We target the Exam Preparation Courses dropdown
     if (item.name === "Exam Preparation Courses" && item.type === "dropdown") {
       const dynamicItems =
@@ -89,8 +139,8 @@ export function usePrimaryNav() {
     return item;
   });
 
-  const isLoading = isLoadingCourses || isLoadingMockTests;
-  const isError = isErrorCourses || isErrorMockTests;
+  const isLoading = isLoadingCourses || isLoadingMockTests || isLoadingExams;
+  const isError = isErrorCourses || isErrorMockTests || isErrorExams;
 
   return { primaryNav, isLoading, isError };
 }

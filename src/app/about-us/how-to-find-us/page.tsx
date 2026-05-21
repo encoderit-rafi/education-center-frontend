@@ -127,7 +127,7 @@ export default function HowToFindUs() {
             <div className="absolute -inset-4 bg-primary/5 rounded-xl blur-3xl opacity-50 transition-opacity group-hover:opacity-100"></div>
             <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
               <Image
-                src="/images/about-us/Exterior_Building.jpg"
+                src="/images/about-us/about-us-10.jpg"
                 alt="Our Center"
                 fill
                 className="object-cover"
