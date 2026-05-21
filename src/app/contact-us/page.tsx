@@ -163,7 +163,6 @@ export default function ContactUs() {
                     Send a Direct<span className="text-primary"> Message</span>
                   </>
                 }
-                description="We'll get back to you within 1 to 2 working days."
                 className="mb-12"
                 badgeClassName="tracking-[0.1em]"
               />

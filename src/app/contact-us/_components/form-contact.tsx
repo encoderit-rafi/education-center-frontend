@@ -261,8 +261,7 @@ export default function ContactForm() {
         <p className="flex items-center gap-1 text-sm">
           <ShieldCheck className="w-4 h-4 text-primary" />
           <span className="font-medium">
-            We&apos;ll get back to you within 1 to 2 working days. Your
-            information is kept confidential.
+            We&apos;ll get back to you within 1 to 2 working days.
           </span>
         </p>
       </div>
