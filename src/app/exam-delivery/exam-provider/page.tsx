@@ -18,7 +18,7 @@ import {
   Lock,
   ChevronRight
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 
 export default function ExamProviderPage() {
   return (
@@ -85,9 +85,9 @@ export default function ExamProviderPage() {
         </div>
       </section>
 
-      {/* Value Pillars Section - Compact Bento Grid */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="mb-12 text-center max-w-3xl mx-auto">
+      {/* Value Pillars Section - Simple List in One Column */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+        <div className="mb-12 text-center">
           <span className="text-primary text-[11px] font-bold uppercase tracking-[0.25em] mb-2 inline-block">
             OUR CAPABILITIES
           </span>
@@ -97,137 +97,155 @@ export default function ExamProviderPage() {
           <div className="w-12 h-0.5 bg-primary rounded-full mx-auto mt-3"></div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          
-          {/* 1. Test Security - Large Card (Span 2) but compact */}
-          <div className="md:col-span-2 bg-white p-6 md:p-8 rounded-xl shadow-xs border border-slate-100 hover:shadow-sm hover:border-maroon-100 hover:-translate-y-0.5 transition-all duration-300 flex flex-col justify-between group">
-            <div>
-              <div className="w-10 h-10 bg-maroon-50 rounded-lg flex items-center justify-center text-maroon-700 mb-4 group-hover:scale-105 transition-transform duration-300">
-                <Lock className="w-5 h-5" />
-              </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-2.5 group-hover:text-primary transition-colors duration-300">
+        <div className="space-y-6">
+          {/* 1. Test Security */}
+          <div className="bg-white p-6 md:p-8 rounded-2xl border border-slate-100 shadow-xs hover:shadow-md hover:border-maroon-100/50 hover:bg-slate-50/20 transition-all duration-300 group flex flex-col md:flex-row gap-6 items-start">
+            <div className="flex-shrink-0 w-12 h-12 bg-maroon-50 rounded-xl flex items-center justify-center text-maroon-700 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+              <Lock className="w-6 h-6" />
+            </div>
+            <div className="flex-grow">
+              <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-primary transition-colors duration-300">
                 Test Security
               </h3>
-              <p className="text-slate-600 leading-relaxed font-sans text-xs sm:text-sm">
+              <p className="text-slate-600 leading-relaxed font-sans text-sm font-light">
                 We maintain strict physical and operational security protocols, managed by trained personnel, to protect the integrity of your exams at every stage—before, during, and after test day. To ensure exam security and integrity, our computer labs are fully equipped with a comprehensive CCTV system. Every workstation is monitored by a dedicated security camera, and recorded footage can be made available to exam providers upon request.
               </p>
-            </div>
-            <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-[10px] font-bold text-slate-400 uppercase tracking-wider">
-              <span>Physical & Operational Protocols</span>
-              <span className="text-primary">100% Dedicated Workstation CCTVs</span>
+              <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-slate-100/70">
+                <span className="inline-flex items-center px-3 py-1 bg-slate-50 border border-slate-100 text-slate-600 rounded-full text-[11px] font-medium tracking-wide">
+                  Physical & Operational Protocols
+                </span>
+                <span className="inline-flex items-center px-3 py-1 bg-maroon-50/50 border border-maroon-100/50 text-maroon-800 rounded-full text-[11px] font-semibold tracking-wide">
+                  100% Dedicated Workstation CCTVs
+                </span>
+              </div>
             </div>
           </div>
 
           {/* 2. Required Business Licences & Permits */}
-          <div className="bg-white p-6 rounded-xl shadow-xs border border-slate-100 hover:shadow-sm hover:border-maroon-100 hover:-translate-y-0.5 transition-all duration-300 flex flex-col justify-between group">
-            <div>
-              <div className="w-10 h-10 bg-maroon-50 rounded-lg flex items-center justify-center text-maroon-700 mb-4 group-hover:scale-105 transition-transform duration-300">
-                <FileCheck className="w-5 h-5" />
-              </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-2.5 group-hover:text-primary transition-colors duration-300">
+          <div className="bg-white p-6 md:p-8 rounded-2xl border border-slate-100 shadow-xs hover:shadow-md hover:border-maroon-100/50 hover:bg-slate-50/20 transition-all duration-300 group flex flex-col md:flex-row gap-6 items-start">
+            <div className="flex-shrink-0 w-12 h-12 bg-maroon-50 rounded-xl flex items-center justify-center text-maroon-700 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+              <FileCheck className="w-6 h-6" />
+            </div>
+            <div className="flex-grow">
+              <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-primary transition-colors duration-300">
                 Required Business Licences & Permits
               </h3>
-              <p className="text-slate-600 leading-relaxed font-sans text-xs">
+              <p className="text-slate-600 leading-relaxed font-sans text-sm font-light">
                 It is very important to partner with a test center that holds the relevant business activity with the local authority to become a test center. The Exam Preparation & Testing House L.L.C is licensed by Sharjah Economic Development Department (SEDD) and regulated by Sharjah Private Education Authority (SPEA).
               </p>
-            </div>
-            <div className="mt-6 pt-3 border-t border-slate-100 flex flex-wrap gap-1.5">
-              <span className="px-2 py-0.5 bg-slate-100 text-slate-700 rounded text-[9px] font-semibold tracking-wider uppercase">Licensed by SEDD</span>
-              <span className="px-2 py-0.5 bg-slate-100 text-slate-700 rounded text-[9px] font-semibold tracking-wider uppercase">Regulated by SPEA</span>
+              <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-slate-100/70">
+                <span className="inline-flex items-center px-3 py-1 bg-slate-50 border border-slate-100 text-slate-600 rounded-full text-[11px] font-medium tracking-wide">
+                  Licensed by SEDD
+                </span>
+                <span className="inline-flex items-center px-3 py-1 bg-slate-50 border border-slate-100 text-slate-600 rounded-full text-[11px] font-medium tracking-wide">
+                  Regulated by SPEA
+                </span>
+              </div>
             </div>
           </div>
 
-          {/* 3. Noise-Free Environment - Large Card (Span 2) but compact */}
-          <div className="md:col-span-2 bg-white p-6 md:p-8 rounded-xl shadow-xs border border-slate-100 hover:shadow-sm hover:border-maroon-100 hover:-translate-y-0.5 transition-all duration-300 flex flex-col justify-between group">
-            <div>
-              <div className="w-10 h-10 bg-maroon-50 rounded-lg flex items-center justify-center text-maroon-700 mb-4 group-hover:scale-105 transition-transform duration-300">
-                <VolumeX className="w-5 h-5" />
-              </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-2.5 group-hover:text-primary transition-colors duration-300">
+          {/* 3. Noise-Free Environment */}
+          <div className="bg-white p-6 md:p-8 rounded-2xl border border-slate-100 shadow-xs hover:shadow-md hover:border-maroon-100/50 hover:bg-slate-50/20 transition-all duration-300 group flex flex-col md:flex-row gap-6 items-start">
+            <div className="flex-shrink-0 w-12 h-12 bg-maroon-50 rounded-xl flex items-center justify-center text-maroon-700 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+              <VolumeX className="w-6 h-6" />
+            </div>
+            <div className="flex-grow">
+              <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-primary transition-colors duration-300">
                 Noise-Free Environment
               </h3>
-              <p className="text-slate-600 leading-relaxed font-sans text-xs sm:text-sm">
+              <p className="text-slate-600 leading-relaxed font-sans text-sm font-light">
                 To minimize distractions and lower noise levels, we have implemented several workplace enhancements. Workstations feature fabric acoustic panels and are spaced generously apart, while testing rooms are carpeted to ensure a quiet environment. Additionally, we utilize white noise machines in the computer labs, alongside quiet keyboards and high-quality headsets throughout our spaces.
               </p>
-            </div>
-            <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-[10px] font-bold text-slate-400 uppercase tracking-wider">
-              <span>Fabric Acoustic Panels</span>
-              <span className="text-primary">White Noise Systems Equipped</span>
+              <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-slate-100/70">
+                <span className="inline-flex items-center px-3 py-1 bg-slate-50 border border-slate-100 text-slate-600 rounded-full text-[11px] font-medium tracking-wide">
+                  Fabric Acoustic Panels
+                </span>
+                <span className="inline-flex items-center px-3 py-1 bg-maroon-50/50 border border-maroon-100/50 text-maroon-800 rounded-full text-[11px] font-semibold tracking-wide">
+                  White Noise Systems Equipped
+                </span>
+              </div>
             </div>
           </div>
 
           {/* 4. Technical Infrastructure */}
-          <div className="bg-white p-6 rounded-xl shadow-xs border border-slate-100 hover:shadow-sm hover:border-maroon-100 hover:-translate-y-0.5 transition-all duration-300 flex flex-col justify-between group">
-            <div>
-              <div className="w-10 h-10 bg-maroon-50 rounded-lg flex items-center justify-center text-maroon-700 mb-4 group-hover:scale-105 transition-transform duration-300">
-                <Cpu className="w-5 h-5" />
-              </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-2.5 group-hover:text-primary transition-colors duration-300">
+          <div className="bg-white p-6 md:p-8 rounded-2xl border border-slate-100 shadow-xs hover:shadow-md hover:border-maroon-100/50 hover:bg-slate-50/20 transition-all duration-300 group flex flex-col md:flex-row gap-6 items-start">
+            <div className="flex-shrink-0 w-12 h-12 bg-maroon-50 rounded-xl flex items-center justify-center text-maroon-700 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+              <Cpu className="w-6 h-6" />
+            </div>
+            <div className="flex-grow">
+              <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-primary transition-colors duration-300">
                 Technical Infrastructure
               </h3>
-              <p className="text-slate-600 leading-relaxed font-sans text-xs">
+              <p className="text-slate-600 leading-relaxed font-sans text-sm font-light">
                 Our technical specifications meet your technical requirements. We provide dedicated, robust desktop PCs and 24-inch monitors.
               </p>
-            </div>
-            <div className="mt-6 pt-3 border-t border-slate-100 text-[10px] font-semibold text-slate-400 uppercase">
-              <span>High-Performance Specifications</span>
+              <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-slate-100/70">
+                <span className="inline-flex items-center px-3 py-1 bg-slate-50 border border-slate-100 text-slate-600 rounded-full text-[11px] font-medium tracking-wide">
+                  High-Performance Specifications
+                </span>
+              </div>
             </div>
           </div>
 
           {/* 5. Top-notch Exam Venues */}
-          <div className="bg-white p-6 rounded-xl shadow-xs border border-slate-100 hover:shadow-sm hover:border-maroon-100 hover:-translate-y-0.5 transition-all duration-300 flex flex-col justify-between group">
-            <div>
-              <div className="w-10 h-10 bg-maroon-50 rounded-lg flex items-center justify-center text-maroon-700 mb-4 group-hover:scale-105 transition-transform duration-300">
-                <Building2 className="w-5 h-5" />
-              </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-2.5 group-hover:text-primary transition-colors duration-300">
+          <div className="bg-white p-6 md:p-8 rounded-2xl border border-slate-100 shadow-xs hover:shadow-md hover:border-maroon-100/50 hover:bg-slate-50/20 transition-all duration-300 group flex flex-col md:flex-row gap-6 items-start">
+            <div className="flex-shrink-0 w-12 h-12 bg-maroon-50 rounded-xl flex items-center justify-center text-maroon-700 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+              <Building2 className="w-6 h-6" />
+            </div>
+            <div className="flex-grow">
+              <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-primary transition-colors duration-300">
                 Top-notch Exam Venues
               </h3>
-              <p className="text-slate-600 leading-relaxed font-sans text-xs">
+              <p className="text-slate-600 leading-relaxed font-sans text-sm font-light">
                 Our modern, easily accessible testing centers are fully equipped with high-performance hardware and advanced technology to ensure an optimal testing environment.
               </p>
-            </div>
-            <div className="mt-6 pt-3 border-t border-slate-100 text-[10px] font-semibold text-slate-400 uppercase">
-              <span>Easily Accessible & Premium Venues</span>
+              <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-slate-100/70">
+                <span className="inline-flex items-center px-3 py-1 bg-slate-50 border border-slate-100 text-slate-600 rounded-full text-[11px] font-medium tracking-wide">
+                  Easily Accessible & Premium Venues
+                </span>
+              </div>
             </div>
           </div>
 
           {/* 6. Flexible Exam Delivery */}
-          <div className="bg-white p-6 rounded-xl shadow-xs border border-slate-100 hover:shadow-sm hover:border-maroon-100 hover:-translate-y-0.5 transition-all duration-300 flex flex-col justify-between group">
-            <div>
-              <div className="w-10 h-10 bg-maroon-50 rounded-lg flex items-center justify-center text-maroon-700 mb-4 group-hover:scale-105 transition-transform duration-300">
-                <Monitor className="w-5 h-5" />
-              </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-2.5 group-hover:text-primary transition-colors duration-300">
+          <div className="bg-white p-6 md:p-8 rounded-2xl border border-slate-100 shadow-xs hover:shadow-md hover:border-maroon-100/50 hover:bg-slate-50/20 transition-all duration-300 group flex flex-col md:flex-row gap-6 items-start">
+            <div className="flex-shrink-0 w-12 h-12 bg-maroon-50 rounded-xl flex items-center justify-center text-maroon-700 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+              <Monitor className="w-6 h-6" />
+            </div>
+            <div className="flex-grow">
+              <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-primary transition-colors duration-300">
                 Flexible Exam Delivery
               </h3>
-              <p className="text-slate-600 leading-relaxed font-sans text-xs">
+              <p className="text-slate-600 leading-relaxed font-sans text-sm font-light">
                 Flexible scheduling options that accommodate massive single-day events, designated testing windows, Morning, Afternoon & Evening slots, or continuous testing year-round.
               </p>
-            </div>
-            <div className="mt-6 pt-3 border-t border-slate-100 text-[10px] font-semibold text-slate-400 uppercase">
-              <span>Continuous & Event-Based Options</span>
+              <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-slate-100/70">
+                <span className="inline-flex items-center px-3 py-1 bg-slate-50 border border-slate-100 text-slate-600 rounded-full text-[11px] font-medium tracking-wide">
+                  Continuous & Event-Based Options
+                </span>
+              </div>
             </div>
           </div>
 
           {/* 7. Special Accommodation */}
-          <div className="bg-white p-6 rounded-xl shadow-xs border border-slate-100 hover:shadow-sm hover:border-maroon-100 hover:-translate-y-0.5 transition-all duration-300 flex flex-col justify-between group">
-            <div>
-              <div className="w-10 h-10 bg-maroon-50 rounded-lg flex items-center justify-center text-maroon-700 mb-4 group-hover:scale-105 transition-transform duration-300">
-                <Accessibility className="w-5 h-5" />
-              </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-2.5 group-hover:text-primary transition-colors duration-300">
+          <div className="bg-white p-6 md:p-8 rounded-2xl border border-slate-100 shadow-xs hover:shadow-md hover:border-maroon-100/50 hover:bg-slate-50/20 transition-all duration-300 group flex flex-col md:flex-row gap-6 items-start">
+            <div className="flex-shrink-0 w-12 h-12 bg-maroon-50 rounded-xl flex items-center justify-center text-maroon-700 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+              <Accessibility className="w-6 h-6" />
+            </div>
+            <div className="flex-grow">
+              <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-primary transition-colors duration-300">
                 Special Accommodation
               </h3>
-              <p className="text-slate-600 leading-relaxed font-sans text-xs">
+              <p className="text-slate-600 leading-relaxed font-sans text-sm font-light">
                 We provide tailored support for candidates who need testing accommodations, offering personalized services such as extended time, frequent breaks, private rooms, and specialized assistive software and equipment.
               </p>
-            </div>
-            <div className="mt-6 pt-3 border-t border-slate-100 text-[10px] font-semibold text-slate-400 uppercase">
-              <span>Adaptive Assistance Softwares</span>
+              <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-slate-100/70">
+                <span className="inline-flex items-center px-3 py-1 bg-slate-50 border border-slate-100 text-slate-600 rounded-full text-[11px] font-medium tracking-wide">
+                  Adaptive Assistance Softwares
+                </span>
+              </div>
             </div>
           </div>
-
         </div>
       </section>
 
@@ -258,17 +276,26 @@ export default function ExamProviderPage() {
               </p>
               
               <div className="flex flex-col sm:flex-row gap-3">
-                <Link href="tel:+97165531250">
-                  <Button className="w-full sm:w-auto bg-white text-maroon-900 hover:bg-slate-50 hover:text-maroon-950 px-5 py-3 rounded-lg font-bold text-sm transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-md shadow-black/10 h-10">
-                    <Phone className="w-4.5 h-4.5 text-primary" />
-                    <span>Call +971 6 553 1250</span>
-                  </Button>
+                <Link href="/contact-us"
+                className={buttonVariants({
+                  size: "lg",
+                  className: "cursor-pointer",
+                })}
+                >
+                 
+                    Partner With Us
+
                 </Link>
-                <Link href="mailto:info@tepth.org">
-                  <Button variant="outline" className="w-full sm:w-auto border-white/20 hover:border-white/40 hover:bg-white/10  px-5 py-3 rounded-lg font-bold text-sm transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer h-10 hover:text-white">
-                    <Mail className="w-4.5 h-4.5" />
-                    <span>info@tepth.org</span>
-                  </Button>
+                <Link href="/our-venues/360-degree-virtual-tour"
+                className={buttonVariants({
+                  variant: "outline",
+                  size: "lg",
+                  className: "cursor-pointer",
+                })}
+                >
+               
+                    Tour Our Venues
+
                 </Link>
               </div>
             </div>

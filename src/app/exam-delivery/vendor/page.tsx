@@ -17,7 +17,7 @@ import {
   Layers,
   HeartHandshake
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 
 export default function VendorPartnershipsPage() {
   return (
@@ -52,16 +52,26 @@ export default function VendorPartnershipsPage() {
               </p>
               
               <div className="flex flex-wrap gap-3 sm:gap-4">
-                <Link href="/contact-us">
-                  <Button className="bg-primary text-white hover:bg-primary-variant px-5 py-3 rounded-lg font-bold text-sm transition-all duration-300 flex items-center gap-2 group shadow-md shadow-primary/10 cursor-pointer h-10">
+                <Link href="/contact-us"
+                className={buttonVariants({
+                  size: "lg",
+                  className: "cursor-pointer",
+                })}
+                >
+                 
                     Partner With Us
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-300" />
-                  </Button>
+
                 </Link>
-                <Link href="/our-venues">
-                  <Button variant="outline" className="border-slate-200 text-slate-700 hover:bg-slate-50 px-5 py-3 rounded-lg font-bold text-sm transition-all duration-300 flex items-center gap-2 cursor-pointer h-10">
+                <Link href="/our-venues/360-degree-virtual-tour"
+                className={buttonVariants({
+                  variant: "outline",
+                  size: "lg",
+                  className: "cursor-pointer",
+                })}
+                >
+               
                     Tour Our Venues
-                  </Button>
+
                 </Link>
               </div>
             </div>
@@ -84,8 +94,8 @@ export default function VendorPartnershipsPage() {
         </div>
       </section>
 
-      {/* Symbiotic Architecture Section - Compact Bento Grid */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      {/* Symbiotic Architecture Section - Simple List in One Column */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
         <div className="mb-10 text-center max-w-3xl mx-auto">
           <span className="text-primary text-[11px] font-bold uppercase tracking-[0.25em] mb-2 inline-block">
             THE COLLABORATION ARCHITECTURE
@@ -97,10 +107,10 @@ export default function VendorPartnershipsPage() {
         </div>
 
         {/* Large Centered Block displaying the full second paragraph exactly */}
-        <div className="bg-white p-6 md:p-8 rounded-xl shadow-xs border border-slate-100 hover:border-maroon-100/50 transition-all duration-300 mb-8 max-w-4xl mx-auto">
-          <div className="flex gap-4 items-start">
-            <div className="w-10 h-10 bg-maroon-50 rounded-lg flex items-center justify-center text-maroon-700 shrink-0 hidden sm:flex">
-              <Layers className="w-5 h-5" />
+        <div className="bg-white p-6 md:p-8 rounded-2xl border border-slate-100 shadow-xs hover:shadow-md hover:border-maroon-100/50 hover:bg-slate-50/20 transition-all duration-300 mb-8 max-w-4xl mx-auto group">
+          <div className="flex gap-6 items-start flex-col sm:flex-row">
+            <div className="flex-shrink-0 w-12 h-12 bg-maroon-50 rounded-xl flex items-center justify-center text-maroon-700 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+              <Layers className="w-6 h-6" />
             </div>
             <div>
               <p className="text-slate-700 leading-relaxed font-sans text-sm md:text-base font-light">
@@ -110,60 +120,66 @@ export default function VendorPartnershipsPage() {
           </div>
         </div>
 
-        {/* Breakdown Bento Grid to give depth to the design */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        {/* Breakdown List in One Column */}
+        <div className="space-y-6">
           
-          {/* 1. Turnkey Security & Standards */}
-          <div className="bg-white p-6 rounded-xl shadow-xs border border-slate-100 hover:shadow-sm hover:border-maroon-100 hover:-translate-y-0.5 transition-all duration-300 flex flex-col justify-between group">
-            <div>
-              <div className="w-10 h-10 bg-maroon-50 rounded-lg flex items-center justify-center text-maroon-700 mb-4 group-hover:scale-105 transition-transform duration-300">
-                <ShieldCheck className="w-5 h-5" />
-              </div>
-              <h3 className="text-base font-bold text-slate-900 mb-2 group-hover:text-primary transition-colors duration-300">
+          {/* 1. Turnkey & Secure */}
+          <div className="bg-white p-6 md:p-8 rounded-2xl border border-slate-100 shadow-xs hover:shadow-md hover:border-maroon-100/50 hover:bg-slate-50/20 transition-all duration-300 group flex flex-col md:flex-row gap-6 items-start">
+            <div className="flex-shrink-0 w-12 h-12 bg-maroon-50 rounded-xl flex items-center justify-center text-maroon-700 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+              <ShieldCheck className="w-6 h-6" />
+            </div>
+            <div className="flex-grow">
+              <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-primary transition-colors duration-300">
                 Turnkey & Secure
               </h3>
-              <p className="text-slate-600 leading-relaxed font-sans text-xs">
+              <p className="text-slate-600 leading-relaxed font-sans text-sm font-light">
                 An instantly accessible, highly secure environment that fully satisfies the stringent compliance policies of international exam boards.
               </p>
-            </div>
-            <div className="mt-6 pt-3 border-t border-slate-50 text-[10px] font-semibold text-slate-400 uppercase">
-              <span>Acreddited Compliance</span>
+              <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-slate-100/70">
+                <span className="inline-flex items-center px-3 py-1 bg-slate-50 border border-slate-100 text-slate-600 rounded-full text-[11px] font-medium tracking-wide">
+                  Accredited Compliance
+                </span>
+              </div>
             </div>
           </div>
 
-          {/* 2. Seat Capacity Optimization */}
-          <div className="bg-white p-6 rounded-xl shadow-xs border border-slate-100 hover:shadow-sm hover:border-maroon-100 hover:-translate-y-0.5 transition-all duration-300 flex flex-col justify-between group">
-            <div>
-              <div className="w-10 h-10 bg-maroon-50 rounded-lg flex items-center justify-center text-maroon-700 mb-4 group-hover:scale-105 transition-transform duration-300">
-                <Cpu className="w-5 h-5" />
-              </div>
-              <h3 className="text-base font-bold text-slate-900 mb-2 group-hover:text-primary transition-colors duration-300">
+          {/* 2. Resource Optimization */}
+          <div className="bg-white p-6 md:p-8 rounded-2xl border border-slate-100 shadow-xs hover:shadow-md hover:border-maroon-100/50 hover:bg-slate-50/20 transition-all duration-300 group flex flex-col md:flex-row gap-6 items-start">
+            <div className="flex-shrink-0 w-12 h-12 bg-maroon-50 rounded-xl flex items-center justify-center text-maroon-700 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+              <Cpu className="w-6 h-6" />
+            </div>
+            <div className="flex-grow">
+              <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-primary transition-colors duration-300">
                 Resource Optimization
               </h3>
-              <p className="text-slate-600 leading-relaxed font-sans text-xs">
+              <p className="text-slate-600 leading-relaxed font-sans text-sm font-light">
                 Maximizing seating capacity and technical infrastructure parameters to streamline operational performance and exam logistics.
               </p>
-            </div>
-            <div className="mt-6 pt-3 border-t border-slate-50 text-[10px] font-semibold text-slate-400 uppercase">
-              <span>Technical Infrastructure</span>
+              <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-slate-100/70">
+                <span className="inline-flex items-center px-3 py-1 bg-slate-50 border border-slate-100 text-slate-600 rounded-full text-[11px] font-medium tracking-wide">
+                  Technical Infrastructure
+                </span>
+              </div>
             </div>
           </div>
 
           {/* 3. Symbiotic Scalability */}
-          <div className="bg-white p-6 rounded-xl shadow-xs border border-slate-100 hover:shadow-sm hover:border-maroon-100 hover:-translate-y-0.5 transition-all duration-300 flex flex-col justify-between group">
-            <div>
-              <div className="w-10 h-10 bg-maroon-50 rounded-lg flex items-center justify-center text-maroon-700 mb-4 group-hover:scale-105 transition-transform duration-300">
-                <TrendingUp className="w-5 h-5" />
-              </div>
-              <h3 className="text-base font-bold text-slate-900 mb-2 group-hover:text-primary transition-colors duration-300">
+          <div className="bg-white p-6 md:p-8 rounded-2xl border border-slate-100 shadow-xs hover:shadow-md hover:border-maroon-100/50 hover:bg-slate-50/20 transition-all duration-300 group flex flex-col md:flex-row gap-6 items-start">
+            <div className="flex-shrink-0 w-12 h-12 bg-maroon-50 rounded-xl flex items-center justify-center text-maroon-700 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+              <TrendingUp className="w-6 h-6" />
+            </div>
+            <div className="flex-grow">
+              <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-primary transition-colors duration-300">
                 Shared Success
               </h3>
-              <p className="text-slate-600 leading-relaxed font-sans text-xs">
+              <p className="text-slate-600 leading-relaxed font-sans text-sm font-light">
                 A mutually beneficial alignment enabling predictable growth scales and a premium professional testing setting for all examinees.
               </p>
-            </div>
-            <div className="mt-6 pt-3 border-t border-slate-50 text-[10px] font-semibold text-slate-400 uppercase">
-              <span>Predictable Scalability</span>
+              <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-slate-100/70">
+                <span className="inline-flex items-center px-3 py-1 bg-slate-50 border border-slate-100 text-slate-600 rounded-full text-[11px] font-medium tracking-wide">
+                  Predictable Scalability
+                </span>
+              </div>
             </div>
           </div>
 
