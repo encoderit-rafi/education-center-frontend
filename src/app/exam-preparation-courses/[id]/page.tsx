@@ -89,6 +89,7 @@ interface CoursePackage {
   specialDiscount?: string | number | null;
   duration: string;
   scheduleInfo: string;
+  totalHours: string;
   bestFor: string[];
 }
 
@@ -110,7 +111,8 @@ export default async function ExamPreparationDynamicPage({
   let workshops: WorkshopDetail[] = [];
   try {
     const courseRes = await api.get<ApiResponse<CourseDetail>>(
-      `/courses/${slug}`,
+      `/courses/${slug}?sort_by=orderIndex&sort_order=desc`,
+
     );
     console.log("👉 ~ ExamPreparationDynamicPage ~ courseRes:", courseRes);
 
@@ -408,6 +410,12 @@ export default async function ExamPreparationDynamicPage({
                           <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Duration</p>
                           <p className="text-sm font-semibold text-slate-800 mt-0.5">
                             {pkg.duration} Hours
+                          </p>
+                        </div>
+                        <div>
+                          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Total Weeks</p>
+                          <p className="text-sm font-semibold text-slate-800 mt-0.5">
+                            {pkg.totalHours} weeks
                           </p>
                         </div>
                         <div>

@@ -29,9 +29,9 @@ export function usePrimaryNav() {
     isLoading: isLoadingCourses,
     isError: isErrorCourses,
   } = useQuery<ApiResponse>({
-    queryKey: ["exam-preparation-courses"],
+    queryKey: ["exam-preparation-courses", { limit: 100, sort_order: "asc" }],
     queryFn: async () => {
-      const response = await api.get("/courses");
+      const response = await api.get("/courses", { params: { limit: 100, sort_order: "asc", sort_by: "orderIndex" } });
       return response.data;
     },
   });
@@ -41,9 +41,9 @@ export function usePrimaryNav() {
     isLoading: isLoadingMockTests,
     isError: isErrorMockTests,
   } = useQuery<ApiResponse>({
-    queryKey: ["paid-mock-tests"],
+    queryKey: ["paid-mock-tests", { sort_order: "asc" }],
     queryFn: async () => {
-      const response = await api.get("/mock-tests");
+      const response = await api.get("/mock-tests", { params: { sort_order: "asc" } });
       return response.data;
     },
   });
@@ -53,9 +53,9 @@ export function usePrimaryNav() {
     isLoading: isLoadingExams,
     isError: isErrorExams,
   } = useQuery<ApiResponse>({
-    queryKey: ["exams", { limit: 100 }],
+    queryKey: ["exams", { limit: 100, sort_order: "asc" }],
     queryFn: async () => {
-      const response = await api.get("/exams?limit=100");
+      const response = await api.get("/exams", { params: { limit: 100, sort_order: "asc", sort_by: "orderIndex" } });
       return response.data;
     },
   });
@@ -76,7 +76,7 @@ export function usePrimaryNav() {
 
       return {
         ...item,
-        items: dynamicItems.length > 0 ? [...dynamicItems,{name:"Other Exams",href:"/exams/other-exams"}] : item.items,
+        items: dynamicItems.length > 0 ? [...dynamicItems, { name: "Other Exams", href: "/exams/other-exams" }] : item.items,
       };
     }
     if (item.name === "Book Exams" && item.type === "dropdown") {
@@ -92,7 +92,7 @@ export function usePrimaryNav() {
 
       return {
         ...item,
-        items: dynamicItems.length > 0 ?  dynamicItems : item.items,
+        items: dynamicItems.length > 0 ? dynamicItems : item.items,
       };
     }
 
