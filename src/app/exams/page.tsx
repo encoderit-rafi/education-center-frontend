@@ -33,17 +33,25 @@ interface ApiResponse {
 
 export default function ExamsPage() {
   const { data: examsResponse, isLoading } = useQuery<ApiResponse>({
-    queryKey: ["exams", { limit: 100 }],
+    queryKey: ["exams", { limit: 100, sort_order: "asc", sort_by: "orderIndex" }],
     queryFn: async () => {
-      const response = await api.get("/exams?limit=100");
+      const response = await api.get("/exams", {
+        params: { limit: 100, sort_order: "asc", sort_by: "orderIndex" },
+      });
       return response.data;
     },
   });
 
   const exams =
-    examsResponse?.data?.data?.filter((exam) =>
-      exam.examType?.some((et) => et.name === "group")
-    ) ?? [];
+    examsResponse?.data?.data
+      ?.filter((exam) =>
+        exam.examType?.some((et) => et.name === "group")
+      )
+      ?.sort((a: any, b: any) => {
+        const aVal = a.orderIndex !== undefined && a.orderIndex !== null ? Number(a.orderIndex) : Infinity;
+        const bVal = b.orderIndex !== undefined && b.orderIndex !== null ? Number(b.orderIndex) : Infinity;
+        return aVal - bVal;
+      }) ?? [];
 
   return (
     <main className="bg-white">

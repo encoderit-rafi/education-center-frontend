@@ -26,7 +26,9 @@ export default async function ExamDetailPage({
 
   // 2. Fetch all exams to find children and resolve by ID if needed (e.g. if the route is a UUID)
   try {
-    const listResponse = await api.get("/exams?limit=100");
+    const listResponse = await api.get("/exams", {
+      params: { limit: 100, sort_order: "asc", sort_by: "orderIndex" },
+    });
     const allExams = listResponse.data?.data?.data || [];
 
     if (!exam) {
@@ -36,8 +38,14 @@ export default async function ExamDetailPage({
     }
 
     if (exam) {
-      // Find all child exams belonging to this exam
-      childExams = allExams.filter((e: any) => e.parentId === exam.id);
+      // Find all child exams belonging to this exam and sort them by orderIndex ascending
+      childExams = allExams
+        .filter((e: any) => e.parentId === exam.id)
+        .sort((a: any, b: any) => {
+          const aVal = a.orderIndex !== undefined && a.orderIndex !== null ? Number(a.orderIndex) : Infinity;
+          const bVal = b.orderIndex !== undefined && b.orderIndex !== null ? Number(b.orderIndex) : Infinity;
+          return aVal - bVal;
+        });
     }
   } catch (error) {
     console.error("Error fetching all exams list:", error);
