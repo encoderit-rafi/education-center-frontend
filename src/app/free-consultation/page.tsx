@@ -260,7 +260,9 @@ export default function FreeConsultationPage() {
             className="mb-12"
             badgeClassName="tracking-[0.1em]"
           />
-          <ContactForm />
+          {/* <ContactForm /> */}
+            <FreeConsultationForm />
+
         </div>
       </div>
     </main>
