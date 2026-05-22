@@ -22,6 +22,7 @@ import { Button } from "@/components/ui/button";
 import { useSearchParams } from "next/navigation";
 import Stepper from "@/components/stepper";
 import { PriceDisplay } from "@/components/ui/price-display";
+import Image from "next/image";
 
 const bookingSchema = z.object({
   mockTestId: z.string().optional(),
@@ -306,7 +307,9 @@ function CourseRegistrationForm({ className }: { className?: string }) {
                   <FieldLabel required>Payment Method</FieldLabel>
                   <RadioGroup
                     value={selectedPaymentMethod}
-                    onValueChange={(val) => setValue("paymentMethod", val as "stripe" | "paypal")}
+                    onValueChange={(val) =>
+                      setValue("paymentMethod", val as "stripe" | "paypal")
+                    }
                     className="grid grid-cols-2 gap-3"
                   >
                     <label
@@ -318,13 +321,16 @@ function CourseRegistrationForm({ className }: { className?: string }) {
                           : "hover:bg-slate-50",
                       )}
                     >
-                      <RadioGroupItem
-                        value="stripe"
-                        id="payment-stripe"
-                      />
-                      <span className="font-semibold text-sm">
+                      <RadioGroupItem value="stripe" id="payment-stripe" />
+                      {/* <span className="font-semibold text-sm">
                         Credit Card (Stripe)
-                      </span>
+                      </span> */}
+                      <Image
+                        src="/images/stripe-logo.png"
+                        alt="Stripe"
+                        width={50}
+                        height={50}
+                      />
                     </label>
                     <label
                       htmlFor="payment-paypal"
@@ -335,11 +341,14 @@ function CourseRegistrationForm({ className }: { className?: string }) {
                           : "hover:bg-slate-50",
                       )}
                     >
-                      <RadioGroupItem
-                        value="paypal"
-                        id="payment-paypal"
+                      <RadioGroupItem value="paypal" id="payment-paypal" />
+                      {/* <span className="font-semibold text-sm">PayPal</span> */}
+                      <Image
+                        src="/images/paypal-logo.png"
+                        alt="PayPal"
+                        width={50}
+                        height={50}
                       />
-                      <span className="font-semibold text-sm">PayPal</span>
                     </label>
                   </RadioGroup>
                   <FieldError errors={[errors.paymentMethod]} />
