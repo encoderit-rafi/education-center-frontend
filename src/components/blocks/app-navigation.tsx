@@ -26,20 +26,6 @@ export type AppNavigationProps = {
 export default function AppNavigation({ navigations, isLoading }: AppNavigationProps) {
   const pathname = usePathname();
 
-  if (isLoading) {
-    return (
-      <NavigationMenu viewport={false}>
-        <NavigationMenuList className="gap-2">
-          {[1, 2, 3, 4, 5, 6].map((i) => (
-            <NavigationMenuItem key={i}>
-              <div className="h-9 w-24 bg-slate-100 animate-pulse rounded-md"></div>
-            </NavigationMenuItem>
-          ))}
-        </NavigationMenuList>
-      </NavigationMenu>
-    );
-  }
-
   return (
     <NavigationMenu viewport={false}>
       <NavigationMenuList className="gap-2">
@@ -77,24 +63,32 @@ export default function AppNavigation({ navigations, isLoading }: AppNavigationP
                   </NavigationMenuTrigger>
                   <NavigationMenuContent className="z-50 p-1 min-w-36 border bg-white text-primary rounded-xl shadow-2xl">
                     <ul className="flex flex-col gap-1">
-                      {item.items.map((child) => {
-                        const isSubItemActive = isMatch(child.href);
-                        return (
-                          <li key={child.name} className="group/child relative">
-                            <NavigationMenuLink
-                              active={isSubItemActive}
-                              asChild
-                            >
-                              <Link
-                                href={child.href}
-                                className="whitespace-nowrap"
+                      {isLoading && item.items.length === 0 ? (
+                        <div className="p-4 flex flex-col gap-2 min-w-[200px]">
+                          <div className="h-4 bg-slate-100 animate-pulse rounded w-3/4"></div>
+                          <div className="h-4 bg-slate-100 animate-pulse rounded w-1/2"></div>
+                          <div className="h-4 bg-slate-100 animate-pulse rounded w-5/6"></div>
+                        </div>
+                      ) : (
+                        item.items.map((child) => {
+                          const isSubItemActive = isMatch(child.href);
+                          return (
+                            <li key={child.name} className="group/child relative">
+                              <NavigationMenuLink
+                                active={isSubItemActive}
+                                asChild
                               >
-                                {child.name}
-                              </Link>
-                            </NavigationMenuLink>
-                          </li>
-                        );
-                      })}
+                                <Link
+                                  href={child.href}
+                                  className="whitespace-nowrap"
+                                >
+                                  {child.name}
+                                </Link>
+                              </NavigationMenuLink>
+                            </li>
+                          );
+                        })
+                      )}
                     </ul>
                   </NavigationMenuContent>
                 </>
