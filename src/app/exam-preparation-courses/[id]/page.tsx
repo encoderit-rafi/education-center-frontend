@@ -269,7 +269,7 @@ export default async function ExamPreparationDynamicPage({
 
       {/* ── Packages Section ── */}
       <section id="packages" className="base-py bg-white">
-        <div className="px-4 lg:px-8 max-w-9xl mx-auto">
+        <div className="px-4 lg:px-8  mx-auto">
 
           <div className="mb-12 text-center max-w-3xl mx-auto space-y-4">
             <h2 className="text-4xl font-black text-slate-900 tracking-tight leading-tight">
@@ -282,7 +282,7 @@ export default async function ExamPreparationDynamicPage({
           </div>
 
 
-          <div className="grid gap-4 [grid-template-rows:repeat(7,auto)]">
+          <div className="grid gap-6 md:grid-cols-3">
             {packages.map((pkg, index) => {
               console.log("👉 ~ ExamPreparationDynamicPage ~ pkg:", pkg);
               const basePrice = parseFloat(pkg.price) || 0;
@@ -321,11 +321,9 @@ export default async function ExamPreparationDynamicPage({
               return (
                 <BaseCard
                   key={index}
-                  // className="grid [grid-template-rows:subgrid] row-span-7 border-slate-200 group relative overflow-hidden hover:border-primary/30 hover:shadow-2xl transition-all duration-500 ease-out p-0"
-               className="grid md:grid-cols-2"
-               >
-<div className="">
-  <div className="relative aspect-video overflow-hidden">
+                  className="p-0 flex flex-col justify-between overflow-hidden border-slate-200 group relative hover:border-primary/30 hover:shadow-2xl transition-all duration-500 ease-out h-full bg-white"
+                >
+                  <div className="relative aspect-video w-full overflow-hidden bg-slate-50/50 border-b border-slate-100">
                     <Image
                       src={
                         pkg.image
@@ -345,10 +343,10 @@ export default async function ExamPreparationDynamicPage({
                       alt={pkg.name}
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      className="object-contain transition-transform duration-500 group-hover:scale-110 "
+                      className="object-contain transition-transform duration-500 group-hover:scale-105"
                     />
                     {discount > 0 && (
-                      <div className="absolute top-4 right-4">
+                      <div className="absolute top-4 right-4 z-10">
                         <Badge className="py-1 px-3 font-bold shadow-lg">
                           SAVE {discount}
                           {discountType === "PERCENTAGE" ? "%" : ""}
@@ -356,191 +354,84 @@ export default async function ExamPreparationDynamicPage({
                       </div>
                     )}
                   </div>
-</div>
-<div className="">
- <div className="px-3">
-                    <BaseCardTitle className="text-xl leading-tight">
-                      {pkg.name}
-                    </BaseCardTitle>
-                  </div>
 
-                 
-                  <div className="px-3">
-                    <div className="flex items-baseline gap-3">
-                      <PriceDisplay
-                        amount={discountedPrice}
-                        className="text-3xl"
-                      />
-                      {discount > 0 && (
-                        <span className="text-sm text-slate-400 line-through decoration-slate-300 flex items-center gap-1">
-                          <PriceDisplay
-                            amount={basePrice}
-                            iconClassName="h-[0.7em]"
-                          />
-                        </span>
-                      )}
-                    </div>
-                  </div>
+                  <div className="flex flex-col flex-1 p-6 justify-between space-y-6">
+                    <div className="space-y-4">
+                      <BaseCardTitle className="text-2xl font-black text-slate-900 tracking-tight leading-snug">
+                        {pkg.name}
+                      </BaseCardTitle>
 
-                  <div className="px-3">
-                    <BaseCardDescription className="text-sm line-clamp-none text-slate-600 font-medium">
-                      {pkg.description}
-                    </BaseCardDescription>
-                  </div>
-
-                  <div className="px-3 space-y-2 
-                  ">
-                    <Badge variant={"destructive"}>Best For</Badge>
-                    <BaseCardList
-                      items={
-                        Array.isArray(pkg.bestFor)
-                          ? pkg.bestFor
-                          : pkg.bestFor && typeof pkg.bestFor === "object"
-                            ? (pkg.bestFor as any).goals || []
-                            : []
-                      }
-                      checked
-                    />
-                  </div>
-
-                  <div className="px-3">
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <p className="text-[11px] text-slate-400">Duration</p>
-                        <p className="text-xs text-slate-900">
-                          {pkg.duration} Hours
-                        </p>
+                      <div className="flex items-baseline gap-3">
+                        <PriceDisplay
+                          amount={discountedPrice}
+                          className="text-3xl font-black text-primary"
+                        />
+                        {discount > 0 && (
+                          <span className="text-sm text-slate-400 line-through decoration-slate-300 flex items-center gap-1">
+                            <PriceDisplay
+                              amount={basePrice}
+                              iconClassName="h-[0.7em]"
+                            />
+                          </span>
+                        )}
                       </div>
-                      <div>
-                        <p className="text-[11px] text-slate-400">Schedule</p>
-                        <p className="text-xs text-slate-900">
-                          {pkg.scheduleInfo}
-                        </p>
+
+                      <BaseCardDescription className="text-sm text-slate-600 font-medium leading-relaxed line-clamp-3">
+                        {pkg.description}
+                      </BaseCardDescription>
+
+                      <div className="h-px bg-slate-100 my-4" />
+
+                      <div className="space-y-2">
+                        <div className="flex items-center gap-2">
+                          <Badge variant="destructive" className="font-bold text-[10px] uppercase tracking-wider px-2 py-0.5">
+                            Best For
+                          </Badge>
+                        </div>
+                        <BaseCardList
+                          items={
+                            Array.isArray(pkg.bestFor)
+                              ? pkg.bestFor
+                              : pkg.bestFor && typeof pkg.bestFor === "object"
+                                ? (pkg.bestFor as any).goals || []
+                                : []
+                          }
+                          checked
+                          className="text-slate-600 font-medium space-y-1.5"
+                        />
                       </div>
-                    </div>
-                  </div>
 
-                  <div className="px-3 pb-4">
-                    <Link
-                      href={`/exam-preparation-courses/registration?examId=${slug}&courseId=${pkg.id}&price=${discountedPrice}&currency=AED`}
-                      className={cn(
-                        buttonVariants(),
-                        "font-bold h-10 shadow-sm px-4 w-full",
-                      )}
-                    >
-                      <Calendar />
-                      Register
-                    </Link>
-                  </div>
-</div>
-                  {/* Row 1 — Image */}
-                  {/* <div className="relative h-48 overflow-hidden">
-                    <Image
-                      src={
-                        pkg.image
-                          ? pkg.image.startsWith("http")
-                            ? pkg.image
-                            : `https://vote.encoder-test-vpn.space/${pkg.image.startsWith("/") ? pkg.image.slice(1) : pkg.image}`
-                          : pkg.slug.includes("group")
-                            ? "/images/hero/image-3.jpg"
-                            : pkg.slug.includes("semi-private")
-                              ? "/images/hero/image-6.png"
-                              : pkg.slug.includes("vip")
-                                ? "/images/hero/image-7.png"
-                                : pkg.slug.includes("online")
-                                  ? "/images/hero/image-8.png"
-                                  : "/images/hero/image-3.jpg"
-                      }
-                      alt={pkg.name}
-                      fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      className="object-cover transition-transform duration-500 group-hover:scale-110 "
-                    />
-                    {discount > 0 && (
-                      <div className="absolute top-4 right-4">
-                        <Badge className="py-1 px-3 font-bold shadow-lg">
-                          SAVE {discount}
-                          {discountType === "PERCENTAGE" ? "%" : ""}
-                        </Badge>
-                      </div>
-                    )}
-                  </div> */}
+                      <div className="h-px bg-slate-100 my-4" />
 
-              
-                  {/* <div className="px-3">
-                    <BaseCardTitle className="text-xl leading-tight">
-                      {pkg.name}
-                    </BaseCardTitle>
-                  </div>
-
-                 
-                  <div className="px-3">
-                    <div className="flex items-baseline gap-3">
-                      <PriceDisplay
-                        amount={discountedPrice}
-                        className="text-3xl"
-                      />
-                      {discount > 0 && (
-                        <span className="text-sm text-slate-400 line-through decoration-slate-300 flex items-center gap-1">
-                          <PriceDisplay
-                            amount={basePrice}
-                            iconClassName="h-[0.7em]"
-                          />
-                        </span>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="px-3">
-                    <BaseCardDescription className="text-sm line-clamp-none text-slate-600 font-medium">
-                      {pkg.description}
-                    </BaseCardDescription>
-                  </div>
-
-                  <div className="px-3 space-y-2 
-                  ">
-                    <Badge variant={"destructive"}>Best For</Badge>
-                    <BaseCardList
-                      items={
-                        Array.isArray(pkg.bestFor)
-                          ? pkg.bestFor
-                          : pkg.bestFor && typeof pkg.bestFor === "object"
-                            ? (pkg.bestFor as any).goals || []
-                            : []
-                      }
-                      checked
-                    />
-                  </div>
-
-                  <div className="px-3">
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <p className="text-[11px] text-slate-400">Duration</p>
-                        <p className="text-xs text-slate-900">
-                          {pkg.duration} Hours
-                        </p>
-                      </div>
-                      <div>
-                        <p className="text-[11px] text-slate-400">Schedule</p>
-                        <p className="text-xs text-slate-900">
-                          {pkg.scheduleInfo}
-                        </p>
+                      <div className="grid grid-cols-2 gap-4 bg-slate-50 p-3 rounded-lg">
+                        <div>
+                          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Duration</p>
+                          <p className="text-sm font-semibold text-slate-800 mt-0.5">
+                            {pkg.duration} Hours
+                          </p>
+                        </div>
+                        <div>
+                          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Schedule</p>
+                          <p className="text-sm font-semibold text-slate-800 mt-0.5">
+                            {pkg.scheduleInfo}
+                          </p>
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  <div className="px-3 pb-4">
-                    <Link
-                      href={`/exam-preparation-courses/registration?examId=${slug}&courseId=${pkg.id}&price=${discountedPrice}&currency=AED`}
-                      className={cn(
-                        buttonVariants(),
-                        "font-bold h-10 shadow-sm px-4 w-full",
-                      )}
-                    >
-                      <Calendar />
-                      Register
-                    </Link>
-                  </div> */}
+                    <div className="pt-2">
+                      <Link
+                        href={`/exam-preparation-courses/registration?examId=${slug}&courseId=${pkg.id}&price=${discountedPrice}&currency=AED`}
+                        className={cn(
+                          buttonVariants(),
+                          "font-bold h-11 shadow-sm px-4 w-full flex items-center justify-center gap-2 transition-all duration-300",
+                        )}
+                      >
+                        <Calendar className="size-4" />
+                        Register Now
+                      </Link>
+                    </div>
+                  </div>
                 </BaseCard>
               );
             })}
