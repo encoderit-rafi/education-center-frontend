@@ -28,6 +28,7 @@ import Stepper from "@/components/stepper";
 import { PriceDisplay } from "@/components/ui/price-display";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import api from "@/axios";
+import Image from "next/image";
 
 const baseBookingSchema = z.object({
   mockTestId: z.string().min(1, "Please select a mock test"),
@@ -36,6 +37,7 @@ const baseBookingSchema = z.object({
   lastName: z.string().min(2, "Last name must be at least 2 characters"),
   email: z.string().email("Please enter a valid email address"),
   phone: z.string().min(6, "Please enter a valid phone number"),
+  city: z.string().min(1, "Please enter an emirate or city"),
   country: z.string().min(1, "Please enter a country"),
   paymentMethod: z.enum(["stripe", "paypal"]),
 });
@@ -97,6 +99,7 @@ function PaidMockTestRegistrationForm({
       varient: "",
       paymentMethod: "stripe",
       phone: "",
+      city: "",
       country: "",
     },
   });
@@ -148,6 +151,7 @@ function PaidMockTestRegistrationForm({
       last_name: formData.lastName || "",
       email: formData.email,
       phone: formData.phone,
+      city: formData.city,
       country: formData.country,
       total_amount: PRICE,
       price: PRICE,
@@ -240,7 +244,7 @@ function PaidMockTestRegistrationForm({
                   Array.isArray(data.variant) &&
                   data.variant.length > 0 && (
                     <Field>
-                      <FieldLabel required>Exam Variant</FieldLabel>
+                      <FieldLabel required>Exam Types</FieldLabel>
                       <FieldContent>
                         <Select
                           onValueChange={(val: string | null) => {
@@ -248,7 +252,7 @@ function PaidMockTestRegistrationForm({
                           }}
                         >
                           <SelectTrigger className="w-full">
-                            <SelectValue placeholder="Select variant" />
+                            <SelectValue placeholder="Select Type" />
                           </SelectTrigger>
                           <SelectContent>
                             {data.variant.map((variantName: string) => (
@@ -275,24 +279,31 @@ function PaidMockTestRegistrationForm({
                   </FieldContent>
                 </Field>
 
+                <Field>
+                  <FieldLabel required>Phone Number</FieldLabel>
+                  <FieldContent>
+                    <Input
+                      type="tel"
+                      placeholder="+1234567890"
+                      {...register("phone")}
+                    />
+                    <FieldError errors={[errors.phone]} />
+                  </FieldContent>
+                </Field>
                 <div className="grid grid-cols-2 gap-3">
-                  <Field>
-                    <FieldLabel required>Phone Number</FieldLabel>
+                  <Field data-invalid={!!errors.city}>
+                    <FieldLabel required>Emirate / City</FieldLabel>
                     <FieldContent>
-                      <Input
-                        type="tel"
-                        placeholder="+1234567890"
-                        {...register("phone")}
-                      />
-                      <FieldError errors={[errors.phone]} />
+                      <Input {...register("city")} placeholder="Dubai" />
                     </FieldContent>
+                    <FieldError errors={[errors.city]} />
                   </Field>
                   <Field>
                     <FieldLabel required>Country</FieldLabel>
                     <FieldContent>
                       <Input
                         type="text"
-                        placeholder="US"
+                        placeholder="UAE"
                         {...register("country")}
                       />
                       <FieldError errors={[errors.country]} />
@@ -383,9 +394,15 @@ function PaidMockTestRegistrationForm({
                       )}
                     >
                       <RadioGroupItem value="stripe" id="payment-stripe" />
-                      <span className="font-semibold text-sm">
+                      {/* <span className="font-semibold text-sm">
                         Credit Card (Stripe)
-                      </span>
+                      </span> */}
+                      <Image
+                        src="/images/stripe-logo.png"
+                        alt="Stripe"
+                        width={50}
+                        height={50}
+                      />
                     </label>
                     <label
                       htmlFor="payment-paypal"
@@ -397,7 +414,13 @@ function PaidMockTestRegistrationForm({
                       )}
                     >
                       <RadioGroupItem value="paypal" id="payment-paypal" />
-                      <span className="font-semibold text-sm">PayPal</span>
+                      {/* <span className="font-semibold text-sm">PayPal</span> */}
+                      <Image
+                        src="/images/paypal-logo.png"
+                        alt="PayPal"
+                        width={50}
+                        height={50}
+                      />
                     </label>
                   </RadioGroup>
                   <FieldError errors={[errors.paymentMethod]} />
