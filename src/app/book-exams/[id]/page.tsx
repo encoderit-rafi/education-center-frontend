@@ -43,7 +43,9 @@ export default async function BookExamsId({
 
   // 2. Fetch all exams to resolve UUID or find children
   try {
-    const listResponse = await api.get("/exams?limit=100");
+    const listResponse = await api.get("/exams", {
+      params: { limit: 100, sort_order: "asc", sort_by: "orderIndex" },
+    });
     const allExams = listResponse.data?.data?.data || [];
 
     if (!exam) {
@@ -53,7 +55,14 @@ export default async function BookExamsId({
     }
 
     if (exam) {
-      childExams = allExams.filter((e: any) => e.parentId === exam.id);
+      // Find all child exams belonging to this exam and sort them by orderIndex ascending
+      childExams = allExams
+        .filter((e: any) => e.parentId === exam.id)
+        .sort((a: any, b: any) => {
+          const aVal = a.orderIndex !== undefined && a.orderIndex !== null ? Number(a.orderIndex) : Infinity;
+          const bVal = b.orderIndex !== undefined && b.orderIndex !== null ? Number(b.orderIndex) : Infinity;
+          return aVal - bVal;
+        });
     }
   } catch (error) {
     console.error("Error fetching all exams list in BookExamsId:", error);
