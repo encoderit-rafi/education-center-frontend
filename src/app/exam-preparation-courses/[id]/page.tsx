@@ -282,7 +282,7 @@ export default async function ExamPreparationDynamicPage({
           </div>
 
 
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 [grid-template-rows:repeat(7,auto)]">
+          <div className="grid gap-4 [grid-template-rows:repeat(7,auto)]">
             {packages.map((pkg, index) => {
               console.log("👉 ~ ExamPreparationDynamicPage ~ pkg:", pkg);
               const basePrice = parseFloat(pkg.price) || 0;
@@ -321,10 +321,120 @@ export default async function ExamPreparationDynamicPage({
               return (
                 <BaseCard
                   key={index}
-                  className="grid [grid-template-rows:subgrid] row-span-7 border-slate-200 group relative overflow-hidden hover:border-primary/30 hover:shadow-2xl transition-all duration-500 ease-out p-0"
-                >
+                  // className="grid [grid-template-rows:subgrid] row-span-7 border-slate-200 group relative overflow-hidden hover:border-primary/30 hover:shadow-2xl transition-all duration-500 ease-out p-0"
+               className="grid md:grid-cols-2"
+               >
+<div className="">
+  <div className="relative aspect-video overflow-hidden">
+                    <Image
+                      src={
+                        pkg.image
+                          ? pkg.image.startsWith("http")
+                            ? pkg.image
+                            : `https://vote.encoder-test-vpn.space/${pkg.image.startsWith("/") ? pkg.image.slice(1) : pkg.image}`
+                          : pkg.slug.includes("group")
+                            ? "/images/hero/image-3.jpg"
+                            : pkg.slug.includes("semi-private")
+                              ? "/images/hero/image-6.png"
+                              : pkg.slug.includes("vip")
+                                ? "/images/hero/image-7.png"
+                                : pkg.slug.includes("online")
+                                  ? "/images/hero/image-8.png"
+                                  : "/images/hero/image-3.jpg"
+                      }
+                      alt={pkg.name}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="object-contain transition-transform duration-500 group-hover:scale-110 "
+                    />
+                    {discount > 0 && (
+                      <div className="absolute top-4 right-4">
+                        <Badge className="py-1 px-3 font-bold shadow-lg">
+                          SAVE {discount}
+                          {discountType === "PERCENTAGE" ? "%" : ""}
+                        </Badge>
+                      </div>
+                    )}
+                  </div>
+</div>
+<div className="">
+ <div className="px-3">
+                    <BaseCardTitle className="text-xl leading-tight">
+                      {pkg.name}
+                    </BaseCardTitle>
+                  </div>
+
+                 
+                  <div className="px-3">
+                    <div className="flex items-baseline gap-3">
+                      <PriceDisplay
+                        amount={discountedPrice}
+                        className="text-3xl"
+                      />
+                      {discount > 0 && (
+                        <span className="text-sm text-slate-400 line-through decoration-slate-300 flex items-center gap-1">
+                          <PriceDisplay
+                            amount={basePrice}
+                            iconClassName="h-[0.7em]"
+                          />
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="px-3">
+                    <BaseCardDescription className="text-sm line-clamp-none text-slate-600 font-medium">
+                      {pkg.description}
+                    </BaseCardDescription>
+                  </div>
+
+                  <div className="px-3 space-y-2 
+                  ">
+                    <Badge variant={"destructive"}>Best For</Badge>
+                    <BaseCardList
+                      items={
+                        Array.isArray(pkg.bestFor)
+                          ? pkg.bestFor
+                          : pkg.bestFor && typeof pkg.bestFor === "object"
+                            ? (pkg.bestFor as any).goals || []
+                            : []
+                      }
+                      checked
+                    />
+                  </div>
+
+                  <div className="px-3">
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <p className="text-[11px] text-slate-400">Duration</p>
+                        <p className="text-xs text-slate-900">
+                          {pkg.duration} Hours
+                        </p>
+                      </div>
+                      <div>
+                        <p className="text-[11px] text-slate-400">Schedule</p>
+                        <p className="text-xs text-slate-900">
+                          {pkg.scheduleInfo}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="px-3 pb-4">
+                    <Link
+                      href={`/exam-preparation-courses/registration?examId=${slug}&courseId=${pkg.id}&price=${discountedPrice}&currency=AED`}
+                      className={cn(
+                        buttonVariants(),
+                        "font-bold h-10 shadow-sm px-4 w-full",
+                      )}
+                    >
+                      <Calendar />
+                      Register
+                    </Link>
+                  </div>
+</div>
                   {/* Row 1 — Image */}
-                  <div className="relative h-48 overflow-hidden">
+                  {/* <div className="relative h-48 overflow-hidden">
                     <Image
                       src={
                         pkg.image
@@ -354,16 +464,16 @@ export default async function ExamPreparationDynamicPage({
                         </Badge>
                       </div>
                     )}
-                  </div>
+                  </div> */}
 
-                  {/* Row 2 — Title */}
-                  <div className="px-3">
+              
+                  {/* <div className="px-3">
                     <BaseCardTitle className="text-xl leading-tight">
                       {pkg.name}
                     </BaseCardTitle>
                   </div>
 
-                  {/* Row 3 — Price */}
+                 
                   <div className="px-3">
                     <div className="flex items-baseline gap-3">
                       <PriceDisplay
@@ -381,16 +491,13 @@ export default async function ExamPreparationDynamicPage({
                     </div>
                   </div>
 
-                  {/* Row 4 — Description */}
                   <div className="px-3">
                     <BaseCardDescription className="text-sm line-clamp-none text-slate-600 font-medium">
                       {pkg.description}
                     </BaseCardDescription>
                   </div>
 
-                  {/* Row 5 — Best For */}
-                  <div className="px-3 space-y-2
-                  
+                  <div className="px-3 space-y-2 
                   ">
                     <Badge variant={"destructive"}>Best For</Badge>
                     <BaseCardList
@@ -405,7 +512,6 @@ export default async function ExamPreparationDynamicPage({
                     />
                   </div>
 
-                  {/* Row 6 — Duration / Schedule */}
                   <div className="px-3">
                     <div className="grid grid-cols-2 gap-4">
                       <div>
@@ -423,7 +529,6 @@ export default async function ExamPreparationDynamicPage({
                     </div>
                   </div>
 
-                  {/* Row 7 — CTA */}
                   <div className="px-3 pb-4">
                     <Link
                       href={`/exam-preparation-courses/registration?examId=${slug}&courseId=${pkg.id}&price=${discountedPrice}&currency=AED`}
@@ -435,7 +540,7 @@ export default async function ExamPreparationDynamicPage({
                       <Calendar />
                       Register
                     </Link>
-                  </div>
+                  </div> */}
                 </BaseCard>
               );
             })}
