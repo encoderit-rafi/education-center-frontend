@@ -15,7 +15,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Trophy, ArrowRight, User, Mail, Info, XIcon } from "lucide-react";
+import { Trophy, ArrowRight, User, Mail, Info, XIcon, Phone, MapPin, Globe } from "lucide-react";
 import {
   Field,
   FieldLabel,
@@ -131,6 +131,9 @@ const QUIZ_QUESTIONS = [
 const quizSchema = z.object({
   fullName: z.string().min(2, "Name is too short"),
   email: z.string().email("Invalid email address"),
+  phoneNumber: z.string().optional(),
+  city: z.string().min(2, "Emirate/City is required"),
+  country: z.string().min(2, "Country is required"),
   answers: z.record(
     z.string(),
     z.string().min(1, "Please answer this question"),
@@ -155,6 +158,9 @@ export default function EnglishQuizPage() {
     defaultValues: {
       fullName: "",
       email: "",
+      phoneNumber: "",
+      city: "",
+      country: "",
       answers: Object.fromEntries(
         QUIZ_QUESTIONS.map((q) => [q.id.toString(), ""]),
       ),
@@ -237,11 +243,73 @@ export default function EnglishQuizPage() {
                   <FieldError errors={[errors.email]} />
                 </FieldContent>
               </Field>
+
+              <Field>
+                <FieldLabel>Phone Number</FieldLabel>
+                <FieldContent>
+                  <div className="relative">
+                    <Phone
+                      className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+                      size={16}
+                    />
+                    <Input
+                      {...register("phoneNumber")}
+                      className="pl-10"
+                      placeholder="+971 50 123 4567"
+                      aria-invalid={!!errors.phoneNumber}
+                    />
+                  </div>
+                  <FieldError errors={[errors.phoneNumber]} />
+                </FieldContent>
+              </Field>
+
+              <Field>
+                <FieldLabel required>Emirate / City</FieldLabel>
+                <FieldContent>
+                  <div className="relative">
+                    <MapPin
+                      className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+                      size={16}
+                    />
+                    <Input
+                      {...register("city")}
+                      className="pl-10"
+                      placeholder="Dubai"
+                      aria-invalid={!!errors.city}
+                    />
+                  </div>
+                  <FieldError errors={[errors.city]} />
+                </FieldContent>
+              </Field>
+
+              <Field>
+                <FieldLabel required>Country</FieldLabel>
+                <FieldContent>
+                  <div className="relative">
+                    <Globe
+                      className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+                      size={16}
+                    />
+                    <Input
+                      {...register("country")}
+                      className="pl-10"
+                      placeholder="United Arab Emirates"
+                      aria-invalid={!!errors.country}
+                    />
+                  </div>
+                  <FieldError errors={[errors.country]} />
+                </FieldContent>
+              </Field>
             </div>
           </div>
 
           {/* Questions */}
-          <div className="space-y-6">
+          <div 
+            className="space-y-6 select-none"
+            onContextMenu={(e) => e.preventDefault()}
+            onCopy={(e) => e.preventDefault()}
+            onCut={(e) => e.preventDefault()}
+          >
             {QUIZ_QUESTIONS.map((q, idx) => (
               <Field
                 key={q.id}
@@ -249,7 +317,7 @@ export default function EnglishQuizPage() {
                 className={cn(
                   "bg-white border border-slate-200 rounded-md p-8 transition-colors",
                   errors.answers?.[q.id.toString()] &&
-                    "border-destructive/50 ring-1 ring-destructive/10 bg-destructive/5",
+                  "border-destructive/50 ring-1 ring-destructive/10 bg-destructive/5",
                 )}
               >
                 <div className="flex gap-4">
@@ -296,8 +364,8 @@ export default function EnglishQuizPage() {
                       <FieldError
                         errors={[
                           errors.answers?.[q.id.toString()] as
-                            | { message?: string }
-                            | undefined,
+                          | { message?: string }
+                          | undefined,
                         ]}
                       />
                     </FieldContent>
