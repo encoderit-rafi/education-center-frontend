@@ -10,7 +10,7 @@ import { useMutation } from "@tanstack/react-query";
 import api from "@/axios";
 import { format } from "date-fns";
 import { User, ShieldCheck, Globe } from "lucide-react";
-import { GlobalReviewStep } from "@/components/blocks/forms/global-review-step";
+import { GlobalReviewStep, ReviewSummaryGrid } from "@/components/blocks/forms/global-review-step";
 
 import { TermsStep } from "./steps/terms-step";
 import { DateStep } from "./steps/date-step";
@@ -320,58 +320,37 @@ export default function FormIeltsAcademicRegistration() {
               reviewStepNumber={4}
               paymentStepNumber={5}
             >
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {/* Personal Details Summary */}
-                <div className="space-y-6">
-                  <div className="flex items-center gap-2 text-black">
-                    <User className="size-4" />
-                    <span className="text-xs font-bold tracking-widest text-black">PERSONAL DETAILS</span>
-                  </div>
-                  <div className="space-y-4">
-                    <div className="flex flex-col"><span className="text-[10px] text-slate-400 font-bold uppercase">Given Names</span><span className="text-sm font-semibold text-black">{formData.givenNames}</span></div>
-                    <div className="flex flex-col"><span className="text-[10px] text-slate-400 font-bold uppercase">Middle Name</span><span className="text-sm font-semibold text-black">{formData.middleName || "N/A"}</span></div>
-                    <div className="flex flex-col"><span className="text-[10px] text-slate-400 font-bold uppercase">Surnames</span><span className="text-sm font-semibold text-black">{formData.surnames || "N/A"}</span></div>
-                    <div className="flex flex-col"><span className="text-[10px] text-slate-400 font-bold uppercase">Date of Birth</span><span className="text-sm font-semibold text-black">{formData.dateOfBirth ? format(formData.dateOfBirth, "PPP") : "N/A"}</span></div>
-                    <div className="flex flex-col"><span className="text-[10px] text-slate-400 font-bold uppercase">Gender</span><span className="text-sm font-semibold text-black capitalize">{formData.sex || "N/A"}</span></div>
-                    <div className="flex flex-col"><span className="text-[10px] text-slate-400 font-bold uppercase">Mobile Number</span><span className="text-sm font-semibold text-black">{formData.mobileNumber || "N/A"}</span></div>
-                    <div className="flex flex-col"><span className="text-[10px] text-slate-400 font-bold uppercase">Nationality</span><span className="text-sm font-semibold text-black">{formData.nationality || "N/A"}</span></div>
-                  </div>
-                </div>
-                {/* Identity & Contact Summary */}
-                <div className="space-y-6">
-                  <div className="flex items-center gap-2 text-black">
-                    <ShieldCheck className="size-4" />
-                    <span className="text-xs font-bold tracking-widest">IDENTITY &amp; CONTACT</span>
-                  </div>
-                  <div className="space-y-4">
-                    <div className="flex flex-col"><span className="text-[10px] text-slate-400 font-bold uppercase">ID Type</span><span className="text-sm font-semibold text-black capitalize">{formData.idType?.replace("_", " ")}</span></div>
-                    <div className="flex flex-col"><span className="text-[10px] text-slate-400 font-bold uppercase">ID Number</span><span className="text-sm font-semibold text-black">{formData.idNumber || "N/A"}</span></div>
-                    <div className="flex flex-col"><span className="text-[10px] text-slate-400 font-bold uppercase">Email</span><span className="text-sm font-semibold text-black">{formData.email}</span></div>
-                    <div className="flex flex-col"><span className="text-[10px] text-slate-400 font-bold uppercase">ID Expiry Date</span><span className="text-sm font-semibold text-black">{formData.idExpiryDate ? format(formData.idExpiryDate, "PPP") : "N/A"}</span></div>
-                    <div className="flex flex-col"><span className="text-[10px] text-slate-400 font-bold uppercase">Identity Document</span><span className="text-sm font-semibold text-black">{formData.idDocument ? (formData.idDocument as File).name : "No file attached"}</span></div>
-                    <div className="flex flex-col"><span className="text-[10px] text-slate-400 font-bold uppercase">Issuing Authority</span><span className="text-sm font-semibold text-black">{formData.issuingAuthority || "N/A"}</span></div>
-                  </div>
-                </div>
-                {/* Test Info Summary */}
-                <div className="space-y-6">
-                  <div className="flex items-center gap-2 text-black">
-                    <Globe className="size-4" />
-                    <span className="text-xs font-bold tracking-widest">TEST INFORMATION</span>
-                  </div>
-                  <div className="space-y-4">
-                    <div className="flex flex-col"><span className="text-[10px] text-slate-400 font-bold uppercase">Exam Date</span><span className="text-sm font-semibold text-primary">{formData.examDate ? format(formData.examDate, "PPP") : "N/A"}</span></div>
-                    <div className="flex flex-col"><span className="text-[10px] text-slate-400 font-bold uppercase">Time Slot</span><span className="text-sm font-semibold text-black">{formData.examTimeSlot === "9:00 AM" ? "Morning Session (09:00 AM)" : formData.examTimeSlot === "11:00 AM" ? "Morning Session (11:00 AM)" : "Morning Session"}</span></div>
-                    <div className="flex flex-col"><span className="text-[10px] text-slate-400 font-bold uppercase">Address Line 1</span><span className="text-sm font-semibold text-black">{formData.postalAddress1}</span></div>
-                    {formData.postalAddress2 && <div className="flex flex-col"><span className="text-[10px] text-slate-400 font-bold uppercase">Address Line 2</span><span className="text-sm font-semibold text-black">{formData.postalAddress2}</span></div>}
-                    <div className="flex flex-col"><span className="text-[10px] text-slate-400 font-bold uppercase">Emirate / City</span><span className="text-sm font-semibold text-black">{formData.city}</span></div>
-                    <div className="flex flex-col"><span className="text-[10px] text-slate-400 font-bold uppercase">Country of Residence</span><span className="text-sm font-semibold text-black">{formData.residenceCountry}</span></div>
-                    <div className="flex flex-col"><span className="text-[10px] text-slate-400 font-bold uppercase">P.O. Box</span><span className="text-sm font-semibold text-black">{formData.poBox || "N/A"}</span></div>
-                    <div className="flex flex-col"><span className="text-[10px] text-slate-400 font-bold uppercase">Postal Code</span><span className="text-sm font-semibold text-black">{formData.postcode || "N/A"}</span></div>
-                    <div className="flex flex-col"><span className="text-[10px] text-slate-400 font-bold uppercase">First Language</span><span className="text-sm font-semibold text-black">{formData.firstLanguage || "N/A"}</span></div>
-                    <div className="flex flex-col"><span className="text-[10px] text-slate-400 font-bold uppercase">Education Level</span><span className="text-sm font-semibold text-black">{formData.educationLevel || "N/A"}</span></div>
-                  </div>
-                </div>
-              </div>
+                            <ReviewSummaryGrid
+                personalDetails={[
+                  { label: "Given Names", value: formData.givenNames },
+                  { label: "Middle Name", value: formData.middleName || "N/A" },
+                  { label: "Surnames", value: formData.surnames || "N/A" },
+                  { label: "Date of Birth", value: formData.dateOfBirth ? format(new Date(formData.dateOfBirth as any), "PPP") : "N/A" },
+                  { label: "Gender", value: formData.sex || "N/A" },
+                  { label: "Mobile Number", value: formData.mobileNumber || "N/A" },
+                  { label: "Nationality", value: formData.nationality || "N/A" },
+                ]}
+                identityContact={[
+                  { label: "ID Type", value: formData.idType?.replace("_", " ") },
+                  { label: "ID Number", value: formData.idNumber || "N/A" },
+                  { label: "Email", value: formData.email },
+                  { label: "ID Expiry Date", value: formData.idExpiryDate ? format(new Date(formData.idExpiryDate as any), "PPP") : "N/A" },
+                  { label: "Identity Document", value: formData.idDocument ? (formData.idDocument as File).name : "No file attached" },
+                  { label: "Issuing Authority", value: formData.issuingAuthority || "N/A" },
+                ]}
+                testInformation={[
+                  { label: "Exam Date", value: formData.examDate ? format(new Date(formData.examDate as any), "PPP") : "N/A", highlight: true },
+                  { label: "Time Slot", value: formData.examTimeSlot === "9:00 AM" ? "Morning Session (09:00 AM)" : formData.examTimeSlot === "11:00 AM" ? "Morning Session (11:00 AM)" : "Morning Session" },
+                  { label: "Address Line 1", value: formData.postalAddress1 },
+                  ...(formData.postalAddress2 ? [{ label: "Address Line 2", value: formData.postalAddress2 }] : []),
+                  { label: "Emirate / City", value: formData.city },
+                  { label: "Country of Residence", value: formData.residenceCountry },
+                  { label: "P.O. Box", value: formData.poBox || "N/A" },
+                  { label: "Postal Code", value: formData.postcode || "N/A" },
+                  { label: "First Language", value: formData.firstLanguage || "N/A" },
+                  { label: "Education Level", value: formData.educationLevel || "N/A" },
+                ]}
+              />
             </GlobalReviewStep>
           )}
         </Form>

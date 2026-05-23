@@ -1,16 +1,96 @@
 "use client";
 
 import React from "react";
-import { Edit3, CreditCard } from "lucide-react";
+import { Edit3, CreditCard, User, ShieldCheck, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PriceDisplay } from "@/components/ui/price-display";
 import Stepper from "@/components/stepper";
 import { PaymentMethodSelector } from "@/components/blocks/payment-method-selector";
+import { cn } from "@/lib/utils";
+
+// ─── ReviewSummaryGrid ────────────────────────────────────────────────────────
+
+export interface ReviewField {
+  label: string;
+  value?: string | React.ReactNode | null;
+  /** If true, value text is rendered in the brand red (#A11D1D / text-primary) */
+  highlight?: boolean;
+}
+
+export interface ReviewSummaryGridProps {
+  personalDetails: ReviewField[];
+  identityContact: ReviewField[];
+  testInformation: ReviewField[];
+}
+
+function SummarySection({
+  icon,
+  title,
+  fields,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  fields: ReviewField[];
+}) {
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center gap-2 text-black">
+        {icon}
+        <span className="text-xs font-bold tracking-widest uppercase">{title}</span>
+      </div>
+      <div className="space-y-4">
+        {fields.map((field, i) => (
+          <div key={i} className="flex flex-col">
+            <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">
+              {field.label}
+            </span>
+            <span
+              className={cn(
+                "text-sm font-bold",
+                field.highlight ? "text-[#A11D1D]" : "text-slate-900",
+              )}
+            >
+              {field.value ?? "N/A"}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export function ReviewSummaryGrid({
+  personalDetails,
+  identityContact,
+  testInformation,
+}: ReviewSummaryGridProps) {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <SummarySection
+        icon={<User className="size-4" />}
+        title="Personal Details"
+        fields={personalDetails}
+      />
+      <SummarySection
+        icon={<ShieldCheck className="size-4" />}
+        title="Identity & Contact"
+        fields={identityContact}
+      />
+      <SummarySection
+        icon={<Globe className="size-4" />}
+        title="Test Information"
+        fields={testInformation}
+      />
+    </div>
+  );
+}
+
+// ─── GlobalReviewStep ─────────────────────────────────────────────────────────
 
 interface GlobalReviewStepProps {
   onEdit: () => void;
   onSubmit: (e?: React.BaseSyntheticEvent) => Promise<void>;
-  
+
   // Payment Section State
   paymentMethodValue: string;
   onPaymentMethodChange: (val: string) => void;
@@ -26,7 +106,7 @@ interface GlobalReviewStepProps {
 
   // Layout / Details
   children: React.ReactNode;
-  
+
   reviewStepNumber: number;
   paymentStepNumber: number;
 }

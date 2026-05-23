@@ -1,4 +1,6 @@
 "use client";
+import { format } from "date-fns";
+import { GlobalReviewStep, ReviewSummaryGrid } from "@/components/blocks/forms/global-review-step";
 
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -309,26 +311,48 @@ export default function FormSELTA1Registration({ initialId }: { initialId?: stri
           )}
 
           {currentStep === 3 && (
-            <ReviewStep
-              data={formData}
-              form={form as any}
+            <GlobalReviewStep
               onEdit={() => goToStep(2)}
-              onSubmit={(e) => form.handleSubmit(handleFormSubmit, onInvalid)(e)}
-              onInvalid={onInvalid}
+              onSubmit={form.handleSubmit(handleFormSubmit, onInvalid)}
+              paymentMethodValue={formData.paymentMethod}
+              onPaymentMethodChange={(val) => form.setValue("paymentMethod", val as any)}
+              paymentMethodError={(form.formState.errors as any)?.paymentMethod}
+              examName={examName}
               baseFee={pricing.baseFee}
               serviceFee={pricing.serviceFee}
               total={total}
-              selectedCourseData={
-                formData.selectedCourse
-                  ? (COURSES_DATA as any)[formData.selectedCourse]
-                  : undefined
-              }
-              selectedWorkshopData={
-                formData.selectedWorkshop
-                  ? (WORKSHOPS_DATA as any)[formData.selectedWorkshop]
-                  : undefined
-              }
-            />
+              selectedCourseData={formData.selectedCourse ? (COURSES_DATA as any)[formData.selectedCourse] : undefined}
+              selectedWorkshopData={formData.selectedWorkshop ? (WORKSHOPS_DATA as any)[formData.selectedWorkshop] : undefined}
+              reviewStepNumber={4}
+              paymentStepNumber={5}
+            >
+              <ReviewSummaryGrid
+                personalDetails={[
+                  { label: "Given Names", value: formData.givenNames },
+                  { label: "Middle Name", value: formData.middleName || "N/A" },
+                  { label: "Surnames", value: formData.surnames || "N/A" },
+                  { label: "Date of Birth", value: formData.dateOfBirth ? format(new Date(formData.dateOfBirth as any), "PPP") : "N/A" },
+                  { label: "Sex", value: formData.sex || "N/A" },
+                  { label: "Mobile Number", value: formData.mobileNumber || "N/A" },
+                  { label: "Nationality", value: formData.nationality || "N/A" },
+                ]}
+                identityContact={[
+                  { label: "ID Type", value: formData.idType?.replace("_", " ") },
+                  { label: "ID Number", value: formData.idNumber || "N/A" },
+                  { label: "Email", value: formData.email },
+                  { label: "ID Expiry Date", value: formData.idExpiryDate ? format(new Date(formData.idExpiryDate as any), "PPP") : "N/A" },
+                  { label: "Identity Document", value: formData.idDocument ? (formData.idDocument as File).name : "No file attached" },
+                  { label: "Issuing Authority", value: formData.issuingAuthority || "N/A" },
+                ]}
+                testInformation={[
+                  { label: "Exam Date", value: formData.examDate ? format(new Date(formData.examDate as any), "PPP") : "N/A", highlight: true },
+                  { label: "Time Slot", value: formData.examTimeSlot },
+                  { label: "Address", value: `${formData.postalAddress1}, ${formData.city}` },
+                  { label: "First Language", value: formData.firstLanguage || "N/A" },
+                  { label: "Education Level", value: formData.educationLevel || "N/A" },
+                ]}
+              />
+            </GlobalReviewStep>
           )}
         </Form>
       </div>

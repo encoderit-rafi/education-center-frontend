@@ -1,4 +1,6 @@
 "use client";
+import { format } from "date-fns";
+import { GlobalReviewStep, ReviewSummaryGrid } from "@/components/blocks/forms/global-review-step";
 
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -288,18 +290,54 @@ export default function FormPTEAcademicRegistration() {
           )}
 
           {currentStep === 3 && (
-            <ReviewStep
-              data={formData}
-              form={form}
+            <GlobalReviewStep
               onEdit={() => goToStep(2)}
               onSubmit={form.handleSubmit(handleFormSubmit, onInvalid)}
-              onInvalid={onInvalid}
+              paymentMethodValue={(formData as any)?.paymentMethod}
+              onPaymentMethodChange={(val) => (form.setValue as any)("paymentMethod", val)}
+              paymentMethodError={(form.formState.errors as any)?.paymentMethod}
+              examName="PTE Academic Exam"
               baseFee={pricing.baseFee}
               serviceFee={pricing.serviceFee}
               total={total}
-              selectedCourseData={formData.selectedCourse ? (PTE_COURSES as any)[formData.selectedCourse] : null}
-              selectedWorkshopData={formData.selectedWorkshop ? (PTE_WORKSHOPS as any)[formData.selectedWorkshop] : null}
-            />
+              selectedCourseData={formData.selectedCourse ? (PTE_COURSES as any)[formData.selectedCourse] : undefined}
+              selectedWorkshopData={formData.selectedWorkshop ? (PTE_WORKSHOPS as any)[formData.selectedWorkshop] : undefined}
+              reviewStepNumber={3}
+              paymentStepNumber={4}
+            >
+              <ReviewSummaryGrid
+                personalDetails={[
+                  { label: "Given Names", value: formData.noGivenNames ? "N/A" : formData.givenNames },
+                  { label: "Middle Name", value: formData.middleName || "N/A" },
+                  { label: "Surnames", value: formData.noSurname ? "N/A" : formData.surnames },
+                  { label: "Date of Birth", value: formData.dateOfBirth ? format(new Date(formData.dateOfBirth as any), "PPP") : "N/A" },
+                  { label: "Sex", value: formData.gender || "N/A" },
+                  { label: "Mobile Number", value: formData.mobileNumber || "N/A" },
+                  { label: "Nationality", value: formData.countryOfCitizenship || "N/A" },
+                ]}
+                identityContact={[
+                  { label: "ID Type", value: formData.idType?.replace("_", " ") },
+                  { label: "ID Number", value: formData.idNumber || "N/A" },
+                  { label: "Email", value: formData.emailUsername },
+                  { label: "ID Expiry Date", value: formData.idExpiryDate ? format(new Date(formData.idExpiryDate as any), "PPP") : "N/A" },
+                  { label: "Identity Document", value: formData.passportCopy ? (formData.passportCopy as File).name : "No file attached" },
+                ]}
+                testInformation={[
+                  { label: "Exam Date", value: formData.examDate ? format(new Date(formData.examDate as any), "PPP") : "N/A", highlight: true },
+                  { label: "Time Slot", value: formData.examTime || "N/A" },
+                  { label: "Address Line 1", value: formData.postalAddress1 },
+                  ...(formData.postalAddress2 ? [{ label: "Address Line 2", value: formData.postalAddress2 }] : []),
+                  { label: "Emirate / City", value: formData.city },
+                  { label: "Country of Residence", value: formData.countryOfResidence },
+                  { label: "P.O. Box", value: formData.poBox || "N/A" },
+                  { label: "Postal Code", value: formData.postcode || "N/A" },
+                  { label: "First Language", value: formData.homeLanguage || "N/A" },
+                  { label: "Destination Country", value: formData.planningCountry || "N/A" },
+                  { label: "Reason for Test", value: `${formData.reasonForTaking} ${formData.studyLevel ? `(${formData.studyLevel})` : ""}`.trim() },
+                  { label: "Current Situation", value: formData.currentSituation },
+                ]}
+              />
+            </GlobalReviewStep>
           )}
         </Form>
       </div>

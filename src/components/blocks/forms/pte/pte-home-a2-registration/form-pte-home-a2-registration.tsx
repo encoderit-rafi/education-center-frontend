@@ -1,4 +1,6 @@
 "use client";
+import { format } from "date-fns";
+import { GlobalReviewStep, ReviewSummaryGrid } from "@/components/blocks/forms/global-review-step";
 
 import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -336,26 +338,50 @@ export default function FormPTEHomeA2Registration() {
           )}
 
           {currentStep === 3 && (
-            <ReviewStep
-              data={formData}
-              form={form}
+            <GlobalReviewStep
               onEdit={() => goToStep(2)}
               onSubmit={form.handleSubmit(handleFormSubmit, onInvalid)}
-              onInvalid={onInvalid}
+              paymentMethodValue={(formData as any)?.paymentMethod}
+              onPaymentMethodChange={(val) => (form.setValue as any)("paymentMethod", val)}
+              paymentMethodError={(form.formState.errors as any)?.paymentMethod}
+              examName="PTE Home A2 Exam"
               baseFee={pricing.baseFee}
               serviceFee={pricing.serviceFee}
-              total={pricing.total}
-              selectedCourseData={
-                formData.selectedCourse
-                  ? (COURSES_DATA as any)[formData.selectedCourse]
-                  : undefined
-              }
-              selectedWorkshopData={
-                formData.selectedWorkshop
-                  ? (WORKSHOPS_DATA as any)[formData.selectedWorkshop]
-                  : undefined
-              }
-            />
+              total={total}
+              selectedCourseData={formData.selectedCourse ? (COURSES_DATA as any)[formData.selectedCourse] : undefined}
+              selectedWorkshopData={formData.selectedWorkshop ? (WORKSHOPS_DATA as any)[formData.selectedWorkshop] : undefined}
+              reviewStepNumber={3}
+              paymentStepNumber={4}
+            >
+              <ReviewSummaryGrid
+                personalDetails={[
+                  { label: "Given Names", value: formData.noGivenNames ? "N/A" : formData.givenNames },
+                  ...((formData as any).middleNames ? [{ label: "Middle Names", value: (formData as any).middleNames }] : []),
+                  { label: "Surnames", value: formData.noSurname ? "N/A" : formData.surnames },
+                  { label: "Date of Birth", value: formData.dateOfBirth ? format(new Date(formData.dateOfBirth as any), "PPP") : "N/A" },
+                  { label: "Sex", value: formData.gender || "N/A" },
+                  { label: "Mobile Number", value: formData.mobileNumber || "N/A" },
+                  { label: "Nationality", value: formData.countryOfCitizenship || "N/A" },
+                ]}
+                identityContact={[
+                  { label: "ID Type", value: formData.idType?.replace("_", " ") },
+                  { label: "ID Number", value: formData.idNumber || "N/A" },
+                  { label: "Email", value: (formData as any).emailUsername },
+                  { label: "ID Expiry Date", value: formData.idExpiryDate ? format(new Date(formData.idExpiryDate as any), "PPP") : "N/A" },
+                  { label: "Identity Document", value: (formData as any).idDocument ? ((formData as any).idDocument as File).name : "No file attached" },
+                ]}
+                testInformation={[
+                  { label: "Exam Date", value: formData.examDate ? format(new Date(formData.examDate as any), "PPP") : "N/A", highlight: true },
+                  { label: "Time Slot", value: (formData as any).examTime || "N/A" },
+                  { label: "Full Address", value: (formData as any).address },
+                  { label: "Emirate / City", value: formData.city },
+                  { label: "Country of Residence", value: formData.countryOfResidence },
+                  { label: "First Language", value: formData.homeLanguage || "N/A" },
+                  { label: "Reason for Test", value: formData.reasonForTaking },
+                  { label: "Current Situation", value: formData.currentSituation },
+                ]}
+              />
+            </GlobalReviewStep>
           )}
         </Form>
       </div>
