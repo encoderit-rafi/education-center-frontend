@@ -1,4 +1,5 @@
-import { useState } from "react";
+"use client";
+import { useState, useRef, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -40,374 +41,9 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import api from "@/axios";
+import { toast } from "sonner";
 
-const QUESTIONS = [
-  {
-    id: "q1",
-    text: "I ___ Jhon.",
-    subtext: "Choose the correct option",
-    options: ["is", "am", "are", "be"],
-  },
-  {
-    id: "q2",
-    text: "She ___ a nurse.",
-    subtext: "Choose the correct option",
-    options: ["is", "are", "am", "be"],
-  },
-  {
-    id: "q3",
-    text: "Choose the correct option: “What’s this?” — “It’s ___ apple.”",
-    subtext: "Choose the correct option",
-    options: ["a", "an", "the", "some"],
-  },
-  {
-    id: "q4",
-    text: "They ___ from Australia.",
-    subtext: "Choose the correct option",
-    options: ["is", "be", "are", "am"],
-  },
-  {
-    id: "q5",
-    text: "“Where are you from?” — “___ from Egypt.”",
-    subtext: "Choose the correct option",
-    options: ["I’m", "I", "Me", "Mine"],
-  },
-  {
-    id: "q6",
-    text: "My brother ___ in London.",
-    subtext: "Choose the correct option",
-    options: ["live", "living", "lives", "lived"],
-  },
-  {
-    id: "q7",
-    text: "I want ___ tea, please.",
-    subtext: "Choose the correct option",
-    options: ["any", "some", "a", "an"],
-  },
-  {
-    id: "q8",
-    text: "What time is it? It’s ___ 3 o’clock.",
-    subtext: "Choose the correct option",
-    options: ["on", "at", "in", "to"],
-  },
-  {
-    id: "q9",
-    text: "I usually ___ to work by bus.",
-    subtext: "Choose the correct option",
-    options: ["go", "goes", "going", "went"],
-  },
-  {
-    id: "q10",
-    text: "She can’t come now because she ___ dinner.",
-    subtext: "Choose the correct option",
-    options: ["cooks", "is cooking", "cooked", "has cooked"],
-  },
-  {
-    id: "q11",
-    text: "We didn’t go out ___ the weather was bad.",
-    subtext: "Choose the correct option",
-    options: ["but", "because", "so", "and"],
-  },
-  {
-    id: "q12",
-    text: "I’ve got a headache. I need ___ medicine.",
-    subtext: "Choose the correct option",
-    options: ["a", "an", "some", "few"],
-  },
-  {
-    id: "q13",
-    text: "The meeting starts ___ 9:30.",
-    subtext: "Choose the correct option",
-    options: ["in", "on", "at", "for"],
-  },
-  {
-    id: "q14",
-    text: "Which sentence is correct?",
-    subtext: "Choose the correct option",
-    options: [
-      "He don’t like coffee.",
-      "He doesn’t likes coffee.",
-      "He doesn’t like coffee.",
-      "He not like coffee.",
-    ],
-  },
-  {
-    id: "q15",
-    text: "“How often do you exercise?” — “___.”",
-    subtext: "Choose the correct option",
-    options: ["Yesterday", "At the gym", "Twice a week", "With my friend"],
-  },
-  {
-    id: "q16",
-    text: "The film was very ___; I almost fell asleep.",
-    subtext: "Choose the correct option",
-    options: ["bored", "boring", "bore", "bores"],
-  },
-  {
-    id: "q17",
-    text: "If it rains tomorrow, we ___ at home.",
-    subtext: "Choose the correct option",
-    options: ["stay", "will stay", "stayed", "staying"],
-  },
-  {
-    id: "q18",
-    text: "I’ve lived in this city ___ 2018.",
-    subtext: "Choose the correct option",
-    options: ["for", "since", "from", "during"],
-  },
-  {
-    id: "q19",
-    text: "She asked me ___ I could help her.",
-    subtext: "Choose the correct option",
-    options: ["what", "if", "that", "why"],
-  },
-  {
-    id: "q20",
-    text: "I’m not used to ___ in such cold weather.",
-    subtext: "Choose the correct option",
-    options: ["drive", "drove", "driving", "drives"],
-  },
-  {
-    id: "q21",
-    text: "“Could you send me the report?” — “___.”",
-    subtext: "Choose the correct option",
-    options: [
-      "Yes, I sent",
-      "Yes, I will send it soon",
-      "Yes, I am sending yesterday",
-      "Yes, I send",
-    ],
-  },
-  {
-    id: "q22",
-    text: "The book was ___ interesting that I finished it in one day.",
-    subtext: "Choose the correct option",
-    options: ["so", "much", "too", "very"],
-  },
-  {
-    id: "q23",
-    text: "When I arrived, they ___ dinner.",
-    subtext: "Choose the correct option",
-    options: ["have", "were having", "had", "are having"],
-  },
-  {
-    id: "q24",
-    text: "I don’t mind ___ late today.",
-    subtext: "Choose the correct option",
-    options: ["work", "working", "to work", "worked"],
-  },
-  {
-    id: "q25",
-    text: "What does the sentence mean? “Prices have gone up significantly.”",
-    subtext: "Choose the correct option",
-    options: [
-      "prices are cheaper now",
-      "prices are the same",
-      "prices are higher now",
-      "prices will go down",
-    ],
-  },
-  {
-    id: "q26",
-    text: "If I ___ more time, I would learn another language.",
-    subtext: "Choose the correct option",
-    options: ["have", "had", "will have", "would have"],
-  },
-  {
-    id: "q27",
-    text: "The manager wants the report ___ by Friday.",
-    subtext: "Choose the correct option",
-    options: ["finish", "finishing", "to finish", "finished"],
-  },
-  {
-    id: "q28",
-    text: "The company is looking for someone who ___ work independently.",
-    subtext: "Choose the correct option",
-    options: ["can", "must", "should", "might"],
-  },
-  {
-    id: "q29",
-    text: "Choose the sentence that is closest in meaning: “Despite the traffic, we arrived on time.”",
-    subtext: "Choose the correct option",
-    options: [
-      "We arrived late because of the traffic.",
-      "We didn’t arrive because of the traffic.",
-      "The traffic was bad, but we still arrived on time.",
-      "The traffic helped us arrive early.",
-    ],
-  },
-  {
-    id: "q30",
-    text: "I’d rather you ___ the documents before the meeting.",
-    subtext: "Choose the correct option",
-    options: ["check", "checked", "checking", "to check"],
-  },
-  {
-    id: "q31",
-    text: "The results were not as good as we expected, ___ we decided to review our strategy.",
-    subtext: "Choose the correct option",
-    options: ["although", "so", "because", "unless"],
-  },
-  {
-    id: "q32",
-    text: "The new policy aims to reduce waste by encouraging people to use fewer disposable products. What is the main purpose of the policy?",
-    subtext: "Choose the correct option",
-    options: [
-      "To increase waste",
-      "To encourage more disposable products",
-      "To reduce waste",
-      "To ban all products",
-    ],
-  },
-  {
-    id: "q33",
-    text: "She speaks French fluently, ___ she has never lived in France.",
-    subtext: "Choose the correct option",
-    options: ["because", "although", "so", "unless"],
-  },
-  {
-    id: "q34",
-    text: "The project, ___ was delayed for months, has finally been completed.",
-    subtext: "Choose the correct option",
-    options: ["which", "who", "where", "what"],
-  },
-  {
-    id: "q35",
-    text: "The proposal was rejected, not because it lacked potential, but because it ___ too many risks.",
-    subtext: "Choose the correct option",
-    options: ["Involved", "was involving", "had involved", "involves"],
-  },
-  {
-    id: "q36",
-    text: "The CEO insisted that the report ___ submitted before noon.",
-    subtext: "Choose the correct option",
-    options: ["is", "be", "was", "being"],
-  },
-  {
-    id: "q37",
-    text: "The documentary provides a compelling insight ___ how technology is shaping modern education.",
-    subtext: "Choose the correct option",
-    options: ["for", "into", "about", "with"],
-  },
-  {
-    id: "q38",
-    text: "Had I known about the deadline, I ___ more carefully.",
-    subtext: "Choose the correct option",
-    options: ["will plan", "would have planned", "planned", "would plan"],
-  },
-  {
-    id: "q39",
-    text: "The writer’s tone in the article can best be described as ___.",
-    subtext: "Choose the correct option",
-    options: [
-      "emotional and angry",
-      "neutral and analytical",
-      "humorous and informal",
-      "confused and uncertain",
-    ],
-  },
-  {
-    id: "q40",
-    text: "The company’s rapid expansion is largely attributable to its ability to ___ new markets quickly.",
-    subtext: "Choose the correct option",
-    options: ["penetrate", "penetrate into", "penetrating", "be penetrating"],
-  },
-  {
-    id: "q41",
-    text: "The findings were inconclusive; ___, further research is required.",
-    subtext: "Choose the correct option",
-    options: ["nevertheless", "otherwise", "although", "moreover"],
-  },
-  {
-    id: "q42",
-    text: "The speaker’s argument was coherent, well-structured, and supported by evidence. Which statement is true?",
-    subtext: "Choose the correct option",
-    options: [
-      "The argument was unclear",
-      "The argument was logical and organized",
-      "The argument lacked examples",
-      "The argument was emotional",
-    ],
-  },
-  {
-    id: "q43",
-    text: "The committee agreed to postpone the decision until more data ___ available.",
-    subtext: "Choose the correct option",
-    options: ["will be", "is", "was", "would be"],
-  },
-  {
-    id: "q44",
-    text: "The researcher challenged the assumption, arguing that the data had been interpreted too narrowly. What does this imply?",
-    subtext: "Choose the correct option",
-    options: [
-      "The data was clear and complete",
-      "The interpretation may have been limited",
-      "The researcher agreed with the conclusion",
-      "The data was irrelevant",
-    ],
-  },
-  {
-    id: "q45",
-    text: "The success of the initiative hinges on stakeholders’ willingness to collaborate. The word “hinges” is closest in meaning to:",
-    subtext: "Choose the correct option",
-    options: ["Depends", "Ignores", "Reduces", "Delays"],
-  },
-  {
-    id: "q46",
-    text: "The author juxtaposes two contrasting perspectives to highlight the complexity of the issue. What does “juxtaposes” mean?",
-    subtext: "Choose the correct option",
-    options: [
-      "Separates completely",
-      "Places side by side",
-      "Removes from context",
-      "Simplifies",
-    ],
-  },
-  {
-    id: "q47",
-    text: "Which sentence is the most stylistically formal?",
-    subtext: "Choose the correct option",
-    options: [
-      "The results were kind of surprising.",
-      "The results were surprising, you know.",
-      "The results were somewhat unexpected.",
-      "The results were super surprising.",
-    ],
-  },
-  {
-    id: "q48",
-    text: "The argument fails to account for several socioeconomic variables, thereby weakening its overall validity. What is the function of “thereby”?",
-    subtext: "Choose the correct option",
-    options: [
-      "It introduces a contrast",
-      "It shows a result",
-      "It gives an example",
-      "It repeats an idea",
-    ],
-  },
-  {
-    id: "q49",
-    text: "Select the sentence that demonstrates precise, academic style.",
-    subtext: "Choose the correct option",
-    options: [
-      "People don’t really get how big the problem is.",
-      "The issue is, like, really serious for many people.",
-      "The issue is, like, really serious for many people.",
-      "The problem is super huge and stuff.",
-    ],
-  },
-  {
-    id: "q50",
-    text: "The reviewer’s critique was both incisive and balanced. “Incisive” most nearly means:",
-    subtext: "Choose the correct option",
-    options: [
-      "Unclear",
-      "sharply analytical",
-      "overly emotional",
-      "repetitive",
-    ],
-  },
-];
 
 const TIMES = [
   { label: "Morning (9:00 AM – 11:30 AM)", value: "Morning" },
@@ -438,6 +74,38 @@ type TestValues = z.infer<typeof testSchema>;
 export default function TestYourEnglishForm() {
   const [step, setStep] = useState(1);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [attemptId, setAttemptId] = useState<string | null>(null);
+  const attemptIdRef = useRef<string | null>(null);
+  interface ApiQuestionOption {
+    key: string;
+    label: string;
+    marks: number;
+  }
+
+  interface ApiQuestion {
+    id: string;
+    questionText: string;
+    options?: ApiQuestionOption[];
+  }
+
+  // API questions carry real UUIDs — fetched from GET /english-test/questions
+  const [apiQuestions, setApiQuestions] = useState<ApiQuestion[]>([]);
+
+  // Fetch real question UUIDs on mount
+  useEffect(() => {
+    api.get("/english-test/questions")
+      .then((res) => {
+        const data = res.data?.data ?? res.data;
+        const questions = Array.isArray(data) ? data : data?.questions ?? [];
+        if (questions.length > 0) {
+          setApiQuestions(questions);
+          console.log("Loaded", questions.length, "questions from API");
+        }
+      })
+      .catch((err) => {
+        console.error("Failed to fetch English test questions:", err);
+      });
+  }, []);
 
   const form = useForm<TestValues>({
     resolver: zodResolver(testSchema),
@@ -478,7 +146,7 @@ export default function TestYourEnglishForm() {
         "preferredTime",
       ];
     } else if (step === 2) {
-      const allAnswered = QUESTIONS.every((q) => currentAnswers[q.id]);
+      const allAnswered = apiQuestions.every((q) => currentAnswers[q.id]);
       if (!allAnswered) {
         await trigger("answers");
         return;
@@ -487,14 +155,83 @@ export default function TestYourEnglishForm() {
     }
 
     const isValid = await trigger(fieldsToValidate);
-    if (isValid) setStep((prev) => prev + 1);
+    if (!isValid) return;
+
+    // On step 1 → 2, call attempt-start to get the attempt_id and question UUIDs
+    if (step === 1) {
+      try {
+        const formData = form.getValues();
+        const nameParts = formData.fullName.trim().split(" ");
+        const firstName = nameParts[0];
+        const lastName = nameParts.length > 1 ? nameParts.slice(1).join(" ") : undefined;
+
+        const res = await api.post("/english-test/attempt-start", {
+          first_name: firstName,
+          last_name: lastName,
+          email: formData.email,
+          phone: formData.phoneNumber,
+          country: formData.country,
+          city: formData.city,
+        });
+
+        // Remove debug alerts once structure is confirmed
+        console.log("attempt-start full response:", JSON.stringify(res.data, null, 2));
+
+        // Try multiple possible paths for attempt_id
+        const rawData = res.data;
+        const attemptIdValue =
+          rawData?.attempt_id ??
+          rawData?.data?.attempt_id ??
+          rawData?.data?.id ??
+          rawData?.id ??
+          null;
+
+        if (attemptIdValue) {
+          setAttemptId(String(attemptIdValue));
+          attemptIdRef.current = String(attemptIdValue);
+        } else {
+          console.warn("attempt_id not found in response:", rawData);
+          toast.error("Could not start the test", {
+            description: "Server did not return a valid attempt ID. Please try again.",
+          });
+          return;
+        }
+
+        // questions now come from the useEffect GET /english-test/questions call
+      } catch (error: any) {
+        toast.error("Could not start the test", {
+          description: error.response?.data?.message || "Please try again later.",
+        });
+        return;
+      }
+    }
+
+    setStep((prev) => prev + 1);
   };
 
   const handlePrev = () => setStep((prev) => prev - 1);
 
-  const onSubmit = (data: TestValues) => {
-    console.log("Assessment Data:", data);
-    setIsSuccess(true);
+  const onSubmit = async (data: TestValues) => {
+    try {
+      // Build answers array from apiQuestions (real UUIDs from API)
+      const answers = apiQuestions.map((q) => ({
+        question_id: q.id,
+        answer: data.answers[q.id] ?? "",
+      }));
+
+      console.log("Submitting:", { attempt_id: attemptIdRef.current, answers });
+
+      await api.post("/english-test/attempt-submit", {
+        attempt_id: attemptIdRef.current,
+        answers,
+      });
+
+      setIsSuccess(true);
+    } catch (error: any) {
+      toast.error("Submission failed", {
+        description: error.response?.data?.message || "An unexpected error occurred. Please try again.",
+      });
+    }
   };
 
   return (
@@ -788,13 +525,18 @@ export default function TestYourEnglishForm() {
         )}
 
         {step === 2 && (
-          <div 
+          <div
             className="space-y-6 select-none"
             onContextMenu={(e) => e.preventDefault()}
             onCopy={(e) => e.preventDefault()}
             onCut={(e) => e.preventDefault()}
           >
-            {QUESTIONS.map((q, idx) => (
+            {apiQuestions.length === 0 ? (
+              <div className="bg-white border border-slate-200 rounded-md p-8 text-center text-slate-500 font-medium">
+                Loading questions...
+              </div>
+            ) : (
+              apiQuestions.map((q, idx) => (
               <Field
                 key={q.id}
                 data-invalid={!!errors.answers?.[q.id]}
@@ -807,13 +549,13 @@ export default function TestYourEnglishForm() {
                 <div className="space-y-6">
                   <Stepper step={idx + 1}>
                     <FieldLabel className="text-lg text-wrap font-bold text-secondary leading-tight normal-case">
-                      {q.text}
+                      {q.questionText}
                     </FieldLabel>
                   </Stepper>
 
                   <div className="mb-2">
                     <p className="text-slate-500 font-medium leading-relaxed">
-                      {q.subtext}
+                      Choose the correct option
                     </p>
                   </div>
 
@@ -827,19 +569,19 @@ export default function TestYourEnglishForm() {
                           onValueChange={field.onChange}
                           className="grid gap-3"
                         >
-                          {q.options.map((opt) => (
-                            <div key={`${q.id}-${opt}`} className="relative">
+                          {(q.options ?? []).map((opt) => (
+                            <div key={`${q.id}-${opt.key}`} className="relative">
                               <Label
-                                htmlFor={`${q.id}-${opt}`}
+                                htmlFor={`${q.id}-${opt.key}`}
                                 className="flex items-center px-5 py-4 border-2 border-slate-100 rounded-md cursor-pointer hover:bg-slate-50 has-data-checked:border-primary has-data-checked:bg-primary/5 transition-all"
                               >
                                 <RadioGroupItem
-                                  value={opt}
-                                  id={`${q.id}-${opt}`}
+                                  value={opt.key}
+                                  id={`${q.id}-${opt.key}`}
                                   className="mr-3"
                                 />
                                 <span className="text-slate-700 font-medium text-wrap">
-                                  {opt}
+                                  {opt.label}
                                 </span>
                               </Label>
                             </div>
@@ -853,7 +595,8 @@ export default function TestYourEnglishForm() {
                   </FieldContent>
                 </div>
               </Field>
-            ))}
+            ))
+            )}
 
             <div className="flex justify-end pt-6">
               <Button
