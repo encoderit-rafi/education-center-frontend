@@ -36,6 +36,7 @@ const contactSchema = z.object({
     .string()
     .min(2, { message: "Last name must be at least 2 characters" }),
   email: z.string().email({ message: "Please enter a valid email address" }),
+  city: z.string().min(1, { message: "Please enter an emirate or city" }),
   country: z.string().min(1, { message: "Please select your country" }),
   enquiryTopic: z
     .string()
@@ -81,6 +82,7 @@ export default function ContactForm() {
       firstName: "",
       lastName: "",
       email: "",
+      city: "",
       country: "",
       enquiryTopic: "",
       message: "",
@@ -103,6 +105,7 @@ export default function ContactForm() {
         first_name: data.firstName,
         last_name: data.lastName,
         email: data.email,
+        city: data.city,
         country: data.country,
         category: data.enquiryTopic
           ? data.enquiryTopic.toLowerCase().replace(/[^a-z0-9]+/g, "_")
@@ -167,6 +170,14 @@ export default function ContactForm() {
         </Field>
       </div>
 
+      <div className="w-full bg-slate-100/80 my-4" />
+      <Field data-invalid={!!errors.city}>
+        <FieldLabel required>Emirate / City</FieldLabel>
+        <FieldContent>
+          <Input {...register("city")} placeholder="Dubai" />
+        </FieldContent>
+        <FieldError errors={[errors.city]} />
+      </Field>
       <div className="w-full bg-slate-100/80 my-4" />
 
       <Field data-invalid={!!errors.country}>
