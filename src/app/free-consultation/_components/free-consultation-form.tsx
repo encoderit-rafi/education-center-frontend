@@ -46,6 +46,7 @@ import Stepper from "@/components/stepper";
 import { PhoneInput } from "@/components/ui/phone-input";
 import { CountryDropdown } from "@/components/ui/country-dropdown";
 import { toast } from "sonner";
+import api from "@/axios";
 
 const AREAS = [
   "Exam Booking & Seat Availability",
@@ -103,15 +104,52 @@ export default function FreeConsultationForm() {
   const selectedDate = watch("date");
 
   const onSubmit = async (data: FormValues) => {
-    console.log("Submitting:", data);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    try {
+      const nameParts = data.fullName.trim().split(" ");
+      const firstName = nameParts[0];
+      const lastName = nameParts.length > 1 ? nameParts.slice(1).join(" ") : undefined;
 
-    toast.success("Enquiry Received", {
-      description: "Thank you for contacting us. We have received your enquiry and will respond to you within 1 to 2 business days. Our working hours: Saturday to Thursday (9:00 AM – 9:00 PM)",
-      duration: 6000,
-    });
+      let consultationType = "exam";
+      if (data.area === "Exam Prep. Course") {
+        consultationType = "exam_preparation_course";
+      }
 
-    reset();
+      let preferredTime = undefined;
+      if (data.time === "Morning") preferredTime = "09:00";
+      if (data.time === "Afternoon") preferredTime = "12:00";
+      if (data.time === "Evening") preferredTime = "18:00";
+
+      const payload = {
+        consultation_type: consultationType,
+        first_name: firstName,
+        last_name: lastName,
+        email: data.email,
+        phone: data.phone,
+        country: data.country,
+        city: data.city,
+        preferred_date: data.date ? format(data.date, "yyyy-MM-dd") : undefined,
+        preferred_time: preferredTime,
+        message: data.message,
+      };
+
+      const res = await api.post("/consultations", payload);
+
+      if (res.data?.success || res.status === 200 || res.status === 201) {
+        toast.success("Enquiry Received", {
+          description: "Thank you for contacting us. We have received your enquiry and will respond to you within 1 to 2 business days. Our working hours: Saturday to Thursday (9:00 AM – 9:00 PM)",
+          duration: 6000,
+        });
+        reset();
+      } else {
+        toast.error("Error", {
+          description: res.data?.message || "Failed to submit consultation request.",
+        });
+      }
+    } catch (error: any) {
+      toast.error("Error", {
+        description: error.response?.data?.message || "An unexpected error occurred. Please try again later.",
+      });
+    }
   };
 
   return (
