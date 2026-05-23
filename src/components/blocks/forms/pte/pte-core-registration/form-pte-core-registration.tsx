@@ -15,6 +15,8 @@ import { ReviewStep } from "./steps/review-step";
 
 // Schema
 import { PteCoreSchema, type TPteCoreSchema } from "./_type";
+import { useMutation } from "@tanstack/react-query";
+import api from "@/axios";
 
 // Data
 const PTE_CORE_COURSES = {
@@ -109,6 +111,41 @@ export default function FormPTECoreRegistration() {
   };
 
   const pricing = calculateTotal();
+  const total = pricing.total;
+
+  const paymentMutation = useMutation({
+    mutationFn: (body: Record<string, unknown>) =>
+      api.post("/payments/initiate", body),
+    onSuccess: (response) => {
+      const checkoutUrl = response.data?.data?.checkoutUrl;
+      if (checkoutUrl) {
+        window.location.href = checkoutUrl;
+      } else {
+        console.error("Checkout URL not found in response");
+      }
+    },
+    onError: (error) => {
+      console.error("Payment initiation failed:", error);
+    },
+  });
+
+  const bookingMutation = useMutation({
+    mutationFn: (newBooking: Record<string, unknown>) =>
+      api.post("/exam-bookings", newBooking),
+    onSuccess: (response) => {
+      const bookingId = response.data?.data?.id;
+      paymentMutation.mutate({
+        booking_type: "exam_booking",
+        booking_id: bookingId,
+        provider: (formData as any).paymentMethod,
+        amount: total,
+        currency: "AED",
+      });
+    },
+    onError: (error) => {
+      console.error("Booking failed:", error);
+    },
+  });
 
   const handleFormSubmit: SubmitHandler<TPteCoreSchema> = (data) => {
     if (currentStep < 3) {
@@ -121,8 +158,39 @@ export default function FormPTECoreRegistration() {
         });
         return;
       }
-      toast.success("PTE Core Registration Submitted Successfully!");
-      console.log("Final submission data:", data);
+      bookingMutation.mutate({
+        exam_id: "pte-core",
+        given_names: data.givenNames,
+        middle_name: data.middleName,
+        surnames: data.surnames,
+        date_of_birth: data.dateOfBirth ? new Date(data.dateOfBirth as any).toISOString() : "",
+        gender: data.gender,
+        email: data.emailUsername,
+        place_of_birth: data.placeOfBirth,
+        country_of_birth: data.countryOfBirth,
+        country_of_citizenship: data.countryOfCitizenship,
+        country_of_residence: data.countryOfResidence,
+        postal_address_1: data.postalAddress1,
+        postal_address_2: data.postalAddress2,
+        po_box: data.poBox,
+        postcode: data.postcode,
+        city: data.city,
+        mobile_number: data.mobileNumber,
+        home_language: data.homeLanguage,
+        planning_country: data.planningCountry,
+        current_situation: data.currentSituation,
+        reason_for_taking: data.reasonForTaking,
+        study_level: data.studyLevel,
+        occupation_sector: data.occupationSector,
+        id_type: data.idType,
+        id_number: data.idNumber,
+        id_country_of_issue: data.idCountryOfIssue,
+        selected_course: data.selectedCourse,
+        selected_workshop: data.selectedWorkshop,
+        payment_methods: (data as any).paymentMethod,
+        exam_time: data.examTime,
+        total_amount: total,
+      });
     }
   };
 

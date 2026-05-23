@@ -66,7 +66,7 @@ export const IeltsAcademicSchema = z
     //   .or(z.literal("")),
     vatNumber: z.string().optional(),
     paymentMethod: z
-      .enum(["online", "bank_transfer", "at_center"], {
+      .enum(["online", "bank_transfer", "at_center", "stripe", "paypal"], {
         message: "Please select a payment method",
       })
       .or(z.literal("")),

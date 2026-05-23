@@ -310,14 +310,6 @@ function PaidMockTestRegistrationForm({
                     </FieldContent>
                   </Field>
                 </div>
-
-                <div className="text-primary border border-dashed border-primary/40 p-3 bg-primary/5 rounded-md flex items-start gap-2">
-                  <Info className="w-4 h-4 mt-0.5" />
-                  <p className="text-[11px] font-medium leading-relaxed">
-                    We will send your testing credentials and link to this email
-                    address 24 hours before your selected slot.
-                  </p>
-                </div>
               </div>
               <div className="space-y-4">
                 {/* Mock Test Details Card */}
