@@ -788,7 +788,12 @@ export default function TestYourEnglishForm() {
         )}
 
         {step === 2 && (
-          <div className="space-y-6">
+          <div 
+            className="space-y-6 select-none"
+            onContextMenu={(e) => e.preventDefault()}
+            onCopy={(e) => e.preventDefault()}
+            onCut={(e) => e.preventDefault()}
+          >
             {QUESTIONS.map((q, idx) => (
               <Field
                 key={q.id}
