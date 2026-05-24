@@ -43,14 +43,14 @@ export function DateStep({
 
         <div className="mt-8 grid md:grid-cols-2 gap-12 items-start">
           <Field data-invalid={!!error}>
-            <FieldLabel required>Select Date</FieldLabel>
+            <FieldLabel required>Select Date (Sundays Only)</FieldLabel>
             <FieldContent className="flex flex-col items-center">
               <Calendar
                 mode="single"
                 selected={value}
                 onSelect={(date) => date && onChange(date)}
                 modifiers={{
-                  available: (date) => date.getDay() !== 0,
+                  available: (date) => date.getDay() === 0,
                 }}
                 modifiersClassNames={{
                   available:
@@ -59,7 +59,7 @@ export function DateStep({
                 disabled={(date) => {
                   const isPast =
                     date < new Date(new Date().setHours(0, 0, 0, 0));
-                  return isPast || date.getDay() === 0;
+                  return isPast || date.getDay() !== 0;
                 }}
                 className="w-full max-w-xl mx-auto border rounded-md p-8 bg-white shadow-xl"
               />
@@ -118,7 +118,7 @@ export function DateStep({
             </div>
 
             <div className="p-4 rounded-xl bg-amber-50 border border-amber-100 text-amber-800 text-sm font-medium">
-              Note: Please select your preferred test date. Public Holidays & Sunday will be deactivated separately.
+              Note: Please select your preferred test date. Public Holidays will be deactivated separately.
             </div>
 
           </div>

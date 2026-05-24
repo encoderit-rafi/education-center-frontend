@@ -46,11 +46,10 @@ export default function TestDatesDetailPage() {
                 <div className="bg-primary/5 border border-primary/10 rounded-md p-5 max-w-xl">
                   <div className="text-sm font-bold text-secondary flex items-center gap-2">
                     <span className="w-2 h-2 bg-primary rounded-full" />
-                    Testing occurs Mon to Sat (Sundays closed)
+                    Testing occurs
                   </div>
                   <p className="text-xs text-slate-500 mt-1 ml-4">
-                    All Sundays are closed for testing (public holidays
-                    will be deactivated separately).
+                    Only Sundays are open for testing.
                   </p>
                   <div className="mt-4 pt-3 border-t border-primary/10">
                     <p className="text-[10px] font-bold text-primary">
@@ -66,11 +65,10 @@ export default function TestDatesDetailPage() {
                 <div className="bg-primary/5 border border-primary/10 rounded-md p-5 max-w-xl">
                   <div className="text-sm font-bold text-secondary flex items-center gap-2">
                     <span className="w-2 h-2 bg-primary rounded-full" />
-                    Testing occurs Mon, Tue, Thu, Fri, Sat (Wednesdays closed)
+                    Testing occurs
                   </div>
                   <p className="text-xs text-slate-500 mt-1 ml-4">
-                    All Wednesdays are closed for testing (public holidays
-                    will be deactivated separately).
+                    Only Wednesdays are open for testing.
                   </p>
                   <div className="mt-4 pt-3 border-t border-primary/10">
                     <p className="text-[10px] font-bold text-primary">
@@ -262,8 +260,8 @@ export default function TestDatesDetailPage() {
                 <Calendar
                   modifiers={{
                     available: (date) =>
-                      (id === "ielts" && date.getDay() !== 0) ||
-                      (id === "toefl" && date.getDay() !== 3) ||
+                      (id === "ielts" && date.getDay() === 0) ||
+                      (id === "toefl" && date.getDay() === 3) ||
                       (id === "selt" && [1, 2, 3].includes(date.getDay())) ||
                       (id === "pte" &&
                         [0, 1, 2, 3, 4, 6].includes(date.getDay())),
@@ -276,10 +274,10 @@ export default function TestDatesDetailPage() {
                     const isPast =
                       date < new Date(new Date().setHours(0, 0, 0, 0));
                     if (id === "ielts") {
-                      return isPast || date.getDay() === 0;
+                      return isPast || date.getDay() !== 0;
                     }
                     if (id === "toefl") {
-                      return isPast || date.getDay() === 3;
+                      return isPast || date.getDay() !== 3;
                     }
                     if (id === "selt") {
                       return isPast || ![1, 2, 3].includes(date.getDay());

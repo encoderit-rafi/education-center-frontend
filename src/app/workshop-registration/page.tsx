@@ -21,6 +21,7 @@ import Stepper from "@/components/stepper";
 import { PriceDisplay } from "@/components/ui/price-display";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import api from "@/axios";
+import Image from "next/image";
 // import { EXAM_FEES } from "../fees/page";
 
 interface WorkshopDetail {
@@ -432,9 +433,20 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
                       )}
                     >
                       <RadioGroupItem value="stripe" id="payment-stripe" />
-                      <span className="font-semibold text-sm">
-                        Credit Card (Stripe)
-                      </span>
+                      <div className="w-full flex items-center justify-between gap-2 ">
+                        <Image
+                          src="/images/stripe-logo.png"
+                          alt="Stripe"
+                          width={50}
+                          height={50}
+                        />
+                        <Image
+                          src="/images/cards.png"
+                          alt="Stripe"
+                          width={50}
+                          height={50}
+                        />
+                      </div>
                     </label>
                     <label
                       htmlFor="payment-paypal"
@@ -446,7 +458,13 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
                       )}
                     >
                       <RadioGroupItem value="paypal" id="payment-paypal" />
-                      <span className="font-semibold text-sm">PayPal</span>
+                      {/* <span className="font-semibold text-sm">PayPal</span> */}
+                      <Image
+                        src="/images/paypal-logo.png"
+                        alt="PayPal"
+                        width={80}
+                        height={80}
+                      />
                     </label>
                   </RadioGroup>
                   <FieldError errors={[errors.paymentMethod]} />

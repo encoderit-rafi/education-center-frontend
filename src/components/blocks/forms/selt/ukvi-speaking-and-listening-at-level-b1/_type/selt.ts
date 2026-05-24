@@ -61,7 +61,7 @@ export const SeltA1Schema = z
     // Step 5: Review & Payment
     vatNumber: z.string().optional(),
     paymentMethod: z
-      .enum(["online", "bank_transfer", "at_center"], {
+      .enum(["stripe", "paypal", "online", "bank_transfer", "at_center"], {
         message: "Please select a payment method",
       })
       .or(z.literal("")),

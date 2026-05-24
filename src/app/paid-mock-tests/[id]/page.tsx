@@ -26,6 +26,7 @@ import {
 } from "@/components/blocks/cards/base-card";
 import { buttonVariants } from "@/components/ui/button";
 import api from "@/axios";
+import Image from "next/image";
 
 // Icon mapping to handle dynamic icon rendering
 const iconMap: Record<string, React.ReactNode> = {
@@ -95,7 +96,7 @@ export default async function PaidMockTestDynamicPage({ params }: PageProps) {
       <section className="relative overflow-hidden bg-slate-50">
         <div className="container relative mx-auto px-4 py-12 lg:px-8 lg:py-20 max-w-7xl">
           <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
-            <div className="max-w-2xl">
+            <div className="max-w-xl">
               <h1 className="text-3xl font-black leading-[1.1] tracking-tight text-slate-900 lg:text-4xl xl:text-5xl mb-4">
                 {data.name} <span className="text-primary">Paid Mock Test</span>
               </h1>
@@ -109,6 +110,13 @@ export default async function PaidMockTestDynamicPage({ params }: PageProps) {
                 Purchase
               </Link>
             </div>
+            <Image
+              src={`/images/mock-test-${data.slug}.jpg`}
+              alt={data.name}
+              className="w-full h-full object-cover aspect-video"
+              width={500}
+              height={500}
+            />
           </div>
         </div>
       </section>

@@ -6,12 +6,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "@/components/ui/form";
 import { languages } from "@/lib/languages-data";
 import { ToeflIbtSchema, type TToeflIbtSchema } from "./_type/toefl-ibt";
+import { useMutation } from "@tanstack/react-query";
+import api from "@/axios";
+import { format } from "date-fns";
+import { User, ShieldCheck, Globe } from "lucide-react";
+import { GlobalReviewStep, ReviewSummaryGrid } from "@/components/blocks/forms/global-review-step";
 
 // Import Steps
 import { TermsStep } from "./steps/terms-step";
 import { DateStep } from "./steps/date-step";
 import { RegistrationFormStep } from "./steps/registration-form-step";
-import { ReviewStep } from "./steps/review-step";
 
 export const WORKSHOPS_DATA = {
   workshop_2_hours: {
@@ -170,13 +174,82 @@ export default function FormTOEFLIBTRegistration() {
     };
 
     const pricing = calculateTotal();
+    const total = pricing.total;
+
+    const paymentMutation = useMutation({
+        mutationFn: (body: Record<string, unknown>) =>
+            api.post("/payments/initiate", body),
+        onSuccess: (response) => {
+            const checkoutUrl = response.data?.data?.checkoutUrl;
+            if (checkoutUrl) {
+                window.location.href = checkoutUrl;
+            } else {
+                console.error("Checkout URL not found in response");
+            }
+        },
+        onError: (error) => {
+            console.error("Payment initiation failed:", error);
+        },
+    });
+
+    const bookingMutation = useMutation({
+        mutationFn: (newBooking: Record<string, unknown>) =>
+            api.post("/exam-bookings", newBooking),
+        onSuccess: (response) => {
+            const bookingId = response.data?.data?.id;
+            paymentMutation.mutate({
+                booking_type: "exam_booking",
+                booking_id: bookingId,
+                provider: formData.paymentMethod,
+                amount: total,
+                currency: "AED",
+            });
+        },
+        onError: (error) => {
+            console.error("Booking failed:", error);
+        },
+    });
 
     const handleFormSubmit: SubmitHandler<TToeflIbtSchema> = (data) => {
         if (currentStep < 3) {
             goToStep(3);
         } else {
-            console.log("Final TOEFL iBT Submission:", data);
-            alert("TOEFL iBT Registration Submitted Successfully!");
+            bookingMutation.mutate({
+                exam_id: "toefl-ibt",
+                given_names: data.givenNames,
+                middle_name: data.middleName,
+                surnames: data.surnames,
+                date_of_birth: data.dateOfBirth ? new Date(data.dateOfBirth as any).toISOString() : "",
+                gender: data.gender,
+                email: data.email,
+                phone_number: data.phoneNumber,
+                country: data.country,
+                street_address_1: data.streetAddress1,
+                street_address_2: data.streetAddress2,
+                city: data.city,
+                state: data.state,
+                postal_code: data.postalCode,
+                id_type: data.idType,
+                id_number: data.idNumber,
+                issuing_authority: data.issuingAuthority,
+                nationality: data.nationality,
+                taken_before: data.takenBefore,
+                less_than_two_years: data.lessThanTwoYears,
+                existing_account: data.existingAccount,
+                first_language: data.firstLanguage,
+                years_studying_english: data.yearsStudyingEnglish,
+                education_level: data.educationLevel,
+                occupation_level: data.occupationLevel,
+                occupation_sector: data.occupationSector,
+                reason_for_taking_test: data.reasonForTakingTest,
+                destination_country: data.destinationCountry,
+                marketing_preference: data.marketingPreference,
+                selected_course: data.selectedCourse,
+                selected_workshop: data.selectedWorkshop,
+                payment_methods: data.paymentMethod,
+                exam_time_slot: data.examTimeSlot,
+                total_amount: total,
+            });
         }
     };
 
@@ -232,27 +305,51 @@ export default function FormTOEFLIBTRegistration() {
                     )}
 
                     {currentStep === 3 && (
-                        <ReviewStep
-                            data={formData}
-                            form={form}
+                        <GlobalReviewStep
                             onEdit={() => goToStep(2)}
-                            onBack={() => goToStep(2)}
                             onSubmit={form.handleSubmit(handleFormSubmit, onInvalid)}
+                            paymentMethodValue={(formData as any)?.paymentMethod}
+                            onPaymentMethodChange={(val) => (form.setValue as any)("paymentMethod", val)}
+                            paymentMethodError={(form.formState.errors as any)?.paymentMethod}
+                            examName="TOEFL iBT Exam"
                             baseFee={pricing.baseFee}
                             serviceFee={pricing.serviceFee}
-                            vat={pricing.vat}
                             total={pricing.total}
-                            selectedCourseData={
-                                formData.selectedCourse
-                                    ? (COURSES_DATA as any)[formData.selectedCourse]
-                                    : undefined
-                            }
-                            selectedWorkshopData={
-                                formData.selectedWorkshop
-                                    ? (WORKSHOPS_DATA as any)[formData.selectedWorkshop]
-                                    : undefined
-                            }
+                            selectedCourseData={formData.selectedCourse ? (COURSES_DATA as any)[formData.selectedCourse] : undefined}
+                            selectedWorkshopData={formData.selectedWorkshop ? (WORKSHOPS_DATA as any)[formData.selectedWorkshop] : undefined}
+                            reviewStepNumber={3}
+                            paymentStepNumber={4}
+                        >
+                                                    <ReviewSummaryGrid
+                            personalDetails={[
+                              { label: "Given Names", value: formData.givenNames },
+                              { label: "Middle Name", value: formData.middleName || "N/A" },
+                              { label: "Surnames", value: formData.surnames || "N/A" },
+                              { label: "Date of Birth", value: formData.dateOfBirth ? format(new Date(formData.dateOfBirth as any), "PPP") : "N/A" },
+                              { label: "Gender", value: formData.gender || "N/A" },
+                              { label: "Contact Number", value: formData.phoneNumber || "N/A" },
+                              { label: "Nationality", value: formData.nationality || "N/A" },
+                            ]}
+                            identityContact={[
+                              { label: "ID Type", value: formData.idType?.replace("_", " ") },
+                              { label: "ID Number", value: formData.idNumber || "N/A" },
+                              { label: "Email", value: formData.email },
+                              { label: "ID Expiry Date", value: formData.idExpiryDate ? format(new Date(formData.idExpiryDate as any), "PPP") : "N/A" },
+                              { label: "Identity Document", value: formData.idDocument ? (formData.idDocument as File).name : "No file attached" },
+                              { label: "Issuing Authority", value: formData.issuingAuthority || "N/A" },
+                            ]}
+                            testInformation={[
+                              { label: "Exam Date", value: formData.examDate ? format(new Date(formData.examDate as any), "PPP") : "N/A", highlight: true },
+                              { label: "Time Slot", value: `${formData.examTimeSlot || "N/A"} Session` },
+                              { label: "Address Line 1", value: formData.streetAddress1 },
+                              ...(formData.streetAddress2 ? [{ label: "Address Line 2", value: formData.streetAddress2 }] : []),
+                              { label: "City", value: formData.city },
+                              { label: "Country of Residence", value: formData.country },
+                              { label: "First Language", value: formData.firstLanguage || "N/A" },
+                              { label: "Education Level", value: formData.educationLevel?.replace(/_/g, " ") || "N/A" },
+                            ]}
                         />
+                        </GlobalReviewStep>
                     )}
                 </Form>
             </div>

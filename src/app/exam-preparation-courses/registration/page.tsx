@@ -22,6 +22,7 @@ import { Button } from "@/components/ui/button";
 import { useSearchParams } from "next/navigation";
 import Stepper from "@/components/stepper";
 import { PriceDisplay } from "@/components/ui/price-display";
+import Image from "next/image";
 
 const bookingSchema = z.object({
   mockTestId: z.string().optional(),
@@ -36,7 +37,40 @@ const bookingSchema = z.object({
 });
 
 type BookingValues = z.infer<typeof bookingSchema>;
+type CoursePackage = {
+  id: string;
+  courseId: string;
+  subCourseId: string | null;
 
+  name: string;
+  slug: string;
+  description: string | null;
+
+  price: string;
+
+  discountType: "PERCENTAGE" | "FIXED" | string;
+  discountValue: string;
+
+  specialDiscountType: "PERCENTAGE" | "FIXED" | string;
+  specialDiscount: string;
+
+  vatRate: string;
+
+  deliveryType: "CLASSROOM" | "ONLINE" | "HYBRID" | string;
+
+  duration: string;
+  noOfDaysPerWeek: number;
+  totalHours: string;
+
+  requirements: string | null;
+  image: string | null;
+  scheduleInfo: string | null;
+  bestFor: string | null;
+  classSize: string | number | null;
+
+  isActive: boolean;
+  orderIndex: number;
+};
 function CourseRegistrationForm({ className }: { className?: string }) {
   const searchParams = useSearchParams();
   // examId = course slug (e.g. "ielts"), courseId = package UUID
@@ -48,15 +82,18 @@ function CourseRegistrationForm({ className }: { className?: string }) {
   const { data: courseData } = useQuery({
     queryKey: ["course", courseSlug],
     queryFn: async () => {
-      const res = await api.get<{ data: { id: string; name: string } }>(
-        `/courses/${courseSlug}`,
-      );
+      const res = await api.get<{
+        data: { id: string; name: string; packages: CoursePackage[] };
+      }>(`/courses/${courseSlug}`);
       return res.data.data;
     },
     enabled: !!courseSlug,
   });
+  console.log("👉 ~ CourseRegistrationForm ~ courseData:", courseData);
 
   const courseName = courseData?.name ?? courseSlug?.toUpperCase() ?? "";
+  const packageData = courseData?.packages?.find((p) => p.id === packageId);
+  console.log("👉 ~ CourseRegistrationForm ~ packageData:", packageData);
 
   const [isSuccess, setIsSuccess] = useState(false);
 
@@ -164,10 +201,63 @@ function CourseRegistrationForm({ className }: { className?: string }) {
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-slate-50 base-px base-py">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-3xl text-center font-black leading-[1.1] tracking-tight text-slate-900 lg:text-4xl xl:text-5xl mb-4">
+          <h1 className="text-3xl mb-12 text-center font-black leading-[1.1] tracking-tight text-slate-900 lg:text-4xl xl:text-5xl">
             {courseName}{" "}
             <span className="text-primary">Course Registration</span>
           </h1>
+
+          <div className="flex flex-col md:flex-row gap-6">
+            <div className="relative flex-1 aspect-video rounded-2xl overflow-hidden bg-slate-100 shrink-0">
+              <Image
+                src={packageData?.image || "/images/course-placeholder.jpg"}
+                alt={packageData?.name || "Package"}
+                fill
+                className="object-cover"
+              />
+            </div>
+
+            <div className="flex-1">
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <h2 className="text-2xl font-black text-slate-900">
+                    {packageData?.name}
+                  </h2>
+
+                  <div className="flex flex-wrap gap-2 mt-3">
+                    <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold">
+                      {packageData?.deliveryType}
+                    </span>
+
+                    {packageData?.duration !== "0" && (
+                      <span className="px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-medium">
+                        {packageData?.duration} Hours
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                <div className="text-right">
+                  <div className="text-3xl font-black text-primary">
+                    <PriceDisplay amount={total_amount} />
+                  </div>
+
+                  {discount_amount > 0 && (
+                    <div className="mt-1">
+                      <span className="text-sm line-through text-slate-400">
+                        <PriceDisplay amount={base_price} />
+                      </span>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {packageData?.description && (
+                <p className="mt-5 text-slate-600 leading-relaxed">
+                  {packageData?.description}
+                </p>
+              )}
+            </div>
+          </div>
           <form
             onSubmit={handleSubmit(onSubmit)}
             className={cn("space-y-5 base-px base-py", className)}
@@ -306,7 +396,9 @@ function CourseRegistrationForm({ className }: { className?: string }) {
                   <FieldLabel required>Payment Method</FieldLabel>
                   <RadioGroup
                     value={selectedPaymentMethod}
-                    onValueChange={(val) => setValue("paymentMethod", val as "stripe" | "paypal")}
+                    onValueChange={(val) =>
+                      setValue("paymentMethod", val as "stripe" | "paypal")
+                    }
                     className="grid grid-cols-2 gap-3"
                   >
                     <label
@@ -318,13 +410,24 @@ function CourseRegistrationForm({ className }: { className?: string }) {
                           : "hover:bg-slate-50",
                       )}
                     >
-                      <RadioGroupItem
-                        value="stripe"
-                        id="payment-stripe"
-                      />
-                      <span className="font-semibold text-sm">
+                      <RadioGroupItem value="stripe" id="payment-stripe" />
+                      {/* <span className="font-semibold text-sm">
                         Credit Card (Stripe)
-                      </span>
+                      </span> */}
+                      <div className="w-full flex items-center justify-between gap-2 ">
+                        <Image
+                          src="/images/stripe-logo.png"
+                          alt="Stripe"
+                          width={50}
+                          height={50}
+                        />
+                        <Image
+                          src="/images/cards.png"
+                          alt="Stripe"
+                          width={50}
+                          height={50}
+                        />
+                      </div>
                     </label>
                     <label
                       htmlFor="payment-paypal"
@@ -335,11 +438,14 @@ function CourseRegistrationForm({ className }: { className?: string }) {
                           : "hover:bg-slate-50",
                       )}
                     >
-                      <RadioGroupItem
-                        value="paypal"
-                        id="payment-paypal"
+                      <RadioGroupItem value="paypal" id="payment-paypal" />
+                      {/* <span className="font-semibold text-sm">PayPal</span> */}
+                      <Image
+                        src="/images/paypal-logo.png"
+                        alt="PayPal"
+                        width={80}
+                        height={80}
                       />
-                      <span className="font-semibold text-sm">PayPal</span>
                     </label>
                   </RadioGroup>
                   <FieldError errors={[errors.paymentMethod]} />

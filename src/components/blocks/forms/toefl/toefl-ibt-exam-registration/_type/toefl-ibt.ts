@@ -67,7 +67,7 @@ export const ToeflIbtSchema = z
             })
             .or(z.literal("")),
         paymentMethod: z
-            .enum(["online", "bank_transfer", "at_center"], {
+            .enum(["online", "bank_transfer", "at_center", "stripe", "paypal"], {
                 message: "Please select a payment method",
             })
             .or(z.literal("")),

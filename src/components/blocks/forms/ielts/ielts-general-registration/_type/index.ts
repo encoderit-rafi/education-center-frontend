@@ -54,7 +54,7 @@ export const IeltsGeneralSchema = z.object({
     // Step 5: Review & Payment
     confirmationRecipient: z.enum(["myself", "other", "company"]).or(z.literal("")),
     vatNumber: z.string().optional(),
-    paymentMethod: z.enum(["online", "bank_transfer", "at_center"]).or(z.literal("")),
+    paymentMethod: z.enum(["online", "bank_transfer", "at_center", "stripe", "paypal"]).or(z.literal("")),
     termsAgreed: z.boolean().optional(),
     examDate: z.any().refine((val) => !!val, "Please select an exam date"),
     examTimeSlot: z.string().min(1, "Please select an exam time"),
