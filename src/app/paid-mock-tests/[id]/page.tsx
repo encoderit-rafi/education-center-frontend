@@ -113,7 +113,7 @@ export default async function PaidMockTestDynamicPage({ params }: PageProps) {
             <Image
               src={`/images/mock-test-${data.slug}.jpg`}
               alt={data.name}
-              className="w-full h-full object-cover aspect-video"
+              className="w-full h-full object-cover"
               width={500}
               height={500}
             />
