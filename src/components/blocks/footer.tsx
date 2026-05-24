@@ -141,13 +141,13 @@ export default function Footer() {
               <ContactItem
                 icon={Mail}
                 copyText="info@tepth.org"
-                value="Email. info@tepth.org"
+                value="Email: info@tepth.org"
               />
 
               <ContactItem
                 icon={Phone}
                 copyText="+97165531250"
-                value="Tel. +97165531250"
+                value="Tel: +97165531250"
               />
             </div>
             {/* <div className="bg-white p-4 rounded-2xl space-y-4 border border-slate-100">

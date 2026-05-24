@@ -56,6 +56,7 @@ function CourseRegistrationForm({ className }: { className?: string }) {
     },
     enabled: !!courseSlug,
   });
+  console.log("👉 ~ CourseRegistrationForm ~ courseData:", courseData);
 
   const courseName = courseData?.name ?? courseSlug?.toUpperCase() ?? "";
 
