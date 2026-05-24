@@ -389,12 +389,20 @@ function PaidMockTestRegistrationForm({
                       {/* <span className="font-semibold text-sm">
                         Credit Card (Stripe)
                       </span> */}
-                      <Image
-                        src="/images/stripe-logo.png"
-                        alt="Stripe"
-                        width={50}
-                        height={50}
-                      />
+                      <div className="flex items-center justify-between gap-2 w-full flex-1">
+                        <Image
+                          src="/images/stripe-logo.png"
+                          alt="Stripe"
+                          width={50}
+                          height={50}
+                        />
+                        <Image
+                          src="/images/cards.png"
+                          alt="Stripe"
+                          width={50}
+                          height={50}
+                        />
+                      </div>
                     </label>
                     <label
                       htmlFor="payment-paypal"
@@ -410,8 +418,8 @@ function PaidMockTestRegistrationForm({
                       <Image
                         src="/images/paypal-logo.png"
                         alt="PayPal"
-                        width={50}
-                        height={50}
+                        width={80}
+                        height={80}
                       />
                     </label>
                   </RadioGroup>

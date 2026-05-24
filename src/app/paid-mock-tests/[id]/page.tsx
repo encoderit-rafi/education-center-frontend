@@ -110,16 +110,13 @@ export default async function PaidMockTestDynamicPage({ params }: PageProps) {
                 Purchase
               </Link>
             </div>
-            <div className="flex-1 relative w-full h-full">
-              {/* <Image
-                src={`/images/mock-test-${data.slug}.jpg`}
-                alt={data.name}
-                fill
-                className="w-full h-full object-cover"
-                // width={500}
-                // height={500}
-              /> */}
-            </div>
+            <Image
+              src={`/images/mock-test-${data.slug}.jpg`}
+              alt={data.name}
+              className="w-full h-full object-cover aspect-video"
+              width={500}
+              height={500}
+            />
           </div>
         </div>
       </section>
