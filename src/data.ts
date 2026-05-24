@@ -693,8 +693,8 @@ export const COURSES_DATA = {
     general_discount: 5,
     special_discount: 15,
   },
-
-  vip_classroom: {
+// private one to one
+  vip_classroom: { 
     id: "vip_classroom",
     name: "VIP Classroom",
     class_mode_id: "vip",
@@ -704,8 +704,9 @@ export const COURSES_DATA = {
     general_discount: 5,
     special_discount: 20,
   },
+  //online one to one
 
-  vip_online: {
+  vip_online: { 
     id: "vip_online",
     name: "Private Online",
     class_mode_id: "vip",

@@ -28,18 +28,23 @@ import { Upload, CheckCircle2 } from "lucide-react";
 import { DateTimePicker } from "@/components/ui/date-time-picker";
 import { CountryDropdown } from "@/components/ui/country-dropdown";
 import { PhoneInput } from "@/components/ui/phone-input";
+import { format } from "date-fns";
+import api from "@/axios";
+import { toast } from "sonner";
 
 const careerSchema = z.object({
-    fullName: z.string().min(3, "Full name must be at least 3 characters"),
+    first_name: z.string().min(2, "First name must be at least 2 characters"),
+    middle_name: z.string().optional(),
+    last_name: z.string().min(2, "Last name must be at least 2 characters"),
     gender: z.string().min(1, "Please select your gender"),
     dob: z.any().refine((val) => val instanceof Date, "Please select your date of birth"),
-    nationality: z.string().min(1, "Please select your nationality"),
+    nationality: z.string().min(2, "Please select your nationality"),
     email: z.string().email("Please enter a valid email address"),
     mobile: z.string().min(7, "Please enter a valid mobile number"),
     address: z.string().min(5, "Address must be at least 5 characters"),
     city: z.string().min(2, "City/Emirate is required"),
     pobox: z.string().optional(),
-    resume: z.any().optional(), // In a real app, you'd validate the file type and size
+    resume: z.any().refine((val) => !!val, "Please upload your resume (PDF, DOC, or DOCX)"),
 });
 
 type CareerFormValues = z.infer<typeof careerSchema>;
@@ -57,7 +62,9 @@ export default function CareerPage() {
     const form = useForm<CareerFormValues>({
         resolver: zodResolver(careerSchema),
         defaultValues: {
-            fullName: "",
+            first_name: "",
+            middle_name: "",
+            last_name: "",
             gender: "",
             dob: undefined,
             nationality: "",
@@ -66,6 +73,7 @@ export default function CareerPage() {
             address: "",
             city: "",
             pobox: "",
+            resume: undefined,
         },
     });
 
@@ -76,16 +84,78 @@ export default function CareerPage() {
             return;
         }
         setCaptchaError(null);
-        
-        console.log("Form Data:", data);
-        // Simulate API call
-        await new Promise((resolve) => setTimeout(resolve, 1500));
-        setIsSuccess(true);
+
+        try {
+            const file = data.resume as File;
+
+            // 1. Upload the file to the file upload API
+            const uploadFormData = new FormData();
+            uploadFormData.append("file", file);
+
+            toast.loading("Uploading resume...", { id: "career-submit" });
+
+            const uploadRes = await api.post("/files/upload", uploadFormData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            });
+
+            const relativeUrl = uploadRes.data?.url;
+            if (!relativeUrl) {
+                throw new Error("Failed to retrieve uploaded file URL from the server.");
+            }
+
+            // Construct full absolute resume URL dynamically from axios config
+            const apiBase = api.defaults.baseURL || "https://vote.encoder-test-vpn.space/api/v1";
+            const apiHost = apiBase.replace("/api/v1", "");
+            const fullResumeUrl = relativeUrl.startsWith("http") ? relativeUrl : `${apiHost}${relativeUrl}`;
+
+            console.log("Resume uploaded successfully! URL:", fullResumeUrl);
+
+            // 2. Submit the career application
+            toast.loading("Submitting application...", { id: "career-submit" });
+
+            const payload = {
+                first_name: data.first_name,
+                middle_name: data.middle_name || "",
+                last_name: data.last_name,
+                gender: data.gender,
+                dob: format(data.dob, "yyyy-MM-dd"),
+                nationality: data.nationality,
+                email: data.email,
+                mobile: data.mobile,
+                address: data.address,
+                city: data.city,
+                pobox: data.pobox || "",
+                resume: fullResumeUrl,
+            };
+
+            const res = await api.post("/career", payload);
+
+            if (res.data?.success || res.status === 200 || res.status === 201) {
+                toast.success("Application Submitted Successfully!", {
+                    id: "career-submit",
+                    description: "Thank you for applying. We will review your application and resume shortly.",
+                });
+                setIsSuccess(true);
+            } else {
+                toast.error("Submission Failed", {
+                    id: "career-submit",
+                    description: res.data?.message || "Failed to submit application. Please try again.",
+                });
+            }
+        } catch (error: any) {
+            console.error("Submission error:", error);
+            toast.error("Submission Error", {
+                id: "career-submit",
+                description: error.response?.data?.message || error.message || "An unexpected error occurred. Please try again later.",
+            });
+        }
     };
 
     if (isSuccess) {
         return (
-            <div className="flex flex-col min-h-screen bg-gray-50/50 items-center justify-center p-6">
+            <div className="flex flex-col min-h-screen bg-gray-50/50 items-center justify-center p-6 animate-fade-up">
                 <div className="max-w-md w-full bg-white p-12 rounded-sm shadow-xl border border-gray-100 text-center space-y-6">
                     <div className="w-20 h-20 bg-emerald-50 rounded-full flex items-center justify-center mx-auto">
                         <CheckCircle2 className="w-10 h-10 text-emerald-500" />
@@ -94,7 +164,7 @@ export default function CareerPage() {
                         <h2 className="text-3xl font-black font-heading tracking-tighter">Application Sent!</h2>
                         <p className="text-gray-500 font-medium">Thank you for your interest. Our HR team will review your application and contact you soon.</p>
                     </div>
-                    <Button 
+                    <Button
                         onClick={() => window.location.reload()}
                         className="w-full bg-[#A11D1D] hover:bg-[#8A1818] text-white font-black text-xs uppercase tracking-widest py-6"
                     >
@@ -123,20 +193,48 @@ export default function CareerPage() {
                                 <Form {...form}>
                                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                            {/* Full Name */}
-                                            <FormField
-                                                control={form.control}
-                                                name="fullName"
-                                                render={({ field }) => (
-                                                    <FormItem className="md:col-span-2 space-y-2">
-                                                        <FormLabel className="text-xs font-black uppercase tracking-widest text-gray-500">Full Name:*</FormLabel>
-                                                        <FormControl>
-                                                            <Input placeholder="Enter your full name" className="rounded-none border-gray-200 focus:border-[#A11D1D] focus:ring-[#A11D1D] h-12" {...field} />
-                                                        </FormControl>
-                                                        <FormMessage />
-                                                    </FormItem>
-                                                )}
-                                            />
+                                            {/* First Name, Middle Name, Last Name */}
+                                            <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-3 gap-6">
+                                                <FormField
+                                                    control={form.control}
+                                                    name="first_name"
+                                                    render={({ field }) => (
+                                                        <FormItem className="space-y-2">
+                                                            <FormLabel className="text-xs font-black uppercase tracking-widest text-gray-500">First Name:*</FormLabel>
+                                                            <FormControl>
+                                                                <Input placeholder="John" className="rounded-none border-gray-200 focus:border-[#A11D1D] focus:ring-[#A11D1D] h-12 bg-white" {...field} />
+                                                            </FormControl>
+                                                            <FormMessage />
+                                                        </FormItem>
+                                                    )}
+                                                />
+                                                <FormField
+                                                    control={form.control}
+                                                    name="middle_name"
+                                                    render={({ field }) => (
+                                                        <FormItem className="space-y-2">
+                                                            <FormLabel className="text-xs font-black uppercase tracking-widest text-gray-500">Middle Name:</FormLabel>
+                                                            <FormControl>
+                                                                <Input placeholder="Robert" className="rounded-none border-gray-200 focus:border-[#A11D1D] focus:ring-[#A11D1D] h-12 bg-white" {...field} />
+                                                            </FormControl>
+                                                            <FormMessage />
+                                                        </FormItem>
+                                                    )}
+                                                />
+                                                <FormField
+                                                    control={form.control}
+                                                    name="last_name"
+                                                    render={({ field }) => (
+                                                        <FormItem className="space-y-2">
+                                                            <FormLabel className="text-xs font-black uppercase tracking-widest text-gray-500">Last Name:*</FormLabel>
+                                                            <FormControl>
+                                                                <Input placeholder="Doe" className="rounded-none border-gray-200 focus:border-[#A11D1D] focus:ring-[#A11D1D] h-12 bg-white" {...field} />
+                                                            </FormControl>
+                                                            <FormMessage />
+                                                        </FormItem>
+                                                    )}
+                                                />
+                                            </div>
 
                                             {/* Gender */}
                                             <FormField
@@ -147,11 +245,11 @@ export default function CareerPage() {
                                                         <FormLabel className="text-xs font-black uppercase tracking-widest text-gray-500">Select Gender:*</FormLabel>
                                                         <Select onValueChange={field.onChange} defaultValue={field.value}>
                                                             <FormControl>
-                                                                <SelectTrigger className="rounded-none border-gray-200 focus:ring-[#A11D1D] h-12">
+                                                                <SelectTrigger className="rounded-none border-gray-200 focus:ring-[#A11D1D] h-12 bg-white">
                                                                     <SelectValue placeholder="-Select Gender-" />
                                                                 </SelectTrigger>
                                                             </FormControl>
-                                                            <SelectContent>
+                                                            <SelectContent className="bg-white">
                                                                 <SelectItem value="male">Male</SelectItem>
                                                                 <SelectItem value="female">Female</SelectItem>
                                                                 <SelectItem value="other">Other</SelectItem>
@@ -170,7 +268,7 @@ export default function CareerPage() {
                                                 labelClassName="text-xs font-black uppercase tracking-widest text-gray-500"
                                                 mode="date"
                                                 placeholder="Select your birth date"
-                                                className="rounded-none border-gray-200 h-12 focus:border-[#A11D1D] w-full"
+                                                className="rounded-none border-gray-200 h-12 focus:border-[#A11D1D] w-full bg-white"
                                             />
 
                                             {/* Nationality */}
@@ -183,8 +281,8 @@ export default function CareerPage() {
                                                         <FormControl>
                                                             <CountryDropdown
                                                                 value={field.value}
-                                                                onChange={(country) => field.onChange(country.name)}
-                                                                className="rounded-none border-gray-200 h-12 focus:border-[#A11D1D] w-full shadow-none"
+                                                                onChange={(country) => field.onChange(country.alpha2.toUpperCase())}
+                                                                className="rounded-none border-gray-200 h-12 focus:border-[#A11D1D] w-full shadow-none bg-white"
                                                                 placeholder="-Select Nationality-"
                                                             />
                                                         </FormControl>
@@ -201,7 +299,7 @@ export default function CareerPage() {
                                                     <FormItem className="space-y-2">
                                                         <FormLabel className="text-xs font-black uppercase tracking-widest text-gray-500">Email Address:*</FormLabel>
                                                         <FormControl>
-                                                            <Input type="email" placeholder="email@example.com" className="rounded-none border-gray-200 h-12" {...field} />
+                                                            <Input type="email" placeholder="email@example.com" className="rounded-none border-gray-200 h-12 bg-white" {...field} />
                                                         </FormControl>
                                                         <FormMessage />
                                                     </FormItem>
@@ -220,7 +318,7 @@ export default function CareerPage() {
                                                                 {...field}
                                                                 defaultCountry="AE"
                                                                 placeholder="Ex: 50 123 4567"
-                                                                className="rounded-none border-gray-200 h-12 focus-within:border-[#A11D1D] focus-within:ring-1 focus-within:ring-[#A11D1D]"
+                                                                className="rounded-none border-gray-200 h-12 focus-within:border-[#A11D1D] focus-within:ring-1 focus-within:ring-[#A11D1D] bg-white"
                                                             />
                                                         </FormControl>
                                                         <FormMessage />
@@ -236,7 +334,7 @@ export default function CareerPage() {
                                                     <FormItem className="md:col-span-2 space-y-2">
                                                         <FormLabel className="text-xs font-black uppercase tracking-widest text-gray-500">Residential Address:*</FormLabel>
                                                         <FormControl>
-                                                            <Input placeholder="Enter your full address" className="rounded-none border-gray-200 h-12" {...field} />
+                                                            <Input placeholder="Enter your full address" className="rounded-none border-gray-200 h-12 bg-white" {...field} />
                                                         </FormControl>
                                                         <FormMessage />
                                                     </FormItem>
@@ -249,9 +347,9 @@ export default function CareerPage() {
                                                 name="city"
                                                 render={({ field }) => (
                                                     <FormItem className="space-y-2">
-                                                        <FormLabel className="text-xs font-black uppercase tracking-widest text-gray-500">Emirate/City:*</FormLabel>
+                                                        <FormLabel className="text-xs font-black uppercase tracking-widest text-gray-500">Emirate / City:*</FormLabel>
                                                         <FormControl>
-                                                            <Input placeholder="Dubai" className="rounded-none border-gray-200 h-12" {...field} />
+                                                            <Input placeholder="Dubai" className="rounded-none border-gray-200 h-12 bg-white" {...field} />
                                                         </FormControl>
                                                         <FormMessage />
                                                     </FormItem>
@@ -266,7 +364,7 @@ export default function CareerPage() {
                                                     <FormItem className="space-y-2">
                                                         <FormLabel className="text-xs font-black uppercase tracking-widest text-gray-500">P.O. Box:</FormLabel>
                                                         <FormControl>
-                                                            <Input placeholder="123456" className="rounded-none border-gray-200 h-12" {...field} />
+                                                            <Input placeholder="123456" className="rounded-none border-gray-200 h-12 bg-white" {...field} />
                                                         </FormControl>
                                                         <FormMessage />
                                                     </FormItem>
@@ -274,33 +372,109 @@ export default function CareerPage() {
                                             />
 
                                             {/* File Upload */}
-                                            <div className="md:col-span-2 space-y-4 pt-6">
-                                                <FormLabel className="text-xs font-black uppercase tracking-widest text-gray-900 border-b-2 border-gray-900 pb-1">Attach your CV:</FormLabel>
-                                                <div className="border-2 border-dashed border-gray-200 p-10 flex flex-col items-center justify-center space-y-4 hover:border-[#A11D1D] transition-colors cursor-pointer group bg-gray-50/50">
-                                                    <Upload className="w-10 h-10 text-gray-300 group-hover:text-[#A11D1D] transition-colors" />
-                                                    <div className="text-center">
-                                                        <p className="text-sm font-bold text-gray-600">Click to upload or drag and drop</p>
-                                                        <p className="text-[10px] text-gray-400 uppercase tracking-widest mt-1">Only doc, docx or pdf file allowed</p>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <FormField
+                                                control={form.control}
+                                                name="resume"
+                                                render={({ field }) => {
+                                                    const file = field.value as File | undefined;
+                                                    const fileRef = useRef<HTMLInputElement>(null);
+                                                    return (
+                                                        <FormItem className="md:col-span-2 space-y-4 pt-6">
+                                                            <FormLabel className="text-xs font-black uppercase tracking-widest text-gray-900 border-b-2 border-gray-900 pb-1 block w-fit">Attach your CV:*</FormLabel>
+                                                            <FormControl>
+                                                                <div
+                                                                    onClick={() => fileRef.current?.click()}
+                                                                    onDragOver={(e) => {
+                                                                        e.preventDefault();
+                                                                        e.stopPropagation();
+                                                                    }}
+                                                                    onDrop={(e) => {
+                                                                        e.preventDefault();
+                                                                        e.stopPropagation();
+                                                                        if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+                                                                            const droppedFile = e.dataTransfer.files[0];
+                                                                            const ext = droppedFile.name.split('.').pop()?.toLowerCase();
+                                                                            if (ext && ['pdf', 'doc', 'docx'].includes(ext)) {
+                                                                                field.onChange(droppedFile);
+                                                                            } else {
+                                                                                toast.error("Invalid file type", {
+                                                                                    description: "Only PDF, DOC, or DOCX files are allowed.",
+                                                                                });
+                                                                            }
+                                                                        }
+                                                                    }}
+                                                                    className={cn(
+                                                                        "relative border-2 border-dashed p-10 flex flex-col items-center justify-center space-y-4 transition-colors cursor-pointer group rounded-none",
+                                                                        file
+                                                                            ? "border-[#A11D1D]/30 bg-[#A11D1D]/5"
+                                                                            : "border-gray-200 hover:border-[#A11D1D] bg-gray-50/50"
+                                                                    )}
+                                                                >
+                                                                    <input
+                                                                        type="file"
+                                                                        ref={fileRef}
+                                                                        className="hidden"
+                                                                        accept=".pdf,.doc,.docx"
+                                                                        onChange={(e) => {
+                                                                            if (e.target.files && e.target.files[0]) {
+                                                                                field.onChange(e.target.files[0]);
+                                                                            }
+                                                                        }}
+                                                                    />
+                                                                    {file ? (
+                                                                        <div className="flex flex-col items-center space-y-3 w-full text-center">
+                                                                            <div className="w-16 h-16 bg-[#A11D1D]/10 rounded-full flex items-center justify-center text-[#A11D1D]">
+                                                                                <CheckCircle2 className="w-8 h-8" />
+                                                                            </div>
+                                                                            <div className="space-y-1">
+                                                                                <p className="font-bold text-gray-900 text-sm max-w-xs truncate">{file.name}</p>
+                                                                                <p className="text-xs text-gray-500 font-medium">{(file.size / (1024 * 1024)).toFixed(2)} MB</p>
+                                                                            </div>
+                                                                            <button
+                                                                                type="button"
+                                                                                onClick={(e) => {
+                                                                                    e.stopPropagation();
+                                                                                    field.onChange(undefined);
+                                                                                    if (fileRef.current) fileRef.current.value = "";
+                                                                                }}
+                                                                                className="text-xs text-[#A11D1D] hover:text-[#8A1818] font-black uppercase tracking-widest flex items-center gap-1 hover:underline mx-auto mt-2"
+                                                                            >
+                                                                                Remove File
+                                                                            </button>
+                                                                        </div>
+                                                                    ) : (
+                                                                        <>
+                                                                            <Upload className="w-10 h-10 text-gray-300 group-hover:text-[#A11D1D] transition-colors" />
+                                                                            <div className="text-center">
+                                                                                <p className="text-sm font-bold text-gray-600">Click to upload or drag and drop</p>
+                                                                                <p className="text-[10px] text-gray-400 uppercase tracking-widest mt-1">Only doc, docx or pdf file allowed</p>
+                                                                            </div>
+                                                                        </>
+                                                                    )}
+                                                                </div>
+                                                            </FormControl>
+                                                            <FormMessage />
+                                                        </FormItem>
+                                                    );
+                                                }}
+                                            />
 
                                             {/* ReCAPTCHA */}
                                             <div className="md:col-span-2 space-y-2">
-                                            {mounted && (
-                                                <ReCAPTCHA
-                                                    ref={captchaRef}
-                                                    sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
-                                                    onChange={() => setCaptchaError(null)}
-                                                />
-                                            )}
+                                                {mounted && (
+                                                    <ReCAPTCHA
+                                                        ref={captchaRef}
+                                                        sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
+                                                        onChange={() => setCaptchaError(null)}
+                                                    />
+                                                )}
                                                 {captchaError && (
-                                                    <p className="text-red-500 text-sm font-medium">{captchaError}</p>
+                                                    <p className="text-[#A11D1D] text-sm font-medium">{captchaError}</p>
                                                 )}
                                             </div>
                                         </div>
 
-                                        <Button 
+                                        <Button
                                             type="submit"
                                             disabled={form.formState.isSubmitting}
                                             className="w-full md:w-auto px-12 py-8 bg-[#A11D1D] hover:bg-[#8A1818] text-white font-black text-xs uppercase tracking-[0.2em] rounded-none shadow-lg hover:shadow-xl transition-all disabled:opacity-50"
