@@ -113,6 +113,22 @@ export function ReviewStep({
               </div>
               <div className="flex flex-col">
                 <span className="text-[10px] text-slate-400 font-bold uppercase">
+                  City of Birth
+                </span>
+                <span className="text-sm font-semibold text-black">
+                  {data.birthCity || "N/A"}
+                </span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] text-slate-400 font-bold uppercase">
+                  Country of Birth
+                </span>
+                <span className="text-sm font-semibold text-black">
+                  {data.birthCountry || "N/A"}
+                </span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] text-slate-400 font-bold uppercase">
                   Mobile Number
                 </span>
                 <span className="text-sm font-semibold text-black">

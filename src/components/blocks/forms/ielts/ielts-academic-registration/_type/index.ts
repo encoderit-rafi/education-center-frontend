@@ -6,7 +6,9 @@ export const IeltsAcademicSchema = z
     testModule: z.enum(["Academic", "General Training"]).or(z.literal("")),
 
     givenNames: z.string().min(1, "Given names are required"),
-    middleName: z.string().optional(),
+    middleName: z.string().min(1, "Middle name is required"),
+    birthCity: z.string().min(1, "City of birth is required"),
+    birthCountry: z.string().min(1, "Country of birth is required"),
     surnames: z.string().optional(),
     postcode: z.string().optional(),
     poBox: z.string().optional(),

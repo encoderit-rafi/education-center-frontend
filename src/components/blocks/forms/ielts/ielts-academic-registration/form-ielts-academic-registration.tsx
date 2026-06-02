@@ -102,6 +102,8 @@ export default function FormIeltsAcademicRegistration() {
       testModule: "Academic",
       givenNames: "",
       middleName: "",
+      birthCity: "",
+      birthCountry: "",
       surnames: "",
       noSurname: false,
       postcode: "",
@@ -223,6 +225,8 @@ export default function FormIeltsAcademicRegistration() {
         test_module: data.testModule,
         given_names: data.givenNames,
         middle_name: data.middleName,
+        birth_city: data.birthCity,
+        birth_country: data.birthCountry,
         surnames: data.surnames,
         date_of_birth: data.dateOfBirth
           ? new Date(data.dateOfBirth as any).toISOString()
@@ -361,6 +365,8 @@ export default function FormIeltsAcademicRegistration() {
                       : "N/A",
                   },
                   { label: "Gender", value: formData.sex || "N/A" },
+                  { label: "City of Birth", value: formData.birthCity || "N/A" },
+                  { label: "Country of Birth", value: formData.birthCountry || "N/A" },
                   {
                     label: "Mobile Number",
                     value: formData.mobileNumber || "N/A",

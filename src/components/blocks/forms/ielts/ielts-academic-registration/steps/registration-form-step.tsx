@@ -79,13 +79,15 @@ export function RegistrationFormStep({
             </FieldContent>
           </Field>
 
-          <Field>
-            <FieldLabel>Middle Name</FieldLabel>
+          <Field data-invalid={!!errors.middleName}>
+            <FieldLabel required>Middle Name</FieldLabel>
             <FieldContent>
               <Input
                 placeholder="As per passport"
+                aria-invalid={!!errors.middleName}
                 {...register("middleName")}
               />
+              <FieldError errors={[errors.middleName]} />
             </FieldContent>
           </Field>
 
@@ -152,6 +154,32 @@ export function RegistrationFormStep({
             </FieldContent>
           </Field>
 
+          <Field data-invalid={!!errors.birthCity}>
+            <FieldLabel required>City of birth</FieldLabel>
+            <FieldContent>
+              <Input
+                placeholder="Enter city of birth"
+                aria-invalid={!!errors.birthCity}
+                {...register("birthCity")}
+              />
+              <FieldError errors={[errors.birthCity]} />
+            </FieldContent>
+          </Field>
+
+          <Field data-invalid={!!errors.birthCountry}>
+            <FieldLabel required>Country of birth</FieldLabel>
+            <FieldContent>
+              <CountryDropdown
+                name="birthCountry"
+                placeholder="Search country..."
+                value={formData.birthCountry}
+                aria-invalid={!!errors.birthCountry}
+                onChange={(country) => setValue("birthCountry", country.name)}
+              />
+              <FieldError errors={[errors.birthCountry]} />
+            </FieldContent>
+          </Field>
+
           <Field data-invalid={!!errors.sex}>
             <FieldLabel required>Sex</FieldLabel>
             <FieldContent>
@@ -197,8 +225,9 @@ export function RegistrationFormStep({
                   }
                   className="mt-0.5"
                 />
-                <Label htmlFor="smsConsent" className="text-xs font-light leading-normal">
-                  I agree to receive notifications or to be contacted about my test registration to this telephone number via SMS, WhatsApp, etc
+                <Label htmlFor="smsConsent" className="text-xs font-light leading-normal whitespace-normal text-wrap block">
+                  I agree to receive notifications or to be contacted about my test registration<br />
+                  to this telephone number via SMS, WhatsApp, etc
                 </Label>
               </FieldDescription>
             </FieldContent>
