@@ -25,7 +25,7 @@ export const IeltsGeneralSchema = z.object({
     postcode: z.string().min(1, "Postcode / ZIP is required"),
     marketingPreference: z.enum(["all", "some", "none"], {
         message: "Please select a marketing preference",
-    }),
+    }).optional(),
 
     // Step 2: Identification Details
     idType: z.enum(["passport", "emirates_id"]).optional(),
@@ -61,6 +61,9 @@ export const IeltsGeneralSchema = z.object({
 }).refine((data) => data.email === data.confirmEmail, {
     message: "Emails do not match",
     path: ["confirmEmail"],
+}).refine((data) => !!data.marketingPreference, {
+    message: "Please select a marketing preference",
+    path: ["marketingPreference"],
 });
 
 export type TIeltsGeneralSchema = z.infer<typeof IeltsGeneralSchema>;

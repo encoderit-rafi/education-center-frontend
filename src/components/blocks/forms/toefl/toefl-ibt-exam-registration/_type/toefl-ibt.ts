@@ -64,7 +64,8 @@ export const ToeflIbtSchema = z
         marketingPreference: z
             .enum(["all", "some", "none"], {
                 message: "Please select a marketing preference",
-            }),
+            })
+            .or(z.literal("")),
         paymentMethod: z
             .enum(["online", "bank_transfer", "at_center", "stripe", "paypal"], {
                 message: "Please select a payment method",
@@ -95,6 +96,13 @@ export const ToeflIbtSchema = z
             }
         }
 
+        if (!data.marketingPreference) {
+            ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                message: "Please select a marketing preference",
+                path: ["marketingPreference"],
+            });
+        }
     });
 
 export type TToeflIbtSchema = z.infer<typeof ToeflIbtSchema>;
