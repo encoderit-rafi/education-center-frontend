@@ -49,16 +49,38 @@ export default function HowToFindUs() {
             display: block !important;
           }
 
+          /* Reduce top padding in print */
+          .print\:py-8 {
+            padding-top: 2rem !important;
+            padding-bottom: 2rem !important;
+          }
+
+          /* Stack transport items to single column, hide images */
+          .transport-grid {
+            display: block !important;
+          }
+
+          .transport-img {
+            display: none !important;
+          }
+
+          .transport-text {
+            order: unset !important;
+            width: 100% !important;
+          }
+
+          /* Page break between the two printed sections */
+          .print-page-break {
+            page-break-before: always !important;
+            break-before: always !important;
+            padding-top: 2rem !important;
+          }
+
           /* Prevent weird clipping by keeping components intact */
           .print-avoid-break {
             break-inside: avoid !important;
             page-break-inside: avoid !important;
             margin-bottom: 2.5rem !important;
-            page-break-after: always;
-          }
-          
-          .print-avoid-break:last-child {
-            page-break-after: auto;
           }
         }
       `}} />
@@ -139,7 +161,7 @@ export default function HowToFindUs() {
       </section>
 
       {/* Map Section */}
-      <section className="py-24 px-8 max-w-screen-2xl mx-auto border-t border-slate-50 print-avoid-break">
+      <section className="py-24 px-8 max-w-screen-2xl mx-auto border-t border-slate-50 print-avoid-break print:hidden">
         <div className="grid lg:grid-cols-2 gap-20 items-center print-grid">
           <div className="space-y-8">
             <SectionHeader
@@ -218,7 +240,7 @@ export default function HowToFindUs() {
       </section>
 
       {/* Transportation Options */}
-      <section className="py-32 bg-white px-8 relative overflow-hidden print:hidden">
+      <section className="py-32 bg-white px-8 relative overflow-hidden print:py-8">
         <div className="max-w-screen-2xl mx-auto">
           {/* Section Header */}
           <SectionHeader
@@ -234,8 +256,8 @@ export default function HowToFindUs() {
 
           <div className="space-y-40">
             {/* 01. By Taxicab */}
-            <div className="grid lg:grid-cols-2 gap-16 lg:gap-32 items-center">
-              <div className="space-y-8 order-2 lg:order-1">
+            <div className="grid lg:grid-cols-2 gap-16 lg:gap-32 items-center transport-grid">
+              <div className="space-y-8 order-2 lg:order-1 transport-text">
                 <div className="flex items-center gap-4">
                   <span className="text-7xl font-black text-primary/10">01</span>
                   <h5 className="text-primary text-3xl font-black uppercase tracking-tight">By Taxicab</h5>
@@ -246,17 +268,17 @@ export default function HowToFindUs() {
                   </p>
                 </div>
               </div>
-              <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl order-1 lg:order-2">
+              <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl order-1 lg:order-2 transport-img">
                 <Image src="/images/about-us/taxi-sharjah.png" alt="Sharjah Taxi" fill className="object-cover" />
               </div>
             </div>
 
             {/* 02. Public Bus */}
-            <div className="grid lg:grid-cols-2 gap-16 lg:gap-32 items-center">
-              <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
+            <div className="grid lg:grid-cols-2 gap-16 lg:gap-32 items-center transport-grid">
+              <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl transport-img">
                 <Image src="/images/about-us/sss.png" alt="Sharjah Public Bus" fill className="object-cover" />
               </div>
-              <div className="space-y-8">
+              <div className="space-y-8 transport-text">
                 <div className="flex items-center gap-4">
                   <span className="text-7xl font-black text-primary/10">02</span>
                   <h5 className="text-primary text-3xl font-black uppercase tracking-tight">Public Bus</h5>
@@ -268,8 +290,8 @@ export default function HowToFindUs() {
             </div>
 
             {/* 03. Dubai Metro & Bus */}
-            <div className="grid lg:grid-cols-2 gap-16 lg:gap-32 items-center">
-              <div className="space-y-8 order-2 lg:order-1">
+            <div className="grid lg:grid-cols-2 gap-16 lg:gap-32 items-center transport-grid">
+              <div className="space-y-8 order-2 lg:order-1 transport-text">
                 <div className="flex items-center gap-4">
                   <span className="text-7xl font-black text-primary/10">03</span>
                   <h5 className="text-3xl font-black text-primary uppercase tracking-tight">Metro & Bus</h5>
@@ -304,7 +326,7 @@ export default function HowToFindUs() {
                   <p className="text-[#d12c2c] font-bold">Note: Please allow extra travel time as bus routes can be affected by traffic conditions.</p>
                 </div>
               </div>
-              <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl order-1 lg:order-2">
+              <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl order-1 lg:order-2 transport-img">
                 <Image src="/images/about-us/mmm.png" alt="Dubai Metro" fill className="object-cover" />
               </div>
             </div>
@@ -313,7 +335,7 @@ export default function HowToFindUs() {
       </section>
 
       {/* Driving Directions */}
-      <section className="py-16 px-8 max-w-screen-2xl mx-auto print-avoid-break">
+      <section className="py-16 px-8 max-w-screen-2xl mx-auto print-avoid-break print-page-break">
         <div className="grid lg:grid-cols-2 gap-20 items-start print-grid">
           <div className="space-y-12">
             <SectionHeader
@@ -339,7 +361,7 @@ export default function HowToFindUs() {
             </div>
           </div>
 
-          <div className="bg-primary rounded-[2.5rem] p-10 md:p-14 text-white space-y-10 shadow-2xl relative overflow-hidden group">
+          <div className="bg-primary rounded-[2.5rem] p-10 md:p-14 text-white space-y-10 shadow-2xl relative overflow-hidden group print:hidden">
             <div className="absolute top-0 right-0 w-80 h-80 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:scale-110 transition-transform duration-700"></div>
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-black/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 group-hover:scale-110 transition-transform duration-700"></div>
 
