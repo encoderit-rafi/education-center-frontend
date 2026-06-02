@@ -1,5 +1,5 @@
-import * as React from "react"
-import * as PopoverPrimitive from "@radix-ui/react-popover"
+import * as React from "react";
+import * as PopoverPrimitive from "@radix-ui/react-popover";
 import {
   Command,
   CommandEmpty,
@@ -7,17 +7,24 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@/components/ui/command"
-import { cn } from "@/lib/utils"
-import { Check, ChevronDown } from "lucide-react"
+} from "@/components/ui/command";
+import { cn } from "@/lib/utils";
+import { Check, ChevronDown } from "lucide-react";
 
-interface SearchableDropdownProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "onChange"> {
-  options: { label: string | React.ReactNode; value: string; description?: string | React.ReactNode }[]
-  placeholder?: string
-  searchPlaceholder?: string
-  emptyMessage?: string
-  value?: string
-  onChange?: (value: string) => void
+interface SearchableDropdownProps extends Omit<
+  React.ButtonHTMLAttributes<HTMLButtonElement>,
+  "onChange"
+> {
+  options: {
+    label: string | React.ReactNode;
+    value: string;
+    description?: string | React.ReactNode;
+  }[];
+  placeholder?: string;
+  searchPlaceholder?: string;
+  emptyMessage?: string;
+  value?: string;
+  onChange?: (value: string) => void;
 }
 
 export const SearchableDropdown = React.forwardRef<
@@ -36,22 +43,22 @@ export const SearchableDropdown = React.forwardRef<
       disabled,
       ...props
     },
-    ref
+    ref,
   ) => {
-    const [open, setOpen] = React.useState(false)
+    const [open, setOpen] = React.useState(false);
 
     const selectedLabel = React.useMemo(
       () => options.find((opt) => opt.value === value)?.label,
-      [options, value]
-    )
+      [options, value],
+    );
 
     const handleSelect = React.useCallback(
       (val: string) => {
-        onChange?.(val)
-        setOpen(false)
+        onChange?.(val);
+        setOpen(false);
       },
-      [onChange]
-    )
+      [onChange],
+    );
 
     return (
       <PopoverPrimitive.Root open={open} onOpenChange={setOpen}>
@@ -103,7 +110,7 @@ export const SearchableDropdown = React.forwardRef<
                   className="h-9 px-2 outline-none w-full bg-slate-50"
                 />
               </div>
-              <CommandList className="overflow-y-auto no-scrollbar">
+              <CommandList className="overflow-y-auto">
                 <CommandEmpty className="py-6 text-center text-sm text-slate-500">
                   {emptyMessage}
                 </CommandEmpty>
@@ -139,8 +146,8 @@ export const SearchableDropdown = React.forwardRef<
           </PopoverPrimitive.Content>
         </PopoverPrimitive.Portal>
       </PopoverPrimitive.Root>
-    )
-  }
-)
+    );
+  },
+);
 
-SearchableDropdown.displayName = "SearchableDropdown"
+SearchableDropdown.displayName = "SearchableDropdown";

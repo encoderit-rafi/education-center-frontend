@@ -144,7 +144,7 @@ const CountrySelect = ({
                                 className="h-9 px-2 outline-none w-full bg-slate-50"
                             />
                         </div>
-                        <CommandList className="overflow-y-auto no-scrollbar">
+                        <CommandList className="overflow-y-auto">
                             <ScrollArea ref={scrollAreaRef} className="h-72">
                                 <CommandEmpty className="py-6 text-center text-sm text-slate-500">No country found.</CommandEmpty>
                                 <CommandGroup>
