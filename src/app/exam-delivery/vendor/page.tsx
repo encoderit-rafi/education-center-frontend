@@ -1,6 +1,3 @@
-"use client";
-
-import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -11,13 +8,43 @@ import {
   TrendingUp,
   Mail,
   Phone,
-  ArrowRight,
   ChevronRight,
   Calendar,
   Layers,
-  HeartHandshake
+  type LucideIcon,
 } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
+
+interface CollaborationPillar {
+  icon: LucideIcon;
+  title: string;
+  description: string;
+  badge: string;
+}
+
+const collaborationPillars: CollaborationPillar[] = [
+  {
+    icon: ShieldCheck,
+    title: "Turnkey & Secure",
+    description:
+      "An instantly accessible, highly secure environment that fully satisfies the stringent compliance policies of international exam boards.",
+    badge: "Accredited Compliance",
+  },
+  {
+    icon: Cpu,
+    title: "Resource Optimization",
+    description:
+      "Maximizing seating capacity and technical infrastructure parameters to streamline operational performance and exam logistics.",
+    badge: "Technical Infrastructure",
+  },
+  {
+    icon: TrendingUp,
+    title: "Shared Success",
+    description:
+      "A mutually beneficial alignment enabling predictable growth scales and a premium professional testing setting for all examinees.",
+    badge: "Predictable Scalability",
+  },
+];
 
 export default function VendorPartnershipsPage() {
   return (
@@ -122,67 +149,29 @@ export default function VendorPartnershipsPage() {
 
         {/* Breakdown List in One Column */}
         <div className="space-y-6">
-          
-          {/* 1. Turnkey & Secure */}
-          <div className="bg-white p-6 md:p-8 rounded-2xl border border-slate-100 shadow-xs hover:shadow-md hover:border-maroon-100/50 hover:bg-slate-50/20 transition-all duration-300 group flex flex-col md:flex-row gap-6 items-start">
-            <div className="flex-shrink-0 w-12 h-12 bg-maroon-50 rounded-xl flex items-center justify-center text-maroon-700 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300">
-              <ShieldCheck className="w-6 h-6" />
-            </div>
-            <div className="flex-grow">
-              <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-primary transition-colors duration-300">
-                Turnkey & Secure
-              </h3>
-              <p className="text-slate-600 leading-relaxed font-sans text-sm font-light">
-                An instantly accessible, highly secure environment that fully satisfies the stringent compliance policies of international exam boards.
-              </p>
-              <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-slate-100/70">
-                <span className="inline-flex items-center px-3 py-1 bg-slate-50 border border-slate-100 text-slate-600 rounded-full text-[11px] font-medium tracking-wide">
-                  Accredited Compliance
-                </span>
+          {collaborationPillars.map((pillar) => (
+            <div
+              key={pillar.title}
+              className="bg-white p-6 md:p-8 rounded-2xl border border-slate-100 shadow-xs hover:shadow-md hover:border-maroon-100/50 hover:bg-slate-50/20 transition-all duration-300 group flex flex-col md:flex-row gap-6 items-start"
+            >
+              <div className="flex-shrink-0 w-12 h-12 bg-maroon-50 rounded-xl flex items-center justify-center text-maroon-700 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                <pillar.icon className="w-6 h-6" />
+              </div>
+              <div className="flex-grow">
+                <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-primary transition-colors duration-300">
+                  {pillar.title}
+                </h3>
+                <p className="text-slate-600 leading-relaxed font-sans text-sm font-light">
+                  {pillar.description}
+                </p>
+                <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-slate-100/70">
+                  <span className="inline-flex items-center px-3 py-1 bg-slate-50 border border-slate-100 text-slate-600 rounded-full text-[11px] font-medium tracking-wide">
+                    {pillar.badge}
+                  </span>
+                </div>
               </div>
             </div>
-          </div>
-
-          {/* 2. Resource Optimization */}
-          <div className="bg-white p-6 md:p-8 rounded-2xl border border-slate-100 shadow-xs hover:shadow-md hover:border-maroon-100/50 hover:bg-slate-50/20 transition-all duration-300 group flex flex-col md:flex-row gap-6 items-start">
-            <div className="flex-shrink-0 w-12 h-12 bg-maroon-50 rounded-xl flex items-center justify-center text-maroon-700 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300">
-              <Cpu className="w-6 h-6" />
-            </div>
-            <div className="flex-grow">
-              <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-primary transition-colors duration-300">
-                Resource Optimization
-              </h3>
-              <p className="text-slate-600 leading-relaxed font-sans text-sm font-light">
-                Maximizing seating capacity and technical infrastructure parameters to streamline operational performance and exam logistics.
-              </p>
-              <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-slate-100/70">
-                <span className="inline-flex items-center px-3 py-1 bg-slate-50 border border-slate-100 text-slate-600 rounded-full text-[11px] font-medium tracking-wide">
-                  Technical Infrastructure
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* 3. Symbiotic Scalability */}
-          <div className="bg-white p-6 md:p-8 rounded-2xl border border-slate-100 shadow-xs hover:shadow-md hover:border-maroon-100/50 hover:bg-slate-50/20 transition-all duration-300 group flex flex-col md:flex-row gap-6 items-start">
-            <div className="flex-shrink-0 w-12 h-12 bg-maroon-50 rounded-xl flex items-center justify-center text-maroon-700 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300">
-              <TrendingUp className="w-6 h-6" />
-            </div>
-            <div className="flex-grow">
-              <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-primary transition-colors duration-300">
-                Shared Success
-              </h3>
-              <p className="text-slate-600 leading-relaxed font-sans text-sm font-light">
-                A mutually beneficial alignment enabling predictable growth scales and a premium professional testing setting for all examinees.
-              </p>
-              <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-slate-100/70">
-                <span className="inline-flex items-center px-3 py-1 bg-slate-50 border border-slate-100 text-slate-600 rounded-full text-[11px] font-medium tracking-wide">
-                  Predictable Scalability
-                </span>
-              </div>
-            </div>
-          </div>
-
+          ))}
         </div>
       </section>
 
