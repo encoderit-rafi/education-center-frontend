@@ -24,6 +24,7 @@ import {
 import { TIeltsAcademicSchema } from "../_type";
 import { AED } from "@/components/ui/aed";
 import { PriceDisplay } from "@/components/ui/price-display";
+import { Badge } from "@/components/ui/badge";
 
 interface RegistrationFormStepProps {
   form: UseFormReturn<TIeltsAcademicSchema>;
@@ -748,6 +749,10 @@ export function RegistrationFormStep({
             Add-on Services
           </h3>
         </div>
+        <p className="section-description text-sm">
+          Save more when you book your exam and register for the course with
+          TEPTH and pay in-person or online on our website.
+        </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <Field>
             <FieldLabel>Courses</FieldLabel>
@@ -759,14 +764,25 @@ export function RegistrationFormStep({
                   ...Object.values(coursesData).map((c: any) => ({
                     label: c.name,
                     description: (
-                      <span className="flex items-center gap-1">
-                        <PriceDisplay
-                          amount={c.price * (1 - c.special_discount / 100)}
-                          minimumFractionDigits={0}
-                          maximumFractionDigits={0}
-                        />
-                        <span>({c.special_discount}% OFF)</span>
-                      </span>
+                      <div className="flex items-center justify-between gap-6">
+                        <span className="flex items-center gap-1">
+                          <PriceDisplay
+                            amount={c.price * (1 - c.special_discount / 100)}
+                            minimumFractionDigits={0}
+                            maximumFractionDigits={0}
+                          />
+                          <span>({c.special_discount}% OFF)</span>
+                        </span>
+                        <div className="flex items-center gap-2">
+                          {[
+                            "Free Prep. Material",
+                            "Free Consultation",
+                            "Free Mock Test",
+                          ].map((item) => (
+                            <Badge>{item}</Badge>
+                          ))}
+                        </div>
+                      </div>
                     ),
                     value: c.id,
                   })),
@@ -809,15 +825,15 @@ export function RegistrationFormStep({
           </Field>
         </div>
 
-        <BaseNoteBox
+        {/* <BaseNoteBox
           title="Enjoy These Free Benefits:"
           notes={[
-            "Save more when you book your exam and register for the course with TEPTH and pay online on our website.",
+            "Save more when you book your exam and register for the course with TEPTH and pay in-person or online on our website.",
             "Free Prep. Material",
             "Free Consultation",
             "Free Mock Test",
           ]}
-        />
+        /> */}
       </div>
 
       {/* Marketing Preferences */}

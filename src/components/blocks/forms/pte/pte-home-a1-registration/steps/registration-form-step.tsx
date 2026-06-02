@@ -2,7 +2,16 @@
 
 import React from "react";
 import { UseFormReturn } from "react-hook-form";
-import { Save, User, ShieldCheck, Globe, BookOpen, Upload, X, FileCheck } from "lucide-react";
+import {
+  Save,
+  User,
+  ShieldCheck,
+  Globe,
+  BookOpen,
+  Upload,
+  X,
+  FileCheck,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -78,7 +87,9 @@ export function RegistrationFormStep({
                 <Checkbox
                   id="noGivenNames"
                   checked={formData.noGivenNames}
-                  onCheckedChange={(val) => setValue("noGivenNames", val as boolean)}
+                  onCheckedChange={(val) =>
+                    setValue("noGivenNames", val as boolean)
+                  }
                 />
                 <Label htmlFor="noGivenNames" className="text-xs font-light">
                   I don't have a given name
@@ -114,7 +125,9 @@ export function RegistrationFormStep({
                 <Checkbox
                   id="noSurname"
                   checked={formData.noSurname}
-                  onCheckedChange={(val) => setValue("noSurname", val as boolean)}
+                  onCheckedChange={(val) =>
+                    setValue("noSurname", val as boolean)
+                  }
                 />
                 <Label htmlFor="noSurname" className="text-xs font-light">
                   I don't have a surname / family name
@@ -137,23 +150,24 @@ export function RegistrationFormStep({
                 toYear={new Date().getFullYear()}
                 placeholder="Select date of birth"
               />
-              {formData.dateOfBirth && (() => {
-                const dob = new Date(formData.dateOfBirth);
-                const today = new Date();
-                let age = today.getFullYear() - dob.getFullYear();
-                const m = today.getMonth() - dob.getMonth();
-                if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
-                  age--;
-                }
-                if (age < 16) {
-                  return (
-                    <p className="mt-2 text-xs text-red-600 font-bold animate-in fade-in slide-in-from-top-1">
-                      Candidates must be at least 16 years old.
-                    </p>
-                  );
-                }
-                return null;
-              })()}
+              {formData.dateOfBirth &&
+                (() => {
+                  const dob = new Date(formData.dateOfBirth);
+                  const today = new Date();
+                  let age = today.getFullYear() - dob.getFullYear();
+                  const m = today.getMonth() - dob.getMonth();
+                  if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+                    age--;
+                  }
+                  if (age < 16) {
+                    return (
+                      <p className="mt-2 text-xs text-red-600 font-bold animate-in fade-in slide-in-from-top-1">
+                        Candidates must be at least 16 years old.
+                      </p>
+                    );
+                  }
+                  return null;
+                })()}
               <FieldError errors={[errors.dateOfBirth]} />
             </FieldContent>
           </Field>
@@ -184,7 +198,10 @@ export function RegistrationFormStep({
           <Field data-invalid={!!errors.placeOfBirth}>
             <FieldLabel required>Town / City of birth</FieldLabel>
             <FieldContent>
-              <Input placeholder="As per passport" {...register("placeOfBirth")} />
+              <Input
+                placeholder="As per passport"
+                {...register("placeOfBirth")}
+              />
               <FieldError errors={[errors.placeOfBirth]} />
             </FieldContent>
           </Field>
@@ -204,7 +221,10 @@ export function RegistrationFormStep({
           <Field data-invalid={!!errors.emailUsername}>
             <FieldLabel required>Email address</FieldLabel>
             <FieldContent>
-              <Input placeholder="example@email.com" {...register("emailUsername")} />
+              <Input
+                placeholder="example@email.com"
+                {...register("emailUsername")}
+              />
               <FieldError errors={[errors.emailUsername]} />
             </FieldContent>
           </Field>
@@ -212,7 +232,10 @@ export function RegistrationFormStep({
           <Field data-invalid={!!errors.confirmEmail}>
             <FieldLabel required>Confirm Email address</FieldLabel>
             <FieldContent>
-              <Input placeholder="Confirm your email" {...register("confirmEmail")} />
+              <Input
+                placeholder="Confirm your email"
+                {...register("confirmEmail")}
+              />
               <FieldError errors={[errors.confirmEmail]} />
             </FieldContent>
           </Field>
@@ -244,7 +267,10 @@ export function RegistrationFormStep({
           <Field data-invalid={!!errors.address} className="lg:col-span-2">
             <FieldLabel required>Full Address</FieldLabel>
             <FieldContent>
-              <Input placeholder="Street address, building, etc." {...register("address")} />
+              <Input
+                placeholder="Street address, building, etc."
+                {...register("address")}
+              />
               <FieldError errors={[errors.address]} />
             </FieldContent>
           </Field>
@@ -363,7 +389,11 @@ export function RegistrationFormStep({
                           {(formData.idDocument as File).name}
                         </span>
                         <span className="text-[10px] text-slate-400 font-medium">
-                          {((formData.idDocument as File).size / (1024 * 1024)).toFixed(2)} MB
+                          {(
+                            (formData.idDocument as File).size /
+                            (1024 * 1024)
+                          ).toFixed(2)}{" "}
+                          MB
                         </span>
                       </div>
                     </div>
@@ -420,7 +450,7 @@ export function RegistrationFormStep({
                   { label: "Employed Part-time", value: "Employed Part-time" },
                   { label: "Self-employed", value: "Self-employed" },
                   { label: "Student", value: "Student" },
-                  { label: "Unemployed", value: "Unemployed" }
+                  { label: "Unemployed", value: "Unemployed" },
                 ]}
                 placeholder="-Select Situation-"
                 value={formData.currentSituation}
@@ -440,7 +470,7 @@ export function RegistrationFormStep({
                   { label: "Banking and Finance", value: "Banking" },
                   { label: "Health and Social Services", value: "Healthcare" },
                   { label: "IT/Communications", value: "IT" },
-                  { label: "Other", value: "Other" }
+                  { label: "Other", value: "Other" },
                 ]}
                 placeholder="-Select Sector-"
                 value={formData.occupationSector}
@@ -450,7 +480,10 @@ export function RegistrationFormStep({
             </FieldContent>
           </Field>
 
-          <Field data-invalid={!!errors.reasonForTaking} className="md:col-span-2">
+          <Field
+            data-invalid={!!errors.reasonForTaking}
+            className="md:col-span-2"
+          >
             <FieldLabel required>Why are you taking PTE Home A1?</FieldLabel>
             <FieldContent>
               <SearchableDropdown
@@ -458,7 +491,7 @@ export function RegistrationFormStep({
                   { label: "Work", value: "work" },
                   { label: "Settlement", value: "settlement" },
                   { label: "Study", value: "study" },
-                  { label: "Other", value: "other" }
+                  { label: "Other", value: "other" },
                 ]}
                 placeholder="Select Reason"
                 value={formData.reasonForTaking}
@@ -476,7 +509,7 @@ export function RegistrationFormStep({
                   { label: "Social Media", value: "Social Media" },
                   { label: "Search Engine", value: "Search Engine" },
                   { label: "Friend/Family", value: "Referral" },
-                  { label: "Other", value: "Other" }
+                  { label: "Other", value: "Other" },
                 ]}
                 placeholder="-Select Source-"
                 value={formData.referralSource}
@@ -517,7 +550,9 @@ export function RegistrationFormStep({
                   <RadioGroup
                     className="grid grid-cols-2 gap-3"
                     value={formData.takenWithinTwoYears}
-                    onValueChange={(val) => setValue("takenWithinTwoYears", val)}
+                    onValueChange={(val) =>
+                      setValue("takenWithinTwoYears", val)
+                    }
                   >
                     {["yes", "no"].map((opt) => (
                       <Label
@@ -572,14 +607,20 @@ export function RegistrationFormStep({
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="space-y-2">
-            <Label className="text-sm font-medium text-slate-700">Courses</Label>
+            <Label className="text-sm font-medium text-slate-700">
+              Courses
+            </Label>
             <SearchableDropdown
               options={[
                 { label: "None", value: "" },
                 ...Object.values(coursesData).map((c: any) => ({
                   label: c.name || c.label,
                   description: (
-                    <PriceDisplay amount={c.price} minimumFractionDigits={0} maximumFractionDigits={0} />
+                    <PriceDisplay
+                      amount={c.price}
+                      minimumFractionDigits={0}
+                      maximumFractionDigits={0}
+                    />
                   ),
                   value: c.id,
                 })),
@@ -591,14 +632,20 @@ export function RegistrationFormStep({
           </div>
 
           <div className="space-y-2">
-            <Label className="text-sm font-medium text-slate-700">Workshops</Label>
+            <Label className="text-sm font-medium text-slate-700">
+              Workshops
+            </Label>
             <SearchableDropdown
               options={[
                 { label: "None", value: "" },
                 ...Object.values(workshopsData).map((w: any) => ({
                   label: w.name,
                   description: (
-                    <PriceDisplay amount={w.price} minimumFractionDigits={0} maximumFractionDigits={0} />
+                    <PriceDisplay
+                      amount={w.price}
+                      minimumFractionDigits={0}
+                      maximumFractionDigits={0}
+                    />
                   ),
                   value: w.id,
                 })),
@@ -612,7 +659,7 @@ export function RegistrationFormStep({
         <BaseNoteBox
           title="Enjoy These Free Benefits:"
           notes={[
-            "Save more when you book your exam and register for the course with TEPTH and pay online on our website.",
+            "Save more when you book your exam and register for the course with TEPTH and pay in-person or online on our website.",
             "Free Prep. Material",
             "Free Consultation",
             "Free Mock Test",
@@ -629,9 +676,19 @@ export function RegistrationFormStep({
               className="space-y-4"
             >
               {[
-                { id: "all", label: "I am happy to receive updates from TEPTH." },
-                { id: "third_party", label: "I am happy to receive info from selected third parties." },
-                { id: "none", label: "Please do not send me any marketing updates." },
+                {
+                  id: "all",
+                  label: "I am happy to receive updates from TEPTH.",
+                },
+                {
+                  id: "third_party",
+                  label:
+                    "I am happy to receive info from selected third parties.",
+                },
+                {
+                  id: "none",
+                  label: "Please do not send me any marketing updates.",
+                },
               ].map((opt) => (
                 <Label
                   key={opt.id}
@@ -639,7 +696,9 @@ export function RegistrationFormStep({
                   className="flex items-center space-x-3 p-4 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-bold cursor-pointer data-[invalid=true]:border-destructive shadow-sm"
                 >
                   <RadioGroupItem value={opt.id} id={`mkt-${opt.id}`} />
-                  <span className="text-sm text-slate-700 font-bold">{opt.label}</span>
+                  <span className="text-sm text-slate-700 font-bold">
+                    {opt.label}
+                  </span>
                 </Label>
               ))}
             </RadioGroup>
@@ -652,9 +711,7 @@ export function RegistrationFormStep({
         <Button type="button" onClick={onBack}>
           Back
         </Button>
-        <Button type="submit">
-          Next
-        </Button>
+        <Button type="submit">Next</Button>
       </div>
     </form>
   );
