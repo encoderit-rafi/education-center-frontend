@@ -214,7 +214,7 @@ export default function BookAnExamVenuePage() {
       </section>
 
       {/* Why Choose TEPTH Section */}
-      <section className="py-24 bg-surface-container-high overflow-hidden">
+      {/* <section className="py-24 bg-surface-container-high overflow-hidden">
         <div className="container mx-auto px-6 lg:px-12">
           <div className="flex flex-col lg:flex-row gap-20 items-center">
             <div className="lg:w-1/2">
@@ -271,7 +271,7 @@ export default function BookAnExamVenuePage() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       <CampusGallery />
 
