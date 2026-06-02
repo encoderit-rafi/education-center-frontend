@@ -761,8 +761,8 @@ export function RegistrationFormStep({
           </h3>
         </div>
         <p className="section-description text-sm">
-          Save more when you book your exam and register for the course with
-          TEPTH and pay in-person or online on our website.
+          Save up to 20% when you book your exam and register for the course
+          with TEPTH and pay in-person or online on our website.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <Field>

@@ -660,7 +660,7 @@ export function RegistrationFormStep({
         {/* <BaseNoteBox
           title="Enjoy These Free Benefits:"
           notes={[
-            "Save more when you book your exam and register for the course with TEPTH and pay in-person or online on our website.",
+            "Save up to 20% when you book your exam and register for the course with TEPTH and pay in-person or online on our website.",
             "Free Prep. Material",
             "Free Consultation",
             "Free Mock Test",
