@@ -21,7 +21,7 @@ export function PaymentMethodSelector({
       <RadioGroup
         value={value}
         onValueChange={onChange}
-        className="grid grid-cols-2 gap-3"
+        className="grid  gap-3"
       >
         <label
           htmlFor="payment-stripe"
@@ -33,11 +33,19 @@ export function PaymentMethodSelector({
           )}
         >
           <RadioGroupItem value="stripe" id="payment-stripe" />
-          <Image
+          {/* <Image
             src="/images/stripe-logo.png"
             alt="Stripe"
             width={50}
             height={50}
+          /> */}
+          <span>Credit/Debit Card</span>
+          <Image
+            src="/images/cards.png"
+            alt="Stripe"
+            width={50}
+            height={50}
+            className="ml-auto"
           />
         </label>
         <label
@@ -53,7 +61,7 @@ export function PaymentMethodSelector({
           <Image
             src="/images/paypal-logo.png"
             alt="PayPal"
-            width={50}
+            width={80}
             height={50}
           />
         </label>

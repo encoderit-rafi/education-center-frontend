@@ -36,7 +36,9 @@ function SummarySection({
     <div className="space-y-6">
       <div className="flex items-center gap-2 text-black">
         {icon}
-        <span className="text-xs font-bold tracking-widest uppercase">{title}</span>
+        <span className="text-xs font-bold tracking-widest uppercase">
+          {title}
+        </span>
       </div>
       <div className="space-y-4">
         {fields.map((field, i) => (
@@ -160,17 +162,17 @@ export function GlobalReviewStep({
       <div className="space-y-8">
         <div className="flex items-center justify-between">
           <Stepper step={paymentStepNumber}>Payment</Stepper>
-          <div className="text-right">
+          {/* <div className="text-right">
             <PriceDisplay
               amount={total}
               className="text-2xl font-black text-[#A11D1D] flex items-center justify-end"
             />
-          </div>
+          </div> */}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-6">
-            <div className="bg-white rounded-2xl border border-slate-100 p-6 shadow-sm">
+            <div>
               <PaymentMethodSelector
                 value={paymentMethodValue}
                 onChange={onPaymentMethodChange}
@@ -181,11 +183,11 @@ export function GlobalReviewStep({
               type="submit"
               className="w-full h-14 bg-primary hover:bg-primary/90 text-white font-bold text-lg rounded-xl shadow-lg shadow-primary/20 transition-all flex items-center justify-center gap-2 group mt-4"
             >
-              Book
+              Purchase
             </Button>
           </div>
 
-          <div className="bg-slate-50/50 rounded-2xl p-8 border border-slate-100 space-y-6 h-fit md:sticky md:top-24">
+          <div className="bg-slate-50/50 rounded-2xl border border-slate-100 space-y-6 h-fit md:sticky md:top-24">
             <div className="flex items-center gap-3 pb-6 border-b border-slate-200">
               <CreditCard className="w-5 h-5 text-[#A11D1D]" />
               <h3 className="font-black text-xs uppercase tracking-[0.2em] text-slate-900">
@@ -195,9 +197,7 @@ export function GlobalReviewStep({
 
             <div className="space-y-4">
               <div className="flex justify-between text-sm">
-                <span className="text-slate-500 font-medium">
-                  {examName}
-                </span>
+                <span className="text-slate-500 font-medium">{examName}</span>
                 <PriceDisplay
                   amount={baseFee}
                   className="font-bold text-slate-900"

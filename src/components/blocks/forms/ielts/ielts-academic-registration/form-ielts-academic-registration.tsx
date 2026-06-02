@@ -10,7 +10,10 @@ import { useMutation } from "@tanstack/react-query";
 import api from "@/axios";
 import { format } from "date-fns";
 import { User, ShieldCheck, Globe } from "lucide-react";
-import { GlobalReviewStep, ReviewSummaryGrid } from "@/components/blocks/forms/global-review-step";
+import {
+  GlobalReviewStep,
+  ReviewSummaryGrid,
+} from "@/components/blocks/forms/global-review-step";
 
 import { TermsStep } from "./steps/terms-step";
 import { DateStep } from "./steps/date-step";
@@ -149,8 +152,8 @@ export default function FormIeltsAcademicRegistration() {
     const serviceFee = 150;
     const coursePrice = formData.selectedCourse
       ? (COURSES_DATA as any)[formData.selectedCourse].price *
-      (1 -
-        (COURSES_DATA as any)[formData.selectedCourse].special_discount / 100)
+        (1 -
+          (COURSES_DATA as any)[formData.selectedCourse].special_discount / 100)
       : 0;
     const workshopPrice = formData.selectedWorkshop
       ? (WORKSHOPS_DATA as any)[formData.selectedWorkshop].price
@@ -165,7 +168,7 @@ export default function FormIeltsAcademicRegistration() {
       workshopPrice,
       subtotal,
       vat: 0,
-      total: subtotal
+      total: subtotal,
     };
   };
 
@@ -216,7 +219,9 @@ export default function FormIeltsAcademicRegistration() {
         given_names: data.givenNames,
         middle_name: data.middleName,
         surnames: data.surnames,
-        date_of_birth: data.dateOfBirth ? new Date(data.dateOfBirth as any).toISOString() : "",
+        date_of_birth: data.dateOfBirth
+          ? new Date(data.dateOfBirth as any).toISOString()
+          : "",
         sex: data.sex,
         email: data.email,
         mobile_number: data.mobileNumber,
@@ -276,7 +281,9 @@ export default function FormIeltsAcademicRegistration() {
               value={formData.examDate}
               timeSlot={formData.examTimeSlot}
               onChange={(date) => form.setValue("examDate", date)}
-              onTimeSlotChange={(slot) => form.setValue("examTimeSlot", slot as any)}
+              onTimeSlotChange={(slot) =>
+                form.setValue("examTimeSlot", slot as any)
+              }
               onNext={() => goToStep(2)}
               onBack={() => goToStep(0)}
               error={form.formState.errors.examDate}
@@ -301,7 +308,9 @@ export default function FormIeltsAcademicRegistration() {
               onEdit={() => goToStep(2)}
               onSubmit={form.handleSubmit(handleFormSubmit, onInvalid)}
               paymentMethodValue={(formData as any)?.paymentMethod}
-              onPaymentMethodChange={(val) => (form.setValue as any)("paymentMethod", val)}
+              onPaymentMethodChange={(val) =>
+                (form.setValue as any)("paymentMethod", val)
+              }
               paymentMethodError={(form.formState.errors as any)?.paymentMethod}
               examName="IELTS Academic Exam"
               baseFee={pricing.baseFee}
@@ -320,35 +329,92 @@ export default function FormIeltsAcademicRegistration() {
               reviewStepNumber={4}
               paymentStepNumber={5}
             >
-                            <ReviewSummaryGrid
+              <ReviewSummaryGrid
                 personalDetails={[
                   { label: "Given Names", value: formData.givenNames },
                   { label: "Middle Name", value: formData.middleName || "N/A" },
                   { label: "Surnames", value: formData.surnames || "N/A" },
-                  { label: "Date of Birth", value: formData.dateOfBirth ? format(new Date(formData.dateOfBirth as any), "PPP") : "N/A" },
+                  {
+                    label: "Date of Birth",
+                    value: formData.dateOfBirth
+                      ? format(new Date(formData.dateOfBirth as any), "PPP")
+                      : "N/A",
+                  },
                   { label: "Gender", value: formData.sex || "N/A" },
-                  { label: "Mobile Number", value: formData.mobileNumber || "N/A" },
-                  { label: "Nationality", value: formData.nationality || "N/A" },
+                  {
+                    label: "Mobile Number",
+                    value: formData.mobileNumber || "N/A",
+                  },
+                  {
+                    label: "Nationality",
+                    value: formData.nationality || "N/A",
+                  },
                 ]}
                 identityContact={[
-                  { label: "ID Type", value: formData.idType?.replace("_", " ") },
+                  {
+                    label: "ID Type",
+                    value: formData.idType?.replace("_", " "),
+                  },
                   { label: "ID Number", value: formData.idNumber || "N/A" },
                   { label: "Email", value: formData.email },
-                  { label: "ID Expiry Date", value: formData.idExpiryDate ? format(new Date(formData.idExpiryDate as any), "PPP") : "N/A" },
-                  { label: "Identity Document", value: formData.idDocument ? (formData.idDocument as File).name : "No file attached" },
-                  { label: "Issuing Authority", value: formData.issuingAuthority || "N/A" },
+                  {
+                    label: "ID Expiry Date",
+                    value: formData.idExpiryDate
+                      ? format(new Date(formData.idExpiryDate as any), "PPP")
+                      : "N/A",
+                  },
+                  {
+                    label: "Identity Document",
+                    value: formData.idDocument
+                      ? (formData.idDocument as File).name
+                      : "No file attached",
+                  },
+                  {
+                    label: "Issuing Authority",
+                    value: formData.issuingAuthority || "N/A",
+                  },
                 ]}
                 testInformation={[
-                  { label: "Exam Date", value: formData.examDate ? format(new Date(formData.examDate as any), "PPP") : "N/A", highlight: true },
-                  { label: "Time Slot", value: formData.examTimeSlot === "9:00 AM" ? "Morning Session (09:00 AM)" : formData.examTimeSlot === "11:00 AM" ? "Morning Session (11:00 AM)" : "Morning Session" },
+                  {
+                    label: "Exam Date",
+                    value: formData.examDate
+                      ? format(new Date(formData.examDate as any), "PPP")
+                      : "N/A",
+                    highlight: true,
+                  },
+                  {
+                    label: "Time Slot",
+                    value:
+                      formData.examTimeSlot === "9:00 AM"
+                        ? "Morning Session (09:00 AM)"
+                        : formData.examTimeSlot === "11:00 AM"
+                          ? "Morning Session (11:00 AM)"
+                          : "Morning Session",
+                  },
                   { label: "Address Line 1", value: formData.postalAddress1 },
-                  ...(formData.postalAddress2 ? [{ label: "Address Line 2", value: formData.postalAddress2 }] : []),
+                  ...(formData.postalAddress2
+                    ? [
+                        {
+                          label: "Address Line 2",
+                          value: formData.postalAddress2,
+                        },
+                      ]
+                    : []),
                   { label: "Emirate / City", value: formData.city },
-                  { label: "Country of Residence", value: formData.residenceCountry },
+                  {
+                    label: "Country of Residence",
+                    value: formData.residenceCountry,
+                  },
                   { label: "P.O. Box", value: formData.poBox || "N/A" },
                   { label: "Postal Code", value: formData.postcode || "N/A" },
-                  { label: "First Language", value: formData.firstLanguage || "N/A" },
-                  { label: "Education Level", value: formData.educationLevel || "N/A" },
+                  {
+                    label: "First Language",
+                    value: formData.firstLanguage || "N/A",
+                  },
+                  {
+                    label: "Education Level",
+                    value: formData.educationLevel || "N/A",
+                  },
                 ]}
               />
             </GlobalReviewStep>

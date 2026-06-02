@@ -54,7 +54,6 @@ const carouselImages = [
     src: "/images/about-us/Parking_Area.jpg",
     name: "Parking Zone",
   },
-
 ];
 
 export function CampusGallery() {
@@ -63,11 +62,11 @@ export function CampusGallery() {
       <div className="max-w-7xl mx-auto px-8">
         <div className="mb-16">
           <h2 className="text-4xl font-headline font-extrabold text-secondary tracking-tight mb-4">
-            Campus Gallery
+            Site Gallery
           </h2>
           <p className="text-on-surface-variant text-lg max-w-2xl">
-            Take a closer look at our state-of-the-art infrastructure and vibrant
-            student spaces.
+            Take a closer look at our state-of-the-art infrastructure and
+            vibrant student spaces.
           </p>
         </div>
 
