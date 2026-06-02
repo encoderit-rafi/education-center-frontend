@@ -10,7 +10,11 @@ import {
   CommandItem,
   CommandList,
 } from "@/components/ui/command";
-import * as PopoverPrimitive from "@radix-ui/react-popover";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 
 // utils
 import { cn } from "@/lib/utils";
@@ -106,15 +110,14 @@ const CountryDropdownComponent = (
   );
 
   return (
-    <PopoverPrimitive.Root open={open} onOpenChange={setOpen}>
-      <PopoverPrimitive.Trigger asChild>
-        <button
-          ref={ref}
-          type="button"
-          className={triggerClasses}
-          disabled={disabled}
-          {...props}
-        >
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger
+        ref={ref}
+        type="button"
+        className={triggerClasses}
+        disabled={disabled}
+        {...props}
+      >
           {selectedCountry ? (
             <div className="flex items-center flex-1 w-0 gap-2 overflow-hidden text-left">
               <div className="inline-flex items-center justify-center w-5 h-5 shrink-0 overflow-hidden rounded-full">
@@ -141,17 +144,13 @@ const CountryDropdownComponent = (
               open && "rotate-180",
             )}
           />
-        </button>
-      </PopoverPrimitive.Trigger>
-      <PopoverPrimitive.Portal>
-        <PopoverPrimitive.Content
-          side="bottom"
-          align="start"
-          sideOffset={4}
-          className={cn(
-            "z-50 w-[var(--radix-popover-trigger-width)] min-w-[12rem] rounded-md border border-slate-200 bg-white  text-slate-700 shadow-md outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
-          )}
-        >
+          </PopoverTrigger>
+      <PopoverContent
+        side="bottom"
+        align="start"
+        sideOffset={4}
+        className="w-[var(--radix-popover-trigger-width)] min-w-[12rem] p-0"
+      >
           <Command className="w-full max-h-[300px] overflow-hidden bg-white text-slate-700">
             <div className="p-1 border-b border-slate-100">
               <CommandInput
@@ -159,7 +158,7 @@ const CountryDropdownComponent = (
                 className="h-9 px-2 outline-none w-full bg-slate-50"
               />
             </div>
-            <CommandList className="overflow-y-auto no-scrollbar">
+            <CommandList className="overflow-y-auto">
               <CommandEmpty className="py-6 text-center text-sm text-slate-500">
                 No country found.
               </CommandEmpty>
@@ -196,9 +195,8 @@ const CountryDropdownComponent = (
               </CommandGroup>
             </CommandList>
           </Command>
-        </PopoverPrimitive.Content>
-      </PopoverPrimitive.Portal>
-    </PopoverPrimitive.Root>
+      </PopoverContent>
+    </Popover>
   );
 };
 
