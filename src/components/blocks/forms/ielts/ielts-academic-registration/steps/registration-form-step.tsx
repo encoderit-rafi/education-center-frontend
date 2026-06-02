@@ -332,10 +332,6 @@ export function RegistrationFormStep({
                 ))}
               </RadioGroup>
               <FieldError errors={[errors.idType]} />
-              <FieldDescription>
-                Please make sure you present the same ID document you used for
-                registration on the exam day.
-              </FieldDescription>
             </FieldContent>
           </Field>
 
