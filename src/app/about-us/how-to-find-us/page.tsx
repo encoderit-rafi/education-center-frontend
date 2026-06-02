@@ -29,6 +29,14 @@ export default function HowToFindUs() {
             color: black !important;
             padding: 0 !important;
             margin: 0 !important;
+            font-size: 14px !important;
+          }
+
+          /* Tighten print-only header */
+          .print-header {
+            padding-bottom: 1rem !important;
+            margin-bottom: 1.5rem !important;
+            gap: 1.5rem !important;
           }
 
           /* Stack grid items vertically on print */
@@ -38,7 +46,7 @@ export default function HowToFindUs() {
 
           /* Spacing between vertically stacked printed items */
           .print-grid > * {
-            margin-bottom: 2.5rem !important;
+            margin-bottom: 1.5rem !important;
           }
 
           /* Ensure map image renders correctly in print layout */
@@ -51,8 +59,17 @@ export default function HowToFindUs() {
 
           /* Reduce top padding in print */
           .print\:py-8 {
-            padding-top: 2rem !important;
-            padding-bottom: 2rem !important;
+            padding-top: 1.5rem !important;
+            padding-bottom: 1.5rem !important;
+          }
+
+          /* Override huge vertical margins between sections/items */
+          .space-y-40 > * + * {
+            margin-top: 2rem !important;
+          }
+          
+          .mb-32 {
+            margin-bottom: 1.5rem !important;
           }
 
           /* Stack transport items to single column, hide images */
@@ -69,24 +86,46 @@ export default function HowToFindUs() {
             width: 100% !important;
           }
 
+          /* Tighten transport item interior spacing */
+          .transport-text.space-y-8 > * + * {
+            margin-top: 1rem !important;
+          }
+          .transport-text .space-y-6 > * + * {
+            margin-top: 0.75rem !important;
+          }
+          .transport-text .space-y-4 > * + * {
+            margin-top: 0.5rem !important;
+          }
+          .transport-text .space-y-4 {
+            margin-top: 0.5rem !important;
+          }
+
+          /* Tighten driving directions list spacing */
+          .space-y-12 > * + * {
+            margin-top: 1.5rem !important;
+          }
+          .space-y-10 > * + * {
+            margin-top: 1rem !important;
+          }
+
           /* Page break between the two printed sections */
           .print-page-break {
             page-break-before: always !important;
             break-before: always !important;
-            padding-top: 2rem !important;
+            padding-top: 1.5rem !important;
           }
 
           /* Prevent weird clipping by keeping components intact */
           .print-avoid-break {
             break-inside: avoid !important;
             page-break-inside: avoid !important;
-            margin-bottom: 2.5rem !important;
+            margin-bottom: 1.5rem !important;
           }
         }
       `}} />
 
       {/* Print-Only Header (Branded Contact Details) */}
-      <div className="hidden print:flex flex-col md:flex-row justify-between items-start gap-8 border-b-2 border-primary/20 pb-8 mb-8">
+      <div className="hidden print:flex flex-col md:flex-row justify-between items-start gap-8 border-b-2 border-primary/20 pb-8 mb-8 print-header">
         {/* Left: Logo & Company Name */}
         <div className="space-y-4">
           <Image
