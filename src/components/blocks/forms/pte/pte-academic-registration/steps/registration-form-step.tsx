@@ -2,7 +2,7 @@
 
 import React from "react";
 import { UseFormReturn } from "react-hook-form";
-import { Save, User, ShieldCheck, Globe, BookOpen } from "lucide-react";
+import { Save, User, Globe, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -19,12 +19,12 @@ import {
   FieldContent,
   FieldDescription,
   FieldError,
-  FieldLabel,
-} from "@/components/ui/field";
+  FieldLabel} from "@/components/ui/field";
 import { TPteAcademicSchema } from "../_type";
 import { PriceDisplay } from "@/components/ui/price-display";
 import { Badge } from "@/components/ui/badge";
 import { AddonServicesSection } from "@/components/blocks/forms/shared/addon-services-section";
+import { MarketingPreferencesSection, TEPTH_MARKETING_OPTIONS } from "@/components/blocks/forms/shared/marketing-preferences-section";
 
 interface RegistrationFormStepProps {
   form: UseFormReturn<TPteAcademicSchema>;
@@ -43,15 +43,13 @@ export function RegistrationFormStep({
   onBack,
   languages,
   coursesData,
-  workshopsData,
-}: RegistrationFormStepProps) {
+  workshopsData}: RegistrationFormStepProps) {
   const {
     register,
     handleSubmit,
     setValue,
     watch,
-    formState: { errors },
-  } = form;
+    formState: { errors }} = form;
 
   const formData = watch();
 
@@ -509,28 +507,22 @@ export function RegistrationFormStep({
                   { label: "Study", value: "study" },
                   {
                     label: "Nursing registration or licensing",
-                    value: "nursing",
-                  },
+                    value: "nursing"},
                   {
                     label: "Australia - MATES visa (India only)",
-                    value: "au_mates",
-                  },
+                    value: "au_mates"},
                   {
                     label: "Australia - Post Study Work (485) visa",
-                    value: "au_485",
-                  },
+                    value: "au_485"},
                   {
                     label: "Australia - Temporary Work visa",
-                    value: "au_temp_work",
-                  },
+                    value: "au_temp_work"},
                   {
                     label: "New Zealand - Temporary Work visa",
-                    value: "nz_temp_work",
-                  },
+                    value: "nz_temp_work"},
                   {
                     label: "Skilled migration / Permanent Residency",
-                    value: "skilled_migration",
-                  },
+                    value: "skilled_migration"},
                   { label: "Spouse / Family visa", value: "family_visa" },
                   { label: "Working Holiday visa", value: "working_holiday" },
                   { label: "Other - specify below", value: "other" },
@@ -556,8 +548,7 @@ export function RegistrationFormStep({
                   options={[
                     {
                       label: "Secondary (up to 16 years)",
-                      value: "undergraduate",
-                    },
+                      value: "undergraduate"},
                     { label: "Secondary (16-19 years)", value: "postgraduate" },
                     { label: "Degree (or equivalent)", value: "degree" },
                     { label: "Post-graduate", value: "post_graduate" },
@@ -673,64 +664,13 @@ export function RegistrationFormStep({
         </div>
       </div>
 
-{/* Add-on Services Section */}
-      <AddonServicesSection
-        coursesData={coursesData}
-        workshopsData={workshopsData}
-        selectedCourse={formData.selectedCourse}
-        selectedWorkshop={formData.selectedWorkshop}
-        onCourseChange={(val) => setValue("selectedCourse", val)}
-        onWorkshopChange={(val) => setValue("selectedWorkshop", val)}
-        courseError={!!errors.selectedCourse}
-        workshopError={!!errors.selectedWorkshop}
-        description={
-          "Save up to 20% when you book your exam and register for the course with TEPTH and pay in-person or online on our website."
-        }
+{/* Marketing Preferences */}
+      <MarketingPreferencesSection
+        value={formData.marketingPreference}
+        onChange={(val) => setValue("marketingPreference", val as any)}
+        error={errors.marketingPreference}
+        options={TEPTH_MARKETING_OPTIONS}
       />
-
-      <div className="pt-8 border-t border-slate-100 space-y-6">
-        <Field data-invalid={!!errors.marketingPreference}>
-          <FieldLabel>Marketing preferences</FieldLabel>
-          <FieldContent className="mt-4">
-            <RadioGroup
-              name="marketingPreference"
-              onValueChange={(val) => setValue("marketingPreference", val)}
-              value={formData.marketingPreference}
-              className="space-y-4"
-            >
-              {[
-                {
-                  id: "all",
-                  label:
-                    "I am happy to receive updates about products, services and events organized by TEPTH.",
-                },
-                {
-                  id: "third_party",
-                  label:
-                    "I am happy to receive information from TEPTH and selected third parties.",
-                },
-                {
-                  id: "none",
-                  label: "Please do not send me any marketing updates.",
-                },
-              ].map((opt) => (
-                <Label
-                  key={opt.id}
-                  htmlFor={`mkt-${opt.id}`}
-                  data-invalid={!!errors.marketingPreference}
-                  className="flex items-center space-x-3 p-4 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive shadow-sm"
-                >
-                  <RadioGroupItem value={opt.id} id={`mkt-${opt.id}`} />
-                  <span className="text-sm text-slate-700 font-bold">
-                    {opt.label}
-                  </span>
-                </Label>
-              ))}
-            </RadioGroup>
-            <FieldError errors={[errors.marketingPreference]} />
-          </FieldContent>
-        </Field>
-      </div>
 
       <div className="flex justify-between pt-12 border-t border-slate-100 mt-12">
         <Button type="button" onClick={onBack}>

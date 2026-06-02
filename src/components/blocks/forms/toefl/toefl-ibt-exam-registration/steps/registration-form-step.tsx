@@ -4,6 +4,7 @@ import React from "react";
 import { UseFormReturn } from "react-hook-form";
 import { Save, Globe, BookOpen, ArrowRight } from "lucide-react";
 import { AddonServicesSection } from "@/components/blocks/forms/shared/addon-services-section";
+import { MarketingPreferencesSection, TEPTH_MARKETING_OPTIONS } from "@/components/blocks/forms/shared/marketing-preferences-section";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -20,8 +21,7 @@ import {
   FieldContent,
   FieldDescription,
   FieldError,
-  FieldLabel,
-} from "@/components/ui/field";
+  FieldLabel} from "@/components/ui/field";
 import { TToeflIbtSchema } from "../_type/toefl-ibt";
 import { PriceDisplay } from "@/components/ui/price-display";
 import { Badge } from "@/components/ui/badge";
@@ -43,15 +43,13 @@ export function RegistrationFormStep({
   onBack,
   languages,
   coursesData,
-  workshopsData,
-}: RegistrationFormStepProps) {
+  workshopsData}: RegistrationFormStepProps) {
   const {
     register,
     handleSubmit,
     setValue,
     watch,
-    formState: { errors },
-  } = form;
+    formState: { errors }} = form;
 
   const formData = watch();
 
@@ -590,8 +588,7 @@ export function RegistrationFormStep({
                 {[
                   {
                     id: "secondary_up_to_16",
-                    label: "Secondary (up to 16 years)",
-                  },
+                    label: "Secondary (up to 16 years)"},
                   { id: "secondary_16_19", label: "Secondary (16-19 years)" },
                   { id: "degree", label: "Degree (or equivalent)" },
                   { id: "post_graduate", label: "Post-graduate" },
@@ -621,12 +618,10 @@ export function RegistrationFormStep({
                   { label: "Employer/Partner", value: "Employer/Partner" },
                   {
                     label: "Employee (Senior level)",
-                    value: "Employee (Senior level)",
-                  },
+                    value: "Employee (Senior level)"},
                   {
                     label: "Employee (Middle/Junior level)",
-                    value: "Employee (Middle/Junior level)",
-                  },
+                    value: "Employee (Middle/Junior level)"},
                   { label: "Homeworker", value: "Homeworker" },
                   { label: "Retired", value: "Retired" },
                   { label: "Student", value: "Student" },
@@ -649,17 +644,14 @@ export function RegistrationFormStep({
                 options={[
                   {
                     label: "Administrative Services",
-                    value: "Administrative Services",
-                  },
+                    value: "Administrative Services"},
                   { label: "Education", value: "Education" },
                   {
                     label: "Banking and Finance",
-                    value: "Banking and Finance",
-                  },
+                    value: "Banking and Finance"},
                   {
                     label: "Health and Social Services",
-                    value: "Health and Social Services",
-                  },
+                    value: "Health and Social Services"},
                   { label: "Other", value: "Other" },
                 ]}
                 placeholder="-Select Sector-"
@@ -679,8 +671,7 @@ export function RegistrationFormStep({
                 options={[
                   {
                     label: "Higher education extended course",
-                    value: "higher_edu_long",
-                  },
+                    value: "higher_edu_long"},
                   { label: "Immigration", value: "immigration" },
                   { label: "Employment", value: "employment" },
                   { label: "Other", value: "other" },
@@ -727,48 +718,13 @@ export function RegistrationFormStep({
         }
       />
 
-      {/* Section 4: Marketing Preferences */}
-      <div className="pt-8 border-t border-slate-100 space-y-8">
-        <Field data-invalid={!!errors.marketingPreference}>
-          <FieldLabel>Marketing preferences</FieldLabel>
-          <FieldContent className="mt-4">
-            <RadioGroup
-              name="marketingPreference"
-              onValueChange={(val) => setValue("marketingPreference", val)}
-              value={formData.marketingPreference}
-              className="space-y-4"
-            >
-              {[
-                {
-                  id: "all",
-                  label:
-                    "I am happy to receive updates about products, services and events organised by TEPTH.",
-                },
-                {
-                  id: "some",
-                  label:
-                    "I am happy to receive information from TEPTH and selected third parties.",
-                },
-                {
-                  id: "none",
-                  label: "Please do not send me any marketing updates.",
-                },
-              ].map((opt) => (
-                <Label
-                  key={opt.id}
-                  htmlFor={`mkt-${opt.id}`}
-                  data-invalid={!!errors.marketingPreference}
-                  className={`flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive ${formData.marketingPreference === opt.id ? "border-[#A11D1D] bg-[#A11D1D]/5 ring-1 ring-[#A11D1D]" : ""}`}
-                >
-                  <RadioGroupItem value={opt.id} id={`mkt-${opt.id}`} />
-                  <span className="text-sm">{opt.label}</span>
-                </Label>
-              ))}
-            </RadioGroup>
-            <FieldError errors={[errors.marketingPreference]} />
-          </FieldContent>
-        </Field>
-      </div>
+      {/* Marketing Preferences */}
+      <MarketingPreferencesSection
+        value={formData.marketingPreference}
+        onChange={(val) => setValue("marketingPreference", val as any)}
+        error={errors.marketingPreference}
+        options={TEPTH_MARKETING_OPTIONS}
+      />
 
       {/* Form Actions */}
       <div className="mt-12 flex justify-between items-center pt-6 border-t border-slate-100">

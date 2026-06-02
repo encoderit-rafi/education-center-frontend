@@ -2,7 +2,7 @@
 
 import React from "react";
 import { UseFormReturn } from "react-hook-form";
-import { Save, User, ShieldCheck, Globe, BookOpen } from "lucide-react";
+import { Save, User, Globe, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -19,13 +19,13 @@ import {
   FieldContent,
   FieldDescription,
   FieldError,
-  FieldLabel,
-} from "@/components/ui/field";
+  FieldLabel} from "@/components/ui/field";
 import { TIeltsGeneralSchema } from "../_type";
 import { AED } from "@/components/ui/aed";
 import { PriceDisplay } from "@/components/ui/price-display";
 import { Badge } from "@/components/ui/badge";
 import { AddonServicesSection } from "@/components/blocks/forms/shared/addon-services-section";
+import { MarketingPreferencesSection } from "@/components/blocks/forms/shared/marketing-preferences-section";
 
 interface RegistrationFormStepProps {
   form: UseFormReturn<TIeltsGeneralSchema>;
@@ -44,15 +44,13 @@ export function RegistrationFormStep({
   onBack,
   languages,
   coursesData,
-  workshopsData,
-}: RegistrationFormStepProps) {
+  workshopsData}: RegistrationFormStepProps) {
   const {
     register,
     handleSubmit,
     setValue,
     watch,
-    formState: { errors },
-  } = form;
+    formState: { errors }} = form;
 
   const formData = watch();
 
@@ -616,8 +614,7 @@ export function RegistrationFormStep({
                 {[
                   {
                     id: "secondary_up_to_16",
-                    label: "Secondary (up to 16 years)",
-                  },
+                    label: "Secondary (up to 16 years)"},
                   { id: "secondary_16_19", label: "Secondary (16-19 years)" },
                   { id: "degree", label: "Degree (or equivalent)" },
                   { id: "post_graduate", label: "Post-graduate" },
@@ -647,12 +644,10 @@ export function RegistrationFormStep({
                   { label: "Employer/Partner", value: "Employer/Partner" },
                   {
                     label: "Employee (Senior level)",
-                    value: "Employee (Senior level)",
-                  },
+                    value: "Employee (Senior level)"},
                   {
                     label: "Employee (Middle/Junior level)",
-                    value: "Employee (Middle/Junior level)",
-                  },
+                    value: "Employee (Middle/Junior level)"},
                   { label: "Homeworker", value: "Homeworker" },
                   { label: "Retired", value: "Retired" },
                   { label: "Student", value: "Student" },
@@ -675,17 +670,14 @@ export function RegistrationFormStep({
                 options={[
                   {
                     label: "Administrative Services",
-                    value: "Administrative Services",
-                  },
+                    value: "Administrative Services"},
                   { label: "Education", value: "Education" },
                   {
                     label: "Banking and Finance",
-                    value: "Banking and Finance",
-                  },
+                    value: "Banking and Finance"},
                   {
                     label: "Health and Social Services",
-                    value: "Health and Social Services",
-                  },
+                    value: "Health and Social Services"},
                   { label: "Other", value: "Other" },
                 ]}
                 placeholder="-Select Sector-"
@@ -712,8 +704,7 @@ export function RegistrationFormStep({
                 {[
                   {
                     label: "Higher education extended course",
-                    value: "higher_edu_long",
-                  },
+                    value: "higher_edu_long"},
                   { label: "Immigration", value: "immigration" },
                   { label: "Employment", value: "employment" },
                   { label: "Other", value: "other" },
@@ -768,68 +759,12 @@ export function RegistrationFormStep({
         }
       />
 
-      {/* Marketing Preferences Section */}
-      <div className="pt-8 border-t border-slate-100 space-y-6">
-        <div className="flex items-center gap-2 text-slate-400 mb-4">
-          <ShieldCheck className="size-5" />
-          <h3 className="text-lg font-bold tracking-tight text-slate-800">
-            Marketing Preferences
-          </h3>
-        </div>
-
-        <div className="space-y-4">
-          <Field data-invalid={!!errors.marketingPreference}>
-            <FieldContent>
-              <RadioGroup
-                name="marketingPreference"
-                onValueChange={(val) =>
-                  setValue("marketingPreference", val as any)
-                }
-                value={formData.marketingPreference}
-                className="flex flex-col gap-4"
-              >
-                {[
-                  {
-                    id: "all",
-                    label:
-                      "I am happy to receive updates about products, services and events organised by British Council.",
-                  },
-                  {
-                    id: "some",
-                    label:
-                      "I am happy to receive information from British Council and selected third parties.",
-                  },
-                  {
-                    id: "none",
-                    label: "Please do not send me any marketing updates.",
-                  },
-                ].map((opt) => (
-                  <Label
-                    key={opt.id}
-                    htmlFor={`marketing-${opt.id}`}
-                    className={cn(
-                      "flex items-center space-x-4 p-5 rounded-2xl border-2 transition-all cursor-pointer bg-white group",
-                      formData.marketingPreference === opt.id
-                        ? "border-primary bg-primary/5 shadow-sm"
-                        : "border-slate-100 hover:border-slate-200",
-                    )}
-                  >
-                    <RadioGroupItem
-                      value={opt.id}
-                      id={`marketing-${opt.id}`}
-                      className="size-5"
-                    />
-                    <span className="text-sm font-medium text-slate-700 leading-relaxed group-hover:text-slate-900 transition-colors">
-                      {opt.label}
-                    </span>
-                  </Label>
-                ))}
-              </RadioGroup>
-              <FieldError errors={[errors.marketingPreference]} />
-            </FieldContent>
-          </Field>
-        </div>
-      </div>
+      {/* Marketing Preferences */}
+      <MarketingPreferencesSection
+        value={formData.marketingPreference}
+        onChange={(val) => setValue("marketingPreference", val as any)}
+        error={errors.marketingPreference}
+      />
 
       <div className="pt-8 border-t border-slate-100 flex justify-between items-center">
         <Button onClick={onBack}>Back</Button>

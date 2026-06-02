@@ -2,7 +2,7 @@
 
 import React from "react";
 import { UseFormReturn } from "react-hook-form";
-import { Save, User, ShieldCheck, Globe, BookOpen } from "lucide-react";
+import { Save, User, Globe, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -17,14 +17,14 @@ import {
   FieldContent,
   FieldDescription,
   FieldError,
-  FieldLabel,
-} from "@/components/ui/field";
+  FieldLabel} from "@/components/ui/field";
 import { SearchableDropdown } from "@/components/ui/searchable-dropdown";
 import { PriceDisplay } from "@/components/ui/price-display";
 import { Badge } from "@/components/ui/badge";
 import BaseNoteBox from "@/components/base-note-box";
 import { TSeltA1Schema } from "../_type";
 import { AddonServicesSection } from "@/components/blocks/forms/shared/addon-services-section";
+import { MarketingPreferencesSection } from "@/components/blocks/forms/shared/marketing-preferences-section";
 
 interface RegistrationFormStepProps {
   form: UseFormReturn<TSeltA1Schema>;
@@ -43,15 +43,13 @@ export function RegistrationFormStep({
   onBack,
   languages = [],
   coursesData = {},
-  workshopsData = {},
-}: RegistrationFormStepProps) {
+  workshopsData = {}}: RegistrationFormStepProps) {
   const {
     register,
     handleSubmit,
     setValue,
     watch,
-    formState: { errors },
-  } = form;
+    formState: { errors }} = form;
 
   const formData = watch();
 
@@ -508,8 +506,7 @@ export function RegistrationFormStep({
                         </div>
                       </div>
                     ),
-                    value: c.id,
-                  })),
+                    value: c.id})),
                 ]}
                 placeholder="Select a course"
                 value={formData.selectedCourse}
@@ -538,8 +535,7 @@ export function RegistrationFormStep({
                         />
                       </span>
                     ),
-                    value: w.id,
-                  })),
+                    value: w.id})),
                 ]}
                 placeholder="Select a workshop"
                 value={formData.selectedWorkshop}
@@ -562,49 +558,11 @@ export function RegistrationFormStep({
       </div>
 
       {/* Marketing Preferences */}
-      <div className="pt-8 border-t border-slate-100 space-y-6">
-        <Field data-invalid={!!errors.marketingPreference}>
-          <FieldLabel>Marketing preferences</FieldLabel>
-          <FieldContent className="mt-4">
-            <RadioGroup
-              name="marketingPreference"
-              onValueChange={(val) =>
-                setValue("marketingPreference", val as any)
-              }
-              value={formData.marketingPreference}
-              className="space-y-4"
-            >
-              {[
-                {
-                  id: "all",
-                  label:
-                    "I am happy to receive updates about products, services and events organised by British Council.",
-                },
-                {
-                  id: "some",
-                  label:
-                    "I am happy to receive information from British Council and selected third parties.",
-                },
-                {
-                  id: "none",
-                  label: "Please do not send me any marketing updates.",
-                },
-              ].map((opt) => (
-                <Label
-                  key={opt.id}
-                  htmlFor={`mkt-${opt.id}`}
-                  data-invalid={!!errors.marketingPreference}
-                  className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive"
-                >
-                  <RadioGroupItem value={opt.id} id={`mkt-${opt.id}`} />
-                  <span className="text-sm">{opt.label}</span>
-                </Label>
-              ))}
-            </RadioGroup>
-            <FieldError errors={[errors.marketingPreference]} />
-          </FieldContent>
-        </Field>
-      </div>
+      <MarketingPreferencesSection
+        value={formData.marketingPreference}
+        onChange={(val) => setValue("marketingPreference", val as any)}
+        error={errors.marketingPreference}
+      />
 
       {/* Form Actions */}
       <div className="mt-12 flex justify-between items-center pt-6 border-t border-slate-100">

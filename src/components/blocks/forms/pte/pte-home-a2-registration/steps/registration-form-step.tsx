@@ -5,13 +5,11 @@ import { UseFormReturn } from "react-hook-form";
 import {
   Save,
   User,
-  ShieldCheck,
   Globe,
   BookOpen,
   Upload,
   X,
-  FileCheck,
-} from "lucide-react";
+  FileCheck} from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -29,12 +27,12 @@ import {
   FieldContent,
   FieldDescription,
   FieldError,
-  FieldLabel,
-} from "@/components/ui/field";
+  FieldLabel} from "@/components/ui/field";
 import { TPteHomeA2FormSchema } from "../_type";
 import { PriceDisplay } from "@/components/ui/price-display";
 import { Badge } from "@/components/ui/badge";
 import { AddonServicesSection } from "@/components/blocks/forms/shared/addon-services-section";
+import { MarketingPreferencesSection, TEPTH_THIRD_PARTY_MARKETING_OPTIONS } from "@/components/blocks/forms/shared/marketing-preferences-section";
 
 interface RegistrationFormStepProps {
   form: UseFormReturn<TPteHomeA2FormSchema>;
@@ -53,15 +51,13 @@ export function RegistrationFormStep({
   onBack,
   languages,
   coursesData,
-  workshopsData,
-}: RegistrationFormStepProps) {
+  workshopsData}: RegistrationFormStepProps) {
   const {
     register,
     handleSubmit,
     setValue,
     watch,
-    formState: { errors },
-  } = form;
+    formState: { errors }} = form;
 
   const formData = watch();
 
@@ -598,60 +594,13 @@ export function RegistrationFormStep({
         </div>
       </div>
 
-{/* Add-on Services Section */}
-      <AddonServicesSection
-        coursesData={coursesData}
-        workshopsData={workshopsData}
-        selectedCourse={formData.selectedCourse}
-        selectedWorkshop={formData.selectedWorkshop}
-        onCourseChange={(val) => setValue("selectedCourse", val)}
-        onWorkshopChange={(val) => setValue("selectedWorkshop", val)}
-        courseError={!!errors.selectedCourse}
-        workshopError={!!errors.selectedWorkshop}
-        description={
-          "Save up to 20% when you book your exam and register for the course with TEPTH and pay in-person or online on our website."
-        }
+{/* Marketing Preferences */}
+      <MarketingPreferencesSection
+        value={formData.marketingConsent}
+        onChange={(val) => setValue("marketingConsent", val as any)}
+        error={errors.marketingConsent}
+        options={TEPTH_THIRD_PARTY_MARKETING_OPTIONS}
       />
-      <div className="pt-8 border-t border-slate-100 space-y-6">
-        <Field data-invalid={!!errors.marketingConsent}>
-          <FieldLabel>Marketing preferences</FieldLabel>
-          <FieldContent className="mt-4">
-            <RadioGroup
-              onValueChange={(val) => setValue("marketingConsent", val)}
-              value={formData.marketingConsent}
-              className="space-y-4"
-            >
-              {[
-                {
-                  id: "all",
-                  label: "I am happy to receive updates from TEPTH.",
-                },
-                {
-                  id: "third_party",
-                  label:
-                    "I am happy to receive info from selected third parties.",
-                },
-                {
-                  id: "none",
-                  label: "Please do not send me any marketing updates.",
-                },
-              ].map((opt) => (
-                <Label
-                  key={opt.id}
-                  htmlFor={`mkt-${opt.id}`}
-                  className="flex items-center space-x-3 p-4 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-bold cursor-pointer data-[invalid=true]:border-destructive shadow-sm"
-                >
-                  <RadioGroupItem value={opt.id} id={`mkt-${opt.id}`} />
-                  <span className="text-sm text-slate-700 font-bold">
-                    {opt.label}
-                  </span>
-                </Label>
-              ))}
-            </RadioGroup>
-            <FieldError errors={[errors.marketingConsent]} />
-          </FieldContent>
-        </Field>
-      </div>
 
       <div className="flex justify-between pt-12 border-t border-slate-100 mt-12">
         <Button type="button" onClick={onBack}>
