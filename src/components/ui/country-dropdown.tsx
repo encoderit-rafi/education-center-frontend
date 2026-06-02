@@ -158,7 +158,7 @@ const CountryDropdownComponent = (
                 className="h-9 px-2 outline-none w-full bg-slate-50"
               />
             </div>
-            <CommandList className="overflow-y-auto">
+            <CommandList className="max-h-[300px] overflow-y-scroll [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-slate-100 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-slate-300 dark:[&::-webkit-scrollbar-track]:bg-slate-800 dark:[&::-webkit-scrollbar-thumb]:bg-slate-600">
               <CommandEmpty className="py-6 text-center text-sm text-slate-500">
                 No country found.
               </CommandEmpty>
