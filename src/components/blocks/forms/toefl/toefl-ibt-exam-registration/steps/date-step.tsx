@@ -5,10 +5,10 @@ import { ArrowRight, Calendar as CalendarIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
-    Field,
-    FieldContent,
-    FieldLabel,
-    FieldError,
+  Field,
+  FieldContent,
+  FieldLabel,
+  FieldError,
 } from "@/components/ui/field";
 import Stepper from "@/components/stepper";
 
@@ -16,128 +16,123 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 
 interface DateStepProps {
-    value?: Date;
-    timeSlot?: "AM" | "PM" | "";
-    onChange: (date: Date) => void;
-    onTimeSlotChange: (slot: "AM" | "PM") => void;
-    onNext: () => void;
-    onBack: () => void;
-    error?: any;
-    timeSlotError?: any;
+  value?: Date;
+  timeSlot?: "AM" | "PM" | "";
+  onChange: (date: Date) => void;
+  onTimeSlotChange: (slot: "AM" | "PM") => void;
+  onNext: () => void;
+  onBack: () => void;
+  error?: any;
+  timeSlotError?: any;
 }
 
 export function DateStep({
-    value,
-    timeSlot,
-    onChange,
-    onTimeSlotChange,
-    onNext,
-    onBack,
-    error,
-    timeSlotError,
+  value,
+  timeSlot,
+  onChange,
+  onTimeSlotChange,
+  onNext,
+  onBack,
+  error,
+  timeSlotError,
 }: DateStepProps) {
-    return (
-        <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-            <div className="bg-white rounded-2xl border border-slate-100 p-6 md:p-8 shadow-sm">
-                <Stepper step={1}>Select Exam Date & Time</Stepper>
+  return (
+    <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
+      <div className="bg-white rounded-2xl border border-slate-100 p-6 md:p-8 shadow-sm">
+        <Stepper step={1}>Select Exam Date & Time</Stepper>
 
-                <div className="mt-8 grid md:grid-cols-2 gap-12 items-start">
-                    <Field data-invalid={!!error}>
-                        <FieldLabel required>Select Date (Wednesdays Only)</FieldLabel>
-                        <FieldContent className="flex flex-col items-center">
-                            <Calendar
-                                mode="single"
-                                selected={value}
-                                onSelect={(date) => date && onChange(date)}
-                                modifiers={{
-                                    available: (date) => date.getDay() === 3,
-                                }}
-                                modifiersClassNames={{
-                                    available:
-                                        "font-semibold text-primary underline underline-offset-4 decoration-primary",
-                                }}
-                                disabled={(date) => {
-                                    const isWednesday = date.getDay() === 3;
-                                    const today = new Date();
-                                    today.setHours(0, 0, 0, 0);
-                                    const isPast = date < today;
-                                    return !isWednesday || isPast;
-                                }}
-                                className="w-full max-w-xl mx-auto border rounded-md p-8 bg-white shadow-xl"
-                            />
-                            <FieldError errors={[error]} className="mt-4 text-center" />
-                        </FieldContent>
-                    </Field>
+        <div className="mt-8 grid md:grid-cols-2 gap-12 items-start">
+          <Field data-invalid={!!error}>
+            <FieldLabel required>Select Date (Wednesdays Only)</FieldLabel>
+            <FieldContent className="flex flex-col items-center">
+              <Calendar
+                mode="single"
+                selected={value}
+                onSelect={(date) => date && onChange(date)}
+                modifiers={{
+                  available: (date) => date.getDay() === 3,
+                }}
+                modifiersClassNames={{
+                  available:
+                    "font-semibold text-primary underline underline-offset-4 decoration-primary",
+                }}
+                disabled={(date) => {
+                  const isWednesday = date.getDay() === 3;
+                  const today = new Date();
+                  today.setHours(0, 0, 0, 0);
+                  const isPast = date < today;
+                  return !isWednesday || isPast;
+                }}
+                className="w-full max-w-xl mx-auto border rounded-md p-8 bg-white shadow-xl"
+              />
+              <FieldError errors={[error]} className="mt-4 text-center" />
+            </FieldContent>
+          </Field>
 
-                    <div className="space-y-8">
-                        <Field data-invalid={!!timeSlotError}>
-                            <FieldLabel required>Available Time Slots</FieldLabel>
-                            <FieldContent>
-                                <RadioGroup
-                                    value={timeSlot}
-                                    onValueChange={(val) => onTimeSlotChange(val as "AM" | "PM")}
-                                    className="grid gap-4"
-                                >
-                                    {[
-                                        { id: "AM", label: "Morning Session", time: "AM" },
-                                        { id: "PM", label: "Afternoon Session", time: "PM" },
-                                    ].map((slot) => (
-                                        <div key={slot.id} className="space-y-3">
-                                            <Label
-                                                htmlFor={slot.id}
-                                                className={`flex items-center justify-between p-4 rounded-xl border-2 transition-all cursor-pointer ${timeSlot === slot.id
-                                                    ? "border-[#A11D1D] bg-[#A11D1D]/5 ring-1 ring-[#A11D1D]"
-                                                    : "border-slate-100 bg-white hover:border-slate-200"
-                                                    }`}
-                                            >
-                                                <div className="flex items-center gap-3">
-                                                    <RadioGroupItem value={slot.id} id={slot.id} />
-                                                    <div>
-                                                        <p className="font-bold text-slate-900">{slot.label}</p>
-                                                        <p className="text-xs text-slate-500 font-medium">{slot.time} Session</p>
-                                                    </div>
-                                                </div>
-                                            </Label>
-                                            {timeSlot === slot.id && (
-                                                <div className="p-3 rounded-xl bg-slate-50 border border-slate-100 animate-in slide-in-from-top-2 duration-300">
-                                                    <p className="text-sm font-medium leading-relaxed">
-                                                        {slot.id === "AM"
-                                                            ? "The Speaking Test usually takes place in the afternoon. This will be confirmed by the British Council."
-                                                            : "The Speaking Test usually takes place in the morning. This will be confirmed by the British Council."}
-                                                    </p>
-                                                </div>
-                                            )}
-                                        </div>
-                                    ))}
-                                </RadioGroup>
-                                <FieldError errors={[timeSlotError]} className="mt-4" />
-                            </FieldContent>
-                        </Field>
-
-                        <div className="p-4 rounded-xl bg-blue-50 border border-blue-100 text-blue-800 text-sm font-medium">
-                            Note: The speaking test might be conducted in-person or via video-call on exam day.
+          <div className="space-y-8">
+            <Field data-invalid={!!timeSlotError}>
+              <FieldLabel required>Available Time Slots</FieldLabel>
+              <FieldContent>
+                <RadioGroup
+                  value={timeSlot}
+                  onValueChange={(val) => onTimeSlotChange(val as "AM" | "PM")}
+                  className="grid gap-4"
+                >
+                  {[
+                    { id: "AM", label: "Morning Session", time: "AM" },
+                    { id: "PM", label: "Afternoon Session", time: "PM" },
+                  ].map((slot) => (
+                    <div key={slot.id} className="space-y-3">
+                      <Label
+                        htmlFor={slot.id}
+                        className={`flex items-center justify-between p-4 rounded-xl border-2 transition-all cursor-pointer ${
+                          timeSlot === slot.id
+                            ? "border-[#A11D1D] bg-[#A11D1D]/5 ring-1 ring-[#A11D1D]"
+                            : "border-slate-100 bg-white hover:border-slate-200"
+                        }`}
+                      >
+                        <div className="flex items-center gap-3">
+                          <RadioGroupItem value={slot.id} id={slot.id} />
+                          <div>
+                            <p className="font-bold text-slate-900">
+                              {slot.label}
+                            </p>
+                            <p className="text-xs text-slate-500 font-medium">
+                              {slot.time} Session
+                            </p>
+                          </div>
                         </div>
-
-                        <div className="p-4 rounded-xl bg-amber-50 border border-amber-100 text-amber-800 text-sm font-medium">
-                            Note: Please select your preferred test date. All Wednesdays are available (we will deactivate Wednesdays that will not participate).
+                      </Label>
+                      {timeSlot === slot.id && (
+                        <div className="p-3 rounded-xl bg-slate-50 border border-slate-100 animate-in slide-in-from-top-2 duration-300">
+                          <p className="text-sm font-medium leading-relaxed">
+                            {slot.id === "AM"
+                              ? "The Speaking Test usually takes place in the afternoon. This will be confirmed by the British Council."
+                              : "The Speaking Test usually takes place in the morning. This will be confirmed by the British Council."}
+                          </p>
                         </div>
+                      )}
                     </div>
-                </div>
+                  ))}
+                </RadioGroup>
+                <FieldError errors={[timeSlotError]} className="mt-4" />
+              </FieldContent>
+            </Field>
 
-                <div className="mt-12 flex justify-between items-center pt-6 border-t border-slate-100">
-                    <Button
-                        onClick={onBack}
-                    >
-                        Back
-                    </Button>
-                    <Button
-                        onClick={onNext}
-                        disabled={!value || !timeSlot}
-                    >
-                        Next
-                    </Button>
-                </div>
+            <div className="p-4 rounded-xl bg-blue-50 border border-blue-100 text-blue-800 text-sm font-medium">
+              Note: The speaking test might be conducted in-person or via
+              video-call on exam day.
             </div>
+          </div>
         </div>
-    );
+
+        <div className="mt-12 flex justify-between items-center pt-6 border-t border-slate-100">
+          <Button onClick={onBack}>Back</Button>
+          <Button onClick={onNext} disabled={!value || !timeSlot}>
+            Next
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
 }

@@ -77,7 +77,9 @@ export function RegistrationFormStep({
                 <Checkbox
                   id="noGivenNames"
                   checked={formData.noGivenNames}
-                  onCheckedChange={(val) => setValue("noGivenNames", val as boolean)}
+                  onCheckedChange={(val) =>
+                    setValue("noGivenNames", val as boolean)
+                  }
                 />
                 <Label htmlFor="noGivenNames" className="text-xs font-light">
                   I don't have a given name
@@ -110,7 +112,9 @@ export function RegistrationFormStep({
                 <Checkbox
                   id="noSurname"
                   checked={formData.noSurname}
-                  onCheckedChange={(val) => setValue("noSurname", val as boolean)}
+                  onCheckedChange={(val) =>
+                    setValue("noSurname", val as boolean)
+                  }
                 />
                 <Label htmlFor="noSurname" className="text-xs font-light">
                   I don't have a surname / family name
@@ -135,23 +139,24 @@ export function RegistrationFormStep({
                 placeholder="Select your date of birth"
                 aria-invalid={!!errors.dateOfBirth}
               />
-              {formData.dateOfBirth && (() => {
-                const dob = new Date(formData.dateOfBirth);
-                const today = new Date();
-                let age = today.getFullYear() - dob.getFullYear();
-                const m = today.getMonth() - dob.getMonth();
-                if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
-                  age--;
-                }
-                if (age < 16) {
-                  return (
-                    <p className="mt-2 text-xs text-red-600 font-bold animate-in fade-in slide-in-from-top-1">
-                      Candidates must be at least 16 years old.
-                    </p>
-                  );
-                }
-                return null;
-              })()}
+              {formData.dateOfBirth &&
+                (() => {
+                  const dob = new Date(formData.dateOfBirth);
+                  const today = new Date();
+                  let age = today.getFullYear() - dob.getFullYear();
+                  const m = today.getMonth() - dob.getMonth();
+                  if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+                    age--;
+                  }
+                  if (age < 16) {
+                    return (
+                      <p className="mt-2 text-xs text-red-600 font-bold animate-in fade-in slide-in-from-top-1">
+                        Candidates must be at least 16 years old.
+                      </p>
+                    );
+                  }
+                  return null;
+                })()}
               <FieldError errors={[errors.dateOfBirth]} />
             </FieldContent>
           </Field>
@@ -183,7 +188,10 @@ export function RegistrationFormStep({
           <Field data-invalid={!!errors.placeOfBirth}>
             <FieldLabel required>Town / City of birth</FieldLabel>
             <FieldContent>
-              <Input placeholder="As per passport" {...register("placeOfBirth")} />
+              <Input
+                placeholder="As per passport"
+                {...register("placeOfBirth")}
+              />
               <FieldError errors={[errors.placeOfBirth]} />
             </FieldContent>
           </Field>
@@ -203,7 +211,10 @@ export function RegistrationFormStep({
           <Field data-invalid={!!errors.emailUsername}>
             <FieldLabel required>Email address</FieldLabel>
             <FieldContent>
-              <Input placeholder="example@email.com" {...register("emailUsername")} />
+              <Input
+                placeholder="example@email.com"
+                {...register("emailUsername")}
+              />
               <FieldError errors={[errors.emailUsername]} />
             </FieldContent>
           </Field>
@@ -247,7 +258,10 @@ export function RegistrationFormStep({
           <Field data-invalid={!!errors.postalAddress1}>
             <FieldLabel required>Address Line 1</FieldLabel>
             <FieldContent>
-              <Input placeholder="Street address, building, etc." {...register("postalAddress1")} />
+              <Input
+                placeholder="Street address, building, etc."
+                {...register("postalAddress1")}
+              />
               <FieldError errors={[errors.postalAddress1]} />
             </FieldContent>
           </Field>
@@ -255,7 +269,10 @@ export function RegistrationFormStep({
           <Field data-invalid={!!errors.postalAddress2}>
             <FieldLabel>Address Line 2</FieldLabel>
             <FieldContent>
-              <Input placeholder="Apartment, suite, etc. (optional)" {...register("postalAddress2")} />
+              <Input
+                placeholder="Apartment, suite, etc. (optional)"
+                {...register("postalAddress2")}
+              />
             </FieldContent>
           </Field>
 
@@ -305,6 +322,10 @@ export function RegistrationFormStep({
                   </Label>
                 ))}
               </RadioGroup>
+              <FieldDescription>
+                Please make sure you present the same ID document you used for
+                registration on the exam day.
+              </FieldDescription>
               <FieldError errors={[errors.idType]} />
             </FieldContent>
           </Field>
@@ -383,7 +404,11 @@ export function RegistrationFormStep({
                           {(formData.passportCopy as File).name}
                         </span>
                         <span className="text-[10px] text-slate-400 font-medium">
-                          {((formData.passportCopy as File).size / (1024 * 1024)).toFixed(2)} MB
+                          {(
+                            (formData.passportCopy as File).size /
+                            (1024 * 1024)
+                          ).toFixed(2)}{" "}
+                          MB
                         </span>
                       </div>
                     </div>
@@ -440,7 +465,7 @@ export function RegistrationFormStep({
                   { label: "Employed Part-time", value: "Employed Part-time" },
                   { label: "Self-employed", value: "Self-employed" },
                   { label: "Student", value: "Student" },
-                  { label: "Unemployed", value: "Unemployed" }
+                  { label: "Unemployed", value: "Unemployed" },
                 ]}
                 placeholder="-Select Level-"
                 value={formData.currentSituation}
@@ -460,7 +485,7 @@ export function RegistrationFormStep({
                   { label: "Banking and Finance", value: "Banking" },
                   { label: "Health and Social Services", value: "Healthcare" },
                   { label: "IT/Communications", value: "IT" },
-                  { label: "Other", value: "Other" }
+                  { label: "Other", value: "Other" },
                 ]}
                 placeholder="-Select Sector-"
                 value={formData.occupationSector}
@@ -470,21 +495,42 @@ export function RegistrationFormStep({
             </FieldContent>
           </Field>
 
-          <Field data-invalid={!!errors.reasonForTaking} className="md:col-span-2">
+          <Field
+            data-invalid={!!errors.reasonForTaking}
+            className="md:col-span-2"
+          >
             <FieldLabel required>Why are you taking PTE Academic?</FieldLabel>
             <FieldContent>
               <SearchableDropdown
                 options={[
                   { label: "Study", value: "study" },
-                  { label: "Nursing registration or licensing", value: "nursing" },
-                  { label: "Australia - MATES visa (India only)", value: "au_mates" },
-                  { label: "Australia - Post Study Work (485) visa", value: "au_485" },
-                  { label: "Australia - Temporary Work visa", value: "au_temp_work" },
-                  { label: "New Zealand - Temporary Work visa", value: "nz_temp_work" },
-                  { label: "Skilled migration / Permanent Residency", value: "skilled_migration" },
+                  {
+                    label: "Nursing registration or licensing",
+                    value: "nursing",
+                  },
+                  {
+                    label: "Australia - MATES visa (India only)",
+                    value: "au_mates",
+                  },
+                  {
+                    label: "Australia - Post Study Work (485) visa",
+                    value: "au_485",
+                  },
+                  {
+                    label: "Australia - Temporary Work visa",
+                    value: "au_temp_work",
+                  },
+                  {
+                    label: "New Zealand - Temporary Work visa",
+                    value: "nz_temp_work",
+                  },
+                  {
+                    label: "Skilled migration / Permanent Residency",
+                    value: "skilled_migration",
+                  },
                   { label: "Spouse / Family visa", value: "family_visa" },
                   { label: "Working Holiday visa", value: "working_holiday" },
-                  { label: "Other - specify below", value: "other" }
+                  { label: "Other - specify below", value: "other" },
                 ]}
                 placeholder="Select one..."
                 value={formData.reasonForTaking}
@@ -495,15 +541,23 @@ export function RegistrationFormStep({
           </Field>
 
           {formData.reasonForTaking === "study" && (
-            <Field data-invalid={!!errors.studyLevel} className="md:col-span-2 animate-in fade-in slide-in-from-top-2">
-              <FieldLabel required>What level of education have you completed?</FieldLabel>
+            <Field
+              data-invalid={!!errors.studyLevel}
+              className="md:col-span-2 animate-in fade-in slide-in-from-top-2"
+            >
+              <FieldLabel required>
+                What level of education have you completed?
+              </FieldLabel>
               <FieldContent>
                 <SearchableDropdown
                   options={[
-                    { label: "Secondary (up to 16 years)", value: "undergraduate" },
+                    {
+                      label: "Secondary (up to 16 years)",
+                      value: "undergraduate",
+                    },
                     { label: "Secondary (16-19 years)", value: "postgraduate" },
                     { label: "Degree (or equivalent)", value: "degree" },
-                    { label: "Post-graduate", value: "post_graduate" }
+                    { label: "Post-graduate", value: "post_graduate" },
                   ]}
                   placeholder="-Select Level-"
                   value={formData.studyLevel}
@@ -522,7 +576,7 @@ export function RegistrationFormStep({
                   { label: "Social Media", value: "Social Media" },
                   { label: "Search Engine", value: "Search Engine" },
                   { label: "Friend/Family", value: "Referral" },
-                  { label: "Other", value: "Other" }
+                  { label: "Other", value: "Other" },
                 ]}
                 placeholder="-Select Source-"
                 value={formData.referralSource}
@@ -533,7 +587,9 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.takenBefore}>
-            <FieldLabel required>Have you taken PTE Academic before?</FieldLabel>
+            <FieldLabel required>
+              Have you taken PTE Academic before?
+            </FieldLabel>
             <FieldContent className="mt-2">
               <RadioGroup
                 className="grid grid-cols-2 gap-3"
@@ -564,7 +620,9 @@ export function RegistrationFormStep({
                   <RadioGroup
                     className="grid grid-cols-2 gap-3"
                     value={formData.takenWithinTwoYears}
-                    onValueChange={(val) => setValue("takenWithinTwoYears", val as any)}
+                    onValueChange={(val) =>
+                      setValue("takenWithinTwoYears", val as any)
+                    }
                   >
                     {["yes", "no"].map((opt) => (
                       <Label
@@ -588,7 +646,9 @@ export function RegistrationFormStep({
                   <RadioGroup
                     className="grid grid-cols-2 gap-3"
                     value={formData.hasExistingAccount}
-                    onValueChange={(val) => setValue("hasExistingAccount", val as any)}
+                    onValueChange={(val) =>
+                      setValue("hasExistingAccount", val as any)
+                    }
                   >
                     {["yes", "no"].map((opt) => (
                       <Label
@@ -629,7 +689,11 @@ export function RegistrationFormStep({
                   ...Object.values(coursesData).map((c: any) => ({
                     label: c.name,
                     description: (
-                      <PriceDisplay amount={c.price} minimumFractionDigits={0} maximumFractionDigits={0} />
+                      <PriceDisplay
+                        amount={c.price}
+                        minimumFractionDigits={0}
+                        maximumFractionDigits={0}
+                      />
                     ),
                     value: c.id,
                   })),
@@ -650,7 +714,11 @@ export function RegistrationFormStep({
                   ...Object.values(workshopsData).map((w: any) => ({
                     label: w.name,
                     description: (
-                      <PriceDisplay amount={w.price} minimumFractionDigits={0} maximumFractionDigits={0} />
+                      <PriceDisplay
+                        amount={w.price}
+                        minimumFractionDigits={0}
+                        maximumFractionDigits={0}
+                      />
                     ),
                     value: w.id,
                   })),
@@ -687,11 +755,13 @@ export function RegistrationFormStep({
               {[
                 {
                   id: "all",
-                  label: "I am happy to receive updates about products, services and events organized by TEPTH.",
+                  label:
+                    "I am happy to receive updates about products, services and events organized by TEPTH.",
                 },
                 {
                   id: "third_party",
-                  label: "I am happy to receive information from TEPTH and selected third parties.",
+                  label:
+                    "I am happy to receive information from TEPTH and selected third parties.",
                 },
                 {
                   id: "none",
@@ -705,7 +775,9 @@ export function RegistrationFormStep({
                   className="flex items-center space-x-3 p-4 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive shadow-sm"
                 >
                   <RadioGroupItem value={opt.id} id={`mkt-${opt.id}`} />
-                  <span className="text-sm text-slate-700 font-bold">{opt.label}</span>
+                  <span className="text-sm text-slate-700 font-bold">
+                    {opt.label}
+                  </span>
                 </Label>
               ))}
             </RadioGroup>
@@ -715,17 +787,10 @@ export function RegistrationFormStep({
       </div>
 
       <div className="flex justify-between pt-12 border-t border-slate-100 mt-12">
-        <Button
-          type="button"
-          onClick={onBack}
-        >
+        <Button type="button" onClick={onBack}>
           Back
         </Button>
-        <Button
-          type="submit"
-        >
-          Next
-        </Button>
+        <Button type="submit">Next</Button>
       </div>
     </form>
   );

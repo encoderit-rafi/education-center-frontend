@@ -129,23 +129,24 @@ export function RegistrationFormStep({
                 placeholder="Select your date of birth"
                 aria-invalid={!!errors.dateOfBirth}
               />
-              {formData.dateOfBirth && (() => {
-                const dob = new Date(formData.dateOfBirth);
-                const today = new Date();
-                let age = today.getFullYear() - dob.getFullYear();
-                const m = today.getMonth() - dob.getMonth();
-                if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
-                  age--;
-                }
-                if (age < 16) {
-                  return (
-                    <p className="mt-2 text-xs text-red-600 font-bold animate-in fade-in slide-in-from-top-1">
-                      Candidates must be at least 16 years old.
-                    </p>
-                  );
-                }
-                return null;
-              })()}
+              {formData.dateOfBirth &&
+                (() => {
+                  const dob = new Date(formData.dateOfBirth);
+                  const today = new Date();
+                  let age = today.getFullYear() - dob.getFullYear();
+                  const m = today.getMonth() - dob.getMonth();
+                  if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+                    age--;
+                  }
+                  if (age < 16) {
+                    return (
+                      <p className="mt-2 text-xs text-red-600 font-bold animate-in fade-in slide-in-from-top-1">
+                        Candidates must be at least 16 years old.
+                      </p>
+                    );
+                  }
+                  return null;
+                })()}
               <FieldError errors={[errors.dateOfBirth]} />
             </FieldContent>
           </Field>
@@ -195,7 +196,7 @@ export function RegistrationFormStep({
                   }
                 />
                 <Label htmlFor="smsConsent" className="text-xs font-light">
-                  I want to receive my results by SMS
+                  I agree to receive notifications
                 </Label>
               </FieldDescription>
             </FieldContent>
@@ -327,6 +328,10 @@ export function RegistrationFormStep({
               </RadioGroup>
               <FieldError errors={[errors.idType]} />
             </FieldContent>
+            <FieldDescription>
+              Please make sure you present the same ID document you used for
+              registration on the exam day.
+            </FieldDescription>
           </Field>
 
           <Field data-invalid={!!errors.idNumber}>
@@ -417,7 +422,11 @@ export function RegistrationFormStep({
                           {(formData.idDocument as File).name}
                         </span>
                         <span className="text-[10px] text-slate-400 font-medium">
-                          {((formData.idDocument as File).size / (1024 * 1024)).toFixed(2)} MB
+                          {(
+                            (formData.idDocument as File).size /
+                            (1024 * 1024)
+                          ).toFixed(2)}{" "}
+                          MB
                         </span>
                       </div>
                     </div>
@@ -545,8 +554,6 @@ export function RegistrationFormStep({
               </Field>
             </>
           )}
-
-
 
           <Field data-invalid={!!errors.firstLanguage}>
             <FieldLabel required>What is your first language?</FieldLabel>
@@ -688,7 +695,10 @@ export function RegistrationFormStep({
             </FieldContent>
           </Field>
 
-          <Field data-invalid={!!errors.reasonForTakingTest} className="md:col-span-2 lg:col-span-3">
+          <Field
+            data-invalid={!!errors.reasonForTakingTest}
+            className="md:col-span-2 lg:col-span-3"
+          >
             <FieldLabel required>Why are you taking the test?</FieldLabel>
             <FieldContent className="mt-2">
               <RadioGroup
@@ -711,7 +721,10 @@ export function RegistrationFormStep({
                     htmlFor={`reason-${opt.value}`}
                     className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer"
                   >
-                    <RadioGroupItem value={opt.value} id={`reason-${opt.value}`} />
+                    <RadioGroupItem
+                      value={opt.value}
+                      id={`reason-${opt.value}`}
+                    />
                     {opt.label}
                   </Label>
                 ))}
@@ -759,11 +772,15 @@ export function RegistrationFormStep({
                     description: (
                       <span className="flex items-center gap-1">
                         <PriceDisplay
-                          amount={c.price * (1 - (c.special_discount || 0) / 100)}
+                          amount={
+                            c.price * (1 - (c.special_discount || 0) / 100)
+                          }
                           minimumFractionDigits={0}
                           maximumFractionDigits={0}
                         />
-                        {c.special_discount > 0 && <span>({c.special_discount}% OFF)</span>}
+                        {c.special_discount > 0 && (
+                          <span>({c.special_discount}% OFF)</span>
+                        )}
                       </span>
                     ),
                     value: c.id,
@@ -814,18 +831,22 @@ export function RegistrationFormStep({
             <FieldContent>
               <RadioGroup
                 name="marketingPreference"
-                onValueChange={(val) => setValue("marketingPreference", val as any)}
+                onValueChange={(val) =>
+                  setValue("marketingPreference", val as any)
+                }
                 value={formData.marketingPreference}
                 className="flex flex-col gap-4"
               >
                 {[
                   {
                     id: "all",
-                    label: "I am happy to receive updates about products, services and events organised by British Council.",
+                    label:
+                      "I am happy to receive updates about products, services and events organised by British Council.",
                   },
                   {
                     id: "some",
-                    label: "I am happy to receive information from British Council and selected third parties.",
+                    label:
+                      "I am happy to receive information from British Council and selected third parties.",
                   },
                   {
                     id: "none",
@@ -839,10 +860,14 @@ export function RegistrationFormStep({
                       "flex items-center space-x-4 p-5 rounded-2xl border-2 transition-all cursor-pointer bg-white group",
                       formData.marketingPreference === opt.id
                         ? "border-primary bg-primary/5 shadow-sm"
-                        : "border-slate-100 hover:border-slate-200"
+                        : "border-slate-100 hover:border-slate-200",
                     )}
                   >
-                    <RadioGroupItem value={opt.id} id={`marketing-${opt.id}`} className="size-5" />
+                    <RadioGroupItem
+                      value={opt.id}
+                      id={`marketing-${opt.id}`}
+                      className="size-5"
+                    />
                     <span className="text-sm font-medium text-slate-700 leading-relaxed group-hover:text-slate-900 transition-colors">
                       {opt.label}
                     </span>
@@ -856,17 +881,8 @@ export function RegistrationFormStep({
       </div>
 
       <div className="pt-8 border-t border-slate-100 flex justify-between items-center">
-        <Button
-          onClick={onBack}
-        >
-          Back
-        </Button>
-        <Button
-          type="submit"
-
-        >
-          Next
-        </Button>
+        <Button onClick={onBack}>Back</Button>
+        <Button type="submit">Next</Button>
       </div>
     </form>
   );

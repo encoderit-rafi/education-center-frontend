@@ -79,23 +79,40 @@ export function DateStep({
                   className="grid gap-4"
                 >
                   {[
-                    { id: "10:00 AM", label: "Morning Session", time: "10:00 AM" },
-                    { id: "1:30 PM", label: "Afternoon Session", time: "01:30 PM" },
-                    { id: "5:30 PM", label: "Evening Session", time: "05:30 PM" },
+                    {
+                      id: "10:00 AM",
+                      label: "Morning Session",
+                      time: "10:00 AM",
+                    },
+                    {
+                      id: "1:30 PM",
+                      label: "Afternoon Session",
+                      time: "01:30 PM",
+                    },
+                    {
+                      id: "5:30 PM",
+                      label: "Evening Session",
+                      time: "05:30 PM",
+                    },
                   ].map((slot) => (
                     <div key={slot.id} className="space-y-3">
                       <Label
                         htmlFor={slot.id}
-                        className={`flex items-center justify-between p-4 rounded-xl border-2 transition-all cursor-pointer ${timeSlot === slot.id
-                          ? "border-primary bg-primary/5 ring-1 ring-primary"
-                          : "border-slate-100 bg-white hover:border-slate-200"
-                          }`}
+                        className={`flex items-center justify-between p-4 rounded-xl border-2 transition-all cursor-pointer ${
+                          timeSlot === slot.id
+                            ? "border-primary bg-primary/5 ring-1 ring-primary"
+                            : "border-slate-100 bg-white hover:border-slate-200"
+                        }`}
                       >
                         <div className="flex items-center gap-3">
                           <RadioGroupItem value={slot.id} id={slot.id} />
                           <div>
-                            <p className="font-bold text-slate-900">{slot.label}</p>
-                            <p className="text-xs text-slate-500 font-medium">Starts at {slot.time}</p>
+                            <p className="font-bold text-slate-900">
+                              {slot.label}
+                            </p>
+                            <p className="text-xs text-slate-500 font-medium">
+                              Starts at {slot.time}
+                            </p>
                           </div>
                         </div>
                       </Label>
@@ -116,25 +133,15 @@ export function DateStep({
             </Field>
 
             <div className="p-4 rounded-xl bg-blue-50 border border-blue-100 text-blue-800 text-sm font-medium">
-              Note: The speaking test might be conducted in-person or via video-call on exam day.
-            </div>
-
-            <div className="p-4 rounded-xl bg-amber-50 border border-amber-100 text-amber-800 text-sm font-medium">
-              Note: Please select your preferred test date. Only Monday, Tuesday, and Wednesday are available for this level.
+              Note: The speaking test might be conducted in-person or via
+              video-call on exam day.
             </div>
           </div>
         </div>
 
         <div className="mt-12 flex justify-between items-center pt-6 border-t border-slate-100">
-          <Button
-            onClick={onBack}
-          >
-            Back
-          </Button>
-          <Button
-            onClick={onNext}
-            disabled={!value || !timeSlot}
-          >
+          <Button onClick={onBack}>Back</Button>
+          <Button onClick={onNext} disabled={!value || !timeSlot}>
             Next
           </Button>
         </div>

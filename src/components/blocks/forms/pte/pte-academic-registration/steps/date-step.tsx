@@ -74,7 +74,8 @@ export function DateStep({
                 disabled={(date) => {
                   const day = date.getDay();
                   const isClosed = PTE_SCHEDULE[day].length === 0;
-                  const isPast = date < new Date(new Date().setHours(0, 0, 0, 0));
+                  const isPast =
+                    date < new Date(new Date().setHours(0, 0, 0, 0));
                   return isClosed || isPast;
                 }}
                 className="w-full max-w-xl mx-auto border rounded-md p-8 bg-white shadow-xl"
@@ -97,18 +98,23 @@ export function DateStep({
                       <div key={slot} className="space-y-3">
                         <Label
                           htmlFor={slot}
-                          className={`flex items-center justify-between p-4 rounded-xl border-2 transition-all cursor-pointer ${timeSlot === slot
-                            ? "border-primary bg-primary/5 ring-1 ring-primary"
-                            : "border-slate-100 bg-white hover:border-slate-200"
-                            }`}
+                          className={`flex items-center justify-between p-4 rounded-xl border-2 transition-all cursor-pointer ${
+                            timeSlot === slot
+                              ? "border-primary bg-primary/5 ring-1 ring-primary"
+                              : "border-slate-100 bg-white hover:border-slate-200"
+                          }`}
                         >
                           <div className="flex items-center gap-3">
                             <RadioGroupItem value={slot} id={slot} />
                             <div>
                               <p className="font-bold text-slate-900">
-                                {slot === "1:00 PM" ? "Afternoon Session" : "Evening Session"}
+                                {slot === "1:00 PM"
+                                  ? "Afternoon Session"
+                                  : "Evening Session"}
                               </p>
-                              <p className="text-xs text-slate-500 font-medium">Starts at {slot}</p>
+                              <p className="text-xs text-slate-500 font-medium">
+                                Starts at {slot}
+                              </p>
                             </div>
                           </div>
                         </Label>
@@ -127,7 +133,9 @@ export function DateStep({
                 ) : (
                   <div className="p-8 rounded-xl border-2 border-dashed border-slate-100 flex flex-col items-center justify-center text-center space-y-2">
                     <CalendarIcon className="w-8 h-8 text-slate-200" />
-                    <p className="text-sm text-slate-400 font-medium">Please select a date first</p>
+                    <p className="text-sm text-slate-400 font-medium">
+                      Please select a date first
+                    </p>
                   </div>
                 )}
                 <FieldError errors={[timeSlotError]} className="mt-4" />
@@ -135,25 +143,15 @@ export function DateStep({
             </Field>
 
             <div className="p-4 rounded-xl bg-blue-50 border border-blue-100 text-blue-800 text-sm font-medium">
-              Note: The speaking test might be conducted in-person or via video-call on exam day.
-            </div>
-
-            <div className="p-4 rounded-xl bg-amber-50 border border-amber-100 text-amber-800 text-sm font-medium">
-              Note: Please select your preferred test date. Available slots are based on the weekly schedule.
+              Note: The speaking test might be conducted in-person or via
+              video-call on exam day.
             </div>
           </div>
         </div>
 
         <div className="mt-12 flex justify-between items-center pt-6 border-t border-slate-100">
-          <Button
-            onClick={onBack}
-          >
-            Back
-          </Button>
-          <Button
-            onClick={onNext}
-            disabled={!value || !timeSlot}
-          >
+          <Button onClick={onBack}>Back</Button>
+          <Button onClick={onNext} disabled={!value || !timeSlot}>
             Next
           </Button>
         </div>

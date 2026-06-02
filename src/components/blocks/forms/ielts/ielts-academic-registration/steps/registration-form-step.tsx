@@ -129,23 +129,24 @@ export function RegistrationFormStep({
                 placeholder="Select your date of birth"
                 aria-invalid={!!errors.dateOfBirth}
               />
-              {formData.dateOfBirth && (() => {
-                const dob = new Date(formData.dateOfBirth);
-                const today = new Date();
-                let age = today.getFullYear() - dob.getFullYear();
-                const m = today.getMonth() - dob.getMonth();
-                if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
-                  age--;
-                }
-                if (age < 16) {
-                  return (
-                    <p className="mt-2 text-xs text-red-600 font-bold animate-in fade-in slide-in-from-top-1">
-                      Candidates must be at least 16 years old.
-                    </p>
-                  );
-                }
-                return null;
-              })()}
+              {formData.dateOfBirth &&
+                (() => {
+                  const dob = new Date(formData.dateOfBirth);
+                  const today = new Date();
+                  let age = today.getFullYear() - dob.getFullYear();
+                  const m = today.getMonth() - dob.getMonth();
+                  if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+                    age--;
+                  }
+                  if (age < 16) {
+                    return (
+                      <p className="mt-2 text-xs text-red-600 font-bold animate-in fade-in slide-in-from-top-1">
+                        Candidates must be at least 16 years old.
+                      </p>
+                    );
+                  }
+                  return null;
+                })()}
               <FieldError errors={[errors.dateOfBirth]} />
             </FieldContent>
           </Field>
@@ -195,7 +196,7 @@ export function RegistrationFormStep({
                   }
                 />
                 <Label htmlFor="smsConsent" className="text-xs font-light">
-                  I want to receive my results by SMS
+                  I agree to receive notifications
                 </Label>
               </FieldDescription>
             </FieldContent>
@@ -326,6 +327,10 @@ export function RegistrationFormStep({
                 ))}
               </RadioGroup>
               <FieldError errors={[errors.idType]} />
+              <FieldDescription>
+                Please make sure you present the same ID document you used for
+                registration on the exam day.
+              </FieldDescription>
             </FieldContent>
           </Field>
 
@@ -417,7 +422,11 @@ export function RegistrationFormStep({
                           {(formData.idDocument as File).name}
                         </span>
                         <span className="text-[10px] text-slate-400 font-medium">
-                          {((formData.idDocument as File).size / (1024 * 1024)).toFixed(2)} MB
+                          {(
+                            (formData.idDocument as File).size /
+                            (1024 * 1024)
+                          ).toFixed(2)}{" "}
+                          MB
                         </span>
                       </div>
                     </div>
@@ -439,8 +448,6 @@ export function RegistrationFormStep({
               <FieldError errors={[errors.idDocument]} />
             </FieldContent>
           </Field>
-
-
         </div>
       </div>
 
@@ -547,7 +554,6 @@ export function RegistrationFormStep({
               </Field>
             </>
           )}
-
 
           <Field data-invalid={!!errors.firstLanguage}>
             <FieldLabel required>What is your first language?</FieldLabel>
@@ -779,7 +785,12 @@ export function RegistrationFormStep({
                     label: w.name,
                     description: (
                       <span className="flex items-center gap-1">
-                        {w.duration} • <PriceDisplay amount={w.price} minimumFractionDigits={0} maximumFractionDigits={0} />
+                        {w.duration} •{" "}
+                        <PriceDisplay
+                          amount={w.price}
+                          minimumFractionDigits={0}
+                          maximumFractionDigits={0}
+                        />
                       </span>
                     ),
                     value: w.id,
@@ -850,13 +861,10 @@ export function RegistrationFormStep({
 
       {/* Form Actions */}
       <div className="mt-12 flex justify-between items-center pt-6 border-t border-slate-100">
-        <Button
-          type="button"
-          onClick={onBack}
-        >
+        <Button type="button" onClick={onBack}>
           Back
         </Button>
-        <Button type="submit" >Next</Button>
+        <Button type="submit">Next</Button>
       </div>
     </form>
   );
