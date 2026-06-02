@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/field";
 import { TToeflIbtSchema } from "../_type/toefl-ibt";
 import { PriceDisplay } from "@/components/ui/price-display";
+import { Badge } from "@/components/ui/badge";
 
 interface RegistrationFormStepProps {
   form: UseFormReturn<TToeflIbtSchema>;
@@ -729,14 +730,25 @@ export function RegistrationFormStep({
                   ...Object.values(coursesData).map((c: any) => ({
                     label: c.name,
                     description: (
-                      <span className="flex items-center gap-1">
-                        <PriceDisplay
-                          amount={c.price * (1 - c.special_discount / 100)}
-                          minimumFractionDigits={0}
-                          maximumFractionDigits={0}
-                        />
-                        <span>({c.special_discount}% OFF)</span>
-                      </span>
+                      <div className="flex items-center justify-between gap-6">
+                        <span className="flex items-center gap-1">
+                          <PriceDisplay
+                            amount={c.price * (1 - c.special_discount / 100)}
+                            minimumFractionDigits={0}
+                            maximumFractionDigits={0}
+                          />
+                          <span>({c.special_discount}% OFF)</span>
+                        </span>
+                        <div className="flex items-center gap-2">
+                          {[
+                            "Free Prep. Material",
+                            "Free Consultation",
+                            "Free Mock Test",
+                          ].map((item, index) => (
+                            <Badge key={index}>{item}</Badge>
+                          ))}
+                        </div>
+                      </div>
                     ),
                     value: c.id,
                   })),
@@ -779,7 +791,7 @@ export function RegistrationFormStep({
           </Field>
         </div>
 
-        <BaseNoteBox
+        {/* <BaseNoteBox
           title="Enjoy These Free Benefits:"
           notes={[
             "Save more when you book your exam and register for the course with TEPTH and pay in-person or online on our website.",
@@ -787,7 +799,7 @@ export function RegistrationFormStep({
             "Free Consultation",
             "Free Mock Test",
           ]}
-        />
+        /> */}
       </div>
 
       {/* Section 4: Marketing Preferences */}

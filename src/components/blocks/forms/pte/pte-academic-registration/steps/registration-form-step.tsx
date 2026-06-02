@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/field";
 import { TPteAcademicSchema } from "../_type";
 import { PriceDisplay } from "@/components/ui/price-display";
+import { Badge } from "@/components/ui/badge";
 
 interface RegistrationFormStepProps {
   form: UseFormReturn<TPteAcademicSchema>;
@@ -735,7 +736,7 @@ export function RegistrationFormStep({
           </Field>
         </div>
 
-        <BaseNoteBox
+        {/* <BaseNoteBox
           title="Enjoy These Free Benefits:"
           notes={[
             "Save more when you book your exam and register for the course with TEPTH and pay in-person or online on our website.",
@@ -743,7 +744,7 @@ export function RegistrationFormStep({
             "Free Consultation",
             "Free Mock Test",
           ]}
-        />
+        /> */}
       </div>
 
       <div className="pt-8 border-t border-slate-100 space-y-6">
