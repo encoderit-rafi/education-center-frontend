@@ -59,7 +59,7 @@ export const PteAcademicSchema = z.object({
     takenWithinTwoYears: z.enum(["yes", "no"]).or(z.literal("")),
     hasExistingAccount: z.enum(["yes", "no"]).or(z.literal("")),
 
-    marketingPreference: z.string().optional().or(z.literal("")),
+    marketingPreference: z.string().min(1, "Please select a marketing preference"),
 
     // Step 4: Add-on Services
     selectedCourse: z.string().optional(),

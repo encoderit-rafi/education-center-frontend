@@ -29,8 +29,7 @@ export const IeltsAcademicSchema = z
     marketingPreference: z
       .enum(["all", "some", "none"], {
         message: "Please select a marketing preference",
-      })
-      .or(z.literal("")),
+      }),
 
     // Step 2: Identification Details
     idType: z.enum(["passport", "emirates_id"]).or(z.literal("")),

@@ -78,7 +78,7 @@ export function MarketingPreferencesSection({
   return (
     <div className="pt-8 border-t border-slate-100 space-y-6">
       <Field data-invalid={!!error}>
-        <FieldLabel>Marketing preferences</FieldLabel>
+        <FieldLabel required>Marketing preferences</FieldLabel>
         <FieldContent className="mt-4">
           <RadioGroup
             name="marketingPreference"
