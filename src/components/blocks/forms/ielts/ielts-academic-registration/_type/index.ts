@@ -47,11 +47,15 @@ export const IeltsAcademicSchema = z
       .enum(["Yes", "No", "I forgot my IELTS account details"])
       .or(z.literal("")),
     firstLanguage: z.string().optional(),
+    firstLanguageOther: z.string().optional(),
     yearsStudyingEnglish: z.string().optional(),
     educationLevel: z.string().optional(),
     occupationLevel: z.string().optional(),
+    occupationLevelOther: z.string().optional(),
     occupationSector: z.string().optional(),
+    occupationSectorOther: z.string().optional(),
     reasonForTakingTest: z.string().optional(),
+    reasonForTakingTestOther: z.string().optional(),
     destinationCountry: z.string().optional(),
 
     // Step 4: Add-ons (Courses & Workshops)
@@ -73,10 +77,11 @@ export const IeltsAcademicSchema = z
     termsAgreed: z.boolean().optional(),
     examDate: z.any().refine((val) => !!val, "Please select an exam date"),
     examTimeSlot: z
-      .enum(["9:00 AM", "11:00 AM"], {
+      .enum(["9:00 AM", "1:00 PM"], {
         message: "Please select a time slot",
       })
       .or(z.literal("")),
+    speakingSlot: z.string().optional(),
   })
   .refine((data) => data.email === data.confirmEmail, {
     message: "Emails do not match",
@@ -106,6 +111,22 @@ export const IeltsAcademicSchema = z
         code: z.ZodIssueCode.custom,
         message: "Please select a marketing preference",
         path: ["marketingPreference"],
+      });
+    }
+
+    if (data.examTimeSlot && !data.speakingSlot) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Please select a speaking slot",
+        path: ["speakingSlot"],
+      });
+    }
+
+    if (!data.noSurname && (!data.surnames || !data.surnames.trim())) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Surname / family name is required",
+        path: ["surnames"],
       });
     }
   });

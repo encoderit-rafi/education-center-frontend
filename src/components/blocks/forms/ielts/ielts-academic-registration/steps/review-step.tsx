@@ -216,9 +216,17 @@ export function ReviewStep({
                 <span className="text-sm font-semibold text-black">
                   {data.examTimeSlot === "9:00 AM"
                     ? "Morning Session (09:00 AM)"
-                    : data.examTimeSlot === "11:00 AM"
-                      ? "Morning Session (11:00 AM)"
+                    : data.examTimeSlot === "1:00 PM"
+                      ? "Afternoon Session (01:00 PM)"
                       : "Morning Session"}
+                </span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] text-slate-400 font-bold uppercase">
+                  Speaking Slot
+                </span>
+                <span className="text-sm font-semibold text-black">
+                  {data.speakingSlot || "Not selected"}
                 </span>
               </div>
               <div className="flex flex-col">
@@ -276,7 +284,39 @@ export function ReviewStep({
                   First Language
                 </span>
                 <span className="text-sm font-semibold text-black">
-                  {data.firstLanguage || "N/A"}
+                  {data.firstLanguage === "Other"
+                    ? data.firstLanguageOther || "Other (not specified)"
+                    : data.firstLanguage || "N/A"}
+                </span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] text-slate-400 font-bold uppercase">
+                  Occupation Level
+                </span>
+                <span className="text-sm font-semibold text-black">
+                  {data.occupationLevel === "Other"
+                    ? data.occupationLevelOther || "Other (not specified)"
+                    : data.occupationLevel || "N/A"}
+                </span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] text-slate-400 font-bold uppercase">
+                  Occupation Sector
+                </span>
+                <span className="text-sm font-semibold text-black">
+                  {data.occupationSector === "Other"
+                    ? data.occupationSectorOther || "Other (not specified)"
+                    : data.occupationSector || "N/A"}
+                </span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] text-slate-400 font-bold uppercase">
+                  Reason for Test
+                </span>
+                <span className="text-sm font-semibold text-black">
+                  {data.reasonForTakingTest === "other"
+                    ? data.reasonForTakingTestOther || "Other (not specified)"
+                    : data.reasonForTakingTest || "N/A"}
                 </span>
               </div>
               <div className="flex flex-col">
