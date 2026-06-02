@@ -1,255 +1,91 @@
 import Image from "next/image";
 import Link from "next/link";
-import {
-  Handshake,
-  ShieldCheck,
-  Cpu,
-  Building2,
-  TrendingUp,
-  Mail,
-  Phone,
-  ChevronRight,
-  Calendar,
-  Layers,
-  type LucideIcon,
-} from "lucide-react";
-import { Button, buttonVariants } from "@/components/ui/button";
-
-interface CollaborationPillar {
-  icon: LucideIcon;
-  title: string;
-  description: string;
-  badge: string;
-}
-
-const collaborationPillars: CollaborationPillar[] = [
-  {
-    icon: ShieldCheck,
-    title: "Turnkey & Secure",
-    description:
-      "An instantly accessible, highly secure environment that fully satisfies the stringent compliance policies of international exam boards.",
-    badge: "Accredited Compliance",
-  },
-  {
-    icon: Cpu,
-    title: "Resource Optimization",
-    description:
-      "Maximizing seating capacity and technical infrastructure parameters to streamline operational performance and exam logistics.",
-    badge: "Technical Infrastructure",
-  },
-  {
-    icon: TrendingUp,
-    title: "Shared Success",
-    description:
-      "A mutually beneficial alignment enabling predictable growth scales and a premium professional testing setting for all examinees.",
-    badge: "Predictable Scalability",
-  },
-];
+import { Handshake, Mail, Phone } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export default function VendorPartnershipsPage() {
   return (
-    <div className="min-h-screen bg-slate-50/50 font-sans antialiased selection:bg-maroon-100 selection:text-maroon-900">
-      
-      {/* Sleek & Compact Hero Section */}
-      <section className="relative pt-12 pb-14 md:pt-16 md:pb-16 overflow-hidden bg-white border-b border-slate-100">
-        {/* Subtle background decoration */}
-        <div className="absolute top-0 right-0 w-1/3 h-full opacity-5 pointer-events-none">
-          <svg className="w-full h-full fill-slate-900" viewBox="0 0 100 100" preserveAspectRatio="none">
-            <path d="M50,0 L100,0 L100,100 L0,100 Z" />
-          </svg>
-        </div>
-        <div className="absolute top-1/4 left-10 w-72 h-72 bg-maroon-50 rounded-full blur-3xl opacity-20 pointer-events-none"></div>
-
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            
-            {/* Left Content Column */}
-            <div className="lg:col-span-6 flex flex-col justify-center">
-              <div className="inline-flex items-center gap-1.5 py-1 px-2.5 rounded-full text-[11px] font-bold bg-maroon-50 text-maroon-800 border border-maroon-100 mb-4 w-fit">
-                <Handshake className="w-3.5 h-3.5" />
-                <span>MUTUAL COLLABORATION</span>
-              </div>
-              
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-headline font-black text-slate-900 leading-tight mb-5 tracking-tight">
-                Vendor <span className="text-primary italic">Partnerships</span>
-              </h1>
-              
-              <p className="text-sm sm:text-base text-slate-700 leading-relaxed font-sans mb-6 max-w-2xl font-light">
-                At TEPTH, we are actively seeking to expand our network of delivery partners and warmly encourage vendors with active exam provider agreements to utilize our advanced testing facilities. We believe in building sustainable, win-win collaborations that drive mutual value.
-              </p>
-              
-              <div className="flex flex-wrap gap-3 sm:gap-4">
-                <Link href="/contact-us"
-                className={buttonVariants({
-                  size: "lg",
-                  className: "cursor-pointer",
-                })}
-                >
-                 
-                    Partner With Us
-
-                </Link>
-                <Link href="/our-venues/360-degree-virtual-tour"
-                className={buttonVariants({
-                  variant: "outline",
-                  size: "lg",
-                  className: "cursor-pointer",
-                })}
-                >
-               
-                    Tour Our Venues
-
-                </Link>
-              </div>
-            </div>
-
-            {/* Right Column - Showing FULL uncropped image */}
-            <div className="lg:col-span-6 flex justify-center">
-              <div className="w-full max-w-[580px] rounded-2xl overflow-hidden shadow-lg border border-slate-100 bg-slate-50 p-1.5">
-                <Image
-                  className="w-full h-auto rounded-xl object-contain block"
-                  alt="Professional vendor partnership exam delivery center at TEPTH"
-                  src="/images/exam-vendors.jpg"
-                  width={600}
-                  height={450}
-                  priority
-                />
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      {/* Symbiotic Architecture Section - Simple List in One Column */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
-        <div className="mb-10 text-center max-w-3xl mx-auto">
-          <span className="text-primary text-[11px] font-bold uppercase tracking-[0.25em] mb-2 inline-block">
-            THE COLLABORATION ARCHITECTURE
-          </span>
-          <h2 className="text-2xl md:text-3xl font-headline font-black text-slate-900 tracking-tight animate-fade-in">
-            A Sustainable & Mutually Scalable Model
-          </h2>
-          <div className="w-12 h-0.5 bg-primary rounded-full mx-auto mt-3"></div>
-        </div>
-
-        {/* Large Centered Block displaying the full second paragraph exactly */}
-        <div className="bg-white p-6 md:p-8 rounded-2xl border border-slate-100 shadow-xs hover:shadow-md hover:border-maroon-100/50 hover:bg-slate-50/20 transition-all duration-300 mb-8 max-w-4xl mx-auto group">
-          <div className="flex gap-6 items-start flex-col sm:flex-row">
-            <div className="flex-shrink-0 w-12 h-12 bg-maroon-50 rounded-xl flex items-center justify-center text-maroon-700 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300">
-              <Layers className="w-6 h-6" />
-            </div>
-            <div>
-              <p className="text-slate-700 leading-relaxed font-sans text-sm md:text-base font-light">
-                By channeling your exam volumes through our state-of-the-art center, you gain an instantly accessible, highly secure, and turnkey testing environment that satisfies the stringent standards of your exam providers—without the burden of facility overhead. In turn, our center optimizes its seating capacity and technical resources. This symbiotic relationship ensures that your candidates experience a seamless, professional testing environment, while both of our organizations benefit from predictable operational scalability and shared success.
-              </p>
+    <div className="min-h-screen bg-white font-sans antialiased">
+      {/* Hero — image + intro text side by side */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Left — image */}
+          <div className="order-2 lg:order-1">
+            <div className="rounded-2xl overflow-hidden shadow-xl border border-slate-100 bg-slate-50 p-1.5">
+              <Image
+                className="w-full h-auto rounded-xl object-contain block"
+                alt="Professional vendor partnership exam delivery center at TEPTH"
+                src="/images/exam-vendors.jpg"
+                width={600}
+                height={450}
+                priority
+              />
             </div>
           </div>
-        </div>
 
-        {/* Breakdown List in One Column */}
-        <div className="space-y-6">
-          {collaborationPillars.map((pillar) => (
-            <div
-              key={pillar.title}
-              className="bg-white p-6 md:p-8 rounded-2xl border border-slate-100 shadow-xs hover:shadow-md hover:border-maroon-100/50 hover:bg-slate-50/20 transition-all duration-300 group flex flex-col md:flex-row gap-6 items-start"
-            >
-              <div className="flex-shrink-0 w-12 h-12 bg-maroon-50 rounded-xl flex items-center justify-center text-maroon-700 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300">
-                <pillar.icon className="w-6 h-6" />
-              </div>
-              <div className="flex-grow">
-                <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-primary transition-colors duration-300">
-                  {pillar.title}
-                </h3>
-                <p className="text-slate-600 leading-relaxed font-sans text-sm font-light">
-                  {pillar.description}
-                </p>
-                <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-slate-100/70">
-                  <span className="inline-flex items-center px-3 py-1 bg-slate-50 border border-slate-100 text-slate-600 rounded-full text-[11px] font-medium tracking-wide">
-                    {pillar.badge}
-                  </span>
-                </div>
-              </div>
+          {/* Right — content */}
+          <div className="order-1 lg:order-2 flex flex-col justify-center">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-1.5 py-1 px-2.5 rounded-full text-[11px] font-bold bg-maroon-50 text-maroon-800 border border-maroon-100 mb-5 w-fit">
+              <Handshake className="w-3.5 h-3.5" />
+              <span>MUTUAL COLLABORATION</span>
             </div>
-          ))}
-        </div>
-      </section>
 
-      {/* Modern Compact Contact CTA Section */}
-      <section className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="relative overflow-hidden rounded-2xl bg-linear-to-br from-maroon-800 via-maroon-900 to-maroon-950 text-white shadow-xl p-6 md:p-10">
-          {/* Geometric pattern accents */}
-          <div className="absolute right-0 top-0 w-1/3 h-full opacity-10 pointer-events-none">
-            <svg className="w-full h-full fill-white" viewBox="0 0 100 100" preserveAspectRatio="none">
-              <path d="M0,0 L100,0 L100,100 Z" />
-            </svg>
-          </div>
-          <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-white/5 rounded-full blur-3xl pointer-events-none"></div>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-headline font-black text-slate-900 leading-tight mb-6 tracking-tight">
+              Vendor{" "}
+              <span className="text-primary italic">Partnerships</span>
+            </h1>
 
-          <div className="relative z-10 grid lg:grid-cols-12 gap-8 items-center">
-            
-            {/* Contact Copy */}
-            <div className="lg:col-span-7">
-              <span className="text-maroon-200 text-[10px] font-bold uppercase tracking-widest mb-2 inline-block">
-                PARTNERSHIP INQUIRIES
-              </span>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline font-black mb-4 leading-tight">
-                Establish Your Strategic <br />
-                <span className="text-maroon-200 italic">Delivery Partnership</span>
-              </h2>
-              
-              <p className="text-xs sm:text-sm text-maroon-100 leading-relaxed font-light mb-6 max-w-2xl">
-                To partner with us, contact us at +97165531250 or by email at info@tepth.org
+            <div className="space-y-4 text-slate-700 text-sm sm:text-base leading-relaxed font-light">
+              <p>
+                At TEPTH, we are actively seeking to expand our network of
+                delivery partners and warmly encourage vendors with active exam
+                provider agreements to utilize our advanced testing facilities.
+                We believe in building sustainable, win-win collaborations that
+                drive mutual value.
               </p>
-              
+              <p>
+                By channeling your exam volumes through our state-of-the-art
+                center, you gain an instantly accessible, highly secure, and
+                turnkey testing environment that satisfies the stringent
+                standards of your exam providers—without the burden of facility
+                overhead. In turn, our center optimizes its seating capacity and
+                technical resources.
+              </p>
+              <p>
+                This symbiotic relationship ensures that your candidates
+                experience a seamless, professional testing environment, while
+                both of our organizations benefit from predictable operational
+                scalability and shared success.
+              </p>
+            </div>
+
+            {/* Contact CTA */}
+            <div className="mt-8 pt-8 border-t border-slate-100">
+              <p className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4">
+                Get in touch to partner with us
+              </p>
               <div className="flex flex-col sm:flex-row gap-3">
                 <Link href="tel:+97165531250">
-                  <Button className="w-full sm:w-auto bg-white text-maroon-900 hover:bg-slate-50 hover:text-maroon-950 px-5 py-3 rounded-lg font-bold text-sm transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-md shadow-black/10 h-10">
-                    <Phone className="w-4.5 h-4.5 text-primary" />
-                    <span>Call +971 6 553 1250</span>
+                  <Button className="bg-primary text-white hover:bg-primary/90 px-5 py-3 rounded-lg font-bold text-sm flex items-center gap-2 cursor-pointer h-10 shadow-md shadow-primary/10 transition-all duration-300">
+                    <Phone className="w-4 h-4" />
+                    +971 6 553 1250
                   </Button>
                 </Link>
                 <Link href="mailto:info@tepth.org">
-                  <Button variant="outline" className="w-full sm:w-auto border-white/20 hover:border-white/40 hover:bg-white/10 px-5 py-3 rounded-lg font-bold text-sm transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer h-10 hover:text-white">
-                    <Mail className="w-4.5 h-4.5" />
-                    <span>info@tepth.org</span>
+                  <Button
+                    variant="outline"
+                    className="border-slate-200 text-slate-700 hover:bg-slate-50 px-5 py-3 rounded-lg font-bold text-sm flex items-center gap-2 cursor-pointer h-10 transition-all duration-300"
+                  >
+                    <Mail className="w-4 h-4" />
+                    info@tepth.org
                   </Button>
                 </Link>
               </div>
             </div>
-
-            {/* Quick Interaction Panel */}
-            <div className="lg:col-span-5 bg-white/10 backdrop-blur-md rounded-xl p-5 border border-white/10">
-              <h3 className="font-bold text-base text-white mb-2.5">Proctoring & Center Setup</h3>
-              <p className="text-xs text-slate-200 mb-4 leading-relaxed">
-                Connect with our partnership coordinators to verify seat availability, review center security parameters, or transfer candidate slots.
-              </p>
-              <div className="space-y-3">
-                <Link href="/contact-us" className="flex items-center justify-between p-3 rounded-lg bg-white/5 border border-white/5 hover:border-white/20 hover:bg-white/10 transition-all duration-300 group">
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded bg-maroon-700 flex items-center justify-center text-white">
-                      <Calendar className="w-4 h-4" />
-                    </div>
-                    <span className="font-bold text-xs">Schedule a Briefing</span>
-                  </div>
-                  <ChevronRight className="w-4.5 h-4.5 text-slate-400 group-hover:translate-x-0.5 transition-transform" />
-                </Link>
-                <Link href="/our-venues" className="flex items-center justify-between p-3 rounded-lg bg-white/5 border border-white/5 hover:border-white/20 hover:bg-white/10 transition-all duration-300 group">
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded bg-maroon-700 flex items-center justify-center text-white">
-                      <Building2 className="w-4 h-4" />
-                    </div>
-                    <span className="font-bold text-xs">View Security Protocols</span>
-                  </div>
-                  <ChevronRight className="w-4.5 h-4.5 text-slate-400 group-hover:translate-x-0.5 transition-transform" />
-                </Link>
-              </div>
-            </div>
-
           </div>
         </div>
       </section>
-
     </div>
   );
 }
