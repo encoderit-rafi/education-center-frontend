@@ -38,6 +38,10 @@ export default function BookExamItems({ data }: { data: any }) {
             <Link
               key={item.id}
               href={item?.examFormRedirectUrl || `/book-exams/${item.id}`}
+              target={item?.examFormRedirectUrl ? "_blank" : undefined}
+              rel={
+                item?.examFormRedirectUrl ? "noopener noreferrer" : undefined
+              }
               className="group"
             >
               <BaseCard className="p-8 h-full flex flex-col transition-all duration-300 hover:shadow-2xl hover:border-primary/20">
@@ -57,4 +61,3 @@ export default function BookExamItems({ data }: { data: any }) {
     </div>
   );
 }
-
