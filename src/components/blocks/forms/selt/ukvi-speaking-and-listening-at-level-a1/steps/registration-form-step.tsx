@@ -24,6 +24,7 @@ import { PriceDisplay } from "@/components/ui/price-display";
 import { Badge } from "@/components/ui/badge";
 import BaseNoteBox from "@/components/base-note-box";
 import { TSeltA1Schema } from "../_type";
+import { AddonServicesSection } from "@/components/blocks/forms/shared/addon-services-section";
 
 interface RegistrationFormStepProps {
   form: UseFormReturn<TSeltA1Schema>;
@@ -452,193 +453,20 @@ export function RegistrationFormStep({
       </div>
 
       {/* Additional Info Section */}
-      <div className="pt-8 border-t border-slate-100 space-y-6">
-        <div className="flex items-center gap-2 text-slate-400 mb-4">
-          <Globe className="size-5" />
-          <h3 className="text-lg font-bold tracking-tight text-slate-800">
-            Additional Information
-          </h3>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <Field
-            className="md:col-span-2 lg:col-span-3"
-            data-invalid={!!errors.takenBefore}
-          >
-            <FieldLabel required>
-              Have you taken the SELT Test before?
-            </FieldLabel>
-            <FieldContent className="mt-2">
-              <RadioGroup
-                name="takenBefore"
-                onValueChange={(val) => setValue("takenBefore", val)}
-                value={formData.takenBefore}
-                className="grid grid-cols-2 gap-3"
-              >
-                {["Yes", "No"].map((opt) => (
-                  <Label
-                    key={opt}
-                    htmlFor={`taken-${opt}`}
-                    data-invalid={!!errors.takenBefore}
-                    className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive"
-                  >
-                    <RadioGroupItem value={opt} id={`taken-${opt}`} />
-                    {opt}
-                  </Label>
-                ))}
-              </RadioGroup>
-              <FieldError errors={[errors.takenBefore]} />
-            </FieldContent>
-          </Field>
-
-          {formData.takenBefore === "Yes" && (
-            <>
-              <Field
-                className="md:col-span-2 lg:col-span-3"
-                data-invalid={!!errors.lessThanTwoYears}
-              >
-                <FieldLabel required>Was it less than 2 years?</FieldLabel>
-                <FieldContent className="mt-2">
-                  <RadioGroup
-                    name="lessThanTwoYears"
-                    onValueChange={(val) => setValue("lessThanTwoYears", val)}
-                    value={formData.lessThanTwoYears}
-                    className="grid grid-cols-1 md:grid-cols-3 gap-3"
-                  >
-                    {["Yes", "No", "I do not know"].map((opt) => (
-                      <Label
-                        key={opt}
-                        htmlFor={`less-${opt}`}
-                        data-invalid={!!errors.lessThanTwoYears}
-                        className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive"
-                      >
-                        <RadioGroupItem value={opt} id={`less-${opt}`} />
-                        {opt}
-                      </Label>
-                    ))}
-                  </RadioGroup>
-                  <FieldError errors={[errors.lessThanTwoYears]} />
-                </FieldContent>
-              </Field>
-
-              <Field
-                className="md:col-span-2 lg:col-span-3"
-                data-invalid={!!errors.existingAccount}
-              >
-                <FieldLabel required>
-                  Do you have an existing account?
-                </FieldLabel>
-                <FieldContent className="mt-2">
-                  <RadioGroup
-                    name="existingAccount"
-                    onValueChange={(val) => setValue("existingAccount", val)}
-                    value={formData.existingAccount}
-                    className="grid grid-cols-1 md:grid-cols-3 gap-3"
-                  >
-                    {["Yes", "No", "I forgot my account details"].map((opt) => (
-                      <Label
-                        key={opt}
-                        htmlFor={`account-${opt}`}
-                        data-invalid={!!errors.existingAccount}
-                        className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive"
-                      >
-                        <RadioGroupItem value={opt} id={`account-${opt}`} />
-                        {opt}
-                      </Label>
-                    ))}
-                  </RadioGroup>
-                  <FieldError errors={[errors.existingAccount]} />
-                </FieldContent>
-              </Field>
-            </>
-          )}
-
-          <Field data-invalid={!!errors.firstLanguage}>
-            <FieldLabel>First language</FieldLabel>
-            <FieldContent>
-              <SearchableDropdown
-                name="firstLanguage"
-                options={languages}
-                placeholder="Select your first language"
-                value={formData.firstLanguage}
-                onChange={(val) => setValue("firstLanguage", val)}
-                aria-invalid={!!errors.firstLanguage}
-              />
-              <FieldError errors={[errors.firstLanguage]} />
-            </FieldContent>
-          </Field>
-
-          <Field data-invalid={!!errors.yearsStudyingEnglish}>
-            <FieldLabel>Years studying English</FieldLabel>
-            <FieldContent>
-              <Input
-                {...register("yearsStudyingEnglish")}
-                placeholder="e.g. 5"
-              />
-              <FieldError errors={[errors.yearsStudyingEnglish]} />
-            </FieldContent>
-          </Field>
-
-          <Field data-invalid={!!errors.educationLevel}>
-            <FieldLabel>Level of education</FieldLabel>
-            <FieldContent>
-              <Input
-                {...register("educationLevel")}
-                placeholder="e.g. Bachelor's"
-              />
-              <FieldError errors={[errors.educationLevel]} />
-            </FieldContent>
-          </Field>
-
-          <Field data-invalid={!!errors.occupationLevel}>
-            <FieldLabel>Occupation level</FieldLabel>
-            <FieldContent>
-              <Input
-                {...register("occupationLevel")}
-                placeholder="e.g. Professional"
-              />
-              <FieldError errors={[errors.occupationLevel]} />
-            </FieldContent>
-          </Field>
-
-          <Field data-invalid={!!errors.occupationSector}>
-            <FieldLabel>Occupation sector</FieldLabel>
-            <FieldContent>
-              <Input
-                {...register("occupationSector")}
-                placeholder="e.g. Education"
-              />
-              <FieldError errors={[errors.occupationSector]} />
-            </FieldContent>
-          </Field>
-
-          <Field data-invalid={!!errors.reasonForTakingTest}>
-            <FieldLabel>Reason for taking test</FieldLabel>
-            <FieldContent>
-              <Input
-                {...register("reasonForTakingTest")}
-                placeholder="e.g. Immigration"
-              />
-              <FieldError errors={[errors.reasonForTakingTest]} />
-            </FieldContent>
-          </Field>
-
-          <Field data-invalid={!!errors.destinationCountry}>
-            <FieldLabel>Destination country</FieldLabel>
-            <FieldContent>
-              <CountryDropdown
-                name="destinationCountry"
-                placeholder="Search country..."
-                value={formData.destinationCountry}
-                onChange={(country) =>
-                  setValue("destinationCountry", country.name)
-                }
-              />
-              <FieldError errors={[errors.destinationCountry]} />
-            </FieldContent>
-          </Field>
-        </div>
-      </div>
+{/* Add-on Services Section */}
+      <AddonServicesSection
+        coursesData={coursesData}
+        workshopsData={workshopsData}
+        selectedCourse={formData.selectedCourse}
+        selectedWorkshop={formData.selectedWorkshop}
+        onCourseChange={(val) => setValue("selectedCourse", val)}
+        onWorkshopChange={(val) => setValue("selectedWorkshop", val)}
+        courseError={!!errors.selectedCourse}
+        workshopError={!!errors.selectedWorkshop}
+        description={
+          "Save up to 20% when you book your exam and register for the course with TEPTH and pay in-person or online on our website."
+        }
+      />
 
       {/* Add-on Services Section */}
       <div className="pt-8 border-t border-slate-100 space-y-6">

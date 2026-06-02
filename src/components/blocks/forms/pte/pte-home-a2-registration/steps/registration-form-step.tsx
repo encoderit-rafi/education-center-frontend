@@ -34,6 +34,7 @@ import {
 import { TPteHomeA2FormSchema } from "../_type";
 import { PriceDisplay } from "@/components/ui/price-display";
 import { Badge } from "@/components/ui/badge";
+import { AddonServicesSection } from "@/components/blocks/forms/shared/addon-services-section";
 
 interface RegistrationFormStepProps {
   form: UseFormReturn<TPteHomeA2FormSchema>;
@@ -597,76 +598,20 @@ export function RegistrationFormStep({
         </div>
       </div>
 
-      {/* Section 5: Add-on Services */}
-      <div className="pt-8 border-t border-slate-100 space-y-6">
-        <div className="flex items-center gap-2 text-slate-400 mb-4">
-          <BookOpen className="size-5" />
-          <h3 className="text-lg font-bold tracking-tight text-slate-800">
-            Add-on Services
-          </h3>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="space-y-2">
-            <Label className="text-sm font-medium text-slate-700">
-              Courses
-            </Label>
-            <SearchableDropdown
-              options={[
-                { label: "None", value: "" },
-                ...Object.values(coursesData).map((c: any) => ({
-                  label: c.name || c.label,
-                  description: (
-                    <PriceDisplay
-                      amount={c.price}
-                      minimumFractionDigits={0}
-                      maximumFractionDigits={0}
-                    />
-                  ),
-                  value: c.id,
-                })),
-              ]}
-              placeholder="None"
-              value={formData.selectedCourse}
-              onChange={(val) => setValue("selectedCourse", val)}
-            />
-          </div>
-
-          <div className="space-y-2">
-            <Label className="text-sm font-medium text-slate-700">
-              Workshops
-            </Label>
-            <SearchableDropdown
-              options={[
-                { label: "None", value: "" },
-                ...Object.values(workshopsData).map((w: any) => ({
-                  label: w.name,
-                  description: (
-                    <PriceDisplay
-                      amount={w.price}
-                      minimumFractionDigits={0}
-                      maximumFractionDigits={0}
-                    />
-                  ),
-                  value: w.id,
-                })),
-              ]}
-              placeholder="None"
-              value={formData.selectedWorkshop}
-              onChange={(val) => setValue("selectedWorkshop", val)}
-            />
-          </div>
-        </div>
-        {/* <BaseNoteBox
-          title="Enjoy These Free Benefits:"
-          notes={[
-            "Save up to 20% when you book your exam and register for the course with TEPTH and pay in-person or online on our website.",
-            "Free Prep. Material",
-            "Free Consultation",
-            "Free Mock Test",
-          ]}
-        /> */}
-      </div>
+{/* Add-on Services Section */}
+      <AddonServicesSection
+        coursesData={coursesData}
+        workshopsData={workshopsData}
+        selectedCourse={formData.selectedCourse}
+        selectedWorkshop={formData.selectedWorkshop}
+        onCourseChange={(val) => setValue("selectedCourse", val)}
+        onWorkshopChange={(val) => setValue("selectedWorkshop", val)}
+        courseError={!!errors.selectedCourse}
+        workshopError={!!errors.selectedWorkshop}
+        description={
+          "Save up to 20% when you book your exam and register for the course with TEPTH and pay in-person or online on our website."
+        }
+      />
       <div className="pt-8 border-t border-slate-100 space-y-6">
         <Field data-invalid={!!errors.marketingConsent}>
           <FieldLabel>Marketing preferences</FieldLabel>
