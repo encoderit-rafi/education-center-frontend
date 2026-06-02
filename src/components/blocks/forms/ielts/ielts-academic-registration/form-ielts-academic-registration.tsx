@@ -126,17 +126,22 @@ export default function FormIeltsAcademicRegistration() {
       lessThanTwoYears: "",
       existingAccount: "",
       firstLanguage: "",
+      firstLanguageOther: "",
       yearsStudyingEnglish: "",
       educationLevel: "",
       occupationLevel: "",
+      occupationLevelOther: "",
       occupationSector: "",
+      occupationSectorOther: "",
       reasonForTakingTest: "",
+      reasonForTakingTestOther: "",
       destinationCountry: "",
       marketingPreference: "",
       selectedCourse: "",
       selectedWorkshop: "",
       paymentMethod: "",
       examTimeSlot: "",
+      speakingSlot: "",
     },
   });
 
@@ -238,18 +243,27 @@ export default function FormIeltsAcademicRegistration() {
         taken_before: data.takenBefore,
         less_than_two_years: data.lessThanTwoYears,
         existing_account: data.existingAccount,
-        first_language: data.firstLanguage,
+        first_language: data.firstLanguage === "Other"
+          ? data.firstLanguageOther || "Other"
+          : data.firstLanguage,
         years_studying_english: data.yearsStudyingEnglish,
         education_level: data.educationLevel,
-        occupation_level: data.occupationLevel,
-        occupation_sector: data.occupationSector,
-        reason_for_taking_test: data.reasonForTakingTest,
+        occupation_level: data.occupationLevel === "Other"
+          ? data.occupationLevelOther || "Other"
+          : data.occupationLevel,
+        occupation_sector: data.occupationSector === "Other"
+          ? data.occupationSectorOther || "Other"
+          : data.occupationSector,
+        reason_for_taking_test: data.reasonForTakingTest === "other"
+          ? data.reasonForTakingTestOther || "other"
+          : data.reasonForTakingTest,
         destination_country: data.destinationCountry,
         marketing_preference: data.marketingPreference,
         selected_course: data.selectedCourse,
         selected_workshop: data.selectedWorkshop,
         payment_methods: data.paymentMethod,
         exam_time_slot: data.examTimeSlot,
+        speaking_slot: data.speakingSlot,
         total_amount: total,
       });
     }
@@ -280,14 +294,20 @@ export default function FormIeltsAcademicRegistration() {
             <DateStep
               value={formData.examDate}
               timeSlot={formData.examTimeSlot}
+              speakingSlot={formData.speakingSlot}
               onChange={(date) => form.setValue("examDate", date)}
-              onTimeSlotChange={(slot) =>
-                form.setValue("examTimeSlot", slot as any)
+              onTimeSlotChange={(slot) => {
+                form.setValue("examTimeSlot", slot as any);
+                form.setValue("speakingSlot", "");
+              }}
+              onSpeakingSlotChange={(slot) =>
+                form.setValue("speakingSlot", slot)
               }
               onNext={() => goToStep(2)}
               onBack={() => goToStep(0)}
               error={form.formState.errors.examDate}
               timeSlotError={form.formState.errors.examTimeSlot}
+              speakingSlotError={form.formState.errors.speakingSlot}
             />
           )}
 
@@ -387,9 +407,13 @@ export default function FormIeltsAcademicRegistration() {
                     value:
                       formData.examTimeSlot === "9:00 AM"
                         ? "Morning Session (09:00 AM)"
-                        : formData.examTimeSlot === "11:00 AM"
-                          ? "Morning Session (11:00 AM)"
+                        : formData.examTimeSlot === "1:00 PM"
+                          ? "Afternoon Session (01:00 PM)"
                           : "Morning Session",
+                  },
+                  {
+                    label: "Speaking Slot",
+                    value: formData.speakingSlot || "Not selected",
                   },
                   { label: "Address Line 1", value: formData.postalAddress1 },
                   ...(formData.postalAddress2
@@ -409,7 +433,27 @@ export default function FormIeltsAcademicRegistration() {
                   { label: "Postal Code", value: formData.postcode || "N/A" },
                   {
                     label: "First Language",
-                    value: formData.firstLanguage || "N/A",
+                    value: formData.firstLanguage === "Other"
+                      ? formData.firstLanguageOther || "Other (not specified)"
+                      : formData.firstLanguage || "N/A",
+                  },
+                  {
+                    label: "Occupation Level",
+                    value: formData.occupationLevel === "Other"
+                      ? formData.occupationLevelOther || "Other (not specified)"
+                      : formData.occupationLevel || "N/A",
+                  },
+                  {
+                    label: "Occupation Sector",
+                    value: formData.occupationSector === "Other"
+                      ? formData.occupationSectorOther || "Other (not specified)"
+                      : formData.occupationSector || "N/A",
+                  },
+                  {
+                    label: "Reason for Test",
+                    value: formData.reasonForTakingTest === "other"
+                      ? formData.reasonForTakingTestOther || "Other (not specified)"
+                      : formData.reasonForTakingTest || "N/A",
                   },
                   {
                     label: "Education Level",
