@@ -149,6 +149,9 @@ export function DateStep({
                                   "11:20 AM",
                                   "11:40 AM",
                                   "12:00 PM",
+                                  "12:20 PM",
+                                  "12:40 PM",
+
                                 ]
                               ).map((sSlot) => {
                                 const isSelected = speakingSlot === sSlot;
