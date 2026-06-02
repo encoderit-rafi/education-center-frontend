@@ -183,7 +183,7 @@ export function GlobalReviewStep({
               type="submit"
               className="w-full h-14 bg-primary hover:bg-primary/90 text-white font-bold text-lg rounded-xl shadow-lg shadow-primary/20 transition-all flex items-center justify-center gap-2 group mt-4"
             >
-              Purchase
+              I accept, Purchase
             </Button>
           </div>
 
