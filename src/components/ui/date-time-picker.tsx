@@ -520,30 +520,32 @@ export function DateTimePicker<TFieldValues extends FieldValues = FieldValues>(
         control={control}
         name={name as Path<TFieldValues>}
         render={({ field }) => (
-          <FormItem className="flex flex-col">
+          <FormItem>
             {label && <FormLabel className={labelClassName}>{label}</FormLabel>}
             <Popover>
               <PopoverTrigger
                 render={
-                  <Button
-                    variant="outline"
+                  <button
+                    type="button"
                     className={cn(
-                      "w-full justify-start text-left font-normal",
-                      !field.value && "text-muted-foreground",
+                      "flex w-full items-center justify-between gap-2 rounded-md border border-slate-200 bg-white px-3 py-2 text-base transition-[color,box-shadow,background-color] outline-none focus-visible:border-primary focus-visible:ring-3 focus-visible:ring-ring/30 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 h-11 text-left font-normal text-slate-800 md:text-sm",
+                      !field.value && "text-slate-400",
                       className
                     )}
                   >
-                    <CalendarIcon className="mr-2 h-4 w-4" />
-                    {field.value ? (
-                      mode === "date" ? (
-                        format(field.value, "PPP")
+                    <span className="truncate">
+                      {field.value ? (
+                        mode === "date" ? (
+                          format(field.value, "PPP")
+                        ) : (
+                          format(field.value, "PPP HH:mm:ss")
+                        )
                       ) : (
-                        format(field.value, "PPP HH:mm:ss")
-                      )
-                    ) : (
-                      <span>{placeholder || "Pick a date"}</span>
-                    )}
-                  </Button>
+                        placeholder || "Pick a date"
+                      )}
+                    </span>
+                    <CalendarIcon className="ml-auto size-4 text-slate-500 shrink-0" />
+                  </button>
                 }
               />
               <PopoverContent className="w-auto p-0" align="start">
@@ -568,17 +570,17 @@ export function DateTimePicker<TFieldValues extends FieldValues = FieldValues>(
       <Popover>
         <PopoverTrigger
           render={
-            <Button
-              variant="outline"
+            <button
+              type="button"
               disabled={disabled}
               className={cn(
-                "w-full h-11 pl-3 text-left font-normal bg-custom-background text-custom-header-text",
+                "flex w-full items-center justify-between gap-2 rounded-md border border-slate-200 bg-white px-3 py-2 text-base transition-[color,box-shadow,background-color] outline-none focus-visible:border-primary focus-visible:ring-3 focus-visible:ring-ring/30 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 h-11 text-left font-normal text-slate-800 md:text-sm",
                 className
               )}
             >
               <span className="truncate">{formatDisplay(value)}</span>
-              <CalendarIcon className="ml-auto h-4 w-4 text-custom-header-text shrink-0" />
-            </Button>
+              <CalendarIcon className="ml-auto h-4 w-4 text-slate-500 shrink-0" />
+            </button>
           }
         />
         <PopoverContent className="w-auto p-0" align="start">

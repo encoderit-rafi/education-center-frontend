@@ -285,7 +285,7 @@ export const PRIMARY_NAV: AppNavigationItem[] = [
     href: "/about-us",
     items: [
       { name: "Who We Are", href: "/about-us/who-we-are" },
-      { name: "Mission & Vision", href: "/about-us/vision-and-mission" },
+      { name: "Mission & Vision", href: "/about-us/mission-and-vision" },
       { name: "Why Choose Us", href: "/about-us/why-choose-us" },
       { name: "Accreditation", href: "/about-us/accreditation" },
       { name: "How to Find Us", href: "/about-us/how-to-find-us" },

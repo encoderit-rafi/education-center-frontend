@@ -1,4 +1,10 @@
 import {
+  BaseCard,
+  BaseCardDescription,
+  BaseCardIcon,
+  BaseCardTitle,
+} from "@/components/blocks/cards/base-card";
+import {
   Accordion,
   AccordionContent,
   AccordionItem,
@@ -83,8 +89,8 @@ export default function FAQPage() {
 
       {/* FAQ */}
       <section className="pb-20">
-        <div className="max-w-2xl mx-auto px-6">
-          <Accordion type="multiple" className="space-y-2 border-none">
+        <div className="max-w-2xl mx-auto px-6 space-y-6">
+          {/* <Accordion type="multiple" className="space-y-2 border-none">
             {FAQS.map((faq, index) => (
               <AccordionItem
                 key={index}
@@ -100,7 +106,21 @@ export default function FAQPage() {
                 </AccordionContent>
               </AccordionItem>
             ))}
-          </Accordion>
+          </Accordion> */}
+          {FAQS.map((faq, index) => (
+            <BaseCard
+              key={index}
+              className="flex flex-row items-start gap-6 p-6"
+            >
+              <BaseCardIcon className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center text-primary font-black shrink-0 group-hover:bg-primary group-hover:text-white group-hover:scale-100 transition-colors">
+                0{index + 1}
+              </BaseCardIcon>
+              <div className="space-y-2">
+                <BaseCardTitle>{faq.question}</BaseCardTitle>
+                <BaseCardDescription>{faq.answer}</BaseCardDescription>
+              </div>
+            </BaseCard>
+          ))}
         </div>
       </section>
     </div>
