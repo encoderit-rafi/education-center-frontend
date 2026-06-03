@@ -13,13 +13,14 @@ import { SearchableDropdown } from "@/components/ui/searchable-dropdown";
 import { CountryDropdown } from "@/components/ui/country-dropdown";
 import { DatePicker } from "@/components/blocks/date-picker";
 import Stepper from "@/components/stepper";
-import { cn } from "@/lib/utils";
+import BaseNoteBox from "@/components/base-note-box";
 import {
   Field,
   FieldContent,
   FieldDescription,
   FieldError,
-  FieldLabel} from "@/components/ui/field";
+  FieldLabel
+} from "@/components/ui/field";
 import { TIeltsGeneralSchema } from "../_type";
 import { AED } from "@/components/ui/aed";
 import { PriceDisplay } from "@/components/ui/price-display";
@@ -44,13 +45,13 @@ export function RegistrationFormStep({
   onBack,
   languages,
   coursesData,
-  workshopsData}: RegistrationFormStepProps) {
+  workshopsData }: RegistrationFormStepProps) {
   const {
     register,
     handleSubmit,
     setValue,
     watch,
-    formState: { errors }} = form;
+    formState: { errors } } = form;
 
   const formData = watch();
 
@@ -62,7 +63,7 @@ export function RegistrationFormStep({
       <div className="space-y-6">
         <Stepper step={2}>Personal Details</Stepper>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
           <Field data-invalid={!!errors.givenNames}>
             <FieldLabel required>First / given names</FieldLabel>
             <FieldContent>
@@ -78,18 +79,20 @@ export function RegistrationFormStep({
             </FieldContent>
           </Field>
 
-          <Field>
-            <FieldLabel>Middle Name</FieldLabel>
+          <Field data-invalid={!!errors.middleName}>
+            <FieldLabel required>Middle Name</FieldLabel>
             <FieldContent>
               <Input
                 placeholder="As per passport"
+                aria-invalid={!!errors.middleName}
                 {...register("middleName")}
               />
+              <FieldError errors={[errors.middleName]} />
             </FieldContent>
           </Field>
 
           <Field data-invalid={!!errors.surnames}>
-            <FieldLabel>Surname / family name</FieldLabel>
+            <FieldLabel required={!formData.noSurname}>Surname / family name</FieldLabel>
             <FieldContent>
               <Input
                 placeholder="As per passport"
@@ -151,6 +154,32 @@ export function RegistrationFormStep({
             </FieldContent>
           </Field>
 
+          <Field data-invalid={!!errors.birthCity}>
+            <FieldLabel required>City of birth</FieldLabel>
+            <FieldContent>
+              <Input
+                placeholder="Enter city of birth"
+                aria-invalid={!!errors.birthCity}
+                {...register("birthCity")}
+              />
+              <FieldError errors={[errors.birthCity]} />
+            </FieldContent>
+          </Field>
+
+          <Field data-invalid={!!errors.birthCountry}>
+            <FieldLabel required>Country of birth</FieldLabel>
+            <FieldContent>
+              <CountryDropdown
+                name="birthCountry"
+                placeholder="Search country..."
+                value={formData.birthCountry}
+                aria-invalid={!!errors.birthCountry}
+                onChange={(country) => setValue("birthCountry", country.name)}
+              />
+              <FieldError errors={[errors.birthCountry]} />
+            </FieldContent>
+          </Field>
+
           <Field data-invalid={!!errors.sex}>
             <FieldLabel required>Sex</FieldLabel>
             <FieldContent>
@@ -187,16 +216,18 @@ export function RegistrationFormStep({
                 aria-invalid={!!errors.mobileNumber}
               />
               <FieldError errors={[errors.mobileNumber]} />
-              <FieldDescription className="flex items-center gap-2 mt-2">
+              <FieldDescription className="flex items-start gap-2.5 mt-2">
                 <Checkbox
                   id="smsConsent"
                   checked={formData.smsConsent}
                   onCheckedChange={(val) =>
                     setValue("smsConsent", val as boolean)
                   }
+                  className="mt-0.5"
                 />
-                <Label htmlFor="smsConsent" className="text-xs font-light">
-                  I agree to receive notifications
+                <Label htmlFor="smsConsent" className="text-xs font-light leading-normal whitespace-normal text-wrap block">
+                  I agree to receive notifications or to be contacted about my test registration<br />
+                  to this telephone number via SMS, WhatsApp, etc
                 </Label>
               </FieldDescription>
             </FieldContent>
@@ -279,7 +310,7 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.postcode}>
-            <FieldLabel required>Postal Code (Zip Code)</FieldLabel>
+            <FieldLabel>Postal Code (Zip Code)</FieldLabel>
             <FieldContent>
               <Input
                 {...register("postcode")}
@@ -313,7 +344,7 @@ export function RegistrationFormStep({
                 name="idType"
                 onValueChange={(val) => setValue("idType", val)}
                 value={formData.idType}
-                className="grid grid-cols-2 gap-3"
+                className="grid grid-cols-1 sm:grid-cols-2 gap-3"
               >
                 {[
                   { id: "passport", label: "Passport" },
@@ -460,7 +491,7 @@ export function RegistrationFormStep({
           </h3>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
           <Field
             className="md:col-span-2 lg:col-span-3"
             data-invalid={!!errors.takenBefore}
@@ -564,8 +595,21 @@ export function RegistrationFormStep({
                 placeholder="-Select Language-"
                 value={formData.firstLanguage}
                 aria-invalid={!!errors.firstLanguage}
-                onChange={(val) => setValue("firstLanguage", val)}
+                onChange={(val) => {
+                  setValue("firstLanguage", val);
+                  if (val !== "Other") setValue("firstLanguageOther", "");
+                }}
               />
+              {formData.firstLanguage === "Other" && (
+                <div className="mt-2 animate-in fade-in slide-in-from-top-2 duration-300">
+                  <Input
+                    placeholder="Please specify your language"
+                    value={formData.firstLanguageOther ?? ""}
+                    onChange={(e) => setValue("firstLanguageOther", e.target.value)}
+                    className="border-primary/40 focus:border-primary"
+                  />
+                </div>
+              )}
               <FieldError errors={[errors.firstLanguage]} />
             </FieldContent>
           </Field>
@@ -578,7 +622,7 @@ export function RegistrationFormStep({
               <SearchableDropdown
                 name="yearsStudyingEnglish"
                 options={[
-                  { label: "1 (less than)", value: "1" },
+                  { label: "1 (less than)", value: "1 (less than)" },
                   { label: "2", value: "2" },
                   { label: "3", value: "3" },
                   { label: "4", value: "4" },
@@ -586,7 +630,7 @@ export function RegistrationFormStep({
                   { label: "6", value: "6" },
                   { label: "7", value: "7" },
                   { label: "8", value: "8" },
-                  { label: "9", value: "9" },
+                  { label: "9 (or more)", value: "9 (or more)" },
                 ]}
                 placeholder="-Select Duration-"
                 value={formData.yearsStudyingEnglish}
@@ -598,7 +642,7 @@ export function RegistrationFormStep({
           </Field>
 
           <Field
-            className="md:col-span-2"
+            className="md:col-span-2 lg:col-span-3"
             data-invalid={!!errors.educationLevel}
           >
             <FieldLabel required>
@@ -614,7 +658,8 @@ export function RegistrationFormStep({
                 {[
                   {
                     id: "secondary_up_to_16",
-                    label: "Secondary (up to 16 years)"},
+                    label: "Secondary (up to 16 years)"
+                  },
                   { id: "secondary_16_19", label: "Secondary (16-19 years)" },
                   { id: "degree", label: "Degree (or equivalent)" },
                   { id: "post_graduate", label: "Post-graduate" },
@@ -644,10 +689,12 @@ export function RegistrationFormStep({
                   { label: "Employer/Partner", value: "Employer/Partner" },
                   {
                     label: "Employee (Senior level)",
-                    value: "Employee (Senior level)"},
+                    value: "Employee (Senior level)"
+                  },
                   {
                     label: "Employee (Middle/Junior level)",
-                    value: "Employee (Middle/Junior level)"},
+                    value: "Employee (Middle/Junior level)"
+                  },
                   { label: "Homeworker", value: "Homeworker" },
                   { label: "Retired", value: "Retired" },
                   { label: "Student", value: "Student" },
@@ -656,8 +703,21 @@ export function RegistrationFormStep({
                 placeholder="-Select Level-"
                 value={formData.occupationLevel}
                 aria-invalid={!!errors.occupationLevel}
-                onChange={(val) => setValue("occupationLevel", val)}
+                onChange={(val) => {
+                  setValue("occupationLevel", val);
+                  if (val !== "Other") setValue("occupationLevelOther", "");
+                }}
               />
+              {formData.occupationLevel === "Other" && (
+                <div className="mt-2 animate-in fade-in slide-in-from-top-2 duration-300">
+                  <Input
+                    placeholder="Please specify your occupation level"
+                    value={formData.occupationLevelOther ?? ""}
+                    onChange={(e) => setValue("occupationLevelOther", e.target.value)}
+                    className="border-primary/40 focus:border-primary"
+                  />
+                </div>
+              )}
               <FieldError errors={[errors.occupationLevel]} />
             </FieldContent>
           </Field>
@@ -668,66 +728,98 @@ export function RegistrationFormStep({
               <SearchableDropdown
                 name="occupationSector"
                 options={[
-                  {
-                    label: "Administrative Services",
-                    value: "Administrative Services"},
+                  { label: "Administrative Services", value: "Administrative Services" },
+                  { label: "Agriculture, Fishing, Forestry, Mining", value: "Agriculture, Fishing, Forestry, Mining" },
+                  { label: "Arts and Entertainment", value: "Arts and Entertainment" },
+                  { label: "Banking and Finance", value: "Banking and Finance" },
+                  { label: "Catering and Leisure", value: "Catering and Leisure" },
+                  { label: "Construction Industries", value: "Construction Industries" },
+                  { label: "Craft and Design", value: "Craft and Design" },
                   { label: "Education", value: "Education" },
-                  {
-                    label: "Banking and Finance",
-                    value: "Banking and Finance"},
-                  {
-                    label: "Health and Social Services",
-                    value: "Health and Social Services"},
+                  { label: "Health and Social Services", value: "Health and Social Services" },
+                  { label: "Installation, Maintenance and Repair Services", value: "Installation, Maintenance and Repair Services" },
+                  { label: "Law and Legal Services", value: "Law and Legal Services" },
+                  { label: "Manufacturing and Assembly Services", value: "Manufacturing and Assembly Services" },
+                  { label: "Personal Services", value: "Personal Services" },
+                  { label: "Retail Trade", value: "Retail Trade" },
+                  { label: "Technical and Scientific", value: "Technical and Scientific" },
+                  { label: "Telecommunications and the Media", value: "Telecommunications and the Media" },
+                  { label: "Transport", value: "Transport" },
+                  { label: "Utilities (Gas, Water, Electricity etc)", value: "Utilities (Gas, Water, Electricity etc)" },
+                  { label: "Wholesale Trade", value: "Wholesale Trade" },
                   { label: "Other", value: "Other" },
                 ]}
                 placeholder="-Select Sector-"
                 value={formData.occupationSector}
                 aria-invalid={!!errors.occupationSector}
-                onChange={(val) => setValue("occupationSector", val)}
+                onChange={(val) => {
+                  setValue("occupationSector", val);
+                  if (val !== "Other") setValue("occupationSectorOther", "");
+                }}
               />
+              {formData.occupationSector === "Other" && (
+                <div className="mt-2 animate-in fade-in slide-in-from-top-2 duration-300">
+                  <Input
+                    placeholder="Please specify your occupation sector"
+                    value={formData.occupationSectorOther ?? ""}
+                    onChange={(e) => setValue("occupationSectorOther", e.target.value)}
+                    className="border-primary/40 focus:border-primary"
+                  />
+                </div>
+              )}
               <FieldError errors={[errors.occupationSector]} />
             </FieldContent>
           </Field>
 
-          <Field
-            data-invalid={!!errors.reasonForTakingTest}
-            className="md:col-span-2 lg:col-span-3"
-          >
+          <Field data-invalid={!!errors.reasonForTakingTest}>
             <FieldLabel required>Why are you taking the test?</FieldLabel>
-            <FieldContent className="mt-2">
-              <RadioGroup
+            <FieldContent>
+              <SearchableDropdown
                 name="reasonForTakingTest"
-                onValueChange={(val) => setValue("reasonForTakingTest", val)}
-                value={formData.reasonForTakingTest}
-                className="grid grid-cols-1 md:grid-cols-2 gap-3"
-              >
-                {[
+                options={[
                   {
-                    label: "Higher education extended course",
-                    value: "higher_edu_long"},
-                  { label: "Immigration", value: "immigration" },
-                  { label: "Employment", value: "employment" },
+                    label: "Higher education extended course (3 months or more)",
+                    value: "Higher education extended course (3 months or more)"
+                  },
+                  {
+                    label: "Higher education short course (3 months or less)",
+                    value: "Higher education short course (3 months or less)"
+                  },
+                  { label: "Other educational purposes", value: "Other educational purposes" },
+                  { label: "Registration as a doctor", value: "Registration as a doctor" },
+                  { label: "Immigration", value: "Immigration" },
+                  { label: "Employment", value: "Employment" },
+                  { label: "Professional registration (not medical)", value: "Professional registration (not medical)" },
+                  { label: "Personal reasons", value: "Personal reasons" },
+                  { label: "Registration as a nurse (including CGFNS)", value: "Registration as a nurse (including CGFNS)" },
+                  { label: "Registration as a dentist", value: "Registration as a dentist" },
+                  { label: "Missing/Invalid", value: "Missing/Invalid" },
                   { label: "Other", value: "other" },
-                ].map((opt) => (
-                  <Label
-                    key={opt.value}
-                    htmlFor={`reason-${opt.value}`}
-                    className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer"
-                  >
-                    <RadioGroupItem
-                      value={opt.value}
-                      id={`reason-${opt.value}`}
-                    />
-                    {opt.label}
-                  </Label>
-                ))}
-              </RadioGroup>
+                ]}
+                placeholder="-Select Reason-"
+                value={formData.reasonForTakingTest}
+                aria-invalid={!!errors.reasonForTakingTest}
+                onChange={(val) => {
+                  setValue("reasonForTakingTest", val);
+                  if (val !== "other") setValue("reasonForTakingTestOther", "");
+                }}
+              />
+              {formData.reasonForTakingTest === "other" && (
+                <div className="mt-2 animate-in fade-in slide-in-from-top-2 duration-300">
+                  <Input
+                    placeholder="Please specify your reason for taking the test"
+                    value={formData.reasonForTakingTestOther ?? ""}
+                    onChange={(e) => setValue("reasonForTakingTestOther", e.target.value)}
+                    className="border-primary/40 focus:border-primary"
+                  />
+                </div>
+              )}
               <FieldError errors={[errors.reasonForTakingTest]} />
             </FieldContent>
           </Field>
 
           <Field data-invalid={!!errors.destinationCountry}>
-            <FieldLabel required>Destination country?</FieldLabel>
+            <FieldLabel required>Which Country / Territory do you want to study / work/ live in?</FieldLabel>
             <FieldContent>
               <CountryDropdown
                 name="destinationCountry"
@@ -744,7 +836,7 @@ export function RegistrationFormStep({
         </div>
       </div>
 
-{/* Add-on Services Section */}
+      {/* Add-on Services Section */}
       <AddonServicesSection
         coursesData={coursesData}
         workshopsData={workshopsData}
@@ -766,8 +858,11 @@ export function RegistrationFormStep({
         error={errors.marketingPreference}
       />
 
-      <div className="pt-8 border-t border-slate-100 flex justify-between items-center">
-        <Button onClick={onBack}>Back</Button>
+      {/* Form Actions */}
+      <div className="mt-12 flex justify-between items-center pt-6 border-t border-slate-100">
+        <Button type="button" onClick={onBack}>
+          Back
+        </Button>
         <Button type="submit">Next</Button>
       </div>
     </form>

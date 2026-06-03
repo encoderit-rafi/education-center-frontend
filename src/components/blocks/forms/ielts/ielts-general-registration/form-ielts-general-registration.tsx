@@ -9,7 +9,7 @@ import { useMutation } from "@tanstack/react-query";
 import api from "@/axios";
 import { toast } from "sonner";
 import { languages } from "@/lib/languages-data";
-import { courses as coursesData, workshops as workshopsData } from "@/lib/data";
+import { ielts_general_courses as coursesData, workshops as workshopsData } from "@/lib/data";
 import { format } from "date-fns";
 import { User, ShieldCheck, Globe } from "lucide-react";
 import { GlobalReviewStep, ReviewSummaryGrid } from "@/components/blocks/forms/global-review-step";
@@ -29,49 +29,54 @@ export default function FormIELTSGeneralRegistration() {
     resolver: zodResolver(IeltsGeneralSchema),
     defaultValues: {
       testModule: "General Training",
-      bookingFor: "",
       givenNames: "",
       middleName: "",
+      birthCity: "",
+      birthCountry: "",
       surnames: "",
       noSurname: false,
       dateOfBirth: undefined,
-      sex: undefined,
+      sex: "",
       email: "",
       confirmEmail: "",
       mobileNumber: "",
       smsConsent: false,
-      residenceCountry: undefined,
+      residenceCountry: "United Arab Emirates",
       postalAddress1: "",
       postalAddress2: "",
       postalAddress3: "",
       poBox: "",
       city: "",
       postcode: "",
-      marketingPreference: undefined,
-      idType: undefined,
+      marketingPreference: "",
+      idType: "",
       idNumber: "",
       idExpiryDate: undefined,
       issuingAuthority: "",
       nationality: "",
       idDocument: undefined,
-      takenBefore: undefined,
-      lessThanTwoYears: undefined,
-      existingAccount: undefined,
+      takenBefore: "",
+      lessThanTwoYears: "",
+      existingAccount: "",
       firstLanguage: "",
+      firstLanguageOther: "",
       yearsStudyingEnglish: "",
       educationLevel: "",
       occupationLevel: "",
+      occupationLevelOther: "",
       occupationSector: "",
+      occupationSectorOther: "",
       reasonForTakingTest: "",
+      reasonForTakingTestOther: "",
       destinationCountry: "",
       selectedCourse: "",
       selectedWorkshop: "",
-      confirmationRecipient: "",
       vatNumber: "",
       paymentMethod: "online",
       termsAgreed: false,
       examDate: undefined,
       examTimeSlot: "",
+      speakingSlot: "",
     },
   });
 
@@ -82,7 +87,7 @@ export default function FormIELTSGeneralRegistration() {
   const selectedCourse = coursesData.find((c) => c.id === formData.selectedCourse);
   const selectedWorkshop = workshopsData.find((w) => w.id === formData.selectedWorkshop);
 
-  const coursePrice = selectedCourse ? selectedCourse.price * (1 - (selectedCourse.special_discount || 0) / 100) : 0;
+  const coursePrice = selectedCourse ? (selectedCourse as any).discounted_price ?? (selectedCourse as any).price : 0;
   const workshopPrice = selectedWorkshop?.price || 0;
 
   const subtotal = EXAM_FEE + SERVICE_FEE + coursePrice + workshopPrice;
@@ -92,7 +97,7 @@ export default function FormIELTSGeneralRegistration() {
     let fieldsToValidate: any[] = [];
 
     if (step === 1) {
-      fieldsToValidate = ["examDate", "examTimeSlot"];
+      fieldsToValidate = ["examDate", "examTimeSlot", "speakingSlot"];
     } else if (step === 2) {
       // Validate the whole form before moving to review
       const isValid = await trigger();
@@ -150,6 +155,8 @@ export default function FormIELTSGeneralRegistration() {
       test_module: data.testModule,
       given_names: data.givenNames,
       middle_name: data.middleName,
+      birth_city: data.birthCity,
+      birth_country: data.birthCountry,
       surnames: data.surnames,
       date_of_birth: data.dateOfBirth ? new Date(data.dateOfBirth as any).toISOString() : "",
       sex: data.sex,
@@ -169,18 +176,27 @@ export default function FormIELTSGeneralRegistration() {
       taken_before: data.takenBefore,
       less_than_two_years: data.lessThanTwoYears,
       existing_account: data.existingAccount,
-      first_language: data.firstLanguage,
+      first_language: data.firstLanguage === "Other"
+        ? data.firstLanguageOther || "Other"
+        : data.firstLanguage,
       years_studying_english: data.yearsStudyingEnglish,
       education_level: data.educationLevel,
-      occupation_level: data.occupationLevel,
-      occupation_sector: data.occupationSector,
-      reason_for_taking_test: data.reasonForTakingTest,
+      occupation_level: data.occupationLevel === "Other"
+        ? data.occupationLevelOther || "Other"
+        : data.occupationLevel,
+      occupation_sector: data.occupationSector === "Other"
+        ? data.occupationSectorOther || "Other"
+        : data.occupationSector,
+      reason_for_taking_test: data.reasonForTakingTest === "other"
+        ? data.reasonForTakingTestOther || "other"
+        : data.reasonForTakingTest,
       destination_country: data.destinationCountry,
       marketing_preference: data.marketingPreference,
       selected_course: data.selectedCourse,
       selected_workshop: data.selectedWorkshop,
       payment_methods: data.paymentMethod,
       exam_time_slot: data.examTimeSlot,
+      speaking_slot: data.speakingSlot,
       total_amount: total,
     });
   };
@@ -200,12 +216,18 @@ export default function FormIELTSGeneralRegistration() {
           <DateStep
             value={formData.examDate}
             timeSlot={formData.examTimeSlot as any}
+            speakingSlot={formData.speakingSlot}
             onChange={(date) => setValue("examDate", date)}
-            onTimeSlotChange={(slot) => setValue("examTimeSlot", slot)}
+            onTimeSlotChange={(slot) => {
+              setValue("examTimeSlot", slot);
+              setValue("speakingSlot", "");
+            }}
+            onSpeakingSlotChange={(slot) => setValue("speakingSlot", slot)}
             onNext={nextStep}
             onBack={prevStep}
             error={form.formState.errors.examDate}
             timeSlotError={form.formState.errors.examTimeSlot}
+            speakingSlotError={form.formState.errors.speakingSlot}
           />
         )}
 
@@ -237,13 +259,15 @@ export default function FormIELTSGeneralRegistration() {
             reviewStepNumber={3}
             paymentStepNumber={4}
           >
-                        <ReviewSummaryGrid
+            <ReviewSummaryGrid
               personalDetails={[
                 { label: "Given Names", value: formData.givenNames },
                 { label: "Middle Name", value: formData.middleName || "N/A" },
                 { label: "Surnames", value: formData.surnames || "N/A" },
                 { label: "Date of Birth", value: formData.dateOfBirth ? format(new Date(formData.dateOfBirth as any), "PPP") : "N/A" },
                 { label: "Gender", value: (formData.sex as string) || "N/A" },
+                { label: "City of Birth", value: formData.birthCity || "N/A" },
+                { label: "Country of Birth", value: formData.birthCountry || "N/A" },
                 { label: "Mobile Number", value: formData.mobileNumber || "N/A" },
                 { label: "Nationality", value: formData.nationality || "N/A" },
               ]}
@@ -257,10 +281,52 @@ export default function FormIELTSGeneralRegistration() {
               ]}
               testInformation={[
                 { label: "Exam Date", value: formData.examDate ? format(new Date(formData.examDate as any), "PPP") : "N/A", highlight: true },
-                { label: "Time Slot", value: formData.examTimeSlot === "9:00 AM" ? "Morning Session (09:00 AM)" : formData.examTimeSlot === "11:00 AM" ? "Morning Session (11:00 AM)" : "Morning Session" },
-                { label: "Address", value: [formData.postalAddress1, formData.postalAddress2, formData.city, formData.postcode, formData.residenceCountry].filter(Boolean).join(", ") },
-                { label: "First Language", value: formData.firstLanguage || "N/A" },
-                { label: "Education Level", value: formData.educationLevel || "N/A" },
+                { label: "Time Slot", value: formData.examTimeSlot === "9:00 AM" ? "Morning Session (09:00 AM)" : formData.examTimeSlot === "1:00 PM" ? "Afternoon Session (01:00 PM)" : "Morning Session" },
+                { label: "Speaking Slot", value: formData.speakingSlot || "Not selected" },
+                { label: "Address Line 1", value: formData.postalAddress1 },
+                ...(formData.postalAddress2
+                  ? [
+                      {
+                        label: "Address Line 2",
+                        value: formData.postalAddress2,
+                      },
+                    ]
+                  : []),
+                { label: "Emirate / City", value: formData.city },
+                {
+                  label: "Country of Residence",
+                  value: formData.residenceCountry,
+                },
+                { label: "P.O. Box", value: formData.poBox || "N/A" },
+                { label: "Postal Code", value: formData.postcode || "N/A" },
+                {
+                  label: "First Language",
+                  value: formData.firstLanguage === "Other"
+                    ? formData.firstLanguageOther || "Other (not specified)"
+                    : formData.firstLanguage || "N/A",
+                },
+                {
+                  label: "Occupation Level",
+                  value: formData.occupationLevel === "Other"
+                    ? formData.occupationLevelOther || "Other (not specified)"
+                    : formData.occupationLevel || "N/A",
+                },
+                {
+                  label: "Occupation Sector",
+                  value: formData.occupationSector === "Other"
+                    ? formData.occupationSectorOther || "Other (not specified)"
+                    : formData.occupationSector || "N/A",
+                },
+                {
+                  label: "Reason for Test",
+                  value: formData.reasonForTakingTest === "other"
+                    ? formData.reasonForTakingTestOther || "Other (not specified)"
+                    : formData.reasonForTakingTest || "N/A",
+                },
+                {
+                  label: "Education Level",
+                  value: formData.educationLevel || "N/A",
+                },
               ]}
             />
           </GlobalReviewStep>

@@ -67,6 +67,44 @@ export const courses = [
     special_discount: 10,
   },
 ];
+
+export const ielts_general_courses = [
+  {
+    id: "ielts_general_course_1",
+    name: "Group Course",
+    price: 1850,
+    discounted_price: 1665,
+    currency: "AED",
+  },
+  {
+    id: "ielts_general_course_2",
+    name: "Semi-Private Course",
+    price: 2850,
+    discounted_price: 2565,
+    currency: "AED",
+  },
+  {
+    id: "ielts_general_course_3",
+    name: "In-Person One-to-One Course",
+    price: 4850,
+    discounted_price: 3880,
+    currency: "AED",
+  },
+  {
+    id: "ielts_general_course_4",
+    name: "Online One-to-One Course",
+    price: 4850,
+    discounted_price: 3880,
+    currency: "AED",
+  },
+  {
+    id: "ielts_general_course_5",
+    name: "Hybrid One-to-One Course",
+    price: 5850,
+    discounted_price: 4387.50,
+    currency: "AED",
+  },
+];
 export const workshops = [
   {
     id: "workshop_1",

@@ -51,34 +51,59 @@ export function AddonServicesSection({
                 { label: "None", value: "" },
                 ...Object.values(coursesData || {}).map((c: any) => ({
                   label: c.name,
-                  description:
-                    c.special_discount ? (
-                      <div className="flex items-center justify-between gap-6">
-                        <span className="flex items-center gap-1">
-                          <PriceDisplay
-                            amount={c.price * (1 - c.special_discount / 100)}
-                            minimumFractionDigits={0}
-                            maximumFractionDigits={0}
-                          />
-                          <span>({c.special_discount}% OFF)</span>
+                  description: c.discounted_price != null ? (
+                    <span className="inline-flex items-center gap-2 flex-wrap">
+                      <span className="inline-flex items-center gap-1">
+                        <PriceDisplay
+                          amount={c.discounted_price}
+                          minimumFractionDigits={2}
+                          maximumFractionDigits={2}
+                          className="text-primary font-semibold"
+                        />
+                        <span className="text-primary font-semibold">
+                          ({Math.round((1 - c.discounted_price / c.price) * 100)}% OFF)
                         </span>
-                        <div className="flex items-center gap-2">
-                          {[
-                            "Free Prep. Material",
-                            "Free Consultation",
-                            "Free Mock Test",
-                          ].map((item, index) => (
-                            <Badge key={index}>{item}</Badge>
-                          ))}
-                        </div>
-                      </div>
-                    ) : (
-                      <PriceDisplay
-                        amount={c.price}
-                        minimumFractionDigits={0}
-                        maximumFractionDigits={0}
-                      />
-                    ),
+                        <PriceDisplay
+                          amount={c.price}
+                          minimumFractionDigits={2}
+                          maximumFractionDigits={2}
+                          className="line-through text-muted-foreground"
+                        />
+                      </span>
+                      {["Free Prep. Material", "Free Consultation", "Free Mock Test"].map((item, index) => (
+                        <Badge key={index}>{item}</Badge>
+                      ))}
+                    </span>
+                  ) : c.special_discount ? (
+                    <span className="inline-flex items-center gap-2 flex-wrap">
+                      <span className="inline-flex items-center gap-1">
+                        <PriceDisplay
+                          amount={c.price * (1 - c.special_discount / 100)}
+                          minimumFractionDigits={2}
+                          maximumFractionDigits={2}
+                          className="text-primary font-semibold"
+                        />
+                        <span className="text-primary font-semibold">
+                          ({c.special_discount}% OFF)
+                        </span>
+                        <PriceDisplay
+                          amount={c.price}
+                          minimumFractionDigits={2}
+                          maximumFractionDigits={2}
+                          className="line-through text-muted-foreground"
+                        />
+                      </span>
+                      {["Free Prep. Material", "Free Consultation", "Free Mock Test"].map((item, index) => (
+                        <Badge key={index}>{item}</Badge>
+                      ))}
+                    </span>
+                  ) : (
+                    <PriceDisplay
+                      amount={c.price}
+                      minimumFractionDigits={0}
+                      maximumFractionDigits={0}
+                    />
+                  ),
                   value: c.id,
                 })),
               ]}

@@ -41,13 +41,13 @@ export function ReviewStep({
   selectedWorkshopData,
 }: ReviewStepProps) {
   const {
-    watch,
+    register,
     setValue,
-    formState: { errors }
+    watch,
+    formState: { errors },
   } = form;
 
   const formData = watch();
-  const selectedPaymentMethod = formData.paymentMethod;
 
   return (
     <GlobalReviewStep
@@ -67,7 +67,6 @@ export function ReviewStep({
     >
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Personal Details Summary */}
-
           <div className="space-y-6">
             <div className="flex items-center gap-2 text-black">
               <User className="size-4" />
@@ -105,7 +104,7 @@ export function ReviewStep({
                   Date of Birth
                 </span>
                 <span className="text-sm font-semibold text-black">
-                  {data.dateOfBirth ? format(new Date(data.dateOfBirth), "PPP") : "N/A"}
+                  {data.dateOfBirth ? format(data.dateOfBirth, "PPP") : "N/A"}
                 </span>
               </div>
               <div className="flex flex-col">
@@ -114,6 +113,22 @@ export function ReviewStep({
                 </span>
                 <span className="text-sm font-semibold text-black capitalize">
                   {data.sex || "N/A"}
+                </span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] text-slate-400 font-bold uppercase">
+                  City of Birth
+                </span>
+                <span className="text-sm font-semibold text-black">
+                  {data.birthCity || "N/A"}
+                </span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] text-slate-400 font-bold uppercase">
+                  Country of Birth
+                </span>
+                <span className="text-sm font-semibold text-black">
+                  {data.birthCountry || "N/A"}
                 </span>
               </div>
               <div className="flex flex-col">
@@ -173,14 +188,14 @@ export function ReviewStep({
                   ID Expiry Date
                 </span>
                 <span className="text-sm font-semibold text-black">
-                  {data.idExpiryDate ? format(new Date(data.idExpiryDate), "PPP") : "N/A"}
+                  {data.idExpiryDate ? format(data.idExpiryDate, "PPP") : "N/A"}
                 </span>
               </div>
               <div className="flex flex-col">
                 <span className="text-[10px] text-slate-400 font-bold uppercase">
                   Identity Document
                 </span>
-                <span className="text-sm font-semibold text-black truncate max-w-[200px]">
+                <span className="text-sm font-semibold text-black">
                   {data.idDocument
                     ? (data.idDocument as File).name
                     : "No file attached"}
@@ -211,7 +226,7 @@ export function ReviewStep({
                   Exam Date
                 </span>
                 <span className="text-sm font-semibold text-primary">
-                  {data.examDate ? format(new Date(data.examDate), "PPP") : "N/A"}
+                  {data.examDate ? format(data.examDate, "PPP") : "N/A"}
                 </span>
               </div>
               <div className="flex flex-col">
@@ -221,23 +236,67 @@ export function ReviewStep({
                 <span className="text-sm font-semibold text-black">
                   {data.examTimeSlot === "9:00 AM"
                     ? "Morning Session (09:00 AM)"
-                    : data.examTimeSlot === "11:00 AM"
-                      ? "Morning Session (11:00 AM)"
+                    : data.examTimeSlot === "1:00 PM"
+                      ? "Afternoon Session (01:00 PM)"
                       : "Morning Session"}
+                </span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] text-slate-400 font-bold uppercase">
+                  Speaking Slot
+                </span>
+                <span className="text-sm font-semibold text-black">
+                  {data.speakingSlot || "Not selected"}
                 </span>
               </div>
               <div className="flex flex-col">
                 <span className="text-[10px] text-slate-400 font-bold uppercase">
                   Address Line 1
                 </span>
-                <span className="text-sm font-semibold text-black text-xs leading-relaxed">
+                <span className="text-sm font-semibold text-black">
                   {data.postalAddress1}
-                  {data.postalAddress2 && <>, {data.postalAddress2}</>}
-                  {data.poBox && <><br />P.O. Box: {data.poBox}</>}
-                  <br />
-                  {data.city}, {data.postcode}
-                  <br />
+                </span>
+              </div>
+              {data.postalAddress2 && (
+                <div className="flex flex-col">
+                  <span className="text-[10px] text-slate-400 font-bold uppercase">
+                    Address Line 2
+                  </span>
+                  <span className="text-sm font-semibold text-black">
+                    {data.postalAddress2}
+                  </span>
+                </div>
+              )}
+              <div className="flex flex-col">
+                <span className="text-[10px] text-slate-400 font-bold uppercase">
+                  Emirate / City
+                </span>
+                <span className="text-sm font-semibold text-black">
+                  {data.city}
+                </span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] text-slate-400 font-bold uppercase">
+                  Country of Residence
+                </span>
+                <span className="text-sm font-semibold text-black">
                   {data.residenceCountry}
+                </span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] text-slate-400 font-bold uppercase">
+                  P.O. Box
+                </span>
+                <span className="text-sm font-semibold text-black">
+                  {data.poBox || "N/A"}
+                </span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] text-slate-400 font-bold uppercase">
+                  Postal Code
+                </span>
+                <span className="text-sm font-semibold text-black">
+                  {data.postcode || "N/A"}
                 </span>
               </div>
               <div className="flex flex-col">
@@ -245,7 +304,39 @@ export function ReviewStep({
                   First Language
                 </span>
                 <span className="text-sm font-semibold text-black">
-                  {data.firstLanguage || "N/A"}
+                  {data.firstLanguage === "Other"
+                    ? data.firstLanguageOther || "Other (not specified)"
+                    : data.firstLanguage || "N/A"}
+                </span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] text-slate-400 font-bold uppercase">
+                  Occupation Level
+                </span>
+                <span className="text-sm font-semibold text-black">
+                  {data.occupationLevel === "Other"
+                    ? data.occupationLevelOther || "Other (not specified)"
+                    : data.occupationLevel || "N/A"}
+                </span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] text-slate-400 font-bold uppercase">
+                  Occupation Sector
+                </span>
+                <span className="text-sm font-semibold text-black">
+                  {data.occupationSector === "Other"
+                    ? data.occupationSectorOther || "Other (not specified)"
+                    : data.occupationSector || "N/A"}
+                </span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] text-slate-400 font-bold uppercase">
+                  Reason for Test
+                </span>
+                <span className="text-sm font-semibold text-black">
+                  {data.reasonForTakingTest === "other"
+                    ? data.reasonForTakingTestOther || "Other (not specified)"
+                    : data.reasonForTakingTest || "N/A"}
                 </span>
               </div>
               <div className="flex flex-col">
@@ -257,8 +348,8 @@ export function ReviewStep({
                 </span>
               </div>
             </div>
-        </div>
-    </div>
+          </div>
+      </div>
     </GlobalReviewStep>
   );
 }
