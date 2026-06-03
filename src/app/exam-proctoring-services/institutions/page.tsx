@@ -1,5 +1,211 @@
-"use client";
+// import {
+//   BaseCard,
+//   BaseCardDescription,
+//   BaseCardIcon,
+//   BaseCardTitle,
+// } from "@/components/blocks/cards/base-card";
+// import {
+//   UserRound,
+//   Eye,
+//   MonitorUp,
+//   Mic2,
+//   Flag,
+//   Building2,
+//   MapPin,
+//   BadgeCheck,
+//   CheckCircle2,
+// } from "lucide-react";
+// import Link from "next/link";
 
+// const AI_TECH = [
+//   {
+//     title: "Facial Recognition & Identification",
+//     desc: "Confirms the student's identity at the start and throughout the exam to prevent impersonation.",
+//     icon: <UserRound className="w-5 h-5" />,
+//   },
+//   {
+//     title: "Behavioral Analysis",
+//     desc: "Detects unusual movements, such as looking away from the screen, leaving the seat, or other people entering the room.",
+//     icon: <Eye className="w-5 h-5" />,
+//   },
+//   {
+//     title: "Screen & Browser Monitoring",
+//     desc: "Tracks tab-switching, prevents opening unauthorized websites, and can lock down the browser.",
+//     icon: <MonitorUp className="w-5 h-5" />,
+//   },
+//   {
+//     title: "Audio Analysis",
+//     desc: "Scans the environment for background noise, voices, or potential cheating sounds.",
+//     icon: <Mic2 className="w-5 h-5" />,
+//   },
+//   {
+//     title: "Real-time Flagging",
+//     desc: "Automatically records and highlights suspicious activities for review, allowing for immediate intervention or post-exam analysis.",
+//     icon: <Flag className="w-5 h-5" />,
+//   },
+// ];
+
+// const FACILITIES = [
+//   {
+//     title: "140 Workstations",
+//     desc: "Dual-monitor setups with ergonomic seating.",
+//   },
+//   {
+//     title: "Climate Controlled",
+//     desc: "Precision temperature for comfort and stability.",
+//   },
+//   {
+//     title: "Acoustic Excellence",
+//     desc: "Sound-dampening design to eliminate distractions.",
+//   },
+//   {
+//     title: "Full Accessibility",
+//     desc: "POD compliant including assistive technology.",
+//   },
+// ];
+
+// export default function InstitutionsPage() {
+//   return (
+//     <div className="flex flex-col min-h-screen bg-[#fafafa]">
+//       {/* 1. Minimal Header */}
+//       <header className="bg-white border-b border-gray-100 py-10">
+//         <div className="container px-6 mx-auto lg:px-24">
+//           <div className="max-w-4xl">
+//             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 tracking-wide leading-none mb-4">
+//               Advanced <span className="text-[#A11D1D]">Proctoring</span>
+//             </h1>
+//             <p className="text-gray-500 text-base md:text-lg font-medium max-w-2xl leading-relaxed">
+//               Secure your academic integrity with TEPTH&apos;s state-of-the-art
+//               surveillance and proctoring ecosystem. Designed for the most
+//               rigorous certification examinations.
+//             </p>
+//           </div>
+//         </div>
+//       </header>
+
+//       <main className="container px-6 mx-auto lg:px-24 py-10 space-y-10">
+//         {/* 2. AI Technology Grid */}
+//         <section>
+//           <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 gap-6">
+//             <div>
+//               <h2 className="text-2xl font-bold text-gray-900 tracking-wide mb-1">
+//                 AI Proctoring
+//               </h2>
+//               <p className="text-sm text-gray-400 font-bold tracking-widest">
+//                 Key Features and Functions
+//               </p>
+//             </div>
+//             <div className="h-px flex-1 bg-gray-100 mx-8 hidden md:block"></div>
+//           </div>
+
+//           <div className="max-w-4xl mb-6">
+//             <p className="text-gray-500 text-sm md:text-base leading-relaxed">
+//               AI proctoring uses artificial intelligence—machine learning,
+//               facial recognition, and behavioral analytics—to monitor online
+//               exams via webcam, microphone, and screen activity. It flags
+//               suspicious behaviors like moving off-screen, multiple faces, or
+//               tab-switching in real-time, providing a cost-effective, scalable
+//               alternative to human invigilators. One of the key benefits is
+//               scalability: AI can easily oversee hundreds or thousands of exams
+//               simultaneously, making it an efficient solution for large
+//               institutions.
+//             </p>
+//           </div>
+
+//           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+//             {AI_TECH.map((tech, i) => (
+//               <BaseCard key={i}>
+//                 <BaseCardIcon className="size-10">{tech.icon}</BaseCardIcon>
+//                 <BaseCardTitle className="mt-2 mb-3">
+//                   {tech.title}
+//                 </BaseCardTitle>
+//                 <BaseCardDescription className="text-gray-500 text-sm md:text-base leading-relaxed">
+//                   {tech.desc}
+//                 </BaseCardDescription>
+//               </BaseCard>
+//             ))}
+//           </div>
+
+//           <div className="mt-6 p-6 bg-white border border-gray-100 rounded-xl shadow-sm">
+//             <p className="text-sm text-gray-500 font-medium leading-relaxed">
+//               To enquire about our services, please contact us by phone at{" "}
+//               <span className="text-[#A11D1D] font-bold">+971 4 333 3616</span>{" "}
+//               or by email at{" "}
+//               <span className="text-[#A11D1D] font-bold underline">
+//                 info@tepth.net
+//               </span>{" "}
+//               for more information. Our team is available to discuss your needs,
+//               provide details, pricing and assist with any questions.
+//             </p>
+//           </div>
+//         </section>
+
+//         {/* 3. Facilities & Partnership Split */}
+//         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+//           {/* LEFT: Facility Standards (7 cols) */}
+//           <div className="lg:col-span-7 bg-[#111827] p-6 md:p-8 rounded-xl text-white shadow-xl relative overflow-hidden">
+//             <div className="absolute top-0 right-0 w-64 h-64 bg-[#A11D1D]/10 blur-[100px] rounded-full"></div>
+//             <h2 className="text-xl font-bold tracking-wide mb-6 flex items-center gap-3 relative z-10 text-white">
+//               <div className="w-2 h-6 bg-[#A11D1D]"></div>
+//               Facility Standards
+//             </h2>
+
+//             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
+//               {FACILITIES.map((fac, i) => (
+//                 <div key={i} className="flex gap-5 group">
+//                   <div className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center font-bold text-[#A11D1D] group-hover:bg-[#A11D1D] group-hover:text-white transition-all shrink-0">
+//                     {i + 1}
+//                   </div>
+//                   <div>
+//                     <h3 className="text-sm font-bold text-white tracking-wider mb-1">
+//                       {fac.title}
+//                     </h3>
+//                     <p className="text-xs text-white/50 leading-relaxed font-medium">
+//                       {fac.desc}
+//                     </p>
+//                   </div>
+//                 </div>
+//               ))}
+//             </div>
+//           </div>
+
+//           {/* RIGHT: Partnership CTA (5 cols) */}
+//           <div className="lg:col-span-5 bg-[#A11D1D] p-6 md:p-8 rounded-xl text-white shadow-xl flex flex-col justify-between h-full">
+//             <div>
+//               <h2 className="text-xl font-bold tracking-wide mb-4">
+//                 Partner With TEPTH
+//               </h2>
+//               <p className="text-sm font-medium text-white/80 leading-relaxed mb-6">
+//                 Join a network of leading global institutions who trust our
+//                 academic atelier for their most critical examination needs.
+//               </p>
+//               <ul className="space-y-3 mb-6">
+//                 {[
+//                   "Secure API Integrations",
+//                   "Custom Reporting Panels",
+//                   "Regional Market Access",
+//                 ].map((item, i) => (
+//                   <li
+//                     key={i}
+//                     className="flex items-center gap-3 text-xs font-bold tracking-widest"
+//                   >
+//                     <CheckCircle2 className="w-4 h-4 text-white" /> {item}
+//                   </li>
+//                 ))}
+//               </ul>
+//             </div>
+//             <Link
+//               href="/contact-us"
+//               className="w-full bg-white text-[#A11D1D] py-3 rounded-lg font-bold text-sm tracking-widest text-center hover:bg-gray-100 transition-all active:scale-95"
+//             >
+//               Request Partnership
+//             </Link>
+//           </div>
+//         </div>
+//       </main>
+//     </div>
+//   );
+// }
 import {
   BaseCard,
   BaseCardDescription,
@@ -12,9 +218,6 @@ import {
   MonitorUp,
   Mic2,
   Flag,
-  Building2,
-  MapPin,
-  BadgeCheck,
   CheckCircle2,
 } from "lucide-react";
 import Link from "next/link";
@@ -23,27 +226,27 @@ const AI_TECH = [
   {
     title: "Facial Recognition & Identification",
     desc: "Confirms the student's identity at the start and throughout the exam to prevent impersonation.",
-    icon: <UserRound className="w-5 h-5" />,
+    icon: <UserRound className="size-5" />,
   },
   {
     title: "Behavioral Analysis",
-    desc: "Detects unusual movements, such as looking away from the screen, leaving the seat, or other people entering the room.",
-    icon: <Eye className="w-5 h-5" />,
+    desc: "Detects unusual movements such as looking away from the screen, leaving the seat, or additional people entering the room.",
+    icon: <Eye className="size-5" />,
   },
   {
     title: "Screen & Browser Monitoring",
-    desc: "Tracks tab-switching, prevents opening unauthorized websites, and can lock down the browser.",
-    icon: <MonitorUp className="w-5 h-5" />,
+    desc: "Tracks tab switching, prevents unauthorized websites, and supports secure browser lockdown environments.",
+    icon: <MonitorUp className="size-5" />,
   },
   {
     title: "Audio Analysis",
-    desc: "Scans the environment for background noise, voices, or potential cheating sounds.",
-    icon: <Mic2 className="w-5 h-5" />,
+    desc: "Monitors ambient sounds, conversations, and suspicious audio activity during examinations.",
+    icon: <Mic2 className="size-5" />,
   },
   {
-    title: "Real-time Flagging",
-    desc: "Automatically records and highlights suspicious activities for review, allowing for immediate intervention or post-exam analysis.",
-    icon: <Flag className="w-5 h-5" />,
+    title: "Real-Time Flagging",
+    desc: "Automatically records and highlights suspicious behaviour for review and post-exam auditing.",
+    icon: <Flag className="size-5" />,
   },
 ];
 
@@ -54,116 +257,120 @@ const FACILITIES = [
   },
   {
     title: "Climate Controlled",
-    desc: "Precision temperature for comfort and stability.",
+    desc: "Precision temperature management for comfort and stability.",
   },
   {
     title: "Acoustic Excellence",
-    desc: "Sound-dampening design to eliminate distractions.",
+    desc: "Sound-dampening design that minimizes distractions.",
   },
   {
     title: "Full Accessibility",
-    desc: "POD compliant including assistive technology.",
+    desc: "POD compliant facilities with assistive technologies.",
   },
 ];
 
 export default function InstitutionsPage() {
   return (
-    <div className="flex flex-col min-h-screen bg-[#fafafa]">
-      {/* 1. Minimal Header */}
-      <header className="bg-white border-b border-gray-100 py-10">
-        <div className="container px-6 mx-auto lg:px-24">
+    <div className="min-h-screen bg-[#fafafa]">
+      {/* Hero */}
+      <header className="bg-white border-b border-gray-200">
+        <div className="container mx-auto px-6 lg:px-24 py-20">
           <div className="max-w-4xl">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 tracking-wide leading-none mb-4">
-              Advanced <span className="text-[#A11D1D]">Proctoring</span>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-gray-900 leading-tight mb-6">
+              Advanced{" "}
+              <span className="text-[#A11D1D]">AI Proctoring Solutions</span>
             </h1>
-            <p className="text-gray-500 text-base md:text-lg font-medium max-w-2xl leading-relaxed">
-              Secure your academic integrity with TEPTH&apos;s state-of-the-art
-              surveillance and proctoring ecosystem. Designed for the most
-              rigorous certification examinations.
+
+            <p className="max-w-3xl text-base md:text-lg text-gray-600 leading-8">
+              Secure online examinations with intelligent monitoring,
+              behavioural analysis, facial recognition, and real-time fraud
+              detection. Designed for universities, certification providers, and
+              professional testing organizations.
             </p>
           </div>
         </div>
       </header>
 
-      <main className="container px-6 mx-auto lg:px-24 py-10 space-y-10">
-        {/* 2. AI Technology Grid */}
+      <main className="container mx-auto px-6 lg:px-24 py-16 space-y-16">
+        {/* AI Proctoring */}
         <section>
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 gap-6">
-            <div>
-              <h2 className="text-2xl font-bold text-gray-900 tracking-wide mb-1">
-                AI Proctoring
-              </h2>
-              <p className="text-sm text-gray-400 font-bold tracking-widest">
-                Key Features and Functions
-              </p>
-            </div>
-            <div className="h-px flex-1 bg-gray-100 mx-8 hidden md:block"></div>
-          </div>
+          <div className="max-w-4xl mb-10">
+            <h2 className="text-3xl font-semibold text-gray-900 mb-4">
+              AI Proctoring Technology
+            </h2>
 
-          <div className="max-w-4xl mb-6">
-            <p className="text-gray-500 text-sm md:text-base leading-relaxed">
-              AI proctoring uses artificial intelligence—machine learning,
-              facial recognition, and behavioral analytics—to monitor online
-              exams via webcam, microphone, and screen activity. It flags
-              suspicious behaviors like moving off-screen, multiple faces, or
-              tab-switching in real-time, providing a cost-effective, scalable
-              alternative to human invigilators. One of the key benefits is
-              scalability: AI can easily oversee hundreds or thousands of exams
-              simultaneously, making it an efficient solution for large
-              institutions.
+            <p className="text-gray-600 leading-8">
+              AI-powered proctoring combines machine learning, facial
+              recognition, behavioural analytics, screen monitoring, and audio
+              analysis to maintain examination integrity at scale. Suspicious
+              activities such as multiple faces, excessive movement, tab
+              switching, or environmental disturbances are automatically
+              detected and flagged for review.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
             {AI_TECH.map((tech, i) => (
-              <BaseCard key={i}>
-                <BaseCardIcon className="size-10">{tech.icon}</BaseCardIcon>
-                <BaseCardTitle className="mt-2 mb-3">
-                  {tech.title}
+              <BaseCard
+                key={i}
+                className="rounded-2xl border border-gray-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+              >
+                <BaseCardIcon className="size-11 rounded-xl bg-red-50 text-[#A11D1D]">
+                  {tech.icon}
+                </BaseCardIcon>
+
+                <BaseCardTitle className="mt-5 mb-3 text-lg font-semibold text-gray-900">
+                  <h3>{tech.title}</h3>
                 </BaseCardTitle>
-                <BaseCardDescription className="text-gray-500 text-sm md:text-base leading-relaxed">
+
+                <BaseCardDescription className="text-gray-600 leading-7">
                   {tech.desc}
                 </BaseCardDescription>
               </BaseCard>
             ))}
           </div>
 
-          <div className="mt-6 p-6 bg-white border border-gray-100 rounded-xl shadow-sm">
-            <p className="text-sm text-gray-500 font-medium leading-relaxed">
-              To enquire about our services, please contact us by phone at{" "}
-              <span className="text-[#A11D1D] font-bold">+971 4 333 3616</span>{" "}
-              or by email at{" "}
-              <span className="text-[#A11D1D] font-bold underline">
+          {/* Contact Box */}
+          <div className="mt-8 rounded-2xl border border-gray-200 bg-white p-8">
+            <p className="text-gray-600 leading-8">
+              To enquire about our proctoring and examination services, contact
+              us at{" "}
+              <span className="font-medium text-gray-900">+971 4 333 3616</span>{" "}
+              or{" "}
+              <a
+                href="mailto:info@tepth.net"
+                className="font-medium text-[#A11D1D] hover:underline"
+              >
                 info@tepth.net
-              </span>{" "}
-              for more information. Our team is available to discuss your needs,
-              provide details, pricing and assist with any questions.
+              </a>
+              . Our team can provide information about implementation,
+              integrations, pricing, and operational support.
             </p>
           </div>
         </section>
 
-        {/* 3. Facilities & Partnership Split */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-          {/* LEFT: Facility Standards (7 cols) */}
-          <div className="lg:col-span-7 bg-[#111827] p-6 md:p-8 rounded-xl text-white shadow-xl relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-[#A11D1D]/10 blur-[100px] rounded-full"></div>
-            <h2 className="text-xl font-bold tracking-wide mb-6 flex items-center gap-3 relative z-10 text-white">
-              <div className="w-2 h-6 bg-[#A11D1D]"></div>
-              Facility Standards
+        {/* Facilities + CTA */}
+        <section className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          {/* Facility Standards */}
+          <div className="lg:col-span-7 rounded-3xl border border-gray-200 bg-white p-8 md:p-10">
+            <h2 className="text-3xl font-semibold text-gray-900 mb-8">
+              Testing Facility Standards
             </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
-              {FACILITIES.map((fac, i) => (
-                <div key={i} className="flex gap-5 group">
-                  <div className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center font-bold text-[#A11D1D] group-hover:bg-[#A11D1D] group-hover:text-white transition-all shrink-0">
-                    {i + 1}
+            <div className="grid md:grid-cols-2 gap-8">
+              {FACILITIES.map((facility, index) => (
+                <div key={index} className="flex gap-4">
+                  <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-red-50 text-[#A11D1D] font-semibold">
+                    {index + 1}
                   </div>
+
                   <div>
-                    <h3 className="text-sm font-bold text-white tracking-wider mb-1">
-                      {fac.title}
+                    <h3 className="text-base font-medium text-gray-900 mb-2">
+                      {facility.title}
                     </h3>
-                    <p className="text-xs text-white/50 leading-relaxed font-medium">
-                      {fac.desc}
+
+                    <p className="text-sm text-gray-600 leading-6">
+                      {facility.desc}
                     </p>
                   </div>
                 </div>
@@ -171,39 +378,44 @@ export default function InstitutionsPage() {
             </div>
           </div>
 
-          {/* RIGHT: Partnership CTA (5 cols) */}
-          <div className="lg:col-span-5 bg-[#A11D1D] p-6 md:p-8 rounded-xl text-white shadow-xl flex flex-col justify-between h-full">
+          {/* Partnership CTA */}
+          <div className="lg:col-span-5 rounded-3xl bg-gradient-to-br from-[#A11D1D] to-[#871818] p-8 md:p-10 text-white flex flex-col justify-between">
             <div>
-              <h2 className="text-xl font-bold tracking-wide mb-4">
+              <h2 className="text-3xl font-semibold mb-5">
                 Partner With TEPTH
               </h2>
-              <p className="text-sm font-medium text-white/80 leading-relaxed mb-6">
-                Join a network of leading global institutions who trust our
-                academic atelier for their most critical examination needs.
+
+              <p className="text-white/85 leading-8 mb-8">
+                Collaborate with a trusted examination infrastructure provider
+                serving educational institutions, certification bodies, and
+                professional organizations across the region.
               </p>
-              <ul className="space-y-3 mb-6">
+
+              <ul className="space-y-4">
                 {[
-                  "Secure API Integrations",
-                  "Custom Reporting Panels",
-                  "Regional Market Access",
+                  "Secure API integrations",
+                  "Custom reporting dashboards",
+                  "Regional market access",
                 ].map((item, i) => (
                   <li
                     key={i}
-                    className="flex items-center gap-3 text-xs font-bold tracking-widest"
+                    className="flex items-center gap-3 text-sm text-white/90"
                   >
-                    <CheckCircle2 className="w-4 h-4 text-white" /> {item}
+                    <CheckCircle2 className="size-4 shrink-0" />
+                    {item}
                   </li>
                 ))}
               </ul>
             </div>
+
             <Link
               href="/contact-us"
-              className="w-full bg-white text-[#A11D1D] py-3 rounded-lg font-bold text-sm tracking-widest text-center hover:bg-gray-100 transition-all active:scale-95"
+              className="mt-10 rounded-xl bg-white py-3.5 text-center text-sm font-medium text-[#A11D1D] transition hover:bg-gray-50"
             >
               Request Partnership
             </Link>
           </div>
-        </div>
+        </section>
       </main>
     </div>
   );
