@@ -100,37 +100,20 @@ export function DateStep({
                     className="grid gap-4"
                   >
                     {availableSlots.map((slot) => (
-                      <div key={slot} className="space-y-3">
-                        <Label
-                          htmlFor={slot}
-                          className={`flex items-center justify-between p-4 rounded-xl border-2 transition-all cursor-pointer ${
-                            timeSlot === slot
-                              ? "border-primary bg-primary/5 ring-1 ring-primary"
-                              : "border-slate-100 bg-white hover:border-slate-200"
-                          }`}
-                        >
-                          <div className="flex items-center gap-3">
-                            <RadioGroupItem value={slot} id={slot} />
-                            <div>
-                              <p className="font-bold text-slate-900">
-                                Session
-                              </p>
-                              <p className="text-xs text-slate-500 font-medium">
-                                Starts at {slot}
-                              </p>
-                            </div>
-                          </div>
-                        </Label>
-                        {timeSlot === slot && (
-                          <div className="p-3 rounded-xl bg-slate-50 border border-slate-100 animate-in slide-in-from-top-2 duration-300">
-                            <p className="text-sm font-medium leading-relaxed">
-                              {slot.includes("AM")
-                                ? "The Speaking Test usually takes place in the afternoon. This will be confirmed by the British Council."
-                                : "The Speaking Test usually takes place in the morning. This will be confirmed by the British Council."}
-                            </p>
-                          </div>
-                        )}
-                      </div>
+                      <Label
+                        key={slot}
+                        htmlFor={slot}
+                        className={`flex items-center p-4 rounded-xl border-2 transition-all cursor-pointer ${
+                          timeSlot === slot
+                            ? "border-primary bg-primary/5 ring-1 ring-primary"
+                            : "border-slate-100 bg-white hover:border-slate-200"
+                        }`}
+                      >
+                        <div className="flex items-center gap-3">
+                          <RadioGroupItem value={slot} id={slot} />
+                          <p className="text-sm font-medium">{slot}</p>
+                        </div>
+                      </Label>
                     ))}
                   </RadioGroup>
                 ) : (
@@ -145,10 +128,7 @@ export function DateStep({
               </FieldContent>
             </Field>
 
-            <div className="p-4 rounded-xl bg-blue-50 border border-blue-100 text-blue-800 text-sm font-medium">
-              Note: The speaking test might be conducted in-person or via
-              video-call on exam day.
-            </div>
+
           </div>
         </div>
 

@@ -140,18 +140,28 @@ export default async function BookExamsId({
           </h2>
         </div>
       );
+    case "selt-a1":
     case "ukvi-speaking-and-listening-at-level-a1":
       return <FormSELTA1Registration />;
+    case "selt-a2":
     case "ukvi-speaking-and-listening-at-level-a2":
       return <FormSELTA2Registration />;
+    case "selt-b1":
     case "ukvi-speaking-and-listening-at-level-b1":
       return <FormSELTB1Registration />;
+    case "selt-b1-r-w":
     case "ukvi-speaking-and-listening-at-level-b1-r-w":
       return <FormSELTB1RWRegistration />;
+    case "selt-b2":
+    case "ukvi-speaking-listening-reading-and-writing-at-level-b2":
     case "ukvi-speaking-and-listening-at-level-b2":
       return <FormSELTB2Registration />;
+    case "selt-c1":
+    case "ukvi-speaking-listening-reading-and-writing-at-level-c1":
     case "ukvi-speaking-and-listening-at-level-c1":
       return <FormSELTC1Registration />;
+    case "selt-c2":
+    case "ukvi-speaking-listening-reading-and-writing-at-level-c2":
     case "ukvi-speaking-and-listening-at-level-c2":
       return <FormSELTC2Registration />;
  

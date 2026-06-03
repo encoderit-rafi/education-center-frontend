@@ -48,48 +48,7 @@ export const WORKSHOPS_DATA = {
   },
 };
 
-export const COURSES_DATA = {
-  group_classroom: {
-    id: "group_classroom",
-    name: "Group Classroom",
-    class_mode_id: "group",
-    class_type_id: "classroom",
-    price: 1850,
-    currency: "AED",
-    general_discount: 5,
-    special_discount: 10,
-  },
-  semi_private_classroom: {
-    id: "semi_private_classroom",
-    name: "Semi-Private Classroom",
-    class_mode_id: "semi_private",
-    class_type_id: "classroom",
-    price: 2850,
-    currency: "AED",
-    general_discount: 5,
-    special_discount: 15,
-  },
-  vip_classroom: {
-    id: "vip_classroom",
-    name: "VIP Classroom",
-    class_mode_id: "vip",
-    class_type_id: "classroom",
-    price: 4850,
-    currency: "AED",
-    general_discount: 5,
-    special_discount: 20,
-  },
-  vip_online: {
-    id: "vip_online",
-    name: "Private Online",
-    class_mode_id: "vip",
-    class_type_id: "online",
-    price: 4850,
-    currency: "AED",
-    general_discount: 5,
-    special_discount: 20,
-  },
-};
+import { ielts_general_courses as COURSES_DATA } from "@/lib/data";
 
 export default function FormSELTA1Registration({ initialId }: { initialId?: string }) {
   const [currentStep, setCurrentStep] = useState(0); // 0: Terms, 1: Date, 2: Form, 3: Review
@@ -104,6 +63,10 @@ export default function FormSELTA1Registration({ initialId }: { initialId?: stri
       middleName: "",
       surnames: "",
       noSurname: false,
+      cityOfBirth: "",
+      countryOfBirth: "",
+      reasonForTest: "",
+      reasonForTestOther: "",
       postcode: "",
       poBox: "",
       dateOfBirth: undefined,
@@ -161,10 +124,11 @@ export default function FormSELTA1Registration({ initialId }: { initialId?: stri
 
     const baseFee = levelFees[initialId || "selt-a1"] || 650;
     const serviceFee = 150;
-    const coursePrice = formData.selectedCourse
-      ? (COURSES_DATA as any)[formData.selectedCourse].price *
-      (1 -
-        (COURSES_DATA as any)[formData.selectedCourse].special_discount / 100)
+    const selectedCourseData = formData.selectedCourse
+      ? COURSES_DATA.find((c: any) => c.id === formData.selectedCourse)
+      : null;
+    const coursePrice = selectedCourseData
+      ? selectedCourseData.discounted_price ?? selectedCourseData.price
       : 0;
     const workshopPrice = formData.selectedWorkshop
       ? (WORKSHOPS_DATA as any)[formData.selectedWorkshop].price
@@ -232,6 +196,10 @@ export default function FormSELTA1Registration({ initialId }: { initialId?: stri
         surnames: data.surnames,
         date_of_birth: data.dateOfBirth ? new Date(data.dateOfBirth as any).toISOString() : "",
         sex: data.sex,
+        city_of_birth: data.cityOfBirth,
+        country_of_birth: data.countryOfBirth,
+        reason_for_test: data.reasonForTest,
+        reason_for_test_other: data.reasonForTestOther,
         email: data.email,
         mobile_number: data.mobileNumber,
         residence_country: data.residenceCountry,
@@ -321,7 +289,7 @@ export default function FormSELTA1Registration({ initialId }: { initialId?: stri
               baseFee={pricing.baseFee}
               serviceFee={pricing.serviceFee}
               total={total}
-              selectedCourseData={formData.selectedCourse ? (COURSES_DATA as any)[formData.selectedCourse] : undefined}
+              selectedCourseData={formData.selectedCourse ? COURSES_DATA.find((c: any) => c.id === formData.selectedCourse) : undefined}
               selectedWorkshopData={formData.selectedWorkshop ? (WORKSHOPS_DATA as any)[formData.selectedWorkshop] : undefined}
               reviewStepNumber={4}
               paymentStepNumber={5}
@@ -333,11 +301,14 @@ export default function FormSELTA1Registration({ initialId }: { initialId?: stri
                   { label: "Surnames", value: formData.surnames || "N/A" },
                   { label: "Date of Birth", value: formData.dateOfBirth ? format(new Date(formData.dateOfBirth as any), "PPP") : "N/A" },
                   { label: "Sex", value: formData.sex || "N/A" },
+                  { label: "City of Birth", value: formData.cityOfBirth || "N/A" },
+                  { label: "Country of Birth", value: formData.countryOfBirth || "N/A" },
                   { label: "Mobile Number", value: formData.mobileNumber || "N/A" },
                   { label: "Nationality", value: formData.nationality || "N/A" },
+                  { label: "Reason for Test", value: formData.reasonForTest === "ukvi" ? "UKVI – For UK Visa and Immigration applications" : formData.reasonForTest === "other" ? `Other: ${formData.reasonForTestOther || "N/A"}` : "N/A" },
                 ]}
                 identityContact={[
-                  { label: "ID Type", value: formData.idType?.replace("_", " ") },
+                  { label: "ID Type", value: formData.idType?.replace(/_/g, " ") },
                   { label: "ID Number", value: formData.idNumber || "N/A" },
                   { label: "Email", value: formData.email },
                   { label: "ID Expiry Date", value: formData.idExpiryDate ? format(new Date(formData.idExpiryDate as any), "PPP") : "N/A" },

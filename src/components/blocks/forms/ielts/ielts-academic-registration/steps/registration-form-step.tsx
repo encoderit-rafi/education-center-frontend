@@ -80,7 +80,7 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.middleName}>
-            <FieldLabel required>Middle Name</FieldLabel>
+            <FieldLabel>Middle Name</FieldLabel>
             <FieldContent>
               <Input
                 placeholder="As per passport"
@@ -847,7 +847,7 @@ export function RegistrationFormStep({
         courseError={!!errors.selectedCourse}
         workshopError={!!errors.selectedWorkshop}
         description={
-          "Save up to 20% when you book your exam and register for the course with TEPTH and pay in-person or online on our website."
+          "Save up to 25% when you book your exam and register for the course with TEPTH and pay in-person or online on our website."
         }
       />
 

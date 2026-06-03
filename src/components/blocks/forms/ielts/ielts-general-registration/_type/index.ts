@@ -1,34 +1,41 @@
 import { z } from "zod";
 
-export const IeltsGeneralSchema = z.object({
+export const IeltsGeneralSchema = z
+  .object({
     // Step 1: Personal Details
-    testModule: z.string().optional(),
-    bookingFor: z.string().optional(),
+    testModule: z.enum(["Academic", "General Training"]).or(z.literal("")),
+
     givenNames: z.string().min(1, "Given names are required"),
-    middleName: z.string().optional(),
+    middleName: z.string().min(1, "Middle name is required"),
+    birthCity: z.string().min(1, "City of birth is required"),
+    birthCountry: z.string().min(1, "Country of birth is required"),
     surnames: z.string().optional(),
+    postcode: z.string().optional(),
+    poBox: z.string().optional(),
     noSurname: z.boolean(),
     dateOfBirth: z.any().refine((val) => !!val, "Date of birth is required"),
-    sex: z.enum(["female", "male"], {
+    sex: z
+      .enum(["female", "male"], {
         message: "Please select your sex",
-    }).optional(),
+      })
+      .or(z.literal("")),
     email: z.string().email("Invalid email address"),
     confirmEmail: z.string().email("Invalid email address"),
     mobileNumber: z.string().min(1, "Mobile number is required"),
     smsConsent: z.boolean(),
-    residenceCountry: z.string().optional(),
+    residenceCountry: z.string().min(1, "Country of residence is required"),
     postalAddress1: z.string().min(1, "Address is required"),
     postalAddress2: z.string().optional(),
     postalAddress3: z.string().optional(),
-    poBox: z.string().optional(),
     city: z.string().min(1, "Town / City is required"),
-    postcode: z.string().min(1, "Postcode / ZIP is required"),
-    marketingPreference: z.enum(["all", "some", "none"], {
+    marketingPreference: z
+      .enum(["all", "some", "none"], {
         message: "Please select a marketing preference",
-    }).optional(),
+      })
+      .or(z.literal("")),
 
     // Step 2: Identification Details
-    idType: z.enum(["passport", "emirates_id"]).optional(),
+    idType: z.enum(["passport", "emirates_id"]).or(z.literal("")),
     idNumber: z.string().optional(),
     idExpiryDate: z.any().optional(),
     issuingAuthority: z.string().optional(),
@@ -36,15 +43,21 @@ export const IeltsGeneralSchema = z.object({
     idDocument: z.any().refine((val) => !!val, "Please upload your ID document"),
 
     // Step 3: Your Profile
-    takenBefore: z.enum(["Yes", "No"]).optional(),
-    lessThanTwoYears: z.enum(["Yes", "No", "I do not know"]).optional(),
-    existingAccount: z.enum(["Yes", "No", "I forgot my IELTS account details"]).optional(),
+    takenBefore: z.enum(["Yes", "No"]).or(z.literal("")),
+    lessThanTwoYears: z.enum(["Yes", "No", "I do not know"]).or(z.literal("")),
+    existingAccount: z
+      .enum(["Yes", "No", "I forgot my IELTS account details"])
+      .or(z.literal("")),
     firstLanguage: z.string().optional(),
+    firstLanguageOther: z.string().optional(),
     yearsStudyingEnglish: z.string().optional(),
     educationLevel: z.string().optional(),
     occupationLevel: z.string().optional(),
+    occupationLevelOther: z.string().optional(),
     occupationSector: z.string().optional(),
+    occupationSectorOther: z.string().optional(),
     reasonForTakingTest: z.string().optional(),
+    reasonForTakingTestOther: z.string().optional(),
     destinationCountry: z.string().optional(),
 
     // Step 4: Add-ons (Courses & Workshops)
@@ -52,18 +65,67 @@ export const IeltsGeneralSchema = z.object({
     selectedWorkshop: z.string().optional(),
 
     // Step 5: Review & Payment
-    confirmationRecipient: z.enum(["myself", "other", "company"]).or(z.literal("")),
     vatNumber: z.string().optional(),
-    paymentMethod: z.enum(["online", "bank_transfer", "at_center", "stripe", "paypal"]).or(z.literal("")),
+    paymentMethod: z
+      .enum(["online", "bank_transfer", "at_center", "stripe", "paypal"], {
+        message: "Please select a payment method",
+      })
+      .or(z.literal("")),
     termsAgreed: z.boolean().optional(),
     examDate: z.any().refine((val) => !!val, "Please select an exam date"),
-    examTimeSlot: z.string().min(1, "Please select an exam time"),
-}).refine((data) => data.email === data.confirmEmail, {
+    examTimeSlot: z
+      .enum(["9:00 AM", "1:00 PM"], {
+        message: "Please select a time slot",
+      })
+      .or(z.literal("")),
+    speakingSlot: z.string().optional(),
+  })
+  .refine((data) => data.email === data.confirmEmail, {
     message: "Emails do not match",
     path: ["confirmEmail"],
-}).refine((data) => !!data.marketingPreference, {
-    message: "Please select a marketing preference",
-    path: ["marketingPreference"],
-});
+  })
+  .superRefine((data, ctx) => {
+    // Conditional logic for Step 3: Your Profile
+    if (data.takenBefore === "Yes") {
+      if (!data.lessThanTwoYears) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Please specify if it was less than 2 years",
+          path: ["lessThanTwoYears"],
+        });
+      }
+      if (!data.existingAccount) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Please specify if you have an existing account",
+          path: ["existingAccount"],
+        });
+      }
+    }
+
+    if (!data.marketingPreference) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Please select a marketing preference",
+        path: ["marketingPreference"],
+      });
+    }
+
+    if (data.examTimeSlot && !data.speakingSlot) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Please select a speaking slot",
+        path: ["speakingSlot"],
+      });
+    }
+
+    if (!data.noSurname && (!data.surnames || !data.surnames.trim())) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Surname / family name is required",
+        path: ["surnames"],
+      });
+    }
+  });
 
 export type TIeltsGeneralSchema = z.infer<typeof IeltsGeneralSchema>;

@@ -39,7 +39,7 @@ export function DateStep({
   return (
     <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
       <div className="bg-white rounded-2xl border border-slate-100 p-6 md:p-8 shadow-sm">
-        <Stepper step={1}>Select Exam Date & Time</Stepper>
+        <Stepper step={1}>Select Exam Date &amp; Time</Stepper>
 
         <div className="mt-8 grid md:grid-cols-2 gap-12 items-start">
           <Field data-invalid={!!error}>
@@ -79,50 +79,26 @@ export function DateStep({
                   className="grid gap-4"
                 >
                   {[
-                    { id: "AM", label: "Morning Session", time: "AM" },
-                    { id: "PM", label: "Afternoon Session", time: "PM" },
+                    { id: "AM", label: "AM" },
+                    { id: "PM", label: "PM" },
                   ].map((slot) => (
-                    <div key={slot.id} className="space-y-3">
+                    <div key={slot.id}>
                       <Label
                         htmlFor={slot.id}
-                        className={`flex items-center justify-between p-4 rounded-xl border-2 transition-all cursor-pointer ${
-                          timeSlot === slot.id
+                        className={`flex items-center gap-3 p-4 rounded-xl border-2 transition-all cursor-pointer ${timeSlot === slot.id
                             ? "border-[#A11D1D] bg-[#A11D1D]/5 ring-1 ring-[#A11D1D]"
                             : "border-slate-100 bg-white hover:border-slate-200"
-                        }`}
+                          }`}
                       >
-                        <div className="flex items-center gap-3">
-                          <RadioGroupItem value={slot.id} id={slot.id} />
-                          <div>
-                            <p className="font-bold text-slate-900">
-                              {slot.label}
-                            </p>
-                            <p className="text-xs text-slate-500 font-medium">
-                              {slot.time} Session
-                            </p>
-                          </div>
-                        </div>
+                        <RadioGroupItem value={slot.id} id={slot.id} />
+                        <p className="font-bold text-slate-900">{slot.label}</p>
                       </Label>
-                      {timeSlot === slot.id && (
-                        <div className="p-3 rounded-xl bg-slate-50 border border-slate-100 animate-in slide-in-from-top-2 duration-300">
-                          <p className="text-sm font-medium leading-relaxed">
-                            {slot.id === "AM"
-                              ? "The Speaking Test usually takes place in the afternoon. This will be confirmed by the British Council."
-                              : "The Speaking Test usually takes place in the morning. This will be confirmed by the British Council."}
-                          </p>
-                        </div>
-                      )}
                     </div>
                   ))}
                 </RadioGroup>
                 <FieldError errors={[timeSlotError]} className="mt-4" />
               </FieldContent>
             </Field>
-
-            <div className="p-4 rounded-xl bg-blue-50 border border-blue-100 text-blue-800 text-sm font-medium">
-              Note: The speaking test might be conducted in-person or via
-              video-call on exam day.
-            </div>
           </div>
         </div>
 

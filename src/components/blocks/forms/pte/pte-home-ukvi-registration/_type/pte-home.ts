@@ -17,6 +17,7 @@ export const PteHomeUkviSchema = z.object({
     givenNames: z.string().optional(),
     middleNames: z.string().optional(),
     noGivenNames: z.boolean(),
+    noMiddleName: z.boolean(),
     surnames: z.string().optional(),
     noSurname: z.boolean(),
     emailUsername: z.string().email("Invalid email/username").or(z.any().transform(v => String(v || ""))).pipe(z.string().email("Invalid email/username")),
@@ -57,7 +58,7 @@ export const PteHomeUkviSchema = z.object({
     // Step 3: Final Details & Documents
     testTiming: z.string().optional(),
     idPolicyRead: z.boolean().refine(val => val === true, "You must read the ID policy"),
-    idType: z.enum(["passport", "emirates_id"], { message: "ID type is required" }).or(z.literal("")),
+    idType: z.literal("passport"),
     idNumber: z.string().min(1, "ID number is required"),
     idExpiryDate: z.any().refine((val) => !!val, "Expiry date is required"),
     idCountryOfIssue: stringOrObject.optional(),
@@ -79,6 +80,12 @@ export const RefinedPteHomeUkviSchema = PteHomeUkviSchema.refine((data) => {
 }, {
     message: "Given names are required",
     path: ["givenNames"],
+}).refine((data) => {
+    if (!data.noMiddleName && !data.middleNames) return false;
+    return true;
+}, {
+    message: "Middle name is required",
+    path: ["middleNames"],
 }).refine((data) => {
     if (!data.noSurname && !data.surnames) return false;
     return true;
