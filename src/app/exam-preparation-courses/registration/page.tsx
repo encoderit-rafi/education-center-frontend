@@ -200,12 +200,11 @@ function CourseRegistrationForm({ className }: { className?: string }) {
     <div className="bg-white">
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-slate-50 base-px base-py">
-        <div className="max-w-4xl mx-auto">
+        <div className="section-container">
           <h1 className="text-3xl mb-12 text-center font-black leading-[1.1] tracking-tight text-slate-900 lg:text-4xl xl:text-5xl">
             {courseName}{" "}
             <span className="text-primary">Course Registration</span>
           </h1>
-
           <div className="flex flex-col md:flex-row gap-6">
             <div className="relative flex-1 aspect-video rounded-2xl overflow-hidden bg-slate-100 shrink-0">
               <Image
@@ -346,14 +345,6 @@ function CourseRegistrationForm({ className }: { className?: string }) {
                     <FieldError errors={[errors.address]} />
                   </FieldContent>
                 </Field>
-
-                <div className="text-primary border border-dashed border-primary/40 p-3 bg-primary/5 rounded-md flex items-start gap-2">
-                  <Info className="w-4 h-4 mt-0.5" />
-                  <p className="text-[11px] font-medium leading-relaxed">
-                    We will send your credentials and link to this email address
-                    24 hours before your selected slot.
-                  </p>
-                </div>
               </div>
               <div className="space-y-3">
                 <Stepper step={2}>
@@ -399,7 +390,7 @@ function CourseRegistrationForm({ className }: { className?: string }) {
                     onValueChange={(val) =>
                       setValue("paymentMethod", val as "stripe" | "paypal")
                     }
-                    className="grid grid-cols-2 gap-3"
+                    className="grid gap-3"
                   >
                     <label
                       htmlFor="payment-stripe"
@@ -415,12 +406,7 @@ function CourseRegistrationForm({ className }: { className?: string }) {
                         Credit Card (Stripe)
                       </span> */}
                       <div className="w-full flex items-center justify-between gap-2 ">
-                        <Image
-                          src="/images/stripe-logo.png"
-                          alt="Stripe"
-                          width={50}
-                          height={50}
-                        />
+                        <span className="font-semibold">Credit/Debit Card</span>
                         <Image
                           src="/images/cards.png"
                           alt="Stripe"

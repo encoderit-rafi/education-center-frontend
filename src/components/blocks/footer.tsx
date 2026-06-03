@@ -292,7 +292,8 @@ export default function Footer() {
         <div className="bg-primary pb-12 -mt-1">
           <div className="container mx-auto px-4 py-8 text-center lg:px-8">
             <p className="text-xs text-gray-100 font-medium">
-              Copyright © 2026 by The Exam Preparation & Testing House LLC.
+              Copyright © {new Date().getFullYear()} by The Exam Preparation &
+              Testing House LLC.
             </p>
             <p className="mt-1 text-xs text-gray-200">
               All trademarks and logos appearing on the site are the property of
