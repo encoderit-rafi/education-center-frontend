@@ -30,7 +30,7 @@ import { notFound } from "next/navigation";
 import { PriceDisplay } from "@/components/ui/price-display";
 import api from "@/axios";
 import DiscountAd from "@/components/blocks/discount-ad";
-
+import PromoDiscount from "@/components/blocks/promo-discount";
 
 interface WorkshopDetail {
   id: string;
@@ -112,7 +112,6 @@ export default async function ExamPreparationDynamicPage({
   try {
     const courseRes = await api.get<ApiResponse<CourseDetail>>(
       `/courses/${slug}?sort_by=orderIndex&sort_order=desc`,
-
     );
     console.log("👉 ~ ExamPreparationDynamicPage ~ courseRes:", courseRes);
 
@@ -208,13 +207,12 @@ export default async function ExamPreparationDynamicPage({
       </section>
 
       {/* ── Gorgeous Discount Banner ── */}
-      <section className="relative overflow-hidden  mx-auto bg-primary py-14 md:py-20">
-        {/* Decorative blobs */}
+      {/* <section className="relative overflow-hidden  mx-auto bg-primary py-14 md:py-20">
+       
         <div className="pointer-events-none absolute -top-20 -left-20 h-72 w-72 rounded-full bg-white/5 blur-3xl" />
         <div className="pointer-events-none absolute -bottom-20 -right-20 h-96 w-96 rounded-full bg-white/5 blur-3xl" />
         <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-64 w-64 rounded-full bg-white/[0.03] blur-2xl" />
 
-        {/* Subtle diagonal grid overlay */}
         <div
           className="pointer-events-none absolute inset-0 opacity-[0.04]"
           style={{
@@ -225,13 +223,13 @@ export default async function ExamPreparationDynamicPage({
         />
 
         <div className="relative px-4 lg:px-8 max-w-6xl mx-auto text-center space-y-8">
-          {/* Label pill */}
+        
           <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-black uppercase tracking-[0.25em] text-white backdrop-blur-sm">
             <BadgePercent className="size-3.5" />
             Exclusive Online Offer
           </div>
 
-          {/* Main heading */}
+         
           <div className="space-y-3">
             <h2 className="text-4xl md:text-6xl font-black text-white leading-[1.08] tracking-tight">
               Save up to{" "}
@@ -247,14 +245,35 @@ export default async function ExamPreparationDynamicPage({
             </p>
           </div>
 
-          {/* Discount breakdown pills */}
+          
           <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
             {[
-              { label: "Group Course", value: "10%", color: "bg-emerald-400/20 border-emerald-300/30 text-emerald-100" },
-              { label: "Semi-private Course", value: "15%", color: "bg-rose-400/20 border-rose-300/30 text-rose-100" },
-              { label: "In-person 1-to-1", value: "20%", color: "bg-sky-400/20 border-sky-300/30 text-sky-100" },
-              { label: "Online 1-to-1", value: "20%", color: "bg-amber-400/20 border-amber-300/30 text-amber-100" },
-              { label: "Hybrid 1-to-1", value: "25%", color: "bg-orange-400/20 border-orange-300/30 text-orange-100" },
+              {
+                label: "Group Course",
+                value: "10%",
+                color:
+                  "bg-emerald-400/20 border-emerald-300/30 text-emerald-100",
+              },
+              {
+                label: "Semi-private Course",
+                value: "15%",
+                color: "bg-rose-400/20 border-rose-300/30 text-rose-100",
+              },
+              {
+                label: "In-person 1-to-1",
+                value: "20%",
+                color: "bg-sky-400/20 border-sky-300/30 text-sky-100",
+              },
+              {
+                label: "Online 1-to-1",
+                value: "20%",
+                color: "bg-amber-400/20 border-amber-300/30 text-amber-100",
+              },
+              {
+                label: "Hybrid 1-to-1",
+                value: "25%",
+                color: "bg-orange-400/20 border-orange-300/30 text-orange-100",
+              },
             ].map(({ label, value, color }) => (
               <div
                 key={label}
@@ -267,12 +286,11 @@ export default async function ExamPreparationDynamicPage({
             ))}
           </div>
         </div>
-      </section>
-
+      </section> */}
+      <PromoDiscount />
       {/* ── Packages Section ── */}
       <section id="packages" className="base-py bg-white">
         <div className="px-4 lg:px-8  mx-auto">
-
           <div className="mb-12 text-center max-w-3xl mx-auto space-y-4">
             <h2 className="text-4xl font-black text-slate-900 tracking-tight leading-tight">
               {data.name} <span className="text-primary">Preparation Path</span>
@@ -282,7 +300,6 @@ export default async function ExamPreparationDynamicPage({
               programs tailored for your success.
             </p>
           </div>
-
 
           <div className="grid gap-6 md:grid-cols-3">
             {packages.map((pkg, index) => {
@@ -386,7 +403,10 @@ export default async function ExamPreparationDynamicPage({
 
                       <div className="space-y-2">
                         <div className="flex items-center gap-2">
-                          <Badge variant="destructive" className="font-bold text-[10px] uppercase tracking-wider px-2 py-0.5">
+                          <Badge
+                            variant="destructive"
+                            className="font-bold text-[10px] uppercase tracking-wider px-2 py-0.5"
+                          >
                             Best For
                           </Badge>
                         </div>
@@ -407,19 +427,25 @@ export default async function ExamPreparationDynamicPage({
 
                       <div className="grid grid-cols-2 gap-4 bg-slate-50 p-3 rounded-lg">
                         <div>
-                          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Duration</p>
+                          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                            Duration
+                          </p>
                           <p className="text-sm font-semibold text-slate-800 mt-0.5">
                             {pkg.duration} Hours
                           </p>
                         </div>
                         <div>
-                          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Total Weeks</p>
+                          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                            Total Weeks
+                          </p>
                           <p className="text-sm font-semibold text-slate-800 mt-0.5">
                             {pkg.totalHours} weeks
                           </p>
                         </div>
                         <div>
-                          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Schedule</p>
+                          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                            Schedule
+                          </p>
                           <p className="text-sm font-semibold text-slate-800 mt-0.5">
                             {pkg.scheduleInfo}
                           </p>
