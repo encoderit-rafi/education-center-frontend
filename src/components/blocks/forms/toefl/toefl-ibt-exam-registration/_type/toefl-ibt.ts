@@ -16,6 +16,8 @@ export const ToeflIbtSchema = z
         surnames: z.string().optional(),
         noSurname: z.boolean(),
         dateOfBirth: z.any().refine((val) => !!val, "Date of birth is required"),
+        birthCity: z.string().min(1, "City of birth is required"),
+        birthCountry: z.string().min(1, "Country of birth is required"),
         gender: z
             .enum(["female", "male", "other"], {
                 message: "Please select your gender",
@@ -49,11 +51,15 @@ export const ToeflIbtSchema = z
             .enum(["Yes", "No", "I forgot my TOEFL account details"])
             .or(z.literal("")),
         firstLanguage: z.string().optional(),
+        firstLanguageOther: z.string().optional(),
         yearsStudyingEnglish: z.string().optional(),
         educationLevel: z.string().optional(),
         occupationLevel: z.string().optional(),
+        occupationLevelOther: z.string().optional(),
         occupationSector: z.string().optional(),
+        occupationSectorOther: z.string().optional(),
         reasonForTakingTest: z.string().optional(),
+        reasonForTakingTestOther: z.string().optional(),
         destinationCountry: z.string().optional(),
 
         // Step 4: Add-ons (Courses & Workshops)

@@ -17,6 +17,8 @@ export const SeltA1Schema = z
         message: "Please select your sex",
       })
       .or(z.literal("")),
+    cityOfBirth: z.string().min(1, "City of birth is required"),
+    countryOfBirth: z.string().min(1, "Country of birth is required"),
     email: z.string().email("Invalid email address"),
     confirmEmail: z.string().email("Invalid email address"),
     mobileNumber: z.string().min(1, "Mobile number is required"),
@@ -31,9 +33,11 @@ export const SeltA1Schema = z
         message: "Please select a marketing preference",
       })
       .or(z.literal("")),
+    reasonForTest: z.enum(["ukvi", "other"]).or(z.literal("")),
+    reasonForTestOther: z.string().optional(),
 
     // Step 2: Identification Details
-    idType: z.enum(["passport", "emirates_id"]).or(z.literal("")),
+    idType: z.enum(["passport", "govt_id", "eu_id", "travel_doc", "uk_brc", "uk_brp"]).or(z.literal("")),
     idNumber: z.string().optional(),
     idExpiryDate: z.any().optional(),
     issuingAuthority: z.string().optional(),
@@ -79,6 +83,14 @@ export const SeltA1Schema = z
   })
   .superRefine((data, ctx) => {
     // Conditional logic for Step 3: Your Profile
+    if (!data.takenBefore) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Please answer this question",
+        path: ["takenBefore"],
+      });
+    }
+
     if (data.takenBefore === "Yes") {
       if (!data.lessThanTwoYears) {
         ctx.addIssue({
@@ -101,6 +113,22 @@ export const SeltA1Schema = z
         code: z.ZodIssueCode.custom,
         message: "Please select a marketing preference",
         path: ["marketingPreference"],
+      });
+    }
+
+    if (!data.idType) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Please select the ID you will bring to the test centre",
+        path: ["idType"],
+      });
+    }
+
+    if (data.reasonForTest === "other" && !data.reasonForTestOther?.trim()) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Please enter your reason for taking the test",
+        path: ["reasonForTestOther"],
       });
     }
   });

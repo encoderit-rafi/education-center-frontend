@@ -162,6 +162,32 @@ export function RegistrationFormStep({
             </FieldContent>
           </Field>
 
+          <Field data-invalid={!!errors.cityOfBirth}>
+            <FieldLabel required>City of birth</FieldLabel>
+            <FieldContent>
+              <Input
+                placeholder="As per passport"
+                aria-invalid={!!errors.cityOfBirth}
+                {...register("cityOfBirth")}
+              />
+              <FieldError errors={[errors.cityOfBirth]} />
+            </FieldContent>
+          </Field>
+
+          <Field data-invalid={!!errors.countryOfBirth}>
+            <FieldLabel required>Country of birth</FieldLabel>
+            <FieldContent>
+              <CountryDropdown
+                name="countryOfBirth"
+                placeholder="Search country..."
+                value={formData.countryOfBirth}
+                aria-invalid={!!errors.countryOfBirth}
+                onChange={(country) => setValue("countryOfBirth", country.name)}
+              />
+              <FieldError errors={[errors.countryOfBirth]} />
+            </FieldContent>
+          </Field>
+
           <Field data-invalid={!!errors.mobileNumber}>
             <FieldLabel required>Mobile number</FieldLabel>
             <FieldContent>
@@ -288,49 +314,92 @@ export function RegistrationFormStep({
             </FieldContent>
           </Field>
 
-          <Field data-invalid={!!errors.idType}>
-            <FieldLabel required>Identification type</FieldLabel>
-            <FieldDescription>
-              Please make sure you present the same ID document you used for
-              registration on the exam day.
-            </FieldDescription>
-            <FieldContent>
+          <Field className="md:col-span-2 lg:col-span-3" data-invalid={!!errors.reasonForTest}>
+            <FieldLabel required>Reason for test</FieldLabel>
+            <FieldContent className="mt-2">
               <RadioGroup
-                name="idType"
-                onValueChange={(val) => setValue("idType", val)}
-                value={formData.idType}
-                className="grid grid-cols-2 gap-3"
+                name="reasonForTest"
+                onValueChange={(val) => {
+                  setValue("reasonForTest", val);
+                  if (val !== "other") setValue("reasonForTestOther", "");
+                }}
+                value={formData.reasonForTest}
+                className="flex flex-col gap-3"
               >
                 {[
-                  { id: "passport", label: "Passport" },
-                  { id: "emirates_id", label: "Emirates ID" },
+                  { id: "ukvi", label: "UKVI", description: "For UK Visa and Immigration applications" },
+                  { id: "other", label: "Other", description: "" },
                 ].map((opt) => (
-                  <Label
-                    key={opt.id}
-                    htmlFor={opt.id}
-                    data-invalid={!!errors.idType}
-                    className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive"
-                  >
-                    <RadioGroupItem value={opt.id} id={opt.id} />
-                    {opt.label}
-                  </Label>
+                  <div key={opt.id} className="flex flex-col gap-2">
+                    <Label
+                      htmlFor={`reason-${opt.id}`}
+                      className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer"
+                    >
+                      <RadioGroupItem value={opt.id} id={`reason-${opt.id}`} />
+                      <div className="flex flex-col">
+                        <span>{opt.label}</span>
+                        {opt.description && (
+                          <span className="text-xs text-slate-500 font-light">{opt.description}</span>
+                        )}
+                      </div>
+                    </Label>
+                    {opt.id === "other" && formData.reasonForTest === "other" && (
+                      <div className="pl-6 animate-in fade-in slide-in-from-top-2 duration-300">
+                        <textarea
+                          placeholder="Please enter a reason for taking the test"
+                          value={formData.reasonForTestOther ?? ""}
+                          onChange={(e) => setValue("reasonForTestOther", e.target.value)}
+                          className="w-full min-h-[80px] p-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary text-sm font-light"
+                        />
+                        <FieldError errors={[errors.reasonForTestOther]} />
+                      </div>
+                    )}
+                  </div>
                 ))}
               </RadioGroup>
+              <FieldError errors={[errors.reasonForTest]} />
+            </FieldContent>
+          </Field>
+
+          <Field data-invalid={!!errors.idType}>
+            <FieldLabel required>ID to present at the test centre</FieldLabel>
+            <FieldDescription>
+              Please select the ID you will bring to the test centre.
+            </FieldDescription>
+            <FieldContent>
+              <SearchableDropdown
+                name="idType"
+                options={[
+                  { label: "Passport", value: "passport" },
+                  { label: "Govt ID card, can be Biometric (only accepted in the country it was issued)", value: "govt_id" },
+                  { label: "EU ID card (only accepted in the country it was issued)**", value: "eu_id" },
+                  { label: "Valid travel document with photograph (excluding Emergency Travel Documents)", value: "travel_doc" },
+                  { label: "UK issued Biometric Residence Card (UK BRC)", value: "uk_brc" },
+                  { label: "UK issued Biometric Residence Permit (UK BRP)", value: "uk_brp" },
+                ]}
+                placeholder="Please choose a type of ID"
+                value={formData.idType}
+                aria-invalid={!!errors.idType}
+                onChange={(val) => setValue("idType", val as any)}
+              />
               <FieldError errors={[errors.idType]} />
+              <p className="mt-2 text-xs font-bold text-slate-800">
+                Acceptable ID. Only Passport or Emirates ID.
+              </p>
             </FieldContent>
           </Field>
 
           <Field data-invalid={!!errors.idNumber}>
             <FieldLabel required>
-              {formData.idType === "emirates_id"
-                ? "ID number"
+              {formData.idType === "govt_id"
+                ? "Emirates ID number"
                 : "Passport number"}
             </FieldLabel>
             <FieldContent>
               <Input
                 {...register("idNumber")}
                 aria-invalid={!!errors.idNumber}
-                placeholder={`Enter your ${formData.idType === "emirates_id" ? "ID" : "Passport"} number`}
+                placeholder={`Enter your ${formData.idType === "govt_id" ? "Emirates ID" : "Passport"} number`}
               />
               <FieldError errors={[errors.idNumber]} />
             </FieldContent>
@@ -338,8 +407,8 @@ export function RegistrationFormStep({
 
           <Field data-invalid={!!errors.idExpiryDate}>
             <FieldLabel required>
-              {formData.idType === "emirates_id"
-                ? "ID expiry date"
+              {formData.idType === "govt_id"
+                ? "Emirates ID expiry date"
                 : "Passport expiry date"}
             </FieldLabel>
             <FieldContent>
@@ -349,7 +418,7 @@ export function RegistrationFormStep({
                 onChange={(date) => setValue("idExpiryDate", date as Date)}
                 aria-invalid={!!errors.idExpiryDate}
                 disabled={(date) => date <= new Date()}
-                placeholder={`Select ${formData.idType === "emirates_id" ? "ID" : "Passport"} expiry date`}
+                placeholder={`Select ${formData.idType === "govt_id" ? "Emirates ID" : "Passport"} expiry date`}
               />
               <FieldError errors={[errors.idExpiryDate]} />
             </FieldContent>
@@ -438,6 +507,115 @@ export function RegistrationFormStep({
       </div>
 
       {/* Additional Info Section */}
+      <div className="pt-8 border-t border-slate-100 space-y-6">
+        <div className="flex items-center gap-2 text-slate-400 mb-4">
+          <Globe className="size-5" />
+          <h3 className="text-lg font-bold tracking-tight text-slate-800">
+            Additional Information
+          </h3>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
+          <Field
+            className="md:col-span-2 lg:col-span-3"
+            data-invalid={!!errors.takenBefore}
+          >
+            <FieldLabel required>
+              Have you taken the Skills for English Test (SELT) before?
+            </FieldLabel>
+            <FieldContent className="mt-2">
+              <RadioGroup
+                name="takenBefore"
+                onValueChange={(val) => {
+                  setValue("takenBefore", val);
+                  if (val === "No") {
+                    setValue("lessThanTwoYears", "");
+                    setValue("existingAccount", "");
+                  }
+                }}
+                value={formData.takenBefore}
+                className="grid grid-cols-2 gap-3"
+              >
+                {["Yes", "No"].map((opt) => (
+                  <Label
+                    key={opt}
+                    htmlFor={`taken-${opt}`}
+                    data-invalid={!!errors.takenBefore}
+                    className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive"
+                  >
+                    <RadioGroupItem value={opt} id={`taken-${opt}`} />
+                    {opt}
+                  </Label>
+                ))}
+              </RadioGroup>
+              <FieldError errors={[errors.takenBefore]} />
+            </FieldContent>
+          </Field>
+
+          {formData.takenBefore === "Yes" && (
+            <>
+              <Field
+                className="md:col-span-2 lg:col-span-3"
+                data-invalid={!!errors.lessThanTwoYears}
+              >
+                <FieldLabel required>Was it less than 2 years?</FieldLabel>
+                <FieldContent className="mt-2">
+                  <RadioGroup
+                    name="lessThanTwoYears"
+                    onValueChange={(val) => setValue("lessThanTwoYears", val)}
+                    value={formData.lessThanTwoYears}
+                    className="grid grid-cols-1 md:grid-cols-3 gap-3"
+                  >
+                    {["Yes", "No", "I do not know"].map((opt) => (
+                      <Label
+                        key={opt}
+                        htmlFor={`less-${opt}`}
+                        data-invalid={!!errors.lessThanTwoYears}
+                        className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive"
+                      >
+                        <RadioGroupItem value={opt} id={`less-${opt}`} />
+                        {opt}
+                      </Label>
+                    ))}
+                  </RadioGroup>
+                  <FieldError errors={[errors.lessThanTwoYears]} />
+                </FieldContent>
+              </Field>
+
+              <Field
+                className="md:col-span-2 lg:col-span-3"
+                data-invalid={!!errors.existingAccount}
+              >
+                <FieldLabel required>
+                  Do you have an existing account?
+                </FieldLabel>
+                <FieldContent className="mt-2">
+                  <RadioGroup
+                    name="existingAccount"
+                    onValueChange={(val) => setValue("existingAccount", val)}
+                    value={formData.existingAccount}
+                    className="flex flex-col gap-3"
+                  >
+                    {["Yes", "No", "I forgot my account details"].map((opt) => (
+                      <Label
+                        key={opt}
+                        htmlFor={`acc-${opt}`}
+                        data-invalid={!!errors.existingAccount}
+                        className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive"
+                      >
+                        <RadioGroupItem value={opt} id={`acc-${opt}`} />
+                        {opt}
+                      </Label>
+                    ))}
+                  </RadioGroup>
+                  <FieldError errors={[errors.existingAccount]} />
+                </FieldContent>
+              </Field>
+            </>
+          )}
+        </div>
+      </div>
+
 {/* Add-on Services Section */}
       <AddonServicesSection
         coursesData={coursesData}

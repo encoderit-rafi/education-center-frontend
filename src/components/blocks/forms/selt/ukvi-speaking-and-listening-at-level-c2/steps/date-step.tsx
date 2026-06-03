@@ -38,7 +38,7 @@ export function DateStep({
 }: DateStepProps) {
   return (
     <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-      <div className="bg-white rounded-2xl border border-slate-100 p-6 md:p-8 shadow-sm">
+      <div className="space-y-6">
         <Stepper step={1}>Select Exam Date & Time</Stepper>
 
         <div className="mt-8 grid md:grid-cols-2 gap-12 items-start">
