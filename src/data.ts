@@ -693,8 +693,8 @@ export const COURSES_DATA = {
     general_discount: 5,
     special_discount: 15,
   },
-// private one to one
-  vip_classroom: { 
+  // private one to one
+  vip_classroom: {
     id: "vip_classroom",
     name: "VIP Classroom",
     class_mode_id: "vip",
@@ -706,7 +706,7 @@ export const COURSES_DATA = {
   },
   //online one to one
 
-  vip_online: { 
+  vip_online: {
     id: "vip_online",
     name: "Private Online",
     class_mode_id: "vip",
@@ -2694,3 +2694,13 @@ export const FEES_DATA = [
     ],
   },
 ];
+
+// INFORMATION
+
+export const INSTITUTIONS_INFO = {
+  phone: "+971 4 333 3616",
+  email: "+97165531250",
+  address: `The Exam Preparation & Testing House L.L.C\n
+  Suite 701, 7th Floor, Tabarak Tower, Corniche Road,\n
+  Al Mamzar, Sharjah, United Arab Emirates.`,
+};

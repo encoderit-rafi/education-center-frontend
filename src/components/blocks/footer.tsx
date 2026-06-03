@@ -14,7 +14,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import WaveDivider from "./wave-divider";
-import { SECONDARY_NAV } from "@/data";
+import { INSTITUTIONS_INFO, SECONDARY_NAV } from "@/data";
 import { usePrimaryNav } from "@/hooks/use-primary-nav";
 import {
   DropdownMenu,
@@ -125,29 +125,35 @@ export default function Footer() {
               />
               <ContactItem
                 icon={MapPin}
-                copyText={`The Exam Preparation & Testing House L.L.C \n Suite 701, 7th Floor, Tabarak Tower, Corniche Road, Al Mamzar, Sharjah, United Arab Emirates.`}
+                // copyText={`The Exam Preparation & Testing House L.L.C \n Suite 701, 7th Floor, Tabarak Tower, Corniche Road, Al Mamzar, Sharjah, United Arab Emirates.`}
+                copyText={INSTITUTIONS_INFO.address}
                 value={
                   <>
                     Our Address:
                     <br />
-                    The Exam Preparation & Testing House L.L.C
+                    {/* The Exam Preparation & Testing House L.L.C
                     <br />
                     Suite 701, 7th Floor, Tabarak Tower, Corniche Road,
                     <br />
-                    Al Mamzar, Sharjah, United Arab Emirates.
+                    Al Mamzar, Sharjah, United Arab Emirates. */}
+                    {INSTITUTIONS_INFO.address}
                   </>
                 }
               />
               <ContactItem
                 icon={Mail}
-                copyText="info@tepth.org"
-                value="Email: info@tepth.org"
+                // copyText="info@tepth.org"
+                copyText={INSTITUTIONS_INFO.email}
+                // value="Email: info@tepth.org"
+                value={`Email: ${INSTITUTIONS_INFO.email}`}
               />
 
               <ContactItem
                 icon={Phone}
-                copyText="+97165531250"
-                value="Tel: +97165531250"
+                // copyText="+97165531250"
+                copyText={INSTITUTIONS_INFO.phone}
+                // value="Tel: +97165531250"
+                value={`Tel: ${INSTITUTIONS_INFO.phone}`}
               />
             </div>
             {/* <div className="bg-white p-4 rounded-2xl space-y-4 border border-slate-100">

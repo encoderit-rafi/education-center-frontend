@@ -59,6 +59,7 @@ const ENQUIRY_TOPICS = [
   "Paid Mock Test",
   "Partnership",
   "General Enquiry",
+  "Referral",
 ];
 
 export default function ContactForm() {
