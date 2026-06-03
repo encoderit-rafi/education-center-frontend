@@ -48,48 +48,7 @@ export const WORKSHOPS_DATA = {
   },
 };
 
-export const COURSES_DATA = {
-  group_classroom: {
-    id: "group_classroom",
-    name: "Group Classroom",
-    class_mode_id: "group",
-    class_type_id: "classroom",
-    price: 1850,
-    currency: "AED",
-    general_discount: 5,
-    special_discount: 10,
-  },
-  semi_private_classroom: {
-    id: "semi_private_classroom",
-    name: "Semi-Private Classroom",
-    class_mode_id: "semi_private",
-    class_type_id: "classroom",
-    price: 2850,
-    currency: "AED",
-    general_discount: 5,
-    special_discount: 15,
-  },
-  vip_classroom: {
-    id: "vip_classroom",
-    name: "VIP Classroom",
-    class_mode_id: "vip",
-    class_type_id: "classroom",
-    price: 4850,
-    currency: "AED",
-    general_discount: 5,
-    special_discount: 20,
-  },
-  vip_online: {
-    id: "vip_online",
-    name: "Private Online",
-    class_mode_id: "vip",
-    class_type_id: "online",
-    price: 4850,
-    currency: "AED",
-    general_discount: 5,
-    special_discount: 20,
-  },
-};
+import { ielts_general_courses as COURSES_DATA } from "@/lib/data";
 
 export default function FormSELTC2Registration() {
   const [currentStep, setCurrentStep] = useState(0); 
@@ -160,10 +119,11 @@ export default function FormSELTC2Registration() {
 
     const baseFee = levelFees[initialId] || 870;
     const serviceFee = 150;
-    const coursePrice = formData.selectedCourse
-      ? (COURSES_DATA as any)[formData.selectedCourse].price *
-      (1 -
-        (COURSES_DATA as any)[formData.selectedCourse].special_discount / 100)
+    const selectedCourseData = formData.selectedCourse
+      ? COURSES_DATA.find((c: any) => c.id === formData.selectedCourse)
+      : null;
+    const coursePrice = selectedCourseData
+      ? selectedCourseData.discounted_price ?? selectedCourseData.price
       : 0;
     const workshopPrice = formData.selectedWorkshop
       ? (WORKSHOPS_DATA as any)[formData.selectedWorkshop].price
@@ -319,7 +279,7 @@ export default function FormSELTC2Registration() {
               baseFee={pricing.baseFee}
               serviceFee={pricing.serviceFee}
               total={total}
-              selectedCourseData={formData.selectedCourse ? (COURSES_DATA as any)[formData.selectedCourse] : undefined}
+              selectedCourseData={formData.selectedCourse ? COURSES_DATA.find((c: any) => c.id === formData.selectedCourse) : undefined}
               selectedWorkshopData={formData.selectedWorkshop ? (WORKSHOPS_DATA as any)[formData.selectedWorkshop] : undefined}
               reviewStepNumber={4}
               paymentStepNumber={5}

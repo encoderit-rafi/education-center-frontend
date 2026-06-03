@@ -97,20 +97,32 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.middleNames}>
-            <FieldLabel>Middle names</FieldLabel>
+            <FieldLabel required>Middle Name</FieldLabel>
             <FieldContent>
               <Input
-                placeholder="Optional"
+                placeholder="As per passport"
                 aria-invalid={!!errors.middleNames}
                 {...register("middleNames")}
-                disabled={formData.noGivenNames}
+                disabled={formData.noMiddleName}
               />
               <FieldError errors={[errors.middleNames]} />
+              <FieldDescription className="flex items-center gap-2 mt-2">
+                <Checkbox
+                  id="noMiddleName"
+                  checked={formData.noMiddleName}
+                  onCheckedChange={(val) =>
+                    setValue("noMiddleName", val as boolean)
+                  }
+                />
+                <Label htmlFor="noMiddleName" className="text-xs font-light">
+                  I don't have a middle name
+                </Label>
+              </FieldDescription>
             </FieldContent>
           </Field>
 
           <Field data-invalid={!!errors.surnames}>
-            <FieldLabel>Surname / family name</FieldLabel>
+            <FieldLabel required>Surname / family name</FieldLabel>
             <FieldContent>
               <Input
                 placeholder="As per passport"
@@ -194,7 +206,7 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.placeOfBirth}>
-            <FieldLabel required>Town / City of birth</FieldLabel>
+            <FieldLabel required>City of birth</FieldLabel>
             <FieldContent>
               <Input
                 placeholder="As per passport"
@@ -281,60 +293,20 @@ export function RegistrationFormStep({
             </FieldContent>
           </Field>
 
-          <Field data-invalid={!!errors.idType}>
-            <FieldLabel required>Identification type</FieldLabel>
-            <FieldDescription>
-              Please make sure you present the same ID document you used for
-              registration on the exam day.
-            </FieldDescription>
-            <FieldContent>
-              <RadioGroup
-                name="idType"
-                onValueChange={(val) => setValue("idType", val)}
-                value={formData.idType}
-                className="grid grid-cols-2 gap-3"
-              >
-                {[
-                  { id: "passport", label: "Passport" },
-                  { id: "emirates_id", label: "Emirates ID" },
-                ].map((opt) => (
-                  <Label
-                    key={opt.id}
-                    htmlFor={opt.id}
-                    data-invalid={!!errors.idType}
-                    className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive"
-                  >
-                    <RadioGroupItem value={opt.id} id={opt.id} />
-                    {opt.label}
-                  </Label>
-                ))}
-              </RadioGroup>
-              <FieldError errors={[errors.idType]} />
-            </FieldContent>
-          </Field>
-
           <Field data-invalid={!!errors.idNumber}>
-            <FieldLabel required>
-              {formData.idType === "emirates_id"
-                ? "ID number"
-                : "Passport number"}
-            </FieldLabel>
+            <FieldLabel required>Passport number</FieldLabel>
             <FieldContent>
               <Input
                 {...register("idNumber")}
                 aria-invalid={!!errors.idNumber}
-                placeholder={`Enter your ${formData.idType === "emirates_id" ? "ID" : "Passport"} number`}
+                placeholder="Enter your Passport number"
               />
               <FieldError errors={[errors.idNumber]} />
             </FieldContent>
           </Field>
 
           <Field data-invalid={!!errors.idExpiryDate}>
-            <FieldLabel required>
-              {formData.idType === "emirates_id"
-                ? "ID expiry date"
-                : "Passport expiry date"}
-            </FieldLabel>
+            <FieldLabel required>Passport expiry date</FieldLabel>
             <FieldContent>
               <DatePicker
                 name="idExpiryDate"
@@ -342,7 +314,7 @@ export function RegistrationFormStep({
                 onChange={(date) => setValue("idExpiryDate", date as Date)}
                 aria-invalid={!!errors.idExpiryDate}
                 disabled={(date) => date <= new Date()}
-                placeholder={`Select ${formData.idType === "emirates_id" ? "ID" : "Passport"} expiry date`}
+                placeholder="Select Passport expiry date"
               />
               <FieldError errors={[errors.idExpiryDate]} />
             </FieldContent>
@@ -356,12 +328,18 @@ export function RegistrationFormStep({
                 value={formData.countryOfCitizenship}
                 onChange={(c) => setValue("countryOfCitizenship", c.name)}
               />
+              {formData.countryOfCitizenship === "Syrian Arab Republic" && (
+                <p className="mt-2 text-xs text-amber-700 font-semibold animate-in fade-in slide-in-from-top-1">
+                  A group of residence outside Syria is required to take the test
+                </p>
+              )}
               <FieldError errors={[errors.countryOfCitizenship]} />
             </FieldContent>
           </Field>
+
           <Field data-invalid={!!errors.idDocument}>
             <FieldLabel required>
-              Attach a valid copy of Passport / Emirates ID:
+              Attach a valid copy of Passport:
             </FieldLabel>
             <FieldContent>
               <div className="flex flex-col gap-2">

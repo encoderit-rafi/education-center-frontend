@@ -7,7 +7,7 @@ export const SeltA1Schema = z
 
     givenNames: z.string().min(1, "Given names are required"),
     middleName: z.string().optional(),
-    surnames: z.string().optional(),
+    surnames: z.string().min(1, "Surname / family name is required"),
     postcode: z.string().optional(),
     poBox: z.string().optional(),
     noSurname: z.boolean().default(false),

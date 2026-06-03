@@ -13,6 +13,7 @@ export const PteAcademicSchema = z.object({
     givenNames: z.string().optional(),
     noGivenNames: z.boolean(),
     middleName: z.string().optional(),
+    noMiddleName: z.boolean(),
     surnames: z.string().optional(),
     noSurname: z.boolean(),
     emailUsername: z.string().email("Invalid email address"),
@@ -38,9 +39,7 @@ export const PteAcademicSchema = z.object({
     examTime: z.string().min(1, "Exam time is required"),
 
     // Step 2: Identification Details
-    idType: z.enum(["passport", "emirates_id"], {
-        message: "Please select your identification type"
-    }).or(z.literal("")),
+    idType: z.literal("passport"),
     idNumber: z.string().min(1, "ID number is required"),
     idExpiryDate: z.any().refine((val) => !!val, "Expiry date is required"),
     idCountryOfIssue: stringOrObject.optional(),
@@ -71,6 +70,10 @@ export const PteAcademicSchema = z.object({
 .refine((data) => data.noGivenNames || (data.givenNames && data.givenNames.trim() !== ""), {
     message: "Given names are required",
     path: ["givenNames"],
+})
+.refine((data) => data.noMiddleName || (data.middleName && data.middleName.trim() !== ""), {
+    message: "Middle name is required",
+    path: ["middleName"],
 })
 .refine((data) => data.noSurname || (data.surnames && data.surnames.trim() !== ""), {
     message: "Surname is required",

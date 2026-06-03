@@ -88,27 +88,14 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.surnames}>
-            <FieldLabel>Surname / family name</FieldLabel>
+            <FieldLabel required>Surname / family name</FieldLabel>
             <FieldContent>
               <Input
                 placeholder="As per passport"
                 aria-invalid={!!errors.surnames}
                 {...register("surnames")}
-                disabled={formData.noSurname}
               />
               <FieldError errors={[errors.surnames]} />
-              <FieldDescription className="flex items-center gap-2">
-                <Checkbox
-                  id="noSurname"
-                  checked={formData.noSurname}
-                  onCheckedChange={(val) =>
-                    setValue("noSurname", val as boolean)
-                  }
-                />
-                <Label htmlFor="noSurname" className="text-xs font-light">
-                  I don't have a surname / family name
-                </Label>
-              </FieldDescription>
             </FieldContent>
           </Field>
 

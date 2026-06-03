@@ -80,7 +80,7 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.middleName}>
-            <FieldLabel required>Middle Name</FieldLabel>
+            <FieldLabel>Middle Name</FieldLabel>
             <FieldContent>
               <Input
                 placeholder="As per passport"
