@@ -200,63 +200,12 @@ function CourseRegistrationForm({ className }: { className?: string }) {
     <div className="bg-white">
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-slate-50 base-px base-py">
-        <div className="section-container">
+        <div className="mx-auto max-w-4xl">
           <h1 className="text-3xl mb-12 text-center font-black leading-[1.1] tracking-tight text-slate-900 lg:text-4xl xl:text-5xl">
             {courseName}{" "}
             <span className="text-primary">Course Registration</span>
           </h1>
-          <div className="flex flex-col md:flex-row gap-6">
-            <div className="relative flex-1 aspect-video rounded-2xl overflow-hidden bg-slate-100 shrink-0">
-              <Image
-                src={packageData?.image || "/images/course-placeholder.jpg"}
-                alt={packageData?.name || "Package"}
-                fill
-                className="object-cover"
-              />
-            </div>
 
-            <div className="flex-1">
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <h2 className="text-2xl font-black text-slate-900">
-                    {packageData?.name}
-                  </h2>
-
-                  <div className="flex flex-wrap gap-2 mt-3">
-                    <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold">
-                      {packageData?.deliveryType}
-                    </span>
-
-                    {packageData?.duration !== "0" && (
-                      <span className="px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-medium">
-                        {packageData?.duration} Hours
-                      </span>
-                    )}
-                  </div>
-                </div>
-
-                <div className="text-right">
-                  <div className="text-3xl font-black text-primary">
-                    <PriceDisplay amount={total_amount} />
-                  </div>
-
-                  {discount_amount > 0 && (
-                    <div className="mt-1">
-                      <span className="text-sm line-through text-slate-400">
-                        <PriceDisplay amount={base_price} />
-                      </span>
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              {packageData?.description && (
-                <p className="mt-5 text-slate-600 leading-relaxed">
-                  {packageData?.description}
-                </p>
-              )}
-            </div>
-          </div>
           <form
             onSubmit={handleSubmit(onSubmit)}
             className={cn("space-y-5 base-px base-py", className)}

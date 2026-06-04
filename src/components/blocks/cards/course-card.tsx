@@ -113,14 +113,13 @@ export default function CourseCard({
 
         <div className="pt-2">
           <Link
-            href={`/exam-preparation-courses/registration?examId=${examSlug}&courseId=${pkg.id}&price=${discountedPrice}&currency=AED`}
+            href={`/exam-preparation-courses/${examSlug}/packages/${pkg.id}`}
             className={cn(
               buttonVariants(),
               "font-bold h-11 shadow-sm px-4 w-full flex items-center justify-center gap-2 transition-all duration-300",
             )}
           >
-            <Calendar className="size-4" />
-            Register Now
+            View Details
           </Link>
         </div>
       </div>
