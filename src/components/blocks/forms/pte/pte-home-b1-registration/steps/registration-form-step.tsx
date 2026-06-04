@@ -9,7 +9,8 @@ import {
   BookOpen,
   Upload,
   X,
-  FileCheck} from "lucide-react";
+  FileCheck
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -27,7 +28,8 @@ import {
   FieldContent,
   FieldDescription,
   FieldError,
-  FieldLabel} from "@/components/ui/field";
+  FieldLabel
+} from "@/components/ui/field";
 import { TPteHomeB1FormSchema } from "../_type";
 import { PriceDisplay } from "@/components/ui/price-display";
 import { Badge } from "@/components/ui/badge";
@@ -51,13 +53,13 @@ export function RegistrationFormStep({
   onBack,
   languages,
   coursesData,
-  workshopsData}: RegistrationFormStepProps) {
+  workshopsData }: RegistrationFormStepProps) {
   const {
     register,
     handleSubmit,
     setValue,
     watch,
-    formState: { errors }} = form;
+    formState: { errors } } = form;
 
   const formData = watch();
 
@@ -346,7 +348,7 @@ export function RegistrationFormStep({
                 {!formData.idDocument ? (
                   <Input
                     type="file"
-                    accept=".pdf,.docx,.doc,.png,.jpg,.jpeg"
+                    accept=".pdf,.png,.jpg,.jpeg"
                     className="h-auto py-2 px-3 border-2 border-dashed border-slate-200 hover:border-primary/50 transition-colors cursor-pointer file:mr-4 file:py-1 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20"
                     onChange={(e) => {
                       const file = e.target.files?.[0];
@@ -384,7 +386,7 @@ export function RegistrationFormStep({
                   </div>
                 )}
                 <p className="text-[12px] text-slate-900 font-medium">
-                  Supported formats: (pdf, docx, doc, png, jpeg)
+                  Supported formats: (pdf, png, jpg,  jpeg)
                 </p>
               </div>
               <FieldError errors={[errors.idDocument]} />
@@ -571,7 +573,7 @@ export function RegistrationFormStep({
         </div>
       </div>
 
-{/* Marketing Preferences */}
+      {/* Marketing Preferences */}
       <MarketingPreferencesSection
         value={formData.marketingConsent}
         onChange={(val) => setValue("marketingConsent", val as any)}

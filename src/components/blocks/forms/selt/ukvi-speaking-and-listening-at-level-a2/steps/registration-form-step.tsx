@@ -377,7 +377,7 @@ export function RegistrationFormStep({
                 {!formData.idDocument ? (
                   <Input
                     type="file"
-                    accept=".pdf,.docx,.doc,.png,.jpg,.jpeg"
+                    accept=".pdf,.png,.jpg,.jpeg"
                     className="h-auto py-2 px-3 border-2 border-dashed border-slate-200 hover:border-primary/50 transition-colors cursor-pointer file:mr-4 file:py-1 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20"
                     onChange={(e) => {
                       const file = e.target.files?.[0];
@@ -415,7 +415,7 @@ export function RegistrationFormStep({
                   </div>
                 )}
                 <p className="text-[12px] text-slate-900 font-medium">
-                  Supported formats: (pdf, docx, doc, png, jpeg)
+                  Supported formats: (pdf, png, jpg,  jpeg)
                 </p>
               </div>
               <FieldError errors={[errors.idDocument]} />

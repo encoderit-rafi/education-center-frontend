@@ -19,7 +19,8 @@ import {
   FieldContent,
   FieldDescription,
   FieldError,
-  FieldLabel} from "@/components/ui/field";
+  FieldLabel
+} from "@/components/ui/field";
 import { TPteAcademicSchema } from "../_type";
 import { PriceDisplay } from "@/components/ui/price-display";
 import { Badge } from "@/components/ui/badge";
@@ -43,13 +44,13 @@ export function RegistrationFormStep({
   onBack,
   languages,
   coursesData,
-  workshopsData}: RegistrationFormStepProps) {
+  workshopsData }: RegistrationFormStepProps) {
   const {
     register,
     handleSubmit,
     setValue,
     watch,
-    formState: { errors }} = form;
+    formState: { errors } } = form;
 
   const formData = watch();
 
@@ -366,7 +367,7 @@ export function RegistrationFormStep({
                 {!formData.passportCopy ? (
                   <Input
                     type="file"
-                    accept=".pdf,.docx,.doc,.png,.jpg,.jpeg"
+                    accept=".pdf,.png,.jpg,.jpeg"
                     className="h-auto py-2 px-3 border-2 border-dashed border-slate-200 hover:border-primary/50 transition-colors cursor-pointer file:mr-4 file:py-1 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20"
                     onChange={(e) => {
                       const file = e.target.files?.[0];
@@ -404,7 +405,7 @@ export function RegistrationFormStep({
                   </div>
                 )}
                 <p className="text-[12px] text-slate-900 font-medium">
-                  Supported formats: (pdf, docx, doc, png, jpeg)
+                  Supported formats: (pdf, png, jpg,  jpeg)
                 </p>
               </div>
               <FieldError errors={[errors.passportCopy]} />
@@ -486,22 +487,28 @@ export function RegistrationFormStep({
                   { label: "Study", value: "study" },
                   {
                     label: "Nursing registration or licensing",
-                    value: "nursing"},
+                    value: "nursing"
+                  },
                   {
                     label: "Australia - MATES visa (India only)",
-                    value: "au_mates"},
+                    value: "au_mates"
+                  },
                   {
                     label: "Australia - Post Study Work (485) visa",
-                    value: "au_485"},
+                    value: "au_485"
+                  },
                   {
                     label: "Australia - Temporary Work visa",
-                    value: "au_temp_work"},
+                    value: "au_temp_work"
+                  },
                   {
                     label: "New Zealand - Temporary Work visa",
-                    value: "nz_temp_work"},
+                    value: "nz_temp_work"
+                  },
                   {
                     label: "Skilled migration / Permanent Residency",
-                    value: "skilled_migration"},
+                    value: "skilled_migration"
+                  },
                   { label: "Spouse / Family visa", value: "family_visa" },
                   { label: "Working Holiday visa", value: "working_holiday" },
                   { label: "Other - specify below", value: "other" },
@@ -527,7 +534,8 @@ export function RegistrationFormStep({
                   options={[
                     {
                       label: "Secondary (up to 16 years)",
-                      value: "undergraduate"},
+                      value: "undergraduate"
+                    },
                     { label: "Secondary (16-19 years)", value: "postgraduate" },
                     { label: "Degree (or equivalent)", value: "degree" },
                     { label: "Post-graduate", value: "post_graduate" },
@@ -643,7 +651,7 @@ export function RegistrationFormStep({
         </div>
       </div>
 
-{/* Marketing Preferences */}
+      {/* Marketing Preferences */}
       <MarketingPreferencesSection
         value={formData.marketingPreference}
         onChange={(val) => setValue("marketingPreference", val as any)}
