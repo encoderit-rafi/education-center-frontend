@@ -151,6 +151,8 @@ export default async function BookExamsId({
       return <FormSELTB1Registration />;
     case "selt-b1-r-w":
     case "ukvi-speaking-and-listening-at-level-b1-r-w":
+    case "ukvi-speaking-listening-reading-and-writing-at-level-b1":
+    case "ukvi-speaking-listening-reading-and-writing-at-level-b1-1":
       return <FormSELTB1RWRegistration />;
     case "selt-b2":
     case "ukvi-speaking-listening-reading-and-writing-at-level-b2":

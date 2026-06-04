@@ -2698,8 +2698,8 @@ export const FEES_DATA = [
 // INFORMATION
 
 export const INSTITUTIONS_INFO = {
-  phone: "+971 4 333 3616",
-  email: "+97165531250",
+  phone: "+97165531250",
+  email: "info@tepth.org",
   address: `The Exam Preparation & Testing House L.L.C\n
   Suite 701, 7th Floor, Tabarak Tower, Corniche Road,\n
   Al Mamzar, Sharjah, United Arab Emirates.`,

@@ -335,10 +335,6 @@ export function RegistrationFormStep({
 
           <Field data-invalid={!!errors.idType}>
             <FieldLabel required>Identification type</FieldLabel>
-            <FieldDescription>
-              Please make sure you present the same ID document you used for
-              registration on the exam day.
-            </FieldDescription>
             <FieldContent>
               <RadioGroup
                 name="idType"
@@ -363,6 +359,10 @@ export function RegistrationFormStep({
               </RadioGroup>
               <FieldError errors={[errors.idType]} />
             </FieldContent>
+            <FieldDescription>
+              Please make sure ,Your present the same identification you use for
+              registration on the exam day.
+            </FieldDescription>
           </Field>
 
           <Field data-invalid={!!errors.idNumber}>

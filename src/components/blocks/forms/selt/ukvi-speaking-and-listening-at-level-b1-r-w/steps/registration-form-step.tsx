@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { Checkbox } from "@/components/ui/checkbox";
 import { PhoneInput } from "@/components/ui/phone-input";
 import { CountryDropdown } from "@/components/ui/country-dropdown";
 import { DatePicker } from "@/components/blocks/date-picker";
@@ -17,7 +16,8 @@ import {
   FieldContent,
   FieldDescription,
   FieldError,
-  FieldLabel} from "@/components/ui/field";
+  FieldLabel
+} from "@/components/ui/field";
 import { SearchableDropdown } from "@/components/ui/searchable-dropdown";
 import { PriceDisplay } from "@/components/ui/price-display";
 import { Badge } from "@/components/ui/badge";
@@ -43,13 +43,13 @@ export function RegistrationFormStep({
   onBack,
   languages = [],
   coursesData = {},
-  workshopsData = {}}: RegistrationFormStepProps) {
+  workshopsData = {} }: RegistrationFormStepProps) {
   const {
     register,
     handleSubmit,
     setValue,
     watch,
-    formState: { errors }} = form;
+    formState: { errors } } = form;
 
   const formData = watch();
 
@@ -199,18 +199,6 @@ export function RegistrationFormStep({
                 aria-invalid={!!errors.mobileNumber}
               />
               <FieldError errors={[errors.mobileNumber]} />
-              <FieldDescription className="flex items-center gap-2 mt-2">
-                <Checkbox
-                  id="smsConsent"
-                  checked={formData.smsConsent}
-                  onCheckedChange={(val) =>
-                    setValue("smsConsent", val as boolean)
-                  }
-                />
-                <Label htmlFor="smsConsent" className="text-xs font-light">
-                  I agree to receive notifications
-                </Label>
-              </FieldDescription>
             </FieldContent>
           </Field>
           <Field data-invalid={!!errors.email}>
@@ -314,80 +302,6 @@ export function RegistrationFormStep({
             </FieldContent>
           </Field>
 
-          <Field className="md:col-span-2 lg:col-span-3" data-invalid={!!errors.reasonForTest}>
-            <FieldLabel required>Reason for test</FieldLabel>
-            <FieldContent className="mt-2">
-              <RadioGroup
-                name="reasonForTest"
-                onValueChange={(val) => {
-                  setValue("reasonForTest", val);
-                  if (val !== "other") setValue("reasonForTestOther", "");
-                }}
-                value={formData.reasonForTest}
-                className="flex flex-col gap-3"
-              >
-                {[
-                  { id: "ukvi", label: "UKVI", description: "For UK Visa and Immigration applications" },
-                  { id: "other", label: "Other", description: "" },
-                ].map((opt) => (
-                  <div key={opt.id} className="flex flex-col gap-2">
-                    <Label
-                      htmlFor={`reason-${opt.id}`}
-                      className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer"
-                    >
-                      <RadioGroupItem value={opt.id} id={`reason-${opt.id}`} />
-                      <div className="flex flex-col">
-                        <span>{opt.label}</span>
-                        {opt.description && (
-                          <span className="text-xs text-slate-500 font-light">{opt.description}</span>
-                        )}
-                      </div>
-                    </Label>
-                    {opt.id === "other" && formData.reasonForTest === "other" && (
-                      <div className="pl-6 animate-in fade-in slide-in-from-top-2 duration-300">
-                        <textarea
-                          placeholder="Please enter a reason for taking the test"
-                          value={formData.reasonForTestOther ?? ""}
-                          onChange={(e) => setValue("reasonForTestOther", e.target.value)}
-                          className="w-full min-h-[80px] p-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary text-sm font-light"
-                        />
-                        <FieldError errors={[errors.reasonForTestOther]} />
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </RadioGroup>
-              <FieldError errors={[errors.reasonForTest]} />
-            </FieldContent>
-          </Field>
-
-          <Field data-invalid={!!errors.idType}>
-            <FieldLabel required>ID to present at the test centre</FieldLabel>
-            <FieldDescription>
-              Please select the ID you will bring to the test centre.
-            </FieldDescription>
-            <FieldContent>
-              <SearchableDropdown
-                name="idType"
-                options={[
-                  { label: "Passport", value: "passport" },
-                  { label: "Govt ID card, can be Biometric (only accepted in the country it was issued)", value: "govt_id" },
-                  { label: "EU ID card (only accepted in the country it was issued)**", value: "eu_id" },
-                  { label: "Valid travel document with photograph (excluding Emergency Travel Documents)", value: "travel_doc" },
-                  { label: "UK issued Biometric Residence Card (UK BRC)", value: "uk_brc" },
-                  { label: "UK issued Biometric Residence Permit (UK BRP)", value: "uk_brp" },
-                ]}
-                placeholder="Please choose a type of ID"
-                value={formData.idType}
-                aria-invalid={!!errors.idType}
-                onChange={(val) => setValue("idType", val as any)}
-              />
-              <FieldError errors={[errors.idType]} />
-              <p className="mt-2 text-xs font-bold text-slate-800">
-                Acceptable ID. Only Passport or Emirates ID.
-              </p>
-            </FieldContent>
-          </Field>
 
           <Field data-invalid={!!errors.idNumber}>
             <FieldLabel required>
@@ -403,6 +317,10 @@ export function RegistrationFormStep({
               />
               <FieldError errors={[errors.idNumber]} />
             </FieldContent>
+            <FieldDescription>
+              Please make sure ,Your present the same passport you use for
+              registration on the exam day.
+            </FieldDescription>
           </Field>
 
           <Field data-invalid={!!errors.idExpiryDate}>
@@ -452,7 +370,7 @@ export function RegistrationFormStep({
 
           <Field data-invalid={!!errors.idDocument}>
             <FieldLabel required>
-              Attach a valid copy of Passport / Emirates ID:
+              Attach a valid copy of your passport
             </FieldLabel>
             <FieldContent>
               <div className="flex flex-col gap-2">
@@ -613,10 +531,56 @@ export function RegistrationFormStep({
               </Field>
             </>
           )}
+          <Field className="md:col-span-2 lg:col-span-3" data-invalid={!!errors.reasonForTest}>
+            <FieldLabel required>Reason for test</FieldLabel>
+            <FieldContent className="mt-2">
+              <RadioGroup
+                name="reasonForTest"
+                onValueChange={(val) => {
+                  setValue("reasonForTest", val);
+                  if (val !== "other") setValue("reasonForTestOther", "");
+                }}
+                value={formData.reasonForTest}
+                className="flex flex-col gap-3"
+              >
+                {[
+                  { id: "ukvi", label: "UKVI", description: "For UK Visa and Immigration applications" },
+                  { id: "other", label: "Other", description: "" },
+                ].map((opt) => (
+                  <div key={opt.id} className="flex flex-col gap-2">
+                    <Label
+                      htmlFor={`reason-${opt.id}`}
+                      className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer"
+                    >
+                      <RadioGroupItem value={opt.id} id={`reason-${opt.id}`} />
+                      <div className="flex flex-col">
+                        <span>{opt.label}</span>
+                        {opt.description && (
+                          <span className="text-xs text-slate-500 font-light">{opt.description}</span>
+                        )}
+                      </div>
+                    </Label>
+                    {opt.id === "other" && formData.reasonForTest === "other" && (
+                      <div className="pl-6 animate-in fade-in slide-in-from-top-2 duration-300">
+                        <textarea
+                          placeholder="Please enter a reason for taking the test"
+                          value={formData.reasonForTestOther ?? ""}
+                          onChange={(e) => setValue("reasonForTestOther", e.target.value)}
+                          className="w-full min-h-[80px] p-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary text-sm font-light"
+                        />
+                        <FieldError errors={[errors.reasonForTestOther]} />
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </RadioGroup>
+              <FieldError errors={[errors.reasonForTest]} />
+            </FieldContent>
+          </Field>
         </div>
       </div>
 
-{/* Add-on Services Section */}
+      {/* Add-on Services Section */}
       <AddonServicesSection
         coursesData={coursesData}
         workshopsData={workshopsData}
