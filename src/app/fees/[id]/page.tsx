@@ -416,8 +416,7 @@ export default async function FeesDynamicPage({
                 <Sparkles className="size-3" /> Targeted Skills Boost
               </div>
               <h2 className="text-4xl font-black text-slate-900 tracking-tight leading-tight lg:text-5xl">
-                Accelerated{" "}
-                <span className="text-primary">Skills Workshops</span>
+                <span className="text-primary">Workshops</span>
               </h2>
               <p className="text-slate-600 text-base lg:text-lg font-medium leading-relaxed">
                 Need a targeted boost? Our high-intensity, topic-focused
