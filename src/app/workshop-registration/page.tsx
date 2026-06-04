@@ -318,13 +318,13 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
                   </FieldContent>
                 </Field>
 
-                <div className="text-primary border border-dashed border-primary/40 p-3 bg-primary/5 rounded-md flex items-start gap-2">
+                {/* <div className="text-primary border border-dashed border-primary/40 p-3 bg-primary/5 rounded-md flex items-start gap-2">
                   <Info className="w-4 h-4 mt-0.5" />
                   <p className="text-[11px] font-medium leading-relaxed">
                     We will send your credentials and link to this email address
                     24 hours before your selected slot.
                   </p>
-                </div>
+                </div> */}
               </div>
               <div className="space-y-4">
                 {/* Workshop & Course Details Card */}
@@ -421,7 +421,7 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
                     onValueChange={(val) =>
                       setValue("paymentMethod", val as "stripe" | "paypal")
                     }
-                    className="grid grid-cols-2 gap-3"
+                    className="grid gap-3"
                   >
                     <label
                       htmlFor="payment-stripe"
@@ -434,12 +434,7 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
                     >
                       <RadioGroupItem value="stripe" id="payment-stripe" />
                       <div className="w-full flex items-center justify-between gap-2 ">
-                        <Image
-                          src="/images/stripe-logo.png"
-                          alt="Stripe"
-                          width={50}
-                          height={50}
-                        />
+                        <span className="font-semibold">Credit/Debit Card</span>
                         <Image
                           src="/images/cards.png"
                           alt="Stripe"
