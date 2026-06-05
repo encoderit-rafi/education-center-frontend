@@ -19,6 +19,8 @@ import { notFound } from "next/navigation";
 import BookExamItems from "../_components/book-exam-items";
 
 import api from "@/axios";
+import CelpipInfo from "@/components/blocks/celpip-info";
+import CaelInfo from "@/components/blocks/cael-info";
 
 export default async function BookExamsId({
   params,
@@ -49,9 +51,7 @@ export default async function BookExamsId({
     const allExams = listResponse.data?.data?.data || [];
 
     if (!exam) {
-      exam = allExams.find(
-        (e: any) => e.id === slug || e.slug === slug
-      );
+      exam = allExams.find((e: any) => e.id === slug || e.slug === slug);
     }
 
     if (exam) {
@@ -59,8 +59,14 @@ export default async function BookExamsId({
       childExams = allExams
         .filter((e: any) => e.parentId === exam.id)
         .sort((a: any, b: any) => {
-          const aVal = a.orderIndex !== undefined && a.orderIndex !== null ? Number(a.orderIndex) : Infinity;
-          const bVal = b.orderIndex !== undefined && b.orderIndex !== null ? Number(b.orderIndex) : Infinity;
+          const aVal =
+            a.orderIndex !== undefined && a.orderIndex !== null
+              ? Number(a.orderIndex)
+              : Infinity;
+          const bVal =
+            b.orderIndex !== undefined && b.orderIndex !== null
+              ? Number(b.orderIndex)
+              : Infinity;
           return aVal - bVal;
         });
     }
@@ -74,7 +80,7 @@ export default async function BookExamsId({
 
   // 3. Determine if it is a parent group (has child items or is labeled group/item) or a detail page
   const hasGroupType = exam.examType?.some(
-    (et: any) => et.name === "group" || et.name === "item"
+    (et: any) => et.name === "group" || et.name === "item",
   );
   const isGroup = hasGroupType && childExams.length > 0;
 
@@ -118,26 +124,20 @@ export default async function BookExamsId({
       );
     case "celpip-general":
       return (
-        <div>
-          <h2 className="text-2xl font-bold my-8 text-center">
-            CELPIP General Registration
-          </h2>
+        <div className="min-h-[60vh] p-2 flex items-center justify-center bg-white">
+          <CelpipInfo />
         </div>
       );
     case "celpip-general-ls":
       return (
-        <div>
-          <h2 className="text-2xl font-bold my-8 text-center">
-            CELPIP General LS Registration
-          </h2>
+        <div className="min-h-[60vh] p-2 flex items-center justify-center bg-white">
+          <CelpipInfo />
         </div>
       );
-    case EXAM_IDS_DATA.cael.id:
+    case "cael":
       return (
-        <div>
-          <h2 className="text-2xl font-bold my-8 text-center">
-            CAEL Registration
-          </h2>
+        <div className="min-h-[60vh] p-2 flex items-center justify-center bg-white">
+          <CaelInfo />
         </div>
       );
     case "selt-a1":
@@ -166,7 +166,7 @@ export default async function BookExamsId({
     case "ukvi-speaking-listening-reading-and-writing-at-level-c2":
     case "ukvi-speaking-and-listening-at-level-c2":
       return <FormSELTC2Registration />;
- 
+
     case "pte-academic":
       return <FormPTEAcademicRegistration />;
     case "pte-core":
