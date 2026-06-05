@@ -288,16 +288,15 @@ export default async function PackageDetailPage({ params }: PageProps) {
             {/* Quality Seals */}
             <div className="space-y-3.5">
               <div className="flex items-center gap-3 text-sm text-slate-600 font-semibold">
-                <ShieldCheck className="size-5 text-emerald-500 shrink-0" />
-                <span>100% Secure Checkout</span>
-              </div>
-              <div className="flex items-center gap-3 text-sm text-slate-600 font-semibold">
-                <Users className="size-5 text-emerald-500 shrink-0" />
-                <span>Expert Instructors</span>
-              </div>
-              <div className="flex items-center gap-3 text-sm text-slate-600 font-semibold">
                 <CheckCircle2 className="size-5 text-emerald-500 shrink-0" />
-                <span>Official Preparation Center</span>
+
+                <span>Certified Instructors</span>
+              </div>
+
+              <div className="flex items-center gap-3 text-sm text-slate-600 font-semibold">
+                <ShieldCheck className="size-5 text-emerald-500 shrink-0" />
+
+                <span>Licensed Prep. Center</span>
               </div>
             </div>
           </div>
