@@ -16,7 +16,7 @@ import { RegistrationFormStep } from "./steps/registration-form-step";
 import { ReviewStep } from "./steps/review-step";
 
 // Schema
-import { RefinedPteHomeUkviSchema, type TPteHomeUkviFormSchema } from "./_type";
+import { PteHomeUKVISchema, type TPteHomeUKVISchema } from "./_type";
 import { useMutation } from "@tanstack/react-query";
 import api from "@/axios";
 
@@ -40,12 +40,12 @@ const SERVICE_FEE = 100;
 export default function FormPTEHomeUKVIRegistration() {
   const [currentStep, setCurrentStep] = useState(0); // 0: Terms, 1: Date, 2: Form, 3: Review
 
-  const form = useForm<TPteHomeUkviFormSchema>({
-    resolver: zodResolver(RefinedPteHomeUkviSchema),
+  const form = useForm<TPteHomeUKVISchema>({
+    resolver: zodResolver(PteHomeUKVISchema),
     defaultValues: {
       givenNames: "",
-      middleNames: "",
       noGivenNames: false,
+      middleName: "",
       noMiddleName: false,
       surnames: "",
       noSurname: false,
@@ -57,30 +57,39 @@ export default function FormPTEHomeUKVIRegistration() {
       countryOfBirth: "",
       countryOfCitizenship: "",
       countryOfResidence: "United Arab Emirates",
-      address: "",
+      postalAddress1: "",
+      postalAddress2: "",
+      poBox: "",
+      postcode: "",
       city: "",
       mobileNumber: "",
       homeLanguage: "",
+      homeLanguageOther: "",
       planningCountry: "",
       currentSituation: "",
+      currentSituationOther: "",
       reasonForTaking: "",
+      reasonForTakingOther: "",
+      studyLevel: "",
+      studyLevelOther: "",
       occupationSector: "",
+      occupationSectorOther: "",
       referralSource: "",
-      takenBefore: "",
-      takenWithinTwoYears: "",
-      hasExistingAccount: "",
-      marketingConsent: "",
+      referralSourceOther: "",
+      fieldOfStudy: "",
+      fieldOfStudyOther: "",
+      takenBefore: "" as any,
+      takenWithinTwoYears: "" as any,
+      hasExistingAccount: "" as any,
+      marketingPreference: "",
       idType: "passport",
       idCountryOfIssue: "",
       idNumber: "",
       idExpiryDate: undefined,
-      documentNumberConfirmed: true,
-      idPolicyRead: true,
-      dataSharingAgreed: true,
-      bookingTermsAgreed: true,
       selectedCourse: "",
       selectedWorkshop: "",
-      idDocument: undefined,
+      passportCopy: undefined,
+      infoCorrect: false,
       examDate: undefined,
       examTime: "",
     },
@@ -153,14 +162,14 @@ export default function FormPTEHomeUKVIRegistration() {
     },
   });
 
-  const handleFormSubmit: SubmitHandler<TPteHomeUkviFormSchema> = (data) => {
+  const handleFormSubmit: SubmitHandler<TPteHomeUKVISchema> = (data) => {
     if (currentStep < 3) {
       nextStep();
     } else {
       bookingMutation.mutate({
         exam_id: "pte-home-ukvi",
         given_names: data.givenNames,
-        middle_names: data.middleNames,
+        middle_name: data.middleName,
         surnames: data.surnames,
         date_of_birth: data.dateOfBirth ? new Date(data.dateOfBirth as any).toISOString() : "",
         gender: data.gender,
@@ -169,13 +178,17 @@ export default function FormPTEHomeUKVIRegistration() {
         country_of_birth: data.countryOfBirth,
         country_of_citizenship: data.countryOfCitizenship,
         country_of_residence: data.countryOfResidence,
-        address: data.address,
+        postal_address_1: data.postalAddress1,
+        postal_address_2: data.postalAddress2,
+        po_box: data.poBox,
+        postcode: data.postcode,
         city: data.city,
         mobile_number: data.mobileNumber,
         home_language: data.homeLanguage,
         planning_country: data.planningCountry,
         current_situation: data.currentSituation,
         reason_for_taking: data.reasonForTaking,
+        study_level: data.studyLevel,
         occupation_sector: data.occupationSector,
         id_type: data.idType,
         id_number: data.idNumber,
@@ -332,7 +345,7 @@ export default function FormPTEHomeUKVIRegistration() {
               <ReviewSummaryGrid
                 personalDetails={[
                   { label: "Given Names", value: formData.noGivenNames ? "N/A" : formData.givenNames },
-                  ...((formData as any).middleNames ? [{ label: "Middle Names", value: (formData as any).middleNames }] : []),
+                  { label: "Middle Name", value: formData.middleName || "N/A" },
                   { label: "Surnames", value: formData.noSurname ? "N/A" : formData.surnames },
                   { label: "Date of Birth", value: formData.dateOfBirth ? format(new Date(formData.dateOfBirth as any), "PPP") : "N/A" },
                   { label: "Sex", value: formData.gender || "N/A" },
@@ -342,14 +355,15 @@ export default function FormPTEHomeUKVIRegistration() {
                 identityContact={[
                   { label: "ID Type", value: formData.idType?.replace("_", " ") },
                   { label: "ID Number", value: formData.idNumber || "N/A" },
-                  { label: "Email", value: (formData as any).emailUsername },
+                  { label: "Email", value: formData.emailUsername },
                   { label: "ID Expiry Date", value: formData.idExpiryDate ? format(new Date(formData.idExpiryDate as any), "PPP") : "N/A" },
-                  { label: "Identity Document", value: (formData as any).idDocument ? ((formData as any).idDocument as File).name : "No file attached" },
+                  { label: "Identity Document", value: formData.passportCopy ? (formData.passportCopy as File).name : "No file attached" },
                 ]}
                 testInformation={[
                   { label: "Exam Date", value: formData.examDate ? format(new Date(formData.examDate as any), "PPP") : "N/A", highlight: true },
-                  { label: "Time Slot", value: (formData as any).examTime || "N/A" },
-                  { label: "Full Address", value: (formData as any).address },
+                  { label: "Time Slot", value: formData.examTime || "N/A" },
+                  { label: "Address Line 1", value: formData.postalAddress1 },
+                  ...(formData.postalAddress2 ? [{ label: "Address Line 2", value: formData.postalAddress2 }] : []),
                   { label: "Emirate / City", value: formData.city },
                   { label: "Country of Residence", value: formData.countryOfResidence },
                   { label: "First Language", value: formData.homeLanguage || "N/A" },

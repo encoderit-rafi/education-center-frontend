@@ -115,66 +115,68 @@ export function DateStep({
                         </div>
                       </Label>
                       {timeSlot === slot.id && (
-                        <div className="p-3 rounded-xl bg-slate-50 border border-slate-100 animate-in slide-in-from-top-2 duration-300">
-                          <p className="text-sm font-medium leading-relaxed mb-3">
-                            {slot.id === "9:00 AM"
-                              ? "The Speaking Test usually takes place in the afternoon. This will be confirmed by the British Council."
-                              : "The Speaking Test usually takes place in the morning. This will be confirmed by the British Council."}
-                          </p>
-                          <div className="mt-3 pt-3 border-t border-slate-200">
+                        <div className="p-4 rounded-xl bg-slate-50 border border-slate-100 animate-in slide-in-from-top-2 duration-300 space-y-4">
+                          <div>
                             <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">
-                              Select Speaking Slot
+                              Select Speaking Test Delivery Format
                             </p>
-                            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                              {(slot.id === "9:00 AM"
-                                ? [
-                                    "1:00 PM",
-                                    "1:20 PM",
-                                    "1:40 PM",
-                                    "2:00 PM",
-                                    "2:20 PM",
-                                    "2:40 PM",
-                                    "3:00 PM",
-                                    "3:20 PM",
-                                    "3:40 PM",
-                                    "4:00 PM",
-                                  ]
-                                : [
-                                    "9:00 AM",
-                                    "9:20 AM",
-                                    "9:40 AM",
-                                    "10:00 AM",
-                                    "10:20 AM",
-                                    "10:40 AM",
-                                    "11:00 AM",
-                                    "11:20 AM",
-                                    "11:40 AM",
-                                    "12:00 PM",
-                                    "12:20 PM",
-                                    "12:40 PM",
-                                  ]
-                              ).map((sSlot) => {
-                                const isSelected = speakingSlot === sSlot;
-                                return (
-                                  <button
-                                    key={sSlot}
-                                    type="button"
-                                    onClick={() => onSpeakingSlotChange(sSlot)}
-                                    className={`py-2 px-3 text-xs font-semibold rounded-lg border transition-all text-center ${
-                                      isSelected
-                                        ? "border-primary bg-primary/10 text-primary shadow-sm"
-                                        : "border-slate-200 bg-white hover:border-slate-300 text-slate-700"
-                                    }`}
-                                  >
-                                    {sSlot}
-                                  </button>
-                                );
-                              })}
-                            </div>
+                            <RadioGroup
+                              value={speakingSlot}
+                              onValueChange={onSpeakingSlotChange}
+                              className="grid gap-3"
+                            >
+                              <div className="flex items-start space-x-2.5 p-2 rounded-lg hover:bg-slate-100/50 transition-colors">
+                                <RadioGroupItem
+                                  value="Live with the examiner at the test center (Face to face)."
+                                  id={`live-${slot.id}`}
+                                  className="mt-1"
+                                />
+                                <Label
+                                  htmlFor={`live-${slot.id}`}
+                                  className="text-sm font-medium leading-tight cursor-pointer text-slate-800"
+                                >
+                                  Live with the examiner at the test center (Face to face).
+                                </Label>
+                              </div>
+                              <div className="flex items-start space-x-2.5 p-2 rounded-lg hover:bg-slate-100/50 transition-colors">
+                                <RadioGroupItem
+                                  value="Video Call at the test centre (VCS)"
+                                  id={`vcs-${slot.id}`}
+                                  className="mt-1"
+                                />
+                                <Label
+                                  htmlFor={`vcs-${slot.id}`}
+                                  className="text-sm font-medium leading-tight cursor-pointer text-slate-800"
+                                >
+                                  Video Call at the test centre (VCS)
+                                </Label>
+                              </div>
+                            </RadioGroup>
                             {speakingSlotError && (
                               <p className="text-xs font-semibold text-destructive mt-2">
                                 {speakingSlotError.message}
                               </p>
+                            )}
+                          </div>
+                          <div className="pt-4 border-t border-slate-200 text-sm font-medium leading-relaxed text-slate-700 space-y-2">
+                            {slot.id === "9:00 AM" ? (
+                              <>
+                                <p>
+                                  <strong>Note:</strong> The Speaking Test usually takes place in the afternoon. The Speaking Test might be conducted in-person with the examiner (face to face) or via video call on exam day. We will confirm with you the Speaking Test delivery format before we book you the test. This will still need to be confirmed by the British Council.
+                                </p>
+                                <p className="text-xs text-slate-500 mt-2">
+                                  You may also reach out to us at <a href="tel:+97165531250" className="underline text-primary font-semibold">+97165531250</a> or <a href="mailto:info@tepth.org" className="underline text-primary font-semibold">info@tepth.org</a> and confirm the Speaking Test delivery format before you proceed with the CD-IELTLS Registration on our website.
+                                </p>
+                              </>
+                            ) : (
+                              <>
+                                <p>
+                                  <strong>Note:</strong> The Speaking Test usually takes place in the morning. The Speaking Test might be conducted in-person with the examiner (face to face) or via video call on exam day. We will confirm with you the Speaking Test delivery format before we book you the test. This will still need to be confirmed by the British Council.
+                                </p>
+                                <p className="text-xs text-slate-500 mt-2">
+                                  You may also reach out to us at <a href="tel:+97165531250" className="underline text-primary font-semibold">+97165531250</a> or <a href="mailto:info@tepth.org" className="underline text-primary font-semibold">info@tepth.org</a> and confirm the Speaking Test delivery format before you proceed with the CD-IELTLS Registration on our website.
+                                </p>
+                              </>
                             )}
                           </div>
                         </div>
@@ -185,11 +187,6 @@ export function DateStep({
                 <FieldError errors={[timeSlotError, speakingSlotError]} className="mt-4" />
               </FieldContent>
             </Field>
-
-            <div className="p-4 rounded-xl bg-blue-50 border border-blue-100 text-blue-800 text-sm font-medium">
-              Note: The speaking test might be conducted in-person or via
-              video-call on exam day. This will be confirmed by the British Council.
-            </div>
           </div>
         </div>
 

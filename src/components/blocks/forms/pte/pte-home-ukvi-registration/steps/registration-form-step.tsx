@@ -2,16 +2,7 @@
 
 import React from "react";
 import { UseFormReturn } from "react-hook-form";
-import {
-  Save,
-  User,
-  Globe,
-  BookOpen,
-  Upload,
-  X,
-  FileCheck
-} from "lucide-react";
-import { cn } from "@/lib/utils";
+import { Save, User, Globe, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -30,20 +21,20 @@ import {
   FieldError,
   FieldLabel
 } from "@/components/ui/field";
-import { TPteHomeUkviFormSchema } from "../_type";
+import { TPteHomeUKVISchema } from "../_type";
 import { PriceDisplay } from "@/components/ui/price-display";
 import { Badge } from "@/components/ui/badge";
 import { AddonServicesSection } from "@/components/blocks/forms/shared/addon-services-section";
-import { MarketingPreferencesSection, TEPTH_THIRD_PARTY_MARKETING_OPTIONS } from "@/components/blocks/forms/shared/marketing-preferences-section";
+import { MarketingPreferencesSection, TEPTH_MARKETING_OPTIONS } from "@/components/blocks/forms/shared/marketing-preferences-section";
 
 interface RegistrationFormStepProps {
-  form: UseFormReturn<TPteHomeUkviFormSchema>;
-  onSubmit: (data: TPteHomeUkviFormSchema) => void;
+  form: UseFormReturn<TPteHomeUKVISchema>;
+  onSubmit: (data: TPteHomeUKVISchema) => void;
   onInvalid: (errors: any) => void;
   onBack: () => void;
   languages: any[];
-  coursesData: any[];
-  workshopsData: any[];
+  coursesData: any;
+  workshopsData: any;
 }
 
 export function RegistrationFormStep({
@@ -72,7 +63,7 @@ export function RegistrationFormStep({
       <div className="space-y-6">
         <Stepper step={3}>Personal Details</Stepper>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
           <Field data-invalid={!!errors.givenNames}>
             <FieldLabel required>First / given names</FieldLabel>
             <FieldContent>
@@ -98,16 +89,16 @@ export function RegistrationFormStep({
             </FieldContent>
           </Field>
 
-          <Field data-invalid={!!errors.middleNames}>
+          <Field data-invalid={!!errors.middleName}>
             <FieldLabel required>Middle Name</FieldLabel>
             <FieldContent>
               <Input
                 placeholder="As per passport"
-                aria-invalid={!!errors.middleNames}
-                {...register("middleNames")}
+                aria-invalid={!!errors.middleName}
+                {...register("middleName")}
                 disabled={formData.noMiddleName}
               />
-              <FieldError errors={[errors.middleNames]} />
+              <FieldError errors={[errors.middleName]} />
               <FieldDescription className="flex items-center gap-2 mt-2">
                 <Checkbox
                   id="noMiddleName"
@@ -160,7 +151,9 @@ export function RegistrationFormStep({
                 }
                 fromYear={1900}
                 toYear={new Date().getFullYear()}
-                placeholder="Select date of birth"
+                calendarClassName="[--calendar-accent:theme(colors.primary.DEFAULT)]"
+                placeholder="Select your date of birth"
+                aria-invalid={!!errors.dateOfBirth}
               />
               {formData.dateOfBirth &&
                 (() => {
@@ -188,7 +181,7 @@ export function RegistrationFormStep({
             <FieldLabel required>Sex</FieldLabel>
             <FieldContent>
               <RadioGroup
-                onValueChange={(val) => setValue("gender", val)}
+                onValueChange={(val) => setValue("gender", val as any)}
                 value={formData.gender}
                 className="grid grid-cols-2 gap-3"
               >
@@ -196,6 +189,7 @@ export function RegistrationFormStep({
                   <Label
                     key={opt}
                     htmlFor={opt}
+                    data-invalid={!!errors.gender}
                     className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive capitalize"
                   >
                     <RadioGroupItem value={opt} id={opt} />
@@ -242,10 +236,11 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.confirmEmail}>
-            <FieldLabel required>Confirm Email address</FieldLabel>
+            <FieldLabel required>Confirm email address</FieldLabel>
             <FieldContent>
               <Input
                 placeholder="Confirm your email"
+                onPaste={(e) => e.preventDefault()}
                 {...register("confirmEmail")}
               />
               <FieldError errors={[errors.confirmEmail]} />
@@ -276,14 +271,38 @@ export function RegistrationFormStep({
             </FieldContent>
           </Field>
 
-          <Field data-invalid={!!errors.address} className="lg:col-span-2">
-            <FieldLabel required>Full Address</FieldLabel>
+          <Field data-invalid={!!errors.postalAddress1}>
+            <FieldLabel required>Address Line 1</FieldLabel>
             <FieldContent>
               <Input
                 placeholder="Street address, building, etc."
-                {...register("address")}
+                {...register("postalAddress1")}
               />
-              <FieldError errors={[errors.address]} />
+              <FieldError errors={[errors.postalAddress1]} />
+            </FieldContent>
+          </Field>
+
+          <Field data-invalid={!!errors.postalAddress2}>
+            <FieldLabel>Address Line 2</FieldLabel>
+            <FieldContent>
+              <Input
+                placeholder="Apartment, suite, etc. (optional)"
+                {...register("postalAddress2")}
+              />
+            </FieldContent>
+          </Field>
+
+          <Field>
+            <FieldLabel>P.O. Box number</FieldLabel>
+            <FieldContent>
+              <Input placeholder="P.O. Box" {...register("poBox")} />
+            </FieldContent>
+          </Field>
+
+          <Field>
+            <FieldLabel>Postal Code (Zip Code)</FieldLabel>
+            <FieldContent>
+              <Input placeholder="Postal code" {...register("postcode")} />
             </FieldContent>
           </Field>
 
@@ -331,7 +350,7 @@ export function RegistrationFormStep({
                 onChange={(c) => setValue("countryOfCitizenship", c.name)}
               />
               {formData.countryOfCitizenship === "Syrian Arab Republic" && (
-                <p className="mt-2 text-xs text-amber-700 font-semibold animate-in fade-in slide-in-from-top-1">
+                <p className="mt-2 text-xs text-red-800 font-semibold">
                   A group of residence outside Syria is required to take the test
                 </p>
               )}
@@ -339,20 +358,20 @@ export function RegistrationFormStep({
             </FieldContent>
           </Field>
 
-          <Field data-invalid={!!errors.idDocument}>
+          <Field data-invalid={!!errors.passportCopy}>
             <FieldLabel required>
               Attach a valid copy of Passport:
             </FieldLabel>
             <FieldContent>
               <div className="flex flex-col gap-2">
-                {!formData.idDocument ? (
+                {!formData.passportCopy ? (
                   <Input
                     type="file"
                     accept=".pdf,.png,.jpg,.jpeg"
                     className="h-auto py-2 px-3 border-2 border-dashed border-slate-200 hover:border-primary/50 transition-colors cursor-pointer file:mr-4 file:py-1 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20"
                     onChange={(e) => {
                       const file = e.target.files?.[0];
-                      if (file) setValue("idDocument", file);
+                      if (file) setValue("passportCopy", file);
                     }}
                   />
                 ) : (
@@ -363,11 +382,11 @@ export function RegistrationFormStep({
                       </div>
                       <div className="flex flex-col">
                         <span className="text-xs font-bold text-slate-700 truncate max-w-[200px]">
-                          {(formData.idDocument as File).name}
+                          {(formData.passportCopy as File).name}
                         </span>
                         <span className="text-[10px] text-slate-400 font-medium">
                           {(
-                            (formData.idDocument as File).size /
+                            (formData.passportCopy as File).size /
                             (1024 * 1024)
                           ).toFixed(2)}{" "}
                           MB
@@ -378,7 +397,7 @@ export function RegistrationFormStep({
                       type="button"
                       variant="ghost"
                       size="sm"
-                      onClick={() => setValue("idDocument", undefined)}
+                      onClick={() => setValue("passportCopy", undefined)}
                       className="size-8 p-0 rounded-full hover:bg-red-50 hover:text-red-600"
                     >
                       <span className="text-lg">×</span>
@@ -389,25 +408,23 @@ export function RegistrationFormStep({
                   Supported formats: (pdf, png, jpg,  jpeg)
                 </p>
               </div>
-              <FieldError errors={[errors.idDocument]} />
+              <FieldError errors={[errors.passportCopy]} />
             </FieldContent>
           </Field>
+        </div>
+      </div>
 
-          <Field data-invalid={!!errors.homeLanguage}>
-            <FieldLabel required>What is your first language?</FieldLabel>
-            <FieldContent>
-              <SearchableDropdown
-                options={languages}
-                placeholder="-Select Language-"
-                value={formData.homeLanguage}
-                onChange={(val) => setValue("homeLanguage", val)}
-              />
-              <FieldError errors={[errors.homeLanguage]} />
-            </FieldContent>
-          </Field>
-
+      {/* Additional Info Section */}
+      <div className="pt-8 border-t border-slate-100 space-y-6">
+        <div className="flex items-center gap-2 text-slate-400 mb-4">
+          <Globe className="size-5" />
+          <h3 className="text-lg font-bold tracking-tight text-slate-800">
+            Additional Information
+          </h3>
+        </div>
+        <div>
           <Field data-invalid={!!errors.planningCountry}>
-            <FieldLabel required>Destination country?</FieldLabel>
+            <FieldLabel required>Which country or region are you planning to study, work or settle in? If you have not yet decided please select your preferred destination.</FieldLabel>
             <FieldContent>
               <CountryDropdown
                 placeholder="-Select Country-"
@@ -417,99 +434,340 @@ export function RegistrationFormStep({
               <FieldError errors={[errors.planningCountry]} />
             </FieldContent>
           </Field>
+        </div>
 
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
+          <Field data-invalid={!!errors.homeLanguage}>
+            <FieldLabel required>What is your first language?</FieldLabel>
+            <FieldContent>
+              <SearchableDropdown
+                options={languages}
+                placeholder="-Select Language-"
+                value={formData.homeLanguage}
+                onChange={(val) => {
+                  setValue("homeLanguage", val);
+                  if (val !== "Other") setValue("homeLanguageOther", "");
+                }}
+              />
+              {formData.homeLanguage === "Other" && (
+                <div className="mt-2 animate-in fade-in slide-in-from-top-2 duration-300">
+                  <Input
+                    placeholder="Please specify your first language"
+                    value={formData.homeLanguageOther ?? ""}
+                    onChange={(e) => setValue("homeLanguageOther", e.target.value)}
+                    className="border-primary/40 focus:border-primary"
+                  />
+                  <FieldError errors={[errors.homeLanguageOther]} />
+                </div>
+              )}
+              <FieldError errors={[errors.homeLanguage]} />
+            </FieldContent>
+          </Field>
           <Field data-invalid={!!errors.currentSituation}>
             <FieldLabel required>What is your current situation?</FieldLabel>
             <FieldContent>
               <SearchableDropdown
                 options={[
-                  { label: "Employed Full-time", value: "Employed Full-time" },
-                  { label: "Employed Part-time", value: "Employed Part-time" },
-                  { label: "Self-employed", value: "Self-employed" },
-                  { label: "Student", value: "Student" },
-                  { label: "Unemployed", value: "Unemployed" },
+                  { label: "Student - In High School", value: "Student - In High School" },
+                  { label: "Student - High School graduate", value: "Student - High School graduate" },
+                  { label: "Student - English language", value: "Student - English language" },
+                  { label: "Student - In University / College", value: "Student - In University / College" },
+                  { label: "Student - University / College graduate", value: "Student - University / College graduate" },
+                  { label: "Working - full time", value: "Working - full time" },
+                  { label: "Working - part time", value: "Working - part time" },
+                  { label: "Not studying or working", value: "Not studying or working" },
+                  { label: "Other - specify below", value: "Other" },
                 ]}
-                placeholder="-Select Situation-"
+                placeholder="Select one..."
                 value={formData.currentSituation}
-                onChange={(val) => setValue("currentSituation", val)}
+                onChange={(val) => {
+                  setValue("currentSituation", val);
+                  if (val !== "Other") setValue("currentSituationOther", "");
+                }}
               />
+              {formData.currentSituation === "Other" && (
+                <div className="mt-2 animate-in fade-in slide-in-from-top-2 duration-300">
+                  <Input
+                    placeholder="Please specify your current situation"
+                    value={formData.currentSituationOther ?? ""}
+                    onChange={(e) => setValue("currentSituationOther", e.target.value)}
+                    className="border-primary/40 focus:border-primary"
+                  />
+                </div>
+              )}
               <FieldError errors={[errors.currentSituation]} />
             </FieldContent>
           </Field>
 
-          <Field data-invalid={!!errors.occupationSector}>
-            <FieldLabel required>Occupation sector?</FieldLabel>
+          {/* <Field data-invalid={!!errors.occupationSector}>
+            <FieldLabel required>What is your occupation sector?</FieldLabel>
             <FieldContent>
               <SearchableDropdown
+                name="occupationSector"
                 options={[
-                  { label: "Accounting/Finance", value: "Accounting" },
+                  { label: "Administrative Services", value: "Administrative Services" },
+                  { label: "Agriculture, Fishing, Forestry, Mining", value: "Agriculture, Fishing, Forestry, Mining" },
+                  { label: "Arts and Entertainment", value: "Arts and Entertainment" },
+                  { label: "Banking and Finance", value: "Banking and Finance" },
+                  { label: "Catering and Leisure", value: "Catering and Leisure" },
+                  { label: "Construction Industries", value: "Construction Industries" },
+                  { label: "Craft and Design", value: "Craft and Design" },
                   { label: "Education", value: "Education" },
-                  { label: "Banking and Finance", value: "Banking" },
-                  { label: "Health and Social Services", value: "Healthcare" },
-                  { label: "IT/Communications", value: "IT" },
+                  { label: "Health and Social Services", value: "Health and Social Services" },
+                  { label: "Installation, Maintenance and Repair Services", value: "Installation, Maintenance and Repair Services" },
+                  { label: "Law and Legal Services", value: "Law and Legal Services" },
+                  { label: "Manufacturing and Assembly Services", value: "Manufacturing and Assembly Services" },
+                  { label: "Personal Services", value: "Personal Services" },
+                  { label: "Retail Trade", value: "Retail Trade" },
+                  { label: "Technical and Scientific", value: "Technical and Scientific" },
+                  { label: "Telecommunications and the Media", value: "Telecommunications and the Media" },
+                  { label: "Transport", value: "Transport" },
+                  { label: "Utilities (Gas, Water, Electricity etc)", value: "Utilities (Gas, Water, Electricity etc)" },
+                  { label: "Wholesale Trade", value: "Wholesale Trade" },
                   { label: "Other", value: "Other" },
                 ]}
                 placeholder="-Select Sector-"
                 value={formData.occupationSector}
-                onChange={(val) => setValue("occupationSector", val)}
+                aria-invalid={!!errors.occupationSector}
+                onChange={(val) => {
+                  setValue("occupationSector", val);
+                  if (val !== "Other") setValue("occupationSectorOther", "");
+                }}
               />
+              {formData.occupationSector === "Other" && (
+                <div className="mt-2 animate-in fade-in slide-in-from-top-2 duration-300">
+                  <Input
+                    placeholder="Please specify your occupation sector"
+                    value={formData.occupationSectorOther ?? ""}
+                    onChange={(e) => setValue("occupationSectorOther", e.target.value)}
+                    className="border-primary/40 focus:border-primary"
+                  />
+                </div>
+              )}
               <FieldError errors={[errors.occupationSector]} />
             </FieldContent>
-          </Field>
+          </Field> */}
 
           <Field
             data-invalid={!!errors.reasonForTaking}
             className="md:col-span-2"
           >
-            <FieldLabel required>
-              Why are you taking PTE Academic UKVI?
-            </FieldLabel>
+            <FieldLabel required>Why are you taking PTE Home UKVI?</FieldLabel>
             <FieldContent>
               <SearchableDropdown
                 options={[
-                  { label: "Work", value: "work" },
-                  { label: "Settlement", value: "settlement" },
                   { label: "Study", value: "study" },
-                  { label: "Other", value: "other" },
+                  {
+                    label: "Nursing registration or licensing",
+                    value: "nursing"
+                  },
+                  {
+                    label: "Australia - MATES visa (India only)",
+                    value: "au_mates"
+                  },
+                  {
+                    label: "Australia - Post Study Work (485) visa",
+                    value: "au_485"
+                  },
+                  {
+                    label: "Australia - Temporary Work visa",
+                    value: "au_temp_work"
+                  },
+                  {
+                    label: "New Zealand - Temporary Work visa",
+                    value: "nz_temp_work"
+                  },
+                  {
+                    label: "Skilled migration / Permanent Residency",
+                    value: "skilled_migration"
+                  },
+                  { label: "Spouse / Family visa", value: "family_visa" },
+                  { label: "Working Holiday visa", value: "working_holiday" },
+                  { label: "Other - specify below", value: "other" },
                 ]}
-                placeholder="Select Reason"
+                placeholder="Select one..."
                 value={formData.reasonForTaking}
-                onChange={(val) => setValue("reasonForTaking", val)}
+                onChange={(val) => {
+                  setValue("reasonForTaking", val);
+                  if (val !== "other") setValue("reasonForTakingOther", "");
+                  if (val !== "study") {
+                    setValue("studyLevel", "");
+                    setValue("studyLevelOther", "");
+                    setValue("fieldOfStudy", "");
+                    setValue("fieldOfStudyOther", "");
+                  }
+                }}
               />
+              {formData.reasonForTaking === "other" && (
+                <div className="mt-2 animate-in fade-in slide-in-from-top-2 duration-300">
+                  <Input
+                    placeholder="Please specify your reason"
+                    value={formData.reasonForTakingOther ?? ""}
+                    onChange={(e) => setValue("reasonForTakingOther", e.target.value)}
+                    className="border-primary/40 focus:border-primary"
+                  />
+                </div>
+              )}
               <FieldError errors={[errors.reasonForTaking]} />
             </FieldContent>
           </Field>
+          {formData.reasonForTaking === "study" && (
+            <Field
+              data-invalid={!!errors.studyLevel}
+              className="md:col-span-2 animate-in fade-in slide-in-from-top-2"
+            >
+              <FieldLabel required>
+                If you are taking PTE Home UKVI for study, which level are you applying for?
+              </FieldLabel>
+              <FieldContent>
+                <SearchableDropdown
+                  options={[
+                    { label: "Pre-degree / Foundation course", value: "pre_degree" },
+                    { label: "Undergraduate degree", value: "undergraduate" },
+                    { label: "(Post) Graduate / Masters degree", value: "postgraduate" },
+                    { label: "Doctorate / PhD", value: "doctorate" },
+                    { label: "MBA (Master of Business Administration)", value: "mba" },
+                    { label: "English Language Course", value: "english_language" },
+                    { label: "Professional qualification", value: "professional" },
+                    { label: "Other - specify below", value: "other" },
+                  ]}
+                  placeholder="-Select Level-"
+                  value={formData.studyLevel}
+                  onChange={(val) => {
+                    setValue("studyLevel", val);
+                    if (val !== "other") setValue("studyLevelOther", "");
+                    if (!val) {
+                      setValue("fieldOfStudy", "");
+                      setValue("fieldOfStudyOther", "");
+                    }
+                  }}
+                />
+                {formData.studyLevel === "other" && (
+                  <div className="mt-2 animate-in fade-in slide-in-from-top-2 duration-300">
+                    <Input
+                      placeholder="Please specify your education level"
+                      value={formData.studyLevelOther ?? ""}
+                      onChange={(e) => setValue("studyLevelOther", e.target.value)}
+                      className="border-primary/40 focus:border-primary"
+                    />
+                    <FieldError errors={[errors.studyLevelOther]} />
+                  </div>
+                )}
+                <FieldError errors={[errors.studyLevel]} />
+              </FieldContent>
+            </Field>
+          )}
 
           <Field data-invalid={!!errors.referralSource}>
-            <FieldLabel required>How did you hear about us?</FieldLabel>
+            <FieldLabel required>How did you hear about PTE Home UKVI?</FieldLabel>
             <FieldContent>
               <SearchableDropdown
                 options={[
-                  { label: "Social Media", value: "Social Media" },
-                  { label: "Search Engine", value: "Search Engine" },
-                  { label: "Friend/Family", value: "Referral" },
-                  { label: "Other", value: "Other" },
+                  { label: "Australian Department of Home Affairs (DHA)", value: "dha" },
+                  { label: "Board of Nursing", value: "board_of_nursing" },
+                  { label: "Education Agent Advisor - specify below", value: "education_agent" },
+                  { label: "Education event - specify below", value: "education_event" },
+                  { label: "Education Malaysia Global Services (EMGS)", value: "emgs" },
+                  { label: "Friend or family", value: "friend_family" },
+                  { label: "Immigration New Zealand (INZ)", value: "inz" },
+                  { label: "Internet search", value: "internet_search" },
+                  { label: "Language School", value: "language_school" },
+                  { label: "Migration agent / lawyer - specify below", value: "migration_agent" },
+                  { label: "Social Media (e.g. Facebook, Twitter, Weibo etc)", value: "social_media" },
+                  { label: "University or College - specify below", value: "university_college" },
+                  { label: "Other - specify below", value: "Other" },
                 ]}
-                placeholder="-Select Source-"
+                placeholder="Select one..."
                 value={formData.referralSource}
-                onChange={(val) => setValue("referralSource", val)}
+                onChange={(val) => {
+                  setValue("referralSource", val);
+                  const specifyOptions = ["education_agent", "education_event", "migration_agent", "university_college", "Other"];
+                  if (!specifyOptions.includes(val)) setValue("referralSourceOther", "");
+                }}
               />
+              {["education_agent", "education_event", "migration_agent", "university_college", "Other"].includes(formData.referralSource) && (
+                <div className="mt-2 animate-in fade-in slide-in-from-top-2 duration-300">
+                  <Input
+                    placeholder="Please specify"
+                    value={formData.referralSourceOther ?? ""}
+                    onChange={(e) => setValue("referralSourceOther", e.target.value)}
+                    className="border-primary/40 focus:border-primary"
+                  />
+                  <FieldError errors={[errors.referralSourceOther]} />
+                </div>
+              )}
               <FieldError errors={[errors.referralSource]} />
             </FieldContent>
           </Field>
 
+          {formData.reasonForTaking === "study" && formData.studyLevel && (
+            <Field
+              data-invalid={!!errors.fieldOfStudy}
+              className="md:col-span-2 animate-in fade-in slide-in-from-top-2"
+            >
+              <FieldLabel required>Which field of study are you applying for?</FieldLabel>
+              <FieldContent>
+                <SearchableDropdown
+                  options={[
+                    { label: "Accountancy and Finance", value: "accountancy_finance" },
+                    { label: "Agriculture", value: "agriculture" },
+                    { label: "Architecture", value: "architecture" },
+                    { label: "Business and Management", value: "business_management" },
+                    { label: "Communications and Media", value: "communications_media" },
+                    { label: "Education", value: "education" },
+                    { label: "Engineering", value: "engineering" },
+                    { label: "Health", value: "health" },
+                    { label: "Humanities & Arts", value: "humanities_arts" },
+                    { label: "Information Technology / Computer Sciences", value: "it_computer_sciences" },
+                    { label: "Law", value: "law" },
+                    { label: "Mathematics", value: "mathematics" },
+                    { label: "Medicine", value: "medicine" },
+                    { label: "Physical and Life Sciences", value: "physical_life_sciences" },
+                    { label: "Social Sciences", value: "social_sciences" },
+                    { label: "Tourism and Hospitality Management", value: "tourism_hospitality" },
+                    { label: "Other - specify below", value: "other" },
+                  ]}
+                  placeholder="Select one..."
+                  value={formData.fieldOfStudy}
+                  onChange={(val) => {
+                    setValue("fieldOfStudy", val);
+                    if (val !== "other") setValue("fieldOfStudyOther", "");
+                  }}
+                />
+                {formData.fieldOfStudy === "other" && (
+                  <div className="mt-2 animate-in fade-in slide-in-from-top-2 duration-300">
+                    <Input
+                      placeholder="Please specify your field of study"
+                      value={formData.fieldOfStudyOther ?? ""}
+                      onChange={(e) => setValue("fieldOfStudyOther", e.target.value)}
+                      className="border-primary/40 focus:border-primary"
+                    />
+                    <FieldError errors={[errors.fieldOfStudyOther]} />
+                  </div>
+                )}
+                <FieldError errors={[errors.fieldOfStudy]} />
+              </FieldContent>
+            </Field>
+          )}
+
+
+        </div>
+        <div className="space-y-3 md:col-span-2 animate-in fade-in slide-in-from-top-2">
           <Field data-invalid={!!errors.takenBefore}>
-            <FieldLabel required>Taken PTE Academic UKVI before?</FieldLabel>
+            <FieldLabel required>
+              Have you taken PTE Home UKVI before?
+            </FieldLabel>
             <FieldContent className="mt-2">
               <RadioGroup
                 className="grid grid-cols-2 gap-3"
                 value={formData.takenBefore}
-                onValueChange={(val) => setValue("takenBefore", val)}
+                onValueChange={(val) => setValue("takenBefore", val as any)}
               >
                 {["yes", "no"].map((opt) => (
                   <Label
                     key={opt}
                     htmlFor={`taken-${opt}`}
+                    data-invalid={!!errors.takenBefore}
                     className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive capitalize"
                   >
                     <RadioGroupItem value={opt} id={`taken-${opt}`} />
@@ -530,14 +788,15 @@ export function RegistrationFormStep({
                     className="grid grid-cols-2 gap-3"
                     value={formData.takenWithinTwoYears}
                     onValueChange={(val) =>
-                      setValue("takenWithinTwoYears", val)
+                      setValue("takenWithinTwoYears", val as any)
                     }
                   >
                     {["yes", "no"].map((opt) => (
                       <Label
                         key={opt}
                         htmlFor={`recent-${opt}`}
-                        className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive capitalize"
+                        data-invalid={!!errors.takenWithinTwoYears}
+                        className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive capitalize"
                       >
                         <RadioGroupItem value={opt} id={`recent-${opt}`} />
                         {opt}
@@ -549,18 +808,21 @@ export function RegistrationFormStep({
               </Field>
 
               <Field data-invalid={!!errors.hasExistingAccount}>
-                <FieldLabel required>Have a Pearson account?</FieldLabel>
+                <FieldLabel required>Do you have a Pearson account?</FieldLabel>
                 <FieldContent className="mt-2">
                   <RadioGroup
-                    className="grid grid-cols-2 gap-3"
+                    className="flex flex-col gap-3"
                     value={formData.hasExistingAccount}
-                    onValueChange={(val) => setValue("hasExistingAccount", val)}
+                    onValueChange={(val) =>
+                      setValue("hasExistingAccount", val as any)
+                    }
                   >
-                    {["yes", "no"].map((opt) => (
+                    {["yes", "no", "I forgot my PTE account details"].map((opt) => (
                       <Label
                         key={opt}
                         htmlFor={`account-${opt}`}
-                        className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive capitalize"
+                        data-invalid={!!errors.hasExistingAccount}
+                        className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive capitalize"
                       >
                         <RadioGroupItem value={opt} id={`account-${opt}`} />
                         {opt}
@@ -575,12 +837,27 @@ export function RegistrationFormStep({
         </div>
       </div>
 
+      {/* Add-on Services Section */}
+      <AddonServicesSection
+        coursesData={coursesData}
+        workshopsData={workshopsData}
+        selectedCourse={formData.selectedCourse}
+        selectedWorkshop={formData.selectedWorkshop}
+        onCourseChange={(val) => setValue("selectedCourse", val)}
+        onWorkshopChange={(val) => setValue("selectedWorkshop", val)}
+        courseError={!!errors.selectedCourse}
+        workshopError={!!errors.selectedWorkshop}
+        description={
+          "Save up to 25% when you book your exam and register for the course with TEPTH and pay in-person or online on our website."
+        }
+      />
+
       {/* Marketing Preferences */}
       <MarketingPreferencesSection
-        value={formData.marketingConsent}
-        onChange={(val) => setValue("marketingConsent", val as any)}
-        error={errors.marketingConsent}
-        options={TEPTH_THIRD_PARTY_MARKETING_OPTIONS}
+        value={formData.marketingPreference}
+        onChange={(val) => setValue("marketingPreference", val as any)}
+        error={errors.marketingPreference}
+        options={TEPTH_MARKETING_OPTIONS}
       />
 
       <div className="flex justify-between pt-12 border-t border-slate-100 mt-12">

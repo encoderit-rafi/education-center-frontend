@@ -10,11 +10,11 @@ import {
   } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { UseFormReturn } from "react-hook-form";
-import { TPteHomeA1FormSchema } from "../_type";
+import { TPteHomeA1Schema } from "../_type";
 
 interface ReviewStepProps {
-  data: TPteHomeA1FormSchema;
-  form: UseFormReturn<TPteHomeA1FormSchema>;
+  data: TPteHomeA1Schema;
+  form: UseFormReturn<TPteHomeA1Schema>;
   onEdit: () => void;
   onSubmit: (e?: React.BaseSyntheticEvent) => Promise<void>;
   onInvalid: (errors: any) => void;
@@ -79,13 +79,13 @@ export function ReviewStep({
                   {data.noGivenNames ? "N/A" : data.givenNames}
                 </span>
               </div>
-              {data.middleNames && (
+              {data.middleName && (
                 <div className="flex flex-col">
                   <span className="text-[10px] text-slate-400 font-bold uppercase">
-                    Middle Names
+                    Middle Name
                   </span>
                   <span className="text-sm font-semibold text-black">
-                    {data.middleNames}
+                    {data.middleName}
                   </span>
                 </div>
               )}
@@ -178,8 +178,8 @@ export function ReviewStep({
                   Identity Document
                 </span>
                 <span className="text-sm font-semibold text-black">
-                  {data.idDocument
-                    ? (data.idDocument as File).name
+                  {data.passportCopy
+                    ? (data.passportCopy as File).name
                     : "No file attached"}
                 </span>
               </div>
@@ -213,10 +213,10 @@ export function ReviewStep({
               </div>
               <div className="flex flex-col">
                 <span className="text-[10px] text-slate-400 font-bold uppercase">
-                  Full Address
+                  Address Line 1
                 </span>
                 <span className="text-sm font-semibold text-black">
-                  {data.address}
+                  {data.postalAddress1}
                 </span>
               </div>
               <div className="flex flex-col">

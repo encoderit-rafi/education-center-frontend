@@ -37,12 +37,20 @@ export const PteHomeA2Schema = z.object({
 
     // Step 2: Booking Questions & Preferences
     homeLanguage: stringOrObject.refine(val => val.length > 0, "Please select your language"),
+    homeLanguageOther: z.string().optional(),
     planningCountry: stringOrObject.refine(val => val.length > 0, "Please select a destination country"),
     currentSituation: stringOrObject.refine(val => val.length > 0, "Please select your current situation"),
+    currentSituationOther: z.string().optional(),
     reasonForTaking: stringOrObject.refine(val => val.length > 0, "Please select why you are taking the test"),
+    reasonForTakingOther: z.string().optional(),
     studyLevel: stringOrObject.optional(),
+    studyLevelOther: z.string().optional(),
     occupationSector: stringOrObject.refine(val => val.length > 0, "Please select your occupation sector"),
+    occupationSectorOther: z.string().optional(),
     referralSource: stringOrObject.refine(val => val.length > 0, "Please select how you heard about us"),
+    referralSourceOther: z.string().optional(),
+    fieldOfStudy: z.string().optional(),
+    fieldOfStudyOther: z.string().optional(),
     
     // Previous Test History (PTE Home A2 specific labels)
     takenBefore: z.string().min(1, "Please select if you have taken the test before"),
@@ -95,6 +103,30 @@ export const RefinedPteHomeA2Schema = PteHomeA2Schema.refine((data) => {
 }, {
     message: "Please select your study level",
     path: ["studyLevel"],
+}).refine((data) => {
+    if (data.studyLevel === "other" && (!data.studyLevelOther || data.studyLevelOther.trim() === "")) return false;
+    return true;
+}, {
+    message: "Please specify your education level",
+    path: ["studyLevelOther"],
+}).refine((data) => {
+    if (data.reasonForTaking === "study" && data.studyLevel && !data.fieldOfStudy) return false;
+    return true;
+}, {
+    message: "Please select your field of study",
+    path: ["fieldOfStudy"],
+}).refine((data) => {
+    if (data.fieldOfStudy === "other" && (!data.fieldOfStudyOther || data.fieldOfStudyOther.trim() === "")) return false;
+    return true;
+}, {
+    message: "Please specify your field of study",
+    path: ["fieldOfStudyOther"],
+}).refine((data) => {
+    if (data.homeLanguage === "Other" && (!data.homeLanguageOther || data.homeLanguageOther.trim() === "")) return false;
+    return true;
+}, {
+    message: "Please specify your first language",
+    path: ["homeLanguageOther"],
 }).refine((data) => {
     if (data.takenBefore === "yes" && !data.takenWithinTwoYears) return false;
     return true;
