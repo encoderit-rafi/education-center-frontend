@@ -54,6 +54,12 @@ export const ToeflIbtSchema = z
         firstLanguageOther: z.string().optional(),
         yearsStudyingEnglish: z.string().optional(),
         educationLevel: z.string().optional(),
+        nextLevelOfStudy: z.string().min(1, "Next level of study is required"),
+        nextLevelOfStudyOther: z.string().optional(),
+        desiredFieldOfStudy: z.string().min(1, "Desired field of study is required"),
+        desiredFieldOfStudyOther: z.string().optional(),
+        reasonsForTakingToefl: z.array(z.string()).min(1, "Please select at least one reason"),
+        etsProductsInterest: z.string().optional(),
         occupationLevel: z.string().optional(),
         occupationLevelOther: z.string().optional(),
         occupationSector: z.string().optional(),
@@ -85,6 +91,14 @@ export const ToeflIbtSchema = z
     })
     .superRefine((data, ctx) => {
         // Conditional logic for Step 3: Your Profile
+        if (!data.takenBefore) {
+            ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                message: "Please specify if you have taken the TOEFL iBT Test before",
+                path: ["takenBefore"],
+            });
+        }
+
         if (data.takenBefore === "Yes") {
             if (!data.lessThanTwoYears) {
                 ctx.addIssue({
@@ -100,6 +114,22 @@ export const ToeflIbtSchema = z
                     path: ["existingAccount"],
                 });
             }
+        }
+
+        if (data.nextLevelOfStudy === "Other" && !data.nextLevelOfStudyOther) {
+            ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                message: "Please specify your next level of study",
+                path: ["nextLevelOfStudyOther"],
+            });
+        }
+
+        if (data.desiredFieldOfStudy === "Other" && !data.desiredFieldOfStudyOther) {
+            ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                message: "Please specify your desired field of study",
+                path: ["desiredFieldOfStudyOther"],
+            });
         }
 
         if (!data.marketingPreference) {

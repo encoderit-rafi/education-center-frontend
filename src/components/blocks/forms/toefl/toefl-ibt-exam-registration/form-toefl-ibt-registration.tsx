@@ -9,7 +9,6 @@ import { ToeflIbtSchema, type TToeflIbtSchema } from "./_type/toefl-ibt";
 import { useMutation } from "@tanstack/react-query";
 import api from "@/axios";
 import { format } from "date-fns";
-import { User, ShieldCheck, Globe } from "lucide-react";
 import { GlobalReviewStep, ReviewSummaryGrid } from "@/components/blocks/forms/global-review-step";
 
 // Import Steps
@@ -82,12 +81,18 @@ export default function FormTOEFLIBTRegistration() {
             issuingAuthority: "",
             nationality: "",
             idDocument: undefined,
-            takenBefore: "No" as any,
-            lessThanTwoYears: "No" as any,
-            existingAccount: "No" as any,
+            takenBefore: "" as any,
+            lessThanTwoYears: "" as any,
+            existingAccount: "" as any,
             firstLanguage: "",
             yearsStudyingEnglish: "",
             educationLevel: "",
+            nextLevelOfStudy: "",
+            nextLevelOfStudyOther: "",
+            desiredFieldOfStudy: "",
+            desiredFieldOfStudyOther: "",
+            reasonsForTakingToefl: [],
+            etsProductsInterest: "",
             occupationLevel: "",
             occupationSector: "",
             reasonForTakingTest: "",
@@ -196,12 +201,16 @@ export default function FormTOEFLIBTRegistration() {
                 taken_before: data.takenBefore,
                 less_than_two_years: data.lessThanTwoYears,
                 existing_account: data.existingAccount,
-                first_language: data.firstLanguage,
+                first_language: data.firstLanguage === "Other" ? data.firstLanguageOther : data.firstLanguage,
                 years_studying_english: data.yearsStudyingEnglish,
                 education_level: data.educationLevel,
+                next_level_of_study: data.nextLevelOfStudy === "Other" ? data.nextLevelOfStudyOther : data.nextLevelOfStudy,
+                desired_field_of_study: data.desiredFieldOfStudy === "Other" ? data.desiredFieldOfStudyOther : data.desiredFieldOfStudy,
+                reasons_for_taking_toefl: data.reasonsForTakingToefl,
+                ets_products_interest: data.etsProductsInterest,
                 occupation_level: data.occupationLevel,
                 occupation_sector: data.occupationSector,
-                reason_for_taking_test: data.reasonForTakingTest,
+                reason_for_taking_test: data.reasonsForTakingToefl?.join(", ") || "",
                 destination_country: data.destinationCountry,
                 marketing_preference: data.marketingPreference,
                 selected_course: data.selectedCourse,
@@ -305,8 +314,12 @@ export default function FormTOEFLIBTRegistration() {
                               ...(formData.streetAddress2 ? [{ label: "Address Line 2", value: formData.streetAddress2 }] : []),
                               { label: "City", value: formData.city },
                               { label: "Country of Residence", value: formData.country },
-                              { label: "First Language", value: formData.firstLanguage || "N/A" },
+                              { label: "First Language", value: formData.firstLanguage === "Other" ? (formData.firstLanguageOther || "Other") : (formData.firstLanguage || "N/A") },
                               { label: "Education Level", value: formData.educationLevel?.replace(/_/g, " ") || "N/A" },
+                              { label: "Next Level of Study", value: formData.nextLevelOfStudy === "Other" ? (formData.nextLevelOfStudyOther || "Other") : (formData.nextLevelOfStudy || "N/A") },
+                              { label: "Desired Field of Study", value: formData.desiredFieldOfStudy === "Other" ? (formData.desiredFieldOfStudyOther || "Other") : (formData.desiredFieldOfStudy || "N/A") },
+                              { label: "Reason for taking TOEFL", value: formData.reasonsForTakingToefl?.join(", ") || "N/A" },
+                              { label: "ETS Products Interest", value: formData.etsProductsInterest || "N/A" },
                             ]}
                         />
                         </GlobalReviewStep>

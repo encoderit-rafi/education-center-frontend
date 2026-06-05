@@ -2,7 +2,7 @@
 
 import React from "react";
 import { UseFormReturn } from "react-hook-form";
-import { Save, Globe, BookOpen, ArrowRight } from "lucide-react";
+import { Save, Globe } from "lucide-react";
 import { AddonServicesSection } from "@/components/blocks/forms/shared/addon-services-section";
 import { MarketingPreferencesSection } from "@/components/blocks/forms/shared/marketing-preferences-section";
 import { Button } from "@/components/ui/button";
@@ -15,7 +15,6 @@ import { SearchableDropdown } from "@/components/ui/searchable-dropdown";
 import { CountryDropdown } from "@/components/ui/country-dropdown";
 import { DatePicker } from "@/components/blocks/date-picker";
 import Stepper from "@/components/stepper";
-import BaseNoteBox from "@/components/base-note-box";
 import {
   Field,
   FieldContent,
@@ -24,8 +23,28 @@ import {
   FieldLabel
 } from "@/components/ui/field";
 import { TToeflIbtSchema } from "../_type/toefl-ibt";
-import { PriceDisplay } from "@/components/ui/price-display";
-import { Badge } from "@/components/ui/badge";
+
+const DESIRED_FIELDS_OF_STUDY = [
+  { label: "Accounting", value: "Accounting" },
+  { label: "Agriculture & Natural Resources", value: "Agriculture & Natural Resources" },
+  { label: "Architecture", value: "Architecture" },
+  { label: "Art and Design", value: "Art and Design" },
+  { label: "Biological/Life Sciences", value: "Biological/Life Sciences" },
+  { label: "Built Environment", value: "Built Environment" },
+  { label: "Business & Administration", value: "Business & Administration" },
+  { label: "Communications/Journalism", value: "Communications/Journalism" },
+  { label: "Computer Science", value: "Computer Science" },
+  { label: "Education", value: "Education" },
+  { label: "Engineering", value: "Engineering" },
+  { label: "Humanities", value: "Humanities" },
+  { label: "Languages/Literature", value: "Languages/Literature" },
+  { label: "Law", value: "Law" },
+  { label: "Mathematics", value: "Mathematics" },
+  { label: "Medicine/Health Sciences", value: "Medicine/Health Sciences" },
+  { label: "Physical Sciences", value: "Physical Sciences" },
+  { label: "Social Sciences", value: "Social Sciences" },
+  { label: "Other", value: "Other" },
+];
 
 interface RegistrationFormStepProps {
   form: UseFormReturn<TToeflIbtSchema>;
@@ -108,7 +127,7 @@ export function RegistrationFormStep({
                   }
                 />
                 <Label htmlFor="noSurname" className="text-xs font-light">
-                  I don't have a surname / family name
+                  I don&apos;t have a surname / family name
                 </Label>
               </FieldDescription>
             </FieldContent>
@@ -303,7 +322,7 @@ export function RegistrationFormStep({
             </FieldContent>
           </Field>
 
-          <Field data-invalid={!!errors.idType}>
+          <Field data-invalid={!!errors.idType} className="md:col-start-1">
             <FieldLabel required>Identification type</FieldLabel>
             <FieldContent>
               <RadioGroup
@@ -461,9 +480,9 @@ export function RegistrationFormStep({
           </h3>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8">
           <Field
-            className="md:col-span-2 lg:col-span-3"
+            className="md:col-span-2"
             data-invalid={!!errors.takenBefore}
           >
             <FieldLabel required>
@@ -472,7 +491,13 @@ export function RegistrationFormStep({
             <FieldContent className="mt-2">
               <RadioGroup
                 name="takenBefore"
-                onValueChange={(val) => setValue("takenBefore", val)}
+                onValueChange={(val) => {
+                  setValue("takenBefore", val);
+                  if (val === "No") {
+                    setValue("lessThanTwoYears", "");
+                    setValue("existingAccount", "");
+                  }
+                }}
                 value={formData.takenBefore}
                 className="grid grid-cols-2 gap-3"
               >
@@ -495,7 +520,7 @@ export function RegistrationFormStep({
           {formData.takenBefore === "Yes" && (
             <>
               <Field
-                className="md:col-span-2 lg:col-span-3"
+                className="md:col-span-2"
                 data-invalid={!!errors.lessThanTwoYears}
               >
                 <FieldLabel required>Was it less than 2 years?</FieldLabel>
@@ -523,7 +548,7 @@ export function RegistrationFormStep({
               </Field>
 
               <Field
-                className="md:col-span-2 lg:col-span-3"
+                className="md:col-span-2"
                 data-invalid={!!errors.existingAccount}
               >
                 <FieldLabel required>
@@ -611,185 +636,140 @@ export function RegistrationFormStep({
             </FieldContent>
           </Field>
 
-          <Field
-            className="md:col-span-2"
-            data-invalid={!!errors.educationLevel}
-          >
-            <FieldLabel required>
-              What level of education have you completed?
-            </FieldLabel>
+          <Field data-invalid={!!errors.nextLevelOfStudy}>
+            <FieldLabel required>What is your next level of study?</FieldLabel>
             <FieldContent>
-              <RadioGroup
-                name="educationLevel"
-                onValueChange={(val) => setValue("educationLevel", val)}
-                value={formData.educationLevel}
-                className="grid grid-cols-1 md:grid-cols-2 gap-3"
-              >
+              <SearchableDropdown
+                name="nextLevelOfStudy"
+                options={[
+                  { label: "Secondary school (high school)", value: "Secondary school (high school)" },
+                  { label: "2 year college/community college", value: "2 year college/community college" },
+                  { label: "Undergraduate program", value: "Undergraduate program" },
+                  { label: "Graduate/postgraduate program", value: "Graduate/postgraduate program" },
+                  { label: "Not applicable", value: "Not applicable" },
+                  { label: "Other", value: "Other" },
+                ]}
+                placeholder="Select Level"
+                value={formData.nextLevelOfStudy}
+                aria-invalid={!!errors.nextLevelOfStudy}
+                onChange={(val) => {
+                  setValue("nextLevelOfStudy", val, { shouldValidate: true });
+                  if (val !== "Other") setValue("nextLevelOfStudyOther", "");
+                }}
+              />
+              {formData.nextLevelOfStudy === "Other" && (
+                <div className="mt-2 animate-in fade-in slide-in-from-top-2 duration-300">
+                  <Input
+                    placeholder="Please specify next level of study"
+                    value={formData.nextLevelOfStudyOther ?? ""}
+                    onChange={(e) => setValue("nextLevelOfStudyOther", e.target.value, { shouldValidate: true })}
+                    className="border-primary/40 focus:border-primary"
+                  />
+                  <FieldError errors={[errors.nextLevelOfStudyOther]} />
+                </div>
+              )}
+              <FieldError errors={[errors.nextLevelOfStudy]} />
+            </FieldContent>
+          </Field>
+
+          <Field data-invalid={!!errors.desiredFieldOfStudy}>
+            <FieldLabel required>What is your desired field of study?</FieldLabel>
+            <FieldContent>
+              <SearchableDropdown
+                name="desiredFieldOfStudy"
+                options={DESIRED_FIELDS_OF_STUDY}
+                placeholder="Select Field"
+                value={formData.desiredFieldOfStudy}
+                aria-invalid={!!errors.desiredFieldOfStudy}
+                onChange={(val) => {
+                  setValue("desiredFieldOfStudy", val, { shouldValidate: true });
+                  if (val !== "Other") setValue("desiredFieldOfStudyOther", "");
+                }}
+              />
+              {formData.desiredFieldOfStudy === "Other" && (
+                <div className="mt-2 animate-in fade-in slide-in-from-top-2 duration-300">
+                  <Input
+                    placeholder="Please specify your desired field of study"
+                    value={formData.desiredFieldOfStudyOther ?? ""}
+                    onChange={(e) => setValue("desiredFieldOfStudyOther", e.target.value, { shouldValidate: true })}
+                    className="border-primary/40 focus:border-primary"
+                  />
+                  <FieldError errors={[errors.desiredFieldOfStudyOther]} />
+                </div>
+              )}
+              <FieldError errors={[errors.desiredFieldOfStudy]} />
+            </FieldContent>
+          </Field>
+
+          <Field className="md:col-span-2" data-invalid={!!errors.reasonsForTakingToefl}>
+            <FieldLabel required>What is your reason for taking the TOEFL test?(You may select more than one response.)</FieldLabel>
+            <FieldContent>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
                 {[
-                  {
-                    id: "secondary_up_to_16",
-                    label: "Secondary (up to 16 years)"
-                  },
-                  { id: "secondary_16_19", label: "Secondary (16-19 years)" },
-                  { id: "degree", label: "Degree (or equivalent)" },
-                  { id: "post_graduate", label: "Post-graduate" },
-                ].map((opt) => (
-                  <Label
-                    key={opt.id}
-                    htmlFor={opt.id}
-                    data-invalid={!!errors.educationLevel}
-                    className={`flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive ${formData.educationLevel === opt.id ? "border-[#A11D1D] bg-[#A11D1D]/5 ring-1 ring-[#A11D1D]" : ""}`}
-                  >
-                    <RadioGroupItem value={opt.id} id={opt.id} />
-                    {opt.label}
-                  </Label>
-                ))}
-              </RadioGroup>
-              <FieldError errors={[errors.educationLevel]} />
-            </FieldContent>
-          </Field>
-
-          {/* <Field data-invalid={!!errors.occupationLevel}>
-            <FieldLabel required>What is your occupation level?</FieldLabel>
-            <FieldContent>
-              <SearchableDropdown
-                name="occupationLevel"
-                options={[
-                  { label: "Self-employed", value: "Self-employed" },
-                  { label: "Employer/Partner", value: "Employer/Partner" },
-                  {
-                    label: "Employee (Senior level)",
-                    value: "Employee (Senior level)"
-                  },
-                  {
-                    label: "Employee (Middle/Junior level)",
-                    value: "Employee (Middle/Junior level)"
-                  },
-                  { label: "Homeworker", value: "Homeworker" },
-                  { label: "Retired", value: "Retired" },
-                  { label: "Student", value: "Student" },
-                  { label: "Other", value: "Other" },
-                ]}
-                placeholder="-Select Level-"
-                value={formData.occupationLevel}
-                aria-invalid={!!errors.occupationLevel}
-                onChange={(val) => {
-                  setValue("occupationLevel", val);
-                  if (val !== "Other") setValue("occupationLevelOther", "");
-                }}
-              />
-              {formData.occupationLevel === "Other" && (
-                <div className="mt-2 animate-in fade-in slide-in-from-top-2 duration-300">
-                  <Input
-                    placeholder="Please specify your occupation level"
-                    value={formData.occupationLevelOther ?? ""}
-                    onChange={(e) => setValue("occupationLevelOther", e.target.value)}
-                    className="border-primary/40 focus:border-primary"
-                  />
-                </div>
-              )}
-              <FieldError errors={[errors.occupationLevel]} />
-            </FieldContent>
-          </Field>
-
-          <Field data-invalid={!!errors.occupationSector}>
-            <FieldLabel required>What is your occupation sector?</FieldLabel>
-            <FieldContent>
-              <SearchableDropdown
-                name="occupationSector"
-                options={[
-                  { label: "Administrative Services", value: "Administrative Services" },
-                  { label: "Agriculture, Fishing, Forestry, Mining", value: "Agriculture, Fishing, Forestry, Mining" },
-                  { label: "Arts and Entertainment", value: "Arts and Entertainment" },
-                  { label: "Banking and Finance", value: "Banking and Finance" },
-                  { label: "Catering and Leisure", value: "Catering and Leisure" },
-                  { label: "Construction Industries", value: "Construction Industries" },
-                  { label: "Craft and Design", value: "Craft and Design" },
-                  { label: "Education", value: "Education" },
-                  { label: "Health and Social Services", value: "Health and Social Services" },
-                  { label: "Installation, Maintenance and Repair Services", value: "Installation, Maintenance and Repair Services" },
-                  { label: "Law and Legal Services", value: "Law and Legal Services" },
-                  { label: "Manufacturing and Assembly Services", value: "Manufacturing and Assembly Services" },
-                  { label: "Personal Services", value: "Personal Services" },
-                  { label: "Retail Trade", value: "Retail Trade" },
-                  { label: "Technical and Scientific", value: "Technical and Scientific" },
-                  { label: "Telecommunications and the Media", value: "Telecommunications and the Media" },
-                  { label: "Transport", value: "Transport" },
-                  { label: "Utilities (Gas, Water, Electricity etc)", value: "Utilities (Gas, Water, Electricity etc)" },
-                  { label: "Wholesale Trade", value: "Wholesale Trade" },
-                  { label: "Other", value: "Other" },
-                ]}
-                placeholder="-Select Sector-"
-                value={formData.occupationSector}
-                aria-invalid={!!errors.occupationSector}
-                onChange={(val) => {
-                  setValue("occupationSector", val);
-                  if (val !== "Other") setValue("occupationSectorOther", "");
-                }}
-              />
-              {formData.occupationSector === "Other" && (
-                <div className="mt-2 animate-in fade-in slide-in-from-top-2 duration-300">
-                  <Input
-                    placeholder="Please specify your occupation sector"
-                    value={formData.occupationSectorOther ?? ""}
-                    onChange={(e) => setValue("occupationSectorOther", e.target.value)}
-                    className="border-primary/40 focus:border-primary"
-                  />
-                </div>
-              )}
-              <FieldError errors={[errors.occupationSector]} />
-            </FieldContent>
-          </Field>
-
-          <Field data-invalid={!!errors.reasonForTakingTest}>
-            <FieldLabel required>Why are you taking the test?</FieldLabel>
-            <FieldContent>
-              <SearchableDropdown
-                name="reasonForTakingTest"
-                options={[
-                  {
-                    label: "Higher education extended course (3 months or more)",
-                    value: "Higher education extended course (3 months or more)"
-                  },
-                  {
-                    label: "Higher education short course (3 months or less)",
-                    value: "Higher education short course (3 months or less)"
-                  },
+                  { label: "To enter an undergraduate program", value: "To enter an undergraduate program" },
+                  { label: "To enter a graduate program", value: "To enter a graduate program" },
+                  { label: "To enter a postgraduate program", value: "To enter a postgraduate program" },
+                  { label: "To enter a secondary school", value: "To enter a secondary school" },
+                  { label: "To enter a 2-year college/community college", value: "To enter a 2-year college/community college" },
+                  { label: "For employment / work", value: "For employment / work" },
+                  { label: "For immigration / settling in a country", value: "For immigration / settling in a country" },
+                  { label: "For professional registration or licensure", value: "For professional registration or licensure" },
+                  { label: "For scholarship or fellowship program", value: "For scholarship or fellowship program" },
+                  { label: "Personal reasons / self-evaluation", value: "Personal reasons / self-evaluation" },
                   { label: "Other educational purposes", value: "Other educational purposes" },
-                  { label: "Registration as a doctor", value: "Registration as a doctor" },
-                  { label: "Immigration", value: "Immigration" },
-                  { label: "Employment", value: "Employment" },
-                  { label: "Professional registration (not medical)", value: "Professional registration (not medical)" },
-                  { label: "Personal reasons", value: "Personal reasons" },
-                  { label: "Registration as a nurse (including CGFNS)", value: "Registration as a nurse (including CGFNS)" },
-                  { label: "Registration as a dentist", value: "Registration as a dentist" },
-                  { label: "Missing/Invalid", value: "Missing/Invalid" },
-                  { label: "Other", value: "other" },
+                ].map((reason) => {
+                  const currentReasons = formData.reasonsForTakingToefl || [];
+                  const isChecked = currentReasons.includes(reason.value);
+                  return (
+                    <div key={reason.value} className="flex items-start space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer">
+                      <Checkbox
+                        id={`reason-${reason.value}`}
+                        checked={isChecked}
+                        onCheckedChange={(checked) => {
+                          const updated = checked
+                            ? [...currentReasons, reason.value]
+                            : currentReasons.filter((r) => r !== reason.value);
+                          setValue("reasonsForTakingToefl", updated, { shouldValidate: true });
+                        }}
+                      />
+                      <Label
+                        htmlFor={`reason-${reason.value}`}
+                        className="text-xs font-medium leading-none cursor-pointer select-none"
+                      >
+                        {reason.label}
+                      </Label>
+                    </div>
+                  );
+                })}
+              </div>
+              <FieldError errors={[errors.reasonsForTakingToefl]} />
+            </FieldContent>
+          </Field>
+
+          {/* <Field data-invalid={!!errors.etsProductsInterest}>
+            <FieldLabel>Which ETS products or services are you interested in?</FieldLabel>
+            <FieldContent>
+              <SearchableDropdown
+                name="etsProductsInterest"
+                options={[
+                  { label: "TOEFL Official Prep Books", value: "prep_books" },
+                  { label: "TOEFL Practice Online (TPO)", value: "practice_online" },
+                  { label: "TOEFL Value Packs / Bundles", value: "value_packs" },
+                  { label: "TOEFL Go! Mobile App", value: "mobile_app" },
+                  { label: "Official TOEFL Grader Services", value: "grader_services" },
+                  { label: "None / Not interested", value: "none" },
                 ]}
-                placeholder="-Select Reason-"
-                value={formData.reasonForTakingTest}
-                aria-invalid={!!errors.reasonForTakingTest}
-                onChange={(val) => {
-                  setValue("reasonForTakingTest", val);
-                  if (val !== "other") setValue("reasonForTakingTestOther", "");
-                }}
+                placeholder="Select Option"
+                value={formData.etsProductsInterest}
+                aria-invalid={!!errors.etsProductsInterest}
+                onChange={(val) => setValue("etsProductsInterest", val, { shouldValidate: true })}
               />
-              {formData.reasonForTakingTest === "other" && (
-                <div className="mt-2 animate-in fade-in slide-in-from-top-2 duration-300">
-                  <Input
-                    placeholder="Please specify your reason for taking the test"
-                    value={formData.reasonForTakingTestOther ?? ""}
-                    onChange={(e) => setValue("reasonForTakingTestOther", e.target.value)}
-                    className="border-primary/40 focus:border-primary"
-                  />
-                </div>
-              )}
-              <FieldError errors={[errors.reasonForTakingTest]} />
+              <FieldError errors={[errors.etsProductsInterest]} />
             </FieldContent>
           </Field> */}
 
           <Field data-invalid={!!errors.destinationCountry}>
-            <FieldLabel required>Destination country?</FieldLabel>
+            <FieldLabel required>In what country or countries do you hope to study, work or settle?</FieldLabel>
             <FieldContent>
               <CountryDropdown
                 name="destinationCountry"

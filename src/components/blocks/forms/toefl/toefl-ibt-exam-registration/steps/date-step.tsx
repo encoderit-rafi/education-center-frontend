@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { ArrowRight, Calendar as CalendarIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -48,9 +47,18 @@ export function DateStep({
               <Calendar
                 mode="single"
                 selected={value}
-                onSelect={(date) => date && onChange(date)}
+                onSelect={(date) => {
+                  if (date) {
+                    onChange(date);
+                    if (date.getDay() === 6) {
+                      onTimeSlotChange("AM");
+                    } else if (date.getDay() === 3) {
+                      onTimeSlotChange("PM");
+                    }
+                  }
+                }}
                 modifiers={{
-                  available: (date) => date.getDay() === 3,
+                  available: (date) => date.getDay() === 3 || date.getDay() === 6,
                 }}
                 modifiersClassNames={{
                   available:
@@ -58,10 +66,11 @@ export function DateStep({
                 }}
                 disabled={(date) => {
                   const isWednesday = date.getDay() === 3;
+                  const isSaturday = date.getDay() === 6;
                   const today = new Date();
                   today.setHours(0, 0, 0, 0);
                   const isPast = date < today;
-                  return !isWednesday || isPast;
+                  return !(isWednesday || isSaturday) || isPast;
                 }}
                 className="w-full max-w-xl mx-auto border rounded-md p-8 bg-white shadow-xl"
               />
@@ -79,18 +88,20 @@ export function DateStep({
                   className="grid gap-4"
                 >
                   {[
-                    { id: "AM", label: "AM" },
-                    { id: "PM", label: "PM" },
+                    { id: "AM", label: "10:00 AM", disabled: value?.getDay() === 3 },
+                    { id: "PM", label: "1:00 PM", disabled: value?.getDay() === 6 },
                   ].map((slot) => (
                     <div key={slot.id}>
                       <Label
                         htmlFor={slot.id}
-                        className={`flex items-center gap-3 p-4 rounded-xl border-2 transition-all cursor-pointer ${timeSlot === slot.id
+                        className={`flex items-center gap-3 p-4 rounded-xl border-2 transition-all cursor-pointer ${
+                          slot.disabled ? "opacity-40 cursor-not-allowed pointer-events-none" : ""
+                        } ${timeSlot === slot.id
                           ? "border-[#A11D1D] bg-[#A11D1D]/5 ring-1 ring-[#A11D1D]"
                           : "border-slate-100 bg-white hover:border-slate-200"
                           }`}
                       >
-                        <RadioGroupItem value={slot.id} id={slot.id} />
+                        <RadioGroupItem value={slot.id} id={slot.id} disabled={slot.disabled} />
                         <p className="font-bold text-slate-900">{slot.label}</p>
                       </Label>
                     </div>
@@ -99,6 +110,15 @@ export function DateStep({
                 <FieldError errors={[timeSlotError]} className="mt-4" />
               </FieldContent>
             </Field>
+
+            <div className="p-4 rounded-xl bg-slate-50 border border-slate-100 text-xs text-slate-500 leading-relaxed space-y-1">
+              <p>
+                <span className="font-bold text-slate-700">Note:</span> You may also reach out to us at{" "}
+                <a href="tel:+97165531250" className="text-[#A11D1D] hover:underline font-semibold">+97165531250</a> or{" "}
+                <a href="mailto:info@tepth.org" className="text-[#A11D1D] hover:underline font-semibold">info@tepth.org</a>{" "}
+                and confirm the Test date availability before you proceed.
+              </p>
+            </div>
           </div>
         </div>
 
