@@ -47,12 +47,20 @@ export const PteAcademicSchema = z.object({
 
     // Step 3: Your Profile
     homeLanguage: stringOrObject.refine(val => val.length > 0, "Please select your language"),
+    homeLanguageOther: z.string().optional(),
     planningCountry: stringOrObject.refine(val => val.length > 0, "Please select a destination country"),
     currentSituation: stringOrObject.refine(val => val.length > 0, "Please select your current situation"),
+    currentSituationOther: z.string().optional(),
     reasonForTaking: z.string().min(1, "Please select why you are taking the test"),
+    reasonForTakingOther: z.string().optional(),
     studyLevel: z.string().optional(),
+    studyLevelOther: z.string().optional(),
     occupationSector: stringOrObject.refine(val => val.length > 0, "Please select your occupation sector"),
+    occupationSectorOther: z.string().optional(),
     referralSource: stringOrObject.refine(val => val.length > 0, "Please select how you heard about us"),
+    referralSourceOther: z.string().optional(),
+    fieldOfStudy: z.string().optional(),
+    fieldOfStudyOther: z.string().optional(),
     
     takenBefore: z.enum(["yes", "no"]).or(z.literal("")),
     takenWithinTwoYears: z.enum(["yes", "no"]).or(z.literal("")),
@@ -86,6 +94,14 @@ export const PteAcademicSchema = z.object({
 .refine((data) => data.reasonForTaking !== "study" || (data.studyLevel && data.studyLevel !== ""), {
     message: "Please select your study level",
     path: ["studyLevel"],
+})
+.refine((data) => data.studyLevel !== "other" || (data.studyLevelOther && data.studyLevelOther.trim() !== ""), {
+    message: "Please specify your education level",
+    path: ["studyLevelOther"],
+})
+.refine((data) => data.homeLanguage !== "Other" || (data.homeLanguageOther && data.homeLanguageOther.trim() !== ""), {
+    message: "Please specify your first language",
+    path: ["homeLanguageOther"],
 })
 .refine((data) => data.takenBefore !== "yes" || !!data.takenWithinTwoYears, {
     message: "Please select an option",

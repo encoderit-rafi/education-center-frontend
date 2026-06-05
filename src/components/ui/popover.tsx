@@ -26,10 +26,10 @@ PopoverTrigger.displayName = "PopoverTrigger"
 const PopoverContent = React.forwardRef<
   HTMLDivElement,
   PopoverPrimitive.Popup.Props &
-    Pick<
-      PopoverPrimitive.Positioner.Props,
-      "align" | "alignOffset" | "side" | "sideOffset"
-    >
+  Pick<
+    PopoverPrimitive.Positioner.Props,
+    "align" | "alignOffset" | "side" | "sideOffset"
+  >
 >(
   (
     {
