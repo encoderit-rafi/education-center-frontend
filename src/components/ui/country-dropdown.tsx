@@ -149,7 +149,10 @@ const CountryDropdownComponent = (
         side="bottom"
         align="start"
         sideOffset={4}
-        className="w-[var(--radix-popover-trigger-width)] min-w-[12rem] p-0"
+        // Prevent Base UI from moving focus into the popup on open,
+        // which would cause the browser to scroll to the search input.
+        initialFocus={false}
+        className="w-[var(--anchor-width)] min-w-[12rem] p-0"
       >
           <Command className="w-full max-h-[300px] overflow-hidden bg-white text-slate-700">
             <div className="p-1 border-b border-slate-100">

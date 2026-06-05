@@ -548,7 +548,7 @@ export function DateTimePicker<TFieldValues extends FieldValues = FieldValues>(
                   </button>
                 }
               />
-              <PopoverContent className="w-auto p-0" align="start">
+              <PopoverContent className="w-auto p-0" align="start" initialFocus={false}>
                 {renderContent(field.value, (val) => {
                   field.onChange(val);
                   onChange?.(val as Date & DateRange);
@@ -583,7 +583,7 @@ export function DateTimePicker<TFieldValues extends FieldValues = FieldValues>(
             </button>
           }
         />
-        <PopoverContent className="w-auto p-0" align="start">
+        <PopoverContent className="w-auto p-0" align="start" initialFocus={false}>
           {renderContent(value, onChange as (val: Date | DateRange | undefined) => void)}
         </PopoverContent>
       </Popover>

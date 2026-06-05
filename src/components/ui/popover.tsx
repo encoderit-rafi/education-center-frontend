@@ -28,7 +28,7 @@ const PopoverContent = React.forwardRef<
   PopoverPrimitive.Popup.Props &
   Pick<
     PopoverPrimitive.Positioner.Props,
-    "align" | "alignOffset" | "side" | "sideOffset"
+    "align" | "alignOffset" | "side" | "sideOffset" | "positionMethod"
   >
 >(
   (
@@ -38,6 +38,12 @@ const PopoverContent = React.forwardRef<
       alignOffset = 0,
       side = "bottom",
       sideOffset = 4,
+      // Use "fixed" so the popup is viewport-relative and never affects
+      // the document scroll height — preventing the bounce/jump when
+      // a dropdown opens near the bottom of a long form.
+      positionMethod = "fixed",
+      initialFocus,
+      finalFocus,
       ...props
     },
     ref
@@ -49,11 +55,14 @@ const PopoverContent = React.forwardRef<
           alignOffset={alignOffset}
           side={side}
           sideOffset={sideOffset}
+          positionMethod={positionMethod}
           className="isolate z-50"
         >
           <PopoverPrimitive.Popup
             ref={ref}
             data-slot="popover-content"
+            initialFocus={initialFocus}
+            finalFocus={finalFocus}
             className={cn(
               "z-50 flex w-72 origin-(--transform-origin) flex-col gap-4 rounded-2xl bg-popover p-4 text-sm text-popover-foreground shadow-xl ring-1 ring-foreground/5 outline-hidden duration-100 data-[side=bottom]:slide-in-from-top-2 data-[side=inline-end]:slide-in-from-left-2 data-[side=inline-start]:slide-in-from-right-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 dark:ring-foreground/10 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
               className
@@ -66,6 +75,7 @@ const PopoverContent = React.forwardRef<
   }
 )
 PopoverContent.displayName = "PopoverContent"
+
 
 function PopoverHeader({ className, ...props }: React.ComponentProps<"div">) {
   return (

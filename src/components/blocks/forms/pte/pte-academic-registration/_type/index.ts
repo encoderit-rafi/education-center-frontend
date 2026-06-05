@@ -99,6 +99,14 @@ export const PteAcademicSchema = z.object({
     message: "Please specify your education level",
     path: ["studyLevelOther"],
 })
+.refine((data) => data.reasonForTaking !== "study" || !data.studyLevel || (data.fieldOfStudy && data.fieldOfStudy !== ""), {
+    message: "Please select your field of study",
+    path: ["fieldOfStudy"],
+})
+.refine((data) => data.fieldOfStudy !== "other" || (data.fieldOfStudyOther && data.fieldOfStudyOther.trim() !== ""), {
+    message: "Please specify your field of study",
+    path: ["fieldOfStudyOther"],
+})
 .refine((data) => data.homeLanguage !== "Other" || (data.homeLanguageOther && data.homeLanguageOther.trim() !== ""), {
     message: "Please specify your first language",
     path: ["homeLanguageOther"],

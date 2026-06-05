@@ -15,37 +15,7 @@ import { TermsStep } from "./steps/terms-step";
 import { DateStep } from "./steps/date-step";
 import { RegistrationFormStep } from "./steps/registration-form-step";
 import { ReviewStep } from "./steps/review-step";
-
-export const PTE_COURSES = {
-  group: {
-    id: "group",
-    name: "Group Classroom",
-    label: "Group (In-person classroom-based course)",
-    price: 1850,
-    currency: "AED",
-  },
-  semi_private: {
-    id: "semi_private",
-    name: "Semi-Private Classroom",
-    label: "Semi-Private (In-person classroom-based)",
-    price: 2850,
-    currency: "AED",
-  },
-  private: {
-    id: "private",
-    name: "Private one-to-one",
-    label: "Private one-to-one (In-person classroom)",
-    price: 4850,
-    currency: "AED",
-  },
-  online: {
-    id: "online",
-    name: "Private Online",
-    label: "Private one-to-one (Online course)",
-    price: 3850,
-    currency: "AED",
-  },
-};
+import { ielts_general_courses as COURSES_DATA } from "@/lib/data";
 
 export const PTE_WORKSHOPS = {
   workshop_2_hours: {
@@ -140,8 +110,12 @@ export default function FormPTEAcademicRegistration() {
     const baseFee = 1350;
     const serviceFee = 100;
     
-    const selectedCourseData = formData.selectedCourse ? (PTE_COURSES as any)[formData.selectedCourse] : null;
-    const coursePrice = selectedCourseData?.price || 0;
+    const selectedCourseData = formData.selectedCourse
+      ? COURSES_DATA.find((c: any) => c.id === formData.selectedCourse)
+      : null;
+    const coursePrice = selectedCourseData
+      ? selectedCourseData.discounted_price ?? selectedCourseData.price
+      : 0;
 
     const selectedWorkshopData = formData.selectedWorkshop ? (PTE_WORKSHOPS as any)[formData.selectedWorkshop] : null;
     const workshopPrice = selectedWorkshopData?.price || 0;
@@ -286,7 +260,7 @@ export default function FormPTEAcademicRegistration() {
               onInvalid={onInvalid}
               onBack={() => goToStep(1)}
               languages={languages}
-              coursesData={PTE_COURSES}
+              coursesData={COURSES_DATA}
               workshopsData={PTE_WORKSHOPS}
             />
           )}
@@ -302,7 +276,11 @@ export default function FormPTEAcademicRegistration() {
               baseFee={pricing.baseFee}
               serviceFee={pricing.serviceFee}
               total={total}
-              selectedCourseData={formData.selectedCourse ? (PTE_COURSES as any)[formData.selectedCourse] : undefined}
+              selectedCourseData={
+                formData.selectedCourse
+                  ? COURSES_DATA.find((c: any) => c.id === formData.selectedCourse)
+                  : undefined
+              }
               selectedWorkshopData={formData.selectedWorkshop ? (PTE_WORKSHOPS as any)[formData.selectedWorkshop] : undefined}
               reviewStepNumber={3}
               paymentStepNumber={4}

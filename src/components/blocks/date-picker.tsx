@@ -61,7 +61,7 @@ export function DatePicker({
           </Button>
         }
       />
-      <PopoverContent className="w-auto p-0" align="start">
+      <PopoverContent className="w-auto p-0" align="start" initialFocus={false}>
         <Calendar
           mode="single"
           selected={value}
