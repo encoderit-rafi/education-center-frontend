@@ -14,6 +14,7 @@ import Stepper from "@/components/stepper";
 
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
+import { INSTITUTIONS_INFO } from "@/data";
 
 interface DateStepProps {
   value?: Date;
@@ -60,7 +61,7 @@ export function DateStep({
                 }}
                 modifiersClassNames={{
                   available:
-                     "font-semibold text-primary underline underline-offset-4 decoration-primary",
+                    "font-semibold text-primary underline underline-offset-4 decoration-primary",
                 }}
                 disabled={(date) => {
                   const isPast =
@@ -97,11 +98,10 @@ export function DateStep({
                     <div key={slot.id} className="space-y-3">
                       <Label
                         htmlFor={slot.id}
-                        className={`flex items-center justify-between p-4 rounded-xl border-2 transition-all cursor-pointer ${
-                          timeSlot === slot.id
-                            ? "border-primary bg-primary/5 ring-1 ring-primary"
-                            : "border-slate-100 bg-white hover:border-slate-200"
-                        }`}
+                        className={`flex items-center justify-between p-4 rounded-xl border-2 transition-all cursor-pointer ${timeSlot === slot.id
+                          ? "border-primary bg-primary/5 ring-1 ring-primary"
+                          : "border-slate-100 bg-white hover:border-slate-200"
+                          }`}
                       >
                         <div className="flex items-center justify-between w-full overflow-hidden">
                           <div className="flex items-center gap-3">
@@ -162,19 +162,19 @@ export function DateStep({
                             {slot.id === "9:00 AM" ? (
                               <>
                                 <p>
-                                  <strong>Note:</strong> The Speaking Test usually takes place in the afternoon. The Speaking Test might be conducted in-person with the examiner (face to face) or via video call on exam day. We will confirm with you the Speaking Test delivery format before we book you the test. This will still need to be confirmed by the British Council.
+                                  <strong>Note:</strong> The Speaking Test usually takes place in the afternoon. The Speaking Test might be conducted in-person with the examiner (face to face) or via video call on exam day at the test centre. We will confirm with you the Speaking Test delivery format before we book you the test. This will still need to be confirmed by the British Council.
                                 </p>
                                 <p className="text-xs text-slate-500 mt-2">
-                                  You may also reach out to us at <a href="tel:+97165531250" className="underline text-primary font-semibold">+97165531250</a> or <a href="mailto:info@tepth.org" className="underline text-primary font-semibold">info@tepth.org</a> and confirm the Speaking Test delivery format before you proceed with the CD-IELTLS Registration on our website.
+                                  You may also reach out to us at <a href={`tel:${INSTITUTIONS_INFO.phone}`} className="underline text-primary font-semibold">{INSTITUTIONS_INFO.phone}</a> or <a href={`mailto:${INSTITUTIONS_INFO.email}`} className="underline text-primary font-semibold">{INSTITUTIONS_INFO.email}</a> and confirm the Speaking Test delivery format before you proceed with the CD-IELTLS Registration on our website.
                                 </p>
                               </>
                             ) : (
                               <>
                                 <p>
-                                  <strong>Note:</strong> The Speaking Test usually takes place in the morning. The Speaking Test might be conducted in-person with the examiner (face to face) or via video call on exam day. We will confirm with you the Speaking Test delivery format before we book you the test. This will still need to be confirmed by the British Council.
+                                  <strong>Note:</strong> The Speaking Test usually takes place in the morning. The Speaking Test might be conducted in-person with the examiner (face to face) or via video call on exam day at the test center. We will confirm with you the Speaking Test delivery format before we book you the test. This will still need to be confirmed by the British Council.
                                 </p>
                                 <p className="text-xs text-slate-500 mt-2">
-                                  You may also reach out to us at <a href="tel:+97165531250" className="underline text-primary font-semibold">+97165531250</a> or <a href="mailto:info@tepth.org" className="underline text-primary font-semibold">info@tepth.org</a> and confirm the Speaking Test delivery format before you proceed with the CD-IELTLS Registration on our website.
+                                  You may also reach out to us at <a href={`tel:${INSTITUTIONS_INFO.phone}`} className="underline text-primary font-semibold">{INSTITUTIONS_INFO.phone}</a> or <a href={`mailto:${INSTITUTIONS_INFO.email}`} className="underline text-primary font-semibold">{INSTITUTIONS_INFO.email}</a> and confirm the Speaking Test delivery format before you proceed with the CD-IELTLS Registration on our website.
                                 </p>
                               </>
                             )}
