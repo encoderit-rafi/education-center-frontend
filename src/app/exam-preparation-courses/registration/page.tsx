@@ -391,7 +391,7 @@ function CourseRegistrationForm({ className }: { className?: string }) {
                   className="w-full mt-6 py-3"
                   disabled={mutation.isPending}
                 >
-                  {mutation.isPending ? "Processing..." : "I accept, Purchase"}
+                  {mutation.isPending ? "Processing..." : "I accept, Pay"}
                 </Button>
                 {mutation.isError && (
                   <p className="text-red-500 text-sm mt-2">
