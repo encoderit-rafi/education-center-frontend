@@ -330,14 +330,13 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
                 {/* Workshop & Course Details Card */}
                 <div className="bg-slate-50 border rounded-2xl p-5 space-y-4 shadow-sm">
                   <h3 className="font-headline font-black text-xs text-slate-800  border-b pb-2 flex items-center gap-2">
-                    <Calendar className="w-4.5 h-4.5 text-primary" /> Workshop &
-                    Course Details
+                    <Calendar className="w-4.5 h-4.5 text-primary" /> Workshop Details
                   </h3>
                   <div className="space-y-3 text-sm">
                     <div>
                       <p className="text-xs text-slate-400 ">Workshop</p>
                       <p className="font-bold text-slate-900 text-base">
-                        {workshop?.name || titleName}
+                        {workshop?.duration}-hour {courseData?.name} Workshop
                       </p>
                     </div>
 
@@ -394,8 +393,8 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
                             amount={
                               workshop?.discountType === "PERCENTAGE"
                                 ? Math.round(
-                                    base_price * (discount_amount / 100),
-                                  )
+                                  base_price * (discount_amount / 100),
+                                )
                                 : discount_amount
                             }
                           />
