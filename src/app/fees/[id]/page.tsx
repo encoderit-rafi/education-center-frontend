@@ -191,7 +191,7 @@ export default async function FeesDynamicPage({
           </div>
         </div>
       </section>
-      <PromoDiscount />
+      {!["oet", "cael", "celpip"].includes(slug.toLowerCase()) && <PromoDiscount />}
       {/* ── Workshops Section ── */}
       {filteredWorkshops.length > 0 && (
         <section
