@@ -649,7 +649,7 @@ export function RegistrationFormStep({
             </FieldContent>
           </Field>
 
-          <Field data-invalid={!!errors.occupationLevel}>
+          {/* <Field data-invalid={!!errors.occupationLevel}>
             <FieldLabel required>What is your occupation level?</FieldLabel>
             <FieldContent>
               <SearchableDropdown
@@ -786,7 +786,7 @@ export function RegistrationFormStep({
               )}
               <FieldError errors={[errors.reasonForTakingTest]} />
             </FieldContent>
-          </Field>
+          </Field> */}
 
           <Field data-invalid={!!errors.destinationCountry}>
             <FieldLabel required>Destination country?</FieldLabel>

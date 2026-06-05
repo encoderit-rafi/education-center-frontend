@@ -43,7 +43,7 @@ export function DateStep({
 
         <div className="mt-8 grid md:grid-cols-2 gap-12 items-start">
           <Field data-invalid={!!error}>
-            <FieldLabel required>Select Date (Wednesdays Only)</FieldLabel>
+            <FieldLabel required>Select Date</FieldLabel>
             <FieldContent className="flex flex-col items-center">
               <Calendar
                 mode="single"
@@ -86,8 +86,8 @@ export function DateStep({
                       <Label
                         htmlFor={slot.id}
                         className={`flex items-center gap-3 p-4 rounded-xl border-2 transition-all cursor-pointer ${timeSlot === slot.id
-                            ? "border-[#A11D1D] bg-[#A11D1D]/5 ring-1 ring-[#A11D1D]"
-                            : "border-slate-100 bg-white hover:border-slate-200"
+                          ? "border-[#A11D1D] bg-[#A11D1D]/5 ring-1 ring-[#A11D1D]"
+                          : "border-slate-100 bg-white hover:border-slate-200"
                           }`}
                       >
                         <RadioGroupItem value={slot.id} id={slot.id} />

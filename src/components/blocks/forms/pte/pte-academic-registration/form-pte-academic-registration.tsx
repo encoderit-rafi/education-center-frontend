@@ -110,6 +110,7 @@ export default function FormPTEAcademicRegistration() {
       reasonForTaking: "",
       studyLevel: "",
       occupationSector: "",
+      occupationSectorOther: "",
       referralSource: "",
       takenBefore: "" as any,
       takenWithinTwoYears: "" as any,

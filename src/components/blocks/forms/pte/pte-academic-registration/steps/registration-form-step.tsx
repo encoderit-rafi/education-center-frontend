@@ -350,7 +350,7 @@ export function RegistrationFormStep({
                 onChange={(c) => setValue("countryOfCitizenship", c.name)}
               />
               {formData.countryOfCitizenship === "Syrian Arab Republic" && (
-                <p className="mt-2 text-xs text-amber-700 font-semibold animate-in fade-in slide-in-from-top-1">
+                <p className="mt-2 text-xs text-red-800 font-semibold">
                   A group of residence outside Syria is required to take the test
                 </p>
               )}
@@ -419,8 +419,22 @@ export function RegistrationFormStep({
                 options={languages}
                 placeholder="-Select Language-"
                 value={formData.homeLanguage}
-                onChange={(val) => setValue("homeLanguage", val)}
+                onChange={(val) => {
+                  setValue("homeLanguage", val);
+                  if (val !== "Other") setValue("homeLanguageOther", "");
+                }}
               />
+              {formData.homeLanguage === "Other" && (
+                <div className="mt-2 animate-in fade-in slide-in-from-top-2 duration-300">
+                  <Input
+                    placeholder="Please specify your first language"
+                    value={formData.homeLanguageOther ?? ""}
+                    onChange={(e) => setValue("homeLanguageOther", e.target.value)}
+                    className="border-primary/40 focus:border-primary"
+                  />
+                  <FieldError errors={[errors.homeLanguageOther]} />
+                </div>
+              )}
               <FieldError errors={[errors.homeLanguage]} />
             </FieldContent>
           </Field>
@@ -442,39 +456,85 @@ export function RegistrationFormStep({
             <FieldContent>
               <SearchableDropdown
                 options={[
-                  { label: "Employed Full-time", value: "Employed Full-time" },
-                  { label: "Employed Part-time", value: "Employed Part-time" },
-                  { label: "Self-employed", value: "Self-employed" },
-                  { label: "Student", value: "Student" },
-                  { label: "Unemployed", value: "Unemployed" },
+                  { label: "Student - In High School", value: "Student - In High School" },
+                  { label: "Student - High School graduate", value: "Student - High School graduate" },
+                  { label: "Student - English language", value: "Student - English language" },
+                  { label: "Student - In University / College", value: "Student - In University / College" },
+                  { label: "Student - University / College graduate", value: "Student - University / College graduate" },
+                  { label: "Working - full time", value: "Working - full time" },
+                  { label: "Working - part time", value: "Working - part time" },
+                  { label: "Not studying or working", value: "Not studying or working" },
+                  { label: "Other - specify below", value: "Other" },
                 ]}
-                placeholder="-Select Level-"
+                placeholder="Select one..."
                 value={formData.currentSituation}
-                onChange={(val) => setValue("currentSituation", val)}
+                onChange={(val) => {
+                  setValue("currentSituation", val);
+                  if (val !== "Other") setValue("currentSituationOther", "");
+                }}
               />
+              {formData.currentSituation === "Other" && (
+                <div className="mt-2 animate-in fade-in slide-in-from-top-2 duration-300">
+                  <Input
+                    placeholder="Please specify your current situation"
+                    value={formData.currentSituationOther ?? ""}
+                    onChange={(e) => setValue("currentSituationOther", e.target.value)}
+                    className="border-primary/40 focus:border-primary"
+                  />
+                </div>
+              )}
               <FieldError errors={[errors.currentSituation]} />
             </FieldContent>
           </Field>
 
-          <Field data-invalid={!!errors.occupationSector}>
+          {/* <Field data-invalid={!!errors.occupationSector}>
             <FieldLabel required>What is your occupation sector?</FieldLabel>
             <FieldContent>
               <SearchableDropdown
+                name="occupationSector"
                 options={[
-                  { label: "Accounting/Finance", value: "Accounting" },
+                  { label: "Administrative Services", value: "Administrative Services" },
+                  { label: "Agriculture, Fishing, Forestry, Mining", value: "Agriculture, Fishing, Forestry, Mining" },
+                  { label: "Arts and Entertainment", value: "Arts and Entertainment" },
+                  { label: "Banking and Finance", value: "Banking and Finance" },
+                  { label: "Catering and Leisure", value: "Catering and Leisure" },
+                  { label: "Construction Industries", value: "Construction Industries" },
+                  { label: "Craft and Design", value: "Craft and Design" },
                   { label: "Education", value: "Education" },
-                  { label: "Banking and Finance", value: "Banking" },
-                  { label: "Health and Social Services", value: "Healthcare" },
-                  { label: "IT/Communications", value: "IT" },
+                  { label: "Health and Social Services", value: "Health and Social Services" },
+                  { label: "Installation, Maintenance and Repair Services", value: "Installation, Maintenance and Repair Services" },
+                  { label: "Law and Legal Services", value: "Law and Legal Services" },
+                  { label: "Manufacturing and Assembly Services", value: "Manufacturing and Assembly Services" },
+                  { label: "Personal Services", value: "Personal Services" },
+                  { label: "Retail Trade", value: "Retail Trade" },
+                  { label: "Technical and Scientific", value: "Technical and Scientific" },
+                  { label: "Telecommunications and the Media", value: "Telecommunications and the Media" },
+                  { label: "Transport", value: "Transport" },
+                  { label: "Utilities (Gas, Water, Electricity etc)", value: "Utilities (Gas, Water, Electricity etc)" },
+                  { label: "Wholesale Trade", value: "Wholesale Trade" },
                   { label: "Other", value: "Other" },
                 ]}
                 placeholder="-Select Sector-"
                 value={formData.occupationSector}
-                onChange={(val) => setValue("occupationSector", val)}
+                aria-invalid={!!errors.occupationSector}
+                onChange={(val) => {
+                  setValue("occupationSector", val);
+                  if (val !== "Other") setValue("occupationSectorOther", "");
+                }}
               />
+              {formData.occupationSector === "Other" && (
+                <div className="mt-2 animate-in fade-in slide-in-from-top-2 duration-300">
+                  <Input
+                    placeholder="Please specify your occupation sector"
+                    value={formData.occupationSectorOther ?? ""}
+                    onChange={(e) => setValue("occupationSectorOther", e.target.value)}
+                    className="border-primary/40 focus:border-primary"
+                  />
+                </div>
+              )}
               <FieldError errors={[errors.occupationSector]} />
             </FieldContent>
-          </Field>
+          </Field> */}
 
           <Field
             data-invalid={!!errors.reasonForTaking}
@@ -515,12 +575,24 @@ export function RegistrationFormStep({
                 ]}
                 placeholder="Select one..."
                 value={formData.reasonForTaking}
-                onChange={(val) => setValue("reasonForTaking", val)}
+                onChange={(val) => {
+                  setValue("reasonForTaking", val);
+                  if (val !== "other") setValue("reasonForTakingOther", "");
+                }}
               />
+              {formData.reasonForTaking === "other" && (
+                <div className="mt-2 animate-in fade-in slide-in-from-top-2 duration-300">
+                  <Input
+                    placeholder="Please specify your reason"
+                    value={formData.reasonForTakingOther ?? ""}
+                    onChange={(e) => setValue("reasonForTakingOther", e.target.value)}
+                    className="border-primary/40 focus:border-primary"
+                  />
+                </div>
+              )}
               <FieldError errors={[errors.reasonForTaking]} />
             </FieldContent>
           </Field>
-
           {formData.reasonForTaking === "study" && (
             <Field
               data-invalid={!!errors.studyLevel}
@@ -532,38 +604,122 @@ export function RegistrationFormStep({
               <FieldContent>
                 <SearchableDropdown
                   options={[
-                    {
-                      label: "Secondary (up to 16 years)",
-                      value: "undergraduate"
-                    },
-                    { label: "Secondary (16-19 years)", value: "postgraduate" },
-                    { label: "Degree (or equivalent)", value: "degree" },
-                    { label: "Post-graduate", value: "post_graduate" },
+                    { label: "Pre-degree / Foundation course", value: "pre_degree" },
+                    { label: "Undergraduate degree", value: "undergraduate" },
+                    { label: "(Post) Graduate / Masters degree", value: "postgraduate" },
+                    { label: "Doctorate / PhD", value: "doctorate" },
+                    { label: "MBA (Master of Business Administration)", value: "mba" },
+                    { label: "English Language Course", value: "english_language" },
+                    { label: "Professional qualification", value: "professional" },
+                    { label: "Other - specify below", value: "other" },
                   ]}
                   placeholder="-Select Level-"
                   value={formData.studyLevel}
-                  onChange={(val) => setValue("studyLevel", val)}
+                  onChange={(val) => {
+                    setValue("studyLevel", val);
+                    if (val !== "other") setValue("studyLevelOther", "");
+                  }}
                 />
+                {formData.studyLevel === "other" && (
+                  <div className="mt-2 animate-in fade-in slide-in-from-top-2 duration-300">
+                    <Input
+                      placeholder="Please specify your education level"
+                      value={formData.studyLevelOther ?? ""}
+                      onChange={(e) => setValue("studyLevelOther", e.target.value)}
+                      className="border-primary/40 focus:border-primary"
+                    />
+                    <FieldError errors={[errors.studyLevelOther]} />
+                  </div>
+                )}
                 <FieldError errors={[errors.studyLevel]} />
               </FieldContent>
             </Field>
           )}
 
           <Field data-invalid={!!errors.referralSource}>
-            <FieldLabel required>How did you hear about us?</FieldLabel>
+            <FieldLabel required>How did you hear about PTE Academic?</FieldLabel>
             <FieldContent>
               <SearchableDropdown
                 options={[
-                  { label: "Social Media", value: "Social Media" },
-                  { label: "Search Engine", value: "Search Engine" },
-                  { label: "Friend/Family", value: "Referral" },
-                  { label: "Other", value: "Other" },
+                  { label: "Australian Department of Home Affairs (DHA)", value: "dha" },
+                  { label: "Board of Nursing", value: "board_of_nursing" },
+                  { label: "Education Agent Advisor - specify below", value: "education_agent" },
+                  { label: "Education event - specify below", value: "education_event" },
+                  { label: "Education Malaysia Global Services (EMGS)", value: "emgs" },
+                  { label: "Friend or family", value: "friend_family" },
+                  { label: "Immigration New Zealand (INZ)", value: "inz" },
+                  { label: "Internet search", value: "internet_search" },
+                  { label: "Language School", value: "language_school" },
+                  { label: "Migration agent / lawyer - specify below", value: "migration_agent" },
+                  { label: "Social Media (e.g. Facebook, Twitter, Weibo etc)", value: "social_media" },
+                  { label: "University or College - specify below", value: "university_college" },
+                  { label: "Other - specify below", value: "Other" },
                 ]}
-                placeholder="-Select Source-"
+                placeholder="Select one..."
                 value={formData.referralSource}
-                onChange={(val) => setValue("referralSource", val)}
+                onChange={(val) => {
+                  setValue("referralSource", val);
+                  const specifyOptions = ["education_agent", "education_event", "migration_agent", "university_college", "Other"];
+                  if (!specifyOptions.includes(val)) setValue("referralSourceOther", "");
+                }}
               />
+              {["education_agent", "education_event", "migration_agent", "university_college", "Other"].includes(formData.referralSource) && (
+                <div className="mt-2 animate-in fade-in slide-in-from-top-2 duration-300">
+                  <Input
+                    placeholder="Please specify"
+                    value={formData.referralSourceOther ?? ""}
+                    onChange={(e) => setValue("referralSourceOther", e.target.value)}
+                    className="border-primary/40 focus:border-primary"
+                  />
+                  <FieldError errors={[errors.referralSourceOther]} />
+                </div>
+              )}
               <FieldError errors={[errors.referralSource]} />
+            </FieldContent>
+          </Field>
+
+          <Field data-invalid={!!errors.fieldOfStudy}>
+            <FieldLabel required>Which field of study are you applying for?</FieldLabel>
+            <FieldContent>
+              <SearchableDropdown
+                options={[
+                  { label: "Accountancy and Finance", value: "accountancy_finance" },
+                  { label: "Agriculture", value: "agriculture" },
+                  { label: "Architecture", value: "architecture" },
+                  { label: "Business and Management", value: "business_management" },
+                  { label: "Communications and Media", value: "communications_media" },
+                  { label: "Education", value: "education" },
+                  { label: "Engineering", value: "engineering" },
+                  { label: "Health", value: "health" },
+                  { label: "Humanities & Arts", value: "humanities_arts" },
+                  { label: "Information Technology / Computer Sciences", value: "it_computer_sciences" },
+                  { label: "Law", value: "law" },
+                  { label: "Mathematics", value: "mathematics" },
+                  { label: "Medicine", value: "medicine" },
+                  { label: "Physical and Life Sciences", value: "physical_life_sciences" },
+                  { label: "Social Sciences", value: "social_sciences" },
+                  { label: "Tourism and Hospitality Management", value: "tourism_hospitality" },
+                  { label: "Other - specify below", value: "other" },
+                ]}
+                placeholder="Select one..."
+                value={formData.fieldOfStudy}
+                onChange={(val) => {
+                  setValue("fieldOfStudy", val);
+                  if (val !== "other") setValue("fieldOfStudyOther", "");
+                }}
+              />
+              {formData.fieldOfStudy === "other" && (
+                <div className="mt-2 animate-in fade-in slide-in-from-top-2 duration-300">
+                  <Input
+                    placeholder="Please specify your field of study"
+                    value={formData.fieldOfStudyOther ?? ""}
+                    onChange={(e) => setValue("fieldOfStudyOther", e.target.value)}
+                    className="border-primary/40 focus:border-primary"
+                  />
+                  <FieldError errors={[errors.fieldOfStudyOther]} />
+                </div>
+              )}
+              <FieldError errors={[errors.fieldOfStudy]} />
             </FieldContent>
           </Field>
 
