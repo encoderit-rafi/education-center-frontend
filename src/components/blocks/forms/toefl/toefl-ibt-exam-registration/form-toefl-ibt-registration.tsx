@@ -17,34 +17,34 @@ import { DateStep } from "./steps/date-step";
 import { RegistrationFormStep } from "./steps/registration-form-step";
 
 export const WORKSHOPS_DATA = {
-  workshop_2_hours: {
-    id: "workshop_2_hours",
-    name: "Workshop 2 Hours",
-    duration: "2 hours",
-    price: 600,
-    currency: "AED",
-  },
-  workshop_4_hours: {
-    id: "workshop_4_hours",
-    name: "Workshop 4 Hours",
-    duration: "4 hours",
-    price: 1000,
-    currency: "AED",
-  },
-  workshop_6_hours: {
-    id: "workshop_6_hours",
-    name: "Workshop 6 Hours",
-    duration: "6 hours",
-    price: 1350,
-    currency: "AED",
-  },
-  workshop_8_hours: {
-    id: "workshop_8_hours",
-    name: "Workshop 8 Hours",
-    duration: "8 hours",
-    price: 1600,
-    currency: "AED",
-  },
+    workshop_2_hours: {
+        id: "workshop_2_hours",
+        name: "Workshop 2 Hours",
+        duration: "2 hours",
+        price: 600,
+        currency: "AED",
+    },
+    workshop_4_hours: {
+        id: "workshop_4_hours",
+        name: "Workshop 4 Hours",
+        duration: "4 hours",
+        price: 1000,
+        currency: "AED",
+    },
+    workshop_6_hours: {
+        id: "workshop_6_hours",
+        name: "Workshop 6 Hours",
+        duration: "6 hours",
+        price: 1350,
+        currency: "AED",
+    },
+    workshop_8_hours: {
+        id: "workshop_8_hours",
+        name: "Workshop 8 Hours",
+        duration: "8 hours",
+        price: 1600,
+        currency: "AED",
+    },
 };
 
 import { ielts_general_courses as COURSES_DATA } from "@/lib/data";
@@ -75,10 +75,9 @@ export default function FormTOEFLIBTRegistration() {
             state: "",
             postalCode: "",
             agentCode: "",
-            idType: "passport" as any,
+            idType: "" as any,
             idNumber: "",
             idExpiryDate: undefined,
-            issuingAuthority: "",
             nationality: "",
             idDocument: undefined,
             takenBefore: "" as any,
@@ -196,7 +195,6 @@ export default function FormTOEFLIBTRegistration() {
                 postal_code: data.postalCode,
                 id_type: data.idType,
                 id_number: data.idNumber,
-                issuing_authority: data.issuingAuthority,
                 nationality: data.nationality,
                 taken_before: data.takenBefore,
                 less_than_two_years: data.lessThanTwoYears,
@@ -289,39 +287,39 @@ export default function FormTOEFLIBTRegistration() {
                             reviewStepNumber={3}
                             paymentStepNumber={4}
                         >
-                                                    <ReviewSummaryGrid
-                            personalDetails={[
-                              { label: "Given Names", value: formData.givenNames },
-                              { label: "Middle Name", value: formData.middleName || "N/A" },
-                              { label: "Surnames", value: formData.surnames || "N/A" },
-                              { label: "Date of Birth", value: formData.dateOfBirth ? format(new Date(formData.dateOfBirth as any), "PPP") : "N/A" },
-                              { label: "Gender", value: formData.gender || "N/A" },
-                              { label: "Contact Number", value: formData.phoneNumber || "N/A" },
-                              { label: "Nationality", value: formData.nationality || "N/A" },
-                            ]}
-                            identityContact={[
-                              { label: "ID Type", value: formData.idType?.replace("_", " ") },
-                              { label: "ID Number", value: formData.idNumber || "N/A" },
-                              { label: "Email", value: formData.email },
-                              { label: "ID Expiry Date", value: formData.idExpiryDate ? format(new Date(formData.idExpiryDate as any), "PPP") : "N/A" },
-                              { label: "Identity Document", value: formData.idDocument ? (formData.idDocument as File).name : "No file attached" },
-                              { label: "Issuing Authority", value: formData.issuingAuthority || "N/A" },
-                            ]}
-                            testInformation={[
-                              { label: "Exam Date", value: formData.examDate ? format(new Date(formData.examDate as any), "PPP") : "N/A", highlight: true },
-                              { label: "Time Slot", value: `${formData.examTimeSlot || "N/A"} Session` },
-                              { label: "Address Line 1", value: formData.streetAddress1 },
-                              ...(formData.streetAddress2 ? [{ label: "Address Line 2", value: formData.streetAddress2 }] : []),
-                              { label: "City", value: formData.city },
-                              { label: "Country of Residence", value: formData.country },
-                              { label: "First Language", value: formData.firstLanguage === "Other" ? (formData.firstLanguageOther || "Other") : (formData.firstLanguage || "N/A") },
-                              { label: "Education Level", value: formData.educationLevel?.replace(/_/g, " ") || "N/A" },
-                              { label: "Next Level of Study", value: formData.nextLevelOfStudy === "Other" ? (formData.nextLevelOfStudyOther || "Other") : (formData.nextLevelOfStudy || "N/A") },
-                              { label: "Desired Field of Study", value: formData.desiredFieldOfStudy === "Other" ? (formData.desiredFieldOfStudyOther || "Other") : (formData.desiredFieldOfStudy || "N/A") },
-                              { label: "Reason for taking TOEFL", value: formData.reasonsForTakingToefl?.join(", ") || "N/A" },
-                              { label: "ETS Products Interest", value: formData.etsProductsInterest || "N/A" },
-                            ]}
-                        />
+                            <ReviewSummaryGrid
+                                personalDetails={[
+                                    { label: "Given Names", value: formData.givenNames },
+                                    { label: "Middle Name", value: formData.middleName || "N/A" },
+                                    { label: "Surnames", value: formData.surnames || "N/A" },
+                                    { label: "Date of Birth", value: formData.dateOfBirth ? format(new Date(formData.dateOfBirth as any), "PPP") : "N/A" },
+                                    { label: "Gender", value: formData.gender || "N/A" },
+                                    { label: "Contact Number", value: formData.phoneNumber || "N/A" },
+                                    { label: "Nationality", value: formData.nationality || "N/A" },
+                                ]}
+                                identityContact={[
+                                    { label: "ID Type", value: formData.idType?.replace("_", " ") },
+                                    { label: "ID Number", value: formData.idNumber || "N/A" },
+                                    { label: "Email", value: formData.email },
+                                    { label: "ID Expiry Date", value: formData.idExpiryDate ? format(new Date(formData.idExpiryDate as any), "PPP") : "N/A" },
+                                    { label: "Identity Document", value: formData.idDocument ? (formData.idDocument as File).name : "No file attached" },
+
+                                ]}
+                                testInformation={[
+                                    { label: "Exam Date", value: formData.examDate ? format(new Date(formData.examDate as any), "PPP") : "N/A", highlight: true },
+                                    { label: "Time Slot", value: `${formData.examTimeSlot || "N/A"} Session` },
+                                    { label: "Address Line 1", value: formData.streetAddress1 },
+                                    ...(formData.streetAddress2 ? [{ label: "Address Line 2", value: formData.streetAddress2 }] : []),
+                                    { label: "City", value: formData.city },
+                                    { label: "Country of Residence", value: formData.country },
+                                    { label: "First Language", value: formData.firstLanguage === "Other" ? (formData.firstLanguageOther || "Other") : (formData.firstLanguage || "N/A") },
+                                    { label: "Education Level", value: formData.educationLevel?.replace(/_/g, " ") || "N/A" },
+                                    { label: "Next Level of Study", value: formData.nextLevelOfStudy === "Other" ? (formData.nextLevelOfStudyOther || "Other") : (formData.nextLevelOfStudy || "N/A") },
+                                    { label: "Desired Field of Study", value: formData.desiredFieldOfStudy === "Other" ? (formData.desiredFieldOfStudyOther || "Other") : (formData.desiredFieldOfStudy || "N/A") },
+                                    { label: "Reason for taking TOEFL", value: formData.reasonsForTakingToefl?.join(", ") || "N/A" },
+                                    { label: "ETS Products Interest", value: formData.etsProductsInterest || "N/A" },
+                                ]}
+                            />
                         </GlobalReviewStep>
                     )}
                 </Form>

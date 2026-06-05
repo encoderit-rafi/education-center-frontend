@@ -40,7 +40,6 @@ export const ToeflIbtSchema = z
         idType: z.enum(["passport", "emirates_id"]).or(z.literal("")),
         idNumber: z.string().optional(),
         idExpiryDate: z.any().optional(),
-        issuingAuthority: z.string().optional(),
         nationality: z.string().optional(),
         idDocument: z.any().refine((val) => !!val, "Please upload your ID document"),
 

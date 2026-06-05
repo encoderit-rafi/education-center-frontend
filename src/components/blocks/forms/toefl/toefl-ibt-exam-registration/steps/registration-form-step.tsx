@@ -389,17 +389,6 @@ export function RegistrationFormStep({
             </FieldContent>
           </Field>
 
-          <Field data-invalid={!!errors.issuingAuthority}>
-            <FieldLabel required>Issuing authority</FieldLabel>
-            <FieldContent>
-              <Input
-                {...register("issuingAuthority")}
-                aria-invalid={!!errors.issuingAuthority}
-                placeholder="Enter issuing authority"
-              />
-              <FieldError errors={[errors.issuingAuthority]} />
-            </FieldContent>
-          </Field>
 
           <Field data-invalid={!!errors.nationality}>
             <FieldLabel required>Country of nationality</FieldLabel>
