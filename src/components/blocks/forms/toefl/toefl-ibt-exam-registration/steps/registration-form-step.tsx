@@ -2,7 +2,7 @@
 
 import React from "react";
 import { UseFormReturn } from "react-hook-form";
-import { Save, Globe } from "lucide-react";
+import { Save, Globe, CalendarIcon, ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import { AddonServicesSection } from "@/components/blocks/forms/shared/addon-services-section";
 import { MarketingPreferencesSection } from "@/components/blocks/forms/shared/marketing-preferences-section";
 import { Button } from "@/components/ui/button";
@@ -14,6 +14,9 @@ import { PhoneInput } from "@/components/ui/phone-input";
 import { SearchableDropdown } from "@/components/ui/searchable-dropdown";
 import { CountryDropdown } from "@/components/ui/country-dropdown";
 import { DatePicker } from "@/components/blocks/date-picker";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { cn } from "@/lib/utils";
+import { format } from "date-fns";
 import Stepper from "@/components/stepper";
 import {
   Field,
@@ -44,6 +47,20 @@ const DESIRED_FIELDS_OF_STUDY = [
   { label: "Physical Sciences", value: "Physical Sciences" },
   { label: "Social Sciences", value: "Social Sciences" },
   { label: "Other", value: "Other" },
+];
+
+const REASONS_FOR_TAKING_TOEFL = [
+  { label: "To enter an undergraduate program", value: "To enter an undergraduate program" },
+  { label: "To enter a graduate program", value: "To enter a graduate program" },
+  { label: "To enter a postgraduate program", value: "To enter a postgraduate program" },
+  { label: "To enter a secondary school", value: "To enter a secondary school" },
+  { label: "To enter a 2-year college/community college", value: "To enter a 2-year college/community college" },
+  { label: "For employment / work", value: "For employment / work" },
+  { label: "For immigration / settling in a country", value: "For immigration / settling in a country" },
+  { label: "For professional registration or licensure", value: "For professional registration or licensure" },
+  { label: "For scholarship or fellowship program", value: "For scholarship or fellowship program" },
+  { label: "Personal reasons / self-evaluation", value: "Personal reasons / self-evaluation" },
+  { label: "Other educational purposes", value: "Other educational purposes" },
 ];
 
 interface RegistrationFormStepProps {
@@ -98,13 +115,15 @@ export function RegistrationFormStep({
             </FieldContent>
           </Field>
 
-          <Field>
+          <Field data-invalid={!!errors.middleName}>
             <FieldLabel>Middle Name</FieldLabel>
             <FieldContent>
               <Input
                 placeholder="As per passport"
+                aria-invalid={!!errors.middleName}
                 {...register("middleName")}
               />
+              <FieldError errors={[errors.middleName]} />
             </FieldContent>
           </Field>
 
@@ -127,7 +146,7 @@ export function RegistrationFormStep({
                   }
                 />
                 <Label htmlFor="noSurname" className="text-xs font-light">
-                  I don&apos;t have a surname / family name
+                  I don't have a surname / family name
                 </Label>
               </FieldDescription>
             </FieldContent>
@@ -145,6 +164,7 @@ export function RegistrationFormStep({
                 }
                 fromYear={1900}
                 toYear={new Date().getFullYear()}
+                calendarClassName="[--calendar-accent:theme(colors.primary.DEFAULT)]"
                 placeholder="Select your date of birth"
                 aria-invalid={!!errors.dateOfBirth}
               />
@@ -197,7 +217,7 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.gender}>
-            <FieldLabel required>Gender</FieldLabel>
+            <FieldLabel required>Sex</FieldLabel>
             <FieldContent>
               <RadioGroup
                 name="gender"
@@ -210,7 +230,7 @@ export function RegistrationFormStep({
                     key={opt}
                     htmlFor={opt}
                     data-invalid={!!errors.gender}
-                    className={`flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive capitalize ${formData.gender === opt ? "border-[#A11D1D] bg-[#A11D1D]/5 ring-1 ring-[#A11D1D]" : ""}`}
+                    className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive capitalize"
                   >
                     <RadioGroupItem value={opt} id={opt} />
                     {opt}
@@ -232,21 +252,22 @@ export function RegistrationFormStep({
                 aria-invalid={!!errors.phoneNumber}
               />
               <FieldError errors={[errors.phoneNumber]} />
-              <FieldDescription className="flex items-center gap-2 mt-2">
+              <FieldDescription className="flex items-start gap-2.5 mt-2">
                 <Checkbox
                   id="smsConsent"
                   checked={formData.smsConsent}
                   onCheckedChange={(val) =>
                     setValue("smsConsent", val as boolean)
                   }
+                  className="mt-0.5"
                 />
-                <Label htmlFor="smsConsent" className="text-xs font-light">
-                  I agree to receive notifications
+                <Label htmlFor="smsConsent" className="text-xs font-light leading-normal whitespace-normal text-wrap block">
+                  I agree to receive notifications or to be contacted about my test registration<br />
+                  to this telephone number via SMS, WhatsApp, etc
                 </Label>
               </FieldDescription>
             </FieldContent>
           </Field>
-
           <Field data-invalid={!!errors.email}>
             <FieldLabel required>Email address</FieldLabel>
             <FieldContent>
@@ -280,7 +301,9 @@ export function RegistrationFormStep({
                 placeholder="Search country..."
                 value={formData.country}
                 aria-invalid={!!errors.country}
-                onChange={(country) => setValue("country", country.name)}
+                onChange={(country) =>
+                  setValue("country", country.name)
+                }
               />
               <FieldError errors={[errors.country]} />
             </FieldContent>
@@ -310,6 +333,30 @@ export function RegistrationFormStep({
             </FieldContent>
           </Field>
 
+          <Field data-invalid={!!errors.poBox}>
+            <FieldLabel>P.O. Box number</FieldLabel>
+            <FieldContent>
+              <Input
+                {...register("poBox")}
+                placeholder="P.O. Box number"
+                aria-invalid={!!errors.poBox}
+              />
+              <FieldError errors={[errors.poBox]} />
+            </FieldContent>
+          </Field>
+
+          <Field data-invalid={!!errors.postalCode}>
+            <FieldLabel>Postal Code (Zip Code)</FieldLabel>
+            <FieldContent>
+              <Input
+                {...register("postalCode")}
+                placeholder="Postal code"
+                aria-invalid={!!errors.postalCode}
+              />
+              <FieldError errors={[errors.postalCode]} />
+            </FieldContent>
+          </Field>
+
           <Field data-invalid={!!errors.city}>
             <FieldLabel required>Emirate / City</FieldLabel>
             <FieldContent>
@@ -322,14 +369,14 @@ export function RegistrationFormStep({
             </FieldContent>
           </Field>
 
-          <Field data-invalid={!!errors.idType} className="md:col-start-1">
+          <Field data-invalid={!!errors.idType}>
             <FieldLabel required>Identification type</FieldLabel>
             <FieldContent>
               <RadioGroup
                 name="idType"
                 onValueChange={(val) => setValue("idType", val)}
                 value={formData.idType}
-                className="grid grid-cols-2 gap-3"
+                className="grid grid-cols-1 sm:grid-cols-2 gap-3"
               >
                 {[
                   { id: "passport", label: "Passport" },
@@ -339,7 +386,7 @@ export function RegistrationFormStep({
                     key={opt.id}
                     htmlFor={opt.id}
                     data-invalid={!!errors.idType}
-                    className={`flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive ${formData.idType === opt.id ? "border-[#A11D1D] bg-[#A11D1D]/5 ring-1 ring-[#A11D1D]" : ""}`}
+                    className="whitespace-nowrap flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive"
                   >
                     <RadioGroupItem value={opt.id} id={opt.id} />
                     {opt.label}
@@ -388,8 +435,6 @@ export function RegistrationFormStep({
               <FieldError errors={[errors.idExpiryDate]} />
             </FieldContent>
           </Field>
-
-
           <Field data-invalid={!!errors.nationality}>
             <FieldLabel required>Country of nationality</FieldLabel>
             <FieldContent>
@@ -405,7 +450,7 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.idDocument}>
-            <FieldLabel required>
+            <FieldLabel required className="whitespace-nowrap">
               Attach a valid copy of Passport / Emirates ID:
             </FieldLabel>
             <FieldContent>
@@ -414,7 +459,7 @@ export function RegistrationFormStep({
                   <Input
                     type="file"
                     accept=".pdf,.png,.jpg,.jpeg"
-                    className="h-auto py-2 px-3 border-2 border-dashed border-slate-200 hover:border-[#A11D1D]/50 transition-colors cursor-pointer file:mr-4 file:py-1 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#A11D1D]/10 file:text-[#A11D1D] hover:file:bg-[#A11D1D]/20"
+                    className="h-auto py-2 px-3 border-2 border-dashed border-slate-200 hover:border-primary/50 transition-colors cursor-pointer file:mr-4 file:py-1 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20"
                     onChange={(e) => {
                       const file = e.target.files?.[0];
                       if (file) setValue("idDocument", file);
@@ -423,7 +468,7 @@ export function RegistrationFormStep({
                 ) : (
                   <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-200">
                     <div className="flex items-center gap-3">
-                      <div className="size-8 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-[#A11D1D]">
+                      <div className="size-8 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-primary">
                         <Save className="size-4" />
                       </div>
                       <div className="flex flex-col">
@@ -690,75 +735,24 @@ export function RegistrationFormStep({
             </FieldContent>
           </Field>
 
-          <Field className="md:col-span-2" data-invalid={!!errors.reasonsForTakingToefl}>
-            <FieldLabel required>What is your reason for taking the TOEFL test?(You may select more than one response.)</FieldLabel>
+          <Field data-invalid={!!errors.reasonsForTakingToefl}>
+            <FieldLabel required>What is your reason for taking the TOEFL test?</FieldLabel>
             <FieldContent>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
-                {[
-                  { label: "To enter an undergraduate program", value: "To enter an undergraduate program" },
-                  { label: "To enter a graduate program", value: "To enter a graduate program" },
-                  { label: "To enter a postgraduate program", value: "To enter a postgraduate program" },
-                  { label: "To enter a secondary school", value: "To enter a secondary school" },
-                  { label: "To enter a 2-year college/community college", value: "To enter a 2-year college/community college" },
-                  { label: "For employment / work", value: "For employment / work" },
-                  { label: "For immigration / settling in a country", value: "For immigration / settling in a country" },
-                  { label: "For professional registration or licensure", value: "For professional registration or licensure" },
-                  { label: "For scholarship or fellowship program", value: "For scholarship or fellowship program" },
-                  { label: "Personal reasons / self-evaluation", value: "Personal reasons / self-evaluation" },
-                  { label: "Other educational purposes", value: "Other educational purposes" },
-                ].map((reason) => {
-                  const currentReasons = formData.reasonsForTakingToefl || [];
-                  const isChecked = currentReasons.includes(reason.value);
-                  return (
-                    <div key={reason.value} className="flex items-start space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer">
-                      <Checkbox
-                        id={`reason-${reason.value}`}
-                        checked={isChecked}
-                        onCheckedChange={(checked) => {
-                          const updated = checked
-                            ? [...currentReasons, reason.value]
-                            : currentReasons.filter((r) => r !== reason.value);
-                          setValue("reasonsForTakingToefl", updated, { shouldValidate: true });
-                        }}
-                      />
-                      <Label
-                        htmlFor={`reason-${reason.value}`}
-                        className="text-xs font-medium leading-none cursor-pointer select-none"
-                      >
-                        {reason.label}
-                      </Label>
-                    </div>
-                  );
-                })}
-              </div>
+              <SearchableDropdown
+                name="reasonsForTakingToefl"
+                options={REASONS_FOR_TAKING_TOEFL}
+                placeholder="Select Reason"
+                value={formData.reasonsForTakingToefl}
+                aria-invalid={!!errors.reasonsForTakingToefl}
+                onChange={(val) => {
+                  setValue("reasonsForTakingToefl", val, { shouldValidate: true });
+                }}
+              />
               <FieldError errors={[errors.reasonsForTakingToefl]} />
             </FieldContent>
           </Field>
-
-          {/* <Field data-invalid={!!errors.etsProductsInterest}>
-            <FieldLabel>Which ETS products or services are you interested in?</FieldLabel>
-            <FieldContent>
-              <SearchableDropdown
-                name="etsProductsInterest"
-                options={[
-                  { label: "TOEFL Official Prep Books", value: "prep_books" },
-                  { label: "TOEFL Practice Online (TPO)", value: "practice_online" },
-                  { label: "TOEFL Value Packs / Bundles", value: "value_packs" },
-                  { label: "TOEFL Go! Mobile App", value: "mobile_app" },
-                  { label: "Official TOEFL Grader Services", value: "grader_services" },
-                  { label: "None / Not interested", value: "none" },
-                ]}
-                placeholder="Select Option"
-                value={formData.etsProductsInterest}
-                aria-invalid={!!errors.etsProductsInterest}
-                onChange={(val) => setValue("etsProductsInterest", val, { shouldValidate: true })}
-              />
-              <FieldError errors={[errors.etsProductsInterest]} />
-            </FieldContent>
-          </Field> */}
-
           <Field data-invalid={!!errors.destinationCountry}>
-            <FieldLabel required>In what country or countries do you hope to study, work or settle?</FieldLabel>
+            <FieldLabel required className="whitespace-nowrap">In what country or countries do you hope to study, work or settle?</FieldLabel>
             <FieldContent>
               <CountryDropdown
                 name="destinationCountry"
@@ -770,6 +764,18 @@ export function RegistrationFormStep({
                 }
               />
               <FieldError errors={[errors.destinationCountry]} />
+            </FieldContent>
+          </Field>
+
+          <Field className="md:col-span-2" data-invalid={!!errors.intendedEnrollmentDate}>
+            <FieldLabel required>Indicate your intended date of enrollment.</FieldLabel>
+            <FieldContent>
+              <MonthYearPicker
+                value={formData.intendedEnrollmentDate}
+                onChange={(date) => setValue("intendedEnrollmentDate", date, { shouldValidate: true })}
+                error={!!errors.intendedEnrollmentDate}
+              />
+              <FieldError errors={[errors.intendedEnrollmentDate]} />
             </FieldContent>
           </Field>
         </div>
@@ -807,5 +813,58 @@ export function RegistrationFormStep({
         </Button>
       </div>
     </form>
+  );
+}
+
+function MonthYearPicker({ value, onChange, error }: { value?: Date; onChange: (date: Date) => void; error?: boolean }) {
+  const [open, setOpen] = React.useState(false);
+  const [pickerYear, setPickerYear] = React.useState(value?.getFullYear() ?? new Date().getFullYear());
+
+  return (
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger render={
+        <Button
+          variant="ghost"
+          className={cn(
+            "w-full justify-start text-left font-normal rounded-md border border-slate-200 px-3 py-2 text-sm transition-all outline-none focus-visible:border-primary focus-visible:ring-3 focus-visible:ring-ring/30 shadow-none hover:shadow-none hover:bg-transparent aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20",
+            !value && "text-muted-foreground"
+          )}
+          aria-invalid={error}
+        >
+          <CalendarIcon className="mr-2 h-4 w-4 text-slate-400" />
+          {value ? format(value, "MMMM yyyy") : <span className="text-slate-400">Select month & year</span>}
+        </Button>
+      } />
+      <PopoverContent className="w-64 p-3" align="start">
+        <div className="flex items-center justify-between pt-1 pb-4">
+          <Button variant="outline" className="h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100" onClick={() => setPickerYear(y => y - 1)}>
+            <ChevronLeftIcon className="h-4 w-4" />
+          </Button>
+          <div className="text-sm font-medium">{pickerYear}</div>
+          <Button variant="outline" className="h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100" onClick={() => setPickerYear(y => y + 1)}>
+            <ChevronRightIcon className="h-4 w-4" />
+          </Button>
+        </div>
+        <div className="grid grid-cols-3 gap-2">
+          {Array.from({ length: 12 }, (_, i) => {
+            const date = new Date(pickerYear, i, 1);
+            const isSelected = value?.getMonth() === i && value?.getFullYear() === pickerYear;
+            return (
+              <Button
+                key={i}
+                variant={isSelected ? "default" : "ghost"}
+                className="h-9 w-full text-sm font-normal"
+                onClick={() => {
+                  onChange(date);
+                  setOpen(false);
+                }}
+              >
+                {format(date, "MMM")}
+              </Button>
+            );
+          })}
+        </div>
+      </PopoverContent>
+    </Popover>
   );
 }

@@ -30,6 +30,7 @@ export const ToeflIbtSchema = z
         country: z.string().min(1, "Country of residence is required"),
         streetAddress1: z.string().min(1, "Address is required"),
         streetAddress2: z.string().optional(),
+        poBox: z.string().optional(),
         moreAddressLines: z.boolean(),
         city: z.string().min(1, "Town / City is required"),
         state: z.string().optional(),
@@ -57,7 +58,7 @@ export const ToeflIbtSchema = z
         nextLevelOfStudyOther: z.string().optional(),
         desiredFieldOfStudy: z.string().min(1, "Desired field of study is required"),
         desiredFieldOfStudyOther: z.string().optional(),
-        reasonsForTakingToefl: z.array(z.string()).min(1, "Please select at least one reason"),
+        reasonsForTakingToefl: z.string().min(1, "Please select a reason"),
         etsProductsInterest: z.string().optional(),
         occupationLevel: z.string().optional(),
         occupationLevelOther: z.string().optional(),
@@ -66,6 +67,7 @@ export const ToeflIbtSchema = z
         reasonForTakingTest: z.string().optional(),
         reasonForTakingTestOther: z.string().optional(),
         destinationCountry: z.string().optional(),
+        intendedEnrollmentDate: z.any().refine((val) => !!val, "Please select an intended date of enrollment"),
 
         // Step 4: Add-ons (Courses & Workshops)
         selectedCourse: z.string().optional(),
