@@ -350,7 +350,7 @@ export function RegistrationFormStep({
                     key={opt.id}
                     htmlFor={opt.id}
                     data-invalid={!!errors.idType}
-                    className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive"
+                    className="whitespace-nowrap flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive"
                   >
                     <RadioGroupItem value={opt.id} id={opt.id} />
                     {opt.label}
@@ -427,7 +427,7 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.idDocument}>
-            <FieldLabel required>
+            <FieldLabel required className="whitespace-nowrap">
               Attach a valid copy of Passport / Emirates ID:
             </FieldLabel>
             <FieldContent>
@@ -615,7 +615,7 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.yearsStudyingEnglish}>
-            <FieldLabel required>
+            <FieldLabel required className="whitespace-nowrap">
               How many years have you been studying English?
             </FieldLabel>
             <FieldContent>
@@ -819,7 +819,7 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.destinationCountry}>
-            <FieldLabel required>Which Country / Territory do you want to study / work/ live in?</FieldLabel>
+            <FieldLabel required className="whitespace-nowrap">Which Country / Territory do you want to study / work/ live in?</FieldLabel>
             <FieldContent>
               <CountryDropdown
                 name="destinationCountry"
