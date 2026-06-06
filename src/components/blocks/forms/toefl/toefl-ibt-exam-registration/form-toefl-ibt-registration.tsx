@@ -90,7 +90,8 @@ export default function FormTOEFLIBTRegistration() {
             nextLevelOfStudyOther: "",
             desiredFieldOfStudy: "",
             desiredFieldOfStudyOther: "",
-            reasonsForTakingToefl: [],
+            reasonsForTakingToefl: "",
+            intendedEnrollmentDate: undefined,
             etsProductsInterest: "",
             occupationLevel: "",
             occupationSector: "",
@@ -208,7 +209,7 @@ export default function FormTOEFLIBTRegistration() {
                 ets_products_interest: data.etsProductsInterest,
                 occupation_level: data.occupationLevel,
                 occupation_sector: data.occupationSector,
-                reason_for_taking_test: data.reasonsForTakingToefl?.join(", ") || "",
+                reason_for_taking_test: data.reasonsForTakingToefl || "",
                 destination_country: data.destinationCountry,
                 marketing_preference: data.marketingPreference,
                 selected_course: data.selectedCourse,
@@ -316,7 +317,8 @@ export default function FormTOEFLIBTRegistration() {
                                     { label: "Education Level", value: formData.educationLevel?.replace(/_/g, " ") || "N/A" },
                                     { label: "Next Level of Study", value: formData.nextLevelOfStudy === "Other" ? (formData.nextLevelOfStudyOther || "Other") : (formData.nextLevelOfStudy || "N/A") },
                                     { label: "Desired Field of Study", value: formData.desiredFieldOfStudy === "Other" ? (formData.desiredFieldOfStudyOther || "Other") : (formData.desiredFieldOfStudy || "N/A") },
-                                    { label: "Reason for taking TOEFL", value: formData.reasonsForTakingToefl?.join(", ") || "N/A" },
+                                    { label: "Reason for taking TOEFL", value: formData.reasonsForTakingToefl || "N/A" },
+                                    { label: "Intended Enrollment Date", value: formData.intendedEnrollmentDate ? format(new Date(formData.intendedEnrollmentDate as any), "MMMM yyyy") : "N/A" },
                                     { label: "ETS Products Interest", value: formData.etsProductsInterest || "N/A" },
                                 ]}
                             />
