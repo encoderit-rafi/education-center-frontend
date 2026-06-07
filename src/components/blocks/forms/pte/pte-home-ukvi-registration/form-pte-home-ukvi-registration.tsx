@@ -20,12 +20,7 @@ import { PteHomeUKVISchema, type TPteHomeUKVISchema } from "./_type";
 import { useMutation } from "@tanstack/react-query";
 import api from "@/axios";
 
-const PTE_UKVI_COURSES = [
-  { id: "group", name: "Group (In-person classroom)", price: 1850 },
-  { id: "semi-private", name: "Semi-Private (In-person)", price: 2850 },
-  { id: "private", name: "Private one-to-one (In-person)", price: 4850 },
-  { id: "online", name: "Private one-to-one (Online)", price: 3850 },
-];
+import { ielts_general_courses as COURSES_DATA } from "@/lib/data";
 
 const PTE_UKVI_WORKSHOPS = [
   { id: "workshop_2", name: "Workshop 2 Hours", price: 600 },
@@ -103,25 +98,31 @@ export default function FormPTEHomeUKVIRegistration() {
   };
 
   const calculateTotal = () => {
-    let subtotal = EXAM_FEE + SERVICE_FEE;
-    const selectedCourseData = PTE_UKVI_COURSES.find(c => c.id === formData.selectedCourse);
-    if (selectedCourseData) {
-      subtotal += selectedCourseData.price;
-    }
+    const baseFee = EXAM_FEE;
+    const serviceFee = SERVICE_FEE;
     
-    const selectedWorkshopData = PTE_UKVI_WORKSHOPS.find(w => w.id === formData.selectedWorkshop);
-    if (selectedWorkshopData) {
-      subtotal += selectedWorkshopData.price;
-    }
+    const selectedCourseData = formData.selectedCourse
+      ? COURSES_DATA.find((c: any) => c.id === formData.selectedCourse)
+      : null;
+    const coursePrice = selectedCourseData
+      ? selectedCourseData.discounted_price ?? selectedCourseData.price
+      : 0;
+
+    const selectedWorkshopData = formData.selectedWorkshop
+      ? PTE_UKVI_WORKSHOPS.find(w => w.id === formData.selectedWorkshop)
+      : null;
+    const workshopPrice = selectedWorkshopData?.price || 0;
     
-    const total = subtotal;
+    const subtotal = baseFee + serviceFee + coursePrice + workshopPrice;
+    
     return {
-      baseFee: EXAM_FEE,
-      serviceFee: SERVICE_FEE,
+      baseFee,
+      serviceFee,
+      coursePrice,
+      workshopPrice,
+      subtotal,
       vat: 0,
-      total,
-      selectedCourseData,
-      selectedWorkshopData: PTE_UKVI_WORKSHOPS.find(w => w.id === formData.selectedWorkshop)
+      total: subtotal
     };
   };
 
@@ -321,7 +322,7 @@ export default function FormPTEHomeUKVIRegistration() {
               onInvalid={onInvalid}
               onBack={() => goToStep(1)}
               languages={languages}
-              coursesData={PTE_UKVI_COURSES}
+              coursesData={COURSES_DATA}
               workshopsData={PTE_UKVI_WORKSHOPS}
             />
           )}
@@ -337,7 +338,11 @@ export default function FormPTEHomeUKVIRegistration() {
               baseFee={pricing.baseFee}
               serviceFee={pricing.serviceFee}
               total={total}
-              selectedCourseData={formData.selectedCourse ? PTE_UKVI_COURSES.find(c => c.id === formData.selectedCourse) : undefined}
+              selectedCourseData={
+                formData.selectedCourse
+                  ? COURSES_DATA.find((c: any) => c.id === formData.selectedCourse)
+                  : undefined
+              }
               selectedWorkshopData={formData.selectedWorkshop ? PTE_UKVI_WORKSHOPS.find(w => w.id === formData.selectedWorkshop) : undefined}
               reviewStepNumber={3}
               paymentStepNumber={4}

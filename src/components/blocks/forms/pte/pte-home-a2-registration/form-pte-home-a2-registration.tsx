@@ -20,36 +20,7 @@ import { PteHomeA2Schema, type TPteHomeA2Schema } from "./_type";
 import { useMutation } from "@tanstack/react-query";
 import api from "@/axios";
 
-export const COURSES_DATA = {
-  group: {
-    id: "group",
-    label: "Group (In-person classroom-based course)",
-    name: "Group Classroom",
-    price: 1850,
-    special_discount: 0,
-  },
-  "semi-private": {
-    id: "semi-private",
-    label: "Semi-Private (In-person classroom-based)",
-    name: "Semi-Private Classroom",
-    price: 2850,
-    special_discount: 0,
-  },
-  private: {
-    id: "private",
-    label: "Private one-to-one (In-person classroom)",
-    name: "Private One-to-One",
-    price: 4850,
-    special_discount: 0,
-  },
-  online: {
-    id: "online",
-    label: "Private one-to-one (Online course)",
-    name: "Private Online",
-    price: 3850,
-    special_discount: 0,
-  },
-};
+import { ielts_general_courses as COURSES_DATA } from "@/lib/data";
 
 export const WORKSHOPS_DATA = {
   workshop_2: { id: "workshop_2", name: "Workshop 2 Hours", price: 600 },
@@ -129,9 +100,11 @@ export default function FormPTEHomeA2Registration() {
   const calculateTotal = () => {
     const baseFee = EXAM_FEE;
     const serviceFee = SERVICE_FEE;
-    const coursePrice = formData.selectedCourse
-      ? (COURSES_DATA as any)[formData.selectedCourse].price *
-        (1 - (COURSES_DATA as any)[formData.selectedCourse].special_discount / 100)
+    const selectedCourseData = formData.selectedCourse
+      ? COURSES_DATA.find((c: any) => c.id === formData.selectedCourse)
+      : null;
+    const coursePrice = selectedCourseData
+      ? selectedCourseData.discounted_price ?? selectedCourseData.price
       : 0;
     const workshopPrice = formData.selectedWorkshop
       ? (WORKSHOPS_DATA as any)[formData.selectedWorkshop].price
@@ -359,7 +332,11 @@ export default function FormPTEHomeA2Registration() {
               baseFee={pricing.baseFee}
               serviceFee={pricing.serviceFee}
               total={total}
-              selectedCourseData={formData.selectedCourse ? (COURSES_DATA as any)[formData.selectedCourse] : undefined}
+              selectedCourseData={
+                formData.selectedCourse
+                  ? COURSES_DATA.find((c: any) => c.id === formData.selectedCourse)
+                  : undefined
+              }
               selectedWorkshopData={formData.selectedWorkshop ? (WORKSHOPS_DATA as any)[formData.selectedWorkshop] : undefined}
               reviewStepNumber={3}
               paymentStepNumber={4}

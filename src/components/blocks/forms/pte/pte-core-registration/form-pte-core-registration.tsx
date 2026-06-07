@@ -20,13 +20,7 @@ import { PteCoreSchema, type TPteCoreSchema } from "./_type";
 import { useMutation } from "@tanstack/react-query";
 import api from "@/axios";
 
-// Data
-const PTE_CORE_COURSES = {
-  group: { id: "group", name: "Group (In-person classroom)", price: 1850 },
-  semi_private: { id: "semi_private", name: "Semi-Private (In-person)", price: 2850 },
-  private: { id: "private", name: "Private one-to-one (In-person)", price: 4850 },
-  online: { id: "online", name: "Private one-to-one (Online)", price: 3850 },
-};
+import { ielts_general_courses as COURSES_DATA } from "@/lib/data";
 
 const PTE_CORE_WORKSHOPS = {
   "2h": { id: "2h", name: "2 Hours Workshop", price: 600 },
@@ -104,20 +98,29 @@ export default function FormPTECoreRegistration() {
   };
 
   const calculateTotal = () => {
-    let subtotal = EXAM_FEE + SERVICE_FEE;
-    if (formData.selectedCourse) {
-      subtotal += (PTE_CORE_COURSES as any)[formData.selectedCourse]?.price || 0;
-    }
-    if (formData.selectedWorkshop) {
-      subtotal += (PTE_CORE_WORKSHOPS as any)[formData.selectedWorkshop]?.price || 0;
-    }
+    const baseFee = EXAM_FEE;
+    const serviceFee = SERVICE_FEE;
     
-    const total = subtotal;
+    const selectedCourseData = formData.selectedCourse
+      ? COURSES_DATA.find((c: any) => c.id === formData.selectedCourse)
+      : null;
+    const coursePrice = selectedCourseData
+      ? selectedCourseData.discounted_price ?? selectedCourseData.price
+      : 0;
+
+    const selectedWorkshopData = formData.selectedWorkshop ? (PTE_CORE_WORKSHOPS as any)[formData.selectedWorkshop] : null;
+    const workshopPrice = selectedWorkshopData?.price || 0;
+    
+    const subtotal = baseFee + serviceFee + coursePrice + workshopPrice;
+    
     return {
-      baseFee: EXAM_FEE,
-      serviceFee: SERVICE_FEE,
+      baseFee,
+      serviceFee,
+      coursePrice,
+      workshopPrice,
+      subtotal,
       vat: 0,
-      total
+      total: subtotal
     };
   };
 
@@ -250,7 +253,7 @@ export default function FormPTECoreRegistration() {
               onInvalid={onInvalid}
               onBack={() => goToStep(1)}
               languages={languages}
-              coursesData={PTE_CORE_COURSES}
+              coursesData={COURSES_DATA}
               workshopsData={PTE_CORE_WORKSHOPS}
             />
           )}
@@ -266,7 +269,11 @@ export default function FormPTECoreRegistration() {
               baseFee={pricing.baseFee}
               serviceFee={pricing.serviceFee}
               total={total}
-              selectedCourseData={formData.selectedCourse ? (PTE_CORE_COURSES as any)[formData.selectedCourse] : undefined}
+              selectedCourseData={
+                formData.selectedCourse
+                  ? COURSES_DATA.find((c: any) => c.id === formData.selectedCourse)
+                  : undefined
+              }
               selectedWorkshopData={formData.selectedWorkshop ? (PTE_CORE_WORKSHOPS as any)[formData.selectedWorkshop] : undefined}
               reviewStepNumber={3}
               paymentStepNumber={4}
