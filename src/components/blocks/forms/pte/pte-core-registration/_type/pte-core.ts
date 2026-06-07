@@ -39,7 +39,7 @@ export const PteCoreSchema = z.object({
     currentSituation: stringOrObject.refine(val => val.length > 0, "Please select your current situation"),
     reasonForTaking: stringOrObject.refine(val => val.length > 0, "Please select why you are taking the test"),
     studyLevel: stringOrObject.optional(),
-    occupationSector: stringOrObject.refine(val => val.length > 0, "Please select your occupation sector"),
+    occupationSector: z.string().optional(),
     referralSource: stringOrObject.refine(val => val.length > 0, "Please select how you heard about us"),
     
     // NEW FIELDS

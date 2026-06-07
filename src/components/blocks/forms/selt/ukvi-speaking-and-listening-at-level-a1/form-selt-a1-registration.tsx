@@ -79,7 +79,7 @@ export default function FormSELTA1Registration({ initialId }: { initialId?: stri
       postalAddress1: "",
       postalAddress2: "",
       city: "",
-      idType: "",
+      idType: "passport",
       idNumber: "",
       idExpiryDate: undefined,
       issuingAuthority: "",

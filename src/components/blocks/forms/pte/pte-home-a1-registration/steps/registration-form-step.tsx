@@ -71,21 +71,8 @@ export function RegistrationFormStep({
                 placeholder="As per passport"
                 aria-invalid={!!errors.givenNames}
                 {...register("givenNames")}
-                disabled={formData.noGivenNames}
               />
               <FieldError errors={[errors.givenNames]} />
-              <FieldDescription className="flex items-center gap-2 mt-2">
-                <Checkbox
-                  id="noGivenNames"
-                  checked={formData.noGivenNames}
-                  onCheckedChange={(val) =>
-                    setValue("noGivenNames", val as boolean)
-                  }
-                />
-                <Label htmlFor="noGivenNames" className="text-xs font-light">
-                  I don't have a given name
-                </Label>
-              </FieldDescription>
             </FieldContent>
           </Field>
 

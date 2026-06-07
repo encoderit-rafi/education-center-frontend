@@ -76,7 +76,7 @@ export default function FormSELTC1Registration() {
       postalAddress1: "",
       postalAddress2: "",
       city: "",
-      idType: "",
+      idType: "passport",
       idNumber: "",
       idExpiryDate: undefined,
       issuingAuthority: "",

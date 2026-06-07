@@ -45,7 +45,7 @@ export const PteHomeB1Schema = z.object({
     reasonForTakingOther: z.string().optional(),
     studyLevel: stringOrObject.optional(),
     studyLevelOther: z.string().optional(),
-    occupationSector: stringOrObject.refine(val => val.length > 0, "Please select your occupation sector"),
+    occupationSector: z.string().optional(),
     occupationSectorOther: z.string().optional(),
     referralSource: stringOrObject.refine(val => val.length > 0, "Please select how you heard about us"),
     referralSourceOther: z.string().optional(),

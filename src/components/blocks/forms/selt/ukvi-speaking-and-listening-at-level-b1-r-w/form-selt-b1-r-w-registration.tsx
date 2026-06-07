@@ -77,7 +77,7 @@ export default function FormSELTB1RWRegistration() {
       postalAddress1: "",
       postalAddress2: "",
       city: "",
-      idType: "",
+      idType: "passport",
       idNumber: "",
       idExpiryDate: undefined,
       issuingAuthority: "",
