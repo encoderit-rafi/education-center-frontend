@@ -16,6 +16,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import Payment from "@/components/blocks/payment";
+import { PhoneInput } from "@/components/ui/phone-input";
+import { CountryDropdown } from "@/components/ui/country-dropdown";
 
 import { CheckCircle2, Info, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -28,11 +30,12 @@ const bookingSchema = z.object({
   mockTestId: z.string().optional(),
   firstName: z.string().min(2, "First name must be at least 2 characters"),
   middleName: z.string().optional(),
-  lastName: z.string().optional(),
+  lastName: z.string().min(1, "Family name is required"),
   email: z.string().email("Please enter a valid email address"),
-  phone: z.string().optional(),
-  address: z.string().optional(),
-  country: z.string().optional(),
+  phone: z.string().min(1, "Phone number is required"),
+  address: z.string().min(1, "Address is required"),
+  city: z.string().min(1, "Emirate / City is required"),
+  country: z.string().min(1, "Country is required"),
   paymentMethod: z.enum(["stripe", "paypal"]),
 });
 
@@ -107,10 +110,19 @@ function CourseRegistrationForm({ className }: { className?: string }) {
     resolver: zodResolver(bookingSchema),
     defaultValues: {
       paymentMethod: "stripe",
+      firstName: "",
+      middleName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      address: "",
+      city: "",
+      country: "",
     },
   });
 
   const selectedPaymentMethod = watch("paymentMethod");
+  const formData = watch();
 
   // Fee breakdown — price comes pre-calculated from the course page
   const base_price = Number(priceParam) || 0;
@@ -157,10 +169,12 @@ function CourseRegistrationForm({ className }: { className?: string }) {
       sub_course_id: null,
       package_id: packageId || "",
       first_name: formData.firstName,
-      last_name: formData.lastName || "",
+      last_name: formData.lastName,
       email: formData.email,
-      phone: formData.phone || "",
-      country: formData.country || "",
+      phone: formData.phone,
+      country: formData.country,
+      city: formData.city,
+      address: formData.address,
       base_price,
       discount_amount,
       total_amount,
@@ -214,84 +228,105 @@ function CourseRegistrationForm({ className }: { className?: string }) {
               <div className="space-y-3">
                 <Stepper step={1}>Your Information</Stepper>
                 <div className="grid grid-cols-2 gap-3">
-                  <Field>
+                  <Field data-invalid={!!errors.firstName}>
                     <FieldLabel required>First Name</FieldLabel>
                     <FieldContent>
                       <Input
                         type="text"
                         placeholder="John"
+                        aria-invalid={!!errors.firstName}
                         {...register("firstName")}
                       />
                       <FieldError errors={[errors.firstName]} />
                     </FieldContent>
                   </Field>
-                  <Field>
+                  <Field data-invalid={!!errors.middleName}>
                     <FieldLabel>Middle Name</FieldLabel>
                     <FieldContent>
                       <Input
                         type="text"
                         placeholder="William"
+                        aria-invalid={!!errors.middleName}
                         {...register("middleName")}
                       />
                       <FieldError errors={[errors.middleName]} />
                     </FieldContent>
                   </Field>
-                  <Field className="col-span-2">
-                    <FieldLabel>Last Name</FieldLabel>
+                  <Field className="col-span-2" data-invalid={!!errors.lastName}>
+                    <FieldLabel required>Family Name</FieldLabel>
                     <FieldContent>
                       <Input
                         type="text"
                         placeholder="Doe"
+                        aria-invalid={!!errors.lastName}
                         {...register("lastName")}
                       />
                       <FieldError errors={[errors.lastName]} />
                     </FieldContent>
                   </Field>
                 </div>
-                <Field>
+                <Field data-invalid={!!errors.email}>
                   <FieldLabel required>Email</FieldLabel>
                   <FieldContent>
                     <Input
                       type="email"
                       placeholder="example@gmail.com"
+                      aria-invalid={!!errors.email}
                       {...register("email")}
                     />
                     <FieldError errors={[errors.email]} />
                   </FieldContent>
                 </Field>
                 <div className="grid grid-cols-2 gap-3">
-                  <Field>
-                    <FieldLabel>Phone Number</FieldLabel>
+                  <Field data-invalid={!!errors.phone}>
+                    <FieldLabel required>Phone Number</FieldLabel>
                     <FieldContent>
-                      <Input
-                        type="tel"
-                        placeholder="+971 50 123 4567"
-                        {...register("phone")}
+                      <PhoneInput
+                        name="phone"
+                        value={formData.phone}
+                        onChange={(val) => setValue("phone", val, { shouldValidate: true })}
+                        defaultCountry="AE"
+                        aria-invalid={!!errors.phone}
                       />
                       <FieldError errors={[errors.phone]} />
                     </FieldContent>
                   </Field>
-                  <Field>
-                    <FieldLabel>Country</FieldLabel>
+                  <Field data-invalid={!!errors.country}>
+                    <FieldLabel required>Country</FieldLabel>
                     <FieldContent>
-                      <Input
-                        type="text"
-                        placeholder="United Arab Emirates"
-                        {...register("country")}
+                      <CountryDropdown
+                        name="country"
+                        placeholder="Search country..."
+                        value={formData.country}
+                        aria-invalid={!!errors.country}
+                        onChange={(country) => setValue("country", country.name, { shouldValidate: true })}
                       />
                       <FieldError errors={[errors.country]} />
                     </FieldContent>
                   </Field>
                 </div>
-                <Field>
-                  <FieldLabel>Address</FieldLabel>
+                <Field data-invalid={!!errors.address}>
+                  <FieldLabel required>Address</FieldLabel>
                   <FieldContent>
                     <Input
                       type="text"
-                      placeholder="123 Main St, City"
+                      placeholder="123 Main St"
+                      aria-invalid={!!errors.address}
                       {...register("address")}
                     />
                     <FieldError errors={[errors.address]} />
+                  </FieldContent>
+                </Field>
+                <Field data-invalid={!!errors.city}>
+                  <FieldLabel required>Emirate / City</FieldLabel>
+                  <FieldContent>
+                    <Input
+                      type="text"
+                      placeholder="Dubai"
+                      aria-invalid={!!errors.city}
+                      {...register("city")}
+                    />
+                    <FieldError errors={[errors.city]} />
                   </FieldContent>
                 </Field>
               </div>
@@ -391,7 +426,7 @@ function CourseRegistrationForm({ className }: { className?: string }) {
                   className="w-full mt-6 py-3"
                   disabled={mutation.isPending}
                 >
-                  {mutation.isPending ? "Processing..." : "I accept, Pay"}
+                  {mutation.isPending ? "Processing..." : "I Accept, Pay"}
                 </Button>
                 {mutation.isError && (
                   <p className="text-red-500 text-sm mt-2">

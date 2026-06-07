@@ -20,6 +20,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { PhoneInput } from "@/components/ui/phone-input";
+import { CountryDropdown } from "@/components/ui/country-dropdown";
 
 import { CheckCircle2, Info, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -34,11 +36,12 @@ const baseBookingSchema = z.object({
   mockTestId: z.string().min(1, "Please select a mock test"),
   varient: z.string().optional(),
   firstName: z.string().min(2, "First name must be at least 2 characters"),
-  lastName: z.string().min(2, "Last name must be at least 2 characters"),
+  lastName: z.string().min(1, "Family name is required"),
   email: z.string().email("Please enter a valid email address"),
-  phone: z.string().min(6, "Please enter a valid phone number"),
-  city: z.string().min(1, "Please enter an emirate or city"),
-  country: z.string().min(1, "Please enter a country"),
+  phone: z.string().min(1, "Phone number is required"),
+  address: z.string().min(1, "Address is required"),
+  city: z.string().min(1, "Emirate / City is required"),
+  country: z.string().min(1, "Country is required"),
   paymentMethod: z.enum(["stripe", "paypal"]),
 });
 
@@ -98,13 +101,18 @@ function PaidMockTestRegistrationForm({
       mockTestId: id || "",
       varient: "",
       paymentMethod: "stripe",
+      firstName: "",
+      lastName: "",
+      email: "",
       phone: "",
+      address: "",
       city: "",
       country: "",
     },
   });
 
   const selectedPaymentMethod = watch("paymentMethod");
+  const formData = watch();
 
   const PRICE = data ? parseFloat(data.price || "350") : 350;
   const CURRENCY = "AED";
@@ -148,11 +156,12 @@ function PaidMockTestRegistrationForm({
       mock_test_id: data?.id || id || formData.mockTestId || "",
       varient: formData.varient || "",
       first_name: formData.firstName,
-      last_name: formData.lastName || "",
+      last_name: formData.lastName,
       email: formData.email,
       phone: formData.phone,
       city: formData.city,
       country: formData.country,
+      address: formData.address,
       total_amount: PRICE,
       price: PRICE,
       payment_methods: formData.paymentMethod,
@@ -216,23 +225,25 @@ function PaidMockTestRegistrationForm({
               <div className="space-y-3">
                 <Stepper step={1}>Your Information</Stepper>
                 <div className="grid grid-cols-2 gap-3">
-                  <Field>
+                  <Field data-invalid={!!errors.firstName}>
                     <FieldLabel required>First Name</FieldLabel>
                     <FieldContent>
                       <Input
                         type="text"
                         placeholder="Jhon"
+                        aria-invalid={!!errors.firstName}
                         {...register("firstName")}
                       />
                       <FieldError errors={[errors.firstName]} />
                     </FieldContent>
                   </Field>
-                  <Field>
-                    <FieldLabel required>Last Name</FieldLabel>
+                  <Field data-invalid={!!errors.lastName}>
+                    <FieldLabel required>Family Name</FieldLabel>
                     <FieldContent>
                       <Input
                         type="text"
                         placeholder="Doe"
+                        aria-invalid={!!errors.lastName}
                         {...register("lastName")}
                       />
                       <FieldError errors={[errors.lastName]} />
@@ -243,12 +254,12 @@ function PaidMockTestRegistrationForm({
                 {data?.variant &&
                   Array.isArray(data.variant) &&
                   data.variant.length > 0 && (
-                    <Field>
+                    <Field data-invalid={!!errors.varient}>
                       <FieldLabel required>Exam Types</FieldLabel>
                       <FieldContent>
                         <Select
                           onValueChange={(val: string | null) => {
-                            if (val) setValue("varient", val);
+                            if (val) setValue("varient", val, { shouldValidate: true });
                           }}
                         >
                           <SelectTrigger className="w-full">
@@ -267,49 +278,73 @@ function PaidMockTestRegistrationForm({
                     </Field>
                   )}
 
-                <Field>
+                <Field data-invalid={!!errors.email}>
                   <FieldLabel required>Email</FieldLabel>
                   <FieldContent>
                     <Input
                       type="text"
                       placeholder="example@gmail.com"
+                      aria-invalid={!!errors.email}
                       {...register("email")}
                     />
                     <FieldError errors={[errors.email]} />
                   </FieldContent>
                 </Field>
 
-                <Field>
-                  <FieldLabel required>Phone Number</FieldLabel>
-                  <FieldContent>
-                    <Input
-                      type="tel"
-                      placeholder="+1234567890"
-                      {...register("phone")}
-                    />
-                    <FieldError errors={[errors.phone]} />
-                  </FieldContent>
-                </Field>
                 <div className="grid grid-cols-2 gap-3">
-                  <Field data-invalid={!!errors.city}>
-                    <FieldLabel required>Emirate / City</FieldLabel>
+                  <Field data-invalid={!!errors.phone}>
+                    <FieldLabel required>Phone Number</FieldLabel>
                     <FieldContent>
-                      <Input {...register("city")} placeholder="Dubai" />
+                      <PhoneInput
+                        name="phone"
+                        value={formData.phone}
+                        onChange={(val) => setValue("phone", val, { shouldValidate: true })}
+                        defaultCountry="AE"
+                        aria-invalid={!!errors.phone}
+                      />
+                      <FieldError errors={[errors.phone]} />
                     </FieldContent>
-                    <FieldError errors={[errors.city]} />
                   </Field>
-                  <Field>
+                  <Field data-invalid={!!errors.country}>
                     <FieldLabel required>Country</FieldLabel>
                     <FieldContent>
-                      <Input
-                        type="text"
-                        placeholder="UAE"
-                        {...register("country")}
+                      <CountryDropdown
+                        name="country"
+                        placeholder="Search country..."
+                        value={formData.country}
+                        aria-invalid={!!errors.country}
+                        onChange={(country) => setValue("country", country.name, { shouldValidate: true })}
                       />
                       <FieldError errors={[errors.country]} />
                     </FieldContent>
                   </Field>
                 </div>
+
+                <Field data-invalid={!!errors.address}>
+                  <FieldLabel required>Address</FieldLabel>
+                  <FieldContent>
+                    <Input
+                      type="text"
+                      placeholder="123 Main St"
+                      aria-invalid={!!errors.address}
+                      {...register("address")}
+                    />
+                    <FieldError errors={[errors.address]} />
+                  </FieldContent>
+                </Field>
+
+                <Field data-invalid={!!errors.city}>
+                  <FieldLabel required>Emirate / City</FieldLabel>
+                  <FieldContent>
+                    <Input
+                      type="text"
+                      placeholder="Dubai"
+                      aria-invalid={!!errors.city}
+                      {...register("city")}
+                    />
+                    <FieldError errors={[errors.city]} />
+                  </FieldContent>
+                </Field>
               </div>
               <div className="space-y-4">
                 {/* Mock Test Details Card */}
@@ -431,7 +466,7 @@ function PaidMockTestRegistrationForm({
                   className="w-full mt-6 py-3"
                   disabled={mutation.isPending}
                 >
-                  {mutation.isPending ? "Processing..." : "I accept, Pay"}
+                  {mutation.isPending ? "Processing..." : "I Accept, Pay"}
                 </Button>
                 {mutation.isError && (
                   <p className="text-red-500 text-sm mt-2">

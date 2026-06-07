@@ -67,10 +67,18 @@ export function DateStep({
                 disabled={(date) => {
                   const isWednesday = date.getDay() === 3;
                   const isSaturday = date.getDay() === 6;
-                  const today = new Date();
-                  today.setHours(0, 0, 0, 0);
-                  const isPast = date < today;
-                  return !(isWednesday || isSaturday) || isPast;
+                  const now = new Date();
+                  if (isWednesday) {
+                    const checkDate = new Date(date);
+                    checkDate.setHours(13, 0, 0, 0); // 1:00 PM
+                    return checkDate.getTime() - now.getTime() < 48 * 60 * 60 * 1000;
+                  }
+                  if (isSaturday) {
+                    const checkDate = new Date(date);
+                    checkDate.setHours(10, 0, 0, 0); // 10:00 AM
+                    return checkDate.getTime() - now.getTime() < 48 * 60 * 60 * 1000;
+                  }
+                  return true;
                 }}
                 className="w-full max-w-xl mx-auto border rounded-md p-8 bg-white shadow-xl"
               />
@@ -88,8 +96,30 @@ export function DateStep({
                   className="grid gap-4"
                 >
                   {[
-                    { id: "AM", label: "10:00 AM", disabled: value?.getDay() === 3 },
-                    { id: "PM", label: "1:00 PM", disabled: value?.getDay() === 6 },
+                    {
+                      id: "AM",
+                      label: "10:00 AM",
+                      disabled: (() => {
+                        if (value?.getDay() === 3) return true;
+                        if (!value) return true;
+                        const now = new Date();
+                        const checkDate = new Date(value);
+                        checkDate.setHours(10, 0, 0, 0);
+                        return checkDate.getTime() - now.getTime() < 48 * 60 * 60 * 1000;
+                      })(),
+                    },
+                    {
+                      id: "PM",
+                      label: "1:00 PM",
+                      disabled: (() => {
+                        if (value?.getDay() === 6) return true;
+                        if (!value) return true;
+                        const now = new Date();
+                        const checkDate = new Date(value);
+                        checkDate.setHours(13, 0, 0, 0);
+                        return checkDate.getTime() - now.getTime() < 48 * 60 * 60 * 1000;
+                      })(),
+                    },
                   ].map((slot) => (
                     <div key={slot.id}>
                       <Label

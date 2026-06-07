@@ -30,6 +30,23 @@ const A2_SCHEDULE: Record<number, string[]> = {
   1: ["1:15 PM"], // Monday
 };
 
+function getSlotDateTime(date: Date, slotTimeStr: string): Date {
+  const checkDate = new Date(date);
+  const match = slotTimeStr.match(/^(\d+):(\d+)\s*(AM|PM)$/i);
+  if (match) {
+    let hours = parseInt(match[1], 10);
+    const minutes = parseInt(match[2], 10);
+    const ampm = match[3].toUpperCase();
+    if (ampm === "PM" && hours < 12) {
+      hours += 12;
+    } else if (ampm === "AM" && hours === 12) {
+      hours = 0;
+    }
+    checkDate.setHours(hours, minutes, 0, 0);
+  }
+  return checkDate;
+}
+
 export function DateStep({
   value,
   timeSlot,
@@ -41,7 +58,6 @@ export function DateStep({
   timeSlotError,
 }: DateStepProps) {
   const availableSlots = value ? A2_SCHEDULE[value.getDay()] || [] : [];
-
 
   return (
     <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
@@ -73,9 +89,12 @@ export function DateStep({
                 disabled={(date) => {
                   const day = date.getDay();
                   const slots = A2_SCHEDULE[day] || [];
-                  const isClosed = slots.length === 0;
-                  const isPast = date < new Date(new Date().setHours(0, 0, 0, 0));
-                  return isClosed || isPast;
+                  if (slots.length === 0) return true;
+                  const now = new Date();
+                  return slots.every((slot) => {
+                    const slotDate = getSlotDateTime(date, slot);
+                    return slotDate.getTime() - now.getTime() < 24 * 60 * 60 * 1000;
+                  });
                 }}
                 className="w-full max-w-xl mx-auto border rounded-md p-8 bg-white shadow-xl"
               />
@@ -93,22 +112,32 @@ export function DateStep({
                     onValueChange={onTimeSlotChange}
                     className="grid gap-4"
                   >
-                    {availableSlots.map((slot) => (
-                      <Label
-                        key={slot}
-                        htmlFor={slot}
-                        className={`flex items-center p-4 rounded-xl border-2 transition-all cursor-pointer ${
-                          timeSlot === slot
-                            ? "border-primary bg-primary/5 ring-1 ring-primary"
-                            : "border-slate-100 bg-white hover:border-slate-200"
-                        }`}
-                      >
-                        <div className="flex items-center gap-3">
-                          <RadioGroupItem value={slot} id={slot} />
-                          <p className="text-sm font-medium">{slot}</p>
-                        </div>
-                      </Label>
-                    ))}
+                    {availableSlots.map((slot) => {
+                      const isDisabled = (() => {
+                        if (!value) return true;
+                        const now = new Date();
+                        const slotDate = getSlotDateTime(value, slot);
+                        return slotDate.getTime() - now.getTime() < 24 * 60 * 60 * 1000;
+                      })();
+                      return (
+                        <Label
+                          key={slot}
+                          htmlFor={slot}
+                          className={`flex items-center p-4 rounded-xl border-2 transition-all cursor-pointer ${
+                            isDisabled ? "opacity-40 cursor-not-allowed pointer-events-none" : ""
+                          } ${
+                            timeSlot === slot
+                              ? "border-primary bg-primary/5 ring-1 ring-primary"
+                              : "border-slate-100 bg-white hover:border-slate-200"
+                          }`}
+                        >
+                          <div className="flex items-center gap-3">
+                            <RadioGroupItem value={slot} id={slot} disabled={isDisabled} />
+                            <p className="text-sm font-medium">{slot}</p>
+                          </div>
+                        </Label>
+                      );
+                    })}
                   </RadioGroup>
                 ) : (
                   <div className="p-8 rounded-xl border-2 border-dashed border-slate-100 flex flex-col items-center justify-center text-center space-y-2">

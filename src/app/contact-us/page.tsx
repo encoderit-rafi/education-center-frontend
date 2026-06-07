@@ -88,12 +88,9 @@ export default function ContactUs() {
                   <div className="space-y-0.5">
                     <h3 className="text-sm font-semibold text-slate-800 leading-relaxed group-hover:text-primary transition-colors tracking-tight">
                       The Exam Preparation & Testing House L.L.C Suite 701, 7th
-                      Floor, Tabarak Tower, Corniche Road, Al Mamzar, Sharjah,
-                      UAE.
+                      Floor, <br />Tabarak Tower, Corniche Road, Al Mamzar, Sharjah,
+                      <br /> United Arab Emirates.
                     </h3>
-                    <p className="text-xs font-normal text-slate-500">
-                      Close to Academic City — wheelchair accessible
-                    </p>
                   </div>
                 </div>
               </Link>

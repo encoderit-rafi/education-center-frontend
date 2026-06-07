@@ -64,9 +64,11 @@ export function DateStep({
                     "font-semibold text-primary underline underline-offset-4 decoration-primary",
                 }}
                 disabled={(date) => {
-                  const isPast =
-                    date < new Date(new Date().setHours(0, 0, 0, 0));
-                  return isPast || date.getDay() !== 0;
+                  if (date.getDay() !== 0) return true;
+                  const now = new Date();
+                  const checkDate = new Date(date);
+                  checkDate.setHours(13, 0, 0, 0); // 1:00 PM (latest slot)
+                  return checkDate.getTime() - now.getTime() < 72 * 60 * 60 * 1000;
                 }}
                 className="w-full max-w-xl mx-auto border rounded-md p-8 bg-white shadow-xl"
               />
@@ -89,23 +91,39 @@ export function DateStep({
                     {
                       id: "9:00 AM",
                       time: "09:00 AM",
+                      disabled: (() => {
+                        if (!value) return true;
+                        const now = new Date();
+                        const checkDate = new Date(value);
+                        checkDate.setHours(9, 0, 0, 0);
+                        return checkDate.getTime() - now.getTime() < 72 * 60 * 60 * 1000;
+                      })(),
                     },
                     {
                       id: "1:00 PM",
                       time: "1:00 PM",
+                      disabled: (() => {
+                        if (!value) return true;
+                        const now = new Date();
+                        const checkDate = new Date(value);
+                        checkDate.setHours(13, 0, 0, 0);
+                        return checkDate.getTime() - now.getTime() < 72 * 60 * 60 * 1000;
+                      })(),
                     },
                   ].map((slot) => (
                     <div key={slot.id} className="space-y-3">
                       <Label
                         htmlFor={slot.id}
-                        className={`flex items-center justify-between p-4 rounded-xl border-2 transition-all cursor-pointer ${timeSlot === slot.id
+                        className={`flex items-center justify-between p-4 rounded-xl border-2 transition-all cursor-pointer ${
+                          slot.disabled ? "opacity-40 cursor-not-allowed pointer-events-none" : ""
+                        } ${timeSlot === slot.id
                           ? "border-primary bg-primary/5 ring-1 ring-primary"
                           : "border-slate-100 bg-white hover:border-slate-200"
                           }`}
                       >
                         <div className="flex items-center justify-between w-full overflow-hidden">
                           <div className="flex items-center gap-3">
-                            <RadioGroupItem value={slot.id} id={slot.id} />
+                            <RadioGroupItem value={slot.id} id={slot.id} disabled={slot.disabled} />
                             <div>
                               <p className="text-sm font-medium">
                                 {slot.time}

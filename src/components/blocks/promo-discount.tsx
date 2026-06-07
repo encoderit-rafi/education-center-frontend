@@ -71,7 +71,7 @@ export default function PromoDiscount() {
             {
               label: "Hybrid 1-to-1",
               value: "25%",
-              color: "bg-orange-400/20 border-orange-300/30 text-orange-100",
+              color: "bg-violet-400/20 border-violet-300/30 text-violet-100",
             },
           ].map(({ label, value, color }) => (
             <div
