@@ -114,11 +114,10 @@ export function DateStep({
                     <div key={slot.id} className="space-y-3">
                       <Label
                         htmlFor={slot.id}
-                        className={`flex items-center justify-between p-4 rounded-xl border-2 transition-all cursor-pointer ${
-                          slot.disabled ? "opacity-40 cursor-not-allowed pointer-events-none" : ""
-                        } ${timeSlot === slot.id
-                          ? "border-primary bg-primary/5 ring-1 ring-primary"
-                          : "border-slate-100 bg-white hover:border-slate-200"
+                        className={`flex items-center justify-between p-4 rounded-xl border-2 transition-all cursor-pointer ${slot.disabled ? "opacity-40 cursor-not-allowed pointer-events-none" : ""
+                          } ${timeSlot === slot.id
+                            ? "border-primary bg-primary/5 ring-1 ring-primary"
+                            : "border-slate-100 bg-white hover:border-slate-200"
                           }`}
                       >
                         <div className="flex items-center justify-between w-full overflow-hidden">
@@ -135,7 +134,7 @@ export function DateStep({
                       {timeSlot === slot.id && (
                         <div className="p-4 rounded-xl bg-slate-50 border border-slate-100 animate-in slide-in-from-top-2 duration-300 space-y-4">
                           <div>
-                            <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">
+                            <p className="text-xs font-bold uppercase tracking-wider mb-3">
                               Select Speaking Test Delivery Format
                             </p>
                             <RadioGroup
@@ -176,13 +175,13 @@ export function DateStep({
                               </p>
                             )}
                           </div>
-                          <div className="pt-4 border-t border-slate-200 text-sm font-medium leading-relaxed text-slate-700 space-y-2">
+                          <div className="pt-4 border-t border-slate-200 text-sm font-medium text-justify space-y-2">
                             {slot.id === "9:00 AM" ? (
                               <>
                                 <p>
                                   <strong>Note:</strong> The Speaking Test usually takes place in the afternoon. The Speaking Test might be conducted in-person with the examiner (face to face) or via video call on exam day at the test centre. We will confirm with you the Speaking Test delivery format before we book you the test. This will still need to be confirmed by the British Council.
                                 </p>
-                                <p className="text-xs text-slate-500 mt-2">
+                                <p className="text-xs mt-2">
                                   You may also reach out to us at <a href={`tel:${INSTITUTIONS_INFO.phone}`} className="underline text-primary font-semibold">{INSTITUTIONS_INFO.phone}</a> or <a href={`mailto:${INSTITUTIONS_INFO.email}`} className="underline text-primary font-semibold">{INSTITUTIONS_INFO.email}</a> and confirm the Speaking Test delivery format before you proceed with the CD-IELTLS Registration on our website.
                                 </p>
                               </>
@@ -191,7 +190,7 @@ export function DateStep({
                                 <p>
                                   <strong>Note:</strong> The Speaking Test usually takes place in the morning. The Speaking Test might be conducted in-person with the examiner (face to face) or via video call on exam day at the test center. We will confirm with you the Speaking Test delivery format before we book you the test. This will still need to be confirmed by the British Council.
                                 </p>
-                                <p className="text-xs text-slate-500 mt-2">
+                                <p className="text-xs mt-2">
                                   You may also reach out to us at <a href={`tel:${INSTITUTIONS_INFO.phone}`} className="underline text-primary font-semibold">{INSTITUTIONS_INFO.phone}</a> or <a href={`mailto:${INSTITUTIONS_INFO.email}`} className="underline text-primary font-semibold">{INSTITUTIONS_INFO.email}</a> and confirm the Speaking Test delivery format before you proceed with the CD-IELTLS Registration on our website.
                                 </p>
                               </>

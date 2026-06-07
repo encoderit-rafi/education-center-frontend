@@ -42,8 +42,20 @@ export default function TestDatesDetailPage() {
               {examMetadata.description}
             </p>
           </div>
-          <div className="grid md:grid-cols-2 grid-cols-1 gap-16">
-            <div className="space-y-4">
+          <div
+            className={
+              ["cael", "celpip-general"].includes(id)
+                ? "flex justify-center"
+                : "grid md:grid-cols-2 grid-cols-1 gap-16"
+            }
+          >
+            <div
+              className={
+                ["cael", "celpip-general"].includes(id)
+                  ? "space-y-4 w-full max-w-2xl"
+                  : "space-y-4"
+              }
+            >
               {id === "ielts" && (
                 <div className="bg-primary/5 border border-primary/10 rounded-md p-5 max-w-xl">
                   <div className="text-sm font-bold text-secondary flex items-center gap-2">
