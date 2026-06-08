@@ -19,6 +19,10 @@ import { buttonVariants } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { PriceDisplay } from "@/components/ui/price-display";
 import { BaseCard } from "@/components/blocks/cards/base-card";
+import {
+  PackageChecklistSection,
+  PackageStatCard,
+} from "./components";
 
 interface CoursePackage {
   id: string;
@@ -153,106 +157,41 @@ export default async function PackageDetailPage({ params }: PageProps) {
               </div>
             </div>
             {/* Requirements */}
-            {pkg.requirements &&
-              (() => {
-                const requirementItems = pkg.requirements
-                  .split("\n")
-                  .map((line) => line.trim())
-                  .filter(Boolean);
-                return requirementItems.length > 0 ? (
-                  <div className="space-y-3">
-                    <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
-                      <Award className="size-5 text-primary" />
-                      During the course, candidates work on:
-                    </h2>
-                    <div className="h-px bg-slate-100" />
-                    <div className="space-y-3">
-                      <ul className="space-y-3 text-slate-600 font-medium text-sm">
-                        {requirementItems.map((item, i) => (
-                          <li key={i} className="flex items-start gap-2.5">
-                            <CheckCircle2 className="size-4 text-primary shrink-0 mt-0.5" />
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                ) : null;
-              })()}
+            {pkg.requirements && (
+              <PackageChecklistSection
+                title="During the course, candidates work on:"
+                icon={Award}
+                items={pkg.requirements}
+              />
+            )}
+
             {/* Course Features / Best For */}
-            <div className="space-y-3">
-              <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
-                <User className="size-5 text-primary" />
-                This course is particularly suitable for candidates who:
-              </h2>
-              <div className="h-px bg-slate-100" />
-              <div className="space-y-3">
-                <ul className="space-y-3 text-slate-600 font-medium text-sm">
-                  {Array.isArray(pkg.bestFor) && pkg.bestFor.length > 0 ? (
-                    pkg.bestFor.map((item, i) => (
-                      <li key={i} className="flex items-start gap-2.5">
-                        <CheckCircle2 className="size-4 text-primary shrink-0 mt-0.5" />
-                        <span>{item}</span>
-                      </li>
-                    ))
-                  ) : pkg.bestFor &&
-                    typeof pkg.bestFor === "object" &&
-                    (pkg.bestFor as any).goals ? (
-                    ((pkg.bestFor as any).goals as string[]).map((item, i) => (
-                      <li key={i} className="flex items-start gap-2.5">
-                        <CheckCircle2 className="size-4 text-primary shrink-0 mt-0.5" />
-                        <span>{item}</span>
-                      </li>
-                    ))
-                  ) : (
-                    <li className="flex items-start gap-2.5">
-                      <CheckCircle2 className="size-4 text-primary shrink-0 mt-0.5" />
-                      <span>
-                        Comprehensive preparation targeting all exam modules.
-                      </span>
-                    </li>
-                  )}
-                </ul>
-              </div>
-            </div>
+            <PackageChecklistSection
+              title="This course is particularly suitable for candidates who:"
+              icon={User}
+              items={pkg.bestFor}
+            />
 
             {/* Course Specifications */}
             <div className="grid sm:grid-cols-3 gap-6">
-              <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm flex flex-col justify-between">
-                <div>
-                  <Clock className="size-6 text-primary mb-3" />
-                  <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">
-                    Duration
-                  </p>
-                </div>
-                <p className="text-lg font-black text-slate-800 mt-2">
-                  {pkg.duration} Hours
-                </p>
-              </div>
-
-              <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm flex flex-col justify-between">
-                <div>
-                  <BookOpen className="size-6 text-primary mb-3" />
-                  <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">
-                    Total Weeks
-                  </p>
-                </div>
-                <p className="text-lg font-black text-slate-800 mt-2">
-                  {pkg.totalHours} weeks
-                </p>
-              </div>
-
-              <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm flex flex-col justify-between">
-                <div>
-                  <Calendar className="size-6 text-primary mb-3" />
-                  <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">
-                    Schedule
-                  </p>
-                </div>
-                <p className="text-sm font-bold text-slate-800 mt-2 line-clamp-2">
-                  {pkg.scheduleInfo}
-                </p>
-              </div>
+              <PackageStatCard
+                icon={Clock}
+                label="Duration"
+                value={pkg.duration}
+                suffix="Hours"
+              />
+              <PackageStatCard
+                icon={BookOpen}
+                label="Total Weeks"
+                value={pkg.totalHours}
+                suffix="weeks"
+              />
+              <PackageStatCard
+                icon={Calendar}
+                label="Schedule"
+                value={pkg.scheduleInfo}
+                compact
+              />
             </div>
           </div>
 
