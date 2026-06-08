@@ -362,40 +362,14 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
                 {/* Workshop & Course Details Card */}
                 <div className="bg-slate-50 border rounded-2xl p-5 space-y-4 shadow-sm">
                   <h3 className="font-headline font-black text-xs text-slate-800  border-b pb-2 flex items-center gap-2">
-                    <Calendar className="w-4.5 h-4.5 text-primary" /> Workshop Details
+                    <Calendar className="w-4.5 h-4.5 text-primary" />Workshop Details
                   </h3>
                   <div className="space-y-3 text-sm">
                     <div>
                       <p className="text-xs text-slate-400 ">Workshop</p>
                       <p className="font-bold text-slate-900 text-base">
-                        {workshop?.duration}-hour {courseData?.name} Workshop
+                        {workshop?.duration}-Hours {courseData?.name} Workshop
                       </p>
-                    </div>
-
-                    {courseData?.name && (
-                      <div>
-                        <p className="text-xs text-slate-400 ">
-                          Associated Course
-                        </p>
-                        <p className="font-semibold text-slate-700">
-                          {courseData.name}
-                        </p>
-                      </div>
-                    )}
-
-                    <div className="grid grid-cols-2 gap-3 pt-2">
-                      <div className="bg-white border rounded-xl p-3 text-center">
-                        <p className="text-xs text-slate-400  ">Duration</p>
-                        <p className="font-extrabold text-slate-900 text-sm mt-0.5">
-                          {workshop?.duration || "8"} Hours
-                        </p>
-                      </div>
-                      <div className="bg-white border rounded-xl p-3 text-center">
-                        <p className="text-xs text-slate-400 ">Focus</p>
-                        <p className="font-extrabold text-primary text-sm mt-0.5">
-                          {workshop?.subTitle || examId?.toUpperCase()}
-                        </p>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -410,33 +384,11 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
                 {/* Fee Breakdown */}
                 <div className="bg-white border rounded-lg p-4 space-y-2 mb-4 text-sm">
                   <div className="flex justify-between items-center text-slate-600">
-                    <span>Base Price</span>
+                    <span>Workshop Price</span>
                     <span>
                       <PriceDisplay amount={base_price} />
                     </span>
                   </div>
-                  <div className="flex justify-between items-center text-slate-600">
-                    <span>Discount</span>
-                    <span className="text-emerald-600">
-                      {discount_amount > 0 ? (
-                        <>
-                          -{" "}
-                          <PriceDisplay
-                            amount={
-                              workshop?.discountType === "PERCENTAGE"
-                                ? Math.round(
-                                  base_price * (discount_amount / 100),
-                                )
-                                : discount_amount
-                            }
-                          />
-                        </>
-                      ) : (
-                        <span className="text-slate-400">—</span>
-                      )}
-                    </span>
-                  </div>
-
                   <div className="pt-2 mt-2 border-t flex justify-between items-center font-bold text-slate-900 text-base">
                     <span>Total</span>
                     <span>
