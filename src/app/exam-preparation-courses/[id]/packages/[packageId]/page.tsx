@@ -11,6 +11,7 @@ import {
   ShieldCheck,
   Award,
   Users,
+  User,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import api from "@/axios";
@@ -34,6 +35,7 @@ interface CoursePackage {
   scheduleInfo: string;
   totalHours: string;
   bestFor: string[];
+  requirements?: string | null;
 }
 
 interface CourseDetail {
@@ -67,6 +69,7 @@ export default async function PackageDetailPage({ params }: PageProps) {
     );
     if (response.data.success) {
       course = response.data.data;
+      console.log("👉 ~ PackageDetailPage ~ course:::", course);
     }
   } catch (error) {
     console.error("Error fetching course detail:", error);
@@ -149,23 +152,41 @@ export default async function PackageDetailPage({ params }: PageProps) {
                 </p>
               </div>
             </div>
-
+            {/* Requirements */}
+            {pkg.requirements &&
+              (() => {
+                const requirementItems = pkg.requirements
+                  .split("\n")
+                  .map((line) => line.trim())
+                  .filter(Boolean);
+                return requirementItems.length > 0 ? (
+                  <div className="space-y-3">
+                    <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
+                      <Award className="size-5 text-primary" />
+                      During the course, candidates work on:
+                    </h2>
+                    <div className="h-px bg-slate-100" />
+                    <div className="space-y-3">
+                      <ul className="space-y-3 text-slate-600 font-medium text-sm">
+                        {requirementItems.map((item, i) => (
+                          <li key={i} className="flex items-start gap-2.5">
+                            <CheckCircle2 className="size-4 text-primary shrink-0 mt-0.5" />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                ) : null;
+              })()}
             {/* Course Features / Best For */}
-            <div className="space-y-6">
+            <div className="space-y-3">
               <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
-                <Award className="size-5 text-primary" />
-                Target Audience & Goals
+                <User className="size-5 text-primary" />
+                This course is particularly suitable for candidates who:
               </h2>
               <div className="h-px bg-slate-100" />
               <div className="space-y-3">
-                <div className="flex items-center gap-2">
-                  <Badge
-                    variant="destructive"
-                    className="font-bold text-[10px] uppercase tracking-wider px-2 py-0.5"
-                  >
-                    Best For
-                  </Badge>
-                </div>
                 <ul className="space-y-3 text-slate-600 font-medium text-sm">
                   {Array.isArray(pkg.bestFor) && pkg.bestFor.length > 0 ? (
                     pkg.bestFor.map((item, i) => (
