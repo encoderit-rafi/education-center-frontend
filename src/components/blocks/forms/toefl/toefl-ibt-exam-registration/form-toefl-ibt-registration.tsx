@@ -10,6 +10,7 @@ import { useMutation } from "@tanstack/react-query";
 import api from "@/axios";
 import { format } from "date-fns";
 import { GlobalReviewStep, ReviewSummaryGrid } from "@/components/blocks/forms/global-review-step";
+import { PriceDisplay } from "@/components/ui/price-display";
 
 // Import Steps
 import { TermsStep } from "./steps/terms-step";
@@ -112,34 +113,66 @@ export default function FormTOEFLIBTRegistration() {
         window.scrollTo({ top: 0, behavior: "smooth" });
     };
 
+    const isExpressRegistration = (date: Date | undefined): boolean => {
+        if (!date) return false;
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const selectedDate = new Date(date);
+        selectedDate.setHours(0, 0, 0, 0);
+        const diffTime = selectedDate.getTime() - today.getTime();
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        return diffDays >= 0 && diffDays <= 7;
+    };
+
     const calculateTotal = () => {
-        const baseFee = 1260; // TOEFL iBT fee
-        const serviceFee = 150;
+        const isExpress = isExpressRegistration(formData.examDate);
+
+        // Base/Standard TOEFL fees
+        const baseFeeUSD = 340;
+        const baseFeeAED = 1270;
+
+        // Express registration fee (7 days or less)
+        const expressFeeUSD = isExpress ? 40 : 0;
+        const expressFeeAED = isExpress ? 190 : 0;
+
+        // Course fee (in AED)
         const selectedCourseData = formData.selectedCourse
             ? COURSES_DATA.find((c: any) => c.id === formData.selectedCourse)
             : null;
-        const coursePrice = selectedCourseData
-            ? selectedCourseData.discounted_price ?? selectedCourseData.price
+        const coursePriceAED = selectedCourseData
+            ? (selectedCourseData.discounted_price ?? selectedCourseData.price)
             : 0;
-        const workshopPrice = formData.selectedWorkshop
+
+        // Workshop fee (in AED)
+        const workshopPriceAED = formData.selectedWorkshop
             ? (WORKSHOPS_DATA as any)[formData.selectedWorkshop].price
             : 0;
 
-        const subtotal = baseFee + serviceFee + coursePrice + workshopPrice;
+        // Convert Course & Workshop fees to USD for display purposes
+        const AED_TO_USD_RATE = 3.67;
+        const coursePriceUSD = coursePriceAED > 0 ? Math.round(coursePriceAED / AED_TO_USD_RATE) : 0;
+        const workshopPriceUSD = workshopPriceAED > 0 ? Math.round(workshopPriceAED / AED_TO_USD_RATE) : 0;
+
+        const totalAED = baseFeeAED + expressFeeAED + coursePriceAED + workshopPriceAED;
+        const totalUSD = baseFeeUSD + expressFeeUSD + coursePriceUSD + workshopPriceUSD;
 
         return {
-            baseFee,
-            serviceFee,
-            coursePrice,
-            workshopPrice,
-            subtotal,
-            vat: 0,
-            total: subtotal
+            baseFeeUSD,
+            baseFeeAED,
+            expressFeeUSD,
+            expressFeeAED,
+            coursePriceUSD,
+            coursePriceAED,
+            workshopPriceUSD,
+            workshopPriceAED,
+            totalAED,
+            totalUSD,
+            isExpress
         };
     };
 
     const pricing = calculateTotal();
-    const total = pricing.total;
+    const total = pricing.totalAED;
 
     const paymentMutation = useMutation({
         mutationFn: (body: Record<string, unknown>) =>
@@ -280,13 +313,70 @@ export default function FormTOEFLIBTRegistration() {
                             onPaymentMethodChange={(val) => (form.setValue as any)("paymentMethod", val)}
                             paymentMethodError={(form.formState.errors as any)?.paymentMethod}
                             examName="TOEFL iBT Exam"
-                            baseFee={pricing.baseFee}
-                            serviceFee={pricing.serviceFee}
-                            total={pricing.total}
+                            baseFee={pricing.baseFeeAED}
+                            serviceFee={pricing.expressFeeAED}
+                            total={pricing.totalAED}
                             selectedCourseData={formData.selectedCourse ? COURSES_DATA.find((c: any) => c.id === formData.selectedCourse) : undefined}
                             selectedWorkshopData={formData.selectedWorkshop ? (WORKSHOPS_DATA as any)[formData.selectedWorkshop] : undefined}
                             reviewStepNumber={3}
                             paymentStepNumber={4}
+                            customOrderSummary={
+                                <div className="space-y-4">
+                                    <div className="flex justify-between text-sm items-center">
+                                        <span className="text-slate-500 font-medium">Standard Registration Fee</span>
+                                        <span className="font-bold text-slate-900 inline-flex items-center gap-1">
+                                            $340 <span className="text-slate-400 font-normal text-xs inline-flex items-center gap-0.5">(estimated <PriceDisplay amount={1270} minimumFractionDigits={0} maximumFractionDigits={0} className="text-slate-400 font-normal text-xs" />)</span>
+                                        </span>
+                                    </div>
+
+                                    {pricing.isExpress && (
+                                        <div className="flex justify-between text-sm items-center animate-in fade-in slide-in-from-top-1 duration-300">
+                                            <span className="text-slate-500 font-medium">Express Registration Fee</span>
+                                            <span className="font-bold text-red-700 inline-flex items-center gap-1">
+                                                $40 <span className="text-red-500/80 font-normal text-xs inline-flex items-center gap-0.5">(estimated <PriceDisplay amount={190} minimumFractionDigits={0} maximumFractionDigits={0} className="text-red-500/80 font-normal text-xs" />)</span>
+                                            </span>
+                                        </div>
+                                    )}
+
+                                    {formData.selectedCourse && pricing.coursePriceAED > 0 && (
+                                        <div className="flex justify-between text-sm items-center">
+                                            <span className="text-slate-500 font-medium">
+                                                Course: {COURSES_DATA.find((c: any) => c.id === formData.selectedCourse)?.name}
+                                            </span>
+                                            <span className="font-bold text-slate-900 inline-flex items-center gap-1">
+                                                ${pricing.coursePriceUSD} <span className="text-slate-400 font-normal text-xs inline-flex items-center gap-0.5">(<PriceDisplay amount={pricing.coursePriceAED} minimumFractionDigits={0} maximumFractionDigits={0} className="text-slate-400 font-normal text-xs" />)</span>
+                                            </span>
+                                        </div>
+                                    )}
+
+                                    {formData.selectedWorkshop && pricing.workshopPriceAED > 0 && (
+                                        <div className="flex justify-between text-sm items-center">
+                                            <span className="text-slate-500 font-medium">
+                                                Workshop: {(WORKSHOPS_DATA as any)[formData.selectedWorkshop]?.name}
+                                            </span>
+                                            <span className="font-bold text-slate-900 inline-flex items-center gap-1">
+                                                ${pricing.workshopPriceUSD} <span className="text-slate-400 font-normal text-xs inline-flex items-center gap-0.5">(<PriceDisplay amount={pricing.workshopPriceAED} minimumFractionDigits={0} maximumFractionDigits={0} className="text-slate-400 font-normal text-xs" />)</span>
+                                            </span>
+                                        </div>
+                                    )}
+
+                                    <div className="pt-6 border-t border-slate-200">
+                                        <div className="flex justify-between items-center">
+                                            <span className="font-black text-xs uppercase tracking-[0.2em] text-slate-900">
+                                                Total Amount
+                                            </span>
+                                            <div className="text-right">
+                                                <span className="text-3xl font-black text-[#A11D1D] block">
+                                                    ${pricing.totalUSD}
+                                                </span>
+                                                <span className="text-xs font-semibold text-slate-500 inline-flex items-center gap-0.5 justify-end">
+                                                    estimated <PriceDisplay amount={pricing.totalAED} minimumFractionDigits={0} maximumFractionDigits={0} className="text-slate-500 font-semibold text-xs" />
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
                         >
                             <ReviewSummaryGrid
                                 personalDetails={[

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Calendar as CalendarIcon } from "lucide-react";
+import { Calendar as CalendarIcon, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -14,6 +14,7 @@ import Stepper from "@/components/stepper";
 
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
+import { AED } from "@/components/ui/aed";
 
 interface DateStepProps {
   value: Date | undefined;
@@ -36,6 +37,17 @@ function isSlotDisabled(date: Date, hours: number, minutes: number): boolean {
   const checkDate = new Date(date);
   checkDate.setHours(hours, minutes, 0, 0);
   return checkDate.getTime() - now.getTime() < 48 * 60 * 60 * 1000;
+}
+
+function isExpressRegistration(date: Date | undefined): boolean {
+  if (!date) return false;
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const examDate = new Date(date);
+  examDate.setHours(0, 0, 0, 0);
+  const diffTime = examDate.getTime() - today.getTime();
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  return diffDays >= 0 && diffDays <= 7;
 }
 
 export function DateStep({
@@ -104,13 +116,11 @@ export function DateStep({
                         <div key={slot.id}>
                           <Label
                             htmlFor={slot.id}
-                            className={`flex items-center p-4 rounded-xl border-2 transition-all cursor-pointer ${
-                              isDisabled ? "opacity-40 cursor-not-allowed pointer-events-none" : ""
-                            } ${
-                              timeSlot === slot.id
+                            className={`flex items-center p-4 rounded-xl border-2 transition-all cursor-pointer ${isDisabled ? "opacity-40 cursor-not-allowed pointer-events-none" : ""
+                              } ${timeSlot === slot.id
                                 ? "border-[#A11D1D] bg-[#A11D1D]/5 ring-1 ring-[#A11D1D]"
                                 : "border-slate-100 bg-white hover:border-slate-200"
-                            }`}
+                              }`}
                           >
                             <div className="flex items-center gap-3">
                               <RadioGroupItem value={slot.id} id={slot.id} disabled={isDisabled} />
@@ -133,12 +143,24 @@ export function DateStep({
               </FieldContent>
             </Field>
 
+            {value && isExpressRegistration(value) && (
+              <div className="p-4 rounded-xl bg-amber-50 border border-amber-200 text-amber-800 text-sm leading-relaxed space-y-2 animate-in fade-in slide-in-from-top-2 duration-300">
+                <div className="flex items-center gap-2 font-bold text-amber-900">
+                  <AlertTriangle className="size-4 text-amber-600" />
+                  <span>Express Registration Fee Applies</span>
+                </div>
+                <p className="text-xs text-amber-800 font-medium">
+                  Since your selected exam date is 7 days or less from today, an <strong>Express Registration Fee of $40 <span className="text-xs inline-flex items-center gap-0.5">(estimated <AED className="h-[0.8em] w-auto fill-current" />190)</span></strong> will be automatically applied to your registration total.
+                </p>
+              </div>
+            )}
+
             <div className="p-4 rounded-xl bg-slate-50 border border-slate-100 text-xs text-slate-500 leading-relaxed space-y-1">
               <p>
                 <span className="font-bold text-slate-700">Note:</span> You may also reach out to us at{" "}
                 <a href="tel:+97165531250" className="text-[#A11D1D] hover:underline font-semibold">+97165531250</a> or{" "}
                 <a href="mailto:info@tepth.org" className="text-[#A11D1D] hover:underline font-semibold">info@tepth.org</a>{" "}
-                and confirm the Test date availability before you proceed.
+                and confirm the Test date availability before you proceed with the Toefl-iBT Registration on our website.
               </p>
             </div>
           </div>

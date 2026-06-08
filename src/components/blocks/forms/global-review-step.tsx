@@ -111,6 +111,8 @@ interface GlobalReviewStepProps {
 
   reviewStepNumber: number;
   paymentStepNumber: number;
+
+  customOrderSummary?: React.ReactNode;
 }
 
 export function GlobalReviewStep({
@@ -128,6 +130,7 @@ export function GlobalReviewStep({
   children,
   reviewStepNumber,
   paymentStepNumber,
+  customOrderSummary,
 }: GlobalReviewStepProps) {
   return (
     <form onSubmit={onSubmit} className="space-y-8">
@@ -196,62 +199,68 @@ export function GlobalReviewStep({
             </div>
 
             <div className="space-y-4">
-              <div className="flex justify-between text-sm">
-                <span className="text-slate-500 font-medium">{examName}</span>
-                <PriceDisplay
-                  amount={baseFee}
-                  className="font-bold text-slate-900"
-                />
-              </div>
+              {customOrderSummary ? (
+                customOrderSummary
+              ) : (
+                <>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-slate-500 font-medium">{examName}</span>
+                    <PriceDisplay
+                      amount={baseFee}
+                      className="font-bold text-slate-900"
+                    />
+                  </div>
 
-              <div className="flex justify-between text-sm">
-                <span className="text-slate-500 font-medium">
-                  Registration Service Fee
-                </span>
-                <PriceDisplay
-                  amount={serviceFee}
-                  className="font-bold text-slate-900"
-                />
-              </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-slate-500 font-medium">
+                      Registration Service Fee
+                    </span>
+                    <PriceDisplay
+                      amount={serviceFee}
+                      className="font-bold text-slate-900"
+                    />
+                  </div>
 
-              {selectedCourseData && (
-                <div className="flex justify-between text-sm">
-                  <span className="text-slate-500 font-medium">
-                    Course: {selectedCourseData.name}
-                  </span>
-                  <PriceDisplay
-                    amount={
-                      selectedCourseData.price *
-                      (1 - (selectedCourseData.special_discount || 0) / 100)
-                    }
-                    className="font-bold text-slate-900"
-                  />
-                </div>
+                  {selectedCourseData && (
+                    <div className="flex justify-between text-sm">
+                      <span className="text-slate-500 font-medium">
+                        Course: {selectedCourseData.name}
+                      </span>
+                      <PriceDisplay
+                        amount={
+                          selectedCourseData.price *
+                          (1 - (selectedCourseData.special_discount || 0) / 100)
+                        }
+                        className="font-bold text-slate-900"
+                      />
+                    </div>
+                  )}
+
+                  {selectedWorkshopData && (
+                    <div className="flex justify-between text-sm">
+                      <span className="text-slate-500 font-medium">
+                        Workshop: {selectedWorkshopData.name}
+                      </span>
+                      <PriceDisplay
+                        amount={selectedWorkshopData.price}
+                        className="font-bold text-slate-900"
+                      />
+                    </div>
+                  )}
+
+                  <div className="pt-6 border-t border-slate-200">
+                    <div className="flex justify-between items-center">
+                      <span className="font-black text-xs uppercase tracking-[0.2em] text-slate-900">
+                        Total Amount
+                      </span>
+                      <PriceDisplay
+                        amount={total}
+                        className="text-3xl font-black text-[#A11D1D]"
+                      />
+                    </div>
+                  </div>
+                </>
               )}
-
-              {selectedWorkshopData && (
-                <div className="flex justify-between text-sm">
-                  <span className="text-slate-500 font-medium">
-                    Workshop: {selectedWorkshopData.name}
-                  </span>
-                  <PriceDisplay
-                    amount={selectedWorkshopData.price}
-                    className="font-bold text-slate-900"
-                  />
-                </div>
-              )}
-
-              <div className="pt-6 border-t border-slate-200">
-                <div className="flex justify-between items-center">
-                  <span className="font-black text-xs uppercase tracking-[0.2em] text-slate-900">
-                    Total Amount
-                  </span>
-                  <PriceDisplay
-                    amount={total}
-                    className="text-3xl font-black text-[#A11D1D]"
-                  />
-                </div>
-              </div>
             </div>
           </div>
         </div>
