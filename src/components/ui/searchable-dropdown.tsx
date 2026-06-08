@@ -135,7 +135,7 @@ export const SearchableDropdown = React.forwardRef<
                         {option.label}
                       </span>
                       {option.description && (
-                        <span className="truncate text-sm font-semibold text-primary">
+                        <span className="text-sm font-semibold text-primary whitespace-normal">
                           {option.description}
                         </span>
                       )}

@@ -52,7 +52,7 @@ export function AddonServicesSection({
                 ...Object.values(coursesData || {}).map((c: any) => ({
                   label: c.name,
                   description: c.discounted_price != null ? (
-                    <span className="inline-flex items-center gap-2 flex-wrap">
+                    <span className="flex flex-col gap-1.5 mt-1">
                       <span className="inline-flex items-center gap-1">
                         <PriceDisplay
                           amount={c.discounted_price}
@@ -70,12 +70,14 @@ export function AddonServicesSection({
                           className="line-through text-muted-foreground"
                         />
                       </span>
-                      {["Free Prep. Material", "Free Consultation", "Free Mock Test"].map((item, index) => (
-                        <Badge key={index}>{item}</Badge>
-                      ))}
+                      <span className="flex items-center gap-1.5 flex-wrap">
+                        {["Free Prep. Material", "Free Consultation", "Free Mock Test"].map((item, index) => (
+                          <Badge key={index}>{item}</Badge>
+                        ))}
+                      </span>
                     </span>
                   ) : c.special_discount ? (
-                    <span className="inline-flex items-center gap-2 flex-wrap">
+                    <span className="flex flex-col gap-1.5 mt-1">
                       <span className="inline-flex items-center gap-1">
                         <PriceDisplay
                           amount={c.price * (1 - c.special_discount / 100)}
@@ -93,9 +95,11 @@ export function AddonServicesSection({
                           className="line-through text-muted-foreground"
                         />
                       </span>
-                      {["Free Prep. Material", "Free Consultation", "Free Mock Test"].map((item, index) => (
-                        <Badge key={index}>{item}</Badge>
-                      ))}
+                      <span className="flex items-center gap-1.5 flex-wrap">
+                        {["Free Prep. Material", "Free Consultation", "Free Mock Test"].map((item, index) => (
+                          <Badge key={index}>{item}</Badge>
+                        ))}
+                      </span>
                     </span>
                   ) : (
                     <PriceDisplay

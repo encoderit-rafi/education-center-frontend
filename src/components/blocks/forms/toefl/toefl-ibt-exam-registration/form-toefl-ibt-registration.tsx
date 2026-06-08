@@ -365,12 +365,12 @@ export default function FormTOEFLIBTRegistration() {
                                             <span className="font-black text-xs uppercase tracking-[0.2em] text-slate-900">
                                                 Total Amount
                                             </span>
-                                            <div className="text-right">
-                                                <span className="text-3xl font-black text-[#A11D1D] block">
+                                            <div className="text-right flex items-baseline gap-2 justify-end flex-wrap">
+                                                <span className="text-3xl font-black text-primary">
                                                     ${pricing.totalUSD}
                                                 </span>
-                                                <span className="text-xs font-semibold text-slate-500 inline-flex items-center gap-0.5 justify-end">
-                                                    estimated <PriceDisplay amount={pricing.totalAED} minimumFractionDigits={0} maximumFractionDigits={0} className="text-slate-500 font-semibold text-xs" />
+                                                <span className="text-3xl font-semibold text-primary inline-flex items-center gap-0.5 justify-end">
+                                                    <span className="text-xs font-semibold text-primary"> estimated </span> <PriceDisplay amount={pricing.totalAED} minimumFractionDigits={0} maximumFractionDigits={0} className="text-primary font-semibold text-3xl" />
                                                 </span>
                                             </div>
                                         </div>

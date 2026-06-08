@@ -255,7 +255,7 @@ export function GlobalReviewStep({
                       </span>
                       <PriceDisplay
                         amount={total}
-                        className="text-3xl font-black text-[#A11D1D]"
+                        className="text-3xl font-black text-primary"
                       />
                     </div>
                   </div>

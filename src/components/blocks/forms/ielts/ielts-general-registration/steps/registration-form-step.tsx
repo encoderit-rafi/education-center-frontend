@@ -503,9 +503,9 @@ export function RegistrationFormStep({
           </h3>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8">
           <Field
-            className="md:col-span-2 lg:col-span-3"
+            className="md:col-span-2"
             data-invalid={!!errors.takenBefore}
           >
             <FieldLabel required>
@@ -537,7 +537,7 @@ export function RegistrationFormStep({
           {formData.takenBefore === "Yes" && (
             <>
               <Field
-                className="md:col-span-2 lg:col-span-3"
+                className="md:col-span-2"
                 data-invalid={!!errors.lessThanTwoYears}
               >
                 <FieldLabel required>Was it less than 2 years?</FieldLabel>
@@ -565,7 +565,7 @@ export function RegistrationFormStep({
               </Field>
 
               <Field
-                className="md:col-span-2 lg:col-span-3"
+                className="md:col-span-2"
                 data-invalid={!!errors.existingAccount}
               >
                 <FieldLabel required>
@@ -654,7 +654,7 @@ export function RegistrationFormStep({
           </Field>
 
           <Field
-            className="md:col-span-2 lg:col-span-3"
+            className="md:col-span-2"
             data-invalid={!!errors.educationLevel}
           >
             <FieldLabel required>
