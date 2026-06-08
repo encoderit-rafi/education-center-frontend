@@ -106,20 +106,20 @@ export default async function BookExamsId({
     // case EXAM_IDS_DATA.ielts_life_skills_b1.id:
     //   return <FormIELTSLifeSkillsB1Registration />;
     case "ielts-academic":
-      return <FormIELTSAcademicRegistration />;
+      return <FormIELTSAcademicRegistration examId={exam.id} />;
     case "ielts-general":
       return (
         <div>
           <h2 className="text-2xl font-bold my-8 text-center">
             IELTS General Registration
           </h2>
-          <FormIELTSGeneralRegistration />
+          <FormIELTSGeneralRegistration examId={exam.id} />
         </div>
       );
     case "toefl-ibt":
       return (
         <div>
-          <FormTOEFLIBTRegistration />
+          <FormTOEFLIBTRegistration examId={exam.id} />
         </div>
       );
     case "celpip-general":
@@ -142,45 +142,45 @@ export default async function BookExamsId({
       );
     case "selt-a1":
     case "ukvi-speaking-and-listening-at-level-a1":
-      return <FormSELTA1Registration />;
+      return <FormSELTA1Registration examId={exam.id} />;
     case "selt-a2":
     case "ukvi-speaking-and-listening-at-level-a2":
-      return <FormSELTA2Registration />;
+      return <FormSELTA2Registration examId={exam.id} />;
     case "selt-b1":
     case "ukvi-speaking-and-listening-at-level-b1":
-      return <FormSELTB1Registration />;
+      return <FormSELTB1Registration examId={exam.id} />;
     case "selt-b1-r-w":
     case "ukvi-speaking-and-listening-at-level-b1-r-w":
     case "ukvi-speaking-listening-reading-and-writing-at-level-b1":
     case "ukvi-speaking-listening-reading-and-writing-at-level-b1-1":
-      return <FormSELTB1RWRegistration />;
+      return <FormSELTB1RWRegistration examId={exam.id} />;
     case "selt-b2":
     case "ukvi-speaking-listening-reading-and-writing-at-level-b2":
     case "ukvi-speaking-and-listening-at-level-b2":
-      return <FormSELTB2Registration />;
+      return <FormSELTB2Registration examId={exam.id} />;
     case "selt-c1":
     case "ukvi-speaking-listening-reading-and-writing-at-level-c1":
     case "ukvi-speaking-and-listening-at-level-c1":
-      return <FormSELTC1Registration />;
+      return <FormSELTC1Registration examId={exam.id} />;
     case "selt-c2":
     case "ukvi-speaking-listening-reading-and-writing-at-level-c2":
     case "ukvi-speaking-and-listening-at-level-c2":
-      return <FormSELTC2Registration />;
+      return <FormSELTC2Registration examId={exam.id} />;
 
     case "pte-academic":
-      return <FormPTEAcademicRegistration />;
+      return <FormPTEAcademicRegistration examId={exam.id} />;
     case "pte-core":
-      return <FormPTECoreRegistration />;
+      return <FormPTECoreRegistration examId={exam.id} />;
 
     case "pte-home-a1":
-      return <FormPTEHomeA1Registration />;
+      return <FormPTEHomeA1Registration examId={exam.id} />;
     case "pte-home-a2":
-      return <FormPTEHomeA2Registration />;
+      return <FormPTEHomeA2Registration examId={exam.id} />;
     case "pte-home-b1":
-      return <FormPTEHomeB1Registration />;
+      return <FormPTEHomeB1Registration examId={exam.id} />;
     case "pte-ukvi":
     case "pte-academic-ukvi":
-      return <FormPTEHomeUkviRegistration />;
+      return <FormPTEHomeUkviRegistration examId={exam.id} />;
 
     default:
       return notFound();

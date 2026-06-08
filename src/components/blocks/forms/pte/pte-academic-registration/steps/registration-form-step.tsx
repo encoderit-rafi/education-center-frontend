@@ -436,7 +436,7 @@ export function RegistrationFormStep({
           </Field>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8">
           <Field data-invalid={!!errors.homeLanguage}>
             <FieldLabel required>What is your first language?</FieldLabel>
             <FieldContent>
@@ -499,58 +499,8 @@ export function RegistrationFormStep({
             </FieldContent>
           </Field>
 
-          {/* <Field data-invalid={!!errors.occupationSector}>
-            <FieldLabel required>What is your occupation sector?</FieldLabel>
-            <FieldContent>
-              <SearchableDropdown
-                name="occupationSector"
-                options={[
-                  { label: "Administrative Services", value: "Administrative Services" },
-                  { label: "Agriculture, Fishing, Forestry, Mining", value: "Agriculture, Fishing, Forestry, Mining" },
-                  { label: "Arts and Entertainment", value: "Arts and Entertainment" },
-                  { label: "Banking and Finance", value: "Banking and Finance" },
-                  { label: "Catering and Leisure", value: "Catering and Leisure" },
-                  { label: "Construction Industries", value: "Construction Industries" },
-                  { label: "Craft and Design", value: "Craft and Design" },
-                  { label: "Education", value: "Education" },
-                  { label: "Health and Social Services", value: "Health and Social Services" },
-                  { label: "Installation, Maintenance and Repair Services", value: "Installation, Maintenance and Repair Services" },
-                  { label: "Law and Legal Services", value: "Law and Legal Services" },
-                  { label: "Manufacturing and Assembly Services", value: "Manufacturing and Assembly Services" },
-                  { label: "Personal Services", value: "Personal Services" },
-                  { label: "Retail Trade", value: "Retail Trade" },
-                  { label: "Technical and Scientific", value: "Technical and Scientific" },
-                  { label: "Telecommunications and the Media", value: "Telecommunications and the Media" },
-                  { label: "Transport", value: "Transport" },
-                  { label: "Utilities (Gas, Water, Electricity etc)", value: "Utilities (Gas, Water, Electricity etc)" },
-                  { label: "Wholesale Trade", value: "Wholesale Trade" },
-                  { label: "Other", value: "Other" },
-                ]}
-                placeholder="-Select Sector-"
-                value={formData.occupationSector}
-                aria-invalid={!!errors.occupationSector}
-                onChange={(val) => {
-                  setValue("occupationSector", val);
-                  if (val !== "Other") setValue("occupationSectorOther", "");
-                }}
-              />
-              {formData.occupationSector === "Other" && (
-                <div className="mt-2 animate-in fade-in slide-in-from-top-2 duration-300">
-                  <Input
-                    placeholder="Please specify your occupation sector"
-                    value={formData.occupationSectorOther ?? ""}
-                    onChange={(e) => setValue("occupationSectorOther", e.target.value)}
-                    className="border-primary/40 focus:border-primary"
-                  />
-                </div>
-              )}
-              <FieldError errors={[errors.occupationSector]} />
-            </FieldContent>
-          </Field> */}
-
           <Field
             data-invalid={!!errors.reasonForTaking}
-            className="md:col-span-2"
           >
             <FieldLabel required>Why are you taking PTE Academic?</FieldLabel>
             <FieldContent>
@@ -611,6 +561,49 @@ export function RegistrationFormStep({
               <FieldError errors={[errors.reasonForTaking]} />
             </FieldContent>
           </Field>
+
+          <Field data-invalid={!!errors.referralSource}>
+            <FieldLabel required>How did you hear about PTE Academic?</FieldLabel>
+            <FieldContent>
+              <SearchableDropdown
+                options={[
+                  { label: "Australian Department of Home Affairs (DHA)", value: "dha" },
+                  { label: "Board of Nursing", value: "board_of_nursing" },
+                  { label: "Education Agent Advisor - specify below", value: "education_agent" },
+                  { label: "Education event - specify below", value: "education_event" },
+                  { label: "Education Malaysia Global Services (EMGS)", value: "emgs" },
+                  { label: "Friend or family", value: "friend_family" },
+                  { label: "Immigration New Zealand (INZ)", value: "inz" },
+                  { label: "Internet search", value: "internet_search" },
+                  { label: "Language School", value: "language_school" },
+                  { label: "Migration agent / lawyer - specify below", value: "migration_agent" },
+                  { label: "Social Media (e.g. Facebook, Twitter, Weibo etc)", value: "social_media" },
+                  { label: "University or College - specify below", value: "university_college" },
+                  { label: "Other - specify below", value: "Other" },
+                ]}
+                placeholder="Select one..."
+                value={formData.referralSource}
+                onChange={(val) => {
+                  setValue("referralSource", val);
+                  const specifyOptions = ["education_agent", "education_event", "migration_agent", "university_college", "Other"];
+                  if (!specifyOptions.includes(val)) setValue("referralSourceOther", "");
+                }}
+              />
+              {["education_agent", "education_event", "migration_agent", "university_college", "Other"].includes(formData.referralSource) && (
+                <div className="mt-2 animate-in fade-in slide-in-from-top-2 duration-300">
+                  <Input
+                    placeholder="Please specify"
+                    value={formData.referralSourceOther ?? ""}
+                    onChange={(e) => setValue("referralSourceOther", e.target.value)}
+                    className="border-primary/40 focus:border-primary"
+                  />
+                  <FieldError errors={[errors.referralSourceOther]} />
+                </div>
+              )}
+              <FieldError errors={[errors.referralSource]} />
+            </FieldContent>
+          </Field>
+
           {formData.reasonForTaking === "study" && (
             <Field
               data-invalid={!!errors.studyLevel}
@@ -657,48 +650,6 @@ export function RegistrationFormStep({
               </FieldContent>
             </Field>
           )}
-
-          <Field data-invalid={!!errors.referralSource}>
-            <FieldLabel required>How did you hear about PTE Academic?</FieldLabel>
-            <FieldContent>
-              <SearchableDropdown
-                options={[
-                  { label: "Australian Department of Home Affairs (DHA)", value: "dha" },
-                  { label: "Board of Nursing", value: "board_of_nursing" },
-                  { label: "Education Agent Advisor - specify below", value: "education_agent" },
-                  { label: "Education event - specify below", value: "education_event" },
-                  { label: "Education Malaysia Global Services (EMGS)", value: "emgs" },
-                  { label: "Friend or family", value: "friend_family" },
-                  { label: "Immigration New Zealand (INZ)", value: "inz" },
-                  { label: "Internet search", value: "internet_search" },
-                  { label: "Language School", value: "language_school" },
-                  { label: "Migration agent / lawyer - specify below", value: "migration_agent" },
-                  { label: "Social Media (e.g. Facebook, Twitter, Weibo etc)", value: "social_media" },
-                  { label: "University or College - specify below", value: "university_college" },
-                  { label: "Other - specify below", value: "Other" },
-                ]}
-                placeholder="Select one..."
-                value={formData.referralSource}
-                onChange={(val) => {
-                  setValue("referralSource", val);
-                  const specifyOptions = ["education_agent", "education_event", "migration_agent", "university_college", "Other"];
-                  if (!specifyOptions.includes(val)) setValue("referralSourceOther", "");
-                }}
-              />
-              {["education_agent", "education_event", "migration_agent", "university_college", "Other"].includes(formData.referralSource) && (
-                <div className="mt-2 animate-in fade-in slide-in-from-top-2 duration-300">
-                  <Input
-                    placeholder="Please specify"
-                    value={formData.referralSourceOther ?? ""}
-                    onChange={(e) => setValue("referralSourceOther", e.target.value)}
-                    className="border-primary/40 focus:border-primary"
-                  />
-                  <FieldError errors={[errors.referralSourceOther]} />
-                </div>
-              )}
-              <FieldError errors={[errors.referralSource]} />
-            </FieldContent>
-          </Field>
 
           {formData.reasonForTaking === "study" && formData.studyLevel && (
             <Field
@@ -749,7 +700,6 @@ export function RegistrationFormStep({
               </FieldContent>
             </Field>
           )}
-
 
         </div>
         <div className="space-y-3 md:col-span-2 animate-in fade-in slide-in-from-top-2">

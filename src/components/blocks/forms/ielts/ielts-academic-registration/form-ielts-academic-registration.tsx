@@ -6,10 +6,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "@/components/ui/form";
 import { languages } from "@/lib/languages-data";
 import { IeltsAcademicSchema, type TIeltsAcademicSchema } from "./_type";
-import { useMutation } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import api from "@/axios";
 import { format } from "date-fns";
 import { User, ShieldCheck, Globe } from "lucide-react";
+import { toast } from "sonner";
 import {
   GlobalReviewStep,
   ReviewSummaryGrid,
@@ -52,8 +53,23 @@ export const WORKSHOPS_DATA = {
 
 import { ielts_general_courses as COURSES_DATA } from "@/lib/data";
 
-export default function FormIeltsAcademicRegistration() {
+interface FormProps {
+  examId?: string;
+}
+
+export default function FormIeltsAcademicRegistration({ examId: initialExamId }: FormProps = {}) {
   const [currentStep, setCurrentStep] = useState(0); // 0: Terms, 1: Date, 2: Form, 3: Review
+
+  const { data: examDetailResponse } = useQuery({
+    queryKey: ["exam-detail", "ielts-academic"],
+    queryFn: async () => {
+      const response = await api.get("/exams/ielts-academic");
+      return response.data;
+    },
+    enabled: !initialExamId,
+  });
+
+  const examId = initialExamId || examDetailResponse?.data?.id;
 
   const form = useForm<TIeltsAcademicSchema>({
     resolver: zodResolver(IeltsAcademicSchema),
@@ -103,6 +119,7 @@ export default function FormIeltsAcademicRegistration() {
       paymentMethod: "",
       examTimeSlot: "",
       speakingSlot: "",
+      examDate: undefined,
     },
   });
 
@@ -148,13 +165,16 @@ export default function FormIeltsAcademicRegistration() {
     onSuccess: (response) => {
       const checkoutUrl = response.data?.data?.checkoutUrl;
       if (checkoutUrl) {
+        toast.success("Redirecting to checkout...", { id: "ielts-submit" });
         window.location.href = checkoutUrl;
       } else {
         console.error("Checkout URL not found in response");
+        toast.error("Checkout URL not found in server response.", { id: "ielts-submit" });
       }
     },
-    onError: (error) => {
+    onError: (error: any) => {
       console.error("Payment initiation failed:", error);
+      toast.error(error?.response?.data?.message || "Payment initiation failed.", { id: "ielts-submit" });
     },
   });
 
@@ -163,6 +183,7 @@ export default function FormIeltsAcademicRegistration() {
       api.post("/exam-bookings", newBooking),
     onSuccess: (response) => {
       const bookingId = response.data?.data?.id;
+      toast.loading("Initiating payment...", { id: "ielts-submit" });
       paymentMutation.mutate({
         booking_type: "exam_booking",
         booking_id: bookingId,
@@ -171,65 +192,114 @@ export default function FormIeltsAcademicRegistration() {
         currency: "AED",
       });
     },
-    onError: (error) => {
+    onError: (error: any) => {
       console.error("Booking failed:", error);
+      toast.error(error?.response?.data?.message || "Exam booking failed.", { id: "ielts-submit" });
     },
   });
 
-  const handleFormSubmit: SubmitHandler<TIeltsAcademicSchema> = (data) => {
+  const handleFormSubmit: SubmitHandler<TIeltsAcademicSchema> = async (data) => {
     if (currentStep < 3) {
       goToStep(3);
     } else {
-      bookingMutation.mutate({
-        exam_id: "ielts-academic",
-        test_module: data.testModule,
-        given_names: data.givenNames,
-        middle_name: data.middleName,
-        birth_city: data.birthCity,
-        birth_country: data.birthCountry,
-        surnames: data.surnames,
-        date_of_birth: data.dateOfBirth
-          ? new Date(data.dateOfBirth as any).toISOString()
-          : "",
-        sex: data.sex,
-        email: data.email,
-        mobile_number: data.mobileNumber,
-        residence_country: data.residenceCountry,
-        postal_address_1: data.postalAddress1,
-        postal_address_2: data.postalAddress2,
-        city: data.city,
-        postcode: data.postcode,
-        po_box: data.poBox,
-        id_type: data.idType,
-        id_number: data.idNumber,
-        issuing_authority: data.issuingAuthority,
-        nationality: data.nationality,
-        taken_before: data.takenBefore,
-        less_than_two_years: data.lessThanTwoYears,
-        existing_account: data.existingAccount,
-        first_language: data.firstLanguage === "Other"
-          ? data.firstLanguageOther || "Other"
-          : data.firstLanguage,
-        years_studying_english: data.yearsStudyingEnglish,
-        education_level: data.educationLevel,
-        occupation_level: data.occupationLevel === "Other"
-          ? data.occupationLevelOther || "Other"
-          : data.occupationLevel,
-        occupation_sector: data.occupationSector === "Other"
-          ? data.occupationSectorOther || "Other"
-          : data.occupationSector,
-        reason_for_taking_test: data.reasonForTakingTest === "other"
-          ? data.reasonForTakingTestOther || "other"
-          : data.reasonForTakingTest,
-        destination_country: data.destinationCountry,
-        marketing_preference: data.marketingPreference,
-        selected_course: data.selectedCourse,
-        selected_workshop: data.selectedWorkshop,
-        payment_methods: data.paymentMethod,
-        exam_time_slot: data.examTimeSlot,
-        speaking_slot: data.speakingSlot,
-        total_amount: total,
-      });
+      try {
+        toast.loading("Uploading ID document...", { id: "ielts-submit" });
+
+        let idDocumentUrl = "";
+        if (data.idDocument instanceof File) {
+          const uploadFormData = new FormData();
+          uploadFormData.append("file", data.idDocument);
+
+          const uploadRes = await api.post("/files/upload", uploadFormData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          });
+
+          const relativeUrl = uploadRes.data?.url;
+          if (!relativeUrl) {
+            throw new Error("Failed to upload identity document.");
+          }
+
+          const apiBase = api.defaults.baseURL || "https://vote.encoder-test-vpn.space/api/v1";
+          const apiHost = apiBase.replace("/api/v1", "");
+          idDocumentUrl = relativeUrl.startsWith("http")
+            ? relativeUrl
+            : `${apiHost}${relativeUrl}`;
+        }
+
+        if (!examId) {
+          toast.error("Exam details are still loading. Please try again in a moment.", { id: "ielts-submit" });
+          return;
+        }
+
+        toast.loading("Submitting booking request...", { id: "ielts-submit" });
+
+        bookingMutation.mutate({
+          exam_id: examId,
+          test_module: data.testModule,
+          given_names: data.givenNames,
+          first_name: data.givenNames,
+          middle_name: data.middleName,
+          birth_city: data.birthCity,
+          birth_country: data.birthCountry,
+          surnames: data.surnames,
+          last_name: data.surnames || "",
+          date_of_birth: data.dateOfBirth
+            ? new Date(data.dateOfBirth as any).toISOString()
+            : "",
+          sex: data.sex,
+          email: data.email,
+          mobile_number: data.mobileNumber,
+          phone: data.mobileNumber,
+          residence_country: data.residenceCountry,
+          postal_address_1: data.postalAddress1,
+          postal_address_2: data.postalAddress2,
+          city: data.city,
+          postcode: data.postcode,
+          po_box: data.poBox,
+          id_type: data.idType === "emirates_id" ? "emirates" : data.idType,
+          id_number: data.idNumber,
+          id_expiry_date: data.idExpiryDate
+            ? new Date(data.idExpiryDate as any).toISOString()
+            : "",
+          id_document: idDocumentUrl,
+          issuing_authority: data.issuingAuthority,
+          nationality: data.nationality,
+          taken_before: data.takenBefore,
+          less_than_two_years: data.lessThanTwoYears,
+          existing_account: data.existingAccount,
+          first_language: data.firstLanguage === "Other"
+            ? data.firstLanguageOther || "Other"
+            : data.firstLanguage,
+          years_studying_english: data.yearsStudyingEnglish,
+          education_level: data.educationLevel,
+          occupation_level: data.occupationLevel === "Other"
+            ? data.occupationLevelOther || "Other"
+            : data.occupationLevel,
+          occupation_sector: data.occupationSector === "Other"
+            ? data.occupationSectorOther || "Other"
+            : data.occupationSector,
+          reason_for_taking_test: data.reasonForTakingTest === "other"
+            ? data.reasonForTakingTestOther || "other"
+            : data.reasonForTakingTest,
+          destination_country: data.destinationCountry,
+          marketing_preference: data.marketingPreference,
+          selected_course: data.selectedCourse,
+          selected_workshop: data.selectedWorkshop,
+          payment_methods: data.paymentMethod,
+          exam_time_slot: data.examTimeSlot,
+          speaking_slot: data.speakingSlot,
+          exam_fee: pricing.baseFee,
+          total_amount: total,
+          exam_date: data.examDate
+            ? new Date(data.examDate as any).toISOString()
+            : "",
+        });
+      } catch (error: any) {
+        console.error("Form submission error:", error);
+        toast.error(error?.message || "Something went wrong during submission.", { id: "ielts-submit" });
+      }
     }
   };
 
