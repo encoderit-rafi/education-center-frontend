@@ -135,7 +135,7 @@ export function DateStep({
                         <div className="p-4 rounded-xl bg-slate-50 border border-slate-100 animate-in slide-in-from-top-2 duration-300 space-y-4">
                           <div>
                             <p className="text-xs font-bold uppercase tracking-wider mb-3">
-                              Select Speaking Test Delivery Format
+                              Select the Speaking Test delivery format preference
                             </p>
                             <RadioGroup
                               value={speakingSlot}
