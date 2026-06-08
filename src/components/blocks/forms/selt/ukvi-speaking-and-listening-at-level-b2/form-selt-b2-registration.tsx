@@ -9,9 +9,11 @@ import { Form } from "@/components/ui/form";
 import { languages } from "@/lib/languages-data";
 import { EXAM_IDS_DATA } from "@/data";
 import { SeltA1Schema, type TSeltA1Schema } from "./_type/selt";
-import { useMutation } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import api from "@/axios";
+import { toast } from "sonner";
 
+// Steps
 import { TermsStep } from "./steps/terms-step";
 import { DateStep } from "./steps/date-step";
 import { RegistrationFormStep } from "./steps/registration-form-step";
@@ -50,10 +52,25 @@ export const WORKSHOPS_DATA = {
 
 import { ielts_general_courses as COURSES_DATA } from "@/lib/data";
 
-export default function FormSELTB2Registration() {
+interface FormProps {
+  examId?: string;
+}
+
+export default function FormSELTB2Registration({ examId: initialExamId }: FormProps = {}) {
   const [currentStep, setCurrentStep] = useState(0); 
   const initialId = "selt-b2";
-  const examName = Object.values(EXAM_IDS_DATA).find(e => e.id === initialId)?.name || "SELT B2";
+
+  const { data: examDetailResponse } = useQuery({
+    queryKey: ["exam-detail", "ukvi-speaking-listening-reading-and-writing-at-level-b2"],
+    queryFn: async () => {
+      const response = await api.get("/exams/ukvi-speaking-listening-reading-and-writing-at-level-b2");
+      return response.data;
+    },
+    enabled: !initialExamId,
+  });
+
+  const examId = initialExamId || examDetailResponse?.data?.id;
+  const examName = examDetailResponse?.data?.name || Object.values(EXAM_IDS_DATA).find(e => e.id === initialId)?.name || "SELT B2";
 
   const form = useForm<TSeltA1Schema>({
     resolver: zodResolver(SeltA1Schema) as any,
@@ -155,13 +172,16 @@ export default function FormSELTB2Registration() {
     onSuccess: (response) => {
       const checkoutUrl = response.data?.data?.checkoutUrl;
       if (checkoutUrl) {
+        toast.success("Redirecting to checkout...", { id: "selt-submit" });
         window.location.href = checkoutUrl;
       } else {
         console.error("Checkout URL not found in response");
+        toast.error("Checkout URL not found in server response.", { id: "selt-submit" });
       }
     },
-    onError: (error) => {
+    onError: (error: any) => {
       console.error("Payment initiation failed:", error);
+      toast.error(error?.response?.data?.message || "Payment initiation failed.", { id: "selt-submit" });
     },
   });
 
@@ -170,6 +190,7 @@ export default function FormSELTB2Registration() {
       api.post("/exam-bookings", newBooking),
     onSuccess: (response) => {
       const bookingId = response.data?.data?.id;
+      toast.loading("Initiating payment...", { id: "selt-submit" });
       paymentMutation.mutate({
         booking_type: "exam_booking",
         booking_id: bookingId,
@@ -178,56 +199,101 @@ export default function FormSELTB2Registration() {
         currency: "AED",
       });
     },
-    onError: (error) => {
+    onError: (error: any) => {
       console.error("Booking failed:", error);
+      toast.error(error?.response?.data?.message || "Exam booking failed.", { id: "selt-submit" });
     },
   });
 
-  const handleFormSubmit: SubmitHandler<TSeltA1Schema> = (data) => {
+  const handleFormSubmit: SubmitHandler<TSeltA1Schema> = async (data) => {
     if (currentStep < 3) {
       goToStep(3);
     } else {
-      bookingMutation.mutate({
-        exam_id: initialId || "",
-        test_module: data.testModule,
-        given_names: data.givenNames,
-        middle_name: data.middleName,
-        surnames: data.surnames,
-        date_of_birth: data.dateOfBirth ? new Date(data.dateOfBirth as any).toISOString() : "",
-        sex: data.sex,
-        city_of_birth: data.cityOfBirth,
-        country_of_birth: data.countryOfBirth,
-        reason_for_test: data.reasonForTest,
-        reason_for_test_other: data.reasonForTestOther,
-        email: data.email,
-        mobile_number: data.mobileNumber,
-        residence_country: data.residenceCountry,
-        postal_address_1: data.postalAddress1,
-        postal_address_2: data.postalAddress2,
-        city: data.city,
-        postcode: data.postcode,
-        po_box: data.poBox,
-        id_type: data.idType,
-        id_number: data.idNumber,
-        issuing_authority: data.issuingAuthority,
-        nationality: data.nationality,
-        taken_before: data.takenBefore,
-        less_than_two_years: data.lessThanTwoYears,
-        existing_account: data.existingAccount,
-        first_language: data.firstLanguage,
-        years_studying_english: data.yearsStudyingEnglish,
-        education_level: data.educationLevel,
-        occupation_level: data.occupationLevel,
-        occupation_sector: data.occupationSector,
-        reason_for_taking_test: data.reasonForTakingTest,
-        destination_country: data.destinationCountry,
-        marketing_preference: data.marketingPreference,
-        selected_course: data.selectedCourse,
-        selected_workshop: data.selectedWorkshop,
-        payment_methods: data.paymentMethod,
-        exam_time_slot: data.examTimeSlot,
-        total_amount: total,
-      });
+      try {
+        toast.loading("Uploading ID document...", { id: "selt-submit" });
+
+        let idDocumentUrl = "";
+        if (data.idDocument instanceof File) {
+          const uploadFormData = new FormData();
+          uploadFormData.append("file", data.idDocument);
+
+          const uploadRes = await api.post("/files/upload", uploadFormData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          });
+
+          const relativeUrl = uploadRes.data?.url;
+          if (!relativeUrl) {
+            throw new Error("Failed to upload identity document.");
+          }
+
+          const apiBase = api.defaults.baseURL || "https://vote.encoder-test-vpn.space/api/v1";
+          const apiHost = apiBase.replace("/api/v1", "");
+          idDocumentUrl = relativeUrl.startsWith("http")
+            ? relativeUrl
+            : `${apiHost}${relativeUrl}`;
+        }
+
+        if (!examId) {
+          toast.error("Exam details are still loading. Please try again in a moment.", { id: "selt-submit" });
+          return;
+        }
+
+        toast.loading("Submitting booking request...", { id: "selt-submit" });
+
+        bookingMutation.mutate({
+          exam_id: examId,
+          test_module: data.testModule,
+          given_names: data.givenNames,
+          first_name: data.givenNames,
+          middle_name: data.middleName,
+          surnames: data.surnames,
+          last_name: data.surnames || "",
+          date_of_birth: data.dateOfBirth ? new Date(data.dateOfBirth as any).toISOString() : "",
+          sex: data.sex,
+          city_of_birth: data.cityOfBirth,
+          country_of_birth: data.countryOfBirth,
+          reason_for_test: data.reasonForTest,
+          reason_for_test_other: data.reasonForTestOther,
+          email: data.email,
+          mobile_number: data.mobileNumber,
+          phone: data.mobileNumber,
+          residence_country: data.residenceCountry,
+          postal_address_1: data.postalAddress1,
+          postal_address_2: data.postalAddress2,
+          city: data.city,
+          postcode: data.postcode,
+          po_box: data.poBox,
+          id_type: data.idType === "passport" ? "passport" : "others",
+          id_number: data.idNumber,
+          id_expiry_date: data.idExpiryDate ? new Date(data.idExpiryDate as any).toISOString() : "",
+          id_document: idDocumentUrl,
+          issuing_authority: data.issuingAuthority,
+          nationality: data.nationality,
+          taken_before: data.takenBefore,
+          less_than_two_years: data.lessThanTwoYears,
+          existing_account: data.existingAccount,
+          first_language: data.firstLanguage,
+          years_studying_english: data.yearsStudyingEnglish,
+          education_level: data.educationLevel,
+          occupation_level: data.occupationLevel,
+          occupation_sector: data.occupationSector,
+          reason_for_taking_test: data.reasonForTakingTest,
+          destination_country: data.destinationCountry,
+          marketing_preference: data.marketingPreference,
+          selected_course: data.selectedCourse,
+          selected_workshop: data.selectedWorkshop,
+          payment_methods: data.paymentMethod,
+          exam_time_slot: data.examTimeSlot,
+          exam_fee: pricing.baseFee,
+          total_amount: total,
+          exam_date: data.examDate ? new Date(data.examDate as any).toISOString() : "",
+        });
+      } catch (error: any) {
+        console.error("Form submission error:", error);
+        toast.error(error?.message || "Something went wrong during submission.", { id: "selt-submit" });
+      }
     }
   };
 

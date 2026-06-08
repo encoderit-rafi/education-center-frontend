@@ -82,7 +82,7 @@ export default function TestDatesDetailPage() {
                     Testing occurs
                   </div>
                   <p className="text-xs text-slate-500 mt-1 ml-4">
-                    Only Wednesdays are open for testing.
+                    Wednesdays and Saturdays are open for testing.
                   </p>
                   <div className="mt-4 pt-3 border-t border-primary/10">
                     <p className="text-[10px] font-bold text-primary">
@@ -181,7 +181,7 @@ export default function TestDatesDetailPage() {
                   modifiers={{
                     available: (date) =>
                       (id === "ielts" && date.getDay() === 0) ||
-                      (id === "toefl" && date.getDay() === 3) ||
+                      (id === "toefl" && [3, 6].includes(date.getDay())) ||
                       (id === "selt" && [1, 2, 3].includes(date.getDay())) ||
                       (id === "pte" &&
                         [0, 1, 2, 3, 4, 6].includes(date.getDay())),
@@ -197,7 +197,7 @@ export default function TestDatesDetailPage() {
                       return isPast || date.getDay() !== 0;
                     }
                     if (id === "toefl") {
-                      return isPast || date.getDay() !== 3;
+                      return isPast || ![3, 6].includes(date.getDay());
                     }
                     if (id === "selt") {
                       return isPast || ![1, 2, 3].includes(date.getDay());

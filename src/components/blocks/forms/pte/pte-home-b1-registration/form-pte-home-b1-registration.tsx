@@ -17,7 +17,7 @@ import { ReviewStep } from "./steps/review-step";
 
 // Schema
 import { PteHomeB1Schema, type TPteHomeB1Schema } from "./_type";
-import { useMutation } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import api from "@/axios";
 
 import { ielts_general_courses as COURSES_DATA } from "@/lib/data";
@@ -32,8 +32,23 @@ export const WORKSHOPS_DATA = {
 const EXAM_FEE = 1400;
 const SERVICE_FEE = 150;
 
-export default function FormPTEHomeB1Registration() {
+interface FormProps {
+  examId?: string;
+}
+
+export default function FormPTEHomeB1Registration({ examId: initialExamId }: FormProps = {}) {
   const [currentStep, setCurrentStep] = useState(0); // 0: Terms, 1: Date, 2: Form, 3: Review
+
+  const { data: examDetailResponse } = useQuery({
+    queryKey: ["exam-detail", "pte-home-b1"],
+    queryFn: async () => {
+      const response = await api.get("/exams/pte-home-b1");
+      return response.data;
+    },
+    enabled: !initialExamId,
+  });
+
+  const examId = initialExamId || examDetailResponse?.data?.id;
 
   const form = useForm<TPteHomeB1Schema>({
     resolver: zodResolver(PteHomeB1Schema),
@@ -132,13 +147,16 @@ export default function FormPTEHomeB1Registration() {
     onSuccess: (response) => {
       const checkoutUrl = response.data?.data?.checkoutUrl;
       if (checkoutUrl) {
+        toast.success("Redirecting to checkout...", { id: "pte-submit" });
         window.location.href = checkoutUrl;
       } else {
         console.error("Checkout URL not found in response");
+        toast.error("Checkout URL not found in server response.", { id: "pte-submit" });
       }
     },
-    onError: (error) => {
+    onError: (error: any) => {
       console.error("Payment initiation failed:", error);
+      toast.error(error?.response?.data?.message || "Payment initiation failed.", { id: "pte-submit" });
     },
   });
 
@@ -147,6 +165,7 @@ export default function FormPTEHomeB1Registration() {
       api.post("/exam-bookings", newBooking),
     onSuccess: (response) => {
       const bookingId = response.data?.data?.id;
+      toast.loading("Initiating payment...", { id: "pte-submit" });
       paymentMutation.mutate({
         booking_type: "exam_booking",
         booking_id: bookingId,
@@ -155,48 +174,94 @@ export default function FormPTEHomeB1Registration() {
         currency: "AED",
       });
     },
-    onError: (error) => {
+    onError: (error: any) => {
       console.error("Booking failed:", error);
+      toast.error(error?.response?.data?.message || "Exam booking failed.", { id: "pte-submit" });
     },
   });
 
-  const handleFormSubmit: SubmitHandler<TPteHomeB1Schema> = (data) => {
+  const handleFormSubmit: SubmitHandler<TPteHomeB1Schema> = async (data) => {
     if (currentStep < 3) {
       nextStep();
     } else {
-      bookingMutation.mutate({
-        exam_id: "pte-home-b1",
-        given_names: data.givenNames,
-        middle_name: data.middleName,
-        surnames: data.surnames,
-        date_of_birth: data.dateOfBirth ? new Date(data.dateOfBirth as any).toISOString() : "",
-        gender: data.gender,
-        email: data.emailUsername,
-        place_of_birth: data.placeOfBirth,
-        country_of_birth: data.countryOfBirth,
-        country_of_citizenship: data.countryOfCitizenship,
-        country_of_residence: data.countryOfResidence,
-        postal_address_1: data.postalAddress1,
-        postal_address_2: data.postalAddress2,
-        po_box: data.poBox,
-        postcode: data.postcode,
-        city: data.city,
-        mobile_number: data.mobileNumber,
-        home_language: data.homeLanguage,
-        planning_country: data.planningCountry,
-        current_situation: data.currentSituation,
-        reason_for_taking: data.reasonForTaking,
-        study_level: data.studyLevel,
-        occupation_sector: data.occupationSector,
-        id_type: data.idType,
-        id_number: data.idNumber,
-        id_country_of_issue: data.idCountryOfIssue,
-        selected_course: data.selectedCourse,
-        selected_workshop: data.selectedWorkshop,
-        payment_methods: (data as any).paymentMethod,
-        exam_time: data.examTime,
-        total_amount: total,
-      });
+      try {
+        toast.loading("Uploading ID document...", { id: "pte-submit" });
+
+        let idDocumentUrl = "";
+        if (data.passportCopy instanceof File) {
+          const uploadFormData = new FormData();
+          uploadFormData.append("file", data.passportCopy);
+
+          const uploadRes = await api.post("/files/upload", uploadFormData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          });
+
+          const relativeUrl = uploadRes.data?.url;
+          if (!relativeUrl) {
+            throw new Error("Failed to upload identity document.");
+          }
+
+          const apiBase = api.defaults.baseURL || "https://vote.encoder-test-vpn.space/api/v1";
+          const apiHost = apiBase.replace("/api/v1", "");
+          idDocumentUrl = relativeUrl.startsWith("http")
+            ? relativeUrl
+            : `${apiHost}${relativeUrl}`;
+        }
+
+        if (!examId) {
+          toast.error("Exam details are still loading. Please try again in a moment.", { id: "pte-submit" });
+          return;
+        }
+
+        toast.loading("Submitting booking request...", { id: "pte-submit" });
+
+        bookingMutation.mutate({
+          exam_id: examId,
+          given_names: data.givenNames,
+          first_name: data.noGivenNames ? "N/A" : data.givenNames,
+          middle_name: data.middleName,
+          surnames: data.surnames,
+          last_name: data.noSurname ? "N/A" : data.surnames || "",
+          date_of_birth: data.dateOfBirth ? new Date(data.dateOfBirth as any).toISOString() : "",
+          gender: data.gender,
+          email: data.emailUsername,
+          place_of_birth: data.placeOfBirth,
+          country_of_birth: data.countryOfBirth,
+          country_of_citizenship: data.countryOfCitizenship,
+          country_of_residence: data.countryOfResidence,
+          postal_address_1: data.postalAddress1,
+          postal_address_2: data.postalAddress2,
+          po_box: data.poBox,
+          postcode: data.postcode,
+          city: data.city,
+          mobile_number: data.mobileNumber,
+          phone: data.mobileNumber,
+          home_language: data.homeLanguage,
+          planning_country: data.planningCountry,
+          current_situation: data.currentSituation,
+          reason_for_taking: data.reasonForTaking,
+          study_level: data.studyLevel,
+          occupation_sector: data.occupationSector,
+          id_type: (data.idType as string) === "emirates_id" ? "emirates" : data.idType,
+          id_number: data.idNumber,
+          id_country_of_issue: data.idCountryOfIssue,
+          selected_course: data.selectedCourse,
+          selected_workshop: data.selectedWorkshop,
+          payment_methods: (formData as any).paymentMethod,
+          exam_time: data.examTime,
+          exam_fee: pricing.baseFee,
+          total_amount: total,
+          exam_date: data.examDate ? new Date(data.examDate as any).toISOString() : "",
+          id_expiry_date: data.idExpiryDate ? new Date(data.idExpiryDate as any).toISOString() : "",
+          id_document: idDocumentUrl,
+          nationality: data.countryOfCitizenship,
+        });
+      } catch (error: any) {
+        console.error("Form submission error:", error);
+        toast.error(error?.message || "Something went wrong during submission.", { id: "pte-submit" });
+      }
     }
   };
 

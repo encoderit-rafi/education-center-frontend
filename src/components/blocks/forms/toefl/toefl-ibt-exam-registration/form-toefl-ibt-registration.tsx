@@ -6,11 +6,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "@/components/ui/form";
 import { languages } from "@/lib/languages-data";
 import { ToeflIbtSchema, type TToeflIbtSchema } from "./_type/toefl-ibt";
-import { useMutation } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import api from "@/axios";
 import { format } from "date-fns";
 import { GlobalReviewStep, ReviewSummaryGrid } from "@/components/blocks/forms/global-review-step";
 import { PriceDisplay } from "@/components/ui/price-display";
+import { toast } from "sonner";
 
 // Import Steps
 import { TermsStep } from "./steps/terms-step";
@@ -50,8 +51,23 @@ export const WORKSHOPS_DATA = {
 
 import { ielts_general_courses as COURSES_DATA } from "@/lib/data";
 
-export default function FormTOEFLIBTRegistration() {
+interface FormProps {
+    examId?: string;
+}
+
+export default function FormTOEFLIBTRegistration({ examId: initialExamId }: FormProps = {}) {
     const [currentStep, setCurrentStep] = useState(0); // 0: Terms, 1: Date, 2: Form, 3: Review
+
+    const { data: examDetailResponse } = useQuery({
+        queryKey: ["exam-detail", "toefl-ibt"],
+        queryFn: async () => {
+            const response = await api.get("/exams/toefl-ibt");
+            return response.data;
+        },
+        enabled: !initialExamId,
+    });
+
+    const examId = initialExamId || examDetailResponse?.data?.id;
 
     const form = useForm<TToeflIbtSchema>({
         resolver: zodResolver(ToeflIbtSchema),
@@ -180,13 +196,16 @@ export default function FormTOEFLIBTRegistration() {
         onSuccess: (response) => {
             const checkoutUrl = response.data?.data?.checkoutUrl;
             if (checkoutUrl) {
+                toast.success("Redirecting to checkout...", { id: "toefl-submit" });
                 window.location.href = checkoutUrl;
             } else {
                 console.error("Checkout URL not found in response");
+                toast.error("Checkout URL not found in server response.", { id: "toefl-submit" });
             }
         },
-        onError: (error) => {
+        onError: (error: any) => {
             console.error("Payment initiation failed:", error);
+            toast.error(error?.response?.data?.message || "Payment initiation failed.", { id: "toefl-submit" });
         },
     });
 
@@ -195,6 +214,7 @@ export default function FormTOEFLIBTRegistration() {
             api.post("/exam-bookings", newBooking),
         onSuccess: (response) => {
             const bookingId = response.data?.data?.id;
+            toast.loading("Initiating payment...", { id: "toefl-submit" });
             paymentMutation.mutate({
                 booking_type: "exam_booking",
                 booking_id: bookingId,
@@ -203,54 +223,106 @@ export default function FormTOEFLIBTRegistration() {
                 currency: "AED",
             });
         },
-        onError: (error) => {
+        onError: (error: any) => {
             console.error("Booking failed:", error);
+            toast.error(error?.response?.data?.message || "Exam booking failed.", { id: "toefl-submit" });
         },
     });
 
-    const handleFormSubmit: SubmitHandler<TToeflIbtSchema> = (data) => {
+    const handleFormSubmit: SubmitHandler<TToeflIbtSchema> = async (data) => {
         if (currentStep < 3) {
             goToStep(3);
         } else {
-            bookingMutation.mutate({
-                exam_id: "toefl-ibt",
-                given_names: data.givenNames,
-                middle_name: data.middleName,
-                surnames: data.surnames,
-                date_of_birth: data.dateOfBirth ? new Date(data.dateOfBirth as any).toISOString() : "",
-                gender: data.gender,
-                email: data.email,
-                phone_number: data.phoneNumber,
-                country: data.country,
-                street_address_1: data.streetAddress1,
-                street_address_2: data.streetAddress2,
-                city: data.city,
-                state: data.state,
-                postal_code: data.postalCode,
-                id_type: data.idType,
-                id_number: data.idNumber,
-                nationality: data.nationality,
-                taken_before: data.takenBefore,
-                less_than_two_years: data.lessThanTwoYears,
-                existing_account: data.existingAccount,
-                first_language: data.firstLanguage === "Other" ? data.firstLanguageOther : data.firstLanguage,
-                years_studying_english: data.yearsStudyingEnglish,
-                education_level: data.educationLevel,
-                next_level_of_study: data.nextLevelOfStudy === "Other" ? data.nextLevelOfStudyOther : data.nextLevelOfStudy,
-                desired_field_of_study: data.desiredFieldOfStudy === "Other" ? data.desiredFieldOfStudyOther : data.desiredFieldOfStudy,
-                reasons_for_taking_toefl: data.reasonsForTakingToefl,
-                ets_products_interest: data.etsProductsInterest,
-                occupation_level: data.occupationLevel,
-                occupation_sector: data.occupationSector,
-                reason_for_taking_test: data.reasonsForTakingToefl || "",
-                destination_country: data.destinationCountry,
-                marketing_preference: data.marketingPreference,
-                selected_course: data.selectedCourse,
-                selected_workshop: data.selectedWorkshop,
-                payment_methods: data.paymentMethod,
-                exam_time_slot: data.examTimeSlot,
-                total_amount: total,
-            });
+            try {
+                toast.loading("Uploading ID document...", { id: "toefl-submit" });
+
+                let idDocumentUrl = "";
+                if (data.idDocument instanceof File) {
+                    const uploadFormData = new FormData();
+                    uploadFormData.append("file", data.idDocument);
+
+                    const uploadRes = await api.post("/files/upload", uploadFormData, {
+                        headers: {
+                            "Content-Type": "multipart/form-data",
+                        },
+                    });
+
+                    const relativeUrl = uploadRes.data?.url;
+                    if (!relativeUrl) {
+                        throw new Error("Failed to upload identity document.");
+                    }
+
+                    const apiBase = api.defaults.baseURL || "https://vote.encoder-test-vpn.space/api/v1";
+                    const apiHost = apiBase.replace("/api/v1", "");
+                    idDocumentUrl = relativeUrl.startsWith("http")
+                        ? relativeUrl
+                        : `${apiHost}${relativeUrl}`;
+                }
+
+                if (!examId) {
+                    toast.error("Exam details are still loading. Please try again in a moment.", { id: "toefl-submit" });
+                    return;
+                }
+
+                toast.loading("Submitting booking request...", { id: "toefl-submit" });
+
+                bookingMutation.mutate({
+                    exam_id: examId,
+                    test_module: "TOEFL iBT",
+                    given_names: data.givenNames,
+                    first_name: data.givenNames,
+                    middle_name: data.middleName,
+                    surnames: data.surnames,
+                    last_name: data.surnames || "",
+                    date_of_birth: data.dateOfBirth ? new Date(data.dateOfBirth as any).toISOString() : "",
+                    gender: data.gender,
+                    email: data.email,
+                    mobile_number: data.phoneNumber,
+                    phone: data.phoneNumber,
+                    residence_country: data.country,
+                    country: data.country,
+                    postal_address_1: data.streetAddress1,
+                    postal_address_2: data.streetAddress2,
+                    city: data.city,
+                    state: data.state,
+                    postcode: data.postalCode,
+                    po_box: data.poBox,
+                    id_type: data.idType === "emirates_id" ? "emirates" : (data.idType === "passport" ? "passport" : (data.idType || "passport")),
+                    id_number: data.idNumber,
+                    id_expiry_date: data.idExpiryDate
+                        ? new Date(data.idExpiryDate as any).toISOString()
+                        : "",
+                    id_document: idDocumentUrl,
+                    nationality: data.nationality,
+                    taken_before: data.takenBefore,
+                    less_than_two_years: data.lessThanTwoYears,
+                    existing_account: data.existingAccount,
+                    first_language: data.firstLanguage === "Other" ? data.firstLanguageOther : data.firstLanguage,
+                    years_studying_english: data.yearsStudyingEnglish,
+                    education_level: data.educationLevel,
+                    next_level_of_study: data.nextLevelOfStudy === "Other" ? data.nextLevelOfStudyOther : data.nextLevelOfStudy,
+                    desired_field_of_study: data.desiredFieldOfStudy === "Other" ? data.desiredFieldOfStudyOther : data.desiredFieldOfStudy,
+                    reasons_for_taking_toefl: data.reasonsForTakingToefl,
+                    ets_products_interest: data.etsProductsInterest,
+                    occupation_level: data.occupationLevel,
+                    occupation_sector: data.occupationSector,
+                    reason_for_taking_test: data.reasonsForTakingToefl || "",
+                    destination_country: data.destinationCountry,
+                    marketing_preference: data.marketingPreference,
+                    selected_course: data.selectedCourse,
+                    selected_workshop: data.selectedWorkshop,
+                    payment_methods: formData.paymentMethod || data.paymentMethod,
+                    exam_time_slot: data.examTimeSlot,
+                    exam_fee: (pricing.baseFeeAED + pricing.expressFeeAED) || 1270,
+                    total_amount: total,
+                    exam_date: data.examDate
+                        ? new Date(data.examDate as any).toISOString()
+                        : "",
+                });
+            } catch (error: any) {
+                console.error("Form submission error:", error);
+                toast.error(error?.message || "Something went wrong during submission.", { id: "toefl-submit" });
+            }
         }
     };
 
