@@ -20,7 +20,7 @@ import { PteHomeUKVISchema, type TPteHomeUKVISchema } from "./_type";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import api from "@/axios";
 
-import { ielts_general_courses as COURSES_DATA } from "@/lib/data";
+
 
 const PTE_UKVI_WORKSHOPS = [
   { id: "workshop_2", name: "Workshop 2 Hours", price: 600 },
@@ -49,6 +49,54 @@ export default function FormPTEHomeUKVIRegistration({ examId: initialExamId }: F
   });
 
   const examId = initialExamId || examDetailResponse?.data?.id;
+
+  const { data: courseDetailResponse } = useQuery({
+    queryKey: ["course-detail", "pte"],
+    queryFn: async () => {
+      const response = await api.get("/courses/pte");
+      return response.data;
+    },
+  });
+
+  const courseDetail = courseDetailResponse?.data;
+  const dbPackages = courseDetail?.packages || [];
+  const dbWorkshops = courseDetail?.workshops || [];
+
+  const coursesData = dbPackages.map((pkg: any) => {
+    const basePrice = parseFloat(pkg.price) || 0;
+    const discount = parseFloat(pkg.discountValue) || 0;
+    const discountedPrice =
+      pkg.discountType === "PERCENTAGE"
+        ? Math.round(basePrice * (1 - discount / 100))
+        : basePrice - discount;
+
+    return {
+      id: pkg.id,
+      name: pkg.name,
+      price: basePrice,
+      discounted_price: discountedPrice,
+      currency: "AED",
+    };
+  });
+
+  const workshopsData = (dbWorkshops || []).reduce((acc: any, w: any) => {
+    const basePrice = parseFloat(w.price) || 0;
+    const discount = parseFloat(w.discountValue) || 0;
+    const discountedPrice =
+      w.discountType === "PERCENTAGE"
+        ? Math.round(basePrice * (1 - discount / 100))
+        : basePrice - discount;
+
+    acc[w.id] = {
+      id: w.id,
+      name: w.name,
+      duration: w.duration,
+      price: discountedPrice,
+      currency: "AED",
+    };
+    return acc;
+  }, {});
+  
 
   const form = useForm<TPteHomeUKVISchema>({
     resolver: zodResolver(PteHomeUKVISchema),
@@ -117,7 +165,7 @@ export default function FormPTEHomeUKVIRegistration({ examId: initialExamId }: F
     const serviceFee = SERVICE_FEE;
     
     const selectedCourseData = formData.selectedCourse
-      ? COURSES_DATA.find((c: any) => c.id === formData.selectedCourse)
+      ? coursesData.find((c: any) => c.id === formData.selectedCourse)
       : null;
     const coursePrice = selectedCourseData
       ? selectedCourseData.discounted_price ?? selectedCourseData.price
@@ -387,7 +435,7 @@ export default function FormPTEHomeUKVIRegistration({ examId: initialExamId }: F
               onInvalid={onInvalid}
               onBack={() => goToStep(1)}
               languages={languages}
-              coursesData={COURSES_DATA}
+              coursesData={coursesData}
               workshopsData={PTE_UKVI_WORKSHOPS}
             />
           )}
@@ -405,7 +453,7 @@ export default function FormPTEHomeUKVIRegistration({ examId: initialExamId }: F
               total={total}
               selectedCourseData={
                 formData.selectedCourse
-                  ? COURSES_DATA.find((c: any) => c.id === formData.selectedCourse)
+                  ? coursesData.find((c: any) => c.id === formData.selectedCourse)
                   : undefined
               }
               selectedWorkshopData={formData.selectedWorkshop ? PTE_UKVI_WORKSHOPS.find(w => w.id === formData.selectedWorkshop) : undefined}

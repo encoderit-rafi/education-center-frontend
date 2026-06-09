@@ -19,38 +19,9 @@ import { DateStep } from "./steps/date-step";
 import { RegistrationFormStep } from "./steps/registration-form-step";
 import { ReviewStep } from "./steps/review-step";
 
-export const WORKSHOPS_DATA = {
-  workshop_2_hours: {
-    id: "workshop_2_hours",
-    name: "Workshop 2 Hours",
-    duration: "2 hours",
-    price: 600,
-    currency: "AED",
-  },
-  workshop_4_hours: {
-    id: "workshop_4_hours",
-    name: "Workshop 4 Hours",
-    duration: "4 hours",
-    price: 1000,
-    currency: "AED",
-  },
-  workshop_6_hours: {
-    id: "workshop_6_hours",
-    name: "Workshop 6 Hours",
-    duration: "6 hours",
-    price: 1350,
-    currency: "AED",
-  },
-  workshop_8_hours: {
-    id: "workshop_8_hours",
-    name: "Workshop 8 Hours",
-    duration: "8 hours",
-    price: 1600,
-    currency: "AED",
-  },
-};
 
-import { ielts_general_courses as COURSES_DATA } from "@/lib/data";
+
+
 
 interface FormProps {
   examId?: string;
@@ -70,6 +41,54 @@ export default function FormSELTC1Registration({ examId: initialExamId }: FormPr
   });
 
   const examId = initialExamId || examDetailResponse?.data?.id;
+
+  const { data: courseDetailResponse } = useQuery({
+    queryKey: ["course-detail", "selt"],
+    queryFn: async () => {
+      const response = await api.get("/courses/selt");
+      return response.data;
+    },
+  });
+
+  const courseDetail = courseDetailResponse?.data;
+  const dbPackages = courseDetail?.packages || [];
+  const dbWorkshops = courseDetail?.workshops || [];
+
+  const coursesData = dbPackages.map((pkg: any) => {
+    const basePrice = parseFloat(pkg.price) || 0;
+    const discount = parseFloat(pkg.discountValue) || 0;
+    const discountedPrice =
+      pkg.discountType === "PERCENTAGE"
+        ? Math.round(basePrice * (1 - discount / 100))
+        : basePrice - discount;
+
+    return {
+      id: pkg.id,
+      name: pkg.name,
+      price: basePrice,
+      discounted_price: discountedPrice,
+      currency: "AED",
+    };
+  });
+
+  const workshopsData = (dbWorkshops || []).reduce((acc: any, w: any) => {
+    const basePrice = parseFloat(w.price) || 0;
+    const discount = parseFloat(w.discountValue) || 0;
+    const discountedPrice =
+      w.discountType === "PERCENTAGE"
+        ? Math.round(basePrice * (1 - discount / 100))
+        : basePrice - discount;
+
+    acc[w.id] = {
+      id: w.id,
+      name: w.name,
+      duration: w.duration,
+      price: discountedPrice,
+      currency: "AED",
+    };
+    return acc;
+  }, {});
+  
   const examName = examDetailResponse?.data?.name || Object.values(EXAM_IDS_DATA).find(e => e.id === initialId)?.name || "SELT C1";
 
   const form = useForm<TSeltA1Schema>({
@@ -141,13 +160,13 @@ export default function FormSELTC1Registration({ examId: initialExamId }: FormPr
     const baseFee = levelFees[initialId] || 870;
     const serviceFee = 150;
     const selectedCourseData = formData.selectedCourse
-      ? COURSES_DATA.find((c: any) => c.id === formData.selectedCourse)
+      ? coursesData.find((c: any) => c.id === formData.selectedCourse)
       : null;
     const coursePrice = selectedCourseData
       ? selectedCourseData.discounted_price ?? selectedCourseData.price
       : 0;
     const workshopPrice = formData.selectedWorkshop
-      ? (WORKSHOPS_DATA as any)[formData.selectedWorkshop].price
+      ? (workshopsData as any)[formData.selectedWorkshop].price
       : 0;
 
     const subtotal = baseFee + serviceFee + coursePrice + workshopPrice;
@@ -337,8 +356,8 @@ export default function FormSELTC1Registration({ examId: initialExamId }: FormPr
               onInvalid={onInvalid}
               onBack={() => goToStep(1)}
               languages={languages}
-              coursesData={COURSES_DATA}
-              workshopsData={WORKSHOPS_DATA}
+              coursesData={coursesData}
+              workshopsData={workshopsData}
             />
           )}
 
@@ -353,8 +372,8 @@ export default function FormSELTC1Registration({ examId: initialExamId }: FormPr
               baseFee={pricing.baseFee}
               serviceFee={pricing.serviceFee}
               total={total}
-              selectedCourseData={formData.selectedCourse ? COURSES_DATA.find((c: any) => c.id === formData.selectedCourse) : undefined}
-              selectedWorkshopData={formData.selectedWorkshop ? (WORKSHOPS_DATA as any)[formData.selectedWorkshop] : undefined}
+              selectedCourseData={formData.selectedCourse ? coursesData.find((c: any) => c.id === formData.selectedCourse) : undefined}
+              selectedWorkshopData={formData.selectedWorkshop ? (workshopsData as any)[formData.selectedWorkshop] : undefined}
               reviewStepNumber={4}
               paymentStepNumber={5}
             >

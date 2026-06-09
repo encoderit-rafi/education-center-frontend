@@ -9,7 +9,7 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import api from "@/axios";
 import { toast } from "sonner";
 import { languages } from "@/lib/languages-data";
-import { ielts_general_courses as coursesData, workshops as workshopsData } from "@/lib/data";
+// Courses and workshops data loaded dynamically from /courses/ielts API
 import { format } from "date-fns";
 import { User, ShieldCheck, Globe } from "lucide-react";
 import { GlobalReviewStep, ReviewSummaryGrid } from "@/components/blocks/forms/global-review-step";
@@ -39,6 +39,52 @@ export default function FormIELTSGeneralRegistration({ examId: initialExamId }: 
   });
 
   const examId = initialExamId || examDetailResponse?.data?.id;
+
+  const { data: courseDetailResponse } = useQuery({
+    queryKey: ["course-detail", "ielts"],
+    queryFn: async () => {
+      const response = await api.get("/courses/ielts");
+      return response.data;
+    },
+  });
+
+  const courseDetail = courseDetailResponse?.data;
+  const dbPackages = courseDetail?.packages || [];
+  const dbWorkshops = courseDetail?.workshops || [];
+
+  const coursesData = dbPackages.map((pkg: any) => {
+    const basePrice = parseFloat(pkg.price) || 0;
+    const discount = parseFloat(pkg.discountValue) || 0;
+    const discountedPrice =
+      pkg.discountType === "PERCENTAGE"
+        ? Math.round(basePrice * (1 - discount / 100))
+        : basePrice - discount;
+
+    return {
+      id: pkg.id,
+      name: pkg.name,
+      price: basePrice,
+      discounted_price: discountedPrice,
+      currency: "AED",
+    };
+  });
+
+  const workshopsData = dbWorkshops.map((w: any) => {
+    const basePrice = parseFloat(w.price) || 0;
+    const discount = parseFloat(w.discountValue) || 0;
+    const discountedPrice =
+      w.discountType === "PERCENTAGE"
+        ? Math.round(basePrice * (1 - discount / 100))
+        : basePrice - discount;
+
+    return {
+      id: w.id,
+      name: w.name,
+      duration: w.duration,
+      price: discountedPrice,
+      currency: "AED",
+    };
+  });
 
   const form = useForm<TIeltsGeneralSchema>({
     resolver: zodResolver(IeltsGeneralSchema),
@@ -99,8 +145,8 @@ export default function FormIELTSGeneralRegistration({ examId: initialExamId }: 
   const formData = watch();
 
   // Pricing Logic
-  const selectedCourse = coursesData.find((c) => c.id === formData.selectedCourse);
-  const selectedWorkshop = workshopsData.find((w) => w.id === formData.selectedWorkshop);
+  const selectedCourse = coursesData.find((c: any) => c.id === formData.selectedCourse);
+  const selectedWorkshop = workshopsData.find((w: any) => w.id === formData.selectedWorkshop);
 
   const coursePrice = selectedCourse ? (selectedCourse as any).discounted_price ?? (selectedCourse as any).price : 0;
   const workshopPrice = selectedWorkshop?.price || 0;

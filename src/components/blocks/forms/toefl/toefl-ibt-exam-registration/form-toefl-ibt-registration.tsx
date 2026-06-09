@@ -18,38 +18,7 @@ import { TermsStep } from "./steps/terms-step";
 import { DateStep } from "./steps/date-step";
 import { RegistrationFormStep } from "./steps/registration-form-step";
 
-export const WORKSHOPS_DATA = {
-    workshop_2_hours: {
-        id: "workshop_2_hours",
-        name: "Workshop 2 Hours",
-        duration: "2 hours",
-        price: 600,
-        currency: "AED",
-    },
-    workshop_4_hours: {
-        id: "workshop_4_hours",
-        name: "Workshop 4 Hours",
-        duration: "4 hours",
-        price: 1000,
-        currency: "AED",
-    },
-    workshop_6_hours: {
-        id: "workshop_6_hours",
-        name: "Workshop 6 Hours",
-        duration: "6 hours",
-        price: 1350,
-        currency: "AED",
-    },
-    workshop_8_hours: {
-        id: "workshop_8_hours",
-        name: "Workshop 8 Hours",
-        duration: "8 hours",
-        price: 1600,
-        currency: "AED",
-    },
-};
-
-import { ielts_general_courses as COURSES_DATA } from "@/lib/data";
+// Static courses and workshops data removed to be loaded dynamically from the API
 
 interface FormProps {
     examId?: string;
@@ -68,6 +37,53 @@ export default function FormTOEFLIBTRegistration({ examId: initialExamId }: Form
     });
 
     const examId = initialExamId || examDetailResponse?.data?.id;
+
+    const { data: courseDetailResponse } = useQuery({
+        queryKey: ["course-detail", "toefl"],
+        queryFn: async () => {
+            const response = await api.get("/courses/toefl");
+            return response.data;
+        },
+    });
+
+    const courseDetail = courseDetailResponse?.data;
+    const dbPackages = courseDetail?.packages || [];
+    const dbWorkshops = courseDetail?.workshops || [];
+
+    const coursesData = dbPackages.map((pkg: any) => {
+        const basePrice = parseFloat(pkg.price) || 0;
+        const discount = parseFloat(pkg.discountValue) || 0;
+        const discountedPrice =
+            pkg.discountType === "PERCENTAGE"
+                ? Math.round(basePrice * (1 - discount / 100))
+                : basePrice - discount;
+
+        return {
+            id: pkg.id,
+            name: pkg.name,
+            price: basePrice,
+            discounted_price: discountedPrice,
+            currency: "AED",
+        };
+    });
+
+    const workshopsData = (dbWorkshops || []).reduce((acc: any, w: any) => {
+        const basePrice = parseFloat(w.price) || 0;
+        const discount = parseFloat(w.discountValue) || 0;
+        const discountedPrice =
+            w.discountType === "PERCENTAGE"
+                ? Math.round(basePrice * (1 - discount / 100))
+                : basePrice - discount;
+
+        acc[w.id] = {
+            id: w.id,
+            name: w.name,
+            duration: w.duration,
+            price: discountedPrice,
+            currency: "AED",
+        };
+        return acc;
+    }, {});
 
     const form = useForm<TToeflIbtSchema>({
         resolver: zodResolver(ToeflIbtSchema),
@@ -153,7 +169,7 @@ export default function FormTOEFLIBTRegistration({ examId: initialExamId }: Form
 
         // Course fee (in AED)
         const selectedCourseData = formData.selectedCourse
-            ? COURSES_DATA.find((c: any) => c.id === formData.selectedCourse)
+            ? coursesData.find((c: any) => c.id === formData.selectedCourse)
             : null;
         const coursePriceAED = selectedCourseData
             ? (selectedCourseData.discounted_price ?? selectedCourseData.price)
@@ -161,7 +177,7 @@ export default function FormTOEFLIBTRegistration({ examId: initialExamId }: Form
 
         // Workshop fee (in AED)
         const workshopPriceAED = formData.selectedWorkshop
-            ? (WORKSHOPS_DATA as any)[formData.selectedWorkshop].price
+            ? (workshopsData as any)[formData.selectedWorkshop]?.price || 0
             : 0;
 
         // Convert Course & Workshop fees to USD for display purposes
@@ -372,8 +388,8 @@ export default function FormTOEFLIBTRegistration({ examId: initialExamId }: Form
                             onInvalid={onInvalid}
                             onBack={() => goToStep(1)}
                             languages={languages}
-                            coursesData={COURSES_DATA}
-                            workshopsData={WORKSHOPS_DATA}
+                            coursesData={coursesData}
+                            workshopsData={workshopsData}
                         />
                     )}
 
@@ -388,8 +404,8 @@ export default function FormTOEFLIBTRegistration({ examId: initialExamId }: Form
                             baseFee={pricing.baseFeeAED}
                             serviceFee={pricing.expressFeeAED}
                             total={pricing.totalAED}
-                            selectedCourseData={formData.selectedCourse ? COURSES_DATA.find((c: any) => c.id === formData.selectedCourse) : undefined}
-                            selectedWorkshopData={formData.selectedWorkshop ? (WORKSHOPS_DATA as any)[formData.selectedWorkshop] : undefined}
+                            selectedCourseData={formData.selectedCourse ? coursesData.find((c: any) => c.id === formData.selectedCourse) : undefined}
+                            selectedWorkshopData={formData.selectedWorkshop ? (workshopsData as any)[formData.selectedWorkshop] : undefined}
                             reviewStepNumber={3}
                             paymentStepNumber={4}
                             customOrderSummary={
@@ -413,7 +429,7 @@ export default function FormTOEFLIBTRegistration({ examId: initialExamId }: Form
                                     {formData.selectedCourse && pricing.coursePriceAED > 0 && (
                                         <div className="flex justify-between text-sm items-center">
                                             <span className="text-slate-500 font-medium">
-                                                Course: {COURSES_DATA.find((c: any) => c.id === formData.selectedCourse)?.name}
+                                                Course: {coursesData.find((c: any) => c.id === formData.selectedCourse)?.name}
                                             </span>
                                             <span className="font-bold text-slate-900 inline-flex items-center gap-1">
                                                 ${pricing.coursePriceUSD} <span className="text-slate-400 font-normal text-xs inline-flex items-center gap-0.5">(<PriceDisplay amount={pricing.coursePriceAED} minimumFractionDigits={0} maximumFractionDigits={0} className="text-slate-400 font-normal text-xs" />)</span>
@@ -424,7 +440,7 @@ export default function FormTOEFLIBTRegistration({ examId: initialExamId }: Form
                                     {formData.selectedWorkshop && pricing.workshopPriceAED > 0 && (
                                         <div className="flex justify-between text-sm items-center">
                                             <span className="text-slate-500 font-medium">
-                                                Workshop: {(WORKSHOPS_DATA as any)[formData.selectedWorkshop]?.name}
+                                                Workshop: {(workshopsData as any)[formData.selectedWorkshop]?.name}
                                             </span>
                                             <span className="font-bold text-slate-900 inline-flex items-center gap-1">
                                                 ${pricing.workshopPriceUSD} <span className="text-slate-400 font-normal text-xs inline-flex items-center gap-0.5">(<PriceDisplay amount={pricing.workshopPriceAED} minimumFractionDigits={0} maximumFractionDigits={0} className="text-slate-400 font-normal text-xs" />)</span>

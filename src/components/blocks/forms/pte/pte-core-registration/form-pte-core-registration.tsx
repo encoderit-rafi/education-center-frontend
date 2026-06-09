@@ -20,14 +20,9 @@ import { PteCoreSchema, type TPteCoreSchema } from "./_type";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import api from "@/axios";
 
-import { ielts_general_courses as COURSES_DATA } from "@/lib/data";
 
-const PTE_CORE_WORKSHOPS = {
-  "2h": { id: "2h", name: "2 Hours Workshop", price: 600 },
-  "4h": { id: "4h", name: "4 Hours Workshop", price: 1000 },
-  "6h": { id: "6h", name: "6 Hours Workshop", price: 1350 },
-  "8h": { id: "8h", name: "8 Hours Workshop", price: 1600 },
-};
+
+
 
 const EXAM_FEE = 1450;
 const SERVICE_FEE = 100;
@@ -49,6 +44,54 @@ export default function FormPTECoreRegistration({ examId: initialExamId }: FormP
   });
 
   const examId = initialExamId || examDetailResponse?.data?.id;
+
+  const { data: courseDetailResponse } = useQuery({
+    queryKey: ["course-detail", "pte"],
+    queryFn: async () => {
+      const response = await api.get("/courses/pte");
+      return response.data;
+    },
+  });
+
+  const courseDetail = courseDetailResponse?.data;
+  const dbPackages = courseDetail?.packages || [];
+  const dbWorkshops = courseDetail?.workshops || [];
+
+  const coursesData = dbPackages.map((pkg: any) => {
+    const basePrice = parseFloat(pkg.price) || 0;
+    const discount = parseFloat(pkg.discountValue) || 0;
+    const discountedPrice =
+      pkg.discountType === "PERCENTAGE"
+        ? Math.round(basePrice * (1 - discount / 100))
+        : basePrice - discount;
+
+    return {
+      id: pkg.id,
+      name: pkg.name,
+      price: basePrice,
+      discounted_price: discountedPrice,
+      currency: "AED",
+    };
+  });
+
+  const workshopsData = (dbWorkshops || []).reduce((acc: any, w: any) => {
+    const basePrice = parseFloat(w.price) || 0;
+    const discount = parseFloat(w.discountValue) || 0;
+    const discountedPrice =
+      w.discountType === "PERCENTAGE"
+        ? Math.round(basePrice * (1 - discount / 100))
+        : basePrice - discount;
+
+    acc[w.id] = {
+      id: w.id,
+      name: w.name,
+      duration: w.duration,
+      price: discountedPrice,
+      currency: "AED",
+    };
+    return acc;
+  }, {});
+  
 
   const form = useForm<TPteCoreSchema>({
     resolver: zodResolver(PteCoreSchema),
@@ -117,13 +160,13 @@ export default function FormPTECoreRegistration({ examId: initialExamId }: FormP
     const serviceFee = SERVICE_FEE;
     
     const selectedCourseData = formData.selectedCourse
-      ? COURSES_DATA.find((c: any) => c.id === formData.selectedCourse)
+      ? coursesData.find((c: any) => c.id === formData.selectedCourse)
       : null;
     const coursePrice = selectedCourseData
       ? selectedCourseData.discounted_price ?? selectedCourseData.price
       : 0;
 
-    const selectedWorkshopData = formData.selectedWorkshop ? (PTE_CORE_WORKSHOPS as any)[formData.selectedWorkshop] : null;
+    const selectedWorkshopData = formData.selectedWorkshop ? (workshopsData as any)[formData.selectedWorkshop] : null;
     const workshopPrice = selectedWorkshopData?.price || 0;
     
     const subtotal = baseFee + serviceFee + coursePrice + workshopPrice;
@@ -311,8 +354,8 @@ export default function FormPTECoreRegistration({ examId: initialExamId }: FormP
               onInvalid={onInvalid}
               onBack={() => goToStep(1)}
               languages={languages}
-              coursesData={COURSES_DATA}
-              workshopsData={PTE_CORE_WORKSHOPS}
+              coursesData={coursesData}
+              workshopsData={workshopsData}
             />
           )}
 
@@ -329,10 +372,10 @@ export default function FormPTECoreRegistration({ examId: initialExamId }: FormP
               total={total}
               selectedCourseData={
                 formData.selectedCourse
-                  ? COURSES_DATA.find((c: any) => c.id === formData.selectedCourse)
+                  ? coursesData.find((c: any) => c.id === formData.selectedCourse)
                   : undefined
               }
-              selectedWorkshopData={formData.selectedWorkshop ? (PTE_CORE_WORKSHOPS as any)[formData.selectedWorkshop] : undefined}
+              selectedWorkshopData={formData.selectedWorkshop ? (workshopsData as any)[formData.selectedWorkshop] : undefined}
               reviewStepNumber={3}
               paymentStepNumber={4}
             >
