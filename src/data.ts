@@ -163,43 +163,43 @@ export const NAV_TEST_DATES_DATA = [
   EXAM_IDS_DATA.selt,
 ];
 
-// export const TEST_DATES_CARDS_DATA = [
-//   {
-//     ...EXAM_IDS_DATA.ielts,
-//     description:
-//       "Check upcoming IELTS test dates for Academic and General Training modules in Sharjah and across the UAE.",
-//   },
-//   {
-//     ...EXAM_IDS_DATA.toefl,
-//     description:
-//       "Find available TOEFL iBT test sessions. Select your preferred date and secure your seat for the internet-based test.",
-//   },
-//   {
-//     ...EXAM_IDS_DATA.pte,
-//     description:
-//       "View real-time availability for PTE Academic and PTE UKVI tests. Fast results and frequent testing windows.",
-//   },
-//   {
-//     ...EXAM_IDS_DATA.celpip_general,
-//     description:
-//       "Upcoming CELPIP General test dates for Canadian immigration and citizenship applications.",
-//   },
-//   {
-//     ...EXAM_IDS_DATA.cael,
-//     description:
-//       "Find CAEL test dates for study and professional registration in Canada. Choose from our available sessions.",
-//   },
-//   {
-//     ...EXAM_IDS_DATA.selt,
-//     description:
-//       "Secure English Language Test (SELT) dates for UK visa applications. View upcoming speaking, listening, reading, and writing slots.",
-//   },
-//   {
-//     ...EXAM_IDS_DATA.oet,
-//     description:
-//       "Check available OET test dates for healthcare professionals. Secure your seat for Medicine, Nursing, and other healthcare disciplines.",
-//   },
-// ];
+export const TEST_DATES_CARDS_DATA = [
+  {
+    ...EXAM_IDS_DATA.ielts,
+    description:
+      "Check upcoming IELTS test dates for Academic and General Training modules in Sharjah and across the UAE.",
+  },
+  {
+    ...EXAM_IDS_DATA.toefl,
+    description:
+      "Find available TOEFL iBT test sessions. Select your preferred date and secure your seat for the internet-based test.",
+  },
+  {
+    ...EXAM_IDS_DATA.pte,
+    description:
+      "View real-time availability for PTE Academic and PTE UKVI tests. Fast results and frequent testing windows.",
+  },
+  {
+    ...EXAM_IDS_DATA.celpip_general,
+    description:
+      "Upcoming CELPIP General test dates for Canadian immigration and citizenship applications.",
+  },
+  {
+    ...EXAM_IDS_DATA.cael,
+    description:
+      "Find CAEL test dates for study and professional registration in Canada. Choose from our available sessions.",
+  },
+  {
+    ...EXAM_IDS_DATA.selt,
+    description:
+      "Secure English Language Test (SELT) dates for UK visa applications. View upcoming speaking, listening, reading, and writing slots.",
+  },
+  {
+    ...EXAM_IDS_DATA.oet,
+    description:
+      "Check available OET test dates for healthcare professionals. Secure your seat for Medicine, Nursing, and other healthcare disciplines.",
+  },
+];
 // export const NAV_BOOK_EXAMS_DATA = [
 //   EXAM_IDS_DATA.ielts,
 //   EXAM_IDS_DATA.toefl,
