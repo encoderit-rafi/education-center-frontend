@@ -294,14 +294,13 @@ export default async function ExamPreparationDynamicPage({
                       </div>
 
                       <Link
-                        href={`/workshop-registration?examId=${mappedExamId}&courseId=${course.id}&workshopId=${workshop.id}&price=${discountedPrice}&currency=AED`}
+                        href={`/exam-preparation-courses/${slug}/workshops/${workshop.id}`}
                         className={cn(
                           buttonVariants(),
                           "font-bold h-11 shadow-sm px-4 w-full flex items-center justify-center gap-2 group-hover:bg-primary group-hover:text-white transition-all duration-300",
                         )}
                       >
-                        {/* <Calendar className="size-4" /> */}
-                        <span>Book</span>
+                        <span>View Details</span>
                       </Link>
                     </div>
                   </BaseCard>
