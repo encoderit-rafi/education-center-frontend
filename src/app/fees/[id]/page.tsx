@@ -110,7 +110,7 @@ export default async function FeesDynamicPage({
   let workshops: WorkshopDetail[] = [];
   try {
     const courseRes = await api.get<ApiResponse<CourseDetail>>(
-      `/courses/${slug}`,
+      `/courses/${slug}?sort_by=orderIndex&sort_order=desc`,
     );
 
     if (courseRes.data.success) {

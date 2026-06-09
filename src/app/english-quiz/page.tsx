@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
+import { useRouter } from "next/navigation";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -8,14 +9,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import { Trophy, ArrowRight, User, Mail, Info, XIcon, Phone, MapPin, Globe } from "lucide-react";
+import { User, Mail, MapPin } from "lucide-react";
+import { PhoneInput } from "@/components/ui/phone-input";
+import { CountryDropdown } from "@/components/ui/country-dropdown";
 import {
   Field,
   FieldLabel,
@@ -28,102 +24,574 @@ import Stepper from "@/components/stepper";
 const QUIZ_QUESTIONS = [
   {
     id: 1,
-    question: "Which sentence is grammatically correct?",
+    question: "_____ name is Robert.",
     options: [
-      { id: "a", text: "She don't like coffee.", points: 0 },
-      { id: "b", text: "She doesn't likes coffee.", points: 0 },
-      { id: "c", text: "She doesn't like coffee.", points: 10 },
-      { id: "d", text: "She not like coffee.", points: 0 },
+      { id: "a", text: "Me", points: 0 },
+      { id: "b", text: "I", points: 0 },
+      { id: "c", text: "My", points: 1 },
     ],
   },
   {
     id: 2,
-    question: "Choose the correct synonym for 'Enormous':",
+    question: "They _____ from Spain.",
     options: [
-      { id: "a", text: "Tiny", points: 0 },
-      { id: "b", text: "Huge", points: 10 },
-      { id: "c", text: "Weak", points: 0 },
-      { id: "d", text: "Bright", points: 0 },
+      { id: "a", text: "is", points: 0 },
+      { id: "b", text: "are", points: 1 },
+      { id: "c", text: "do", points: 0 },
     ],
   },
   {
     id: 3,
-    question: "I have been living here ___ 2010.",
+    question: "_____ are you from?",
     options: [
-      { id: "a", text: "for", points: 0 },
-      { id: "b", text: "since", points: 10 },
-      { id: "c", text: "from", points: 0 },
-      { id: "d", text: "during", points: 0 },
+      { id: "a", text: "What", points: 0 },
+      { id: "b", text: "Who", points: 0 },
+      { id: "c", text: "Where", points: 1 },
     ],
   },
   {
     id: 4,
-    question: "What is the past participle of 'Write'?",
+    question: "What do you do? I’m _____ student.",
     options: [
-      { id: "a", text: "Wrote", points: 0 },
-      { id: "b", text: "Writing", points: 0 },
-      { id: "c", text: "Written", points: 10 },
-      { id: "d", text: "Writes", points: 0 },
+      { id: "a", text: "the", points: 0 },
+      { id: "b", text: "a", points: 1 },
+      { id: "c", text: "–-", points: 0 },
     ],
   },
   {
     id: 5,
-    question: "Identify the antonym of 'Generous':",
+    question: "Peter _____ at seven o’clock.",
     options: [
-      { id: "a", text: "Kind", points: 0 },
-      { id: "b", text: "Selfish", points: 10 },
-      { id: "c", text: "Rich", points: 0 },
-      { id: "d", text: "Polite", points: 0 },
+      { id: "a", text: "goes up", points: 0 },
+      { id: "b", text: "gets", points: 0 },
+      { id: "c", text: "gets up", points: 1 },
     ],
   },
   {
     id: 6,
-    question: "If I ___ you, I would take the job.",
+    question: "_____ you like this DVD?",
     options: [
-      { id: "a", text: "am", points: 0 },
-      { id: "b", text: "was", points: 0 },
-      { id: "c", text: "were", points: 10 },
-      { id: "d", text: "be", points: 0 },
+      { id: "a", text: "Are", points: 0 },
+      { id: "b", text: "Have", points: 0 },
+      { id: "c", text: "Do", points: 1 },
     ],
   },
   {
     id: 7,
-    question: "Which of these is a noun?",
+    question: "We _____ live in a flat.",
     options: [
-      { id: "a", text: "Quickly", points: 0 },
-      { id: "b", text: "Beautiful", points: 0 },
-      { id: "c", text: "Happiness", points: 10 },
-      { id: "d", text: "Run", points: 0 },
+      { id: "a", text: "don’t", points: 1 },
+      { id: "b", text: "hasn’t", points: 0 },
+      { id: "c", text: "doesn’t", points: 0 },
     ],
   },
   {
     id: 8,
-    question: "They ___ playing football when it started to rain.",
+    question: "_____ he play tennis?",
     options: [
-      { id: "a", text: "is", points: 0 },
-      { id: "b", text: "was", points: 0 },
-      { id: "c", text: "were", points: 10 },
-      { id: "d", text: "are", points: 0 },
+      { id: "a", text: "Where", points: 0 },
+      { id: "b", text: "Does", points: 1 },
+      { id: "c", text: "Do", points: 0 },
     ],
   },
   {
     id: 9,
-    question: "Choose the correctly spelled word:",
+    question: "We don’t have _____ butter.",
     options: [
-      { id: "a", text: "Accomodate", points: 0 },
-      { id: "b", text: "Accommodate", points: 10 },
-      { id: "c", text: "Acomodate", points: 0 },
-      { id: "d", text: "Acommodify", points: 0 },
+      { id: "a", text: "a", points: 0 },
+      { id: "b", text: "any", points: 1 },
+      { id: "c", text: "got", points: 0 },
     ],
   },
   {
     id: 10,
-    question: "The book is ___ the table.",
+    question: "_____ some money here.",
     options: [
-      { id: "a", text: "in", points: 0 },
-      { id: "b", text: "at", points: 0 },
-      { id: "c", text: "on", points: 10 },
-      { id: "d", text: "over", points: 0 },
+      { id: "a", text: "There’re", points: 0 },
+      { id: "b", text: "There", points: 0 },
+      { id: "c", text: "There’s", points: 1 },
+    ],
+  },
+  {
+    id: 11,
+    question: "Those shoes are very _____ .",
+    options: [
+      { id: "a", text: "expensive", points: 1 },
+      { id: "b", text: "a lot", points: 0 },
+      { id: "c", text: "cost", points: 0 },
+    ],
+  },
+  {
+    id: 12,
+    question: "They _____ at home yesterday.",
+    options: [
+      { id: "a", text: "was", points: 0 },
+      { id: "b", text: "are", points: 0 },
+      { id: "c", text: "were", points: 1 },
+    ],
+  },
+  {
+    id: 13,
+    question: "I _____ there for a long time.",
+    options: [
+      { id: "a", text: "lived", points: 1 },
+      { id: "b", text: "living", points: 0 },
+      { id: "c", text: "live", points: 0 },
+    ],
+  },
+  {
+    id: 14,
+    question: "He didn’t _____ glasses.",
+    options: [
+      { id: "a", text: "put", points: 0 },
+      { id: "b", text: "wear", points: 1 },
+      { id: "c", text: "take", points: 0 },
+    ],
+  },
+  {
+    id: 15,
+    question: "The restaurant was _____ busy.",
+    options: [
+      { id: "a", text: "very", points: 1 },
+      { id: "b", text: "a lot", points: 0 },
+      { id: "c", text: "many", points: 0 },
+    ],
+  },
+  {
+    id: 16,
+    question: "He _____ to Brazil on business.",
+    options: [
+      { id: "a", text: "go", points: 0 },
+      { id: "b", text: "goed", points: 0 },
+      { id: "c", text: "went", points: 1 },
+    ],
+  },
+  {
+    id: 17,
+    question: "Yesterday was the _____ of April.",
+    options: [
+      { id: "a", text: "third", points: 1 },
+      { id: "b", text: "three", points: 0 },
+      { id: "c", text: "day three", points: 0 },
+    ],
+  },
+  {
+    id: 18,
+    question: "I _____ play football at the weekend.",
+    options: [
+      { id: "a", text: "usually", points: 1 },
+      { id: "b", text: "use", points: 0 },
+      { id: "c", text: "usual", points: 0 },
+    ],
+  },
+  {
+    id: 19,
+    question: "I _____ in an armchair at the moment.",
+    options: [
+      { id: "a", text: "sitting", points: 0 },
+      { id: "b", text: "‘m sitting", points: 1 },
+      { id: "c", text: "sit", points: 0 },
+    ],
+  },
+  {
+    id: 20,
+    question: "My brother is older _____ me.",
+    options: [
+      { id: "a", text: "than", points: 1 },
+      { id: "b", text: "that", points: 0 },
+      { id: "c", text: "then", points: 0 },
+    ],
+  },
+  {
+    id: 21,
+    question: "The _____ have seen it before.",
+    options: [
+      { id: "a", text: "childs", points: 0 },
+      { id: "b", text: "child", points: 0 },
+      { id: "c", text: "children", points: 1 },
+    ],
+  },
+  {
+    id: 22,
+    question: "I can’t _____ another language.",
+    options: [
+      { id: "a", text: "speaking", points: 0 },
+      { id: "b", text: "speak", points: 1 },
+      { id: "c", text: "to speak", points: 0 },
+    ],
+  },
+  {
+    id: 23,
+    question: "_____ old is their car?",
+    options: [
+      { id: "a", text: "What", points: 0 },
+      { id: "b", text: "When", points: 0 },
+      { id: "c", text: "How", points: 1 },
+    ],
+  },
+  {
+    id: 24,
+    question: "Stephen _____ to visit his parents.",
+    options: [
+      { id: "a", text: "will", points: 0 },
+      { id: "b", text: "going", points: 0 },
+      { id: "c", text: "is going", points: 1 },
+    ],
+  },
+  {
+    id: 25,
+    question: "I don’t _____ getting up early.",
+    options: [
+      { id: "a", text: "not like", points: 0 },
+      { id: "b", text: "want", points: 0 },
+      { id: "c", text: "enjoy", points: 1 },
+    ],
+  },
+  {
+    id: 26,
+    question: "They _____ ever check their emails.",
+    options: [
+      { id: "a", text: "hard", points: 0 },
+      { id: "b", text: "harder", points: 0 },
+      { id: "c", text: "hardly", points: 1 },
+    ],
+  },
+  {
+    id: 27,
+    question: "He _____ know how to spell it.",
+    options: [
+      { id: "a", text: "doesn’t", points: 1 },
+      { id: "b", text: "hasn’t", points: 0 },
+      { id: "c", text: "don’t", points: 0 },
+    ],
+  },
+  {
+    id: 28,
+    question: "We _____ them at eight o’clock.",
+    options: [
+      { id: "a", text: "meet", points: 0 },
+      { id: "b", text: "‘re meet", points: 0 },
+      { id: "c", text: "‘re meeting", points: 1 },
+    ],
+  },
+  {
+    id: 29,
+    question: "They are going _____ in America next month.",
+    options: [
+      { id: "a", text: "to be", points: 1 },
+      { id: "b", text: "will be", points: 0 },
+      { id: "c", text: "be", points: 0 },
+      { id: "d", text: "being", points: 0 },
+    ],
+  },
+  {
+    id: 30,
+    question: "This is the cinema _____ we saw the film.",
+    options: [
+      { id: "a", text: "when", points: 0 },
+      { id: "b", text: "which", points: 0 },
+      { id: "c", text: "that", points: 0 },
+      { id: "d", text: "where", points: 1 },
+    ],
+  },
+  {
+    id: 31,
+    question: "Have you ever _____ in a jazz band?",
+    options: [
+      { id: "a", text: "seen", points: 0 },
+      { id: "b", text: "played", points: 1 },
+      { id: "c", text: "listened", points: 0 },
+      { id: "d", text: "wanted", points: 0 },
+    ],
+  },
+  {
+    id: 32,
+    question: "I’m _____ when I’m with you.",
+    options: [
+      { id: "a", text: "happyer", points: 0 },
+      { id: "b", text: "happier than", points: 0 },
+      { id: "c", text: "happier", points: 1 },
+      { id: "d", text: "the happy", points: 0 },
+    ],
+  },
+  {
+    id: 33,
+    question: "This is _____ than I thought.",
+    options: [
+      { id: "a", text: "bad", points: 0 },
+      { id: "b", text: "badder", points: 0 },
+      { id: "c", text: "worse", points: 1 },
+      { id: "d", text: "worst", points: 0 },
+    ],
+  },
+  {
+    id: 34,
+    question: "Can you tell me the way _____ ?",
+    options: [
+      { id: "a", text: "to the bank", points: 1 },
+      { id: "b", text: "is the bank", points: 0 },
+      { id: "c", text: "where is bank", points: 0 },
+      { id: "d", text: "of the bank", points: 0 },
+    ],
+  },
+  {
+    id: 35,
+    question: "Do you know what _____ ?",
+    options: [
+      { id: "a", text: "time is it", points: 0 },
+      { id: "b", text: "time is", points: 0 },
+      { id: "c", text: "time is now", points: 0 },
+      { id: "d", text: "time it is", points: 1 },
+    ],
+  },
+  {
+    id: 36,
+    question: "Were you _____ to open the door?",
+    options: [
+      { id: "a", text: "could", points: 0 },
+      { id: "b", text: "can", points: 0 },
+      { id: "c", text: "able", points: 1 },
+      { id: "d", text: "possible", points: 0 },
+    ],
+  },
+  {
+    id: 37,
+    question: "Everybody _____ wear a seat belt in the car.",
+    options: [
+      { id: "a", text: "must", points: 1 },
+      { id: "b", text: "mustn’t", points: 0 },
+      { id: "c", text: "don’t have to", points: 0 },
+      { id: "d", text: "doesn’t have to", points: 0 },
+    ],
+  },
+  {
+    id: 38,
+    question: "Tom has lived in this town _____ three years.",
+    options: [
+      { id: "a", text: "since", points: 0 },
+      { id: "b", text: "from", points: 0 },
+      { id: "c", text: "after", points: 0 },
+      { id: "d", text: "for", points: 1 },
+    ],
+  },
+  {
+    id: 39,
+    question: "We _____ work in that factory.",
+    options: [
+      { id: "a", text: "use to", points: 0 },
+      { id: "b", text: "was", points: 0 },
+      { id: "c", text: "used to", points: 1 },
+      { id: "d", text: "then", points: 0 },
+    ],
+  },
+  {
+    id: 40,
+    question: "I think it _____ be sunny tomorrow.",
+    options: [
+      { id: "a", text: "will probably", points: 1 },
+      { id: "b", text: "probably", points: 0 },
+      { id: "c", text: "can", points: 0 },
+      { id: "d", text: "will to", points: 0 },
+    ],
+  },
+  {
+    id: 41,
+    question: "He _____ like his brother.",
+    options: [
+      { id: "a", text: "look", points: 0 },
+      { id: "b", text: "isn’t", points: 1 },
+      { id: "c", text: "isn’t look", points: 0 },
+      { id: "d", text: "can look", points: 0 },
+    ],
+  },
+  {
+    id: 42,
+    question: "_____ does your boyfriend look like?",
+    options: [
+      { id: "a", text: "How", points: 0 },
+      { id: "b", text: "What", points: 1 },
+      { id: "c", text: "Why", points: 0 },
+      { id: "d", text: "Which", points: 0 },
+    ],
+  },
+  {
+    id: 43,
+    question: "I’ve got _____ many problems.",
+    options: [
+      { id: "a", text: "too", points: 1 },
+      { id: "b", text: "a", points: 0 },
+      { id: "c", text: "enough", points: 0 },
+      { id: "d", text: "really", points: 0 },
+    ],
+  },
+  {
+    id: 44,
+    question: "If we get up in time, _____ catch the train.",
+    options: [
+      { id: "a", text: "we catch", points: 0 },
+      { id: "b", text: "we caught", points: 0 },
+      { id: "c", text: "we had caught", points: 0 },
+      { id: "d", text: "we’ll catch", points: 1 },
+    ],
+  },
+  {
+    id: 45,
+    question: "They _____ to go to France for a year.",
+    options: [
+      { id: "a", text: "decide", points: 0 },
+      { id: "b", text: "deciding", points: 0 },
+      { id: "c", text: "decided", points: 1 },
+      { id: "d", text: "to decide", points: 0 },
+    ],
+  },
+  {
+    id: 46,
+    question: "I’m working _____ to pass my exam.",
+    options: [
+      { id: "a", text: "hardly", points: 0 },
+      { id: "b", text: "much", points: 0 },
+      { id: "c", text: "hard", points: 1 },
+      { id: "d", text: "good", points: 0 },
+    ],
+  },
+  {
+    id: 47,
+    question: "I’m writing _____ ask you to explain.",
+    options: [
+      { id: "a", text: "for", points: 0 },
+      { id: "b", text: "in order to", points: 1 },
+      { id: "c", text: "because", points: 0 },
+      { id: "d", text: "because of", points: 0 },
+    ],
+  },
+  {
+    id: 48,
+    question: "He said that most problems _____ by teenagers.",
+    options: [
+      { id: "a", text: "cause", points: 0 },
+      { id: "b", text: "caused", points: 0 },
+      { id: "c", text: "were caused", points: 1 },
+      { id: "d", text: "were causing", points: 0 },
+    ],
+  },
+  {
+    id: 49,
+    question: "They _____ an old photograph of the place.",
+    options: [
+      { id: "a", text: "came up", points: 0 },
+      { id: "b", text: "came across", points: 1 },
+      { id: "c", text: "came into", points: 0 },
+      { id: "d", text: "came after", points: 0 },
+    ],
+  },
+  {
+    id: 50,
+    question: "I _____ I had been able to meet her.",
+    options: [
+      { id: "a", text: "hope", points: 0 },
+      { id: "b", text: "want", points: 0 },
+      { id: "c", text: "think", points: 0 },
+      { id: "d", text: "wish", points: 1 },
+    ],
+  },
+  {
+    id: 51,
+    question: "We’ll have taken our exams _____ this time next month.",
+    options: [
+      { id: "a", text: "by", points: 1 },
+      { id: "b", text: "on", points: 0 },
+      { id: "c", text: "during", points: 0 },
+      { id: "d", text: "for", points: 0 },
+    ],
+  },
+  {
+    id: 52,
+    question: "I will do badly in my work, _____ try harder.",
+    options: [
+      { id: "a", text: "if I’m not", points: 0 },
+      { id: "b", text: "if I wasn’t", points: 0 },
+      { id: "c", text: "if I haven’t", points: 0 },
+      { id: "d", text: "if I don’t", points: 1 },
+    ],
+  },
+  {
+    id: 53,
+    question: "I _____ wasted my time when I was at university.",
+    options: [
+      { id: "a", text: "regret", points: 0 },
+      { id: "b", text: "shouldn’t", points: 0 },
+      { id: "c", text: "ought not to", points: 0 },
+      { id: "d", text: "shouldn’t have", points: 1 },
+    ],
+  },
+  {
+    id: 54,
+    question: "This is going to be my chance to _____ any difficulties.",
+    options: [
+      { id: "a", text: "repair", points: 0 },
+      { id: "b", text: "sort out", points: 1 },
+      { id: "c", text: "solve", points: 0 },
+      { id: "d", text: "improve", points: 0 },
+    ],
+  },
+  {
+    id: 55,
+    question: "It was difficult at first, but I soon _____ it.",
+    options: [
+      { id: "a", text: "got used to", points: 1 },
+      { id: "b", text: "get used to", points: 0 },
+      { id: "c", text: "changed to", points: 0 },
+      { id: "d", text: "used to", points: 0 },
+    ],
+  },
+  {
+    id: 56,
+    question: "How did you manage to cook _____ a good meal?",
+    options: [
+      { id: "a", text: "so", points: 0 },
+      { id: "b", text: "that", points: 0 },
+      { id: "c", text: "absolutely", points: 0 },
+      { id: "d", text: "such", points: 1 },
+    ],
+  },
+  {
+    id: 57,
+    question: "The solution had been found, _____ we hadn’t realised it.",
+    options: [
+      { id: "a", text: "however", points: 0 },
+      { id: "b", text: "therefore", points: 0 },
+      { id: "c", text: "although", points: 1 },
+      { id: "d", text: "even", points: 0 },
+    ],
+  },
+  {
+    id: 58,
+    question: "She _____ what I had been doing for all that time.",
+    options: [
+      { id: "a", text: "asked to me", points: 0 },
+      { id: "b", text: "asked for me", points: 0 },
+      { id: "c", text: "asked with me", points: 0 },
+      { id: "d", text: "asked me", points: 1 },
+    ],
+  },
+  {
+    id: 59,
+    question: "They _____ heard us coming, we were making a lot of noise.",
+    options: [
+      { id: "a", text: "must have", points: 1 },
+      { id: "b", text: "must", points: 0 },
+      { id: "c", text: "might", points: 0 },
+      { id: "d", text: "could", points: 0 },
+    ],
+  },
+  {
+    id: 60,
+    question: "He _____ to help me with the decorating.",
+    options: [
+      { id: "a", text: "suggested", points: 0 },
+      { id: "b", text: "offered", points: 1 },
+      { id: "c", text: "invited", points: 0 },
+      { id: "d", text: "told", points: 0 },
     ],
   },
 ];
@@ -143,8 +611,7 @@ const quizSchema = z.object({
 type QuizFormValues = z.infer<typeof quizSchema>;
 
 export default function EnglishQuizPage() {
-  const [showResult, setShowResult] = useState(false);
-  const [score, setScore] = useState(0);
+  const router = useRouter();
 
   const {
     register,
@@ -152,6 +619,7 @@ export default function EnglishQuizPage() {
     setValue,
     reset,
     control,
+    watch,
     formState: { errors },
   } = useForm<QuizFormValues>({
     resolver: zodResolver(quizSchema),
@@ -167,17 +635,19 @@ export default function EnglishQuizPage() {
     },
   });
 
+  const formData = watch();
+
   const onSubmit = (data: QuizFormValues) => {
-    let totalScore = 0;
+    let correctAnswersCount = 0;
     QUIZ_QUESTIONS.forEach((q) => {
       const selectedOptionId = data.answers[q.id.toString()];
       const option = q.options.find((o) => o.id === selectedOptionId);
-      if (option) {
-        totalScore += option.points;
+      if (option && option.points > 0) {
+        correctAnswersCount++;
       }
     });
-    setScore(totalScore);
-    setShowResult(true);
+    const calculatedScore = Math.round((correctAnswersCount / QUIZ_QUESTIONS.length) * 100);
+    router.push(`/english-quiz/result?score=${calculatedScore}`);
   };
 
   return (
@@ -244,21 +714,16 @@ export default function EnglishQuizPage() {
                 </FieldContent>
               </Field>
 
-              <Field>
+              <Field data-invalid={!!errors.phoneNumber}>
                 <FieldLabel>Phone Number</FieldLabel>
                 <FieldContent>
-                  <div className="relative">
-                    <Phone
-                      className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
-                      size={16}
-                    />
-                    <Input
-                      {...register("phoneNumber")}
-                      className="pl-10"
-                      placeholder="+971 50 123 4567"
-                      aria-invalid={!!errors.phoneNumber}
-                    />
-                  </div>
+                  <PhoneInput
+                    name="phoneNumber"
+                    value={formData.phoneNumber}
+                    onChange={(val) => setValue("phoneNumber", val || "", { shouldValidate: true })}
+                    defaultCountry="AE"
+                    aria-invalid={!!errors.phoneNumber}
+                  />
                   <FieldError errors={[errors.phoneNumber]} />
                 </FieldContent>
               </Field>
@@ -282,21 +747,16 @@ export default function EnglishQuizPage() {
                 </FieldContent>
               </Field>
 
-              <Field>
+              <Field data-invalid={!!errors.country}>
                 <FieldLabel required>Country</FieldLabel>
                 <FieldContent>
-                  <div className="relative">
-                    <Globe
-                      className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
-                      size={16}
-                    />
-                    <Input
-                      {...register("country")}
-                      className="pl-10"
-                      placeholder="United Arab Emirates"
-                      aria-invalid={!!errors.country}
-                    />
-                  </div>
+                  <CountryDropdown
+                    name="country"
+                    placeholder="Search country..."
+                    value={formData.country}
+                    aria-invalid={!!errors.country}
+                    onChange={(country) => setValue("country", country.name, { shouldValidate: true })}
+                  />
                   <FieldError errors={[errors.country]} />
                 </FieldContent>
               </Field>
@@ -382,77 +842,6 @@ export default function EnglishQuizPage() {
           </div>
         </form>
       </div>
-
-      {/* Result Dialog */}
-      <Dialog open={showResult} onOpenChange={setShowResult}>
-        <DialogContent
-          showCloseButton={false}
-          className="sm:max-w-[450px] p-0 overflow-hidden border-none rounded-md"
-        >
-          <div className="bg-primary p-8 text-white text-center space-y-4 relative">
-            <DialogClose className="absolute top-4 right-4 p-2 rounded-md hover:bg-white/10 text-white transition-colors cursor-pointer">
-              <XIcon size={20} />
-            </DialogClose>
-            <div className="mx-auto w-20 h-20 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
-              <Trophy size={40} className="text-white" />
-            </div>
-            <DialogTitle className="text-3xl font-black tracking-tight text-white">
-              Quiz Completed!
-            </DialogTitle>
-            <p className="text-white/80 font-medium">
-              Here's how you performed
-            </p>
-          </div>
-
-          <div className="p-8 space-y-8 bg-white">
-            <div className="flex justify-around items-center">
-              <div className="text-center">
-                <p className="text-slate-400 text-[10px] font-bold uppercase tracking-widest mb-1">
-                  Your Score
-                </p>
-                <p className="text-5xl font-black text-secondary">
-                  {score}
-                  <span className="text-xl text-slate-300">/100</span>
-                </p>
-              </div>
-              <div className="h-12 w-px bg-slate-100" />
-              <div className="text-center">
-                <p className="text-slate-400 text-[10px] font-bold uppercase tracking-widest mb-1">
-                  Rank
-                </p>
-                <p className="text-2xl font-black text-primary">
-                  {score >= 80
-                    ? "Expert"
-                    : score >= 50
-                      ? "Intermediate"
-                      : "Beginner"}
-                </p>
-              </div>
-            </div>
-
-            <div className="bg-slate-50 rounded-md p-4 border border-slate-100 flex items-start gap-3">
-              <Info className="text-primary flex-shrink-0 mt-0.5" size={18} />
-              <p className="text-xs text-slate-600 leading-relaxed">
-                {score >= 80
-                  ? "Outstanding! You have a strong command of the English language. Consider taking our advanced IELTS/PTE courses."
-                  : score >= 50
-                    ? "Good job! You have a solid foundation. Our preparation courses can help you achieve even better results."
-                    : "Keep practicing! Our beginner-friendly courses are designed to help you build confidence and core skills."}
-              </p>
-            </div>
-
-            <Button
-              className="w-full h-12 font-bold rounded-md"
-              onClick={() => {
-                setShowResult(false);
-                reset();
-              }}
-            >
-              Take Quiz Again
-            </Button>
-          </div>
-        </DialogContent>
-      </Dialog>
     </main>
   );
 }
