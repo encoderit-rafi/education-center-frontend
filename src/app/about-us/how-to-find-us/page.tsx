@@ -21,6 +21,9 @@ export default function HowToFindUs() {
       <style
         dangerouslySetInnerHTML={{
           __html: `
+        .print-watermark {
+          display: none;
+        }
         @media print {
           /* Force exact color adjustment to print backgrounds */
           * {
@@ -131,10 +134,50 @@ export default function HowToFindUs() {
             page-break-inside: avoid !important;
             margin-bottom: 1.5rem !important;
           }
+
+          /* Disable transforms and filters on print to allow correct position: fixed centering on every page */
+          html, body, main, div {
+            transform: none !important;
+            filter: none !important;
+          }
+
+          /* Print Watermark Overlay */
+          .print-watermark {
+            display: flex !important;
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            align-items: center !important;
+            justify-content: center !important;
+            pointer-events: none !important;
+            opacity: 0.05 !important;
+            z-index: 99999 !important;
+          }
+          .print-watermark-inner {
+            transform: rotate(-35deg) !important;
+            width: 650px !important;
+            height: 650px !important;
+            position: relative !important;
+          }
         }
       `,
         }}
       />
+
+      {/* Print Watermark */}
+      <div className="print-watermark select-none">
+        <div className="print-watermark-inner">
+          <Image
+            src="/images/tepth-logo.png"
+            alt="TEPTH Watermark"
+            fill
+            className="object-contain"
+            priority
+          />
+        </div>
+      </div>
 
       {/* Print-Only Header (Branded Contact Details) */}
       <div className="hidden print:flex flex-col md:flex-row justify-between items-start gap-8 border-b-2 border-primary/20 pb-8 mb-8 print-header">
@@ -212,7 +255,7 @@ export default function HowToFindUs() {
       </section>
 
       {/* Map Section */}
-      <section className="py-24 px-8 max-w-screen-2xl mx-auto border-t border-slate-50 print-avoid-break print:hidden">
+      <section className="px-8 max-w-screen-2xl mx-auto border-t border-slate-50 print-avoid-break">
         <div className="grid lg:grid-cols-2 gap-20 items-center print-grid">
           <div className="space-y-8">
             <SectionHeader
