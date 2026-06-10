@@ -422,23 +422,10 @@ export function RegistrationFormStep({
             Additional Information
           </h3>
         </div>
-        <div>
-          <Field data-invalid={!!errors.planningCountry}>
-            <FieldLabel required className="whitespace-nowrap">Which country or region are you planning to study, work or settle in? If you have not yet decided please select your preferred destination.</FieldLabel>
-            <FieldContent>
-              <CountryDropdown
-                placeholder="-Select Country-"
-                value={formData.planningCountry}
-                onChange={(c) => setValue("planningCountry", c.name)}
-              />
-              <FieldError errors={[errors.planningCountry]} />
-            </FieldContent>
-          </Field>
-        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8">
           <Field data-invalid={!!errors.homeLanguage}>
-            <FieldLabel required>What is your first language?</FieldLabel>
+            <FieldLabel required>What language do you speak mostly at home?</FieldLabel>
             <FieldContent>
               <SearchableDropdown
                 options={languages}
@@ -464,7 +451,7 @@ export function RegistrationFormStep({
             </FieldContent>
           </Field>
           <Field data-invalid={!!errors.currentSituation}>
-            <FieldLabel required>What is your current situation?</FieldLabel>
+            <FieldLabel required>What best describes your current situation?</FieldLabel>
             <FieldContent>
               <SearchableDropdown
                 options={[
@@ -501,38 +488,17 @@ export function RegistrationFormStep({
 
           <Field
             data-invalid={!!errors.reasonForTaking}
+            className="md:col-span-2"
           >
-            <FieldLabel required>Why are you taking PTE Home A1?</FieldLabel>
+            <FieldLabel required>Why are you taking the test?</FieldLabel>
             <FieldContent>
               <SearchableDropdown
                 options={[
-                  { label: "Study", value: "study" },
-                  {
-                    label: "Nursing registration or licensing",
-                    value: "nursing"
-                  },
-                  {
-                    label: "Australia - MATES visa (India only)",
-                    value: "au_mates"
-                  },
-                  {
-                    label: "Australia - Post Study Work (485) visa",
-                    value: "au_485"
-                  },
-                  {
-                    label: "Australia - Temporary Work visa",
-                    value: "au_temp_work"
-                  },
-                  {
-                    label: "New Zealand - Temporary Work visa",
-                    value: "nz_temp_work"
-                  },
-                  {
-                    label: "Skilled migration / Permanent Residency",
-                    value: "skilled_migration"
-                  },
-                  { label: "Spouse / Family visa", value: "family_visa" },
-                  { label: "Working Holiday visa", value: "working_holiday" },
+                  { label: "Family visa (Partner, Spouse or Parent)", value: "family_visa" },
+                  { label: "Settlement (Indefinite Leave to Remain)", value: "settlement" },
+                  { label: "Citizenship", value: "citizenship" },
+                  { label: "Sportsperson visa (Tier 2)", value: "sportsperson_visa" },
+                  { label: "Representative of an Overseas Business visa", value: "representative_visa" },
                   { label: "Other - specify below", value: "other" },
                 ]}
                 placeholder="Select one..."
@@ -562,22 +528,21 @@ export function RegistrationFormStep({
             </FieldContent>
           </Field>
 
-          <Field data-invalid={!!errors.referralSource}>
-            <FieldLabel required>How did you hear about PTE Home A1?</FieldLabel>
+          <Field data-invalid={!!errors.referralSource} className="md:col-span-2">
+            <FieldLabel required>How did you hear about the test?</FieldLabel>
             <FieldContent>
               <SearchableDropdown
                 options={[
-                  { label: "Australian Department of Home Affairs (DHA)", value: "dha" },
-                  { label: "Board of Nursing", value: "board_of_nursing" },
                   { label: "Education Agent Advisor - specify below", value: "education_agent" },
                   { label: "Education event - specify below", value: "education_event" },
-                  { label: "Education Malaysia Global Services (EMGS)", value: "emgs" },
-                  { label: "Friend or family", value: "friend_family" },
-                  { label: "Immigration New Zealand (INZ)", value: "inz" },
-                  { label: "Internet search", value: "internet_search" },
+                  { label: "Friend or Family", value: "friend_family" },
+                  { label: "Internet Search", value: "internet_search" },
                   { label: "Language School", value: "language_school" },
-                  { label: "Migration agent / lawyer - specify below", value: "migration_agent" },
-                  { label: "Social Media (e.g. Facebook, Twitter, Weibo etc)", value: "social_media" },
+                  { label: "Migration Agent/Lawyer - specify below", value: "migration_agent" },
+                  { label: "Outdoor Advert", value: "outdoor_advert" },
+                  { label: "Radio Advert", value: "radio_advert" },
+                  { label: "Social Media (e.g. Facebook, Twitter,Weibo etc.)", value: "social_media" },
+                  { label: "UK Visas and Immigration (UKVI)", value: "ukvi" },
                   { label: "University or College - specify below", value: "university_college" },
                   { label: "Other - specify below", value: "Other" },
                 ]}
@@ -758,7 +723,7 @@ export function RegistrationFormStep({
               </Field>
 
               <Field data-invalid={!!errors.hasExistingAccount}>
-                <FieldLabel required>Do you have a Pearson account?</FieldLabel>
+                <FieldLabel required>Do you have a PTE account?</FieldLabel>
                 <FieldContent className="mt-2">
                   <RadioGroup
                     className="flex flex-col gap-3"

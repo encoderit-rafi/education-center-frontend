@@ -26,7 +26,7 @@ export const PteAcademicSchema = z.object({
     countryOfBirth: stringOrObject.refine(val => val.length > 0, "Country of birth is required"),
     countryOfCitizenship: stringOrObject.refine(val => val.length > 0, "Country of citizenship is required"),
     countryOfResidence: stringOrObject.refine(val => val.length > 0, "Country of residence is required"),
-    
+
     postalAddress1: z.string().min(1, "Address Line 1 is required"),
     postalAddress2: z.string().optional(),
     poBox: z.string().optional(),
@@ -61,7 +61,7 @@ export const PteAcademicSchema = z.object({
     referralSourceOther: z.string().optional(),
     fieldOfStudy: z.string().optional(),
     fieldOfStudyOther: z.string().optional(),
-    
+
     takenBefore: z.enum(["yes", "no"]).or(z.literal("")),
     takenWithinTwoYears: z.enum(["yes", "no"]).or(z.literal("")),
     hasExistingAccount: z.enum(["yes", "no"]).or(z.literal("")),
@@ -75,49 +75,57 @@ export const PteAcademicSchema = z.object({
     // Step 5: Review & Payment
     infoCorrect: z.boolean().optional(),
 })
-.refine((data) => data.noGivenNames || (data.givenNames && data.givenNames.trim() !== ""), {
-    message: "Given names are required",
-    path: ["givenNames"],
-})
-.refine((data) => data.noMiddleName || (data.middleName && data.middleName.trim() !== ""), {
-    message: "Middle name is required",
-    path: ["middleName"],
-})
-.refine((data) => data.noSurname || (data.surnames && data.surnames.trim() !== ""), {
-    message: "Surname is required",
-    path: ["surnames"],
-})
-.refine((data) => data.emailUsername === data.confirmEmail, {
-    message: "Emails do not match",
-    path: ["confirmEmail"],
-})
-.refine((data) => data.reasonForTaking !== "study" || (data.studyLevel && data.studyLevel !== ""), {
-    message: "Please select your study level",
-    path: ["studyLevel"],
-})
-.refine((data) => data.studyLevel !== "other" || (data.studyLevelOther && data.studyLevelOther.trim() !== ""), {
-    message: "Please specify your education level",
-    path: ["studyLevelOther"],
-})
-.refine((data) => data.reasonForTaking !== "study" || !data.studyLevel || (data.fieldOfStudy && data.fieldOfStudy !== ""), {
-    message: "Please select your field of study",
-    path: ["fieldOfStudy"],
-})
-.refine((data) => data.fieldOfStudy !== "other" || (data.fieldOfStudyOther && data.fieldOfStudyOther.trim() !== ""), {
-    message: "Please specify your field of study",
-    path: ["fieldOfStudyOther"],
-})
-.refine((data) => data.homeLanguage !== "Other" || (data.homeLanguageOther && data.homeLanguageOther.trim() !== ""), {
-    message: "Please specify your first language",
-    path: ["homeLanguageOther"],
-})
-.refine((data) => data.takenBefore !== "yes" || !!data.takenWithinTwoYears, {
-    message: "Please select an option",
-    path: ["takenWithinTwoYears"],
-})
-.refine((data) => data.takenBefore !== "yes" || !!data.hasExistingAccount, {
-    message: "Please select an option",
-    path: ["hasExistingAccount"],
-});
+    .refine((data) => data.noGivenNames || (data.givenNames && data.givenNames.trim() !== ""), {
+        message: "Given names are required",
+        path: ["givenNames"],
+    })
+    .refine((data) => data.noMiddleName || (data.middleName && data.middleName.trim() !== ""), {
+        message: "Middle name is required",
+        path: ["middleName"],
+    })
+    .refine((data) => data.noSurname || (data.surnames && data.surnames.trim() !== ""), {
+        message: "Surname is required",
+        path: ["surnames"],
+    })
+    .refine((data) => data.emailUsername === data.confirmEmail, {
+        message: "Emails do not match",
+        path: ["confirmEmail"],
+    })
+    .refine((data) => data.reasonForTaking !== "study" || (data.studyLevel && data.studyLevel !== ""), {
+        message: "Please select your study level",
+        path: ["studyLevel"],
+    })
+    .refine((data) => data.studyLevel !== "other" || (data.studyLevelOther && data.studyLevelOther.trim() !== ""), {
+        message: "Please specify your education level",
+        path: ["studyLevelOther"],
+    })
+    .refine((data) => data.reasonForTaking !== "study" || !data.studyLevel || (data.fieldOfStudy && data.fieldOfStudy !== ""), {
+        message: "Please select your field of study",
+        path: ["fieldOfStudy"],
+    })
+    .refine((data) => data.fieldOfStudy !== "other" || (data.fieldOfStudyOther && data.fieldOfStudyOther.trim() !== ""), {
+        message: "Please specify your field of study",
+        path: ["fieldOfStudyOther"],
+    })
+    .refine((data) => !["au_485", "au_temp_work", "nz_temp_work", "skilled_migration"].includes(data.reasonForTaking) || (data.occupationSector && data.occupationSector !== ""), {
+        message: "Please select your occupation sector",
+        path: ["occupationSector"],
+    })
+    .refine((data) => data.occupationSector !== "Other" || (data.occupationSectorOther && data.occupationSectorOther.trim() !== ""), {
+        message: "Please specify your occupation sector",
+        path: ["occupationSectorOther"],
+    })
+    .refine((data) => data.homeLanguage !== "Other" || (data.homeLanguageOther && data.homeLanguageOther.trim() !== ""), {
+        message: "Please specify your first language",
+        path: ["homeLanguageOther"],
+    })
+    .refine((data) => data.takenBefore !== "yes" || !!data.takenWithinTwoYears, {
+        message: "Please select an option",
+        path: ["takenWithinTwoYears"],
+    })
+    .refine((data) => data.takenBefore !== "yes" || !!data.hasExistingAccount, {
+        message: "Please select an option",
+        path: ["hasExistingAccount"],
+    });
 
 export type TPteAcademicSchema = z.infer<typeof PteAcademicSchema>;

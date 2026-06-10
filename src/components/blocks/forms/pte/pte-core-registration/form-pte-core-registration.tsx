@@ -287,7 +287,9 @@ export default function FormPTECoreRegistration({ examId: initialExamId }: FormP
           current_situation: data.currentSituation,
           reason_for_taking: data.reasonForTaking,
           study_level: data.studyLevel,
-          occupation_sector: data.occupationSector,
+          occupation_sector: data.occupationSector === "Other"
+             ? data.occupationSectorOther || "Other"
+             : data.occupationSector,
           id_type: (data.idType as string) === "emirates_id" ? "emirates" : data.idType,
           id_number: data.idNumber,
           id_country_of_issue: data.idCountryOfIssue,
@@ -317,6 +319,17 @@ export default function FormPTECoreRegistration({ examId: initialExamId }: FormP
     if (element) {
       element.scrollIntoView({ behavior: "smooth", block: "center" });
     }
+  };
+
+  const getReasonLabel = (val: string) => {
+    const mapping: Record<string, string> = {
+      canadian_immigration: "Canadian Immigration (Permanent Residence)",
+      canadian_citizenship: "Canadian Citizenship",
+      temporary_foreign_worker: "Canada Temporary Foreign Worker",
+      pgwp: "Post Graduation Work Permit (PGWP)",
+      other: formData.reasonForTakingOther || "Other",
+    };
+    return mapping[val] || val;
   };
 
   return (
@@ -403,7 +416,13 @@ export default function FormPTECoreRegistration({ examId: initialExamId }: FormP
                   ...(formData.postalAddress2 ? [{ label: "Address Line 2", value: formData.postalAddress2 }] : []),
                   { label: "Emirate / City", value: formData.city },
                   { label: "Country of Residence", value: formData.countryOfResidence },
-                  { label: "Reason for Test", value: formData.reasonForTaking },
+                  { label: "Reason for Test", value: getReasonLabel(formData.reasonForTaking) },
+                  ...(formData.occupationSector ? [{
+                     label: "Occupation Sector",
+                     value: formData.occupationSector === "Other"
+                       ? formData.occupationSectorOther || "Other"
+                       : formData.occupationSector
+                   }] : []),
                 ]}
               />
             </GlobalReviewStep>

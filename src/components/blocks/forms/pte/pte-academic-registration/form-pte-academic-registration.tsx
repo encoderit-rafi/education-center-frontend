@@ -273,7 +273,9 @@ export default function FormPTEAcademicRegistration({ examId: initialExamId }: F
           current_situation: data.currentSituation,
           reason_for_taking: data.reasonForTaking,
           study_level: data.studyLevel,
-          occupation_sector: data.occupationSector,
+          occupation_sector: data.occupationSector === "Other"
+             ? data.occupationSectorOther || "Other"
+             : data.occupationSector,
           id_type: (data.idType as string) === "emirates_id" ? "emirates" : data.idType,
           id_number: data.idNumber,
           id_country_of_issue: data.idCountryOfIssue,
@@ -302,6 +304,22 @@ export default function FormPTEAcademicRegistration({ examId: initialExamId }: F
     if (element) {
       element.scrollIntoView({ behavior: "smooth", block: "center" });
     }
+  };
+
+  const getReasonLabel = (val: string) => {
+    const mapping: Record<string, string> = {
+      study: "Study",
+      nursing: "Nursing registration or licensing",
+      au_mates: "Australia - MATES visa (India only)",
+      au_485: "Australia - Post Study Work (485) visa",
+      au_temp_work: "Australia - Temporary Work visa",
+      nz_temp_work: "New Zealand - Temporary Work visa",
+      skilled_migration: "Skilled migration / Permanent Residency",
+      family_visa: "Spouse / Family visa",
+      working_holiday: "Working Holiday visa",
+      other: formData.reasonForTakingOther || "Other",
+    };
+    return mapping[val] || val;
   };
 
   return (
@@ -392,7 +410,13 @@ export default function FormPTEAcademicRegistration({ examId: initialExamId }: F
                   { label: "Postal Code", value: formData.postcode || "N/A" },
                   { label: "First Language", value: formData.homeLanguage || "N/A" },
                   { label: "Destination Country", value: formData.planningCountry || "N/A" },
-                  { label: "Reason for Test", value: `${formData.reasonForTaking} ${formData.studyLevel ? `(${formData.studyLevel})` : ""}`.trim() },
+                  { label: "Reason for Test", value: `${getReasonLabel(formData.reasonForTaking)} ${formData.studyLevel ? `(${formData.studyLevel})` : ""}`.trim() },
+                  ...(formData.occupationSector ? [{
+                     label: "Occupation Sector",
+                     value: formData.occupationSector === "Other"
+                       ? formData.occupationSectorOther || "Other"
+                       : formData.occupationSector
+                   }] : []),
                   { label: "Current Situation", value: formData.currentSituation },
                 ]}
               />

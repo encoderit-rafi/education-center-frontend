@@ -48,7 +48,7 @@ export const PteCoreSchema = z.object({
     // Step 3: Your Profile
     homeLanguage: stringOrObject.refine(val => val.length > 0, "Please select your language"),
     homeLanguageOther: z.string().optional(),
-    planningCountry: stringOrObject.refine(val => val.length > 0, "Please select a destination country"),
+    planningCountry: stringOrObject.optional(),
     currentSituation: stringOrObject.refine(val => val.length > 0, "Please select your current situation"),
     currentSituationOther: z.string().optional(),
     reasonForTaking: z.string().min(1, "Please select why you are taking the test"),
@@ -106,6 +106,14 @@ export const PteCoreSchema = z.object({
 .refine((data) => data.fieldOfStudy !== "other" || (data.fieldOfStudyOther && data.fieldOfStudyOther.trim() !== ""), {
     message: "Please specify your field of study",
     path: ["fieldOfStudyOther"],
+})
+.refine((data) => !["canadian_immigration", "temporary_foreign_worker", "pgwp"].includes(data.reasonForTaking) || (data.occupationSector && data.occupationSector !== ""), {
+    message: "Please select your occupation sector",
+    path: ["occupationSector"],
+})
+.refine((data) => data.occupationSector !== "Other" || (data.occupationSectorOther && data.occupationSectorOther.trim() !== ""), {
+    message: "Please specify your occupation sector",
+    path: ["occupationSectorOther"],
 })
 .refine((data) => data.homeLanguage !== "Other" || (data.homeLanguageOther && data.homeLanguageOther.trim() !== ""), {
     message: "Please specify your first language",

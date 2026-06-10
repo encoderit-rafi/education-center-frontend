@@ -16,7 +16,7 @@ import { RegistrationFormStep } from "./steps/registration-form-step";
 import { ReviewStep } from "./steps/review-step";
 
 // Schema
-import { PteHomeUKVISchema, type TPteHomeUKVISchema } from "./_type";
+import { PteAcademicUKVISchema, type TPteAcademicUKVISchema } from "./_type";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import api from "@/axios";
 
@@ -36,7 +36,7 @@ interface FormProps {
   examId?: string;
 }
 
-export default function FormPTEHomeUKVIRegistration({ examId: initialExamId }: FormProps = {}) {
+export default function FormPTEAcademicUKVIRegistration({ examId: initialExamId }: FormProps = {}) {
   const [currentStep, setCurrentStep] = useState(0); // 0: Terms, 1: Date, 2: Form, 3: Review
 
   const { data: examDetailResponse } = useQuery({
@@ -96,10 +96,10 @@ export default function FormPTEHomeUKVIRegistration({ examId: initialExamId }: F
     };
     return acc;
   }, {});
-  
 
-  const form = useForm<TPteHomeUKVISchema>({
-    resolver: zodResolver(PteHomeUKVISchema),
+
+  const form = useForm<TPteAcademicUKVISchema>({
+    resolver: zodResolver(PteAcademicUKVISchema),
     defaultValues: {
       givenNames: "",
       noGivenNames: false,
@@ -163,7 +163,7 @@ export default function FormPTEHomeUKVIRegistration({ examId: initialExamId }: F
   const calculateTotal = () => {
     const baseFee = EXAM_FEE;
     const serviceFee = SERVICE_FEE;
-    
+
     const selectedCourseData = formData.selectedCourse
       ? coursesData.find((c: any) => c.id === formData.selectedCourse)
       : null;
@@ -175,9 +175,9 @@ export default function FormPTEHomeUKVIRegistration({ examId: initialExamId }: F
       ? PTE_UKVI_WORKSHOPS.find(w => w.id === formData.selectedWorkshop)
       : null;
     const workshopPrice = selectedWorkshopData?.price || 0;
-    
+
     const subtotal = baseFee + serviceFee + coursePrice + workshopPrice;
-    
+
     return {
       baseFee,
       serviceFee,
@@ -231,7 +231,7 @@ export default function FormPTEHomeUKVIRegistration({ examId: initialExamId }: F
     },
   });
 
-  const handleFormSubmit: SubmitHandler<TPteHomeUKVISchema> = async (data) => {
+  const handleFormSubmit: SubmitHandler<TPteAcademicUKVISchema> = async (data) => {
     if (currentStep < 3) {
       nextStep();
     } else {
@@ -294,7 +294,9 @@ export default function FormPTEHomeUKVIRegistration({ examId: initialExamId }: F
           current_situation: data.currentSituation,
           reason_for_taking: data.reasonForTaking,
           study_level: data.studyLevel,
-          occupation_sector: data.occupationSector,
+          occupation_sector: data.occupationSector === "Other"
+             ? data.occupationSectorOther || "Other"
+             : data.occupationSector,
           id_type: (data.idType as string) === "emirates_id" ? "emirates" : data.idType,
           id_number: data.idNumber,
           id_country_of_issue: data.idCountryOfIssue,
@@ -318,7 +320,7 @@ export default function FormPTEHomeUKVIRegistration({ examId: initialExamId }: F
 
   const onInvalid = (errors: any) => {
     console.error("Validation Errors:", errors);
-    
+
     // Create user-friendly field labels
     const fieldLabels: Record<string, string> = {
       givenNames: "First / Given Names",
@@ -364,7 +366,7 @@ export default function FormPTEHomeUKVIRegistration({ examId: initialExamId }: F
       const firstErrorField = errorFields[0];
       const errorMessage = errors[firstErrorField]?.message || "This field is required";
       const label = fieldLabels[firstErrorField] || firstErrorField;
-      
+
       toast.error(`Validation Error: ${label} - ${errorMessage}`, {
         description: `Please fix ${errorFields.length} field(s) before proceeding.`,
         duration: 5000,
@@ -381,7 +383,7 @@ export default function FormPTEHomeUKVIRegistration({ examId: initialExamId }: F
 
   const nextStep = async () => {
     let fieldsToValidate: any[] = [];
-    
+
     if (currentStep === 1) {
       fieldsToValidate = ["examDate", "examTime"];
     } else if (currentStep === 2) {
@@ -400,11 +402,26 @@ export default function FormPTEHomeUKVIRegistration({ examId: initialExamId }: F
     }
   };
 
+  const getReasonLabel = (val: string) => {
+    const mapping: Record<string, string> = {
+      settlement: "Settlement (Indefinite Leave to Remain)",
+      citizenship: "Citizenship",
+      sportsperson_visa: "Sportsperson visa (Tier 2)",
+      student_visa: "Student visa (formerly known as the Tier 4 General student visa)",
+      skilled_worker_visa: "Skilled Worker visa (formerly known as the Tier 2 General work visa)",
+      startup_innovator_visa: "Start Up or Innovator Visa",
+      domestic_worker: "Domestic Worker in a Private Household",
+      minister_religion_visa: "Minister of Religion visa (Tier 2)",
+      other: formData.reasonForTakingOther || "Other",
+    };
+    return mapping[val] || val;
+  };
+
   return (
     <div className="max-w-7xl mx-auto px-4 py-12">
       <div className="text-center mb-12">
         <h1 className="text-4xl md:text-5xl font-black text-slate-900 mb-4 tracking-tight">
-          PTE Home <span className="text-primary">UKVI</span> Registration
+          PTE Academic <span className="text-primary">UKVI</span> Registration
         </h1>
         <p className="text-slate-500 text-lg max-w-2xl mx-auto">
           Authorized UK Visa & Immigration (UKVI) test registration portal.
@@ -485,8 +502,9 @@ export default function FormPTEHomeUKVIRegistration({ examId: initialExamId }: F
                   { label: "Emirate / City", value: formData.city },
                   { label: "Country of Residence", value: formData.countryOfResidence },
                   { label: "First Language", value: formData.homeLanguage || "N/A" },
-                  { label: "Reason for Test", value: formData.reasonForTaking },
+                  { label: "Reason for Test", value: `${getReasonLabel(formData.reasonForTaking)} ${formData.studyLevel ? `(${formData.studyLevel})` : ""}`.trim() },
                   { label: "Current Situation", value: formData.currentSituation },
+                  ...(formData.occupationSector ? [{ label: "Occupation Sector", value: formData.occupationSector === "Other" ? formData.occupationSectorOther || "Other" : formData.occupationSector }] : []),
                 ]}
               />
             </GlobalReviewStep>

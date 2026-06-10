@@ -260,6 +260,18 @@ export function ReviewStep({
                   {data.reasonForTaking}
                 </span>
               </div>
+              {data.occupationSector && (
+                <div className="flex flex-col">
+                  <span className="text-[10px] text-slate-400 font-bold uppercase">
+                    Occupation Sector
+                  </span>
+                  <span className="text-sm font-semibold text-black">
+                    {data.occupationSector === "Other"
+                      ? data.occupationSectorOther || "Other"
+                      : data.occupationSector}
+                  </span>
+                </div>
+              )}
             </div>
       </div>
     </div>

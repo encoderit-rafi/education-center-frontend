@@ -8,7 +8,7 @@ const stringOrObject = z.union([z.string(), z.any(), z.null(), z.undefined()]).t
     return "";
 });
 
-export const PteHomeUKVISchema = z.object({
+export const PteAcademicUKVISchema = z.object({
     // Step 1: Personal Details
     givenNames: z.string().optional(),
     noGivenNames: z.boolean(),
@@ -48,7 +48,7 @@ export const PteHomeUKVISchema = z.object({
     // Step 3: Your Profile
     homeLanguage: stringOrObject.refine(val => val.length > 0, "Please select your language"),
     homeLanguageOther: z.string().optional(),
-    planningCountry: stringOrObject.refine(val => val.length > 0, "Please select a destination country"),
+    planningCountry: stringOrObject.optional(),
     currentSituation: stringOrObject.refine(val => val.length > 0, "Please select your current situation"),
     currentSituationOther: z.string().optional(),
     reasonForTaking: z.string().min(1, "Please select why you are taking the test"),
@@ -91,7 +91,7 @@ export const PteHomeUKVISchema = z.object({
     message: "Emails do not match",
     path: ["confirmEmail"],
 })
-.refine((data) => data.reasonForTaking !== "study" || (data.studyLevel && data.studyLevel !== ""), {
+.refine((data) => data.reasonForTaking !== "student_visa" || (data.studyLevel && data.studyLevel !== ""), {
     message: "Please select your study level",
     path: ["studyLevel"],
 })
@@ -99,7 +99,7 @@ export const PteHomeUKVISchema = z.object({
     message: "Please specify your education level",
     path: ["studyLevelOther"],
 })
-.refine((data) => data.reasonForTaking !== "study" || !data.studyLevel || (data.fieldOfStudy && data.fieldOfStudy !== ""), {
+.refine((data) => data.reasonForTaking !== "student_visa" || (data.fieldOfStudy && data.fieldOfStudy !== ""), {
     message: "Please select your field of study",
     path: ["fieldOfStudy"],
 })
@@ -118,6 +118,14 @@ export const PteHomeUKVISchema = z.object({
 .refine((data) => data.takenBefore !== "yes" || !!data.hasExistingAccount, {
     message: "Please select an option",
     path: ["hasExistingAccount"],
+})
+.refine((data) => !["sportsperson_visa", "skilled_worker_visa", "startup_innovator_visa", "domestic_worker", "minister_religion_visa"].includes(data.reasonForTaking) || (data.occupationSector && data.occupationSector !== ""), {
+    message: "Please select your occupation sector",
+    path: ["occupationSector"],
+})
+.refine((data) => data.occupationSector !== "Other" || (data.occupationSectorOther && data.occupationSectorOther.trim() !== ""), {
+    message: "Please specify your occupation sector",
+    path: ["occupationSectorOther"],
 });
 
-export type TPteHomeUKVISchema = z.infer<typeof PteHomeUKVISchema>;
+export type TPteAcademicUKVISchema = z.infer<typeof PteAcademicUKVISchema>;

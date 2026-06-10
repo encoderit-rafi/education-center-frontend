@@ -438,7 +438,7 @@ export function RegistrationFormStep({
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8">
           <Field data-invalid={!!errors.homeLanguage}>
-            <FieldLabel required>What is your first language?</FieldLabel>
+            <FieldLabel required>What language do you speak mostly at home?</FieldLabel>
             <FieldContent>
               <SearchableDropdown
                 options={languages}
@@ -464,19 +464,17 @@ export function RegistrationFormStep({
             </FieldContent>
           </Field>
           <Field data-invalid={!!errors.currentSituation}>
-            <FieldLabel required>What is your current situation?</FieldLabel>
+            <FieldLabel required>What best describes your current situation?</FieldLabel>
             <FieldContent>
               <SearchableDropdown
                 options={[
-                  { label: "Student - In High School", value: "Student - In High School" },
-                  { label: "Student - High School graduate", value: "Student - High School graduate" },
                   { label: "Student - English language", value: "Student - English language" },
                   { label: "Student - In University / College", value: "Student - In University / College" },
                   { label: "Student - University / College graduate", value: "Student - University / College graduate" },
-                  { label: "Working - full time", value: "Working - full time" },
-                  { label: "Working - part time", value: "Working - part time" },
+                  { label: "Working - Full time", value: "Working - Full time" },
+                  { label: "Working - Part time", value: "Working - Part time" },
                   { label: "Not studying or working", value: "Not studying or working" },
-                  { label: "Other - specify below", value: "Other" },
+                  { label: "Other - Specify below", value: "Other" },
                 ]}
                 placeholder="Select one..."
                 value={formData.currentSituation}
@@ -546,6 +544,10 @@ export function RegistrationFormStep({
                     setValue("fieldOfStudy", "");
                     setValue("fieldOfStudyOther", "");
                   }
+                  if (!["au_485", "au_temp_work", "nz_temp_work", "skilled_migration"].includes(val)) {
+                    setValue("occupationSector", "");
+                    setValue("occupationSectorOther", "");
+                  }
                 }}
               />
               {formData.reasonForTaking === "other" && (
@@ -563,7 +565,7 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.referralSource}>
-            <FieldLabel required>How did you hear about PTE Academic?</FieldLabel>
+            <FieldLabel required>How did you hear about the test?</FieldLabel>
             <FieldContent>
               <SearchableDropdown
                 options={[
@@ -701,6 +703,60 @@ export function RegistrationFormStep({
             </Field>
           )}
 
+          {["au_485", "au_temp_work", "nz_temp_work", "skilled_migration"].includes(formData.reasonForTaking) && (
+            <Field
+              data-invalid={!!errors.occupationSector}
+              className="md:col-span-2 animate-in fade-in slide-in-from-top-2"
+            >
+              <FieldLabel required>What is your occupation sector?</FieldLabel>
+              <FieldContent>
+                <SearchableDropdown
+                  options={[
+                    { label: "Agriculture, Fishing, Forestry, Mining", value: "Agriculture, Fishing, Forestry, Mining" },
+                    { label: "Architecture", value: "Architecture" },
+                    { label: "Arts and Entertainment", value: "Arts and Entertainment" },
+                    { label: "Banking and Finance", value: "Banking and Finance" },
+                    { label: "Catering and Leisure", value: "Catering and Leisure" },
+                    { label: "Construction Industries", value: "Construction Industries" },
+                    { label: "Communications and Media", value: "Communications and Media" },
+                    { label: "Craft and Design", value: "Craft and Design" },
+                    { label: "Education", value: "Education" },
+                    { label: "Health and Social Services", value: "Health and Social Services" },
+                    { label: "Installation, Maintenance and Repair Services", value: "Installation, Maintenance and Repair Services" },
+                    { label: "Law and Legal Services", value: "Law and Legal Services" },
+                    { label: "Manufacturing and Assembly Services", value: "Manufacturing and Assembly Services" },
+                    { label: "Personal Services", value: "Personal Services" },
+                    { label: "Retail Trade", value: "Retail Trade" },
+                    { label: "Technical and Scientific", value: "Technical and Scientific" },
+                    { label: "Telecommunications and Media", value: "Telecommunications and Media" },
+                    { label: "Transport", value: "Transport" },
+                    { label: "Utilities (Gas, Water, Electricity, etc.)", value: "Utilities (Gas, Water, Electricity, etc.)" },
+                    { label: "Wholesale Trade", value: "Wholesale Trade" },
+                    { label: "Other - Specify below", value: "Other" },
+                  ]}
+                  placeholder="-Select Sector-"
+                  value={formData.occupationSector}
+                  onChange={(val) => {
+                    setValue("occupationSector", val);
+                    if (val !== "Other") setValue("occupationSectorOther", "");
+                  }}
+                />
+                {formData.occupationSector === "Other" && (
+                  <div className="mt-2 animate-in fade-in slide-in-from-top-2 duration-300">
+                    <Input
+                      placeholder="Please specify your occupation sector"
+                      value={formData.occupationSectorOther ?? ""}
+                      onChange={(e) => setValue("occupationSectorOther", e.target.value)}
+                      className="border-primary/40 focus:border-primary"
+                    />
+                    <FieldError errors={[errors.occupationSectorOther]} />
+                  </div>
+                )}
+                <FieldError errors={[errors.occupationSector]} />
+              </FieldContent>
+            </Field>
+          )}
+
         </div>
         <div className="space-y-3 md:col-span-2 animate-in fade-in slide-in-from-top-2">
           <Field data-invalid={!!errors.takenBefore}>
@@ -758,7 +814,7 @@ export function RegistrationFormStep({
               </Field>
 
               <Field data-invalid={!!errors.hasExistingAccount}>
-                <FieldLabel required>Do you have a Pearson account?</FieldLabel>
+                <FieldLabel required>Do you have a PTE account?</FieldLabel>
                 <FieldContent className="mt-2">
                   <RadioGroup
                     className="flex flex-col gap-3"
