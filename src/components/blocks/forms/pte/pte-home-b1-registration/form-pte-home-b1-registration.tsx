@@ -308,6 +308,18 @@ export default function FormPTEHomeB1Registration({ examId: initialExamId }: For
     }
   };
 
+  const getReasonLabel = (val: string) => {
+    const mapping: Record<string, string> = {
+      family_visa: "Family visa (Partner, Spouse or Parent)",
+      settlement: "Settlement (Indefinite Leave to Remain)",
+      citizenship: "Citizenship",
+      sportsperson_visa: "Sportsperson visa (Tier 2)",
+      representative_visa: "Representative of an Overseas Business visa",
+      other: formData.reasonForTakingOther || "Other",
+    };
+    return mapping[val] || val;
+  };
+
   const onInvalid = (errors: any) => {
     console.error("Validation Errors:", errors);
     
@@ -474,7 +486,7 @@ export default function FormPTEHomeB1Registration({ examId: initialExamId }: For
                   { label: "Emirate / City", value: formData.city },
                   { label: "Country of Residence", value: formData.countryOfResidence },
                   { label: "First Language", value: formData.homeLanguage || "N/A" },
-                  { label: "Reason for Test", value: formData.reasonForTaking },
+                  { label: "Reason for Test", value: getReasonLabel(formData.reasonForTaking) },
                   { label: "Current Situation", value: formData.currentSituation },
                 ]}
               />

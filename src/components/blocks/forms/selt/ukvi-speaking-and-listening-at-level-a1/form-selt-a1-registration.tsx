@@ -42,9 +42,9 @@ export default function FormSELTA1Registration({ examId: initialExamId }: FormPr
   const examId = initialExamId || examDetailResponse?.data?.id;
 
   const { data: courseDetailResponse } = useQuery({
-    queryKey: ["course-detail", "selt"],
+    queryKey: ["course-detail", "skills-for-english-selt"],
     queryFn: async () => {
-      const response = await api.get("/courses/selt");
+      const response = await api.get("/courses/skills-for-english-selt");
       return response.data;
     },
   });

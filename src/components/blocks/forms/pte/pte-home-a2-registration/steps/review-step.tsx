@@ -248,7 +248,17 @@ export function ReviewStep({
                   Reason for Test
                 </span>
                 <span className="text-sm font-semibold text-black">
-                  {data.reasonForTaking}
+                  {(() => {
+                    const mapping: Record<string, string> = {
+                      family_visa: "Family visa (Partner, Spouse or Parent)",
+                      settlement: "Settlement (Indefinite Leave to Remain)",
+                      citizenship: "Citizenship",
+                      sportsperson_visa: "Sportsperson visa (Tier 2)",
+                      representative_visa: "Representative of an Overseas Business visa",
+                      other: data.reasonForTakingOther || "Other",
+                    };
+                    return mapping[data.reasonForTaking] || data.reasonForTaking;
+                  })()}
                 </span>
               </div>
               <div className="flex flex-col">

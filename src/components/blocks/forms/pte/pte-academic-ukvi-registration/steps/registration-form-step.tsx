@@ -422,23 +422,9 @@ export function RegistrationFormStep({
             Additional Information
           </h3>
         </div>
-        <div>
-          <Field data-invalid={!!errors.planningCountry}>
-            <FieldLabel required className="whitespace-nowrap">Which country or region are you planning to study, work or settle in? If you have not yet decided please select your preferred destination.</FieldLabel>
-            <FieldContent>
-              <CountryDropdown
-                placeholder="-Select Country-"
-                value={formData.planningCountry}
-                onChange={(c) => setValue("planningCountry", c.name)}
-              />
-              <FieldError errors={[errors.planningCountry]} />
-            </FieldContent>
-          </Field>
-        </div>
-
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8">
           <Field data-invalid={!!errors.homeLanguage}>
-            <FieldLabel required>What is your first language?</FieldLabel>
+            <FieldLabel required>What language do you speak mostly at home?</FieldLabel>
             <FieldContent>
               <SearchableDropdown
                 options={languages}
@@ -501,38 +487,20 @@ export function RegistrationFormStep({
 
           <Field
             data-invalid={!!errors.reasonForTaking}
+            className="md:col-span-2"
           >
-            <FieldLabel required>Why are you taking PTE Academic UKVI?</FieldLabel>
+            <FieldLabel required>Why are you taking the test?</FieldLabel>
             <FieldContent>
               <SearchableDropdown
                 options={[
-                  { label: "Study", value: "study" },
-                  {
-                    label: "Nursing registration or licensing",
-                    value: "nursing"
-                  },
-                  {
-                    label: "Australia - MATES visa (India only)",
-                    value: "au_mates"
-                  },
-                  {
-                    label: "Australia - Post Study Work (485) visa",
-                    value: "au_485"
-                  },
-                  {
-                    label: "Australia - Temporary Work visa",
-                    value: "au_temp_work"
-                  },
-                  {
-                    label: "New Zealand - Temporary Work visa",
-                    value: "nz_temp_work"
-                  },
-                  {
-                    label: "Skilled migration / Permanent Residency",
-                    value: "skilled_migration"
-                  },
-                  { label: "Spouse / Family visa", value: "family_visa" },
-                  { label: "Working Holiday visa", value: "working_holiday" },
+                  { label: "Settlement (Indefinite Leave to Remain)", value: "settlement" },
+                  { label: "Citizenship", value: "citizenship" },
+                  { label: "Sportsperson visa (Tier 2)", value: "sportsperson_visa" },
+                  { label: "Student visa (formerly known as the Tier 4 General student visa)", value: "student_visa" },
+                  { label: "Skilled Worker visa (formerly known as the Tier 2 General work visa)", value: "skilled_worker_visa" },
+                  { label: "Start Up or Innovator Visa", value: "startup_innovator_visa" },
+                  { label: "Domestic Worker in a Private Household", value: "domestic_worker" },
+                  { label: "Minister of Religion visa (Tier 2)", value: "minister_religion_visa" },
                   { label: "Other - specify below", value: "other" },
                 ]}
                 placeholder="Select one..."
@@ -540,11 +508,15 @@ export function RegistrationFormStep({
                 onChange={(val) => {
                   setValue("reasonForTaking", val);
                   if (val !== "other") setValue("reasonForTakingOther", "");
-                  if (val !== "study") {
+                  if (val !== "student_visa") {
                     setValue("studyLevel", "");
                     setValue("studyLevelOther", "");
                     setValue("fieldOfStudy", "");
                     setValue("fieldOfStudyOther", "");
+                  }
+                  if (!["sportsperson_visa", "skilled_worker_visa", "startup_innovator_visa", "domestic_worker", "minister_religion_visa"].includes(val)) {
+                    setValue("occupationSector", "");
+                    setValue("occupationSectorOther", "");
                   }
                 }}
               />
@@ -562,8 +534,8 @@ export function RegistrationFormStep({
             </FieldContent>
           </Field>
 
-          <Field data-invalid={!!errors.referralSource}>
-            <FieldLabel required className="whitespace-nowrap">How did you hear about PTE Academic UKVI?</FieldLabel>
+          <Field data-invalid={!!errors.referralSource} className="md:col-span-2">
+            <FieldLabel required className="whitespace-nowrap">How did you hear about the test?</FieldLabel>
             <FieldContent>
               <SearchableDropdown
                 options={[
@@ -604,13 +576,13 @@ export function RegistrationFormStep({
             </FieldContent>
           </Field>
 
-          {formData.reasonForTaking === "study" && (
+          {formData.reasonForTaking === "student_visa" && (
             <Field
               data-invalid={!!errors.studyLevel}
               className="md:col-span-2 animate-in fade-in slide-in-from-top-2"
             >
               <FieldLabel required>
-                If you are taking PTE Academic UKVI for study, which level are you applying for?
+                If you are taking this test for study purposes, which level are you applying for?
               </FieldLabel>
               <FieldContent>
                 <SearchableDropdown
@@ -620,11 +592,11 @@ export function RegistrationFormStep({
                     { label: "(Post) Graduate / Masters degree", value: "postgraduate" },
                     { label: "Doctorate / PhD", value: "doctorate" },
                     { label: "MBA (Master of Business Administration)", value: "mba" },
-                    { label: "English Language Course", value: "english_language" },
                     { label: "Professional qualification", value: "professional" },
+                    { label: "English Language Course", value: "english_language" },
                     { label: "Other - specify below", value: "other" },
                   ]}
-                  placeholder="-Select Level-"
+                  placeholder="Select one..."
                   value={formData.studyLevel}
                   onChange={(val) => {
                     setValue("studyLevel", val);
@@ -651,7 +623,7 @@ export function RegistrationFormStep({
             </Field>
           )}
 
-          {formData.reasonForTaking === "study" && formData.studyLevel && (
+          {formData.reasonForTaking === "student_visa" && (
             <Field
               data-invalid={!!errors.fieldOfStudy}
               className="md:col-span-2 animate-in fade-in slide-in-from-top-2"
@@ -669,7 +641,7 @@ export function RegistrationFormStep({
                     { label: "Engineering", value: "engineering" },
                     { label: "Health", value: "health" },
                     { label: "Humanities & Arts", value: "humanities_arts" },
-                    { label: "Information Technology / Computer Sciences", value: "it_computer_sciences" },
+                    { label: "Information Technology", value: "it_computer_sciences" },
                     { label: "Law", value: "law" },
                     { label: "Mathematics", value: "mathematics" },
                     { label: "Medicine", value: "medicine" },
@@ -697,6 +669,60 @@ export function RegistrationFormStep({
                   </div>
                 )}
                 <FieldError errors={[errors.fieldOfStudy]} />
+              </FieldContent>
+            </Field>
+          )}
+
+          {["sportsperson_visa", "skilled_worker_visa", "startup_innovator_visa", "domestic_worker", "minister_religion_visa"].includes(formData.reasonForTaking) && (
+            <Field
+              data-invalid={!!errors.occupationSector}
+              className="md:col-span-2 animate-in fade-in slide-in-from-top-2"
+            >
+              <FieldLabel required>What is your occupation sector?</FieldLabel>
+              <FieldContent>
+                <SearchableDropdown
+                  options={[
+                    { label: "Agriculture, Fishing, Forestry, Mining", value: "Agriculture, Fishing, Forestry, Mining" },
+                    { label: "Architecture", value: "Architecture" },
+                    { label: "Arts and Entertainment", value: "Arts and Entertainment" },
+                    { label: "Banking and Finance", value: "Banking and Finance" },
+                    { label: "Catering and Leisure", value: "Catering and Leisure" },
+                    { label: "Construction Industries", value: "Construction Industries" },
+                    { label: "Communications and Media", value: "Communications and Media" },
+                    { label: "Craft and Design", value: "Craft and Design" },
+                    { label: "Education", value: "Education" },
+                    { label: "Health and Social Services", value: "Health and Social Services" },
+                    { label: "Installation, Maintenance and Repair Services", value: "Installation, Maintenance and Repair Services" },
+                    { label: "Law and Legal Services", value: "Law and Legal Services" },
+                    { label: "Manufacturing and Assembly Services", value: "Manufacturing and Assembly Services" },
+                    { label: "Personal Services", value: "Personal Services" },
+                    { label: "Retail Trade", value: "Retail Trade" },
+                    { label: "Technical and Scientific", value: "Technical and Scientific" },
+                    { label: "Telecommunications and Media", value: "Telecommunications and Media" },
+                    { label: "Transport", value: "Transport" },
+                    { label: "Utilities (Gas, Water, Electricity, etc.)", value: "Utilities (Gas, Water, Electricity, etc.)" },
+                    { label: "Wholesale Trade", value: "Wholesale Trade" },
+                    { label: "Other - Specify below", value: "Other" },
+                  ]}
+                  placeholder="Select one..."
+                  value={formData.occupationSector}
+                  onChange={(val) => {
+                    setValue("occupationSector", val);
+                    if (val !== "Other") setValue("occupationSectorOther", "");
+                  }}
+                />
+                {formData.occupationSector === "Other" && (
+                  <div className="mt-2 animate-in fade-in slide-in-from-top-2 duration-300">
+                    <Input
+                      placeholder="Please specify your occupation sector"
+                      value={formData.occupationSectorOther ?? ""}
+                      onChange={(e) => setValue("occupationSectorOther", e.target.value)}
+                      className="border-primary/40 focus:border-primary"
+                    />
+                    <FieldError errors={[errors.occupationSectorOther]} />
+                  </div>
+                )}
+                <FieldError errors={[errors.occupationSector]} />
               </FieldContent>
             </Field>
           )}
@@ -758,7 +784,7 @@ export function RegistrationFormStep({
               </Field>
 
               <Field data-invalid={!!errors.hasExistingAccount}>
-                <FieldLabel required>Do you have a Pearson account?</FieldLabel>
+                <FieldLabel required>Do you have a PTE account?</FieldLabel>
                 <FieldContent className="mt-2">
                   <RadioGroup
                     className="flex flex-col gap-3"

@@ -28,6 +28,20 @@ export function AddonServicesSection({
   workshopError,
   description,
 }: AddonServicesSectionProps) {
+  const getCourseEffectivePrice = (c: any) => {
+    if (c.discounted_price != null) return c.discounted_price;
+    if (c.special_discount) return c.price * (1 - c.special_discount / 100);
+    return c.price || 0;
+  };
+
+  const sortedCourses = Object.values(coursesData || {}).sort((a: any, b: any) => {
+    return getCourseEffectivePrice(a) - getCourseEffectivePrice(b);
+  });
+
+  const sortedWorkshops = Object.values(workshopsData || {}).sort((a: any, b: any) => {
+    return (a.price || 0) - (b.price || 0);
+  });
+
   return (
     <div className="pt-8 border-t border-slate-100 space-y-6">
       <div className="flex items-center gap-2 text-slate-400 mb-4">
@@ -49,7 +63,7 @@ export function AddonServicesSection({
               name="selectedCourse"
               options={[
                 { label: "None", value: "" },
-                ...Object.values(coursesData || {}).map((c: any) => ({
+                ...sortedCourses.map((c: any) => ({
                   label: c.name,
                   description: c.discounted_price != null ? (
                     <span className="flex flex-col gap-1.5 mt-1">
@@ -126,11 +140,10 @@ export function AddonServicesSection({
               name="selectedWorkshop"
               options={[
                 { label: "None", value: "" },
-                ...Object.values(workshopsData || {}).map((w: any) => ({
+                ...sortedWorkshops.map((w: any) => ({
                   label: w.name,
                   description: w.duration ? (
-                    <span className="flex items-center gap-1">
-                      {w.duration} •{" "}
+                    <span className="items-center gap-1">
                       <PriceDisplay
                         amount={w.price}
                         minimumFractionDigits={0}

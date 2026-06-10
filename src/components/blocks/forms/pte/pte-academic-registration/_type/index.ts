@@ -107,6 +107,14 @@ export const PteAcademicSchema = z.object({
         message: "Please specify your field of study",
         path: ["fieldOfStudyOther"],
     })
+    .refine((data) => !["au_485", "au_temp_work", "nz_temp_work", "skilled_migration"].includes(data.reasonForTaking) || (data.occupationSector && data.occupationSector !== ""), {
+        message: "Please select your occupation sector",
+        path: ["occupationSector"],
+    })
+    .refine((data) => data.occupationSector !== "Other" || (data.occupationSectorOther && data.occupationSectorOther.trim() !== ""), {
+        message: "Please specify your occupation sector",
+        path: ["occupationSectorOther"],
+    })
     .refine((data) => data.homeLanguage !== "Other" || (data.homeLanguageOther && data.homeLanguageOther.trim() !== ""), {
         message: "Please specify your first language",
         path: ["homeLanguageOther"],

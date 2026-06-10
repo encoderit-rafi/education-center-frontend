@@ -294,7 +294,9 @@ export default function FormPTEAcademicUKVIRegistration({ examId: initialExamId 
           current_situation: data.currentSituation,
           reason_for_taking: data.reasonForTaking,
           study_level: data.studyLevel,
-          occupation_sector: data.occupationSector,
+          occupation_sector: data.occupationSector === "Other"
+             ? data.occupationSectorOther || "Other"
+             : data.occupationSector,
           id_type: (data.idType as string) === "emirates_id" ? "emirates" : data.idType,
           id_number: data.idNumber,
           id_country_of_issue: data.idCountryOfIssue,
@@ -400,6 +402,21 @@ export default function FormPTEAcademicUKVIRegistration({ examId: initialExamId 
     }
   };
 
+  const getReasonLabel = (val: string) => {
+    const mapping: Record<string, string> = {
+      settlement: "Settlement (Indefinite Leave to Remain)",
+      citizenship: "Citizenship",
+      sportsperson_visa: "Sportsperson visa (Tier 2)",
+      student_visa: "Student visa (formerly known as the Tier 4 General student visa)",
+      skilled_worker_visa: "Skilled Worker visa (formerly known as the Tier 2 General work visa)",
+      startup_innovator_visa: "Start Up or Innovator Visa",
+      domestic_worker: "Domestic Worker in a Private Household",
+      minister_religion_visa: "Minister of Religion visa (Tier 2)",
+      other: formData.reasonForTakingOther || "Other",
+    };
+    return mapping[val] || val;
+  };
+
   return (
     <div className="max-w-7xl mx-auto px-4 py-12">
       <div className="text-center mb-12">
@@ -485,8 +502,9 @@ export default function FormPTEAcademicUKVIRegistration({ examId: initialExamId 
                   { label: "Emirate / City", value: formData.city },
                   { label: "Country of Residence", value: formData.countryOfResidence },
                   { label: "First Language", value: formData.homeLanguage || "N/A" },
-                  { label: "Reason for Test", value: formData.reasonForTaking },
+                  { label: "Reason for Test", value: `${getReasonLabel(formData.reasonForTaking)} ${formData.studyLevel ? `(${formData.studyLevel})` : ""}`.trim() },
                   { label: "Current Situation", value: formData.currentSituation },
+                  ...(formData.occupationSector ? [{ label: "Occupation Sector", value: formData.occupationSector === "Other" ? formData.occupationSectorOther || "Other" : formData.occupationSector }] : []),
                 ]}
               />
             </GlobalReviewStep>

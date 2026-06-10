@@ -48,7 +48,7 @@ export const PteHomeB1Schema = z.object({
     // Step 3: Your Profile
     homeLanguage: stringOrObject.refine(val => val.length > 0, "Please select your language"),
     homeLanguageOther: z.string().optional(),
-    planningCountry: stringOrObject.refine(val => val.length > 0, "Please select a destination country"),
+    planningCountry: stringOrObject.optional(),
     currentSituation: stringOrObject.refine(val => val.length > 0, "Please select your current situation"),
     currentSituationOther: z.string().optional(),
     reasonForTaking: z.string().min(1, "Please select why you are taking the test"),
