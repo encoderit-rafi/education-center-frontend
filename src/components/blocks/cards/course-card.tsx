@@ -106,9 +106,10 @@ export default function CourseCard({
             )}
           </div>
 
-          <BaseCardDescription className="text-sm text-slate-600 font-medium leading-relaxed line-clamp-3">
+          {/* <BaseCardDescription className="text-sm text-slate-600 font-medium leading-relaxed line-clamp-3">
             {pkg.description}
-          </BaseCardDescription>
+          </BaseCardDescription> */}
+          <BaseCardList items={pkg.bestFor} checked />
         </div>
 
         <div className="pt-2">
