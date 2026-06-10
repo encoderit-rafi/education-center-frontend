@@ -3,18 +3,16 @@
 import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { cn } from "@/lib/utils";
 import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+  Field,
+  FieldLabel,
+  FieldContent,
+  FieldError,
+} from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -58,6 +56,7 @@ export default function CareerPage() {
   const [captchaError, setCaptchaError] = useState<string | null>(null);
   const [isSuccess, setIsSuccess] = useState(false);
   const captchaRef = useRef<ReCAPTCHA>(null);
+  const resumeFileRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -80,6 +79,13 @@ export default function CareerPage() {
       resume: undefined,
     },
   });
+
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors, isSubmitting },
+  } = form;
 
   const onSubmit = async (data: CareerFormValues) => {
     const token = captchaRef.current?.getValue();
@@ -215,372 +221,334 @@ export default function CareerPage() {
                   </p>
                 </div>
 
-                <Form {...form}>
-                  <form
-                    onSubmit={form.handleSubmit(onSubmit)}
-                    className="space-y-8"
-                  >
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                      {/* First Name, Middle Name, Last Name */}
-                      <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <FormField
-                          control={form.control}
-                          name="first_name"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>
-                                First Name:*
-                              </FormLabel>
-                              <FormControl>
-                                <Input
-                                  placeholder="John"
-                                  {...field}
-                                />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                        <FormField
-                          control={form.control}
-                          name="middle_name"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>
-                                Middle Name:
-                              </FormLabel>
-                              <FormControl>
-                                <Input
-                                  placeholder="Robert"
-                                  {...field}
-                                />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                        <FormField
-                          control={form.control}
-                          name="last_name"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>
-                                Last Name:*
-                              </FormLabel>
-                              <FormControl>
-                                <Input
-                                  placeholder="Doe"
-                                  {...field}
-                                />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                      </div>
+                <form
+                  onSubmit={handleSubmit(onSubmit)}
+                  className="space-y-8"
+                >
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    {/* First Name, Middle Name, Last Name */}
+                    <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-3 gap-6">
+                      <Field data-invalid={!!errors.first_name}>
+                        <FieldLabel required>First Name</FieldLabel>
+                        <FieldContent>
+                          <Input
+                            placeholder="John"
+                            {...register("first_name")}
+                          />
+                        </FieldContent>
+                        {errors.first_name && (
+                          <FieldError>{errors.first_name.message}</FieldError>
+                        )}
+                      </Field>
 
-                      {/* Gender */}
-                      <FormField
-                        control={form.control}
-                        name="gender"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>
-                              Select Gender:*
-                            </FormLabel>
+                      <Field data-invalid={!!errors.middle_name}>
+                        <FieldLabel>Middle Name</FieldLabel>
+                        <FieldContent>
+                          <Input
+                            placeholder="Robert"
+                            {...register("middle_name")}
+                          />
+                        </FieldContent>
+                        {errors.middle_name && (
+                          <FieldError>{errors.middle_name.message}</FieldError>
+                        )}
+                      </Field>
+
+                      <Field data-invalid={!!errors.last_name}>
+                        <FieldLabel required>Last Name</FieldLabel>
+                        <FieldContent>
+                          <Input
+                            placeholder="Doe"
+                            {...register("last_name")}
+                          />
+                        </FieldContent>
+                        {errors.last_name && (
+                          <FieldError>{errors.last_name.message}</FieldError>
+                        )}
+                      </Field>
+                    </div>
+
+                    {/* Gender */}
+                    <Field data-invalid={!!errors.gender}>
+                      <FieldLabel className="text-sm font-medium">
+                        Select Gender <span className="text-primary font-bold">*</span>
+                      </FieldLabel>
+                      <FieldContent>
+                        <Controller
+                          control={control}
+                          name="gender"
+                          render={({ field }) => (
                             <Select
                               onValueChange={field.onChange}
-                              defaultValue={field.value}
+                              value={field.value}
                             >
-                              <FormControl>
-                                <SelectTrigger>
-                                  <SelectValue placeholder="-Select Gender-" />
-                                </SelectTrigger>
-                              </FormControl>
+                              <SelectTrigger>
+                                <SelectValue placeholder="-Select Gender-" />
+                              </SelectTrigger>
                               <SelectContent className="bg-white">
                                 <SelectItem value="male">Male</SelectItem>
                                 <SelectItem value="female">Female</SelectItem>
-                                <SelectItem value="other">Other</SelectItem>
                               </SelectContent>
                             </Select>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
+                          )}
+                        />
+                      </FieldContent>
+                      {errors.gender && (
+                        <FieldError>{errors.gender.message}</FieldError>
+                      )}
+                    </Field>
 
-                      {/* DOB */}
-                      <DateTimePicker
-                        control={form.control}
-                        name="dob"
-                        label="Date of Birth:*"
-                        mode="date"
-                        placeholder="Select your birth date"
-                      />
+                    {/* DOB */}
+                    <Field data-invalid={!!errors.dob}>
+                      <FieldLabel className="text-sm font-medium">
+                        Date of Birth <span className="text-primary font-bold">*</span>
+                      </FieldLabel>
+                      <FieldContent>
+                        <Controller
+                          control={control}
+                          name="dob"
+                          render={({ field }) => (
+                            <DateTimePicker
+                              mode="date"
+                              placeholder="Select your birth date"
+                              value={field.value}
+                              onChange={field.onChange}
+                            />
+                          )}
+                        />
+                      </FieldContent>
+                      {errors.dob && (
+                        <FieldError>{(errors.dob as any).message}</FieldError>
+                      )}
+                    </Field>
 
-                      {/* Nationality */}
-                      <FormField
-                        control={form.control}
-                        name="nationality"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>
-                              Nationality:*
-                            </FormLabel>
-                            <FormControl>
-                              <CountryDropdown
-                                value={field.value}
-                                onChange={(country) =>
-                                  field.onChange(country.alpha2.toUpperCase())
-                                }
-                                placeholder="-Select Nationality-"
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
+                    {/* Nationality */}
+                    <Field data-invalid={!!errors.nationality}>
+                      <FieldLabel className="text-sm font-medium">
+                        Nationality <span className="text-primary font-bold">*</span>
+                      </FieldLabel>
+                      <FieldContent>
+                        <Controller
+                          control={control}
+                          name="nationality"
+                          render={({ field }) => (
+                            <CountryDropdown
+                              value={field.value}
+                              onChange={(country) =>
+                                field.onChange(country.alpha2.toUpperCase())
+                              }
+                              placeholder="-Select Nationality-"
+                            />
+                          )}
+                        />
+                      </FieldContent>
+                      {errors.nationality && (
+                        <FieldError>{errors.nationality.message}</FieldError>
+                      )}
+                    </Field>
 
-                      {/* Email */}
-                      <FormField
-                        control={form.control}
-                        name="email"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>
-                              Email Address:*
-                            </FormLabel>
-                            <FormControl>
-                              <Input
-                                type="email"
-                                placeholder="email@example.com"
-                                {...field}
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
+                    {/* Email */}
+                    <Field data-invalid={!!errors.email}>
+                      <FieldLabel required>Email Address</FieldLabel>
+                      <FieldContent>
+                        <Input
+                          type="email"
+                          placeholder="email@example.com"
+                          {...register("email")}
+                        />
+                      </FieldContent>
+                      {errors.email && (
+                        <FieldError>{errors.email.message}</FieldError>
+                      )}
+                    </Field>
 
-                      {/* Phone */}
-                      <FormField
-                        control={form.control}
-                        name="mobile"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>
-                              Mobile No:*
-                            </FormLabel>
-                            <FormControl>
-                              <PhoneInput
-                                {...field}
-                                defaultCountry="AE"
-                                placeholder="Ex: 50 123 4567"
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
+                    {/* Phone */}
+                    <Field data-invalid={!!errors.mobile}>
+                      <FieldLabel className="text-sm font-medium">
+                        Mobile No <span className="text-primary font-bold">*</span>
+                      </FieldLabel>
+                      <FieldContent>
+                        <Controller
+                          control={control}
+                          name="mobile"
+                          render={({ field }) => (
+                            <PhoneInput
+                              value={field.value}
+                              onChange={field.onChange}
+                              defaultCountry="AE"
+                              placeholder="Ex: 50 123 4567"
+                            />
+                          )}
+                        />
+                      </FieldContent>
+                      {errors.mobile && (
+                        <FieldError>{errors.mobile.message}</FieldError>
+                      )}
+                    </Field>
 
-                      {/* Address */}
-                      <FormField
-                        control={form.control}
-                        name="address"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>
-                              Residential Address:*
-                            </FormLabel>
-                            <FormControl>
-                              <Input
-                                placeholder="Enter your full address"
-                                {...field}
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
+                    {/* Address */}
+                    <Field data-invalid={!!errors.address}>
+                      <FieldLabel required>Residential Address</FieldLabel>
+                      <FieldContent>
+                        <Input
+                          placeholder="Enter your full address"
+                          {...register("address")}
+                        />
+                      </FieldContent>
+                      {errors.address && (
+                        <FieldError>{errors.address.message}</FieldError>
+                      )}
+                    </Field>
 
-                      {/* Emirate/City */}
-                      <FormField
-                        control={form.control}
-                        name="city"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>
-                              Emirate / City:*
-                            </FormLabel>
-                            <FormControl>
-                              <Input
-                                placeholder="Dubai"
-                                {...field}
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
+                    {/* Emirate/City */}
+                    <Field data-invalid={!!errors.city}>
+                      <FieldLabel required>Emirate / City</FieldLabel>
+                      <FieldContent>
+                        <Input
+                          placeholder="Dubai"
+                          {...register("city")}
+                        />
+                      </FieldContent>
+                      {errors.city && (
+                        <FieldError>{errors.city.message}</FieldError>
+                      )}
+                    </Field>
 
-                      {/* P.O. Box */}
-                      <FormField
-                        control={form.control}
-                        name="pobox"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>
-                              P.O. Box:
-                            </FormLabel>
-                            <FormControl>
-                              <Input
-                                placeholder="123456"
-                                {...field}
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
+                    {/* P.O. Box */}
+                    <Field data-invalid={!!errors.pobox}>
+                      <FieldLabel>P.O. Box</FieldLabel>
+                      <FieldContent>
+                        <Input
+                          placeholder="123456"
+                          {...register("pobox")}
+                        />
+                      </FieldContent>
+                      {errors.pobox && (
+                        <FieldError>{errors.pobox.message}</FieldError>
+                      )}
+                    </Field>
 
-                      {/* File Upload */}
-                      <FormField
-                        control={form.control}
-                        name="resume"
-                        render={({ field }) => {
-                          const file = field.value as File | undefined;
-                          const fileRef = useRef<HTMLInputElement>(null);
-                          return (
-                            <FormItem>
-                              <FormLabel>
-                                Attach your CV:*
-                              </FormLabel>
-                              <FormControl>
-                                <div
-                                  onClick={() => fileRef.current?.click()}
-                                  onDragOver={(e) => {
-                                    e.preventDefault();
-                                    e.stopPropagation();
-                                  }}
-                                  onDrop={(e) => {
-                                    e.preventDefault();
-                                    e.stopPropagation();
+                    {/* File Upload */}
+                    <Field data-invalid={!!errors.resume}>
+                      <FieldLabel className="text-sm font-medium">
+                        Attach your CV <span className="text-primary font-bold">*</span>
+                      </FieldLabel>
+                      <FieldContent>
+                        <Controller
+                          control={control}
+                          name="resume"
+                          render={({ field }) => {
+                            const file = field.value as File | undefined;
+                            return (
+                              <div
+                                onClick={() => resumeFileRef.current?.click()}
+                                onDragOver={(e) => {
+                                  e.preventDefault();
+                                  e.stopPropagation();
+                                }}
+                                onDrop={(e) => {
+                                  e.preventDefault();
+                                  e.stopPropagation();
+                                  if (
+                                    e.dataTransfer.files &&
+                                    e.dataTransfer.files[0]
+                                  ) {
+                                    const droppedFile = e.dataTransfer.files[0];
+                                    const ext = droppedFile.name
+                                      .split(".")
+                                      .pop()
+                                      ?.toLowerCase();
                                     if (
-                                      e.dataTransfer.files &&
-                                      e.dataTransfer.files[0]
+                                      ext &&
+                                      ["pdf", "doc", "docx"].includes(ext)
                                     ) {
-                                      const droppedFile =
-                                        e.dataTransfer.files[0];
-                                      const ext = droppedFile.name
-                                        .split(".")
-                                        .pop()
-                                        ?.toLowerCase();
-                                      if (
-                                        ext &&
-                                        ["pdf", "doc", "docx"].includes(ext)
-                                      ) {
-                                        field.onChange(droppedFile);
-                                      } else {
-                                        toast.error("Invalid file type", {
-                                          description:
-                                            "Only PDF, DOC, or DOCX files are allowed.",
-                                        });
-                                      }
+                                      field.onChange(droppedFile);
+                                    } else {
+                                      toast.error("Invalid file type", {
+                                        description:
+                                          "Only PDF, DOC, or DOCX files are allowed.",
+                                      });
+                                    }
+                                  }
+                                }}
+                                className={cn(
+                                  "relative border-2 border-dashed p-10 flex flex-col items-center justify-center space-y-4 transition-colors cursor-pointer group rounded-none",
+                                  file
+                                    ? "border-[#A11D1D]/30 bg-[#A11D1D]/5"
+                                    : "border-gray-200 hover:border-[#A11D1D] bg-gray-50/50",
+                                )}
+                              >
+                                <input
+                                  type="file"
+                                  ref={resumeFileRef}
+                                  className="hidden"
+                                  accept=".pdf,.doc,.docx"
+                                  onChange={(e) => {
+                                    if (e.target.files && e.target.files[0]) {
+                                      field.onChange(e.target.files[0]);
                                     }
                                   }}
-                                  className={cn(
-                                    "relative border-2 border-dashed p-10 flex flex-col items-center justify-center space-y-4 transition-colors cursor-pointer group rounded-none",
-                                    file
-                                      ? "border-[#A11D1D]/30 bg-[#A11D1D]/5"
-                                      : "border-gray-200 hover:border-[#A11D1D] bg-gray-50/50",
-                                  )}
-                                >
-                                  <input
-                                    type="file"
-                                    ref={fileRef}
-                                    className="hidden"
-                                    accept=".pdf,.doc,.docx"
-                                    onChange={(e) => {
-                                      if (e.target.files && e.target.files[0]) {
-                                        field.onChange(e.target.files[0]);
-                                      }
-                                    }}
-                                  />
-                                  {file ? (
-                                    <div className="flex flex-col items-center space-y-3 w-full text-center">
-                                      <div className="w-16 h-16 bg-[#A11D1D]/10 rounded-full flex items-center justify-center text-[#A11D1D]">
-                                        <CheckCircle2 className="w-8 h-8" />
-                                      </div>
-                                      <div className="space-y-1">
-                                        <p className="font-bold text-gray-900 text-sm max-w-xs truncate">
-                                          {file.name}
-                                        </p>
-                                        <p className="text-xs text-gray-500 font-medium">
-                                          {(file.size / (1024 * 1024)).toFixed(
-                                            2,
-                                          )}{" "}
-                                          MB
-                                        </p>
-                                      </div>
-                                      <button
-                                        type="button"
-                                        onClick={(e) => {
-                                          e.stopPropagation();
-                                          field.onChange(undefined);
-                                          if (fileRef.current)
-                                            fileRef.current.value = "";
-                                        }}
-                                        className="text-xs text-[#A11D1D] hover:text-[#8A1818] font-black uppercase tracking-widest flex items-center gap-1 hover:underline mx-auto mt-2"
-                                      >
-                                        Remove File
-                                      </button>
+                                />
+                                {file ? (
+                                  <div className="flex flex-col items-center space-y-3 w-full text-center">
+                                    <div className="w-16 h-16 bg-[#A11D1D]/10 rounded-full flex items-center justify-center text-[#A11D1D]">
+                                      <CheckCircle2 className="w-8 h-8" />
                                     </div>
-                                  ) : (
-                                    <>
-                                      <Upload className="w-10 h-10 text-gray-300 group-hover:text-[#A11D1D] transition-colors" />
-                                      <div className="text-center">
-                                        <p className="text-sm font-bold text-gray-600">
-                                          Click to upload or drag and drop
-                                        </p>
-                                        <p className="text-[10px] text-gray-400 uppercase tracking-widest mt-1">
-                                          Only doc, docx or pdf file allowed
-                                        </p>
-                                      </div>
-                                    </>
-                                  )}
-                                </div>
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          );
-                        }}
-                      />
+                                    <div className="space-y-1">
+                                      <p className="font-bold text-gray-900 text-sm max-w-xs truncate">
+                                        {file.name}
+                                      </p>
+                                      <p className="text-xs text-gray-500 font-medium">
+                                        {(file.size / (1024 * 1024)).toFixed(
+                                          2,
+                                        )}{" "}
+                                        MB
+                                      </p>
+                                    </div>
+                                    <button
+                                      type="button"
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        field.onChange(undefined);
+                                        if (resumeFileRef.current)
+                                          resumeFileRef.current.value = "";
+                                      }}
+                                      className="text-xs text-[#A11D1D] hover:text-[#8A1818] font-black uppercase tracking-widest flex items-center gap-1 hover:underline mx-auto mt-2"
+                                    >
+                                      Remove File
+                                    </button>
+                                  </div>
+                                ) : (
+                                  <>
+                                    <Upload className="w-10 h-10 text-gray-300 group-hover:text-[#A11D1D] transition-colors" />
+                                    <div className="text-center">
+                                      <p className="text-sm font-bold text-gray-600">
+                                        Click to upload or drag and drop
+                                      </p>
+                                      <p className="text-[10px] text-gray-400 uppercase tracking-widest mt-1">
+                                        Only doc, docx or pdf file allowed
+                                      </p>
+                                    </div>
+                                  </>
+                                )}
+                              </div>
+                            );
+                          }}
+                        />
+                      </FieldContent>
+                      {errors.resume && (
+                        <FieldError>{errors.resume.message as string}</FieldError>
+                      )}
+                    </Field>
+                  </div>
 
-                      {/* ReCAPTCHA */}
-                      {/* <div className="md:col-span-2 space-y-2">
-                                                {mounted && (
-                                                    <ReCAPTCHA
-                                                        ref={captchaRef}
-                                                        sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
-                                                        onChange={() => setCaptchaError(null)}
-                                                    />
-                                                )}
-                                                {captchaError && (
-                                                    <p className="text-[#A11D1D] text-sm font-medium">{captchaError}</p>
-                                                )}
-                                            </div> */}
-                    </div>
-
-                    <Button
-                      type="submit"
-                      disabled={form.formState.isSubmitting}
-                      // className="w-full md:w-auto px-12 py-8 bg-[#A11D1D] hover:bg-[#8A1818] text-white font-black text-xs uppercase tracking-[0.2em] rounded-none shadow-lg hover:shadow-xl transition-all disabled:opacity-50"
-                    >
-                      {form.formState.isSubmitting
-                        ? "Submitting..."
-                        : "Submit Application"}
-                    </Button>
-                  </form>
-                </Form>
+                  <Button
+                    type="submit"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? "Submitting..." : "Submit Application"}
+                  </Button>
+                </form>
               </div>
             </div>
           </div>
