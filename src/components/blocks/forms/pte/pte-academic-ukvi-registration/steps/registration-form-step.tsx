@@ -21,15 +21,15 @@ import {
   FieldError,
   FieldLabel
 } from "@/components/ui/field";
-import { TPteHomeUKVISchema } from "../_type";
+import { TPteAcademicUKVISchema } from "../_type";
 import { PriceDisplay } from "@/components/ui/price-display";
 import { Badge } from "@/components/ui/badge";
 import { AddonServicesSection } from "@/components/blocks/forms/shared/addon-services-section";
 import { MarketingPreferencesSection, TEPTH_MARKETING_OPTIONS } from "@/components/blocks/forms/shared/marketing-preferences-section";
 
 interface RegistrationFormStepProps {
-  form: UseFormReturn<TPteHomeUKVISchema>;
-  onSubmit: (data: TPteHomeUKVISchema) => void;
+  form: UseFormReturn<TPteAcademicUKVISchema>;
+  onSubmit: (data: TPteAcademicUKVISchema) => void;
   onInvalid: (errors: any) => void;
   onBack: () => void;
   languages: any[];
@@ -502,7 +502,7 @@ export function RegistrationFormStep({
           <Field
             data-invalid={!!errors.reasonForTaking}
           >
-            <FieldLabel required>Why are you taking PTE Home UKVI?</FieldLabel>
+            <FieldLabel required>Why are you taking PTE Academic UKVI?</FieldLabel>
             <FieldContent>
               <SearchableDropdown
                 options={[
@@ -563,7 +563,7 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.referralSource}>
-            <FieldLabel required className="whitespace-nowrap">How did you hear about PTE Home UKVI?</FieldLabel>
+            <FieldLabel required className="whitespace-nowrap">How did you hear about PTE Academic UKVI?</FieldLabel>
             <FieldContent>
               <SearchableDropdown
                 options={[
@@ -610,7 +610,7 @@ export function RegistrationFormStep({
               className="md:col-span-2 animate-in fade-in slide-in-from-top-2"
             >
               <FieldLabel required>
-                If you are taking PTE Home UKVI for study, which level are you applying for?
+                If you are taking PTE Academic UKVI for study, which level are you applying for?
               </FieldLabel>
               <FieldContent>
                 <SearchableDropdown
@@ -705,7 +705,7 @@ export function RegistrationFormStep({
         <div className="space-y-3 md:col-span-2 animate-in fade-in slide-in-from-top-2">
           <Field data-invalid={!!errors.takenBefore}>
             <FieldLabel required>
-              Have you taken PTE Home UKVI before?
+              Have you taken PTE Academic UKVI before?
             </FieldLabel>
             <FieldContent className="mt-2">
               <RadioGroup

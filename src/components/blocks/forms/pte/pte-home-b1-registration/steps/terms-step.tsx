@@ -8,7 +8,7 @@ import { AED } from "@/components/ui/aed";
 const B1_NOTICES: (React.ReactNode | string)[] = [
   <span key="1">
     <strong className="font-semibold">The Exam Preparation &amp; Testing House L.L.C</strong> facilitates{" "}
-    <strong className="font-semibold">PTE Home B1</strong> test registration strictly as an optional convenience for
+    <strong className="font-semibold">PTE Home B1 </strong>test registration strictly as an optional convenience for
     candidates. We expressly disclaim any liability or involvement regarding test administration, scoring, technical
     issues, or the distribution of results. Alternatively, candidates may choose to register directly via the official
     exam provider&apos;s portal while designating our facility as their testing location.

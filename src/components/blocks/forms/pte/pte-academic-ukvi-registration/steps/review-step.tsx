@@ -10,11 +10,11 @@ import {
   } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { UseFormReturn } from "react-hook-form";
-import { TPteHomeUKVISchema } from "../_type";
+import { TPteAcademicUKVISchema } from "../_type";
 
 interface ReviewStepProps {
-  data: TPteHomeUKVISchema;
-  form: UseFormReturn<TPteHomeUKVISchema>;
+  data: TPteAcademicUKVISchema;
+  form: UseFormReturn<TPteAcademicUKVISchema>;
   onEdit: () => void;
   onSubmit: (e?: React.BaseSyntheticEvent) => Promise<void>;
   onInvalid: (errors: any) => void;

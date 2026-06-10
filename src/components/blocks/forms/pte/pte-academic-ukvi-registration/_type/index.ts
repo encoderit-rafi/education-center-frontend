@@ -8,7 +8,7 @@ const stringOrObject = z.union([z.string(), z.any(), z.null(), z.undefined()]).t
     return "";
 });
 
-export const PteHomeUKVISchema = z.object({
+export const PteAcademicUKVISchema = z.object({
     // Step 1: Personal Details
     givenNames: z.string().optional(),
     noGivenNames: z.boolean(),
@@ -120,4 +120,4 @@ export const PteHomeUKVISchema = z.object({
     path: ["hasExistingAccount"],
 });
 
-export type TPteHomeUKVISchema = z.infer<typeof PteHomeUKVISchema>;
+export type TPteAcademicUKVISchema = z.infer<typeof PteAcademicUKVISchema>;

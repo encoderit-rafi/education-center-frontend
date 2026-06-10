@@ -5,7 +5,7 @@ import FormPTECoreRegistration from "@/components/blocks/forms/pte/pte-core-regi
 import FormPTEHomeA1Registration from "@/components/blocks/forms/pte/pte-home-a1-registration/form-pte-home-a1-registration";
 import FormPTEHomeA2Registration from "@/components/blocks/forms/pte/pte-home-a2-registration/form-pte-home-a2-registration";
 import FormPTEHomeB1Registration from "@/components/blocks/forms/pte/pte-home-b1-registration/form-pte-home-b1-registration";
-import FormPTEHomeUkviRegistration from "@/components/blocks/forms/pte/pte-home-ukvi-registration/form-pte-home-ukvi-registration";
+import FormPTEAcademicUkviRegistration from "@/components/blocks/forms/pte/pte-academic-ukvi-registration/form-pte-academic-ukvi-registration";
 import FormSELTA1Registration from "@/components/blocks/forms/selt/ukvi-speaking-and-listening-at-level-a1/form-selt-a1-registration";
 import FormSELTA2Registration from "@/components/blocks/forms/selt/ukvi-speaking-and-listening-at-level-a2/form-selt-a2-registration";
 import FormSELTB1Registration from "@/components/blocks/forms/selt/ukvi-speaking-and-listening-at-level-b1/form-selt-b1-registration";
@@ -180,7 +180,7 @@ export default async function BookExamsId({
       return <FormPTEHomeB1Registration examId={exam.id} />;
     case "pte-ukvi":
     case "pte-academic-ukvi":
-      return <FormPTEHomeUkviRegistration examId={exam.id} />;
+      return <FormPTEAcademicUkviRegistration examId={exam.id} />;
 
     default:
       return notFound();
