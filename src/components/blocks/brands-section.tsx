@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 import { Marquee } from "../ui/marquee";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 const brands = [
   {
@@ -36,11 +37,12 @@ const BrandLogo = ({ img, name }: { img: string; name: string }) => {
 };
 
 export default function BrandsSection() {
+  const t = useTranslations("HomePage.BrandsSection");
   return (
     <section className="py-12">
       <div className="max-w-7xl mx-auto overflow-hidden">
         <p className="mb-10 text-primary text-center text-[11px] font-bold uppercase tracking-[0.3em] lg:text-xs">
-          Authorised Testing Centre For
+          {t("heading")}
         </p>
         <Marquee pauseOnHover className="[--duration:30s]">
           {/* Repeat brands to ensure smooth marquee if few items */}

@@ -6,8 +6,10 @@ import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import ContactForm from "@/app/contact-us/_components/form-contact";
 import { MessageCircle } from "lucide-react";
 import { SectionHeader } from "@/components/ui/section-header";
+import { useTranslations } from "next-intl";
 
 export default function ContactUs() {
+  const t = useTranslations("ContactUsPage");
   return (
     <main className="bg-white min-h-screen">
       {/* Hero Section */}
@@ -15,13 +17,13 @@ export default function ContactUs() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
           {/* Left Content */}
           <SectionHeader
-            badge="CONTACT US"
+            badge={t("HeroSection.badge")}
             title={
               <>
-                Get in Touch<span className="text-primary"> With Us</span>
+                {t("HeroSection.title")}<span className="text-primary">{t("HeroSection.titleAccent")}</span>
               </>
             }
-            description="Whether you're preparing for an entrance exam or need deep editorial review, we're here to guide you. Our expert team is ready to assist you at every step of your journey."
+            description={t("HeroSection.description")}
           />
 
           {/* Right Visual */}
@@ -55,10 +57,10 @@ export default function ContactUs() {
                   </span>
                   <div className="space-y-0.5">
                     <h3 className="text-base font-semibold text-slate-800 group-hover:text-primary transition-colors tracking-tight">
-                      +971 6 553 1250
+                      {t("ContactDetails.phone")}
                     </h3>
                     <p className="text-xs font-normal text-slate-500">
-                      Available Saturday – Thursday, 9:00 AM – 9:00 PM
+                      {t("ContactDetails.phoneAvailability")}
                     </p>
                   </div>
                 </div>
@@ -71,10 +73,10 @@ export default function ContactUs() {
                   </span>
                   <div className="space-y-0.5">
                     <h3 className="text-base font-semibold text-slate-800 group-hover:text-primary transition-colors tracking-tight">
-                      info@tepth.org
+                      {t("ContactDetails.email")}
                     </h3>
                     <p className="text-xs font-normal text-slate-500">
-                      We typically respond within 24 hours
+                      {t("ContactDetails.emailAvailability")}
                     </p>
                   </div>
                 </div>
@@ -87,9 +89,9 @@ export default function ContactUs() {
                   </span>
                   <div className="space-y-0.5">
                     <h3 className="text-sm font-semibold text-slate-800 leading-relaxed group-hover:text-primary transition-colors tracking-tight">
-                      The Exam Preparation & Testing House L.L.C Suite 701, 7th
-                      Floor, <br />Tabarak Tower, Corniche Road, Al Mamzar, Sharjah,
-                      <br /> United Arab Emirates.
+                      {t("ContactDetails.addressPart1")} <br />
+                      {t("ContactDetails.addressPart2")} <br />
+                      {t("ContactDetails.addressPart3")}
                     </h3>
                   </div>
                 </div>
@@ -106,10 +108,10 @@ export default function ContactUs() {
                   </span>
                   <div className="space-y-0.5">
                     <h3 className="text-base font-semibold text-slate-800 group-hover:text-primary transition-colors tracking-tight">
-                      Chat with us
+                      {t("ContactDetails.chat")}
                     </h3>
                     <p className="text-xs font-normal text-slate-500">
-                      Quick answers via WhatsApp
+                      {t("ContactDetails.chatAvailability")}
                     </p>
                   </div>
                 </div>
@@ -123,25 +125,25 @@ export default function ContactUs() {
 
                 <div className="flex-1 space-y-3">
                   <h3 className="text-xs font-bold uppercase tracking-widest text-slate-500 pt-0.5">
-                    Office Hours
+                    {t("OfficeHours.title")}
                   </h3>
 
                   <div className="space-y-2">
                     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-1 sm:gap-4">
                       <span className="text-sm font-medium text-slate-600">
-                        Saturday – Thursday
+                        {t("OfficeHours.saturdayToThursday")}
                       </span>
                       <span className="text-sm text-slate-800 font-semibold">
-                        9:00 AM – 9:00 PM
+                        {t("OfficeHours.hours")}
                       </span>
                     </div>
                     <div className="w-full h-px bg-slate-200/40" />
                     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-1 sm:gap-4">
                       <span className="text-sm font-medium text-slate-600">
-                        Friday
+                        {t("OfficeHours.friday")}
                       </span>
                       <span className="text-rose-600 font-bold uppercase text-xs tracking-wider">
-                        Closed
+                        {t("OfficeHours.closed")}
                       </span>
                     </div>
                   </div>
@@ -157,7 +159,7 @@ export default function ContactUs() {
               <SectionHeader
                 title={
                   <>
-                    Send a Direct<span className="text-primary"> Message</span>
+                    {t("FormSection.title")}<span className="text-primary">{t("FormSection.titleAccent")}</span>
                   </>
                 }
                 className="mb-12"

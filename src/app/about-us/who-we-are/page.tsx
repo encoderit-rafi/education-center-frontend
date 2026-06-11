@@ -2,8 +2,10 @@
 
 import Image from "next/image";
 import { SectionHeader } from "@/components/ui/section-header";
+import { useTranslations } from "next-intl";
 
 export default function WhoWeAre() {
+  const t = useTranslations("AboutUsPage.WhoWeAre");
   return (
     <main className="bg-white min-h-screen">
       {/* Hero Section */}
@@ -11,14 +13,14 @@ export default function WhoWeAre() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
           {/* Left Content */}
           <SectionHeader
-            badge="ABOUT TEPTH"
+            badge={t("HeroSection.badge")}
             title={
               <>
-                UAE&apos;s Trusted Exam Testing
-                <span className="text-primary"> & Preparation House</span>
+                {t("HeroSection.title")}
+                <span className="text-primary">{t("HeroSection.titleAccent")}</span>
               </>
             }
-            description="For over a decade, TEPTH has been the go-to destination for international language exam registration, expert preparation courses, and secure proctoring services across the UAE."
+            description={t("HeroSection.description")}
           />
 
           {/* Right Visual */}
@@ -55,53 +57,30 @@ export default function WhoWeAre() {
           {/* Right Narrative */}
           <div className="space-y-12">
             <SectionHeader
-              badge="WHO WE ARE"
+              badge={t("NarrativeSection.badge")}
               title={
                 <>
-                  Education is not preparation
+                  {t("NarrativeSection.title")}
                   <span className="text-primary">
-                    {" "}
-                    for life; education is life itself.
+                    {t("NarrativeSection.titleAccent")}
                   </span>
                 </>
               }
               description={
-                <p className="italic text-sm font-bold">— John Dewey</p>
+                <p className="italic text-sm font-bold">{t("NarrativeSection.quoteAuthor")}</p>
               }
             />
 
             {/* Detailed Text */}
             <div className="space-y-8 text-base leading-relaxed">
               <p className="text-primary">
-                TEPTH derives its objective from John Dewey’s quote, “Education
-                is not preparation for life; education is life itself.” Being an
-                experienced enterprise in the areas of education and exam
-                preparation courses, TEPTH strives to offer students high
-                quality services. We have been in the education industry for
-                years now, catering to the contemporary competent educational
-                requirements across the Arab World. TEPTH is a visionary
-                organization that values students as the guardians of a
-                successful society. We believe in offering you professional
-                career services so that you can turn your dreams into reality.
+                {t("NarrativeSection.p1")}
               </p>
               <p>
-                Preparing for an international exam could get tricky at times,
-                TEPTH has trained professionals who are well-equipped with the
-                latest knowledge and techniques for the preparation of GMAT,
-                GRE, SAT and TOEFL courses. With their expertise and dedication,
-                you are likely to pass these tests with flying colors. TEPTH
-                offers you proficient services at the best price.
+                {t("NarrativeSection.p2")}
               </p>
               <p>
-                TEPTH envisions to be a leader in exam preparation and testing,
-                as we look forward to set a benchmark by our unrivaled services.
-                We have set long term goals that will benefit both the education
-                system and the society. With innovative IT support and learning
-                procedures, TEPTH has made it quite expedient for the students
-                to pass online exams. Our latest learning techniques allow you
-                to score more with less effort. Whether you are preparing for
-                IELTS, CELPIP G, CAEL, PTE, TOEFL iBT and OET, TEPTH is your one
-                pit stop for all your exam preparation needs.
+                {t("NarrativeSection.p3")}
               </p>
             </div>
           </div>

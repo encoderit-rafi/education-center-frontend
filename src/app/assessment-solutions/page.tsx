@@ -13,32 +13,10 @@ import {
   PhoneForwarded,
 } from "lucide-react";
 import { BaseCard } from "@/components/blocks/cards/base-card";
-
-const assessmentServices = [
-  {
-    id: 1,
-    title: "Exam Proctoring",
-    description:
-      "Hybrid proctoring combining advanced AI monitoring with elite human invigilators for maximum integrity.",
-    image: "/images/about-us/infrastructure-center.png",
-  },
-  {
-    id: 2,
-    title: "Secure Delivery",
-    description:
-      "Proprietary lockdown browsers ensuring that your intellectual property remains protected at every terminal.",
-    image: "/images/about-us/vision-hero.png",
-  },
-  {
-    id: 3,
-    title: "Special Accommodations",
-    description:
-      "Inclusive testing environments supporting WCAG standards and specialized hardware for diverse requirements.",
-    image: "/images/about-us/experience-student.png",
-  },
-];
+import { useTranslations } from "next-intl";
 
 export default function AssessmentSolutionsPage() {
+  const t = useTranslations("AssessmentSolutionsPage");
   return (
     <main className="pb-12">
       {/* Hero Section */}
@@ -63,7 +41,7 @@ export default function AssessmentSolutionsPage() {
         <div className="max-w-screen-2xl mx-auto">
           <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-4 mb-10">
             <h2 className="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight font-headline">
-              Assessment Solutions for Universities
+              {t("title")}
             </h2>
           </div>
 
@@ -73,22 +51,20 @@ export default function AssessmentSolutionsPage() {
               <div className="relative z-10">
                 <Building2 className="text-red-800 w-8 h-8 mb-4" />
                 <h3 className="text-xl md:text-2xl font-bold mb-3 text-slate-900 font-headline">
-                  Large-Scale Testing Frameworks
+                  {t("LargeInstitutionalCard.title")}
                 </h3>
                 <p className="text-slate-600 text-sm md:text-base leading-relaxed max-w-xl">
-                  We specialize in managing thousands of simultaneous
-                  assessments across multiple geographic locations with zero
-                  downtime and iron-clad security.
+                  {t("LargeInstitutionalCard.description")}
                 </p>
               </div>
               <div className="mt-8 flex gap-3 flex-wrap relative z-10">
                 <div className="flex items-center gap-2 bg-red-50/60 text-red-800 px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider">
                   <CheckCircle2 className="w-3.5 h-3.5" />
-                  ISO 27001 Certified
+                  {t("LargeInstitutionalCard.badge1")}
                 </div>
                 <div className="flex items-center gap-2 bg-red-50/60 text-red-800 px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider">
                   <Globe2 className="w-3.5 h-3.5" />
-                  Global Access
+                  {t("LargeInstitutionalCard.badge2")}
                 </div>
               </div>
               <Image
@@ -105,12 +81,10 @@ export default function AssessmentSolutionsPage() {
               <div className="relative z-10">
                 <LineChart className="w-8 h-8 mb-4 text-red-200" />
                 <h3 className="text-lg md:text-xl font-bold mb-3 font-headline">
-                  Advanced Psychometrics
+                  {t("AnalyticalInsights.title")}
                 </h3>
                 <p className="text-red-100/80 leading-relaxed text-sm md:text-base">
-                  Beyond scores. We provide item-analysis, reliability
-                  coefficients, and longitudinal growth tracking for your entire
-                  student body.
+                  {t("AnalyticalInsights.description")}
                 </p>
               </div>
               <div className="absolute bottom-4 right-4 opacity-10 group-hover:opacity-20 transition-opacity group-hover:scale-110 duration-500">
@@ -122,11 +96,10 @@ export default function AssessmentSolutionsPage() {
             <div className="md:col-span-4 bg-slate-50 p-6 md:p-8 rounded-xl border border-slate-100 hover:shadow-md transition-shadow">
               <ScrollText className="text-red-800 w-7 h-7 mb-4" />
               <h3 className="text-lg md:text-xl font-bold mb-3 text-slate-900 font-headline">
-                Institutional Reporting
+                {t("Reporting.title")}
               </h3>
               <p className="text-slate-600 text-sm leading-relaxed">
-                Customizable executive dashboards that translate complex testing
-                data into actionable institutional intelligence.
+                {t("Reporting.description")}
               </p>
             </div>
 
@@ -134,24 +107,23 @@ export default function AssessmentSolutionsPage() {
             <div className="md:col-span-8 bg-slate-900 p-6 md:p-8 rounded-xl text-white flex flex-col md:flex-row gap-6 md:gap-12 items-center">
               <div className="flex-1">
                 <h3 className="text-lg md:text-xl font-bold mb-3 text-red-400 font-headline">
-                  Strategic Integration
+                  {t("StrategicIntegration.title")}
                 </h3>
                 <p className="text-slate-400 text-sm leading-relaxed">
-                  Our systems integrate seamlessly with major LMS platforms
-                  including Canvas, Moodle, and Blackboard via LTI standards.
+                  {t("StrategicIntegration.description")}
                 </p>
               </div>
               <div className="flex flex-wrap gap-3">
                 <div className="bg-white/5 border border-white/10 p-4 rounded-lg flex items-center gap-3 min-w-[140px] hover:bg-white/10 transition-colors">
                   <Zap className="text-red-400 w-5 h-5" />
                   <span className="text-[9px] font-bold uppercase tracking-widest">
-                    LTI Core
+                    {t("StrategicIntegration.badge1")}
                   </span>
                 </div>
                 <div className="bg-white/5 border border-white/10 p-4 rounded-lg flex items-center gap-3 min-w-[140px] hover:bg-white/10 transition-colors">
                   <ShieldCheck className="text-red-400 w-5 h-5" />
                   <span className="text-[9px] font-bold uppercase tracking-widest">
-                    SSO Auth
+                    {t("StrategicIntegration.badge2")}
                   </span>
                 </div>
               </div>
@@ -165,16 +137,16 @@ export default function AssessmentSolutionsPage() {
         <div className="max-w-screen-2xl mx-auto">
           <div className="text-center mb-10">
             <span className="text-red-800 font-bold uppercase tracking-[0.2em] text-[9px]">
-              Our Core Pillars
+              {t("PromotedAcademicServices.badge")}
             </span>
             <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mt-2 tracking-tight font-headline">
-              Promoted Academic Services
+              {t("PromotedAcademicServices.title")}
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-            {assessmentServices.map((service) => (
+            {t.raw("PromotedAcademicServices.services").map((service: any, idx: number) => (
               <BaseCard
-                key={service.id}
+                key={idx}
                 className="text-center group bg-transparent p-6 border border-slate-100 bg-white/40 shadow-sm"
               >
                 <h3 className="text-lg font-bold mb-3 text-slate-900 font-headline">
@@ -194,13 +166,11 @@ export default function AssessmentSolutionsPage() {
         <div className="max-w-screen-2xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-start">
           <div>
             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6 leading-tight tracking-tight font-headline">
-              Join Our Global <br />
-              Academic Network
+              {t("PartnerWithUs.title1")} <br />
+              {t("PartnerWithUs.title2")}
             </h2>
             <p className="text-base text-slate-600 mb-8 leading-relaxed">
-              TEPTH Academic Atelier partners with forward-thinking institutions
-              to redefine the value of certification. Let&apos;s discuss your
-              organization&apos;s specific needs.
+              {t("PartnerWithUs.description")}
             </p>
             <div className="space-y-6">
               <div className="flex items-start gap-4">
@@ -209,10 +179,10 @@ export default function AssessmentSolutionsPage() {
                 </div>
                 <div>
                   <h4 className="font-bold text-sm text-slate-900">
-                    Direct Inquiries
+                    {t("PartnerWithUs.directInquiriesTitle")}
                   </h4>
                   <p className="text-slate-500 font-semibold text-sm">
-                    partnerships@tepth.academy
+                    {t("PartnerWithUs.directInquiriesText")}
                   </p>
                 </div>
               </div>
@@ -222,10 +192,10 @@ export default function AssessmentSolutionsPage() {
                 </div>
                 <div>
                   <h4 className="font-bold text-sm text-slate-900">
-                    Institutional Support
+                    {t("PartnerWithUs.institutionalSupportTitle")}
                   </h4>
                   <p className="text-slate-500 font-semibold text-sm">
-                    +971 4 000 0000
+                    {t("PartnerWithUs.institutionalSupportText")}
                   </p>
                 </div>
               </div>

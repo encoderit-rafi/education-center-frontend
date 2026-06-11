@@ -2,8 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { Handshake, Mail, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
 
 export default function VendorPartnershipsPage() {
+  const t = useTranslations("ExamDeliveryPage.VendorPage");
   return (
     <div className="min-h-screen bg-white font-sans antialiased">
       {/* Hero — image + intro text side by side */}
@@ -28,42 +30,30 @@ export default function VendorPartnershipsPage() {
             {/* Badge */}
             <div className="inline-flex items-center gap-1.5 py-1 px-2.5 rounded-full text-[11px] font-bold bg-maroon-50 text-maroon-800 border border-maroon-100 mb-5 w-fit">
               <Handshake className="w-3.5 h-3.5" />
-              <span>MUTUAL COLLABORATION</span>
+              <span>{t("badge")}</span>
             </div>
 
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-headline font-black text-slate-900 leading-tight mb-6 tracking-tight">
-              Vendor{" "}
-              <span className="text-primary italic">Partnerships</span>
+              {t("title")}{" "}
+              <span className="text-primary italic">{t("titleAccent")}</span>
             </h1>
 
             <div className="space-y-4 text-slate-700 text-sm sm:text-base leading-relaxed font-light">
               <p>
-                At TEPTH, we are actively seeking to expand our network of
-                delivery partners and warmly encourage vendors with active exam
-                provider agreements to utilize our advanced testing facilities.
-                We believe in building sustainable, win-win collaborations that
-                drive mutual value.
+                {t("p1")}
               </p>
               <p>
-                By channeling your exam volumes through our state-of-the-art
-                center, you gain an instantly accessible, highly secure, and
-                turnkey testing environment that satisfies the stringent
-                standards of your exam providers—without the burden of facility
-                overhead. In turn, our center optimizes its seating capacity and
-                technical resources.
+                {t("p2")}
               </p>
               <p>
-                This symbiotic relationship ensures that your candidates
-                experience a seamless, professional testing environment, while
-                both of our organizations benefit from predictable operational
-                scalability and shared success.
+                {t("p3")}
               </p>
             </div>
 
             {/* Contact CTA */}
             <div className="mt-8 pt-8 border-t border-slate-100">
               <p className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4">
-                Get in touch to partner with us
+                {t("contactHeader")}
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
                 <Link href="tel:+97165531250">

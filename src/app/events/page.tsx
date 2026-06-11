@@ -22,29 +22,21 @@ import {
     CheckCircle2
 } from "lucide-react";
 import React, { useState } from "react";
+import { useTranslations } from "next-intl";
 
-const eventSchema = z.object({
-    fullName: z.string().min(3, "Full name must be at least 3 characters"),
-    mobile: z.string().min(7, "Please enter a valid mobile number"),
-    email: z.string().email("Please enter a valid email address"),
+const getEventSchema = (t: any) => z.object({
+    fullName: z.string().min(3, t("form.fullNameError")),
+    mobile: z.string().min(7, t("form.mobileError")),
+    email: z.string().email(t("form.emailError")),
 });
 
-type EventFormValues = z.infer<typeof eventSchema>;
-
-const AGENDA_ITEMS = [
-    "CELPIP Basics",
-    "Why Choose CELPIP?",
-    "Test Format, Scoring, and Strategies (With sample responses)",
-    "Test Preparation Materials",
-    "Key Test Strategies",
-    "Tips for dealing with test questions",
-    "Question and Answer session (FAQs)"
-];
-
 export default function EventsPage() {
+    const t = useTranslations("EventsPage");
     const [isSubmitted, setIsSubmitted] = useState(false);
 
-    const form = useForm<EventFormValues>({
+    const eventSchema = getEventSchema(t);
+
+    const form = useForm<z.infer<typeof eventSchema>>({
         resolver: zodResolver(eventSchema),
         defaultValues: {
             fullName: "",
@@ -53,7 +45,7 @@ export default function EventsPage() {
         },
     });
 
-    const onSubmit = async (data: EventFormValues) => {
+    const onSubmit = async (data: z.infer<typeof eventSchema>) => {
         console.log("Event Registration Data:", data);
         // Simulate API call
         await new Promise((resolve) => setTimeout(resolve, 1500));
@@ -66,10 +58,10 @@ export default function EventsPage() {
             <section className="pt-24 pb-12 bg-white">
                 <div className="container px-6 mx-auto sm:px-12 lg:px-24 text-center">
                     <h1 className="text-4xl md:text-6xl font-black text-gray-900 tracking-tighter uppercase leading-none mb-4">
-                        Upcoming <span className="text-[#A11D1D]">Events</span>
+                        {t("title")} <span className="text-[#A11D1D]">{t("titleAccent")}</span>
                     </h1>
                     <p className="text-gray-500 text-lg max-w-2xl mx-auto font-medium">
-                        Empowering your academic journey through expert-led information sessions and immersive workshops.
+                        {t("subtitle")}
                     </p>
                 </div>
             </section>
@@ -126,19 +118,19 @@ export default function EventsPage() {
                                     </div>
                                     <div className="space-y-1">
                                         <h2 className="text-4xl lg:text-7xl font-black text-blue-900 leading-[0.9] tracking-tighter">
-                                            FREE INFO <br /> SESSION
+                                            {t("eventTitle1")} <br /> {t("eventTitle2")}
                                         </h2>
                                         <p className="text-lg lg:text-xl font-bold text-gray-700 pt-2">
-                                            Feb 13, 2026 | 6:00 PM - 8:00 PM
+                                            {t("eventSubtitle")}
                                         </p>
                                     </div>
                                 </div>
 
                                 {/* Integrated Agenda */}
                                 <div className="max-w-xl bg-white/40 backdrop-blur-md p-8 border border-white/20 rounded-sm">
-                                    <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-[#A11D1D] mb-6">Workshop Highlights</h3>
+                                    <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-[#A11D1D] mb-6">{t("workshopHighlights")}</h3>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                        {AGENDA_ITEMS.slice(0, 6).map((item, index) => (
+                                        {t.raw("agendaItems").map((item: string, index: number) => (
                                             <div key={index} className="flex items-start gap-3 group">
                                                 <CheckCircle className="w-4 h-4 text-[#A11D1D] shrink-0 mt-0.5" />
                                                 <span className="text-[11px] font-bold text-gray-800 leading-tight uppercase tracking-tight">{item}</span>
@@ -157,22 +149,22 @@ export default function EventsPage() {
                                                 <div className="w-20 h-20 bg-[#A11D1D]/10 rounded-full flex items-center justify-center mb-6">
                                                     <CheckCircle2 className="w-10 h-10 text-[#A11D1D]" />
                                                 </div>
-                                                <h3 className="text-2xl font-black mb-2 uppercase tracking-tight">Registration Sent!</h3>
+                                                <h3 className="text-2xl font-black mb-2 uppercase tracking-tight">{t("successTitle")}</h3>
                                                 <p className="text-gray-500 text-sm leading-relaxed mb-8">
-                                                    Thank you for registering. Our team will contact you shortly with the session details.
+                                                    {t("successDesc")}
                                                 </p>
                                                 <Button
                                                     onClick={() => setIsSubmitted(false)}
                                                     variant="outline"
                                                     className="rounded-none border-gray-200 text-gray-900 hover:bg-gray-900 hover:text-white font-bold uppercase tracking-widest text-[10px]"
                                                 >
-                                                    New Registration
+                                                    {t("newRegistrationBtn")}
                                                 </Button>
                                             </div>
                                         ) : (
                                             <>
-                                                <h3 className="text-2xl font-black mb-1 font-heading tracking-tight underline decoration-[#A11D1D] decoration-4 underline-offset-8">Register</h3>
-                                                <p className="text-gray-500 text-[10px] mb-10 uppercase tracking-[0.2em] font-bold">Secure your session entry</p>
+                                                <h3 className="text-2xl font-black mb-1 font-heading tracking-tight underline decoration-[#A11D1D] decoration-4 underline-offset-8">{t("registerTitle")}</h3>
+                                                <p className="text-gray-500 text-[10px] mb-10 uppercase tracking-[0.2em] font-bold">{t("registerSubtitle")}</p>
 
                                                 <Form {...form}>
                                                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
@@ -181,9 +173,9 @@ export default function EventsPage() {
                                                             name="fullName"
                                                             render={({ field }) => (
                                                                 <FormItem className="space-y-2">
-                                                                    <FormLabel className="text-[10px] font-black uppercase tracking-widest text-[#A11D1D]">Full Name:*</FormLabel>
+                                                                    <FormLabel className="text-[10px] font-black uppercase tracking-widest text-[#A11D1D]">{t("form.fullName")}</FormLabel>
                                                                     <FormControl>
-                                                                        <Input className="bg-white border-gray-200 rounded-none h-12 text-[13px] focus:border-[#A11D1D] focus:ring-[#A11D1D]" placeholder="Enter your name" {...field} />
+                                                                        <Input className="bg-white border-gray-200 rounded-none h-12 text-[13px] focus:border-[#A11D1D] focus:ring-[#A11D1D]" placeholder={t("form.fullNamePlaceholder")} {...field} />
                                                                     </FormControl>
                                                                     <FormMessage className="text-[10px]" />
                                                                 </FormItem>
@@ -195,12 +187,12 @@ export default function EventsPage() {
                                                             name="mobile"
                                                             render={({ field }) => (
                                                                 <FormItem className="space-y-2">
-                                                                    <FormLabel className="text-[10px] font-black uppercase tracking-widest text-[#A11D1D]">Mobile No:*</FormLabel>
+                                                                    <FormLabel className="text-[10px] font-black uppercase tracking-widest text-[#A11D1D]">{t("form.mobile")}</FormLabel>
                                                                     <FormControl>
                                                                         <PhoneInput
                                                                             {...field}
                                                                             defaultCountry="AE"
-                                                                            placeholder="Enter phone number"
+                                                                            placeholder={t("form.mobilePlaceholder")}
                                                                             className="bg-white border-gray-200 rounded-none h-12 text-[13px] focus-within:border-[#A11D1D] focus-within:ring-1 focus-within:ring-[#A11D1D]"
                                                                         />
                                                                     </FormControl>
@@ -214,9 +206,9 @@ export default function EventsPage() {
                                                             name="email"
                                                             render={({ field }) => (
                                                                 <FormItem className="space-y-2">
-                                                                    <FormLabel className="text-[10px] font-black uppercase tracking-widest text-[#A11D1D]">Email Address:*</FormLabel>
+                                                                    <FormLabel className="text-[10px] font-black uppercase tracking-widest text-[#A11D1D]">{t("form.email")}</FormLabel>
                                                                     <FormControl>
-                                                                        <Input className="bg-white border-gray-200 rounded-none h-12 text-[13px] focus:border-[#A11D1D] focus:ring-[#A11D1D]" placeholder="email@example.com" {...field} />
+                                                                        <Input className="bg-white border-gray-200 rounded-none h-12 text-[13px] focus:border-[#A11D1D] focus:ring-[#A11D1D]" placeholder={t("form.emailPlaceholder")} {...field} />
                                                                     </FormControl>
                                                                     <FormMessage className="text-[10px]" />
                                                                 </FormItem>
@@ -228,7 +220,7 @@ export default function EventsPage() {
                                                             disabled={form.formState.isSubmitting}
                                                             className="w-full h-16 bg-[#A11D1D] hover:bg-[#111827] transition-all rounded-none font-black text-xs uppercase tracking-[0.3em] mt-4"
                                                         >
-                                                            {form.formState.isSubmitting ? "Processing..." : "Join Session"}
+                                                            {form.formState.isSubmitting ? t("form.processing") : t("form.submitBtn")}
                                                         </Button>
                                                     </form>
                                                 </Form>
@@ -264,9 +256,9 @@ export default function EventsPage() {
             {/* More Events Placeholder */}
             <section className="py-24 bg-white">
                 <div className="container px-6 mx-auto text-center">
-                    <h2 className="text-3xl font-black font-heading tracking-tighter mb-4 text-gray-200">Other Upcoming Events</h2>
+                    <h2 className="text-3xl font-black font-heading tracking-tighter mb-4 text-gray-200">{t("otherEventsTitle")}</h2>
                     <p className="text-gray-400 text-sm max-w-lg mx-auto leading-relaxed">
-                        Stay tuned for more information sessions coming soon including TOEFL iBT workshops and PTE-A training weeks.
+                        {t("otherEventsDesc")}
                     </p>
                 </div>
             </section>

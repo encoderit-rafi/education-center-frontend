@@ -9,6 +9,7 @@ import AppNavigation from "./app-navigation";
 import { SECONDARY_NAV } from "@/data";
 import { usePrimaryNav } from "@/hooks/use-primary-nav";
 import MobileNav from "./mobile-nav";
+import { LocaleToggle } from "./locale-toggle";
 
 export default function NavBar() {
   const { primaryNav, isLoading } = usePrimaryNav();
@@ -31,7 +32,8 @@ export default function NavBar() {
         <div className="max-lg:hidden">
           <AppNavigation navigations={primaryNav} isLoading={isLoading} />
         </div>
-        <div className="w-24  flex items-center justify-end gap-2">
+        <div className="flex items-center justify-end gap-2">
+          <LocaleToggle />
           <SearchCommand />
           <div className="block lg:hidden">
             <MobileNav />

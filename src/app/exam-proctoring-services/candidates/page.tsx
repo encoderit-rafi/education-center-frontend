@@ -1,5 +1,4 @@
 import {
-  CheckCircle2,
   Info,
   CreditCard,
   CalendarDays,
@@ -9,9 +8,9 @@ import {
   Check,
 } from "lucide-react";
 
-import { AED } from "@/components/ui/aed";
 import { PriceDisplay } from "@/components/ui/price-display";
 import { INSTITUTIONS_INFO } from "@/data";
+import { useTranslations } from "next-intl";
 
 type FeeEntry = {
   duration: string;
@@ -28,6 +27,9 @@ const FEES: FeeEntry[] = [
 ];
 
 export default function CandidatesProctoringPage() {
+  const t = useTranslations("ExamProctoringServicesPage.CandidatesPage");
+  const paymentMethods = t.raw("paymentMethods") as string[];
+
   return (
     <div className="flex flex-col min-h-screen bg-slate-50">
       {/* 1. Hero Section */}
@@ -35,13 +37,11 @@ export default function CandidatesProctoringPage() {
         <div className="container px-6 mx-auto lg:px-24">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-slate-900 mb-6 leading-tight">
-              Exam Proctoring for{" "}
-              <span className="text-primary">Candidates</span>
+              {t("heroTitle")}{" "}
+              <span className="text-primary">{t("heroTitleAccent")}</span>
             </h1>
             <p className="text-lg md:text-xl text-slate-600 leading-relaxed max-w-2xl">
-              Professional, secure, and monitored exam environments for students
-              from external institutions. We ensure a seamless testing
-              experience that meets your university's strict requirements.
+              {t("heroDescription")}
             </p>
           </div>
         </div>
@@ -53,7 +53,7 @@ export default function CandidatesProctoringPage() {
           {/* LEFT: Booking Process (7 cols) */}
           <section className="lg:col-span-7 bg-white p-5 rounded-lg">
             <h2 className="text-2xl font-semibold text-slate-900 mb-10">
-              How to Book Your Proctored Exam
+              {t("bookingHeading")}
             </h2>
 
             <div className="relative space-y-10 ">
@@ -63,12 +63,10 @@ export default function CandidatesProctoringPage() {
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold text-slate-900 mb-2 mt-1">
-                    Review Rules & Regulations
+                    {t("step1Title")}
                   </h3>
                   <p className="text-slate-600 leading-relaxed">
-                    Review the rules of your home institution carefully. Pay
-                    attention to deadlines, requirements, and policies for
-                    external testing facilities.
+                    {t("step1Description")}
                   </p>
                 </div>
               </div>
@@ -79,12 +77,10 @@ export default function CandidatesProctoringPage() {
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold text-slate-900 mb-2 mt-1">
-                    Get in Touch
+                    {t("step2Title")}
                   </h3>
                   <p className="text-slate-600 leading-relaxed mb-5">
-                    Speak to our staff about requirements, duration, format
-                    (computer or paper), preferred date, time, and any special
-                    accommodations.
+                    {t("step2Description")}
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4">
                     <a
@@ -111,19 +107,14 @@ export default function CandidatesProctoringPage() {
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold text-slate-900 mb-2 mt-1">
-                    Inform Your Home Institution
+                    {t("step3Title")}
                   </h3>
                   <p className="text-slate-600 leading-relaxed mb-4">
-                    Provide them with our contact details so they can send us
-                    your exam package securely. If no return envelope is
-                    provided, we can arrange a courier for an additional charge.
+                    {t("step3Description")}
                   </p>
                   <div className="inline-flex items-start gap-3 p-4 rounded-2xl bg-slate-50 text-sm text-slate-600 border border-slate-100">
                     <Info className="w-4 h-4 text-slate-400 shrink-0 mt-0.5" />
-                    <p>
-                      We are not responsible for the package after courier
-                      collection.
-                    </p>
+                    <p>{t("step3Disclaimer")}</p>
                   </div>
                 </div>
               </div>
@@ -138,7 +129,7 @@ export default function CandidatesProctoringPage() {
                   <ShieldCheck className="w-6 h-6 text-primary" />
                 </div>
                 <h2 className="text-2xl font-semibold text-slate-900">
-                  Proctoring Fees
+                  {t("feesHeading")}
                 </h2>
               </div>
 
@@ -147,10 +138,10 @@ export default function CandidatesProctoringPage() {
                   <thead className="bg-slate-50 border-b border-slate-200">
                     <tr>
                       <th className="py-4 px-5 font-semibold text-secondary text-left">
-                        Duration
+                        {t("feesColDuration")}
                       </th>
                       <th className="py-4 px-5 font-semibold text-secondary text-right">
-                        Fee
+                        {t("feesColFee")}
                       </th>
                     </tr>
                   </thead>
@@ -171,7 +162,6 @@ export default function CandidatesProctoringPage() {
                               amount={parseInt(row.fee)}
                               className="text-lg font-semibold text-primary"
                             />
-                            {/* <AED className="h-3 ml-1 text-slate-500 inline-block" /> */}
                           </div>
                         </td>
                       </tr>
@@ -185,13 +175,13 @@ export default function CandidatesProctoringPage() {
                   <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
                     <Check className="w-3.5 h-3.5 text-primary" />
                   </div>
-                  <span>One dedicated proctor provided</span>
+                  <span>{t("feeNote1")}</span>
                 </div>
                 <div className="flex items-center gap-3 text-sm text-slate-700">
                   <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
                     <Check className="w-3.5 h-3.5 text-primary" />
                   </div>
-                  <span>Fees are calculated per exam, per session</span>
+                  <span>{t("feeNote2")}</span>
                 </div>
               </div>
             </div>
@@ -207,16 +197,12 @@ export default function CandidatesProctoringPage() {
                 <CreditCard className="w-6 h-6 text-blue-600" />
               </div>
               <h2 className="text-2xl font-semibold text-slate-900">
-                Payment Methods
+                {t("paymentHeading")}
               </h2>
             </div>
 
             <ul className="space-y-5 mb-8 flex-1">
-              {[
-                "Cash or Card on/before exam day",
-                "Electronic payment via online link",
-                "Wire transfer (Candidate covers bank charges)",
-              ].map((m, i) => (
+              {paymentMethods.map((m, i) => (
                 <li key={i} className="flex items-start gap-4 text-slate-600">
                   <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 shrink-0"></div>
                   <span className="leading-relaxed">{m}</span>
@@ -225,9 +211,10 @@ export default function CandidatesProctoringPage() {
             </ul>
 
             <div className="p-5 bg-amber-50 border border-amber-200 text-amber-800 rounded-2xl text-sm leading-relaxed">
-              <span className="font-semibold block mb-1">Recommendation:</span>
-              We highly advise paying in advance to avoid last-minute payment
-              failures that could result in the cancellation of your exam.
+              <span className="font-semibold block mb-1">
+                {t("paymentRecommendationLabel")}
+              </span>
+              {t("paymentRecommendationText")}
             </div>
           </section>
 
@@ -238,23 +225,16 @@ export default function CandidatesProctoringPage() {
                 <CalendarDays className="w-6 h-6 text-emerald-600" />
               </div>
               <h2 className="text-2xl font-semibold text-slate-900">
-                On Exam Day
+                {t("dayOfHeading")}
               </h2>
             </div>
 
             <div className="space-y-6 flex-1 text-slate-600 leading-relaxed">
-              <p>
-                Please arrive early to settle in and avoid unnecessary anxiety.
-                Ensure you bring an approved, valid photo ID and strictly follow
-                all regulations set by your home institution.
-              </p>
+              <p>{t("dayOfText")}</p>
 
               <div className="flex items-start gap-4 p-5 rounded-2xl bg-slate-50 border border-slate-200">
                 <Info className="w-5 h-5 text-slate-400 shrink-0 mt-0.5" />
-                <p className="text-sm text-slate-700">
-                  Always double-check that you have your ID and all personal
-                  belongings before leaving the testing center.
-                </p>
+                <p className="text-sm text-slate-700">{t("dayOfTip")}</p>
               </div>
             </div>
           </section>

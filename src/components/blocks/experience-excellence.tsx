@@ -1,24 +1,24 @@
+"use client";
+import { useTranslations } from "next-intl";
+
 export default function ExperienceExcellence() {
+  const t = useTranslations("HomePage.ExperienceExcellence");
+
   return (
     <section className="base-px base-py relative overflow-hidden ">
       <div className="section-container flex flex-col lg:flex-row gap-16 items-center">
         {/* Left Content Block */}
         <div className="flex-1 space-y-8">
-          <h2 className="section-label">Experience Our Excellence</h2>
+          <h2 className="section-label">{t("label")}</h2>
           <div className="space-y-6">
             <h2 className="text-4xl md:text-5xl font-headline font-extrabold text-secondary leading-tight">
-              Comprehensive Exam Services from Highly-Qualified Instructors
+              {t("title")}
             </h2>
             <p className="text-base text-on-surface-variant leading-relaxed text-justify">
-              TEPTH is a renowned UAE-based institution that helps students in
-              preparing for and undertaking different international aptitude
-              tests in order to meet admission requirements. We provide expert
-              guidance for various English-based examinations and assessments,
-              in addition to facilitating the registration, booking, and
-              preparation for the tests.
+              {t("description")}
             </p>
             <p className="text-2xl font-headline font-bold text-primary italic">
-              Ace the Test, Secure Your Future.
+              {t("tagline")}
             </p>
           </div>
         </div>

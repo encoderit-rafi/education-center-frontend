@@ -1,0 +1,1100 @@
+{
+  "HomePage": {
+    "HeroSection": {
+      "headline1": "Prep Smarter",
+      "headline2": "Score",
+      "headline3": "Higher",
+      "description": "Empowering students with skilled instructors and premium resources to achieve their language goals and global recognition.",
+      "bookExam": "Book Exam",
+      "ourCourses": "Our Courses"
+    },
+    "InformationSection": {
+      "items": [
+        { "label": "Exams Offered", "value": "10+" },
+        { "label": "Course Types", "value": "4" },
+        { "label": "Mock Test Results", "value": "72h" },
+        { "label": "Registered Centre", "value": "UAE" }
+      ]
+    },
+    "BrandsSection": {
+      "heading": "Authorized Testing Centre For"
+    },
+    "CourseList": {
+      "label": "Curriculum",
+      "title": "Explore",
+      "titleAccent": "Exams"
+    },
+    "CoreServices": {
+      "label": "Our Services",
+      "title": "More Than Just an",
+      "titleAccent": "Exam Centre",
+      "services": [
+        {
+          "title": "Paid Mock Tests",
+          "description": "Sit a full scored mock exam in our centre or receive it online within 72 hours."
+        },
+        {
+          "title": "Test Your English",
+          "description": "Take a free multiple-choice assessment and receive your level result by email instantly."
+        },
+        {
+          "title": "Free Consultation",
+          "description": "15 minutes with one of our teachers — ask about exams, courses, or preparation strategies."
+        },
+        {
+          "title": "Exam Proctoring Services",
+          "description": "Professional proctoring services for institutions and remote test takers."
+        },
+        {
+          "title": "Exam Delivery",
+          "description": "End-to-end exam delivery solutions for providers, vendors, and test-takers."
+        },
+        {
+          "title": "Special Accommodation",
+          "description": "Tailored exam conditions for candidates with disabilities or special requirements."
+        },
+        {
+          "title": "Assessment Solutions",
+          "description": "Customised language assessment services for organisations and institutions."
+        },
+        {
+          "title": "Our Venues",
+          "description": "Noise-free, professional exam environment. Take a 360° virtual tour before you visit."
+        },
+        {
+          "title": "Contact Us",
+          "description": "Reach our team via WhatsApp, Telegram, or our contact form. We reply within 24 hours."
+        }
+      ]
+    },
+    "WhyChooseUs": {
+      "label": "Why Choose Us",
+      "title": "Everything You Need, in",
+      "titleAccent": "One Place",
+      "stats": [
+        { "label": "Noise-free Environment" },
+        { "label": "Top-notch Facility" },
+        { "label": "Quality Service" },
+        { "label": "Licensed & Accredited" }
+      ],
+      "features": [
+        {
+          "title": "Accredited Testing Centre",
+          "description": "Authorized by leading exam bodies — British Council, ETS, Pearson, and more."
+        },
+        {
+          "title": "Flexible Test Dates",
+          "description": "Frequent exam slots available. Book online and choose your preferred date and time."
+        },
+        {
+          "title": "Expert Preparation Courses",
+          "description": "Group, semi-private, and 1-to-1 courses tailored to your target score and timeline."
+        },
+        {
+          "title": "Paid Mock Tests",
+          "description": "Sit a realistic mock exam in our centre or receive it online. Scored and timed."
+        },
+        {
+          "title": "Dedicated Support",
+          "description": "Our team answers your questions via WhatsApp, Telegram, or our contact form."
+        },
+        {
+          "title": "Instant Tax Invoices",
+          "description": "VAT-compliant tax invoice automatically emailed to you after every payment."
+        }
+      ]
+    },
+    "ExperienceExcellence": {
+      "label": "Experience Our Excellence",
+      "title": "Comprehensive Exam Services from Highly-Qualified Instructors",
+      "description": "TEPTH is a renowned UAE-based institution that helps students in preparing for and undertaking different international aptitude tests in order to meet admission requirements. We provide expert guidance for various English-based examinations and assessments, in addition to facilitating the registration, booking, and preparation for the tests.",
+      "tagline": "Ace the Test, Secure Your Future."
+    },
+    "CampusGallery": {
+      "title": "Site Gallery",
+      "description": "Take a closer look at our state-of-the-art infrastructure and vibrant student spaces.",
+      "images": [
+        { "name": "Exterior Building" },
+        { "name": "Main Entrance" },
+        { "name": "Classroom" },
+        { "name": "Classroom" },
+        { "name": "Computer Room" },
+        { "name": "Lockers" },
+        { "name": "Computer Room" },
+        { "name": "Computer Room" },
+        { "name": "Building Lobby" },
+        { "name": "Building Lobby" },
+        { "name": "Parking Zone" }
+      ]
+    },
+    "Testimonials": {
+      "title": "Trusted by Tomorrow's",
+      "titleAccent": "Leaders",
+      "description": "See what our global community has to say about their journey with TEPTH."
+    },
+    "FreeConsultation": {
+      "title": "Ready to start your journey?",
+      "description": "Our academic counselors are available to guide you through the selection and booking process.",
+      "cta": "Get Free Consultation",
+      "features": [
+        "Expert academic guidance",
+        "Personalized course selection",
+        "No commitment required",
+        "Quick response time"
+      ]
+    }
+  },
+  "ContactUsPage": {
+    "HeroSection": {
+      "badge": "CONTACT US",
+      "title": "Get in Touch",
+      "titleAccent": " With Us",
+      "description": "Whether you're preparing for an entrance exam or need deep editorial review, we're here to guide you. Our expert team is ready to assist you at every step of your journey."
+    },
+    "ContactDetails": {
+      "phone": "+971 6 553 1250",
+      "phoneAvailability": "Available Saturday – Thursday, 9:00 AM – 9:00 PM",
+      "email": "info@tepth.org",
+      "emailAvailability": "We typically respond within 24 hours",
+      "addressPart1": "The Exam Preparation & Testing House L.L.C Suite 701, 7th Floor,",
+      "addressPart2": "Tabarak Tower, Corniche Road, Al Mamzar, Sharjah,",
+      "addressPart3": "United Arab Emirates.",
+      "chat": "Chat with us",
+      "chatAvailability": "Quick answers via WhatsApp"
+    },
+    "OfficeHours": {
+      "title": "Office Hours",
+      "saturdayToThursday": "Saturday – Thursday",
+      "hours": "9:00 AM – 9:00 PM",
+      "friday": "Friday",
+      "closed": "Closed"
+    },
+    "FormSection": {
+      "title": "Send a Direct",
+      "titleAccent": " Message"
+    }
+  },
+  "AboutUsPage": {
+    "Accreditation": {
+      "HeroSection": {
+        "badge": "ACCREDITATION",
+        "title": "Licensed & ",
+        "titleAccent": "Regulated Excellence",
+        "description": "The Exam Preparation & Testing House L.L.C is officially licensed and regulated by leading educational authorities, ensuring institutional integrity."
+      },
+      "SEDD": {
+        "description": "The Exam Preparation & Testing House L.L.C is licensed by Sharjah Economic Development Department (SEDD). Sharjah is firmly established as a premier educational hub in the UAE, known for top-tier institutions and high-quality educational centres. Driven by government support, the emirate offers extensive academic facilities and significant investment in the education sector."
+      },
+      "SPEA": {
+        "description": "The Exam Preparation & Testing House L.L.C is regulated by Sharjah Private Education Authority (SPEA). SPEA is the official body responsible for overseeing and regulating private education in the Emirate of Sharjah. SPEA was established by Emiri Decree No. 45 of 2018 issued by H.H. Sheikh Dr. Sultan Bin Mohammed Al Qasimi, Ruler of Sharjah with core responsibilities including Licensing private schools and educational centre and monitoring quality through inspection and performance ratings."
+      }
+    },
+    "HowToFindUs": {
+      "HeroSection": {
+        "badge": "LOCATION GUIDE",
+        "title": "How to ",
+        "titleAccent": "Find Our Center",
+        "description": "Reaching our center in Sharjah is straightforward. We've compiled this comprehensive guide to help you navigate your journey with ease."
+      },
+      "MapSection": {
+        "badge": "LOCATION MAP",
+        "title": "Interactive ",
+        "titleAccent": "Navigation",
+        "p1": "Route to our centre is too easy to follow and reach the destination. We have incorporated Google Location Map to make it more understandable for you.",
+        "p2": "From the small box on lower-left corner of the map, you can select to view street map or the satellite imagery. You can also view larger map to be more certain about our location.",
+        "p3Start": "This visual representation will help you with the driving directions to arrive at ",
+        "p3Highlight": "The Exam Preparation & Testing House L.L.C",
+        "p3End": " in Sharjah.",
+        "printButton": "Print Map & Directions"
+      },
+      "VisitOurCentre": {
+        "title": "Visit Our Centre",
+        "description": "Al Mamzar, Sharjah — located in the strategic Tabarak Tower, close to all major transport links. All facilities are wheelchair accessible.",
+        "openInMaps": "Open in Maps "
+      },
+      "Transportation": {
+        "badge": "MOVEMENT & ACCESS",
+        "title": "Ways to ",
+        "titleAccent": "Reach Us",
+        "description": "We have mapped out the most efficient routes to ensure your journey to our center is as smooth as possible.",
+        "taxicabTitle": "By Taxicab",
+        "taxicabDescriptionPart1": "From anywhere in Sharjah, you can hire a taxi and it will take you to your final destination. Call ",
+        "taxicabNumber": "600-525-252",
+        "taxicabDescriptionPart2": " to book a taxicab with Sharjah Taxi Corporation. Taxicab drivers will pick you up from your specified location and take you to our centre. For location map, please ",
+        "taxicabLink": "click here",
+        "publicBusTitle": "Public Bus",
+        "publicBusDescription": "Take a Sharjah public bus towards Al Mamzar or Al Taawun, disembarking at the nearest bus stop to Tabarak Tower. The bus ride will get you within a short walking distance of the center.",
+        "metroTitle": "Metro & Bus",
+        "metroDescription": "Although Sharjah does not have its own metro, you can combine the Dubai Metro with bus services to reach our Sharjah office.",
+        "metroStep1Title": "1. Take the Dubai Metro:",
+        "metroStep1Text": "— Board the Red Line and alight at Union Metro Station.",
+        "metroStep2Title": "2. Transfer to a Bus:",
+        "metroStep2Text1": "— From Union Metro Station, proceed to the adjacent Union Square Bus Station.",
+        "metroStep2Text2": "— Board the E303 bus, which operates between Union Square Bus Station in Dubai and Al Jubail Bus Station in Sharjah.",
+        "metroStep3Title": "3. From Al Jubail Bus Station:",
+        "metroStep3Text": "— Upon arrival at Al Jubail Bus Station in Sharjah, you can hire a taxi to reach Tabarak Tower in Al Mamzar, Sharjah.",
+        "alternativeRoutesTitle": "Alternative Bus Routes:",
+        "alternativeRoute1": "E306 Bus Service: Departs from Al Ghubaiba Bus Station in Dubai and arrives at Al Jubail Bus Station in Sharjah.",
+        "alternativeRoute2": "E307 Bus Service: Departs from Deira City Centre Bus Station in Dubai and arrives at Al Jubail Bus Station in Sharjah.",
+        "note": "Note: Please allow extra travel time as bus routes can be affected by traffic conditions."
+      },
+      "DrivingDirections": {
+        "badge": "DRIVING DIRECTIONS",
+        "title": "Get Directions",
+        "routes": [
+          {
+            "from": "Dubai",
+            "text": "Take Al Ittihad Road (E11) towards Sharjah. Follow the signs towards Al Mamzar. Turn right onto Al Mamzar Road and continue until you reach Tabarak Tower on your right."
+          },
+          {
+            "from": "Ajman, Umm Al Quwain, or Ras Al Khaimah",
+            "text": "Drive towards Sharjah on Sheikh Mohammed Bin Zayed Road (E311). Take the exit for Al Mamzar, and follow the signs to reach Al Mamzar Road. Tabarak Tower will be on your right."
+          },
+          {
+            "from": "Abu Dhabi",
+            "text": "Head towards Dubai on Sheikh Zayed Road (E11). Continue towards Al Ittihad Road (E11) into Sharjah. Follow the signs to Al Mamzar, and turn right onto Al Mamzar Road. Tabarak Tower will be on your right."
+          }
+        ],
+        "parkingTitle1": "Parking",
+        "parkingTitle2": "Information",
+        "onSiteParking": "On-Site Parking",
+        "onSiteParkingText1": "There are visitor parking spaces available at the back of ",
+        "onSiteParkingText2": "Tabarak Tower",
+        "publicParking": "Public Parking",
+        "publicParkingText1": "Metered parking is also available near the tower at a rate of ",
+        "publicParkingText2": " per hour. Please check with SRTA in Sharjah for recent updates.",
+        "quote": "This guide is aimed at helping you reach The Exam Preparation & Testing House L.L.C in Sharjah with ease.",
+        "assistance": "For Further Assistance"
+      }
+    },
+    "MissionAndVision": {
+      "HeroSection": {
+        "badge": "OUR VISION & MISSION",
+        "title": "Shaping the Future of",
+        "titleAccent": " Education",
+        "description": "TEPTH is an organization with high goals and high regards for the students. It is here to help students achieve their academic pursuits and support their professional growth."
+      },
+      "PhilosophySection": {
+        "badge": "OUR PHILOSOPHY",
+        "title": "Dream, Prepare, and ",
+        "titleAccent": "Excel.",
+        "p1": "The Exam Preparation and Testing House envisions to be a top-notch exam counselling and service provider across the globe. The enterprise was founded with the dream to offer students latest techniques and tools for exam preparation so that they can excel in their respective fields and contribute positively to the well-being of a society. Our team believes in providing commendable services to you.",
+        "p2": "The inspirational philosophy behind TEPTH is to offer full-fledged testing and exam preparation services to students in United Arab Emirates and the Arab World. We are a team of enthusiasts who strive hard to facilitate students in every possible way for exam testing."
+      },
+      "CoreValues": {
+        "title": "Core Values",
+        "values": [
+          {
+            "title": "Simplify Complexity",
+            "text": "To simplify the complexities in a test’s procedure that hinder the examinee’s comprehension skills. We employ unique resources and technology to make students understand tough tasks easily."
+          },
+          {
+            "title": "Shape the Future",
+            "text": "TEPTH is an enterprise that aims to shape a better future. Quality education for youth means a more enlightened and better society."
+          },
+          {
+            "title": "Torch Bearer",
+            "text": "By aiding students in picking a suitable Exam Preparation Course, TEPTH ought to be the torch bearer of knowledge and skills."
+          }
+        ]
+      }
+    },
+    "WhoWeAre": {
+      "HeroSection": {
+        "badge": "ABOUT TEPTH",
+        "title": "UAE's Trusted Exam Testing",
+        "titleAccent": " & Preparation House",
+        "description": "For over a decade, TEPTH has been the go-to destination for international language exam registration, expert preparation courses, and secure proctoring services across the UAE."
+      },
+      "NarrativeSection": {
+        "badge": "WHO WE ARE",
+        "title": "Education is not preparation",
+        "titleAccent": " for life; education is life itself.",
+        "quoteAuthor": "— John Dewey",
+        "p1": "TEPTH derives its objective from John Dewey’s quote, “Education is not preparation for life; education is life itself.” Being an experienced enterprise in the areas of education and exam preparation courses, TEPTH strives to offer students high quality services. We have been in the education industry for years now, catering to the contemporary competent educational requirements across the Arab World. TEPTH is a visionary organization that values students as the guardians of a successful society. We believe in offering you professional career services so that you can turn your dreams into reality.",
+        "p2": "Preparing for an international exam could get tricky at times, TEPTH has trained professionals who are well-equipped with the latest knowledge and techniques for the preparation of GMAT, GRE, SAT and TOEFL courses. With their expertise and dedication, you are likely to pass these tests with flying colors. TEPTH offers you proficient services at the best price.",
+        "p3": "TEPTH envisions to be a leader in exam preparation and testing, as we look forward to set a benchmark by our unrivaled services. We have set long term goals that will benefit both the education system and the society. With innovative IT support and learning procedures, TEPTH has made it quite expedient for the students to pass online exams. Our latest learning techniques allow you to score more with less effort. Whether you are preparing for IELTS, CELPIP G, CAEL, PTE, TOEFL iBT and OET, TEPTH is your one pit stop for all your exam preparation needs."
+      }
+    },
+    "WhyChooseUs": {
+      "HeroSection": {
+        "badge": "WHY CHOOSE US",
+        "title": "Invest Less & Gain More ",
+        "titleAccent": "From TEPTH.",
+        "description": "Preparing for college or university is more like riding an emotional rollercoaster; therefore, TEPTH keeps on looking for apt ways to make students feel confident, psychologically in control and well-prepared for the challenges ahead."
+      },
+      "NarrativeSection": {
+        "badge": "OUR PROMISE",
+        "title": "Your Success is ",
+        "titleAccent": "Ours.",
+        "p1": "The Exam Preparation & Testing House L.L.C understands just how perplexing the endeavor can be to gain admission in your top-choice college. For this reason, we have crafted ingenious study plans to enhance your skills and score exceptionally well in any test you opt for. We believe that ‘Your Success Is Ours’ so we work earnestly towards the achievement of your educational goals.",
+        "p2": "We bring into play the right tools and strategies for focused learning and outstanding results for build your career. With us, you will be able to improve your weak areas. Our expert professionals’ feedback will help you to reinforce your strong points and it will prove useful in steering your abilities and energies in the right direction.",
+        "highlightStart": "TEPTH",
+        "highlightText": " works on adaptive approach and offers flexible and convenient prep options that will move with you and will fit in your hectic schedule. We analyze student’s performance and advise a custom-learning plan to ensure good results. Our proven test-taking strategies, e-learning solutions, and instructions from proficient coaches will sweep away any doubts of success. You will be confident on the test day for optimal performance."
+      }
+    }
+  },
+  "AssessmentSolutionsPage": {
+    "title": "Assessment Solutions for Universities",
+    "LargeInstitutionalCard": {
+      "title": "Large-Scale Testing Frameworks",
+      "description": "We specialize in managing thousands of simultaneous assessments across multiple geographic locations with zero downtime and iron-clad security.",
+      "badge1": "ISO 27001 Certified",
+      "badge2": "Global Access"
+    },
+    "AnalyticalInsights": {
+      "title": "Advanced Psychometrics",
+      "description": "Beyond scores. We provide item-analysis, reliability coefficients, and longitudinal growth tracking for your entire student body."
+    },
+    "Reporting": {
+      "title": "Institutional Reporting",
+      "description": "Customizable executive dashboards that translate complex testing data into actionable institutional intelligence."
+    },
+    "StrategicIntegration": {
+      "title": "Strategic Integration",
+      "description": "Our systems integrate seamlessly with major LMS platforms including Canvas, Moodle, and Blackboard via LTI standards.",
+      "badge1": "LTI Core",
+      "badge2": "SSO Auth"
+    },
+    "PromotedAcademicServices": {
+      "badge": "Our Core Pillars",
+      "title": "Promoted Academic Services",
+      "services": [
+        {
+          "title": "Exam Proctoring",
+          "description": "Hybrid proctoring combining advanced AI monitoring with elite human invigilators for maximum integrity."
+        },
+        {
+          "title": "Secure Delivery",
+          "description": "Proprietary lockdown browsers ensuring that your intellectual property remains protected at every terminal."
+        },
+        {
+          "title": "Special Accommodations",
+          "description": "Inclusive testing environments supporting WCAG standards and specialized hardware for diverse requirements."
+        }
+      ]
+    },
+    "PartnerWithUs": {
+      "title1": "Join Our Global",
+      "title2": "Academic Network",
+      "description": "TEPTH Academic Atelier partners with forward-thinking institutions to redefine the value of certification. Let's discuss your organization's specific needs.",
+      "directInquiriesTitle": "Direct Inquiries",
+      "directInquiriesText": "partnerships@tepth.academy",
+      "institutionalSupportTitle": "Institutional Support",
+      "institutionalSupportText": "+971 4 000 0000"
+    }
+  },
+  "CareerPage": {
+    "title": "Personal Information",
+    "description": "Please fill out the form below and attach your latest CV to apply.",
+    "successTitle": "Application Sent!",
+    "successDescription": "Thank you for your interest. Our HR team will review your application and contact you soon.",
+    "goBack": "Go Back",
+    "submit": "Submit Application",
+    "submitting": "Submitting...",
+    "form": {
+      "firstName": "First Name",
+      "firstNamePlaceholder": "John",
+      "middleName": "Middle Name",
+      "middleNamePlaceholder": "Robert",
+      "lastName": "Last Name",
+      "lastNamePlaceholder": "Doe",
+      "gender": "Select Gender",
+      "genderPlaceholder": "-Select Gender-",
+      "male": "Male",
+      "female": "Female",
+      "dob": "Date of Birth",
+      "dobPlaceholder": "Select your birth date",
+      "nationality": "Nationality",
+      "nationalityPlaceholder": "-Select Nationality-",
+      "email": "Email Address",
+      "emailPlaceholder": "email@example.com",
+      "mobile": "Mobile No",
+      "mobilePlaceholder": "Ex: 50 123 4567",
+      "address": "Residential Address",
+      "addressPlaceholder": "Enter your full address",
+      "city": "Emirate / City",
+      "cityPlaceholder": "Dubai",
+      "pobox": "P.O. Box",
+      "poboxPlaceholder": "123456",
+      "attachCv": "Attach your CV",
+      "uploadText": "Click to upload or drag and drop",
+      "uploadHint": "Only doc, docx or pdf file allowed",
+      "removeFile": "Remove File"
+    }
+  },
+  "DisabilityPolicyPage": {
+    "title": "Disability",
+    "titleAccent": "Policy",
+    "commitment": "Our Commitment",
+    "quote": "\"TEPTH aims to create an environment that enables disabled faculty staff and students to realize their individual potential.\"",
+    "scopeTitle": "Scope & Coverage",
+    "scopeP1": "This disability policy states TEPTH’s commitments and responsibilities under UAE legislation and its goal to ensure an inclusively supportive environment for people with a disability that are participating in work and study at The Exam Preparation and Testing House.",
+    "scopeP2": "This policy applies to all teaching staff and students of TEPTH. Some faculty staff of TEPTH has specific responsibilities in reference to the implementation of this disability policy.",
+    "supportServicesTitle": "Support Services & Resources",
+    "services": [
+      "Guidance officers",
+      "Support teachers (literacy and numeracy)",
+      "Speech-language pathologists",
+      "Behavior support trainers",
+      "Teacher aides",
+      "Assistive technology"
+    ],
+    "supportFooter": "Other interventions include alternative format materials, differentiated teaching practices, special provisions for assessment, and customized study programs.",
+    "criteriaTitle": "Disability Criteria for Enrollment",
+    "criteriaDesc": "We do not need a formal diagnosis. Evidence-based information is sufficient for us to respond to learning requirements.",
+    "criteria": [
+      "Total or partial loss of body parts",
+      "Malfunction or disfigurement",
+      "Disturbed behavior affecting judgment",
+      "Physical weakness prone to illness",
+      "Disorder affecting learning capacity"
+    ],
+    "antiDiscriminationTitle": "Anti-Discrimination",
+    "antiDiscriminationDesc": "TEPTH will take severe action against any incident of direct/indirect harassment or bullying based on disability. Strictly prohibited behavior will not be tolerated.",
+    "actionPlanTitle": "Strategic Action Plan",
+    "actionPlanDesc": "The most integral aspect of our policy for continual performance improvement.",
+    "actionPlans": [
+      "Ensure academic integrity meets international standards.",
+      "Modify activities for satisfactory access.",
+      "Support career and academic goal pursuit.",
+      "Maintain reliability of merit principles.",
+      "Negotiate reasonable adjustment working plans.",
+      "Ensure opportunities for consultation.",
+      "Respond immediately to harassment allegations."
+    ],
+    "contactPrompt": "Need a consultation or more information?",
+    "contactBtn": "Contact Administration"
+  },
+  "EventsPage": {
+    "title": "Upcoming",
+    "titleAccent": "Events",
+    "subtitle": "Empowering your academic journey through expert-led information sessions and immersive workshops.",
+    "eventSubtitle": "Feb 13, 2026 | 6:00 PM - 8:00 PM",
+    "eventTitle1": "FREE INFO",
+    "eventTitle2": "SESSION",
+    "workshopHighlights": "Workshop Highlights",
+    "agendaItems": [
+      "CELPIP Basics",
+      "Why Choose CELPIP?",
+      "Test Format, Scoring, and Strategies (With sample responses)",
+      "Test Preparation Materials",
+      "Key Test Strategies",
+      "Tips for dealing with test questions",
+      "Question and Answer session (FAQs)"
+    ],
+    "successTitle": "Registration Sent!",
+    "successDesc": "Thank you for registering. Our team will contact you shortly with the session details.",
+    "newRegistrationBtn": "New Registration",
+    "registerTitle": "Register",
+    "registerSubtitle": "Secure your session entry",
+    "form": {
+      "fullName": "Full Name:*",
+      "fullNamePlaceholder": "Enter your name",
+      "fullNameError": "Full name must be at least 3 characters",
+      "mobile": "Mobile No:*",
+      "mobilePlaceholder": "Enter phone number",
+      "mobileError": "Please enter a valid mobile number",
+      "email": "Email Address:*",
+      "emailPlaceholder": "email@example.com",
+      "emailError": "Please enter a valid email address",
+      "processing": "Processing...",
+      "submitBtn": "Join Session"
+    },
+    "otherEventsTitle": "Other Upcoming Events",
+    "otherEventsDesc": "Stay tuned for more information sessions coming soon including TOEFL iBT workshops and PTE-A training weeks."
+  },
+  "ExamDeliveryPage": {
+    "ExamProviderPage": {
+      "badge": "GOLD STANDARD EXAM DELIVERY",
+      "title": "Exam",
+      "titleAccent": "Providers",
+      "description": "To international awarding bodies, physical in-centre exam delivery remains the gold standard for high-stakes testing. Streamline your testing with our end-to-end exam delivery services. Whether you need to run massive, single-day test events or consistent sessions throughout the year, we've got you covered. With secure in-person testing sites and robust remote proctoring, we ensure a seamless and high-quality experience for all test-takers.",
+      "partnerBtn": "Partner With Us",
+      "tourBtn": "Tour Our Venues",
+      "capabilitiesBadge": "OUR CAPABILITIES",
+      "capabilitiesTitle": "Designed for Perfect Integrity and Performance",
+      "capabilities": [
+        {
+          "title": "Required Business Licences & Permits",
+          "description": "It is very important to partner with a test center that holds the relevant business activity with the local authority to become a test center. The Exam Preparation & Testing House L.L.C is licensed by Sharjah Economic Development Department (SEDD) and regulated by Sharjah Private Education Authority (SPEA).",
+          "badges": ["Licensed by SEDD", "Regulated by SPEA"]
+        },
+        {
+          "title": "Test Security",
+          "description": "We maintain strict physical and operational security protocols, managed by trained personnel, to protect the integrity of your exams at every stage—before, during, and after test day. To ensure exam security and integrity, our computer labs are fully equipped with a comprehensive CCTV system. Every workstation is monitored by a dedicated security camera, and recorded footage can be made available to exam providers upon request.",
+          "badges": [
+            "Physical & Operational Protocols",
+            "100% Dedicated Workstation CCTVs"
+          ]
+        },
+        {
+          "title": "Flexible Exam Delivery",
+          "description": "Flexible scheduling options that accommodate massive single-day events, designated testing windows, Morning, Afternoon & Evening slots, or continuous testing year-round.",
+          "badges": ["Continuous & Event-Based Options"]
+        },
+        {
+          "title": "Top-notch Exam Venues",
+          "description": "Our modern, easily accessible testing centers are fully equipped with high-performance hardware and advanced technology to ensure an optimal testing environment.",
+          "badges": ["Easily Accessible & Premium Venues"]
+        },
+        {
+          "title": "Noise-Free Environment",
+          "description": "To minimize distractions and lower noise levels, we have implemented several workplace enhancements. Workstations feature fabric acoustic panels and are spaced generously apart, while testing rooms are carpeted to ensure a quiet environment. Additionally, we utilize white noise machines in the computer labs, alongside quiet keyboards and high-quality headsets throughout our spaces.",
+          "badges": ["Fabric Acoustic Panels", "White Noise Systems Equipped"]
+        },
+        {
+          "title": "Technical Infrastructure",
+          "description": "Our technical specifications meet your technical requirements. We provide dedicated, robust desktop PCs and 24-inch monitors.",
+          "badges": ["High-Performance Specifications"]
+        },
+        {
+          "title": "Special Accommodation",
+          "description": "We provide tailored support for candidates who need testing accommodations, offering personalized services such as extended time, frequent breaks, private rooms, and specialized assistive software and equipment.",
+          "badges": ["Adaptive Assistance Softwares"]
+        }
+      ]
+    },
+    "VendorPage": {
+      "badge": "MUTUAL COLLABORATION",
+      "title": "Vendor",
+      "titleAccent": "Partnerships",
+      "p1": "At TEPTH, we are actively seeking to expand our network of delivery partners and warmly encourage vendors with active exam provider agreements to utilize our advanced testing facilities. We believe in building sustainable, win-win collaborations that drive mutual value.",
+      "p2": "By channeling your exam volumes through our state-of-the-art center, you gain an instantly accessible, highly secure, and turnkey testing environment that satisfies the stringent standards of your exam providers—without the burden of facility overhead. In turn, our center optimizes its seating capacity and technical resources.",
+      "p3": "This symbiotic relationship ensures that your candidates experience a seamless, professional testing environment, while both of our organizations benefit from predictable operational scalability and shared success.",
+      "contactHeader": "Get in touch to partner with us"
+    }
+  },
+  "ExamProctoringServicesPage": {
+    "CandidatesPage": {
+      "heroTitle": "Exam Proctoring for",
+      "heroTitleAccent": "Candidates",
+      "heroDescription": "Professional, secure, and monitored exam environments for students from external institutions. We ensure a seamless testing experience that meets your university's strict requirements.",
+      "bookingHeading": "How to Book Your Proctored Exam",
+      "step1Title": "Review Rules & Regulations",
+      "step1Description": "Review the rules of your home institution carefully. Pay attention to deadlines, requirements, and policies for external testing facilities.",
+      "step2Title": "Get in Touch",
+      "step2Description": "Speak to our staff about requirements, duration, format (computer or paper), preferred date, time, and any special accommodations.",
+      "step3Title": "Inform Your Home Institution",
+      "step3Description": "Provide them with our contact details so they can send us your exam package securely. If no return envelope is provided, we can arrange a courier for an additional charge.",
+      "step3Disclaimer": "We are not responsible for the package after courier collection.",
+      "feesHeading": "Proctoring Fees",
+      "feesColDuration": "Duration",
+      "feesColFee": "Fee",
+      "feeNote1": "One dedicated proctor provided",
+      "feeNote2": "Fees are calculated per exam, per session",
+      "paymentHeading": "Payment Methods",
+      "paymentMethods": [
+        "Cash or Card on/before exam day",
+        "Electronic payment via online link",
+        "Wire transfer (Candidate covers bank charges)"
+      ],
+      "paymentRecommendationLabel": "Recommendation:",
+      "paymentRecommendationText": "We highly advise paying in advance to avoid last-minute payment failures that could result in the cancellation of your exam.",
+      "dayOfHeading": "On Exam Day",
+      "dayOfText": "Please arrive early to settle in and avoid unnecessary anxiety. Ensure you bring an approved, valid photo ID and strictly follow all regulations set by your home institution.",
+      "dayOfTip": "Always double-check that you have your ID and all personal belongings before leaving the testing center."
+    },
+    "InstitutionsPage": {
+      "heroTitle": "Advanced",
+      "heroTitleAccent": "AI Proctoring Solutions",
+      "heroDescription": "Secure online examinations with intelligent monitoring, behavioural analysis, facial recognition, and real-time fraud detection. Designed for universities, certification providers, and professional testing organizations.",
+      "aiSectionTitle": "AI Proctoring Technology",
+      "aiSectionDescription": "AI-powered proctoring combines machine learning, facial recognition, behavioural analytics, screen monitoring, and audio analysis to maintain examination integrity at scale. Suspicious activities such as multiple faces, excessive movement, tab switching, or environmental disturbances are automatically detected and flagged for review.",
+      "aiTech": [
+        {
+          "title": "Facial Recognition & Identification",
+          "desc": "Confirms the student's identity at the start and throughout the exam to prevent impersonation."
+        },
+        {
+          "title": "Behavioral Analysis",
+          "desc": "Detects unusual movements such as looking away from the screen, leaving the seat, or additional people entering the room."
+        },
+        {
+          "title": "Screen & Browser Monitoring",
+          "desc": "Tracks tab switching, prevents unauthorized websites, and supports secure browser lockdown environments."
+        },
+        {
+          "title": "Audio Analysis",
+          "desc": "Monitors ambient sounds, conversations, and suspicious audio activity during examinations."
+        },
+        {
+          "title": "Real-Time Flagging",
+          "desc": "Automatically records and highlights suspicious behaviour for review and post-exam auditing."
+        }
+      ],
+      "contactBoxText1": "To enquire about our proctoring and examination services, contact us at",
+      "contactBoxPhone": "+971 4 333 3616",
+      "contactBoxText2": "or",
+      "contactBoxEmail": "info@tepth.net",
+      "contactBoxText3": ". Our team can provide information about implementation, integrations, pricing, and operational support.",
+      "facilitiesTitle": "Testing Facility Standards",
+      "facilities": [
+        {
+          "title": "140 Workstations",
+          "desc": "Dual-monitor setups with ergonomic seating."
+        },
+        {
+          "title": "Climate Controlled",
+          "desc": "Precision temperature management for comfort and stability."
+        },
+        {
+          "title": "Acoustic Excellence",
+          "desc": "Sound-dampening design that minimizes distractions."
+        },
+        {
+          "title": "Full Accessibility",
+          "desc": "POD compliant facilities with assistive technologies."
+        }
+      ],
+      "partnerTitle": "Partner With TEPTH",
+      "partnerDescription": "Collaborate with a trusted examination infrastructure provider serving educational institutions, certification bodies, and professional organizations across the region.",
+      "partnerFeatures": [
+        "Secure API integrations",
+        "Custom reporting dashboards",
+        "Regional market access"
+      ],
+      "partnerCta": "Request Partnership"
+    }
+  },
+  "FacilitiesPage": {
+    "heroTitle": "WORLD-CLASS",
+    "heroTitleAccent": "FACILITIES",
+    "heroDescription": "A purpose-built ecosystem designed to empower learners with the environment and technology they need to excel.",
+    "beliefText": "TEPTH believes in offering quality education. We provide a comfortable environment and modern equipment so students can perform in a",
+    "beliefAccent": "stress-free environment.",
+    "facilities": [
+      {
+        "title": "Quiet Classrooms",
+        "description": "Purpose-built, sound-insulated learning spaces designed to eliminate distractions and foster deep focus."
+      },
+      {
+        "title": "Modern Equipment",
+        "description": "High-specification hardware and industry-standard software to facilitate seamless test performance and practice."
+      },
+      {
+        "title": "Comfortable Environment",
+        "description": "Ergonomically furnished spaces that prioritize learner comfort, reducing physical strain during long study sessions."
+      },
+      {
+        "title": "High-Speed Infrastructure",
+        "description": "Enterprise-grade connectivity ensuring that online registrations and digital practice tests run without interruption."
+      },
+      {
+        "title": "Stress-Free Atmosphere",
+        "description": "A welcoming, professional environment designed to keep anxiety low during critical test preparation periods."
+      },
+      {
+        "title": "Testing Lab",
+        "description": "Dedicated testing stations configured to replicate official exam conditions for maximum preparation efficacy."
+      }
+    ],
+    "calloutTitle": "Designed for",
+    "calloutAccent": "Focus & Performance.",
+    "experienceTitle": "Furnished to",
+    "experienceTitleAccent": "Facilitate Learning.",
+    "experienceP1": "Our classrooms are not just rooms; they are quiet hubs of intellectual activity. Every chair, table, and lighting fixture has been selected to minimize fatigue and maximize cognitive output.",
+    "experienceP2": "For students preparing for high-stakes exams, we provide the exact technology stack they will encounter on test day, ensuring that physical equipment never becomes a barrier to performance."
+  },
+  "FreeConsultationPage": {
+    "heroBadge": "FREE CONSULTATION",
+    "heroTitle": "Get the Right Guidance",
+    "heroTitleAccent": "Before You Decide",
+    "heroDescription1": "Whether you are planning to book your exam or prepare for the test, the right advice at the beginning can save you time, money, and effort.",
+    "heroDescription2": "At TEPTH, we offer free consultations to help you make the right decision with confidence — no pressure, no obligation.",
+    "examPrepBadge": "FOR EXAM PREPARATION COURSES",
+    "examPrepTitle": "15-Minute Free Consultation",
+    "examPrepTitleAccent": "with Our Instructor",
+    "examPrepDescription": "If you are unsure about your current level or which course to choose, speak directly with one of our experienced instructors.",
+    "chooseLabel": "You can choose:",
+    "chooseOptions": [
+      "In-person Consultation at our centre.",
+      "Online Consultation via GoTo Application",
+      "Phone Consultation via phone call"
+    ],
+    "sessionLabel": "During your session, we will:",
+    "sessionItems": [
+      "Assess your current English level",
+      "Understand your target exam, review your score report if you have already taken a test and discuss your score goal.",
+      "Recommend the right course (IELTS, PTE, TOEFL iBT, CELPIP, CAEL, Skills for English – SELT & OET)",
+      "Suggest a realistic study plan based on your timeline"
+    ],
+    "examPrepNote": "This is a quick but focused session designed to give you clarity before you start.",
+    "bookingBadge": "FOR EXAM BOOKINGS & TEST INFORMATION",
+    "bookingTitle": "Free Consultation with Our",
+    "bookingTitleAccent": "Test Centre Team",
+    "bookingDescription": "If you are planning to book one of the English Proficiency tests administered at our centre, our staff members are available to guide you.",
+    "consultLabel": "You can consult:",
+    "consultOptions": [
+      "In-person Consultation at our centre.",
+      "Phone Consultation via phone call for quick support"
+    ],
+    "helpLabel": "We will help you with:",
+    "helpItems": [
+      "Understanding test requirements and eligibility",
+      "Available test dates and booking process",
+      "ID requirements and test day instructions",
+      "Any exam registration-related questions"
+    ],
+    "formTitle": "Confirm your",
+    "formTitleAccent": "Free Consultation",
+    "formDescription": "Please fill out the form below to book your session with our experts."
+  },
+  "FAQsPage": {
+    "title": "Frequently Asked Questions",
+    "description": "Everything you need to know about registration, courses, and our facilities.",
+    "faqs": [
+      {
+        "question": "How do I register?",
+        "answer": "Since you are already on our website, the fastest way is to register online. You can also register in person at the center."
+      },
+      {
+        "question": "Do you offer individual tutoring?",
+        "answer": "Yes, both group and one-to-one tutoring are available."
+      },
+      {
+        "question": "Is the material fee refundable?",
+        "answer": "No, the material fee is included and not refundable."
+      },
+      {
+        "question": "Is the registration fee refundable?",
+        "answer": "No, it is not refundable."
+      },
+      {
+        "question": "What happens if I cancel or withdraw?",
+        "answer": "Please refer to our refund policy for details."
+      },
+      {
+        "question": "Online registration is not working. What should I do?",
+        "answer": "Make sure cookies and JavaScript are enabled. You will receive a confirmation email if your registration is successful. If not, please retry or check your email address."
+      },
+      {
+        "question": "What payment methods do you accept?",
+        "answer": "Visa, MasterCard, and PayPal are accepted."
+      },
+      {
+        "question": "What qualifications do your teachers have?",
+        "answer": "Our teachers hold bachelor's or master's degrees and certifications such as CELTA, with international teaching experience."
+      },
+      {
+        "question": "Do you offer facilities for special needs candidates?",
+        "answer": "Yes, our centre is fully accessible."
+      },
+      {
+        "question": "Do you offer a quiet learning environment?",
+        "answer": "Yes, we provide dedicated noise-free classrooms and testing labs."
+      },
+      {
+        "question": "Do you offer evening classes?",
+        "answer": "Yes, our working hours are 9:00 am – 9:00 pm (Saturday–Thursday)."
+      },
+      {
+        "question": "Can I get brochures or flyers?",
+        "answer": "Yes, you can request them via email at info@tepth.net. Content matches our website."
+      },
+      {
+        "question": "Is public transport available nearby?",
+        "answer": "Yes, buses from Al Rashidiya and Burjuman stop near Dubai Silicon Oasis, within a short walking distance."
+      }
+    ]
+  },
+  "OurVenuesPage": {
+    "360DegreeVirtualTourPage": {
+      "title": "360° TEPTH Virtual Tour",
+      "description": "Explore our world-class facilities from the comfort of your home.",
+      "advantageTitle": "The TEPTH Advantage",
+      "advantageSubtitle": "Infrastructure Engineered for Success",
+      "features": [
+        {
+          "title": "Downtown Campus",
+          "desc": "Centrally located for easy access with public transport links and premium parking."
+        },
+        {
+          "title": "Fiber Connectivity",
+          "desc": "Redundant high-speed fiber lines ensuring zero interruption during digital exams."
+        },
+        {
+          "title": "Secure & Proctored",
+          "desc": "Full biometric security and international standard proctoring protocols."
+        }
+      ]
+    },
+    "BookAndExamVenuePage": {
+      "title": "Comprehensive Exam Infrastructure",
+      "infrastructureItems": [
+        {
+          "title": "Service License",
+          "description": "The Exam Preparation & Testing House is a well-formed organization in Dubai with vast experience in test delivery and exam prep. services. TEPTH is licensed by Dubai Silicon Oasis Authority and permitted by KHDA with Testing Centre activity."
+        },
+        {
+          "title": "Computer-based Exams",
+          "description": "Three 40-seat computer rooms and 20-seat classroom to administer computer-based exams."
+        },
+        {
+          "title": "Noise Free Environment",
+          "description": "Fabric acoustic panels are fixed onto the partitions of workstations to help reduce the noise level. Our floors at the testing rooms are carpeted to eliminate distraction. We have also spaced out our workstations as this helps in reducing the noise. Additionally, we are using white noise machines in our computer labs to help reduce noise. We also use quiet keyboards and high-quality headsets to further minimize distractions."
+        },
+        {
+          "title": "Paper-based Exams",
+          "description": "We provide a dedicated 20-seat classroom specifically designed to accommodate paper-based examination formats."
+        },
+        {
+          "title": "CCTV Surveillance",
+          "description": "To maintain exam security and integrity, we have implemented a comprehensive CCTV system in our computer labs. Each workstation is monitored by a security camera, and exam providers may be granted access to recordings upon request."
+        },
+        {
+          "title": "Exam Delivery Machines",
+          "description": "Our venues are equipped with high-specification computers that meet or exceed all official exam provider requirements for performance and security."
+        },
+        {
+          "title": "Strategic Location",
+          "description": "Our center is conveniently located in Dubai Silicon Oasis, one of the most strategic areas in Dubai, and in close proximity to Academic City."
+        },
+        {
+          "title": "Wheelchair Accessible",
+          "description": "All our facilities are fully wheelchair accessible. We also provide adjustable chairs to ensure comfort for all candidates during their exams."
+        },
+        {
+          "title": "Top-Notch Premises",
+          "description": "Our modern, air-conditioned venues are professionally built and well-equipped with waiting areas and secure lockers for test-takers. Features include built-in ceiling speakers for events and specialized training."
+        },
+        {
+          "title": "Experienced Invigilators",
+          "description": "All administrators and proctors at TEPTH are certified and highly trained to supervise various types of international exams with the highest level of professionalism."
+        },
+        {
+          "title": "Special Accommodation",
+          "description": "We can accommodate test-takers requiring extra time or private rooms for special needs, ensuring a fair and supportive testing environment for everyone."
+        },
+        {
+          "title": "Seating Capacity",
+          "description": "With a total capacity of 140 workstations across three 40-seat computer rooms and a 20-seat classroom, we can administer exams for up to 140 candidates in a single session."
+        }
+      ]
+    }
+  },
+  "PrivacyPolicyPage": {
+    "title": "Privacy",
+    "titleAccent": "Policy",
+    "description": "Our commitment to demonstrating concern for maintaining your secrecy and data integrity.",
+    "navTitle": "Navigation",
+    "sidebarTitle": "Privacy Question?",
+    "sidebarDescription": "Contact our data protection team directly for any inquiries.",
+    "lastUpdated": "Last Updated: April 2026. TEPTH makes efforts to ensure this policy is aligned with national and international laws.",
+    "sections": {
+      "intro": {
+        "title": "Introduction",
+        "p1": "A privacy policy is a document that tells our website’s users what will be done with their personal information, how this information will be collected, and how this gathered data will be used.",
+        "p2": "While storing, managing, and using all information available on the site’s database, <strong>all legal requirements are fulfilled</strong> to protect client confidentiality. All possible security measures are embedded when site owners deal with visitors’ personal information."
+      },
+      "statement": {
+        "title": "Statement",
+        "quote": "TEPTH has created this privacy policy with the aim of demonstrating our concern and commitment towards maintaining customer secrecy.",
+        "p1": "Our privacy policy holds great importance for us. It communicates our information collection process and dissemination practices for gathered information from our visitors and customers."
+      },
+      "purpose": {
+        "title": "Purpose",
+        "p1": "This policy explains how we tackle and share (if needed) the information you share with us. Website users are informed that their information will be used for two primary reasons:",
+        "items": [
+          "Disclosing personal information to third parties (legal affiliates, business partners, etc.)",
+          "Making use of gathered information for particular purposes (newsletters, promotional emails, etc.)"
+        ]
+      },
+      "collection": {
+        "title": "Collected Information",
+        "p1": "TEPTH requires users who register for our services to furnish contact information including name, address, phone number, e-mail contact, billing information, and credit card numbers."
+      },
+      "pii": {
+        "title": "Personally Identifiable Information (PII)",
+        "p1": "PII collected by TEPTH will solely belong to the customers and will be used exclusively according to the legitimate international privacy standards for both offline and online data.",
+        "useTitle": "How we use PII:",
+        "items": [
+          "To set up and improve our services for individuals and organizations.",
+          "To contact customers regarding their specific interests in TEPTH.",
+          "To facilitate promotional campaigns via authorized partners.",
+          "To send email newsletters (only if an email address is provided)."
+        ],
+        "p2": "We will not distribute your personal information haphazardly. If we share your information with third parties, we will ask for your approval first."
+      },
+      "nonPii": {
+        "title": "Information that is not PII",
+        "p1": "We may also collect non-PII such as Internet addresses, navigational data, and cookies. This information is logged to help govern our site and diagnose technical problems.",
+        "cookiesTitle": "Cookies utilization:",
+        "p2": "Today, cookies utilization is the industry standard. standing alone, these cannot identify you personally. We recommend letting your web browser accept cookies to access a fully functional website."
+      },
+      "security": {
+        "title": "Security and Retention",
+        "p1": "TEPTH ensures that user-provided personal information is safeguarded against potentially illegal access, disclosure, or misuse.",
+        "items": [
+          {
+            "strong": "Secured Servers: ",
+            "text": "Personal information is stored in a secured server environment using firewalls."
+          },
+          {
+            "strong": "Authorized Access: ",
+            "text": "Only employees with signed confidentiality agreements have authorized access."
+          },
+          {
+            "strong": "Data Destruction: ",
+            "text": "TEPTH destroys information that is no longer required for its intended reason."
+          }
+        ]
+      },
+      "changes": {
+        "title": "Changes to the Policy",
+        "p1": "TEPTH authorities can make changes to this privacy policy anytime. We may send you an email advising of modifications, or we may post them on the website."
+      }
+    }
+  },
+  "SpecialAccommodationPage": {
+    "title": "Available",
+    "titleAccent": "Accommodations",
+    "description": "We offer various modifications based on documented medical conditions, disabilities, or specific learning requirements.",
+    "cards": {
+      "additionalTime": {
+        "title": "Additional Time",
+        "desc": "Standard 25% to 50% extra time for candidates with cognitive processing speeds, physical disabilities, or visual impairments that require more time to navigate materials.",
+        "link": "Learn more"
+      },
+      "visualAids": {
+        "title": "Visual Aids",
+        "desc": "Large print papers, Braille versions, and screen magnifier software for candidates with varying degrees of visual impairment.",
+        "badge": "Customizable"
+      },
+      "privateRoom": {
+        "title": "Private Room",
+        "desc": "Distraction-free environments for candidates requiring specialized medical equipment or frequent breaks."
+      },
+      "assistivePersonnel": {
+        "title": "Assistive Personnel",
+        "desc": "Qualified scribes, readers, and sign-language interpreters can be provided to assist candidates in conveying their knowledge accurately.",
+        "tags": ["Amanuensis", "Oral Transcribers", "Invigilators"]
+      }
+    },
+    "howToApply": {
+      "title": "How to Apply",
+      "steps": [
+        {
+          "title": "Initial Request",
+          "desc": "Submit your request during the initial exam registration phase. We recommend applying at least 6 weeks before your test date."
+        },
+        {
+          "title": "Documentation Upload",
+          "desc": "Provide valid medical evidence from a registered practitioner outlining the nature of the requirement and recommended adjustments."
+        },
+        {
+          "title": "Review & Approval",
+          "desc": "Our specialist board reviews the request against exam body criteria and issues a Formal Approval Notice via email."
+        }
+      ]
+    },
+    "inquiry": {
+      "title": "Accommodation Inquiry"
+    }
+  },
+  "TermsAndConditionsPage": {
+    "title": "TERMS &",
+    "titleAccent": "CONDITIONS",
+    "description": "Please read our terms carefully to understand your rights and responsibilities when using TEPTH services.",
+    "navTitle": "Navigation",
+    "sidebarTitle": "Need help?",
+    "sidebarDescription": "If you have any questions regarding these terms, contact us.",
+    "lastUpdated": "Last Updated: April 2026. TEPTH Reserves the right to update these terms at any time.",
+    "sections": {
+      "intro": {
+        "title": "Introduction",
+        "p1": "Welcome to TEPTH Website.",
+        "p2": "This website is owned and operated by <strong>The Exam Preparation & Testing House FZCO</strong>, a company licensed by Dubai Silicon Oasis Authority whose registered office is at Suite 703, Apricot Tower, Dubai Silicon Oasis, Dubai, United Arab Emirates.",
+        "p3": "Our Terms and Conditions apply to your access to and use of our Website \"https://www.tepth.net/\". Please read these Terms and Conditions carefully.",
+        "p4": "By continuing to access and use our website, you are deemed to have understood and agreed to all the terms & conditions contained here in. If you do not agree to these Terms & Conditions, you may not use this website.",
+        "p5": "For the purposes of these Terms and Conditions, \"this Website\" includes means all the webpages related to the tepth.net website excluding any links to third party sites."
+      },
+      "changes": {
+        "title": "Changes to Terms and Conditions",
+        "p1": "TEPTH reserves every right to change the terms and conditions or modify this agreement anytime as necessary without any prior notice. Such amended or modified Terms and Conditions shall be effective upon publication on this Website. Therefore, it is recommended to keep checking if there is any addition or change made to TEPTH’s terms and conditions agreement. Users are bound to follow this agreement."
+      },
+      "operation": {
+        "title": "Changes to Operation of Website",
+        "items": [
+          "TEPTH may change the format and content of this website at any time without a prior notice.",
+          "TEPTH may suspend the operation of this website for update, support or maintenance work, in order to update the content, function or for any other reason.",
+          "TEPTH reserves the right to terminate access to this website at any time and without any prior notice."
+        ],
+        "p1": "The use of Tepth.net is subject to the below mentioned Terms of Use:"
+      },
+      "payment": {
+        "title": "Payment Terms",
+        "items": [
+          "TEPTH accepts the payments in U.A.E currency through Visa, MasterCard and PayPal accounts.",
+          "If you make a payment for services on our website, the details you are asked to submit will be provided directly to our payment provider via secured connection.",
+          "The payments are taken securely on the payment page of our card processor. No card details are stored by the website.",
+          "When registering with us, you are liable to provide accurate personal information to avoid future problems.",
+          "The customer using the website who are Minor /under the age of 18 shall not register as a User of the website and shall not transact on or use the website.",
+          "The country of merchant domicile is UAE.",
+          "https://www.tepth.net/ will NOT deal or provide any services or products to any of OFAC sanctions countries in accordance with the law of UAE.",
+          "Any dispute or claim arising out of or in connection with this website shall be governed and construed in accordance with the laws of UAE."
+        ]
+      },
+      "registration": {
+        "title": "Registration & Rescheduling",
+        "items": [
+          "Students who miss a scheduled group lesson or session have no privilege to reschedule the missed lesson and it will be considered as availed.",
+          "Rescheduling group lessons may only be possible with the consensus of all students of the same class and with a notice period of 48-hours.",
+          "TEPTH reserves the right to cancel or reschedule any session or course due to unforeseen circumstances or exam delivery.",
+          "Students must attend at least 75% of the course in order to receive a certificate of attendance.",
+          "For one-to-one tutoring, students should notify the center at least 48 hours prior to cancellation or rescheduling. Otherwise it will be considered availed. No show up sessions/classes will be treated as taken and no sessions will be made up."
+        ]
+      },
+      "material": {
+        "title": "Preparation Material & Books",
+        "p1": "Practice materials are included in private and semi-private classroom-based courses but not group or online courses.",
+        "items": [
+          "Practice tests are non-refundable once purchased.",
+          "Software language courses and practice tests cannot be exchanged or returned once a purchase order has been placed."
+        ],
+        "registrationFeePrefix": "Registration fee of ",
+        "registrationFeeSuffix": " 100 is included in the course fee."
+      },
+      "withdrawal": {
+        "title": "Withdrawal, Cancellation & Refund",
+        "noticeItems": [
+          {
+            "strong": "10+ days notice: ",
+            "text": "Full refund of course fees."
+          },
+          {
+            "strong": "5-10 days notice: ",
+            "text": "50% refund of course fees."
+          },
+          {
+            "strong": "Less than 5 days notice: ",
+            "text": "No refund issued."
+          }
+        ],
+        "p1": "If for any reason TEPTH cancels a course, all course fees, including registration fee will be refunded in full.",
+        "p2": "Refunds are made in U.A.E Dirham currency and, therefore, the final amount that you may receive will depend on the foreign exchange rates at the time the refund is processed."
+      },
+      "process": {
+        "title": "Refund Process",
+        "items": [
+          "You must apply by completing a signed, type-written TEPTH official Withdrawal/Refund Request Form.",
+          "The form is available for download on our website or at the center.",
+          "Submit via email to <strong>info@tepth.net</strong>.",
+          "Refunds are processed within six (6) weeks of receipt."
+        ]
+      },
+      "privacy": {
+        "title": "Privacy Conditions",
+        "p1": "All credit/debit cards details and personally identifiable information will <strong>NOT</strong> be stored, sold, shared, rented or leased to any third parties."
+      },
+      "copyright": {
+        "title": "Copyright & Trade-marks",
+        "p1": "The copyright for all the content and images on this website is held by TEPTH. You may not use these trade-marks in any form for any purpose without written consent of the trade-mark owner."
+      },
+      "jurisdiction": {
+        "title": "Jurisdiction",
+        "p1": "These Terms and Conditions are governed by and to be interpreted according to the laws of the Emirate of Dubai, United Arab Emirates. Dubai courts will have exclusive jurisdiction over any dispute."
+      }
+    }
+  }
+}

@@ -7,9 +7,7 @@ import FreeConsultation from "./free-consultation/_components/free-consultation"
 import InformationSection from "@/components/blocks/information-section";
 import BrandsSection from "@/components/blocks/brands-section";
 import WhyChooseUs from "@/components/blocks/why-choose-us";
-import ExamPrepCourses from "@/components/blocks/exam-prep-courses";
 import { CampusGallery } from "@/components/blocks/campus-gallery";
-
 export default function Home() {
   return (
     <div>
@@ -17,7 +15,6 @@ export default function Home() {
       <InformationSection />
       <BrandsSection />
       <CourseList />
-      {/* <ExamPrepCourses /> */}
       <CoreServices />
       <WhyChooseUs />
       <ExperienceExcellence />
