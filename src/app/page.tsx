@@ -9,10 +9,12 @@ import BrandsSection from "@/components/blocks/brands-section";
 import WhyChooseUs from "@/components/blocks/why-choose-us";
 import ExamPrepCourses from "@/components/blocks/exam-prep-courses";
 import { CampusGallery } from "@/components/blocks/campus-gallery";
-
+import { useTranslations } from "next-intl";
 export default function Home() {
+  const t = useTranslations("HomePage");
   return (
     <div>
+      <h1>{t("title")}</h1>
       <HeroSection />
       <InformationSection />
       <BrandsSection />
