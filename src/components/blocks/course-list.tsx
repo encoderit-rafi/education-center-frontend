@@ -9,6 +9,7 @@ import {
 } from "@/components/blocks/cards/base-card";
 import { useQuery } from "@tanstack/react-query";
 import api from "@/axios";
+import { useTranslations } from "next-intl";
 interface ExamType {
   id: string;
   name: string;
@@ -30,7 +31,8 @@ interface ApiResponse {
 }
 
 export default function CourseList() {
-   const { data: examsResponse, isLoading } = useQuery<ApiResponse>({
+  const t = useTranslations("HomePage.CourseList");
+  const { data: examsResponse, isLoading } = useQuery<ApiResponse>({
     queryKey: ["exams", { limit: 100, sort_order: "asc", sort_by: "orderIndex" }],
     queryFn: async () => {
       const response = await api.get("/exams", {
@@ -54,9 +56,9 @@ export default function CourseList() {
     <section className="base-px base-py">
       <div className="section-container">
         <div className="space-y-4 mb-12">
-          <span className="section-label">Curriculum</span>
+          <span className="section-label">{t("label")}</span>
           <h3 className="section-title">
-            Explore <span>Exams</span>
+            {t("title")} <span>{t("titleAccent")}</span>
           </h3>
         </div>
 

@@ -7,8 +7,8 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel";
 import { cn } from "@/lib/utils";
-
 import { Marquee } from "../ui/marquee";
+import { useTranslations } from "next-intl";
 
 const GoogleLogo = () => (
   <svg viewBox="0 0 24 24" className="w-6 h-6">
@@ -165,6 +165,7 @@ function TestimonialCard({
 }
 
 export default function Testimonials() {
+  const t = useTranslations("HomePage.Testimonials");
   const [api, setApi] = React.useState<CarouselApi>();
   const [current, setCurrent] = React.useState(0);
   const [count, setCount] = React.useState(0);
@@ -195,12 +196,11 @@ export default function Testimonials() {
     <section className="py-32 bg-[#F8F9FA] overflow-hidden border-y border-gray-100">
       <div className="max-w-7xl mx-auto text-center mb-20 px-6">
         <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6 uppercase tracking-tight">
-          Trusted by Tomorrow&apos;s{" "}
-          <span className="text-primary italic">Leaders</span>
+          {t("title")}{" "}
+          <span className="text-primary italic">{t("titleAccent")}</span>
         </h2>
         <p className="text-gray-500 text-base max-w-2xl mx-auto font-medium">
-          See what our global community has to say about their journey with
-          TEPTH.
+          {t("description")}
         </p>
       </div>
 

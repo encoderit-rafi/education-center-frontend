@@ -1,5 +1,147 @@
 {
   "HomePage": {
-    "title": "Hello world!"
+    "HeroSection": {
+      "headline1": "Prep Smarter",
+      "headline2": "Score",
+      "headline3": "Higher",
+      "description": "Empowering students with skilled instructors and premium resources to achieve their language goals and global recognition.",
+      "bookExam": "Book Exam",
+      "ourCourses": "Our Courses"
+    },
+    "InformationSection": {
+      "items": [
+        { "label": "Exams Offered", "value": "10+" },
+        { "label": "Course Types", "value": "4" },
+        { "label": "Mock Test Results", "value": "72h" },
+        { "label": "Registered Centre", "value": "UAE" }
+      ]
+    },
+    "BrandsSection": {
+      "heading": "Authorized Testing Centre For"
+    },
+    "CourseList": {
+      "label": "Curriculum",
+      "title": "Explore",
+      "titleAccent": "Exams"
+    },
+    "CoreServices": {
+      "label": "Our Services",
+      "title": "More Than Just an",
+      "titleAccent": "Exam Centre",
+      "services": [
+        {
+          "title": "Paid Mock Tests",
+          "description": "Sit a full scored mock exam in our centre or receive it online within 72 hours."
+        },
+        {
+          "title": "Test Your English",
+          "description": "Take a free multiple-choice assessment and receive your level result by email instantly."
+        },
+        {
+          "title": "Free Consultation",
+          "description": "15 minutes with one of our teachers — ask about exams, courses, or preparation strategies."
+        },
+        {
+          "title": "Exam Proctoring Services",
+          "description": "Professional proctoring services for institutions and remote test takers."
+        },
+        {
+          "title": "Exam Delivery",
+          "description": "End-to-end exam delivery solutions for providers, vendors, and test-takers."
+        },
+        {
+          "title": "Special Accommodation",
+          "description": "Tailored exam conditions for candidates with disabilities or special requirements."
+        },
+        {
+          "title": "Assessment Solutions",
+          "description": "Customised language assessment services for organisations and institutions."
+        },
+        {
+          "title": "Our Venues",
+          "description": "Noise-free, professional exam environment. Take a 360° virtual tour before you visit."
+        },
+        {
+          "title": "Contact Us",
+          "description": "Reach our team via WhatsApp, Telegram, or our contact form. We reply within 24 hours."
+        }
+      ]
+    },
+    "WhyChooseUs": {
+      "label": "Why Choose Us",
+      "title": "Everything You Need, in",
+      "titleAccent": "One Place",
+      "stats": [
+        { "label": "Noise-free Environment" },
+        { "label": "Top-notch Facility" },
+        { "label": "Quality Service" },
+        { "label": "Licensed & Accredited" }
+      ],
+      "features": [
+        {
+          "title": "Accredited Testing Centre",
+          "description": "Authorized by leading exam bodies — British Council, ETS, Pearson, and more."
+        },
+        {
+          "title": "Flexible Test Dates",
+          "description": "Frequent exam slots available. Book online and choose your preferred date and time."
+        },
+        {
+          "title": "Expert Preparation Courses",
+          "description": "Group, semi-private, and 1-to-1 courses tailored to your target score and timeline."
+        },
+        {
+          "title": "Paid Mock Tests",
+          "description": "Sit a realistic mock exam in our centre or receive it online. Scored and timed."
+        },
+        {
+          "title": "Dedicated Support",
+          "description": "Our team answers your questions via WhatsApp, Telegram, or our contact form."
+        },
+        {
+          "title": "Instant Tax Invoices",
+          "description": "VAT-compliant tax invoice automatically emailed to you after every payment."
+        }
+      ]
+    },
+    "ExperienceExcellence": {
+      "label": "Experience Our Excellence",
+      "title": "Comprehensive Exam Services from Highly-Qualified Instructors",
+      "description": "TEPTH is a renowned UAE-based institution that helps students in preparing for and undertaking different international aptitude tests in order to meet admission requirements. We provide expert guidance for various English-based examinations and assessments, in addition to facilitating the registration, booking, and preparation for the tests.",
+      "tagline": "Ace the Test, Secure Your Future."
+    },
+    "CampusGallery": {
+      "title": "Site Gallery",
+      "description": "Take a closer look at our state-of-the-art infrastructure and vibrant student spaces.",
+      "images": [
+        { "name": "Exterior Building" },
+        { "name": "Main Entrance" },
+        { "name": "Classroom" },
+        { "name": "Classroom" },
+        { "name": "Computer Room" },
+        { "name": "Lockers" },
+        { "name": "Computer Room" },
+        { "name": "Computer Room" },
+        { "name": "Building Lobby" },
+        { "name": "Building Lobby" },
+        { "name": "Parking Zone" }
+      ]
+    },
+    "Testimonials": {
+      "title": "Trusted by Tomorrow's",
+      "titleAccent": "Leaders",
+      "description": "See what our global community has to say about their journey with TEPTH."
+    },
+    "FreeConsultation": {
+      "title": "Ready to start your journey?",
+      "description": "Our academic counselors are available to guide you through the selection and booking process.",
+      "cta": "Get Free Consultation",
+      "features": [
+        "Expert academic guidance",
+        "Personalized course selection",
+        "No commitment required",
+        "Quick response time"
+      ]
+    }
   }
 }

@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { buttonVariants } from "../ui/button";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 
 const HERO_IMAGES = [
   "/images/about-us/Exterior_Building.jpg",
@@ -16,6 +17,7 @@ const HERO_IMAGES = [
 ];
 
 export default function HeroSection() {
+  const t = useTranslations("HomePage.HeroSection");
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
@@ -33,7 +35,7 @@ export default function HeroSection() {
           <div
             key={src}
             className={cn(
-              "absolute inset-0 transition-all duration-[2000ms] ease-in-out",
+              "absolute inset-0 transition-all duration-2000 ease-in-out",
               index === currentImageIndex
                 ? "opacity-100 scale-105"
                 : "opacity-0 scale-100",
@@ -58,17 +60,16 @@ export default function HeroSection() {
       <div className="container relative z-20 px-4 md:px-8 max-w-7xl mx-auto">
         <div className="max-w-3xl space-y-8">
           <h1 className="text-4xl md:text-7xl font-headline font-black text-white leading-[1.1] tracking-tight animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-150">
-            Prep Smarter <br />
+            {t("headline1")} <br />
             <span className="text-primary italic relative">
-              Score
+              {t("headline2")}
               <div className="absolute -bottom-2 left-0 w-full h-1 bg-primary rounded-full opacity-50" />
             </span>{" "}
-            Higher
+            {t("headline3")}
           </h1>
 
           <p className="text-lg text-slate-200 max-w-2xl leading-relaxed font-light animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-300">
-            Empowering students with skilled instructors and premium resources
-            to achieve their language goals and global recognition.
+            {t("description")}
           </p>
 
           <div className="max-w-md grid grid-cols-2 gap-3 pt-4 animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-500">
@@ -79,7 +80,7 @@ export default function HeroSection() {
                 className: "group py-2.5",
               })}
             >
-              Book Exam
+              {t("bookExam")}
               <ArrowRight className="max-md:hidden ml-2 size-4 group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link
@@ -90,7 +91,7 @@ export default function HeroSection() {
                 className: "py-2.5",
               })}
             >
-              Our Courses
+              {t("ourCourses")}
             </Link>
           </div>
         </div>

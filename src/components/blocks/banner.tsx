@@ -13,7 +13,7 @@ export default function Banner() {
         <div className="flex items-center gap-2 text-white">
           <BadgeCheck className="text-yellow-300 size-3" />
           <span className="font-medium tracking-wide">
-            Authorised Test Centre &nbsp;·&nbsp; IELTS &nbsp;·&nbsp; TOEFL iBT
+            Authorized Test Centre &nbsp;·&nbsp; IELTS &nbsp;·&nbsp; TOEFL iBT
             &nbsp;·&nbsp; PTE &nbsp;·&nbsp; CELPIP G &nbsp;·&nbsp; Skills for
             English (SELT) . Save up to 25% when you book your exam and register
             for the course with TEPTH and pay in-person or online on our website
