@@ -656,5 +656,44 @@
       ],
       "partnerCta": "Request Partnership"
     }
+  },
+  "FacilitiesPage": {
+    "heroTitle": "WORLD-CLASS",
+    "heroTitleAccent": "FACILITIES",
+    "heroDescription": "A purpose-built ecosystem designed to empower learners with the environment and technology they need to excel.",
+    "beliefText": "TEPTH believes in offering quality education. We provide a comfortable environment and modern equipment so students can perform in a",
+    "beliefAccent": "stress-free environment.",
+    "facilities": [
+      {
+        "title": "Quiet Classrooms",
+        "description": "Purpose-built, sound-insulated learning spaces designed to eliminate distractions and foster deep focus."
+      },
+      {
+        "title": "Modern Equipment",
+        "description": "High-specification hardware and industry-standard software to facilitate seamless test performance and practice."
+      },
+      {
+        "title": "Comfortable Environment",
+        "description": "Ergonomically furnished spaces that prioritize learner comfort, reducing physical strain during long study sessions."
+      },
+      {
+        "title": "High-Speed Infrastructure",
+        "description": "Enterprise-grade connectivity ensuring that online registrations and digital practice tests run without interruption."
+      },
+      {
+        "title": "Stress-Free Atmosphere",
+        "description": "A welcoming, professional environment designed to keep anxiety low during critical test preparation periods."
+      },
+      {
+        "title": "Testing Lab",
+        "description": "Dedicated testing stations configured to replicate official exam conditions for maximum preparation efficacy."
+      }
+    ],
+    "calloutTitle": "Designed for",
+    "calloutAccent": "Focus & Performance.",
+    "experienceTitle": "Furnished to",
+    "experienceTitleAccent": "Facilitate Learning.",
+    "experienceP1": "Our classrooms are not just rooms; they are quiet hubs of intellectual activity. Every chair, table, and lighting fixture has been selected to minimize fatigue and maximize cognitive output.",
+    "experienceP2": "For students preparing for high-stakes exams, we provide the exact technology stack they will encounter on test day, ensuring that physical equipment never becomes a barrier to performance."
   }
 }
