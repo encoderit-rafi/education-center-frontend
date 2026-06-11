@@ -151,7 +151,7 @@ export default async function PackageDetailPage({ params }: PageProps) {
                 <h1 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight leading-tight">
                   {pkg.name}
                 </h1>
-                <p className="text-slate-600 text-base md:text-lg leading-relaxed font-medium">
+                <p className="text-slate-600 text-base md:text-lg leading-relaxed font-medium text-justify">
                   {pkg.description}
                 </p>
               </div>
@@ -196,7 +196,7 @@ export default async function PackageDetailPage({ params }: PageProps) {
           </div>
 
           {/* Right Column: Pricing & Sticky Register CTA */}
-          <div className="lg:sticky lg:top-8 bg-white rounded-3xl p-6 md:p-8 border border-slate-100 shadow-xl space-y-6">
+          <div className="lg:sticky lg:top-44 bg-white rounded-3xl p-6 md:p-8 border border-slate-100 shadow-xl space-y-6">
             <div>
               <p className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-2">
                 Course Package Pricing
@@ -245,7 +245,7 @@ export default async function PackageDetailPage({ params }: PageProps) {
 
             <div className="h-px bg-slate-100" />
 
-            {/* Quality Seals */}
+
             <div className="space-y-3.5">
               <div className="flex items-center gap-3 text-sm text-slate-600 font-semibold">
                 <CheckCircle2 className="size-5 text-emerald-500 shrink-0" />

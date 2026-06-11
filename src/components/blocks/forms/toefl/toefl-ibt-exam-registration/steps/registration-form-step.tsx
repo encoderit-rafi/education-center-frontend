@@ -779,7 +779,7 @@ export function RegistrationFormStep({
             </FieldContent>
           </Field>
 
-          <Field className="md:col-span-2" data-invalid={!!errors.intendedEnrollmentDate}>
+          <Field data-invalid={!!errors.intendedEnrollmentDate}>
             <FieldLabel required>Indicate your intended date of enrollment.</FieldLabel>
             <FieldContent>
               <MonthYearPicker

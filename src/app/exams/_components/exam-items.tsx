@@ -28,10 +28,10 @@ export default function ExamItems({ data }: { data: any }) {
           <h2 className="section-title">
             Choose Your <span>{data.name}</span> Test
           </h2>
-          <p className="section-subtitle text-center mx-auto">
+          {/* <p className="section-subtitle text-center mx-auto">
             Each {data.name} variant is designed for a specific purpose. Select
             the one that matches your visa, academic, or professional goal.
-          </p>
+          </p> */}
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

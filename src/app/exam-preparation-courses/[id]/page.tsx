@@ -162,11 +162,11 @@ export default async function ExamPreparationDynamicPage({
               <h1 className="text-4xl font-black leading-[1.1] tracking-tight text-slate-900 lg:text-6xl mb-6">
                 {data.name}
               </h1>
-              <p className="text-base text-slate-600 leading-relaxed mb-8 font-medium">
+              <p className="text-base text-slate-600 leading-relaxed mb-8 font-medium text-justify">
                 {data.description}
               </p>
 
-              <div className="grid sm:grid-cols-2 gap-8 mb-10">
+              {/* <div className="grid sm:grid-cols-2 gap-8 mb-10">
                 <div>
                   <h3 className="text-sm  text-slate-400 mb-4 flex items-center gap-2">
                     <Target className="size-4 text-primary" />
@@ -201,7 +201,7 @@ export default async function ExamPreparationDynamicPage({
                     ))}
                   </ul>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
