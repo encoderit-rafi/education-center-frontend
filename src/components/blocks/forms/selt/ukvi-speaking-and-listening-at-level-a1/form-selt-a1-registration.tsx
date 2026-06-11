@@ -30,16 +30,20 @@ interface FormProps {
 export default function FormSELTA1Registration({ examId: initialExamId }: FormProps = {}) {
   const [currentStep, setCurrentStep] = useState(0); // 0: Terms, 1: Date, 2: Form, 3: Review
 
-  const { data: examDetailResponse } = useQuery({
-    queryKey: ["exam-detail", "ukvi-speaking-and-listening-at-level-a1"],
+  const { data: examsResponse } = useQuery({
+    queryKey: ["exams-list"],
     queryFn: async () => {
-      const response = await api.get("/exams/ukvi-speaking-and-listening-at-level-a1");
+      const response = await api.get("/exams", { params: { limit: 100 } });
       return response.data;
     },
-    enabled: !initialExamId,
   });
 
-  const examId = initialExamId || examDetailResponse?.data?.id;
+  const examsList = examsResponse?.data?.data || [];
+  const activeExam = initialExamId
+    ? examsList.find((e: any) => e.id === initialExamId)
+    : examsList.find((e: any) => e.slug === "ukvi-speaking-and-listening-at-level-a1");
+
+  const examId = initialExamId || activeExam?.id;
 
   const { data: courseDetailResponse } = useQuery({
     queryKey: ["course-detail", "skills-for-english-selt"],
@@ -88,7 +92,7 @@ export default function FormSELTA1Registration({ examId: initialExamId }: FormPr
     return acc;
   }, {});
   
-  const examName = examDetailResponse?.data?.name || Object.values(EXAM_IDS_DATA).find(e => e.id === "selt-a1")?.name || "SELT A1";
+  const examName = activeExam?.name || Object.values(EXAM_IDS_DATA).find(e => e.id === "selt-a1")?.name || "SELT A1";
 
   const form = useForm<TSeltA1Schema>({
     resolver: zodResolver(SeltA1Schema) as any,
@@ -146,19 +150,8 @@ export default function FormSELTA1Registration({ examId: initialExamId }: FormPr
   };
 
   const calculateTotal = () => {
-    // Pricing mapping based on the provided fee structure
-    const levelFees: Record<string, number> = {
-      "selt-a1": 650,
-      "selt-a2": 650,
-      "selt-b1": 650,
-      "selt-b1-r-w": 870,
-      "selt-b2": 870,
-      "selt-c1": 870,
-      "selt-c2": 870,
-    };
-
-    const baseFee = levelFees["selt-a1"] || 650;
-    const serviceFee = 150;
+    const baseFee = activeExam?.examFee ? parseFloat(activeExam.examFee) : 650;
+    const serviceFee = activeExam?.additionalFee ? parseFloat(activeExam.additionalFee) : 150;
     const selectedCourseData = formData.selectedCourse
       ? coursesData.find((c: any) => c.id === formData.selectedCourse)
       : null;
@@ -335,7 +328,13 @@ export default function FormSELTA1Registration({ examId: initialExamId }: FormPr
 
       <div className="max-w-4xl mx-auto">
         <Form {...form}>
-          {currentStep === 0 && <TermsStep onNext={() => goToStep(1)} />}
+          {currentStep === 0 && (
+            <TermsStep
+              onNext={() => goToStep(1)}
+              examFee={pricing.baseFee}
+              additionalFee={pricing.serviceFee}
+            />
+          )}
 
           {currentStep === 1 && (
             <DateStep

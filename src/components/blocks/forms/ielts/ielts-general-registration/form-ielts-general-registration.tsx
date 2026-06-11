@@ -19,8 +19,7 @@ import { TermsStep } from "./steps/terms-step";
 import { DateStep } from "./steps/date-step";
 import { RegistrationFormStep } from "./steps/registration-form-step";
 
-const EXAM_FEE = 1400;
-const SERVICE_FEE = 150;
+
 
 interface FormProps {
   examId?: string;
@@ -29,16 +28,20 @@ interface FormProps {
 export default function FormIELTSGeneralRegistration({ examId: initialExamId }: FormProps = {}) {
   const [step, setStep] = useState(0);
 
-  const { data: examDetailResponse } = useQuery({
-    queryKey: ["exam-detail", "ielts-general"],
+  const { data: examsResponse } = useQuery({
+    queryKey: ["exams-list"],
     queryFn: async () => {
-      const response = await api.get("/exams/ielts-general");
+      const response = await api.get("/exams", { params: { limit: 100 } });
       return response.data;
     },
-    enabled: !initialExamId,
   });
 
-  const examId = initialExamId || examDetailResponse?.data?.id;
+  const examsList = examsResponse?.data?.data || [];
+  const activeExam = initialExamId
+    ? examsList.find((e: any) => e.id === initialExamId)
+    : examsList.find((e: any) => e.slug === "ielts-general");
+
+  const examId = initialExamId || activeExam?.id;
 
   const { data: courseDetailResponse } = useQuery({
     queryKey: ["course-detail", "ielts"],
@@ -151,7 +154,10 @@ export default function FormIELTSGeneralRegistration({ examId: initialExamId }: 
   const coursePrice = selectedCourse ? (selectedCourse as any).discounted_price ?? (selectedCourse as any).price : 0;
   const workshopPrice = selectedWorkshop?.price || 0;
 
-  const subtotal = EXAM_FEE + SERVICE_FEE + coursePrice + workshopPrice;
+  const baseFee = activeExam?.examFee ? parseFloat(activeExam.examFee) : 1470;
+  const serviceFee = activeExam?.additionalFee ? parseFloat(activeExam.additionalFee) : 150;
+
+  const subtotal = baseFee + serviceFee + coursePrice + workshopPrice;
   const total = subtotal;
 
   const nextStep = async () => {
@@ -303,7 +309,7 @@ export default function FormIELTSGeneralRegistration({ examId: initialExamId }: 
         payment_methods: data.paymentMethod,
         exam_time_slot: data.examTimeSlot,
         speaking_slot: data.speakingSlot,
-        exam_fee: EXAM_FEE,
+        exam_fee: baseFee,
         total_amount: total,
         exam_date: data.examDate
           ? new Date(data.examDate as any).toISOString()
@@ -324,7 +330,13 @@ export default function FormIELTSGeneralRegistration({ examId: initialExamId }: 
   return (
     <Form {...form}>
       <div className="max-w-5xl mx-auto py-10 px-4">
-        {step === 0 && <TermsStep onNext={nextStep} />}
+        {step === 0 && (
+          <TermsStep
+            onNext={nextStep}
+            examFee={baseFee}
+            additionalFee={serviceFee}
+          />
+        )}
 
         {step === 1 && (
           <DateStep
@@ -365,8 +377,8 @@ export default function FormIELTSGeneralRegistration({ examId: initialExamId }: 
             onPaymentMethodChange={(val) => setValue("paymentMethod", val as any)}
             paymentMethodError={(form.formState.errors as any)?.paymentMethod}
             examName="IELTS General Exam"
-            baseFee={EXAM_FEE}
-            serviceFee={SERVICE_FEE}
+            baseFee={baseFee}
+            serviceFee={serviceFee}
             total={total}
             selectedCourseData={selectedCourse}
             selectedWorkshopData={selectedWorkshop}

@@ -228,8 +228,9 @@ export function GlobalReviewStep({
                       </span>
                       <PriceDisplay
                         amount={
+                          selectedCourseData.discounted_price ??
                           selectedCourseData.price *
-                          (1 - (selectedCourseData.special_discount || 0) / 100)
+                            (1 - (selectedCourseData.special_discount || 0) / 100)
                         }
                         className="font-bold text-slate-900"
                       />

@@ -27,16 +27,20 @@ interface FormProps {
 export default function FormTOEFLIBTRegistration({ examId: initialExamId }: FormProps = {}) {
     const [currentStep, setCurrentStep] = useState(0); // 0: Terms, 1: Date, 2: Form, 3: Review
 
-    const { data: examDetailResponse } = useQuery({
-        queryKey: ["exam-detail", "toefl-ibt"],
+    const { data: examsResponse } = useQuery({
+        queryKey: ["exams-list"],
         queryFn: async () => {
-            const response = await api.get("/exams/toefl-ibt");
+            const response = await api.get("/exams", { params: { limit: 100 } });
             return response.data;
         },
-        enabled: !initialExamId,
     });
 
-    const examId = initialExamId || examDetailResponse?.data?.id;
+    const examsList = examsResponse?.data?.data || [];
+    const activeExam = initialExamId
+        ? examsList.find((e: any) => e.id === initialExamId)
+        : examsList.find((e: any) => e.slug === "toefl-ibt");
+
+    const examId = initialExamId || activeExam?.id;
 
     const { data: courseDetailResponse } = useQuery({
         queryKey: ["course-detail", "toefl"],
@@ -160,8 +164,8 @@ export default function FormTOEFLIBTRegistration({ examId: initialExamId }: Form
         const isExpress = isExpressRegistration(formData.examDate);
 
         // Base/Standard TOEFL fees
-        const baseFeeUSD = 340;
-        const baseFeeAED = 1270;
+        const baseFeeAED = activeExam?.examFee ? parseFloat(activeExam.examFee) : 1270;
+        const baseFeeUSD = Math.round(baseFeeAED / 3.67) || 340;
 
         // Express registration fee (7 days or less)
         const expressFeeUSD = isExpress ? 40 : 0;
@@ -362,7 +366,11 @@ export default function FormTOEFLIBTRegistration({ examId: initialExamId }: Form
             <div className="max-w-4xl mx-auto">
                 <Form {...form}>
                     {currentStep === 0 && (
-                        <TermsStep onNext={() => goToStep(1)} />
+                        <TermsStep
+                            onNext={() => goToStep(1)}
+                            examFee={pricing.baseFeeAED}
+                            additionalFee={activeExam?.additionalFee ? parseFloat(activeExam.additionalFee) : 100}
+                        />
                     )}
 
                     {currentStep === 1 && (

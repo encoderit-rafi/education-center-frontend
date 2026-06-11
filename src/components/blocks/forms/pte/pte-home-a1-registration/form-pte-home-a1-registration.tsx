@@ -24,8 +24,7 @@ import api from "@/axios";
 
 
 
-const EXAM_FEE = 1450;
-const SERVICE_FEE = 100;
+
 
 interface FormProps {
   examId?: string;
@@ -34,16 +33,20 @@ interface FormProps {
 export default function FormPTEHomeA1Registration({ examId: initialExamId }: FormProps = {}) {
   const [currentStep, setCurrentStep] = useState(0); // 0: Terms, 1: Date, 2: Form, 3: Review
 
-  const { data: examDetailResponse } = useQuery({
-    queryKey: ["exam-detail", "pte-home-a1"],
+  const { data: examsResponse } = useQuery({
+    queryKey: ["exams-list"],
     queryFn: async () => {
-      const response = await api.get("/exams/pte-home-a1");
+      const response = await api.get("/exams", { params: { limit: 100 } });
       return response.data;
     },
-    enabled: !initialExamId,
   });
 
-  const examId = initialExamId || examDetailResponse?.data?.id;
+  const examsList = examsResponse?.data?.data || [];
+  const activeExam = initialExamId
+    ? examsList.find((e: any) => e.id === initialExamId)
+    : examsList.find((e: any) => e.slug === "pte-home-a1");
+
+  const examId = initialExamId || activeExam?.id;
 
   const { data: courseDetailResponse } = useQuery({
     queryKey: ["course-detail", "pte"],
@@ -156,8 +159,8 @@ export default function FormPTEHomeA1Registration({ examId: initialExamId }: For
   };
 
   const calculateTotal = () => {
-    const baseFee = EXAM_FEE;
-    const serviceFee = SERVICE_FEE;
+    const baseFee = activeExam?.examFee ? parseFloat(activeExam.examFee) : 1450;
+    const serviceFee = activeExam?.additionalFee ? parseFloat(activeExam.additionalFee) : 100;
     const selectedCourseData = formData.selectedCourse
       ? coursesData.find((c: any) => c.id === formData.selectedCourse)
       : null;
@@ -411,7 +414,13 @@ export default function FormPTEHomeA1Registration({ examId: initialExamId }: For
 
       <div className="max-w-4xl mx-auto">
         <Form {...form}>
-          {currentStep === 0 && <TermsStep onNext={() => goToStep(1)} />}
+          {currentStep === 0 && (
+            <TermsStep
+              onNext={() => goToStep(1)}
+              examFee={pricing.baseFee}
+              additionalFee={pricing.serviceFee}
+            />
+          )}
 
           {currentStep === 1 && (
             <DateStep
