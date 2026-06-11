@@ -926,15 +926,74 @@
         "title": "Security and Retention",
         "p1": "TEPTH ensures that user-provided personal information is safeguarded against potentially illegal access, disclosure, or misuse.",
         "items": [
-          { "strong": "Secured Servers: ", "text": "Personal information is stored in a secured server environment using firewalls." },
-          { "strong": "Authorized Access: ", "text": "Only employees with signed confidentiality agreements have authorized access." },
-          { "strong": "Data Destruction: ", "text": "TEPTH destroys information that is no longer required for its intended reason." }
+          {
+            "strong": "Secured Servers: ",
+            "text": "Personal information is stored in a secured server environment using firewalls."
+          },
+          {
+            "strong": "Authorized Access: ",
+            "text": "Only employees with signed confidentiality agreements have authorized access."
+          },
+          {
+            "strong": "Data Destruction: ",
+            "text": "TEPTH destroys information that is no longer required for its intended reason."
+          }
         ]
       },
       "changes": {
         "title": "Changes to the Policy",
         "p1": "TEPTH authorities can make changes to this privacy policy anytime. We may send you an email advising of modifications, or we may post them on the website."
       }
+    }
+  },
+  "SpecialAccommodationPage": {
+    "title": "Available",
+    "titleAccent": "Accommodations",
+    "description": "We offer various modifications based on documented medical conditions, disabilities, or specific learning requirements.",
+    "cards": {
+      "additionalTime": {
+        "title": "Additional Time",
+        "desc": "Standard 25% to 50% extra time for candidates with cognitive processing speeds, physical disabilities, or visual impairments that require more time to navigate materials.",
+        "link": "Learn more"
+      },
+      "visualAids": {
+        "title": "Visual Aids",
+        "desc": "Large print papers, Braille versions, and screen magnifier software for candidates with varying degrees of visual impairment.",
+        "badge": "Customizable"
+      },
+      "privateRoom": {
+        "title": "Private Room",
+        "desc": "Distraction-free environments for candidates requiring specialized medical equipment or frequent breaks."
+      },
+      "assistivePersonnel": {
+        "title": "Assistive Personnel",
+        "desc": "Qualified scribes, readers, and sign-language interpreters can be provided to assist candidates in conveying their knowledge accurately.",
+        "tags": [
+          "Amanuensis",
+          "Oral Transcribers",
+          "Invigilators"
+        ]
+      }
+    },
+    "howToApply": {
+      "title": "How to Apply",
+      "steps": [
+        {
+          "title": "Initial Request",
+          "desc": "Submit your request during the initial exam registration phase. We recommend applying at least 6 weeks before your test date."
+        },
+        {
+          "title": "Documentation Upload",
+          "desc": "Provide valid medical evidence from a registered practitioner outlining the nature of the requirement and recommended adjustments."
+        },
+        {
+          "title": "Review & Approval",
+          "desc": "Our specialist board reviews the request against exam body criteria and issues a Formal Approval Notice via email."
+        }
+      ]
+    },
+    "inquiry": {
+      "title": "Accommodation Inquiry"
     }
   }
 }
