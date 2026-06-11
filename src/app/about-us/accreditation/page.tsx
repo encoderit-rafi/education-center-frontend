@@ -2,8 +2,10 @@
 
 import Image from "next/image";
 import { SectionHeader } from "@/components/ui/section-header";
+import { useTranslations } from "next-intl";
 
 export default function Accreditation() {
+  const t = useTranslations("AboutUsPage.Accreditation");
   return (
     <main className="bg-white min-h-screen">
       {/* Hero Section */}
@@ -11,14 +13,14 @@ export default function Accreditation() {
         <div className="grid lg:grid-cols-2 gap-10 md:gap-24 items-center">
           {/* Left Content */}
           <SectionHeader
-            badge="ACCREDITATION"
+            badge={t("HeroSection.badge")}
             title={
               <>
-                Licensed &{" "}
-                <span className="text-primary">Regulated Excellence</span>
+                {t("HeroSection.title")}
+                <span className="text-primary">{t("HeroSection.titleAccent")}</span>
               </>
             }
-            description="The Exam Preparation & Testing House L.L.C is officially licensed and regulated by leading educational authorities, ensuring institutional integrity."
+            description={t("HeroSection.description")}
             className="space-y-4"
           />
 
@@ -59,13 +61,7 @@ export default function Accreditation() {
                 </div>
                 <div className="flex-1 space-y-6">
                   <p className="text-base leading-relaxed font-medium">
-                    The Exam Preparation & Testing House L.L.C is licensed by
-                    Sharjah Economic Development Department (SEDD). Sharjah is
-                    firmly established as a premier educational hub in the UAE,
-                    known for top-tier institutions and high-quality educational
-                    centres. Driven by government support, the emirate offers
-                    extensive academic facilities and significant investment in
-                    the education sector.
+                    {t("SEDD.description")}
                   </p>
                 </div>
               </div>
@@ -74,15 +70,7 @@ export default function Accreditation() {
               <div className="flex flex-col md:flex-row items-center gap-10 group">
                 <div className="flex-1 space-y-6">
                   <p className="text-base leading-relaxed font-medium">
-                    The Exam Preparation & Testing House L.L.C is regulated by
-                    Sharjah Private Education Authority (SPEA). SPEA is the
-                    official body responsible for overseeing and regulating
-                    private education in the Emirate of Sharjah. SPEA was
-                    established by Emiri Decree No. 45 of 2018 issued by H.H.
-                    Sheikh Dr. Sultan Bin Mohammed Al Qasimi, Ruler of Sharjah
-                    with core responsibilities including Licensing private
-                    schools and educational centre and monitoring quality
-                    through inspection and performance ratings.
+                    {t("SPEA.description")}
                   </p>
                 </div>
                 <div className="w-full md:flex-1">

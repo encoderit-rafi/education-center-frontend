@@ -11,8 +11,10 @@ import { SectionHeader } from "@/components/ui/section-header";
 import { Button } from "@/components/ui/button";
 import { PriceDisplay } from "@/components/ui/price-display";
 import { PdfPrintLayout } from "@/components/blocks/how-to-find-us/pdf-print-layout";
+import { useTranslations } from "next-intl";
 
 export default function HowToFindUs() {
+  const t = useTranslations("AboutUsPage.HowToFindUs");
   return (
     <main className="bg-white min-h-screen">
       <PdfPrintLayout />
@@ -22,13 +24,13 @@ export default function HowToFindUs() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
           {/* Left Content */}
           <SectionHeader
-            badge="LOCATION GUIDE"
+            badge={t("HeroSection.badge")}
             title={
               <>
-                How to <span className="text-primary">Find Our Center</span>
+                {t("HeroSection.title")}<span className="text-primary">{t("HeroSection.titleAccent")}</span>
               </>
             }
-            description="Reaching our center in Sharjah is straightforward. We've compiled this comprehensive guide to help you navigate your journey with ease."
+            description={t("HeroSection.description")}
             className="space-y-4"
           />
 
@@ -53,32 +55,27 @@ export default function HowToFindUs() {
         <div className="grid lg:grid-cols-2 gap-20 items-center print-grid">
           <div className="space-y-8">
             <SectionHeader
-              badge="LOCATION MAP"
+              badge={t("MapSection.badge")}
               title={
                 <>
-                  Interactive <span className="text-primary">Navigation</span>
+                  {t("MapSection.title")}<span className="text-primary">{t("MapSection.titleAccent")}</span>
                 </>
               }
               className="space-y-4"
             />
             <div className="space-y-4 text-base leading-relaxed font-medium">
               <p>
-                Route to our centre is too easy to follow and reach the
-                destination. We have incorporated Google Location Map to make it
-                more understandable for you.
+                {t("MapSection.p1")}
               </p>
               <p>
-                From the small box on lower-left corner of the map, you can
-                select to view street map or the satellite imagery. You can also
-                view larger map to be more certain about our location.
+                {t("MapSection.p2")}
               </p>
               <p className="text-slate-900 font-bold">
-                This visual representation will help you with the driving
-                directions to arrive at{" "}
+                {t("MapSection.p3Start")}
                 <span className="text-primary">
-                  The Exam Preparation & Testing House L.L.C
-                </span>{" "}
-                in Sharjah.
+                  {t("MapSection.p3Highlight")}
+                </span>
+                {t("MapSection.p3End")}
               </p>
             </div>
 
@@ -88,7 +85,7 @@ export default function HowToFindUs() {
               className="flex items-center gap-2 font-bold text-primary border-primary/20 hover:bg-primary/5 transition-all print-hide"
             >
               <Printer className="w-4 h-4" />
-              Print Map & Directions
+              {t("MapSection.printButton")}
             </Button>
           </div>
           <div className="relative aspect-[4/3] rounded-xl overflow-hidden print-map-container">
@@ -108,8 +105,8 @@ export default function HowToFindUs() {
         id="map"
       >
         <SectionHeader
-          title="Visit Our Centre"
-          description="Al Mamzar, Sharjah — located in the strategic Tabarak Tower, close to all major transport links. All facilities are wheelchair accessible."
+          title={t("VisitOurCentre.title")}
+          description={t("VisitOurCentre.description")}
           align="center"
           className="mb-16"
         />
@@ -121,7 +118,7 @@ export default function HowToFindUs() {
               target="_blank"
               className="bg-white/90 backdrop-blur-md px-6 py-3 rounded-xl flex items-center gap-2 text-sm font-black text-slate-900 shadow-xl hover:bg-white transition-all group/btn"
             >
-              Open in Maps{" "}
+              {t("VisitOurCentre.openInMaps")}
               <ExternalLink className="w-4 h-4 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
             </Link>
           </div>
@@ -145,13 +142,13 @@ export default function HowToFindUs() {
         <div className="max-w-screen-2xl mx-auto">
           {/* Section Header */}
           <SectionHeader
-            badge="MOVEMENT & ACCESS"
+            badge={t("Transportation.badge")}
             title={
               <>
-                Ways to <span className="text-primary">Reach Us</span>
+                {t("Transportation.title")}<span className="text-primary">{t("Transportation.titleAccent")}</span>
               </>
             }
-            description="We have mapped out the most efficient routes to ensure your journey to our center is as smooth as possible."
+            description={t("Transportation.description")}
             className="max-w-3xl mb-32"
           />
 
@@ -164,27 +161,23 @@ export default function HowToFindUs() {
                     01
                   </span>
                   <h5 className="text-primary text-3xl font-black uppercase tracking-tight">
-                    By Taxicab
+                    {t("Transportation.taxicabTitle")}
                   </h5>
                 </div>
                 <div className="space-y-6 text-base leading-relaxed font-medium">
                   <p>
-                    From anywhere in Sharjah, you can hire a taxi and it will
-                    take you to your final destination.
-                    <br /> Call{" "}
+                    {t("Transportation.taxicabDescriptionPart1")}
+                    <br /> {t("Transportation.taxicabDescriptionPart2")}{" "}
                     <span className="text-primary font-semibold">
-                      600-525-252
+                      {t("Transportation.taxicabNumber")}
                     </span>{" "}
-                    to book a taxicab with Sharjah Taxi Corporation. Taxicab
-                    drivers will pick you up from your specified location and
-                    take you to our centre. For location map, please{" "}
+                    {t("Transportation.taxicabDescriptionPart3")}
                     <Link
                       href="#map"
                       className="text-primary font-black hover:underline"
                     >
-                      click here
+                      {t("Transportation.taxicabLink")}
                     </Link>
-                    .
                   </p>
                 </div>
               </div>
@@ -214,15 +207,12 @@ export default function HowToFindUs() {
                     02
                   </span>
                   <h5 className="text-primary text-3xl font-black uppercase tracking-tight">
-                    Public Bus
+                    {t("Transportation.publicBusTitle")}
                   </h5>
                 </div>
                 <div className="space-y-6 text-base leading-relaxed">
                   <p>
-                    Take a Sharjah public bus towards Al Mamzar or Al Taawun,
-                    disembarking at the nearest bus stop to Tabarak Tower. The
-                    bus ride will get you within a short walking distance of the
-                    center.
+                    {t("Transportation.publicBusDescription")}
                   </p>
                 </div>
               </div>
@@ -236,63 +226,52 @@ export default function HowToFindUs() {
                     03
                   </span>
                   <h5 className="text-3xl font-black text-primary uppercase tracking-tight">
-                    Metro & Bus
+                    {t("Transportation.metroTitle")}
                   </h5>
                 </div>
                 <div className="space-y-6 text-base leading-relaxed font-medium">
                   <p>
-                    Although Sharjah does not have its own metro, you can
-                    combine the Dubai Metro with bus services to reach our
-                    Sharjah office.
+                    {t("Transportation.metroDescription")}
                   </p>
 
                   <div className="space-y-4">
-                    <p className="font-bold">1. Take the Dubai Metro:</p>
+                    <p className="font-bold">{t("Transportation.metroStep1Title")}</p>
                     <p>
-                      — Board the Red Line and alight at Union Metro Station.
+                      {t("Transportation.metroStep1Text")}
                     </p>
                   </div>
 
                   <div className="space-y-4">
-                    <p className="font-bold">2. Transfer to a Bus:</p>
+                    <p className="font-bold">{t("Transportation.metroStep2Title")}</p>
                     <p>
-                      — From Union Metro Station, proceed to the adjacent Union
-                      Square Bus Station.
+                      {t("Transportation.metroStep2Text1")}
                     </p>
                     <p>
-                      — Board the E303 bus, which operates between Union Square
-                      Bus Station in Dubai and Al Jubail Bus Station in Sharjah.
+                      {t("Transportation.metroStep2Text2")}
                     </p>
                   </div>
 
                   <div className="space-y-4">
-                    <p className="font-bold">3. From Al Jubail Bus Station:</p>
+                    <p className="font-bold">{t("Transportation.metroStep3Title")}</p>
                     <p>
-                      — Upon arrival at Al Jubail Bus Station in Sharjah, you
-                      can hire a taxi to reach Tabarak Tower in Al Mamzar,
-                      Sharjah.
+                      {t("Transportation.metroStep3Text")}
                     </p>
                   </div>
 
                   <div className="pt-4 border-t border-slate-100">
-                    <p className="font-bold mb-2">Alternative Bus Routes:</p>
+                    <p className="font-bold mb-2">{t("Transportation.alternativeRoutesTitle")}</p>
                     <ul className="list-disc pl-5 space-y-2">
                       <li>
-                        E306 Bus Service: Departs from Al Ghubaiba Bus Station
-                        in Dubai and arrives at Al Jubail Bus Station in
-                        Sharjah.
+                        {t("Transportation.alternativeRoute1")}
                       </li>
                       <li>
-                        E307 Bus Service: Departs from Deira City Centre Bus
-                        Station in Dubai and arrives at Al Jubail Bus Station in
-                        Sharjah.
+                        {t("Transportation.alternativeRoute2")}
                       </li>
                     </ul>
                   </div>
 
                   <p className="text-[#d12c2c] font-bold">
-                    Note: Please allow extra travel time as bus routes can be
-                    affected by traffic conditions.
+                    {t("Transportation.note")}
                   </p>
                 </div>
               </div>
@@ -314,33 +293,20 @@ export default function HowToFindUs() {
         <div className="grid lg:grid-cols-2 gap-20 items-start print-grid">
           <div className="space-y-12">
             <SectionHeader
-              badge="DRIVING DIRECTIONS"
-              title="Get Directions"
+              badge={t("DrivingDirections.badge")}
+              title={t("DrivingDirections.title")}
               className="mb-12"
               titleClassName="text-3xl md:text-4xl"
             />
             <div className="space-y-10">
-              {[
-                {
-                  from: "Dubai",
-                  text: "Take Al Ittihad Road (E11) towards Sharjah. Follow the signs towards Al Mamzar. Turn right onto Al Mamzar Road and continue until you reach Tabarak Tower on your right.",
-                },
-                {
-                  from: "Ajman, Umm Al Quwain, or Ras Al Khaimah",
-                  text: "Drive towards Sharjah on Sheikh Mohammed Bin Zayed Road (E311). Take the exit for Al Mamzar, and follow the signs to reach Al Mamzar Road. Tabarak Tower will be on your right.",
-                },
-                {
-                  from: "Abu Dhabi",
-                  text: "Head towards Dubai on Sheikh Zayed Road (E11). Continue towards Al Ittihad Road (E11) into Sharjah. Follow the signs to Al Mamzar, and turn right onto Al Mamzar Road. Tabarak Tower will be on your right.",
-                },
-              ].map((route, idx) => (
+              {t.raw("DrivingDirections.routes").map((route: any, idx: number) => (
                 <div key={idx} className="flex gap-6 group">
                   <span className="text-slate-200 text-5xl font-black group-hover:text-primary/20 transition-colors">
                     0{idx + 1}
                   </span>
                   <div className="space-y-2">
                     <h6 className="text-primary font-black uppercase text-base">
-                      From {route.from}
+                      {route.from}
                     </h6>
                     <p className="text-base leading-relaxed font-medium">
                       {route.text}
@@ -361,8 +327,8 @@ export default function HowToFindUs() {
                   <Car className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tight">
-                  Parking <br />
-                  Information
+                  {t("DrivingDirections.parkingTitle1")} <br />
+                  {t("DrivingDirections.parkingTitle2")}
                 </h3>
               </div>
 
@@ -371,13 +337,12 @@ export default function HowToFindUs() {
                   <div className="flex items-center gap-3">
                     <div className="w-2 h-2 rounded-full bg-white"></div>
                     <p className="text-white font-black uppercase text-sm tracking-[0.2em]">
-                      On-Site Parking
+                      {t("DrivingDirections.onSiteParking")}
                     </p>
                   </div>
                   <p className="text-white/80 text-base leading-relaxed font-medium pl-5">
-                    There are visitor parking spaces available at the back of{" "}
-                    <span className="text-white font-black">Tabarak Tower</span>
-                    .
+                    {t("DrivingDirections.onSiteParkingText1")}
+                    <span className="text-white font-black">{t("DrivingDirections.onSiteParkingText2")}</span>
                   </p>
                 </div>
 
@@ -387,23 +352,19 @@ export default function HowToFindUs() {
                   <div className="flex items-center gap-3">
                     <div className="w-2 h-2 rounded-full bg-white"></div>
                     <p className="text-white font-black uppercase text-sm tracking-[0.2em]">
-                      Public Parking
+                      {t("DrivingDirections.publicParking")}
                     </p>
                   </div>
                   <div className="space-y-5 pl-5">
                     <p className="text-white/80 text-base leading-relaxed font-medium">
-                      Metered parking is also available near the tower at a rate
-                      of{" "}
+                      {t("DrivingDirections.publicParkingText1")}
                       <span className="text-white font-black flex items-center gap-1 inline-flex">
-                        <PriceDisplay amount={2} /> per hour
+                        <PriceDisplay amount={2} /> {t("DrivingDirections.publicParkingText2")}
                       </span>
-                      . Please check with SRTA in Sharjah for recent updates.
                     </p>
                     <div className="bg-white/10 p-5 rounded-2xl border border-white/10 backdrop-blur-sm">
                       <p className="text-white font-medium leading-relaxed italic">
-                        &quot;This guide is aimed at helping you reach The Exam
-                        Preparation & Testing House L.L.C in Sharjah with
-                        ease.&quot;
+                        &quot;{t("DrivingDirections.quote")}&quot;
                       </p>
                     </div>
                   </div>
@@ -412,7 +373,7 @@ export default function HowToFindUs() {
 
               <div className="p-4 border-t border-white/20">
                 <p className="text-base text-white mb-6">
-                  For Further Assistance
+                  {t("DrivingDirections.assistance")}
                 </p>
                 <Link
                   href="tel:+97165531250"

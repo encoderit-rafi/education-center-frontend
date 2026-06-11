@@ -173,5 +173,165 @@
       "title": "Send a Direct",
       "titleAccent": " Message"
     }
+  },
+  "AboutUsPage": {
+    "Accreditation": {
+      "HeroSection": {
+        "badge": "ACCREDITATION",
+        "title": "Licensed & ",
+        "titleAccent": "Regulated Excellence",
+        "description": "The Exam Preparation & Testing House L.L.C is officially licensed and regulated by leading educational authorities, ensuring institutional integrity."
+      },
+      "SEDD": {
+        "description": "The Exam Preparation & Testing House L.L.C is licensed by Sharjah Economic Development Department (SEDD). Sharjah is firmly established as a premier educational hub in the UAE, known for top-tier institutions and high-quality educational centres. Driven by government support, the emirate offers extensive academic facilities and significant investment in the education sector."
+      },
+      "SPEA": {
+        "description": "The Exam Preparation & Testing House L.L.C is regulated by Sharjah Private Education Authority (SPEA). SPEA is the official body responsible for overseeing and regulating private education in the Emirate of Sharjah. SPEA was established by Emiri Decree No. 45 of 2018 issued by H.H. Sheikh Dr. Sultan Bin Mohammed Al Qasimi, Ruler of Sharjah with core responsibilities including Licensing private schools and educational centre and monitoring quality through inspection and performance ratings."
+      }
+    },
+    "HowToFindUs": {
+      "HeroSection": {
+        "badge": "LOCATION GUIDE",
+        "title": "How to ",
+        "titleAccent": "Find Our Center",
+        "description": "Reaching our center in Sharjah is straightforward. We've compiled this comprehensive guide to help you navigate your journey with ease."
+      },
+      "MapSection": {
+        "badge": "LOCATION MAP",
+        "title": "Interactive ",
+        "titleAccent": "Navigation",
+        "p1": "Route to our centre is too easy to follow and reach the destination. We have incorporated Google Location Map to make it more understandable for you.",
+        "p2": "From the small box on lower-left corner of the map, you can select to view street map or the satellite imagery. You can also view larger map to be more certain about our location.",
+        "p3Start": "This visual representation will help you with the driving directions to arrive at ",
+        "p3Highlight": "The Exam Preparation & Testing House L.L.C",
+        "p3End": " in Sharjah.",
+        "printButton": "Print Map & Directions"
+      },
+      "VisitOurCentre": {
+        "title": "Visit Our Centre",
+        "description": "Al Mamzar, Sharjah — located in the strategic Tabarak Tower, close to all major transport links. All facilities are wheelchair accessible.",
+        "openInMaps": "Open in Maps "
+      },
+      "Transportation": {
+        "badge": "MOVEMENT & ACCESS",
+        "title": "Ways to ",
+        "titleAccent": "Reach Us",
+        "description": "We have mapped out the most efficient routes to ensure your journey to our center is as smooth as possible.",
+        "taxicabTitle": "By Taxicab",
+        "taxicabDescriptionPart1": "From anywhere in Sharjah, you can hire a taxi and it will take you to your final destination. Call ",
+        "taxicabNumber": "600-525-252",
+        "taxicabDescriptionPart2": " to book a taxicab with Sharjah Taxi Corporation. Taxicab drivers will pick you up from your specified location and take you to our centre. For location map, please ",
+        "taxicabLink": "click here",
+        "publicBusTitle": "Public Bus",
+        "publicBusDescription": "Take a Sharjah public bus towards Al Mamzar or Al Taawun, disembarking at the nearest bus stop to Tabarak Tower. The bus ride will get you within a short walking distance of the center.",
+        "metroTitle": "Metro & Bus",
+        "metroDescription": "Although Sharjah does not have its own metro, you can combine the Dubai Metro with bus services to reach our Sharjah office.",
+        "metroStep1Title": "1. Take the Dubai Metro:",
+        "metroStep1Text": "— Board the Red Line and alight at Union Metro Station.",
+        "metroStep2Title": "2. Transfer to a Bus:",
+        "metroStep2Text1": "— From Union Metro Station, proceed to the adjacent Union Square Bus Station.",
+        "metroStep2Text2": "— Board the E303 bus, which operates between Union Square Bus Station in Dubai and Al Jubail Bus Station in Sharjah.",
+        "metroStep3Title": "3. From Al Jubail Bus Station:",
+        "metroStep3Text": "— Upon arrival at Al Jubail Bus Station in Sharjah, you can hire a taxi to reach Tabarak Tower in Al Mamzar, Sharjah.",
+        "alternativeRoutesTitle": "Alternative Bus Routes:",
+        "alternativeRoute1": "E306 Bus Service: Departs from Al Ghubaiba Bus Station in Dubai and arrives at Al Jubail Bus Station in Sharjah.",
+        "alternativeRoute2": "E307 Bus Service: Departs from Deira City Centre Bus Station in Dubai and arrives at Al Jubail Bus Station in Sharjah.",
+        "note": "Note: Please allow extra travel time as bus routes can be affected by traffic conditions."
+      },
+      "DrivingDirections": {
+        "badge": "DRIVING DIRECTIONS",
+        "title": "Get Directions",
+        "routes": [
+          {
+            "from": "Dubai",
+            "text": "Take Al Ittihad Road (E11) towards Sharjah. Follow the signs towards Al Mamzar. Turn right onto Al Mamzar Road and continue until you reach Tabarak Tower on your right."
+          },
+          {
+            "from": "Ajman, Umm Al Quwain, or Ras Al Khaimah",
+            "text": "Drive towards Sharjah on Sheikh Mohammed Bin Zayed Road (E311). Take the exit for Al Mamzar, and follow the signs to reach Al Mamzar Road. Tabarak Tower will be on your right."
+          },
+          {
+            "from": "Abu Dhabi",
+            "text": "Head towards Dubai on Sheikh Zayed Road (E11). Continue towards Al Ittihad Road (E11) into Sharjah. Follow the signs to Al Mamzar, and turn right onto Al Mamzar Road. Tabarak Tower will be on your right."
+          }
+        ],
+        "parkingTitle1": "Parking",
+        "parkingTitle2": "Information",
+        "onSiteParking": "On-Site Parking",
+        "onSiteParkingText1": "There are visitor parking spaces available at the back of ",
+        "onSiteParkingText2": "Tabarak Tower",
+        "publicParking": "Public Parking",
+        "publicParkingText1": "Metered parking is also available near the tower at a rate of ",
+        "publicParkingText2": " per hour. Please check with SRTA in Sharjah for recent updates.",
+        "quote": "This guide is aimed at helping you reach The Exam Preparation & Testing House L.L.C in Sharjah with ease.",
+        "assistance": "For Further Assistance"
+      }
+    },
+    "MissionAndVision": {
+      "HeroSection": {
+        "badge": "OUR VISION & MISSION",
+        "title": "Shaping the Future of",
+        "titleAccent": " Education",
+        "description": "TEPTH is an organization with high goals and high regards for the students. It is here to help students achieve their academic pursuits and support their professional growth."
+      },
+      "PhilosophySection": {
+        "badge": "OUR PHILOSOPHY",
+        "title": "Dream, Prepare, and ",
+        "titleAccent": "Excel.",
+        "p1": "The Exam Preparation and Testing House envisions to be a top-notch exam counselling and service provider across the globe. The enterprise was founded with the dream to offer students latest techniques and tools for exam preparation so that they can excel in their respective fields and contribute positively to the well-being of a society. Our team believes in providing commendable services to you.",
+        "p2": "The inspirational philosophy behind TEPTH is to offer full-fledged testing and exam preparation services to students in United Arab Emirates and the Arab World. We are a team of enthusiasts who strive hard to facilitate students in every possible way for exam testing."
+      },
+      "CoreValues": {
+        "title": "Core Values",
+        "values": [
+          {
+            "title": "Simplify Complexity",
+            "text": "To simplify the complexities in a test’s procedure that hinder the examinee’s comprehension skills. We employ unique resources and technology to make students understand tough tasks easily."
+          },
+          {
+            "title": "Shape the Future",
+            "text": "TEPTH is an enterprise that aims to shape a better future. Quality education for youth means a more enlightened and better society."
+          },
+          {
+            "title": "Torch Bearer",
+            "text": "By aiding students in picking a suitable Exam Preparation Course, TEPTH ought to be the torch bearer of knowledge and skills."
+          }
+        ]
+      }
+    },
+    "WhoWeAre": {
+      "HeroSection": {
+        "badge": "ABOUT TEPTH",
+        "title": "UAE's Trusted Exam Testing",
+        "titleAccent": " & Preparation House",
+        "description": "For over a decade, TEPTH has been the go-to destination for international language exam registration, expert preparation courses, and secure proctoring services across the UAE."
+      },
+      "NarrativeSection": {
+        "badge": "WHO WE ARE",
+        "title": "Education is not preparation",
+        "titleAccent": " for life; education is life itself.",
+        "quoteAuthor": "— John Dewey",
+        "p1": "TEPTH derives its objective from John Dewey’s quote, “Education is not preparation for life; education is life itself.” Being an experienced enterprise in the areas of education and exam preparation courses, TEPTH strives to offer students high quality services. We have been in the education industry for years now, catering to the contemporary competent educational requirements across the Arab World. TEPTH is a visionary organization that values students as the guardians of a successful society. We believe in offering you professional career services so that you can turn your dreams into reality.",
+        "p2": "Preparing for an international exam could get tricky at times, TEPTH has trained professionals who are well-equipped with the latest knowledge and techniques for the preparation of GMAT, GRE, SAT and TOEFL courses. With their expertise and dedication, you are likely to pass these tests with flying colors. TEPTH offers you proficient services at the best price.",
+        "p3": "TEPTH envisions to be a leader in exam preparation and testing, as we look forward to set a benchmark by our unrivaled services. We have set long term goals that will benefit both the education system and the society. With innovative IT support and learning procedures, TEPTH has made it quite expedient for the students to pass online exams. Our latest learning techniques allow you to score more with less effort. Whether you are preparing for IELTS, CELPIP G, CAEL, PTE, TOEFL iBT and OET, TEPTH is your one pit stop for all your exam preparation needs."
+      }
+    },
+    "WhyChooseUs": {
+      "HeroSection": {
+        "badge": "WHY CHOOSE US",
+        "title": "Invest Less & Gain More ",
+        "titleAccent": "From TEPTH.",
+        "description": "Preparing for college or university is more like riding an emotional rollercoaster; therefore, TEPTH keeps on looking for apt ways to make students feel confident, psychologically in control and well-prepared for the challenges ahead."
+      },
+      "NarrativeSection": {
+        "badge": "OUR PROMISE",
+        "title": "Your Success is ",
+        "titleAccent": "Ours.",
+        "p1": "The Exam Preparation & Testing House L.L.C understands just how perplexing the endeavor can be to gain admission in your top-choice college. For this reason, we have crafted ingenious study plans to enhance your skills and score exceptionally well in any test you opt for. We believe that ‘Your Success Is Ours’ so we work earnestly towards the achievement of your educational goals.",
+        "p2": "We bring into play the right tools and strategies for focused learning and outstanding results for build your career. With us, you will be able to improve your weak areas. Our expert professionals’ feedback will help you to reinforce your strong points and it will prove useful in steering your abilities and energies in the right direction.",
+        "highlightStart": "TEPTH",
+        "highlightText": " works on adaptive approach and offers flexible and convenient prep options that will move with you and will fit in your hectic schedule. We analyze student’s performance and advise a custom-learning plan to ensure good results. Our proven test-taking strategies, e-learning solutions, and instructions from proficient coaches will sweep away any doubts of success. You will be confident on the test day for optimal performance."
+      }
+    }
   }
 }

@@ -2,8 +2,10 @@
 
 import Image from "next/image";
 import { SectionHeader } from "@/components/ui/section-header";
+import { useTranslations } from "next-intl";
 
 export default function WhyChooseUs() {
+  const t = useTranslations("AboutUsPage.WhyChooseUs");
   return (
     <main className="bg-white min-h-screen">
       {/* Hero Section */}
@@ -11,14 +13,14 @@ export default function WhyChooseUs() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
           {/* Left Content */}
           <SectionHeader
-            badge="WHY CHOOSE US"
+            badge={t("HeroSection.badge")}
             title={
               <>
-                Invest Less & Gain More{" "}
-                <span className="text-primary">From TEPTH.</span>
+                {t("HeroSection.title")}{" "}
+                <span className="text-primary">{t("HeroSection.titleAccent")}</span>
               </>
             }
-            description="Preparing for college or university is more like riding an emotional rollercoaster; therefore, TEPTH keeps on looking for apt ways to make students feel confident, psychologically in control and well-prepared for the challenges ahead."
+            description={t("HeroSection.description")}
             className="space-y-4"
           />
 
@@ -57,10 +59,10 @@ export default function WhyChooseUs() {
           <div className="space-y-12">
             {/* Section Badge */}
             <SectionHeader
-              badge="OUR PROMISE"
+              badge={t("NarrativeSection.badge")}
               title={
                 <>
-                  Your Success is <span className="text-primary">Ours.</span>
+                  {t("NarrativeSection.title")} <span className="text-primary">{t("NarrativeSection.titleAccent")}</span>
                 </>
               }
               className="space-y-4"
@@ -69,21 +71,10 @@ export default function WhyChooseUs() {
             {/* Detailed Text */}
             <div className="space-y-8 text-base leading-relaxed font-medium">
               <p className="section-description text-primary">
-                The Exam Preparation & Testing House L.L.C understands just how
-                perplexing the endeavor can be to gain admission in your
-                top-choice college. For this reason, we have crafted ingenious
-                study plans to enhance your skills and score exceptionally well
-                in any test you opt for. We believe that ‘Your Success Is Ours’
-                so we work earnestly towards the achievement of your educational
-                goals.
+                {t("NarrativeSection.p1")}
               </p>
               <p className="section-description">
-                We bring into play the right tools and strategies for focused
-                learning and outstanding results for build your career. With us,
-                you will be able to improve your weak areas. Our expert
-                professionals’ feedback will help you to reinforce your strong
-                points and it will prove useful in steering your abilities and
-                energies in the right direction.
+                {t("NarrativeSection.p2")}
               </p>
             </div>
 
@@ -91,15 +82,9 @@ export default function WhyChooseUs() {
             <div className="bg-primary/5 border border-primary/10 rounded-[2rem] p-10 md:p-14 shadow-sm group hover:bg-primary transition-colors duration-500">
               <p className="text-lg md:text-xl text-slate-800 leading-relaxed font-black group-hover:text-white">
                 <span className="text-primary group-hover:text-white transition-colors">
-                  TEPTH
+                  {t("NarrativeSection.highlightStart")}
                 </span>{" "}
-                works on adaptive approach and offers flexible and convenient
-                prep options that will move with you and will fit in your hectic
-                schedule. We analyze student’s performance and advise a
-                custom-learning plan to ensure good results. Our proven
-                test-taking strategies, e-learning solutions, and instructions
-                from proficient coaches will sweep away any doubts of success.
-                You will be confident on the test day for optimal performance.
+                {t("NarrativeSection.highlightText")}
               </p>
             </div>
           </div>
