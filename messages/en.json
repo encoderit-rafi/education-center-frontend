@@ -422,5 +422,48 @@
       "uploadHint": "Only doc, docx or pdf file allowed",
       "removeFile": "Remove File"
     }
+  },
+  "DisabilityPolicyPage": {
+    "title": "Disability",
+    "titleAccent": "Policy",
+    "commitment": "Our Commitment",
+    "quote": "\"TEPTH aims to create an environment that enables disabled faculty staff and students to realize their individual potential.\"",
+    "scopeTitle": "Scope & Coverage",
+    "scopeP1": "This disability policy states TEPTH’s commitments and responsibilities under UAE legislation and its goal to ensure an inclusively supportive environment for people with a disability that are participating in work and study at The Exam Preparation and Testing House.",
+    "scopeP2": "This policy applies to all teaching staff and students of TEPTH. Some faculty staff of TEPTH has specific responsibilities in reference to the implementation of this disability policy.",
+    "supportServicesTitle": "Support Services & Resources",
+    "services": [
+      "Guidance officers",
+      "Support teachers (literacy and numeracy)",
+      "Speech-language pathologists",
+      "Behavior support trainers",
+      "Teacher aides",
+      "Assistive technology"
+    ],
+    "supportFooter": "Other interventions include alternative format materials, differentiated teaching practices, special provisions for assessment, and customized study programs.",
+    "criteriaTitle": "Disability Criteria for Enrollment",
+    "criteriaDesc": "We do not need a formal diagnosis. Evidence-based information is sufficient for us to respond to learning requirements.",
+    "criteria": [
+      "Total or partial loss of body parts",
+      "Malfunction or disfigurement",
+      "Disturbed behavior affecting judgment",
+      "Physical weakness prone to illness",
+      "Disorder affecting learning capacity"
+    ],
+    "antiDiscriminationTitle": "Anti-Discrimination",
+    "antiDiscriminationDesc": "TEPTH will take severe action against any incident of direct/indirect harassment or bullying based on disability. Strictly prohibited behavior will not be tolerated.",
+    "actionPlanTitle": "Strategic Action Plan",
+    "actionPlanDesc": "The most integral aspect of our policy for continual performance improvement.",
+    "actionPlans": [
+      "Ensure academic integrity meets international standards.",
+      "Modify activities for satisfactory access.",
+      "Support career and academic goal pursuit.",
+      "Maintain reliability of merit principles.",
+      "Negotiate reasonable adjustment working plans.",
+      "Ensure opportunities for consultation.",
+      "Respond immediately to harassment allegations."
+    ],
+    "contactPrompt": "Need a consultation or more information?",
+    "contactBtn": "Contact Administration"
   }
 }
