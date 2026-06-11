@@ -27,6 +27,7 @@ import {
 import { buttonVariants } from "@/components/ui/button";
 import api from "@/axios";
 import Image from "next/image";
+import { AED } from "@/components/ui/aed";
 
 // Icon mapping to handle dynamic icon rendering
 const iconMap: Record<string, React.ReactNode> = {
@@ -310,8 +311,11 @@ export default async function PaidMockTestDynamicPage({ params }: PageProps) {
               <h1 className="text-3xl font-black leading-[1.1] tracking-tight text-slate-900 lg:text-4xl xl:text-5xl mb-4">
                 {data.name} <span className="text-primary">Paid Mock Test</span>
               </h1>
-              <p className="text-base text-slate-600 leading-relaxed mb-6 text-justify">
+              <p className="text-base text-slate-600 leading-relaxed mb-2 text-justify">
                 {data.description}
+              </p>
+              <p className="text-base text-slate-600 leading-relaxed mb-4 text-justify">
+                Mock Test Price: <span className="text-primary font-bold inline-flex items-center gap-0.5"><AED className="h-[0.8em] w-auto fill-current" />{data.price}</span>
               </p>
               <Link
                 href={`/paid-mock-tests/registration?id=${data.slug}`}
