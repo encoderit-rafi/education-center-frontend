@@ -15,6 +15,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
 
 type BadgeVariant = "default" | "highlight";
 
@@ -25,66 +26,61 @@ interface Capability {
   badges: { label: string; variant?: BadgeVariant }[];
 }
 
-const capabilities: Capability[] = [
-  {
-    icon: FileCheck,
-    title: "Required Business Licences & Permits",
-    description:
-      "It is very important to partner with a test center that holds the relevant business activity with the local authority to become a test center. The Exam Preparation & Testing House L.L.C is licensed by Sharjah Economic Development Department (SEDD) and regulated by Sharjah Private Education Authority (SPEA).",
-    badges: [{ label: "Licensed by SEDD" }, { label: "Regulated by SPEA" }],
-  },
-  {
-    icon: Lock,
-    title: "Test Security",
-    description:
-      "We maintain strict physical and operational security protocols, managed by trained personnel, to protect the integrity of your exams at every stage\u2014before, during, and after test day. To ensure exam security and integrity, our computer labs are fully equipped with a comprehensive CCTV system. Every workstation is monitored by a dedicated security camera, and recorded footage can be made available to exam providers upon request.",
-    badges: [
-      { label: "Physical & Operational Protocols" },
-      { label: "100% Dedicated Workstation CCTVs", variant: "highlight" },
-    ],
-  },
-  {
-    icon: Monitor,
-    title: "Flexible Exam Delivery",
-    description:
-      "Flexible scheduling options that accommodate massive single-day events, designated testing windows, Morning, Afternoon & Evening slots, or continuous testing year-round.",
-    badges: [{ label: "Continuous & Event-Based Options" }],
-  },
-  {
-    icon: Building2,
-    title: "Top-notch Exam Venues",
-    description:
-      "Our modern, easily accessible testing centers are fully equipped with high-performance hardware and advanced technology to ensure an optimal testing environment.",
-    badges: [{ label: "Easily Accessible & Premium Venues" }],
-  },
-  {
-    icon: VolumeX,
-    title: "Noise-Free Environment",
-    description:
-      "To minimize distractions and lower noise levels, we have implemented several workplace enhancements. Workstations feature fabric acoustic panels and are spaced generously apart, while testing rooms are carpeted to ensure a quiet environment. Additionally, we utilize white noise machines in the computer labs, alongside quiet keyboards and high-quality headsets throughout our spaces.",
-    badges: [
-      { label: "Fabric Acoustic Panels" },
-      { label: "White Noise Systems Equipped", variant: "highlight" },
-    ],
-  },
-  {
-    icon: Cpu,
-    title: "Technical Infrastructure",
-    description:
-      "Our technical specifications meet your technical requirements. We provide dedicated, robust desktop PCs and 24-inch monitors.",
-    badges: [{ label: "High-Performance Specifications" }],
-  },
-
-  {
-    icon: Accessibility,
-    title: "Special Accommodation",
-    description:
-      "We provide tailored support for candidates who need testing accommodations, offering personalized services such as extended time, frequent breaks, private rooms, and specialized assistive software and equipment.",
-    badges: [{ label: "Adaptive Assistance Softwares" }],
-  },
-];
-
 export default function ExamProviderPage() {
+  const t = useTranslations("ExamDeliveryPage.ExamProviderPage");
+  
+  const capabilitiesRaw = t.raw("capabilities");
+  const capabilities: Capability[] = [
+    {
+      icon: FileCheck,
+      title: capabilitiesRaw[0].title,
+      description: capabilitiesRaw[0].description,
+      badges: [{ label: capabilitiesRaw[0].badges[0] }, { label: capabilitiesRaw[0].badges[1] }],
+    },
+    {
+      icon: Lock,
+      title: capabilitiesRaw[1].title,
+      description: capabilitiesRaw[1].description,
+      badges: [
+        { label: capabilitiesRaw[1].badges[0] },
+        { label: capabilitiesRaw[1].badges[1], variant: "highlight" },
+      ],
+    },
+    {
+      icon: Monitor,
+      title: capabilitiesRaw[2].title,
+      description: capabilitiesRaw[2].description,
+      badges: [{ label: capabilitiesRaw[2].badges[0] }],
+    },
+    {
+      icon: Building2,
+      title: capabilitiesRaw[3].title,
+      description: capabilitiesRaw[3].description,
+      badges: [{ label: capabilitiesRaw[3].badges[0] }],
+    },
+    {
+      icon: VolumeX,
+      title: capabilitiesRaw[4].title,
+      description: capabilitiesRaw[4].description,
+      badges: [
+        { label: capabilitiesRaw[4].badges[0] },
+        { label: capabilitiesRaw[4].badges[1], variant: "highlight" },
+      ],
+    },
+    {
+      icon: Cpu,
+      title: capabilitiesRaw[5].title,
+      description: capabilitiesRaw[5].description,
+      badges: [{ label: capabilitiesRaw[5].badges[0] }],
+    },
+    {
+      icon: Accessibility,
+      title: capabilitiesRaw[6].title,
+      description: capabilitiesRaw[6].description,
+      badges: [{ label: capabilitiesRaw[6].badges[0] }],
+    },
+  ];
+
   return (
     <div className="min-h-screen bg-slate-50/50 font-sans antialiased selection:bg-maroon-100 selection:text-maroon-900">
       {/* Sleek & Compact Hero Section */}
@@ -107,28 +103,21 @@ export default function ExamProviderPage() {
             <div className="lg:col-span-6 flex flex-col justify-center">
               <div className="inline-flex items-center gap-1.5 py-1 px-2.5 rounded-full text-[11px] font-bold bg-maroon-50 text-maroon-800 border border-maroon-100 mb-4 w-fit">
                 <ShieldCheck className="w-3.5 h-3.5" />
-                <span>GOLD STANDARD EXAM DELIVERY</span>
+                <span>{t("badge")}</span>
               </div>
 
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-headline font-black text-slate-900 leading-tight mb-5 tracking-tight">
-                Exam <span className="text-primary italic">Providers</span>
+                {t("title")} <span className="text-primary italic">{t("titleAccent")}</span>
               </h1>
 
               <p className="text-sm sm:text-base text-slate-700 leading-relaxed font-sans mb-6 max-w-2xl font-light">
-                To international awarding bodies, physical in-centre exam
-                delivery remains the gold standard for high-stakes testing.
-                Streamline your testing with our end-to-end exam delivery
-                services. Whether you need to run massive, single-day test
-                events or consistent sessions throughout the year, we &lsquo;ve
-                got you covered. With secure in-person testing sites and robust
-                remote proctoring, we ensure a seamless and high-quality
-                experience for all test-takers.
+                {t("description")}
               </p>
 
               <div className="flex flex-wrap gap-3 sm:gap-4">
                 <Link href="/contact-us">
                   <Button className="bg-primary text-white hover:bg-primary-variant px-5 py-3 rounded-lg font-bold text-sm transition-all duration-300 flex items-center gap-2 group shadow-md shadow-primary/10 cursor-pointer h-10">
-                    Partner With Us
+                    {t("partnerBtn")}
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-300" />
                   </Button>
                 </Link>
@@ -137,7 +126,7 @@ export default function ExamProviderPage() {
                     variant="outline"
                     className="border-slate-200 text-slate-700 hover:bg-slate-50 px-5 py-3 rounded-lg font-bold text-sm transition-all duration-300 flex items-center gap-2 cursor-pointer h-10"
                   >
-                    Tour Our Venues
+                    {t("tourBtn")}
                   </Button>
                 </Link>
               </div>
@@ -164,10 +153,10 @@ export default function ExamProviderPage() {
       <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
         <div className="mb-12 text-center">
           <span className="text-primary text-[11px] font-bold uppercase tracking-[0.25em] mb-2 inline-block">
-            OUR CAPABILITIES
+            {t("capabilitiesBadge")}
           </span>
           <h2 className="text-2xl md:text-3xl font-headline font-black text-slate-900 tracking-tight">
-            Designed for Perfect Integrity and Performance
+            {t("capabilitiesTitle")}
           </h2>
           <div className="w-12 h-0.5 bg-primary rounded-full mx-auto mt-3"></div>
         </div>

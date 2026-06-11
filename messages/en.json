@@ -503,5 +503,63 @@
     },
     "otherEventsTitle": "Other Upcoming Events",
     "otherEventsDesc": "Stay tuned for more information sessions coming soon including TOEFL iBT workshops and PTE-A training weeks."
+  },
+  "ExamDeliveryPage": {
+    "ExamProviderPage": {
+      "badge": "GOLD STANDARD EXAM DELIVERY",
+      "title": "Exam",
+      "titleAccent": "Providers",
+      "description": "To international awarding bodies, physical in-centre exam delivery remains the gold standard for high-stakes testing. Streamline your testing with our end-to-end exam delivery services. Whether you need to run massive, single-day test events or consistent sessions throughout the year, we've got you covered. With secure in-person testing sites and robust remote proctoring, we ensure a seamless and high-quality experience for all test-takers.",
+      "partnerBtn": "Partner With Us",
+      "tourBtn": "Tour Our Venues",
+      "capabilitiesBadge": "OUR CAPABILITIES",
+      "capabilitiesTitle": "Designed for Perfect Integrity and Performance",
+      "capabilities": [
+        {
+          "title": "Required Business Licences & Permits",
+          "description": "It is very important to partner with a test center that holds the relevant business activity with the local authority to become a test center. The Exam Preparation & Testing House L.L.C is licensed by Sharjah Economic Development Department (SEDD) and regulated by Sharjah Private Education Authority (SPEA).",
+          "badges": ["Licensed by SEDD", "Regulated by SPEA"]
+        },
+        {
+          "title": "Test Security",
+          "description": "We maintain strict physical and operational security protocols, managed by trained personnel, to protect the integrity of your exams at every stage—before, during, and after test day. To ensure exam security and integrity, our computer labs are fully equipped with a comprehensive CCTV system. Every workstation is monitored by a dedicated security camera, and recorded footage can be made available to exam providers upon request.",
+          "badges": ["Physical & Operational Protocols", "100% Dedicated Workstation CCTVs"]
+        },
+        {
+          "title": "Flexible Exam Delivery",
+          "description": "Flexible scheduling options that accommodate massive single-day events, designated testing windows, Morning, Afternoon & Evening slots, or continuous testing year-round.",
+          "badges": ["Continuous & Event-Based Options"]
+        },
+        {
+          "title": "Top-notch Exam Venues",
+          "description": "Our modern, easily accessible testing centers are fully equipped with high-performance hardware and advanced technology to ensure an optimal testing environment.",
+          "badges": ["Easily Accessible & Premium Venues"]
+        },
+        {
+          "title": "Noise-Free Environment",
+          "description": "To minimize distractions and lower noise levels, we have implemented several workplace enhancements. Workstations feature fabric acoustic panels and are spaced generously apart, while testing rooms are carpeted to ensure a quiet environment. Additionally, we utilize white noise machines in the computer labs, alongside quiet keyboards and high-quality headsets throughout our spaces.",
+          "badges": ["Fabric Acoustic Panels", "White Noise Systems Equipped"]
+        },
+        {
+          "title": "Technical Infrastructure",
+          "description": "Our technical specifications meet your technical requirements. We provide dedicated, robust desktop PCs and 24-inch monitors.",
+          "badges": ["High-Performance Specifications"]
+        },
+        {
+          "title": "Special Accommodation",
+          "description": "We provide tailored support for candidates who need testing accommodations, offering personalized services such as extended time, frequent breaks, private rooms, and specialized assistive software and equipment.",
+          "badges": ["Adaptive Assistance Softwares"]
+        }
+      ]
+    },
+    "VendorPage": {
+      "badge": "MUTUAL COLLABORATION",
+      "title": "Vendor",
+      "titleAccent": "Partnerships",
+      "p1": "At TEPTH, we are actively seeking to expand our network of delivery partners and warmly encourage vendors with active exam provider agreements to utilize our advanced testing facilities. We believe in building sustainable, win-win collaborations that drive mutual value.",
+      "p2": "By channeling your exam volumes through our state-of-the-art center, you gain an instantly accessible, highly secure, and turnkey testing environment that satisfies the stringent standards of your exam providers—without the burden of facility overhead. In turn, our center optimizes its seating capacity and technical resources.",
+      "p3": "This symbiotic relationship ensures that your candidates experience a seamless, professional testing environment, while both of our organizations benefit from predictable operational scalability and shared success.",
+      "contactHeader": "Get in touch to partner with us"
+    }
   }
 }
