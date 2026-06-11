@@ -523,7 +523,10 @@
         {
           "title": "Test Security",
           "description": "We maintain strict physical and operational security protocols, managed by trained personnel, to protect the integrity of your exams at every stage—before, during, and after test day. To ensure exam security and integrity, our computer labs are fully equipped with a comprehensive CCTV system. Every workstation is monitored by a dedicated security camera, and recorded footage can be made available to exam providers upon request.",
-          "badges": ["Physical & Operational Protocols", "100% Dedicated Workstation CCTVs"]
+          "badges": [
+            "Physical & Operational Protocols",
+            "100% Dedicated Workstation CCTVs"
+          ]
         },
         {
           "title": "Flexible Exam Delivery",
@@ -560,6 +563,98 @@
       "p2": "By channeling your exam volumes through our state-of-the-art center, you gain an instantly accessible, highly secure, and turnkey testing environment that satisfies the stringent standards of your exam providers—without the burden of facility overhead. In turn, our center optimizes its seating capacity and technical resources.",
       "p3": "This symbiotic relationship ensures that your candidates experience a seamless, professional testing environment, while both of our organizations benefit from predictable operational scalability and shared success.",
       "contactHeader": "Get in touch to partner with us"
+    }
+  },
+  "ExamProctoringServicesPage": {
+    "CandidatesPage": {
+      "heroTitle": "Exam Proctoring for",
+      "heroTitleAccent": "Candidates",
+      "heroDescription": "Professional, secure, and monitored exam environments for students from external institutions. We ensure a seamless testing experience that meets your university's strict requirements.",
+      "bookingHeading": "How to Book Your Proctored Exam",
+      "step1Title": "Review Rules & Regulations",
+      "step1Description": "Review the rules of your home institution carefully. Pay attention to deadlines, requirements, and policies for external testing facilities.",
+      "step2Title": "Get in Touch",
+      "step2Description": "Speak to our staff about requirements, duration, format (computer or paper), preferred date, time, and any special accommodations.",
+      "step3Title": "Inform Your Home Institution",
+      "step3Description": "Provide them with our contact details so they can send us your exam package securely. If no return envelope is provided, we can arrange a courier for an additional charge.",
+      "step3Disclaimer": "We are not responsible for the package after courier collection.",
+      "feesHeading": "Proctoring Fees",
+      "feesColDuration": "Duration",
+      "feesColFee": "Fee",
+      "feeNote1": "One dedicated proctor provided",
+      "feeNote2": "Fees are calculated per exam, per session",
+      "paymentHeading": "Payment Methods",
+      "paymentMethods": [
+        "Cash or Card on/before exam day",
+        "Electronic payment via online link",
+        "Wire transfer (Candidate covers bank charges)"
+      ],
+      "paymentRecommendationLabel": "Recommendation:",
+      "paymentRecommendationText": "We highly advise paying in advance to avoid last-minute payment failures that could result in the cancellation of your exam.",
+      "dayOfHeading": "On Exam Day",
+      "dayOfText": "Please arrive early to settle in and avoid unnecessary anxiety. Ensure you bring an approved, valid photo ID and strictly follow all regulations set by your home institution.",
+      "dayOfTip": "Always double-check that you have your ID and all personal belongings before leaving the testing center."
+    },
+    "InstitutionsPage": {
+      "heroTitle": "Advanced",
+      "heroTitleAccent": "AI Proctoring Solutions",
+      "heroDescription": "Secure online examinations with intelligent monitoring, behavioural analysis, facial recognition, and real-time fraud detection. Designed for universities, certification providers, and professional testing organizations.",
+      "aiSectionTitle": "AI Proctoring Technology",
+      "aiSectionDescription": "AI-powered proctoring combines machine learning, facial recognition, behavioural analytics, screen monitoring, and audio analysis to maintain examination integrity at scale. Suspicious activities such as multiple faces, excessive movement, tab switching, or environmental disturbances are automatically detected and flagged for review.",
+      "aiTech": [
+        {
+          "title": "Facial Recognition & Identification",
+          "desc": "Confirms the student's identity at the start and throughout the exam to prevent impersonation."
+        },
+        {
+          "title": "Behavioral Analysis",
+          "desc": "Detects unusual movements such as looking away from the screen, leaving the seat, or additional people entering the room."
+        },
+        {
+          "title": "Screen & Browser Monitoring",
+          "desc": "Tracks tab switching, prevents unauthorized websites, and supports secure browser lockdown environments."
+        },
+        {
+          "title": "Audio Analysis",
+          "desc": "Monitors ambient sounds, conversations, and suspicious audio activity during examinations."
+        },
+        {
+          "title": "Real-Time Flagging",
+          "desc": "Automatically records and highlights suspicious behaviour for review and post-exam auditing."
+        }
+      ],
+      "contactBoxText1": "To enquire about our proctoring and examination services, contact us at",
+      "contactBoxPhone": "+971 4 333 3616",
+      "contactBoxText2": "or",
+      "contactBoxEmail": "info@tepth.net",
+      "contactBoxText3": ". Our team can provide information about implementation, integrations, pricing, and operational support.",
+      "facilitiesTitle": "Testing Facility Standards",
+      "facilities": [
+        {
+          "title": "140 Workstations",
+          "desc": "Dual-monitor setups with ergonomic seating."
+        },
+        {
+          "title": "Climate Controlled",
+          "desc": "Precision temperature management for comfort and stability."
+        },
+        {
+          "title": "Acoustic Excellence",
+          "desc": "Sound-dampening design that minimizes distractions."
+        },
+        {
+          "title": "Full Accessibility",
+          "desc": "POD compliant facilities with assistive technologies."
+        }
+      ],
+      "partnerTitle": "Partner With TEPTH",
+      "partnerDescription": "Collaborate with a trusted examination infrastructure provider serving educational institutions, certification bodies, and professional organizations across the region.",
+      "partnerFeatures": [
+        "Secure API integrations",
+        "Custom reporting dashboards",
+        "Regional market access"
+      ],
+      "partnerCta": "Request Partnership"
     }
   }
 }
