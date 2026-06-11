@@ -465,5 +465,43 @@
     ],
     "contactPrompt": "Need a consultation or more information?",
     "contactBtn": "Contact Administration"
+  },
+  "EventsPage": {
+    "title": "Upcoming",
+    "titleAccent": "Events",
+    "subtitle": "Empowering your academic journey through expert-led information sessions and immersive workshops.",
+    "eventSubtitle": "Feb 13, 2026 | 6:00 PM - 8:00 PM",
+    "eventTitle1": "FREE INFO",
+    "eventTitle2": "SESSION",
+    "workshopHighlights": "Workshop Highlights",
+    "agendaItems": [
+      "CELPIP Basics",
+      "Why Choose CELPIP?",
+      "Test Format, Scoring, and Strategies (With sample responses)",
+      "Test Preparation Materials",
+      "Key Test Strategies",
+      "Tips for dealing with test questions",
+      "Question and Answer session (FAQs)"
+    ],
+    "successTitle": "Registration Sent!",
+    "successDesc": "Thank you for registering. Our team will contact you shortly with the session details.",
+    "newRegistrationBtn": "New Registration",
+    "registerTitle": "Register",
+    "registerSubtitle": "Secure your session entry",
+    "form": {
+      "fullName": "Full Name:*",
+      "fullNamePlaceholder": "Enter your name",
+      "fullNameError": "Full name must be at least 3 characters",
+      "mobile": "Mobile No:*",
+      "mobilePlaceholder": "Enter phone number",
+      "mobileError": "Please enter a valid mobile number",
+      "email": "Email Address:*",
+      "emailPlaceholder": "email@example.com",
+      "emailError": "Please enter a valid email address",
+      "processing": "Processing...",
+      "submitBtn": "Join Session"
+    },
+    "otherEventsTitle": "Other Upcoming Events",
+    "otherEventsDesc": "Stay tuned for more information sessions coming soon including TOEFL iBT workshops and PTE-A training weeks."
   }
 }
