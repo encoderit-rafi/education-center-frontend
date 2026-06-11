@@ -143,5 +143,35 @@
         "Quick response time"
       ]
     }
+  },
+  "ContactUsPage": {
+    "HeroSection": {
+      "badge": "CONTACT US",
+      "title": "Get in Touch",
+      "titleAccent": " With Us",
+      "description": "Whether you're preparing for an entrance exam or need deep editorial review, we're here to guide you. Our expert team is ready to assist you at every step of your journey."
+    },
+    "ContactDetails": {
+      "phone": "+971 6 553 1250",
+      "phoneAvailability": "Available Saturday – Thursday, 9:00 AM – 9:00 PM",
+      "email": "info@tepth.org",
+      "emailAvailability": "We typically respond within 24 hours",
+      "addressPart1": "The Exam Preparation & Testing House L.L.C Suite 701, 7th Floor,",
+      "addressPart2": "Tabarak Tower, Corniche Road, Al Mamzar, Sharjah,",
+      "addressPart3": "United Arab Emirates.",
+      "chat": "Chat with us",
+      "chatAvailability": "Quick answers via WhatsApp"
+    },
+    "OfficeHours": {
+      "title": "Office Hours",
+      "saturdayToThursday": "Saturday – Thursday",
+      "hours": "9:00 AM – 9:00 PM",
+      "friday": "Friday",
+      "closed": "Closed"
+    },
+    "FormSection": {
+      "title": "Send a Direct",
+      "titleAccent": " Message"
+    }
   }
 }
