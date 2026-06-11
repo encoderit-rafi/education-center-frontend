@@ -341,12 +341,12 @@ function CourseRegistrationForm({ className }: { className?: string }) {
                 {/* Fee Breakdown */}
                 <div className="bg-white border rounded-lg p-4 space-y-2 mb-4 text-sm">
                   <div className="flex justify-between items-center text-slate-600">
-                    <span>Base Price</span>
+                    <span>Course Price</span>
                     <span>
                       <PriceDisplay amount={base_price} />
                     </span>
                   </div>
-                  <div className="flex justify-between items-center text-slate-600">
+                  {/* <div className="flex justify-between items-center text-slate-600">
                     <span>Discount</span>
                     <span className="text-emerald-600">
                       {discount_amount > 0 ? (
@@ -357,7 +357,7 @@ function CourseRegistrationForm({ className }: { className?: string }) {
                         <span className="text-slate-400">—</span>
                       )}
                     </span>
-                  </div>
+                  </div> */}
 
                   <div className="pt-2 mt-2 border-t flex justify-between items-center font-bold text-slate-900 text-base">
                     <span>Total</span>

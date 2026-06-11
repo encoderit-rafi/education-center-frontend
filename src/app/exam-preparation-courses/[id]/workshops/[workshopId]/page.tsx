@@ -174,7 +174,7 @@ export default async function WorkshopDetailPage({ params }: PageProps) {
                   </p>
                 )}
 
-                <p className="text-slate-600 text-base md:text-lg leading-relaxed font-medium">
+                <p className="text-slate-600 text-base md:text-lg leading-relaxed font-medium text-justify">
                   {displayDescription}
                 </p>
               </div>

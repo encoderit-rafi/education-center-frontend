@@ -271,7 +271,7 @@ export default async function ExamPreparationDynamicPage({
 
                       <div className="space-y-2"></div>
 
-                      <p className="text-xs text-slate-600 font-medium leading-relaxed line-clamp-4">
+                      <p className="text-xs text-slate-600 font-medium leading-relaxed line-clamp-4 text-justify">
                         {workshop.description ||
                           `Comprehensive ${workshop.duration}-hour intensive workshop focusing on core strategies, mock practice, and live feedback for the ${workshop.subTitle} exam.`}
                       </p>
