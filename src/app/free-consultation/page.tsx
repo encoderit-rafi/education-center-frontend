@@ -8,9 +8,27 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { SectionHeader } from "@/components/ui/section-header";
-import ContactForm from "../contact-us/_components/form-contact";
+import { useTranslations } from "next-intl";
 
 export default function FreeConsultationPage() {
+  const t = useTranslations("FreeConsultationPage");
+
+  const chooseOptionsIcons = [MapPin, Globe, Phone];
+  const chooseOptions = (t.raw("chooseOptions") as string[]).map((text, idx) => ({
+    text,
+    icon: chooseOptionsIcons[idx]
+  }));
+
+  const sessionItems = t.raw("sessionItems") as string[];
+
+  const consultOptionsIcons = [MapPin, Phone];
+  const consultOptions = (t.raw("consultOptions") as string[]).map((text, idx) => ({
+    text,
+    icon: consultOptionsIcons[idx]
+  }));
+
+  const helpItems = t.raw("helpItems") as string[];
+
   return (
     <main className="bg-white min-h-screen">
       {/* ── Section 1: Hero ── */}
@@ -22,21 +40,18 @@ export default function FreeConsultationPage() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center relative z-10">
           {/* Left Content */}
           <SectionHeader
-            badge="FREE CONSULTATION"
+            badge={t("heroBadge")}
             title={
               <>
-                Get the Right Guidance{" "}
-                <span className="text-primary">Before You Decide</span>
+                {t("heroTitle")}{" "}
+                <span className="text-primary">{t("heroTitleAccent")}</span>
               </>
             }
             description={
               <>
-                Whether you are planning to book your exam or prepare for the
-                test, the right advice at the beginning can save you time,
-                money, and effort. <br />
+                {t("heroDescription1")} <br />
                 <br />
-                At TEPTH, we offer free consultations to help you make the right
-                decision with confidence — no pressure, no obligation.
+                {t("heroDescription2")}
               </>
             }
             className="space-y-4"
@@ -76,33 +91,23 @@ export default function FreeConsultationPage() {
           {/* Right Content */}
           <div className="space-y-12">
             <SectionHeader
-              badge="FOR EXAM PREPARATION COURSES"
+              badge={t("examPrepBadge")}
               title={
                 <>
-                  15-Minute Free Consultation{" "}
-                  <span className="text-primary">with Our Instructor</span>
+                  {t("examPrepTitle")}{" "}
+                  <span className="text-primary">{t("examPrepTitleAccent")}</span>
                 </>
               }
-              description="If you are unsure about your current level or which course to choose, speak directly with one of our experienced instructors."
+              description={t("examPrepDescription")}
             />
 
             <div className="space-y-8">
               <div className="space-y-4">
                 <p className="font-bold text-secondary uppercase tracking-widest text-xs">
-                  You can choose:
+                  {t("chooseLabel")}
                 </p>
                 <div className="grid gap-3">
-                  {[
-                    {
-                      text: "In-person Consultation at our centre.",
-                      icon: MapPin,
-                    },
-                    {
-                      text: "Online Consultation via GoTo Application",
-                      icon: Globe,
-                    },
-                    { text: "Phone Consultation via phone call", icon: Phone },
-                  ].map((item) => (
+                  {chooseOptions.map((item) => (
                     <div
                       key={item.text}
                       className="flex items-center gap-3 p-4 rounded-xl bg-slate-50 border border-slate-100 text-slate-700 font-medium transition-all hover:bg-white hover:shadow-md group/item"
@@ -116,15 +121,10 @@ export default function FreeConsultationPage() {
 
               <div className="space-y-4">
                 <p className="font-bold text-secondary uppercase tracking-widest text-xs">
-                  During your session, we will:
+                  {t("sessionLabel")}
                 </p>
                 <ul className="space-y-4">
-                  {[
-                    "Assess your current English level",
-                    "Understand your target exam, review your score report if you have already taken a test and discuss your score goal.",
-                    "Recommend the right course (IELTS, PTE, TOEFL iBT, CELPIP, CAEL, Skills for English – SELT & OET)",
-                    "Suggest a realistic study plan based on your timeline",
-                  ].map((item) => (
+                  {sessionItems.map((item) => (
                     <li key={item} className="flex items-start gap-3 group">
                       <CheckCircle2 className="w-5 h-5 text-primary/40 shrink-0 mt-1 group-hover:text-primary transition-colors" />
                       <span className="text-slate-600 font-medium leading-relaxed group-hover:translate-x-1 transition-transform">
@@ -136,8 +136,7 @@ export default function FreeConsultationPage() {
               </div>
 
               <div className="p-6 bg-primary/5 border border-primary/10 rounded-2xl italic text-primary font-medium">
-                This is a quick but focused session designed to give you clarity
-                before you start.
+                {t("examPrepNote")}
               </div>
             </div>
           </div>
@@ -153,32 +152,23 @@ export default function FreeConsultationPage() {
           {/* Left Content */}
           <div className="space-y-12">
             <SectionHeader
-              badge="FOR EXAM BOOKINGS & TEST INFORMATION"
+              badge={t("bookingBadge")}
               title={
                 <>
-                  Free Consultation with Our{" "}
-                  <span className="text-primary"> Test Centre Team</span>
+                  {t("bookingTitle")}{" "}
+                  <span className="text-primary"> {t("bookingTitleAccent")}</span>
                 </>
               }
-              description="If you are planning to book one of the English Proficiency tests administered at our centre, our staff members are available to guide you."
+              description={t("bookingDescription")}
             />
 
             <div className="space-y-8">
               <div className="space-y-4">
                 <p className="font-bold text-secondary uppercase tracking-widest text-xs">
-                  You can consult:
+                  {t("consultLabel")}
                 </p>
                 <div className="grid gap-3">
-                  {[
-                    {
-                      text: "In-person Consultation at our centre.",
-                      icon: MapPin,
-                    },
-                    {
-                      text: "Phone Consultation via phone call for quick support",
-                      icon: Phone,
-                    },
-                  ].map((item) => (
+                  {consultOptions.map((item) => (
                     <div
                       key={item.text}
                       className="flex items-center gap-3 p-4 rounded-xl bg-white border border-slate-100 text-slate-700 font-medium shadow-sm transition-all hover:shadow-md group/item"
@@ -192,15 +182,10 @@ export default function FreeConsultationPage() {
 
               <div className="space-y-4">
                 <p className="font-bold text-secondary uppercase tracking-widest text-xs">
-                  We will help you with:
+                  {t("helpLabel")}
                 </p>
                 <ul className="space-y-4">
-                  {[
-                    "Understanding test requirements and eligibility",
-                    "Available test dates and booking process",
-                    "ID requirements and test day instructions",
-                    "Any exam registration-related questions",
-                  ].map((item) => (
+                  {helpItems.map((item) => (
                     <li key={item} className="flex items-start gap-3 group">
                       <ArrowRightCircle className="w-5 h-5 text-primary/40 shrink-0 mt-1 group-hover:text-primary transition-colors" />
                       <span className="text-slate-600 font-medium leading-relaxed group-hover:translate-x-1 transition-transform">
@@ -229,40 +214,20 @@ export default function FreeConsultationPage() {
       </section>
 
       {/* ── Section 4: Form ── */}
-      {/* <section className="py-24 px-8 max-w-screen-2xl mx-auto border-t border-slate-50 bg-white">
-        <div className="max-w-4xl mx-auto">
-          <SectionHeader
-            badge="BOOK A SESSION"
-            title={
-              <>
-                Confirm your <span className="text-primary">Free Consultation</span>
-              </>
-            }
-            description="Please fill out the form below to book your session with our experts."
-            align="center"
-            className="mb-12"
-          />
-          <div className="p-8 md:p-12">
-            <FreeConsultationForm />
-          </div>
-        </div>
-      </section> */}
       <div className="relative h-full bg-white base-px base-py">
         <div className=" max-w-3xl mx-auto flex flex-col">
           <SectionHeader
             title={
               <>
-                Confirm your{" "}
-                <span className="text-primary">Free Consultation</span>
+                {t("formTitle")}{" "}
+                <span className="text-primary">{t("formTitleAccent")}</span>
               </>
             }
-            description="Please fill out the form below to book your session with our experts."
+            description={t("formDescription")}
             className="mb-12"
             badgeClassName="tracking-[0.1em]"
           />
-          {/* <ContactForm /> */}
-            <FreeConsultationForm />
-
+          <FreeConsultationForm />
         </div>
       </div>
     </main>

@@ -695,5 +695,107 @@
     "experienceTitleAccent": "Facilitate Learning.",
     "experienceP1": "Our classrooms are not just rooms; they are quiet hubs of intellectual activity. Every chair, table, and lighting fixture has been selected to minimize fatigue and maximize cognitive output.",
     "experienceP2": "For students preparing for high-stakes exams, we provide the exact technology stack they will encounter on test day, ensuring that physical equipment never becomes a barrier to performance."
+  },
+  "FreeConsultationPage": {
+    "heroBadge": "FREE CONSULTATION",
+    "heroTitle": "Get the Right Guidance",
+    "heroTitleAccent": "Before You Decide",
+    "heroDescription1": "Whether you are planning to book your exam or prepare for the test, the right advice at the beginning can save you time, money, and effort.",
+    "heroDescription2": "At TEPTH, we offer free consultations to help you make the right decision with confidence — no pressure, no obligation.",
+    "examPrepBadge": "FOR EXAM PREPARATION COURSES",
+    "examPrepTitle": "15-Minute Free Consultation",
+    "examPrepTitleAccent": "with Our Instructor",
+    "examPrepDescription": "If you are unsure about your current level or which course to choose, speak directly with one of our experienced instructors.",
+    "chooseLabel": "You can choose:",
+    "chooseOptions": [
+      "In-person Consultation at our centre.",
+      "Online Consultation via GoTo Application",
+      "Phone Consultation via phone call"
+    ],
+    "sessionLabel": "During your session, we will:",
+    "sessionItems": [
+      "Assess your current English level",
+      "Understand your target exam, review your score report if you have already taken a test and discuss your score goal.",
+      "Recommend the right course (IELTS, PTE, TOEFL iBT, CELPIP, CAEL, Skills for English – SELT & OET)",
+      "Suggest a realistic study plan based on your timeline"
+    ],
+    "examPrepNote": "This is a quick but focused session designed to give you clarity before you start.",
+    "bookingBadge": "FOR EXAM BOOKINGS & TEST INFORMATION",
+    "bookingTitle": "Free Consultation with Our",
+    "bookingTitleAccent": "Test Centre Team",
+    "bookingDescription": "If you are planning to book one of the English Proficiency tests administered at our centre, our staff members are available to guide you.",
+    "consultLabel": "You can consult:",
+    "consultOptions": [
+      "In-person Consultation at our centre.",
+      "Phone Consultation via phone call for quick support"
+    ],
+    "helpLabel": "We will help you with:",
+    "helpItems": [
+      "Understanding test requirements and eligibility",
+      "Available test dates and booking process",
+      "ID requirements and test day instructions",
+      "Any exam registration-related questions"
+    ],
+    "formTitle": "Confirm your",
+    "formTitleAccent": "Free Consultation",
+    "formDescription": "Please fill out the form below to book your session with our experts."
+  },
+  "FAQsPage": {
+    "title": "Frequently Asked Questions",
+    "description": "Everything you need to know about registration, courses, and our facilities.",
+    "faqs": [
+      {
+        "question": "How do I register?",
+        "answer": "Since you are already on our website, the fastest way is to register online. You can also register in person at the center."
+      },
+      {
+        "question": "Do you offer individual tutoring?",
+        "answer": "Yes, both group and one-to-one tutoring are available."
+      },
+      {
+        "question": "Is the material fee refundable?",
+        "answer": "No, the material fee is included and not refundable."
+      },
+      {
+        "question": "Is the registration fee refundable?",
+        "answer": "No, it is not refundable."
+      },
+      {
+        "question": "What happens if I cancel or withdraw?",
+        "answer": "Please refer to our refund policy for details."
+      },
+      {
+        "question": "Online registration is not working. What should I do?",
+        "answer": "Make sure cookies and JavaScript are enabled. You will receive a confirmation email if your registration is successful. If not, please retry or check your email address."
+      },
+      {
+        "question": "What payment methods do you accept?",
+        "answer": "Visa, MasterCard, and PayPal are accepted."
+      },
+      {
+        "question": "What qualifications do your teachers have?",
+        "answer": "Our teachers hold bachelor's or master's degrees and certifications such as CELTA, with international teaching experience."
+      },
+      {
+        "question": "Do you offer facilities for special needs candidates?",
+        "answer": "Yes, our centre is fully accessible."
+      },
+      {
+        "question": "Do you offer a quiet learning environment?",
+        "answer": "Yes, we provide dedicated noise-free classrooms and testing labs."
+      },
+      {
+        "question": "Do you offer evening classes?",
+        "answer": "Yes, our working hours are 9:00 am – 9:00 pm (Saturday–Thursday)."
+      },
+      {
+        "question": "Can I get brochures or flyers?",
+        "answer": "Yes, you can request them via email at info@tepth.net. Content matches our website."
+      },
+      {
+        "question": "Is public transport available nearby?",
+        "answer": "Yes, buses from Al Rashidiya and Burjuman stop near Dubai Silicon Oasis, within a short walking distance."
+      }
+    ]
   }
 }
