@@ -29,6 +29,7 @@ import { PhoneInput } from "@/components/ui/phone-input";
 import { format } from "date-fns";
 import api from "@/axios";
 import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 
 const careerSchema = z.object({
   first_name: z.string().min(2, "First name must be at least 2 characters"),
@@ -52,6 +53,7 @@ const careerSchema = z.object({
 type CareerFormValues = z.infer<typeof careerSchema>;
 
 export default function CareerPage() {
+  const t = useTranslations("CareerPage");
   const [mounted, setMounted] = useState(false);
   const [captchaError, setCaptchaError] = useState<string | null>(null);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -183,18 +185,17 @@ export default function CareerPage() {
           </div>
           <div className="space-y-2">
             <h2 className="text-3xl font-black font-heading tracking-tighter">
-              Application Sent!
+              {t("successTitle")}
             </h2>
             <p className="text-gray-500 font-medium">
-              Thank you for your interest. Our HR team will review your
-              application and contact you soon.
+              {t("successDescription")}
             </p>
           </div>
           <Button
             onClick={() => window.location.reload()}
             className="w-full bg-[#A11D1D] hover:bg-[#8A1818] text-white font-black text-xs uppercase tracking-widest py-6"
           >
-            Go Back
+            {t("goBack")}
           </Button>
         </div>
       </div>
@@ -213,11 +214,10 @@ export default function CareerPage() {
 
                 <div className="mb-12">
                   <h2 className="text-3xl font-black text-gray-900 font-heading tracking-tighter mb-4">
-                    Personal Information
+                    {t("title")}
                   </h2>
                   <p className="text-gray-500 text-sm">
-                    Please fill out the form below and attach your latest CV to
-                    apply.
+                    {t("description")}
                   </p>
                 </div>
 
@@ -229,10 +229,10 @@ export default function CareerPage() {
                     {/* First Name, Middle Name, Last Name */}
                     <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-3 gap-6">
                       <Field data-invalid={!!errors.first_name}>
-                        <FieldLabel required>First Name</FieldLabel>
+                        <FieldLabel required>{t("form.firstName")}</FieldLabel>
                         <FieldContent>
                           <Input
-                            placeholder="John"
+                            placeholder={t("form.firstNamePlaceholder")}
                             {...register("first_name")}
                           />
                         </FieldContent>
@@ -242,10 +242,10 @@ export default function CareerPage() {
                       </Field>
 
                       <Field data-invalid={!!errors.middle_name}>
-                        <FieldLabel>Middle Name</FieldLabel>
+                        <FieldLabel>{t("form.middleName")}</FieldLabel>
                         <FieldContent>
                           <Input
-                            placeholder="Robert"
+                            placeholder={t("form.middleNamePlaceholder")}
                             {...register("middle_name")}
                           />
                         </FieldContent>
@@ -255,10 +255,10 @@ export default function CareerPage() {
                       </Field>
 
                       <Field data-invalid={!!errors.last_name}>
-                        <FieldLabel required>Last Name</FieldLabel>
+                        <FieldLabel required>{t("form.lastName")}</FieldLabel>
                         <FieldContent>
                           <Input
-                            placeholder="Doe"
+                            placeholder={t("form.lastNamePlaceholder")}
                             {...register("last_name")}
                           />
                         </FieldContent>
@@ -271,7 +271,7 @@ export default function CareerPage() {
                     {/* Gender */}
                     <Field data-invalid={!!errors.gender}>
                       <FieldLabel className="text-sm font-medium">
-                        Select Gender <span className="text-primary font-bold">*</span>
+                        {t("form.gender")} <span className="text-primary font-bold">*</span>
                       </FieldLabel>
                       <FieldContent>
                         <Controller
@@ -283,11 +283,11 @@ export default function CareerPage() {
                               value={field.value}
                             >
                               <SelectTrigger>
-                                <SelectValue placeholder="-Select Gender-" />
+                                <SelectValue placeholder={t("form.genderPlaceholder")} />
                               </SelectTrigger>
                               <SelectContent className="bg-white">
-                                <SelectItem value="male">Male</SelectItem>
-                                <SelectItem value="female">Female</SelectItem>
+                                <SelectItem value="male">{t("form.male")}</SelectItem>
+                                <SelectItem value="female">{t("form.female")}</SelectItem>
                               </SelectContent>
                             </Select>
                           )}
@@ -301,7 +301,7 @@ export default function CareerPage() {
                     {/* DOB */}
                     <Field data-invalid={!!errors.dob}>
                       <FieldLabel className="text-sm font-medium">
-                        Date of Birth <span className="text-primary font-bold">*</span>
+                        {t("form.dob")} <span className="text-primary font-bold">*</span>
                       </FieldLabel>
                       <FieldContent>
                         <Controller
@@ -310,7 +310,7 @@ export default function CareerPage() {
                           render={({ field }) => (
                             <DateTimePicker
                               mode="date"
-                              placeholder="Select your birth date"
+                              placeholder={t("form.dobPlaceholder")}
                               value={field.value}
                               onChange={field.onChange}
                             />
@@ -325,7 +325,7 @@ export default function CareerPage() {
                     {/* Nationality */}
                     <Field data-invalid={!!errors.nationality}>
                       <FieldLabel className="text-sm font-medium">
-                        Nationality <span className="text-primary font-bold">*</span>
+                        {t("form.nationality")} <span className="text-primary font-bold">*</span>
                       </FieldLabel>
                       <FieldContent>
                         <Controller
@@ -337,7 +337,7 @@ export default function CareerPage() {
                               onChange={(country) =>
                                 field.onChange(country.alpha2.toUpperCase())
                               }
-                              placeholder="-Select Nationality-"
+                              placeholder={t("form.nationalityPlaceholder")}
                             />
                           )}
                         />
@@ -349,11 +349,11 @@ export default function CareerPage() {
 
                     {/* Email */}
                     <Field data-invalid={!!errors.email}>
-                      <FieldLabel required>Email Address</FieldLabel>
+                      <FieldLabel required>{t("form.email")}</FieldLabel>
                       <FieldContent>
                         <Input
                           type="email"
-                          placeholder="email@example.com"
+                          placeholder={t("form.emailPlaceholder")}
                           {...register("email")}
                         />
                       </FieldContent>
@@ -365,7 +365,7 @@ export default function CareerPage() {
                     {/* Phone */}
                     <Field data-invalid={!!errors.mobile}>
                       <FieldLabel className="text-sm font-medium">
-                        Mobile No <span className="text-primary font-bold">*</span>
+                        {t("form.mobile")} <span className="text-primary font-bold">*</span>
                       </FieldLabel>
                       <FieldContent>
                         <Controller
@@ -376,7 +376,7 @@ export default function CareerPage() {
                               value={field.value}
                               onChange={field.onChange}
                               defaultCountry="AE"
-                              placeholder="Ex: 50 123 4567"
+                              placeholder={t("form.mobilePlaceholder")}
                             />
                           )}
                         />
@@ -388,10 +388,10 @@ export default function CareerPage() {
 
                     {/* Address */}
                     <Field data-invalid={!!errors.address}>
-                      <FieldLabel required>Residential Address</FieldLabel>
+                      <FieldLabel required>{t("form.address")}</FieldLabel>
                       <FieldContent>
                         <Input
-                          placeholder="Enter your full address"
+                          placeholder={t("form.addressPlaceholder")}
                           {...register("address")}
                         />
                       </FieldContent>
@@ -402,10 +402,10 @@ export default function CareerPage() {
 
                     {/* Emirate/City */}
                     <Field data-invalid={!!errors.city}>
-                      <FieldLabel required>Emirate / City</FieldLabel>
+                      <FieldLabel required>{t("form.city")}</FieldLabel>
                       <FieldContent>
                         <Input
-                          placeholder="Dubai"
+                          placeholder={t("form.cityPlaceholder")}
                           {...register("city")}
                         />
                       </FieldContent>
@@ -416,10 +416,10 @@ export default function CareerPage() {
 
                     {/* P.O. Box */}
                     <Field data-invalid={!!errors.pobox}>
-                      <FieldLabel>P.O. Box</FieldLabel>
+                      <FieldLabel>{t("form.pobox")}</FieldLabel>
                       <FieldContent>
                         <Input
-                          placeholder="123456"
+                          placeholder={t("form.poboxPlaceholder")}
                           {...register("pobox")}
                         />
                       </FieldContent>
@@ -431,7 +431,7 @@ export default function CareerPage() {
                     {/* File Upload */}
                     <Field data-invalid={!!errors.resume}>
                       <FieldLabel className="text-sm font-medium">
-                        Attach your CV <span className="text-primary font-bold">*</span>
+                        {t("form.attachCv")} <span className="text-primary font-bold">*</span>
                       </FieldLabel>
                       <FieldContent>
                         <Controller
@@ -515,7 +515,7 @@ export default function CareerPage() {
                                       }}
                                       className="text-xs text-[#A11D1D] hover:text-[#8A1818] font-black uppercase tracking-widest flex items-center gap-1 hover:underline mx-auto mt-2"
                                     >
-                                      Remove File
+                                      {t("form.removeFile")}
                                     </button>
                                   </div>
                                 ) : (
@@ -523,10 +523,10 @@ export default function CareerPage() {
                                     <Upload className="w-10 h-10 text-gray-300 group-hover:text-[#A11D1D] transition-colors" />
                                     <div className="text-center">
                                       <p className="text-sm font-bold text-gray-600">
-                                        Click to upload or drag and drop
+                                        {t("form.uploadText")}
                                       </p>
                                       <p className="text-[10px] text-gray-400 uppercase tracking-widest mt-1">
-                                        Only doc, docx or pdf file allowed
+                                        {t("form.uploadHint")}
                                       </p>
                                     </div>
                                   </>
@@ -546,7 +546,7 @@ export default function CareerPage() {
                     type="submit"
                     disabled={isSubmitting}
                   >
-                    {isSubmitting ? "Submitting..." : "Submit Application"}
+                    {isSubmitting ? t("submitting") : t("submit")}
                   </Button>
                 </form>
               </div>

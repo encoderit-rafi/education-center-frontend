@@ -333,5 +333,94 @@
         "highlightText": " works on adaptive approach and offers flexible and convenient prep options that will move with you and will fit in your hectic schedule. We analyze student’s performance and advise a custom-learning plan to ensure good results. Our proven test-taking strategies, e-learning solutions, and instructions from proficient coaches will sweep away any doubts of success. You will be confident on the test day for optimal performance."
       }
     }
+  },
+  "AssessmentSolutionsPage": {
+    "title": "Assessment Solutions for Universities",
+    "LargeInstitutionalCard": {
+      "title": "Large-Scale Testing Frameworks",
+      "description": "We specialize in managing thousands of simultaneous assessments across multiple geographic locations with zero downtime and iron-clad security.",
+      "badge1": "ISO 27001 Certified",
+      "badge2": "Global Access"
+    },
+    "AnalyticalInsights": {
+      "title": "Advanced Psychometrics",
+      "description": "Beyond scores. We provide item-analysis, reliability coefficients, and longitudinal growth tracking for your entire student body."
+    },
+    "Reporting": {
+      "title": "Institutional Reporting",
+      "description": "Customizable executive dashboards that translate complex testing data into actionable institutional intelligence."
+    },
+    "StrategicIntegration": {
+      "title": "Strategic Integration",
+      "description": "Our systems integrate seamlessly with major LMS platforms including Canvas, Moodle, and Blackboard via LTI standards.",
+      "badge1": "LTI Core",
+      "badge2": "SSO Auth"
+    },
+    "PromotedAcademicServices": {
+      "badge": "Our Core Pillars",
+      "title": "Promoted Academic Services",
+      "services": [
+        {
+          "title": "Exam Proctoring",
+          "description": "Hybrid proctoring combining advanced AI monitoring with elite human invigilators for maximum integrity."
+        },
+        {
+          "title": "Secure Delivery",
+          "description": "Proprietary lockdown browsers ensuring that your intellectual property remains protected at every terminal."
+        },
+        {
+          "title": "Special Accommodations",
+          "description": "Inclusive testing environments supporting WCAG standards and specialized hardware for diverse requirements."
+        }
+      ]
+    },
+    "PartnerWithUs": {
+      "title1": "Join Our Global",
+      "title2": "Academic Network",
+      "description": "TEPTH Academic Atelier partners with forward-thinking institutions to redefine the value of certification. Let's discuss your organization's specific needs.",
+      "directInquiriesTitle": "Direct Inquiries",
+      "directInquiriesText": "partnerships@tepth.academy",
+      "institutionalSupportTitle": "Institutional Support",
+      "institutionalSupportText": "+971 4 000 0000"
+    }
+  },
+  "CareerPage": {
+    "title": "Personal Information",
+    "description": "Please fill out the form below and attach your latest CV to apply.",
+    "successTitle": "Application Sent!",
+    "successDescription": "Thank you for your interest. Our HR team will review your application and contact you soon.",
+    "goBack": "Go Back",
+    "submit": "Submit Application",
+    "submitting": "Submitting...",
+    "form": {
+      "firstName": "First Name",
+      "firstNamePlaceholder": "John",
+      "middleName": "Middle Name",
+      "middleNamePlaceholder": "Robert",
+      "lastName": "Last Name",
+      "lastNamePlaceholder": "Doe",
+      "gender": "Select Gender",
+      "genderPlaceholder": "-Select Gender-",
+      "male": "Male",
+      "female": "Female",
+      "dob": "Date of Birth",
+      "dobPlaceholder": "Select your birth date",
+      "nationality": "Nationality",
+      "nationalityPlaceholder": "-Select Nationality-",
+      "email": "Email Address",
+      "emailPlaceholder": "email@example.com",
+      "mobile": "Mobile No",
+      "mobilePlaceholder": "Ex: 50 123 4567",
+      "address": "Residential Address",
+      "addressPlaceholder": "Enter your full address",
+      "city": "Emirate / City",
+      "cityPlaceholder": "Dubai",
+      "pobox": "P.O. Box",
+      "poboxPlaceholder": "123456",
+      "attachCv": "Attach your CV",
+      "uploadText": "Click to upload or drag and drop",
+      "uploadHint": "Only doc, docx or pdf file allowed",
+      "removeFile": "Remove File"
+    }
   }
 }
