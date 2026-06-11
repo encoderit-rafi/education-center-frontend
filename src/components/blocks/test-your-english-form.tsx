@@ -351,7 +351,50 @@ export default function TestYourEnglishForm() {
                 </FieldContent>
               </Field>
 
-              <Field data-invalid={!!errors.phoneNumber}>
+             
+
+             
+
+              <Field data-invalid={!!errors.country}>
+                <FieldLabel required>Country</FieldLabel>
+                <FieldContent>
+                  <Controller
+                    control={control}
+                    name="country"
+                    render={({ field }) => (
+                      <CountryDropdown
+                        value={field.value}
+                        onChange={(country) => field.onChange(country.name)}
+                        className="h-10"
+                      />
+                    )}
+                  />
+                  {errors.country && (
+                    <FieldError>{errors.country.message}</FieldError>
+                  )}
+                </FieldContent>
+              </Field>
+
+              <Field data-invalid={!!errors.city}>
+                <FieldLabel required>Emirate / City</FieldLabel>
+                <FieldContent>
+                  <div className="relative">
+                    <MapPin
+                      className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+                      size={16}
+                    />
+                    <Input
+                      {...register("city")}
+                      className="pl-10 h-10"
+                      placeholder="Dubai"
+                    />
+                  </div>
+                  {errors.city && (
+                    <FieldError>{errors.city.message}</FieldError>
+                  )}
+                </FieldContent>
+              </Field>
+               <Field data-invalid={!!errors.phoneNumber}>
                 <FieldLabel required>Phone Number</FieldLabel>
                 <FieldContent>
                   <div className="rounded-md border border-input focus-within:ring-1 focus-within:ring-ring overflow-hidden">
@@ -373,8 +416,7 @@ export default function TestYourEnglishForm() {
                   )}
                 </FieldContent>
               </Field>
-
-              <Field data-invalid={!!errors.preferredContactMethod}>
+               <Field data-invalid={!!errors.preferredContactMethod}>
                 <FieldLabel required>Preferred Contact Method</FieldLabel>
                 <FieldContent>
                   <Controller
@@ -422,48 +464,8 @@ export default function TestYourEnglishForm() {
                 </FieldContent>
               </Field>
 
-              <Field data-invalid={!!errors.country}>
-                <FieldLabel required>Country</FieldLabel>
-                <FieldContent>
-                  <Controller
-                    control={control}
-                    name="country"
-                    render={({ field }) => (
-                      <CountryDropdown
-                        value={field.value}
-                        onChange={(country) => field.onChange(country.name)}
-                        className="h-10"
-                      />
-                    )}
-                  />
-                  {errors.country && (
-                    <FieldError>{errors.country.message}</FieldError>
-                  )}
-                </FieldContent>
-              </Field>
-
-              <Field data-invalid={!!errors.city}>
-                <FieldLabel required>Emirate / City</FieldLabel>
-                <FieldContent>
-                  <div className="relative">
-                    <MapPin
-                      className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
-                      size={16}
-                    />
-                    <Input
-                      {...register("city")}
-                      className="pl-10 h-10"
-                      placeholder="Dubai"
-                    />
-                  </div>
-                  {errors.city && (
-                    <FieldError>{errors.city.message}</FieldError>
-                  )}
-                </FieldContent>
-              </Field>
-
-              <Field data-invalid={!!errors.preferredTime} className="md:col-span-2">
-                <FieldLabel required>Preferred Time</FieldLabel>
+              <Field data-invalid={!!errors.preferredTime}>
+                <FieldLabel required>Preferred Time to Contact You</FieldLabel>
                 <FieldContent>
                   <Controller
                     control={control}
@@ -509,6 +511,7 @@ export default function TestYourEnglishForm() {
                   )}
                 </FieldContent>
               </Field>
+              
             </div>
 
             <Button

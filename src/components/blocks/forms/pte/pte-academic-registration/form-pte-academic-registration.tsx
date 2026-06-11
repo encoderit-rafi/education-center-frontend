@@ -84,7 +84,7 @@ export default function FormPTEAcademicRegistration({ examId: initialExamId }: F
     };
     return acc;
   }, {});
-  
+
 
   const form = useForm<TPteAcademicSchema>({
     resolver: zodResolver(PteAcademicSchema),
@@ -144,7 +144,7 @@ export default function FormPTEAcademicRegistration({ examId: initialExamId }: F
   const calculateTotal = () => {
     const baseFee = 1350;
     const serviceFee = 100;
-    
+
     const selectedCourseData = formData.selectedCourse
       ? coursesData.find((c: any) => c.id === formData.selectedCourse)
       : null;
@@ -154,9 +154,9 @@ export default function FormPTEAcademicRegistration({ examId: initialExamId }: F
 
     const selectedWorkshopData = formData.selectedWorkshop ? (workshopsData as any)[formData.selectedWorkshop] : null;
     const workshopPrice = selectedWorkshopData?.price || 0;
-    
+
     const subtotal = baseFee + serviceFee + coursePrice + workshopPrice;
-    
+
     return {
       baseFee,
       serviceFee,
@@ -274,8 +274,8 @@ export default function FormPTEAcademicRegistration({ examId: initialExamId }: F
           reason_for_taking: data.reasonForTaking,
           study_level: data.studyLevel,
           occupation_sector: data.occupationSector === "Other"
-             ? data.occupationSectorOther || "Other"
-             : data.occupationSector,
+            ? data.occupationSectorOther || "Other"
+            : data.occupationSector,
           id_type: (data.idType as string) === "emirates_id" ? "emirates" : data.idType,
           id_number: data.idNumber,
           id_country_of_issue: data.idCountryOfIssue,
@@ -328,9 +328,6 @@ export default function FormPTEAcademicRegistration({ examId: initialExamId }: F
         <h1 className="text-4xl md:text-5xl font-black text-slate-900 mb-4 tracking-tight">
           PTE Academic <span className="text-primary">Registration</span>
         </h1>
-        <p className="text-slate-500 text-lg max-w-2xl mx-auto">
-          Secure your Pearson Test of English booking today.
-        </p>
       </div>
 
       <div className="max-w-4xl mx-auto">
@@ -412,11 +409,11 @@ export default function FormPTEAcademicRegistration({ examId: initialExamId }: F
                   { label: "Destination Country", value: formData.planningCountry || "N/A" },
                   { label: "Reason for Test", value: `${getReasonLabel(formData.reasonForTaking)} ${formData.studyLevel ? `(${formData.studyLevel})` : ""}`.trim() },
                   ...(formData.occupationSector ? [{
-                     label: "Occupation Sector",
-                     value: formData.occupationSector === "Other"
-                       ? formData.occupationSectorOther || "Other"
-                       : formData.occupationSector
-                   }] : []),
+                    label: "Occupation Sector",
+                    value: formData.occupationSector === "Other"
+                      ? formData.occupationSectorOther || "Other"
+                      : formData.occupationSector
+                  }] : []),
                   { label: "Current Situation", value: formData.currentSituation },
                 ]}
               />

@@ -832,6 +832,12 @@ function MonthYearPicker({ value, onChange, error }: { value?: Date; onChange: (
   const [open, setOpen] = React.useState(false);
   const [pickerYear, setPickerYear] = React.useState(value?.getFullYear() ?? new Date().getFullYear());
 
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+  const currentMonth = currentDate.getMonth(); // 0-indexed
+
+  const isPrevYearDisabled = pickerYear <= currentYear;
+
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger render={
@@ -849,11 +855,20 @@ function MonthYearPicker({ value, onChange, error }: { value?: Date; onChange: (
       } />
       <PopoverContent className="w-64 p-3" align="start">
         <div className="flex items-center justify-between pt-1 pb-4">
-          <Button variant="outline" className="h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100" onClick={() => setPickerYear(y => y - 1)}>
+          <Button
+            variant="outline"
+            className="h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100"
+            onClick={() => setPickerYear(y => y - 1)}
+            disabled={isPrevYearDisabled}
+          >
             <ChevronLeftIcon className="h-4 w-4" />
           </Button>
           <div className="text-sm font-medium">{pickerYear}</div>
-          <Button variant="outline" className="h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100" onClick={() => setPickerYear(y => y + 1)}>
+          <Button
+            variant="outline"
+            className="h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100"
+            onClick={() => setPickerYear(y => y + 1)}
+          >
             <ChevronRightIcon className="h-4 w-4" />
           </Button>
         </div>
@@ -861,11 +876,14 @@ function MonthYearPicker({ value, onChange, error }: { value?: Date; onChange: (
           {Array.from({ length: 12 }, (_, i) => {
             const date = new Date(pickerYear, i, 1);
             const isSelected = value?.getMonth() === i && value?.getFullYear() === pickerYear;
+            const isMonthDisabled = pickerYear < currentYear || (pickerYear === currentYear && i < currentMonth);
+
             return (
               <Button
                 key={i}
                 variant={isSelected ? "default" : "ghost"}
                 className="h-9 w-full text-sm font-normal"
+                disabled={isMonthDisabled}
                 onClick={() => {
                   onChange(date);
                   setOpen(false);

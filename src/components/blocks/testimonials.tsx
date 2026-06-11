@@ -134,7 +134,7 @@ function TestimonialCard({
         </div>
       </div>
 
-      <p className="text-gray-800 text-lg font-medium leading-relaxed line-clamp-4">
+      <p className="text-gray-800 text-lg font-medium leading-relaxed line-clamp-4 text-justify">
         &quot;{t.quote}&quot;
       </p>
 

@@ -349,11 +349,7 @@ export function RegistrationFormStep({
                 value={formData.countryOfCitizenship}
                 onChange={(c) => setValue("countryOfCitizenship", c.name)}
               />
-              {formData.countryOfCitizenship === "Syrian Arab Republic" && (
-                <p className="mt-2 text-xs text-red-800 font-semibold">
-                  A group of residence outside Syria is required to take the test
-                </p>
-              )}
+
               <FieldError errors={[errors.countryOfCitizenship]} />
             </FieldContent>
           </Field>

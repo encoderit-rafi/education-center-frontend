@@ -407,9 +407,6 @@ export default function FormPTEHomeA2Registration({ examId: initialExamId }: For
         <h1 className="text-4xl md:text-5xl font-black text-slate-900 mb-4 tracking-tight">
           PTE Home <span className="text-primary">A2</span> Registration
         </h1>
-        <p className="text-slate-500 text-lg max-w-2xl mx-auto">
-          Authorized Pearson PTE Home A2 test registration portal.
-        </p>
       </div>
 
       <div className="max-w-4xl mx-auto">

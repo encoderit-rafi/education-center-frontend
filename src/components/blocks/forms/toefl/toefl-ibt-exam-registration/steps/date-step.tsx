@@ -150,7 +150,7 @@ export function DateStep({
                   <span>Express Registration Fee Applies</span>
                 </div>
                 <p className="text-xs text-amber-800 font-medium">
-                  Since your selected exam date is 7 days or less from today, an <strong>Express Registration Fee of $40 <span className="text-xs inline-flex items-center gap-0.5">(estimated <AED className="h-[0.8em] w-auto fill-current" />190)</span></strong> will be automatically applied to your registration total.
+                  Since your selected exam date is 7 days or less from today, an <strong>Express Registration Fee of $49 <span className="text-xs inline-flex items-center gap-0.5">(estimated <AED className="h-[0.8em] w-auto fill-current" />190)</span></strong> will be automatically applied to your registration total.
                 </p>
               </div>
             )}

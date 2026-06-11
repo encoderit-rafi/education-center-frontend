@@ -357,9 +357,6 @@ export default function FormTOEFLIBTRegistration({ examId: initialExamId }: Form
                 <h1 className="text-4xl md:text-5xl font-black text-slate-900 mb-4 tracking-tight uppercase">
                     TOEFL iBT <span className="text-[#A11D1D]">Registration</span>
                 </h1>
-                <p className="text-slate-500 text-lg max-w-2xl mx-auto font-medium">
-                    Complete your TOEFL iBT registration in few easy steps.
-                </p>
             </div>
 
             <div className="max-w-4xl mx-auto">

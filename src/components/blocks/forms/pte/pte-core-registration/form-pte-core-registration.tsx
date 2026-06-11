@@ -91,7 +91,7 @@ export default function FormPTECoreRegistration({ examId: initialExamId }: FormP
     };
     return acc;
   }, {});
-  
+
 
   const form = useForm<TPteCoreSchema>({
     resolver: zodResolver(PteCoreSchema),
@@ -158,7 +158,7 @@ export default function FormPTECoreRegistration({ examId: initialExamId }: FormP
   const calculateTotal = () => {
     const baseFee = EXAM_FEE;
     const serviceFee = SERVICE_FEE;
-    
+
     const selectedCourseData = formData.selectedCourse
       ? coursesData.find((c: any) => c.id === formData.selectedCourse)
       : null;
@@ -168,9 +168,9 @@ export default function FormPTECoreRegistration({ examId: initialExamId }: FormP
 
     const selectedWorkshopData = formData.selectedWorkshop ? (workshopsData as any)[formData.selectedWorkshop] : null;
     const workshopPrice = selectedWorkshopData?.price || 0;
-    
+
     const subtotal = baseFee + serviceFee + coursePrice + workshopPrice;
-    
+
     return {
       baseFee,
       serviceFee,
@@ -288,8 +288,8 @@ export default function FormPTECoreRegistration({ examId: initialExamId }: FormP
           reason_for_taking: data.reasonForTaking,
           study_level: data.studyLevel,
           occupation_sector: data.occupationSector === "Other"
-             ? data.occupationSectorOther || "Other"
-             : data.occupationSector,
+            ? data.occupationSectorOther || "Other"
+            : data.occupationSector,
           id_type: (data.idType as string) === "emirates_id" ? "emirates" : data.idType,
           id_number: data.idNumber,
           id_country_of_issue: data.idCountryOfIssue,
@@ -338,9 +338,6 @@ export default function FormPTECoreRegistration({ examId: initialExamId }: FormP
         <h1 className="text-4xl md:text-5xl font-black text-slate-900 mb-4 tracking-tight">
           PTE Core <span className="text-primary">Registration</span>
         </h1>
-        <p className="text-slate-500 text-lg max-w-2xl mx-auto">
-          Authorized Canadian Immigration (IRCC) test registration portal.
-        </p>
       </div>
 
       <div className="max-w-4xl mx-auto">
@@ -418,11 +415,11 @@ export default function FormPTECoreRegistration({ examId: initialExamId }: FormP
                   { label: "Country of Residence", value: formData.countryOfResidence },
                   { label: "Reason for Test", value: getReasonLabel(formData.reasonForTaking) },
                   ...(formData.occupationSector ? [{
-                     label: "Occupation Sector",
-                     value: formData.occupationSector === "Other"
-                       ? formData.occupationSectorOther || "Other"
-                       : formData.occupationSector
-                   }] : []),
+                    label: "Occupation Sector",
+                    value: formData.occupationSector === "Other"
+                      ? formData.occupationSectorOther || "Other"
+                      : formData.occupationSector
+                  }] : []),
                 ]}
               />
             </GlobalReviewStep>

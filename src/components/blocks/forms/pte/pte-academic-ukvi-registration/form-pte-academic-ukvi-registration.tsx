@@ -423,9 +423,6 @@ export default function FormPTEAcademicUKVIRegistration({ examId: initialExamId 
         <h1 className="text-4xl md:text-5xl font-black text-slate-900 mb-4 tracking-tight">
           PTE Academic <span className="text-primary">UKVI</span> Registration
         </h1>
-        <p className="text-slate-500 text-lg max-w-2xl mx-auto">
-          Authorized UK Visa & Immigration (UKVI) test registration portal.
-        </p>
       </div>
 
       <div className="max-w-4xl mx-auto">

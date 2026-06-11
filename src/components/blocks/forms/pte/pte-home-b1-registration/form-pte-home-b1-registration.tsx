@@ -91,7 +91,7 @@ export default function FormPTEHomeB1Registration({ examId: initialExamId }: For
     };
     return acc;
   }, {});
-  
+
 
   const form = useForm<TPteHomeB1Schema>({
     resolver: zodResolver(PteHomeB1Schema),
@@ -167,9 +167,9 @@ export default function FormPTEHomeB1Registration({ examId: initialExamId }: For
     const workshopPrice = formData.selectedWorkshop
       ? (workshopsData as any)[formData.selectedWorkshop].price
       : 0;
-    
+
     const total = baseFee + serviceFee + coursePrice + workshopPrice;
-    
+
     return {
       baseFee,
       serviceFee,
@@ -322,7 +322,7 @@ export default function FormPTEHomeB1Registration({ examId: initialExamId }: For
 
   const onInvalid = (errors: any) => {
     console.error("Validation Errors:", errors);
-    
+
     const fieldLabels: Record<string, string> = {
       givenNames: "First / Given Names",
       surnames: "Surnames",
@@ -366,7 +366,7 @@ export default function FormPTEHomeB1Registration({ examId: initialExamId }: For
       const firstErrorField = errorFields[0];
       const errorMessage = errors[firstErrorField]?.message || "This field is required";
       const label = fieldLabels[firstErrorField] || firstErrorField;
-      
+
       toast.error(`Validation Error: ${label} - ${errorMessage}`, {
         description: `Please fix ${errorFields.length} field(s) before proceeding.`,
         duration: 5000,
@@ -382,7 +382,7 @@ export default function FormPTEHomeB1Registration({ examId: initialExamId }: For
 
   const nextStep = async () => {
     let fieldsToValidate: any[] = [];
-    
+
     if (currentStep === 1) {
       fieldsToValidate = ["examDate", "examTime"];
     } else if (currentStep === 2) {
@@ -407,9 +407,6 @@ export default function FormPTEHomeB1Registration({ examId: initialExamId }: For
         <h1 className="text-4xl md:text-5xl font-black text-slate-900 mb-4 tracking-tight">
           PTE Home <span className="text-primary">B1</span> Registration
         </h1>
-        <p className="text-slate-500 text-lg max-w-2xl mx-auto">
-          Authorized Pearson PTE Home B1 test registration portal.
-        </p>
       </div>
 
       <div className="max-w-4xl mx-auto">
