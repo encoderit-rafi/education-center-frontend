@@ -72,7 +72,7 @@ export default function WhoWeAre() {
             />
 
             {/* Detailed Text */}
-            <div className="space-y-8 text-base leading-relaxed">
+            <div className="space-y-8 text-base leading-relaxed text-justify">
               <p className="text-primary">
                 {t("NarrativeSection.p1")}
               </p>

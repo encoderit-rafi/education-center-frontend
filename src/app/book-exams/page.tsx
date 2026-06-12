@@ -53,7 +53,7 @@ const BOOK_STEPS = [
   {
     step: "03",
     title: "Select TEPTH as Your Centre",
-    desc: "When choosing your test centre, search for TEPTH in Dubai Silicon Oasis. If you need help, call us on +971 4 333 3616.",
+    desc: "When choosing your test centre, search for TEPTH in Dubai Silicon Oasis. If you need help, call us on +97165531250.",
     icon: MapPin,
   },
   {

@@ -1,6 +1,7 @@
 "use client";
 import { format } from "date-fns";
 import { GlobalReviewStep, ReviewSummaryGrid } from "@/components/blocks/forms/global-review-step";
+import { PriceDisplay } from "@/components/ui/price-display";
 
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -376,6 +377,85 @@ export default function FormSELTC1Registration({ examId: initialExamId }: FormPr
               selectedWorkshopData={formData.selectedWorkshop ? (workshopsData as any)[formData.selectedWorkshop] : undefined}
               reviewStepNumber={4}
               paymentStepNumber={5}
+              customOrderSummary={
+                <>
+                  {activeExam?.usdExamFee && (
+                    <div className="flex justify-between text-sm">
+                      <span className="text-slate-500 font-medium">USD Exam Fee</span>
+                      <span className="font-bold text-slate-900">
+                        ${parseFloat(activeExam.usdExamFee).toFixed(2)}
+                      </span>
+                    </div>
+                  )}
+
+                  <div className="flex justify-between text-sm">
+                    <span className="text-slate-500 font-medium">{examName}</span>
+                    <div className="flex items-center gap-1">
+                      <span className="text-xs text-slate-400 font-normal">Estimated</span>
+                      <PriceDisplay
+                        amount={pricing.baseFee}
+                        className="font-bold text-slate-900"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="flex justify-between text-sm">
+                    <span className="text-slate-500 font-medium">
+                      Registration Service Fee
+                    </span>
+                    <PriceDisplay
+                      amount={pricing.serviceFee}
+                      className="font-bold text-slate-900"
+                    />
+                  </div>
+
+                  {formData.selectedCourse && (
+                    (() => {
+                      const selectedCourse = coursesData.find((c: any) => c.id === formData.selectedCourse);
+                      return selectedCourse ? (
+                        <div className="flex justify-between text-sm">
+                          <span className="text-slate-500 font-medium">
+                            Course: {selectedCourse.name}
+                          </span>
+                          <PriceDisplay
+                            amount={selectedCourse.discounted_price ?? selectedCourse.price}
+                            className="font-bold text-slate-900"
+                          />
+                        </div>
+                      ) : null;
+                    })()
+                  )}
+
+                  {formData.selectedWorkshop && (
+                    (() => {
+                      const selectedWorkshop = (workshopsData as any)[formData.selectedWorkshop];
+                      return selectedWorkshop ? (
+                        <div className="flex justify-between text-sm">
+                          <span className="text-slate-500 font-medium">
+                            Workshop: {selectedWorkshop.name}
+                          </span>
+                          <PriceDisplay
+                            amount={selectedWorkshop.price}
+                            className="font-bold text-slate-900"
+                          />
+                        </div>
+                      ) : null;
+                    })()
+                  )}
+
+                  <div className="pt-6 border-t border-slate-200">
+                    <div className="flex justify-between items-center">
+                      <span className="font-black text-xs uppercase tracking-[0.2em] text-slate-900">
+                        Total Amount
+                      </span>
+                      <PriceDisplay
+                        amount={total}
+                        className="text-3xl font-black text-primary"
+                      />
+                    </div>
+                  </div>
+                </>
+              }
             >
               <ReviewSummaryGrid
                 personalDetails={[

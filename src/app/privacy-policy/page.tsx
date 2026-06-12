@@ -57,10 +57,10 @@ export default function PrivacyPolicyPage() {
                     {t("sidebarDescription")}
                   </p>
                   <a
-                    href="mailto:info@tepth.net"
+                    href="mailto:info@tepth.org"
                     className="text-xs font-bold text-[#A11D1D] hover:underline"
                   >
-                    info@tepth.net
+                    info@tepth.org
                   </a>
                 </div>
               </div>

@@ -62,7 +62,7 @@ export const SectionHeader = ({
       {description && (
         <p
           className={cn(
-            "section-description max-w-3xl",
+            "section-description max-w-3xl text-justify",
             align === "center" && "mx-auto",
             descriptionClassName
           )}

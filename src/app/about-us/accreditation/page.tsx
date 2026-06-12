@@ -60,7 +60,7 @@ export default function Accreditation() {
                   </div>
                 </div>
                 <div className="flex-1 space-y-6">
-                  <p className="text-base leading-relaxed font-medium">
+                  <p className="text-base leading-relaxed font-medium text-justify">
                     {t("SEDD.description")}
                   </p>
                 </div>
@@ -69,7 +69,7 @@ export default function Accreditation() {
               {/* SPEA */}
               <div className="flex flex-col md:flex-row items-center gap-10 group">
                 <div className="flex-1 space-y-6">
-                  <p className="text-base leading-relaxed font-medium">
+                  <p className="text-base leading-relaxed font-medium text-justify">
                     {t("SPEA.description")}
                   </p>
                 </div>

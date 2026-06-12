@@ -38,7 +38,7 @@ export default function VendorPartnershipsPage() {
               <span className="text-primary italic">{t("titleAccent")}</span>
             </h1>
 
-            <div className="space-y-4 text-slate-700 text-sm sm:text-base leading-relaxed font-light">
+            <div className="space-y-4 text-slate-700 text-sm sm:text-base leading-relaxed font-light text-justify">
               <p>
                 {t("p1")}
               </p>

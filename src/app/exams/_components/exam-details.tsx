@@ -24,6 +24,7 @@ import {
 } from "@/components/blocks/cards/base-card";
 import GradientBox from "@/components/blocks/gradient-box";
 import { buttonVariants } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
 
 import { EXAM_DETAILE_DATA } from "@/data";
 
@@ -53,21 +54,44 @@ const IconTile = ({ icon, size = 20 }: { icon: string; size?: number }) => {
 };
 
 export default function ExamDetails({ data }: { data: any }) {
+  const t = useTranslations("ExamDetailsPage");
+
   // Find matching static metadata to enrich the dynamic backend data
   const staticMeta = EXAM_DETAILE_DATA.find(
     (item: any) =>
       item.id === data.id ||
       item.slug === data.slug ||
       item.name?.toLowerCase() === data.name?.toLowerCase()
-  );
+  ) as any;
+
+  // Look up localized metadata from translations
+  const examId = staticMeta?.id || data.id;
+  let localizedMeta: any = {};
+  if (examId) {
+    try {
+      localizedMeta = t.raw(examId) || {};
+    } catch (e) {
+      // Graceful fallback to static English data if translation key doesn't exist
+    }
+  }
 
   const detailData = {
     ...staticMeta,
+    ...localizedMeta,
     ...data,
   };
 
   const stats = detailData.stats || [];
-  const sections = detailData.sections || [];
+
+  // Safely merge sections to preserve the static icon property
+  const sections = (detailData.sections || []).map((section: any, idx: number) => {
+    const staticSection = staticMeta?.sections?.[idx] || {};
+    return {
+      ...staticSection,
+      ...section,
+    };
+  });
+
   const whoShouldTake = detailData.whoShouldTake || [];
   const acceptedFor = detailData.acceptedFor || [];
   const faqs = detailData.faqs || [];

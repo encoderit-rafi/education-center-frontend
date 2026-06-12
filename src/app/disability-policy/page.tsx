@@ -135,7 +135,7 @@ export default function DisabilityPolicyPage() {
                 <div className="container px-6 mx-auto text-center">
                     <p className="text-gray-400 mb-6">{t("contactPrompt")}</p>
                     <a
-                        href="mailto:info@tepth.net"
+                        href="mailto:info@tepth.org"
                         className="inline-flex items-center justify-center px-10 py-5 bg-[#111827] text-white font-black text-xs uppercase tracking-[0.2em] rounded-none hover:bg-[#A11D1D] transition-all"
                     >
                         {t("contactBtn")}
