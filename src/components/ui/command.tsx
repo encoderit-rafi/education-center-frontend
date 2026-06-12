@@ -37,6 +37,7 @@ function CommandDialog({
   className,
   overlayClassName,
   showCloseButton = false,
+  shouldFilter,
   ...props
 }: Omit<React.ComponentProps<typeof Dialog>, "children"> & {
   title?: string;
@@ -44,6 +45,7 @@ function CommandDialog({
   className?: string;
   overlayClassName?: string;
   showCloseButton?: boolean;
+  shouldFilter?: boolean;
   children: React.ReactNode;
 }) {
   return (
@@ -60,7 +62,10 @@ function CommandDialog({
         overlayClassName={overlayClassName}
         showCloseButton={showCloseButton}
       >
-        <Command className="[&_[data-slot=command-input-wrapper]_input]:h-12 [&_[data-slot=command-group]:not([hidden])_~_[data-slot=command-group]]:pt-0 [&_[data-slot=command-group]]:px-2 [&_[data-slot=command-input-wrapper]_svg]:size-5 [&_[data-slot=command-item]]:px-3 [&_[data-slot=command-item]]:py-3 [&_[data-slot=command-item]_svg]:size-5">
+        <Command
+          shouldFilter={shouldFilter}
+          className="[&_[data-slot=command-input-wrapper]_input]:h-12 [&_[data-slot=command-group]:not([hidden])_~_[data-slot=command-group]]:pt-0 [&_[data-slot=command-group]]:px-2 [&_[data-slot=command-input-wrapper]_svg]:size-5 [&_[data-slot=command-item]]:px-3 [&_[data-slot=command-item]]:py-3 [&_[data-slot=command-item]_svg]:size-5"
+        >
           {children}
         </Command>
       </DialogContent>
