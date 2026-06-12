@@ -43,6 +43,7 @@ interface SearchResult {
 export default function SearchCommand({ className }: { className?: string }) {
   const [open, setOpen] = React.useState(false);
   const [query, setQuery] = React.useState("");
+  const [debouncedQuery, setDebouncedQuery] = React.useState("");
   const [results, setResults] = React.useState<SearchResult[]>([]);
   const [isLoading, setIsLoading] = React.useState(false);
   const router = useRouter();
@@ -62,14 +63,31 @@ export default function SearchCommand({ className }: { className?: string }) {
   React.useEffect(() => {
     if (!open) {
       setQuery("");
+      setDebouncedQuery("");
       setResults([]);
       setIsLoading(false);
     }
   }, [open]);
 
-  // Debounced API search
+  // Debounce query
   React.useEffect(() => {
     if (!query.trim()) {
+      setDebouncedQuery("");
+      return;
+    }
+
+    const handler = setTimeout(() => {
+      setDebouncedQuery(query);
+    }, 300);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [query]);
+
+  // API search on debounced query
+  React.useEffect(() => {
+    if (!debouncedQuery.trim()) {
       setResults([]);
       setIsLoading(false);
       return;
@@ -78,13 +96,13 @@ export default function SearchCommand({ className }: { className?: string }) {
     let active = true;
     setIsLoading(true);
 
-    const handler = setTimeout(async () => {
+    const fetchData = async () => {
       try {
         const response = await api.get<{
           success: boolean;
           message: string;
           data: SearchResult[];
-        }>("/search-everything", { params: { q: query } });
+        }>("/search-everything", { params: { q: debouncedQuery } });
 
         if (active) {
           if (response.data?.success) {
@@ -103,13 +121,14 @@ export default function SearchCommand({ className }: { className?: string }) {
           setIsLoading(false);
         }
       }
-    }, 300);
+    };
+
+    fetchData();
 
     return () => {
       active = false;
-      clearTimeout(handler);
     };
-  }, [query]);
+  }, [debouncedQuery]);
 
   const runCommand = React.useCallback((command: () => void) => {
     setOpen(false);
