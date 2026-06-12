@@ -2386,5 +2386,81 @@
         "UK Visas and Immigration (UKVI)"
       ]
     }
+  },
+  "TermsSteps": {
+    "title": "Terms and Conditions",
+    "agreeBtn": "I Agree & Continue",
+    "pte": {
+      "0": "The Exam Preparation & Testing House L.L.C facilitates <bold>{examName}</bold> test registration strictly as an optional convenience for candidates. We expressly disclaim any liability or involvement regarding test administration, scoring, technical issues, or the distribution of results. Alternatively, candidates may choose to register directly via the official exam provider's portal while designating our facility as their testing location.",
+      "1": "If you require special testing accommodations, please do not proceed with this online form. Instead, contact us directly so we can assist you with your registration.",
+      "2": "Our test center takes full responsibility for any data entry errors or incorrect information submitted by our staff during your registration process.",
+      "3": "Registration for the <bold>{examName}</bold> officially closes <bold>24 hours (1 day)</bold> prior to exam date. Registration must be completed at least 24 hours before your chosen test time. Since testing seats often fill up quickly, we strongly encourage you to secure your booking well ahead of time.",
+      "4": "It doesn't matter if you use our registration service or book the test yourself online—everyone gets the exact same treatment and experience on test day at our center.",
+      "5": "In the UAE, the current fee for the <bold>{examName}</bold> exam is <aed_exam/>. Candidates opting to use the <bold>TEPTH</bold> registration service will incur an administrative fee of <aed_additional/>, which is applied in addition to the standard <bold>{examName}</bold> exam fee.",
+      "6": "Before you use our service to book your test, please reach out to our Help Desk to make sure we still have open seats for your preferred date and time slot.",
+      "7": "If you are under 18, you will need to get written permission from your parent or guardian before you can proceed with your <bold>{examName}</bold> Registration.",
+      "8": "Candidates must be at least 16 years of age to be eligible to sit for the <bold>{examName}</bold> exam.",
+      "9": "On the day of the exam, you must present the exact same, valid form of identification that you used during your registration.",
+      "10": "Candidates who arrive late to the exam will be denied entry and will not be permitted to take the test.",
+      "11": "Test administrators will conduct a respectful security check to verify that no prohibited items are being brought into the testing room. As part of this process, you may be requested to empty your pockets, perform a self-pat-down, or adjust clothing items—such as rolling up sleeves or lifting hoods and pant legs—to confirm no unauthorized materials are concealed.",
+      "12": "For candidates wearing glasses, the proctor will conduct a visual inspection of your eyewear to ensure compliance, strictly without physically touching them. The same applies to hearing aid.",
+      "13": "Before entering the exam room, all personal items, such as wallets, watches, and small purses, must be stored in your assigned locker. Large bags and backpacks are not allowed at your testing station and must be placed in a designated area at the front or back of the room, as instructed by the staff. Additionally, all electronic devices, including phones, smartwatches, and earbuds, are strictly prohibited; they must be completely powered off and locked away prior to entry.",
+      "14": "Candidates are not allowed to bring any food, beverages (including water), or chewing gum into the testing room.",
+      "15": "Using fraudulent identification or attempting to cheat will result in immediate disqualification and removal from the testing center. Furthermore, such actions including any suspicious behaviour will be reported to the exam provider, which can lead to the cancellation of your scores and the forfeiture of your testing fees.",
+      "16": "We are not responsible if we cannot run the test or fulfill our duties due to extreme situations entirely out of our hands. This includes major emergencies like natural disasters, wars, or unexpected power and technical blackouts."
+    },
+    "selt": {
+      "0": "The Skills for English Test (SELT) registration service is offered by The Exam Preparation & Testing House LLC for the convenience of the test-takers. We hold no control or responsibility regarding any issues related to test results, scoring or other. We have no involvement in the test itself.",
+      "1": "The registration service is entirely voluntary and candidates can book their test at the center directly through Pearson without paying for the additional fee. Any candidate who wishes to use TEPTH registration service offered by our staff will be charged an additional AED {additionalFee} (service charge) on top of the Skills for English Test (SELT) fee.",
+      "2": "The test center bears responsibility of any incorrect information filled out during registration by one of our staff.",
+      "3": "Candidates registering using this service and others who register themselves online will be treated the same while taking the test at our center.",
+      "4": "If you are a minor, you will need consent from your parent or guardian.",
+      "5": "If you need special arrangements for the test, please do not complete this online form and contact us to assist your further."
+    },
+    "toefl": {
+      "0": "The TOEFL iBT test registration service is offered by The Exam Preparation & Testing House LLC for the convenience of the test-takers. It is very important that you provide your full address information including the P.O. Box number or Postal Code (Zip Code) for the delivery of your test score report.",
+      "1": "Express shipping for a hard copy TOEFL iBT Score Report delivers within 2–5 business days after scores are confirmed. This service is available in GCC Countries for an additional estimated fee (<price_express/> when selected during registration) and it provides tracking faster than standard mail, which can take several weeks. Express shipping only speeds up the delivery of the report once mailed, not the scoring process itself. However, we hold no control or responsibility regarding any issues related to test results and have no control or involvement in the test itself, the scoring of the test, the release of the results or the delivery of your score report.",
+      "2": "Any candidate who wishes to use TEPTH registration service offered by our staff will be charged an additional <price_additional/> (Estimated Late registration fee <price_late/> applies for late registration period).",
+      "3": "Please be advised that registration is subject to seats availability. It is unlikely that a seat would not be secured. However, if a seat is not available, you can either ask for a refund or reschedule for the next available test date. Before booking the exam using our registration service, candidates are advised to contact our Help Desk to check the seats availability.",
+      "4": "Candidates registering using this service and others who register themselves online will be treated the same while taking the test at our center.",
+      "5": "If you have a permanent disability that is causing you a learning difficulty that requires a special arrangement, please do not complete this online form and contact us. Our employees would be happy to assist your further."
+    },
+    "ieltsAcademic": {
+      "0": "The Exam Preparation & Testing House L.L.C facilitates <bold>CD-IELTS Academic</bold> test registration strictly as an optional convenience for candidates. We expressly disclaim any liability or involvement regarding test administration, scoring, technical issues, or the distribution of results. Alternatively, candidates may choose to register directly via the official exam provider's portal while designating our facility as their testing location.",
+      "1": "If you require special testing accommodations, please do not proceed with this online form. Instead, contact us directly so we can assist you with your registration.",
+      "2": "Registration for the CD-IELTS officially closes <bold>72 hours (3 days)</bold> prior to the start of the Listening, Reading, and Writing sections. Since testing seats often fill up quickly, we strongly encourage you to secure your booking well ahead of time.",
+      "3": "Test sessions at our venue are contingent upon meeting minimum enrollment requirements. In the event of a cancellation due to low registration, the <bold>British Council</bold> will reassign affected candidates to the nearest available testing center. Candidates will be notified accordingly; therefore, it is mandatory to provide a valid email address and mobile phone number upon registration.",
+      "4": "Your CD-IELTS scores will only be delivered electronically. Between 1 and 8 days after your test, you can log into the Test Taker portal to download your digital results (eTRF). Keep in mind that the British Council will not mail you a printed paper copy.",
+      "5": "You have multiple options for sharing your electronic Test Report Form (eTRF) with institutions. You may print a hard copy to submit manually, send the digital file via email, or use the Test Taker portal to route your results directly to the organization.",
+      "6": "It doesn't matter if you use our registration service or book the test yourself online—everyone gets the exact same treatment and experience on test day at our center.",
+      "7": "In the UAE, the current fee for the computer-delivered (CD) <bold>IELTS Academic</bold> exam is <aed_exam/> (VAT inclusive). Candidates opting to use the <bold>TEPTH</bold> registration service will incur an administrative fee of <aed_additional/>, which is applied in addition to the standard CD-IELTS exam fee.",
+      "8": "Before you use our service to book your test, please reach out to our Help Desk to make sure we still have open seats for your preferred date and time slot.",
+      "9": "If you are under 18, you will need to get written permission from your parent or guardian before you can proceed with your CD-IELTS Registration.",
+      "10": "The CD-IELTS exam is generally not advised for candidates who are younger than 16 years old.",
+      "11": "Your Speaking Test may take place either face-to-face with an examiner or via video call. We will inform you of the intended format before finalizing your booking, though please note that the <bold>British Council</bold> must ultimately approve it. If you have a strong preference for one format over the other, please contact us to verify the details before starting your CD-IELTS registration on our website.",
+      "12": "On the day of the exam, you must present the exact same, valid form of identification that you used during your registration.",
+      "13": "Candidates who arrive late to the exam will be denied entry and will not be permitted to take the test.",
+      "14": "Using fraudulent identification or attempting to cheat will result in immediate disqualification and removal from the testing center. Furthermore, such actions including any suspicious behaviour will be reported to the exam provider, which can lead to the cancellation of your scores and the forfeiture of your testing fees.",
+      "15": "We are not responsible if we cannot run the test or fulfill our duties due to extreme situations entirely out of our hands. This includes major emergencies like natural disasters, wars, or unexpected power and technical blackout."
+    },
+    "ieltsGeneral": {
+      "0": "The Exam Preparation & Testing House L.L.C facilitates <bold>CD-IELTS General Training</bold> test registration strictly as an optional convenience for candidates. We expressly disclaim any liability or involvement regarding test administration, scoring, technical issues, or the distribution of results. Alternatively, candidates may choose to register directly via the official exam provider's portal while designating our facility as their testing location.",
+      "1": "If you require special testing accommodations, please do not proceed with this online form. Instead, contact us directly so we can assist you with your registration.",
+      "2": "Our test center takes full responsibility for any data entry errors or incorrect information submitted by our staff during your registration process.",
+      "3": "Registration for the CD-IELTS officially closes <bold>72 hours (3 days)</bold> prior to the start of the Listening, Reading, and Writing sections. Since testing seats often fill up quickly, we strongly encourage you to secure your booking well ahead of time.",
+      "4": "It doesn't matter if you use our registration service or book the test yourself online—everyone gets the exact same treatment and experience on test day at our center.",
+      "5": "In the UAE, the current fee for the computer-delivered (CD) <bold>IELTS General Training</bold> exam is <aed_exam/> (VAT inclusive). Candidates opting to use the <bold>TEPTH</bold> registration service will incur an administrative fee of <aed_additional/>, which is applied in addition to the standard CD-IELTS exam fee.",
+      "6": "Before you use our service to book your test, please reach out to our Help Desk to make sure we still have open seats for your preferred date and time slot.",
+      "7": "If you are under 18, you will need to get written permission from your parent or guardian before you can proceed with your CD-IELTS Registration.",
+      "8": "The CD-IELTS exam is generally not advised for candidates who are younger than 16 years old.",
+      "9": "On the day of the exam, you must present the exact same, valid form of identification that you used during your registration.",
+      "10": "Candidates who arrive late to the exam will be denied entry and will not be permitted to take the test.",
+      "11": "Test administrators will conduct a respectful security check to verify that no prohibited items are being brought into the testing room. As part of this process, you may be requested to empty your pockets, perform a self-pat-down, or adjust clothing items—such as rolling up sleeves or lifting hoods and pant legs—to confirm no unauthorized materials are concealed.",
+      "12": "For candidates wearing glasses, the proctor will conduct a visual inspection of your eyewear to ensure compliance, strictly without physically touching them. The same applies to hearing aid.",
+      "13": "Before entering the exam room, all personal items, such as wallets, watches, and small purses, must be stored in your assigned locker. Large bags and backpacks are not allowed at your testing station and must be placed in a designated area at the front or back of the room, as instructed by the staff. Additionally, all electronic devices, including phones, smartwatches, and earbuds, are strictly prohibited; they must be completely powered off and locked away prior to entry.",
+      "14": "Candidates are not allowed to bring any food, beverages (including water), or chewing gum into the testing room.",
+      "15": "Using fraudulent identification or attempting to cheat will result in immediate disqualification and removal from the testing center. Furthermore, such actions including any suspicious behaviour will be reported to the exam provider, which can lead to the cancellation of your scores and the forfeiture of your testing fees.",
+      "16": "We are not responsible if we cannot run the test or fulfill our duties due to extreme situations entirely out of our hands. This includes major emergencies like natural disasters, wars, or unexpected power and technical blackouts."
+    }
   }
 }
