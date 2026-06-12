@@ -10,12 +10,39 @@ import {
   FieldValues,
   FormProvider,
   useFormContext,
+  FormProviderProps,
 } from "react-hook-form";
 
 import { cn } from "@/lib/utils";
 import { Label } from "@/components/ui/label";
 
-const Form = FormProvider;
+import { useBookingStore } from "@/store/booking-store";
+
+const Form = <
+  TFieldValues extends FieldValues = FieldValues,
+  TContext = any,
+  TTransformedValues extends FieldValues | undefined = undefined,
+>({
+  children,
+  ...props
+}: FormProviderProps<TFieldValues, TContext, TTransformedValues>) => {
+  const selectedDate = useBookingStore((state) => state.selectedDate);
+
+  React.useEffect(() => {
+    if (selectedDate && props.setValue && props.getValues) {
+      try {
+        const currentVal = props.getValues("examDate" as any);
+        if (!currentVal) {
+          props.setValue("examDate" as any, selectedDate as any);
+        }
+      } catch {
+        // Ignore if form doesn't support examDate
+      }
+    }
+  }, [selectedDate, props]);
+
+  return <FormProvider {...props}>{children}</FormProvider>;
+};
 
 type FormFieldContextValue<
   TFieldValues extends FieldValues = FieldValues,

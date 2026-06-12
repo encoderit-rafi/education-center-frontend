@@ -1,16 +1,34 @@
 "use client";
 
-import { useParams } from "next/navigation";
+import * as React from "react";
+import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { TEST_DATES_CARDS_DATA } from "@/data";
-import { ArrowLeft } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import CaelInfo from "@/components/blocks/cael-info";
 import CelpipInfo from "@/components/blocks/celpip-info";
+import { cn } from "@/lib/utils";
+import { useBookingStore } from "@/store/booking-store";
 
 export default function TestDatesDetailPage() {
   const params = useParams();
+  const router = useRouter();
   const id = params.id as string;
+
+  const selectedDate = useBookingStore((state) => state.selectedDate);
+  const setSelectedDate = useBookingStore((state) => state.setSelectedDate);
+
+  // Clear selected date on mount or when id changes
+  React.useEffect(() => {
+    setSelectedDate(null);
+  }, [id, setSelectedDate]);
+
+  const handleBookNow = () => {
+    if (selectedDate) {
+      router.push(`/book-exams/${id}`);
+    }
+  };
 
   // Find the exam metadata from our cards data
   const examMetadata = TEST_DATES_CARDS_DATA.find((e) => e.id === id);
@@ -175,42 +193,67 @@ export default function TestDatesDetailPage() {
               {id === "cael" && <CaelInfo />}
               {id === "celpip-general" && <CelpipInfo />}
             </div>
-            <div className="">
+            <div className="flex flex-col items-center gap-6">
               {!["cael", "celpip-general"].includes(id) && (
-                <Calendar
-                  modifiers={{
-                    available: (date) =>
-                      (id === "ielts" && date.getDay() === 0) ||
-                      (id === "toefl" && [3, 6].includes(date.getDay())) ||
-                      (id === "selt" && [1, 2, 3].includes(date.getDay())) ||
-                      (id === "pte" &&
-                        [0, 1, 2, 3, 4, 6].includes(date.getDay())),
-                  }}
-                  modifiersClassNames={{
-                    available:
-                      "font-semibold text-primary underline underline-offset-4 decoration-primary",
-                  }}
-                  disabled={(date) => {
-                    const isPast =
-                      date < new Date(new Date().setHours(0, 0, 0, 0));
-                    if (id === "ielts") {
-                      return isPast || date.getDay() !== 0;
-                    }
-                    if (id === "toefl") {
-                      return isPast || ![3, 6].includes(date.getDay());
-                    }
-                    if (id === "selt") {
-                      return isPast || ![1, 2, 3].includes(date.getDay());
-                    }
-                    if (id === "pte") {
-                      return (
-                        isPast || ![0, 1, 2, 3, 4, 6].includes(date.getDay())
-                      );
-                    }
-                    return isPast;
-                  }}
-                  className="w-full max-w-xl mx-auto border rounded-md p-8 bg-white shadow-xl"
-                />
+                <>
+                  <Calendar
+                    mode="single"
+                    selected={selectedDate || undefined}
+                    onSelect={(date) => setSelectedDate(date || null)}
+                    modifiers={{
+                      available: (date) =>
+                        (id === "ielts" && date.getDay() === 0) ||
+                        (id === "toefl" && [3, 6].includes(date.getDay())) ||
+                        (id === "selt" && [1, 2, 3].includes(date.getDay())) ||
+                        (id === "pte" &&
+                          [0, 1, 2, 3, 4, 6].includes(date.getDay())),
+                    }}
+                    modifiersClassNames={{
+                      available:
+                        "font-semibold text-primary underline underline-offset-4 decoration-primary",
+                    }}
+                    disabled={(date) => {
+                      const isPast =
+                        date < new Date(new Date().setHours(0, 0, 0, 0));
+                      if (id === "ielts") {
+                        return isPast || date.getDay() !== 0;
+                      }
+                      if (id === "toefl") {
+                        return isPast || ![3, 6].includes(date.getDay());
+                      }
+                      if (id === "selt") {
+                        return isPast || ![1, 2, 3].includes(date.getDay());
+                      }
+                      if (id === "pte") {
+                        return (
+                          isPast || ![0, 1, 2, 3, 4, 6].includes(date.getDay())
+                        );
+                      }
+                      return isPast;
+                    }}
+                    className="w-full max-w-xl mx-auto border rounded-md p-8 bg-white shadow-xl"
+                  />
+                  <div className="w-full max-w-xl flex flex-col items-center gap-3">
+                    <button
+                      onClick={handleBookNow}
+                      disabled={!selectedDate}
+                      className={cn(
+                        "w-full py-4 rounded-xl font-bold text-white transition-all flex items-center justify-center gap-2 cursor-pointer shadow-lg hover:shadow-xl",
+                        selectedDate
+                          ? "bg-primary hover:bg-primary/95 hover:-translate-y-0.5"
+                          : "bg-slate-300 cursor-not-allowed opacity-80"
+                      )}
+                    >
+                      Book Now
+                      <ArrowRight className="size-4" />
+                    </button>
+                    {!selectedDate && (
+                      <p className="text-xs text-slate-400">
+                        * Please select an available date on the calendar to book.
+                      </p>
+                    )}
+                  </div>
+                </>
               )}
             </div>
           </div>
