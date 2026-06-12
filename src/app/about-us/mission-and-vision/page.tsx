@@ -76,7 +76,7 @@ export default function VisionAndMission() {
             />
 
             {/* Detailed Text */}
-            <div className="space-y-8 text-base leading-relaxed">
+            <div className="space-y-8 text-base leading-relaxed text-justify">
               <p className="section-description text-primary">
                 {t("PhilosophySection.p1")}
               </p>

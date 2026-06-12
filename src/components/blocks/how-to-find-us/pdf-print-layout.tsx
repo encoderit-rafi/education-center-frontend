@@ -115,21 +115,56 @@ export function PdfPrintLayout() {
             }
             .pdf-header-logo {
               position: relative !important;
-              width: 160px !important;
-              height: 56px !important;
+              width: 220px !important;
+              height: 77px !important;
             }
             .pdf-header-contact {
-              text-align: right !important;
-              font-size: 11px !important;
-              line-height: 1.7 !important;
-              color: #475569 !important;
+              text-align: left !important;
+              font-size: 10px !important;
+              line-height: 1.5 !important;
+              color: #334155 !important;
+              background: #fafafb !important;
+              border: 1px solid #e2e8f0 !important;
+              border-left: 3.5px solid #991b1b !important;
+              border-radius: 6px !important;
+              padding: 10px 14px !important;
+              box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02) !important;
+              max-width: 290px !important;
+              box-sizing: border-box !important;
             }
             .pdf-header-contact strong {
               display: block !important;
-              font-size: 12px !important;
+              font-size: 11px !important;
               font-weight: 800 !important;
-              color: #1a1a1a !important;
-              margin-bottom: 2px !important;
+              color: #991b1b !important;
+              margin-bottom: 6px !important;
+              text-transform: uppercase !important;
+              letter-spacing: 0.03em !important;
+            }
+            .pdf-header-contact-details {
+              display: flex !important;
+              flex-direction: column !important;
+              gap: 2px !important;
+            }
+            .pdf-header-contact-details span {
+              display: block !important;
+            }
+            .pdf-header-contact-meta {
+              display: flex !important;
+              flex-wrap: wrap !important;
+              gap: 10px !important;
+              margin-top: 6px !important;
+              padding-top: 6px !important;
+              border-top: 1px dashed #e2e8f0 !important;
+              font-size: 9.5px !important;
+            }
+            .pdf-header-contact-meta strong {
+              display: inline !important;
+              color: #334155 !important;
+              font-size: 9.5px !important;
+              text-transform: none !important;
+              letter-spacing: normal !important;
+              margin-bottom: 0 !important;
             }
 
             /* ── Section title bar ── */
@@ -348,10 +383,14 @@ export function PdfPrintLayout() {
           </div>
           <div className="pdf-header-contact">
             <strong>The Exam Preparation &amp; Testing House L.L.C</strong>
-            Tabarak Tower, Suite 701, 7th Floor<br />
-            Corniche Rd, Al Mamzar, Sharjah, UAE<br />
-            Tel: +971 6 553 1250<br />
-            www.tepth.com
+            <div className="pdf-header-contact-details">
+              <span>Suite 701, 7th Floor, Tabarak Tower</span>
+              <span>Corniche Rd, Al Mamzar, Sharjah, UAE</span>
+              <div className="pdf-header-contact-meta">
+                <span><strong>Tel:</strong> +971 6 553 1250</span>
+                <span><strong>Web:</strong> www.tepth.com</span>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -487,8 +526,12 @@ export function PdfPrintLayout() {
             </div>
             <div className="pdf-header-contact">
               <strong>How to Find Us — Continued</strong>
-              Tabarak Tower, Suite 701, Sharjah, UAE<br />
-              Tel: +971 6 553 1250
+              <div className="pdf-header-contact-details">
+                <span>Suite 701, Tabarak Tower, Sharjah, UAE</span>
+                <div className="pdf-header-contact-meta">
+                  <span><strong>Tel:</strong> +971 6 553 1250</span>
+                </div>
+              </div>
             </div>
           </div>
 

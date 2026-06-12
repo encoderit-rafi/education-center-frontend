@@ -10,10 +10,22 @@
     },
     "InformationSection": {
       "items": [
-        { "label": "Exams Offered", "value": "10+" },
-        { "label": "Course Types", "value": "4" },
-        { "label": "Mock Test Results", "value": "72h" },
-        { "label": "Registered Centre", "value": "UAE" }
+        {
+          "label": "Exams Offered",
+          "value": "10+"
+        },
+        {
+          "label": "Course Types",
+          "value": "4"
+        },
+        {
+          "label": "Mock Test Results",
+          "value": "72h"
+        },
+        {
+          "label": "Registered Centre",
+          "value": "UAE"
+        }
       ]
     },
     "BrandsSection": {
@@ -72,10 +84,18 @@
       "title": "Everything You Need, in",
       "titleAccent": "One Place",
       "stats": [
-        { "label": "Noise-free Environment" },
-        { "label": "Top-notch Facility" },
-        { "label": "Quality Service" },
-        { "label": "Licensed & Accredited" }
+        {
+          "label": "Noise-free Environment"
+        },
+        {
+          "label": "Top-notch Facility"
+        },
+        {
+          "label": "Quality Service"
+        },
+        {
+          "label": "Licensed & Accredited"
+        }
       ],
       "features": [
         {
@@ -114,17 +134,39 @@
       "title": "Site Gallery",
       "description": "Take a closer look at our state-of-the-art infrastructure and vibrant student spaces.",
       "images": [
-        { "name": "Exterior Building" },
-        { "name": "Main Entrance" },
-        { "name": "Classroom" },
-        { "name": "Classroom" },
-        { "name": "Computer Room" },
-        { "name": "Lockers" },
-        { "name": "Computer Room" },
-        { "name": "Computer Room" },
-        { "name": "Building Lobby" },
-        { "name": "Building Lobby" },
-        { "name": "Parking Zone" }
+        {
+          "name": "Exterior Building"
+        },
+        {
+          "name": "Main Entrance"
+        },
+        {
+          "name": "Classroom"
+        },
+        {
+          "name": "Classroom"
+        },
+        {
+          "name": "Computer Room"
+        },
+        {
+          "name": "Lockers"
+        },
+        {
+          "name": "Computer Room"
+        },
+        {
+          "name": "Computer Room"
+        },
+        {
+          "name": "Building Lobby"
+        },
+        {
+          "name": "Building Lobby"
+        },
+        {
+          "name": "Parking Zone"
+        }
       ]
     },
     "Testimonials": {
@@ -518,7 +560,10 @@
         {
           "title": "Required Business Licences & Permits",
           "description": "It is very important to partner with a test center that holds the relevant business activity with the local authority to become a test center. The Exam Preparation & Testing House L.L.C is licensed by Sharjah Economic Development Department (SEDD) and regulated by Sharjah Private Education Authority (SPEA).",
-          "badges": ["Licensed by SEDD", "Regulated by SPEA"]
+          "badges": [
+            "Licensed by SEDD",
+            "Regulated by SPEA"
+          ]
         },
         {
           "title": "Test Security",
@@ -531,27 +576,38 @@
         {
           "title": "Flexible Exam Delivery",
           "description": "Flexible scheduling options that accommodate massive single-day events, designated testing windows, Morning, Afternoon & Evening slots, or continuous testing year-round.",
-          "badges": ["Continuous & Event-Based Options"]
+          "badges": [
+            "Continuous & Event-Based Options"
+          ]
         },
         {
           "title": "Top-notch Exam Venues",
           "description": "Our modern, easily accessible testing centers are fully equipped with high-performance hardware and advanced technology to ensure an optimal testing environment.",
-          "badges": ["Easily Accessible & Premium Venues"]
+          "badges": [
+            "Easily Accessible & Premium Venues"
+          ]
         },
         {
           "title": "Noise-Free Environment",
           "description": "To minimize distractions and lower noise levels, we have implemented several workplace enhancements. Workstations feature fabric acoustic panels and are spaced generously apart, while testing rooms are carpeted to ensure a quiet environment. Additionally, we utilize white noise machines in the computer labs, alongside quiet keyboards and high-quality headsets throughout our spaces.",
-          "badges": ["Fabric Acoustic Panels", "White Noise Systems Equipped"]
+          "badges": [
+            "Fabric Acoustic Panels",
+            "White Noise Systems Equipped"
+          ]
         },
         {
           "title": "Technical Infrastructure",
           "description": "Our technical specifications meet your technical requirements. We provide dedicated, robust desktop PCs and 24-inch monitors.",
-          "badges": ["High-Performance Specifications"]
+          "badges": [
+            "High-Performance Specifications"
+          ]
         },
         {
           "title": "Special Accommodation",
           "description": "We provide tailored support for candidates who need testing accommodations, offering personalized services such as extended time, frequent breaks, private rooms, and specialized assistive software and equipment.",
-          "badges": ["Adaptive Assistance Softwares"]
+          "badges": [
+            "Adaptive Assistance Softwares"
+          ]
         }
       ]
     },
@@ -624,9 +680,9 @@
         }
       ],
       "contactBoxText1": "To enquire about our proctoring and examination services, contact us at",
-      "contactBoxPhone": "+971 4 333 3616",
+      "contactBoxPhone": "+97165531250",
       "contactBoxText2": "or",
-      "contactBoxEmail": "info@tepth.net",
+      "contactBoxEmail": "info@tepth.org",
       "contactBoxText3": ". Our team can provide information about implementation, integrations, pricing, and operational support.",
       "facilitiesTitle": "Testing Facility Standards",
       "facilities": [
@@ -790,7 +846,7 @@
       },
       {
         "question": "Can I get brochures or flyers?",
-        "answer": "Yes, you can request them via email at info@tepth.net. Content matches our website."
+        "answer": "Yes, you can request them via email at info@tepth.org. Content matches our website."
       },
       {
         "question": "Is public transport available nearby?",
@@ -968,7 +1024,11 @@
       "assistivePersonnel": {
         "title": "Assistive Personnel",
         "desc": "Qualified scribes, readers, and sign-language interpreters can be provided to assist candidates in conveying their knowledge accurately.",
-        "tags": ["Amanuensis", "Oral Transcribers", "Invigilators"]
+        "tags": [
+          "Amanuensis",
+          "Oral Transcribers",
+          "Invigilators"
+        ]
       }
     },
     "howToApply": {
@@ -1079,7 +1139,7 @@
         "items": [
           "You must apply by completing a signed, type-written TEPTH official Withdrawal/Refund Request Form.",
           "The form is available for download on our website or at the center.",
-          "Submit via email to <strong>info@tepth.net</strong>.",
+          "Submit via email to <strong>info@tepth.org</strong>.",
           "Refunds are processed within six (6) weeks of receipt."
         ]
       },

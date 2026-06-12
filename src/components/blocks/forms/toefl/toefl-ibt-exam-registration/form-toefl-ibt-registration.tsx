@@ -415,10 +415,19 @@ export default function FormTOEFLIBTRegistration({ examId: initialExamId }: Form
                             paymentStepNumber={4}
                             customOrderSummary={
                                 <div className="space-y-4">
+                                    {activeExam?.usdExamFee && (
+                                        <div className="flex justify-between text-sm">
+                                            <span className="text-slate-500 font-medium">USD Exam Fee</span>
+                                            <span className="font-bold text-slate-900">
+                                                ${parseFloat(activeExam.usdExamFee).toFixed(2)}
+                                            </span>
+                                        </div>
+                                    )}
+
                                     <div className="flex justify-between text-sm items-center">
                                         <span className="text-slate-500 font-medium">Standard Registration Fee</span>
                                         <span className="font-bold text-slate-900 inline-flex items-center gap-1">
-                                            $340 <span className="text-slate-400 font-normal text-xs inline-flex items-center gap-0.5">(estimated <PriceDisplay amount={1270} minimumFractionDigits={0} maximumFractionDigits={0} className="text-slate-400 font-normal text-xs" />)</span>
+                                            ${pricing.baseFeeUSD} <span className="text-slate-400 font-normal text-xs inline-flex items-center gap-0.5">(estimated <PriceDisplay amount={pricing.baseFeeAED} minimumFractionDigits={0} maximumFractionDigits={0} className="text-slate-400 font-normal text-xs" />)</span>
                                         </span>
                                     </div>
 

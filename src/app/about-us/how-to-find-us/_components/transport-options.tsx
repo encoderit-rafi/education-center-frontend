@@ -70,7 +70,7 @@ export function TransportOptions() {
                   <h3 className="text-3xl md:text-4xl font-extrabold text-[#1F1F1F] font-heading tracking-tight">{option.title}</h3>
                   <div className="w-16 h-1.5 bg-[#A11D1D]" />
                 </div>
-                <div className="text-gray-600 leading-relaxed text-lg space-y-6">
+                <div className="text-gray-600 leading-relaxed text-lg space-y-6 text-justify">
                   {option.content}
                 </div>
               </div>

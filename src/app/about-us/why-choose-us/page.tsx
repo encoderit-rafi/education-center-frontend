@@ -69,7 +69,7 @@ export default function WhyChooseUs() {
             />
 
             {/* Detailed Text */}
-            <div className="space-y-8 text-base leading-relaxed font-medium">
+            <div className="space-y-8 text-base leading-relaxed font-medium text-justify">
               <p className="section-description text-primary">
                 {t("NarrativeSection.p1")}
               </p>
@@ -80,7 +80,7 @@ export default function WhyChooseUs() {
 
             {/* Feature Block */}
             <div className="bg-primary/5 border border-primary/10 rounded-[2rem] p-10 md:p-14 shadow-sm group hover:bg-primary transition-colors duration-500">
-              <p className="text-lg md:text-xl text-slate-800 leading-relaxed font-black group-hover:text-white">
+              <p className="text-lg md:text-xl text-slate-800 leading-relaxed font-black group-hover:text-white text-justify">
                 <span className="text-primary group-hover:text-white transition-colors">
                   {t("NarrativeSection.highlightStart")}
                 </span>{" "}

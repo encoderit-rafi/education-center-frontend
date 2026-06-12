@@ -28,7 +28,7 @@ interface Capability {
 
 export default function ExamProviderPage() {
   const t = useTranslations("ExamDeliveryPage.ExamProviderPage");
-  
+
   const capabilitiesRaw = t.raw("capabilities");
   const capabilities: Capability[] = [
     {
@@ -110,7 +110,7 @@ export default function ExamProviderPage() {
                 {t("title")} <span className="text-primary italic">{t("titleAccent")}</span>
               </h1>
 
-              <p className="text-sm sm:text-base text-slate-700 leading-relaxed font-sans mb-6 max-w-2xl font-light">
+              <p className="text-sm sm:text-base text-slate-700 leading-relaxed font-sans mb-6 max-w-2xl font-light text-justify">
                 {t("description")}
               </p>
 
@@ -174,7 +174,7 @@ export default function ExamProviderPage() {
                 <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-primary transition-colors duration-300">
                   {cap.title}
                 </h3>
-                <p className="text-slate-600 leading-relaxed font-sans text-sm font-light">
+                <p className="text-slate-600 leading-relaxed font-sans text-sm font-light text-justify">
                   {cap.description}
                 </p>
                 <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-slate-100/70">
