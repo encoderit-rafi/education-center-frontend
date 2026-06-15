@@ -32,6 +32,7 @@ import { PriceDisplay } from "@/components/ui/price-display";
 import api from "@/axios";
 import DiscountAd from "@/components/blocks/discount-ad";
 import PromoDiscount from "@/components/blocks/promo-discount";
+import { getLocale, getTranslations } from "next-intl/server";
 
 interface WorkshopDetail {
   id: string;
@@ -106,6 +107,8 @@ export default async function ExamPreparationDynamicPage({
   params: Promise<{ id: string }>;
 }) {
   const { id: slug } = await params;
+  const locale = await getLocale();
+  const t = await getTranslations("ExamPrepPage");
 
   let course: CourseDetail | null = null;
   let packages: CoursePackage[] = [];
@@ -128,6 +131,18 @@ export default async function ExamPreparationDynamicPage({
   if (!course) {
     notFound();
   }
+
+  // Apply locale-aware description: use translations[locale].description when available
+  const translatedDescription = (course as any)?.translations?.[locale]?.description;
+  if (translatedDescription) {
+    course = { ...course, description: translatedDescription };
+  }
+
+  // Apply locale-aware description for each workshop
+  workshops = workshops.map((w) => {
+    const wTranslated = (w as any)?.translations?.[locale]?.description;
+    return wTranslated ? { ...w, description: wTranslated } : w;
+  });
 
   const data = course; // For easier mapping
 
@@ -273,7 +288,7 @@ export default async function ExamPreparationDynamicPage({
 
                       <p className="text-xs text-slate-600 font-medium leading-relaxed line-clamp-4 text-justify">
                         {workshop.description ||
-                          `Comprehensive ${workshop.duration}-hour intensive workshop focusing on core strategies, mock practice, and live feedback for the ${workshop.subTitle} exam.`}
+                          t("workshopFallback", { duration: workshop.duration, subTitle: workshop.subTitle })}
                       </p>
                     </div>
 

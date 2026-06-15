@@ -2551,5 +2551,39 @@
       "Blogs": "Blogs",
       "Public Holidays": "Public Holidays"
     }
+  },
+  "ExamPrepCourses": {
+    "sectionLabel": "Exam Preparation",
+    "sectionTitle": "Courses Tailored to",
+    "sectionTitleAccent": "Your Goals",
+    "availableFor": "Available for:",
+    "courses": [
+      {
+        "title": "Group Course",
+        "students": "Up to 8 students",
+        "description": "Learn alongside other candidates in a structured classroom environment. Ideal for those who prefer a collaborative study experience.",
+        "discount": "Save 10% off when you book your exam and register for the course with TEPTH and pay online on our website."
+      },
+      {
+        "title": "Semi-Private",
+        "students": "2 students",
+        "description": "Focused sessions with one study partner and a dedicated teacher. Perfect for couples, siblings, or friends preparing together.",
+        "discount": "Save 15% off when you book your exam and register for the course with TEPTH and pay online on our website."
+      },
+      {
+        "title": "1-to-1 In-Class",
+        "students": "You only",
+        "description": "Fully personalised classroom sessions with a teacher dedicated entirely to your needs, pace, and target score.",
+        "discount": "Save 20% off when you book your exam and register for the course with TEPTH and pay online on our website."
+      }
+    ],
+    "discountLabel": "Direct booking discount:",
+    "discountText": "Book any course directly on our website and receive",
+    "discountHighlight": "5% off automatically",
+    "discountNote": "— no code needed.",
+    "viewAllCourses": "View All Courses"
+  },
+  "ExamPrepPage": {
+    "workshopFallback": "Comprehensive {duration}-hour intensive workshop focusing on core strategies, mock practice, and live feedback for the {subTitle} exam."
   }
 }
