@@ -11,6 +11,7 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 
 type NavItem = { name: string; href: string };
 type NavSingle = NavItem & { type: "single" };
@@ -25,6 +26,15 @@ export type AppNavigationProps = {
 
 export default function AppNavigation({ navigations, isLoading }: AppNavigationProps) {
   const pathname = usePathname();
+  const t = useTranslations("NavBar.menu");
+
+  const translateName = (name: string) => {
+    try {
+      return t.has(name) ? t(name) : name;
+    } catch {
+      return name;
+    }
+  };
 
   return (
     <NavigationMenu viewport={false}>
@@ -46,7 +56,7 @@ export default function AppNavigation({ navigations, isLoading }: AppNavigationP
               {item.type === "single" && (
                 <NavigationMenuLink active={isParentActive} asChild>
                   <Link href={item.href} className="capitalize">
-                    {item.name}
+                    {translateName(item.name)}
                   </Link>
                 </NavigationMenuLink>
               )}
@@ -59,11 +69,11 @@ export default function AppNavigation({ navigations, isLoading }: AppNavigationP
                       isActive && "bg-primary text-white font-medium",
                     )}
                   >
-                    <Link href={item.href}>{item.name}</Link>
+                    <Link href={item.href}>{translateName(item.name)}</Link>
                   </NavigationMenuTrigger>
                   <NavigationMenuContent className="z-50 p-1 min-w-36 border bg-white text-primary rounded-xl shadow-2xl">
                     <ul className="flex flex-col gap-1">
-                      {isLoading && item.items.length === 0 ? (
+                       {isLoading && item.items.length === 0 ? (
                         <div className="p-4 flex flex-col gap-2 min-w-[200px]">
                           <div className="h-4 bg-slate-100 animate-pulse rounded w-3/4"></div>
                           <div className="h-4 bg-slate-100 animate-pulse rounded w-1/2"></div>
@@ -82,7 +92,7 @@ export default function AppNavigation({ navigations, isLoading }: AppNavigationP
                                   href={child.href}
                                   className="whitespace-nowrap"
                                 >
-                                  {child.name}
+                                  {translateName(child.name)}
                                 </Link>
                               </NavigationMenuLink>
                             </li>

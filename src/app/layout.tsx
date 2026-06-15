@@ -9,6 +9,7 @@ import SocialSupport from "@/components/blocks/social-support";
 import { Toaster } from "sonner";
 import Providers from "@/components/providers";
 import { NextIntlClientProvider } from "next-intl";
+import { getLocale, getMessages } from "next-intl/server";
 
 const manrope = Manrope({ subsets: ["latin"], variable: "--font-headline" });
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
@@ -18,14 +19,18 @@ export const metadata: Metadata = {
   description: "Prep Smarter, Score Higher",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getLocale();
+  const messages = await getMessages();
+
   return (
     <html
-      lang="en"
+      lang={locale}
+      // dir={locale === "ar" ? "rtl" : "ltr"}
       className={cn(
         "h-full antialiased",
         manrope.variable,
@@ -40,7 +45,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col bg-background text-on-surface font-body selection:bg-red-100 selection:text-red-900">
-        <NextIntlClientProvider>
+        <NextIntlClientProvider messages={messages}>
           <Providers>
             <NavBar />
             <main>{children}</main>

@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 import SearchCommand from "./search-command";
 
@@ -13,6 +14,7 @@ import { LocaleToggle } from "./locale-toggle";
 
 export default function NavBar() {
   const { primaryNav, isLoading } = usePrimaryNav();
+  const t = useTranslations("NavBar");
 
   return (
     <header className="sticky top-0 z-50 overflow-visible shadow-lg">
@@ -21,7 +23,7 @@ export default function NavBar() {
       <div className="relative z-20 nav-px nav-py flex items-center justify-between gap-2 bg-white backdrop-blur-sm">
         <Link href={"/"}>
           <Image
-            alt="TEPTH Logo"
+            alt={t("logoAlt")}
             width={112}
             height={112}
             src="/images/tepth-logo.png"
