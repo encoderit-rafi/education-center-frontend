@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import ExamItems from "../_components/exam-items";
 import ExamDetails from "../_components/exam-details";
 import api from "@/axios";
+import { getLocale } from "next-intl/server";
 
 export default async function ExamDetailPage({
   params,
@@ -9,6 +10,7 @@ export default async function ExamDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id: slug } = await params;
+  const locale = await getLocale();
   console.log("👉 ~ ExamDetailPage ~ id/slug:", slug);
 
   let exam: any = null;
@@ -53,6 +55,12 @@ export default async function ExamDetailPage({
 
   if (!exam) {
     notFound();
+  }
+
+  // Apply locale-aware description: use translations[locale].description when available
+  const translatedDescription = exam?.translations?.[locale]?.description;
+  if (translatedDescription) {
+    exam = { ...exam, description: translatedDescription };
   }
 
   // 3. Determine if it is a parent group (has child items or is labeled group/item) or a detail page

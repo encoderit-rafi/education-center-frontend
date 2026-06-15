@@ -25,6 +25,7 @@ import {
 } from "@/components/ui/command";
 import { cn } from "@/lib/utils";
 import api from "@/axios";
+import { useTranslations } from "next-intl";
 
 interface SearchResult {
   course?: {
@@ -47,6 +48,7 @@ export default function SearchCommand({ className }: { className?: string }) {
   const [results, setResults] = React.useState<SearchResult[]>([]);
   const [isLoading, setIsLoading] = React.useState(false);
   const router = useRouter();
+  const t = useTranslations("Search");
 
   React.useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -169,14 +171,14 @@ export default function SearchCommand({ className }: { className?: string }) {
           "inline-flex size-9 items-center justify-center rounded-md text-sm outline-none transition-[color,box-shadow] focus-visible:border-rounded focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 text-primary hover:text-primary cursor-pointer group",
           className,
         )}
-        aria-label="Search"
+        aria-label={t("placeholder")}
       >
         <Search className="size-4.5 group-hover:scale-110" />
       </button>
 
       <CommandDialog open={open} onOpenChange={setOpen} shouldFilter={!query}>
         <CommandInput
-          placeholder="Search courses, exams, workshops..."
+          placeholder={t("placeholder")}
           value={query}
           onValueChange={setQuery}
         />
@@ -184,20 +186,20 @@ export default function SearchCommand({ className }: { className?: string }) {
           {isLoading && (
             <div className="flex items-center justify-center py-8 text-sm text-muted-foreground gap-2">
               <Loader2 className="h-5 w-5 animate-spin text-primary" />
-              <span>Searching...</span>
+              <span>{t("searching")}</span>
             </div>
           )}
 
           {!isLoading && query && results.length === 0 && (
             <CommandEmpty>
-              No results found for &ldquo;{query}&rdquo;.
+              {t("noResults", { query })}
             </CommandEmpty>
           )}
 
           {!isLoading && query && results.length > 0 && (
             <>
               {courses.length > 0 && (
-                <CommandGroup heading="Courses">
+                <CommandGroup heading={t("courses")}>
                   {courses.map((item) => (
                     <CommandItem
                       key={item.id}
@@ -232,7 +234,7 @@ export default function SearchCommand({ className }: { className?: string }) {
               )}
 
               {exams.length > 0 && (
-                <CommandGroup heading="Exams">
+                <CommandGroup heading={t("exams")}>
                   {exams.map((item) => (
                     <CommandItem
                       key={item.id}
@@ -267,7 +269,7 @@ export default function SearchCommand({ className }: { className?: string }) {
               )}
 
               {workshops.length > 0 && (
-                <CommandGroup heading="Workshops">
+                <CommandGroup heading={t("workshops")}>
                   {workshops.map((item) => (
                     <CommandItem
                       key={item.id}
@@ -302,7 +304,7 @@ export default function SearchCommand({ className }: { className?: string }) {
               )}
 
               {others.length > 0 && (
-                <CommandGroup heading="Other Results">
+                <CommandGroup heading={t("otherResults")}>
                   {others.map((item) => (
                     <CommandItem
                       key={item.id}
@@ -340,49 +342,49 @@ export default function SearchCommand({ className }: { className?: string }) {
 
           {!query && (
             <>
-              <CommandGroup heading="Exams & Registration">
+              <CommandGroup heading={t("examsAndRegistration")}>
                 <CommandItem
                   onSelect={() => runCommand(() => router.push("/contact-us"))}
                 >
                   <GraduationCap className="mr-2 h-4 w-4 text-primary" />
-                  <span>IELTS Registration</span>
+                  <span>{t("ieltsRegistration")}</span>
                 </CommandItem>
                 <CommandItem
                   onSelect={() => runCommand(() => router.push("/contact-us"))}
                 >
                   <Laptop className="mr-2 h-4 w-4 text-primary" />
-                  <span>PTE Core Registration</span>
+                  <span>{t("pteCoreRegistration")}</span>
                 </CommandItem>
                 <CommandItem
                   onSelect={() => runCommand(() => router.push("/contact-us"))}
                 >
                   <Globe className="mr-2 h-4 w-4 text-primary" />
-                  <span>PTE Academic Registration</span>
+                  <span>{t("pteAcademicRegistration")}</span>
                 </CommandItem>
                 <CommandItem
                   onSelect={() => runCommand(() => router.push("/contact-us"))}
                 >
                   <FileText className="mr-2 h-4 w-4 text-primary" />
-                  <span>PTE Home Registration</span>
+                  <span>{t("pteHomeRegistration")}</span>
                 </CommandItem>
               </CommandGroup>
 
               <CommandSeparator />
 
-              <CommandGroup heading="Services">
+              <CommandGroup heading={t("services")}>
                 <CommandItem
                   onSelect={() =>
                     runCommand(() => router.push("/free-consultation"))
                   }
                 >
                   <HelpCircle className="mr-2 h-4 w-4 text-blue-500" />
-                  <span>Free Consultation</span>
+                  <span>{t("freeConsultation")}</span>
                 </CommandItem>
                 <CommandItem
                   onSelect={() => runCommand(() => router.push("/our-venues"))}
                 >
                   <MapPin className="mr-2 h-4 w-4 text-green-500" />
-                  <span>Explore Our Venues</span>
+                  <span>{t("exploreOurVenues")}</span>
                 </CommandItem>
                 <CommandItem
                   onSelect={() =>
@@ -390,18 +392,18 @@ export default function SearchCommand({ className }: { className?: string }) {
                   }
                 >
                   <Laptop className="mr-2 h-4 w-4 text-orange-500" />
-                  <span>Book a Mock Test</span>
+                  <span>{t("bookMockTest")}</span>
                 </CommandItem>
               </CommandGroup>
 
               <CommandSeparator />
 
-              <CommandGroup heading="Support">
+              <CommandGroup heading={t("support")}>
                 <CommandItem
                   onSelect={() => runCommand(() => router.push("/contact-us"))}
                 >
                   <Phone className="mr-2 h-4 w-4" />
-                  <span>Contact Support</span>
+                  <span>{t("contactSupport")}</span>
                 </CommandItem>
                 <CommandItem
                   onSelect={() =>
@@ -409,7 +411,7 @@ export default function SearchCommand({ className }: { className?: string }) {
                   }
                 >
                   <HelpCircle className="mr-2 h-4 w-4" />
-                  <span>Frequently Asked Questions</span>
+                  <span>{t("faqs")}</span>
                 </CommandItem>
               </CommandGroup>
             </>

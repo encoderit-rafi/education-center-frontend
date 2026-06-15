@@ -20,6 +20,25 @@ interface PackageChecklistSectionProps {
   fallback?: string;
 }
 
+export function renderChecklistItem(text: string | React.ReactNode) {
+  if (typeof text !== "string") return text;
+  const parts = text.split("**");
+  if (parts.length <= 1) return text;
+  return (
+    <span>
+      {parts.map((part, i) =>
+        i % 2 === 1 ? (
+          <strong key={i} className="font-bold">
+            {part}
+          </strong>
+        ) : (
+          part
+        )
+      )}
+    </span>
+  );
+}
+
 export function PackageChecklistSection({
   title,
   icon: Icon,
@@ -63,13 +82,13 @@ export function PackageChecklistSection({
             list.map((item, i) => (
               <li key={i} className="flex items-start gap-2.5">
                 <CheckCircle2 className="size-4 text-primary shrink-0 mt-0.5" />
-                <span>{item}</span>
+                <span>{renderChecklistItem(item)}</span>
               </li>
             ))
           ) : (
             <li className="flex items-start gap-2.5">
               <CheckCircle2 className="size-4 text-primary shrink-0 mt-0.5" />
-              <span>{fallback}</span>
+              <span>{renderChecklistItem(fallback)}</span>
             </li>
           )}
         </ul>

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import React, { useState } from "react";
 import { toast } from "sonner";
 import {
   Clock,
@@ -22,6 +22,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
+import { useTranslations } from "next-intl";
 
 function ContactItem({
   icon: Icon,
@@ -59,6 +60,16 @@ function ContactItem({
 
 export default function Footer() {
   const { primaryNav, isLoading } = usePrimaryNav();
+  const t = useTranslations("Footer");
+  const tMenu = useTranslations("NavBar.menu");
+
+  const translateMenuName = (name: string) => {
+    try {
+      return tMenu.has(name) ? tMenu(name) : name;
+    } catch {
+      return name;
+    }
+  };
 
   const usefulLinks = [
     { label: "Home", href: "/" },
@@ -112,63 +123,51 @@ export default function Footer() {
             <div className="space-y-5">
               <ContactItem
                 icon={Clock}
-                copyText="Saturday to Thursday (9:00 AM - 9:00 PM)"
+                copyText={`${t("workingHoursDays")} ${t("workingHoursTime")}`}
                 value={
                   <>
-                    Working Hours:
+                    {t("workingHoursLabel")}
                     <br />
-                    Saturday to Thursday
+                    {t("workingHoursDays")}
                     <br />
-                    (9:00 AM - 9:00 PM)
+                    {t("workingHoursTime")}
                   </>
                 }
               />
               <ContactItem
                 icon={MapPin}
-                // copyText={`The Exam Preparation & Testing House L.L.C \n Suite 701, 7th Floor, Tabarak Tower, Corniche Road, Al Mamzar, Sharjah, United Arab Emirates.`}
-                copyText={INSTITUTIONS_INFO.address}
+                copyText={t("addressText")}
                 value={
                   <>
-                    Our Address:
+                    {t("addressLabel")}
                     <br />
-                    {/* The Exam Preparation & Testing House L.L.C
-                    <br />
-                    Suite 701, 7th Floor, Tabarak Tower, Corniche Road,
-                    <br />
-                    Al Mamzar, Sharjah, United Arab Emirates. */}
-                    {INSTITUTIONS_INFO.address}
+                    {t("addressText").split("\n").map((line, i) => (
+                      <React.Fragment key={i}>
+                        {line}
+                        <br />
+                      </React.Fragment>
+                    ))}
                   </>
                 }
               />
               <ContactItem
                 icon={Mail}
-                // copyText="info@tepth.org"
                 copyText={INSTITUTIONS_INFO.email}
-                // value="Email: info@tepth.org"
-                value={`Email: ${INSTITUTIONS_INFO.email}`}
+                value={`${t("emailLabel")} ${INSTITUTIONS_INFO.email}`}
               />
 
               <ContactItem
                 icon={Phone}
-                // copyText="+97165531250"
                 copyText={INSTITUTIONS_INFO.phone}
-                // value="Tel: +97165531250"
-                value={`Tel: ${INSTITUTIONS_INFO.phone}`}
+                value={`${t("telLabel")} ${INSTITUTIONS_INFO.phone}`}
               />
             </div>
-            {/* <div className="bg-white p-4 rounded-2xl space-y-4 border border-slate-100">
-
-                <div className="h-px bg-red-200/50" />
-
-
-                <div className="h-px bg-red-200/50" />
-              </div> */}
           </div>
 
           {/* Column 2: Our Services (Navbar Links) */}
           <div className="lg:pl-10">
             <h3 className="text-xl font-black uppercase tracking-wider mb-2">
-              Our Services
+              {t("ourServices")}
             </h3>
             <div className="w-14 h-1 bg-red-700 mb-8" />
 
@@ -193,7 +192,7 @@ export default function Footer() {
                             <span className="text-gray-500 scale-75 group-hover:text-red-500 transition-colors">
                               <ChevronRight className="w-6 h-6" />
                             </span>
-                            <span className="flex-1">{nav.name}</span>
+                            <span className="flex-1">{translateMenuName(nav.name)}</span>
                             <ChevronDown className="w-3 h-3 text-gray-500 group-hover:text-red-500 transition-transform group-data-[state=open]:rotate-180" />
                           </DropdownMenuTrigger>
                           <DropdownMenuContent
@@ -214,7 +213,7 @@ export default function Footer() {
                                   <span className="text-gray-500 scale-75 group-hover:text-red-500 transition-colors">
                                     <ChevronRight className="w-6 h-6" />
                                   </span>
-                                  {item.name}
+                                  {translateMenuName(item.name)}
                                 </Link>
                               </DropdownMenuItem>
                             ))}
@@ -228,7 +227,7 @@ export default function Footer() {
                           <span className="text-gray-500 scale-75 group-hover:text-red-500 transition-colors">
                             <ChevronRight className="w-6 h-6" />
                           </span>
-                          {nav.name}
+                          {translateMenuName(nav.name)}
                         </Link>
                       )}
                     </div>
@@ -240,7 +239,7 @@ export default function Footer() {
           {/* Column 3: Useful Links */}
           <div className="lg:pl-10">
             <h3 className="text-xl font-black uppercase tracking-wider mb-2">
-              Useful Link
+              {t("usefulLinks")}
             </h3>
             <div className="w-14 h-1 bg-red-700 mb-8" />
 
@@ -254,7 +253,7 @@ export default function Footer() {
                     <span className="text-gray-500 scale-75 group-hover:text-red-500 transition-colors">
                       <ChevronRight className="w-6 h-6" />
                     </span>
-                    {link.label}
+                    {t("links." + link.label, { defaultValue: link.label })}
                   </Link>
                 </li>
               ))}
@@ -264,7 +263,7 @@ export default function Footer() {
           {/* Column 4: News & Updates */}
           <div className="lg:pl-10">
             <h3 className="text-xl font-black uppercase tracking-wider mb-2">
-              News & Updates
+              {t("newsUpdates")}
             </h3>
             <div className="w-14 h-1 bg-red-700 mb-8" />
 
@@ -278,7 +277,7 @@ export default function Footer() {
                     <span className="text-gray-500 scale-75 group-hover:text-red-500 transition-colors">
                       <ChevronRight className="w-6 h-6" />
                     </span>
-                    {link.label}
+                    {t("links." + link.label, { defaultValue: link.label })}
                   </Link>
                 </li>
               ))}
@@ -292,12 +291,10 @@ export default function Footer() {
         <div className="bg-primary pb-12 -mt-1">
           <div className="container mx-auto px-4 py-8 text-center lg:px-8">
             <p className="text-xs text-gray-100 font-medium">
-              Copyright © {new Date().getFullYear()} by The Exam Preparation &
-              Testing House LLC.
+              {t("copyright", { year: new Date().getFullYear() })}
             </p>
             <p className="mt-1 text-xs text-gray-200">
-              All trademarks and logos appearing on the site are the property of
-              their respective owners.
+              {t("trademarks")}
             </p>
             <div className="mt-6 flex items-center justify-center gap-3">
               {socialLinks.map((social) => (

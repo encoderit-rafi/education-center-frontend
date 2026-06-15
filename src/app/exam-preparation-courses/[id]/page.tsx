@@ -32,6 +32,7 @@ import { PriceDisplay } from "@/components/ui/price-display";
 import api from "@/axios";
 import DiscountAd from "@/components/blocks/discount-ad";
 import PromoDiscount from "@/components/blocks/promo-discount";
+import { getLocale, getTranslations } from "next-intl/server";
 
 interface WorkshopDetail {
   id: string;
@@ -91,7 +92,8 @@ interface CoursePackage {
   duration: string;
   scheduleInfo: string;
   totalHours: string;
-  bestFor: string[];
+  bestFor: (string | React.ReactNode)[];
+  requirements?: string | null;
 }
 
 interface ApiResponse<T> {
@@ -106,6 +108,8 @@ export default async function ExamPreparationDynamicPage({
   params: Promise<{ id: string }>;
 }) {
   const { id: slug } = await params;
+  const locale = await getLocale();
+  const t = await getTranslations("ExamPrepPage");
 
   let course: CourseDetail | null = null;
   let packages: CoursePackage[] = [];
@@ -128,6 +132,71 @@ export default async function ExamPreparationDynamicPage({
   if (!course) {
     notFound();
   }
+
+  // Apply locale-aware description: use translations[locale].description when available
+  const translatedDescription = (course as any)?.translations?.[locale]?.description;
+  if (translatedDescription) {
+    course = { ...course, description: translatedDescription };
+  }
+
+  // Apply locale-aware description/name for each workshop
+  workshops = workshops.map((w) => {
+    const wTrans = (w as any)?.translations?.[locale];
+    const wTranslatedName = wTrans?.name;
+    const wTranslatedDescription = wTrans?.description;
+    return {
+      ...w,
+      name: wTranslatedName || w.name,
+      description: wTranslatedDescription || w.description,
+    };
+  });
+
+  // Helper to parse ** bolds
+  const renderPoint = (text: string) => {
+    if (typeof text !== "string") return text;
+    const parts = text.split("**");
+    if (parts.length <= 1) return text;
+    return (
+      <span>
+        {parts.map((part, i) =>
+          i % 2 === 1 ? (
+            <strong key={i} className="font-bold">
+              {part}
+            </strong>
+          ) : (
+            part
+          )
+        )}
+      </span>
+    );
+  };
+
+  // Apply locale-aware translations for each package
+  packages = packages.map((pkg) => {
+    const pkgTrans = (pkg as any)?.translations?.[locale];
+    const pkgTranslatedName = pkgTrans?.name;
+    const pkgTranslatedDescription = pkgTrans?.description;
+    const pkgTranslatedRequirements = pkgTrans?.requirements;
+    const pkgTranslatedBestFor = pkgTrans?.best_for || pkgTrans?.bestFor;
+    const pkgTranslatedScheduleInfo = pkgTrans?.schedule_info || pkgTrans?.scheduleInfo;
+
+    const rawBestFor = pkgTranslatedBestFor
+      ? Array.isArray(pkgTranslatedBestFor)
+        ? pkgTranslatedBestFor
+        : typeof pkgTranslatedBestFor === "string"
+          ? pkgTranslatedBestFor.split("\n").map((s: string) => s.trim()).filter(Boolean)
+          : pkg.bestFor
+      : pkg.bestFor;
+
+    return {
+      ...pkg,
+      name: pkgTranslatedName || pkg.name,
+      description: pkgTranslatedDescription || pkg.description,
+      requirements: pkgTranslatedRequirements || pkg.requirements,
+      bestFor: rawBestFor.map(renderPoint),
+      scheduleInfo: pkgTranslatedScheduleInfo || pkg.scheduleInfo,
+    };
+  });
 
   const data = course; // For easier mapping
 
@@ -212,11 +281,10 @@ export default async function ExamPreparationDynamicPage({
         <div className="px-4 lg:px-8  mx-auto">
           <div className="mb-12 text-center max-w-3xl mx-auto space-y-4">
             <h2 className="text-4xl font-black text-slate-900 tracking-tight leading-tight">
-              {data.name} <span className="text-primary">Preparation Path</span>
+              {data.name} <span className="text-primary">{t("packages.pathSpan")}</span>
             </h2>
             <p className="text-slate-600 text-lg font-medium leading-relaxed">
-              Master the {data.name} exam with our strategic preparation
-              programs tailored for your success.
+              {t("packages.pathSubtitle", { name: data.name })}
             </p>
           </div>
 
@@ -273,7 +341,7 @@ export default async function ExamPreparationDynamicPage({
 
                       <p className="text-xs text-slate-600 font-medium leading-relaxed line-clamp-4 text-justify">
                         {workshop.description ||
-                          `Comprehensive ${workshop.duration}-hour intensive workshop focusing on core strategies, mock practice, and live feedback for the ${workshop.subTitle} exam.`}
+                          t("workshopFallback", { duration: workshop.duration, subTitle: workshop.subTitle })}
                       </p>
                     </div>
 

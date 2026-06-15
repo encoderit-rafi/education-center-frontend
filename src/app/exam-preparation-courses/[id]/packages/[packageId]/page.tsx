@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import { getLocale, getTranslations } from "next-intl/server";
 import {
   Calendar,
   Clock,
@@ -65,6 +66,8 @@ interface PageProps {
 
 export default async function PackageDetailPage({ params }: PageProps) {
   const { id: courseSlug, packageId } = await params;
+  const locale = await getLocale();
+  const t = await getTranslations("ExamPrepPage");
 
   let course: CourseDetail | null = null;
   try {
@@ -83,10 +86,36 @@ export default async function PackageDetailPage({ params }: PageProps) {
     notFound();
   }
 
+  // Apply course translation if available
+  const courseTranslatedName = (course as any)?.translations?.[locale]?.name;
+  const courseTranslatedDescription = (course as any)?.translations?.[locale]?.description;
+  if (courseTranslatedName) course.name = courseTranslatedName;
+  if (courseTranslatedDescription) course.description = courseTranslatedDescription;
+
   const pkg = course.packages?.find((p) => p.id === packageId);
   if (!pkg) {
     notFound();
   }
+
+  // Apply package translation if available
+  const pkgTrans = (pkg as any)?.translations?.[locale];
+  const pkgTranslatedName = pkgTrans?.name;
+  const pkgTranslatedDescription = pkgTrans?.description;
+  const pkgTranslatedRequirements = pkgTrans?.requirements;
+  const pkgTranslatedBestFor = pkgTrans?.best_for || pkgTrans?.bestFor;
+  const pkgTranslatedScheduleInfo = pkgTrans?.schedule_info || pkgTrans?.scheduleInfo;
+
+  if (pkgTranslatedName) pkg.name = pkgTranslatedName;
+  if (pkgTranslatedDescription) pkg.description = pkgTranslatedDescription;
+  if (pkgTranslatedRequirements) pkg.requirements = pkgTranslatedRequirements;
+  if (pkgTranslatedBestFor) {
+    pkg.bestFor = Array.isArray(pkgTranslatedBestFor)
+      ? pkgTranslatedBestFor
+      : typeof pkgTranslatedBestFor === "string"
+        ? pkgTranslatedBestFor.split("\n").map((s: string) => s.trim()).filter(Boolean)
+        : pkg.bestFor;
+  }
+  if (pkgTranslatedScheduleInfo) pkg.scheduleInfo = pkgTranslatedScheduleInfo;
 
   // Calculate pricing logic exactly as in CourseCard
   const basePrice = parseFloat(pkg.price) || 0;
@@ -159,7 +188,7 @@ export default async function PackageDetailPage({ params }: PageProps) {
             {/* Requirements */}
             {pkg.requirements && (
               <PackageChecklistSection
-                title="During the course, candidates work on:"
+                title={t("packages.requirementsTitle")}
                 icon={Award}
                 items={pkg.requirements}
               />
@@ -167,7 +196,7 @@ export default async function PackageDetailPage({ params }: PageProps) {
 
             {/* Course Features / Best For */}
             <PackageChecklistSection
-              title="This course is particularly suitable for candidates who:"
+              title={t("packages.bestForTitle")}
               icon={User}
               items={pkg.bestFor}
             />
@@ -176,19 +205,19 @@ export default async function PackageDetailPage({ params }: PageProps) {
             <div className="grid sm:grid-cols-3 gap-6">
               <PackageStatCard
                 icon={Clock}
-                label="Duration"
+                label={t("packages.durationLabel")}
                 value={pkg.duration}
-                suffix="Hours"
+                suffix={t("packages.hoursSuffix")}
               />
               <PackageStatCard
                 icon={BookOpen}
-                label="Total Weeks"
+                label={t("packages.weeksLabel")}
                 value={pkg.totalHours}
-                suffix="weeks"
+                suffix={t("packages.weeksSuffix")}
               />
               <PackageStatCard
                 icon={Calendar}
-                label="Schedule"
+                label={t("packages.scheduleLabel")}
                 value={pkg.scheduleInfo}
                 compact
               />
@@ -199,7 +228,7 @@ export default async function PackageDetailPage({ params }: PageProps) {
           <div className="lg:sticky lg:top-44 bg-white rounded-3xl p-6 md:p-8 border border-slate-100 shadow-xl space-y-6">
             <div>
               <p className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-2">
-                Course Package Pricing
+                {t("packages.pricingTitle")}
               </p>
               <div className="flex items-baseline gap-3 flex-wrap">
                 <PriceDisplay
@@ -218,8 +247,10 @@ export default async function PackageDetailPage({ params }: PageProps) {
               {discount > 0 && (
                 <div className="mt-2.5">
                   <Badge className="py-1 px-3 font-bold shadow-sm bg-emerald-50 text-emerald-600 hover:bg-emerald-50/80 border-emerald-200">
-                    SAVE {discount}
-                    {discountType === "PERCENTAGE" ? "%" : " AED"} INSTANTLY
+                    {t("packages.saveInstant", {
+                      discount,
+                      type: discountType === "PERCENTAGE" ? "%" : " AED"
+                    })}
                   </Badge>
                 </div>
               )}
@@ -236,10 +267,10 @@ export default async function PackageDetailPage({ params }: PageProps) {
                 )}
               >
                 <Calendar className="size-5" />
-                Register Now
+                {t("packages.registerNow")}
               </Link>
               <p className="text-center text-xs text-slate-400 font-medium">
-                Secure online payment processing
+                {t("packages.securePayment")}
               </p>
             </div>
 
@@ -250,13 +281,13 @@ export default async function PackageDetailPage({ params }: PageProps) {
               <div className="flex items-center gap-3 text-sm text-slate-600 font-semibold">
                 <CheckCircle2 className="size-5 text-emerald-500 shrink-0" />
 
-                <span>Certified Instructors</span>
+                <span>{t("packages.certifiedInstructors")}</span>
               </div>
 
               <div className="flex items-center gap-3 text-sm text-slate-600 font-semibold">
                 <ShieldCheck className="size-5 text-emerald-500 shrink-0" />
 
-                <span>Licensed Prep. Center</span>
+                <span>{t("packages.licensedCenter")}</span>
               </div>
             </div>
           </div>

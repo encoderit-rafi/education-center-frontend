@@ -2462,5 +2462,170 @@
       "15": "Using fraudulent identification or attempting to cheat will result in immediate disqualification and removal from the testing center. Furthermore, such actions including any suspicious behaviour will be reported to the exam provider, which can lead to the cancellation of your scores and the forfeiture of your testing fees.",
       "16": "We are not responsible if we cannot run the test or fulfill our duties due to extreme situations entirely out of our hands. This includes major emergencies like natural disasters, wars, or unexpected power and technical blackouts."
     }
+  },
+  "NavBar": {
+    "logoAlt": "TEPTH Logo",
+    "copyright": "© {year} TEPTH. All Rights Reserved.",
+    "Menu": "Menu",
+    "banner": {
+      "marqueeText": "Authorized Test Centre · IELTS · TOEFL iBT · PTE · CELPIP G · Skills for English (SELT) . Save up to 25% when you book your exam and register for the course with TEPTH and pay in-person or online on our website"
+    },
+    "menu": {
+      "home": "Home",
+      "Exams": "Exams",
+      "Other Exams": "Other Exams",
+      "Test Dates": "Test Dates",
+      "Book Exam": "Book Exam",
+      "Paid Mock Tests": "Paid Mock Tests",
+      "Exam Preparation Courses": "Exam Preparation Courses",
+      "Fees": "Fees",
+      "About Us": "About Us",
+      "Who We Are": "Who We Are",
+      "Mission & Vision": "Mission & Vision",
+      "Why Choose Us": "Why Choose Us",
+      "Accreditation": "Accreditation",
+      "How to Find Us": "How to Find Us",
+      "Contact Us": "Contact Us",
+      "Free Consultation": "Free Consultation",
+      "Test Your English Level": "Test Your English Level",
+      "English Quiz": "English Quiz",
+      "Assessment Solutions": "Assessment Solutions",
+      "Exam Special Accommodation": "Exam Special Accommodation",
+      "Exam Proctoring Services": "Exam Proctoring Services",
+      "Institutions": "Institutions",
+      "Candidates": "Candidates",
+      "Exam Delivery": "Exam Delivery",
+      "Exam Provider": "Exam Provider",
+      "Vendor": "Vendor",
+      "Our Venues": "Our Venues",
+      "360° Virtual Tour": "360° Virtual Tour",
+      "Book An Exam Venue": "Book An Exam Venue"
+    }
+  },
+  "Search": {
+    "placeholder": "Search courses, exams, workshops...",
+    "searching": "Searching...",
+    "noResults": "No results found for \"{query}\".",
+    "courses": "Courses",
+    "exams": "Exams",
+    "workshops": "Workshops",
+    "otherResults": "Other Results",
+    "examsAndRegistration": "Exams & Registration",
+    "services": "Services",
+    "support": "Support",
+    "ieltsRegistration": "IELTS Registration",
+    "pteCoreRegistration": "PTE Core Registration",
+    "pteAcademicRegistration": "PTE Academic Registration",
+    "pteHomeRegistration": "PTE Home Registration",
+    "freeConsultation": "Free Consultation",
+    "exploreOurVenues": "Explore Our Venues",
+    "bookMockTest": "Book a Mock Test",
+    "contactSupport": "Contact Support",
+    "faqs": "Frequently Asked Questions"
+  },
+  "Footer": {
+    "workingHoursLabel": "Working Hours:",
+    "workingHoursDays": "Saturday to Thursday",
+    "workingHoursTime": "(9:00 AM - 9:00 PM)",
+    "addressLabel": "Our Address:",
+    "addressText": "The Exam Preparation & Testing House L.L.C\nSuite 701, 7th Floor, Tabarak Tower, Corniche Road,\nAl Mamzar, Sharjah, United Arab Emirates.",
+    "emailLabel": "Email:",
+    "telLabel": "Tel:",
+    "ourServices": "Our Services",
+    "usefulLinks": "Useful Links",
+    "newsUpdates": "News & Updates",
+    "copyright": "Copyright © {year} by The Exam Preparation & Testing House LLC.",
+    "trademarks": "All trademarks and logos appearing on the site are the property of their respective owners.",
+    "links": {
+      "Home": "Home",
+      "Contact Us": "Contact Us",
+      "FAQs": "FAQs",
+      "Download Forms": "Download Forms",
+      "Terms & Conditions": "Terms & Conditions",
+      "Disability Policy": "Disability Policy",
+      "Facilities": "Facilities",
+      "Book an Exam Venue": "Book an Exam Venue",
+      "Privacy Policy": "Privacy Policy",
+      "Career": "Career",
+      "Events": "Events",
+      "Blogs": "Blogs",
+      "Public Holidays": "Public Holidays"
+    }
+  },
+  "ExamPrepCourses": {
+    "sectionLabel": "Exam Preparation",
+    "sectionTitle": "Courses Tailored to",
+    "sectionTitleAccent": "Your Goals",
+    "availableFor": "Available for:",
+    "courses": [
+      {
+        "title": "Group Course",
+        "students": "Up to 8 students",
+        "description": "Learn alongside other candidates in a structured classroom environment. Ideal for those who prefer a collaborative study experience.",
+        "discount": "Save 10% off when you book your exam and register for the course with TEPTH and pay online on our website."
+      },
+      {
+        "title": "Semi-Private",
+        "students": "2 students",
+        "description": "Focused sessions with one study partner and a dedicated teacher. Perfect for couples, siblings, or friends preparing together.",
+        "discount": "Save 15% off when you book your exam and register for the course with TEPTH and pay online on our website."
+      },
+      {
+        "title": "1-to-1 In-Class",
+        "students": "You only",
+        "description": "Fully personalised classroom sessions with a teacher dedicated entirely to your needs, pace, and target score.",
+        "discount": "Save 20% off when you book your exam and register for the course with TEPTH and pay online on our website."
+      }
+    ],
+    "discountLabel": "Direct booking discount:",
+    "discountText": "Book any course directly on our website and receive",
+    "discountHighlight": "5% off automatically",
+    "discountNote": "— no code needed.",
+    "viewAllCourses": "View All Courses"
+  },
+  "ExamPrepListPage": {
+    "title": "Exam Preparation",
+    "titleSpan": "Courses",
+    "subtitle": "Master international proficiency standards with our elite preparation programs. We combine official pedagogy with intensive practice to guarantee your success.",
+    "classroomCourse": "{name} Classroom Course",
+    "onlineCourse": "{name} Online Course"
+  },
+  "ExamPrepPage": {
+    "workshopFallback": "Comprehensive {duration}-hour intensive workshop focusing on core strategies, mock practice, and live feedback for the {subTitle} exam.",
+    "packages": {
+      "pathSpan": "Preparation Path",
+      "pathSubtitle": "Master the {name} exam with our strategic preparation programs tailored for your success.",
+      "requirementsTitle": "During the course, candidates work on:",
+      "bestForTitle": "This course is particularly suitable for candidates who:",
+      "durationLabel": "Duration",
+      "hoursSuffix": "Hours",
+      "weeksLabel": "Total Weeks",
+      "weeksSuffix": "weeks",
+      "scheduleLabel": "Schedule",
+      "pricingTitle": "Course Package Pricing",
+      "saveInstant": "SAVE {discount}{type} INSTANTLY",
+      "saveInstantCard": "SAVE {discount}{type}",
+      "viewDetails": "View Details",
+      "registerNow": "Register Now",
+      "securePayment": "Secure online payment processing",
+      "certifiedInstructors": "Certified Instructors",
+      "licensedCenter": "Licensed Prep. Center"
+    },
+    "workshops": {
+      "requirementsTitle": "During the workshop, candidates work on:",
+      "bestForTitle": "This workshop is particularly suitable for candidates who:",
+      "bestForFallback": "Anyone looking to sharpen their skills in a focused, intensive session.",
+      "durationLabel": "Duration",
+      "hoursSuffix": "Hours",
+      "startTimeLabel": "Start Time",
+      "endTimeLabel": "End Time",
+      "pricingTitle": "Workshop Pricing",
+      "saveInstant": "SAVE {discount}{type} INSTANTLY",
+      "bookNow": "Book Now",
+      "securePayment": "Secure online payment processing",
+      "quickInfoDuration": "{duration}-hour intensive session",
+      "certifiedInstructors": "Certified Instructors",
+      "licensedCenter": "Licensed Prep. Center"
+    }
   }
 }

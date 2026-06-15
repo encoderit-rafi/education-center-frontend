@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import { getLocale, getTranslations } from "next-intl/server";
 import {
   Calendar,
   Clock,
@@ -88,6 +89,8 @@ const slugToExamId: Record<string, string> = {
 
 export default async function WorkshopDetailPage({ params }: PageProps) {
   const { id: courseSlug, workshopId } = await params;
+  const locale = await getLocale();
+  const t = await getTranslations("ExamPrepPage");
 
   let course: CourseDetail | null = null;
   try {
@@ -105,9 +108,37 @@ export default async function WorkshopDetailPage({ params }: PageProps) {
     notFound();
   }
 
+  // Apply course translation if available
+  const courseTranslatedName = (course as any)?.translations?.[locale]?.name;
+  const courseTranslatedDescription = (course as any)?.translations?.[locale]?.description;
+  if (courseTranslatedName) course.name = courseTranslatedName;
+  if (courseTranslatedDescription) course.description = courseTranslatedDescription;
+
   const workshop = course.workshops?.find((w) => w.id === workshopId);
   if (!workshop) {
     notFound();
+  }
+
+  // Apply workshop translation if available
+  const wTrans = (workshop as any)?.translations?.[locale];
+  const wTranslatedName = wTrans?.name;
+  const wTranslatedTitle = wTrans?.title;
+  const wTranslatedDescription = wTrans?.description;
+  const wTranslatedShortDescription = wTrans?.short_description || wTrans?.shortDescription;
+  const wTranslatedRequirements = wTrans?.requirements;
+  const wTranslatedBestFor = wTrans?.best_for || wTrans?.bestFor;
+
+  if (wTranslatedName) workshop.name = wTranslatedName;
+  if (wTranslatedTitle) workshop.title = wTranslatedTitle;
+  if (wTranslatedDescription) workshop.description = wTranslatedDescription;
+  if (wTranslatedShortDescription) workshop.shortDescription = wTranslatedShortDescription;
+  if (wTranslatedRequirements) workshop.requirements = wTranslatedRequirements;
+  if (wTranslatedBestFor) {
+    workshop.bestFor = Array.isArray(wTranslatedBestFor)
+      ? wTranslatedBestFor
+      : typeof wTranslatedBestFor === "string"
+        ? wTranslatedBestFor.split("\n").map((s: string) => s.trim()).filter(Boolean)
+        : workshop.bestFor;
   }
 
   // Pricing
@@ -125,7 +156,7 @@ export default async function WorkshopDetailPage({ params }: PageProps) {
   const displayDescription =
     workshop.description ||
     workshop.shortDescription ||
-    `Comprehensive ${workshop.duration}-hour intensive workshop focusing on core strategies, mock practice, and live feedback for the ${workshop.subTitle || course.name} exam.`;
+    t("workshopFallback", { duration: workshop.duration, subTitle: workshop.subTitle || course.name });
 
   return (
     <div className="min-h-screen bg-slate-50/50 py-10 md:py-16">
@@ -183,7 +214,7 @@ export default async function WorkshopDetailPage({ params }: PageProps) {
             {/* Requirements */}
             {workshop.requirements && (
               <WorkshopChecklistSection
-                title="During the workshop, candidates work on:"
+                title={t("workshops.requirementsTitle")}
                 icon={Award}
                 items={workshop.requirements}
               />
@@ -192,10 +223,10 @@ export default async function WorkshopDetailPage({ params }: PageProps) {
             {/* Best For */}
             {workshop.bestFor && (
               <WorkshopChecklistSection
-                title="This workshop is particularly suitable for candidates who:"
+                title={t("workshops.bestForTitle")}
                 icon={User}
                 items={workshop.bestFor}
-                fallback="Anyone looking to sharpen their skills in a focused, intensive session."
+                fallback={t("workshops.bestForFallback")}
               />
             )}
 
@@ -203,14 +234,14 @@ export default async function WorkshopDetailPage({ params }: PageProps) {
             <div className="grid sm:grid-cols-3 gap-6">
               <WorkshopStatCard
                 icon={Timer}
-                label="Duration"
+                label={t("workshops.durationLabel")}
                 value={workshop.duration}
-                suffix="Hours"
+                suffix={t("workshops.hoursSuffix")}
               />
               {workshop.startTime && (
                 <WorkshopStatCard
                   icon={Clock}
-                  label="Start Time"
+                  label={t("workshops.startTimeLabel")}
                   value={workshop.startTime}
                   compact
                 />
@@ -218,7 +249,7 @@ export default async function WorkshopDetailPage({ params }: PageProps) {
               {workshop.endTime && (
                 <WorkshopStatCard
                   icon={Calendar}
-                  label="End Time"
+                  label={t("workshops.endTimeLabel")}
                   value={workshop.endTime}
                   compact
                 />
@@ -230,7 +261,7 @@ export default async function WorkshopDetailPage({ params }: PageProps) {
           <div className="lg:sticky lg:top-8 bg-white rounded-3xl p-6 md:p-8 border border-slate-100 shadow-xl space-y-6">
             <div>
               <p className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-2">
-                Workshop Pricing
+                {t("workshops.pricingTitle")}
               </p>
               <div className="flex items-baseline gap-3 flex-wrap">
                 <PriceDisplay
@@ -249,9 +280,10 @@ export default async function WorkshopDetailPage({ params }: PageProps) {
               {discountRaw > 0 && (
                 <div className="mt-2.5">
                   <Badge className="py-1 px-3 font-bold shadow-sm bg-emerald-50 text-emerald-600 hover:bg-emerald-50/80 border-emerald-200">
-                    SAVE {discountRaw}
-                    {workshop.discountType === "PERCENTAGE" ? "%" : " AED"}{" "}
-                    INSTANTLY
+                    {t("workshops.saveInstant", {
+                      discount: discountRaw,
+                      type: workshop.discountType === "PERCENTAGE" ? "%" : " AED"
+                    })}
                   </Badge>
                 </div>
               )}
@@ -267,10 +299,10 @@ export default async function WorkshopDetailPage({ params }: PageProps) {
                   "w-full font-black py-6 text-base shadow-md flex items-center justify-center gap-2 transition-all duration-300",
                 )}
               >
-                Book Now
+                {t("workshops.bookNow")}
               </Link>
               <p className="text-center text-xs text-slate-400 font-medium">
-                Secure online payment processing
+                {t("workshops.securePayment")}
               </p>
             </div>
 
@@ -280,17 +312,17 @@ export default async function WorkshopDetailPage({ params }: PageProps) {
             <div className="space-y-3.5">
               <div className="flex items-center gap-3 text-sm text-slate-600 font-semibold">
                 <Timer className="size-5 text-primary shrink-0" />
-                <span>{workshop.duration}-hour intensive session</span>
+                <span>{t("workshops.quickInfoDuration", { duration: workshop.duration })}</span>
               </div>
 
               <div className="flex items-center gap-3 text-sm text-slate-600 font-semibold">
                 <CheckCircle2 className="size-5 text-emerald-500 shrink-0" />
-                <span>Certified Instructors</span>
+                <span>{t("workshops.certifiedInstructors")}</span>
               </div>
 
               <div className="flex items-center gap-3 text-sm text-slate-600 font-semibold">
                 <ShieldCheck className="size-5 text-emerald-500 shrink-0" />
-                <span>Licensed Prep. Center</span>
+                <span>{t("workshops.licensedCenter")}</span>
               </div>
             </div>
           </div>

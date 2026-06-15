@@ -12,6 +12,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { PriceDisplay } from "@/components/ui/price-display";
+import { useTranslations } from "next-intl";
 
 export interface CoursePackage {
   id: string;
@@ -26,7 +27,7 @@ export interface CoursePackage {
   duration: string;
   totalHours: string;
   scheduleInfo: string;
-  bestFor: string[];
+  bestFor: (string | React.ReactNode)[];
   image?: string | null;
 }
 
@@ -41,6 +42,7 @@ export default function CourseCard({
   examSlug,
   showDetails = false,
 }: CourseCardProps) {
+  const t = useTranslations("ExamPrepPage");
   const basePrice = parseFloat(pkg.price) || 0;
   let discount = 0;
   let discountType: "PERCENTAGE" | "FIXED" | null = pkg.discountType;
@@ -81,8 +83,10 @@ export default function CourseCard({
         {discount > 0 && (
           <div className="absolute top-4 right-4 z-10">
             <Badge className="py-1 px-3 font-bold shadow-lg">
-              SAVE {discount}
-              {discountType === "PERCENTAGE" ? "%" : ""}
+              {t("packages.saveInstantCard", {
+                discount,
+                type: discountType === "PERCENTAGE" ? "%" : " AED"
+              })}
             </Badge>
           </div>
         )}
@@ -120,7 +124,7 @@ export default function CourseCard({
               "font-bold h-11 shadow-sm px-4 w-full flex items-center justify-center gap-2 transition-all duration-300",
             )}
           >
-            View Details
+            {t("packages.viewDetails")}
           </Link>
         </div>
       </div>

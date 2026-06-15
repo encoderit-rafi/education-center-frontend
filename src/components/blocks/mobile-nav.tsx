@@ -19,11 +19,22 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "../ui/accordion";
+import { useTranslations } from "next-intl";
 
 export default function MobileNav() {
   const [open, setOpen] = useState(false);
   const { primaryNav, isLoading } = usePrimaryNav();
   const allNavs = [...primaryNav, ...SECONDARY_NAV];
+  const t = useTranslations("NavBar");
+  const tMenu = useTranslations("NavBar.menu");
+
+  const translateName = (name: string) => {
+    try {
+      return tMenu.has(name) ? tMenu(name) : name;
+    } catch {
+      return name;
+    }
+  };
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -35,7 +46,7 @@ export default function MobileNav() {
       >
         <DialogHeader className="p-4 px-6 border-b shrink-0 flex flex-row items-center justify-between">
           <DialogTitle className="text-left text-lg font-bold text-secondary uppercase tracking-wider">
-            Menu
+            {t("Menu")}
           </DialogTitle>
           <Button
             variant="ghost"
@@ -58,7 +69,7 @@ export default function MobileNav() {
                     onClick={() => setOpen(false)}
                     className="flex items-center justify-between px-6 py-4 text-sm font-semibold text-secondary hover:bg-slate-50 transition-colors border-b border-slate-100/50"
                   >
-                    <span className="capitalize">{item.name}</span>
+                    <span className="capitalize">{translateName(item.name)}</span>
                   </Link>
                 ) : (
                   <AccordionItem
@@ -66,7 +77,7 @@ export default function MobileNav() {
                     className="border-b border-slate-100/50"
                   >
                     <AccordionTrigger className="hover:no-underline px-6 py-4 text-sm font-semibold text-secondary border-none [&[data-state=open]]:bg-slate-50">
-                      <span className="capitalize">{item.name}</span>
+                      <span className="capitalize">{translateName(item.name)}</span>
                     </AccordionTrigger>
                     <AccordionContent className="p-0 bg-slate-50/50">
                       <div className="flex flex-col">
@@ -83,7 +94,7 @@ export default function MobileNav() {
                               onClick={() => setOpen(false)}
                               className="px-10 py-3.5 text-sm font-medium text-slate-600 hover:text-primary hover:bg-white transition-all border-t border-slate-100 first:border-t-0"
                             >
-                              {subItem.name}
+                              {translateName(subItem.name)}
                             </Link>
                           ))
                         )}
@@ -98,7 +109,7 @@ export default function MobileNav() {
 
         <div className="p-6 border-t bg-slate-50/80 shrink-0">
           <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest text-center">
-            © {new Date().getFullYear()} TEPTH. All Rights Reserved.
+            {t("copyright", { year: new Date().getFullYear() })}
           </p>
         </div>
       </DialogContent>

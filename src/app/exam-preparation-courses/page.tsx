@@ -7,8 +7,11 @@ import {
   BaseCardTitle,
 } from "@/components/blocks/cards/base-card";
 import api from "@/axios";
+import { getLocale, getTranslations } from "next-intl/server";
 
 export default async function ExamPreparationCoursesPage() {
+  const locale = await getLocale();
+  const t = await getTranslations("ExamPrepListPage");
   let courses = [];
   try {
     const response = await api.get("/courses");
@@ -25,13 +28,11 @@ export default async function ExamPreparationCoursesPage() {
       <section className="relative overflow-hidden bg-slate-50 base-py base-px">
         <div className="max-w-4xl mx-auto text-center space-y-8">
           <h1 className="section-title">
-            Exam Preparation{" "}
-            <span className="text-primary italic">Courses</span>
+            {t("title")}{" "}
+            <span className="text-primary italic">{t("titleSpan")}</span>
           </h1>
           <p className="section-subtitle max-w-3xl mx-auto">
-            Master international proficiency standards with our elite
-            preparation programs. We combine official pedagogy with intensive
-            practice to guarantee your success.
+            {t("subtitle")}
           </p>
         </div>
       </section>
@@ -41,6 +42,7 @@ export default async function ExamPreparationCoursesPage() {
         <div className="container mx-auto px-4 lg:px-8 max-w-7xl">
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {courses.map((exam: any, index: number) => {
+              const courseName = exam.translations?.[locale]?.name || exam.name;
               return (
                 <Link
                   key={exam.id}
@@ -54,15 +56,15 @@ export default async function ExamPreparationCoursesPage() {
 
                     <div className="space-y-5 mb-5">
                       <BaseCardTitle className="text-2xl font-black text-slate-900 leading-tight">
-                        {exam.name}
+                        {courseName}
                       </BaseCardTitle>
                     </div>
 
                     <BaseCardList
                       checked
                       items={[
-                        `${exam.name} Classroom Course`,
-                        `${exam.name} Online Course`,
+                        t("classroomCourse", { name: courseName }),
+                        t("onlineCourse", { name: courseName }),
                       ]}
                     />
                   </BaseCard>

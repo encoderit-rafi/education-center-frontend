@@ -2462,5 +2462,170 @@
       "15": "إن استخدام هوية مزورة أو محاولة الغش سيؤدي إلى الاستبعاد الفوري والطرد من مركز الاختبار. علاوة على ذلك، سيتم الإبلاغ عن مثل هذه التصرفات بما في ذلك أي سلوك مشبوه إلى جهة تقديم الاختبار، مما قد يؤدي إلى إلغاء درجاتك ومصادرة رسوم الاختبار.",
       "16": "نحن لسنا مسؤولين في حال عدم قدرتنا على تشغيل الاختبار أو أداء واجباتنا بسبب ظروف استثنائية خارجة تماماً عن إرادتنا. ويشمل ذلك حالات الطوارئ الكبرى مثل الكوارث الطبيعية أو الحروب أو انقطاع التيار الكهربائي والأعطال الفنية غير المتوقعة."
     }
+  },
+  "NavBar": {
+    "logoAlt": "شعار TEPTH",
+    "copyright": "جميع الحقوق محفوظة © {year} TEPTH.",
+    "Menu": "القائمة",
+    "banner": {
+      "marqueeText": "مركز اختبارات معتمد · IELTS · TOEFL iBT · PTE · CELPIP G · Skills for English (SELT). وفّر ما يصل إلى 25% عند حجز اختبارك والتسجيل في الدورة مع TEPTH والدفع حضورياً أو عبر الإنترنت على موقعنا"
+    },
+    "menu": {
+      "home": "الرئيسية",
+      "Exams": "الاختبارات",
+      "Other Exams": "اختبارات أخرى",
+      "Test Dates": "مواعيد الاختبارات",
+      "Book Exam": "حجز اختبار",
+      "Paid Mock Tests": "الاختبارات التجريبية المدفوعة",
+      "Exam Preparation Courses": "دورات التحضير للامتحانات",
+      "Fees": "الرسوم",
+      "About Us": "من نحن",
+      "Who We Are": "من نحن",
+      "Mission & Vision": "الرؤية والرسالة",
+      "Why Choose Us": "لماذا تختارنا",
+      "Accreditation": "الاعتماد",
+      "How to Find Us": "كيف تجدنا",
+      "Contact Us": "اتصل بنا",
+      "Free Consultation": "استشارة مجانية",
+      "Test Your English Level": "اختبر مستواك في اللغة الإنجليزية",
+      "English Quiz": "كويز الإنجليزية",
+      "Assessment Solutions": "حلول التقييم",
+      "Exam Special Accommodation": "التسهيلات الخاصة بالامتحانات",
+      "Exam Proctoring Services": "خدمات مراقبة الامتحانات",
+      "Institutions": "المؤسسات",
+      "Candidates": "المرشحون",
+      "Exam Delivery": "تقديم الامتحانات",
+      "Exam Provider": "مقدمو الامتحانات",
+      "Vendor": "الموردون",
+      "Our Venues": "قاعاتنا",
+      "360° Virtual Tour": "جولة افتراضية 360°",
+      "Book An Exam Venue": "حجز قاعة اختبار"
+    }
+  },
+  "Search": {
+    "placeholder": "ابحث عن الدورات، الامتحانات، ورش العمل...",
+    "searching": "جاري البحث...",
+    "noResults": "لم يتم العثور على نتائج لـ \"{query}\".",
+    "courses": "الدورات",
+    "exams": "الامتحانات",
+    "workshops": "ورش العمل",
+    "otherResults": "نتائج أخرى",
+    "examsAndRegistration": "الامتحانات والتسجيل",
+    "services": "الخدمات",
+    "support": "الدعم",
+    "ieltsRegistration": "تسجيل IELTS",
+    "pteCoreRegistration": "تسجيل PTE Core",
+    "pteAcademicRegistration": "تسجيل PTE Academic",
+    "pteHomeRegistration": "تسجيل PTE Home",
+    "freeConsultation": "استشارة مجانية",
+    "exploreOurVenues": "الوصول لقاعاتنا",
+    "bookMockTest": "حجز اختبار تجريبي",
+    "contactSupport": "الاتصال بالدعم",
+    "faqs": "الأسئلة الشائعة"
+  },
+  "Footer": {
+    "workingHoursLabel": "ساعات العمل:",
+    "workingHoursDays": "السبت إلى الخميس",
+    "workingHoursTime": "(9:00 صباحاً - 9:00 مساءً)",
+    "addressLabel": "عنواننا:",
+    "addressText": "ذا اكزام بريباريشن اند تيستنج هاوس ذ.م.م\nمكتب 701، الطابق السابع، برج تبارك، شارع الكورنيش،\nالممزر، الشارقة، الإمارات العربية المتحدة.",
+    "emailLabel": "البريد الإلكتروني:",
+    "telLabel": "الهاتف:",
+    "ourServices": "خدماتنا",
+    "usefulLinks": "روابط مفيدة",
+    "newsUpdates": "أخبار وتحديثات",
+    "copyright": "حقوق الطبع والنشر © {year} محفوظة لـ ذا اكزام بريباريشن اند تيستنج هاوس ذ.م.م.",
+    "trademarks": "جميع العلامات التجارية والشعارات التي تظهر على الموقع هي ملك لأصحابها المعنيين.",
+    "links": {
+      "Home": "الرئيسية",
+      "Contact Us": "اتصل بنا",
+      "FAQs": "الأسئلة الشائعة",
+      "Download Forms": "تحميل النماذج",
+      "Terms & Conditions": "الشروط والأحكام",
+      "Disability Policy": "سياسة الإعاقة",
+      "Facilities": "المرافق",
+      "Book an Exam Venue": "حجز قاعة اختبار",
+      "Privacy Policy": "سياسة الخصوصية",
+      "Career": "الوظائف",
+      "Events": "الفعاليات",
+      "Blogs": "المدونات",
+      "Public Holidays": "العالمية والعطلات الرسمية"
+    }
+  },
+  "ExamPrepCourses": {
+    "sectionLabel": "التحضير للاختبارات",
+    "sectionTitle": "دورات مصمَّمة وفق",
+    "sectionTitleAccent": "أهدافك",
+    "availableFor": "متاح لـ:",
+    "courses": [
+      {
+        "title": "دورة جماعية",
+        "students": "حتى 8 طلاب",
+        "description": "تعلّم إلى جانب المرشحين الآخرين في بيئة دراسية منظمة. مثالية لمن يفضلون التعلم التعاوني.",
+        "discount": "وفّر 10% عند حجز اختبارك والتسجيل في الدورة مع TEPTH والدفع عبر الإنترنت على موقعنا."
+      },
+      {
+        "title": "شبه خاص",
+        "students": "طالبان",
+        "description": "جلسات مركّزة مع شريك دراسي ومدرّس مخصّص. مثالية للأزواج أو الأشقاء أو الأصدقاء الذين يتحضّرون معاً.",
+        "discount": "وفّر 15% عند حجز اختبارك والتسجيل في الدورة مع TEPTH والدفع عبر الإنترنت على موقعنا."
+      },
+      {
+        "title": "فردي داخل الصف",
+        "students": "أنت فقط",
+        "description": "جلسات صفية مخصّصة بالكامل مع مدرّس يركّز على احتياجاتك وإيقاعك وهدفك في الدرجة.",
+        "discount": "وفّر 20% عند حجز اختبارك والتسجيل في الدورة مع TEPTH والدفع عبر الإنترنت على موقعنا."
+      }
+    ],
+    "discountLabel": "خصم الحجز المباشر:",
+    "discountText": "احجز أي دورة مباشرةً على موقعنا واحصل على",
+    "discountHighlight": "خصم 5% تلقائياً",
+    "discountNote": "— دون الحاجة إلى رمز.",
+    "viewAllCourses": "عرض جميع الدورات"
+  },
+  "ExamPrepListPage": {
+    "title": "التحضير للاختبارات",
+    "titleSpan": "الدورات",
+    "subtitle": "أتقن معايير الكفاءة الدولية من خلال برامجنا التحضيرية المتميزة. نحن نجمع بين التدريس الرسمي والممارسة المكثفة لضمان نجاحك.",
+    "classroomCourse": "دورة حضورية لـ {name}",
+    "onlineCourse": "دورة عبر الإنترنت لـ {name}"
+  },
+  "ExamPrepPage": {
+    "workshopFallback": "ورشة عمل مكثّفة مدتها {duration} ساعة تركّز على الاستراتيجيات الأساسية، والتدريب العملي، والتغذية الراجعة المباشرة لاختبار {subTitle}.",
+    "packages": {
+      "pathSpan": "مسار التحضير",
+      "pathSubtitle": "أتقن اختبار {name} من خلال برامجنا التحضيرية الاستراتيجية المصممة لنجاحك.",
+      "requirementsTitle": "أثناء الدورة، يعمل المرشحون على:",
+      "bestForTitle": "هذه الدورة مناسبة بشكل خاص للمرشحين الذين:",
+      "durationLabel": "المدة",
+      "hoursSuffix": "ساعة",
+      "weeksLabel": "إجمالي الأسابيع",
+      "weeksSuffix": "أسابيع",
+      "scheduleLabel": "الجدول الدراسي",
+      "pricingTitle": "أسعار باقة الدورة",
+      "saveInstant": "وفر {discount}{type} فوراً",
+      "saveInstantCard": "وفر {discount}{type}",
+      "viewDetails": "عرض التفاصيل",
+      "registerNow": "سجل الآن",
+      "securePayment": "معالجة دفع آمنة عبر الإنترنت",
+      "certifiedInstructors": "مدربون معتمدون",
+      "licensedCenter": "مركز تحضيري مرخص"
+    },
+    "workshops": {
+      "requirementsTitle": "أثناء ورشة العمل، يعمل المرشحون على:",
+      "bestForTitle": "هذه الورشة مناسبة بشكل خاص للمرشحين الذين:",
+      "bestForFallback": "أي شخص يتطلع إلى صقل مهاراته في جلسة مركزة ومكثفة.",
+      "durationLabel": "المدة",
+      "hoursSuffix": "ساعة",
+      "startTimeLabel": "وقت البدء",
+      "endTimeLabel": "وقت الانتهاء",
+      "pricingTitle": "أسعار ورشة العمل",
+      "saveInstant": "وفر {discount}{type} فوراً",
+      "bookNow": "احجز الآن",
+      "securePayment": "معالجة دفع آمنة عبر الإنترنت",
+      "quickInfoDuration": "جلسة مكثفة مدتها {duration} ساعة",
+      "certifiedInstructors": "مدربون معتمدون",
+      "licensedCenter": "مركز تحضيري مرخص"
+    }
   }
 }
