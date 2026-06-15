@@ -2583,7 +2583,49 @@
     "discountNote": "— no code needed.",
     "viewAllCourses": "View All Courses"
   },
+  "ExamPrepListPage": {
+    "title": "Exam Preparation",
+    "titleSpan": "Courses",
+    "subtitle": "Master international proficiency standards with our elite preparation programs. We combine official pedagogy with intensive practice to guarantee your success.",
+    "classroomCourse": "{name} Classroom Course",
+    "onlineCourse": "{name} Online Course"
+  },
   "ExamPrepPage": {
-    "workshopFallback": "Comprehensive {duration}-hour intensive workshop focusing on core strategies, mock practice, and live feedback for the {subTitle} exam."
+    "workshopFallback": "Comprehensive {duration}-hour intensive workshop focusing on core strategies, mock practice, and live feedback for the {subTitle} exam.",
+    "packages": {
+      "pathSpan": "Preparation Path",
+      "pathSubtitle": "Master the {name} exam with our strategic preparation programs tailored for your success.",
+      "requirementsTitle": "During the course, candidates work on:",
+      "bestForTitle": "This course is particularly suitable for candidates who:",
+      "durationLabel": "Duration",
+      "hoursSuffix": "Hours",
+      "weeksLabel": "Total Weeks",
+      "weeksSuffix": "weeks",
+      "scheduleLabel": "Schedule",
+      "pricingTitle": "Course Package Pricing",
+      "saveInstant": "SAVE {discount}{type} INSTANTLY",
+      "saveInstantCard": "SAVE {discount}{type}",
+      "viewDetails": "View Details",
+      "registerNow": "Register Now",
+      "securePayment": "Secure online payment processing",
+      "certifiedInstructors": "Certified Instructors",
+      "licensedCenter": "Licensed Prep. Center"
+    },
+    "workshops": {
+      "requirementsTitle": "During the workshop, candidates work on:",
+      "bestForTitle": "This workshop is particularly suitable for candidates who:",
+      "bestForFallback": "Anyone looking to sharpen their skills in a focused, intensive session.",
+      "durationLabel": "Duration",
+      "hoursSuffix": "Hours",
+      "startTimeLabel": "Start Time",
+      "endTimeLabel": "End Time",
+      "pricingTitle": "Workshop Pricing",
+      "saveInstant": "SAVE {discount}{type} INSTANTLY",
+      "bookNow": "Book Now",
+      "securePayment": "Secure online payment processing",
+      "quickInfoDuration": "{duration}-hour intensive session",
+      "certifiedInstructors": "Certified Instructors",
+      "licensedCenter": "Licensed Prep. Center"
+    }
   }
 }

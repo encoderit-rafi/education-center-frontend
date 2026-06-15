@@ -2583,7 +2583,49 @@
     "discountNote": "— دون الحاجة إلى رمز.",
     "viewAllCourses": "عرض جميع الدورات"
   },
+  "ExamPrepListPage": {
+    "title": "التحضير للاختبارات",
+    "titleSpan": "الدورات",
+    "subtitle": "أتقن معايير الكفاءة الدولية من خلال برامجنا التحضيرية المتميزة. نحن نجمع بين التدريس الرسمي والممارسة المكثفة لضمان نجاحك.",
+    "classroomCourse": "دورة حضورية لـ {name}",
+    "onlineCourse": "دورة عبر الإنترنت لـ {name}"
+  },
   "ExamPrepPage": {
-    "workshopFallback": "ورشة عمل مكثّفة مدتها {duration} ساعة تركّز على الاستراتيجيات الأساسية، والتدريب العملي، والتغذية الراجعة المباشرة لاختبار {subTitle}."
+    "workshopFallback": "ورشة عمل مكثّفة مدتها {duration} ساعة تركّز على الاستراتيجيات الأساسية، والتدريب العملي، والتغذية الراجعة المباشرة لاختبار {subTitle}.",
+    "packages": {
+      "pathSpan": "مسار التحضير",
+      "pathSubtitle": "أتقن اختبار {name} من خلال برامجنا التحضيرية الاستراتيجية المصممة لنجاحك.",
+      "requirementsTitle": "أثناء الدورة، يعمل المرشحون على:",
+      "bestForTitle": "هذه الدورة مناسبة بشكل خاص للمرشحين الذين:",
+      "durationLabel": "المدة",
+      "hoursSuffix": "ساعة",
+      "weeksLabel": "إجمالي الأسابيع",
+      "weeksSuffix": "أسابيع",
+      "scheduleLabel": "الجدول الدراسي",
+      "pricingTitle": "أسعار باقة الدورة",
+      "saveInstant": "وفر {discount}{type} فوراً",
+      "saveInstantCard": "وفر {discount}{type}",
+      "viewDetails": "عرض التفاصيل",
+      "registerNow": "سجل الآن",
+      "securePayment": "معالجة دفع آمنة عبر الإنترنت",
+      "certifiedInstructors": "مدربون معتمدون",
+      "licensedCenter": "مركز تحضيري مرخص"
+    },
+    "workshops": {
+      "requirementsTitle": "أثناء ورشة العمل، يعمل المرشحون على:",
+      "bestForTitle": "هذه الورشة مناسبة بشكل خاص للمرشحين الذين:",
+      "bestForFallback": "أي شخص يتطلع إلى صقل مهاراته في جلسة مركزة ومكثفة.",
+      "durationLabel": "المدة",
+      "hoursSuffix": "ساعة",
+      "startTimeLabel": "وقت البدء",
+      "endTimeLabel": "وقت الانتهاء",
+      "pricingTitle": "أسعار ورشة العمل",
+      "saveInstant": "وفر {discount}{type} فوراً",
+      "bookNow": "احجز الآن",
+      "securePayment": "معالجة دفع آمنة عبر الإنترنت",
+      "quickInfoDuration": "جلسة مكثفة مدتها {duration} ساعة",
+      "certifiedInstructors": "مدربون معتمدون",
+      "licensedCenter": "مركز تحضيري مرخص"
+    }
   }
 }
