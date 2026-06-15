@@ -132,7 +132,7 @@ export default function ContactForm() {
   };
 
   return (
-    <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+    <form className="space-y-6" onSubmit={(e) => handleSubmit(onSubmit)(e)}>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Field data-invalid={!!errors.firstName}>
           <FieldLabel required>First Name</FieldLabel>

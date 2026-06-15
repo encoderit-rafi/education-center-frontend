@@ -23,12 +23,12 @@ export default function PaymentFailedClient() {
   const router = useRouter();
   const [copied, setCopied] = useState(false);
   const [formattedDate, setFormattedDate] = useState("");
+  const [reference, setReference] = useState("");
 
   // Extract query parameters
   const rawAmount = searchParams.get("amount");
   const currency = searchParams.get("currency") || "AED";
   const examName = searchParams.get("exam") || searchParams.get("course") || searchParams.get("item") || "TEPTH Premium Exam Prep";
-  const reference = searchParams.get("reference") || searchParams.get("payment_intent") || searchParams.get("session_id") || `TXN-${Math.floor(100000 + Math.random() * 900000)}`;
   const errorMessage = searchParams.get("error_message") || searchParams.get("reason") || "The transaction was declined by the card issuer or cancelled.";
   const retryUrl = searchParams.get("retry_url") || "/exams";
 
@@ -38,6 +38,14 @@ export default function PaymentFailedClient() {
     : null;
 
   useEffect(() => {
+    // Set reference on client to avoid hydration mismatch
+    const refParam = searchParams.get("reference") || searchParams.get("payment_intent") || searchParams.get("session_id");
+    if (refParam) {
+      setReference(refParam);
+    } else {
+      setReference(`TXN-${Math.floor(100000 + Math.random() * 900000)}`);
+    }
+
     // Generate current date beautifully on client
     const today = new Date();
     setFormattedDate(
@@ -49,7 +57,7 @@ export default function PaymentFailedClient() {
         minute: "2-digit"
       })
     );
-  }, []);
+  }, [searchParams]);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(reference);
