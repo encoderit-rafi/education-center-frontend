@@ -13,6 +13,7 @@ import { languages } from "@/lib/languages-data";
 import { format } from "date-fns";
 import { User, ShieldCheck, Globe } from "lucide-react";
 import { GlobalReviewStep, ReviewSummaryGrid } from "@/components/blocks/forms/global-review-step";
+import { getEducationLevelLabel } from "@/lib/utils";
 
 // Import steps
 import { TermsStep } from "./steps/terms-step";
@@ -451,7 +452,7 @@ export default function FormIELTSGeneralRegistration({ examId: initialExamId }: 
                 },
                 {
                   label: "Education Level",
-                  value: formData.educationLevel || "N/A",
+                  value: getEducationLevelLabel(formData.educationLevel),
                 },
               ]}
             />
