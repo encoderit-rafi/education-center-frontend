@@ -10,6 +10,7 @@ import {
 import { UseFormReturn } from "react-hook-form";
 import { TToeflIbtSchema } from "../_type/toefl-ibt";
 import { GlobalReviewStep } from "@/components/blocks/forms/global-review-step";
+import { getEducationLevelLabel } from "@/lib/utils";
 
 interface ReviewStepProps {
     data: TToeflIbtSchema;
@@ -247,7 +248,7 @@ export function ReviewStep({
                                 Education Level
                             </span>
                             <span className="text-sm font-bold text-slate-900">
-                                {data.educationLevel?.replace(/_/g, " ") || "N/A"}
+                                {getEducationLevelLabel(data.educationLevel)}
                             </span>
                         </div>
                     </div>

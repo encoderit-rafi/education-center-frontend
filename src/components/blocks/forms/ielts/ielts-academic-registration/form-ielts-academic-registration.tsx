@@ -15,6 +15,7 @@ import {
   GlobalReviewStep,
   ReviewSummaryGrid,
 } from "@/components/blocks/forms/global-review-step";
+import { getEducationLevelLabel } from "@/lib/utils";
 
 import { TermsStep } from "./steps/terms-step";
 import { DateStep } from "./steps/date-step";
@@ -517,7 +518,7 @@ export default function FormIeltsAcademicRegistration({ examId: initialExamId }:
                   },
                   {
                     label: "Education Level",
-                    value: formData.educationLevel || "N/A",
+                    value: getEducationLevelLabel(formData.educationLevel),
                   },
                 ]}
               />

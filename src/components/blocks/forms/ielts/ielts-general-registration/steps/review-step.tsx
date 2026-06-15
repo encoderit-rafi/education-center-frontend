@@ -10,6 +10,7 @@ import {
 import { UseFormReturn } from "react-hook-form";
 import { TIeltsGeneralSchema } from "../_type";
 import { GlobalReviewStep } from "@/components/blocks/forms/global-review-step";
+import { getEducationLevelLabel } from "@/lib/utils";
 
 interface ReviewStepProps {
   data: TIeltsGeneralSchema;
@@ -344,7 +345,7 @@ export function ReviewStep({
                   Education Level
                 </span>
                 <span className="text-sm font-semibold text-black">
-                  {data.educationLevel || "N/A"}
+                  {getEducationLevelLabel(data.educationLevel)}
                 </span>
               </div>
             </div>

@@ -1,6 +1,7 @@
 "use client";
 import { format } from "date-fns";
 import { GlobalReviewStep, ReviewSummaryGrid } from "@/components/blocks/forms/global-review-step";
+import { getEducationLevelLabel } from "@/lib/utils";
 import { PriceDisplay } from "@/components/ui/price-display";
 
 import { useState } from "react";
@@ -483,7 +484,7 @@ export default function FormSELTB2Registration({ examId: initialExamId }: FormPr
                   { label: "Time Slot", value: formData.examTimeSlot },
                   { label: "Address", value: `${formData.postalAddress1}, ${formData.city}` },
                   { label: "First Language", value: formData.firstLanguage || "N/A" },
-                  { label: "Education Level", value: formData.educationLevel || "N/A" },
+                  { label: "Education Level", value: getEducationLevelLabel(formData.educationLevel) },
                 ]}
               />
             </GlobalReviewStep>

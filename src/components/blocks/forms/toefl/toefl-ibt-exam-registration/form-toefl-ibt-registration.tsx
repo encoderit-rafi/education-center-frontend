@@ -12,6 +12,7 @@ import { format } from "date-fns";
 import { GlobalReviewStep, ReviewSummaryGrid } from "@/components/blocks/forms/global-review-step";
 import { PriceDisplay } from "@/components/ui/price-display";
 import { toast } from "sonner";
+import { getEducationLevelLabel } from "@/lib/utils";
 
 // Import Steps
 import { TermsStep } from "./steps/terms-step";
@@ -506,7 +507,7 @@ export default function FormTOEFLIBTRegistration({ examId: initialExamId }: Form
                                     { label: "City", value: formData.city },
                                     { label: "Country of Residence", value: formData.country },
                                     { label: "First Language", value: formData.firstLanguage === "Other" ? (formData.firstLanguageOther || "Other") : (formData.firstLanguage || "N/A") },
-                                    { label: "Education Level", value: formData.educationLevel?.replace(/_/g, " ") || "N/A" },
+                                    { label: "Education Level", value: getEducationLevelLabel(formData.educationLevel) },
                                     { label: "Next Level of Study", value: formData.nextLevelOfStudy === "Other" ? (formData.nextLevelOfStudyOther || "Other") : (formData.nextLevelOfStudy || "N/A") },
                                     { label: "Desired Field of Study", value: formData.desiredFieldOfStudy === "Other" ? (formData.desiredFieldOfStudyOther || "Other") : (formData.desiredFieldOfStudy || "N/A") },
                                     { label: "Reason for taking TOEFL", value: formData.reasonsForTakingToefl || "N/A" },

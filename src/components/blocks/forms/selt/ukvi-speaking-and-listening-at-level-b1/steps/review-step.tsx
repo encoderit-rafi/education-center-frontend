@@ -2,6 +2,7 @@
 
 import React from "react";
 import { GlobalReviewStep } from "@/components/blocks/forms/global-review-step";
+import { getEducationLevelLabel } from "@/lib/utils";
 import { format } from "date-fns";
 import {
   User,
@@ -236,7 +237,7 @@ export function ReviewStep({
                   Education Level
                 </span>
                 <span className="text-sm font-semibold text-black">
-                  {data.educationLevel || "N/A"}
+                  {getEducationLevelLabel(data.educationLevel)}
                 </span>
               </div>
               <div className="flex flex-col">

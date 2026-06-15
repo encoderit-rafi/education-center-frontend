@@ -22,12 +22,12 @@ export default function PaymentSuccessClient() {
   const searchParams = useSearchParams();
   const [copied, setCopied] = useState(false);
   const [formattedDate, setFormattedDate] = useState("");
+  const [reference, setReference] = useState("");
 
   // Extract query parameters
   const rawAmount = searchParams.get("amount");
   const currency = searchParams.get("currency") || "AED";
   const examName = searchParams.get("exam") || searchParams.get("course") || searchParams.get("item") || "TEPTH Premium Exam Prep";
-  const reference = searchParams.get("reference") || searchParams.get("payment_intent") || searchParams.get("session_id") || `TXN-${Math.floor(100000 + Math.random() * 900000)}`;
   const paymentMethod = searchParams.get("method") || "Credit / Debit Card";
 
   // Format amount (e.g. 1250 -> 1,250.00)
@@ -36,6 +36,14 @@ export default function PaymentSuccessClient() {
     : "1,250.00";
 
   useEffect(() => {
+    // Set reference on client to avoid hydration mismatch
+    const refParam = searchParams.get("reference") || searchParams.get("payment_intent") || searchParams.get("session_id");
+    if (refParam) {
+      setReference(refParam);
+    } else {
+      setReference(`TXN-${Math.floor(100000 + Math.random() * 900000)}`);
+    }
+
     // Generate current date beautifully on client to avoid hydration mismatch
     const today = new Date();
     setFormattedDate(
@@ -47,7 +55,7 @@ export default function PaymentSuccessClient() {
         minute: "2-digit"
       })
     );
-  }, []);
+  }, [searchParams]);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(reference);

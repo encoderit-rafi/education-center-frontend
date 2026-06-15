@@ -2,14 +2,14 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Globe } from "lucide-react";
+import { Languages } from "lucide-react";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 function getLocaleCookie(): string {
   if (typeof document === "undefined") return "en";
@@ -30,7 +30,7 @@ export function LocaleToggle() {
     setLocale(getLocaleCookie());
   }, []);
 
-  function handleChange(next: string | null) {
+  function handleChange(next: string) {
     if (!next) return;
     document.cookie = `locale=${next}; path=/; max-age=31536000; SameSite=Lax`;
     setLocale(next);
@@ -38,22 +38,27 @@ export function LocaleToggle() {
   }
 
   return (
-    <Select value={locale} onValueChange={handleChange}>
-      <SelectTrigger
-        // size="sm"
-        size="sm"
-        className="w-auto gap-1.5 px-2.5 font-semibold text-xs text-primary"
-      >
-        <Globe className="w-3.5 h-3.5 shrink-0" />
-        <SelectValue className="uppercase font-normal text-secondary" />
-      </SelectTrigger>
-      <SelectContent align="end">
-        {LOCALES.map((l) => (
-          <SelectItem key={l.value} value={l.value}>
-            {l.label}
-          </SelectItem>
-        ))}
-      </SelectContent>
-    </Select>
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <button
+          data-slot="dropdown-menu-trigger"
+          className="hover:cursor-pointer inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 rounded-md has-[>svg]:px-2.5 gap-1.5 h-9 px-2.5 text-app-text"
+          type="button"
+        >
+          <Languages className="size-4" />
+          <span className="uppercase text-xs font-semibold">{locale}</span>
+        </button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" className="w-[120px]">
+        <DropdownMenuRadioGroup value={locale} onValueChange={handleChange}>
+          {LOCALES.map((l) => (
+            <DropdownMenuRadioItem key={l.value} value={l.value}>
+              {l.label}
+            </DropdownMenuRadioItem>
+          ))}
+        </DropdownMenuRadioGroup>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }
+
