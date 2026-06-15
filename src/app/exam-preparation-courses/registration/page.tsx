@@ -439,7 +439,7 @@ function CourseRegistrationForm({ className }: { className?: string }) {
                       <div className="flex gap-2">
                         <Input
                           type="text"
-                          placeholder="e.g. NOW10"
+                          placeholder=""
                           value={couponCodeInput}
                           onChange={(e) => {
                             setCouponCodeInput(e.target.value);
