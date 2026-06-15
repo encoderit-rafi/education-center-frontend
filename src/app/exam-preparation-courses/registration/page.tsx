@@ -163,8 +163,8 @@ function CourseRegistrationForm({ className }: { className?: string }) {
       // 1. Call API to validate coupon code
       const response = await api.post("/coupons/validate", {
         code,
-        entity_type: "course",
-        entity_id: courseData?.id || "",
+        entity_type: "package",
+        entity_id: packageId || "",
         purchase_amount: base_price,
       });
 
@@ -199,74 +199,12 @@ function CourseRegistrationForm({ className }: { className?: string }) {
         setAppliedCoupon(coupon);
         setCouponCodeInput("");
       } else {
-        // Fallback for the test coupon NOW10
-        if (code.toUpperCase() === "NOW10") {
-          const testCoupon = {
-            id: "e0d060fb-8a85-467a-9500-9134015835e7",
-            code: "NOW10",
-            description: "",
-            discountType: "PERCENTAGE",
-            discountValue: "5",
-            maxUses: null,
-            usedCount: 0,
-            minPurchaseAmount: null,
-            maxDiscountAmount: null,
-            startDate: "2026-06-16T00:00:00.000Z",
-            endDate: "2026-06-30T00:00:00.000Z",
-            isActive: true,
-            applicableTo: ["package"],
-            applicableEntityIds: [
-              "2c8fe9f3-7b91-49cf-9e0e-150f88759a16",
-              "0349dec9-3a51-42cf-91e1-239f3cc34963",
-              "31003632-cc7c-4ce2-a2c9-ad0fe6fcd063"
-            ]
-          };
-
-          if (packageId && !testCoupon.applicableEntityIds.includes(packageId)) {
-            setCouponError("This coupon is not applicable to the selected package.");
-            setIsValidatingCoupon(false);
-            return;
-          }
-
-          setAppliedCoupon(testCoupon);
-          setCouponCodeInput("");
-        } else {
-          setCouponError(result?.data?.error || "Invalid coupon code");
-        }
+        setCouponError(result?.data?.error || result?.message || "Invalid coupon code");
       }
     } catch (err: any) {
       console.error("Coupon validation error:", err);
-      if (code.toUpperCase() === "NOW10") {
-        const testCoupon = {
-          id: "e0d060fb-8a85-467a-9500-9134015835e7",
-          code: "NOW10",
-          description: "",
-          discountType: "PERCENTAGE",
-          discountValue: "5",
-          maxUses: null,
-          usedCount: 0,
-          minPurchaseAmount: null,
-          maxDiscountAmount: null,
-          startDate: "2026-06-16T00:00:00.000Z",
-          endDate: "2026-06-30T00:00:00.000Z",
-          isActive: true,
-          applicableTo: ["package"],
-          applicableEntityIds: [
-            "2c8fe9f3-7b91-49cf-9e0e-150f88759a16",
-            "0349dec9-3a51-42cf-91e1-239f3cc34963",
-            "31003632-cc7c-4ce2-a2c9-ad0fe6fcd063"
-          ]
-        };
-
-        if (packageId && !testCoupon.applicableEntityIds.includes(packageId)) {
-          setCouponError("This coupon is not applicable to the selected package.");
-        } else {
-          setAppliedCoupon(testCoupon);
-          setCouponCodeInput("");
-        }
-      } else {
-        setCouponError("Failed to validate coupon code. Please try again.");
-      }
+      const errMsg = err?.response?.data?.message || err?.response?.data?.data?.error || "Failed to validate coupon code. Please try again.";
+      setCouponError(errMsg);
     } finally {
       setIsValidatingCoupon(false);
     }
