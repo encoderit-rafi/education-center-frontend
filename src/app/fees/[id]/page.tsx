@@ -27,6 +27,7 @@ import { Badge } from "@/components/ui/badge";
 import { notFound } from "next/navigation";
 import { PriceDisplay } from "@/components/ui/price-display";
 import api from "@/axios";
+import { getLocale, getTranslations } from "next-intl/server";
 import Image from "next/image";
 import DiscountAd from "@/components/blocks/discount-ad";
 import PromoDiscount from "@/components/blocks/promo-discount";
@@ -88,7 +89,8 @@ interface CoursePackage {
   duration: string;
   totalHours: string;
   scheduleInfo: string;
-  bestFor: string[];
+  bestFor: (string | React.ReactNode)[];
+  requirements?: string | null;
   image?: string | null;
 }
 
@@ -104,6 +106,9 @@ export default async function FeesDynamicPage({
   params: Promise<{ id: string }>;
 }) {
   const { id: slug } = await params;
+  const locale = await getLocale();
+  const t = await getTranslations("FeesPage");
+  const tPrep = await getTranslations("ExamPrepPage");
 
   let course: CourseDetail | null = null;
   let packages: CoursePackage[] = [];
@@ -125,6 +130,71 @@ export default async function FeesDynamicPage({
   if (!course) {
     notFound();
   }
+
+  // Apply course translation if available
+  const courseTranslatedName = (course as any)?.translations?.[locale]?.name;
+  const courseTranslatedDescription = (course as any)?.translations?.[locale]?.description;
+  if (courseTranslatedName) course.name = courseTranslatedName;
+  if (courseTranslatedDescription) course.description = courseTranslatedDescription;
+
+  // Apply locale-aware description/name for each workshop
+  workshops = workshops.map((w) => {
+    const wTrans = (w as any)?.translations?.[locale];
+    const wTranslatedName = wTrans?.name;
+    const wTranslatedDescription = wTrans?.description;
+    return {
+      ...w,
+      name: wTranslatedName || w.name,
+      description: wTranslatedDescription || w.description,
+    };
+  });
+
+  // Helper to parse ** bolds
+  const renderPoint = (text: string) => {
+    if (typeof text !== "string") return text;
+    const parts = text.split("**");
+    if (parts.length <= 1) return text;
+    return (
+      <span>
+        {parts.map((part, i) =>
+          i % 2 === 1 ? (
+            <strong key={i} className="font-bold">
+              {part}
+            </strong>
+          ) : (
+            part
+          )
+        )}
+      </span>
+    );
+  };
+
+  // Apply locale-aware translations for each package
+  packages = packages.map((pkg) => {
+    const pkgTrans = (pkg as any)?.translations?.[locale];
+    const pkgTranslatedName = pkgTrans?.name;
+    const pkgTranslatedDescription = pkgTrans?.description;
+    const pkgTranslatedRequirements = pkgTrans?.requirements;
+    const pkgTranslatedBestFor = pkgTrans?.best_for || pkgTrans?.bestFor;
+    const pkgTranslatedScheduleInfo = pkgTrans?.schedule_info || pkgTrans?.scheduleInfo;
+
+    const rawBestFor = pkgTranslatedBestFor
+      ? Array.isArray(pkgTranslatedBestFor)
+        ? pkgTranslatedBestFor
+        : typeof pkgTranslatedBestFor === "string"
+          ? pkgTranslatedBestFor.split("\n").map((s: string) => s.trim()).filter(Boolean)
+          : pkg.bestFor
+      : pkg.bestFor;
+
+    return {
+      ...pkg,
+      name: pkgTranslatedName || pkg.name,
+      description: pkgTranslatedDescription || pkg.description,
+      requirements: pkgTranslatedRequirements || pkg.requirements,
+      bestFor: rawBestFor.map(renderPoint),
+      scheduleInfo: pkgTranslatedScheduleInfo || pkg.scheduleInfo,
+    };
+  });
 
   const data = course; // For easier mapping
   const mappedExamId = slugToExamId[slug.toLowerCase()] || slug;
@@ -156,12 +226,10 @@ export default async function FeesDynamicPage({
       <section className="relative overflow-hidden bg-slate-50 border-b border-slate-100 base-py base-px">
         <div className="max-w-4xl mx-auto text-center space-y-6">
           <h1 className="text-4xl font-black leading-[1.1] tracking-tight text-slate-900 lg:text-5xl">
-            {data.name} <span className="text-primary italic">Fees</span>
+            {data.name} <span className="text-primary italic">{t("titleSpan")}</span>
           </h1>
           <p className="text-slate-600 text-lg font-medium leading-relaxed max-w-2xl mx-auto">
-            Here is the complete pricing structure for the {data.name} packages
-            and skills workshops. Choose the track that fits your goals and
-            begin your journey.
+            {t("subtitle", { name: data.name })}
           </p>
         </div>
       </section>
@@ -204,12 +272,10 @@ export default async function FeesDynamicPage({
                 <Sparkles className="size-3" /> Targeted Skills Boost
               </div> */}
               <h2 className="text-4xl font-black text-slate-900 tracking-tight leading-tight lg:text-5xl">
-                <span className="text-primary">Workshops</span>
+                <span className="text-primary">{tPrep("workshops.title")}</span>
               </h2>
               <p className="text-slate-600 text-base lg:text-lg font-medium leading-relaxed">
-                Need a targeted boost? Our high-intensity, topic-focused
-                workshops are engineered to deliver immediate results in
-                specific exam sections.
+                {tPrep("workshops.subtitle")}
               </p>
             </div>
 
@@ -237,7 +303,7 @@ export default async function FeesDynamicPage({
 
                       <p className="text-xs text-slate-600 font-medium leading-relaxed line-clamp-4">
                         {workshop.description ||
-                          `Comprehensive ${workshop.duration}-hour intensive workshop focusing on core strategies, mock practice, and live feedback for the ${workshop.subTitle} exam.`}
+                          tPrep("workshopFallback", { duration: workshop.duration, subTitle: workshop.subTitle })}
                       </p>
                     </div>
 
@@ -265,7 +331,7 @@ export default async function FeesDynamicPage({
                         )}
                       >
                         {/* <Calendar className="size-4" /> */}
-                        <span>Book</span>
+                        <span>{t("bookNow")}</span>
                       </Link>
                     </div>
                   </BaseCard>

@@ -1,7 +1,9 @@
 import { BadgePercent } from "lucide-react";
 import React from "react";
+import { useTranslations } from "next-intl";
 
 export default function PromoDiscount() {
+  const t = useTranslations("DiscountSection");
   return (
     <section className="relative overflow-hidden  mx-auto bg-primary py-14 md:py-20">
       {/* Decorative blobs */}
@@ -23,25 +25,23 @@ export default function PromoDiscount() {
         {/* Label pill */}
         <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-black uppercase tracking-[0.25em] text-white backdrop-blur-sm">
           <BadgePercent className="size-3.5" />
-          Exclusive Online Offer
+          {t("exclusiveOffer")}
         </div>
 
         {/* Main heading */}
         <div className="space-y-3">
           <h2 className="text-4xl md:text-6xl font-black text-white leading-[1.08] tracking-tight">
-            Save up to{" "}
+            {t("saveUpTo")}{" "}
             <span className="relative inline-block">
               <span className="relative z-10">25%</span>
               <span className="absolute inset-0 -mx-2 rounded-lg bg-white/15 blur-sm" />
             </span>
           </h2>
           <p className="mx-auto max-w-2xl text-base md:text-xl text-white/80 leading-relaxed font-medium">
-            On <em className="not-italic font-semibold text-white">some</em> of
-            our courses when you book your exam and register for the course with{" "}
-            <span className="font-extrabold text-white underline underline-offset-4 decoration-white/40">
-              TEPTH
-            </span>{" "}
-            and pay online on our website.
+            {t.rich("promoTextRich", {
+              italic: (chunks) => <em className="not-italic font-semibold text-white">{chunks}</em>,
+              bold: (chunks) => <span className="font-extrabold text-white underline underline-offset-4 decoration-white/40">{chunks}</span>
+            })}
           </p>
         </div>
 
@@ -49,27 +49,27 @@ export default function PromoDiscount() {
         <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
           {[
             {
-              label: "Group Course",
+              label: t("groupCourse"),
               value: "10%",
               color: "bg-emerald-400/20 border-emerald-300/30 text-emerald-100",
             },
             {
-              label: "Semi-private Course",
+              label: t("semiPrivateCourse"),
               value: "15%",
               color: "bg-rose-400/20 border-rose-300/30 text-rose-100",
             },
             {
-              label: "In-person 1-to-1",
+              label: t("inPersonOneToOne"),
               value: "20%",
               color: "bg-sky-400/20 border-sky-300/30 text-sky-100",
             },
             {
-              label: "Online 1-to-1",
+              label: t("onlineOneToOne"),
               value: "20%",
               color: "bg-amber-400/20 border-amber-300/30 text-amber-100",
             },
             {
-              label: "Hybrid 1-to-1",
+              label: t("hybridOneToOne"),
               value: "25%",
               color: "bg-violet-400/20 border-violet-300/30 text-violet-100",
             },

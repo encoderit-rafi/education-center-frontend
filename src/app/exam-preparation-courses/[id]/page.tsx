@@ -305,15 +305,13 @@ export default async function ExamPreparationDynamicPage({
           <div className="container px-4 lg:px-8 max-w-7xl mx-auto space-y-16">
             <div className="text-center max-w-3xl mx-auto space-y-4">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-black uppercase tracking-widest">
-                <Sparkles className="size-3" /> Targeted Skills Boost
+                <Sparkles className="size-3" /> {t("workshops.skillsBoostBadge")}
               </div>
               <h2 className="text-4xl font-black text-slate-900 tracking-tight leading-tight lg:text-5xl">
-                <span className="text-primary">Workshops</span>
+                <span className="text-primary">{t("workshops.title")}</span>
               </h2>
               <p className="text-slate-600 text-base lg:text-lg font-medium leading-relaxed">
-                Need a targeted boost? Our high-intensity, topic-focused
-                workshops are engineered to deliver immediate results in
-                specific exam sections.
+                {t("workshops.subtitle")}
               </p>
             </div>
 
@@ -368,7 +366,7 @@ export default async function ExamPreparationDynamicPage({
                           "font-bold h-11 shadow-sm px-4 w-full flex items-center justify-center gap-2 group-hover:bg-primary group-hover:text-white transition-all duration-300",
                         )}
                       >
-                        <span>View Details</span>
+                        <span>{t("workshops.viewDetails")}</span>
                       </Link>
                     </div>
                   </BaseCard>
