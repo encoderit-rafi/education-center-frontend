@@ -2614,6 +2614,10 @@
       "licensedCenter": "مركز تحضيري مرخص"
     },
     "workshops": {
+      "skillsBoostBadge": "تعزيز المهارات المستهدفة",
+      "title": "ورش العمل",
+      "subtitle": "هل تحتاج إلى تعزيز مهاراتك بشكل مستهدف؟ تم تصميم ورش العمل المكثفة والمركزة لدينا لتحقيق نتائج فورية في أقسام محددة من الاختبار.",
+      "viewDetails": "عرض التفاصيل",
       "requirementsTitle": "أثناء ورشة العمل، يعمل المرشحون على:",
       "bestForTitle": "هذه الورشة مناسبة بشكل خاص للمرشحين الذين:",
       "bestForFallback": "أي شخص يتطلع إلى صقل مهاراته في جلسة مركزة ومكثفة.",
@@ -2628,6 +2632,80 @@
       "quickInfoDuration": "جلسة مكثفة مدتها {duration} ساعة",
       "certifiedInstructors": "مدربون معتمدون",
       "licensedCenter": "مركز تحضيري مرخص"
+    }
+  },
+  "FeesPage": {
+    "titleSpan": "الرسوم",
+    "subtitle": "إليك هيكل الأسعار الكامل لباقات {name} وورش العمل الخاصة بالمهارات. اختر المسار الذي يناسب أهدافك وابدأ رحلتك.",
+    "bookNow": "احجز"
+  },
+  "DiscountSection": {
+    "specialOffer": "عرض خاص",
+    "exclusiveOffer": "عرض حصري عبر الإنترنت",
+    "saveUpTo": "وفر ما يصل إلى",
+    "promoTextRich": "على <italic>بعض</italic> دوراتنا عند حجز اختبارك والتسجيل في الدورة مع <bold>TEPTH</bold> والدفع عبر الإنترنت على موقعنا.",
+    "adText": "احجز اختبارك وسجل في الدورة مع TEPTH وادفع عبر الإنترنت على موقعنا الإلكتروني.",
+    "groupCourse": "دورة جماعية",
+    "semiPrivateCourse": "دورة شبه خاصة",
+    "inPersonOneToOne": "دورة حضورية شخص لشخص",
+    "onlineOneToOne": "دورة عبر الإنترنت شخص لشخص",
+    "hybridOneToOne": "دورة هجينة شخص لشخص",
+    "savePct": "وفر {val}",
+    "viewPackages": "عرض الباقات والتسجيل"
+  },
+  "CourseRegistration": {
+    "title": "<primary>التسجيل في دورة</primary> {courseName}",
+    "loading": "جاري التحميل...",
+    "step1Title": "معلوماتك الشخصية",
+    "firstNameLabel": "الاسم الأول",
+    "firstNamePlaceholder": "جون",
+    "middleNameLabel": "الاسم الأوسط",
+    "middleNamePlaceholder": "ويليام",
+    "lastNameLabel": "اسم العائلة",
+    "lastNamePlaceholder": "دو",
+    "emailLabel": "البريد الإلكتروني",
+    "emailPlaceholder": "example@gmail.com",
+    "phoneLabel": "رقم الهاتف",
+    "countryLabel": "الدولة",
+    "countryPlaceholder": "ابحث عن الدولة...",
+    "addressLabel": "العنوان",
+    "addressPlaceholder": "123 الشارع الرئيسي",
+    "cityLabel": "الإمارة / المدينة",
+    "cityPlaceholder": "دبي",
+    "step2Title": "الدفع",
+    "havePromoCode": "هل لديك رمز ترويجي؟",
+    "apply": "تطبيق",
+    "removeCoupon": "إزالة الكوبون",
+    "percentageOff": "تم تطبيق خصم {value}%",
+    "fixedOff": "تم تطبيق خصم {value} درهم",
+    "coursePrice": "سعر الدورة",
+    "couponApplied": "كوبون ({code})",
+    "total": "الإجمالي",
+    "paymentMethodLabel": "طريقة الدفع",
+    "creditCardLabel": "بطاقة الائتمان / الخصم",
+    "processing": "جاري المعالجة...",
+    "submitButton": "أوافق، ادفع",
+    "bookingError": "حدث خطأ أثناء معالجة حجزك. يرجى المحاولة مرة أخرى.",
+    "couponErrors": {
+      "packageOnly": "هذا الكوبون ينطبق فقط على باقات الدورات.",
+      "notApplicable": "هذا الكوبون لا ينطبق على الباقة المحددة.",
+      "minPurchase": "الحد الأدنى لقيمة الشراء المطلوبة هو {amount} درهم.",
+      "invalid": "رمز كوبون غير صالح",
+      "failed": "فشل التحقق من رمز الكوبون. يرجى المحاولة مرة أخرى."
+    },
+    "validation": {
+      "firstName": "يجب أن يتكون الاسم الأول من حرفين على الأقل",
+      "lastName": "اسم العائلة مطلوب",
+      "email": "يرجى إدخال بريد إلكتروني صحيح",
+      "phone": "رقم الهاتف مطلوب",
+      "address": "العنوان مطلوب",
+      "city": "الإمارة / المدينة مطلوبة",
+      "country": "الدولة مطلوبة"
+    },
+    "success": {
+      "title": "تم تأكيد الحجز",
+      "message": "تم استلام تسجيلك في دورة تحضير <bold>{courseName}</bold>. يرجى التحقق من بريدك الإلكتروني للحصول على مزيد من التعليمات وتفاصيل التسجيل.",
+      "close": "إغلاق"
     }
   }
 }

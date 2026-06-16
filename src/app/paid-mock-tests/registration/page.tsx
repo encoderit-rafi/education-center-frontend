@@ -137,7 +137,12 @@ function PaidMockTestRegistrationForm({
   const selectedPaymentMethod = watch("paymentMethod");
   const formData = watch();
 
-  const PRICE = data ? parseFloat(data.price || "350") : 350;
+  const locationParam = searchParams.get("location") || "home";
+  const priceParam = searchParams.get("price");
+  const rawCenterPrice = data?.details?.center_price ?? data?.center_price;
+  const PRICE = priceParam
+    ? parseFloat(priceParam)
+    : (data ? parseFloat((locationParam === "center" ? rawCenterPrice : data.price) || data.price || "350") : 350);
   const CURRENCY = "AED";
 
   const paymentMutation = useMutation({
@@ -187,6 +192,7 @@ function PaidMockTestRegistrationForm({
       address: formData.address,
       total_amount: PRICE,
       price: PRICE,
+      location: locationParam,
       payment_methods: formData.paymentMethod,
     };
 
@@ -393,6 +399,13 @@ function PaidMockTestRegistrationForm({
                           </p>
                         </div>
                       )}
+
+                      <div>
+                        <p className="text-xs text-slate-400">Location</p>
+                        <p className="font-semibold text-slate-700 capitalize">
+                          {locationParam === "center" ? "Test Center" : "Home / Online"}
+                        </p>
+                      </div>
 
                       <div className="grid grid-cols-2 gap-3 pt-2">
                         {data.duration && (

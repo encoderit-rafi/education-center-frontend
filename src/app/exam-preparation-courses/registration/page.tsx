@@ -25,44 +25,22 @@ import { useSearchParams } from "next/navigation";
 import Stepper from "@/components/stepper";
 import { PriceDisplay } from "@/components/ui/price-display";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
-const bookingSchema = z.object({
+const getBookingSchema = (t: any) => z.object({
   mockTestId: z.string().optional(),
-  firstName: z
-    .string()
-    .trim()
-    .min(1, "First Name is required")
-    .min(2, "First name must be at least 2 characters"),
+  firstName: z.string().min(2, t("validation.firstName")),
   middleName: z.string().optional(),
-  lastName: z
-    .string()
-    .trim()
-    .min(1, "Family name is required"),
-  email: z
-    .string()
-    .trim()
-    .min(1, "Email Address is required")
-    .email("Please enter a valid email address"),
-  phone: z
-    .string()
-    .trim()
-    .min(1, "Phone number is required"),
-  address: z
-    .string()
-    .trim()
-    .min(1, "Address is required"),
-  city: z
-    .string()
-    .trim()
-    .min(1, "Emirate / City is required"),
-  country: z
-    .string()
-    .trim()
-    .min(1, "Country is required"),
+  lastName: z.string().min(1, t("validation.lastName")),
+  email: z.string().email(t("validation.email")),
+  phone: z.string().min(1, t("validation.phone")),
+  address: z.string().min(1, t("validation.address")),
+  city: z.string().min(1, t("validation.city")),
+  country: z.string().min(1, t("validation.country")),
   paymentMethod: z.enum(["stripe", "paypal"]),
 });
 
-type BookingValues = z.infer<typeof bookingSchema>;
+type BookingValues = z.infer<ReturnType<typeof getBookingSchema>>;
 type CoursePackage = {
   id: string;
   courseId: string;
@@ -103,6 +81,9 @@ function CourseRegistrationForm({ className }: { className?: string }) {
   const courseSlug = searchParams.get("examId");
   const packageId = searchParams.get("courseId");
   const priceParam = searchParams.get("price");
+
+  const t = useTranslations("CourseRegistration");
+  const bookingSchema = getBookingSchema(t);
 
   // Fetch course details from API
   const { data: courseData } = useQuery({
@@ -199,7 +180,7 @@ function CourseRegistrationForm({ className }: { className?: string }) {
         // Verify coupon parameters on client-side for additional safety
         if (coupon.applicableTo && Array.isArray(coupon.applicableTo)) {
           if (!coupon.applicableTo.includes("package")) {
-            setCouponError("This coupon is only applicable to course packages.");
+            setCouponError(t("couponErrors.packageOnly"));
             setIsValidatingCoupon(false);
             return;
           }
@@ -207,14 +188,14 @@ function CourseRegistrationForm({ className }: { className?: string }) {
 
         if (coupon.applicableEntityIds && Array.isArray(coupon.applicableEntityIds) && coupon.applicableEntityIds.length > 0) {
           if (packageId && !coupon.applicableEntityIds.includes(packageId)) {
-            setCouponError("This coupon is not applicable to the selected package.");
+            setCouponError(t("couponErrors.notApplicable"));
             setIsValidatingCoupon(false);
             return;
           }
         }
 
         if (coupon.minPurchaseAmount && base_price < parseFloat(coupon.minPurchaseAmount)) {
-          setCouponError(`Minimum purchase amount of AED ${coupon.minPurchaseAmount} required.`);
+          setCouponError(t("couponErrors.minPurchase", { amount: coupon.minPurchaseAmount }));
           setIsValidatingCoupon(false);
           return;
         }
@@ -222,11 +203,11 @@ function CourseRegistrationForm({ className }: { className?: string }) {
         setAppliedCoupon(coupon);
         setCouponCodeInput("");
       } else {
-        setCouponError(result?.data?.error || result?.message || "Invalid coupon code");
+        setCouponError(result?.data?.error || result?.message || t("couponErrors.invalid"));
       }
     } catch (err: any) {
       console.error("Coupon validation error:", err);
-      const errMsg = err?.response?.data?.message || err?.response?.data?.data?.error || "Failed to validate coupon code. Please try again.";
+      const errMsg = err?.response?.data?.message || err?.response?.data?.data?.error || t("couponErrors.failed");
       setCouponError(errMsg);
     } finally {
       setIsValidatingCoupon(false);
@@ -304,19 +285,20 @@ function CourseRegistrationForm({ className }: { className?: string }) {
         </div>
         <div className="space-y-3">
           <h2 className="text-3xl font-headline font-black text-emerald-900 tracking-tight">
-            Booking Confirmed
+            {t("success.title")}
           </h2>
           <p className="text-emerald-700/80 text-base leading-relaxed font-medium">
-            Your registration for the <strong>{courseName}</strong> preparation
-            course has been received. Check your email for further instructions
-            and your enrollment details.
+            {t.rich("success.message", {
+              courseName: courseName,
+              bold: (chunks) => <strong>{chunks}</strong>
+            })}
           </p>
         </div>
         <button
           onClick={() => setIsSuccess(false)}
           className="px-10 py-3 bg-emerald-600 text-white font-headline font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-emerald-700 transition-all shadow-xl shadow-emerald-600/20"
         >
-          Close
+          {t("success.close")}
         </button>
       </div>
     );
@@ -328,8 +310,10 @@ function CourseRegistrationForm({ className }: { className?: string }) {
       <section className="relative overflow-hidden bg-slate-50 base-px base-py">
         <div className="mx-auto max-w-4xl">
           <h1 className="text-3xl mb-12 text-center font-black leading-[1.1] tracking-tight text-slate-900 lg:text-4xl xl:text-5xl">
-            {courseName}{" "}
-            <span className="text-primary">Course Registration</span>
+            {t.rich("title", {
+              courseName: courseName,
+              primary: (chunks) => <span className="text-primary">{chunks}</span>
+            })}
           </h1>
 
           <form
@@ -338,14 +322,14 @@ function CourseRegistrationForm({ className }: { className?: string }) {
           >
             <section className="grid md:grid-cols-2 gap-5">
               <div className="space-y-3">
-                <Stepper step={1}>Your Information</Stepper>
+                <Stepper step={1}>{t("step1Title")}</Stepper>
                 <div className="grid grid-cols-2 gap-3">
                   <Field data-invalid={!!errors.firstName}>
-                    <FieldLabel required>First Name</FieldLabel>
+                    <FieldLabel required>{t("firstNameLabel")}</FieldLabel>
                     <FieldContent>
                       <Input
                         type="text"
-                        placeholder="John"
+                        placeholder={t("firstNamePlaceholder")}
                         aria-invalid={!!errors.firstName}
                         {...register("firstName")}
                       />
@@ -353,11 +337,11 @@ function CourseRegistrationForm({ className }: { className?: string }) {
                     </FieldContent>
                   </Field>
                   <Field data-invalid={!!errors.middleName}>
-                    <FieldLabel>Middle Name</FieldLabel>
+                    <FieldLabel>{t("middleNameLabel")}</FieldLabel>
                     <FieldContent>
                       <Input
                         type="text"
-                        placeholder="William"
+                        placeholder={t("middleNamePlaceholder")}
                         aria-invalid={!!errors.middleName}
                         {...register("middleName")}
                       />
@@ -365,11 +349,11 @@ function CourseRegistrationForm({ className }: { className?: string }) {
                     </FieldContent>
                   </Field>
                   <Field className="col-span-2" data-invalid={!!errors.lastName}>
-                    <FieldLabel required>Family Name</FieldLabel>
+                    <FieldLabel required>{t("lastNameLabel")}</FieldLabel>
                     <FieldContent>
                       <Input
                         type="text"
-                        placeholder="Doe"
+                        placeholder={t("lastNamePlaceholder")}
                         aria-invalid={!!errors.lastName}
                         {...register("lastName")}
                       />
@@ -378,11 +362,11 @@ function CourseRegistrationForm({ className }: { className?: string }) {
                   </Field>
                 </div>
                 <Field data-invalid={!!errors.email}>
-                  <FieldLabel required>Email</FieldLabel>
+                  <FieldLabel required>{t("emailLabel")}</FieldLabel>
                   <FieldContent>
                     <Input
                       type="email"
-                      placeholder="example@gmail.com"
+                      placeholder={t("emailPlaceholder")}
                       aria-invalid={!!errors.email}
                       {...register("email")}
                     />
@@ -391,7 +375,7 @@ function CourseRegistrationForm({ className }: { className?: string }) {
                 </Field>
                 <div className="grid grid-cols-2 gap-3">
                   <Field data-invalid={!!errors.phone}>
-                    <FieldLabel required>Phone Number</FieldLabel>
+                    <FieldLabel required>{t("phoneLabel")}</FieldLabel>
                     <FieldContent>
                       <PhoneInput
                         name="phone"
@@ -404,11 +388,11 @@ function CourseRegistrationForm({ className }: { className?: string }) {
                     </FieldContent>
                   </Field>
                   <Field data-invalid={!!errors.country}>
-                    <FieldLabel required>Country</FieldLabel>
+                    <FieldLabel required>{t("countryLabel")}</FieldLabel>
                     <FieldContent>
                       <CountryDropdown
                         name="country"
-                        placeholder="Search country..."
+                        placeholder={t("countryPlaceholder")}
                         value={formData.country}
                         aria-invalid={!!errors.country}
                         onChange={(country) => setValue("country", country.name, { shouldValidate: true })}
@@ -418,11 +402,11 @@ function CourseRegistrationForm({ className }: { className?: string }) {
                   </Field>
                 </div>
                 <Field data-invalid={!!errors.address}>
-                  <FieldLabel required>Address</FieldLabel>
+                  <FieldLabel required>{t("addressLabel")}</FieldLabel>
                   <FieldContent>
                     <Input
                       type="text"
-                      placeholder="123 Main St"
+                      placeholder={t("addressPlaceholder")}
                       aria-invalid={!!errors.address}
                       {...register("address")}
                     />
@@ -430,11 +414,11 @@ function CourseRegistrationForm({ className }: { className?: string }) {
                   </FieldContent>
                 </Field>
                 <Field data-invalid={!!errors.city}>
-                  <FieldLabel required>Emirate / City</FieldLabel>
+                  <FieldLabel required>{t("cityLabel")}</FieldLabel>
                   <FieldContent>
                     <Input
                       type="text"
-                      placeholder="Dubai"
+                      placeholder={t("cityPlaceholder")}
                       aria-invalid={!!errors.city}
                       {...register("city")}
                     />
@@ -444,7 +428,7 @@ function CourseRegistrationForm({ className }: { className?: string }) {
               </div>
               <div className="space-y-3">
                 <Stepper step={2}>
-                  Payment{" "}
+                  {t("step2Title")}{" "}
                   <span className="bg-primary/10 px-3 py-1 rounded-full text-sm font-semibold text-primary">
                     <PriceDisplay amount={total_amount} />
                   </span>
@@ -454,7 +438,7 @@ function CourseRegistrationForm({ className }: { className?: string }) {
                 <div className="bg-slate-50 border border-slate-200/60 rounded-xl p-4 space-y-3 mb-4 transition-all duration-300">
                   <div className="flex items-center gap-2 text-xs font-bold text-slate-500 uppercase tracking-wider">
                     <Tag className="w-3.5 h-3.5 text-primary" />
-                    <span>Have a Promo Code?</span>
+                    <span>{t("havePromoCode")}</span>
                   </div>
                   
                   {!appliedCoupon ? (
@@ -480,7 +464,7 @@ function CourseRegistrationForm({ className }: { className?: string }) {
                           {isValidatingCoupon ? (
                             <Loader2 className="w-3.5 h-3.5 animate-spin" />
                           ) : (
-                            "Apply"
+                            t("apply")
                           )}
                         </Button>
                       </div>
@@ -503,8 +487,8 @@ function CourseRegistrationForm({ className }: { className?: string }) {
                           </p>
                           <p className="text-[10px] font-semibold text-emerald-600">
                             {appliedCoupon.discountType === "PERCENTAGE"
-                              ? `${appliedCoupon.discountValue}% Off applied`
-                              : `AED ${appliedCoupon.discountValue} Off applied`}
+                              ? t("percentageOff", { value: appliedCoupon.discountValue })
+                              : t("fixedOff", { value: appliedCoupon.discountValue })}
                           </p>
                         </div>
                       </div>
@@ -512,7 +496,7 @@ function CourseRegistrationForm({ className }: { className?: string }) {
                         type="button"
                         onClick={handleRemoveCoupon}
                         className="w-6 h-6 rounded-full hover:bg-emerald-100/50 flex items-center justify-center text-emerald-700/60 hover:text-emerald-800 transition-colors"
-                        title="Remove coupon"
+                        title={t("removeCoupon")}
                       >
                         <X className="w-4 h-4" />
                       </button>
@@ -523,7 +507,7 @@ function CourseRegistrationForm({ className }: { className?: string }) {
                 {/* Fee Breakdown */}
                 <div className="bg-white border rounded-lg p-4 space-y-2 mb-4 text-sm">
                   <div className="flex justify-between items-center text-slate-600">
-                    <span>Course Price</span>
+                    <span>{t("coursePrice")}</span>
                     <span>
                       <PriceDisplay amount={base_price} />
                     </span>
@@ -532,7 +516,7 @@ function CourseRegistrationForm({ className }: { className?: string }) {
                     <div className="flex justify-between items-center text-emerald-600 font-medium animate-in slide-in-from-top-1 duration-200">
                       <span className="flex items-center gap-1.5">
                         <Tag className="w-3.5 h-3.5 shrink-0" />
-                        Coupon ({appliedCoupon?.code})
+                        {t("couponApplied", { code: appliedCoupon?.code })}
                       </span>
                       <span>
                         - <PriceDisplay amount={discount_amount} />
@@ -541,7 +525,7 @@ function CourseRegistrationForm({ className }: { className?: string }) {
                   )}
 
                   <div className="pt-2 mt-2 border-t flex justify-between items-center font-bold text-slate-900 text-base">
-                    <span>Total</span>
+                    <span>{t("total")}</span>
                     <span>
                       <PriceDisplay amount={total_amount} />
                     </span>
@@ -549,7 +533,7 @@ function CourseRegistrationForm({ className }: { className?: string }) {
                 </div>
 
                 <div className="space-y-3">
-                  <FieldLabel required>Payment Method</FieldLabel>
+                  <FieldLabel required>{t("paymentMethodLabel")}</FieldLabel>
                   <RadioGroup
                     value={selectedPaymentMethod}
                     onValueChange={(val) =>
@@ -567,11 +551,8 @@ function CourseRegistrationForm({ className }: { className?: string }) {
                       )}
                     >
                       <RadioGroupItem value="stripe" id="payment-stripe" />
-                      {/* <span className="font-semibold text-sm">
-                        Credit Card (Stripe)
-                      </span> */}
                       <div className="w-full flex items-center justify-between gap-2 ">
-                        <span className="font-semibold">Credit/Debit Card</span>
+                        <span className="font-semibold">{t("creditCardLabel")}</span>
                         <Image
                           src="/images/cards.png"
                           alt="Stripe"
@@ -590,7 +571,6 @@ function CourseRegistrationForm({ className }: { className?: string }) {
                       )}
                     >
                       <RadioGroupItem value="paypal" id="payment-paypal" />
-                      {/* <span className="font-semibold text-sm">PayPal</span> */}
                       <Image
                         src="/images/paypal-logo.png"
                         alt="PayPal"
@@ -607,12 +587,11 @@ function CourseRegistrationForm({ className }: { className?: string }) {
                   className="w-full mt-6 py-3"
                   disabled={mutation.isPending}
                 >
-                  {mutation.isPending ? "Processing..." : "I Accept, Pay"}
+                  {mutation.isPending ? t("processing") : t("submitButton")}
                 </Button>
                 {mutation.isError && (
                   <p className="text-red-500 text-sm mt-2">
-                    There was an error processing your booking. Please try
-                    again.
+                    {t("bookingError")}
                   </p>
                 )}
               </div>
@@ -625,8 +604,9 @@ function CourseRegistrationForm({ className }: { className?: string }) {
 }
 
 export default function CourseRegistration() {
+  const t = useTranslations("CourseRegistration");
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<div>{t("loading")}</div>}>
       <CourseRegistrationForm />
     </Suspense>
   );

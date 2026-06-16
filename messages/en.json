@@ -2614,6 +2614,10 @@
       "licensedCenter": "Licensed Prep. Center"
     },
     "workshops": {
+      "skillsBoostBadge": "Targeted Skills Boost",
+      "title": "Workshops",
+      "subtitle": "Need a targeted boost? Our high-intensity, topic-focused workshops are engineered to deliver immediate results in specific exam sections.",
+      "viewDetails": "View Details",
       "requirementsTitle": "During the workshop, candidates work on:",
       "bestForTitle": "This workshop is particularly suitable for candidates who:",
       "bestForFallback": "Anyone looking to sharpen their skills in a focused, intensive session.",
@@ -2628,6 +2632,80 @@
       "quickInfoDuration": "{duration}-hour intensive session",
       "certifiedInstructors": "Certified Instructors",
       "licensedCenter": "Licensed Prep. Center"
+    }
+  },
+  "FeesPage": {
+    "titleSpan": "Fees",
+    "subtitle": "Here is the complete pricing structure for the {name} packages and skills workshops. Choose the track that fits your goals and begin your journey.",
+    "bookNow": "Book"
+  },
+  "DiscountSection": {
+    "specialOffer": "SPECIAL OFFER",
+    "exclusiveOffer": "Exclusive Online Offer",
+    "saveUpTo": "Save up to",
+    "promoTextRich": "On <italic>some</italic> of our courses when you book your exam and register for the course with <bold>TEPTH</bold> and pay online on our website.",
+    "adText": "Book your exam and register for the course with TEPTH and pay online on our website.",
+    "groupCourse": "Group Course",
+    "semiPrivateCourse": "Semi-private Course",
+    "inPersonOneToOne": "In-person One-to-one",
+    "onlineOneToOne": "Online One-to-one",
+    "hybridOneToOne": "Hybrid One-to-one",
+    "savePct": "Save {val}",
+    "viewPackages": "View Packages & Enroll"
+  },
+  "CourseRegistration": {
+    "title": "{courseName} <primary>Course Registration</primary>",
+    "loading": "Loading...",
+    "step1Title": "Your Information",
+    "firstNameLabel": "First Name",
+    "firstNamePlaceholder": "John",
+    "middleNameLabel": "Middle Name",
+    "middleNamePlaceholder": "William",
+    "lastNameLabel": "Family Name",
+    "lastNamePlaceholder": "Doe",
+    "emailLabel": "Email",
+    "emailPlaceholder": "example@gmail.com",
+    "phoneLabel": "Phone Number",
+    "countryLabel": "Country",
+    "countryPlaceholder": "Search country...",
+    "addressLabel": "Address",
+    "addressPlaceholder": "123 Main St",
+    "cityLabel": "Emirate / City",
+    "cityPlaceholder": "Dubai",
+    "step2Title": "Payment",
+    "havePromoCode": "Have a Promo Code?",
+    "apply": "Apply",
+    "removeCoupon": "Remove coupon",
+    "percentageOff": "{value}% Off applied",
+    "fixedOff": "AED {value} Off applied",
+    "coursePrice": "Course Price",
+    "couponApplied": "Coupon ({code})",
+    "total": "Total",
+    "paymentMethodLabel": "Payment Method",
+    "creditCardLabel": "Credit/Debit Card",
+    "processing": "Processing...",
+    "submitButton": "I Accept, Pay",
+    "bookingError": "There was an error processing your booking. Please try again.",
+    "couponErrors": {
+      "packageOnly": "This coupon is only applicable to course packages.",
+      "notApplicable": "This coupon is not applicable to the selected package.",
+      "minPurchase": "Minimum purchase amount of AED {amount} required.",
+      "invalid": "Invalid coupon code",
+      "failed": "Failed to validate coupon code. Please try again."
+    },
+    "validation": {
+      "firstName": "First name must be at least 2 characters",
+      "lastName": "Family name is required",
+      "email": "Please enter a valid email address",
+      "phone": "Phone number is required",
+      "address": "Address is required",
+      "city": "Emirate / City is required",
+      "country": "Country is required"
+    },
+    "success": {
+      "title": "Booking Confirmed",
+      "message": "Your registration for the <bold>{courseName}</bold> preparation course has been received. Check your email for further instructions and your enrollment details.",
+      "close": "Close"
     }
   }
 }

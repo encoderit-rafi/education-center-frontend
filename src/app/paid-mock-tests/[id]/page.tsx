@@ -28,6 +28,8 @@ import { buttonVariants } from "@/components/ui/button";
 import api from "@/axios";
 import Image from "next/image";
 import { AED } from "@/components/ui/aed";
+import { AcceptPayButton } from "./AcceptPayButton";
+
 
 // Icon mapping to handle dynamic icon rendering
 const iconMap: Record<string, React.ReactNode> = {
@@ -315,14 +317,34 @@ export default async function PaidMockTestDynamicPage({ params }: PageProps) {
                 {data.description}
               </p>
               <p className="text-base text-slate-600 leading-relaxed mb-4 text-justify">
-                Mock Test Price: <span className="text-primary font-bold inline-flex items-center gap-0.5"><AED className="h-[0.8em] w-auto fill-current" />{data.price}</span>
+                Mock Test Price:{" "}
+                {data.details?.center_price || data.center_price ? (
+                  <span className="text-slate-700 font-medium">
+                    <span className="text-primary font-bold inline-flex items-center gap-0.5">
+                      <AED className="h-[0.8em] w-auto fill-current" />
+                      {data.price}
+                    </span>{" "}
+                    (Home) /{" "}
+                    <span className="text-primary font-bold inline-flex items-center gap-0.5">
+                      <AED className="h-[0.8em] w-auto fill-current" />
+                      {data.details?.center_price || data.center_price}
+                    </span>{" "}
+                    (Center)
+                  </span>
+                ) : (
+                  <span className="text-primary font-bold inline-flex items-center gap-0.5">
+                    <AED className="h-[0.8em] w-auto fill-current" />
+                    {data.price}
+                  </span>
+                )}
               </p>
-              <Link
-                href={`/paid-mock-tests/registration?id=${data.slug}`}
+              <AcceptPayButton
+                data={data}
                 className={cn(buttonVariants())}
               >
                 I Accept, Pay
-              </Link>
+              </AcceptPayButton>
+
             </div>
             <Image
               src={`/images/mock-test-${data.slug.replace(/-\d+$/, "")}.jpg`}
@@ -413,6 +435,22 @@ export default async function PaidMockTestDynamicPage({ params }: PageProps) {
             <h3 className="text-secondary text-2xl font-bold italic mb-6 leading-snug">
               &quot;{quote}&quot;
             </h3>
+
+            <AcceptPayButton
+              data={data}
+              className={cn(
+                buttonVariants(),
+                "px-4 sm:px-8 py-3 text-sm font-bold shadow-xl shadow-primary/20 hover:-translate-y-1 transition-all duration-300 ",
+              )}
+            >
+              I Accept, Pay
+            </AcceptPayButton>
+
+            {tagline && (
+              <p className="text-slate-500 font-medium text-xs mt-3">
+                {tagline}
+              </p>
+            )}
           </div>
         </section>
       )}
