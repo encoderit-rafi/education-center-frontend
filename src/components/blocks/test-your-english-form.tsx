@@ -375,9 +375,9 @@ export default function TestYourEnglishForm() {
                 </FieldContent>
               </Field>
 
-             
 
-             
+
+
 
               <Field data-invalid={!!errors.country}>
                 <FieldLabel required>Country</FieldLabel>
@@ -418,7 +418,7 @@ export default function TestYourEnglishForm() {
                   )}
                 </FieldContent>
               </Field>
-               <Field data-invalid={!!errors.phoneNumber}>
+              <Field data-invalid={!!errors.phoneNumber}>
                 <FieldLabel required>Phone Number</FieldLabel>
                 <FieldContent>
                   <div className="rounded-md border border-input focus-within:ring-1 focus-within:ring-ring overflow-hidden">
@@ -440,7 +440,7 @@ export default function TestYourEnglishForm() {
                   )}
                 </FieldContent>
               </Field>
-               <Field data-invalid={!!errors.preferredContactMethod}>
+              <Field data-invalid={!!errors.preferredContactMethod}>
                 <FieldLabel required>Preferred Contact Method</FieldLabel>
                 <FieldContent>
                   <Controller
@@ -535,7 +535,7 @@ export default function TestYourEnglishForm() {
                   )}
                 </FieldContent>
               </Field>
-              
+
             </div>
 
             <Button
@@ -564,65 +564,65 @@ export default function TestYourEnglishForm() {
               </div>
             ) : (
               apiQuestions.map((q, idx) => (
-              <Field
-                key={q.id}
-                data-invalid={!!errors.answers?.[q.id]}
-                className={cn(
-                  "bg-white border border-slate-200 rounded-md p-8 transition-colors",
-                  errors.answers?.[q.id] &&
-                  "border-destructive/50 ring-1 ring-destructive/10 bg-destructive/5",
-                )}
-              >
-                <div className="space-y-6">
-                  <Stepper step={idx + 1}>
-                    <FieldLabel className="text-lg text-wrap font-bold text-secondary leading-tight normal-case">
-                      {q.questionText}
-                    </FieldLabel>
-                  </Stepper>
+                <Field
+                  key={q.id}
+                  data-invalid={!!errors.answers?.[q.id]}
+                  className={cn(
+                    "bg-white border border-slate-200 rounded-md p-8 transition-colors",
+                    errors.answers?.[q.id] &&
+                    "border-destructive/50 ring-1 ring-destructive/10 bg-destructive/5",
+                  )}
+                >
+                  <div className="space-y-6">
+                    <Stepper step={idx + 1}>
+                      <FieldLabel className="text-lg text-wrap font-bold text-secondary leading-tight normal-case">
+                        {q.questionText}
+                      </FieldLabel>
+                    </Stepper>
 
-                  <div className="mb-2">
-                    <p className="text-slate-500 font-medium leading-relaxed">
-                      Choose the correct option
-                    </p>
-                  </div>
+                    <div className="mb-2">
+                      <p className="text-slate-500 font-medium leading-relaxed">
+                        Choose the correct option
+                      </p>
+                    </div>
 
-                  <FieldContent>
-                    <Controller
-                      control={control}
-                      name={`answers.${q.id}`}
-                      render={({ field }) => (
-                        <RadioGroup
-                          value={field.value}
-                          onValueChange={field.onChange}
-                          className="grid gap-3"
-                        >
-                          {(q.options ?? []).map((opt) => (
-                            <div key={`${q.id}-${opt.key}`} className="relative">
-                              <Label
-                                htmlFor={`${q.id}-${opt.key}`}
-                                className="flex items-center px-5 py-4 border-2 border-slate-100 rounded-md cursor-pointer hover:bg-slate-50 has-data-checked:border-primary has-data-checked:bg-primary/5 transition-all"
-                              >
-                                <RadioGroupItem
-                                  value={opt.key}
-                                  id={`${q.id}-${opt.key}`}
-                                  className="mr-3"
-                                />
-                                <span className="text-slate-700 font-medium text-wrap">
-                                  {opt.label}
-                                </span>
-                              </Label>
-                            </div>
-                          ))}
-                        </RadioGroup>
+                    <FieldContent>
+                      <Controller
+                        control={control}
+                        name={`answers.${q.id}`}
+                        render={({ field }) => (
+                          <RadioGroup
+                            value={field.value}
+                            onValueChange={field.onChange}
+                            className="grid gap-3"
+                          >
+                            {(q.options ?? []).map((opt) => (
+                              <div key={`${q.id}-${opt.key}`} className="relative">
+                                <Label
+                                  htmlFor={`${q.id}-${opt.key}`}
+                                  className="flex items-center px-5 py-4 border-2 border-slate-100 rounded-md cursor-pointer hover:bg-slate-50 has-data-checked:border-primary has-data-checked:bg-primary/5 transition-all"
+                                >
+                                  <RadioGroupItem
+                                    value={opt.key}
+                                    id={`${q.id}-${opt.key}`}
+                                    className="mr-3"
+                                  />
+                                  <span className="text-slate-700 font-medium text-wrap">
+                                    {opt.label}
+                                  </span>
+                                </Label>
+                              </div>
+                            ))}
+                          </RadioGroup>
+                        )}
+                      />
+                      {errors.answers?.[q.id] && (
+                        <FieldError>{errors.answers[q.id]?.message}</FieldError>
                       )}
-                    />
-                    {errors.answers?.[q.id] && (
-                      <FieldError>{errors.answers[q.id]?.message}</FieldError>
-                    )}
-                  </FieldContent>
-                </div>
-              </Field>
-            ))
+                    </FieldContent>
+                  </div>
+                </Field>
+              ))
             )}
 
             <div className="flex justify-end pt-6">

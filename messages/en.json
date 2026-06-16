@@ -377,49 +377,55 @@
     }
   },
   "AssessmentSolutionsPage": {
-    "title": "Assessment Solutions for Universities",
-    "LargeInstitutionalCard": {
-      "title": "Large-Scale Testing Frameworks",
-      "description": "We specialize in managing thousands of simultaneous assessments across multiple geographic locations with zero downtime and iron-clad security.",
-      "badge1": "ISO 27001 Certified",
-      "badge2": "Global Access"
+    "title": "Certify Assessment Solutions",
+    "subtitle": "Global Standards in Assessment Intelligence",
+    "intro": "In the rapidly evolving educational sector, secure and smooth exam administration is critical. Educational institutions require a highly reliable platform capable of accommodating anything from a single classroom to a global student body. To meet this demand, TEPTH has teamed up with Certify Assessment Solutions a worldwide leader in assessment solutions and exam delivery to provide an all-inclusive solution featuring exam creation, AI-driven administration, and secure remote proctoring.",
+    "manageTitle": "Develop a tailored system that allows you to manage:",
+    "manageItems": [
+      "Test Authoring & Delivery",
+      "Marking and Results",
+      "Remote Proctoring",
+      "Candidate Management",
+      "Exam Scheduling & Booking",
+      "Payment Gateway"
+    ],
+    "suiteTitle": "SmarTest Suite platforms",
+    "invigilate": {
+      "title": "SmarTest Invigilate",
+      "subtitle": "Uncompromising security meets effortless simplicity.",
+      "description": "SmarTest Invigilate elevates standard remote proctoring by merging smart automation with human review. Our AI-driven system automatically detects and alerts reviewers to potential academic dishonesty, including:",
+      "features": [
+        "Additional person present",
+        "Object detection",
+        "Test-taker absence",
+        "Device usage"
+      ],
+      "detail1": "Our easily installed lockdown browser restricts the user's interface entirely to the assessment, effectively disabling all unauthorized web browsing and background applications.",
+      "detail2": "Functioning as a primary control hub, the Invigilate dashboard allows organizations to seamlessly administer the end-to-end assessment process, free from technical complications.",
+      "tabOverview": "Overview",
+      "tabProctor": "Proctor Console",
+      "tabCandidate": "Candidate View",
+      "tabMobile": "Mobile Setup"
     },
-    "AnalyticalInsights": {
-      "title": "Advanced Psychometrics",
-      "description": "Beyond scores. We provide item-analysis, reliability coefficients, and longitudinal growth tracking for your entire student body."
+    "examiner": {
+      "title": "SmarTest Examiner",
+      "description": "Design and administer multilingual assessment programs equipped with bulk question importing, advanced exam-building capabilities, and comprehensive performance analytics."
     },
-    "Reporting": {
-      "title": "Institutional Reporting",
-      "description": "Customizable executive dashboards that translate complex testing data into actionable institutional intelligence."
+    "nexus": {
+      "title": "SmarTest Nexus",
+      "description": "Take complete control of your program with built-in tools for handling payments, registrations, candidate tracking, and venue logistics."
     },
-    "StrategicIntegration": {
-      "title": "Strategic Integration",
-      "description": "Our systems integrate seamlessly with major LMS platforms including Canvas, Moodle, and Blackboard via LTI standards.",
-      "badge1": "LTI Core",
-      "badge2": "SSO Auth"
+    "proctors": {
+      "title": "SmarTest Proctors",
+      "description": "Leverage our local and worldwide network of multilingual invigilators."
     },
-    "PromotedAcademicServices": {
-      "badge": "Our Core Pillars",
-      "title": "Promoted Academic Services",
-      "services": [
-        {
-          "title": "Exam Proctoring",
-          "description": "Hybrid proctoring combining advanced AI monitoring with elite human invigilators for maximum integrity."
-        },
-        {
-          "title": "Secure Delivery",
-          "description": "Proprietary lockdown browsers ensuring that your intellectual property remains protected at every terminal."
-        },
-        {
-          "title": "Special Accommodations",
-          "description": "Inclusive testing environments supporting WCAG standards and specialized hardware for diverse requirements."
-        }
-      ]
+    "centres": {
+      "title": "SmarTest Centres",
+      "description": "Utilize our state-of-the-art facilities in Dubai and throughout our international network, partnering with us to deliver your program to the highest standards."
     },
-    "PartnerWithUs": {
-      "title1": "Join Our Global",
-      "title2": "Academic Network",
-      "description": "TEPTH Academic Atelier partners with forward-thinking institutions to redefine the value of certification. Let's discuss your organization's specific needs.",
+    "partner": {
+      "title": "Join Our Academic Network",
+      "subtitle": "TEPTH Academic Atelier partners with forward-thinking institutions to redefine the value of certification. Let's discuss your organization's specific needs.",
       "directInquiriesTitle": "Direct Inquiries",
       "directInquiriesText": "partnerships@tepth.academy",
       "institutionalSupportTitle": "Institutional Support",
@@ -809,10 +815,6 @@
         "answer": "Yes, both group and one-to-one tutoring are available."
       },
       {
-        "question": "Is the material fee refundable?",
-        "answer": "No, the material fee is included and not refundable."
-      },
-      {
         "question": "Is the registration fee refundable?",
         "answer": "No, it is not refundable."
       },
@@ -826,11 +828,11 @@
       },
       {
         "question": "What payment methods do you accept?",
-        "answer": "Visa, MasterCard, and PayPal are accepted."
+        "answer": "Visa, MasterCard, Cash, and PayPal are accepted."
       },
       {
         "question": "What qualifications do your teachers have?",
-        "answer": "Our teachers hold bachelor's or master's degrees and certifications such as CELTA, with international teaching experience."
+        "answer": "Our teachers hold bachelor's or master's degrees and certifications such as CELTA, TEFL with international teaching experience."
       },
       {
         "question": "Do you offer facilities for special needs candidates?",
@@ -850,7 +852,7 @@
       },
       {
         "question": "Is public transport available nearby?",
-        "answer": "Yes, buses from Al Rashidiya and Burjuman stop near Dubai Silicon Oasis, within a short walking distance."
+        "answer": "Yes, Take a Sharjah public bus towards Al Mamzar or Al Taawun, disembarking at the nearest bus stop to Tabarak Tower. The bus ride will get you within a short walking distance of the center."
       }
     ]
   },
@@ -2607,7 +2609,7 @@
       "saveInstantCard": "SAVE {discount}{type}",
       "viewDetails": "View Details",
       "registerNow": "Register Now",
-      "securePayment": "Secure online payment processing",
+      "securePayment": "Secure Online Payment",
       "certifiedInstructors": "Certified Instructors",
       "licensedCenter": "Licensed Prep. Center"
     },
@@ -2622,7 +2624,7 @@
       "pricingTitle": "Workshop Pricing",
       "saveInstant": "SAVE {discount}{type} INSTANTLY",
       "bookNow": "Book Now",
-      "securePayment": "Secure online payment processing",
+      "securePayment": "Secure Online Payment",
       "quickInfoDuration": "{duration}-hour intensive session",
       "certifiedInstructors": "Certified Instructors",
       "licensedCenter": "Licensed Prep. Center"
