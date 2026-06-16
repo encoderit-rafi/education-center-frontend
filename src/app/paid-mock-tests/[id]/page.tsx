@@ -318,7 +318,7 @@ export default async function PaidMockTestDynamicPage({ params }: PageProps) {
               </p>
               <p className="text-base text-slate-600 leading-relaxed mb-4 text-justify">
                 Mock Test Price:{" "}
-                {data.center_price ? (
+                {data.details?.center_price || data.center_price ? (
                   <span className="text-slate-700 font-medium">
                     <span className="text-primary font-bold inline-flex items-center gap-0.5">
                       <AED className="h-[0.8em] w-auto fill-current" />
@@ -327,7 +327,7 @@ export default async function PaidMockTestDynamicPage({ params }: PageProps) {
                     (Home) /{" "}
                     <span className="text-primary font-bold inline-flex items-center gap-0.5">
                       <AED className="h-[0.8em] w-auto fill-current" />
-                      {data.center_price}
+                      {data.details?.center_price || data.center_price}
                     </span>{" "}
                     (Center)
                   </span>

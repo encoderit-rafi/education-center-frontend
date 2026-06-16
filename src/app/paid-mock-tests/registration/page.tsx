@@ -116,9 +116,10 @@ function PaidMockTestRegistrationForm({
 
   const locationParam = searchParams.get("location") || "home";
   const priceParam = searchParams.get("price");
+  const rawCenterPrice = data?.details?.center_price ?? data?.center_price;
   const PRICE = priceParam
     ? parseFloat(priceParam)
-    : (data ? parseFloat((locationParam === "center" ? data.center_price : data.price) || data.price || "350") : 350);
+    : (data ? parseFloat((locationParam === "center" ? rawCenterPrice : data.price) || data.price || "350") : 350);
   const CURRENCY = "AED";
 
   const paymentMutation = useMutation({

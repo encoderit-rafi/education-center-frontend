@@ -20,6 +20,9 @@ interface AcceptPayButtonProps {
     slug: string;
     price: string;
     center_price?: string;
+    details?: {
+      center_price?: string | number;
+    } | null;
   };
   className?: string;
   children?: React.ReactNode;
@@ -37,7 +40,8 @@ export function AcceptPayButton({
   const router = useRouter();
 
   const homePrice = parseFloat(data.price || "350");
-  const centerPrice = data.center_price ? parseFloat(data.center_price) : 450;
+  const rawCenterPrice = data.details?.center_price ?? data.center_price;
+  const centerPrice = rawCenterPrice ? parseFloat(String(rawCenterPrice)) : 450;
 
   const handleContinue = () => {
     setIsOpen(false);
