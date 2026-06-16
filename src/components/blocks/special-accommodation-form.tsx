@@ -23,10 +23,20 @@ import {
 import { cn } from "@/lib/utils";
 
 const inquirySchema = z.object({
-  name: z.string().min(2, { message: "Name must be at least 2 characters" }),
-  email: z.string().email({ message: "Please enter a valid email address" }),
+  name: z
+    .string()
+    .trim()
+    .min(1, { message: "Full Name is required" })
+    .min(2, { message: "Name must be at least 2 characters" }),
+  email: z
+    .string()
+    .trim()
+    .min(1, { message: "Email Address is required" })
+    .email({ message: "Please enter a valid email address" }),
   message: z
     .string()
+    .trim()
+    .min(1, { message: "Accommodation Details is required" })
     .min(10, { message: "Message must be at least 10 characters" }),
   document: z.any().optional(),
 });

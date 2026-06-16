@@ -597,11 +597,28 @@ const QUIZ_QUESTIONS = [
 ];
 
 const quizSchema = z.object({
-  fullName: z.string().min(2, "Name is too short"),
-  email: z.string().email("Invalid email address"),
-  phoneNumber: z.string().optional(),
-  city: z.string().min(2, "Emirate/City is required"),
-  country: z.string().min(2, "Country is required"),
+  fullName: z
+    .string()
+    .trim()
+    .min(1, "Full Name is required")
+    .min(2, "Name is too short"),
+  email: z
+    .string()
+    .trim()
+    .min(1, "Email Address is required")
+    .email("Invalid email address"),
+  phoneNumber: z
+    .string()
+    .trim()
+    .min(1, "Phone Number is required"),
+  city: z
+    .string()
+    .trim()
+    .min(1, "Emirate/City is required"),
+  country: z
+    .string()
+    .trim()
+    .min(1, "Country is required"),
   answers: z.record(
     z.string(),
     z.string().min(1, "Please answer this question"),
@@ -778,7 +795,7 @@ export default function EnglishQuizForm() {
               </Field>
 
               <Field data-invalid={!!errors.phoneNumber}>
-                <FieldLabel>Phone Number</FieldLabel>
+                <FieldLabel required>Phone Number</FieldLabel>
                 <FieldContent>
                   <div className="rounded-md border border-input focus-within:ring-1 focus-within:ring-ring overflow-hidden">
                     <Controller
@@ -807,7 +824,7 @@ export default function EnglishQuizForm() {
               size="lg"
               className="w-full md:w-auto px-5 font-bold"
             >
-              Start the Quiz
+              Start the quiz
             </Button>
           </div>
         )}

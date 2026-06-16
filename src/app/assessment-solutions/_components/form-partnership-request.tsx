@@ -9,10 +9,26 @@ import { cn } from "@/lib/utils";
 import { CheckCircle2, Loader2 } from "lucide-react";
 
 const partnershipSchema = z.object({
-    fullName: z.string().min(2, { message: "Full Name is required." }),
-    institution: z.string().min(2, { message: "Institution is required." }),
-    workEmail: z.string().email({ message: "Please provide a valid work email address." }),
-    message: z.string().min(10, { message: "Please provide a detailed description." }),
+    fullName: z
+        .string()
+        .trim()
+        .min(1, { message: "Full Name is required." })
+        .min(2, { message: "Full Name must be at least 2 characters." }),
+    institution: z
+        .string()
+        .trim()
+        .min(1, { message: "Institution is required." })
+        .min(2, { message: "Institution must be at least 2 characters." }),
+    workEmail: z
+        .string()
+        .trim()
+        .min(1, { message: "Work Email is required." })
+        .email({ message: "Please provide a valid work email address." }),
+    message: z
+        .string()
+        .trim()
+        .min(1, { message: "Message is required." })
+        .min(10, { message: "Please provide a detailed description." }),
 });
 
 type PartnershipFormValues = z.infer<typeof partnershipSchema>;

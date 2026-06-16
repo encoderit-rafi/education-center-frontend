@@ -35,13 +35,36 @@ import Image from "next/image";
 const baseBookingSchema = z.object({
   mockTestId: z.string().min(1, "Please select a mock test"),
   varient: z.string().optional(),
-  firstName: z.string().min(2, "First name must be at least 2 characters"),
-  lastName: z.string().min(1, "Family name is required"),
-  email: z.string().email("Please enter a valid email address"),
-  phone: z.string().min(1, "Phone number is required"),
-  address: z.string().min(1, "Address is required"),
-  city: z.string().min(1, "Emirate / City is required"),
-  country: z.string().min(1, "Country is required"),
+  firstName: z
+    .string()
+    .trim()
+    .min(1, "First Name is required")
+    .min(2, "First name must be at least 2 characters"),
+  lastName: z
+    .string()
+    .trim()
+    .min(1, "Family name is required"),
+  email: z
+    .string()
+    .trim()
+    .min(1, "Email Address is required")
+    .email("Please enter a valid email address"),
+  phone: z
+    .string()
+    .trim()
+    .min(1, "Phone number is required"),
+  address: z
+    .string()
+    .trim()
+    .min(1, "Address is required"),
+  city: z
+    .string()
+    .trim()
+    .min(1, "Emirate / City is required"),
+  country: z
+    .string()
+    .trim()
+    .min(1, "Country is required"),
   paymentMethod: z.enum(["stripe", "paypal"]),
 });
 

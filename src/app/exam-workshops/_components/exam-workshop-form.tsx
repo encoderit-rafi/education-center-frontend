@@ -33,13 +33,27 @@ import { Button } from "@/components/ui/button";
 const TIME_SLOTS = ["09:00 AM", "11:30 AM", "02:00 PM", "04:30 PM"];
 
 const bookingSchema = z.object({
-  workshopTitle: z.string().min(1, "Please select a workshop package"),
-  fullName: z.string().min(2, "Full name must be at least 2 characters"),
-  email: z.string().email("Please enter a valid email address"),
+  workshopTitle: z
+    .string()
+    .trim()
+    .min(1, "Please select a workshop package"),
+  fullName: z
+    .string()
+    .trim()
+    .min(1, "Full Name is required")
+    .min(2, "Full name must be at least 2 characters"),
+  email: z
+    .string()
+    .trim()
+    .min(1, "Email Address is required")
+    .email("Please enter a valid email address"),
   date: z.date({
-    message: "Please select a preferred date",
+    message: "Preferred Date is required",
   }),
-  timeSlot: z.string().min(1, "Please select a time slot"),
+  timeSlot: z
+    .string()
+    .trim()
+    .min(1, "Preferred Time Slot is required"),
   paymentMethod: z.literal("card"),
 });
 

@@ -31,18 +31,35 @@ import { Button } from "@/components/ui/button";
 const contactSchema = z.object({
   firstName: z
     .string()
+    .trim()
+    .min(1, { message: "First Name is required" })
     .min(2, { message: "First name must be at least 2 characters" }),
   lastName: z
     .string()
+    .trim()
+    .min(1, { message: "Last Name is required" })
     .min(2, { message: "Last name must be at least 2 characters" }),
-  email: z.string().email({ message: "Please enter a valid email address" }),
-  city: z.string().min(1, { message: "Please enter an emirate or city" }),
-  country: z.string().min(1, { message: "Please select your country" }),
+  email: z
+    .string()
+    .trim()
+    .min(1, { message: "Email Address is required" })
+    .email({ message: "Please enter a valid email address" }),
+  city: z
+    .string()
+    .trim()
+    .min(1, { message: "Emirate / City is required" }),
+  country: z
+    .string()
+    .trim()
+    .min(1, { message: "Country is required" }),
   enquiryTopic: z
     .string()
-    .min(1, { message: "Please select an enquiry topic" }),
+    .trim()
+    .min(1, { message: "Enquiry Topic is required" }),
   message: z
     .string()
+    .trim()
+    .min(1, { message: "Message is required" })
     .min(10, { message: "Message must be at least 10 characters" }),
 });
 

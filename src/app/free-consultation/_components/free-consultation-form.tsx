@@ -60,16 +60,40 @@ const TIMES = [
 ];
 
 const formSchema = z.object({
-  fullName: z.string().min(2, "Full name must be at least 2 characters"),
-  email: z.string().email("Please enter a valid email address"),
-  phone: z.string().min(5, "Please enter a valid phone number"),
-  country: z.string().min(1, "Please select a country"),
-  city: z.string().min(1, "Please enter your emirate/city"),
-  area: z.string().min(1, "Please select an area of consultation"),
+  fullName: z
+    .string()
+    .trim()
+    .min(1, "Full Name is required")
+    .min(2, "Full name must be at least 2 characters"),
+  email: z
+    .string()
+    .trim()
+    .min(1, "Email Address is required")
+    .email("Please enter a valid email address"),
+  phone: z
+    .string()
+    .trim()
+    .min(1, "Phone Number is required")
+    .min(5, "Please enter a valid phone number"),
+  country: z
+    .string()
+    .trim()
+    .min(1, "Country is required"),
+  city: z
+    .string()
+    .trim()
+    .min(1, "Emirate / City is required"),
+  area: z
+    .string()
+    .trim()
+    .min(1, "Area of Consultation is required"),
   date: z.date({
-    error: "Please select a preferred date",
+    message: "Preferred Date is required",
   }),
-  time: z.string().min(1, "Please select a preferred time"),
+  time: z
+    .string()
+    .trim()
+    .min(1, "Preferred Time is required"),
   message: z.string().optional(),
 });
 

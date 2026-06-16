@@ -32,18 +32,47 @@ import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 
 const careerSchema = z.object({
-  first_name: z.string().min(2, "First name must be at least 2 characters"),
+  first_name: z
+    .string()
+    .trim()
+    .min(1, "First name is required")
+    .min(2, "First name must be at least 2 characters"),
   middle_name: z.string().optional(),
-  last_name: z.string().min(2, "Last name must be at least 2 characters"),
-  gender: z.string().min(1, "Please select your gender"),
+  last_name: z
+    .string()
+    .trim()
+    .min(1, "Last name is required")
+    .min(2, "Last name must be at least 2 characters"),
+  gender: z
+    .string()
+    .trim()
+    .min(1, "Please select your gender"),
   dob: z
     .any()
     .refine((val) => val instanceof Date, "Please select your date of birth"),
-  nationality: z.string().min(2, "Please select your nationality"),
-  email: z.string().email("Please enter a valid email address"),
-  mobile: z.string().min(7, "Please enter a valid mobile number"),
-  address: z.string().min(5, "Address must be at least 5 characters"),
-  city: z.string().min(2, "City/Emirate is required"),
+  nationality: z
+    .string()
+    .trim()
+    .min(1, "Please select your nationality"),
+  email: z
+    .string()
+    .trim()
+    .min(1, "Email Address is required")
+    .email("Please enter a valid email address"),
+  mobile: z
+    .string()
+    .trim()
+    .min(1, "Mobile Number is required")
+    .min(7, "Please enter a valid mobile number"),
+  address: z
+    .string()
+    .trim()
+    .min(1, "Address is required")
+    .min(5, "Address must be at least 5 characters"),
+  city: z
+    .string()
+    .trim()
+    .min(1, "City/Emirate is required"),
   pobox: z.string().optional(),
   resume: z
     .any()

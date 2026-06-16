@@ -58,13 +58,37 @@ const CONTACT_METHODS = [
 ];
 
 const testSchema = z.object({
-  fullName: z.string().min(2, "Full name must be at least 2 characters"),
-  email: z.string().email("Please enter a valid email address"),
-  phoneNumber: z.string().min(5, "Please enter a valid phone number"),
-  country: z.string().min(1, "Please select a country"),
-  city: z.string().min(1, "Please enter your emirate/city"),
-  preferredContactMethod: z.string().min(1, "Please select your preferred contact method"),
-  preferredTime: z.string().min(1, "Please select your preferred time"),
+  fullName: z
+    .string()
+    .trim()
+    .min(1, "Full Name is required")
+    .min(2, "Full name must be at least 2 characters"),
+  email: z
+    .string()
+    .trim()
+    .min(1, "Email Address is required")
+    .email("Please enter a valid email address"),
+  phoneNumber: z
+    .string()
+    .trim()
+    .min(1, "Phone Number is required")
+    .min(5, "Please enter a valid phone number"),
+  country: z
+    .string()
+    .trim()
+    .min(1, "Country is required"),
+  city: z
+    .string()
+    .trim()
+    .min(1, "Emirate / City is required"),
+  preferredContactMethod: z
+    .string()
+    .trim()
+    .min(1, "Preferred Contact Method is required"),
+  preferredTime: z
+    .string()
+    .trim()
+    .min(1, "Preferred Time is required"),
   answers: z.record(z.string(), z.string().min(1, "Please select an answer")),
   writtenExpression: z.string().optional(),
 });
