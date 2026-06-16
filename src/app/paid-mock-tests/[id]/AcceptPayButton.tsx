@@ -2,16 +2,15 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Home, MapPin, CheckCircle2 } from "lucide-react";
+import { Calendar, AlertCircle, X, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogDescription,
-  DialogFooter,
 } from "@/components/ui/dialog";
 import { PriceDisplay } from "@/components/ui/price-display";
 
@@ -34,23 +33,21 @@ export function AcceptPayButton({
   children,
 }: AcceptPayButtonProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedLocation, setSelectedLocation] = useState<"home" | "center">(
-    "home",
-  );
+  const [agreed, setAgreed] = useState(false);
   const router = useRouter();
 
   const homePrice = parseFloat(data.price || "350");
   const rawCenterPrice = data.details?.center_price ?? data.center_price;
   const centerPrice = rawCenterPrice ? parseFloat(String(rawCenterPrice)) : 450;
+  const diffPrice = Math.max(0, centerPrice - homePrice);
 
-  const handleContinue = () => {
+  const handleContinue = (location: "home" | "center") => {
     setIsOpen(false);
-    const selectedPrice = selectedLocation === "center" ? centerPrice : homePrice;
+    const selectedPrice = location === "center" ? centerPrice : homePrice;
     router.push(
-      `/paid-mock-tests/registration?id=${data.slug}&location=${selectedLocation}&price=${selectedPrice}`,
+      `/paid-mock-tests/registration?id=${data.slug}&location=${location}&price=${selectedPrice}`,
     );
   };
-
 
   return (
     <>
@@ -59,105 +56,167 @@ export function AcceptPayButton({
       </button>
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent className="sm:max-w-lg p-6 bg-white rounded-2xl shadow-xl">
-          <DialogHeader className="mb-4">
-            <DialogTitle className="text-xl font-black text-slate-900 tracking-tight">
-              Select Test Location
+        <DialogContent className="max-w-[95vw] md:max-w-3xl lg:max-w-4xl p-6 bg-white rounded-2xl shadow-xl overflow-y-auto max-h-[90vh]">
+          <DialogHeader className="mb-6">
+            <DialogTitle className="text-xl font-extrabold text-slate-900 tracking-tight text-center md:text-left">
+              Choose your Mock Test Option
             </DialogTitle>
-            <DialogDescription className="text-sm text-slate-500 mt-1">
-              Please choose where you would like to take the mock test. Prices
-              vary based on the location.
-            </DialogDescription>
           </DialogHeader>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 my-2">
-            {/* Home Option */}
-            <div
-              onClick={() => setSelectedLocation("home")}
-              className={cn(
-                "relative flex flex-col p-5 border-2 rounded-2xl cursor-pointer transition-all duration-300 select-none group",
-                selectedLocation === "home"
-                  ? "border-primary bg-primary/5 shadow-md shadow-primary/5"
-                  : "border-slate-200 hover:border-slate-300 hover:bg-slate-50/50",
-              )}
-            >
-              <div className="flex items-center justify-between mb-3">
-                <div
-                  className={cn(
-                    "p-2.5 rounded-xl transition-colors",
-                    selectedLocation === "home"
-                      ? "bg-primary/10 text-primary"
-                      : "bg-slate-100 text-slate-500",
-                  )}
-                >
-                  <Home className="w-5 h-5" />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
+            {/* Left Card: Basic (Home-based) */}
+            <div className="relative flex flex-col p-6 border border-slate-200 rounded-2xl bg-white shadow-sm flex-1 justify-between">
+              <div>
+                {/* Card Header with vertical red accent line */}
+                <div className="border-l-4 border-[#9a1c1f] pl-3 min-h-[38px] flex flex-col justify-center mb-6">
+                  <p className="text-[10px] font-bold tracking-wider text-slate-400 uppercase">
+                    Online
+                  </p>
+                  <h3 className="text-lg font-black text-slate-900 flex items-center gap-1.5 leading-none">
+                    Home-based
+                    <AlertCircle className="w-4 h-4 text-[#9a1c1f] fill-[#9a1c1f]/10" />
+                  </h3>
                 </div>
-                {selectedLocation === "home" && (
-                  <CheckCircle2 className="w-5 h-5 text-primary animate-in zoom-in-50 duration-200" />
-                )}
+
+                {/* Feature list */}
+                <ul className="space-y-3.5 mb-6 text-sm text-slate-600">
+                  <li className="flex items-start gap-2.5">
+                    <X className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
+                    <span>Self-managed distraction-prone environment</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <X className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
+                    <span>No on-site technical support or internet check</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <X className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
+                    <span>Standard domestic testing experience</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <X className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
+                    <span>No physical proctor presence or venue simulation</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <Check className="w-4 h-4 text-slate-400 shrink-0 mt-0.5" />
+                    <span>Timed practice under exam conditions</span>
+                  </li>
+                </ul>
               </div>
-              <h4 className="font-bold text-slate-800 text-base mb-1">
-                At Home
-              </h4>
-              <p className="text-xs text-slate-500 mb-4 flex-1">
-                Take the exam online from the comfort of your own device.
-              </p>
-              <div className="text-lg font-black text-slate-900 mt-auto">
-                <PriceDisplay amount={homePrice} />
+
+              <div className="mt-auto pt-6 border-t border-slate-100 space-y-4">
+                {/* Price section */}
+                <div className="bg-slate-50/70 border border-slate-100 rounded-xl p-3 flex items-center justify-between">
+                  <span className="text-xs font-semibold text-slate-500">Base Price</span>
+                  <span className="text-base font-extrabold text-primary">
+                    <PriceDisplay amount={homePrice} />
+                  </span>
+                </div>
+
+                {/* Checkbox */}
+                <div className="flex items-start gap-3">
+                  <Checkbox
+                    id="agree-home-test"
+                    checked={agreed}
+                    onCheckedChange={(checked) => setAgreed(!!checked)}
+                    className="mt-0.5"
+                  />
+                  <label htmlFor="agree-home-test" className="text-xs text-slate-500 cursor-pointer select-none leading-tight">
+                    I agree that my Home-based Mock Test must be taken on my own device and internet.
+                  </label>
+                </div>
+
+                {/* Action Button */}
+                <Button
+                  variant="outline"
+                  onClick={() => handleContinue("home")}
+                  disabled={!agreed}
+                  className="w-full py-5 font-bold border-slate-300 text-slate-700 hover:bg-slate-50 transition-all rounded-xl"
+                >
+                  Continue with Home-based
+                </Button>
               </div>
             </div>
 
-            {/* Center Option */}
-            <div
-              onClick={() => setSelectedLocation("center")}
-              className={cn(
-                "relative flex flex-col p-5 border-2 rounded-2xl cursor-pointer transition-all duration-300 select-none group",
-                selectedLocation === "center"
-                  ? "border-primary bg-primary/5 shadow-md shadow-primary/5"
-                  : "border-slate-200 hover:border-slate-300 hover:bg-slate-50/50",
-              )}
-            >
-              <div className="flex items-center justify-between mb-3">
-                <div
-                  className={cn(
-                    "p-2.5 rounded-xl transition-colors",
-                    selectedLocation === "center"
-                      ? "bg-primary/10 text-primary"
-                      : "bg-slate-100 text-slate-500",
-                  )}
-                >
-                  <MapPin className="w-5 h-5" />
-                </div>
-                {selectedLocation === "center" && (
-                  <CheckCircle2 className="w-5 h-5 text-primary animate-in zoom-in-50 duration-200" />
-                )}
+            {/* Right Card: Standard (Center-based) */}
+            <div className="relative flex flex-col p-6 border border-slate-200 rounded-2xl bg-white shadow-sm flex-1 justify-between">
+              {/* Green UPGRADE badge on top right */}
+              <div className="absolute -top-3 right-4">
+                <span className="bg-primary text-white text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
+                  Upgrade
+                </span>
               </div>
-              <h4 className="font-bold text-slate-800 text-base mb-1">
-                At Center
-              </h4>
-              <p className="text-xs text-slate-500 mb-4 flex-1">
-                Take the exam at our accredited, fully-equipped test center.
-              </p>
-              <div className="text-lg font-black text-slate-900 mt-auto">
-                <PriceDisplay amount={centerPrice} />
+
+              <div>
+                {/* Card Header with vertical red accent line */}
+                <div className="border-l-4 border-[#9a1c1f] pl-3 min-h-[38px] flex flex-col justify-center mb-6">
+                  <p className="text-[10px] font-bold tracking-wider text-slate-400 uppercase">
+                    In-Center
+                  </p>
+                  <h3 className="text-lg font-black text-slate-900 leading-none">
+                    Center-based
+                  </h3>
+                </div>
+
+                {/* Feature list - Pros from 1st image */}
+                <ul className="space-y-3.5 mb-6 text-sm text-slate-600">
+                  <li className="flex items-start gap-2.5">
+                    <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                    <span className="font-medium text-slate-700">Distraction-free environment</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                    <span className="font-medium text-slate-700">Reliable internet & tech support on-site</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                    <span className="font-medium text-slate-700">Experiencing an authentic, exam-like environment</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                    <span className="font-medium text-slate-700">Timed practice under exam conditions</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                    <span className="font-medium text-slate-700">Replicates physical venue stress & proctor presence</span>
+                  </li>
+                </ul>
+
+                {/* Schedule Availability Box */}
+                <div className="bg-slate-50 border border-slate-100 rounded-xl p-3.5 flex gap-2.5 items-start mt-4">
+                  <Calendar className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                  <div className="space-y-0.5">
+                    <h4 className="text-xs font-bold text-slate-700">Schedule Availability</h4>
+                    <p className="text-[11px] leading-relaxed text-slate-500">
+                      Please note that date & time need to be confirmed by our staff and it must be taken within our working hours.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-auto pt-6 border-t border-slate-100 space-y-4">
+                {/* Price section showing + AED diff */}
+                <div className="bg-emerald-50/50 border border-emerald-100/50 rounded-xl p-3 flex flex-col items-center justify-center text-center">
+                  <span className="text-[10px] font-bold text-emerald-700 uppercase tracking-wide">Upgrade cost</span>
+                  <div className="text-xl font-black text-[#1e824c] mt-0.5 flex items-center gap-1">
+                    <span>+</span>
+                    <PriceDisplay amount={diffPrice} className="text-[#1e824c]" />
+                  </div>
+                  <span className="text-[10px] text-slate-400 mt-0.5">additional per registration</span>
+                </div>
+
+                {/* Action Button */}
+                <Button
+                  onClick={() => handleContinue("center")}
+                  className="w-full py-5 font-bold"
+                >
+                  Upgrade to Center-based
+                </Button>
               </div>
             </div>
           </div>
-
-          <DialogFooter className="mt-6 flex flex-col sm:flex-row gap-2">
-            <Button
-              variant="outline"
-              onClick={() => setIsOpen(false)}
-              className="w-full sm:w-auto"
-            >
-              Cancel
-            </Button>
-            <Button onClick={handleContinue} className="w-full sm:w-auto px-8">
-              Continue to Pay
-            </Button>
-          </DialogFooter>
         </DialogContent>
       </Dialog>
     </>
   );
 }
+

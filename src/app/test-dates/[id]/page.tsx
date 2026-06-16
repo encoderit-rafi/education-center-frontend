@@ -112,7 +112,7 @@ export default function TestDatesDetailPage() {
                   </div>
                 </div>
               )}
-              {id === "selt" && (
+              {id === "skill-for-english-selt" && (
                 <div className="bg-primary/5 border border-primary/10 rounded-md p-5 max-w-xl">
                   <div className="text-sm font-bold text-secondary flex items-center gap-2">
                     <span className="w-2 h-2 bg-primary rounded-full" />
@@ -204,7 +204,7 @@ export default function TestDatesDetailPage() {
                       available: (date) =>
                         (id === "ielts" && date.getDay() === 0) ||
                         (id === "toefl" && [3, 6].includes(date.getDay())) ||
-                        (id === "selt" && [1, 2, 3].includes(date.getDay())) ||
+                        (id === "skill-for-english-selt" && [1, 2, 3].includes(date.getDay())) ||
                         (id === "pte" &&
                           [0, 1, 2, 3, 4, 6].includes(date.getDay())),
                     }}
@@ -221,7 +221,7 @@ export default function TestDatesDetailPage() {
                       if (id === "toefl") {
                         return isPast || ![3, 6].includes(date.getDay());
                       }
-                      if (id === "selt") {
+                      if (id === "skill-for-english-selt") {
                         return isPast || ![1, 2, 3].includes(date.getDay());
                       }
                       if (id === "pte") {
