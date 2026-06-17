@@ -10,8 +10,10 @@ import {
 import FreeConsultation from "../free-consultation/_components/free-consultation";
 import Link from "next/link";
 import api from "@/axios";
+import { getTranslations } from "next-intl/server";
 
 export default async function PaidMockTestPage() {
+  const t = await getTranslations("PaidMockTestsPage");
   let mockTests = [];
   try {
     const res = await api.get("/mock-tests");
@@ -30,12 +32,10 @@ export default async function PaidMockTestPage() {
     <div className="min-h-screen bg-white">
       <div className="base-px base-py max-w-3xl mx-auto base-space-y">
         <h1 className="section-title text-center">
-          Our <span className="highlight">Paid</span> MockTests
+          {t("title")}<span className="highlight">{t("titleAccent")}</span>{t("titleSuffix")}
         </h1>
         <p className="section-subtitle max-w-3xl mx-auto text-center">
-          Elevate your performance through rigorous simulation. Our proprietary
-          testing environment mirrors the actual exam constraints, providing the
-          diagnostic precision required for elite academic success.
+          {t("subtitle")}
         </p>
       </div>
       <div className="base-px base-py max-w-5xl mx-auto">

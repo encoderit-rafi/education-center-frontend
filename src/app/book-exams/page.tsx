@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import api from "@/axios";
+import { useTranslations } from "next-intl";
 import {
   BaseCard,
   BaseCardArrow,
@@ -37,35 +38,10 @@ interface ApiResponse {
   };
 }
 
-const BOOK_STEPS = [
-  {
-    step: "01",
-    title: "Choose Your Exam",
-    desc: "Select the exam that matches your goal — study, migration, UK visa, or professional certification. Browse the exam cards below.",
-    icon: ClipboardCheck,
-  },
-  {
-    step: "02",
-    title: "Register with the Provider",
-    desc: "Click the registration link for your chosen exam to create an account and select a test date and centre.",
-    icon: ExternalLink,
-  },
-  {
-    step: "03",
-    title: "Select TEPTH as Your Centre",
-    desc: "When choosing your test centre, search for TEPTH in Dubai Silicon Oasis. If you need help, call us on +97165531250.",
-    icon: MapPin,
-  },
-  {
-    step: "04",
-    title: "Confirm & Prepare",
-    desc: "Once booked, you will receive a confirmation. Review your exam requirements and contact TEPTH if you need any special arrangements.",
-    icon: ShieldCheck,
-  },
-];
-
+const STEP_ICONS = [ClipboardCheck, ExternalLink, MapPin, ShieldCheck];
 
 export default function BookExamPage() {
+  const t = useTranslations("BookExamsPage");
   const { data: examsResponse, isLoading } = useQuery<ApiResponse>({
     queryKey: ["exams", { limit: 100, sort_order: "asc", sort_by: "orderIndex" }],
     queryFn: async () => {
@@ -92,35 +68,39 @@ export default function BookExamPage() {
       {/* ── How to Book Section ── */}
       <section className="base-px section-container">
         <div className="mb-14 text-center space-y-6">
-          <span className="section-label">Simple Process</span>
+          <span className="section-label">{t("HeroSection.label")}</span>
           <h2 className="section-title">
-            How to <span className="text-red-500">Book</span>
+            {t("HeroSection.title")}<span className="text-red-500">{t("HeroSection.titleAccent")}</span>
           </h2>
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {BOOK_STEPS.map((item, index) => (
-            <div key={index} className="relative card-hover p-7">
-              {index < 3 && (
-                <span
-                  className="pointer-events-none absolute -right-3 top-12 hidden h-px w-6 bg-gradient-to-r from-maroon-200 to-transparent lg:block"
-                  aria-hidden="true"
-                ></span>
-              )}
-              <div className="mb-5 flex items-center justify-between">
-                <span className="icon-tile icon-tile-sq">
-                  <item.icon className="h-5 w-5" />
-                </span>
-                <span className="text-4xl font-black leading-none text-maroon-100">
-                  {item.step}
-                </span>
+          {t.raw("Steps").map((item: any, index: number) => {
+            const Icon = STEP_ICONS[index];
+            return (
+              <div key={index} className="relative card-hover p-7">
+                {index < 3 && (
+                  <span
+                    className="pointer-events-none absolute -right-3 top-12 hidden h-px w-6 bg-gradient-to-r from-maroon-200 to-transparent lg:block"
+                    aria-hidden="true"
+                  >
+                  </span>
+                )}
+                <div className="mb-5 flex items-center justify-between">
+                  <span className="icon-tile icon-tile-sq">
+                    <Icon className="h-5 w-5" />
+                  </span>
+                  <span className="text-4xl font-black leading-none text-maroon-100">
+                    {item.step}
+                  </span>
+                </div>
+                <h3 className="mb-2 font-bold text-gray-900">{item.title}</h3>
+                <p className="text-sm leading-relaxed text-gray-600">
+                  {item.desc}
+                </p>
               </div>
-              <h3 className="mb-2 font-bold text-gray-900">{item.title}</h3>
-              <p className="text-sm leading-relaxed text-gray-600">
-                {item.desc}
-              </p>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </section>
 
@@ -128,9 +108,9 @@ export default function BookExamPage() {
       <section>
         <div className="section-container base-py base-px">
           <div className="mb-14 text-center space-y-6">
-            <span className="section-label">Available Exams</span>
+            <span className="section-label">{t("HeroSection.availableExamsLabel")}</span>
             <h2 className="section-title">
-              Choose Your <span className="text-red-500">Exam</span>
+              {t("HeroSection.availableExamsTitle")}<span className="text-red-500">{t("HeroSection.availableExamsTitleAccent")}</span>
             </h2>
           </div>
 

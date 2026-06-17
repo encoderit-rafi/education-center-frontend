@@ -17,33 +17,27 @@ import {
   Info,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 
-const GUIDELINE_SECTIONS = [
-  { id: "before", label: "Before Test Day" },
-  { id: "what-to-bring", label: "What to Bring" },
-  { id: "what-not-to-bring", label: "What Not to Bring" },
-  { id: "arrival", label: "Arrival Time" },
-  { id: "during-test", label: "During the Test" },
-  { id: "rules", label: "Test Environment Rules" },
-  { id: "after-test", label: "After the Test" },
-  { id: "advice", label: "Our Advice" },
-];
+const GUIDELINE_SECTION_IDS = ["before","what-to-bring","what-not-to-bring","arrival","during-test","rules","after-test","advice"];
 
 export default function TestDayGuidelinesClient() {
+  const t = useTranslations("TestDayGuidelinesPage");
+  const navSections = t.raw("navSections") as { id: string; label: string }[];
   const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY + 100;
-      for (const section of GUIDELINE_SECTIONS) {
-        const element = document.getElementById(section.id);
+      for (const section of GUIDELINE_SECTION_IDS) {
+        const element = document.getElementById(section);
         if (element) {
           const { offsetTop, offsetHeight } = element;
           if (
             scrollPosition >= offsetTop &&
             scrollPosition < offsetTop + offsetHeight
           ) {
-            setActiveSection(section.id);
+            setActiveSection(section);
             break;
           }
         }
@@ -70,15 +64,13 @@ export default function TestDayGuidelinesClient() {
         <div className="container relative mx-auto px-4 py-16 lg:px-8 lg:py-24">
           <div className="mx-auto max-w-3xl text-center">
             <h1 className="mb-5 text-4xl font-bold tracking-tight text-slate-950 lg:text-6xl italic">
-              Be Prepared. Be Confident. <br />
+              {t("hero.title")} <br />
               <span className="text-primary not-italic">
-                Perform Your Best.
+                {t("hero.titleAccent")}
               </span>
             </h1>
             <p className="mx-auto max-w-2xl text-lg leading-relaxed text-slate-600">
-              Your test day is not just about knowledge — it&apos;s about calm
-              execution, timing, and following correct procedures. These
-              guidelines help you arrive prepared and avoid unnecessary stress.
+              {t("hero.subtitle")}
             </p>
           </div>
         </div>
@@ -88,7 +80,7 @@ export default function TestDayGuidelinesClient() {
       <section className="sticky top-20 z-30 border-y border-slate-100 bg-white/90 backdrop-blur-md">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="flex gap-2 overflow-x-auto py-3 scrollbar-none scroll-smooth">
-            {GUIDELINE_SECTIONS.map((section) => (
+            {navSections.map((section) => (
               <Link
                 key={section.id}
                 href={`#${section.id}`}
@@ -120,20 +112,14 @@ export default function TestDayGuidelinesClient() {
                   <Moon className="h-6 w-6" />
                 </div>
                 <h2 className="text-xl font-bold text-slate-900 lg:text-2xl">
-                  Before Test Day
+                  {t("before.title")}
                 </h2>
               </div>
               <p className="mb-5 text-sm font-medium text-slate-500">
-                To ensure a smooth experience:
+                {t("before.subtitle")}
               </p>
               <ul className="space-y-3.5">
-                {[
-                  "Get a full night of rest before your exam",
-                  "Avoid last-minute intensive studying",
-                  "Check your exam confirmation email carefully",
-                  "Know the exact date, time, and location",
-                  "Plan your route in advance (account for Dubai traffic)",
-                ].map((item, i) => (
+                {(t.raw("before.items") as string[]).map((item, i) => (
                   <li
                     key={i}
                     className="flex items-start gap-3.5 text-sm leading-relaxed text-slate-700"
@@ -157,18 +143,14 @@ export default function TestDayGuidelinesClient() {
                   <Check className="h-6 w-6" />
                 </div>
                 <h2 className="text-xl font-bold text-slate-900 lg:text-2xl">
-                  What to Bring
+                  {t("whatToBring.title")}
                 </h2>
               </div>
               <p className="mb-5 text-sm font-medium text-slate-500">
-                On the day of your exam, you must bring:
+                {t("whatToBring.subtitle")}
               </p>
               <ul className="space-y-3.5">
-                {[
-                  "Valid original passport or accepted ID (no copies or expired documents)",
-                  "Booking confirmation (printed or digital)",
-                  "Any additional items mentioned in your exam instructions email",
-                ].map((item, i) => (
+                {(t.raw("whatToBring.items") as string[]).map((item, i) => (
                   <li
                     key={i}
                     className="flex items-start gap-3.5 text-sm leading-relaxed text-slate-700"
@@ -183,9 +165,8 @@ export default function TestDayGuidelinesClient() {
               <div className="mt-6 flex items-start gap-3 rounded-2xl border border-amber-200 bg-amber-50/50 p-4">
                 <Info className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" />
                 <p className="text-xs leading-relaxed text-amber-900">
-                  <strong className="block mb-0.5">Crucial Requirement</strong>
-                  Without valid identification, you will not be allowed to enter
-                  the test room under any circumstances.
+                  <strong className="block mb-0.5">{t("whatToBring.alertTitle")}</strong>
+                  {t("whatToBring.alertText")}
                 </p>
               </div>
             </div>
@@ -200,19 +181,14 @@ export default function TestDayGuidelinesClient() {
                   <ShieldAlert className="h-6 w-6" />
                 </div>
                 <h2 className="text-xl font-bold text-slate-900 lg:text-2xl">
-                  What Not to Bring
+                  {t("whatNotToBring.title")}
                 </h2>
               </div>
               <p className="mb-5 text-sm font-medium text-slate-500">
-                Prohibited items inside the test room:
+                {t("whatNotToBring.subtitle")}
               </p>
               <ul className="space-y-3.5">
-                {[
-                  "Mobile phones or smart devices",
-                  "Smart watches or electronic accessories",
-                  "Bags, notes, or study materials",
-                  "Food or drinks (unless medically pre-approved)",
-                ].map((item, i) => (
+                {(t.raw("whatNotToBring.items") as string[]).map((item, i) => (
                   <li
                     key={i}
                     className="flex items-start gap-3.5 text-sm leading-relaxed text-slate-700"
@@ -225,8 +201,7 @@ export default function TestDayGuidelinesClient() {
                 ))}
               </ul>
               <p className="mt-6 rounded-xl bg-slate-50 p-4 text-xs font-medium text-slate-500">
-                Secure lockers are provided at the center for all prohibited
-                items.
+                {t("whatNotToBring.lockerNote")}
               </p>
             </div>
 
@@ -240,15 +215,11 @@ export default function TestDayGuidelinesClient() {
                   <Clock className="h-6 w-6" />
                 </div>
                 <h2 className="text-xl font-bold text-slate-900 lg:text-2xl">
-                  Arrival Time
+                  {t("arrival.title")}
                 </h2>
               </div>
               <ul className="space-y-3.5">
-                {[
-                  "Arrive at least 30 to 45 minutes early",
-                  "Late arrivals will not be admitted (no exceptions)",
-                  "Allow extra time for Dubai traffic and parking search",
-                ].map((item, i) => (
+                {(t.raw("arrival.items") as string[]).map((item, i) => (
                   <li
                     key={i}
                     className="flex items-start gap-3.5 text-sm leading-relaxed text-slate-700"
@@ -272,17 +243,11 @@ export default function TestDayGuidelinesClient() {
                   <PenTool className="h-6 w-6" />
                 </div>
                 <h2 className="text-xl font-bold text-slate-900 lg:text-2xl">
-                  During the Test
+                  {t("duringTest.title")}
                 </h2>
               </div>
               <ul className="space-y-3.5">
-                {[
-                  "Follow all instructions given by the invigilators",
-                  "Remain silent and focused at all times",
-                  "Do not attempt to communicate with other candidates",
-                  "Manage your time carefully for each section",
-                  "Stay calm — difficult questions are a normal part of the test",
-                ].map((item, i) => (
+                {(t.raw("duringTest.items") as string[]).map((item, i) => (
                   <li
                     key={i}
                     className="flex items-start gap-3.5 text-sm leading-relaxed text-slate-700"
@@ -306,16 +271,11 @@ export default function TestDayGuidelinesClient() {
                   <ShieldAlert className="h-6 w-6" />
                 </div>
                 <h2 className="text-xl font-bold text-slate-900 lg:text-2xl">
-                  Environment Rules
+                  {t("rules.title")}
                 </h2>
               </div>
               <ul className="space-y-3.5">
-                {[
-                  "You must follow all center rules strictly",
-                  "Any form of misconduct leads to immediate disqualification",
-                  "Breaks (if allowed) are only at designated times",
-                  "Respect the exam environment and other candidates",
-                ].map((item, i) => (
+                {(t.raw("rules.items") as string[]).map((item, i) => (
                   <li
                     key={i}
                     className="flex items-start gap-3.5 text-sm leading-relaxed text-slate-700"
@@ -339,16 +299,11 @@ export default function TestDayGuidelinesClient() {
                   <Flag className="h-6 w-6" />
                 </div>
                 <h2 className="text-xl font-bold text-slate-900 lg:text-2xl">
-                  After the Test
+                  {t("afterTest.title")}
                 </h2>
               </div>
               <ul className="space-y-3.5">
-                {[
-                  "Collect belongings only when instructed",
-                  "Leave the test area quietly and immediately",
-                  "Results shared per official exam body timelines",
-                  "One test does not define your entire potential",
-                ].map((item, i) => (
+                {(t.raw("afterTest.items") as string[]).map((item, i) => (
                   <li
                     key={i}
                     className="flex items-start gap-3.5 text-sm leading-relaxed text-slate-700"
@@ -372,17 +327,15 @@ export default function TestDayGuidelinesClient() {
                   <Sparkles className="h-6 w-6" />
                 </div>
                 <h2 className="text-xl font-bold text-slate-900 lg:text-2xl">
-                  Our Expert Advice
+                  {t("advice.title")}
                 </h2>
               </div>
               <p className="text-sm leading-relaxed text-slate-700">
-                Most candidates lose marks{" "}
-                <strong className="text-slate-900">not</strong> because of their
-                English ability — but because of anxiety and poor strategy.
+                {t("advice.text")}
               </p>
               <div className="mt-6 rounded-2xl bg-primary/5 p-6 text-center">
                 <p className="text-lg font-bold italic leading-relaxed text-primary">
-                  &ldquo;Stay calm. Stay focused. Trust your preparation.&rdquo;
+                  &ldquo;{t("advice.quote")}&rdquo;
                 </p>
               </div>
             </div>
@@ -399,11 +352,10 @@ export default function TestDayGuidelinesClient() {
 
             <div className="relative z-10 text-center md:text-left">
               <h2 className="mb-4 text-3xl font-bold text-white lg:text-5xl">
-                Still Have Questions?
+                {t("cta.title")}
               </h2>
               <p className="mb-10 text-slate-400 text-lg max-w-xl">
-                Our support team is here to ensure you have a seamless
-                experience. Contact us Sunday to Thursday, 9am – 6pm.
+                {t("cta.subtitle")}
               </p>
               <div className="flex flex-wrap items-center justify-center md:justify-start gap-4">
                 <Link
@@ -411,13 +363,13 @@ export default function TestDayGuidelinesClient() {
                   className="inline-flex items-center gap-2.5 rounded-xl bg-white px-8 py-4 text-sm font-bold text-slate-950 shadow-lg transition-all hover:bg-slate-50 hover:scale-105 active:scale-95"
                 >
                   <Phone className="h-4 w-4 text-primary" />
-                  +97165531250
+                  {t("cta.callButton")}
                 </Link>
                 <Link
                   href="/contact"
                   className="inline-flex items-center gap-2.5 rounded-xl border border-white/20 px-8 py-4 text-sm font-bold text-white transition-all hover:bg-white/5 hover:border-white/40"
                 >
-                  Send an Enquiry
+                  {t("cta.enquiryButton")}
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>

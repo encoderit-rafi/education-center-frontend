@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { FileSearch, Home } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 
-export default function NotFound() {
+export default async function NotFound() {
+  const t = await getTranslations("NotFoundPage");
   return (
     // <div className="flex min-h-[70vh] flex-col items-center justify-center px-4 py-24 text-center">
     //   <div className="relative mb-8">
@@ -64,13 +66,12 @@ export default function NotFound() {
 
       {/* Title */}
       <h2 className="mb-3 px-2 text-xl font-semibold text-on-surface sm:text-2xl md:mb-4 md:text-3xl">
-        Page Not Found
+        {t("title")}
       </h2>
 
       {/* Description */}
       <p className="mb-8 max-w-md px-2 text-sm leading-relaxed text-on-surface-variant sm:text-base md:mb-10 md:text-lg">
-        Sorry, we couldn&apos;t find the page you&apos;re looking for. It might
-        have been moved or deleted.
+        {t("description")}
       </p>
 
       {/* Buttons */}
@@ -81,7 +82,7 @@ export default function NotFound() {
           render={
             <Link href="/" className="inline-flex items-center justify-center">
               <Home className="mr-2 size-5" />
-              Back to Home
+              {t("backToHome")}
             </Link>
           }
         />
@@ -90,7 +91,7 @@ export default function NotFound() {
           variant="outline"
           size="lg"
           className="w-full rounded-full px-6 sm:w-auto sm:px-8"
-          render={<Link href="/contact-us">Contact Support</Link>}
+          render={<Link href="/contact-us">{t("contactSupport")}</Link>}
         />
       </div>
 

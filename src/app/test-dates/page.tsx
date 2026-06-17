@@ -9,8 +9,10 @@ import {
   BaseCardArrow,
 } from "@/components/blocks/cards/base-card";
 import { TEST_DATES_CARDS_DATA } from "@/data";
+import { useTranslations } from "next-intl";
 
 export default function TestDatesPage() {
+  const t = useTranslations("TestDatesPage");
   return (
     <main className="bg-white">
       {/* ── Header ── */}
@@ -18,11 +20,10 @@ export default function TestDatesPage() {
         <div className="section-container">
           <div className="max-w-3xl mx-auto text-center space-y-4">
             <h1 className="text-4xl md:text-6xl font-headline font-black text-secondary tracking-tighter leading-none">
-              Test <span className="text-primary italic">Dates</span>
+              {t("title")}<span className="text-primary italic">{t("titleAccent")}</span>
             </h1>
             <p className="text-slate-500 text-lg leading-relaxed font-light">
-              Choose an exam to view upcoming available sessions, venues, and
-              technical formats across our testing centers.
+              {t("subtitle")}
             </p>
           </div>
         </div>

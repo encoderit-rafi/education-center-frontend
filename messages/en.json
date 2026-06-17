@@ -307,6 +307,27 @@
         "publicParkingText2": " per hour. Please check with SRTA in Sharjah for recent updates.",
         "quote": "This guide is aimed at helping you reach The Exam Preparation & Testing House L.L.C in Sharjah with ease.",
         "assistance": "For Further Assistance"
+      },
+      "Pdf": {
+        "companyName": "The Exam Preparation & Testing House L.L.C",
+        "addressL1": "Suite 701, 7th Floor, Tabarak Tower",
+        "addressL2": "Corniche Rd, Al Mamzar, Sharjah, UAE",
+        "tel": "Tel",
+        "web": "Web",
+        "destinationPrefix": "Destination: ",
+        "destinationSuffix": ", Sharjah",
+        "fullAddressBadge": "📍 Full Address",
+        "fullAddressL1": "Tabarak Tower, Suite 701, 7th Floor",
+        "fullAddressL2": "Corniche Road, Al Mamzar",
+        "fullAddressL3": "Sharjah, United Arab Emirates",
+        "phoneLabel": "Phone:",
+        "taxiLabel": "Taxi (Sharjah):",
+        "continued": "How to Find Us — Continued",
+        "footerBrand": "TEPTH — The Exam Preparation & Testing House L.L.C",
+        "footerAddress": "Tabarak Tower, Suite 701, Corniche Rd, Al Mamzar, Sharjah, UAE",
+        "alternatives": "Alternatives: E306 (Al Ghubaiba → Al Jubail) · E307 (Deira City Centre → Al Jubail).",
+        "from": "From",
+        "parkingInfo": "🅿 Parking Information"
       }
     },
     "MissionAndVision": {
@@ -527,10 +548,22 @@
       "title": "Built for the Future of Assessment",
       "subtitle": "Trusted by examination bodies, universities, and certification providers across the region, SmarTest delivers unmatched reliability and innovation.",
       "stats": [
-        { "value": "500K+", "label": "Candidates Served" },
-        { "value": "99.9%", "label": "Platform Uptime" },
-        { "value": "40+", "label": "Countries Reached" },
-        { "value": "24/7", "label": "Expert Support" }
+        {
+          "value": "500K+",
+          "label": "Candidates Served"
+        },
+        {
+          "value": "99.9%",
+          "label": "Platform Uptime"
+        },
+        {
+          "value": "40+",
+          "label": "Countries Reached"
+        },
+        {
+          "value": "24/7",
+          "label": "Expert Support"
+        }
       ],
       "pillars": [
         {
@@ -2844,5 +2877,219 @@
       "message": "Your registration for the <bold>{courseName}</bold> preparation course has been received. Check your email for further instructions and your enrollment details.",
       "close": "Close"
     }
+  },
+  "BookExamsPage": {
+    "HeroSection": {
+      "label": "Simple Process",
+      "title": "How to ",
+      "titleAccent": "Book",
+      "availableExamsLabel": "Available Exams",
+      "availableExamsTitle": "Choose Your ",
+      "availableExamsTitleAccent": "Exam"
+    },
+    "Steps": [
+      {
+        "step": "01",
+        "title": "Choose Your Exam",
+        "desc": "Select the exam that matches your goal — study, migration, UK visa, or professional certification. Browse the exam cards below."
+      },
+      {
+        "step": "02",
+        "title": "Register with the Provider",
+        "desc": "Click the registration link for your chosen exam to create an account and select a test date and centre."
+      },
+      {
+        "step": "03",
+        "title": "Select TEPTH as Your Centre",
+        "desc": "When choosing your test centre, search for TEPTH in Dubai Silicon Oasis. If you need help, call us on +97165531250."
+      },
+      {
+        "step": "04",
+        "title": "Confirm & Prepare",
+        "desc": "Once booked, you will receive a confirmation. Review your exam requirements and contact TEPTH if you need any special arrangements."
+      }
+    ]
+  },
+  "TestDayGuidelinesPage": {
+    "hero": {
+      "title": "Be Prepared. Be Confident.",
+      "titleAccent": "Perform Your Best.",
+      "subtitle": "Your test day is not just about knowledge — it's about calm execution, timing, and following correct procedures. These guidelines help you arrive prepared and avoid unnecessary stress."
+    },
+    "navSections": [
+      {
+        "id": "before",
+        "label": "Before Test Day"
+      },
+      {
+        "id": "what-to-bring",
+        "label": "What to Bring"
+      },
+      {
+        "id": "what-not-to-bring",
+        "label": "What Not to Bring"
+      },
+      {
+        "id": "arrival",
+        "label": "Arrival Time"
+      },
+      {
+        "id": "during-test",
+        "label": "During the Test"
+      },
+      {
+        "id": "rules",
+        "label": "Test Environment Rules"
+      },
+      {
+        "id": "after-test",
+        "label": "After the Test"
+      },
+      {
+        "id": "advice",
+        "label": "Our Advice"
+      }
+    ],
+    "before": {
+      "title": "Before Test Day",
+      "subtitle": "To ensure a smooth experience:",
+      "items": [
+        "Get a full night of rest before your exam",
+        "Avoid last-minute intensive studying",
+        "Check your exam confirmation email carefully",
+        "Know the exact date, time, and location",
+        "Plan your route in advance (account for Dubai traffic)"
+      ]
+    },
+    "whatToBring": {
+      "title": "What to Bring",
+      "subtitle": "On the day of your exam, you must bring:",
+      "items": [
+        "Valid original passport or accepted ID (no copies or expired documents)",
+        "Booking confirmation (printed or digital)",
+        "Any additional items mentioned in your exam instructions email"
+      ],
+      "alertTitle": "Crucial Requirement",
+      "alertText": "Without valid identification, you will not be allowed to enter the test room under any circumstances."
+    },
+    "whatNotToBring": {
+      "title": "What Not to Bring",
+      "subtitle": "Prohibited items inside the test room:",
+      "items": [
+        "Mobile phones or smart devices",
+        "Smart watches or electronic accessories",
+        "Bags, notes, or study materials",
+        "Food or drinks (unless medically pre-approved)"
+      ],
+      "lockerNote": "Secure lockers are provided at the center for all prohibited items."
+    },
+    "arrival": {
+      "title": "Arrival Time",
+      "items": [
+        "Arrive at least 30 to 45 minutes early",
+        "Late arrivals will not be admitted (no exceptions)",
+        "Allow extra time for Dubai traffic and parking search"
+      ]
+    },
+    "duringTest": {
+      "title": "During the Test",
+      "items": [
+        "Follow all instructions given by the invigilators",
+        "Remain silent and focused at all times",
+        "Do not attempt to communicate with other candidates",
+        "Manage your time carefully for each section",
+        "Stay calm — difficult questions are a normal part of the test"
+      ]
+    },
+    "rules": {
+      "title": "Environment Rules",
+      "items": [
+        "You must follow all center rules strictly",
+        "Any form of misconduct leads to immediate disqualification",
+        "Breaks (if allowed) are only at designated times",
+        "Respect the exam environment and other candidates"
+      ]
+    },
+    "afterTest": {
+      "title": "After the Test",
+      "items": [
+        "Collect belongings only when instructed",
+        "Leave the test area quietly and immediately",
+        "Results shared per official exam body timelines",
+        "One test does not define your entire potential"
+      ]
+    },
+    "advice": {
+      "title": "Our Expert Advice",
+      "text": "Most candidates lose marks not because of their English ability — but because of anxiety and poor strategy.",
+      "quote": "Stay calm. Stay focused. Trust your preparation."
+    },
+    "cta": {
+      "title": "Still Have Questions?",
+      "subtitle": "Our support team is here to ensure you have a seamless experience. Contact us Sunday to Thursday, 9am – 6pm.",
+      "callButton": "+97165531250",
+      "enquiryButton": "Send an Enquiry"
+    }
+  },
+  "TestDatesPage": {
+    "title": "Test ",
+    "titleAccent": "Dates",
+    "subtitle": "Choose an exam to view upcoming available sessions, venues, and technical formats across our testing centers."
+  },
+  "DownloadFormsPage": {
+    "title": "Download ",
+    "titleAccent": "Official Forms",
+    "subtitle": "Access and download the necessary documentation for your exam registrations, cancellations, and administrative requests.",
+    "downloadButton": "Download PDF",
+    "forms": [
+      {
+        "title": "PTE-A",
+        "subtitle": "Registration Form",
+        "description": "Download the official Pearson Test of English Academic registration forms."
+      },
+      {
+        "title": "TEPTH CANCELLATION",
+        "subtitle": "Request Form",
+        "description": "Official form for course or exam cancellation and refund requests."
+      },
+      {
+        "title": "TOEFL IBT REGISTRATION",
+        "subtitle": "Registration Form",
+        "description": "Complete your TOEFL iBT registration with the official TEPTH documentation."
+      }
+    ]
+  },
+  "PublicHolidaysPage": {
+    "label": "Academic Calendar",
+    "title": "HOLIDAY ",
+    "titleAccent": "SCHEDULE",
+    "subtitle": "Stay informed about upcoming public holidays and scheduled center closures. Plan your examination journey with clarity and precision.",
+    "loading": "Loading holidays…",
+    "errorDefault": "Failed to load holidays. Please try again.",
+    "noHolidaysMonth": "No holidays scheduled for this month.",
+    "calendarHint": "Select a highlighted date on the calendar to view specific closure details for our regional hubs.",
+    "thisMonthTitle": "Closures",
+    "yearlyTitle": "Academic Year",
+    "yearlySubtitle": "Official Institutional Holidays",
+    "noHolidaysYear": "No holidays found for",
+    "recurringLabel": "· Recurring Annually",
+    "typeLabels": {
+      "RELIGIOUS": "Religious Holiday",
+      "NATIONAL": "National Holiday",
+      "PUBLIC": "Public Holiday"
+    }
+  },
+  "PaidMockTestsPage": {
+    "title": "Our ",
+    "titleAccent": "Paid",
+    "titleSuffix": " Mock Tests",
+    "subtitle": "Elevate your performance through rigorous simulation. Our proprietary testing environment mirrors the actual exam constraints, providing the diagnostic precision required for elite academic success."
+  },
+  "NotFoundPage": {
+    "code": "404",
+    "title": "Page Not Found",
+    "description": "Sorry, we couldn't find the page you're looking for. It might have been moved or deleted.",
+    "backToHome": "Back to Home",
+    "contactSupport": "Contact Support"
   }
 }

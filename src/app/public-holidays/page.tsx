@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import api from "@/axios";
+import { useTranslations } from "next-intl";
 
 // ────────────────────────────────────────────────────────────────
 // Types
@@ -51,19 +52,11 @@ function formatDay(dateStr: string) {
   };
 }
 
-function typeLabel(type: string) {
-  const map: Record<string, string> = {
-    RELIGIOUS: "Religious Holiday",
-    NATIONAL: "National Holiday",
-    PUBLIC: "Public Holiday",
-  };
-  return map[type] ?? type;
-}
-
 // ────────────────────────────────────────────────────────────────
 // Component
 // ────────────────────────────────────────────────────────────────
 export default function PublicHolidaysPage() {
+  const t = useTranslations("PublicHolidaysPage");
   const currentYear = new Date().getFullYear();
   const currentMonth = new Date().getMonth(); // 0-indexed
 
@@ -79,7 +72,7 @@ export default function PublicHolidaysPage() {
         const data: Holiday[] = res.data?.data?.data ?? [];
         setHolidays(data.filter((h) => h.isActive));
       })
-      .catch(() => setError("Failed to load holidays. Please try again."))
+      .catch(() => setError(t("errorDefault")))
       .finally(() => setLoading(false));
   }, [currentYear]);
 
@@ -101,14 +94,13 @@ export default function PublicHolidaysPage() {
         <div className="container px-6 mx-auto lg:px-24">
           <div className="max-w-4xl">
             <span className="text-xs font-black uppercase tracking-[0.2em] text-[#A11D1D] mb-3 block">
-              Academic Calendar
+              {t("label")}
             </span>
             <h1 className="text-4xl md:text-6xl font-black text-gray-900 tracking-tight uppercase leading-none mb-6">
-              HOLIDAY <span className="text-[#A11D1D]">SCHEDULE</span>
+              {t("title")}<span className="text-[#A11D1D]">{t("titleAccent")}</span>
             </h1>
             <p className="text-gray-500 text-base md:text-lg font-medium max-w-2xl leading-relaxed">
-              Stay informed about upcoming public holidays and scheduled center
-              closures. Plan your examination journey with clarity and precision.
+              {t("subtitle")}
             </p>
           </div>
         </div>
@@ -120,7 +112,7 @@ export default function PublicHolidaysPage() {
         {loading && (
           <div className="flex items-center justify-center py-24 gap-3 text-gray-400">
             <Loader2 className="w-6 h-6 animate-spin text-[#A11D1D]" />
-            <span className="text-sm font-semibold">Loading holidays…</span>
+            <span className="text-sm font-semibold">{t("loading")}</span>
           </div>
         )}
 
@@ -139,14 +131,14 @@ export default function PublicHolidaysPage() {
               {/* LEFT: This Month's Closures */}
               <div className="lg:col-span-5 space-y-6">
                 <h2 className="text-2xl font-black text-gray-900 uppercase tracking-tight mb-6">
-                  {MONTH_NAMES[currentMonth]} {currentYear} Closures
+                  {MONTH_NAMES[currentMonth]} {currentYear} {t("thisMonthTitle")}
                 </h2>
 
                 <div className="bg-white p-8 rounded-xl border border-gray-100 shadow-sm space-y-6">
                   {thisMonthHolidays.length === 0 ? (
                     <div className="flex gap-3 items-center text-sm text-gray-400 font-medium">
                       <CalendarIcon className="w-5 h-5 text-[#A11D1D] shrink-0" />
-                      <p>No holidays scheduled for this month.</p>
+                      <p>{t("noHolidaysMonth")}</p>
                     </div>
                   ) : (
                     thisMonthHolidays.map((h) => {
@@ -169,7 +161,7 @@ export default function PublicHolidaysPage() {
                               {h.title}
                             </h4>
                             <p className="text-xs text-gray-400 font-bold uppercase tracking-tight mt-1">
-                              {typeLabel(h.holidayType)}
+                              {(t.raw("typeLabels") as Record<string, string>)[h.holidayType] ?? h.holidayType}
                             </p>
                           </div>
                         </div>
@@ -180,10 +172,7 @@ export default function PublicHolidaysPage() {
                   <div className="pt-6 border-t border-gray-50">
                     <div className="flex gap-3 items-start text-xs text-gray-400 font-medium leading-relaxed">
                       <Info className="w-4 h-4 text-[#A11D1D] shrink-0 mt-0.5" />
-                      <p>
-                        Select a highlighted date on the calendar to view
-                        specific closure details for our regional hubs.
-                      </p>
+                      <p>{t("calendarHint")}</p>
                     </div>
                   </div>
                 </div>
@@ -215,10 +204,10 @@ export default function PublicHolidaysPage() {
               <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
                 <div>
                   <h2 className="text-2xl font-black text-gray-900 uppercase tracking-tight mb-2">
-                    Academic Year {currentYear}–{currentYear + 1}
+                    {t("yearlyTitle")} {currentYear}–{currentYear + 1}
                   </h2>
                   <p className="text-sm text-gray-400 font-bold uppercase tracking-widest">
-                    Official Institutional Holidays
+                    {t("yearlySubtitle")}
                   </p>
                 </div>
                 <div className="h-px flex-1 bg-gray-100 mx-8 hidden md:block" />
@@ -228,7 +217,7 @@ export default function PublicHolidaysPage() {
                 <div className="bg-white rounded-xl border border-gray-100 p-12 text-center">
                   <CalendarIcon className="w-10 h-10 text-gray-200 mx-auto mb-4" />
                   <p className="text-gray-400 font-semibold text-sm">
-                    No holidays found for {currentYear}.
+                    {t("noHolidaysYear")} {currentYear}.
                   </p>
                 </div>
               ) : (
@@ -253,7 +242,7 @@ export default function PublicHolidaysPage() {
                           <div
                             className={`p-3 rounded-xl border text-xs font-black uppercase tracking-widest ${typeStyle}`}
                           >
-                            {typeLabel(holiday.holidayType)}
+                            {(t.raw("typeLabels") as Record<string, string>)[holiday.holidayType] ?? holiday.holidayType}
                           </div>
                           <span className="bg-gray-900 text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest">
                             {month} {day}
@@ -275,7 +264,7 @@ export default function PublicHolidaysPage() {
                             <Info className="w-4 h-4 text-[#A11D1D] shrink-0" />
                             <span className="text-[10px] font-black text-[#A11D1D] uppercase tracking-tight">
                               {holiday.country}
-                              {holiday.isRecurring && " · Recurring Annually"}
+                              {holiday.isRecurring && ` ${t("recurringLabel")}`}
                             </span>
                           </div>
                         )}
