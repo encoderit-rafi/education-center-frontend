@@ -86,9 +86,9 @@ function Calendar({
           defaultClassNames.dropdown,
         ),
         caption_label: cn(
-          "select-none font-bold text-slate-700",
+          "select-none font-black text-slate-800",
           captionLayout === "label"
-            ? "text-sm uppercase tracking-widest italic"
+            ? "text-lg uppercase tracking-widest"
             : "rounded-md px-2 flex items-center gap-1 text-xs h-7 [&>svg]:text-muted-foreground [&>svg]:size-3",
           defaultClassNames.caption_label,
         ),
