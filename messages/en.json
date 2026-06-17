@@ -393,7 +393,9 @@
     "invigilate": {
       "title": "SmarTest Invigilate",
       "subtitle": "Uncompromising security meets effortless simplicity.",
-      "description": "SmarTest Invigilate elevates standard remote proctoring by merging smart automation with human review. Our AI-driven system automatically detects and alerts reviewers to potential academic dishonesty, including:",
+      "description": "Ensure secure exam delivery and monitoring using real-time proctoring, AI-powered recording and analysis, a dedicated lockdown browser, and a supplementary mobile camera feed.",
+      "overlayText": "SmarTest Invigilate is an advanced remote proctoring solution designed to uphold exam security and academic integrity, enabling candidates to be monitored securely from their home, office, or any global location at their convenience.",
+      "featuresTitle": "SmarTest Invigilate elevates standard remote proctoring by merging smart automation with human review. Our AI-driven system automatically detects and alerts reviewers to potential academic dishonesty, including:",
       "features": [
         "Additional person present",
         "Object detection",
@@ -402,18 +404,153 @@
       ],
       "detail1": "Our easily installed lockdown browser restricts the user's interface entirely to the assessment, effectively disabling all unauthorized web browsing and background applications.",
       "detail2": "Functioning as a primary control hub, the Invigilate dashboard allows organizations to seamlessly administer the end-to-end assessment process, free from technical complications.",
-      "tabOverview": "Overview",
-      "tabProctor": "Proctor Console",
+      "tabOverview": "AI-Powered Monitoring Platform",
+      "tabOverviewDesc": "Ensure secure exam delivery and monitoring using real-time proctoring.",
+      "testTakerFeaturesTitle": "Test-taker features",
+      "monitoringPills": [
+        "Comprehensive Recording",
+        "Reviewer Playback",
+        "Automated flagging",
+        "Review Time Tracking",
+        "Unlimited Testing"
+      ],
+      "testTakerFeatures": [
+        "Multi-language UI",
+        "Technical Support Chatbox",
+        "ID Check",
+        "Proctor Chatbox (including voice communication)",
+        "System Check",
+        "Lockdown Browser (SmarTest Lock)",
+        "Mobile camera",
+        "Pre-Exam System Check",
+        "Toilet Break guidance at system check",
+        "Post-exam Room Check (optional)",
+        "Material Check as a part of system check",
+        "Room Check as a part of system check"
+      ],
+      "tabProctor": "Proctor Experience",
+      "tabProctorDesc": "Comprehensive exam monitoring via AI-powered recording and analysis.",
+      "proctorFeatures": [
+        {
+          "title": "Multi-Stream Monitoring",
+          "desc": "Real-time invigilation through webcam, mobile camera, and screen sharing capabilities. Comprehensive coverage ensures maximum security."
+        },
+        {
+          "title": "Dedicated Support",
+          "desc": "Proctor and technical assistance available before and during exams. Test-takers can focus entirely on their assessment."
+        },
+        {
+          "title": "Two-Way Communication",
+          "desc": "Seamless chat and voice interaction between proctors and test-takers. No additional software installation required."
+        },
+        {
+          "title": "AI Automated Flagging",
+          "desc": "Automated flagging system augments human monitoring. Suspicious activities identified in real-time for proctor review."
+        }
+      ],
       "tabCandidate": "Candidate View",
-      "tabMobile": "Mobile Setup"
+      "tabCandidateDesc": "A secure testing experience enforced by a dedicated lockdown browser.",
+      "tabMobile": "Mobile Setup",
+      "tabMobileDesc": "Enhanced exam integrity with a supplementary mobile camera feed."
     },
     "examiner": {
       "title": "SmarTest Examiner",
-      "description": "Design and administer multilingual assessment programs equipped with bulk question importing, advanced exam-building capabilities, and comprehensive performance analytics."
+      "description": "SmarTest Examiner is a secure, cutting-edge digital testing and test-creation system built to provide candidates with a highly interactive and easy-to-use assessment experience.",
+      "detail": "Examiner accommodates a broad spectrum of tests and features a multilingual interface, allowing candidates to take assessments in their preferred language.",
+      "authoring": {
+        "title": "Smarter Question Authoring",
+        "description": "Examiner offers a broad selection of interactive question formats that go well beyond standard multiple-choice, such as:",
+        "features": [
+          "Drag and Drop",
+          "Radio Buttons & Checkboxes",
+          "Text Boxes",
+          "Hotspot Questions",
+          "Ranking, Voice Capture, and more",
+          "Built-in calculator and notepad tools"
+        ],
+        "enhanceText": "enhance the Test-Taker's experience."
+      },
+      "friendly": {
+        "title": "Flexible & Test-Taker Friendly",
+        "features": [
+          "Navigate freely between questions",
+          "Track answered and flagged questions",
+          "Simple keycode access to enter the test",
+          "Hotspot Questions",
+          "Lockdown mode via one-click SmarTest Lock installation",
+          "Seamlessly works with Invigilate Remote Proctoring"
+        ]
+      },
+      "providers": {
+        "title": "Designed for Test Providers",
+        "p1": "Examiner connects smoothly with Learning Management Systems and enables the bulk importing of question banks for quick, efficient setup. Content is organized into an easy-to-use, topic-based folder system with unlimited sub-topics, while author tracking and version control maintain the accuracy of the material.",
+        "p2": "Organizing massive question banks is simplified through sorting, filtering, and localization tools, while comprehensive event logs maintain transparency during the entire testing lifecycle. Furthermore, by supporting both IRT and CTT frameworks, Examiner delivers in-depth psychometric data regarding candidate performance.",
+        "markingTitle": "Marking & Feedback",
+        "markingFeatures": [
+          "Double-Blind Marking: each marker assesses independently",
+          "Configurable marking criteria and breakdowns",
+          "Supports open, blind, and human-based marking with approval"
+        ],
+        "reportsTitle": "Detailed reports on:",
+        "reportsFeatures": [
+          "Test-Taker performance",
+          "Marker effectiveness",
+          "Assessment analytics for moderation"
+        ]
+      },
+      "performance": {
+        "title": "Performance Insights with Audit-Grade Logging",
+        "features": [
+          "Detailed test-taker and marker analytics",
+          "Event logs for accountability and audit trail",
+          "Supports IRT & CTT psychometric analysis tools"
+        ]
+      }
     },
     "nexus": {
       "title": "SmarTest Nexus",
-      "description": "Take complete control of your program with built-in tools for handling payments, registrations, candidate tracking, and venue logistics."
+      "description1": "SmarTest Nexus is an all-in-one hub that allows administrators to fully oversee exams, candidates, testing locations, and proctors. Additionally, the platform includes built-in e-commerce tools, allowing users to set up an online storefront that accepts various payment methods for smooth and easy transactions.",
+      "features": [
+        "Test-taker Registration and Profile Management",
+        "Payment Processing and Voucher Handling",
+        "Eligibility Verification",
+        "Venue Scheduling and Coordination",
+        "Test-day Administration (In-person or Remote)",
+        "Proctor Support and Assignment",
+        "Integration with your Testing Engine",
+        "Result access and performance tracking"
+      ],
+      "description2": "Simplify your entire assessment lifecycle with SmarTest Nexus, an all-in-one platform built for maximum efficiency. It allows you to securely and smoothly manage everything from student registration to final test results in one convenient place."
+    },
+    "whySmartest": {
+      "badge": "Why SmarTest?",
+      "title": "Built for the Future of Assessment",
+      "subtitle": "Trusted by examination bodies, universities, and certification providers across the region, SmarTest delivers unmatched reliability and innovation.",
+      "stats": [
+        { "value": "500K+", "label": "Candidates Served" },
+        { "value": "99.9%", "label": "Platform Uptime" },
+        { "value": "40+", "label": "Countries Reached" },
+        { "value": "24/7", "label": "Expert Support" }
+      ],
+      "pillars": [
+        {
+          "title": "Enterprise-Grade Security",
+          "desc": "End-to-end encryption, AI-powered fraud detection, and rigorous audit trails ensure the highest standards of exam integrity."
+        },
+        {
+          "title": "Seamless Integration",
+          "desc": "Connects effortlessly with your existing LMS, HR, and payment platforms through a robust API ecosystem."
+        },
+        {
+          "title": "Multilingual & Accessible",
+          "desc": "Full RTL support, localised interfaces, and WCAG-compliant design make assessments inclusive for all candidates."
+        },
+        {
+          "title": "Rapid Deployment",
+          "desc": "Go live in days, not months. Our dedicated onboarding team ensures a smooth transition with zero disruption."
+        }
+      ],
+      "ctaLabel": "Explore All Features"
     },
     "proctors": {
       "title": "SmarTest Proctors",

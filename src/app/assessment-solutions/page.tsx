@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import FormPartnershipRequest from "./_components/form-partnership-request";
 import {
@@ -22,15 +21,20 @@ import {
   Cpu,
   Monitor,
   Smartphone,
-  Info
+  Info,
+  ChevronRight,
+  MessageSquare,
+  Headphones,
+  BarChart3,
+  ScrollText,
+  TrendingUp
 } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 export default function AssessmentSolutionsPage() {
   const t = useTranslations("AssessmentSolutionsPage");
-  
-  // Interactive view switcher for SmarTest Invigilate
-  const [activeView, setActiveView] = useState<"overview" | "proctor" | "candidate" | "mobile">("overview");
+  const locale = useLocale();
+  const isRtl = locale === "ar";
 
   // Helper icons for the 6 management categories
   const manageIcons = [
@@ -122,8 +126,9 @@ export default function AssessmentSolutionsPage() {
 
         <div className="space-y-24">
           {/* SmarTest Invigilate Showcase */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            <div className="lg:col-span-6 space-y-6">
+          <div className="space-y-12">
+            {/* Top Text/Description Section (Full Width) */}
+            <div className="space-y-6 max-w-7xl">
               <div className="flex items-center gap-2 bg-red-50 text-red-800 px-3 py-1 rounded-full w-fit text-xs font-bold uppercase tracking-wider shadow-sm">
                 <ShieldAlert className="w-3.5 h-3.5" />
                 Featured Platform
@@ -136,66 +141,24 @@ export default function AssessmentSolutionsPage() {
                   {t("invigilate.subtitle")}
                 </p>
               </div>
+
               <p className="text-slate-600 leading-relaxed text-sm font-semibold">
                 {t("invigilate.description")}
               </p>
 
               {/* Highlights List */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
-                {t.raw("invigilate.features").map((feat: string, i: number) => (
-                  <div key={i} className="flex items-center gap-2.5 text-sm text-slate-700">
-                    <CheckCircle className="w-4 h-4 text-red-800 shrink-0" />
-                    <span>{feat}</span>
-                  </div>
-                ))}
-              </div>
-
-              {/* View Switcher Controls */}
-              <div className="bg-slate-100 p-1 rounded-lg flex flex-wrap gap-1 w-fit border border-slate-200">
-                <button
-                  onClick={() => setActiveView("overview")}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-bold transition-all duration-200 ${
-                    activeView === "overview"
-                      ? "bg-white text-red-800 shadow-sm"
-                      : "text-slate-600 hover:text-slate-900"
-                  }`}
-                >
-                  <Sparkles className="w-3.5 h-3.5" />
-                  {t("invigilate.tabOverview")}
-                </button>
-                <button
-                  onClick={() => setActiveView("proctor")}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-bold transition-all duration-200 ${
-                    activeView === "proctor"
-                      ? "bg-white text-red-800 shadow-sm"
-                      : "text-slate-600 hover:text-slate-900"
-                  }`}
-                >
-                  <Monitor className="w-3.5 h-3.5" />
-                  {t("invigilate.tabProctor")}
-                </button>
-                <button
-                  onClick={() => setActiveView("candidate")}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-bold transition-all duration-200 ${
-                    activeView === "candidate"
-                      ? "bg-white text-red-800 shadow-sm"
-                      : "text-slate-600 hover:text-slate-900"
-                  }`}
-                >
-                  <Users className="w-3.5 h-3.5" />
-                  {t("invigilate.tabCandidate")}
-                </button>
-                <button
-                  onClick={() => setActiveView("mobile")}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-bold transition-all duration-200 ${
-                    activeView === "mobile"
-                      ? "bg-white text-red-800 shadow-sm"
-                      : "text-slate-600 hover:text-slate-900"
-                  }`}
-                >
-                  <Smartphone className="w-3.5 h-3.5" />
-                  {t("invigilate.tabMobile")}
-                </button>
+              <div className="space-y-3 pt-2">
+                <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider">
+                  {t("invigilate.featuresTitle")}
+                </h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {t.raw("invigilate.features").map((feat: string, i: number) => (
+                    <div key={i} className="flex items-center gap-2.5 text-sm text-slate-700">
+                      <CheckCircle className="w-4 h-4 text-red-800 shrink-0" />
+                      <span>{feat}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
 
               {/* Additional Details */}
@@ -205,49 +168,167 @@ export default function AssessmentSolutionsPage() {
               </div>
             </div>
 
-            <div className="lg:col-span-6 flex flex-col justify-center items-center relative group">
-              <div className="absolute inset-0 bg-gradient-to-tr from-red-800/10 to-transparent rounded-2xl blur-lg group-hover:scale-105 transition-transform duration-500 pointer-events-none" />
-              <div className="relative flex justify-center w-full">
-                {activeView === "overview" && (
-                  <Image
-                    className="rounded-2xl w-auto h-auto max-h-[420px] max-w-full bg-white border border-slate-200/60 shadow-xl p-2 animate-fade-in"
-                    src="/images/smartest-invigilate-features.jpg"
-                    alt="SmarTest Invigilate Overview Panel"
-                    width={825}
-                    height={602}
-                  />
-                )}
-                {activeView === "proctor" && (
-                  <Image
-                    className="rounded-2xl w-auto h-auto max-h-[420px] max-w-full bg-white border border-slate-200/60 shadow-xl p-2 animate-fade-in"
-                    src="/images/smartest-invigilate-dashboard.jpg"
-                    alt="SmarTest Invigilate Proctor Dashboard"
-                    width={1024}
-                    height={585}
-                  />
-                )}
-                {activeView === "candidate" && (
-                  <Image
-                    className="rounded-2xl w-auto h-auto max-h-[420px] max-w-full bg-white border border-slate-200/60 shadow-xl p-2 animate-fade-in"
-                    src="/images/smartest-invigilate.jpg"
-                    alt="SmarTest Invigilate Desk Setup"
-                    width={1024}
-                    height={1024}
-                  />
-                )}
-                {activeView === "mobile" && (
-                  <Image
-                    className="rounded-2xl w-auto h-auto max-h-[420px] max-w-full bg-white border border-slate-200/60 shadow-xl p-2 animate-fade-in"
-                    src="/images/hijab-student.jpg"
-                    alt="SmarTest Invigilate Smartphone Monitoring"
-                    width={796}
-                    height={1024}
-                  />
-                )}
+            {/* Vertical Stack of Individual Interfaces (Below Text Section) */}
+            <div className="grid grid-cols-1 gap-8 max-w-7xl">
+              {/* 1. AI-Powered Monitoring Platform */}
+              <div className="bg-white rounded-2xl border border-slate-100 p-6 lg:p-8 shadow-sm hover:shadow-md hover:border-slate-200 transition-all duration-300 flex flex-col justify-between group">
+                <div className="space-y-8">
+                  {/* Title Header */}
+                  <div className="flex items-center gap-2 font-bold text-slate-900 text-base border-b border-slate-100 pb-3">
+                    <Sparkles className="w-5 h-5 text-red-800 shrink-0" />
+                    {t("invigilate.tabOverview")}
+                  </div>
+
+                  {/* Graphic/Grid containing Pills and Image */}
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    {/* Left: 5 Pills */}
+                    <div className="lg:col-span-5 flex flex-col gap-3.5">
+                      {t.raw("invigilate.monitoringPills").map((pill: string, idx: number) => (
+                        <div
+                          key={idx}
+                          className="flex items-center gap-3 px-5 py-3 rounded-full border border-emerald-500/80 bg-white shadow-sm hover:bg-emerald-50/10 transition-colors duration-200"
+                        >
+                          <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0" />
+                          <span className="font-bold text-slate-800 text-xs tracking-tight">
+                            {pill}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Right: Business Meeting Image */}
+                    <div className="lg:col-span-7 relative rounded-xl overflow-hidden border border-slate-100 bg-slate-50 aspect-[3960/2640] w-full max-w-[600px] mx-auto shadow-md">
+                      <Image
+                        className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-[1.02]"
+                        src="/images/study-1.jpg"
+                        alt="AI-Powered Monitoring Platform"
+                        fill
+                      />
+                    </div>
+                  </div>
+
+                  {/* Bottom: Test-taker features list */}
+                  <div className="border-t border-slate-100 pt-6 space-y-4">
+                    <h4 className="font-extrabold text-slate-900 text-sm tracking-wide uppercase border-l-4 border-red-800 pl-3">
+                      {t("invigilate.testTakerFeaturesTitle")}
+                    </h4>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                      {t.raw("invigilate.testTakerFeatures").map((feat: string, i: number) => (
+                        <div key={i} className="flex items-start gap-2 text-xs text-slate-700 leading-relaxed">
+                          <ChevronRight className={`w-4 h-4 text-red-800 shrink-0 mt-0.5 ${isRtl ? "rotate-180" : ""}`} />
+                          <span>{feat}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div className="mt-4 flex items-center gap-2 text-xs text-slate-400 justify-center">
-                <Info className="w-3.5 h-3.5" />
-                <span>Interactive View Demonstrating AI Invigilation</span>
+
+              {/* 2. Proctor Experience */}
+              <div className="bg-white rounded-2xl border border-slate-100 p-6 lg:p-8 shadow-sm hover:shadow-md hover:border-slate-200 transition-all duration-300 flex flex-col justify-between group">
+                <div className="space-y-8">
+                  {/* Title Header */}
+                  <div className="flex items-center gap-2 font-bold text-slate-900 text-base border-b border-slate-100 pb-3">
+                    <Monitor className="w-5 h-5 text-red-800 shrink-0" />
+                    {t("invigilate.tabProctor")}
+                  </div>
+
+                  {/* Two-Column Grid: Image on Left, Features on Right */}
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    {/* Left: Dashboard Image */}
+                    <div className="lg:col-span-6 relative rounded-xl overflow-hidden border border-slate-100 bg-slate-50 aspect-[1024/585] w-full max-w-[600px] mx-auto shadow-md">
+                      <Image
+                        className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-[1.02]"
+                        src="/images/smartest-invigilate-dashboard.jpg"
+                        alt="SmarTest Invigilate Proctor Dashboard"
+                        fill
+                      />
+                    </div>
+
+                    {/* Right: 4 Sub-features with Green Icons */}
+                    <div className="lg:col-span-6 flex flex-col gap-6">
+                      {t.raw("invigilate.proctorFeatures").map((feat: { title: string; desc: string }, idx: number) => {
+                        // Dynamically assign appropriate icons based on index
+                        const icons = [
+                          <Layers className="w-6 h-6 text-white" key="0" />,
+                          <Headphones className="w-6 h-6 text-white" key="1" />,
+                          <MessageSquare className="w-6 h-6 text-white" key="2" />,
+                          <Cpu className="w-6 h-6 text-white" key="3" />
+                        ];
+                        return (
+                          <div key={idx} className="flex items-start gap-4">
+                            <div className="w-12 h-12 rounded-xl bg-emerald-600 text-white flex items-center justify-center shrink-0 shadow-sm">
+                              {icons[idx]}
+                            </div>
+                            <div className="space-y-1">
+                              <h4 className="font-extrabold text-slate-900 text-sm tracking-tight leading-none">
+                                {feat.title}
+                              </h4>
+                              <p className="text-xs text-slate-600 leading-relaxed">
+                                {feat.desc}
+                              </p>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* 3. Candidate View */}
+              <div className="bg-white rounded-2xl border border-slate-100 p-6 shadow-sm hover:shadow-md hover:border-slate-200 transition-all duration-300 flex flex-col justify-between group">
+                <div className="space-y-3">
+                  <div className="flex items-center gap-2 font-bold text-slate-900 text-base">
+                    <Users className="w-5 h-5 text-red-800 shrink-0" />
+                    {t("invigilate.tabCandidate")}
+                  </div>
+                  <p className="text-slate-600 text-xs leading-relaxed">
+                    {t("invigilate.tabCandidateDesc")}
+                  </p>
+                  <div className="relative rounded-xl overflow-hidden border border-slate-100 bg-slate-50 flex items-center justify-center p-2 aspect-[4/3] mt-2">
+                    <Image
+                      className="object-contain w-full h-full rounded-lg group-hover:scale-[1.03] transition-transform duration-500"
+                      src="/images/smartest-invigilate.jpg"
+                      alt="SmarTest Invigilate Desk Setup"
+                      width={1024}
+                      height={1024}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* 4. Mobile Setup */}
+              <div className="bg-white rounded-2xl border border-slate-100 p-6 shadow-sm hover:shadow-md hover:border-slate-200 transition-all duration-300 flex flex-col justify-between group">
+                <div className="space-y-3">
+                  <div className="flex items-center gap-2 font-bold text-slate-900 text-base">
+                    <Smartphone className="w-5 h-5 text-red-800 shrink-0" />
+                    {t("invigilate.tabMobile")}
+                  </div>
+
+                  <p className="text-slate-600 text-xs leading-relaxed">
+                    {t("invigilate.tabMobileDesc")}
+                  </p>
+
+                  {/* Portrait aspect image with slanted text overlay */}
+                  <div className="relative rounded-xl overflow-hidden border border-slate-100 bg-slate-50 w-full aspect-[796/1024] max-w-[650px] mx-auto mt-2 group/banner">
+                    <Image
+                      src="/images/hijab-student.jpg"
+                      alt="SmarTest Invigilate Smartphone Monitoring"
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover/banner:scale-[1.02]"
+                    />
+
+                    {/* Flat horizontal overlay bar */}
+                    <div
+                      className="absolute bottom-0 left-0 right-0 w-full bg-slate-950/80 text-white p-4 md:p-5 text-center backdrop-blur-sm border-t border-white/10"
+                    >
+                      <p className="text-xs md:text-sm font-medium leading-relaxed max-w-2xl mx-auto">
+                        {t("invigilate.overlayText")}
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -262,9 +343,14 @@ export default function AssessmentSolutionsPage() {
               <h3 className="text-3xl font-black text-slate-900 tracking-tight font-headline">
                 {t("examiner.title")}
               </h3>
-              <p className="text-slate-600 leading-relaxed font-semibold">
-                {t("examiner.description")}
-              </p>
+              <div className="space-y-4">
+                <p className="text-slate-600 leading-relaxed font-semibold">
+                  {t("examiner.description")}
+                </p>
+                <p className="text-slate-600 leading-relaxed font-semibold">
+                  {t("examiner.detail")}
+                </p>
+              </div>
 
               {/* Highlights */}
               <div className="space-y-3 pt-2">
@@ -285,8 +371,203 @@ export default function AssessmentSolutionsPage() {
               <div className="absolute inset-0 bg-gradient-to-tr from-amber-800/10 to-transparent rounded-2xl blur-lg group-hover:scale-105 transition-transform duration-500 pointer-events-none" />
               <Image
                 className="rounded-2xl w-auto h-auto max-h-[420px] max-w-full bg-white border border-slate-200/60 shadow-xl p-2 transform group-hover:scale-[1.01] transition-transform duration-500"
-                src="/images/smartest-examiner.jpg"
+                src="/images/smartest-invigilate-features.jpg"
                 alt="SmarTest Examiner Assessment Development"
+                width={1024}
+                height={1024}
+              />
+            </div>
+          </div>
+
+          {/* SmarTest Examiner - Smarter Question Authoring Showcase */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center pt-16 border-t border-slate-100/80">
+            <div className="lg:col-span-6 lg:order-1 space-y-6">
+              <div className="flex items-center gap-2 bg-amber-50 text-amber-800 px-3 py-1 rounded-full w-fit text-xs font-bold uppercase tracking-wider shadow-sm">
+                <Sparkles className="w-3.5 h-3.5 animate-pulse" />
+                Advanced Authoring
+              </div>
+              <h3 className="text-3xl font-black text-slate-900 tracking-tight font-headline">
+                {t("examiner.authoring.title")}
+              </h3>
+              <p className="text-slate-600 leading-relaxed font-semibold text-sm">
+                {t("examiner.authoring.description")}
+              </p>
+
+              {/* Formats Checklist */}
+              <div className="space-y-3 pt-2">
+                <div className="grid grid-cols-1 gap-3">
+                  {t.raw("examiner.authoring.features").map((feat: string, i: number) => {
+                    const isLast = i === 5;
+                    return (
+                      <div key={i} className="flex flex-col sm:flex-row sm:items-center gap-x-2 gap-y-1 text-sm text-slate-700 leading-relaxed">
+                        <div className="flex items-start gap-2.5">
+                          <ChevronRight className={`w-4 h-4 text-slate-800 shrink-0 mt-0.5 ${isRtl ? "rotate-180" : ""}`} />
+                          <span className="font-bold text-slate-800">{feat}</span>
+                        </div>
+                        {isLast && (
+                          <span className="text-slate-800 font-bold sm:pl-12 rtl:sm:pr-12">
+                            {t("examiner.authoring.enhanceText")}
+                          </span>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+
+            <div className="lg:col-span-6 lg:order-2 flex justify-center items-center relative group">
+              <div className="absolute inset-0 bg-gradient-to-tr from-amber-800/10 to-transparent rounded-2xl blur-lg group-hover:scale-105 transition-transform duration-500 pointer-events-none" />
+              <Image
+                className="rounded-2xl w-auto h-auto max-h-[420px] max-w-full bg-white border border-slate-200/60 shadow-xl p-2 transform group-hover:scale-[1.01] transition-transform duration-500"
+                src="/images/smartest-examiner.jpg"
+                alt="Smarter Question Authoring"
+                width={1024}
+                height={1024}
+              />
+            </div>
+          </div>
+
+          {/* SmarTest Examiner - Flexible & Test-Taker Friendly Showcase */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center pt-16 border-t border-slate-100/80">
+            <div className="lg:col-span-6 lg:order-2 space-y-6">
+              <div className="flex items-center gap-2 bg-amber-50 text-amber-800 px-3 py-1 rounded-full w-fit text-xs font-bold uppercase tracking-wider shadow-sm">
+                <CheckCircle className="w-3.5 h-3.5" />
+                Test-Taker Experience
+              </div>
+              <h3 className="text-3xl font-black text-slate-900 tracking-tight font-headline">
+                {t("examiner.friendly.title")}
+              </h3>
+              <p className="text-slate-600 leading-relaxed font-semibold text-sm">
+                Examiner delivers a flexible, intuitive interface designed to minimize stress and maximize candidates' focus during the assessment process.
+              </p>
+
+              {/* Friendly Checklist */}
+              <div className="space-y-3 pt-2">
+                <div className="grid grid-cols-1 gap-3">
+                  {t.raw("examiner.friendly.features").map((feat: string, i: number) => (
+                    <div key={i} className="flex items-start gap-2.5 text-sm text-slate-700 leading-relaxed">
+                      <ChevronRight className={`w-4 h-4 text-slate-800 shrink-0 mt-0.5 ${isRtl ? "rotate-180" : ""}`} />
+                      <span className="font-bold text-slate-800">{feat}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="lg:col-span-6 lg:order-1 flex justify-center items-center relative group">
+              <div className="absolute inset-0 bg-gradient-to-tr from-amber-800/10 to-transparent rounded-2xl blur-lg group-hover:scale-105 transition-transform duration-500 pointer-events-none" />
+              <Image
+                className="rounded-2xl w-auto h-auto max-h-[420px] max-w-full bg-white border border-slate-200/60 shadow-xl p-2 transform group-hover:scale-[1.01] transition-transform duration-500"
+                src="/images/study.jpg"
+                alt="Flexible & Test-Taker Friendly"
+                width={1024}
+                height={1024}
+              />
+            </div>
+          </div>
+
+          {/* SmarTest Examiner - Designed for Test Providers Showcase */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center pt-16 border-t border-slate-100/80">
+            <div className="lg:col-span-6 lg:order-1 space-y-6">
+              <div className="flex items-center gap-2 bg-amber-50 text-amber-800 px-3 py-1 rounded-full w-fit text-xs font-bold uppercase tracking-wider shadow-sm">
+                <Cpu className="w-3.5 h-3.5" />
+                Operations & Evaluation
+              </div>
+              <h3 className="text-3xl font-black text-slate-900 tracking-tight font-headline">
+                {t("examiner.providers.title")}
+              </h3>
+
+              <div className="space-y-4 text-slate-600 text-sm leading-relaxed font-semibold">
+                <p>{t("examiner.providers.p1")}</p>
+                <p>{t("examiner.providers.p2")}</p>
+              </div>
+
+              {/* Marking & Feedback Block */}
+              <div className="pt-6 border-t border-slate-100 space-y-4">
+                <h4 className="text-xl font-bold text-amber-800 font-headline">
+                  {t("examiner.providers.markingTitle")}
+                </h4>
+                <div className="space-y-3.5 text-slate-700 text-sm">
+                  {t.raw("examiner.providers.markingFeatures").map((feat: string, i: number) => (
+                    <div key={i} className="flex items-start gap-3">
+                      <span className="text-amber-600 shrink-0 mt-0.5 text-base">❖</span>
+                      <span className="font-bold text-slate-800">{feat}</span>
+                    </div>
+                  ))}
+
+                  <div className="space-y-2">
+                    <div className="flex items-start gap-3">
+                      <span className="text-amber-600 shrink-0 mt-0.5 text-base">❖</span>
+                      <span className="font-bold text-slate-800">{t("examiner.providers.reportsTitle")}</span>
+                    </div>
+                    <div className="pl-7 rtl:pr-7 space-y-2">
+                      {t.raw("examiner.providers.reportsFeatures").map((subFeat: string, i: number) => (
+                        <div key={i} className="flex items-start gap-2 text-slate-650 text-xs font-semibold">
+                          <span className="text-amber-600 shrink-0 mt-1">▪</span>
+                          <span>{subFeat}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="lg:col-span-6 lg:order-2 flex justify-center items-center relative group">
+              <div className="absolute inset-0 bg-gradient-to-tr from-amber-800/10 to-transparent rounded-2xl blur-lg group-hover:scale-105 transition-transform duration-500 pointer-events-none" />
+              <Image
+                className="rounded-2xl w-auto h-auto max-h-[480px] max-w-full bg-white border border-slate-200/60 shadow-xl p-2 transform group-hover:scale-[1.01] transition-transform duration-500"
+                src="/images/smartest-examiner-providers.jpg"
+                alt="Designed for Test Providers"
+                width={1024}
+                height={1024}
+              />
+            </div>
+          </div>
+
+          {/* SmarTest Examiner - Performance Insights Showcase */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center pt-16 border-t border-slate-100/80">
+            <div className="lg:col-span-6 lg:order-2 space-y-6">
+              <div className="flex items-center gap-2 bg-amber-50 text-amber-800 px-3 py-1 rounded-full w-fit text-xs font-bold uppercase tracking-wider shadow-sm">
+                <TrendingUp className="w-3.5 h-3.5" />
+                Performance Analytics
+              </div>
+              <h3 className="text-3xl font-black text-slate-900 tracking-tight font-headline">
+                {t("examiner.performance.title")}
+              </h3>
+              <p className="text-slate-600 leading-relaxed font-semibold text-sm">
+                Examiner translates assessment data into actionable feedback, maintaining a robust audit trail and delivering rich psychometric calculations.
+              </p>
+
+              {/* Performance Checklist */}
+              <div className="space-y-4 pt-2">
+                {t.raw("examiner.performance.features").map((feat: string, i: number) => {
+                  const icons = [
+                    <BarChart3 className="w-5 h-5 text-white" key="0" />,
+                    <ScrollText className="w-5 h-5 text-white" key="1" />,
+                    <TrendingUp className="w-5 h-5 text-white" key="2" />
+                  ];
+                  return (
+                    <div key={i} className="flex items-center gap-4">
+                      <div className="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center shrink-0 shadow-sm">
+                        {icons[i]}
+                      </div>
+                      <p className="text-sm font-bold text-slate-800">
+                        {feat}
+                      </p>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div className="lg:col-span-6 lg:order-1 flex justify-center items-center relative group">
+              <div className="absolute inset-0 bg-gradient-to-tr from-amber-800/10 to-transparent rounded-2xl blur-lg group-hover:scale-105 transition-transform duration-500 pointer-events-none" />
+              <Image
+                className="rounded-2xl w-auto h-auto max-h-[480px] max-w-full bg-white border border-slate-200/60 shadow-xl p-2 transform group-hover:scale-[1.01] transition-transform duration-500"
+                src="/images/smartest-examiner-performance.jpg"
+                alt="Performance Insights with Audit-Grade Logging"
                 width={1024}
                 height={1024}
               />
@@ -303,23 +584,23 @@ export default function AssessmentSolutionsPage() {
               <h3 className="text-3xl font-black text-slate-900 tracking-tight font-headline">
                 {t("nexus.title")}
               </h3>
-              <p className="text-slate-600 leading-relaxed font-semibold">
-                {t("nexus.description")}
+              <p className="text-slate-600 leading-relaxed font-semibold text-sm">
+                {t("nexus.description1")}
               </p>
 
-              {/* Operations Highlights */}
-              <div className="space-y-3 pt-2">
-                {[
-                  "Built-in Payment Gateways & Compliance",
-                  "Registrations & Candidate Performance Tracking",
-                  "Venue Logistics & Venue Capacity Management"
-                ].map((hubFeat, i) => (
-                  <div key={i} className="flex items-start gap-3 text-sm text-slate-700">
-                    <div className="w-1.5 h-1.5 rounded-full bg-blue-600 mt-2 shrink-0" />
-                    <span>{hubFeat}</span>
+              {/* Operations Checklist */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-2">
+                {t.raw("nexus.features").map((feat: string, i: number) => (
+                  <div key={i} className="flex items-start gap-2.5 text-sm text-slate-700 leading-relaxed">
+                    <span className="text-blue-600 font-extrabold shrink-0 mt-0.5">✓</span>
+                    <span className="font-bold text-slate-800">{feat}</span>
                   </div>
                 ))}
               </div>
+
+              <p className="text-slate-600 leading-relaxed font-semibold text-sm pt-2">
+                {t("nexus.description2")}
+              </p>
             </div>
 
             <div className="lg:col-span-6 flex justify-center items-center relative group">
@@ -327,7 +608,7 @@ export default function AssessmentSolutionsPage() {
               <Image
                 className="rounded-2xl w-auto h-auto max-h-[420px] max-w-full bg-white border border-slate-200/60 shadow-xl p-2 transform group-hover:scale-[1.01] transition-transform duration-500"
                 src="/images/smartest-nexus.jpg"
-                alt="SmarTest Nexus Operations Hub"
+                alt="SmarTest Nexus"
                 width={1024}
                 height={1024}
               />
@@ -338,7 +619,7 @@ export default function AssessmentSolutionsPage() {
         {/* SmarTest Proctors & Centres Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-24">
           {/* SmarTest Proctors */}
-          <div className="bg-white border border-slate-100 rounded-2xl p-8 hover:shadow-lg hover:border-slate-200 transition-all duration-300 flex flex-col justify-between group relative overflow-hidden">
+          {/* <div className="bg-white border border-slate-100 rounded-2xl p-8 hover:shadow-lg hover:border-slate-200 transition-all duration-300 flex flex-col justify-between group relative overflow-hidden">
             <div className="absolute top-0 right-0 w-32 h-32 bg-red-500/5 rounded-full blur-2xl pointer-events-none" />
             <div className="relative z-10">
               <div className="w-12 h-12 rounded-xl bg-red-50 text-red-800 flex items-center justify-center mb-6 group-hover:bg-red-800 group-hover:text-white transition-all duration-300">
@@ -354,10 +635,10 @@ export default function AssessmentSolutionsPage() {
             <div className="relative z-10 flex items-center gap-1.5 text-xs font-bold text-red-800 uppercase tracking-widest cursor-pointer group-hover:translate-x-1.5 transition-transform duration-300 mt-4">
               Learn more <ArrowRight className="w-3.5 h-3.5" />
             </div>
-          </div>
+          </div> */}
 
           {/* SmarTest Centres */}
-          <div className="bg-white border border-slate-100 rounded-2xl p-8 hover:shadow-lg hover:border-slate-200 transition-all duration-300 flex flex-col justify-between group relative overflow-hidden">
+          {/* <div className="bg-white border border-slate-100 rounded-2xl p-8 hover:shadow-lg hover:border-slate-200 transition-all duration-300 flex flex-col justify-between group relative overflow-hidden">
             <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 rounded-full blur-2xl pointer-events-none" />
             <div className="relative z-10">
               <div className="w-12 h-12 rounded-xl bg-blue-50 text-blue-800 flex items-center justify-center mb-6 group-hover:bg-blue-800 group-hover:text-white transition-all duration-300">
@@ -373,6 +654,99 @@ export default function AssessmentSolutionsPage() {
             <div className="relative z-10 flex items-center gap-1.5 text-xs font-bold text-blue-800 uppercase tracking-widest cursor-pointer group-hover:translate-x-1.5 transition-transform duration-300 mt-4">
               Learn more <ArrowRight className="w-3.5 h-3.5" />
             </div>
+          </div> */}
+        </div>
+      </section>
+
+      {/* Why SmarTest Section */}
+      <section className="py-24 px-6 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 relative overflow-hidden">
+        {/* Decorative glows */}
+        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-red-800/10 rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-blue-800/10 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-amber-800/5 rounded-full blur-[100px] pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto relative z-10">
+          {/* Header */}
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 backdrop-blur-sm px-4 py-1.5 rounded-full mb-5">
+              <Sparkles className="w-4 h-4 text-amber-400 animate-pulse" />
+              <span className="text-xs font-bold uppercase tracking-widest text-slate-300">
+                {t("whySmartest.badge")}
+              </span>
+            </div>
+            <h2 className="text-4xl lg:text-5xl font-black text-white tracking-tight font-headline leading-tight mb-4">
+              {t("whySmartest.title")}
+            </h2>
+            <p className="text-slate-400 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
+              {t("whySmartest.subtitle")}
+            </p>
+          </div>
+
+          {/* Stats Bar */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
+            {t.raw("whySmartest.stats").map((stat: { value: string; label: string }, i: number) => (
+              <div
+                key={i}
+                className="relative group bg-white/5 border border-white/10 rounded-2xl p-6 text-center backdrop-blur-sm hover:bg-white/10 hover:border-white/20 transition-all duration-300 overflow-hidden"
+              >
+                <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                <p className="text-4xl font-black text-white tracking-tight font-headline mb-1">
+                  {stat.value}
+                </p>
+                <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+                  {stat.label}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          {/* Value Pillars */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {t.raw("whySmartest.pillars").map((pillar: { title: string; desc: string }, i: number) => {
+              const pillarIcons = [
+                <ShieldAlert className="w-6 h-6 text-red-400" key="0" />,
+                <Layers className="w-6 h-6 text-blue-400" key="1" />,
+                <Users className="w-6 h-6 text-emerald-400" key="2" />,
+                <ArrowRight className="w-6 h-6 text-amber-400" key="3" />,
+              ];
+              const pillarColors = [
+                "from-red-500/10 to-red-800/5 border-red-500/20 hover:border-red-500/40",
+                "from-blue-500/10 to-blue-800/5 border-blue-500/20 hover:border-blue-500/40",
+                "from-emerald-500/10 to-emerald-800/5 border-emerald-500/20 hover:border-emerald-500/40",
+                "from-amber-500/10 to-amber-800/5 border-amber-500/20 hover:border-amber-500/40",
+              ];
+              const iconBgs = [
+                "bg-red-500/15",
+                "bg-blue-500/15",
+                "bg-emerald-500/15",
+                "bg-amber-500/15",
+              ];
+              return (
+                <div
+                  key={i}
+                  className={`group bg-gradient-to-br ${pillarColors[i]} border rounded-2xl p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/20`}
+                >
+                  <div className={`w-12 h-12 rounded-xl ${iconBgs[i]} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300`}>
+                    {pillarIcons[i]}
+                  </div>
+                  <h3 className="text-base font-extrabold text-white mb-3 leading-tight font-headline">
+                    {pillar.title}
+                  </h3>
+                  <p className="text-xs text-slate-400 leading-relaxed">
+                    {pillar.desc}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Divider line */}
+          <div className="mt-16 flex items-center gap-6">
+            <div className="flex-1 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+            <span className="text-xs font-semibold text-slate-500 uppercase tracking-widest whitespace-nowrap">
+              Trusted · Secure · Innovative
+            </span>
+            <div className="flex-1 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
           </div>
         </div>
       </section>
