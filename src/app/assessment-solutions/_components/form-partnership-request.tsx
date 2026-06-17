@@ -72,8 +72,8 @@ export default function FormPartnershipRequest() {
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <Field data-invalid={!!errors.fullName}>
-                    <label className="block text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-3" htmlFor="fullName">
-                        Full Name
+                    <label className="block text-[12px] font-semibold uppercase tracking-widest mb-3" htmlFor="fullName">
+                        Full Name <span className="text-red-500 ml-0.5">*</span>
                     </label>
                     <input
                         {...register("fullName")}
@@ -89,8 +89,8 @@ export default function FormPartnershipRequest() {
                 </Field>
 
                 <Field data-invalid={!!errors.institution}>
-                    <label className="block text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-3" htmlFor="institution">
-                        Institution
+                    <label className="block text-[12px] font-semibold uppercase tracking-widest mb-3" htmlFor="institution">
+                        Institution <span className="text-red-500 ml-0.5">*</span>
                     </label>
                     <input
                         {...register("institution")}
@@ -107,8 +107,8 @@ export default function FormPartnershipRequest() {
             </div>
 
             <Field data-invalid={!!errors.workEmail}>
-                <label className="block text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-3" htmlFor="workEmail">
-                    Work Email
+                <label className="block text-[12px] font-semibold uppercase tracking-widest mb-3" htmlFor="workEmail">
+                    Work Email <span className="text-red-500 ml-0.5">*</span>
                 </label>
                 <input
                     {...register("workEmail")}
@@ -124,8 +124,8 @@ export default function FormPartnershipRequest() {
             </Field>
 
             <Field data-invalid={!!errors.message}>
-                <label className="block text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-3" htmlFor="message">
-                    Message
+                <label className="block text-[12px] font-semibold uppercase tracking-widest mb-3" htmlFor="message">
+                    Message <span className="text-red-500 ml-0.5">*</span>
                 </label>
                 <textarea
                     {...register("message")}

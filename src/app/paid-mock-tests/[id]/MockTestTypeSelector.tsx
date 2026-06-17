@@ -1,0 +1,144 @@
+"use client";
+
+import React, { useState } from "react";
+import { CheckCircle2 } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { AcceptPayButton } from "./AcceptPayButton";
+import { buttonVariants } from "@/components/ui/button";
+import { AED } from "@/components/ui/aed";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+/** Per-exam mock test type options */
+const EXAM_TYPES: Record<string, { label: string; value: string }[]> = {
+  pte: [
+    { label: "PTE Academic", value: "PTE Academic" },
+    { label: "PTE Academic UKVI", value: "PTE Academic UKVI" },
+    { label: "PTE Core", value: "PTE Core" },
+  ],
+  ielts: [
+    { label: "IELTS Academic", value: "IELTS Academic" },
+    { label: "IELTS General Training", value: "IELTS General Training" },
+  ],
+};
+
+/** Resolve exam key from slug, e.g. "pte-1" → "pte", "ielts" → "ielts" */
+function resolveExamKey(slug: string): string | null {
+  const cleaned = slug.replace(/-\d+$/, "").toLowerCase();
+  if (cleaned.includes("ielts")) return "ielts";
+  if (cleaned.includes("pte")) return "pte";
+  return null;
+}
+
+interface MockTestTypeSelectorProps {
+  data: {
+    slug: string;
+    price: string;
+    center_price?: string;
+    details?: {
+      center_price?: string | number;
+    } | null;
+  };
+}
+
+export function MockTestTypeSelector({ data }: MockTestTypeSelectorProps) {
+  const examKey = resolveExamKey(data.slug);
+  const types = examKey ? EXAM_TYPES[examKey] : null;
+
+  const [selectedType, setSelectedType] = useState<string>("");
+
+  const homePrice = parseFloat(data.price || "350");
+  const rawCenterPrice = data.details?.center_price ?? data.center_price;
+  const centerPrice = rawCenterPrice ? parseFloat(String(rawCenterPrice)) : null;
+
+  // TOEFL iBT (or any exam without subtypes) — show Pay button directly
+  if (!types) {
+    return (
+      <AcceptPayButton data={data} className={cn(buttonVariants())}>
+        I Accept, Pay
+      </AcceptPayButton>
+    );
+  }
+
+  return (
+    <div className="space-y-4 w-full max-w-sm">
+      {/* ── Type Selector ── */}
+      <div className="space-y-1.5">
+        <label className="text-xs font-bold uppercase tracking-wider text-slate-500">
+          Select Mock Test Type
+        </label>
+        <Select
+          value={selectedType || undefined}
+          onValueChange={(val) => setSelectedType(val as string)}
+        >
+          <SelectTrigger className="w-full">
+            <SelectValue placeholder="— Choose exam type —" />
+          </SelectTrigger>
+          <SelectContent>
+            {types.map((t) => (
+              <SelectItem key={t.value} value={t.value}>
+                {t.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+
+      {/* ── Price + Pay Button (visible after a type is selected) ── */}
+      {selectedType && (
+        <div className="animate-in fade-in slide-in-from-top-1 duration-200 space-y-3">
+          {/* Price card */}
+          <div className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 space-y-2">
+            <p className="text-[10px] font-bold uppercase tracking-wider">
+              Mock Test Price
+            </p>
+
+            {centerPrice ? (
+              <div className="flex items-center gap-3 flex-wrap">
+                <div className="flex items-center gap-1">
+                  <span className="text-xs font-medium">Home-based:</span>
+                  <span className="text-base font-extrabold text-primary inline-flex items-center gap-0.5">
+                    <AED className="h-[0.8em] w-auto fill-current" />
+                    {homePrice}
+                  </span>
+                </div>
+                <span className="text-slate-300 text-sm">/</span>
+                <div className="flex items-center gap-1">
+                  <span className="text-xs font-medium">Center-based:</span>
+                  <span className="text-base font-extrabold text-primary inline-flex items-center gap-0.5">
+                    <AED className="h-[0.8em] w-auto fill-current" />
+                    {centerPrice}
+                  </span>
+                </div>
+              </div>
+            ) : (
+              <span className="text-xl font-extrabold text-primary inline-flex items-center gap-0.5">
+                <AED className="h-[0.85em] w-auto fill-current" />
+                {homePrice}
+              </span>
+            )}
+
+            <div className="flex items-center gap-1.5 text-xs text-emerald-600 font-medium">
+              <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
+              {selectedType} selected
+            </div>
+          </div>
+
+          {/* Pay button — passes selectedType as variant to AcceptPayButton */}
+          <AcceptPayButton
+            data={data}
+            className={cn(buttonVariants(), "w-full")}
+            selectedType={selectedType}
+          >
+            Register
+          </AcceptPayButton>
+        </div>
+      )}
+    </div>
+  );
+}

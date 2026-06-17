@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useState, useMemo } from "react";
+import { Suspense, useState, useMemo, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -134,11 +134,20 @@ function PaidMockTestRegistrationForm({
     },
   });
 
+  // Pre-fill variant from URL query param
+  useEffect(() => {
+    const variantFromUrl = searchParams.get("variant");
+    if (variantFromUrl) {
+      setValue("varient", variantFromUrl, { shouldValidate: false });
+    }
+  }, [searchParams, setValue]);
+
   const selectedPaymentMethod = watch("paymentMethod");
   const formData = watch();
 
   const locationParam = searchParams.get("location") || "home";
   const priceParam = searchParams.get("price");
+  const variantParam = searchParams.get("variant") || "";
   const rawCenterPrice = data?.details?.center_price ?? data?.center_price;
   const PRICE = priceParam
     ? parseFloat(priceParam)
@@ -396,6 +405,16 @@ function PaidMockTestRegistrationForm({
                           <p className="text-xs text-slate-400">Type</p>
                           <p className="font-semibold text-slate-700 capitalize">
                             {data.type.replace("_", " ")}
+                          </p>
+                        </div>
+                      )}
+
+                      {/* Show selected exam type / variant from URL */}
+                      {variantParam && (
+                        <div>
+                          <p className="text-xs text-slate-400">Exam Type</p>
+                          <p className="font-semibold text-primary">
+                            {variantParam}
                           </p>
                         </div>
                       )}

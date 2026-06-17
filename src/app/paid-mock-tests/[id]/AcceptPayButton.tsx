@@ -13,6 +13,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { PriceDisplay } from "@/components/ui/price-display";
+import Image from "next/image";
 
 interface AcceptPayButtonProps {
   data: {
@@ -25,12 +26,15 @@ interface AcceptPayButtonProps {
   };
   className?: string;
   children?: React.ReactNode;
+  /** Optional pre-selected exam type variant (e.g. "PTE Academic", "IELTS Academic") */
+  selectedType?: string;
 }
 
 export function AcceptPayButton({
   data,
   className,
   children,
+  selectedType,
 }: AcceptPayButtonProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [agreed, setAgreed] = useState(false);
@@ -44,8 +48,11 @@ export function AcceptPayButton({
   const handleContinue = (location: "home" | "center") => {
     setIsOpen(false);
     const selectedPrice = location === "center" ? centerPrice : homePrice;
+    const variantParam = selectedType
+      ? `&variant=${encodeURIComponent(selectedType)}`
+      : "";
     router.push(
-      `/paid-mock-tests/registration?id=${data.slug}&location=${location}&price=${selectedPrice}`,
+      `/paid-mock-tests/registration?id=${data.slug}&location=${location}&price=${selectedPrice}${variantParam}`,
     );
   };
 
@@ -98,7 +105,7 @@ export function AcceptPayButton({
                   </li>
                   <li className="flex items-start gap-2.5">
                     <Check className="w-4 h-4 text-slate-400 shrink-0 mt-0.5" />
-                    <span>Timed practice under exam conditions</span>
+                    <span>Timed practice</span>
                   </li>
                 </ul>
               </div>
@@ -132,85 +139,107 @@ export function AcceptPayButton({
                   disabled={!agreed}
                   className="w-full py-5 font-bold border-slate-300 text-slate-700 hover:bg-slate-50 transition-all rounded-xl"
                 >
-                  Continue with Home-based
+                  Continue with Home-based Mock Test
                 </Button>
               </div>
             </div>
 
             {/* Right Card: Standard (Center-based) */}
-            <div className="relative flex flex-col p-6 border border-slate-200 rounded-2xl bg-white shadow-sm flex-1 justify-between">
-              {/* Green UPGRADE badge on top right */}
-              <div className="absolute -top-3 right-4">
-                <span className="bg-primary text-white text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
-                  Upgrade
-                </span>
-              </div>
+            <div className="relative flex flex-col rounded-2xl border border-slate-200 bg-white shadow-sm flex-1 justify-between overflow-hidden">
 
-              <div>
-                {/* Card Header with vertical red accent line */}
-                <div className="border-l-4 border-[#9a1c1f] pl-3 min-h-[38px] flex flex-col justify-center mb-6">
-                  <p className="text-[10px] font-bold tracking-wider text-slate-400 uppercase">
+              {/* ── Hero Image Strip ── */}
+              <div className="relative h-44 w-full shrink-0 overflow-hidden">
+                <Image
+                  src="/images/about-us/Computer_Room_3.jpg"
+                  alt="Test center computer room"
+                  fill
+                  className="object-cover object-center scale-105"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+                {/* Dark gradient overlay so text is legible */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10" />
+
+                {/* Upgrade badge — top right inside the image */}
+                <div className="absolute top-3 right-3">
+                  <span className="bg-primary text-white text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider shadow-md">
+                    Upgrade
+                  </span>
+                </div>
+
+                {/* Title overlaid at the bottom of the image */}
+                <div className="absolute bottom-0 left-0 right-0 px-5 pb-4">
+                  <p className="text-[10px] font-bold tracking-widest text-white/60 uppercase mb-0.5">
                     In-Center
                   </p>
-                  <h3 className="text-lg font-black text-slate-900 leading-none">
+                  <h3 className="text-xl font-black text-white leading-tight drop-shadow-md">
                     Center-based
                   </h3>
                 </div>
-
-                {/* Feature list - Pros from 1st image */}
-                <ul className="space-y-3.5 mb-6 text-sm text-slate-600">
-                  <li className="flex items-start gap-2.5">
-                    <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                    <span className="font-medium text-slate-700">Distraction-free environment</span>
-                  </li>
-                  <li className="flex items-start gap-2.5">
-                    <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                    <span className="font-medium text-slate-700">Reliable internet & tech support on-site</span>
-                  </li>
-                  <li className="flex items-start gap-2.5">
-                    <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                    <span className="font-medium text-slate-700">Experiencing an authentic, exam-like environment</span>
-                  </li>
-                  <li className="flex items-start gap-2.5">
-                    <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                    <span className="font-medium text-slate-700">Timed practice under exam conditions</span>
-                  </li>
-                  <li className="flex items-start gap-2.5">
-                    <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                    <span className="font-medium text-slate-700">Replicates physical venue stress & proctor presence</span>
-                  </li>
-                </ul>
-
-                {/* Schedule Availability Box */}
-                <div className="bg-slate-50 border border-slate-100 rounded-xl p-3.5 flex gap-2.5 items-start mt-4">
-                  <Calendar className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                  <div className="space-y-0.5">
-                    <h4 className="text-xs font-bold text-slate-700">Schedule Availability</h4>
-                    <p className="text-[11px] leading-relaxed text-slate-500">
-                      Please note that date & time need to be confirmed by our staff and it must be taken within our working hours.
-                    </p>
-                  </div>
-                </div>
               </div>
 
-              <div className="mt-auto pt-6 border-t border-slate-100 space-y-4">
-                {/* Price section showing + AED diff */}
-                <div className="bg-emerald-50/50 border border-emerald-100/50 rounded-xl p-3 flex flex-col items-center justify-center text-center">
-                  <span className="text-[10px] font-bold text-emerald-700 uppercase tracking-wide">Upgrade cost</span>
-                  <div className="text-xl font-black text-[#1e824c] mt-0.5 flex items-center gap-1">
-                    <span>+</span>
-                    <PriceDisplay amount={diffPrice} className="text-[#1e824c]" />
+              {/* ── Card Body ── */}
+              <div className="p-5 flex flex-col flex-1">
+                <div className="flex-1">
+                  {/* Feature list */}
+                  <ul className="space-y-3 mb-5 text-sm">
+                    <li className="flex items-start gap-2.5">
+                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                      <span className="font-medium text-slate-700">Distraction-free environment</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                      <span className="font-medium text-slate-700">Reliable internet &amp; tech support on-site</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                      <span className="font-medium text-slate-700">Experiencing an authentic, exam-like environment</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                      <span className="font-medium text-slate-700">Timed practice under exam conditions</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                      <span className="font-medium text-slate-700">Replicates physical venue stress &amp; proctor presence</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                      <span className="font-medium text-slate-700">Timed practice under exam conditions</span>
+                    </li>
+                  </ul>
+
+                  {/* Schedule Availability Box */}
+                  <div className="bg-slate-50 border border-slate-100 rounded-xl p-3.5 flex gap-2.5 items-start">
+                    <Calendar className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                    <div className="space-y-0.5">
+                      <h4 className="text-xs font-bold text-slate-700">Schedule Availability</h4>
+                      <p className="text-[11px] leading-relaxed text-slate-500">
+                        Please note that date &amp; time need to be confirmed by our staff and it must be taken within our working hours.
+                      </p>
+                    </div>
                   </div>
-                  <span className="text-[10px] text-slate-400 mt-0.5">additional per registration</span>
                 </div>
 
-                {/* Action Button */}
-                <Button
-                  onClick={() => handleContinue("center")}
-                  className="w-full py-5 font-bold"
-                >
-                  Upgrade to Center-based
-                </Button>
+                {/* ── Footer: price + button ── */}
+                <div className="mt-5 pt-5 border-t border-slate-100 space-y-4">
+                  {/* Price section */}
+                  <div className="bg-emerald-50/50 border border-emerald-100/50 rounded-xl p-3 flex flex-col items-center justify-center text-center">
+                    <span className="text-[10px] font-bold text-emerald-700 uppercase tracking-wide">Upgrade cost</span>
+                    <div className="text-xl font-black text-[#1e824c] mt-0.5 flex items-center gap-1">
+                      <span>+</span>
+                      <PriceDisplay amount={diffPrice} className="text-[#1e824c]" />
+                    </div>
+                    <span className="text-[10px] text-slate-400 mt-0.5">additional per registration</span>
+                  </div>
+
+                  {/* Action Button */}
+                  <Button
+                    onClick={() => handleContinue("center")}
+                    className="w-full py-5 font-bold"
+                  >
+                    Upgrade to Center-based Mock Test
+                  </Button>
+                </div>
               </div>
             </div>
           </div>

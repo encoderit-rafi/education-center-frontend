@@ -4,7 +4,7 @@ import * as React from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { TEST_DATES_CARDS_DATA } from "@/data";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, CalendarDays, Clock } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import CaelInfo from "@/components/blocks/cael-info";
 import CelpipInfo from "@/components/blocks/celpip-info";
@@ -50,7 +50,7 @@ export default function TestDatesDetailPage() {
     <main className="min-h-screen bg-background">
       {/* ── Header ── */}
       <section className="base-py base-px bg-[#F9FAFB]">
-        <div className="max-w-4xl mx-auto space-y-5">
+        <div className="max-w-6xl mx-auto space-y-5">
           <div className="space-y-3">
             <h1 className="text-4xl font-headline font-black text-secondary tracking-tight leading-tight">
               {examMetadata.name}{" "}
@@ -75,117 +75,244 @@ export default function TestDatesDetailPage() {
               }
             >
               {id === "ielts" && (
-                <div className="bg-primary/5 border border-primary/10 rounded-md p-5 max-w-xl">
-                  <div className="text-sm font-bold text-secondary flex items-center gap-2">
-                    <span className="w-2 h-2 bg-primary rounded-full" />
-                    Testing occurs
+                <div className="relative overflow-hidden bg-gradient-to-br from-white to-red-50/15 border border-red-100/80 rounded-2xl p-6 shadow-md shadow-red-950/5 max-w-xl transition-all duration-300 hover:shadow-lg hover:border-red-200">
+                  <div className="flex items-center gap-3 pb-4 mb-5 border-b border-slate-100">
+                    <div className="rounded-xl bg-gradient-to-br from-primary to-primary/80 text-white p-2.5 shadow-md shadow-primary/20">
+                      <CalendarDays className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h3 className="text-sm font-bold text-slate-800">IELTS Weekly Schedule</h3>
+                      <p className="text-[10px] text-slate-400">Regular weekly test sessions</p>
+                    </div>
                   </div>
-                  <p className="text-xs text-slate-500 mt-1 ml-4">
-                    Only Sundays are open for testing.
-                  </p>
-                  <div className="mt-4 pt-3 border-t border-primary/10">
-                    <p className="text-[10px] font-bold text-primary">
-                      Available Time Slots
-                    </p>
-                    <p className="text-sm font-bold text-secondary mt-1 ml-4">
-                      Morning & Afternoon Sessions (AM / PM)
-                    </p>
+
+                  <div className="space-y-4">
+                    <div className="bg-slate-50/60 rounded-xl p-4 border border-slate-100/80 space-y-3">
+                      <div className="flex items-center gap-2 text-xs font-bold text-slate-700">
+                        <span className="w-1.5 h-1.5 bg-primary rounded-full" />
+                        Testing Days
+                      </div>
+                      <div className="flex flex-wrap gap-2 pl-3.5">
+                        <span className="text-xs font-semibold text-primary bg-primary/5 border border-primary/10 rounded-md px-3 py-1 shadow-xs">
+                          Sunday Only
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="bg-slate-50/60 rounded-xl p-4 border border-slate-100/80 space-y-3">
+                      <div className="flex items-center gap-2 text-xs font-bold text-slate-700">
+                        <Clock className="w-4 h-4 text-primary" />
+                        Available Time Slots
+                      </div>
+                      <div className="flex flex-wrap gap-2 pl-5">
+                        <span className="text-[11px] font-semibold text-slate-600 bg-white border border-slate-200 rounded-md px-2.5 py-1 shadow-xs hover:border-primary/30 hover:text-primary hover:bg-red-50/10 transition-all duration-200 cursor-default">
+                          Morning Session (AM)
+                        </span>
+                        <span className="text-[11px] font-semibold text-slate-600 bg-white border border-slate-200 rounded-md px-2.5 py-1 shadow-xs hover:border-primary/30 hover:text-primary hover:bg-red-50/10 transition-all duration-200 cursor-default">
+                          Afternoon Session (PM)
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               )}
               {id === "toefl" && (
-                <div className="bg-primary/5 border border-primary/10 rounded-md p-5 max-w-xl">
-                  <div className="text-sm font-bold text-secondary flex items-center gap-2">
-                    <span className="w-2 h-2 bg-primary rounded-full" />
-                    Testing occurs
+                <div className="relative overflow-hidden bg-gradient-to-br from-white to-red-50/15 border border-red-100/80 rounded-2xl p-6 shadow-md shadow-red-950/5 max-w-xl transition-all duration-300 hover:shadow-lg hover:border-red-200">
+                  <div className="flex items-center gap-3 pb-4 mb-5 border-b border-slate-100">
+                    <div className="rounded-xl bg-gradient-to-br from-primary to-primary/80 text-white p-2.5 shadow-md shadow-primary/20">
+                      <CalendarDays className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h3 className="text-sm font-bold text-slate-800">TOEFL iBT Weekly Schedule</h3>
+                      <p className="text-[10px] text-slate-400">Regular weekly test sessions</p>
+                    </div>
                   </div>
-                  <p className="text-xs text-slate-500 mt-1 ml-4">
-                    Wednesdays and Saturdays are open for testing.
-                  </p>
-                  <div className="mt-4 pt-3 border-t border-primary/10">
-                    <p className="text-[10px] font-bold text-primary">
-                      Available Time Slots
-                    </p>
-                    <p className="text-sm font-bold text-secondary mt-1 ml-4">
-                      AM / PM Sessions
-                    </p>
+
+                  <div className="space-y-4">
+                    <div className="bg-slate-50/60 rounded-xl p-4 border border-slate-100/80 space-y-3">
+                      <div className="flex items-center gap-2 text-xs font-bold text-slate-700">
+                        <span className="w-1.5 h-1.5 bg-primary rounded-full" />
+                        Testing Days
+                      </div>
+                      <div className="flex flex-wrap gap-2 pl-3.5">
+                        <span className="text-xs font-semibold text-primary bg-primary/5 border border-primary/10 rounded-md px-3 py-1 shadow-xs">
+                          Wednesday
+                        </span>
+                        <span className="text-xs font-semibold text-primary bg-primary/5 border border-primary/10 rounded-md px-3 py-1 shadow-xs">
+                          Saturday
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="bg-slate-50/60 rounded-xl p-4 border border-slate-100/80 space-y-3">
+                      <div className="flex items-center gap-2 text-xs font-bold text-slate-700">
+                        <Clock className="w-4 h-4 text-primary" />
+                        Available Time Slots
+                      </div>
+                      <div className="flex flex-wrap gap-2 pl-5">
+                        <span className="text-[11px] font-semibold text-slate-600 bg-white border border-slate-200 rounded-md px-2.5 py-1 shadow-xs hover:border-primary/30 hover:text-primary hover:bg-red-50/10 transition-all duration-200 cursor-default">
+                          AM / PM Sessions
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               )}
               {id === "skill-for-english-selt" && (
-                <div className="bg-primary/5 border border-primary/10 rounded-md p-5 max-w-xl">
-                  <div className="text-sm font-bold text-secondary flex items-center gap-2">
-                    <span className="w-2 h-2 bg-primary rounded-full" />
-                    Testing occurs Mon, Tue & Wed
+                <div className="relative overflow-hidden bg-gradient-to-br from-white to-red-50/15 border border-red-100/80 rounded-2xl p-6 shadow-md shadow-red-950/5 max-w-xl transition-all duration-300 hover:shadow-lg hover:border-red-200">
+                  <div className="flex items-center gap-3 pb-4 mb-5 border-b border-slate-100">
+                    <div className="rounded-xl bg-gradient-to-br from-primary to-primary/80 text-white p-2.5 shadow-md shadow-primary/20">
+                      <CalendarDays className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h3 className="text-sm font-bold text-slate-800">Skills for English (SELT) Schedule</h3>
+                      <p className="text-[10px] text-slate-400">Regular weekly test sessions</p>
+                    </div>
                   </div>
-                  <p className="text-xs text-slate-500 mt-1 ml-4">
-                    Secure your seat for upcoming SELT sessions available every
-                    Monday, Tuesday, and Wednesday.
-                  </p>
-                  <div className="mt-4 pt-3 border-t border-primary/10">
-                    <p className="text-[10px] font-bold text-primary">
-                      Available Time Slots
-                    </p>
-                    <p className="text-sm font-bold text-secondary mt-1 ml-4">
-                      10:00 AM, 01:30 PM, 05:30 PM
-                    </p>
+
+                  <div className="space-y-4">
+                    <div className="bg-slate-50/60 rounded-xl p-4 border border-slate-100/80 space-y-3">
+                      <div className="flex items-center gap-2 text-xs font-bold text-slate-700">
+                        <span className="w-1.5 h-1.5 bg-primary rounded-full" />
+                        Testing Days
+                      </div>
+                      <div className="flex flex-wrap gap-2 pl-3.5">
+                        <span className="text-xs font-semibold text-primary bg-primary/5 border border-primary/10 rounded-md px-3 py-1 shadow-xs">
+                          Monday, Tuesday & Wednesday
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="bg-slate-50/60 rounded-xl p-4 border border-slate-100/80 space-y-3">
+                      <div className="flex items-center gap-2 text-xs font-bold text-slate-700">
+                        <Clock className="w-4 h-4 text-primary" />
+                        Available Time Slots
+                      </div>
+                      <div className="flex flex-wrap gap-2 pl-5">
+                        <span className="text-[11px] font-semibold text-slate-600 bg-white border border-slate-200 rounded-md px-2.5 py-1 shadow-xs hover:border-primary/30 hover:text-primary hover:bg-red-50/10 transition-all duration-200 cursor-default">
+                          10:00 AM
+                        </span>
+                        <span className="text-[11px] font-semibold text-slate-600 bg-white border border-slate-200 rounded-md px-2.5 py-1 shadow-xs hover:border-primary/30 hover:text-primary hover:bg-red-50/10 transition-all duration-200 cursor-default">
+                          01:30 PM
+                        </span>
+                        <span className="text-[11px] font-semibold text-slate-600 bg-white border border-slate-200 rounded-md px-2.5 py-1 shadow-xs hover:border-primary/30 hover:text-primary hover:bg-red-50/10 transition-all duration-200 cursor-default">
+                          05:30 PM
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               )}
               {id === "pte" && (
-                <div className="bg-primary/5 border border-primary/10 rounded-md p-5 max-w-4xl">
-                  <div className="text-sm font-bold text-secondary flex items-center gap-2 mb-4">
-                    <span className="w-2 h-2 bg-primary rounded-full" />
-                    PTE Weekly Schedule
-                  </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-3">
-                      <h4 className="text-[11px] font-bold text-primary">
-                        PTE Academic / Core / UKVI
-                      </h4>
-                      <ul className="text-xs space-y-2 text-slate-600">
-                        <li className="flex justify-between border-b border-slate-100 pb-1">
-                          <span className="font-bold text-secondary">
-                            Sat, Tue, Wed
-                          </span>
-                          <span>10:00 AM, 12:45 PM, 3:30 PM, 6:15 PM</span>
-                        </li>
-                        <li className="flex justify-between border-b border-slate-100 pb-1">
-                          <span className="font-bold text-secondary">
-                            Sunday
-                          </span>
-                          <span>6:15 PM</span>
-                        </li>
-                        <li className="flex justify-between border-b border-slate-100 pb-1">
-                          <span className="font-bold text-secondary">
-                            Monday
-                          </span>
-                          <span>10:00 AM, 1:00 PM, 3:30 PM, 6:15 PM</span>
-                        </li>
-                        <li className="flex justify-between border-b border-slate-100 pb-1">
-                          <span className="font-bold text-secondary">
-                            Thursday
-                          </span>
-                          <span>3:30 PM, 6:15 PM</span>
-                        </li>
-                      </ul>
+                <div className="relative overflow-hidden bg-gradient-to-br from-white to-red-50/15 border border-red-100/80 rounded-2xl p-6 shadow-md shadow-red-950/5 max-w-4xl transition-all duration-300 hover:shadow-lg hover:border-red-200">
+                  <div className="flex items-center gap-3 pb-4 mb-6 border-b border-slate-100">
+                    <div className="rounded-xl bg-gradient-to-br from-primary to-primary/80 text-white p-2.5 shadow-md shadow-primary/20">
+                      <CalendarDays className="w-5 h-5" />
                     </div>
-                    <div className="space-y-3">
-                      <h4 className="text-[11px] font-bold text-primary">
-                        PTE Home (A1, A2, B1)
-                      </h4>
-                      <ul className="text-xs space-y-2 text-slate-600">
-                        <li className="flex justify-between border-b border-slate-100 pb-1">
-                          <span className="font-bold text-secondary">
-                            Monday
-                          </span>
-                          <span>1:15 PM</span>
-                        </li>
-                      </ul>
-                      <p className="text-[10px] text-slate-400 italic mt-2">
-                        * Times may vary slightly based on center capacity and
-                        public holidays.
-                      </p>
+                    <div>
+                      <h3 className="text-sm font-bold text-slate-800">PTE Weekly Schedule</h3>
+                      <p className="text-[10px] text-slate-400">Regular weekly test sessions</p>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {/* Column 1: PTE Academic / Core / UKVI */}
+                    <div className="bg-slate-50/60 rounded-xl p-5 border border-slate-100/80 space-y-4">
+                      <div className="pb-2 border-b border-slate-200/60">
+                        <h4 className="text-xs font-black uppercase tracking-wider text-primary">
+                          PTE Academic / Core / UKVI
+                        </h4>
+                      </div>
+                      <div className="space-y-4">
+                        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 pb-3 border-b border-slate-200/40 last:border-0 last:pb-0">
+                          <div className="flex items-center gap-2 mt-1">
+                            <span className="w-1.5 h-1.5 bg-primary/60 rounded-full shrink-0" />
+                            <span className="text-xs font-bold text-slate-700">Sat, Tue, Wed</span>
+                          </div>
+                          <div className="flex flex-wrap gap-1.5 justify-start sm:justify-end max-w-md">
+                            {["10:00 AM", "12:45 PM", "3:30 PM", "6:15 PM"].map((t) => (
+                              <span key={t} className="text-[11px] font-semibold text-slate-600 bg-white border border-slate-200 rounded-md px-2 py-0.5 shadow-xs hover:border-primary/30 hover:text-primary hover:bg-red-50/10 transition-all duration-200 cursor-default">
+                                {t}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 pb-3 border-b border-slate-200/40 last:border-0 last:pb-0">
+                          <div className="flex items-center gap-2 mt-1">
+                            <span className="w-1.5 h-1.5 bg-primary/60 rounded-full shrink-0" />
+                            <span className="text-xs font-bold text-slate-700">Sunday</span>
+                          </div>
+                          <div className="flex flex-wrap gap-1.5 justify-start sm:justify-end max-w-md">
+                            {["6:15 PM"].map((t) => (
+                              <span key={t} className="text-[11px] font-semibold text-slate-600 bg-white border border-slate-200 rounded-md px-2 py-0.5 shadow-xs hover:border-primary/30 hover:text-primary hover:bg-red-50/10 transition-all duration-200 cursor-default">
+                                {t}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 pb-3 border-b border-slate-200/40 last:border-0 last:pb-0">
+                          <div className="flex items-center gap-2 mt-1">
+                            <span className="w-1.5 h-1.5 bg-primary/60 rounded-full shrink-0" />
+                            <span className="text-xs font-bold text-slate-700">Monday</span>
+                          </div>
+                          <div className="flex flex-wrap gap-1.5 justify-start sm:justify-end max-w-md">
+                            {["10:00 AM", "1:00 PM", "3:30 PM", "6:15 PM"].map((t) => (
+                              <span key={t} className="text-[11px] font-semibold text-slate-600 bg-white border border-slate-200 rounded-md px-2 py-0.5 shadow-xs hover:border-primary/30 hover:text-primary hover:bg-red-50/10 transition-all duration-200 cursor-default">
+                                {t}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 pb-3 border-b border-slate-200/40 last:border-0 last:pb-0">
+                          <div className="flex items-center gap-2 mt-1">
+                            <span className="w-1.5 h-1.5 bg-primary/60 rounded-full shrink-0" />
+                            <span className="text-xs font-bold text-slate-700">Thursday</span>
+                          </div>
+                          <div className="flex flex-wrap gap-1.5 justify-start sm:justify-end max-w-md">
+                            {["3:30 PM", "6:15 PM"].map((t) => (
+                              <span key={t} className="text-[11px] font-semibold text-slate-600 bg-white border border-slate-200 rounded-md px-2 py-0.5 shadow-xs hover:border-primary/30 hover:text-primary hover:bg-red-50/10 transition-all duration-200 cursor-default">
+                                {t}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Column 2: PTE Home */}
+                    <div className="bg-slate-50/60 rounded-xl p-5 border border-slate-100/80 space-y-4 flex flex-col justify-between">
+                      <div className="space-y-4">
+                        <div className="pb-2 border-b border-slate-200/60">
+                          <h4 className="text-xs font-black uppercase tracking-wider text-primary">
+                            PTE Home (A1, A2, B1)
+                          </h4>
+                        </div>
+                        <div className="space-y-4">
+                          <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 pb-3 border-b border-slate-200/40 last:border-0 last:pb-0">
+                            <div className="flex items-center gap-2 mt-1">
+                              <span className="w-1.5 h-1.5 bg-primary/60 rounded-full shrink-0" />
+                              <span className="text-xs font-bold text-slate-700">Monday</span>
+                            </div>
+                            <div className="flex flex-wrap gap-1.5 justify-start sm:justify-end max-w-md">
+                              {["1:15 PM"].map((t) => (
+                                <span key={t} className="text-[11px] font-semibold text-slate-600 bg-white border border-slate-200 rounded-md px-2 py-0.5 shadow-xs hover:border-primary/30 hover:text-primary hover:bg-red-50/10 transition-all duration-200 cursor-default">
+                                  {t}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="pt-4 mt-auto">
+                        <p className="text-[12px] flex items-center gap-1.5 bg-white border border-slate-100 rounded-lg p-2.5 shadow-xs">
+                          <span className="w-1.5 h-1.5 rounded-full text-black" />
+                          Times may vary slightly based on center capacity and public holidays.
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>

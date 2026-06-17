@@ -162,7 +162,7 @@ export default function AssessmentSolutionsPage() {
               </div>
 
               {/* Additional Details */}
-              <div className="space-y-3 pt-2 text-slate-500 text-xs leading-relaxed border-t border-slate-100">
+              <div className="space-y-3 pt-2 text-slate-500 text-sm leading-relaxed border-t border-slate-100">
                 <p>{t("invigilate.detail1")}</p>
                 <p>{t("invigilate.detail2")}</p>
               </div>

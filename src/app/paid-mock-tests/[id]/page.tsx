@@ -27,8 +27,8 @@ import {
 import { buttonVariants } from "@/components/ui/button";
 import api from "@/axios";
 import Image from "next/image";
-import { AED } from "@/components/ui/aed";
 import { AcceptPayButton } from "./AcceptPayButton";
+import { MockTestTypeSelector } from "./MockTestTypeSelector";
 
 
 // Icon mapping to handle dynamic icon rendering
@@ -313,37 +313,10 @@ export default async function PaidMockTestDynamicPage({ params }: PageProps) {
               <h1 className="text-3xl font-black leading-[1.1] tracking-tight text-slate-900 lg:text-4xl xl:text-5xl mb-4">
                 {data.name} <span className="text-primary">Paid Mock Test</span>
               </h1>
-              <p className="text-base text-slate-600 leading-relaxed mb-2 text-justify">
+              <p className="text-base text-slate-600 leading-relaxed mb-4 text-justify">
                 {data.description}
               </p>
-              <p className="text-base text-slate-600 leading-relaxed mb-4 text-justify">
-                Mock Test Price:{" "}
-                {data.details?.center_price || data.center_price ? (
-                  <span className="text-slate-700 font-medium">
-                    <span className="text-primary font-bold inline-flex items-center gap-0.5">
-                      <AED className="h-[0.8em] w-auto fill-current" />
-                      {data.price}
-                    </span>{" "}
-                    (Home) /{" "}
-                    <span className="text-primary font-bold inline-flex items-center gap-0.5">
-                      <AED className="h-[0.8em] w-auto fill-current" />
-                      {data.details?.center_price || data.center_price}
-                    </span>{" "}
-                    (Center)
-                  </span>
-                ) : (
-                  <span className="text-primary font-bold inline-flex items-center gap-0.5">
-                    <AED className="h-[0.8em] w-auto fill-current" />
-                    {data.price}
-                  </span>
-                )}
-              </p>
-              <AcceptPayButton
-                data={data}
-                className={cn(buttonVariants())}
-              >
-                I Accept, Pay
-              </AcceptPayButton>
+              <MockTestTypeSelector data={data} />
 
             </div>
             <Image
