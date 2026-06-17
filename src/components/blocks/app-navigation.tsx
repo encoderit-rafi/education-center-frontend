@@ -63,13 +63,12 @@ export default function AppNavigation({ navigations, isLoading }: AppNavigationP
               {item.type === "dropdown" && (
                 <>
                   <NavigationMenuTrigger
-                    asChild
                     className={cn(
-                      "bg-transparent px-2 py-1.5 text-sm border-none outline-none transition-all rounded-sm",
+                      "bg-transparent px-2 py-1.5 text-sm border-none outline-none transition-all rounded-sm capitalize",
                       isActive && "bg-primary text-white font-medium",
                     )}
                   >
-                    <Link href={item.href}>{translateName(item.name)}</Link>
+                    {translateName(item.name)}
                   </NavigationMenuTrigger>
                   <NavigationMenuContent className="z-50 p-1 min-w-36 border bg-white text-primary rounded-xl shadow-2xl">
                     <ul className="flex flex-col gap-1">

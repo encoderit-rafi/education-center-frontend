@@ -72,75 +72,97 @@ export function AcceptPayButton({
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
             {/* Left Card: Basic (Home-based) */}
-            <div className="relative flex flex-col p-6 border border-slate-200 rounded-2xl bg-white shadow-sm flex-1 justify-between">
-              <div>
-                {/* Card Header with vertical red accent line */}
-                <div className="border-l-4 border-[#9a1c1f] pl-3 min-h-[38px] flex flex-col justify-center mb-6">
-                  <p className="text-[10px] font-bold tracking-wider text-slate-400 uppercase">
+            <div className="relative flex flex-col rounded-2xl border border-slate-200 bg-white shadow-sm flex-1 justify-between overflow-hidden">
+              {/* ── Hero Image Strip ── */}
+              <div className="relative h-44 w-full shrink-0 overflow-hidden">
+                <Image
+                  src="/images/home_mock_test.png"
+                  alt="Home-based mock testing environment"
+                  fill
+                  className="object-cover object-center scale-105"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+                {/* Dark gradient overlay so text is legible */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10" />
+
+                {/* Online badge — top right inside the image */}
+                <div className="absolute top-3 right-3">
+                  <span className="bg-white/20 backdrop-blur-md text-white text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider border border-white/20 shadow-md">
                     Online
-                  </p>
-                  <h3 className="text-lg font-black text-slate-900 flex items-center gap-1.5 leading-none">
-                    Home-based
-                    <AlertCircle className="w-4 h-4 text-[#9a1c1f] fill-[#9a1c1f]/10" />
-                  </h3>
-                </div>
-
-                {/* Feature list */}
-                <ul className="space-y-3.5 mb-6 text-sm text-slate-600">
-                  <li className="flex items-start gap-2.5">
-                    <X className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
-                    <span>Self-managed distraction-prone environment</span>
-                  </li>
-                  <li className="flex items-start gap-2.5">
-                    <X className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
-                    <span>No on-site technical support or internet check</span>
-                  </li>
-                  <li className="flex items-start gap-2.5">
-                    <X className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
-                    <span>Standard domestic testing experience</span>
-                  </li>
-                  <li className="flex items-start gap-2.5">
-                    <X className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
-                    <span>No physical proctor presence or venue simulation</span>
-                  </li>
-                  <li className="flex items-start gap-2.5">
-                    <Check className="w-4 h-4 text-slate-400 shrink-0 mt-0.5" />
-                    <span>Timed practice</span>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="mt-auto pt-6 border-t border-slate-100 space-y-4">
-                {/* Price section */}
-                <div className="bg-slate-50/70 border border-slate-100 rounded-xl p-3 flex items-center justify-between">
-                  <span className="text-xs font-semibold text-slate-500">Base Price</span>
-                  <span className="text-base font-extrabold text-primary">
-                    <PriceDisplay amount={homePrice} />
                   </span>
                 </div>
 
-                {/* Checkbox */}
-                <div className="flex items-start gap-3">
-                  <Checkbox
-                    id="agree-home-test"
-                    checked={agreed}
-                    onCheckedChange={(checked) => setAgreed(!!checked)}
-                    className="mt-0.5"
-                  />
-                  <label htmlFor="agree-home-test" className="text-xs text-slate-500 cursor-pointer select-none leading-tight">
-                    I agree that my Home-based Mock Test must be taken on my own device and internet.
-                  </label>
+                {/* Title overlaid at the bottom of the image */}
+                <div className="absolute bottom-0 left-0 right-0 px-5 pb-4">
+                  <p className="text-[10px] font-bold tracking-widest text-white/60 uppercase mb-0.5">
+                    Self-managed
+                  </p>
+                  <h3 className="text-xl font-black text-white flex items-center gap-1.5 leading-tight drop-shadow-md">
+                    Home-based
+                    <AlertCircle className="w-4 h-4 text-red-400 fill-red-950/20 animate-pulse" />
+                  </h3>
+                </div>
+              </div>
+
+              {/* ── Card Body ── */}
+              <div className="p-5 flex flex-col flex-1">
+                <div className="flex-1">
+                  {/* Feature list */}
+                  <ul className="space-y-3 mb-5 text-sm text-slate-600">
+                    <li className="flex items-start gap-2.5">
+                      <X className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
+                      <span>Self-managed distraction-prone environment</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <X className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
+                      <span>No on-site technical support or internet check</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <X className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
+                      <span>Standard domestic testing experience</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <X className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
+                      <span>No physical proctor presence or venue simulation</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <Check className="w-4 h-4 text-slate-400 shrink-0 mt-0.5" />
+                      <span>Timed practice</span>
+                    </li>
+                  </ul>
                 </div>
 
-                {/* Action Button */}
-                <Button
-                  variant="outline"
-                  onClick={() => handleContinue("home")}
-                  disabled={!agreed}
-                  className="w-full py-5 font-bold border-slate-300 text-slate-700 hover:bg-slate-50 transition-all rounded-xl"
-                >
-                  Continue with Home-based Mock Test
-                </Button>
+                <div className="mt-auto pt-5 border-t border-slate-100 space-y-4">
+                  {/* Price section */}
+                  <div className="bg-slate-50/70 border border-slate-100 rounded-xl p-3 flex items-center justify-between">
+                    <span className="text-xs font-semibold">Mock Test Price</span>
+                    <span className="text-base font-extrabold text-primary">
+                      <PriceDisplay amount={homePrice} />
+                    </span>
+                  </div>
+
+                  {/* Checkbox */}
+                  <div className="flex items-start gap-3">
+                    <Checkbox
+                      id="agree-home-test"
+                      checked={agreed}
+                      onCheckedChange={(checked) => setAgreed(!!checked)}
+                      className="mt-0.5"
+                    />
+                    <label htmlFor="agree-home-test" className="text-xs text-slate-500 cursor-pointer select-none leading-tight">
+                      I agree that my Home-based Mock Test must be taken on my own device and internet.
+                    </label>
+                  </div>
+
+                  {/* Action Button */}
+                  <Button
+                    onClick={() => handleContinue("home")}
+                    disabled={!agreed}
+                    className="w-full py-5 font-bold"
+                  >
+                    Continue with Home-based Mock Test
+                  </Button>
+                </div>
               </div>
             </div>
 

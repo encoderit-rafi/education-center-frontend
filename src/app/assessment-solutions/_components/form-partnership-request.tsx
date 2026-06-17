@@ -3,7 +3,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { Field, FieldError } from "@/components/ui/field";
+import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { CheckCircle2, Loader2 } from "lucide-react";
@@ -72,9 +72,9 @@ export default function FormPartnershipRequest() {
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <Field data-invalid={!!errors.fullName}>
-                    <label className="block text-[12px] font-semibold uppercase tracking-widest mb-3" htmlFor="fullName">
-                        Full Name <span className="text-red-500 ml-0.5">*</span>
-                    </label>
+                    <FieldLabel required className="text-[12px] font-semibold uppercase tracking-widest mb-3" htmlFor="fullName">
+                        Full Name
+                    </FieldLabel>
                     <input
                         {...register("fullName")}
                         id="fullName"
@@ -89,9 +89,9 @@ export default function FormPartnershipRequest() {
                 </Field>
 
                 <Field data-invalid={!!errors.institution}>
-                    <label className="block text-[12px] font-semibold uppercase tracking-widest mb-3" htmlFor="institution">
-                        Institution <span className="text-red-500 ml-0.5">*</span>
-                    </label>
+                    <FieldLabel required className="text-[12px] font-semibold uppercase tracking-widest mb-3" htmlFor="institution">
+                        Institution
+                    </FieldLabel>
                     <input
                         {...register("institution")}
                         id="institution"
@@ -107,9 +107,9 @@ export default function FormPartnershipRequest() {
             </div>
 
             <Field data-invalid={!!errors.workEmail}>
-                <label className="block text-[12px] font-semibold uppercase tracking-widest mb-3" htmlFor="workEmail">
-                    Work Email <span className="text-red-500 ml-0.5">*</span>
-                </label>
+                <FieldLabel required className="text-[12px] font-semibold uppercase tracking-widest mb-3" htmlFor="workEmail">
+                    Work Email
+                </FieldLabel>
                 <input
                     {...register("workEmail")}
                     id="workEmail"
@@ -124,9 +124,9 @@ export default function FormPartnershipRequest() {
             </Field>
 
             <Field data-invalid={!!errors.message}>
-                <label className="block text-[12px] font-semibold uppercase tracking-widest mb-3" htmlFor="message">
-                    Message <span className="text-red-500 ml-0.5">*</span>
-                </label>
+                <FieldLabel required className="text-[12px] font-semibold uppercase tracking-widest mb-3" htmlFor="message">
+                    Message
+                </FieldLabel>
                 <textarea
                     {...register("message")}
                     id="message"
