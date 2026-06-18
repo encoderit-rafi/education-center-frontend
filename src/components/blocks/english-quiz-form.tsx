@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -596,40 +597,48 @@ const QUIZ_QUESTIONS = [
   },
 ];
 
-const quizSchema = z.object({
-  fullName: z
-    .string()
-    .trim()
-    .min(1, "Full Name is required")
-    .min(2, "Name is too short"),
-  email: z
-    .string()
-    .trim()
-    .min(1, "Email Address is required")
-    .email("Invalid email address"),
-  phoneNumber: z
-    .string()
-    .trim()
-    .min(1, "Phone Number is required"),
-  city: z
-    .string()
-    .trim()
-    .min(1, "Emirate/City is required"),
-  country: z
-    .string()
-    .trim()
-    .min(1, "Country is required"),
-  answers: z.record(
-    z.string(),
-    z.string().min(1, "Please answer this question"),
-  ),
-});
-
-type QuizFormValues = z.infer<typeof quizSchema>;
+type QuizFormValues = {
+  fullName: string;
+  email: string;
+  phoneNumber: string;
+  city: string;
+  country: string;
+  answers: Record<string, string>;
+};
 
 export default function EnglishQuizForm() {
+  const t = useTranslations("EnglishQuiz");
   const router = useRouter();
   const [step, setStep] = useState(1);
+
+  const quizSchema = z.object({
+    fullName: z
+      .string()
+      .trim()
+      .min(1, t("form.fullNameRequired"))
+      .min(2, t("form.fullNameTooShort")),
+    email: z
+      .string()
+      .trim()
+      .min(1, t("form.emailRequired"))
+      .email(t("form.emailInvalid")),
+    phoneNumber: z
+      .string()
+      .trim()
+      .min(1, t("form.phoneNumberRequired")),
+    city: z
+      .string()
+      .trim()
+      .min(1, t("form.cityRequired")),
+    country: z
+      .string()
+      .trim()
+      .min(1, t("form.countryRequired")),
+    answers: z.record(
+      z.string(),
+      z.string().min(1, t("form.answerRequired")),
+    ),
+  });
 
   const form = useForm<QuizFormValues>({
     resolver: zodResolver(quizSchema),
@@ -708,13 +717,13 @@ export default function EnglishQuizForm() {
                 <User size={20} />
               </div>
               <h2 className="text-xl font-bold text-secondary">
-                Personal Information
+                {t("form.personalInfo")}
               </h2>
             </div>
 
             <div className="grid md:grid-cols-2 gap-6">
               <Field data-invalid={!!errors.fullName}>
-                <FieldLabel required>Full Name</FieldLabel>
+                <FieldLabel required>{t("form.fullName")}</FieldLabel>
                 <FieldContent>
                   <div className="relative">
                     <User
@@ -724,7 +733,7 @@ export default function EnglishQuizForm() {
                     <Input
                       {...register("fullName")}
                       className="pl-10 h-10"
-                      placeholder="John Doe"
+                      placeholder={t("form.fullNamePlaceholder")}
                     />
                   </div>
                   {errors.fullName && (
@@ -734,7 +743,7 @@ export default function EnglishQuizForm() {
               </Field>
 
               <Field data-invalid={!!errors.email}>
-                <FieldLabel required>Email Address</FieldLabel>
+                <FieldLabel required>{t("form.email")}</FieldLabel>
                 <FieldContent>
                   <div className="relative">
                     <Mail
@@ -745,7 +754,7 @@ export default function EnglishQuizForm() {
                       {...register("email")}
                       type="email"
                       className="pl-10 h-10"
-                      placeholder="john@example.com"
+                      placeholder={t("form.emailPlaceholder")}
                     />
                   </div>
                   {errors.email && (
@@ -755,7 +764,7 @@ export default function EnglishQuizForm() {
               </Field>
 
               <Field data-invalid={!!errors.country}>
-                <FieldLabel required>Country</FieldLabel>
+                <FieldLabel required>{t("form.country")}</FieldLabel>
                 <FieldContent>
                   <Controller
                     control={control}
@@ -775,7 +784,7 @@ export default function EnglishQuizForm() {
               </Field>
 
               <Field data-invalid={!!errors.city}>
-                <FieldLabel required>Emirate / City</FieldLabel>
+                <FieldLabel required>{t("form.city")}</FieldLabel>
                 <FieldContent>
                   <div className="relative">
                     <MapPin
@@ -785,7 +794,7 @@ export default function EnglishQuizForm() {
                     <Input
                       {...register("city")}
                       className="pl-10 h-10"
-                      placeholder="Dubai"
+                      placeholder={t("form.cityPlaceholder")}
                     />
                   </div>
                   {errors.city && (
@@ -795,7 +804,7 @@ export default function EnglishQuizForm() {
               </Field>
 
               <Field data-invalid={!!errors.phoneNumber}>
-                <FieldLabel required>Phone Number</FieldLabel>
+                <FieldLabel required>{t("form.phoneNumber")}</FieldLabel>
                 <FieldContent>
                   <div className="rounded-md border border-input focus-within:ring-1 focus-within:ring-ring overflow-hidden">
                     <Controller
@@ -824,7 +833,7 @@ export default function EnglishQuizForm() {
               size="lg"
               className="w-full md:w-auto px-5 font-bold"
             >
-              Start the quiz
+              {t("form.startQuiz")}
             </Button>
           </div>
         )}
@@ -855,7 +864,7 @@ export default function EnglishQuizForm() {
 
                   <div className="mb-2">
                     <p className="text-slate-500 font-medium leading-relaxed">
-                      Choose the correct option
+                      {t("form.chooseOption")}
                     </p>
                   </div>
 
@@ -907,7 +916,7 @@ export default function EnglishQuizForm() {
                 size="lg"
                 className="px-10 font-bold"
               >
-                Back
+                {t("form.back")}
               </Button>
               <Button
                 type="submit"
@@ -915,7 +924,7 @@ export default function EnglishQuizForm() {
                 size="lg"
                 className="px-10 font-bold"
               >
-                {form.formState.isSubmitting ? "Processing..." : "Submit Quiz"}
+                {form.formState.isSubmitting ? t("form.processing") : t("form.submitQuiz")}
               </Button>
             </div>
           </div>

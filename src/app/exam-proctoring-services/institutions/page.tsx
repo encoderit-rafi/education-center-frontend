@@ -77,7 +77,7 @@ export default function InstitutionsPage() {
                 </BaseCardIcon>
 
                 <BaseCardTitle className="mt-5 mb-3 text-lg font-semibold text-gray-900">
-                  <h3>{tech.title}</h3>
+                  {tech.title}
                 </BaseCardTitle>
 
                 <BaseCardDescription className="text-gray-600 leading-7">

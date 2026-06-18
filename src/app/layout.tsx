@@ -30,7 +30,7 @@ export default async function RootLayout({
   return (
     <html
       lang={locale}
-      // dir={locale === "ar" ? "rtl" : "ltr"}
+      dir={locale === "ar" ? "rtl" : "ltr"}
       className={cn(
         "h-full antialiased",
         manrope.variable,

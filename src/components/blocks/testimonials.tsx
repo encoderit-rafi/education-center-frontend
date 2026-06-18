@@ -31,86 +31,68 @@ const GoogleLogo = () => (
   </svg>
 );
 
-const testimonials = [
+const testimonialsData = [
   {
-    name: "Nadine Mustafa",
-    date: "a year ago",
-    quote:
-      "Very organised and polite",
+    id: "nadine",
     color: "bg-blue-600",
     rating: 5,
     image: "/images/testimonials/nadine.png",
   },
   {
-    name: "Rahul Chauhan",
-    date: "2 months ago",
-    quote:
-      "⭐⭐⭐⭐⭐ TEPTH Sharjah – Prep Smarter, Score Higher TEPTH Sharjah is the go‑to hub for mastering exams such as the IELTS, TOEFL, CELPIP, PTE‑A, OET, PearsonVUE, and CAEL.Expert trainers, a calm and modern test environment, and smooth check‑in make the whole process stress‑free. Their guidance and realistic practice sessions give you the confidence to hit your target score. If you’re serious about results, this is where you should be.",
+    id: "rahul",
     color: "bg-red-600",
     rating: 5,
     image: "/images/testimonials/rahul.png",
   },
   {
-    name: "Sima Al Kanawati",
-    date: "a month ago",
-    quote:
-      "Calm and clean examination test center Respectful staff Strict rules And has a great location away from highways",
+    id: "sima",
     color: "bg-amber-600",
     rating: 5,
     image: "/images/testimonials/sima.png",
   },
   {
-    name: "Rahimuddin Qureshi",
-    date: "9 months ago",
-    quote:
-      "It was an amazing experience. The staff, the ambience, the procedures all were professional and visitor friendly. Thanks for being part of my success.",
+    id: "rahimuddin",
     color: "bg-purple-600",
     rating: 5,
     image: "/images/testimonials/rahimuddin.png",
   },
   {
-    name: "Ayan Ali khan",
-    date: "a year ago",
-    quote:
-      "Gave my GED exam there every thing went smoothly highly recommended !!",
+    id: "ayan",
     color: "bg-orange-600",
     rating: 5,
     image: "/images/testimonials/ayan.png",
   },
   {
-    name: "Mydeen Basha",
-    date: "a year ago",
-    quote:
-      "I had a best experience in this center. Those guys in the centre were really helpful and they provide me the rules and regulations in the calm. The centre is very cool and we can't experience any background noise. Overall my experience in this center was very very good. Cheers to the team..!!!",
+    id: "mydeen",
     color: "bg-teal-500",
     rating: 5,
     image: "/images/testimonials/mydeen.png",
   },
   {
-    name: "Deepika Manoj",
-    date: "a year ago",
-    quote:
-      "TA made me comfortable and very polite in attitude. Test experience was seamless",
+    id: "depika",
     color: "bg-orange-500",
     rating: 5,
     image: "/images/testimonials/depika.png",
   },
   {
-    name: "Kafuka Mode",
-    date: "a year ago",
-    quote:
-      "Had a great experience there for my examination, and the staff were all friendly and helpful. The place is calm and well-prepared to make the examinee feel stress-free.",
+    id: "kafuka",
     color: "bg-indigo-500",
     rating: 5,
     image: "/images/testimonials/kafuka.png",
   },
 ];
 
+type TestimonialItem = typeof testimonialsData[0] & {
+  name: string;
+  date: string;
+  quote: string;
+};
+
 function TestimonialCard({
   t,
   isMarquee = false,
 }: {
-  t: (typeof testimonials)[0];
+  t: TestimonialItem;
   isMarquee?: boolean;
 }) {
   return (
@@ -155,7 +137,7 @@ function TestimonialCard({
             t.name.charAt(0)
           )}
         </div>
-        <div className="text-left">
+        <div className="text-start">
           <div className="font-bold text-gray-900 text-lg">{t.name}</div>
           <div className="text-sm text-gray-400 font-medium">{t.date}</div>
         </div>
@@ -166,6 +148,13 @@ function TestimonialCard({
 
 export default function Testimonials() {
   const t = useTranslations("HomePage.Testimonials");
+  const testimonials: TestimonialItem[] = testimonialsData.map((item) => ({
+    ...item,
+    name: t(`reviews.${item.id}.name`),
+    date: t(`reviews.${item.id}.date`),
+    quote: t(`reviews.${item.id}.quote`),
+  }));
+
   const [api, setApi] = React.useState<CarouselApi>();
   const [current, setCurrent] = React.useState(0);
   const [count, setCount] = React.useState(0);

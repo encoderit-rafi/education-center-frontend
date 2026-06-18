@@ -193,7 +193,7 @@ export function AcceptPayButton({
                 {/* Title overlaid at the bottom of the image */}
                 <div className="absolute bottom-0 left-0 right-0 px-5 pb-4">
                   <p className="text-[10px] font-bold tracking-widest text-white/60 uppercase mb-0.5">
-                    {t("inCenter")}
+                    {t("inPerson")}
                   </p>
                   <h3 className="text-xl font-black text-white leading-tight drop-shadow-md">
                     {t("centerBased")}

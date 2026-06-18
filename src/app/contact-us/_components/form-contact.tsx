@@ -24,65 +24,77 @@ import {
 import { CountryDropdown } from "@/components/ui/country-dropdown";
 import { toast } from "sonner";
 import api from "@/axios";
+import { useTranslations } from "next-intl";
 
 import { ChevronDown, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const contactSchema = z.object({
-  firstName: z
-    .string()
-    .trim()
-    .min(1, { message: "First Name is required" })
-    .min(2, { message: "First name must be at least 2 characters" }),
-  lastName: z
-    .string()
-    .trim()
-    .min(1, { message: "Last Name is required" })
-    .min(2, { message: "Last name must be at least 2 characters" }),
-  email: z
-    .string()
-    .trim()
-    .min(1, { message: "Email Address is required" })
-    .email({ message: "Please enter a valid email address" }),
-  city: z
-    .string()
-    .trim()
-    .min(1, { message: "Emirate / City is required" }),
-  country: z
-    .string()
-    .trim()
-    .min(1, { message: "Country is required" }),
-  enquiryTopic: z
-    .string()
-    .trim()
-    .min(1, { message: "Enquiry Topic is required" }),
-  message: z
-    .string()
-    .trim()
-    .min(1, { message: "Message is required" })
-    .min(10, { message: "Message must be at least 10 characters" }),
-});
-
-type ContactFormValues = z.infer<typeof contactSchema>;
-
-const ENQUIRY_TOPICS = [
-  "Exam Registration",
-  "Exam Preparation Courses",
-  "Exam Proctoring",
-  "Special Accommodation",
-  "Test Dates & Availability",
-  "Fees & Payment",
-  "Free Consultation",
-  "Paid Mock Test",
-  "Partnership",
-  "General Enquiry",
-  "Referral",
-];
+type ContactFormValues = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  city: string;
+  country: string;
+  enquiryTopic: string;
+  message: string;
+};
 
 export default function ContactForm() {
   const [mounted, setMounted] = useState(false);
   const [captchaError, setCaptchaError] = useState<string | null>(null);
   const captchaRef = useRef<ReCAPTCHA>(null);
+
+  const t = useTranslations("ContactUsPage");
+  const tForm = useTranslations("ContactUsPage.FormSection.form");
+
+  const ENQUIRY_TOPICS = [
+    { value: "Exam Registration", label: tForm("topics.exam_registration") },
+    { value: "Exam Preparation Courses", label: tForm("topics.prep_courses") },
+    { value: "Exam Proctoring", label: tForm("topics.proctoring") },
+    { value: "Special Accommodation", label: tForm("topics.accommodation") },
+    { value: "Test Dates & Availability", label: tForm("topics.dates_availability") },
+    { value: "Fees & Payment", label: tForm("topics.fees_payment") },
+    { value: "Free Consultation", label: tForm("topics.consultation") },
+    { value: "Paid Mock Test", label: tForm("topics.mock_test") },
+    { value: "Partnership", label: tForm("topics.partnership") },
+    { value: "General Enquiry", label: tForm("topics.general_enquiry") },
+    { value: "Referral", label: tForm("topics.referral") },
+  ];
+
+  const contactSchema = z.object({
+    firstName: z
+      .string()
+      .trim()
+      .min(1, { message: tForm("validation.firstNameRequired") })
+      .min(2, { message: tForm("validation.firstNameMin") }),
+    lastName: z
+      .string()
+      .trim()
+      .min(1, { message: tForm("validation.lastNameRequired") })
+      .min(2, { message: tForm("validation.lastNameMin") }),
+    email: z
+      .string()
+      .trim()
+      .min(1, { message: tForm("validation.emailRequired") })
+      .email({ message: tForm("validation.emailInvalid") }),
+    city: z
+      .string()
+      .trim()
+      .min(1, { message: tForm("validation.cityRequired") }),
+    country: z
+      .string()
+      .trim()
+      .min(1, { message: tForm("validation.countryRequired") }),
+    enquiryTopic: z
+      .string()
+      .trim()
+      .min(1, { message: tForm("validation.topicRequired") }),
+    message: z
+      .string()
+      .trim()
+      .min(1, { message: tForm("validation.messageRequired") })
+      .min(10, { message: tForm("validation.messageMin") }),
+  });
 
   useEffect(() => {
     setMounted(true);
@@ -109,15 +121,6 @@ export default function ContactForm() {
   console.log("👉 ~ ContactForm ~ errors:", errors);
 
   const onSubmit = async (data: ContactFormValues) => {
-    // const token = captchaRef.current?.getValue();
-
-    // if (!token) {
-    //   setCaptchaError("Please verify that you are not a robot.");
-    //   return;
-    // }
-
-    // setCaptchaError(null);
-
     try {
       const payload = {
         first_name: data.firstName,
@@ -134,16 +137,16 @@ export default function ContactForm() {
 
       await api.post("/contact", payload);
 
-      toast.success("Enquiry Sent Successfully!", {
-        description: "Our team will get back to you within 24 business hours.",
+      toast.success(tForm("toast.successTitle"), {
+        description: tForm("toast.successDesc"),
       });
 
       reset();
       captchaRef.current?.reset();
     } catch (error) {
       console.error("Error submitting contact form:", error);
-      toast.error("Failed to Send Enquiry", {
-        description: "An error occurred while submitting. Please try again.",
+      toast.error(tForm("toast.errorTitle"), {
+        description: tForm("toast.errorDesc"),
       });
     }
   };
@@ -152,9 +155,9 @@ export default function ContactForm() {
     <form className="space-y-6" onSubmit={(e) => handleSubmit(onSubmit)(e)}>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Field data-invalid={!!errors.firstName}>
-          <FieldLabel required>First Name</FieldLabel>
+          <FieldLabel required>{tForm("firstName")}</FieldLabel>
           <FieldContent>
-            <Input placeholder="John" {...register("firstName")} />
+            <Input placeholder={tForm("firstNamePlaceholder")} {...register("firstName")} />
           </FieldContent>
           {errors.firstName && (
             <FieldError>{errors.firstName.message}</FieldError>
@@ -162,9 +165,9 @@ export default function ContactForm() {
         </Field>
 
         <Field data-invalid={!!errors.lastName}>
-          <FieldLabel required>Last Name</FieldLabel>
+          <FieldLabel required>{tForm("lastName")}</FieldLabel>
           <FieldContent>
-            <Input placeholder="Doe" {...register("lastName")} />
+            <Input placeholder={tForm("lastNamePlaceholder")} {...register("lastName")} />
           </FieldContent>
           {errors.lastName && (
             <FieldError>{errors.lastName.message}</FieldError>
@@ -176,11 +179,11 @@ export default function ContactForm() {
 
       <div className="grid grid-cols-1 gap-6">
         <Field data-invalid={!!errors.email}>
-          <FieldLabel required>Email Address</FieldLabel>
+          <FieldLabel required>{tForm("email")}</FieldLabel>
           <FieldContent>
             <Input
               type="email"
-              placeholder="john@example.com"
+              placeholder={tForm("emailPlaceholder")}
               {...register("email")}
             />
           </FieldContent>
@@ -190,9 +193,9 @@ export default function ContactForm() {
 
       <div className="w-full bg-slate-100/80 my-4" />
       <Field data-invalid={!!errors.city}>
-        <FieldLabel required>Emirate / City</FieldLabel>
+        <FieldLabel required>{tForm("city")}</FieldLabel>
         <FieldContent>
-          <Input {...register("city")} placeholder="Dubai" />
+          <Input {...register("city")} placeholder={tForm("cityPlaceholder")} />
         </FieldContent>
         <FieldError errors={[errors.city]} />
       </Field>
@@ -200,7 +203,7 @@ export default function ContactForm() {
 
       <Field data-invalid={!!errors.country}>
         <FieldLabel className="text-sm font-medium">
-          Country <span className="text-primary font-bold">*</span>
+          {tForm("country")} <span className="text-primary font-bold">*</span>
         </FieldLabel>
         <FieldContent>
           <Controller
@@ -221,7 +224,7 @@ export default function ContactForm() {
 
       <Field data-invalid={!!errors.enquiryTopic}>
         <FieldLabel className="text-sm font-medium">
-          Enquiry Topic <span className="text-primary font-bold">*</span>
+          {tForm("topic")} <span className="text-primary font-bold">*</span>
         </FieldLabel>
         <FieldContent>
           <Controller
@@ -235,7 +238,9 @@ export default function ContactForm() {
                     className="flex h-11 w-full bg-white items-center justify-between whitespace-nowrap rounded-md border border-slate-200 px-3 py-2 text-base outline-none focus:border-primary focus:ring-3 focus:ring-ring/30 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm font-medium hover:border-slate-200 hover:text-inherit hover:bg-white hover:shadow-none transition-none"
                   >
                     <span className={!field.value ? "text-slate-400" : ""}>
-                      {field.value || "Select a topic"}
+                      {field.value
+                        ? ENQUIRY_TOPICS.find((t) => t.value === field.value)?.label
+                        : tForm("selectTopic")}
                     </span>
                     <ChevronDown className="w-4 h-4 text-slate-500" />
                   </Button>
@@ -246,8 +251,8 @@ export default function ContactForm() {
                     onValueChange={field.onChange}
                   >
                     {ENQUIRY_TOPICS.map((topic) => (
-                      <DropdownMenuRadioItem key={topic} value={topic}>
-                        {topic}
+                      <DropdownMenuRadioItem key={topic.value} value={topic.value}>
+                        {topic.label}
                       </DropdownMenuRadioItem>
                     ))}
                   </DropdownMenuRadioGroup>
@@ -264,10 +269,10 @@ export default function ContactForm() {
       <div className="w-full bg-slate-100/80 my-4" />
 
       <Field data-invalid={!!errors.message}>
-        <FieldLabel required>Message</FieldLabel>
+        <FieldLabel required>{tForm("message")}</FieldLabel>
         <FieldContent>
           <Textarea
-            placeholder="Tell us more about your inquiry..."
+            placeholder={tForm("messagePlaceholder")}
             rows={5}
             {...register("message")}
             className="bg-white border border-slate-200 focus-visible:border-primary focus-visible:ring-3 focus-visible:ring-ring/30 rounded-md px-3 py-2 placeholder:text-slate-400 font-medium resize-none transition-[color,box-shadow,background-color] outline-none"
@@ -283,14 +288,14 @@ export default function ContactForm() {
           className="h-11 px-4 py-2 rounded-md font-semibold text-sm w-full md:w-auto transition-all active:scale-95"
         >
           <div className="flex items-center gap-3">
-            {isSubmitting ? "Sending..." : "Submit"}
+            {isSubmitting ? tForm("submitting") : tForm("submit")}
           </div>
         </Button>
 
         <p className="flex items-center gap-1 text-sm">
           <ShieldCheck className="w-4 h-4 text-primary" />
           <span className="font-medium">
-            We&apos;ll get back to you within 1 to 2 working days.
+            {tForm("responseTime")}
           </span>
         </p>
       </div>

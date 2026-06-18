@@ -7,34 +7,42 @@ import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { CheckCircle2, Loader2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 
-const partnershipSchema = z.object({
-    fullName: z
-        .string()
-        .trim()
-        .min(1, { message: "Full Name is required." })
-        .min(2, { message: "Full Name must be at least 2 characters." }),
-    institution: z
-        .string()
-        .trim()
-        .min(1, { message: "Institution is required." })
-        .min(2, { message: "Institution must be at least 2 characters." }),
-    workEmail: z
-        .string()
-        .trim()
-        .min(1, { message: "Work Email is required." })
-        .email({ message: "Please provide a valid work email address." }),
-    message: z
-        .string()
-        .trim()
-        .min(1, { message: "Message is required." })
-        .min(10, { message: "Please provide a detailed description." }),
-});
-
-type PartnershipFormValues = z.infer<typeof partnershipSchema>;
+type PartnershipFormValues = {
+    fullName: string;
+    institution: string;
+    workEmail: string;
+    message: string;
+};
 
 export default function FormPartnershipRequest() {
     const [isSuccess, setIsSuccess] = useState(false);
+    const t = useTranslations("AssessmentSolutionsPage");
+    const tForm = useTranslations("AssessmentSolutionsPage.partnershipForm");
+
+    const partnershipSchema = z.object({
+        fullName: z
+            .string()
+            .trim()
+            .min(1, { message: tForm("validation.fullNameRequired") })
+            .min(2, { message: tForm("validation.fullNameMin") }),
+        institution: z
+            .string()
+            .trim()
+            .min(1, { message: tForm("validation.institutionRequired") })
+            .min(2, { message: tForm("validation.institutionMin") }),
+        workEmail: z
+            .string()
+            .trim()
+            .min(1, { message: tForm("validation.workEmailRequired") })
+            .email({ message: tForm("validation.workEmailInvalid") }),
+        message: z
+            .string()
+            .trim()
+            .min(1, { message: tForm("validation.messageRequired") })
+            .min(10, { message: tForm("validation.messageMin") }),
+    });
 
     const {
         register,
@@ -60,9 +68,9 @@ export default function FormPartnershipRequest() {
         return (
             <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl p-10 text-center space-y-4 shadow-sm h-full flex flex-col items-center justify-center min-h-[400px]">
                 <CheckCircle2 className="w-16 h-16 text-emerald-500" />
-                <h2 className="text-2xl font-bold font-headline text-secondary">Request Received</h2>
+                <h2 className="text-2xl font-bold font-headline text-secondary">{tForm("successTitle")}</h2>
                 <p className="text-emerald-700 text-sm">
-                    Thank you for reaching out. Our partnership team will review your inquiry and connect with your institution within 24-48 business hours.
+                    {tForm("successDesc")}
                 </p>
             </div>
         );
@@ -73,13 +81,13 @@ export default function FormPartnershipRequest() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <Field data-invalid={!!errors.fullName}>
                     <FieldLabel required className="text-[12px] font-semibold uppercase tracking-widest mb-3" htmlFor="fullName">
-                        Full Name
+                        {tForm("fullName")}
                     </FieldLabel>
                     <input
                         {...register("fullName")}
                         id="fullName"
                         type="text"
-                        placeholder="Enter Your Full Name"
+                        placeholder={tForm("fullNamePlaceholder")}
                         className={cn(
                             "w-full bg-red-50/30 border-none rounded-md p-4 text-sm focus:ring-1 focus:ring-red-800 placeholder:text-neutral-300",
                             errors.fullName ? "ring-1 ring-red-500 bg-red-50" : ""
@@ -90,13 +98,13 @@ export default function FormPartnershipRequest() {
 
                 <Field data-invalid={!!errors.institution}>
                     <FieldLabel required className="text-[12px] font-semibold uppercase tracking-widest mb-3" htmlFor="institution">
-                        Institution
+                        {tForm("institution")}
                     </FieldLabel>
                     <input
                         {...register("institution")}
                         id="institution"
                         type="text"
-                        placeholder="Enter Your Institution Name"
+                        placeholder={tForm("institutionPlaceholder")}
                         className={cn(
                             "w-full bg-red-50/30 border-none rounded-md p-4 text-sm focus:ring-1 focus:ring-red-800 placeholder:text-neutral-300",
                             errors.institution ? "ring-1 ring-red-500 bg-red-50" : ""
@@ -108,13 +116,13 @@ export default function FormPartnershipRequest() {
 
             <Field data-invalid={!!errors.workEmail}>
                 <FieldLabel required className="text-[12px] font-semibold uppercase tracking-widest mb-3" htmlFor="workEmail">
-                    Work Email
+                    {tForm("workEmail")}
                 </FieldLabel>
                 <input
                     {...register("workEmail")}
                     id="workEmail"
                     type="email"
-                    placeholder="Enter Your Work Email"
+                    placeholder={tForm("workEmailPlaceholder")}
                     className={cn(
                         "w-full bg-red-50/30 border-none rounded-md p-4 text-sm focus:ring-1 focus:ring-red-800 placeholder:text-neutral-300",
                         errors.workEmail ? "ring-1 ring-red-500 bg-red-50" : ""
@@ -125,13 +133,13 @@ export default function FormPartnershipRequest() {
 
             <Field data-invalid={!!errors.message}>
                 <FieldLabel required className="text-[12px] font-semibold uppercase tracking-widest mb-3" htmlFor="message">
-                    Message
+                    {tForm("message")}
                 </FieldLabel>
                 <textarea
                     {...register("message")}
                     id="message"
                     rows={5}
-                    placeholder="Enter Your Message"
+                    placeholder={tForm("messagePlaceholder")}
                     className={cn(
                         "w-full bg-red-50/30 border-none rounded-md p-4 text-sm focus:ring-1 focus:ring-red-800 placeholder:text-neutral-300",
                         errors.message ? "ring-1 ring-red-500 bg-red-50" : ""
@@ -148,7 +156,7 @@ export default function FormPartnershipRequest() {
                 {isSubmitting ? (
                     <Loader2 className="w-5 h-5 animate-spin mr-2" />
                 ) : null}
-                {isSubmitting ? "Submitting..." : "Submit Partnership Request"}
+                {isSubmitting ? tForm("submitting") : tForm("submit")}
             </button>
         </form>
     );

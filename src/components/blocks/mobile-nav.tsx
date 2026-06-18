@@ -38,7 +38,9 @@ export default function MobileNav() {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger render={<Menu className="size-5 text-primary" />} />
+      <DialogTrigger className="flex items-center justify-center p-2 rounded-md hover:bg-slate-100 transition-colors outline-none focus:outline-none">
+        <Menu className="size-5 text-primary" />
+      </DialogTrigger>
       <DialogContent
         className="fixed top-0 left-auto right-0 bottom-0 translate-x-0 translate-y-0 h-full w-[85vw] max-w-sm rounded-none border-l p-0 shadow-2xl flex flex-col data-open:animate-in data-open:slide-in-from-right data-closed:animate-out data-closed:slide-out-to-right"
         overlayClassName="backdrop-blur-sm"

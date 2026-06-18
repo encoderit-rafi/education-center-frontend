@@ -1,5 +1,6 @@
 "use client";
 import React, { useCallback, useState, forwardRef, useEffect } from "react";
+import { useTranslations } from "next-intl";
 
 // shadcn
 import {
@@ -60,7 +61,7 @@ const CountryDropdownComponent = (
     onChange,
     value,
     disabled = false,
-    placeholder = "Select a country",
+    placeholder,
     slim = false,
     className,
     ...props
@@ -71,6 +72,8 @@ const CountryDropdownComponent = (
   const [selectedCountry, setSelectedCountry] = useState<Country | undefined>(
     undefined,
   );
+  const t = useTranslations("CountryDropdown");
+  const displayPlaceholder = placeholder || t("placeholder");
 
   useEffect(() => {
     if (value) {
@@ -134,7 +137,7 @@ const CountryDropdownComponent = (
             </div>
           ) : (
             <span className="text-slate-400">
-              {slim === false ? placeholder : <Globe size={20} />}
+              {slim === false ? displayPlaceholder : <Globe size={20} />}
             </span>
           )}
           <ChevronDown
@@ -157,13 +160,13 @@ const CountryDropdownComponent = (
           <Command className="w-full max-h-[300px] overflow-hidden bg-white text-slate-700">
             <div className="p-1 border-b border-slate-100">
               <CommandInput
-                placeholder="Search country..."
+                placeholder={t("searchPlaceholder")}
                 className="h-9 px-2 outline-none w-full bg-slate-50"
               />
             </div>
             <CommandList className="max-h-[300px] overflow-y-scroll [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-slate-100 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-slate-300 dark:[&::-webkit-scrollbar-track]:bg-slate-800 dark:[&::-webkit-scrollbar-thumb]:bg-slate-600">
               <CommandEmpty className="py-6 text-center text-sm text-slate-500">
-                No country found.
+                {t("emptyMessage")}
               </CommandEmpty>
               <CommandGroup>
                 {options

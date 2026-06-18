@@ -4,10 +4,12 @@ import React, { Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Trophy, Info, RotateCcw, ArrowRight, Sparkles, Star } from "lucide-react";
+import { Trophy, Info, RotateCcw, ArrowRight, Star } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 
 function QuizResultContent() {
+  const t = useTranslations("EnglishQuiz");
   const searchParams = useSearchParams();
   const scoreParam = searchParams.get("score");
   const score = scoreParam ? parseInt(scoreParam, 10) : 0;
@@ -17,10 +19,10 @@ function QuizResultContent() {
   const isIntermediate = score >= 50 && score < 80;
 
   const rank = isExpert
-    ? "Expert"
+    ? t("result.expert")
     : isIntermediate
-      ? "Intermediate"
-      : "Beginner";
+      ? t("result.intermediate")
+      : t("result.beginner");
 
   const rankColor = isExpert
     ? "text-emerald-600 bg-emerald-50 border-emerald-200"
@@ -29,10 +31,16 @@ function QuizResultContent() {
       : "text-amber-600 bg-amber-50 border-amber-200";
 
   const feedbackText = isExpert
-    ? "Outstanding! You have a strong command of the English language. Consider taking our advanced IELTS/PTE courses."
+    ? t("result.feedbackExpert")
     : isIntermediate
-      ? "Good job! You have a solid foundation. Our preparation courses can help you achieve even better results."
-      : "Keep practicing! Our beginner-friendly courses are designed to help you build confidence and core skills.";
+      ? t("result.feedbackIntermediate")
+      : t("result.feedbackBeginner");
+
+  const levelDetails = isExpert
+    ? t("result.levelAdvanced")
+    : isIntermediate
+      ? t("result.levelIntermediate")
+      : t("result.levelBeginner");
 
   return (
     <div className="max-w-2xl mx-auto bg-white border border-slate-200 shadow-xl rounded-2xl overflow-hidden">
@@ -56,10 +64,10 @@ function QuizResultContent() {
         </div>
         <div className="space-y-2 relative">
           <h1 className="text-4xl font-black tracking-tight text-white">
-            Quiz Completed!
+            {t("result.title")}
           </h1>
           <p className="text-white/80 font-medium text-lg">
-            Here is your official performance report
+            {t("result.subtitle")}
           </p>
         </div>
       </div>
@@ -67,10 +75,10 @@ function QuizResultContent() {
       {/* Main Results Container */}
       <div className="p-8 lg:p-12 space-y-8 bg-white">
         <div className="grid sm:grid-cols-2 gap-8 items-center text-center sm:text-left">
-          {/* Score Circle/Display */}
+          {/* Score Display */}
           <div className="flex flex-col items-center justify-center bg-slate-50 border border-slate-100 rounded-2xl p-6 space-y-2">
             <span className="text-slate-400 text-xs font-bold uppercase tracking-widest">
-              Your Score
+              {t("result.yourScore")}
             </span>
             <div className="flex items-baseline justify-center">
               <span className="text-6xl font-black text-secondary">{score}</span>
@@ -87,7 +95,7 @@ function QuizResultContent() {
           {/* Rank Card */}
           <div className="flex flex-col items-center justify-center border border-slate-100 rounded-2xl p-6 space-y-2">
             <span className="text-slate-400 text-xs font-bold uppercase tracking-widest">
-              Proficiency Rank
+              {t("result.proficiencyRank")}
             </span>
             <span
               className={cn(
@@ -98,7 +106,7 @@ function QuizResultContent() {
               {rank}
             </span>
             <span className="text-xs text-slate-500 font-medium mt-2">
-              Level {score >= 80 ? "C1/C2 (Advanced)" : score >= 50 ? "B1/B2 (Intermediate)" : "A1/A2 (Beginner)"}
+              {levelDetails}
             </span>
           </div>
         </div>
@@ -109,7 +117,7 @@ function QuizResultContent() {
             <Info className="text-primary mt-0.5" size={20} />
           </div>
           <div className="space-y-1">
-            <h3 className="font-bold text-secondary text-sm">Feedback & Recommendations</h3>
+            <h3 className="font-bold text-secondary text-sm">{t("result.feedbackTitle")}</h3>
             <p className="text-sm text-slate-600 leading-relaxed">
               {feedbackText}
             </p>
@@ -124,12 +132,12 @@ function QuizResultContent() {
               className="w-full h-12 font-bold rounded-xl border-slate-200 hover:bg-slate-50 hover:text-secondary flex items-center justify-center gap-2"
             >
               <RotateCcw size={16} />
-              <span>Take Quiz Again</span>
+              <span>{t("result.takeAgain")}</span>
             </Button>
           </Link>
           <Link href="/exam-preparation-courses" className="w-full">
             <Button className="w-full h-12 font-bold rounded-xl flex items-center justify-center gap-2">
-              <span>View Courses</span>
+              <span>{t("result.viewCourses")}</span>
               <ArrowRight size={16} />
             </Button>
           </Link>
@@ -140,13 +148,15 @@ function QuizResultContent() {
 }
 
 export default function EnglishQuizResultPage() {
+  const t = useTranslations("EnglishQuiz");
+
   return (
     <main className="min-h-screen bg-slate-50/50 pt-32 pb-20 px-4">
       <Suspense
         fallback={
           <div className="max-w-2xl mx-auto text-center p-20 space-y-4">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto" />
-            <p className="text-slate-500 font-medium">Calculating your result...</p>
+            <p className="text-slate-500 font-medium">{t("result.calculating")}</p>
           </div>
         }
       >

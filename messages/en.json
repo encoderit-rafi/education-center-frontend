@@ -172,7 +172,49 @@
     "Testimonials": {
       "title": "Trusted by Tomorrow's",
       "titleAccent": "Leaders",
-      "description": "See what our global community has to say about their journey with TEPTH."
+      "description": "See what our global community has to say about their journey with TEPTH.",
+      "reviews": {
+        "nadine": {
+          "name": "Nadine Mustafa",
+          "date": "a year ago",
+          "quote": "Very organised and polite"
+        },
+        "rahul": {
+          "name": "Rahul Chauhan",
+          "date": "2 months ago",
+          "quote": "⭐⭐⭐⭐⭐ TEPTH Sharjah – Prep Smarter, Score Higher TEPTH Sharjah is the go‑to hub for mastering exams such as the IELTS, TOEFL, CELPIP, PTE‑A, OET, PearsonVUE, and CAEL.Expert trainers, a calm and modern test environment, and smooth check‑in make the whole process stress‑free. Their guidance and realistic practice sessions give you the confidence to hit your target score. If you’re serious about results, this is where you should be."
+        },
+        "sima": {
+          "name": "Sima Al Kanawati",
+          "date": "a month ago",
+          "quote": "Calm and clean examination test center Respectful staff Strict rules And has a great location away from highways"
+        },
+        "rahimuddin": {
+          "name": "Rahimuddin Qureshi",
+          "date": "9 months ago",
+          "quote": "It was an amazing experience. The staff, the ambience, the procedures all were professional and visitor friendly. Thanks for being part of my success."
+        },
+        "ayan": {
+          "name": "Ayan Ali khan",
+          "date": "a year ago",
+          "quote": "Gave my GED exam there every thing went smoothly highly recommended !!"
+        },
+        "mydeen": {
+          "name": "Mydeen Basha",
+          "date": "a year ago",
+          "quote": "I had a best experience in this center. Those guys in the centre were really helpful and they provide me the rules and regulations in the calm. The centre is very cool and we can't experience any background noise. Overall my experience in this center was very very good. Cheers to the team..!!!"
+        },
+        "depika": {
+          "name": "Deepika Manoj",
+          "date": "a year ago",
+          "quote": "TA made me comfortable and very polite in attitude. Test experience was seamless"
+        },
+        "kafuka": {
+          "name": "Kafuka Mode",
+          "date": "a year ago",
+          "quote": "Had a great experience there for my examination, and the staff were all friendly and helpful. The place is calm and well-prepared to make the examinee feel stress-free."
+        }
+      }
     },
     "FreeConsultation": {
       "title": "Ready to start your journey?",
@@ -213,7 +255,57 @@
     },
     "FormSection": {
       "title": "Send a Direct",
-      "titleAccent": " Message"
+      "titleAccent": " Message",
+      "form": {
+        "firstName": "First Name",
+        "firstNamePlaceholder": "John",
+        "lastName": "Last Name",
+        "lastNamePlaceholder": "Doe",
+        "email": "Email Address",
+        "emailPlaceholder": "john@example.com",
+        "city": "Emirate / City",
+        "cityPlaceholder": "Dubai",
+        "country": "Country",
+        "topic": "Enquiry Topic",
+        "selectTopic": "Select a topic",
+        "message": "Message",
+        "messagePlaceholder": "Tell us more about your inquiry...",
+        "submit": "Submit",
+        "submitting": "Sending...",
+        "responseTime": "We'll get back to you within 1 to 2 working days.",
+        "topics": {
+          "exam_registration": "Exam Registration",
+          "prep_courses": "Exam Preparation Courses",
+          "proctoring": "Exam Proctoring",
+          "accommodation": "Special Accommodation",
+          "dates_availability": "Test Dates & Availability",
+          "fees_payment": "Fees & Payment",
+          "consultation": "Free Consultation",
+          "mock_test": "Paid Mock Test",
+          "partnership": "Partnership",
+          "general_enquiry": "General Enquiry",
+          "referral": "Referral"
+        },
+        "validation": {
+          "firstNameRequired": "First Name is required",
+          "firstNameMin": "First name must be at least 2 characters",
+          "lastNameRequired": "Last Name is required",
+          "lastNameMin": "Last name must be at least 2 characters",
+          "emailRequired": "Email Address is required",
+          "emailInvalid": "Please enter a valid email address",
+          "cityRequired": "Emirate / City is required",
+          "countryRequired": "Country is required",
+          "topicRequired": "Enquiry Topic is required",
+          "messageRequired": "Message is required",
+          "messageMin": "Message must be at least 10 characters"
+        },
+        "toast": {
+          "successTitle": "Enquiry Sent Successfully!",
+          "successDesc": "Our team will get back to you within 24 business hours.",
+          "errorTitle": "Failed to Send Enquiry",
+          "errorDesc": "An error occurred while submitting. Please try again."
+        }
+      }
     }
   },
   "AboutUsPage": {
@@ -600,6 +692,30 @@
       "directInquiriesText": "partnerships@tepth.academy",
       "institutionalSupportTitle": "Institutional Support",
       "institutionalSupportText": "+971 4 000 0000"
+    },
+    "partnershipForm": {
+      "fullName": "Full Name",
+      "fullNamePlaceholder": "Enter Your Full Name",
+      "institution": "Institution",
+      "institutionPlaceholder": "Enter Your Institution Name",
+      "workEmail": "Work Email",
+      "workEmailPlaceholder": "Enter Your Work Email",
+      "message": "Message",
+      "messagePlaceholder": "Enter Your Message",
+      "submit": "Submit Partnership Request",
+      "submitting": "Submitting...",
+      "successTitle": "Request Received",
+      "successDesc": "Thank you for reaching out. Our partnership team will review your inquiry and connect with your institution within 24-48 business hours.",
+      "validation": {
+        "fullNameRequired": "Full Name is required.",
+        "fullNameMin": "Full Name must be at least 2 characters.",
+        "institutionRequired": "Institution is required.",
+        "institutionMin": "Institution must be at least 2 characters.",
+        "workEmailRequired": "Work Email is required.",
+        "workEmailInvalid": "Please provide a valid work email address.",
+        "messageRequired": "Message is required.",
+        "messageMin": "Please provide a detailed description."
+      }
     }
   },
   "CareerPage": {
@@ -988,7 +1104,60 @@
     ],
     "formTitle": "Confirm your",
     "formTitleAccent": "Free Consultation",
-    "formDescription": "Please fill out the form below to book your session with our experts."
+    "formDescription": "Please fill out the form below to book your session with our experts.",
+    "form": {
+      "step1": "Your Information",
+      "step2": "Consultation Details",
+      "fullName": "Full Name",
+      "fullNamePlaceholder": "John Doe",
+      "email": "Email Address",
+      "emailPlaceholder": "john@example.com",
+      "phone": "Phone Number",
+      "phonePlaceholder": "Please Enter Your Number",
+      "country": "Country",
+      "city": "Emirate / City",
+      "cityPlaceholder": "Dubai",
+      "area": "Area of Consultation",
+      "selectArea": "Select area",
+      "areas": {
+        "booking": "Exam Booking & Seat Availability",
+        "prep": "Exam Prep. Course"
+      },
+      "date": "Date Preference",
+      "selectDate": "Select date",
+      "time": "Preferred Time",
+      "selectTime": "Select time",
+      "times": {
+        "morning": "Morning (9:00 AM – 11:30 AM)",
+        "afternoon": "Afternoon (12:00 PM – 5:30 PM)",
+        "evening": "Evening (6:00 PM – 8:30 PM)"
+      },
+      "message": "Message/Comments",
+      "messagePlaceholder": "Any specific questions?",
+      "submit": "Submit",
+      "sending": "Sending...",
+      "responseTime": "Response within 1-2 business days",
+      "validation": {
+        "fullNameRequired": "Full Name is required",
+        "fullNameMin": "Full name must be at least 2 characters",
+        "emailRequired": "Email Address is required",
+        "emailInvalid": "Please enter a valid email address",
+        "phoneRequired": "Phone Number is required",
+        "phoneMin": "Please enter a valid phone number",
+        "countryRequired": "Country is required",
+        "cityRequired": "Emirate / City is required",
+        "areaRequired": "Area of Consultation is required",
+        "dateRequired": "Preferred Date is required",
+        "timeRequired": "Preferred Time is required"
+      },
+      "toast": {
+        "successTitle": "Enquiry Received",
+        "successDesc": "Thank you for contacting us. We have received your enquiry and will respond to you within 1 to 2 business days. Our working hours: Saturday to Thursday (9:00 AM – 9:00 PM)",
+        "errorTitle": "Error",
+        "errorDesc": "Failed to submit consultation request.",
+        "unexpectedError": "An unexpected error occurred. Please try again later."
+      }
+    }
   },
   "FAQsPage": {
     "title": "Frequently Asked Questions",
@@ -1246,7 +1415,34 @@
       ]
     },
     "inquiry": {
-      "title": "Accommodation Inquiry"
+      "title": "Accommodation Inquiry",
+      "form": {
+        "fullName": "Full Name",
+        "fullNamePlaceholder": "John Doe",
+        "email": "Email Address",
+        "emailPlaceholder": "john@example.com",
+        "details": "Accommodation Details",
+        "detailsPlaceholder": "Please describe your specific requirements in detail...",
+        "documentation": "Supporting Documentation",
+        "dropText": "Drop your medical evidence here",
+        "fileLimit": "PDF, JPG or PNG (Max 10MB)",
+        "browse": "Browse Files",
+        "remove": "Remove File",
+        "submit": "Send Inquiry",
+        "submitting": "Sending Request...",
+        "privacyText": "Confidential and secure inquiry. We value your privacy.",
+        "successTitle": "Request Received",
+        "successDesc": "Thank you! Your accommodation request has been securely received. Our support team will reach out within 48 hours.",
+        "sendAnother": "Send Another Request",
+        "validation": {
+          "fullNameRequired": "Full Name is required",
+          "fullNameMin": "Name must be at least 2 characters",
+          "emailRequired": "Email Address is required",
+          "emailInvalid": "Please enter a valid email address",
+          "detailsRequired": "Accommodation Details is required",
+          "detailsMin": "Message must be at least 10 characters"
+        }
+      }
     }
   },
   "TermsAndConditionsPage": {
@@ -2696,7 +2892,35 @@
       "Vendor": "Vendor",
       "Our Venues": "Our Venues",
       "360° Virtual Tour": "360° Virtual Tour",
-      "Book An Exam Venue": "Book An Exam Venue"
+      "Book An Exam Venue": "Book An Exam Venue",
+      "IELTS": "IELTS",
+      "PTE": "PTE",
+      "TOEFL iBT": "TOEFL iBT",
+      "CELPIP": "CELPIP",
+      "CAEL": "CAEL",
+      "Skills for English (SELT)": "Skills for English (SELT)",
+      "Skill for English(SELT)": "Skills for English (SELT)",
+      "OET": "OET",
+      "IELTS Academic": "IELTS Academic",
+      "IELTS General": "IELTS General",
+      "IELTS UKVI": "IELTS UKVI",
+      "IELTS UKVI Academic": "IELTS UKVI Academic",
+      "IELTS UKVI General": "IELTS UKVI General",
+      "IELTS Life Skills A1": "IELTS Life Skills A1",
+      "IELTS Life Skills A2": "IELTS Life Skills A2",
+      "IELTS Life Skills B1": "IELTS Life Skills B1",
+      "PTE Academic": "PTE Academic",
+      "PTE Core": "PTE Core",
+      "PTE UKVI": "PTE UKVI",
+      "PTE Academic UKVI": "PTE Academic UKVI",
+      "PTE Home A1": "PTE Home A1",
+      "PTE Home A2": "PTE Home A2",
+      "PTE Home B1": "PTE Home B1",
+      "CELPIP General": "CELPIP General",
+      "CELPIP General LS": "CELPIP General LS",
+      "Skills for English": "Skills for English",
+      "PSI": "PSI",
+      "PSI UKVI": "PSI UKVI"
     }
   },
   "Search": {
@@ -3115,7 +3339,7 @@
     "online": "Online",
     "selfManaged": "Self-managed",
     "homeBased": "Home-based",
-    "inCenter": "In-Center",
+    "inPerson": "In-Person",
     "centerBased": "Center-based",
     "scheduleAvailability": "Schedule Availability",
     "scheduleNote": "Please note that date & time need to be confirmed by our staff and it must be taken within our working hours.",
@@ -3137,15 +3361,20 @@
     "regTitle": "Paid Mock Test Registration",
     "yourInfo": "Your Information",
     "firstName": "First Name",
+    "firstNamePlaceholder": "John",
     "familyName": "Family Name",
+    "lastNamePlaceholder": "Doe",
     "examTypes": "Exam Types",
     "selectType": "Select Type",
     "email": "Email",
+    "emailPlaceholder": "example@gmail.com",
     "phoneNumber": "Phone Number",
     "country": "Country",
     "searchCountry": "Search country...",
     "address": "Address",
+    "addressPlaceholder": "123 Main St",
     "emirateCity": "Emirate / City",
+    "cityPlaceholder": "Dubai",
     "detailsTitle": "Mock Test Details",
     "mockTest": "Mock Test",
     "type": "Type",
@@ -3179,11 +3408,128 @@
       "proctorPresence": "Replicates physical venue stress & proctor presence"
     }
   },
+  "EnglishQuiz": {
+    "title": "English",
+    "titleAccent": "Quiz",
+    "description": "Test your English skills and get instant results.",
+    "form": {
+      "personalInfo": "Personal Information",
+      "fullName": "Full Name",
+      "fullNamePlaceholder": "John Doe",
+      "fullNameRequired": "Full Name is required",
+      "fullNameTooShort": "Name is too short",
+      "email": "Email Address",
+      "emailPlaceholder": "john@example.com",
+      "emailRequired": "Email Address is required",
+      "emailInvalid": "Invalid email address",
+      "country": "Country",
+      "countryRequired": "Country is required",
+      "city": "Emirate / City",
+      "cityPlaceholder": "Dubai",
+      "cityRequired": "Emirate/City is required",
+      "phoneNumber": "Phone Number",
+      "phoneNumberRequired": "Phone Number is required",
+      "startQuiz": "Start the quiz",
+      "answerRequired": "Please answer this question",
+      "chooseOption": "Choose the correct option",
+      "back": "Back",
+      "processing": "Processing...",
+      "submitQuiz": "Submit Quiz"
+    },
+    "result": {
+      "title": "Quiz Completed!",
+      "subtitle": "Here is your official performance report",
+      "yourScore": "Your Score",
+      "proficiencyRank": "Proficiency Rank",
+      "feedbackTitle": "Feedback & Recommendations",
+      "takeAgain": "Take Quiz Again",
+      "viewCourses": "View Courses",
+      "calculating": "Calculating your result...",
+      "levelBeginner": "Level A1/A2 (Beginner)",
+      "levelIntermediate": "Level B1/B2 (Intermediate)",
+      "levelAdvanced": "Level C1/C2 (Advanced)",
+      "beginner": "Beginner",
+      "intermediate": "Intermediate",
+      "expert": "Expert",
+      "feedbackBeginner": "Keep practicing! Our beginner-friendly courses are designed to help you build confidence and core skills.",
+      "feedbackIntermediate": "Good job! You have a solid foundation. Our preparation courses can help you achieve even better results.",
+      "feedbackExpert": "Outstanding! You have a strong command of the English language. Consider taking our advanced IELTS/PTE courses."
+    }
+  },
   "NotFoundPage": {
     "code": "404",
     "title": "Page Not Found",
     "description": "Sorry, we couldn't find the page you're looking for. It might have been moved or deleted.",
     "backToHome": "Back to Home",
     "contactSupport": "Contact Support"
+  },
+  "TestYourEnglish": {
+    "title": "Test Your English",
+    "titleAccent": "Level",
+    "subtitle": "Assess your proficiency and get a personalized learning roadmap.",
+    "step1": "Personal Information",
+    "fullName": "Full Name",
+    "fullNamePlaceholder": "John Doe",
+    "email": "Email Address",
+    "emailPlaceholder": "john@example.com",
+    "country": "Country",
+    "city": "Emirate / City",
+    "cityPlaceholder": "Dubai",
+    "phone": "Phone Number",
+    "contactMethod": "Preferred Contact Method",
+    "selectContactMethod": "Select contact method",
+    "contactMethods": {
+      "phone": "Phone Call",
+      "email": "Email",
+      "whatsapp": "WhatsApp / Telegram"
+    },
+    "contactTime": "Preferred Time to Contact You",
+    "selectTime": "Select time",
+    "times": {
+      "morning": "Morning (9:00 AM – 11:30 AM)",
+      "afternoon": "Afternoon (12:00 PM – 5:30 PM)",
+      "evening": "Evening (6:00 PM – 8:30 PM)"
+    },
+    "start": "Start",
+    "introText": "Please allocate a few minutes to complete our online English Level Test. We take your English Language assessment seriously.",
+    "loading": "Loading questions...",
+    "guidance": "Choose the correct option",
+    "submit": "Submit Assessment",
+    "submitting": "Processing...",
+    "success": {
+      "title": "Assessment Complete!",
+      "subtitle": "Your results are being processed",
+      "description": "Our academic board has received your responses. Your personalized proficiency profile and course roadmap will be sent to your email within 4 hours.",
+      "retake": "Retake Assessment"
+    },
+    "validation": {
+      "fullNameRequired": "Full Name is required",
+      "fullNameMin": "Full name must be at least 2 characters",
+      "emailRequired": "Email Address is required",
+      "emailInvalid": "Please enter a valid email address",
+      "phoneRequired": "Phone Number is required",
+      "phoneMin": "Please enter a valid phone number",
+      "countryRequired": "Country is required",
+      "cityRequired": "Emirate / City is required",
+      "contactMethodRequired": "Preferred Contact Method is required",
+      "contactTimeRequired": "Preferred Time is required",
+      "answersRequired": "Please select an answer"
+    },
+    "toast": {
+      "startErrorTitle": "Could not start the test",
+      "startErrorDesc": "Server did not return a valid attempt ID. Please try again.",
+      "unexpectedError": "Please try again later.",
+      "submitErrorTitle": "Submission failed",
+      "submitErrorDesc": "An unexpected error occurred. Please try again."
+    }
+  },
+  "PhoneInput": {
+    "searchPlaceholder": "Search country...",
+    "emptyMessage": "No country found."
+  },
+  "CountryDropdown": {
+    "placeholder": "Select a country",
+    "searchPlaceholder": "Search country...",
+    "emptyMessage": "No country found."
   }
 }

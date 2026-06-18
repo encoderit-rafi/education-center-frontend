@@ -1,7 +1,10 @@
+"use client";
+
 import React from "react";
 import { CheckIcon, ChevronDown } from "lucide-react";
 import * as RPNInput from "react-phone-number-input";
 import { CircleFlag } from "react-circle-flags";
+import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -87,6 +90,7 @@ const CountrySelect = ({
     const scrollAreaRef = React.useRef<HTMLDivElement>(null);
     const [searchValue, setSearchValue] = React.useState("");
     const [isOpen, setIsOpen] = React.useState(false);
+    const t = useTranslations("PhoneInput");
 
     return (
         <PopoverPrimitive.Root
@@ -140,13 +144,13 @@ const CountrySelect = ({
                                         }
                                     }, 0);
                                 }}
-                                placeholder="Search country..."
+                                placeholder={t("searchPlaceholder")}
                                 className="h-9 px-2 outline-none w-full bg-slate-50"
                             />
                         </div>
                         <CommandList className="overflow-y-auto">
                             <ScrollArea ref={scrollAreaRef} className="h-72">
-                                <CommandEmpty className="py-6 text-center text-sm text-slate-500">No country found.</CommandEmpty>
+                                <CommandEmpty className="py-6 text-center text-sm text-slate-500">{t("emptyMessage")}</CommandEmpty>
                                 <CommandGroup>
                                     {countryList.map(({ value, label }) =>
                                         value ? (

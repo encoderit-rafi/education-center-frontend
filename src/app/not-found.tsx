@@ -79,6 +79,7 @@ export default async function NotFound() {
         <Button
           size="lg"
           className="w-full rounded-full px-6 sm:w-auto sm:px-8"
+          nativeButton={false}
           render={
             <Link href="/" className="inline-flex items-center justify-center">
               <Home className="mr-2 size-5" />
@@ -91,6 +92,7 @@ export default async function NotFound() {
           variant="outline"
           size="lg"
           className="w-full rounded-full px-6 sm:w-auto sm:px-8"
+          nativeButton={false}
           render={<Link href="/contact-us">{t("contactSupport")}</Link>}
         />
       </div>

@@ -45,61 +45,76 @@ import api from "@/axios";
 import { toast } from "sonner";
 
 
-const TIMES = [
-  { label: "Morning (9:00 AM – 11:30 AM)", value: "Morning" },
-  { label: "Afternoon (12:00 PM – 5:30 PM)", value: "Afternoon" },
-  { label: "Evening (6:00 PM – 8:30 PM)", value: "Evening" },
-];
+import { useTranslations } from "next-intl";
 
-const CONTACT_METHODS = [
-  { label: "Phone Call", value: "Phone Call" },
-  { label: "Email", value: "Email" },
-  { label: "WhatsApp / Telegram", value: "WhatsApp / Telegram" },
-];
-
-const testSchema = z.object({
-  fullName: z
-    .string()
-    .trim()
-    .min(1, "Full Name is required")
-    .min(2, "Full name must be at least 2 characters"),
-  email: z
-    .string()
-    .trim()
-    .min(1, "Email Address is required")
-    .email("Please enter a valid email address"),
-  phoneNumber: z
-    .string()
-    .trim()
-    .min(1, "Phone Number is required")
-    .min(5, "Please enter a valid phone number"),
-  country: z
-    .string()
-    .trim()
-    .min(1, "Country is required"),
-  city: z
-    .string()
-    .trim()
-    .min(1, "Emirate / City is required"),
-  preferredContactMethod: z
-    .string()
-    .trim()
-    .min(1, "Preferred Contact Method is required"),
-  preferredTime: z
-    .string()
-    .trim()
-    .min(1, "Preferred Time is required"),
-  answers: z.record(z.string(), z.string().min(1, "Please select an answer")),
-  writtenExpression: z.string().optional(),
-});
-
-type TestValues = z.infer<typeof testSchema>;
+type TestValues = {
+  fullName: string;
+  email: string;
+  phoneNumber: string;
+  country: string;
+  city: string;
+  preferredContactMethod: string;
+  preferredTime: string;
+  answers: Record<string, string>;
+  writtenExpression?: string;
+};
 
 export default function TestYourEnglishForm() {
   const [step, setStep] = useState(1);
   const [isSuccess, setIsSuccess] = useState(false);
   const [attemptId, setAttemptId] = useState<string | null>(null);
   const attemptIdRef = useRef<string | null>(null);
+
+  const t = useTranslations("TestYourEnglish");
+
+  const TIMES = [
+    { label: t("times.morning"), value: "Morning" },
+    { label: t("times.afternoon"), value: "Afternoon" },
+    { label: t("times.evening"), value: "Evening" },
+  ];
+
+  const CONTACT_METHODS = [
+    { label: t("contactMethods.phone"), value: "Phone Call" },
+    { label: t("contactMethods.email"), value: "Email" },
+    { label: t("contactMethods.whatsapp"), value: "WhatsApp / Telegram" },
+  ];
+
+  const testSchema = z.object({
+    fullName: z
+      .string()
+      .trim()
+      .min(1, t("validation.fullNameRequired"))
+      .min(2, t("validation.fullNameMin")),
+    email: z
+      .string()
+      .trim()
+      .min(1, t("validation.emailRequired"))
+      .email(t("validation.emailInvalid")),
+    phoneNumber: z
+      .string()
+      .trim()
+      .min(1, t("validation.phoneRequired"))
+      .min(5, t("validation.phoneMin")),
+    country: z
+      .string()
+      .trim()
+      .min(1, t("validation.countryRequired")),
+    city: z
+      .string()
+      .trim()
+      .min(1, t("validation.cityRequired")),
+    preferredContactMethod: z
+      .string()
+      .trim()
+      .min(1, t("validation.contactMethodRequired")),
+    preferredTime: z
+      .string()
+      .trim()
+      .min(1, t("validation.contactTimeRequired")),
+    answers: z.record(z.string(), z.string().min(1, t("validation.answersRequired"))),
+    writtenExpression: z.string().optional(),
+  });
+
   interface ApiQuestionOption {
     key: string;
     label: string;
@@ -215,16 +230,16 @@ export default function TestYourEnglishForm() {
           attemptIdRef.current = String(attemptIdValue);
         } else {
           console.warn("attempt_id not found in response:", rawData);
-          toast.error("Could not start the test", {
-            description: "Server did not return a valid attempt ID. Please try again.",
+          toast.error(t("toast.startErrorTitle"), {
+            description: t("toast.startErrorDesc"),
           });
           return;
         }
 
         // questions now come from the useEffect GET /english-test/questions call
       } catch (error: any) {
-        toast.error("Could not start the test", {
-          description: error.response?.data?.message || "Please try again later.",
+        toast.error(t("toast.startErrorTitle"), {
+          description: error.response?.data?.message || t("toast.unexpectedError"),
         });
         return;
       }
@@ -252,8 +267,8 @@ export default function TestYourEnglishForm() {
 
       setIsSuccess(true);
     } catch (error: any) {
-      toast.error("Submission failed", {
-        description: error.response?.data?.message || "An unexpected error occurred. Please try again.",
+      toast.error(t("toast.submitErrorTitle"), {
+        description: error.response?.data?.message || t("toast.submitErrorDesc"),
       });
     }
   };
@@ -274,10 +289,10 @@ export default function TestYourEnglishForm() {
               <Trophy size={40} className="text-white" />
             </div>
             <DialogTitle className="text-3xl font-black tracking-tight text-white">
-              Assessment Complete!
+              {t("success.title")}
             </DialogTitle>
             <p className="text-white/80 font-medium">
-              Your results are being processed
+              {t("success.subtitle")}
             </p>
           </div>
 
@@ -285,9 +300,7 @@ export default function TestYourEnglishForm() {
             <div className="bg-slate-50 rounded-md p-4 border border-slate-100 flex items-start gap-3">
               <Info className="text-primary flex-shrink-0 mt-0.5" size={18} />
               <p className="text-xs text-slate-600 leading-relaxed font-medium">
-                Our academic board has received your responses. Your
-                personalized proficiency profile and course roadmap will be sent
-                to your email within 4 hours.
+                {t("success.description")}
               </p>
             </div>
 
@@ -299,27 +312,11 @@ export default function TestYourEnglishForm() {
                 form.reset();
               }}
             >
-              Retake Assessment
+              {t("success.retake")}
             </Button>
           </div>
         </DialogContent>
       </Dialog>
-
-      {/* Progress Indicator */}
-      {/* <div className="flex items-center justify-between mb-8">
-        <div className="flex items-center gap-3">
-          {[1, 2].map((i) => (
-            <div
-              key={i}
-              className={cn(
-                "h-2 w-12 rounded-full transition-all duration-500",
-                step >= i ? "bg-primary" : "bg-slate-100",
-              )}
-            />
-          ))}
-        </div>
-     
-      </div> */}
 
       <form onSubmit={handleSubmit(onSubmit)} className="animate-fade-up">
         {step === 1 && (
@@ -329,13 +326,13 @@ export default function TestYourEnglishForm() {
                 <User size={20} />
               </div>
               <h2 className="text-xl font-bold text-secondary">
-                Personal Information
+                {t("step1")}
               </h2>
             </div>
 
             <div className="grid md:grid-cols-2 gap-6">
               <Field data-invalid={!!errors.fullName}>
-                <FieldLabel required>Full Name</FieldLabel>
+                <FieldLabel required>{t("fullName")}</FieldLabel>
                 <FieldContent>
                   <div className="relative">
                     <User
@@ -345,7 +342,7 @@ export default function TestYourEnglishForm() {
                     <Input
                       {...register("fullName")}
                       className="pl-10 h-10"
-                      placeholder="John Doe"
+                      placeholder={t("fullNamePlaceholder")}
                     />
                   </div>
                   {errors.fullName && (
@@ -355,7 +352,7 @@ export default function TestYourEnglishForm() {
               </Field>
 
               <Field data-invalid={!!errors.email}>
-                <FieldLabel required>Email Address</FieldLabel>
+                <FieldLabel required>{t("email")}</FieldLabel>
                 <FieldContent>
                   <div className="relative">
                     <Mail
@@ -366,7 +363,7 @@ export default function TestYourEnglishForm() {
                       {...register("email")}
                       type="email"
                       className="pl-10 h-10"
-                      placeholder="john@example.com"
+                      placeholder={t("emailPlaceholder")}
                     />
                   </div>
                   {errors.email && (
@@ -375,12 +372,8 @@ export default function TestYourEnglishForm() {
                 </FieldContent>
               </Field>
 
-
-
-
-
               <Field data-invalid={!!errors.country}>
-                <FieldLabel required>Country</FieldLabel>
+                <FieldLabel required>{t("country")}</FieldLabel>
                 <FieldContent>
                   <Controller
                     control={control}
@@ -400,7 +393,7 @@ export default function TestYourEnglishForm() {
               </Field>
 
               <Field data-invalid={!!errors.city}>
-                <FieldLabel required>Emirate / City</FieldLabel>
+                <FieldLabel required>{t("city")}</FieldLabel>
                 <FieldContent>
                   <div className="relative">
                     <MapPin
@@ -410,7 +403,7 @@ export default function TestYourEnglishForm() {
                     <Input
                       {...register("city")}
                       className="pl-10 h-10"
-                      placeholder="Dubai"
+                      placeholder={t("cityPlaceholder")}
                     />
                   </div>
                   {errors.city && (
@@ -418,8 +411,9 @@ export default function TestYourEnglishForm() {
                   )}
                 </FieldContent>
               </Field>
+
               <Field data-invalid={!!errors.phoneNumber}>
-                <FieldLabel required>Phone Number</FieldLabel>
+                <FieldLabel required>{t("phone")}</FieldLabel>
                 <FieldContent>
                   <div className="rounded-md border border-input focus-within:ring-1 focus-within:ring-ring overflow-hidden">
                     <Controller
@@ -440,8 +434,9 @@ export default function TestYourEnglishForm() {
                   )}
                 </FieldContent>
               </Field>
+
               <Field data-invalid={!!errors.preferredContactMethod}>
-                <FieldLabel required>Preferred Contact Method</FieldLabel>
+                <FieldLabel required>{t("contactMethod")}</FieldLabel>
                 <FieldContent>
                   <Controller
                     control={control}
@@ -461,7 +456,7 @@ export default function TestYourEnglishForm() {
                               <span className="truncate">
                                 {field.value
                                   ? CONTACT_METHODS.find((c) => c.value === field.value)?.label
-                                  : "Select contact method"}
+                                  : t("selectContactMethod")}
                               </span>
                             </div>
                             <ChevronDown className="h-4 w-4 text-slate-400 shrink-0" />
@@ -489,7 +484,7 @@ export default function TestYourEnglishForm() {
               </Field>
 
               <Field data-invalid={!!errors.preferredTime}>
-                <FieldLabel required>Preferred Time to Contact You</FieldLabel>
+                <FieldLabel required>{t("contactTime")}</FieldLabel>
                 <FieldContent>
                   <Controller
                     control={control}
@@ -509,7 +504,7 @@ export default function TestYourEnglishForm() {
                               <span className="truncate">
                                 {field.value
                                   ? TIMES.find((t) => t.value === field.value)?.label
-                                  : "Select time"}
+                                  : t("selectTime")}
                               </span>
                             </div>
                             <ChevronDown className="h-4 w-4 text-slate-400 shrink-0" />
@@ -544,10 +539,9 @@ export default function TestYourEnglishForm() {
               size="lg"
               className="w-full md:w-auto px-5"
             >
-              Start
+              {t("start")}
             </Button>
-            <p>Please allocate a few minutes to complete our online English Level Test. We take your English Language
-              assessment seriously.</p>
+            <p>{t("introText")}</p>
           </div>
         )}
 
@@ -560,7 +554,7 @@ export default function TestYourEnglishForm() {
           >
             {apiQuestions.length === 0 ? (
               <div className="bg-white border border-slate-200 rounded-md p-8 text-center text-slate-500 font-medium">
-                Loading questions...
+                {t("loading")}
               </div>
             ) : (
               apiQuestions.map((q, idx) => (
@@ -582,7 +576,7 @@ export default function TestYourEnglishForm() {
 
                     <div className="mb-2">
                       <p className="text-slate-500 font-medium leading-relaxed">
-                        Choose the correct option
+                        {t("guidance")}
                       </p>
                     </div>
 
@@ -633,8 +627,8 @@ export default function TestYourEnglishForm() {
                 className="px-10 font-bold"
               >
                 {form.formState.isSubmitting
-                  ? "Processing..."
-                  : "Submit Assessment"}
+                  ? t("submitting")
+                  : t("submit")}
               </Button>
             </div>
           </div>

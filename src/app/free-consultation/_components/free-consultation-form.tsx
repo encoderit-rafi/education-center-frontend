@@ -48,59 +48,73 @@ import { CountryDropdown } from "@/components/ui/country-dropdown";
 import { toast } from "sonner";
 import api from "@/axios";
 
-const AREAS = [
-  "Exam Booking & Seat Availability",
-  "Exam Prep. Course",
-];
+import { useTranslations } from "next-intl";
 
-const TIMES = [
-  { label: "Morning (9:00 AM – 11:30 AM)", value: "Morning" },
-  { label: "Afternoon (12:00 PM – 5:30 PM)", value: "Afternoon" },
-  { label: "Evening (6:00 PM – 8:30 PM)", value: "Evening" },
-];
-
-const formSchema = z.object({
-  fullName: z
-    .string()
-    .trim()
-    .min(1, "Full Name is required")
-    .min(2, "Full name must be at least 2 characters"),
-  email: z
-    .string()
-    .trim()
-    .min(1, "Email Address is required")
-    .email("Please enter a valid email address"),
-  phone: z
-    .string()
-    .trim()
-    .min(1, "Phone Number is required")
-    .min(5, "Please enter a valid phone number"),
-  country: z
-    .string()
-    .trim()
-    .min(1, "Country is required"),
-  city: z
-    .string()
-    .trim()
-    .min(1, "Emirate / City is required"),
-  area: z
-    .string()
-    .trim()
-    .min(1, "Area of Consultation is required"),
-  date: z.date({
-    message: "Preferred Date is required",
-  }),
-  time: z
-    .string()
-    .trim()
-    .min(1, "Preferred Time is required"),
-  message: z.string().optional(),
-});
-
-type FormValues = z.infer<typeof formSchema>;
+type FormValues = {
+  fullName: string;
+  email: string;
+  phone: string;
+  country: string;
+  city: string;
+  area: string;
+  date: Date;
+  time: string;
+  message?: string;
+};
 
 export default function FreeConsultationForm() {
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+  const t = useTranslations("FreeConsultationPage");
+  const tForm = useTranslations("FreeConsultationPage.form");
+
+  const AREAS = [
+    { label: tForm("areas.booking"), value: "Exam Booking & Seat Availability" },
+    { label: tForm("areas.prep"), value: "Exam Prep. Course" },
+  ];
+
+  const TIMES = [
+    { label: tForm("times.morning"), value: "Morning" },
+    { label: tForm("times.afternoon"), value: "Afternoon" },
+    { label: tForm("times.evening"), value: "Evening" },
+  ];
+
+  const formSchema = z.object({
+    fullName: z
+      .string()
+      .trim()
+      .min(1, tForm("validation.fullNameRequired"))
+      .min(2, tForm("validation.fullNameMin")),
+    email: z
+      .string()
+      .trim()
+      .min(1, tForm("validation.emailRequired"))
+      .email(tForm("validation.emailInvalid")),
+    phone: z
+      .string()
+      .trim()
+      .min(1, tForm("validation.phoneRequired"))
+      .min(5, tForm("validation.phoneMin")),
+    country: z
+      .string()
+      .trim()
+      .min(1, tForm("validation.countryRequired")),
+    city: z
+      .string()
+      .trim()
+      .min(1, tForm("validation.cityRequired")),
+    area: z
+      .string()
+      .trim()
+      .min(1, tForm("validation.areaRequired")),
+    date: z.date({
+      message: tForm("validation.dateRequired"),
+    }),
+    time: z
+      .string()
+      .trim()
+      .min(1, tForm("validation.timeRequired")),
+    message: z.string().optional(),
+  });
 
   const {
     register,
@@ -159,19 +173,19 @@ export default function FreeConsultationForm() {
       const res = await api.post("/consultations", payload);
 
       if (res.data?.success || res.status === 200 || res.status === 201) {
-        toast.success("Enquiry Received", {
-          description: "Thank you for contacting us. We have received your enquiry and will respond to you within 1 to 2 business days. Our working hours: Saturday to Thursday (9:00 AM – 9:00 PM)",
+        toast.success(tForm("toast.successTitle"), {
+          description: tForm("toast.successDesc"),
           duration: 6000,
         });
         reset();
       } else {
-        toast.error("Error", {
-          description: res.data?.message || "Failed to submit consultation request.",
+        toast.error(tForm("toast.errorTitle"), {
+          description: res.data?.message || tForm("toast.errorDesc"),
         });
       }
     } catch (error: any) {
-      toast.error("Error", {
-        description: error.response?.data?.message || "An unexpected error occurred. Please try again later.",
+      toast.error(tForm("toast.errorTitle"), {
+        description: error.response?.data?.message || tForm("toast.unexpectedError"),
       });
     }
   };
@@ -181,33 +195,33 @@ export default function FreeConsultationForm() {
       <div className="grid md:grid-cols-2 gap-x-10 gap-y-8">
         {/* Personal Information */}
         <div className="space-y-6">
-          <Stepper step={1}>Your Information</Stepper>
+          <Stepper step={1}>{tForm("step1")}</Stepper>
           <div className="space-y-4">
             <Field data-invalid={!!errors.fullName}>
-              <FieldLabel required>Full Name</FieldLabel>
+              <FieldLabel required>{tForm("fullName")}</FieldLabel>
               <FieldContent>
                 <Input
                   {...register("fullName")}
-                  placeholder="John Doe"
+                  placeholder={tForm("fullNamePlaceholder")}
                 />
               </FieldContent>
               <FieldError errors={[errors.fullName]} />
             </Field>
 
             <Field data-invalid={!!errors.email}>
-              <FieldLabel required>Email Address</FieldLabel>
+              <FieldLabel required>{tForm("email")}</FieldLabel>
               <FieldContent>
                 <Input
                   {...register("email")}
                   type="email"
-                  placeholder="john@example.com"
+                  placeholder={tForm("emailPlaceholder")}
                 />
               </FieldContent>
               <FieldError errors={[errors.email]} />
             </Field>
 
             <Field data-invalid={!!errors.phone}>
-              <FieldLabel required>Phone Number</FieldLabel>
+              <FieldLabel required>{tForm("phone")}</FieldLabel>
               <FieldContent>
                 <Controller
                   control={control}
@@ -217,7 +231,7 @@ export default function FreeConsultationForm() {
                       value={field.value}
                       onChange={field.onChange}
                       defaultCountry="AE"
-                      placeholder="Please Enter Your Number"
+                      placeholder={tForm("phonePlaceholder")}
                       className="bg-slate-50 border border-slate-200 rounded-md overflow-hidden h-11 focus-within:ring-4 focus-within:ring-primary/5"
                     />
                   )}
@@ -228,7 +242,7 @@ export default function FreeConsultationForm() {
 
             <div className="grid grid-cols-2 gap-4">
               <Field data-invalid={!!errors.country}>
-                <FieldLabel required>Country</FieldLabel>
+                <FieldLabel required>{tForm("country")}</FieldLabel>
                 <FieldContent>
                   <Controller
                     control={control}
@@ -237,7 +251,6 @@ export default function FreeConsultationForm() {
                       <CountryDropdown
                         value={field.value}
                         onChange={(country) => field.onChange(country.name)}
-
                       />
                     )}
                   />
@@ -246,11 +259,11 @@ export default function FreeConsultationForm() {
               </Field>
 
               <Field data-invalid={!!errors.city}>
-                <FieldLabel required>Emirate / City</FieldLabel>
+                <FieldLabel required>{tForm("city")}</FieldLabel>
                 <FieldContent>
                   <Input
                     {...register("city")}
-                    placeholder="Dubai"
+                    placeholder={tForm("cityPlaceholder")}
                   />
                 </FieldContent>
                 <FieldError errors={[errors.city]} />
@@ -261,10 +274,10 @@ export default function FreeConsultationForm() {
 
         {/* Consultation Details */}
         <div className="space-y-6">
-          <Stepper step={2}>Consultation Details</Stepper>
+          <Stepper step={2}>{tForm("step2")}</Stepper>
           <div className="space-y-4">
             <Field data-invalid={!!errors.area}>
-              <FieldLabel required>Area of Consultation</FieldLabel>
+              <FieldLabel required>{tForm("area")}</FieldLabel>
               <FieldContent>
                 <Controller
                   control={control}
@@ -272,12 +285,12 @@ export default function FreeConsultationForm() {
                   render={({ field }) => (
                     <Select onValueChange={field.onChange} value={field.value}>
                       <SelectTrigger className="border-slate-200 h-10 rounded-md px-4 font-medium">
-                        <SelectValue placeholder="Select area" />
+                        <SelectValue placeholder={tForm("selectArea")} />
                       </SelectTrigger>
                       <SelectContent>
                         {AREAS.map((area) => (
-                          <SelectItem key={area} value={area}>
-                            {area}
+                          <SelectItem key={area.value} value={area.value}>
+                            {area.label}
                           </SelectItem>
                         ))}
                       </SelectContent>
@@ -288,9 +301,8 @@ export default function FreeConsultationForm() {
               <FieldError errors={[errors.area]} />
             </Field>
 
-
             <Field data-invalid={!!errors.date}>
-              <FieldLabel required>Date Preference</FieldLabel>
+              <FieldLabel required>{tForm("date")}</FieldLabel>
               <FieldContent>
                 <Popover open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
                   <PopoverTrigger
@@ -298,7 +310,7 @@ export default function FreeConsultationForm() {
                       <Button
                         variant="ghost"
                         className={cn(
-                          "w-full justify-start text-left font-normal rounded-md border border-slate-200  px-3 py-2 text-sm transition-all outline-none  focus-visible:border-primary focus-visible:ring-3 focus-visible:ring-ring/30 shadow-none hover:shadow-none hover:bg-transparent whitespace-nowrap",
+                          "w-full justify-start text-left font-normal rounded-md border border-slate-200 px-3 py-2 text-sm transition-all outline-none focus-visible:border-primary focus-visible:ring-3 focus-visible:ring-ring/30 shadow-none hover:shadow-none hover:bg-transparent whitespace-nowrap",
                           !selectedDate && "text-slate-400"
                         )}
                       >
@@ -306,7 +318,7 @@ export default function FreeConsultationForm() {
                         {selectedDate ? (
                           format(selectedDate, "PPP")
                         ) : (
-                          <span>Select date</span>
+                          <span>{tForm("selectDate")}</span>
                         )}
                       </Button>
                     }
@@ -330,7 +342,7 @@ export default function FreeConsultationForm() {
             </Field>
 
             <Field data-invalid={!!errors.time}>
-              <FieldLabel required>Preferred Time</FieldLabel>
+              <FieldLabel required>{tForm("time")}</FieldLabel>
               <FieldContent>
                 <Controller
                   control={control}
@@ -347,7 +359,7 @@ export default function FreeConsultationForm() {
                         >
                           {field.value
                             ? TIMES.find((t) => t.value === field.value)?.label
-                            : "Select time"}
+                            : tForm("selectTime")}
                           <ChevronDown className="h-4 w-4 text-slate-400" />
                         </Button>
                       </DropdownMenuTrigger>
@@ -370,15 +382,14 @@ export default function FreeConsultationForm() {
               <FieldError errors={[errors.time]} />
             </Field>
 
-
             <Field>
-              <FieldLabel>Message/Comments</FieldLabel>
+              <FieldLabel>{tForm("message")}</FieldLabel>
               <FieldContent>
                 <Textarea
                   {...register("message")}
                   rows={4}
                   className="bg-white border-slate-200 rounded-md px-3 py-2 placeholder:text-slate-400 font-medium resize-none transition-[color,box-shadow,background-color] outline-none focus-visible:border-primary focus-visible:ring-3 focus-visible:ring-ring/30"
-                  placeholder="Any specific questions?"
+                  placeholder={tForm("messagePlaceholder")}
                 />
               </FieldContent>
             </Field>
@@ -393,12 +404,12 @@ export default function FreeConsultationForm() {
           className="h-11 px-4 py-2 rounded-md font-bold uppercase tracking-widest text-sm w-full md:w-auto transition-all active:scale-95"
         >
           <div className="flex items-center gap-3">
-            {isSubmitting ? "Sending..." : "Submit"}
+            {isSubmitting ? tForm("sending") : tForm("submit")}
           </div>
         </Button>
         <div className="flex items-center justify-center gap-2 text-xs text-slate-500 font-medium text-center">
           <ShieldCheck className="w-4 h-4 text-primary shrink-0" />
-          <span>Response within 1-2 business days</span>
+          <span>{tForm("responseTime")}</span>
         </div>
       </div>
     </form>

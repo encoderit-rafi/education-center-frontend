@@ -22,30 +22,39 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const inquirySchema = z.object({
-  name: z
-    .string()
-    .trim()
-    .min(1, { message: "Full Name is required" })
-    .min(2, { message: "Name must be at least 2 characters" }),
-  email: z
-    .string()
-    .trim()
-    .min(1, { message: "Email Address is required" })
-    .email({ message: "Please enter a valid email address" }),
-  message: z
-    .string()
-    .trim()
-    .min(1, { message: "Accommodation Details is required" })
-    .min(10, { message: "Message must be at least 10 characters" }),
-  document: z.any().optional(),
-});
+import { useTranslations } from "next-intl";
 
-type InquiryFormValues = z.infer<typeof inquirySchema>;
+type InquiryFormValues = {
+  name: string;
+  email: string;
+  message: string;
+  document?: any;
+};
 
 export default function SpecialAccommodationForm() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [fileName, setFileName] = useState("");
+  const t = useTranslations("SpecialAccommodationPage");
+  const tForm = useTranslations("SpecialAccommodationPage.inquiry.form");
+
+  const inquirySchema = z.object({
+    name: z
+      .string()
+      .trim()
+      .min(1, { message: tForm("validation.fullNameRequired") })
+      .min(2, { message: tForm("validation.fullNameMin") }),
+    email: z
+      .string()
+      .trim()
+      .min(1, { message: tForm("validation.emailRequired") })
+      .email({ message: tForm("validation.emailInvalid") }),
+    message: z
+      .string()
+      .trim()
+      .min(1, { message: tForm("validation.detailsRequired") })
+      .min(10, { message: tForm("validation.detailsMin") }),
+    document: z.any().optional(),
+  });
 
   const {
     register,
@@ -85,11 +94,10 @@ export default function SpecialAccommodationForm() {
         <CheckCircle2 className="w-16 h-16 text-emerald-500 mx-auto" />
         <div className="space-y-2">
           <h3 className="text-2xl font-black uppercase tracking-tight">
-            Request Received
+            {tForm("successTitle")}
           </h3>
           <p className="text-emerald-700 font-medium">
-            Thank you! Your accommodation request has been securely received.
-            Our support team will reach out within 48 hours.
+            {tForm("successDesc")}
           </p>
         </div>
         <Button
@@ -97,7 +105,7 @@ export default function SpecialAccommodationForm() {
           onClick={() => setIsSuccess(false)}
           className="border-emerald-200 text-emerald-800 hover:bg-emerald-100/50 rounded-xl"
         >
-          Send Another Request
+          {tForm("sendAnother")}
         </Button>
       </div>
     );
@@ -107,20 +115,20 @@ export default function SpecialAccommodationForm() {
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Field data-invalid={!!errors.name}>
-          <FieldLabel required>Full Name</FieldLabel>
+          <FieldLabel required>{tForm("fullName")}</FieldLabel>
           <FieldContent>
-            <Input {...register("name")} placeholder="John Doe" />
+            <Input {...register("name")} placeholder={tForm("fullNamePlaceholder")} />
           </FieldContent>
           {errors.name && <FieldError>{errors.name.message}</FieldError>}
         </Field>
 
         <Field data-invalid={!!errors.email}>
-          <FieldLabel required>Email Address</FieldLabel>
+          <FieldLabel required>{tForm("email")}</FieldLabel>
           <FieldContent>
             <Input
               {...register("email")}
               type="email"
-              placeholder="john@example.com"
+              placeholder={tForm("emailPlaceholder")}
             />
           </FieldContent>
           {errors.email && <FieldError>{errors.email.message}</FieldError>}
@@ -128,11 +136,11 @@ export default function SpecialAccommodationForm() {
       </div>
 
       <Field data-invalid={!!errors.message}>
-        <FieldLabel required>Accommodation Details</FieldLabel>
+        <FieldLabel required>{tForm("details")}</FieldLabel>
         <FieldContent>
           <Textarea
             {...register("message")}
-            placeholder="Please describe your specific requirements in detail..."
+            placeholder={tForm("detailsPlaceholder")}
             rows={5}
             className="bg-transparent border border-slate-200 rounded-md px-3 py-2 focus-visible:border-primary focus-visible:ring-3 focus-visible:ring-ring/30 placeholder:text-slate-400 placeholder:text-sm"
           />
@@ -141,7 +149,7 @@ export default function SpecialAccommodationForm() {
       </Field>
 
       <div className="space-y-4">
-        <FieldLabel>Supporting Documentation</FieldLabel>
+        <FieldLabel>{tForm("documentation")}</FieldLabel>
         <div
           className={cn(
             "relative p-8 border-2 border-dashed rounded-2xl transition-all flex flex-col items-center justify-center text-center group bg-slate-50/30",
@@ -162,7 +170,7 @@ export default function SpecialAccommodationForm() {
                   onClick={clearFile}
                   className="text-xs text-primary font-bold uppercase tracking-widest hover:underline flex items-center gap-1 mx-auto"
                 >
-                  <X className="w-3 h-3" /> Remove File
+                  <X className="w-3 h-3" /> {tForm("remove")}
                 </button>
               </div>
             </div>
@@ -171,10 +179,10 @@ export default function SpecialAccommodationForm() {
               <UploadCloud className="w-12 h-12 text-slate-300 group-hover:text-primary transition-colors mb-4" />
               <div className="space-y-1 mb-6">
                 <p className="font-bold text-slate-700">
-                  Drop your medical evidence here
+                  {tForm("dropText")}
                 </p>
                 <p className="text-sm text-slate-400 font-medium">
-                  PDF, JPG or PNG (Max 10MB)
+                  {tForm("fileLimit")}
                 </p>
               </div>
               <Button
@@ -182,7 +190,7 @@ export default function SpecialAccommodationForm() {
                 variant="outline"
                 className="rounded-xl border-slate-200 hover:bg-white font-bold"
               >
-                Browse Files
+                {tForm("browse")}
               </Button>
             </>
           )}
@@ -199,16 +207,15 @@ export default function SpecialAccommodationForm() {
         <Button
           disabled={isSubmitting}
           type="submit"
-          // className="h-14 px-12 rounded-xl font-black uppercase tracking-widest text-sm w-full md:w-auto transition-all active:scale-95 shadow-xl shadow-primary/10"
         >
           <div className="flex items-center gap-3">
-            {isSubmitting ? "Sending Request..." : "Send Inquiry"}
+            {isSubmitting ? tForm("submitting") : tForm("submit")}
           </div>
         </Button>
 
         <p className="flex items-center gap-2 text-sm text-slate-500 font-medium">
           <ShieldCheck className="w-4 h-4 text-primary" />
-          <span>Confidential and secure inquiry. We value your privacy.</span>
+          <span>{tForm("privacyText")}</span>
         </p>
       </div>
     </form>

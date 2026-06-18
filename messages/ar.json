@@ -172,7 +172,49 @@
     "Testimonials": {
       "title": "موثوق به من قِبَل قادة",
       "titleAccent": "الغد",
-      "description": "اطّلع على ما يقوله مجتمعنا العالمي عن تجربتهم مع TEPTH."
+      "description": "اطّلع على ما يقوله مجتمعنا العالمي عن تجربتهم مع TEPTH.",
+      "reviews": {
+        "nadine": {
+          "name": "نادين مصطفى",
+          "date": "قبل عام",
+          "quote": "منظم ومهذب للغاية"
+        },
+        "rahul": {
+          "name": "راهول تشوهان",
+          "date": "قبل شهرين",
+          "quote": "⭐⭐⭐⭐⭐ تيبث الشارقة – استعد بذكاء أكبر، وحقق درجات أعلى. تيبث الشارقة هو وجهتك المثالية لاجتياز اختبارات مثل IELTS و TOEFL و CELPIP و PTE-A و OET و PearsonVUE و CAEL. مدربون خبراء، وبيئة اختبار هادئة وحديثة، وإجراءات تسجيل دخول سلسة تجعل العملية برمتها خالية من التوتر. إن توجيهاتهم وجلسات التدريب الواقعية تمنحك الثقة لتحقيق درجتك المستهدفة. إذا كنت جاداً بشأن تحقيق نتائج متميزة، فهذا هو المكان المناسب لك."
+        },
+        "sima": {
+          "name": "سيما القنواتي",
+          "date": "قبل شهر",
+          "quote": "مركز اختبار هادئ ونظيف، موظفون محترمون، قواعد صارمة، ويتميز بموقع رائع بعيداً عن الطرق السريعة"
+        },
+        "rahimuddin": {
+          "name": "رحيم الدين قريشي",
+          "date": "قبل 9 أشهر",
+          "quote": "لقد كانت تجربة مذهلة. الموظفون، الأجواء، والإجراءات كلها كانت احترافية ومرحبة بالزوار. شكراً لكونكم جزءاً من نجاحي."
+        },
+        "ayan": {
+          "name": "أيان علي خان",
+          "date": "قبل عام",
+          "quote": "قدمت امتحان GED هناك وكل شيء تم بسلاسة. أنصح به بشدة!!"
+        },
+        "mydeen": {
+          "name": "ميدين باشا",
+          "date": "قبل عام",
+          "quote": "لقد حظيت بأفضل تجربة في هذا المركز. كان العاملون هناك متعاونين للغاية وشرحوا لي القواعد والتعليمات بكل هدوء. المركز رائع جداً ولا يوجد أي إزعاج أو ضوضاء في الخلفية. إجمالاً، كانت تجربتي في هذا المركز ممتازة للغاية. كل التحية للفريق..!!!"
+        },
+        "depika": {
+          "name": "ديبيكا مانوج",
+          "date": "قبل عام",
+          "quote": "لقد جعلني مسؤول الاختبار أشعر بالارتياح وكان مهذباً جداً في تعامله. كانت تجربة الاختبار سلسة وخالية من المتاعب"
+        },
+        "kafuka": {
+          "name": "كافوكا مود",
+          "date": "قبل عام",
+          "quote": "حظيت بتجربة رائعة هناك أثناء امتحاني، وكان جميع الموظفين ودودين ومتعاونين. المكان هادئ ومجهز بشكل ممتاز لجعل المتقدم للامتحان يشعر بالراحة وخلو من التوتر."
+        }
+      }
     },
     "FreeConsultation": {
       "title": "هل أنت مستعد لبدء رحلتك؟",
@@ -212,8 +254,58 @@
       "closed": "مغلق"
     },
     "FormSection": {
-      "title": "أرسل رسالة",
-      "titleAccent": " مباشرة"
+      "title": "إرسال رسالة",
+      "titleAccent": " مباشرة",
+      "form": {
+        "firstName": "الاسم الأول",
+        "firstNamePlaceholder": "جون",
+        "lastName": "اسم العائلة",
+        "lastNamePlaceholder": "دو",
+        "email": "البريد الإلكتروني",
+        "emailPlaceholder": "john@example.com",
+        "city": "الإمارة / المدينة",
+        "cityPlaceholder": "دبي",
+        "country": "البلد",
+        "topic": "موضوع الاستفسار",
+        "selectTopic": "اختر موضوعاً",
+        "message": "الرسالة",
+        "messagePlaceholder": "أخبرنا المزيد عن استفسارك...",
+        "submit": "إرسال",
+        "submitting": "جاري الإرسال...",
+        "responseTime": "سنقوم بالرد عليك خلال يوم أو يومين عمل.",
+        "topics": {
+          "exam_registration": "تسجيل الامتحان",
+          "prep_courses": "دورات التحضير للامتحانات",
+          "proctoring": "مراقبة الامتحانات",
+          "accommodation": "التسهيلات الخاصة",
+          "dates_availability": "تواريخ الامتحانات وتوفرها",
+          "fees_payment": "الرسوم والدفع",
+          "consultation": "استشارة مجانية",
+          "mock_test": "امتحان تجريبي مدفوع",
+          "partnership": "الشراكة",
+          "general_enquiry": "استفسار عام",
+          "referral": "إحالة"
+        },
+        "validation": {
+          "firstNameRequired": "الاسم الأول مطلوب",
+          "firstNameMin": "يجب أن يتكون الاسم الأول من حرفين على الأقل",
+          "lastNameRequired": "اسم العائلة مطلوب",
+          "lastNameMin": "يجب أن يتكون اسم العائلة من حرفين على الأقل",
+          "emailRequired": "البريد الإلكتروني مطلوب",
+          "emailInvalid": "يرجى إدخال بريد إلكتروني صالح",
+          "cityRequired": "الإمارة / المدينة مطلوبة",
+          "countryRequired": "البلد مطلوب",
+          "topicRequired": "موضوع الاستفسار مطلوب",
+          "messageRequired": "الرسالة مطلوبة",
+          "messageMin": "يجب أن تتكون الرسالة من 10 أحرف على الأقل"
+        },
+        "toast": {
+          "successTitle": "تم إرسال الاستفسار بنجاح!",
+          "successDesc": "سيعود إليك فريقنا خلال 24 ساعة عمل.",
+          "errorTitle": "فشل إرسال الاستفسار",
+          "errorDesc": "حدث خطأ أثناء الإرسال. يرجى المحاولة مرة أخرى."
+        }
+      }
     }
   },
   "AboutUsPage": {
@@ -600,6 +692,30 @@
       "directInquiriesText": "partnerships@tepth.academy",
       "institutionalSupportTitle": "الدعم المؤسسي",
       "institutionalSupportText": "+971 4 000 0000"
+    },
+    "partnershipForm": {
+      "fullName": "الاسم الكامل",
+      "fullNamePlaceholder": "أدخل اسمك الكامل",
+      "institution": "المؤسسة",
+      "institutionPlaceholder": "أدخل اسم مؤسستك",
+      "workEmail": "بريد العمل الإلكتروني",
+      "workEmailPlaceholder": "أدخل بريد العمل الإلكتروني",
+      "message": "الرسالة",
+      "messagePlaceholder": "أدخل رسالتك",
+      "submit": "تقديم طلب الشراكة",
+      "submitting": "جاري التقديم...",
+      "successTitle": "تم استلام الطلب",
+      "successDesc": "شكرًا لتواصلك معنا. سيقوم فريق الشراكة لدينا بمراجعة استفسارك والتواصل مع مؤسستك في غضون 24-48 ساعة عمل.",
+      "validation": {
+        "fullNameRequired": "الاسم الكامل مطلوب.",
+        "fullNameMin": "يجب أن يتكون الاسم الكامل من حرفين على الأقل.",
+        "institutionRequired": "المؤسسة مطلوبة.",
+        "institutionMin": "يجب أن تتكون المؤسسة من حرفين على الأقل.",
+        "workEmailRequired": "بريد العمل الإلكتروني مطلوب.",
+        "workEmailInvalid": "يرجى تقديم بريد عمل إلكتروني صالح.",
+        "messageRequired": "الرسالة مطلوبة.",
+        "messageMin": "يرجى تقديم وصف مفصل."
+      }
     }
   },
   "CareerPage": {
@@ -988,7 +1104,60 @@
     ],
     "formTitle": "أكّد",
     "formTitleAccent": "استشارتك المجانية",
-    "formDescription": "يرجى ملء النموذج أدناه لحجز جلستك مع خبرائنا."
+    "formDescription": "يرجى ملء النموذج أدناه لحجز جلستك مع خبرائنا.",
+    "form": {
+      "step1": "معلوماتك",
+      "step2": "تفاصيل الاستشارة",
+      "fullName": "الاسم الكامل",
+      "fullNamePlaceholder": "جون دو",
+      "email": "البريد الإلكتروني",
+      "emailPlaceholder": "john@example.com",
+      "phone": "رقم الهاتف",
+      "phonePlaceholder": "يرجى إدخال رقمك",
+      "country": "البلد",
+      "city": "الإمارة / المدينة",
+      "cityPlaceholder": "دبي",
+      "area": "مجال الاستشارة",
+      "selectArea": "اختر المجال",
+      "areas": {
+        "booking": "حجز الامتحانات وتوفر المقاعد",
+        "prep": "دورة التحضير للامتحان"
+      },
+      "date": "تاريخ الاستشارة المفضل",
+      "selectDate": "اختر التاريخ",
+      "time": "الوقت المفضل",
+      "selectTime": "اختر الوقت",
+      "times": {
+        "morning": "الصباح (9:00 صباحًا – 11:30 صباحًا)",
+        "afternoon": "بعد الظهر (12:00 مساءً – 5:30 مساءً)",
+        "evening": "المساء (6:00 مساءً – 8:30 مساءً)"
+      },
+      "message": "الرسالة/التعليقات",
+      "messagePlaceholder": "أي أسئلة محددة؟",
+      "submit": "إرسال",
+      "sending": "جاري الإرسال...",
+      "responseTime": "الرد خلال 1-2 أيام عمل",
+      "validation": {
+        "fullNameRequired": "الاسم الكامل مطلوب",
+        "fullNameMin": "يجب أن يتكون الاسم الكامل من حرفين على الأقل",
+        "emailRequired": "البريد الإلكتروني مطلوب",
+        "emailInvalid": "يرجى إدخال بريد إلكتروني صالح",
+        "phoneRequired": "رقم الهاتف مطلوب",
+        "phoneMin": "يرجى إدخال رقم هاتف صالح",
+        "countryRequired": "البلد مطلوب",
+        "cityRequired": "الإمارة / المدينة مطلوبة",
+        "areaRequired": "مجال الاستشارة مطلوب",
+        "dateRequired": "التاريخ المفضل مطلوب",
+        "timeRequired": "الوقت المفضل مطلوب"
+      },
+      "toast": {
+        "successTitle": "تم استلام الطلب",
+        "successDesc": "شكرًا لتواصلك معنا. لقد تلقينا استفسارك وسنقوم بالرد عليك في غضون يوم أو يومين عمل. ساعات العمل لدينا: من السبت إلى الخميس (9:00 صباحًا – 9:00 مساءً)",
+        "errorTitle": "خطأ",
+        "errorDesc": "فشل تقديم طلب الاستشارة.",
+        "unexpectedError": "حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى لاحقًا."
+      }
+    }
   },
   "FAQsPage": {
     "title": "الأسئلة الشائعة",
@@ -1246,7 +1415,34 @@
       ]
     },
     "inquiry": {
-      "title": "الاستفسار عن التسهيلات"
+      "title": "الاستفسار عن التسهيلات",
+      "form": {
+        "fullName": "الاسم الكامل",
+        "fullNamePlaceholder": "جون دو",
+        "email": "البريد الإلكتروني",
+        "emailPlaceholder": "john@example.com",
+        "details": "تفاصيل التسهيلات المطلوبة",
+        "detailsPlaceholder": "يرجى وصف متملباتك المحددة بالتفصيل...",
+        "documentation": "المستندات الداعمة",
+        "dropText": "قم بسحب وإفلات التقارير الطبية هنا",
+        "fileLimit": "PDF أو JPG أو PNG (بحد أقصى 10 ميجابايت)",
+        "browse": "تصفح الملفات",
+        "remove": "إزالة الملف",
+        "submit": "إرسال الاستفسار",
+        "submitting": "جاري إرسال الطلب...",
+        "privacyText": "استفسار سري وآمن. نحن نقدر خصوصيتك.",
+        "successTitle": "تم استلام الطلب",
+        "successDesc": "شكرًا لك! لقد تم استلام طلب التسهيلات الخاص بك بأمان. سيتصل بك فريق الدعم لدينا في غضون 48 ساعة.",
+        "sendAnother": "إرسال طلب آخر",
+        "validation": {
+          "fullNameRequired": "الاسم الكامل مطلوب",
+          "fullNameMin": "يجب أن يتكون الاسم من حرفين على الأقل",
+          "emailRequired": "البريد الإلكتروني مطلوب",
+          "emailInvalid": "يرجى إدخال بريد إلكتروني صالح",
+          "detailsRequired": "تفاصيل التسهيلات مطلوبة",
+          "detailsMin": "يجب أن تتكون الرسالة من 10 أحرف على الأقل"
+        }
+      }
     }
   },
   "TermsAndConditionsPage": {
@@ -2696,7 +2892,35 @@
       "Vendor": "الموردون",
       "Our Venues": "قاعاتنا",
       "360° Virtual Tour": "جولة افتراضية 360°",
-      "Book An Exam Venue": "حجز قاعة اختبار"
+      "Book An Exam Venue": "حجز قاعة اختبار",
+      "IELTS": "آيلتس",
+      "PTE": "بي تي إي",
+      "TOEFL iBT": "توفل iBT",
+      "CELPIP": "سيلبيب",
+      "CAEL": "كايل",
+      "Skills for English (SELT)": "سكيلز فور إنجلش (SELT)",
+      "Skill for English(SELT)": "سكيلز فور إنجلش (SELT)",
+      "OET": "أو إي تي",
+      "IELTS Academic": "آيلتس الأكاديمي",
+      "IELTS General": "آيلتس العام",
+      "IELTS UKVI": "آيلتس UKVI",
+      "IELTS UKVI Academic": "آيلتس UKVI الأكاديمي",
+      "IELTS UKVI General": "آيلتس UKVI العام",
+      "IELTS Life Skills A1": "آيلتس مهارات الحياة A1",
+      "IELTS Life Skills A2": "آيلتس مهارات الحياة A2",
+      "IELTS Life Skills B1": "آيلتس مهارات الحياة B1",
+      "PTE Academic": "بي تي إي الأكاديمي",
+      "PTE Core": "بي تي إي العام",
+      "PTE UKVI": "بي تي إي UKVI",
+      "PTE Academic UKVI": "بي تي إي الأكاديمي UKVI",
+      "PTE Home A1": "بي تي إي هوم A1",
+      "PTE Home A2": "بي تي إي هوم A2",
+      "PTE Home B1": "بي تي إي هوم B1",
+      "CELPIP General": "سيلبيب العام",
+      "CELPIP General LS": "سيلبيب العام LS",
+      "Skills for English": "سكيلز فور إنجلش",
+      "PSI": "بي إس آي",
+      "PSI UKVI": "بي إس آي UKVI"
     }
   },
   "Search": {
@@ -3115,7 +3339,7 @@
     "online": "عبر الإنترنت",
     "selfManaged": "إدارة ذاتية",
     "homeBased": "من المنزل",
-    "inCenter": "في المركز",
+    "inPerson": "في المركز",
     "centerBased": "في المركز",
     "scheduleAvailability": "توفر الجدول الزمني",
     "scheduleNote": "يرجى العلم أن التاريخ والوقت يجب تأكيدهما من قبل موظفينا ويجب أن يكون الاختبار ضمن ساعات عملنا.",
@@ -3137,15 +3361,20 @@
     "regTitle": "تسجيل اختبار تجريبي مدفوع",
     "yourInfo": "معلوماتك",
     "firstName": "الاسم الأول",
+    "firstNamePlaceholder": "جون",
     "familyName": "اسم العائلة",
+    "lastNamePlaceholder": "دو",
     "examTypes": "أنواع الامتحانات",
     "selectType": "اختر النوع",
     "email": "البريد الإلكتروني",
+    "emailPlaceholder": "example@gmail.com",
     "phoneNumber": "رقم الهاتف",
     "country": "البلد",
     "searchCountry": "البحث عن بلد...",
     "address": "العنوان",
+    "addressPlaceholder": "123 الشارع الرئيسي",
     "emirateCity": "الإمارة / المدينة",
+    "cityPlaceholder": "دبي",
     "detailsTitle": "تفاصيل الاختبار التجريبي",
     "mockTest": "الاختبار التجريبي",
     "type": "النوع",
@@ -3179,11 +3408,128 @@
       "proctorPresence": "يماثل ضغط قاعة الاختبار الفعلية ووجود المراقب"
     }
   },
+  "EnglishQuiz": {
+    "title": "اختبار اللغة",
+    "titleAccent": "الإنجليزية",
+    "description": "اختبر مهاراتك في اللغة الإنجليزية واحصل على نتائج فورية.",
+    "form": {
+      "personalInfo": "المعلومات الشخصية",
+      "fullName": "الاسم الكامل",
+      "fullNamePlaceholder": "جون دو",
+      "fullNameRequired": "الاسم الكامل مطلوب",
+      "fullNameTooShort": "الاسم قصير جداً",
+      "email": "البريد الإلكتروني",
+      "emailPlaceholder": "john@example.com",
+      "emailRequired": "البريد الإلكتروني مطلوب",
+      "emailInvalid": "عنوان بريد إلكتروني غير صالح",
+      "country": "البلد",
+      "countryRequired": "البلد مطلوب",
+      "city": "الإمارة / المدينة",
+      "cityPlaceholder": "دبي",
+      "cityRequired": "الإمارة / المدينة مطلوبة",
+      "phoneNumber": "رقم الهاتف",
+      "phoneNumberRequired": "رقم الهاتف مطلوب",
+      "startQuiz": "ابدأ الاختبار",
+      "answerRequired": "يرجى الإجابة على هذا السؤال",
+      "chooseOption": "اختر الإجابة الصحيحة",
+      "back": "رجوع",
+      "processing": "جاري المعالجة...",
+      "submitQuiz": "إرسال الاختبار"
+    },
+    "result": {
+      "title": "اكتمل الاختبار!",
+      "subtitle": "إليك تقرير أدائك الرسمي",
+      "yourScore": "درجتك",
+      "proficiencyRank": "مستوى الكفاءة",
+      "feedbackTitle": "التقييم والتوصيات",
+      "takeAgain": "إعادة الاختبار",
+      "viewCourses": "عرض الدورات",
+      "calculating": "جاري حساب النتيجة...",
+      "levelBeginner": "المستوى A1/A2 (مبتدئ)",
+      "levelIntermediate": "المستوى B1/B2 (متوسط)",
+      "levelAdvanced": "المستوى C1/C2 (متقدم)",
+      "beginner": "مبتدئ",
+      "intermediate": "متوسط",
+      "expert": "متقدم / خبير",
+      "feedbackBeginner": "واصل التدريب! تم تصميم دوراتنا للمبتدئين لمساعدتك على بناء الثقة والمهارات الأساسية.",
+      "feedbackIntermediate": "عمل جيد! لديك أساس متين. يمكن أن تساعدك دوراتنا التحضيرية على تحقيق نتائج أفضل.",
+      "feedbackExpert": "رائع! لديك تمكن قوي من اللغة الإنجليزية. ننصحك بالالتحاق بدورات آيلتس/بي تي إي المتقدمة لدينا."
+    }
+  },
   "NotFoundPage": {
     "code": "404",
     "title": "الصفحة غير موجودة",
     "description": "عذراً، لم نتمكن من العثور على الصفحة التي تبحث عنها. ربما تم نقلها أو حذفها.",
     "backToHome": "العودة إلى الرئيسية",
     "contactSupport": "تواصل مع الدعم"
+  },
+  "TestYourEnglish": {
+    "title": "اختبر لغتك الإنجليزية",
+    "titleAccent": "المستوى",
+    "subtitle": "قيّم مستواك واحصل على خارطة طريق تعليمية مخصصة.",
+    "step1": "معلومات شخصية",
+    "fullName": "الاسم الكامل",
+    "fullNamePlaceholder": "جون دو",
+    "email": "البريد الإلكتروني",
+    "emailPlaceholder": "john@example.com",
+    "country": "البلد",
+    "city": "الإمارة / المدينة",
+    "cityPlaceholder": "دبي",
+    "phone": "رقم الهاتف",
+    "contactMethod": "طريقة الاتصال المفضلة",
+    "selectContactMethod": "اختر طريقة الاتصال",
+    "contactMethods": {
+      "phone": "مكالمة هاتفية",
+      "email": "البريد الإلكتروني",
+      "whatsapp": "واتساب / تليغرام"
+    },
+    "contactTime": "الوقت المفضل للاتصال بك",
+    "selectTime": "اختر الوقت",
+    "times": {
+      "morning": "الصباح (9:00 صباحًا – 11:30 صباحًا)",
+      "afternoon": "بعد الظهر (12:00 مساءً – 5:30 مساءً)",
+      "evening": "المساء (6:00 مساءً – 8:30 مساءً)"
+    },
+    "start": "ابدأ",
+    "introText": "يرجى تخصيص بضع دقائق لإكمال اختبار تحديد مستوى اللغة الإنجليزية عبر الإنترنت. نحن نأخذ تقييم لغتك الإنجليزية على محمل الجد.",
+    "loading": "جاري تحميل الأسئلة...",
+    "guidance": "اختر الخيار الصحيح",
+    "submit": "تقديم التقييم",
+    "submitting": "جاري المعالجة...",
+    "success": {
+      "title": "اكتمل التقييم!",
+      "subtitle": "جاري معالجة نتائجك",
+      "description": "لقد تلقى مجلسنا الأكاديمي ردودك. سيتم إرسال ملفك الشخصي المخصص للمستوى وخارطة طريق الدورة التدريبية إلى بريدك الإلكتروني في غضون 4 ساعات.",
+      "retake": "إعادة التقييم"
+    },
+    "validation": {
+      "fullNameRequired": "الاسم الكامل مطلوب",
+      "fullNameMin": "يجب أن يتكون الاسم الكامل من حرفين على الأقل",
+      "emailRequired": "البريد الإلكتروني مطلوب",
+      "emailInvalid": "يرجى إدخال بريد إلكتروني صالح",
+      "phoneRequired": "رقم الهاتف مطلوب",
+      "phoneMin": "يرجى إدخال رقم هاتف صالح",
+      "countryRequired": "البلد مطلوب",
+      "cityRequired": "الإمارة / المدينة مطلوبة",
+      "contactMethodRequired": "طريقة الاتصال المفضلة مطلوبة",
+      "contactTimeRequired": "الوقت المفضل مطلوب",
+      "answersRequired": "يرجى تحديد إجابة"
+    },
+    "toast": {
+      "startErrorTitle": "تعذر بدء الاختبار",
+      "startErrorDesc": "لم يرجع الخادم معرف محاولة صالح. يرجى المحاولة مرة أخرى.",
+      "unexpectedError": "يرجى المحاولة مرة أخرى لاحقًا.",
+      "submitErrorTitle": "فشل تقديم التقييم",
+      "submitErrorDesc": "حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى."
+    }
+  },
+  "PhoneInput": {
+    "searchPlaceholder": "البحث عن بلد...",
+    "emptyMessage": "لم يتم العثور على أي بلد."
+  },
+  "CountryDropdown": {
+    "placeholder": "اختر بلداً",
+    "searchPlaceholder": "البحث عن بلد...",
+    "emptyMessage": "لم يتم العثور على أي بلد."
   }
 }

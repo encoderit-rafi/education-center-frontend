@@ -269,7 +269,7 @@ function PaidMockTestRegistrationForm({
                     <FieldContent>
                       <Input
                         type="text"
-                        placeholder="Jhon"
+                        placeholder={t("firstNamePlaceholder")}
                         aria-invalid={!!errors.firstName}
                         {...register("firstName")}
                       />
@@ -281,7 +281,7 @@ function PaidMockTestRegistrationForm({
                     <FieldContent>
                       <Input
                         type="text"
-                        placeholder="Doe"
+                        placeholder={t("lastNamePlaceholder")}
                         aria-invalid={!!errors.lastName}
                         {...register("lastName")}
                       />
@@ -322,7 +322,7 @@ function PaidMockTestRegistrationForm({
                   <FieldContent>
                     <Input
                       type="text"
-                      placeholder="example@gmail.com"
+                      placeholder={t("emailPlaceholder")}
                       aria-invalid={!!errors.email}
                       {...register("email")}
                     />
@@ -364,7 +364,7 @@ function PaidMockTestRegistrationForm({
                   <FieldContent>
                     <Input
                       type="text"
-                      placeholder="123 Main St"
+                      placeholder={t("addressPlaceholder")}
                       aria-invalid={!!errors.address}
                       {...register("address")}
                     />
@@ -377,7 +377,7 @@ function PaidMockTestRegistrationForm({
                   <FieldContent>
                     <Input
                       type="text"
-                      placeholder="Dubai"
+                      placeholder={t("cityPlaceholder")}
                       aria-invalid={!!errors.city}
                       {...register("city")}
                     />
