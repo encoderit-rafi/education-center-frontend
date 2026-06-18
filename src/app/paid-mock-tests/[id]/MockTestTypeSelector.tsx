@@ -60,7 +60,7 @@ export function MockTestTypeSelector({ data }: MockTestTypeSelectorProps) {
   if (!types) {
     return (
       <AcceptPayButton data={data} className={cn(buttonVariants())}>
-        I Accept, Pay
+        Register
       </AcceptPayButton>
     );
   }

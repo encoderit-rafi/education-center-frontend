@@ -2,31 +2,15 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import {
-  CheckCircle2,
-  ArrowRight,
-  MapPin,
-  Award,
-  Zap,
-  Target,
-  Users,
-  UserCheck,
-  Calendar,
-  Sparkles,
-  BadgePercent,
-} from "lucide-react";
+import { Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   BaseCard,
-  BaseCardDescription,
   BaseCardIcon,
-  BaseCardList,
   BaseCardTitle,
 } from "@/components/blocks/cards/base-card";
 import CourseCard from "@/components/blocks/cards/course-card";
 import { buttonVariants } from "@/components/ui/button";
-import FreeConsultation from "@/app/free-consultation/_components/free-consultation";
-import { Badge } from "@/components/ui/badge";
 import { notFound } from "next/navigation";
 import { PriceDisplay } from "@/components/ui/price-display";
 import api from "@/axios";
@@ -226,7 +210,7 @@ export default async function ExamPreparationDynamicPage({
       {/* ── Hero Section ── */}
       <section className="relative overflow-hidden bg-slate-50 border-b border-slate-100">
         <div className="container relative mx-auto px-4 py-16 lg:px-8 lg:py-24 max-w-7xl flex flex-col items-center">
-          <div className="grid lg:grid-cols-[1fr_450px] gap-16 items-center">
+          <div className={`grid ${data.bannerImage ? "lg:grid-cols-[1fr_450px]" : ""} gap-16 items-center`}>
             <div className="max-w-4xl mx-auto text-center lg:text-left">
               <h1 className="text-4xl font-black leading-[1.1] tracking-tight text-slate-900 lg:text-6xl mb-6">
                 {data.name}
@@ -234,44 +218,18 @@ export default async function ExamPreparationDynamicPage({
               <p className="text-base text-slate-600 leading-relaxed mb-8 font-medium text-justify">
                 {data.description}
               </p>
-
-              {/* <div className="grid sm:grid-cols-2 gap-8 mb-10">
-                <div>
-                  <h3 className="text-sm  text-slate-400 mb-4 flex items-center gap-2">
-                    <Target className="size-4 text-primary" />
-                    Key Benefits
-                  </h3>
-                  <ul className="space-y-3">
-                    {data.keyBenefits?.map((item, i) => (
-                      <li
-                        key={i}
-                        className="flex items-start gap-2 text-sm  text-slate-700"
-                      >
-                        <CheckCircle2 className="size-4 text-primary shrink-0 mt-0.5" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div>
-                  <h3 className="text-sm text-slate-400 mb-4 flex items-center gap-2">
-                    <Zap className="size-4 text-primary" />
-                    Focus Area
-                  </h3>
-                  <ul className="space-y-3">
-                    {data.focusArea?.map((area, i) => (
-                      <li
-                        key={i}
-                        className="flex items-start gap-2 text-sm  text-slate-700"
-                      >
-                        <CheckCircle2 className="size-4 text-primary shrink-0 mt-0.5" />
-                        {area}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div> */}
             </div>
+            {data.bannerImage && (
+              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl">
+                <Image
+                  src={data.bannerImage}
+                  alt={data.name}
+                  fill
+                  className="object-cover"
+                  priority
+                />
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -288,11 +246,18 @@ export default async function ExamPreparationDynamicPage({
             </p>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-3">
-            {packages.map((pkg, index) => (
-              <CourseCard key={index} pkg={pkg} examSlug={slug} />
-            ))}
-          </div>
+          {packages.length > 0 ? (
+            <div className="grid gap-6 md:grid-cols-3">
+              {packages.map((pkg, index) => (
+                <CourseCard key={index} pkg={pkg} examSlug={slug} />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-16 text-slate-400">
+              <p className="text-base font-medium">Course packages are not available yet.</p>
+              <p className="text-sm mt-1">Please check back soon or contact us for enrollment details.</p>
+            </div>
+          )}
         </div>
       </section>
 

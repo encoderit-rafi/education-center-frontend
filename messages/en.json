@@ -1102,75 +1102,82 @@
     }
   },
   "PrivacyPolicyPage": {
-    "title": "Privacy",
-    "titleAccent": "Policy",
-    "description": "Our commitment to demonstrating concern for maintaining your secrecy and data integrity.",
+    "title": "The Exam Preparation & Testing House L.L.C",
+    "titleAccent": "Privacy Policy",
+    "description": "At TEPTH, we deeply value your privacy and are committed to keeping your personal information secure.",
     "navTitle": "Navigation",
     "sidebarTitle": "Privacy Question?",
     "sidebarDescription": "Contact our data protection team directly for any inquiries.",
-    "lastUpdated": "Last Updated: April 2026. TEPTH makes efforts to ensure this policy is aligned with national and international laws.",
+    "lastUpdated": "Last Updated: June 2026. The Exam Preparation & Testing House L.L.C continually works to ensure that this policy aligns with all applicable national and international privacy laws.",
     "sections": {
       "intro": {
-        "title": "Introduction",
-        "p1": "A privacy policy is a document that tells our website’s users what will be done with their personal information, how this information will be collected, and how this gathered data will be used.",
-        "p2": "While storing, managing, and using all information available on the site’s database, <strong>all legal requirements are fulfilled</strong> to protect client confidentiality. All possible security measures are embedded when site owners deal with visitors’ personal information."
-      },
-      "statement": {
-        "title": "Statement",
-        "quote": "TEPTH has created this privacy policy with the aim of demonstrating our concern and commitment towards maintaining customer secrecy.",
-        "p1": "Our privacy policy holds great importance for us. It communicates our information collection process and dissemination practices for gathered information from our visitors and customers."
+        "title": "Introduction & Commitment to Privacy",
+        "p1": "A privacy policy outlines how a website collects, uses, and safeguards user data. At TEPTH, we deeply value your privacy and are committed to keeping your personal information secure. This policy explains our data collection and sharing practices. We comply with all legal requirements to protect your confidentiality and implement robust security measures when handling your data."
       },
       "purpose": {
-        "title": "Purpose",
-        "p1": "This policy explains how we tackle and share (if needed) the information you share with us. Website users are informed that their information will be used for two primary reasons:",
+        "title": "Purpose of Data Collection",
+        "p1": "We collect and use your information primarily for two reasons:",
         "items": [
-          "Disclosing personal information to third parties (legal affiliates, business partners, etc.)",
-          "Making use of gathered information for particular purposes (newsletters, promotional emails, etc.)"
+          "To share with relevant third parties, such as business partners or legal affiliates, when necessary.",
+          "To use the data for specific communications, such as sending newsletters or promotional emails."
         ]
       },
       "collection": {
-        "title": "Collected Information",
-        "p1": "TEPTH requires users who register for our services to furnish contact information including name, address, phone number, e-mail contact, billing information, and credit card numbers."
+        "title": "Information We Collect",
+        "p1": "To use our services, registering users may need to provide contact and billing details, including name, address, phone number, email, and credit card information."
       },
       "pii": {
-        "title": "Personally Identifiable Information (PII)",
-        "p1": "PII collected by TEPTH will solely belong to the customers and will be used exclusively according to the legitimate international privacy standards for both offline and online data.",
-        "useTitle": "How we use PII:",
-        "items": [
-          "To set up and improve our services for individuals and organizations.",
-          "To contact customers regarding their specific interests in TEPTH.",
-          "To facilitate promotional campaigns via authorized partners.",
-          "To send email newsletters (only if an email address is provided)."
-        ],
-        "p2": "We will not distribute your personal information haphazardly. If we share your information with third parties, we will ask for your approval first."
+        "title": "1. Personally Identifiable Information (PII)",
+        "p1": "We only collect PII (like your name, address, and email) if you voluntarily provide it. This information belongs to you and is handled according to international privacy standards. You can easily opt out of third-party marketing communications. We primarily communicate via email rather than phone calls.",
+        "accuracyTitle": "Keeping Data Accurate:",
+        "accuracyText": "We strive to keep your data accurate and up-to-date. You may contact us at any time to update your personal details.",
+        "useTitle": "How We Use Your PII:",
+        "useItems": [
+          "To set up and enhance our services for individuals and organizations.",
+          "To contact you regarding your interest in our company.",
+          "To send you our email newsletters and service updates.",
+          "To share with partners for promotional events—<strong>only</strong> with your authorization. We never distribute your personal data haphazardly."
+        ]
       },
       "nonPii": {
-        "title": "Information that is not PII",
-        "p1": "We may also collect non-PII such as Internet addresses, navigational data, and cookies. This information is logged to help govern our site and diagnose technical problems.",
-        "cookiesTitle": "Cookies utilization:",
-        "p2": "Today, cookies utilization is the industry standard. standing alone, these cannot identify you personally. We recommend letting your web browser accept cookies to access a fully functional website."
+        "title": "2. Non-Personally Identifiable Information",
+        "p1": "We also collect technical data that does not identify you personally, such as IP addresses, navigational trends, and cookies. This data helps us troubleshoot technical issues, manage the website, and improve our services. We may also track volume statistics to share with third parties in compliance with the law.",
+        "cookiesTitle": "Cookies:",
+        "cookiesText": "Like most websites, we use cookies (small identifiers stored on your browser). They can be temporary (session-based) or permanent (until deleted). Cookies do not personally identify you, but they help us tailor our promotions and provide a fully functional website experience. We recommend allowing cookies to get the most out of our site."
       },
       "security": {
-        "title": "Security and Retention",
-        "p1": "TEPTH ensures that user-provided personal information is safeguarded against potentially illegal access, disclosure, or misuse.",
+        "title": "Data Security and Retention",
+        "p1": "We take stringent measures to protect your personal information from unauthorized access, misuse, loss, or modification.",
         "items": [
           {
-            "strong": "Secured Servers: ",
-            "text": "Personal information is stored in a secured server environment using firewalls."
+            "strong": "Secure Storage: ",
+            "text": "Your data is kept in a highly secure server environment protected by firewalls."
           },
           {
-            "strong": "Authorized Access: ",
-            "text": "Only employees with signed confidentiality agreements have authorized access."
+            "strong": "Restricted Access: ",
+            "text": "Only authorized employees who have signed confidentiality agreements can access your PII."
+          },
+          {
+            "strong": "No Selling/Renting: ",
+            "text": "We do not sell or rent your PII to third parties unless we have your consent or are required by law."
           },
           {
             "strong": "Data Destruction: ",
-            "text": "TEPTH destroys information that is no longer required for its intended reason."
+            "text": "Once personal information is no longer needed (e.g., after a specific promotion ends), TEPTH safely destroys it."
+          },
+          {
+            "strong": "Disclaimer: ",
+            "text": "While no internet transmission is 100% guaranteed to be secure, we employ top-tier physical, electronic, and procedural safeguards to protect your data."
           }
         ]
       },
-      "changes": {
-        "title": "Changes to the Policy",
-        "p1": "TEPTH authorities can make changes to this privacy policy anytime. We may send you an email advising of modifications, or we may post them on the website."
+      "updates": {
+        "title": "Policy Updates",
+        "p1": "<strong>The Exam Preparation & Testing House L.L.C</strong> reserves the right to modify this privacy policy at any time without prior notice. We encourage you to check this page periodically for updates. If significant changes are made, we may notify you via email or post an announcement on our website."
+      },
+      "compliance": {
+        "title": "Compliance",
+        "p1": "<strong>The Exam Preparation & Testing House L.L.C</strong> continually works to ensure that this policy aligns with all applicable national and international privacy laws."
       }
     }
   },
