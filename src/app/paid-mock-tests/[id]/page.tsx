@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 import {
   Activity,
   Clock,
@@ -271,6 +272,7 @@ export async function generateStaticParams() {
 
 export default async function PaidMockTestDynamicPage({ params }: PageProps) {
   const { id } = await params;
+  const t = await getTranslations("PaidMockTestsPage");
 
   let data = null;
   try {
@@ -338,7 +340,7 @@ export default async function PaidMockTestDynamicPage({ params }: PageProps) {
           <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
             <div className="max-w-xl">
               <h1 className="text-3xl font-black leading-[1.1] tracking-tight text-slate-900 lg:text-4xl xl:text-5xl mb-4">
-                {data.name} <span className="text-primary">Paid Mock Test</span>
+                {data.name} <span className="text-primary">{t("paidMockTest")}</span>
               </h1>
               <p className="text-base text-slate-600 leading-relaxed mb-4 text-justify">
                 {data.description}
@@ -361,7 +363,7 @@ export default async function PaidMockTestDynamicPage({ params }: PageProps) {
         <div className="container mx-auto px-4 lg:px-8 max-w-7xl">
           <div className="mb-10 text-center max-w-3xl mx-auto">
             <h2 className="text-2xl font-black text-slate-900 lg:text-3xl mb-3">
-              Benefits of Mock Tests for{" "}
+              {t("benefitsTitle")}{" "}
               <span className="text-primary">
                 {data.details?.sub_title || data.name}
               </span>
@@ -426,33 +428,6 @@ export default async function PaidMockTestDynamicPage({ params }: PageProps) {
           </div>
         </div>
       </section>
-
-      {/* Testimonial/Quote Section */}
-      {quote && (
-        <section className="bg-slate-50 py-16 relative overflow-hidden">
-          <div className="container mx-auto px-4 max-w-4xl text-center relative z-10">
-            <h3 className="text-secondary text-2xl font-bold italic mb-6 leading-snug">
-              &quot;{quote}&quot;
-            </h3>
-
-            <AcceptPayButton
-              data={data}
-              className={cn(
-                buttonVariants(),
-                "px-4 sm:px-8 py-3 text-sm font-bold shadow-xl shadow-primary/20 hover:-translate-y-1 transition-all duration-300 ",
-              )}
-            >
-              I Accept, Pay
-            </AcceptPayButton>
-
-            {tagline && (
-              <p className="text-slate-500 font-medium text-xs mt-3">
-                {tagline}
-              </p>
-            )}
-          </div>
-        </section>
-      )}
     </div>
   );
 }

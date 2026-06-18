@@ -1,6 +1,7 @@
 "use client";
 
 import { Suspense, useState, useMemo, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -90,6 +91,7 @@ function PaidMockTestRegistrationForm({
   initialMockTestId,
   className,
 }: MockTestBookingFormProps) {
+  const t = useTranslations("PaidMockTestsPage");
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
 
@@ -212,7 +214,7 @@ function PaidMockTestRegistrationForm({
     return (
       <div className="min-h-[400px] flex items-center justify-center bg-slate-50 animate-pulse">
         <div className="text-slate-500 font-medium">
-          Loading test details...
+          {t("loadingDetails")}
         </div>
       </div>
     );
@@ -230,18 +232,17 @@ function PaidMockTestRegistrationForm({
         </div>
         <div className="space-y-3">
           <h2 className="text-3xl font-headline font-black text-emerald-900 tracking-tight">
-            Booking Confirmed
+            {t("bookingConfirmed")}
           </h2>
           <p className="text-emerald-700/80 text-base leading-relaxed font-medium">
-            Your &quot;{data.name}&quot; Mock Test registration has been
-            successfully received. Check your email for testing credentials.
+            {t("bookingSuccessMsg")}
           </p>
         </div>
         <button
           onClick={() => setIsSuccess(false)}
           className="px-10 py-3 bg-emerald-600 text-white font-headline font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-emerald-700 transition-all shadow-xl shadow-emerald-600/20"
         >
-          Close
+          {t("close")}
         </button>
       </div>
     );
@@ -253,7 +254,7 @@ function PaidMockTestRegistrationForm({
       <section className="relative overflow-hidden bg-slate-50 base-px base-py">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-3xl text-center font-black leading-[1.1] tracking-tight text-slate-900 lg:text-4xl xl:text-5xl mb-4">
-            <span className="text-primary">Paid Mock Test Registration</span>
+            <span className="text-primary">{t("regTitle")}</span>
           </h1>
           <form
             onSubmit={handleSubmit(onSubmit)}
@@ -261,10 +262,10 @@ function PaidMockTestRegistrationForm({
           >
             <section className="grid md:grid-cols-2 gap-5">
               <div className="space-y-3">
-                <Stepper step={1}>Your Information</Stepper>
+                <Stepper step={1}>{t("yourInfo")}</Stepper>
                 <div className="grid grid-cols-2 gap-3">
                   <Field data-invalid={!!errors.firstName}>
-                    <FieldLabel required>First Name</FieldLabel>
+                    <FieldLabel required>{t("firstName")}</FieldLabel>
                     <FieldContent>
                       <Input
                         type="text"
@@ -276,7 +277,7 @@ function PaidMockTestRegistrationForm({
                     </FieldContent>
                   </Field>
                   <Field data-invalid={!!errors.lastName}>
-                    <FieldLabel required>Family Name</FieldLabel>
+                    <FieldLabel required>{t("familyName")}</FieldLabel>
                     <FieldContent>
                       <Input
                         type="text"
@@ -293,7 +294,7 @@ function PaidMockTestRegistrationForm({
                   Array.isArray(data.variant) &&
                   data.variant.length > 0 && (
                     <Field data-invalid={!!errors.varient}>
-                      <FieldLabel required>Exam Types</FieldLabel>
+                      <FieldLabel required>{t("examTypes")}</FieldLabel>
                       <FieldContent>
                         <Select
                           onValueChange={(val: string | null) => {
@@ -301,7 +302,7 @@ function PaidMockTestRegistrationForm({
                           }}
                         >
                           <SelectTrigger className="w-full">
-                            <SelectValue placeholder="Select Type" />
+                            <SelectValue placeholder={t("selectType")} />
                           </SelectTrigger>
                           <SelectContent>
                             {data.variant.map((variantName: string) => (
@@ -317,7 +318,7 @@ function PaidMockTestRegistrationForm({
                   )}
 
                 <Field data-invalid={!!errors.email}>
-                  <FieldLabel required>Email</FieldLabel>
+                  <FieldLabel required>{t("email")}</FieldLabel>
                   <FieldContent>
                     <Input
                       type="text"
@@ -331,7 +332,7 @@ function PaidMockTestRegistrationForm({
 
                 <div className="grid grid-cols-2 gap-3">
                   <Field data-invalid={!!errors.phone}>
-                    <FieldLabel required>Phone Number</FieldLabel>
+                    <FieldLabel required>{t("phoneNumber")}</FieldLabel>
                     <FieldContent>
                       <PhoneInput
                         name="phone"
@@ -344,11 +345,11 @@ function PaidMockTestRegistrationForm({
                     </FieldContent>
                   </Field>
                   <Field data-invalid={!!errors.country}>
-                    <FieldLabel required>Country</FieldLabel>
+                    <FieldLabel required>{t("country")}</FieldLabel>
                     <FieldContent>
                       <CountryDropdown
                         name="country"
-                        placeholder="Search country..."
+                        placeholder={t("searchCountry")}
                         value={formData.country}
                         aria-invalid={!!errors.country}
                         onChange={(country) => setValue("country", country.name, { shouldValidate: true })}
@@ -359,7 +360,7 @@ function PaidMockTestRegistrationForm({
                 </div>
 
                 <Field data-invalid={!!errors.address}>
-                  <FieldLabel required>Address</FieldLabel>
+                  <FieldLabel required>{t("address")}</FieldLabel>
                   <FieldContent>
                     <Input
                       type="text"
@@ -372,7 +373,7 @@ function PaidMockTestRegistrationForm({
                 </Field>
 
                 <Field data-invalid={!!errors.city}>
-                  <FieldLabel required>Emirate / City</FieldLabel>
+                  <FieldLabel required>{t("emirateCity")}</FieldLabel>
                   <FieldContent>
                     <Input
                       type="text"
@@ -389,12 +390,11 @@ function PaidMockTestRegistrationForm({
                 {data && (
                   <div className="bg-slate-50 border rounded-2xl p-5 space-y-4 shadow-sm">
                     <h3 className="font-headline font-black text-xs text-slate-800 border-b pb-2 flex items-center gap-2">
-                      <Calendar className="w-4.5 h-4.5 text-primary" /> Mock
-                      Test Details
+                      <Calendar className="w-4.5 h-4.5 text-primary" /> {t("detailsTitle")}
                     </h3>
                     <div className="space-y-3 text-sm">
                       <div>
-                        <p className="text-xs text-slate-400">Mock Test</p>
+                        <p className="text-xs text-slate-400">{t("mockTest")}</p>
                         <p className="font-bold text-slate-900 text-base">
                           {data.name}
                         </p>
@@ -402,7 +402,7 @@ function PaidMockTestRegistrationForm({
 
                       {data.type && (
                         <div>
-                          <p className="text-xs text-slate-400">Type</p>
+                          <p className="text-xs text-slate-400">{t("type")}</p>
                           <p className="font-semibold text-slate-700 capitalize">
                             {data.type.replace("_", " ")}
                           </p>
@@ -412,7 +412,7 @@ function PaidMockTestRegistrationForm({
                       {/* Show selected exam type / variant from URL */}
                       {variantParam && (
                         <div>
-                          <p className="text-xs text-slate-400">Exam Type</p>
+                          <p className="text-xs text-slate-400">{t("examType")}</p>
                           <p className="font-semibold text-primary">
                             {variantParam}
                           </p>
@@ -420,16 +420,16 @@ function PaidMockTestRegistrationForm({
                       )}
 
                       <div>
-                        <p className="text-xs text-slate-400">Location</p>
+                        <p className="text-xs text-slate-400">{t("location")}</p>
                         <p className="font-semibold text-slate-700 capitalize">
-                          {locationParam === "center" ? "Test Center" : "Home / Online"}
+                          {locationParam === "center" ? t("testCenter") : t("homeOnline")}
                         </p>
                       </div>
 
                       <div className="grid grid-cols-2 gap-3 pt-2">
                         {data.duration && (
                           <div className="bg-white border rounded-xl p-3 text-center">
-                            <p className="text-xs text-slate-400">Duration</p>
+                            <p className="text-xs text-slate-400">{t("duration")}</p>
                             <p className="font-extrabold text-slate-900 text-sm mt-0.5">
                               {data.duration}
                             </p>
@@ -438,7 +438,7 @@ function PaidMockTestRegistrationForm({
                         {data.subTitle && (
                           <div className="bg-white border rounded-xl p-3 text-center">
                             <p className="text-xs text-slate-400">
-                              Exam Category
+                              {t("examCategory")}
                             </p>
                             <p className="font-extrabold text-primary text-sm mt-0.5">
                               {data.subTitle}
@@ -451,14 +451,14 @@ function PaidMockTestRegistrationForm({
                 )}
 
                 <Stepper step={2}>
-                  Payment{" "}
+                  {t("payment")}{" "}
                   <span className="bg-primary/10 px-3 py-1 rounded-full text-sm font-semibold text-primary">
                     <PriceDisplay amount={PRICE} />
                   </span>
                 </Stepper>
 
                 <div className="space-y-3">
-                  <FieldLabel required>Payment Method</FieldLabel>
+                  <FieldLabel required>{t("paymentMethod")}</FieldLabel>
                   <RadioGroup
                     value={selectedPaymentMethod}
                     onValueChange={(val) =>
@@ -486,7 +486,7 @@ function PaidMockTestRegistrationForm({
                           width={50}
                           height={50}
                         /> */}
-                        <span className="font-semibold text-sm">Credit / Debit Card</span>
+                        <span className="font-semibold text-sm">{t("creditDebitCard")}</span>
                         <Image
                           src="/images/cards.png"
                           alt="Stripe"
@@ -522,12 +522,11 @@ function PaidMockTestRegistrationForm({
                   className="w-full mt-6 py-3"
                   disabled={mutation.isPending}
                 >
-                  {mutation.isPending ? "Processing..." : "I Accept, Pay"}
+                  {mutation.isPending ? t("processing") : t("acceptPay")}
                 </Button>
                 {mutation.isError && (
                   <p className="text-red-500 text-sm mt-2">
-                    There was an error processing your booking. Please try
-                    again.
+                    {t("errorProcessing")}
                   </p>
                 )}
               </div>

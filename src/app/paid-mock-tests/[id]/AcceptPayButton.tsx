@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { Calendar, AlertCircle, X, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -36,6 +37,7 @@ export function AcceptPayButton({
   children,
   selectedType,
 }: AcceptPayButtonProps) {
+  const t = useTranslations("PaidMockTestsPage");
   const [isOpen, setIsOpen] = useState(false);
   const [agreed, setAgreed] = useState(false);
   const router = useRouter();
@@ -59,14 +61,14 @@ export function AcceptPayButton({
   return (
     <>
       <button onClick={() => setIsOpen(true)} className={className}>
-        {children || "I Accept, Pay"}
+        {children || t("acceptPay")}
       </button>
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogContent className="max-w-[95vw] md:max-w-3xl lg:max-w-4xl p-6 bg-white rounded-2xl shadow-xl overflow-y-auto max-h-[90vh]">
           <DialogHeader className="mb-6">
             <DialogTitle className="text-xl font-extrabold text-slate-900 tracking-tight text-center md:text-left">
-              Choose your Mock Test Option
+              {t("chooseOption")}
             </DialogTitle>
           </DialogHeader>
 
@@ -88,17 +90,17 @@ export function AcceptPayButton({
                 {/* Online badge — top right inside the image */}
                 <div className="absolute top-3 right-3">
                   <span className="bg-white/20 backdrop-blur-md text-white text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider border border-white/20 shadow-md">
-                    Online
+                    {t("online")}
                   </span>
                 </div>
 
                 {/* Title overlaid at the bottom of the image */}
                 <div className="absolute bottom-0 left-0 right-0 px-5 pb-4">
                   <p className="text-[10px] font-bold tracking-widest text-white/60 uppercase mb-0.5">
-                    Self-managed
+                    {t("selfManaged")}
                   </p>
                   <h3 className="text-xl font-black text-white flex items-center gap-1.5 leading-tight drop-shadow-md">
-                    Home-based
+                    {t("homeBased")}
                     <AlertCircle className="w-4 h-4 text-red-400 fill-red-950/20 animate-pulse" />
                   </h3>
                 </div>
@@ -111,23 +113,23 @@ export function AcceptPayButton({
                   <ul className="space-y-3 mb-5 text-sm text-slate-600">
                     <li className="flex items-start gap-2.5">
                       <X className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
-                      <span>Self-managed distraction-prone environment</span>
+                      <span>{t("homeFeatures.distractionProne")}</span>
                     </li>
                     <li className="flex items-start gap-2.5">
                       <X className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
-                      <span>No on-site technical support or internet check</span>
+                      <span>{t("homeFeatures.noTechSupport")}</span>
                     </li>
                     <li className="flex items-start gap-2.5">
                       <X className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
-                      <span>Standard domestic testing experience</span>
+                      <span>{t("homeFeatures.domesticExperience")}</span>
                     </li>
                     <li className="flex items-start gap-2.5">
                       <X className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
-                      <span>No physical proctor presence or venue simulation</span>
+                      <span>{t("homeFeatures.noProctor")}</span>
                     </li>
                     <li className="flex items-start gap-2.5">
                       <Check className="w-4 h-4 text-slate-400 shrink-0 mt-0.5" />
-                      <span>Timed practice</span>
+                      <span>{t("homeFeatures.timedPractice")}</span>
                     </li>
                   </ul>
                 </div>
@@ -135,7 +137,7 @@ export function AcceptPayButton({
                 <div className="mt-auto pt-5 border-t border-slate-100 space-y-4">
                   {/* Price section */}
                   <div className="bg-slate-50/70 border border-slate-100 rounded-xl p-3 flex items-center justify-between">
-                    <span className="text-xs font-semibold">Mock Test Price</span>
+                    <span className="text-xs font-semibold">{t("mockTestPrice")}</span>
                     <span className="text-base font-extrabold text-primary">
                       <PriceDisplay amount={homePrice} />
                     </span>
@@ -150,7 +152,7 @@ export function AcceptPayButton({
                       className="mt-0.5"
                     />
                     <label htmlFor="agree-home-test" className="text-xs text-slate-500 cursor-pointer select-none leading-tight">
-                      I agree that my Home-based Mock Test must be taken on my own device and internet.
+                      {t("homeAgreeLabel")}
                     </label>
                   </div>
 
@@ -160,7 +162,7 @@ export function AcceptPayButton({
                     disabled={!agreed}
                     className="w-full py-5 font-bold"
                   >
-                    Continue with Home-based Mock Test
+                    {t("continueHomeBtn")}
                   </Button>
                 </div>
               </div>
@@ -184,17 +186,17 @@ export function AcceptPayButton({
                 {/* Upgrade badge — top right inside the image */}
                 <div className="absolute top-3 right-3">
                   <span className="bg-primary text-white text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider shadow-md">
-                    Upgrade
+                    {t("upgrade")}
                   </span>
                 </div>
 
                 {/* Title overlaid at the bottom of the image */}
                 <div className="absolute bottom-0 left-0 right-0 px-5 pb-4">
                   <p className="text-[10px] font-bold tracking-widest text-white/60 uppercase mb-0.5">
-                    In-Center
+                    {t("inCenter")}
                   </p>
                   <h3 className="text-xl font-black text-white leading-tight drop-shadow-md">
-                    Center-based
+                    {t("centerBased")}
                   </h3>
                 </div>
               </div>
@@ -206,27 +208,23 @@ export function AcceptPayButton({
                   <ul className="space-y-3 mb-5 text-sm">
                     <li className="flex items-start gap-2.5">
                       <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                      <span className="font-medium text-slate-700">Distraction-free environment</span>
+                      <span className="font-medium text-slate-700">{t("centerFeatures.distractionFree")}</span>
                     </li>
                     <li className="flex items-start gap-2.5">
                       <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                      <span className="font-medium text-slate-700">Reliable internet &amp; tech support on-site</span>
+                      <span className="font-medium text-slate-700">{t("centerFeatures.techSupport")}</span>
                     </li>
                     <li className="flex items-start gap-2.5">
                       <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                      <span className="font-medium text-slate-700">Experiencing an authentic, exam-like environment</span>
+                      <span className="font-medium text-slate-700">{t("centerFeatures.examEnvironment")}</span>
                     </li>
                     <li className="flex items-start gap-2.5">
                       <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                      <span className="font-medium text-slate-700">Timed practice under exam conditions</span>
+                      <span className="font-medium text-slate-700">{t("centerFeatures.timedConditions")}</span>
                     </li>
                     <li className="flex items-start gap-2.5">
                       <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                      <span className="font-medium text-slate-700">Replicates physical venue stress &amp; proctor presence</span>
-                    </li>
-                    <li className="flex items-start gap-2.5">
-                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                      <span className="font-medium text-slate-700">Timed practice under exam conditions</span>
+                      <span className="font-medium text-slate-700">{t("centerFeatures.proctorPresence")}</span>
                     </li>
                   </ul>
 
@@ -234,9 +232,9 @@ export function AcceptPayButton({
                   <div className="bg-slate-50 border border-slate-100 rounded-xl p-3.5 flex gap-2.5 items-start">
                     <Calendar className="w-4 h-4 text-primary shrink-0 mt-0.5" />
                     <div className="space-y-0.5">
-                      <h4 className="text-xs font-bold text-slate-700">Schedule Availability</h4>
+                      <h4 className="text-xs font-bold text-slate-700">{t("scheduleAvailability")}</h4>
                       <p className="text-[11px] leading-relaxed text-slate-500">
-                        Please note that date &amp; time need to be confirmed by our staff and it must be taken within our working hours.
+                        {t("scheduleNote")}
                       </p>
                     </div>
                   </div>
@@ -246,12 +244,12 @@ export function AcceptPayButton({
                 <div className="mt-5 pt-5 border-t border-slate-100 space-y-4">
                   {/* Price section */}
                   <div className="bg-emerald-50/50 border border-emerald-100/50 rounded-xl p-3 flex flex-col items-center justify-center text-center">
-                    <span className="text-[10px] font-bold text-emerald-700 uppercase tracking-wide">Upgrade cost</span>
+                    <span className="text-[10px] font-bold text-emerald-700 uppercase tracking-wide">{t("upgradeCost")}</span>
                     <div className="text-xl font-black text-[#1e824c] mt-0.5 flex items-center gap-1">
                       <span>+</span>
                       <PriceDisplay amount={diffPrice} className="text-[#1e824c]" />
                     </div>
-                    <span className="text-[10px] text-slate-400 mt-0.5">additional per registration</span>
+                    <span className="text-[10px] text-slate-400 mt-0.5">{t("additionalPerReg")}</span>
                   </div>
 
                   {/* Action Button */}
@@ -259,7 +257,7 @@ export function AcceptPayButton({
                     onClick={() => handleContinue("center")}
                     className="w-full py-5 font-bold"
                   >
-                    Upgrade to Center-based Mock Test
+                    {t("upgradeBtn")}
                   </Button>
                 </div>
               </div>

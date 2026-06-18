@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useTranslations } from "next-intl";
 import { CheckCircle2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { AcceptPayButton } from "./AcceptPayButton";
@@ -47,6 +48,7 @@ interface MockTestTypeSelectorProps {
 }
 
 export function MockTestTypeSelector({ data }: MockTestTypeSelectorProps) {
+  const t = useTranslations("PaidMockTestsPage");
   const examKey = resolveExamKey(data.slug);
   const types = examKey ? EXAM_TYPES[examKey] : null;
 
@@ -60,7 +62,7 @@ export function MockTestTypeSelector({ data }: MockTestTypeSelectorProps) {
   if (!types) {
     return (
       <AcceptPayButton data={data} className={cn(buttonVariants())}>
-        Register
+        {t("register")}
       </AcceptPayButton>
     );
   }
@@ -70,14 +72,14 @@ export function MockTestTypeSelector({ data }: MockTestTypeSelectorProps) {
       {/* ── Type Selector ── */}
       <div className="space-y-1.5">
         <label className="text-xs font-bold uppercase tracking-wider text-slate-500">
-          Select Mock Test Type
+          {t("selectTypeLabel")}
         </label>
         <Select
           value={selectedType || undefined}
           onValueChange={(val) => setSelectedType(val as string)}
         >
           <SelectTrigger className="w-full">
-            <SelectValue placeholder="— Choose exam type —" />
+            <SelectValue placeholder={t("chooseExamTypePlaceholder")} />
           </SelectTrigger>
           <SelectContent>
             {types.map((t) => (
@@ -95,13 +97,13 @@ export function MockTestTypeSelector({ data }: MockTestTypeSelectorProps) {
           {/* Price card */}
           <div className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 space-y-2">
             <p className="text-[10px] font-bold uppercase tracking-wider">
-              Mock Test Price
+              {t("mockTestPrice")}
             </p>
 
             {centerPrice ? (
               <div className="flex items-center gap-3 flex-wrap">
                 <div className="flex items-center gap-1">
-                  <span className="text-xs font-medium">Home-based:</span>
+                  <span className="text-xs font-medium">{t("homeBasedLabel")}</span>
                   <span className="text-base font-extrabold text-primary inline-flex items-center gap-0.5">
                     <AED className="h-[0.8em] w-auto fill-current" />
                     {homePrice}
@@ -109,7 +111,7 @@ export function MockTestTypeSelector({ data }: MockTestTypeSelectorProps) {
                 </div>
                 <span className="text-slate-300 text-sm">/</span>
                 <div className="flex items-center gap-1">
-                  <span className="text-xs font-medium">Center-based:</span>
+                  <span className="text-xs font-medium">{t("centerBasedLabel")}</span>
                   <span className="text-base font-extrabold text-primary inline-flex items-center gap-0.5">
                     <AED className="h-[0.8em] w-auto fill-current" />
                     {centerPrice}
@@ -125,7 +127,7 @@ export function MockTestTypeSelector({ data }: MockTestTypeSelectorProps) {
 
             <div className="flex items-center gap-1.5 text-xs text-emerald-600 font-medium">
               <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
-              {selectedType} selected
+              {selectedType} {t("selected")}
             </div>
           </div>
 
@@ -135,7 +137,7 @@ export function MockTestTypeSelector({ data }: MockTestTypeSelectorProps) {
             className={cn(buttonVariants(), "w-full")}
             selectedType={selectedType}
           >
-            Register
+            {t("register")}
           </AcceptPayButton>
         </div>
       )}
