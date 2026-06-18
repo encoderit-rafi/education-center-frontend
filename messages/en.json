@@ -642,45 +642,79 @@
     }
   },
   "DisabilityPolicyPage": {
-    "title": "Disability",
-    "titleAccent": "Policy",
-    "commitment": "Our Commitment",
-    "quote": "\"TEPTH aims to create an environment that enables disabled faculty staff and students to realize their individual potential.\"",
-    "scopeTitle": "Scope & Coverage",
-    "scopeP1": "This disability policy states TEPTH’s commitments and responsibilities under UAE legislation and its goal to ensure an inclusively supportive environment for people with a disability that are participating in work and study at The Exam Preparation and Testing House.",
-    "scopeP2": "This policy applies to all teaching staff and students of TEPTH. Some faculty staff of TEPTH has specific responsibilities in reference to the implementation of this disability policy.",
-    "supportServicesTitle": "Support Services & Resources",
-    "services": [
-      "Guidance officers",
-      "Support teachers (literacy and numeracy)",
-      "Speech-language pathologists",
-      "Behavior support trainers",
-      "Teacher aides",
-      "Assistive technology"
-    ],
-    "supportFooter": "Other interventions include alternative format materials, differentiated teaching practices, special provisions for assessment, and customized study programs.",
-    "criteriaTitle": "Disability Criteria for Enrollment",
-    "criteriaDesc": "We do not need a formal diagnosis. Evidence-based information is sufficient for us to respond to learning requirements.",
-    "criteria": [
-      "Total or partial loss of body parts",
-      "Malfunction or disfigurement",
-      "Disturbed behavior affecting judgment",
-      "Physical weakness prone to illness",
-      "Disorder affecting learning capacity"
-    ],
-    "antiDiscriminationTitle": "Anti-Discrimination",
-    "antiDiscriminationDesc": "TEPTH will take severe action against any incident of direct/indirect harassment or bullying based on disability. Strictly prohibited behavior will not be tolerated.",
-    "actionPlanTitle": "Strategic Action Plan",
-    "actionPlanDesc": "The most integral aspect of our policy for continual performance improvement.",
-    "actionPlans": [
-      "Ensure academic integrity meets international standards.",
-      "Modify activities for satisfactory access.",
-      "Support career and academic goal pursuit.",
-      "Maintain reliability of merit principles.",
-      "Negotiate reasonable adjustment working plans.",
-      "Ensure opportunities for consultation.",
-      "Respond immediately to harassment allegations."
-    ],
+    "title": "The Exam Preparation & Testing House L.L.C",
+    "titleAccent": "Disability Policy",
+    "description": "Cultivating an inclusive, supportive, and accommodating environment in alignment with UAE legislation.",
+    "sections": {
+      "intro": {
+        "title": "Introduction and Statement",
+        "p1": "TEPTH - The Exam Preparation and Testing House L.L.C - is fully dedicated to ensuring equal opportunities for all faculty members and students with disabilities. In alignment with UAE legislation, our goal is to cultivate an inclusive, supportive, and accommodating environment. We strive to implement leading practices that allow individuals to fully participate in academic and professional life and reach their highest potential."
+      },
+      "scope": {
+        "title": "Scope and Coverage",
+        "p1": "This policy applies to all candidates and teaching staff at TEPTH. Certain faculty members are assigned specific responsibilities to ensure these disability guidelines are effectively implemented."
+      },
+      "support": {
+        "title": "Support Services and Resources",
+        "p1": "We are committed to providing specialized facilities, resources, and support services to help faculty and students manage physical impairments or health-related learning challenges. This includes access to assistive learning programs, e-courses, and physical accommodations designed to minimize academic barriers."
+      },
+      "interventions": {
+        "title": "Targeted Interventions",
+        "p1": "To accommodate diverse learning challenges, TEPTH offers a continuum of support services for registered candidates. These resources include:",
+        "items": [
+          "Assistive technologies",
+          "Alternative format learning materials",
+          "Differentiated teaching methods",
+          "Specialized assessment accommodations",
+          "Customized study programs"
+        ]
+      },
+      "eligibility": {
+        "title": "Eligibility and Enrollment Criteria",
+        "p1": "A formal medical diagnosis may be required for a candidate to receive support; evidence-based information regarding their learning needs is sufficient. TEPTH decision-makers will review individual cases to grant disability status based on the following criteria:",
+        "items": [
+          "Total or partial loss of a body part.",
+          "Disfigurement or malfunction of a body part.",
+          "Illnesses or disorders that disrupt behavior, judgment, emotions, thought processes, or reality perception.",
+          "Physical weaknesses that increase vulnerability to disease or illness.",
+          "Any bodily disorder or malfunction that causes an individual to learn differently than their peers."
+        ]
+      },
+      "actionPlan": {
+        "title": "Strategic Action Plan",
+        "p1": "The TEPTH action plan committee outlines key priorities to continuously improve the experience for staff and students with disabilities. TEPTH officially commits to the following:",
+        "items": [
+          {
+            "strong": "Maintaining Standards: ",
+            "text": "Upholding the academic integrity of our programs to international standards."
+          },
+          {
+            "strong": "Ensuring Accessibility: ",
+            "text": "Making reasonable modifications so individuals with disabilities have satisfactory access to academic and occupational activities."
+          },
+          {
+            "strong": "Empowering Individuals: ",
+            "text": "Providing the support necessary for registered candidates and faculty to confidently pursue their goals."
+          },
+          {
+            "strong": "Promoting Equality: ",
+            "text": "Championing access to education and employment while upholding merit-based principles."
+          },
+          {
+            "strong": "Customizing Plans: ",
+            "text": "Negotiating practical and reasonable adjustment plans for studying or working when needed."
+          },
+          {
+            "strong": "Fostering Inclusion: ",
+            "text": "Ensuring individuals with disabilities are consulted and included in decision-making processes that affect their roles and needs."
+          },
+          {
+            "strong": "Enforcing Zero Tolerance: ",
+            "text": "Taking severe disciplinary action against any direct or indirect discrimination, bullying, or harassment based on a person's disability."
+          }
+        ]
+      }
+    },
     "contactPrompt": "Need a consultation or more information?",
     "contactBtn": "Contact Administration"
   },
@@ -890,43 +924,27 @@
     }
   },
   "FacilitiesPage": {
-    "heroTitle": "WORLD-CLASS",
-    "heroTitleAccent": "FACILITIES",
-    "heroDescription": "A purpose-built ecosystem designed to empower learners with the environment and technology they need to excel.",
-    "beliefText": "TEPTH believes in offering quality education. We provide a comfortable environment and modern equipment so students can perform in a",
-    "beliefAccent": "stress-free environment.",
-    "facilities": [
-      {
-        "title": "Quiet Classrooms",
-        "description": "Purpose-built, sound-insulated learning spaces designed to eliminate distractions and foster deep focus."
+    "title": "Educational Environment",
+    "titleAccent": "& Facilities",
+    "description": "Our high-quality settings and modern testing infrastructure.",
+    "sections": {
+      "intro": {
+        "title": "Educational Environment & Facilities",
+        "p1": "<strong>The Exam Preparation & Testing House L.L.C</strong> is dedicated to delivering high-quality education by providing a comfortable and modern setting for all learners."
       },
-      {
-        "title": "Modern Equipment",
-        "description": "High-specification hardware and industry-standard software to facilitate seamless test performance and practice."
-      },
-      {
-        "title": "Comfortable Environment",
-        "description": "Ergonomically furnished spaces that prioritize learner comfort, reducing physical strain during long study sessions."
-      },
-      {
-        "title": "High-Speed Infrastructure",
-        "description": "Enterprise-grade connectivity ensuring that online registrations and digital practice tests run without interruption."
-      },
-      {
-        "title": "Stress-Free Atmosphere",
-        "description": "A welcoming, professional environment designed to keep anxiety low during critical test preparation periods."
-      },
-      {
-        "title": "Testing Lab",
-        "description": "Dedicated testing stations configured to replicate official exam conditions for maximum preparation efficacy."
+      "details": {
+        "items": [
+          {
+            "strong": "Optimal Learning Spaces: ",
+            "text": "candidates can focus on their studies in quiet, thoughtfully furnished classrooms that are specifically designed to maximize focus and facilitate the learning process."
+          },
+          {
+            "strong": "Advanced Testing Equipment: ",
+            "text": "To ensure a stress-free experience during test preparation and performance, we equip our candidates with state-of-the-art technology and resources."
+          }
+        ]
       }
-    ],
-    "calloutTitle": "Designed for",
-    "calloutAccent": "Focus & Performance.",
-    "experienceTitle": "Furnished to",
-    "experienceTitleAccent": "Facilitate Learning.",
-    "experienceP1": "Our classrooms are not just rooms; they are quiet hubs of intellectual activity. Every chair, table, and lighting fixture has been selected to minimize fatigue and maximize cognitive output.",
-    "experienceP2": "For students preparing for high-stakes exams, we provide the exact technology stack they will encounter on test day, ensuring that physical equipment never becomes a barrier to performance."
+    }
   },
   "FreeConsultationPage": {
     "heroBadge": "FREE CONSULTATION",
