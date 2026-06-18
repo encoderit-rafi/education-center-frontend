@@ -186,7 +186,7 @@ export default function Footer() {
                   .filter((nav) => nav.name.toLowerCase() !== "home")
                   .map((nav) => (
                     <div key={nav.name}>
-                      {nav.type === "dropdown" ? (
+                      {nav.type === "dropdown" && nav.items.length > 0 ? (
                         <DropdownMenu>
                           <DropdownMenuTrigger className="flex items-center gap-2 text-sm font-medium text-gray-100 hover:text-white transition-all hover:translate-x-1 group outline-none text-left w-full">
                             <span className="text-gray-500 scale-75 group-hover:text-red-500 transition-colors">

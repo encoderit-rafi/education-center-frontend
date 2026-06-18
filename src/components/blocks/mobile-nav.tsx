@@ -63,7 +63,7 @@ export default function MobileNav() {
           <Accordion type="single" className="border-none rounded-none w-full">
             {allNavs.map((item) => (
               <React.Fragment key={item.name}>
-                {item.type === "single" ? (
+                {item.type === "single" || (item.type === "dropdown" && !isLoading && item.items.length === 0) ? (
                   <Link
                     href={item.href}
                     onClick={() => setOpen(false)}
@@ -76,7 +76,7 @@ export default function MobileNav() {
                     value={item.name}
                     className="border-b border-slate-100/50"
                   >
-                    <AccordionTrigger className="hover:no-underline px-6 py-4 text-sm font-semibold text-secondary border-none [&[data-state=open]]:bg-slate-50">
+                    <AccordionTrigger className="hover:no-underline px-6 py-4 text-sm font-semibold text-secondary border-none [[data-state=open]]:bg-slate-50">
                       <span className="capitalize">{translateName(item.name)}</span>
                     </AccordionTrigger>
                     <AccordionContent className="p-0 bg-slate-50/50">

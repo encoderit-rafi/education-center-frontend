@@ -51,16 +51,19 @@ export default function AppNavigation({ navigations, isLoading }: AppNavigationP
             item.items.some((child) => isMatch(child.href));
           const isActive = isParentActive || isChildActive;
 
+          // Treat dropdown with no children (and not loading) as a direct link
+          const hasChildren = item.type === "dropdown" && (isLoading || item.items.length > 0);
+
           return (
             <NavigationMenuItem key={item.name}>
-              {item.type === "single" && (
+              {(item.type === "single" || (item.type === "dropdown" && !hasChildren)) && (
                 <NavigationMenuLink active={isParentActive} asChild>
                   <Link href={item.href} className="capitalize">
                     {translateName(item.name)}
                   </Link>
                 </NavigationMenuLink>
               )}
-              {item.type === "dropdown" && (
+              {item.type === "dropdown" && hasChildren && (
                 <>
                   <NavigationMenuTrigger
                     className={cn(
