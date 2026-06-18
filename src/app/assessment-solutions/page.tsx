@@ -49,7 +49,7 @@ export default function AssessmentSolutionsPage() {
   return (
     <main className="min-h-screen bg-slate-50/50 pb-20 overflow-x-hidden">
       {/* Hero Header Section */}
-      <section className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-950 text-white py-20 lg:py-28 px-6 overflow-hidden">
+      <section className="relative bg-linear-to-br from-slate-900 via-slate-800 to-slate-950 text-white py-20 lg:py-28 px-6 overflow-hidden">
         {/* Glow effect */}
         <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-red-800/10 rounded-full blur-[120px] pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-blue-800/10 rounded-full blur-[100px] pointer-events-none" />
@@ -64,7 +64,7 @@ export default function AssessmentSolutionsPage() {
 
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.15] mb-6 font-headline max-w-4xl">
             {t("title")} <br />
-            <span className="bg-gradient-to-r from-red-400 via-orange-400 to-amber-300 bg-clip-text text-transparent italic font-semibold">
+            <span className="bg-linear-to-r from-red-400 via-orange-400 to-amber-300 bg-clip-text text-transparent italic font-semibold">
               {t("subtitle")}
             </span>
           </h1>
@@ -73,7 +73,7 @@ export default function AssessmentSolutionsPage() {
             {t("intro")}
           </p>
 
-          <div className="h-1 w-24 bg-gradient-to-r from-red-600 to-red-800 rounded-full" />
+          <div className="h-1 w-24 bg-linear-to-r from-red-600 to-red-800 rounded-full" />
         </div>
       </section>
 
@@ -368,7 +368,7 @@ export default function AssessmentSolutionsPage() {
             </div>
 
             <div className="lg:col-span-6 lg:order-1 flex justify-center items-center relative group">
-              <div className="absolute inset-0 bg-gradient-to-tr from-amber-800/10 to-transparent rounded-2xl blur-lg group-hover:scale-105 transition-transform duration-500 pointer-events-none" />
+              <div className="absolute inset-0 bg-linear-to-tr from-amber-800/10 to-transparent rounded-2xl blur-lg group-hover:scale-105 transition-transform duration-500 pointer-events-none" />
               <Image
                 className="rounded-2xl w-auto h-auto max-h-[420px] max-w-full bg-white border border-slate-200/60 shadow-xl p-2 transform group-hover:scale-[1.01] transition-transform duration-500"
                 src="/images/smartest-invigilate-features.jpg"
@@ -417,7 +417,7 @@ export default function AssessmentSolutionsPage() {
             </div>
 
             <div className="lg:col-span-6 lg:order-2 flex justify-center items-center relative group">
-              <div className="absolute inset-0 bg-gradient-to-tr from-amber-800/10 to-transparent rounded-2xl blur-lg group-hover:scale-105 transition-transform duration-500 pointer-events-none" />
+              <div className="absolute inset-0 bg-linear-to-tr from-amber-800/10 to-transparent rounded-2xl blur-lg group-hover:scale-105 transition-transform duration-500 pointer-events-none" />
               <Image
                 className="rounded-2xl w-auto h-auto max-h-[420px] max-w-full bg-white border border-slate-200/60 shadow-xl p-2 transform group-hover:scale-[1.01] transition-transform duration-500"
                 src="/images/smartest-examiner.jpg"
@@ -456,7 +456,7 @@ export default function AssessmentSolutionsPage() {
             </div>
 
             <div className="lg:col-span-6 lg:order-1 flex justify-center items-center relative group">
-              <div className="absolute inset-0 bg-gradient-to-tr from-amber-800/10 to-transparent rounded-2xl blur-lg group-hover:scale-105 transition-transform duration-500 pointer-events-none" />
+              <div className="absolute inset-0 bg-linear-to-tr from-amber-800/10 to-transparent rounded-2xl blur-lg group-hover:scale-105 transition-transform duration-500 pointer-events-none" />
               <Image
                 className="rounded-2xl w-auto h-auto max-h-[420px] max-w-full bg-white border border-slate-200/60 shadow-xl p-2 transform group-hover:scale-[1.01] transition-transform duration-500"
                 src="/images/study.jpg"
@@ -515,7 +515,7 @@ export default function AssessmentSolutionsPage() {
             </div>
 
             <div className="lg:col-span-6 lg:order-2 flex justify-center items-center relative group">
-              <div className="absolute inset-0 bg-gradient-to-tr from-amber-800/10 to-transparent rounded-2xl blur-lg group-hover:scale-105 transition-transform duration-500 pointer-events-none" />
+              <div className="absolute inset-0 bg-linear-to-tr from-amber-800/10 to-transparent rounded-2xl blur-lg group-hover:scale-105 transition-transform duration-500 pointer-events-none" />
               <Image
                 className="rounded-2xl w-auto h-auto max-h-[480px] max-w-full bg-white border border-slate-200/60 shadow-xl p-2 transform group-hover:scale-[1.01] transition-transform duration-500"
                 src="/images/smartest-examiner-providers.jpg"
@@ -563,7 +563,7 @@ export default function AssessmentSolutionsPage() {
             </div>
 
             <div className="lg:col-span-6 lg:order-1 flex justify-center items-center relative group">
-              <div className="absolute inset-0 bg-gradient-to-tr from-amber-800/10 to-transparent rounded-2xl blur-lg group-hover:scale-105 transition-transform duration-500 pointer-events-none" />
+              <div className="absolute inset-0 bg-linear-to-tr from-amber-800/10 to-transparent rounded-2xl blur-lg group-hover:scale-105 transition-transform duration-500 pointer-events-none" />
               <Image
                 className="rounded-2xl w-auto h-auto max-h-[480px] max-w-full bg-white border border-slate-200/60 shadow-xl p-2 transform group-hover:scale-[1.01] transition-transform duration-500"
                 src="/images/smartest-examiner-performance.jpg"
@@ -604,7 +604,7 @@ export default function AssessmentSolutionsPage() {
             </div>
 
             <div className="lg:col-span-6 flex justify-center items-center relative group">
-              <div className="absolute inset-0 bg-gradient-to-tr from-blue-800/10 to-transparent rounded-2xl blur-lg group-hover:scale-105 transition-transform duration-500 pointer-events-none" />
+              <div className="absolute inset-0 bg-linear-to-tr from-blue-800/10 to-transparent rounded-2xl blur-lg group-hover:scale-105 transition-transform duration-500 pointer-events-none" />
               <Image
                 className="rounded-2xl w-auto h-auto max-h-[420px] max-w-full bg-white border border-slate-200/60 shadow-xl p-2 transform group-hover:scale-[1.01] transition-transform duration-500"
                 src="/images/smartest-nexus.jpg"
@@ -659,7 +659,7 @@ export default function AssessmentSolutionsPage() {
       </section>
 
       {/* Why SmarTest Section */}
-      <section className="py-24 px-6 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 relative overflow-hidden">
+      <section className="py-24 px-6 bg-linear-to-br from-slate-950 via-slate-900 to-slate-950 relative overflow-hidden">
         {/* Decorative glows */}
         <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-red-800/10 rounded-full blur-[140px] pointer-events-none" />
         <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-blue-800/10 rounded-full blur-[120px] pointer-events-none" />
@@ -689,7 +689,7 @@ export default function AssessmentSolutionsPage() {
                 key={i}
                 className="relative group bg-white/5 border border-white/10 rounded-2xl p-6 text-center backdrop-blur-sm hover:bg-white/10 hover:border-white/20 transition-all duration-300 overflow-hidden"
               >
-                <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                <div className="absolute inset-0 bg-linear-to-b from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                 <p className="text-4xl font-black text-white tracking-tight font-headline mb-1">
                   {stat.value}
                 </p>
@@ -724,7 +724,7 @@ export default function AssessmentSolutionsPage() {
               return (
                 <div
                   key={i}
-                  className={`group bg-gradient-to-br ${pillarColors[i]} border rounded-2xl p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/20`}
+                  className={`group bg-linear-to-br ${pillarColors[i]} border rounded-2xl p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/20`}
                 >
                   <div className={`w-12 h-12 rounded-xl ${iconBgs[i]} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300`}>
                     {pillarIcons[i]}
@@ -742,11 +742,11 @@ export default function AssessmentSolutionsPage() {
 
           {/* Divider line */}
           <div className="mt-16 flex items-center gap-6">
-            <div className="flex-1 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+            <div className="flex-1 h-px bg-linear-to-r from-transparent via-white/10 to-transparent" />
             <span className="text-xs font-semibold text-slate-500 uppercase tracking-widest whitespace-nowrap">
               Trusted · Secure · Innovative
             </span>
-            <div className="flex-1 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+            <div className="flex-1 h-px bg-linear-to-r from-transparent via-white/10 to-transparent" />
           </div>
         </div>
       </section>

@@ -312,10 +312,15 @@ export default async function PaidMockTestDynamicPage({ params }: PageProps) {
     } else if (cleanSlug.includes("toefl") || cleanSlug.includes("toelf")) {
       cleanSlug = "toefl";
     }
-    data.details =
+    const originalDetails = data.details || {};
+    const fallback =
       FALLBACK_DETAILS[cleanSlug] ||
       FALLBACK_DETAILS[data.slug.toLowerCase()] ||
-      null;
+      {};
+    data.details = {
+      ...fallback,
+      ...originalDetails,
+    };
     console.log("👉 ~ PaidMockTestDynamicPage ~ data.details:", data.details);
   }
 
