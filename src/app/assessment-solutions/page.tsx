@@ -94,7 +94,7 @@ export default function AssessmentSolutionsPage() {
                   key={idx}
                   className="group flex items-start gap-4 p-5 rounded-xl border border-slate-100 bg-slate-50/50 hover:bg-white hover:border-slate-200 hover:shadow-md transition-all duration-300"
                 >
-                  <div className="p-3 bg-red-50 rounded-lg group-hover:bg-red-800 group-hover:text-white transition-all duration-300 shrink-0 shadow-sm">
+                  <div className="p-3 bg-red-50 rounded-lg  group-hover:text-white transition-all duration-300 shrink-0 shadow-sm">
                     {manageIcons[idx] || <CheckCircle className="w-6 h-6 text-red-800" />}
                   </div>
                   <div>
