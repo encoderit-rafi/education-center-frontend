@@ -307,7 +307,7 @@ export default async function FeesDynamicPage({
                       </p>
                     </div>
 
-                    <div className=" my-3 space-y-4">
+                    <div className="mt-auto pt-4 space-y-4">
                       <div className="flex items-baseline gap-2">
                         <PriceDisplay
                           amount={discountedPrice}

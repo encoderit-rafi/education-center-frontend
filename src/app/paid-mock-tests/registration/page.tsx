@@ -464,7 +464,7 @@ function PaidMockTestRegistrationForm({
                     onValueChange={(val) =>
                       setValue("paymentMethod", val as "stripe" | "paypal")
                     }
-                    className="grid grid-cols-2 gap-3"
+                    className="grid gap-3"
                   >
                     <label
                       htmlFor="payment-stripe"
@@ -480,12 +480,13 @@ function PaidMockTestRegistrationForm({
                         Credit Card (Stripe)
                       </span> */}
                       <div className="flex items-center justify-between gap-2 w-full flex-1">
-                        <Image
+                        {/* <Image
                           src="/images/stripe-logo.png"
                           alt="Stripe"
                           width={50}
                           height={50}
-                        />
+                        /> */}
+                        <span className="font-semibold text-sm">Credit / Debit Card</span>
                         <Image
                           src="/images/cards.png"
                           alt="Stripe"
