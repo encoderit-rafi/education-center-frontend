@@ -30,7 +30,6 @@ import Image from "next/image";
 import { AcceptPayButton } from "./AcceptPayButton";
 import { MockTestTypeSelector } from "./MockTestTypeSelector";
 
-
 // Icon mapping to handle dynamic icon rendering
 const iconMap: Record<string, React.ReactNode> = {
   Activity: <Activity />,
@@ -289,12 +288,35 @@ export default async function PaidMockTestDynamicPage({ params }: PageProps) {
   }
 
   // Populate details from fallbacks if not present in the backend
-  if (data && !data.details) {
+  // if (data && !data.details) {
+  //   let cleanSlug = data.slug.replace(/-\d+$/, "").toLowerCase();
+  //   if (cleanSlug.includes("ielts")) {
+  //     cleanSlug = "ielts";
+  //   } else if (cleanSlug.includes("pte")) {
+  //     cleanSlug = "pte";
+  //   } else if (cleanSlug.includes("toefl") || cleanSlug.includes("toelf")) {
+  //     cleanSlug = "toefl";
+  //   }
+  //   data.details =
+  //     FALLBACK_DETAILS[cleanSlug] ||
+  //     FALLBACK_DETAILS[data.slug.toLowerCase()] ||
+  //     null;
+  //   console.log("👉 ~ PaidMockTestDynamicPage ~ data.details:", data.details);
+  // }
+  if (data) {
     let cleanSlug = data.slug.replace(/-\d+$/, "").toLowerCase();
-    if (cleanSlug === "toefl-ibt") {
+    if (cleanSlug.includes("ielts")) {
+      cleanSlug = "ielts";
+    } else if (cleanSlug.includes("pte")) {
+      cleanSlug = "pte";
+    } else if (cleanSlug.includes("toefl") || cleanSlug.includes("toelf")) {
       cleanSlug = "toefl";
     }
-    data.details = FALLBACK_DETAILS[cleanSlug] || FALLBACK_DETAILS[data.slug.toLowerCase()] || null;
+    data.details =
+      FALLBACK_DETAILS[cleanSlug] ||
+      FALLBACK_DETAILS[data.slug.toLowerCase()] ||
+      null;
+    console.log("👉 ~ PaidMockTestDynamicPage ~ data.details:", data.details);
   }
 
   const notesParts = data.details?.notes
@@ -317,7 +339,6 @@ export default async function PaidMockTestDynamicPage({ params }: PageProps) {
                 {data.description}
               </p>
               <MockTestTypeSelector data={data} />
-
             </div>
             <Image
               src={`/images/mock-test-${data.slug.replace(/-\d+$/, "")}.jpg`}
