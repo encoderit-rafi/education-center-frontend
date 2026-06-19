@@ -2,7 +2,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Sparkles } from "lucide-react";
+import { Sparkles, CheckCircle2, MapPin, Calendar, Target } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   BaseCard,
@@ -118,7 +118,8 @@ export default async function ExamPreparationDynamicPage({
   }
 
   // Apply locale-aware description: use translations[locale].description when available
-  const translatedDescription = (course as any)?.translations?.[locale]?.description;
+  const translatedDescription = (course as any)?.translations?.[locale]
+    ?.description;
   if (translatedDescription) {
     course = { ...course, description: translatedDescription };
   }
@@ -149,7 +150,7 @@ export default async function ExamPreparationDynamicPage({
             </strong>
           ) : (
             part
-          )
+          ),
         )}
       </span>
     );
@@ -162,13 +163,17 @@ export default async function ExamPreparationDynamicPage({
     const pkgTranslatedDescription = pkgTrans?.description;
     const pkgTranslatedRequirements = pkgTrans?.requirements;
     const pkgTranslatedBestFor = pkgTrans?.best_for || pkgTrans?.bestFor;
-    const pkgTranslatedScheduleInfo = pkgTrans?.schedule_info || pkgTrans?.scheduleInfo;
+    const pkgTranslatedScheduleInfo =
+      pkgTrans?.schedule_info || pkgTrans?.scheduleInfo;
 
     const rawBestFor = pkgTranslatedBestFor
       ? Array.isArray(pkgTranslatedBestFor)
         ? pkgTranslatedBestFor
         : typeof pkgTranslatedBestFor === "string"
-          ? pkgTranslatedBestFor.split("\n").map((s: string) => s.trim()).filter(Boolean)
+          ? pkgTranslatedBestFor
+              .split("\n")
+              .map((s: string) => s.trim())
+              .filter(Boolean)
           : pkg.bestFor
       : pkg.bestFor;
 
@@ -210,7 +215,9 @@ export default async function ExamPreparationDynamicPage({
       {/* ── Hero Section ── */}
       <section className="relative overflow-hidden bg-slate-50 border-b border-slate-100">
         <div className="container relative mx-auto px-4 py-16 lg:px-8 lg:py-24 max-w-7xl flex flex-col items-center">
-          <div className={`grid ${data.bannerImage ? "lg:grid-cols-[1fr_450px]" : ""} gap-16 items-center`}>
+          <div
+            className={`grid ${data.bannerImage ? "lg:grid-cols-[1fr_450px]" : ""} gap-16 items-center`}
+          >
             <div className="max-w-4xl mx-auto text-center lg:text-left">
               <h1 className="text-4xl font-black leading-[1.1] tracking-tight text-slate-900 lg:text-6xl mb-6">
                 {data.name}
@@ -233,13 +240,16 @@ export default async function ExamPreparationDynamicPage({
           </div>
         </div>
       </section>
-      {!["oet", "cael", "celpip"].includes(slug.toLowerCase()) && <PromoDiscount />}
+      {!["oet", "cael", "celpip"].includes(slug.toLowerCase()) && (
+        <PromoDiscount />
+      )}
       {/* ── Packages Section ── */}
       <section id="packages" className="base-py bg-white">
         <div className="px-4 lg:px-8  mx-auto">
           <div className="mb-12 text-center max-w-3xl mx-auto space-y-4">
             <h2 className="text-4xl font-black text-slate-900 tracking-tight leading-tight">
-              {data.name} <span className="text-primary">{t("packages.pathSpan")}</span>
+              {data.name}{" "}
+              <span className="text-primary">{t("packages.pathSpan")}</span>
             </h2>
             <p className="text-slate-600 text-lg font-medium leading-relaxed">
               {t("packages.pathSubtitle", { name: data.name })}
@@ -254,8 +264,12 @@ export default async function ExamPreparationDynamicPage({
             </div>
           ) : (
             <div className="text-center py-16 text-slate-400">
-              <p className="text-base font-medium">Course packages are not available yet.</p>
-              <p className="text-sm mt-1">Please check back soon or contact us for enrollment details.</p>
+              <p className="text-base font-medium">
+                Course packages are not available yet.
+              </p>
+              <p className="text-sm mt-1">
+                Please check back soon or contact us for enrollment details.
+              </p>
             </div>
           )}
         </div>
@@ -270,7 +284,8 @@ export default async function ExamPreparationDynamicPage({
           <div className="container px-4 lg:px-8 max-w-7xl mx-auto space-y-16">
             <div className="text-center max-w-3xl mx-auto space-y-4">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-black uppercase tracking-widest">
-                <Sparkles className="size-3" /> {t("workshops.skillsBoostBadge")}
+                <Sparkles className="size-3" />{" "}
+                {t("workshops.skillsBoostBadge")}
               </div>
               <h2 className="text-4xl font-black text-slate-900 tracking-tight leading-tight lg:text-5xl">
                 <span className="text-primary">{t("workshops.title")}</span>
@@ -304,7 +319,10 @@ export default async function ExamPreparationDynamicPage({
 
                       <p className="text-xs text-slate-600 font-medium leading-relaxed line-clamp-4 text-justify">
                         {workshop.description ||
-                          t("workshopFallback", { duration: workshop.duration, subTitle: workshop.subTitle })}
+                          t("workshopFallback", {
+                            duration: workshop.duration,
+                            subTitle: workshop.subTitle,
+                          })}
                       </p>
                     </div>
 
