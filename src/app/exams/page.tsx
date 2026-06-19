@@ -36,7 +36,10 @@ interface ApiResponse {
 export default function ExamsPage() {
   const locale = useLocale();
   const { data: examsResponse, isLoading } = useQuery<ApiResponse>({
-    queryKey: ["exams", { limit: 100, sort_order: "asc", sort_by: "orderIndex" }],
+    queryKey: [
+      "exams",
+      { limit: 100, sort_order: "asc", sort_by: "orderIndex" },
+    ],
     queryFn: async () => {
       const response = await api.get("/exams", {
         params: { limit: 100, sort_order: "asc", sort_by: "orderIndex" },
@@ -47,12 +50,16 @@ export default function ExamsPage() {
 
   const exams =
     examsResponse?.data?.data
-      ?.filter((exam) =>
-        exam.examType?.some((et) => et.name === "group")
-      )
+      ?.filter((exam) => exam.examType?.some((et) => et.name === "exam"))
       ?.sort((a: any, b: any) => {
-        const aVal = a.orderIndex !== undefined && a.orderIndex !== null ? Number(a.orderIndex) : Infinity;
-        const bVal = b.orderIndex !== undefined && b.orderIndex !== null ? Number(b.orderIndex) : Infinity;
+        const aVal =
+          a.orderIndex !== undefined && a.orderIndex !== null
+            ? Number(a.orderIndex)
+            : Infinity;
+        const bVal =
+          b.orderIndex !== undefined && b.orderIndex !== null
+            ? Number(b.orderIndex)
+            : Infinity;
         return aVal - bVal;
       }) ?? [];
 
@@ -84,7 +91,8 @@ export default function ExamsPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
               {exams.map((exam, index) => {
                 const examName = exam.translations?.[locale]?.name || exam.name;
-                const examDesc = exam.translations?.[locale]?.description || exam.description;
+                const examDesc =
+                  exam.translations?.[locale]?.description || exam.description;
                 return (
                   <Link key={exam.id} href={`/exams/${exam.slug}`}>
                     <BaseCard className="p-6">
