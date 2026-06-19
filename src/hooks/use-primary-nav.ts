@@ -31,7 +31,9 @@ export function usePrimaryNav() {
   } = useQuery<ApiResponse>({
     queryKey: ["exam-preparation-courses", { limit: 100, sort_order: "asc" }],
     queryFn: async () => {
-      const response = await api.get("/courses", { params: { limit: 100, sort_order: "asc", sort_by: "orderIndex" } });
+      const response = await api.get("/courses", {
+        params: { limit: 100, sort_order: "asc", sort_by: "orderIndex" },
+      });
       return response.data;
     },
   });
@@ -43,7 +45,9 @@ export function usePrimaryNav() {
   } = useQuery<ApiResponse>({
     queryKey: ["paid-mock-tests", { sort_order: "asc" }],
     queryFn: async () => {
-      const response = await api.get("/mock-tests", { params: { sort_order: "asc" } });
+      const response = await api.get("/mock-tests", {
+        params: { sort_order: "asc" },
+      });
       return response.data;
     },
   });
@@ -55,7 +59,10 @@ export function usePrimaryNav() {
   } = useQuery<ApiResponse>({
     queryKey: ["exams", { limit: 100, sort_order: "asc" }],
     queryFn: async () => {
-      const response = await api.get("/exams", { params: { limit: 100, sort_order: "asc", sort_by: "orderIndex" } });
+      const response = await api.get("/exams", {
+        params: { limit: 100, sort_order: "asc", sort_by: "orderIndex" },
+      });
+      console.log("👉 ~ usePrimaryNav ~ response:", response.data.data);
       return response.data;
     },
   });
@@ -66,9 +73,7 @@ export function usePrimaryNav() {
     if (item.name === "Exams" && item.type === "dropdown") {
       const dynamicItems =
         examsResponse?.data?.data
-          ?.filter((exam) =>
-            exam.examType?.some((et) => et.name === "group")
-          )
+          ?.filter((exam) => exam.examType?.some((et) => et.name === "exam"))
           ?.map((exam) => ({
             name: exam.name,
             href: `/exams/${exam.slug}`,
@@ -76,15 +81,19 @@ export function usePrimaryNav() {
 
       return {
         ...item,
-        items: dynamicItems.length > 0 ? [...dynamicItems, { name: "Other Exams", href: "/exams/other-exams" }] : item.items,
+        items:
+          dynamicItems.length > 0
+            ? [
+                ...dynamicItems,
+                { name: "Other Exams", href: "/exams/other-exams" },
+              ]
+            : item.items,
       };
     }
     if (item.name === "Book Exam" && item.type === "dropdown") {
       const dynamicItems =
         examsResponse?.data?.data
-          ?.filter((exam) =>
-            exam.examType?.some((et) => et.name === "group")
-          )
+          ?.filter((exam) => exam.examType?.some((et) => et.name === "group"))
           ?.map((exam) => ({
             name: exam.name,
             href: `/book-exams/${exam.slug}`,
