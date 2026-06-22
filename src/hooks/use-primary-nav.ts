@@ -84,16 +84,16 @@ export function usePrimaryNav() {
         items:
           dynamicItems.length > 0
             ? [
-                ...dynamicItems,
-                { name: "Other Exams", href: "/exams/other-exams" },
-              ]
+              ...dynamicItems,
+              { name: "Other Exams", href: "/exams/other-exams" },
+            ]
             : item.items,
       };
     }
     if (item.name === "Book Exam" && item.type === "dropdown") {
       const dynamicItems =
         examsResponse?.data?.data
-          ?.filter((exam) => exam.examType?.some((et) => et.name === "group"))
+          ?.filter((exam) => exam.examType?.some((et) => et.name === "exam"))
           ?.map((exam) => ({
             name: exam.name,
             href: `/book-exams/${exam.slug}`,
