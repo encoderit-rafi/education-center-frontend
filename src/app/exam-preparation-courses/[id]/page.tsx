@@ -166,7 +166,7 @@ export default async function ExamPreparationDynamicPage({
     const pkgTranslatedScheduleInfo =
       pkgTrans?.schedule_info || pkgTrans?.scheduleInfo;
 
-    const rawBestFor = pkgTranslatedBestFor
+    const safeBestFor = pkgTranslatedBestFor
       ? Array.isArray(pkgTranslatedBestFor)
         ? pkgTranslatedBestFor
         : typeof pkgTranslatedBestFor === "string"
