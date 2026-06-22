@@ -87,13 +87,6 @@ export function AcceptPayButton({
                 {/* Dark gradient overlay so text is legible */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10" />
 
-                {/* Online badge — top right inside the image */}
-                <div className="absolute top-3 right-3">
-                  <span className="bg-white/20 backdrop-blur-md text-white text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider border border-white/20 shadow-md">
-                    {t("online")}
-                  </span>
-                </div>
-
                 {/* Title overlaid at the bottom of the image */}
                 <div className="absolute bottom-0 left-0 right-0 px-5 pb-4">
                   <p className="text-[10px] font-bold tracking-widest text-white/60 uppercase mb-0.5">

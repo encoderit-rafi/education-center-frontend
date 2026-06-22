@@ -183,15 +183,17 @@ export default async function FeesDynamicPage({
         ? pkgTranslatedBestFor
         : typeof pkgTranslatedBestFor === "string"
           ? pkgTranslatedBestFor.split("\n").map((s: string) => s.trim()).filter(Boolean)
-          : pkg.bestFor
-      : pkg.bestFor;
+          : (pkg.bestFor || [])
+      : (pkg.bestFor || []);
+
+    const safeBestFor = Array.isArray(rawBestFor) ? rawBestFor : [];
 
     return {
       ...pkg,
       name: pkgTranslatedName || pkg.name,
       description: pkgTranslatedDescription || pkg.description,
       requirements: pkgTranslatedRequirements || pkg.requirements,
-      bestFor: rawBestFor.map(renderPoint),
+      bestFor: safeBestFor.map(renderPoint),
       scheduleInfo: pkgTranslatedScheduleInfo || pkg.scheduleInfo,
     };
   });

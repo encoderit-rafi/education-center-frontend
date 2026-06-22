@@ -58,6 +58,20 @@ export function MockTestTypeSelector({ data }: MockTestTypeSelectorProps) {
   const rawCenterPrice = data.details?.center_price ?? data.center_price;
   const centerPrice = rawCenterPrice ? parseFloat(String(rawCenterPrice)) : null;
 
+  const selectTypeLabel =
+    examKey === "ielts"
+      ? t("selectIeltsTypeLabel")
+      : examKey === "pte"
+      ? t("selectPteTypeLabel")
+      : t("selectTypeLabel");
+
+  const chooseExamTypePlaceholder =
+    examKey === "ielts"
+      ? t("chooseIeltsTypePlaceholder")
+      : examKey === "pte"
+      ? t("choosePteTypePlaceholder")
+      : t("chooseExamTypePlaceholder");
+
   // TOEFL iBT (or any exam without subtypes) — show Pay button directly
   if (!types) {
     return (
@@ -72,14 +86,14 @@ export function MockTestTypeSelector({ data }: MockTestTypeSelectorProps) {
       {/* ── Type Selector ── */}
       <div className="space-y-1.5">
         <label className="text-xs font-bold uppercase tracking-wider text-slate-500">
-          {t("selectTypeLabel")}
+          {selectTypeLabel}
         </label>
         <Select
           value={selectedType || undefined}
           onValueChange={(val) => setSelectedType(val as string)}
         >
           <SelectTrigger className="w-full">
-            <SelectValue placeholder={t("chooseExamTypePlaceholder")} />
+            <SelectValue placeholder={chooseExamTypePlaceholder} />
           </SelectTrigger>
           <SelectContent>
             {types.map((t) => (
