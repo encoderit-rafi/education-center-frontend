@@ -182,7 +182,7 @@ export default async function ExamPreparationDynamicPage({
       name: pkgTranslatedName || pkg.name,
       description: pkgTranslatedDescription || pkg.description,
       requirements: pkgTranslatedRequirements || pkg.requirements,
-      bestFor: rawBestFor.map(renderPoint),
+      bestFor: safeBestFor.map(renderPoint),
       scheduleInfo: pkgTranslatedScheduleInfo || pkg.scheduleInfo,
     };
   });

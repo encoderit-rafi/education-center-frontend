@@ -1448,105 +1448,95 @@
   "TermsAndConditionsPage": {
     "title": "TERMS &",
     "titleAccent": "CONDITIONS",
-    "description": "Please read our terms carefully to understand your rights and responsibilities when using TEPTH services.",
-    "navTitle": "Navigation",
-    "sidebarTitle": "Need help?",
-    "sidebarDescription": "If you have any questions regarding these terms, contact us.",
-    "lastUpdated": "Last Updated: April 2026. TEPTH Reserves the right to update these terms at any time.",
+    "description": "Welcome to the website of The Exam Preparation & Testing House L.L.C (TEPTH), located in Sharjah, United Arab Emirates. By accessing and using tepth.org, you agree to abide by these Terms and Conditions.",
+    "lastUpdated": "Last Updated: June 2026",
+    "importantNote": "The Exam Preparation & Testing House L.L.C reserves the right to modify these terms, update website content, or suspend website operations at any time without prior notice.",
+    "searchPlaceholder": "Search terms and conditions...",
+    "noResults": "No sections match your search.",
     "sections": {
-      "intro": {
-        "title": "Introduction",
-        "p1": "Welcome to TEPTH Website.",
-        "p2": "This website is owned and operated by <strong>The Exam Preparation & Testing House FZCO</strong>, a company licensed by Dubai Silicon Oasis Authority whose registered office is at Suite 703, Apricot Tower, Dubai Silicon Oasis, Dubai, United Arab Emirates.",
-        "p3": "Our Terms and Conditions apply to your access to and use of our Website \"https://www.tepth.net/\". Please read these Terms and Conditions carefully.",
-        "p4": "By continuing to access and use our website, you are deemed to have understood and agreed to all the terms & conditions contained here in. If you do not agree to these Terms & Conditions, you may not use this website.",
-        "p5": "For the purposes of these Terms and Conditions, \"this Website\" includes means all the webpages related to the tepth.net website excluding any links to third party sites."
-      },
-      "changes": {
-        "title": "Changes to Terms and Conditions",
-        "p1": "TEPTH reserves every right to change the terms and conditions or modify this agreement anytime as necessary without any prior notice. Such amended or modified Terms and Conditions shall be effective upon publication on this Website. Therefore, it is recommended to keep checking if there is any addition or change made to TEPTH’s terms and conditions agreement. Users are bound to follow this agreement."
-      },
-      "operation": {
-        "title": "Changes to Operation of Website",
-        "items": [
-          "TEPTH may change the format and content of this website at any time without a prior notice.",
-          "TEPTH may suspend the operation of this website for update, support or maintenance work, in order to update the content, function or for any other reason.",
-          "TEPTH reserves the right to terminate access to this website at any time and without any prior notice."
-        ],
-        "p1": "The use of Tepth.net is subject to the below mentioned Terms of Use:"
-      },
       "payment": {
-        "title": "Payment Terms",
+        "title": "Payment Policies",
         "items": [
-          "TEPTH accepts the payments in U.A.E currency through Visa, MasterCard and PayPal accounts.",
-          "If you make a payment for services on our website, the details you are asked to submit will be provided directly to our payment provider via secured connection.",
-          "The payments are taken securely on the payment page of our card processor. No card details are stored by the website.",
-          "When registering with us, you are liable to provide accurate personal information to avoid future problems.",
-          "The customer using the website who are Minor /under the age of 18 shall not register as a User of the website and shall not transact on or use the website.",
-          "The country of merchant domicile is UAE.",
-          "https://www.tepth.net/ will NOT deal or provide any services or products to any of OFAC sanctions countries in accordance with the law of UAE.",
-          "Any dispute or claim arising out of or in connection with this website shall be governed and construed in accordance with the laws of UAE."
+          "<strong>Accepted Methods:</strong> Visa, MasterCard, Cash, and PayPal in UAE Dirhams (AED).",
+          "<strong>Security:</strong> Payments are processed securely via a third-party gateway. TEPTH does not store your credit card details.",
+          "<strong>Eligibility:</strong> Users must be 18 or older to make transactions.",
+          "<strong>Restrictions:</strong> TEPTH complies with UAE law and does not provide services to OFAC-sanctioned countries."
+        ]
+      },
+      "attendance": {
+        "title": "Attendance & Scheduling",
+        "items": [
+          "<strong>Group & Semi-private classes:</strong> Missed sessions cannot be rescheduled or refunded. Rescheduling a group class requires 48 hours' notice and unanimous agreement from all candidates.",
+          "<strong>Private Tutoring:</strong> You must provide at least 48 hours' notice to cancel or reschedule; otherwise, the session is forfeited.",
+          "<strong>Certificates:</strong> To earn a Certificate of Completion, you must attend the full course and pass the Mock Test. Attending at least 75% of the course qualifies you for a Certificate of Attendance.",
+          "<strong>Cancellations:</strong> TEPTH may cancel or reschedule courses due to instructor illness, exam deliveries, or other unforeseen circumstances."
+        ]
+      },
+      "materials": {
+        "title": "Course Materials & Exam Vouchers",
+        "items": [
+          "<strong>Physical Materials:</strong> Practice materials and books/prep. material are included in prep. courses.",
+          "<strong>Returns:</strong> If you cancel or transfer courses, physical books must be returned in good condition, or you will be charged the retail price.",
+          "<strong>Usage:</strong> All provided materials, especially teacher's books, are strictly for personal, non-commercial use. Reproducing or publishing them is prohibited and punishable by UAE law.",
+          "<strong>Exam Vouchers:</strong> Vouchers are non-refundable, treated as cash, valid only in the UAE, and must be redeemed before they expire. They do not cover late registration fees."
         ]
       },
       "registration": {
-        "title": "Registration & Rescheduling",
+        "title": "Exam Registration Services",
+        "p1": "TEPTH offers online exam registration as a voluntary convenience for a fee of AED 150.",
         "items": [
-          "Students who miss a scheduled group lesson or session have no privilege to reschedule the missed lesson and it will be considered as availed.",
-          "Rescheduling group lessons may only be possible with the consensus of all students of the same class and with a notice period of 48-hours.",
-          "TEPTH reserves the right to cancel or reschedule any session or course due to unforeseen circumstances or exam delivery.",
-          "Students must attend at least 75% of the course in order to receive a certificate of attendance.",
-          "For one-to-one tutoring, students should notify the center at least 48 hours prior to cancellation or rescheduling. Otherwise it will be considered availed. No show up sessions/classes will be treated as taken and no sessions will be made up."
+          "<strong>Optional Service:</strong> Because this service is entirely voluntary, candidates can choose to book directly with the test provider to avoid this additional fee.",
+          "<strong>Limitations:</strong> TEPTH is not responsible for seat availability, exam delivery issues, exam scoring, or the release of results.",
+          "<strong>Cancellations & Rescheduling:</strong> If a seat cannot be secured or an exam is canceled by the provider due to low enrollment, you may request a refund or reschedule to the next available date."
         ]
       },
-      "material": {
-        "title": "Preparation Material & Books",
-        "p1": "Practice materials are included in private and semi-private classroom-based courses but not group or online courses.",
+      "discounts": {
+        "title": "Discounts & Offers",
+        "p1": "Students can earn up to <strong>10% discount</strong> under the following conditions:",
         "items": [
-          "Practice tests are non-refundable once purchased.",
-          "Software language courses and practice tests cannot be exchanged or returned once a purchase order has been placed."
+          "Friends registering and paying together on-site.",
+          "A single student registering for two or more courses.",
+          "Returning students."
         ],
-        "registrationFeePrefix": "Registration fee of ",
-        "registrationFeeSuffix": " 100 is included in the course fee."
+        "note": "<strong>Note on Discounts:</strong> Discounts cannot be combined with other offers, or redeemed for cash."
       },
-      "withdrawal": {
-        "title": "Withdrawal, Cancellation & Refund",
-        "noticeItems": [
-          {
-            "strong": "10+ days notice: ",
-            "text": "Full refund of course fees."
-          },
-          {
-            "strong": "5-10 days notice: ",
-            "text": "50% refund of course fees."
-          },
-          {
-            "strong": "Less than 5 days notice: ",
-            "text": "No refund issued."
-          }
+      "refunds": {
+        "title": "Withdrawals, Cancellations & Refunds",
+        "p1": "All refund requests must be submitted using the official, type-written Withdrawal/Refund Request Form and emailed to info@tepth.org. Approved refunds take up to six weeks to process and must be claimed within eight weeks.",
+        "timelineTitle": "Refund Eligibility Timeline",
+        "thNotice": "Notice Given Before Course Start",
+        "thRefund": "Refund Amount",
+        "timeline": [
+          { "notice": "10 or more calendar days", "amount": "100% Refund" },
+          { "notice": "Under 10 calendar days", "amount": "50% Refund" },
+          { "notice": "Under 5 calendar days", "amount": "No Refund" }
         ],
-        "p1": "If for any reason TEPTH cancels a course, all course fees, including registration fee will be refunded in full.",
-        "p2": "Refunds are made in U.A.E Dirham currency and, therefore, the final amount that you may receive will depend on the foreign exchange rates at the time the refund is processed."
-      },
-      "process": {
-        "title": "Refund Process",
-        "items": [
-          "You must apply by completing a signed, type-written TEPTH official Withdrawal/Refund Request Form.",
-          "The form is available for download on our website or at the center.",
-          "Submit via email to <strong>info@tepth.org</strong>.",
-          "Refunds are processed within six (6) weeks of receipt."
+        "additionalTitle": "Additional Refund Rules:",
+        "additionalItems": [
+          "No refunds are issued for missed classes, ongoing courses, or candidates dismissed for policy violations.",
+          "If TEPTH cancels or postpones a course, you are entitled to a full refund.",
+          "Medical or family emergencies missing the deadline require official documentation (e.g., a doctor's note) for management review."
         ]
       },
-      "privacy": {
-        "title": "Privacy Conditions",
-        "p1": "All credit/debit cards details and personally identifiable information will <strong>NOT</strong> be stored, sold, shared, rented or leased to any third parties."
+      "intellectual_property": {
+        "title": "Website Use & Intellectual Property",
+        "items": [
+          "<strong>Permitted Use:</strong> You may access the website and print pages solely for personal, non-commercial use.",
+          "<strong>Prohibited Use:</strong> You may not copy, reproduce, modify, or distribute any website content, materials, or trademarks without written consent from TEPTH.",
+          "<strong>Account Security:</strong> You are completely responsible for keeping your password secure and for any activity that occurs under your account."
+        ]
       },
-      "copyright": {
-        "title": "Copyright & Trade-marks",
-        "p1": "The copyright for all the content and images on this website is held by TEPTH. You may not use these trade-marks in any form for any purpose without written consent of the trade-mark owner."
+      "disclaimer": {
+        "title": "Disclaimers & Limitations of Liability",
+        "items": [
+          "<strong>Accuracy:</strong> While TEPTH strives for accuracy, the information on the website is provided \"as is.\" TEPTH is not liable for decisions made based on this information.",
+          "<strong>Third-Party Links:</strong> External links are provided for convenience. TEPTH is not responsible for the content, safety, or services of third-party websites.",
+          "<strong>Liability:</strong> TEPTH is not liable for indirect, consequential, or punitive damages (such as data or financial loss) resulting from website use."
+        ]
       },
       "jurisdiction": {
         "title": "Jurisdiction",
-        "p1": "These Terms and Conditions are governed by and to be interpreted according to the laws of the Emirate of Dubai, United Arab Emirates. Dubai courts will have exclusive jurisdiction over any dispute."
+        "p1": "These terms are governed by the laws of the Emirate of Sharjah, United Arab Emirates. Any disputes will be handled exclusively by Sharjah courts."
       }
     }
   },
@@ -3379,9 +3369,15 @@
     "mockTest": "Mock Test",
     "type": "Type",
     "examType": "Exam Type",
+    "ieltsType": "IELTS Type",
+    "pteType": "PTE Type",
+    "chooseIeltsTypePlaceholder": "— Choose IELTS type —",
+    "choosePteTypePlaceholder": "— Choose PTE type —",
+    "selectIeltsTypeLabel": "Select IELTS Type",
+    "selectPteTypeLabel": "Select PTE Type",
     "location": "Location",
     "testCenter": "Test Center",
-    "homeOnline": "Home / Online",
+    "homeOnline": "Home",
     "duration": "Duration",
     "examCategory": "Exam Category",
     "payment": "Payment",

@@ -107,6 +107,7 @@ const BaseCardList = ({
   checked?: boolean;
   className?: string;
 }) => {
+  if (!items || !Array.isArray(items)) return null;
   return (
     <ul className={cn("space-y-2 text-sm text-slate-700", className)}>
       {items.map((point, i) => (

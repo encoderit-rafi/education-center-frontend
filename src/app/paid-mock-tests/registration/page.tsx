@@ -156,6 +156,28 @@ function PaidMockTestRegistrationForm({
     : (data ? parseFloat((locationParam === "center" ? rawCenterPrice : data.price) || data.price || "350") : 350);
   const CURRENCY = "AED";
 
+  const examKey = data?.slug
+    ? data.slug.replace(/-\d+$/, "").toLowerCase().includes("ielts")
+      ? "ielts"
+      : data.slug.replace(/-\d+$/, "").toLowerCase().includes("pte")
+      ? "pte"
+      : null
+    : null;
+
+  const examTypesLabel =
+    examKey === "ielts"
+      ? t("ieltsType")
+      : examKey === "pte"
+      ? t("pteType")
+      : t("examTypes");
+
+  const examTypeLabel =
+    examKey === "ielts"
+      ? t("ieltsType")
+      : examKey === "pte"
+      ? t("pteType")
+      : t("examType");
+
   const paymentMutation = useMutation({
     mutationFn: (body: Record<string, unknown>) =>
       api.post("/payments/initiate", body),
@@ -294,7 +316,7 @@ function PaidMockTestRegistrationForm({
                   Array.isArray(data.variant) &&
                   data.variant.length > 0 && (
                     <Field data-invalid={!!errors.varient}>
-                      <FieldLabel required>{t("examTypes")}</FieldLabel>
+                      <FieldLabel required>{examTypesLabel}</FieldLabel>
                       <FieldContent>
                         <Select
                           onValueChange={(val: string | null) => {
@@ -412,7 +434,7 @@ function PaidMockTestRegistrationForm({
                       {/* Show selected exam type / variant from URL */}
                       {variantParam && (
                         <div>
-                          <p className="text-xs text-slate-400">{t("examType")}</p>
+                          <p className="text-xs text-slate-400">{examTypeLabel}</p>
                           <p className="font-semibold text-primary">
                             {variantParam}
                           </p>
