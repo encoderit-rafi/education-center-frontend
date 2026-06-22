@@ -174,8 +174,8 @@ export default async function ExamPreparationDynamicPage({
               .split("\n")
               .map((s: string) => s.trim())
               .filter(Boolean)
-          : (pkg.bestFor || [])
-      : (pkg.bestFor || []);
+          : pkg.bestFor || []
+      : pkg.bestFor || [];
 
     const safeBestFor = Array.isArray(rawBestFor) ? rawBestFor : [];
 
@@ -320,11 +320,12 @@ export default async function ExamPreparationDynamicPage({
                       <div className="space-y-2"></div>
 
                       <p className="text-xs text-slate-600 font-medium leading-relaxed line-clamp-4 text-justify">
-                        {workshop.description ||
+                        {/* {workshop.description ||
                           t("workshopFallback", {
                             duration: workshop.duration,
                             subTitle: workshop.subTitle,
-                          })}
+                          })} */}
+                        {workshop.description}
                       </p>
                     </div>
 
