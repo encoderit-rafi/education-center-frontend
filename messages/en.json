@@ -492,7 +492,7 @@
   "AssessmentSolutionsPage": {
     "title": "Certify Assessment Solutions",
     "subtitle": "Global Standards in Assessment Intelligence",
-    "intro": "In the rapidly evolving educational sector, secure and smooth exam administration is critical. Educational institutions require a highly reliable platform capable of accommodating anything from a single classroom to a global student body. To meet this demand, TEPTH has teamed up with Certify Assessment Solutions a worldwide leader in assessment solutions and exam delivery to provide an all-inclusive solution featuring exam creation, AI-driven administration, and secure remote proctoring.",
+    "intro": "In the rapidly evolving educational sector, secure and smooth exam administration is critical. Educational institutions require a highly reliable platform capable of accommodating anything from a single classroom to a global student body. To meet this demand, TEPTH has teamed up with Certify Assessment Solutions, a worldwide leader in assessment solutions and exam delivery to provide an all-inclusive solution featuring exam creation, AI-driven administration, and secure remote proctoring.",
     "manageTitle": "Develop a tailored system that allows you to manage:",
     "manageItems": [
       "Test Authoring & Delivery",
@@ -1507,9 +1507,18 @@
         "thNotice": "Notice Given Before Course Start",
         "thRefund": "Refund Amount",
         "timeline": [
-          { "notice": "10 or more calendar days", "amount": "100% Refund" },
-          { "notice": "Under 10 calendar days", "amount": "50% Refund" },
-          { "notice": "Under 5 calendar days", "amount": "No Refund" }
+          {
+            "notice": "10 or more calendar days",
+            "amount": "100% Refund"
+          },
+          {
+            "notice": "Under 10 calendar days",
+            "amount": "50% Refund"
+          },
+          {
+            "notice": "Under 5 calendar days",
+            "amount": "No Refund"
+          }
         ],
         "additionalTitle": "Additional Refund Rules:",
         "additionalItems": [
