@@ -693,6 +693,11 @@
       "institutionalSupportTitle": "الدعم المؤسسي",
       "institutionalSupportText": "+971 4 000 0000"
     },
+    "partnershipLogos": {
+      "badge": "تحالف استراتيجي",
+      "title": "نعمل معاً لتحقيق التميز في التقييم",
+      "subtitle": "الجمع بين حلول التقييم الرقمية المتقدمة من Certify والبنية التحتية المتطورة لتقديم الاختبارات من TEPTH."
+    },
     "partnershipForm": {
       "fullName": "الاسم الكامل",
       "fullNamePlaceholder": "أدخل اسمك الكامل",
