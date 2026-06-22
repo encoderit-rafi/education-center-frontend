@@ -751,6 +751,70 @@ export default function AssessmentSolutionsPage() {
         </div>
       </section>
 
+      {/* Strategic Partnership Logos Section */}
+      <section className="py-20 px-6 max-w-7xl mx-auto">
+        <div className="relative bg-linear-to-br from-slate-900 via-slate-950 to-slate-900 rounded-3xl p-10 lg:p-16 overflow-hidden shadow-2xl border border-slate-800/60">
+          {/* Decorative ambient glowing circles */}
+          <div className="absolute -top-24 -right-24 w-[400px] h-[400px] bg-red-500/10 rounded-full blur-[120px] pointer-events-none animate-pulse" />
+          <div className="absolute -bottom-24 -left-24 w-[400px] h-[400px] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none animate-pulse" />
+          
+          {/* Subtle grid pattern overlay */}
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#334155_1px,transparent_1px),linear-gradient(to_bottom,#334155_1px,transparent_1px)] bg-[size:3rem_3rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_80%,transparent_100%)] opacity-10 pointer-events-none" />
+
+          <div className="relative z-10 text-center max-w-3xl mx-auto mb-16">
+            <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 backdrop-blur-sm px-4 py-1.5 rounded-full mb-4">
+              <span className="w-2 h-2 rounded-full bg-red-500 animate-ping" />
+              <span className="text-xs font-bold uppercase tracking-[0.25em] text-slate-300">
+                {t("partnershipLogos.badge")}
+              </span>
+            </div>
+            <h2 className="text-3xl lg:text-5xl font-black text-white mt-4 tracking-tight font-headline leading-tight">
+              {t("partnershipLogos.title")}
+            </h2>
+            <p className="text-slate-400 text-sm md:text-base mt-4 leading-relaxed font-light">
+              {t("partnershipLogos.subtitle")}
+            </p>
+            <div className="h-1.5 w-20 bg-linear-to-r from-red-500 to-amber-500 mx-auto mt-6 rounded-full" />
+          </div>
+
+          <div className="relative z-10 flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16 max-w-4xl mx-auto">
+            {/* Certify Logo Card */}
+            <div className="group relative flex-1 w-full max-w-[340px] aspect-[4/3] rounded-2xl bg-black border border-slate-800/80 flex items-center justify-center p-8 shadow-xl transition-all duration-500 hover:-translate-y-2 hover:border-red-500/30 hover:shadow-red-500/5">
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-red-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+              <div className="relative w-full h-full max-h-[160px] transform group-hover:scale-105 transition-transform duration-500">
+                <Image
+                  src="/images/certify-logo.jpg"
+                  alt="Certify Assessment Solutions"
+                  fill
+                  className="object-contain filter drop-shadow-[0_4px_12px_rgba(239,68,68,0.1)]"
+                />
+              </div>
+            </div>
+
+            {/* Alliance Indicator */}
+            <div className="flex flex-col items-center justify-center shrink-0">
+              <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center shadow-lg backdrop-blur-md text-slate-400 font-black text-lg transition-transform duration-500 hover:rotate-180 select-none">
+                ✕
+              </div>
+              <div className="h-8 w-px bg-gradient-to-b from-white/10 to-transparent hidden md:block mt-2" />
+            </div>
+
+            {/* TEPTH Logo Card */}
+            <div className="group relative flex-1 w-full max-w-[340px] aspect-[4/3] rounded-2xl bg-white border border-slate-200/50 flex items-center justify-center p-8 shadow-xl transition-all duration-500 hover:-translate-y-2 hover:border-blue-500/30 hover:shadow-blue-500/5">
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+              <div className="relative w-full h-full max-h-[160px] transform group-hover:scale-105 transition-transform duration-500">
+                <Image
+                  src="/images/tepth-logo.jpg"
+                  alt="TEPTH - The Exam Preparation & Testing House"
+                  fill
+                  className="object-contain filter drop-shadow-[0_4px_12px_rgba(59,130,246,0.1)]"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Institutional Partnership Request Form Section */}
       <section className="py-20 px-6 max-w-7xl mx-auto bg-slate-900 rounded-3xl text-white my-16 relative overflow-hidden shadow-2xl">
         <div className="absolute top-0 left-1/4 w-[300px] h-[300px] bg-red-800/10 rounded-full blur-[100px] pointer-events-none" />
