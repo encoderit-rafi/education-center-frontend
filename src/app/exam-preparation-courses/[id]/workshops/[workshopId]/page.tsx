@@ -12,6 +12,8 @@ import {
   User,
   Zap,
   Timer,
+  MapPin,
+  Target,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import api from "@/axios";
@@ -110,9 +112,11 @@ export default async function WorkshopDetailPage({ params }: PageProps) {
 
   // Apply course translation if available
   const courseTranslatedName = (course as any)?.translations?.[locale]?.name;
-  const courseTranslatedDescription = (course as any)?.translations?.[locale]?.description;
+  const courseTranslatedDescription = (course as any)?.translations?.[locale]
+    ?.description;
   if (courseTranslatedName) course.name = courseTranslatedName;
-  if (courseTranslatedDescription) course.description = courseTranslatedDescription;
+  if (courseTranslatedDescription)
+    course.description = courseTranslatedDescription;
 
   const workshop = course.workshops?.find((w) => w.id === workshopId);
   if (!workshop) {
@@ -124,20 +128,25 @@ export default async function WorkshopDetailPage({ params }: PageProps) {
   const wTranslatedName = wTrans?.name;
   const wTranslatedTitle = wTrans?.title;
   const wTranslatedDescription = wTrans?.description;
-  const wTranslatedShortDescription = wTrans?.short_description || wTrans?.shortDescription;
+  const wTranslatedShortDescription =
+    wTrans?.short_description || wTrans?.shortDescription;
   const wTranslatedRequirements = wTrans?.requirements;
   const wTranslatedBestFor = wTrans?.best_for || wTrans?.bestFor;
 
   if (wTranslatedName) workshop.name = wTranslatedName;
   if (wTranslatedTitle) workshop.title = wTranslatedTitle;
   if (wTranslatedDescription) workshop.description = wTranslatedDescription;
-  if (wTranslatedShortDescription) workshop.shortDescription = wTranslatedShortDescription;
+  if (wTranslatedShortDescription)
+    workshop.shortDescription = wTranslatedShortDescription;
   if (wTranslatedRequirements) workshop.requirements = wTranslatedRequirements;
   if (wTranslatedBestFor) {
     workshop.bestFor = Array.isArray(wTranslatedBestFor)
       ? wTranslatedBestFor
       : typeof wTranslatedBestFor === "string"
-        ? wTranslatedBestFor.split("\n").map((s: string) => s.trim()).filter(Boolean)
+        ? wTranslatedBestFor
+            .split("\n")
+            .map((s: string) => s.trim())
+            .filter(Boolean)
         : workshop.bestFor;
   }
 
@@ -156,7 +165,10 @@ export default async function WorkshopDetailPage({ params }: PageProps) {
   const displayDescription =
     workshop.description ||
     workshop.shortDescription ||
-    t("workshopFallback", { duration: workshop.duration, subTitle: workshop.subTitle || course.name });
+    t("workshopFallback", {
+      duration: workshop.duration,
+      subTitle: workshop.subTitle || course.name,
+    });
 
   return (
     <div className="min-h-screen bg-slate-50/50 py-10 md:py-16">
@@ -208,6 +220,16 @@ export default async function WorkshopDetailPage({ params }: PageProps) {
                 <p className="text-slate-600 text-base md:text-lg leading-relaxed font-medium text-justify">
                   {displayDescription}
                 </p>
+
+                <div className="relative overflow-hidden bg-white border border-slate-100 rounded-2xl p-6 shadow-sm flex items-start gap-4 mt-6">
+                  <div className="absolute top-0 right-0 -mr-6 -mt-6 w-24 h-24 bg-primary/5 rounded-full blur-xl"></div>
+                  <div className="flex items-center justify-center size-10 rounded-xl bg-primary/10 text-primary shrink-0">
+                    <Zap className="size-5" />
+                  </div>
+                  <p className="text-slate-600 font-medium text-sm md:text-base leading-relaxed relative z-10">
+                    Our intensive workshops at <span className="font-semibold text-slate-800">TEPTH – The Exam Preparation & Testing House</span> help you quickly understand the exam format, master key strategies, and improve your performance in <span className="text-primary font-bold">{course.name}</span> — all in focused sessions designed for busy candidates.
+                  </p>
+                </div>
               </div>
             </div>
 
@@ -282,7 +304,8 @@ export default async function WorkshopDetailPage({ params }: PageProps) {
                   <Badge className="py-1 px-3 font-bold shadow-sm bg-emerald-50 text-emerald-600 hover:bg-emerald-50/80 border-emerald-200">
                     {t("workshops.saveInstant", {
                       discount: discountRaw,
-                      type: workshop.discountType === "PERCENTAGE" ? "%" : " AED"
+                      type:
+                        workshop.discountType === "PERCENTAGE" ? "%" : " AED",
                     })}
                   </Badge>
                 </div>
@@ -312,7 +335,11 @@ export default async function WorkshopDetailPage({ params }: PageProps) {
             <div className="space-y-3.5">
               <div className="flex items-center gap-3 text-sm text-slate-600 font-semibold">
                 <Timer className="size-5 text-primary shrink-0" />
-                <span>{t("workshops.quickInfoDuration", { duration: workshop.duration })}</span>
+                <span>
+                  {t("workshops.quickInfoDuration", {
+                    duration: workshop.duration,
+                  })}
+                </span>
               </div>
 
               <div className="flex items-center gap-3 text-sm text-slate-600 font-semibold">
@@ -324,6 +351,100 @@ export default async function WorkshopDetailPage({ params }: PageProps) {
                 <ShieldCheck className="size-5 text-emerald-500 shrink-0" />
                 <span>{t("workshops.licensedCenter")}</span>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* Flexible Workshops Banner */}
+      <div className="p-8 lg:p-12 relative overflow-hidden">
+        <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
+
+        <div className="relative z-10 grid lg:grid-cols-2 gap-12 items-center">
+          <div className="space-y-8">
+            <div className="space-y-4">
+              <h3 className="text-3xl font-black text-slate-900 leading-tight">
+                Flexible Workshops at{" "}
+                <span className="text-primary">TEPTH</span>
+              </h3>
+              <p className="text-slate-600 text-lg font-medium leading-relaxed">
+                All workshops at TEPTH – The Exam Preparation & Testing House
+                are:
+              </p>
+            </div>
+
+            <ul className="space-y-4">
+              {[
+                "Face-to-face and one-on-one",
+                "Fully customizable according to the candidate's needs",
+                "Focused on practical exam strategies and performance",
+              ].map((item, i) => (
+                <li key={i} className="flex items-start gap-3">
+                  <CheckCircle2 className="size-6 text-primary shrink-0" />
+                  <span className="text-slate-700 font-medium">{item}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div className="flex flex-col sm:flex-row gap-6 pt-6 border-t border-slate-100">
+              <div className="flex items-center gap-3">
+                <div className="flex items-center justify-center size-12 rounded-full bg-primary/10 text-primary">
+                  <MapPin className="size-5" />
+                </div>
+                <div>
+                  <p className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-0.5">
+                    Location
+                  </p>
+                  <p className="text-sm font-semibold text-slate-900">
+                    Suite 703, Apricot Tower, Dubai Silicon Oasis
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="flex items-center justify-center size-12 rounded-full bg-primary/10 text-primary">
+                  <Calendar className="size-5" />
+                </div>
+                <div>
+                  <p className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-0.5">
+                    Scheduling
+                  </p>
+                  <p className="text-sm font-semibold text-slate-900">
+                    Flexible
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-slate-50 rounded-2xl p-8 border border-slate-200">
+            <div className="flex items-center gap-3 mb-6">
+              <Target className="size-6 text-primary" />
+              <h4 className="text-xl font-bold text-slate-900">
+                Who is this for?
+              </h4>
+            </div>
+            <p className="text-slate-600 mb-6 font-medium">
+              Workshops can be particularly helpful for candidates who:
+            </p>
+            <ul className="space-y-3">
+              {[
+                "Have an exam scheduled soon",
+                "Want to refresh their knowledge quickly",
+                "Need guidance on specific modules",
+                "Want to understand the exam format before starting preparation",
+              ].map((item, i) => (
+                <li key={i} className="flex items-start gap-3">
+                  <div className="size-1.5 rounded-full bg-primary mt-2.5 shrink-0" />
+                  <span className="text-slate-700 font-medium text-sm leading-relaxed">
+                    {item}
+                  </span>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-8 p-5 bg-white rounded-xl border border-slate-100 shadow-sm">
+              <p className="text-sm font-semibold text-slate-800 leading-relaxed text-center">
+                These focused sessions allow candidates to gain clarity, improve
+                their approach, and walk into the exam with greater confidence.
+              </p>
             </div>
           </div>
         </div>
