@@ -166,7 +166,7 @@ export default async function ExamPreparationDynamicPage({
     const pkgTranslatedScheduleInfo =
       pkgTrans?.schedule_info || pkgTrans?.scheduleInfo;
 
-    const safeBestFor = pkgTranslatedBestFor
+    const rawBestFor = pkgTranslatedBestFor
       ? Array.isArray(pkgTranslatedBestFor)
         ? pkgTranslatedBestFor
         : typeof pkgTranslatedBestFor === "string"
@@ -174,8 +174,10 @@ export default async function ExamPreparationDynamicPage({
               .split("\n")
               .map((s: string) => s.trim())
               .filter(Boolean)
-          : pkg.bestFor
-      : pkg.bestFor;
+          : (pkg.bestFor || [])
+      : (pkg.bestFor || []);
+
+    const safeBestFor = Array.isArray(rawBestFor) ? rawBestFor : [];
 
     return {
       ...pkg,

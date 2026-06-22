@@ -113,7 +113,9 @@ export default async function PackageDetailPage({ params }: PageProps) {
       ? pkgTranslatedBestFor
       : typeof pkgTranslatedBestFor === "string"
         ? pkgTranslatedBestFor.split("\n").map((s: string) => s.trim()).filter(Boolean)
-        : pkg.bestFor;
+        : (pkg.bestFor || []);
+  } else {
+    pkg.bestFor = pkg.bestFor || [];
   }
   if (pkgTranslatedScheduleInfo) pkg.scheduleInfo = pkgTranslatedScheduleInfo;
 
