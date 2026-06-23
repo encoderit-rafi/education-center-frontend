@@ -12,6 +12,8 @@ import {
   FileCheck,
   Lock,
   ChevronRight,
+  Phone,
+  Mail,
   type LucideIcon,
 } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -35,7 +37,10 @@ export default function ExamProviderPage() {
       icon: FileCheck,
       title: capabilitiesRaw[0].title,
       description: capabilitiesRaw[0].description,
-      badges: [{ label: capabilitiesRaw[0].badges[0] }, { label: capabilitiesRaw[0].badges[1] }],
+      badges: [
+        { label: capabilitiesRaw[0].badges[0] },
+        { label: capabilitiesRaw[0].badges[1] },
+      ],
     },
     {
       icon: Lock,
@@ -107,7 +112,8 @@ export default function ExamProviderPage() {
               </div>
 
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-headline font-black text-slate-900 leading-tight mb-5 tracking-tight">
-                {t("title")} <span className="text-primary italic">{t("titleAccent")}</span>
+                {t("title")}{" "}
+                <span className="text-primary italic">{t("titleAccent")}</span>
               </h1>
 
               <p className="text-sm sm:text-base text-slate-700 leading-relaxed font-sans mb-6 max-w-2xl font-light text-justify">
@@ -115,20 +121,21 @@ export default function ExamProviderPage() {
               </p>
 
               <div className="flex flex-wrap gap-3 sm:gap-4">
-                <Link href="/contact-us">
+                <Link href="/our-venues/360-degree-virtual-tour">
                   <Button className="bg-primary text-white hover:bg-primary-variant px-5 py-3 rounded-lg font-bold text-sm transition-all duration-300 flex items-center gap-2 group shadow-md shadow-primary/10 cursor-pointer h-10">
-                    {t("partnerBtn")}
+                    {t("tourBtn")}
+
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-300" />
                   </Button>
                 </Link>
-                <Link href="/our-venues">
+                {/* <Link href="/our-venues/360-degree-virtual-tour">
                   <Button
                     variant="outline"
                     className="border-slate-200 text-slate-700 hover:bg-slate-50 px-5 py-3 rounded-lg font-bold text-sm transition-all duration-300 flex items-center gap-2 cursor-pointer h-10"
                   >
                     {t("tourBtn")}
                   </Button>
-                </Link>
+                </Link> */}
               </div>
             </div>
 
@@ -167,10 +174,10 @@ export default function ExamProviderPage() {
               key={cap.title}
               className="bg-white p-6 md:p-8 rounded-2xl border border-slate-100 hover:border-primary transition-all duration-300 group flex flex-col md:flex-row gap-6 items-start"
             >
-              <div className="flex-shrink-0 w-12 h-12 bg-maroon-50 rounded-xl flex items-center justify-center text-maroon-700 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+              <div className="shrink-0 w-12 h-12 bg-maroon-50 rounded-xl flex items-center justify-center text-maroon-700 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300">
                 <cap.icon className="w-6 h-6" />
               </div>
-              <div className="flex-grow">
+              <div className="grow">
                 <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-primary transition-colors duration-300">
                   {cap.title}
                 </h3>
@@ -199,6 +206,34 @@ export default function ExamProviderPage() {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Contact CTA Section */}
+      <section className="bg-white border-t border-slate-100 py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-2xl sm:text-3xl font-headline font-black text-slate-900 tracking-tight mb-4">
+            {t("contactTitle")}
+          </h2>
+          <p className="text-slate-600 leading-relaxed font-sans text-base max-w-2xl mx-auto mb-8 font-light">
+            {t("contactInfo")}
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+            <a
+              href="tel:+97165531250"
+              className="flex items-center gap-3 px-6 py-4 rounded-xl bg-primary text-white hover:bg-primary-variant font-bold text-sm transition-all duration-300 w-full sm:w-auto justify-center shadow-md shadow-primary/10"
+            >
+              <Phone className="w-4 h-4" />
+              <span>+971 6 553 1250</span>
+            </a>
+            <a
+              href="mailto:info@tepth.org"
+              className="flex items-center gap-3 px-6 py-4 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 hover:bg-slate-100 font-bold text-sm transition-all duration-300 w-full sm:w-auto justify-center"
+            >
+              <Mail className="w-4 h-4" />
+              <span>info@tepth.org</span>
+            </a>
+          </div>
         </div>
       </section>
     </div>
