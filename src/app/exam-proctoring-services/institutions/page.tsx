@@ -27,7 +27,10 @@ export default function InstitutionsPage() {
   const t = useTranslations("ExamProctoringServicesPage.InstitutionsPage");
 
   const aiTechRaw = t.raw("aiTech") as { title: string; desc: string }[];
-  const facilitiesRaw = t.raw("facilities") as { title: string; desc: string }[];
+  const facilitiesRaw = t.raw("facilities") as {
+    title: string;
+    desc: string;
+  }[];
   const partnerFeatures = t.raw("partnerFeatures") as string[];
 
   const aiTech = aiTechRaw.map((item, i) => ({

@@ -176,7 +176,7 @@ export default function CandidatesProctoringPage() {
                         <td className="py-4 px-5 text-right">
                           <div className="text-right flex items-center justify-end">
                             <PriceDisplay
-                              amount={parseInt(row.fee)}
+                              amount={Number(row.fee)}
                               className="text-lg font-semibold text-primary"
                             />
                           </div>
