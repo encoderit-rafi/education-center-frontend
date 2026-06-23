@@ -3,6 +3,22 @@ import { PRIMARY_NAV } from "@/data";
 import api from "@/axios";
 import { AppNavigationItem } from "@/components/blocks/app-navigation";
 
+const examPriority = (slug: string) => {
+  const s = slug.toLowerCase();
+  if (s.startsWith("ielts")) return 1;
+  if (s.startsWith("pte")) return 2;
+  if (s.startsWith("toefl")) return 3;
+  if (s.startsWith("cael")) return 4;
+  if (s.startsWith("celpip")) return 5;
+  if (s.startsWith("selt") || s.includes("english") || s.includes("skill")) return 6;
+  return 10;
+};
+
+const formatExamName = (name: string) => {
+  if (name === "CELPIP") return "CELPIP General";
+  return name;
+};
+
 interface ApiResponse {
   success: boolean;
   message: string;
@@ -75,9 +91,12 @@ export function usePrimaryNav() {
         examsResponse?.data?.data
           ?.filter((exam) => exam.examType?.some((et) => et.name === "exam"))
           ?.map((exam) => ({
-            name: exam.name,
+            name: formatExamName(exam.name),
             href: `/exams/${exam.slug}`,
-          })) || [];
+            slug: exam.slug,
+          }))
+          ?.sort((a, b) => examPriority(a.slug) - examPriority(b.slug))
+          ?.map(({ name, href }) => ({ name, href })) || [];
 
       return {
         ...item,
@@ -95,9 +114,12 @@ export function usePrimaryNav() {
         examsResponse?.data?.data
           ?.filter((exam) => exam.examType?.some((et) => et.name === "exam"))
           ?.map((exam) => ({
-            name: exam.name,
+            name: formatExamName(exam.name),
             href: `/book-exams/${exam.slug}`,
-          })) || [];
+            slug: exam.slug,
+          }))
+          ?.sort((a, b) => examPriority(a.slug) - examPriority(b.slug))
+          ?.map(({ name, href }) => ({ name, href })) || [];
 
       return {
         ...item,
@@ -108,10 +130,14 @@ export function usePrimaryNav() {
     // We target the Exam Preparation Courses dropdown
     if (item.name === "Exam Preparation Courses" && item.type === "dropdown") {
       const dynamicItems =
-        coursesResponse?.data?.data?.map((course) => ({
-          name: course.name,
-          href: `/exam-preparation-courses/${course.slug}`,
-        })) || [];
+        coursesResponse?.data?.data
+          ?.map((course) => ({
+            name: formatExamName(course.name),
+            href: `/exam-preparation-courses/${course.slug}`,
+            slug: course.slug,
+          }))
+          ?.sort((a, b) => examPriority(a.slug) - examPriority(b.slug))
+          ?.map(({ name, href }) => ({ name, href })) || [];
 
       return {
         ...item,
@@ -120,10 +146,14 @@ export function usePrimaryNav() {
     }
     if (item.name === "Fees" && item.type === "dropdown") {
       const dynamicItems =
-        coursesResponse?.data?.data?.map((course) => ({
-          name: course.name,
-          href: `/fees/${course.slug}`,
-        })) || [];
+        coursesResponse?.data?.data
+          ?.map((course) => ({
+            name: formatExamName(course.name),
+            href: `/fees/${course.slug}`,
+            slug: course.slug,
+          }))
+          ?.sort((a, b) => examPriority(a.slug) - examPriority(b.slug))
+          ?.map(({ name, href }) => ({ name, href })) || [];
 
       return {
         ...item,
@@ -135,7 +165,7 @@ export function usePrimaryNav() {
     if (item.name === "Paid Mock Tests" && item.type === "dropdown") {
       const dynamicItems =
         mockTestsResponse?.data?.data?.map((mockTest) => ({
-          name: mockTest.name,
+          name: formatExamName(mockTest.name),
           href: `/paid-mock-tests/${mockTest.slug}`,
         })) || [];
 

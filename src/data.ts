@@ -74,11 +74,11 @@ export const EXAM_IDS_DATA = {
   },
   toefl: {
     id: "toefl",
-    name: "TOEFL iBT",
+    name: "TOEFL-iBT",
   },
   celpip: {
     id: "celpip",
-    name: "CELPIP",
+    name: "CELPIP General",
   },
   celpip_general: {
     id: "celpip-general",
@@ -139,10 +139,10 @@ export const EXAM_IDS_DATA = {
 };
 export const NAV_EXAMS_DATA = [
   EXAM_IDS_DATA.ielts,
-  EXAM_IDS_DATA.toefl,
   EXAM_IDS_DATA.pte,
-  EXAM_IDS_DATA.celpip,
+  EXAM_IDS_DATA.toefl,
   EXAM_IDS_DATA.cael,
+  EXAM_IDS_DATA.celpip,
   EXAM_IDS_DATA.selt,
 ];
 // export const NAV_EXAM_PREPARATION_COURSES_DATA = [
@@ -156,10 +156,10 @@ export const NAV_EXAMS_DATA = [
 // ];
 export const NAV_TEST_DATES_DATA = [
   EXAM_IDS_DATA.ielts,
-  EXAM_IDS_DATA.toefl,
   EXAM_IDS_DATA.pte,
-  EXAM_IDS_DATA.celpip_general,
+  EXAM_IDS_DATA.toefl,
   EXAM_IDS_DATA.cael,
+  EXAM_IDS_DATA.celpip_general,
   EXAM_IDS_DATA.selt,
 ];
 
@@ -170,24 +170,24 @@ export const TEST_DATES_CARDS_DATA = [
       "Check upcoming IELTS test dates for Academic and General Training modules in Sharjah and across the UAE.",
   },
   {
-    ...EXAM_IDS_DATA.toefl,
-    description:
-      "Find available TOEFL iBT test sessions. Select your preferred date and secure your seat for the internet-based test.",
-  },
-  {
     ...EXAM_IDS_DATA.pte,
     description:
       "View real-time availability for PTE Academic and PTE UKVI tests. Fast results and frequent testing windows.",
   },
   {
-    ...EXAM_IDS_DATA.celpip_general,
+    ...EXAM_IDS_DATA.toefl,
     description:
-      "Upcoming CELPIP General test dates for Canadian immigration and citizenship applications.",
+      "Find available TOEFL iBT test sessions. Select your preferred date and secure your seat for the internet-based test.",
   },
   {
     ...EXAM_IDS_DATA.cael,
     description:
       "Find CAEL test dates for study and professional registration in Canada. Choose from our available sessions.",
+  },
+  {
+    ...EXAM_IDS_DATA.celpip_general,
+    description:
+      "Upcoming CELPIP General test dates for Canadian immigration and citizenship applications.",
   },
   {
     ...EXAM_IDS_DATA.selt,

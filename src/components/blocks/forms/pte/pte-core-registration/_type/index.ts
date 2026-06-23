@@ -55,7 +55,7 @@ export const PteCoreSchema = z.object({
     reasonForTakingOther: z.string().optional(),
     studyLevel: z.string().optional(),
     studyLevelOther: z.string().optional(),
-    occupationSector: z.string().optional(),
+    occupationSector: stringOrObject.refine(val => val.length > 0, "Please select your occupation sector"),
     occupationSectorOther: z.string().optional(),
     referralSource: stringOrObject.refine(val => val.length > 0, "Please select how you heard about us"),
     referralSourceOther: z.string().optional(),
@@ -107,10 +107,7 @@ export const PteCoreSchema = z.object({
     message: "Please specify your field of study",
     path: ["fieldOfStudyOther"],
 })
-.refine((data) => !["canadian_immigration", "temporary_foreign_worker", "pgwp"].includes(data.reasonForTaking) || (data.occupationSector && data.occupationSector !== ""), {
-    message: "Please select your occupation sector",
-    path: ["occupationSector"],
-})
+
 .refine((data) => data.occupationSector !== "Other" || (data.occupationSectorOther && data.occupationSectorOther.trim() !== ""), {
     message: "Please specify your occupation sector",
     path: ["occupationSectorOther"],

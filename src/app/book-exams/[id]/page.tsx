@@ -122,12 +122,8 @@ export default async function BookExamsId({
           <FormTOEFLIBTRegistration examId={exam.id} />
         </div>
       );
+    case "celpip":
     case "celpip-general":
-      return (
-        <div className="min-h-[60vh] p-2 flex items-center justify-center bg-white">
-          <CelpipInfo />
-        </div>
-      );
     case "celpip-general-ls":
       return (
         <div className="min-h-[60vh] p-2 flex items-center justify-center bg-white">
