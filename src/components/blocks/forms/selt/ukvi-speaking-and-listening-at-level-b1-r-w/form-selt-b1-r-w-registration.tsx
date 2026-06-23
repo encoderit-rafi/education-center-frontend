@@ -49,9 +49,9 @@ export default function FormSELTB1RWRegistration({ examId: initialExamId }: Form
   const examId = initialExamId || activeExam?.id;
 
   const { data: courseDetailResponse } = useQuery({
-    queryKey: ["course-detail", "skills-for-english-selt"],
+    queryKey: ["course-detail", "skill-for-english-selt"],
     queryFn: async () => {
-      const response = await api.get("/courses/skills-for-english-selt");
+      const response = await api.get("/courses/skill-for-english-selt");
       return response.data;
     },
   });

@@ -48,7 +48,7 @@ export const SeltA1Schema = z
     takenBefore: z.enum(["Yes", "No"]).or(z.literal("")),
     lessThanTwoYears: z.enum(["Yes", "No", "I do not know"]).or(z.literal("")),
     existingAccount: z
-      .enum(["Yes", "No", "I forgot my IELTS account details"])
+      .enum(["Yes", "No", "I forgot my SELT account details"])
       .or(z.literal("")),
     firstLanguage: z.string().optional(),
     yearsStudyingEnglish: z.string().optional(),

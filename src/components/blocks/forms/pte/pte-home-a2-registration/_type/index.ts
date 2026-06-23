@@ -64,7 +64,7 @@ export const PteHomeA2Schema = z.object({
     
     takenBefore: z.enum(["yes", "no"]).or(z.literal("")),
     takenWithinTwoYears: z.enum(["yes", "no"]).or(z.literal("")),
-    hasExistingAccount: z.enum(["yes", "no"]).or(z.literal("")),
+    hasExistingAccount: z.enum(["yes", "no", "I forgot my PTE account details"]).or(z.literal("")),
 
     marketingPreference: z.string().min(1, "Please select a marketing preference"),
 

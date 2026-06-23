@@ -525,7 +525,7 @@ export function RegistrationFormStep({
                     value={formData.existingAccount}
                     className="flex flex-col gap-3"
                   >
-                    {["Yes", "No", "I forgot my account details"].map((opt) => (
+                    {["Yes", "No", "I forgot my SELT account details"].map((opt) => (
                       <Label
                         key={opt}
                         htmlFor={`acc-${opt}`}
