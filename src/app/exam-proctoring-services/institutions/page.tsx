@@ -27,7 +27,10 @@ export default function InstitutionsPage() {
   const t = useTranslations("ExamProctoringServicesPage.InstitutionsPage");
 
   const aiTechRaw = t.raw("aiTech") as { title: string; desc: string }[];
-  const facilitiesRaw = t.raw("facilities") as { title: string; desc: string }[];
+  const facilitiesRaw = t.raw("facilities") as {
+    title: string;
+    desc: string;
+  }[];
   const partnerFeatures = t.raw("partnerFeatures") as string[];
 
   const aiTech = aiTechRaw.map((item, i) => ({
@@ -136,7 +139,7 @@ export default function InstitutionsPage() {
           </div>
 
           {/* Partnership CTA */}
-          <div className="lg:col-span-5 rounded-3xl bg-gradient-to-br from-[#A11D1D] to-[#871818] p-8 md:p-10 text-white flex flex-col justify-between">
+          <div className="lg:col-span-5 rounded-3xl bg-linear-to-br from-[#A11D1D] to-[#871818] p-8 md:p-10 text-white flex flex-col justify-between">
             <div>
               <h2 className="text-3xl font-semibold mb-5">
                 {t("partnerTitle")}

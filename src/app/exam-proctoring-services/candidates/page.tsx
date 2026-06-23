@@ -49,7 +49,7 @@ export default function CandidatesProctoringPage() {
             </div>
             {/* Right Column - Showing Image */}
             <div className="lg:col-span-5 flex justify-center">
-              <div className="w-full max-w-[450px] rounded-2xl overflow-hidden shadow-lg border border-slate-100 bg-slate-50 p-1.5">
+              <div className="w-full max-w-112.5 rounded-2xl overflow-hidden shadow-lg border border-slate-100 bg-slate-50 p-1.5">
                 <Image
                   className="w-full h-auto rounded-xl object-contain block"
                   alt="Exam proctoring services for candidates at TEPTH"
