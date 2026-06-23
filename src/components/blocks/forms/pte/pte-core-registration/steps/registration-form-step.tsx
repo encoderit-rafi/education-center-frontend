@@ -503,10 +503,6 @@ export function RegistrationFormStep({
                     setValue("fieldOfStudy", "");
                     setValue("fieldOfStudyOther", "");
                   }
-                  if (!["canadian_immigration", "temporary_foreign_worker", "pgwp"].includes(val)) {
-                    setValue("occupationSector", "");
-                    setValue("occupationSectorOther", "");
-                  }
                 }}
               />
               {formData.reasonForTaking === "other" && (
@@ -524,33 +520,29 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.referralSource}>
-            <FieldLabel required>How did you hear about the test?</FieldLabel>
+            <FieldLabel required>How did you hear about PTE Core?</FieldLabel>
             <FieldContent>
               <SearchableDropdown
                 options={[
-                  { label: "Australian Department of Home Affairs (DHA)", value: "dha" },
-                  { label: "Board of Nursing", value: "board_of_nursing" },
-                  { label: "Education Agent Advisor - specify below", value: "education_agent" },
-                  { label: "Education event - specify below", value: "education_event" },
-                  { label: "Education Malaysia Global Services (EMGS)", value: "emgs" },
+                  { label: "Agent advisor - Specify below", value: "agent_advisor" },
+                  { label: "Event - Specify below", value: "event" },
                   { label: "Friend or family", value: "friend_family" },
-                  { label: "Immigration New Zealand (INZ)", value: "inz" },
+                  { label: "Immigration, Refugees and Citizenship Canada (IRCC)", value: "ircc" },
                   { label: "Internet search", value: "internet_search" },
-                  { label: "Language School", value: "language_school" },
-                  { label: "Migration agent / lawyer - specify below", value: "migration_agent" },
-                  { label: "Social Media (e.g. Facebook, Twitter, Weibo etc)", value: "social_media" },
-                  { label: "University or College - specify below", value: "university_college" },
-                  { label: "Other - specify below", value: "Other" },
+                  { label: "Language school", value: "language_school" },
+                  { label: "Migration agent / lawyer - Specify below", value: "migration_agent" },
+                  { label: "Social media (e.g. Facebook, Twitter, Weibo, etc.)", value: "social_media" },
+                  { label: "Other - Specify below", value: "other" },
                 ]}
                 placeholder="Select one..."
                 value={formData.referralSource}
                 onChange={(val) => {
                   setValue("referralSource", val);
-                  const specifyOptions = ["education_agent", "education_event", "migration_agent", "university_college", "Other"];
+                  const specifyOptions = ["agent_advisor", "event", "migration_agent", "other"];
                   if (!specifyOptions.includes(val)) setValue("referralSourceOther", "");
                 }}
               />
-              {["education_agent", "education_event", "migration_agent", "university_college", "Other"].includes(formData.referralSource) && (
+              {["agent_advisor", "event", "migration_agent", "other"].includes(formData.referralSource) && (
                 <div className="mt-2 animate-in fade-in slide-in-from-top-2 duration-300">
                   <Input
                     placeholder="Please specify"
@@ -662,59 +654,57 @@ export function RegistrationFormStep({
             </Field>
           )}
 
-          {["canadian_immigration", "temporary_foreign_worker", "pgwp"].includes(formData.reasonForTaking) && (
-            <Field
-              data-invalid={!!errors.occupationSector}
-              className="md:col-span-2 animate-in fade-in slide-in-from-top-2"
-            >
-              <FieldLabel required>What is your occupation sector?</FieldLabel>
-              <FieldContent>
-                <SearchableDropdown
-                  options={[
-                    { label: "Agriculture, Fishing, Forestry, Mining", value: "Agriculture, Fishing, Forestry, Mining" },
-                    { label: "Architecture", value: "Architecture" },
-                    { label: "Arts and Entertainment", value: "Arts and Entertainment" },
-                    { label: "Banking and Finance", value: "Banking and Finance" },
-                    { label: "Catering and Leisure", value: "Catering and Leisure" },
-                    { label: "Construction Industries", value: "Construction Industries" },
-                    { label: "Communications and Media", value: "Communications and Media" },
-                    { label: "Craft and Design", value: "Craft and Design" },
-                    { label: "Education", value: "Education" },
-                    { label: "Health and Social Services", value: "Health and Social Services" },
-                    { label: "Installation, Maintenance and Repair Services", value: "Installation, Maintenance and Repair Services" },
-                    { label: "Law and Legal Services", value: "Law and Legal Services" },
-                    { label: "Manufacturing and Assembly Services", value: "Manufacturing and Assembly Services" },
-                    { label: "Personal Services", value: "Personal Services" },
-                    { label: "Retail Trade", value: "Retail Trade" },
-                    { label: "Technical and Scientific", value: "Technical and Scientific" },
-                    { label: "Telecommunications and Media", value: "Telecommunications and Media" },
-                    { label: "Transport", value: "Transport" },
-                    { label: "Utilities (Gas, Water, Electricity, etc.)", value: "Utilities (Gas, Water, Electricity, etc.)" },
-                    { label: "Wholesale Trade", value: "Wholesale Trade" },
-                    { label: "Other - Specify below", value: "Other" },
-                  ]}
-                  placeholder="-Select Sector-"
-                  value={formData.occupationSector}
-                  onChange={(val) => {
-                    setValue("occupationSector", val);
-                    if (val !== "Other") setValue("occupationSectorOther", "");
-                  }}
-                />
-                {formData.occupationSector === "Other" && (
-                  <div className="mt-2 animate-in fade-in slide-in-from-top-2 duration-300">
-                    <Input
-                      placeholder="Please specify your occupation sector"
-                      value={formData.occupationSectorOther ?? ""}
-                      onChange={(e) => setValue("occupationSectorOther", e.target.value)}
-                      className="border-primary/40 focus:border-primary"
-                    />
-                    <FieldError errors={[errors.occupationSectorOther]} />
-                  </div>
-                )}
-                <FieldError errors={[errors.occupationSector]} />
-              </FieldContent>
-            </Field>
-          )}
+          <Field
+            data-invalid={!!errors.occupationSector}
+            className="md:col-span-2 animate-in fade-in slide-in-from-top-2"
+          >
+            <FieldLabel required>What is your occupation sector?</FieldLabel>
+            <FieldContent>
+              <SearchableDropdown
+                options={[
+                  { label: "Agriculture, Fishing, Forestry, Mining", value: "Agriculture, Fishing, Forestry, Mining" },
+                  { label: "Architecture", value: "Architecture" },
+                  { label: "Arts and Entertainment", value: "Arts and Entertainment" },
+                  { label: "Banking and Finance", value: "Banking and Finance" },
+                  { label: "Catering and Leisure", value: "Catering and Leisure" },
+                  { label: "Construction Industries", value: "Construction Industries" },
+                  { label: "Communications and Media", value: "Communications and Media" },
+                  { label: "Craft and Design", value: "Craft and Design" },
+                  { label: "Education", value: "Education" },
+                  { label: "Health and Social Services", value: "Health and Social Services" },
+                  { label: "Installation, Maintenance and Repair Services", value: "Installation, Maintenance and Repair Services" },
+                  { label: "Law and Legal Services", value: "Law and Legal Services" },
+                  { label: "Manufacturing and Assembly Services", value: "Manufacturing and Assembly Services" },
+                  { label: "Personal Services", value: "Personal Services" },
+                  { label: "Retail Trade", value: "Retail Trade" },
+                  { label: "Technical and Scientific", value: "Technical and Scientific" },
+                  { label: "Telecommunications and Media", value: "Telecommunications and Media" },
+                  { label: "Transport", value: "Transport" },
+                  { label: "Utilities (Gas, Water, Electricity, etc.)", value: "Utilities (Gas, Water, Electricity, etc.)" },
+                  { label: "Wholesale Trade", value: "Wholesale Trade" },
+                  { label: "Other - Specify below", value: "Other" },
+                ]}
+                placeholder="Select one..."
+                value={formData.occupationSector}
+                onChange={(val) => {
+                  setValue("occupationSector", val);
+                  if (val !== "Other") setValue("occupationSectorOther", "");
+                }}
+              />
+              {formData.occupationSector === "Other" && (
+                <div className="mt-2 animate-in fade-in slide-in-from-top-2 duration-300">
+                  <Input
+                    placeholder="Please specify your occupation sector"
+                    value={formData.occupationSectorOther ?? ""}
+                    onChange={(e) => setValue("occupationSectorOther", e.target.value)}
+                    className="border-primary/40 focus:border-primary"
+                  />
+                  <FieldError errors={[errors.occupationSectorOther]} />
+                </div>
+              )}
+              <FieldError errors={[errors.occupationSector]} />
+            </FieldContent>
+          </Field>
 
         </div>
         <div className="space-y-3 md:col-span-2 animate-in fade-in slide-in-from-top-2">

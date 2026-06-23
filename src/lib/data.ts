@@ -328,7 +328,7 @@ export const exams_types = [
   {
     exam: {
       id: "celpip",
-      name: "CELPIP",
+      name: "CELPIP General",
     },
     types: [
       {
@@ -1085,7 +1085,7 @@ export const exams = [
   },
   {
     id: "celpip",
-    name: "CELPIP",
+    name: "CELPIP General",
     provider: "Prometric",
     image: "/images/brands/celpip.png",
     content:

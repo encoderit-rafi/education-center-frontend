@@ -535,17 +535,16 @@ export function RegistrationFormStep({
             <FieldContent>
               <SearchableDropdown
                 options={[
-                  { label: "Australian Department of Home Affairs (DHA)", value: "dha" },
-                  { label: "Board of Nursing", value: "board_of_nursing" },
                   { label: "Education Agent Advisor - specify below", value: "education_agent" },
                   { label: "Education event - specify below", value: "education_event" },
-                  { label: "Education Malaysian Global Services (EMGS)", value: "emgs" }, // Wait, Malaysian in EMGS? Let's check original. Ah, EMGS is Education Malaysia Global Services, let's keep original options.
-                  { label: "Friend or family", value: "friend_family" },
-                  { label: "Immigration New Zealand (INZ)", value: "inz" },
-                  { label: "Internet search", value: "internet_search" },
+                  { label: "Friend or Family", value: "friend_family" },
+                  { label: "Internet Search", value: "internet_search" },
                   { label: "Language School", value: "language_school" },
-                  { label: "Migration agent / lawyer - specify below", value: "migration_agent" },
-                  { label: "Social Media (e.g. Facebook, Twitter, Weibo etc)", value: "social_media" },
+                  { label: "Migration Agent/Lawyer - specify below", value: "migration_agent" },
+                  { label: "Outdoor Advert", value: "outdoor_advert" },
+                  { label: "Radio Advert", value: "radio_advert" },
+                  { label: "Social Media (e.g. Facebook, Twitter,Weibo etc.)", value: "social_media" },
+                  { label: "UK Visas and Immigration (UKVI)", value: "ukvi" },
                   { label: "University or College - specify below", value: "university_college" },
                   { label: "Other - specify below", value: "Other" },
                 ]}
