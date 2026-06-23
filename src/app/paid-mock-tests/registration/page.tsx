@@ -216,6 +216,7 @@ function PaidMockTestRegistrationForm({
     const payload = {
       mock_test_id: data?.id || id || formData.mockTestId || "",
       varient: formData.varient || "",
+      mock_test_type_name: formData.varient || "",
       first_name: formData.firstName,
       last_name: formData.lastName,
       email: formData.email,
@@ -229,6 +230,8 @@ function PaidMockTestRegistrationForm({
       payment_methods: formData.paymentMethod,
     };
 
+    console.log("payload", payload);
+    return;
     mutation.mutate(omitEmpty(payload));
   };
 
