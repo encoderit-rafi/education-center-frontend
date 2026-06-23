@@ -891,10 +891,7 @@
         {
           "title": "Required Business Licences & Permits",
           "description": "It is very important to partner with a test center that holds the relevant business activity with the local authority to become a test center. The Exam Preparation & Testing House L.L.C is licensed by Sharjah Economic Development Department (SEDD) and regulated by Sharjah Private Education Authority (SPEA).",
-          "badges": [
-            "Licensed by SEDD",
-            "Regulated by SPEA"
-          ]
+          "badges": ["Licensed by SEDD", "Regulated by SPEA"]
         },
         {
           "title": "Test Security",
@@ -907,38 +904,27 @@
         {
           "title": "Flexible Exam Delivery",
           "description": "Flexible scheduling options that accommodate massive single-day events, designated testing windows, Morning, Afternoon & Evening slots, or continuous testing year-round.",
-          "badges": [
-            "Continuous & Event-Based Options"
-          ]
+          "badges": ["Continuous & Event-Based Options"]
         },
         {
           "title": "Top-notch Exam Venues",
           "description": "Our modern, easily accessible testing centers are fully equipped with high-performance hardware and advanced technology to ensure an optimal testing environment.",
-          "badges": [
-            "Easily Accessible & Premium Venues"
-          ]
+          "badges": ["Easily Accessible & Premium Venues"]
         },
         {
           "title": "Noise-Free Environment",
           "description": "To minimize distractions and lower noise levels, we have implemented several workplace enhancements. Workstations feature fabric acoustic panels and are spaced generously apart, while testing rooms are carpeted to ensure a quiet environment. Additionally, we utilize white noise machines in the computer labs, alongside quiet keyboards and high-quality headsets throughout our spaces.",
-          "badges": [
-            "Fabric Acoustic Panels",
-            "White Noise Systems Equipped"
-          ]
+          "badges": ["Fabric Acoustic Panels", "White Noise Systems Equipped"]
         },
         {
           "title": "Technical Infrastructure",
           "description": "Our technical specifications meet your technical requirements. We provide dedicated, robust desktop PCs and 24-inch monitors.",
-          "badges": [
-            "High-Performance Specifications"
-          ]
+          "badges": ["High-Performance Specifications"]
         },
         {
           "title": "Special Accommodation",
           "description": "We provide tailored support for candidates who need testing accommodations, offering personalized services such as extended time, frequent breaks, private rooms, and specialized assistive software and equipment.",
-          "badges": [
-            "Adaptive Assistance Softwares"
-          ]
+          "badges": ["Adaptive Assistance Softwares"]
         }
       ],
       "contactInfo": "Get in touch with us today to discuss your needs or tour our venues online. You may also schedule a visit to our venues. Give us a call at +97165531250 or drop us an email at info@tepth.org",
@@ -967,7 +953,7 @@
       "step3Title": "Inform Your Home Institution",
       "step3Description": "Provide them with our contact details so they can send us your exam package securely. If no return envelope is provided, we can arrange a courier for an additional charge.",
       "step3Disclaimer": "We are not responsible for the package after courier collection.",
-      "feesHeading": "Proctoring Fees",
+      "feesHeading": "In-Person Proctoring Fees",
       "feesColDuration": "Duration",
       "feesColFee": "Fee",
       "feeNote1": "One dedicated proctor provided",
@@ -1397,11 +1383,7 @@
       "assistivePersonnel": {
         "title": "Assistive Personnel",
         "desc": "Qualified scribes, readers, and sign-language interpreters can be provided to assist candidates in conveying their knowledge accurately.",
-        "tags": [
-          "Amanuensis",
-          "Oral Transcribers",
-          "Invigilators"
-        ]
+        "tags": ["Amanuensis", "Oral Transcribers", "Invigilators"]
       }
     },
     "howToApply": {
@@ -1772,10 +1754,7 @@
       "whoShouldTake": [
         "Students applying for UK student visas (degree level)"
       ],
-      "acceptedFor": [
-        "UK Visas and Immigration (UKVI)",
-        "UK Universities"
-      ]
+      "acceptedFor": ["UK Visas and Immigration (UKVI)", "UK Universities"]
     },
     "ielts-ukvi-general": {
       "subtitle": "For migration and work in the UK",
@@ -1821,14 +1800,8 @@
           "details": "Face-to-face interview"
         }
       ],
-      "whoShouldTake": [
-        "Migrants to the UK",
-        "Work visa applicants"
-      ],
-      "acceptedFor": [
-        "UK Visas and Immigration (UKVI)",
-        "UK Work Permits"
-      ]
+      "whoShouldTake": ["Migrants to the UK", "Work visa applicants"],
+      "acceptedFor": ["UK Visas and Immigration (UKVI)", "UK Work Permits"]
     },
     "ielts-life-skills-a1": {
       "subtitle": "For Family, Spouse or Partner visas",
@@ -1855,12 +1828,8 @@
           "details": "Face-to-face interview with an examiner and another test taker."
         }
       ],
-      "whoShouldTake": [
-        "UK Family/Spouse visa applicants"
-      ],
-      "acceptedFor": [
-        "UK Visas and Immigration (UKVI)"
-      ]
+      "whoShouldTake": ["UK Family/Spouse visa applicants"],
+      "acceptedFor": ["UK Visas and Immigration (UKVI)"]
     },
     "ielts-life-skills-a2": {
       "subtitle": "For Family visa extension",
@@ -1887,12 +1856,8 @@
           "details": "Face-to-face interview with an examiner and another test taker."
         }
       ],
-      "whoShouldTake": [
-        "UK Family visa extension applicants"
-      ],
-      "acceptedFor": [
-        "UK Visas and Immigration (UKVI)"
-      ]
+      "whoShouldTake": ["UK Family visa extension applicants"],
+      "acceptedFor": ["UK Visas and Immigration (UKVI)"]
     },
     "ielts-life-skills-b1": {
       "subtitle": "For Citizenship and Settlement",
@@ -1919,12 +1884,8 @@
           "details": "Face-to-face interview with an examiner and another test taker."
         }
       ],
-      "whoShouldTake": [
-        "UK Citizenship/Settlement applicants"
-      ],
-      "acceptedFor": [
-        "UK Visas and Immigration (UKVI)"
-      ]
+      "whoShouldTake": ["UK Citizenship/Settlement applicants"],
+      "acceptedFor": ["UK Visas and Immigration (UKVI)"]
     },
     "toefl": {
       "subtitle": "Test of English as a Foreign Language — Internet-Based Test",
@@ -2155,12 +2116,8 @@
           "details": "Summarize spoken text, dictation"
         }
       ],
-      "whoShouldTake": [
-        "UK visa applicants"
-      ],
-      "acceptedFor": [
-        "UK Visas and Immigration (UKVI)"
-      ]
+      "whoShouldTake": ["UK visa applicants"],
+      "acceptedFor": ["UK Visas and Immigration (UKVI)"]
     },
     "pte-home-a1": {
       "subtitle": "For Family and Work visas in the UK",
@@ -2187,12 +2144,8 @@
           "details": "Speaking and listening tasks only"
         }
       ],
-      "whoShouldTake": [
-        "UK Family/Spouse visa applicants"
-      ],
-      "acceptedFor": [
-        "UK Visas and Immigration (UKVI)"
-      ]
+      "whoShouldTake": ["UK Family/Spouse visa applicants"],
+      "acceptedFor": ["UK Visas and Immigration (UKVI)"]
     },
     "pte-home-a2": {
       "subtitle": "For UK Family visa extension",
@@ -2219,12 +2172,8 @@
           "details": "Speaking and listening tasks only"
         }
       ],
-      "whoShouldTake": [
-        "UK Family visa extension applicants"
-      ],
-      "acceptedFor": [
-        "UK Visas and Immigration (UKVI)"
-      ]
+      "whoShouldTake": ["UK Family visa extension applicants"],
+      "acceptedFor": ["UK Visas and Immigration (UKVI)"]
     },
     "pte-home-b1": {
       "subtitle": "For UK Citizenship and Settlement",
@@ -2251,12 +2200,8 @@
           "details": "Speaking and listening tasks only"
         }
       ],
-      "whoShouldTake": [
-        "UK Citizenship and Settlement applicants"
-      ],
-      "acceptedFor": [
-        "UK Visas and Immigration (UKVI)"
-      ]
+      "whoShouldTake": ["UK Citizenship and Settlement applicants"],
+      "acceptedFor": ["UK Visas and Immigration (UKVI)"]
     },
     "celpip-general": {
       "subtitle": "For Permanent Residency in Canada",
@@ -2377,12 +2322,8 @@
           "format": "Task 1: Giving Advice\nTask 2: Talking about a Personal Experience\nTask 3: Describing a Scene\nTask 4: Making Predictions\nTask 5: Comparing and Persuading\nTask 6: Dealing with a Difficult Situation\nTask 7: Expressing Opinions\nTask 8: Describing an Unusual Situation"
         }
       ],
-      "whoShouldTake": [
-        "Canadian citizenship applicants"
-      ],
-      "acceptedFor": [
-        "Canadian Citizenship"
-      ]
+      "whoShouldTake": ["Canadian citizenship applicants"],
+      "acceptedFor": ["Canadian Citizenship"]
     },
     "cael": {
       "subtitle": "Canadian Academic English Language Test",
@@ -2491,11 +2432,7 @@
           "details": "Profession-specific role-plays."
         }
       ],
-      "whoShouldTake": [
-        "Doctors",
-        "Nurses",
-        "Healthcare professionals"
-      ],
+      "whoShouldTake": ["Doctors", "Nurses", "Healthcare professionals"],
       "acceptedFor": [
         "Healthcare registration",
         "Migration for health professionals"
@@ -2519,10 +2456,7 @@
         "Professional certification seekers",
         "Licensing applicants"
       ],
-      "acceptedFor": [
-        "Industry certifications",
-        "Professional licensing"
-      ]
+      "acceptedFor": ["Industry certifications", "Professional licensing"]
     },
     "selt": {
       "description": "Home Office-approved Secure English Language Tests (SELT) for UK visa applications."
@@ -2556,9 +2490,7 @@
         "UK Family visa applicants",
         "UK Spouse visa applicants"
       ],
-      "acceptedFor": [
-        "UK Visas and Immigration (UKVI)"
-      ]
+      "acceptedFor": ["UK Visas and Immigration (UKVI)"]
     },
     "selt-a2": {
       "subtitle": "For UK Family visa extension",
@@ -2585,12 +2517,8 @@
           "details": "Speaking and listening tasks"
         }
       ],
-      "whoShouldTake": [
-        "UK Family visa extension applicants"
-      ],
-      "acceptedFor": [
-        "UK Visas and Immigration (UKVI)"
-      ]
+      "whoShouldTake": ["UK Family visa extension applicants"],
+      "acceptedFor": ["UK Visas and Immigration (UKVI)"]
     },
     "selt-b1": {
       "subtitle": "For UK Citizenship and Settlement",
@@ -2621,9 +2549,7 @@
         "UK Citizenship applicants",
         "UK Settlement applicants"
       ],
-      "acceptedFor": [
-        "UK Visas and Immigration (UKVI)"
-      ]
+      "acceptedFor": ["UK Visas and Immigration (UKVI)"]
     },
     "selt-b1-r-w": {
       "subtitle": "For UK Work and Student visas",
@@ -2657,13 +2583,8 @@
           "duration": "60 min"
         }
       ],
-      "whoShouldTake": [
-        "Work visa applicants",
-        "Student visa applicants"
-      ],
-      "acceptedFor": [
-        "UK Visas and Immigration (UKVI)"
-      ]
+      "whoShouldTake": ["Work visa applicants", "Student visa applicants"],
+      "acceptedFor": ["UK Visas and Immigration (UKVI)"]
     },
     "selt-b2": {
       "subtitle": "For UK Work and Professional visas",
@@ -2701,9 +2622,7 @@
         "Professional registration seekers",
         "Advanced work visa applicants"
       ],
-      "acceptedFor": [
-        "UK Visas and Immigration (UKVI)"
-      ]
+      "acceptedFor": ["UK Visas and Immigration (UKVI)"]
     },
     "selt-c1": {
       "subtitle": "For advanced UK academic and professional requirements",
@@ -2741,9 +2660,7 @@
         "Advanced academic students",
         "Senior professional applicants"
       ],
-      "acceptedFor": [
-        "UK Visas and Immigration (UKVI)"
-      ]
+      "acceptedFor": ["UK Visas and Immigration (UKVI)"]
     },
     "selt-c2": {
       "subtitle": "For near-native UK requirements",
@@ -2781,9 +2698,7 @@
         "Highest level academic seekers",
         "Native-equivalent proficiency seekers"
       ],
-      "acceptedFor": [
-        "UK Visas and Immigration (UKVI)"
-      ]
+      "acceptedFor": ["UK Visas and Immigration (UKVI)"]
     }
   },
   "TermsSteps": {

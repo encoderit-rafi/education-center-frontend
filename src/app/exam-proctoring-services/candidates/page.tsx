@@ -1,3 +1,4 @@
+import Image from "next/image";
 import {
   Info,
   CreditCard,
@@ -33,16 +34,32 @@ export default function CandidatesProctoringPage() {
   return (
     <div className="flex flex-col min-h-screen bg-slate-50">
       {/* 1. Hero Section */}
-      <section className="bg-white border-b border-slate-200 py-16 md:py-24">
+      <section className="bg-white border-b border-slate-200 py-16 md:py-20">
         <div className="container px-6 mx-auto lg:px-24">
-          <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-slate-900 mb-6 leading-tight">
-              {t("heroTitle")}{" "}
-              <span className="text-primary">{t("heroTitleAccent")}</span>
-            </h1>
-            <p className="text-lg md:text-xl text-slate-600 leading-relaxed max-w-2xl">
-              {t("heroDescription")}
-            </p>
+          <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+            {/* Left Content Column */}
+            <div className="lg:col-span-7 flex flex-col justify-center">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-slate-900 mb-6 leading-tight">
+                {t("heroTitle")}{" "}
+                <span className="text-primary">{t("heroTitleAccent")}</span>
+              </h1>
+              <p className="text-lg md:text-xl text-slate-600 leading-relaxed max-w-2xl">
+                {t("heroDescription")}
+              </p>
+            </div>
+            {/* Right Column - Showing Image */}
+            <div className="lg:col-span-5 flex justify-center">
+              <div className="w-full max-w-[450px] rounded-2xl overflow-hidden shadow-lg border border-slate-100 bg-slate-50 p-1.5">
+                <Image
+                  className="w-full h-auto rounded-xl object-contain block"
+                  alt="Exam proctoring services for candidates at TEPTH"
+                  src="/images/exam_proctoring_services.jpg"
+                  width={500}
+                  height={500}
+                  priority
+                />
+              </div>
+            </div>
           </div>
         </div>
       </section>
