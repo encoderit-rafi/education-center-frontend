@@ -44,9 +44,9 @@ export default function FormTOEFLIBTRegistration({ examId: initialExamId }: Form
     const examId = initialExamId || activeExam?.id;
 
     const { data: courseDetailResponse } = useQuery({
-        queryKey: ["course-detail", "toefl"],
+        queryKey: ["course-detail", "toefl-ibt"],
         queryFn: async () => {
-            const response = await api.get("/courses/toefl");
+            const response = await api.get("/courses/toefl-ibt");
             return response.data;
         },
     });
@@ -169,7 +169,7 @@ export default function FormTOEFLIBTRegistration({ examId: initialExamId }: Form
         const baseFeeUSD = Math.round(baseFeeAED / 3.67) || 340;
 
         // Express registration fee (7 days or less)
-        const expressFeeUSD = isExpress ? 40 : 0;
+        const expressFeeUSD = isExpress ? 49 : 0;
         const expressFeeAED = isExpress ? 190 : 0;
 
         // Course fee (in AED)
@@ -436,7 +436,7 @@ export default function FormTOEFLIBTRegistration({ examId: initialExamId }: Form
                                         <div className="flex justify-between text-sm items-center animate-in fade-in slide-in-from-top-1 duration-300">
                                             <span className="text-slate-500 font-medium">Express Registration Fee</span>
                                             <span className="font-bold text-red-700 inline-flex items-center gap-1">
-                                                $40 <span className="text-red-500/80 font-normal text-xs inline-flex items-center gap-0.5">(estimated <PriceDisplay amount={190} minimumFractionDigits={0} maximumFractionDigits={0} className="text-red-500/80 font-normal text-xs" />)</span>
+                                                ${pricing.expressFeeUSD} <span className="text-red-500/80 font-normal text-xs inline-flex items-center gap-0.5">(estimated <PriceDisplay amount={pricing.expressFeeAED} minimumFractionDigits={0} maximumFractionDigits={0} className="text-red-500/80 font-normal text-xs" />)</span>
                                             </span>
                                         </div>
                                     )}
