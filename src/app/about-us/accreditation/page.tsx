@@ -17,7 +17,9 @@ export default function Accreditation() {
             title={
               <>
                 {t("HeroSection.title")}
-                <span className="text-primary">{t("HeroSection.titleAccent")}</span>
+                <span className="text-primary">
+                  {t("HeroSection.titleAccent")}
+                </span>
               </>
             }
             description={t("HeroSection.description")}
@@ -27,7 +29,7 @@ export default function Accreditation() {
           {/* Right Visual */}
           <div className="relative group">
             <div className="absolute -inset-4 bg-primary/5 rounded-xl blur-3xl opacity-50 transition-opacity group-hover:opacity-100"></div>
-            <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
+            <div className="relative aspect-4/3 rounded-xl overflow-hidden shadow-2xl">
               <Image
                 src="/images/about-us/approve.png"
                 alt="Accreditation Hero"
@@ -50,7 +52,7 @@ export default function Accreditation() {
               {/* SEDD */}
               <div className="flex flex-col md:flex-row items-center gap-10 group">
                 <div className="w-full md:flex-1">
-                  <div className="relative w-full aspect-[2/1] overflow-hidden transition-all">
+                  <div className="relative w-full aspect-2/1 overflow-hidden transition-all">
                     <Image
                       src="/images/about-us/goverment.png"
                       alt="SEDD Logo"
@@ -74,7 +76,7 @@ export default function Accreditation() {
                   </p>
                 </div>
                 <div className="w-full md:flex-1">
-                  <div className="relative w-full aspect-[2/1] overflow-hidden transition-all">
+                  <div className="relative w-full aspect-2/1 overflow-hidden transition-all">
                     <Image
                       src="/images/about-us/private.png"
                       alt="SPEA Logo"
