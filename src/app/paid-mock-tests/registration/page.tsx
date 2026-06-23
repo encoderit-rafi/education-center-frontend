@@ -24,7 +24,7 @@ import {
 import { PhoneInput } from "@/components/ui/phone-input";
 import { CountryDropdown } from "@/components/ui/country-dropdown";
 
-import { CheckCircle2, Info, Calendar } from "lucide-react";
+import { CheckCircle2, Info, Calendar, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { notFound, useSearchParams } from "next/navigation";
 import Stepper from "@/components/stepper";
@@ -151,9 +151,13 @@ function PaidMockTestRegistrationForm({
   const priceParam = searchParams.get("price");
   const variantParam = searchParams.get("variant") || "";
   const rawCenterPrice = data?.details?.center_price ?? data?.center_price;
-  const PRICE = priceParam
-    ? parseFloat(priceParam)
-    : (data ? parseFloat((locationParam === "center" ? rawCenterPrice : data.price) || data.price || "350") : 350);
+
+  const parsedPriceParam = priceParam ? parseFloat(priceParam) : 0;
+  const defaultHomePrice = data?.price && parseFloat(data.price) > 0 ? parseFloat(data.price) : 350;
+  const defaultCenterPrice = rawCenterPrice && parseFloat(String(rawCenterPrice)) > 0 ? parseFloat(String(rawCenterPrice)) : 450;
+  const defaultPrice = locationParam === "center" ? defaultCenterPrice : defaultHomePrice;
+
+  const PRICE = parsedPriceParam > 0 ? parsedPriceParam : defaultPrice;
   const CURRENCY = "AED";
 
   const examKey = data?.slug
@@ -230,10 +234,10 @@ function PaidMockTestRegistrationForm({
       payment_methods: formData.paymentMethod,
     };
 
-    console.log("payload", payload);
-    return;
     mutation.mutate(omitEmpty(payload));
   };
+
+  const isPending = mutation.isPending || paymentMutation.isPending;
 
   if (isLoading) {
     return (
@@ -545,9 +549,16 @@ function PaidMockTestRegistrationForm({
                 <Button
                   type="submit"
                   className="w-full mt-6 py-3"
-                  disabled={mutation.isPending}
+                  disabled={isPending}
                 >
-                  {mutation.isPending ? t("processing") : t("acceptPay")}
+                  {isPending ? (
+                    <span className="flex items-center justify-center gap-2">
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      {t("processing")}
+                    </span>
+                  ) : (
+                    t("acceptPay")
+                  )}
                 </Button>
                 {mutation.isError && (
                   <p className="text-red-500 text-sm mt-2">

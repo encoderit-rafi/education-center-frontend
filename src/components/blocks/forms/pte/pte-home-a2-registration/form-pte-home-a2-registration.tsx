@@ -159,8 +159,8 @@ export default function FormPTEHomeA2Registration({ examId: initialExamId }: For
   };
 
   const calculateTotal = () => {
-    const baseFee = activeExam?.examFee ? parseFloat(activeExam.examFee) : 1230;
-    const serviceFee = activeExam?.additionalFee ? parseFloat(activeExam.additionalFee) : 150;
+    const baseFee = activeExam?.examFee && parseFloat(activeExam.examFee) > 0 ? parseFloat(activeExam.examFee) : 1230;
+    const serviceFee = activeExam?.additionalFee && parseFloat(activeExam.additionalFee) > 0 ? parseFloat(activeExam.additionalFee) : 150;
     const selectedCourseData = formData.selectedCourse
       ? coursesData.find((c: any) => c.id === formData.selectedCourse)
       : null;

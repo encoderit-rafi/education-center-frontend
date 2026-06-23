@@ -155,8 +155,8 @@ export default function FormIELTSGeneralRegistration({ examId: initialExamId }: 
   const coursePrice = selectedCourse ? (selectedCourse as any).discounted_price ?? (selectedCourse as any).price : 0;
   const workshopPrice = selectedWorkshop?.price || 0;
 
-  const baseFee = activeExam?.examFee ? parseFloat(activeExam.examFee) : 1470;
-  const serviceFee = activeExam?.additionalFee ? parseFloat(activeExam.additionalFee) : 150;
+  const baseFee = activeExam?.examFee && parseFloat(activeExam.examFee) > 0 ? parseFloat(activeExam.examFee) : 1470;
+  const serviceFee = activeExam?.additionalFee && parseFloat(activeExam.additionalFee) > 0 ? parseFloat(activeExam.additionalFee) : 150;
 
   const subtotal = baseFee + serviceFee + coursePrice + workshopPrice;
   const total = subtotal;

@@ -42,9 +42,9 @@ export function AcceptPayButton({
   const [agreed, setAgreed] = useState(false);
   const router = useRouter();
 
-  const homePrice = parseFloat(data.price || "350");
+  const homePrice = data.price && parseFloat(data.price) > 0 ? parseFloat(data.price) : 350;
   const rawCenterPrice = data.details?.center_price ?? data.center_price;
-  const centerPrice = rawCenterPrice ? parseFloat(String(rawCenterPrice)) : 450;
+  const centerPrice = rawCenterPrice && parseFloat(String(rawCenterPrice)) > 0 ? parseFloat(String(rawCenterPrice)) : 450;
   const diffPrice = Math.max(0, centerPrice - homePrice);
 
   const handleContinue = (location: "home" | "center") => {

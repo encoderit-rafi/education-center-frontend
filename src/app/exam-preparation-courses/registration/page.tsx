@@ -25,7 +25,8 @@ import { useSearchParams } from "next/navigation";
 import Stepper from "@/components/stepper";
 import { PriceDisplay } from "@/components/ui/price-display";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
+import { AED } from "@/components/ui/aed";
 
 const getBookingSchema = (t: any) => z.object({
   mockTestId: z.string().optional(),
@@ -83,6 +84,7 @@ function CourseRegistrationForm({ className }: { className?: string }) {
   const priceParam = searchParams.get("price");
 
   const t = useTranslations("CourseRegistration");
+  const locale = useLocale();
   const bookingSchema = getBookingSchema(t);
 
   // Fetch course details from API
@@ -105,7 +107,7 @@ function CourseRegistrationForm({ className }: { className?: string }) {
   const [isSuccess, setIsSuccess] = useState(false);
   const [couponCodeInput, setCouponCodeInput] = useState("");
   const [appliedCoupon, setAppliedCoupon] = useState<any | null>(null);
-  const [couponError, setCouponError] = useState<string | null>(null);
+  const [couponError, setCouponError] = useState<React.ReactNode | null>(null);
   const [isValidatingCoupon, setIsValidatingCoupon] = useState(false);
 
   const {
@@ -195,7 +197,17 @@ function CourseRegistrationForm({ className }: { className?: string }) {
         }
 
         if (coupon.minPurchaseAmount && base_price < parseFloat(coupon.minPurchaseAmount)) {
-          setCouponError(t("couponErrors.minPurchase", { amount: coupon.minPurchaseAmount }));
+          setCouponError(
+            locale === "ar" ? (
+              <span className="flex items-center gap-0.5">
+                الحد الأدنى لقيمة الشراء المطلوبة هو <AED className="h-[0.8em] w-auto fill-current inline-block" /> {coupon.minPurchaseAmount}
+              </span>
+            ) : (
+              <span className="flex items-center gap-0.5">
+                Minimum purchase amount of <AED className="h-[0.8em] w-auto fill-current inline-block" /> {coupon.minPurchaseAmount} required.
+              </span>
+            )
+          );
           setIsValidatingCoupon(false);
           return;
         }
@@ -485,10 +497,16 @@ function CourseRegistrationForm({ className }: { className?: string }) {
                           <p className="text-xs font-black text-emerald-800 uppercase tracking-wide">
                             {appliedCoupon.code}
                           </p>
-                          <p className="text-[10px] font-semibold text-emerald-600">
-                            {appliedCoupon.discountType === "PERCENTAGE"
-                              ? t("percentageOff", { value: appliedCoupon.discountValue })
-                              : t("fixedOff", { value: appliedCoupon.discountValue })}
+                           <p className="text-[10px] font-semibold text-emerald-600 flex items-center gap-0.5">
+                            {appliedCoupon.discountType === "PERCENTAGE" ? (
+                              t("percentageOff", { value: appliedCoupon.discountValue })
+                            ) : (
+                              <>
+                                {locale === "ar" ? "تم تطبيق خصم" : "Discount of"}{" "}
+                                <AED className="h-[0.8em] w-auto fill-current inline-block" />
+                                {appliedCoupon.discountValue} {locale === "ar" ? "" : "applied"}
+                              </>
+                            )}
                           </p>
                         </div>
                       </div>

@@ -153,8 +153,8 @@ export default function FormSELTA2Registration({ examId: initialExamId }: FormPr
   };
 
   const calculateTotal = () => {
-    const baseFee = activeExam?.examFee ? parseFloat(activeExam.examFee) : 650;
-    const serviceFee = activeExam?.additionalFee ? parseFloat(activeExam.additionalFee) : 150;
+    const baseFee = activeExam?.examFee && parseFloat(activeExam.examFee) > 0 ? parseFloat(activeExam.examFee) : 650;
+    const serviceFee = activeExam?.additionalFee && parseFloat(activeExam.additionalFee) > 0 ? parseFloat(activeExam.additionalFee) : 150;
     const selectedCourseData = formData.selectedCourse
       ? coursesData.find((c: any) => c.id === formData.selectedCourse)
       : null;
@@ -380,7 +380,7 @@ export default function FormSELTA2Registration({ examId: initialExamId }: FormPr
               paymentStepNumber={5}
               customOrderSummary={
                 <>
-                  {activeExam?.usdExamFee && (
+                  {activeExam?.usdExamFee && parseFloat(activeExam.usdExamFee) > 0 && (
                     <div className="flex justify-between text-sm">
                       <span className="text-slate-500 font-medium">USD Exam Fee</span>
                       <span className="font-bold text-slate-900">

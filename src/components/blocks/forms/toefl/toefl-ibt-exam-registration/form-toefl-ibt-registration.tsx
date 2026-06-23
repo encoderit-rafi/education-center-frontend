@@ -165,7 +165,7 @@ export default function FormTOEFLIBTRegistration({ examId: initialExamId }: Form
         const isExpress = isExpressRegistration(formData.examDate);
 
         // Base/Standard TOEFL fees
-        const baseFeeAED = activeExam?.examFee ? parseFloat(activeExam.examFee) : 1270;
+        const baseFeeAED = activeExam?.examFee && parseFloat(activeExam.examFee) > 0 ? parseFloat(activeExam.examFee) : 1270;
         const baseFeeUSD = Math.round(baseFeeAED / 3.67) || 340;
 
         // Express registration fee (7 days or less)
@@ -370,7 +370,7 @@ export default function FormTOEFLIBTRegistration({ examId: initialExamId }: Form
                         <TermsStep
                             onNext={() => goToStep(1)}
                             examFee={pricing.baseFeeAED}
-                            additionalFee={activeExam?.additionalFee ? parseFloat(activeExam.additionalFee) : 100}
+                            additionalFee={activeExam?.additionalFee && parseFloat(activeExam.additionalFee) > 0 ? parseFloat(activeExam.additionalFee) : 100}
                         />
                     )}
 
@@ -416,7 +416,7 @@ export default function FormTOEFLIBTRegistration({ examId: initialExamId }: Form
                             paymentStepNumber={4}
                             customOrderSummary={
                                 <div className="space-y-4">
-                                    {activeExam?.usdExamFee && (
+                                    {activeExam?.usdExamFee && parseFloat(activeExam.usdExamFee) > 0 && (
                                         <div className="flex justify-between text-sm">
                                             <span className="text-slate-500 font-medium">USD Exam Fee</span>
                                             <span className="font-bold text-slate-900">
