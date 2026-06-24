@@ -35,7 +35,7 @@ const PhoneInput: React.ForwardRefExoticComponent<PhoneInputProps> =
                 <RPNInput.default
                     ref={ref}
                     className={cn(
-                        "flex w-full min-w-0 rounded-md border border-slate-200 bg-transparent px-0 py-0 text-base transition-[color,box-shadow,background-color] outline-none focus-within:border-primary focus-within:ring-3 focus-within:ring-ring/30 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
+                        "flex w-full min-w-0 rounded-md bg-transparent px-0 py-0 text-base transition-[color,box-shadow,background-color] outline-none focus-within:border-primary focus-within:ring-3 focus-within:ring-ring/30 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
                         className,
                     )}
                     flagComponent={FlagComponent}
@@ -65,7 +65,7 @@ const InputComponent = React.forwardRef<
     React.ComponentProps<"input">
 >(({ className, ...props }, ref) => (
     <Input
-        className={cn("rounded-e-md rounded-s-none h-full bg-white border-none focus-visible:ring-0 focus-visible:border-none", className)}
+        className={cn("rounded-e-md rounded-s-none h-full bg-white focus-visible:ring-0", className)}
         {...props}
         ref={ref}
     />
@@ -104,7 +104,7 @@ const CountrySelect = ({
                 <Button
                     type="button"
                     variant="ghost"
-                    className="flex gap-1 rounded-e-none rounded-s-md px-3 focus:z-10 h-full bg-transparent hover:bg-white hover:shadow-none"
+                    className="flex gap-1 rounded-e-none rounded-s-md px-3 border border-slate-200 focus:z-10 h-full bg-white shadow-none hover:bg-white hover:shadow-none"
                     disabled={disabled}
                 >
                     <FlagComponent
@@ -125,7 +125,7 @@ const CountrySelect = ({
                     side="bottom"
                     align="start"
                     sideOffset={4}
-                    className="z-50 w-[300px] rounded-md border border-slate-200 bg-white text-slate-700 shadow-md outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2"
+                    className="z-50 w-[300px] rounded-md border border-slate-200 bg-white text-slate-700 shadow-none outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2"
                 >
                     <Command className="bg-white text-slate-700">
                         <div className="p-1 border-b border-slate-100">

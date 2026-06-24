@@ -358,9 +358,9 @@ export default function TestDatesDetailPage() {
                       }
                       return isPast;
                     }}
-                    className="w-full max-w-xl mx-auto border rounded-md p-8 bg-white shadow-xl"
+                    className="w-full mx-auto border rounded-md p-4 sm:p-8 bg-white shadow-xl"
                   />
-                  <div className="w-full max-w-xl flex flex-col items-center gap-3">
+                  <div className="w-full flex flex-col items-center gap-3">
                     <button
                       onClick={handleBookNow}
                       disabled={!selectedDate}
