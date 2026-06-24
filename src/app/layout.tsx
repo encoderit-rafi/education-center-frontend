@@ -4,7 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import NavBar from "@/components/blocks/nav-bar";
 import Footer from "@/components/blocks/footer";
-import FloatingChatbot from "@/components/blocks/floating-chatbot";
+// import FloatingChatbot from "@/components/blocks/floating-chatbot";
 import SocialSupport from "@/components/blocks/social-support";
 import { Toaster } from "sonner";
 import Providers from "@/components/providers";
@@ -50,8 +50,8 @@ export default async function RootLayout({
             <NavBar />
             <main>{children}</main>
             <Footer />
-            {/* <FloatingChatbot />
-          <SocialSupport /> */}
+            {/* <FloatingChatbot /> */}
+            <SocialSupport />
             <Toaster position="top-right" richColors />
           </Providers>
         </NextIntlClientProvider>
