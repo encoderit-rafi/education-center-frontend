@@ -321,7 +321,7 @@ export default function FormTOEFLIBTRegistration({ examId: initialExamId }: Form
                     first_language: data.firstLanguage === "Other" ? data.firstLanguageOther : data.firstLanguage,
                     years_studying_english: data.yearsStudyingEnglish,
                     education_level: data.educationLevel,
-                    next_level_of_study: data.nextLevelOfStudy === "Other" ? data.nextLevelOfStudyOther : data.nextLevelOfStudy,
+                    next_level_of_study: data.nextLevelOfStudy === "Other" ? (data.nextLevelOfStudyOther || "Other") : data.nextLevelOfStudy,
                     desired_field_of_study: data.desiredFieldOfStudy === "Other" ? data.desiredFieldOfStudyOther : data.desiredFieldOfStudy,
                     reasons_for_taking_toefl: data.reasonsForTakingToefl,
                     ets_products_interest: data.etsProductsInterest,

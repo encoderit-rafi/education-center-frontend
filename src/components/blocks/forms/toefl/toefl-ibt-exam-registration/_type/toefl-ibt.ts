@@ -117,13 +117,7 @@ export const ToeflIbtSchema = z
             }
         }
 
-        if (data.nextLevelOfStudy === "Other" && !data.nextLevelOfStudyOther) {
-            ctx.addIssue({
-                code: z.ZodIssueCode.custom,
-                message: "Please specify your next level of study",
-                path: ["nextLevelOfStudyOther"],
-            });
-        }
+
 
         if (data.desiredFieldOfStudy === "Other" && !data.desiredFieldOfStudyOther) {
             ctx.addIssue({

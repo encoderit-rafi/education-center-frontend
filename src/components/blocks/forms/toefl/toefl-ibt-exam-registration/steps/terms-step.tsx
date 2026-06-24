@@ -3,7 +3,7 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import BaseNoteBox from "@/components/base-note-box";
-import { PriceDisplay } from "@/components/ui/price-display";
+import { AED } from "@/components/ui/aed";
 import { useTranslations } from "next-intl";
 
 interface TermsStepProps {
@@ -15,11 +15,28 @@ interface TermsStepProps {
 export function TermsStep({ onNext, examFee, additionalFee }: TermsStepProps) {
     const t = useTranslations("TermsSteps");
 
-    const notices: (React.ReactNode | string)[] = Array.from({ length: 6 }).map((_, idx) => {
+    const notices: (React.ReactNode | string)[] = Array.from({ length: 22 }).map((_, idx) => {
         return t.rich(`toefl.${idx}`, {
-            price_express: () => <span className="font-bold text-primary"><PriceDisplay amount={130} /></span>,
-            price_additional: () => <span className="font-bold text-primary"><PriceDisplay amount={additionalFee} /></span>,
-            price_late: () => <span className="font-bold text-primary"><PriceDisplay amount={180} /></span>,
+            aed_exam: () => (
+                <strong className="font-semibold">
+                    <AED className="h-[0.8em] w-auto fill-current inline-block" /> {examFee.toLocaleString()}
+                </strong>
+            ),
+            aed_additional: () => (
+                <strong className="font-semibold">
+                    <AED className="h-[0.8em] w-auto fill-current inline-block" /> {additionalFee.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                </strong>
+            ),
+            aed_express: () => (
+                <strong className="font-semibold">
+                    <AED className="h-[0.8em] w-auto fill-current inline-block" /> 190
+                </strong>
+            ),
+            aed_reschedule: () => (
+                <strong className="font-semibold">
+                    <AED className="h-[0.8em] w-auto fill-current inline-block" /> 255
+                </strong>
+            ),
             bold: (chunks) => <strong className="font-semibold">{chunks}</strong>,
         });
     });

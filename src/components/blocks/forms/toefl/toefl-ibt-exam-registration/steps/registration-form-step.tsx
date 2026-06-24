@@ -13,6 +13,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { PhoneInput } from "@/components/ui/phone-input";
 import { SearchableDropdown } from "@/components/ui/searchable-dropdown";
 import { CountryDropdown } from "@/components/ui/country-dropdown";
+import { MultiCountryDropdown } from "@/components/ui/multi-country-dropdown";
 import { DatePicker } from "@/components/blocks/date-picker";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
@@ -34,19 +35,59 @@ const DESIRED_FIELDS_OF_STUDY = [
   { label: "Art and Design", value: "Art and Design" },
   { label: "Biological/Life Sciences", value: "Biological/Life Sciences" },
   { label: "Built Environment", value: "Built Environment" },
-  { label: "Business & Administration", value: "Business & Administration" },
-  { label: "Communications/Journalism", value: "Communications/Journalism" },
-  { label: "Computer Science", value: "Computer Science" },
-  { label: "Education", value: "Education" },
-  { label: "Engineering", value: "Engineering" },
-  { label: "Humanities", value: "Humanities" },
-  { label: "Languages/Literature", value: "Languages/Literature" },
+  { label: "Business & Management", value: "Business & Management" },
+  { label: "Chemistry", value: "Chemistry" },
+  { label: "Communications and Media", value: "Communications and Media" },
+  { label: "Computing & Information Technology", value: "Computing & Information Technology" },
+  { label: "Creative Arts", value: "Creative Arts" },
+  { label: "Cultural Studies", value: "Cultural Studies" },
+  { label: "Dental Studies", value: "Dental Studies" },
+  { label: "Economics", value: "Economics" },
+  { label: "Education & Training", value: "Education & Training" },
+  { label: "Employment Skills", value: "Employment Skills" },
+  { label: "English Language/Literature", value: "English Language/Literature" },
+  { label: "Engineering & Technology", value: "Engineering & Technology" },
+  { label: "Environmental Studies", value: "Environmental Studies" },
+  { label: "Fashion and Design", value: "Fashion and Design" },
+  { label: "Food & Hospitality", value: "Food & Hospitality" },
+  { label: "Foreign Language/Literature", value: "Foreign Language/Literature" },
+  { label: "Geography", value: "Geography" },
+  { label: "Health Science/Studies", value: "Health Science/Studies" },
+  { label: "Humanities & Social Sciences", value: "Humanities & Social Sciences" },
+  { label: "Journalism", value: "Journalism" },
+  { label: "Language & Literature", value: "Language & Literature" },
   { label: "Law", value: "Law" },
+  { label: "Legal Studies", value: "Legal Studies" },
+  { label: "Liberal Arts/General Studies", value: "Liberal Arts/General Studies" },
+  { label: "Marketing", value: "Marketing" },
   { label: "Mathematics", value: "Mathematics" },
-  { label: "Medicine/Health Sciences", value: "Medicine/Health Sciences" },
+  { label: "Medicine", value: "Medicine" },
+  { label: "Military Technologies", value: "Military Technologies" },
+  { label: "Multi/Interdisciplinary Studies", value: "Multi/Interdisciplinary Studies" },
+  { label: "Music", value: "Music" },
+  { label: "Nursing", value: "Nursing" },
+  { label: "Personal Services", value: "Personal Services" },
+  { label: "Pharmacy", value: "Pharmacy" },
+  { label: "Philosophy and Religion", value: "Philosophy and Religion" },
   { label: "Physical Sciences", value: "Physical Sciences" },
-  { label: "Social Sciences", value: "Social Sciences" },
-  { label: "Other", value: "Other" },
+  { label: "Physics", value: "Physics" },
+  { label: "Political Science", value: "Political Science" },
+  { label: "Psychology", value: "Psychology" },
+  { label: "Public Administration", value: "Public Administration" },
+  { label: "Rehabilitation", value: "Rehabilitation" },
+  { label: "Sciences", value: "Sciences" },
+  { label: "Social Sciences/History", value: "Social Sciences/History" },
+  { label: "Social Work", value: "Social Work" },
+  { label: "Sport, Leisure & Recreation", value: "Sport, Leisure & Recreation" },
+  { label: "Surveying", value: "Surveying" },
+  { label: "Technology", value: "Technology" },
+  { label: "Theological Studies", value: "Theological Studies" },
+  { label: "Travel and Tourism", value: "Travel and Tourism" },
+  { label: "Veterinary Studies & Animal Care", value: "Veterinary Studies & Animal Care" },
+  { label: "Visual and Performing Arts Care", value: "Visual and Performing Arts Care" },
+  { label: "Welfare & Community Services", value: "Welfare & Community Services" },
+  { label: "Undecided", value: "Undecided" },
+  { label: "Not applicable", value: "Not applicable" },
 ];
 
 const REASONS_FOR_TAKING_TOEFL = [
@@ -700,20 +741,8 @@ export function RegistrationFormStep({
                 aria-invalid={!!errors.nextLevelOfStudy}
                 onChange={(val) => {
                   setValue("nextLevelOfStudy", val, { shouldValidate: true });
-                  if (val !== "Other") setValue("nextLevelOfStudyOther", "");
                 }}
               />
-              {formData.nextLevelOfStudy === "Other" && (
-                <div className="mt-2 animate-in fade-in slide-in-from-top-2 duration-300">
-                  <Input
-                    placeholder="Please specify next level of study"
-                    value={formData.nextLevelOfStudyOther ?? ""}
-                    onChange={(e) => setValue("nextLevelOfStudyOther", e.target.value, { shouldValidate: true })}
-                    className="border-primary/40 focus:border-primary"
-                  />
-                  <FieldError errors={[errors.nextLevelOfStudyOther]} />
-                </div>
-              )}
               <FieldError errors={[errors.nextLevelOfStudy]} />
             </FieldContent>
           </Field>
@@ -763,21 +792,7 @@ export function RegistrationFormStep({
               <FieldError errors={[errors.reasonsForTakingToefl]} />
             </FieldContent>
           </Field>
-          <Field data-invalid={!!errors.destinationCountry}>
-            <FieldLabel required className="whitespace-nowrap">In what country or countries do you hope to study, work or settle?</FieldLabel>
-            <FieldContent>
-              <CountryDropdown
-                name="destinationCountry"
-                placeholder="-Select Country-"
-                value={formData.destinationCountry}
-                aria-invalid={!!errors.destinationCountry}
-                onChange={(country) =>
-                  setValue("destinationCountry", country.name)
-                }
-              />
-              <FieldError errors={[errors.destinationCountry]} />
-            </FieldContent>
-          </Field>
+
 
           <Field data-invalid={!!errors.intendedEnrollmentDate}>
             <FieldLabel required>Indicate your intended date of enrollment.</FieldLabel>
@@ -788,6 +803,19 @@ export function RegistrationFormStep({
                 error={!!errors.intendedEnrollmentDate}
               />
               <FieldError errors={[errors.intendedEnrollmentDate]} />
+            </FieldContent>
+          </Field>
+          <Field data-invalid={!!errors.destinationCountry}>
+            <FieldLabel required className="whitespace-nowrap">In what country or countries do you hope to study, work or settle?</FieldLabel>
+            <FieldContent>
+              <MultiCountryDropdown
+                placeholder="-Select Countries-"
+                value={formData.destinationCountry ? formData.destinationCountry.split(", ") : []}
+                onChange={(countries) =>
+                  setValue("destinationCountry", countries.join(", "), { shouldValidate: true })
+                }
+              />
+              <FieldError errors={[errors.destinationCountry]} />
             </FieldContent>
           </Field>
         </div>
