@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import {
   clearStoredSessionKey,
-  extractAssistantReply,
+  extractAssistantMessage,
   getOrCreateChatSession,
   getStoredSessionKey,
   getMessageText,
@@ -27,7 +27,7 @@ import { ScrollArea } from "../ui/scroll-area";
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 interface Message {
-    id: number;
+    id: number | string;
     role: "user" | "assistant";
     content: string;
     time: string;
@@ -64,7 +64,7 @@ function formatTimeFromDate(date?: string): string {
 
 function mapApiMessage(msg: ApiChatMessage, index: number): Message {
     return {
-        id: typeof msg.id === "number" ? msg.id : Date.now() + index,
+        id: msg.id ?? Date.now() + index,
         role: msg.role,
         content: getMessageText(msg),
         time: formatTimeFromDate(msg.createdAt),
@@ -83,6 +83,7 @@ function renderMarkdown(text: string): string {
     return sanitized
         .replace(/```([\s\S]*?)```/g, '<pre className="bg-muted p-2 rounded-md my-2 overflow-x-auto"><code>$1</code></pre>')
         .replace(/`([^`]+)`/g, '<code className="bg-muted px-1 rounded">$1</code>')
+        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="underline text-purple-700 hover:text-purple-900">$1</a>')
         .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
         .replace(/\*(.*?)\*/g, "<em>$1</em>")
         .replace(/\n/g, "<br />");
@@ -140,7 +141,7 @@ function ReactionPopover({ children, onReact }: ReactionPopoverProps) {
 
 interface MessageBubbleProps {
     msg: Message;
-    onReact: (msgId: number, emoji: string | null) => void;
+    onReact: (msgId: number | string, emoji: string | null) => void;
 }
 
 /** A single message bubble */
@@ -268,7 +269,7 @@ export default function AIChatbot() {
         ta.style.height = Math.min(ta.scrollHeight, 120) + "px";
     }, [input]);
 
-    const handleReact = (msgId: number, emoji: string | null) => {
+    const handleReact = (msgId: number | string, emoji: string | null) => {
         setMessages((prev) =>
             prev.map((m) =>
                 m.id === msgId
@@ -302,19 +303,19 @@ export default function AIChatbot() {
             }
 
             const response = await sendChatMessage(sessionKeyRef.current, content);
-            const reply = extractAssistantReply(response);
+            const assistantMsg = extractAssistantMessage(response);
 
-            if (!reply) {
+            if (!assistantMsg) {
                 throw new Error("No response received from the assistant");
             }
 
             setMessages((prev) => [
                 ...prev,
                 {
-                    id: Date.now() + 1,
+                    id: assistantMsg.id ?? Date.now() + 1,
                     role: "assistant",
-                    content: reply,
-                    time: formatTime(),
+                    content: getMessageText(assistantMsg),
+                    time: formatTimeFromDate(assistantMsg.createdAt),
                     reaction: null,
                 },
             ]);

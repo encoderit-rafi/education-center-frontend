@@ -35,26 +35,37 @@ function extractMessages(data: unknown): ApiChatMessage[] {
 }
 
 export function extractAssistantReply(data: unknown): string | null {
+  const assistantMessage = extractAssistantMessage(data);
+  if (!assistantMessage) return null;
+  return getMessageText(assistantMessage);
+}
+
+export function extractAssistantMessage(data: unknown): ApiChatMessage | null {
   if (!data) return null;
-  if (typeof data === "string") return data;
+  if (typeof data === "string") return { role: "assistant", content: data };
   if (typeof data !== "object") return null;
 
   const record = data as Record<string, unknown>;
 
-  if (typeof record.content === "string" && record.role === "assistant") {
-    return record.content;
+  if (record.role === "assistant") {
+    const text = getMessageText(record as ApiChatMessage);
+    if (text) return record as ApiChatMessage;
   }
-  if (typeof record.message === "string" && record.role === "assistant") {
-    return record.message;
+
+  const nestedMessage = record.message;
+  if (nestedMessage && typeof nestedMessage === "object") {
+    const msg = nestedMessage as ApiChatMessage;
+    if (getMessageText(msg)) return msg;
   }
-  if (typeof record.reply === "string") return record.reply;
-  if (typeof record.message === "string") return record.message;
+
+  if (typeof record.reply === "string") {
+    return { role: "assistant", content: record.reply };
+  }
 
   const assistantMessage = record.assistantMessage;
   if (assistantMessage && typeof assistantMessage === "object") {
-    const nested = assistantMessage as Record<string, unknown>;
-    if (typeof nested.content === "string") return nested.content;
-    if (typeof nested.message === "string") return nested.message;
+    const msg = assistantMessage as ApiChatMessage;
+    if (getMessageText(msg)) return msg;
   }
 
   return null;
