@@ -67,7 +67,7 @@ export default function WhoWeAre() {
                 </>
               }
               description={
-                <p className="italic text-sm font-bold">{t("NarrativeSection.quoteAuthor")}</p>
+                <span className="italic text-sm font-bold block">{t("NarrativeSection.quoteAuthor")}</span>
               }
             />
 

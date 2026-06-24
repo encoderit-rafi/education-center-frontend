@@ -60,15 +60,15 @@ export const SectionHeader = ({
 
       {/* Description */}
       {description && (
-        <p
+        <div
           className={cn(
-            "section-description max-w-3xl text-justify",
+            "section-description max-w-3xl text-justify text-slate-600",
             align === "center" && "mx-auto",
             descriptionClassName
           )}
         >
           {description}
-        </p>
+        </div>
       )}
     </div>
   );
