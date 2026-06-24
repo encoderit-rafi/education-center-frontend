@@ -446,7 +446,7 @@ export function RegistrationFormStep({
             </FieldContent>
           </Field>
           <Field data-invalid={!!errors.currentSituation}>
-            <FieldLabel required>What is your current situation?</FieldLabel>
+            <FieldLabel required>What best describes your current situation?</FieldLabel>
             <FieldContent>
               <SearchableDropdown
                 options={[
