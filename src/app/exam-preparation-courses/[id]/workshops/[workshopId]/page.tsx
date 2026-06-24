@@ -144,9 +144,9 @@ export default async function WorkshopDetailPage({ params }: PageProps) {
       ? wTranslatedBestFor
       : typeof wTranslatedBestFor === "string"
         ? wTranslatedBestFor
-            .split("\n")
-            .map((s: string) => s.trim())
-            .filter(Boolean)
+          .split("\n")
+          .map((s: string) => s.trim())
+          .filter(Boolean)
         : workshop.bestFor;
   }
 
@@ -394,8 +394,10 @@ export default async function WorkshopDetailPage({ params }: PageProps) {
                   <p className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-0.5">
                     Location
                   </p>
-                  <p className="text-sm font-semibold text-slate-900">
-                    Suite 703, Apricot Tower, Dubai Silicon Oasis
+                  <p className="text-sm font-semibold text-slate-900 ">
+                    The Exam Preparation & Testing House L.L.C <br />
+                    Suite 701, 7th Floor, Tabarak Tower, Corniche Road, <br />
+                    Al Mamzar, Sharjah, United Arab Emirates.
                   </p>
                 </div>
               </div>

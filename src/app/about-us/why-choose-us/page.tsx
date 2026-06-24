@@ -29,7 +29,7 @@ export default function WhyChooseUs() {
             <div className="absolute -inset-4 bg-primary/5 rounded-xl blur-3xl opacity-50 transition-opacity group-hover:opacity-100"></div>
             <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
               <Image
-                src="/images/about-us/why-choose-us.jpg"
+                src="/images/about-us/experience-student.png"
                 alt="Student Confidence"
                 fill
                 className="object-cover"

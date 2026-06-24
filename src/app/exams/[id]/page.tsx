@@ -22,8 +22,11 @@ export default async function ExamDetailPage({
     if (response.data?.success && response.data?.data) {
       exam = response.data.data;
     }
-  } catch (error) {
-    console.error("Error fetching exam by slug:", error);
+  } catch (error: any) {
+    // Only log unexpected errors; 404 is expected when the slug is a UUID
+    if (error?.response?.status !== 404) {
+      console.error("Error fetching exam by slug:", error);
+    }
   }
 
   // 2. Fetch all exams to find children and resolve by ID if needed (e.g. if the route is a UUID)

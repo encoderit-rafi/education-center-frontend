@@ -89,7 +89,7 @@ export function MockTestTypeSelector({ data }: MockTestTypeSelectorProps) {
           {selectTypeLabel}
         </label>
         <Select
-          value={selectedType || undefined}
+          value={selectedType}
           onValueChange={(val) => setSelectedType(val as string)}
         >
           <SelectTrigger className="w-full">

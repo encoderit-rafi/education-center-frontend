@@ -39,8 +39,11 @@ export default async function BookExamsId({
     if (response.data?.success && response.data?.data) {
       exam = response.data.data;
     }
-  } catch (error) {
-    console.error("Error fetching exam in BookExamsId:", error);
+  } catch (error: any) {
+    // Only log unexpected errors; 404 is expected when the slug is a UUID
+    if (error?.response?.status !== 404) {
+      console.error("Error fetching exam in BookExamsId:", error);
+    }
   }
 
   // 2. Fetch all exams to resolve UUID or find children
