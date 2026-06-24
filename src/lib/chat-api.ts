@@ -5,8 +5,13 @@ export const CHAT_SESSION_KEY_STORAGE = "chatSessionKey";
 export interface ApiChatMessage {
   id?: number | string;
   role: "user" | "assistant";
-  content: string;
+  content?: string;
+  message?: string;
   createdAt?: string;
+}
+
+function getMessageText(msg: ApiChatMessage): string {
+  return msg.content ?? msg.message ?? "";
 }
 
 function extractSessionKey(data: unknown): string | null {
@@ -39,13 +44,17 @@ export function extractAssistantReply(data: unknown): string | null {
   if (typeof record.content === "string" && record.role === "assistant") {
     return record.content;
   }
+  if (typeof record.message === "string" && record.role === "assistant") {
+    return record.message;
+  }
   if (typeof record.reply === "string") return record.reply;
   if (typeof record.message === "string") return record.message;
 
   const assistantMessage = record.assistantMessage;
   if (assistantMessage && typeof assistantMessage === "object") {
-    const content = (assistantMessage as Record<string, unknown>).content;
-    if (typeof content === "string") return content;
+    const nested = assistantMessage as Record<string, unknown>;
+    if (typeof nested.content === "string") return nested.content;
+    if (typeof nested.message === "string") return nested.message;
   }
 
   return null;
@@ -84,10 +93,12 @@ export async function loadChatMessages(sessionKey: string): Promise<ApiChatMessa
 
 export async function sendChatMessage(
   sessionKey: string,
-  content: string,
+  message: string,
 ): Promise<unknown> {
   const res = await api.post(`/chat/sessions/${sessionKey}/messages`, {
-    content,
+    message,
   });
   return res.data?.data ?? res.data;
 }
+
+export { getMessageText };

@@ -6,6 +6,7 @@ import {
   extractAssistantReply,
   getOrCreateChatSession,
   getStoredSessionKey,
+  getMessageText,
   loadChatMessages,
   sendChatMessage,
   type ApiChatMessage,
@@ -65,7 +66,7 @@ function mapApiMessage(msg: ApiChatMessage, index: number): Message {
     return {
         id: typeof msg.id === "number" ? msg.id : Date.now() + index,
         role: msg.role,
-        content: msg.content,
+        content: getMessageText(msg),
         time: formatTimeFromDate(msg.createdAt),
         reaction: null,
     };
