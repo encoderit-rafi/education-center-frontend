@@ -142,7 +142,7 @@ export function DateStep({
                               onValueChange={onSpeakingSlotChange}
                               className="grid gap-3"
                             >
-                              <div className="flex items-start space-x-2.5 p-2 rounded-lg hover:bg-slate-100/50 transition-colors">
+                              <div className="flex items-center space-x-2.5 p-2 rounded-lg hover:bg-slate-100/50 transition-colors">
                                 <RadioGroupItem
                                   value="Live with the examiner at the test center (Face to face)."
                                   id={`live-${slot.id}`}
@@ -155,7 +155,7 @@ export function DateStep({
                                   Live with the examiner at the test center (Face to face).
                                 </Label>
                               </div>
-                              <div className="flex items-start space-x-2.5 p-2 rounded-lg hover:bg-slate-100/50 transition-colors">
+                              <div className="flex items-center space-x-2.5 p-2 rounded-lg hover:bg-slate-100/50 transition-colors">
                                 <RadioGroupItem
                                   value="Video Call at the test centre (VCS)"
                                   id={`vcs-${slot.id}`}
