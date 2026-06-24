@@ -1,4 +1,15 @@
+"use client";
+
 import { useState, useRef, useEffect } from "react";
+import {
+  clearStoredSessionKey,
+  extractAssistantReply,
+  getOrCreateChatSession,
+  getStoredSessionKey,
+  loadChatMessages,
+  sendChatMessage,
+  type ApiChatMessage,
+} from "@/lib/chat-api";
 
 // ─── Shadcn/ui / Base UI imports ─────────────────────────────────────────────
 import { Button } from "@/components/ui/button";
@@ -26,14 +37,11 @@ interface Message {
 const EMOJIS = ["👍", "❤️", "😂", "😮", "😢", "🔥"];
 
 const SUGGESTIONS = [
-    "What can you help with?",
-    "Write a haiku about coding",
-    "Explain async/await in JS",
-    "Give me a productivity tip",
+    "What courses do you offer?",
+    "How do I register for an exam?",
+    "Tell me about IELTS preparation",
+    "What are your office hours?",
 ];
-
-const SYSTEM_PROMPT =
-    "You are a helpful, friendly AI assistant. Keep responses concise and conversational. Use markdown sparingly — only for code blocks or emphasis when it genuinely helps.";
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 function formatTime(): string {
@@ -41,6 +49,26 @@ function formatTime(): string {
         hour: "numeric",
         minute: "2-digit",
     });
+}
+
+function formatTimeFromDate(date?: string): string {
+    if (!date) return formatTime();
+    const parsed = new Date(date);
+    if (Number.isNaN(parsed.getTime())) return formatTime();
+    return parsed.toLocaleTimeString([], {
+        hour: "numeric",
+        minute: "2-digit",
+    });
+}
+
+function mapApiMessage(msg: ApiChatMessage, index: number): Message {
+    return {
+        id: typeof msg.id === "number" ? msg.id : Date.now() + index,
+        role: msg.role,
+        content: msg.content,
+        time: formatTimeFromDate(msg.createdAt),
+        reaction: null,
+    };
 }
 
 function renderMarkdown(text: string): string {
@@ -181,9 +209,50 @@ export default function AIChatbot() {
     const [messages, setMessages] = useState<Message[]>([]);
     const [input, setInput] = useState("");
     const [isLoading, setIsLoading] = useState(false);
+    const [isInitializing, setIsInitializing] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const sessionKeyRef = useRef<string | null>(null);
     const bottomRef = useRef<HTMLDivElement>(null);
     const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+    useEffect(() => {
+        let active = true;
+
+        const initializeSession = async () => {
+            setIsInitializing(true);
+            setError(null);
+
+            try {
+                const storedKey = getStoredSessionKey();
+                if (!storedKey) {
+                    sessionKeyRef.current = null;
+                    if (active) setMessages([]);
+                    return;
+                }
+
+                sessionKeyRef.current = storedKey;
+                const history = await loadChatMessages(storedKey);
+                if (active) {
+                    setMessages(history.map(mapApiMessage));
+                }
+            } catch {
+                clearStoredSessionKey();
+                sessionKeyRef.current = null;
+                if (active) {
+                    setMessages([]);
+                    setError("Could not load your previous conversation. Start a new chat.");
+                }
+            } finally {
+                if (active) setIsInitializing(false);
+            }
+        };
+
+        initializeSession();
+
+        return () => {
+            active = false;
+        };
+    }, []);
 
     // Auto-scroll on new messages
     useEffect(() => {
@@ -210,7 +279,7 @@ export default function AIChatbot() {
 
     const sendMessage = async (text?: string) => {
         const content = (text ?? input).trim();
-        if (!content || isLoading) return;
+        if (!content || isLoading || isInitializing) return;
 
         setInput("");
         setError(null);
@@ -226,63 +295,17 @@ export default function AIChatbot() {
         setMessages((prev) => [...prev, userMsg]);
         setIsLoading(true);
 
-        // MOCK MODE: Since direct browser calls to Anthropic are blocked by CORS
-        // and insecure (exposes API key), we implement a mock response for UI testing.
-        const IS_MOCK_MODE = true;
-
-        if (IS_MOCK_MODE) {
-            // Simulate network delay
-            setTimeout(() => {
-                const mockReply = `I'm currently in **Mock Mode** because direct browser calls to my API are restricted by [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS). 
-
-To enable real responses, please set up a secure backend route that proxies your requests.
-
-You said: *"${content}"*`;
-
-                setMessages((prev) => [
-                    ...prev,
-                    {
-                        id: Date.now() + 1,
-                        role: "assistant",
-                        content: mockReply,
-                        time: formatTime(),
-                        reaction: null,
-                    },
-                ]);
-                setIsLoading(false);
-                textareaRef.current?.focus();
-            }, 1000);
-            return;
-        }
-
-        // Real API call logic (will likely fail in browser due to CORS)
         try {
-            const apiHistory = [...messages, userMsg].map(({ role, content }) => ({
-                role,
-                content,
-            }));
+            if (!sessionKeyRef.current) {
+                sessionKeyRef.current = await getOrCreateChatSession();
+            }
 
-            // IMPORTANT: API Keys should NEVER be stored in the frontend.
-            // This URL is for demonstration purposes. Use a backend proxy.
-            const res = await fetch("https://api.anthropic.com/v1/messages", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "x-api-key": "YOUR_API_KEY_HERE", // DO NOT DO THIS IN PRODUCTION
-                    "anthropic-version": "2023-06-01"
-                },
-                body: JSON.stringify({
-                    model: "claude-3-sonnet-20240229",
-                    max_tokens: 1000,
-                    system: SYSTEM_PROMPT,
-                    messages: apiHistory,
-                }),
-            });
+            const response = await sendChatMessage(sessionKeyRef.current, content);
+            const reply = extractAssistantReply(response);
 
-            const data = await res.json();
-            if (data.error) throw new Error(data.error.message);
-
-            const reply = data.content?.map((b: { text?: string }) => b.text || "").join("") ?? "";
+            if (!reply) {
+                throw new Error("No response received from the assistant");
+            }
 
             setMessages((prev) => [
                 ...prev,
@@ -294,8 +317,11 @@ You said: *"${content}"*`;
                     reaction: null,
                 },
             ]);
-        } catch (err: any) {
-            setError(err.message || "Failed to fetch response");
+        } catch (err: unknown) {
+            const message =
+                err instanceof Error ? err.message : "Failed to send message";
+            setError(message);
+            setMessages((prev) => prev.filter((m) => m.id !== userMsg.id));
         } finally {
             setIsLoading(false);
             textareaRef.current?.focus();
@@ -310,6 +336,8 @@ You said: *"${content}"*`;
     };
 
     const clearChat = () => {
+        clearStoredSessionKey();
+        sessionKeyRef.current = null;
         setMessages([]);
         setError(null);
     };
@@ -326,7 +354,7 @@ You said: *"${content}"*`;
                     </AvatarFallback>
                 </Avatar>
                 <div className="flex-1">
-                    <p className="text-sm font-semibold leading-none">Claude</p>
+                    <p className="text-sm font-semibold leading-none">TEPTH Assistant</p>
                     <p className="text-[10px] text-muted-foreground mt-1 flex items-center gap-1">
                         <span className="w-1.5 h-1.5 rounded-full bg-green-500 inline-block animate-pulse" />
                         Available Now
@@ -345,7 +373,12 @@ You said: *"${content}"*`;
             {/* ── Messages ── */}
             <ScrollArea className="flex-1">
                 <div className="px-3 py-4 md:px-4 md:py-6">
-                    {messages.length === 0 ? (
+                    {isInitializing ? (
+                        <div className="flex flex-col items-center justify-center min-h-[350px] md:min-h-[400px] gap-4 text-center">
+                            <TypingIndicator />
+                            <p className="text-sm text-muted-foreground">Loading conversation...</p>
+                        </div>
+                    ) : messages.length === 0 ? (
                         // Empty state
                         <div className="flex flex-col items-center justify-center min-h-[350px] md:min-h-[400px] gap-6 text-center animate-in fade-in duration-700">
                             <div className="w-14 h-14 md:w-16 md:h-16 rounded-3xl bg-purple-50 flex items-center justify-center text-2xl md:text-3xl">✦</div>
@@ -419,7 +452,7 @@ You said: *"${content}"*`;
                         size="icon"
                         className="rounded-xl w-8 h-8 shrink-0 bg-blue-600 hover:bg-blue-700 shadow-lg shadow-blue-500/20"
                         onClick={() => sendMessage()}
-                        disabled={isLoading || !input.trim()}
+                        disabled={isLoading || isInitializing || !input.trim()}
                     >
                         <svg viewBox="0 0 24 24" className="w-4 h-4 fill-white">
                             <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
@@ -427,7 +460,7 @@ You said: *"${content}"*`;
                     </Button>
                 </div>
                 <p className="text-[9px] text-center text-muted-foreground mt-3 tracking-wide">
-                    Powered by Claude 3.5 Sonnet
+                    Powered by TEPTH AI
                 </p>
             </div>
         </div>
