@@ -236,6 +236,8 @@ export default async function FeesDynamicPage({
         </div>
       </section>
 
+      {!["oet", "cael", "celpip"].includes(slug.toLowerCase()) && <PromoDiscount />}
+
       {/* ── Packages Section ── */}
       <section id="packages" className="base-py bg-white">
         <div className="px-4 lg:px-8  mx-auto">
@@ -261,7 +263,6 @@ export default async function FeesDynamicPage({
           </div>
         </div>
       </section>
-      {!["oet", "cael", "celpip"].includes(slug.toLowerCase()) && <PromoDiscount />}
       {/* ── Workshops Section ── */}
       {filteredWorkshops.length > 0 && (
         <section
@@ -270,9 +271,10 @@ export default async function FeesDynamicPage({
         >
           <div className="container px-4 lg:px-8 max-w-7xl mx-auto space-y-16">
             <div className="text-center max-w-3xl mx-auto space-y-4">
-              {/* <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-black uppercase tracking-widest">
-                <Sparkles className="size-3" /> Targeted Skills Boost
-              </div> */}
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-black uppercase tracking-widest">
+                <Sparkles className="size-3" />{" "}
+                {tPrep("workshops.skillsBoostBadge")}
+              </div>
               <h2 className="text-4xl font-black text-slate-900 tracking-tight leading-tight lg:text-5xl">
                 <span className="text-primary">{tPrep("workshops.title")}</span>
               </h2>
@@ -303,9 +305,8 @@ export default async function FeesDynamicPage({
 
                       <div className="space-y-2"></div>
 
-                      <p className="text-xs text-slate-600 font-medium leading-relaxed line-clamp-4">
-                        {workshop.description ||
-                          tPrep("workshopFallback", { duration: workshop.duration, subTitle: workshop.subTitle })}
+                      <p className="text-xs text-slate-600 font-medium leading-relaxed line-clamp-4 text-justify">
+                        {workshop.description}
                       </p>
                     </div>
 
@@ -326,14 +327,13 @@ export default async function FeesDynamicPage({
                       </div>
 
                       <Link
-                        href={`/workshop-registration?examId=${mappedExamId}&courseId=${course.id}&workshopId=${workshop.id}&price=${discountedPrice}&currency=AED`}
+                        href={`/exam-preparation-courses/${slug}/workshops/${workshop.id}`}
                         className={cn(
                           buttonVariants(),
                           "font-bold h-11 shadow-sm px-4 w-full flex items-center justify-center gap-2 group-hover:bg-primary group-hover:text-white transition-all duration-300",
                         )}
                       >
-                        {/* <Calendar className="size-4" /> */}
-                        <span>{t("bookNow")}</span>
+                        <span>{tPrep("workshops.viewDetails")}</span>
                       </Link>
                     </div>
                   </BaseCard>
