@@ -153,7 +153,7 @@ export default function FormSELTA2Registration({ examId: initialExamId }: FormPr
   };
 
   const calculateTotal = () => {
-    const baseFee = activeExam?.examFee && parseFloat(activeExam.examFee) > 0 ? parseFloat(activeExam.examFee) : 650;
+    const baseFee = activeExam?.examFee && parseFloat(activeExam.examFee) > 0 ? parseFloat(activeExam.examFee) : 660;
     const serviceFee = activeExam?.additionalFee && parseFloat(activeExam.additionalFee) > 0 ? parseFloat(activeExam.additionalFee) : 150;
     const selectedCourseData = formData.selectedCourse
       ? coursesData.find((c: any) => c.id === formData.selectedCourse)
@@ -342,7 +342,10 @@ export default function FormSELTA2Registration({ examId: initialExamId }: FormPr
             <DateStep
               value={formData.examDate}
               timeSlot={formData.examTimeSlot}
-              onChange={(date) => form.setValue("examDate", date)}
+              onChange={(date) => {
+                form.setValue("examDate", date);
+                form.setValue("examTimeSlot", "");
+              }}
               onTimeSlotChange={(slot) => form.setValue("examTimeSlot", slot as any)}
               onNext={() => goToStep(2)}
               onBack={() => goToStep(0)}

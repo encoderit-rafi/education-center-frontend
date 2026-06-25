@@ -892,7 +892,10 @@
         {
           "title": "Required Business Licences & Permits",
           "description": "It is very important to partner with a test center that holds the relevant business activity with the local authority to become a test center. The Exam Preparation & Testing House L.L.C is licensed by Sharjah Economic Development Department (SEDD) and regulated by Sharjah Private Education Authority (SPEA).",
-          "badges": ["Licensed by SEDD", "Regulated by SPEA"]
+          "badges": [
+            "Licensed by SEDD",
+            "Regulated by SPEA"
+          ]
         },
         {
           "title": "Test Security",
@@ -905,27 +908,38 @@
         {
           "title": "Flexible Exam Delivery",
           "description": "Flexible scheduling options that accommodate massive single-day events, designated testing windows, Morning, Afternoon & Evening slots, or continuous testing year-round.",
-          "badges": ["Continuous & Event-Based Options"]
+          "badges": [
+            "Continuous & Event-Based Options"
+          ]
         },
         {
           "title": "Top-notch Exam Venues",
           "description": "Our modern, easily accessible testing centers are fully equipped with high-performance hardware and advanced technology to ensure an optimal testing environment.",
-          "badges": ["Easily Accessible & Premium Venues"]
+          "badges": [
+            "Easily Accessible & Premium Venues"
+          ]
         },
         {
           "title": "Noise-Free Environment",
           "description": "To minimize distractions and lower noise levels, we have implemented several workplace enhancements. Workstations feature fabric acoustic panels and are spaced generously apart, while testing rooms are carpeted to ensure a quiet environment. Additionally, we utilize white noise machines in the computer labs, alongside quiet keyboards and high-quality headsets throughout our spaces.",
-          "badges": ["Fabric Acoustic Panels", "White Noise Systems Equipped"]
+          "badges": [
+            "Fabric Acoustic Panels",
+            "White Noise Systems Equipped"
+          ]
         },
         {
           "title": "Technical Infrastructure",
           "description": "Our technical specifications meet your technical requirements. We provide dedicated, robust desktop PCs and 24-inch monitors.",
-          "badges": ["High-Performance Specifications"]
+          "badges": [
+            "High-Performance Specifications"
+          ]
         },
         {
           "title": "Special Accommodation",
           "description": "We provide tailored support for candidates who need testing accommodations, offering personalized services such as extended time, frequent breaks, private rooms, and specialized assistive software and equipment.",
-          "badges": ["Adaptive Assistance Softwares"]
+          "badges": [
+            "Adaptive Assistance Softwares"
+          ]
         }
       ],
       "contactInfo": "Get in touch with us today to discuss your needs or tour our venues online. You may also schedule a visit to our venues. Give us a call at +97165531250 or drop us an email at info@tepth.org",
@@ -1233,51 +1247,51 @@
       "infrastructureItems": [
         {
           "title": "Service License",
-          "description": "The Exam Preparation & Testing House is a well-formed organization in Dubai with vast experience in test delivery and exam prep. services. TEPTH is licensed by Dubai Silicon Oasis Authority and permitted by KHDA with Testing Centre activity."
+          "description": "The Exam Preparation & Testing House L.L.C is a well-formed organization in Sharjah with vast experience in test delivery and exam prep. services. TEPTH is licensed by Sharjah Economic Development Department (SEDD) and regulated by Sharjah Private Education Authority (SPEA)."
         },
         {
-          "title": "Computer-based Exams",
-          "description": "Three 40-seat computer rooms and 20-seat classroom to administer computer-based exams."
+          "title": "Computer-delivered Exams",
+          "description": "Our facility features two dedicated computer labs accommodating 16 and 7 candidates respectively, alongside a 5-seat classroom, all fully equipped for the administration of computer-based testing."
         },
         {
           "title": "Noise Free Environment",
-          "description": "Fabric acoustic panels are fixed onto the partitions of workstations to help reduce the noise level. Our floors at the testing rooms are carpeted to eliminate distraction. We have also spaced out our workstations as this helps in reducing the noise. Additionally, we are using white noise machines in our computer labs to help reduce noise. We also use quiet keyboards and high-quality headsets to further minimize distractions."
+          "description": "To ensure a quiet, distraction-free testing environment, our computer labs feature carpeted floors, spaced-out workstations, and fabric acoustic panels on all desk partitions. We also utilize white noise machines, quiet-touch keyboards, and high-quality headsets to further block out any unwanted sound."
         },
         {
           "title": "Paper-based Exams",
-          "description": "We provide a dedicated 20-seat classroom specifically designed to accommodate paper-based examination formats."
+          "description": "For candidates taking paper-based tests, we feature a dedicated 5-seat classroom designed specifically to support this format."
         },
         {
           "title": "CCTV Surveillance",
-          "description": "To maintain exam security and integrity, we have implemented a comprehensive CCTV system in our computer labs. Each workstation is monitored by a security camera, and exam providers may be granted access to recordings upon request."
+          "description": "To strictly enforce examination integrity and security protocols, a comprehensive closed-circuit television (CCTV) network is active across all computer labs. Individual security cameras monitor every workstation, and authorized exam providers reserve the right to access and review these surveillance recordings upon formal request."
         },
         {
           "title": "Exam Delivery Machines",
-          "description": "Our venues are equipped with high-specification computers that meet or exceed all official exam provider requirements for performance and security."
+          "description": "Our computer labs feature high-performance machines that meet or exceed every security and technical standard required by official exam providers."
         },
         {
           "title": "Strategic Location",
-          "description": "Our center is conveniently located in Dubai Silicon Oasis, one of the most strategic areas in Dubai, and in close proximity to Academic City."
+          "description": "Our center is centrally located in Sharjah, offering excellent accessibility to the surrounding area."
         },
         {
           "title": "Wheelchair Accessible",
-          "description": "All our facilities are fully wheelchair accessible. We also provide adjustable chairs to ensure comfort for all candidates during their exams."
+          "description": "Our entire testing center is wheelchair accessible, and we feature adjustable seating to keep every candidate comfortable during their exam."
         },
         {
           "title": "Top-Notch Premises",
-          "description": "Our modern, air-conditioned venues are professionally built and well-equipped with waiting areas and secure lockers for test-takers. Features include built-in ceiling speakers for events and specialized training."
+          "description": "Our modern, purpose-built, and air-conditioned venues feature comfortable waiting areas and secure lockers for test-takers. Additionally, the facility is equipped with built-in ceiling speakers to support events and specialized training."
         },
         {
           "title": "Experienced Invigilators",
-          "description": "All administrators and proctors at TEPTH are certified and highly trained to supervise various types of international exams with the highest level of professionalism."
+          "description": "Every administrator and proctor at TEPTH is fully certified and rigorously trained to oversee a wide variety of international exams with the utmost professionalism."
         },
         {
           "title": "Special Accommodation",
-          "description": "We can accommodate test-takers requiring extra time or private rooms for special needs, ensuring a fair and supportive testing environment for everyone."
+          "description": "To ensure a fair and supportive environment for all, we happily accommodate test-takers who require special arrangements, such as extra testing time or a private room."
         },
         {
           "title": "Seating Capacity",
-          "description": "With a total capacity of 140 workstations across three 40-seat computer rooms and a 20-seat classroom, we can administer exams for up to 140 candidates in a single session."
+          "description": "We can host up to 28 candidates per exam session, utilizing 23 workstations across two computer labs and an additional 5-seat classroom."
         }
       ]
     }
@@ -1384,7 +1398,11 @@
       "assistivePersonnel": {
         "title": "Assistive Personnel",
         "desc": "Qualified scribes, readers, and sign-language interpreters can be provided to assist candidates in conveying their knowledge accurately.",
-        "tags": ["Amanuensis", "Oral Transcribers", "Invigilators"]
+        "tags": [
+          "Amanuensis",
+          "Oral Transcribers",
+          "Invigilators"
+        ]
       }
     },
     "howToApply": {
@@ -1755,7 +1773,10 @@
       "whoShouldTake": [
         "Students applying for UK student visas (degree level)"
       ],
-      "acceptedFor": ["UK Visas and Immigration (UKVI)", "UK Universities"]
+      "acceptedFor": [
+        "UK Visas and Immigration (UKVI)",
+        "UK Universities"
+      ]
     },
     "ielts-ukvi-general": {
       "subtitle": "For migration and work in the UK",
@@ -1801,8 +1822,14 @@
           "details": "Face-to-face interview"
         }
       ],
-      "whoShouldTake": ["Migrants to the UK", "Work visa applicants"],
-      "acceptedFor": ["UK Visas and Immigration (UKVI)", "UK Work Permits"]
+      "whoShouldTake": [
+        "Migrants to the UK",
+        "Work visa applicants"
+      ],
+      "acceptedFor": [
+        "UK Visas and Immigration (UKVI)",
+        "UK Work Permits"
+      ]
     },
     "ielts-life-skills-a1": {
       "subtitle": "For Family, Spouse or Partner visas",
@@ -1829,8 +1856,12 @@
           "details": "Face-to-face interview with an examiner and another test taker."
         }
       ],
-      "whoShouldTake": ["UK Family/Spouse visa applicants"],
-      "acceptedFor": ["UK Visas and Immigration (UKVI)"]
+      "whoShouldTake": [
+        "UK Family/Spouse visa applicants"
+      ],
+      "acceptedFor": [
+        "UK Visas and Immigration (UKVI)"
+      ]
     },
     "ielts-life-skills-a2": {
       "subtitle": "For Family visa extension",
@@ -1857,8 +1888,12 @@
           "details": "Face-to-face interview with an examiner and another test taker."
         }
       ],
-      "whoShouldTake": ["UK Family visa extension applicants"],
-      "acceptedFor": ["UK Visas and Immigration (UKVI)"]
+      "whoShouldTake": [
+        "UK Family visa extension applicants"
+      ],
+      "acceptedFor": [
+        "UK Visas and Immigration (UKVI)"
+      ]
     },
     "ielts-life-skills-b1": {
       "subtitle": "For Citizenship and Settlement",
@@ -1885,8 +1920,12 @@
           "details": "Face-to-face interview with an examiner and another test taker."
         }
       ],
-      "whoShouldTake": ["UK Citizenship/Settlement applicants"],
-      "acceptedFor": ["UK Visas and Immigration (UKVI)"]
+      "whoShouldTake": [
+        "UK Citizenship/Settlement applicants"
+      ],
+      "acceptedFor": [
+        "UK Visas and Immigration (UKVI)"
+      ]
     },
     "toefl": {
       "subtitle": "Test of English as a Foreign Language — Internet-Based Test",
@@ -2117,8 +2156,12 @@
           "details": "Summarize spoken text, dictation"
         }
       ],
-      "whoShouldTake": ["UK visa applicants"],
-      "acceptedFor": ["UK Visas and Immigration (UKVI)"]
+      "whoShouldTake": [
+        "UK visa applicants"
+      ],
+      "acceptedFor": [
+        "UK Visas and Immigration (UKVI)"
+      ]
     },
     "pte-home-a1": {
       "subtitle": "For Family and Work visas in the UK",
@@ -2145,8 +2188,12 @@
           "details": "Speaking and listening tasks only"
         }
       ],
-      "whoShouldTake": ["UK Family/Spouse visa applicants"],
-      "acceptedFor": ["UK Visas and Immigration (UKVI)"]
+      "whoShouldTake": [
+        "UK Family/Spouse visa applicants"
+      ],
+      "acceptedFor": [
+        "UK Visas and Immigration (UKVI)"
+      ]
     },
     "pte-home-a2": {
       "subtitle": "For UK Family visa extension",
@@ -2173,8 +2220,12 @@
           "details": "Speaking and listening tasks only"
         }
       ],
-      "whoShouldTake": ["UK Family visa extension applicants"],
-      "acceptedFor": ["UK Visas and Immigration (UKVI)"]
+      "whoShouldTake": [
+        "UK Family visa extension applicants"
+      ],
+      "acceptedFor": [
+        "UK Visas and Immigration (UKVI)"
+      ]
     },
     "pte-home-b1": {
       "subtitle": "For UK Citizenship and Settlement",
@@ -2201,8 +2252,12 @@
           "details": "Speaking and listening tasks only"
         }
       ],
-      "whoShouldTake": ["UK Citizenship and Settlement applicants"],
-      "acceptedFor": ["UK Visas and Immigration (UKVI)"]
+      "whoShouldTake": [
+        "UK Citizenship and Settlement applicants"
+      ],
+      "acceptedFor": [
+        "UK Visas and Immigration (UKVI)"
+      ]
     },
     "celpip-general": {
       "subtitle": "For Permanent Residency in Canada",
@@ -2323,8 +2378,12 @@
           "format": "Task 1: Giving Advice\nTask 2: Talking about a Personal Experience\nTask 3: Describing a Scene\nTask 4: Making Predictions\nTask 5: Comparing and Persuading\nTask 6: Dealing with a Difficult Situation\nTask 7: Expressing Opinions\nTask 8: Describing an Unusual Situation"
         }
       ],
-      "whoShouldTake": ["Canadian citizenship applicants"],
-      "acceptedFor": ["Canadian Citizenship"]
+      "whoShouldTake": [
+        "Canadian citizenship applicants"
+      ],
+      "acceptedFor": [
+        "Canadian Citizenship"
+      ]
     },
     "cael": {
       "subtitle": "Canadian Academic English Language Test",
@@ -2433,7 +2492,11 @@
           "details": "Profession-specific role-plays."
         }
       ],
-      "whoShouldTake": ["Doctors", "Nurses", "Healthcare professionals"],
+      "whoShouldTake": [
+        "Doctors",
+        "Nurses",
+        "Healthcare professionals"
+      ],
       "acceptedFor": [
         "Healthcare registration",
         "Migration for health professionals"
@@ -2457,7 +2520,10 @@
         "Professional certification seekers",
         "Licensing applicants"
       ],
-      "acceptedFor": ["Industry certifications", "Professional licensing"]
+      "acceptedFor": [
+        "Industry certifications",
+        "Professional licensing"
+      ]
     },
     "selt": {
       "description": "Home Office-approved Secure English Language Tests (SELT) for UK visa applications."
@@ -2491,7 +2557,9 @@
         "UK Family visa applicants",
         "UK Spouse visa applicants"
       ],
-      "acceptedFor": ["UK Visas and Immigration (UKVI)"]
+      "acceptedFor": [
+        "UK Visas and Immigration (UKVI)"
+      ]
     },
     "selt-a2": {
       "subtitle": "For UK Family visa extension",
@@ -2518,8 +2586,12 @@
           "details": "Speaking and listening tasks"
         }
       ],
-      "whoShouldTake": ["UK Family visa extension applicants"],
-      "acceptedFor": ["UK Visas and Immigration (UKVI)"]
+      "whoShouldTake": [
+        "UK Family visa extension applicants"
+      ],
+      "acceptedFor": [
+        "UK Visas and Immigration (UKVI)"
+      ]
     },
     "selt-b1": {
       "subtitle": "For UK Citizenship and Settlement",
@@ -2550,7 +2622,9 @@
         "UK Citizenship applicants",
         "UK Settlement applicants"
       ],
-      "acceptedFor": ["UK Visas and Immigration (UKVI)"]
+      "acceptedFor": [
+        "UK Visas and Immigration (UKVI)"
+      ]
     },
     "selt-b1-r-w": {
       "subtitle": "For UK Work and Student visas",
@@ -2584,8 +2658,13 @@
           "duration": "60 min"
         }
       ],
-      "whoShouldTake": ["Work visa applicants", "Student visa applicants"],
-      "acceptedFor": ["UK Visas and Immigration (UKVI)"]
+      "whoShouldTake": [
+        "Work visa applicants",
+        "Student visa applicants"
+      ],
+      "acceptedFor": [
+        "UK Visas and Immigration (UKVI)"
+      ]
     },
     "selt-b2": {
       "subtitle": "For UK Work and Professional visas",
@@ -2623,7 +2702,9 @@
         "Professional registration seekers",
         "Advanced work visa applicants"
       ],
-      "acceptedFor": ["UK Visas and Immigration (UKVI)"]
+      "acceptedFor": [
+        "UK Visas and Immigration (UKVI)"
+      ]
     },
     "selt-c1": {
       "subtitle": "For advanced UK academic and professional requirements",
@@ -2661,7 +2742,9 @@
         "Advanced academic students",
         "Senior professional applicants"
       ],
-      "acceptedFor": ["UK Visas and Immigration (UKVI)"]
+      "acceptedFor": [
+        "UK Visas and Immigration (UKVI)"
+      ]
     },
     "selt-c2": {
       "subtitle": "For near-native UK requirements",
@@ -2699,7 +2782,9 @@
         "Highest level academic seekers",
         "Native-equivalent proficiency seekers"
       ],
-      "acceptedFor": ["UK Visas and Immigration (UKVI)"]
+      "acceptedFor": [
+        "UK Visas and Immigration (UKVI)"
+      ]
     }
   },
   "TermsSteps": {
@@ -2725,12 +2810,27 @@
       "16": "We are not responsible if we cannot run the test or fulfill our duties due to extreme situations entirely out of our hands. This includes major emergencies like natural disasters, wars, or unexpected power and technical blackouts."
     },
     "selt": {
-      "0": "The Skills for English Test (SELT) registration service is offered by <bold>The Exam Preparation & Testing House LLC</bold> for the convenience of the test-takers. We hold no control or responsibility regarding any issues related to test results, scoring or other. We have no involvement in the test itself.",
-      "1": "The registration service is entirely voluntary and candidates can book their test at the center directly through Pearson without paying for the additional fee. Any candidate who wishes to use TEPTH registration service offered by our staff will be charged an additional <aed_additional></aed_additional> (service charge) on top of the Skills for English Test (SELT) fee.",
-      "2": "The test center bears responsibility of any incorrect information filled out during registration by one of our staff.",
-      "3": "Candidates registering using this service and others who register themselves online will be treated the same while taking the test at our center.",
-      "4": "If you are a minor, you will need consent from your parent or guardian.",
-      "5": "If you need special arrangements for the test, please do not complete this online form and contact us to assist your further."
+      "0": "<bold>The Exam Preparation & Testing House L.L.C</bold> facilitates <bold>{examName}</bold> test registration strictly as an optional convenience for candidates. We expressly disclaim any liability or involvement regarding test administration, scoring, technical issues, or the distribution of results. Alternatively, candidates may choose to register directly via the official exam provider's portal while designating any SELT Test Centres. <bold>Please note that we do not administer this exam at our current facility. Instead, we will register you to take the test at our Dubai location or another SELT center of your choosing, strictly depending on seat availability for your preferred date and time.</bold>",
+      "1": "If you need special testing accommodations, please do not use this online form. You can either contact us directly so we can help you register, or you can email your request to <bold>info@skillsforenglish.com</bold>.",
+      "2": "Registration for the <bold>{examName}</bold> officially closes <bold>48 hours (2 days)</bold> prior to exam date. Registration must be completed at least <bold>72 hours (3 days)</bold> before your chosen test time. Since testing seats often fill up quickly, we strongly encourage you to secure your booking well ahead of time.",
+      "3": "It doesn't matter if you use our registration service or book the test yourself online—everyone gets the exact same treatment and experience on test day at the test center.",
+      "4": "In the UAE, the current fee for the <bold>{examName}</bold> exam is <bold>{usdFee}</bold> (approximately <aed_exam></aed_exam>). Candidates opting to use the <bold>TEPTH</bold> registration service will incur an administrative fee of <aed_additional></aed_additional>, which is applied in addition to the standard <bold>{examNameShort}</bold> exam fee.",
+      "5": "Please note that we do not process schedule changes; you must handle this yourself via the Skills for English Candidate Account Portal. You can change your test date or location as long as your desired slot is available, you pay the required administration fee, and you finalize the change before 9:00 AM (Local Time) exactly seven days before your test (e.g., by 9 AM the Monday before a Monday test). Rescheduling is strictly prohibited after this deadline. If you need a new date after the 7-day mark has passed, you must cancel your current appointment and book a completely new test.",
+      "6": "Please note that our responsibility ends once your test is booked. You must manage any cancellations yourself through the Skills for English Candidate Account Portal. To receive a full refund, you must cancel no later than 9:00 AM (Local Time) seven days before your test date. If you cancel after this strict deadline or miss your exam entirely, you will forfeit 100% of your fee. When you cancel, you will receive an email confirmation and a credit note if a refund is due, which will be credited back to the original payment method. You must communicate directly with the exam provider for these matters; you can call them at +1 858 875 3753 (international rates apply).",
+      "7": "Please contact our Help Desk to confirm seat availability for your desired date and time before using our service to book your test.",
+      "8": "You must be 16 or older to take the Skills for English (SELT) test. Registration is not permitted for anyone younger than 16.",
+      "9": "Test-takers aged 16 and 17 must have a parent or guardian accept the Terms and Conditions on their behalf. Before registering, you must download the <bold>Release Form for Testing Minors</bold> and the <bold>Emergency Contact Form</bold>, fill them out, and email them to <bold>info@skillsforenglish.com</bold>. On test day, you must bring the signed physical forms with you. Please note that you will take the exam entirely on your own; your parent or guardian is not allowed to wait inside the facility or enter the testing room.",
+      "10": "When you arrive for your test, you must bring the exact same valid ID that you used to register.",
+      "11": "Candidates who arrive late to the exam will be denied entry and will not be permitted to take the test.",
+      "12": "Test administrators will conduct a respectful security check to verify that no prohibited items are being brought into the testing room. As part of this process, you may be requested to empty your pockets, perform a self-pat-down, or adjust clothing items—such as rolling up sleeves or lifting hoods and pant legs—to confirm no unauthorized materials are concealed.",
+      "13": "For candidates wearing glasses, the proctor will conduct a visual inspection of your eyewear to ensure compliance, strictly without physically touching them. The same applies to hearing aid.",
+      "14": "You will undergo a visual security screening and an electronic scan with a handheld metal detector. Additionally, to validate your identity, you must consent to having your photograph taken.",
+      "15": "Before entering the exam room, all personal items, such as wallets, watches, and small purses, must be stored in your assigned locker. Large bags and backpacks are not allowed at your testing station and must be placed in a designated area at the front or back of the room, as instructed by the staff. Additionally, all electronic devices, including phones, smartwatches, and earbuds, are strictly prohibited; they must be completely powered off and locked away prior to entry.",
+      "16": "Candidates are not allowed to bring any food, beverages (including water), or chewing gum into the testing room.",
+      "17": "Candidates are strictly forbidden from taking restroom breaks while completing the <bold>{examNameShort}</bold> test.",
+      "18": "Using fraudulent identification or attempting to cheat will result in immediate disqualification and removal from the testing center. Furthermore, such actions including any suspicious behaviour will be reported to the exam provider, which can lead to the cancellation of your scores and the forfeiture of your testing fees.",
+      "19": "We are not responsible if the test is cancelled, postponed or rescheduled due to extreme situations or any other reason. This includes major emergencies like natural disasters, wars, or unexpected power and technical blackouts.",
+      "20": "By using our registration service, you acknowledge that you have read and agreed to our terms and conditions."
     },
     "toefl": {
       "0": "<bold>The Exam Preparation & Testing House L.L.C</bold> facilitates <bold>TOEFL iBT</bold> test registration strictly as an optional convenience for candidates. We expressly disclaim any liability or involvement regarding test administration, scoring, technical issues, or the distribution of results. Alternatively, candidates may choose to register directly via the official exam provider's portal while designating our facility as their testing location.",
@@ -2792,6 +2892,167 @@
       "14": "Candidates are not allowed to bring any food, beverages (including water), or chewing gum into the testing room.",
       "15": "Using fraudulent identification or attempting to cheat will result in immediate disqualification and removal from the testing center. Furthermore, such actions including any suspicious behaviour will be reported to the exam provider, which can lead to the cancellation of your scores and the forfeiture of your testing fees.",
       "16": "We are not responsible if we cannot run the test or fulfill our duties due to extreme situations entirely out of our hands. This includes major emergencies like natural disasters, wars, or unexpected power and technical blackouts."
+    },
+    "selt_a1": {
+      "0": "<bold>The Exam Preparation & Testing House L.L.C</bold> facilitates <bold>Skills for English Secure English Language Test (SELT): UKVI Speaking and Listening at level A1</bold> test registration strictly as an optional convenience for candidates. We expressly disclaim any liability or involvement regarding test administration, scoring, technical issues, or the distribution of results. Alternatively, candidates may choose to register directly via the official exam provider's portal while designating any SELT Test Centres. <bold>Please note that we do not administer this exam at our current facility. Instead, we will register you to take the test at our Dubai location or another SELT center of your choosing, strictly depending on seat availability for your preferred date and time.</bold>",
+      "1": "If you need special testing accommodations, please do not use this online form. You can either contact us directly so we can help you register, or you can email your request to <bold>info@skillsforenglish.com</bold>.",
+      "2": "Registration for the <bold>Skills for English Secure English Language Test (SELT): UKVI Speaking and Listening at level A1</bold> officially closes <bold>48 hours (2 days)</bold> prior to exam date. Registration must be completed at least <bold>72 hours (3 days)</bold> before your chosen test time. Since testing seats often fill up quickly, we strongly encourage you to secure your booking well ahead of time.",
+      "3": "It doesn't matter if you use our registration service or book the test yourself online—everyone gets the exact same treatment and experience on test day at the test center.",
+      "4": "In the UAE, the current fee for the <bold>Skills for English Secure English Language Test (SELT): UKVI Speaking and Listening at level A1</bold> exam is <bold>US$175</bold> (approximately <aed_exam></aed_exam>). Candidates opting to use the <bold>TEPTH</bold> registration service will incur an administrative fee of <aed_additional></aed_additional>, which is applied in addition to the standard <bold>UKVI Speaking and Listening at level A1</bold> exam fee.",
+      "5": "Please note that we do not process schedule changes; you must handle this yourself via the Skills for English Candidate Account Portal. You can change your test date or location as long as your desired slot is available, you pay the required administration fee, and you finalize the change before 9:00 AM (Local Time) exactly seven days before your test (e.g., by 9 AM the Monday before a Monday test). Rescheduling is strictly prohibited after this deadline. If you need a new date after the 7-day mark has passed, you must cancel your current appointment and book a completely new test.",
+      "6": "Please note that our responsibility ends once your test is booked. You must manage any cancellations yourself through the Skills for English Candidate Account Portal. To receive a full refund, you must cancel no later than 9:00 AM (Local Time) seven days before your test date. If you cancel after this strict deadline or miss your exam entirely, you will forfeit 100% of your fee. When you cancel, you will receive an email confirmation and a credit note if a refund is due, which will be credited back to the original payment method. You must communicate directly with the exam provider for these matters; you can call them at +1 858 875 3753 (international rates apply).",
+      "7": "Please contact our Help Desk to confirm seat availability for your desired date and time before using our service to book your test.",
+      "8": "You must be 16 or older to take the Skills for English (SELT) test. Registration is not permitted for anyone younger than 16.",
+      "9": "Test-takers aged 16 and 17 must have a parent or guardian accept the Terms and Conditions on their behalf. Before registering, you must download the <bold>Release Form for Testing Minors</bold> and the <bold>Emergency Contact Form</bold>, fill them out, and email them to <bold>info@skillsforenglish.com</bold>. On test day, you must bring the signed physical forms with you. Please note that you will take the exam entirely on your own; your parent or guardian is not allowed to wait inside the facility or enter the testing room.",
+      "10": "When you arrive for your test, you must bring the exact same valid ID that you used to register.",
+      "11": "Candidates who arrive late to the exam will be denied entry and will not be permitted to take the test.",
+      "12": "Test administrators will conduct a respectful security check to verify that no prohibited items are being brought into the testing room. As part of this process, you may be requested to empty your pockets, perform a self-pat-down, or adjust clothing items—such as rolling up sleeves or lifting hoods and pant legs—to confirm no unauthorized materials are concealed.",
+      "13": "For candidates wearing glasses, the proctor will conduct a visual inspection of your eyewear to ensure compliance, strictly without physically touching them. The same applies to hearing aid.",
+      "14": "You will undergo a visual security screening and an electronic scan with a handheld metal detector. Additionally, to validate your identity, you must consent to having your photograph taken.",
+      "15": "Before entering the exam room, all personal items, such as wallets, watches, and small purses, must be stored in your assigned locker. Large bags and backpacks are not allowed at your testing station and must be placed in a designated area at the front or back of the room, as instructed by the staff. Additionally, all electronic devices, including phones, smartwatches, and earbuds, are strictly prohibited; they must be completely powered off and locked away prior to entry.",
+      "16": "Candidates are not allowed to bring any food, beverages (including water), or chewing gum into the testing room.",
+      "17": "Candidates are strictly forbidden from taking restroom breaks while completing the <bold>Skills for English (SELT) A1 UKVI Speaking and Listening</bold> test.",
+      "18": "Using fraudulent identification or attempting to cheat will result in immediate disqualification and removal from the testing center. Furthermore, such actions including any suspicious behaviour will be reported to the exam provider, which can lead to the cancellation of your scores and the forfeiture of your testing fees.",
+      "19": "We are not responsible if the test is cancelled, postponed or rescheduled due to extreme situations or any other reason. This includes major emergencies like natural disasters, wars, or unexpected power and technical blackouts.",
+      "20": "By using our registration service, you acknowledge that you have read and agreed to our terms and conditions."
+    },
+    "selt_a2": {
+      "0": "<bold>The Exam Preparation & Testing House L.L.C</bold> facilitates <bold>Skills for English Secure English Language Test (SELT): UKVI Speaking and Listening at level A2</bold> test registration strictly as an optional convenience for candidates. We expressly disclaim any liability or involvement regarding test administration, scoring, technical issues, or the distribution of results. Alternatively, candidates may choose to register directly via the official exam provider's portal while designating any SELT Test Centres. <bold>Please note that we do not administer this exam at our current facility. Instead, we will register you to take the test at our Dubai location or another SELT center of your choosing, strictly depending on seat availability for your preferred date and time.</bold>",
+      "1": "If you need special testing accommodations, please do not use this online form. You can either contact us directly so we can help you register, or you can email your request to <bold>info@skillsforenglish.com</bold>.",
+      "2": "Registration for the <bold>Skills for English Secure English Language Test (SELT): UKVI Speaking and Listening at level A2</bold> officially closes <bold>48 hours (2 days)</bold> prior to exam date. Registration must be completed at least <bold>72 hours (3 days)</bold> before your chosen test time. Since testing seats often fill up quickly, we strongly encourage you to secure your booking well ahead of time.",
+      "3": "It doesn't matter if you use our registration service or book the test yourself online—everyone gets the exact same treatment and experience on test day at the test center.",
+      "4": "In the UAE, the current fee for the <bold>Skills for English Secure English Language Test (SELT): UKVI Speaking and Listening at level A2</bold> exam is <bold>US$175</bold> (approximately <aed_exam></aed_exam>). Candidates opting to use the <bold>TEPTH</bold> registration service will incur an administrative fee of <aed_additional></aed_additional>, which is applied in addition to the standard <bold>Skills for English (SELT) A2 UKVI Speaking and Listening</bold> exam fee.",
+      "5": "Please note that we do not process schedule changes; you must handle this yourself via the Skills for English Candidate Account Portal. You can change your test date or location as long as your desired slot is available, you pay the required administration fee, and you finalize the change before 9:00 AM (Local Time) exactly seven days before your test (e.g., by 9 AM the Monday before a Monday test). Rescheduling is strictly prohibited after this deadline. If you need a new date after the 7-day mark has passed, you must cancel your current appointment and book a completely new test.",
+      "6": "Please note that our responsibility ends once your test is booked. You must manage any cancellations yourself through the Skills for English Candidate Account Portal. To receive a full refund, you must cancel no later than 9:00 AM (Local Time) seven days before your test date. If you cancel after this strict deadline or miss your exam entirely, you will forfeit 100% of your fee. When you cancel, you will receive an email confirmation and a credit note if a refund is due, which will be credited back to the original payment method. You must communicate directly with the exam provider for these matters; you can call them at +1 858 875 3753 (international rates apply).",
+      "7": "Please contact our Help Desk to confirm seat availability for your desired date and time before using our service to book your test.",
+      "8": "You must be 16 or older to take the Skills for English (SELT) test. Registration is not permitted for anyone younger than 16.",
+      "9": "Test-takers aged 16 and 17 must have a parent or guardian accept the Terms and Conditions on their behalf. Before registering, you must download the <bold>Release Form for Testing Minors</bold> and the <bold>Emergency Contact Form</bold>, fill them out, and email them to <bold>info@skillsforenglish.com</bold>. On test day, you must bring the signed physical forms with you. Please note that you will take the exam entirely on your own; your parent or guardian is not allowed to wait inside the facility or enter the testing room.",
+      "10": "When you arrive for your test, you must bring the exact same valid ID that you used to register.",
+      "11": "Candidates who arrive late to the exam will be denied entry and will not be permitted to take the test.",
+      "12": "Test administrators will conduct a respectful security check to verify that no prohibited items are being brought into the testing room. As part of this process, you may be requested to empty your pockets, perform a self-pat-down, or adjust clothing items—such as rolling up sleeves or lifting hoods and pant legs—to confirm no unauthorized materials are concealed.",
+      "13": "For candidates wearing glasses, the proctor will conduct a visual inspection of your eyewear to ensure compliance, strictly without physically touching them. The same applies to hearing aid.",
+      "14": "You will undergo a visual security screening and an electronic scan with a handheld metal detector. Additionally, to validate your identity, you must consent to having your photograph taken.",
+      "15": "Before entering the exam room, all personal items, such as wallets, watches, and small purses, must be stored in your assigned locker. Large bags and backpacks are not allowed at your testing station and must be placed in a designated area at the front or back of the room, as instructed by the staff. Additionally, all electronic devices, including phones, smartwatches, and earbuds, are strictly prohibited; they must be completely powered off and locked away prior to entry.",
+      "16": "Candidates are not allowed to bring any food, beverages (including water), or chewing gum into the testing room.",
+      "17": "Candidates are strictly forbidden from taking restroom breaks while completing the <bold>Skills for English (SELT) A2 UKVI Speaking and Listening</bold> test.",
+      "18": "Using fraudulent identification or attempting to cheat will result in immediate disqualification and removal from the testing center. Furthermore, such actions including any suspicious behaviour will be reported to the exam provider, which can lead to the cancellation of your scores and the forfeiture of your testing fees.",
+      "19": "We are not responsible if the test is cancelled, postponed or rescheduled due to extreme situations or any other reason. This includes major emergencies like natural disasters, wars, or unexpected power and technical blackouts.",
+      "20": "By using our registration service, you acknowledge that you have read and agreed to our terms and conditions."
+    },
+    "selt_b1": {
+      "0": "<bold>The Exam Preparation & Testing House L.L.C</bold> facilitates <bold>Skills for English Secure English Language Test (SELT): UKVI Speaking and Listening at level B1</bold> test registration strictly as an optional convenience for candidates. We expressly disclaim any liability or involvement regarding test administration, scoring, technical issues, or the distribution of results. Alternatively, candidates may choose to register directly via the official exam provider's portal while designating any SELT Test Centres. <bold>Please note that we do not administer this exam at our current facility. Instead, we will register you to take the test at our Dubai location or another SELT center of your choosing, strictly depending on seat availability for your preferred date and time.</bold>",
+      "1": "If you need special testing accommodations, please do not use this online form. You can either contact us directly so we can help you register, or you can email your request to <bold>info@skillsforenglish.com</bold>.",
+      "2": "Registration for the <bold>Skills for English Secure English Language Test (SELT): UKVI Speaking and Listening at level B1</bold> officially closes <bold>48 hours (2 days)</bold> prior to exam date. Registration must be completed at least <bold>72 hours (3 days)</bold> before your chosen test time. Since testing seats often fill up quickly, we strongly encourage you to secure your booking well ahead of time.",
+      "3": "It doesn't matter if you use our registration service or book the test yourself online—everyone gets the exact same treatment and experience on test day at the test center.",
+      "4": "In the UAE, the current fee for the <bold>Skills for English Secure English Language Test (SELT): UKVI Speaking and Listening at level B1</bold> exam is <bold>US$175</bold> (approximately <aed_exam></aed_exam>). Candidates opting to use the <bold>TEPTH</bold> registration service will incur an administrative fee of <aed_additional></aed_additional>, which is applied in addition to the standard <bold>UKVI Speaking and Listening at level B1</bold> exam fee.",
+      "5": "Please note that we do not process schedule changes; you must handle this yourself via the Skills for English Candidate Account Portal. You can change your test date or location as long as your desired slot is available, you pay the required administration fee, and you finalize the change before 9:00 AM (Local Time) exactly seven days before your test (e.g., by 9 AM the Monday before a Monday test). Rescheduling is strictly prohibited after this deadline. If you need a new date after the 7-day mark has passed, you must cancel your current appointment and book a completely new test.",
+      "6": "Please note that our responsibility ends once your test is booked. You must manage any cancellations yourself through the Skills for English Candidate Account Portal. To receive a full refund, you must cancel no later than 9:00 AM (Local Time) seven days before your test date. If you cancel after this strict deadline or miss your exam entirely, you will forfeit 100% of your fee. When you cancel, you will receive an email confirmation and a credit note if a refund is due, which will be credited back to the original payment method. You must communicate directly with the exam provider for these matters; you can call them at +1 858 875 3753 (international rates apply).",
+      "7": "Please contact our Help Desk to confirm seat availability for your desired date and time before using our service to book your test.",
+      "8": "You must be 16 or older to take the Skills for English (SELT) test. Registration is not permitted for anyone younger than 16.",
+      "9": "Test-takers aged 16 and 17 must have a parent or guardian accept the Terms and Conditions on their behalf. Before registering, you must download the <bold>Release Form for Testing Minors</bold> and the <bold>Emergency Contact Form</bold>, fill them out, and email them to <bold>info@skillsforenglish.com</bold>. On test day, you must bring the signed physical forms with you. Please note that you will take the exam entirely on your own; your parent or guardian is not allowed to wait inside the facility or enter the testing room.",
+      "10": "When you arrive for your test, you must bring the exact same valid ID that you used to register.",
+      "11": "Candidates who arrive late to the exam will be denied entry and will not be permitted to take the test.",
+      "12": "Test administrators will conduct a respectful security check to verify that no prohibited items are being brought into the testing room. As part of this process, you may be requested to empty your pockets, perform a self-pat-down, or adjust clothing items—such as rolling up sleeves or lifting hoods and pant legs—to confirm no unauthorized materials are concealed.",
+      "13": "For candidates wearing glasses, the proctor will conduct a visual inspection of your eyewear to ensure compliance, strictly without physically touching them. The same applies to hearing aid.",
+      "14": "You will undergo a visual security screening and an electronic scan with a handheld metal detector. Additionally, to validate your identity, you must consent to having your photograph taken.",
+      "15": "Before entering the exam room, all personal items, such as wallets, watches, and small purses, must be stored in your assigned locker. Large bags and backpacks are not allowed at your testing station and must be placed in a designated area at the front or back of the room, as instructed by the staff. Additionally, all electronic devices, including phones, smartwatches, and earbuds, are strictly prohibited; they must be completely powered off and locked away prior to entry.",
+      "16": "Candidates are not allowed to bring any food, beverages (including water), or chewing gum into the testing room.",
+      "17": "Candidates are strictly forbidden from taking restroom breaks while completing the <bold>Skills for English (SELT) B1 UKVI Speaking and Listening</bold> test.",
+      "18": "Using fraudulent identification or attempting to cheat will result in immediate disqualification and removal from the testing center. Furthermore, such actions including any suspicious behaviour will be reported to the exam provider, which can lead to the cancellation of your scores and the forfeiture of your testing fees.",
+      "19": "We are not responsible if the test is cancelled, postponed or rescheduled due to extreme situations or any other reason. This includes major emergencies like natural disasters, wars, or unexpected power and technical blackouts.",
+      "20": "By using our registration service, you acknowledge that you have read and agreed to our terms and conditions."
+    },
+    "selt_b1_rw": {
+      "0": "<bold>The Exam Preparation & Testing House L.L.C</bold> facilitates <bold>Skills for English Secure English Language Test (SELT): UKVI Speaking, Listening, Reading and Writing at level B1</bold> test registration strictly as an optional convenience for candidates. We expressly disclaim any liability or involvement regarding test administration, scoring, technical issues, or the distribution of results. Alternatively, candidates may choose to register directly via the official exam provider's portal while designating any SELT Test Centres. <bold>Please note that we do not administer this exam at our current facility. Instead, we will register you to take the test at our Dubai location or another SELT center of your choosing, strictly depending on seat availability for your preferred date and time.</bold>",
+      "1": "If you need special testing accommodations, please do not use this online form. You can either contact us directly so we can help you register, or you can email your request to <bold>info@skillsforenglish.com</bold>.",
+      "2": "Registration for the <bold>Skills for English Secure English Language Test (SELT): UKVI Speaking, Listening, Reading and Writing at level B1</bold> officially closes <bold>48 hours (2 days)</bold> prior to exam date. Registration must be completed at least <bold>72 hours (3 days)</bold> before your chosen test time. Since testing seats often fill up quickly, we strongly encourage you to secure your booking well ahead of time.",
+      "3": "It doesn't matter if you use our registration service or book the test yourself online—everyone gets the exact same treatment and experience on test day at the test center.",
+      "4": "In the UAE, the current fee for the <bold>Skills for English Secure English Language Test (SELT): UKVI Speaking, Listening, Reading and Writing at level B1</bold> exam is <bold>US$235</bold> (approximately <aed_exam></aed_exam>). Candidates opting to use the <bold>TEPTH</bold> registration service will incur an administrative fee of <aed_additional></aed_additional>, which is applied in addition to the standard <bold>UKVI Speaking, Listening, Reading and Writing at level B1</bold> exam fee.",
+      "5": "Please note that we do not process schedule changes; you must handle this yourself via the Skills for English Candidate Account Portal. You can change your test date or location as long as your desired slot is available, you pay the required administration fee, and you finalize the change before 9:00 AM (Local Time) exactly seven days before your test (e.g., by 9 AM the Monday before a Monday test). Rescheduling is strictly prohibited after this deadline. If you need a new date after the 7-day mark has passed, you must cancel your current appointment and book a completely new test.",
+      "6": "Please note that our responsibility ends once your test is booked. You must manage any cancellations yourself through the Skills for English Candidate Account Portal. To receive a full refund, you must cancel no later than 9:00 AM (Local Time) seven days before your test date. If you cancel after this strict deadline or miss your exam entirely, you will forfeit 100% of your fee. When you cancel, you will receive an email confirmation and a credit note if a refund is due, which will be credited back to the original payment method. You must communicate directly with the exam provider for these matters; you can call them at +1 858 875 3753 (international rates apply).",
+      "7": "Please contact our Help Desk to confirm seat availability for your desired date and time before using our service to book your test.",
+      "8": "You must be 16 or older to take the Skills for English (SELT) test. Registration is not permitted for anyone younger than 16.",
+      "9": "Test-takers aged 16 and 17 must have a parent or guardian accept the Terms and Conditions on their behalf. Before registering, you must download the <bold>Release Form for Testing Minors</bold> and the <bold>Emergency Contact Form</bold>, fill them out, and email them to <bold>info@skillsforenglish.com</bold>. On test day, you must bring the signed physical forms with you. Please note that you will take the exam entirely on your own; your parent or guardian is not allowed to wait inside the facility or enter the testing room.",
+      "10": "When you arrive for your test, you must bring the exact same valid ID that you used to register.",
+      "11": "Candidates who arrive late to the exam will be denied entry and will not be permitted to take the test.",
+      "12": "Test administrators will conduct a respectful security check to verify that no prohibited items are being brought into the testing room. As part of this process, you may be requested to empty your pockets, perform a self-pat-down, or adjust clothing items—such as rolling up sleeves or lifting hoods and pant legs—to confirm no unauthorized materials are concealed.",
+      "13": "For candidates wearing glasses, the proctor will conduct a visual inspection of your eyewear to ensure compliance, strictly without physically touching them. The same applies to hearing aid.",
+      "14": "You will undergo a visual security screening and an electronic scan with a handheld metal detector. Additionally, to validate your identity, you must consent to having your photograph taken.",
+      "15": "Before entering the exam room, all personal items, such as wallets, watches, and small purses, must be stored in your assigned locker. Large bags and backpacks are not allowed at your testing station and must be placed in a designated area at the front or back of the room, as instructed by the staff. Additionally, all electronic devices, including phones, smartwatches, and earbuds, are strictly prohibited; they must be completely powered off and locked away prior to entry.",
+      "16": "Candidates are not allowed to bring any food, beverages (including water), or chewing gum into the testing room.",
+      "17": "You are only permitted to use the restroom during the <bold>Reading and Writing</bold> sections of the test. Please be aware that the exam clock will not pause; any time you spend away from your desk will be permanently deducted from your total testing time. Candidates are strictly forbidden from taking restroom breaks while completing the <bold>Speaking and Listening</bold> portions of the test.",
+      "18": "Using fraudulent identification or attempting to cheat will result in immediate disqualification and removal from the testing center. Furthermore, such actions including any suspicious behaviour will be reported to the exam provider, which can lead to the cancellation of your scores and the forfeiture of your testing fees.",
+      "19": "We are not responsible if the test is cancelled, postponed or rescheduled due to extreme situations or any other reason. This includes major emergencies like natural disasters, wars, or unexpected power and technical blackouts.",
+      "20": "By using our registration service, you acknowledge that you have read and agreed to our terms and conditions."
+    },
+    "selt_b2": {
+      "0": "<bold>The Exam Preparation & Testing House L.L.C</bold> facilitates <bold>Skills for English Secure English Language Test (SELT): UKVI Speaking, Listening, Reading and Writing at level B2</bold> test registration strictly as an optional convenience for candidates. We expressly disclaim any liability or involvement regarding test administration, scoring, technical issues, or the distribution of results. Alternatively, candidates may choose to register directly via the official exam provider's portal while designating any SELT Test Centres. <bold>Please note that we do not administer this exam at our current facility. Instead, we will register you to take the test at our Dubai location or another SELT center of your choosing, strictly depending on seat availability for your preferred date and time.</bold>",
+      "1": "If you need special testing accommodations, please do not use this online form. You can either contact us directly so we can help you register, or you can email your request to <bold>info@skillsforenglish.com</bold>.",
+      "2": "Registration for the <bold>Skills for English Secure English Language Test (SELT): UKVI Speaking, Listening, Reading and Writing at level B2</bold> officially closes <bold>48 hours (2 days)</bold> prior to exam date. Registration must be completed at least <bold>72 hours (3 days)</bold> before your chosen test time. Since testing seats often fill up quickly, we strongly encourage you to secure your booking well ahead of time.",
+      "3": "It doesn't matter if you use our registration service or book the test yourself online—everyone gets the exact same treatment and experience on test day at the test center.",
+      "4": "In the UAE, the current fee for the <bold>Skills for English Secure English Language Test (SELT): UKVI Speaking, Listening, Reading and Writing at level B2</bold> exam is <bold>US$235</bold> (approximately <aed_exam></aed_exam>). Candidates opting to use the <bold>TEPTH</bold> registration service will incur an administrative fee of <aed_additional></aed_additional>, which is applied in addition to the standard <bold>UKVI Speaking, Listening, Reading and Writing at level B2</bold> exam fee.",
+      "5": "Please note that we do not process schedule changes; you must handle this yourself via the Skills for English Candidate Account Portal. You can change your test date or location as long as your desired slot is available, you pay the required administration fee, and you finalize the change before 9:00 AM (Local Time) exactly seven days before your test (e.g., by 9 AM the Monday before a Monday test). Rescheduling is strictly prohibited after this deadline. If you need a new date after the 7-day mark has passed, you must cancel your current appointment and book a completely new test.",
+      "6": "Please note that our responsibility ends once your test is booked. You must manage any cancellations yourself through the Skills for English Candidate Account Portal. To receive a full refund, you must cancel no later than 9:00 AM (Local Time) seven days before your test date. If you cancel after this strict deadline or miss your exam entirely, you will forfeit 100% of your fee. When you cancel, you will receive an email confirmation and a credit note if a refund is due, which will be credited back to the original payment method. You must communicate directly with the exam provider for these matters; you can call them at +1 858 875 3753 (international rates apply).",
+      "7": "Please contact our Help Desk to confirm seat availability for your desired date and time before using our service to book your test.",
+      "8": "You must be 16 or older to take the Skills for English (SELT) test. Registration is not permitted for anyone younger than 16.",
+      "9": "Test-takers aged 16 and 17 must have a parent or guardian accept the Terms and Conditions on their behalf. Before registering, you must download the <bold>Release Form for Testing Minors</bold> and the <bold>Emergency Contact Form</bold>, fill them out, and email them to <bold>info@skillsforenglish.com</bold>. On test day, you must bring the signed physical forms with you. Please note that you will take the exam entirely on your own; your parent or guardian is not allowed to wait inside the facility or enter the testing room.",
+      "10": "When you arrive for your test, you must bring the exact same valid ID that you used to register.",
+      "11": "Candidates who arrive late to the exam will be denied entry and will not be permitted to take the test.",
+      "12": "Test administrators will conduct a respectful security check to verify that no prohibited items are being brought into the testing room. As part of this process, you may be requested to empty your pockets, perform a self-pat-down, or adjust clothing items—such as rolling up sleeves or lifting hoods and pant legs—to confirm no unauthorized materials are concealed.",
+      "13": "For candidates wearing glasses, the proctor will conduct a visual inspection of your eyewear to ensure compliance, strictly without physically touching them. The same applies to hearing aid.",
+      "14": "You will undergo a visual security screening and an electronic scan with a handheld metal detector. Additionally, to validate your identity, you must consent to having your photograph taken.",
+      "15": "Before entering the exam room, all personal items, such as wallets, watches, and small purses, must be stored in your assigned locker. Large bags and backpacks are not allowed at your testing station and must be placed in a designated area at the front or back of the room, as instructed by the staff. Additionally, all electronic devices, including phones, smartwatches, and earbuds, are strictly prohibited; they must be completely powered off and locked away prior to entry.",
+      "16": "Candidates are not allowed to bring any food, beverages (including water), or chewing gum into the testing room.",
+      "17": "You are only permitted to use the restroom during the <bold>Reading and Writing</bold> sections of the test. Please be aware that the exam clock will not pause; any time you spend away from your desk will be permanently deducted from your total testing time. Candidates are strictly forbidden from taking restroom breaks while completing the <bold>Speaking and Listening</bold> portions of the test.",
+      "18": "Using fraudulent identification or attempting to cheat will result in immediate disqualification and removal from the testing center. Furthermore, such actions including any suspicious behaviour will be reported to the exam provider, which can lead to the cancellation of your scores and the forfeiture of your testing fees.",
+      "19": "We are not responsible if the test is cancelled, postponed or rescheduled due to extreme situations or any other reason. This includes major emergencies like natural disasters, wars, or unexpected power and technical blackouts.",
+      "20": "By using our registration service, you acknowledge that you have read and agreed to our terms and conditions."
+    },
+    "selt_c1": {
+      "0": "<bold>The Exam Preparation & Testing House L.L.C</bold> facilitates <bold>Skills for English Secure English Language Test (SELT): UKVI Speaking, Listening, Reading and Writing at level C1</bold> test registration strictly as an optional convenience for candidates. We expressly disclaim any liability or involvement regarding test administration, scoring, technical issues, or the distribution of results. Alternatively, candidates may choose to register directly via the official exam provider's portal while designating any SELT Test Centres. <bold>Please note that we do not administer this exam at our current facility. Instead, we will register you to take the test at our Dubai location or another SELT center of your choosing, strictly depending on seat availability for your preferred date and time.</bold>",
+      "1": "If you need special testing accommodations, please do not use this online form. You can either contact us directly so we can help you register, or you can email your request to <bold>info@skillsforenglish.com</bold>.",
+      "2": "Registration for the <bold>Skills for English Secure English Language Test (SELT): UKVI Speaking, Listening, Reading and Writing at level C1</bold> officially closes <bold>48 hours (2 days)</bold> prior to exam date. Registration must be completed at least <bold>72 hours (3 days)</bold> before your chosen test time. Since testing seats often fill up quickly, we strongly encourage you to secure your booking well ahead of time.",
+      "3": "It doesn't matter if you use our registration service or book the test yourself online—everyone gets the exact same treatment and experience on test day at the test center.",
+      "4": "In the UAE, the current fee for the <bold>Skills for English Secure English Language Test (SELT): UKVI Speaking, Listening, Reading and Writing at level C1</bold> exam is <bold>US$235</bold> (approximately <aed_exam></aed_exam>). Candidates opting to use the <bold>TEPTH</bold> registration service will incur an administrative fee of <aed_additional></aed_additional>, which is applied in addition to the standard <bold>UKVI Speaking, Listening, Reading and Writing at level C1</bold> exam fee.",
+      "5": "Please note that we do not process schedule changes; you must handle this yourself via the Skills for English Candidate Account Portal. You can change your test date or location as long as your desired slot is available, you pay the required administration fee, and you finalize the change before 9:00 AM (Local Time) exactly seven days before your test (e.g., by 9 AM the Monday before a Monday test). Rescheduling is strictly prohibited after this deadline. If you need a new date after the 7-day mark has passed, you must cancel your current appointment and book a completely new test.",
+      "6": "Please note that our responsibility ends once your test is booked. You must manage any cancellations yourself through the Skills for English Candidate Account Portal. To receive a full refund, you must cancel no later than 9:00 AM (Local Time) seven days before your test date. If you cancel after this strict deadline or miss your exam entirely, you will forfeit 100% of your fee. When you cancel, you will receive an email confirmation and a credit note if a refund is due, which will be credited back to the original payment method. You must communicate directly with the exam provider for these matters; you can call them at +1 858 875 3753 (international rates apply).",
+      "7": "Please contact our Help Desk to confirm seat availability for your desired date and time before using our service to book your test.",
+      "8": "You must be 16 or older to take the Skills for English (SELT) test. Registration is not permitted for anyone younger than 16.",
+      "9": "Test-takers aged 16 and 17 must have a parent or guardian accept the Terms and Conditions on their behalf. Before registering, you must download the <bold>Release Form for Testing Minors</bold> and the <bold>Emergency Contact Form</bold>, fill them out, and email them to <bold>info@skillsforenglish.com</bold>. On test day, you must bring the signed physical forms with you. Please note that you will take the exam entirely on your own; your parent or guardian is not allowed to wait inside the facility or enter the testing room.",
+      "10": "When you arrive for your test, you must bring the exact same valid ID that you used to register.",
+      "11": "Candidates who arrive late to the exam will be denied entry and will not be permitted to take the test.",
+      "12": "Test administrators will conduct a respectful security check to verify that no prohibited items are being brought into the testing room. As part of this process, you may be requested to empty your pockets, perform a self-pat-down, or adjust clothing items—such as rolling up sleeves or lifting hoods and pant legs—to confirm no unauthorized materials are concealed.",
+      "13": "For candidates wearing glasses, the proctor will conduct a visual inspection of your eyewear to ensure compliance, strictly without physically touching them. The same applies to hearing aid.",
+      "14": "You will undergo a visual security screening and an electronic scan with a handheld metal detector. Additionally, to validate your identity, you must consent to having your photograph taken.",
+      "15": "Before entering the exam room, all personal items, such as wallets, watches, and small purses, must be stored in your assigned locker. Large bags and backpacks are not allowed at your testing station and must be placed in a designated area at the front or back of the room, as instructed by the staff. Additionally, all electronic devices, including phones, smartwatches, and earbuds, are strictly prohibited; they must be completely powered off and locked away prior to entry.",
+      "16": "Candidates are not allowed to bring any food, beverages (including water), or chewing gum into the testing room.",
+      "17": "You are only permitted to use the restroom during the <bold>Reading and Writing</bold> sections of the test. Please be aware that the exam clock will not pause; any time you spend away from your desk will be permanently deducted from your total testing time. Candidates are strictly forbidden from taking restroom breaks while completing the <bold>Speaking and Listening</bold> portions of the test.",
+      "18": "Using fraudulent identification or attempting to cheat will result in immediate disqualification and removal from the testing center. Furthermore, such actions including any suspicious behaviour will be reported to the exam provider, which can lead to the cancellation of your scores and the forfeiture of your testing fees.",
+      "19": "We are not responsible if the test is cancelled, postponed or rescheduled due to extreme situations or any other reason. This includes major emergencies like natural disasters, wars, or unexpected power and technical blackouts.",
+      "20": "By using our registration service, you acknowledge that you have read and agreed to our terms and conditions."
+    },
+    "selt_c2": {
+      "0": "<bold>The Exam Preparation & Testing House L.L.C</bold> facilitates <bold>Skills for English Secure English Language Test (SELT): UKVI Speaking, Listening, Reading and Writing at level C2</bold> test registration strictly as an optional convenience for candidates. We expressly disclaim any liability or involvement regarding test administration, scoring, technical issues, or the distribution of results. Alternatively, candidates may choose to register directly via the official exam provider's portal while designating any SELT Test Centres. <bold>Please note that we do not administer this exam at our current facility. Instead, we will register you to take the test at our Dubai location or another SELT center of your choosing, strictly depending on seat availability for your preferred date and time.</bold>",
+      "1": "If you need special testing accommodations, please do not use this online form. You can either contact us directly so we can help you register, or you can email your request to <bold>info@skillsforenglish.com</bold>.",
+      "2": "Registration for the <bold>Skills for English Secure English Language Test (SELT): UKVI Speaking, Listening, Reading and Writing at level C2</bold> officially closes <bold>48 hours (2 days)</bold> prior to exam date. Registration must be completed at least <bold>72 hours (3 days)</bold> before your chosen test time. Since testing seats often fill up quickly, we strongly encourage you to secure your booking well ahead of time.",
+      "3": "It doesn't matter if you use our registration service or book the test yourself online—everyone gets the exact same treatment and experience on test day at the test center.",
+      "4": "In the UAE, the current fee for the <bold>Skills for English Secure English Language Test (SELT): UKVI Speaking, Listening, Reading and Writing at level C2</bold> exam is <bold>US$235</bold> (approximately <aed_exam></aed_exam>). Candidates opting to use the <bold>TEPTH</bold> registration service will incur an administrative fee of <aed_additional></aed_additional>, which is applied in addition to the standard <bold>UKVI Speaking, Listening, Reading and Writing at level C2</bold> exam fee.",
+      "5": "Please note that we do not process schedule changes; you must handle this yourself via the Skills for English Candidate Account Portal. You can change your test date or location as long as your desired slot is available, you pay the required administration fee, and you finalize the change before 9:00 AM (Local Time) exactly seven days before your test (e.g., by 9 AM the Monday before a Monday test). Rescheduling is strictly prohibited after this deadline. If you need a new date after the 7-day mark has passed, you must cancel your current appointment and book a completely new test.",
+      "6": "Please note that our responsibility ends once your test is booked. You must manage any cancellations yourself through the Skills for English Candidate Account Portal. To receive a full refund, you must cancel no later than 9:00 AM (Local Time) seven days before your test date. If you cancel after this strict deadline or miss your exam entirely, you will forfeit 100% of your fee. When you cancel, you will receive an email confirmation and a credit note if a refund is due, which will be credited back to the original payment method. You must communicate directly with the exam provider for these matters; you can call them at +1 858 875 3753 (international rates apply).",
+      "7": "Please contact our Help Desk to confirm seat availability for your desired date and time before using our service to book your test.",
+      "8": "You must be 16 or older to take the Skills for English (SELT) test. Registration is not permitted for anyone younger than 16.",
+      "9": "Test-takers aged 16 and 17 must have a parent or guardian accept the Terms and Conditions on their behalf. Before registering, you must download the <bold>Release Form for Testing Minors</bold> and the <bold>Emergency Contact Form</bold>, fill them out, and email them to <bold>info@skillsforenglish.com</bold>. On test day, you must bring the signed physical forms with you. Please note that you will take the exam entirely on your own; your parent or guardian is not allowed to wait inside the facility or enter the testing room.",
+      "10": "When you arrive for your test, you must bring the exact same valid ID that you used to register.",
+      "11": "Candidates who arrive late to the exam will be denied entry and will not be permitted to take the test.",
+      "12": "Test administrators will conduct a respectful security check to verify that no prohibited items are being brought into the testing room. As part of this process, you may be requested to empty your pockets, perform a self-pat-down, or adjust clothing items—such as rolling up sleeves or lifting hoods and pant legs—to confirm no unauthorized materials are concealed.",
+      "13": "For candidates wearing glasses, the proctor will conduct a visual inspection of your eyewear to ensure compliance, strictly without physically touching them. The same applies to hearing aid.",
+      "14": "You will undergo a visual security screening and an electronic scan with a handheld metal detector. Additionally, to validate your identity, you must consent to having your photograph taken.",
+      "15": "Before entering the exam room, all personal items, such as wallets, watches, and small purses, must be stored in your assigned locker. Large bags and backpacks are not allowed at your testing station and must be placed in a designated area at the front or back of the room, as instructed by the staff. Additionally, all electronic devices, including phones, smartwatches, and earbuds, are strictly prohibited; they must be completely powered off and locked away prior to entry.",
+      "16": "Candidates are not allowed to bring any food, beverages (including water), or chewing gum into the testing room.",
+      "17": "You are only permitted to use the restroom during the <bold>Reading and Writing</bold> sections of the test. Please be aware that the exam clock will not pause; any time you spend away from your desk will be permanently deducted from your total testing time. Candidates are strictly forbidden from taking restroom breaks while completing the <bold>Speaking and Listening</bold> portions of the test.",
+      "18": "Using fraudulent identification or attempting to cheat will result in immediate disqualification and removal from the testing center. Furthermore, such actions including any suspicious behaviour will be reported to the exam provider, which can lead to the cancellation of your scores and the forfeiture of your testing fees.",
+      "19": "We are not responsible if the test is cancelled, postponed or rescheduled due to extreme situations or any other reason. This includes major emergencies like natural disasters, wars, or unexpected power and technical blackouts.",
+      "20": "By using our registration service, you acknowledge that you have read and agreed to our terms and conditions."
     }
   },
   "NavBar": {
