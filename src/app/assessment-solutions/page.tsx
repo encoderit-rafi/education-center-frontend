@@ -779,11 +779,11 @@ export default function AssessmentSolutionsPage() {
 
           <div className="relative z-10 flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16 max-w-4xl mx-auto">
             {/* Certify Logo Card */}
-            <div className="group relative flex-1 w-full max-w-[340px] aspect-[4/3] rounded-2xl bg-black border border-slate-800/80 flex items-center justify-center p-8 shadow-xl transition-all duration-500 hover:-translate-y-2 hover:border-red-500/30 hover:shadow-red-500/5">
+            <div className="group relative flex-1 w-full max-w-[340px] aspect-[4/3] rounded-2xl bg-white border border-slate-200/50 flex items-center justify-center p-8 shadow-xl transition-all duration-500 hover:-translate-y-2 hover:border-red-500/30 hover:shadow-red-500/5">
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-red-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
               <div className="relative w-full h-full max-h-[160px] transform group-hover:scale-105 transition-transform duration-500">
                 <Image
-                  src="/images/certify-logo.jpg"
+                  src="/images/certify-logo.png"
                   alt="Certify Assessment Solutions"
                   fill
                   className="object-contain filter drop-shadow-[0_4px_12px_rgba(239,68,68,0.1)]"
