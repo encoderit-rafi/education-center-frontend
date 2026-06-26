@@ -333,15 +333,7 @@ export function RegistrationFormStep({
                 autoComplete="off"
                 data-lpignore="true"
                 aria-invalid={!!errors.confirmEmail}
-                readOnly
                 {...register("confirmEmail")}
-                onFocus={(e) => {
-                  e.currentTarget.readOnly = false;
-                }}
-                onBlur={(e) => {
-                  e.currentTarget.readOnly = true;
-                  register("confirmEmail").onBlur(e);
-                }}
               />
               <FieldError errors={[errors.confirmEmail]} />
             </FieldContent>
@@ -450,7 +442,7 @@ export function RegistrationFormStep({
               <FieldError errors={[errors.idType]} />
             </FieldContent>
             <FieldDescription>
-              Please make sure you present the same identification you use for registration on exam day.
+              Please make sure you present the same identification you registered with on exam day.
             </FieldDescription>
           </Field>
 

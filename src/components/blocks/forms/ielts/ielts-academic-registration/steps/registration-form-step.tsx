@@ -373,7 +373,7 @@ export function RegistrationFormStep({
               <FieldError errors={[errors.idType]} />
             </FieldContent>
             <FieldDescription>
-             Please make sure you present the same identification you use for registration on exam day.
+              Please make sure you present the same identification you registered with on exam day.
             </FieldDescription>
           </Field>
 

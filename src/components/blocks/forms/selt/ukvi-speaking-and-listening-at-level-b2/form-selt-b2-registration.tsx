@@ -395,7 +395,7 @@ export default function FormSELTB2Registration({ examId: initialExamId }: FormPr
                   <div className="flex justify-between text-sm">
                     <span className="text-slate-500 font-medium">{examName}</span>
                     <div className="flex items-center gap-1">
-                      <span className="text-xs text-slate-400 font-normal">Estimated</span>
+                      <span className="text-xs text-slate-400 font-normal">Approximately</span>
                       <PriceDisplay
                         amount={pricing.baseFee}
                         className="font-bold text-slate-900"

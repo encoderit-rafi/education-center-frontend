@@ -24,7 +24,6 @@ import {
     Loader2,
     RefreshCw,
     Users,
-    Tag,
     ChevronRight,
 } from "lucide-react";
 import React, { useState } from "react";
@@ -415,16 +414,6 @@ export default function EventsPage() {
                                     <span className="bg-[#A11D1D] text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest shadow">
                                         {activeEvent.eventType}
                                     </span>
-                                    {parseFloat(activeEvent.price) === 0 && (
-                                        <span className="bg-green-500 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest shadow">
-                                            Free
-                                        </span>
-                                    )}
-                                    {activeEvent.totalSeats && (activeEvent.totalSeats - activeEvent.bookedSeats <= 10) && (
-                                        <span className="bg-amber-500 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest shadow">
-                                            Only {activeEvent.totalSeats - activeEvent.bookedSeats} Seats Left
-                                        </span>
-                                    )}
                                 </div>
 
                                 {/* Event info overlay at bottom */}
@@ -460,21 +449,13 @@ export default function EventsPage() {
                             {/* Right: Details + Form */}
                             <div className="lg:col-span-5 flex flex-col p-6 lg:p-8 gap-6 overflow-y-auto">
 
-                                {/* Price and seats chip layout */}
-                                <div className="flex items-center justify-between gap-4">
-                                    <div className="flex items-center gap-2 shrink-0">
-                                        <Tag className="w-4 h-4 text-[#A11D1D]" />
-                                        <span className="text-2xl font-black text-gray-900">
-                                            {parseFloat(activeEvent.price) > 0 ? `AED ${activeEvent.price}` : "FREE"}
-                                        </span>
+                                {/* Seats chip layout */}
+                                {activeEvent.totalSeats && (
+                                    <div className="flex items-center gap-2 text-sm text-gray-700 font-bold bg-gray-50 px-4 py-2 rounded-full border border-gray-200 self-start shadow-sm">
+                                        <span className="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse" />
+                                        Total seats: {activeEvent.totalSeats}
                                     </div>
-                                    {activeEvent.totalSeats && (
-                                        <div className="flex items-center gap-1.5 text-xs text-gray-500 font-semibold bg-gray-50 px-3 py-1.5 rounded-full border border-gray-100">
-                                            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                                            Total seats: {activeEvent.totalSeats}
-                                        </div>
-                                    )}
-                                </div>
+                                )}
 
                                 {/* Description */}
                                 {activeEvent.description && (
@@ -537,22 +518,6 @@ export default function EventsPage() {
                                                 event.eventType === "WORKSHOP" ? "bg-[#A11D1D]" : "bg-blue-600"
                                             )}>
                                                 {event.eventType}
-                                            </span>
-                                            {event.totalSeats && (event.totalSeats - event.bookedSeats <= 10) && (
-                                                <span className="bg-amber-500 text-white text-[9px] font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider shadow-sm">
-                                                    Only {event.totalSeats - event.bookedSeats} Left
-                                                </span>
-                                            )}
-                                        </div>
-                                        {/* Price badge */}
-                                        <div className="absolute top-3 right-3 z-10">
-                                            <span className={cn(
-                                                "text-[10px] font-black px-2.5 py-0.5 rounded-full shadow-sm",
-                                                parseFloat(event.price) > 0
-                                                    ? "bg-white text-gray-900"
-                                                    : "bg-green-500 text-white"
-                                            )}>
-                                                {parseFloat(event.price) > 0 ? `AED ${event.price}` : "FREE"}
                                             </span>
                                         </div>
                                     </div>

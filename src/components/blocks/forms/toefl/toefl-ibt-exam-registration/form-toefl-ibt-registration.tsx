@@ -428,7 +428,7 @@ export default function FormTOEFLIBTRegistration({ examId: initialExamId }: Form
                                     <div className="flex justify-between text-sm items-center">
                                         <span className="text-slate-500 font-medium">Standard Registration Fee</span>
                                         <span className="font-bold text-slate-900 inline-flex items-center gap-1">
-                                            ${pricing.baseFeeUSD} <span className="text-slate-400 font-normal text-xs inline-flex items-center gap-0.5">(estimated <PriceDisplay amount={pricing.baseFeeAED} minimumFractionDigits={0} maximumFractionDigits={0} className="text-slate-400 font-normal text-xs" />)</span>
+                                            ${pricing.baseFeeUSD} <span className="text-slate-400 font-normal text-xs inline-flex items-center gap-0.5">(Approximately <PriceDisplay amount={pricing.baseFeeAED} minimumFractionDigits={0} maximumFractionDigits={0} className="text-slate-400 font-normal text-xs" />)</span>
                                         </span>
                                     </div>
 
@@ -436,7 +436,7 @@ export default function FormTOEFLIBTRegistration({ examId: initialExamId }: Form
                                         <div className="flex justify-between text-sm items-center animate-in fade-in slide-in-from-top-1 duration-300">
                                             <span className="text-slate-500 font-medium">Express Registration Fee</span>
                                             <span className="font-bold text-red-700 inline-flex items-center gap-1">
-                                                ${pricing.expressFeeUSD} <span className="text-red-500/80 font-normal text-xs inline-flex items-center gap-0.5">(estimated <PriceDisplay amount={pricing.expressFeeAED} minimumFractionDigits={0} maximumFractionDigits={0} className="text-red-500/80 font-normal text-xs" />)</span>
+                                                ${pricing.expressFeeUSD} <span className="text-red-500/80 font-normal text-xs inline-flex items-center gap-0.5">(Approximately <PriceDisplay amount={pricing.expressFeeAED} minimumFractionDigits={0} maximumFractionDigits={0} className="text-red-500/80 font-normal text-xs" />)</span>
                                             </span>
                                         </div>
                                     )}
@@ -473,7 +473,7 @@ export default function FormTOEFLIBTRegistration({ examId: initialExamId }: Form
                                                     ${pricing.totalUSD}
                                                 </span>
                                                 <span className="text-3xl font-semibold text-primary inline-flex items-center gap-0.5 justify-end">
-                                                    <span className="text-xs font-semibold text-primary"> estimated </span> <PriceDisplay amount={pricing.totalAED} minimumFractionDigits={0} maximumFractionDigits={0} className="text-primary font-semibold text-3xl" />
+                                                    <span className="text-xs font-semibold text-primary"> Approximately </span> <PriceDisplay amount={pricing.totalAED} minimumFractionDigits={0} maximumFractionDigits={0} className="text-primary font-semibold text-3xl" />
                                                 </span>
                                             </div>
                                         </div>

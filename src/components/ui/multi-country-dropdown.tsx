@@ -40,6 +40,11 @@ interface MultiCountryDropdownProps {
   className?: string;
 }
 
+const options: Country[] = countries.all.filter(
+  (country: Country) =>
+    country.emoji && country.status !== "deleted" && country.ioc !== "PRK"
+);
+
 const MultiCountryDropdownComponent = (
   {
     onChange,
@@ -55,22 +60,18 @@ const MultiCountryDropdownComponent = (
   const [selectedCountries, setSelectedCountries] = useState<Country[]>([]);
   const t = useTranslations("CountryDropdown");
 
-  const options: Country[] = countries.all.filter(
-    (country: Country) =>
-      country.emoji && country.status !== "deleted" && country.ioc !== "PRK"
-  );
-
   // Sync state with prop
   useEffect(() => {
-    if (value && value.length > 0) {
-      const matched = options.filter(
-        (c) => value.includes(c.name) || value.includes(c.alpha2) || value.includes(c.alpha3)
-      );
-      setSelectedCountries(matched);
-    } else {
-      setSelectedCountries([]);
-    }
-  }, [value, options]);
+    const matched = value && value.length > 0
+      ? options.filter((c) => value.includes(c.name) || value.includes(c.alpha2) || value.includes(c.alpha3))
+      : [];
+
+    setSelectedCountries((prev) => {
+      const isSame = prev.length === matched.length &&
+        prev.every((c, index) => c.name === matched[index].name);
+      return isSame ? prev : matched;
+    });
+  }, [value]);
 
   const handleSelect = useCallback(
     (country: Country) => {
