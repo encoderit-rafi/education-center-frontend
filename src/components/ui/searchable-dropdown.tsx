@@ -103,7 +103,7 @@ export const SearchableDropdown = React.forwardRef<
           // Prevent Base UI from moving focus into the popup on open,
           // which would cause the browser to scroll to the input element.
           initialFocus={false}
-          className="w-[var(--anchor-width)] min-w-[var(--anchor-width)] md:min-w-[460px] p-0"
+          className="w-(--anchor-width) min-w-(--anchor-width) md:min-w-[460px] p-0"
         >
           <Command className="w-full max-h-[300px] overflow-hidden bg-white text-slate-700">
             <div className="p-1 border-b border-slate-100">

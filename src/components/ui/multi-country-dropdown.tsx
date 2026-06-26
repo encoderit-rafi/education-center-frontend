@@ -114,7 +114,7 @@ const MultiCountryDropdownComponent = (
         </span>
         <ChevronDown size={16} className={cn("shrink-0 text-slate-500 transition-transform duration-200", open && "rotate-180")} />
       </PopoverTrigger>
-      <PopoverContent side="bottom" align="start" sideOffset={4} className="w-[var(--anchor-width)] min-w-[12rem] p-0" initialFocus={false}>
+      <PopoverContent side="bottom" align="start" sideOffset={4} className="w-(--anchor-width) min-w-[12rem] p-0" initialFocus={false}>
         <Command className="w-full max-h-[300px] overflow-hidden bg-white text-slate-700">
           <div className="p-1 border-b border-slate-100">
             <CommandInput placeholder={t("searchPlaceholder")} className="h-9 px-2 outline-none w-full bg-slate-50" />

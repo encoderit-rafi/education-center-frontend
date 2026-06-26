@@ -363,7 +363,7 @@ export default function FreeConsultationForm() {
                           <ChevronDown className="h-4 w-4 text-slate-400" />
                         </Button>
                       </DropdownMenuTrigger>
-                      <DropdownMenuContent className="min-w-[var(--radix-dropdown-menu-trigger-width)] w-auto bg-white">
+                      <DropdownMenuContent className="min-w-(--radix-dropdown-menu-trigger-width) w-auto bg-white">
                         <DropdownMenuRadioGroup
                           value={field.value}
                           onValueChange={field.onChange}

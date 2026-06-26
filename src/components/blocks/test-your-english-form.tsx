@@ -462,7 +462,7 @@ export default function TestYourEnglishForm() {
                             <ChevronDown className="h-4 w-4 text-slate-400 shrink-0" />
                           </Button>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent className="min-w-[var(--radix-dropdown-menu-trigger-width)] w-auto bg-white">
+                        <DropdownMenuContent className="min-w-(--radix-dropdown-menu-trigger-width) w-auto bg-white">
                           <DropdownMenuRadioGroup
                             value={field.value}
                             onValueChange={field.onChange}
@@ -510,7 +510,7 @@ export default function TestYourEnglishForm() {
                             <ChevronDown className="h-4 w-4 text-slate-400 shrink-0" />
                           </Button>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent className="min-w-[var(--radix-dropdown-menu-trigger-width)] w-auto bg-white">
+                        <DropdownMenuContent className="min-w-(--radix-dropdown-menu-trigger-width) w-auto bg-white">
                           <DropdownMenuRadioGroup
                             value={field.value}
                             onValueChange={field.onChange}

@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
-import ReCAPTCHA from "react-google-recaptcha";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -14,15 +13,15 @@ import {
   FieldError,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
-import { Upload, CheckCircle2 } from "lucide-react";
+import { Upload, CheckCircle2, ChevronDown } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { DateTimePicker } from "@/components/ui/date-time-picker";
 import { CountryDropdown } from "@/components/ui/country-dropdown";
 import { PhoneInput } from "@/components/ui/phone-input";
@@ -49,7 +48,13 @@ const careerSchema = z.object({
     .min(1, "Please select your gender"),
   dob: z
     .any()
-    .refine((val) => val instanceof Date, "Please select your date of birth"),
+    .refine((val) => val instanceof Date, "Please select your date of birth")
+    .refine((val) => {
+      if (!(val instanceof Date)) return false;
+      const today = new Date();
+      const ageLimitDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+      return val <= ageLimitDate;
+    }, "You must be at least 18 years old"),
   nationality: z
     .string()
     .trim()
@@ -76,22 +81,20 @@ const careerSchema = z.object({
   pobox: z.string().optional(),
   resume: z
     .any()
-    .refine((val) => !!val, "Please upload your resume (PDF, DOC, or DOCX)"),
+    .refine((val) => !!val, "Please upload your resume (PDF, DOC, or DOCX)")
+    .refine(
+      (val) => !val || (val instanceof File && val.size <= 5 * 1024 * 1024),
+      "Resume file size must be less than 5MB",
+    ),
 });
 
 type CareerFormValues = z.infer<typeof careerSchema>;
 
 export default function CareerPage() {
   const t = useTranslations("CareerPage");
-  const [mounted, setMounted] = useState(false);
-  const [captchaError, setCaptchaError] = useState<string | null>(null);
   const [isSuccess, setIsSuccess] = useState(false);
-  const captchaRef = useRef<ReCAPTCHA>(null);
   const resumeFileRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const form = useForm<CareerFormValues>({
     resolver: zodResolver(careerSchema),
@@ -118,14 +121,13 @@ export default function CareerPage() {
     formState: { errors, isSubmitting },
   } = form;
 
-  const onSubmit = async (data: CareerFormValues) => {
-    const token = captchaRef.current?.getValue();
-    if (!token) {
-      setCaptchaError("Please verify that you are not a robot.");
-      return;
+  useEffect(() => {
+    if (Object.keys(errors).length > 0) {
+      console.log("👉 Form Validation Errors:", errors);
     }
-    setCaptchaError(null);
+  }, [errors]);
 
+  const onSubmit = async (data: CareerFormValues) => {
     try {
       const file = data.resume as File;
 
@@ -195,12 +197,19 @@ export default function CareerPage() {
       }
     } catch (error: any) {
       console.error("Submission error:", error);
+
+      let errorMessage = "An unexpected error occurred. Please try again later.";
+      if (error.response?.status === 413) {
+        errorMessage = "The uploaded file is too large. Please upload a file smaller than 2MB.";
+      } else if (error.response?.data?.message) {
+        errorMessage = error.response.data.message;
+      } else if (error.message) {
+        errorMessage = error.message;
+      }
+
       toast.error("Submission Error", {
         id: "career-submit",
-        description:
-          error.response?.data?.message ||
-          error.message ||
-          "An unexpected error occurred. Please try again later.",
+        description: errorMessage,
       });
     }
   };
@@ -307,18 +316,36 @@ export default function CareerPage() {
                           control={control}
                           name="gender"
                           render={({ field }) => (
-                            <Select
-                              onValueChange={field.onChange}
-                              value={field.value}
-                            >
-                              <SelectTrigger>
-                                <SelectValue placeholder={t("form.genderPlaceholder")} />
-                              </SelectTrigger>
-                              <SelectContent className="bg-white">
-                                <SelectItem value="male">{t("form.male")}</SelectItem>
-                                <SelectItem value="female">{t("form.female")}</SelectItem>
-                              </SelectContent>
-                            </Select>
+                            <DropdownMenu>
+                              <DropdownMenuTrigger asChild>
+                                <Button
+                                  variant="outline"
+                                  className="flex h-11 w-full bg-white items-center justify-between whitespace-nowrap rounded-md border border-slate-200 px-3 py-2 text-base outline-none focus:border-primary focus:ring-3 focus:ring-ring/30 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm font-medium hover:border-slate-200 hover:text-inherit hover:bg-white hover:shadow-none transition-none"
+                                >
+                                  <span className={!field.value ? "text-slate-400 font-normal" : ""}>
+                                    {field.value
+                                      ? field.value === "male"
+                                        ? t("form.male")
+                                        : t("form.female")
+                                      : t("form.genderPlaceholder")}
+                                  </span>
+                                  <ChevronDown className="w-4 h-4 text-slate-500" />
+                                </Button>
+                              </DropdownMenuTrigger>
+                              <DropdownMenuContent className="w-(--radix-dropdown-menu-trigger-width) bg-white">
+                                <DropdownMenuRadioGroup
+                                  value={field.value}
+                                  onValueChange={field.onChange}
+                                >
+                                  <DropdownMenuRadioItem value="male">
+                                    {t("form.male")}
+                                  </DropdownMenuRadioItem>
+                                  <DropdownMenuRadioItem value="female">
+                                    {t("form.female")}
+                                  </DropdownMenuRadioItem>
+                                </DropdownMenuRadioGroup>
+                              </DropdownMenuContent>
+                            </DropdownMenu>
                           )}
                         />
                       </FieldContent>
@@ -336,14 +363,20 @@ export default function CareerPage() {
                         <Controller
                           control={control}
                           name="dob"
-                          render={({ field }) => (
-                            <DateTimePicker
-                              mode="date"
-                              placeholder={t("form.dobPlaceholder")}
-                              value={field.value}
-                              onChange={field.onChange}
-                            />
-                          )}
+                          render={({ field }) => {
+                            const maxDob = new Date();
+                            maxDob.setFullYear(maxDob.getFullYear() - 18);
+                            return (
+                              <DateTimePicker
+                                mode="date"
+                                placeholder={t("form.dobPlaceholder")}
+                                value={field.value}
+                                onChange={field.onChange}
+                                disabledDays={{ after: maxDob }}
+                                toYear={maxDob.getFullYear()}
+                              />
+                            );
+                          }}
                         />
                       </FieldContent>
                       {errors.dob && (

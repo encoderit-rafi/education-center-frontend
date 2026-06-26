@@ -43,6 +43,7 @@ interface BaseDateTimePickerProps<TFieldValues extends FieldValues = FieldValues
   disablePast?: boolean;
   fromYear?: number;
   toYear?: number;
+  disabledDays?: any;
 }
 
 interface SingleDateTimePickerProps<TFieldValues extends FieldValues = FieldValues>
@@ -81,6 +82,7 @@ export function DateTimePicker<TFieldValues extends FieldValues = FieldValues>(
     disablePast = false,
     fromYear,
     toYear,
+    disabledDays,
   } = props;
 
   const startMonth = fromYear ? new Date(fromYear, 0) : undefined;
@@ -432,7 +434,7 @@ export function DateTimePicker<TFieldValues extends FieldValues = FieldValues>(
               }
             }
           }}
-          disabled={disablePast ? { before: new Date() } : undefined}
+          disabled={disabledDays || (disablePast ? { before: new Date() } : undefined)}
           startMonth={startMonth}
           endMonth={endMonth}
           initialFocus
@@ -456,7 +458,7 @@ export function DateTimePicker<TFieldValues extends FieldValues = FieldValues>(
                 }
               }
             }}
-            disabled={disablePast ? { before: new Date() } : undefined}
+            disabled={disabledDays || (disablePast ? { before: new Date() } : undefined)}
             startMonth={startMonth}
             endMonth={endMonth}
             initialFocus
@@ -487,7 +489,7 @@ export function DateTimePicker<TFieldValues extends FieldValues = FieldValues>(
           mode="single"
           selected={singleValue}
           onSelect={(date) => handleDateSelect(date, singleValue, onChangeCallback as (date: Date | undefined) => void)}
-          disabled={disablePast ? { before: new Date() } : undefined}
+          disabled={disabledDays || (disablePast ? { before: new Date() } : undefined)}
           startMonth={startMonth}
           endMonth={endMonth}
           initialFocus
@@ -502,7 +504,7 @@ export function DateTimePicker<TFieldValues extends FieldValues = FieldValues>(
           mode="single"
           selected={singleValue}
           onSelect={(date) => handleDateSelect(date, singleValue, onChangeCallback as (date: Date | undefined) => void)}
-          disabled={disablePast ? { before: new Date() } : undefined}
+          disabled={disabledDays || (disablePast ? { before: new Date() } : undefined)}
           startMonth={startMonth}
           endMonth={endMonth}
           initialFocus

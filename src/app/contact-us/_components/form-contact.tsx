@@ -245,7 +245,7 @@ export default function ContactForm() {
                     <ChevronDown className="w-4 h-4 text-slate-500" />
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-[var(--radix-dropdown-menu-trigger-width)]">
+                <DropdownMenuContent className="w-(--radix-dropdown-menu-trigger-width)">
                   <DropdownMenuRadioGroup
                     value={field.value}
                     onValueChange={field.onChange}
