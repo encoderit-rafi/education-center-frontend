@@ -72,7 +72,7 @@
           "description": "Customised language assessment services for organisations and institutions."
         },
         {
-          "title": "Our Venues",
+          "title": "Book An Exam Venue",
           "description": "Noise-free, professional exam environment. Book a state-of-the-art testing venue for your exams."
         }
       ]
@@ -489,9 +489,9 @@
     }
   },
   "AssessmentSolutionsPage": {
-    "title": "Certify Assessment Solutions",
+    "title": "SmarTest Assessment Solutions",
     "subtitle": "Global Standards in Assessment Intelligence",
-    "intro": "In the rapidly evolving educational sector, secure and smooth exam administration is critical. Educational institutions require a highly reliable platform capable of accommodating anything from a single classroom to a global student body. To meet this demand, TEPTH has teamed up with Certify Assessment Solutions, a worldwide leader in assessment solutions and exam delivery to provide an all-inclusive solution featuring exam creation, AI-driven administration, and secure remote proctoring.",
+    "intro": "In the rapidly evolving educational sector, secure and smooth exam administration is critical. Educational institutions require a highly reliable platform capable of accommodating anything from a single classroom to a global student body. To meet this demand, TEPTH has partnered with a worldwide leader in assessment solutions and exam delivery to provide an all-inclusive solution featuring exam creation, AI-driven administration, and secure remote proctoring.",
     "manageTitle": "Develop a tailored system that allows you to manage:",
     "manageItems": [
       "Test Authoring & Delivery",
@@ -695,7 +695,7 @@
     "partnershipLogos": {
       "badge": "Strategic Alliance",
       "title": "Powering Assessment Excellence Together",
-      "subtitle": "Combining Certify's advanced digital assessment solutions with TEPTH's state-of-the-art testing infrastructure."
+      "subtitle": "Combining advanced digital assessment solutions with TEPTH's state-of-the-art testing infrastructure."
     },
     "partnershipForm": {
       "fullName": "Full Name",

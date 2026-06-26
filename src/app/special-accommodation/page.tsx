@@ -2,7 +2,6 @@ import React from "react";
 import SpecialAccommodationForm from "@/components/blocks/special-accommodation-form";
 import { Timer, ArrowRight, Eye, DoorOpen, Users } from "lucide-react";
 import { SectionHeader } from "@/components/ui/section-header";
-import ContactForm from "../contact-us/_components/form-contact";
 import { useTranslations } from "next-intl";
 
 export default function SpecialAccommodation() {
@@ -125,10 +124,19 @@ export default function SpecialAccommodation() {
             </div>
 
             <div className="border border-slate-100 shadow-sm rounded-xl p-4 md:p-6 bg-white">
-              <h2 className="text-xl font-headline font-bold mb-4 text-secondary">
+              <h2 className="text-xl font-headline font-bold mb-3 text-secondary">
                 {t("inquiry.title")}
               </h2>
-              <ContactForm />
+              <p className="text-slate-600 text-sm leading-relaxed">
+                To apply or enquire about special accommodations, please contact us at{" "}
+                <a href="mailto:info@tepth.org" className="text-red-800 font-semibold hover:underline">
+                  info@tepth.org
+                </a>{" "}
+                or call us on{" "}
+                <a href="tel:+97165531250" className="text-red-800 font-semibold hover:underline">
+                  +97165531250
+                </a>.
+              </p>
             </div>
           </div>
         </div>

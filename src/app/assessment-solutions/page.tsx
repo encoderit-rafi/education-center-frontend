@@ -54,11 +54,11 @@ export default function AssessmentSolutionsPage() {
         <div className="max-w-7xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left: Text */}
           <div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.15] mb-6 font-headline">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-black tracking-tight  mb-6  whitespace-nowrap">
               {t("title")}
             </h1>
 
-            <p className="text-base md:text-lg text-slate-300 max-w-3xl leading-relaxed mb-8">
+            <p className="text-base md:text-lg text-slate-300 max-w-3xl leading-relaxed mb-8 text-justify">
               {t("intro")}
             </p>
 
@@ -175,7 +175,7 @@ export default function AssessmentSolutionsPage() {
                 </p>
               </div>
 
-              <p className="text-slate-600 leading-relaxed text-sm font-semibold">
+              <p className="text-slate-600 leading-relaxed text-sm font-semibold text-justify">
                 {t("invigilate.description")}
               </p>
 
@@ -195,7 +195,7 @@ export default function AssessmentSolutionsPage() {
               </div>
 
               {/* Additional Details */}
-              <div className="space-y-3 pt-2 text-slate-500 text-sm leading-relaxed border-t border-slate-100">
+              <div className="space-y-3 pt-2 text-slate-500 text-sm leading-relaxed border-t border-slate-100 text-justify">
                 <p>{t("invigilate.detail1")}</p>
                 <p>{t("invigilate.detail2")}</p>
               </div>
@@ -297,7 +297,7 @@ export default function AssessmentSolutionsPage() {
                               <h4 className="font-extrabold text-slate-900 text-sm tracking-tight leading-none">
                                 {feat.title}
                               </h4>
-                              <p className="text-xs text-slate-600 leading-relaxed">
+                              <p className="text-xs text-slate-600 leading-relaxed text-justify">
                                 {feat.desc}
                               </p>
                             </div>
@@ -316,7 +316,7 @@ export default function AssessmentSolutionsPage() {
                     <Users className="w-5 h-5 text-red-800 shrink-0" />
                     {t("invigilate.tabCandidate")}
                   </div>
-                  <p className="text-slate-600 text-xs leading-relaxed">
+                  <p className="text-slate-600 text-xs leading-relaxed text-justify">
                     {t("invigilate.tabCandidateDesc")}
                   </p>
                   <div className="relative rounded-xl overflow-hidden border border-slate-100 bg-slate-50 flex items-center justify-center p-2 aspect-[4/3] mt-2">
@@ -339,7 +339,7 @@ export default function AssessmentSolutionsPage() {
                     {t("invigilate.tabMobile")}
                   </div>
 
-                  <p className="text-slate-600 text-xs leading-relaxed">
+                  <p className="text-slate-600 text-xs leading-relaxed text-justify">
                     {t("invigilate.tabMobileDesc")}
                   </p>
 
@@ -354,7 +354,7 @@ export default function AssessmentSolutionsPage() {
 
                     {/* Solid navy rectangle — bottom-left, only top-right corner rounded */}
                     <div className="absolute bottom-0 left-0 w-[68%] bg-[#0d1b3e] text-white px-8 py-7 rounded-tr-[2rem]">
-                      <p className="text-sm font-bold leading-relaxed">
+                      <p className="text-sm font-bold leading-relaxed text-justify">
                         {t("invigilate.overlayText")}
                       </p>
                     </div>
@@ -384,10 +384,10 @@ export default function AssessmentSolutionsPage() {
                 {t("examiner.title")}
               </h3>
               <div className="space-y-4">
-                <p className="text-slate-600 leading-relaxed font-semibold">
+                <p className="text-slate-600 leading-relaxed font-semibold text-justify">
                   {t("examiner.description")}
                 </p>
-                <p className="text-slate-600 leading-relaxed font-semibold">
+                <p className="text-slate-600 leading-relaxed font-semibold text-justify">
                   {t("examiner.detail")}
                 </p>
               </div>
@@ -429,7 +429,7 @@ export default function AssessmentSolutionsPage() {
               <h3 className="text-3xl font-black text-slate-900 tracking-tight font-headline">
                 {t("examiner.authoring.title")}
               </h3>
-              <p className="text-slate-600 leading-relaxed font-semibold text-sm">
+              <p className="text-slate-600 leading-relaxed font-semibold text-sm text-justify">
                 {t("examiner.authoring.description")}
               </p>
 
@@ -478,7 +478,7 @@ export default function AssessmentSolutionsPage() {
               <h3 className="text-3xl font-black text-slate-900 tracking-tight font-headline">
                 {t("examiner.friendly.title")}
               </h3>
-              <p className="text-slate-600 leading-relaxed font-semibold text-sm">
+              <p className="text-slate-600 leading-relaxed font-semibold text-sm text-justify">
                 Examiner delivers a flexible, intuitive interface designed to minimize stress and maximize candidates' focus during the assessment process.
               </p>
 
@@ -518,7 +518,7 @@ export default function AssessmentSolutionsPage() {
                 {t("examiner.providers.title")}
               </h3>
 
-              <div className="space-y-4 text-slate-600 text-sm leading-relaxed font-semibold">
+              <div className="space-y-4 text-slate-600 text-sm leading-relaxed font-semibold text-justify">
                 <p>{t("examiner.providers.p1")}</p>
                 <p>{t("examiner.providers.p2")}</p>
               </div>
@@ -576,7 +576,7 @@ export default function AssessmentSolutionsPage() {
               <h3 className="text-3xl font-black text-slate-900 tracking-tight font-headline">
                 {t("examiner.performance.title")}
               </h3>
-              <p className="text-slate-600 leading-relaxed font-semibold text-sm">
+              <p className="text-slate-600 leading-relaxed font-semibold text-sm text-justify">
                 Examiner translates assessment data into actionable feedback, maintaining a robust audit trail and delivering rich psychometric calculations.
               </p>
 
@@ -633,7 +633,7 @@ export default function AssessmentSolutionsPage() {
               <h3 className="text-3xl font-black text-slate-900 tracking-tight font-headline">
                 {t("nexus.title")}
               </h3>
-              <p className="text-slate-600 leading-relaxed font-semibold text-sm">
+              <p className="text-slate-600 leading-relaxed font-semibold text-sm text-justify">
                 {t("nexus.description1")}
               </p>
 
@@ -647,7 +647,7 @@ export default function AssessmentSolutionsPage() {
                 ))}
               </div>
 
-              <p className="text-slate-600 leading-relaxed font-semibold text-sm pt-2">
+              <p className="text-slate-600 leading-relaxed font-semibold text-sm pt-2 text-justify">
                 {t("nexus.description2")}
               </p>
             </div>
@@ -683,7 +683,7 @@ export default function AssessmentSolutionsPage() {
               <h4 className="text-2xl font-bold text-slate-900 font-headline">
                 SmarTest Proctors
               </h4>
-              <p className="text-slate-600 text-sm leading-relaxed">
+              <p className="text-slate-600 text-sm leading-relaxed text-justify">
                 Leverage our local and worldwide network of multilingual invigilators.
               </p>
             </div>
@@ -705,7 +705,7 @@ export default function AssessmentSolutionsPage() {
               <h4 className="text-2xl font-bold text-slate-900 font-headline">
                 SmarTest Centres
               </h4>
-              <p className="text-slate-600 text-sm leading-relaxed">
+              <p className="text-slate-600 text-sm leading-relaxed text-justify">
                 Utilize our state-of-the-art facilities in Dubai and throughout our international network, partnering with us to deliver your program to the highest standards.
               </p>
             </div>
