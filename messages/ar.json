@@ -282,7 +282,13 @@
           "mock_test": "امتحان تجريبي مدفوع",
           "partnership": "الشراكة",
           "general_enquiry": "استفسار عام",
-          "referral": "إحالة"
+          "referral": "إحالة",
+          "value_driven_collaboration": "تعاون قائم على القيمة",
+          "venue_rental": "تأجير القاعات",
+          "assessment_solutions": "حلول التقييم",
+          "exam_delivery": "تقديم الامتحانات",
+          "venue_availability": "توفر القاعات",
+          "other": "أخرى"
         },
         "validation": {
           "firstNameRequired": "الاسم الأول مطلوب",

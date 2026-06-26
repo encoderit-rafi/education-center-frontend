@@ -282,7 +282,13 @@
           "mock_test": "Paid Mock Test",
           "partnership": "Partnership",
           "general_enquiry": "General Enquiry",
-          "referral": "Referral"
+          "referral": "Referral",
+          "value_driven_collaboration": "Value-driven Collaboration",
+          "venue_rental": "Venue Rental",
+          "assessment_solutions": "Assessment Solutions",
+          "exam_delivery": "Exam Delivery",
+          "venue_availability": "Venue Availability",
+          "other": "Other"
         },
         "validation": {
           "firstNameRequired": "First Name is required",
