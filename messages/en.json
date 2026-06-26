@@ -34,7 +34,9 @@
     "CourseList": {
       "label": "Curriculum",
       "title": "Explore",
-      "titleAccent": "Exams"
+      "titleAccent": "Exams",
+      "otherExamsTitle": "Other Exams",
+      "otherExamsDesc": "Beyond our core language tests, TEPTH delivers a range of professional certification and credentialing exams — including Pearson VUE, ACCA, and Kryterion."
     },
     "CoreServices": {
       "label": "Our Services",
@@ -71,11 +73,7 @@
         },
         {
           "title": "Our Venues",
-          "description": "Noise-free, professional exam environment. Take a 360° virtual tour before you visit."
-        },
-        {
-          "title": "Contact Us",
-          "description": "Reach our team via WhatsApp, Telegram, or our contact form. We reply within 24 hours."
+          "description": "Noise-free, professional exam environment. Book a state-of-the-art testing venue for your exams."
         }
       ]
     },
@@ -240,9 +238,9 @@
       "phoneAvailability": "Available Saturday – Thursday, 9:00 AM – 9:00 PM",
       "email": "info@tepth.org",
       "emailAvailability": "We typically respond within 24 hours",
-      "addressPart1": "The Exam Preparation & Testing House L.L.C Suite 701, 7th Floor,",
-      "addressPart2": "Tabarak Tower, Corniche Road, Al Mamzar, Sharjah,",
-      "addressPart3": "United Arab Emirates.",
+      "addressPart1": "The Exam Preparation & Testing House L.L.C",
+      "addressPart2": "Suite 701, 7th Floor, Tabarak Tower, Corniche Road, Al Mamzar,",
+      "addressPart3": "Sharjah, United Arab Emirates.",
       "chat": "Chat with us",
       "chatAvailability": "Quick answers via WhatsApp"
     },
@@ -3148,7 +3146,7 @@
     "workingHoursDays": "Saturday to Thursday",
     "workingHoursTime": "(9:00 AM - 9:00 PM)",
     "addressLabel": "Our Address:",
-    "addressText": "The Exam Preparation & Testing House L.L.C\nSuite 701, 7th Floor, Tabarak Tower, Corniche Road,\nAl Mamzar, Sharjah, United Arab Emirates.",
+    "addressText": "The Exam Preparation & Testing House L.L.C\nSuite 701, 7th Floor, Tabarak Tower, Corniche Road, Al Mamzar,\nSharjah, United Arab Emirates.",
     "emailLabel": "Email:",
     "telLabel": "Tel:",
     "ourServices": "Our Services",

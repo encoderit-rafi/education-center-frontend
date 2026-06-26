@@ -396,8 +396,8 @@ export default async function WorkshopDetailPage({ params }: PageProps) {
                   </p>
                   <p className="text-sm font-semibold text-slate-900 ">
                     The Exam Preparation & Testing House L.L.C <br />
-                    Suite 701, 7th Floor, Tabarak Tower, Corniche Road, <br />
-                    Al Mamzar, Sharjah, United Arab Emirates.
+                    Suite 701, 7th Floor, Tabarak Tower, Corniche Road, Al Mamzar, <br />
+                    Sharjah, United Arab Emirates.
                   </p>
                 </div>
               </div>

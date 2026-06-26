@@ -160,7 +160,7 @@ export function DateStep({
                 <span className="font-bold text-slate-700">Note:</span> You may also reach out to us at{" "}
                 <a href="tel:+97165531250" className="text-[#A11D1D] hover:underline font-semibold">+97165531250</a> or{" "}
                 <a href="mailto:info@tepth.org" className="text-[#A11D1D] hover:underline font-semibold">info@tepth.org</a>{" "}
-                and confirm the Test date availability before you proceed with the Toefl-iBT Registration on our website.
+                and confirm the Test date availability before you proceed with the TOEFL iBT Registration on our website.
               </p>
             </div>
           </div>

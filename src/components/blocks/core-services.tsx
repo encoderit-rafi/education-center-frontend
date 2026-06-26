@@ -9,7 +9,6 @@ import {
   Users,
   BarChart3,
   Building2,
-  MapPin,
 } from "lucide-react";
 import {
   BaseCard,
@@ -27,8 +26,7 @@ const SERVICE_HREFS = [
   "/exam-delivery/exam-provider",
   "/special-accommodation",
   "/assessment-solutions",
-  "/our-venues/360-degree-virtual-tour",
-  "/contact-us",
+  "/our-venues/book-an-exam-venue",
 ];
 
 const SERVICE_ICONS = [
@@ -40,7 +38,6 @@ const SERVICE_ICONS = [
   Users,
   BarChart3,
   Building2,
-  MapPin,
 ];
 
 export default function CoreServices() {

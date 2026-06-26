@@ -31,6 +31,22 @@ interface ApiResponse {
   };
 }
 
+const examPriority = (slug: string) => {
+  const s = slug.toLowerCase();
+  if (s.startsWith("ielts")) return 1;
+  if (s.startsWith("pte")) return 2;
+  if (s.startsWith("toefl")) return 3;
+  if (s.startsWith("cael")) return 4;
+  if (s.startsWith("celpip")) return 5;
+  if (s.startsWith("selt") || s.includes("english") || s.includes("skill")) return 6;
+  return 10;
+};
+
+const formatExamName = (name: string) => {
+  if (name === "CELPIP") return "CELPIP General";
+  return name;
+};
+
 export default function CourseList() {
   const t = useTranslations("HomePage.CourseList");
   const locale = useLocale();
@@ -44,80 +60,68 @@ export default function CourseList() {
     },
   });
 
-  const exams =
+  const coreExams =
     examsResponse?.data?.data
       ?.filter((exam) =>
-        exam.examType?.some((et) => et.name === "group")
+        exam.examType?.some((et) => et.name === "exam")
       )
-      ?.sort((a: any, b: any) => {
-        const aVal = a.orderIndex !== undefined && a.orderIndex !== null ? Number(a.orderIndex) : Infinity;
-        const bVal = b.orderIndex !== undefined && b.orderIndex !== null ? Number(b.orderIndex) : Infinity;
-        return aVal - bVal;
-      }) ?? [];
+      ?.map((exam) => ({
+        id: exam.id,
+        name: formatExamName(exam.translations?.[locale]?.name || exam.name),
+        slug: exam.slug,
+        description: exam.translations?.[locale]?.description || exam.description || "",
+      }))
+      ?.sort((a, b) => examPriority(a.slug) - examPriority(b.slug)) ?? [];
+
+  const allCards = [
+    ...coreExams,
+    {
+      id: "other-exams",
+      name: t("otherExamsTitle"),
+      slug: "other-exams",
+    }
+  ];
+
   return (
     <section className="base-px base-py">
       <div className="section-container">
         <div className="space-y-4 mb-12">
-          <span className="section-label">{t("label")}</span>
           <h3 className="section-title">
             {t("title")} <span>{t("titleAccent")}</span>
           </h3>
         </div>
 
-     
-          {/* {EXAM_CARDS_DATA.map((exam) => (
-            <Link key={exam.id} href={`/exams/${exam.id}`}>
-              <BaseCard className="p-6">
-                <div className="flex items-center justify-between gap-2">
-                  <BaseCardTitle className="uppercase tracking-tight text-lg leading-snug">
-                    {exam.name}
-                  </BaseCardTitle>
-                  <BaseCardArrow />
-                </div>
-                <div className="flex-1 flex flex-col space-y-2">
-                  <BaseCardDescription className="mb-4">
-                    {exam.description}
-                  </BaseCardDescription>
-                </div>
-              </BaseCard>
-            </Link>
-          ))} */}
-          {isLoading ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-              {Array.from({ length: 6 }).map((_, i) => (
-                <div
-                  key={i}
-                  className="h-40 rounded-2xl bg-slate-100 animate-pulse"
-                />
-              ))}
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-              {exams.map((exam, index) => {
-                const examName = exam.translations?.[locale]?.name || exam.name;
-                const examDesc = exam.translations?.[locale]?.description || exam.description;
-                return (
-                  <Link key={exam.id} href={`/exams/${exam.slug}`}>
-                    <BaseCard className="p-6">
-                      <div className="flex items-center justify-between gap-2">
-                        <BaseCardIcon>{index + 1}</BaseCardIcon>
-                        <BaseCardArrow />
-                      </div>
-                      <div className="flex-1 flex flex-col space-y-2 mt-3">
-                        <BaseCardTitle className="uppercase tracking-tight text-lg leading-snug">
-                          {examName}
-                        </BaseCardTitle>
-                        <BaseCardDescription className="mb-4">
-                          {examDesc}
-                        </BaseCardDescription>
-                      </div>
-                    </BaseCard>
-                  </Link>
-                );
-              })}
-            </div>
-          )}
-    
+        {isLoading ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <div
+                key={i}
+                className="h-40 rounded-2xl bg-slate-100 animate-pulse"
+              />
+            ))}
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+            {allCards.map((exam, index) => {
+              return (
+                <Link key={exam.id} href={`/exams/${exam.slug}`}>
+                  <BaseCard className="p-6">
+                    <div className="flex items-center justify-between gap-2">
+                      <BaseCardIcon>{index + 1}</BaseCardIcon>
+                      <BaseCardArrow />
+                    </div>
+                    <div className="flex-1 flex flex-col space-y-2 mt-3">
+                      <BaseCardTitle className="uppercase tracking-tight text-lg leading-snug">
+                        {exam.name}
+                      </BaseCardTitle>
+                    </div>
+                  </BaseCard>
+                </Link>
+              );
+            })}
+          </div>
+        )}
+
       </div>
     </section>
   );

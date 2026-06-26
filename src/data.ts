@@ -74,7 +74,7 @@ export const EXAM_IDS_DATA = {
   },
   toefl: {
     id: "toefl",
-    name: "TOEFL-iBT",
+    name: "TOEFL iBT",
   },
   celpip: {
     id: "celpip",
@@ -2677,6 +2677,6 @@ export const INSTITUTIONS_INFO = {
   phone: "+97165531250",
   email: "info@tepth.org",
   address: `The Exam Preparation & Testing House L.L.C\n
-  Suite 701, 7th Floor, Tabarak Tower, Corniche Road,\n
-  Al Mamzar, Sharjah, United Arab Emirates.`,
+  Suite 701, 7th Floor, Tabarak Tower, Corniche Road, Al Mamzar,\n
+  Sharjah, United Arab Emirates.`,
 };

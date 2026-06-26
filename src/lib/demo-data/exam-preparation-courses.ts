@@ -47,8 +47,8 @@ Course Details
 Total Duration: 24 Hours
 Typical Completion Time: 6 Weeks
 Location: TEPTH – The Exam Preparation & Testing House L.L.C
-Suite 701, 7th Floor, Tabarak Tower, Corniche Road,
-Al Mamzar, Sharjah, United Arab Emirates.
+Suite 701, 7th Floor, Tabarak Tower, Corniche Road, Al Mamzar,
+Sharjah, United Arab Emirates.
 Schedule: Flexible
 This format allows candidates to maximize every hour of preparation and move toward their target
 score with clear direction and expert guidance.`,
@@ -78,8 +78,8 @@ Course Details:
 Total Duration: 24 Hours
 Typical Completion Time: 6 Weeks
 Location: TEPTH – The Exam Preparation & Testing House L.L.C
-Suite 701, 7th Floor, Tabarak Tower, Corniche Road,
-Al Mamzar, Sharjah, United Arab Emirates.
+Suite 701, 7th Floor, Tabarak Tower, Corniche Road, Al Mamzar,
+Sharjah, United Arab Emirates.
 Class Size: 2 Students Only
 Schedule: Flexible
 The semi-private format offers an excellent balance between personalized instruction and interactive
@@ -108,8 +108,8 @@ Course Details:
 Total Duration: 24 Hours
 Typical Completion Time: 6 Weeks
 Location: TEPTH – The Exam Preparation & Testing House L.L.C
-Suite 701, 7th Floor, Tabarak Tower, Corniche Road,
-Al Mamzar, Sharjah, United Arab Emirates.
+Suite 701, 7th Floor, Tabarak Tower, Corniche Road, Al Mamzar,
+Sharjah, United Arab Emirates.
 Class Size: Small Groups
 Schedule: Flexible
 For many candidates, this format offers the perfect combination of structured learning, collaborative
@@ -191,8 +191,8 @@ Course Details
 Total Duration: 24 Hours
 Typical Completion Time: 6 Weeks
 Location: TEPTH – The Exam Preparation & Testing House L.L.C
-Suite 701, 7th Floor, Tabarak Tower, Corniche Road,
-Al Mamzar, Sharjah, United Arab Emirates.
+Suite 701, 7th Floor, Tabarak Tower, Corniche Road, Al Mamzar,
+Sharjah, United Arab Emirates.
 Schedule: Flexible
 This format allows candidates to maximize every hour of preparation and move toward their target score with clear direction and expert guidance.`,
           },
@@ -214,8 +214,8 @@ Course Details:
 Total Duration: 24 Hours
 Typical Completion Time: 6 Weeks
 Location: TEPTH – The Exam Preparation & Testing House L.L.C
-Suite 701, 7th Floor, Tabarak Tower, Corniche Road,
-Al Mamzar, Sharjah, United Arab Emirates.
+Suite 701, 7th Floor, Tabarak Tower, Corniche Road, Al Mamzar,
+Sharjah, United Arab Emirates.
 Class Size: 2 Students Only
 Schedule: Flexible
 The semi-private format offers an excellent balance between personalized instruction and interactive learning.`,
@@ -237,8 +237,8 @@ Course Details:
 Total Duration: 24 Hours
 Typical Completion Time: 6 Weeks
 Location: TEPTH – The Exam Preparation & Testing House L.L.C
-Suite 701, 7th Floor, Tabarak Tower, Corniche Road,
-Al Mamzar, Sharjah, United Arab Emirates.
+Suite 701, 7th Floor, Tabarak Tower, Corniche Road, Al Mamzar,
+Sharjah, United Arab Emirates.
 Class Size: Small Groups
 Schedule: Flexible
 For many candidates, this format offers the perfect combination of structured learning, collaborative practice, and professional guidance.`,
@@ -320,8 +320,8 @@ Course Details
 Total Duration: 24 Hours
 Typical Completion Time: 6 Weeks
 Location: TEPTH – The Exam Preparation & Testing House L.L.C
-Suite 701, 7th Floor, Tabarak Tower, Corniche Road,
-Al Mamzar, Sharjah, United Arab Emirates.
+Suite 701, 7th Floor, Tabarak Tower, Corniche Road, Al Mamzar,
+Sharjah, United Arab Emirates.
 Schedule: Flexible
 This format allows candidates to maximize every hour of preparation and move toward their target
 score with clear direction and expert guidance.`,
@@ -351,8 +351,8 @@ Course Details:
 Total Duration: 24 Hours
 Typical Completion Time: 6 Weeks
 Location: TEPTH – The Exam Preparation & Testing House L.L.C
-Suite 701, 7th Floor, Tabarak Tower, Corniche Road,
-Al Mamzar, Sharjah, United Arab Emirates.
+Suite 701, 7th Floor, Tabarak Tower, Corniche Road, Al Mamzar,
+Sharjah, United Arab Emirates.
 Class Size: 2 Students Only
 Schedule: Flexible
 The semi-private format offers an excellent balance between personalized instruction and interactive
@@ -381,8 +381,8 @@ Course Details:
 Total Duration: 24 Hours
 Typical Completion Time: 6 Weeks
 Location: TEPTH – The Exam Preparation & Testing House L.L.C
-Suite 701, 7th Floor, Tabarak Tower, Corniche Road,
-Al Mamzar, Sharjah, United Arab Emirates.
+Suite 701, 7th Floor, Tabarak Tower, Corniche Road, Al Mamzar,
+Sharjah, United Arab Emirates.
 Class Size: Small Groups
 Schedule: Flexible
 For many candidates, this format offers the perfect combination of structured learning, collaborative
@@ -466,8 +466,8 @@ Course Details
 Total Duration: 24 Hours
 Typical Completion Time: 6 Weeks
 Location: TEPTH – The Exam Preparation & Testing House L.L.C
-Suite 701, 7th Floor, Tabarak Tower, Corniche Road,
-Al Mamzar, Sharjah, United Arab Emirates.
+Suite 701, 7th Floor, Tabarak Tower, Corniche Road, Al Mamzar,
+Sharjah, United Arab Emirates.
 Schedule: Flexible
 This format allows candidates to maximize every hour of preparation and move toward their target
 score with clear direction and expert guidance.`,
@@ -501,8 +501,8 @@ Course Details
 Total Duration: 24 Hours
 Typical Completion Time: 6 Weeks
 Location: TEPTH – The Exam Preparation & Testing House L.L.C
-Suite 701, 7th Floor, Tabarak Tower, Corniche Road,
-Al Mamzar, Sharjah, United Arab Emirates.
+Suite 701, 7th Floor, Tabarak Tower, Corniche Road, Al Mamzar,
+Sharjah, United Arab Emirates.
 Schedule: Flexible
 This format allows candidates to maximize every hour of preparation and move toward their target
 score with clear direction and expert guidance.`,
@@ -532,8 +532,8 @@ Course Details:
 Total Duration: 24 Hours
 Typical Completion Time: 6 Weeks
 Location: TEPTH – The Exam Preparation & Testing House L.L.C
-Suite 701, 7th Floor, Tabarak Tower, Corniche Road,
-Al Mamzar, Sharjah, United Arab Emirates.
+Suite 701, 7th Floor, Tabarak Tower, Corniche Road, Al Mamzar,
+Sharjah, United Arab Emirates.
 Class Size: 2 Students Only
 Schedule: Flexible
 The semi-private format offers an excellent balance between personalized instruction and interactive
@@ -562,8 +562,8 @@ Course Details:
 Total Duration: 24 Hours
 Typical Completion Time: 6 Weeks
 Location: TEPTH – The Exam Preparation & Testing House L.L.C
-Suite 701, 7th Floor, Tabarak Tower, Corniche Road,
-Al Mamzar, Sharjah, United Arab Emirates.
+Suite 701, 7th Floor, Tabarak Tower, Corniche Road, Al Mamzar,
+Sharjah, United Arab Emirates.
 Class Size: Small Groups
 Schedule: Flexible
 For many candidates, this format offers the perfect combination of structured learning, collaborative
@@ -692,8 +692,8 @@ Course Details
 Total Duration: 24 Hours
 Typical Completion Time: 6 Weeks
 Location: TEPTH – The Exam Preparation & Testing House L.L.C
-Suite 701, 7th Floor, Tabarak Tower, Corniche Road,
-Al Mamzar, Sharjah, United Arab Emirates.
+Suite 701, 7th Floor, Tabarak Tower, Corniche Road, Al Mamzar,
+Sharjah, United Arab Emirates.
 Schedule: Flexible
 This format allows candidates to maximize every hour of preparation and move toward their target
 score with clear direction and expert guidance.`,
@@ -723,8 +723,8 @@ Course Details:
 Total Duration: 24 Hours
 Typical Completion Time: 6 Weeks
 Location: TEPTH – The Exam Preparation & Testing House L.L.C
-Suite 701, 7th Floor, Tabarak Tower, Corniche Road,
-Al Mamzar, Sharjah, United Arab Emirates.
+Suite 701, 7th Floor, Tabarak Tower, Corniche Road, Al Mamzar,
+Sharjah, United Arab Emirates.
 Class Size: 2 Students Only
 Schedule: Flexible
 The semi-private format offers an excellent balance between personalized instruction and interactive
@@ -753,8 +753,8 @@ Course Details:
 Total Duration: 24 Hours
 Typical Completion Time: 6 Weeks
 Location: TEPTH – The Exam Preparation & Testing House L.L.C
-Suite 701, 7th Floor, Tabarak Tower, Corniche Road,
-Al Mamzar, Sharjah, United Arab Emirates.
+Suite 701, 7th Floor, Tabarak Tower, Corniche Road, Al Mamzar,
+Sharjah, United Arab Emirates.
 Class Size: Small Groups
 Schedule: Flexible
 For many candidates, this format offers the perfect combination of structured learning, collaborative
