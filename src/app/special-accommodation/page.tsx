@@ -1,146 +1,391 @@
 import React from "react";
-import SpecialAccommodationForm from "@/components/blocks/special-accommodation-form";
-import { Timer, ArrowRight, Eye, DoorOpen, Users } from "lucide-react";
-import { SectionHeader } from "@/components/ui/section-header";
+import Image from "next/image";
+import {
+  Timer,
+  DoorOpen,
+  Accessibility,
+  FileText,
+  Cpu,
+  ShieldAlert,
+  Check,
+  AlertCircle,
+  Phone,
+  Mail,
+  HelpCircle,
+  Calendar,
+  ArrowRight,
+} from "lucide-react";
 import { useTranslations } from "next-intl";
 
 export default function SpecialAccommodation() {
   const t = useTranslations("SpecialAccommodationPage");
 
-  const steps = t.raw("howToApply.steps") as { title: string; desc: string }[];
-  const assistiveTags = t.raw("cards.assistivePersonnel.tags") as string[];
+  const whoCanRequestItems = t.raw("whoCanRequest.items") as string[];
+
+  const supportsItems = t.raw("supports.items") as {
+    title: string;
+    desc: string;
+  }[];
+
+  const steps = t.raw("howToApply.steps") as {
+    title: string;
+    desc: string;
+  }[];
+
+  const importantNotesItems = t.raw("importantNotes.items") as {
+    title: string;
+    desc: string;
+  }[];
+
+  const supportsIcons = [
+    <Timer className="w-5 h-5" key="0" />,
+    <DoorOpen className="w-5 h-5" key="1" />,
+    <Calendar className="w-5 h-5" key="2" />,
+    <Accessibility className="w-5 h-5" key="3" />,
+    <FileText className="w-5 h-5" key="4" />,
+    <Cpu className="w-5 h-5" key="5" />,
+  ];
 
   return (
-    <main className="bg-white min-h-screen">
-      {/* Types of Accommodations - Bento Grid */}
-      <section className="py-12 md:py-16 bg-red-50/30">
-        <div className="max-w-screen-2xl mx-auto px-6 md:px-8">
-          <SectionHeader
-            title={
-              <>
-                {t("title")} <span className="text-primary">{t("titleAccent")}</span>
-              </>
-            }
-            description={t("description")}
-            className="mb-8"
-          />
+    <main className="bg-white min-h-screen overflow-x-hidden">
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="md:col-span-2 bg-white shadow-sm p-6 md:p-8 rounded-xl flex flex-col justify-between group hover:bg-primary transition-colors duration-500 border border-slate-100 hover:border-primary">
-              <div>
-                <Timer className="w-8 h-8 mb-4 text-primary group-hover:text-white transition-colors" />
-                <h3 className="text-lg md:text-xl font-bold mb-3 group-hover:text-white transition-colors text-secondary">
-                  {t("cards.additionalTime.title")}
-                </h3>
-                <p className="text-slate-500 group-hover:text-white/80 transition-colors text-sm leading-relaxed">
-                  {t("cards.additionalTime.desc")}
+      {/* ─── HERO ─── */}
+      <section className="relative isolate overflow-hidden bg-slate-950 text-white">
+        {/* Mesh gradient background */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_60%_-10%,rgba(185,28,28,0.25),transparent)] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_50%_at_0%_100%,rgba(30,58,138,0.15),transparent)] pointer-events-none" />
+
+        {/* Decorative grid dots */}
+        <div
+          className="absolute inset-0 opacity-[0.03] pointer-events-none"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle, #fff 1px, transparent 1px)",
+            backgroundSize: "28px 28px",
+          }}
+        />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-6 py-20 lg:py-28 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          {/* Left */}
+          <div className="space-y-7">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm text-xs font-bold uppercase tracking-widest text-rose-400">
+              <ShieldAlert className="w-3.5 h-3.5" />
+              Candidate Support
+            </div>
+
+            <div className="space-y-3">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05]">
+                {t("title")}
+              </h1>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] bg-gradient-to-r from-rose-400 via-red-400 to-orange-400 bg-clip-text text-transparent">
+                {t("titleAccent")}
+              </h1>
+            </div>
+
+            <p className="text-slate-300 text-base md:text-lg leading-relaxed max-w-lg">
+              {t("description")}
+            </p>
+
+            {/* Governance Alert */}
+            <div className="relative overflow-hidden rounded-2xl border border-rose-500/20 bg-rose-950/30 backdrop-blur-md p-5">
+              <div className="absolute inset-y-0 left-0 w-1 bg-gradient-to-b from-rose-500 to-rose-700 rounded-l-2xl" />
+              <div className="flex gap-4 pl-3">
+                <AlertCircle className="w-5 h-5 text-rose-400 shrink-0 mt-0.5" />
+                <p className="text-sm text-slate-300 leading-relaxed">
+                  {t("governanceNote")}
                 </p>
               </div>
-              <div className="mt-6">
-                <a
-                  className="text-primary font-bold group-hover:text-white flex items-center gap-2 text-sm"
-                  href="#"
-                >
-                  {t("cards.additionalTime.link")} <ArrowRight className="w-4 h-4" />
-                </a>
-              </div>
             </div>
-            <div className="bg-red-50 p-6 md:p-8 rounded-xl flex flex-col group hover:shadow-xl transition-all border border-red-100">
-              <Eye className="w-8 h-8 mb-4 text-primary" />
-              <h3 className="text-lg md:text-xl font-bold mb-3 text-secondary">
-                {t("cards.visualAids.title")}
-              </h3>
-              <p className="text-slate-600 text-sm leading-relaxed mb-4">
-                {t("cards.visualAids.desc")}
-              </p>
-              <div className="mt-auto">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-primary">
-                  {t("cards.visualAids.badge")}
-                </span>
+          </div>
+
+          {/* Right — Image */}
+          <div className="flex justify-center lg:justify-end">
+            <div className="relative w-full max-w-[480px]">
+              {/* Glow ring behind image */}
+              <div className="absolute -inset-4 rounded-[2rem] bg-gradient-to-br from-rose-600/30 to-blue-600/10 blur-2xl" />
+              <div className="relative rounded-[1.75rem] overflow-hidden shadow-2xl ring-1 ring-white/10 group">
+                <Image
+                  src="/images/ADA.jpg"
+                  alt={t("title")}
+                  width={480}
+                  height={480}
+                  className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent" />
               </div>
-            </div>
-            <div className="bg-white p-6 md:p-8 rounded-xl shadow-sm flex flex-col group border border-slate-100 border-b-4 border-b-transparent hover:border-b-primary transition-all">
-              <DoorOpen className="w-8 h-8 mb-4 text-primary" />
-              <h3 className="text-lg md:text-xl font-bold mb-3 text-secondary">
-                {t("cards.privateRoom.title")}
-              </h3>
-              <p className="text-slate-500 text-sm leading-relaxed">
-                {t("cards.privateRoom.desc")}
-              </p>
-            </div>
-            <div className="md:col-span-2 bg-secondary text-white p-6 md:p-8 rounded-xl relative overflow-hidden">
-              <div className="relative z-10 flex flex-col h-full justify-between">
-                <div>
-                  <h3 className="text-lg md:text-xl font-bold mb-3">
-                    {t("cards.assistivePersonnel.title")}
-                  </h3>
-                  <p className="text-white/80 text-sm leading-relaxed max-w-lg">
-                    {t("cards.assistivePersonnel.desc")}
-                  </p>
-                </div>
-                <div className="flex gap-3 mt-6 flex-wrap">
-                  {assistiveTags.map((tag, idx) => (
-                    <div
-                      key={idx}
-                      className="bg-white/10 px-3.5 py-1.5 rounded-lg text-xs backdrop-blur-md border border-white/20"
-                    >
-                      {tag}
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <Users className="absolute -right-8 -bottom-8 w-32 h-32 opacity-10 rotate-12" />
             </div>
           </div>
         </div>
       </section>
 
-      {/* How to Apply & Documentation */}
-      <section className="py-12 md:py-16">
-        <div className="max-w-screen-2xl mx-auto px-6 md:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
-            <div>
-              <h2 className="text-2xl font-headline font-bold mb-8 flex items-center gap-4 text-secondary">
-                {t("howToApply.title")}
-                <div className="h-1 w-16 bg-primary/20"></div>
+      {/* ─── WHO CAN REQUEST ─── */}
+      <section className="relative py-20 px-6 bg-slate-50">
+        {/* Decorative blob */}
+        <div className="absolute right-0 top-0 w-72 h-72 bg-rose-100 rounded-full blur-3xl opacity-50 pointer-events-none" />
+
+        <div className="relative max-w-7xl mx-auto">
+          {/* Section label */}
+          <div className="flex items-center gap-3 mb-3">
+            <div className="h-px w-8 bg-primary" />
+            <span className="text-primary text-xs font-bold uppercase tracking-widest">
+              Eligibility
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            {/* Heading */}
+            <div className="lg:col-span-4 space-y-4 lg:sticky lg:top-24">
+              <h2 className="text-3xl md:text-4xl font-black text-slate-900 leading-snug">
+                {t("whoCanRequest.title")}
               </h2>
-              <div className="space-y-6">
-                {steps.map((step, index) => (
-                  <div key={index} className="flex gap-4">
-                    <div className="flex-shrink-0 w-9 h-9 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm">
-                      {index + 1}
+              <p className="text-slate-500 text-sm md:text-base leading-relaxed">
+                {t("whoCanRequest.intro")}
+              </p>
+            </div>
+
+            {/* Cards grid */}
+            <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {whoCanRequestItems.map((item, index) => (
+                <div
+                  key={index}
+                  className="group flex items-center gap-4 p-5 rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-lg hover:border-rose-200 hover:-translate-y-0.5 transition-all duration-300 cursor-default"
+                >
+                  <div className="shrink-0 w-9 h-9 rounded-xl bg-rose-50 flex items-center justify-center group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+                    <Check className="w-4 h-4 text-primary group-hover:text-white" />
+                  </div>
+                  <span className="font-semibold text-slate-700 text-sm leading-snug">
+                    {item}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── ACCOMMODATIONS SUPPORTED ─── */}
+      <section className="relative py-20 px-6 bg-white overflow-hidden">
+        <div className="absolute left-1/2 top-0 -translate-x-1/2 w-[800px] h-[1px] bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
+
+        <div className="max-w-7xl mx-auto">
+          {/* Header */}
+          <div className="text-center mb-14 space-y-4">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-rose-50 border border-rose-100 text-rose-600 text-xs font-bold uppercase tracking-widest">
+              Our Facility
+            </div>
+            <h2 className="text-3xl md:text-4xl font-black text-slate-900">
+              {t("supports.title")}
+            </h2>
+            <p className="text-slate-500 text-sm md:text-base leading-relaxed max-w-2xl mx-auto">
+              {t("supports.intro")}
+            </p>
+          </div>
+
+          {/* Bento grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {supportsItems.map((item, index) => (
+              <div
+                key={index}
+                className="group relative overflow-hidden rounded-2xl bg-slate-50 border border-slate-100 p-7 hover:bg-white hover:shadow-2xl hover:border-transparent hover:-translate-y-1 transition-all duration-400 cursor-default flex flex-col"
+              >
+                {/* Gradient corner accent */}
+                <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-rose-100/80 to-transparent rounded-bl-[3rem] group-hover:from-rose-200/60 transition-all" />
+
+                {/* Icon */}
+                <div className="relative mb-5 w-12 h-12 rounded-xl bg-white border border-slate-200 shadow-xs flex items-center justify-center text-primary group-hover:border-rose-200 group-hover:shadow-md group-hover:scale-110 transition-all duration-300">
+                  {supportsIcons[index] || <Check className="w-5 h-5" />}
+                </div>
+
+                <h3 className="font-bold text-base text-slate-900 mb-2 group-hover:text-primary transition-colors">
+                  {item.title}
+                </h3>
+                <p className="text-slate-500 text-sm leading-relaxed flex-1">
+                  {item.desc}
+                </p>
+
+                {/* Bottom hover accent */}
+                <div className="mt-5 flex items-center gap-1.5 text-xs font-bold text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <span>Included</span>
+                  <Check className="w-3.5 h-3.5" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── HOW THE PROCESS WORKS ─── */}
+      <section className="relative py-20 px-6 bg-slate-950 text-white overflow-hidden">
+        {/* Mesh background */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_120%,rgba(185,28,28,0.15),transparent)] pointer-events-none" />
+        <div
+          className="absolute inset-0 opacity-[0.04] pointer-events-none"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle, #fff 1px, transparent 1px)",
+            backgroundSize: "32px 32px",
+          }}
+        />
+
+        <div className="relative z-10 max-w-7xl mx-auto">
+          {/* Header */}
+          <div className="text-center mb-16 space-y-4">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-rose-400 text-xs font-bold uppercase tracking-widest">
+              Step by Step
+            </div>
+            <h2 className="text-3xl md:text-4xl font-black">
+              {t("howToApply.title")}
+            </h2>
+            <p className="text-slate-400 text-sm md:text-base leading-relaxed max-w-2xl mx-auto">
+              {t("howToApply.intro")}
+            </p>
+          </div>
+
+          {/* Steps */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
+            {/* Connecting line (desktop) */}
+            <div className="hidden lg:block absolute top-10 left-[calc(12.5%+2rem)] right-[calc(12.5%+2rem)] h-px bg-gradient-to-r from-transparent via-white/10 to-transparent pointer-events-none" />
+
+            {steps.map((step, index) => (
+              <div key={index} className="group flex flex-col items-center text-center space-y-5">
+                {/* Number bubble */}
+                <div className="relative w-20 h-20 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-rose-500/50 group-hover:bg-rose-950/30 transition-all duration-300">
+                  <span className="text-3xl font-black text-white/20 group-hover:text-rose-400/60 transition-colors">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  {/* Corner badge */}
+                  <div className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-primary border-2 border-slate-950 flex items-center justify-center">
+                    <ArrowRight className="w-2.5 h-2.5 text-white" />
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <h3 className="font-bold text-base text-white group-hover:text-rose-400 transition-colors">
+                    {step.title}
+                  </h3>
+                  <p className="text-slate-400 text-xs md:text-sm leading-relaxed">
+                    {step.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── IMPORTANT NOTES + CONTACT ─── */}
+      <section className="relative py-20 px-6 bg-slate-50 overflow-hidden">
+        <div className="absolute left-0 bottom-0 w-80 h-80 bg-rose-100/60 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="relative max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+
+            {/* Left: Important Notes */}
+            <div className="lg:col-span-7 space-y-8">
+              {/* Label */}
+              <div className="space-y-3">
+                <div className="flex items-center gap-3">
+                  <div className="h-px w-8 bg-primary" />
+                  <span className="text-primary text-xs font-bold uppercase tracking-widest">
+                    Please Note
+                  </span>
+                </div>
+                <h2 className="text-3xl md:text-4xl font-black text-slate-900">
+                  {t("importantNotes.title")}
+                </h2>
+              </div>
+
+              {/* Note cards */}
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+                {importantNotesItems.map((note, index) => (
+                  <div
+                    key={index}
+                    className="group relative overflow-hidden rounded-2xl bg-white border border-slate-100 p-6 hover:shadow-xl hover:border-rose-100 hover:-translate-y-0.5 transition-all duration-300"
+                  >
+                    {/* Top colored strip */}
+                    <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-rose-500 to-red-600 rounded-t-2xl" />
+
+                    <div className="mt-2 mb-4 w-9 h-9 rounded-xl bg-rose-50 border border-rose-100 flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <AlertCircle className="w-4 h-4 text-primary" />
                     </div>
-                    <div>
-                      <h4 className="font-bold text-base mb-1 text-secondary">
-                        {step.title}
-                      </h4>
-                      <p className="text-slate-500 text-xs md:text-sm leading-relaxed">
-                        {step.desc}
-                      </p>
-                    </div>
+
+                    <h4 className="font-bold text-sm text-slate-900 mb-2">
+                      {note.title}
+                    </h4>
+                    <p className="text-xs text-slate-500 leading-relaxed">
+                      {note.desc}
+                    </p>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="border border-slate-100 shadow-sm rounded-xl p-4 md:p-6 bg-white">
-              <h2 className="text-xl font-headline font-bold mb-3 text-secondary">
-                {t("inquiry.title")}
-              </h2>
-              <p className="text-slate-600 text-sm leading-relaxed">
-                To apply or enquire about special accommodations, please contact us at{" "}
-                <a href="mailto:info@tepth.org" className="text-red-800 font-semibold hover:underline">
-                  info@tepth.org
-                </a>{" "}
-                or call us on{" "}
-                <a href="tel:+97165531250" className="text-red-800 font-semibold hover:underline">
-                  +97165531250
-                </a>.
-              </p>
+            {/* Right: Contact card */}
+            <div className="lg:col-span-5">
+              <div className="relative overflow-hidden rounded-3xl bg-slate-900 text-white p-8 shadow-2xl">
+                {/* Glow */}
+                <div className="absolute -top-20 -right-20 w-64 h-64 bg-rose-600/20 rounded-full blur-3xl pointer-events-none" />
+
+                <div className="relative z-10 space-y-8">
+                  <div className="space-y-2">
+                    <div className="w-11 h-11 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-4">
+                      <HelpCircle className="w-5 h-5 text-rose-400" />
+                    </div>
+                    <h3 className="text-2xl font-black">
+                      {t("questions.title")}
+                    </h3>
+                    <div className="h-0.5 w-10 bg-gradient-to-r from-rose-500 to-red-400 rounded-full" />
+                  </div>
+
+                  <div className="space-y-3">
+                    {/* Phone */}
+                    <a
+                      href="tel:+97165531250"
+                      className="group/link flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-rose-500/40 transition-all duration-300"
+                    >
+                      <div className="w-10 h-10 rounded-xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center group-hover/link:bg-rose-500/20 transition-colors">
+                        <Phone className="w-4 h-4 text-rose-400" />
+                      </div>
+                      <div>
+                        <p className="text-[10px] uppercase tracking-widest text-slate-400 font-bold">
+                          Call us
+                        </p>
+                        <p className="text-sm font-bold text-white">
+                          +971 6 553 1250
+                        </p>
+                      </div>
+                      <ArrowRight className="w-4 h-4 text-slate-600 ml-auto group-hover/link:text-rose-400 group-hover/link:translate-x-0.5 transition-all" />
+                    </a>
+
+                    {/* Email */}
+                    <a
+                      href="mailto:info@tepth.org"
+                      className="group/link flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-rose-500/40 transition-all duration-300"
+                    >
+                      <div className="w-10 h-10 rounded-xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center group-hover/link:bg-rose-500/20 transition-colors">
+                        <Mail className="w-4 h-4 text-rose-400" />
+                      </div>
+                      <div>
+                        <p className="text-[10px] uppercase tracking-widest text-slate-400 font-bold">
+                          Email us
+                        </p>
+                        <p className="text-sm font-bold text-white">
+                          info@tepth.org
+                        </p>
+                      </div>
+                      <ArrowRight className="w-4 h-4 text-slate-600 ml-auto group-hover/link:text-rose-400 group-hover/link:translate-x-0.5 transition-all" />
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
+
           </div>
         </div>
       </section>
+
     </main>
   );
 }

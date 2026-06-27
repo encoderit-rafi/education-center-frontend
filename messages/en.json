@@ -1381,50 +1381,94 @@
     }
   },
   "SpecialAccommodationPage": {
-    "title": "Available",
-    "titleAccent": "Accommodations",
-    "description": "We offer various modifications based on documented medical conditions, disabilities, or specific learning requirements.",
-    "cards": {
-      "additionalTime": {
-        "title": "Additional Time",
-        "desc": "Standard 25% to 50% extra time for candidates with cognitive processing speeds, physical disabilities, or visual impairments that require more time to navigate materials.",
-        "link": "Learn more"
-      },
-      "visualAids": {
-        "title": "Visual Aids",
-        "desc": "Large print papers, Braille versions, and screen magnifier software for candidates with varying degrees of visual impairment.",
-        "badge": "Customizable"
-      },
-      "privateRoom": {
-        "title": "Private Room",
-        "desc": "Distraction-free environments for candidates requiring specialized medical equipment or frequent breaks."
-      },
-      "assistivePersonnel": {
-        "title": "Assistive Personnel",
-        "desc": "Qualified scribes, readers, and sign-language interpreters can be provided to assist candidates in conveying their knowledge accurately.",
-        "tags": [
-          "Amanuensis",
-          "Oral Transcribers",
-          "Invigilators"
-        ]
-      }
+    "title": "Exam Special Accommodations",
+    "titleAccent": "Fair Access for Every Candidate",
+    "description": "At TEPTH, we believe that every candidate deserves an equal opportunity to perform at their best. We are proud to offer a testing facility fully equipped to support candidates with special requirements, ensuring your exam experience is accessible, comfortable, and fully supported.",
+    "governanceNote": "Because these accommodations are governed strictly by the organizations that create the exams, the entire application and approval process is managed directly by the exam providers. Candidates must contact their respective exam boards directly to initiate a request.",
+    "whoCanRequest": {
+      "title": "Who Can Request Special Accommodation?",
+      "intro": "While specific policies vary by exam provider, you may be eligible to apply for accommodations through them if you have:",
+      "items": [
+        "Medical conditions (temporary or long-term)",
+        "Physical disabilities or mobility limitations",
+        "Vision or hearing impairments",
+        "Learning difficulties such as dyslexia or ADHD",
+        "Anxiety or other exam-related conditions (with documentation)"
+      ]
     },
-    "howToApply": {
-      "title": "How to Apply",
-      "steps": [
+    "supports": {
+      "title": "Accommodations Our Facility Supports",
+      "intro": "Once your exam provider has officially approved your request, TEPTH is happy to accommodate approved needs such as:",
+      "items": [
         {
-          "title": "Initial Request",
-          "desc": "Submit your request during the initial exam registration phase. We recommend applying at least 6 weeks before your test date."
+          "title": "Extra time during the exam",
+          "desc": "Additional time allowances tailored to support candidates who need more time to complete their tests."
         },
         {
-          "title": "Documentation Upload",
-          "desc": "Provide valid medical evidence from a registered practitioner outlining the nature of the requirement and recommended adjustments."
+          "title": "Separate or quiet testing rooms",
+          "desc": "Distraction-free environments to help candidates concentrate and perform at their best."
         },
         {
-          "title": "Review & Approval",
-          "desc": "Our specialist board reviews the request against exam body criteria and issues a Formal Approval Notice via email."
+          "title": "Rest breaks during the test",
+          "desc": "Scheduled intervals that allow candidates to rest, stretch, or attend to medical requirements."
+        },
+        {
+          "title": "Adjustable seating & accessibility support",
+          "desc": "Ergonomic furniture and physical access setups designed to ensure comfort throughout the session."
+        },
+        {
+          "title": "Large print or modified exam materials",
+          "desc": "Adjusted media, fonts, or formats designed for candidates with visual or learning requirements."
+        },
+        {
+          "title": "Assistive technology",
+          "desc": "Approved software or hardware tools configured specifically to aid candidates during the examination."
         }
       ]
+    },
+    "howToApply": {
+      "title": "How the Process Works",
+      "intro": "To ensure your accommodations are in place for test day, please follow these steps:",
+      "steps": [
+        {
+          "title": "Contact Your Exam Provider",
+          "desc": "Reach out to the official exam body directly to request their specific special accommodation application."
+        },
+        {
+          "title": "Submit Your Documentation",
+          "desc": "Provide the exam body directly with your supporting medical or psychological documentation."
+        },
+        {
+          "title": "Receive Approval",
+          "desc": "The exam provider will review your case and issue an official approval decision."
+        },
+        {
+          "title": "Test With Us",
+          "desc": "Once approved, the exam body will coordinate with TEPTH so we can arrange your test under the exact conditions they have authorized. You will receive a confirmation with your full exam details."
+        }
+      ]
+    },
+    "importantNotes": {
+      "title": "Important Notes",
+      "items": [
+        {
+          "title": "Direct Contact Required",
+          "desc": "TEPTH cannot process, review, or forward accommodation requests on your behalf. All requests must be submitted directly to the official exam body."
+        },
+        {
+          "title": "Apply Early",
+          "desc": "Exam boards often require significant time to review requests. Please submit your application to them well in advance of your desired test date."
+        },
+        {
+          "title": "Follow Provider Guidelines",
+          "desc": "Ensure your supporting documents are clear, valid, and meet the specific criteria set by your exam provider."
+        }
+      ]
+    },
+    "questions": {
+      "title": "Have questions?",
+      "callUs": "Call us at",
+      "emailUs": "or email us at"
     },
     "inquiry": {
       "title": "Accommodation Inquiry",
