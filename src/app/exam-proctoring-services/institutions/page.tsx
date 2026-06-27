@@ -1,3 +1,4 @@
+import Image from "next/image";
 import {
   BaseCard,
   BaseCardDescription,
@@ -41,20 +42,37 @@ export default function InstitutionsPage() {
   return (
     <div className="min-h-screen bg-[#fafafa]">
       {/* Hero */}
-      <header className="bg-white border-b border-gray-200">
-        <div className="container mx-auto px-6 lg:px-24 py-20">
-          <div className="max-w-4xl">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-gray-900 leading-tight mb-6">
-              {t("heroTitle")}{" "}
-              <span className="text-[#A11D1D]">{t("heroTitleAccent")}</span>
-            </h1>
+      <section className="bg-white border-b border-gray-200 py-16 md:py-20">
+        <div className="container mx-auto px-6 lg:px-24">
+          <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+            {/* Left Content Column */}
+            <div className="lg:col-span-7 flex flex-col justify-center">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-gray-900 leading-tight mb-6">
+                {t("heroTitle")}{" "}
+                <span className="text-[#A11D1D]">{t("heroTitleAccent")}</span>
+              </h1>
 
-            <p className="max-w-3xl text-base md:text-lg text-gray-600 leading-8">
-              {t("heroDescription")}
-            </p>
+              <p className="max-w-3xl text-base md:text-lg text-gray-600 leading-8">
+                {t("heroDescription")}
+              </p>
+            </div>
+
+            {/* Right Column - Showing Image */}
+            <div className="lg:col-span-5 flex justify-center">
+              <div className="w-full max-w-[450px] rounded-2xl overflow-hidden shadow-lg border border-gray-100 bg-gray-50 p-1.5">
+                <Image
+                  className="w-full h-auto rounded-xl object-contain block"
+                  alt="Exam proctoring services for institutions at TEPTH"
+                  src="/images/Live Proctoring.jpg"
+                  width={500}
+                  height={500}
+                  priority
+                />
+              </div>
+            </div>
           </div>
         </div>
-      </header>
+      </section>
 
       <main className="container mx-auto px-6 lg:px-24 py-16 space-y-16">
         {/* AI Proctoring */}
