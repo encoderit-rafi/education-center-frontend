@@ -309,6 +309,7 @@ export default function FormSELTB2Registration({ examId: initialExamId }: FormPr
           exam_time_slot: data.examTimeSlot,
           exam_fee: pricing.baseFee,
           total_amount: total,
+          vat_amount: pricing.vat,
           exam_date: data.examDate ? new Date(data.examDate as any).toISOString() : "",
         });
       } catch (error: any) {

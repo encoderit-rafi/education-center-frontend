@@ -236,6 +236,7 @@ function PaidMockTestRegistrationForm({
       country: formData.country,
       address: formData.address,
       total_amount: PRICE,
+      vat_amount: vatAmount,
       price: base_price,
       location: locationParam,
       payment_methods: formData.paymentMethod,

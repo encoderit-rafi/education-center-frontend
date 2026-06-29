@@ -295,6 +295,7 @@ export default function FormPTEAcademicRegistration({ examId: initialExamId }: F
           exam_time: data.examTime,
           exam_fee: pricing.baseFee,
           total_amount: total,
+          vat_amount: pricing.vat,
           exam_date: data.examDate ? new Date(data.examDate as any).toISOString() : "",
           id_expiry_date: data.idExpiryDate ? new Date(data.idExpiryDate as any).toISOString() : "",
           id_document: idDocumentUrl,

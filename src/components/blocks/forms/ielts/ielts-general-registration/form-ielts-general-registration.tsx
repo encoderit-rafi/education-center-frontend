@@ -319,6 +319,7 @@ export default function FormIELTSGeneralRegistration({ examId: initialExamId }: 
         speaking_slot: data.speakingSlot,
         exam_fee: baseFee,
         total_amount: total,
+        vat_amount: vatAmount,
         exam_date: data.examDate
           ? new Date(data.examDate as any).toISOString()
           : "",

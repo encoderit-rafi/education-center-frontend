@@ -320,6 +320,7 @@ export default function FormIeltsAcademicRegistration({ examId: initialExamId }:
           speaking_slot: data.speakingSlot,
           exam_fee: pricing.baseFee,
           total_amount: total,
+          vat_amount: pricing.vat,
           exam_date: data.examDate
             ? new Date(data.examDate as any).toISOString()
             : "",

@@ -288,6 +288,7 @@ function CourseRegistrationForm({ className }: { className?: string }) {
       base_price,
       discount_amount,
       total_amount,
+      vat_amount: vatAmount,
       payment_methods: formData.paymentMethod,
       coupon_code: appliedCoupon ? appliedCoupon.code : null,
       coupon: appliedCoupon ? appliedCoupon.code : null,

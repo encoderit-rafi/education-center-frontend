@@ -214,6 +214,7 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
           ? Math.round(base_price * (discount_amount / 100))
           : discount_amount,
       total_amount,
+      vat_amount: vatAmount,
       payment_methods: formData.paymentMethod,
     };
 

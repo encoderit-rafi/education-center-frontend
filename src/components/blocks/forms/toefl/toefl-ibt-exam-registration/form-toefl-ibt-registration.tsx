@@ -351,6 +351,7 @@ export default function FormTOEFLIBTRegistration({ examId: initialExamId }: Form
                     exam_time_slot: data.examTimeSlot,
                     exam_fee: (pricing.baseFeeAED + pricing.expressFeeAED) || 1270,
                     total_amount: total,
+                    vat_amount: pricing.vatAED,
                     exam_date: data.examDate
                         ? new Date(data.examDate as any).toISOString()
                         : "",
