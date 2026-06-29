@@ -10,6 +10,8 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import api from "@/axios";
 import { format } from "date-fns";
 import { User, ShieldCheck, Globe } from "lucide-react";
+import * as z from "zod";
+import { VAT_PERCENT, calculateVat } from "@/lib/vat";
 import { toast } from "sonner";
 import {
   GlobalReviewStep,
@@ -165,6 +167,7 @@ export default function FormIeltsAcademicRegistration({ examId: initialExamId }:
       : 0;
 
     const subtotal = baseFee + serviceFee + coursePrice + workshopPrice;
+    const vatAmount = calculateVat(subtotal);
 
     return {
       baseFee,
@@ -172,8 +175,8 @@ export default function FormIeltsAcademicRegistration({ examId: initialExamId }:
       coursePrice,
       workshopPrice,
       subtotal,
-      vat: 0,
-      total: subtotal,
+      vat: vatAmount,
+      total: subtotal + vatAmount,
     };
   };
 

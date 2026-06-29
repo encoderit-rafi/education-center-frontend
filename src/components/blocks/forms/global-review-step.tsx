@@ -7,6 +7,7 @@ import { PriceDisplay } from "@/components/ui/price-display";
 import Stepper from "@/components/stepper";
 import { PaymentMethodSelector } from "@/components/blocks/payment-method-selector";
 import { cn } from "@/lib/utils";
+import { VAT_PERCENT, calculateVat } from "@/lib/vat";
 
 // ─── ReviewSummaryGrid ────────────────────────────────────────────────────────
 
@@ -132,6 +133,14 @@ export function GlobalReviewStep({
   paymentStepNumber,
   customOrderSummary,
 }: GlobalReviewStepProps) {
+  const selectedCoursePrice = selectedCourseData
+    ? (selectedCourseData.discounted_price ??
+       selectedCourseData.price * (1 - (selectedCourseData.special_discount || 0) / 100))
+    : 0;
+  const selectedWorkshopPrice = selectedWorkshopData ? selectedWorkshopData.price : 0;
+  const calculatedSubtotal = baseFee + serviceFee + selectedCoursePrice + selectedWorkshopPrice;
+  const vatAmount = calculateVat(calculatedSubtotal);
+
   return (
     <form onSubmit={onSubmit} className="space-y-8">
       <Stepper step={reviewStepNumber}>Review Your Details</Stepper>
@@ -247,6 +256,27 @@ export function GlobalReviewStep({
                         className="font-bold text-slate-900"
                       />
                     </div>
+                  )}
+
+                  {VAT_PERCENT > 0 && (
+                    <>
+                      <div className="flex justify-between text-sm pt-4 border-t border-slate-100">
+                        <span className="text-slate-500 font-semibold">Subtotal</span>
+                        <PriceDisplay
+                          amount={calculatedSubtotal}
+                          className="font-bold text-slate-900"
+                        />
+                      </div>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-slate-500 font-medium">
+                          VAT ({VAT_PERCENT}%)
+                        </span>
+                        <PriceDisplay
+                          amount={vatAmount}
+                          className="font-bold text-slate-900"
+                        />
+                      </div>
+                    </>
                   )}
 
                   <div className="pt-6 border-t border-slate-200">

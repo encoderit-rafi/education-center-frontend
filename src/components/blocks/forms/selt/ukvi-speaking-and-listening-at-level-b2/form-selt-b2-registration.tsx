@@ -20,6 +20,7 @@ import { TermsStep } from "./steps/terms-step";
 import { DateStep } from "./steps/date-step";
 import { RegistrationFormStep } from "./steps/registration-form-step";
 import { ReviewStep } from "./steps/review-step";
+import { VAT_PERCENT, calculateVat } from "@/lib/vat";
 
 
 
@@ -166,6 +167,7 @@ export default function FormSELTB2Registration({ examId: initialExamId }: FormPr
       : 0;
 
     const subtotal = baseFee + serviceFee + coursePrice + workshopPrice;
+    const vatAmount = calculateVat(subtotal);
 
     return {
       baseFee,
@@ -173,8 +175,8 @@ export default function FormSELTB2Registration({ examId: initialExamId }: FormPr
       coursePrice,
       workshopPrice,
       subtotal,
-      vat: 0,
-      total: subtotal
+      vat: vatAmount,
+      total: subtotal + vatAmount,
     };
   };
 

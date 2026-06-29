@@ -7,6 +7,8 @@ import { Form } from "@/components/ui/form";
 import { IeltsGeneralSchema, type TIeltsGeneralSchema } from "./_type";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import api from "@/axios";
+import * as z from "zod";
+import { VAT_PERCENT, calculateVat } from "@/lib/vat";
 import { toast } from "sonner";
 import { languages } from "@/lib/languages-data";
 // Courses and workshops data loaded dynamically from /courses/ielts API
@@ -159,7 +161,8 @@ export default function FormIELTSGeneralRegistration({ examId: initialExamId }: 
   const serviceFee = activeExam?.additionalFee && parseFloat(activeExam.additionalFee) > 0 ? parseFloat(activeExam.additionalFee) : 150;
 
   const subtotal = baseFee + serviceFee + coursePrice + workshopPrice;
-  const total = subtotal;
+  const vatAmount = calculateVat(subtotal);
+  const total = subtotal + vatAmount;
 
   const nextStep = async () => {
     let fieldsToValidate: any[] = [];

@@ -19,6 +19,7 @@ import { ReviewStep } from "./steps/review-step";
 import { PteAcademicUKVISchema, type TPteAcademicUKVISchema } from "./_type";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import api from "@/axios";
+import { VAT_PERCENT, calculateVat } from "@/lib/vat";
 
 
 
@@ -180,6 +181,7 @@ export default function FormPTEAcademicUKVIRegistration({ examId: initialExamId 
     const workshopPrice = selectedWorkshopData?.price || 0;
 
     const subtotal = baseFee + serviceFee + coursePrice + workshopPrice;
+    const vatAmount = calculateVat(subtotal);
 
     return {
       baseFee,
@@ -187,8 +189,8 @@ export default function FormPTEAcademicUKVIRegistration({ examId: initialExamId 
       coursePrice,
       workshopPrice,
       subtotal,
-      vat: 0,
-      total: subtotal
+      vat: vatAmount,
+      total: subtotal + vatAmount,
     };
   };
 
