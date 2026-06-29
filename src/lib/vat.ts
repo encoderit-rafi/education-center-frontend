@@ -3,9 +3,9 @@ export const VAT_PERCENT = Number(
 );
 
 export function calculateVat(amount: number): number {
-  return amount * (VAT_PERCENT / 100);
+  return Number((amount * (VAT_PERCENT / 100)).toFixed(2));
 }
 
 export function addVat(amount: number): number {
-  return amount + calculateVat(amount);
+  return Number((amount + calculateVat(amount)).toFixed(2));
 }
