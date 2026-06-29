@@ -94,7 +94,7 @@ export function DateStep({
                   if (slots.length === 0) return true;
                   return slots.every((slot) => isSlotDisabled(date, slot.hours, slot.minutes));
                 }}
-                className="w-full max-w-xl mx-auto border rounded-md p-8 bg-white shadow-xl"
+                className="w-full max-w-xl mx-auto border rounded-md p-4 sm:p-8 bg-white shadow-xl"
               />
               <FieldError errors={[error]} className="mt-4 text-center" />
             </FieldContent>

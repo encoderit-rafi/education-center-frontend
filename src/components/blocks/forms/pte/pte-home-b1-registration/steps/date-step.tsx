@@ -96,7 +96,7 @@ export function DateStep({
                     return slotDate.getTime() - now.getTime() < 24 * 60 * 60 * 1000;
                   });
                 }}
-                className="w-full max-w-xl mx-auto border rounded-md p-8 bg-white shadow-xl"
+                className="w-full max-w-xl mx-auto border rounded-md p-4 sm:p-8 bg-white shadow-xl"
               />
               <FieldError errors={[error]} className="mt-4 text-center" />
             </FieldContent>

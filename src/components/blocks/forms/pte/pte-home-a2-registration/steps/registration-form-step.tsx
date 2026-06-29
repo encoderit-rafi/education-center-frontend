@@ -233,15 +233,7 @@ export function RegistrationFormStep({
                 onDrop={(e) => e.preventDefault()}
                 autoComplete="off"
                 data-lpignore="true"
-                readOnly
                 {...register("confirmEmail")}
-                onFocus={(e) => {
-                  e.currentTarget.readOnly = false;
-                }}
-                onBlur={(e) => {
-                  e.currentTarget.readOnly = true;
-                  register("confirmEmail").onBlur(e);
-                }}
               />
               <FieldError errors={[errors.confirmEmail]} />
             </FieldContent>

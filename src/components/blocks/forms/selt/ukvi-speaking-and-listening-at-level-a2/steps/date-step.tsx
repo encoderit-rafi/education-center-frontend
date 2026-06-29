@@ -83,7 +83,7 @@ export function DateStep({
                     isSlotDisabled(date, "5:30 PM");
                   return !isAllowed || allSlotsDisabled;
                 }}
-                className="w-full max-w-xl mx-auto border rounded-md p-8 bg-white shadow-xl"
+                className="w-full max-w-xl mx-auto border rounded-md p-4 sm:p-8 bg-white shadow-xl"
               />
               <FieldError errors={[error]} className="mt-4 text-center" />
             </FieldContent>
