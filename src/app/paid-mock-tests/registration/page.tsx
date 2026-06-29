@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { cn, omitEmpty } from "@/lib/utils";
+import { VAT_PERCENT, calculateVat } from "@/lib/vat";
 import {
   Field,
   FieldLabel,
@@ -157,7 +158,9 @@ function PaidMockTestRegistrationForm({
   const defaultCenterPrice = rawCenterPrice && parseFloat(String(rawCenterPrice)) > 0 ? parseFloat(String(rawCenterPrice)) : 450;
   const defaultPrice = locationParam === "center" ? defaultCenterPrice : defaultHomePrice;
 
-  const PRICE = parsedPriceParam > 0 ? parsedPriceParam : defaultPrice;
+  const base_price = parsedPriceParam > 0 ? parsedPriceParam : defaultPrice;
+  const vatAmount = calculateVat(base_price);
+  const PRICE = base_price + vatAmount;
   const CURRENCY = "AED";
 
   const examKey = data?.slug
@@ -229,7 +232,7 @@ function PaidMockTestRegistrationForm({
       country: formData.country,
       address: formData.address,
       total_amount: PRICE,
-      price: PRICE,
+      price: base_price,
       location: locationParam,
       payment_methods: formData.paymentMethod,
     };
@@ -485,6 +488,30 @@ function PaidMockTestRegistrationForm({
                     <PriceDisplay amount={PRICE} />
                   </span>
                 </Stepper>
+
+                {/* Fee Breakdown */}
+                <div className="bg-white border rounded-lg p-4 space-y-2 mb-4 text-sm">
+                  <div className="flex justify-between items-center text-slate-600">
+                    <span>Mock Test Price</span>
+                    <span>
+                      <PriceDisplay amount={base_price} />
+                    </span>
+                  </div>
+                  {VAT_PERCENT > 0 && (
+                    <div className="flex justify-between items-center text-slate-600">
+                      <span>VAT ({VAT_PERCENT}%)</span>
+                      <span>
+                        <PriceDisplay amount={vatAmount} />
+                      </span>
+                    </div>
+                  )}
+                  <div className="pt-2 mt-2 border-t flex justify-between items-center font-bold text-slate-900 text-base">
+                    <span>{t("total")}</span>
+                    <span>
+                      <PriceDisplay amount={PRICE} />
+                    </span>
+                  </div>
+                </div>
 
                 <div className="space-y-3">
                   <FieldLabel required>{t("paymentMethod")}</FieldLabel>

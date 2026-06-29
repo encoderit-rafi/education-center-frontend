@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "@/components/ui/form";
 import { languages } from "@/lib/languages-data";
 import { ToeflIbtSchema, type TToeflIbtSchema } from "./_type/toefl-ibt";
+import { VAT_PERCENT, calculateVat } from "@/lib/vat";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import api from "@/axios";
 import { format } from "date-fns";
@@ -190,8 +191,14 @@ export default function FormTOEFLIBTRegistration({ examId: initialExamId }: Form
         const coursePriceUSD = coursePriceAED > 0 ? Math.round(coursePriceAED / AED_TO_USD_RATE) : 0;
         const workshopPriceUSD = workshopPriceAED > 0 ? Math.round(workshopPriceAED / AED_TO_USD_RATE) : 0;
 
-        const totalAED = baseFeeAED + expressFeeAED + coursePriceAED + workshopPriceAED;
-        const totalUSD = baseFeeUSD + expressFeeUSD + coursePriceUSD + workshopPriceUSD;
+        const subtotalAED = baseFeeAED + expressFeeAED + coursePriceAED + workshopPriceAED;
+        const subtotalUSD = baseFeeUSD + expressFeeUSD + coursePriceUSD + workshopPriceUSD;
+
+        const vatAED = calculateVat(subtotalAED);
+        const vatUSD = calculateVat(subtotalUSD);
+
+        const totalAED = subtotalAED + vatAED;
+        const totalUSD = subtotalUSD + vatUSD;
 
         return {
             baseFeeUSD,
@@ -202,6 +209,10 @@ export default function FormTOEFLIBTRegistration({ examId: initialExamId }: Form
             coursePriceAED,
             workshopPriceUSD,
             workshopPriceAED,
+            subtotalAED,
+            subtotalUSD,
+            vatAED,
+            vatUSD,
             totalAED,
             totalUSD,
             isExpress
@@ -459,6 +470,17 @@ export default function FormTOEFLIBTRegistration({ examId: initialExamId }: Form
                                             </span>
                                             <span className="font-bold text-slate-900 inline-flex items-center gap-1">
                                                 ${pricing.workshopPriceUSD} <span className="text-slate-400 font-normal text-xs inline-flex items-center gap-0.5">(<PriceDisplay amount={pricing.workshopPriceAED} minimumFractionDigits={0} maximumFractionDigits={0} className="text-slate-400 font-normal text-xs" />)</span>
+                                            </span>
+                                        </div>
+                                    )}
+
+                                    {VAT_PERCENT > 0 && (
+                                        <div className="flex justify-between text-sm items-center pt-4 border-t border-slate-100 mt-2">
+                                            <span className="text-slate-500 font-medium">
+                                                VAT ({VAT_PERCENT}%)
+                                            </span>
+                                            <span className="font-bold text-slate-900 inline-flex items-center gap-1">
+                                                ${pricing.vatUSD} <span className="text-slate-400 font-normal text-xs inline-flex items-center gap-0.5">(Approximately <PriceDisplay amount={pricing.vatAED} minimumFractionDigits={0} maximumFractionDigits={0} className="text-slate-400 font-normal text-xs" />)</span>
                                             </span>
                                         </div>
                                     )}

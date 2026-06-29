@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { cn, omitEmpty } from "@/lib/utils";
+import { VAT_PERCENT, calculateVat } from "@/lib/vat";
 import {
   Field,
   FieldLabel,
@@ -148,11 +149,14 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
   const discount_amount = workshop
     ? parseFloat(workshop.discountValue) || 0
     : 0;
-  const total_amount = workshop
+  const subtotal = workshop
     ? workshop.discountType === "PERCENTAGE"
       ? Math.round(base_price * (1 - discount_amount / 100))
       : base_price - discount_amount
     : base_price;
+
+  const vatAmount = calculateVat(subtotal);
+  const total_amount = subtotal + vatAmount;
 
   const paymentMutation = useMutation({
     mutationFn: (body: Record<string, unknown>) =>
@@ -412,6 +416,32 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
                       <PriceDisplay amount={base_price} />
                     </span>
                   </div>
+                  {discount_amount > 0 && (
+                    <div className="flex justify-between items-center text-emerald-600">
+                      <span>Discount</span>
+                      <span>
+                        - <PriceDisplay amount={discount_amount} />
+                      </span>
+                    </div>
+                  )}
+                  {VAT_PERCENT > 0 && (
+                    <>
+                      {discount_amount > 0 && (
+                        <div className="flex justify-between items-center text-slate-600 pt-2 mt-2 border-t">
+                          <span className="font-semibold text-slate-500">Subtotal</span>
+                          <span>
+                            <PriceDisplay amount={subtotal} />
+                          </span>
+                        </div>
+                      )}
+                      <div className="flex justify-between items-center text-slate-600">
+                        <span>VAT ({VAT_PERCENT}%)</span>
+                        <span>
+                          <PriceDisplay amount={vatAmount} />
+                        </span>
+                      </div>
+                    </>
+                  )}
                   <div className="pt-2 mt-2 border-t flex justify-between items-center font-bold text-slate-900 text-base">
                     <span>Total</span>
                     <span>

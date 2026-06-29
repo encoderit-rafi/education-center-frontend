@@ -19,6 +19,7 @@ import { ReviewStep } from "./steps/review-step";
 import { PteHomeA2Schema, type TPteHomeA2Schema } from "./_type";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import api from "@/axios";
+import { VAT_PERCENT, calculateVat } from "@/lib/vat";
 
 
 
@@ -171,16 +172,17 @@ export default function FormPTEHomeA2Registration({ examId: initialExamId }: For
       ? (workshopsData as any)[formData.selectedWorkshop].price
       : 0;
     
-    const total = baseFee + serviceFee + coursePrice + workshopPrice;
-    
+    const subtotal = baseFee + serviceFee + coursePrice + workshopPrice;
+    const vatAmount = calculateVat(subtotal);
+
     return {
       baseFee,
       serviceFee,
       coursePrice,
       workshopPrice,
-      subtotal: total,
-      vat: 0,
-      total
+      subtotal,
+      vat: vatAmount,
+      total: subtotal + vatAmount,
     };
   };
 
