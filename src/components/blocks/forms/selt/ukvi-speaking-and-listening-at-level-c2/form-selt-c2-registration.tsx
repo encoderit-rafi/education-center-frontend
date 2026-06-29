@@ -188,7 +188,11 @@ export default function FormSELTC2Registration({ examId: initialExamId }: FormPr
       const checkoutUrl = response.data?.data?.checkoutUrl;
       if (checkoutUrl) {
         toast.success("Redirecting to checkout...", { id: "selt-submit" });
-        window.location.href = checkoutUrl;
+        if (window.top && window.top !== window) {
+          window.top.location.href = checkoutUrl;
+        } else {
+          window.location.href = checkoutUrl;
+        }
       } else {
         console.error("Checkout URL not found in response");
         toast.error("Checkout URL not found in server response.", { id: "selt-submit" });

@@ -188,7 +188,11 @@ function PaidMockTestRegistrationForm({
     onSuccess: (response) => {
       const checkoutUrl = response.data?.data?.checkoutUrl;
       if (checkoutUrl) {
-        window.location.href = checkoutUrl;
+        if (window.top && window.top !== window) {
+          window.top.location.href = checkoutUrl;
+        } else {
+          window.location.href = checkoutUrl;
+        }
       } else {
         console.error("Checkout URL not found in response");
       }

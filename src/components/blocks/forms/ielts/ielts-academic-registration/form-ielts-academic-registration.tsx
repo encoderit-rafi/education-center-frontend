@@ -187,7 +187,11 @@ export default function FormIeltsAcademicRegistration({ examId: initialExamId }:
       const checkoutUrl = response.data?.data?.checkoutUrl;
       if (checkoutUrl) {
         toast.success("Redirecting to checkout...", { id: "ielts-submit" });
-        window.location.href = checkoutUrl;
+        if (window.top && window.top !== window) {
+          window.top.location.href = checkoutUrl;
+        } else {
+          window.location.href = checkoutUrl;
+        }
       } else {
         console.error("Checkout URL not found in response");
         toast.error("Checkout URL not found in server response.", { id: "ielts-submit" });
