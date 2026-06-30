@@ -98,7 +98,7 @@ export default function ContactUs() {
               </Link>
 
               <Link
-                href="https://wa.me/97165531250"
+                href="https://wa.me/971555688035"
                 target="_blank"
                 className="block"
               >

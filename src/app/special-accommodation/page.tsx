@@ -50,49 +50,39 @@ export default function SpecialAccommodation() {
     <main className="bg-white min-h-screen overflow-x-hidden">
 
       {/* ─── HERO ─── */}
-      <section className="relative isolate overflow-hidden bg-slate-950 text-white">
-        {/* Mesh gradient background */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_60%_-10%,rgba(185,28,28,0.25),transparent)] pointer-events-none" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_50%_at_0%_100%,rgba(30,58,138,0.15),transparent)] pointer-events-none" />
-
-        {/* Decorative grid dots */}
-        <div
-          className="absolute inset-0 opacity-[0.03] pointer-events-none"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle, #fff 1px, transparent 1px)",
-            backgroundSize: "28px 28px",
-          }}
-        />
+      <section className="relative isolate overflow-hidden bg-white text-slate-900 border-b border-slate-100">
+        {/* Subtle light glow behind content */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_60%_-10%,rgba(161,29,29,0.05),transparent)] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_50%_at_0%_100%,rgba(161,29,29,0.02),transparent)] pointer-events-none" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 py-20 lg:py-28 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left */}
           <div className="space-y-7">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm text-xs font-bold uppercase tracking-widest text-rose-400">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-50 border border-red-100 text-xs font-bold uppercase tracking-widest text-[#A11D1D] shadow-xs">
               <ShieldAlert className="w-3.5 h-3.5" />
               Candidate Support
             </div>
 
             <div className="space-y-3">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05]">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] text-slate-900">
                 {t("title")}
               </h1>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] bg-gradient-to-r from-rose-400 via-red-400 to-orange-400 bg-clip-text text-transparent">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] text-[#A11D1D]">
                 {t("titleAccent")}
               </h1>
             </div>
 
-            <p className="text-slate-300 text-base md:text-lg leading-relaxed max-w-lg">
+            <p className="text-slate-600 text-base md:text-lg leading-relaxed max-w-lg text-justify">
               {t("description")}
             </p>
 
             {/* Governance Alert */}
-            <div className="relative overflow-hidden rounded-2xl border border-rose-500/20 bg-rose-950/30 backdrop-blur-md p-5">
-              <div className="absolute inset-y-0 left-0 w-1 bg-gradient-to-b from-rose-500 to-rose-700 rounded-l-2xl" />
+            <div className="relative overflow-hidden rounded-2xl border border-red-100 bg-red-50/40 backdrop-blur-md p-5 shadow-xs">
+              <div className="absolute inset-y-0 left-0 w-1 bg-gradient-to-b from-[#A11D1D] to-[#7a1212] rounded-l-2xl" />
               <div className="flex gap-4 pl-3">
-                <AlertCircle className="w-5 h-5 text-rose-400 shrink-0 mt-0.5" />
-                <p className="text-sm text-slate-300 leading-relaxed">
+                <AlertCircle className="w-5 h-5 text-[#A11D1D] shrink-0 mt-0.5" />
+                <p className="text-sm text-slate-650 leading-relaxed font-semibold text-justify">
                   {t("governanceNote")}
                 </p>
               </div>
@@ -103,17 +93,16 @@ export default function SpecialAccommodation() {
           <div className="flex justify-center lg:justify-end">
             <div className="relative w-full max-w-[480px]">
               {/* Glow ring behind image */}
-              <div className="absolute -inset-4 rounded-[2rem] bg-gradient-to-br from-rose-600/30 to-blue-600/10 blur-2xl" />
-              <div className="relative rounded-[1.75rem] overflow-hidden shadow-2xl ring-1 ring-white/10 group">
+              <div className="absolute -inset-4 rounded-[2rem] bg-gradient-to-br from-[#A11D1D]/10 to-rose-500/5 blur-2xl" />
+              <div className="relative rounded-[1.75rem] overflow-hidden shadow-xl ring-1 ring-slate-100 group">
                 <Image
                   src="/images/ADA.jpg"
                   alt={t("title")}
                   width={480}
                   height={480}
-                  className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="w-full h-auto object-cover"
                   priority
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent" />
               </div>
             </div>
           </div>
@@ -140,7 +129,7 @@ export default function SpecialAccommodation() {
               <h2 className="text-3xl md:text-4xl font-black text-slate-900 leading-snug">
                 {t("whoCanRequest.title")}
               </h2>
-              <p className="text-slate-500 text-sm md:text-base leading-relaxed">
+              <p className="text-slate-500 text-sm md:text-base leading-relaxed text-justify">
                 {t("whoCanRequest.intro")}
               </p>
             </div>
@@ -201,7 +190,7 @@ export default function SpecialAccommodation() {
                 <h3 className="font-bold text-base text-slate-900 mb-2 group-hover:text-primary transition-colors">
                   {item.title}
                 </h3>
-                <p className="text-slate-500 text-sm leading-relaxed flex-1">
+                <p className="text-slate-500 text-sm leading-relaxed flex-1 text-justify">
                   {item.desc}
                 </p>
 
@@ -217,9 +206,9 @@ export default function SpecialAccommodation() {
       </section>
 
       {/* ─── HOW THE PROCESS WORKS ─── */}
-      <section className="relative py-20 px-6 bg-slate-950 text-white overflow-hidden">
+      <section className="relative py-20 px-6 bg-gradient-to-br from-[#7a1212] via-[#590b0b] to-[#330404] text-white overflow-hidden">
         {/* Mesh background */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_120%,rgba(185,28,28,0.15),transparent)] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_120%,rgba(239,68,68,0.15),transparent)] pointer-events-none" />
         <div
           className="absolute inset-0 opacity-[0.04] pointer-events-none"
           style={{
@@ -232,13 +221,13 @@ export default function SpecialAccommodation() {
         <div className="relative z-10 max-w-7xl mx-auto">
           {/* Header */}
           <div className="text-center mb-16 space-y-4">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-rose-400 text-xs font-bold uppercase tracking-widest">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-red-300 text-xs font-bold uppercase tracking-widest">
               Step by Step
             </div>
-            <h2 className="text-3xl md:text-4xl font-black">
+            <h2 className="text-3xl md:text-4xl font-black text-white">
               {t("howToApply.title")}
             </h2>
-            <p className="text-slate-400 text-sm md:text-base leading-relaxed max-w-2xl mx-auto">
+            <p className="text-slate-200 text-sm md:text-base leading-relaxed max-w-2xl mx-auto">
               {t("howToApply.intro")}
             </p>
           </div>
@@ -249,23 +238,23 @@ export default function SpecialAccommodation() {
             <div className="hidden lg:block absolute top-10 left-[calc(12.5%+2rem)] right-[calc(12.5%+2rem)] h-px bg-gradient-to-r from-transparent via-white/10 to-transparent pointer-events-none" />
 
             {steps.map((step, index) => (
-              <div key={index} className="group flex flex-col items-center text-center space-y-5">
+              <div key={index} className="group flex flex-col items-center text-center space-y-5 cursor-default">
                 {/* Number bubble */}
-                <div className="relative w-20 h-20 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-rose-500/50 group-hover:bg-rose-950/30 transition-all duration-300">
-                  <span className="text-3xl font-black text-white/20 group-hover:text-rose-400/60 transition-colors">
+                <div className="relative w-20 h-20 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-white/50 group-hover:bg-white/20 group-hover:scale-105 transition-all duration-300">
+                  <span className="text-3xl font-black text-white/20 group-hover:text-white transition-colors duration-300">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   {/* Corner badge */}
-                  <div className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-primary border-2 border-slate-950 flex items-center justify-center">
+                  <div className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-primary border-2 border-[#590b0b] flex items-center justify-center group-hover:scale-110 transition-transform">
                     <ArrowRight className="w-2.5 h-2.5 text-white" />
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <h3 className="font-bold text-base text-white group-hover:text-rose-400 transition-colors">
+                  <h3 className="font-bold text-base text-slate-100 group-hover:text-white transition-colors duration-300">
                     {step.title}
                   </h3>
-                  <p className="text-slate-400 text-xs md:text-sm leading-relaxed">
+                  <p className="text-xs md:text-sm text-justify">
                     {step.desc}
                   </p>
                 </div>
@@ -314,7 +303,7 @@ export default function SpecialAccommodation() {
                     <h4 className="font-bold text-sm text-slate-900 mb-2">
                       {note.title}
                     </h4>
-                    <p className="text-xs text-slate-500 leading-relaxed">
+                    <p className="text-xs text-slate-500 leading-relaxed text-justify">
                       {note.desc}
                     </p>
                   </div>

@@ -7,7 +7,7 @@ export default function WhatsAppSupport() {
   return (
     <div className="fixed bottom-8 left-8 z-50">
       <a
-        href="https://wa.me/your-number" // Replace with actual number
+        href="https://wa.me/971555688035"
         target="_blank"
         rel="noopener noreferrer"
         className="w-16 h-16 bg-[#25D366] text-white rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-110 active:scale-95 group relative"

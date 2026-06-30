@@ -6,63 +6,63 @@ import {
   BaseCardTitle,
 } from "@/components/blocks/cards/base-card";
 import {
-  UserRound,
+  ShieldCheck,
+  UserCheck,
   Eye,
-  MonitorUp,
-  Mic2,
-  Flag,
-  CheckCircle2,
+  Lock,
+  FileText,
+  Globe,
 } from "lucide-react";
-import Link from "next/link";
 import { useTranslations } from "next-intl";
 
-const AI_ICONS = [
-  <UserRound key="user" className="size-5" />,
-  <Eye key="eye" className="size-5" />,
-  <MonitorUp key="monitor" className="size-5" />,
-  <Mic2 key="mic" className="size-5" />,
-  <Flag key="flag" className="size-5" />,
+const SERVICE_ICONS = [
+  <ShieldCheck key="supervision" className="size-5" />,
+  <UserCheck key="auth" className="size-5" />,
+  <Eye key="observation" className="size-5" />,
+  <Lock key="security" className="size-5" />,
+  <FileText key="documentation" className="size-5" />,
+  <Globe key="adaptability" className="size-5" />,
 ];
 
 export default function InstitutionsPage() {
   const t = useTranslations("ExamProctoringServicesPage.InstitutionsPage");
 
-  const aiTechRaw = t.raw("aiTech") as { title: string; desc: string }[];
-  const facilitiesRaw = t.raw("facilities") as {
-    title: string;
-    desc: string;
-  }[];
-  const partnerFeatures = t.raw("partnerFeatures") as string[];
+  const servicesRaw = t.raw("services") as { title: string; desc: string }[];
+  const onsiteFeatures = t.raw("onsite.features") as { title: string; desc: string }[];
+  const onlineFeatures = t.raw("online.features") as { title: string; desc: string }[];
 
-  const aiTech = aiTechRaw.map((item, i) => ({
+  const services = servicesRaw.map((item, i) => ({
     ...item,
-    icon: AI_ICONS[i],
+    icon: SERVICE_ICONS[i],
   }));
 
   return (
-    <div className="min-h-screen bg-[#fafafa]">
+    <div className="min-h-screen bg-slate-50/50 pb-20 overflow-x-hidden">
       {/* Hero */}
-      <section className="bg-white border-b border-gray-200 py-16 md:py-20">
-        <div className="container mx-auto px-6 lg:px-24">
-          <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+      <section className="bg-white border-b border-slate-100 py-16 md:py-20 relative overflow-hidden">
+        {/* Glow effect */}
+        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-red-500/5 rounded-full blur-[120px] pointer-events-none" />
+        
+        <div className="container mx-auto px-6 lg:px-24 relative z-10">
+          <div className="grid lg:grid-cols-12 gap-12 items-center">
             {/* Left Content Column */}
-            <div className="lg:col-span-7 flex flex-col justify-center">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-gray-900 leading-tight mb-6">
+            <div className="lg:col-span-7 flex flex-col justify-center space-y-6">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight font-headline leading-tight">
                 {t("heroTitle")}{" "}
                 <span className="text-[#A11D1D]">{t("heroTitleAccent")}</span>
               </h1>
 
-              <p className="max-w-3xl text-base md:text-lg text-gray-600 leading-8">
+              <p className="max-w-3xl text-base md:text-lg text-slate-650 leading-relaxed text-justify">
                 {t("heroDescription")}
               </p>
             </div>
 
-            {/* Right Column - Showing Image */}
+            {/* Right Column - Image */}
             <div className="lg:col-span-5 flex justify-center">
-              <div className="w-full max-w-[450px] rounded-2xl overflow-hidden shadow-lg border border-gray-100 bg-gray-50 p-1.5">
+              <div className="w-full max-w-[450px] rounded-3xl overflow-hidden">
                 <Image
-                  className="w-full h-auto rounded-xl object-contain block"
-                  alt="Exam proctoring services for institutions at TEPTH"
+                  className="w-full h-auto rounded-2xl object-cover block"
+                  alt="Professional Exam Proctoring services by TEPTH"
                   src="/images/Live Proctoring.jpg"
                   width={500}
                   height={500}
@@ -74,118 +74,122 @@ export default function InstitutionsPage() {
         </div>
       </section>
 
-      <main className="container mx-auto px-6 lg:px-24 py-16 space-y-16">
-        {/* AI Proctoring */}
-        <section>
-          <div className="max-w-4xl mb-10">
-            <h2 className="text-3xl font-semibold text-gray-900 mb-4">
-              {t("aiSectionTitle")}
+      <main className="container mx-auto px-6 lg:px-24 py-16 space-y-20">
+        {/* Core Services Section */}
+        <section className="space-y-10">
+          <div className="max-w-3xl">
+            <span className="text-[#A11D1D] font-extrabold uppercase tracking-[0.25em] text-xs">
+              Capabilities
+            </span>
+            <h2 className="text-3xl lg:text-4xl font-extrabold text-slate-900 mt-2 tracking-tight font-headline">
+              {t("servicesTitle")}
             </h2>
-
-            <p className="text-gray-600 leading-8">
-              {t("aiSectionDescription")}
-            </p>
+            <div className="h-1 w-16 bg-[#A11D1D] mt-4 rounded-full" />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-            {aiTech.map((tech, i) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {services.map((service, i) => (
               <BaseCard
                 key={i}
-                className="rounded-2xl border border-gray-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                className="rounded-2xl border border-slate-100 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-md group"
               >
-                <BaseCardIcon className="size-11 rounded-xl bg-red-50 text-[#A11D1D]">
-                  {tech.icon}
+                <BaseCardIcon className="size-11 rounded-xl bg-red-55 text-[#A11D1D] group-hover:bg-[#A11D1D] group-hover:text-white transition-all duration-300 shadow-xs">
+                  {service.icon}
                 </BaseCardIcon>
 
-                <BaseCardTitle className="mt-5 mb-3 text-lg font-semibold text-gray-900">
-                  {tech.title}
+                <BaseCardTitle className="mt-5 mb-3 text-lg font-bold text-slate-900 tracking-tight group-hover:text-[#A11D1D] transition-colors duration-200">
+                  {service.title}
                 </BaseCardTitle>
 
-                <BaseCardDescription className="text-gray-600 leading-7">
-                  {tech.desc}
+                <BaseCardDescription className="text-slate-600 leading-relaxed text-justify text-xs font-semibold">
+                  {service.desc}
                 </BaseCardDescription>
               </BaseCard>
             ))}
           </div>
+        </section>
 
-          {/* Contact Box */}
-          <div className="mt-8 rounded-2xl border border-gray-200 bg-white p-8">
-            <p className="text-gray-600 leading-8">
-              {t("contactBoxText1")}{" "}
-              <span className="font-medium text-gray-900">
-                {t("contactBoxPhone")}
-              </span>{" "}
-              {t("contactBoxText2")}{" "}
-              <a
-                href={`mailto:${t("contactBoxEmail")}`}
-                className="font-medium text-[#A11D1D] hover:underline"
-              >
-                {t("contactBoxEmail")}
-              </a>
-              {t("contactBoxText3")}
-            </p>
+        {/* Proctoring Options Section */}
+        <section className="space-y-10">
+          <div className="max-w-3xl">
+            <span className="text-[#A11D1D] font-extrabold uppercase tracking-[0.25em] text-xs">
+              Flexible Delivery
+            </span>
+            <h2 className="text-3xl lg:text-4xl font-extrabold text-slate-900 mt-2 tracking-tight font-headline">
+              {t("optionsTitle")}
+            </h2>
+            <div className="h-1 w-16 bg-[#A11D1D] mt-4 rounded-full" />
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* On-Site Proctoring */}
+            <div className="rounded-3xl border border-slate-100 bg-white p-8 lg:p-10 shadow-xs hover:shadow-md transition-all duration-300 flex flex-col gap-6">
+              <h3 className="text-2xl font-bold text-slate-900 tracking-tight font-headline border-l-4 border-[#A11D1D] pl-4">
+                {t("onsite.title")}
+              </h3>
+              <p className="text-slate-650 text-sm leading-relaxed text-justify font-medium">
+                {t("onsite.description")}
+              </p>
+              <div className="space-y-5 pt-4 border-t border-slate-50 flex-grow">
+                {onsiteFeatures.map((feat, idx) => (
+                  <div key={idx} className="flex items-start gap-3">
+                    <span className="text-[#A11D1D] shrink-0 mt-1 select-none">❖</span>
+                    <div className="space-y-1">
+                      <span className="font-bold text-slate-900 text-sm block">
+                        {feat.title}:
+                      </span>
+                      <span className="text-xs text-slate-600 leading-relaxed text-justify block">
+                        {feat.desc}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Live Online Proctoring */}
+            <div className="rounded-3xl border border-slate-100 bg-white p-8 lg:p-10 shadow-xs hover:shadow-md transition-all duration-300 flex flex-col gap-6">
+              <h3 className="text-2xl font-bold text-slate-900 tracking-tight font-headline border-l-4 border-[#A11D1D] pl-4">
+                {t("online.title")}
+              </h3>
+              <p className="text-slate-655 text-sm leading-relaxed text-justify font-medium">
+                {t("online.description")}
+              </p>
+              <div className="space-y-5 pt-4 border-t border-slate-50 flex-grow">
+                {onlineFeatures.map((feat, idx) => (
+                  <div key={idx} className="flex items-start gap-3">
+                    <span className="text-[#A11D1D] shrink-0 mt-1 select-none">❖</span>
+                    <div className="space-y-1">
+                      <span className="font-bold text-slate-900 text-sm block">
+                        {feat.title}:
+                      </span>
+                      <span className="text-xs text-slate-600 leading-relaxed text-justify block">
+                        {feat.desc}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
 
-        {/* Facilities + CTA */}
-        <section className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          {/* Facility Standards */}
-          <div className="lg:col-span-7 rounded-3xl border border-gray-200 bg-white p-8 md:p-10">
-            <h2 className="text-3xl font-semibold text-gray-900 mb-8">
-              {t("facilitiesTitle")}
-            </h2>
-
-            <div className="grid md:grid-cols-2 gap-8">
-              {facilitiesRaw.map((facility, index) => (
-                <div key={index} className="flex gap-4">
-                  <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-red-50 text-[#A11D1D] font-semibold">
-                    {index + 1}
-                  </div>
-
-                  <div>
-                    <h3 className="text-base font-medium text-gray-900 mb-2">
-                      {facility.title}
-                    </h3>
-
-                    <p className="text-sm text-gray-600 leading-6">
-                      {facility.desc}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Partnership CTA */}
-          <div className="lg:col-span-5 rounded-3xl bg-gradient-to-br from-[#A11D1D] to-[#871818] p-8 md:p-10 text-white flex flex-col justify-between">
-            <div>
-              <h2 className="text-3xl font-semibold mb-5">
-                {t("partnerTitle")}
-              </h2>
-
-              <p className="text-white/85 leading-8 mb-8">
-                {t("partnerDescription")}
+        {/* Commitment Section */}
+        <section className="py-8">
+          <div className="relative bg-white border border-slate-100 rounded-3xl p-8 lg:p-12 overflow-hidden shadow-xs">
+            <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-red-500/5 rounded-full blur-[100px] pointer-events-none" />
+            
+            <div className="relative z-10 max-w-4xl mx-auto text-center space-y-6">
+              <span className="text-[#A11D1D] font-extrabold uppercase tracking-[0.25em] text-xs">
+                Quality Assurance
+              </span>
+              <h3 className="text-3xl font-black text-slate-900 tracking-tight font-headline">
+                {t("commitmentTitle")}
+              </h3>
+              <p className="text-slate-650 text-sm md:text-base max-w-3xl mx-auto leading-relaxed text-justify md:text-center">
+                {t("commitmentDescription")}
               </p>
-
-              <ul className="space-y-4">
-                {partnerFeatures.map((item, i) => (
-                  <li
-                    key={i}
-                    className="flex items-center gap-3 text-sm text-white/90"
-                  >
-                    <CheckCircle2 className="size-4 shrink-0" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
             </div>
-
-            <Link
-              href="/contact-us"
-              className="mt-10 rounded-xl bg-white py-3.5 text-center text-sm font-medium text-[#A11D1D] transition hover:bg-gray-50"
-            >
-              {t("partnerCta")}
-            </Link>
           </div>
         </section>
       </main>

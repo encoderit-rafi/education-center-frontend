@@ -36,7 +36,7 @@ export default function SocialSupport() {
           <div className="bg-white dark:bg-slate-900">
             <div className="p-2 space-y-2">
               <a
-                href="https://wa.me/97165531250"
+                href="https://wa.me/971555688035"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center p-3 rounded-2xl hover:bg-[#25D366]/10 transition-colors group"
@@ -54,7 +54,7 @@ export default function SocialSupport() {
               </a>
 
               <a
-                href="https://t.me/your_telegram_bot"
+                href="https://t.me/+971555688035"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center p-3 rounded-2xl hover:bg-sky-500/10 transition-colors group"
