@@ -954,13 +954,13 @@
     "form": {
       "fullName": "الاسم الكامل:*",
       "fullNamePlaceholder": "أدخل اسمك",
-      "fullNameError": "يجب أن يتكون الاسم الكامل من 3 أحرف على الأقل",
+      "fullNameError": "الاسم الكامل مطلوب",
       "mobile": "رقم الجوال:*",
       "mobilePlaceholder": "أدخل رقم الهاتف",
-      "mobileError": "يرجى إدخال رقم جوال صحيح",
+      "mobileError": "رقم الجوال مطلوب",
       "email": "البريد الإلكتروني:*",
       "emailPlaceholder": "email@example.com",
-      "emailError": "يرجى إدخال عنوان بريد إلكتروني صحيح",
+      "emailError": "البريد الإلكتروني مطلوب",
       "processing": "جاري المعالجة...",
       "submitBtn": "انضمام للجلسة"
     },

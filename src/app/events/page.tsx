@@ -34,11 +34,11 @@ import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 // Schema for event registration
 const getEventSchema = (t: any) => z.object({
-    fullName: z.string().min(3, t("form.fullNameError") || "Full name must be at least 3 characters"),
-    mobile: z.string().min(7, t("form.mobileError") || "Please enter a valid mobile number"),
-    email: z.string().email(t("form.emailError") || "Please enter a valid email address"),
-    country: z.string().min(1, "Please enter your country"),
-    city: z.string().min(1, "Please enter your city"),
+    fullName: z.string().min(1, t("form.fullNameError") || "Full Name is required"),
+    mobile: z.string().min(1, t("form.mobileError") || "Mobile Number is required"),
+    email: z.string().min(1, t("form.emailError") || "Email Address is required").email("Please enter a valid email address"),
+    country: z.string().min(1, "Country is required"),
+    city: z.string().min(1, "Emirate / City is required"),
 });
 
 // Helper to resolve dynamic event banner images

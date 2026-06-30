@@ -954,13 +954,13 @@
     "form": {
       "fullName": "Full Name:*",
       "fullNamePlaceholder": "Enter your name",
-      "fullNameError": "Full name must be at least 3 characters",
+      "fullNameError": "Full Name is required",
       "mobile": "Mobile No:*",
       "mobilePlaceholder": "Enter phone number",
-      "mobileError": "Please enter a valid mobile number",
+      "mobileError": "Mobile Number is required",
       "email": "Email Address:*",
       "emailPlaceholder": "email@example.com",
-      "emailError": "Please enter a valid email address",
+      "emailError": "Email Address is required",
       "processing": "Processing...",
       "submitBtn": "Join Session"
     },

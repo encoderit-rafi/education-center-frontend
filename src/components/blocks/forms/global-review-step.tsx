@@ -24,33 +24,37 @@ export interface ReviewSummaryGridProps {
   testInformation: ReviewField[];
 }
 
-function SummarySection({
+function SummaryCard({
   icon,
   title,
   fields,
+  colsClassName = "grid-cols-1 sm:grid-cols-2",
 }: {
   icon: React.ReactNode;
   title: string;
   fields: ReviewField[];
+  colsClassName?: string;
 }) {
   return (
-    <div className="space-y-6">
-      <div className="flex items-center gap-2 text-black">
-        {icon}
-        <span className="text-xs font-bold tracking-widest uppercase">
+    <div className="border border-slate-150 rounded-2xl bg-white overflow-hidden shadow-xs">
+      {/* Card Header */}
+      <div className="flex items-center gap-2.5 px-5 py-3.5 bg-slate-50 border-b border-slate-100 text-slate-800">
+        <span className="text-[#A11D1D]">{icon}</span>
+        <span className="text-xs font-black tracking-wider uppercase">
           {title}
         </span>
       </div>
-      <div className="space-y-4">
+      {/* Card Body */}
+      <div className={cn("grid gap-5 p-5", colsClassName)}>
         {fields.map((field, i) => (
-          <div key={i} className="flex flex-col">
-            <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">
+          <div key={i} className="flex flex-col space-y-1">
+            <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">
               {field.label}
             </span>
             <span
               className={cn(
-                "text-sm font-bold",
-                field.highlight ? "text-[#A11D1D]" : "text-slate-900",
+                "text-sm font-semibold leading-normal",
+                field.highlight ? "text-[#A11D1D] font-bold" : "text-slate-900",
               )}
             >
               {field.value ?? "N/A"}
@@ -68,21 +72,26 @@ export function ReviewSummaryGrid({
   testInformation,
 }: ReviewSummaryGridProps) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <SummarySection
-        icon={<User className="size-4" />}
-        title="Personal Details"
-        fields={personalDetails}
-      />
-      <SummarySection
-        icon={<ShieldCheck className="size-4" />}
-        title="Identity & Contact"
-        fields={identityContact}
-      />
-      <SummarySection
+    <div className="space-y-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <SummaryCard
+          icon={<User className="size-4" />}
+          title="Personal Details"
+          fields={personalDetails}
+          colsClassName="grid-cols-1 sm:grid-cols-2"
+        />
+        <SummaryCard
+          icon={<ShieldCheck className="size-4" />}
+          title="Identity & Contact"
+          fields={identityContact}
+          colsClassName="grid-cols-1 sm:grid-cols-2"
+        />
+      </div>
+      <SummaryCard
         icon={<Globe className="size-4" />}
         title="Test Information"
         fields={testInformation}
+        colsClassName="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
       />
     </div>
   );

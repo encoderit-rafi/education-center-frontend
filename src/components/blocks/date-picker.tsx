@@ -38,8 +38,17 @@ export function DatePicker({
   toYear,
   calendarClassName,
 }: DatePickerProps) {
+  const [open, setOpen] = React.useState(false);
+
+  const handleSelect = (date: Date | undefined) => {
+    if (onChange) {
+      onChange(date);
+    }
+    setOpen(false);
+  };
+
   return (
-    <Popover>
+    <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger
         render={
           <Button
@@ -65,7 +74,7 @@ export function DatePicker({
         <Calendar
           mode="single"
           selected={value}
-          onSelect={onChange}
+          onSelect={handleSelect}
           disabled={disabled}
           fromYear={fromYear}
           toYear={toYear}

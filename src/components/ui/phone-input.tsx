@@ -42,6 +42,8 @@ const PhoneInput: React.ForwardRefExoticComponent<PhoneInputProps> =
                     countrySelectComponent={CountrySelect}
                     inputComponent={InputComponent}
                     smartCaret={false}
+                    international={false}
+                    initialValueFormat="national"
                     value={value || undefined}
                     /**
                      * Handles the onChange event.
@@ -52,7 +54,7 @@ const PhoneInput: React.ForwardRefExoticComponent<PhoneInputProps> =
                      *
                      * @param {E164Number | undefined} value - The entered value
                      */
-                    onChange={(value) => onChange?.(value || ("" as RPNInput.Value))}
+                     onChange={(value) => onChange?.(value || ("" as RPNInput.Value))}
                     {...props}
                 />
             );
