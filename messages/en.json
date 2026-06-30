@@ -551,19 +551,19 @@
       "proctorFeatures": [
         {
           "title": "Multi-Stream Monitoring",
-          "desc": "Real-time invigilation through webcam, mobile camera, and screen sharing capabilities. Comprehensive coverage ensures maximum security."
+          "desc": "Ensure robust exam integrity with real-time oversight utilizing webcams, mobile cameras, and active screen capture for a completely secure assessment experience."
         },
         {
           "title": "Dedicated Support",
-          "desc": "Proctor and technical assistance available before and during exams. Test-takers can focus entirely on their assessment."
+          "desc": "Comprehensive proctor and technical support are accessible from setup through submission, allowing test-takers to remain completely focused on their exam material."
         },
         {
           "title": "Two-Way Communication",
-          "desc": "Seamless chat and voice interaction between proctors and test-takers. No additional software installation required."
+          "desc": "Proctors and candidates can communicate clearly via built-in chat and voice tools, with zero software installation or plugins required."
         },
         {
           "title": "AI Automated Flagging",
-          "desc": "Automated flagging system augments human monitoring. Suspicious activities identified in real-time for proctor review."
+          "desc": "A smart automated system enhances human oversight by instantly detecting and highlighting questionable behavior for the proctor's evaluation."
         }
       ],
       "tabCandidate": "Candidate View",
@@ -623,7 +623,8 @@
           "Event logs for accountability and audit trail",
           "Supports IRT & CTT psychometric analysis tools"
         ]
-      }
+      },
+      "cardDescription": "Design and administer multilingual assessment programs equipped with bulk question importing, advanced exam-building capabilities, and comprehensive performance analytics."
     },
     "nexus": {
       "title": "SmarTest Nexus",
@@ -638,7 +639,61 @@
         "Integration with your Testing Engine",
         "Result access and performance tracking"
       ],
-      "description2": "Simplify your entire assessment lifecycle with SmarTest Nexus, an all-in-one platform built for maximum efficiency. It allows you to securely and smoothly manage everything from student registration to final test results in one convenient place."
+      "description2": "Simplify your entire assessment lifecycle with SmarTest Nexus, an all-in-one platform built for maximum efficiency. It allows you to securely and smoothly manage everything from student registration to final test results in one convenient place.",
+      "cardDescription": "Take complete control of your program with built-in tools for handling payments, registrations, candidate tracking, and venue logistics.",
+      "candidateManagement": {
+        "title": "Candidate Profile Management",
+        "features": [
+          {
+            "title": "Self-Registration & Verification",
+            "desc": "Allows users to sign up on their own, utilizing automatic profile verification to ensure data accuracy and system security."
+          },
+          {
+            "title": "Public Shop Access",
+            "desc": "Features an easy-to-use online shop where users can quickly browse and buy courses and assessment materials."
+          },
+          {
+            "title": "Event Management",
+            "desc": "Take the hassle out of event planning with user-friendly tools and automated workflows that streamline your scheduling and management tasks."
+          },
+          {
+            "title": "Historical Data Records",
+            "desc": "Securely archives historical event details, candidate profiles, and test scores for quick access and streamlined reporting."
+          }
+        ]
+      },
+      "paymentSystem": {
+        "title": "Payment System",
+        "features": [
+          {
+            "title": "Integrated Payment Gateway",
+            "desc": "Includes an inbuilt payment solution."
+          },
+          {
+            "title": "Flexible Payment Options",
+            "desc": "Supports transactions via debit cards, credit cards, and PayPal."
+          },
+          {
+            "title": "Voucher Generation",
+            "desc": "Offers the ability to create and manage vouchers seamlessly."
+          }
+        ]
+      },
+      "proctorManagement": {
+        "title": "Proctor Management",
+        "description": "Nexus goes beyond candidate features by providing a dedicated portal for proctors, allowing them to:",
+        "features": [
+          "Access and manage their profiles",
+          "View upcoming and past session assignments",
+          "Receive real-time notifications and reminders",
+          "Access key event details anytime"
+        ]
+      },
+      "empower": {
+        "title": "Empower Your Organisation",
+        "p1": "SmarTest Nexus is more than just a software system—it completely revolutionizes the way you manage assessments.",
+        "p2": "Step into the future of testing. Boost your operational efficiency and streamline your entire assessment process with the platform that leads the industry."
+      }
     },
     "whySmartest": {
       "badge": "Why SmarTest?",
@@ -694,9 +749,9 @@
       "title": "Join Our Academic Network",
       "subtitle": "TEPTH Academic Atelier partners with forward-thinking institutions to redefine the value of certification. Let's discuss your organization's specific needs.",
       "directInquiriesTitle": "Direct Inquiries",
-      "directInquiriesText": "partnerships@tepth.academy",
+      "directInquiriesText": "info@tepth.org",
       "institutionalSupportTitle": "Institutional Support",
-      "institutionalSupportText": "+971 4 000 0000"
+      "institutionalSupportText": "+97165531250"
     },
     "partnershipLogos": {
       "badge": "Strategic Alliance",
