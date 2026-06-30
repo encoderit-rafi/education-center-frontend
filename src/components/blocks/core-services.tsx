@@ -7,8 +7,9 @@ import {
   Lock,
   Globe,
   Users,
-  BarChart3,
   Building2,
+  BookOpen,
+  GraduationCap,
 } from "lucide-react";
 import {
   BaseCard,
@@ -22,10 +23,11 @@ const SERVICE_HREFS = [
   "/paid-mock-tests/ielts",
   "/test-your-english",
   "/free-consultation",
+  "/exam-preparation-courses",
+  "/exam-preparation-courses",
   "/exam-proctoring-services/institutions",
   "/exam-delivery/exam-provider",
   "/special-accommodation",
-  "/assessment-solutions",
   "/our-venues/book-an-exam-venue",
 ];
 
@@ -33,10 +35,11 @@ const SERVICE_ICONS = [
   ClipboardList,
   CheckCircle2,
   MessageSquare,
+  BookOpen,
+  GraduationCap,
   Lock,
   Globe,
   Users,
-  BarChart3,
   Building2,
 ];
 

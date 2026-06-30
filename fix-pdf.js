@@ -18,7 +18,7 @@ code = code.replace(
               <span>Corniche Rd, Al Mamzar, Sharjah, UAE</span>
               <div className="pdf-header-contact-meta">
                 <span><strong>Tel:</strong> +971 6 553 1250</span>
-                <span><strong>Web:</strong> www.tepth.com</span>`,
+                <span><strong>Web:</strong> www.tepth.org</span>`,
   `          <div className="pdf-header-contact">
             <strong>{t("Pdf.companyName")}</strong>
             <div className="pdf-header-contact-details">
@@ -26,7 +26,7 @@ code = code.replace(
               <span>{t("Pdf.addressL2")}</span>
               <div className="pdf-header-contact-meta">
                 <span><strong>{t("Pdf.tel")}:</strong> +971 6 553 1250</span>
-                <span><strong>{t("Pdf.web")}:</strong> www.tepth.com</span>`
+                <span><strong>{t("Pdf.web")}:</strong> www.tepth.org</span>`
 );
 
 code = code.replace(

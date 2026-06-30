@@ -163,8 +163,8 @@ export default function Footer() {
 
               <ContactItem
                 icon={Globe}
-                copyText="www.tepth.com"
-                value={`${t("webLabel", { defaultValue: "Web:" })} www.tepth.com`}
+                copyText="www.tepth.org"
+                value={`${t("webLabel", { defaultValue: "Web:" })} www.tepth.org`}
               />
             </div>
           </div>

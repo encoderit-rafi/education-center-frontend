@@ -56,6 +56,14 @@
           "description": "15 minutes with one of our teachers — ask about exams, courses, or preparation strategies."
         },
         {
+          "title": "Exam Prep Courses",
+          "description": "Comprehensive preparation courses designed to help you succeed in IELTS, TOEFL, PTE, and GRE."
+        },
+        {
+          "title": "Exam Prep Workshops",
+          "description": "Focused, intensive workshops covering key strategies, tips, and mock practices for major exams."
+        },
+        {
           "title": "Exam Proctoring Services",
           "description": "Professional proctoring services for institutions and remote test takers."
         },
@@ -66,10 +74,6 @@
         {
           "title": "Special Accommodation",
           "description": "Tailored exam conditions for candidates with disabilities or special requirements."
-        },
-        {
-          "title": "Assessment Solutions",
-          "description": "Customised language assessment services for organisations and institutions."
         },
         {
           "title": "Book An Exam Venue",
@@ -117,8 +121,8 @@
           "description": "Our team answers your questions via WhatsApp, Telegram, or our contact form."
         },
         {
-          "title": "Instant Tax Invoices",
-          "description": "VAT-compliant tax invoice automatically emailed to you after every payment."
+          "title": "Instant Invoice",
+          "description": "Invoice automatically emailed to you after every payment."
         }
       ]
     },
@@ -397,7 +401,7 @@
         "parkingTitle1": "Parking",
         "parkingTitle2": "Information",
         "onSiteParking": "On-Site Parking",
-        "onSiteParkingText1": "There are visitor parking spaces available at the back of ",
+        "onSiteParkingText1": "There are visitor parking spaces available in front of the ",
         "onSiteParkingText2": "Tabarak Tower",
         "publicParking": "Public Parking",
         "publicParkingText1": "Metered parking is also available near the tower at a rate of ",
@@ -965,7 +969,8 @@
       "submitBtn": "Join Session"
     },
     "otherEventsTitle": "Other Upcoming Events",
-    "otherEventsDesc": "Stay tuned for more information sessions coming soon including TOEFL iBT workshops and PTE-A training weeks."
+    "otherEventsDesc": "Stay tuned for more information sessions coming soon including TOEFL iBT workshops and PTE-A training weeks.",
+    "noEventsTitle": "event coming soon..."
   },
   "ExamDeliveryPage": {
     "ExamProviderPage": {
@@ -1281,10 +1286,6 @@
       {
         "question": "Do you offer individual tutoring?",
         "answer": "Yes, both group and one-to-one tutoring are available."
-      },
-      {
-        "question": "Is the registration fee refundable?",
-        "answer": "No, it is not refundable."
       },
       {
         "question": "What happens if I cancel or withdraw?",
@@ -3207,7 +3208,7 @@
     "copyright": "© {year} TEPTH. All Rights Reserved.",
     "Menu": "Menu",
     "banner": {
-      "marqueeText": "Authorized Test Centre · IELTS · TOEFL iBT · PTE · CELPIP G · Skills for English (SELT) . Save up to 25% when you book your exam and register for the course with TEPTH and pay in-person or online on our website"
+      "marqueeText": "Authorized Test Centre · IELTS · TOEFL iBT · PTE · GRE . Save up to 25% on some of our courses when you book your exam and register for the course with TEPTH and pay in-person or online on our website"
     },
     "menu": {
       "home": "Home",
@@ -3397,7 +3398,11 @@
       "securePayment": "Secure Online Payment",
       "quickInfoDuration": "{duration}-hour intensive session",
       "certifiedInstructors": "Certified Instructors",
-      "licensedCenter": "Licensed Prep. Center"
+      "licensedCenter": "Licensed Prep. Center",
+      "mockTestType": "Workshop Type",
+      "selectMockTestType": "Select your workshop type",
+      "online": "Online",
+      "inPerson": "In Person"
     }
   },
   "FeesPage": {
@@ -3739,6 +3744,7 @@
     "examCategory": "Exam Category",
     "payment": "Payment",
     "paymentMethod": "Payment Method",
+    "total": "Total",
     "creditDebitCard": "Credit / Debit Card",
     "processing": "Processing...",
     "acceptPay": "I Accept, Pay",

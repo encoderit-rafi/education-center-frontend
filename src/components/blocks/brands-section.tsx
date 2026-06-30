@@ -5,24 +5,20 @@ import { useTranslations } from "next-intl";
 
 const brands = [
   {
-    name: "CAEL",
-    img: "/images/brands/cael.png",
-  },
-  {
-    name: "CELPIP",
-    img: "/images/brands/celpip.png",
-  },
-  {
     name: "IELTS",
     img: "/images/brands/ielts.png",
   },
   {
-    name: "Skills for English",
-    img: "/images/brands/skills-for-english.png",
-  },
-  {
     name: "TOEFL",
     img: "/images/brands/toefl.png",
+  },
+  {
+    name: "GRE",
+    img: "/images/brands/gre-logo.png",
+  },
+  {
+    name: "Pearson PTE",
+    img: "/images/brands/pearson-logo.png",
   },
 ];
 

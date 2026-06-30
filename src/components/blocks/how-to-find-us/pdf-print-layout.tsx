@@ -377,7 +377,7 @@ export function PdfPrintLayout() {
               <span>{t("Pdf.addressL2")}</span>
               <div className="pdf-header-contact-meta">
                 <span><strong>{t("Pdf.tel")}:</strong> +971 6 553 1250</span>
-                <span><strong>{t("Pdf.web")}:</strong> www.tepth.com</span>
+                <span><strong>{t("Pdf.web")}:</strong> www.tepth.org</span>
               </div>
             </div>
           </div>
@@ -576,7 +576,7 @@ export function PdfPrintLayout() {
             </div>
             <div style={{ textAlign: "right" }}>
               +971 6 553 1250<br />
-              www.tepth.com
+              www.tepth.org
             </div>
           </div>
 

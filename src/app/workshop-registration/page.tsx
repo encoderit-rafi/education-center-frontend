@@ -98,6 +98,7 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
   const examId = searchParams.get("examId"); // e.g. "ielts"
   const workshopId = searchParams.get("workshopId"); // workshop ID (UUID)
   const priceParam = searchParams.get("price");
+  const typeParam = searchParams.get("type");
 
   // Fetch course details (includes workshops array)
   const { data: courseData, isLoading } = useQuery({
@@ -216,6 +217,7 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
       total_amount,
       vat_amount: vatAmount,
       payment_methods: formData.paymentMethod,
+      location: searchParams.get("type") || "",
     };
 
     mutation.mutate(omitEmpty(payload));
@@ -403,6 +405,14 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
                         {workshop?.duration}-Hour {courseData?.name} Workshop
                       </p>
                     </div>
+                    {typeParam && (
+                      <div>
+                        <p className="text-xs text-slate-400">Workshop Type</p>
+                        <p className="font-bold text-slate-900 text-base">
+                          {typeParam}
+                        </p>
+                      </div>
+                    )}
                   </div>
                 </div>
 

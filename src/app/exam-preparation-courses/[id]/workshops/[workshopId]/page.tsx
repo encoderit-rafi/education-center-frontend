@@ -21,6 +21,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { PriceDisplay } from "@/components/ui/price-display";
 import { WorkshopChecklistSection, WorkshopStatCard } from "./components";
+import { WorkshopBookingSidebar } from "./WorkshopBookingSidebar";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -280,58 +281,26 @@ export default async function WorkshopDetailPage({ params }: PageProps) {
           </div>
 
           {/* ── Right Column: Pricing & CTA ── */}
-          <div className="lg:sticky lg:top-8 bg-white rounded-3xl p-6 md:p-8 border border-slate-100 shadow-xl space-y-6">
-            <div>
-              <p className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-2">
-                {t("workshops.pricingTitle")}
-              </p>
-              <div className="flex items-baseline gap-3 flex-wrap">
-                <PriceDisplay
-                  amount={discountedPrice}
-                  className="text-4xl font-black text-primary"
-                />
-                {discountRaw > 0 && (
-                  <span className="text-lg text-slate-400 line-through decoration-slate-300 flex items-center gap-1">
-                    <PriceDisplay
-                      amount={basePrice}
-                      iconClassName="h-[0.7em]"
-                    />
-                  </span>
-                )}
-              </div>
-              {discountRaw > 0 && (
-                <div className="mt-2.5">
-                  <Badge className="py-1 px-3 font-bold shadow-sm bg-emerald-50 text-emerald-600 hover:bg-emerald-50/80 border-emerald-200">
-                    {t("workshops.saveInstant", {
-                      discount: discountRaw,
-                      type:
-                        workshop.discountType === "PERCENTAGE" ? "%" : " AED",
-                    })}
-                  </Badge>
-                </div>
-              )}
-            </div>
-
+          <WorkshopBookingSidebar
+            discountedPrice={discountedPrice}
+            basePrice={basePrice}
+            discountRaw={discountRaw}
+            discountType={workshop.discountType}
+            baseUrl={registrationUrl}
+            pricingTitle={t("workshops.pricingTitle")}
+            saveInstantText={t("workshops.saveInstant", {
+              discount: discountRaw,
+              type:
+                workshop.discountType === "PERCENTAGE" ? "%" : " AED",
+            })}
+            bookNowText={t("workshops.bookNow")}
+            securePaymentText={t("workshops.securePayment")}
+            mockTestTypeTitle={t("workshops.mockTestType")}
+            mockTestTypePlaceholder={t("workshops.selectMockTestType")}
+            onlineOptionText={t("workshops.online")}
+            inPersonOptionText={t("workshops.inPerson")}
+          >
             <div className="h-px bg-slate-100" />
-
-            <div className="space-y-4">
-              <Link
-                href={registrationUrl}
-                className={cn(
-                  buttonVariants({ size: "lg" }),
-                  "w-full font-black py-6 text-base shadow-md flex items-center justify-center gap-2 transition-all duration-300",
-                )}
-              >
-                {t("workshops.bookNow")}
-              </Link>
-              <p className="text-center text-xs text-slate-400 font-medium">
-                {t("workshops.securePayment")}
-              </p>
-            </div>
-
-            <div className="h-px bg-slate-100" />
-
-            {/* Quick info */}
             <div className="space-y-3.5">
               <div className="flex items-center gap-3 text-sm text-slate-600 font-semibold">
                 <Timer className="size-5 text-primary shrink-0" />
@@ -352,7 +321,7 @@ export default async function WorkshopDetailPage({ params }: PageProps) {
                 <span>{t("workshops.licensedCenter")}</span>
               </div>
             </div>
-          </div>
+          </WorkshopBookingSidebar>
         </div>
       </div>
       {/* Flexible Workshops Banner */}

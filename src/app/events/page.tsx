@@ -356,7 +356,7 @@ export default function EventsPage() {
                     <div className="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mb-6 border border-slate-100">
                         <Calendar className="w-9 h-9 text-gray-300" />
                     </div>
-                    <h3 className="text-xl font-black text-gray-900 mb-2">No upcoming events</h3>
+                    <h3 className="text-xl font-black text-gray-900 mb-2">{t("noEventsTitle")}</h3>
                     <p className="text-gray-400 text-sm max-w-xs leading-relaxed">{t("otherEventsDesc")}</p>
                 </section>
             </div>
