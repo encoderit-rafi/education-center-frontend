@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { cn, omitEmpty } from "@/lib/utils";
-import { VAT_PERCENT, calculateVat } from "@/lib/vat";
+import { VAT_PERCENT, calculateVatForCountry } from "@/lib/vat";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import api from "@/axios";
 import {
@@ -157,7 +157,7 @@ function CourseRegistrationForm({ className }: { className?: string }) {
 
   const discount_amount = couponDiscount;
   const subtotal = base_price - discount_amount;
-  const vatAmount = calculateVat(subtotal);
+  const vatAmount = calculateVatForCountry(subtotal, formData.country);
   const total_amount = subtotal + vatAmount;
 
   const handleApplyCoupon = async (e: React.MouseEvent) => {
@@ -549,7 +549,7 @@ function CourseRegistrationForm({ className }: { className?: string }) {
                       </span>
                     </div>
                   )}
-                  {VAT_PERCENT > 0 && (
+                  {vatAmount > 0 && (
                     <>
                       {discount_amount > 0 && (
                         <div className="flex justify-between items-center text-slate-600 pt-2 mt-2 border-t">
