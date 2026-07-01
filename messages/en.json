@@ -1791,9 +1791,9 @@
       ]
     },
     "ielts-general": {
-      "subtitle": "For migration, work experience, or secondary education",
+      "subtitle": "The IELTS General Training Exam: Your Key to Global Work and Life",
       "description": "The IELTS General Training test is designed to measure your English language proficiency in a practical, everyday context. The test reflects both workplace and social situations.",
-      "overview": "The IELTS General Training test is designed to measure your English language proficiency in a practical, everyday context. The test reflects both workplace and social situations. Take IELTS General Training if you want to work or undertake work-related training in an English-speaking country or emigrate to an English-speaking country.",
+      "overview": "The IELTS General Training test is specifically structured to evaluate your English language proficiency within practical, everyday environments. Rather than focusing on academic settings, this version of the exam mirrors the real-world communication skills needed for both professional workplaces and daily social interactions.\n\nWho should take this test? You should choose the IELTS General Training exam if you plan to:",
       "stats": [
         {
           "label": "Total Duration",
@@ -1820,21 +1820,24 @@
         {
           "name": "Listening Component",
           "duration": "30 minutes (+10m transfer time)",
-          "details": "The Listening Component is designed to assess a wide range of listening skills, including how well you understand main ideas and follow arguments.",
+          "details": "This section is designed to evaluate a diverse range of auditory comprehension skills. It specifically measures your ability to process spoken English by focusing on how well you can:",
           "format": "You will listen to four recordings of native English speakers and then write your answers to a series of questions.\nRecording 1: a conversation between two people set in an everyday social context.\nRecording 2: a monologue set in an everyday social context, e.g. a speech about local facilities.\nRecording 3: a conversation between up to four people set in an educational or training context, e.g. a university tutor and a student discussing an assignment.\nRecording 4: a monologue on an academic subject, e.g. a university lecture.",
           "questions": "40 questions",
           "taskTypes": "multiple choice, matching, plan/map/diagram labelling, form/note/table/flow-chart/summary completion, sentence completion",
           "marks": "Each correct answer receives one mark. Scores out of 40 are converted to the IELTS 9-band scale. Scores are reported in whole and half bands.",
           "skills": [
-            "understand main ideas and specific factual information",
-            "recognise the opinions, attitudes and purpose of a speaker",
-            "follow the development of an argument"
+            "Grasp Core Concepts: Accurately identify and comprehend the primary themes and main messages presented in a conversation or monologue.",
+            "Track Discussions: Logically follow the progression of thoughts, details, and conversational arguments."
           ]
         },
         {
           "name": "Reading Component",
           "duration": "60 minutes",
-          "details": "The IELTS Reading test takes approximately 60 minutes, including the time it takes to transfer your answers from your question booklet to your answer sheet.",
+          "details": "This section evaluates your reading comprehension within a strict 60-minute timeframe. It is crucial to pace yourself effectively throughout the assessment, as this one-hour limit must cover all your reading and answering activities.\n\nKey details of this section include:",
+          "skills": [
+            "Strict Time Management: You have exactly one hour to complete the entire reading assessment.",
+            "Answer Transfer: No additional time is provided at the end of the test to move your answers. You must factor in the time needed to transfer your responses from the question booklet onto the official answer sheet within the allotted 60 minutes."
+          ],
           "format": "Extracts from books, magazines, newspapers, notices, advertisements, company handbooks and guidelines. These are materials you are likely to encounter on a daily basis in an English-speaking environment.",
           "questions": "40 questions",
           "taskTypes": "Multiple choice, identifying information, identifying writer's views/claims, matching information, matching headings, matching features, matching sentence endings, sentence completion, summary completion, note completion, table completion, flow-chart completion, diagram label completion, short-answer questions.",
@@ -1843,7 +1846,11 @@
         {
           "name": "Writing Component",
           "duration": "60 minutes",
-          "details": "Write responses to practical and general prompts. Consists of two tasks that must be managed within the hour.",
+          "details": "This section evaluates your ability to produce written English for everyday, practical situations. You will have a strict 60-minute time limit to successfully manage and complete two distinct writing tasks.\n\nKey features of this section include:",
+          "skills": [
+            "Real-World Prompts: Your writing tasks will be based on general, practical scenarios, assessing your ability to communicate effectively in everyday social or workplace contexts.",
+            "Time Management: You must strategically allocate your one hour to ensure both writing tasks are fully addressed and completed."
+          ],
           "format": "Task 1: Write a letter requesting information or explaining a situation (150+ words).\nTask 2: Write an essay in response to a point of view, argument or problem (250+ words).",
           "questions": "2 tasks",
           "taskTypes": "Task 1 (Letter Writing) and Task 2 (Essay)",
@@ -1857,9 +1864,8 @@
         }
       ],
       "whoShouldTake": [
-        "Individuals planning to work or undertake work-related training in an English-speaking country",
-        "Those who wish to emigrate to an English-speaking country",
-        "People looking to demonstrate proficiency in a practical, everyday context"
+        "Advance Your Career: Secure employment or participate in occupational training programs in an English-speaking country.",
+        "Immigrate Abroad: Fulfill the language requirements necessary for permanent residency or citizenship applications."
       ],
       "acceptedFor": [
         "Work Permits",
@@ -1874,10 +1880,10 @@
         }
       ]
     },
-    "ielts-ukvi-academic": {
-      "subtitle": "For study at degree level and above in the UK",
-      "description": "IELTS Academic for UKVI measures whether your level of English language proficiency is suitable for an academic environment.",
-      "overview": "IELTS Academic for UKVI is a Secure English Language Test (SELT) that is required for student visa applications to the UK for courses at degree level and above.",
+    "ielts-for-ukvi-academic": {
+      "subtitle": "IELTS for UKVI (Academic): Approved for UK Visas and Immigration",
+      "description": "The IELTS for UKVI (Academic) is a UK Home Office-approved Secure English Language Test (SELT) specifically designed for individuals applying for UK student visas or seeking professional registration in the United Kingdom.",
+      "overview": "The IELTS for UKVI (Academic) is a UK Home Office-approved Secure English Language Test (SELT) specifically designed for individuals applying for UK student visas or seeking professional registration in the United Kingdom.\n\nWhile this exam features the exact same format, content, and scoring system as the standard IELTS Academic test, it is administered in specialized testing centers equipped with stringent, enhanced security measures, such as voice recording and CCTV monitoring.\n\n**Important Registration Note**: The standard IELTS Academic test is *not* accepted for UK visa applications. To fulfill UK immigration requirements, you must explicitly select the \"IELTS for UKVI\" option and book your exam exclusively through an officially authorized UKVI test center.",
       "stats": [
         {
           "label": "Test Duration",
@@ -1919,17 +1925,20 @@
         }
       ],
       "whoShouldTake": [
-        "Students applying for UK student visas (degree level)"
+        "Assessment Components: The test evaluates your English proficiency across four areas: Listening, Reading, Writing, and Speaking, with the Speaking portion conducted as a face-to-face interview.",
+        "Testing Options & Results: The exam is available in both paper-based and computer-delivered formats at approved UKVI locations. If you choose the computer-delivered option, you can typically expect your results within 3 to 5 days.",
+        "Score Requirements: Minimum score thresholds depend entirely on your specific visa category. For instance, student visas generally require a minimum score of 5.5 across all components, whereas other immigration routes may only require a 4.0.",
+        "Certification Validity: Your official Test Report Form will feature a unique identification prefix confirming it meets UKVI standards. These test results remain valid for exactly two years."
       ],
       "acceptedFor": [
         "UK Visas and Immigration (UKVI)",
         "UK Universities"
       ]
     },
-    "ielts-ukvi-general": {
-      "subtitle": "For migration and work in the UK",
-      "description": "IELTS General Training for UKVI measures English language proficiency in a practical, everyday context.",
-      "overview": "IELTS General Training for UKVI is a Secure English Language Test (SELT) required for UK visa applications for migration, work, or secondary education.",
+    "ielts-for-ukvi-general-training": {
+      "subtitle": "IELTS General Training for UKVI: Approved for UK Work and Migration",
+      "description": "The IELTS General Training for UKVI is a Secure English Language Test (SELT) officially mandated by the UK Home Office for individuals applying for work, migration, or vocational training visas in the United Kingdom. It shares the exact same content, format, scoring system, and level of difficulty as the standard IELTS General Training exam.",
+      "overview": "The IELTS General Training for UKVI is a Secure English Language Test (SELT) officially mandated by the UK Home Office for individuals applying for work, migration, or vocational training visas in the United Kingdom. It shares the exact same content, format, scoring system, and level of difficulty as the standard IELTS General Training exam.\n\nThe crucial distinction lies in the administrative requirements. The UKVI version is conducted under enhanced security protocols at officially authorized testing centers. Furthermore, your final Test Report Form (TRF) will include a Unique Reference Number (URN), which is necessary to validate your UK visa application.\n\nTest Format Breakdown\n\nThe entire assessment takes 2 hours and 45 minutes to complete and evaluates your proficiency across four fundamental communication skills:",
       "stats": [
         {
           "label": "Test Duration",
@@ -1971,18 +1980,20 @@
         }
       ],
       "whoShouldTake": [
-        "Migrants to the UK",
-        "Work visa applicants"
+        "Listening (30 Minutes): You will answer 40 questions based on four audio recordings featuring everyday conversations and educational monologues.",
+        "Reading (60 Minutes): This section includes 40 questions designed to test your comprehension of texts related to daily life, workplace scenarios, and general interest topics.",
+        "Writing (60 Minutes): You must complete two distinct tasks. Task 1 involves writing a formal or informal letter, while Task 2 requires you to compose a semi-formal essay.",
+        "Speaking (11–14 Minutes): Divided into three parts, this is a live, face-to-face interactive interview where you will discuss familiar topics such as your family, work, or hobbies."
       ],
       "acceptedFor": [
         "UK Visas and Immigration (UKVI)",
         "UK Work Permits"
       ]
     },
-    "ielts-life-skills-a1": {
-      "subtitle": "For Family, Spouse or Partner visas",
-      "description": "IELTS Life Skills A1 measures Speaking and Listening skills at CEFR Level A1.",
-      "overview": "This test is for those who need to prove their English speaking and listening skills as part of their application to UK Visas and Immigration for 'family of a settled person' visas.",
+    "ielts-for-ukvi-life-skills-a1": {
+      "subtitle": "IELTS for UKVI Life Skills A1: English for Family and Spouse Visas",
+      "description": "The IELTS for UKVI Life Skills A1 is a Secure English Language Test (SELT) focused entirely on speaking and listening at CEFR Level A1. It is designed for individuals seeking family, spouse, or partner visas in the United Kingdom, evaluating basic English communication skills in practical, everyday contexts.",
+      "overview": "The IELTS for UKVI Life Skills A1 is a Secure English Language Test (SELT) focused entirely on speaking and listening at CEFR Level A1. It is designed for individuals seeking family, spouse, or partner visas in the United Kingdom, evaluating basic English communication skills in practical, everyday contexts.\n\nTest Format Breakdown\n\nUnlike standard IELTS exams, the Life Skills A1 assessment does not involve any reading or writing components.\n• **Interactive Structure**: The test is conducted in person with a certified examiner and one other candidate. Rest assured, the other test-taker's performance will not negatively impact your results.\n• **Skill Focus**: You will be evaluated strictly on your ability to listen accurately and communicate effectively in conversational English.\n\nCommon Test Topics\n\nThe assessment revolves around practical, everyday experiences. You should be prepared to comfortably discuss common subjects, including:\n• Personal information (e.g., your name and age)\n• Family members and friends\n• Your daily schedule and routines\n• The weather\n• Transportation and travel\n• Your job or hobbies\n• Your housing situation and local neighborhood\n• Shopping and purchasing everyday goods\n\nScoring and Results\n\nYou will not receive a traditional numerical IELTS band score for this assessment. Instead, your results will simply be issued as a **Pass** or **Fail**. Achieving a \"Pass\" officially confirms that you have met the required English language standards for your visa application.",
       "stats": [
         {
           "label": "Duration",
@@ -2004,21 +2015,19 @@
           "details": "Face-to-face interview with an examiner and another test taker."
         }
       ],
-      "whoShouldTake": [
-        "UK Family/Spouse visa applicants"
-      ],
+      "whoShouldTake": [],
       "acceptedFor": [
         "UK Visas and Immigration (UKVI)"
       ]
     },
-    "ielts-life-skills-a2": {
-      "subtitle": "For Family visa extension",
-      "description": "IELTS Life Skills A2 measures Speaking and Listening skills at CEFR Level A2.",
-      "overview": "This test is for those who need to prove their English speaking and listening skills as part of their application to UK Visas and Immigration for extension to Family, Spouse or Partner visa.",
+    "ielts-for-ukvi-life-skills-a2": {
+      "subtitle": "IELTS for UKVI Life Skills A2: English for Visa Extensions",
+      "description": "The IELTS for UKVI Life Skills A2 is a concise, 16-18 minute Secure English Language Test focused entirely on speaking and listening. It is specifically designed for individuals seeking to extend their family, spouse, or partner visas in the United Kingdom, evaluating basic English communication skills in practical, everyday contexts.",
+      "overview": "The IELTS for UKVI Life Skills A2 is a concise, 16-18 minute Secure English Language Test focused entirely on speaking and listening. It is specifically designed for individuals seeking to extend their family, spouse, or partner visas in the United Kingdom, evaluating basic English communication skills in practical, everyday contexts.\n\nTest Format Breakdown\n\nUnlike standard IELTS exams, the Life Skills A2 assessment does not involve any reading or writing components.\n• **Interactive Structure**: The test is conducted in person with a certified examiner and one other candidate. Rest assured, the other test-taker's performance will not negatively impact your results.\n• **Skill Focus**: You will be evaluated strictly on your ability to listen accurately and communicate effectively in conversational English.\n\nCommon Test Topics\n\nDiscussions during the exam are based on familiar, everyday subjects. You should be prepared to talk about:\n• Personal details and daily routines\n• Family members and friends\n• Shopping and transportation\n• Health, leisure activities, and the weather\n• Education, employment, and your housing situation\n\nScoring and Results\n\nYou will not receive a traditional numerical IELTS band score for this assessment. Instead, your results will simply be issued as a **Pass** or **Fail**. Achieving a \"Pass\" officially confirms that you have met the required English language standards for your visa extension.",
       "stats": [
         {
           "label": "Duration",
-          "value": "18–20 mins"
+          "value": "16–18 mins"
         },
         {
           "label": "Results In",
@@ -2032,21 +2041,19 @@
       "sections": [
         {
           "name": "Speaking & Listening",
-          "duration": "18–20 min",
+          "duration": "16–18 min",
           "details": "Face-to-face interview with an examiner and another test taker."
         }
       ],
-      "whoShouldTake": [
-        "UK Family visa extension applicants"
-      ],
+      "whoShouldTake": [],
       "acceptedFor": [
         "UK Visas and Immigration (UKVI)"
       ]
     },
-    "ielts-life-skills-b1": {
-      "subtitle": "For Citizenship and Settlement",
-      "description": "IELTS Life Skills B1 measures Speaking and Listening skills at CEFR Level B1.",
-      "overview": "This test is for those who need to prove their English speaking and listening skills as part of their application to UK Visas and Immigration for indefinite leave to remain or citizenship.",
+    "ielts-for-ukvi-life-skills-b1": {
+      "subtitle": "IELTS for UKVI Life Skills B1: English for Settlement and Citizenship",
+      "description": "The IELTS for UKVI Life Skills B1 is a Secure English Language Test (SELT) officially mandated by the UK Home Office for individuals seeking Indefinite Leave to Remain (ILR), settlement, or British Citizenship. This assessment focuses entirely on your face-to-face communication abilities, meaning there are no reading or writing components involved.",
+      "overview": "The IELTS for UKVI Life Skills B1 is a Secure English Language Test (SELT) officially mandated by the UK Home Office for individuals seeking Indefinite Leave to Remain (ILR), settlement, or British Citizenship. This assessment focuses entirely on your face-to-face communication abilities, meaning there are no reading or writing components involved.\n\nTest Overview\n• **Interactive Format**: The exam is conducted in person with one certified examiner and a second test-taker. Rest assured, the other candidate's performance will not impact your final outcome.\n• **Duration**: The entire assessment takes approximately 22 minutes to complete.\n• **Skill Focus**: Evaluates strictly your speaking and listening proficiencies.\n• **Scoring System**: You will not receive a traditional numerical band score; results are issued simply as a **Pass** or **Fail**.\n\nTest Structure & Phases\n\nAt the B1 level, you are expected to demonstrate the ability to gather and share information, express your preferences, and maintain a structured, coherent discussion. The exam is broken down into four key parts:\n• **Phase 1A (Introduction & Interview)**: You will introduce yourself, provide personal details, and answer basic questions regarding daily life.\n• **Phase 1B (Presentation & Q&A)**: You will deliver a brief spoken presentation (about 1.5 minutes) on a chosen topic, followed by answering questions posed by the other candidate.\n• **Phase 2A (Listening Comprehension)**: You will listen to two short audio recordings, answer specific questions about the content, and discuss what you heard.\n• **Phase 2B (Collaborative Planning)**: You will work together with the other test-taker to discuss a prompt, plan a scenario, or solve a practical problem.\n\nCommon Test Topics\n\nAll tasks throughout the exam revolve around familiar, everyday themes. You should be comfortable discussing subjects such as:\n• Family, friends, and social life\n• Employment, education, and professional training\n• Health, leisure activities, free time, and media\n• Shopping and transportation\n• Your local housing situation and the weather",
       "stats": [
         {
           "label": "Duration",
@@ -2068,29 +2075,27 @@
           "details": "Face-to-face interview with an examiner and another test taker."
         }
       ],
-      "whoShouldTake": [
-        "UK Citizenship/Settlement applicants"
-      ],
+      "whoShouldTake": [],
       "acceptedFor": [
         "UK Visas and Immigration (UKVI)"
       ]
     },
     "toefl": {
-      "subtitle": "Test of English as a Foreign Language — Internet-Based Test",
-      "description": "The TOEFL iBT is an Internet-based English proficiency test that measures reading, listening, speaking, and writing skills in an academic context.",
-      "overview": "The TOEFL iBT is used primarily for academic admissions, immigration, and professional certification. It takes about 1.5 hours to complete in one sitting, though test takers should allow approximately two hours for the entire process including directions.\n\nAs the test adapts to each individual, the specific items and exact timing may vary slightly. It is widely recognized as one of the most respected English-language tests in the world, accepted by more than 11,500 universities and other institutions in over 160 countries.",
+      "subtitle": "The TOEFL iBT: A Global Standard for University Admissions",
+      "description": "Developed by the Educational Testing Service (ETS), the TOEFL iBT (Internet-Based Test) is a premier standardized assessment designed to evaluate your ability to use and comprehend English in an academic environment. It accurately measures your readiness to communicate effectively at the university level.",
+      "overview": "Developed by the Educational Testing Service (ETS), the TOEFL iBT (Internet-Based Test) is a premier standardized assessment designed to evaluate your ability to use and comprehend English in an academic environment. It accurately measures your readiness to communicate effectively at the university level.\n\n**Unmatched Global Recognition**: As one of the most trusted English proficiency exams, the TOEFL iBT opens doors to higher education worldwide. It is officially recognized and accepted by more than 13,000 universities, colleges, and educational institutions across over 160 countries.\n\n**The 2026 TOEFL iBT Format: Everything You Need to Know**\n\nStarting **January 21, 2026**, the TOEFL iBT is undergoing its most significant update in decades. ETS is modernizing the exam to make it shorter, fully adaptive, and better aligned with real-world language use.\n\nWhether you are aiming for undergraduate admission or a highly competitive graduate program, here is exactly what you need to know about the new 90-minute test.\n\n**What's Changing at a Glance**\n• **Shorter Duration**: The test has been compressed from roughly two hours down to just **90 minutes** running completely back-to-back with no scheduled breaks.\n• **Adaptive Difficulty**: The Reading and Listening sections now feature multistage adaptive testing. How well you perform in the first module directly determines the difficulty of the second.\n• **New Scoring Scale**: The traditional 0–120 score is being replaced by a **1.0 to 6.0 band scale** to align directly with the CEFR (Common European Framework of Reference).\n• **Faster Results**: Official scores will now be delivered to test-takers within 72 hours.\n\n**Crucial test-day tip**: The Speaking section has been entirely redesigned. Long, prepared academic speeches are out. Instead, you will be evaluated on spontaneous verbal recall and conversational fluency, with zero preparation time given before you speak.\n\n**Understanding the New 1.0 to 6.0 Scale**\n\nFor decades, the standard for a \"good\" TOEFL score was usually around 80 to 100+. The new system simplifies this by using a 1.0 to 6.0 band (in 0.5 increments).\n• **How it is calculated**: Each of the four sections receives a score from 1.0 to 6.0. Your overall score is the average of those four sections, rounded to the nearest half-band.\n• **The CEFR Alignment**: A score of **6.0** indicates C2 Mastery (equivalent to the old 107–120). A **5.0** or **5.5** indicates C1 Advanced (95–106), which is the standard for highly competitive programs. A **4.0** or **4.5** hits the B2 Upper Intermediate level (72–94), satisfying most standard university admissions.\n• **The Transition Phase (2026–2028)**: Do not panic if universities still ask for a \"100 on the TOEFL.\" Through January 2028, ETS will issue score reports showing both the new 1.0–6.0 band and your comparable 0–120 score to help admissions teams adjust.",
       "stats": [
         {
           "label": "Total Duration",
-          "value": "~2 Hours"
+          "value": "90 Minutes"
         },
         {
           "label": "Score Scale",
-          "value": "0–120"
+          "value": "1.0–6.0 Bands"
         },
         {
           "label": "Results In",
-          "value": "3 Days"
+          "value": "72 Hours"
         },
         {
           "label": "Validity",
@@ -2104,30 +2109,30 @@
       "sections": [
         {
           "name": "Reading",
-          "duration": "Approx. 30 minutes",
-          "details": "Read academic and daily life texts to evaluate comprehension.",
-          "format": "• Complete the Words\n• Read in Daily Life\n• Read an Academic Passage",
+          "duration": "~30 minutes",
+          "details": "The Reading section now features multistage adaptive testing. How well you perform in the first module directly determines the difficulty of the second.",
+          "format": "• Complete the Words\n• Read in Daily Life\n• Read an Academic Passage (shorter)",
           "questions": "50 items"
         },
         {
           "name": "Listening",
-          "duration": "Approx. 29 minutes",
-          "details": "Evaluate your ability to understand conversations and lectures in English.",
-          "format": "• Listen and Choose a Response\n• Listen to a Conversation\n• Listen to an Announcement\n• Listen to an Academic Talk",
+          "duration": "~29 minutes",
+          "details": "The Listening section now features multistage adaptive testing. How well you perform in the first module directly determines the difficulty of the second.",
+          "format": "• Listen and Choose a Response\n• Listen to campus conversations, announcements, and academic talks",
           "questions": "47 items"
         },
         {
           "name": "Writing",
-          "duration": "Approx. 23 minutes",
-          "details": "Write responses to academic and practical prompts.",
-          "format": "• Build a Sentence\n• Write an Email\n• Write for an Academic Discussion",
+          "duration": "~23 minutes",
+          "details": "Write responses to academic and practical prompts assessing everyday communication.",
+          "format": "• Build a Sentence\n• Write an Email (7 mins)\n• Write for an Academic Discussion (10 mins)",
           "questions": "12 items"
         },
         {
           "name": "Speaking",
-          "duration": "Approx. 8 minutes",
-          "details": "Respond to prompts verbally to demonstrate speaking proficiency.",
-          "format": "• Listen and Repeat\n• Take an Interview",
+          "duration": "~8 minutes",
+          "details": "Spontaneous verbal recall and conversational fluency with zero preparation time.",
+          "format": "• Listen and Repeat (7 progressive prompts)\n• Take an Interview (4 conversational questions)",
           "questions": "11 items"
         }
       ],
@@ -2151,9 +2156,9 @@
       ]
     },
     "pte-academic": {
-      "subtitle": "Fast, computer-based English test for study and migration",
-      "description": "PTE Academic is a computer-based English test that assesses your academic-level speaking, writing, reading and listening skills in a single 2-hour sitting.",
-      "overview": "PTE Academic is the preferred choice for students planning to study at a university globally. It provides a fast, fair, and flexible way to prove your English level for academic admissions.\n\nBeyond academia, PTE Academic is widely accepted for work and migration visas, particularly for Australia and New Zealand. It is also uniquely recognized by the U.S. State Boards of Nursing for professional registration and work visas.",
+      "subtitle": "Your Guide to the PTE Academic Exam",
+      "description": "The **PTE Academic (Pearson Test of English Academic)** is one of the world's leading computer-based English language tests, designed specifically for international students and professionals.",
+      "overview": "Preparing to study or work abroad can feel overwhelming, but understanding your language proficiency requirements is a great first step. The **PTE Academic (Pearson Test of English Academic)** is one of the world's leading computer-based English language tests, designed specifically for international students and professionals.\n\nWhether you are applying to a university or seeking a visa, here is everything you need to know about the PTE Academic exam to help you prepare with confidence.\n\n**What is the PTE Academic?**\n\nThe PTE Academic assesses your English skills in an academic context. Instead of testing isolated grammar rules, it evaluates your ability to understand and communicate in real-life academic and everyday scenarios. You will listen to excerpts from university lectures, read graphs and academic passages, and speak your answers directly into a microphone.\n\n**Key Takeaway:** The entire exam is completed in a single session on a computer at a secure test center, making it a streamlined and efficient experience.\n\n**Why Choose the PTE Academic?**\n\nMany candidates prefer the PTE for its modern approach to testing. Here are a few reasons why it stands out:\n• **Fast Results:** Scores are typically available within **48 hours**, making it ideal for meeting tight application deadlines.\n• **Unbiased AI Scoring:** The test is graded entirely by an advanced artificial intelligence system, ensuring your spoken and written answers are judged objectively and consistently.\n• **Frequent Test Dates:** Test centers operate year-round, offering highly flexible scheduling.\n• **Shorter Duration:** The entire test takes just **2 hours** to complete, which helps reduce testing fatigue.\n\n**Test Format and Structure**\n\nThe PTE Academic consists of three main parts, all completed in one sitting.\n• **Part 1 – Speaking & Writing (54–67 minutes):** You will read aloud, repeat sentences, describe images, retell lectures, and write a short essay. This section tests your spoken fluency, pronunciation, and written grammar.\n• **Part 2 – Reading (29–30 minutes):** This section includes multiple-choice questions, reordering paragraphs, and fill-in-the-blanks. It evaluates your comprehension of written academic English.\n• **Part 3 – Listening (30–43 minutes):** You will listen to audio or video clips and answer questions by summarizing spoken text, filling in blanks, and identifying incorrect words. You only hear each clip once.\n\n**Understanding Your Scores**\n\nThe PTE uses the **Global Scale of English (GSE)**. Your overall score will range from **10 to 90 points**, providing a highly precise measurement of your English ability.\n\nAlong with your overall score, your score report will show a detailed breakdown of your communicative skills (Listening, Reading, Speaking, and Writing), allowing you to clearly identify your strengths and areas for improvement.\n\n**Global Recognition**\n\nThe PTE Academic is trusted by thousands of institutions worldwide.\n• **Study:** Accepted by prestigious universities across the USA, UK, Canada, Australia, and New Zealand, including Harvard Business School, INSEAD, and Yale.\n• **Visas & Immigration:** Approved for all UK, Australian, and New Zealand student and migration visa applications.\n\nWith the right preparation and a clear understanding of the test format, you can easily achieve the score you need to take your next big step. We can help you prepare the TEPTH Way.",
       "stats": [
         {
           "label": "Total Duration",
@@ -2165,7 +2170,7 @@
         },
         {
           "label": "Results In",
-          "value": "2 Days"
+          "value": "48 Hours"
         },
         {
           "label": "Validity",
@@ -2180,19 +2185,19 @@
         {
           "name": "Part 1: Speaking & Writing",
           "duration": "54–67 minutes",
-          "details": "Assess your ability to communicate effectively in an academic environment through various integrated tasks.",
+          "details": "You will read aloud, repeat sentences, describe images, retell lectures, and write a short essay. This section tests your spoken fluency, pronunciation, and written grammar.",
           "format": "Tasks include Personal Introduction, Read Aloud, Repeat Sentence, Describe Image, Re-tell Lecture, Answer Short Question, Summarize Written Text, and Write Essay."
         },
         {
           "name": "Part 2: Reading",
           "duration": "29–30 minutes",
-          "details": "Evaluate your ability to understand written English in academic contexts.",
+          "details": "This section includes multiple-choice questions, reordering paragraphs, and fill-in-the-blanks. It evaluates your comprehension of written academic English.",
           "format": "Tasks include Reading & Writing: Fill in the Blanks, Multiple Choice (Multiple Answer), Re-order Paragraphs, Reading: Fill in the Blanks, and Multiple Choice (Single Answer)."
         },
         {
           "name": "Part 3: Listening",
           "duration": "30–43 minutes",
-          "details": "Test your ability to understand spoken English through a variety of audio and video clips.",
+          "details": "You will listen to audio or video clips and answer questions by summarizing spoken text, filling in blanks, and identifying incorrect words. You only hear each clip once.",
           "format": "Tasks include Summarize Spoken Text, Multiple Choice (Multiple Answer), Fill in the Blanks, Highlight Correct Summary, Multiple Choice (Single Answer), Select Missing Word, Highlight Incorrect Words, and Write from Dictation."
         }
       ],
@@ -2209,13 +2214,13 @@
       ]
     },
     "pte-core": {
-      "subtitle": "For Canadian migration and work",
-      "description": "PTE Core is a 2-hour computer-based English test that assesses your general speaking, writing, reading and listening skills in a single test.",
-      "overview": "The PTE Core test results are available in just 2 days. It is recognized by the Canadian government (IRCC) for permanent residency applications under all economic classes.\n\nChoose PTE Core if you are applying for permanent residency in Canada. You can also choose PTE Core if you are applying for Canadian citizenship. The test evaluates your ability to use English in everyday vocational situations.",
+      "subtitle": "Your Guide to the PTE Core Test",
+      "description": "The **PTE Core** is a relatively new, computer-based English language test developed by Pearson specifically for Canadian immigration and general professional purposes.",
+      "overview": "If you are planning to migrate to Canada for work, permanent residency, or citizenship, proving your English proficiency is a crucial step. The **PTE Core** is a relatively new, computer-based English language test developed by Pearson specifically for Canadian immigration and general professional purposes.\n\nUnlike academic tests designed for university admissions, the PTE Core evaluates how well you communicate in real-world, everyday scenarios.\n\n**What is the PTE Core?**\n\nThe PTE Core assesses your practical English skills in a general and workplace context. Instead of analyzing academic lectures or complex essays, you will be tested on your ability to handle everyday situations. For example, you might be asked to listen to a brief workplace conversation, read a standard public notice, or write an email to a colleague.\n\nTwo unique question types specifically designed for this exam include **Respond to a Situation** (verbally explaining how you would handle a given scenario) and **Write an Email**.\n\n**Key Takeaway:** The entire exam is completed in a single, two-hour session on a computer at a secure test center, focusing entirely on the English you will actually use in your day-to-day life in Canada.\n\n**Why Choose the PTE Core?**\n\nThe PTE Core is highly favored by immigration candidates for its speed and predictability. Here is why it stands out:\n• **Fast Results:** Scores are typically returned within **48 hours**, which is ideal when preparing time-sensitive immigration applications.\n• **Direct CLB Mapping:** Your scores are designed to translate directly to the **Canadian Language Benchmarks (CLB)**, the standard used by the Canadian government.\n• **Unbiased AI Scoring:** Your spoken and written responses are graded entirely by an advanced artificial intelligence system, ensuring complete objectivity.\n• **Flexible Scheduling:** With frequent test dates available at centers worldwide, booking an exam is highly convenient.\n\n**Test Format and Structure**\n\nThe PTE Core is broken down into three main parts, completed sequentially without breaks.\n• **Part 1 – Speaking & Writing (50–65 minutes):** You will introduce yourself, read aloud, describe images, respond to everyday situations, and write an email.\n• **Part 2 – Reading (27–37 minutes):** You will answer multiple-choice questions, reorder paragraphs, and fill in the blanks using practical texts.\n• **Part 3 – Listening (30–37 minutes):** You will listen to short audio clips, summarize spoken text, and type exactly what you hear in dictation tasks.\n\n**Understanding Your Scores**\n\nLike other Pearson tests, the PTE Core uses a scoring scale from **10 to 90 points**. Your score report will break down your performance across the four communicative skills: Listening, Reading, Speaking, and Writing.\n\nBecause the test is tailored for Canada, you can easily use Pearson's official equivalency charts to convert your 10–90 score into your required CLB level (such as CLB 7 or CLB 9) for Express Entry or other immigration streams.\n\n**Official Recognition**\n\nThe PTE Core is officially recognized by **Immigration, Refugees and Citizenship Canada (IRCC)**.\n• **Immigration & PR:** Accepted for all Canadian economic immigration programs, including Express Entry and Provincial Nominee Programs (PNPs).\n• **Citizenship:** Valid for individuals applying for Canadian citizenship.\n\n*(Note: If you are applying for a Canadian study permit through the Student Direct Stream, you will typically need the PTE Academic instead.)*\n\nWith its focus on practical communication and rapid scoring, the PTE Core is an excellent, stress-free option for proving your English readiness for life in Canada.",
       "stats": [
         {
           "label": "Total Duration",
-          "value": "2 Hours"
+          "value": "~2 Hours"
         },
         {
           "label": "Approval",
@@ -2223,7 +2228,7 @@
         },
         {
           "label": "Results In",
-          "value": "2 Days"
+          "value": "48 Hours"
         },
         {
           "label": "Validity",
@@ -2237,27 +2242,27 @@
       "sections": [
         {
           "name": "Part 1: Speaking & Writing",
-          "duration": "Around 50 minutes",
-          "details": "This section will test your speaking and writing skills.",
+          "duration": "50–65 minutes",
+          "details": "You will introduce yourself, read aloud, describe images, respond to everyday situations, and write an email.",
           "format": "Tasks include Personal Introduction, Read Aloud, Repeat Sentence, Describe Image, Respond to a Situation, Answer Short Question, Summarize Written Text, and Write Email."
         },
         {
           "name": "Part 2: Reading",
-          "duration": "Around 30 minutes",
-          "details": "This section will test your reading skills.",
+          "duration": "27–37 minutes",
+          "details": "You will answer multiple-choice questions, reorder paragraphs, and fill in the blanks using practical texts.",
           "format": "Tasks include Reading & Writing: Fill in the Blanks, Multiple Choice (Multiple Answer), Re-order Paragraphs, Reading: Fill in the Blanks, and Multiple Choice (Single Answer)."
         },
         {
           "name": "Part 3: Listening",
-          "duration": "Around 30 minutes",
-          "details": "This section will test your listening skills.",
+          "duration": "30–37 minutes",
+          "details": "You will listen to short audio clips, summarize spoken text, and type exactly what you hear in dictation tasks.",
           "format": "Tasks include Summarize Spoken Text, Multiple Choice (Multiple Answer), Fill in the Blanks, Highlight Correct Summary, Multiple Choice (Single Answer), Select Missing Word, Highlight Incorrect Words, and Write from Dictation."
         }
       ],
       "whoShouldTake": [
         "Individuals applying for Canadian Permanent Residency (PR)",
         "Applicants for Canadian Citizenship",
-        "Individuals applying under any economic class pathway"
+        "Individuals applying under any economic class pathway (Express Entry, PNPs)"
       ],
       "acceptedFor": [
         "Canadian Permanent Residency (IRCC)",
@@ -2266,13 +2271,13 @@
       ]
     },
     "pte-academic-ukvi": {
-      "subtitle": "Secure English Language Test (SELT) for UK Visas",
-      "description": "PTE Academic UKVI is a SELT approved by the UK Home Office for all UK visas that require a four-skill language test.",
-      "overview": "PTE Academic UKVI is a Secure English Language Test (SELT) approved by the UK Home Office for use in UK visa applications.",
+      "subtitle": "Your Guide to the PTE Academic UKVI Test",
+      "description": "The **PTE Academic UKVI** is a Secure English Language Test (SELT) approved by the UK Home Office, designed for individuals applying for UK visas that require a four-skill English language test.",
+      "overview": "If your goal is to study, work, or live in the United Kingdom, you may be required to prove your English language proficiency as part of your visa application. The **PTE Academic UKVI** is a Secure English Language Test (SELT) approved by the UK Home Office.\n\nHere is everything you need to know to determine if this is the right test for you and how to prepare with confidence.\n\n**What is the PTE Academic UKVI?**\n\nThe PTE Academic UKVI is designed to assess your English listening, reading, speaking, and writing skills in an academic context. You will take the exam in a highly secure, authorized test center on a computer.\n\nA defining feature of this exam is its administrative integration with UK immigration systems. When you complete the test, your score report includes a **Unique Reference Number (URN)**, which is a mandatory requirement for certain UK visa applications.\n\n**Key Takeaway:** This test provides a streamlined, all-in-one way to prove your academic English abilities while meeting the strict security protocols of the UK Home Office.\n\n**Why Choose the PTE Academic UKVI?**\n\nCandidates choose this test because it offers a modern, stress-free testing experience tailored specifically for UK immigration purposes:\n• **Fast Results:** Scores are typically delivered within **48 hours**, helping you process your visa application quickly and meet tight deadlines.\n• **Unbiased AI Scoring:** The entire test is graded by an advanced artificial intelligence system alongside human oversight, ensuring your English is judged objectively without human bias.\n• **A Single Sitting:** You will complete all four sections (Speaking, Writing, Reading, and Listening) in one go, taking approximately **2 hours**, reducing testing fatigue.\n• **UK Home Office Approved:** It is recognized as a legitimate SELT, guaranteeing it meets the necessary legal and security requirements for UK visas.\n\n**Test Format and Structure**\n\nThe exam is divided into three consecutive parts, all completed in one continuous session.\n• **Part 1 – Speaking & Writing (54–67 minutes):** You will read aloud, repeat sentences, describe images, participate in speaking tasks, and write a short essay.\n• **Part 2 – Reading (29–30 minutes):** You will answer multiple-choice questions, reorder paragraphs, and fill in the blanks using academic and everyday texts.\n• **Part 3 – Listening (30–43 minutes):** You will listen to audio clips, summarize spoken text, and identify incorrect or missing words.\n\n**When Should You Take the UKVI Version?**\n\nIt is crucial to book the correct test based on your specific UK destination and visa type. You should choose the PTE Academic UKVI if you are applying for:\n\n**1. Study Below Degree Level**\n\nIf you are applying for a foundation course, a pre-sessional English program, a pathway course, or studying at an institution that is **not** a recognized UK Higher Education Institution (HEI).\n\n**2. Specific UK Work Visas**\n\nIf you are applying for visas that require a 4-skills English test, including:\n• Skilled Worker visa\n• Innovator Founder visa\n• Minister of Religion visa\n\nBy securing your PTE Academic UKVI certification, you are ensuring your English credentials are fully compliant with the UK Home Office, smoothing the way for your move to the UK!",
       "stats": [
         {
           "label": "Test Duration",
-          "value": "2 hours"
+          "value": "~2 Hours"
         },
         {
           "label": "Score Scale",
@@ -2280,141 +2285,167 @@
         },
         {
           "label": "Results In",
-          "value": "2 days"
+          "value": "48 Hours"
         },
         {
           "label": "Validity",
-          "value": "2 years"
+          "value": "2 Years"
         }
       ],
       "sections": [
         {
-          "name": "Speaking & Writing",
-          "duration": "54–67 min",
-          "details": "Integrated skills assessment"
+          "name": "Part 1: Speaking & Writing",
+          "duration": "54–67 minutes",
+          "details": "You will read aloud, repeat sentences, describe images, participate in speaking tasks, and write a short essay.",
+          "format": "Tasks include Personal Introduction, Read Aloud, Repeat Sentence, Describe Image, Re-tell Lecture, Answer Short Question, Summarize Written Text, and Write Essay."
         },
         {
-          "name": "Reading",
-          "duration": "29–30 min",
-          "details": "Multiple choice, fill in the blanks"
+          "name": "Part 2: Reading",
+          "duration": "29–30 minutes",
+          "details": "You will answer multiple-choice questions, reorder paragraphs, and fill in the blanks using academic and everyday texts.",
+          "format": "Tasks include Reading & Writing: Fill in the Blanks, Multiple Choice (Multiple Answer), Re-order Paragraphs, Reading: Fill in the Blanks, and Multiple Choice (Single Answer)."
         },
         {
-          "name": "Listening",
-          "duration": "30–43 min",
-          "details": "Summarize spoken text, dictation"
+          "name": "Part 3: Listening",
+          "duration": "30–43 minutes",
+          "details": "You will listen to audio clips, summarize spoken text, and identify incorrect or missing words.",
+          "format": "Tasks include Summarize Spoken Text, Multiple Choice (Multiple Answer), Fill in the Blanks, Highlight Correct Summary, Multiple Choice (Single Answer), Select Missing Word, Highlight Incorrect Words, and Write from Dictation."
         }
       ],
       "whoShouldTake": [
-        "UK visa applicants"
+        "Applicants for UK study below degree level (foundation, pathway, pre-sessional courses)",
+        "Skilled Worker visa applicants",
+        "Innovator Founder visa applicants",
+        "Minister of Religion visa applicants"
       ],
       "acceptedFor": [
         "UK Visas and Immigration (UKVI)"
       ]
     },
     "pte-home-a1": {
-      "subtitle": "For Family and Work visas in the UK",
-      "description": "PTE Home A1 is a basic English test for UK Family and Work visas.",
-      "overview": "PTE Home A1 is a Secure English Language Test (SELT) that measures only your speaking and listening skills.",
+      "subtitle": "Your Guide to the PTE Home A1 Test",
+      "description": "The **PTE Home A1** is a beginner-level Secure English Language Test (SELT) specifically designed for individuals applying for certain family or work visas to settle in the United Kingdom.",
+      "overview": "If you are planning to apply for certain family or work visas to settle in the United Kingdom, you may need to prove a basic level of English language proficiency. The **PTE Home A1** is a beginner-level Secure English Language Test (SELT) specifically designed for this purpose.\n\nUnlike the comprehensive, four-skill PTE exams used for university admissions or professional migration, the PTE Home A1 is a shorter, simpler test focused entirely on basic communication.\n\n**What is the PTE Home A1?**\n\nThe PTE Home A1 is a simple **two-skills test** that assesses only your **Speaking** and **Listening** abilities. It does not include reading or writing sections. The exam measures your ability to understand and communicate everyday English at a beginner level.\n\n**Key Takeaway:** You do not need advanced English skills to pass this test. It is designed purely to show that you have the basic language foundation needed to interact and function in daily UK life.\n\n**Why Choose the PTE Home A1?**\n\nCandidates choose this test because it is highly convenient, fast, and removes the stress of complex scoring systems:\n• **Simple Pass/Fail Result:** There is no complicated point scale to worry about. You either pass or fail based on whether you meet the basic required standard.\n• **Extremely Short Duration:** The entire computer-based test takes **less than 30 minutes** to complete.\n• **Fast Results:** Your scores are typically available within **48 hours**, complete with the Unique Reference Number (URN) required for your UK visa application.\n• **Unbiased AI Scoring:** Like all PTE tests, it is scored by an advanced artificial intelligence system, ensuring fair and accurate results without human bias.\n\n**Test Format and Structure**\n\nThe PTE Home A1 is taken on a computer with a headset at a highly secure test center. It consists of three simple question types that simulate basic, real-life conversations.\n• **Repeat Sentence:** You will listen to short, simple sentences and be asked to repeat them exactly as you heard them.\n• **Describe Image:** You will be shown basic, easy-to-understand images and will have a few seconds to briefly describe what you see.\n• **Conversation: Listen and Answer:** You will listen to short questions or conversational snippets and provide quick spoken answers.\n\n**When Should You Take the PTE Home A1?**\n\nYou must choose the correct test based on your specific UK visa application. It is required for applicants applying for the *first time* in the following visa categories:\n\nFamily Visas:\n• Spouse or Partner visa\n• Parent of a Dependent Child visa\n\nSpecific Work Visas:\n• Representative of an Overseas Business visa\n• Sportsperson visa\n\nWith its short duration and focus on basic, everyday conversation, the PTE Home A1 offers a highly accessible and stress-free way to meet your UK visa requirements!",
       "stats": [
         {
           "label": "Test Duration",
-          "value": "22 mins"
+          "value": "< 30 mins"
         },
         {
           "label": "Results In",
-          "value": "2 days"
+          "value": "48 Hours"
         },
         {
           "label": "Validity",
-          "value": "2 years"
+          "value": "2 Years"
+        },
+        {
+          "label": "Test Format",
+          "value": "Computer-based"
         }
       ],
       "sections": [
         {
           "name": "Speaking & Listening",
-          "duration": "22 min",
-          "details": "Speaking and listening tasks only"
+          "duration": "< 30 mins",
+          "details": "The PTE Home A1 consists of three simple question types that simulate basic, real-life conversations.",
+          "format": "• Repeat Sentence: You will listen to short, simple sentences and be asked to repeat them exactly as you heard them.\n• Describe Image: You will be shown basic, easy-to-understand images and will have a few seconds to briefly describe what you see.\n• Conversation — Listen and Answer: You will listen to short questions or conversational snippets and provide quick spoken answers."
         }
       ],
       "whoShouldTake": [
-        "UK Family/Spouse visa applicants"
+        "Applicants for UK Spouse or Partner visa (first-time)",
+        "Applicants for Parent of a Dependent Child visa (first-time)",
+        "Representative of an Overseas Business visa applicants",
+        "Sportsperson visa applicants"
       ],
       "acceptedFor": [
         "UK Visas and Immigration (UKVI)"
       ]
     },
     "pte-home-a2": {
-      "subtitle": "For UK Family visa extension",
-      "description": "PTE Home A2 is for those applying for a UK Family visa extension.",
-      "overview": "PTE Home A2 is a Secure English Language Test (SELT) that measures only your speaking and listening skills.",
+      "subtitle": "PTE Home A2: Secure English Language Test for UK Visa Extensions",
+      "description": "The PTE Home A2 is a Secure English Language Test (SELT) officially approved by the UK Home Office for family visa extensions. Building on beginner foundations, it evaluates Speaking and Listening skills at CEFR Level A2 through basic, everyday situations.",
+      "overview": "If you are already living in the United Kingdom and need to extend your family visa, proving your continued progress in the English language is a mandatory step. The PTE Home A2 is a Secure English Language Test (SELT) specifically designed to meet the UK Home Office requirements for visa extensions.\n\nBuilding slightly on the beginner foundations of the A1 test, the PTE Home A2 evaluates your ability to communicate in basic, everyday situations at an elementary level.\n\n**What is the PTE Home A2?**\n\nLike the A1 version, the PTE Home A2 is a **two-skills test** that focuses entirely on **Speaking and Listening**. It does not include any reading or writing sections. The exam measures your ability to understand and express simple opinions, talk about your routines, and handle short social exchanges.\n\n**Key Takeaway**: You only need to demonstrate an elementary, conversational understanding of English. The test proves you have built upon your basic language skills since your initial arrival in the UK.\n\n**Why Choose the PTE Home A2?**\n\nCandidates choose this test for its efficiency, predictability, and stress-free grading system:\n• **Simple Pass/Fail Result**: Instead of worrying about achieving a specific numerical score, you will simply receive a \"Pass\" or \"Fail\" based on whether you meet the required elementary standard.\n• **Extremely Short Duration**: The entire computer-based exam takes **less than 30 minutes** to complete.\n• **Fast Results**: Your scores are generally returned within **48 hours**, giving you the Unique Reference Number (URN) required to proceed with your visa extension application without delay.\n• **Unbiased AI Scoring**: Your spoken answers are evaluated by an advanced artificial intelligence system, ensuring complete fairness and objectivity.\n\n**When Should You Take the PTE Home A2?**\n\nChoosing the correct test level is critical for UK immigration. The UK Home Office requires the A2 level for applicants applying for a **visa extension** (usually after spending 2.5 years in the UK) in the following categories:\n\nFamily Visa Extensions:\n• Spouse or Partner visa (extending stay)\n• Parent of a Dependent Child visa (extending stay)\n\n*(Note: If you are applying to settle permanently in the UK (Indefinite Leave to Remain) or applying for British Citizenship, you will need a slightly higher level of English, such as the PTE Home B1).*\n\nBy offering a quick, practical, and highly accessible format, the PTE Home A2 takes the stress out of your visa extension process, helping you seamlessly continue your life in the UK.",
       "stats": [
         {
           "label": "Test Duration",
-          "value": "22 mins"
+          "value": "< 30 mins"
         },
         {
           "label": "Results In",
-          "value": "2 days"
+          "value": "48 Hours"
         },
         {
           "label": "Validity",
-          "value": "2 years"
+          "value": "2 Years"
+        },
+        {
+          "label": "Format",
+          "value": "Computer-based"
         }
       ],
       "sections": [
         {
           "name": "Speaking & Listening",
-          "duration": "22 min",
-          "details": "Speaking and listening tasks only"
+          "duration": "< 30 min",
+          "details": "The exam consists of three straightforward question types designed to simulate everyday conversation and listening comprehension.",
+          "format": "• Repeat Sentence: Listen to short sentences and repeat them into your microphone exactly as you heard them.\n• Describe Image: Look at simple images (such as everyday scenes or objects) and provide a brief spoken description.\n• Retell Story: Listen to a short, simple story or conversation and then summarize or retell the key points in your own words."
         }
       ],
       "whoShouldTake": [
-        "UK Family visa extension applicants"
+        "Applicants extending their UK Spouse or Partner visa",
+        "Applicants extending their UK Parent of a Dependent Child visa"
       ],
       "acceptedFor": [
         "UK Visas and Immigration (UKVI)"
       ]
     },
     "pte-home-b1": {
-      "subtitle": "For UK Citizenship and Settlement",
-      "description": "PTE Home B1 is for UK Citizenship (Naturalisation) and Settlement (Indefinite Leave to Remain).",
-      "overview": "PTE Home B1 is a Secure English Language Test (SELT) that measures only your speaking and listening skills.",
+      "subtitle": "PTE Home B1: Your Guide to the PTE Home B1 Test",
+      "description": "The **PTE Home B1** is a Secure English Language Test (SELT) approved by the UK Home Office, specifically designed for individuals applying for settlement or citizenship.",
+      "overview": "If you are taking the final steps toward making the United Kingdom your permanent home, proving your English proficiency is a vital requirement. The **PTE Home B1** is a Secure English Language Test (SELT) approved by the UK Home Office, specifically designed for individuals applying for settlement or citizenship.\n\nAs a step up from the beginner A1 and A2 exams, the PTE Home B1 evaluates your ability to communicate effectively in familiar, everyday situations at an intermediate level.\n\n**What is the PTE Home B1?**\n\nLike the other PTE Home exams, the B1 level is a **two-skills test** focusing exclusively on **Speaking** and **Listening**. It does not include any reading or writing sections. The exam measures your ability to express yourself clearly, understand standard spoken English, and participate in normal social and workplace conversations.\n\n**Key Takeaway:** You do not need to be perfectly fluent to pass this test. It is designed to prove you have the intermediate, practical communication skills necessary to live and work independently in the UK.\n\n**Why Choose the PTE Home B1?**\n\nCandidates prefer this test because it offers a highly streamlined, stress-free path to meeting mandatory UK immigration requirements:\n• **Simple Pass/Fail Result:** There are no complex score bands to decipher. You will receive a straightforward \"Pass\" or \"Fail\" based on whether you meet the B1 standard required by the UK Home Office.\n• **Extremely Short Duration:** The entire computer-based exam is completed in **less than 30 minutes**.\n• **Fast Results:** Scores are generally returned within **48 hours**, complete with the Unique Reference Number (URN) required to submit your visa or citizenship application.\n• **Unbiased AI Scoring:** Your spoken answers are evaluated by an advanced artificial intelligence system, ensuring completely objective and consistent grading.\n\n**Test Format and Structure**\n\nYou will take the PTE Home B1 on a computer with a headset at a highly secure test center. The exam features straightforward question types designed to test your real-world listening and speaking skills.\n• **Repeat Sentence:** You will listen to short sentences and must repeat them into your microphone exactly as you heard them.\n• **Describe Image:** You will look at a simple visual (such as a chart, map, or everyday scene) and provide a brief spoken description of what you see.\n• **Retell Story:** You will listen to a short narrative or conversation and then summarize the key details in your own words.\n• **Listen and Answer:** You will listen to a brief question and provide a short, simple spoken answer (often just one or two words).\n\n**When Should You Take the PTE Home B1?**\n\nChoosing the correct test level is critical for a successful UK immigration application. The UK Home Office requires the B1 level of English for applicants applying for the following:\n\nSettlement and Citizenship:\n• **Settlement:** Indefinite Leave to Remain (ILR)\n• **Citizenship:** Naturalization as a British Citizen\n\n*(Note: If you are applying for certain work or student visas, you may need a 4-skills test like the PTE Academic UKVI instead. Always verify your exact requirement on the UK government website before booking).*\n\nBy offering a fast, focused, and highly practical testing experience, the PTE Home B1 clears a smooth path for finalizing your permanent settlement or citizenship in the UK.",
       "stats": [
         {
           "label": "Test Duration",
-          "value": "22 mins"
+          "value": "< 30 mins"
         },
         {
           "label": "Results In",
-          "value": "2 days"
+          "value": "48 Hours"
         },
         {
           "label": "Validity",
-          "value": "2 years"
+          "value": "2 Years"
+        },
+        {
+          "label": "Test Format",
+          "value": "Computer-based"
         }
       ],
       "sections": [
         {
           "name": "Speaking & Listening",
-          "duration": "22 min",
-          "details": "Speaking and listening tasks only"
+          "duration": "< 30 mins",
+          "details": "The exam features four straightforward question types designed to test your real-world listening and speaking skills.",
+          "format": "• Repeat Sentence: You will listen to short sentences and must repeat them into your microphone exactly as you heard them.\n• Describe Image: You will look at a simple visual (such as a chart, map, or everyday scene) and provide a brief spoken description of what you see.\n• Retell Story: You will listen to a short narrative or conversation and then summarize the key details in your own words.\n• Listen and Answer: You will listen to a brief question and provide a short, simple spoken answer (often just one or two words)."
         }
       ],
       "whoShouldTake": [
-        "UK Citizenship and Settlement applicants"
+        "Applicants for Indefinite Leave to Remain (ILR / Settlement)",
+        "Applicants for Naturalisation as a British Citizen"
       ],
       "acceptedFor": [
         "UK Visas and Immigration (UKVI)"
       ]
     },
     "celpip-general": {
-      "subtitle": "For Permanent Residency in Canada",
-      "description": "The CELPIP – General evaluates test taker’s English listening, reading, writing, and speaking skills and is officially designated for permanent residence applications by IRCC.",
-      "overview": "The CELPIP – General evaluates test taker’s English listening, reading, writing, and speaking skills. It is officially designated for permanent residence applications by Immigration, Refugees and Citizenship Canada (IRCC), visa purposes by the Australian Department of Home Affairs (DHA), and is also accepted for professional designations.\n\nIt is a computer-delivered test and it takes under 2 hours and 50 minutes to complete in one sitting with no separate speaking session.",
+      "subtitle": "Your Guide to the CELPIP Test",
+      "description": "The **CELPIP (Canadian English Language Proficiency Index Program)** is Canada's leading general English test, designed specifically for immigration and professional designation.",
+      "overview": "If your goal is to live, work, or become a citizen in Canada, you will need to prove your English language proficiency. The **CELPIP (Canadian English Language Proficiency Index Program)** is Canada's leading general English test. Designed specifically for immigration and professional designation, it is one of the most popular choices for individuals navigating the Canadian immigration system.\n\nUnlike academic tests designed for university admissions, the CELPIP test focuses on everyday, real-world English used in Canadian workplaces and social situations.\n\n**What is the CELPIP Test?**\n\nCELPIP evaluates your ability to use English in everyday Canadian scenarios. Instead of complex academic lectures, you will be tested on practical situations — like communicating with coworkers, understanding a news broadcast, or writing an email to a manager.\n\nOne of the standout features of CELPIP is that it uses a **single North American accent**. If you are accustomed to Canadian or American English, you will find the audio segments naturally easy to follow.\n\n**Key Takeaway:** The entire test is completely computer-delivered and completed in one single sitting. You will not need to schedule a separate appointment for a face-to-face speaking interview.\n\n**Two Versions of the Test**\n\nIt is essential to know which version of the test you need before you book. The CELPIP test is available in two distinct formats:\n\n**1. CELPIP - General Test**\n- **Who it's for:** Individuals applying for Canadian Permanent Residency (PR) through Express Entry, Provincial Nominee Programs (PNPs), or seeking professional designation.\n- **What it tests:** All four language skills: Listening, Reading, Writing, and Speaking.\n- **Duration:** Approximately 3 hours.\n\n**2. CELPIP - General LS Test**\n- **Who it's for:** Individuals applying for Canadian Citizenship.\n- **What it tests:** Only two skills: Listening and Speaking.\n- **Duration:** Approximately 1 hour and 10 minutes.\n\n**Why Choose the CELPIP Test?**\n\nMany candidates prefer the CELPIP test for its modern, user-friendly design and its direct alignment with Canadian immigration standards. Here are the top reasons to choose CELPIP:\n- **Fast Results:** Your official test scores are available online quickly, typically within **4 to 5 calendar days**.\n- **Direct CLB Mapping:** The scoring system is perfectly aligned with the **Canadian Language Benchmarks (CLB)**. A CELPIP score of 8 directly equals a CLB 8, making it incredibly easy to calculate your immigration points.\n- **Helpful Built-in Features:** Because the test is entirely computer-based, the Writing section includes a personal timer, a word counter, and a standard English spell-check tool.\n- **A Single Sitting:** You will complete all components on a computer without having to leave the room or switch testing centers.\n\n**Test Format and Structure (CELPIP - General)**\n\nFor those taking the full CELPIP - General Test, here is a breakdown of what to expect in your 3-hour session:\n- **Listening (46-55 minutes):** You will listen to short conversations, news items, and discussions, then answer multiple-choice questions.\n- **Reading (43-56 minutes):** You will read everyday materials like emails, diagrams, and informative articles, followed by comprehension questions.\n- **Writing (53-60 minutes):** You will write an email regarding a day-to-day matter and respond to a survey question expressing your opinion.\n- **Speaking (15-20 minutes):** You will speak into a microphone to provide advice, describe a scene, make predictions, and express your opinions based on on-screen prompts.\n\n**Official Recognition**\n\nThe CELPIP test is officially recognized by **Immigration, Refugees and Citizenship Canada (IRCC)**. It is also accepted by the Real Estate Council of British Columbia, the College of Immigration and Citizenship Consultants (CICC), and numerous other professional organizations across Canada.\n\nBy choosing the CELPIP test, you are taking an exam designed by Canadians, for Canada, giving you a clear and straightforward path to achieving your immigration goals.",
       "stats": [
         {
           "label": "Total Duration",
-          "value": "2h 50m"
+          "value": "~3 Hours"
         },
         {
           "label": "Format",
@@ -2422,11 +2453,11 @@
         },
         {
           "label": "Results In",
-          "value": "3–4 Days"
+          "value": "4-5 Days"
         },
         {
           "label": "Score Scale",
-          "value": "M–12"
+          "value": "M-12 (CLB)"
         },
         {
           "label": "Validity",
@@ -2436,32 +2467,31 @@
       "sections": [
         {
           "name": "Listening Component",
-          "duration": "47–55 minutes",
-          "details": "Listen to passages and answer questions. The Listening Test contains 6 parts designed to evaluate various real-life listening scenarios.",
+          "duration": "46-55 minutes",
+          "details": "You will listen to short conversations, news items, and discussions, then answer multiple-choice questions.",
           "format": "Part 1: Listening to Problem Solving\nPart 2: Listening to a Daily Life Conversation\nPart 3: Listening for Information\nPart 4: Listening to a News Item\nPart 5: Listening to a Discussion\nPart 6: Listening to Viewpoints",
           "questions": "38-40 questions",
-          "taskTypes": "Multiple Choice",
-          "marks": "The test may contain unscored reading or listening items used for test development."
+          "taskTypes": "Multiple Choice"
         },
         {
           "name": "Reading Component",
-          "duration": "55–60 minutes",
-          "details": "Read passages and answer questions. Evaluate your ability to understand written correspondence, diagrams, and discursive texts.",
+          "duration": "43-56 minutes",
+          "details": "You will read everyday materials like emails, diagrams, and informative articles, followed by comprehension questions.",
           "format": "Part 1: Reading Correspondence\nPart 2: Reading to Apply a Diagram\nPart 3: Reading for Information\nPart 4: Reading for Viewpoints",
           "questions": "38-40 questions",
           "taskTypes": "Multiple Choice, Gap Fill"
         },
         {
           "name": "Writing Component",
-          "duration": "53–60 minutes",
-          "details": "Respond to questions with written answers. Focuses on practical communication such as email writing and responding to survey questions.",
+          "duration": "53-60 minutes",
+          "details": "You will write an email regarding a day-to-day matter and respond to a survey question expressing your opinion.",
           "format": "Task 1: Writing an Email\nTask 2: Responding to Survey Questions",
           "questions": "2 tasks"
         },
         {
           "name": "Speaking Component",
-          "duration": "15–20 minutes",
-          "details": "Reply to on-screen prompts verbally. This component is completed in the same sitting as the other tests.",
+          "duration": "15-20 minutes",
+          "details": "You will speak into a microphone to provide advice, describe a scene, make predictions, and express your opinions based on on-screen prompts.",
           "format": "Task 1: Giving Advice\nTask 2: Talking about a Personal Experience\nTask 3: Describing a Scene\nTask 4: Making Predictions\nTask 5: Comparing and Persuading\nTask 6: Dealing with a Difficult Situation\nTask 7: Expressing Opinions\nTask 8: Describing an Unusual Situation"
         }
       ],
@@ -2485,13 +2515,13 @@
       ]
     },
     "celpip-general-ls": {
-      "subtitle": "For Canadian Citizenship",
+      "subtitle": "CELPIP General LS - For Canadian Citizenship",
       "description": "The CELPIP – General LS evaluates test taker’s English listening and speaking skills and is officially designated for citizenship applications by IRCC.",
-      "overview": "The CELPIP – General LS is a computer-delivered test for citizenship applications. It takes approximately 1 hour and 10 minutes to complete in one sitting.",
+      "overview": "The CELPIP General LS is specifically designed for individuals applying for Canadian Citizenship. It tests only two skills - Listening and Speaking - and is completed entirely on a computer in approximately 1 hour and 10 minutes in a single sitting.\n\nLike the CELPIP General, it uses a single North American accent and reflects real-life Canadian everyday scenarios. Scores are delivered within 4 to 5 calendar days and map directly to the Canadian Language Benchmarks (CLB).",
       "stats": [
         {
           "label": "Total Duration",
-          "value": "1h 10m"
+          "value": "~1h 10m"
         },
         {
           "label": "Format",
@@ -2499,11 +2529,11 @@
         },
         {
           "label": "Results In",
-          "value": "3–4 Days"
+          "value": "4-5 Days"
         },
         {
           "label": "Score Scale",
-          "value": "M–12"
+          "value": "M-12 (CLB)"
         },
         {
           "label": "Validity",
@@ -2534,9 +2564,9 @@
       ]
     },
     "cael": {
-      "subtitle": "Canadian Academic English Language Test",
-      "description": "The CAEL Test measures the English language proficiency of students planning to study at Canadian universities and colleges.",
-      "overview": "The CAEL Test (Canadian Academic English Language Test) is a computer-delivered test that evaluates your ability to use English in academic contexts. It is accepted by over 180 Canadian academic institutions and professional organizations.\n\nThe test is designed to reflect the language tasks you will perform in a university or college setting, such as reading articles, listening to lectures, and responding to academic prompts.",
+      "subtitle": "Your Guide to the CAEL Test",
+      "description": "The **CAEL (Canadian Academic English Language)** test is a comprehensive, computer-based exam designed specifically to measure the English level of international students planning to study in Canada.",
+      "overview": "If your dream is to study at a Canadian university or college, proving your English proficiency is a critical first step in your application journey. The **CAEL (Canadian Academic English Language)** test is a comprehensive, computer-based exam designed specifically to measure the English level of international students planning to study in Canada.\n\nUnlike other global English tests, CAEL is deeply rooted in the Canadian educational experience, giving you a true taste of what to expect in a North American classroom.\n\n**What is the CAEL Test?**\n\nThe CAEL test evaluates your ability to use English in an academic context. What makes CAEL completely unique is its **integrated, topic-based approach**.\n\nInstead of testing your skills in isolation (reading a text about history, then listening to a lecture about biology), CAEL groups tasks by subject. You might read an article about glaciers, listen to a lecture on the same topic, and then use the information from both sources to write a short essay.\n\n**Key Takeaway:** The CAEL test accurately simulates a real first-year Canadian university class. By integrating reading, listening, writing, and speaking around a single topic, it tests how well you synthesize and use information in the real academic world.\n\n**Why Choose CAEL?**\n\nMany candidates prefer CAEL because it feels less like a traditional test and more like a standard academic assignment. Here is why it stands out:\n• **100% Canadian Focus:** It uses Canadian English vocabulary and accents, preparing you directly for the environment you will be studying in.\n• **Fast Results:** Your official test scores are typically available online within **8 business days** after taking the exam.\n• **Integrated Tasks:** Because the reading and listening materials share the same topic as your writing tasks, you are naturally provided with vocabulary and ideas to help you construct your answers.\n• **A Single Sitting:** You will complete all four components (Speaking, Reading, Listening, and Writing) in one continuous session taking approximately **3.5 hours**.\n\n**Test Format and Structure**\n\nThe CAEL test is taken entirely on a computer. It is divided into five main sections that move from general speaking tasks to in-depth, integrated academic units.\n• **Speaking:** You will speak into a microphone to answer short questions about your academic experiences, summarize information, and relay details from a short presentation.\n• **Integrated Reading:** You will read academic passages (like textbook excerpts or articles) and answer comprehension questions.\n• **Integrated Listening:** You will listen to academic lectures, presentations, or campus conversations and answer questions based on the audio.\n• **Academic Unit A:** You will read a passage and listen to a lecture on the **same topic**. You will then use information from both sources to write an extended essay.\n• **Academic Unit B:** Similar to Unit A, but slightly shorter. You will read a passage and listen to a lecture on a unified topic, followed by writing a shorter response.\n\n**Understanding Your Scores**\n\nCAEL uses a specialized Band Score system ranging from **10 to 90 points**.\n\nYour final score report will provide an Overall Band Score, as well as individual scores for your Reading, Listening, Speaking, and Writing components. Most Canadian academic institutions require an overall score between 60 and 70 for direct admission, though this varies by program.\n\n**Official Recognition**\n\nThe CAEL test is one of the most widely recognized academic English tests in the country.\n• **Universities & Colleges:** It is accepted by 100% of English-speaking Canadian universities and colleges.\n• **Professional Associations:** Many professional organizations across Canada also accept CAEL as proof of English proficiency for licensure and certification.\n\nBy taking the CAEL test, you are not just proving your English skills — you are demonstrating that you are fully prepared to succeed in a Canadian academic environment.",
       "stats": [
         {
           "label": "Total Duration",
@@ -2563,26 +2593,32 @@
         {
           "name": "Speaking",
           "duration": "7–10 minutes",
-          "details": "Reply to on-screen prompts verbally.",
+          "details": "You will speak into a microphone to answer short questions about your academic experiences, summarize information, and relay details from a short presentation.",
           "format": "Test takers respond to three speaking tasks that reflect common university-level communication scenarios."
         },
         {
           "name": "Integrated Reading",
           "duration": "35–50 minutes",
-          "details": "Read passages and reply to questions.",
+          "details": "You will read academic passages (like textbook excerpts or articles) and answer comprehension questions.",
           "format": "Read one long academic text and answer questions, evaluating comprehension and information retrieval skills."
         },
         {
           "name": "Integrated Listening",
           "duration": "25–35 minutes",
-          "details": "Listen to passages and reply to questions.",
+          "details": "You will listen to academic lectures, presentations, or campus conversations and answer questions based on the audio.",
           "format": "Listen to one long academic lecture and answer questions based on the content and key details."
         },
         {
-          "name": "Academic Unit A & B",
-          "duration": "120–140 minutes",
-          "details": "Integrated academic units combining reading, listening, and writing.",
-          "format": "Combines reading and listening materials on specific academic topics, followed by a writing task that integrates information from both sources."
+          "name": "Academic Unit A",
+          "duration": "~70 minutes",
+          "details": "You will read a passage and listen to a lecture on the same topic. You will then use information from both sources to write an extended essay.",
+          "format": "Combines reading and listening materials on a specific academic topic, followed by an extended writing task integrating both sources."
+        },
+        {
+          "name": "Academic Unit B",
+          "duration": "~50 minutes",
+          "details": "Similar to Unit A, but slightly shorter. You will read a passage and listen to a lecture on a unified topic, followed by writing a shorter response.",
+          "format": "Combines reading and listening on a unified topic, followed by a shorter writing response."
         }
       ],
       "whoShouldTake": [
@@ -2677,261 +2713,383 @@
       "description": "Home Office-approved Secure English Language Tests (SELT) for UK visa applications."
     },
     "selt-a1": {
-      "subtitle": "For UK Family, Spouse or Partner visas",
-      "description": "Skills for English (UKVI) A1 is for those who need to demonstrate speaking and listening skills at level A1.",
-      "overview": "This test measures speaking and listening skills only. It is approved by the UK Home Office for Family, Spouse or Partner visa applications.",
+      "subtitle": "Your Guide to the Skills for English (SELT) UKVI Speaking & Listening A1 Test",
+      "description": "The **Skills for English SELT (Secure English Language Test) Speaking and Listening at Level A1** is an official, UK Home Office-approved exam designed for individuals applying for specific UK family visas.",
+      "overview": "If you are applying for specific UK family visas, you may need to prove your basic English language proficiency. The **Skills for English SELT (Secure English Language Test) Speaking and Listening at Level A1** is an official, UK Home Office-approved exam designed exactly for this purpose.\n\nDelivered globally by PSI, this test is a convenient and accessible option for individuals who need to demonstrate a beginner level of English to settle with their family or work in the UK.\n\n**What is the Skills for English SELT A1 Test?**\n\nThis is a straightforward **two-skills test** that assesses only your **Speaking** and **Listening** abilities. There are no reading or writing sections. It measures your English at the CEFR A1 level, which is a beginner standard.\n\nThe exam evaluates your ability to understand simple spoken English, introduce yourself, and respond to basic everyday questions.\n\n**Key Takeaway:** You do not need advanced English skills to pass. This test is entirely computer-based and is designed purely to prove that you can handle basic, everyday communication in the UK.\n\n**Why Choose Skills for English?**\n\nCandidates appreciate the Skills for English test because of its modern, user-friendly, and highly efficient delivery:\n- **100% Computer-Based:** You will complete both the speaking and listening parts on a computer using a headset. You will record your spoken answers directly into the system, meaning there is no face-to-face examiner to make you nervous.\n- **Short Duration:** The entire exam takes a maximum of **30 minutes** to complete.\n- **Fast Results:** Test results are typically available online in just **3 to 5 days**, helping you meet tight visa deadlines.\n- **UKVI Approved:** It provides the essential Unique Reference Number (URN) that you must include with your UK visa application to prove your result is genuine.\n\n**Test Format and Structure**\n\nYou will take the test in a single, continuous session at a secure UKVI-approved test center. The interface is designed to be intuitive and easy to navigate.\n- **Speaking:** You will start by introducing yourself. Then, you will listen to recorded questions or prompts on the screen and speak your answers directly into the microphone. Your responses are digitally recorded and marked by trained assessors later.\n- **Listening:** You will listen to short audio recordings of spoken English (you will get to hear each recording twice). After listening, you will answer a series of simple questions based on what you heard. This section is automatically marked by the computer.\n\n**When Should You Take This Test?**\n\nChoosing the correct SELT level is crucial for your UK immigration application. The UK Home Office requires an A1 level English test for applicants applying for the *first time* under certain visa categories, such as:\n\nFamily Visas:\n- Spouse or Partner visa\n- Parent of a Dependent Child visa\n\nSpecific Work Visas:\n- Representative of an Overseas Business visa\n- Sportsperson visa\n\n*(Note: If you are extending a family visa you already have or applying for citizenship, you will likely need a higher level, such as A2 or B1. Always confirm your specific visa requirements before booking).*\n\nWith its stress-free, computer-based format and quick turnaround time, the Skills for English SELT A1 is an excellent, straightforward choice for taking your first step toward living in the UK.",
       "stats": [
         {
+          "label": "Max Duration",
+          "value": "30 Minutes"
+        },
+        {
+          "label": "CEFR Level",
+          "value": "A1 (Beginner)"
+        },
+        {
           "label": "Results In",
-          "value": "3–5 days"
+          "value": "3-5 Days"
         },
         {
-          "label": "Validity",
-          "value": "2 years"
+          "label": "Format",
+          "value": "Computer-Based"
         },
         {
-          "label": "Skills",
-          "value": "Speaking & Listening"
+          "label": "Approval",
+          "value": "UK Home Office"
         }
       ],
       "sections": [
         {
-          "name": "Speaking & Listening",
-          "duration": "17–22 min",
-          "details": "Face-to-face or online speaking and listening tasks"
+          "name": "Speaking",
+          "duration": "Part of 30 min session",
+          "details": "You will start by introducing yourself. Then, you will listen to recorded questions or prompts on the screen and speak your answers directly into the microphone. Your responses are digitally recorded and marked by trained assessors later."
+        },
+        {
+          "name": "Listening",
+          "duration": "Part of 30 min session",
+          "details": "You will listen to short audio recordings of spoken English (you will get to hear each recording twice). After listening, you will answer a series of simple questions based on what you heard. This section is automatically marked by the computer."
         }
       ],
       "whoShouldTake": [
-        "UK Family visa applicants",
-        "UK Spouse visa applicants"
+        "Applicants for UK Spouse or Partner visa (first time)",
+        "Applicants for Parent of a Dependent Child visa (first time)",
+        "Representative of an Overseas Business visa applicants",
+        "Sportsperson visa applicants"
       ],
       "acceptedFor": [
-        "UK Visas and Immigration (UKVI)"
+        "UK Visas and Immigration (UKVI)",
+        "UK Family Visa applications"
       ]
     },
     "selt-a2": {
-      "subtitle": "For UK Family visa extension",
-      "description": "Skills for English (UKVI) A2 is for UK Family visa extensions.",
-      "overview": "This test measures speaking and listening skills at level A2. It is required for extending a Family, Spouse or Partner visa after 2.5 years.",
+      "subtitle": "Your Guide to the Skills for English (SELT) UKVI Speaking & Listening A2 Test",
+      "description": "The **Skills for English SELT (Secure English Language Test) Speaking and Listening at Level A2** is an official, UK Home Office-approved exam designed specifically for individuals looking for a stress-free way to meet their UK visa extension requirements.",
+      "overview": "If you are already living in the United Kingdom and need to extend your family or partner visa, you will need to prove your continued progress in the English language. The **Skills for English SELT (Secure English Language Test) Speaking and Listening at Level A2** is an official, UK Home Office-approved exam designed specifically for this purpose.\n\nDelivered by PSI, this exam is a highly accessible option for individuals looking for a stress-free way to meet their UK visa extension requirements.\n\n**What is the Skills for English SELT A2 Test?**\n\nBuilding slightly on the beginner foundations of the A1 exam, the Skills for English SELT A2 is a **two-skills test** that focuses entirely on **Speaking** and **Listening**. It does not include any reading or writing sections.\n\nThe exam measures your English at the CEFR A2 level, which is considered an elementary standard. It evaluates your ability to handle simple, routine conversations, share basic information about your past and present, and understand everyday spoken English.\n\n**Key Takeaway:** You only need to demonstrate an elementary, conversational understanding of English. The test simply proves you have built upon your basic language skills since your initial arrival in the UK.\n\n**Why Choose Skills for English?**\n\nCandidates prefer the Skills for English test because it offers a modern, highly predictable testing environment that removes the stress of traditional exams:\n- **100% Computer-Based:** You will complete the entire exam on a computer using a headset. Because you record your spoken answers directly into the system, there is no face-to-face examiner in the room to make you nervous.\n- **Short Duration:** The exam is very quick, taking **under 35 minutes** to complete.\n- **Fast Results:** Your official test scores are typically available online in just **3 to 5 days**, helping you meet strict visa extension deadlines.\n- **UKVI Approved:** Your results report will include the Unique Reference Number (URN) required by the UK Home Office to process your visa application.\n\n**Test Format and Structure**\n\nYou will take the test in a single, continuous session at a secure UKVI-approved test center. The interface is intuitive, and the tasks are based on highly practical, real-world scenarios like shopping, working, and daily routines.\n- **Speaking:** You will listen to recorded prompts on your screen and speak your answers into the microphone. You will be asked to talk about familiar topics, describe past events or future plans, and express simple opinions. Your answers are recorded and marked by trained assessors later.\n- **Listening:** You will listen to short audio recordings of spoken English (you will get to hear each clip twice). You will then answer simple questions based on the audio, such as identifying the main point or picking out key details. This section is automatically marked.\n\n**When Should You Take This Test?**\n\nChoosing the correct test level is critical for UK immigration. The UK Home Office requires the A2 level for applicants applying for a **visa extension** (usually after spending 2.5 years in the UK) in the following categories:\n\nFamily Visa Extensions:\n- Spouse or Partner visa (extending stay)\n- Parent of a Dependent Child visa (extending stay)\n\nSpecific Work Visas:\n- Sportsperson visa (extending stay)\n\n*(Note: If you are applying to settle permanently in the UK (Indefinite Leave to Remain) or applying for British Citizenship, you will need a slightly higher level of English, such as the B1 level. Always check your exact visa requirements on the UK government website before booking).\n\nWith its focused format and quick turnaround time, the Skills for English SELT A2 is a straightforward choice for taking the next step in your UK journey.",
       "stats": [
         {
+          "label": "Max Duration",
+          "value": "35 Minutes"
+        },
+        {
+          "label": "CEFR Level",
+          "value": "A2 (Elementary)"
+        },
+        {
           "label": "Results In",
-          "value": "3–5 days"
+          "value": "3-5 Days"
         },
         {
-          "label": "Validity",
-          "value": "2 years"
+          "label": "Format",
+          "value": "Computer-Based"
         },
         {
-          "label": "Skills",
-          "value": "Speaking & Listening"
+          "label": "Approval",
+          "value": "UK Home Office"
         }
       ],
       "sections": [
         {
-          "name": "Speaking & Listening",
-          "duration": "17–22 min",
-          "details": "Speaking and listening tasks"
+          "name": "Speaking",
+          "duration": "Part of 35 min session",
+          "details": "You will listen to recorded prompts on your screen and speak your answers into the microphone. You will be asked to talk about familiar topics, describe past events or future plans, and express simple opinions. Your answers are recorded and marked by trained assessors later."
+        },
+        {
+          "name": "Listening",
+          "duration": "Part of 35 min session",
+          "details": "You will listen to short audio recordings of spoken English (you will get to hear each clip twice). You will then answer simple questions based on the audio, such as identifying the main point or picking out key details. This section is automatically marked."
         }
       ],
       "whoShouldTake": [
-        "UK Family visa extension applicants"
+        "UK Spouse or Partner visa extension applicants (extending stay)",
+        "UK Parent of a Dependent Child visa extension applicants (extending stay)",
+        "UK Sportsperson visa extension applicants (extending stay)"
       ],
       "acceptedFor": [
-        "UK Visas and Immigration (UKVI)"
+        "UK Visas and Immigration (UKVI)",
+        "UK Family Visa extensions"
       ]
     },
     "selt-b1": {
-      "subtitle": "For UK Citizenship and Settlement",
-      "description": "Skills for English (UKVI) B1 Speaking & Listening is for UK Citizenship and Settlement.",
-      "overview": "This test measures speaking and listening skills at level B1. It is approved for Indefinite Leave to Remain (Settlement) and British Citizenship applications.",
+      "subtitle": "Your Guide to the Skills for English (SELT) UKVI Speaking & Listening B1 Test",
+      "description": "The **Skills for English SELT (Secure English Language Test) Speaking and Listening at Level B1** is an official, UK Home Office-approved exam designed specifically for individuals applying for UK citizenship or permanent settlement.",
+      "overview": "If you are taking the final, exciting steps to make the United Kingdom your permanent home, proving your English proficiency is a vital requirement. The **Skills for English SELT (Secure English Language Test) Speaking and Listening at Level B1** is an official, UK Home Office-approved exam designed exactly for this purpose.\n\nDelivered globally by PSI, this exam offers a streamlined, highly accessible route for individuals applying for UK citizenship or permanent settlement.\n\n**What is the Skills for English SELT B1 Test?**\n\nLike the A1 and A2 versions, the B1 level is a **two-skills test** focusing exclusively on **Speaking** and **Listening**. It does not include any reading or writing sections.\n\nThe exam measures your English at the CEFR B1 level, which is an intermediate standard. It evaluates your ability to communicate effectively in familiar, everyday situations, express opinions, describe past events or future plans, and understand standard spoken English in social or workplace contexts.\n\n**Key Takeaway:** You do not need to be perfectly fluent to pass this test. It is designed to prove you have the practical, intermediate communication skills necessary to live and work independently in the UK.\n\n**Why Choose Skills for English?**\n\nCandidates prefer this test because it offers a modern, highly predictable testing environment that removes the stress of traditional face-to-face interviews:\n- **100% Computer-Based:** You will complete the entire exam on a computer using a headset. You record your spoken answers directly into the system, meaning there is no examiner in the room to make you nervous.\n- **Short Duration:** The exam is very quick, taking **approximately 35 to 40 minutes** to complete.\n- **Fast Results:** Your official test scores are typically available online in just **3 to 5 days**, helping you meet strict immigration deadlines.\n- **UKVI Approved:** Your results report will include the Unique Reference Number (URN) required by the UK Home Office to process your citizenship or settlement application.\n\n**Test Format and Structure**\n\nYou will take the test in a single, continuous session at a secure UKVI-approved test center. The interface is intuitive, and the tasks are based on practical, real-world scenarios.\n- **Speaking:** You will listen to recorded prompts and speak your answers into the microphone. You will be asked to discuss familiar topics, provide explanations, and express your opinions clearly. Your answers are recorded and marked by trained assessors later.\n- **Listening:** You will listen to short audio recordings of everyday spoken English. You will then answer simple multiple-choice questions to identify the main points and key details.\n\n**When Should You Take This Test?**\n\nChoosing the correct test level is critical for a successful UK immigration application. The UK Home Office requires the B1 level of English for applicants applying for the following permanent statuses:\n\nSettlement and Citizenship:\n- **Settlement:** Indefinite Leave to Remain (ILR)\n- **Citizenship:** Naturalization as a British Citizen\n\n*(Note: If you are applying for certain professional work visas or student visas for degree-level studies, you may need a 4-skills test instead. Always verify your exact requirement on the UK government website before booking).\n\nBy offering a fast, focused, and completely computer-delivered testing experience, the Skills for English SELT B1 clears a smooth path for finalizing your permanent settlement or citizenship in the UK.",
       "stats": [
         {
+          "label": "Max Duration",
+          "value": "35–40 Minutes"
+        },
+        {
+          "label": "CEFR Level",
+          "value": "B1 (Intermediate)"
+        },
+        {
           "label": "Results In",
-          "value": "3–5 days"
+          "value": "3-5 Days"
         },
         {
-          "label": "Validity",
-          "value": "2 years"
+          "label": "Format",
+          "value": "Computer-Based"
         },
         {
-          "label": "Skills",
-          "value": "Speaking & Listening"
+          "label": "Approval",
+          "value": "UK Home Office"
         }
       ],
       "sections": [
         {
-          "name": "Speaking & Listening",
-          "duration": "17–22 min",
-          "details": "Speaking and listening tasks"
+          "name": "Speaking",
+          "duration": "Part of 35-40 min session",
+          "details": "You will listen to recorded prompts and speak your answers into the microphone. You will be asked to discuss familiar topics, provide explanations, and express your opinions clearly. Your answers are recorded and marked by trained assessors later."
+        },
+        {
+          "name": "Listening",
+          "duration": "Part of 35-40 min session",
+          "details": "You will listen to short audio recordings of everyday spoken English. You will then answer simple multiple-choice questions to identify the main points and key details."
         }
       ],
       "whoShouldTake": [
-        "UK Citizenship applicants",
-        "UK Settlement applicants"
+        "UK Settlement: Indefinite Leave to Remain (ILR) applicants",
+        "UK Citizenship: Naturalization as a British Citizen applicants"
       ],
       "acceptedFor": [
-        "UK Visas and Immigration (UKVI)"
+        "UK Visas and Immigration (UKVI)",
+        "UK Settlement & Citizenship"
       ]
     },
     "selt-b1-r-w": {
-      "subtitle": "For UK Work and Student visas",
-      "description": "Skills for English (UKVI) B1 Speaking, Listening, Reading and Writing is for UK Work and Student visas.",
-      "overview": "This test measures all four language skills at level B1. It is approved for UK Work (Skilled Worker) and Student visa applications.",
+      "subtitle": "Your Guide to the Skills for English (SELT) UKVI Speaking, Listening, Reading & Writing B1 (Four Skills)",
+      "description": "The **Skills for English SELT (Secure English Language Test) B1 (Four Skills)** is an official, UK Home Office-approved exam designed for individuals applying for specific UK visa routes — such as certain student visas below degree level.",
+      "overview": "If you are applying for specific UK visa routes — such as certain student visas below degree level — you may be required to prove your English language proficiency across all four core areas. The **Skills for English SELT (Secure English Language Test) B1 (Four Skills)** is an official, UK Home Office-approved exam designed for this purpose.\n\nUnlike the two-skill versions of this test, the \"Four Skills\" format provides a comprehensive assessment of your ability to communicate in an English-speaking environment.\n\n**What is the Skills for English SELT B1 (Four Skills)?**\n\nThis test is a comprehensive assessment that evaluates your **Speaking, Listening, Reading, and Writing** abilities. It is aligned with the CEFR B1 intermediate level, which is a standard requirement for various work, study, and settlement visa applications.\n\nThe entire exam is completed in one continuous, computer-based session. By testing all four modalities, it provides a complete picture of your language competency, ensuring you are prepared for the academic or professional requirements of your specific visa route.\n\n**Key Takeaway:** While the two-skill version of this test is often used for citizenship or settlement, the Four Skills version is typically required for visa routes where you must demonstrate your ability to process written information and produce written content in English.\n\n**Why Choose Skills for English?**\n\nCandidates opt for this test because of its modern, efficient, and user-friendly delivery:\n- **100% Computer-Based:** You will complete all four components on a computer in a single sitting. Speaking and writing responses are digitally recorded and submitted for assessment, meaning you do not have to worry about the pressure of a face-to-face examiner.\n- **Unified Experience:** The transition between each skill is seamless, and because the test is computer-delivered, you benefit from a consistent and controlled environment.\n- **Fast Results:** Official results are typically available online in just **3 to 5 days**, helping you move forward with your visa application quickly.\n- **UKVI Approved:** The test is fully approved by the UK Home Office, and your results will include the mandatory Unique Reference Number (URN) required for your application.\n\n**Test Format and Structure**\n\nYou will take the test at an approved, secure SELT test center. The test is designed to be intuitive, and you will be guided through each section:\n- **Speaking:** You will listen to prompts and record your spoken responses into a headset. You will be asked to discuss familiar topics, explain your opinions, and describe experiences.\n- **Listening:** You will listen to audio recordings of everyday English conversations and answer questions to demonstrate your understanding of key details and main ideas.\n- **Reading:** You will read various short texts — such as notices, emails, or articles — and answer comprehension questions to show you can extract relevant information.\n- **Writing:** You will write responses to practical tasks, such as drafting an email or a short description, demonstrating your ability to use grammar and vocabulary accurately at an intermediate level.\n\n**Who Needs the Four-Skills B1 Test?**\n\nThe requirement for the Four Skills test depends entirely on the visa you are applying for. While many settlement and citizenship routes only require Speaking and Listening, you should choose the B1 Four Skills test if:\n- **Student Visa:** You are applying to study a course below degree level (always confirm your specific institution's requirement).\n- **Specific Work Routes:** Certain temporary or specialized work visa categories mandate a demonstration of all four language competencies.\n\n*(Note: Always verify your specific visa route's requirements on the official UK government website before booking, as visa policies and language requirements can change).\n\nBy opting for the Skills for English SELT B1 Four Skills test, you are choosing a modern, efficient, and secure way to meet your UK visa requirements with confidence.",
       "stats": [
         {
+          "label": "Max Duration",
+          "value": "Variable"
+        },
+        {
+          "label": "CEFR Level",
+          "value": "B1 (Intermediate)"
+        },
+        {
           "label": "Results In",
-          "value": "3–5 days"
+          "value": "3-5 Days"
         },
         {
-          "label": "Validity",
-          "value": "2 years"
+          "label": "Format",
+          "value": "Computer-Based"
         },
         {
-          "label": "Skills",
-          "value": "All 4 Skills"
+          "label": "Approval",
+          "value": "UK Home Office"
         }
       ],
       "sections": [
         {
-          "name": "Speaking & Listening",
-          "duration": "17–22 min"
+          "name": "Speaking",
+          "duration": "Variable",
+          "details": "You will listen to prompts and record your spoken responses into a headset. You will be asked to discuss familiar topics, explain your opinions, and describe experiences."
+        },
+        {
+          "name": "Listening",
+          "duration": "Variable",
+          "details": "You will listen to audio recordings of everyday English conversations and answer questions to demonstrate your understanding of key details and main ideas."
         },
         {
           "name": "Reading",
-          "duration": "60 min"
+          "duration": "Variable",
+          "details": "You will read various short texts — such as notices, emails, or articles — and answer comprehension questions to show you can extract relevant information."
         },
         {
           "name": "Writing",
-          "duration": "60 min"
+          "duration": "Variable",
+          "details": "You will write responses to practical tasks, such as drafting an email or a short description, demonstrating your ability to use grammar and vocabulary accurately at an intermediate level."
         }
       ],
       "whoShouldTake": [
-        "Work visa applicants",
-        "Student visa applicants"
+        "Student Visa: Applicants studying a course below degree level",
+        "Specific Work Routes: Temporary or specialized work visa categories requiring 4 skills"
       ],
       "acceptedFor": [
-        "UK Visas and Immigration (UKVI)"
+        "UK Visas and Immigration (UKVI)",
+        "UK Student and Work visas"
       ]
     },
     "selt-b2": {
-      "subtitle": "For UK Work and Professional visas",
-      "description": "Skills for English (UKVI) B2 is for those who need to demonstrate higher level proficiency for work or professional registration.",
-      "overview": "This test measures all four language skills at level B2. It is approved for various UK work visa categories and professional bodies.",
+      "subtitle": "Your Guide to the Skills for English (SELT) UKVI Speaking, Listening, Reading & Writing B2 (Four Skills)",
+      "description": "The **Skills for English SELT (Secure English Language Test) B2 (Four Skills)** is an official, UK Home Office-approved exam explicitly designed to assess your complete language capabilities.",
+      "overview": "If you are applying for an advanced study program or a specialized work visa in the United Kingdom, you may be required to prove a high level of English proficiency across all communication areas. The **Skills for English SELT (Secure English Language Test) B2 (Four Skills)** is an official, UK Home Office-approved exam explicitly designed to assess your complete language capabilities.\n\nUnlike the beginner and intermediate tests used for settlement, the B2 level is an upper-intermediate qualification. It proves that you have the robust language skills required to thrive in a professional British workplace or a rigorous academic environment.\n\n**What is the Skills for English SELT B2 (Four Skills)?**\n\nThis comprehensive test evaluates your **Speaking, Listening, Reading, and Writing** abilities. Aligned with the CEFR B2 upper-intermediate level, the exam measures your capacity to understand complex texts, express detailed opinions, and interact with native speakers with a high degree of fluency and spontaneity.\n\nYou will complete the entire exam in a single, continuous, computer-based session that generally lasts between **175 and 190 minutes**, depending on the specific tasks. By assessing all four language modalities at an advanced level, it provides the UK Home Office and your future sponsor with a complete, accurate picture of your professional and academic readiness.\n\n**Key Takeaway:** The B2 Four Skills test is for individuals taking on significant roles in the UK. It demonstrates that you can comfortably handle technical discussions, write detailed reports, and communicate confidently without straining yourself or the listener.\n\n**Why Choose Skills for English?**\n\nCandidates taking upper-intermediate exams often prefer the Skills for English format because of its modern, user-friendly, and highly efficient delivery system:\n- **100% Computer-Based:** You will complete all four components on a computer in one sitting. Your spoken and written responses are digitally recorded and submitted for assessment, removing the anxiety of facing a live examiner.\n- **A Unified Experience:** The test transitions smoothly from one skill to the next. Because it is entirely computer-delivered, you benefit from a quiet, controlled environment that allows you to focus deeply on complex reading and writing tasks.\n- **Fast Results:** Even for a comprehensive four-skills test, official results are typically available online in just **3 to 5 days**, helping you meet strict visa application deadlines.\n- **UKVI Approved:** The test is fully approved by the UK Home Office, and your results will include the mandatory Unique Reference Number (URN) required to validate your visa application.\n\n**Test Format and Structure**\n\nYou will take the test at an approved, secure SELT test center. The interface is intuitive, guiding you clearly through each advanced section:\n- **Speaking (Approx. 15 mins):** You will listen to prompts and record your spoken responses using a headset. You will be asked to express detailed viewpoints, weigh the advantages and disadvantages of different options, and describe personal experiences fluently.\n- **Listening (Approx. 40 mins):** You will listen to longer audio recordings, such as presentations, interviews, or discussions on abstract topics. You will answer questions to demonstrate your understanding of both the main ideas and the underlying attitudes or opinions of the speakers.\n- **Reading (Approx. 75 mins):** You will read complex texts from various sources — such as articles, reports, or academic excerpts — and answer questions to show you can extract specific details, understand text structure, and grasp implied meanings.\n- **Writing (Approx. 60 mins):** You will complete practical writing tasks that require you to produce clear, detailed text. This may involve writing an essay, a detailed email, or a report where you must synthesize information and construct a logical argument.\n\n**Who Needs the Four-Skills B2 Test?**\n\nThe UK Home Office requires a B2 level of English across all four skills for several high-level visa categories. You will likely need to take this test if you are applying for:\n- **Skilled Worker Visa:** Required for individuals coming to the UK to do an eligible skilled job with an approved employer.\n- **Health and Care Worker Visa:** For medical professionals coming to work in the NHS or related sectors.\n- **Student Visa (Degree Level or Above):** While some universities accept B1, many require a B2 level for bachelor's or master's degree programs. (Always check directly with your chosen university).\n- **Innovator Founder Visa:** For entrepreneurs looking to set up and run an innovative business in the UK.\n- **Minister of Religion Visa:** For those coming to the UK to take up a key role within their faith community.\n\nBy choosing the Skills for English SELT B2 Four Skills test, you are securing a reliable, stress-free certification that proves you are fully equipped to succeed in the UK's academic and professional spheres.",
       "stats": [
         {
+          "label": "Total Duration",
+          "value": "175–190 Mins"
+        },
+        {
+          "label": "CEFR Level",
+          "value": "B2 (Upper-Int)"
+        },
+        {
           "label": "Results In",
-          "value": "3–5 days"
+          "value": "3-5 Days"
         },
         {
-          "label": "Validity",
-          "value": "2 years"
+          "label": "Format",
+          "value": "Computer-Based"
         },
         {
-          "label": "Skills",
-          "value": "All 4 Skills"
+          "label": "Approval",
+          "value": "UK Home Office"
         }
       ],
       "sections": [
         {
-          "name": "Speaking & Listening",
-          "duration": "17–22 min"
+          "name": "Speaking",
+          "duration": "Approx. 15 mins",
+          "details": "You will listen to prompts and record your spoken responses using a headset. You will be asked to express detailed viewpoints, weigh the advantages and disadvantages of different options, and describe personal experiences fluently."
+        },
+        {
+          "name": "Listening",
+          "duration": "Approx. 40 mins",
+          "details": "You will listen to longer audio recordings, such as presentations, interviews, or discussions on abstract topics. You will answer questions to demonstrate your understanding of both the main ideas and the underlying attitudes or opinions of the speakers."
         },
         {
           "name": "Reading",
-          "duration": "60 min"
+          "duration": "Approx. 75 mins",
+          "details": "You will read complex texts from various sources — such as articles, reports, or academic excerpts — and answer questions to show you can extract specific details, understand text structure, and grasp implied meanings."
         },
         {
           "name": "Writing",
-          "duration": "60 min"
+          "duration": "Approx. 60 mins",
+          "details": "You will complete practical writing tasks that require you to produce clear, detailed text. This may involve writing an essay, a detailed email, or a report where you must synthesize information and construct a logical argument."
         }
       ],
       "whoShouldTake": [
-        "Professional registration seekers",
-        "Advanced work visa applicants"
+        "Skilled Worker Visa applicants",
+        "Health and Care Worker Visa applicants",
+        "Student Visa (Degree Level or Above) applicants",
+        "Innovator Founder Visa applicants",
+        "Minister of Religion Visa applicants"
       ],
       "acceptedFor": [
-        "UK Visas and Immigration (UKVI)"
+        "UK Visas and Immigration (UKVI)",
+        "Professional registrations (UK)",
+        "UK University Admissions"
       ]
     },
     "selt-c1": {
-      "subtitle": "For advanced UK academic and professional requirements",
-      "description": "Skills for English (UKVI) C1 measures advanced proficiency for complex academic or professional environments.",
-      "overview": "This test measures all four language skills at level C1, representing an advanced user of English.",
+      "subtitle": "Your Guide to the Skills for English (SELT) UKVI Speaking, Listening, Reading & Writing C1 (Four Skills)",
+      "description": "The **Skills for English SELT (Secure English Language Test) C1 (Four Skills)** is an official, UK Home Office-approved exam designed to assess your language capabilities at a highly sophisticated level.",
+      "overview": "If you are aiming to enroll in a postgraduate academic program or take on a highly specialized professional role in the United Kingdom, you may be required to prove an advanced level of English proficiency. The **Skills for English SELT (Secure English Language Test) C1 (Four Skills)** is an official, UK Home Office-approved exam designed to assess your language capabilities at a highly sophisticated level.\n\nAs an advanced (CEFR C1) qualification, this test proves that you can express yourself fluently and spontaneously, understand implicit meanings, and use English flexibly for complex academic, professional, and social purposes.\n\n**What is the Skills for English SELT C1 (Four Skills)?**\n\nThis comprehensive exam evaluates your **Speaking, Listening, Reading, and Writing** abilities at the C1 level. It goes beyond basic comprehension and intermediate communication to test your mastery of the English language.\n\nYou will complete the entire exam in a single, continuous, computer-based session that allows for a maximum of **190 minutes**. By assessing all four language skills at an advanced tier, the test provides universities and employers with concrete proof that you can handle rigorous, high-level English environments without difficulty.\n\n**Key Takeaway:** The C1 Four Skills test is for individuals pursuing top-tier opportunities in the UK. It demonstrates that you can confidently navigate demanding academic research, lead high-level professional meetings, and comprehend complex, nuanced texts.\n\n**Why Choose Skills for English?**\n\nCandidates aiming for advanced certifications often prefer the Skills for English format for its efficiency, focus, and modern delivery:\n- **100% Computer-Based:** You will complete all four test components on a computer in one sitting. Your speaking and writing responses are digitally recorded and submitted for assessment, removing the pressure of performing in front of a live, face-to-face examiner.\n- **A Unified Experience:** The test is designed to transition smoothly from one skill to the next. The intuitive computer interface allows you to focus deeply on complex reading passages and advanced writing tasks in a quiet, controlled test center environment.\n- **Fast Results:** Despite being an advanced, comprehensive exam, official results are typically available online in just **3 to 5 days** (and up to 14 days), helping you meet strict university or visa deadlines.\n- **UKVI Approved:** The test is fully approved by the UK Home Office, and your official results report will include the mandatory Unique Reference Number (URN) required to validate your visa application.\n\n**Test Format and Structure**\n\nYou will take the test at an approved, secure SELT test center. The interface will guide you clearly through each of the advanced sections:\n- **Speaking:** You will listen to advanced prompts and record your spoken responses using a headset. You will be expected to express ideas fluently and spontaneously, discuss abstract concepts, and communicate complex thoughts with precision.\n- **Listening:** You will listen to lengthy audio recordings — such as lectures, demanding professional discussions, or detailed presentations. You must answer questions that test your ability to follow extended arguments, recognize underlying attitudes, and grasp implicit meanings.\n- **Reading:** You will read long, complex texts from varied sources, such as academic journals, specialized articles, or literary excerpts. You will answer questions to demonstrate your ability to understand sophisticated vocabulary, text structure, and nuanced details.\n- **Writing:** You will be given two distinct writing tasks on relevant, complex topics. You must produce clear, well-structured, and detailed written responses, showing a high degree of grammatical control, extensive vocabulary, and effective use of organizational patterns.\n\n**Who Needs the Four-Skills C1 Test?**\n\nThe UK Home Office and UK educational institutions require a C1 level of English for highly demanding roles and advanced study programs. You will likely need to take this test if you are applying for:\n- **Student Visa (Postgraduate or PhD Level):** Many prestigious universities require a C1 level of English for Master's degrees, Doctoral programs, or highly competitive undergraduate courses. (Always verify the exact entry requirements with your chosen institution).\n- **Specialized Professional Roles:** Certain high-level corporate, medical, or academic positions may require proof of advanced English proficiency.\n- **Specific Visa Routes:** While B2 is the minimum for many skilled worker visas, having a C1 qualification can strengthen applications for highly specialized sectors or meet the strict criteria of particular employers.\n\nBy choosing the Skills for English SELT C1 Four Skills test, you are securing a highly respected, stress-free certification that proves you are fully equipped to excel at the highest levels of the UK's academic and professional spheres.",
       "stats": [
         {
+          "label": "Max Duration",
+          "value": "190 Minutes"
+        },
+        {
+          "label": "CEFR Level",
+          "value": "C1 (Advanced)"
+        },
+        {
           "label": "Results In",
-          "value": "3–5 days"
+          "value": "3-5 Days"
         },
         {
-          "label": "Validity",
-          "value": "2 years"
+          "label": "Format",
+          "value": "Computer-Based"
         },
         {
-          "label": "Skills",
-          "value": "All 4 Skills"
+          "label": "Approval",
+          "value": "UK Home Office"
         }
       ],
       "sections": [
         {
-          "name": "Speaking & Listening",
-          "duration": "17–22 min"
+          "name": "Speaking",
+          "duration": "Variable",
+          "details": "You will listen to advanced prompts and record your spoken responses using a headset. You will be expected to express ideas fluently and spontaneously, discuss abstract concepts, and communicate complex thoughts with precision."
+        },
+        {
+          "name": "Listening",
+          "duration": "Variable",
+          "details": "You will listen to lengthy audio recordings — such as lectures, demanding professional discussions, or detailed presentations. You must answer questions that test your ability to follow extended arguments, recognize underlying attitudes, and grasp implicit meanings."
         },
         {
           "name": "Reading",
-          "duration": "60 min"
+          "duration": "Variable",
+          "details": "You will read long, complex texts from varied sources, such as academic journals, specialized articles, or literary excerpts. You will answer questions to demonstrate your ability to understand sophisticated vocabulary, text structure, and nuanced details."
         },
         {
           "name": "Writing",
-          "duration": "60 min"
+          "duration": "Variable",
+          "details": "You will be given two distinct writing tasks on relevant, complex topics. You must produce clear, well-structured, and detailed written responses, showing a high degree of grammatical control, extensive vocabulary, and effective use of organizational patterns."
         }
       ],
       "whoShouldTake": [
-        "Advanced academic students",
-        "Senior professional applicants"
+        "Student Visa (Postgraduate or PhD Level) applicants",
+        "Specialized Professional Roles requiring C1",
+        "Applicants wishing to strengthen Skilled Worker Visa application"
       ],
       "acceptedFor": [
-        "UK Visas and Immigration (UKVI)"
+        "UK Visas and Immigration (UKVI)",
+        "UK Postgraduate admissions",
+        "Advanced professional registrations (UK)"
       ]
     },
     "selt-c2": {
-      "subtitle": "For near-native UK requirements",
-      "description": "Skills for English (UKVI) C2 is the highest level of English proficiency test available.",
-      "overview": "This test measures all four language skills at level C2, the highest level on the CEFR scale.",
+      "subtitle": "Your Guide to the Skills for English (SELT) UKVI Speaking, Listening, Reading & Writing C2 (Four Skills)",
+      "description": "The **Skills for English SELT (Secure English Language Test) C2 (Four Skills)** is an official, UK Home Office-approved exam designed to assess your language capabilities at a mastery level.",
+      "overview": "If you are applying for top-tier academic positions, leading research roles, or highly specialized professional opportunities in the United Kingdom, you may wish or be required to prove the highest possible level of English proficiency. The **Skills for English SELT (Secure English Language Test) C2 (Four Skills)** is an official, UK Home Office-approved exam designed to assess your language capabilities at a mastery level.\n\nAs the highest qualification on the CEFR scale (C2), this test proves that you have native-like fluency. It demonstrates that you can understand virtually everything you hear or read with ease, and can express yourself spontaneously, very fluently, and precisely in the most complex situations.\n\n**What is the Skills for English SELT C2 (Four Skills)?**\n\nThis comprehensive exam evaluates your **Speaking, Listening, Reading, and Writing** abilities at the absolute highest standard. It does not just test your ability to communicate; it tests your ability to differentiate finer shades of meaning, handle abstract and structurally complex texts, and engage effortlessly in high-level academic or professional discourse.\n\nYou will complete the entire exam in a single, continuous, computer-based session that lasts a maximum of **190 minutes**. By passing all four skills at the C2 level, you provide universities, employers, and the UK Home Office with undeniable proof of your exceptional English competency.\n\n**Key Takeaway:** The C2 Four Skills test is for individuals who need to demonstrate total mastery of the English language. It proves that you can handle demanding native-level environments - such as defending a doctoral thesis, publishing advanced academic papers, or negotiating complex corporate contracts - without any language barrier.\n\n**Why Choose Skills for English?**\n\nCandidates aiming for the highest level of certification often prefer the Skills for English format for its streamlined, highly focused, and modern delivery:\n- **100% Computer-Based:** You will complete all four test components on a computer in a single sitting. Your speaking and writing responses are digitally recorded and submitted for assessment, allowing you to focus completely on the complex tasks without the distraction of a face-to-face examiner.\n- **A Unified Experience:** The test transitions smoothly between skills. The intuitive interface and quiet test center environment allow you to maintain the deep concentration required for C2-level reading and writing tasks.\n- **Fast Results:** Despite being the most advanced comprehensive exam available, official results are typically available online in just **3 to 5 days**, giving you a quick turnaround for strict application deadlines.\n- **UKVI Approved:** The test is fully approved by the UK Home Office, and your official results report will include the mandatory Unique Reference Number (URN) required to validate your visa application.\n\n**Test Format and Structure**\n\nYou will take the test at an approved, secure SELT test center. The interface will guide you through each of the expert-level sections:\n- **Speaking:** You will listen to advanced prompts and record your spoken responses using a headset. You must demonstrate the ability to express yourself precisely and fluently, discuss highly abstract concepts, and seamlessly adapt your tone and style to the context.\n- **Listening:** You will listen to lengthy audio recordings - such as fast-paced, native-level discussions, complex presentations, or academic debates. You must answer questions that test your ability to catch subtle nuances, implied meanings, and speaker attitudes.\n- **Reading:** You will read complex, dense texts from varied high-level sources, such as literary writings, scientific journals, or specialized reports. You will answer questions to show your ability to comprehend both the broad concepts and the finest details effortlessly.\n- **Writing:** You will complete two demanding writing tasks on relevant, sophisticated topics. You must produce well-structured, compelling, and stylistically accurate written responses, showcasing flawless grammatical control and a vast, sophisticated vocabulary.\n\n**Who Needs the Four-Skills C2 Test?**\n\nWhile lower levels (such as B2 or C1) are often sufficient for standard work and student visas, the C2 level is reserved for individuals pursuing the most demanding roles in the UK. You may choose or be required to take this test if you are applying for:\n- **Top-Tier Academic Programs:** For admission into highly competitive postgraduate programs, doctoral (PhD) research, or postdoctoral positions at elite UK universities.\n- **Academic and Teaching Roles:** If you are applying to teach at a UK university, lead high-level research teams, or publish within English-speaking academic communities.\n- **Executive and Specialized Professions:** For senior corporate leadership, legal professions, or advanced medical roles where native-level communication, nuance, and absolute precision are critical.",
       "stats": [
         {
+          "label": "Max Duration",
+          "value": "190 Minutes"
+        },
+        {
+          "label": "CEFR Level",
+          "value": "C2 (Mastery)"
+        },
+        {
           "label": "Results In",
-          "value": "3–5 days"
+          "value": "3-5 Days"
         },
         {
-          "label": "Validity",
-          "value": "2 years"
+          "label": "Format",
+          "value": "Computer-Based"
         },
         {
-          "label": "Skills",
-          "value": "All 4 Skills"
+          "label": "Approval",
+          "value": "UK Home Office"
         }
       ],
       "sections": [
         {
-          "name": "Speaking & Listening",
-          "duration": "17–22 min"
+          "name": "Speaking",
+          "duration": "Variable",
+          "details": "You will listen to advanced prompts and record your spoken responses using a headset. You must demonstrate the ability to express yourself precisely and fluently, discuss highly abstract concepts, and seamlessly adapt your tone and style to the context."
+        },
+        {
+          "name": "Listening",
+          "duration": "Variable",
+          "details": "You will listen to lengthy audio recordings - such as fast-paced, native-level discussions, complex presentations, or academic debates. You must answer questions that test your ability to catch subtle nuances, implied meanings, and speaker attitudes."
         },
         {
           "name": "Reading",
-          "duration": "60 min"
+          "duration": "Variable",
+          "details": "You will read complex, dense texts from varied high-level sources, such as literary writings, scientific journals, or specialized reports. You will answer questions to show your ability to comprehend both the broad concepts and the finest details effortlessly."
         },
         {
           "name": "Writing",
-          "duration": "60 min"
+          "duration": "Variable",
+          "details": "You will complete two demanding writing tasks on relevant, sophisticated topics. You must produce well-structured, compelling, and stylistically accurate written responses, showcasing flawless grammatical control and a vast, sophisticated vocabulary."
         }
       ],
       "whoShouldTake": [
-        "Highest level academic seekers",
-        "Native-equivalent proficiency seekers"
+        "Top-Tier Academic Programs: PhD research or postdoctoral positions at elite UK universities",
+        "Academic and Teaching Roles: Teaching at a UK university or leading high-level research teams",
+        "Executive and Specialized Professions: Senior corporate leadership, legal, or advanced medical roles"
       ],
       "acceptedFor": [
-        "UK Visas and Immigration (UKVI)"
+        "UK Visas and Immigration (UKVI)",
+        "Top-tier academic admissions",
+        "Professional licensing (advanced roles)"
       ]
     }
   },
@@ -3827,7 +3985,7 @@
       },
       "toefl": {
         "sub_title": "TOEFL iBT",
-        "description": "After teaching TOEFL preparation for many years, I always tell my students something very simple: the TOEFL exam is not only about English ability anymore — it is about how quickly and efficiently you can respond in a digital, adaptive test environment. With the updated TOEFL format being shorter, faster, and more adaptive, mock tests have become even more critical for test-takers.",
+        "description": "If you are preparing to take the TOEFL iBT to fulfill your study abroad or professional goals, taking a full-length mock test is one of the most effective ways to ensure you are ready for test day. A TOEFL iBT Mock Test is a comprehensive practice exam designed to accurately simulate the format, timing, and difficulty of the official ETS test. Instead of just studying vocabulary words or grammar rules in isolation, a mock test immerses you in the real-world conditions of the exam, helping you build both your language skills and your test-taking confidence.",
         "notes": "Students who only study theory often struggle with these tasks because the challenge is not language difficulty but response efficiency. — Master the Shorter, Faster TOEFL iBT",
         "content": [
           {

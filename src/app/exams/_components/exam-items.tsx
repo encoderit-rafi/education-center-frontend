@@ -35,27 +35,31 @@ export default function ExamItems({ data }: { data: any }) {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {data.items?.map((item: any, index: number) => (
-            <Link
-              key={item.id}
-              href={item?.examFormRedirectUrl || `/exams/${item.id}`}
-              target={item?.examFormRedirectUrl ? "_blank" : undefined}
-              rel={item?.examFormRedirectUrl ? "noopener noreferrer" : undefined}
-              className="group"
-            >
-              <BaseCard className="p-8 h-full flex flex-col transition-all duration-300 hover:shadow-2xl hover:border-primary/20">
-                <div className="flex items-center justify-between mb-8">
-                  <BaseCardIcon>{index + 1}</BaseCardIcon>
-                  <BaseCardArrow className="group-hover:translate-x-1 transition-transform" />
-                </div>
+          {data.items?.map((item: any, index: number) => {
+            const isUkvi = (item?.name?.toLowerCase().includes("ukvi") || item?.name?.toLowerCase().includes("life skills") || item?.slug?.toLowerCase().includes("ukvi") || item?.slug?.toLowerCase().includes("life-skills"));
+            const href = isUkvi ? `/exams/${item.id}` : (item?.examFormRedirectUrl || `/exams/${item.id}`);
+            const isExternal = !isUkvi && !!item?.examFormRedirectUrl;
+            return (
+              <Link
+                key={item.id}
+                href={href}
+                target={isExternal ? "_blank" : undefined}
+                rel={isExternal ? "noopener noreferrer" : undefined}
+                className="group"
+              >
+                <BaseCard className="p-8 h-full flex flex-col transition-all duration-300 hover:shadow-2xl hover:border-primary/20">
+                  <div className="flex items-center justify-between mb-8">
+                    <BaseCardIcon>{index + 1}</BaseCardIcon>
+                    <BaseCardArrow className="group-hover:translate-x-1 transition-transform" />
+                  </div>
 
-                <div className="flex-1 space-y-3">
-                  <BaseCardTitle>{item.name}</BaseCardTitle>
-               
-                </div>
-              </BaseCard>
-            </Link>
-          ))}
+                  <div className="flex-1 space-y-3">
+                    <BaseCardTitle>{item.name}</BaseCardTitle>
+                  </div>
+                </BaseCard>
+              </Link>
+            );
+          })}
         </div>
       </div>
     </div>

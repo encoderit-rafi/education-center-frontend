@@ -96,10 +96,25 @@ export default function ExamDetails({ data }: { data: any }) {
   const acceptedFor = detailData.acceptedFor || [];
   const faqs = detailData.faqs || [];
   const description =
-    detailData.description || detailData.content || data.description;
-  const subtitle = detailData.subtitle || "";
-  const overview = detailData.overview || description;
+    data.description ||
+    localizedMeta.description ||
+    staticMeta?.description ||
+    detailData.content ||
+    "";
+  const subtitle =
+    data.subtitle ||
+    localizedMeta.subtitle ||
+    staticMeta?.subtitle ||
+    "";
+  const overview =
+    data.overview ||
+    localizedMeta.overview ||
+    staticMeta?.overview ||
+    description;
   const image = detailData.image || "/images/exams/ielts/ielts-1.jpg";
+
+  const registerUrl = data.examFormRedirectUrl || `/book-exams/${data.slug}`;
+  const isExternalRegister = !!data.examFormRedirectUrl;
 
   return (
     <div className="min-h-screen bg-[#FDFDFD]">
@@ -115,7 +130,9 @@ export default function ExamDetails({ data }: { data: any }) {
               </p>
             )}
             <Link
-              href={`/book-exams/${data.slug}`}
+              href={registerUrl}
+              target={isExternalRegister ? "_blank" : undefined}
+              rel={isExternalRegister ? "noopener noreferrer" : undefined}
               className={cn(buttonVariants(), "w-fit")}
             >
               <Calendar /> Register
@@ -156,25 +173,54 @@ export default function ExamDetails({ data }: { data: any }) {
                   {(() => {
                     const renderFormattedText = (text: string) => {
                       if (!text) return "";
-                      const parts = text.split(/(\*\*.*?\*\*)/g);
-                      return parts.map((part, idx) => {
-                        if (part.startsWith("**") && part.endsWith("**")) {
+                      const boldParts = text.split(/(\*\*.*?\*\*)/g);
+                      return boldParts.map((boldPart, boldIdx) => {
+                        if (boldPart.startsWith("**") && boldPart.endsWith("**")) {
                           return (
-                            <strong key={idx} className="font-bold text-slate-900">
-                              {part.slice(2, -2)}
+                            <strong key={`b-${boldIdx}`} className="font-bold text-slate-900">
+                              {boldPart.slice(2, -2)}
                             </strong>
                           );
                         }
-                        return part;
+                        const italicParts = boldPart.split(/(\*.*?\*)/g);
+                        return italicParts.map((italicPart, italicIdx) => {
+                          if (italicPart.startsWith("*") && italicPart.endsWith("*")) {
+                            return (
+                              <em key={`i-${boldIdx}-${italicIdx}`} className="italic text-slate-900 font-medium">
+                                {italicPart.slice(1, -1)}
+                              </em>
+                            );
+                          }
+                          return italicPart;
+                        });
                       });
                     };
 
                     return overview
                       ?.split("\n\n")
                       .map((para: string, i: number) => (
-                        <p key={i}>{renderFormattedText(para)}</p>
-                      )) || <p>{renderFormattedText(description)}</p>;
+                        <p key={i} className="whitespace-pre-line">{renderFormattedText(para)}</p>
+                      )) || <p className="whitespace-pre-line">{renderFormattedText(description)}</p>;
                   })()}
+
+                  {whoShouldTake.length > 0 && (
+                    <ul className="mt-4 space-y-2 list-disc pl-5">
+                      {whoShouldTake.map((item: string, i: number) => (
+                        <li key={i} className="text-slate-600 leading-relaxed text-xs lg:text-sm">
+                          {item.includes(":") ? (
+                            <>
+                              <strong className="font-bold text-slate-900">
+                                {item.split(":")[0]}:
+                              </strong>
+                              {item.split(":").slice(1).join(":")}
+                            </>
+                          ) : (
+                            item
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
               </section>
 
@@ -339,35 +385,6 @@ export default function ExamDetails({ data }: { data: any }) {
 
           {/* Sidebar Area (Compact) */}
           <aside className="space-y-4 lg:pt-0">
-            {whoShouldTake.length > 0 && (
-              <BaseCard className="p-5 border-slate-200 bg-white h-auto">
-                <h3 className="text-[11px]   text-slate-500 mb-4">
-                  Who Should Take This?
-                </h3>
-                <ul className="space-y-3">
-                  {whoShouldTake.map((item: string, i: number) => (
-                    <li key={i} className="flex gap-2.5">
-                      <div className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
-                        <CheckCircle2 size={10} />
-                      </div>
-                      <span className="text-slate-600 leading-relaxed font-medium text-xs">
-                        {item.includes(":") ? (
-                          <>
-                            <strong className="font-bold text-slate-900">
-                              {item.split(":")[0]}:
-                            </strong>
-                            {item.split(":").slice(1).join(":")}
-                          </>
-                        ) : (
-                          item
-                        )}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </BaseCard>
-            )}
-
             {acceptedFor.length > 0 && (
               <BaseCard className="p-5 bg-slate-900 border-slate-800 text-white h-auto">
                 <h3 className="text-[11px]   text-slate-500 mb-4">
@@ -399,7 +416,9 @@ export default function ExamDetails({ data }: { data: any }) {
                     </p>
                   </div>
                   <Link
-                    href={`/book-exams/${data.slug}`}
+                    href={registerUrl}
+                    target={isExternalRegister ? "_blank" : undefined}
+                    rel={isExternalRegister ? "noopener noreferrer" : undefined}
                     className={cn(
                       buttonVariants({ variant: "light", size: "sm" }),
                       "w-full font-black text-xs py-5 rounded-xl shadow-xl hover:scale-[1.02] transition-all",

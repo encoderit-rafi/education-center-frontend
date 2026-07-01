@@ -17,24 +17,24 @@ export const EXAM_IDS_DATA = {
     name: "IELTS UKVI",
   },
   ielts_ukvi_academic: {
-    id: "ielts-ukvi-academic",
-    name: "IELTS UKVI Academic",
+    id: "ielts-for-ukvi-academic",
+    name: "IELTS for UKVI Academic",
   },
   ielts_ukvi_general: {
-    id: "ielts-ukvi-general",
-    name: "IELTS UKVI General",
+    id: "ielts-for-ukvi-general-training",
+    name: "IELTS for UKVI General Training",
   },
   ielts_life_skills_a1: {
-    id: "ielts-life-skills-a1",
-    name: "IELTS Life Skills A1",
+    id: "ielts-for-ukvi-life-skills-a1",
+    name: "IELTS for UKVI Life Skills A1",
   },
   ielts_life_skills_a2: {
-    id: "ielts-life-skills-a2",
-    name: "IELTS Life Skills A2",
+    id: "ielts-for-ukvi-life-skills-a2",
+    name: "IELTS for UKVI Life Skills A2",
   },
   ielts_life_skills_b1: {
-    id: "ielts-life-skills-b1",
-    name: "IELTS Life Skills B1",
+    id: "ielts-for-ukvi-life-skills-b1",
+    name: "IELTS for UKVI Life Skills B1",
   },
   toefl_ibt: {
     id: "toefl-ibt",
@@ -1558,11 +1558,11 @@ export const EXAM_DETAILE_DATA = [
   {
     ...EXAM_IDS_DATA.ielts_general,
     type: "details",
-    subtitle: "For migration, work experience, or secondary education",
+    subtitle: "The IELTS General Training Exam: Your Key to Global Work and Life",
     description:
       "The IELTS General Training test is designed to measure your English language proficiency in a practical, everyday context. The test reflects both workplace and social situations.",
     overview:
-      "The IELTS General Training test is designed to measure your English language proficiency in a practical, everyday context. The test reflects both workplace and social situations. Take IELTS General Training if you want to work or undertake work-related training in an English-speaking country or emigrate to an English-speaking country.",
+      "The IELTS General Training test is specifically structured to evaluate your English language proficiency within practical, everyday environments. Rather than focusing on academic settings, this version of the exam mirrors the real-world communication skills needed for both professional workplaces and daily social interactions.\n\nWho should take this test? You should choose the IELTS General Training exam if you plan to:",
     stats: [
       { label: "Total Duration", value: "2h 45m" },
       { label: "Score Scale", value: "0–9 Bands" },
@@ -1576,11 +1576,10 @@ export const EXAM_DETAILE_DATA = [
         name: "Listening Component",
         duration: "30 minutes (+10m transfer time)",
         details:
-          "The Listening Component is designed to assess a wide range of listening skills, including how well you understand main ideas and follow arguments.",
+          "This section is designed to evaluate a diverse range of auditory comprehension skills. It specifically measures your ability to process spoken English by focusing on how well you can:",
         skills: [
-          "understand main ideas and specific factual information",
-          "recognise the opinions, attitudes and purpose of a speaker",
-          "follow the development of an argument",
+          "Grasp Core Concepts: Accurately identify and comprehend the primary themes and main messages presented in a conversation or monologue.",
+          "Track Discussions: Logically follow the progression of thoughts, details, and conversational arguments.",
         ],
         format:
           "You will listen to four recordings of native English speakers and then write your answers to a series of questions.\nRecording 1: a conversation between two people set in an everyday social context.\nRecording 2: a monologue set in an everyday social context, e.g. a speech about local facilities.\nRecording 3: a conversation between up to four people set in an educational or training context, e.g. a university tutor and a student discussing an assignment.\nRecording 4: a monologue on an academic subject, e.g. a university lecture.",
@@ -1595,7 +1594,11 @@ export const EXAM_DETAILE_DATA = [
         name: "Reading Component",
         duration: "60 minutes",
         details:
-          "The IELTS Reading test takes approximately 60 minutes, including the time it takes to transfer your answers from your question booklet to your answer sheet.",
+          "This section evaluates your reading comprehension within a strict 60-minute timeframe. It is crucial to pace yourself effectively throughout the assessment, as this one-hour limit must cover all your reading and answering activities.\n\nKey details of this section include:",
+        skills: [
+          "Strict Time Management: You have exactly one hour to complete the entire reading assessment.",
+          "Answer Transfer: No additional time is provided at the end of the test to move your answers. You must factor in the time needed to transfer your responses from the question booklet onto the official answer sheet within the allotted 60 minutes.",
+        ],
         format:
           "Extracts from books, magazines, newspapers, notices, advertisements, company handbooks and guidelines. These are materials you are likely to encounter on a daily basis in an English-speaking environment.",
         questions: "40 questions",
@@ -1609,7 +1612,11 @@ export const EXAM_DETAILE_DATA = [
         name: "Writing Component",
         duration: "60 minutes",
         details:
-          "Write responses to practical and general prompts. Consists of two tasks that must be managed within the hour.",
+          "This section evaluates your ability to produce written English for everyday, practical situations. You will have a strict 60-minute time limit to successfully manage and complete two distinct writing tasks.\n\nKey features of this section include:",
+        skills: [
+          "Real-World Prompts: Your writing tasks will be based on general, practical scenarios, assessing your ability to communicate effectively in everyday social or workplace contexts.",
+          "Time Management: You must strategically allocate your one hour to ensure both writing tasks are fully addressed and completed.",
+        ],
         format:
           "Task 1: Write a letter requesting information or explaining a situation (150+ words).\nTask 2: Write an essay in response to a point of view, argument or problem (250+ words).",
         questions: "2 tasks",
@@ -1628,9 +1635,8 @@ export const EXAM_DETAILE_DATA = [
       },
     ],
     whoShouldTake: [
-      "Individuals planning to work or undertake work-related training in an English-speaking country",
-      "Those who wish to emigrate to an English-speaking country",
-      "People looking to demonstrate proficiency in a practical, everyday context",
+      "Advance Your Career: Secure employment or participate in occupational training programs in an English-speaking country.",
+      "Immigrate Abroad: Fulfill the language requirements necessary for permanent residency or citizenship applications.",
     ],
     acceptedFor: [
       "Work Permits",
@@ -1649,11 +1655,11 @@ export const EXAM_DETAILE_DATA = [
   {
     ...EXAM_IDS_DATA.ielts_ukvi_academic,
     type: "details",
-    subtitle: "For study at degree level and above in the UK",
+    subtitle: "IELTS for UKVI (Academic): Approved for UK Visas and Immigration",
     description:
-      "IELTS Academic for UKVI measures whether your level of English language proficiency is suitable for an academic environment.",
+      "The IELTS for UKVI (Academic) is a UK Home Office-approved Secure English Language Test (SELT) specifically designed for individuals applying for UK student visas or seeking professional registration in the United Kingdom.",
     overview:
-      "IELTS Academic for UKVI is a Secure English Language Test (SELT) that is required for student visa applications to the UK for courses at degree level and above.",
+      "The IELTS for UKVI (Academic) is a UK Home Office-approved Secure English Language Test (SELT) specifically designed for individuals applying for UK student visas or seeking professional registration in the United Kingdom.\n\nWhile this exam features the exact same format, content, and scoring system as the standard IELTS Academic test, it is administered in specialized testing centers equipped with stringent, enhanced security measures, such as voice recording and CCTV monitoring.\n\n**Important Registration Note**: The standard IELTS Academic test is *not* accepted for UK visa applications. To fulfill UK immigration requirements, you must explicitly select the \"IELTS for UKVI\" option and book your exam exclusively through an officially authorized UKVI test center.",
     stats: [
       { label: "Test Duration", value: "2h 45m" },
       { label: "Score Scale", value: "0–9 Bands" },
@@ -1686,17 +1692,22 @@ export const EXAM_DETAILE_DATA = [
         icon: "speaking",
       },
     ],
-    whoShouldTake: ["Students applying for UK student visas (degree level)"],
+    whoShouldTake: [
+      "Assessment Components: The test evaluates your English proficiency across four areas: Listening, Reading, Writing, and Speaking, with the Speaking portion conducted as a face-to-face interview.",
+      "Testing Options & Results: The exam is available in both paper-based and computer-delivered formats at approved UKVI locations. If you choose the computer-delivered option, you can typically expect your results within 3 to 5 days.",
+      "Score Requirements: Minimum score thresholds depend entirely on your specific visa category. For instance, student visas generally require a minimum score of 5.5 across all components, whereas other immigration routes may only require a 4.0.",
+      "Certification Validity: Your official Test Report Form will feature a unique identification prefix confirming it meets UKVI standards. These test results remain valid for exactly two years.",
+    ],
     acceptedFor: ["UK Visas and Immigration (UKVI)", "UK Universities"],
   },
   {
     ...EXAM_IDS_DATA.ielts_ukvi_general,
     type: "details",
-    subtitle: "For migration and work in the UK",
+    subtitle: "IELTS General Training for UKVI: Approved for UK Work and Migration",
     description:
-      "IELTS General Training for UKVI measures English language proficiency in a practical, everyday context.",
+      "The IELTS General Training for UKVI is a Secure English Language Test (SELT) officially mandated by the UK Home Office for individuals applying for work, migration, or vocational training visas in the United Kingdom. It shares the exact same content, format, scoring system, and level of difficulty as the standard IELTS General Training exam.",
     overview:
-      "IELTS General Training for UKVI is a Secure English Language Test (SELT) required for UK visa applications for migration, work, or secondary education.",
+      "The IELTS General Training for UKVI is a Secure English Language Test (SELT) officially mandated by the UK Home Office for individuals applying for work, migration, or vocational training visas in the United Kingdom. It shares the exact same content, format, scoring system, and level of difficulty as the standard IELTS General Training exam.\n\nThe crucial distinction lies in the administrative requirements. The UKVI version is conducted under enhanced security protocols at officially authorized testing centers. Furthermore, your final Test Report Form (TRF) will include a Unique Reference Number (URN), which is necessary to validate your UK visa application.\n\nTest Format Breakdown\n\nThe entire assessment takes 2 hours and 45 minutes to complete and evaluates your proficiency across four fundamental communication skills:",
     stats: [
       { label: "Test Duration", value: "2h 45m" },
       { label: "Score Scale", value: "0–9 Bands" },
@@ -1729,17 +1740,22 @@ export const EXAM_DETAILE_DATA = [
         icon: "speaking",
       },
     ],
-    whoShouldTake: ["Migrants to the UK", "Work visa applicants"],
+    whoShouldTake: [
+      "Listening (30 Minutes): You will answer 40 questions based on four audio recordings featuring everyday conversations and educational monologues.",
+      "Reading (60 Minutes): This section includes 40 questions designed to test your comprehension of texts related to daily life, workplace scenarios, and general interest topics.",
+      "Writing (60 Minutes): You must complete two distinct tasks. Task 1 involves writing a formal or informal letter, while Task 2 requires you to compose a semi-formal essay.",
+      "Speaking (11–14 Minutes): Divided into three parts, this is a live, face-to-face interactive interview where you will discuss familiar topics such as your family, work, or hobbies.",
+    ],
     acceptedFor: ["UK Visas and Immigration (UKVI)", "UK Work Permits"],
   },
   {
     ...EXAM_IDS_DATA.ielts_life_skills_a1,
     type: "details",
-    subtitle: "For Family, Spouse or Partner visas",
+    subtitle: "IELTS for UKVI Life Skills A1: English for Family and Spouse Visas",
     description:
-      "IELTS Life Skills A1 measures Speaking and Listening skills at CEFR Level A1.",
+      "The IELTS for UKVI Life Skills A1 is a Secure English Language Test (SELT) focused entirely on speaking and listening at CEFR Level A1. It is designed for individuals seeking family, spouse, or partner visas in the United Kingdom, evaluating basic English communication skills in practical, everyday contexts.",
     overview:
-      "This test is for those who need to prove their English speaking and listening skills as part of their application to UK Visas and Immigration for 'family of a settled person' visas.",
+      "The IELTS for UKVI Life Skills A1 is a Secure English Language Test (SELT) focused entirely on speaking and listening at CEFR Level A1. It is designed for individuals seeking family, spouse, or partner visas in the United Kingdom, evaluating basic English communication skills in practical, everyday contexts.\n\nTest Format Breakdown\n\nUnlike standard IELTS exams, the Life Skills A1 assessment does not involve any reading or writing components.\n• **Interactive Structure**: The test is conducted in person with a certified examiner and one other candidate. Rest assured, the other test-taker's performance will not negatively impact your results.\n• **Skill Focus**: You will be evaluated strictly on your ability to listen accurately and communicate effectively in conversational English.\n\nCommon Test Topics\n\nThe assessment revolves around practical, everyday experiences. You should be prepared to comfortably discuss common subjects, including:\n• Personal information (e.g., your name and age)\n• Family members and friends\n• Your daily schedule and routines\n• The weather\n• Transportation and travel\n• Your job or hobbies\n• Your housing situation and local neighborhood\n• Shopping and purchasing everyday goods\n\nScoring and Results\n\nYou will not receive a traditional numerical IELTS band score for this assessment. Instead, your results will simply be issued as a **Pass** or **Fail**. Achieving a \"Pass\" officially confirms that you have met the required English language standards for your visa application.",
     stats: [
       { label: "Duration", value: "16–18 mins" },
       { label: "Results In", value: "7 days" },
@@ -1754,42 +1770,42 @@ export const EXAM_DETAILE_DATA = [
         icon: "speaking",
       },
     ],
-    whoShouldTake: ["UK Family/Spouse visa applicants"],
+    whoShouldTake: [],
     acceptedFor: ["UK Visas and Immigration (UKVI)"],
   },
   {
     ...EXAM_IDS_DATA.ielts_life_skills_a2,
     type: "details",
-    subtitle: "For Family visa extension",
+    subtitle: "IELTS for UKVI Life Skills A2: English for Visa Extensions",
     description:
-      "IELTS Life Skills A2 measures Speaking and Listening skills at CEFR Level A2.",
+      "The IELTS for UKVI Life Skills A2 is a concise, 16-18 minute Secure English Language Test focused entirely on speaking and listening. It is specifically designed for individuals seeking to extend their family, spouse, or partner visas in the United Kingdom, evaluating basic English communication skills in practical, everyday contexts.",
     overview:
-      "This test is for those who need to prove their English speaking and listening skills as part of their application to UK Visas and Immigration for extension to Family, Spouse or Partner visa.",
+      "The IELTS for UKVI Life Skills A2 is a concise, 16-18 minute Secure English Language Test focused entirely on speaking and listening. It is specifically designed for individuals seeking to extend their family, spouse, or partner visas in the United Kingdom, evaluating basic English communication skills in practical, everyday contexts.\n\nTest Format Breakdown\n\nUnlike standard IELTS exams, the Life Skills A2 assessment does not involve any reading or writing components.\n• **Interactive Structure**: The test is conducted in person with a certified examiner and one other candidate. Rest assured, the other test-taker's performance will not negatively impact your results.\n• **Skill Focus**: You will be evaluated strictly on your ability to listen accurately and communicate effectively in conversational English.\n\nCommon Test Topics\n\nDiscussions during the exam are based on familiar, everyday subjects. You should be prepared to talk about:\n• Personal details and daily routines\n• Family members and friends\n• Shopping and transportation\n• Health, leisure activities, and the weather\n• Education, employment, and your housing situation\n\nScoring and Results\n\nYou will not receive a traditional numerical IELTS band score for this assessment. Instead, your results will simply be issued as a **Pass** or **Fail**. Achieving a \"Pass\" officially confirms that you have met the required English language standards for your visa extension.",
     stats: [
-      { label: "Duration", value: "18–20 mins" },
+      { label: "Duration", value: "16–18 mins" },
       { label: "Results In", value: "7 days" },
       { label: "Validity", value: "2 years" },
     ],
     sections: [
       {
         name: "Speaking & Listening",
-        duration: "18–20 min",
+        duration: "16–18 min",
         details:
           "Face-to-face interview with an examiner and another test taker.",
         icon: "speaking",
       },
     ],
-    whoShouldTake: ["UK Family visa extension applicants"],
+    whoShouldTake: [],
     acceptedFor: ["UK Visas and Immigration (UKVI)"],
   },
   {
     ...EXAM_IDS_DATA.ielts_life_skills_b1,
     type: "details",
-    subtitle: "For Citizenship and Settlement",
+    subtitle: "IELTS for UKVI Life Skills B1: English for Settlement and Citizenship",
     description:
-      "IELTS Life Skills B1 measures Speaking and Listening skills at CEFR Level B1.",
+      "The IELTS for UKVI Life Skills B1 is a Secure English Language Test (SELT) officially mandated by the UK Home Office for individuals seeking Indefinite Leave to Remain (ILR), settlement, or British Citizenship. This assessment focuses entirely on your face-to-face communication abilities, meaning there are no reading or writing components involved.",
     overview:
-      "This test is for those who need to prove their English speaking and listening skills as part of their application to UK Visas and Immigration for indefinite leave to remain or citizenship.",
+      "The IELTS for UKVI Life Skills B1 is a Secure English Language Test (SELT) officially mandated by the UK Home Office for individuals seeking Indefinite Leave to Remain (ILR), settlement, or British Citizenship. This assessment focuses entirely on your face-to-face communication abilities, meaning there are no reading or writing components involved.\n\nTest Overview\n• **Interactive Format**: The exam is conducted in person with one certified examiner and a second test-taker. Rest assured, the other candidate's performance will not impact your final outcome.\n• **Duration**: The entire assessment takes approximately 22 minutes to complete.\n• **Skill Focus**: Evaluates strictly your speaking and listening proficiencies.\n• **Scoring System**: You will not receive a traditional numerical band score; results are issued simply as a **Pass** or **Fail**.\n\nTest Structure & Phases\n\nAt the B1 level, you are expected to demonstrate the ability to gather and share information, express your preferences, and maintain a structured, coherent discussion. The exam is broken down into four key parts:\n• **Phase 1A (Introduction & Interview)**: You will introduce yourself, provide personal details, and answer basic questions regarding daily life.\n• **Phase 1B (Presentation & Q&A)**: You will deliver a brief spoken presentation (about 1.5 minutes) on a chosen topic, followed by answering questions posed by the other candidate.\n• **Phase 2A (Listening Comprehension)**: You will listen to two short audio recordings, answer specific questions about the content, and discuss what you heard.\n• **Phase 2B (Collaborative Planning)**: You will work together with the other test-taker to discuss a prompt, plan a scenario, or solve a practical problem.\n\nCommon Test Topics\n\nAll tasks throughout the exam revolve around familiar, everyday themes. You should be comfortable discussing subjects such as:\n• Family, friends, and social life\n• Employment, education, and professional training\n• Health, leisure activities, free time, and media\n• Shopping and transportation\n• Your local housing situation and the weather",
     stats: [
       { label: "Duration", value: "22 mins" },
       { label: "Results In", value: "7 days" },
@@ -1804,21 +1820,22 @@ export const EXAM_DETAILE_DATA = [
         icon: "speaking",
       },
     ],
-    whoShouldTake: ["UK Citizenship/Settlement applicants"],
+    whoShouldTake: [],
     acceptedFor: ["UK Visas and Immigration (UKVI)"],
   },
   {
     ...EXAM_IDS_DATA.toefl,
+    slug: "toefl-ibt",
     type: "details",
-    subtitle: "Test of English as a Foreign Language — Internet-Based Test",
+    subtitle: "The TOEFL iBT: A Global Standard for University Admissions",
     description:
-      "The TOEFL iBT is an Internet-based English proficiency test that measures reading, listening, speaking, and writing skills in an academic context.",
+      "Developed by the Educational Testing Service (ETS), the TOEFL iBT (Internet-Based Test) is a premier standardized assessment designed to evaluate your ability to use and comprehend English in an academic environment. It accurately measures your readiness to communicate effectively at the university level.",
     overview:
-      "The TOEFL iBT is used primarily for academic admissions, immigration, and professional certification. It takes about 1.5 hours to complete in one sitting, though test takers should allow approximately two hours for the entire process including directions.\n\nAs the test adapts to each individual, the specific items and exact timing may vary slightly. It is widely recognized as one of the most respected English-language tests in the world, accepted by more than 11,500 universities and other institutions in over 160 countries.",
+      "Developed by the Educational Testing Service (ETS), the TOEFL iBT (Internet-Based Test) is a premier standardized assessment designed to evaluate your ability to use and comprehend English in an academic environment. It accurately measures your readiness to communicate effectively at the university level.\n\n**Unmatched Global Recognition**: As one of the most trusted English proficiency exams, the TOEFL iBT opens doors to higher education worldwide. It is officially recognized and accepted by more than 13,000 universities, colleges, and educational institutions across over 160 countries.\n\n**The 2026 TOEFL iBT Format: Everything You Need to Know**\n\nStarting **January 21, 2026**, the TOEFL iBT is undergoing its most significant update in decades. ETS is modernizing the exam to make it shorter, fully adaptive, and better aligned with real-world language use.\n\nWhether you are aiming for undergraduate admission or a highly competitive graduate program, here is exactly what you need to know about the new 90-minute test.\n\n**What's Changing at a Glance**\n• **Shorter Duration**: The test has been compressed from roughly two hours down to just **90 minutes** running completely back-to-back with no scheduled breaks.\n• **Adaptive Difficulty**: The Reading and Listening sections now feature multistage adaptive testing. How well you perform in the first module directly determines the difficulty of the second.\n• **New Scoring Scale**: The traditional 0–120 score is being replaced by a **1.0 to 6.0 band scale** to align directly with the CEFR (Common European Framework of Reference).\n• **Faster Results**: Official scores will now be delivered to test-takers within 72 hours.\n\n**Crucial test-day tip**: The Speaking section has been entirely redesigned. Long, prepared academic speeches are out. Instead, you will be evaluated on spontaneous verbal recall and conversational fluency, with zero preparation time given before you speak.\n\n**Understanding the New 1.0 to 6.0 Scale**\n\nFor decades, the standard for a \"good\" TOEFL score was usually around 80 to 100+. The new system simplifies this by using a 1.0 to 6.0 band (in 0.5 increments).\n• **How it is calculated**: Each of the four sections receives a score from 1.0 to 6.0. Your overall score is the average of those four sections, rounded to the nearest half-band.\n• **The CEFR Alignment**: A score of **6.0** indicates C2 Mastery (equivalent to the old 107–120). A **5.0** or **5.5** indicates C1 Advanced (95–106), which is the standard for highly competitive programs. A **4.0** or **4.5** hits the B2 Upper Intermediate level (72–94), satisfying most standard university admissions.\n• **The Transition Phase (2026–2028)**: Do not panic if universities still ask for a \"100 on the TOEFL.\" Through January 2028, ETS will issue score reports showing both the new 1.0–6.0 band and your comparable 0–120 score to help admissions teams adjust.",
     stats: [
-      { label: "Total Duration", value: "~2 Hours" },
-      { label: "Score Scale", value: "0–120" },
-      { label: "Results In", value: "3 Days" },
+      { label: "Total Duration", value: "90 Minutes" },
+      { label: "Score Scale", value: "1.0–6.0 Bands" },
+      { label: "Results In", value: "72 Hours" },
       { label: "Validity", value: "2 Years" },
       { label: "Format", value: "Internet-based" },
     ],
@@ -1826,40 +1843,41 @@ export const EXAM_DETAILE_DATA = [
       {
         icon: "reading",
         name: "Reading",
-        duration: "Approx. 30 minutes",
+        duration: "~30 minutes",
         questions: "50 items",
         details:
-          "Read academic and daily life texts to evaluate comprehension.",
+          "The Reading section now features multistage adaptive testing. How well you perform in the first module directly determines the difficulty of the second.",
         format:
-          "• Complete the Words\n• Read in Daily Life\n• Read an Academic Passage",
+          "• Complete the Words\n• Read in Daily Life\n• Read an Academic Passage (shorter)",
       },
       {
         icon: "listening",
         name: "Listening",
-        duration: "Approx. 29 minutes",
+        duration: "~29 minutes",
         questions: "47 items",
         details:
-          "Evaluate your ability to understand conversations and lectures in English.",
+          "The Listening section now features multistage adaptive testing. How well you perform in the first module directly determines the difficulty of the second.",
         format:
-          "• Listen and Choose a Response\n• Listen to a Conversation\n• Listen to an Announcement\n• Listen to an Academic Talk",
+          "• Listen and Choose a Response\n• Listen to campus conversations, announcements, and academic talks",
       },
       {
         icon: "writing",
         name: "Writing",
-        duration: "Approx. 23 minutes",
+        duration: "~23 minutes",
         questions: "12 items",
-        details: "Write responses to academic and practical prompts.",
+        details:
+          "Write responses to academic and practical prompts assessing everyday communication.",
         format:
-          "• Build a Sentence\n• Write an Email\n• Write for an Academic Discussion",
+          "• Build a Sentence\n• Write an Email (7 mins)\n• Write for an Academic Discussion (10 mins)",
       },
       {
         icon: "speaking",
         name: "Speaking",
-        duration: "Approx. 8 minutes",
+        duration: "~8 minutes",
         questions: "11 items",
         details:
-          "Respond to prompts verbally to demonstrate speaking proficiency.",
-        format: "• Listen and Repeat\n• Take an Interview",
+          "Spontaneous verbal recall and conversational fluency with zero preparation time.",
+        format: "• Listen and Repeat (7 progressive prompts)\n• Take an Interview (4 conversational questions)",
       },
     ],
     whoShouldTake: [
@@ -2076,25 +2094,31 @@ export const EXAM_DETAILE_DATA = [
   {
     ...EXAM_IDS_DATA.pte_home_a2,
     type: "details",
-    subtitle: "For UK Family visa extension",
+    subtitle: "PTE Home A2: Secure English Language Test for UK Visa Extensions",
     description:
-      "PTE Home A2 is for those applying for a UK Family visa extension.",
+      "The PTE Home A2 is a Secure English Language Test (SELT) officially approved by the UK Home Office for family visa extensions. Building on beginner foundations, it evaluates Speaking and Listening skills at CEFR Level A2 through basic, everyday situations.",
     overview:
-      "PTE Home A2 is a Secure English Language Test (SELT) that measures only your speaking and listening skills.",
+      "If you are already living in the United Kingdom and need to extend your family visa, proving your continued progress in the English language is a mandatory step. The PTE Home A2 is a Secure English Language Test (SELT) specifically designed to meet the UK Home Office requirements for visa extensions.\n\nBuilding slightly on the beginner foundations of the A1 test, the PTE Home A2 evaluates your ability to communicate in basic, everyday situations at an elementary level.\n\n**What is the PTE Home A2?**\n\nLike the A1 version, the PTE Home A2 is a **two-skills test** that focuses entirely on **Speaking and Listening**. It does not include any reading or writing sections. The exam measures your ability to understand and express simple opinions, talk about your routines, and handle short social exchanges.\n\n**Key Takeaway**: You only need to demonstrate an elementary, conversational understanding of English. The test proves you have built upon your basic language skills since your initial arrival in the UK.\n\n**Why Choose the PTE Home A2?**\n\nCandidates choose this test for its efficiency, predictability, and stress-free grading system:\n• **Simple Pass/Fail Result**: Instead of worrying about achieving a specific numerical score, you will simply receive a \"Pass\" or \"Fail\" based on whether you meet the required elementary standard.\n• **Extremely Short Duration**: The entire computer-based exam takes **less than 30 minutes** to complete.\n• **Fast Results**: Your scores are generally returned within **48 hours**, giving you the Unique Reference Number (URN) required to proceed with your visa extension application without delay.\n• **Unbiased AI Scoring**: Your spoken answers are evaluated by an advanced artificial intelligence system, ensuring complete fairness and objectivity.\n\n**When Should You Take the PTE Home A2?**\n\nChoosing the correct test level is critical for UK immigration. The UK Home Office requires the A2 level for applicants applying for a **visa extension** (usually after spending 2.5 years in the UK) in the following categories:\n\nFamily Visa Extensions:\n• Spouse or Partner visa (extending stay)\n• Parent of a Dependent Child visa (extending stay)\n\n*(Note: If you are applying to settle permanently in the UK (Indefinite Leave to Remain) or applying for British Citizenship, you will need a slightly higher level of English, such as the PTE Home B1).*\n\nBy offering a quick, practical, and highly accessible format, the PTE Home A2 takes the stress out of your visa extension process, helping you seamlessly continue your life in the UK.",
     stats: [
-      { label: "Test Duration", value: "22 mins" },
-      { label: "Results In", value: "2 days" },
-      { label: "Validity", value: "2 years" },
+      { label: "Test Duration", value: "< 30 mins" },
+      { label: "Results In", value: "48 Hours" },
+      { label: "Validity", value: "2 Years" },
+      { label: "Format", value: "Computer-based" },
     ],
     sections: [
       {
         name: "Speaking & Listening",
-        duration: "22 min",
-        details: "Speaking and listening tasks only",
+        duration: "< 30 min",
+        details: "The exam consists of three straightforward question types designed to simulate everyday conversation and listening comprehension.",
         icon: "speaking",
+        format:
+          "• Repeat Sentence: Listen to short sentences and repeat them into your microphone exactly as you heard them.\n• Describe Image: Look at simple images (such as everyday scenes or objects) and provide a brief spoken description.\n• Retell Story: Listen to a short, simple story or conversation and then summarize or retell the key points in your own words.",
       },
     ],
-    whoShouldTake: ["UK Family visa extension applicants"],
+    whoShouldTake: [
+      "Applicants extending their UK Spouse or Partner visa",
+      "Applicants extending their UK Parent of a Dependent Child visa",
+    ],
     acceptedFor: ["UK Visas and Immigration (UKVI)"],
   },
   {
