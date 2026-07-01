@@ -42,7 +42,7 @@ export default function InstitutionsPage() {
       <section className="bg-white border-b border-slate-100 py-16 md:py-20 relative overflow-hidden">
         {/* Glow effect */}
         <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-red-500/5 rounded-full blur-[120px] pointer-events-none" />
-        
+
         <div className="container mx-auto px-6 lg:px-24 relative z-10">
           <div className="grid lg:grid-cols-12 gap-12 items-center">
             {/* Left Content Column */}
@@ -59,9 +59,12 @@ export default function InstitutionsPage() {
 
             {/* Right Column - Image */}
             <div className="lg:col-span-5 flex justify-center">
-              <div className="w-full max-w-[450px] rounded-3xl overflow-hidden">
+              <div className="w-full max-w-[450px] rounded-3xl overflow-hidden relative group/image">
+                <div className="absolute top-4 right-4 bg-[#A11D1D]/90 backdrop-blur-md text-white text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full shadow-lg z-10 flex items-center gap-1.5 border border-white/20 select-none">
+                  <p>Live Proctoring</p>
+                </div>
                 <Image
-                  className="w-full h-auto rounded-2xl object-cover block"
+                  className="w-full h-auto rounded-2xl object-cover block transition-transform duration-500 group-hover/image:scale-105"
                   alt="Professional Exam Proctoring services by TEPTH"
                   src="/images/Live Proctoring.jpg"
                   width={500}
@@ -178,7 +181,7 @@ export default function InstitutionsPage() {
         <section className="py-8">
           <div className="relative bg-white border border-slate-100 rounded-3xl p-8 lg:p-12 overflow-hidden shadow-xs">
             <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-red-500/5 rounded-full blur-[100px] pointer-events-none" />
-            
+
             <div className="relative z-10 max-w-4xl mx-auto text-center space-y-6">
               <span className="text-[#A11D1D] font-extrabold uppercase tracking-[0.25em] text-xs">
                 Quality Assurance

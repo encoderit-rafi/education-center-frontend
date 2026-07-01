@@ -229,7 +229,7 @@ export default async function PackageDetailPage({ params }: PageProps) {
           {/* Right Column: Pricing & Sticky Register CTA */}
           <div className="lg:sticky lg:top-44 bg-white rounded-3xl p-6 md:p-8 border border-slate-100 shadow-xl space-y-6">
             <div>
-              <p className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-2">
+              <p className="text-sm font-bold uppercase tracking-wider mb-2">
                 {t("packages.pricingTitle")}
               </p>
               <div className="flex items-baseline gap-3 flex-wrap">

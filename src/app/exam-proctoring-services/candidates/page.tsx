@@ -25,6 +25,8 @@ const FEES: FeeEntry[] = [
   { duration: "180 min", fee: "400" },
   { duration: "210 min", fee: "450" },
   { duration: "240 min", fee: "500" },
+  { duration: "270 min", fee: "550" },
+  { duration: "300 min", fee: "600" },
 ];
 
 export default function CandidatesProctoringPage() {

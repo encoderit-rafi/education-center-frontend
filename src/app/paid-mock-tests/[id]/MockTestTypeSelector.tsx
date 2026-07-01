@@ -85,7 +85,7 @@ export function MockTestTypeSelector({ data }: MockTestTypeSelectorProps) {
     <div className="space-y-4 w-full max-w-sm">
       {/* ── Type Selector ── */}
       <div className="space-y-1.5">
-        <label className="text-xs font-bold uppercase tracking-wider text-slate-500">
+        <label className="text-xs font-bold uppercase tracking-wider text-slate-900">
           {selectTypeLabel}
         </label>
         <Select

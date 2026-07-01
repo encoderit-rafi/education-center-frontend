@@ -3,6 +3,7 @@ import ExamItems from "../_components/exam-items";
 import ExamDetails from "../_components/exam-details";
 import api from "@/axios";
 import { getLocale } from "next-intl/server";
+import { EXAM_DETAILE_DATA } from "@/data";
 
 export default async function ExamDetailPage({
   params,
@@ -15,6 +16,7 @@ export default async function ExamDetailPage({
 
   let exam: any = null;
   let childExams: any[] = [];
+  let isRateLimited = false;
 
   try {
     // 1. Try to fetch exam by slug/id directly
@@ -23,6 +25,9 @@ export default async function ExamDetailPage({
       exam = response.data.data;
     }
   } catch (error: any) {
+    if (error?.response?.status === 429) {
+      isRateLimited = true;
+    }
     // Only log unexpected errors; 404 is expected when the slug is a UUID
     if (error?.response?.status !== 404) {
       console.error("Error fetching exam by slug:", error);
@@ -52,11 +57,29 @@ export default async function ExamDetailPage({
           return aVal - bVal;
         });
     }
-  } catch (error) {
+  } catch (error: any) {
+    if (error?.response?.status === 429) {
+      isRateLimited = true;
+    }
     console.error("Error fetching all exams list:", error);
   }
 
+  // Fallback to static exam details if API request fails (e.g., during rate limiting/429)
   if (!exam) {
+    const staticExam = EXAM_DETAILE_DATA.find(
+      (e: any) => e.id === slug || e.slug === slug
+    );
+    if (staticExam) {
+      exam = staticExam;
+    }
+  }
+
+  if (!exam) {
+    if (isRateLimited) {
+      throw new Error(
+        "The server is currently busy (Too Many Requests). Please click the Try Again button below to refresh."
+      );
+    }
     notFound();
   }
 

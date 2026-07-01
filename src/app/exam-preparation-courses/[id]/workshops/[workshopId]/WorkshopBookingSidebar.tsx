@@ -13,6 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Calendar } from "lucide-react";
 
 interface WorkshopBookingSidebarProps {
   discountedPrice: number;
@@ -44,7 +45,7 @@ export function WorkshopBookingSidebar({
   mockTestTypeTitle = "mock test type",
   mockTestTypePlaceholder = "select your mock test type",
   onlineOptionText = "Online",
-  inPersonOptionText = "In Person",
+  inPersonOptionText = "In-Person",
   children,
 }: WorkshopBookingSidebarProps) {
   const [selectedType, setSelectedType] = useState<string>("");
@@ -57,7 +58,7 @@ export function WorkshopBookingSidebar({
   return (
     <div className="lg:sticky lg:top-8 bg-white rounded-3xl p-6 md:p-8 border border-slate-100 shadow-xl space-y-6">
       <div>
-        <p className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-2">
+        <p className="text-sm font-bold uppercase tracking-wider mb-2">
           {pricingTitle}
         </p>
         <div className="flex items-baseline gap-3 flex-wrap">
@@ -84,7 +85,7 @@ export function WorkshopBookingSidebar({
 
       {/* Mock Test Type Dropdown */}
       <div className="space-y-2">
-        <label className="text-xs font-bold text-slate-500 uppercase tracking-wider block">
+        <label className="text-xs font-bold text-slate-900 uppercase tracking-wider block">
           {mockTestTypeTitle}
         </label>
         <Select value={selectedType} onValueChange={(val) => setSelectedType(val || "")}>
@@ -93,7 +94,7 @@ export function WorkshopBookingSidebar({
           </SelectTrigger>
           <SelectContent className="bg-white border border-slate-150">
             <SelectItem value="Online">{onlineOptionText}</SelectItem>
-            <SelectItem value="In Person">{inPersonOptionText}</SelectItem>
+            <SelectItem value="In-Person">{inPersonOptionText}</SelectItem>
           </SelectContent>
         </Select>
       </div>
@@ -109,6 +110,7 @@ export function WorkshopBookingSidebar({
             !selectedType && "pointer-events-none opacity-50"
           )}
         >
+          <Calendar className="w-5 h-5 shrink-0" />
           {bookNowText}
         </Link>
       </div>
