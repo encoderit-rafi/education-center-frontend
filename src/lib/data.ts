@@ -563,7 +563,7 @@ export const exams = [
     id: "ielts_academic",
     name: "IELTS Academic",
     provider: "British Council / IDP",
-    subtitle: "For higher education and professional registration",
+    subtitle: "The IELTS Academic Exam: Your Gateway to Global Education",
     image: "/images/brands/ielts.png",
     content:
       "The world's most popular English test for higher education and professional registration.",

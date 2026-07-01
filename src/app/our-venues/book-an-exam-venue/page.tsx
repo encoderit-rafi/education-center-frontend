@@ -17,6 +17,8 @@ import {
   Award,
   HeartHandshake,
   Users,
+  Phone,
+  Mail,
 } from "lucide-react";
 import { CampusGallery } from "@/components/blocks/campus-gallery";
 import { useTranslations } from "next-intl";
@@ -92,6 +94,39 @@ export default function BookAnExamVenuePage() {
       </section>
 
       <CampusGallery />
+
+      {/* Contact CTA Section */}
+      <section className="bg-slate-50 border-t border-slate-200/60 py-16 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-80 h-80 bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
+        <div className="max-w-4xl mx-auto px-6 text-center space-y-8 relative z-10">
+          <p className="text-slate-700 text-base md:text-lg leading-relaxed max-w-3xl mx-auto font-medium">
+            Get in touch with us today to discuss your needs, tour our venues online, or schedule an in-person visit. Give us a call at{" "}
+            <a href="tel:+97165531250" className="text-primary font-bold hover:underline">
+              +97165531250
+            </a>{" "}
+            or email us at{" "}
+            <a href="mailto:info@tepth.org" className="text-primary font-bold hover:underline">
+              info@tepth.org
+            </a>.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <a
+              href="tel:+97165531250"
+              className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl bg-white border border-slate-200 text-slate-800 hover:bg-slate-50 hover:border-primary/30 transition-all font-bold shadow-sm group w-full sm:w-auto"
+            >
+              <Phone className="w-4.5 h-4.5 text-primary transition-transform group-hover:scale-110" />
+              <span>Call Us</span>
+            </a>
+            <a
+              href="mailto:info@tepth.org"
+              className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl bg-white border border-slate-200 text-slate-800 hover:bg-slate-50 hover:border-primary/30 transition-all font-bold shadow-sm group w-full sm:w-auto"
+            >
+              <Mail className="w-4.5 h-4.5 text-primary transition-transform group-hover:scale-110" />
+              <span>Email Us</span>
+            </a>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

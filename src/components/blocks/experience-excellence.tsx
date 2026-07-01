@@ -14,7 +14,7 @@ export default function ExperienceExcellence() {
             <h2 className="text-4xl md:text-5xl font-headline font-extrabold text-secondary leading-tight">
               {t("title")}
             </h2>
-            <p className="text-base text-on-surface-variant leading-relaxed text-justify">
+            <p className="text-base text-on-surface-variant leading-relaxed text-justify whitespace-pre-line">
               {t("description")}
             </p>
             <p className="text-2xl font-headline font-bold text-primary italic">
@@ -26,7 +26,7 @@ export default function ExperienceExcellence() {
         <div className="flex-1 w-full space-y-6">
           <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
             <img
-              src="/images/about-us/Classroom.jpg"
+              src="/images/about-us/Computer_Room_3.jpg"
               alt="TEPTH Testing Center"
               className="w-full h-full object-cover"
             />

@@ -153,11 +153,28 @@ export default function ExamDetails({ data }: { data: any }) {
                   </h2>
                 </div>
                 <div className="prose prose-slate max-w-none text-slate-600 leading-relaxed text-xs lg:text-sm">
-                  {overview
-                    ?.split("\n\n")
-                    .map((para: string, i: number) => (
-                      <p key={i}>{para}</p>
-                    )) || <p>{description}</p>}
+                  {(() => {
+                    const renderFormattedText = (text: string) => {
+                      if (!text) return "";
+                      const parts = text.split(/(\*\*.*?\*\*)/g);
+                      return parts.map((part, idx) => {
+                        if (part.startsWith("**") && part.endsWith("**")) {
+                          return (
+                            <strong key={idx} className="font-bold text-slate-900">
+                              {part.slice(2, -2)}
+                            </strong>
+                          );
+                        }
+                        return part;
+                      });
+                    };
+
+                    return overview
+                      ?.split("\n\n")
+                      .map((para: string, i: number) => (
+                        <p key={i}>{renderFormattedText(para)}</p>
+                      )) || <p>{renderFormattedText(description)}</p>;
+                  })()}
                 </div>
               </section>
 
@@ -193,7 +210,7 @@ export default function ExamDetails({ data }: { data: any }) {
                                 </div>
                               )}
                             </div>
-                            <p className="text-slate-600 leading-relaxed text-xs">
+                            <p className="text-slate-600 leading-relaxed text-xs whitespace-pre-line">
                               {section.details}
                             </p>
 
@@ -202,15 +219,33 @@ export default function ExamDetails({ data }: { data: any }) {
                                 <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
                                   Skills Assessed
                                 </p>
-                                <div className="grid gap-2 sm:grid-cols-2">
+                                <div
+                                  className={cn(
+                                    "grid gap-2",
+                                    section.skills.some((s: string) => s.length > 50)
+                                      ? "grid-cols-1"
+                                      : "sm:grid-cols-2"
+                                  )}
+                                >
                                   {section.skills.map(
                                     (skill: string, si: number) => (
                                       <div
                                         key={si}
-                                        className="flex items-center gap-2 text-slate-700"
+                                        className="flex items-start gap-2 text-slate-700"
                                       >
-                                        <CheckCircle2 className="size-3 text-primary shrink-0" />
-                                        <span className="text-xs">{skill}</span>
+                                        <CheckCircle2 className="size-3 text-primary shrink-0 mt-0.5" />
+                                        <span className="text-xs">
+                                          {skill.includes(":") ? (
+                                            <>
+                                              <strong className="font-bold text-slate-900">
+                                                {skill.split(":")[0]}:
+                                              </strong>
+                                              {skill.split(":").slice(1).join(":")}
+                                            </>
+                                          ) : (
+                                            skill
+                                          )}
+                                        </span>
                                       </div>
                                     ),
                                   )}
@@ -316,7 +351,16 @@ export default function ExamDetails({ data }: { data: any }) {
                         <CheckCircle2 size={10} />
                       </div>
                       <span className="text-slate-600 leading-relaxed font-medium text-xs">
-                        {item}
+                        {item.includes(":") ? (
+                          <>
+                            <strong className="font-bold text-slate-900">
+                              {item.split(":")[0]}:
+                            </strong>
+                            {item.split(":").slice(1).join(":")}
+                          </>
+                        ) : (
+                          item
+                        )}
                       </span>
                     </li>
                   ))}

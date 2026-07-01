@@ -1707,9 +1707,9 @@
   },
   "ExamDetailsPage": {
     "ielts-academic": {
-      "subtitle": "For higher education and professional registration",
+      "subtitle": "The IELTS Academic Exam: Your Gateway to Global Education",
       "description": "The International English Language Testing System (IELTS) is the world’s most popular English proficiency test. Succeed on the gold standard for measuring English language ability in academic contexts.",
-      "overview": "The International English Language Testing System (IELTS) is the world’s most popular English proficiency test. The IELTS Academic test is the international gold standard for measuring English language ability in academic contexts, such as universities or colleges. If you want to apply to an undergraduate or postgraduate degree in an English-speaking environment, you’ll likely have to succeed on the IELTS Academic test.",
+      "overview": "The International English Language Testing System (IELTS) is globally recognized as the most widely taken English proficiency exam. Within this framework, the **IELTS Academic test** serves as the ultimate international benchmark for evaluating language skills specifically for higher education. If your goal is to pursue an undergraduate or postgraduate degree at an English-speaking college or university, successfully completing the IELTS Academic exam is an essential step in your application journey.",
       "stats": [
         {
           "label": "Total Duration",

@@ -1458,11 +1458,11 @@ export const EXAM_DETAILE_DATA = [
   {
     ...EXAM_IDS_DATA.ielts_academic,
     type: "details",
-    subtitle: "For higher education and professional registration",
+    subtitle: "The IELTS Academic Exam: Your Gateway to Global Education",
     description:
       "The International English Language Testing System (IELTS) is the world’s most popular English proficiency test. Succeed on the gold standard for measuring English language ability in academic contexts.",
     overview:
-      "The International English Language Testing System (IELTS) is the world’s most popular English proficiency test. The IELTS Academic test is the international gold standard for measuring English language ability in academic contexts, such as universities or colleges. If you want to apply to an undergraduate or postgraduate degree in an English-speaking environment, you’ll likely have to succeed on the IELTS Academic test.",
+      "The International English Language Testing System (IELTS) is globally recognized as the most widely taken English proficiency exam. Within this framework, the **IELTS Academic test** serves as the ultimate international benchmark for evaluating language skills specifically for higher education. If your goal is to pursue an undergraduate or postgraduate degree at an English-speaking college or university, successfully completing the IELTS Academic exam is an essential step in your application journey.",
     stats: [
       { label: "Total Duration", value: "2h 45m" },
       { label: "Score Scale", value: "0–9 Bands" },
@@ -1476,11 +1476,11 @@ export const EXAM_DETAILE_DATA = [
         name: "Listening Component",
         duration: "30 minutes (+10m transfer time)",
         details:
-          "The Listening Component is designed to assess a wide range of listening skills, including how well you understand main ideas, recognize opinions, and follow arguments.",
+          "This section is specifically structured to evaluate a broad spectrum of auditory comprehension skills. It measures your proficiency in several key areas, including your ability to:",
         skills: [
-          "understand main ideas and specific factual information",
-          "recognise the opinions, attitudes and purpose of a speaker",
-          "follow the development of an argument",
+          "Grasp Core Concepts: Accurately identify the main ideas and central themes of a conversation or lecture.",
+          "Identify Perspectives: Discern the underlying attitudes, intentions, and opinions expressed by the speakers.",
+          "Track Discussions: Logically follow the flow and development of complex arguments.",
         ],
         format:
           "You will listen to four recordings of native English speakers and then write your answers to a series of questions.\nRecording 1: a conversation between two people set in an everyday social context.\nRecording 2: a monologue set in an everyday social context, e.g. a speech about local facilities.\nRecording 3: a conversation between up to four people set in an educational or training context, e.g. a university tutor and a student discussing an assignment.\nRecording 4: a monologue on an academic subject, e.g. a university lecture.",
@@ -1509,7 +1509,11 @@ export const EXAM_DETAILE_DATA = [
         name: "Writing Component",
         duration: "60 minutes",
         details:
-          "Write in a formal style in the IELTS Academic Writing test. Consists of two tasks that must be managed within the hour.",
+          "This section assesses your ability to produce clear, well-structured, and academically appropriate written English. You will have a strict 60-minute time limit to successfully manage and complete two distinct writing tasks.\n\nKey elements of this section include:",
+        skills: [
+          "Formal Tone: All responses must maintain a professional, academic writing style suitable for university-level communication.",
+          "Time Management: You must strategically divide your one hour to ensure both writing tasks are fully addressed and completed.",
+        ],
         format:
           "Task 1: Describe, summarise or explain information from a graph, table, chart or diagram in your own words (150+ words).\nTask 2: Write an essay in response to a point of view, argument or problem (250+ words).",
         questions: "2 tasks",
@@ -1522,7 +1526,12 @@ export const EXAM_DETAILE_DATA = [
         name: "Speaking Component",
         duration: "11–14 minutes",
         details:
-          "The Speaking test is a face-to-face interview with a certified examiner. It is interactive and as close to a real-life situation as a test can get.",
+          "This section evaluates your verbal communication skills through a direct conversation with a certified examiner. Whether conducted in person or via a live video call on a computer at the test center, this section is uniquely designed to be dynamic and highly interactive, providing the most authentic assessment of your spoken English.\n\nKey features of this section include:",
+        skills: [
+          "Flexible Interview Formats: Your one-on-one interview can be administered either as a traditional face-to-face meeting or through a secure, live video conference at the testing facility.",
+          "Real-World Application: The assessment is structured to closely mimic natural, everyday communication and conversational scenarios.",
+          "Expert Assessment: Evaluated by a trained professional in real time to ensure an accurate measure of your fluency, pronunciation, and conversational confidence.",
+        ],
         format:
           "The Speaking test consists of three parts:\nPart 1: You will answer general questions about yourself and a range of familiar topics.\nPart 2: You will be given a card which asks you to talk about a particular topic.\nPart 3: You will be asked further questions about the topic in Part 2.",
       },

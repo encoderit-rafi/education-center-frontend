@@ -400,14 +400,14 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
                   </h3>
                   <div className="space-y-3 text-sm">
                     <div>
-                      <p className="text-xs text-slate-400 ">Workshop</p>
+                      <p className="text-xs text-slate-500">Workshop</p>
                       <p className="font-bold text-slate-900 text-base">
                         {workshop?.duration}-Hour {courseData?.name} Workshop
                       </p>
                     </div>
                     {typeParam && (
                       <div>
-                        <p className="text-xs text-slate-400">Workshop Type</p>
+                        <p className="text-xs text-slate-500">Workshop Type</p>
                         <p className="font-bold text-slate-900 text-base">
                           {typeParam}
                         </p>
