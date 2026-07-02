@@ -41,7 +41,7 @@ export default function InstitutionsPage() {
       {/* Hero */}
       <section className="bg-white border-b border-slate-100 py-16 md:py-20 relative overflow-hidden">
         {/* Glow effect */}
-        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-red-500/5 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-0 right-0 w-100 h-100 bg-red-500/5 rounded-full blur-[120px] pointer-events-none" />
 
         <div className="container mx-auto px-6 lg:px-24 relative z-10">
           <div className="grid lg:grid-cols-12 gap-12 items-center">
@@ -59,7 +59,7 @@ export default function InstitutionsPage() {
 
             {/* Right Column - Image */}
             <div className="lg:col-span-5 flex justify-center">
-              <div className="w-full max-w-[450px] rounded-3xl overflow-hidden relative group/image">
+              <div className="w-full max-w-112.5 rounded-3xl overflow-hidden relative group/image">
                 <div className="absolute top-4 right-4 bg-[#A11D1D]/90 backdrop-blur-md text-white text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full shadow-lg z-10 flex items-center gap-1.5 border border-white/20 select-none">
                   <p>Live Proctoring</p>
                 </div>
@@ -133,7 +133,7 @@ export default function InstitutionsPage() {
               <p className="text-slate-650 text-sm leading-relaxed text-justify font-medium">
                 {t("onsite.description")}
               </p>
-              <div className="space-y-5 pt-4 border-t border-slate-50 flex-grow">
+              <div className="space-y-5 pt-4 border-t border-slate-50 grow">
                 {onsiteFeatures.map((feat, idx) => (
                   <div key={idx} className="flex items-start gap-3">
                     <span className="text-[#A11D1D] shrink-0 mt-1 select-none">❖</span>
@@ -158,7 +158,7 @@ export default function InstitutionsPage() {
               <p className="text-slate-655 text-sm leading-relaxed text-justify font-medium">
                 {t("online.description")}
               </p>
-              <div className="space-y-5 pt-4 border-t border-slate-50 flex-grow">
+              <div className="space-y-5 pt-4 border-t border-slate-50 grow">
                 {onlineFeatures.map((feat, idx) => (
                   <div key={idx} className="flex items-start gap-3">
                     <span className="text-[#A11D1D] shrink-0 mt-1 select-none">❖</span>
@@ -180,7 +180,7 @@ export default function InstitutionsPage() {
         {/* Commitment Section */}
         <section className="py-8">
           <div className="relative bg-white border border-slate-100 rounded-3xl p-8 lg:p-12 overflow-hidden shadow-xs">
-            <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-red-500/5 rounded-full blur-[100px] pointer-events-none" />
+            <div className="absolute top-0 right-0 w-75 h-75 bg-red-500/5 rounded-full blur-[100px] pointer-events-none" />
 
             <div className="relative z-10 max-w-4xl mx-auto text-center space-y-6">
               <span className="text-[#A11D1D] font-extrabold uppercase tracking-[0.25em] text-xs">

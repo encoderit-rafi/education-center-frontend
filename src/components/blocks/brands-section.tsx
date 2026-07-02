@@ -26,7 +26,13 @@ const BrandLogo = ({ img, name }: { img: string; name: string }) => {
   return (
     <div className="flex items-center justify-center px-12 py-4">
       <div className="relative h-12 w-32 md:h-16 md:w-40 grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-500 ease-in-out transform hover:scale-110">
-        <Image src={img} alt={name} fill className="object-contain" />
+        <Image
+          src={img}
+          alt={name}
+          fill
+          sizes="(max-width: 768px) 128px, 160px"
+          className="object-contain"
+        />
       </div>
     </div>
   );

@@ -225,7 +225,7 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
 
   if (isLoading) {
     return (
-      <div className="min-h-[400px] flex items-center justify-center bg-slate-50 animate-pulse">
+      <div className="min-h-100 flex items-center justify-center bg-slate-50 animate-pulse">
         <div className="text-slate-500 font-medium">
           Loading workshop details...
         </div>

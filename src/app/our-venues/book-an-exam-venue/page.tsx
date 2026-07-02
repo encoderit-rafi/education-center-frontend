@@ -67,7 +67,7 @@ export default function BookAnExamVenuePage() {
               <AccordionItem
                 key={index}
                 value={`item-${index}`}
-                className="bg-white rounded-xl overflow-hidden border border-outline/100 transition-all duration-300 data-[state=open]:border-primary data-[state=open]:shadow-lg h-fit"
+                className="bg-white rounded-xl overflow-hidden border border-outline transition-all duration-300 data-[state=open]:border-primary data-[state=open]:shadow-lg h-fit"
               >
                 <AccordionTrigger className="flex items-center justify-between p-6 cursor-pointer hover:no-underline group/trigger text-left">
                   <div className="flex items-center gap-4">
