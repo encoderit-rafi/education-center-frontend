@@ -42,7 +42,9 @@ export const ToeflIbtSchema = z
         idNumber: z.string().optional(),
         idExpiryDate: z.any().optional(),
         nationality: z.string().min(1, "Country of nationality is required"),
-        idDocument: z.any().refine((val) => !!val, "Please upload your ID document"),
+        idDocument: z.any()
+        .refine((val) => !!val, "Please upload your ID document")
+        .refine((val) => !(val instanceof File) || val.size <= 5 * 1024 * 1024, "File size must be less than 5MB"),
 
         // Step 3: Your Profile
         takenBefore: z.enum(["Yes", "No"]).or(z.literal("")),

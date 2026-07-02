@@ -16,6 +16,7 @@ import { format } from "date-fns";
 import { User, ShieldCheck, Globe } from "lucide-react";
 import { GlobalReviewStep, ReviewSummaryGrid } from "@/components/blocks/forms/global-review-step";
 import { getEducationLevelLabel } from "@/lib/utils";
+import { compileBookingPayload } from "@/lib/booking";
 
 // Import steps
 import { TermsStep } from "./steps/terms-step";
@@ -263,67 +264,38 @@ export default function FormIELTSGeneralRegistration({ examId: initialExamId }: 
 
       toast.loading("Submitting booking request...", { id: "ielts-submit" });
 
-      bookingMutation.mutate({
-        exam_id: examId,
-        test_module: data.testModule,
-        given_names: data.givenNames,
-        first_name: data.givenNames,
-        middle_name: data.middleName,
-        birth_city: data.birthCity,
-        birth_country: data.birthCountry,
-        surnames: data.surnames,
-        last_name: data.surnames || "",
-        date_of_birth: data.dateOfBirth ? new Date(data.dateOfBirth as any).toISOString() : "",
-        sex: data.sex,
-        email: data.email,
-        mobile_number: data.mobileNumber,
-        phone: data.mobileNumber,
-        residence_country: data.residenceCountry,
-        postal_address_1: data.postalAddress1,
-        postal_address_2: data.postalAddress2,
-        postal_address_3: data.postalAddress3,
-        city: data.city,
-        postcode: data.postcode,
-        po_box: data.poBox,
-        id_type: data.idType === "emirates_id" ? "emirates" : data.idType,
-        id_number: data.idNumber,
-        id_expiry_date: data.idExpiryDate
-          ? new Date(data.idExpiryDate as any).toISOString()
-          : "",
-        id_document: idDocumentUrl,
-        issuing_authority: data.issuingAuthority,
+      const compiledPayload = compileBookingPayload({
+        examId,
+        paymentMethod: data.paymentMethod,
+        firstName: data.givenNames,
+        middleName: data.middleName || null,
+        lastName: data.surnames || null,
+        dateOfBirth: data.dateOfBirth,
+        gender: data.sex ? (data.sex.charAt(0).toUpperCase() + data.sex.slice(1)) : null,
         nationality: data.nationality,
-        taken_before: data.takenBefore,
-        less_than_two_years: data.lessThanTwoYears,
-        existing_account: data.existingAccount,
-        first_language: data.firstLanguage === "Other"
-          ? data.firstLanguageOther || "Other"
-          : data.firstLanguage,
-        years_studying_english: data.yearsStudyingEnglish,
-        education_level: data.educationLevel,
-        occupation_level: data.occupationLevel === "Other"
-          ? data.occupationLevelOther || "Other"
-          : data.occupationLevel,
-        occupation_sector: data.occupationSector === "Other"
-          ? data.occupationSectorOther || "Other"
-          : data.occupationSector,
-        reason_for_taking_test: data.reasonForTakingTest === "other"
-          ? data.reasonForTakingTestOther || "other"
-          : data.reasonForTakingTest,
-        destination_country: data.destinationCountry,
-        marketing_preference: data.marketingPreference,
-        selected_course: data.selectedCourse,
-        selected_workshop: data.selectedWorkshop,
-        payment_methods: data.paymentMethod,
-        exam_time_slot: data.examTimeSlot,
-        speaking_slot: data.speakingSlot,
-        exam_fee: baseFee,
-        total_amount: total,
-        vat_amount: vatAmount,
-        exam_date: data.examDate
-          ? new Date(data.examDate as any).toISOString()
-          : "",
+        email: data.email,
+        phone: data.mobileNumber,
+        address: data.postalAddress1 + (data.postalAddress2 ? `, ${data.postalAddress2}` : "") + (data.postalAddress3 ? `, ${data.postalAddress3}` : ""),
+        country: data.residenceCountry,
+        idType: data.idType,
+        idNumber: data.idNumber,
+        sessionDate: data.examDate,
+        sessionTime: data.examTimeSlot || null,
+        examFee: baseFee,
+        courseFee: coursePrice,
+        workshopFee: workshopPrice,
+        additionalFee: serviceFee,
+        discountAmount: 0,
+        vatAmount: vatAmount,
+        totalAmount: total,
+        allFormData: {
+          ...data,
+          idDocumentUrl,
+        },
+        courseId: data.selectedCourse ? courseDetail?.id : null,
       });
+
+      bookingMutation.mutate(compiledPayload);
     } catch (error: any) {
       console.error("Form submission error:", error);
       toast.error(error?.message || "Something went wrong during submission.", { id: "ielts-submit" });

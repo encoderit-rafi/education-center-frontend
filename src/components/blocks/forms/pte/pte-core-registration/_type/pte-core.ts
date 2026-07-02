@@ -66,7 +66,9 @@ export const PteCoreSchema = z.object({
     selectedCourse: z.string().optional(),
     
     // Document Uploads
-    passportCopy: z.any().refine((val) => !!val, "Passport copy is required"),
+    passportCopy: z.any()
+        .refine((val) => !!val, "Passport copy is required")
+        .refine((val) => !(val instanceof File) || val.size <= 5 * 1024 * 1024, "File size must be less than 5MB"),
     userPhoto: z.any().optional(),
     
     // Final Confirmation

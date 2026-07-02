@@ -20,6 +20,7 @@ import { PteHomeB1Schema, type TPteHomeB1Schema } from "./_type";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import api from "@/axios";
 import { VAT_PERCENT, calculateVat } from "@/lib/vat";
+import { compileBookingPayload } from "@/lib/booking";
 
 
 
@@ -268,49 +269,37 @@ export default function FormPTEHomeB1Registration({ examId: initialExamId }: For
         }
 
         toast.loading("Submitting booking request...", { id: "pte-submit" });
-
-        bookingMutation.mutate({
-          exam_id: examId,
-          given_names: data.givenNames,
-          first_name: data.noGivenNames ? "N/A" : data.givenNames,
-          middle_name: data.middleName,
-          surnames: data.surnames,
-          last_name: data.noSurname ? "N/A" : data.surnames || "",
-          date_of_birth: data.dateOfBirth ? new Date(data.dateOfBirth as any).toISOString() : "",
-          gender: data.gender,
-          email: data.emailUsername,
-          place_of_birth: data.placeOfBirth,
-          country_of_birth: data.countryOfBirth,
-          country_of_citizenship: data.countryOfCitizenship,
-          country_of_residence: data.countryOfResidence,
-          postal_address_1: data.postalAddress1,
-          postal_address_2: data.postalAddress2,
-          po_box: data.poBox,
-          postcode: data.postcode,
-          city: data.city,
-          mobile_number: data.mobileNumber,
-          phone: data.mobileNumber,
-          home_language: data.homeLanguage,
-          planning_country: data.planningCountry,
-          current_situation: data.currentSituation,
-          reason_for_taking: data.reasonForTaking,
-          study_level: data.studyLevel,
-          occupation_sector: data.occupationSector,
-          id_type: (data.idType as string) === "emirates_id" ? "emirates" : data.idType,
-          id_number: data.idNumber,
-          id_country_of_issue: data.idCountryOfIssue,
-          selected_course: data.selectedCourse,
-          selected_workshop: data.selectedWorkshop,
-          payment_methods: (formData as any).paymentMethod,
-          exam_time: data.examTime,
-          exam_fee: pricing.baseFee,
-          total_amount: total,
-          vat_amount: pricing.vat,
-          exam_date: data.examDate ? new Date(data.examDate as any).toISOString() : "",
-          id_expiry_date: data.idExpiryDate ? new Date(data.idExpiryDate as any).toISOString() : "",
-          id_document: idDocumentUrl,
-          nationality: data.countryOfCitizenship,
+        const compiledPayload = compileBookingPayload({
+          examId,
+          paymentMethod: ((formData as any).paymentMethod as string) || "stripe",
+          firstName: data.noGivenNames ? "N/A" : (data.givenNames || ""),
+          middleName: data.middleName || null,
+          lastName: data.noSurname ? "N/A" : (data.surnames || null),
+          dateOfBirth: data.dateOfBirth,
+          gender: data.gender ? (data.gender.charAt(0).toUpperCase() + data.gender.slice(1)) : null,
+          nationality: data.countryOfCitizenship || "",
+          email: data.emailUsername || "",
+          phone: data.mobileNumber || "",
+          address: (data.postalAddress1 || "") + (data.postalAddress2 ? `, ${data.postalAddress2}` : ""),
+          country: data.countryOfResidence || null,
+          idType: data.idType,
+          idNumber: data.idNumber,
+          sessionDate: data.examDate,
+          sessionTime: data.examTime || null,
+          examFee: pricing.baseFee,
+          courseFee: pricing.coursePrice,
+          workshopFee: pricing.workshopPrice,
+          additionalFee: pricing.serviceFee,
+          discountAmount: 0,
+          vatAmount: pricing.vat,
+          totalAmount: total,
+          allFormData: {
+            ...data,
+            idDocumentUrl,
+          },
+          courseId: data.selectedCourse ? courseDetail?.id : null,
         });
+        bookingMutation.mutate(compiledPayload);
       } catch (error: any) {
         console.error("Form submission error:", error);
         toast.error(error?.message || "Something went wrong during submission.", { id: "pte-submit" });

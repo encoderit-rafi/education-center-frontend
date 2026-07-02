@@ -280,7 +280,7 @@ export default function FormIeltsAcademicRegistration({ examId: initialExamId }:
           idType: data.idType,
           idNumber: data.idNumber,
           sessionDate: data.examDate,
-          sessionTime: data.examTimeSlot === "9:00 AM" ? "09:00" : data.examTimeSlot === "1:00 PM" ? "13:00" : null,
+          sessionTime: data.examTimeSlot || null,
           examFee: pricing.baseFee,
           courseFee: pricing.coursePrice,
           workshopFee: pricing.workshopPrice,

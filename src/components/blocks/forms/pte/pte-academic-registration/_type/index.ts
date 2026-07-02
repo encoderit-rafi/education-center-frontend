@@ -43,7 +43,9 @@ export const PteAcademicSchema = z.object({
     idNumber: z.string().min(1, "ID number is required"),
     idExpiryDate: z.any().refine((val) => !!val, "Expiry date is required"),
     idCountryOfIssue: stringOrObject.optional(),
-    passportCopy: z.any().refine((val) => !!val, "Passport copy is required"),
+    passportCopy: z.any()
+        .refine((val) => !!val, "Passport copy is required")
+        .refine((val) => !(val instanceof File) || val.size <= 5 * 1024 * 1024, "File size must be less than 5MB"),
 
     // Step 3: Your Profile
     homeLanguage: stringOrObject.refine(val => val.length > 0, "Please select your language"),

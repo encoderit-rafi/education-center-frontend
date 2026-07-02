@@ -75,7 +75,9 @@ export const PteHomeB1Schema = z.object({
     selectedWorkshop: z.string().optional(),
     
     // Document Uploads
-    idDocument: z.any().refine((val) => !!val, "Passport copy is required"),
+    idDocument: z.any()
+        .refine((val) => !!val, "Passport copy is required")
+        .refine((val) => !(val instanceof File) || val.size <= 5 * 1024 * 1024, "File size must be less than 5MB"),
     userPhoto: z.any().optional(),
 });
 

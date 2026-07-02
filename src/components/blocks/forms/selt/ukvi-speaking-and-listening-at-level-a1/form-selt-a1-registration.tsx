@@ -2,6 +2,7 @@
 import { format } from "date-fns";
 import { GlobalReviewStep, ReviewSummaryGrid } from "@/components/blocks/forms/global-review-step";
 import { getEducationLevelLabel } from "@/lib/utils";
+import { compileBookingPayload } from "@/lib/booking";
 import { PriceDisplay } from "@/components/ui/price-display";
 
 import { useState } from "react";
@@ -262,55 +263,38 @@ export default function FormSELTA1Registration({ examId: initialExamId }: FormPr
 
         toast.loading("Submitting booking request...", { id: "selt-submit" });
 
-        bookingMutation.mutate({
-          exam_id: examId,
-          test_module: data.testModule,
-          given_names: data.givenNames,
-          first_name: data.givenNames,
-          middle_name: data.middleName,
-          surnames: data.surnames,
-          last_name: data.surnames || "",
-          date_of_birth: data.dateOfBirth ? new Date(data.dateOfBirth as any).toISOString() : "",
-          sex: data.sex,
-          city_of_birth: data.cityOfBirth,
-          country_of_birth: data.countryOfBirth,
-          reason_for_test: data.reasonForTest,
-          reason_for_test_other: data.reasonForTestOther,
-          email: data.email,
-          mobile_number: data.mobileNumber,
-          phone: data.mobileNumber,
-          residence_country: data.residenceCountry,
-          postal_address_1: data.postalAddress1,
-          postal_address_2: data.postalAddress2,
-          city: data.city,
-          postcode: data.postcode,
-          po_box: data.poBox,
-          id_type: data.idType === "passport" ? "passport" : "others",
-          id_number: data.idNumber,
-          id_expiry_date: data.idExpiryDate ? new Date(data.idExpiryDate as any).toISOString() : "",
-          id_document: idDocumentUrl,
-          issuing_authority: data.issuingAuthority,
+        const compiledPayload = compileBookingPayload({
+          examId,
+          paymentMethod: data.paymentMethod,
+          firstName: data.givenNames,
+          middleName: data.middleName || null,
+          lastName: data.surnames || null,
+          dateOfBirth: data.dateOfBirth,
+          gender: data.sex ? (data.sex.charAt(0).toUpperCase() + data.sex.slice(1)) : null,
           nationality: data.nationality,
-          taken_before: data.takenBefore,
-          less_than_two_years: data.lessThanTwoYears,
-          existing_account: data.existingAccount,
-          first_language: data.firstLanguage,
-          years_studying_english: data.yearsStudyingEnglish,
-          education_level: data.educationLevel,
-          occupation_level: data.occupationLevel,
-          occupation_sector: data.occupationSector,
-          reason_for_taking_test: data.reasonForTakingTest,
-          destination_country: data.destinationCountry,
-          marketing_preference: data.marketingPreference,
-          selected_course: data.selectedCourse,
-          selected_workshop: data.selectedWorkshop,
-          payment_methods: data.paymentMethod,
-          exam_time_slot: data.examTimeSlot,
-          exam_fee: pricing.baseFee,
-          total_amount: total,
-          vat_amount: pricing.vat,
-          exam_date: data.examDate ? new Date(data.examDate as any).toISOString() : "",
+          email: data.email,
+          phone: data.mobileNumber,
+          address: data.postalAddress1 + (data.postalAddress2 ? `, ${data.postalAddress2}` : ""),
+          country: data.residenceCountry,
+          idType: data.idType,
+          idNumber: data.idNumber,
+          sessionDate: data.examDate,
+          sessionTime: data.examTimeSlot || null,
+          examFee: pricing.baseFee,
+          courseFee: pricing.coursePrice,
+          workshopFee: pricing.workshopPrice,
+          additionalFee: pricing.serviceFee,
+          discountAmount: 0,
+          vatAmount: pricing.vat,
+          totalAmount: total,
+          allFormData: {
+            ...data,
+            idDocumentUrl,
+          },
+          courseId: data.selectedCourse ? courseDetail?.id : null,
         });
+
+        bookingMutation.mutate(compiledPayload);
       } catch (error: any) {
         console.error("Form submission error:", error);
         toast.error(error?.message || "Something went wrong during submission.", { id: "selt-submit" });

@@ -421,7 +421,7 @@ export function RegistrationFormStep({
                   </div>
                 )}
                 <p className="text-[12px] text-slate-900 font-medium">
-                  Supported formats: (pdf, png, jpg,  jpeg)
+                  Supported formats: (pdf, png, jpg, jpeg) - Max size: 5MB
                 </p>
               </div>
               <FieldError errors={[errors.idDocument]} />

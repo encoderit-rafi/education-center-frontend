@@ -14,6 +14,7 @@ import { GlobalReviewStep, ReviewSummaryGrid } from "@/components/blocks/forms/g
 import { PriceDisplay } from "@/components/ui/price-display";
 import { toast } from "sonner";
 import { getEducationLevelLabel } from "@/lib/utils";
+import { compileBookingPayload } from "@/lib/booking";
 
 // Import Steps
 import { TermsStep } from "./steps/terms-step";
@@ -299,63 +300,38 @@ export default function FormTOEFLIBTRegistration({ examId: initialExamId }: Form
                     toast.error("Exam details are still loading. Please try again in a moment.", { id: "toefl-submit" });
                     return;
                 }
-
                 toast.loading("Submitting booking request...", { id: "toefl-submit" });
-
-                bookingMutation.mutate({
-                    exam_id: examId,
-                    test_module: "TOEFL iBT",
-                    given_names: data.givenNames,
-                    first_name: data.givenNames,
-                    middle_name: data.middleName,
-                    surnames: data.surnames,
-                    last_name: data.surnames || "",
-                    date_of_birth: data.dateOfBirth ? new Date(data.dateOfBirth as any).toISOString() : "",
-                    gender: data.gender,
-                    email: data.email,
-                    mobile_number: data.phoneNumber,
-                    phone: data.phoneNumber,
-                    residence_country: data.country,
-                    country: data.country,
-                    postal_address_1: data.streetAddress1,
-                    postal_address_2: data.streetAddress2,
-                    city: data.city,
-                    state: data.state,
-                    postcode: data.postalCode,
-                    po_box: data.poBox,
-                    id_type: data.idType === "emirates_id" ? "emirates" : (data.idType === "passport" ? "passport" : (data.idType || "passport")),
-                    id_number: data.idNumber,
-                    id_expiry_date: data.idExpiryDate
-                        ? new Date(data.idExpiryDate as any).toISOString()
-                        : "",
-                    id_document: idDocumentUrl,
+                const compiledPayload = compileBookingPayload({
+                    examId,
+                    paymentMethod: ((formData as any).paymentMethod as string) || "stripe",
+                    firstName: data.givenNames,
+                    middleName: data.middleName || null,
+                    lastName: data.surnames || null,
+                    dateOfBirth: data.dateOfBirth,
+                    gender: data.gender ? (data.gender.charAt(0).toUpperCase() + data.gender.slice(1)) : null,
                     nationality: data.nationality,
-                    taken_before: data.takenBefore,
-                    less_than_two_years: data.lessThanTwoYears,
-                    existing_account: data.existingAccount,
-                    first_language: data.firstLanguage === "Other" ? data.firstLanguageOther : data.firstLanguage,
-                    years_studying_english: data.yearsStudyingEnglish,
-                    education_level: data.educationLevel,
-                    next_level_of_study: data.nextLevelOfStudy === "Other" ? (data.nextLevelOfStudyOther || "Other") : data.nextLevelOfStudy,
-                    desired_field_of_study: data.desiredFieldOfStudy === "Other" ? data.desiredFieldOfStudyOther : data.desiredFieldOfStudy,
-                    reasons_for_taking_toefl: data.reasonsForTakingToefl,
-                    ets_products_interest: data.etsProductsInterest,
-                    occupation_level: data.occupationLevel,
-                    occupation_sector: data.occupationSector,
-                    reason_for_taking_test: data.reasonsForTakingToefl || "",
-                    destination_country: data.destinationCountry,
-                    marketing_preference: data.marketingPreference,
-                    selected_course: data.selectedCourse,
-                    selected_workshop: data.selectedWorkshop,
-                    payment_methods: formData.paymentMethod || data.paymentMethod,
-                    exam_time_slot: data.examTimeSlot,
-                    exam_fee: (pricing.baseFeeAED + pricing.expressFeeAED) || 1270,
-                    total_amount: total,
-                    vat_amount: pricing.vatAED,
-                    exam_date: data.examDate
-                        ? new Date(data.examDate as any).toISOString()
-                        : "",
+                    email: data.email,
+                    phone: data.phoneNumber,
+                    address: data.streetAddress1 + (data.streetAddress2 ? `, ${data.streetAddress2}` : ""),
+                    country: data.country,
+                    idType: data.idType,
+                    idNumber: data.idNumber,
+                    sessionDate: data.examDate,
+                    sessionTime: data.examTimeSlot || null,
+                    examFee: pricing.baseFeeAED + pricing.expressFeeAED,
+                    courseFee: pricing.coursePriceAED,
+                    workshopFee: pricing.workshopPriceAED,
+                    additionalFee: 0,
+                    discountAmount: 0,
+                    vatAmount: pricing.vatAED,
+                    totalAmount: total,
+                    allFormData: {
+                        ...data,
+                        idDocumentUrl,
+                    },
+                    courseId: data.selectedCourse ? courseDetail?.id : null,
                 });
+                bookingMutation.mutate(compiledPayload);
             } catch (error: any) {
                 console.error("Form submission error:", error);
                 toast.error(error?.message || "Something went wrong during submission.", { id: "toefl-submit" });

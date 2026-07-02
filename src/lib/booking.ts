@@ -52,6 +52,33 @@ export function compileBookingPayload(input: BookingPayloadInput) {
     return "others";
   };
 
+  const formatSessionTime = (timeStr?: string | null) => {
+    if (!timeStr) return undefined;
+    const trimmed = timeStr.trim().toUpperCase();
+    if (trimmed === "AM") return "09:00";
+    if (trimmed === "PM") return "13:00";
+
+    const match12 = trimmed.match(/^(\d{1,2}):(\d{2})\s*(AM|PM)$/);
+    if (match12) {
+      let hours = parseInt(match12[1], 10);
+      const minutes = match12[2];
+      const ampm = match12[3];
+      if (ampm === "PM" && hours < 12) {
+        hours += 12;
+      } else if (ampm === "AM" && hours === 12) {
+        hours = 0;
+      }
+      return `${hours.toString().padStart(2, "0")}:${minutes}`;
+    }
+
+    const match24 = trimmed.match(/^(\d{1,2}):(\d{2})$/);
+    if (match24) {
+      return `${parseInt(match24[1], 10).toString().padStart(2, "0")}:${match24[2]}`;
+    }
+
+    return timeStr;
+  };
+
   const payload: Record<string, any> = {
     user_id: input.userId || undefined,
     exam_id: input.examId,
@@ -74,7 +101,7 @@ export function compileBookingPayload(input: BookingPayloadInput) {
     id_type: mapIdType(input.idType),
     id_number: input.idNumber || undefined,
     session_date: formatDate(input.sessionDate),
-    session_time: input.sessionTime || undefined,
+    session_time: formatSessionTime(input.sessionTime),
     exam_fee: input.examFee,
     course_fee: input.courseFee || 0,
     workshop_fee: input.workshopFee || 0,

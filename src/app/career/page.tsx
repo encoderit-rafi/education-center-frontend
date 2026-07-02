@@ -200,7 +200,7 @@ export default function CareerPage() {
 
       let errorMessage = "An unexpected error occurred. Please try again later.";
       if (error.response?.status === 413) {
-        errorMessage = "The uploaded file is too large. Please upload a file smaller than 2MB.";
+        errorMessage = "The uploaded file is too large. Please upload a file smaller than 5MB.";
       } else if (error.response?.data?.message) {
         errorMessage = error.response.data.message;
       } else if (error.message) {
