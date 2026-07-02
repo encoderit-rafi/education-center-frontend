@@ -460,7 +460,7 @@ export default function FormTOEFLIBTRegistration({ examId: initialExamId }: Form
                                     {formData.selectedCourse && pricing.coursePriceAED > 0 && (
                                         <div className="flex justify-between text-sm items-center">
                                             <span className="text-slate-500 font-medium">
-                                                Course: {coursesData.find((c: any) => c.id === formData.selectedCourse)?.name}
+                                                Course: {coursesData.find((c: any) => c.id === formData.selectedCourse)?.name} Fee
                                             </span>
                                             <span className="font-bold text-slate-900 inline-flex items-center gap-1">
                                                 ${pricing.coursePriceUSD} <span className="text-slate-400 font-normal text-xs inline-flex items-center gap-0.5">(<PriceDisplay amount={pricing.coursePriceAED} minimumFractionDigits={0} maximumFractionDigits={0} className="text-slate-400 font-normal text-xs" />)</span>
@@ -471,7 +471,7 @@ export default function FormTOEFLIBTRegistration({ examId: initialExamId }: Form
                                     {formData.selectedWorkshop && pricing.workshopPriceAED > 0 && (
                                         <div className="flex justify-between text-sm items-center">
                                             <span className="text-slate-500 font-medium">
-                                                Workshop: {(workshopsData as any)[formData.selectedWorkshop]?.name}
+                                                Workshop: {(workshopsData as any)[formData.selectedWorkshop]?.name} Fee
                                             </span>
                                             <span className="font-bold text-slate-900 inline-flex items-center gap-1">
                                                 ${pricing.workshopPriceUSD} <span className="text-slate-400 font-normal text-xs inline-flex items-center gap-0.5">(<PriceDisplay amount={pricing.workshopPriceAED} minimumFractionDigits={0} maximumFractionDigits={0} className="text-slate-400 font-normal text-xs" />)</span>

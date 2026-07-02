@@ -222,7 +222,7 @@ export function GlobalReviewStep({
               ) : (
                 <>
                   <div className="flex justify-between text-sm">
-                    <span className="text-slate-500 font-medium">{examName}</span>
+                    <span className="text-slate-500 font-medium">{examName} Fee</span>
                     <PriceDisplay
                       amount={baseFee}
                       className="font-bold text-slate-900"
@@ -242,7 +242,7 @@ export function GlobalReviewStep({
                   {selectedCourseData && (
                     <div className="flex justify-between text-sm">
                       <span className="text-slate-500 font-medium">
-                        Course: {selectedCourseData.name}
+                        Course: {selectedCourseData.name} Fee
                       </span>
                       <PriceDisplay
                         amount={
@@ -258,7 +258,7 @@ export function GlobalReviewStep({
                   {selectedWorkshopData && (
                     <div className="flex justify-between text-sm">
                       <span className="text-slate-500 font-medium">
-                        Workshop: {selectedWorkshopData.name}
+                        Workshop: {selectedWorkshopData.name} Fee
                       </span>
                       <PriceDisplay
                         amount={selectedWorkshopData.price}
@@ -290,7 +290,7 @@ export function GlobalReviewStep({
 
                   <div className="pt-6 border-t border-slate-200">
                     <div className="flex justify-between items-center">
-                      <span className="font-black text-xs uppercase tracking-[0.2em] text-slate-900">
+                      <span className="font-black text-md uppercase">
                         Total Amount
                       </span>
                       <PriceDisplay

@@ -128,8 +128,8 @@
     },
     "ExperienceExcellence": {
       "label": "Experience Our Excellence",
-      "title": "Comprehensive Exam Services from Highly-Qualified Instructors",
-      "description": "TEPTH is a renowned UAE-based institution that helps students in preparing for and undertaking different international aptitude tests in order to meet admission requirements. We provide expert guidance for various English-based examinations and assessments, in addition to facilitating the registration, booking, and preparation for the tests.",
+      "title": "About TEPTH: Your Premier UAE-Based Testing Partner",
+      "description": "TEPTH is a highly respected institution based in the UAE, dedicated to helping students successfully prepare for and complete the international aptitude tests required for university admissions and global opportunities.\n\nWe offer comprehensive support and expert instruction for a wide variety of English-language exams and assessments. To ensure a seamless experience, our services go beyond academic guidance—we also fully manage and facilitate the entire test registration and booking process on your behalf.",
       "tagline": "Ace the Test, Secure Your Future."
     },
     "CampusGallery": {
@@ -401,7 +401,7 @@
         "parkingTitle1": "Parking",
         "parkingTitle2": "Information",
         "onSiteParking": "On-Site Parking",
-        "onSiteParkingText1": "There are visitor parking spaces available in front of the ",
+        "onSiteParkingText1": "There are visitor parking spaces available in front of ",
         "onSiteParkingText2": "Tabarak Tower",
         "publicParking": "Public Parking",
         "publicParkingText1": "Metered parking is also available near the tower at a rate of ",
@@ -1333,7 +1333,7 @@
       "advantageSubtitle": "Infrastructure Engineered for Success",
       "features": [
         {
-          "title": "Downtown Campus",
+          "title": "Downtown Site",
           "desc": "Centrally located for easy access with public transport links and premium parking."
         },
         {
@@ -3552,7 +3552,7 @@
       "endTimeLabel": "End Time",
       "pricingTitle": "Workshop Pricing",
       "saveInstant": "SAVE {discount}{type} INSTANTLY",
-      "bookNow": "Book Now",
+      "bookNow": "Register Now",
       "securePayment": "Secure Online Payment",
       "quickInfoDuration": "{duration}-hour intensive session",
       "certifiedInstructors": "Certified Instructors",
@@ -3560,7 +3560,7 @@
       "mockTestType": "Workshop Type",
       "selectMockTestType": "Select your workshop type",
       "online": "Online",
-      "inPerson": "In Person"
+      "inPerson": "In-Person"
     }
   },
   "FeesPage": {

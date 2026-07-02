@@ -400,7 +400,7 @@ export default function FormSELTA2Registration({ examId: initialExamId }: FormPr
                   )}
 
                   <div className="flex justify-between text-sm">
-                    <span className="text-slate-500 font-medium">{examName}</span>
+                    <span className="text-slate-500 font-medium">{examName} Fee</span>
                     <div className="flex items-center gap-1">
                       <span className="text-xs text-slate-400 font-normal">Approximately</span>
                       <PriceDisplay
@@ -426,7 +426,7 @@ export default function FormSELTA2Registration({ examId: initialExamId }: FormPr
                       return selectedCourse ? (
                         <div className="flex justify-between text-sm">
                           <span className="text-slate-500 font-medium">
-                            Course: {selectedCourse.name}
+                            Course: {selectedCourse.name} Fee
                           </span>
                           <PriceDisplay
                             amount={selectedCourse.discounted_price ?? selectedCourse.price}
@@ -443,7 +443,7 @@ export default function FormSELTA2Registration({ examId: initialExamId }: FormPr
                       return selectedWorkshop ? (
                         <div className="flex justify-between text-sm">
                           <span className="text-slate-500 font-medium">
-                            Workshop: {selectedWorkshop.name}
+                            Workshop: {selectedWorkshop.name} Fee
                           </span>
                           <PriceDisplay
                             amount={selectedWorkshop.price}
