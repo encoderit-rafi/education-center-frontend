@@ -1,7 +1,13 @@
 import { format } from "date-fns";
 
 export interface BookingPayloadInput {
+  userId?: string | null;
   examId: string;
+  courseId?: string | null;
+  packageId?: string | null;
+  workshopId?: string | null;
+  workshopPackageId?: string | null;
+  paymentId?: string | null;
   paymentMethod: string;
   firstName: string;
   middleName?: string | null;
@@ -47,7 +53,13 @@ export function compileBookingPayload(input: BookingPayloadInput) {
   };
 
   const payload: Record<string, any> = {
+    user_id: input.userId || undefined,
     exam_id: input.examId,
+    course_id: input.courseId || null,
+    package_id: input.packageId || input.allFormData.selectedCourse || undefined,
+    workshop_id: input.workshopId || input.allFormData.selectedWorkshop || undefined,
+    workshop_package_id: input.workshopPackageId || undefined,
+    payment_id: input.paymentId || undefined,
     payment_methods: input.paymentMethod || "stripe",
     first_name: input.firstName,
     middle_name: input.middleName || null,
@@ -70,8 +82,6 @@ export function compileBookingPayload(input: BookingPayloadInput) {
     discount_amount: input.discountAmount || 0,
     vat_amount: input.vatAmount || 0,
     total_amount: input.totalAmount,
-    package_id: input.allFormData.selectedCourse || undefined,
-    workshop_id: input.allFormData.selectedWorkshop || undefined,
   };
 
   const coreKeys = [
@@ -96,7 +106,13 @@ export function compileBookingPayload(input: BookingPayloadInput) {
     "additionalFee", "additional_fee",
     "discountAmount", "discount_amount",
     "vatAmount", "vat_amount",
-    "totalAmount", "total_amount"
+    "totalAmount", "total_amount",
+    "userId", "user_id",
+    "courseId", "course_id",
+    "packageId", "package_id",
+    "workshopId", "workshop_id",
+    "workshopPackageId", "workshop_package_id",
+    "paymentId", "payment_id",
   ];
 
   const formData: Record<string, any> = {};
