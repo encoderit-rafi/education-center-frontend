@@ -44,6 +44,7 @@ export default function Error({
           variant="outline"
           size="lg"
           className="rounded-full px-8"
+          nativeButton={false}
           render={
             <Link href="/" className="inline-flex items-center justify-center">
               <Home className="mr-2 size-5" />

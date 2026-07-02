@@ -169,7 +169,7 @@ export default function ExamDetails({ data }: { data: any }) {
                     Overview
                   </h2>
                 </div>
-                <div className="prose prose-slate max-w-none text-slate-600 leading-relaxed text-xs lg:text-sm">
+                <div className="prose prose-slate max-w-none text-slate-600 leading-relaxed text-xs lg:text-sm text-justify">
                   {(() => {
                     const renderFormattedText = (text: string) => {
                       if (!text) return "";
@@ -199,14 +199,14 @@ export default function ExamDetails({ data }: { data: any }) {
                     return overview
                       ?.split("\n\n")
                       .map((para: string, i: number) => (
-                        <p key={i} className="whitespace-pre-line">{renderFormattedText(para)}</p>
-                      )) || <p className="whitespace-pre-line">{renderFormattedText(description)}</p>;
+                        <p key={i} className="whitespace-pre-line text-justify">{renderFormattedText(para)}</p>
+                      )) || <p className="whitespace-pre-line text-justify">{renderFormattedText(description)}</p>;
                   })()}
 
                   {whoShouldTake.length > 0 && (
                     <ul className="mt-4 space-y-2 list-disc pl-5">
                       {whoShouldTake.map((item: string, i: number) => (
-                        <li key={i} className="text-slate-600 leading-relaxed text-xs lg:text-sm">
+                        <li key={i} className="text-slate-600 leading-relaxed text-xs lg:text-sm text-justify">
                           {item.includes(":") ? (
                             <>
                               <strong className="font-bold text-slate-900">
@@ -234,7 +234,7 @@ export default function ExamDetails({ data }: { data: any }) {
                     </h2>
                   </div>
 
-                  <div className="grid gap-3">
+                  <div className={cn("grid gap-4", (data.slug === "ielts-academic" || data.slug === "ielts-general") ? "md:grid-cols-2" : "grid-cols-1")}>
                     {sections.map((section: any, i: number) => (
                       <div
                         key={i}
@@ -256,15 +256,17 @@ export default function ExamDetails({ data }: { data: any }) {
                                 </div>
                               )}
                             </div>
-                            <p className="text-slate-600 leading-relaxed text-xs whitespace-pre-line">
+                            <p className="text-slate-600 leading-relaxed text-xs whitespace-pre-line text-justify">
                               {section.details}
                             </p>
 
                             {section.skills && (
                               <div className="space-y-3">
-                                <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
-                                  Skills Assessed
-                                </p>
+                                {data.slug !== "ielts-academic" && data.slug !== "ielts-general" && (
+                                  <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                                    Skills Assessed
+                                  </p>
+                                )}
                                 <div
                                   className={cn(
                                     "grid gap-2",
@@ -280,7 +282,7 @@ export default function ExamDetails({ data }: { data: any }) {
                                         className="flex items-start gap-2 text-slate-700"
                                       >
                                         <CheckCircle2 className="size-3 text-primary shrink-0 mt-0.5" />
-                                        <span className="text-xs">
+                                        <span className="text-xs text-justify">
                                           {skill.includes(":") ? (
                                             <>
                                               <strong className="font-bold text-slate-900">
@@ -299,50 +301,52 @@ export default function ExamDetails({ data }: { data: any }) {
                               </div>
                             )}
 
-                            <div className="grid gap-4 sm:grid-cols-2 pt-4 border-t border-slate-100">
-                              {section.format && (
-                                <div className="space-y-1 sm:col-span-2">
-                                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">
-                                    Format
-                                  </p>
-                                  <p className="text-xs font-medium text-slate-900 leading-relaxed whitespace-pre-line">
-                                    {section.format}
-                                  </p>
-                                </div>
-                              )}
-                              {section.questions && (
-                                <div className="space-y-1">
-                                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">
-                                    Questions
-                                  </p>
-                                  <p className="text-sm font-medium text-slate-900 whitespace-pre-line">
-                                    {section.questions}
-                                  </p>
-                                </div>
-                              )}
-                              {section.taskTypes && (
-                                <div className="space-y-1 sm:col-span-2">
-                                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">
-                                    Task Types
-                                  </p>
-                                  <p className="text-xs font-medium text-slate-900 leading-relaxed whitespace-pre-line">
-                                    {Array.isArray(section.taskTypes)
-                                      ? section.taskTypes.join(", ")
-                                      : section.taskTypes}
-                                  </p>
-                                </div>
-                              )}
-                              {section.marks && (
-                                <div className="space-y-1 sm:col-span-2">
-                                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">
-                                    Marks & Scoring
-                                  </p>
-                                  <p className="text-xs font-medium text-slate-900 leading-relaxed whitespace-pre-line">
-                                    {section.marks}
-                                  </p>
-                                </div>
-                              )}
-                            </div>
+                            {(section.format || section.questions || section.taskTypes || section.marks) && (
+                              <div className="grid gap-4 sm:grid-cols-2 pt-4 border-t border-slate-100">
+                                {section.format && (
+                                  <div className="space-y-1 sm:col-span-2">
+                                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">
+                                      Format
+                                    </p>
+                                    <p className="text-xs font-medium text-slate-900 leading-relaxed whitespace-pre-line">
+                                      {section.format}
+                                    </p>
+                                  </div>
+                                )}
+                                {section.questions && (
+                                  <div className="space-y-1">
+                                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">
+                                      Questions
+                                    </p>
+                                    <p className="text-sm font-medium text-slate-900 whitespace-pre-line">
+                                      {section.questions}
+                                    </p>
+                                  </div>
+                                )}
+                                {section.taskTypes && (
+                                  <div className="space-y-1 sm:col-span-2">
+                                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">
+                                      Task Types
+                                    </p>
+                                    <p className="text-xs font-medium text-slate-900 leading-relaxed whitespace-pre-line">
+                                      {Array.isArray(section.taskTypes)
+                                        ? section.taskTypes.join(", ")
+                                        : section.taskTypes}
+                                    </p>
+                                  </div>
+                                )}
+                                {section.marks && (
+                                  <div className="space-y-1 sm:col-span-2">
+                                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">
+                                      Marks & Scoring
+                                    </p>
+                                    <p className="text-xs font-medium text-slate-900 leading-relaxed whitespace-pre-line">
+                                      {section.marks}
+                                    </p>
+                                  </div>
+                                )}
+                              </div>
+                            )}
                           </div>
                         </div>
                       </div>
