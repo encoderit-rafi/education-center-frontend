@@ -386,7 +386,7 @@ export default function FormTOEFLIBTRegistration({ examId: initialExamId }: Form
                         <TermsStep
                             onNext={() => goToStep(1)}
                             examFee={pricing.baseFeeAED}
-                            additionalFee={activeExam?.additionalFee && parseFloat(activeExam.additionalFee) > 0 ? parseFloat(activeExam.additionalFee) : 100}
+                            additionalFee={activeExam?.additionalFee && parseFloat(activeExam.additionalFee) > 0 ? parseFloat(activeExam.additionalFee) : 150}
                         />
                     )}
 

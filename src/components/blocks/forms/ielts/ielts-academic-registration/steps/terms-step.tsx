@@ -15,7 +15,7 @@ interface TermsStepProps {
 export function TermsStep({ onNext, examFee, additionalFee }: TermsStepProps) {
   const t = useTranslations("TermsSteps");
 
-  const notices: (React.ReactNode | string)[] = Array.from({ length: 16 }).map((_, idx) => {
+  const notices: (React.ReactNode | string)[] = Array.from({ length: 26 }).map((_, idx) => {
     return t.rich(`ieltsAcademic.${idx}`, {
       aed_exam: () => (
         <strong className="font-semibold">

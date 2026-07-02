@@ -16,8 +16,8 @@ export function TermsStep({ onNext, examFee, additionalFee }: TermsStepProps) {
   const t = useTranslations("TermsSteps");
   const examName = "PTE Academic UKVI";
 
-  const notices: (React.ReactNode | string)[] = Array.from({ length: 17 }).map((_, idx) => {
-    return t.rich(`pte.${idx}`, {
+  const notices: (React.ReactNode | string)[] = Array.from({ length: 23 }).map((_, idx) => {
+    return t.rich(`pteUkvi.${idx}`, {
       examName: examName,
       aed_exam: () => (
         <strong className="font-semibold">
