@@ -78,7 +78,7 @@ export function RegistrationFormStep({
           </Field>
 
           <Field>
-            <FieldLabel>Middle Name</FieldLabel>
+            <FieldLabel>Middle Name (Optional)</FieldLabel>
             <FieldContent>
               <Input
                 placeholder="As per passport"

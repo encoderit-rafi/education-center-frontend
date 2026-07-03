@@ -1781,15 +1781,15 @@ export const EXAM_DETAILE_DATA = [
   {
     ...EXAM_IDS_DATA.pte_academic,
     type: "details",
-    subtitle: "Fast, computer-based English test for study and migration",
+    subtitle: "Your Guide to the PTE Academic Exam",
     description:
-      "PTE Academic is a computer-based English test that assesses your academic-level speaking, writing, reading and listening skills in a single 2-hour sitting.",
+      "Preparing to study or work abroad can feel overwhelming, but understanding your language proficiency requirements is a great first step. The PTE Academic (Pearson Test of English Academic) is one of the world's leading computer-based English language tests, designed specifically for international students and professionals.",
     overview:
-      "PTE Academic is the preferred choice for students planning to study at a university globally. It provides a fast, fair, and flexible way to prove your English level for academic admissions.\n\nBeyond academia, PTE Academic is widely accepted for work and migration visas, particularly for Australia and New Zealand. It is also uniquely recognized by the U.S. State Boards of Nursing for professional registration and work visas.",
+      "Preparing to study or work abroad can feel overwhelming, but understanding your language proficiency requirements is a great first step. The PTE Academic (Pearson Test of English Academic) is one of the world's leading computer-based English language tests, designed specifically for international students and professionals.\n\nWhether you are applying to a university or seeking a visa, here is everything you need to know about the PTE Academic exam to help you prepare with confidence.\n\n**What is the PTE Academic?**\n\nThe PTE Academic assesses your English skills in an academic context. Instead of testing isolated grammar rules, it evaluates your ability to understand and communicate in real-life academic and everyday scenarios. You will listen to excerpts from university lectures, read graphs and academic passages, and speak your answers directly into a microphone.\n\n**Key Takeaway:** The entire exam is completed in a single session on a computer at a secure test center, making it a streamlined and efficient experience.\n\n**Why Choose the PTE Academic?**\n\nMany candidates prefer the PTE for its modern approach to testing. Here are a few reasons why it stands out:\n• **Fast Results:** Scores are typically available within **48 hours**, making it ideal for meeting tight application deadlines.\n• **Unbiased AI Scoring:** The test is graded entirely by an advanced artificial intelligence system, ensuring your spoken and written answers are judged objectively and consistently.\n• **Frequent Test Dates:** Test centers operate year-round, offering highly flexible scheduling.\n• **Shorter Duration:** The entire test takes just **2 hours** to complete, which helps reduce testing fatigue.\n\n**Test Format and Structure**\n\nThe PTE Academic consists of three main parts, all completed in one sitting.\n\n**Understanding Your Scores**\n\nThe PTE uses the **Global Scale of English (GSE)**. Your overall score will range from **10 to 90 points**, providing a highly precise measurement of your English ability.\n\nAlong with your overall score, your score report will show a detailed breakdown of your communicative skills (Listening, Reading, Speaking, and Writing), allowing you to clearly identify your strengths and areas for improvement.\n\n**Global Recognition**\n\nThe PTE Academic is trusted by thousands of institutions worldwide.\n• **Study:** Accepted by prestigious universities across the USA, UK, Canada, Australia, and New Zealand, including Harvard Business School, INSEAD, and Yale.\n• **Visas & Immigration:** Approved for all UK, Australian, and New Zealand student and migration visa applications.\n\nWith the right preparation and a clear understanding of the test format, you can easily achieve the score you need to take your next big step. We can help you prepare the TEPTH Way.",
     stats: [
       { label: "Total Duration", value: "2 Hours" },
-      { label: "Score Scale", value: "10–90" },
-      { label: "Results In", value: "2 Days" },
+      { label: "Score Scale", value: "10–90 Points" },
+      { label: "Results In", value: "48 Hours" },
       { label: "Validity", value: "2 Years" },
       { label: "AI Scored", value: "Yes" },
     ],
@@ -1799,40 +1799,43 @@ export const EXAM_DETAILE_DATA = [
         name: "Part 1: Speaking & Writing",
         duration: "54–67 minutes",
         details:
-          "Assess your ability to communicate effectively in an academic environment through various integrated tasks.",
-        format:
-          "Tasks include Personal Introduction, Read Aloud, Repeat Sentence, Describe Image, Re-tell Lecture, Answer Short Question, Summarize Written Text, and Write Essay.",
+          "This section tests your spoken fluency, pronunciation, and written grammar in an academic environment.",
+        skills: [
+          "Read Aloud: Read a text on the screen aloud with proper pronunciation and intonation.",
+          "Repeat Sentence: Listen to a recording and repeat the sentence exactly as spoken.",
+          "Describe Image: Analyze and describe a chart, graph, map, or picture.",
+          "Retell Lecture: Listen to a lecture excerpt and summarize it in your own words.",
+          "Write Essay: Write a short, well-structured essay on a given prompt.",
+        ],
       },
       {
         icon: "reading",
         name: "Part 2: Reading",
         duration: "29–30 minutes",
         details:
-          "Evaluate your ability to understand written English in academic contexts.",
-        format:
-          "Tasks include Reading & Writing: Fill in the Blanks, Multiple Choice (Multiple Answer), Re-order Paragraphs, Reading: Fill in the Blanks, and Multiple Choice (Single Answer).",
+          "This section evaluates your ability to understand written English in academic contexts through different reading materials.",
+        skills: [
+          "Fill in the Blanks: Provide correct words using context and grammar clues.",
+          "Reorder Paragraphs: Arrange randomly placed paragraphs into a logical text flow.",
+          "Multiple Choice: Answer single-select or multiple-select questions based on a reading passage.",
+        ],
       },
       {
         icon: "listening",
         name: "Part 3: Listening",
         duration: "30–43 minutes",
         details:
-          "Test your ability to understand spoken English through a variety of audio and video clips.",
-        format:
-          "Tasks include Summarize Spoken Text, Multiple Choice (Multiple Answer), Fill in the Blanks, Highlight Correct Summary, Multiple Choice (Single Answer), Select Missing Word, Highlight Incorrect Words, and Write from Dictation.",
+          "This section tests your ability to understand spoken English through a variety of audio and video clips (heard only once).",
+        skills: [
+          "Summarize Spoken Text: Listen to a recording and write a summary.",
+          "Fill in the Blanks: Type the missing words in a transcription while listening.",
+          "Highlight Incorrect Words: Identify words that do not match the spoken audio.",
+          "Write from Dictation: Listen to a short sentence and type it exactly as heard.",
+        ],
       },
     ],
-    whoShouldTake: [
-      "Students applying for undergraduate or postgraduate study globally",
-      "Individuals applying for work or migration visas for Australia and New Zealand",
-      "Nurses and healthcare professionals seeking U.S. state board registration",
-    ],
-    acceptedFor: [
-      "University Admissions (Global)",
-      "Australian Migration & Work Visas",
-      "New Zealand Migration & Work Visas",
-      "U.S. Nursing Registration",
-    ],
+    whoShouldTake: [],
+    acceptedFor: [],
   },
   {
     ...EXAM_IDS_DATA.pte_core,

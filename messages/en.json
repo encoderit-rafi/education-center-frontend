@@ -2060,8 +2060,8 @@
     },
     "pte-academic": {
       "subtitle": "Your Guide to the PTE Academic Exam",
-      "description": "The **PTE Academic (Pearson Test of English Academic)** is one of the world's leading computer-based English language tests, designed specifically for international students and professionals.",
-      "overview": "Preparing to study or work abroad can feel overwhelming, but understanding your language proficiency requirements is a great first step. The **PTE Academic (Pearson Test of English Academic)** is one of the world's leading computer-based English language tests, designed specifically for international students and professionals.\n\nWhether you are applying to a university or seeking a visa, here is everything you need to know about the PTE Academic exam to help you prepare with confidence.\n\n**What is the PTE Academic?**\n\nThe PTE Academic assesses your English skills in an academic context. Instead of testing isolated grammar rules, it evaluates your ability to understand and communicate in real-life academic and everyday scenarios. You will listen to excerpts from university lectures, read graphs and academic passages, and speak your answers directly into a microphone.\n\n**Key Takeaway:** The entire exam is completed in a single session on a computer at a secure test center, making it a streamlined and efficient experience.\n\n**Why Choose the PTE Academic?**\n\nMany candidates prefer the PTE for its modern approach to testing. Here are a few reasons why it stands out:\n• **Fast Results:** Scores are typically available within **48 hours**, making it ideal for meeting tight application deadlines.\n• **Unbiased AI Scoring:** The test is graded entirely by an advanced artificial intelligence system, ensuring your spoken and written answers are judged objectively and consistently.\n• **Frequent Test Dates:** Test centers operate year-round, offering highly flexible scheduling.\n• **Shorter Duration:** The entire test takes just **2 hours** to complete, which helps reduce testing fatigue.\n\n**Test Format and Structure**\n\nThe PTE Academic consists of three main parts, all completed in one sitting.\n• **Part 1 – Speaking & Writing (54–67 minutes):** You will read aloud, repeat sentences, describe images, retell lectures, and write a short essay. This section tests your spoken fluency, pronunciation, and written grammar.\n• **Part 2 – Reading (29–30 minutes):** This section includes multiple-choice questions, reordering paragraphs, and fill-in-the-blanks. It evaluates your comprehension of written academic English.\n• **Part 3 – Listening (30–43 minutes):** You will listen to audio or video clips and answer questions by summarizing spoken text, filling in blanks, and identifying incorrect words. You only hear each clip once.\n\n**Understanding Your Scores**\n\nThe PTE uses the **Global Scale of English (GSE)**. Your overall score will range from **10 to 90 points**, providing a highly precise measurement of your English ability.\n\nAlong with your overall score, your score report will show a detailed breakdown of your communicative skills (Listening, Reading, Speaking, and Writing), allowing you to clearly identify your strengths and areas for improvement.\n\n**Global Recognition**\n\nThe PTE Academic is trusted by thousands of institutions worldwide.\n• **Study:** Accepted by prestigious universities across the USA, UK, Canada, Australia, and New Zealand, including Harvard Business School, INSEAD, and Yale.\n• **Visas & Immigration:** Approved for all UK, Australian, and New Zealand student and migration visa applications.\n\nWith the right preparation and a clear understanding of the test format, you can easily achieve the score you need to take your next big step. We can help you prepare the TEPTH Way.",
+      "description": "Preparing to study or work abroad can feel overwhelming, but understanding your language proficiency requirements is a great first step. The **PTE Academic (Pearson Test of English Academic)** is one of the world's leading computer-based English language tests, designed specifically for international students and professionals.",
+      "overview": "Preparing to study or work abroad can feel overwhelming, but understanding your language proficiency requirements is a great first step. The **PTE Academic (Pearson Test of English Academic)** is one of the world's leading computer-based English language tests, designed specifically for international students and professionals.\n\nWhether you are applying to a university or seeking a visa, here is everything you need to know about the PTE Academic exam to help you prepare with confidence.\n\n**What is the PTE Academic?**\n\nThe PTE Academic assesses your English skills in an academic context. Instead of testing isolated grammar rules, it evaluates your ability to understand and communicate in real-life academic and everyday scenarios. You will listen to excerpts from university lectures, read graphs and academic passages, and speak your answers directly into a microphone.\n\n**Key Takeaway:** The entire exam is completed in a single session on a computer at a secure test center, making it a streamlined and efficient experience.\n\n**Why Choose the PTE Academic?**\n\nMany candidates prefer the PTE for its modern approach to testing. Here are a few reasons why it stands out:\n• **Fast Results:** Scores are typically available within **48 hours**, making it ideal for meeting tight application deadlines.\n• **Unbiased AI Scoring:** The test is graded entirely by an advanced artificial intelligence system, ensuring your spoken and written answers are judged objectively and consistently.\n• **Frequent Test Dates:** Test centers operate year-round, offering highly flexible scheduling.\n• **Shorter Duration:** The entire test takes just **2 hours** to complete, which helps reduce testing fatigue.\n\n**Test Format and Structure**\n\nThe PTE Academic consists of three main parts, all completed in one sitting.\n\n| Exam Section | Duration | What to Expect |\n|---|---|---|\n| **Part 1: Speaking & Writing** | 54 - 67 minutes | You will read aloud, repeat sentences, describe images, retell lectures, and write a short essay. This section tests your spoken fluency, pronunciation, and written grammar. |\n| **Part 2: Reading** | 29 - 30 minutes | This section includes multiple-choice questions, reordering paragraphs, and fill-in-the-blanks. It evaluates your comprehension of written academic English. |\n| **Part 3: Listening** | 30 - 43 minutes | You will listen to audio or video clips and answer questions by summarizing spoken text, filling in blanks, and identifying incorrect words. You only hear each clip once. |\n\n**Understanding Your Scores**\n\nThe PTE uses the **Global Scale of English (GSE)**. Your overall score will range from **10 to 90 points**, providing a highly precise measurement of your English ability.\n\nAlong with your overall score, your score report will show a detailed breakdown of your communicative skills (Listening, Reading, Speaking, and Writing), allowing you to clearly identify your strengths and areas for improvement.\n\n**Global Recognition**\n\nThe PTE Academic is trusted by thousands of institutions worldwide.\n• **Study:** Accepted by prestigious universities across the USA, UK, Canada, Australia, and New Zealand, including Harvard Business School, INSEAD, and Yale.\n• **Visas & Immigration:** Approved for all UK, Australian, and New Zealand student and migration visa applications.\n\nWith the right preparation and a clear understanding of the test format, you can easily achieve the score you need to take your next big step. We can help you prepare the TEPTH Way.",
       "stats": [
         {
           "label": "Total Duration",
@@ -2069,7 +2069,7 @@
         },
         {
           "label": "Score Scale",
-          "value": "10–90"
+          "value": "10–90 Points"
         },
         {
           "label": "Results In",
@@ -2088,38 +2088,44 @@
         {
           "name": "Part 1: Speaking & Writing",
           "duration": "54–67 minutes",
-          "details": "You will read aloud, repeat sentences, describe images, retell lectures, and write a short essay. This section tests your spoken fluency, pronunciation, and written grammar.",
-          "format": "Tasks include Personal Introduction, Read Aloud, Repeat Sentence, Describe Image, Re-tell Lecture, Answer Short Question, Summarize Written Text, and Write Essay."
+          "details": "This section tests your spoken fluency, pronunciation, and written grammar in an academic environment.",
+          "skills": [
+            "Read Aloud: Read a text on the screen aloud with proper pronunciation and intonation.",
+            "Repeat Sentence: Listen to a recording and repeat the sentence exactly as spoken.",
+            "Describe Image: Analyze and describe a chart, graph, map, or picture.",
+            "Retell Lecture: Listen to a lecture excerpt and summarize it in your own words.",
+            "Write Essay: Write a short, well-structured essay on a given prompt."
+          ]
         },
         {
           "name": "Part 2: Reading",
           "duration": "29–30 minutes",
-          "details": "This section includes multiple-choice questions, reordering paragraphs, and fill-in-the-blanks. It evaluates your comprehension of written academic English.",
-          "format": "Tasks include Reading & Writing: Fill in the Blanks, Multiple Choice (Multiple Answer), Re-order Paragraphs, Reading: Fill in the Blanks, and Multiple Choice (Single Answer)."
+          "details": "This section evaluates your ability to understand written English in academic contexts through different reading materials.",
+          "skills": [
+            "Fill in the Blanks: Provide correct words using context and grammar clues.",
+            "Reorder Paragraphs: Arrange randomly placed paragraphs into a logical text flow.",
+            "Multiple Choice: Answer single-select or multiple-select questions based on a reading passage."
+          ]
         },
         {
           "name": "Part 3: Listening",
           "duration": "30–43 minutes",
-          "details": "You will listen to audio or video clips and answer questions by summarizing spoken text, filling in blanks, and identifying incorrect words. You only hear each clip once.",
-          "format": "Tasks include Summarize Spoken Text, Multiple Choice (Multiple Answer), Fill in the Blanks, Highlight Correct Summary, Multiple Choice (Single Answer), Select Missing Word, Highlight Incorrect Words, and Write from Dictation."
+          "details": "This section tests your ability to understand spoken English through a variety of audio and video clips (heard only once).",
+          "skills": [
+            "Summarize Spoken Text: Listen to a recording and write a summary.",
+            "Fill in the Blanks: Type the missing words in a transcription while listening.",
+            "Highlight Incorrect Words: Identify words that do not match the spoken audio.",
+            "Write from Dictation: Listen to a short sentence and type it exactly as heard."
+          ]
         }
       ],
-      "whoShouldTake": [
-        "Students applying for undergraduate or postgraduate study globally",
-        "Individuals applying for work or migration visas for Australia and New Zealand",
-        "Nurses and healthcare professionals seeking U.S. state board registration"
-      ],
-      "acceptedFor": [
-        "University Admissions (Global)",
-        "Australian Migration & Work Visas",
-        "New Zealand Migration & Work Visas",
-        "U.S. Nursing Registration"
-      ]
+      "whoShouldTake": [],
+      "acceptedFor": []
     },
     "pte-core": {
       "subtitle": "Your Guide to the PTE Core Test",
-      "description": "The **PTE Core** is a relatively new, computer-based English language test developed by Pearson specifically for Canadian immigration and general professional purposes.",
-      "overview": "If you are planning to migrate to Canada for work, permanent residency, or citizenship, proving your English proficiency is a crucial step. The **PTE Core** is a relatively new, computer-based English language test developed by Pearson specifically for Canadian immigration and general professional purposes.\n\nUnlike academic tests designed for university admissions, the PTE Core evaluates how well you communicate in real-world, everyday scenarios.\n\n**What is the PTE Core?**\n\nThe PTE Core assesses your practical English skills in a general and workplace context. Instead of analyzing academic lectures or complex essays, you will be tested on your ability to handle everyday situations. For example, you might be asked to listen to a brief workplace conversation, read a standard public notice, or write an email to a colleague.\n\nTwo unique question types specifically designed for this exam include **Respond to a Situation** (verbally explaining how you would handle a given scenario) and **Write an Email**.\n\n**Key Takeaway:** The entire exam is completed in a single, two-hour session on a computer at a secure test center, focusing entirely on the English you will actually use in your day-to-day life in Canada.\n\n**Why Choose the PTE Core?**\n\nThe PTE Core is highly favored by immigration candidates for its speed and predictability. Here is why it stands out:\n• **Fast Results:** Scores are typically returned within **48 hours**, which is ideal when preparing time-sensitive immigration applications.\n• **Direct CLB Mapping:** Your scores are designed to translate directly to the **Canadian Language Benchmarks (CLB)**, the standard used by the Canadian government.\n• **Unbiased AI Scoring:** Your spoken and written responses are graded entirely by an advanced artificial intelligence system, ensuring complete objectivity.\n• **Flexible Scheduling:** With frequent test dates available at centers worldwide, booking an exam is highly convenient.\n\n**Test Format and Structure**\n\nThe PTE Core is broken down into three main parts, completed sequentially without breaks.\n• **Part 1 – Speaking & Writing (50–65 minutes):** You will introduce yourself, read aloud, describe images, respond to everyday situations, and write an email.\n• **Part 2 – Reading (27–37 minutes):** You will answer multiple-choice questions, reorder paragraphs, and fill in the blanks using practical texts.\n• **Part 3 – Listening (30–37 minutes):** You will listen to short audio clips, summarize spoken text, and type exactly what you hear in dictation tasks.\n\n**Understanding Your Scores**\n\nLike other Pearson tests, the PTE Core uses a scoring scale from **10 to 90 points**. Your score report will break down your performance across the four communicative skills: Listening, Reading, Speaking, and Writing.\n\nBecause the test is tailored for Canada, you can easily use Pearson's official equivalency charts to convert your 10–90 score into your required CLB level (such as CLB 7 or CLB 9) for Express Entry or other immigration streams.\n\n**Official Recognition**\n\nThe PTE Core is officially recognized by **Immigration, Refugees and Citizenship Canada (IRCC)**.\n• **Immigration & PR:** Accepted for all Canadian economic immigration programs, including Express Entry and Provincial Nominee Programs (PNPs).\n• **Citizenship:** Valid for individuals applying for Canadian citizenship.\n\n*(Note: If you are applying for a Canadian study permit through the Student Direct Stream, you will typically need the PTE Academic instead.)*\n\nWith its focus on practical communication and rapid scoring, the PTE Core is an excellent, stress-free option for proving your English readiness for life in Canada.",
+      "description": "If you are planning to migrate to Canada for work, permanent residency, or citizenship, proving your English proficiency is a crucial step. The **PTE Core** is a relatively new, computer-based English language test developed by Pearson specifically for Canadian immigration and general professional purposes.",
+      "overview": "If you are planning to migrate to Canada for work, permanent residency, or citizenship, proving your English proficiency is a crucial step. The **PTE Core** is a relatively new, computer-based English language test developed by Pearson specifically for Canadian immigration and general professional purposes.\n\nUnlike academic tests designed for university admissions, the PTE Core evaluates how well you communicate in real-world, everyday scenarios.\n\n**What is the PTE Core?**\n\nThe PTE Core assesses your practical English skills in a general and workplace context. Instead of analyzing academic lectures or complex essays, you will be tested on your ability to handle everyday situations. For example, you might be asked to listen to a workplace conversation, read a standard public notice, or write an email to a colleague.\n\nTwo unique question types specifically designed for this exam include **Respond to a Situation** (verbally explaining how you would handle a given scenario) and **Write an Email**.\n\n**Key Takeaway:** The entire exam is completed in a single, two-hour session on a computer at a secure test center, focusing entirely on the English you will actually use in your day-to-day life in Canada.\n\n**Why Choose the PTE Core?**\n\nThe PTE Core is highly favored by immigration candidates for its speed and predictability. Here is why it stands out:\n• **Fast Results:** Scores are typically returned within **48 hours**, which is ideal when preparing time-sensitive immigration applications.\n• **Direct CLB Mapping:** Your scores are designed to translate directly to the **Canadian Language Benchmarks (CLB)**, the standard used by the Canadian government.\n• **Unbiased AI Scoring:** Your spoken and written responses are graded entirely by an advanced artificial intelligence system, ensuring complete objectivity.\n• **Flexible Scheduling:** With frequent test dates available at centers worldwide, booking an exam is highly convenient.\n\n**Test Format and Structure**\n\nThe PTE Core is broken down into three main parts, completed sequentially without breaks.\n\n| Exam Section | Duration | What to Expect |\n|---|---|---|\n| **Part 1: Speaking & Writing** | 50 – 65 minutes | You will introduce yourself, read aloud, describe images, respond to everyday situations, and write an email. |\n| **Part 2: Reading** | 27 – 37 minutes | You will answer multiple-choice questions, reorder paragraphs, and fill in the blanks using practical texts. |\n| **Part 3: Listening** | 30 – 37 minutes | You will listen to short audio clips, summarize spoken text, and type exactly what you hear in dictation tasks. |\n\n**Understanding Your Scores**\n\nLike other Pearson tests, the PTE Core uses a scoring scale from **10 to 90 points**. Your score report will break down your performance across the four communicative skills: Listening, Reading, Speaking, and Writing.\n\nBecause the test is tailored for Canada, you can easily use Pearson's official equivalency charts to convert your 10–90 score into your required CLB level (such as CLB 7 or CLB 9) for Express Entry or other immigration streams.\n\n**Official Recognition**\n\nThe PTE Core is officially recognized by **Immigration, Refugees and Citizenship Canada (IRCC)**.\n• **Immigration & PR:** Accepted for all Canadian economic immigration programs, including Express Entry and Provincial Nominee Programs (PNPs).\n• **Citizenship:** Valid for individuals applying for Canadian citizenship.\n\n*(Note: If you are applying for a Canadian study permit through the Student Direct Stream, you will typically need the PTE Academic instead.)*\n\nWith its focus on practical communication and rapid scoring, the PTE Core is an excellent, stress-free option for proving your English readiness for life in Canada.",
       "stats": [
         {
           "label": "Total Duration",
@@ -2142,36 +2148,9 @@
           "value": "Yes"
         }
       ],
-      "sections": [
-        {
-          "name": "Part 1: Speaking & Writing",
-          "duration": "50–65 minutes",
-          "details": "You will introduce yourself, read aloud, describe images, respond to everyday situations, and write an email.",
-          "format": "Tasks include Personal Introduction, Read Aloud, Repeat Sentence, Describe Image, Respond to a Situation, Answer Short Question, Summarize Written Text, and Write Email."
-        },
-        {
-          "name": "Part 2: Reading",
-          "duration": "27–37 minutes",
-          "details": "You will answer multiple-choice questions, reorder paragraphs, and fill in the blanks using practical texts.",
-          "format": "Tasks include Reading & Writing: Fill in the Blanks, Multiple Choice (Multiple Answer), Re-order Paragraphs, Reading: Fill in the Blanks, and Multiple Choice (Single Answer)."
-        },
-        {
-          "name": "Part 3: Listening",
-          "duration": "30–37 minutes",
-          "details": "You will listen to short audio clips, summarize spoken text, and type exactly what you hear in dictation tasks.",
-          "format": "Tasks include Summarize Spoken Text, Multiple Choice (Multiple Answer), Fill in the Blanks, Highlight Correct Summary, Multiple Choice (Single Answer), Select Missing Word, Highlight Incorrect Words, and Write from Dictation."
-        }
-      ],
-      "whoShouldTake": [
-        "Individuals applying for Canadian Permanent Residency (PR)",
-        "Applicants for Canadian Citizenship",
-        "Individuals applying under any economic class pathway (Express Entry, PNPs)"
-      ],
-      "acceptedFor": [
-        "Canadian Permanent Residency (IRCC)",
-        "Canadian Citizenship",
-        "All Economic Class Applications"
-      ]
+      "sections": [],
+      "whoShouldTake": [],
+      "acceptedFor": []
     },
     "pte-academic-ukvi": {
       "subtitle": "Your Guide to the PTE Academic UKVI Test",

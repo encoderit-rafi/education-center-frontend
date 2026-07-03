@@ -84,13 +84,17 @@ export default function ExamDetails({ data }: { data: any }) {
   const stats = detailData.stats || [];
 
   // Safely merge sections to preserve the static icon property
-  const sections = (detailData.sections || []).map((section: any, idx: number) => {
+  let sections = (detailData.sections || []).map((section: any, idx: number) => {
     const staticSection = staticMeta?.sections?.[idx] || {};
     return {
       ...staticSection,
       ...section,
     };
   });
+
+  if (data.slug === "pte-academic" || data.slug === "pte-core") {
+    sections = [];
+  }
 
   const whoShouldTake = detailData.whoShouldTake || [];
   const acceptedFor = detailData.acceptedFor || [];
@@ -196,11 +200,61 @@ export default function ExamDetails({ data }: { data: any }) {
                       });
                     };
 
-                    return overview
+                    return (overview || description)
                       ?.split("\n\n")
-                      .map((para: string, i: number) => (
-                        <p key={i} className="whitespace-pre-line text-justify">{renderFormattedText(para)}</p>
-                      )) || <p className="whitespace-pre-line text-justify">{renderFormattedText(description)}</p>;
+                      .map((para: string, i: number) => {
+                        const lines = para.trim().split("\n");
+                        const isTable = lines.length > 1 && lines.every(line => {
+                          const trimmed = line.trim();
+                          return trimmed.startsWith("|") && trimmed.endsWith("|");
+                        });
+
+                        if (isTable) {
+                          const tableRows = lines.filter(line => !/^[|:\s-]+$/.test(line.trim()));
+                          if (tableRows.length > 0) {
+                            const parseCells = (rowStr: string) => {
+                              return rowStr
+                                .split("|")
+                                .slice(1, -1)
+                                .map(cell => cell.trim());
+                            };
+                            const headers = parseCells(tableRows[0]);
+                            const bodyRows = tableRows.slice(1).map(row => parseCells(row));
+                            return (
+                              <div key={i} className="my-6 overflow-x-auto rounded-xl border border-slate-200/80 shadow-sm bg-white">
+                                <table className="w-full min-w-150 border-collapse text-left text-xs lg:text-sm">
+                                  <thead>
+                                    <tr className="bg-slate-50 border-b border-slate-200/80">
+                                      {headers.map((h, hi) => (
+                                        <th key={hi} className="px-5 py-3.5 font-black text-slate-900 border-r last:border-r-0 border-slate-200/85">
+                                          {renderFormattedText(h)}
+                                        </th>
+                                      ))}
+                                    </tr>
+                                  </thead>
+                                  <tbody className="divide-y divide-slate-200/60">
+                                    {bodyRows.map((row, ri) => (
+                                      <tr key={ri} className="hover:bg-slate-50/30 transition-colors">
+                                        {row.map((cell, ci) => (
+                                          <td key={ci} className="px-5 py-3.5 text-slate-700 leading-relaxed border-r last:border-r-0 border-slate-200/60 text-justify">
+                                            {renderFormattedText(cell)}
+                                          </td>
+                                        ))}
+                                      </tr>
+                                    ))}
+                                  </tbody>
+                                </table>
+                              </div>
+                            );
+                          }
+                        }
+
+                        return (
+                          <p key={i} className="whitespace-pre-line text-justify">
+                            {renderFormattedText(para)}
+                          </p>
+                        );
+                      });
                   })()}
 
                   {whoShouldTake.length > 0 && (

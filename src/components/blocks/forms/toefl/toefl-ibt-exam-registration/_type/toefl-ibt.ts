@@ -12,7 +12,7 @@ export const ToeflIbtSchema = z
 
         // Step 1: Personal Details
         givenNames: z.string().min(1, "Given names are required"),
-        middleName: z.string().optional(),
+        middleName: z.string().optional().nullable().or(z.literal("")),
         surnames: z.string().optional(),
         noSurname: z.boolean(),
         dateOfBirth: z.any().refine((val) => !!val, "Date of birth is required"),
