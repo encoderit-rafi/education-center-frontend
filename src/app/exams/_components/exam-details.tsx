@@ -257,7 +257,7 @@ export default function ExamDetails({ data }: { data: any }) {
                       });
                   })()}
 
-                  {whoShouldTake.length > 0 && (
+                  {whoShouldTake.length > 0 && data.slug !== "pte-academic-ukvi" && data.slug !== "pte-home-a1" && data.slug !== "pte-home-a2" && data.slug !== "pte-home-b1" && (
                     <ul className="mt-4 space-y-2 list-disc pl-5">
                       {whoShouldTake.map((item: string, i: number) => (
                         <li key={i} className="text-slate-600 leading-relaxed text-xs lg:text-sm text-justify">
@@ -279,7 +279,7 @@ export default function ExamDetails({ data }: { data: any }) {
               </section>
 
               {/* Test Format Section */}
-              {sections.length > 0 && (
+              {sections.length > 0 && data.slug !== "pte-academic-ukvi" && data.slug !== "pte-home-a1" && data.slug !== "pte-home-a2" && data.slug !== "pte-home-b1" && (
                 <section className="space-y-6">
                   <div className="flex items-center gap-3">
                     <div className="h-6 w-1 bg-primary rounded-full" />
