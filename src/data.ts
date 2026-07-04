@@ -2032,7 +2032,7 @@ export const EXAM_DETAILE_DATA = [
     description:
       "The CELPIP – General evaluates test taker’s English listening, reading, writing, and speaking skills and is officially designated for permanent residence applications by IRCC.",
     overview:
-      "The CELPIP – General evaluates test taker’s English listening, reading, writing, and speaking skills. It is officially designated for permanent residence applications by Immigration, Refugees and Citizenship Canada (IRCC), visa purposes by the Australian Department of Home Affairs (DHA), and is also accepted for professional designations.\n\nIt is a computer-delivered test and it takes under 2 hours and 50 minutes to complete in one sitting with no separate speaking session.",
+      "If your goal is to live, work, or become a citizen in Canada, you will need to prove your English language proficiency. The CELPIP (Canadian English Language Proficiency Index Program) is Canada’s leading general English test. Designed specifically for immigration and professional designation, it is one of the most popular choices for individuals navigating the Canadian immigration system.\n\nUnlike academic tests designed for university admissions, the CELPIP test focuses on everyday, real-world English used in Canadian workplaces and social situations.\n\n**What is the CELPIP Test?**\nCELPIP evaluates your ability to use English in everyday Canadian scenarios. Instead of complex academic lectures, you will be tested on practical situations—like communicating with coworkers, understanding a news broadcast, or writing an email to a manager.\nOne of the standout features of CELPIP is that it uses a **single North American accent**. If you are accustomed to Canadian or American English, you will find the audio segments naturally easy to follow.\n\n**Key Takeaway:** The entire test is completely computer-delivered and completed in one single sitting. You will not need to schedule a separate appointment for a face-to-face speaking interview.\n\n**Two Versions of the Test**\nIt is essential to know which version of the test you need before you book. The CELPIP test is available in two distinct formats:\n\n**1. CELPIP - General Test**\n• **Who it's for:** Individuals applying for Canadian Permanent Residency (PR) through Express Entry, Provincial Nominee Programs (PNPs), or seeking professional designation.\n• **What it tests:** All four language skills: Listening, Reading, Writing, and Speaking.\n• **Duration:** Approximately 3 hours.\n\n**2. CELPIP - General LS Test**\n• **Who it's for:** Individuals applying for Canadian Citizenship.\n• **What it tests:** Only two skills: Listening and Speaking.\n• **Duration:** Approximately 1 hour and 10 minutes.\n\n**Why Choose the CELPIP Test?**\nMany candidates prefer the CELPIP test for its modern, user-friendly design and its direct alignment with Canadian immigration standards. Here are the top reasons to choose CELPIP:\n• **Fast Results:** Your official test scores are available online quickly, typically within **4 to 5 calendar days**.\n• **Direct CLB Mapping:** The scoring system is perfectly aligned with the **Canadian Language Benchmarks (CLB)**. A CELPIP score of 8 directly equals a CLB 8, making it incredibly easy to calculate your immigration points.\n• **Helpful Built-in Features:** Because the test is entirely computer-based, the Writing section includes a personal timer, a word counter, and a standard English spell-check tool.\n• **A Single Sitting:** You will complete all components on a computer without having to leave the room or switch testing centers.\n\n**Test Format and Structure (CELPIP - General)**\nFor those taking the full CELPIP - General Test, here is a breakdown of what to expect in your 3-hour session:\n\n| Exam Section | Duration | What to Expect |\n|---|---|---|\n| **Listening** | 46 - 55 minutes | You will listen to short conversations, news items, and discussions, then answer multiple-choice questions. |\n| **Reading** | 43 - 56 minutes | You will read everyday materials like emails, diagrams, and informative articles, followed by comprehension questions. |\n| **Writing** | 53 - 60 minutes | You will write an email regarding a day-to-day matter and respond to a survey question expressing your opinion. |\n| **Speaking** | 15 - 20 minutes | You will speak into a microphone to provide advice, describe a scene, make predictions, and express your opinions based on on-screen prompts. |\n\n**Official Recognition**\nThe CELPIP test is officially recognized by **Immigration, Refugees and Citizenship Canada (IRCC)**. It is also accepted by the Real Estate Council of British Columbia, the College of Immigration and Citizenship Consultants (CICC), and numerous other professional organizations across Canada.\n\nBy choosing the CELPIP test, you are taking an exam designed by Canadians, for Canada, giving you a clear and straightforward path to achieving your immigration goals.",
     stats: [
       { label: "Total Duration", value: "2h 50m" },
       { label: "Format", value: "Computer" },
@@ -2040,71 +2040,10 @@ export const EXAM_DETAILE_DATA = [
       { label: "Score Scale", value: "M–12" },
       { label: "Validity", value: "2 Years" },
     ],
-    sections: [
-      {
-        icon: "listening",
-        name: "Listening Component",
-        duration: "47–55 minutes",
-        details:
-          "Listen to passages and answer questions. The Listening Test contains 6 parts designed to evaluate various real-life listening scenarios.",
-        format:
-          "Part 1: Listening to Problem Solving\nPart 2: Listening to a Daily Life Conversation\nPart 3: Listening for Information\nPart 4: Listening to a News Item\nPart 5: Listening to a Discussion\nPart 6: Listening to Viewpoints",
-        questions: "38-40 questions",
-        taskTypes: "Multiple Choice",
-        marks:
-          "The test may contain unscored reading or listening items used for test development.",
-      },
-      {
-        icon: "reading",
-        name: "Reading Component",
-        duration: "55–60 minutes",
-        details:
-          "Read passages and answer questions. Evaluate your ability to understand written correspondence, diagrams, and discursive texts.",
-        format:
-          "Part 1: Reading Correspondence\nPart 2: Reading to Apply a Diagram\nPart 3: Reading for Information\nPart 4: Reading for Viewpoints",
-        questions: "38-40 questions",
-        taskTypes: "Multiple Choice, Gap Fill",
-      },
-      {
-        icon: "writing",
-        name: "Writing Component",
-        duration: "53–60 minutes",
-        details:
-          "Respond to questions with written answers. Focuses on practical communication such as email writing and responding to survey questions.",
-        format:
-          "Task 1: Writing an Email\nTask 2: Responding to Survey Questions",
-        questions: "2 tasks",
-      },
-      {
-        icon: "speaking",
-        name: "Speaking Component",
-        duration: "15–20 minutes",
-        details:
-          "Reply to on-screen prompts verbally. This component is completed in the same sitting as the other tests.",
-        format:
-          "Task 1: Giving Advice\nTask 2: Talking about a Personal Experience\nTask 3: Describing a Scene\nTask 4: Making Predictions\nTask 5: Comparing and Persuading\nTask 6: Dealing with a Difficult Situation\nTask 7: Expressing Opinions\nTask 8: Describing an Unusual Situation",
-      },
-    ],
-    whoShouldTake: [
-      "Permanent residence applicants (IRCC Canada)",
-      "Visa applicants for Australia (DHA)",
-      "Individuals seeking professional designations",
-      "Students applying to Universities and Colleges",
-    ],
-    acceptedFor: [
-      "Permanent Residency",
-      "Professional Designation",
-      "Australian Visa",
-      "Academic Admissions",
-    ],
-    faqs: [
-      {
-        question:
-          "What is the difference between CELPIP General and General LS?",
-        answer:
-          "General is for residency (all 4 skills). General LS is for citizenship (only Listening and Speaking).",
-      },
-    ],
+    sections: [],
+    whoShouldTake: [],
+    acceptedFor: [],
+    faqs: [],
   },
   {
     ...EXAM_IDS_DATA.celpip_general_ls,
@@ -2151,7 +2090,7 @@ export const EXAM_DETAILE_DATA = [
     description:
       "The CAEL Test measures the English language proficiency of students planning to study at Canadian universities and colleges.",
     overview:
-      "The CAEL Test (Canadian Academic English Language Test) is a computer-delivered test that evaluates your ability to use English in academic contexts. It is accepted by over 180 Canadian academic institutions and professional organizations.\n\nThe test is designed to reflect the language tasks you will perform in a university or college setting, such as reading articles, listening to lectures, and responding to academic prompts.",
+      "If your dream is to study at a Canadian university or college, proving your English proficiency is a critical first step in your application journey. The CAEL (Canadian Academic English Language) test is a comprehensive, computer-based exam designed specifically to measure the English level of international students planning to study in Canada.\n\nUnlike other global English tests, CAEL is deeply rooted in the Canadian educational experience, giving you a true taste of what to expect in a North American classroom.\n\n**What is the CAEL Test?**\nThe CAEL test evaluates your ability to use English in an academic context. What makes CAEL completely unique is its **integrated, topic-based approach**.\nInstead of testing your skills in isolation (reading a text about history, then listening to a lecture about biology), CAEL groups tasks by subject. You might read an article about glaciers, listen to a lecture on the same topic, and then use the information from both sources to write a short essay.\n\n**Key Takeaway:** The CAEL test accurately simulates a real first-year Canadian university class. By integrating reading, listening, writing, and speaking around a single topic, it tests how well you synthesize and use information in the real academic world.\n\n**Why Choose CAEL?**\nMany candidates prefer CAEL because it feels less like a traditional test and more like a standard academic assignment. Here is why it stands out:\n• **100% Canadian Focus:** It uses Canadian English vocabulary and accents, preparing you directly for the environment you will be studying in.\n• **Fast Results:** Your official test scores are typically available online within **8 business days** after taking the exam.\n• **Integrated Tasks:** Because the reading and listening materials share the same topic as your writing tasks, you are naturally provided with vocabulary and ideas to help you construct your answers.\n• **A Single Sitting:** You will complete all four components (Speaking, Reading, Listening, and Writing) in one continuous session taking approximately **3.5 hours**.\n\n**Test Format and Structure**\nThe CAEL test is taken entirely on a computer. It is divided into five main sections that move from general speaking tasks to in-depth, integrated academic units.\n\n| Exam Section | What to Expect |\n|---|---|\n| **Speaking** | You will speak into a microphone to answer short questions about your academic experiences, summarize information, and relay details from a short presentation. |\n| **Integrated Reading** | You will read academic passages (like textbook excerpts or articles) and answer comprehension questions. |\n| **Integrated Listening** | You will listen to academic lectures, presentations, or campus conversations and answer questions based on the audio. |\n| **Academic Unit A** | You will read a passage and listen to a lecture on the **same topic**. You will then use information from both sources to write an extended essay. |\n| **Academic Unit B** | Similar to Unit A, but slightly shorter. You will read a passage and listen to a lecture on a unified topic, followed by writing a shorter response. |\n\n**Understanding Your Scores**\nCAEL uses a specialized Band Score system ranging from **10 to 90 points**.\nYour final score report will provide an Overall Band Score, as well as individual scores for your Reading, Listening, Speaking, and Writing components. Most Canadian academic institutions require an overall score between 60 and 70 for direct admission, though this varies by program.\n\n**Official Recognition**\nThe CAEL test is one of the most widely recognized academic English tests in the country.\n• **Universities & Colleges:** It is accepted by 100% of English-speaking Canadian universities and colleges.\n• **Professional Associations:** Many professional organizations across Canada also accept CAEL as proof of English proficiency for licensure and certification.\n\nBy taking the CAEL test, you are not just proving your English skills—you are demonstrating that you are fully prepared to succeed in a Canadian academic environment.",
     stats: [
       { label: "Total Duration", value: "3.5 Hours" },
       { label: "Format", value: "Computer" },
@@ -2159,51 +2098,9 @@ export const EXAM_DETAILE_DATA = [
       { label: "Validity", value: "2 Years" },
       { label: "Acceptance", value: "180+ Inst." },
     ],
-    sections: [
-      {
-        icon: "speaking",
-        name: "Speaking",
-        duration: "7–10 minutes",
-        details: "Reply to on-screen prompts verbally.",
-        format:
-          "Test takers respond to three speaking tasks that reflect common university-level communication scenarios.",
-      },
-      {
-        icon: "reading",
-        name: "Integrated Reading",
-        duration: "35–50 minutes",
-        details: "Read passages and reply to questions.",
-        format:
-          "Read one long academic text and answer questions, evaluating comprehension and information retrieval skills.",
-      },
-      {
-        icon: "listening",
-        name: "Integrated Listening",
-        duration: "25–35 minutes",
-        details: "Listen to passages and reply to questions.",
-        format:
-          "Listen to one long academic lecture and answer questions based on the content and key details.",
-      },
-      {
-        icon: "writing",
-        name: "Academic Unit A & B",
-        duration: "120–140 minutes",
-        details:
-          "Integrated academic units combining reading, listening, and writing.",
-        format:
-          "Combines reading and listening materials on specific academic topics, followed by a writing task that integrates information from both sources.",
-      },
-    ],
-    whoShouldTake: [
-      "Students applying for undergraduate or postgraduate programs in Canada",
-      "Professionals seeking registration with Canadian regulatory bodies",
-    ],
-    acceptedFor: [
-      "University Admissions (Canada)",
-      "College Admissions (Canada)",
-      "Professional Registration",
-      "Study Permit Applications",
-    ],
+    sections: [],
+    whoShouldTake: [],
+    acceptedFor: [],
   },
   {
     ...EXAM_IDS_DATA.oet,
@@ -2292,22 +2189,15 @@ export const EXAM_DETAILE_DATA = [
     description:
       "Skills for English (UKVI) A1 is for those who need to demonstrate speaking and listening skills at level A1.",
     overview:
-      "This test measures speaking and listening skills only. It is approved by the UK Home Office for Family, Spouse or Partner visa applications.",
+      "If you are applying for specific UK family visas, you may need to prove your basic English language proficiency. The **Skills for English SELT (Secure English Language Test) Speaking and Listening at Level A1** is an official, UK Home Office-approved exam designed exactly for this purpose.\n\nDelivered globally by PSI, this test is a convenient and accessible option for individuals who need to demonstrate a beginner level of English to settle with their family or work in the UK.\n\n**What is the Skills for English SELT A1 Test?**\nThis is a straightforward **two-skills test** that assesses only your **Speaking** and **Listening** abilities. There are no reading or writing sections. It measures your English at the CEFR A1 level, which is a beginner standard.\nThe exam evaluates your ability to understand simple spoken English, introduce yourself, and respond to basic everyday questions.\n\n**Key Takeaway:** You do not need advanced English skills to pass. This test is entirely computer-based and is designed purely to prove that you can handle basic, everyday communication in the UK.\n\n**Why Choose Skills for English?**\nCandidates appreciate the Skills for English test because of its modern, user-friendly, and highly efficient delivery:\n• **100% Computer-Based:** You will complete both the speaking and listening parts on a computer using a headset. You will record your spoken answers directly into the system, meaning there is no face-to-face examiner to make you nervous.\n• **Short Duration:** The entire exam takes a maximum of **30 minutes** to complete.\n• **Fast Results:** Test results are typically available online in just **3 to 5 days**, helping you meet tight visa deadlines.\n• **UKVI Approved:** It provides the essential Unique Reference Number (URN) that you must include with your UK visa application to prove your result is genuine.\n\n**Test Format and Structure**\nYou will take the test in a single, continuous session at a secure UKVI-approved test center. The interface is designed to be intuitive and easy to navigate.\n\n| Exam Section | What to Expect |\n|---|---|\n| **Speaking** | You will start by introducing yourself. Then, you will listen to recorded questions or prompts on the screen and speak your answers directly into the microphone. Your responses are digitally recorded and marked by trained assessors later. |\n| **Listening** | You will listen to short audio recordings of spoken English (you will get to hear each recording twice). After listening, you will answer a series of simple questions based on what you heard. This section is automatically marked by the computer. |\n\n**When Should You Take This Test?**\nChoosing the correct SELT level is crucial for your UK immigration application. The UK Home Office requires an A1 level English test for applicants applying for the *first time* under certain visa categories, such as:\n\n**Family Visas:**\n• Spouse or Partner visa\n• Parent of a Dependent Child visa\n\n**Specific Work Visas:**\n• Representative of an Overseas Business visa\n• Sportsperson visa\n\n*(Note: If you are extending a family visa you already have or applying for citizenship, you will likely need a higher level, such as A2 or B1. Always confirm your specific visa requirements before booking).*\n\nWith its stress-free, computer-based format and quick turnaround time, the Skills for English SELT A1 is an excellent, straightforward choice for taking your first step toward living in the UK.",
     stats: [
       { label: "Results In", value: "3–5 days" },
       { label: "Validity", value: "2 years" },
       { label: "Skills", value: "Speaking & Listening" },
     ],
-    sections: [
-      {
-        name: "Speaking & Listening",
-        duration: "17–22 min",
-        details: "Face-to-face or online speaking and listening tasks",
-        icon: "speaking",
-      },
-    ],
-    whoShouldTake: ["UK Family visa applicants", "UK Spouse visa applicants"],
-    acceptedFor: ["UK Visas and Immigration (UKVI)"],
+    sections: [],
+    whoShouldTake: [],
+    acceptedFor: [],
   },
   {
     ...EXAM_IDS_DATA.selt_a2,
@@ -2316,22 +2206,15 @@ export const EXAM_DETAILE_DATA = [
     description:
       "Skills for English (UKVI) A2 is for UK Family visa extensions.",
     overview:
-      "This test measures speaking and listening skills at level A2. It is required for extending a Family, Spouse or Partner visa after 2.5 years.",
+      "If you are already living in the United Kingdom and need to extend your family or partner visa, you will need to prove your continued progress in the English language. The **Skills for English SELT (Secure English Language Test) Speaking and Listening at Level A2** is an official, UK Home Office-approved exam designed specifically for this purpose.\n\nDelivered by PSI, this exam is a highly accessible option for individuals looking for a stress-free way to meet their UK visa extension requirements.\n\n**What is the Skills for English SELT A2 Test?**\nBuilding slightly on the beginner foundations of the A1 exam, the Skills for English SELT A2 is a **two-skills test** that focuses entirely on **Speaking** and **Listening**. It does not include any reading or writing sections.\nThe exam measures your English at the CEFR A2 level, which is considered an elementary standard. It evaluates your ability to handle simple, routine conversations, share basic information about your past and present, and understand everyday spoken English.\n\n**Key Takeaway:** You only need to demonstrate an elementary, conversational understanding of English. The test simply proves you have built upon your basic language skills since your initial arrival in the UK.\n\n**Why Choose Skills for English?**\nCandidates prefer the Skills for English test because it offers a modern, highly predictable testing environment that removes the stress of traditional exams:\n• **100% Computer-Based:** You will complete the entire exam on a computer using a headset. Because you record your spoken answers directly into the system, there is no face-to-face examiner in the room to make you nervous.\n• **Short Duration:** The exam is very quick, taking **under 35 minutes** to complete.\n• **Fast Results:** Your official test scores are typically available online in just **3 to 5 days**, helping you meet strict visa extension deadlines.\n• **UKVI Approved:** Your results report will include the Unique Reference Number (URN) required by the UK Home Office to process your visa application.\n\n**Test Format and Structure**\nYou will take the test in a single, continuous session at a secure UKVI-approved test center. The interface is intuitive, and the tasks are based on highly practical, real-world scenarios like shopping, working, and daily routines.\n\n| Exam Section | What to Expect |\n|---|---|\n| **Speaking** | You will listen to recorded prompts on your screen and speak your answers into the microphone. You will be asked to talk about familiar topics, describe past events or future plans, and express simple opinions. Your answers are recorded and marked by trained assessors later. |\n| **Listening** | You will listen to short audio recordings of spoken English (you will get to hear each clip twice). You will then answer simple questions based on the audio, such as identifying the main point or picking out key details. This section is automatically marked. |\n\n**When Should You Take This Test?**\nChoosing the correct test level is critical for UK immigration. The UK Home Office requires the A2 level for applicants applying for a **visa extension** (usually after spending 2.5 years in the UK) in the following categories:\n\n**Family Visa Extensions:**\n• Spouse or Partner visa (extending stay)\n• Parent of a Dependent Child visa (extending stay)\n\n**Specific Work Visas:**\n• Sportsperson visa (extending stay)\n\n*(Note: If you are applying to settle permanently in the UK (Indefinite Leave to Remain) or applying for British Citizenship, you will need a slightly higher level of English, such as the B1 level. Always check your exact visa requirements on the UK government website before booking).\n\nWith its focused format and quick turnaround time, the Skills for English SELT A2 is a straightforward choice for taking the next step in your UK journey.",
     stats: [
       { label: "Results In", value: "3–5 days" },
       { label: "Validity", value: "2 years" },
       { label: "Skills", value: "Speaking & Listening" },
     ],
-    sections: [
-      {
-        name: "Speaking & Listening",
-        duration: "17–22 min",
-        details: "Speaking and listening tasks",
-        icon: "speaking",
-      },
-    ],
-    whoShouldTake: ["UK Family visa extension applicants"],
-    acceptedFor: ["UK Visas and Immigration (UKVI)"],
+    sections: [],
+    whoShouldTake: [],
+    acceptedFor: [],
   },
   {
     ...EXAM_IDS_DATA.selt_b1,
@@ -2415,16 +2298,9 @@ export const EXAM_DETAILE_DATA = [
       { label: "Validity", value: "2 years" },
       { label: "Skills", value: "All 4 Skills" },
     ],
-    sections: [
-      { name: "Speaking & Listening", duration: "17–22 min", icon: "speaking" },
-      { name: "Reading", duration: "60 min", icon: "reading" },
-      { name: "Writing", duration: "60 min", icon: "writing" },
-    ],
-    whoShouldTake: [
-      "Advanced academic students",
-      "Senior professional applicants",
-    ],
-    acceptedFor: ["UK Visas and Immigration (UKVI)"],
+    sections: [],
+    whoShouldTake: [],
+    acceptedFor: [],
   },
   {
     ...EXAM_IDS_DATA.selt_c2,
@@ -2439,16 +2315,9 @@ export const EXAM_DETAILE_DATA = [
       { label: "Validity", value: "2 years" },
       { label: "Skills", value: "All 4 Skills" },
     ],
-    sections: [
-      { name: "Speaking & Listening", duration: "17–22 min", icon: "speaking" },
-      { name: "Reading", duration: "60 min", icon: "reading" },
-      { name: "Writing", duration: "60 min", icon: "writing" },
-    ],
-    whoShouldTake: [
-      "Highest level academic seekers",
-      "Native-equivalent proficiency seekers",
-    ],
-    acceptedFor: ["UK Visas and Immigration (UKVI)"],
+    sections: [],
+    whoShouldTake: [],
+    acceptedFor: [],
   },
 ];
 
