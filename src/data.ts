@@ -1706,66 +1706,10 @@ export const EXAM_DETAILE_DATA = [
       { label: "Validity", value: "2 Years" },
       { label: "Format", value: "Internet-based" },
     ],
-    sections: [
-      {
-        icon: "reading",
-        name: "Reading",
-        duration: "~30 minutes",
-        questions: "50 items",
-        details:
-          "The Reading section now features multistage adaptive testing. How well you perform in the first module directly determines the difficulty of the second.",
-        format:
-          "• Complete the Words\n• Read in Daily Life\n• Read an Academic Passage (shorter)",
-      },
-      {
-        icon: "listening",
-        name: "Listening",
-        duration: "~29 minutes",
-        questions: "47 items",
-        details:
-          "The Listening section now features multistage adaptive testing. How well you perform in the first module directly determines the difficulty of the second.",
-        format:
-          "• Listen and Choose a Response\n• Listen to campus conversations, announcements, and academic talks",
-      },
-      {
-        icon: "writing",
-        name: "Writing",
-        duration: "~23 minutes",
-        questions: "12 items",
-        details:
-          "Write responses to academic and practical prompts assessing everyday communication.",
-        format:
-          "• Build a Sentence\n• Write an Email (7 mins)\n• Write for an Academic Discussion (10 mins)",
-      },
-      {
-        icon: "speaking",
-        name: "Speaking",
-        duration: "~8 minutes",
-        questions: "11 items",
-        details:
-          "Spontaneous verbal recall and conversational fluency with zero preparation time.",
-        format: "• Listen and Repeat (7 progressive prompts)\n• Take an Interview (4 conversational questions)",
-      },
-    ],
-    whoShouldTake: [
-      "Students planning to study at a higher education institution",
-      "English-language learning program admissions and exit",
-      "Scholarship and certification candidates",
-      "Students and workers applying for visas",
-    ],
-    acceptedFor: [
-      "Academic Admissions",
-      "Immigration",
-      "Professional Certification",
-      "Student Visas",
-    ],
-    faqs: [
-      {
-        question: "How is TOEFL different from IELTS?",
-        answer:
-          "TOEFL is fully Internet-based and is primarily used in North America. IELTS includes a face-to-face speaking component.",
-      },
-    ],
+    sections: [],
+    whoShouldTake: [],
+    acceptedFor: [],
+    faqs: [],
   },
   // {
   //   ...EXAM_IDS_DATA.pte,
@@ -2060,28 +2004,9 @@ export const EXAM_DETAILE_DATA = [
       { label: "Score Scale", value: "M–12" },
       { label: "Validity", value: "2 Years" },
     ],
-    sections: [
-      {
-        icon: "listening",
-        name: "Listening Component",
-        duration: "47–55 minutes",
-        details: "Listen to passages and answer questions.",
-        format:
-          "Part 1: Listening to Problem Solving\nPart 2: Listening to a Daily Life Conversation\nPart 3: Listening for Information\nPart 4: Listening to a News Item\nPart 5: Listening to a Discussion\nPart 6: Listening to Viewpoints",
-        questions: "38-40 questions",
-        taskTypes: "Multiple Choice",
-      },
-      {
-        icon: "speaking",
-        name: "Speaking Component",
-        duration: "15–20 minutes",
-        details: "Reply to on-screen prompts verbally.",
-        format:
-          "Task 1: Giving Advice\nTask 2: Talking about a Personal Experience\nTask 3: Describing a Scene\nTask 4: Making Predictions\nTask 5: Comparing and Persuading\nTask 6: Dealing with a Difficult Situation\nTask 7: Expressing Opinions\nTask 8: Describing an Unusual Situation",
-      },
-    ],
-    whoShouldTake: ["Canadian citizenship applicants"],
-    acceptedFor: ["Canadian Citizenship"],
+    sections: [],
+    whoShouldTake: [],
+    acceptedFor: [],
   },
   {
     ...EXAM_IDS_DATA.cael,

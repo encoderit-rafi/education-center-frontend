@@ -1986,7 +1986,7 @@
     "toefl": {
       "subtitle": "The TOEFL iBT: A Global Standard for University Admissions",
       "description": "Developed by the Educational Testing Service (ETS), the TOEFL iBT (Internet-Based Test) is a premier standardized assessment designed to evaluate your ability to use and comprehend English in an academic environment. It accurately measures your readiness to communicate effectively at the university level.",
-      "overview": "Developed by the Educational Testing Service (ETS), the TOEFL iBT (Internet-Based Test) is a premier standardized assessment designed to evaluate your ability to use and comprehend English in an academic environment. It accurately measures your readiness to communicate effectively at the university level.\n\n**Unmatched Global Recognition**: As one of the most trusted English proficiency exams, the TOEFL iBT opens doors to higher education worldwide. It is officially recognized and accepted by more than 13,000 universities, colleges, and educational institutions across over 160 countries.\n\n**The 2026 TOEFL iBT Format: Everything You Need to Know**\n\nStarting **January 21, 2026**, the TOEFL iBT is undergoing its most significant update in decades. ETS is modernizing the exam to make it shorter, fully adaptive, and better aligned with real-world language use.\n\nWhether you are aiming for undergraduate admission or a highly competitive graduate program, here is exactly what you need to know about the new 90-minute test.\n\n**What's Changing at a Glance**\n• **Shorter Duration**: The test has been compressed from roughly two hours down to just **90 minutes** running completely back-to-back with no scheduled breaks.\n• **Adaptive Difficulty**: The Reading and Listening sections now feature multistage adaptive testing. How well you perform in the first module directly determines the difficulty of the second.\n• **New Scoring Scale**: The traditional 0–120 score is being replaced by a **1.0 to 6.0 band scale** to align directly with the CEFR (Common European Framework of Reference).\n• **Faster Results**: Official scores will now be delivered to test-takers within 72 hours.\n\n**Crucial test-day tip**: The Speaking section has been entirely redesigned. Long, prepared academic speeches are out. Instead, you will be evaluated on spontaneous verbal recall and conversational fluency, with zero preparation time given before you speak.\n\n**Understanding the New 1.0 to 6.0 Scale**\n\nFor decades, the standard for a \"good\" TOEFL score was usually around 80 to 100+. The new system simplifies this by using a 1.0 to 6.0 band (in 0.5 increments).\n• **How it is calculated**: Each of the four sections receives a score from 1.0 to 6.0. Your overall score is the average of those four sections, rounded to the nearest half-band.\n• **The CEFR Alignment**: A score of **6.0** indicates C2 Mastery (equivalent to the old 107–120). A **5.0** or **5.5** indicates C1 Advanced (95–106), which is the standard for highly competitive programs. A **4.0** or **4.5** hits the B2 Upper Intermediate level (72–94), satisfying most standard university admissions.\n• **The Transition Phase (2026–2028)**: Do not panic if universities still ask for a \"100 on the TOEFL.\" Through January 2028, ETS will issue score reports showing both the new 1.0–6.0 band and your comparable 0–120 score to help admissions teams adjust.",
+      "overview": "Developed by the Educational Testing Service (ETS), the TOEFL iBT (Internet-Based Test) is a premier standardized assessment designed to evaluate your ability to use and comprehend English in an academic environment. It accurately measures your readiness to communicate effectively at the university level.\n\n**Unmatched Global Recognition**: As one of the most trusted English proficiency exams, the TOEFL iBT opens doors to higher education worldwide. It is officially recognized and accepted by more than 13,000 universities, colleges, and educational institutions across over 160 countries.\n\n**The 2026 TOEFL iBT Format: Everything You Need to Know**\n\nStarting **January 21, 2026**, the TOEFL iBT is undergoing its most significant update in decades. ETS is modernizing the exam to make it shorter, fully adaptive, and better aligned with real-world language use.\n\nWhether you are aiming for undergraduate admission or a highly competitive graduate program, here is exactly what you need to know about the new 90-minute test.\n\n**What's Changing at a Glance**\n• **Shorter Duration**: The test has been compressed from roughly two hours down to just **90 minutes** running completely back-to-back with no scheduled breaks.\n• **Adaptive Difficulty**: The Reading and Listening sections now feature multistage adaptive testing. How well you perform in the first module directly determines the difficulty of the second.\n• **New Scoring Scale**: The traditional 0–120 score is being replaced by a **1.0 to 6.0 band scale** to align directly with the CEFR (Common European Framework of Reference).\n• **Faster Results**: Official scores will now be delivered to test-takers within 72 hours.\n\n**The 90-Minute Section Breakdown**\n\nThe 2026 format prioritizes everyday campus life and modern academic scenarios over traditional, long-form lectures.\n\n| Section | Time Limit | Format | Key Tasks |\n|---|---|---|---|\n| **Reading** | ~30 minutes | 50 items (Adaptive) | \"Complete the Words\", \"Read in Daily Life\", and a shorter \"Read an Academic Passage\". |\n| **Listening** | ~29 minutes | 47 items (Adaptive) | \"Listen and Choose a Response\", plus short campus conversations, announcements, and academic talks. |\n| **Writing** | ~23 minutes | 12 items | \"Build a Sentence\", \"Write an Email\" (7 mins), and \"Write for an Academic Discussion\" (10 mins). |\n| **Speaking** | ~8 minutes | 11 items | \"Listen and Repeat\" (7 progressive prompts) and \"Take an Interview\" (4 conversational questions). |\n\n**Crucial test-day tip**: The Speaking section has been entirely redesigned. Long, prepared academic speeches are out. Instead, you will be evaluated on spontaneous verbal recall and conversational fluency, with zero preparation time given before you speak.\n\n**Understanding the New 1.0 to 6.0 Scale**\n\nFor decades, the standard for a \"good\" TOEFL score was usually around 80 to 100+. The new system simplifies this by using a 1.0 to 6.0 band (in 0.5 increments).\n• **How it is calculated**: Each of the four sections receives a score from 1.0 to 6.0. Your overall score is the average of those four sections, rounded to the nearest half-band.\n• **The CEFR Alignment**: A score of **6.0** indicates C2 Mastery (equivalent to the old 107–120). A **5.0** or **5.5** indicates C1 Advanced (95–106), which is the standard for highly competitive programs. A **4.0** or **4.5** hits the B2 Upper Intermediate level (72–94), satisfying most standard university admissions.\n• **The Transition Phase (2026–2028)**: Do not panic if universities still ask for a \"100 on the TOEFL.\" Through January 2028, ETS will issue score reports showing both the new 1.0–6.0 band and your comparable 0–120 score to help admissions teams adjust.",
       "stats": [
         {
           "label": "Total Duration",
@@ -2009,54 +2009,10 @@
           "value": "Internet-based"
         }
       ],
-      "sections": [
-        {
-          "name": "Reading",
-          "duration": "~30 minutes",
-          "details": "The Reading section now features multistage adaptive testing. How well you perform in the first module directly determines the difficulty of the second.",
-          "format": "• Complete the Words\n• Read in Daily Life\n• Read an Academic Passage (shorter)",
-          "questions": "50 items"
-        },
-        {
-          "name": "Listening",
-          "duration": "~29 minutes",
-          "details": "The Listening section now features multistage adaptive testing. How well you perform in the first module directly determines the difficulty of the second.",
-          "format": "• Listen and Choose a Response\n• Listen to campus conversations, announcements, and academic talks",
-          "questions": "47 items"
-        },
-        {
-          "name": "Writing",
-          "duration": "~23 minutes",
-          "details": "Write responses to academic and practical prompts assessing everyday communication.",
-          "format": "• Build a Sentence\n• Write an Email (7 mins)\n• Write for an Academic Discussion (10 mins)",
-          "questions": "12 items"
-        },
-        {
-          "name": "Speaking",
-          "duration": "~8 minutes",
-          "details": "Spontaneous verbal recall and conversational fluency with zero preparation time.",
-          "format": "• Listen and Repeat (7 progressive prompts)\n• Take an Interview (4 conversational questions)",
-          "questions": "11 items"
-        }
-      ],
-      "whoShouldTake": [
-        "Students planning to study at a higher education institution",
-        "English-language learning program admissions and exit",
-        "Scholarship and certification candidates",
-        "Students and workers applying for visas"
-      ],
-      "acceptedFor": [
-        "Academic Admissions",
-        "Immigration",
-        "Professional Certification",
-        "Student Visas"
-      ],
-      "faqs": [
-        {
-          "question": "How is TOEFL different from IELTS?",
-          "answer": "TOEFL is fully Internet-based and is primarily used in North America. IELTS includes a face-to-face speaking component."
-        }
-      ]
+      "sections": [],
+      "whoShouldTake": [],
+      "acceptedFor": [],
+      "faqs": []
     },
     "pte-academic": {
       "subtitle": "Your Guide to the PTE Academic Exam",
@@ -2323,7 +2279,7 @@
     "celpip-general": {
       "subtitle": "Your Guide to the CELPIP Test",
       "description": "The **CELPIP (Canadian English Language Proficiency Index Program)** is Canada's leading general English test, designed specifically for immigration and professional designation.",
-      "overview": "If your goal is to live, work, or become a citizen in Canada, you will need to prove your English language proficiency. The **CELPIP (Canadian English Language Proficiency Index Program)** is Canada's leading general English test. Designed specifically for immigration and professional designation, it is one of the most popular choices for individuals navigating the Canadian immigration system.\n\nUnlike academic tests designed for university admissions, the CELPIP test focuses on everyday, real-world English used in Canadian workplaces and social situations.\n\n**What is the CELPIP Test?**\n\nCELPIP evaluates your ability to use English in everyday Canadian scenarios. Instead of complex academic lectures, you will be tested on practical situations — like communicating with coworkers, understanding a news broadcast, or writing an email to a manager.\n\nOne of the standout features of CELPIP is that it uses a **single North American accent**. If you are accustomed to Canadian or American English, you will find the audio segments naturally easy to follow.\n\n**Key Takeaway:** The entire test is completely computer-delivered and completed in one single sitting. You will not need to schedule a separate appointment for a face-to-face speaking interview.\n\n**Two Versions of the Test**\n\nIt is essential to know which version of the test you need before you book. The CELPIP test is available in two distinct formats:\n\n**1. CELPIP - General Test**\n- **Who it's for:** Individuals applying for Canadian Permanent Residency (PR) through Express Entry, Provincial Nominee Programs (PNPs), or seeking professional designation.\n- **What it tests:** All four language skills: Listening, Reading, Writing, and Speaking.\n- **Duration:** Approximately 3 hours.\n\n**2. CELPIP - General LS Test**\n- **Who it's for:** Individuals applying for Canadian Citizenship.\n- **What it tests:** Only two skills: Listening and Speaking.\n- **Duration:** Approximately 1 hour and 10 minutes.\n\n**Why Choose the CELPIP Test?**\n\nMany candidates prefer the CELPIP test for its modern, user-friendly design and its direct alignment with Canadian immigration standards. Here are the top reasons to choose CELPIP:\n- **Fast Results:** Your official test scores are available online quickly, typically within **4 to 5 calendar days**.\n- **Direct CLB Mapping:** The scoring system is perfectly aligned with the **Canadian Language Benchmarks (CLB)**. A CELPIP score of 8 directly equals a CLB 8, making it incredibly easy to calculate your immigration points.\n- **Helpful Built-in Features:** Because the test is entirely computer-based, the Writing section includes a personal timer, a word counter, and a standard English spell-check tool.\n- **A Single Sitting:** You will complete all components on a computer without having to leave the room or switch testing centers.\n\n**Test Format and Structure (CELPIP - General)**\n\nFor those taking the full CELPIP - General Test, here is a breakdown of what to expect in your 3-hour session:\n- **Listening (46-55 minutes):** You will listen to short conversations, news items, and discussions, then answer multiple-choice questions.\n- **Reading (43-56 minutes):** You will read everyday materials like emails, diagrams, and informative articles, followed by comprehension questions.\n- **Writing (53-60 minutes):** You will write an email regarding a day-to-day matter and respond to a survey question expressing your opinion.\n- **Speaking (15-20 minutes):** You will speak into a microphone to provide advice, describe a scene, make predictions, and express your opinions based on on-screen prompts.\n\n**Official Recognition**\n\nThe CELPIP test is officially recognized by **Immigration, Refugees and Citizenship Canada (IRCC)**. It is also accepted by the Real Estate Council of British Columbia, the College of Immigration and Citizenship Consultants (CICC), and numerous other professional organizations across Canada.\n\nBy choosing the CELPIP test, you are taking an exam designed by Canadians, for Canada, giving you a clear and straightforward path to achieving your immigration goals.",
+      "overview": "If your goal is to live, work, or become a citizen in Canada, you will need to prove your English language proficiency. The **CELPIP (Canadian English Language Proficiency Index Program)** is Canada’s leading general English test. Designed specifically for immigration and professional designation, it is one of the most popular choices for individuals navigating the Canadian immigration system.\n\nUnlike academic tests designed for university admissions, the CELPIP test focuses on everyday, real-world English used in Canadian workplaces and social situations.\n\n**What is the CELPIP Test?**\n\nCELPIP evaluates your ability to use English in everyday Canadian scenarios. Instead of complex academic lectures, you will be tested on practical situations—like communicating with coworkers, understanding a news broadcast, or writing an email to a manager.\n\nOne of the standout features of CELPIP is that it uses a **single North American accent**. If you are accustomed to Canadian or American English, you will find the audio segments naturally easy to follow.\n\n**Key Takeaway:** The entire test is completely computer-delivered and completed in one single sitting. You will not need to schedule a separate appointment for a face-to-face speaking interview.\n\n**Two Versions of the Test**\n\nIt is essential to know which version of the test you need before you book. The CELPIP test is available in two distinct formats:\n\n**1. CELPIP - General Test**\n- **Who it's for:** Individuals applying for Canadian Permanent Residency (PR) through Express Entry, Provincial Nominee Programs (PNPs), or seeking professional designation.\n- **What it tests:** All four language skills: Listening, Reading, Writing, and Speaking.\n- **Duration:** Approximately 3 hours.\n\n**2. CELPIP - General LS Test**\n- **Who it's for:** Individuals applying for Canadian Citizenship.\n- **What it tests:** Only two skills: Listening and Speaking.\n- **Duration:** Approximately 1 hour and 10 minutes.\n\n**Why Choose the CELPIP Test?**\n\nMany candidates prefer the CELPIP test for its modern, user-friendly design and its direct alignment with Canadian immigration standards. Here are the top reasons to choose CELPIP:\n- **Fast Results:** Your official test scores are available online quickly, typically within **4 to 5 calendar days**.\n- **Direct CLB Mapping:** The scoring system is perfectly aligned with the **Canadian Language Benchmarks (CLB)**. A CELPIP score of 8 directly equals a CLB 8, making it incredibly easy to calculate your immigration points.\n- **Helpful Built-in Features:** Because the test is entirely computer-based, the Writing section includes a personal timer, a word counter, and a standard English spell-check tool.\n- **A Single Sitting:** You will complete all components on a computer without having to leave the room or switch testing centers.\n\n**Test Format and Structure (CELPIP - General)**\n\nFor those taking the full CELPIP - General Test, here is a breakdown of what to expect in your 3-hour session:\n\n| Exam Section | Duration | What to Expect |\n|---|---|---|\n| **Listening** | 46 - 55 minutes | You will listen to short conversations, news items, and discussions, then answer multiple-choice questions. |\n| **Reading** | 43 - 56 minutes | You will read everyday materials like emails, diagrams, and informative articles, followed by comprehension questions. |\n| **Writing** | 53 - 60 minutes | You will write an email regarding a day-to-day matter and respond to a survey question expressing your opinion. |\n| **Speaking** | 15 - 20 minutes | You will speak into a microphone to provide advice, describe a scene, make predictions, and express your opinions based on on-screen prompts. |\n\n**Official Recognition**\n\nThe CELPIP test is officially recognized by **Immigration, Refugees and Citizenship Canada (IRCC)**. It is also accepted by the Real Estate Council of British Columbia, the College of Immigration and Citizenship Consultants (CICC), and numerous other professional organizations across Canada.\n\nBy choosing the CELPIP test, you are taking an exam designed by Canadians, for Canada, giving you a clear and straightforward path to achieving your immigration goals.",
       "stats": [
         {
           "label": "Total Duration",
@@ -2346,55 +2302,10 @@
           "value": "2 Years"
         }
       ],
-      "sections": [
-        {
-          "name": "Listening Component",
-          "duration": "46-55 minutes",
-          "details": "You will listen to short conversations, news items, and discussions, then answer multiple-choice questions.",
-          "format": "Part 1: Listening to Problem Solving\nPart 2: Listening to a Daily Life Conversation\nPart 3: Listening for Information\nPart 4: Listening to a News Item\nPart 5: Listening to a Discussion\nPart 6: Listening to Viewpoints",
-          "questions": "38-40 questions",
-          "taskTypes": "Multiple Choice"
-        },
-        {
-          "name": "Reading Component",
-          "duration": "43-56 minutes",
-          "details": "You will read everyday materials like emails, diagrams, and informative articles, followed by comprehension questions.",
-          "format": "Part 1: Reading Correspondence\nPart 2: Reading to Apply a Diagram\nPart 3: Reading for Information\nPart 4: Reading for Viewpoints",
-          "questions": "38-40 questions",
-          "taskTypes": "Multiple Choice, Gap Fill"
-        },
-        {
-          "name": "Writing Component",
-          "duration": "53-60 minutes",
-          "details": "You will write an email regarding a day-to-day matter and respond to a survey question expressing your opinion.",
-          "format": "Task 1: Writing an Email\nTask 2: Responding to Survey Questions",
-          "questions": "2 tasks"
-        },
-        {
-          "name": "Speaking Component",
-          "duration": "15-20 minutes",
-          "details": "You will speak into a microphone to provide advice, describe a scene, make predictions, and express your opinions based on on-screen prompts.",
-          "format": "Task 1: Giving Advice\nTask 2: Talking about a Personal Experience\nTask 3: Describing a Scene\nTask 4: Making Predictions\nTask 5: Comparing and Persuading\nTask 6: Dealing with a Difficult Situation\nTask 7: Expressing Opinions\nTask 8: Describing an Unusual Situation"
-        }
-      ],
-      "whoShouldTake": [
-        "Permanent residence applicants (IRCC Canada)",
-        "Visa applicants for Australia (DHA)",
-        "Individuals seeking professional designations",
-        "Students applying to Universities and Colleges"
-      ],
-      "acceptedFor": [
-        "Permanent Residency",
-        "Professional Designation",
-        "Australian Visa",
-        "Academic Admissions"
-      ],
-      "faqs": [
-        {
-          "question": "What is the difference between CELPIP General and General LS?",
-          "answer": "General is for residency (all 4 skills). General LS is for citizenship (only Listening and Speaking)."
-        }
-      ]
+      "sections": [],
+      "whoShouldTake": [],
+      "acceptedFor": [],
+      "faqs": []
     },
     "celpip-general-ls": {
       "subtitle": "CELPIP General LS - For Canadian Citizenship",
@@ -2422,33 +2333,14 @@
           "value": "2 Years"
         }
       ],
-      "sections": [
-        {
-          "name": "Listening Component",
-          "duration": "47–55 minutes",
-          "details": "Listen to passages and answer questions.",
-          "format": "Part 1: Listening to Problem Solving\nPart 2: Listening to a Daily Life Conversation\nPart 3: Listening for Information\nPart 4: Listening to a News Item\nPart 5: Listening to a Discussion\nPart 6: Listening to Viewpoints",
-          "questions": "38-40 questions",
-          "taskTypes": "Multiple Choice"
-        },
-        {
-          "name": "Speaking Component",
-          "duration": "15–20 minutes",
-          "details": "Reply to on-screen prompts verbally.",
-          "format": "Task 1: Giving Advice\nTask 2: Talking about a Personal Experience\nTask 3: Describing a Scene\nTask 4: Making Predictions\nTask 5: Comparing and Persuading\nTask 6: Dealing with a Difficult Situation\nTask 7: Expressing Opinions\nTask 8: Describing an Unusual Situation"
-        }
-      ],
-      "whoShouldTake": [
-        "Canadian citizenship applicants"
-      ],
-      "acceptedFor": [
-        "Canadian Citizenship"
-      ]
+      "sections": [],
+      "whoShouldTake": [],
+      "acceptedFor": []
     },
     "cael": {
       "subtitle": "Your Guide to the CAEL Test",
       "description": "The **CAEL (Canadian Academic English Language)** test is a comprehensive, computer-based exam designed specifically to measure the English level of international students planning to study in Canada.",
-      "overview": "If your dream is to study at a Canadian university or college, proving your English proficiency is a critical first step in your application journey. The **CAEL (Canadian Academic English Language)** test is a comprehensive, computer-based exam designed specifically to measure the English level of international students planning to study in Canada.\n\nUnlike other global English tests, CAEL is deeply rooted in the Canadian educational experience, giving you a true taste of what to expect in a North American classroom.\n\n**What is the CAEL Test?**\n\nThe CAEL test evaluates your ability to use English in an academic context. What makes CAEL completely unique is its **integrated, topic-based approach**.\n\nInstead of testing your skills in isolation (reading a text about history, then listening to a lecture about biology), CAEL groups tasks by subject. You might read an article about glaciers, listen to a lecture on the same topic, and then use the information from both sources to write a short essay.\n\n**Key Takeaway:** The CAEL test accurately simulates a real first-year Canadian university class. By integrating reading, listening, writing, and speaking around a single topic, it tests how well you synthesize and use information in the real academic world.\n\n**Why Choose CAEL?**\n\nMany candidates prefer CAEL because it feels less like a traditional test and more like a standard academic assignment. Here is why it stands out:\n• **100% Canadian Focus:** It uses Canadian English vocabulary and accents, preparing you directly for the environment you will be studying in.\n• **Fast Results:** Your official test scores are typically available online within **8 business days** after taking the exam.\n• **Integrated Tasks:** Because the reading and listening materials share the same topic as your writing tasks, you are naturally provided with vocabulary and ideas to help you construct your answers.\n• **A Single Sitting:** You will complete all four components (Speaking, Reading, Listening, and Writing) in one continuous session taking approximately **3.5 hours**.\n\n**Test Format and Structure**\n\nThe CAEL test is taken entirely on a computer. It is divided into five main sections that move from general speaking tasks to in-depth, integrated academic units.\n• **Speaking:** You will speak into a microphone to answer short questions about your academic experiences, summarize information, and relay details from a short presentation.\n• **Integrated Reading:** You will read academic passages (like textbook excerpts or articles) and answer comprehension questions.\n• **Integrated Listening:** You will listen to academic lectures, presentations, or campus conversations and answer questions based on the audio.\n• **Academic Unit A:** You will read a passage and listen to a lecture on the **same topic**. You will then use information from both sources to write an extended essay.\n• **Academic Unit B:** Similar to Unit A, but slightly shorter. You will read a passage and listen to a lecture on a unified topic, followed by writing a shorter response.\n\n**Understanding Your Scores**\n\nCAEL uses a specialized Band Score system ranging from **10 to 90 points**.\n\nYour final score report will provide an Overall Band Score, as well as individual scores for your Reading, Listening, Speaking, and Writing components. Most Canadian academic institutions require an overall score between 60 and 70 for direct admission, though this varies by program.\n\n**Official Recognition**\n\nThe CAEL test is one of the most widely recognized academic English tests in the country.\n• **Universities & Colleges:** It is accepted by 100% of English-speaking Canadian universities and colleges.\n• **Professional Associations:** Many professional organizations across Canada also accept CAEL as proof of English proficiency for licensure and certification.\n\nBy taking the CAEL test, you are not just proving your English skills — you are demonstrating that you are fully prepared to succeed in a Canadian academic environment.",
+      "overview": "If your dream is to study at a Canadian university or college, proving your English proficiency is a critical first step in your application journey. The **CAEL (Canadian Academic English Language)** test is a comprehensive, computer-based exam designed specifically to measure the English level of international students planning to study in Canada.\n\nUnlike other global English tests, CAEL is deeply rooted in the Canadian educational experience, giving you a true taste of what to expect in a North American classroom.\n\n**What is the CAEL Test?**\n\nThe CAEL test evaluates your ability to use English in an academic context. What makes CAEL completely unique is its **integrated, topic-based approach**.\n\nInstead of testing your skills in isolation (reading a text about history, then listening to a lecture about biology), CAEL groups tasks by subject. You might read an article about glaciers, listen to a lecture on the same topic, and then use the information from both sources to write a short essay.\n\n**Key Takeaway:** The CAEL test accurately simulates a real first-year Canadian university class. By integrating reading, listening, writing, and speaking around a single topic, it tests how well you synthesize and use information in the real academic world.\n\n**Why Choose CAEL?**\n\nMany candidates prefer CAEL because it feels less like a traditional test and more like a standard academic assignment. Here is why it stands out:\n- **100% Canadian Focus:** It uses Canadian English vocabulary and accents, preparing you directly for the environment you will be studying in.\n- **Fast Results:** Your official test scores are typically available online within **8 business days** after taking the exam.\n- **Integrated Tasks:** Because the reading and listening materials share the same topic as your writing tasks, you are naturally provided with vocabulary and ideas to help you construct your answers.\n- **A Single Sitting:** You will complete all four components (Speaking, Reading, Listening, and Writing) in one continuous session taking approximately **3.5 hours**.\n\n**Test Format and Structure**\n\nThe CAEL test is taken entirely on a computer. It is divided into five main sections that move from general speaking tasks to in-depth, integrated academic units.\n\n| Exam Section | What to Expect |\n|---|---|\n| **Speaking** | You will speak into a microphone to answer short questions about your academic experiences, summarize information, and relay details from a short presentation. |\n| **Integrated Reading** | You will read academic passages (like textbook excerpts or articles) and answer comprehension questions. |\n| **Integrated Listening** | You will listen to academic lectures, presentations, or campus conversations and answer questions based on the audio. |\n| **Academic Unit A** | You will read a passage and listen to a lecture on the **same topic**. You will then use information from both sources to write an extended essay. |\n| **Academic Unit B** | Similar to Unit A, but slightly shorter. You will read a passage and listen to a lecture on a unified topic, followed by writing a shorter response. |\n\n**Understanding Your Scores**\n\nCAEL uses a specialized Band Score system ranging from **10 to 90 points**.\n\nYour final score report will provide an Overall Band Score, as well as individual scores for your Reading, Listening, Speaking, and Writing components. Most Canadian academic institutions require an overall score between 60 and 70 for direct admission, though this varies by program.\n\n**Official Recognition**\n\nThe CAEL test is one of the most widely recognized academic English tests in the country.\n- **Universities & Colleges:** It is accepted by 100% of English-speaking Canadian universities and colleges.\n- **Professional Associations:** Many professional organizations across Canada also accept CAEL as proof of English proficiency for licensure and certification.\n\nBy taking the CAEL test, you are not just proving your English skills—you are demonstrating that you are fully prepared to succeed in a Canadian academic environment.",
       "stats": [
         {
           "label": "Total Duration",
@@ -2471,48 +2363,9 @@
           "value": "180+ Inst."
         }
       ],
-      "sections": [
-        {
-          "name": "Speaking",
-          "duration": "7–10 minutes",
-          "details": "You will speak into a microphone to answer short questions about your academic experiences, summarize information, and relay details from a short presentation.",
-          "format": "Test takers respond to three speaking tasks that reflect common university-level communication scenarios."
-        },
-        {
-          "name": "Integrated Reading",
-          "duration": "35–50 minutes",
-          "details": "You will read academic passages (like textbook excerpts or articles) and answer comprehension questions.",
-          "format": "Read one long academic text and answer questions, evaluating comprehension and information retrieval skills."
-        },
-        {
-          "name": "Integrated Listening",
-          "duration": "25–35 minutes",
-          "details": "You will listen to academic lectures, presentations, or campus conversations and answer questions based on the audio.",
-          "format": "Listen to one long academic lecture and answer questions based on the content and key details."
-        },
-        {
-          "name": "Academic Unit A",
-          "duration": "~70 minutes",
-          "details": "You will read a passage and listen to a lecture on the same topic. You will then use information from both sources to write an extended essay.",
-          "format": "Combines reading and listening materials on a specific academic topic, followed by an extended writing task integrating both sources."
-        },
-        {
-          "name": "Academic Unit B",
-          "duration": "~50 minutes",
-          "details": "Similar to Unit A, but slightly shorter. You will read a passage and listen to a lecture on a unified topic, followed by writing a shorter response.",
-          "format": "Combines reading and listening on a unified topic, followed by a shorter writing response."
-        }
-      ],
-      "whoShouldTake": [
-        "Students applying for undergraduate or postgraduate programs in Canada",
-        "Professionals seeking registration with Canadian regulatory bodies"
-      ],
-      "acceptedFor": [
-        "University Admissions (Canada)",
-        "College Admissions (Canada)",
-        "Professional Registration",
-        "Study Permit Applications"
-      ]
+      "sections": [],
+      "whoShouldTake": [],
+      "acceptedFor": []
     },
     "oet": {
       "subtitle": "Occupational English Test",
