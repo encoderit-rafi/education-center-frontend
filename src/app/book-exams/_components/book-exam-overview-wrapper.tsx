@@ -90,7 +90,7 @@ function OverviewBody({ text }: { text: string }) {
                 key={i}
                 className="my-6 overflow-x-auto rounded-xl border border-slate-200/80 shadow-sm bg-white"
               >
-                <table className="w-full min-w-[500px] border-collapse text-left text-xs lg:text-sm">
+                <table className="w-full min-w-125 border-collapse text-left text-xs lg:text-sm">
                   <thead>
                     <tr className="bg-slate-50 border-b border-slate-200/80">
                       {headers.map((h, hi) => (

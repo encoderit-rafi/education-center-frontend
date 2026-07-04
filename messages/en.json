@@ -8,23 +8,51 @@
       "bookExam": "Book Exam",
       "ourCourses": "Our Courses"
     },
-    "InformationSection": {
+    "ExperienceSection": {
+      "title": "Have a Better Testing Experience",
+      "bookExam": "Book Exam",
       "items": [
         {
-          "label": "Exams Offered",
-          "value": "10+"
+          "title": "Trusted by 10,000+ Organisations Worldwide"
         },
         {
-          "label": "Course Types",
-          "value": "4"
+          "title": "High-quality testing centres"
         },
         {
-          "label": "Mock Test Results",
-          "value": "72h"
+          "title": "Preparation courses available"
         },
         {
-          "label": "Registered Centre",
-          "value": "UAE"
+          "title": "Knowledgeable support staff"
+        },
+        {
+          "title": "Computer-delivered testing"
+        },
+        {
+          "title": "Expert examiners"
+        }
+      ]
+    },
+    "ApartSection": {
+      "title": "What sets us apart from other test centres",
+      "bookExam": "Book Exam",
+      "items": [
+        {
+          "title": "Located in the heart of the city"
+        },
+        {
+          "title": "Easily accessible by public transport"
+        },
+        {
+          "title": "Modern testing facilities"
+        },
+        {
+          "title": "Quiet and spacious test-taking rooms"
+        },
+        {
+          "title": "Hands-on staff"
+        },
+        {
+          "title": "Qualified professional examiners"
         }
       ]
     },
@@ -51,7 +79,7 @@
           "title": "Test Your English",
           "description": "Take a free multiple-choice assessment and receive your level result by email instantly."
         },
-        {
+        { 
           "title": "Free Consultation",
           "description": "15 minutes with one of our teachers — ask about exams, courses, or preparation strategies."
         },
@@ -101,7 +129,7 @@
       ],
       "features": [
         {
-          "title": "Accredited Testing Centre",
+          "title": "Accredited Test Centre",
           "description": "Authorized by leading exam bodies — British Council, ETS, Pearson, and more."
         },
         {
