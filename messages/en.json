@@ -2150,15 +2150,8 @@
           "format": "Tasks include Summarize Spoken Text, Multiple Choice (Multiple Answer), Fill in the Blanks, Highlight Correct Summary, Multiple Choice (Single Answer), Select Missing Word, Highlight Incorrect Words, and Write from Dictation."
         }
       ],
-      "whoShouldTake": [
-        "Applicants for UK study below degree level (foundation, pathway, pre-sessional courses)",
-        "Skilled Worker visa applicants",
-        "Innovator Founder visa applicants",
-        "Minister of Religion visa applicants"
-      ],
-      "acceptedFor": [
-        "UK Visas and Immigration (UKVI)"
-      ]
+      "whoShouldTake": [],
+      "acceptedFor": []
     },
     "pte-home-a1": {
       "subtitle": "Your Guide to the PTE Home A1 Test",
@@ -2190,15 +2183,8 @@
           "format": "• Repeat Sentence: You will listen to short, simple sentences and be asked to repeat them exactly as you heard them.\n• Describe Image: You will be shown basic, easy-to-understand images and will have a few seconds to briefly describe what you see.\n• Conversation — Listen and Answer: You will listen to short questions or conversational snippets and provide quick spoken answers."
         }
       ],
-      "whoShouldTake": [
-        "Applicants for UK Spouse or Partner visa (first-time)",
-        "Applicants for Parent of a Dependent Child visa (first-time)",
-        "Representative of an Overseas Business visa applicants",
-        "Sportsperson visa applicants"
-      ],
-      "acceptedFor": [
-        "UK Visas and Immigration (UKVI)"
-      ]
+      "whoShouldTake": [],
+      "acceptedFor": []
     },
     "pte-home-a2": {
       "subtitle": "PTE Home A2: Secure English Language Test for UK Visa Extensions",
@@ -2230,13 +2216,8 @@
           "format": "• Repeat Sentence: Listen to short sentences and repeat them into your microphone exactly as you heard them.\n• Describe Image: Look at simple images (such as everyday scenes or objects) and provide a brief spoken description.\n• Retell Story: Listen to a short, simple story or conversation and then summarize or retell the key points in your own words."
         }
       ],
-      "whoShouldTake": [
-        "Applicants extending their UK Spouse or Partner visa",
-        "Applicants extending their UK Parent of a Dependent Child visa"
-      ],
-      "acceptedFor": [
-        "UK Visas and Immigration (UKVI)"
-      ]
+      "whoShouldTake": [],
+      "acceptedFor": []
     },
     "pte-home-b1": {
       "subtitle": "PTE Home B1: Your Guide to the PTE Home B1 Test",
@@ -2268,13 +2249,8 @@
           "format": "• Repeat Sentence: You will listen to short sentences and must repeat them into your microphone exactly as you heard them.\n• Describe Image: You will look at a simple visual (such as a chart, map, or everyday scene) and provide a brief spoken description of what you see.\n• Retell Story: You will listen to a short narrative or conversation and then summarize the key details in your own words.\n• Listen and Answer: You will listen to a brief question and provide a short, simple spoken answer (often just one or two words)."
         }
       ],
-      "whoShouldTake": [
-        "Applicants for Indefinite Leave to Remain (ILR / Settlement)",
-        "Applicants for Naturalisation as a British Citizen"
-      ],
-      "acceptedFor": [
-        "UK Visas and Immigration (UKVI)"
-      ]
+      "whoShouldTake": [],
+      "acceptedFor": []
     },
     "celpip-general": {
       "subtitle": "Your Guide to the CELPIP Test",
@@ -2450,7 +2426,7 @@
     "selt-a1": {
       "subtitle": "Your Guide to the Skills for English (SELT) UKVI Speaking & Listening A1 Test",
       "description": "The **Skills for English SELT (Secure English Language Test) Speaking and Listening at Level A1** is an official, UK Home Office-approved exam designed for individuals applying for specific UK family visas.",
-      "overview": "If you are applying for specific UK family visas, you may need to prove your basic English language proficiency. The **Skills for English SELT (Secure English Language Test) Speaking and Listening at Level A1** is an official, UK Home Office-approved exam designed exactly for this purpose.\n\nDelivered globally by PSI, this test is a convenient and accessible option for individuals who need to demonstrate a beginner level of English to settle with their family or work in the UK.\n\n**What is the Skills for English SELT A1 Test?**\n\nThis is a straightforward **two-skills test** that assesses only your **Speaking** and **Listening** abilities. There are no reading or writing sections. It measures your English at the CEFR A1 level, which is a beginner standard.\n\nThe exam evaluates your ability to understand simple spoken English, introduce yourself, and respond to basic everyday questions.\n\n**Key Takeaway:** You do not need advanced English skills to pass. This test is entirely computer-based and is designed purely to prove that you can handle basic, everyday communication in the UK.\n\n**Why Choose Skills for English?**\n\nCandidates appreciate the Skills for English test because of its modern, user-friendly, and highly efficient delivery:\n- **100% Computer-Based:** You will complete both the speaking and listening parts on a computer using a headset. You will record your spoken answers directly into the system, meaning there is no face-to-face examiner to make you nervous.\n- **Short Duration:** The entire exam takes a maximum of **30 minutes** to complete.\n- **Fast Results:** Test results are typically available online in just **3 to 5 days**, helping you meet tight visa deadlines.\n- **UKVI Approved:** It provides the essential Unique Reference Number (URN) that you must include with your UK visa application to prove your result is genuine.\n\n**Test Format and Structure**\n\nYou will take the test in a single, continuous session at a secure UKVI-approved test center. The interface is designed to be intuitive and easy to navigate.\n- **Speaking:** You will start by introducing yourself. Then, you will listen to recorded questions or prompts on the screen and speak your answers directly into the microphone. Your responses are digitally recorded and marked by trained assessors later.\n- **Listening:** You will listen to short audio recordings of spoken English (you will get to hear each recording twice). After listening, you will answer a series of simple questions based on what you heard. This section is automatically marked by the computer.\n\n**When Should You Take This Test?**\n\nChoosing the correct SELT level is crucial for your UK immigration application. The UK Home Office requires an A1 level English test for applicants applying for the *first time* under certain visa categories, such as:\n\nFamily Visas:\n- Spouse or Partner visa\n- Parent of a Dependent Child visa\n\nSpecific Work Visas:\n- Representative of an Overseas Business visa\n- Sportsperson visa\n\n*(Note: If you are extending a family visa you already have or applying for citizenship, you will likely need a higher level, such as A2 or B1. Always confirm your specific visa requirements before booking).*\n\nWith its stress-free, computer-based format and quick turnaround time, the Skills for English SELT A1 is an excellent, straightforward choice for taking your first step toward living in the UK.",
+      "overview": "If you are applying for specific UK family visas, you may need to prove your basic English language proficiency. The **Skills for English SELT (Secure English Language Test) Speaking and Listening at Level A1** is an official, UK Home Office-approved exam designed exactly for this purpose.\n\nDelivered globally by PSI, this test is a convenient and accessible option for individuals who need to demonstrate a beginner level of English to settle with their family or work in the UK.\n\n**What is the Skills for English SELT A1 Test?**\n\nThis is a straightforward **two-skills test** that assesses only your **Speaking** and **Listening** abilities. There are no reading or writing sections. It measures your English at the CEFR A1 level, which is a beginner standard.\n\nThe exam evaluates your ability to understand simple spoken English, introduce yourself, and respond to basic everyday questions.\n\n**Key Takeaway:** You do not need advanced English skills to pass. This test is entirely computer-based and is designed purely to prove that you can handle basic, everyday communication in the UK.\n\n**Why Choose Skills for English?**\n\nCandidates appreciate the Skills for English test because of its modern, user-friendly, and highly efficient delivery:\n- **100% Computer-Based:** You will complete both the speaking and listening parts on a computer using a headset. You will record your spoken answers directly into the system, meaning there is no face-to-face examiner to make you nervous.\n- **Short Duration:** The entire exam takes a maximum of **30 minutes** to complete.\n- **Fast Results:** Test results are typically available online in just **3 to 5 days**, helping you meet tight visa deadlines.\n- **UKVI Approved:** It provides the essential Unique Reference Number (URN) that you must include with your UK visa application to prove your result is genuine.\n\n**Test Format and Structure**\n\nYou will take the test in a single, continuous session at a secure UKVI-approved test center. The interface is designed to be intuitive and easy to navigate.\n\n| Exam Section | What to Expect |\n|---|---|\n| **Speaking** | You will start by introducing yourself. Then, you will listen to recorded questions or prompts on the screen and speak your answers directly into the microphone. Your responses are digitally recorded and marked by trained assessors later. |\n| **Listening** | You will listen to short audio recordings of spoken English (you will get to hear each recording twice). After listening, you will answer a series of simple questions based on what you heard. This section is automatically marked by the computer. |\n\n**When Should You Take This Test?**\n\nChoosing the correct SELT level is crucial for your UK immigration application. The UK Home Office requires an A1 level English test for applicants applying for the *first time* under certain visa categories, such as:\n\n**Family Visas:**\n- Spouse or Partner visa\n- Parent of a Dependent Child visa\n\n**Specific Work Visas:**\n- Representative of an Overseas Business visa\n- Sportsperson visa\n\n*(Note: If you are extending a family visa you already have or applying for citizenship, you will likely need a higher level, such as A2 or B1. Always confirm your specific visa requirements before booking).*\n\nWith its stress-free, computer-based format and quick turnaround time, the Skills for English SELT A1 is an excellent, straightforward choice for taking your first step toward living in the UK.",
       "stats": [
         {
           "label": "Max Duration",
@@ -2473,28 +2449,9 @@
           "value": "UK Home Office"
         }
       ],
-      "sections": [
-        {
-          "name": "Speaking",
-          "duration": "Part of 30 min session",
-          "details": "You will start by introducing yourself. Then, you will listen to recorded questions or prompts on the screen and speak your answers directly into the microphone. Your responses are digitally recorded and marked by trained assessors later."
-        },
-        {
-          "name": "Listening",
-          "duration": "Part of 30 min session",
-          "details": "You will listen to short audio recordings of spoken English (you will get to hear each recording twice). After listening, you will answer a series of simple questions based on what you heard. This section is automatically marked by the computer."
-        }
-      ],
-      "whoShouldTake": [
-        "Applicants for UK Spouse or Partner visa (first time)",
-        "Applicants for Parent of a Dependent Child visa (first time)",
-        "Representative of an Overseas Business visa applicants",
-        "Sportsperson visa applicants"
-      ],
-      "acceptedFor": [
-        "UK Visas and Immigration (UKVI)",
-        "UK Family Visa applications"
-      ]
+      "sections": [],
+      "whoShouldTake": [],
+      "acceptedFor": []
     },
     "selt-a2": {
       "subtitle": "Your Guide to the Skills for English (SELT) UKVI Speaking & Listening A2 Test",
@@ -2589,7 +2546,7 @@
     "selt-b2": {
       "subtitle": "Your Guide to the Skills for English (SELT) UKVI Speaking, Listening, Reading & Writing B2 (Four Skills)",
       "description": "The **Skills for English SELT (Secure English Language Test) B2 (Four Skills)** is an official, UK Home Office-approved exam explicitly designed to assess your complete language capabilities.",
-      "overview": "If you are applying for an advanced study program or a specialized work visa in the United Kingdom, you may be required to prove a high level of English proficiency across all communication areas. The **Skills for English SELT (Secure English Language Test) B2 (Four Skills)** is an official, UK Home Office-approved exam explicitly designed to assess your complete language capabilities.\n\nUnlike the beginner and intermediate tests used for settlement, the B2 level is an upper-intermediate qualification. It proves that you have the robust language skills required to thrive in a professional British workplace or a rigorous academic environment.\n\n**What is the Skills for English SELT B2 (Four Skills)?**\n\nThis comprehensive test evaluates your **Speaking, Listening, Reading, and Writing** abilities. Aligned with the CEFR B2 upper-intermediate level, the exam measures your capacity to understand complex texts, express detailed opinions, and interact with native speakers with a high degree of fluency and spontaneity.\n\nYou will complete the entire exam in a single, continuous, computer-based session that generally lasts between **175 and 190 minutes**, depending on the specific tasks. By assessing all four language modalities at an advanced level, it provides the UK Home Office and your future sponsor with a complete, accurate picture of your professional and academic readiness.\n\n**Key Takeaway:** The B2 Four Skills test is for individuals taking on significant roles in the UK. It demonstrates that you can comfortably handle technical discussions, write detailed reports, and communicate confidently without straining yourself or the listener.\n\n**Why Choose Skills for English?**\n\nCandidates taking upper-intermediate exams often prefer the Skills for English format because of its modern, user-friendly, and highly efficient delivery system:\n- **100% Computer-Based:** You will complete all four components on a computer in one sitting. Your spoken and written responses are digitally recorded and submitted for assessment, removing the anxiety of facing a live examiner.\n- **A Unified Experience:** The test transitions smoothly from one skill to the next. Because it is entirely computer-delivered, you benefit from a quiet, controlled environment that allows you to focus deeply on complex reading and writing tasks.\n- **Fast Results:** Even for a comprehensive four-skills test, official results are typically available online in just **3 to 5 days**, helping you meet strict visa application deadlines.\n- **UKVI Approved:** The test is fully approved by the UK Home Office, and your results will include the mandatory Unique Reference Number (URN) required to validate your visa application.\n\n**Test Format and Structure**\n\nYou will take the test at an approved, secure SELT test center. The interface is intuitive, guiding you clearly through each advanced section:\n- **Speaking (Approx. 15 mins):** You will listen to prompts and record your spoken responses using a headset. You will be asked to express detailed viewpoints, weigh the advantages and disadvantages of different options, and describe personal experiences fluently.\n- **Listening (Approx. 40 mins):** You will listen to longer audio recordings, such as presentations, interviews, or discussions on abstract topics. You will answer questions to demonstrate your understanding of both the main ideas and the underlying attitudes or opinions of the speakers.\n- **Reading (Approx. 75 mins):** You will read complex texts from various sources — such as articles, reports, or academic excerpts — and answer questions to show you can extract specific details, understand text structure, and grasp implied meanings.\n- **Writing (Approx. 60 mins):** You will complete practical writing tasks that require you to produce clear, detailed text. This may involve writing an essay, a detailed email, or a report where you must synthesize information and construct a logical argument.\n\n**Who Needs the Four-Skills B2 Test?**\n\nThe UK Home Office requires a B2 level of English across all four skills for several high-level visa categories. You will likely need to take this test if you are applying for:\n- **Skilled Worker Visa:** Required for individuals coming to the UK to do an eligible skilled job with an approved employer.\n- **Health and Care Worker Visa:** For medical professionals coming to work in the NHS or related sectors.\n- **Student Visa (Degree Level or Above):** While some universities accept B1, many require a B2 level for bachelor's or master's degree programs. (Always check directly with your chosen university).\n- **Innovator Founder Visa:** For entrepreneurs looking to set up and run an innovative business in the UK.\n- **Minister of Religion Visa:** For those coming to the UK to take up a key role within their faith community.\n\nBy choosing the Skills for English SELT B2 Four Skills test, you are securing a reliable, stress-free certification that proves you are fully equipped to succeed in the UK's academic and professional spheres.",
+      "overview": "If you are applying for an advanced study program or a specialized work visa in the United Kingdom, you may be required to prove a high level of English proficiency across all communication areas. The **Skills for English SELT (Secure English Language Test) B2 (Four Skills)** is an official, UK Home Office-approved exam explicitly designed to assess your complete language capabilities.\n\nUnlike the beginner and intermediate tests used for settlement, the B2 level is an upper-intermediate qualification. It proves that you have the robust language skills required to thrive in a professional British workplace or a rigorous academic environment.\n\n**What is the Skills for English SELT B2 (Four Skills)?**\n\nThis comprehensive test evaluates your **Speaking, Listening, Reading, and Writing** abilities. Aligned with the CEFR B2 upper-intermediate level, the exam measures your capacity to understand complex texts, express detailed opinions, and interact with native speakers with a high degree of fluency and spontaneity.\n\nYou will complete the entire exam in a single, continuous, computer-based session that generally lasts between **175 and 190 minutes**, depending on the specific tasks. By assessing all four language modalities at an advanced level, it provides the UK Home Office and your future sponsor with a complete, accurate picture of your professional and academic readiness.\n\n**Key Takeaway:** The B2 Four Skills test is for individuals taking on significant roles in the UK. It demonstrates that you can comfortably handle technical discussions, write detailed reports, and communicate confidently without straining yourself or the listener.\n\n**Why Choose Skills for English?**\n\nCandidates taking upper-intermediate exams often prefer the Skills for English format because of its modern, user-friendly, and highly efficient delivery system:\n- **100% Computer-Based:** You will complete all four components on a computer in one sitting. Your spoken and written responses are digitally recorded and submitted for assessment, removing the anxiety of facing a live examiner.\n- **A Unified Experience:** The test transitions smoothly from one skill to the next. Because it is entirely computer-delivered, you benefit from a quiet, controlled environment that allows you to focus deeply on complex reading and writing tasks.\n- **Fast Results:** Even for a comprehensive four-skills test, official results are typically available online in just **3 to 5 days**, helping you meet strict visa application deadlines.\n- **UKVI Approved:** The test is fully approved by the UK Home Office, and your results will include the mandatory Unique Reference Number (URN) required to validate your visa application.\n\n**Test Format and Structure**\n\nYou will take the test at an approved, secure SELT test center. The interface is intuitive, guiding you clearly through each advanced section:\n\n| Exam Section | What to Expect |\n|---|---|\n| **Speaking (Approx. 15 mins)** | You will listen to prompts and record your spoken responses using a headset. You will be asked to express detailed viewpoints, weigh the advantages and disadvantages of different options, and describe personal experiences fluently. |\n| **Listening (Approx. 40 mins)** | You will listen to longer audio recordings, such as presentations, interviews, or discussions on abstract topics. You will answer questions to demonstrate your understanding of both the main ideas and the underlying attitudes or opinions of the speakers. |\n| **Reading (Approx. 75 mins)** | You will read complex texts from various sources—such as articles, reports, or academic excerpts—and answer questions to show you can extract specific details, understand text structure, and grasp implied meanings. |\n| **Writing (Approx. 60 mins)** | You will complete practical writing tasks that require you to produce clear, detailed text. This may involve writing an essay, a detailed email, or a report where you must synthesize information and construct a logical argument. |\n\n**Who Needs the Four-Skills B2 Test?**\n\nThe UK Home Office requires a B2 level of English across all four skills for several high-level visa categories. You will likely need to take this test if you are applying for:\n- **Skilled Worker Visa:** Required for individuals coming to the UK to do an eligible skilled job with an approved employer.\n- **Health and Care Worker Visa:** For medical professionals coming to work in the NHS or related sectors.\n- **Student Visa (Degree Level or Above):** While some universities accept B1, many require a B2 level for bachelor’s or master’s degree programs. (Always check directly with your chosen university).\n- **Innovator Founder Visa:** For entrepreneurs looking to set up and run an innovative business in the UK.\n- **Minister of Religion Visa:** For those coming to the UK to take up a key role within their faith community.\n\nBy choosing the Skills for English SELT B2 Four Skills test, you are securing a reliable, stress-free certification that proves you are fully equipped to succeed in the UK's academic and professional spheres.",
       "stats": [
         {
           "label": "Total Duration",
@@ -2612,40 +2569,9 @@
           "value": "UK Home Office"
         }
       ],
-      "sections": [
-        {
-          "name": "Speaking",
-          "duration": "Approx. 15 mins",
-          "details": "You will listen to prompts and record your spoken responses using a headset. You will be asked to express detailed viewpoints, weigh the advantages and disadvantages of different options, and describe personal experiences fluently."
-        },
-        {
-          "name": "Listening",
-          "duration": "Approx. 40 mins",
-          "details": "You will listen to longer audio recordings, such as presentations, interviews, or discussions on abstract topics. You will answer questions to demonstrate your understanding of both the main ideas and the underlying attitudes or opinions of the speakers."
-        },
-        {
-          "name": "Reading",
-          "duration": "Approx. 75 mins",
-          "details": "You will read complex texts from various sources — such as articles, reports, or academic excerpts — and answer questions to show you can extract specific details, understand text structure, and grasp implied meanings."
-        },
-        {
-          "name": "Writing",
-          "duration": "Approx. 60 mins",
-          "details": "You will complete practical writing tasks that require you to produce clear, detailed text. This may involve writing an essay, a detailed email, or a report where you must synthesize information and construct a logical argument."
-        }
-      ],
-      "whoShouldTake": [
-        "Skilled Worker Visa applicants",
-        "Health and Care Worker Visa applicants",
-        "Student Visa (Degree Level or Above) applicants",
-        "Innovator Founder Visa applicants",
-        "Minister of Religion Visa applicants"
-      ],
-      "acceptedFor": [
-        "UK Visas and Immigration (UKVI)",
-        "Professional registrations (UK)",
-        "UK University Admissions"
-      ]
+      "sections": [],
+      "whoShouldTake": [],
+      "acceptedFor": []
     },
     "selt-c1": {
       "subtitle": "Your Guide to the Skills for English (SELT) UKVI Speaking, Listening, Reading & Writing C1 (Four Skills)",

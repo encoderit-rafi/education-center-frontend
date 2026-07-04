@@ -1878,8 +1878,8 @@ export const EXAM_DETAILE_DATA = [
         icon: "listening",
       },
     ],
-    whoShouldTake: ["UK visa applicants"],
-    acceptedFor: ["UK Visas and Immigration (UKVI)"],
+    whoShouldTake: [],
+    acceptedFor: [],
   },
   {
     ...EXAM_IDS_DATA.pte_home_a1,
@@ -1902,8 +1902,8 @@ export const EXAM_DETAILE_DATA = [
         icon: "speaking",
       },
     ],
-    whoShouldTake: ["UK Family/Spouse visa applicants"],
-    acceptedFor: ["UK Visas and Immigration (UKVI)"],
+    whoShouldTake: [],
+    acceptedFor: [],
   },
   {
     ...EXAM_IDS_DATA.pte_home_a2,
@@ -1929,11 +1929,8 @@ export const EXAM_DETAILE_DATA = [
           "• Repeat Sentence: Listen to short sentences and repeat them into your microphone exactly as you heard them.\n• Describe Image: Look at simple images (such as everyday scenes or objects) and provide a brief spoken description.\n• Retell Story: Listen to a short, simple story or conversation and then summarize or retell the key points in your own words.",
       },
     ],
-    whoShouldTake: [
-      "Applicants extending their UK Spouse or Partner visa",
-      "Applicants extending their UK Parent of a Dependent Child visa",
-    ],
-    acceptedFor: ["UK Visas and Immigration (UKVI)"],
+    whoShouldTake: [],
+    acceptedFor: [],
   },
   {
     ...EXAM_IDS_DATA.pte_home_b1,
@@ -1956,8 +1953,8 @@ export const EXAM_DETAILE_DATA = [
         icon: "speaking",
       },
     ],
-    whoShouldTake: ["UK Citizenship and Settlement applicants"],
-    acceptedFor: ["UK Visas and Immigration (UKVI)"],
+    whoShouldTake: [],
+    acceptedFor: [],
   },
   // {
   //   ...EXAM_IDS_DATA.celpip,
@@ -2154,16 +2151,9 @@ export const EXAM_DETAILE_DATA = [
       { label: "Validity", value: "2 years" },
       { label: "Skills", value: "Speaking & Listening" },
     ],
-    sections: [
-      {
-        name: "Speaking & Listening",
-        duration: "17–22 min",
-        details: "Speaking and listening tasks",
-        icon: "speaking",
-      },
-    ],
-    whoShouldTake: ["UK Citizenship applicants", "UK Settlement applicants"],
-    acceptedFor: ["UK Visas and Immigration (UKVI)"],
+    sections: [],
+    whoShouldTake: [],
+    acceptedFor: [],
   },
   {
     ...EXAM_IDS_DATA.selt_b1_r_w,
@@ -2178,13 +2168,9 @@ export const EXAM_DETAILE_DATA = [
       { label: "Validity", value: "2 years" },
       { label: "Skills", value: "All 4 Skills" },
     ],
-    sections: [
-      { name: "Speaking & Listening", duration: "17–22 min", icon: "speaking" },
-      { name: "Reading", duration: "60 min", icon: "reading" },
-      { name: "Writing", duration: "60 min", icon: "writing" },
-    ],
-    whoShouldTake: ["Work visa applicants", "Student visa applicants"],
-    acceptedFor: ["UK Visas and Immigration (UKVI)"],
+    sections: [],
+    whoShouldTake: [],
+    acceptedFor: [],
   },
   {
     ...EXAM_IDS_DATA.selt_b2,
@@ -2199,16 +2185,9 @@ export const EXAM_DETAILE_DATA = [
       { label: "Validity", value: "2 years" },
       { label: "Skills", value: "All 4 Skills" },
     ],
-    sections: [
-      { name: "Speaking & Listening", duration: "17–22 min", icon: "speaking" },
-      { name: "Reading", duration: "60 min", icon: "reading" },
-      { name: "Writing", duration: "60 min", icon: "writing" },
-    ],
-    whoShouldTake: [
-      "Professional registration seekers",
-      "Advanced work visa applicants",
-    ],
-    acceptedFor: ["UK Visas and Immigration (UKVI)"],
+    sections: [],
+    whoShouldTake: [],
+    acceptedFor: [],
   },
   {
     ...EXAM_IDS_DATA.selt_c1,
