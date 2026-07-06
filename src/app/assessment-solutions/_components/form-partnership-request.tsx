@@ -66,7 +66,7 @@ export default function FormPartnershipRequest() {
 
     if (isSuccess) {
         return (
-            <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl p-10 text-center space-y-4 shadow-sm h-full flex flex-col items-center justify-center min-h-[400px]">
+            <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl p-10 text-center space-y-4 shadow-sm h-full flex flex-col items-center justify-center min-h-100">
                 <CheckCircle2 className="w-16 h-16 text-emerald-500" />
                 <h2 className="text-2xl font-bold font-headline text-secondary">{tForm("successTitle")}</h2>
                 <p className="text-emerald-700 text-sm">

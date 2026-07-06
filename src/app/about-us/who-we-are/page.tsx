@@ -15,7 +15,7 @@ export default function WhoWeAre() {
       {/* Hero Section */}
       <section className="py-16 md:py-24 px-6 md:px-8 max-w-screen-2xl mx-auto relative overflow-hidden">
         {/* Glow effect */}
-        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-red-500/5 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-0 right-0 w-100 h-100 bg-red-500/5 rounded-full blur-[120px] pointer-events-none" />
 
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
           {/* Left Content */}
@@ -36,7 +36,7 @@ export default function WhoWeAre() {
           {/* Right Visual */}
           <div className="relative group">
             <div className="absolute -inset-4 bg-primary/5 rounded-xl blur-3xl opacity-50 transition-opacity group-hover:opacity-100"></div>
-            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-md border border-slate-100 bg-white p-2">
+            <div className="relative aspect-4/3 rounded-2xl overflow-hidden shadow-md border border-slate-100 bg-white p-2">
               <Image
                 src="/images/about-us/business-meeting-office.jpg"
                 alt="TEPTH Strategic Collaboration"
@@ -63,7 +63,7 @@ export default function WhoWeAre() {
             />
           </div>
           <div className="lg:col-span-4 relative group">
-            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-md">
+            <div className="relative aspect-4/3 rounded-2xl overflow-hidden shadow-md">
               <Image
                 src="/images/study.jpg"
                 alt="Students Empowering Journey"
@@ -112,7 +112,7 @@ export default function WhoWeAre() {
       {/* Vision & Approach Section */}
       <section className="py-8 px-6 md:px-8 max-w-screen-2xl mx-auto">
         <div className="relative bg-slate-50/50 border border-slate-100 rounded-3xl p-8 lg:p-12 overflow-hidden hover:bg-white hover:border-slate-200 hover:shadow-md transition-all duration-300">
-          <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-red-500/5 rounded-full blur-[100px] pointer-events-none" />
+          <div className="absolute top-0 right-0 w-75 h-75 bg-red-500/5 rounded-full blur-[100px] pointer-events-none" />
           
           <div className="relative z-10 max-w-4xl mx-auto space-y-6">
             <span className="text-[#A11D1D] font-extrabold uppercase tracking-[0.25em] text-xs">

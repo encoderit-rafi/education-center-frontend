@@ -82,8 +82,8 @@ export default function AssessmentSolutionsPage() {
       {/* Hero Header Section */}
       <section className="relative bg-white border-b border-slate-100 text-slate-900 py-20 lg:py-28 px-6 overflow-hidden">
         {/* Glow effect */}
-        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-red-500/5 rounded-full blur-[120px] pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-blue-500/5 rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute top-0 right-0 w-100 h-100 bg-red-500/5 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-75 h-75 bg-blue-500/5 rounded-full blur-[100px] pointer-events-none" />
 
         <div className="max-w-7xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left: Text */}
@@ -102,9 +102,9 @@ export default function AssessmentSolutionsPage() {
           {/* Right: Partnership Logos */}
           <div className="flex items-center justify-center gap-4 md:gap-6">
             {/* Certify Logo */}
-            <div className="flex-1 max-w-[200px] bg-white rounded-2xl p-5 shadow-xl relative overflow-hidden">
+            <div className="flex-1 max-w-50 bg-white rounded-2xl p-5 shadow-xl relative overflow-hidden">
               <div className="absolute inset-0 pointer-events-none" />
-              <div className="relative h-[100px]">
+              <div className="relative h-25">
                 <Image
                   src="/images/certify-logo-main.jpg"
                   alt="Certify Assessment Solutions"
@@ -121,8 +121,8 @@ export default function AssessmentSolutionsPage() {
             </div>
 
             {/* TEPTH Logo */}
-            <div className="flex-1 max-w-[200px] bg-white rounded-2xl p-5 shadow-xl border border-slate-200/40">
-              <div className="relative h-[100px]">
+            <div className="flex-1 max-w-50 bg-white rounded-2xl p-5 shadow-xl border border-slate-200/40">
+              <div className="relative h-25">
                 <Image
                   src="/images/tepth-logo.jpg"
                   alt="TEPTH - The Exam Preparation & Testing House"
@@ -139,7 +139,7 @@ export default function AssessmentSolutionsPage() {
       <section className="py-16 px-6 max-w-7xl mx-auto">
         <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-8 lg:p-12 relative overflow-hidden">
           {/* Subtle background lines */}
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#f1f5f9_1px,transparent_1px),linear-gradient(to_bottom,#f1f5f9_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-30 pointer-events-none" />
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#f1f5f9_1px,transparent_1px),linear-gradient(to_bottom,#f1f5f9_1px,transparent_1px)] bg-size-[4rem_4rem] mask-[radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-30 pointer-events-none" />
 
           <div className="relative z-10">
             <h2 className="text-2xl lg:text-3xl font-extrabold text-slate-900 mb-10 tracking-tight font-headline border-l-4 border-red-800 pl-4">
@@ -225,7 +225,7 @@ export default function AssessmentSolutionsPage() {
                   <span className="text-xs text-slate-400 group-hover:text-red-850 transition-colors font-normal">→</span>
                 </h3>
 
-                <p className="text-slate-600 text-sm leading-relaxed text-justify flex-grow">
+                <p className="text-slate-600 text-sm leading-relaxed text-justify grow">
                   {platform.description}
                 </p>
               </a>
@@ -237,7 +237,7 @@ export default function AssessmentSolutionsPage() {
         <div className="mt-32 space-y-32">
           {/* 1. SmarTest Invigilate Details */}
           <div id="detail-invigilate" className="bg-white rounded-3xl border border-slate-100 shadow-sm p-8 lg:p-12 space-y-10 relative overflow-hidden scroll-mt-20">
-            <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-red-800/5 rounded-full blur-[100px] pointer-events-none" />
+            <div className="absolute top-0 right-0 w-100 h-100 bg-red-800/5 rounded-full blur-[100px] pointer-events-none" />
 
             <div className="space-y-6">
               <div className="flex items-center gap-3">
@@ -253,7 +253,7 @@ export default function AssessmentSolutionsPage() {
               </p>
             </div>
 
-            <div className="relative w-full max-w-3xl mx-auto aspect-[3/4] rounded-2xl overflow-hidden">
+            <div className="relative w-full max-w-3xl mx-auto aspect-3/4 rounded-2xl overflow-hidden">
               <Image
                 src="/images/smartest-invigilate-features.jpg"
                 alt="SmarTest Invigilate Features"
@@ -295,7 +295,7 @@ export default function AssessmentSolutionsPage() {
 
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                 {/* Left: Dashboard Image */}
-                <div className="lg:col-span-6 relative rounded-xl overflow-hidden border border-slate-100 bg-slate-50 aspect-[1024/585] w-full max-w-[600px] mx-auto shadow-md">
+                <div className="lg:col-span-6 relative rounded-xl overflow-hidden border border-slate-100 bg-slate-50 aspect-1024/585 w-full max-w-150 mx-auto shadow-md">
                   <Image
                     className="object-contain w-full h-full transition-transform duration-700"
                     src="/images/smartest-invigilate-dashboard.jpg"
@@ -329,7 +329,7 @@ export default function AssessmentSolutionsPage() {
 
             {/* AI-Powered Monitoring Sub-section */}
             <div className="pt-10 border-t border-slate-100">
-              <div className="relative w-full max-w-3xl mx-auto aspect-[16/10] rounded-2xl overflow-hidden shadow-md border border-slate-100 bg-white">
+              <div className="relative w-full max-w-3xl mx-auto aspect-16/10 rounded-2xl overflow-hidden shadow-md border border-slate-100 bg-white">
                 <Image
                   className="object-contain rounded-2xl"
                   src="/images/2.jpg"
@@ -358,7 +358,7 @@ export default function AssessmentSolutionsPage() {
 
           {/* 2. SmarTest Examiner Details */}
           <div id="detail-examiner" className="bg-white rounded-3xl border border-slate-100 shadow-sm p-8 lg:p-12 space-y-10 relative overflow-hidden scroll-mt-20">
-            <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-amber-500/5 rounded-full blur-[100px] pointer-events-none" />
+            <div className="absolute top-0 right-0 w-100 h-100 bg-amber-500/5 rounded-full blur-[100px] pointer-events-none" />
 
             <div className="space-y-6">
               <div className="flex items-center gap-3">
@@ -374,7 +374,7 @@ export default function AssessmentSolutionsPage() {
               </p>
             </div>
 
-            <div className="relative w-full max-w-3xl mx-auto aspect-[16/10] overflow-hidden">
+            <div className="relative w-full max-w-3xl mx-auto aspect-16/10 overflow-hidden">
               <Image
                 src="/images/study.jpg"
                 alt="SmarTest Examiner Features"
@@ -402,7 +402,7 @@ export default function AssessmentSolutionsPage() {
                 </div>
 
                 {/* Portrait student image inside the authoring section */}
-                <div className="relative w-full max-w-xs mx-auto aspect-[3/4]  overflow-hidden mt-6">
+                <div className="relative w-full max-w-xs mx-auto aspect-3/4  overflow-hidden mt-6">
                   <Image
                     src="/images/5.jpg"
                     alt="Smarter Question Authoring"
@@ -433,7 +433,7 @@ export default function AssessmentSolutionsPage() {
                 {t("examiner.providers.title")}
               </h4>
 
-              <div className="relative w-full max-w-3xl mx-auto aspect-[16/10] overflow-hidden">
+              <div className="relative w-full max-w-3xl mx-auto aspect-16/10 overflow-hidden">
                 <Image
                   className="object-contain rounded-2xl"
                   src="/images/smartest-examiner-providers.jpg"
@@ -478,7 +478,7 @@ export default function AssessmentSolutionsPage() {
             </div>
             {/* Performance Insights Sub-section */}
             <div className="pt-10 border-t border-slate-100 space-y-8">
-              <div className="relative w-full max-w-2xl mx-auto aspect-[1/1] overflow-hidden">
+              <div className="relative w-full max-w-2xl mx-auto aspect-square overflow-hidden">
                 <Image
                   className="object-contain rounded-2xl"
                   src="/images/smartest-examiner-performance.jpg"
@@ -491,7 +491,7 @@ export default function AssessmentSolutionsPage() {
 
           {/* 3. SmarTest Nexus Details */}
           <div id="detail-nexus" className="bg-white rounded-3xl border border-slate-100 shadow-sm p-8 lg:p-12 space-y-10 relative overflow-hidden scroll-mt-20">
-            <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-blue-600/5 rounded-full blur-[100px] pointer-events-none" />
+            <div className="absolute top-0 right-0 w-100 h-100 bg-blue-600/5 rounded-full blur-[100px] pointer-events-none" />
 
             <div className="space-y-6">
               <div className="flex items-center gap-3">
@@ -504,7 +504,7 @@ export default function AssessmentSolutionsPage() {
               </h3>
             </div>
 
-            <div className="relative w-full max-w-3xl mx-auto aspect-[16/10] overflow-hidden">
+            <div className="relative w-full max-w-3xl mx-auto aspect-16/10 overflow-hidden">
               <Image
                 src="/images/smartest-nexus.jpg"
                 alt="SmarTest Nexus"
@@ -633,8 +633,8 @@ export default function AssessmentSolutionsPage() {
       <section className="py-16 px-6 max-w-7xl mx-auto">
         <div className="relative bg-white border border-slate-100 rounded-3xl p-8 lg:p-16 overflow-hidden shadow-md">
           {/* Decorative background glow */}
-          <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-red-500/5 rounded-full blur-[100px] pointer-events-none" />
-          <div className="absolute bottom-0 left-0 w-[200px] h-[200px] bg-blue-500/5 rounded-full blur-[80px] pointer-events-none" />
+          <div className="absolute top-0 right-0 w-75 h-75 bg-red-500/5 rounded-full blur-[100px] pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-50 h-50 bg-blue-500/5 rounded-full blur-[80px] pointer-events-none" />
 
           <div className="relative z-10 max-w-4xl mx-auto text-center space-y-8">
             <span className="text-red-800 bg-red-50 px-3 py-1 rounded-full font-extrabold uppercase tracking-[0.25em] text-xs">

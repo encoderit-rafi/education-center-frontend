@@ -311,7 +311,7 @@ export default function EventsPage() {
                 </section>
                 <section className="pb-24">
                     <div className="container px-6 mx-auto sm:px-12 lg:px-24 animate-pulse">
-                        <div className="w-full h-[520px] bg-slate-100 rounded-2xl mb-12" />
+                        <div className="w-full h-130 bg-slate-100 rounded-2xl mb-12" />
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             {[1, 2, 3].map(i => (
                                 <div key={i} className="h-72 bg-slate-50 rounded-xl border border-slate-100" />
@@ -397,7 +397,7 @@ export default function EventsPage() {
                         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
 
                             {/* Left: Banner Image */}
-                            <div className="lg:col-span-7 relative min-h-[320px] lg:min-h-[560px] overflow-hidden bg-slate-100">
+                            <div className="lg:col-span-7 relative min-h-80 lg:min-h-140 overflow-hidden bg-slate-100">
                                 {/* Image */}
                                 <Image
                                     src={heroImageError ? "/images/study.jpg" : getBannerImageUrl(activeEvent.bannerImage)}
@@ -407,7 +407,7 @@ export default function EventsPage() {
                                     onError={() => setHeroImageError(true)}
                                 />
                                 {/* Dark gradient overlay */}
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                                <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/30 to-transparent" />
 
                                 {/* Badges */}
                                 <div className="absolute top-5 left-5 flex flex-wrap gap-2 z-10">
@@ -506,7 +506,7 @@ export default function EventsPage() {
                                     className="group bg-white border border-gray-100 rounded-xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col"
                                 >
                                     {/* Banner image */}
-                                    <div className="relative aspect-[16/9] w-full bg-slate-100 overflow-hidden">
+                                    <div className="relative aspect-video w-full bg-slate-100 overflow-hidden">
                                         <EventCardImage
                                             src={getBannerImageUrl(event.bannerImage)}
                                             alt={event.title}
@@ -523,7 +523,7 @@ export default function EventsPage() {
                                     </div>
 
                                     {/* Card body */}
-                                    <div className="p-5 flex flex-col flex-grow">
+                                    <div className="p-5 flex flex-col grow">
                                         {/* Meta: date & location */}
                                         <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mb-3">
                                             <div className="flex items-center gap-1 text-[10px] font-semibold text-gray-400">
@@ -538,7 +538,7 @@ export default function EventsPage() {
                                             )}
                                             <div className="flex items-center gap-1 text-[10px] font-semibold text-gray-400">
                                                 <MapPin className="w-3 h-3 text-[#A11D1D]" />
-                                                <span className="truncate max-w-[100px]">{event.location || "Online"}</span>
+                                                <span className="truncate max-w-25">{event.location || "Online"}</span>
                                             </div>
                                         </div>
 
@@ -549,7 +549,7 @@ export default function EventsPage() {
 
                                         {/* Description */}
                                         <div
-                                            className="text-xs text-gray-500 line-clamp-2 leading-relaxed flex-grow mb-4"
+                                            className="text-xs text-gray-500 line-clamp-2 leading-relaxed grow mb-4"
                                             dangerouslySetInnerHTML={{ __html: event.description || "" }}
                                         />
 

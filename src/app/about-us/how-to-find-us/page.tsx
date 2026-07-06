@@ -37,7 +37,7 @@ export default function HowToFindUs() {
           {/* Right Visual */}
           <div className="relative group">
             <div className="absolute -inset-4 bg-primary/5 rounded-xl blur-3xl opacity-50 transition-opacity group-hover:opacity-100"></div>
-            <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
+            <div className="relative aspect-4/3 rounded-xl overflow-hidden shadow-2xl">
               <Image
                 src="/images/about-us/Exterior_Building.jpg"
                 alt="Our Center"
@@ -88,7 +88,7 @@ export default function HowToFindUs() {
               {t("MapSection.printButton")}
             </Button>
           </div>
-          <div className="relative aspect-[4/3] rounded-xl overflow-hidden print-map-container">
+          <div className="relative aspect-4/3 rounded-xl overflow-hidden print-map-container">
             <Image
               src="/images/about-us/TEPTH-Sharjah-Location-Map.jpg"
               alt="TEPTH Location Map"
@@ -122,7 +122,7 @@ export default function HowToFindUs() {
               <ExternalLink className="w-4 h-4 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
             </Link>
           </div>
-          <div className="relative aspect-[21/9] min-h-[450px]">
+          <div className="relative aspect-21/9 min-h-112.5">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3606.2843818318043!2d55.3589000751671!3d25.31369297763539!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f5bdc6cfb106d%3A0x26ff2a834eecd8fe!2sThe%20Exam%20Preparation%20and%20Testing%20House(TEPTH)!5e0!3m2!1sen!2sae!4v1715083800000!5m2!1sen!2sae"
               width="100%"
@@ -181,7 +181,7 @@ export default function HowToFindUs() {
                   </p>
                 </div>
               </div>
-              <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl order-1 lg:order-2 transport-img">
+              <div className="relative aspect-4/3 rounded-xl overflow-hidden shadow-2xl order-1 lg:order-2 transport-img">
                 <Image
                   src="/images/about-us/taxi-sharjah.png"
                   alt="Sharjah Taxi"
@@ -193,7 +193,7 @@ export default function HowToFindUs() {
 
             {/* 02. Public Bus */}
             <div className="grid lg:grid-cols-2 gap-16 lg:gap-32 items-center transport-grid">
-              <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl transport-img">
+              <div className="relative aspect-4/3 rounded-xl overflow-hidden shadow-2xl transport-img">
                 <Image
                   src="/images/about-us/sss.png"
                   alt="Sharjah Public Bus"
@@ -275,7 +275,7 @@ export default function HowToFindUs() {
                   </p>
                 </div>
               </div>
-              <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl order-1 lg:order-2 transport-img">
+              <div className="relative aspect-4/3 rounded-xl overflow-hidden shadow-2xl order-1 lg:order-2 transport-img">
                 <Image
                   src="/images/about-us/mmm.png"
                   alt="Dubai Metro"
@@ -358,7 +358,7 @@ export default function HowToFindUs() {
                   <div className="space-y-5 pl-5">
                     <p className="text-white/80 text-base leading-relaxed font-medium">
                       {t("DrivingDirections.publicParkingText1")}
-                      <span className="text-white font-black flex items-center gap-1 inline-flex">
+                      <span className="text-white font-black inline-flex items-center gap-1">
                         <PriceDisplay amount={2} /> {t("DrivingDirections.publicParkingText2")}
                       </span>
                     </p>

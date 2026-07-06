@@ -141,7 +141,7 @@ export default function ExamProviderPage() {
 
             {/* Right Column - Showing FULL uncropped image */}
             <div className="lg:col-span-6 flex justify-center">
-              <div className="w-full max-w-[580px] rounded-2xl overflow-hidden shadow-lg border border-slate-100 bg-slate-50 p-1.5">
+              <div className="w-full max-w-145 rounded-2xl overflow-hidden shadow-lg border border-slate-100 bg-slate-50 p-1.5">
                 <Image
                   className="w-full h-auto rounded-xl object-contain block"
                   alt="Elite professional exam delivery and test-taking facility at TEPTH"

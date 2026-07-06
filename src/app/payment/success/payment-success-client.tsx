@@ -71,17 +71,17 @@ export default function PaymentSuccessClient() {
   };
 
   return (
-    <div className="relative min-h-[85vh] w-full flex items-center justify-center bg-gradient-to-br from-slate-50 via-gray-50 to-slate-100/70 py-16 px-4 md:px-6 overflow-hidden">
+    <div className="relative min-h-[85vh] w-full flex items-center justify-center bg-linear-to-br from-slate-50 via-gray-50 to-slate-100/70 py-16 px-4 md:px-6 overflow-hidden">
       {/* Aesthetic Background Blobs */}
-      <div className="absolute top-10 left-10 w-72 h-72 rounded-full bg-emerald-200/20 blur-3xl animate-pulse duration-[8000ms]" />
-      <div className="absolute bottom-10 right-10 w-96 h-96 rounded-full bg-maroon-100/10 blur-3xl animate-pulse duration-[10000ms] delay-2000" />
-      <div className="absolute top-1/2 left-2/3 -translate-x-1/2 -translate-y-1/2 w-80 h-80 rounded-full bg-teal-100/15 blur-3xl animate-pulse duration-[9000ms] delay-1000" />
+      <div className="absolute top-10 left-10 w-72 h-72 rounded-full bg-emerald-200/20 blur-3xl animate-pulse duration-8000" />
+      <div className="absolute bottom-10 right-10 w-96 h-96 rounded-full bg-maroon-100/10 blur-3xl animate-pulse duration-10000 delay-2000" />
+      <div className="absolute top-1/2 left-2/3 -translate-x-1/2 -translate-y-1/2 w-80 h-80 rounded-full bg-teal-100/15 blur-3xl animate-pulse duration-9000 delay-1000" />
 
       {/* Main Glassmorphic Container */}
       <div className="relative w-full max-w-xl bg-white/80 backdrop-blur-md border border-white/60 shadow-[0_24px_60px_-15px_rgba(0,0,0,0.05)] rounded-3xl overflow-hidden transition-all duration-300 hover:shadow-[0_32px_70px_-10px_rgba(0,0,0,0.08)]">
 
         {/* Modern Success Gradient Bar */}
-        <div className="h-2 w-full bg-gradient-to-r from-emerald-400 via-teal-500 to-emerald-600" />
+        <div className="h-2 w-full bg-linear-to-r from-emerald-400 via-teal-500 to-emerald-600" />
 
         {/* Card Body */}
         <div className="p-6 md:p-8 text-center flex flex-col items-center">
@@ -90,8 +90,8 @@ export default function PaymentSuccessClient() {
           <div className="relative flex items-center justify-center mb-6 mt-4">
             <div className="absolute w-24 h-24 rounded-full bg-emerald-50 border border-emerald-100 animate-ping opacity-60 duration-1000" />
             <div className="absolute w-20 h-20 rounded-full bg-emerald-100/60 border border-emerald-200 animate-pulse duration-2000" />
-            <div className="relative z-10 w-16 h-16 rounded-full bg-gradient-to-tr from-emerald-500 to-teal-600 flex items-center justify-center text-white shadow-lg shadow-emerald-500/30 transition-transform duration-300 hover:scale-105">
-              <Check className="w-8 h-8 stroke-[3]" />
+            <div className="relative z-10 w-16 h-16 rounded-full bg-linear-to-tr from-emerald-500 to-teal-600 flex items-center justify-center text-white shadow-lg shadow-emerald-500/30 transition-transform duration-300 hover:scale-105">
+              <Check className="w-8 h-8 stroke-3" />
             </div>
           </div>
 

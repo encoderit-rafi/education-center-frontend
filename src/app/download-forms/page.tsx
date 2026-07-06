@@ -52,7 +52,7 @@ export default function DownloadFormsPage() {
                                         </h4>
                                     </CardHeader>
 
-                                    <CardContent className="flex-grow">
+                                    <CardContent className="grow">
                                         <p className="text-gray-500 text-sm leading-relaxed">
                                             {form.description}
                                         </p>

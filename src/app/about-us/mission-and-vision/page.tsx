@@ -30,7 +30,7 @@ export default function VisionAndMission() {
       {/* Hero Section */}
       <section className="py-16 md:py-24 px-6 md:px-8 max-w-screen-2xl mx-auto relative overflow-hidden">
         {/* Glow effect */}
-        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-red-500/5 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-0 right-0 w-100 h-100 bg-red-500/5 rounded-full blur-[120px] pointer-events-none" />
 
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
           {/* Left Content */}
@@ -51,7 +51,7 @@ export default function VisionAndMission() {
           {/* Right Visual */}
           <div className="relative group">
             <div className="absolute -inset-4 bg-primary/5 rounded-xl blur-3xl opacity-50 transition-opacity group-hover:opacity-100"></div>
-            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-md border border-slate-100 bg-white p-2">
+            <div className="relative aspect-4/3 rounded-2xl overflow-hidden shadow-md border border-slate-100 bg-white p-2">
               <Image
                 src="/images/study-1.jpg"
                 alt="TEPTH Strategic Vision"
@@ -114,8 +114,8 @@ export default function VisionAndMission() {
                   {value.icon}
                 </BaseCardIcon>
 
-                <div className="space-y-3 flex-grow">
-                  <BaseCardTitle className="text-lg font-bold text-slate-900 tracking-tight group-hover:text-[#A11D1D] transition-colors duration-200 uppercase tracking-wider">
+                <div className="space-y-3 grow">
+                  <BaseCardTitle className="text-lg font-bold text-slate-900 group-hover:text-[#A11D1D] transition-colors duration-200 uppercase tracking-wider">
                     {value.title}
                   </BaseCardTitle>
 

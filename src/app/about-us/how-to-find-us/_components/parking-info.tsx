@@ -64,7 +64,7 @@ export function ParkingInfo() {
               <h5 className="text-xl font-bold font-heading">On-Street Parking</h5>
               <p className="text-white/70 leading-relaxed">
                 Paid on-street parking is available at{" "}
-                <span className="text-white font-bold flex items-center gap-1 inline-flex">
+                <span className="text-white font-bold inline-flex items-center gap-1">
                   <PriceDisplay amount={4} /> per hour
                 </span>
                 . Payment via SMS or coins. *Seasonal pre-paid parking cards are

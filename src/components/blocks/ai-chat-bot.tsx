@@ -316,7 +316,7 @@ You said: *"${content}"*`;
 
     // ── Render ──────────────────────────────────────────────────────────────────
     return (
-        <div className="flex flex-col h-[500px] md:h-[600px] w-full max-w-full md:max-w-[500px] mx-auto border border-border rounded-2xl overflow-hidden bg-background shadow-lg">
+        <div className="flex flex-col h-125 md:h-150 w-full max-w-full md:max-w-125 mx-auto border border-border rounded-2xl overflow-hidden bg-background shadow-lg">
 
             {/* ── Header ── */}
             <div className="flex items-center gap-3 px-4 py-3 border-b border-border bg-muted/50">
@@ -347,13 +347,13 @@ You said: *"${content}"*`;
                 <div className="px-3 py-4 md:px-4 md:py-6">
                     {messages.length === 0 ? (
                         // Empty state
-                        <div className="flex flex-col items-center justify-center min-h-[350px] md:min-h-[400px] gap-6 text-center animate-in fade-in duration-700">
+                        <div className="flex flex-col items-center justify-center min-h-87.5 md:min-h-100 gap-6 text-center animate-in fade-in duration-700">
                             <div className="w-14 h-14 md:w-16 md:h-16 rounded-3xl bg-purple-50 flex items-center justify-center text-2xl md:text-3xl">✦</div>
                             <div className="space-y-2 px-4">
                                 <h3 className="text-base md:text-lg font-bold text-foreground">
                                     How can I help you today?
                                 </h3>
-                                <p className="text-xs md:text-sm text-muted-foreground max-w-[240px] md:max-w-[280px] mx-auto leading-relaxed">
+                                <p className="text-xs md:text-sm text-muted-foreground max-w-60 md:max-w-70 mx-auto leading-relaxed">
                                     Ask me anything or choose a starting point from below to get started.
                                 </p>
                             </div>
@@ -412,7 +412,7 @@ You said: *"${content}"*`;
                         onChange={(e) => setInput(e.target.value)}
                         onKeyDown={handleKeyDown}
                         placeholder="Type your message..."
-                        className="flex-1 resize-none border-0 shadow-none focus-visible:ring-0 p-1 min-h-[24px] max-h-[120px] text-sm bg-transparent"
+                        className="flex-1 resize-none border-0 shadow-none focus-visible:ring-0 p-1 min-h-6 max-h-30 text-sm bg-transparent"
                         rows={1}
                     />
                     <Button

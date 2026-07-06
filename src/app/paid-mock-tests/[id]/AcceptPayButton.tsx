@@ -85,7 +85,7 @@ export function AcceptPayButton({
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
                 {/* Dark gradient overlay so text is legible */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10" />
+                <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-black/10" />
 
                 {/* Title overlaid at the bottom of the image */}
                 <div className="absolute bottom-0 left-0 right-0 px-5 pb-4">
@@ -174,7 +174,7 @@ export function AcceptPayButton({
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
                 {/* Dark gradient overlay so text is legible */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10" />
+                <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-black/10" />
 
                 {/* Upgrade badge — top right inside the image */}
                 <div className="absolute top-3 right-3">

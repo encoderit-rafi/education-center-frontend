@@ -60,7 +60,7 @@ export default function FreeConsultationPage() {
           {/* Right Visual */}
           <div className="relative group">
             <div className="absolute -inset-4 bg-primary/5 rounded-xl blur-3xl opacity-50 transition-opacity group-hover:opacity-100"></div>
-            <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
+            <div className="relative aspect-4/3 rounded-xl overflow-hidden shadow-2xl">
               <Image
                 src="/images/free-consultation-1.png"
                 alt="Expert Consultation Session"
@@ -78,7 +78,7 @@ export default function FreeConsultationPage() {
         <div className="grid lg:grid-cols-2 gap-20 items-start">
           {/* Left Visual */}
           <div className="relative pt-12 lg:pt-0">
-            <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
+            <div className="relative aspect-4/3 rounded-xl overflow-hidden shadow-2xl">
               <Image
                 src="/images/consultation-instructor.png"
                 alt="Exam Preparation Consultation with Instructor"
@@ -201,7 +201,7 @@ export default function FreeConsultationPage() {
           {/* Right Visual */}
           <div className="relative group">
             <div className="absolute -inset-4 bg-primary/5 rounded-xl blur-3xl opacity-50 transition-opacity group-hover:opacity-100"></div>
-            <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
+            <div className="relative aspect-4/3 rounded-xl overflow-hidden shadow-2xl">
               <Image
                 src="/images/free-consultation-2.png"
                 alt="Test Centre Support"

@@ -160,7 +160,7 @@ export default function ExamWorkshopForm({
               <label
                 htmlFor={w.title}
                 className={cn(
-                  "relative block p-8 rounded-[2rem] border-2 cursor-pointer transition-all duration-300",
+                  "relative block p-8 rounded-4xl border-2 cursor-pointer transition-all duration-300",
                   selectedTitle === w.title
                     ? "border-primary bg-primary/5 shadow-xl shadow-primary/5"
                     : "border-slate-100 bg-white hover:border-slate-200",
@@ -208,7 +208,7 @@ export default function ExamWorkshopForm({
                 mode="single"
                 selected={selectedDate}
                 onSelect={(date) => setValue("date", date as Date)}
-                className="rounded-[2rem] border border-slate-100 bg-white p-6 shadow-sm"
+                className="rounded-4xl border border-slate-100 bg-white p-6 shadow-sm"
               />
               <FieldError errors={[errors.date]} />
             </FieldContent>
@@ -250,7 +250,7 @@ export default function ExamWorkshopForm({
               </FieldContent>
             </Field>
 
-            <div className="p-8 bg-slate-50 rounded-[2rem] border border-slate-100">
+            <div className="p-8 bg-slate-50 rounded-4xl border border-slate-100">
               <div className="flex items-center gap-3 mb-4">
                 <Clock className="size-5 text-primary" />
                 <h4 className="font-bold text-slate-900 uppercase text-xs tracking-widest">

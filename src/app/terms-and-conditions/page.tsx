@@ -48,8 +48,8 @@ export default function TermsAndConditionsPage() {
       className="flex flex-col min-h-screen bg-slate-50/50 pb-24 text-slate-800 font-sans"
     >
       {/* Background gradients */}
-      <div className="absolute top-0 left-0 right-0 h-[500px] bg-gradient-to-b from-[#A11D1D]/5 to-transparent pointer-events-none z-0" />
-      <div className="absolute top-[200px] left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-gradient-to-r from-red-500/5 to-amber-500/5 blur-[120px] rounded-full pointer-events-none z-0" />
+      <div className="absolute top-0 left-0 right-0 h-125 bg-linear-to-b from-[#A11D1D]/5 to-transparent pointer-events-none z-0" />
+      <div className="absolute top-50 left-1/2 -translate-x-1/2 w-150 h-75 bg-linear-to-r from-red-500/5 to-amber-500/5 blur-[120px] rounded-full pointer-events-none z-0" />
 
       {/* Header section */}
       <section className="pt-24 pb-8 relative z-10">
@@ -63,7 +63,7 @@ export default function TermsAndConditionsPage() {
             {t("title")}{" "}
             <span className="text-[#A11D1D] relative inline-block">
               {t("titleAccent")}
-              <span className="absolute left-0 bottom-1 w-full h-[6px] bg-[#A11D1D]/10 rounded-full" />
+              <span className="absolute left-0 bottom-1 w-full h-1.5 bg-[#A11D1D]/10 rounded-full" />
             </span>
           </h1>
 
@@ -75,7 +75,7 @@ export default function TermsAndConditionsPage() {
           <div className={`bg-red-50/60 backdrop-blur-sm p-6 rounded-2xl shadow-sm text-start mb-12 ${isRtl ? "border-r-4 border-[#A11D1D]" : "border-l-4 border-[#A11D1D]"
             }`}>
             <div className="flex gap-4">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-red-100 flex items-center justify-center text-[#A11D1D]">
+              <div className="shrink-0 w-10 h-10 rounded-full bg-red-100 flex items-center justify-center text-[#A11D1D]">
                 <AlertTriangle className="w-5 h-5" />
               </div>
               <div>
@@ -106,7 +106,7 @@ export default function TermsAndConditionsPage() {
                   className="group scroll-mt-36 gap-0 hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5"
                 >
                   <CardHeader className="flex-row items-center gap-4 border-b border-slate-100 pb-5 [.border-b]:pb-5">
-                    <div className="flex-shrink-0 w-12 h-12 rounded-2xl bg-red-50 text-[#A11D1D] flex items-center justify-center group-hover:bg-[#A11D1D] group-hover:text-white transition-colors duration-300 shadow-inner">
+                    <div className="shrink-0 w-12 h-12 rounded-2xl bg-red-50 text-[#A11D1D] flex items-center justify-center group-hover:bg-[#A11D1D] group-hover:text-white transition-colors duration-300 shadow-inner">
                       <Icon className="w-6 h-6" />
                     </div>
                     <CardTitle className="text-xl md:text-2xl font-black text-slate-900 group-hover:text-[#A11D1D] transition-colors">
@@ -132,7 +132,7 @@ export default function TermsAndConditionsPage() {
                               key={idx}
                               className="flex gap-3 items-start"
                             >
-                              <span className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-[#A11D1D] mt-2.5 shadow-sm" />
+                              <span className="shrink-0 w-1.5 h-1.5 rounded-full bg-[#A11D1D] mt-2.5 shadow-sm" />
                               <span
                                 dangerouslySetInnerHTML={{ __html: item }}
                                 className="flex-1"
@@ -206,7 +206,7 @@ export default function TermsAndConditionsPage() {
                                     key={idx}
                                     className="flex gap-3 items-start"
                                   >
-                                    <span className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-[#A11D1D] mt-2.5 shadow-sm" />
+                                    <span className="shrink-0 w-1.5 h-1.5 rounded-full bg-[#A11D1D] mt-2.5 shadow-sm" />
                                     <span className="flex-1">{item}</span>
                                   </li>
                                 )
