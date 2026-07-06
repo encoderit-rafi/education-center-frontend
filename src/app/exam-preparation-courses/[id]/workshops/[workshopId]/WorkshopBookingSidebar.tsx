@@ -56,7 +56,7 @@ export function WorkshopBookingSidebar({
     : baseUrl;
 
   return (
-    <div className="lg:sticky lg:top-8 bg-white rounded-3xl p-6 md:p-8 border border-slate-100 shadow-xl space-y-6">
+    <div className="lg:sticky lg:top-40 bg-white rounded-3xl p-6 md:p-8 border border-slate-100 shadow-xl space-y-6">
       <div>
         <p className="text-sm font-bold uppercase tracking-wider mb-2">
           {pricingTitle}

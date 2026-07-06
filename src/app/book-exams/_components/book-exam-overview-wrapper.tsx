@@ -414,7 +414,7 @@ export default function BookExamOverviewWrapper({
           </div>
 
           {/* ── Sidebar (identical to exam-details, but button is "Continue to Book") ── */}
-          <aside className="space-y-4 lg:pt-0">
+          <aside className="space-y-4 lg:sticky lg:top-44 self-start">
             {acceptedFor.length > 0 && (
               <BaseCard className="p-5 bg-slate-900 border-slate-800 text-white h-auto">
                 <h3 className="text-[11px] text-slate-500 mb-4">Accepted For</h3>
