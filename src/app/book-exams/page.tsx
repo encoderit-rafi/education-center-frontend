@@ -81,7 +81,7 @@ export default function BookExamPage() {
               <div key={index} className="relative card-hover p-7">
                 {index < 3 && (
                   <span
-                    className="pointer-events-none absolute -right-3 top-12 hidden h-px w-6 bg-gradient-to-r from-maroon-200 to-transparent lg:block"
+                    className="pointer-events-none absolute -right-3 top-12 hidden h-px w-6 bg-linear-to-r from-maroon-200 to-transparent lg:block"
                     aria-hidden="true"
                   >
                   </span>

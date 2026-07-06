@@ -229,7 +229,7 @@ export default async function ExamPreparationDynamicPage({
               </p>
             </div>
             {data.bannerImage && (
-              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl">
+              <div className="relative aspect-4/3 rounded-2xl overflow-hidden shadow-xl">
                 <Image
                   src={data.bannerImage}
                   alt={data.name}

@@ -23,7 +23,7 @@ export default function Loading() {
             {[1, 2, 3].map((n) => (
               <div
                 key={n}
-                className="border border-slate-100 rounded-2xl p-6 bg-slate-50/50 animate-pulse h-[300px]"
+                className="border border-slate-100 rounded-2xl p-6 bg-slate-50/50 animate-pulse h-75"
               />
             ))}
           </div>

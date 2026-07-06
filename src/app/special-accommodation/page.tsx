@@ -79,7 +79,7 @@ export default function SpecialAccommodation() {
 
             {/* Governance Alert */}
             <div className="relative overflow-hidden rounded-2xl border border-red-100 bg-red-50/40 backdrop-blur-md p-5 shadow-xs">
-              <div className="absolute inset-y-0 left-0 w-1 bg-gradient-to-b from-[#A11D1D] to-[#7a1212] rounded-l-2xl" />
+              <div className="absolute inset-y-0 left-0 w-1 bg-linear-to-b from-[#A11D1D] to-[#7a1212] rounded-l-2xl" />
               <div className="flex gap-4 pl-3">
                 <AlertCircle className="w-5 h-5 text-[#A11D1D] shrink-0 mt-0.5" />
                 <p className="text-sm text-slate-650 leading-relaxed font-semibold text-justify">
@@ -91,9 +91,9 @@ export default function SpecialAccommodation() {
 
           {/* Right — Image */}
           <div className="flex justify-center lg:justify-end">
-            <div className="relative w-full max-w-[480px]">
+            <div className="relative w-full max-w-120">
               {/* Glow ring behind image */}
-              <div className="absolute -inset-4 rounded-[2rem] bg-gradient-to-br from-[#A11D1D]/10 to-rose-500/5 blur-2xl" />
+              <div className="absolute -inset-4 rounded-4xl bg-linear-to-br from-[#A11D1D]/10 to-rose-500/5 blur-2xl" />
               <div className="relative rounded-[1.75rem] overflow-hidden shadow-xl ring-1 ring-slate-100 group">
                 <Image
                   src="/images/ADA.jpg"
@@ -156,7 +156,7 @@ export default function SpecialAccommodation() {
 
       {/* ─── ACCOMMODATIONS SUPPORTED ─── */}
       <section className="relative py-20 px-6 bg-white overflow-hidden">
-        <div className="absolute left-1/2 top-0 -translate-x-1/2 w-[800px] h-[1px] bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
+        <div className="absolute left-1/2 top-0 -translate-x-1/2 w-200 h-px bg-linear-to-r from-transparent via-slate-200 to-transparent" />
 
         <div className="max-w-7xl mx-auto">
           {/* Header */}
@@ -180,7 +180,7 @@ export default function SpecialAccommodation() {
                 className="group relative overflow-hidden rounded-2xl bg-slate-50 border border-slate-100 p-7 hover:bg-white hover:shadow-2xl hover:border-transparent hover:-translate-y-1 transition-all duration-400 cursor-default flex flex-col"
               >
                 {/* Gradient corner accent */}
-                <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-rose-100/80 to-transparent rounded-bl-[3rem] group-hover:from-rose-200/60 transition-all" />
+                <div className="absolute top-0 right-0 w-24 h-24 bg-linear-to-bl from-rose-100/80 to-transparent rounded-bl-[3rem] group-hover:from-rose-200/60 transition-all" />
 
                 {/* Icon */}
                 <div className="relative mb-5 w-12 h-12 rounded-xl bg-white border border-slate-200 shadow-xs flex items-center justify-center text-primary group-hover:border-rose-200 group-hover:shadow-md group-hover:scale-110 transition-all duration-300">
@@ -206,7 +206,7 @@ export default function SpecialAccommodation() {
       </section>
 
       {/* ─── HOW THE PROCESS WORKS ─── */}
-      <section className="relative py-20 px-6 bg-gradient-to-br from-[#7a1212] via-[#590b0b] to-[#330404] text-white overflow-hidden">
+      <section className="relative py-20 px-6 bg-linear-to-br from-[#7a1212] via-[#590b0b] to-[#330404] text-white overflow-hidden">
         {/* Mesh background */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_120%,rgba(239,68,68,0.15),transparent)] pointer-events-none" />
         <div
@@ -235,7 +235,7 @@ export default function SpecialAccommodation() {
           {/* Steps */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
             {/* Connecting line (desktop) */}
-            <div className="hidden lg:block absolute top-10 left-[calc(12.5%+2rem)] right-[calc(12.5%+2rem)] h-px bg-gradient-to-r from-transparent via-white/10 to-transparent pointer-events-none" />
+            <div className="hidden lg:block absolute top-10 left-[calc(12.5%+2rem)] right-[calc(12.5%+2rem)] h-px bg-linear-to-r from-transparent via-white/10 to-transparent pointer-events-none" />
 
             {steps.map((step, index) => (
               <div key={index} className="group flex flex-col items-center text-center space-y-5 cursor-default">
@@ -294,7 +294,7 @@ export default function SpecialAccommodation() {
                     className="group relative overflow-hidden rounded-2xl bg-white border border-slate-100 p-6 hover:shadow-xl hover:border-rose-100 hover:-translate-y-0.5 transition-all duration-300"
                   >
                     {/* Top colored strip */}
-                    <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-rose-500 to-red-600 rounded-t-2xl" />
+                    <div className="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-rose-500 to-red-600 rounded-t-2xl" />
 
                     <div className="mt-2 mb-4 w-9 h-9 rounded-xl bg-rose-50 border border-rose-100 flex items-center justify-center group-hover:scale-110 transition-transform">
                       <AlertCircle className="w-4 h-4 text-primary" />
@@ -325,7 +325,7 @@ export default function SpecialAccommodation() {
                     <h3 className="text-2xl font-black">
                       {t("questions.title")}
                     </h3>
-                    <div className="h-0.5 w-10 bg-gradient-to-r from-rose-500 to-red-400 rounded-full" />
+                    <div className="h-0.5 w-10 bg-linear-to-r from-rose-500 to-red-400 rounded-full" />
                   </div>
 
                   <div className="space-y-3">
