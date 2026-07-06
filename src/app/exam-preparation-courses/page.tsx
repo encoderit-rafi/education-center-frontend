@@ -9,6 +9,17 @@ import {
 import api from "@/axios";
 import { getLocale, getTranslations } from "next-intl/server";
 
+const examPriority = (slug: string) => {
+  const s = slug.toLowerCase();
+  if (s.startsWith("ielts")) return 1;
+  if (s.startsWith("pte")) return 2;
+  if (s.startsWith("toefl")) return 3;
+  if (s.startsWith("cael")) return 4;
+  if (s.startsWith("celpip")) return 5;
+  if (s.startsWith("selt") || s.includes("english") || s.includes("skill")) return 6;
+  return 10;
+};
+
 export default async function ExamPreparationCoursesPage() {
   const locale = await getLocale();
   const t = await getTranslations("ExamPrepListPage");
@@ -16,7 +27,9 @@ export default async function ExamPreparationCoursesPage() {
   try {
     const response = await api.get("/courses");
     if (response.data?.success) {
-      courses = response.data.data.data;
+      courses = response.data.data.data.sort(
+        (a: any, b: any) => examPriority(a.slug || "") - examPriority(b.slug || "")
+      );
     }
   } catch (error) {
     console.error("Failed to fetch courses:", error);

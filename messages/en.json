@@ -3256,6 +3256,7 @@
     }
   },
   "BookExamsPage": {
+    "otherExamsTitle": "Other Exams",
     "HeroSection": {
       "label": "Simple Process",
       "title": "How to ",

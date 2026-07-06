@@ -3206,6 +3206,7 @@
     }
   },
   "BookExamsPage": {
+    "otherExamsTitle": "اختبارات أخرى",
     "HeroSection": {
       "label": "عملية بسيطة",
       "title": "كيفية ",

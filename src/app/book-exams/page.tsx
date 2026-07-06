@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import api from "@/axios";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import {
   BaseCard,
   BaseCardArrow,
@@ -29,6 +29,7 @@ interface Exam {
   slug: string;
   description: string | null;
   examType: ExamType[];
+  translations?: Record<string, { name?: string; description?: string }> | null;
 }
 
 interface ApiResponse {
@@ -40,8 +41,25 @@ interface ApiResponse {
 
 const STEP_ICONS = [ClipboardCheck, ExternalLink, MapPin, ShieldCheck];
 
+const examPriority = (slug: string) => {
+  const s = slug.toLowerCase();
+  if (s.startsWith("ielts")) return 1;
+  if (s.startsWith("pte")) return 2;
+  if (s.startsWith("toefl")) return 3;
+  if (s.startsWith("cael")) return 4;
+  if (s.startsWith("celpip")) return 5;
+  if (s.startsWith("selt") || s.includes("english") || s.includes("skill")) return 6;
+  return 10;
+};
+
+const formatExamName = (name: string) => {
+  if (name === "CELPIP") return "CELPIP General";
+  return name;
+};
+
 export default function BookExamPage() {
   const t = useTranslations("BookExamsPage");
+  const locale = useLocale();
   const { data: examsResponse, isLoading } = useQuery<ApiResponse>({
     queryKey: ["exams", { limit: 100, sort_order: "asc", sort_by: "orderIndex" }],
     queryFn: async () => {
@@ -52,16 +70,28 @@ export default function BookExamPage() {
     },
   });
 
-  const exams =
+  const coreExams =
     examsResponse?.data?.data
       ?.filter((exam) =>
-        exam.examType?.some((et) => et.name === "group")
+        exam.examType?.some((et) => et.name === "exam")
       )
-      ?.sort((a: any, b: any) => {
-        const aVal = a.orderIndex !== undefined && a.orderIndex !== null ? Number(a.orderIndex) : Infinity;
-        const bVal = b.orderIndex !== undefined && b.orderIndex !== null ? Number(b.orderIndex) : Infinity;
-        return aVal - bVal;
-      }) ?? [];
+      ?.map((exam) => ({
+        id: exam.id,
+        name: formatExamName(exam.translations?.[locale]?.name || exam.name),
+        slug: exam.slug,
+        description: exam.translations?.[locale]?.description || exam.description || "",
+      }))
+      ?.sort((a, b) => examPriority(a.slug) - examPriority(b.slug)) ?? [];
+
+  const exams = [
+    ...coreExams,
+    {
+      id: "other-exams",
+      name: t("otherExamsTitle"),
+      slug: "other-exams",
+      description: "",
+    },
+  ];
 
   return (
     <div className="base-py space-y-12">
@@ -125,24 +155,32 @@ export default function BookExamPage() {
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-              {exams.map((exam, index) => (
-                <Link key={exam.id} href={`/book-exams/${exam.slug}`}>
-                  <BaseCard className="p-6">
-                    <div className="flex items-center justify-between gap-2">
-                      <BaseCardIcon>{index + 1}</BaseCardIcon>
-                      <BaseCardArrow />
-                    </div>
-                    <div className="flex-1 flex flex-col space-y-2">
-                      <BaseCardTitle className="uppercase tracking-tight text-lg leading-snug">
-                        {exam.name}
-                      </BaseCardTitle>
-                      <BaseCardDescription className="mb-4">
-                        {exam.description}
-                      </BaseCardDescription>
-                    </div>
-                  </BaseCard>
-                </Link>
-              ))}
+              {exams.map((exam, index) => {
+                const href =
+                  exam.slug === "other-exams"
+                    ? "/exams/other-exams"
+                    : `/book-exams/${exam.slug}`;
+                return (
+                  <Link key={exam.id} href={href}>
+                    <BaseCard className="p-6">
+                      <div className="flex items-center justify-between gap-2">
+                        <BaseCardIcon>{index + 1}</BaseCardIcon>
+                        <BaseCardArrow />
+                      </div>
+                      <div className="flex-1 flex flex-col space-y-2 mt-3">
+                        <BaseCardTitle className="uppercase tracking-tight text-lg leading-snug">
+                          {exam.name}
+                        </BaseCardTitle>
+                        {exam.description && (
+                          <BaseCardDescription className="mb-4">
+                            {exam.description}
+                          </BaseCardDescription>
+                        )}
+                      </div>
+                    </BaseCard>
+                  </Link>
+                );
+              })}
             </div>
           )}
         </div>
