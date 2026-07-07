@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { cn, omitEmpty } from "@/lib/utils";
-import { VAT_PERCENT, calculateVatForCountry } from "@/lib/vat";
+import { VAT_PERCENT } from "@/lib/vat";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import api from "@/axios";
 import {
@@ -29,18 +29,19 @@ import Image from "next/image";
 import { useTranslations, useLocale } from "next-intl";
 import { AED } from "@/components/ui/aed";
 
-const getBookingSchema = (t: any) => z.object({
-  mockTestId: z.string().optional(),
-  firstName: z.string().min(2, t("validation.firstName")),
-  middleName: z.string().optional(),
-  lastName: z.string().min(1, t("validation.lastName")),
-  email: z.string().email(t("validation.email")),
-  phone: z.string().min(1, t("validation.phone")),
-  address: z.string().min(1, t("validation.address")),
-  city: z.string().min(1, t("validation.city")),
-  country: z.string().min(1, t("validation.country")),
-  paymentMethod: z.enum(["stripe", "paypal"]),
-});
+const getBookingSchema = (t: any) =>
+  z.object({
+    mockTestId: z.string().optional(),
+    firstName: z.string().min(2, t("validation.firstName")),
+    middleName: z.string().optional(),
+    lastName: z.string().min(1, t("validation.lastName")),
+    email: z.string().email(t("validation.email")),
+    phone: z.string().min(1, t("validation.phone")),
+    address: z.string().min(1, t("validation.address")),
+    city: z.string().min(1, t("validation.city")),
+    country: z.string().min(1, t("validation.country")),
+    paymentMethod: z.enum(["stripe", "paypal"]),
+  });
 
 type BookingValues = z.infer<ReturnType<typeof getBookingSchema>>;
 type CoursePackage = {
@@ -148,7 +149,10 @@ function CourseRegistrationForm({ className }: { className?: string }) {
       couponDiscount = value;
     }
     // Cap coupon discount at maxDiscountAmount if specified
-    if (appliedCoupon.maxDiscountAmount && couponDiscount > parseFloat(appliedCoupon.maxDiscountAmount)) {
+    if (
+      appliedCoupon.maxDiscountAmount &&
+      couponDiscount > parseFloat(appliedCoupon.maxDiscountAmount)
+    ) {
       couponDiscount = parseFloat(appliedCoupon.maxDiscountAmount);
     }
     // Cap at base_price to avoid negative total
@@ -157,7 +161,15 @@ function CourseRegistrationForm({ className }: { className?: string }) {
 
   const discount_amount = couponDiscount;
   const subtotal = base_price - discount_amount;
-  const vatAmount = calculateVatForCountry(subtotal, formData.country);
+  const selectedCountry = formData.country;
+  const isUae =
+    selectedCountry?.toLowerCase() === "united arab emirates" ||
+    selectedCountry?.toLowerCase() === "uae";
+  const vatRate = packageData?.vatRate ? parseFloat(packageData.vatRate) : 0;
+  console.log("👉 ~ CourseRegistrationForm ~ vatRate:", vatRate);
+
+  const activeVatPercent = vatRate === 0 ? VAT_PERCENT : isUae ? vatRate : 0;
+  const vatAmount = Number((subtotal * (activeVatPercent / 100)).toFixed(2));
   const total_amount = subtotal + vatAmount;
 
   const handleApplyCoupon = async (e: React.MouseEvent) => {
@@ -191,7 +203,11 @@ function CourseRegistrationForm({ className }: { className?: string }) {
           }
         }
 
-        if (coupon.applicableEntityIds && Array.isArray(coupon.applicableEntityIds) && coupon.applicableEntityIds.length > 0) {
+        if (
+          coupon.applicableEntityIds &&
+          Array.isArray(coupon.applicableEntityIds) &&
+          coupon.applicableEntityIds.length > 0
+        ) {
           if (packageId && !coupon.applicableEntityIds.includes(packageId)) {
             setCouponError(t("couponErrors.notApplicable"));
             setIsValidatingCoupon(false);
@@ -199,17 +215,24 @@ function CourseRegistrationForm({ className }: { className?: string }) {
           }
         }
 
-        if (coupon.minPurchaseAmount && base_price < parseFloat(coupon.minPurchaseAmount)) {
+        if (
+          coupon.minPurchaseAmount &&
+          base_price < parseFloat(coupon.minPurchaseAmount)
+        ) {
           setCouponError(
             locale === "ar" ? (
               <span className="flex items-center gap-0.5">
-                الحد الأدنى لقيمة الشراء المطلوبة هو <AED className="h-[0.8em] w-auto fill-current inline-block" /> {coupon.minPurchaseAmount}
+                الحد الأدنى لقيمة الشراء المطلوبة هو{" "}
+                <AED className="h-[0.8em] w-auto fill-current inline-block" />{" "}
+                {coupon.minPurchaseAmount}
               </span>
             ) : (
               <span className="flex items-center gap-0.5">
-                Minimum purchase amount of <AED className="h-[0.8em] w-auto fill-current inline-block" /> {coupon.minPurchaseAmount} required.
+                Minimum purchase amount of{" "}
+                <AED className="h-[0.8em] w-auto fill-current inline-block" />{" "}
+                {coupon.minPurchaseAmount} required.
               </span>
-            )
+            ),
           );
           setIsValidatingCoupon(false);
           return;
@@ -218,11 +241,16 @@ function CourseRegistrationForm({ className }: { className?: string }) {
         setAppliedCoupon(coupon);
         setCouponCodeInput("");
       } else {
-        setCouponError(result?.data?.error || result?.message || t("couponErrors.invalid"));
+        setCouponError(
+          result?.data?.error || result?.message || t("couponErrors.invalid"),
+        );
       }
     } catch (err: any) {
       console.error("Coupon validation error:", err);
-      const errMsg = err?.response?.data?.message || err?.response?.data?.data?.error || t("couponErrors.failed");
+      const errMsg =
+        err?.response?.data?.message ||
+        err?.response?.data?.data?.error ||
+        t("couponErrors.failed");
       setCouponError(errMsg);
     } finally {
       setIsValidatingCoupon(false);
@@ -310,7 +338,7 @@ function CourseRegistrationForm({ className }: { className?: string }) {
           <p className="text-emerald-700/80 text-base leading-relaxed font-medium">
             {t.rich("success.message", {
               courseName: courseName,
-              bold: (chunks) => <strong>{chunks}</strong>
+              bold: (chunks) => <strong>{chunks}</strong>,
             })}
           </p>
         </div>
@@ -332,7 +360,9 @@ function CourseRegistrationForm({ className }: { className?: string }) {
           <h1 className="text-3xl mb-12 text-center font-black leading-[1.1] tracking-tight text-slate-900 lg:text-4xl xl:text-5xl">
             {t.rich("title", {
               courseName: courseName,
-              primary: (chunks) => <span className="text-primary">{chunks}</span>
+              primary: (chunks) => (
+                <span className="text-primary">{chunks}</span>
+              ),
             })}
           </h1>
 
@@ -368,7 +398,10 @@ function CourseRegistrationForm({ className }: { className?: string }) {
                       <FieldError errors={[errors.middleName]} />
                     </FieldContent>
                   </Field>
-                  <Field className="col-span-2" data-invalid={!!errors.lastName}>
+                  <Field
+                    className="col-span-2"
+                    data-invalid={!!errors.lastName}
+                  >
                     <FieldLabel required>{t("lastNameLabel")}</FieldLabel>
                     <FieldContent>
                       <Input
@@ -400,7 +433,9 @@ function CourseRegistrationForm({ className }: { className?: string }) {
                       <PhoneInput
                         name="phone"
                         value={formData.phone}
-                        onChange={(val) => setValue("phone", val, { shouldValidate: true })}
+                        onChange={(val) =>
+                          setValue("phone", val, { shouldValidate: true })
+                        }
                         defaultCountry="AE"
                         aria-invalid={!!errors.phone}
                       />
@@ -415,7 +450,11 @@ function CourseRegistrationForm({ className }: { className?: string }) {
                         placeholder={t("countryPlaceholder")}
                         value={formData.country}
                         aria-invalid={!!errors.country}
-                        onChange={(country) => setValue("country", country.name, { shouldValidate: true })}
+                        onChange={(country) =>
+                          setValue("country", country.name, {
+                            shouldValidate: true,
+                          })
+                        }
                       />
                       <FieldError errors={[errors.country]} />
                     </FieldContent>
@@ -460,7 +499,7 @@ function CourseRegistrationForm({ className }: { className?: string }) {
                     <Tag className="w-3.5 h-3.5 text-primary" />
                     <span>{t("havePromoCode")}</span>
                   </div>
-                  
+
                   {!appliedCoupon ? (
                     <div className="space-y-2">
                       <div className="flex gap-2">
@@ -478,7 +517,9 @@ function CourseRegistrationForm({ className }: { className?: string }) {
                         <Button
                           type="button"
                           onClick={handleApplyCoupon}
-                          disabled={isValidatingCoupon || !couponCodeInput.trim()}
+                          disabled={
+                            isValidatingCoupon || !couponCodeInput.trim()
+                          }
                           className="h-10 px-5 text-xs font-bold uppercase tracking-wider shrink-0 bg-primary hover:bg-primary/90 text-white rounded-lg shadow-sm hover:shadow transition-all duration-200"
                         >
                           {isValidatingCoupon ? (
@@ -505,14 +546,19 @@ function CourseRegistrationForm({ className }: { className?: string }) {
                           <p className="text-xs font-black text-emerald-800 uppercase tracking-wide">
                             {appliedCoupon.code}
                           </p>
-                           <p className="text-[10px] font-semibold text-emerald-600 flex items-center gap-0.5">
+                          <p className="text-[10px] font-semibold text-emerald-600 flex items-center gap-0.5">
                             {appliedCoupon.discountType === "PERCENTAGE" ? (
-                              t("percentageOff", { value: appliedCoupon.discountValue })
+                              t("percentageOff", {
+                                value: appliedCoupon.discountValue,
+                              })
                             ) : (
                               <>
-                                {locale === "ar" ? "تم تطبيق خصم" : "Discount of"}{" "}
+                                {locale === "ar"
+                                  ? "تم تطبيق خصم"
+                                  : "Discount of"}{" "}
                                 <AED className="h-[0.8em] w-auto fill-current inline-block" />
-                                {appliedCoupon.discountValue} {locale === "ar" ? "" : "applied"}
+                                {appliedCoupon.discountValue}{" "}
+                                {locale === "ar" ? "" : "applied"}
                               </>
                             )}
                           </p>
@@ -553,14 +599,16 @@ function CourseRegistrationForm({ className }: { className?: string }) {
                     <>
                       {discount_amount > 0 && (
                         <div className="flex justify-between items-center text-slate-600 pt-2 mt-2 border-t">
-                          <span className="font-semibold text-slate-500">Subtotal</span>
+                          <span className="font-semibold text-slate-500">
+                            Subtotal
+                          </span>
                           <span>
                             <PriceDisplay amount={subtotal} />
                           </span>
                         </div>
                       )}
                       <div className="flex justify-between items-center text-slate-600">
-                        <span>VAT ({VAT_PERCENT}%)</span>
+                        <span>VAT ({activeVatPercent}%)</span>
                         <span>
                           <PriceDisplay amount={vatAmount} />
                         </span>
@@ -596,7 +644,9 @@ function CourseRegistrationForm({ className }: { className?: string }) {
                     >
                       <RadioGroupItem value="stripe" id="payment-stripe" />
                       <div className="w-full flex items-center justify-between gap-2 ">
-                        <span className="font-semibold">{t("creditCardLabel")}</span>
+                        <span className="font-semibold">
+                          {t("creditCardLabel")}
+                        </span>
                         <Image
                           src="/images/cards.png"
                           alt="Stripe"
