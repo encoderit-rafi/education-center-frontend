@@ -1,4 +1,5 @@
 import { format } from "date-fns";
+import { EXAM_DETAILE_DATA } from "@/data";
 
 export interface BookingPayloadInput {
   userId?: string | null;
@@ -55,6 +56,23 @@ export function compileBookingPayload(input: BookingPayloadInput) {
   const formatSessionTime = (timeStr?: string | null) => {
     if (!timeStr) return undefined;
     const trimmed = timeStr.trim().toUpperCase();
+
+    if (input.examId?.toLowerCase().includes("toefl")) {
+      const dateObj = input.sessionDate ? new Date(input.sessionDate) : null;
+      if (dateObj && !isNaN(dateObj.getTime())) {
+        const day =
+          typeof input.sessionDate === "string" &&
+          input.sessionDate.includes("-")
+            ? dateObj.getUTCDay()
+            : dateObj.getDay();
+        if (day === 3 && trimmed === "PM") {
+          return "18:00";
+        } else if (day === 6 && trimmed === "AM") {
+          return "10:00";
+        }
+      }
+    }
+
     if (trimmed === "AM") return "09:00";
     if (trimmed === "PM") return "13:00";
 
@@ -83,8 +101,10 @@ export function compileBookingPayload(input: BookingPayloadInput) {
     user_id: input.userId || undefined,
     exam_id: input.examId,
     course_id: input.courseId || null,
-    package_id: input.packageId || input.allFormData.selectedCourse || undefined,
-    workshop_id: input.workshopId || input.allFormData.selectedWorkshop || undefined,
+    package_id:
+      input.packageId || input.allFormData.selectedCourse || undefined,
+    workshop_id:
+      input.workshopId || input.allFormData.selectedWorkshop || undefined,
     workshop_package_id: input.workshopPackageId || undefined,
     payment_id: input.paymentId || undefined,
     payment_methods: input.paymentMethod || "stripe",
@@ -112,45 +132,211 @@ export function compileBookingPayload(input: BookingPayloadInput) {
   };
 
   const coreKeys = [
-    "examId", "exam_id",
-    "paymentMethod", "payment_methods",
-    "firstName", "first_name",
-    "middleName", "middle_name",
-    "lastName", "last_name",
-    "dateOfBirth", "date_of_birth",
-    "gender", "sex",
+    "examId",
+    "exam_id",
+    "paymentMethod",
+    "payment_methods",
+    "firstName",
+    "first_name",
+    "middleName",
+    "middle_name",
+    "lastName",
+    "last_name",
+    "dateOfBirth",
+    "date_of_birth",
+    "gender",
+    "sex",
     "nationality",
-    "email", "emailUsername",
-    "phone", "mobileNumber",
-    "address", "country",
-    "idType", "id_type",
-    "idNumber", "id_number",
-    "sessionDate", "session_date", "examDate", "exam_date",
-    "sessionTime", "session_time", "examTimeSlot", "examTime",
-    "examFee", "exam_fee",
-    "courseFee", "course_fee",
-    "workshopFee", "workshop_fee",
-    "additionalFee", "additional_fee",
-    "discountAmount", "discount_amount",
-    "vatAmount", "vat_amount",
-    "totalAmount", "total_amount",
-    "userId", "user_id",
-    "courseId", "course_id",
-    "packageId", "package_id",
-    "workshopId", "workshop_id",
-    "workshopPackageId", "workshop_package_id",
-    "paymentId", "payment_id",
+    "email",
+    "emailUsername",
+    "phone",
+    "mobileNumber",
+    "address",
+    "country",
+    "idType",
+    "id_type",
+    "idNumber",
+    "id_number",
+    "sessionDate",
+    "session_date",
+    "examDate",
+    "exam_date",
+    "sessionTime",
+    "session_time",
+    "examTimeSlot",
+    "examTime",
+    "examFee",
+    "exam_fee",
+    "courseFee",
+    "course_fee",
+    "workshopFee",
+    "workshop_fee",
+    "additionalFee",
+    "additional_fee",
+    "discountAmount",
+    "discount_amount",
+    "vatAmount",
+    "vat_amount",
+    "totalAmount",
+    "total_amount",
+    "userId",
+    "user_id",
+    "courseId",
+    "course_id",
+    "packageId",
+    "package_id",
+    "workshopId",
+    "workshop_id",
+    "workshopPackageId",
+    "workshop_package_id",
+    "paymentId",
+    "payment_id",
   ];
 
-  const formData: Record<string, any> = {};
+  const keyToLabelMap: Record<string, string> = {
+    testModule: "Test Module",
+    givenNames: "Given Names",
+    middleName: "Middle Name",
+    surnames: "Surnames",
+    noSurname: "No Surname",
+    birthCity: "City of Birth",
+    birthCountry: "Country of Birth",
+    postcode: "Post Code",
+    poBox: "P.O. Box",
+    dateOfBirth: "Date of Birth",
+    sex: "Gender",
+    gender: "Gender",
+    email: "Email",
+    mobileNumber: "Mobile Number",
+    phoneNumber: "Phone Number",
+    smsConsent: "SMS Consent",
+    residenceCountry: "Country of Residence",
+    postalAddress1: "Address Line 1",
+    postalAddress2: "Address Line 2",
+    postalAddress3: "Address Line 3",
+    streetAddress1: "Street Address 1",
+    streetAddress2: "Street Address 2",
+    city: "Town / City",
+    marketingPreference: "Marketing Preference",
+    idType: "ID Type",
+    idNumber: "ID Number",
+    idExpiryDate: "ID Expiry Date",
+    issuingAuthority: "Issuing Authority",
+    nationality: "Country of Nationality",
+    takenBefore: "Taken Before",
+    lessThanTwoYears: "Less Than Two Years",
+    existingAccount: "Existing Account",
+    firstLanguage: "First Language",
+    firstLanguageOther: "First Language (Other)",
+    yearsStudyingEnglish: "Years Studying English",
+    educationLevel: "Education Level",
+    occupationLevel: "Occupation Level",
+    occupationLevelOther: "Occupation Level (Other)",
+    occupationSector: "Occupation Sector",
+    occupationSectorOther: "Occupation Sector (Other)",
+    reasonForTakingTest: "Reason for Taking Test",
+    reasonForTakingTestOther: "Reason for Taking Test (Other)",
+    destinationCountry: "Destination Country",
+    selectedCourse: "Selected Course",
+    selectedWorkshop: "Selected Workshop",
+    vatNumber: "VAT Number",
+    paymentMethod: "Payment Method",
+    examDate: "Exam Date",
+    examTimeSlot: "Exam Time Slot",
+    speakingSlot: "Speaking Slot",
+    level_name: "Selected Level",
+  };
+
+  const getLabel = (key: string) => {
+    if (keyToLabelMap[key]) return keyToLabelMap[key];
+    return key
+      .replace(/([A-Z])/g, " $1")
+      .replace(/^./, (str) => str.toUpperCase())
+      .trim();
+  };
+
+  const examInfoList: Array<{ name: string; label: string; value: string }> =
+    [];
+  const documentsList: Array<{ name: string; label: string; value: string }> =
+    [];
+
   for (const [key, value] of Object.entries(input.allFormData)) {
-    if (!coreKeys.includes(key)) {
-      formData[key] = value;
+    if (key === "idDocument" || key === "confirmEmail") continue;
+
+    let valueStr = "";
+    if (value instanceof Date) {
+      valueStr = format(value, "yyyy-MM-dd");
+    } else if (typeof value === "boolean") {
+      valueStr = value ? "Yes" : "No";
+    } else if (value !== null && value !== undefined && value !== "") {
+      valueStr = String(value);
+    }
+
+    if (key === "examTimeSlot" || key === "sessionTime" || key === "examTime") {
+      if (input.examId?.toLowerCase().includes("toefl")) {
+        const dateObj = input.sessionDate ? new Date(input.sessionDate) : null;
+        if (dateObj && !isNaN(dateObj.getTime())) {
+          const day =
+            typeof input.sessionDate === "string" &&
+            input.sessionDate.includes("-")
+              ? dateObj.getUTCDay()
+              : dateObj.getDay();
+          if (day === 3) {
+            valueStr = "6:00 PM";
+          } else if (day === 6) {
+            valueStr = "10:00 AM";
+          }
+        }
+      }
+    }
+
+    if (key === "idDocumentUrl") {
+      documentsList.push({
+        name: "id_document_url",
+        label: "ID Document",
+        value: valueStr,
+      });
+    } else {
+      examInfoList.push({
+        name: key,
+        label: getLabel(key),
+        value: valueStr || "N/A",
+      });
     }
   }
-  payload.form_data = formData;
+
+  // Fallback if idDocument is a relative file path and idDocumentUrl is missing
+  if (
+    documentsList.length === 0 &&
+    input.allFormData.idDocument &&
+    typeof input.allFormData.idDocument === "string"
+  ) {
+    documentsList.push({
+      name: "id_document_url",
+      label: "ID Document",
+      value: input.allFormData.idDocument,
+    });
+  }
+
+  if (!examInfoList.some((item) => item.name === "level_name")) {
+    const staticMeta = EXAM_DETAILE_DATA.find(
+      (item: any) => item.id === input.examId || item.slug === input.examId,
+    );
+    if (staticMeta) {
+      examInfoList.unshift({
+        name: "level_name",
+        label: "Selected Level",
+        value: staticMeta.name,
+      });
+    }
+  }
+
+  payload.form_data = {
+    exam_info: examInfoList,
+    documents: documentsList,
+  };
 
   return Object.fromEntries(
-    Object.entries(payload).filter(([_, v]) => v !== undefined)
+    Object.entries(payload).filter(([_, v]) => v !== undefined),
   );
 }
