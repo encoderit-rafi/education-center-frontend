@@ -228,19 +228,15 @@ export default async function BookExamsId({
     case "celpip-general":
     case "celpip-general-ls":
       return (
-        <BookExamOverviewWrapper exam={examInfo}>
-          <div className="min-h-[60vh] p-2 flex items-center justify-center bg-white">
-            <CelpipInfo />
-          </div>
-        </BookExamOverviewWrapper>
+        <div className="min-h-[60vh] p-2 flex items-center justify-center bg-white">
+          <CelpipInfo />
+        </div>
       );
     case "cael":
       return (
-        <BookExamOverviewWrapper exam={examInfo}>
-          <div className="min-h-[60vh] p-2 flex items-center justify-center bg-white">
-            <CaelInfo />
-          </div>
-        </BookExamOverviewWrapper>
+        <div className="min-h-[60vh] p-2 flex items-center justify-center bg-white">
+          <CaelInfo />
+        </div>
       );
     case "selt-a1":
     case "ukvi-speaking-and-listening-at-level-a1":
