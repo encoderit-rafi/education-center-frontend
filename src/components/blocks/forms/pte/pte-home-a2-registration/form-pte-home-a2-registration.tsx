@@ -1,6 +1,9 @@
 "use client";
 import { format } from "date-fns";
-import { GlobalReviewStep, ReviewSummaryGrid } from "@/components/blocks/forms/global-review-step";
+import {
+  GlobalReviewStep,
+  ReviewSummaryGrid,
+} from "@/components/blocks/forms/global-review-step";
 
 import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -22,17 +25,13 @@ import api from "@/axios";
 import { VAT_PERCENT, calculateVat } from "@/lib/vat";
 import { compileBookingPayload } from "@/lib/booking";
 
-
-
-
-
-
-
 interface FormProps {
   examId?: string;
 }
 
-export default function FormPTEHomeA2Registration({ examId: initialExamId }: FormProps = {}) {
+export default function FormPTEHomeA2Registration({
+  examId: initialExamId,
+}: FormProps = {}) {
   const [currentStep, setCurrentStep] = useState(0); // 0: Terms, 1: Date, 2: Form, 3: Review
 
   const { data: examsResponse } = useQuery({
@@ -96,7 +95,6 @@ export default function FormPTEHomeA2Registration({ examId: initialExamId }: For
     };
     return acc;
   }, {});
-  
 
   const form = useForm<TPteHomeA2Schema>({
     resolver: zodResolver(PteHomeA2Schema),
@@ -161,18 +159,24 @@ export default function FormPTEHomeA2Registration({ examId: initialExamId }: For
   };
 
   const calculateTotal = () => {
-    const baseFee = activeExam?.examFee && parseFloat(activeExam.examFee) > 0 ? parseFloat(activeExam.examFee) : 1230;
-    const serviceFee = activeExam?.additionalFee && parseFloat(activeExam.additionalFee) > 0 ? parseFloat(activeExam.additionalFee) : 150;
+    const baseFee =
+      activeExam?.examFee && parseFloat(activeExam.examFee) > 0
+        ? parseFloat(activeExam.examFee)
+        : 1230;
+    const serviceFee =
+      activeExam?.additionalFee && parseFloat(activeExam.additionalFee) > 0
+        ? parseFloat(activeExam.additionalFee)
+        : 150;
     const selectedCourseData = formData.selectedCourse
       ? coursesData.find((c: any) => c.id === formData.selectedCourse)
       : null;
     const coursePrice = selectedCourseData
-      ? selectedCourseData.discounted_price ?? selectedCourseData.price
+      ? (selectedCourseData.discounted_price ?? selectedCourseData.price)
       : 0;
     const workshopPrice = formData.selectedWorkshop
       ? (workshopsData as any)[formData.selectedWorkshop].price
       : 0;
-    
+
     const subtotal = baseFee + serviceFee + coursePrice + workshopPrice;
     const vatAmount = calculateVat(subtotal);
 
@@ -204,12 +208,17 @@ export default function FormPTEHomeA2Registration({ examId: initialExamId }: For
         }
       } else {
         console.error("Checkout URL not found in response");
-        toast.error("Checkout URL not found in server response.", { id: "pte-submit" });
+        toast.error("Checkout URL not found in server response.", {
+          id: "pte-submit",
+        });
       }
     },
     onError: (error: any) => {
       console.error("Payment initiation failed:", error);
-      toast.error(error?.response?.data?.message || "Payment initiation failed.", { id: "pte-submit" });
+      toast.error(
+        error?.response?.data?.message || "Payment initiation failed.",
+        { id: "pte-submit" },
+      );
     },
   });
 
@@ -229,7 +238,9 @@ export default function FormPTEHomeA2Registration({ examId: initialExamId }: For
     },
     onError: (error: any) => {
       console.error("Booking failed:", error);
-      toast.error(error?.response?.data?.message || "Exam booking failed.", { id: "pte-submit" });
+      toast.error(error?.response?.data?.message || "Exam booking failed.", {
+        id: "pte-submit",
+      });
     },
   });
 
@@ -256,7 +267,9 @@ export default function FormPTEHomeA2Registration({ examId: initialExamId }: For
             throw new Error("Failed to upload identity document.");
           }
 
-          const apiBase = api.defaults.baseURL || "https://vote.encoder-test-vpn.space/api/v1";
+          const apiBase =
+            api.defaults.baseURL ||
+            "https://vote.encoder-test-vpn.space/api/v1";
           const apiHost = apiBase.replace("/api/v1", "");
           idDocumentUrl = relativeUrl.startsWith("http")
             ? relativeUrl
@@ -264,23 +277,31 @@ export default function FormPTEHomeA2Registration({ examId: initialExamId }: For
         }
 
         if (!examId) {
-          toast.error("Exam details are still loading. Please try again in a moment.", { id: "pte-submit" });
+          toast.error(
+            "Exam details are still loading. Please try again in a moment.",
+            { id: "pte-submit" },
+          );
           return;
         }
 
         toast.loading("Submitting booking request...", { id: "pte-submit" });
         const compiledPayload = compileBookingPayload({
           examId,
-          paymentMethod: ((formData as any).paymentMethod as string) || "stripe",
-          firstName: data.noGivenNames ? "N/A" : (data.givenNames || ""),
+          paymentMethod:
+            ((formData as any).paymentMethod as string) || "stripe",
+          firstName: data.noGivenNames ? "N/A" : data.givenNames || "",
           middleName: data.middleName || null,
-          lastName: data.noSurname ? "N/A" : (data.surnames || null),
+          lastName: data.noSurname ? "N/A" : data.surnames || null,
           dateOfBirth: data.dateOfBirth,
-          gender: data.gender ? (data.gender.charAt(0).toUpperCase() + data.gender.slice(1)) : null,
+          gender: data.gender
+            ? data.gender.charAt(0).toUpperCase() + data.gender.slice(1)
+            : null,
           nationality: data.countryOfCitizenship || "",
           email: data.emailUsername || "",
           phone: data.mobileNumber || "",
-          address: (data.postalAddress1 || "") + (data.postalAddress2 ? `, ${data.postalAddress2}` : ""),
+          address:
+            (data.postalAddress1 || "") +
+            (data.postalAddress2 ? `, ${data.postalAddress2}` : ""),
           country: data.countryOfResidence || null,
           idType: data.idType,
           idNumber: data.idNumber,
@@ -295,6 +316,14 @@ export default function FormPTEHomeA2Registration({ examId: initialExamId }: For
           totalAmount: total,
           allFormData: {
             ...data,
+            level_name: activeExam?.name || "PTE Home A2",
+            selected_course_name: data.selectedCourse
+              ? courseDetail?.name
+              : undefined,
+            selected_workshop_name: data.selectedWorkshop
+              ? dbWorkshops.find((w: any) => w.id === data.selectedWorkshop)
+                  ?.name
+              : undefined,
             idDocumentUrl,
           },
           courseId: data.selectedCourse ? courseDetail?.id : null,
@@ -302,7 +331,10 @@ export default function FormPTEHomeA2Registration({ examId: initialExamId }: For
         bookingMutation.mutate(compiledPayload);
       } catch (error: any) {
         console.error("Form submission error:", error);
-        toast.error(error?.message || "Something went wrong during submission.", { id: "pte-submit" });
+        toast.error(
+          error?.message || "Something went wrong during submission.",
+          { id: "pte-submit" },
+        );
       }
     }
   };
@@ -321,7 +353,7 @@ export default function FormPTEHomeA2Registration({ examId: initialExamId }: For
 
   const onInvalid = (errors: any) => {
     console.error("Validation Errors:", errors);
-    
+
     const fieldLabels: Record<string, string> = {
       givenNames: "First / Given Names",
       surnames: "Surnames",
@@ -363,9 +395,10 @@ export default function FormPTEHomeA2Registration({ examId: initialExamId }: For
     const errorFields = Object.keys(errors);
     if (errorFields.length > 0) {
       const firstErrorField = errorFields[0];
-      const errorMessage = errors[firstErrorField]?.message || "This field is required";
+      const errorMessage =
+        errors[firstErrorField]?.message || "This field is required";
       const label = fieldLabels[firstErrorField] || firstErrorField;
-      
+
       toast.error(`Validation Error: ${label} - ${errorMessage}`, {
         description: `Please fix ${errorFields.length} field(s) before proceeding.`,
         duration: 5000,
@@ -381,7 +414,7 @@ export default function FormPTEHomeA2Registration({ examId: initialExamId }: For
 
   const nextStep = async () => {
     let fieldsToValidate: any[] = [];
-    
+
     if (currentStep === 1) {
       fieldsToValidate = ["examDate", "examTime"];
     } else if (currentStep === 2) {
@@ -448,7 +481,9 @@ export default function FormPTEHomeA2Registration({ examId: initialExamId }: For
               onEdit={() => goToStep(2)}
               onSubmit={form.handleSubmit(handleFormSubmit, onInvalid)}
               paymentMethodValue={(formData as any)?.paymentMethod}
-              onPaymentMethodChange={(val) => (form.setValue as any)("paymentMethod", val)}
+              onPaymentMethodChange={(val) =>
+                (form.setValue as any)("paymentMethod", val)
+              }
               paymentMethodError={(form.formState.errors as any)?.paymentMethod}
               examName="PTE Home A2 Exam"
               baseFee={pricing.baseFee}
@@ -456,40 +491,101 @@ export default function FormPTEHomeA2Registration({ examId: initialExamId }: For
               total={total}
               selectedCourseData={
                 formData.selectedCourse
-                  ? coursesData.find((c: any) => c.id === formData.selectedCourse)
+                  ? coursesData.find(
+                      (c: any) => c.id === formData.selectedCourse,
+                    )
                   : undefined
               }
-              selectedWorkshopData={formData.selectedWorkshop ? (workshopsData as any)[formData.selectedWorkshop] : undefined}
+              selectedWorkshopData={
+                formData.selectedWorkshop
+                  ? (workshopsData as any)[formData.selectedWorkshop]
+                  : undefined
+              }
               reviewStepNumber={3}
               paymentStepNumber={4}
             >
               <ReviewSummaryGrid
                 personalDetails={[
-                  { label: "Given Names", value: formData.noGivenNames ? "N/A" : formData.givenNames },
+                  {
+                    label: "Given Names",
+                    value: formData.noGivenNames ? "N/A" : formData.givenNames,
+                  },
                   { label: "Middle Name", value: formData.middleName || "N/A" },
-                  { label: "Surnames", value: formData.noSurname ? "N/A" : formData.surnames },
-                  { label: "Date of Birth", value: formData.dateOfBirth ? format(new Date(formData.dateOfBirth as any), "PPP") : "N/A" },
+                  {
+                    label: "Surnames",
+                    value: formData.noSurname ? "N/A" : formData.surnames,
+                  },
+                  {
+                    label: "Date of Birth",
+                    value: formData.dateOfBirth
+                      ? format(new Date(formData.dateOfBirth as any), "PPP")
+                      : "N/A",
+                  },
                   { label: "Sex", value: formData.gender || "N/A" },
-                  { label: "Mobile Number", value: formData.mobileNumber || "N/A" },
-                  { label: "Nationality", value: formData.countryOfCitizenship || "N/A" },
+                  {
+                    label: "Mobile Number",
+                    value: formData.mobileNumber || "N/A",
+                  },
+                  {
+                    label: "Nationality",
+                    value: formData.countryOfCitizenship || "N/A",
+                  },
                 ]}
                 identityContact={[
-                  { label: "ID Type", value: formData.idType?.replace("_", " ") },
+                  {
+                    label: "ID Type",
+                    value: formData.idType?.replace("_", " "),
+                  },
                   { label: "ID Number", value: formData.idNumber || "N/A" },
                   { label: "Email", value: formData.emailUsername },
-                  { label: "ID Expiry Date", value: formData.idExpiryDate ? format(new Date(formData.idExpiryDate as any), "PPP") : "N/A" },
-                  { label: "Identity Document", value: formData.passportCopy ? (formData.passportCopy as File).name : "No file attached" },
+                  {
+                    label: "ID Expiry Date",
+                    value: formData.idExpiryDate
+                      ? format(new Date(formData.idExpiryDate as any), "PPP")
+                      : "N/A",
+                  },
+                  {
+                    label: "Identity Document",
+                    value: formData.passportCopy
+                      ? (formData.passportCopy as File).name
+                      : "No file attached",
+                  },
                 ]}
                 testInformation={[
-                  { label: "Exam Date", value: formData.examDate ? format(new Date(formData.examDate as any), "PPP") : "N/A", highlight: true },
+                  {
+                    label: "Exam Date",
+                    value: formData.examDate
+                      ? format(new Date(formData.examDate as any), "PPP")
+                      : "N/A",
+                    highlight: true,
+                  },
                   { label: "Time Slot", value: formData.examTime || "N/A" },
                   { label: "Address Line 1", value: formData.postalAddress1 },
-                  ...(formData.postalAddress2 ? [{ label: "Address Line 2", value: formData.postalAddress2 }] : []),
+                  ...(formData.postalAddress2
+                    ? [
+                        {
+                          label: "Address Line 2",
+                          value: formData.postalAddress2,
+                        },
+                      ]
+                    : []),
                   { label: "Emirate / City", value: formData.city },
-                  { label: "Country of Residence", value: formData.countryOfResidence },
-                  { label: "First Language", value: formData.homeLanguage || "N/A" },
-                  { label: "Reason for Test", value: getReasonLabel(formData.reasonForTaking) },
-                  { label: "Current Situation", value: formData.currentSituation },
+                  {
+                    label: "Country of Residence",
+                    value: formData.countryOfResidence,
+                  },
+                  {
+                    label: "First Language",
+                    value: formData.homeLanguage || "N/A",
+                  },
+                  {
+                    label: "Reason for Test",
+                    value: getReasonLabel(formData.reasonForTaking),
+                  },
+                  {
+                    label: "Current Situation",
+                    value: formData.currentSituation,
+                  },
                 ]}
               />
             </GlobalReviewStep>

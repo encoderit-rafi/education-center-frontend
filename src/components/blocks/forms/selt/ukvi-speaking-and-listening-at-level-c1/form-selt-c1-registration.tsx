@@ -1,6 +1,9 @@
 "use client";
 import { format } from "date-fns";
-import { GlobalReviewStep, ReviewSummaryGrid } from "@/components/blocks/forms/global-review-step";
+import {
+  GlobalReviewStep,
+  ReviewSummaryGrid,
+} from "@/components/blocks/forms/global-review-step";
 import { getEducationLevelLabel } from "@/lib/utils";
 import { compileBookingPayload } from "@/lib/booking";
 import { PriceDisplay } from "@/components/ui/price-display";
@@ -23,16 +26,14 @@ import { RegistrationFormStep } from "./steps/registration-form-step";
 import { ReviewStep } from "./steps/review-step";
 import { VAT_PERCENT, calculateVat } from "@/lib/vat";
 
-
-
-
-
 interface FormProps {
   examId?: string;
 }
 
-export default function FormSELTC1Registration({ examId: initialExamId }: FormProps = {}) {
-  const [currentStep, setCurrentStep] = useState(0); 
+export default function FormSELTC1Registration({
+  examId: initialExamId,
+}: FormProps = {}) {
+  const [currentStep, setCurrentStep] = useState(0);
   const initialId = "selt-c1";
 
   const { data: examsResponse } = useQuery({
@@ -46,7 +47,10 @@ export default function FormSELTC1Registration({ examId: initialExamId }: FormPr
   const examsList = examsResponse?.data?.data || [];
   const activeExam = initialExamId
     ? examsList.find((e: any) => e.id === initialExamId)
-    : examsList.find((e: any) => e.slug === "ukvi-speaking-listening-reading-and-writing-at-level-c1");
+    : examsList.find(
+        (e: any) =>
+          e.slug === "ukvi-speaking-listening-reading-and-writing-at-level-c1",
+      );
 
   const examId = initialExamId || activeExam?.id;
 
@@ -96,8 +100,11 @@ export default function FormSELTC1Registration({ examId: initialExamId }: FormPr
     };
     return acc;
   }, {});
-  
-  const examName = activeExam?.name || Object.values(EXAM_IDS_DATA).find(e => e.id === initialId)?.name || "SELT C1";
+
+  const examName =
+    activeExam?.name ||
+    Object.values(EXAM_IDS_DATA).find((e) => e.id === initialId)?.name ||
+    "SELT C1";
 
   const form = useForm<TSeltA1Schema>({
     resolver: zodResolver(SeltA1Schema) as any,
@@ -155,13 +162,19 @@ export default function FormSELTC1Registration({ examId: initialExamId }: FormPr
   };
 
   const calculateTotal = () => {
-    const baseFee = activeExam?.examFee && parseFloat(activeExam.examFee) > 0 ? parseFloat(activeExam.examFee) : 880;
-    const serviceFee = activeExam?.additionalFee && parseFloat(activeExam.additionalFee) > 0 ? parseFloat(activeExam.additionalFee) : 150;
+    const baseFee =
+      activeExam?.examFee && parseFloat(activeExam.examFee) > 0
+        ? parseFloat(activeExam.examFee)
+        : 880;
+    const serviceFee =
+      activeExam?.additionalFee && parseFloat(activeExam.additionalFee) > 0
+        ? parseFloat(activeExam.additionalFee)
+        : 150;
     const selectedCourseData = formData.selectedCourse
       ? coursesData.find((c: any) => c.id === formData.selectedCourse)
       : null;
     const coursePrice = selectedCourseData
-      ? selectedCourseData.discounted_price ?? selectedCourseData.price
+      ? (selectedCourseData.discounted_price ?? selectedCourseData.price)
       : 0;
     const workshopPrice = formData.selectedWorkshop
       ? (workshopsData as any)[formData.selectedWorkshop].price
@@ -198,12 +211,17 @@ export default function FormSELTC1Registration({ examId: initialExamId }: FormPr
         }
       } else {
         console.error("Checkout URL not found in response");
-        toast.error("Checkout URL not found in server response.", { id: "selt-submit" });
+        toast.error("Checkout URL not found in server response.", {
+          id: "selt-submit",
+        });
       }
     },
     onError: (error: any) => {
       console.error("Payment initiation failed:", error);
-      toast.error(error?.response?.data?.message || "Payment initiation failed.", { id: "selt-submit" });
+      toast.error(
+        error?.response?.data?.message || "Payment initiation failed.",
+        { id: "selt-submit" },
+      );
     },
   });
 
@@ -223,7 +241,9 @@ export default function FormSELTC1Registration({ examId: initialExamId }: FormPr
     },
     onError: (error: any) => {
       console.error("Booking failed:", error);
-      toast.error(error?.response?.data?.message || "Exam booking failed.", { id: "selt-submit" });
+      toast.error(error?.response?.data?.message || "Exam booking failed.", {
+        id: "selt-submit",
+      });
     },
   });
 
@@ -250,7 +270,9 @@ export default function FormSELTC1Registration({ examId: initialExamId }: FormPr
             throw new Error("Failed to upload identity document.");
           }
 
-          const apiBase = api.defaults.baseURL || "https://vote.encoder-test-vpn.space/api/v1";
+          const apiBase =
+            api.defaults.baseURL ||
+            "https://vote.encoder-test-vpn.space/api/v1";
           const apiHost = apiBase.replace("/api/v1", "");
           idDocumentUrl = relativeUrl.startsWith("http")
             ? relativeUrl
@@ -258,7 +280,10 @@ export default function FormSELTC1Registration({ examId: initialExamId }: FormPr
         }
 
         if (!examId) {
-          toast.error("Exam details are still loading. Please try again in a moment.", { id: "selt-submit" });
+          toast.error(
+            "Exam details are still loading. Please try again in a moment.",
+            { id: "selt-submit" },
+          );
           return;
         }
 
@@ -271,11 +296,15 @@ export default function FormSELTC1Registration({ examId: initialExamId }: FormPr
           middleName: data.middleName || null,
           lastName: data.surnames || null,
           dateOfBirth: data.dateOfBirth,
-          gender: data.sex ? (data.sex.charAt(0).toUpperCase() + data.sex.slice(1)) : null,
+          gender: data.sex
+            ? data.sex.charAt(0).toUpperCase() + data.sex.slice(1)
+            : null,
           nationality: data.nationality,
           email: data.email,
           phone: data.mobileNumber,
-          address: data.postalAddress1 + (data.postalAddress2 ? `, ${data.postalAddress2}` : ""),
+          address:
+            data.postalAddress1 +
+            (data.postalAddress2 ? `, ${data.postalAddress2}` : ""),
           country: data.residenceCountry,
           idType: data.idType,
           idNumber: data.idNumber,
@@ -290,6 +319,14 @@ export default function FormSELTC1Registration({ examId: initialExamId }: FormPr
           totalAmount: total,
           allFormData: {
             ...data,
+            level_name: activeExam?.name || "SELT C1",
+            selected_course_name: data.selectedCourse
+              ? courseDetail?.name
+              : undefined,
+            selected_workshop_name: data.selectedWorkshop
+              ? dbWorkshops.find((w: any) => w.id === data.selectedWorkshop)
+                  ?.name
+              : undefined,
             idDocumentUrl,
           },
           courseId: data.selectedCourse ? courseDetail?.id : null,
@@ -298,7 +335,10 @@ export default function FormSELTC1Registration({ examId: initialExamId }: FormPr
         bookingMutation.mutate(compiledPayload);
       } catch (error: any) {
         console.error("Form submission error:", error);
-        toast.error(error?.message || "Something went wrong during submission.", { id: "selt-submit" });
+        toast.error(
+          error?.message || "Something went wrong during submission.",
+          { id: "selt-submit" },
+        );
       }
     }
   };
@@ -315,7 +355,8 @@ export default function FormSELTC1Registration({ examId: initialExamId }: FormPr
     <div className="max-w-7xl mx-auto px-4 py-12">
       <div className="text-center mb-12">
         <h1 className="text-4xl md:text-5xl font-black text-slate-900 mb-4 tracking-tight uppercase italic">
-          {examName.split(" (")[0]} <span className="text-[#A11D1D]">Registration</span>
+          {examName.split(" (")[0]}{" "}
+          <span className="text-[#A11D1D]">Registration</span>
         </h1>
       </div>
 
@@ -337,7 +378,9 @@ export default function FormSELTC1Registration({ examId: initialExamId }: FormPr
                 form.setValue("examDate", date);
                 form.setValue("examTimeSlot", "");
               }}
-              onTimeSlotChange={(slot) => form.setValue("examTimeSlot", slot as any)}
+              onTimeSlotChange={(slot) =>
+                form.setValue("examTimeSlot", slot as any)
+              }
               onNext={() => goToStep(2)}
               onBack={() => goToStep(0)}
               error={form.formState.errors.examDate}
@@ -362,31 +405,50 @@ export default function FormSELTC1Registration({ examId: initialExamId }: FormPr
               onEdit={() => goToStep(2)}
               onSubmit={form.handleSubmit(handleFormSubmit, onInvalid)}
               paymentMethodValue={formData.paymentMethod}
-              onPaymentMethodChange={(val) => form.setValue("paymentMethod", val as any)}
+              onPaymentMethodChange={(val) =>
+                form.setValue("paymentMethod", val as any)
+              }
               paymentMethodError={(form.formState.errors as any)?.paymentMethod}
               examName={examName}
               baseFee={pricing.baseFee}
               serviceFee={pricing.serviceFee}
               total={total}
-              selectedCourseData={formData.selectedCourse ? coursesData.find((c: any) => c.id === formData.selectedCourse) : undefined}
-              selectedWorkshopData={formData.selectedWorkshop ? (workshopsData as any)[formData.selectedWorkshop] : undefined}
+              selectedCourseData={
+                formData.selectedCourse
+                  ? coursesData.find(
+                      (c: any) => c.id === formData.selectedCourse,
+                    )
+                  : undefined
+              }
+              selectedWorkshopData={
+                formData.selectedWorkshop
+                  ? (workshopsData as any)[formData.selectedWorkshop]
+                  : undefined
+              }
               reviewStepNumber={4}
               paymentStepNumber={5}
               customOrderSummary={
                 <>
-                  {activeExam?.usdExamFee && parseFloat(activeExam.usdExamFee) > 0 && (
-                    <div className="flex justify-between text-sm">
-                      <span className="text-slate-500 font-medium">USD Exam Fee</span>
-                      <span className="font-bold text-slate-900">
-                        ${parseFloat(activeExam.usdExamFee).toFixed(2)}
-                      </span>
-                    </div>
-                  )}
+                  {activeExam?.usdExamFee &&
+                    parseFloat(activeExam.usdExamFee) > 0 && (
+                      <div className="flex justify-between text-sm">
+                        <span className="text-slate-500 font-medium">
+                          USD Exam Fee
+                        </span>
+                        <span className="font-bold text-slate-900">
+                          ${parseFloat(activeExam.usdExamFee).toFixed(2)}
+                        </span>
+                      </div>
+                    )}
 
                   <div className="flex justify-between text-sm">
-                    <span className="text-slate-500 font-medium">{examName} Fee</span>
+                    <span className="text-slate-500 font-medium">
+                      {examName} Fee
+                    </span>
                     <div className="flex items-center gap-1">
-                      <span className="text-xs text-slate-400 font-normal">Approximately</span>
+                      <span className="text-xs text-slate-400 font-normal">
+                        Approximately
+                      </span>
                       <PriceDisplay
                         amount={pricing.baseFee}
                         className="font-bold text-slate-900"
@@ -404,26 +466,32 @@ export default function FormSELTC1Registration({ examId: initialExamId }: FormPr
                     />
                   </div>
 
-                  {formData.selectedCourse && (
+                  {formData.selectedCourse &&
                     (() => {
-                      const selectedCourse = coursesData.find((c: any) => c.id === formData.selectedCourse);
+                      const selectedCourse = coursesData.find(
+                        (c: any) => c.id === formData.selectedCourse,
+                      );
                       return selectedCourse ? (
                         <div className="flex justify-between text-sm">
                           <span className="text-slate-500 font-medium">
                             Course: {selectedCourse.name} Fee
                           </span>
                           <PriceDisplay
-                            amount={selectedCourse.discounted_price ?? selectedCourse.price}
+                            amount={
+                              selectedCourse.discounted_price ??
+                              selectedCourse.price
+                            }
                             className="font-bold text-slate-900"
                           />
                         </div>
                       ) : null;
-                    })()
-                  )}
+                    })()}
 
-                  {formData.selectedWorkshop && (
+                  {formData.selectedWorkshop &&
                     (() => {
-                      const selectedWorkshop = (workshopsData as any)[formData.selectedWorkshop];
+                      const selectedWorkshop = (workshopsData as any)[
+                        formData.selectedWorkshop
+                      ];
                       return selectedWorkshop ? (
                         <div className="flex justify-between text-sm">
                           <span className="text-slate-500 font-medium">
@@ -435,8 +503,7 @@ export default function FormSELTC1Registration({ examId: initialExamId }: FormPr
                           />
                         </div>
                       ) : null;
-                    })()
-                  )}
+                    })()}
 
                   <div className="pt-6 border-t border-slate-200">
                     <div className="flex justify-between items-center">
@@ -457,28 +524,84 @@ export default function FormSELTC1Registration({ examId: initialExamId }: FormPr
                   { label: "Given Names", value: formData.givenNames },
                   { label: "Middle Name", value: formData.middleName || "N/A" },
                   { label: "Surnames", value: formData.surnames || "N/A" },
-                  { label: "Date of Birth", value: formData.dateOfBirth ? format(new Date(formData.dateOfBirth as any), "PPP") : "N/A" },
+                  {
+                    label: "Date of Birth",
+                    value: formData.dateOfBirth
+                      ? format(new Date(formData.dateOfBirth as any), "PPP")
+                      : "N/A",
+                  },
                   { label: "Sex", value: formData.sex || "N/A" },
-                  { label: "City of Birth", value: formData.cityOfBirth || "N/A" },
-                  { label: "Country of Birth", value: formData.countryOfBirth || "N/A" },
-                  { label: "Mobile Number", value: formData.mobileNumber || "N/A" },
-                  { label: "Nationality", value: formData.nationality || "N/A" },
-                  { label: "Reason for Test", value: formData.reasonForTest === "ukvi" ? "UKVI – For UK Visa and Immigration applications" : formData.reasonForTest === "other" ? `Other: ${formData.reasonForTestOther || "N/A"}` : "N/A" },
+                  {
+                    label: "City of Birth",
+                    value: formData.cityOfBirth || "N/A",
+                  },
+                  {
+                    label: "Country of Birth",
+                    value: formData.countryOfBirth || "N/A",
+                  },
+                  {
+                    label: "Mobile Number",
+                    value: formData.mobileNumber || "N/A",
+                  },
+                  {
+                    label: "Nationality",
+                    value: formData.nationality || "N/A",
+                  },
+                  {
+                    label: "Reason for Test",
+                    value:
+                      formData.reasonForTest === "ukvi"
+                        ? "UKVI – For UK Visa and Immigration applications"
+                        : formData.reasonForTest === "other"
+                          ? `Other: ${formData.reasonForTestOther || "N/A"}`
+                          : "N/A",
+                  },
                 ]}
                 identityContact={[
-                  { label: "ID Type", value: formData.idType?.replace(/_/g, " ") },
+                  {
+                    label: "ID Type",
+                    value: formData.idType?.replace(/_/g, " "),
+                  },
                   { label: "ID Number", value: formData.idNumber || "N/A" },
                   { label: "Email", value: formData.email },
-                  { label: "ID Expiry Date", value: formData.idExpiryDate ? format(new Date(formData.idExpiryDate as any), "PPP") : "N/A" },
-                  { label: "Identity Document", value: formData.idDocument ? (formData.idDocument as File).name : "No file attached" },
-                  { label: "Issuing Authority", value: formData.issuingAuthority || "N/A" },
+                  {
+                    label: "ID Expiry Date",
+                    value: formData.idExpiryDate
+                      ? format(new Date(formData.idExpiryDate as any), "PPP")
+                      : "N/A",
+                  },
+                  {
+                    label: "Identity Document",
+                    value: formData.idDocument
+                      ? (formData.idDocument as File).name
+                      : "No file attached",
+                  },
+                  {
+                    label: "Issuing Authority",
+                    value: formData.issuingAuthority || "N/A",
+                  },
                 ]}
                 testInformation={[
-                  { label: "Exam Date", value: formData.examDate ? format(new Date(formData.examDate as any), "PPP") : "N/A", highlight: true },
+                  {
+                    label: "Exam Date",
+                    value: formData.examDate
+                      ? format(new Date(formData.examDate as any), "PPP")
+                      : "N/A",
+                    highlight: true,
+                  },
                   { label: "Time Slot", value: formData.examTimeSlot },
-                  { label: "Address", value: `${formData.postalAddress1}, ${formData.city}` },
-                  { label: "First Language", value: formData.firstLanguage || "N/A" },
-                  { label: "Education Level", value: getEducationLevelLabel(formData.educationLevel) },
+                  {
+                    label: "Address",
+                    value: `${formData.postalAddress1}, ${formData.city}`,
+                  },
+                  {
+                    label: "First Language",
+                    value: formData.firstLanguage || "N/A",
+                  },
+                  {
+                    label: "Education Level",
+                    value: getEducationLevelLabel(formData.educationLevel),
+                  },
                 ]}
               />
             </GlobalReviewStep>
