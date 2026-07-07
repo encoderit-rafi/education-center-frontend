@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { cn, omitEmpty } from "@/lib/utils";
-import { VAT_PERCENT, calculateVatForCountry } from "@/lib/vat";
+import { VAT_PERCENT, calculateVat } from "@/lib/vat";
 import {
   Field,
   FieldLabel,
@@ -157,7 +157,12 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
     : base_price;
 
   const selectedCountry = formData.country;
-  const vatAmount = calculateVatForCountry(subtotal, selectedCountry);
+  const registrationType = (typeParam || workshop?.type || "").toLowerCase();
+  const isInPerson = registrationType === "in-person";
+  const isOnline = registrationType === "online";
+  const isUae = selectedCountry === "United Arab Emirates";
+
+  const vatAmount = isInPerson || (isOnline && isUae) ? calculateVat(subtotal) : 0;
   const total_amount = subtotal + vatAmount;
 
   const paymentMutation = useMutation({
