@@ -35,9 +35,8 @@ export default function BookExamItems({ data }: { data: any }) {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {data.items?.map((item: any, index: number) => {
-            const isUkvi = (item?.name?.toLowerCase().includes("ukvi") || item?.name?.toLowerCase().includes("life skills") || item?.slug?.toLowerCase().includes("ukvi") || item?.slug?.toLowerCase().includes("life-skills"));
-            const href = isUkvi ? `/exams/${item.id}` : (item?.examFormRedirectUrl || `/book-exams/${item.id}`);
-            const isExternal = !isUkvi && !!item?.examFormRedirectUrl;
+            const href = item?.examFormRedirectUrl || `/book-exams/${item.id}`;
+            const isExternal = !!item?.examFormRedirectUrl;
             return (
               <Link
                 key={item.id}

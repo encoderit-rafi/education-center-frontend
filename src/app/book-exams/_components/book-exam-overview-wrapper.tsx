@@ -165,7 +165,14 @@ export default function BookExamOverviewWrapper({
   exam,
   children,
 }: BookExamOverviewWrapperProps) {
-  const [showForm, setShowForm] = useState(false);
+  const slug = exam.slug || "";
+  const isExternalExam =
+    slug === "celpip" ||
+    slug === "celpip-general" ||
+    slug === "celpip-general-ls" ||
+    slug === "cael";
+
+  const [showForm, setShowForm] = useState(!isExternalExam);
 
   /* Once the user clicks "Continue to Book", reveal the form */
   if (showForm) {
@@ -177,7 +184,6 @@ export default function BookExamOverviewWrapper({
   const whoShouldTake = exam.whoShouldTake || [];
   const acceptedFor = exam.acceptedFor || [];
   const faqs = exam.faqs || [];
-  const slug = exam.slug || "";
   const overviewText = exam.overview || exam.description || "";
   const subtitle = exam.subtitle || "";
 
