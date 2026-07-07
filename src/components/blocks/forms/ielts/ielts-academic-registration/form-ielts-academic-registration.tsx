@@ -30,7 +30,9 @@ interface FormProps {
   examId?: string;
 }
 
-export default function FormIeltsAcademicRegistration({ examId: initialExamId }: FormProps = {}) {
+export default function FormIeltsAcademicRegistration({
+  examId: initialExamId,
+}: FormProps = {}) {
   const [currentStep, setCurrentStep] = useState(0); // 0: Terms, 1: Date, 2: Form, 3: Review
 
   const { data: examsResponse } = useQuery({
@@ -155,13 +157,19 @@ export default function FormIeltsAcademicRegistration({ examId: initialExamId }:
   };
 
   const calculateTotal = () => {
-    const baseFee = activeExam?.examFee && parseFloat(activeExam.examFee) > 0 ? parseFloat(activeExam.examFee) : 1470;
-    const serviceFee = activeExam?.additionalFee && parseFloat(activeExam.additionalFee) > 0 ? parseFloat(activeExam.additionalFee) : 150;
+    const baseFee =
+      activeExam?.examFee && parseFloat(activeExam.examFee) > 0
+        ? parseFloat(activeExam.examFee)
+        : 1470;
+    const serviceFee =
+      activeExam?.additionalFee && parseFloat(activeExam.additionalFee) > 0
+        ? parseFloat(activeExam.additionalFee)
+        : 150;
     const selectedCourseData = formData.selectedCourse
       ? coursesData.find((c: any) => c.id === formData.selectedCourse)
       : null;
     const coursePrice = selectedCourseData
-      ? selectedCourseData.discounted_price ?? selectedCourseData.price
+      ? (selectedCourseData.discounted_price ?? selectedCourseData.price)
       : 0;
     const workshopPrice = formData.selectedWorkshop
       ? (workshopsData as any)[formData.selectedWorkshop]?.price || 0
@@ -198,12 +206,17 @@ export default function FormIeltsAcademicRegistration({ examId: initialExamId }:
         }
       } else {
         console.error("Checkout URL not found in response");
-        toast.error("Checkout URL not found in server response.", { id: "ielts-submit" });
+        toast.error("Checkout URL not found in server response.", {
+          id: "ielts-submit",
+        });
       }
     },
     onError: (error: any) => {
       console.error("Payment initiation failed:", error);
-      toast.error(error?.response?.data?.message || "Payment initiation failed.", { id: "ielts-submit" });
+      toast.error(
+        error?.response?.data?.message || "Payment initiation failed.",
+        { id: "ielts-submit" },
+      );
     },
   });
 
@@ -223,11 +236,15 @@ export default function FormIeltsAcademicRegistration({ examId: initialExamId }:
     },
     onError: (error: any) => {
       console.error("Booking failed:", error);
-      toast.error(error?.response?.data?.message || "Exam booking failed.", { id: "ielts-submit" });
+      toast.error(error?.response?.data?.message || "Exam booking failed.", {
+        id: "ielts-submit",
+      });
     },
   });
 
-  const handleFormSubmit: SubmitHandler<TIeltsAcademicSchema> = async (data) => {
+  const handleFormSubmit: SubmitHandler<TIeltsAcademicSchema> = async (
+    data,
+  ) => {
     if (currentStep < 3) {
       goToStep(3);
     } else {
@@ -250,7 +267,9 @@ export default function FormIeltsAcademicRegistration({ examId: initialExamId }:
             throw new Error("Failed to upload identity document.");
           }
 
-          const apiBase = api.defaults.baseURL || "https://vote.encoder-test-vpn.space/api/v1";
+          const apiBase =
+            api.defaults.baseURL ||
+            "https://vote.encoder-test-vpn.space/api/v1";
           const apiHost = apiBase.replace("/api/v1", "");
           idDocumentUrl = relativeUrl.startsWith("http")
             ? relativeUrl
@@ -258,47 +277,239 @@ export default function FormIeltsAcademicRegistration({ examId: initialExamId }:
         }
 
         if (!examId) {
-          toast.error("Exam details are still loading. Please try again in a moment.", { id: "ielts-submit" });
+          toast.error(
+            "Exam details are still loading. Please try again in a moment.",
+            { id: "ielts-submit" },
+          );
           return;
         }
 
         toast.loading("Submitting booking request...", { id: "ielts-submit" });
 
-        const compiledPayload = compileBookingPayload({
-          examId,
-          paymentMethod: data.paymentMethod,
-          firstName: data.givenNames,
-          middleName: data.middleName || null,
-          lastName: data.surnames || null,
-          dateOfBirth: data.dateOfBirth,
-          gender: data.sex ? (data.sex.charAt(0).toUpperCase() + data.sex.slice(1)) : null,
-          nationality: data.nationality,
-          email: data.email,
-          phone: data.mobileNumber,
-          address: data.postalAddress1 + (data.postalAddress2 ? `, ${data.postalAddress2}` : ""),
-          country: data.residenceCountry,
-          idType: data.idType,
-          idNumber: data.idNumber,
-          sessionDate: data.examDate,
-          sessionTime: data.examTimeSlot || null,
-          examFee: pricing.baseFee,
-          courseFee: pricing.coursePrice,
-          workshopFee: pricing.workshopPrice,
-          additionalFee: pricing.serviceFee,
-          discountAmount: 0,
-          vatAmount: pricing.vat,
-          totalAmount: total,
-          allFormData: {
-            ...data,
-            idDocumentUrl,
+        const sessionTimeFormatted = (() => {
+          if (!data.examTimeSlot) return null;
+          if (data.examTimeSlot === "9:00 AM") return "09:00";
+          if (data.examTimeSlot === "1:00 PM") return "13:00";
+          return data.examTimeSlot;
+        })();
+
+        // 1. Build form_data list
+        const fieldLabels: Record<string, string> = {
+          testModule: "Test Module",
+          givenNames: "Given Names",
+          middleName: "Middle Name",
+          surnames: "Surnames",
+          noSurname: "No Surname",
+          birthCity: "City of Birth",
+          birthCountry: "Country of Birth",
+          postcode: "Post Code",
+          poBox: "P.O. Box",
+          dateOfBirth: "Date of Birth",
+          sex: "Gender",
+          email: "Email",
+          mobileNumber: "Mobile Number",
+          smsConsent: "SMS Consent",
+          residenceCountry: "Country of Residence",
+          postalAddress1: "Address Line 1",
+          postalAddress2: "Address Line 2",
+          postalAddress3: "Address Line 3",
+          city: "Town / City",
+          marketingPreference: "Marketing Preference",
+          idType: "ID Type",
+          idNumber: "ID Number",
+          idExpiryDate: "ID Expiry Date",
+          issuingAuthority: "Issuing Authority",
+          nationality: "Country of Nationality",
+          takenBefore: "Taken Before",
+          lessThanTwoYears: "Less Than Two Years",
+          existingAccount: "Existing Account",
+          firstLanguage: "First Language",
+          firstLanguageOther: "First Language (Other)",
+          yearsStudyingEnglish: "Years Studying English",
+          educationLevel: "Education Level",
+          occupationLevel: "Occupation Level",
+          occupationLevelOther: "Occupation Level (Other)",
+          occupationSector: "Occupation Sector",
+          occupationSectorOther: "Occupation Sector (Other)",
+          reasonForTakingTest: "Reason for Taking Test",
+          reasonForTakingTestOther: "Reason for Taking Test (Other)",
+          destinationCountry: "Destination Country",
+          selectedCourse: "Selected Course",
+          selectedWorkshop: "Selected Workshop",
+          vatNumber: "VAT Number",
+          paymentMethod: "Payment Method",
+          examDate: "Exam Date",
+          examTimeSlot: "Exam Time Slot",
+          speakingSlot: "Speaking Slot",
+        };
+
+        const selectedCourseObj = data.selectedCourse
+          ? coursesData.find((c: any) => c.id === data.selectedCourse)
+          : null;
+        const selectedWorkshopObj = data.selectedWorkshop
+          ? (workshopsData as any)[data.selectedWorkshop]
+          : null;
+
+        const baseExamInfo = [
+          {
+            name: "level_name",
+            label: "Selected Level",
+            value: activeExam?.name || "IELTS Academic",
           },
-          courseId: data.selectedCourse ? courseDetail?.id : null,
+          ...(selectedCourseObj
+            ? [
+                {
+                  name: "selected_course_name",
+                  label: "Selected Course Name",
+                  value: selectedCourseObj.name,
+                },
+              ]
+            : []),
+          ...(selectedWorkshopObj
+            ? [
+                {
+                  name: "selected_workshop_name",
+                  label: "Selected Workshop Name",
+                  value: selectedWorkshopObj.name,
+                },
+              ]
+            : []),
+        ];
+
+        const fieldValues = Object.entries(fieldLabels).map(([key, label]) => {
+          const val = (data as any)[key];
+          let valueStr = "";
+          if (val instanceof Date) {
+            valueStr = format(val, "yyyy-MM-dd");
+          } else if (typeof val === "boolean") {
+            valueStr = val ? "Yes" : "No";
+          } else if (val !== null && val !== undefined && val !== "") {
+            valueStr = String(val);
+          }
+          return {
+            name: key,
+            label,
+            value: valueStr || "N/A",
+          };
         });
 
-        bookingMutation.mutate(compiledPayload);
+        const pricingInfo = [
+          {
+            name: "exam_fee",
+            label: "Exam Fee",
+            value: `${pricing.baseFee} AED`,
+          },
+          ...(pricing.coursePrice
+            ? [
+                {
+                  name: "course_fee",
+                  label: "Course Fee",
+                  value: `${pricing.coursePrice} AED`,
+                },
+              ]
+            : []),
+          ...(pricing.workshopPrice
+            ? [
+                {
+                  name: "workshop_fee",
+                  label: "Workshop Fee",
+                  value: `${pricing.workshopPrice} AED`,
+                },
+              ]
+            : []),
+          ...(pricing.serviceFee
+            ? [
+                {
+                  name: "service_fee",
+                  label: "Service Fee",
+                  value: `${pricing.serviceFee} AED`,
+                },
+              ]
+            : []),
+          ...(pricing.vat
+            ? [
+                {
+                  name: "vat_amount",
+                  label: "VAT Amount",
+                  value: `${pricing.vat} AED`,
+                },
+              ]
+            : []),
+          {
+            name: "total_amount",
+            label: "Total Amount",
+            value: `${total} AED`,
+          },
+        ];
+
+        const examInfoList = [...baseExamInfo, ...fieldValues, ...pricingInfo];
+
+        // 2. Documents array
+        const documentsList = idDocumentUrl
+          ? [
+              {
+                name: "id_document_url",
+                label: "ID Document",
+                value: idDocumentUrl,
+              },
+            ]
+          : [];
+
+        // 3. Compile final payload
+        const finalPayload = {
+          exam_id: examId,
+          payment_methods: data.paymentMethod || "stripe",
+          course_id: data.selectedCourse ? courseDetail?.id : null,
+          package_id: data.selectedCourse || null,
+          workshop_id: data.selectedWorkshop || null,
+          first_name: data.givenNames,
+          middle_name: data.middleName || null,
+          last_name: data.surnames || null,
+          date_of_birth: data.dateOfBirth
+            ? format(new Date(data.dateOfBirth), "yyyy-MM-dd")
+            : null,
+          gender: data.sex
+            ? data.sex.charAt(0).toUpperCase() + data.sex.slice(1)
+            : null,
+          nationality: data.nationality || null,
+          email: data.email,
+          phone: data.mobileNumber,
+          address:
+            data.postalAddress1 +
+            (data.postalAddress2 ? `, ${data.postalAddress2}` : ""),
+          country: data.residenceCountry || null,
+          id_type: data.idType
+            ? data.idType.toLowerCase().includes("passport")
+              ? "passport"
+              : data.idType.toLowerCase().includes("emirate")
+                ? "emirates"
+                : "visa"
+            : null,
+          id_number: data.idNumber || null,
+          session_date: data.examDate
+            ? format(new Date(data.examDate), "yyyy-MM-dd")
+            : null,
+          session_time: sessionTimeFormatted,
+          exam_fee: pricing.baseFee,
+          course_fee: pricing.coursePrice || 0,
+          workshop_fee: pricing.workshopPrice || 0,
+          additional_fee: pricing.serviceFee || 0,
+          discount_amount: 0,
+          vat_amount: pricing.vat || 0,
+          total_amount: total,
+          form_data: {
+            exam_info: examInfoList,
+            documents: documentsList,
+          },
+        };
+
+        bookingMutation.mutate(finalPayload);
       } catch (error: any) {
         console.error("Form submission error:", error);
-        toast.error(error?.message || "Something went wrong during submission.", { id: "ielts-submit" });
+        toast.error(
+          error?.message || "Something went wrong during submission.",
+          { id: "ielts-submit" },
+        );
       }
     }
   };
@@ -376,7 +587,9 @@ export default function FormIeltsAcademicRegistration({ examId: initialExamId }:
               total={total}
               selectedCourseData={
                 formData.selectedCourse
-                  ? coursesData.find((c: any) => c.id === formData.selectedCourse)
+                  ? coursesData.find(
+                      (c: any) => c.id === formData.selectedCourse,
+                    )
                   : undefined
               }
               selectedWorkshopData={
@@ -399,8 +612,14 @@ export default function FormIeltsAcademicRegistration({ examId: initialExamId }:
                       : "N/A",
                   },
                   { label: "Gender", value: formData.sex || "N/A" },
-                  { label: "City of Birth", value: formData.birthCity || "N/A" },
-                  { label: "Country of Birth", value: formData.birthCountry || "N/A" },
+                  {
+                    label: "City of Birth",
+                    value: formData.birthCity || "N/A",
+                  },
+                  {
+                    label: "Country of Birth",
+                    value: formData.birthCountry || "N/A",
+                  },
                   {
                     label: "Mobile Number",
                     value: formData.mobileNumber || "N/A",
@@ -473,27 +692,34 @@ export default function FormIeltsAcademicRegistration({ examId: initialExamId }:
                   { label: "Postal Code", value: formData.postcode || "N/A" },
                   {
                     label: "First Language",
-                    value: formData.firstLanguage === "Other"
-                      ? formData.firstLanguageOther || "Other (not specified)"
-                      : formData.firstLanguage || "N/A",
+                    value:
+                      formData.firstLanguage === "Other"
+                        ? formData.firstLanguageOther || "Other (not specified)"
+                        : formData.firstLanguage || "N/A",
                   },
                   {
                     label: "Occupation Level",
-                    value: formData.occupationLevel === "Other"
-                      ? formData.occupationLevelOther || "Other (not specified)"
-                      : formData.occupationLevel || "N/A",
+                    value:
+                      formData.occupationLevel === "Other"
+                        ? formData.occupationLevelOther ||
+                          "Other (not specified)"
+                        : formData.occupationLevel || "N/A",
                   },
                   {
                     label: "Occupation Sector",
-                    value: formData.occupationSector === "Other"
-                      ? formData.occupationSectorOther || "Other (not specified)"
-                      : formData.occupationSector || "N/A",
+                    value:
+                      formData.occupationSector === "Other"
+                        ? formData.occupationSectorOther ||
+                          "Other (not specified)"
+                        : formData.occupationSector || "N/A",
                   },
                   {
                     label: "Reason for Test",
-                    value: formData.reasonForTakingTest === "other"
-                      ? formData.reasonForTakingTestOther || "Other (not specified)"
-                      : formData.reasonForTakingTest || "N/A",
+                    value:
+                      formData.reasonForTakingTest === "other"
+                        ? formData.reasonForTakingTestOther ||
+                          "Other (not specified)"
+                        : formData.reasonForTakingTest || "N/A",
                   },
                   {
                     label: "Education Level",
