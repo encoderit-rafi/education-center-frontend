@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { cn, omitEmpty } from "@/lib/utils";
-import { VAT_PERCENT, calculateVatForCountry } from "@/lib/vat";
+import { VAT_PERCENT, calculateVat } from "@/lib/vat";
 import {
   Field,
   FieldLabel,
@@ -159,8 +159,7 @@ function PaidMockTestRegistrationForm({
   const defaultPrice = locationParam === "center" ? defaultCenterPrice : defaultHomePrice;
 
   const base_price = parsedPriceParam > 0 ? parsedPriceParam : defaultPrice;
-  const selectedCountry = formData.country;
-  const vatAmount = calculateVatForCountry(base_price, selectedCountry);
+  const vatAmount = calculateVat(base_price);
   const PRICE = base_price + vatAmount;
   const CURRENCY = "AED";
 
