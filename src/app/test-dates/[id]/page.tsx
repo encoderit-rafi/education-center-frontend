@@ -26,7 +26,8 @@ export default function TestDatesDetailPage() {
 
   const handleBookNow = () => {
     if (selectedDate) {
-      router.push(`/book-exams/${id}`);
+      const targetSlug = id === "toefl" ? "toefl-ibt" : id;
+      router.push(`/book-exams/${targetSlug}`);
     }
   };
 
@@ -75,14 +76,18 @@ export default function TestDatesDetailPage() {
               }
             >
               {id === "ielts" && (
-                <div className="relative overflow-hidden bg-gradient-to-br from-white to-red-50/15 border border-red-100/80 rounded-2xl p-6 shadow-md shadow-red-950/5 max-w-xl transition-all duration-300 hover:shadow-lg hover:border-red-200">
+                <div className="relative overflow-hidden bg-linear-to-br from-white to-red-50/15 border border-red-100/80 rounded-2xl p-6 shadow-md shadow-red-950/5 max-w-xl transition-all duration-300 hover:shadow-lg hover:border-red-200">
                   <div className="flex items-center gap-3 pb-4 mb-5 border-b border-slate-100">
-                    <div className="rounded-xl bg-gradient-to-br from-primary to-primary/80 text-white p-2.5 shadow-md shadow-primary/20">
+                    <div className="rounded-xl bg-linear-to-br from-primary to-primary/80 text-white p-2.5 shadow-md shadow-primary/20">
                       <CalendarDays className="w-5 h-5" />
                     </div>
                     <div>
-                      <h3 className="text-sm font-bold text-slate-800">IELTS Weekly Schedule</h3>
-                      <p className="text-[10px] text-slate-400">Regular weekly test sessions</p>
+                      <h3 className="text-sm font-bold text-slate-800">
+                        IELTS Weekly Schedule
+                      </h3>
+                      <p className="text-[10px] text-slate-400">
+                        Regular weekly test sessions
+                      </p>
                     </div>
                   </div>
 
@@ -117,14 +122,18 @@ export default function TestDatesDetailPage() {
                 </div>
               )}
               {id === "toefl" && (
-                <div className="relative overflow-hidden bg-gradient-to-br from-white to-red-50/15 border border-red-100/80 rounded-2xl p-6 shadow-md shadow-red-950/5 max-w-xl transition-all duration-300 hover:shadow-lg hover:border-red-200">
+                <div className="relative overflow-hidden bg-linear-to-br from-white to-red-50/15 border border-red-100/80 rounded-2xl p-6 shadow-md shadow-red-950/5 max-w-xl transition-all duration-300 hover:shadow-lg hover:border-red-200">
                   <div className="flex items-center gap-3 pb-4 mb-5 border-b border-slate-100">
-                    <div className="rounded-xl bg-gradient-to-br from-primary to-primary/80 text-white p-2.5 shadow-md shadow-primary/20">
+                    <div className="rounded-xl bg-linear-to-br from-primary to-primary/80 text-white p-2.5 shadow-md shadow-primary/20">
                       <CalendarDays className="w-5 h-5" />
                     </div>
                     <div>
-                      <h3 className="text-sm font-bold text-slate-800">TOEFL iBT Weekly Schedule</h3>
-                      <p className="text-[10px] text-slate-400">Regular weekly test sessions</p>
+                      <h3 className="text-sm font-bold text-slate-800">
+                        TOEFL iBT Weekly Schedule
+                      </h3>
+                      <p className="text-[10px] text-slate-400">
+                        Regular weekly test sessions
+                      </p>
                     </div>
                   </div>
 
@@ -159,14 +168,18 @@ export default function TestDatesDetailPage() {
                 </div>
               )}
               {id === "skill-for-english-selt" && (
-                <div className="relative overflow-hidden bg-gradient-to-br from-white to-red-50/15 border border-red-100/80 rounded-2xl p-6 shadow-md shadow-red-950/5 max-w-xl transition-all duration-300 hover:shadow-lg hover:border-red-200">
+                <div className="relative overflow-hidden bg-linear-to-br from-white to-red-50/15 border border-red-100/80 rounded-2xl p-6 shadow-md shadow-red-950/5 max-w-xl transition-all duration-300 hover:shadow-lg hover:border-red-200">
                   <div className="flex items-center gap-3 pb-4 mb-5 border-b border-slate-100">
-                    <div className="rounded-xl bg-gradient-to-br from-primary to-primary/80 text-white p-2.5 shadow-md shadow-primary/20">
+                    <div className="rounded-xl bg-linear-to-br from-primary to-primary/80 text-white p-2.5 shadow-md shadow-primary/20">
                       <CalendarDays className="w-5 h-5" />
                     </div>
                     <div>
-                      <h3 className="text-sm font-bold text-slate-800">Skills for English (SELT) Schedule</h3>
-                      <p className="text-[10px] text-slate-400">Regular weekly test sessions</p>
+                      <h3 className="text-sm font-bold text-slate-800">
+                        Skills for English (SELT) Schedule
+                      </h3>
+                      <p className="text-[10px] text-slate-400">
+                        Regular weekly test sessions
+                      </p>
                     </div>
                   </div>
 
@@ -204,14 +217,18 @@ export default function TestDatesDetailPage() {
                 </div>
               )}
               {id === "pte" && (
-                <div className="relative overflow-hidden bg-gradient-to-br from-white to-red-50/15 border border-red-100/80 rounded-2xl p-6 shadow-md shadow-red-950/5 max-w-4xl transition-all duration-300 hover:shadow-lg hover:border-red-200">
+                <div className="relative overflow-hidden bg-linear-to-br from-white to-red-50/15 border border-red-100/80 rounded-2xl p-6 shadow-md shadow-red-950/5 max-w-4xl transition-all duration-300 hover:shadow-lg hover:border-red-200">
                   <div className="flex items-center gap-3 pb-4 mb-6 border-b border-slate-100">
-                    <div className="rounded-xl bg-gradient-to-br from-primary to-primary/80 text-white p-2.5 shadow-md shadow-primary/20">
+                    <div className="rounded-xl bg-linear-to-br from-primary to-primary/80 text-white p-2.5 shadow-md shadow-primary/20">
                       <CalendarDays className="w-5 h-5" />
                     </div>
                     <div>
-                      <h3 className="text-sm font-bold text-slate-800">PTE Weekly Schedule</h3>
-                      <p className="text-[10px] text-slate-400">Regular weekly test sessions</p>
+                      <h3 className="text-sm font-bold text-slate-800">
+                        PTE Weekly Schedule
+                      </h3>
+                      <p className="text-[10px] text-slate-400">
+                        Regular weekly test sessions
+                      </p>
                     </div>
                   </div>
 
@@ -227,25 +244,37 @@ export default function TestDatesDetailPage() {
                         <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 pb-3 border-b border-slate-200/40 last:border-0 last:pb-0">
                           <div className="flex items-center gap-2 mt-1">
                             <span className="w-1.5 h-1.5 bg-primary/60 rounded-full shrink-0" />
-                            <span className="text-xs font-bold text-slate-700">Sat, Tue, Wed</span>
+                            <span className="text-xs font-bold text-slate-700">
+                              Sat, Tue, Wed
+                            </span>
                           </div>
                           <div className="flex flex-wrap gap-1.5 justify-start sm:justify-end max-w-md">
-                            {["10:00 AM", "12:45 PM", "3:30 PM", "6:15 PM"].map((t) => (
-                              <span key={t} className="text-[11px] font-semibold text-slate-600 bg-white border border-slate-200 rounded-md px-2 py-0.5 shadow-xs hover:border-primary/30 hover:text-primary hover:bg-red-50/10 transition-all duration-200 cursor-default">
-                                {t}
-                              </span>
-                            ))}
+                            {["10:00 AM", "12:45 PM", "3:30 PM", "6:15 PM"].map(
+                              (t) => (
+                                <span
+                                  key={t}
+                                  className="text-[11px] font-semibold text-slate-600 bg-white border border-slate-200 rounded-md px-2 py-0.5 shadow-xs hover:border-primary/30 hover:text-primary hover:bg-red-50/10 transition-all duration-200 cursor-default"
+                                >
+                                  {t}
+                                </span>
+                              ),
+                            )}
                           </div>
                         </div>
 
                         <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 pb-3 border-b border-slate-200/40 last:border-0 last:pb-0">
                           <div className="flex items-center gap-2 mt-1">
                             <span className="w-1.5 h-1.5 bg-primary/60 rounded-full shrink-0" />
-                            <span className="text-xs font-bold text-slate-700">Sunday</span>
+                            <span className="text-xs font-bold text-slate-700">
+                              Sunday
+                            </span>
                           </div>
                           <div className="flex flex-wrap gap-1.5 justify-start sm:justify-end max-w-md">
                             {["6:15 PM"].map((t) => (
-                              <span key={t} className="text-[11px] font-semibold text-slate-600 bg-white border border-slate-200 rounded-md px-2 py-0.5 shadow-xs hover:border-primary/30 hover:text-primary hover:bg-red-50/10 transition-all duration-200 cursor-default">
+                              <span
+                                key={t}
+                                className="text-[11px] font-semibold text-slate-600 bg-white border border-slate-200 rounded-md px-2 py-0.5 shadow-xs hover:border-primary/30 hover:text-primary hover:bg-red-50/10 transition-all duration-200 cursor-default"
+                              >
                                 {t}
                               </span>
                             ))}
@@ -255,25 +284,37 @@ export default function TestDatesDetailPage() {
                         <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 pb-3 border-b border-slate-200/40 last:border-0 last:pb-0">
                           <div className="flex items-center gap-2 mt-1">
                             <span className="w-1.5 h-1.5 bg-primary/60 rounded-full shrink-0" />
-                            <span className="text-xs font-bold text-slate-700">Monday</span>
+                            <span className="text-xs font-bold text-slate-700">
+                              Monday
+                            </span>
                           </div>
                           <div className="flex flex-wrap gap-1.5 justify-start sm:justify-end max-w-md">
-                            {["10:00 AM", "1:00 PM", "3:30 PM", "6:15 PM"].map((t) => (
-                              <span key={t} className="text-[11px] font-semibold text-slate-600 bg-white border border-slate-200 rounded-md px-2 py-0.5 shadow-xs hover:border-primary/30 hover:text-primary hover:bg-red-50/10 transition-all duration-200 cursor-default">
-                                {t}
-                              </span>
-                            ))}
+                            {["10:00 AM", "1:00 PM", "3:30 PM", "6:15 PM"].map(
+                              (t) => (
+                                <span
+                                  key={t}
+                                  className="text-[11px] font-semibold text-slate-600 bg-white border border-slate-200 rounded-md px-2 py-0.5 shadow-xs hover:border-primary/30 hover:text-primary hover:bg-red-50/10 transition-all duration-200 cursor-default"
+                                >
+                                  {t}
+                                </span>
+                              ),
+                            )}
                           </div>
                         </div>
 
                         <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 pb-3 border-b border-slate-200/40 last:border-0 last:pb-0">
                           <div className="flex items-center gap-2 mt-1">
                             <span className="w-1.5 h-1.5 bg-primary/60 rounded-full shrink-0" />
-                            <span className="text-xs font-bold text-slate-700">Thursday</span>
+                            <span className="text-xs font-bold text-slate-700">
+                              Thursday
+                            </span>
                           </div>
                           <div className="flex flex-wrap gap-1.5 justify-start sm:justify-end max-w-md">
                             {["3:30 PM", "6:15 PM"].map((t) => (
-                              <span key={t} className="text-[11px] font-semibold text-slate-600 bg-white border border-slate-200 rounded-md px-2 py-0.5 shadow-xs hover:border-primary/30 hover:text-primary hover:bg-red-50/10 transition-all duration-200 cursor-default">
+                              <span
+                                key={t}
+                                className="text-[11px] font-semibold text-slate-600 bg-white border border-slate-200 rounded-md px-2 py-0.5 shadow-xs hover:border-primary/30 hover:text-primary hover:bg-red-50/10 transition-all duration-200 cursor-default"
+                              >
                                 {t}
                               </span>
                             ))}
@@ -294,11 +335,16 @@ export default function TestDatesDetailPage() {
                           <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 pb-3 border-b border-slate-200/40 last:border-0 last:pb-0">
                             <div className="flex items-center gap-2 mt-1">
                               <span className="w-1.5 h-1.5 bg-primary/60 rounded-full shrink-0" />
-                              <span className="text-xs font-bold text-slate-700">Monday</span>
+                              <span className="text-xs font-bold text-slate-700">
+                                Monday
+                              </span>
                             </div>
                             <div className="flex flex-wrap gap-1.5 justify-start sm:justify-end max-w-md">
                               {["1:15 PM"].map((t) => (
-                                <span key={t} className="text-[11px] font-semibold text-slate-600 bg-white border border-slate-200 rounded-md px-2 py-0.5 shadow-xs hover:border-primary/30 hover:text-primary hover:bg-red-50/10 transition-all duration-200 cursor-default">
+                                <span
+                                  key={t}
+                                  className="text-[11px] font-semibold text-slate-600 bg-white border border-slate-200 rounded-md px-2 py-0.5 shadow-xs hover:border-primary/30 hover:text-primary hover:bg-red-50/10 transition-all duration-200 cursor-default"
+                                >
                                   {t}
                                 </span>
                               ))}
@@ -310,7 +356,8 @@ export default function TestDatesDetailPage() {
                       <div className="pt-4 mt-auto">
                         <p className="text-[12px] flex items-center gap-1.5 bg-white border border-slate-100 rounded-lg p-2.5 shadow-xs">
                           <span className="w-1.5 h-1.5 rounded-full text-black" />
-                          Times may vary slightly based on center capacity and public holidays.
+                          Times may vary slightly based on center capacity and
+                          public holidays.
                         </p>
                       </div>
                     </div>
@@ -331,7 +378,8 @@ export default function TestDatesDetailPage() {
                       available: (date) =>
                         (id === "ielts" && date.getDay() === 0) ||
                         (id === "toefl" && [3, 6].includes(date.getDay())) ||
-                        (id === "skill-for-english-selt" && [1, 2, 3].includes(date.getDay())) ||
+                        (id === "skill-for-english-selt" &&
+                          [1, 2, 3].includes(date.getDay())) ||
                         (id === "pte" &&
                           [0, 1, 2, 3, 4, 6].includes(date.getDay())),
                     }}
@@ -368,7 +416,7 @@ export default function TestDatesDetailPage() {
                         "w-full py-4 rounded-xl font-bold text-white transition-all flex items-center justify-center gap-2 cursor-pointer shadow-lg hover:shadow-xl",
                         selectedDate
                           ? "bg-primary hover:bg-primary/95 hover:-translate-y-0.5"
-                          : "bg-slate-300 cursor-not-allowed opacity-80"
+                          : "bg-slate-300 cursor-not-allowed opacity-80",
                       )}
                     >
                       Book Now
@@ -376,7 +424,8 @@ export default function TestDatesDetailPage() {
                     </button>
                     {!selectedDate && (
                       <p className="text-xs text-slate-400">
-                        * Please select an available date on the calendar to book.
+                        * Please select an available date on the calendar to
+                        book.
                       </p>
                     )}
                   </div>

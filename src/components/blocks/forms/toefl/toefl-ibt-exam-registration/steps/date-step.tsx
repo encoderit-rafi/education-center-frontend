@@ -27,8 +27,11 @@ interface DateStepProps {
   timeSlotError?: any;
 }
 
-const TOEFL_SCHEDULE: Record<number, { id: "AM" | "PM"; label: string; hours: number; minutes: number }[]> = {
-  3: [{ id: "PM", label: "1:00 PM", hours: 13, minutes: 0 }], // Wednesday
+const TOEFL_SCHEDULE: Record<
+  number,
+  { id: "AM" | "PM"; label: string; hours: number; minutes: number }[]
+> = {
+  3: [{ id: "PM", label: "6:00 PM", hours: 18, minutes: 0 }], // Wednesday
   6: [{ id: "AM", label: "10:00 AM", hours: 10, minutes: 0 }], // Saturday
 };
 
@@ -81,7 +84,9 @@ export function DateStep({
                 modifiers={{
                   available: (date) => {
                     const day = date.getDay();
-                    return TOEFL_SCHEDULE[day] && TOEFL_SCHEDULE[day].length > 0;
+                    return (
+                      TOEFL_SCHEDULE[day] && TOEFL_SCHEDULE[day].length > 0
+                    );
                   },
                 }}
                 modifiersClassNames={{
@@ -92,7 +97,9 @@ export function DateStep({
                   const day = date.getDay();
                   const slots = TOEFL_SCHEDULE[day] || [];
                   if (slots.length === 0) return true;
-                  return slots.every((slot) => isSlotDisabled(date, slot.hours, slot.minutes));
+                  return slots.every((slot) =>
+                    isSlotDisabled(date, slot.hours, slot.minutes),
+                  );
                 }}
                 className="w-full max-w-xl mx-auto border rounded-md p-4 sm:p-8 bg-white shadow-xl"
               />
@@ -107,24 +114,40 @@ export function DateStep({
                 {value ? (
                   <RadioGroup
                     value={timeSlot}
-                    onValueChange={(val) => onTimeSlotChange(val as "AM" | "PM" | "")}
+                    onValueChange={(val) =>
+                      onTimeSlotChange(val as "AM" | "PM" | "")
+                    }
                     className="grid gap-4"
                   >
                     {availableSlots.map((slot) => {
-                      const isDisabled = isSlotDisabled(value, slot.hours, slot.minutes);
+                      const isDisabled = isSlotDisabled(
+                        value,
+                        slot.hours,
+                        slot.minutes,
+                      );
                       return (
                         <div key={slot.id}>
                           <Label
                             htmlFor={slot.id}
-                            className={`flex items-center p-4 rounded-xl border-2 transition-all cursor-pointer ${isDisabled ? "opacity-40 cursor-not-allowed pointer-events-none" : ""
-                              } ${timeSlot === slot.id
+                            className={`flex items-center p-4 rounded-xl border-2 transition-all cursor-pointer ${
+                              isDisabled
+                                ? "opacity-40 cursor-not-allowed pointer-events-none"
+                                : ""
+                            } ${
+                              timeSlot === slot.id
                                 ? "border-[#A11D1D] bg-[#A11D1D]/5 ring-1 ring-[#A11D1D]"
                                 : "border-slate-100 bg-white hover:border-slate-200"
-                              }`}
+                            }`}
                           >
                             <div className="flex items-center gap-3">
-                              <RadioGroupItem value={slot.id} id={slot.id} disabled={isDisabled} />
-                              <p className="font-bold text-slate-900">{slot.label}</p>
+                              <RadioGroupItem
+                                value={slot.id}
+                                id={slot.id}
+                                disabled={isDisabled}
+                              />
+                              <p className="font-bold text-slate-900">
+                                {slot.label}
+                              </p>
                             </div>
                           </Label>
                         </div>
@@ -150,17 +173,39 @@ export function DateStep({
                   <span>Express Registration Fee Applies</span>
                 </div>
                 <p className="text-xs text-amber-800 font-medium">
-                  Since your selected exam date is 7 days or less from today, an <strong>Express Registration Fee of $49 <span className="text-xs inline-flex items-center gap-0.5">(Approximately <AED className="h-[0.8em] w-auto fill-current" />190)</span></strong> will be automatically applied to your registration total.
+                  Since your selected exam date is 7 days or less from today, an{" "}
+                  <strong>
+                    Express Registration Fee of $49{" "}
+                    <span className="text-xs inline-flex items-center gap-0.5">
+                      (Approximately{" "}
+                      <AED className="h-[0.8em] w-auto fill-current" />
+                      190)
+                    </span>
+                  </strong>{" "}
+                  will be automatically applied to your registration total.
                 </p>
               </div>
             )}
 
             <div className="p-4 rounded-xl bg-slate-50 border border-slate-100 text-xs text-slate-500 leading-relaxed space-y-1">
               <p>
-                <span className="font-bold text-slate-700">Note:</span> You may also reach out to us at{" "}
-                <a href="tel:+97165531250" className="text-[#A11D1D] hover:underline font-semibold">+97165531250</a> or{" "}
-                <a href="mailto:info@tepth.org" className="text-[#A11D1D] hover:underline font-semibold">info@tepth.org</a>{" "}
-                and confirm the Test date availability before you proceed with the TOEFL iBT Registration on our website.
+                <span className="font-bold text-slate-700">Note:</span> You may
+                also reach out to us at{" "}
+                <a
+                  href="tel:+97165531250"
+                  className="text-[#A11D1D] hover:underline font-semibold"
+                >
+                  +97165531250
+                </a>{" "}
+                or{" "}
+                <a
+                  href="mailto:info@tepth.org"
+                  className="text-[#A11D1D] hover:underline font-semibold"
+                >
+                  info@tepth.org
+                </a>{" "}
+                and confirm the Test date availability before you proceed with
+                the TOEFL iBT Registration on our website.
               </p>
             </div>
           </div>

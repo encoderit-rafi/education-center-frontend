@@ -17,24 +17,32 @@ import {
   CheckCircle2,
   HelpCircle,
 } from "lucide-react";
-import {
-  BaseCard,
-} from "@/components/blocks/cards/base-card";
+import { BaseCard } from "@/components/blocks/cards/base-card";
 import { Button, buttonVariants } from "@/components/ui/button";
 
 /* ── Icon mapper (mirrors exam-details.tsx) ──────────────────────────────── */
 const IconTile = ({ icon, size = 20 }: { icon: string; size?: number }) => {
   switch (icon) {
-    case "reading":     return <BookOpen size={size} />;
-    case "listening":   return <Headphones size={size} />;
-    case "writing":     return <PenTool size={size} />;
-    case "speaking":    return <Mic2 size={size} />;
-    case "Activity":    return <Activity size={size} />;
-    case "Clock":       return <Clock size={size} />;
-    case "ShieldCheck": return <ShieldCheck size={size} />;
-    case "TrendingUp":  return <TrendingUp size={size} />;
-    case "Zap":         return <Zap size={size} />;
-    default:            return <Info size={size} />;
+    case "reading":
+      return <BookOpen size={size} />;
+    case "listening":
+      return <Headphones size={size} />;
+    case "writing":
+      return <PenTool size={size} />;
+    case "speaking":
+      return <Mic2 size={size} />;
+    case "Activity":
+      return <Activity size={size} />;
+    case "Clock":
+      return <Clock size={size} />;
+    case "ShieldCheck":
+      return <ShieldCheck size={size} />;
+    case "TrendingUp":
+      return <TrendingUp size={size} />;
+    case "Zap":
+      return <Zap size={size} />;
+    default:
+      return <Info size={size} />;
   }
 };
 
@@ -54,7 +62,10 @@ function renderFormattedText(text: string): React.ReactNode {
     return italicParts.map((italicPart, italicIdx) => {
       if (italicPart.startsWith("*") && italicPart.endsWith("*")) {
         return (
-          <em key={`i-${boldIdx}-${italicIdx}`} className="italic text-slate-900 font-medium">
+          <em
+            key={`i-${boldIdx}-${italicIdx}`}
+            className="italic text-slate-900 font-medium"
+          >
             {italicPart.slice(1, -1)}
           </em>
         );
@@ -82,7 +93,10 @@ function OverviewBody({ text }: { text: string }) {
           const tableRows = lines.filter((l) => !/^[|:\s-]+$/.test(l.trim()));
           if (tableRows.length > 0) {
             const parseCells = (row: string) =>
-              row.split("|").slice(1, -1).map((c) => c.trim());
+              row
+                .split("|")
+                .slice(1, -1)
+                .map((c) => c.trim());
             const headers = parseCells(tableRows[0]);
             const bodyRows = tableRows.slice(1).map((r) => parseCells(r));
             return (
@@ -105,7 +119,10 @@ function OverviewBody({ text }: { text: string }) {
                   </thead>
                   <tbody className="divide-y divide-slate-200/60">
                     {bodyRows.map((row, ri) => (
-                      <tr key={ri} className="hover:bg-slate-50/30 transition-colors">
+                      <tr
+                        key={ri}
+                        className="hover:bg-slate-50/30 transition-colors"
+                      >
                         {row.map((cell, ci) => (
                           <td
                             key={ci}
@@ -233,8 +250,12 @@ export default function BookExamOverviewWrapper({
               <div className="grid grid-cols-2 gap-2 md:grid-cols-4">
                 {stats.map((stat, i) => (
                   <div key={i}>
-                    <p className="text-[11px] text-slate-500 mb-1">{stat.label}</p>
-                    <p className="text-lg font-black text-slate-900">{stat.value}</p>
+                    <p className="text-[11px] text-slate-500 mb-1">
+                      {stat.label}
+                    </p>
+                    <p className="text-lg font-black text-slate-900">
+                      {stat.value}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -245,7 +266,9 @@ export default function BookExamOverviewWrapper({
               <section className="space-y-4">
                 <div className="flex items-center gap-3">
                   <div className="h-6 w-1 bg-primary rounded-full" />
-                  <h2 className="text-xl font-black text-slate-900">Overview</h2>
+                  <h2 className="text-xl font-black text-slate-900">
+                    Overview
+                  </h2>
                 </div>
                 <div className="prose prose-slate max-w-none text-slate-600 leading-relaxed text-xs lg:text-sm text-justify">
                   <OverviewBody text={overviewText} />
@@ -253,7 +276,10 @@ export default function BookExamOverviewWrapper({
                   {whoShouldTake.length > 0 && !hideSections && (
                     <ul className="mt-4 space-y-2 list-disc pl-5">
                       {whoShouldTake.map((item, i) => (
-                        <li key={i} className="text-slate-600 leading-relaxed text-xs lg:text-sm text-justify">
+                        <li
+                          key={i}
+                          className="text-slate-600 leading-relaxed text-xs lg:text-sm text-justify"
+                        >
                           {item.includes(":") ? (
                             <>
                               <strong className="font-bold text-slate-900">
@@ -276,10 +302,17 @@ export default function BookExamOverviewWrapper({
                 <section className="space-y-6">
                   <div className="flex items-center gap-3">
                     <div className="h-6 w-1 bg-primary rounded-full" />
-                    <h2 className="text-xl font-black text-slate-900">Test Format</h2>
+                    <h2 className="text-xl font-black text-slate-900">
+                      Test Format
+                    </h2>
                   </div>
 
-                  <div className={cn("grid gap-4", isIelts ? "md:grid-cols-2" : "grid-cols-1")}>
+                  <div
+                    className={cn(
+                      "grid gap-4",
+                      isIelts ? "md:grid-cols-2" : "grid-cols-1",
+                    )}
+                  >
                     {sections.map((section, i) => (
                       <div
                         key={i}
@@ -317,11 +350,14 @@ export default function BookExamOverviewWrapper({
                                     "grid gap-2",
                                     section.skills.some((s) => s.length > 50)
                                       ? "grid-cols-1"
-                                      : "sm:grid-cols-2"
+                                      : "sm:grid-cols-2",
                                   )}
                                 >
                                   {section.skills.map((skill, si) => (
-                                    <div key={si} className="flex items-start gap-2 text-slate-700">
+                                    <div
+                                      key={si}
+                                      className="flex items-start gap-2 text-slate-700"
+                                    >
                                       <CheckCircle2 className="size-3 text-primary shrink-0 mt-0.5" />
                                       <span className="text-xs text-justify">
                                         {skill.includes(":") ? (
@@ -329,7 +365,10 @@ export default function BookExamOverviewWrapper({
                                             <strong className="font-bold text-slate-900">
                                               {skill.split(":")[0]}:
                                             </strong>
-                                            {skill.split(":").slice(1).join(":")}
+                                            {skill
+                                              .split(":")
+                                              .slice(1)
+                                              .join(":")}
                                           </>
                                         ) : (
                                           skill
@@ -341,11 +380,16 @@ export default function BookExamOverviewWrapper({
                               </div>
                             )}
 
-                            {(section.format || section.questions || section.taskTypes || section.marks) && (
+                            {(section.format ||
+                              section.questions ||
+                              section.taskTypes ||
+                              section.marks) && (
                               <div className="grid gap-4 sm:grid-cols-2 pt-4 border-t border-slate-100">
                                 {section.format && (
                                   <div className="space-y-1 sm:col-span-2">
-                                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">Format</p>
+                                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">
+                                      Format
+                                    </p>
                                     <p className="text-xs font-medium text-slate-900 leading-relaxed whitespace-pre-line">
                                       {section.format}
                                     </p>
@@ -353,7 +397,9 @@ export default function BookExamOverviewWrapper({
                                 )}
                                 {section.questions && (
                                   <div className="space-y-1">
-                                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">Questions</p>
+                                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">
+                                      Questions
+                                    </p>
                                     <p className="text-sm font-medium text-slate-900 whitespace-pre-line">
                                       {section.questions}
                                     </p>
@@ -361,7 +407,9 @@ export default function BookExamOverviewWrapper({
                                 )}
                                 {section.taskTypes && (
                                   <div className="space-y-1 sm:col-span-2">
-                                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">Task Types</p>
+                                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">
+                                      Task Types
+                                    </p>
                                     <p className="text-xs font-medium text-slate-900 leading-relaxed whitespace-pre-line">
                                       {Array.isArray(section.taskTypes)
                                         ? section.taskTypes.join(", ")
@@ -371,7 +419,9 @@ export default function BookExamOverviewWrapper({
                                 )}
                                 {section.marks && (
                                   <div className="space-y-1 sm:col-span-2">
-                                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">Marks & Scoring</p>
+                                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">
+                                      Marks & Scoring
+                                    </p>
                                     <p className="text-xs font-medium text-slate-900 leading-relaxed whitespace-pre-line">
                                       {section.marks}
                                     </p>
@@ -423,7 +473,9 @@ export default function BookExamOverviewWrapper({
           <aside className="space-y-4 lg:sticky lg:top-44 self-start">
             {acceptedFor.length > 0 && (
               <BaseCard className="p-5 bg-slate-900 border-slate-800 text-white h-auto">
-                <h3 className="text-[11px] text-slate-500 mb-4">Accepted For</h3>
+                <h3 className="text-[11px] text-slate-500 mb-4">
+                  Accepted For
+                </h3>
                 <ul className="space-y-3">
                   {acceptedFor.map((item, i) => (
                     <li key={i} className="flex items-center gap-3 group">
@@ -442,10 +494,9 @@ export default function BookExamOverviewWrapper({
                     <Calendar size={24} />
                   </div>
                   <div className="space-y-2">
-                    <h3 className="text-lg font-black text-white">Ready to Book?</h3>
-                    <p className="text-[11px] text-slate-100/80 leading-relaxed">
-                      Secure your test date at TEPTH today.
-                    </p>
+                    <h3 className="text-lg font-black text-white">
+                      Ready to Book?
+                    </h3>
                   </div>
                   <button
                     onClick={() => {
@@ -454,7 +505,7 @@ export default function BookExamOverviewWrapper({
                     }}
                     className={cn(
                       buttonVariants({ variant: "light", size: "sm" }),
-                      "w-full font-black text-xs py-5 rounded-xl shadow-xl hover:scale-[1.02] transition-all"
+                      "w-full font-black text-xs py-5 rounded-xl shadow-xl hover:scale-[1.02] transition-all",
                     )}
                   >
                     Register

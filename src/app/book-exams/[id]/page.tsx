@@ -27,13 +27,12 @@ import CaelInfo from "@/components/blocks/cael-info";
 /** Build a lightweight exam-info object for the overview wrapper by merging
  *  the API response with the static EXAM_DETAILE_DATA fallback and localized strings. */
 function buildExamInfo(exam: any, t: any, locale: string) {
-  const staticMeta =
-    EXAM_DETAILE_DATA.find(
-      (item: any) =>
-        item.id === exam.id ||
-        item.slug === exam.slug ||
-        item.name?.toLowerCase() === exam.name?.toLowerCase()
-    ) as any;
+  const staticMeta = EXAM_DETAILE_DATA.find(
+    (item: any) =>
+      item.id === exam.id ||
+      item.slug === exam.slug ||
+      item.name?.toLowerCase() === exam.name?.toLowerCase(),
+  ) as any;
 
   const examId = staticMeta?.id || exam.id;
   let localizedMeta: any = {};
@@ -52,13 +51,15 @@ function buildExamInfo(exam: any, t: any, locale: string) {
   };
 
   // Safely merge sections to preserve the static icon property
-  let sections = (detailData.sections || []).map((section: any, idx: number) => {
-    const staticSection = staticMeta?.sections?.[idx] || {};
-    return {
-      ...staticSection,
-      ...section,
-    };
-  });
+  let sections = (detailData.sections || []).map(
+    (section: any, idx: number) => {
+      const staticSection = staticMeta?.sections?.[idx] || {};
+      return {
+        ...staticSection,
+        ...section,
+      };
+    },
+  );
 
   if (exam.slug === "pte-academic" || exam.slug === "pte-core") {
     sections = [];
@@ -72,10 +73,7 @@ function buildExamInfo(exam: any, t: any, locale: string) {
     "";
 
   const subtitle =
-    exam.subtitle ||
-    localizedMeta.subtitle ||
-    staticMeta?.subtitle ||
-    "";
+    exam.subtitle || localizedMeta.subtitle || staticMeta?.subtitle || "";
 
   const overview =
     exam.overview ||
@@ -85,7 +83,9 @@ function buildExamInfo(exam: any, t: any, locale: string) {
 
   const translatedDescription = exam?.translations?.[locale]?.description;
   const finalDescription = translatedDescription || description;
-  const finalOverview = exam?.translations?.[locale]?.overview || (translatedDescription ? translatedDescription : overview);
+  const finalOverview =
+    exam?.translations?.[locale]?.overview ||
+    (translatedDescription ? translatedDescription : overview);
 
   return {
     name: exam.name || staticMeta?.name || "",
@@ -106,7 +106,8 @@ export default async function BookExamsId({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const { id: slug } = await params;
+  const { id: rawSlug } = await params;
+  const slug = rawSlug === "toefl" ? "toefl-ibt" : rawSlug;
   const locale = await getLocale();
   const t = await getTranslations("ExamDetailsPage");
   console.log("👉 ~ BookExamsId ~ id/slug:", slug);
@@ -339,5 +340,3 @@ export default async function BookExamsId({
       return notFound();
   }
 }
-
-
