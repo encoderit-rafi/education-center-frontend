@@ -2931,7 +2931,7 @@
       "Free Consultation": "استشارة مجانية",
       "Test Your English Level": "اختبر مستواك في اللغة الإنجليزية",
       "English Quiz": "كويز الإنجليزية",
-      "Assessment Solutions": "حلول التقييم",
+      "Test Day Guidelines": "إرشادات يوم الاختبار",
       "Exam Special Accommodation": "التسهيلات الخاصة بالامتحانات",
       "Exam Proctoring Services": "خدمات مراقبة الامتحانات",
       "Institutions": "المؤسسات",
@@ -3347,19 +3347,29 @@
     "downloadButton": "تحميل PDF",
     "forms": [
       {
-        "title": "PTE-A",
+        "title": "تسجيل IELTS",
         "subtitle": "نموذج التسجيل",
-        "description": "قم بتنزيل نماذج التسجيل الرسمية لاختبار Pearson للغة الإنجليزية الأكاديمية."
+        "description": "قم بتنزيل نموذج التسجيل الرسمي لاختبار نظام اختبار اللغة الإنجليزية الدولي (IELTS)."
       },
       {
-        "title": "إلغاء TEPTH",
-        "subtitle": "نموذج الطلب",
-        "description": "النموذج الرسمي لطلبات إلغاء الدورة أو الامتحان واسترداد الرسوم."
+        "title": "تسجيل PTE",
+        "subtitle": "نموذج التسجيل",
+        "description": "قم بتنزيل نموذج التسجيل الرسمي لاختبار Pearson للغة الإنجليزية الأكاديمية (PTE)."
       },
       {
-        "title": "تسجيل TOEFL IBT",
+        "title": "تسجيل SELT",
+        "subtitle": "نموذج التسجيل",
+        "description": "قم بتنزيل نموذج التسجيل الرسمي لاختبار مهارات اللغة الإنجليزية (SELT)."
+      },
+      {
+        "title": "تسجيل TOEFL iBT",
         "subtitle": "نموذج التسجيل",
         "description": "أكمل تسجيل TOEFL iBT الخاص بك مع الوثائق الرسمية لـ TEPTH."
+      },
+      {
+        "title": "الإلغاء والاسترداد",
+        "subtitle": "نموذج الطلب",
+        "description": "النموذج الرسمي لطلبات إلغاء الدورة أو الامتحان واسترداد الرسوم."
       }
     ]
   },

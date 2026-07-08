@@ -10,7 +10,28 @@ import {
 import { FileText, XCircle, ClipboardList, Download } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-const FORM_ICONS = [FileText, XCircle, ClipboardList];
+const FORM_FILES = [
+    {
+        pdfPath: "/pdf/TEPTH - IELTS Exam Registration Form.pdf",
+        icon: FileText,
+    },
+    {
+        pdfPath: "/pdf/TEPTH - PTE Exam Registration Form.pdf",
+        icon: ClipboardList,
+    },
+    {
+        pdfPath: "/pdf/TEPTH - Skills for English (SELT) Exam Registration Form.pdf",
+        icon: ClipboardList,
+    },
+    {
+        pdfPath: "/pdf/TEPTH - TOEFL iBT Exam Registration Form.pdf",
+        icon: FileText,
+    },
+    {
+        pdfPath: "/pdf/TEPTH Cancellation & Refund Form.pdf",
+        icon: XCircle,
+    },
+];
 
 export default function DownloadFormsPage() {
     const t = useTranslations("DownloadFormsPage");
@@ -29,13 +50,14 @@ export default function DownloadFormsPage() {
                             {t("subtitle")}
                         </p>
                     </div>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {forms.map((form, idx) => {
-                            const Icon = FORM_ICONS[idx];
+                            const Icon = FORM_FILES[idx]?.icon || FileText;
+                            const pdfPath = FORM_FILES[idx]?.pdfPath || "#";
                             return (
                                 <Card
                                     key={form.title}
-                                    className="group relative bg-white border-gray-100 rounded-sm shadow-sm transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 hover:border-[#A11D1D]/20 overflow-hidden"
+                                    className="group relative bg-white border-gray-100 rounded-sm shadow-sm transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 hover:border-[#A11D1D]/20 overflow-hidden flex flex-col"
                                 >
                                     {/* Visual Accent */}
                                     <div className="absolute top-0 left-0 w-full h-1 bg-gray-100 group-hover:bg-[#A11D1D] transition-colors" />
@@ -60,7 +82,10 @@ export default function DownloadFormsPage() {
 
                                     <CardFooter className="pt-6 pb-10 mt-auto">
                                         <Link
-                                            href="#"
+                                            href={pdfPath}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            download
                                             className="w-full inline-flex items-center justify-center gap-2 px-6 py-4 bg-[#A11D1D] text-white text-xs font-black uppercase tracking-widest rounded-sm transition-all hover:bg-[#111827] hover:shadow-lg"
                                         >
                                             <Download className="w-4 h-4" />

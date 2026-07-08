@@ -315,8 +315,8 @@ export const SECONDARY_NAV: AppNavigationItem[] = [
   },
   {
     type: "single",
-    name: "Assessment Solutions",
-    href: "/assessment-solutions",
+    name: "Test Day Guidelines",
+    href: "/test-day-guidelines",
   },
 
   {

@@ -13,10 +13,10 @@
       "bookExam": "Book Exam",
       "items": [
         {
-          "title": "Licenses Prep Centre"
+          "title": "Licensed Prep. Centre"
         },
         {
-          "title": "High-Quality Testing Centre"
+          "title": "High-Quality Test Centre"
         },
         {
           "title": "Preparation Courses Available"
@@ -46,13 +46,13 @@
           "title": "Modern Testing Facilities"
         },
         {
-          "title": "Quiet and Spacious Test-Taking Rooms"
+          "title": "Quiet and Spacious Testing Labs"
         },
         {
           "title": "Hands-on Staff"
         },
         {
-          "title": "Test Centre Administrators"
+          "title": "Certified Test Center Administrators"
         }
       ]
     },
@@ -2984,7 +2984,7 @@
       "Free Consultation": "Free Consultation",
       "Test Your English Level": "Test Your English Level",
       "English Quiz": "English Quiz",
-      "Assessment Solutions": "Assessment Solutions",
+      "Test Day Guidelines": "Test Day Guidelines",
       "Exam Special Accommodation": "Exam Special Accommodation",
       "Exam Proctoring Services": "Exam Proctoring Services",
       "Institutions": "Institutions",
@@ -3400,19 +3400,29 @@
     "downloadButton": "Download PDF",
     "forms": [
       {
-        "title": "PTE-A",
+        "title": "IELTS REGISTRATION",
         "subtitle": "Registration Form",
-        "description": "Download the official Pearson Test of English Academic registration forms."
+        "description": "Download the official International English Language Testing System (IELTS) registration form."
       },
       {
-        "title": "TEPTH CANCELLATION",
-        "subtitle": "Request Form",
-        "description": "Official form for course or exam cancellation and refund requests."
+        "title": "PTE REGISTRATION",
+        "subtitle": "Registration Form",
+        "description": "Download the official Pearson Test of English Academic (PTE) registration form."
+      },
+      {
+        "title": "SELT REGISTRATION",
+        "subtitle": "Registration Form",
+        "description": "Download the official Skills for English (SELT) registration form."
       },
       {
         "title": "TOEFL IBT REGISTRATION",
         "subtitle": "Registration Form",
         "description": "Complete your TOEFL iBT registration with the official TEPTH documentation."
+      },
+      {
+        "title": "CANCELLATION & REFUND",
+        "subtitle": "Request Form",
+        "description": "Official form for course or exam cancellation and refund requests."
       }
     ]
   },
