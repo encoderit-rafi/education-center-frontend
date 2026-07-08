@@ -275,7 +275,7 @@ export default function TestDayGuidelines() {
       {/* Still Have Questions CTA */}
       <section className="relative z-10 py-16">
         <div className="container max-w-4xl px-6 mx-auto">
-          <div className="relative overflow-hidden rounded-[2rem] bg-slate-950 px-8 py-14 shadow-2xl md:px-16 text-center md:text-left">
+          <div className="relative overflow-hidden rounded-4xl bg-slate-950 px-8 py-14 shadow-2xl md:px-16 text-center md:text-left">
             {/* Background Accent */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-[#A11D1D]/10 blur-[100px] rounded-full -mr-32 -mt-32" />
 
