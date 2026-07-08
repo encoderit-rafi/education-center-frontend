@@ -61,7 +61,6 @@ export default function ContactForm() {
     { value: "Referral", label: tForm("topics.referral") },
     { value: "Value-driven Collaboration", label: tForm("topics.value_driven_collaboration") },
     { value: "Venue Rental", label: tForm("topics.venue_rental") },
-    { value: "Assessment Solutions", label: tForm("topics.assessment_solutions") },
     { value: "Exam Delivery", label: tForm("topics.exam_delivery") },
     { value: "Venue Availability", label: tForm("topics.venue_availability") },
     { value: "Other", label: tForm("topics.other") },
