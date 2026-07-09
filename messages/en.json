@@ -3248,29 +3248,31 @@
       {
         "step": "01",
         "title": "Choose Your Exam",
-        "desc": "Select the exam that matches your goal — study, migration, UK visa, or professional certification. Browse the exam cards below."
+        "desc": "Select the exam that matches your goal — study, migration, UK visa, or professional certification."
       },
       {
         "step": "02",
-        "title": "Register with the Provider",
-        "desc": "Click the registration link for your chosen exam to create an account and select a test date and centre."
+        "title": "Agree to Terms and Conditions",
+        "desc": "Agree to Terms and Conditions and candidate policies before proceeding with your registration."
       },
       {
         "step": "03",
-        "title": "Select TEPTH as Your Centre",
-        "desc": "When choosing your test centre, search for TEPTH in Dubai Silicon Oasis. If you need help, call us on +97165531250."
+        "title": "Register & Pay",
+        "desc": "Complete the online registration form, review, confirm and finalize payment."
       },
       {
         "step": "04",
-        "title": "Confirm & Prepare",
-        "desc": "Once booked, you will receive a confirmation. Review your exam requirements and contact TEPTH if you need any special arrangements."
+        "title": "Review & Contact",
+        "desc": "A member of our team will review your application and be in touch to finalize your exam booking."
       }
     ]
   },
   "TestDayGuidelinesPage": {
     "hero": {
-      "title": "Be Prepared. Be Confident.",
-      "titleAccent": "Perform Your Best.",
+      "badge": "General Guidelines",
+      "title1": "Be Prepared.",
+      "title2": "Be Confident.",
+      "title3": "Perform Your Best.",
       "subtitle": "Your test day is not just about knowledge — it's about calm execution, timing, and following correct procedures. These guidelines help you arrive prepared and avoid unnecessary stress."
     },
     "navSections": [
@@ -3383,7 +3385,7 @@
     },
     "cta": {
       "title": "Still Have Questions?",
-      "subtitle": "Our support team is here to ensure you have a seamless experience. Contact us Sunday to Thursday, 9am – 6pm.",
+      "subtitle": "Our support team is here to ensure you have a seamless experience. Contact us Saturday to Thursday, 9:00 AM – 9:00 PM.",
       "callButton": "+97165531250",
       "enquiryButton": "Send an Enquiry"
     }
@@ -3818,7 +3820,7 @@
     "success": {
       "title": "Assessment Complete!",
       "subtitle": "Your results are being processed",
-      "description": "Our academic board has received your responses. Your personalized proficiency profile and course roadmap will be sent to your email within 4 hours.",
+      "description": "Thank you for completing our English Level Test. Our team will review your responses to evaluate your proficiency and determine your current level. Please allow 1 to 2 business days for us to contact you with your results.",
       "retake": "Retake Assessment"
     },
     "validation": {

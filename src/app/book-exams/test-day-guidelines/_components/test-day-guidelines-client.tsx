@@ -17,12 +17,14 @@ import {
   Info,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 const GUIDELINE_SECTION_IDS = ["before","what-to-bring","what-not-to-bring","arrival","during-test","rules","after-test","advice"];
 
 export default function TestDayGuidelinesClient() {
   const t = useTranslations("TestDayGuidelinesPage");
+  const locale = useLocale();
+  const isRtl = locale === "ar";
   const navSections = t.raw("navSections") as { id: string; label: string }[];
   const [activeSection, setActiveSection] = useState("");
 
@@ -49,7 +51,10 @@ export default function TestDayGuidelinesClient() {
   }, []);
 
   return (
-    <main className="min-h-screen bg-white font-sans selection:bg-primary/10 selection:text-primary">
+    <main
+      dir={isRtl ? "rtl" : "ltr"}
+      className="min-h-screen bg-white font-sans selection:bg-primary/10 selection:text-primary"
+    >
       {/* ── Premium Hero ── */}
       <section className="relative overflow-hidden bg-white pt-20">
         <div
@@ -62,16 +67,41 @@ export default function TestDayGuidelinesClient() {
         />
 
         <div className="container relative mx-auto px-4 py-16 lg:px-8 lg:py-24">
-          <div className="mx-auto max-w-3xl text-center">
-            <h1 className="mb-5 text-4xl font-bold tracking-tight text-slate-950 lg:text-6xl italic">
-              {t("hero.title")} <br />
-              <span className="text-primary not-italic">
-                {t("hero.titleAccent")}
-              </span>
-            </h1>
-            <p className="mx-auto max-w-2xl text-lg leading-relaxed text-slate-600">
-              {t("hero.subtitle")}
-            </p>
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+            {/* Left Column (Text Content) */}
+            <div className="md:col-span-8 text-center md:text-start">
+              <div className="inline-flex items-center gap-2 px-4.5 py-2 rounded-full bg-red-50 border border-red-200/50 text-sm font-bold text-[#A11D1D] mb-6 shadow-sm">
+                <Info className="w-4 h-4" />
+                <span>{t("hero.badge")}</span>
+              </div>
+
+              <h1 className="flex flex-col gap-2 md:gap-3.5 tracking-tight uppercase leading-tight mb-8">
+                <span className="block text-4xl md:text-5xl lg:text-6.5xl font-black text-slate-950">
+                  {t("hero.title1")}
+                </span>
+                <span className="block text-4xl md:text-5xl lg:text-6.5xl font-black text-slate-950 md:ms-12">
+                  {t("hero.title2")}
+                </span>
+                <span className="block text-4xl md:text-5xl lg:text-6.5xl font-black text-primary md:ms-24 relative whitespace-nowrap self-center md:self-start">
+                  {t("hero.title3")}
+                  <span className="absolute left-0 bottom-1 w-full h-2.5 bg-primary/10 rounded-full -z-10" />
+                </span>
+              </h1>
+              <p className="text-slate-700 text-lg md:text-xl font-semibold leading-relaxed max-w-2xl">
+                {t("hero.subtitle")}
+              </p>
+            </div>
+
+            {/* Right Column (Image Content) */}
+            <div className="md:col-span-4 flex justify-center">
+              <div className="relative w-full max-w-md aspect-square rounded-4xl overflow-hidden border border-slate-200/60 shadow-2xl bg-white p-2 transition-transform duration-300 hover:scale-102">
+                <img
+                  src="/images/test-day-guidelines.png"
+                  alt={isRtl ? "إرشادات يوم الاختبار" : "Test Day Guidelines Illustration"}
+                  className="w-full h-full object-contain rounded-2xl"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -346,7 +376,7 @@ export default function TestDayGuidelinesClient() {
       {/* ── Still Have Questions CTA ── */}
       <section className="bg-white py-24">
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="mx-auto max-w-4xl overflow-hidden rounded-[2.5rem] bg-slate-950 px-8 py-16 shadow-2xl md:px-16 relative">
+          <div className="mx-auto max-w-4xl overflow-hidden rounded-[2.5rem] bg-linear-to-br from-red-950/50 via-slate-950 to-slate-950 border border-red-900/30 px-8 py-16 shadow-2xl md:px-16 relative">
             {/* Background Accent */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-primary/20 blur-[100px] rounded-full -mr-32 -mt-32" />
 

@@ -53,13 +53,13 @@ export function CampusGallery() {
                 key={index}
                 className="pl-4 md:basis-1/2 lg:basis-1/3"
               >
-                <div className="relative aspect-[4/3] rounded-3xl overflow-hidden group shadow-lg">
+                <div className="relative aspect-4/3 rounded-3xl overflow-hidden group shadow-lg">
                   <img
                     src={src}
                     alt={images[index]?.name ?? ""}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-8">
+                  <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-8">
                     <p className="text-white font-medium text-lg">
                       {images[index]?.name}
                     </p>

@@ -159,23 +159,43 @@ export default function TestDayGuidelines() {
 
       {/* Header section */}
       <section className="pt-24 pb-8 relative z-10 animate-fade-in">
-        <div className="container max-w-5xl px-6 mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-red-50 border border-red-150/30 text-xs font-semibold text-[#A11D1D] mb-6 shadow-sm">
-            <Info className="w-3.5 h-3.5" />
-            <span>{isRtl ? "إرشادات رسمية" : "Official Guidelines"}</span>
+        <div className="container max-w-7xl px-6 mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+            {/* Left Column (Text Content) */}
+            <div className="md:col-span-8 text-center md:text-start">
+              <div className="inline-flex items-center gap-2 px-4.5 py-2 rounded-full bg-red-50 border border-red-200/50 text-sm font-bold text-[#A11D1D] mb-6 shadow-sm">
+                <Info className="w-4 h-4" />
+                <span>{t("hero.badge")}</span>
+              </div>
+
+              <h1 className="flex flex-col gap-2 md:gap-3.5 tracking-tight uppercase leading-tight mb-8">
+                <span className="block text-4xl md:text-5xl lg:text-6.5xl font-black text-slate-950">
+                  {t("hero.title1")}
+                </span>
+                <span className="block text-4xl md:text-5xl lg:text-6.5xl font-black text-slate-950 md:ms-12">
+                  {t("hero.title2")}
+                </span>
+                <span className="block text-4xl md:text-5xl lg:text-6.5xl font-black text-[#A11D1D] md:ms-24 relative whitespace-nowrap self-center md:self-start">
+                  {t("hero.title3")}
+                </span>
+              </h1>
+
+              <p className="text-slate-700 text-lg md:text-xl font-semibold leading-relaxed mb-4 max-w-2xl">
+                {t("hero.subtitle")}
+              </p>
+            </div>
+
+            {/* Right Column (Image Content) */}
+            <div className="md:col-span-4 flex justify-center">
+              <div className="relative w-full max-w-md aspect-square rounded-2xl overflow-hidden border border-slate-200/60 shadow-xl bg-white p-1 transition-transform duration-300 hover:scale-102">
+                <img
+                  src="/images/test-day-guidelines.png"
+                  alt={isRtl ? "إرشادات يوم الاختبار" : "Test Day Guidelines Illustration"}
+                  className="w-full h-full object-contain rounded-2xl"
+                />
+              </div>
+            </div>
           </div>
-
-          <h1 className="text-4xl md:text-6xl font-black text-slate-900 tracking-tight uppercase leading-none mb-6">
-            {t("hero.title")}{" "}
-            <span className="text-[#A11D1D] relative inline-block">
-              {t("hero.titleAccent")}
-              <span className="absolute left-0 bottom-1 w-full h-1.5 bg-[#A11D1D]/10 rounded-full" />
-            </span>
-          </h1>
-
-          <p className="text-slate-500 text-lg max-w-3xl mx-auto font-medium leading-relaxed mb-4">
-            {t("hero.subtitle")}
-          </p>
         </div>
       </section>
 
@@ -275,7 +295,7 @@ export default function TestDayGuidelines() {
       {/* Still Have Questions CTA */}
       <section className="relative z-10 py-16">
         <div className="container max-w-4xl px-6 mx-auto">
-          <div className="relative overflow-hidden rounded-4xl bg-slate-950 px-8 py-14 shadow-2xl md:px-16 text-center md:text-left">
+          <div className="relative overflow-hidden rounded-4xl bg-linear-to-br from-red-950/50 via-slate-950 to-slate-950 border border-red-900/30 px-8 py-14 shadow-2xl md:px-16 text-center md:text-left">
             {/* Background Accent */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-[#A11D1D]/10 blur-[100px] rounded-full -mr-32 -mt-32" />
 

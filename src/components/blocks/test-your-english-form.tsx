@@ -586,7 +586,7 @@ export default function TestYourEnglishForm() {
                         name={`answers.${q.id}`}
                         render={({ field }) => (
                           <RadioGroup
-                            value={field.value}
+                            value={field.value ?? ""}
                             onValueChange={field.onChange}
                             className="grid gap-3"
                           >
