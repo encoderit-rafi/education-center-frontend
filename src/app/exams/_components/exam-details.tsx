@@ -175,7 +175,7 @@ export default function ExamDetails({ data }: { data: any }) {
                     Overview
                   </h2>
                 </div>
-                <div className="w-full text-slate-600 leading-relaxed text-sm md:text-[15px] lg:text-base space-y-5">
+                <div className="w-full text-slate-600 leading-relaxed text-sm md:text-[15px] lg:text-base space-y-5 text-justify">
                   {(() => {
                     const renderFormattedText = (text: string) => {
                       if (!text) return "";
@@ -272,7 +272,7 @@ export default function ExamDetails({ data }: { data: any }) {
                                         {row.map((cell, ci) => (
                                           <td
                                             key={ci}
-                                            className="px-6 py-4.5 text-slate-700 leading-relaxed border-r last:border-r-0 border-slate-200/50 text-left rtl:text-right"
+                                            className="px-6 py-4.5 text-slate-700 leading-relaxed border-r last:border-r-0 border-slate-200/50 text-justify"
                                           >
                                             {renderFormattedText(cell)}
                                           </td>
@@ -332,7 +332,7 @@ export default function ExamDetails({ data }: { data: any }) {
                             currentList.push(
                               <li
                                 key={`li-${lineIdx}`}
-                                className="flex items-start gap-3 text-slate-600 text-sm md:text-[15px] leading-relaxed text-left rtl:text-right"
+                                className="flex items-start gap-3 text-slate-600 text-sm md:text-[15px] leading-relaxed text-justify"
                               >
                                 {isNumbered ? (
                                   <span className="text-primary font-bold text-[11px] md:text-xs mt-0.5 shrink-0 select-none bg-primary/10 rounded-md w-5 h-5 flex items-center justify-center">
@@ -384,7 +384,7 @@ export default function ExamDetails({ data }: { data: any }) {
                               elements.push(
                                 <div
                                   key={`takeaway-${lineIdx}`}
-                                  className="my-6 p-4 md:p-5 rounded-2xl border border-primary/20 bg-primary/3 shadow-sm flex gap-3.5 items-start text-left rtl:text-right"
+                                  className="my-6 p-4 md:p-5 rounded-2xl border border-primary/20 bg-primary/3 shadow-sm flex gap-3.5 items-start text-justify"
                                 >
                                   <div className="p-2 rounded-xl bg-primary/10 text-primary shrink-0">
                                     <Info size={18} />
@@ -404,7 +404,7 @@ export default function ExamDetails({ data }: { data: any }) {
                               elements.push(
                                 <p
                                   key={`p-${lineIdx}`}
-                                  className="text-slate-600 leading-relaxed text-sm md:text-[15px] lg:text-base text-left rtl:text-right my-3"
+                                  className="text-slate-600 leading-relaxed text-sm md:text-[15px] lg:text-base text-justify my-3"
                                 >
                                   {renderFormattedText(line)}
                                 </p>
@@ -432,7 +432,7 @@ export default function ExamDetails({ data }: { data: any }) {
                         {whoShouldTake.map((item: string, i: number) => (
                           <li
                             key={i}
-                            className="flex items-start gap-3 text-slate-600 text-sm md:text-[15px] leading-relaxed text-left rtl:text-right"
+                            className="flex items-start gap-3 text-slate-600 text-sm md:text-[15px] leading-relaxed text-justify"
                           >
                             <span className="text-primary mt-2 shrink-0 select-none">
                               <span className="block h-2 w-2 rounded-full bg-primary/70" />
