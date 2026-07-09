@@ -181,11 +181,7 @@ export default function CareerPage() {
       const res = await api.post("/career", payload);
 
       if (res.data?.success || res.status === 200 || res.status === 201) {
-        toast.success("Application Submitted Successfully!", {
-          id: "career-submit",
-          description:
-            "Thank you for applying. We will review your application and resume shortly.",
-        });
+        toast.dismiss("career-submit");
         setIsSuccess(true);
       } else {
         toast.error("Submission Failed", {

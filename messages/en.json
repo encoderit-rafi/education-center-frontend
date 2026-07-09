@@ -336,8 +336,8 @@
           "messageMin": "Message must be at least 10 characters"
         },
         "toast": {
-          "successTitle": "Enquiry Sent Successfully!",
-          "successDesc": "Our team will get back to you within 24 business hours.",
+          "successTitle": "Thank you for reaching out.",
+          "successDesc": "We have successfully received your message. A member of our team will review your inquiry and get back to you within 1-2 business days. If your request requires immediate assistance, please call us directly at +971 6 553 1250 during our standard business hours: 9:00 AM – 9:00 PM, Saturday to Thursday.",
           "errorTitle": "Failed to Send Enquiry",
           "errorDesc": "An error occurred while submitting. Please try again."
         }
@@ -849,7 +849,7 @@
     "title": "Personal Information",
     "description": "Please fill out the form below and attach your latest CV to apply.",
     "successTitle": "Application Sent!",
-    "successDescription": "Thank you for your interest. Our HR team will review your application and contact you soon.",
+    "successDescription": "Thank you for applying to TEPTH. Your CV has been successfully received. If your skills and qualifications align with what we are looking for, we will reach out via email or phone with the next steps for an interview. Best of luck.",
     "goBack": "Go Back",
     "submit": "Submit Application",
     "submitting": "Submitting...",
