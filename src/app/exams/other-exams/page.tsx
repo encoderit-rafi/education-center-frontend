@@ -25,20 +25,12 @@ const OTHER_EXAMS = [
       "A broad portfolio of professional and academic exams delivered through Pearson VUE — including GED, GMAT, IT certifications, Professional, Healthcare, and Finance exams.",
   },
   {
-    id: "acca",
-    initial: "A",
-    provider: "ACCA",
-    name: "ACCA",
+    id: "gre",
+    initial: "G",
+    provider: "ETS",
+    name: "GRE",
     description:
-      "Association of Chartered Certified Accountants — globally recognised professional accountancy qualification. Contact us to confirm current availability and scheduling.",
-  },
-  {
-    id: "kryterion",
-    initial: "K",
-    provider: "Kryterion",
-    name: "Kryterion Exams",
-    description:
-      "Various professional certification and credentialing exams delivered securely through Kryterion's testing network. Contact us for available titles and scheduling.",
+      "Graduate Record Examinations (GRE) — standardized test widely used for graduate school admissions. Contact us to confirm availability and scheduling.",
   },
 ];
 
@@ -54,9 +46,8 @@ export default function OtherExamsPage() {
         </h2>
         <p className="mx-auto section-subtitle text-center">
           Beyond our core language tests, TEPTH delivers a range of professional
-          certification and credentialing exams — including Pearson VUE, ACCA,
-          and Kryterion. Contact us to confirm availability and current
-          scheduling.
+          certification and credentialing exams — including Pearson VUE and GRE.
+          Contact us to confirm availability and current scheduling.
         </p>
 
         <Accordion
