@@ -2,10 +2,10 @@
 import React from "react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { Landmark, Bus, Building2, Leaf, Headphones, ShieldCheck, ArrowRight } from "lucide-react";
+import { Landmark, Bus, Building2, Leaf, GraduationCap, ShieldCheck, ArrowRight } from "lucide-react";
 import { buttonVariants } from "../ui/button";
 
-const ICONS = [Landmark, Bus, Building2, Leaf, Headphones, ShieldCheck];
+const ICONS = [Landmark, Bus, Building2, Leaf, GraduationCap, ShieldCheck];
 
 export default function ApartSection() {
   const t = useTranslations("HomePage.ApartSection");
