@@ -40,17 +40,17 @@ export default function DownloadFormsPage() {
     return (
         <div className="flex flex-col min-h-screen">
             {/* Forms Section */}
-            <section className="py-24 bg-white">
-                <div className="max-w-7xl mx-auto px-6">
-                    <div className="text-center mb-20">
-                        <h1 className="text-4xl md:text-6xl font-black text-gray-900 tracking-tighter mb-4 uppercase leading-none">
+            <section className="base-py bg-white">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="text-center mb-10 md:mb-20">
+                        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 tracking-tighter mb-4 uppercase leading-none">
                             {t("title")}<span className="text-[#A11D1D]">{t("titleAccent")}</span>
                         </h1>
-                        <p className="text-gray-500 text-lg max-w-2xl mx-auto font-medium">
+                        <p className="text-gray-500 text-sm sm:text-base md:text-lg max-w-2xl mx-auto font-medium">
                             {t("subtitle")}
                         </p>
                     </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                         {forms.map((form, idx) => {
                             const Icon = FORM_FILES[idx]?.icon || FileText;
                             const pdfPath = FORM_FILES[idx]?.pdfPath || "#";
@@ -62,11 +62,11 @@ export default function DownloadFormsPage() {
                                     {/* Visual Accent */}
                                     <div className="absolute top-0 left-0 w-full h-1 bg-gray-100 group-hover:bg-[#A11D1D] transition-colors" />
 
-                                    <CardHeader className="pt-10 pb-2">
-                                        <div className="w-14 h-14 bg-gray-50 rounded-full flex items-center justify-center mb-8 group-hover:bg-red-50 transition-colors">
-                                            <Icon className="w-7 h-7 text-gray-400 group-hover:text-[#A11D1D]" />
+                                    <CardHeader className="pt-8 md:pt-10 pb-2 px-5 md:px-6">
+                                        <div className="w-12 h-12 md:w-14 md:h-14 bg-gray-50 rounded-full flex items-center justify-center mb-6 md:mb-8 group-hover:bg-red-50 transition-colors">
+                                            <Icon className="w-6 h-6 md:w-7 md:h-7 text-gray-400 group-hover:text-[#A11D1D]" />
                                         </div>
-                                        <h4 className="text-2xl font-black text-gray-900 leading-tight">
+                                        <h4 className="text-xl md:text-2xl font-black text-gray-900 leading-tight">
                                             {form.title.startsWith("TEPTH") ? (
                                                 <>
                                                     <span className="text-[#A11D1D]">TEPTH</span>
@@ -78,7 +78,7 @@ export default function DownloadFormsPage() {
                                         </h4>
                                     </CardHeader>
 
-                                    <CardFooter className="pt-6 pb-10 mt-auto">
+                                    <CardFooter className="pt-4 pb-8 md:pt-6 md:pb-10 px-5 md:px-6 mt-auto">
                                         <Link
                                             href={pdfPath}
                                             target="_blank"
