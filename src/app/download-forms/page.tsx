@@ -78,12 +78,6 @@ export default function DownloadFormsPage() {
                                         </h4>
                                     </CardHeader>
 
-                                    <CardContent className="grow">
-                                        <p className="text-gray-500 text-sm leading-relaxed">
-                                            {form.description}
-                                        </p>
-                                    </CardContent>
-
                                     <CardFooter className="pt-6 pb-10 mt-auto">
                                         <Link
                                             href={pdfPath}
