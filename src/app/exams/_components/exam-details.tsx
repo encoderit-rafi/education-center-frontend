@@ -148,16 +148,16 @@ export default function ExamDetails({ data }: { data: any }) {
           <div className="lg:col-span-2 space-y-6">
             {/* Stats Grid Card */}
             {stats.length > 0 && (
-              <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 bg-slate-50/50 p-4.5 rounded-2xl border border-slate-100/80">
+              <div className="grid grid-cols-1 min-[360px]:grid-cols-2 gap-2.5 sm:gap-3 sm:grid-cols-4 bg-slate-50/50 p-3 sm:p-4.5 rounded-2xl border border-slate-100/80">
                 {stats.map((stat: any, i: number) => (
                   <div
                     key={i}
-                    className="bg-white p-3.5 rounded-xl border border-slate-200/50 shadow-sm flex flex-col justify-between hover:scale-[1.02] hover:shadow-md transition-all duration-200"
+                    className="bg-white p-3 sm:p-3.5 rounded-xl border border-slate-200/50 shadow-sm flex flex-col justify-between hover:scale-[1.02] hover:shadow-md transition-all duration-200"
                   >
                     <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
                       {stat.label}
                     </p>
-                    <p className="text-base font-black text-slate-900 tracking-tight">
+                    <p className="text-sm sm:text-base font-black text-slate-900 tracking-tight">
                       {stat.value}
                     </p>
                   </div>
@@ -250,7 +250,7 @@ export default function ExamDetails({ data }: { data: any }) {
                                 key={i}
                                 className="my-6 overflow-x-auto rounded-2xl border border-slate-200/60 shadow-sm bg-white"
                               >
-                                <table className="w-full min-w-150 border-collapse text-left rtl:text-right text-xs lg:text-sm">
+                                <table className="w-full min-w-[600px] border-collapse text-left rtl:text-right text-xs lg:text-sm">
                                   <thead>
                                     <tr className="bg-slate-50/80 border-b border-slate-200/60">
                                       {headers.map((h, hi) => (

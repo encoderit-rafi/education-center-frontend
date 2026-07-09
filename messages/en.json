@@ -3773,7 +3773,7 @@
       "phoneNumberRequired": "Phone Number is required",
       "startQuiz": "Start the quiz",
       "answerRequired": "Please answer this question",
-      "chooseOption": "Choose the correct option",
+      "chooseOption": "Choose the correct answer",
       "back": "Back",
       "processing": "Processing...",
       "submitQuiz": "Submit Quiz"
@@ -3835,7 +3835,7 @@
     "start": "Start",
     "introText": "Please allocate a few minutes to complete our online English Level Test. We take your English Language assessment seriously.",
     "loading": "Loading questions...",
-    "guidance": "Choose the correct option",
+    "guidance": "Choose the correct answer",
     "submit": "Submit Assessment",
     "submitting": "Processing...",
     "success": {
