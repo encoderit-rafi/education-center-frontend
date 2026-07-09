@@ -169,7 +169,7 @@ export default function ContactForm() {
           <h3 className="text-2xl font-black text-secondary">
             {tForm("toast.successTitle")}
           </h3>
-          <p className="text-slate-600 leading-relaxed max-w-xl mx-auto text-base font-semibold">
+          <p className="text-slate-600 leading-relaxed max-w-xl mx-auto text-base font-semibold text-justify">
             {tForm("toast.successDesc")}
           </p>
         </div>

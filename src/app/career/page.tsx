@@ -221,7 +221,7 @@ export default function CareerPage() {
             <h2 className="text-3xl font-black font-heading tracking-tighter">
               {t("successTitle")}
             </h2>
-            <p className="text-gray-500 font-medium">
+            <p className="text-gray-500 font-medium text-justify">
               {t("successDescription")}
             </p>
           </div>
