@@ -17,11 +17,11 @@ const FORM_FILES = [
     },
     {
         pdfPath: "/pdf/TEPTH - PTE Exam Registration Form.pdf",
-        icon: ClipboardList,
+        icon: FileText,
     },
     {
         pdfPath: "/pdf/TEPTH - Skills for English (SELT) Exam Registration Form.pdf",
-        icon: ClipboardList,
+        icon: FileText,
     },
     {
         pdfPath: "/pdf/TEPTH - TOEFL iBT Exam Registration Form.pdf",
@@ -29,7 +29,7 @@ const FORM_FILES = [
     },
     {
         pdfPath: "/pdf/TEPTH Cancellation & Refund Form.pdf",
-        icon: XCircle,
+        icon: FileText,
     },
 ];
 
