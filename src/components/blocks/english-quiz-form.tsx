@@ -704,7 +704,7 @@ export default function EnglishQuizForm() {
     const calculatedScore = Math.round(
       (correctAnswersCount / QUIZ_QUESTIONS.length) * 100
     );
-    router.push(`/english-quiz/result?score=${calculatedScore}`);
+    router.push(`/english-quiz/result?score=${calculatedScore}&correct=${correctAnswersCount}`);
   };
 
   return (

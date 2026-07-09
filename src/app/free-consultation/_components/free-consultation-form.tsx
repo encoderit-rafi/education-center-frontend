@@ -48,7 +48,7 @@ import { CountryDropdown } from "@/components/ui/country-dropdown";
 import { toast } from "sonner";
 import api from "@/axios";
 
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 type FormValues = {
   fullName: string;
@@ -64,6 +64,8 @@ type FormValues = {
 
 export default function FreeConsultationForm() {
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const locale = useLocale();
   const t = useTranslations("FreeConsultationPage");
   const tForm = useTranslations("FreeConsultationPage.form");
 
@@ -171,12 +173,8 @@ export default function FreeConsultationForm() {
       };
 
       const res = await api.post("/consultations", payload);
-
       if (res.data?.success || res.status === 200 || res.status === 201) {
-        toast.success(tForm("toast.successTitle"), {
-          description: tForm("toast.successDesc"),
-          duration: 6000,
-        });
+        setIsSubmitted(true);
         reset();
       } else {
         toast.error(tForm("toast.errorTitle"), {
@@ -189,6 +187,34 @@ export default function FreeConsultationForm() {
       });
     }
   };
+
+  if (isSubmitted) {
+    const isRtl = locale === "ar";
+    return (
+      <div
+        dir={isRtl ? "rtl" : "ltr"}
+        className="bg-slate-50 border border-slate-200/60 rounded-2xl p-8 md:p-12 text-center space-y-6 animate-fade-in text-slate-800"
+      >
+        <div className="mx-auto w-16 h-16 bg-primary/10 text-primary rounded-full flex items-center justify-center">
+          <ShieldCheck size={36} />
+        </div>
+        <div className="space-y-3">
+          <h3 className="text-2xl font-black text-secondary">
+            {tForm("toast.successTitle")}
+          </h3>
+          <p className="text-slate-600 leading-relaxed max-w-xl mx-auto text-base font-semibold">
+            {tForm("toast.successDesc")}
+          </p>
+        </div>
+        <Button
+          onClick={() => setIsSubmitted(false)}
+          className="font-bold px-8 h-12 rounded-xl transition-all active:scale-95 cursor-pointer"
+        >
+          {isRtl ? "إرسال طلب آخر" : "Submit Another Request"}
+        </Button>
+      </div>
+    );
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">

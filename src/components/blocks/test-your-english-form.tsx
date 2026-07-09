@@ -279,7 +279,7 @@ export default function TestYourEnglishForm() {
       <Dialog open={isSuccess} onOpenChange={setIsSuccess}>
         <DialogContent
           showCloseButton={false}
-          className="sm:max-w-[450px] p-0 overflow-hidden border-none rounded-md"
+          className="sm:max-w-112.5 p-0 overflow-hidden border-none rounded-md"
         >
           <div className="bg-primary p-8 text-white text-center space-y-4 relative">
             <DialogClose className="absolute top-4 right-4 p-2 rounded-md hover:bg-white/10 text-white transition-colors cursor-pointer">
@@ -298,7 +298,7 @@ export default function TestYourEnglishForm() {
 
           <div className="p-8 space-y-8 bg-white">
             <div className="bg-slate-50 rounded-md p-4 border border-slate-100 flex items-start gap-3">
-              <Info className="text-primary flex-shrink-0 mt-0.5" size={18} />
+              <Info className="text-primary shrink-0 mt-0.5" size={18} />
               <p className="text-xs text-slate-600 leading-relaxed font-medium">
                 {t("success.description")}
               </p>
@@ -586,7 +586,7 @@ export default function TestYourEnglishForm() {
                         name={`answers.${q.id}`}
                         render={({ field }) => (
                           <RadioGroup
-                            value={field.value}
+                            value={field.value ?? ""}
                             onValueChange={field.onChange}
                             className="grid gap-3"
                           >

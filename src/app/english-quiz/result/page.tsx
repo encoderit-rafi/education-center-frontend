@@ -6,13 +6,17 @@ import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Trophy, Info, RotateCcw, ArrowRight, Star } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 function QuizResultContent() {
   const t = useTranslations("EnglishQuiz");
+  const locale = useLocale();
+  const isRtl = locale === "ar";
   const searchParams = useSearchParams();
   const scoreParam = searchParams.get("score");
   const score = scoreParam ? parseInt(scoreParam, 10) : 0;
+  const correctParam = searchParams.get("correct");
+  const correct = correctParam ? parseInt(correctParam, 10) : Math.round((score * 60) / 100);
 
   // Rank and text feedback
   const isExpert = score >= 80;
@@ -43,7 +47,10 @@ function QuizResultContent() {
       : t("result.levelBeginner");
 
   return (
-    <div className="max-w-2xl mx-auto bg-white border border-slate-200 shadow-xl rounded-2xl overflow-hidden">
+    <div
+      dir={isRtl ? "rtl" : "ltr"}
+      className="max-w-2xl mx-auto bg-white border border-slate-200 shadow-xl rounded-2xl overflow-hidden"
+    >
       {/* Visual Header Banner */}
       <div className="bg-primary p-12 text-white text-center space-y-6 relative overflow-hidden">
         {/* Subtle background decoration */}
@@ -74,20 +81,20 @@ function QuizResultContent() {
 
       {/* Main Results Container */}
       <div className="p-8 lg:p-12 space-y-8 bg-white">
-        <div className="grid sm:grid-cols-2 gap-8 items-center text-center sm:text-left">
+        <div className="grid sm:grid-cols-2 gap-8 items-center text-center sm:text-start">
           {/* Score Display */}
           <div className="flex flex-col items-center justify-center bg-slate-50 border border-slate-100 rounded-2xl p-6 space-y-2">
             <span className="text-slate-400 text-xs font-bold uppercase tracking-widest">
               {t("result.yourScore")}
             </span>
             <div className="flex items-baseline justify-center">
-              <span className="text-6xl font-black text-secondary">{score}</span>
-              <span className="text-2xl text-slate-400 font-bold ml-1">/100</span>
+              <span className="text-6xl font-black text-secondary">{correct}</span>
+              <span className="text-2xl text-slate-400 font-bold ml-1">/60</span>
             </div>
             <div className="w-full bg-slate-200 h-2 rounded-full overflow-hidden mt-3">
               <div
                 className="bg-primary h-full transition-all duration-1000"
-                style={{ width: `${score}%` }}
+                style={{ width: `${(correct / 60) * 100}%` }}
               />
             </div>
           </div>
@@ -112,14 +119,22 @@ function QuizResultContent() {
         </div>
 
         {/* Feedback Alert box */}
-        <div className="bg-slate-50 rounded-xl p-6 border border-slate-100 flex items-start gap-4">
+        <div className="bg-slate-50 rounded-xl p-6 border border-slate-100 flex items-start gap-4 text-start">
           <div className="p-2 bg-primary/10 rounded-lg text-primary shrink-0">
             <Info className="text-primary mt-0.5" size={20} />
           </div>
           <div className="space-y-1">
             <h3 className="font-bold text-secondary text-sm">{t("result.feedbackTitle")}</h3>
             <p className="text-sm text-slate-600 leading-relaxed">
-              {feedbackText}
+              {isRtl ? (
+                <>
+                  شكرًا لك على إجراء كويز اللغة الإنجليزية لدينا. نتيجتك النهائية هي <strong className="text-primary font-black">{correct}</strong> من 60. إذا كنت ترغب في معرفة المزيد عن خدماتنا، يرجى الاتصال بنا عبر الهاتف على الرقم <strong className="text-secondary font-black" dir="ltr">+97165531250</strong> أو عبر البريد الإلكتروني على <a href="mailto:info@tepth.org" className="text-primary underline font-medium">info@tepth.org</a>.
+                </>
+              ) : (
+                <>
+                  Thank you for taking our English Quiz. Your final score is <strong className="text-primary font-black">{correct}</strong> out of 60. If you would like to learn more about our services, please contact us by phone at <strong className="text-secondary font-black">+97165531250</strong> or via email at <a href="mailto:info@tepth.org" className="text-primary underline font-medium">info@tepth.org</a>.
+                </>
+              )}
             </p>
           </div>
         </div>
