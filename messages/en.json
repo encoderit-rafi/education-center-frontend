@@ -19,7 +19,7 @@
           "title": "High-Quality Test Centre"
         },
         {
-          "title": "Preparation Courses Available"
+          "title": "Exam Preparation Courses"
         },
         {
           "title": "On-Site IT Support"
@@ -49,7 +49,7 @@
           "title": "Quiet and Spacious Testing Labs"
         },
         {
-          "title": "Hands-on Staff"
+          "title": "Certified Instructors"
         },
         {
           "title": "Certified Test Center Administrators"
@@ -1014,7 +1014,10 @@
         {
           "title": "Required Business Licences & Permits",
           "description": "It is very important to partner with a test center that holds the relevant business activity with the local authority to become a test center. The Exam Preparation & Testing House L.L.C is licensed by Sharjah Economic Development Department (SEDD) and regulated by Sharjah Private Education Authority (SPEA).",
-          "badges": ["Licensed by SEDD", "Regulated by SPEA"]
+          "badges": [
+            "Licensed by SEDD",
+            "Regulated by SPEA"
+          ]
         },
         {
           "title": "Test Security",
@@ -1027,27 +1030,38 @@
         {
           "title": "Flexible Exam Delivery",
           "description": "Flexible scheduling options that accommodate massive single-day events, designated testing windows, Morning, Afternoon & Evening slots, or continuous testing year-round.",
-          "badges": ["Continuous & Event-Based Options"]
+          "badges": [
+            "Continuous & Event-Based Options"
+          ]
         },
         {
           "title": "Top-notch Exam Venues",
           "description": "Our modern, easily accessible testing centers are fully equipped with high-performance hardware and advanced technology to ensure an optimal testing environment.",
-          "badges": ["Easily Accessible & Premium Venues"]
+          "badges": [
+            "Easily Accessible & Premium Venues"
+          ]
         },
         {
           "title": "Noise-Free Environment",
           "description": "To minimize distractions and lower noise levels, we have implemented several workplace enhancements. Workstations feature fabric acoustic panels and are spaced generously apart, while testing rooms are carpeted to ensure a quiet environment. Additionally, we utilize white noise machines in the computer labs, alongside quiet keyboards and high-quality headsets throughout our spaces.",
-          "badges": ["Fabric Acoustic Panels", "White Noise Systems Equipped"]
+          "badges": [
+            "Fabric Acoustic Panels",
+            "White Noise Systems Equipped"
+          ]
         },
         {
           "title": "Technical Infrastructure",
           "description": "Our technical specifications meet your technical requirements. We provide dedicated, robust desktop PCs and 24-inch monitors.",
-          "badges": ["High-Performance Specifications"]
+          "badges": [
+            "High-Performance Specifications"
+          ]
         },
         {
           "title": "Special Accommodation",
           "description": "We provide tailored support for candidates who need testing accommodations, offering personalized services such as extended time, frequent breaks, private rooms, and specialized assistive software and equipment.",
-          "badges": ["Adaptive Assistance Softwares"]
+          "badges": [
+            "Adaptive Assistance Softwares"
+          ]
         }
       ],
       "contactInfo": "Get in touch with us today to discuss your needs or tour our venues online. You may also schedule a visit to our venues. Give us a call at +97165531250 or drop us an email at info@tepth.org",
@@ -2401,7 +2415,11 @@
           "details": "Profession-specific role-plays."
         }
       ],
-      "whoShouldTake": ["Doctors", "Nurses", "Healthcare professionals"],
+      "whoShouldTake": [
+        "Doctors",
+        "Nurses",
+        "Healthcare professionals"
+      ],
       "acceptedFor": [
         "Healthcare registration",
         "Migration for health professionals"
@@ -2425,7 +2443,10 @@
         "Professional certification seekers",
         "Licensing applicants"
       ],
-      "acceptedFor": ["Industry certifications", "Professional licensing"]
+      "acceptedFor": [
+        "Industry certifications",
+        "Professional licensing"
+      ]
     },
     "selt": {
       "description": "Home Office-approved Secure English Language Tests (SELT) for UK visa applications."
