@@ -66,11 +66,15 @@ export default function DownloadFormsPage() {
                                         <div className="w-14 h-14 bg-gray-50 rounded-full flex items-center justify-center mb-8 group-hover:bg-red-50 transition-colors">
                                             <Icon className="w-7 h-7 text-gray-400 group-hover:text-[#A11D1D]" />
                                         </div>
-                                        <h3 className="text-sm font-black text-[#A11D1D] uppercase tracking-widest mb-1">
-                                            {form.subtitle}
-                                        </h3>
                                         <h4 className="text-2xl font-black text-gray-900 leading-tight">
-                                            {form.title}
+                                            {form.title.startsWith("TEPTH") ? (
+                                                <>
+                                                    <span className="text-[#A11D1D]">TEPTH</span>
+                                                    {form.title.slice(5)}
+                                                </>
+                                            ) : (
+                                                form.title
+                                            )}
                                         </h4>
                                     </CardHeader>
 

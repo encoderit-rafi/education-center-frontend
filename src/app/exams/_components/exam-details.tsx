@@ -146,15 +146,18 @@ export default function ExamDetails({ data }: { data: any }) {
       <div className="section-container base-px base-py">
         <div className="grid gap-6 lg:grid-cols-3">
           <div className="lg:col-span-2 space-y-6">
-            {/* Tighter Stats Grid */}
+            {/* Stats Grid Card */}
             {stats.length > 0 && (
-              <div className="grid grid-cols-2 gap-2 md:grid-cols-4">
+              <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 bg-slate-50/50 p-4.5 rounded-2xl border border-slate-100/80">
                 {stats.map((stat: any, i: number) => (
-                  <div key={i} className="">
-                    <p className="text-[11px]  text-slate-500 mb-1">
+                  <div
+                    key={i}
+                    className="bg-white p-3.5 rounded-xl border border-slate-200/50 shadow-sm flex flex-col justify-between hover:scale-[1.02] hover:shadow-md transition-all duration-200"
+                  >
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
                       {stat.label}
                     </p>
-                    <p className="text-lg font-black text-slate-900">
+                    <p className="text-base font-black text-slate-900 tracking-tight">
                       {stat.value}
                     </p>
                   </div>
@@ -172,7 +175,7 @@ export default function ExamDetails({ data }: { data: any }) {
                     Overview
                   </h2>
                 </div>
-                <div className="prose prose-slate max-w-none text-slate-600 leading-relaxed text-xs lg:text-sm text-justify">
+                <div className="w-full text-slate-600 leading-relaxed text-sm md:text-[15px] lg:text-base space-y-5">
                   {(() => {
                     const renderFormattedText = (text: string) => {
                       if (!text) return "";
@@ -214,7 +217,10 @@ export default function ExamDetails({ data }: { data: any }) {
                     return (overview || description)
                       ?.split("\n\n")
                       .map((para: string, i: number) => {
-                        const lines = para.trim().split("\n");
+                        const trimmedPara = para.trim();
+                        if (!trimmedPara) return null;
+
+                        const lines = trimmedPara.split("\n");
                         const isTable =
                           lines.length > 1 &&
                           lines.every((line) => {
@@ -242,22 +248,22 @@ export default function ExamDetails({ data }: { data: any }) {
                             return (
                               <div
                                 key={i}
-                                className="my-6 overflow-x-auto rounded-xl border border-slate-200/80 shadow-sm bg-white"
+                                className="my-6 overflow-x-auto rounded-2xl border border-slate-200/60 shadow-sm bg-white"
                               >
-                                <table className="w-full min-w-150 border-collapse text-left text-xs lg:text-sm">
+                                <table className="w-full min-w-150 border-collapse text-left rtl:text-right text-xs lg:text-sm">
                                   <thead>
-                                    <tr className="bg-slate-50 border-b border-slate-200/80">
+                                    <tr className="bg-slate-50/80 border-b border-slate-200/60">
                                       {headers.map((h, hi) => (
                                         <th
                                           key={hi}
-                                          className="px-5 py-3.5 font-black text-slate-900 border-r last:border-r-0 border-slate-200/85"
+                                          className="px-6 py-4 font-black text-slate-900 border-r last:border-r-0 border-slate-200/60 text-left rtl:text-right"
                                         >
                                           {renderFormattedText(h)}
                                         </th>
                                       ))}
                                     </tr>
                                   </thead>
-                                  <tbody className="divide-y divide-slate-200/60">
+                                  <tbody className="divide-y divide-slate-200/50">
                                     {bodyRows.map((row, ri) => (
                                       <tr
                                         key={ri}
@@ -266,7 +272,7 @@ export default function ExamDetails({ data }: { data: any }) {
                                         {row.map((cell, ci) => (
                                           <td
                                             key={ci}
-                                            className="px-5 py-3.5 text-slate-700 leading-relaxed border-r last:border-r-0 border-slate-200/60 text-justify"
+                                            className="px-6 py-4.5 text-slate-700 leading-relaxed border-r last:border-r-0 border-slate-200/50 text-left rtl:text-right text-justify"
                                           >
                                             {renderFormattedText(cell)}
                                           </td>
@@ -280,13 +286,139 @@ export default function ExamDetails({ data }: { data: any }) {
                           }
                         }
 
+                        // Check if paragraph itself is just a single subheading
+                        if (
+                          trimmedPara.startsWith("**") &&
+                          trimmedPara.endsWith("**") &&
+                          !trimmedPara.includes("\n")
+                        ) {
+                          const headingText = trimmedPara.slice(2, -2);
+                          return (
+                            <h3
+                              key={i}
+                              className="text-base md:text-lg lg:text-xl font-black text-slate-900 mt-8 mb-4 flex items-center gap-2.5"
+                            >
+                              <span className="h-5 w-1 bg-primary rounded-full inline-block shrink-0" />
+                              {renderFormattedText(headingText)}
+                            </h3>
+                          );
+                        }
+
+                        // Process paragraph line-by-line to parse lists, takeaways, and subheadings
+                        const elements: React.ReactNode[] = [];
+                        let currentList: React.ReactNode[] = [];
+
+                        const flushList = (listKey: string) => {
+                          if (currentList.length > 0) {
+                            const listContent = [...currentList];
+                            elements.push(
+                              <ul key={listKey} className="my-4 pl-1 space-y-3">
+                                {listContent}
+                              </ul>
+                            );
+                            currentList = [];
+                          }
+                        };
+
+                        lines.forEach((line, lineIdx) => {
+                          const trimmedLine = line.trim();
+                          if (!trimmedLine) return;
+
+                          // Check if bullet point or numbered item
+                          const bulletMatch = trimmedLine.match(/^([•\-\*]|\d+\.)\s*(.*)/);
+                          if (bulletMatch) {
+                            const isNumbered = /^\d+\./.test(bulletMatch[1]);
+                            const content = bulletMatch[2];
+                            currentList.push(
+                              <li
+                                key={`li-${lineIdx}`}
+                                className="flex items-start gap-3 text-slate-600 text-sm md:text-[15px] leading-relaxed text-left rtl:text-right"
+                              >
+                                {isNumbered ? (
+                                  <span className="text-primary font-bold text-[11px] md:text-xs mt-0.5 shrink-0 select-none bg-primary/10 rounded-md w-5 h-5 flex items-center justify-center">
+                                    {bulletMatch[1].slice(0, -1)}
+                                  </span>
+                                ) : (
+                                  <span className="text-primary mt-2 shrink-0 select-none">
+                                    <span className="block h-2 w-2 rounded-full bg-primary/70" />
+                                  </span>
+                                )}
+                                <span className="flex-1">
+                                  {renderFormattedText(content)}
+                                </span>
+                              </li>
+                            );
+                          } else {
+                            flushList(`list-${lineIdx}`);
+
+                            // Check if line is a bold subheading inside a paragraph block
+                            if (
+                              trimmedLine.startsWith("**") &&
+                              trimmedLine.endsWith("**")
+                            ) {
+                              elements.push(
+                                <h4
+                                  key={`h-${lineIdx}`}
+                                  className="text-sm md:text-base font-extrabold text-slate-900 mt-6 mb-3 flex items-center gap-2"
+                                >
+                                  <span className="h-4 w-1 bg-primary/70 rounded-full inline-block shrink-0" />
+                                  {renderFormattedText(trimmedLine.slice(2, -2))}
+                                </h4>
+                              );
+                            }
+                            // Check if it's a takeaway block
+                            else if (
+                              trimmedLine.startsWith("**Key Takeaway:**") ||
+                              trimmedLine.startsWith("**نصيحة رئيسية:**") ||
+                              trimmedLine.startsWith("Key Takeaway:") ||
+                              trimmedLine.startsWith("نصيحة رئيسية:")
+                            ) {
+                              const prefix = trimmedLine.startsWith("**Key Takeaway:**")
+                                ? "**Key Takeaway:**"
+                                : trimmedLine.startsWith("**نصيحة رئيسية:**")
+                                ? "**نصيحة رئيسية:**"
+                                : trimmedLine.startsWith("Key Takeaway:")
+                                ? "Key Takeaway:"
+                                : "نصيحة رئيسية:";
+                              const content = trimmedLine.slice(prefix.length).trim();
+                              elements.push(
+                                <div
+                                  key={`takeaway-${lineIdx}`}
+                                  className="my-6 p-4 md:p-5 rounded-2xl border border-primary/20 bg-primary/[0.03] shadow-sm flex gap-3.5 items-start text-left rtl:text-right"
+                                >
+                                  <div className="p-2 rounded-xl bg-primary/10 text-primary shrink-0">
+                                    <Info size={18} />
+                                  </div>
+                                  <div className="space-y-1 flex-1">
+                                    <h5 className="font-bold text-slate-900 text-sm md:text-[15px]">
+                                      {prefix.replace(/\*\*/g, "").replace(":", "")}
+                                    </h5>
+                                    <p className="text-slate-600 text-xs md:text-sm leading-relaxed">
+                                      {renderFormattedText(content)}
+                                    </p>
+                                  </div>
+                                </div>
+                              );
+                            } else {
+                              // Normal paragraph line
+                              elements.push(
+                                <p
+                                  key={`p-${lineIdx}`}
+                                  className="text-slate-600 leading-relaxed text-sm md:text-[15px] lg:text-base text-left rtl:text-right text-justify my-3"
+                                >
+                                  {renderFormattedText(line)}
+                                </p>
+                              );
+                            }
+                          }
+                        });
+
+                        flushList("list-end");
+
                         return (
-                          <p
-                            key={i}
-                            className="whitespace-pre-line text-justify"
-                          >
-                            {renderFormattedText(para)}
-                          </p>
+                          <div key={i} className="space-y-2">
+                            {elements}
+                          </div>
                         );
                       });
                   })()}
@@ -296,22 +428,27 @@ export default function ExamDetails({ data }: { data: any }) {
                     data.slug !== "pte-home-a1" &&
                     data.slug !== "pte-home-a2" &&
                     data.slug !== "pte-home-b1" && (
-                      <ul className="mt-4 space-y-2 list-disc pl-5">
+                      <ul className="mt-6 space-y-3 pl-1">
                         {whoShouldTake.map((item: string, i: number) => (
                           <li
                             key={i}
-                            className="text-slate-600 leading-relaxed text-xs lg:text-sm text-justify"
+                            className="flex items-start gap-3 text-slate-600 text-sm md:text-[15px] leading-relaxed text-left rtl:text-right"
                           >
-                            {item.includes(":") ? (
-                              <>
-                                <strong className="font-bold text-slate-900">
-                                  {item.split(":")[0]}:
-                                </strong>
-                                {item.split(":").slice(1).join(":")}
-                              </>
-                            ) : (
-                              item
-                            )}
+                            <span className="text-primary mt-2 shrink-0 select-none">
+                              <span className="block h-2 w-2 rounded-full bg-primary/70" />
+                            </span>
+                            <span className="flex-1">
+                              {item.includes(":") ? (
+                                <>
+                                  <strong className="font-extrabold text-slate-900">
+                                    {item.split(":")[0]}:
+                                  </strong>
+                                  {item.split(":").slice(1).join(":")}
+                                </>
+                              ) : (
+                                item
+                              )}
+                            </span>
                           </li>
                         ))}
                       </ul>

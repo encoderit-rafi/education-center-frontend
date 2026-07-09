@@ -3420,30 +3420,30 @@
     "title": "Download ",
     "titleAccent": "Official Forms",
     "subtitle": "Access and download the necessary documentation for your exam registrations, cancellations, and administrative requests.",
-    "downloadButton": "Download PDF",
+    "downloadButton": "Download",
     "forms": [
       {
-        "title": "IELTS REGISTRATION",
+        "title": "TEPTH - IELTS Exam Registration Form",
         "subtitle": "Registration Form",
         "description": "Download the official International English Language Testing System (IELTS) registration form."
       },
       {
-        "title": "PTE REGISTRATION",
+        "title": "TEPTH - PTE Exam Registration Form",
         "subtitle": "Registration Form",
         "description": "Download the official Pearson Test of English Academic (PTE) registration form."
       },
       {
-        "title": "SELT REGISTRATION",
+        "title": "TEPTH - Skills for English (SELT) Exam Registration Form",
         "subtitle": "Registration Form",
         "description": "Download the official Skills for English (SELT) registration form."
       },
       {
-        "title": "TOEFL IBT REGISTRATION",
+        "title": "TEPTH - TOEFL iBT Exam Registration Form",
         "subtitle": "Registration Form",
         "description": "Complete your TOEFL iBT registration with the official TEPTH documentation."
       },
       {
-        "title": "CANCELLATION & REFUND",
+        "title": "TEPTH Cancellation & Refund Form",
         "subtitle": "Request Form",
         "description": "Official form for course or exam cancellation and refund requests."
       }
