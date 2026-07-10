@@ -142,7 +142,7 @@
         },
         {
           "title": "Paid Mock Tests",
-          "description": "Sit a realistic mock exam in our centre or receive it online. Scored and timed."
+          "description": "Choose to take a full mock test in person at our test center, or complete it online from the comfort of your home"
         },
         {
           "title": "Dedicated Support",
@@ -333,7 +333,7 @@
           "countryRequired": "Country is required",
           "topicRequired": "Enquiry Topic is required",
           "messageRequired": "Message is required",
-          "messageMin": "Message must be at least 10 characters"
+          "messageMin": "Message must be at least 5 characters"
         },
         "toast": {
           "successTitle": "Thank you for reaching out.",
@@ -848,7 +848,7 @@
   "CareerPage": {
     "title": "Personal Information",
     "description": "Please fill out the form below and attach your latest CV to apply.",
-    "successTitle": "Application Sent!",
+    "successTitle": "Application Submitted !",
     "successDescription": "Thank you for applying to TEPTH. Your CV has been successfully received. If your skills and qualifications align with what we are looking for, we will reach out via email or phone with the next steps for an interview. Best of luck.",
     "goBack": "Go Back",
     "submit": "Submit Application",
@@ -872,7 +872,7 @@
       "emailPlaceholder": "email@example.com",
       "mobile": "Mobile No",
       "mobilePlaceholder": "Ex: 50 123 4567",
-      "address": "Residential Address",
+      "address": "Address",
       "addressPlaceholder": "Enter your full address",
       "city": "Emirate / City",
       "cityPlaceholder": "Dubai",
@@ -3418,8 +3418,8 @@
   },
   "DownloadFormsPage": {
     "title": "Download ",
-    "titleAccent": "Official Forms",
-    "subtitle": "Access and download the necessary documentation for your exam registrations, cancellations, and administrative requests.",
+    "titleAccent": "Our Fillable Form",
+    "subtitle": "",
     "downloadButton": "Download",
     "forms": [
       {
@@ -3443,7 +3443,7 @@
         "description": "Complete your TOEFL iBT registration with the official TEPTH documentation."
       },
       {
-        "title": "TEPTH Cancellation & Refund Form",
+        "title": "TEPTH Cancellation & Refund Request Form",
         "subtitle": "Request Form",
         "description": "Official form for course or exam cancellation and refund requests."
       }
