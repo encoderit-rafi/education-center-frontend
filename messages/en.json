@@ -3783,7 +3783,9 @@
       "chooseOption": "Choose the correct answer",
       "back": "Back",
       "processing": "Processing...",
-      "submitQuiz": "Submit Quiz"
+      "submitQuiz": "Submit Quiz",
+      "submitErrorTitle": "Submission failed",
+      "submitErrorDesc": "An unexpected error occurred. Please try again."
     },
     "result": {
       "title": "Quiz Completed!",
