@@ -250,7 +250,7 @@ export default function ExamDetails({ data }: { data: any }) {
                                 key={i}
                                 className="my-6 overflow-x-auto rounded-2xl border border-slate-200/60 shadow-sm bg-white"
                               >
-                                <table className="w-full min-w-[600px] border-collapse text-left rtl:text-right text-xs lg:text-sm">
+                                <table className="w-full min-w-150 border-collapse text-left rtl:text-right text-xs lg:text-sm">
                                   <thead>
                                     <tr className="bg-slate-50/80 border-b border-slate-200/60">
                                       {headers.map((h, hi) => (

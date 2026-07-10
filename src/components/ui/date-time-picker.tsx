@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { format } from "date-fns";
 import { type FieldValues, type Control, type Path } from "react-hook-form";
 import { cn } from "@/lib/utils";
@@ -84,6 +85,8 @@ export function DateTimePicker<TFieldValues extends FieldValues = FieldValues>(
     toYear,
     disabledDays,
   } = props;
+
+  const [open, setOpen] = useState(false);
 
   const startMonth = fromYear ? new Date(fromYear, 0) : undefined;
   const endMonth = toYear ? new Date(toYear, 11) : undefined;
@@ -524,7 +527,7 @@ export function DateTimePicker<TFieldValues extends FieldValues = FieldValues>(
         render={({ field }) => (
           <FormItem>
             {label && <FormLabel className={labelClassName}>{label}</FormLabel>}
-            <Popover>
+            <Popover open={open} onOpenChange={setOpen}>
               <PopoverTrigger
                 render={
                   <button
@@ -554,6 +557,14 @@ export function DateTimePicker<TFieldValues extends FieldValues = FieldValues>(
                 {renderContent(field.value, (val) => {
                   field.onChange(val);
                   onChange?.(val as Date & DateRange);
+                  if (mode === "date") {
+                    setOpen(false);
+                  } else if (mode === "dateRange" && val && typeof val === "object" && "from" in val && "to" in val) {
+                    const range = val as DateRange;
+                    if (range.from && range.to) {
+                      setOpen(false);
+                    }
+                  }
                 })}
               </PopoverContent>
             </Popover>
@@ -569,7 +580,7 @@ export function DateTimePicker<TFieldValues extends FieldValues = FieldValues>(
   return (
     <div className={cn("flex flex-col space-y-2", className)}>
       {label && <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">{label}</label>}
-      <Popover>
+      <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger
           render={
             <button
@@ -586,7 +597,17 @@ export function DateTimePicker<TFieldValues extends FieldValues = FieldValues>(
           }
         />
         <PopoverContent className="w-auto p-0" align="start" initialFocus={false}>
-          {renderContent(value, onChange as (val: Date | DateRange | undefined) => void)}
+          {renderContent(value, (val) => {
+            onChange?.(val as Date & DateRange);
+            if (mode === "date") {
+              setOpen(false);
+            } else if (mode === "dateRange" && val && typeof val === "object" && "from" in val && "to" in val) {
+              const range = val as DateRange;
+              if (range.from && range.to) {
+                setOpen(false);
+              }
+            }
+          })}
         </PopoverContent>
       </Popover>
       {description && <p className="text-sm text-muted-foreground">{description}</p>}

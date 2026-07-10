@@ -170,7 +170,9 @@ export default function ContactForm() {
             {tForm("toast.successTitle")}
           </h3>
           <p className="text-slate-600 leading-relaxed max-w-xl mx-auto text-base font-semibold text-justify">
-            {tForm("toast.successDesc")}
+            {tForm.rich("toast.successDesc", {
+              phone: (chunks) => <span className="whitespace-nowrap">{chunks}</span>,
+            })}
           </p>
         </div>
         <Button
