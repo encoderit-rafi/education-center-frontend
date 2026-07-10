@@ -3773,6 +3773,8 @@
       "phoneNumberRequired": "Phone Number is required",
       "startQuiz": "Start the quiz",
       "answerRequired": "Please answer this question",
+      "answersRequiredAll": "Please answer all questions before proceeding",
+      "requiredFieldsError": "Please fill in all required fields before proceeding",
       "chooseOption": "Choose the correct answer",
       "back": "Back",
       "processing": "Processing...",
@@ -3855,7 +3857,9 @@
       "cityRequired": "Emirate / City is required",
       "contactMethodRequired": "Preferred Contact Method is required",
       "contactTimeRequired": "Preferred Time is required",
-      "answersRequired": "Please select an answer"
+      "answersRequired": "Please select an answer",
+      "answersRequiredAll": "Please answer all questions before proceeding",
+      "requiredFieldsError": "Please fill in all required fields before proceeding"
     },
     "toast": {
       "startErrorTitle": "Could not start the test",

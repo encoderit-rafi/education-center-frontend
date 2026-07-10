@@ -15,21 +15,14 @@ import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import {
   User,
   Mail,
-  Info,
-  Trophy,
-  XIcon,
+  Check,
   MapPin,
   MessageSquare,
   Clock,
   ChevronDown,
+  Star,
 } from "lucide-react";
 import { PhoneInput } from "@/components/ui/phone-input";
 import Stepper from "@/components/stepper";
@@ -45,7 +38,7 @@ import api from "@/axios";
 import { toast } from "sonner";
 
 
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 type TestValues = {
   fullName: string;
@@ -59,13 +52,14 @@ type TestValues = {
   writtenExpression?: string;
 };
 
-export default function TestYourEnglishForm() {
+export default function TestYourEnglishForm({ onSuccess }: { onSuccess?: (val: boolean) => void }) {
   const [step, setStep] = useState(1);
   const [isSuccess, setIsSuccess] = useState(false);
   const [attemptId, setAttemptId] = useState<string | null>(null);
   const attemptIdRef = useRef<string | null>(null);
 
   const t = useTranslations("TestYourEnglish");
+  const locale = useLocale();
 
   const TIMES = [
     { label: t("times.morning"), value: "Morning" },
@@ -194,7 +188,10 @@ export default function TestYourEnglishForm() {
     }
 
     const isValid = await trigger(fieldsToValidate);
-    if (!isValid) return;
+    if (!isValid) {
+      toast.error(t("validation.requiredFieldsError"));
+      return;
+    }
 
     // On step 1 → 2, call attempt-start to get the attempt_id and question UUIDs
     if (step === 1) {
@@ -266,6 +263,7 @@ export default function TestYourEnglishForm() {
       });
 
       setIsSuccess(true);
+      onSuccess?.(true);
     } catch (error: any) {
       toast.error(t("toast.submitErrorTitle"), {
         description: error.response?.data?.message || t("toast.submitErrorDesc"),
@@ -273,52 +271,62 @@ export default function TestYourEnglishForm() {
     }
   };
 
-  return (
-    <div className="space-y-12">
-      {/* Result Dialog */}
-      <Dialog open={isSuccess} onOpenChange={setIsSuccess}>
-        <DialogContent
-          showCloseButton={false}
-          className="sm:max-w-112.5 p-0 overflow-hidden border-none rounded-md"
-        >
-          <div className="bg-primary p-8 text-white text-center space-y-4 relative">
-            <DialogClose className="absolute top-4 right-4 p-2 rounded-md hover:bg-white/10 text-white transition-colors cursor-pointer">
-              <XIcon size={20} />
-            </DialogClose>
-            <div className="mx-auto w-20 h-20 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
-              <Trophy size={40} className="text-white" />
-            </div>
-            <DialogTitle className="text-3xl font-black tracking-tight text-white">
+  const onInvalid = (errors: any) => {
+    if (errors.answers) {
+      toast.error(t("validation.answersRequiredAll"));
+    }
+  };
+
+  if (isSuccess) {
+    const isRtl = locale === "ar";
+    return (
+      <div
+        dir={isRtl ? "rtl" : "ltr"}
+        className="max-w-2xl mx-auto bg-white border border-slate-200 shadow-xl rounded-2xl overflow-hidden animate-fade-up"
+      >
+        {/* Visual Header Banner */}
+        <div className="bg-primary p-12 text-white text-center space-y-6 relative overflow-hidden">
+          {/* Subtle background decoration */}
+          <div className="absolute inset-0 opacity-10 pointer-events-none">
+            <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                  <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" strokeWidth="1" />
+                </pattern>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#grid)" />
+            </svg>
+          </div>
+
+          <div className="relative mx-auto w-24 h-24 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-md shadow-inner">
+            <Check size={48} className="text-white animate-bounce" strokeWidth={3} />
+            <Star size={16} className="absolute top-2 right-2 text-amber-300 animate-pulse" />
+          </div>
+          <div className="space-y-2 relative">
+            <h1 className="text-4xl font-black tracking-tight text-white">
               {t("success.title")}
-            </DialogTitle>
+            </h1>
             <p className="text-white/80 font-medium">
               {t("success.subtitle")}
             </p>
           </div>
+        </div>
 
-          <div className="p-8 space-y-8 bg-white">
-            <div className="bg-slate-50 rounded-md p-4 border border-slate-100 flex items-start gap-3">
-              <Info className="text-primary shrink-0 mt-0.5" size={18} />
-              <p className="text-xs text-slate-600 leading-relaxed font-medium">
-                {t("success.description")}
-              </p>
-            </div>
-
-            <Button
-              className="w-full h-12 font-bold rounded-md"
-              onClick={() => {
-                setStep(1);
-                setIsSuccess(false);
-                form.reset();
-              }}
-            >
-              {t("success.retake")}
-            </Button>
+        {/* Main Results Container */}
+        <div className="p-8 lg:p-12 bg-white">
+          <div className="bg-slate-50 rounded-xl p-6 border border-slate-100 text-start">
+            <p className="text-sm text-slate-600 leading-relaxed">
+              {t("success.description")}
+            </p>
           </div>
-        </DialogContent>
-      </Dialog>
+        </div>
+      </div>
+    );
+  }
 
-      <form onSubmit={handleSubmit(onSubmit)} className="animate-fade-up">
+  return (
+    <div className="space-y-12">
+      <form onSubmit={handleSubmit(onSubmit, onInvalid)} className="animate-fade-up">
         {step === 1 && (
           <div className="bg-white border border-slate-200 rounded-md p-8 space-y-8">
             <div className="flex items-center gap-3 mb-2">
@@ -610,9 +618,6 @@ export default function TestYourEnglishForm() {
                           </RadioGroup>
                         )}
                       />
-                      {errors.answers?.[q.id] && (
-                        <FieldError>{errors.answers[q.id]?.message}</FieldError>
-                      )}
                     </FieldContent>
                   </div>
                 </Field>

@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Upload, CheckCircle2, ChevronDown } from "lucide-react";
+import { Upload, CheckCircle2, ChevronDown, Check, Star } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -213,24 +213,40 @@ export default function CareerPage() {
   if (isSuccess) {
     return (
       <div className="flex flex-col min-h-screen bg-gray-50/50 items-center justify-center p-6 animate-fade-up">
-        <div className="max-w-md w-full bg-white p-12 rounded-sm shadow-xl border border-gray-100 text-center space-y-6">
-          <div className="w-20 h-20 bg-emerald-50 rounded-full flex items-center justify-center mx-auto">
-            <CheckCircle2 className="w-10 h-10 text-emerald-500" />
+        <div className="max-w-2xl w-full bg-white border border-slate-200 shadow-xl rounded-2xl overflow-hidden">
+          {/* Visual Header Banner */}
+          <div className="bg-[#A11D1D] p-12 text-white text-center space-y-6 relative overflow-hidden">
+            {/* Subtle background decoration */}
+            <div className="absolute inset-0 opacity-10 pointer-events-none">
+              <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" strokeWidth="1" />
+                  </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#grid)" />
+              </svg>
+            </div>
+
+            <div className="relative mx-auto w-24 h-24 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-md shadow-inner">
+              <Check size={48} className="text-white animate-bounce" strokeWidth={3} />
+              <Star size={16} className="absolute top-2 right-2 text-amber-300 animate-pulse" />
+            </div>
+            <div className="space-y-2 relative">
+              <h2 className="text-4xl font-black font-heading tracking-tighter text-white">
+                {t("successTitle")}
+              </h2>
+            </div>
           </div>
-          <div className="space-y-2">
-            <h2 className="text-3xl font-black font-heading tracking-tighter">
-              {t("successTitle")}
-            </h2>
-            <p className="text-gray-500 font-medium text-justify">
-              {t("successDescription")}
-            </p>
+
+          {/* Main Results Container */}
+          <div className="p-8 lg:p-12 bg-white">
+            <div className="bg-slate-50 rounded-xl p-6 border border-slate-100 text-start">
+              <p className="text-sm text-slate-600 leading-relaxed">
+                {t("successDescription")}
+              </p>
+            </div>
           </div>
-          <Button
-            onClick={() => window.location.reload()}
-            className="w-full bg-[#A11D1D] hover:bg-[#8A1818] text-white font-black text-xs uppercase tracking-widest py-6"
-          >
-            {t("goBack")}
-          </Button>
         </div>
       </div>
     );

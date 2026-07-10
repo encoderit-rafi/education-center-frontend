@@ -3699,6 +3699,8 @@
       "phoneNumberRequired": "رقم الهاتف مطلوب",
       "startQuiz": "ابدأ الاختبار",
       "answerRequired": "يرجى الإجابة على هذا السؤال",
+      "answersRequiredAll": "يرجى الإجابة على جميع الأسئلة قبل المتابعة",
+      "requiredFieldsError": "يرجى ملء جميع الحقول المطلوبة قبل المتابعة",
       "chooseOption": "اختر الإجابة الصحيحة",
       "back": "رجوع",
       "processing": "جاري المعالجة...",
@@ -3781,7 +3783,9 @@
       "cityRequired": "الإمارة / المدينة مطلوبة",
       "contactMethodRequired": "طريقة الاتصال المفضلة مطلوبة",
       "contactTimeRequired": "الوقت المفضل مطلوب",
-      "answersRequired": "يرجى تحديد إجابة"
+      "answersRequired": "يرجى تحديد إجابة",
+      "answersRequiredAll": "يرجى الإجابة على جميع الأسئلة قبل المتابعة",
+      "requiredFieldsError": "يرجى ملء جميع الحقول المطلوبة قبل المتابعة"
     },
     "toast": {
       "startErrorTitle": "تعذر بدء الاختبار",
