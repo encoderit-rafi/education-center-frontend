@@ -5,7 +5,7 @@ import {
   ShieldCheck,
   Trophy,
   Calendar,
-  Headphones,
+  Laptop,
   ClipboardCheck,
   CheckCircle2,
 } from "lucide-react";
@@ -18,7 +18,7 @@ import {
 import { useTranslations } from "next-intl";
 
 const STAT_ICONS = [GraduationCap, MapPin, ShieldCheck, Trophy];
-const FEATURE_ICONS = [ShieldCheck, Calendar, GraduationCap, ClipboardCheck, Headphones, CheckCircle2];
+const FEATURE_ICONS = [ShieldCheck, Calendar, GraduationCap, ClipboardCheck, Laptop, CheckCircle2];
 
 const WhyChooseUs = () => {
   const t = useTranslations("HomePage.WhyChooseUs");
