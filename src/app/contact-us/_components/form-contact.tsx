@@ -11,8 +11,7 @@ import {
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { useState, useRef, useEffect } from "react";
-import ReCAPTCHA from "react-google-recaptcha";
+import { useState } from "react";
 import { Controller } from "react-hook-form";
 import {
   DropdownMenu,
@@ -28,6 +27,7 @@ import { useTranslations, useLocale } from "next-intl";
 
 import { ChevronDown, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { FormRecaptcha, useRecaptcha } from "@/components/ui/form-recaptcha";
 
 type ContactFormValues = {
   firstName: string;
@@ -40,10 +40,14 @@ type ContactFormValues = {
 };
 
 export default function ContactForm() {
-  const [mounted, setMounted] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [captchaError, setCaptchaError] = useState<string | null>(null);
-  const captchaRef = useRef<ReCAPTCHA>(null);
+  const {
+    captchaRef,
+    captchaError,
+    validateCaptcha,
+    resetCaptcha,
+    clearCaptchaError,
+  } = useRecaptcha();
 
   const locale = useLocale();
   const t = useTranslations("ContactUsPage");
@@ -103,10 +107,6 @@ export default function ContactForm() {
       .min(5, { message: tForm("validation.messageMin") }),
   });
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
   const {
     register,
     control,
@@ -125,9 +125,13 @@ export default function ContactForm() {
       message: "",
     },
   });
-  console.log("👉 ~ ContactForm ~ errors:", errors);
 
   const onSubmit = async (data: ContactFormValues) => {
+    const recaptchaToken = validateCaptcha(tForm("validation.captchaRequired"));
+    if (recaptchaToken === null) {
+      return;
+    }
+
     try {
       const payload = {
         first_name: data.firstName,
@@ -140,13 +144,14 @@ export default function ContactForm() {
           : "general",
         subject: data.enquiryTopic || "Inquiry",
         message: data.message,
+        ...(recaptchaToken ? { recaptcha_token: recaptchaToken } : {}),
       };
 
       await api.post("/contact", payload);
 
       setIsSubmitted(true);
       reset();
-      captchaRef.current?.reset();
+      resetCaptcha();
     } catch (error) {
       console.error("Error submitting contact form:", error);
       toast.error(tForm("toast.errorTitle"), {
@@ -314,6 +319,12 @@ export default function ContactForm() {
         </FieldContent>
         {errors.message && <FieldError>{errors.message.message}</FieldError>}
       </Field>
+
+      <FormRecaptcha
+        captchaRef={captchaRef}
+        error={captchaError}
+        onChange={clearCaptchaError}
+      />
 
       <div className="space-y-4">
         <Button

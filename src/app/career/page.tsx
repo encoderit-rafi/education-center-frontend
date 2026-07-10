@@ -29,6 +29,7 @@ import { format } from "date-fns";
 import api from "@/axios";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
+import { FormRecaptcha, useRecaptcha } from "@/components/ui/form-recaptcha";
 
 const careerSchema = z.object({
   first_name: z
@@ -94,6 +95,13 @@ export default function CareerPage() {
   const t = useTranslations("CareerPage");
   const [isSuccess, setIsSuccess] = useState(false);
   const resumeFileRef = useRef<HTMLInputElement>(null);
+  const {
+    captchaRef,
+    captchaError,
+    validateCaptcha,
+    resetCaptcha,
+    clearCaptchaError,
+  } = useRecaptcha();
 
 
   const form = useForm<CareerFormValues>({
@@ -128,6 +136,11 @@ export default function CareerPage() {
   }, [errors]);
 
   const onSubmit = async (data: CareerFormValues) => {
+    const recaptchaToken = validateCaptcha(t("validation.captchaRequired"));
+    if (recaptchaToken === null) {
+      return;
+    }
+
     try {
       const file = data.resume as File;
 
@@ -176,6 +189,7 @@ export default function CareerPage() {
         city: data.city,
         pobox: data.pobox || "",
         resume: fullResumeUrl,
+        ...(recaptchaToken ? { recaptcha_token: recaptchaToken } : {}),
       };
 
       const res = await api.post("/career", payload);
@@ -183,6 +197,7 @@ export default function CareerPage() {
       if (res.data?.success || res.status === 200 || res.status === 201) {
         toast.dismiss("career-submit");
         setIsSuccess(true);
+        resetCaptcha();
       } else {
         toast.error("Submission Failed", {
           id: "career-submit",
@@ -615,6 +630,12 @@ export default function CareerPage() {
                       )}
                     </Field>
                   </div>
+
+                  <FormRecaptcha
+                    captchaRef={captchaRef}
+                    error={captchaError}
+                    onChange={clearCaptchaError}
+                  />
 
                   <Button
                     type="submit"

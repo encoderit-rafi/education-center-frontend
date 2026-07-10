@@ -47,6 +47,7 @@ import { PhoneInput } from "@/components/ui/phone-input";
 import { CountryDropdown } from "@/components/ui/country-dropdown";
 import { toast } from "sonner";
 import api from "@/axios";
+import { FormRecaptcha, useRecaptcha } from "@/components/ui/form-recaptcha";
 
 import { useTranslations, useLocale } from "next-intl";
 
@@ -65,6 +66,13 @@ type FormValues = {
 export default function FreeConsultationForm() {
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const {
+    captchaRef,
+    captchaError,
+    validateCaptcha,
+    resetCaptcha,
+    clearCaptchaError,
+  } = useRecaptcha();
   const locale = useLocale();
   const t = useTranslations("FreeConsultationPage");
   const tForm = useTranslations("FreeConsultationPage.form");
@@ -144,6 +152,11 @@ export default function FreeConsultationForm() {
   const selectedDate = watch("date");
 
   const onSubmit = async (data: FormValues) => {
+    const recaptchaToken = validateCaptcha(tForm("validation.captchaRequired"));
+    if (recaptchaToken === null) {
+      return;
+    }
+
     try {
       const nameParts = data.fullName.trim().split(" ");
       const firstName = nameParts[0];
@@ -170,12 +183,14 @@ export default function FreeConsultationForm() {
         preferred_date: data.date ? format(data.date, "yyyy-MM-dd") : undefined,
         preferred_time: preferredTime,
         message: data.message?.trim() || "-",
+        ...(recaptchaToken ? { recaptcha_token: recaptchaToken } : {}),
       };
 
       const res = await api.post("/consultations", payload);
       if (res.data?.success || res.status === 200 || res.status === 201) {
         setIsSubmitted(true);
         reset();
+        resetCaptcha();
       } else {
         toast.error(tForm("toast.errorTitle"), {
           description: res.data?.message || tForm("toast.errorDesc"),
@@ -422,6 +437,12 @@ export default function FreeConsultationForm() {
           </div>
         </div>
       </div>
+
+      <FormRecaptcha
+        captchaRef={captchaRef}
+        error={captchaError}
+        onChange={clearCaptchaError}
+      />
 
       <div className="pt-4 space-y-4 max-w-md mx-auto flex flex-col items-center justify-center">
         <Button

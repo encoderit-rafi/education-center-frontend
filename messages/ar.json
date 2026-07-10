@@ -333,7 +333,8 @@
           "countryRequired": "البلد مطلوب",
           "topicRequired": "موضوع الاستفسار مطلوب",
           "messageRequired": "الرسالة مطلوبة",
-          "messageMin": "يجب أن تتكون الرسالة من 5 أحرف على الأقل"
+          "messageMin": "يجب أن تتكون الرسالة من 5 أحرف على الأقل",
+          "captchaRequired": "يرجى إكمال التحقق من reCAPTCHA"
         },
         "toast": {
           "successTitle": "شكرًا لتواصلك معنا.",
@@ -853,6 +854,9 @@
     "goBack": "العودة",
     "submit": "إرسال الطلب",
     "submitting": "جاري الإرسال...",
+    "validation": {
+      "captchaRequired": "يرجى إكمال التحقق من reCAPTCHA"
+    },
     "form": {
       "firstName": "الاسم الأول",
       "firstNamePlaceholder": "جون",
@@ -1352,7 +1356,8 @@
         "cityRequired": "الإمارة / المدينة مطلوبة",
         "areaRequired": "مجال الاستشارة مطلوب",
         "dateRequired": "التاريخ المفضل مطلوب",
-        "timeRequired": "الوقت المفضل مطلوب"
+        "timeRequired": "الوقت المفضل مطلوب",
+        "captchaRequired": "يرجى إكمال التحقق من reCAPTCHA"
       },
       "toast": {
         "successTitle": "تم استلام الطلب",

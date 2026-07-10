@@ -333,7 +333,8 @@
           "countryRequired": "Country is required",
           "topicRequired": "Enquiry Topic is required",
           "messageRequired": "Message is required",
-          "messageMin": "Message must be at least 5 characters"
+          "messageMin": "Message must be at least 5 characters",
+          "captchaRequired": "Please complete the reCAPTCHA verification"
         },
         "toast": {
           "successTitle": "Thank you for reaching out.",
@@ -853,6 +854,9 @@
     "goBack": "Go Back",
     "submit": "Submit Application",
     "submitting": "Submitting...",
+    "validation": {
+      "captchaRequired": "Please complete the reCAPTCHA verification"
+    },
     "form": {
       "firstName": "First Name",
       "firstNamePlaceholder": "John",
@@ -1292,7 +1296,8 @@
         "cityRequired": "Emirate / City is required",
         "areaRequired": "Area of Consultation is required",
         "dateRequired": "Preferred Date is required",
-        "timeRequired": "Preferred Time is required"
+        "timeRequired": "Preferred Time is required",
+        "captchaRequired": "Please complete the reCAPTCHA verification"
       },
       "toast": {
         "successTitle": "Enquiry Received",
