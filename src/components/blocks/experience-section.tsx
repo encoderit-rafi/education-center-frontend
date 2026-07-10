@@ -2,10 +2,10 @@
 import React from "react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { Landmark, Building2, BookOpen, Headphones, Laptop, Star, ArrowRight } from "lucide-react";
+import { Landmark, Building2, BookOpen, Laptop, Star, ArrowRight } from "lucide-react";
 import { buttonVariants } from "../ui/button";
 
-const ICONS = [Landmark, Building2, BookOpen, Headphones, Laptop, Star];
+const ICONS = [Landmark, Building2, BookOpen, Laptop, Laptop, Star];
 
 export default function ExperienceSection() {
   const t = useTranslations("HomePage.ExperienceSection");
