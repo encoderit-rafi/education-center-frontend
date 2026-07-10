@@ -100,7 +100,7 @@ export default function ContactForm() {
       .string()
       .trim()
       .min(1, { message: tForm("validation.messageRequired") })
-      .min(10, { message: tForm("validation.messageMin") }),
+      .min(5, { message: tForm("validation.messageMin") }),
   });
 
   useEffect(() => {
@@ -133,7 +133,7 @@ export default function ContactForm() {
         first_name: data.firstName,
         last_name: data.lastName,
         email: data.email,
-        city: data.city,
+        address: data.city,
         country: data.country,
         category: data.enquiryTopic
           ? data.enquiryTopic.toLowerCase().replace(/[^a-z0-9]+/g, "_")

@@ -155,9 +155,9 @@ export default function FreeConsultationForm() {
       }
 
       let preferredTime = undefined;
-      if (data.time === "Morning") preferredTime = "09:00";
-      if (data.time === "Afternoon") preferredTime = "12:00";
-      if (data.time === "Evening") preferredTime = "18:00";
+      if (data.time === "Morning") preferredTime = "Morning (9:00 AM – 11:30 AM)";
+      if (data.time === "Afternoon") preferredTime = "Afternoon (12:00 PM – 5:30 PM)";
+      if (data.time === "Evening") preferredTime = "Evening (6:00 PM – 8:30 PM)";
 
       const payload = {
         consultation_type: consultationType,
@@ -169,7 +169,7 @@ export default function FreeConsultationForm() {
         city: data.city,
         preferred_date: data.date ? format(data.date, "yyyy-MM-dd") : undefined,
         preferred_time: preferredTime,
-        message: data.message,
+        message: data.message?.trim() || "-",
       };
 
       const res = await api.post("/consultations", payload);

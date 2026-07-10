@@ -256,7 +256,7 @@ export function DateTimePicker<TFieldValues extends FieldValues = FieldValues>(
     currentValue: Date | undefined,
     onChangeCallback: (date: Date | undefined) => void
   ) => (
-    <div className="flex flex-col sm:flex-row sm:h-[300px] divide-y sm:divide-y-0 sm:divide-x">
+    <div className="flex flex-col sm:flex-row sm:h-75 divide-y sm:divide-y-0 sm:divide-x">
       <ScrollArea className="w-64 sm:w-auto">
         <div className="flex sm:flex-col p-2">
           {Array.from({ length: 12 }, (_, i) => i + 1)
@@ -342,7 +342,7 @@ export function DateTimePicker<TFieldValues extends FieldValues = FieldValues>(
         <div className="text-sm font-medium text-center">
           {isEndTime ? "End Time" : "Start Time"}
         </div>
-        <div className="flex flex-col sm:flex-row sm:h-[300px] divide-y sm:divide-y-0 sm:divide-x">
+        <div className="flex flex-col sm:flex-row sm:h-75 divide-y sm:divide-y-0 sm:divide-x">
           <ScrollArea className="w-64 sm:w-auto">
             <div className="flex sm:flex-col p-2">
               {Array.from({ length: 12 }, (_, i) => i + 1)
