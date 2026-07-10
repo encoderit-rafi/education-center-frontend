@@ -337,7 +337,7 @@
         },
         "toast": {
           "successTitle": "Thank you for reaching out.",
-          "successDesc": "We have successfully received your message. A member of our team will review your inquiry and get back to you within 1-2 business days. If your request requires immediate assistance, please call us directly at +971 6 553 1250 during our standard business hours: 9:00 AM – 9:00 PM, Saturday to Thursday.",
+          "successDesc": "We have successfully received your message. A member of our team will review your inquiry and get back to you within 1-2 business days. If your request requires immediate assistance, please call us directly at <phone>+971 6 553 1250</phone> during our standard business hours: 9:00 AM – 9:00 PM, Saturday to Thursday.",
           "errorTitle": "Failed to Send Enquiry",
           "errorDesc": "An error occurred while submitting. Please try again."
         }
@@ -3773,6 +3773,8 @@
       "phoneNumberRequired": "Phone Number is required",
       "startQuiz": "Start the quiz",
       "answerRequired": "Please answer this question",
+      "answersRequiredAll": "Please answer all questions before proceeding",
+      "requiredFieldsError": "Please fill in all required fields before proceeding",
       "chooseOption": "Choose the correct answer",
       "back": "Back",
       "processing": "Processing...",
@@ -3855,7 +3857,9 @@
       "cityRequired": "Emirate / City is required",
       "contactMethodRequired": "Preferred Contact Method is required",
       "contactTimeRequired": "Preferred Time is required",
-      "answersRequired": "Please select an answer"
+      "answersRequired": "Please select an answer",
+      "answersRequiredAll": "Please answer all questions before proceeding",
+      "requiredFieldsError": "Please fill in all required fields before proceeding"
     },
     "toast": {
       "startErrorTitle": "Could not start the test",
