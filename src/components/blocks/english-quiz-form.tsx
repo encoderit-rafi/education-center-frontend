@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useForm, Controller } from "react-hook-form";
+import { toast } from "sonner";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { cn } from "@/lib/utils";
@@ -685,7 +686,10 @@ export default function EnglishQuizForm() {
     }
 
     const isValid = await trigger(fieldsToValidate);
-    if (!isValid) return;
+    if (!isValid) {
+      toast.error(t("form.requiredFieldsError"));
+      return;
+    }
 
     setStep((prev) => prev + 1);
   };
@@ -707,9 +711,15 @@ export default function EnglishQuizForm() {
     router.push(`/english-quiz/result?score=${calculatedScore}&correct=${correctAnswersCount}`);
   };
 
+  const onInvalid = (errors: any) => {
+    if (errors.answers) {
+      toast.error(t("form.answersRequiredAll"));
+    }
+  };
+
   return (
     <div className="space-y-12">
-      <form onSubmit={handleSubmit(onSubmit)} className="animate-fade-up">
+      <form onSubmit={handleSubmit(onSubmit, onInvalid)} className="animate-fade-up">
         {step === 1 && (
           <div className="bg-white border border-slate-200 rounded-md p-8 space-y-8">
             <div className="flex items-center gap-3 mb-2">
@@ -898,11 +908,6 @@ export default function EnglishQuizForm() {
                         </RadioGroup>
                       )}
                     />
-                    {errors.answers?.[q.id.toString()] && (
-                      <FieldError>
-                        {errors.answers[q.id.toString()]?.message}
-                      </FieldError>
-                    )}
                   </FieldContent>
                 </div>
               </Field>
