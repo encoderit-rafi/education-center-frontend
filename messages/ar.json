@@ -3704,7 +3704,9 @@
       "chooseOption": "اختر الإجابة الصحيحة",
       "back": "رجوع",
       "processing": "جاري المعالجة...",
-      "submitQuiz": "إرسال الاختبار"
+      "submitQuiz": "إرسال الاختبار",
+      "submitErrorTitle": "فشل تقديم الاختبار",
+      "submitErrorDesc": "حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى."
     },
     "result": {
       "title": "اكتمل الاختبار!",

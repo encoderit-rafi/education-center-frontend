@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useForm, Controller } from "react-hook-form";
 import { toast } from "sonner";
+import api from "@/axios";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { cn } from "@/lib/utils";
@@ -696,19 +697,46 @@ export default function EnglishQuizForm() {
 
   const handlePrev = () => setStep((prev) => prev - 1);
 
-  const onSubmit = (data: QuizFormValues) => {
-    let correctAnswersCount = 0;
-    QUIZ_QUESTIONS.forEach((q) => {
-      const selectedOptionId = data.answers[q.id.toString()];
-      const option = q.options.find((o) => o.id === selectedOptionId);
-      if (option && option.points > 0) {
-        correctAnswersCount++;
-      }
-    });
-    const calculatedScore = Math.round(
-      (correctAnswersCount / QUIZ_QUESTIONS.length) * 100
-    );
-    router.push(`/english-quiz/result?score=${calculatedScore}&correct=${correctAnswersCount}`);
+  const onSubmit = async (data: QuizFormValues) => {
+    try {
+      const questions = QUIZ_QUESTIONS.map((q) => {
+        const selectedOptionId = data.answers[q.id.toString()];
+        const option = q.options.find((o) => o.id === selectedOptionId);
+        return {
+          question: q.question,
+          answer: option ? option.text : "",
+        };
+      });
+
+      const payload = {
+        full_name: data.fullName,
+        email: data.email,
+        phone: data.phoneNumber,
+        country: data.country,
+        city: data.city,
+        questions,
+      };
+
+      await api.post("/english-quiz-submissions", payload);
+
+      let correctAnswersCount = 0;
+      QUIZ_QUESTIONS.forEach((q) => {
+        const selectedOptionId = data.answers[q.id.toString()];
+        const option = q.options.find((o) => o.id === selectedOptionId);
+        if (option && option.points > 0) {
+          correctAnswersCount++;
+        }
+      });
+      const calculatedScore = Math.round(
+        (correctAnswersCount / QUIZ_QUESTIONS.length) * 100
+      );
+      router.push(`/english-quiz/result?score=${calculatedScore}&correct=${correctAnswersCount}`);
+    } catch (error: any) {
+      console.error("Error submitting English quiz:", error);
+      toast.error(t("form.submitErrorTitle") || "Submission failed", {
+        description: error.response?.data?.message || t("form.submitErrorDesc") || "An unexpected error occurred. Please try again.",
+      });
+    }
   };
 
   const onInvalid = (errors: any) => {
