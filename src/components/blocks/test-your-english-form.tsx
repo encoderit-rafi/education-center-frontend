@@ -201,6 +201,15 @@ export default function TestYourEnglishForm({ onSuccess }: { onSuccess?: (val: b
         const firstName = nameParts[0];
         const lastName = nameParts.length > 1 ? nameParts.slice(1).join(" ") : undefined;
 
+        let preferredTime = formData.preferredTime;
+        if (formData.preferredTime === "Morning") {
+          preferredTime = "Morning (9:00 AM – 11:30 AM)";
+        } else if (formData.preferredTime === "Afternoon") {
+          preferredTime = "Afternoon (12:00 PM – 5:30 PM)";
+        } else if (formData.preferredTime === "Evening") {
+          preferredTime = "Evening (6:00 PM – 8:30 PM)";
+        }
+
         const res = await api.post("/english-test/attempt-start", {
           first_name: firstName,
           last_name: lastName,
@@ -208,6 +217,8 @@ export default function TestYourEnglishForm({ onSuccess }: { onSuccess?: (val: b
           phone: formData.phoneNumber,
           country: formData.country,
           city: formData.city,
+          preferred_contact_method: formData.preferredContactMethod,
+          preferred_time_to_contact_you: preferredTime,
         });
 
         // Remove debug alerts once structure is confirmed
