@@ -25,12 +25,7 @@ import api from "@/axios";
 import { VAT_PERCENT, calculateVat } from "@/lib/vat";
 import { compileBookingPayload } from "@/lib/booking";
 
-const PTE_UKVI_WORKSHOPS = [
-  { id: "workshop_2", name: "Workshop 2 Hours", price: 600 },
-  { id: "workshop_4", name: "Workshop 4 Hours", price: 1000 },
-  { id: "workshop_6", name: "Workshop 6 Hours", price: 1350 },
-  { id: "workshop_8", name: "Workshop 8 Hours", price: 1600 },
-];
+
 
 interface FormProps {
   examId?: string;
@@ -183,7 +178,7 @@ export default function FormPTEAcademicUKVIRegistration({
       : 0;
 
     const selectedWorkshopData = formData.selectedWorkshop
-      ? PTE_UKVI_WORKSHOPS.find((w) => w.id === formData.selectedWorkshop)
+      ? (workshopsData as any)[formData.selectedWorkshop]
       : null;
     const workshopPrice = selectedWorkshopData?.price || 0;
 
@@ -492,7 +487,7 @@ export default function FormPTEAcademicUKVIRegistration({
               onBack={() => goToStep(1)}
               languages={languages}
               coursesData={coursesData}
-              workshopsData={PTE_UKVI_WORKSHOPS}
+              workshopsData={workshopsData}
             />
           )}
 
@@ -518,9 +513,7 @@ export default function FormPTEAcademicUKVIRegistration({
               }
               selectedWorkshopData={
                 formData.selectedWorkshop
-                  ? PTE_UKVI_WORKSHOPS.find(
-                      (w) => w.id === formData.selectedWorkshop,
-                    )
+                  ? (workshopsData as any)[formData.selectedWorkshop]
                   : undefined
               }
               reviewStepNumber={3}
