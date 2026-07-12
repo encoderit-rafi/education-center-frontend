@@ -150,7 +150,7 @@ export default function FreeConsultationForm() {
       const lastName = nameParts.length > 1 ? nameParts.slice(1).join(" ") : undefined;
 
       let consultationType = "exam";
-      if (data.area === "Exam Prep. Course") {
+      if (data.area.toLowerCase().includes("prep")) {
         consultationType = "exam_preparation_course";
       }
 
