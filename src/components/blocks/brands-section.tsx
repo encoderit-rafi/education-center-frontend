@@ -14,7 +14,7 @@ const brands = [
   },
   {
     name: "GRE",
-    img: "/images/brands/gre-logo.png",
+    img: "/images/brands/gre-logo.svg",
   },
   {
     name: "Pearson PTE",
