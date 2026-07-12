@@ -144,8 +144,8 @@ export default function ExamDetails({ data }: { data: any }) {
         </div>
       </div>
       <div className="section-container base-px base-py">
-        <div className="grid gap-6 lg:grid-cols-3">
-          <div className="lg:col-span-2 space-y-6">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+          <div className="lg:col-span-2 space-y-6 min-w-0">
             {/* Stats Grid Card */}
             {stats.length > 0 && (
               <div className="grid grid-cols-1 min-[360px]:grid-cols-2 gap-2.5 sm:gap-3 sm:grid-cols-4 bg-slate-50/50 p-3 sm:p-4.5 rounded-2xl border border-slate-100/80">
@@ -248,7 +248,7 @@ export default function ExamDetails({ data }: { data: any }) {
                             return (
                               <div
                                 key={i}
-                                className="my-6 overflow-x-auto rounded-2xl border border-slate-200/60 shadow-sm bg-white"
+                                className="my-6 w-full overflow-x-auto rounded-2xl border border-slate-200/60 shadow-sm bg-white"
                               >
                                 <table className="w-full min-w-150 border-collapse text-left rtl:text-right text-xs lg:text-sm">
                                   <thead>

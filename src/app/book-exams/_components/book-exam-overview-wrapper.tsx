@@ -102,7 +102,7 @@ function OverviewBody({ text }: { text: string }) {
             return (
               <div
                 key={i}
-                className="my-6 overflow-x-auto rounded-xl border border-slate-200/80 shadow-sm bg-white"
+                className="my-6 w-full overflow-x-auto rounded-xl border border-slate-200/80 shadow-sm bg-white"
               >
                 <table className="w-full min-w-125 border-collapse text-left text-xs lg:text-sm">
                   <thead>
@@ -242,9 +242,9 @@ export default function BookExamOverviewWrapper({
 
       {/* ── Body grid (identical to exam-details) ── */}
       <div className="section-container base-px base-py">
-        <div className="grid gap-6 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
           {/* ── Main column ── */}
-          <div className="lg:col-span-2 space-y-6">
+          <div className="lg:col-span-2 space-y-6 min-w-0">
             {/* Stats */}
             {stats.length > 0 && (
               <div className="grid grid-cols-2 gap-2 md:grid-cols-4">
