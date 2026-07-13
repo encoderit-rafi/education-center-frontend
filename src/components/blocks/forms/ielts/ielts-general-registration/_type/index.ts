@@ -87,6 +87,60 @@ export const IeltsGeneralSchema = z
     path: ["confirmEmail"],
   })
   .superRefine((data, ctx) => {
+    // Sex required
+    if (!data.sex) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Please select your sex",
+        path: ["sex"],
+      });
+    }
+
+    // ID type required
+    if (!data.idType) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Please select an identification type",
+        path: ["idType"],
+      });
+    }
+
+    // ID number required
+    if (!data.idNumber || !data.idNumber.trim()) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "ID / Passport number is required",
+        path: ["idNumber"],
+      });
+    }
+
+    // ID expiry date required
+    if (!data.idExpiryDate) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Expiry date is required",
+        path: ["idExpiryDate"],
+      });
+    }
+
+    // Issuing authority required
+    if (!data.issuingAuthority || !data.issuingAuthority.trim()) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Issuing authority is required",
+        path: ["issuingAuthority"],
+      });
+    }
+
+    // takenBefore required
+    if (!data.takenBefore) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Please answer this question",
+        path: ["takenBefore"],
+      });
+    }
+
     // Conditional logic for Step 3: Your Profile
     if (data.takenBefore === "Yes") {
       if (!data.lessThanTwoYears) {
@@ -103,6 +157,105 @@ export const IeltsGeneralSchema = z
           path: ["existingAccount"],
         });
       }
+    }
+
+    // First language required
+    if (!data.firstLanguage) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Please select your first language",
+        path: ["firstLanguage"],
+      });
+    }
+
+    // firstLanguageOther required if "Other"
+    if (data.firstLanguage === "Other" && (!data.firstLanguageOther || !data.firstLanguageOther.trim())) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Please specify your first language",
+        path: ["firstLanguageOther"],
+      });
+    }
+
+    // Years studying English required
+    if (!data.yearsStudyingEnglish) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Please select how many years you have been studying English",
+        path: ["yearsStudyingEnglish"],
+      });
+    }
+
+    // Education level required
+    if (!data.educationLevel) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Please select your education level",
+        path: ["educationLevel"],
+      });
+    }
+
+    // Occupation level required
+    if (!data.occupationLevel) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Please select your occupation level",
+        path: ["occupationLevel"],
+      });
+    }
+
+    // occupationLevelOther required if "Other"
+    if (data.occupationLevel === "Other" && (!data.occupationLevelOther || !data.occupationLevelOther.trim())) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Please specify your occupation level",
+        path: ["occupationLevelOther"],
+      });
+    }
+
+    // Occupation sector required
+    if (!data.occupationSector) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Please select your occupation sector",
+        path: ["occupationSector"],
+      });
+    }
+
+    // occupationSectorOther required if "Other"
+    if (data.occupationSector === "Other" && (!data.occupationSectorOther || !data.occupationSectorOther.trim())) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Please specify your occupation sector",
+        path: ["occupationSectorOther"],
+      });
+    }
+
+    // Reason for taking test required
+    if (!data.reasonForTakingTest) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Please select a reason for taking the test",
+        path: ["reasonForTakingTest"],
+      });
+    }
+
+    // reasonForTakingTestOther required if "other"
+    if (data.reasonForTakingTest === "other" && (!data.reasonForTakingTestOther || !data.reasonForTakingTestOther.trim())) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Please specify your reason for taking the test",
+        path: ["reasonForTakingTestOther"],
+      });
+    }
+
+    // Destination country required
+    if (!data.destinationCountry) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Please select a destination country",
+        path: ["destinationCountry"],
+      });
     }
 
     if (!data.marketingPreference) {

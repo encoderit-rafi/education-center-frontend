@@ -343,6 +343,8 @@ export default function FormSELTA2Registration({
   };
 
   const onInvalid = (errors: any) => {
+    const errorFields = Object.keys(errors).join(", ");
+    toast.error(`Validation failed for: ${errorFields}`);
     const firstError = Object.keys(errors)[0];
     const element = document.getElementsByName(firstError)[0];
     if (element) {

@@ -128,6 +128,14 @@ export const PteAcademicSchema = z.object({
     .refine((data) => data.takenBefore !== "yes" || !!data.hasExistingAccount, {
         message: "Please select an option",
         path: ["hasExistingAccount"],
+    })
+    .refine((data) => !!data.gender, {
+        message: "Please select your gender",
+        path: ["gender"],
+    })
+    .refine((data) => !!data.takenBefore, {
+        message: "Please answer this question",
+        path: ["takenBefore"],
     });
 
 export type TPteAcademicSchema = z.infer<typeof PteAcademicSchema>;

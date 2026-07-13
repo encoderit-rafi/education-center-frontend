@@ -6,7 +6,15 @@ const stringOrObject = z.union([z.string(), z.any(), z.null(), z.undefined()]).t
         return val.name || val.value || val.label || "";
     }
     return "";
-});
+})
+    .refine((data) => !!data.gender, {
+        message: "Please select your gender",
+        path: ["gender"],
+    })
+    .refine((data) => !!data.takenBefore, {
+        message: "Please answer this question",
+        path: ["takenBefore"],
+    });
 
 export const PteAcademicUKVISchema = z.object({
     // Step 1: Personal Details
@@ -128,6 +136,14 @@ export const PteAcademicUKVISchema = z.object({
 .refine((data) => data.occupationSector !== "Other" || (data.occupationSectorOther && data.occupationSectorOther.trim() !== ""), {
     message: "Please specify your occupation sector",
     path: ["occupationSectorOther"],
-});
+})
+    .refine((data) => !!data.gender, {
+        message: "Please select your gender",
+        path: ["gender"],
+    })
+    .refine((data) => !!data.takenBefore, {
+        message: "Please answer this question",
+        path: ["takenBefore"],
+    });
 
 export type TPteAcademicUKVISchema = z.infer<typeof PteAcademicUKVISchema>;

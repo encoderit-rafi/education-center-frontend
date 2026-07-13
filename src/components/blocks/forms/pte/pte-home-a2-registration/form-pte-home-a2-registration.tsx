@@ -352,65 +352,15 @@ export default function FormPTEHomeA2Registration({
   };
 
   const onInvalid = (errors: any) => {
-    console.error("Validation Errors:", errors);
-
-    const fieldLabels: Record<string, string> = {
-      givenNames: "First / Given Names",
-      surnames: "Surnames",
-      emailUsername: "Email",
-      confirmEmail: "Confirm Email",
-      dateOfBirth: "Date of Birth",
-      gender: "Gender",
-      placeOfBirth: "Place of Birth",
-      countryOfBirth: "Country of Birth",
-      countryOfCitizenship: "Country of Citizenship",
-      countryOfResidence: "Country of Residence",
-      address: "Address",
-      city: "City",
-      mobileNumber: "Mobile Number",
-      homeLanguage: "Home Language",
-      planningCountry: "Destination Country",
-      currentSituation: "Current Situation",
-      reasonForTaking: "Reason for Taking",
-      occupationSector: "Occupation Sector",
-      referralSource: "Referral Source",
-      takenBefore: "Test History",
-      takenWithinTwoYears: "Previous Test Timing",
-      hasExistingAccount: "Existing Account Confirmation",
-      dataSharingAgreed: "Data Sharing Agreement",
-      bookingTermsAgreed: "Terms and Conditions",
-      marketingConsent: "Marketing Preferences",
-      idType: "ID Type",
-      idCountryOfIssue: "ID Country of Issue",
-      idNumber: "ID Number",
-      idExpiryDate: "ID Expiry Date",
-      documentNumber: "ID Number",
-      documentNumberConfirmed: "ID Confirmation",
-      idPolicyRead: "ID Policy Confirmation",
-      idDocument: "ID Document Upload",
-      examDate: "Exam Date",
-      examTime: "Exam Time",
-    };
-
-    const errorFields = Object.keys(errors);
-    if (errorFields.length > 0) {
-      const firstErrorField = errorFields[0];
-      const errorMessage =
-        errors[firstErrorField]?.message || "This field is required";
-      const label = fieldLabels[firstErrorField] || firstErrorField;
-
-      toast.error(`Validation Error: ${label} - ${errorMessage}`, {
-        description: `Please fix ${errorFields.length} field(s) before proceeding.`,
-        duration: 5000,
-      });
-
-      const element = document.getElementsByName(firstErrorField)[0];
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth", block: "center" });
-        element.focus({ preventScroll: true });
-      }
+    const errorFields = Object.keys(errors).join(", ");
+    toast.error(`Validation failed for: ${errorFields}`);
+    const firstError = Object.keys(errors)[0];
+    const element = document.getElementsByName(firstError)[0];
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "center" });
     }
   };
+
 
   const nextStep = async () => {
     let fieldsToValidate: any[] = [];
