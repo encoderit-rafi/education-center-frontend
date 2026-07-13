@@ -149,15 +149,13 @@ export default function FreeConsultationForm() {
       const firstName = nameParts[0];
       const lastName = nameParts.length > 1 ? nameParts.slice(1).join(" ") : undefined;
 
-      let consultationType = "exam";
-      if (data.area.toLowerCase().includes("prep")) {
-        consultationType = "exam_preparation_course";
-      }
-
       let preferredTime = undefined;
       if (data.time === "Morning") preferredTime = "Morning (9:00 AM – 11:30 AM)";
       if (data.time === "Afternoon") preferredTime = "Afternoon (12:00 PM – 5:30 PM)";
       if (data.time === "Evening") preferredTime = "Evening (6:00 PM – 8:30 PM)";
+
+      const consultationType =
+        data.area === "Exam Prep. Course" ? "exam_preparation_course" : "exam";
 
       const payload = {
         consultation_type: consultationType,
