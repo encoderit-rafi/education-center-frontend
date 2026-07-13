@@ -101,6 +101,7 @@ export default function CareerPage() {
     validateCaptcha,
     resetCaptcha,
     clearCaptchaError,
+    setToken,
   } = useRecaptcha();
 
 
@@ -635,6 +636,7 @@ export default function CareerPage() {
                     captchaRef={captchaRef}
                     error={captchaError}
                     onChange={clearCaptchaError}
+                    setToken={setToken}
                   />
 
                   <Button

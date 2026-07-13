@@ -47,6 +47,7 @@ export default function ContactForm() {
     validateCaptcha,
     resetCaptcha,
     clearCaptchaError,
+    setToken,
   } = useRecaptcha();
 
   const locale = useLocale();
@@ -324,6 +325,7 @@ export default function ContactForm() {
         captchaRef={captchaRef}
         error={captchaError}
         onChange={clearCaptchaError}
+        setToken={setToken}
       />
 
       <div className="space-y-4">

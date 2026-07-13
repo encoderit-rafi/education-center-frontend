@@ -72,6 +72,7 @@ export default function FreeConsultationForm() {
     validateCaptcha,
     resetCaptcha,
     clearCaptchaError,
+    setToken,
   } = useRecaptcha();
   const locale = useLocale();
   const t = useTranslations("FreeConsultationPage");
@@ -442,6 +443,7 @@ export default function FreeConsultationForm() {
         captchaRef={captchaRef}
         error={captchaError}
         onChange={clearCaptchaError}
+        setToken={setToken}
       />
 
       <div className="pt-4 space-y-4 max-w-md mx-auto flex flex-col items-center justify-center">

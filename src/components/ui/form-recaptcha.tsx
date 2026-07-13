@@ -1,18 +1,23 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import ReCAPTCHA from "react-google-recaptcha";
-import { RECAPTCHA_SITE_KEY } from "@/consts";
+import { useRef, useState } from "react";
+import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
+import { TURNSTILE_SITE_KEY } from "@/consts";
 import { FieldError } from "@/components/ui/field";
 
 export function useRecaptcha() {
-  const captchaRef = useRef<ReCAPTCHA>(null);
+  const captchaRef = useRef<TurnstileInstance | null>(null);
+  const tokenRef = useRef<string | null>(null);
   const [captchaError, setCaptchaError] = useState<string | null>(null);
 
-  const validateCaptcha = (errorMessage: string): string | null => {
-    if (!RECAPTCHA_SITE_KEY) return "";
+  const setToken = (token: string | null) => {
+    tokenRef.current = token;
+  };
 
-    const token = captchaRef.current?.getValue();
+  const validateCaptcha = (errorMessage: string): string | null => {
+    if (!TURNSTILE_SITE_KEY) return "";
+
+    const token = tokenRef.current;
     if (!token) {
       setCaptchaError(errorMessage);
       return null;
@@ -24,6 +29,7 @@ export function useRecaptcha() {
 
   const resetCaptcha = () => {
     captchaRef.current?.reset();
+    tokenRef.current = null;
     setCaptchaError(null);
   };
 
@@ -35,34 +41,38 @@ export function useRecaptcha() {
     validateCaptcha,
     resetCaptcha,
     clearCaptchaError,
-    isEnabled: Boolean(RECAPTCHA_SITE_KEY),
+    setToken,
+    isEnabled: Boolean(TURNSTILE_SITE_KEY),
   };
 }
 
 type FormRecaptchaProps = {
-  captchaRef: React.RefObject<ReCAPTCHA | null>;
+  captchaRef: React.RefObject<TurnstileInstance | null>;
   error?: string | null;
   onChange?: () => void;
+  setToken?: (token: string | null) => void;
 };
 
-export function FormRecaptcha({ captchaRef, error, onChange }: FormRecaptchaProps) {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!RECAPTCHA_SITE_KEY || !mounted) {
+export function FormRecaptcha({ captchaRef, error, onChange, setToken }: FormRecaptchaProps) {
+  if (!TURNSTILE_SITE_KEY) {
     return null;
   }
 
   return (
     <div className="space-y-2">
-      <ReCAPTCHA
+      <Turnstile
         ref={captchaRef}
-        sitekey={RECAPTCHA_SITE_KEY}
-        onChange={() => onChange?.()}
-        onExpired={() => onChange?.()}
+        siteKey={TURNSTILE_SITE_KEY}
+        onSuccess={(token) => {
+          setToken?.(token);
+          onChange?.();
+        }}
+        onExpire={() => {
+          setToken?.(null);
+        }}
+        onError={() => {
+          setToken?.(null);
+        }}
       />
       {error && <FieldError>{error}</FieldError>}
     </div>
