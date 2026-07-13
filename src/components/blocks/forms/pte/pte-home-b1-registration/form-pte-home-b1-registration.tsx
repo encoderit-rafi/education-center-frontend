@@ -318,7 +318,7 @@ export default function FormPTEHomeB1Registration({
             ...data,
             level_name: activeExam?.name || "PTE Home B1",
             selected_course_name: data.selectedCourse
-              ? courseDetail?.name
+              ? coursesData.find((c: any) => c.id === data.selectedCourse)?.name
               : undefined,
             selected_workshop_name: data.selectedWorkshop
               ? dbWorkshops.find((w: any) => w.id === data.selectedWorkshop)

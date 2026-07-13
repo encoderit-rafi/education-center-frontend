@@ -151,6 +151,7 @@ export default function FormTOEFLIBTRegistration({
   });
 
   const formData = form.watch();
+  console.log('formData', formData);
 
   const goToStep = (step: number) => {
     setCurrentStep(step);
@@ -367,7 +368,7 @@ export default function FormTOEFLIBTRegistration({
             ...data,
             level_name: activeExam?.name || "TOEFL iBT",
             selected_course_name: data.selectedCourse
-              ? courseDetail?.name
+              ? coursesData.find((c: any) => c.id === data.selectedCourse)?.name
               : undefined,
             selected_workshop_name: data.selectedWorkshop
               ? (workshopsData as any)[data.selectedWorkshop]?.name
@@ -412,7 +413,7 @@ export default function FormTOEFLIBTRegistration({
               examFee={pricing.baseFeeAED}
               additionalFee={
                 activeExam?.additionalFee &&
-                parseFloat(activeExam.additionalFee) > 0
+                  parseFloat(activeExam.additionalFee) > 0
                   ? parseFloat(activeExam.additionalFee)
                   : 150
               }
@@ -460,8 +461,8 @@ export default function FormTOEFLIBTRegistration({
               selectedCourseData={
                 formData.selectedCourse
                   ? coursesData.find(
-                      (c: any) => c.id === formData.selectedCourse,
-                    )
+                    (c: any) => c.id === formData.selectedCourse,
+                  )
                   : undefined
               }
               selectedWorkshopData={
@@ -506,7 +507,7 @@ export default function FormTOEFLIBTRegistration({
 
                   <div className="flex justify-between text-sm items-center">
                     <span className="text-slate-500 font-medium">
-                     Exam Registration Service Fee
+                      Exam Registration Service Fee
                     </span>
                     <span className="font-bold text-slate-900 inline-flex items-center gap-1">
                       ${pricing.registrationServiceFeeUSD}{" "}
@@ -702,11 +703,11 @@ export default function FormTOEFLIBTRegistration({
                   { label: "Address Line 1", value: formData.streetAddress1 },
                   ...(formData.streetAddress2
                     ? [
-                        {
-                          label: "Address Line 2",
-                          value: formData.streetAddress2,
-                        },
-                      ]
+                      {
+                        label: "Address Line 2",
+                        value: formData.streetAddress2,
+                      },
+                    ]
                     : []),
                   { label: "City", value: formData.city },
                   { label: "Country of Residence", value: formData.country },
@@ -743,9 +744,9 @@ export default function FormTOEFLIBTRegistration({
                     label: "Intended Enrollment Date",
                     value: formData.intendedEnrollmentDate
                       ? format(
-                          new Date(formData.intendedEnrollmentDate as any),
-                          "MMMM yyyy",
-                        )
+                        new Date(formData.intendedEnrollmentDate as any),
+                        "MMMM yyyy",
+                      )
                       : "N/A",
                   },
                   {
