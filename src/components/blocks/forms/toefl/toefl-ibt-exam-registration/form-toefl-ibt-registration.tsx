@@ -178,6 +178,14 @@ export default function FormTOEFLIBTRegistration({
         : 1270;
     const baseFeeUSD = Math.round(baseFeeAED / 3.67) || 340;
 
+    // TEPTH Registration Service Fee
+    const registrationServiceFeeAED =
+      activeExam?.additionalFee && parseFloat(activeExam.additionalFee) > 0
+        ? parseFloat(activeExam.additionalFee)
+        : 150;
+    const AED_TO_USD_RATE = 3.67;
+    const registrationServiceFeeUSD = Math.round(registrationServiceFeeAED / AED_TO_USD_RATE);
+
     // Express registration fee (7 days or less)
     const expressFeeUSD = isExpress ? 49 : 0;
     const expressFeeAED = isExpress ? 190 : 0;
@@ -196,16 +204,15 @@ export default function FormTOEFLIBTRegistration({
       : 0;
 
     // Convert Course & Workshop fees to USD for display purposes
-    const AED_TO_USD_RATE = 3.67;
     const coursePriceUSD =
       coursePriceAED > 0 ? Math.round(coursePriceAED / AED_TO_USD_RATE) : 0;
     const workshopPriceUSD =
       workshopPriceAED > 0 ? Math.round(workshopPriceAED / AED_TO_USD_RATE) : 0;
 
     const subtotalAED =
-      baseFeeAED + expressFeeAED + coursePriceAED + workshopPriceAED;
+      baseFeeAED + registrationServiceFeeAED + expressFeeAED + coursePriceAED + workshopPriceAED;
     const subtotalUSD =
-      baseFeeUSD + expressFeeUSD + coursePriceUSD + workshopPriceUSD;
+      baseFeeUSD + registrationServiceFeeUSD + expressFeeUSD + coursePriceUSD + workshopPriceUSD;
 
     const vatAED = calculateVat(subtotalAED);
     const vatUSD = calculateVat(subtotalUSD);
@@ -216,6 +223,8 @@ export default function FormTOEFLIBTRegistration({
     return {
       baseFeeUSD,
       baseFeeAED,
+      registrationServiceFeeAED,
+      registrationServiceFeeUSD,
       expressFeeUSD,
       expressFeeAED,
       coursePriceUSD,
@@ -350,7 +359,7 @@ export default function FormTOEFLIBTRegistration({
           examFee: pricing.baseFeeAED + pricing.expressFeeAED,
           courseFee: pricing.coursePriceAED,
           workshopFee: pricing.workshopPriceAED,
-          additionalFee: 0,
+          additionalFee: pricing.registrationServiceFeeAED,
           discountAmount: 0,
           vatAmount: pricing.vatAED,
           totalAmount: total,
@@ -478,7 +487,7 @@ export default function FormTOEFLIBTRegistration({
 
                   <div className="flex justify-between text-sm items-center">
                     <span className="text-slate-500 font-medium">
-                      Standard Registration Fee
+                      Exam Registration Fee
                     </span>
                     <span className="font-bold text-slate-900 inline-flex items-center gap-1">
                       ${pricing.baseFeeUSD}{" "}
@@ -486,6 +495,25 @@ export default function FormTOEFLIBTRegistration({
                         (Approximately{" "}
                         <PriceDisplay
                           amount={pricing.baseFeeAED}
+                          minimumFractionDigits={0}
+                          maximumFractionDigits={0}
+                          className="text-slate-400 font-normal text-xs"
+                        />
+                        )
+                      </span>
+                    </span>
+                  </div>
+
+                  <div className="flex justify-between text-sm items-center">
+                    <span className="text-slate-500 font-medium">
+                     Exam Registration Service Fee
+                    </span>
+                    <span className="font-bold text-slate-900 inline-flex items-center gap-1">
+                      ${pricing.registrationServiceFeeUSD}{" "}
+                      <span className="text-slate-400 font-normal text-xs inline-flex items-center gap-0.5">
+                        (Approximately{" "}
+                        <PriceDisplay
+                          amount={pricing.registrationServiceFeeAED}
                           minimumFractionDigits={0}
                           maximumFractionDigits={0}
                           className="text-slate-400 font-normal text-xs"
