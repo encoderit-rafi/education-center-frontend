@@ -98,7 +98,7 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
   const examId = searchParams.get("examId"); // e.g. "ielts"
   const workshopId = searchParams.get("workshopId"); // workshop ID (UUID)
   const priceParam = searchParams.get("price");
-  const typeParam = searchParams.get("type");
+  const typeParam = searchParams.get("workshop_type") || searchParams.get("type");
 
   // Fetch course details (includes workshops array)
   const { data: courseData, isLoading } = useQuery({
@@ -223,7 +223,7 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
       total_amount,
       vat_amount: vatAmount,
       payment_methods: formData.paymentMethod,
-      location: searchParams.get("type") || "",
+      workshop_type: typeParam || "",
     };
 
     mutation.mutate(omitEmpty(payload));

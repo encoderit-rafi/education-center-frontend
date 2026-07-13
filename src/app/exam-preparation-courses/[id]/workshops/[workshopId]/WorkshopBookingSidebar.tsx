@@ -52,7 +52,7 @@ export function WorkshopBookingSidebar({
 
   // Construct dynamic registration URL with the selected type parameter
   const registrationUrl = selectedType
-    ? `${baseUrl}&type=${encodeURIComponent(selectedType)}`
+    ? `${baseUrl}&workshop_type=${encodeURIComponent(selectedType)}&type=${encodeURIComponent(selectedType)}`
     : baseUrl;
 
   return (
