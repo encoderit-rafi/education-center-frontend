@@ -6,7 +6,15 @@ const stringOrObject = z.union([z.string(), z.any(), z.null(), z.undefined()]).t
         return val.name || val.value || val.label || "";
     }
     return "";
-});
+})
+    .refine((data) => !!data.gender, {
+        message: "Please select your gender",
+        path: ["gender"],
+    })
+    .refine((data) => !!data.takenBefore, {
+        message: "Please answer this question",
+        path: ["takenBefore"],
+    });
 
 export const PteHomeA2Schema = z.object({
     // Step 1: Personal Details
@@ -120,6 +128,14 @@ export const PteHomeA2Schema = z.object({
 .refine((data) => data.takenBefore !== "yes" || !!data.hasExistingAccount, {
     message: "Please select an option",
     path: ["hasExistingAccount"],
-});
+})
+    .refine((data) => !!data.gender, {
+        message: "Please select your gender",
+        path: ["gender"],
+    })
+    .refine((data) => !!data.takenBefore, {
+        message: "Please answer this question",
+        path: ["takenBefore"],
+    });
 
 export type TPteHomeA2Schema = z.infer<typeof PteHomeA2Schema>;

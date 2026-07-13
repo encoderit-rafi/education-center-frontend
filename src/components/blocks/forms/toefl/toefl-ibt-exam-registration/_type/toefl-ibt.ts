@@ -93,6 +93,78 @@ export const ToeflIbtSchema = z
         path: ["confirmEmail"],
     })
     .superRefine((data, ctx) => {
+        // Gender required
+        if (!data.gender) {
+            ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                message: "Please select your gender",
+                path: ["gender"],
+            });
+        }
+
+        // ID type required
+        if (!data.idType) {
+            ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                message: "Please select an identification type",
+                path: ["idType"],
+            });
+        }
+
+        // ID number required
+        if (!data.idNumber || !data.idNumber.trim()) {
+            ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                message: "ID / Passport number is required",
+                path: ["idNumber"],
+            });
+        }
+
+        // ID expiry date required
+        if (!data.idExpiryDate) {
+            ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                message: "Expiry date is required",
+                path: ["idExpiryDate"],
+            });
+        }
+
+        // First language required
+        if (!data.firstLanguage) {
+            ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                message: "Please select your first language",
+                path: ["firstLanguage"],
+            });
+        }
+
+        // firstLanguageOther required if "Other"
+        if (data.firstLanguage === "Other" && (!data.firstLanguageOther || !data.firstLanguageOther.trim())) {
+            ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                message: "Please specify your first language",
+                path: ["firstLanguageOther"],
+            });
+        }
+
+        // Years studying English required
+        if (!data.yearsStudyingEnglish) {
+            ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                message: "Please select how many years you have been studying English",
+                path: ["yearsStudyingEnglish"],
+            });
+        }
+
+        // Destination country required
+        if (!data.destinationCountry) {
+            ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                message: "Please select a destination country",
+                path: ["destinationCountry"],
+            });
+        }
+
         // Conditional logic for Step 3: Your Profile
         if (!data.takenBefore) {
             ctx.addIssue({
@@ -134,6 +206,14 @@ export const ToeflIbtSchema = z
                 code: z.ZodIssueCode.custom,
                 message: "Please select a marketing preference",
                 path: ["marketingPreference"],
+            });
+        }
+
+        if (!data.noSurname && (!data.surnames || !data.surnames.trim())) {
+            ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                message: "Surname / family name is required",
+                path: ["surnames"],
             });
         }
     });

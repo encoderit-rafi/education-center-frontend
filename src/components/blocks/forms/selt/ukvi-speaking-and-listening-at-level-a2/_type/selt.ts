@@ -84,6 +84,51 @@ export const SeltA1Schema = z
     path: ["confirmEmail"],
   })
   .superRefine((data, ctx) => {
+    // Sex required
+    if (!data.sex) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Please select your sex",
+        path: ["sex"],
+      });
+    }
+
+    // ID number required
+    if (!data.idNumber || !data.idNumber.trim()) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "ID / Passport number is required",
+        path: ["idNumber"],
+      });
+    }
+
+    // ID expiry date required
+    if (!data.idExpiryDate) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Expiry date is required",
+        path: ["idExpiryDate"],
+      });
+    }
+
+    // Issuing authority required
+    if (!data.issuingAuthority || !data.issuingAuthority.trim()) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Issuing authority is required",
+        path: ["issuingAuthority"],
+      });
+    }
+
+    // Reason for test required
+    if (!data.reasonForTest) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Please select a reason for taking the test",
+        path: ["reasonForTest"],
+      });
+    }
+
     // Conditional logic for Step 3: Your Profile
     if (!data.takenBefore) {
       ctx.addIssue({

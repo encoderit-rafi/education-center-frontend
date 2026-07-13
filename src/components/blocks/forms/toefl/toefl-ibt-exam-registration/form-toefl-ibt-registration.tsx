@@ -389,7 +389,8 @@ export default function FormTOEFLIBTRegistration({
   };
 
   const onInvalid = (errors: any) => {
-    console.error("TOEFL Registration Validation Errors:", errors);
+    const errorFields = Object.keys(errors).join(", ");
+    toast.error(`Validation failed for: ${errorFields}`);
     const firstError = Object.keys(errors)[0];
     const element = document.getElementsByName(firstError)[0];
     if (element) {
