@@ -321,7 +321,7 @@ export default function FormSELTB1RWRegistration({
             ...data,
             level_name: activeExam?.name || "SELT B1 (R/W)",
             selected_course_name: data.selectedCourse
-              ? courseDetail?.name
+              ? coursesData.find((c: any) => c.id === data.selectedCourse)?.name
               : undefined,
             selected_workshop_name: data.selectedWorkshop
               ? dbWorkshops.find((w: any) => w.id === data.selectedWorkshop)

@@ -311,7 +311,7 @@ export default function FormPTEAcademicRegistration({
             ...data,
             level_name: activeExam?.name || "PTE Academic",
             selected_course_name: data.selectedCourse
-              ? courseDetail?.name
+              ? coursesData.find((c: any) => c.id === data.selectedCourse)?.name
               : undefined,
             selected_workshop_name: data.selectedWorkshop
               ? dbWorkshops.find((w: any) => w.id === data.selectedWorkshop)
