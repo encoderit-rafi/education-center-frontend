@@ -661,12 +661,21 @@ export function RegistrationFormStep({
               >
                 {[
                   {
-                    id: "secondary_up_to_16",
+                    id: "Secondary (up to 16 years)",
                     label: "Secondary (up to 16 years)"
                   },
-                  { id: "secondary_16_19", label: "Secondary (16-19 years)" },
-                  { id: "degree", label: "Degree (or equivalent)" },
-                  { id: "post_graduate", label: "Post-graduate" },
+                  {
+                    id: "Secondary (16-19 years)",
+                    label: "Secondary (16-19 years)"
+                  },
+                  {
+                    id: "Degree (or equivalent)",
+                    label: "Degree (or equivalent)"
+                  },
+                  {
+                    id: "Post-graduate",
+                    label: "Post-graduate"
+                  },
                 ].map((opt) => (
                   <Label
                     key={opt.id}

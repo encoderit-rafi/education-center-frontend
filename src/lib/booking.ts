@@ -62,7 +62,7 @@ export function compileBookingPayload(input: BookingPayloadInput) {
       if (dateObj && !isNaN(dateObj.getTime())) {
         const day =
           typeof input.sessionDate === "string" &&
-          input.sessionDate.includes("-")
+            input.sessionDate.includes("-")
             ? dateObj.getUTCDay()
             : dateObj.getDay();
         if (day === 3 && trimmed === "PM") {
@@ -278,7 +278,7 @@ export function compileBookingPayload(input: BookingPayloadInput) {
         if (dateObj && !isNaN(dateObj.getTime())) {
           const day =
             typeof input.sessionDate === "string" &&
-            input.sessionDate.includes("-")
+              input.sessionDate.includes("-")
               ? dateObj.getUTCDay()
               : dateObj.getDay();
           if (day === 3) {
@@ -335,35 +335,35 @@ export function compileBookingPayload(input: BookingPayloadInput) {
     { name: "exam_fee", label: "Exam Fee", value: String(input.examFee) },
     input.additionalFee
       ? {
-          name: "additional_fee",
-          label: "Registration Service Fee",
-          value: String(input.additionalFee),
-        }
+        name: "additional_fee",
+        label: "Registration Service Fee",
+        value: String(input.additionalFee),
+      }
       : null,
     input.courseFee
       ? {
-          name: "course_fee",
-          label: input.allFormData?.selected_course_name
-            ? `${input.allFormData.selected_course_name}`
-            : "Course Fee",
-          value: String(input.courseFee),
-        }
+        name: "course_fee",
+        label: input.allFormData?.selected_course_name
+          ? `${input.allFormData.selected_course_name}`
+          : "Course Fee",
+        value: String(input.courseFee),
+      }
       : null,
     input.workshopFee
       ? {
-          name: "workshop_fee",
-          label: input.allFormData?.selected_workshop_name
-            ? `${input.allFormData.selected_workshop_name}`
-            : "Workshop Fee",
-          value: String(input.workshopFee),
-        }
+        name: "workshop_fee",
+        label: input.allFormData?.selected_workshop_name
+          ? `${input.allFormData.selected_workshop_name}`
+          : "Workshop Fee",
+        value: String(input.workshopFee),
+      }
       : null,
     input.vatAmount
       ? {
-          name: "vat_amount",
-          label: "VAT",
-          value: String(input.vatAmount),
-        }
+        name: "vat_amount",
+        label: "VAT",
+        value: String(input.vatAmount),
+      }
       : null,
     {
       name: "total_amount",
