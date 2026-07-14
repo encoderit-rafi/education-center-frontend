@@ -4,7 +4,6 @@ import {
   GlobalReviewStep,
   ReviewSummaryGrid,
 } from "@/components/blocks/forms/global-review-step";
-import { getEducationLevelLabel } from "@/lib/utils";
 import { compileBookingPayload } from "@/lib/booking";
 import { PriceDisplay } from "@/components/ui/price-display";
 
@@ -594,14 +593,6 @@ export default function FormSELTA2Registration({
                   {
                     label: "Address",
                     value: `${formData.postalAddress1}, ${formData.city}`,
-                  },
-                  {
-                    label: "First Language",
-                    value: formData.firstLanguage || "N/A",
-                  },
-                  {
-                    label: "Education Level",
-                    value: getEducationLevelLabel(formData.educationLevel),
                   },
                 ]}
               />

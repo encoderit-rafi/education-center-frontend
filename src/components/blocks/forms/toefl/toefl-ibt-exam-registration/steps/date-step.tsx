@@ -129,15 +129,13 @@ export function DateStep({
                         <div key={slot.id}>
                           <Label
                             htmlFor={slot.id}
-                            className={`flex items-center p-4 rounded-xl border-2 transition-all cursor-pointer ${
-                              isDisabled
+                            className={`flex items-center p-4 rounded-xl border-2 transition-all cursor-pointer ${isDisabled
                                 ? "opacity-40 cursor-not-allowed pointer-events-none"
                                 : ""
-                            } ${
-                              timeSlot === slot.id
+                              } ${timeSlot === slot.id
                                 ? "border-[#A11D1D] bg-[#A11D1D]/5 ring-1 ring-[#A11D1D]"
                                 : "border-slate-100 bg-white hover:border-slate-200"
-                            }`}
+                              }`}
                           >
                             <div className="flex items-center gap-3">
                               <RadioGroupItem

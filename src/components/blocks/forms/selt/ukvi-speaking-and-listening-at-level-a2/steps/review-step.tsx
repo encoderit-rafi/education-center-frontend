@@ -2,7 +2,6 @@
 
 import React from "react";
 import { GlobalReviewStep } from "@/components/blocks/forms/global-review-step";
-import { getEducationLevelLabel } from "@/lib/utils";
 import { format } from "date-fns";
 import {
   User,
@@ -222,22 +221,6 @@ export function ReviewStep({
                 </span>
                 <span className="text-sm font-semibold text-black">
                   {data.postalAddress1}, {data.city}
-                </span>
-              </div>
-              <div className="flex flex-col">
-                <span className="text-[10px] text-slate-400 font-bold uppercase">
-                  First Language
-                </span>
-                <span className="text-sm font-semibold text-black">
-                  {data.firstLanguage || "N/A"}
-                </span>
-              </div>
-              <div className="flex flex-col">
-                <span className="text-[10px] text-slate-400 font-bold uppercase">
-                  Education Level
-                </span>
-                <span className="text-sm font-semibold text-black">
-                  {getEducationLevelLabel(data.educationLevel)}
                 </span>
               </div>
               <div className="flex flex-col">
