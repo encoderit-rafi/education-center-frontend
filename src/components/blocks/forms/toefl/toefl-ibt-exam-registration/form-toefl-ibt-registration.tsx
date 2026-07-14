@@ -137,7 +137,6 @@ export default function FormTOEFLIBTRegistration({
       desiredFieldOfStudyOther: "",
       reasonsForTakingToefl: "",
       intendedEnrollmentDate: undefined,
-      etsProductsInterest: "",
       occupationLevel: "",
       occupationSector: "",
       reasonForTakingTest: "",
@@ -749,10 +748,6 @@ export default function FormTOEFLIBTRegistration({
                         "MMMM yyyy",
                       )
                       : "N/A",
-                  },
-                  {
-                    label: "ETS Products Interest",
-                    value: formData.etsProductsInterest || "N/A",
                   },
                 ]}
               />

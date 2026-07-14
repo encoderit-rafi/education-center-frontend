@@ -61,7 +61,6 @@ export const ToeflIbtSchema = z
         desiredFieldOfStudy: z.string().min(1, "Desired field of study is required"),
         desiredFieldOfStudyOther: z.string().optional(),
         reasonsForTakingToefl: z.string().min(1, "Please select a reason"),
-        etsProductsInterest: z.string().optional(),
         occupationLevel: z.string().optional(),
         occupationLevelOther: z.string().optional(),
         occupationSector: z.string().optional(),

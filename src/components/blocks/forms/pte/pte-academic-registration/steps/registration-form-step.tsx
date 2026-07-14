@@ -412,7 +412,7 @@ export function RegistrationFormStep({
         </div>
         <div>
           <Field data-invalid={!!errors.planningCountry}>
-            <FieldLabel required className="whitespace-nowrap">Which country or region are you planning to study, work or settle in? If you have not yet decided please select your preferred destination.</FieldLabel>
+            <FieldLabel required>Which country or region are you planning to study, work or settle in? If you have not yet decided please select your preferred destination.</FieldLabel>
             <FieldContent>
               <CountryDropdown
                 placeholder="-Select Country-"

@@ -431,7 +431,7 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.idDocument}>
-            <FieldLabel required className="whitespace-nowrap">
+            <FieldLabel required>
               Attach a valid copy of Passport / Emirates ID:
             </FieldLabel>
             <FieldContent>
@@ -619,7 +619,7 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.yearsStudyingEnglish}>
-            <FieldLabel required className="whitespace-nowrap">
+            <FieldLabel required>
               How many years have you been studying English?
             </FieldLabel>
             <FieldContent>
@@ -832,7 +832,7 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.destinationCountry}>
-            <FieldLabel required className="whitespace-nowrap">Which Country / Territory do you want to study / work/ live in?</FieldLabel>
+            <FieldLabel required>Which Country / Territory do you want to study / work/ live in?</FieldLabel>
             <FieldContent>
               <CountryDropdown
                 name="destinationCountry"

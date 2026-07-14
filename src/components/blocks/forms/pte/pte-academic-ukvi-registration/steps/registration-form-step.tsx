@@ -523,7 +523,7 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.referralSource} className="md:col-span-2">
-            <FieldLabel required className="whitespace-nowrap">How did you hear about the test?</FieldLabel>
+            <FieldLabel required>How did you hear about the test?</FieldLabel>
             <FieldContent>
               <SearchableDropdown
                 options={[

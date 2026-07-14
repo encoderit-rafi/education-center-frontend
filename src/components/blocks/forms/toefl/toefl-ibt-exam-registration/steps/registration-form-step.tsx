@@ -495,7 +495,7 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.idDocument}>
-            <FieldLabel required className="whitespace-nowrap">
+            <FieldLabel required>
               Attach a valid copy of Passport / Emirates ID:
             </FieldLabel>
             <FieldContent>
@@ -798,7 +798,7 @@ export function RegistrationFormStep({
             </FieldContent>
           </Field>
           <Field data-invalid={!!errors.destinationCountry}>
-            <FieldLabel required className="whitespace-nowrap">In what country or countries do you hope to study, work or settle?</FieldLabel>
+            <FieldLabel required>In what country or countries do you hope to study, work or settle?</FieldLabel>
             <FieldContent>
               <MultiCountryDropdown
                 placeholder="-Select Countries-"

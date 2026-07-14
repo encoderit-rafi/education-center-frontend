@@ -82,7 +82,7 @@ export default function TestDayGuidelinesClient() {
                 <span className="block text-4xl md:text-5xl lg:text-6.5xl font-black text-slate-950 md:ms-12">
                   {t("hero.title2")}
                 </span>
-                <span className="block text-4xl md:text-5xl lg:text-6.5xl font-black text-primary md:ms-24 relative whitespace-nowrap self-center md:self-start">
+                <span className="block text-4xl md:text-5xl lg:text-6.5xl font-black text-primary md:ms-24 relative md:whitespace-nowrap self-center md:self-start">
                   {t("hero.title3")}
                   <span className="absolute left-0 bottom-1 w-full h-2.5 bg-primary/10 rounded-full -z-10" />
                 </span>

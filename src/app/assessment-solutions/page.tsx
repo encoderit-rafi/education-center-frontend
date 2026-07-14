@@ -88,7 +88,7 @@ export default function AssessmentSolutionsPage() {
         <div className="max-w-7xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left: Text */}
           <div>
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-black tracking-tight mb-6 whitespace-nowrap">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-black tracking-tight mb-6 md:whitespace-nowrap">
               {t("title")}
             </h1>
 
