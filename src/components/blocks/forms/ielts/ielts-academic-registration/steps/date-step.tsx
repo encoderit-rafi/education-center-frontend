@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useTranslations } from "next-intl";
 import { ArrowRight, Calendar as CalendarIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -44,15 +45,14 @@ export function DateStep({
   timeSlotError,
   speakingSlotError,
 }: DateStepProps) {
-  const t = useCalendarTranslations();
   return (
     <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
       <div className="bg-white rounded-2xl border border-slate-100 p-6 md:p-8 shadow-sm">
-        <Stepper step={1}>{t.selectExamDateTime}</Stepper>
+        <Stepper step={1}>Select Exam Date & Time</Stepper>
 
         <div className="mt-8 grid md:grid-cols-2 gap-12 items-start">
           <Field data-invalid={!!error}>
-            <FieldLabel required>{t.selectDate}</FieldLabel>
+            <FieldLabel required>Select Date</FieldLabel>
             <FieldContent className="flex flex-col items-center">
               <Calendar
                 mode="single"
@@ -70,7 +70,9 @@ export function DateStep({
                   const now = new Date();
                   const checkDate = new Date(date);
                   checkDate.setHours(13, 0, 0, 0); // 1:00 PM (latest slot)
-                  return checkDate.getTime() - now.getTime() < 72 * 60 * 60 * 1000;
+                  return (
+                    checkDate.getTime() - now.getTime() < 72 * 60 * 60 * 1000
+                  );
                 }}
                 className="w-full max-w-xl mx-auto border rounded-md p-4 sm:p-8 bg-white shadow-xl"
               />
@@ -80,7 +82,7 @@ export function DateStep({
 
           <div className="space-y-8">
             <Field data-invalid={!!timeSlotError}>
-              <FieldLabel required>{t.availableTimeSlots}</FieldLabel>
+              <FieldLabel required>Available Time Slots</FieldLabel>
               <FieldContent>
                 <RadioGroup
                   value={timeSlot}
@@ -98,7 +100,10 @@ export function DateStep({
                         const now = new Date();
                         const checkDate = new Date(value);
                         checkDate.setHours(9, 0, 0, 0);
-                        return checkDate.getTime() - now.getTime() < 72 * 60 * 60 * 1000;
+                        return (
+                          checkDate.getTime() - now.getTime() <
+                          72 * 60 * 60 * 1000
+                        );
                       })(),
                     },
                     {
@@ -109,26 +114,35 @@ export function DateStep({
                         const now = new Date();
                         const checkDate = new Date(value);
                         checkDate.setHours(13, 0, 0, 0);
-                        return checkDate.getTime() - now.getTime() < 72 * 60 * 60 * 1000;
+                        return (
+                          checkDate.getTime() - now.getTime() <
+                          72 * 60 * 60 * 1000
+                        );
                       })(),
                     },
                   ].map((slot) => (
                     <div key={slot.id} className="space-y-3">
                       <Label
                         htmlFor={slot.id}
-                        className={`flex items-center justify-between p-4 rounded-xl border-2 transition-all cursor-pointer ${slot.disabled ? "opacity-40 cursor-not-allowed pointer-events-none" : ""
-                          } ${timeSlot === slot.id
+                        className={`flex items-center justify-between p-4 rounded-xl border-2 transition-all cursor-pointer ${
+                          slot.disabled
+                            ? "opacity-40 cursor-not-allowed pointer-events-none"
+                            : ""
+                        } ${
+                          timeSlot === slot.id
                             ? "border-primary bg-primary/5 ring-1 ring-primary"
                             : "border-slate-100 bg-white hover:border-slate-200"
-                          }`}
+                        }`}
                       >
                         <div className="flex items-center justify-between w-full overflow-hidden">
                           <div className="flex items-center gap-3">
-                            <RadioGroupItem value={slot.id} id={slot.id} disabled={slot.disabled} />
+                            <RadioGroupItem
+                              value={slot.id}
+                              id={slot.id}
+                              disabled={slot.disabled}
+                            />
                             <div>
-                              <p className="text-sm font-medium">
-                                {slot.time}
-                              </p>
+                              <p className="text-sm font-medium">{slot.time}</p>
                             </div>
                           </div>
                         </div>
@@ -137,7 +151,7 @@ export function DateStep({
                         <div className="p-4 rounded-xl bg-slate-50 border border-slate-100 animate-in slide-in-from-top-2 duration-300 space-y-4">
                           <div>
                             <p className="text-xs font-bold uppercase tracking-wider mb-3">
-                              Select the Speaking Test delivery format preference
+                              {tIelts("speakingFormat")}
                             </p>
                             <RadioGroup
                               value={speakingSlot}
@@ -146,7 +160,7 @@ export function DateStep({
                             >
                               <div className="flex items-center space-x-2.5 p-2 rounded-lg hover:bg-slate-100/50 transition-colors">
                                 <RadioGroupItem
-                                  value="Live with the examiner at the test center (Face to face)."
+                                  value={tIelts("speakingFaceToFace")}
                                   id={`live-${slot.id}`}
                                   className="mt-1"
                                 />
@@ -154,12 +168,12 @@ export function DateStep({
                                   htmlFor={`live-${slot.id}`}
                                   className="text-sm font-medium leading-tight cursor-pointer text-slate-800"
                                 >
-                                  Live with the examiner at the test center (Face to face).
+                                  {tIelts("speakingFaceToFace")}
                                 </Label>
                               </div>
                               <div className="flex items-center space-x-2.5 p-2 rounded-lg hover:bg-slate-100/50 transition-colors">
                                 <RadioGroupItem
-                                  value="Video Call at the test centre (VCS)"
+                                  value={tIelts("speakingVideoCall")}
                                   id={`vcs-${slot.id}`}
                                   className="mt-1"
                                 />
@@ -167,7 +181,7 @@ export function DateStep({
                                   htmlFor={`vcs-${slot.id}`}
                                   className="text-sm font-medium leading-tight cursor-pointer text-slate-800"
                                 >
-                                  Video Call at the test centre (VCS)
+                                  {tIelts("speakingVideoCall")}
                                 </Label>
                               </div>
                             </RadioGroup>
@@ -178,41 +192,41 @@ export function DateStep({
                             )}
                           </div>
                           <div className="pt-4 border-t border-slate-200 text-sm font-medium text-justify space-y-2">
-                            {slot.id === "9:00 AM" ? (
-                              <>
-                                <p className="">
-                                  <strong>Note:</strong> The Speaking Test usually takes place in the afternoon. The Speaking Test might be conducted in-person with the examiner (face to face) or via video call on exam day. We will confirm with you the Speaking Test delivery format before we book you the test. This will still need to be confirmed by the British Council.
-                                </p>
-                                <p className="text-xs">
-                                  You may also reach out to us at <a href={`tel:${INSTITUTIONS_INFO.phone}`} className="underline text-primary font-semibold">{INSTITUTIONS_INFO.phone}</a> or <a href={`mailto:${INSTITUTIONS_INFO.email}`} className="underline text-primary font-semibold">{INSTITUTIONS_INFO.email}</a> and confirm the Speaking Test delivery format before you proceed with the CD-IELTLS Registration on our website.
-                                </p>
-                              </>
-                            ) : (
-                              <>
-                                <p>
-                                  <strong>Note:</strong> The Speaking Test usually takes place in the morning. The Speaking Test might be conducted in-person with the examiner (face to face) or via video call on exam day. We will confirm with you the Speaking Test delivery format before we book you the test. This will still need to be confirmed by the British Council.
-                                </p>
-                                <p className="text-xs mt-2">
-                                  You may also reach out to us at <a href={`tel:${INSTITUTIONS_INFO.phone}`} className="underline text-primary font-semibold">{INSTITUTIONS_INFO.phone}</a> or <a href={`mailto:${INSTITUTIONS_INFO.email}`} className="underline text-primary font-semibold">{INSTITUTIONS_INFO.email}</a> and confirm the Speaking Test delivery format before you proceed with the CD-IELTLS Registration on our website.
-                                </p>
-                              </>
-                            )}
+                            <div className="text-sm font-medium text-justify">
+                              {tIelts.rich(
+                                slot.id === "9:00 AM"
+                                  ? "speakingNoteMorning"
+                                  : "speakingNoteAfternoon",
+                                {
+                                  strong: (chunks) => <strong>{chunks}</strong>,
+                                  br: () => <br />,
+                                  phone: INSTITUTIONS_INFO.phone,
+                                  email: INSTITUTIONS_INFO.email,
+                                },
+                              )}
+                            </div>
                           </div>
                         </div>
                       )}
                     </div>
                   ))}
                 </RadioGroup>
-                <FieldError errors={[timeSlotError, speakingSlotError]} className="mt-4" />
+                <FieldError
+                  errors={[timeSlotError, speakingSlotError]}
+                  className="mt-4"
+                />
               </FieldContent>
             </Field>
           </div>
         </div>
 
         <div className="mt-12 flex justify-between items-center pt-6 border-t border-slate-100">
-          <Button onClick={onBack}>{t.back}</Button>
-          <Button onClick={onNext} disabled={!value || !timeSlot || !speakingSlot}>
-            {t.next}
+          <Button onClick={onBack}>Back</Button>
+          <Button
+            onClick={onNext}
+            disabled={!value || !timeSlot || !speakingSlot}
+          >
+            Next
           </Button>
         </div>
       </div>

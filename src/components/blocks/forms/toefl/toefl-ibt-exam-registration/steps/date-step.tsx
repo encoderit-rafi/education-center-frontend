@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useTranslations } from "next-intl";
 import { Calendar as CalendarIcon, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -11,7 +12,6 @@ import {
   FieldError,
 } from "@/components/ui/field";
 import Stepper from "@/components/stepper";
-import { useCalendarTranslations } from "@/lib/translations";
 
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
@@ -64,17 +64,17 @@ export function DateStep({
   error,
   timeSlotError,
 }: DateStepProps) {
+  const tDate = useTranslations("FormsShared.DateStep");
   const availableSlots = value ? TOEFL_SCHEDULE[value.getDay()] || [] : [];
-  const t = useCalendarTranslations();
 
   return (
     <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
       <div className="bg-white rounded-2xl border border-slate-100 p-6 md:p-8 shadow-sm">
-        <Stepper step={1}>{t.selectExamDateTime}</Stepper>
+        <Stepper step={1}>Select Exam Date &amp; Time</Stepper>
 
         <div className="mt-8 grid md:grid-cols-2 gap-12 items-start">
           <Field data-invalid={!!error}>
-            <FieldLabel required>{t.selectDate}</FieldLabel>
+            <FieldLabel required>Select Date</FieldLabel>
             <FieldContent className="flex flex-col items-center">
               <Calendar
                 mode="single"
@@ -111,7 +111,7 @@ export function DateStep({
 
           <div className="space-y-8">
             <Field data-invalid={!!timeSlotError}>
-              <FieldLabel required>{t.availableTimeSlots}</FieldLabel>
+              <FieldLabel required>Available Time Slots</FieldLabel>
               <FieldContent>
                 {value ? (
                   <RadioGroup
@@ -131,13 +131,15 @@ export function DateStep({
                         <div key={slot.id}>
                           <Label
                             htmlFor={slot.id}
-                            className={`flex items-center p-4 rounded-xl border-2 transition-all cursor-pointer ${isDisabled
+                            className={`flex items-center p-4 rounded-xl border-2 transition-all cursor-pointer ${
+                              isDisabled
                                 ? "opacity-40 cursor-not-allowed pointer-events-none"
                                 : ""
-                              } ${timeSlot === slot.id
+                            } ${
+                              timeSlot === slot.id
                                 ? "border-[#A11D1D] bg-[#A11D1D]/5 ring-1 ring-[#A11D1D]"
                                 : "border-slate-100 bg-white hover:border-slate-200"
-                              }`}
+                            }`}
                           >
                             <div className="flex items-center gap-3">
                               <RadioGroupItem
@@ -158,7 +160,7 @@ export function DateStep({
                   <div className="p-8 rounded-xl border-2 border-dashed border-slate-100 flex flex-col items-center justify-center text-center space-y-2">
                     <CalendarIcon className="w-8 h-8 text-slate-200" />
                     <p className="text-sm text-slate-400 font-medium">
-                      {t.pleaseSelectDateFirst}
+                      Please select a date first
                     </p>
                   </div>
                 )}
@@ -212,9 +214,9 @@ export function DateStep({
         </div>
 
         <div className="mt-12 flex justify-between items-center pt-6 border-t border-slate-100">
-          <Button onClick={onBack}>{t.back}</Button>
+          <Button onClick={onBack}>{tDate("back")}</Button>
           <Button onClick={onNext} disabled={!value || !timeSlot}>
-            {t.next}
+            {tDate("next")}
           </Button>
         </div>
       </div>

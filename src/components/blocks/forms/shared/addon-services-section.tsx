@@ -1,4 +1,7 @@
+"use client";
+
 import React from "react";
+import { useTranslations } from "next-intl";
 import { BookOpen } from "lucide-react";
 import { Field, FieldContent, FieldLabel } from "@/components/ui/field";
 import { SearchableDropdown } from "@/components/ui/searchable-dropdown";
@@ -28,6 +31,8 @@ export function AddonServicesSection({
   workshopError,
   description,
 }: AddonServicesSectionProps) {
+  const t = useTranslations("FormsShared.AddonServices");
+  const resolvedDescription = description ?? t("saveUpTo");
   const getCourseEffectivePrice = (c: any) => {
     if (c.discounted_price != null) return c.discounted_price;
     if (c.special_discount) return c.price * (1 - c.special_discount / 100);
@@ -47,22 +52,22 @@ export function AddonServicesSection({
       <div className="flex items-center gap-2 text-slate-400 mb-4">
         <BookOpen className="size-5" />
         <h3 className="text-lg font-bold tracking-tight text-slate-800">
-          Add-on Services
+          {t("title")}
         </h3>
       </div>
 
-      {description && (
-        <p className="section-description text-sm">{description}</p>
+      {resolvedDescription && (
+        <p className="section-description text-sm">{resolvedDescription}</p>
       )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <Field>
-          <FieldLabel>Courses</FieldLabel>
+          <FieldLabel>{t("coursesLabel")}</FieldLabel>
           <FieldContent>
             <SearchableDropdown
               name="selectedCourse"
               options={[
-                { label: "None", value: "" },
+                { label: t("none"), value: "" },
                 ...sortedCourses.map((c: any) => ({
                   label: c.name,
                   description: c.discounted_price != null ? (
@@ -85,7 +90,7 @@ export function AddonServicesSection({
                         />
                       </span>
                       <span className="flex items-center gap-1.5 flex-wrap">
-                        {["Free Prep. Material", "Free Consultation", "Free Mock Test"].map((item, index) => (
+                        {[t("freePrepMaterial"), t("freeConsultation"), t("freeMockTest")].map((item, index) => (
                           <Badge key={index}>{item}</Badge>
                         ))}
                       </span>
@@ -110,7 +115,7 @@ export function AddonServicesSection({
                         />
                       </span>
                       <span className="flex items-center gap-1.5 flex-wrap">
-                        {["Free Prep. Material", "Free Consultation", "Free Mock Test"].map((item, index) => (
+                        {[t("freePrepMaterial"), t("freeConsultation"), t("freeMockTest")].map((item, index) => (
                           <Badge key={index}>{item}</Badge>
                         ))}
                       </span>
@@ -125,7 +130,7 @@ export function AddonServicesSection({
                   value: c.id,
                 })),
               ]}
-              placeholder="Select a course"
+              placeholder={t("selectCourse")}
               value={selectedCourse}
               onChange={onCourseChange}
               aria-invalid={courseError}
@@ -134,12 +139,12 @@ export function AddonServicesSection({
         </Field>
 
         <Field>
-          <FieldLabel>Workshops</FieldLabel>
+          <FieldLabel>{t("workshopsLabel")}</FieldLabel>
           <FieldContent>
             <SearchableDropdown
               name="selectedWorkshop"
               options={[
-                { label: "None", value: "" },
+                { label: t("none"), value: "" },
                 ...sortedWorkshops.map((w: any) => ({
                   label: w.name,
                   description: w.duration ? (
@@ -160,7 +165,7 @@ export function AddonServicesSection({
                   value: w.id,
                 })),
               ]}
-              placeholder="Select a workshop"
+              placeholder={t("selectWorkshop")}
               value={selectedWorkshop}
               onChange={onWorkshopChange}
               aria-invalid={workshopError}

@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useTranslations } from "next-intl";
 import { UseFormReturn } from "react-hook-form";
 import { Save, Globe, CalendarIcon, ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import { AddonServicesSection } from "@/components/blocks/forms/shared/addon-services-section";
@@ -130,6 +131,11 @@ export function RegistrationFormStep({
     formState: { errors } } = form;
 
   const formData = watch();
+  const t = useTranslations("FormsShared.FormFields");
+  const tYesNo = useTranslations("FormsShared.GlobalReviewStep");
+  const tDate = useTranslations("FormsShared.DateStep");
+  const tToefl = useTranslations("FormsShared.TOEFL");
+  const tAddon = useTranslations("FormsShared.AddonServices");
 
   return (
     <form
@@ -138,29 +144,29 @@ export function RegistrationFormStep({
     >
       {/* Section 1: Personal Details */}
       <div className="space-y-6">
-        <Stepper step={2}>Personal Details</Stepper>
+        <Stepper step={2}>{t("personalDetails")}</Stepper>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
           <Field data-invalid={!!errors.givenNames}>
-            <FieldLabel required>First / given names</FieldLabel>
+            <FieldLabel required>{t("firstGivenNames")}</FieldLabel>
             <FieldContent>
               <Input
-                placeholder="As per passport"
+                placeholder={t("asPerPassport")}
                 aria-invalid={!!errors.givenNames}
                 {...register("givenNames")}
               />
               <FieldError errors={[errors.givenNames]} />
               <FieldDescription>
-                This must match the name(s) on your identification document.
+                {t("nameMatchDesc")}
               </FieldDescription>
             </FieldContent>
           </Field>
 
           <Field data-invalid={!!errors.middleName}>
-            <FieldLabel>Middle Name (Optional)</FieldLabel>
+            <FieldLabel>{t("middleNameOptional")}</FieldLabel>
             <FieldContent>
               <Input
-                placeholder="As per passport"
+                placeholder={t("asPerPassport")}
                 aria-invalid={!!errors.middleName}
                 {...register("middleName")}
               />
@@ -169,10 +175,10 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.surnames}>
-            <FieldLabel required={!formData.noSurname}>Surname / family name</FieldLabel>
+            <FieldLabel required={!formData.noSurname}>{t("surname")}</FieldLabel>
             <FieldContent>
               <Input
-                placeholder="As per passport"
+                placeholder={t("asPerPassport")}
                 aria-invalid={!!errors.surnames}
                 {...register("surnames")}
                 disabled={formData.noSurname}
@@ -187,14 +193,14 @@ export function RegistrationFormStep({
                   }
                 />
                 <Label htmlFor="noSurname" className="text-xs font-light">
-                  I don't have a surname / family name
+                  {t("noSurname")}
                 </Label>
               </FieldDescription>
             </FieldContent>
           </Field>
 
           <Field data-invalid={!!errors.dateOfBirth}>
-            <FieldLabel required>Date of birth</FieldLabel>
+            <FieldLabel required>{t("dateOfBirth")}</FieldLabel>
             <FieldContent>
               <DatePicker
                 name="dateOfBirth"
@@ -206,7 +212,7 @@ export function RegistrationFormStep({
                 fromYear={1900}
                 toYear={new Date().getFullYear()}
                 calendarClassName="[--calendar-accent:theme(colors.primary.DEFAULT)]"
-                placeholder="Select your date of birth"
+                placeholder={t("selectDateOfBirth")}
                 aria-invalid={!!errors.dateOfBirth}
               />
               {formData.dateOfBirth &&
@@ -221,7 +227,7 @@ export function RegistrationFormStep({
                   if (age < 16) {
                     return (
                       <p className="mt-2 text-xs text-red-600 font-bold animate-in fade-in slide-in-from-top-1">
-                        Candidates must be at least 16 years old.
+                        {t("minAge16")}
                       </p>
                     );
                   }
@@ -232,10 +238,10 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.birthCity}>
-            <FieldLabel required>City of birth</FieldLabel>
+            <FieldLabel required>{t("cityOfBirth")}</FieldLabel>
             <FieldContent>
               <Input
-                placeholder="Enter city of birth"
+                placeholder={t("enterBirthCity")}
                 aria-invalid={!!errors.birthCity}
                 {...register("birthCity")}
               />
@@ -244,11 +250,11 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.birthCountry}>
-            <FieldLabel required>Country of birth</FieldLabel>
+            <FieldLabel required>{t("countryOfBirth")}</FieldLabel>
             <FieldContent>
               <CountryDropdown
                 name="birthCountry"
-                placeholder="Search country..."
+                placeholder={t("searchCountry")}
                 value={formData.birthCountry}
                 aria-invalid={!!errors.birthCountry}
                 onChange={(country) => setValue("birthCountry", country.name)}
@@ -258,7 +264,7 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.gender}>
-            <FieldLabel required>Sex</FieldLabel>
+            <FieldLabel required>{t("sex")}</FieldLabel>
             <FieldContent>
               <RadioGroup
                 name="gender"
@@ -274,7 +280,7 @@ export function RegistrationFormStep({
                     className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive capitalize"
                   >
                     <RadioGroupItem value={opt} id={opt} />
-                    {opt}
+                    {opt === "male" ? t("male") : t("female")}
                   </Label>
                 ))}
               </RadioGroup>
@@ -283,7 +289,7 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.phoneNumber}>
-            <FieldLabel required>Mobile number</FieldLabel>
+            <FieldLabel required>{t("mobileNumber")}</FieldLabel>
             <FieldContent>
               <PhoneInput
                 name="phoneNumber"
@@ -303,17 +309,16 @@ export function RegistrationFormStep({
                   className="mt-0.5"
                 />
                 <Label htmlFor="smsConsent" className="text-xs font-light leading-normal whitespace-normal text-wrap block">
-                  I agree to receive notifications or to be contacted about my test registration<br />
-                  to this telephone number via SMS, WhatsApp, etc
+                  {tToefl("smsConsent")}
                 </Label>
               </FieldDescription>
             </FieldContent>
           </Field>
           <Field data-invalid={!!errors.email}>
-            <FieldLabel required>Email address</FieldLabel>
+            <FieldLabel required>{t("email")}</FieldLabel>
             <FieldContent>
               <Input
-                placeholder="example@email.com"
+                placeholder={t("exampleEmail")}
                 aria-invalid={!!errors.email}
                 {...register("email")}
               />
@@ -322,10 +327,10 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.confirmEmail}>
-            <FieldLabel required>Confirm email address</FieldLabel>
+            <FieldLabel required>{t("confirmEmail")}</FieldLabel>
             <FieldContent>
               <Input
-                placeholder="Confirm your email address"
+                placeholder={t("confirmEmailPlaceholder")}
                 onPaste={(e) => e.preventDefault()}
                 onCopy={(e) => e.preventDefault()}
                 onDragStart={(e) => e.preventDefault()}
@@ -340,11 +345,11 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.country}>
-            <FieldLabel required>Country of residence</FieldLabel>
+            <FieldLabel required>{t("countryOfResidence")}</FieldLabel>
             <FieldContent>
               <CountryDropdown
                 name="country"
-                placeholder="Search country..."
+                placeholder={t("searchCountry")}
                 value={formData.country}
                 aria-invalid={!!errors.country}
                 onChange={(country) =>
@@ -356,11 +361,11 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.streetAddress1}>
-            <FieldLabel required>Address Line 1</FieldLabel>
+            <FieldLabel required>{t("addressLine1")}</FieldLabel>
             <FieldContent>
               <Input
                 {...register("streetAddress1")}
-                placeholder="Street address, building, etc."
+                placeholder={t("streetAddress")}
                 aria-invalid={!!errors.streetAddress1}
               />
               <FieldError errors={[errors.streetAddress1]} />
@@ -368,11 +373,11 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.streetAddress2}>
-            <FieldLabel>Address Line 2</FieldLabel>
+            <FieldLabel>{t("addressLine2")}</FieldLabel>
             <FieldContent>
               <Input
                 {...register("streetAddress2")}
-                placeholder="Apartment, suite, unit, etc. (optional)"
+                placeholder={t("apartmentSuite")}
                 aria-invalid={!!errors.streetAddress2}
               />
               <FieldError errors={[errors.streetAddress2]} />
@@ -380,11 +385,11 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.poBox}>
-            <FieldLabel>P.O. Box number</FieldLabel>
+            <FieldLabel>{t("poBox")}</FieldLabel>
             <FieldContent>
               <Input
                 {...register("poBox")}
-                placeholder="P.O. Box number"
+                placeholder={t("poBox")}
                 aria-invalid={!!errors.poBox}
               />
               <FieldError errors={[errors.poBox]} />
@@ -392,11 +397,11 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.postalCode}>
-            <FieldLabel>Postal Code (Zip Code)</FieldLabel>
+            <FieldLabel>{t("postalCode")}</FieldLabel>
             <FieldContent>
               <Input
                 {...register("postalCode")}
-                placeholder="Postal code"
+                placeholder={t("postalCodePlaceholder")}
                 aria-invalid={!!errors.postalCode}
               />
               <FieldError errors={[errors.postalCode]} />
@@ -404,11 +409,11 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.city}>
-            <FieldLabel required>Emirate / City</FieldLabel>
+            <FieldLabel required>{t("emirateCity")}</FieldLabel>
             <FieldContent>
               <Input
                 {...register("city")}
-                placeholder="Enter your city"
+                placeholder={t("enteringCity")}
                 aria-invalid={!!errors.city}
               />
               <FieldError errors={[errors.city]} />
@@ -416,7 +421,7 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.idType}>
-            <FieldLabel required>Identification type</FieldLabel>
+            <FieldLabel required>{t("identificationType")}</FieldLabel>
             <FieldContent>
               <RadioGroup
                 name="idType"
@@ -425,8 +430,8 @@ export function RegistrationFormStep({
                 className="grid grid-cols-1 sm:grid-cols-2 gap-3"
               >
                 {[
-                  { id: "passport", label: "Passport" },
-                  { id: "emirates_id", label: "Emirates ID" },
+                  { id: "passport", label: t("idTypePassport") },
+                  { id: "emirates_id", label: t("idTypeEmiratesId") },
                 ].map((opt) => (
                   <Label
                     key={opt.id}
@@ -442,21 +447,21 @@ export function RegistrationFormStep({
               <FieldError errors={[errors.idType]} />
             </FieldContent>
             <FieldDescription>
-              Please make sure you present the same identification you registered with on exam day.
+              {t("sameIdOnExamDay")}
             </FieldDescription>
           </Field>
 
           <Field data-invalid={!!errors.idNumber}>
             <FieldLabel required>
               {formData.idType === "emirates_id"
-                ? "ID number"
-                : "Passport number"}
+                ? t("idNumber")
+                : t("passportNumber")}
             </FieldLabel>
             <FieldContent>
               <Input
                 {...register("idNumber")}
                 aria-invalid={!!errors.idNumber}
-                placeholder={`Enter your ${formData.idType === "emirates_id" ? "ID" : "Passport"} number`}
+                placeholder={formData.idType === "emirates_id" ? t("enterIdNumber") : t("enterPassportNumber")}
               />
               <FieldError errors={[errors.idNumber]} />
             </FieldContent>
@@ -465,8 +470,8 @@ export function RegistrationFormStep({
           <Field data-invalid={!!errors.idExpiryDate}>
             <FieldLabel required>
               {formData.idType === "emirates_id"
-                ? "ID expiry date"
-                : "Passport expiry date"}
+                ? t("idExpiryDate")
+                : t("passportExpiryDate")}
             </FieldLabel>
             <FieldContent>
               <DatePicker
@@ -475,17 +480,17 @@ export function RegistrationFormStep({
                 onChange={(date) => setValue("idExpiryDate", date as Date)}
                 aria-invalid={!!errors.idExpiryDate}
                 disabled={(date) => date <= new Date()}
-                placeholder={`Select ${formData.idType === "emirates_id" ? "ID" : "Passport"} expiry date`}
+                placeholder={formData.idType === "emirates_id" ? t("selectIdExpiryDate") : t("selectPassportExpiryDate")}
               />
               <FieldError errors={[errors.idExpiryDate]} />
             </FieldContent>
           </Field>
           <Field data-invalid={!!errors.nationality}>
-            <FieldLabel required>Country of nationality</FieldLabel>
+            <FieldLabel required>{t("nationality")}</FieldLabel>
             <FieldContent>
               <CountryDropdown
                 name="nationality"
-                placeholder="Search country..."
+                placeholder={t("searchCountry")}
                 value={formData.nationality}
                 aria-invalid={!!errors.nationality}
                 onChange={(country) => setValue("nationality", country.name)}
@@ -496,7 +501,7 @@ export function RegistrationFormStep({
 
           <Field data-invalid={!!errors.idDocument}>
             <FieldLabel required>
-              Attach a valid copy of Passport / Emirates ID:
+              {t("attachIdCopy")}
             </FieldLabel>
             <FieldContent>
               <div className="flex flex-col gap-2">
@@ -541,7 +546,7 @@ export function RegistrationFormStep({
                   </div>
                 )}
                 <p className="text-[12px] text-slate-900 font-medium">
-                  Supported formats: (pdf, png, jpg, jpeg) - Max size: 5MB
+                  {t("supportedFormats")}
                 </p>
               </div>
               <FieldError errors={[errors.idDocument]} />
@@ -555,7 +560,7 @@ export function RegistrationFormStep({
         <div className="flex items-center gap-2 text-slate-400 mb-4">
           <Globe className="size-5" />
           <h3 className="text-lg font-bold tracking-tight text-slate-800">
-            Additional Information
+            {t("additionalInformation")}
           </h3>
         </div>
 
@@ -565,7 +570,7 @@ export function RegistrationFormStep({
             data-invalid={!!errors.takenBefore}
           >
             <FieldLabel required>
-              Have you taken the TOEFL iBT Test before?
+              {tToefl("takenBefore")}
             </FieldLabel>
             <FieldContent className="mt-2">
               <RadioGroup
@@ -588,7 +593,7 @@ export function RegistrationFormStep({
                     className={`flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive ${formData.takenBefore === opt ? "border-[#A11D1D] bg-[#A11D1D]/5 ring-1 ring-[#A11D1D]" : ""}`}
                   >
                     <RadioGroupItem value={opt} id={`taken-${opt}`} />
-                    {opt}
+                    {opt === "Yes" ? tYesNo("yes") : tYesNo("no")}
                   </Label>
                 ))}
               </RadioGroup>
@@ -602,7 +607,7 @@ export function RegistrationFormStep({
                 className="md:col-span-2"
                 data-invalid={!!errors.lessThanTwoYears}
               >
-                <FieldLabel required>Was it less than 2 years?</FieldLabel>
+                <FieldLabel required>{tToefl("lessThanTwoYears")}</FieldLabel>
                 <FieldContent className="mt-2">
                   <RadioGroup
                     name="lessThanTwoYears"
@@ -618,7 +623,7 @@ export function RegistrationFormStep({
                         className={`flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive ${formData.lessThanTwoYears === opt ? "border-[#A11D1D] bg-[#A11D1D]/5 ring-1 ring-[#A11D1D]" : ""}`}
                       >
                         <RadioGroupItem value={opt} id={`less-${opt}`} />
-                        {opt}
+                        {opt === "Yes" ? tYesNo("yes") : opt === "No" ? tYesNo("no") : tToefl("doNotKnow")}
                       </Label>
                     ))}
                   </RadioGroup>
@@ -631,7 +636,7 @@ export function RegistrationFormStep({
                 data-invalid={!!errors.existingAccount}
               >
                 <FieldLabel required>
-                  Do you have an existing TOEFL account?
+                  {tToefl("existingAccount")}
                 </FieldLabel>
                 <FieldContent className="mt-2">
                   <RadioGroup
@@ -649,7 +654,7 @@ export function RegistrationFormStep({
                           className={`flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive ${formData.existingAccount === opt ? "border-[#A11D1D] bg-[#A11D1D]/5 ring-1 ring-[#A11D1D]" : ""}`}
                         >
                           <RadioGroupItem value={opt} id={`acc-${opt}`} />
-                          {opt}
+                          {opt === "Yes" ? tYesNo("yes") : opt === "No" ? tYesNo("no") : tToefl("forgotAccountDetails")}
                         </Label>
                       ),
                     )}
@@ -661,12 +666,12 @@ export function RegistrationFormStep({
           )}
 
           <Field data-invalid={!!errors.firstLanguage}>
-            <FieldLabel required>What is your first language?</FieldLabel>
+            <FieldLabel required>{tToefl("firstLanguage")}</FieldLabel>
             <FieldContent>
               <SearchableDropdown
                 name="firstLanguage"
                 options={languages}
-                placeholder="-Select Language-"
+                placeholder={tToefl("selectLanguage")}
                 value={formData.firstLanguage}
                 aria-invalid={!!errors.firstLanguage}
                 onChange={(val) => {
@@ -677,7 +682,7 @@ export function RegistrationFormStep({
               {formData.firstLanguage === "Other" && (
                 <div className="mt-2 animate-in fade-in slide-in-from-top-2 duration-300">
                   <Input
-                    placeholder="Please specify your language"
+                    placeholder={tToefl("specifyLanguage")}
                     value={formData.firstLanguageOther ?? ""}
                     onChange={(e) => setValue("firstLanguageOther", e.target.value)}
                     className="border-primary/40 focus:border-primary"
@@ -690,7 +695,7 @@ export function RegistrationFormStep({
 
           <Field data-invalid={!!errors.yearsStudyingEnglish}>
             <FieldLabel required>
-              How many years have you been studying English?
+              {tToefl("yearsStudyingEnglish")}
             </FieldLabel>
             <FieldContent>
               <SearchableDropdown
@@ -706,7 +711,7 @@ export function RegistrationFormStep({
                   { label: "8", value: "8" },
                   { label: "9", value: "9" },
                 ]}
-                placeholder="-Select Duration-"
+                placeholder={tToefl("selectDuration")}
                 value={formData.yearsStudyingEnglish}
                 aria-invalid={!!errors.yearsStudyingEnglish}
                 onChange={(val) => setValue("yearsStudyingEnglish", val)}
@@ -716,7 +721,7 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.nextLevelOfStudy}>
-            <FieldLabel required>What is your next level of study?</FieldLabel>
+            <FieldLabel required>{tToefl("nextLevelOfStudy")}</FieldLabel>
             <FieldContent>
               <SearchableDropdown
                 name="nextLevelOfStudy"
@@ -728,7 +733,7 @@ export function RegistrationFormStep({
                   { label: "Not applicable", value: "Not applicable" },
                   { label: "Other", value: "Other" },
                 ]}
-                placeholder="Select Level"
+                placeholder={tToefl("selectLevel")}
                 value={formData.nextLevelOfStudy}
                 aria-invalid={!!errors.nextLevelOfStudy}
                 onChange={(val) => {
@@ -740,12 +745,12 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.desiredFieldOfStudy}>
-            <FieldLabel required>What is your desired field of study?</FieldLabel>
+            <FieldLabel required>{tToefl("desiredFieldOfStudy")}</FieldLabel>
             <FieldContent>
               <SearchableDropdown
                 name="desiredFieldOfStudy"
                 options={DESIRED_FIELDS_OF_STUDY}
-                placeholder="Select Field"
+                placeholder={tToefl("selectField")}
                 value={formData.desiredFieldOfStudy}
                 aria-invalid={!!errors.desiredFieldOfStudy}
                 onChange={(val) => {
@@ -756,7 +761,7 @@ export function RegistrationFormStep({
               {formData.desiredFieldOfStudy === "Other" && (
                 <div className="mt-2 animate-in fade-in slide-in-from-top-2 duration-300">
                   <Input
-                    placeholder="Please specify your desired field of study"
+                    placeholder={tToefl("specifyFieldOfStudy")}
                     value={formData.desiredFieldOfStudyOther ?? ""}
                     onChange={(e) => setValue("desiredFieldOfStudyOther", e.target.value, { shouldValidate: true })}
                     className="border-primary/40 focus:border-primary"
@@ -769,12 +774,12 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.reasonsForTakingToefl}>
-            <FieldLabel required>What is your reason for taking the TOEFL test?</FieldLabel>
+            <FieldLabel required>{tToefl("reasonForTakingTest")}</FieldLabel>
             <FieldContent>
               <SearchableDropdown
                 name="reasonsForTakingToefl"
                 options={REASONS_FOR_TAKING_TOEFL}
-                placeholder="Select Reason"
+                placeholder={tToefl("selectReason")}
                 value={formData.reasonsForTakingToefl}
                 aria-invalid={!!errors.reasonsForTakingToefl}
                 onChange={(val) => {
@@ -787,7 +792,7 @@ export function RegistrationFormStep({
 
 
           <Field data-invalid={!!errors.intendedEnrollmentDate}>
-            <FieldLabel required>Indicate your intended date of enrollment.</FieldLabel>
+            <FieldLabel required>{tToefl("intendedEnrollmentDate")}</FieldLabel>
             <FieldContent>
               <MonthYearPicker
                 value={formData.intendedEnrollmentDate}
@@ -798,10 +803,10 @@ export function RegistrationFormStep({
             </FieldContent>
           </Field>
           <Field data-invalid={!!errors.destinationCountry}>
-            <FieldLabel required>In what country or countries do you hope to study, work or settle?</FieldLabel>
+            <FieldLabel required>{tToefl("destinationCountry")}</FieldLabel>
             <FieldContent>
               <MultiCountryDropdown
-                placeholder="-Select Countries-"
+                placeholder={tToefl("selectCountries")}
                 value={formData.destinationCountry ? formData.destinationCountry.split(", ") : []}
                 onChange={(countries) =>
                   setValue("destinationCountry", countries.join(", "), { shouldValidate: true })
@@ -823,9 +828,7 @@ export function RegistrationFormStep({
         onWorkshopChange={(val) => setValue("selectedWorkshop", val)}
         courseError={!!errors.selectedCourse}
         workshopError={!!errors.selectedWorkshop}
-        description={
-          "Save up to 25% when you book your exam and register for the course with TEPTH and pay in-person or online on our website."
-        }
+        description={tAddon("saveUpTo")}
       />
 
       {/* Marketing Preferences */}
@@ -838,10 +841,10 @@ export function RegistrationFormStep({
       {/* Form Actions */}
       <div className="mt-12 flex justify-between items-center pt-6 border-t border-slate-100">
         <Button type="button" onClick={onBack} className="">
-          Back
+          {tDate("back")}
         </Button>
         <Button type="submit" className="">
-          Next
+          {tDate("next")}
         </Button>
       </div>
     </form>
@@ -849,6 +852,7 @@ export function RegistrationFormStep({
 }
 
 function MonthYearPicker({ value, onChange, error }: { value?: Date; onChange: (date: Date) => void; error?: boolean }) {
+  const tToefl = useTranslations("FormsShared.TOEFL");
   const [open, setOpen] = React.useState(false);
   const [pickerYear, setPickerYear] = React.useState(value?.getFullYear() ?? new Date().getFullYear());
 
@@ -870,7 +874,7 @@ function MonthYearPicker({ value, onChange, error }: { value?: Date; onChange: (
           aria-invalid={error}
         >
           <CalendarIcon className="mr-2 h-4 w-4 text-slate-400" />
-          {value ? format(value, "MMMM yyyy") : <span className="text-slate-400">Select month & year</span>}
+          {value ? format(value, "MMMM yyyy") : <span className="text-slate-400">{tToefl("selectMonthYear")}</span>}
         </Button>
       } />
       <PopoverContent className="w-64 p-3" align="start">

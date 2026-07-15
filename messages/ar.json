@@ -1018,7 +1018,10 @@
         {
           "title": "التراخيص والتصاريح التجارية المطلوبة",
           "description": "من المهم جدًا الشراكة مع مركز اختبار يحمل النشاط التجاري ذي الصلة مع السلطة المحلية ليصبح مركز اختبار. تم ترخيص دار إعداد واختبار الامتحانات ذ.م.م من قبل دائرة التنمية الاقتصادية في الشارقة (SEDD) وتخضع لتنظيم هيئة الشارقة للتعليم الخاص (SPEA).",
-          "badges": ["مرخصة من SEDD", "منظمة من SPEA"]
+          "badges": [
+            "مرخصة من SEDD",
+            "منظمة من SPEA"
+          ]
         },
         {
           "title": "أمن الاختبار",
@@ -1031,27 +1034,38 @@
         {
           "title": "توصيل مرن للامتحانات",
           "description": "خيارات جدولة مرنة تستوعب الأحداث الضخمة ليوم واحد، وفترات الاختبار المحددة، والفترات الصباحية، وبعد الظهر، والمسائية، أو الاختبارات المستمرة على مدار العام.",
-          "badges": ["خيارات مستمرة وقائمة على الأحداث"]
+          "badges": [
+            "خيارات مستمرة وقائمة على الأحداث"
+          ]
         },
         {
           "title": "مقرات اختبار من الدرجة الأولى",
           "description": "مراكز الاختبار الحديثة الخاصة بنا، والتي يسهل الوصول إليها، مجهزة بالكامل بأجهزة عالية الأداء وتكنولوجيا متقدمة لضمان بيئة اختبار مثالية.",
-          "badges": ["مقرات يسهل الوصول إليها ومميزة"]
+          "badges": [
+            "مقرات يسهل الوصول إليها ومميزة"
+          ]
         },
         {
           "title": "بيئة خالية من الضوضاء",
           "description": "لتقليل المشتتات وخفض مستويات الضوضاء، قمنا بتنفيذ العديد من تحسينات مساحة العمل. تتميز محطات العمل بألواح صوتية من القماش ومتباعدة بسخاء، في حين أن غرف الاختبار مفروشة بالسجاد لضمان بيئة هادئة. بالإضافة إلى ذلك، نستخدم آلات الضوضاء البيضاء في مختبرات الكمبيوتر، إلى جانب لوحات المفاتيح الهادئة وسماعات الرأس عالية الجودة في جميع أنحاء مساحاتنا.",
-          "badges": ["ألواح صوتية قماشية", "مجهزة بأنظمة الضوضاء البيضاء"]
+          "badges": [
+            "ألواح صوتية قماشية",
+            "مجهزة بأنظمة الضوضاء البيضاء"
+          ]
         },
         {
           "title": "البنية التحتية الفنية",
           "description": "مواصفاتنا الفنية تلبي متطلباتك الفنية. نحن نقدم أجهزة كمبيوتر مكتبية قوية ومخصصة وشاشات مقاس 24 بوصة.",
-          "badges": ["مواصفات عالية الأداء"]
+          "badges": [
+            "مواصفات عالية الأداء"
+          ]
         },
         {
           "title": "إقامة خاصة",
           "description": "نحن نقدم دعماً مخصصاً للمرشحين الذين يحتاجون إلى تسهيلات في الاختبار، ونقدم خدمات مخصصة مثل تمديد الوقت، والاستراحات المتكررة، والغرف الخاصة، وبرامج ومعدات مساعدة متخصصة.",
-          "badges": ["برامج المساعدة التكيفية"]
+          "badges": [
+            "برامج المساعدة التكيفية"
+          ]
         }
       ],
       "contactInfo": "تواصل معنا اليوم لمناقشة احتياجاتك أو القيام بجولة في مقراتنا عبر الإنترنت. كما يمكنك أيضاً تحديد موعد لزيارة مقراتنا. اتصل بنا على 97165531250+ أو راسلنا عبر البريد الإلكتروني على info@tepth.org",
@@ -2369,8 +2383,15 @@
           "details": "لعب أدوار خاص بالمهنة."
         }
       ],
-      "whoShouldTake": ["الأطباء", "الممرضات", "متخصصو الرعاية الصحية"],
-      "acceptedFor": ["التسجيل في الرعاية الصحية", "الهجرة لمتخصصي الصحة"]
+      "whoShouldTake": [
+        "الأطباء",
+        "الممرضات",
+        "متخصصو الرعاية الصحية"
+      ],
+      "acceptedFor": [
+        "التسجيل في الرعاية الصحية",
+        "الهجرة لمتخصصي الصحة"
+      ]
     },
     "psi": {
       "subtitle": "حلول الاختبارات المهنية",
@@ -2390,7 +2411,10 @@
         "الباحثون عن الشهادات المهنية",
         "المتقدمون للحصول على الترخيص"
       ],
-      "acceptedFor": ["الشهادات الصناعية", "الترخيص المهني"]
+      "acceptedFor": [
+        "الشهادات الصناعية",
+        "الترخيص المهني"
+      ]
     },
     "selt": {
       "description": "اختبارات اللغة الإنجليزية الآمنة (SELT) المعتمدة من وزارة الداخلية لطلبات الحصول على تأشيرة المملكة المتحدة."
@@ -3810,5 +3834,290 @@
     "placeholder": "اختر بلداً",
     "searchPlaceholder": "البحث عن بلد...",
     "emptyMessage": "لم يتم العثور على أي بلد."
+  },
+  "FormsShared": {
+    "GlobalReviewStep": {
+      "title": "مراجعة بياناتك",
+      "description": "يرجى تأكيد صحة جميع المعلومات قبل المتابعة إلى الدفع.",
+      "editDetails": "تعديل البيانات",
+      "personalDetails": "البيانات الشخصية",
+      "identityContact": "الهوية والتواصل",
+      "testInformation": "معلومات الاختبار",
+      "iAcceptPay": "أوافق، وأدفع",
+      "payment": "الدفع",
+      "orderSummary": "ملخص الطلب",
+      "subtotal": "المجموع الفرعي",
+      "vat": "ضريبة القيمة المضافة ({percent}%)",
+      "totalAmount": "المبلغ الإجمالي",
+      "registrationServiceFee": "رسوم خدمة التسجيل",
+      "courseFee": "رسوم الدورة: {name}",
+      "workshopFee": "رسوم ورشة العمل: {name}",
+      "na": "غير متوفر",
+      "morningSession": "الجلسة الصباحية (09:00 صباحاً)",
+      "afternoonSession": "الجلسة المسائية (01:00 مساءً)",
+      "speakingSlot": "موعد المحادثة",
+      "notSelected": "لم يتم الاختيار",
+      "noFileAttached": "لم يتم إرفاق ملف",
+      "otherNotSpecified": "أخرى (غير محددة)",
+      "yes": "نعم",
+      "no": "لا",
+      "iDoNotKnow": "لا أعرف",
+      "male": "ذكر",
+      "female": "أنثى",
+      "examFee": "رسوم {name}",
+      "session": "جلسة"
+    },
+    "AddonServices": {
+      "title": "الخدمات الإضافية",
+      "coursesLabel": "الدورات",
+      "workshopsLabel": "ورش العمل",
+      "none": "لا شيء",
+      "selectCourse": "اختر دورة",
+      "selectWorkshop": "اختر ورشة عمل",
+      "freePrepMaterial": "مواد تحضيرية مجانية",
+      "freeConsultation": "استشارة مجانية",
+      "freeMockTest": "اختبار تجريبي مجاني",
+      "saveUpTo": "وفر حتى 25% عند حجز امتحانك والتسجيل في الدورة مع TEPTH والدفع شخصياً أو عبر الإنترنت على موقعنا."
+    },
+    "MarketingPreferences": {
+      "title": "التفضيلات التسويقية",
+      "bcAll": "يسعدني تلقي تحديثات حول المنتجات والخدمات والفعاليات التي ينظمها المجلس الثقافي البريطاني.",
+      "bcSome": "يسعدني تلقي معلومات من المجلس الثقافي البريطاني وأطراف ثالثة مختارة.",
+      "bcNone": "يرجى عدم إرسال أي تحديثات تسويقية إلي.",
+      "tepthAll": "يسعدني تلقي تحديثات حول المنتجات والخدمات والفعاليات التي تنظمها TEPTH.",
+      "tepthSome": "يسعدني تلقي معلومات من TEPTH وأطراف ثالثة مختارة.",
+      "tepthNone": "يرجى عدم إرسال أي تحديثات تسويقية إلي.",
+      "tepthThirdAll": "يسعدني تلقي تحديثات من TEPTH.",
+      "tepthThirdSome": "يسعدني تلقي معلومات من أطراف ثالثة مختارة.",
+      "tepthThirdNone": "يرجى عدم إرسال أي تحديثات تسويقية إلي."
+    },
+    "DateStep": {
+      "selectDate": "اختيار تاريخ ووقت الامتحان",
+      "selectDateLabel": "اختيار التاريخ",
+      "availableTimeSlots": "المواعيد المتاحة",
+      "pleaseSelectDateFirst": "يرجى اختيار تاريخ أولاً",
+      "morningSession": "الجلسة الصباحية",
+      "afternoonSession": "الجلسة المسائية",
+      "eveningSession": "الجلسة المسائية المتأخرة",
+      "back": "رجوع",
+      "next": "التالي"
+    },
+    "FormFields": {
+      "firstGivenNames": "الاسم الأول / الأسماء المعطاة",
+      "middleName": "الاسم الأوسط",
+      "middleNameOptional": "الاسم الأوسط (اختياري)",
+      "surname": "اسم العائلة",
+      "dateOfBirth": "تاريخ الميلاد",
+      "cityOfBirth": "مدينة الميلاد",
+      "countryOfBirth": "بلد الميلاد",
+      "sex": "الجنس",
+      "mobileNumber": "رقم الجوال",
+      "email": "عنوان البريد الإلكتروني",
+      "confirmEmail": "تأكيد عنوان البريد الإلكتروني",
+      "countryOfResidence": "بلد الإقامة",
+      "addressLine1": "العنوان سطر 1",
+      "addressLine2": "العنوان سطر 2",
+      "poBox": "رقم صندوق البريد",
+      "postalCode": "الرمز البريدي",
+      "emirateCity": "الإمارة / المدينة",
+      "identificationType": "نوع الهوية",
+      "idNumber": "رقم الهوية",
+      "passportNumber": "رقم جواز السفر",
+      "idExpiryDate": "تاريخ انتهاء الهوية",
+      "passportExpiryDate": "تاريخ انتهاء جواز السفر",
+      "issuingAuthority": "جهة الإصدار",
+      "nationality": "بلد الجنسية",
+      "attachIdCopy": "إرفاق نسخة سارية من جواز السفر / الهوية الإماراتية:",
+      "noSurname": "ليس لدي اسم عائلة",
+      "noMiddleName": "ليس لدي اسم أوسط",
+      "smsConsent": "أوافق على تلقي إشعارات أو التواصل معي بخصوص تسجيل اختباري على رقم الهاتف هذا عبر الرسائل النصية أو واتساب أو غيرها",
+      "nameMatchDesc": "يجب أن يتطابق هذا مع الاسم (الأسماء) في وثيقة هويتك.",
+      "idTypePassport": "جواز سفر",
+      "idTypeEmiratesId": "الهوية الإماراتية",
+      "sameIdOnExamDay": "يرجى التأكد من تقديم نفس الهوية التي سجلت بها في يوم الامتحان.",
+      "supportedFormats": "الصيغ المدعومة: (pdf, png, jpg, jpeg) - الحد الأقصى: 5MB",
+      "fileAttached": "{fileName}",
+      "minAge16": "يجب أن لا يقل عمر المرشح عن 16 سنة.",
+      "asPerPassport": "حسب جواز السفر",
+      "exampleEmail": "example@email.com",
+      "confirmEmailPlaceholder": "تأكيد عنوان بريدك الإلكتروني",
+      "searchCountry": "البحث عن بلد...",
+      "selectDateOfBirth": "اختر تاريخ ميلادك",
+      "enteringCity": "أدخل مدينتك",
+      "enterIssuingAuthority": "أدخل جهة الإصدار",
+      "enterBirthCity": "أدخل مدينة الميلاد",
+      "streetAddress": "اسم الشارع، المبنى، إلخ.",
+      "apartmentSuite": "شقة، جناح، وحدة، إلخ. (اختياري)",
+      "postalCodePlaceholder": "الرمز البريدي",
+      "enterPoBox": "رقم صندوق البريد",
+      "additionalInformation": "معلومات إضافية",
+      "personalDetails": "البيانات الشخصية",
+      "male": "ذكر",
+      "female": "أنثى",
+      "enterIdNumber": "أدخل رقم هويتك",
+      "enterPassportNumber": "أدخل رقم جواز سفرك",
+      "selectIdExpiryDate": "اختر تاريخ انتهاء الهوية",
+      "selectPassportExpiryDate": "اختر تاريخ انتهاء جواز السفر"
+    },
+    "IELTS": {
+      "registrationTitle": "تسجيل آيلتس {module}",
+      "examName": "امتحان آيلتس {module}",
+      "testModule": "أكاديمي",
+      "examDate": "تاريخ الامتحان",
+      "timeSlot": "الموعد",
+      "haveYouTakenBefore": "هل أجريت اختبار CD-IELTS من قبل؟",
+      "wasItLessThan2Years": "هل كان ذلك منذ أقل من سنتين؟",
+      "existingAccount": "هل لديك حساب آيلتس موجود؟",
+      "forgotAccount": "نسيت بيانات حسابي في آيلتس",
+      "firstLanguage": "ما هي لغتك الأم؟",
+      "yearsStudyingEnglish": "كم سنة قضيتها في دراسة اللغة الإنجليزية؟",
+      "educationLevel": "ما هو مستوى التعليم الذي أكملته؟",
+      "occupationLevel": "ما هو مستواك الوظيفي؟",
+      "occupationSector": "ما هو قطاعك الوظيفي؟",
+      "reasonForTest": "لماذا تتقدم للاختبار؟",
+      "destinationCountry": "أي بلد / إقليم ترغب في الدراسة / العمل / العيش فيه؟",
+      "speakingFormat": "اختر طريقة تقديم اختبار المحادثة المفضلة",
+      "speakingFaceToFace": "مباشر مع الممتحن في مركز الاختبار (وجهاً لوجه).",
+      "speakingVideoCall": "مكالمة فيديو في مركز الاختبار (VCS)",
+      "speakingNoteMorning": "<strong>ملاحظة:</strong> عادةً ما يُعقد اختبار المحادثة في فترة ما بعد الظهر. قد يُجرى اختبار المحادثة شخصياً مع الممتحن (وجهاً لوجه) أو عبر مكالمة فيديو في يوم الامتحان. سنؤكد لك طريقة تقديم اختبار المحادثة قبل حجز الاختبار. هذا لا يزال بحاجة إلى تأكيد من المجلس الثقافي البريطاني.<br/><br/>يمكنك أيضًا التواصل معنا على {phone} أو {email} وتأكيد طريقة تقديم اختبار المحادثة قبل المتابعة مع تسجيل CD-IELTS على موقعنا.",
+      "speakingNoteAfternoon": "<strong>ملاحظة:</strong> عادةً ما يُعقد اختبار المحادثة في فترة الصباح. قد يُجرى اختبار المحادثة شخصياً مع الممتحن (وجهاً لوجه) أو عبر مكالمة فيديو في يوم الامتحان. سنؤكد لك طريقة تقديم اختبار المحادثة قبل حجز الاختبار. هذا لا يزال بحاجة إلى تأكيد من المجلس الثقافي البريطاني.<br/><br/>يمكنك أيضًا التواصل معنا على {phone} أو {email} وتأكيد طريقة تقديم اختبار المحادثة قبل المتابعة مع تسجيل CD-IELTS على موقعنا.",
+      "contactUs": "يمكنك أيضًا التواصل معنا على {phone} أو {email} وتأكيد طريقة تقديم اختبار المحادثة قبل المتابعة مع تسجيل CD-IELTS على موقعنا.",
+      "enterIdNumber": "أدخل رقم هويتك",
+      "enterPassportNumber": "أدخل رقم جواز سفرك",
+      "selectIdExpiry": "اختر تاريخ انتهاء الهوية",
+      "selectPassportExpiry": "اختر تاريخ انتهاء جواز السفر",
+      "searchCountry": "البحث عن بلد...",
+      "selectDuration": "-اختر المدة-",
+      "selectLevel": "-اختر المستوى-",
+      "selectSector": "-اختر القطاع-",
+      "selectReason": "-اختر السبب-",
+      "selectCountry": "-اختر البلد-",
+      "pleaseSpecifyLanguage": "يرجى تحديد لغتك",
+      "pleaseSpecifyOccupationLevel": "يرجى تحديد مستواك الوظيفي",
+      "pleaseSpecifyOccupationSector": "يرجى تحديد قطاعك الوظيفي",
+      "pleaseSpecifyReason": "يرجى تحديد سبب تقدمك للاختبار",
+      "year1Less": "1 (أقل من)",
+      "year2": "2",
+      "year3": "3",
+      "year4": "4",
+      "year5": "5",
+      "year6": "6",
+      "year7": "7",
+      "year8": "8",
+      "year9More": "9 (أو أكثر)",
+      "educationSecondaryUpTo16": "ثانوي (حتى 16 سنة)",
+      "educationSecondary16To19": "ثانوي (16-19 سنة)",
+      "educationDegree": "درجة جامعية (أو ما يعادلها)",
+      "educationPostGraduate": "دراسات عليا",
+      "occupationSelfEmployed": "عمل حر",
+      "occupationEmployerPartner": "صاحب عمل/شريك",
+      "occupationSeniorLevel": "موظف (مستوى أول)",
+      "occupationMiddleJuniorLevel": "موظف (مستوى متوسط/مبتدئ)",
+      "occupationHomeworker": "عمل من المنزل",
+      "occupationRetired": "متقاعد",
+      "occupationStudent": "طالب",
+      "occupationOther": "أخرى",
+      "sectorAdministrative": "الخدمات الإدارية",
+      "sectorAgriculture": "الزراعة، صيد الأسماك، الغابات، التعدين",
+      "sectorArts": "الفنون والترفيه",
+      "sectorBanking": "البنوك والمالية",
+      "sectorCatering": "خدمات الطعام والترفيه",
+      "sectorConstruction": "صناعات البناء والتشييد",
+      "sectorCraft": "الحرف والتصميم",
+      "sectorEducation": "التعليم",
+      "sectorHealth": "الصحة والخدمات الاجتماعية",
+      "sectorInstallation": "خدمات التركيب والصيانة والإصلاح",
+      "sectorLaw": "القانون والخدمات القانونية",
+      "sectorManufacturing": "خدمات التصنيع والتجميع",
+      "sectorPersonal": "الخدمات الشخصية",
+      "sectorRetail": "تجارة التجزئة",
+      "sectorTechnical": "الفني والعلمي",
+      "sectorTelecoms": "الاتصالات ووسائل الإعلام",
+      "sectorTransport": "النقل",
+      "sectorUtilities": "المرافق (غاز، ماء، كهرباء، إلخ)",
+      "sectorWholesale": "تجارة الجملة",
+      "sectorOther": "أخرى",
+      "reasonHigherEducationExtended": "دورة تعليم عالي ممتدة (3 أشهر أو أكثر)",
+      "reasonHigherEducationShort": "دورة تعليم عالي قصيرة (3 أشهر أو أقل)",
+      "reasonOtherEducational": "أغراض تعليمية أخرى",
+      "reasonDoctor": "التسجيل كطبيب",
+      "reasonImmigration": "الهجرة",
+      "reasonEmployment": "التوظيف",
+      "reasonProfessionalRegistration": "تسجيل مهني (غير طبي)",
+      "reasonPersonal": "أسباب شخصية",
+      "reasonNurse": "التسجيل كممرض (بما في ذلك CGFNS)",
+      "reasonDentist": "التسجيل كطبيب أسنان",
+      "reasonMissingInvalid": "مفقود/غير صالح",
+      "reasonOther": "أخرى"
+    },
+    "PTE": {
+      "registrationTitle": "تسجيل PTE {module}",
+      "examName": "امتحان PTE {module}",
+      "haveYouTakenBefore": "هل أجريت اختبار PTE {module} من قبل؟",
+      "wasItLessThan2Years": "هل كان ذلك منذ أقل من سنتين؟",
+      "existingAccount": "هل لديك حساب PTE؟",
+      "forgotAccount": "نسيت بيانات حسابي في PTE",
+      "firstLanguage": "ما هي اللغة التي تتحدثها غالباً في المنزل؟",
+      "currentSituation": "ما هو أفضل وصف لوضعك الحالي؟",
+      "reasonForTest": "لماذا تتقدم للاختبار؟",
+      "referralSource": "كيف سمعت عن الاختبار؟",
+      "studyLevel": "إذا كنت تتقدم لاختبار PTE {module} للدراسة، فما هو المستوى الذي تتقدم له؟",
+      "fieldOfStudy": "ما هو مجال الدراسة الذي تتقدم له؟",
+      "idType": "نوع الهوية",
+      "idTypePassport": "جواز سفر",
+      "passportNumber": "رقم جواز السفر",
+      "passportExpiry": "تاريخ انتهاء جواز السفر",
+      "attachPassportCopy": "إرفاق نسخة سارية من جواز السفر:",
+      "noGivenNames": "ليس لدي اسم أول"
+    },
+    "SELT": {
+      "registrationTitle": "تسجيل {examName}",
+      "examName": "رسوم {examName}",
+      "haveYouTakenBefore": "هل أجريت اختبار Skills for English (SELT) من قبل؟",
+      "wasItLessThan2Years": "هل كان ذلك منذ أقل من سنتين؟",
+      "existingAccount": "هل لديك حساب موجود؟",
+      "forgotAccount": "نسيت بيانات حسابي في SELT",
+      "reasonForSeltTest": "سبب الاختبار",
+      "ukvi": "UKVI",
+      "ukviDescription": "لطلبات التأشيرة والهجرة إلى المملكة المتحدة",
+      "other": "أخرى",
+      "otherReason": "يرجى إدخال سبب التقدم للاختبار",
+      "selectCountry": "اختر بلداً"
+    },
+    "TOEFL": {
+      "registrationTitle": "تسجيل TOEFL iBT",
+      "examName": "امتحان TOEFL iBT",
+      "haveYouTakenBefore": "هل أجريت اختبار TOEFL iBT من قبل؟",
+      "firstLanguage": "ما هي لغتك الأم؟",
+      "educationLevel": "ما هو مستوى التعليم الذي أكملته؟",
+      "reasonForTest": "لماذا تتقدم للاختبار؟",
+      "wherePlanToStudy": "أين تخطط للدراسة؟",
+      "preferredLocation": "اختر الموقع المفضل لإجراء الاختبار:",
+      "uaeLocation": "في الإمارات (في مركز الاختبار لدينا)",
+      "outsideUae": "خارج الإمارات (في أي مركز اختبار ETS)",
+      "takenBefore": "هل أجريت اختبار TOEFL iBT من قبل؟",
+      "lessThanTwoYears": "هل كان ذلك منذ أقل من سنتين؟",
+      "doNotKnow": "لا أعرف",
+      "existingAccount": "هل لديك حساب TOEFL موجود؟",
+      "forgotAccountDetails": "نسيت تفاصيل حساب TOEFL الخاص بي",
+      "smsConsent": "أوافق على تلقي إشعارات أو التواصل معي بخصوص تسجيل اختباري على رقم الهاتف هذا عبر الرسائل النصية أو واتساب أو غيرها",
+      "selectLanguage": "-اختر اللغة-",
+      "specifyLanguage": "يرجى تحديد لغتك",
+      "yearsStudyingEnglish": "كم عدد السنوات التي قضيتها في دراسة اللغة الإنجليزية؟",
+      "selectDuration": "-اختر المدة-",
+      "nextLevelOfStudy": "المستوى التالي للدراسة الذي تتقدم إليه",
+      "selectLevel": "-اختر المستوى-",
+      "desiredFieldOfStudy": "مجال الدراسة المرغوب فيه",
+      "selectField": "-اختر المجال-",
+      "specifyFieldOfStudy": "يرجى تحديد مجال دراستك",
+      "reasonForTakingTest": "لماذا تتقدم للاختبار؟",
+      "selectReason": "-اختر السبب-",
+      "intendedEnrollmentDate": "تاريخ الالتحاق المقصود",
+      "selectMonthYear": "اختر الشهر والسنة",
+      "destinationCountry": "أين تخطط للدراسة؟",
+      "selectCountries": "اختر الدول",
+      "examDate": "تاريخ الامتحان",
+      "timeSlot": "الوقت المحدد"
+    }
   }
 }

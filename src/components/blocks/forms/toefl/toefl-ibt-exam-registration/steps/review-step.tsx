@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useTranslations } from "next-intl";
 import { format } from "date-fns";
 import {
     User,
@@ -37,6 +38,9 @@ export function ReviewStep({
     selectedCourseData,
     selectedWorkshopData,
 }: ReviewStepProps) {
+    const t = useTranslations("FormsShared.GlobalReviewStep");
+    const tFields = useTranslations("FormsShared.FormFields");
+    const tToefl = useTranslations("FormsShared.TOEFL");
     return (
         <GlobalReviewStep
             onEdit={onEdit}
@@ -44,7 +48,7 @@ export function ReviewStep({
             paymentMethodValue={(form.watch() as any)?.paymentMethod}
             onPaymentMethodChange={(val) => (form.setValue as any)("paymentMethod", val)}
             paymentMethodError={(form.formState.errors as any)?.paymentMethod}
-            examName="TOEFL iBT Exam"
+            examName={tToefl("examName")}
             baseFee={baseFee}
             serviceFee={serviceFee}
             total={total}
@@ -59,13 +63,13 @@ export function ReviewStep({
                     <div className="flex items-center gap-2 text-black">
                         <User className="size-4" />
                         <span className="text-xs font-bold tracking-wideste">
-                            PERSONAL DETAILS
+                            {t("personalDetails")}
                         </span>
                     </div>
                     <div className="space-y-4">
                         <div className="flex flex-col">
                             <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">
-                                Given Names
+                                {tFields("firstGivenNames")}
                             </span>
                             <span className="text-sm font-bold text-slate-900">
                                 {data.givenNames}
@@ -73,50 +77,50 @@ export function ReviewStep({
                         </div>
                         <div className="flex flex-col">
                             <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">
-                                Middle Name
+                                {tFields("middleName")}
                             </span>
                             <span className="text-sm font-bold text-slate-900">
-                                {data.middleName || "N/A"}
+                                {data.middleName || t("na")}
                             </span>
                         </div>
                         <div className="flex flex-col">
                             <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">
-                                Surnames
+                                {tFields("surname")}
                             </span>
                             <span className="text-sm font-bold text-slate-900">
-                                {data.surnames || "N/A"}
+                                {data.surnames || t("na")}
                             </span>
                         </div>
                         <div className="flex flex-col">
                             <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">
-                                Date of Birth
+                                {tFields("dateOfBirth")}
                             </span>
                             <span className="text-sm font-bold text-slate-900">
-                                {data.dateOfBirth ? format(data.dateOfBirth, "PPP") : "N/A"}
+                                {data.dateOfBirth ? format(data.dateOfBirth, "PPP") : t("na")}
                             </span>
                         </div>
                         <div className="flex flex-col">
                             <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">
-                                Gender
+                                {tFields("sex")}
                             </span>
                             <span className="text-sm font-bold text-slate-900 capitalize">
-                                {data.gender || "N/A"}
+                                {data.gender || t("na")}
                             </span>
                         </div>
                         <div className="flex flex-col">
                             <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">
-                                Contact Number
+                                {tFields("mobileNumber")}
                             </span>
                             <span className="text-sm font-bold text-slate-900">
-                                {data.phoneNumber || "N/A"}
+                                {data.phoneNumber || t("na")}
                             </span>
                         </div>
                         <div className="flex flex-col">
                             <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">
-                                Nationality
+                                {tFields("nationality")}
                             </span>
                             <span className="text-sm font-bold text-slate-900">
-                                {data.nationality || "N/A"}
+                                {data.nationality || t("na")}
                             </span>
                         </div>
                     </div>
@@ -127,13 +131,13 @@ export function ReviewStep({
                     <div className="flex items-center gap-2 text-black">
                         <ShieldCheck className="size-4" />
                         <span className="text-xs font-bold tracking-wideste">
-                            IDENTITY & CONTACT
+                            {t("identityContact")}
                         </span>
                     </div>
                     <div className="space-y-4">
                         <div className="flex flex-col">
                             <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">
-                                ID Type
+                                {tFields("identificationType")}
                             </span>
                             <span className="text-sm font-bold text-slate-900 capitalize">
                                 {data.idType?.replace("_", " ")}
@@ -141,15 +145,15 @@ export function ReviewStep({
                         </div>
                         <div className="flex flex-col">
                             <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">
-                                ID Number
+                                {tFields("idNumber")}
                             </span>
                             <span className="text-sm font-bold text-slate-900">
-                                {data.idNumber || "N/A"}
+                                {data.idNumber || t("na")}
                             </span>
                         </div>
                         <div className="flex flex-col">
                             <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">
-                                Email
+                                {tFields("email")}
                             </span>
                             <span className="text-sm font-bold text-slate-900">
                                 {data.email}
@@ -157,20 +161,20 @@ export function ReviewStep({
                         </div>
                         <div className="flex flex-col">
                             <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">
-                                ID Expiry Date
+                                {tFields("idExpiryDate")}
                             </span>
                             <span className="text-sm font-bold text-slate-900">
-                                {data.idExpiryDate ? format(data.idExpiryDate, "PPP") : "N/A"}
+                                {data.idExpiryDate ? format(data.idExpiryDate, "PPP") : t("na")}
                             </span>
                         </div>
                         <div className="flex flex-col">
                             <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">
-                                Identity Document
+                                {tFields("attachIdCopy")}
                             </span>
                             <span className="text-sm font-bold text-slate-900 truncate max-w-[200px]">
                                 {data.idDocument
                                     ? (data.idDocument as File).name
-                                    : "No file attached"}
+                                    : t("noFileAttached")}
                             </span>
                         </div>
                     </div>
@@ -181,29 +185,29 @@ export function ReviewStep({
                     <div className="flex items-center gap-2 text-black">
                         <Globe className="size-4" />
                         <span className="text-xs font-bold tracking-wideste">
-                            TEST INFORMATION
+                            {t("testInformation")}
                         </span>
                     </div>
                     <div className="space-y-4">
                         <div className="flex flex-col">
                             <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">
-                                Exam Date
+                                {tToefl("examDate")}
                             </span>
                             <span className="text-sm font-bold text-[#A11D1D]">
-                                {data.examDate ? format(data.examDate, "PPP") : "N/A"}
+                                {data.examDate ? format(data.examDate, "PPP") : t("na")}
                             </span>
                         </div>
                         <div className="flex flex-col">
                             <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">
-                                Time Slot
+                                {tToefl("timeSlot")}
                             </span>
                             <span className="text-sm font-bold text-slate-900">
-                                {data.examTimeSlot || "N/A"} Session
+                                {data.examTimeSlot ? `${data.examTimeSlot} ${t("session")}` : t("na")}
                             </span>
                         </div>
                         <div className="flex flex-col">
                             <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">
-                                Address Line 1
+                                {tFields("addressLine1")}
                             </span>
                             <span className="text-sm font-bold text-slate-900">
                                 {data.streetAddress1}
@@ -212,7 +216,7 @@ export function ReviewStep({
                         {data.streetAddress2 && (
                             <div className="flex flex-col">
                                 <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">
-                                    Address Line 2
+                                    {tFields("addressLine2")}
                                 </span>
                                 <span className="text-sm font-bold text-slate-900">
                                     {data.streetAddress2}
@@ -221,7 +225,7 @@ export function ReviewStep({
                         )}
                         <div className="flex flex-col">
                             <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">
-                                City
+                                {tFields("emirateCity")}
                             </span>
                             <span className="text-sm font-bold text-slate-900">
                                 {data.city}
@@ -229,7 +233,7 @@ export function ReviewStep({
                         </div>
                         <div className="flex flex-col">
                             <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">
-                                Country of Residence
+                                {tFields("countryOfResidence")}
                             </span>
                             <span className="text-sm font-bold text-slate-900">
                                 {data.country}
@@ -237,15 +241,15 @@ export function ReviewStep({
                         </div>
                         <div className="flex flex-col">
                             <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">
-                                First Language
+                                {tToefl("firstLanguage")}
                             </span>
                             <span className="text-sm font-bold text-slate-900">
-                                {data.firstLanguage || "N/A"}
+                                {data.firstLanguage || t("na")}
                             </span>
                         </div>
                         <div className="flex flex-col">
                             <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">
-                                Education Level
+                                {tToefl("educationLevel")}
                             </span>
                             <span className="text-sm font-bold text-slate-900">
                                 {getEducationLevelLabel(data.educationLevel)}

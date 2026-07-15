@@ -1,4 +1,7 @@
+"use client";
+
 import React from "react";
+import { useTranslations } from "next-intl";
 import {
   Field,
   FieldContent,
@@ -10,56 +13,26 @@ import { Label } from "@/components/ui/label";
 
 export interface MarketingOption {
   id: string;
-  label: string;
+  label?: string;
+  labelKey?: string;
 }
 
 export const BRITISH_COUNCIL_MARKETING_OPTIONS: MarketingOption[] = [
-  {
-    id: "all",
-    label:
-      "I am happy to receive updates about products, services and events organised by British Council.",
-  },
-  {
-    id: "some",
-    label:
-      "I am happy to receive information from British Council and selected third parties.",
-  },
-  {
-    id: "none",
-    label: "Please do not send me any marketing updates.",
-  },
+  { id: "all", labelKey: "bcAll" },
+  { id: "some", labelKey: "bcSome" },
+  { id: "none", labelKey: "bcNone" },
 ];
 
 export const TEPTH_MARKETING_OPTIONS: MarketingOption[] = [
-  {
-    id: "all",
-    label:
-      "I am happy to receive updates about products, services and events organised by TEPTH.",
-  },
-  {
-    id: "some",
-    label:
-      "I am happy to receive information from TEPTH and selected third parties.",
-  },
-  {
-    id: "none",
-    label: "Please do not send me any marketing updates.",
-  },
+  { id: "all", labelKey: "tepthAll" },
+  { id: "some", labelKey: "tepthSome" },
+  { id: "none", labelKey: "tepthNone" },
 ];
 
 export const TEPTH_THIRD_PARTY_MARKETING_OPTIONS: MarketingOption[] = [
-  {
-    id: "all",
-    label: "I am happy to receive updates from TEPTH.",
-  },
-  {
-    id: "third_party",
-    label: "I am happy to receive info from selected third parties.",
-  },
-  {
-    id: "none",
-    label: "Please do not send me any marketing updates.",
-  },
+  { id: "all", labelKey: "tepthThirdAll" },
+  { id: "third_party", labelKey: "tepthThirdSome" },
+  { id: "none", labelKey: "tepthThirdNone" },
 ];
 
 export interface MarketingPreferencesSectionProps {
@@ -75,10 +48,11 @@ export function MarketingPreferencesSection({
   error,
   options = BRITISH_COUNCIL_MARKETING_OPTIONS,
 }: MarketingPreferencesSectionProps) {
+  const t = useTranslations("FormsShared.MarketingPreferences");
   return (
     <div className="pt-8 border-t border-slate-100 space-y-6">
       <Field data-invalid={!!error}>
-        <FieldLabel required>Marketing preferences</FieldLabel>
+        <FieldLabel required>{t("title")}</FieldLabel>
         <FieldContent className="mt-4">
           <RadioGroup
             name="marketingPreference"
@@ -93,7 +67,7 @@ export function MarketingPreferencesSection({
                 className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive"
               >
                 <RadioGroupItem value={opt.id} id={`mkt-${opt.id}`} />
-                <span className="text-sm">{opt.label}</span>
+                <span className="text-sm">{opt.labelKey ? t(opt.labelKey) : opt.label}</span>
               </Label>
             ))}
           </RadioGroup>

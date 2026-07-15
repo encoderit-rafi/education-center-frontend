@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useTranslations } from "next-intl";
 import { UseFormReturn } from "react-hook-form";
 import { Save, User, Globe, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -46,6 +47,11 @@ export function RegistrationFormStep({
   languages,
   coursesData,
   workshopsData }: RegistrationFormStepProps) {
+  const t = useTranslations("FormsShared.FormFields");
+  const tIelts = useTranslations("FormsShared.IELTS");
+  const tYesNo = useTranslations("FormsShared.GlobalReviewStep");
+  const tDate = useTranslations("FormsShared.DateStep");
+  const tAddon = useTranslations("FormsShared.AddonServices");
   const {
     register,
     handleSubmit,
@@ -61,29 +67,28 @@ export function RegistrationFormStep({
       className="space-y-8 animate-in fade-in duration-500"
     >
       <div className="space-y-6">
-        <Stepper step={2}>Personal Details</Stepper>
+        <Stepper step={2}>{t("personalDetails")}</Stepper>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
           <Field data-invalid={!!errors.givenNames}>
-            <FieldLabel required>First / given names</FieldLabel>
+            <FieldLabel required>{t("firstGivenNames")}</FieldLabel>
             <FieldContent>
               <Input
-                placeholder="As per passport"
+                placeholder={t("asPerPassport")}
                 aria-invalid={!!errors.givenNames}
                 {...register("givenNames")}
               />
               <FieldError errors={[errors.givenNames]} />
-              <FieldDescription>
-                This must match the name(s) on your identification document.
+              <FieldDescription>{t("nameMatchDesc")}
               </FieldDescription>
             </FieldContent>
           </Field>
 
           <Field data-invalid={!!errors.middleName}>
-            <FieldLabel>Middle Name (Optional)</FieldLabel>
+            <FieldLabel>{t("middleNameOptional")}</FieldLabel>
             <FieldContent>
               <Input
-                placeholder="As per passport"
+                placeholder={t("asPerPassport")}
                 aria-invalid={!!errors.middleName}
                 {...register("middleName")}
               />
@@ -92,10 +97,10 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.surnames}>
-            <FieldLabel required={!formData.noSurname}>Surname / family name</FieldLabel>
+            <FieldLabel required={!formData.noSurname}>{t("surname")}</FieldLabel>
             <FieldContent>
               <Input
-                placeholder="As per passport"
+                placeholder={t("asPerPassport")}
                 aria-invalid={!!errors.surnames}
                 {...register("surnames")}
                 disabled={formData.noSurname}
@@ -110,14 +115,14 @@ export function RegistrationFormStep({
                   }
                 />
                 <Label htmlFor="noSurname" className="text-xs font-light">
-                  I don't have a surname / family name
+                  {t("noSurname")}
                 </Label>
               </FieldDescription>
             </FieldContent>
           </Field>
 
           <Field data-invalid={!!errors.dateOfBirth}>
-            <FieldLabel required>Date of birth</FieldLabel>
+            <FieldLabel required>{t("dateOfBirth")}</FieldLabel>
             <FieldContent>
               <DatePicker
                 name="dateOfBirth"
@@ -129,7 +134,7 @@ export function RegistrationFormStep({
                 fromYear={1900}
                 toYear={new Date().getFullYear()}
                 calendarClassName="[--calendar-accent:theme(colors.primary.DEFAULT)]"
-                placeholder="Select your date of birth"
+                placeholder={t("selectDateOfBirth")}
                 aria-invalid={!!errors.dateOfBirth}
               />
               {formData.dateOfBirth &&
@@ -144,7 +149,7 @@ export function RegistrationFormStep({
                   if (age < 16) {
                     return (
                       <p className="mt-2 text-xs text-red-600 font-bold animate-in fade-in slide-in-from-top-1">
-                        Candidates must be at least 16 years old.
+                        {t("minAge16")}
                       </p>
                     );
                   }
@@ -155,10 +160,10 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.birthCity}>
-            <FieldLabel required>City of birth</FieldLabel>
+            <FieldLabel required>{t("cityOfBirth")}</FieldLabel>
             <FieldContent>
               <Input
-                placeholder="Enter city of birth"
+                placeholder={t("enterBirthCity")}
                 aria-invalid={!!errors.birthCity}
                 {...register("birthCity")}
               />
@@ -167,11 +172,11 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.birthCountry}>
-            <FieldLabel required>Country of birth</FieldLabel>
+            <FieldLabel required>{t("countryOfBirth")}</FieldLabel>
             <FieldContent>
               <CountryDropdown
                 name="birthCountry"
-                placeholder="Search country..."
+                placeholder={t("searchCountry")}
                 value={formData.birthCountry}
                 aria-invalid={!!errors.birthCountry}
                 onChange={(country) => setValue("birthCountry", country.name)}
@@ -181,7 +186,7 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.sex}>
-            <FieldLabel required>Sex</FieldLabel>
+            <FieldLabel required>{t("sex")}</FieldLabel>
             <FieldContent>
               <RadioGroup
                 name="sex"
@@ -197,7 +202,7 @@ export function RegistrationFormStep({
                     className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive capitalize"
                   >
                     <RadioGroupItem value={opt} id={opt} />
-                    {opt}
+                    {tYesNo(opt)}
                   </Label>
                 ))}
               </RadioGroup>
@@ -206,7 +211,7 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.mobileNumber}>
-            <FieldLabel required>Mobile number</FieldLabel>
+            <FieldLabel required>{t("mobileNumber")}</FieldLabel>
             <FieldContent>
               <PhoneInput
                 name="mobileNumber"
@@ -226,17 +231,16 @@ export function RegistrationFormStep({
                   className="mt-0.5"
                 />
                 <Label htmlFor="smsConsent" className="text-xs font-light leading-normal whitespace-normal text-wrap block">
-                  I agree to receive notifications or to be contacted about my test registration<br />
-                  to this telephone number via SMS, WhatsApp, etc
+                  {t("smsConsent")}
                 </Label>
               </FieldDescription>
             </FieldContent>
           </Field>
           <Field data-invalid={!!errors.email}>
-            <FieldLabel required>Email address</FieldLabel>
+            <FieldLabel required>{t("email")}</FieldLabel>
             <FieldContent>
               <Input
-                placeholder="example@email.com"
+                placeholder={t("exampleEmail")}
                 aria-invalid={!!errors.email}
                 {...register("email")}
               />
@@ -245,10 +249,10 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.confirmEmail}>
-            <FieldLabel required>Confirm email address</FieldLabel>
+            <FieldLabel required>{t("confirmEmail")}</FieldLabel>
             <FieldContent>
               <Input
-                placeholder="Confirm your email address"
+                placeholder={t("confirmEmailPlaceholder")}
                 onPaste={(e) => e.preventDefault()}
                 onCopy={(e) => e.preventDefault()}
                 onDragStart={(e) => e.preventDefault()}
@@ -263,11 +267,11 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.residenceCountry}>
-            <FieldLabel required>Country of residence</FieldLabel>
+            <FieldLabel required>{t("countryOfResidence")}</FieldLabel>
             <FieldContent>
               <CountryDropdown
                 name="residenceCountry"
-                placeholder="Search country..."
+                placeholder={t("searchCountry")}
                 value={formData.residenceCountry}
                 aria-invalid={!!errors.residenceCountry}
                 onChange={(country) =>
@@ -279,11 +283,11 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.postalAddress1}>
-            <FieldLabel required>Address Line 1</FieldLabel>
+            <FieldLabel required>{t("addressLine1")}</FieldLabel>
             <FieldContent>
               <Input
                 {...register("postalAddress1")}
-                placeholder="Street address, building, etc."
+                placeholder={t("streetAddress")}
                 aria-invalid={!!errors.postalAddress1}
               />
               <FieldError errors={[errors.postalAddress1]} />
@@ -291,11 +295,11 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.postalAddress2}>
-            <FieldLabel>Address Line 2</FieldLabel>
+            <FieldLabel>{t("addressLine2")}</FieldLabel>
             <FieldContent>
               <Input
                 {...register("postalAddress2")}
-                placeholder="Apartment, suite, unit, etc. (optional)"
+                placeholder={t("apartmentSuite")}
                 aria-invalid={!!errors.postalAddress2}
               />
               <FieldError errors={[errors.postalAddress2]} />
@@ -303,11 +307,11 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.poBox}>
-            <FieldLabel>P.O. Box number</FieldLabel>
+            <FieldLabel>{t("poBox")}</FieldLabel>
             <FieldContent>
               <Input
                 {...register("poBox")}
-                placeholder="P.O. Box number"
+                placeholder={t("enterPoBox")}
                 aria-invalid={!!errors.poBox}
               />
               <FieldError errors={[errors.poBox]} />
@@ -315,11 +319,11 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.postcode}>
-            <FieldLabel>Postal Code (Zip Code)</FieldLabel>
+            <FieldLabel>{t("postalCode")}</FieldLabel>
             <FieldContent>
               <Input
                 {...register("postcode")}
-                placeholder="Postal code"
+                placeholder={t("postalCodePlaceholder")}
                 aria-invalid={!!errors.postcode}
               />
               <FieldError errors={[errors.postcode]} />
@@ -327,11 +331,11 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.city}>
-            <FieldLabel required>Emirate / City</FieldLabel>
+            <FieldLabel required>{t("emirateCity")}</FieldLabel>
             <FieldContent>
               <Input
                 {...register("city")}
-                placeholder="Enter your city"
+                placeholder={t("enteringCity")}
                 aria-invalid={!!errors.city}
               />
               <FieldError errors={[errors.city]} />
@@ -339,7 +343,7 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.idType}>
-            <FieldLabel required>Identification type</FieldLabel>
+            <FieldLabel required>{t("identificationType")}</FieldLabel>
             <FieldContent>
               <RadioGroup
                 name="idType"
@@ -348,8 +352,8 @@ export function RegistrationFormStep({
                 className="grid grid-cols-1 sm:grid-cols-2 gap-3"
               >
                 {[
-                  { id: "passport", label: "Passport" },
-                  { id: "emirates_id", label: "Emirates ID" },
+                  { id: "passport", label: t("idTypePassport") },
+                  { id: "emirates_id", label: t("idTypeEmiratesId") },
                 ].map((opt) => (
                   <Label
                     key={opt.id}
@@ -364,22 +368,20 @@ export function RegistrationFormStep({
               </RadioGroup>
               <FieldError errors={[errors.idType]} />
             </FieldContent>
-            <FieldDescription>
-              Please make sure you present the same identification you registered with on exam day.
-            </FieldDescription>
+            <FieldDescription>{t("sameIdOnExamDay")}</FieldDescription>
           </Field>
 
           <Field data-invalid={!!errors.idNumber}>
             <FieldLabel required>
               {formData.idType === "emirates_id"
-                ? "ID number"
-                : "Passport number"}
+                ? t("idNumber")
+                : t("passportNumber")}
             </FieldLabel>
             <FieldContent>
               <Input
                 {...register("idNumber")}
                 aria-invalid={!!errors.idNumber}
-                placeholder={`Enter your ${formData.idType === "emirates_id" ? "ID" : "Passport"} number`}
+                placeholder={formData.idType === "emirates_id" ? tIelts("enterIdNumber") : tIelts("enterPassportNumber")}
               />
               <FieldError errors={[errors.idNumber]} />
             </FieldContent>
@@ -388,8 +390,8 @@ export function RegistrationFormStep({
           <Field data-invalid={!!errors.idExpiryDate}>
             <FieldLabel required>
               {formData.idType === "emirates_id"
-                ? "ID expiry date"
-                : "Passport expiry date"}
+                ? t("idExpiryDate")
+                : t("passportExpiryDate")}
             </FieldLabel>
             <FieldContent>
               <DatePicker
@@ -398,30 +400,30 @@ export function RegistrationFormStep({
                 onChange={(date) => setValue("idExpiryDate", date as Date)}
                 aria-invalid={!!errors.idExpiryDate}
                 disabled={(date) => date <= new Date()}
-                placeholder={`Select ${formData.idType === "emirates_id" ? "ID" : "Passport"} expiry date`}
+                placeholder={formData.idType === "emirates_id" ? tIelts("selectIdExpiry") : tIelts("selectPassportExpiry")}
               />
               <FieldError errors={[errors.idExpiryDate]} />
             </FieldContent>
           </Field>
 
           <Field data-invalid={!!errors.issuingAuthority}>
-            <FieldLabel required>Issuing authority</FieldLabel>
+            <FieldLabel required>{t("issuingAuthority")}</FieldLabel>
             <FieldContent>
               <Input
                 {...register("issuingAuthority")}
                 aria-invalid={!!errors.issuingAuthority}
-                placeholder="Enter issuing authority"
+                placeholder={t("enterIssuingAuthority")}
               />
               <FieldError errors={[errors.issuingAuthority]} />
             </FieldContent>
           </Field>
 
           <Field data-invalid={!!errors.nationality}>
-            <FieldLabel required>Country of nationality</FieldLabel>
+            <FieldLabel required>{t("nationality")}</FieldLabel>
             <FieldContent>
               <CountryDropdown
                 name="nationality"
-                placeholder="Search country..."
+                placeholder={t("searchCountry")}
                 value={formData.nationality}
                 aria-invalid={!!errors.nationality}
                 onChange={(country) => setValue("nationality", country.name)}
@@ -431,9 +433,7 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.idDocument}>
-            <FieldLabel required>
-              Attach a valid copy of Passport / Emirates ID:
-            </FieldLabel>
+            <FieldLabel required>{t("attachIdCopy")}</FieldLabel>
             <FieldContent>
               <div className="flex flex-col gap-2">
                 {!formData.idDocument ? (
@@ -477,7 +477,7 @@ export function RegistrationFormStep({
                   </div>
                 )}
                 <p className="text-[12px] text-slate-900 font-medium">
-                  Supported formats: (pdf, png, jpg, jpeg) - Max size: 5MB
+                  {t("supportedFormats")}
                 </p>
               </div>
               <FieldError errors={[errors.idDocument]} />
@@ -491,7 +491,7 @@ export function RegistrationFormStep({
         <div className="flex items-center gap-2 text-slate-400 mb-4">
           <Globe className="size-5" />
           <h3 className="text-lg font-bold tracking-tight text-slate-800">
-            Additional Information
+            {t("additionalInformation")}
           </h3>
         </div>
 
@@ -501,7 +501,7 @@ export function RegistrationFormStep({
             data-invalid={!!errors.takenBefore}
           >
             <FieldLabel required>
-              Have you taken the CD-IELTS Test before?
+              {tIelts("haveYouTakenBefore")}
             </FieldLabel>
             <FieldContent className="mt-2">
               <RadioGroup
@@ -510,7 +510,7 @@ export function RegistrationFormStep({
                 value={formData.takenBefore}
                 className="grid grid-cols-2 gap-3"
               >
-                {["Yes", "No"].map((opt) => (
+                {[tYesNo("yes"), tYesNo("no")].map((opt) => (
                   <Label
                     key={opt}
                     htmlFor={`taken-${opt}`}
@@ -532,7 +532,7 @@ export function RegistrationFormStep({
                 className="md:col-span-2"
                 data-invalid={!!errors.lessThanTwoYears}
               >
-                <FieldLabel required>Was it less than 2 years?</FieldLabel>
+                <FieldLabel required>{tIelts("wasItLessThan2Years")}</FieldLabel>
                 <FieldContent className="mt-2">
                   <RadioGroup
                     name="lessThanTwoYears"
@@ -540,7 +540,7 @@ export function RegistrationFormStep({
                     value={formData.lessThanTwoYears}
                     className="grid grid-cols-1 md:grid-cols-3 gap-3"
                   >
-                    {["Yes", "No", "I do not know"].map((opt) => (
+                    {[tYesNo("yes"), tYesNo("no"), tYesNo("iDoNotKnow")].map((opt) => (
                       <Label
                         key={opt}
                         htmlFor={`less-${opt}`}
@@ -561,7 +561,7 @@ export function RegistrationFormStep({
                 data-invalid={!!errors.existingAccount}
               >
                 <FieldLabel required>
-                  Do you have an existing IELTS account?
+                  {tIelts("existingAccount")}
                 </FieldLabel>
                 <FieldContent className="mt-2">
                   <RadioGroup
@@ -570,7 +570,7 @@ export function RegistrationFormStep({
                     value={formData.existingAccount}
                     className="flex flex-col gap-3"
                   >
-                    {["Yes", "No", "I forgot my IELTS account details"].map(
+                    {[tYesNo("yes"), tYesNo("no"), tIelts("forgotAccount")].map(
                       (opt) => (
                         <Label
                           key={opt}
@@ -591,12 +591,12 @@ export function RegistrationFormStep({
           )}
 
           <Field data-invalid={!!errors.firstLanguage}>
-            <FieldLabel required>What is your first language?</FieldLabel>
+            <FieldLabel required>{tIelts("firstLanguage")}</FieldLabel>
             <FieldContent>
               <SearchableDropdown
                 name="firstLanguage"
                 options={languages}
-                placeholder="-Select Language-"
+                placeholder={tIelts("selectDuration")}
                 value={formData.firstLanguage}
                 aria-invalid={!!errors.firstLanguage}
                 onChange={(val) => {
@@ -607,7 +607,7 @@ export function RegistrationFormStep({
               {formData.firstLanguage === "Other" && (
                 <div className="mt-2 animate-in fade-in slide-in-from-top-2 duration-300">
                   <Input
-                    placeholder="Please specify your language"
+                    placeholder={tIelts("pleaseSpecifyLanguage")}
                     value={formData.firstLanguageOther ?? ""}
                     onChange={(e) => setValue("firstLanguageOther", e.target.value)}
                     className="border-primary/40 focus:border-primary"
@@ -620,23 +620,23 @@ export function RegistrationFormStep({
 
           <Field data-invalid={!!errors.yearsStudyingEnglish}>
             <FieldLabel required>
-              How many years have you been studying English?
+              {tIelts("yearsStudyingEnglish")}
             </FieldLabel>
             <FieldContent>
               <SearchableDropdown
                 name="yearsStudyingEnglish"
                 options={[
-                  { label: "1 (less than)", value: "1 (less than)" },
-                  { label: "2", value: "2" },
-                  { label: "3", value: "3" },
-                  { label: "4", value: "4" },
-                  { label: "5", value: "5" },
-                  { label: "6", value: "6" },
-                  { label: "7", value: "7" },
-                  { label: "8", value: "8" },
-                  { label: "9 (or more)", value: "9 (or more)" },
+                  { label: tIelts("year1Less"), value: "1 (less than)" },
+                  { label: tIelts("year2"), value: "2" },
+                  { label: tIelts("year3"), value: "3" },
+                  { label: tIelts("year4"), value: "4" },
+                  { label: tIelts("year5"), value: "5" },
+                  { label: tIelts("year6"), value: "6" },
+                  { label: tIelts("year7"), value: "7" },
+                  { label: tIelts("year8"), value: "8" },
+                  { label: tIelts("year9More"), value: "9 (or more)" },
                 ]}
-                placeholder="-Select Duration-"
+                placeholder={tIelts("selectDuration")}
                 value={formData.yearsStudyingEnglish}
                 aria-invalid={!!errors.yearsStudyingEnglish}
                 onChange={(val) => setValue("yearsStudyingEnglish", val)}
@@ -650,7 +650,7 @@ export function RegistrationFormStep({
             data-invalid={!!errors.educationLevel}
           >
             <FieldLabel required>
-              What level of education have you completed?
+              {tIelts("educationLevel")}
             </FieldLabel>
             <FieldContent>
               <RadioGroup
@@ -662,19 +662,19 @@ export function RegistrationFormStep({
                 {[
                   {
                     id: "Secondary (up to 16 years)",
-                    label: "Secondary (up to 16 years)"
+                    label: tIelts("educationSecondaryUpTo16")
                   },
                   {
                     id: "Secondary (16-19 years)",
-                    label: "Secondary (16-19 years)"
+                    label: tIelts("educationSecondary16To19")
                   },
                   {
                     id: "Degree (or equivalent)",
-                    label: "Degree (or equivalent)"
+                    label: tIelts("educationDegree")
                   },
                   {
                     id: "Post-graduate",
-                    label: "Post-graduate"
+                    label: tIelts("educationPostGraduate")
                   },
                 ].map((opt) => (
                   <Label
@@ -693,27 +693,27 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.occupationLevel}>
-            <FieldLabel required>What is your occupation level?</FieldLabel>
+            <FieldLabel required>{tIelts("occupationLevel")}</FieldLabel>
             <FieldContent>
               <SearchableDropdown
                 name="occupationLevel"
                 options={[
-                  { label: "Self-employed", value: "Self-employed" },
-                  { label: "Employer/Partner", value: "Employer/Partner" },
+                  { label: tIelts("occupationSelfEmployed"), value: "Self-employed" },
+                  { label: tIelts("occupationEmployerPartner"), value: "Employer/Partner" },
                   {
-                    label: "Employee (Senior level)",
+                    label: tIelts("occupationSeniorLevel"),
                     value: "Employee (Senior level)"
                   },
                   {
-                    label: "Employee (Middle/Junior level)",
+                    label: tIelts("occupationMiddleJuniorLevel"),
                     value: "Employee (Middle/Junior level)"
                   },
-                  { label: "Homeworker", value: "Homeworker" },
-                  { label: "Retired", value: "Retired" },
-                  { label: "Student", value: "Student" },
-                  { label: "Other", value: "Other" },
+                  { label: tIelts("occupationHomeworker"), value: "Homeworker" },
+                  { label: tIelts("occupationRetired"), value: "Retired" },
+                  { label: tIelts("occupationStudent"), value: "Student" },
+                  { label: tIelts("occupationOther"), value: "Other" },
                 ]}
-                placeholder="-Select Level-"
+                placeholder={tIelts("selectLevel")}
                 value={formData.occupationLevel}
                 aria-invalid={!!errors.occupationLevel}
                 onChange={(val) => {
@@ -724,7 +724,7 @@ export function RegistrationFormStep({
               {formData.occupationLevel === "Other" && (
                 <div className="mt-2 animate-in fade-in slide-in-from-top-2 duration-300">
                   <Input
-                    placeholder="Please specify your occupation level"
+                    placeholder={tIelts("pleaseSpecifyOccupationLevel")}
                     value={formData.occupationLevelOther ?? ""}
                     onChange={(e) => setValue("occupationLevelOther", e.target.value)}
                     className="border-primary/40 focus:border-primary"
@@ -736,33 +736,33 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.occupationSector}>
-            <FieldLabel required>What is your occupation sector?</FieldLabel>
+            <FieldLabel required>{tIelts("occupationSector")}</FieldLabel>
             <FieldContent>
               <SearchableDropdown
                 name="occupationSector"
                 options={[
-                  { label: "Administrative Services", value: "Administrative Services" },
-                  { label: "Agriculture, Fishing, Forestry, Mining", value: "Agriculture, Fishing, Forestry, Mining" },
-                  { label: "Arts and Entertainment", value: "Arts and Entertainment" },
-                  { label: "Banking and Finance", value: "Banking and Finance" },
-                  { label: "Catering and Leisure", value: "Catering and Leisure" },
-                  { label: "Construction Industries", value: "Construction Industries" },
-                  { label: "Craft and Design", value: "Craft and Design" },
-                  { label: "Education", value: "Education" },
-                  { label: "Health and Social Services", value: "Health and Social Services" },
-                  { label: "Installation, Maintenance and Repair Services", value: "Installation, Maintenance and Repair Services" },
-                  { label: "Law and Legal Services", value: "Law and Legal Services" },
-                  { label: "Manufacturing and Assembly Services", value: "Manufacturing and Assembly Services" },
-                  { label: "Personal Services", value: "Personal Services" },
-                  { label: "Retail Trade", value: "Retail Trade" },
-                  { label: "Technical and Scientific", value: "Technical and Scientific" },
-                  { label: "Telecommunications and the Media", value: "Telecommunications and the Media" },
-                  { label: "Transport", value: "Transport" },
-                  { label: "Utilities (Gas, Water, Electricity etc)", value: "Utilities (Gas, Water, Electricity etc)" },
-                  { label: "Wholesale Trade", value: "Wholesale Trade" },
-                  { label: "Other", value: "Other" },
+                  { label: tIelts("sectorAdministrative"), value: "Administrative Services" },
+                  { label: tIelts("sectorAgriculture"), value: "Agriculture, Fishing, Forestry, Mining" },
+                  { label: tIelts("sectorArts"), value: "Arts and Entertainment" },
+                  { label: tIelts("sectorBanking"), value: "Banking and Finance" },
+                  { label: tIelts("sectorCatering"), value: "Catering and Leisure" },
+                  { label: tIelts("sectorConstruction"), value: "Construction Industries" },
+                  { label: tIelts("sectorCraft"), value: "Craft and Design" },
+                  { label: tIelts("sectorEducation"), value: "Education" },
+                  { label: tIelts("sectorHealth"), value: "Health and Social Services" },
+                  { label: tIelts("sectorInstallation"), value: "Installation, Maintenance and Repair Services" },
+                  { label: tIelts("sectorLaw"), value: "Law and Legal Services" },
+                  { label: tIelts("sectorManufacturing"), value: "Manufacturing and Assembly Services" },
+                  { label: tIelts("sectorPersonal"), value: "Personal Services" },
+                  { label: tIelts("sectorRetail"), value: "Retail Trade" },
+                  { label: tIelts("sectorTechnical"), value: "Technical and Scientific" },
+                  { label: tIelts("sectorTelecoms"), value: "Telecommunications and the Media" },
+                  { label: tIelts("sectorTransport"), value: "Transport" },
+                  { label: tIelts("sectorUtilities"), value: "Utilities (Gas, Water, Electricity etc)" },
+                  { label: tIelts("sectorWholesale"), value: "Wholesale Trade" },
+                  { label: tIelts("sectorOther"), value: "Other" },
                 ]}
-                placeholder="-Select Sector-"
+                placeholder={tIelts("selectSector")}
                 value={formData.occupationSector}
                 aria-invalid={!!errors.occupationSector}
                 onChange={(val) => {
@@ -773,7 +773,7 @@ export function RegistrationFormStep({
               {formData.occupationSector === "Other" && (
                 <div className="mt-2 animate-in fade-in slide-in-from-top-2 duration-300">
                   <Input
-                    placeholder="Please specify your occupation sector"
+                    placeholder={tIelts("pleaseSpecifyOccupationSector")}
                     value={formData.occupationSectorOther ?? ""}
                     onChange={(e) => setValue("occupationSectorOther", e.target.value)}
                     className="border-primary/40 focus:border-primary"
@@ -785,31 +785,31 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.reasonForTakingTest}>
-            <FieldLabel required>Why are you taking the test?</FieldLabel>
+            <FieldLabel required>{tIelts("reasonForTest")}</FieldLabel>
             <FieldContent>
               <SearchableDropdown
                 name="reasonForTakingTest"
                 options={[
                   {
-                    label: "Higher education extended course (3 months or more)",
+                    label: tIelts("reasonHigherEducationExtended"),
                     value: "Higher education extended course (3 months or more)"
                   },
                   {
-                    label: "Higher education short course (3 months or less)",
+                    label: tIelts("reasonHigherEducationShort"),
                     value: "Higher education short course (3 months or less)"
                   },
-                  { label: "Other educational purposes", value: "Other educational purposes" },
-                  { label: "Registration as a doctor", value: "Registration as a doctor" },
-                  { label: "Immigration", value: "Immigration" },
-                  { label: "Employment", value: "Employment" },
-                  { label: "Professional registration (not medical)", value: "Professional registration (not medical)" },
-                  { label: "Personal reasons", value: "Personal reasons" },
-                  { label: "Registration as a nurse (including CGFNS)", value: "Registration as a nurse (including CGFNS)" },
-                  { label: "Registration as a dentist", value: "Registration as a dentist" },
-                  { label: "Missing/Invalid", value: "Missing/Invalid" },
-                  { label: "Other", value: "other" },
+                  { label: tIelts("reasonOtherEducational"), value: "Other educational purposes" },
+                  { label: tIelts("reasonDoctor"), value: "Registration as a doctor" },
+                  { label: tIelts("reasonImmigration"), value: "Immigration" },
+                  { label: tIelts("reasonEmployment"), value: "Employment" },
+                  { label: tIelts("reasonProfessionalRegistration"), value: "Professional registration (not medical)" },
+                  { label: tIelts("reasonPersonal"), value: "Personal reasons" },
+                  { label: tIelts("reasonNurse"), value: "Registration as a nurse (including CGFNS)" },
+                  { label: tIelts("reasonDentist"), value: "Registration as a dentist" },
+                  { label: tIelts("reasonMissingInvalid"), value: "Missing/Invalid" },
+                  { label: tIelts("reasonOther"), value: "other" },
                 ]}
-                placeholder="-Select Reason-"
+                placeholder={tIelts("selectReason")}
                 value={formData.reasonForTakingTest}
                 aria-invalid={!!errors.reasonForTakingTest}
                 onChange={(val) => {
@@ -820,7 +820,7 @@ export function RegistrationFormStep({
               {formData.reasonForTakingTest === "other" && (
                 <div className="mt-2 animate-in fade-in slide-in-from-top-2 duration-300">
                   <Input
-                    placeholder="Please specify your reason for taking the test"
+                    placeholder={tIelts("pleaseSpecifyReason")}
                     value={formData.reasonForTakingTestOther ?? ""}
                     onChange={(e) => setValue("reasonForTakingTestOther", e.target.value)}
                     className="border-primary/40 focus:border-primary"
@@ -832,11 +832,11 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.destinationCountry}>
-            <FieldLabel required>Which Country / Territory do you want to study / work/ live in?</FieldLabel>
+            <FieldLabel required>{tIelts("destinationCountry")}</FieldLabel>
             <FieldContent>
               <CountryDropdown
                 name="destinationCountry"
-                placeholder="-Select Country-"
+                placeholder={tIelts("selectCountry")}
                 value={formData.destinationCountry}
                 aria-invalid={!!errors.destinationCountry}
                 onChange={(country) =>
@@ -859,9 +859,7 @@ export function RegistrationFormStep({
         onWorkshopChange={(val) => setValue("selectedWorkshop", val)}
         courseError={!!errors.selectedCourse}
         workshopError={!!errors.selectedWorkshop}
-        description={
-          "Save up to 25% when you book your exam and register for the course with TEPTH and pay in-person or online on our website."
-        }
+        description={tAddon("saveUpTo")}
       />
 
       {/* Marketing Preferences */}
@@ -874,9 +872,9 @@ export function RegistrationFormStep({
       {/* Form Actions */}
       <div className="mt-12 flex justify-between items-center pt-6 border-t border-slate-100">
         <Button type="button" onClick={onBack}>
-          Back
+          {tDate("back")}
         </Button>
-        <Button type="submit">Next</Button>
+        <Button type="submit">{tDate("next")}</Button>
       </div>
     </form>
   );
