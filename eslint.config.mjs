@@ -13,6 +13,10 @@ const eslintConfig = defineConfig([
     "build/**",
     "next-env.d.ts",
     "refactor.js",
+    "add-fallback.js",
+    "add-pdf-translations.js",
+    "check-translations.js",
+    "fix-pdf.js",
   ]),
   {
     rules: {

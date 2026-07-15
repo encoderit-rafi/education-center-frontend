@@ -43,6 +43,10 @@ function formatTime(): string {
     });
 }
 
+function generateUniqueId(): number {
+    return Date.now();
+}
+
 function renderMarkdown(text: string): string {
     // Basic sanitization to prevent simple XSS when using dangerouslySetInnerHTML
     const sanitized = text
@@ -216,7 +220,7 @@ export default function AIChatbot() {
         setError(null);
 
         const userMsg: Message = {
-            id: Date.now(),
+            id: generateUniqueId(),
             role: "user",
             content,
             time: formatTime(),
@@ -242,7 +246,7 @@ You said: *"${content}"*`;
                 setMessages((prev) => [
                     ...prev,
                     {
-                        id: Date.now() + 1,
+                        id: generateUniqueId() + 1,
                         role: "assistant",
                         content: mockReply,
                         time: formatTime(),
@@ -287,7 +291,7 @@ You said: *"${content}"*`;
             setMessages((prev) => [
                 ...prev,
                 {
-                    id: Date.now() + 1,
+                    id: generateUniqueId() + 1,
                     role: "assistant",
                     content: reply,
                     time: formatTime(),
