@@ -134,7 +134,7 @@ export default function PublicHolidaysPage() {
                   {MONTH_NAMES[currentMonth]} {currentYear} {t("thisMonthTitle")}
                 </h2>
 
-                <div className="bg-white p-8 rounded-xl border border-gray-100 shadow-sm space-y-6">
+                <div className="bg-white p-6 sm:p-8 rounded-xl border border-gray-100 shadow-sm space-y-6">
                   {thisMonthHolidays.length === 0 ? (
                     <div className="flex gap-3 items-center text-sm text-gray-400 font-medium">
                       <CalendarIcon className="w-5 h-5 text-[#A11D1D] shrink-0" />
@@ -214,7 +214,7 @@ export default function PublicHolidaysPage() {
               </div>
 
               {holidays.length === 0 ? (
-                <div className="bg-white rounded-xl border border-gray-100 p-12 text-center">
+                <div className="bg-white rounded-xl border border-gray-100 p-6 sm:p-12 text-center">
                   <CalendarIcon className="w-10 h-10 text-gray-200 mx-auto mb-4" />
                   <p className="text-gray-400 font-semibold text-sm">
                     {t("noHolidaysYear")} {currentYear}.
@@ -235,10 +235,10 @@ export default function PublicHolidaysPage() {
                     return (
                       <div
                         key={holiday.id}
-                        className="bg-white p-8 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-all group"
+                        className="bg-white p-6 sm:p-8 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-all group"
                       >
                         {/* Top row: type badge + date pill */}
-                        <div className="flex justify-between items-start mb-6">
+                        <div className="flex flex-wrap gap-3 justify-between items-start mb-6">
                           <div
                             className={`p-3 rounded-xl border text-xs font-black uppercase tracking-widest ${typeStyle}`}
                           >
