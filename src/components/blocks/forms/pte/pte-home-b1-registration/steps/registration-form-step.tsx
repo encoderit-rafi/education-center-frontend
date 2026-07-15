@@ -658,7 +658,7 @@ export function RegistrationFormStep({
         <div className="space-y-3 md:col-span-2 animate-in fade-in slide-in-from-top-2">
           <Field data-invalid={!!errors.takenBefore}>
             <FieldLabel required>
-              Have you taken PTE Home A1 before?
+              Have you taken PTE Home B1 before?
             </FieldLabel>
             <FieldContent className="mt-2">
               <RadioGroup

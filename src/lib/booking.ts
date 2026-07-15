@@ -261,7 +261,14 @@ export function compileBookingPayload(input: BookingPayloadInput) {
     [];
 
   for (const [key, value] of Object.entries(input.allFormData)) {
-    if (key === "idDocument" || key === "confirmEmail") continue;
+    if (
+      key === "idDocument" ||
+      key === "confirmEmail" ||
+      key === "passportCopy" ||
+      (typeof File !== "undefined" && value instanceof File)
+    ) {
+      continue;
+    }
 
     let valueStr = "";
     if (value instanceof Date) {
@@ -291,17 +298,87 @@ export function compileBookingPayload(input: BookingPayloadInput) {
     }
 
     if (key === "idDocumentUrl") {
-      documentsList.push({
-        name: "id_document_url",
-        label: "ID Document",
-        value: valueStr,
-      });
+      if (valueStr !== "") {
+        documentsList.push({
+          name: "id_document_url",
+          label: "ID Document",
+          value: valueStr,
+        });
+      }
     } else {
-      examInfoList.push({
-        name: key,
-        label: getLabel(key),
-        value: valueStr || "N/A",
-      });
+      if (valueStr !== "") {
+        let mappedValue = valueStr;
+        if (key === "referralSource") {
+          const referralSourceMap: Record<string, string> = {
+            dha: "Australian Department of Home Affairs (DHA)",
+            board_of_nursing: "Board of Nursing",
+            education_agent: "Education Agent Advisor - specify below",
+            education_event: "Education event - specify below",
+            emgs: "Education Malaysia Global Services (EMGS)",
+            friend_family: "Friend or family",
+            inz: "Immigration New Zealand (INZ)",
+            internet_search: "Internet search",
+            language_school: "Language School",
+            migration_agent: "Migration agent / lawyer - specify below",
+            social_media: "Social Media (e.g. Facebook, Twitter, Weibo etc)",
+            university_college: "University or College - specify below",
+            Other: "Other - specify below",
+            other: "Other - specify below",
+            agent_advisor: "Agent advisor - Specify below",
+            event: "Event - Specify below",
+            ircc: "Immigration, Refugees and Citizenship Canada (IRCC)",
+            outdoor_advert: "Outdoor Advert",
+            radio_advert: "Radio Advert",
+            ukvi: "UK Visas and Immigration (UKVI)",
+          };
+          if (referralSourceMap[valueStr]) {
+            mappedValue = referralSourceMap[valueStr];
+          }
+        } else if (key === "reasonForTaking") {
+          const reasonMap: Record<string, string> = {
+            // pte-academic
+            study: "Study",
+            nursing: "Nursing registration or licensing",
+            au_mates: "Australia - MATES visa (India only)",
+            au_485: "Australia - Post Study Work (485) visa",
+            au_temp_work: "Australia - Temporary Work visa",
+            nz_temp_work: "New Zealand - Temporary Work visa",
+            skilled_migration: "Skilled migration / Permanent Residency",
+            family_visa: "Spouse / Family visa",
+            working_holiday: "Working Holiday visa",
+
+            // pte-academic-ukvi & pte-home
+            settlement: "Settlement (Indefinite Leave to Remain)",
+            citizenship: "Citizenship",
+            sportsperson_visa: "Sportsperson visa (Tier 2)",
+            student_visa: "Student visa (formerly known as the Tier 4 General student visa)",
+            skilled_worker_visa: "Skilled Worker visa (formerly known as the Tier 2 General work visa)",
+            startup_innovator_visa: "Start Up or Innovator Visa",
+            domestic_worker: "Domestic Worker in a Private Household",
+            minister_religion_visa: "Minister of Religion visa (Tier 2)",
+            representative_visa: "Representative of an Overseas Business visa",
+
+            // pte-core
+            canadian_immigration: "Canadian Immigration (Permanent Residence)",
+            canadian_citizenship: "Canadian Citizenship",
+            temporary_foreign_worker: "Canada Temporary Foreign Worker",
+            pgwp: "Post Graduation Work Permit (PGWP)",
+
+            // general / fallback
+            other: "Other - specify below",
+            Other: "Other - specify below",
+          };
+          if (reasonMap[valueStr]) {
+            mappedValue = reasonMap[valueStr];
+          }
+        }
+
+        examInfoList.push({
+          name: key,
+          label: getLabel(key),
+          value: mappedValue,
+        });
+      }
     }
   }
 

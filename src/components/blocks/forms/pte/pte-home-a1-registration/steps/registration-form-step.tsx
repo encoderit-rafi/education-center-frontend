@@ -369,7 +369,7 @@ export function RegistrationFormStep({
                         <Save className="size-4" />
                       </div>
                       <div className="flex flex-col">
-                        <span className="text-xs font-bold text-slate-700 truncate max-w-[200px]">
+                        <span className="text-xs font-bold text-slate-700 truncate max-w-50">
                           {(formData.passportCopy as File).name}
                         </span>
                         <span className="text-[10px] text-slate-400 font-medium">
