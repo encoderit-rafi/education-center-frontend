@@ -53,9 +53,9 @@ export function WorkshopChecklistSection({
 
   return (
     <div className="space-y-3">
-      <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
-        <Icon className="size-5 text-primary" />
-        {title}
+      <h2 className="text-xl font-bold text-slate-900 flex items-start gap-2.5">
+        <Icon className="size-5 text-primary shrink-0 mt-1" />
+        <span>{title}</span>
       </h2>
       <div className="h-px bg-slate-100" />
       <ul className="space-y-3 text-slate-600 font-medium text-sm">

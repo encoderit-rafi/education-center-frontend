@@ -275,7 +275,7 @@ export default function CareerPage() {
         <div className="container px-6 mx-auto sm:px-12 lg:px-24">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
             <div className="lg:col-span-12">
-              <div className="bg-white p-12 md:p-16 rounded-sm shadow-xl border border-gray-100 relative overflow-hidden">
+              <div className="bg-white p-6 sm:p-12 md:p-16 rounded-sm shadow-xl border border-gray-100 relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-full h-2 bg-[#A11D1D]" />
 
                 <div className="mb-12">
@@ -562,7 +562,7 @@ export default function CareerPage() {
                                   }
                                 }}
                                 className={cn(
-                                  "relative border-2 border-dashed p-10 flex flex-col items-center justify-center space-y-4 transition-colors cursor-pointer group rounded-none",
+                                  "w-full relative border-2 border-dashed p-6 sm:p-10 flex flex-col items-center justify-center space-y-4 transition-colors cursor-pointer group rounded-none",
                                   file
                                     ? "border-[#A11D1D]/30 bg-[#A11D1D]/5"
                                     : "border-gray-200 hover:border-[#A11D1D] bg-gray-50/50",
@@ -585,7 +585,7 @@ export default function CareerPage() {
                                       <CheckCircle2 className="w-8 h-8" />
                                     </div>
                                     <div className="space-y-1">
-                                      <p className="font-bold text-gray-900 text-sm max-w-xs truncate">
+                                      <p className="font-bold text-gray-900 text-sm max-w-full truncate px-4">
                                         {file.name}
                                       </p>
                                       <p className="text-xs text-gray-500 font-medium">
