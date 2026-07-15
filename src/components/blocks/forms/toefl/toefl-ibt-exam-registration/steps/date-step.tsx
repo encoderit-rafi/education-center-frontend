@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useTranslations } from "next-intl";
 import { Calendar as CalendarIcon, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -63,6 +64,7 @@ export function DateStep({
   error,
   timeSlotError,
 }: DateStepProps) {
+  const tDate = useTranslations("FormsShared.DateStep");
   const availableSlots = value ? TOEFL_SCHEDULE[value.getDay()] || [] : [];
 
   return (
@@ -212,9 +214,9 @@ export function DateStep({
         </div>
 
         <div className="mt-12 flex justify-between items-center pt-6 border-t border-slate-100">
-          <Button onClick={onBack}>Back</Button>
+          <Button onClick={onBack}>{tDate("back")}</Button>
           <Button onClick={onNext} disabled={!value || !timeSlot}>
-            Next
+            {tDate("next")}
           </Button>
         </div>
       </div>

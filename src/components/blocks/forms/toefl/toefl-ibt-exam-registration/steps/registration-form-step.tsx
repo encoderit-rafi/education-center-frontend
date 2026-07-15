@@ -135,6 +135,7 @@ export function RegistrationFormStep({
   const tYesNo = useTranslations("FormsShared.GlobalReviewStep");
   const tDate = useTranslations("FormsShared.DateStep");
   const tToefl = useTranslations("FormsShared.TOEFL");
+  const tAddon = useTranslations("FormsShared.AddonServices");
 
   return (
     <form
@@ -827,9 +828,7 @@ export function RegistrationFormStep({
         onWorkshopChange={(val) => setValue("selectedWorkshop", val)}
         courseError={!!errors.selectedCourse}
         workshopError={!!errors.selectedWorkshop}
-        description={
-          tToefl("addonDescription")
-        }
+        description={tAddon("saveUpTo")}
       />
 
       {/* Marketing Preferences */}
