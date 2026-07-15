@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useTranslations } from "next-intl";
 import { ArrowRight, Calendar as CalendarIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -43,14 +44,15 @@ export function DateStep({
   timeSlotError,
   speakingSlotError,
 }: DateStepProps) {
+  const t = useTranslations("FormsShared.DateStep");
   return (
     <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
       <div className="bg-white rounded-2xl border border-slate-100 p-6 md:p-8 shadow-sm">
-        <Stepper step={1}>Select Exam Date & Time</Stepper>
+        <Stepper step={1}>{t("selectDate")}</Stepper>
 
         <div className="mt-8 grid md:grid-cols-2 gap-12 items-start">
           <Field data-invalid={!!error}>
-            <FieldLabel required>Select Date</FieldLabel>
+            <FieldLabel required>{t("selectDateLabel")}</FieldLabel>
             <FieldContent className="flex flex-col items-center">
               <Calendar
                 mode="single"
@@ -78,7 +80,7 @@ export function DateStep({
 
           <div className="space-y-8">
             <Field data-invalid={!!timeSlotError}>
-              <FieldLabel required>Available Time Slots</FieldLabel>
+              <FieldLabel required>{t("availableTimeSlots")}</FieldLabel>
               <FieldContent>
                 <RadioGroup
                   value={timeSlot}
@@ -208,9 +210,9 @@ export function DateStep({
         </div>
 
         <div className="mt-12 flex justify-between items-center pt-6 border-t border-slate-100">
-          <Button onClick={onBack}>Back</Button>
+          <Button onClick={onBack}>{t("back")}</Button>
           <Button onClick={onNext} disabled={!value || !timeSlot || !speakingSlot}>
-            Next
+            {t("next")}
           </Button>
         </div>
       </div>

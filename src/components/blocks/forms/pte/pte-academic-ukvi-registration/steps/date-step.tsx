@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import React from "react";
 import { Calendar as CalendarIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -63,16 +64,17 @@ export function DateStep({
   error,
   timeSlotError,
 }: DateStepProps) {
+  const t = useTranslations("FormsShared.DateStep");
   const availableSlots = value ? UKVI_SCHEDULE[value.getDay()] || [] : [];
 
   return (
     <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
       <div className="bg-white rounded-2xl border border-slate-100 p-6 md:p-8 shadow-sm">
-        <Stepper step={2}>Select Exam Date & Time</Stepper>
+        <Stepper step={2}>{t("selectDate")}</Stepper>
 
         <div className="mt-8 grid md:grid-cols-2 gap-12 items-start">
           <Field data-invalid={!!error}>
-            <FieldLabel required>Select Date</FieldLabel>
+            <FieldLabel required>{t("selectDateLabel")}</FieldLabel>
             <FieldContent className="flex flex-col items-center">
               <Calendar
                 mode="single"
@@ -110,7 +112,7 @@ export function DateStep({
 
           <div className="space-y-8">
             <Field data-invalid={!!timeSlotError}>
-              <FieldLabel required>Available Time Slots</FieldLabel>
+              <FieldLabel required>{t("availableTimeSlots")}</FieldLabel>
               <FieldContent>
                 {value ? (
                   <RadioGroup
@@ -148,7 +150,7 @@ export function DateStep({
                 ) : (
                   <div className="p-8 rounded-xl border-2 border-dashed border-slate-100 flex flex-col items-center justify-center text-center space-y-2">
                     <CalendarIcon className="w-8 h-8 text-slate-200" />
-                    <p className="text-sm text-slate-400 font-medium">Please select a date first</p>
+                    <p className="text-sm text-slate-400 font-medium">{t("pleaseSelectDateFirst")}</p>
                   </div>
                 )}
                 <FieldError errors={[timeSlotError]} className="mt-4" />
@@ -164,7 +166,7 @@ export function DateStep({
             type="button"
             onClick={onBack}
           >
-            Back
+            {t("back")}
           </Button>
           <Button
             type="button"
@@ -172,7 +174,7 @@ export function DateStep({
             disabled={!value || !timeSlot}
 
           >
-            Next
+            {t("next")}
           </Button>
         </div>
       </div>

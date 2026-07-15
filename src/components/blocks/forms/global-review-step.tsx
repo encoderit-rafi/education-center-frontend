@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useTranslations } from "next-intl";
 import { Edit3, CreditCard, User, ShieldCheck, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PriceDisplay } from "@/components/ui/price-display";
@@ -35,6 +36,7 @@ function SummaryCard({
   fields: ReviewField[];
   colsClassName?: string;
 }) {
+  const t = useTranslations("FormsShared.GlobalReviewStep");
   return (
     <div className="border border-slate-150 rounded-2xl bg-white overflow-hidden shadow-xs">
       {/* Card Header */}
@@ -57,7 +59,7 @@ function SummaryCard({
                 field.highlight ? "text-[#A11D1D] font-bold" : "text-slate-900",
               )}
             >
-              {field.value ?? "N/A"}
+              {field.value ?? t("na")}
             </span>
           </div>
         ))}
@@ -71,25 +73,26 @@ export function ReviewSummaryGrid({
   identityContact,
   testInformation,
 }: ReviewSummaryGridProps) {
+  const t = useTranslations("FormsShared.GlobalReviewStep");
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <SummaryCard
           icon={<User className="size-4" />}
-          title="Personal Details"
+          title={t("personalDetails")}
           fields={personalDetails}
           colsClassName="grid-cols-1 sm:grid-cols-2"
         />
         <SummaryCard
           icon={<ShieldCheck className="size-4" />}
-          title="Identity & Contact"
+          title={t("identityContact")}
           fields={identityContact}
           colsClassName="grid-cols-1 sm:grid-cols-2"
         />
       </div>
       <SummaryCard
         icon={<Globe className="size-4" />}
-        title="Test Information"
+        title={t("testInformation")}
         fields={testInformation}
         colsClassName="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
       />
@@ -142,6 +145,7 @@ export function GlobalReviewStep({
   paymentStepNumber,
   customOrderSummary,
 }: GlobalReviewStepProps) {
+  const t = useTranslations("FormsShared.GlobalReviewStep");
   const selectedCoursePrice = selectedCourseData
     ? (selectedCourseData.discounted_price ??
        selectedCourseData.price * (1 - (selectedCourseData.special_discount || 0) / 100))
@@ -152,16 +156,15 @@ export function GlobalReviewStep({
 
   return (
     <form onSubmit={onSubmit} className="space-y-8">
-      <Stepper step={reviewStepNumber}>Review Your Details</Stepper>
+      <Stepper step={reviewStepNumber}>{t("title")}</Stepper>
       <div className="bg-white rounded-2xl border border-slate-100 p-6 md:p-8 shadow-sm">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 pb-6 border-b border-slate-100">
           <div>
             <h3 className="text-xl font-bold text-slate-800">
-              Review Your Details
+              {t("title")}
             </h3>
             <p className="text-sm text-slate-500 mt-1">
-              Please confirm all information is correct before proceeding to
-              payment.
+              {t("description")}
             </p>
           </div>
           <Button
@@ -171,7 +174,7 @@ export function GlobalReviewStep({
             onClick={onEdit}
             className="text-primary hover:text-primary hover:bg-primary/5 font-bold flex items-center gap-2 px-4 py-2 self-start md:self-center"
           >
-            <Edit3 className="size-4" /> Edit Details
+            <Edit3 className="size-4" /> {t("editDetails")}
           </Button>
         </div>
 
@@ -182,7 +185,7 @@ export function GlobalReviewStep({
       {/* Payment Section */}
       <div className="space-y-8">
         <div className="flex items-center justify-between">
-          <Stepper step={paymentStepNumber}>Payment</Stepper>
+          <Stepper step={paymentStepNumber}>{t("payment")}</Stepper>
           {/* <div className="text-right">
             <PriceDisplay
               amount={total}
@@ -204,7 +207,7 @@ export function GlobalReviewStep({
               type="submit"
               className="w-full h-14 bg-primary hover:bg-primary/90 text-white font-bold text-lg rounded-xl shadow-lg shadow-primary/20 transition-all flex items-center justify-center gap-2 group mt-4"
             >
-              I Accept, Pay
+              {t("iAcceptPay")}
             </Button>
           </div>
 
@@ -212,7 +215,7 @@ export function GlobalReviewStep({
             <div className="flex items-center gap-3 pb-6 border-b border-slate-200">
               <CreditCard className="w-5 h-5 text-[#A11D1D]" />
               <h3 className="font-black text-xs uppercase tracking-[0.2em] text-slate-900">
-                Order Summary
+                {t("orderSummary")}
               </h3>
             </div>
 
@@ -222,7 +225,7 @@ export function GlobalReviewStep({
               ) : (
                 <>
                   <div className="flex justify-between text-sm">
-                    <span className="text-slate-500 font-medium">{examName} Fee</span>
+                    <span className="text-slate-500 font-medium">{t("examFee", { name: examName })}</span>
                     <PriceDisplay
                       amount={baseFee}
                       className="font-bold text-slate-900"
@@ -231,7 +234,7 @@ export function GlobalReviewStep({
 
                   <div className="flex justify-between text-sm">
                     <span className="text-slate-500 font-medium">
-                      Registration Service Fee
+                      {t("registrationServiceFee")}
                     </span>
                     <PriceDisplay
                       amount={serviceFee}
@@ -242,7 +245,7 @@ export function GlobalReviewStep({
                   {selectedCourseData && (
                     <div className="flex justify-between text-sm">
                       <span className="text-slate-500 font-medium">
-                        Course: {selectedCourseData.name} Fee
+                        {t("courseFee", { name: selectedCourseData.name })}
                       </span>
                       <PriceDisplay
                         amount={
@@ -258,7 +261,7 @@ export function GlobalReviewStep({
                   {selectedWorkshopData && (
                     <div className="flex justify-between text-sm">
                       <span className="text-slate-500 font-medium">
-                        Workshop: {selectedWorkshopData.name} Fee
+                        {t("workshopFee", { name: selectedWorkshopData.name })}
                       </span>
                       <PriceDisplay
                         amount={selectedWorkshopData.price}
@@ -270,7 +273,7 @@ export function GlobalReviewStep({
                   {VAT_PERCENT > 0 && (
                     <>
                       <div className="flex justify-between text-sm pt-4 border-t border-slate-100">
-                        <span className="text-slate-500 font-semibold">Subtotal</span>
+                        <span className="text-slate-500 font-semibold">{t("subtotal")}</span>
                         <PriceDisplay
                           amount={calculatedSubtotal}
                           className="font-bold text-slate-900"
@@ -278,7 +281,7 @@ export function GlobalReviewStep({
                       </div>
                       <div className="flex justify-between text-sm">
                         <span className="text-slate-500 font-medium">
-                          VAT ({VAT_PERCENT}%)
+                          {t("vat", { percent: VAT_PERCENT })}
                         </span>
                         <PriceDisplay
                           amount={vatAmount}
@@ -291,7 +294,7 @@ export function GlobalReviewStep({
                   <div className="pt-6 border-t border-slate-200">
                     <div className="flex justify-between items-center">
                       <span className="font-black text-md uppercase">
-                        Total Amount
+                        {t("totalAmount")}
                       </span>
                       <PriceDisplay
                         amount={total}

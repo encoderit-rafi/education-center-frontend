@@ -1,4 +1,7 @@
+"use client";
+
 import React from "react";
+import { useTranslations } from "next-intl";
 import {
   Field,
   FieldContent,
@@ -75,10 +78,11 @@ export function MarketingPreferencesSection({
   error,
   options = BRITISH_COUNCIL_MARKETING_OPTIONS,
 }: MarketingPreferencesSectionProps) {
+  const t = useTranslations("FormsShared.MarketingPreferences");
   return (
     <div className="pt-8 border-t border-slate-100 space-y-6">
       <Field data-invalid={!!error}>
-        <FieldLabel required>Marketing preferences</FieldLabel>
+        <FieldLabel required>{t("title")}</FieldLabel>
         <FieldContent className="mt-4">
           <RadioGroup
             name="marketingPreference"

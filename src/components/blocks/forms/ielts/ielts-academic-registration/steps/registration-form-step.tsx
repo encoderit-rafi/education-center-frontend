@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useTranslations } from "next-intl";
 import { UseFormReturn } from "react-hook-form";
 import { Save, User, Globe, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -46,6 +47,10 @@ export function RegistrationFormStep({
   languages,
   coursesData,
   workshopsData }: RegistrationFormStepProps) {
+  const t = useTranslations("FormsShared.FormFields");
+  const tIelts = useTranslations("FormsShared.IELTS");
+  const tYesNo = useTranslations("FormsShared.GlobalReviewStep");
+  const tDate = useTranslations("FormsShared.DateStep");
   const {
     register,
     handleSubmit,
@@ -61,29 +66,28 @@ export function RegistrationFormStep({
       className="space-y-8 animate-in fade-in duration-500"
     >
       <div className="space-y-6">
-        <Stepper step={2}>Personal Details</Stepper>
+        <Stepper step={2}>{t("personalDetails")}</Stepper>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
           <Field data-invalid={!!errors.givenNames}>
-            <FieldLabel required>First / given names</FieldLabel>
+            <FieldLabel required>{t("firstGivenNames")}</FieldLabel>
             <FieldContent>
               <Input
-                placeholder="As per passport"
+                placeholder={t("asPerPassport")}
                 aria-invalid={!!errors.givenNames}
                 {...register("givenNames")}
               />
               <FieldError errors={[errors.givenNames]} />
-              <FieldDescription>
-                This must match the name(s) on your identification document.
+              <FieldDescription>{t("nameMatchDesc")}
               </FieldDescription>
             </FieldContent>
           </Field>
 
           <Field data-invalid={!!errors.middleName}>
-            <FieldLabel>Middle Name (Optional)</FieldLabel>
+            <FieldLabel>{t("middleNameOptional")}</FieldLabel>
             <FieldContent>
               <Input
-                placeholder="As per passport"
+                placeholder={t("asPerPassport")}
                 aria-invalid={!!errors.middleName}
                 {...register("middleName")}
               />
@@ -92,10 +96,10 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.surnames}>
-            <FieldLabel required={!formData.noSurname}>Surname / family name</FieldLabel>
+            <FieldLabel required={!formData.noSurname}>{t("surname")}</FieldLabel>
             <FieldContent>
               <Input
-                placeholder="As per passport"
+                placeholder={t("asPerPassport")}
                 aria-invalid={!!errors.surnames}
                 {...register("surnames")}
                 disabled={formData.noSurname}
@@ -110,14 +114,14 @@ export function RegistrationFormStep({
                   }
                 />
                 <Label htmlFor="noSurname" className="text-xs font-light">
-                  I don't have a surname / family name
+                  {t("noSurname")}
                 </Label>
               </FieldDescription>
             </FieldContent>
           </Field>
 
           <Field data-invalid={!!errors.dateOfBirth}>
-            <FieldLabel required>Date of birth</FieldLabel>
+            <FieldLabel required>{t("dateOfBirth")}</FieldLabel>
             <FieldContent>
               <DatePicker
                 name="dateOfBirth"
@@ -129,7 +133,7 @@ export function RegistrationFormStep({
                 fromYear={1900}
                 toYear={new Date().getFullYear()}
                 calendarClassName="[--calendar-accent:theme(colors.primary.DEFAULT)]"
-                placeholder="Select your date of birth"
+                placeholder={t("selectDateOfBirth")}
                 aria-invalid={!!errors.dateOfBirth}
               />
               {formData.dateOfBirth &&
@@ -144,7 +148,7 @@ export function RegistrationFormStep({
                   if (age < 16) {
                     return (
                       <p className="mt-2 text-xs text-red-600 font-bold animate-in fade-in slide-in-from-top-1">
-                        Candidates must be at least 16 years old.
+                        {t("minAge16")}
                       </p>
                     );
                   }
@@ -155,10 +159,10 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.birthCity}>
-            <FieldLabel required>City of birth</FieldLabel>
+            <FieldLabel required>{t("cityOfBirth")}</FieldLabel>
             <FieldContent>
               <Input
-                placeholder="Enter city of birth"
+                placeholder={t("enterBirthCity")}
                 aria-invalid={!!errors.birthCity}
                 {...register("birthCity")}
               />
@@ -167,11 +171,11 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.birthCountry}>
-            <FieldLabel required>Country of birth</FieldLabel>
+            <FieldLabel required>{t("countryOfBirth")}</FieldLabel>
             <FieldContent>
               <CountryDropdown
                 name="birthCountry"
-                placeholder="Search country..."
+                placeholder={t("searchCountry")}
                 value={formData.birthCountry}
                 aria-invalid={!!errors.birthCountry}
                 onChange={(country) => setValue("birthCountry", country.name)}
@@ -181,7 +185,7 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.sex}>
-            <FieldLabel required>Sex</FieldLabel>
+            <FieldLabel required>{t("sex")}</FieldLabel>
             <FieldContent>
               <RadioGroup
                 name="sex"
@@ -206,7 +210,7 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.mobileNumber}>
-            <FieldLabel required>Mobile number</FieldLabel>
+            <FieldLabel required>{t("mobileNumber")}</FieldLabel>
             <FieldContent>
               <PhoneInput
                 name="mobileNumber"
@@ -226,17 +230,16 @@ export function RegistrationFormStep({
                   className="mt-0.5"
                 />
                 <Label htmlFor="smsConsent" className="text-xs font-light leading-normal whitespace-normal text-wrap block">
-                  I agree to receive notifications or to be contacted about my test registration<br />
-                  to this telephone number via SMS, WhatsApp, etc
+                  {t("smsConsent")}
                 </Label>
               </FieldDescription>
             </FieldContent>
           </Field>
           <Field data-invalid={!!errors.email}>
-            <FieldLabel required>Email address</FieldLabel>
+            <FieldLabel required>{t("email")}</FieldLabel>
             <FieldContent>
               <Input
-                placeholder="example@email.com"
+                placeholder={t("exampleEmail")}
                 aria-invalid={!!errors.email}
                 {...register("email")}
               />
@@ -245,10 +248,10 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.confirmEmail}>
-            <FieldLabel required>Confirm email address</FieldLabel>
+            <FieldLabel required>{t("confirmEmail")}</FieldLabel>
             <FieldContent>
               <Input
-                placeholder="Confirm your email address"
+                placeholder={t("confirmEmailPlaceholder")}
                 onPaste={(e) => e.preventDefault()}
                 onCopy={(e) => e.preventDefault()}
                 onDragStart={(e) => e.preventDefault()}
@@ -263,11 +266,11 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.residenceCountry}>
-            <FieldLabel required>Country of residence</FieldLabel>
+            <FieldLabel required>{t("countryOfResidence")}</FieldLabel>
             <FieldContent>
               <CountryDropdown
                 name="residenceCountry"
-                placeholder="Search country..."
+                placeholder={t("searchCountry")}
                 value={formData.residenceCountry}
                 aria-invalid={!!errors.residenceCountry}
                 onChange={(country) =>
@@ -279,11 +282,11 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.postalAddress1}>
-            <FieldLabel required>Address Line 1</FieldLabel>
+            <FieldLabel required>{t("addressLine1")}</FieldLabel>
             <FieldContent>
               <Input
                 {...register("postalAddress1")}
-                placeholder="Street address, building, etc."
+                placeholder={t("streetAddress")}
                 aria-invalid={!!errors.postalAddress1}
               />
               <FieldError errors={[errors.postalAddress1]} />
@@ -291,11 +294,11 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.postalAddress2}>
-            <FieldLabel>Address Line 2</FieldLabel>
+            <FieldLabel>{t("addressLine2")}</FieldLabel>
             <FieldContent>
               <Input
                 {...register("postalAddress2")}
-                placeholder="Apartment, suite, unit, etc. (optional)"
+                placeholder={t("apartmentSuite")}
                 aria-invalid={!!errors.postalAddress2}
               />
               <FieldError errors={[errors.postalAddress2]} />
@@ -303,11 +306,11 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.poBox}>
-            <FieldLabel>P.O. Box number</FieldLabel>
+            <FieldLabel>{t("poBox")}</FieldLabel>
             <FieldContent>
               <Input
                 {...register("poBox")}
-                placeholder="P.O. Box number"
+                placeholder={t("enterPoBox")}
                 aria-invalid={!!errors.poBox}
               />
               <FieldError errors={[errors.poBox]} />
@@ -315,11 +318,11 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.postcode}>
-            <FieldLabel>Postal Code (Zip Code)</FieldLabel>
+            <FieldLabel>{t("postalCode")}</FieldLabel>
             <FieldContent>
               <Input
                 {...register("postcode")}
-                placeholder="Postal code"
+                placeholder={t("postalCodePlaceholder")}
                 aria-invalid={!!errors.postcode}
               />
               <FieldError errors={[errors.postcode]} />
@@ -327,11 +330,11 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.city}>
-            <FieldLabel required>Emirate / City</FieldLabel>
+            <FieldLabel required>{t("emirateCity")}</FieldLabel>
             <FieldContent>
               <Input
                 {...register("city")}
-                placeholder="Enter your city"
+                placeholder={t("enteringCity")}
                 aria-invalid={!!errors.city}
               />
               <FieldError errors={[errors.city]} />
@@ -339,7 +342,7 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.idType}>
-            <FieldLabel required>Identification type</FieldLabel>
+            <FieldLabel required>{t("identificationType")}</FieldLabel>
             <FieldContent>
               <RadioGroup
                 name="idType"
@@ -348,8 +351,8 @@ export function RegistrationFormStep({
                 className="grid grid-cols-1 sm:grid-cols-2 gap-3"
               >
                 {[
-                  { id: "passport", label: "Passport" },
-                  { id: "emirates_id", label: "Emirates ID" },
+                  { id: "passport", label: t("idTypePassport") },
+                  { id: "emirates_id", label: t("idTypeEmiratesId") },
                 ].map((opt) => (
                   <Label
                     key={opt.id}
@@ -364,16 +367,14 @@ export function RegistrationFormStep({
               </RadioGroup>
               <FieldError errors={[errors.idType]} />
             </FieldContent>
-            <FieldDescription>
-              Please make sure you present the same identification you registered with on exam day.
-            </FieldDescription>
+            <FieldDescription>{t("sameIdOnExamDay")}</FieldDescription>
           </Field>
 
           <Field data-invalid={!!errors.idNumber}>
             <FieldLabel required>
               {formData.idType === "emirates_id"
-                ? "ID number"
-                : "Passport number"}
+                ? t("idNumber")
+                : t("passportNumber")}
             </FieldLabel>
             <FieldContent>
               <Input
@@ -388,8 +389,8 @@ export function RegistrationFormStep({
           <Field data-invalid={!!errors.idExpiryDate}>
             <FieldLabel required>
               {formData.idType === "emirates_id"
-                ? "ID expiry date"
-                : "Passport expiry date"}
+                ? t("idExpiryDate")
+                : t("passportExpiryDate")}
             </FieldLabel>
             <FieldContent>
               <DatePicker
@@ -405,19 +406,19 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.issuingAuthority}>
-            <FieldLabel required>Issuing authority</FieldLabel>
+            <FieldLabel required>{t("issuingAuthority")}</FieldLabel>
             <FieldContent>
               <Input
                 {...register("issuingAuthority")}
                 aria-invalid={!!errors.issuingAuthority}
-                placeholder="Enter issuing authority"
+                placeholder={t("enterIssuingAuthority")}
               />
               <FieldError errors={[errors.issuingAuthority]} />
             </FieldContent>
           </Field>
 
           <Field data-invalid={!!errors.nationality}>
-            <FieldLabel required>Country of nationality</FieldLabel>
+            <FieldLabel required>{t("nationality")}</FieldLabel>
             <FieldContent>
               <CountryDropdown
                 name="nationality"
@@ -431,9 +432,7 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.idDocument}>
-            <FieldLabel required>
-              Attach a valid copy of Passport / Emirates ID:
-            </FieldLabel>
+            <FieldLabel required>{t("attachIdCopy")}</FieldLabel>
             <FieldContent>
               <div className="flex flex-col gap-2">
                 {!formData.idDocument ? (
@@ -477,7 +476,7 @@ export function RegistrationFormStep({
                   </div>
                 )}
                 <p className="text-[12px] text-slate-900 font-medium">
-                  Supported formats: (pdf, png, jpg, jpeg) - Max size: 5MB
+                  {t("supportedFormats")}
                 </p>
               </div>
               <FieldError errors={[errors.idDocument]} />
@@ -491,7 +490,7 @@ export function RegistrationFormStep({
         <div className="flex items-center gap-2 text-slate-400 mb-4">
           <Globe className="size-5" />
           <h3 className="text-lg font-bold tracking-tight text-slate-800">
-            Additional Information
+            {t("additionalInformation")}
           </h3>
         </div>
 
@@ -501,7 +500,7 @@ export function RegistrationFormStep({
             data-invalid={!!errors.takenBefore}
           >
             <FieldLabel required>
-              Have you taken the CD-IELTS Test before?
+              {tIelts("haveYouTakenBefore")}
             </FieldLabel>
             <FieldContent className="mt-2">
               <RadioGroup
@@ -510,7 +509,7 @@ export function RegistrationFormStep({
                 value={formData.takenBefore}
                 className="grid grid-cols-2 gap-3"
               >
-                {["Yes", "No"].map((opt) => (
+                {[tYesNo("yes"), tYesNo("no")].map((opt) => (
                   <Label
                     key={opt}
                     htmlFor={`taken-${opt}`}
@@ -532,7 +531,7 @@ export function RegistrationFormStep({
                 className="md:col-span-2"
                 data-invalid={!!errors.lessThanTwoYears}
               >
-                <FieldLabel required>Was it less than 2 years?</FieldLabel>
+                <FieldLabel required>{tIelts("wasItLessThan2Years")}</FieldLabel>
                 <FieldContent className="mt-2">
                   <RadioGroup
                     name="lessThanTwoYears"
