@@ -9,6 +9,8 @@ import {
   getDefaultClassNames,
   type DayButtonProps,
 } from "react-day-picker";
+import { useLocale } from "next-intl";
+import { ar } from "date-fns/locale";
 
 import { cn } from "@/lib/utils";
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -30,10 +32,14 @@ function Calendar({
   toYear?: number;
 }) {
   const defaultClassNames = getDefaultClassNames();
+  const activeLocale = useLocale();
+  const calendarLocale = props.locale || (activeLocale === "ar" ? ar : undefined);
 
   return (
     <DayPicker
       showOutsideDays={showOutsideDays}
+      locale={calendarLocale}
+      dir={props.dir || (activeLocale === "ar" ? "rtl" : "ltr")}
       className={cn(
         "bg-background group/calendar p-3 [--cell-size:--spacing(8)] sm:[--cell-size:--spacing(10)] [[data-slot=card-content]_&]:bg-transparent [[data-slot=popover-content]_&]:bg-transparent",
         String.raw`rtl:**:[.rdp-button\_next>svg]:rotate-180`,
@@ -45,7 +51,7 @@ function Calendar({
       endMonth={new Date(toYear, 11)}
       formatters={{
         formatMonthDropdown: (date) =>
-          date.toLocaleString("en-US", { month: "short" }),
+          date.toLocaleString(activeLocale === "ar" ? "ar" : "en-US", { month: "short" }),
         ...formatters,
       }}
       classNames={{

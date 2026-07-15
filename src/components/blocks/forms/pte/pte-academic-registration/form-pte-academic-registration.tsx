@@ -19,6 +19,7 @@ import { TermsStep } from "./steps/terms-step";
 import { DateStep } from "./steps/date-step";
 import { RegistrationFormStep } from "./steps/registration-form-step";
 import { ReviewStep } from "./steps/review-step";
+import { useRegistrationTitle } from "@/lib/translations";
 import { VAT_PERCENT, calculateVat } from "@/lib/vat";
 import { compileBookingPayload } from "@/lib/booking";
 
@@ -30,6 +31,7 @@ export default function FormPTEAcademicRegistration({
   examId: initialExamId,
 }: FormProps = {}) {
   const [currentStep, setCurrentStep] = useState(0); // 0: Terms, 1: Date, 2: Form, 3: Review
+  const titleObj = useRegistrationTitle("pte-academic");
 
   const { data: examsResponse } = useQuery({
     queryKey: ["exams-list"],
@@ -362,7 +364,7 @@ export default function FormPTEAcademicRegistration({
     <div className="max-w-7xl mx-auto px-4 py-12">
       <div className="text-center mb-12">
         <h1 className="text-4xl md:text-5xl font-black text-slate-900 mb-4 tracking-tight">
-          PTE Academic <span className="text-primary">Registration</span>
+          {titleObj.main} <span className="text-primary">{titleObj.highlight}</span>
         </h1>
       </div>
 

@@ -1,5 +1,7 @@
 "use client"
 import { Calendar } from "@/components/ui/calendar"
+import { useCalendarTranslations } from "@/lib/translations"
+import { useLocale } from "next-intl"
 import { Card, CardContent } from "@/components/ui/card"
 import { CalendarDays } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -28,12 +30,15 @@ export function ExamDateSelector({
   onTimeSelect,
   disabledDates
 }: ExamDateSelectorProps) {
+  const t = useCalendarTranslations();
+  const locale = useLocale();
+  const isAr = locale === "ar";
   return (
     <div className="space-y-8">
       <div className="space-y-4">
         <div className="flex items-center gap-2 text-[#A11D1D]">
           <CalendarDays className="w-5 h-5" />
-          <h3 className="text-sm font-black uppercase tracking-widest">Select Exam Date</h3>
+          <h3 className="text-sm font-black uppercase tracking-widest">{t.selectExamDate}</h3>
         </div>
 
         <Card className="border-slate-200 shadow-xl shadow-slate-200/50 rounded-[2rem] overflow-hidden">
@@ -67,7 +72,7 @@ export function ExamDateSelector({
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </span>
-            <h3 className="text-sm font-black uppercase tracking-widest">Available Time Slots</h3>
+            <h3 className="text-sm font-black uppercase tracking-widest">{t.availableTimeSlots}</h3>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
@@ -90,7 +95,7 @@ export function ExamDateSelector({
                   {time}
                 </span>
                 <span className="text-xs font-bold uppercase tracking-widest text-slate-400 group-hover:text-slate-500">
-                  Available
+                  {isAr ? "متاح" : "Available"}
                 </span>
               </button>
             ))}

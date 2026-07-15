@@ -23,6 +23,7 @@ import { compileBookingPayload } from "@/lib/booking";
 import { TermsStep } from "./steps/terms-step";
 import { DateStep } from "./steps/date-step";
 import { RegistrationFormStep } from "./steps/registration-form-step";
+import { useRegistrationTitle } from "@/lib/translations";
 
 // Static courses and workshops data removed to be loaded dynamically from the API
 
@@ -34,6 +35,7 @@ export default function FormTOEFLIBTRegistration({
   examId: initialExamId,
 }: FormProps = {}) {
   const [currentStep, setCurrentStep] = useState(0); // 0: Terms, 1: Date, 2: Form, 3: Review
+  const titleObj = useRegistrationTitle("toefl-ibt");
 
   const { data: examsResponse } = useQuery({
     queryKey: ["exams-list"],
@@ -401,7 +403,7 @@ export default function FormTOEFLIBTRegistration({
     <div className="max-w-7xl mx-auto px-4 py-12">
       <div className="text-center mb-12">
         <h1 className="text-4xl md:text-5xl font-black text-slate-900 mb-4 tracking-tight uppercase">
-          TOEFL iBT <span className="text-[#A11D1D]">Registration</span>
+          {titleObj.main} <span className="text-[#A11D1D]">{titleObj.highlight}</span>
         </h1>
       </div>
 

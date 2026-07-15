@@ -373,7 +373,7 @@ function CourseRegistrationForm({ className }: { className?: string }) {
             <section className="grid md:grid-cols-2 gap-5">
               <div className="space-y-3">
                 <Stepper step={1}>{t("step1Title")}</Stepper>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <Field data-invalid={!!errors.firstName}>
                     <FieldLabel required>{t("firstNameLabel")}</FieldLabel>
                     <FieldContent>
@@ -426,7 +426,7 @@ function CourseRegistrationForm({ className }: { className?: string }) {
                     <FieldError errors={[errors.email]} />
                   </FieldContent>
                 </Field>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <Field data-invalid={!!errors.phone}>
                     <FieldLabel required>{t("phoneLabel")}</FieldLabel>
                     <FieldContent>

@@ -304,7 +304,7 @@ function PaidMockTestRegistrationForm({
             <section className="grid md:grid-cols-2 gap-5">
               <div className="space-y-3">
                 <Stepper step={1}>{t("yourInfo")}</Stepper>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <Field data-invalid={!!errors.firstName}>
                     <FieldLabel required>{t("firstName")}</FieldLabel>
                     <FieldContent>
@@ -371,7 +371,7 @@ function PaidMockTestRegistrationForm({
                   </FieldContent>
                 </Field>
 
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <Field data-invalid={!!errors.phone}>
                     <FieldLabel required>{t("phoneNumber")}</FieldLabel>
                     <FieldContent>

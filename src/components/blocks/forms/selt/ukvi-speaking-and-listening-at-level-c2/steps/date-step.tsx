@@ -11,6 +11,7 @@ import {
   FieldError,
 } from "@/components/ui/field";
 import Stepper from "@/components/stepper";
+import { useCalendarTranslations } from "@/lib/translations";
 
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
@@ -54,14 +55,15 @@ export function DateStep({
   error,
   timeSlotError,
 }: DateStepProps) {
+  const t = useCalendarTranslations();
   return (
     <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
       <div className="space-y-6">
-        <Stepper step={1}>Select Exam Date & Time</Stepper>
+        <Stepper step={1}>{t.selectExamDateTime}</Stepper>
 
         <div className="mt-8 grid md:grid-cols-2 gap-12 items-start">
           <Field data-invalid={!!error}>
-            <FieldLabel required>Select Date</FieldLabel>
+            <FieldLabel required>{t.selectDate}</FieldLabel>
             <FieldContent className="flex flex-col items-center">
               <Calendar
                 mode="single"
@@ -91,7 +93,7 @@ export function DateStep({
 
           <div className="space-y-8">
             <Field data-invalid={!!timeSlotError}>
-              <FieldLabel required>Available Time Slots</FieldLabel>
+              <FieldLabel required>{t.availableTimeSlots}</FieldLabel>
               <FieldContent>
                 <RadioGroup
                   value={timeSlot}
@@ -146,12 +148,12 @@ export function DateStep({
         </div>
 
         <div className="mt-12 flex justify-between items-center pt-6 border-t border-slate-100">
-          <Button onClick={onBack}>Back</Button>
+          <Button onClick={onBack}>{t.back}</Button>
           <Button
             onClick={onNext}
             disabled={!value || !timeSlot || isSlotDisabled(value, timeSlot)}
           >
-            Next
+            {t.next}
           </Button>
         </div>
       </div>

@@ -17,6 +17,7 @@ import { TermsStep } from "./steps/terms-step";
 import { DateStep } from "./steps/date-step";
 import { RegistrationFormStep } from "./steps/registration-form-step";
 import { ReviewStep } from "./steps/review-step";
+import { useRegistrationTitle } from "@/lib/translations";
 
 // Schema
 import { PteHomeA1Schema, type TPteHomeA1Schema } from "./_type";
@@ -33,6 +34,7 @@ export default function FormPTEHomeA1Registration({
   examId: initialExamId,
 }: FormProps = {}) {
   const [currentStep, setCurrentStep] = useState(0); // 0: Terms, 1: Date, 2: Form, 3: Review
+  const titleObj = useRegistrationTitle("pte-home-a1");
 
   const { data: examsResponse } = useQuery({
     queryKey: ["exams-list"],
@@ -387,7 +389,7 @@ export default function FormPTEHomeA1Registration({
     <div className="max-w-7xl mx-auto px-4 py-12">
       <div className="text-center mb-12">
         <h1 className="text-4xl md:text-5xl font-black text-slate-900 mb-4 tracking-tight">
-          PTE Home <span className="text-primary">A1</span> Registration
+          {titleObj.main} <span className="text-primary">{titleObj.highlight}</span>
         </h1>
       </div>
 

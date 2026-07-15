@@ -287,7 +287,7 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
             <section className="grid md:grid-cols-2 gap-5">
               <div className="space-y-3">
                 <Stepper step={1}>Your Information</Stepper>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <Field data-invalid={!!errors.firstName}>
                     <FieldLabel required>First Name</FieldLabel>
                     <FieldContent>
@@ -337,7 +337,7 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
                     <FieldError errors={[errors.email]} />
                   </FieldContent>
                 </Field>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <Field data-invalid={!!errors.phone}>
                     <FieldLabel required>Phone Number</FieldLabel>
                     <FieldContent>

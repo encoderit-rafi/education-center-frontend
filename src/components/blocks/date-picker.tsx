@@ -3,6 +3,8 @@
 import * as React from "react";
 import { format } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-react";
+import { useLocale } from "next-intl";
+import { ar } from "date-fns/locale";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -39,6 +41,7 @@ export function DatePicker({
   calendarClassName,
 }: DatePickerProps) {
   const [open, setOpen] = React.useState(false);
+  const activeLocale = useLocale();
 
   const handleSelect = (date: Date | undefined) => {
     if (onChange) {
@@ -63,7 +66,7 @@ export function DatePicker({
           >
             <CalendarIcon className="mr-2 h-4 w-4 text-slate-400 " />
             {value ? (
-              format(value, "PPP")
+              format(value, "PPP", { locale: activeLocale === "ar" ? ar : undefined })
             ) : (
               <span className="text-slate-400">{placeholder}</span>
             )}

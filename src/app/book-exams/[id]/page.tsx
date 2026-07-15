@@ -210,7 +210,7 @@ export default async function BookExamsId({
         <BookExamOverviewWrapper exam={examInfo}>
           <div>
             <h2 className="text-2xl font-bold my-8 text-center">
-              IELTS General Registration
+              {locale === "ar" ? "التسجيل في اختبار آيلتس العام" : "IELTS General Registration"}
             </h2>
             <FormIELTSGeneralRegistration examId={exam.id} />
           </div>

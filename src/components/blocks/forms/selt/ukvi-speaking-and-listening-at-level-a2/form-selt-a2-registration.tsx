@@ -23,6 +23,7 @@ import { TermsStep } from "./steps/terms-step";
 import { DateStep } from "./steps/date-step";
 import { RegistrationFormStep } from "./steps/registration-form-step";
 import { ReviewStep } from "./steps/review-step";
+import { useRegistrationTitle } from "@/lib/translations";
 import { VAT_PERCENT, calculateVat } from "@/lib/vat";
 
 interface FormProps {
@@ -103,6 +104,8 @@ export default function FormSELTA2Registration({
     activeExam?.name ||
     Object.values(EXAM_IDS_DATA).find((e) => e.id === initialId)?.name ||
     "SELT A2";
+
+  const titleObj = useRegistrationTitle(activeExam?.slug || "ukvi-speaking-and-listening-at-level-a2");
 
   const form = useForm<TSeltA1Schema>({
     resolver: zodResolver(SeltA1Schema) as any,
@@ -355,8 +358,7 @@ export default function FormSELTA2Registration({
     <div className="max-w-7xl mx-auto px-4 py-12">
       <div className="text-center mb-12">
         <h1 className="text-4xl md:text-5xl font-black text-slate-900 mb-4 tracking-tight uppercase italic">
-          {examName.split(" (")[0]}{" "}
-          <span className="text-[#A11D1D]">Registration</span>
+          {titleObj.main} <span className="text-[#A11D1D]">{titleObj.highlight}</span>
         </h1>
       </div>
 
