@@ -2137,9 +2137,36 @@
           "value": "Yes"
         }
       ],
-      "sections": [],
-      "whoShouldTake": [],
-      "acceptedFor": []
+      "sections": [
+        {
+          "name": "Part 1: Speaking & Writing",
+          "duration": "Around 50 minutes",
+          "details": "This section will test your speaking and writing skills.",
+          "format": "Tasks include Personal Introduction, Read Aloud, Repeat Sentence, Describe Image, Respond to a Situation, Answer Short Question, Summarize Written Text, and Write Email."
+        },
+        {
+          "name": "Part 2: Reading",
+          "duration": "Around 30 minutes",
+          "details": "This section will test your reading skills.",
+          "format": "Tasks include Reading & Writing: Fill in the Blanks, Multiple Choice (Multiple Answer), Re-order Paragraphs, Reading: Fill in the Blanks, and Multiple Choice (Single Answer)."
+        },
+        {
+          "name": "Part 3: Listening",
+          "duration": "Around 30 minutes",
+          "details": "This section will test your listening skills.",
+          "format": "Tasks include Summarize Spoken Text, Multiple Choice (Multiple Answer), Fill in the Blanks, Highlight Correct Summary, Multiple Choice (Single Answer), Select Missing Word, Highlight Incorrect Words, and Write from Dictation."
+        }
+      ],
+      "whoShouldTake": [
+        "Individuals applying for Canadian Permanent Residency (PR)",
+        "Applicants for Canadian Citizenship",
+        "Individuals applying under any economic class pathway"
+      ],
+      "acceptedFor": [
+        "Canadian Permanent Residency (IRCC)",
+        "Canadian Citizenship",
+        "All Economic Class Applications"
+      ]
     },
     "pte-academic-ukvi": {
       "subtitle": "Your Guide to the PTE Academic UKVI Test",
@@ -2572,9 +2599,36 @@
           "value": "UK Home Office"
         }
       ],
-      "sections": [],
-      "whoShouldTake": [],
-      "acceptedFor": []
+      "sections": [
+        {
+          "name": "Speaking",
+          "duration": "Variable",
+          "details": "You will listen to prompts and record your spoken responses into a headset. You will be asked to discuss familiar topics, explain your opinions, and describe experiences."
+        },
+        {
+          "name": "Listening",
+          "duration": "Variable",
+          "details": "You will listen to audio recordings of everyday English conversations and answer questions to demonstrate your understanding of key details and main ideas."
+        },
+        {
+          "name": "Reading",
+          "duration": "Variable",
+          "details": "You will read various short texts—such as notices, emails, or articles—and answer comprehension questions to show you can extract relevant information."
+        },
+        {
+          "name": "Writing",
+          "duration": "Variable",
+          "details": "You will write responses to practical tasks, such as drafting an email or a short description, demonstrating your ability to use grammar and vocabulary accurately at an intermediate level."
+        }
+      ],
+      "whoShouldTake": [
+        "Candidates applying for a student visa to study below degree level in the UK.",
+        "Candidates applying for specific UK work visa routes that require proof of four language skills at CEFR level B1."
+      ],
+      "acceptedFor": [
+        "UK Student Visa (for studies below degree level)",
+        "Specific UK Work Visas (such as the Skilled Worker Visa)"
+      ]
     },
     "selt-b2": {
       "subtitle": "Your Guide to the Skills for English (SELT) UKVI Speaking, Listening, Reading & Writing B2 (Four Skills)",
