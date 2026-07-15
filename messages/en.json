@@ -3913,7 +3913,9 @@
       "no": "No",
       "iDoNotKnow": "I do not know",
       "male": "male",
-      "female": "female"
+      "female": "female",
+      "examFee": "{name} Fee",
+      "session": "Session"
     },
     "AddonServices": {
       "title": "Add-on Services",
@@ -3999,7 +4001,13 @@
       "postalCodePlaceholder": "Postal code",
       "enterPoBox": "P.O. Box number",
       "additionalInformation": "Additional Information",
-      "personalDetails": "Personal Details"
+      "personalDetails": "Personal Details",
+      "male": "Male",
+      "female": "Female",
+      "enterIdNumber": "Enter your ID number",
+      "enterPassportNumber": "Enter your Passport number",
+      "selectIdExpiryDate": "Select ID expiry date",
+      "selectPassportExpiryDate": "Select Passport expiry date"
     },
     "IELTS": {
       "registrationTitle": "IELTS {module} Registration",
@@ -4136,7 +4144,30 @@
       "wherePlanToStudy": "Where do you plan to study?",
       "preferredLocation": "Select you preferred location to take the test:",
       "uaeLocation": "In the UAE (at our test center)",
-      "outsideUae": "Outside the UAE (at any ETS test center)"
+      "outsideUae": "Outside the UAE (at any ETS test center)",
+      "takenBefore": "Have you taken the TOEFL iBT Test before?",
+      "lessThanTwoYears": "Was it less than 2 years?",
+      "doNotKnow": "I do not know",
+      "existingAccount": "Do you have an existing TOEFL account?",
+      "forgotAccountDetails": "I forgot my TOEFL account details",
+      "smsConsent": "I agree to receive notifications or to be contacted about my test registration to this telephone number via SMS, WhatsApp, etc",
+      "selectLanguage": "-Select Language-",
+      "specifyLanguage": "Please specify your language",
+      "yearsStudyingEnglish": "How many years have you been studying English?",
+      "selectDuration": "-Select Duration-",
+      "nextLevelOfStudy": "Next level of study you are applying for",
+      "selectLevel": "-Select Level-",
+      "desiredFieldOfStudy": "Desired field of study",
+      "selectField": "-Select Field-",
+      "specifyFieldOfStudy": "Please specify your field of study",
+      "reasonForTakingTest": "Why are you taking the test?",
+      "selectReason": "-Select Reason-",
+      "intendedEnrollmentDate": "Intended enrollment date",
+      "selectMonthYear": "Select month and year",
+      "destinationCountry": "Where do you plan to study?",
+      "selectCountries": "Select countries",
+      "examDate": "Exam Date",
+      "timeSlot": "Time Slot"
     }
   }
 }
