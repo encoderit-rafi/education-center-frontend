@@ -13,6 +13,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 import { Controller } from "react-hook-form";
+import { PhoneInput } from "@/components/ui/phone-input";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -33,6 +34,7 @@ type ContactFormValues = {
   firstName: string;
   lastName: string;
   email: string;
+  mobile: string;
   city: string;
   country: string;
   enquiryTopic: string;
@@ -89,6 +91,10 @@ export default function ContactForm() {
       .trim()
       .min(1, { message: tForm("validation.emailRequired") })
       .email({ message: tForm("validation.emailInvalid") }),
+    mobile: z
+      .string()
+      .trim()
+      .min(1, { message: tForm("validation.mobileRequired") }),
     city: z
       .string()
       .trim()
@@ -120,6 +126,7 @@ export default function ContactForm() {
       firstName: "",
       lastName: "",
       email: "",
+      mobile: "",
       city: "",
       country: "",
       enquiryTopic: "",
@@ -138,6 +145,7 @@ export default function ContactForm() {
         first_name: data.firstName,
         last_name: data.lastName,
         email: data.email,
+        phone: data.mobile,
         address: data.city,
         country: data.country,
         category: data.enquiryTopic
@@ -217,7 +225,7 @@ export default function ContactForm() {
 
       <div className="w-full bg-slate-100/80 my-4" />
 
-      <div className="grid grid-cols-1 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Field data-invalid={!!errors.email}>
           <FieldLabel required>{tForm("email")}</FieldLabel>
           <FieldContent>
@@ -228,6 +236,27 @@ export default function ContactForm() {
             />
           </FieldContent>
           {errors.email && <FieldError>{errors.email.message}</FieldError>}
+        </Field>
+
+        <Field data-invalid={!!errors.mobile}>
+          <FieldLabel required>{tForm("mobile")}</FieldLabel>
+          <FieldContent>
+            <Controller
+              control={control}
+              name="mobile"
+              render={({ field }) => (
+                <PhoneInput
+                  name={field.name}
+                  value={field.value}
+                  onChange={field.onChange}
+                  defaultCountry="AE"
+                  placeholder={tForm("mobilePlaceholder")}
+                  aria-invalid={!!errors.mobile}
+                />
+              )}
+            />
+          </FieldContent>
+          {errors.mobile && <FieldError>{errors.mobile.message}</FieldError>}
         </Field>
       </div>
 
