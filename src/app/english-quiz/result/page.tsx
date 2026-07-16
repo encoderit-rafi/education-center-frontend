@@ -1,8 +1,8 @@
 "use client";
 
-import React, { Suspense } from "react";
+import React, { Suspense, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { Check, Star } from "lucide-react";
+import { Check, Star, Mail, Phone, Copy } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
 
 function QuizResultContent() {
@@ -15,7 +15,15 @@ function QuizResultContent() {
   const correctParam = searchParams.get("correct");
   const correct = correctParam ? parseInt(correctParam, 10) : Math.round((score * 60) / 100);
 
+  const [copiedPhone, setCopiedPhone] = useState(false);
 
+  const handleCopyPhone = () => {
+    navigator.clipboard.writeText("+971 6 553 1250");
+    setCopiedPhone(true);
+    setTimeout(() => {
+      setCopiedPhone(false);
+    }, 2000);
+  };
 
   return (
     <div
@@ -69,18 +77,79 @@ function QuizResultContent() {
         </div>
 
         {/* Feedback Alert box */}
-        <div className="bg-slate-50 rounded-xl p-6 border border-slate-100 text-start">
-          <p className="text-sm text-slate-600 leading-relaxed">
-            {isRtl ? (
-              <>
-                شكرًا لك على إجراء كويز اللغة الإنجليزية لدينا. نتيجتك النهائية هي <strong className="text-primary font-black">{correct}</strong> من 60. إذا كنت ترغب في معرفة المزيد عن خدماتنا، يرجى الاتصال بنا عبر الهاتف على الرقم <strong className="text-secondary font-black" dir="ltr">+97165531250</strong> أو عبر البريد الإلكتروني على <a href="mailto:info@tepth.org" className="text-primary underline font-medium">info@tepth.org</a>.
-              </>
-            ) : (
-              <>
-                Thank you for taking our English Quiz. Your final score is <strong className="text-primary font-black">{correct}</strong> out of 60. If you would like to learn more about our services, please contact us by phone at <strong className="text-secondary font-black">+97165531250</strong> or via email at <a href="mailto:info@tepth.org" className="text-primary underline font-medium">info@tepth.org</a>.
-              </>
-            )}
-          </p>
+        <div className="bg-slate-50 rounded-xl p-6 border border-slate-100 text-start space-y-6">
+          <div className="space-y-2">
+            <p className="text-base font-bold text-slate-800 leading-snug">
+              {isRtl ? "شكرًا لك على إجراء كويز TEPTH للغة الإنجليزية!" : "Thank you for taking the TEPTH English Quiz!"}
+            </p>
+            <p className="text-sm text-slate-600 leading-relaxed">
+              {isRtl ? (
+                <>
+                  لقد حصلت على نتيجة نهائية قدرها <strong className="text-primary font-black">{correct} من 60</strong>. لمعرفة المزيد عن خدماتنا وكيف يمكننا دعمك، يرجى التواصل مع فريقنا:
+                </>
+              ) : (
+                <>
+                  You achieved a final score of <strong className="text-primary font-black">{correct} out of 60</strong>. To learn more about our services and how we can support you, please reach out to our team:
+                </>
+              )}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {/* Phone Contact Button */}
+            <button
+              onClick={handleCopyPhone}
+              className="flex items-center gap-4 p-4 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300 transition-all text-start group relative active:scale-[0.98] w-full"
+            >
+              <div className="p-3 bg-secondary/10 rounded-lg text-secondary group-hover:scale-110 transition-transform">
+                <Phone className="w-5 h-5" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <span className="block text-xs font-semibold text-slate-400 uppercase tracking-wider">
+                  {isRtl ? "اتصل بنا" : "Call Us"}
+                </span>
+                <span className="block text-sm font-bold text-slate-700 mt-0.5" dir="ltr">
+                  +971 6 553 1250
+                </span>
+              </div>
+              <div className="flex items-center justify-center p-2 rounded-md hover:bg-slate-100 text-slate-400 group-hover:text-slate-600 transition-colors">
+                {copiedPhone ? (
+                  <Check className="w-4 h-4 text-emerald-600" />
+                ) : (
+                  <Copy className="w-4 h-4" />
+                )}
+              </div>
+              {/* Tooltip */}
+              <div
+                className={`absolute -top-10 left-1/2 -translate-x-1/2 px-2.5 py-1.5 bg-slate-900 text-white text-xs font-semibold rounded-lg shadow-xl transition-all duration-200 whitespace-nowrap z-10 ${
+                  copiedPhone ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 translate-y-2 pointer-events-none"
+                }`}
+              >
+                {isRtl ? "تم النسخ!" : "Copied to clipboard!"}
+              </div>
+            </button>
+
+            {/* Email Contact Link */}
+            <a
+              href="mailto:info@tepth.org"
+              className="flex items-center gap-4 p-4 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300 transition-all text-start group active:scale-[0.98] w-full"
+            >
+              <div className="p-3 bg-primary/10 rounded-lg text-primary group-hover:scale-110 transition-transform">
+                <Mail className="w-5 h-5" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <span className="block text-xs font-semibold text-slate-400 uppercase tracking-wider">
+                  {isRtl ? "البريد الإلكتروني" : "Email Us"}
+                </span>
+                <span className="block text-sm font-bold text-slate-700 mt-0.5 truncate">
+                  info@tepth.org
+                </span>
+              </div>
+              <div className="flex items-center justify-center p-2 rounded-md hover:bg-slate-100 text-slate-400 group-hover:text-slate-600 transition-colors">
+                <Mail className="w-4 h-4" />
+              </div>
+            </a>
+          </div>
         </div>
       </div>
     </div>
