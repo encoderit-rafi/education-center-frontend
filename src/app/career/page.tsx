@@ -226,6 +226,21 @@ export default function CareerPage() {
     }
   };
 
+  const onInvalid = (errors: any) => {
+    const errorFields = Object.keys(errors);
+    if (errorFields.length > 0) {
+      const firstField = errorFields[0];
+      const errorMessage = (errors[firstField] as any)?.message || "Please fill in all required fields.";
+      toast.error("Validation Error", {
+        description: errorMessage,
+      });
+      const element = document.getElementsByName(firstField)[0];
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    }
+  };
+
   if (isSuccess) {
     return (
       <div className="flex flex-col min-h-screen bg-gray-50/50 items-center justify-center p-6 animate-fade-up">
@@ -288,7 +303,7 @@ export default function CareerPage() {
                 </div>
 
                 <form
-                  onSubmit={(e) => handleSubmit(onSubmit)(e)}
+                  onSubmit={handleSubmit(onSubmit, onInvalid)}
                   className="space-y-8"
                 >
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
