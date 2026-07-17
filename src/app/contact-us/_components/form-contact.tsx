@@ -148,9 +148,7 @@ export default function ContactForm() {
         phone: data.mobile,
         address: data.city,
         country: data.country,
-        category: data.enquiryTopic
-          ? data.enquiryTopic.toLowerCase().replace(/[^a-z0-9]+/g, "_")
-          : "general",
+        category: data.enquiryTopic || "General Enquiry",
         subject: data.enquiryTopic || "Inquiry",
         message: data.message,
         ...(recaptchaToken ? { recaptcha_token: recaptchaToken } : {}),
@@ -183,9 +181,9 @@ export default function ContactForm() {
           <h3 className="text-2xl font-black text-secondary">
             {tForm("toast.successTitle")}
           </h3>
-          <p className="text-slate-600 leading-relaxed max-w-xl mx-auto text-base font-semibold text-justify">
+          <p className="max-w-xl mx-auto text-lg  text-justify whitespace-pre-line">
             {tForm.rich("toast.successDesc", {
-              phone: (chunks) => <span className="whitespace-nowrap">{chunks}</span>,
+              bold: (chunks) => <strong className="font-bold text-slate-900">{chunks}</strong>,
             })}
           </p>
         </div>
