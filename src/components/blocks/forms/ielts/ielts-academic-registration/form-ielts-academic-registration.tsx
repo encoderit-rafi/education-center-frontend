@@ -345,12 +345,17 @@ export default function FormIeltsAcademicRegistration({
   };
 
   const onInvalid = (errors: any) => {
-    const errorFields = Object.keys(errors).join(", ");
-    toast.error(`Validation failed for: ${errorFields}`);
-    const firstError = Object.keys(errors)[0];
-    const element = document.getElementsByName(firstError)[0];
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "center" });
+    const errorFields = Object.keys(errors);
+    if (errorFields.length > 0) {
+      const firstField = errorFields[0];
+      const errorMessage = (errors[firstField] as any)?.message || "Please fill in all required fields.";
+      toast.error("Validation Error", {
+        description: errorMessage,
+      });
+      const element = document.getElementsByName(firstField)[0];
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
     }
   };
 
