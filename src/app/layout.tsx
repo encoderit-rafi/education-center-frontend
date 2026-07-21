@@ -30,7 +30,6 @@ export default async function RootLayout({
   return (
     <html
       lang={locale}
-      // dir={locale === "ar" ? "rtl" : "ltr"}
       className={cn(
         "h-full antialiased",
         manrope.variable,
@@ -48,7 +47,7 @@ export default async function RootLayout({
         <NextIntlClientProvider messages={messages}>
           <Providers>
             <NavBar />
-            <main>{children}</main>
+            <main dir={locale === "ar" ? "rtl" : "ltr"}>{children}</main>
             <Footer />
             {/* <FloatingChatbot /> */}
             <SocialSupport />
