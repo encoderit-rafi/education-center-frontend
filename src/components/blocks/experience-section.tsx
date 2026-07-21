@@ -1,14 +1,17 @@
 "use client";
 import React from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
 import { Landmark, Building2, BookOpen, Laptop, Star, ArrowRight, Cpu } from "lucide-react";
 import { buttonVariants } from "../ui/button";
+import { cn } from "@/lib/utils";
 
 const ICONS = [Landmark, Building2, BookOpen, Cpu, Laptop, Star];
 
 export default function ExperienceSection() {
   const t = useTranslations("HomePage.ExperienceSection");
+  const locale = useLocale();
+  const isRtl = locale === "ar";
   const items = t.raw("items") as { title: string }[];
 
   return (
@@ -43,7 +46,12 @@ export default function ExperienceSection() {
             })}
           >
             {t("bookExam")}
-            <ArrowRight className="ms-2 size-4 group-hover:translate-x-1 rtl:group-hover:-translate-x-1 rtl:rotate-180 transition-transform" />
+            <ArrowRight
+              className={cn(
+                "ms-2 size-4 transition-transform group-hover:translate-x-1",
+                isRtl ? "rotate-180 group-hover:-translate-x-1" : "",
+              )}
+            />
           </Link>
         </div>
       </div>

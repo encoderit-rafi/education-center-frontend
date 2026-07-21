@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { buttonVariants } from "../ui/button";
 import { cn } from "@/lib/utils";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 const HERO_IMAGES = [
   "/images/about-us/Exterior_Building.jpg",
@@ -18,6 +18,8 @@ const HERO_IMAGES = [
 
 export default function HeroSection() {
   const t = useTranslations("HomePage.HeroSection");
+  const locale = useLocale();
+  const isRtl = locale === "ar";
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
@@ -75,23 +77,30 @@ export default function HeroSection() {
           <div className="max-w-md grid grid-cols-2 gap-3 pt-4 animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-500">
             <Link
               href="/book-exams"
+              dir={isRtl ? "rtl" : "ltr"}
               className={buttonVariants({
                 size: "lg",
-                className: "group py-2.5",
+                className: "group py-2.5 flex items-center justify-center gap-2",
               })}
             >
-              {t("bookExam")}
-              <ArrowRight className="max-md:hidden ms-2 size-4 group-hover:translate-x-1 rtl:group-hover:-translate-x-1 rtl:rotate-180 transition-transform" />
+              <span>{t("bookExam")}</span>
+              <ArrowRight
+                className={cn(
+                  "size-4 shrink-0 transition-transform group-hover:translate-x-1",
+                  isRtl ? "rotate-180 group-hover:-translate-x-1" : "",
+                )}
+              />
             </Link>
             <Link
               href="/exam-preparation-courses"
+              dir={isRtl ? "rtl" : "ltr"}
               className={buttonVariants({
                 variant: "light",
                 size: "lg",
-                className: "py-2.5",
+                className: "py-2.5 flex items-center justify-center gap-2",
               })}
             >
-              {t("ourCourses")}
+              <span>{t("ourCourses")}</span>
             </Link>
           </div>
         </div>

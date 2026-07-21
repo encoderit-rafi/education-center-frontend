@@ -75,7 +75,7 @@ export default function AppNavigation({ navigations, isLoading }: AppNavigationP
                   </NavigationMenuTrigger>
                   <NavigationMenuContent className="z-50 p-1 min-w-36 border bg-white text-primary rounded-xl shadow-2xl">
                     <ul className="flex flex-col gap-1">
-                       {isLoading && item.items.length === 0 ? (
+                      {isLoading && item.items.length === 0 ? (
                         <div className="p-4 flex flex-col gap-2 min-w-50">
                           <div className="h-4 bg-slate-100 animate-pulse rounded w-3/4"></div>
                           <div className="h-4 bg-slate-100 animate-pulse rounded w-1/2"></div>

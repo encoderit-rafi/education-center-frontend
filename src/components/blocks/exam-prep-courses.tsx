@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Badge } from "../ui/badge";
 import {
   BaseCard,
@@ -12,6 +12,7 @@ import {
   BaseCardTitle,
 } from "./cards/base-card";
 import { buttonVariants } from "../ui/button";
+import { cn } from "@/lib/utils";
 
 const COURSE_IMAGES = [
   "/images/hero/image-3.jpg",
@@ -37,6 +38,8 @@ const EXAMS = [
 
 export default function ExamPrepCourses() {
   const t = useTranslations("ExamPrepCourses");
+  const locale = useLocale();
+  const isRtl = locale === "ar";
 
   const courses = t.raw("courses") as {
     title: string;
@@ -113,14 +116,20 @@ export default function ExamPrepCourses() {
           </div>
           <Link
             href="/exam-preparation-courses"
+            dir={isRtl ? "rtl" : "ltr"}
             className={buttonVariants({
               variant: "default",
               className:
                 "group shadow-xl shadow-primary/30 hover:scale-105 active:scale-95 uppercase px-5",
             })}
           >
-            {t("viewAllCourses")}
-            <ArrowRight className="size-5 ms-2 transition-transform duration-300 group-hover:translate-x-1 rtl:group-hover:-translate-x-1 rtl:rotate-180" />
+            <span>{t("viewAllCourses")}</span>
+            <ArrowRight
+              className={cn(
+                "size-5 ms-2 transition-transform duration-300 group-hover:translate-x-1",
+                isRtl ? "rotate-180 group-hover:-translate-x-1" : "",
+              )}
+            />
           </Link>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { ComponentProps, PropsWithChildren } from "react";
 import { cn } from "@/lib/utils";
+import { useLocale } from "next-intl";
 const BaseCardTitle = ({
   children,
   className,
@@ -70,10 +71,13 @@ const BaseCardIcon = ({
   );
 };
 const BaseCardArrow = ({ className, ...props }: ComponentProps<"svg">) => {
+  const locale = useLocale();
+  const isRtl = locale === "ar";
   return (
     <ArrowRight
       className={cn(
-        "size-6 text-slate-300 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-primary rtl:rotate-180 rtl:group-hover:-translate-x-1",
+        "size-6 text-slate-300 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-primary",
+        isRtl && "rotate-180 group-hover:-translate-x-1",
         className,
       )}
       {...props}
