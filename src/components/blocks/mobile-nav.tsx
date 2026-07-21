@@ -30,7 +30,22 @@ export default function MobileNav() {
 
   const translateName = (name: string) => {
     try {
-      return tMenu.has(name) ? tMenu(name) : name;
+      if (!name) return "";
+      const trimmed = name.trim();
+      if (tMenu.has(trimmed)) return tMenu(trimmed);
+
+      const normalized = trimmed
+        .replace(/^Skill\b/i, "Skills")
+        .replace(/\s*\(\s*/g, " (")
+        .replace(/\s*\)/g, ")");
+      if (tMenu.has(normalized)) return tMenu(normalized);
+
+      const altNormalized = trimmed
+        .replace(/^Skills\b/i, "Skill")
+        .replace(/\s*\(/g, "(");
+      if (tMenu.has(altNormalized)) return tMenu(altNormalized);
+
+      return name;
     } catch {
       return name;
     }

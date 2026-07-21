@@ -3512,6 +3512,25 @@
       "enquiryButton": "Send an Enquiry"
     }
   },
+  "OtherExamsPage": {
+    "title": "Professional & ",
+    "titleAccent": "Other",
+    "titleEnd": " Exams",
+    "subtitle": "Beyond our core language tests, TEPTH delivers a range of professional certification and credentialing exams — including Pearson VUE and GRE. Contact us to confirm availability and current scheduling.",
+    "authorizedProvider": "Authorized Provider:",
+    "exams": {
+      "pearson-non-pte": {
+        "name": "Pearson Non-PTE Exams",
+        "provider": "Pearson VUE",
+        "description": "A broad portfolio of professional and academic exams delivered through Pearson VUE — including GED, GMAT, IT certifications, Professional, Healthcare, and Finance exams."
+      },
+      "gre": {
+        "name": "GRE",
+        "provider": "ETS",
+        "description": "Graduate Record Examinations (GRE) — standardized test widely used for graduate school admissions. Contact us to confirm availability and scheduling."
+      }
+    }
+  },
   "TestDatesPage": {
     "title": "Test ",
     "titleAccent": "Dates",

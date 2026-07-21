@@ -30,7 +30,22 @@ export default function AppNavigation({ navigations, isLoading }: AppNavigationP
 
   const translateName = (name: string) => {
     try {
-      return t.has(name) ? t(name) : name;
+      if (!name) return "";
+      const trimmed = name.trim();
+      if (t.has(trimmed)) return t(trimmed);
+
+      const normalized = trimmed
+        .replace(/^Skill\b/i, "Skills")
+        .replace(/\s*\(\s*/g, " (")
+        .replace(/\s*\)/g, ")");
+      if (t.has(normalized)) return t(normalized);
+
+      const altNormalized = trimmed
+        .replace(/^Skills\b/i, "Skill")
+        .replace(/\s*\(/g, "(");
+      if (t.has(altNormalized)) return t(altNormalized);
+
+      return name;
     } catch {
       return name;
     }

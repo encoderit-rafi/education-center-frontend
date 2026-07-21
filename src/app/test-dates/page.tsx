@@ -9,10 +9,26 @@ import {
   BaseCardArrow,
 } from "@/components/blocks/cards/base-card";
 import { TEST_DATES_CARDS_DATA } from "@/data";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
+
+const EXAM_ARABIC_NAMES: Record<string, string> = {
+  ielts: "آيلتس",
+  pte: "بي تي إي",
+  toefl: "توفل آي بي تي",
+  "toefl-ibt": "توفل آي بي تي",
+  cael: "كايل",
+  "celpip-general": "سيلبيب العام",
+  celpip: "سيلبيب",
+  "skill-for-english-selt": "سكيلز فور إنجلش (سيلت)",
+  oet: "أو إي تي",
+  gre: "جي آر إي",
+};
 
 export default function TestDatesPage() {
   const t = useTranslations("TestDatesPage");
+  const locale = useLocale();
+  const isRtl = locale === "ar";
+
   return (
     <main className="bg-white">
       {/* ── Header ── */}
@@ -42,7 +58,7 @@ export default function TestDatesPage() {
                   </div>
                   <div className="flex-1 flex flex-col space-y-2">
                     <BaseCardTitle className="uppercase tracking-tight text-lg leading-snug">
-                      {exam.name}
+                      {isRtl ? (EXAM_ARABIC_NAMES[exam.id] || exam.name) : exam.name}
                     </BaseCardTitle>
                     <BaseCardDescription className="mb-4">
                       {t.has(`descriptions.${exam.id}`) ? t(`descriptions.${exam.id}`) : exam.description}
@@ -57,3 +73,4 @@ export default function TestDatesPage() {
     </main>
   );
 }
+

@@ -12,6 +12,19 @@ import { cn } from "@/lib/utils";
 import { useBookingStore } from "@/store/booking-store";
 import { useTranslations, useLocale } from "next-intl";
 
+const EXAM_ARABIC_NAMES: Record<string, string> = {
+  ielts: "آيلتس",
+  pte: "بي تي إي",
+  toefl: "توفل آي بي تي",
+  "toefl-ibt": "توفل آي بي تي",
+  cael: "كايل",
+  "celpip-general": "سيلبيب العام",
+  celpip: "سيلبيب",
+  "skill-for-english-selt": "سكيلز فور إنجلش (سيلت)",
+  oet: "أو إي تي",
+  gre: "جي آر إي",
+};
+
 export default function TestDatesDetailPage() {
   const params = useParams();
   const router = useRouter();
@@ -58,6 +71,8 @@ export default function TestDatesDetailPage() {
     );
   }
 
+  const examDisplayName = isRtl ? (EXAM_ARABIC_NAMES[id] || examMetadata.name) : examMetadata.name;
+
   return (
     <main className="min-h-screen bg-background">
       {/* ── Header ── */}
@@ -68,11 +83,11 @@ export default function TestDatesDetailPage() {
               {isRtl ? (
                 <>
                   <span className="text-primary italic">{t("testDatesAccent")}</span>{" "}
-                  {examMetadata.name}
+                  {examDisplayName}
                 </>
               ) : (
                 <>
-                  {examMetadata.name}{" "}
+                  {examDisplayName}{" "}
                   <span className="text-primary italic">{t("testDatesAccent")}</span>
                 </>
               )}

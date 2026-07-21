@@ -1,85 +1,73 @@
-import BaseHeroSection from "@/components/base-hero-section";
-import {
-  BaseCard,
-  BaseCardIcon,
-  BaseCardTitle,
-  BaseCardDescription,
-  BaseCardArrow,
-} from "@/components/blocks/cards/base-card";
-import GradientBox from "@/components/blocks/gradient-box";
-import { buttonVariants } from "@/components/ui/button";
+"use client";
+
+import { useTranslations, useLocale } from "next-intl";
+import { BaseCardIcon } from "@/components/blocks/cards/base-card";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { cn } from "@/lib/utils";
 
-const OTHER_EXAMS = [
-  {
-    id: "pearson-non-pte",
-    initial: "P",
-    provider: "Pearson VUE",
-    name: "Pearson Non-PTE Exams",
-    description:
-      "A broad portfolio of professional and academic exams delivered through Pearson VUE — including GED, GMAT, IT certifications, Professional, Healthcare, and Finance exams.",
-  },
-  {
-    id: "gre",
-    initial: "G",
-    provider: "ETS",
-    name: "GRE",
-    description:
-      "Graduate Record Examinations (GRE) — standardized test widely used for graduate school admissions. Contact us to confirm availability and scheduling.",
-  },
-];
+const OTHER_EXAMS_KEYS = ["pearson-non-pte", "gre"] as const;
 
 export default function OtherExamsPage() {
+  const t = useTranslations("OtherExamsPage");
+  const locale = useLocale();
+  const isRtl = locale === "ar";
+
   return (
     <div className="min-h-screen">
-      {/* ── Hero ── */}
-
       {/* ── Exam Cards ── */}
       <div className="section-container base-px base-py">
         <h2 className="section-title text-center">
-          Professional &amp; <span>Other</span> Exams
+          {t("title")}
+          <span>{t("titleAccent")}</span>
+          {t("titleEnd")}
         </h2>
         <p className="mx-auto section-subtitle text-center">
-          Beyond our core language tests, TEPTH delivers a range of professional
-          certification and credentialing exams — including Pearson VUE and GRE.
-          Contact us to confirm availability and current scheduling.
+          {t("subtitle")}
         </p>
 
         <Accordion
           type="single"
           className="w-full max-w-4xl mx-auto mt-20 space-y-8 rounded-none border-none"
         >
-          {OTHER_EXAMS.map((exam, index) => (
+          {OTHER_EXAMS_KEYS.map((key, index) => (
             <AccordionItem
-              key={exam.id}
-              value={exam.id}
+              key={key}
+              value={key}
               className="bg-white! overflow-hidden rounded-none border-none"
             >
-              <AccordionTrigger className="bg-white rounded-md hover:no-underline  items-center">
-                <div className="flex items-center gap-3 text-left">
+              <AccordionTrigger className="bg-white rounded-md hover:no-underline items-center">
+                <div
+                  className={cn(
+                    "flex items-center gap-3",
+                    isRtl ? "text-right" : "text-left"
+                  )}
+                >
                   <BaseCardIcon className="rounded-full size-10 text-lg font-bold shrink-0">
                     {index + 1}
                   </BaseCardIcon>
                   <div className="space-y-1">
                     <h3 className="font-bold text-secondary text-lg tracking-tight">
-                      {exam.name}
+                      {t(`exams.${key}.name`)}
                     </h3>
                     <p className="text-xs text-primary font-semibold">
-                      Authorized Provider: {exam.provider}
+                      {t("authorizedProvider")} {t(`exams.${key}.provider`)}
                     </p>
                   </div>
                 </div>
               </AccordionTrigger>
               <AccordionContent>
-                {/* <div className="pl-18">
-                </div> */}
-                <p className="pl-12 pt-5 text-slate-600 leading-relaxed mb-8 max-w-2xl">
-                  {exam.description}
+                <p
+                  className={cn(
+                    "pt-5 text-slate-600 leading-relaxed mb-8 max-w-2xl",
+                    isRtl ? "pr-12" : "pl-12"
+                  )}
+                >
+                  {t(`exams.${key}.description`)}
                 </p>
               </AccordionContent>
             </AccordionItem>
@@ -89,3 +77,4 @@ export default function OtherExamsPage() {
     </div>
   );
 }
+

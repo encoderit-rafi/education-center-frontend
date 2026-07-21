@@ -80,7 +80,7 @@ function QuizResultContent() {
         <div className="bg-slate-50 rounded-xl p-6 border border-slate-100 text-start space-y-6">
           <div className="space-y-2">
             <p className="text-base font-bold text-slate-800 leading-snug">
-              {isRtl ? "شكرًا لك على إجراء كويز TEPTH للغة الإنجليزية!" : "Thank you for taking the TEPTH English Quiz!"}
+              {isRtl ? "شكرًا لك على إجراء كويز تيبث للغة الإنجليزية!" : "Thank you for taking the TEPTH English Quiz!"}
             </p>
             <p className="text-sm text-slate-600 leading-relaxed">
               {isRtl ? (
