@@ -480,6 +480,7 @@
         "desc": "Our guiding philosophy is to provide comprehensive, end-to-end testing and exam preparation solutions for candidates throughout the United Arab Emirates and the broader Arab World. We are a passionate team committed to supporting and facilitating students through every step of their testing journey."
       },
       "CoreValues": {
+        "badge": "Foundational Principles",
         "title": "Our Core Values",
         "subtitle": "Our work is driven by the following foundational principles:",
         "values": [
@@ -521,6 +522,7 @@
           "Skills for English (SELT)",
           "OET"
         ],
+        "visionBadge": "Vision & Innovation",
         "visionTitle": "Our Vision and Innovative Approach",
         "visionDesc1": "TEPTH aims to be the premier leader in testing and exam preparation, setting new industry benchmarks through our unrivaled services. We are driven by long-term goals designed to benefit both the educational sector and society at large.",
         "visionDesc2": "By combining innovative IT support with modern teaching methodologies, we have streamlined the learning process. Our advanced techniques are designed to help you study smarter, allowing you to achieve higher scores with greater efficiency. Whatever your certification goals may be, TEPTH is your ultimate, one-stop destination for exam success."
@@ -531,6 +533,8 @@
         "badge": "WHY CHOOSE US",
         "title": "Navigating Your Global Journey:",
         "titleAccent": "Study, Work, and Immigration",
+        "methodologyBadge": "Our Methodology",
+        "confidenceBadge": "Walk into Test Day with Confidence",
         "description": "Preparing to move abroad—whether to pursue higher education, advance your career, or immigrate—can often feel like an emotional rollercoaster. At the Exam Preparation & Testing House (TEPTH), we understand just how overwhelming the journey toward international success can be. That is why we are dedicated to helping you feel confident, psychologically grounded, and fully equipped for the global challenges ahead."
       },
       "NarrativeSection": {
@@ -970,6 +974,11 @@
     "contactBtn": "Contact Administration"
   },
   "EventsPage": {
+    "educationCenter": "EDUCATION CENTER",
+    "details": "Details",
+    "registerBtn": "Register",
+    "registerFor": "Register for",
+    "online": "Online",
     "title": "Upcoming",
     "titleAccent": "Events",
     "subtitle": "Empowering your academic journey through expert-led information sessions and immersive workshops.",
@@ -1082,8 +1091,10 @@
           ]
         }
       ],
-      "contactInfo": "Get in touch with us today to discuss your needs or tour our venues online. You may also schedule a visit to our venues. Give us a call at +97165531250 or drop us an email at info@tepth.org",
-      "contactTitle": "Get in Touch With Us"
+      "contactInfo": "Get in touch with us today to discuss your needs, tour our venues online, or schedule an in-person visit.",
+      "contactTitle": "Get in Touch With Us",
+      "callUs": "Call Us",
+      "emailUs": "Email Us"
     },
     "VendorPage": {
       "badge": "MUTUAL COLLABORATION",
@@ -1126,6 +1137,10 @@
       "dayOfTip": "Always double-check that you have your ID and all personal belongings before leaving the testing center."
     },
     "InstitutionsPage": {
+      "liveProctoring": "Live Proctoring",
+      "capabilitiesLabel": "Capabilities",
+      "flexibleDeliveryLabel": "Flexible Delivery",
+      "qualityAssuranceLabel": "Quality Assurance",
       "heroTitle": "Professional Exam Proctoring",
       "heroTitleAccent": "by TEPTH",
       "heroDescription": "TEPTH delivers expert exam proctoring solutions designed to safeguard the fairness, security, and integrity of both remote and in-person assessments. We partner with schools, universities, certification boards, and training organizations to provide reliable, professionally supervised testing environments. Our goal is to uphold academic honesty while maintaining accessibility and convenience for test-takers.",
@@ -1444,7 +1459,11 @@
           "title": "Seating Capacity",
           "description": "We can host up to 28 candidates per exam session, utilizing 23 workstations across two computer labs and an additional 5-seat classroom."
         }
-      ]
+      ],
+      "contactInfo": "Get in touch with us today to discuss your needs, tour our venues online, or schedule an in-person visit. Give us a call at <phone>+97165531250</phone> or email us at <email>info@tepth.org</email>.",
+      "contactTitle": "Get in Touch With Us",
+      "callUs": "Call Us",
+      "emailUs": "Email Us"
     }
   },
   "PrivacyPolicyPage": {
@@ -1528,6 +1547,14 @@
     }
   },
   "SpecialAccommodationPage": {
+    "candidateSupportBadge": "Candidate Support",
+    "eligibilityLabel": "Eligibility",
+    "ourFacilityBadge": "Our Facility",
+    "includedLabel": "Included",
+    "stepByStepBadge": "Step by Step",
+    "pleaseNoteLabel": "Please Note",
+    "callUsLabel": "Call us",
+    "emailUsLabel": "Email us",
     "title": "Exam Special Accommodations",
     "titleAccent": "Fair Access for Every Candidate",
     "description": "At TEPTH, we believe that every candidate deserves an equal opportunity to perform at their best. We are proud to offer a testing facility fully equipped to support candidates with special requirements, ensuring your exam experience is accessible, comfortable, and fully supported.",
@@ -3235,6 +3262,7 @@
       "subtitle": "Need a targeted boost? Our high-intensity, topic-focused workshops are engineered to deliver immediate results in specific exam sections.",
       "viewDetails": "View Details",
       "requirementsTitle": "During the workshop, candidates work on:",
+      "calloutText": "Our intensive workshops at <tepth>TEPTH – The Exam Preparation & Testing House</tepth> help you quickly understand the exam format, master key strategies, and improve your performance in <course>{courseName}</course> — all in focused sessions designed for busy candidates.",
       "bestForTitle": "This workshop is particularly suitable for candidates who:",
       "bestForFallback": "Anyone looking to sharpen their skills in a focused, intensive session.",
       "durationLabel": "Duration",
@@ -3487,7 +3515,51 @@
   "TestDatesPage": {
     "title": "Test ",
     "titleAccent": "Dates",
-    "subtitle": "Choose an exam to view upcoming available sessions, venues, and technical formats across our testing centers."
+    "subtitle": "Choose an exam to view upcoming available sessions, venues, and technical formats across our testing centers.",
+    "testDatesAccent": "Test Dates",
+    "regularWeeklySessions": "Regular weekly test sessions",
+    "testingDays": "Testing Days",
+    "availableTimeSlots": "Available Time Slots",
+    "morningSession": "Morning Session (AM)",
+    "afternoonSession": "Afternoon Session (PM)",
+    "amPmSessions": "AM / PM Sessions",
+    "sundayOnly": "Sunday Only",
+    "wednesday": "Wednesday",
+    "saturday": "Saturday",
+    "monTueWed": "Monday, Tuesday & Wednesday",
+    "satTueWed": "Sat, Tue, Wed",
+    "sunday": "Sunday",
+    "monday": "Monday",
+    "thursday": "Thursday",
+    "pteAcademicCoreUkvi": "PTE Academic / Core / UKVI",
+    "pteHome": "PTE Home (A1, A2, B1)",
+    "timesVaryNotice": "Times may vary slightly based on center capacity and public holidays.",
+    "bookNow": "Book Now",
+    "selectDateNotice": "* Please select an available date on the calendar to book.",
+    "examNotFound": "Exam not found",
+    "backToTestDates": "Back to all test dates",
+    "ieltsSchedule": "IELTS Weekly Schedule",
+    "toeflSchedule": "TOEFL iBT Weekly Schedule",
+    "seltSchedule": "Skills for English (SELT) Schedule",
+    "pteSchedule": "PTE Weekly Schedule",
+    "caelTitle": "CAEL Information",
+    "caelDesc": "The CAEL (Canadian Academic English Language) Test is a computer-based test designed to measure the English proficiency of students planning to study at Canadian universities and colleges. Unlike general English tests, CAEL simulates the language use required in a first-year Canadian post-secondary environment, involving tasks like listening to a lecture or writing an essay based on academic readings. The CAEL test is administered at TEPTH Dubai not at our centre in Sharjah. To see the available test dates and book the test directly with the exam provider.",
+    "caelNoticeTitle": "Important Notice:",
+    "caelNoticeText": "The CAEL test is administered at TEPTH Dubai, not at our Sharjah centre.",
+    "celpipTitle": "CELPIP General Information",
+    "celpipDesc": "The CELPIP-General (Canadian English Language Proficiency Index Program) is a completely computer-delivered English test used primarily for permanent residence applications in Canada and Australia. It assesses your ability to use English in everyday, real-world situations through four key modules: Listening, Reading, Writing, and Speaking. The CELPIP General test is administered at TEPTH Dubai not at our centre in Sharjah. To see the available test dates and book the test directly with the exam provider.",
+    "celpipNoticeTitle": "Important Notice:",
+    "celpipNoticeText": "The CELPIP General test is administered at TEPTH Dubai, not at our Sharjah centre.",
+    "questionsContact": "Questions? Call +97165531250 or email info@tepth.org",
+    "descriptions": {
+      "ielts": "Check upcoming IELTS test dates for Academic and General Training modules in Sharjah and across the UAE.",
+      "pte": "View real-time availability for PTE Academic and PTE UKVI tests. Fast results and frequent testing windows.",
+      "toefl": "Find available TOEFL iBT test sessions. Select your preferred date and secure your seat for the internet-based test.",
+      "cael": "Find CAEL test dates for study and professional registration in Canada. Choose from our available sessions.",
+      "celpip-general": "Upcoming CELPIP General test dates for Canadian immigration and citizenship applications.",
+      "skill-for-english-selt": "Secure English Language Test (SELT) dates for UK visa applications. View upcoming speaking, listening, reading, and writing slots.",
+      "oet": "Check available OET test dates for healthcare professionals. Secure your seat for Medicine, Nursing, and other healthcare disciplines."
+    }
   },
   "DownloadFormsPage": {
     "title": "Download ",
@@ -3843,6 +3915,7 @@
       "cityPlaceholder": "Dubai",
       "cityRequired": "Emirate/City is required",
       "phoneNumber": "Phone Number",
+      "phoneNumberPlaceholder": "Enter phone number",
       "phoneNumberRequired": "Phone Number is required",
       "startQuiz": "Start the quiz",
       "answerRequired": "Please answer this question",
@@ -3895,6 +3968,7 @@
     "city": "Emirate / City",
     "cityPlaceholder": "Dubai",
     "phone": "Phone Number",
+    "phonePlaceholder": "Enter phone number",
     "contactMethod": "Preferred Contact Method",
     "selectContactMethod": "Select contact method",
     "contactMethods": {
@@ -3945,6 +4019,7 @@
     }
   },
   "PhoneInput": {
+    "placeholder": "Enter phone number",
     "searchPlaceholder": "Search country...",
     "emptyMessage": "No country found."
   },
@@ -4075,7 +4150,13 @@
       "enterIdNumber": "Enter your ID number",
       "enterPassportNumber": "Enter your Passport number",
       "selectIdExpiryDate": "Select ID expiry date",
-      "selectPassportExpiryDate": "Select Passport expiry date"
+      "selectPassportExpiryDate": "Select Passport expiry date",
+      "selectCountry": "-Select Country-",
+      "selectLanguage": "-Select Language-",
+      "selectOne": "Select one...",
+      "selectLevel": "-Select Level-",
+      "selectSector": "-Select Sector-",
+      "selectReason": "-Select Reason-"
     },
     "IELTS": {
       "registrationTitle": "IELTS {module} Registration",
@@ -4110,6 +4191,8 @@
       "selectSector": "-Select Sector-",
       "selectReason": "-Select Reason-",
       "selectCountry": "-Select Country-",
+      "selectLanguage": "-Select Language-",
+      "selectOne": "Select one...",
       "pleaseSpecifyLanguage": "Please specify your language",
       "pleaseSpecifyOccupationLevel": "Please specify your occupation level",
       "pleaseSpecifyOccupationSector": "Please specify your occupation sector",
@@ -4170,6 +4253,7 @@
     },
     "PTE": {
       "registrationTitle": "PTE {module} Registration",
+      "planningCountryQuestion": "Which country or region are you planning to study, work or settle in? If you have not yet decided please select your preferred destination.",
       "examName": "PTE {module} Exam",
       "haveYouTakenBefore": "Have you taken PTE {module} before?",
       "wasItLessThan2Years": "Was it less than 2 years?",

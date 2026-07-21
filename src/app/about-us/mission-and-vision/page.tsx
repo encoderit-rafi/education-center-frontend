@@ -69,7 +69,7 @@ export default function VisionAndMission() {
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Vision Box */}
           <div className="rounded-3xl border border-slate-100 bg-slate-50/50 p-8 lg:p-12 hover:bg-white hover:border-slate-200 hover:shadow-md transition-all duration-300 space-y-6">
-            <h2 className="text-2xl lg:text-3xl font-black text-slate-900 tracking-tight font-headline border-l-4 border-[#A11D1D] pl-4">
+            <h2 className="text-2xl lg:text-3xl font-black text-slate-900 tracking-tight font-headline border-s-4 border-[#A11D1D] ps-4">
               {t("Vision.title")}
             </h2>
             <p className="text-slate-650 text-sm leading-relaxed text-justify font-medium">
@@ -79,7 +79,7 @@ export default function VisionAndMission() {
 
           {/* Mission Box */}
           <div className="rounded-3xl border border-slate-100 bg-slate-50/50 p-8 lg:p-12 hover:bg-white hover:border-slate-200 hover:shadow-md transition-all duration-300 space-y-6">
-            <h2 className="text-2xl lg:text-3xl font-black text-slate-900 tracking-tight font-headline border-l-4 border-[#A11D1D] pl-4">
+            <h2 className="text-2xl lg:text-3xl font-black text-slate-900 tracking-tight font-headline border-s-4 border-[#A11D1D] ps-4">
               {t("Mission.title")}
             </h2>
             <p className="text-slate-650 text-sm leading-relaxed text-justify font-medium">
@@ -93,7 +93,7 @@ export default function VisionAndMission() {
         <div className="space-y-12">
           <div className="max-w-3xl">
             <span className="text-[#A11D1D] font-extrabold uppercase tracking-[0.25em] text-xs">
-              Foundational Principles
+              {t("CoreValues.badge")}
             </span>
             <h2 className="text-3xl lg:text-4xl font-extrabold text-slate-900 mt-2 tracking-tight font-headline">
               {t("CoreValues.title")}

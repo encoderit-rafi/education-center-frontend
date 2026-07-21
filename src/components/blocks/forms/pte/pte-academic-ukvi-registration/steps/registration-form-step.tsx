@@ -425,7 +425,7 @@ export function RegistrationFormStep({
             <FieldContent>
               <SearchableDropdown
                 options={languages}
-                placeholder="-Select Language-"
+                placeholder={t("selectLanguage")}
                 value={formData.homeLanguage}
                 onChange={(val) => {
                   setValue("homeLanguage", val);
@@ -461,7 +461,7 @@ export function RegistrationFormStep({
                   { label: "Not studying or working", value: "Not studying or working" },
                   { label: "Other - specify below", value: "Other" },
                 ]}
-                placeholder="Select one..."
+                placeholder={t("selectOne")}
                 value={formData.currentSituation}
                 onChange={(val) => {
                   setValue("currentSituation", val);
@@ -500,7 +500,7 @@ export function RegistrationFormStep({
                   { label: "Minister of Religion visa (Tier 2)", value: "minister_religion_visa" },
                   { label: "Other - specify below", value: "other" },
                 ]}
-                placeholder="Select one..."
+                placeholder={t("selectOne")}
                 value={formData.reasonForTaking}
                 onChange={(val) => {
                   setValue("reasonForTaking", val);
@@ -549,7 +549,7 @@ export function RegistrationFormStep({
                   { label: "University or College - specify below", value: "university_college" },
                   { label: "Other - specify below", value: "Other" },
                 ]}
-                placeholder="Select one..."
+                placeholder={t("selectOne")}
                 value={formData.referralSource}
                 onChange={(val) => {
                   setValue("referralSource", val);
@@ -592,7 +592,7 @@ export function RegistrationFormStep({
                     { label: "English Language Course", value: "english_language" },
                     { label: "Other - specify below", value: "other" },
                   ]}
-                  placeholder="Select one..."
+                  placeholder={t("selectOne")}
                   value={formData.studyLevel}
                   onChange={(val) => {
                     setValue("studyLevel", val);
@@ -646,7 +646,7 @@ export function RegistrationFormStep({
                     { label: "Tourism and Hospitality Management", value: "tourism_hospitality" },
                     { label: "Other - specify below", value: "other" },
                   ]}
-                  placeholder="Select one..."
+                  placeholder={t("selectOne")}
                   value={formData.fieldOfStudy}
                   onChange={(val) => {
                     setValue("fieldOfStudy", val);
@@ -700,7 +700,7 @@ export function RegistrationFormStep({
                     { label: "Wholesale Trade", value: "Wholesale Trade" },
                     { label: "Other - Specify below", value: "Other" },
                   ]}
-                  placeholder="Select one..."
+                  placeholder={t("selectSector")}
                   value={formData.occupationSector}
                   onChange={(val) => {
                     setValue("occupationSector", val);

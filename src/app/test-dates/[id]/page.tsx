@@ -10,11 +10,15 @@ import CaelInfo from "@/components/blocks/cael-info";
 import CelpipInfo from "@/components/blocks/celpip-info";
 import { cn } from "@/lib/utils";
 import { useBookingStore } from "@/store/booking-store";
+import { useTranslations, useLocale } from "next-intl";
 
 export default function TestDatesDetailPage() {
   const params = useParams();
   const router = useRouter();
   const id = params.id as string;
+  const t = useTranslations("TestDatesPage");
+  const locale = useLocale();
+  const isRtl = locale === "ar";
 
   const selectedDate = useBookingStore((state) => state.selectedDate);
   const setSelectedDate = useBookingStore((state) => state.setSelectedDate);
@@ -31,6 +35,13 @@ export default function TestDatesDetailPage() {
     }
   };
 
+  const formatSlotTime = (timeStr: string) => {
+    if (isRtl) {
+      return timeStr.replace("AM", "صباحاً").replace("PM", "مساءً");
+    }
+    return timeStr;
+  };
+
   // Find the exam metadata from our cards data
   const examMetadata = TEST_DATES_CARDS_DATA.find((e) => e.id === id);
 
@@ -38,9 +49,9 @@ export default function TestDatesDetailPage() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center space-y-4">
-          <h1 className="text-2xl font-bold">Exam not found</h1>
+          <h1 className="text-2xl font-bold">{t("examNotFound")}</h1>
           <Link href="/test-dates" className="text-primary hover:underline">
-            Back to all test dates
+            {t("backToTestDates")}
           </Link>
         </div>
       </div>
@@ -54,11 +65,20 @@ export default function TestDatesDetailPage() {
         <div className="max-w-6xl mx-auto space-y-5">
           <div className="space-y-3">
             <h1 className="text-4xl font-headline font-black text-secondary tracking-tight leading-tight">
-              {examMetadata.name}{" "}
-              <span className="text-primary italic">Test Dates</span>
+              {isRtl ? (
+                <>
+                  <span className="text-primary italic">{t("testDatesAccent")}</span>{" "}
+                  {examMetadata.name}
+                </>
+              ) : (
+                <>
+                  {examMetadata.name}{" "}
+                  <span className="text-primary italic">{t("testDatesAccent")}</span>
+                </>
+              )}
             </h1>
             <p className="text-slate-500 text-base leading-relaxed font-light max-w-2xl">
-              {examMetadata.description}
+              {t.has(`descriptions.${id}`) ? t(`descriptions.${id}`) : examMetadata.description}
             </p>
           </div>
           <div
@@ -83,10 +103,10 @@ export default function TestDatesDetailPage() {
                     </div>
                     <div>
                       <h3 className="text-sm font-bold text-slate-800">
-                        IELTS Weekly Schedule
+                        {t("ieltsSchedule")}
                       </h3>
                       <p className="text-[10px] text-slate-400">
-                        Regular weekly test sessions
+                        {t("regularWeeklySessions")}
                       </p>
                     </div>
                   </div>
@@ -95,11 +115,11 @@ export default function TestDatesDetailPage() {
                     <div className="bg-slate-50/60 rounded-xl p-4 border border-slate-100/80 space-y-3">
                       <div className="flex items-center gap-2 text-xs font-bold text-slate-700">
                         <span className="w-1.5 h-1.5 bg-primary rounded-full" />
-                        Testing Days
+                        {t("testingDays")}
                       </div>
-                      <div className="flex flex-wrap gap-2 pl-3.5">
+                      <div className="flex flex-wrap gap-2 rtl:pr-3.5 ltr:pl-3.5">
                         <span className="text-xs font-semibold text-primary bg-primary/5 border border-primary/10 rounded-md px-3 py-1 shadow-xs">
-                          Sunday Only
+                          {t("sundayOnly")}
                         </span>
                       </div>
                     </div>
@@ -107,14 +127,14 @@ export default function TestDatesDetailPage() {
                     <div className="bg-slate-50/60 rounded-xl p-4 border border-slate-100/80 space-y-3">
                       <div className="flex items-center gap-2 text-xs font-bold text-slate-700">
                         <Clock className="w-4 h-4 text-primary" />
-                        Available Time Slots
+                        {t("availableTimeSlots")}
                       </div>
-                      <div className="flex flex-wrap gap-2 pl-5">
+                      <div className="flex flex-wrap gap-2 rtl:pr-5 ltr:pl-5">
                         <span className="text-[11px] font-semibold text-slate-600 bg-white border border-slate-200 rounded-md px-2.5 py-1 shadow-xs hover:border-primary/30 hover:text-primary hover:bg-red-50/10 transition-all duration-200 cursor-default">
-                          Morning Session (AM)
+                          {t("morningSession")}
                         </span>
                         <span className="text-[11px] font-semibold text-slate-600 bg-white border border-slate-200 rounded-md px-2.5 py-1 shadow-xs hover:border-primary/30 hover:text-primary hover:bg-red-50/10 transition-all duration-200 cursor-default">
-                          Afternoon Session (PM)
+                          {t("afternoonSession")}
                         </span>
                       </div>
                     </div>
@@ -129,10 +149,10 @@ export default function TestDatesDetailPage() {
                     </div>
                     <div>
                       <h3 className="text-sm font-bold text-slate-800">
-                        TOEFL iBT Weekly Schedule
+                        {t("toeflSchedule")}
                       </h3>
                       <p className="text-[10px] text-slate-400">
-                        Regular weekly test sessions
+                        {t("regularWeeklySessions")}
                       </p>
                     </div>
                   </div>
@@ -141,14 +161,14 @@ export default function TestDatesDetailPage() {
                     <div className="bg-slate-50/60 rounded-xl p-4 border border-slate-100/80 space-y-3">
                       <div className="flex items-center gap-2 text-xs font-bold text-slate-700">
                         <span className="w-1.5 h-1.5 bg-primary rounded-full" />
-                        Testing Days
+                        {t("testingDays")}
                       </div>
-                      <div className="flex flex-wrap gap-2 pl-3.5">
+                      <div className="flex flex-wrap gap-2 rtl:pr-3.5 ltr:pl-3.5">
                         <span className="text-xs font-semibold text-primary bg-primary/5 border border-primary/10 rounded-md px-3 py-1 shadow-xs">
-                          Wednesday
+                          {t("wednesday")}
                         </span>
                         <span className="text-xs font-semibold text-primary bg-primary/5 border border-primary/10 rounded-md px-3 py-1 shadow-xs">
-                          Saturday
+                          {t("saturday")}
                         </span>
                       </div>
                     </div>
@@ -156,11 +176,11 @@ export default function TestDatesDetailPage() {
                     <div className="bg-slate-50/60 rounded-xl p-4 border border-slate-100/80 space-y-3">
                       <div className="flex items-center gap-2 text-xs font-bold text-slate-700">
                         <Clock className="w-4 h-4 text-primary" />
-                        Available Time Slots
+                        {t("availableTimeSlots")}
                       </div>
-                      <div className="flex flex-wrap gap-2 pl-5">
+                      <div className="flex flex-wrap gap-2 rtl:pr-5 ltr:pl-5">
                         <span className="text-[11px] font-semibold text-slate-600 bg-white border border-slate-200 rounded-md px-2.5 py-1 shadow-xs hover:border-primary/30 hover:text-primary hover:bg-red-50/10 transition-all duration-200 cursor-default">
-                          AM / PM Sessions
+                          {t("amPmSessions")}
                         </span>
                       </div>
                     </div>
@@ -175,10 +195,10 @@ export default function TestDatesDetailPage() {
                     </div>
                     <div>
                       <h3 className="text-sm font-bold text-slate-800">
-                        Skills for English (SELT) Schedule
+                        {t("seltSchedule")}
                       </h3>
                       <p className="text-[10px] text-slate-400">
-                        Regular weekly test sessions
+                        {t("regularWeeklySessions")}
                       </p>
                     </div>
                   </div>
@@ -187,11 +207,11 @@ export default function TestDatesDetailPage() {
                     <div className="bg-slate-50/60 rounded-xl p-4 border border-slate-100/80 space-y-3">
                       <div className="flex items-center gap-2 text-xs font-bold text-slate-700">
                         <span className="w-1.5 h-1.5 bg-primary rounded-full" />
-                        Testing Days
+                        {t("testingDays")}
                       </div>
-                      <div className="flex flex-wrap gap-2 pl-3.5">
+                      <div className="flex flex-wrap gap-2 rtl:pr-3.5 ltr:pl-3.5">
                         <span className="text-xs font-semibold text-primary bg-primary/5 border border-primary/10 rounded-md px-3 py-1 shadow-xs">
-                          Monday, Tuesday & Wednesday
+                          {t("monTueWed")}
                         </span>
                       </div>
                     </div>
@@ -199,17 +219,17 @@ export default function TestDatesDetailPage() {
                     <div className="bg-slate-50/60 rounded-xl p-4 border border-slate-100/80 space-y-3">
                       <div className="flex items-center gap-2 text-xs font-bold text-slate-700">
                         <Clock className="w-4 h-4 text-primary" />
-                        Available Time Slots
+                        {t("availableTimeSlots")}
                       </div>
-                      <div className="flex flex-wrap gap-2 pl-5">
+                      <div className="flex flex-wrap gap-2 rtl:pr-5 ltr:pl-5">
                         <span className="text-[11px] font-semibold text-slate-600 bg-white border border-slate-200 rounded-md px-2.5 py-1 shadow-xs hover:border-primary/30 hover:text-primary hover:bg-red-50/10 transition-all duration-200 cursor-default">
-                          10:00 AM
+                          {formatSlotTime("10:00 AM")}
                         </span>
                         <span className="text-[11px] font-semibold text-slate-600 bg-white border border-slate-200 rounded-md px-2.5 py-1 shadow-xs hover:border-primary/30 hover:text-primary hover:bg-red-50/10 transition-all duration-200 cursor-default">
-                          01:30 PM
+                          {formatSlotTime("01:30 PM")}
                         </span>
                         <span className="text-[11px] font-semibold text-slate-600 bg-white border border-slate-200 rounded-md px-2.5 py-1 shadow-xs hover:border-primary/30 hover:text-primary hover:bg-red-50/10 transition-all duration-200 cursor-default">
-                          05:30 PM
+                          {formatSlotTime("05:30 PM")}
                         </span>
                       </div>
                     </div>
@@ -224,10 +244,10 @@ export default function TestDatesDetailPage() {
                     </div>
                     <div>
                       <h3 className="text-sm font-bold text-slate-800">
-                        PTE Weekly Schedule
+                        {t("pteSchedule")}
                       </h3>
                       <p className="text-[10px] text-slate-400">
-                        Regular weekly test sessions
+                        {t("regularWeeklySessions")}
                       </p>
                     </div>
                   </div>
@@ -237,7 +257,7 @@ export default function TestDatesDetailPage() {
                     <div className="bg-slate-50/60 rounded-xl p-5 border border-slate-100/80 space-y-4">
                       <div className="pb-2 border-b border-slate-200/60">
                         <h4 className="text-xs font-black uppercase tracking-wider text-primary">
-                          PTE Academic / Core / UKVI
+                          {t("pteAcademicCoreUkvi")}
                         </h4>
                       </div>
                       <div className="space-y-4">
@@ -245,17 +265,17 @@ export default function TestDatesDetailPage() {
                           <div className="flex items-center gap-2 mt-1">
                             <span className="w-1.5 h-1.5 bg-primary/60 rounded-full shrink-0" />
                             <span className="text-xs font-bold text-slate-700">
-                              Sat, Tue, Wed
+                              {t("satTueWed")}
                             </span>
                           </div>
                           <div className="flex flex-wrap gap-1.5 justify-start sm:justify-end max-w-md">
                             {["10:00 AM", "12:45 PM", "3:30 PM", "6:15 PM"].map(
-                              (t) => (
+                              (tSlot) => (
                                 <span
-                                  key={t}
+                                  key={tSlot}
                                   className="text-[11px] font-semibold text-slate-600 bg-white border border-slate-200 rounded-md px-2 py-0.5 shadow-xs hover:border-primary/30 hover:text-primary hover:bg-red-50/10 transition-all duration-200 cursor-default"
                                 >
-                                  {t}
+                                  {formatSlotTime(tSlot)}
                                 </span>
                               ),
                             )}
@@ -266,16 +286,16 @@ export default function TestDatesDetailPage() {
                           <div className="flex items-center gap-2 mt-1">
                             <span className="w-1.5 h-1.5 bg-primary/60 rounded-full shrink-0" />
                             <span className="text-xs font-bold text-slate-700">
-                              Sunday
+                              {t("sunday")}
                             </span>
                           </div>
                           <div className="flex flex-wrap gap-1.5 justify-start sm:justify-end max-w-md">
-                            {["6:15 PM"].map((t) => (
+                            {["6:15 PM"].map((tSlot) => (
                               <span
-                                key={t}
+                                key={tSlot}
                                 className="text-[11px] font-semibold text-slate-600 bg-white border border-slate-200 rounded-md px-2 py-0.5 shadow-xs hover:border-primary/30 hover:text-primary hover:bg-red-50/10 transition-all duration-200 cursor-default"
                               >
-                                {t}
+                                {formatSlotTime(tSlot)}
                               </span>
                             ))}
                           </div>
@@ -285,17 +305,17 @@ export default function TestDatesDetailPage() {
                           <div className="flex items-center gap-2 mt-1">
                             <span className="w-1.5 h-1.5 bg-primary/60 rounded-full shrink-0" />
                             <span className="text-xs font-bold text-slate-700">
-                              Monday
+                              {t("monday")}
                             </span>
                           </div>
                           <div className="flex flex-wrap gap-1.5 justify-start sm:justify-end max-w-md">
                             {["10:00 AM", "1:00 PM", "3:30 PM", "6:15 PM"].map(
-                              (t) => (
+                              (tSlot) => (
                                 <span
-                                  key={t}
+                                  key={tSlot}
                                   className="text-[11px] font-semibold text-slate-600 bg-white border border-slate-200 rounded-md px-2 py-0.5 shadow-xs hover:border-primary/30 hover:text-primary hover:bg-red-50/10 transition-all duration-200 cursor-default"
                                 >
-                                  {t}
+                                  {formatSlotTime(tSlot)}
                                 </span>
                               ),
                             )}
@@ -306,16 +326,16 @@ export default function TestDatesDetailPage() {
                           <div className="flex items-center gap-2 mt-1">
                             <span className="w-1.5 h-1.5 bg-primary/60 rounded-full shrink-0" />
                             <span className="text-xs font-bold text-slate-700">
-                              Thursday
+                              {t("thursday")}
                             </span>
                           </div>
                           <div className="flex flex-wrap gap-1.5 justify-start sm:justify-end max-w-md">
-                            {["3:30 PM", "6:15 PM"].map((t) => (
+                            {["3:30 PM", "6:15 PM"].map((tSlot) => (
                               <span
-                                key={t}
+                                key={tSlot}
                                 className="text-[11px] font-semibold text-slate-600 bg-white border border-slate-200 rounded-md px-2 py-0.5 shadow-xs hover:border-primary/30 hover:text-primary hover:bg-red-50/10 transition-all duration-200 cursor-default"
                               >
-                                {t}
+                                {formatSlotTime(tSlot)}
                               </span>
                             ))}
                           </div>
@@ -328,7 +348,7 @@ export default function TestDatesDetailPage() {
                       <div className="space-y-4">
                         <div className="pb-2 border-b border-slate-200/60">
                           <h4 className="text-xs font-black uppercase tracking-wider text-primary">
-                            PTE Home (A1, A2, B1)
+                            {t("pteHome")}
                           </h4>
                         </div>
                         <div className="space-y-4">
@@ -336,16 +356,16 @@ export default function TestDatesDetailPage() {
                             <div className="flex items-center gap-2 mt-1">
                               <span className="w-1.5 h-1.5 bg-primary/60 rounded-full shrink-0" />
                               <span className="text-xs font-bold text-slate-700">
-                                Monday
+                                {t("monday")}
                               </span>
                             </div>
                             <div className="flex flex-wrap gap-1.5 justify-start sm:justify-end max-w-md">
-                              {["1:15 PM"].map((t) => (
+                              {["1:15 PM"].map((tSlot) => (
                                 <span
-                                  key={t}
+                                  key={tSlot}
                                   className="text-[11px] font-semibold text-slate-600 bg-white border border-slate-200 rounded-md px-2 py-0.5 shadow-xs hover:border-primary/30 hover:text-primary hover:bg-red-50/10 transition-all duration-200 cursor-default"
                                 >
-                                  {t}
+                                  {formatSlotTime(tSlot)}
                                 </span>
                               ))}
                             </div>
@@ -356,8 +376,7 @@ export default function TestDatesDetailPage() {
                       <div className="pt-4 mt-auto">
                         <p className="text-[12px] flex items-center gap-1.5 bg-white border border-slate-100 rounded-lg p-2.5 shadow-xs">
                           <span className="w-1.5 h-1.5 rounded-full text-black" />
-                          Times may vary slightly based on center capacity and
-                          public holidays.
+                          {t("timesVaryNotice")}
                         </p>
                       </div>
                     </div>
@@ -419,13 +438,12 @@ export default function TestDatesDetailPage() {
                           : "bg-slate-300 cursor-not-allowed opacity-80",
                       )}
                     >
-                      Book Now
-                      <ArrowRight className="size-4" />
+                      {t("bookNow")}
+                      <ArrowRight className={cn("size-4", isRtl && "rotate-180")} />
                     </button>
                     {!selectedDate && (
                       <p className="text-xs text-slate-400">
-                        * Please select an available date on the calendar to
-                        book.
+                        {t("selectDateNotice")}
                       </p>
                     )}
                   </div>

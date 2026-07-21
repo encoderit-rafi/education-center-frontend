@@ -443,6 +443,7 @@ export default function TestYourEnglishForm({ onSuccess }: { onSuccess?: (val: b
                           value={field.value}
                           onChange={field.onChange}
                           defaultCountry="AE"
+                          placeholder={t("phonePlaceholder")}
                           className="h-10 border-none focus-within:ring-0"
                         />
                       )}

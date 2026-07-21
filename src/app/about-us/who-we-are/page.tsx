@@ -80,7 +80,7 @@ export default function WhoWeAre() {
         <div className="grid lg:grid-cols-12 gap-12 items-start">
           {/* Left Block */}
           <div className="lg:col-span-6 space-y-6">
-            <h3 className="text-2xl lg:text-3xl font-extrabold text-slate-900 tracking-tight font-headline border-l-4 border-[#A11D1D] pl-4">
+            <h3 className="text-2xl lg:text-3xl font-extrabold text-slate-900 tracking-tight font-headline border-s-4 border-[#A11D1D] ps-4">
               {t("NarrativeSection.expertTitle")}
             </h3>
             <p className="text-slate-655 text-sm leading-relaxed text-justify font-medium">
@@ -116,7 +116,7 @@ export default function WhoWeAre() {
           
           <div className="relative z-10 max-w-4xl mx-auto space-y-6">
             <span className="text-[#A11D1D] font-extrabold uppercase tracking-[0.25em] text-xs">
-              Vision & Innovation
+              {t("NarrativeSection.visionBadge")}
             </span>
             <h3 className="text-2xl lg:text-3xl font-black text-slate-900 tracking-tight font-headline">
               {t("NarrativeSection.visionTitle")}

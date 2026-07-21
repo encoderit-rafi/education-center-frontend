@@ -61,7 +61,7 @@ export default function InstitutionsPage() {
             <div className="lg:col-span-5 flex justify-center">
               <div className="w-full max-w-112.5 rounded-3xl overflow-hidden relative group/image">
                 <div className="absolute top-4 right-4 bg-[#A11D1D]/90 backdrop-blur-md text-white text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full shadow-lg z-10 flex items-center gap-1.5 border border-white/20 select-none">
-                  <p>Live Proctoring</p>
+                  <p>{t("liveProctoring")}</p>
                 </div>
                 <Image
                   className="w-full h-auto rounded-2xl object-cover block transition-transform duration-500 group-hover/image:scale-105"
@@ -82,7 +82,7 @@ export default function InstitutionsPage() {
         <section className="space-y-10">
           <div className="max-w-3xl">
             <span className="text-[#A11D1D] font-extrabold uppercase tracking-[0.25em] text-xs">
-              Capabilities
+              {t("capabilitiesLabel")}
             </span>
             <h2 className="text-3xl lg:text-4xl font-extrabold text-slate-900 mt-2 tracking-tight font-headline">
               {t("servicesTitle")}
@@ -116,7 +116,7 @@ export default function InstitutionsPage() {
         <section className="space-y-10">
           <div className="max-w-3xl">
             <span className="text-[#A11D1D] font-extrabold uppercase tracking-[0.25em] text-xs">
-              Flexible Delivery
+              {t("flexibleDeliveryLabel")}
             </span>
             <h2 className="text-3xl lg:text-4xl font-extrabold text-slate-900 mt-2 tracking-tight font-headline">
               {t("optionsTitle")}
@@ -127,7 +127,7 @@ export default function InstitutionsPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* On-Site Proctoring */}
             <div className="rounded-3xl border border-slate-100 bg-white p-8 lg:p-10 shadow-xs hover:shadow-md transition-all duration-300 flex flex-col gap-6">
-              <h3 className="text-2xl font-bold text-slate-900 tracking-tight font-headline border-l-4 border-[#A11D1D] pl-4">
+              <h3 className="text-2xl font-bold text-slate-900 tracking-tight font-headline border-s-4 border-[#A11D1D] ps-4">
                 {t("onsite.title")}
               </h3>
               <p className="text-slate-650 text-sm leading-relaxed text-justify font-medium">
@@ -152,7 +152,7 @@ export default function InstitutionsPage() {
 
             {/* Live Online Proctoring */}
             <div className="rounded-3xl border border-slate-100 bg-white p-8 lg:p-10 shadow-xs hover:shadow-md transition-all duration-300 flex flex-col gap-6">
-              <h3 className="text-2xl font-bold text-slate-900 tracking-tight font-headline border-l-4 border-[#A11D1D] pl-4">
+              <h3 className="text-2xl font-bold text-slate-900 tracking-tight font-headline border-s-4 border-[#A11D1D] ps-4">
                 {t("online.title")}
               </h3>
               <p className="text-slate-655 text-sm leading-relaxed text-justify font-medium">
@@ -184,7 +184,7 @@ export default function InstitutionsPage() {
 
             <div className="relative z-10 max-w-4xl mx-auto text-center space-y-6">
               <span className="text-[#A11D1D] font-extrabold uppercase tracking-[0.25em] text-xs">
-                Quality Assurance
+                {t("qualityAssuranceLabel")}
               </span>
               <h3 className="text-3xl font-black text-slate-900 tracking-tight font-headline">
                 {t("commitmentTitle")}

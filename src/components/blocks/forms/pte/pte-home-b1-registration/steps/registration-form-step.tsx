@@ -27,6 +27,8 @@ import { Badge } from "@/components/ui/badge";
 import { AddonServicesSection } from "@/components/blocks/forms/shared/addon-services-section";
 import { MarketingPreferencesSection, TEPTH_MARKETING_OPTIONS } from "@/components/blocks/forms/shared/marketing-preferences-section";
 
+import { useTranslations } from "next-intl";
+
 interface RegistrationFormStepProps {
   form: UseFormReturn<TPteHomeB1Schema>;
   onSubmit: (data: TPteHomeB1Schema) => void;
@@ -53,6 +55,8 @@ export function RegistrationFormStep({
     formState: { errors } } = form;
 
   const formData = watch();
+  const t = useTranslations("FormsShared.FormFields");
+  const tPte = useTranslations("FormsShared.PTE");
 
   return (
     <form
@@ -417,7 +421,7 @@ export function RegistrationFormStep({
             <FieldContent>
               <SearchableDropdown
                 options={languages}
-                placeholder="-Select Language-"
+                placeholder={t("selectLanguage")}
                 value={formData.homeLanguage}
                 onChange={(val) => {
                   setValue("homeLanguage", val);
@@ -439,7 +443,7 @@ export function RegistrationFormStep({
             </FieldContent>
           </Field>
           <Field data-invalid={!!errors.currentSituation}>
-            <FieldLabel required>What best describes your current situation?</FieldLabel>
+            <FieldLabel required>{tPte("currentSituation")}</FieldLabel>
             <FieldContent>
               <SearchableDropdown
                 options={[
@@ -453,7 +457,7 @@ export function RegistrationFormStep({
                   { label: "Not studying or working", value: "Not studying or working" },
                   { label: "Other - specify below", value: "Other" },
                 ]}
-                placeholder="Select one..."
+                placeholder={t("selectOne")}
                 value={formData.currentSituation}
                 onChange={(val) => {
                   setValue("currentSituation", val);
@@ -478,7 +482,7 @@ export function RegistrationFormStep({
             data-invalid={!!errors.reasonForTaking}
             className="md:col-span-2"
           >
-            <FieldLabel required>Why are you taking the test?</FieldLabel>
+            <FieldLabel required>{tPte("reasonForTest")}</FieldLabel>
             <FieldContent>
               <SearchableDropdown
                 options={[
@@ -489,7 +493,7 @@ export function RegistrationFormStep({
                   { label: "Representative of an Overseas Business visa", value: "representative_visa" },
                   { label: "Other - specify below", value: "other" },
                 ]}
-                placeholder="Select one..."
+                placeholder={t("selectOne")}
                 value={formData.reasonForTaking}
                 onChange={(val) => {
                   setValue("reasonForTaking", val);
@@ -517,7 +521,7 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.referralSource} className="md:col-span-2">
-            <FieldLabel required>How did you hear about the test?</FieldLabel>
+            <FieldLabel required>{tPte("referralSource")}</FieldLabel>
             <FieldContent>
               <SearchableDropdown
                 options={[
@@ -534,7 +538,7 @@ export function RegistrationFormStep({
                   { label: "University or College - specify below", value: "university_college" },
                   { label: "Other - specify below", value: "Other" },
                 ]}
-                placeholder="Select one..."
+                placeholder={t("selectOne")}
                 value={formData.referralSource}
                 onChange={(val) => {
                   setValue("referralSource", val);

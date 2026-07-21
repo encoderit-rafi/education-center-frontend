@@ -15,10 +15,12 @@ import {
   Calendar,
   ArrowRight,
 } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 export default function SpecialAccommodation() {
   const t = useTranslations("SpecialAccommodationPage");
+  const locale = useLocale();
+  const isRtl = locale === "ar";
 
   const whoCanRequestItems = t.raw("whoCanRequest.items") as string[];
 
@@ -61,7 +63,7 @@ export default function SpecialAccommodation() {
             {/* Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-50 border border-red-100 text-xs font-bold uppercase tracking-widest text-[#A11D1D] shadow-xs">
               <ShieldAlert className="w-3.5 h-3.5" />
-              Candidate Support
+              {t("candidateSupportBadge")}
             </div>
 
             <div className="space-y-3">
@@ -119,7 +121,7 @@ export default function SpecialAccommodation() {
           <div className="flex items-center gap-3 mb-3">
             <div className="h-px w-8 bg-primary" />
             <span className="text-primary text-xs font-bold uppercase tracking-widest">
-              Eligibility
+              {t("eligibilityLabel")}
             </span>
           </div>
 
@@ -162,7 +164,7 @@ export default function SpecialAccommodation() {
           {/* Header */}
           <div className="text-center mb-14 space-y-4">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-rose-50 border border-rose-100 text-rose-600 text-xs font-bold uppercase tracking-widest">
-              Our Facility
+              {t("ourFacilityBadge")}
             </div>
             <h2 className="text-3xl md:text-4xl font-black text-slate-900">
               {t("supports.title")}
@@ -196,7 +198,7 @@ export default function SpecialAccommodation() {
 
                 {/* Bottom hover accent */}
                 <div className="mt-5 flex items-center gap-1.5 text-xs font-bold text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span>Included</span>
+                  <span>{t("includedLabel")}</span>
                   <Check className="w-3.5 h-3.5" />
                 </div>
               </div>
@@ -222,7 +224,7 @@ export default function SpecialAccommodation() {
           {/* Header */}
           <div className="text-center mb-16 space-y-4">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-red-300 text-xs font-bold uppercase tracking-widest">
-              Step by Step
+              {t("stepByStepBadge")}
             </div>
             <h2 className="text-3xl md:text-4xl font-black text-white">
               {t("howToApply.title")}
@@ -246,7 +248,7 @@ export default function SpecialAccommodation() {
                   </span>
                   {/* Corner badge */}
                   <div className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-primary border-2 border-[#590b0b] flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <ArrowRight className="w-2.5 h-2.5 text-white" />
+                    <ArrowRight className={`w-2.5 h-2.5 text-white ${isRtl ? "rotate-180" : ""}`} />
                   </div>
                 </div>
 
@@ -278,7 +280,7 @@ export default function SpecialAccommodation() {
                 <div className="flex items-center gap-3">
                   <div className="h-px w-8 bg-primary" />
                   <span className="text-primary text-xs font-bold uppercase tracking-widest">
-                    Please Note
+                    {t("pleaseNoteLabel")}
                   </span>
                 </div>
                 <h2 className="text-3xl md:text-4xl font-black text-slate-900">
@@ -339,13 +341,13 @@ export default function SpecialAccommodation() {
                       </div>
                       <div>
                         <p className="text-[10px] uppercase tracking-widest text-slate-400 font-bold">
-                          Call us
+                          {t("callUsLabel")}
                         </p>
                         <p className="text-sm font-bold text-white">
                           +971 6 553 1250
                         </p>
                       </div>
-                      <ArrowRight className="w-4 h-4 text-slate-600 ml-auto group-hover/link:text-rose-400 group-hover/link:translate-x-0.5 transition-all" />
+                      <ArrowRight className={`w-4 h-4 text-slate-600 ml-auto group-hover/link:text-rose-400 group-hover/link:translate-x-0.5 transition-all ${isRtl ? "rotate-180" : ""}`} />
                     </a>
 
                     {/* Email */}
@@ -358,13 +360,13 @@ export default function SpecialAccommodation() {
                       </div>
                       <div>
                         <p className="text-[10px] uppercase tracking-widest text-slate-400 font-bold">
-                          Email us
+                          {t("emailUsLabel")}
                         </p>
                         <p className="text-sm font-bold text-white">
                           info@tepth.org
                         </p>
                       </div>
-                      <ArrowRight className="w-4 h-4 text-slate-600 ml-auto group-hover/link:text-rose-400 group-hover/link:translate-x-0.5 transition-all" />
+                      <ArrowRight className={`w-4 h-4 text-slate-600 ml-auto group-hover/link:text-rose-400 group-hover/link:translate-x-0.5 transition-all ${isRtl ? "rotate-180" : ""}`} />
                     </a>
                   </div>
                 </div>

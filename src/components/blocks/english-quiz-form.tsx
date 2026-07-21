@@ -853,6 +853,7 @@ export default function EnglishQuizForm() {
                           value={field.value}
                           onChange={field.onChange}
                           defaultCountry="AE"
+                          placeholder={t("form.phoneNumberPlaceholder")}
                           className="h-10 border-none focus-within:ring-0"
                         />
                       )}

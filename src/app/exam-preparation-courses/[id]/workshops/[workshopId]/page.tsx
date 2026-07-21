@@ -131,11 +131,13 @@ export default async function WorkshopDetailPage({ params }: PageProps) {
   const wTranslatedDescription = wTrans?.description;
   const wTranslatedShortDescription =
     wTrans?.short_description || wTrans?.shortDescription;
+  const wTranslatedSubTitle = wTrans?.sub_title || wTrans?.subTitle;
   const wTranslatedRequirements = wTrans?.requirements;
   const wTranslatedBestFor = wTrans?.best_for || wTrans?.bestFor;
 
   if (wTranslatedName) workshop.name = wTranslatedName;
   if (wTranslatedTitle) workshop.title = wTranslatedTitle;
+  if (wTranslatedSubTitle) workshop.subTitle = wTranslatedSubTitle;
   if (wTranslatedDescription) workshop.description = wTranslatedDescription;
   if (wTranslatedShortDescription)
     workshop.shortDescription = wTranslatedShortDescription;
@@ -196,14 +198,20 @@ export default async function WorkshopDetailPage({ params }: PageProps) {
               <div className="space-y-3">
                 <div className="flex items-center gap-2 flex-wrap">
                   <Badge className="uppercase text-[10px] tracking-wider font-bold px-2 py-0.5">
-                    {workshop.type || "Workshop"}
+                    {locale === "ar" ? "ورشة عمل" : (workshop.type || "Workshop")}
                   </Badge>
                   {workshop.subTitle && (
                     <Badge
                       variant="outline"
                       className="uppercase text-[10px] tracking-wider font-bold px-2 py-0.5"
                     >
-                      {workshop.subTitle}
+                      {locale === "ar"
+                        ? workshop.subTitle
+                            .replace(/(\d+)-HOUR INTENSIVE WORKSHOP/i, "ورشة عمل مكثفة لمدة $1 ساعات")
+                            .replace(/(\d+)-HOUR WORKSHOP/i, "ورشة عمل لمدة $1 ساعات")
+                            .replace(/INTENSIVE WORKSHOP/i, "ورشة عمل مكثفة")
+                            .replace(/WORKSHOP/i, "ورشة عمل")
+                        : workshop.subTitle}
                     </Badge>
                   )}
                 </div>
@@ -228,7 +236,19 @@ export default async function WorkshopDetailPage({ params }: PageProps) {
                     <Zap className="size-5" />
                   </div>
                   <p className="text-slate-600 font-medium text-sm md:text-base leading-relaxed relative z-10">
-                    Our intensive workshops at <span className="font-semibold text-slate-800">TEPTH – The Exam Preparation & Testing House</span> help you quickly understand the exam format, master key strategies, and improve your performance in <span className="text-primary font-bold">{course.name}</span> — all in focused sessions designed for busy candidates.
+                    {t.rich("workshops.calloutText", {
+                      courseName: course.name,
+                      tepth: (chunks) => (
+                        <span className="font-semibold text-slate-800">
+                          {chunks}
+                        </span>
+                      ),
+                      course: (chunks) => (
+                        <span className="text-primary font-bold">
+                          {chunks}
+                        </span>
+                      ),
+                    })}
                   </p>
                 </div>
               </div>

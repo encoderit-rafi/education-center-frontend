@@ -87,7 +87,7 @@ export default function WhyChooseUs() {
 
           {/* Right Text */}
           <div className="space-y-6">
-            <h3 className="text-3xl font-black text-slate-900 tracking-tight font-headline border-l-4 border-[#A11D1D] pl-4">
+            <h3 className="text-3xl font-black text-slate-900 tracking-tight font-headline border-s-4 border-[#A11D1D] ps-4">
               {t("NarrativeSection.title")} <span className="text-primary">{t("NarrativeSection.titleAccent")}</span>
             </h3>
             <p className="text-slate-650 text-base leading-relaxed text-justify font-medium">
@@ -102,7 +102,7 @@ export default function WhyChooseUs() {
         <div className="space-y-12">
           <div className="max-w-3xl">
             <span className="text-[#A11D1D] font-extrabold uppercase tracking-[0.25em] text-xs">
-              Our Methodology
+              {t("HeroSection.methodologyBadge")}
             </span>
             <h2 className="text-3xl lg:text-4xl font-extrabold text-slate-900 mt-2 tracking-tight font-headline">
               {t("NarrativeSection.subtitle")}
@@ -142,7 +142,7 @@ export default function WhyChooseUs() {
           
           <div className="relative z-10 max-w-4xl mx-auto text-center space-y-6">
             <span className="text-[#A11D1D] font-extrabold uppercase tracking-[0.25em] text-xs">
-              Walk into Test Day with Confidence
+              {t("HeroSection.confidenceBadge")}
             </span>
             <p className="text-slate-700 text-base md:text-lg max-w-3xl mx-auto leading-relaxed text-justify md:text-center font-bold">
               {t("NarrativeSection.conclusion")}

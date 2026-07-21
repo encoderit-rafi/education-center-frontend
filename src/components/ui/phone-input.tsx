@@ -30,10 +30,12 @@ type PhoneInputProps = Omit<
 
 const PhoneInput: React.ForwardRefExoticComponent<PhoneInputProps> =
     React.forwardRef<React.ElementRef<typeof RPNInput.default>, PhoneInputProps>(
-        ({ className, onChange, value, ...props }, ref) => {
+        ({ className, onChange, value, placeholder, ...props }, ref) => {
+            const t = useTranslations("PhoneInput");
             return (
                 <RPNInput.default
                     ref={ref}
+                    placeholder={placeholder ?? t("placeholder")}
                     className={cn(
                         "flex w-full min-w-0 rounded-md bg-transparent px-0 py-0 text-base transition-[color,box-shadow,background-color] outline-none focus-within:border-primary focus-within:ring-3 focus-within:ring-ring/30 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
                         className,

@@ -510,15 +510,18 @@ export function RegistrationFormStep({
                 value={formData.takenBefore}
                 className="grid grid-cols-2 gap-3"
               >
-                {[tYesNo("yes"), tYesNo("no")].map((opt) => (
+                {[
+                  { label: tYesNo("yes"), value: "Yes" },
+                  { label: tYesNo("no"), value: "No" },
+                ].map((opt) => (
                   <Label
-                    key={opt}
-                    htmlFor={`taken-${opt}`}
+                    key={opt.value}
+                    htmlFor={`taken-${opt.value}`}
                     data-invalid={!!errors.takenBefore}
                     className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive"
                   >
-                    <RadioGroupItem value={opt} id={`taken-${opt}`} />
-                    {opt}
+                    <RadioGroupItem value={opt.value} id={`taken-${opt.value}`} />
+                    {opt.label}
                   </Label>
                 ))}
               </RadioGroup>
@@ -540,15 +543,19 @@ export function RegistrationFormStep({
                     value={formData.lessThanTwoYears}
                     className="grid grid-cols-1 md:grid-cols-3 gap-3"
                   >
-                    {[tYesNo("yes"), tYesNo("no"), tYesNo("iDoNotKnow")].map((opt) => (
+                    {[
+                      { label: tYesNo("yes"), value: "Yes" },
+                      { label: tYesNo("no"), value: "No" },
+                      { label: tYesNo("iDoNotKnow"), value: "I do not know" },
+                    ].map((opt) => (
                       <Label
-                        key={opt}
-                        htmlFor={`less-${opt}`}
+                        key={opt.value}
+                        htmlFor={`less-${opt.value}`}
                         data-invalid={!!errors.lessThanTwoYears}
                         className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive"
                       >
-                        <RadioGroupItem value={opt} id={`less-${opt}`} />
-                        {opt}
+                        <RadioGroupItem value={opt.value} id={`less-${opt.value}`} />
+                        {opt.label}
                       </Label>
                     ))}
                   </RadioGroup>
@@ -570,19 +577,21 @@ export function RegistrationFormStep({
                     value={formData.existingAccount}
                     className="flex flex-col gap-3"
                   >
-                    {[tYesNo("yes"), tYesNo("no"), tIelts("forgotAccount")].map(
-                      (opt) => (
-                        <Label
-                          key={opt}
-                          htmlFor={`acc-${opt}`}
-                          data-invalid={!!errors.existingAccount}
-                          className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive"
-                        >
-                          <RadioGroupItem value={opt} id={`acc-${opt}`} />
-                          {opt}
-                        </Label>
-                      ),
-                    )}
+                    {[
+                      { label: tYesNo("yes"), value: "Yes" },
+                      { label: tYesNo("no"), value: "No" },
+                      { label: tIelts("forgotAccount"), value: "I forgot my SELT account details" },
+                    ].map((opt) => (
+                      <Label
+                        key={opt.value}
+                        htmlFor={`acc-${opt.value}`}
+                        data-invalid={!!errors.existingAccount}
+                        className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive"
+                      >
+                        <RadioGroupItem value={opt.value} id={`acc-${opt.value}`} />
+                        {opt.label}
+                      </Label>
+                    ))}
                   </RadioGroup>
                   <FieldError errors={[errors.existingAccount]} />
                 </FieldContent>

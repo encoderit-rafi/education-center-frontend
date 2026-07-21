@@ -150,7 +150,6 @@ export default function TestDayGuidelines() {
 
   return (
     <div
-      dir={isRtl ? "rtl" : "ltr"}
       className="flex flex-col min-h-screen bg-slate-50/50 pb-24 text-slate-800 font-sans relative overflow-hidden"
     >
       {/* Background decoration */}

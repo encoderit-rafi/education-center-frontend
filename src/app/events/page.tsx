@@ -372,7 +372,7 @@ export default function EventsPage() {
             <section className="pt-28 pb-10 bg-white border-b border-gray-100">
                 <div className="container px-6 mx-auto sm:px-12 lg:px-24 text-center">
                     <span className="inline-block text-[#A11D1D] text-xs font-black uppercase tracking-[0.3em] mb-3">
-                        Education Center
+                        {t("educationCenter")}
                     </span>
                     <h1 className="text-4xl md:text-6xl font-black text-gray-900 tracking-tighter leading-none mb-4">
                         {t("title")} <span className="text-[#A11D1D]">{t("titleAccent")}</span>
@@ -462,7 +462,7 @@ export default function EventsPage() {
                                     <div>
                                         <h3 className="text-xs font-black uppercase tracking-widest text-gray-400 mb-2">{t("aboutThisEvent")}</h3>
                                         <div
-                                            className="text-sm text-gray-600 leading-relaxed max-h-36 overflow-y-auto pr-1 prose prose-sm"
+                                            className="text-sm text-gray-600 leading-relaxed max-h-36 overflow-y-auto pr-1 prose prose-sm text-justify"
                                             dangerouslySetInnerHTML={{ __html: activeEvent.description }}
                                         />
                                     </div>
@@ -538,7 +538,7 @@ export default function EventsPage() {
                                             )}
                                             <div className="flex items-center gap-1 text-[10px] font-semibold text-gray-400">
                                                 <MapPin className="w-3 h-3 text-[#A11D1D]" />
-                                                <span className="truncate max-w-25">{event.location || "Online"}</span>
+                                                <span className="truncate max-w-25">{event.location || t("online")}</span>
                                             </div>
                                         </div>
 
@@ -561,19 +561,19 @@ export default function EventsPage() {
                                                 onClick={() => handleSelectEvent(event.id)}
                                                 className="flex-1 gap-1 h-9"
                                             >
-                                                Details <ChevronRight className="w-3 h-3" />
+                                                {t("details")} <ChevronRight className="w-3 h-3" />
                                             </Button>
 
                                             <Dialog>
                                                 <DialogTrigger
                                                     className="flex-1 inline-flex items-center justify-center gap-1 h-9 px-3 rounded-lg bg-[#A11D1D] hover:bg-[#8a1818] text-white text-xs font-bold transition-colors cursor-pointer"
                                                 >
-                                                    Register <ArrowRight className="w-3 h-3 rtl:rotate-180" />
+                                                    {t("registerBtn")} <ArrowRight className="w-3 h-3 rtl:rotate-180" />
                                                 </DialogTrigger>
                                                 <DialogContent className="max-w-md bg-white border border-gray-100 rounded-2xl shadow-2xl p-7">
                                                     <DialogHeader className="mb-4">
                                                         <DialogTitle className="text-xl font-black text-gray-900 text-left leading-snug">
-                                                            Register for{" "}
+                                                            {t("registerFor")}{" "}
                                                             <span className="text-[#A11D1D]">{event.title}</span>
                                                         </DialogTitle>
                                                     </DialogHeader>

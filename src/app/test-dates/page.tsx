@@ -45,7 +45,7 @@ export default function TestDatesPage() {
                       {exam.name}
                     </BaseCardTitle>
                     <BaseCardDescription className="mb-4">
-                      {exam.description}
+                      {t.has(`descriptions.${exam.id}`) ? t(`descriptions.${exam.id}`) : exam.description}
                     </BaseCardDescription>
                   </div>
                 </BaseCard>
