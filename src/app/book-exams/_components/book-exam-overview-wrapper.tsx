@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { BaseCard } from "@/components/blocks/cards/base-card";
 import { Button, buttonVariants } from "@/components/ui/button";
+import { useLocale } from "next-intl";
 
 /* ── Icon mapper (mirrors exam-details.tsx) ──────────────────────────────── */
 const IconTile = ({ icon, size = 20 }: { icon: string; size?: number }) => {
@@ -182,6 +183,8 @@ export default function BookExamOverviewWrapper({
   exam,
   children,
 }: BookExamOverviewWrapperProps) {
+  const locale = useLocale();
+  const isRtl = locale === "ar";
   const slug = exam.slug || "";
   const isExternalExam =
     slug === "celpip" ||
@@ -219,10 +222,10 @@ export default function BookExamOverviewWrapper({
         <div className="section-container base-px w-full">
           <div className="max-w-4xl space-y-2">
             <h1 className="text-3xl md:text-5xl font-black tracking-tight text-secondary leading-tight">
-              {exam.name} <span className="text-primary italic">Test</span>
+              {exam.name} <span className="text-primary italic">{isRtl ? "اختبار" : "Test"}</span>
             </h1>
             {subtitle && (
-              <p className="text-sm md:text-base font-medium text-secondary">
+              <p dir={isRtl ? "rtl" : "ltr"} className="text-sm md:text-base font-medium text-secondary text-start">
                 {subtitle}
               </p>
             )}
@@ -232,9 +235,10 @@ export default function BookExamOverviewWrapper({
                 setShowForm(true);
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }}
+              dir={isRtl ? "rtl" : "ltr"}
               className="w-fit gap-2"
             >
-              <Calendar size={16} /> Register
+              <Calendar size={16} /> {isRtl ? "تسجيل" : "Register"}
             </Button>
           </div>
         </div>
@@ -267,7 +271,7 @@ export default function BookExamOverviewWrapper({
                 <div className="flex items-center gap-3">
                   <div className="h-6 w-1 bg-primary rounded-full" />
                   <h2 className="text-xl font-black text-slate-900">
-                    Overview
+                    {isRtl ? "نظرة عامة" : "Overview"}
                   </h2>
                 </div>
                 <div className="prose prose-slate max-w-none text-slate-600 leading-relaxed text-xs lg:text-sm text-justify">
@@ -303,7 +307,7 @@ export default function BookExamOverviewWrapper({
                   <div className="flex items-center gap-3">
                     <div className="h-6 w-1 bg-primary rounded-full" />
                     <h2 className="text-xl font-black text-slate-900">
-                      Test Format
+                      {isRtl ? "تفاصيل صيغة الاختبار" : "Test Format"}
                     </h2>
                   </div>
 
@@ -442,7 +446,9 @@ export default function BookExamOverviewWrapper({
                 <section className="space-y-6">
                   <div className="flex items-center gap-3">
                     <div className="h-6 w-1 bg-primary rounded-full" />
-                    <h2 className="text-xl font-black text-slate-900">FAQs</h2>
+                    <h2 className="text-xl font-black text-slate-900">
+                      {isRtl ? "الأسئلة الشائعة" : "FAQs"}
+                    </h2>
                   </div>
                   <div className="grid gap-2">
                     {faqs.map((faq, i) => (
@@ -495,7 +501,7 @@ export default function BookExamOverviewWrapper({
                   </div>
                   <div className="space-y-2">
                     <h3 className="text-lg font-black text-white">
-                      Ready to Book?
+                      {isRtl ? "هل أنت جاهز للحجز؟" : "Ready to Book?"}
                     </h3>
                   </div>
                   <button
@@ -508,7 +514,7 @@ export default function BookExamOverviewWrapper({
                       "w-full font-black text-xs py-5 rounded-xl shadow-xl hover:scale-[1.02] transition-all",
                     )}
                   >
-                    Register
+                    {isRtl ? "تسجيل" : "Register"}
                   </button>
                 </div>
               </div>

@@ -24,7 +24,7 @@ import {
 } from "@/components/blocks/cards/base-card";
 import GradientBox from "@/components/blocks/gradient-box";
 import { buttonVariants } from "@/components/ui/button";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 import { EXAM_DETAILE_DATA } from "@/data";
 
@@ -54,6 +54,8 @@ const IconTile = ({ icon, size = 20 }: { icon: string; size?: number }) => {
 };
 
 export default function ExamDetails({ data }: { data: any }) {
+  const locale = useLocale();
+  const isRtl = locale === "ar";
   const t = useTranslations("ExamDetailsPage");
 
   // Find matching static metadata to enrich the dynamic backend data
@@ -77,14 +79,14 @@ export default function ExamDetails({ data }: { data: any }) {
 
   const detailData = {
     ...staticMeta,
-    ...localizedMeta,
     ...data,
+    ...(isRtl ? localizedMeta : {}),
   };
 
-  const stats = detailData.stats || [];
+  const stats = (isRtl && localizedMeta.stats) || detailData.stats || [];
 
   // Safely merge sections to preserve the static icon property
-  let sections = (detailData.sections || []).map(
+  let sections = ((isRtl && localizedMeta.sections) || detailData.sections || []).map(
     (section: any, idx: number) => {
       const staticSection = staticMeta?.sections?.[idx] || {};
       return {
@@ -98,20 +100,26 @@ export default function ExamDetails({ data }: { data: any }) {
     sections = [];
   }
 
-  const whoShouldTake = detailData.whoShouldTake || [];
-  const acceptedFor = detailData.acceptedFor || [];
-  const faqs = detailData.faqs || [];
+  const whoShouldTake = (isRtl && localizedMeta.whoShouldTake) || detailData.whoShouldTake || [];
+  const acceptedFor = (isRtl && localizedMeta.acceptedFor) || detailData.acceptedFor || [];
+  const faqs = (isRtl && localizedMeta.faqs) || detailData.faqs || [];
   const description =
+    data.translations?.[locale]?.description ||
+    (isRtl && localizedMeta.description) ||
     data.description ||
-    localizedMeta.description ||
     staticMeta?.description ||
     detailData.content ||
     "";
   const subtitle =
-    data.subtitle || localizedMeta.subtitle || staticMeta?.subtitle || "";
+    data.translations?.[locale]?.subtitle ||
+    (isRtl && localizedMeta.subtitle) ||
+    data.subtitle ||
+    staticMeta?.subtitle ||
+    "";
   const overview =
+    data.translations?.[locale]?.overview ||
+    (isRtl && localizedMeta.overview) ||
     data.overview ||
-    localizedMeta.overview ||
     staticMeta?.overview ||
     description;
   const image = detailData.image || "/images/exams/ielts/ielts-1.jpg";
@@ -125,10 +133,10 @@ export default function ExamDetails({ data }: { data: any }) {
         <div className="section-container base-px w-full">
           <div className="max-w-4xl space-y-2">
             <h1 className="text-3xl md:text-5xl font-black tracking-tight text-secondary leading-tight">
-              {data.name} <span className="text-primary italic">Test</span>
+              {data.name} <span className="text-primary italic">{isRtl ? "اختبار" : "Test"}</span>
             </h1>
             {subtitle && (
-              <p className="text-sm md:text-base font-medium text-secondary">
+              <p dir={isRtl ? "rtl" : "ltr"} className="text-sm md:text-base font-medium text-secondary text-start">
                 {subtitle}
               </p>
             )}
@@ -136,9 +144,10 @@ export default function ExamDetails({ data }: { data: any }) {
               href={registerUrl}
               target={isExternalRegister ? "_blank" : undefined}
               rel={isExternalRegister ? "noopener noreferrer" : undefined}
+              dir={isRtl ? "rtl" : "ltr"}
               className={cn(buttonVariants(), "w-fit")}
             >
-              <Calendar /> Register
+              <Calendar /> {isRtl ? "تسجيل" : "Register"}
             </Link>
           </div>
         </div>
@@ -172,7 +181,7 @@ export default function ExamDetails({ data }: { data: any }) {
                 <div className="flex items-center gap-3">
                   <div className="h-6 w-1 bg-primary rounded-full" />
                   <h2 className="text-xl font-black text-slate-900">
-                    Overview
+                    {isRtl ? "نظرة عامة" : "Overview"}
                   </h2>
                 </div>
                 <div className="w-full text-slate-600 leading-relaxed text-sm md:text-[15px] lg:text-base space-y-5 text-justify">
@@ -466,7 +475,7 @@ export default function ExamDetails({ data }: { data: any }) {
                     <div className="flex items-center gap-3">
                       <div className="h-6 w-1 bg-primary rounded-full" />
                       <h2 className="text-xl font-black text-slate-900">
-                        Test Format
+                        {isRtl ? "تفاصيل صيغة الاختبار" : "Test Format"}
                       </h2>
                     </div>
 
@@ -613,7 +622,9 @@ export default function ExamDetails({ data }: { data: any }) {
                 <section className="space-y-6">
                   <div className="flex items-center gap-3">
                     <div className="h-6 w-1 bg-primary rounded-full" />
-                    <h2 className="text-xl font-black text-slate-900">FAQs</h2>
+                    <h2 className="text-xl font-black text-slate-900">
+                      {isRtl ? "الأسئلة الشائعة" : "FAQs"}
+                    </h2>
                   </div>
                   <div className="grid gap-2">
                     {faqs.map((faq: any, i: number) => (
@@ -666,7 +677,7 @@ export default function ExamDetails({ data }: { data: any }) {
                   </div>
                   <div className="space-y-2">
                     <h3 className="text-lg font-black text-white">
-                      Ready to Book?
+                      {isRtl ? "هل أنت جاهز للحجز؟" : "Ready to Book?"}
                     </h3>
                   </div>
                   <Link
@@ -678,7 +689,7 @@ export default function ExamDetails({ data }: { data: any }) {
                       "w-full font-black text-xs py-5 rounded-xl shadow-xl hover:scale-[1.02] transition-all",
                     )}
                   >
-                    Register
+                    {isRtl ? "تسجيل" : "Register"}
                   </Link>
                 </div>
               </div>

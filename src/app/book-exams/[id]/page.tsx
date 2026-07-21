@@ -44,14 +44,15 @@ function buildExamInfo(exam: any, t: any, locale: string) {
     }
   }
 
+  const isAr = locale === "ar";
   const detailData = {
     ...staticMeta,
-    ...localizedMeta,
     ...exam,
+    ...(isAr ? localizedMeta : {}),
   };
 
   // Safely merge sections to preserve the static icon property
-  let sections = (detailData.sections || []).map(
+  let sections = ((isAr && localizedMeta.sections) || detailData.sections || []).map(
     (section: any, idx: number) => {
       const staticSection = staticMeta?.sections?.[idx] || {};
       return {
@@ -66,38 +67,38 @@ function buildExamInfo(exam: any, t: any, locale: string) {
   }
 
   const description =
+    exam?.translations?.[locale]?.description ||
+    (isAr && localizedMeta.description) ||
     exam.description ||
-    localizedMeta.description ||
     staticMeta?.description ||
     detailData.content ||
     "";
 
   const subtitle =
-    exam.subtitle || localizedMeta.subtitle || staticMeta?.subtitle || "";
+    exam?.translations?.[locale]?.subtitle ||
+    (isAr && localizedMeta.subtitle) ||
+    exam.subtitle ||
+    staticMeta?.subtitle ||
+    "";
 
   const overview =
+    exam?.translations?.[locale]?.overview ||
+    (isAr && localizedMeta.overview) ||
     exam.overview ||
-    localizedMeta.overview ||
     staticMeta?.overview ||
     description;
 
-  const translatedDescription = exam?.translations?.[locale]?.description;
-  const finalDescription = translatedDescription || description;
-  const finalOverview =
-    exam?.translations?.[locale]?.overview ||
-    (translatedDescription ? translatedDescription : overview);
-
   return {
-    name: exam.name || staticMeta?.name || "",
+    name: (isAr && localizedMeta.name) || exam.name || staticMeta?.name || "",
     slug: exam.slug || staticMeta?.slug || "",
-    description: finalDescription,
-    overview: finalOverview,
+    description,
+    overview,
     subtitle,
-    stats: detailData.stats || [],
+    stats: (isAr && localizedMeta.stats) || detailData.stats || [],
     sections,
-    whoShouldTake: detailData.whoShouldTake || [],
-    acceptedFor: detailData.acceptedFor || [],
-    faqs: detailData.faqs || [],
+    whoShouldTake: (isAr && localizedMeta.whoShouldTake) || detailData.whoShouldTake || [],
+    acceptedFor: (isAr && localizedMeta.acceptedFor) || detailData.acceptedFor || [],
+    faqs: (isAr && localizedMeta.faqs) || detailData.faqs || [],
   };
 }
 

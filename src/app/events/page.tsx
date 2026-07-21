@@ -248,7 +248,7 @@ function EventRegistrationForm({ event, onSuccess }: EventRegistrationFormProps)
                 {bookingMutation.isPending ? (
                     <><Loader2 className="w-4 h-4 animate-spin" />{t("form.processing")}</>
                 ) : (
-                    <><span>{t("form.submitBtn")}</span><ArrowRight className="w-4 h-4" /></>
+                    <><span>{t("form.submitBtn")}</span><ArrowRight className="w-4 h-4 rtl:rotate-180" /></>
                 )}
             </Button>
         </form>
@@ -568,7 +568,7 @@ export default function EventsPage() {
                                                 <DialogTrigger
                                                     className="flex-1 inline-flex items-center justify-center gap-1 h-9 px-3 rounded-lg bg-[#A11D1D] hover:bg-[#8a1818] text-white text-xs font-bold transition-colors cursor-pointer"
                                                 >
-                                                    Register <ArrowRight className="w-3 h-3" />
+                                                    Register <ArrowRight className="w-3 h-3 rtl:rotate-180" />
                                                 </DialogTrigger>
                                                 <DialogContent className="max-w-md bg-white border border-gray-100 rounded-2xl shadow-2xl p-7">
                                                     <DialogHeader className="mb-4">

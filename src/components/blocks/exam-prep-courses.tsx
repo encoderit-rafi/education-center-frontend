@@ -120,7 +120,7 @@ export default function ExamPrepCourses() {
             })}
           >
             {t("viewAllCourses")}
-            <ArrowRight className="size-5 transition-transform duration-300 group-hover:translate-x-1" />
+            <ArrowRight className="size-5 ms-2 transition-transform duration-300 group-hover:translate-x-1 rtl:group-hover:-translate-x-1 rtl:rotate-180" />
           </Link>
         </div>
       </div>

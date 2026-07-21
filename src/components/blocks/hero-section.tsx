@@ -81,7 +81,7 @@ export default function HeroSection() {
               })}
             >
               {t("bookExam")}
-              <ArrowRight className="max-md:hidden ml-2 size-4 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="max-md:hidden ms-2 size-4 group-hover:translate-x-1 rtl:group-hover:-translate-x-1 rtl:rotate-180 transition-transform" />
             </Link>
             <Link
               href="/exam-preparation-courses"

@@ -23,7 +23,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 function ContactItem({
   icon: Icon,
@@ -34,6 +34,8 @@ function ContactItem({
   value: React.ReactNode;
   copyText: string;
 }) {
+  const locale = useLocale();
+  const isRtl = locale === "ar";
   const [copied, setCopied] = useState(false);
 
   const handleCopy = (e: React.MouseEvent) => {
@@ -53,14 +55,18 @@ function ContactItem({
       onClick={handleCopy}
       className="flex items-start gap-3 text-primary hover:opacity-80 transition-all cursor-pointer group/item"
     >
-      <Icon className="size-4 text-primary shrink-0 transition-transform group-hover/item:scale-110" />
-      <span className="text-xs font-medium leading-snug flex-1">{value}</span>
+      <Icon className="size-4 text-primary shrink-0 transition-transform group-hover/item:scale-110 mt-0.5" />
+      <span className="text-xs font-medium leading-snug flex-1">
+        {value}
+      </span>
     </div>
   );
 }
 
 export default function Footer() {
   const { primaryNav, isLoading } = usePrimaryNav();
+  const locale = useLocale();
+  const isRtl = locale === "ar";
   const t = useTranslations("Footer");
   const tMenu = useTranslations("NavBar.menu");
 
@@ -102,24 +108,26 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="relative w-full text-white overflow-hidden bg-secondary ">
+    <footer className="relative w-full text-white overflow-hidden bg-secondary">
       {/* Main Content */}
       <div className="max-w-8xl mx-auto px-6 pt-20">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-2">
           {/* Column 1: Info Card */}
-          <div className="p-6 rounded-lg relative z-10 bg-white hover:bg-white h-fit">
-            <Link
-              href="/"
-              className="inline-block mb-6 transition-transform hover:scale-105 duration-300"
-            >
-              <Image
-                alt="TEPTH Logo"
-                height={100}
-                width={180}
-                src="/images/tepth-logo.png"
-                className="h-auto w-40"
-              />
-            </Link>
+          <div dir={isRtl ? "rtl" : "ltr"} className="p-6 rounded-lg relative z-10 bg-white hover:bg-white h-fit">
+            <div dir="ltr" className="flex justify-start mb-6">
+              <Link
+                href="/"
+                className="inline-block transition-transform hover:scale-105 duration-300"
+              >
+                <Image
+                  alt="TEPTH Logo"
+                  height={100}
+                  width={180}
+                  src="/images/tepth-logo.png"
+                  className="h-auto w-40"
+                />
+              </Link>
+            </div>
             <div className="space-y-5">
               <ContactItem
                 icon={Clock}
@@ -165,7 +173,7 @@ export default function Footer() {
               <ContactItem
                 icon={Globe}
                 copyText="www.tepth.org"
-                value={`${t("webLabel", { defaultValue: "Web:" })} www.tepth.org`}
+                value={`${t("webLabel", { defaultValue: "الموقع الإلكتروني:" })} www.tepth.org`}
               />
             </div>
           </div>

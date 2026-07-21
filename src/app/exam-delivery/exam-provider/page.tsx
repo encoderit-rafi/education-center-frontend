@@ -125,7 +125,7 @@ export default function ExamProviderPage() {
                   <Button className="bg-primary text-white hover:bg-primary-variant px-5 py-3 rounded-lg font-bold text-sm transition-all duration-300 flex items-center gap-2 group shadow-md shadow-primary/10 cursor-pointer h-10">
                     {t("tourBtn")}
 
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-300" />
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5 rtl:rotate-180 transition-transform duration-300" />
                   </Button>
                 </Link>
                 {/* <Link href="/our-venues/360-degree-virtual-tour">

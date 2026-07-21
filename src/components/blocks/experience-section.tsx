@@ -43,7 +43,7 @@ export default function ExperienceSection() {
             })}
           >
             {t("bookExam")}
-            <ArrowRight className="ml-2 size-4 group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="ms-2 size-4 group-hover:translate-x-1 rtl:group-hover:-translate-x-1 rtl:rotate-180 transition-transform" />
           </Link>
         </div>
       </div>

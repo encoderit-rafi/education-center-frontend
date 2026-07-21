@@ -196,7 +196,7 @@ export default function ExamWorkshopsCELPIP() {
                 )}
               >
                 View Packages
-                <ArrowRight className="ml-2 size-5" />
+                <ArrowRight className="ms-2 size-5 rtl:rotate-180" />
               </Link>
               <div className="flex items-center gap-6 px-4">
                 <div className="flex items-center gap-2 text-sm font-bold text-slate-500">
@@ -322,7 +322,7 @@ export default function ExamWorkshopsCELPIP() {
                   {celpipWorkshop.commonFeatures.features.map((feature, i) => (
                     <li key={i} className="flex items-start gap-4">
                       <div className="size-6 rounded-full bg-primary flex items-center justify-center shrink-0 mt-1">
-                        <ArrowRight className="size-3 text-white" />
+                        <ArrowRight className="size-3 text-white rtl:rotate-180" />
                       </div>
                       <span className="text-xl font-bold tracking-tight">
                         {feature}

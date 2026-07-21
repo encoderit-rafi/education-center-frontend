@@ -73,7 +73,7 @@ const BaseCardArrow = ({ className, ...props }: ComponentProps<"svg">) => {
   return (
     <ArrowRight
       className={cn(
-        "size-6 text-slate-300 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-primary",
+        "size-6 text-slate-300 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-primary rtl:rotate-180 rtl:group-hover:-translate-x-1",
         className,
       )}
       {...props}
@@ -111,13 +111,15 @@ const BaseCardList = ({
   return (
     <ul className={cn("space-y-2 text-sm text-slate-700", className)}>
       {items.map((point, i) => (
-        <li key={i} className="flex items-center gap-2 ">
+        <li key={i} className="flex items-start gap-2">
           {checked ? (
-            <CheckCircle2 className="size-4 text-primary shrink-0" />
+            <CheckCircle2 className="size-4 text-primary shrink-0 mt-0.5" />
           ) : (
-            <span className="size-1.5 rounded-full bg-primary shrink-0" />
+            <span className="size-1.5 rounded-full bg-primary shrink-0 mt-1.5" />
           )}
-          {point}
+          <span dir="auto" className="flex-1 text-start leading-relaxed">
+            {point}
+          </span>
         </li>
       ))}
     </ul>

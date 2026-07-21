@@ -400,7 +400,7 @@ export default function TestDayGuidelinesClient() {
                   className="inline-flex items-center gap-2.5 rounded-xl border border-white/20 px-8 py-4 text-sm font-bold text-white transition-all hover:bg-white/5 hover:border-white/40"
                 >
                   {t("cta.enquiryButton")}
-                  <ArrowRight className="h-4 w-4" />
+                  <ArrowRight className={`h-4 w-4 ${isRtl ? "rotate-180" : ""}`} />
                 </Link>
               </div>
             </div>
