@@ -207,7 +207,7 @@ export function compileBookingPayload(input: BookingPayloadInput) {
     sex: "Gender",
     gender: "Gender",
     email: "Email",
-    mobileNumber: "Mobile Number",
+    mobileNumber: "Phone Number",
     phoneNumber: "Phone Number",
     smsConsent: "SMS Consent",
     residenceCountry: "Country of Residence",

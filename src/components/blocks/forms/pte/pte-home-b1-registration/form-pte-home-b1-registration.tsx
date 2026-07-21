@@ -480,7 +480,7 @@ export default function FormPTEHomeB1Registration({
                   },
                   { label: "Sex", value: formData.gender || "N/A" },
                   {
-                    label: "Mobile Number",
+                    label: "Phone Number",
                     value: formData.mobileNumber || "N/A",
                   },
                   {

@@ -113,8 +113,8 @@ export default function Footer() {
       <div className="max-w-8xl mx-auto px-6 pt-20">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-2">
           {/* Column 1: Info Card */}
-          <div dir={isRtl ? "rtl" : "ltr"} className="p-6 rounded-lg relative z-10 bg-white hover:bg-white h-fit">
-            <div dir="ltr" className="flex justify-start mb-6">
+          <div className="p-6 rounded-lg relative z-10 bg-white hover:bg-white h-fit">
+            <div className="flex justify-start mb-6">
               <Link
                 href="/"
                 className="inline-block transition-transform hover:scale-105 duration-300"

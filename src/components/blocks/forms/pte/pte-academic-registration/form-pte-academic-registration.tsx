@@ -455,7 +455,7 @@ export default function FormPTEAcademicRegistration({
                   },
                   { label: "Sex", value: formData.gender || "N/A" },
                   {
-                    label: "Mobile Number",
+                    label: "Phone Number",
                     value: formData.mobileNumber || "N/A",
                   },
                   {

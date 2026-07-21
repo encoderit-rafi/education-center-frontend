@@ -460,7 +460,7 @@ export default function FormPTECoreRegistration({
                   },
                   { label: "Sex", value: formData.gender || "N/A" },
                   {
-                    label: "Mobile Number",
+                    label: "Phone Number",
                     value: formData.mobileNumber || "N/A",
                   },
                   {

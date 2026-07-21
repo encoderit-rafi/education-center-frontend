@@ -204,7 +204,7 @@ export default function Testimonials() {
 
       {/* Mobile/Tablet Version: Carousel */}
       <div className="lg:hidden px-6">
-        <Carousel setApi={setApi} className="w-full max-w-lg mx-auto">
+        <Carousel dir="ltr" setApi={setApi} className="w-full max-w-lg mx-auto">
           <CarouselContent>
             {testimonials.map((t, i) => (
               <CarouselItem key={i}>

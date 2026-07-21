@@ -439,7 +439,7 @@ export default function FormIELTSGeneralRegistration({
                   value: formData.birthCountry || "N/A",
                 },
                 {
-                  label: "Mobile Number",
+                  label: "Phone Number",
                   value: formData.mobileNumber || "N/A",
                 },
                 { label: "Nationality", value: formData.nationality || "N/A" },

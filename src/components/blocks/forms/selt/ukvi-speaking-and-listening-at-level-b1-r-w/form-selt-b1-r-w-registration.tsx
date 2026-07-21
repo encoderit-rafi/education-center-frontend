@@ -548,7 +548,7 @@ export default function FormSELTB1RWRegistration({
                     value: formData.countryOfBirth || "N/A",
                   },
                   {
-                    label: "Mobile Number",
+                    label: "Phone Number",
                     value: formData.mobileNumber || "N/A",
                   },
                   {

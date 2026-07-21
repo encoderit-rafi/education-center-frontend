@@ -547,7 +547,7 @@ export default function FormSELTA2Registration({
                     value: formData.countryOfBirth || "N/A",
                   },
                   {
-                    label: "Mobile Number",
+                    label: "Phone Number",
                     value: formData.mobileNumber || "N/A",
                   },
                   {

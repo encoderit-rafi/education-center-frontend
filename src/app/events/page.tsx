@@ -35,10 +35,10 @@ import { cn } from "@/lib/utils";
 // Schema for event registration
 const getEventSchema = (t: any) => z.object({
     fullName: z.string().min(1, t("form.fullNameError") || "Full Name is required"),
-    mobile: z.string().min(1, t("form.mobileError") || "Mobile Number is required"),
+    mobile: z.string().min(1, t("form.mobileError") || "Phone Number is required"),
     email: z.string().min(1, t("form.emailError") || "Email Address is required").email("Please enter a valid email address"),
-    country: z.string().min(1, "Country is required"),
-    city: z.string().min(1, "Emirate / City is required"),
+    country: z.string().min(1, t("form.countryError") || "Country is required"),
+    city: z.string().min(1, t("form.cityError") || "Emirate / City is required"),
 });
 
 // Helper to resolve dynamic event banner images
@@ -59,7 +59,7 @@ function EventCardImage({ src, alt }: { src: string; alt: string }) {
             src={error ? "/images/study.jpg" : src}
             alt={alt}
             fill
-            className="object-cover transition-transform duration-700 group-hover:scale-110"
+            className="object-contain transition-transform duration-700 group-hover:scale-110"
             onError={() => setError(true)}
         />
     );
@@ -204,7 +204,7 @@ function EventRegistrationForm({ event, onSuccess }: EventRegistrationFormProps)
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <Field data-invalid={!!errors.country}>
-                    <FieldLabel required className="text-xs font-semibold text-gray-700">Country</FieldLabel>
+                    <FieldLabel required className="text-xs font-semibold text-gray-700">{t("form.country")}</FieldLabel>
                     <FieldContent>
                         <Controller
                             control={control}
@@ -215,7 +215,7 @@ function EventRegistrationForm({ event, onSuccess }: EventRegistrationFormProps)
                                     onChange={(country) =>
                                         field.onChange(country.name)
                                     }
-                                    placeholder="Select country"
+                                    placeholder={t("form.countryPlaceholder")}
                                 />
                             )}
                         />
@@ -226,11 +226,11 @@ function EventRegistrationForm({ event, onSuccess }: EventRegistrationFormProps)
                 </Field>
 
                 <Field data-invalid={!!errors.city}>
-                    <FieldLabel required className="text-xs font-semibold text-gray-700">Emirate / City</FieldLabel>
+                    <FieldLabel required className="text-xs font-semibold text-gray-700">{t("form.city")}</FieldLabel>
                     <FieldContent>
                         <Input
                             className="h-11 rounded-md border-gray-200 bg-gray-50 focus:bg-white focus:border-[#A11D1D] focus:ring-[#A11D1D]/20 text-sm transition-all"
-                            placeholder="Enter your City Name"
+                            placeholder={t("form.cityPlaceholder")}
                             {...register("city")}
                         />
                     </FieldContent>
@@ -391,13 +391,13 @@ export default function EventsPage() {
                         {/* Label */}
                         <div className="flex items-center gap-2 mb-6">
                             <div className="w-1 h-5 bg-[#A11D1D] rounded-full" />
-                            <span className="text-xs font-black uppercase tracking-widest text-gray-500">Featured Event</span>
+                            <span className="text-xs font-black uppercase tracking-widest text-gray-500">{t("featuredEvent")}</span>
                         </div>
 
                         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
 
                             {/* Left: Banner Image */}
-                            <div className="lg:col-span-7 relative min-h-80 lg:min-h-140 overflow-hidden bg-slate-100">
+                            <div className="lg:col-span-7 relative aspect-16/10 lg:min-h-100 overflow-hidden bg-slate-100">
                                 {/* Image */}
                                 <Image
                                     src={heroImageError ? "/images/study.jpg" : getBannerImageUrl(activeEvent.bannerImage)}
@@ -439,7 +439,7 @@ export default function EventsPage() {
                                         {activeEvent.totalSeats && (
                                             <div className="flex items-center gap-1.5 text-white/90 text-xs font-semibold bg-black/30 backdrop-blur-sm px-3 py-1.5 rounded-full">
                                                 <Users className="w-3.5 h-3.5 text-[#ff6b6b]" />
-                                                <span>{activeEvent.totalSeats - activeEvent.bookedSeats} Seats Available</span>
+                                                <span>{t("seatsAvailable", { count: activeEvent.totalSeats - activeEvent.bookedSeats })}</span>
                                             </div>
                                         )}
                                     </div>
@@ -453,14 +453,14 @@ export default function EventsPage() {
                                 {activeEvent.totalSeats && (
                                     <div className="flex items-center gap-2 text-sm text-gray-700 font-bold bg-gray-50 px-4 py-2 rounded-full border border-gray-200 self-start shadow-sm">
                                         <span className="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse" />
-                                        Total seats: {activeEvent.totalSeats}
+                                        {t("totalSeats", { count: activeEvent.totalSeats })}
                                     </div>
                                 )}
 
                                 {/* Description */}
                                 {activeEvent.description && (
                                     <div>
-                                        <h3 className="text-xs font-black uppercase tracking-widest text-gray-400 mb-2">About This Event</h3>
+                                        <h3 className="text-xs font-black uppercase tracking-widest text-gray-400 mb-2">{t("aboutThisEvent")}</h3>
                                         <div
                                             className="text-sm text-gray-600 leading-relaxed max-h-36 overflow-y-auto pr-1 prose prose-sm"
                                             dangerouslySetInnerHTML={{ __html: activeEvent.description }}

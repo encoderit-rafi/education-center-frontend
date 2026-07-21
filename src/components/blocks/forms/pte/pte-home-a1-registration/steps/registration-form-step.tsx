@@ -240,7 +240,7 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.mobileNumber}>
-            <FieldLabel required>Mobile number</FieldLabel>
+            <FieldLabel required>Phone number</FieldLabel>
             <FieldContent>
               <PhoneInput
                 value={formData.mobileNumber}

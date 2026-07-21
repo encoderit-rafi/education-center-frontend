@@ -244,7 +244,7 @@ export default function PublicHolidaysPage() {
                           >
                             {(t.raw("typeLabels") as Record<string, string>)[holiday.holidayType] ?? holiday.holidayType}
                           </div>
-                          <span className="bg-gray-900 text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest">
+                          <span className="bg-[#A11D1D] text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-sm">
                             {month} {day}
                             {!isSameDay &&
                               ` – ${endFormatted.month} ${endFormatted.day}`}

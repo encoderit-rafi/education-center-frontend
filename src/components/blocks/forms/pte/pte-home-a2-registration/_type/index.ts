@@ -32,7 +32,7 @@ export const PteHomeA2Schema = z.object({
     poBox: z.string().optional(),
     postcode: z.string().optional(),
     city: z.string().min(1, "Emirate / City is required"),
-    mobileNumber: z.string().min(1, "Mobile number is required"),
+    mobileNumber: z.string().min(1, "Phone number is required"),
 
     // Exam Date & Time
     examDate: z.any().refine((val) => !!val, "Exam date is required"),

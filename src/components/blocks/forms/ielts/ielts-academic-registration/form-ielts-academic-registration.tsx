@@ -457,7 +457,7 @@ export default function FormIeltsAcademicRegistration({
                     value: formData.birthCountry || "N/A",
                   },
                   {
-                    label: "Mobile Number",
+                    label: "Phone Number",
                     value: formData.mobileNumber || "N/A",
                   },
                   {

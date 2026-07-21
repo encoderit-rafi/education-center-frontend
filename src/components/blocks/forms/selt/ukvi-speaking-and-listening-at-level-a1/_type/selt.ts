@@ -21,7 +21,7 @@ export const SeltA1Schema = z
     countryOfBirth: z.string().min(1, "Country of birth is required"),
     email: z.string().email("Invalid email address"),
     confirmEmail: z.string().email("Invalid email address"),
-    mobileNumber: z.string().min(1, "Mobile number is required"),
+    mobileNumber: z.string().min(1, "Phone number is required"),
     smsConsent: z.boolean().default(false),
     residenceCountry: z.string().min(1, "Country of residence is required"),
     postalAddress1: z.string().min(1, "Address is required"),

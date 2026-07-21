@@ -25,7 +25,7 @@ export const ToeflIbtSchema = z
             .or(z.literal("")),
         email: z.string().email("Invalid email address"),
         confirmEmail: z.string().email("Invalid email address"),
-        phoneNumber: z.string().min(1, "Mobile number is required"),
+        phoneNumber: z.string().min(1, "Phone number is required"),
         smsConsent: z.boolean(),
         country: z.string().min(1, "Country of residence is required"),
         streetAddress1: z.string().min(1, "Address is required"),

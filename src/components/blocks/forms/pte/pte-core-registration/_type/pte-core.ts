@@ -26,7 +26,7 @@ export const PteCoreSchema = z.object({
     countryOfResidence: stringOrObject.refine(val => val.length > 0, "Country of residence is required"),
     address: z.string().min(1, "Address is required"),
     city: z.string().min(1, "City is required"),
-    mobileNumber: z.string().min(1, "Mobile number is required").or(z.any().transform(v => String(v || ""))).pipe(z.string().min(1, "Mobile number is required")),
+    mobileNumber: z.string().min(1, "Phone number is required").or(z.any().transform(v => String(v || ""))).pipe(z.string().min(1, "Phone number is required")),
     readyToBook: z.string().min(1, "Please select an option"),
 
     // New Fields for Step 1 alignment

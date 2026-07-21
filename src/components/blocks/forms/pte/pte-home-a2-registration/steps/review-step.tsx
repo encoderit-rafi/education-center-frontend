@@ -115,7 +115,7 @@ export function ReviewStep({
               </div>
               <div className="flex flex-col">
                 <span className="text-[10px] text-slate-400 font-bold uppercase">
-                  Mobile Number
+                  Phone Number
                 </span>
                 <span className="text-sm font-semibold text-black">
                   {data.mobileNumber || "N/A"}
