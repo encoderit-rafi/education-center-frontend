@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { CheckCircle2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { AcceptPayButton } from "./AcceptPayButton";
@@ -16,15 +16,15 @@ import {
 } from "@/components/ui/select";
 
 /** Per-exam mock test type options */
-const EXAM_TYPES: Record<string, { label: string; value: string }[]> = {
+const EXAM_TYPES: Record<string, { label: string; labelAr: string; value: string }[]> = {
   pte: [
-    { label: "PTE Academic", value: "PTE Academic" },
-    { label: "PTE Academic UKVI", value: "PTE Academic UKVI" },
-    { label: "PTE Core", value: "PTE Core" },
+    { label: "PTE Academic", labelAr: "بي تي إي الأكاديمي", value: "PTE Academic" },
+    { label: "PTE Academic UKVI", labelAr: "بي تي إي الأكاديمي UKVI", value: "PTE Academic UKVI" },
+    { label: "PTE Core", labelAr: "بي تي إي العام", value: "PTE Core" },
   ],
   ielts: [
-    { label: "IELTS Academic", value: "IELTS Academic" },
-    { label: "IELTS General Training", value: "IELTS General Training" },
+    { label: "IELTS Academic", labelAr: "آيلتس الأكاديمي", value: "IELTS Academic" },
+    { label: "IELTS General Training", labelAr: "آيلتس العام", value: "IELTS General Training" },
   ],
 };
 
@@ -49,6 +49,8 @@ interface MockTestTypeSelectorProps {
 
 export function MockTestTypeSelector({ data }: MockTestTypeSelectorProps) {
   const t = useTranslations("PaidMockTestsPage");
+  const locale = useLocale();
+  const isRtl = locale === "ar";
   const examKey = resolveExamKey(data.slug);
   const types = examKey ? EXAM_TYPES[examKey] : null;
 
@@ -71,6 +73,16 @@ export function MockTestTypeSelector({ data }: MockTestTypeSelectorProps) {
       : examKey === "pte"
       ? t("choosePteTypePlaceholder")
       : t("chooseExamTypePlaceholder");
+
+  const getDisplayLabel = (typeObj: { label: string; labelAr: string }) => {
+    return isRtl ? typeObj.labelAr : typeObj.label;
+  };
+
+  const getSelectedTypeDisplay = () => {
+    if (!selectedType || !types) return selectedType;
+    const match = types.find((t) => t.value === selectedType);
+    return match ? (isRtl ? match.labelAr : match.label) : selectedType;
+  };
 
   // TOEFL iBT (or any exam without subtypes) — show Pay button directly
   if (!types) {
@@ -96,9 +108,9 @@ export function MockTestTypeSelector({ data }: MockTestTypeSelectorProps) {
             <SelectValue placeholder={chooseExamTypePlaceholder} />
           </SelectTrigger>
           <SelectContent>
-            {types.map((t) => (
-              <SelectItem key={t.value} value={t.value}>
-                {t.label}
+            {types.map((typeObj) => (
+              <SelectItem key={typeObj.value} value={typeObj.value}>
+                {getDisplayLabel(typeObj)}
               </SelectItem>
             ))}
           </SelectContent>
@@ -141,7 +153,7 @@ export function MockTestTypeSelector({ data }: MockTestTypeSelectorProps) {
 
             <div className="flex items-center gap-1.5 text-xs text-emerald-600 font-medium">
               <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
-              {selectedType} {t("selected")}
+              {getSelectedTypeDisplay()} {t("selected")}
             </div>
           </div>
 

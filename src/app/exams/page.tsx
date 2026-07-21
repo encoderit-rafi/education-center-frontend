@@ -33,8 +33,23 @@ interface ApiResponse {
   };
 }
 
+const EXAM_ARABIC_NAMES: Record<string, string> = {
+  ielts: "آيلتس",
+  pte: "بي تي إي",
+  toefl: "توفل آي بي تي",
+  "toefl-ibt": "توفل آي بي تي",
+  cael: "كايل",
+  "celpip-general": "سيلبيب العام",
+  celpip: "سيلبيب العام",
+  "skill-for-english-selt": "سكيلز فور إنجلش (سيلت)",
+  "skills-for-english-selt": "سكيلز فور إنجلش (سيلت)",
+  oet: "أو إي تي",
+  gre: "جي آر إي",
+};
+
 export default function ExamsPage() {
   const locale = useLocale();
+  const isRtl = locale === "ar";
   const { data: examsResponse, isLoading } = useQuery<ApiResponse>({
     queryKey: [
       "exams",
@@ -47,6 +62,24 @@ export default function ExamsPage() {
       return response.data;
     },
   });
+
+  const getExamName = (exam: Exam) => {
+    const rawName = exam.translations?.[locale]?.name || exam.name;
+    if (isRtl) {
+      const slugKey = exam.slug?.toLowerCase();
+      if (slugKey && EXAM_ARABIC_NAMES[slugKey]) {
+        return EXAM_ARABIC_NAMES[slugKey];
+      }
+      const upper = exam.name?.toUpperCase() || "";
+      if (upper === "IELTS") return "آيلتس";
+      if (upper === "PTE") return "بي تي إي";
+      if (upper.includes("TOEFL")) return "توفل آي بي تي";
+      if (upper === "CAEL") return "كايل";
+      if (upper.includes("CELPIP")) return "سيلبيب العام";
+      if (upper.includes("SKILL")) return "سكيلز فور إنجلش (سيلت)";
+    }
+    return rawName;
+  };
 
   const exams =
     examsResponse?.data?.data
@@ -90,7 +123,7 @@ export default function ExamsPage() {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
               {exams.map((exam, index) => {
-                const examName = exam.translations?.[locale]?.name || exam.name;
+                const examName = getExamName(exam);
                 const examDesc =
                   exam.translations?.[locale]?.description || exam.description;
                 return (

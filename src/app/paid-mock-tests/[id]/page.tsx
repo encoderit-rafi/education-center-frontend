@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import {
   Activity,
   Clock,
@@ -71,8 +71,38 @@ export async function generateStaticParams() {
   return [];
 }
 
+
+const EXAM_ARABIC_NAMES: Record<string, string> = {
+  ielts: "آيلتس",
+  pte: "بي تي إي",
+  toefl: "توفل آي بي تي",
+  "toefl-ibt": "توفل آي بي تي",
+  cael: "كايل",
+  "celpip-general": "سيلبيب العام",
+  celpip: "سيلبيب العام",
+  "skill-for-english-selt": "سكيلز فور إنجلش (سيلت)",
+  "skills-for-english-selt": "سكيلز فور إنجلش (سيلت)",
+  oet: "أو إي تي",
+  gre: "جي آر إي",
+};
+
+const getExamArabicName = (slug: string, name: string) => {
+  const clean = slug.replace(/-\d+$/, "").toLowerCase();
+  if (EXAM_ARABIC_NAMES[clean]) return EXAM_ARABIC_NAMES[clean];
+  const upper = name.toUpperCase();
+  if (upper.includes("IELTS")) return "آيلتس";
+  if (upper.includes("PTE")) return "بي تي إي";
+  if (upper.includes("TOEFL")) return "توفل آي بي تي";
+  if (upper.includes("CAEL")) return "كايل";
+  if (upper.includes("CELPIP")) return "سيلبيب العام";
+  if (upper.includes("SKILL")) return "سكيلز فور إنجلش (سيلت)";
+  return name;
+};
+
 export default async function PaidMockTestDynamicPage({ params }: PageProps) {
   const { id } = await params;
+  const locale = await getLocale();
+  const isRtl = locale === "ar";
   const t = await getTranslations("PaidMockTestsPage");
 
   let data = null;
@@ -89,6 +119,7 @@ export default async function PaidMockTestDynamicPage({ params }: PageProps) {
   if (!data) {
     notFound();
   }
+  let fallback: Record<string, any> = {};
   if (data) {
     let cleanSlug = data.slug.replace(/-\d+$/, "").toLowerCase();
     if (cleanSlug.includes("ielts")) {
@@ -100,14 +131,22 @@ export default async function PaidMockTestDynamicPage({ params }: PageProps) {
     }
     const originalDetails = data.details || {};
     const fallbackDetails = t.raw("fallbackDetails") as Record<string, any>;
-    const fallback =
+    fallback =
       fallbackDetails[cleanSlug] ||
       fallbackDetails[data.slug.toLowerCase()] ||
       {};
-    data.details = {
-      ...fallback,
-      ...originalDetails,
-    };
+    data.details = isRtl
+      ? {
+          ...originalDetails,
+          ...fallback,
+          description: fallback.description || originalDetails.description,
+          sub_title: fallback.sub_title || originalDetails.sub_title,
+          content: fallback.content || originalDetails.content,
+        }
+      : {
+          ...fallback,
+          ...originalDetails,
+        };
     console.log("👉 ~ PaidMockTestDynamicPage ~ data.details:", data.details);
   }
 
@@ -117,6 +156,12 @@ export default async function PaidMockTestDynamicPage({ params }: PageProps) {
   const quote = notesParts[0];
   const tagline = notesParts[1] || "";
 
+  const pageDescription = isRtl
+    ? (fallback.description || data.details?.description || data.description)
+    : (data.description || data.details?.description);
+
+  const arabicExamName = getExamArabicName(data.slug, data.name);
+
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
@@ -125,11 +170,20 @@ export default async function PaidMockTestDynamicPage({ params }: PageProps) {
           <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
             <div className="max-w-xl">
               <h1 className="text-3xl font-black leading-[1.1] tracking-tight text-slate-900 lg:text-4xl xl:text-5xl mb-4">
-                {data.name}{" "}
-                <span className="text-primary">{t("paidMockTest")}</span>
+                {isRtl ? (
+                  <>
+                    {t("paidMockTest")}{" "}
+                    <span className="text-primary">{arabicExamName}</span>
+                  </>
+                ) : (
+                  <>
+                    {data.name}{" "}
+                    <span className="text-primary">{t("paidMockTest")}</span>
+                  </>
+                )}
               </h1>
               <p className="text-base text-slate-600 leading-relaxed mb-4 text-justify">
-                {data.description || data.details?.description}
+                {pageDescription}
               </p>
               <MockTestTypeSelector data={data} />
             </div>
