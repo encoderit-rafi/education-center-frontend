@@ -403,7 +403,7 @@ export function RegistrationFormStep({
                         <Save className="size-4" />
                       </div>
                       <div className="flex flex-col">
-                        <span className="text-xs font-bold text-slate-700 truncate max-w-[200px]">
+                        <span className="text-xs font-bold text-slate-700 truncate max-w-50">
                           {(formData.idDocument as File).name}
                         </span>
                         <span className="text-[10px] text-slate-400 font-medium">
@@ -579,7 +579,7 @@ export function RegistrationFormStep({
                           placeholder={tSelt("otherReason")}
                           value={formData.reasonForTestOther ?? ""}
                           onChange={(e) => setValue("reasonForTestOther", e.target.value)}
-                          className="w-full min-h-[80px] p-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary text-sm font-light"
+                          className="w-full min-h-20 p-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary text-sm font-light"
                         />
                         <FieldError errors={[errors.reasonForTestOther]} />
                       </div>

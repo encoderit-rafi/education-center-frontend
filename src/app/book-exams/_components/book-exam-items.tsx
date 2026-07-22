@@ -58,7 +58,7 @@ export default function BookExamItems({ data }: { data: any }) {
           {data.items?.map((item: any, index: number) => {
             const itemName = item.name;
             const href = item?.examFormRedirectUrl || `/book-exams/${item.id}`;
-            const isExternal = !item?.examFormRedirectUrl;
+            const isExternal = !!item?.examFormRedirectUrl;
             return (
               <Link
                 key={item.id}

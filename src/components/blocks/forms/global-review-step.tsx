@@ -42,7 +42,7 @@ const translateLabel = (label: string, locale: string) => {
     "mobile number": "رقم الجوال",
     "nationality": "الجنسية",
     "country of nationality": "بلد الجنسية",
-    
+
     "id type": "نوع الهوية",
     "id number": "رقم الهوية",
     "email": "البريد الإلكتروني",
@@ -50,7 +50,7 @@ const translateLabel = (label: string, locale: string) => {
     "identity document": "وثيقة الهوية",
     "id document": "وثيقة الهوية",
     "issuing authority": "جهة الإصدار",
-    
+
     "exam date": "تاريخ الامتحان",
     "time slot": "الموعد",
     "speaking slot": "طريقة تقديم اختبار المحادثة",
@@ -68,6 +68,8 @@ const translateLabel = (label: string, locale: string) => {
     "first language": "اللغة الأولى",
     "occupation level": "المستوى الوظيفي",
     "occupation sector": "القطاع الوظيفي",
+    "reason for test": "السبب من إجراء الاختبار",
+    "education level": "المستوى التعليمي",
     "selected level": "المستوى المختار",
     "test module": "نوع الاختبار",
     "reason for taking test": "السبب من إجراء الاختبار",
@@ -84,7 +86,7 @@ const translateLabel = (label: string, locale: string) => {
 const translateValue = (val: string, locale: string) => {
   if (locale !== "ar") return val;
   let cleanVal = val.trim();
-  
+
   // Translate dates (e.g. "July 26th, 2026", "July 1st, 1984")
   const months: Record<string, string> = {
     January: "يناير",
@@ -100,13 +102,13 @@ const translateValue = (val: string, locale: string) => {
     November: "نوفمبر",
     December: "ديسمبر"
   };
-  
+
   for (const [engMonth, arMonth] of Object.entries(months)) {
     if (cleanVal.includes(engMonth)) {
       cleanVal = cleanVal.replace(engMonth, arMonth);
     }
   }
-  
+
   // Replace ordinals like "1st", "2nd", "3rd", "4th" etc.
   cleanVal = cleanVal.replace(/(\d+)(st|nd|rd|th)/g, "$1");
 
@@ -122,23 +124,23 @@ const translateValue = (val: string, locale: string) => {
   }
 
   const lower = cleanVal.toLowerCase();
-  
+
   // Handle genders
   if (lower === "male") return "ذكر";
   if (lower === "female") return "أنثى";
   if (lower === "other") return "أخرى";
-  
+
   // Handle ID types
   if (lower === "emirates id" || lower === "emirates_id" || lower === "emirates") return "الهوية الإماراتية";
   if (lower === "passport") return "جواز سفر";
   if (lower === "visa") return "تأشيرة";
   if (lower === "others" || lower === "other") return "أخرى";
-  
+
   // Handle YES/NO
   if (lower === "yes") return "نعم";
   if (lower === "no") return "لا";
   if (lower === "n/a") return "غير متوفر";
-  
+
   // Handle common countries
   if (lower === "united arab emirates") return "الإمارات العربية المتحدة";
   if (lower === "saudi arabia") return "المملكة العربية السعودية";
@@ -154,14 +156,14 @@ const translateValue = (val: string, locale: string) => {
   if (lower === "yemen") return "اليمن";
   if (lower === "palestine") return "فلسطين";
   if (lower === "sudan") return "السودان";
-  
+
   // Handle occupation levels / sectors / languages
   if (lower === "self-employed") return "عامل لحسابه الخاص";
   if (lower === "albanian") return "الألبانية";
   if (cleanVal.includes("Agriculture, Fishing, Forestry, Mining")) {
     return "الزراعة والصيد والغابات والتعدين";
   }
-  
+
   // Format Speaking Slot description if in English
   if (cleanVal.includes("Live with the examiner")) {
     return "مباشر مع الممتحن في مركز الاختبار (وجهاً لوجه)";
@@ -169,7 +171,7 @@ const translateValue = (val: string, locale: string) => {
   if (cleanVal.includes("Video Call at the test")) {
     return "مكالمة فيديو في مركز الاختبار (VCS)";
   }
-  
+
   return cleanVal;
 };
 
@@ -199,8 +201,8 @@ function SummaryCard({
       <div className={cn("grid gap-5 p-5", colsClassName)}>
         {fields.map((field, i) => {
           const displayLabel = translateLabel(field.label, locale);
-          const displayValue = typeof field.value === "string" 
-            ? translateValue(field.value, locale) 
+          const displayValue = typeof field.value === "string"
+            ? translateValue(field.value, locale)
             : field.value;
 
           return (
@@ -304,7 +306,7 @@ export function GlobalReviewStep({
   const t = useTranslations("FormsShared.GlobalReviewStep");
   const selectedCoursePrice = selectedCourseData
     ? (selectedCourseData.discounted_price ??
-       selectedCourseData.price * (1 - (selectedCourseData.special_discount || 0) / 100))
+      selectedCourseData.price * (1 - (selectedCourseData.special_discount || 0) / 100))
     : 0;
   const selectedWorkshopPrice = selectedWorkshopData ? selectedWorkshopData.price : 0;
   const calculatedSubtotal = baseFee + serviceFee + selectedCoursePrice + selectedWorkshopPrice;
@@ -407,7 +409,7 @@ export function GlobalReviewStep({
                         amount={
                           selectedCourseData.discounted_price ??
                           selectedCourseData.price *
-                            (1 - (selectedCourseData.special_discount || 0) / 100)
+                          (1 - (selectedCourseData.special_discount || 0) / 100)
                         }
                         className="font-bold text-slate-900"
                       />
