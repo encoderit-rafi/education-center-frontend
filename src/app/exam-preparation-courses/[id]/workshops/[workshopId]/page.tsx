@@ -352,21 +352,37 @@ export default async function WorkshopDetailPage({ params }: PageProps) {
           <div className="space-y-8">
             <div className="space-y-4">
               <h3 className="text-3xl font-black text-slate-900 leading-tight">
-                Flexible Workshops at{" "}
-                <span className="text-primary">TEPTH</span>
+                {locale === "ar" ? (
+                  <>
+                    ورش عمل مرنة في <span className="text-primary">TEPTH</span>
+                  </>
+                ) : (
+                  <>
+                    Flexible Workshops at{" "}
+                    <span className="text-primary">TEPTH</span>
+                  </>
+                )}
               </h3>
               <p className="text-slate-600 text-lg font-medium leading-relaxed">
-                All workshops at TEPTH – The Exam Preparation & Testing House
-                are:
+                {locale === "ar"
+                  ? "جميع ورش العمل في TEPTH – بيت التحضير للاختبارات وتقديمها هي:"
+                  : "All workshops at TEPTH – The Exam Preparation & Testing House are:"}
               </p>
             </div>
 
             <ul className="space-y-4">
-              {[
-                "Face-to-face and one-on-one",
-                "Fully customizable according to the candidate's needs",
-                "Focused on practical exam strategies and performance",
-              ].map((item, i) => (
+              {(locale === "ar"
+                ? [
+                    "حضورياً وفردياً (واحد لواحد)",
+                    "قابلة للتخصيص بالكامل وفقاً لاحتياجات المرشح",
+                    "تركّز على استراتيجيات الامتحان العملية والأداء",
+                  ]
+                : [
+                    "Face-to-face and one-on-one",
+                    "Fully customizable according to the candidate's needs",
+                    "Focused on practical exam strategies and performance",
+                  ]
+              ).map((item, i) => (
                 <li key={i} className="flex items-start gap-3">
                   <CheckCircle2 className="size-6 text-primary shrink-0" />
                   <span className="text-slate-700 font-medium">{item}</span>
@@ -381,12 +397,22 @@ export default async function WorkshopDetailPage({ params }: PageProps) {
                 </div>
                 <div>
                   <p className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-0.5">
-                    Location
+                    {locale === "ar" ? "الموقع" : "Location"}
                   </p>
-                  <p className="text-sm font-semibold text-slate-900 ">
-                    The Exam Preparation & Testing House L.L.C <br />
-                    Suite 701, 7th Floor, Tabarak Tower, Corniche Road, Al Mamzar, <br />
-                    Sharjah, United Arab Emirates.
+                  <p className="text-sm font-semibold text-slate-900">
+                    {locale === "ar" ? (
+                      <>
+                        مؤسسة بيت التحضير للاختبارات وتقديمها ش.ذ.م.م <br />
+                        جناح 701، الطابق السابع، برج تبارك، شارع الكورنيش، الممزر، <br />
+                        الشارقة، الإمارات العربية المتحدة.
+                      </>
+                    ) : (
+                      <>
+                        The Exam Preparation & Testing House L.L.C <br />
+                        Suite 701, 7th Floor, Tabarak Tower, Corniche Road, Al Mamzar, <br />
+                        Sharjah, United Arab Emirates.
+                      </>
+                    )}
                   </p>
                 </div>
               </div>
@@ -396,10 +422,10 @@ export default async function WorkshopDetailPage({ params }: PageProps) {
                 </div>
                 <div>
                   <p className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-0.5">
-                    Scheduling
+                    {locale === "ar" ? "الجدول الزمني" : "Scheduling"}
                   </p>
                   <p className="text-sm font-semibold text-slate-900">
-                    Flexible
+                    {locale === "ar" ? "مرن" : "Flexible"}
                   </p>
                 </div>
               </div>
@@ -410,19 +436,29 @@ export default async function WorkshopDetailPage({ params }: PageProps) {
             <div className="flex items-center gap-3 mb-6">
               <Target className="size-6 text-primary" />
               <h4 className="text-xl font-bold text-slate-900">
-                Who is this for?
+                {locale === "ar" ? "لمن هذه الورش؟" : "Who is this for?"}
               </h4>
             </div>
             <p className="text-slate-600 mb-6 font-medium">
-              Workshops can be particularly helpful for candidates who:
+              {locale === "ar"
+                ? "يمكن أن تكون ورش العمل مفيدة بشكل خاص للمرشحين الذين:"
+                : "Workshops can be particularly helpful for candidates who:"}
             </p>
             <ul className="space-y-3">
-              {[
-                "Have an exam scheduled soon",
-                "Want to refresh their knowledge quickly",
-                "Need guidance on specific modules",
-                "Want to understand the exam format before starting preparation",
-              ].map((item, i) => (
+              {(locale === "ar"
+                ? [
+                    "لديهم اختبار مقرر قريباً",
+                    "يرغبون في تنشيط معلوماتهم بسرعة",
+                    "يحتاجون إلى توجيه بشأن أجزاء معينة من الاختبار",
+                    "يرغبون في فهم شكل الامتحان قبل بدء التحضير",
+                  ]
+                : [
+                    "Have an exam scheduled soon",
+                    "Want to refresh their knowledge quickly",
+                    "Need guidance on specific modules",
+                    "Want to understand the exam format before starting preparation",
+                  ]
+              ).map((item, i) => (
                 <li key={i} className="flex items-start gap-3">
                   <div className="size-1.5 rounded-full bg-primary mt-2.5 shrink-0" />
                   <span className="text-slate-700 font-medium text-sm leading-relaxed">
@@ -433,8 +469,9 @@ export default async function WorkshopDetailPage({ params }: PageProps) {
             </ul>
             <div className="mt-8 p-5 bg-white rounded-xl border border-slate-100 shadow-sm">
               <p className="text-sm font-semibold text-slate-800 leading-relaxed text-center">
-                These focused sessions allow candidates to gain clarity, improve
-                their approach, and walk into the exam with greater confidence.
+                {locale === "ar"
+                  ? "تتيح هذه الجلسات المركزة للمرشحين الحصول على الوضوح، وتحسين نهجهم، ودخول الامتحان بثقة أكبر."
+                  : "These focused sessions allow candidates to gain clarity, improve their approach, and walk into the exam with greater confidence."}
               </p>
             </div>
           </div>
