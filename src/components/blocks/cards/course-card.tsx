@@ -31,6 +31,16 @@ export interface CoursePackage {
   image?: string | null;
 }
 
+function getDisplayDiscount(courseName: string, actualDiscount: number): number {
+  const name = courseName.toLowerCase();
+  if (name.includes("group")) return 10;
+  if (name.includes("semi-private")) return 15;
+  if (name.includes("hybrid")) return 25;
+  if (name.includes("online") && (name.includes("one-to-one") || name.includes("1-to-1") || name.includes("private") || name.includes("vip"))) return 20;
+  if (name.includes("in-person") || name.includes("classroom") || name.includes("one-to-one") || name.includes("1-to-1") || name.includes("vip") || name.includes("private")) return 20;
+  return actualDiscount;
+}
+
 export interface CourseCardProps {
   pkg: CoursePackage;
   examSlug: string;
@@ -84,7 +94,7 @@ export default function CourseCard({
           <div className="absolute top-4 right-4 z-10">
             <Badge className="py-1 px-3 font-bold shadow-lg">
               {t("packages.saveInstantCard", {
-                discount,
+                discount: getDisplayDiscount(pkg.name, discount),
                 type: discountType === "PERCENTAGE" ? "%" : " AED"
               })}
             </Badge>
