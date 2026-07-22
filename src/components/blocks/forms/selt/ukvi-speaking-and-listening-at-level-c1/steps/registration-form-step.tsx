@@ -318,7 +318,7 @@ export function RegistrationFormStep({
           <Field data-invalid={!!errors.idNumber}>
             <FieldLabel required>
               {formData.idType === "govt_id"
-                ? `${t("idTypeEmiratesId")} ${t("idNumber")}`
+                ? t("idNumber")
                 : t("passportNumber")}
             </FieldLabel>
 
@@ -326,7 +326,11 @@ export function RegistrationFormStep({
               <Input
                 {...register("idNumber")}
                 aria-invalid={!!errors.idNumber}
-                placeholder={`Enter your ${formData.idType === "govt_id" ? t("idTypeEmiratesId") : t("idTypePassport")} number`}
+                placeholder={
+                  formData.idType === "govt_id"
+                    ? t("enterIdNumber")
+                    : t("enterPassportNumber")
+                }
               />
               <FieldError errors={[errors.idNumber]} />
             </FieldContent>
@@ -338,7 +342,7 @@ export function RegistrationFormStep({
           <Field data-invalid={!!errors.idExpiryDate}>
             <FieldLabel required>
               {formData.idType === "govt_id"
-                ? `${t("idTypeEmiratesId")} ${t("idExpiryDate")}`
+                ? t("idExpiryDate")
                 : t("passportExpiryDate")}
             </FieldLabel>
             <FieldContent>
@@ -348,7 +352,11 @@ export function RegistrationFormStep({
                 onChange={(date) => setValue("idExpiryDate", date as Date)}
                 aria-invalid={!!errors.idExpiryDate}
                 disabled={(date) => date <= new Date()}
-                placeholder={`Select ${formData.idType === "govt_id" ? t("idTypeEmiratesId") : t("idTypePassport")} expiry date`}
+                placeholder={
+                  formData.idType === "govt_id"
+                    ? t("selectIdExpiryDate")
+                    : t("selectPassportExpiryDate")
+                }
               />
               <FieldError errors={[errors.idExpiryDate]} />
             </FieldContent>

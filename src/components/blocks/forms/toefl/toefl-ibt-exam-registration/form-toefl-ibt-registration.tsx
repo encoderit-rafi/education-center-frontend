@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useTranslations } from "next-intl";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "@/components/ui/form";
@@ -36,6 +37,7 @@ export default function FormTOEFLIBTRegistration({
 }: FormProps = {}) {
   const [currentStep, setCurrentStep] = useState(0); // 0: Terms, 1: Date, 2: Form, 3: Review
   const titleObj = useRegistrationTitle("toefl-ibt");
+  const tReview = useTranslations("FormsShared.GlobalReviewStep");
 
   const { data: examsResponse } = useQuery({
     queryKey: ["exams-list"],
@@ -485,7 +487,7 @@ export default function FormTOEFLIBTRegistration({
                     parseFloat(activeExam.usdExamFee) > 0 && (
                       <div className="flex justify-between text-sm">
                         <span className="text-slate-500 font-medium">
-                          USD Exam Fee
+                          {tReview("usdExamFee")}
                         </span>
                         <span className="font-bold text-slate-900">
                           ${parseFloat(activeExam.usdExamFee).toFixed(2)}
@@ -495,12 +497,12 @@ export default function FormTOEFLIBTRegistration({
 
                   <div className="flex justify-between text-sm items-center">
                     <span className="text-slate-500 font-medium">
-                      Exam Registration Fee
+                      {tReview("examRegistrationFee")}
                     </span>
                     <span className="font-bold text-slate-900 inline-flex items-center gap-1">
                       ${pricing.baseFeeUSD}{" "}
                       <span className="text-slate-400 font-normal text-xs inline-flex items-center gap-0.5">
-                        (Approximately{" "}
+                        ({tReview("approximately")}{" "}
                         <PriceDisplay
                           amount={pricing.baseFeeAED}
                           minimumFractionDigits={0}
@@ -514,12 +516,12 @@ export default function FormTOEFLIBTRegistration({
 
                   <div className="flex justify-between text-sm items-center">
                     <span className="text-slate-500 font-medium">
-                      Exam Registration Service Fee
+                      {tReview("registrationServiceFee")}
                     </span>
                     <span className="font-bold text-slate-900 inline-flex items-center gap-1">
                       ${pricing.registrationServiceFeeUSD}{" "}
                       <span className="text-slate-400 font-normal text-xs inline-flex items-center gap-0.5">
-                        (Approximately{" "}
+                        ({tReview("approximately")}{" "}
                         <PriceDisplay
                           amount={pricing.registrationServiceFeeAED}
                           minimumFractionDigits={0}
@@ -534,12 +536,12 @@ export default function FormTOEFLIBTRegistration({
                   {pricing.isExpress && (
                     <div className="flex justify-between text-sm items-center animate-in fade-in slide-in-from-top-1 duration-300">
                       <span className="text-slate-500 font-medium">
-                        Express Registration Fee
+                        {tReview("expressRegistrationFee")}
                       </span>
                       <span className="font-bold text-red-700 inline-flex items-center gap-1">
                         ${pricing.expressFeeUSD}{" "}
                         <span className="text-red-500/80 font-normal text-xs inline-flex items-center gap-0.5">
-                          (Approximately{" "}
+                          ({tReview("approximately")}{" "}
                           <PriceDisplay
                             amount={pricing.expressFeeAED}
                             minimumFractionDigits={0}

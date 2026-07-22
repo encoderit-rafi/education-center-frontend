@@ -451,15 +451,15 @@ export function RegistrationFormStep({
             <FieldContent>
               <SearchableDropdown
                 options={[
-                  { label: "Student - In High School", value: "Student - In High School" },
-                  { label: "Student - High School graduate", value: "Student - High School graduate" },
-                  { label: "Student - English language", value: "Student - English language" },
-                  { label: "Student - In University / College", value: "Student - In University / College" },
-                  { label: "Student - University / College graduate", value: "Student - University / College graduate" },
-                  { label: "Working - full time", value: "Working - full time" },
-                  { label: "Working - part time", value: "Working - part time" },
-                  { label: "Not studying or working", value: "Not studying or working" },
-                  { label: "Other - specify below", value: "Other" },
+                  { label: tPte("situationStudentInHighSchool"), value: "Student - In High School" },
+                  { label: tPte("situationStudentHighSchoolGraduate"), value: "Student - High School graduate" },
+                  { label: tPte("situationStudentEnglish"), value: "Student - English language" },
+                  { label: tPte("situationStudentUniversity"), value: "Student - In University / College" },
+                  { label: tPte("situationStudentUniversityGraduate"), value: "Student - University / College graduate" },
+                  { label: tPte("situationWorkingFull"), value: "Working - full time" },
+                  { label: tPte("situationWorkingPart"), value: "Working - part time" },
+                  { label: tPte("situationNotStudying"), value: "Not studying or working" },
+                  { label: tPte("situationOther"), value: "Other" },
                 ]}
                 placeholder={t("selectOne")}
                 value={formData.currentSituation}
@@ -490,15 +490,15 @@ export function RegistrationFormStep({
             <FieldContent>
               <SearchableDropdown
                 options={[
-                  { label: "Settlement (Indefinite Leave to Remain)", value: "settlement" },
-                  { label: "Citizenship", value: "citizenship" },
-                  { label: "Sportsperson visa (Tier 2)", value: "sportsperson_visa" },
-                  { label: "Student visa (formerly known as the Tier 4 General student visa)", value: "student_visa" },
-                  { label: "Skilled Worker visa (formerly known as the Tier 2 General work visa)", value: "skilled_worker_visa" },
-                  { label: "Start Up or Innovator Visa", value: "startup_innovator_visa" },
-                  { label: "Domestic Worker in a Private Household", value: "domestic_worker" },
-                  { label: "Minister of Religion visa (Tier 2)", value: "minister_religion_visa" },
-                  { label: "Other - specify below", value: "other" },
+                  { label: tPte("reasonSettlement"), value: "settlement" },
+                  { label: tPte("reasonCitizenship"), value: "citizenship" },
+                  { label: tPte("reasonSportspersonVisa"), value: "sportsperson_visa" },
+                  { label: tPte("reasonStudentVisa"), value: "student_visa" },
+                  { label: tPte("reasonSkilledWorkerVisa"), value: "skilled_worker_visa" },
+                  { label: tPte("reasonStartupInnovatorVisa"), value: "startup_innovator_visa" },
+                  { label: tPte("reasonDomesticWorker"), value: "domestic_worker" },
+                  { label: tPte("reasonMinisterReligion"), value: "minister_religion_visa" },
+                  { label: tPte("reasonOther"), value: "other" },
                 ]}
                 placeholder={t("selectOne")}
                 value={formData.reasonForTaking}
@@ -536,18 +536,18 @@ export function RegistrationFormStep({
             <FieldContent>
               <SearchableDropdown
                 options={[
-                  { label: "Education Agent Advisor - specify below", value: "education_agent" },
-                  { label: "Education event - specify below", value: "education_event" },
-                  { label: "Friend or Family", value: "friend_family" },
-                  { label: "Internet Search", value: "internet_search" },
-                  { label: "Language School", value: "language_school" },
-                  { label: "Migration Agent/Lawyer - specify below", value: "migration_agent" },
-                  { label: "Outdoor Advert", value: "outdoor_advert" },
-                  { label: "Radio Advert", value: "radio_advert" },
-                  { label: "Social Media (e.g. Facebook, Twitter,Weibo etc.)", value: "social_media" },
-                  { label: "UK Visas and Immigration (UKVI)", value: "ukvi" },
-                  { label: "University or College - specify below", value: "university_college" },
-                  { label: "Other - specify below", value: "Other" },
+                  { label: tPte("referralEducationAgent"), value: "education_agent" },
+                  { label: tPte("referralEducationEvent"), value: "education_event" },
+                  { label: tPte("referralFriendFamily"), value: "friend_family" },
+                  { label: tPte("referralInternetSearch"), value: "internet_search" },
+                  { label: tPte("referralLanguageSchool"), value: "language_school" },
+                  { label: tPte("referralMigrationAgentUKVI"), value: "migration_agent" },
+                  { label: tPte("referralOutdoorAdvert"), value: "outdoor_advert" },
+                  { label: tPte("referralRadioAdvert"), value: "radio_advert" },
+                  { label: tPte("referralSocialMedia"), value: "social_media" },
+                  { label: tPte("referralUKVI"), value: "ukvi" },
+                  { label: tPte("referralUniversityCollege"), value: "university_college" },
+                  { label: tPte("referralOther"), value: "Other" },
                 ]}
                 placeholder={t("selectOne")}
                 value={formData.referralSource}
@@ -583,14 +583,14 @@ export function RegistrationFormStep({
               <FieldContent>
                 <SearchableDropdown
                   options={[
-                    { label: "Pre-degree / Foundation course", value: "pre_degree" },
-                    { label: "Undergraduate degree", value: "undergraduate" },
-                    { label: "(Post) Graduate / Masters degree", value: "postgraduate" },
-                    { label: "Doctorate / PhD", value: "doctorate" },
-                    { label: "MBA (Master of Business Administration)", value: "mba" },
-                    { label: "Professional qualification", value: "professional" },
-                    { label: "English Language Course", value: "english_language" },
-                    { label: "Other - specify below", value: "other" },
+                    { label: tPte("studyLevelPreDegree"), value: "pre_degree" },
+                    { label: tPte("studyLevelUndergraduate"), value: "undergraduate" },
+                    { label: tPte("studyLevelPostgraduate"), value: "postgraduate" },
+                    { label: tPte("studyLevelDoctorate"), value: "doctorate" },
+                    { label: tPte("studyLevelMba"), value: "mba" },
+                    { label: tPte("studyLevelProfessional"), value: "professional" },
+                    { label: tPte("studyLevelEnglish"), value: "english_language" },
+                    { label: tPte("studyLevelOther"), value: "other" },
                   ]}
                   placeholder={t("selectOne")}
                   value={formData.studyLevel}
@@ -628,23 +628,23 @@ export function RegistrationFormStep({
               <FieldContent>
                 <SearchableDropdown
                   options={[
-                    { label: "Accountancy and Finance", value: "accountancy_finance" },
-                    { label: "Agriculture", value: "agriculture" },
-                    { label: "Architecture", value: "architecture" },
-                    { label: "Business and Management", value: "business_management" },
-                    { label: "Communications and Media", value: "communications_media" },
-                    { label: "Education", value: "education" },
-                    { label: "Engineering", value: "engineering" },
-                    { label: "Health", value: "health" },
-                    { label: "Humanities & Arts", value: "humanities_arts" },
-                    { label: "Information Technology", value: "it_computer_sciences" },
-                    { label: "Law", value: "law" },
-                    { label: "Mathematics", value: "mathematics" },
-                    { label: "Medicine", value: "medicine" },
-                    { label: "Physical and Life Sciences", value: "physical_life_sciences" },
-                    { label: "Social Sciences", value: "social_sciences" },
-                    { label: "Tourism and Hospitality Management", value: "tourism_hospitality" },
-                    { label: "Other - specify below", value: "other" },
+                    { label: tPte("fieldAccountancyFinance"), value: "accountancy_finance" },
+                    { label: tPte("fieldAgriculture"), value: "agriculture" },
+                    { label: tPte("fieldArchitecture"), value: "architecture" },
+                    { label: tPte("fieldBusinessManagement"), value: "business_management" },
+                    { label: tPte("fieldCommunicationsMedia"), value: "communications_media" },
+                    { label: tPte("fieldEducation"), value: "education" },
+                    { label: tPte("fieldEngineering"), value: "engineering" },
+                    { label: tPte("fieldHealth"), value: "health" },
+                    { label: tPte("fieldHumanitiesArts"), value: "humanities_arts" },
+                    { label: tPte("fieldIT"), value: "it_computer_sciences" },
+                    { label: tPte("fieldLaw"), value: "law" },
+                    { label: tPte("fieldMathematics"), value: "mathematics" },
+                    { label: tPte("fieldMedicine"), value: "medicine" },
+                    { label: tPte("fieldPhysicalLifeSciences"), value: "physical_life_sciences" },
+                    { label: tPte("fieldSocialSciences"), value: "social_sciences" },
+                    { label: tPte("fieldTourismHospitality"), value: "tourism_hospitality" },
+                    { label: tPte("fieldOther"), value: "other" },
                   ]}
                   placeholder={t("selectOne")}
                   value={formData.fieldOfStudy}
@@ -674,31 +674,31 @@ export function RegistrationFormStep({
               data-invalid={!!errors.occupationSector}
               className="md:col-span-2 animate-in fade-in slide-in-from-top-2"
             >
-              <FieldLabel required>What is your occupation sector?</FieldLabel>
+              <FieldLabel required>{tPte("occupationSectorLabel")}</FieldLabel>
               <FieldContent>
                 <SearchableDropdown
                   options={[
-                    { label: "Agriculture, Fishing, Forestry, Mining", value: "Agriculture, Fishing, Forestry, Mining" },
-                    { label: "Architecture", value: "Architecture" },
-                    { label: "Arts and Entertainment", value: "Arts and Entertainment" },
-                    { label: "Banking and Finance", value: "Banking and Finance" },
-                    { label: "Catering and Leisure", value: "Catering and Leisure" },
-                    { label: "Construction Industries", value: "Construction Industries" },
-                    { label: "Communications and Media", value: "Communications and Media" },
-                    { label: "Craft and Design", value: "Craft and Design" },
-                    { label: "Education", value: "Education" },
-                    { label: "Health and Social Services", value: "Health and Social Services" },
-                    { label: "Installation, Maintenance and Repair Services", value: "Installation, Maintenance and Repair Services" },
-                    { label: "Law and Legal Services", value: "Law and Legal Services" },
-                    { label: "Manufacturing and Assembly Services", value: "Manufacturing and Assembly Services" },
-                    { label: "Personal Services", value: "Personal Services" },
-                    { label: "Retail Trade", value: "Retail Trade" },
-                    { label: "Technical and Scientific", value: "Technical and Scientific" },
-                    { label: "Telecommunications and Media", value: "Telecommunications and Media" },
-                    { label: "Transport", value: "Transport" },
-                    { label: "Utilities (Gas, Water, Electricity, etc.)", value: "Utilities (Gas, Water, Electricity, etc.)" },
-                    { label: "Wholesale Trade", value: "Wholesale Trade" },
-                    { label: "Other - Specify below", value: "Other" },
+                    { label: tPte("occupationSectorAgriculture"), value: "Agriculture, Fishing, Forestry, Mining" },
+                    { label: tPte("occupationSectorArchitecture"), value: "Architecture" },
+                    { label: tPte("occupationSectorArts"), value: "Arts and Entertainment" },
+                    { label: tPte("occupationSectorBanking"), value: "Banking and Finance" },
+                    { label: tPte("occupationSectorCatering"), value: "Catering and Leisure" },
+                    { label: tPte("occupationSectorConstruction"), value: "Construction Industries" },
+                    { label: tPte("occupationSectorCommunications"), value: "Communications and Media" },
+                    { label: tPte("occupationSectorCraft"), value: "Craft and Design" },
+                    { label: tPte("occupationSectorEducation"), value: "Education" },
+                    { label: tPte("occupationSectorHealth"), value: "Health and Social Services" },
+                    { label: tPte("occupationSectorInstallation"), value: "Installation, Maintenance and Repair Services" },
+                    { label: tPte("occupationSectorLaw"), value: "Law and Legal Services" },
+                    { label: tPte("occupationSectorManufacturing"), value: "Manufacturing and Assembly Services" },
+                    { label: tPte("occupationSectorPersonal"), value: "Personal Services" },
+                    { label: tPte("occupationSectorRetail"), value: "Retail Trade" },
+                    { label: tPte("occupationSectorTechnical"), value: "Technical and Scientific" },
+                    { label: tPte("occupationSectorTelecoms"), value: "Telecommunications and Media" },
+                    { label: tPte("occupationSectorTransport"), value: "Transport" },
+                    { label: tPte("occupationSectorUtilities"), value: "Utilities (Gas, Water, Electricity, etc.)" },
+                    { label: tPte("occupationSectorWholesale"), value: "Wholesale Trade" },
+                    { label: tPte("occupationSectorOther"), value: "Other" },
                   ]}
                   placeholder={t("selectSector")}
                   value={formData.occupationSector}

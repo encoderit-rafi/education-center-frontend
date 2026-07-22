@@ -172,42 +172,51 @@ export function DateStep({
               <div className="p-4 rounded-xl bg-amber-50 border border-amber-200 text-amber-800 text-sm leading-relaxed space-y-2 animate-in fade-in slide-in-from-top-2 duration-300">
                 <div className="flex items-center gap-2 font-bold text-amber-900">
                   <AlertTriangle className="size-4 text-amber-600" />
-                  <span>Express Registration Fee Applies</span>
+                  <span>{tDate("expressRegistrationTitle")}</span>
                 </div>
                 <p className="text-xs text-amber-800 font-medium">
-                  Since your selected exam date is 7 days or less from today, an{" "}
-                  <strong>
-                    Express Registration Fee of $49{" "}
-                    <span className="text-xs inline-flex items-center gap-0.5">
-                      (Approximately{" "}
+                  {tDate.rich("expressRegistrationNotice", {
+                    fee: "49",
+                    aedAmount: "190",
+                    strong: (chunks) => <strong>{chunks}</strong>,
+                    approx: (chunks) => (
+                      <span className="text-xs inline-flex items-center gap-0.5">
+                        {chunks}
+                      </span>
+                    ),
+                    aed: () => (
                       <AED className="h-[0.8em] w-auto fill-current" />
-                      190)
-                    </span>
-                  </strong>{" "}
-                  will be automatically applied to your registration total.
+                    ),
+                  })}
                 </p>
               </div>
             )}
 
             <div className="p-4 rounded-xl bg-slate-50 border border-slate-100 text-xs text-slate-500 leading-relaxed space-y-1">
               <p>
-                <span className="font-bold text-slate-700">Note:</span> You may
-                also reach out to us at{" "}
-                <a
-                  href="tel:+97165531250"
-                  className="text-[#A11D1D] hover:underline font-semibold"
-                >
-                  +97165531250
-                </a>{" "}
-                or{" "}
-                <a
-                  href="mailto:info@tepth.org"
-                  className="text-[#A11D1D] hover:underline font-semibold"
-                >
-                  info@tepth.org
-                </a>{" "}
-                and confirm the Test date availability before you proceed with
-                the TOEFL iBT Registration on our website.
+                {tDate.rich("contactNote", {
+                  strong: (chunks) => (
+                    <span className="font-bold text-slate-700">{chunks}</span>
+                  ),
+                  phoneLink: (chunks) => (
+                    <a
+                      href="tel:+97165531250"
+                      className="text-[#A11D1D] hover:underline font-semibold"
+                      dir="ltr"
+                    >
+                      {chunks}
+                    </a>
+                  ),
+                  emailLink: (chunks) => (
+                    <a
+                      href="mailto:info@tepth.org"
+                      className="text-[#A11D1D] hover:underline font-semibold"
+                      dir="ltr"
+                    >
+                      {chunks}
+                    </a>
+                  ),
+                })}
               </p>
             </div>
           </div>

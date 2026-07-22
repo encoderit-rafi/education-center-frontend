@@ -25,7 +25,7 @@ export interface ReviewSummaryGridProps {
   testInformation: ReviewField[];
 }
 
-const translateLabel = (label: string, locale: string) => {
+export const translateLabel = (label: string, locale: string) => {
   if (locale !== "ar") return label;
   const cleanLabel = label.trim().toLowerCase();
   const mapping: Record<string, string> = {
@@ -69,10 +69,13 @@ const translateLabel = (label: string, locale: string) => {
     "occupation level": "المستوى الوظيفي",
     "occupation sector": "القطاع الوظيفي",
     "reason for test": "السبب من إجراء الاختبار",
+    "reason for taking test": "السبب من إجراء الاختبار",
+    "reason for taking": "السبب من إجراء الاختبار",
+    "current situation": "الوضع الحالي",
+    "current_situation": "الوضع الحالي",
     "education level": "المستوى التعليمي",
     "selected level": "المستوى المختار",
     "test module": "نوع الاختبار",
-    "reason for taking test": "السبب من إجراء الاختبار",
     "destination country": "بلد الوجهة",
     "payment method": "طريقة الدفع",
     "total amount": "المبلغ الإجمالي",
@@ -83,9 +86,74 @@ const translateLabel = (label: string, locale: string) => {
   return mapping[cleanLabel] || label;
 };
 
-const translateValue = (val: string, locale: string) => {
+export const translateValue = (val: string, locale: string) => {
   if (locale !== "ar") return val;
   let cleanVal = val.trim();
+
+  // Handle Current Situation options
+  const situationMapping: Record<string, string> = {
+    "Student - English language": "طالب - لغة إنجليزية",
+    "Student - In High School": "طالب - في المرحلة الثانوية",
+    "Student - High School graduate": "طالب - خريج مرحلة ثانوية",
+    "Student - In University / College": "طالب - في الجامعة / الكلية",
+    "Student - University / College graduate": "طالب - خريج جامعة / كلية",
+    "Working - Full time": "عامل - دوام كامل",
+    "Working - Part time": "عامل - دوام جزئي",
+    "Not studying or working": "لا أدرس ولا أعمل",
+    "Other - Specify below": "أخرى - حدد أدناه",
+  };
+  if (situationMapping[cleanVal]) return situationMapping[cleanVal];
+
+  // Handle Reason for Test options
+  const reasonMapping: Record<string, string> = {
+    "Nursing registration or licensing": "تسجيل أو ترخيص التمريض",
+    "Study": "الدراسة",
+    "Australia - MATES visa (India only)": "أستراليا - تأشيرة MATES (الهند فقط)",
+    "Australia - Post Study Work (485) visa": "أستراليا - تأشيرة العمل بعد الدراسة (485)",
+    "Australia - Temporary Work visa": "أستراليا - تأشيرة عمل مؤقت",
+    "New Zealand - Temporary Work visa": "نيوزيلندا - تأشيرة عمل مؤقت",
+    "Skilled migration / Permanent Residency": "الهجرة المهنية / الإقامة الدائمة",
+    "Spouse / Family visa": "تأشيرة الزوج / العائلة",
+    "Family visa (Partner, Spouse or Parent)": "تأشيرة عائلية (شريك، زوج، أو أحد الوالدين)",
+    "Working Holiday visa": "تأشيرة عطلة العمل",
+    "Settlement (Indefinite Leave to Remain)": "الاستقرار (الإذن اللامحدود للبقاء)",
+    "Citizenship": "الجنسية",
+    "Sportsperson visa (Tier 2)": "تأشيرة الرياضيين (الفئة 2)",
+    "Student visa (formerly known as the Tier 4 General student visa)": "تأشيرة الطالب (المعروفة سابقاً بتأشيرة الطالب العام من الفئة 4)",
+    "Skilled Worker visa (formerly known as the Tier 2 General work visa)": "تأشيرة العامل المهري (المعروفة سابقاً بتأشيرة العمل العام من الفئة 2)",
+    "Start Up or Innovator Visa": "تأشيرة الشركة الناشئة أو المبتكر",
+    "Domestic Worker in a Private Household": "عامل منزلي في منزل خاص",
+    "Minister of Religion visa (Tier 2)": "تأشيرة وزير ديني (الفئة 2)",
+    "Representative of an Overseas Business visa": "تأشيرة ممثل أعمال أجنبية",
+    "Canadian Immigration (Permanent Residency)": "الهجرة الكندية (الإقامة الدائمة)",
+    "Canadian Citizenship": "الجنسية الكندية",
+    "Temporary Foreign Worker in Canada": "عامل أجنبي مؤقت في كندا",
+    "Post-Graduation Work Permit (PGWP)": "تصريح عمل بعد التخرج (PGWP)",
+  };
+  if (reasonMapping[cleanVal]) return reasonMapping[cleanVal];
+
+  for (const [engReason, arReason] of Object.entries(reasonMapping)) {
+    if (cleanVal.includes(engReason)) {
+      cleanVal = cleanVal.replace(engReason, arReason);
+    }
+  }
+
+  // Handle Study Levels if attached in parentheses
+  const studyLevelMapping: Record<string, string> = {
+    "Undergraduate degree": "درجة البكالوريوس",
+    "(Post) Graduate / Masters degree": "درجة الماجستير / الدراسات العليا",
+    "Postgraduate degree": "درجة الماجستير",
+    "Doctorate / PhD": "درجة الدكتوراه",
+    "MBA (Master of Business Administration)": "ماجستير إدارة الأعمال (MBA)",
+    "Pre-degree / Foundation course": "ما قبل الدرجة الجامعية / دورة تأسيسية",
+    "English Language Course": "دورة اللغة الإنجليزية",
+    "Professional qualification": "مؤهل مهني",
+  };
+  for (const [engLevel, arLevel] of Object.entries(studyLevelMapping)) {
+    if (cleanVal.includes(engLevel)) {
+      cleanVal = cleanVal.replace(engLevel, arLevel);
+    }
+  }
 
   // Translate dates (e.g. "July 26th, 2026", "July 1st, 1984")
   const months: Record<string, string> = {

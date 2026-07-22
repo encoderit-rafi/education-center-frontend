@@ -1,7 +1,11 @@
 "use client";
 
-import React from "react";
-import { GlobalReviewStep } from "@/components/blocks/forms/global-review-step";
+import { useLocale } from "next-intl";
+import {
+  GlobalReviewStep,
+  translateLabel,
+  translateValue,
+} from "@/components/blocks/forms/global-review-step";
 import { format } from "date-fns";
 import {
   User,
@@ -38,6 +42,7 @@ export function ReviewStep({
   selectedCourseData,
   selectedWorkshopData,
 }: ReviewStepProps) {
+  const locale = useLocale();
   const {
     watch,
     setValue,
@@ -278,30 +283,36 @@ export function ReviewStep({
               </div>
               <div className="flex flex-col">
                 <span className="text-[10px] text-slate-400 font-bold uppercase">
-                  Reason for Test
+                  {translateLabel("Reason for Test", locale)}
                 </span>
                 <span className="text-sm font-semibold text-black">
-                  {data.reasonForTaking} {data.studyLevel ? `(${data.studyLevel})` : ""}
+                  {translateValue(
+                    `${data.reasonForTaking} ${data.studyLevel ? `(${data.studyLevel})` : ""}`.trim(),
+                    locale,
+                  )}
                 </span>
               </div>
               {data.occupationSector && (
                 <div className="flex flex-col">
                   <span className="text-[10px] text-slate-400 font-bold uppercase">
-                    Occupation Sector
+                    {translateLabel("Occupation Sector", locale)}
                   </span>
                   <span className="text-sm font-semibold text-black">
-                    {data.occupationSector === "Other"
-                      ? data.occupationSectorOther || "Other"
-                      : data.occupationSector}
+                    {translateValue(
+                      data.occupationSector === "Other"
+                        ? data.occupationSectorOther || "Other"
+                        : data.occupationSector,
+                      locale,
+                    )}
                   </span>
                 </div>
               )}
               <div className="flex flex-col">
                 <span className="text-[10px] text-slate-400 font-bold uppercase">
-                  Current Situation
+                  {translateLabel("Current Situation", locale)}
                 </span>
                 <span className="text-sm font-semibold text-black">
-                  {data.currentSituation}
+                  {translateValue(data.currentSituation, locale)}
                 </span>
               </div>
               {data.selectedWorkshop && selectedWorkshopData && (
