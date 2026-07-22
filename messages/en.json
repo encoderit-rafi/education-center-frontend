@@ -1005,23 +1005,24 @@
     "seatsAvailable": "{count} Seats Available",
     "aboutThisEvent": "About This Event",
     "form": {
-      "fullName": "Full Name:*",
+      "fullName": "Full Name",
       "fullNamePlaceholder": "Enter your name",
       "fullNameError": "Full Name is required",
-      "mobile": "Phone Number:*",
+      "mobile": "Phone Number",
       "mobilePlaceholder": "Enter phone number",
       "mobileError": "Phone Number is required",
-      "email": "Email Address:*",
+      "email": "Email Address",
       "emailPlaceholder": "email@example.com",
       "emailError": "Email Address is required",
-      "country": "Country:*",
+      "country": "Country",
       "countryPlaceholder": "Select country",
       "countryError": "Country is required",
-      "city": "Emirate / City:*",
+      "city": "Emirate / City",
       "cityPlaceholder": "Enter your City Name",
       "cityError": "Emirate / City is required",
       "processing": "Processing...",
-      "submitBtn": "Join Session"
+      "submitBtn": "Register",
+      "captchaRequired": "Please complete the reCAPTCHA verification"
     },
     "otherEventsTitle": "Other Upcoming Events",
     "otherEventsDesc": "Stay tuned for more information sessions coming soon including TOEFL iBT workshops and PTE-A training weeks.",
@@ -4093,7 +4094,7 @@
       "freePrepMaterial": "Free Prep. Material",
       "freeConsultation": "Free Consultation",
       "freeMockTest": "Free Mock Test",
-      "saveUpTo": "Save up to 25% when you book your exam and register for the course with TEPTH and pay in-person or online on our website."
+      "saveUpTo": "Save up to 25% on some of our prep courses when you book your exam and register for the course with TEPTH and pay in-person or online on our website."
     },
     "MarketingPreferences": {
       "title": "Marketing preferences",

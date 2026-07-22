@@ -20,6 +20,16 @@ export interface AddonServicesSectionProps {
   description?: string;
 }
 
+function getDisplayDiscount(courseName: string, actualDiscount: number): number {
+  const name = courseName.toLowerCase();
+  if (name.includes("group")) return 10;
+  if (name.includes("semi-private")) return 15;
+  if (name.includes("hybrid")) return 25;
+  if (name.includes("online") && (name.includes("one-to-one") || name.includes("1-to-1") || name.includes("private") || name.includes("vip"))) return 20;
+  if (name.includes("in-person") || name.includes("classroom") || name.includes("one-to-one") || name.includes("1-to-1") || name.includes("vip") || name.includes("private")) return 20;
+  return actualDiscount;
+}
+
 export function AddonServicesSection({
   coursesData,
   workshopsData,
@@ -80,7 +90,7 @@ export function AddonServicesSection({
                           className="text-primary font-semibold"
                         />
                         <span className="text-primary font-semibold">
-                          ({Math.round((1 - c.discounted_price / c.price) * 100)}% OFF)
+                          ({getDisplayDiscount(c.name, Math.round((1 - c.discounted_price / c.price) * 100))}% OFF)
                         </span>
                         <PriceDisplay
                           amount={c.price}
@@ -105,7 +115,7 @@ export function AddonServicesSection({
                           className="text-primary font-semibold"
                         />
                         <span className="text-primary font-semibold">
-                          ({c.special_discount}% OFF)
+                          ({getDisplayDiscount(c.name, c.special_discount)}% OFF)
                         </span>
                         <PriceDisplay
                           amount={c.price}

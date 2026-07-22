@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import { FormRecaptcha, useRecaptcha } from "@/components/ui/form-recaptcha";
 import {
     Field,
     FieldLabel,
@@ -75,6 +76,15 @@ function EventRegistrationForm({ event, onSuccess }: EventRegistrationFormProps)
     const t = useTranslations("EventsPage");
     const [isSubmitted, setIsSubmitted] = useState(false);
 
+    const {
+        captchaRef,
+        captchaError,
+        validateCaptcha,
+        resetCaptcha,
+        clearCaptchaError,
+        setToken,
+    } = useRecaptcha();
+
     const eventSchema = getEventSchema(t);
     const form = useForm<z.infer<typeof eventSchema>>({
         resolver: zodResolver(eventSchema),
@@ -100,6 +110,7 @@ function EventRegistrationForm({ event, onSuccess }: EventRegistrationFormProps)
         onSuccess: () => {
             toast.success("Successfully registered for the event!", { id: "event-submit" });
             setIsSubmitted(true);
+            resetCaptcha();
             if (onSuccess) onSuccess();
         },
         onError: (error: any) => {
@@ -108,6 +119,11 @@ function EventRegistrationForm({ event, onSuccess }: EventRegistrationFormProps)
     });
 
     const onSubmit = async (data: z.infer<typeof eventSchema>) => {
+        const recaptchaToken = validateCaptcha(t("form.captchaRequired") || "Please complete the reCAPTCHA verification");
+        if (recaptchaToken === null) {
+            return;
+        }
+
         toast.loading("Submitting registration...", { id: "event-submit" });
         const fullNameVal = data.fullName.trim();
         const firstSpaceIndex = fullNameVal.indexOf(" ");
@@ -128,6 +144,7 @@ function EventRegistrationForm({ event, onSuccess }: EventRegistrationFormProps)
             price: 0,
             total_amount: 0,
             payment_methods: "stripe",
+            ...(recaptchaToken ? { recaptcha_token: recaptchaToken } : {}),
         });
     };
 
@@ -239,6 +256,13 @@ function EventRegistrationForm({ event, onSuccess }: EventRegistrationFormProps)
                     )}
                 </Field>
             </div>
+
+            <FormRecaptcha
+                captchaRef={captchaRef}
+                error={captchaError}
+                onChange={clearCaptchaError}
+                setToken={setToken}
+            />
 
             <Button
                 type="submit"

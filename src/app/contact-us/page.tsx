@@ -85,7 +85,12 @@ export default function ContactUs() {
                 </div>
               </Link>
 
-              <Link href="/about-us/how-to-find-us" className="block">
+              <a
+                href="https://www.google.com/maps/dir//The+Exam+Preparation+and+Testing+House(TEPTH),+Tabarak+Tower+Suite+701+,+7th+Floor+-+Corniche+Rd+-+Al+Mamzar+-+Sharjah+-+United+Arab+Emirates/@25.313693,55.361475,15z"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block"
+              >
                 <div className="group flex flex-row items-start gap-4 p-4 rounded-xl border border-slate-200 bg-white transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-md">
                   <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-slate-50 text-slate-600 transition-all duration-300 group-hover:bg-primary group-hover:text-white mt-0.5">
                     <MapPin className="size-4" />
@@ -98,7 +103,7 @@ export default function ContactUs() {
                     </h3>
                   </div>
                 </div>
-              </Link>
+              </a>
 
               <div className="block">
                 <div className="flex flex-col gap-4 p-4 rounded-xl border border-slate-200 bg-white transition-all duration-300 hover:border-primary/50 hover:shadow-md">

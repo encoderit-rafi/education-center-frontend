@@ -755,7 +755,7 @@ export function RegistrationFormStep({
         courseError={!!errors.selectedCourse}
         workshopError={!!errors.selectedWorkshop}
         description={
-          "Save up to 25% when you book your exam and register for the course with TEPTH and pay in-person or online on our website."
+          "Save up to 25% on some of our prep courses when you book your exam and register for the course with TEPTH and pay in-person or online on our website."
         }
       />
 
