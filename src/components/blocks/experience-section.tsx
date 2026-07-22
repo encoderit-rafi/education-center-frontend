@@ -15,7 +15,7 @@ export default function ExperienceSection() {
   const items = t.raw("items") as { title: string }[];
 
   return (
-    <section className="py-16 md:py-24 bg-slate-50/50 border-y border-slate-100">
+    <section dir={isRtl ? "rtl" : "ltr"} className="py-16 md:py-24 bg-slate-50/50 border-y border-slate-100">
       <div className="max-w-7xl mx-auto px-6 md:px-8">
         <h2 className="text-2xl md:text-4xl font-bold text-center text-[#1E293B] mb-12 md:mb-16">
           {t("title")}

@@ -47,8 +47,8 @@ export default async function RootLayout({
         <NextIntlClientProvider messages={messages}>
           <Providers>
             <NavBar />
-            {/* <main>{children}</main> */}
-            <main dir={locale === "ar" ? "rtl" : "ltr"}>{children}</main>
+            <main>{children}</main>
+            {/* <main dir={locale === "ar" ? "rtl" : "ltr"}>{children}</main> */}
             <Footer />
             {/* <FloatingChatbot /> */}
             <SocialSupport />

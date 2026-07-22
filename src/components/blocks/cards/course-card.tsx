@@ -12,7 +12,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { PriceDisplay } from "@/components/ui/price-display";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 export interface CoursePackage {
   id: string;
@@ -53,6 +53,8 @@ export default function CourseCard({
   showDetails = false,
 }: CourseCardProps) {
   const t = useTranslations("ExamPrepPage");
+  const locale = useLocale();
+  const isRtl = locale === "ar";
   const basePrice = parseFloat(pkg.price) || 0;
   let discount = 0;
   let discountType: "PERCENTAGE" | "FIXED" | null = pkg.discountType;
@@ -81,7 +83,7 @@ export default function CourseCard({
       : basePrice - discount;
 
   return (
-    <BaseCard className="p-0 flex flex-col justify-between overflow-hidden border-slate-200 group relative hover:border-primary/30 hover:shadow-2xl transition-all duration-500 ease-out h-full bg-white">
+    <BaseCard dir={isRtl ? "rtl" : "ltr"} className="p-0 flex flex-col justify-between overflow-hidden border-slate-200 group relative hover:border-primary/30 hover:shadow-2xl transition-all duration-500 ease-out h-full bg-white">
       <div className="relative aspect-video w-full overflow-hidden bg-slate-50/50 border-b border-slate-100">
         <Image
           src={pkg.image || "/images/hero/image-3.jpg"}
@@ -91,12 +93,14 @@ export default function CourseCard({
           className="object-contain transition-transform duration-500 group-hover:scale-105"
         />
         {discount > 0 && (
-          <div className="absolute top-4 right-4 z-10">
+          <div className={cn("absolute top-4 z-10", isRtl ? "left-4" : "right-4")}>
             <Badge className="py-1 px-3 font-bold shadow-lg">
-              {t("packages.saveInstantCard", {
-                discount: getDisplayDiscount(pkg.name, discount),
-                type: discountType === "PERCENTAGE" ? "%" : " AED"
-              })}
+              <span dir="ltr" className="inline-block">
+                {t("packages.saveInstantCard", {
+                  discount: getDisplayDiscount(pkg.name, discount),
+                  type: discountType === "PERCENTAGE" ? "%" : " AED"
+                })}
+              </span>
             </Badge>
           </div>
         )}

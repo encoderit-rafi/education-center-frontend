@@ -83,11 +83,27 @@ export default async function ExamDetailPage({
     notFound();
   }
 
-  // Apply locale-aware description: use translations[locale].description when available
+  // Apply locale-aware description & name: use translations[locale] when available
+  const translatedName = exam?.translations?.[locale]?.name;
   const translatedDescription = exam?.translations?.[locale]?.description;
-  if (translatedDescription) {
-    exam = { ...exam, description: translatedDescription };
+  if (translatedName || translatedDescription) {
+    exam = {
+      ...exam,
+      ...(translatedName ? { name: translatedName } : {}),
+      ...(translatedDescription ? { description: translatedDescription } : {}),
+    };
   }
+
+  // Apply locale-aware names and descriptions to child exams
+  childExams = childExams.map((child: any) => {
+    const cName = child?.translations?.[locale]?.name || child?.name;
+    const cDesc = child?.translations?.[locale]?.description || child?.description;
+    return {
+      ...child,
+      name: cName,
+      description: cDesc,
+    };
+  });
 
   // 3. Determine if it is a parent group (has child items or is labeled group/item) or a detail page
   const hasGroupType = exam.examType?.some(

@@ -8,34 +8,43 @@ import {
 } from "@/components/blocks/cards/base-card";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { useLocale } from "next-intl";
 
 export default function ExamItems({ data }: { data: any }) {
-  console.log("🚀 ~ ExamItems ~ data:", data)
-  // return <div>Exam Items</div>
+  const locale = useLocale();
+  const isRtl = locale === "ar";
+  const name = data.translations?.[locale]?.name || data.name;
+  const description = data.translations?.[locale]?.description || data.description;
+
   return (
     <div className="min-h-screen bg-white">
       <div className="bg-slate-50">
-        <div className="max-w-4xl space-y-6  base-py px-3 md:px-12">
+        <div className="max-w-4xl space-y-6 base-py px-3 md:px-12">
           <h1 className="text-4xl md:text-7xl font-black text-secondary leading-[1.1] tracking-tight">
-            {data.name} <span className="italic text-primary">Exams</span>
+            {name} <span className="italic text-primary">{isRtl ? "اختبارات" : "Exams"}</span>
           </h1>
-          <p className="text-secondary">{data.description}</p>
+          {description && <p className="text-secondary">{description}</p>}
         </div>
       </div>
 
       <div className="section-container base-px base-py">
         <div className="mb-14 text-center space-y-4">
           <h2 className="section-title">
-            Choose Your <span>{data.name}</span> Test
+            {isRtl ? (
+              <>
+                اختر اختبار <span>{name}</span> المناسب لك
+              </>
+            ) : (
+              <>
+                Choose Your <span>{name}</span> Test
+              </>
+            )}
           </h2>
-          {/* <p className="section-subtitle text-center mx-auto">
-            Each {data.name} variant is designed for a specific purpose. Select
-            the one that matches your visa, academic, or professional goal.
-          </p> */}
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {data.items?.map((item: any, index: number) => {
+            const itemName = item.translations?.[locale]?.name || item.name;
             const isUkvi = (item?.name?.toLowerCase().includes("ukvi") || item?.name?.toLowerCase().includes("life skills") || item?.slug?.toLowerCase().includes("ukvi") || item?.slug?.toLowerCase().includes("life-skills"));
             const href = isUkvi ? `/exams/${item.id}` : (item?.examFormRedirectUrl || `/exams/${item.id}`);
             const isExternal = !isUkvi && !!item?.examFormRedirectUrl;
@@ -54,7 +63,7 @@ export default function ExamItems({ data }: { data: any }) {
                   </div>
 
                   <div className="flex-1 space-y-3">
-                    <BaseCardTitle>{item.name}</BaseCardTitle>
+                    <BaseCardTitle>{itemName}</BaseCardTitle>
                   </div>
                 </BaseCard>
               </Link>

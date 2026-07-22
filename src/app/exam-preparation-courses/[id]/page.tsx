@@ -93,6 +93,7 @@ export default async function ExamPreparationDynamicPage({
 }) {
   const { id: slug } = await params;
   const locale = await getLocale();
+  const isRtl = locale === "ar";
   const t = await getTranslations("ExamPrepPage");
 
   let course: CourseDetail | null = null;
@@ -307,7 +308,7 @@ export default async function ExamPreparationDynamicPage({
                     : basePrice - discount;
 
                 return (
-                  <BaseCard key={workshop.id}>
+                  <BaseCard key={workshop.id} dir={isRtl ? "rtl" : "ltr"}>
                     <div className="space-y-6">
                       <div className="flex items-center gap-3">
                         <BaseCardIcon className="size-9">

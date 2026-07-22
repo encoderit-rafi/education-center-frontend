@@ -15,18 +15,20 @@ import {
   BaseCardIcon,
   BaseCardTitle,
 } from "./cards/base-card";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 const STAT_ICONS = [GraduationCap, MapPin, ShieldCheck, Trophy];
 const FEATURE_ICONS = [ShieldCheck, Calendar, GraduationCap, ClipboardCheck, Laptop, CheckCircle2];
 
 const WhyChooseUs = () => {
   const t = useTranslations("HomePage.WhyChooseUs");
+  const locale = useLocale();
+  const isRtl = locale === "ar";
   const stats = t.raw("stats") as { label: string }[];
   const features = t.raw("features") as { title: string; description: string }[];
 
   return (
-    <section className="base-px base-py bg-white">
+    <section dir={isRtl ? "rtl" : "ltr"} className="base-px base-py bg-white">
       <div className="section-container">
         <div className="mb-16">
           <span className="section-label">{t("label")}</span>
