@@ -200,9 +200,9 @@ const QUIZ_QUESTIONS = [
     id: 20,
     question: "My brother is older _____ me.",
     options: [
-      { id: "a", text: "than", points: 1 },
+      { id: "a", text: "then", points: 0 },
       { id: "b", text: "that", points: 0 },
-      { id: "c", text: "then", points: 0 },
+      { id: "c", text: "than", points: 1 },
     ],
   },
   {
@@ -245,7 +245,7 @@ const QUIZ_QUESTIONS = [
     id: 25,
     question: "I don’t _____ getting up early.",
     options: [
-      { id: "a", text: "not like", points: 0 },
+      { id: "a", text: "like", points: 0 },
       { id: "b", text: "want", points: 0 },
       { id: "c", text: "enjoy", points: 1 },
     ],
@@ -272,7 +272,7 @@ const QUIZ_QUESTIONS = [
     id: 28,
     question: "We _____ them at eight o’clock.",
     options: [
-      { id: "a", text: "meet", points: 0 },
+      { id: "a", text: "going to meet", points: 0 },
       { id: "b", text: "‘re meet", points: 0 },
       { id: "c", text: "‘re meeting", points: 1 },
     ],
@@ -534,17 +534,17 @@ const QUIZ_QUESTIONS = [
       { id: "a", text: "repair", points: 0 },
       { id: "b", text: "sort out", points: 1 },
       { id: "c", text: "solve", points: 0 },
-      { id: "d", text: "improve", points: 0 },
+      { id: "d", text: "resolve", points: 0 },
     ],
   },
   {
     id: 55,
-    question: "It was difficult at first, but I soon _____ it.",
+    question: "It was difficult at first, but I soon got _____ it.",
     options: [
-      { id: "a", text: "got used to", points: 1 },
+      { id: "a", text: "got used to", points: 0 },
       { id: "b", text: "get used to", points: 0 },
       { id: "c", text: "changed to", points: 0 },
-      { id: "d", text: "used to", points: 0 },
+      { id: "d", text: "used to", points: 1 },
     ],
   },
   {
@@ -721,7 +721,8 @@ export default function EnglishQuizForm() {
 
       let correctAnswersCount = 0;
       QUIZ_QUESTIONS.forEach((q) => {
-        const selectedOptionId = data.answers[q.id.toString()];
+        const selectedOptionId =
+          data.answers[q.id.toString()] || (data.answers as any)[q.id];
         const option = q.options.find((o) => o.id === selectedOptionId);
         if (option && option.points > 0) {
           correctAnswersCount++;
