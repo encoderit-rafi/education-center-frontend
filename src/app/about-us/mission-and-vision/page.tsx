@@ -53,7 +53,7 @@ export default function VisionAndMission() {
             <div className="absolute -inset-4 bg-primary/5 rounded-xl blur-3xl opacity-50 transition-opacity group-hover:opacity-100"></div>
             <div className="relative aspect-4/3 rounded-2xl overflow-hidden shadow-md border border-slate-100 bg-white p-2">
               <Image
-                src="/images/study-1.jpg"
+                src="/images/vision-mission-1.jpg"
                 alt="TEPTH Strategic Vision"
                 fill
                 className="object-cover rounded-xl"
