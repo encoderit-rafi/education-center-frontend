@@ -200,9 +200,9 @@ const QUIZ_QUESTIONS = [
     id: 20,
     question: "My brother is older _____ me.",
     options: [
-      { id: "a", text: "then", points: 0 },
+      { id: "a", text: "then", points: 1 },
       { id: "b", text: "that", points: 0 },
-      { id: "c", text: "than", points: 1 },
+      { id: "c", text: "than", points: 0 },
     ],
   },
   {
@@ -541,10 +541,10 @@ const QUIZ_QUESTIONS = [
     id: 55,
     question: "It was difficult at first, but I soon got _____ it.",
     options: [
-      { id: "a", text: "got used to", points: 0 },
+      { id: "a", text: "got used to", points: 1 },
       { id: "b", text: "get used to", points: 0 },
       { id: "c", text: "changed to", points: 0 },
-      { id: "d", text: "used to", points: 1 },
+      { id: "d", text: "used to", points: 0 },
     ],
   },
   {
