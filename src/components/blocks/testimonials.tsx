@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/carousel";
 import { cn } from "@/lib/utils";
 import { Marquee } from "../ui/marquee";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 const GoogleLogo = () => (
   <svg viewBox="0 0 24 24" className="w-6 h-6">
@@ -95,8 +95,11 @@ function TestimonialCard({
   t: TestimonialItem;
   isMarquee?: boolean;
 }) {
+  const locale = useLocale();
+  const isRtl = locale === "ar";
   return (
     <div
+      dir={isRtl ? "rtl" : "ltr"}
       className={cn(
         "bg-white p-6 rounded-lg  border flex flex-col gap-6 transition-all duration-300",
         isMarquee ? "w-sm sm:w-md shrink-0" : "w-full mx-auto max-w-md",
