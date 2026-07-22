@@ -2,18 +2,18 @@
 
 import React, { useState } from "react";
 import { useTranslations, useLocale } from "next-intl";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { AcceptPayButton } from "./AcceptPayButton";
 import { buttonVariants } from "@/components/ui/button";
 import { AED } from "@/components/ui/aed";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 /** Per-exam mock test type options */
 const EXAM_TYPES: Record<string, { label: string; labelAr: string; value: string }[]> = {
@@ -55,24 +55,31 @@ export function MockTestTypeSelector({ data }: MockTestTypeSelectorProps) {
   const types = examKey ? EXAM_TYPES[examKey] : null;
 
   const [selectedType, setSelectedType] = useState<string>("");
+  const [selectedLocation, setSelectedLocation] = useState<"home" | "center">("home");
+  const [locationOpen, setLocationOpen] = useState(false);
+  const [typeOpen, setTypeOpen] = useState(false);
+
+  const triggerClass = "flex h-11 w-full items-center justify-between gap-2 rounded-md border border-slate-200 bg-white px-3 py-2 text-base outline-none focus:border-primary focus:ring-3 focus:ring-ring/30 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm text-left font-medium text-slate-700";
 
   const homePrice = data.price && parseFloat(data.price) > 0 ? parseFloat(data.price) : 350;
   const rawCenterPrice = data.details?.center_price ?? data.center_price;
   const centerPrice = rawCenterPrice && parseFloat(String(rawCenterPrice)) > 0 ? parseFloat(String(rawCenterPrice)) : 450;
 
+  const activePrice = selectedLocation === "center" ? centerPrice : homePrice;
+
   const selectTypeLabel =
     examKey === "ielts"
       ? t("selectIeltsTypeLabel")
       : examKey === "pte"
-      ? t("selectPteTypeLabel")
-      : t("selectTypeLabel");
+        ? t("selectPteTypeLabel")
+        : t("selectTypeLabel");
 
   const chooseExamTypePlaceholder =
     examKey === "ielts"
       ? t("chooseIeltsTypePlaceholder")
       : examKey === "pte"
-      ? t("choosePteTypePlaceholder")
-      : t("chooseExamTypePlaceholder");
+        ? t("choosePteTypePlaceholder")
+        : t("chooseExamTypePlaceholder");
 
   const getDisplayLabel = (typeObj: { label: string; labelAr: string }) => {
     return isRtl ? typeObj.labelAr : typeObj.label;
@@ -84,84 +91,202 @@ export function MockTestTypeSelector({ data }: MockTestTypeSelectorProps) {
     return match ? (isRtl ? match.labelAr : match.label) : selectedType;
   };
 
-  // TOEFL iBT (or any exam without subtypes) — show Pay button directly
   if (!types) {
     return (
-      <AcceptPayButton data={data} className={cn(buttonVariants())}>
-        {t("register")}
-      </AcceptPayButton>
+      <div className="space-y-4 w-full max-w-sm">
+        <div className="space-y-1.5">
+          <label className="text-xs font-bold uppercase tracking-wider text-slate-900">
+            {t("selectLocationLabel")}
+          </label>
+          <DropdownMenu open={locationOpen} onOpenChange={setLocationOpen}>
+            <DropdownMenuTrigger asChild>
+              <button type="button" className={triggerClass}>
+                {selectedLocation === "home" ? (
+                  <span className="inline-flex items-center gap-0.5">
+                    {t("homeOption")} (
+                    <AED className="size-auto h-[0.85em] fill-current text-primary" />
+                    <span className="text-primary">{homePrice}</span>)
+                  </span>
+                ) : (
+                  <span className="inline-flex items-center gap-0.5">
+                    {t("centerOption")} (
+                    <AED className="size-auto h-[0.85em] fill-current text-primary" />
+                    <span className="text-primary">{centerPrice}</span>)
+                  </span>
+                )}
+                <ChevronDown
+                  className={cn(
+                    "size-4 text-slate-500 transition-transform duration-200",
+                    locationOpen && "rotate-180"
+                  )}
+                />
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-[var(--radix-dropdown-menu-trigger-width)]">
+              <DropdownMenuRadioGroup
+                value={selectedLocation}
+                onValueChange={(val) => setSelectedLocation(val as "home" | "center")}
+              >
+                <DropdownMenuRadioItem value="home">
+                  <span className="inline-flex items-center gap-0.5">
+                    {t("homeOption")} (
+                    <AED className="size-auto h-[0.85em] fill-current text-primary" />
+                    <span className="text-primary">{homePrice}</span>)
+                  </span>
+                </DropdownMenuRadioItem>
+                {centerPrice > 0 && (
+                  <DropdownMenuRadioItem value="center">
+                    <span className="inline-flex items-center gap-0.5">
+                      {t("centerOption")} (
+                      <AED className="size-auto h-[0.85em] fill-current text-primary" />
+                      <span className="text-primary">{centerPrice}</span>)
+                    </span>
+                  </DropdownMenuRadioItem>
+                )}
+              </DropdownMenuRadioGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
+
+        <div className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 space-y-2">
+          <p className="text-[10px] font-bold uppercase tracking-wider">
+            {t("mockTestPrice")}
+          </p>
+          <span className="text-xl font-extrabold text-primary inline-flex items-center gap-0.5">
+            <AED className="h-[0.85em] w-auto fill-current" />
+            {activePrice}
+          </span>
+        </div>
+
+        <AcceptPayButton
+          data={data}
+          className={cn(buttonVariants(), "w-full")}
+          selectedLocation={selectedLocation}
+        >
+          {t("register")}
+        </AcceptPayButton>
+      </div>
     );
   }
 
   return (
     <div className="space-y-4 w-full max-w-sm">
-      {/* ── Type Selector ── */}
+      {/* ── 1. Exam Type Dropdown ── */}
       <div className="space-y-1.5">
         <label className="text-xs font-bold uppercase tracking-wider text-slate-900">
           {selectTypeLabel}
         </label>
-        <Select
-          value={selectedType}
-          onValueChange={(val) => setSelectedType(val as string)}
-        >
-          <SelectTrigger className="w-full">
-            <SelectValue placeholder={chooseExamTypePlaceholder} />
-          </SelectTrigger>
-          <SelectContent>
-            {types.map((typeObj) => (
-              <SelectItem key={typeObj.value} value={typeObj.value}>
-                {getDisplayLabel(typeObj)}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+        <DropdownMenu open={typeOpen} onOpenChange={setTypeOpen}>
+          <DropdownMenuTrigger asChild>
+            <button type="button" className={triggerClass}>
+              <span className={cn(!selectedType && "text-slate-400 font-normal")}>
+                {selectedType ? getSelectedTypeDisplay() : chooseExamTypePlaceholder}
+              </span>
+              <ChevronDown
+                className={cn(
+                  "size-4 text-slate-500 transition-transform duration-200",
+                  typeOpen && "rotate-180"
+                )}
+              />
+            </button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="w-[var(--radix-dropdown-menu-trigger-width)]">
+            <DropdownMenuRadioGroup value={selectedType} onValueChange={setSelectedType}>
+              {types.map((typeObj) => (
+                <DropdownMenuRadioItem key={typeObj.value} value={typeObj.value}>
+                  {getDisplayLabel(typeObj)}
+                </DropdownMenuRadioItem>
+              ))}
+            </DropdownMenuRadioGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
 
-      {/* ── Price + Pay Button (visible after a type is selected) ── */}
+      {/* ── 2. Test Location Dropdown (visible when exam type is chosen) ── */}
       {selectedType && (
-        <div className="animate-in fade-in slide-in-from-top-1 duration-200 space-y-3">
-          {/* Price card */}
+        <div className="animate-in fade-in slide-in-from-top-1 duration-200 space-y-4">
+          <div className="space-y-1.5">
+            <label className="text-xs font-bold uppercase tracking-wider text-slate-900">
+              {t("selectLocationLabel")}
+            </label>
+            <DropdownMenu open={locationOpen} onOpenChange={setLocationOpen}>
+              <DropdownMenuTrigger asChild>
+                <button type="button" className={triggerClass}>
+                  {selectedLocation === "home" ? (
+                    <span className="inline-flex items-center gap-0.5">
+                      {t("homeOption")} (
+                      <AED className="size-auto h-[0.85em] fill-current text-primary" />
+                      <span className="text-primary">{homePrice}</span>)
+                    </span>
+                  ) : (
+                    <span className="inline-flex items-center gap-0.5">
+                      {t("centerOption")} (
+                      <AED className="size-auto h-[0.85em] fill-current text-primary" />
+                      <span className="text-primary">{centerPrice}</span>)
+                    </span>
+                  )}
+                  <ChevronDown
+                    className={cn(
+                      "size-4 text-slate-500 transition-transform duration-200",
+                      locationOpen && "rotate-180"
+                    )}
+                  />
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-[var(--radix-dropdown-menu-trigger-width)]">
+                <DropdownMenuRadioGroup
+                  value={selectedLocation}
+                  onValueChange={(val) => setSelectedLocation(val as "home" | "center")}
+                >
+                  <DropdownMenuRadioItem value="home">
+                    <span className="inline-flex items-center gap-0.5">
+                      {t("homeOption")} (
+                      <AED className="size-auto h-[0.85em] fill-current text-primary" />
+                      <span className="text-primary">{homePrice}</span>)
+                    </span>
+                  </DropdownMenuRadioItem>
+                  {centerPrice > 0 && (
+                    <DropdownMenuRadioItem value="center">
+                      <span className="inline-flex items-center gap-0.5">
+                        {t("centerOption")} (
+                        <AED className="size-auto h-[0.85em] fill-current text-primary" />
+                        <span className="text-primary">{centerPrice}</span>)
+                      </span>
+                    </DropdownMenuRadioItem>
+                  )}
+                </DropdownMenuRadioGroup>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+
+          {/* ── Dynamic Price Card & Summary ── */}
           <div className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 space-y-2">
             <p className="text-[10px] font-bold uppercase tracking-wider">
               {t("mockTestPrice")}
             </p>
 
-            {centerPrice ? (
-              <div className="flex items-center gap-3 flex-wrap">
-                <div className="flex items-center gap-1">
-                  <span className="text-xs font-medium">{t("homeBasedLabel")}</span>
-                  <span className="text-base font-extrabold text-primary inline-flex items-center gap-0.5">
-                    <AED className="h-[0.8em] w-auto fill-current" />
-                    {homePrice}
-                  </span>
-                </div>
-                <span className="text-slate-300 text-sm">/</span>
-                <div className="flex items-center gap-1">
-                  <span className="text-xs font-medium">{t("centerBasedLabel")}</span>
-                  <span className="text-base font-extrabold text-primary inline-flex items-center gap-0.5">
-                    <AED className="h-[0.8em] w-auto fill-current" />
-                    {centerPrice}
-                  </span>
-                </div>
-              </div>
-            ) : (
-              <span className="text-xl font-extrabold text-primary inline-flex items-center gap-0.5">
+            <div className="flex items-center justify-between">
+              <span className="text-2xl font-extrabold text-primary inline-flex items-center gap-0.5">
                 <AED className="h-[0.85em] w-auto fill-current" />
-                {homePrice}
+                {activePrice}
               </span>
-            )}
+              <span className="text-xs font-semibold bg-[#A11D1D] text-white px-2.5 py-1 rounded-md">
+                {selectedLocation === "center" ? t("centerOption") : t("homeOption")}
+              </span>
+            </div>
 
-            <div className="flex items-center gap-1.5 text-xs text-emerald-600 font-medium">
+            <div className="flex items-center gap-1.5 text-xs text-emerald-600 font-medium pt-1">
               <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
-              {getSelectedTypeDisplay()} {t("selected")}
+              {getSelectedTypeDisplay()} ({selectedLocation === "center" ? t("centerOption") : t("homeOption")}) {t("selected")}
             </div>
           </div>
 
-          {/* Pay button — passes selectedType as variant to AcceptPayButton */}
+          {/* ── Action Button ── */}
           <AcceptPayButton
             data={data}
-            className={cn(buttonVariants(), "w-full")}
+            className={cn(buttonVariants(), "w-full py-6 font-bold text-base")}
             selectedType={selectedType}
+            selectedLocation={selectedLocation}
           >
             {t("register")}
           </AcceptPayButton>
