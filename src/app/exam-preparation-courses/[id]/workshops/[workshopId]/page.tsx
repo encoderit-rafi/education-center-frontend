@@ -207,10 +207,10 @@ export default async function WorkshopDetailPage({ params }: PageProps) {
                     >
                       {locale === "ar"
                         ? workshop.subTitle
-                            .replace(/(\d+)-HOUR INTENSIVE WORKSHOP/i, "ورشة عمل مكثفة لمدة $1 ساعات")
-                            .replace(/(\d+)-HOUR WORKSHOP/i, "ورشة عمل لمدة $1 ساعات")
-                            .replace(/INTENSIVE WORKSHOP/i, "ورشة عمل مكثفة")
-                            .replace(/WORKSHOP/i, "ورشة عمل")
+                          .replace(/(\d+)-HOUR INTENSIVE WORKSHOP/i, "ورشة عمل مكثفة لمدة $1 ساعات")
+                          .replace(/(\d+)-HOUR WORKSHOP/i, "ورشة عمل لمدة $1 ساعات")
+                          .replace(/INTENSIVE WORKSHOP/i, "ورشة عمل مكثفة")
+                          .replace(/WORKSHOP/i, "ورشة عمل")
                         : workshop.subTitle}
                     </Badge>
                   )}
@@ -373,15 +373,15 @@ export default async function WorkshopDetailPage({ params }: PageProps) {
             <ul className="space-y-4">
               {(locale === "ar"
                 ? [
-                    "حضورياً وفردياً (واحد لواحد)",
-                    "قابلة للتخصيص بالكامل وفقاً لاحتياجات المرشح",
-                    "تركّز على استراتيجيات الامتحان العملية والأداء",
-                  ]
+                  "حضورياً وفردياً (واحد لواحد)",
+                  "قابلة للتخصيص بالكامل وفقاً لاحتياجات المرشح",
+                  "تركّز على استراتيجيات الامتحان العملية والأداء",
+                ]
                 : [
-                    "Face-to-face and one-on-one",
-                    "Fully customizable according to the candidate's needs",
-                    "Focused on practical exam strategies and performance",
-                  ]
+                  "Face-to-face and one-on-one",
+                  "Fully customizable according to the candidate's needs",
+                  "Focused on practical exam strategies and performance",
+                ]
               ).map((item, i) => (
                 <li key={i} className="flex items-start gap-3">
                   <CheckCircle2 className="size-6 text-primary shrink-0" />
@@ -447,17 +447,17 @@ export default async function WorkshopDetailPage({ params }: PageProps) {
             <ul className="space-y-3">
               {(locale === "ar"
                 ? [
-                    "لديهم اختبار مقرر قريباً",
-                    "يرغبون في تنشيط معلوماتهم بسرعة",
-                    "يحتاجون إلى توجيه بشأن أجزاء معينة من الاختبار",
-                    "يرغبون في فهم شكل الامتحان قبل بدء التحضير",
-                  ]
+                  "لديهم اختبار مقرر قريباً",
+                  "يرغبون في تنشيط معلوماتهم بسرعة",
+                  "يحتاجون إلى توجيه بشأن أجزاء معينة من الاختبار",
+                  "يرغبون في فهم شكل الامتحان قبل بدء التحضير",
+                ]
                 : [
-                    "Have an exam scheduled soon",
-                    "Want to refresh their knowledge quickly",
-                    "Need guidance on specific modules",
-                    "Want to understand the exam format before starting preparation",
-                  ]
+                  "Have an exam scheduled soon",
+                  "Want to refresh their knowledge quickly",
+                  "Need guidance on specific modules",
+                  "Want to understand the exam format before starting preparation",
+                ]
               ).map((item, i) => (
                 <li key={i} className="flex items-start gap-3">
                   <div className="size-1.5 rounded-full bg-primary mt-2.5 shrink-0" />

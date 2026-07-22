@@ -172,9 +172,9 @@ export default async function ExamPreparationDynamicPage({
         ? pkgTranslatedBestFor
         : typeof pkgTranslatedBestFor === "string"
           ? pkgTranslatedBestFor
-              .split("\n")
-              .map((s: string) => s.trim())
-              .filter(Boolean)
+            .split("\n")
+            .map((s: string) => s.trim())
+            .filter(Boolean)
           : pkg.bestFor || []
       : pkg.bestFor || [];
 

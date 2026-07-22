@@ -13,15 +13,20 @@ import { useLocale } from "next-intl";
 export default function ExamItems({ data }: { data: any }) {
   const locale = useLocale();
   const isRtl = locale === "ar";
-  const name = data.translations?.[locale]?.name || data.name;
-  const description = data.translations?.[locale]?.description || data.description;
+  const title =
+    data.translations?.[locale]?.title ||
+    data.translations?.[locale]?.name ||
+    data.title ||
+    data.name;
+  const description =
+    data.translations?.[locale]?.description || data.description;
 
   return (
     <div className="min-h-screen bg-white">
       <div className="bg-slate-50">
         <div className="max-w-4xl space-y-6 base-py px-3 md:px-12">
           <h1 className="text-4xl md:text-7xl font-black text-secondary leading-[1.1] tracking-tight">
-            {name} <span className="italic text-primary">{isRtl ? "اختبارات" : "Exams"}</span>
+            {title} <span className="italic text-primary">{isRtl ? "اختبارات" : "Exams"}</span>
           </h1>
           {description && <p className="text-secondary">{description}</p>}
         </div>
@@ -32,19 +37,26 @@ export default function ExamItems({ data }: { data: any }) {
           <h2 className="section-title">
             {isRtl ? (
               <>
-                اختر اختبار <span>{name}</span> المناسب لك
+                اختر اختبار <span>{title}</span> المناسب لك
               </>
             ) : (
               <>
-                Choose Your <span>{name}</span> Test
+                Choose Your <span>{title}</span> Test
               </>
             )}
           </h2>
+          <p className="section-subtitle text-center mx-auto">
+            {isRtl ? (
+              `تم تصميم كل نوع من اختبارات ${title} لهدف محدد. اختر النوع الذي يناسب هدفك الأكاديمي أو المهني أو التأشيرة.`
+            ) : (
+              `Each ${title} variant is designed for a specific purpose. Select the one that matches your visa, academic, or professional goal.`
+            )}
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {data.items?.map((item: any, index: number) => {
-            const itemName = item.translations?.[locale]?.name || item.name;
+            const itemName = item.name;
             const isUkvi = (item?.name?.toLowerCase().includes("ukvi") || item?.name?.toLowerCase().includes("life skills") || item?.slug?.toLowerCase().includes("ukvi") || item?.slug?.toLowerCase().includes("life-skills"));
             const href = isUkvi ? `/exams/${item.id}` : (item?.examFormRedirectUrl || `/exams/${item.id}`);
             const isExternal = !isUkvi && !!item?.examFormRedirectUrl;
