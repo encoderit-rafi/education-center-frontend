@@ -437,7 +437,7 @@ export function RegistrationFormStep({
                     key={opt.id}
                     htmlFor={opt.id}
                     data-invalid={!!errors.idType}
-                    className="whitespace-nowrap flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive"
+                    className="flex items-center gap-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive"
                   >
                     <RadioGroupItem value={opt.id} id={opt.id} />
                     {opt.label}

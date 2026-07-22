@@ -45,6 +45,7 @@ export function DateStep({
   speakingSlotError,
 }: DateStepProps) {
   const t = useTranslations("FormsShared.DateStep");
+  const tIelts = useTranslations("FormsShared.IELTS");
   return (
     <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
       <div className="bg-white rounded-2xl border border-slate-100 p-6 md:p-8 shadow-sm">
@@ -137,7 +138,7 @@ export function DateStep({
                         <div className="p-4 rounded-xl bg-slate-50 border border-slate-100 animate-in slide-in-from-top-2 duration-300 space-y-4">
                           <div>
                             <p className="text-xs font-bold uppercase tracking-wider mb-3">
-                              Select the Speaking Test delivery format preference
+                              {tIelts("speakingFormat")}
                             </p>
                             <RadioGroup
                               value={speakingSlot}
@@ -146,7 +147,7 @@ export function DateStep({
                             >
                               <div className="flex items-center space-x-2.5 p-2 rounded-lg hover:bg-slate-100/50 transition-colors">
                                 <RadioGroupItem
-                                  value="Live with the examiner at the test center (Face to face)."
+                                  value={tIelts("speakingFaceToFace")}
                                   id={`live-${slot.id}`}
                                   className="mt-1"
                                 />
@@ -154,12 +155,12 @@ export function DateStep({
                                   htmlFor={`live-${slot.id}`}
                                   className="text-sm font-medium leading-tight cursor-pointer text-slate-800"
                                 >
-                                  Live with the examiner at the test center (Face to face).
+                                  {tIelts("speakingFaceToFace")}
                                 </Label>
                               </div>
                               <div className="flex items-center space-x-2.5 p-2 rounded-lg hover:bg-slate-100/50 transition-colors">
                                 <RadioGroupItem
-                                  value="Video Call at the test centre (VCS)"
+                                  value={tIelts("speakingVideoCall")}
                                   id={`vcs-${slot.id}`}
                                   className="mt-1"
                                 />
@@ -167,7 +168,7 @@ export function DateStep({
                                   htmlFor={`vcs-${slot.id}`}
                                   className="text-sm font-medium leading-tight cursor-pointer text-slate-800"
                                 >
-                                  Video Call at the test centre (VCS)
+                                  {tIelts("speakingVideoCall")}
                                 </Label>
                               </div>
                             </RadioGroup>
@@ -178,25 +179,19 @@ export function DateStep({
                             )}
                           </div>
                           <div className="pt-4 border-t border-slate-200 text-sm font-medium text-justify space-y-2">
-                            {slot.id === "9:00 AM" ? (
-                              <>
-                                <p>
-                                  <strong>Note:</strong> The Speaking Test usually takes place in the afternoon. The Speaking Test might be conducted in-person with the examiner (face to face) or via video call on exam day at the test centre. We will confirm with you the Speaking Test delivery format before we book you the test. This will still need to be confirmed by the British Council.
-                                </p>
-                                <p className="text-xs mt-2">
-                                  You may also reach out to us at <a href={`tel:${INSTITUTIONS_INFO.phone}`} className="underline text-primary font-semibold">{INSTITUTIONS_INFO.phone}</a> or <a href={`mailto:${INSTITUTIONS_INFO.email}`} className="underline text-primary font-semibold">{INSTITUTIONS_INFO.email}</a> and confirm the Speaking Test delivery format before you proceed with the CD-IELTLS Registration on our website.
-                                </p>
-                              </>
-                            ) : (
-                              <>
-                                <p>
-                                  <strong>Note:</strong> The Speaking Test usually takes place in the morning. The Speaking Test might be conducted in-person with the examiner (face to face) or via video call on exam day at the test center. We will confirm with you the Speaking Test delivery format before we book you the test. This will still need to be confirmed by the British Council.
-                                </p>
-                                <p className="text-xs mt-2">
-                                  You may also reach out to us at <a href={`tel:${INSTITUTIONS_INFO.phone}`} className="underline text-primary font-semibold">{INSTITUTIONS_INFO.phone}</a> or <a href={`mailto:${INSTITUTIONS_INFO.email}`} className="underline text-primary font-semibold">{INSTITUTIONS_INFO.email}</a> and confirm the Speaking Test delivery format before you proceed with the CD-IELTLS Registration on our website.
-                                </p>
-                              </>
-                            )}
+                            <div className="text-sm font-medium text-justify">
+                              {tIelts.rich(
+                                slot.id === "9:00 AM"
+                                  ? "speakingNoteMorning"
+                                  : "speakingNoteAfternoon",
+                                {
+                                  strong: (chunks) => <strong>{chunks}</strong>,
+                                  br: () => <br />,
+                                  phone: INSTITUTIONS_INFO.phone,
+                                  email: INSTITUTIONS_INFO.email,
+                                },
+                              )}
+                            </div>
                           </div>
                         </div>
                       )}

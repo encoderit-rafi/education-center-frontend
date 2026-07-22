@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Edit3, CreditCard, User, ShieldCheck, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PriceDisplay } from "@/components/ui/price-display";
@@ -25,6 +25,154 @@ export interface ReviewSummaryGridProps {
   testInformation: ReviewField[];
 }
 
+const translateLabel = (label: string, locale: string) => {
+  if (locale !== "ar") return label;
+  const cleanLabel = label.trim().toLowerCase();
+  const mapping: Record<string, string> = {
+    "given names": "الاسم الأول / الأسماء المعطاة",
+    "middle name": "الاسم الأوسط",
+    "surnames": "اسم العائلة",
+    "surname": "اسم العائلة",
+    "date of birth": "تاريخ الميلاد",
+    "gender": "الجنس",
+    "sex": "الجنس",
+    "city of birth": "مدينة الميلاد",
+    "country of birth": "بلد الميلاد",
+    "phone number": "رقم الجوال",
+    "mobile number": "رقم الجوال",
+    "nationality": "الجنسية",
+    "country of nationality": "بلد الجنسية",
+    
+    "id type": "نوع الهوية",
+    "id number": "رقم الهوية",
+    "email": "البريد الإلكتروني",
+    "id expiry date": "تاريخ انتهاء الهوية",
+    "identity document": "وثيقة الهوية",
+    "id document": "وثيقة الهوية",
+    "issuing authority": "جهة الإصدار",
+    
+    "exam date": "تاريخ الامتحان",
+    "time slot": "الموعد",
+    "speaking slot": "طريقة تقديم اختبار المحادثة",
+    "address line 1": "العنوان سطر 1",
+    "address line 2": "العنوان سطر 2",
+    "address line 3": "العنوان سطر 3",
+    "street address 1": "عنوان الشارع 1",
+    "street address 2": "عنوان الشارع 2",
+    "emirate / city": "الإمارة / المدينة",
+    "town / city": "المدينة",
+    "country of residence": "بلد الإقامة",
+    "p.o. box": "رقم صندوق البريد",
+    "postal code": "الرمز البريدي",
+    "post code": "الرمز البريدي",
+    "first language": "اللغة الأولى",
+    "occupation level": "المستوى الوظيفي",
+    "occupation sector": "القطاع الوظيفي",
+    "selected level": "المستوى المختار",
+    "test module": "نوع الاختبار",
+    "reason for taking test": "السبب من إجراء الاختبار",
+    "destination country": "بلد الوجهة",
+    "payment method": "طريقة الدفع",
+    "total amount": "المبلغ الإجمالي",
+    "exam fee": "رسوم الاختبار",
+    "registration service fee": "رسوم خدمة التسجيل",
+    "vat": "ضريبة القيمة المضافة",
+  };
+  return mapping[cleanLabel] || label;
+};
+
+const translateValue = (val: string, locale: string) => {
+  if (locale !== "ar") return val;
+  let cleanVal = val.trim();
+  
+  // Translate dates (e.g. "July 26th, 2026", "July 1st, 1984")
+  const months: Record<string, string> = {
+    January: "يناير",
+    February: "فبراير",
+    March: "مارس",
+    April: "أبريل",
+    May: "مايو",
+    June: "يونيو",
+    July: "يوليو",
+    August: "أغسطس",
+    September: "سبتمبر",
+    October: "أكتوبر",
+    November: "نوفمبر",
+    December: "ديسمبر"
+  };
+  
+  for (const [engMonth, arMonth] of Object.entries(months)) {
+    if (cleanVal.includes(engMonth)) {
+      cleanVal = cleanVal.replace(engMonth, arMonth);
+    }
+  }
+  
+  // Replace ordinals like "1st", "2nd", "3rd", "4th" etc.
+  cleanVal = cleanVal.replace(/(\d+)(st|nd|rd|th)/g, "$1");
+
+  // Handle common time slot labels
+  if (cleanVal.includes("Morning Session")) {
+    cleanVal = cleanVal.replace("Morning Session", "الجلسة الصباحية");
+  }
+  if (cleanVal.includes("Afternoon Session")) {
+    cleanVal = cleanVal.replace("Afternoon Session", "الجلسة المسائية");
+  }
+  if (cleanVal.includes("Evening Session")) {
+    cleanVal = cleanVal.replace("Evening Session", "الجلسة المسائية المتأخرة");
+  }
+
+  const lower = cleanVal.toLowerCase();
+  
+  // Handle genders
+  if (lower === "male") return "ذكر";
+  if (lower === "female") return "أنثى";
+  if (lower === "other") return "أخرى";
+  
+  // Handle ID types
+  if (lower === "emirates id" || lower === "emirates_id" || lower === "emirates") return "الهوية الإماراتية";
+  if (lower === "passport") return "جواز سفر";
+  if (lower === "visa") return "تأشيرة";
+  if (lower === "others" || lower === "other") return "أخرى";
+  
+  // Handle YES/NO
+  if (lower === "yes") return "نعم";
+  if (lower === "no") return "لا";
+  if (lower === "n/a") return "غير متوفر";
+  
+  // Handle common countries
+  if (lower === "united arab emirates") return "الإمارات العربية المتحدة";
+  if (lower === "saudi arabia") return "المملكة العربية السعودية";
+  if (lower === "oman") return "عمان";
+  if (lower === "qatar") return "قطر";
+  if (lower === "kuwait") return "الكويت";
+  if (lower === "bahrain") return "البحرين";
+  if (lower === "egypt") return "مصر";
+  if (lower === "jordan") return "الأردن";
+  if (lower === "lebanon") return "لبنان";
+  if (lower === "syria") return "سوريا";
+  if (lower === "iraq") return "العراق";
+  if (lower === "yemen") return "اليمن";
+  if (lower === "palestine") return "فلسطين";
+  if (lower === "sudan") return "السودان";
+  
+  // Handle occupation levels / sectors / languages
+  if (lower === "self-employed") return "عامل لحسابه الخاص";
+  if (lower === "albanian") return "الألبانية";
+  if (cleanVal.includes("Agriculture, Fishing, Forestry, Mining")) {
+    return "الزراعة والصيد والغابات والتعدين";
+  }
+  
+  // Format Speaking Slot description if in English
+  if (cleanVal.includes("Live with the examiner")) {
+    return "مباشر مع الممتحن في مركز الاختبار (وجهاً لوجه)";
+  }
+  if (cleanVal.includes("Video Call at the test")) {
+    return "مكالمة فيديو في مركز الاختبار (VCS)";
+  }
+  
+  return cleanVal;
+};
+
 function SummaryCard({
   icon,
   title,
@@ -37,6 +185,7 @@ function SummaryCard({
   colsClassName?: string;
 }) {
   const t = useTranslations("FormsShared.GlobalReviewStep");
+  const locale = useLocale();
   return (
     <div className="border border-slate-150 rounded-2xl bg-white overflow-hidden shadow-xs">
       {/* Card Header */}
@@ -48,21 +197,28 @@ function SummaryCard({
       </div>
       {/* Card Body */}
       <div className={cn("grid gap-5 p-5", colsClassName)}>
-        {fields.map((field, i) => (
-          <div key={i} className="flex flex-col space-y-1">
-            <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">
-              {field.label}
-            </span>
-            <span
-              className={cn(
-                "text-sm font-semibold leading-normal",
-                field.highlight ? "text-[#A11D1D] font-bold" : "text-slate-900",
-              )}
-            >
-              {field.value ?? t("na")}
-            </span>
-          </div>
-        ))}
+        {fields.map((field, i) => {
+          const displayLabel = translateLabel(field.label, locale);
+          const displayValue = typeof field.value === "string" 
+            ? translateValue(field.value, locale) 
+            : field.value;
+
+          return (
+            <div key={i} className="flex flex-col space-y-1">
+              <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">
+                {displayLabel}
+              </span>
+              <span
+                className={cn(
+                  "text-sm font-semibold leading-normal",
+                  field.highlight ? "text-[#A11D1D] font-bold" : "text-slate-900",
+                )}
+              >
+                {displayValue ?? t("na")}
+              </span>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
