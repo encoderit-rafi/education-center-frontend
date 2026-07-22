@@ -122,7 +122,7 @@ export function MockTestTypeSelector({ data }: MockTestTypeSelectorProps) {
                 />
               </button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-[var(--radix-dropdown-menu-trigger-width)]">
+            <DropdownMenuContent className="w-(--radix-dropdown-menu-trigger-width)">
               <DropdownMenuRadioGroup
                 value={selectedLocation}
                 onValueChange={(val) => setSelectedLocation(val as "home" | "center")}
@@ -190,7 +190,7 @@ export function MockTestTypeSelector({ data }: MockTestTypeSelectorProps) {
               />
             </button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-[var(--radix-dropdown-menu-trigger-width)]">
+          <DropdownMenuContent className="w-(--radix-dropdown-menu-trigger-width)">
             <DropdownMenuRadioGroup value={selectedType} onValueChange={setSelectedType}>
               {types.map((typeObj) => (
                 <DropdownMenuRadioItem key={typeObj.value} value={typeObj.value}>
@@ -233,7 +233,7 @@ export function MockTestTypeSelector({ data }: MockTestTypeSelectorProps) {
                   />
                 </button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-[var(--radix-dropdown-menu-trigger-width)]">
+              <DropdownMenuContent className="w-(--radix-dropdown-menu-trigger-width)">
                 <DropdownMenuRadioGroup
                   value={selectedLocation}
                   onValueChange={(val) => setSelectedLocation(val as "home" | "center")}
