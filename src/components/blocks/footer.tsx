@@ -186,18 +186,8 @@ export default function Footer() {
             <div className="w-14 h-1 bg-red-700 mb-8" />
 
             <div className="flex flex-col gap-y-4">
-              {isLoading ? (
-                <div className="space-y-4">
-                  {[1, 2, 3, 4, 5].map((i) => (
-                    <div
-                      key={i}
-                      className="h-5 w-3/4 bg-white/10 animate-pulse rounded-md"
-                    />
-                  ))}
-                </div>
-              ) : (
-                [...primaryNav, ...SECONDARY_NAV]
-                  .filter((nav) => nav.name.toLowerCase() !== "home")
+              {[...primaryNav, ...SECONDARY_NAV]
+                .filter((nav) => nav.name.toLowerCase() !== "home")
                   .map((nav) => (
                     <div key={nav.name}>
                       {nav.type === "dropdown" && nav.items.length > 0 ? (
@@ -245,8 +235,7 @@ export default function Footer() {
                         </Link>
                       )}
                     </div>
-                  ))
-              )}
+                  ))}
             </div>
           </div>
 

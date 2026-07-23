@@ -98,23 +98,16 @@ export default function MobileNav() {
                     </AccordionTrigger>
                     <AccordionContent className="p-0 bg-slate-50/50">
                       <div className="flex flex-col">
-                        {isLoading && item.items.length === 0 ? (
-                          <div className="flex flex-col gap-2 px-10 py-4">
-                            <div className="h-4 bg-slate-100 animate-pulse rounded w-3/4"></div>
-                            <div className="h-4 bg-slate-100 animate-pulse rounded w-1/2"></div>
-                          </div>
-                        ) : (
-                          item.items.map((subItem) => (
-                            <Link
-                              key={subItem.name}
-                              href={subItem.href}
-                              onClick={() => setOpen(false)}
-                              className="px-10 py-3.5 text-sm font-medium text-slate-600 hover:text-primary hover:bg-white transition-all border-t border-slate-100 first:border-t-0"
-                            >
-                              {translateName(subItem.name)}
-                            </Link>
-                          ))
-                        )}
+                        {item.items.map((subItem) => (
+                          <Link
+                            key={subItem.name}
+                            href={subItem.href}
+                            onClick={() => setOpen(false)}
+                            className="px-10 py-3.5 text-sm font-medium text-slate-600 hover:text-primary hover:bg-white transition-all border-t border-slate-100 first:border-t-0"
+                          >
+                            {translateName(subItem.name)}
+                          </Link>
+                        ))}
                       </div>
                     </AccordionContent>
                   </AccordionItem>

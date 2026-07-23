@@ -875,9 +875,8 @@ export default function EnglishQuizForm() {
               </Field>
 
               <Field data-invalid={!!errors.followUp}>
-                <FieldLabel className="normal-case block text-sm font-medium leading-snug text-slate-900">
+                <FieldLabel required className="normal-case block text-sm font-medium leading-snug text-slate-900">
                   {t("form.followUpQuestion")}
-                  <span className="text-primary ms-0.5">*</span>
                 </FieldLabel>
                 <FieldContent>
                   <Controller
