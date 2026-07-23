@@ -35,7 +35,7 @@ export default function BaseNoteBox({
             className="text-secondary text-sm font-light leading-relaxed flex items-start gap-3"
           >
             <span className="size-1.5 bg-primary rounded-full mt-2 shrink-0" />
-            <span className="flex-1 text-start leading-relaxed">{note}</span>
+            <span className="flex-1 text-justify leading-relaxed">{note}</span>
           </li>
         ))}
       </ul>
