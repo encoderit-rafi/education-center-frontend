@@ -605,6 +605,7 @@ type QuizFormValues = {
   phoneNumber: string;
   city: string;
   country: string;
+  followUp: string;
   answers: Record<string, string>;
 };
 
@@ -636,6 +637,10 @@ export default function EnglishQuizForm() {
       .string()
       .trim()
       .min(1, t("form.countryRequired")),
+    followUp: z
+      .string()
+      .trim()
+      .min(1, t("form.followUpRequired")),
     answers: z.record(
       z.string(),
       z.string().min(1, t("form.answerRequired")),
@@ -650,6 +655,7 @@ export default function EnglishQuizForm() {
       phoneNumber: "",
       city: "",
       country: "",
+      followUp: "",
       answers: Object.fromEntries(
         QUIZ_QUESTIONS.map((q) => [q.id.toString(), ""]),
       ),
@@ -676,6 +682,7 @@ export default function EnglishQuizForm() {
         "phoneNumber",
         "country",
         "city",
+        "followUp",
       ];
     } else if (step === 2) {
       const allAnswered = QUIZ_QUESTIONS.every((q) => currentAnswers[q.id.toString()]);
@@ -714,6 +721,7 @@ export default function EnglishQuizForm() {
         phone: data.phoneNumber,
         country: data.country,
         city: data.city,
+        follow_up: data.followUp,
         questions,
       };
 
@@ -760,7 +768,7 @@ export default function EnglishQuizForm() {
               </h2>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid md:grid-cols-2 gap-6 items-start">
               <Field data-invalid={!!errors.fullName}>
                 <FieldLabel required>{t("form.fullName")}</FieldLabel>
                 <FieldContent>
@@ -862,6 +870,56 @@ export default function EnglishQuizForm() {
                   </div>
                   {errors.phoneNumber && (
                     <FieldError>{errors.phoneNumber.message}</FieldError>
+                  )}
+                </FieldContent>
+              </Field>
+
+              <Field data-invalid={!!errors.followUp}>
+                <FieldLabel className="normal-case block text-sm font-medium leading-snug text-slate-900">
+                  {t("form.followUpQuestion")}
+                  <span className="text-primary ms-0.5">*</span>
+                </FieldLabel>
+                <FieldContent>
+                  <Controller
+                    control={control}
+                    name="followUp"
+                    render={({ field }) => (
+                      <RadioGroup
+                        value={field.value}
+                        onValueChange={field.onChange}
+                        className="gap-3 pt-1"
+                      >
+                        <div className="flex items-start gap-2.5 cursor-pointer">
+                          <RadioGroupItem
+                            value="yes"
+                            id="followUp-yes"
+                            className="mt-0.5 shrink-0"
+                          />
+                          <Label
+                            htmlFor="followUp-yes"
+                            className="text-xs sm:text-sm text-slate-700 font-normal leading-snug cursor-pointer"
+                          >
+                            {t("form.followUpYes")}
+                          </Label>
+                        </div>
+                        <div className="flex items-start gap-2.5 cursor-pointer">
+                          <RadioGroupItem
+                            value="no"
+                            id="followUp-no"
+                            className="mt-0.5 shrink-0"
+                          />
+                          <Label
+                            htmlFor="followUp-no"
+                            className="text-xs sm:text-sm text-slate-700 font-normal leading-snug cursor-pointer"
+                          >
+                            {t("form.followUpNo")}
+                          </Label>
+                        </div>
+                      </RadioGroup>
+                    )}
+                  />
+                  {errors.followUp && (
+                    <FieldError>{errors.followUp.message}</FieldError>
                   )}
                 </FieldContent>
               </Field>

@@ -1253,8 +1253,8 @@
     "chooseLabel": "You can choose:",
     "chooseOptions": [
       "In-person Consultation at our centre.",
-      "Online Consultation via GoTo Application",
-      "Phone Consultation via phone call"
+      "Online Consultation.",
+      "Phone Consultation."
     ],
     "sessionLabel": "During your session, we will:",
     "sessionItems": [
@@ -1271,7 +1271,7 @@
     "consultLabel": "You can consult:",
     "consultOptions": [
       "In-person Consultation at our centre.",
-      "Phone Consultation via phone call for quick support"
+      "Phone Consultation for quick support"
     ],
     "helpLabel": "We will help you with:",
     "helpItems": [
@@ -3941,6 +3941,10 @@
       "phoneNumber": "Phone Number",
       "phoneNumberPlaceholder": "Enter phone number",
       "phoneNumberRequired": "Phone Number is required",
+      "followUpQuestion": "Would you like us to follow up with you after the quiz?",
+      "followUpYes": "Yes, I would like to receive a follow-up email or phone call regarding my results, Paid Mock Tests, prep courses, and exam booking.",
+      "followUpNo": "No, thank you. I will reach out if I need assistance.",
+      "followUpRequired": "Please select a follow-up preference",
       "startQuiz": "Start the quiz",
       "answerRequired": "Please answer this question",
       "answersRequiredAll": "Please answer all questions before proceeding",
@@ -4009,6 +4013,7 @@
     },
     "start": "Start",
     "introText": "Please allocate a few minutes to complete our online English Level Test. We take your English Language assessment seriously.",
+    "consentText": "By proceeding with this test, you consent to receiving a follow-up call or email as part of this dedicated service.",
     "loading": "Loading questions...",
     "guidance": "Choose the correct answer",
     "submit": "Submit Assessment",

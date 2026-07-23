@@ -561,7 +561,10 @@ export default function TestYourEnglishForm({ onSuccess }: { onSuccess?: (val: b
             >
               {t("start")}
             </Button>
-            <p>{t("introText")}</p>
+            <div className="space-y-2 text-slate-600">
+              <p>{t("introText")}</p>
+              <p>{t("consentText")}</p>
+            </div>
           </div>
         )}
 
