@@ -339,28 +339,28 @@ export default function TestYourEnglishForm({ onSuccess }: { onSuccess?: (val: b
     <div className="space-y-12">
       <form onSubmit={handleSubmit(onSubmit, onInvalid)} className="animate-fade-up">
         {step === 1 && (
-          <div className="bg-white border border-slate-200 rounded-md p-8 space-y-8">
+          <div className="bg-white border border-slate-200 rounded-md p-4 sm:p-8 space-y-6 sm:space-y-8 scroll-mt-28">
             <div className="flex items-center gap-3 mb-2">
               <div className="p-2 bg-primary/10 rounded-lg text-primary">
                 <User size={20} />
               </div>
-              <h2 className="text-xl font-bold text-secondary">
+              <h2 className="text-lg sm:text-xl font-bold text-secondary">
                 {t("step1")}
               </h2>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
               <Field data-invalid={!!errors.fullName}>
                 <FieldLabel required>{t("fullName")}</FieldLabel>
                 <FieldContent>
                   <div className="relative">
                     <User
-                      className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+                      className="absolute start-3 top-1/2 -translate-y-1/2 text-slate-400"
                       size={16}
                     />
                     <Input
                       {...register("fullName")}
-                      className="pl-10 h-10"
+                      className="ps-10 h-10"
                       placeholder={t("fullNamePlaceholder")}
                     />
                   </div>
@@ -375,13 +375,13 @@ export default function TestYourEnglishForm({ onSuccess }: { onSuccess?: (val: b
                 <FieldContent>
                   <div className="relative">
                     <Mail
-                      className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+                      className="absolute start-3 top-1/2 -translate-y-1/2 text-slate-400"
                       size={16}
                     />
                     <Input
                       {...register("email")}
                       type="email"
-                      className="pl-10 h-10"
+                      className="ps-10 h-10"
                       placeholder={t("emailPlaceholder")}
                     />
                   </div>
@@ -416,12 +416,12 @@ export default function TestYourEnglishForm({ onSuccess }: { onSuccess?: (val: b
                 <FieldContent>
                   <div className="relative">
                     <MapPin
-                      className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+                      className="absolute start-3 top-1/2 -translate-y-1/2 text-slate-400"
                       size={16}
                     />
                     <Input
                       {...register("city")}
-                      className="pl-10 h-10"
+                      className="ps-10 h-10"
                       placeholder={t("cityPlaceholder")}
                     />
                   </div>

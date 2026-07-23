@@ -234,9 +234,9 @@ export default function FreeConsultationForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-      <div className="grid md:grid-cols-2 gap-x-10 gap-y-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-y-6 md:gap-x-10 md:gap-y-8">
         {/* Personal Information */}
-        <div className="space-y-6">
+        <div className="space-y-6 scroll-mt-28">
           <Stepper step={1}>{tForm("step1")}</Stepper>
           <div className="space-y-4">
             <Field data-invalid={!!errors.fullName}>
@@ -315,7 +315,7 @@ export default function FreeConsultationForm() {
         </div>
 
         {/* Consultation Details */}
-        <div className="space-y-6">
+        <div className="space-y-6 scroll-mt-28">
           <Stepper step={2}>{tForm("step2")}</Stepper>
           <div className="space-y-4">
             <Field data-invalid={!!errors.area}>
@@ -356,11 +356,11 @@ export default function FreeConsultationForm() {
                           !selectedDate && "text-slate-400"
                         )}
                       >
-                        <CalendarIcon className="mr-2 h-4 w-4 text-slate-400" />
+                        <CalendarIcon className="mr-2 h-4 w-4 text-slate-400 shrink-0" />
                         {selectedDate ? (
-                          format(selectedDate, "PPP")
+                          <span className="truncate">{format(selectedDate, "PPP")}</span>
                         ) : (
-                          <span>{tForm("selectDate")}</span>
+                          <span className="truncate">{tForm("selectDate")}</span>
                         )}
                       </Button>
                     }
@@ -399,10 +399,12 @@ export default function FreeConsultationForm() {
                             !field.value && "text-slate-400"
                           )}
                         >
-                          {field.value
-                            ? TIMES.find((t) => t.value === field.value)?.label
-                            : tForm("selectTime")}
-                          <ChevronDown className="h-4 w-4 text-slate-400" />
+                          <span className="truncate">
+                            {field.value
+                              ? TIMES.find((t) => t.value === field.value)?.label
+                              : tForm("selectTime")}
+                          </span>
+                          <ChevronDown className="h-4 w-4 text-slate-400 shrink-0" />
                         </Button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent className="min-w-(--radix-dropdown-menu-trigger-width) w-auto bg-white">

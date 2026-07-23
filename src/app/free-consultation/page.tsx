@@ -32,12 +32,12 @@ export default function FreeConsultationPage() {
   return (
     <main className="bg-white min-h-screen">
       {/* ── Section 1: Hero ── */}
-      <section className="relative py-16 md:py-24 px-8 max-w-screen-2xl mx-auto overflow-hidden">
+      <section className="relative py-10 md:py-24 px-4 sm:px-8 max-w-screen-2xl mx-auto overflow-hidden">
         {/* Decorative Background */}
         <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-96 h-96 bg-primary/5 rounded-full blur-3xl -z-10"></div>
         <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/2 w-64 h-64 bg-secondary/5 rounded-full blur-3xl -z-10"></div>
 
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center relative z-10">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-24 items-center relative z-10">
           {/* Left Content */}
           <SectionHeader
             badge={t("heroBadge")}
@@ -74,10 +74,10 @@ export default function FreeConsultationPage() {
       </section>
 
       {/* ── Section 2: Exam Preparation Courses ── */}
-      <section className="py-32 px-8 max-w-screen-2xl mx-auto border-t border-slate-50">
-        <div className="grid lg:grid-cols-2 gap-20 items-start">
+      <section className="py-12 md:py-32 px-4 sm:px-8 max-w-screen-2xl mx-auto border-t border-slate-50">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-20 items-start">
           {/* Left Visual */}
-          <div className="relative pt-12 lg:pt-0">
+          <div className="relative pt-6 lg:pt-0">
             <div className="relative aspect-4/3 rounded-xl overflow-hidden shadow-2xl">
               <Image
                 src="/images/consultation-instructor.png"
@@ -89,7 +89,7 @@ export default function FreeConsultationPage() {
           </div>
 
           {/* Right Content */}
-          <div className="space-y-12">
+          <div className="space-y-8 md:space-y-12">
             <SectionHeader
               badge={t("examPrepBadge")}
               title={
@@ -144,11 +144,11 @@ export default function FreeConsultationPage() {
       </section>
 
       {/* ── Section 3: Exam Bookings & Test Information ── */}
-      <section className="relative py-32 px-8 max-w-screen-2xl mx-auto border-t border-slate-50 bg-slate-50/30 overflow-hidden">
+      <section className="relative py-12 md:py-32 px-4 sm:px-8 max-w-screen-2xl mx-auto border-t border-slate-50 bg-slate-50/30 overflow-hidden">
         {/* Decorative Background */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(var(--primary-rgb),0.03)_0%,transparent_70%)] -z-10"></div>
 
-        <div className="grid lg:grid-cols-2 gap-20 items-start relative z-10">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-20 items-start relative z-10">
           {/* Left Content */}
           <div className="space-y-12">
             <SectionHeader
