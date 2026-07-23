@@ -26,6 +26,7 @@ import { toast } from "sonner";
 import api from "@/axios";
 import { useTranslations, useLocale } from "next-intl";
 
+import { cn } from "@/lib/utils";
 import { ChevronDown, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FormRecaptcha, useRecaptcha } from "@/components/ui/form-recaptcha";
@@ -304,12 +305,12 @@ export default function ContactForm() {
                     variant="outline"
                     className="flex h-11 w-full bg-white items-center justify-between whitespace-nowrap rounded-md border border-slate-200 px-3 py-2 text-base outline-none focus:border-primary focus:ring-3 focus:ring-ring/30 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm font-medium hover:border-slate-200 hover:text-inherit hover:bg-white hover:shadow-none transition-none"
                   >
-                    <span className={!field.value ? "text-slate-400" : ""}>
+                    <span className={cn("truncate", !field.value ? "text-slate-400" : "")}>
                       {field.value
                         ? ENQUIRY_TOPICS.find((t) => t.value === field.value)?.label
                         : tForm("selectTopic")}
                     </span>
-                    <ChevronDown className="w-4 h-4 text-slate-500" />
+                    <ChevronDown className="w-4 h-4 text-slate-500 shrink-0" />
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-(--radix-dropdown-menu-trigger-width)">

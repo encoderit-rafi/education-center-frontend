@@ -56,7 +56,7 @@ function QuizResultContent() {
       </div>
 
       {/* Main Results Container */}
-      <div className="p-8 lg:p-12 space-y-8 bg-white">
+      <div className="p-4 sm:p-8 lg:p-12 space-y-8 bg-white">
         <div>
           {/* Score Display */}
           <div className="w-full max-w-md mx-auto flex flex-col items-center justify-center bg-slate-50 border border-slate-100 rounded-2xl p-6 space-y-2">
@@ -77,7 +77,7 @@ function QuizResultContent() {
         </div>
 
         {/* Feedback Alert box */}
-        <div className="bg-slate-50 rounded-xl p-6 border border-slate-100 text-start space-y-6">
+        <div className="bg-slate-50 rounded-xl p-4 sm:p-6 border border-slate-100 text-start space-y-6">
           <div className="space-y-2">
             <p className="text-base font-bold text-slate-800 leading-snug">
               {isRtl ? "شكرًا لك على إجراء كويز تيبث للغة الإنجليزية!" : "Thank you for taking the TEPTH English Quiz!"}
@@ -95,24 +95,24 @@ function QuizResultContent() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             {/* Phone Contact Button */}
             <button
               onClick={handleCopyPhone}
-              className="flex items-center gap-4 p-4 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300 transition-all text-start group relative active:scale-[0.98] w-full"
+              className="flex items-center gap-3 p-3.5 sm:p-4 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300 transition-all text-start group relative active:scale-[0.98] w-full"
             >
-              <div className="p-3 bg-secondary/10 rounded-lg text-secondary group-hover:scale-110 transition-transform">
+              <div className="p-2.5 sm:p-3 bg-secondary/10 rounded-lg text-secondary group-hover:scale-110 transition-transform shrink-0">
                 <Phone className="w-5 h-5" />
               </div>
               <div className="flex-1 min-w-0">
                 <span className="block text-xs font-semibold text-slate-400 uppercase tracking-wider">
                   {isRtl ? "اتصل بنا" : "Call Us"}
                 </span>
-                <span className="block text-sm font-bold text-slate-700 mt-0.5" dir="ltr">
+                <span className="block text-xs sm:text-sm font-bold text-slate-700 mt-0.5 rtl:text-right" dir="ltr">
                   +971 6 553 1250
                 </span>
               </div>
-              <div className="flex items-center justify-center p-2 rounded-md hover:bg-slate-100 text-slate-400 group-hover:text-slate-600 transition-colors">
+              <div className="flex items-center justify-center p-2 rounded-md hover:bg-slate-100 text-slate-400 group-hover:text-slate-600 transition-colors shrink-0">
                 {copiedPhone ? (
                   <Check className="w-4 h-4 text-emerald-600" />
                 ) : (
@@ -132,20 +132,20 @@ function QuizResultContent() {
             {/* Email Contact Link */}
             <a
               href="mailto:info@tepth.org"
-              className="flex items-center gap-4 p-4 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300 transition-all text-start group active:scale-[0.98] w-full"
+              className="flex items-center gap-3 p-3.5 sm:p-4 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300 transition-all text-start group active:scale-[0.98] w-full"
             >
-              <div className="p-3 bg-primary/10 rounded-lg text-primary group-hover:scale-110 transition-transform">
+              <div className="p-2.5 sm:p-3 bg-primary/10 rounded-lg text-primary group-hover:scale-110 transition-transform shrink-0">
                 <Mail className="w-5 h-5" />
               </div>
               <div className="flex-1 min-w-0">
                 <span className="block text-xs font-semibold text-slate-400 uppercase tracking-wider">
                   {isRtl ? "البريد الإلكتروني" : "Email Us"}
                 </span>
-                <span className="block text-sm font-bold text-slate-700 mt-0.5 truncate">
+                <span className="block text-xs sm:text-sm font-bold text-slate-700 mt-0.5 whitespace-nowrap">
                   info@tepth.org
                 </span>
               </div>
-              <div className="flex items-center justify-center p-2 rounded-md hover:bg-slate-100 text-slate-400 group-hover:text-slate-600 transition-colors">
+              <div className="flex items-center justify-center p-2 rounded-md hover:bg-slate-100 text-slate-400 group-hover:text-slate-600 transition-colors shrink-0">
                 <Mail className="w-4 h-4" />
               </div>
             </a>

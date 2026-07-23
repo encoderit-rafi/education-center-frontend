@@ -595,12 +595,12 @@ export default function CareerPage() {
                                   }}
                                 />
                                 {file ? (
-                                  <div className="flex flex-col items-center space-y-3 w-full text-center">
-                                    <div className="w-16 h-16 bg-[#A11D1D]/10 rounded-full flex items-center justify-center text-[#A11D1D]">
+                                  <div className="flex flex-col items-center space-y-3 w-full text-center min-w-0">
+                                    <div className="w-16 h-16 bg-[#A11D1D]/10 rounded-full flex items-center justify-center text-[#A11D1D] shrink-0">
                                       <CheckCircle2 className="w-8 h-8" />
                                     </div>
-                                    <div className="space-y-1">
-                                      <p className="font-bold text-gray-900 text-sm max-w-full truncate px-4">
+                                    <div className="space-y-1 w-full min-w-0 px-2">
+                                      <p className="font-bold text-gray-900 text-sm w-full truncate" dir="ltr">
                                         {file.name}
                                       </p>
                                       <p className="text-xs text-gray-500 font-medium">
@@ -618,7 +618,7 @@ export default function CareerPage() {
                                         if (resumeFileRef.current)
                                           resumeFileRef.current.value = "";
                                       }}
-                                      className="text-xs text-[#A11D1D] hover:text-[#8A1818] font-black uppercase tracking-widest flex items-center gap-1 hover:underline mx-auto mt-2"
+                                      className="text-xs text-[#A11D1D] hover:text-[#8A1818] font-black uppercase tracking-widest flex items-center gap-1 hover:underline mx-auto mt-2 cursor-pointer"
                                     >
                                       {t("form.removeFile")}
                                     </button>

@@ -43,11 +43,11 @@ export default async function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="min-h-full flex flex-col bg-background text-on-surface font-body selection:bg-red-100 selection:text-red-900">
+      <body className="min-h-full flex flex-col bg-background text-on-surface font-body selection:bg-red-100 selection:text-red-900 overflow-x-hidden">
         <NextIntlClientProvider messages={messages}>
           <Providers>
             <NavBar />
-            <main>{children}</main>
+            <main className="overflow-x-hidden">{children}</main>
             {/* <main dir={locale === "ar" ? "rtl" : "ltr"}>{children}</main> */}
             <Footer />
             {/* <FloatingChatbot /> */}
