@@ -3085,7 +3085,7 @@
     "copyright": "© {year} TEPTH. All Rights Reserved.",
     "Menu": "Menu",
     "banner": {
-      "marqueeText": "Authorized Test Centre · IELTS · TOEFL iBT · PTE · GRE . Save up to 25% on some of our courses when you book your exam and register for the course with TEPTH and pay in-person or online on our website"
+      "marqueeText": "Authorized Test Centre / Venue · IELTS · TOEFL iBT · PTE · GRE . Save up to 25% on some of our courses when you book your exam and register for the course with TEPTH and pay in-person or online on our website"
     },
     "menu": {
       "home": "Home",
@@ -3942,7 +3942,7 @@
       "phoneNumberPlaceholder": "Enter phone number",
       "phoneNumberRequired": "Phone Number is required",
       "followUpQuestion": "Would you like us to follow up with you after the quiz?",
-      "followUpYes": "Yes, I would like to receive a follow-up email or phone call regarding my results, Paid Mock Tests, prep courses, and exam booking.",
+      "followUpYes": "Yes, I would like to receive a follow-up email or phone call regarding my results, paid mock tests, prep courses, and exam booking.",
       "followUpNo": "No, thank you. I will reach out if I need assistance.",
       "followUpRequired": "Please select a follow-up preference",
       "startQuiz": "Start the quiz",
