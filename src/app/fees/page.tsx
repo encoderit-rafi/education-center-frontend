@@ -1,14 +1,16 @@
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 import {
   BaseCard,
   BaseCardTitle,
   BaseCardIcon,
   BaseCardArrow,
-  BaseCardList,
 } from "@/components/blocks/cards/base-card";
 import api from "@/axios";
 
 export default async function FeesPage() {
+  const t = await getTranslations("ExamFeesPage");
+
   let courses = [];
   try {
     const response = await api.get("/courses");
@@ -25,11 +27,10 @@ export default async function FeesPage() {
       <section className="relative overflow-hidden bg-slate-50 base-py base-px">
         <div className="max-w-4xl mx-auto text-center space-y-8">
           <h1 className="section-title">
-            Exam <span className="text-primary italic">Fees</span>
+            {t("title")} <span className="text-primary italic">{t("titleAccent")}</span>
           </h1>
           <p className="section-subtitle max-w-3xl mx-auto">
-            Here is a comprehensive breakdown of all official exam fees and
-            service charges. This guide ensures transparency in your planning.
+            {t("subtitle")}
           </p>
         </div>
       </section>
@@ -44,7 +45,7 @@ export default async function FeesPage() {
                   <BaseCard>
                     <div className="flex items-center justify-between mb-10">
                       <BaseCardIcon>{index + 1}</BaseCardIcon>
-                      <BaseCardArrow className="group-hover:translate-x-2 transition-transform duration-500" />
+                      <BaseCardArrow className="group-hover:translate-x-2 rtl:group-hover:-translate-x-2 transition-transform duration-500" />
                     </div>
 
                     <div className="space-y-5 mb-5">

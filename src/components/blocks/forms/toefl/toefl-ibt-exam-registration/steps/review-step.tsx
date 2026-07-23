@@ -167,11 +167,11 @@ export function ReviewStep({
                                 {data.idExpiryDate ? format(data.idExpiryDate, "PPP") : t("na")}
                             </span>
                         </div>
-                        <div className="flex flex-col">
+                        <div className="flex flex-col min-w-0">
                             <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">
                                 {tFields("attachIdCopy")}
                             </span>
-                            <span className="text-sm font-bold text-slate-900 truncate max-w-50">
+                            <span className="text-sm font-bold text-slate-900 break-words [overflow-wrap:anywhere]">
                                 {data.idDocument
                                     ? (data.idDocument as File).name
                                     : t("noFileAttached")}

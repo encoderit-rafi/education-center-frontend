@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "@/components/ui/form";
@@ -14,6 +14,7 @@ import { format } from "date-fns";
 import {
   GlobalReviewStep,
   ReviewSummaryGrid,
+  translateValue,
 } from "@/components/blocks/forms/global-review-step";
 import { PriceDisplay } from "@/components/ui/price-display";
 import { toast } from "sonner";
@@ -38,6 +39,7 @@ export default function FormTOEFLIBTRegistration({
   const [currentStep, setCurrentStep] = useState(0); // 0: Terms, 1: Date, 2: Form, 3: Review
   const titleObj = useRegistrationTitle("toefl-ibt");
   const tReview = useTranslations("FormsShared.GlobalReviewStep");
+  const locale = useLocale();
 
   const { data: examsResponse } = useQuery({
     queryKey: ["exams-list"],
@@ -557,13 +559,14 @@ export default function FormTOEFLIBTRegistration({
                   {formData.selectedCourse && pricing.coursePriceAED > 0 && (
                     <div className="flex justify-between text-sm items-center">
                       <span className="text-slate-500 font-medium">
-                        Course:{" "}
-                        {
-                          coursesData.find(
-                            (c: any) => c.id === formData.selectedCourse,
-                          )?.name
-                        }{" "}
-                        Fee
+                        {tReview("courseFee", {
+                          name: translateValue(
+                            coursesData.find(
+                              (c: any) => c.id === formData.selectedCourse,
+                            )?.name || "",
+                            locale,
+                          ),
+                        })}
                       </span>
                       <span className="font-bold text-slate-900 inline-flex items-center gap-1">
                         ${pricing.coursePriceUSD}{" "}
@@ -585,12 +588,13 @@ export default function FormTOEFLIBTRegistration({
                     pricing.workshopPriceAED > 0 && (
                       <div className="flex justify-between text-sm items-center">
                         <span className="text-slate-500 font-medium">
-                          Workshop:{" "}
-                          {
-                            (workshopsData as any)[formData.selectedWorkshop]
-                              ?.name
-                          }{" "}
-                          Fee
+                          {tReview("workshopFee", {
+                            name: translateValue(
+                              (workshopsData as any)[formData.selectedWorkshop]
+                                ?.name || "",
+                              locale,
+                            ),
+                          })}
                         </span>
                         <span className="font-bold text-slate-900 inline-flex items-center gap-1">
                           ${pricing.workshopPriceUSD}{" "}
@@ -611,12 +615,12 @@ export default function FormTOEFLIBTRegistration({
                   {VAT_PERCENT > 0 && (
                     <div className="flex justify-between text-sm items-center pt-4 border-t border-slate-100 mt-2">
                       <span className="text-slate-500 font-medium">
-                        VAT ({VAT_PERCENT}%)
+                        {tReview("vat", { percent: VAT_PERCENT })}
                       </span>
                       <span className="font-bold text-slate-900 inline-flex items-center gap-1">
                         ${pricing.vatUSD}{" "}
                         <span className="text-slate-400 font-normal text-xs inline-flex items-center gap-0.5">
-                          (Approximately{" "}
+                          ({tReview("approximately")}{" "}
                           <PriceDisplay
                             amount={pricing.vatAED}
                             minimumFractionDigits={0}
@@ -632,7 +636,7 @@ export default function FormTOEFLIBTRegistration({
                   <div className="pt-6 border-t border-slate-200">
                     <div className="flex justify-between items-center">
                       <span className="font-black text-xs uppercase tracking-[0.2em] text-slate-900">
-                        Total Amount
+                        {tReview("totalAmount")}
                       </span>
                       <div className="text-right flex items-baseline gap-2 justify-end flex-wrap">
                         <span className="text-3xl font-black text-primary">
@@ -641,7 +645,7 @@ export default function FormTOEFLIBTRegistration({
                         <span className="text-3xl font-semibold text-primary inline-flex items-center gap-0.5 justify-end">
                           <span className="text-xs font-semibold text-primary">
                             {" "}
-                            Approximately{" "}
+                            {tReview("approximately")}{" "}
                           </span>{" "}
                           <PriceDisplay
                             amount={pricing.totalAED}

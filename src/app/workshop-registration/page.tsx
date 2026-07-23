@@ -1,9 +1,10 @@
 "use client";
 
-import { Suspense, useState } from "react";
+import { Suspense, useState, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import { useTranslations } from "next-intl";
 import { cn, omitEmpty } from "@/lib/utils";
 import { VAT_PERCENT, calculateVat } from "@/lib/vat";
 import {
@@ -15,9 +16,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
-import { CheckCircle2, Info, Calendar } from "lucide-react";
+import { CheckCircle2, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { notFound, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import Stepper from "@/components/stepper";
 import { PriceDisplay } from "@/components/ui/price-display";
 import { useQuery, useMutation } from "@tanstack/react-query";
@@ -25,7 +26,6 @@ import api from "@/axios";
 import Image from "next/image";
 import { PhoneInput } from "@/components/ui/phone-input";
 import { CountryDropdown } from "@/components/ui/country-dropdown";
-// import { EXAM_FEES } from "../fees/page";
 
 interface WorkshopDetail {
   id: string;
@@ -56,49 +56,53 @@ interface CourseDetail {
   workshops: WorkshopDetail[];
 }
 
-const bookingSchema = z.object({
-  firstName: z
-    .string()
-    .trim()
-    .min(1, "First Name is required")
-    .min(2, "First name must be at least 2 characters"),
-  middleName: z.string().optional(),
-  lastName: z
-    .string()
-    .trim()
-    .min(1, "Family name is required"),
-  email: z
-    .string()
-    .trim()
-    .min(1, "Email Address is required")
-    .email("Please enter a valid email address"),
-  phone: z
-    .string()
-    .trim()
-    .min(1, "Phone number is required"),
-  address: z
-    .string()
-    .trim()
-    .min(1, "Address is required"),
-  city: z
-    .string()
-    .trim()
-    .min(1, "Emirate / City is required"),
-  country: z
-    .string()
-    .trim()
-    .min(1, "Country is required"),
-  paymentMethod: z.enum(["stripe", "paypal"]),
-});
+const getBookingSchema = (t: (key: string) => string) =>
+  z.object({
+    firstName: z
+      .string()
+      .trim()
+      .min(1, t("validation.firstNameRequired"))
+      .min(2, t("validation.firstNameMin")),
+    middleName: z.string().optional(),
+    lastName: z
+      .string()
+      .trim()
+      .min(1, t("validation.lastNameRequired")),
+    email: z
+      .string()
+      .trim()
+      .min(1, t("validation.emailRequired"))
+      .email(t("validation.emailInvalid")),
+    phone: z
+      .string()
+      .trim()
+      .min(1, t("validation.phoneRequired")),
+    address: z
+      .string()
+      .trim()
+      .min(1, t("validation.addressRequired")),
+    city: z
+      .string()
+      .trim()
+      .min(1, t("validation.cityRequired")),
+    country: z
+      .string()
+      .trim()
+      .min(1, t("validation.countryRequired")),
+    paymentMethod: z.enum(["stripe", "paypal"]),
+  });
 
-type BookingValues = z.infer<typeof bookingSchema>;
+type BookingValues = z.infer<ReturnType<typeof getBookingSchema>>;
 
 function WorkshopRegistrationForm({ className }: { className?: string }) {
+  const t = useTranslations("WorkshopRegistration");
   const searchParams = useSearchParams();
   const examId = searchParams.get("examId"); // e.g. "ielts"
   const workshopId = searchParams.get("workshopId"); // workshop ID (UUID)
   const priceParam = searchParams.get("price");
   const typeParam = searchParams.get("workshop_type") || searchParams.get("type");
+
+  const bookingSchema = useMemo(() => getBookingSchema(t), [t]);
 
   // Fetch course details (includes workshops array)
   const { data: courseData, isLoading } = useQuery({
@@ -112,10 +116,6 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
 
   // Derive the specific workshop from course's embedded workshops
   const workshop = courseData?.workshops?.find((w) => w.id === workshopId);
-
-  // const fallbackData = useMemo(() => {
-  //   return EXAM_FEES.find((item) => item.id === examId);
-  // }, [examId]);
 
   const [isSuccess, setIsSuccess] = useState(false);
 
@@ -233,18 +233,20 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
     return (
       <div className="min-h-100 flex items-center justify-center bg-slate-50 animate-pulse">
         <div className="text-slate-500 font-medium">
-          Loading workshop details...
+          {t("loading")}
         </div>
       </div>
     );
   }
 
-  // If no workshop matches and no static fallback data matches, show notFound
-  // if (!workshop) {
-  //   notFound();
-  // }
+  const titleName = workshop?.name || t("workshopLabel");
 
-  const titleName = workshop?.name || "Workshop";
+  const formatWorkshopType = (type: string) => {
+    const lower = type.toLowerCase();
+    if (lower === "in-person") return t("types.inPerson");
+    if (lower === "online") return t("types.online");
+    return type;
+  };
 
   if (isSuccess) {
     return (
@@ -254,19 +256,17 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
         </div>
         <div className="space-y-3">
           <h2 className="text-3xl font-headline font-black text-emerald-900 tracking-tight">
-            Booking Confirmed
+            {t("success.title")}
           </h2>
           <p className="text-emerald-700/80 text-base leading-relaxed font-medium">
-            Your registration for the <strong>{titleName}</strong> workshop has
-            been successfully received. Check your email for further
-            instructions.
+            {t("success.description", { name: titleName })}
           </p>
         </div>
         <button
           onClick={() => setIsSuccess(false)}
           className="px-10 py-3 bg-emerald-600 text-white font-headline font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-emerald-700 transition-all shadow-xl shadow-emerald-600/20"
         >
-          Close
+          {t("success.close")}
         </button>
       </div>
     );
@@ -278,7 +278,7 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
       <section className="relative overflow-hidden bg-slate-50 base-px base-py">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-3xl text-center font-black leading-[1.1] tracking-tight text-slate-900 lg:text-4xl xl:text-5xl mb-4">
-            <span className="text-primary">Workshop Registration</span>
+            <span className="text-primary">{t("title")}</span>
           </h1>
           <form
             onSubmit={handleSubmit(onSubmit)}
@@ -286,14 +286,14 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
           >
             <section className="grid md:grid-cols-2 gap-5">
               <div className="space-y-3">
-                <Stepper step={1}>Your Information</Stepper>
+                <Stepper step={1}>{t("yourInformation")}</Stepper>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <Field data-invalid={!!errors.firstName}>
-                    <FieldLabel required>First Name</FieldLabel>
+                    <FieldLabel required>{t("firstName")}</FieldLabel>
                     <FieldContent>
                       <Input
                         type="text"
-                        placeholder="John"
+                        placeholder={t("placeholders.firstName")}
                         aria-invalid={!!errors.firstName}
                         {...register("firstName")}
                       />
@@ -301,11 +301,11 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
                     </FieldContent>
                   </Field>
                   <Field data-invalid={!!errors.middleName}>
-                    <FieldLabel>Middle Name</FieldLabel>
+                    <FieldLabel>{t("middleName")}</FieldLabel>
                     <FieldContent>
                       <Input
                         type="text"
-                        placeholder="William"
+                        placeholder={t("placeholders.middleName")}
                         aria-invalid={!!errors.middleName}
                         {...register("middleName")}
                       />
@@ -313,11 +313,11 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
                     </FieldContent>
                   </Field>
                   <Field className="col-span-2" data-invalid={!!errors.lastName}>
-                    <FieldLabel required>Family Name</FieldLabel>
+                    <FieldLabel required>{t("lastName")}</FieldLabel>
                     <FieldContent>
                       <Input
                         type="text"
-                        placeholder="Doe"
+                        placeholder={t("placeholders.lastName")}
                         aria-invalid={!!errors.lastName}
                         {...register("lastName")}
                       />
@@ -326,11 +326,11 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
                   </Field>
                 </div>
                 <Field data-invalid={!!errors.email}>
-                  <FieldLabel required>Email</FieldLabel>
+                  <FieldLabel required>{t("email")}</FieldLabel>
                   <FieldContent>
                     <Input
                       type="email"
-                      placeholder="example@gmail.com"
+                      placeholder={t("placeholders.email")}
                       aria-invalid={!!errors.email}
                       {...register("email")}
                     />
@@ -339,7 +339,7 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
                 </Field>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <Field data-invalid={!!errors.phone}>
-                    <FieldLabel required>Phone Number</FieldLabel>
+                    <FieldLabel required>{t("phone")}</FieldLabel>
                     <FieldContent>
                       <PhoneInput
                         name="phone"
@@ -352,11 +352,11 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
                     </FieldContent>
                   </Field>
                   <Field data-invalid={!!errors.country}>
-                    <FieldLabel required>Country</FieldLabel>
+                    <FieldLabel required>{t("country")}</FieldLabel>
                     <FieldContent>
                       <CountryDropdown
                         name="country"
-                        placeholder="Search country..."
+                        placeholder={t("placeholders.searchCountry")}
                         value={formData.country}
                         aria-invalid={!!errors.country}
                         onChange={(country) => setValue("country", country.name, { shouldValidate: true })}
@@ -366,11 +366,11 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
                   </Field>
                 </div>
                 <Field data-invalid={!!errors.address}>
-                  <FieldLabel required>Address</FieldLabel>
+                  <FieldLabel required>{t("address")}</FieldLabel>
                   <FieldContent>
                     <Input
                       type="text"
-                      placeholder="123 Main St"
+                      placeholder={t("placeholders.address")}
                       aria-invalid={!!errors.address}
                       {...register("address")}
                     />
@@ -378,44 +378,39 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
                   </FieldContent>
                 </Field>
                 <Field data-invalid={!!errors.city}>
-                  <FieldLabel required>Emirate / City</FieldLabel>
+                  <FieldLabel required>{t("city")}</FieldLabel>
                   <FieldContent>
                     <Input
                       type="text"
-                      placeholder="Dubai"
+                      placeholder={t("placeholders.city")}
                       aria-invalid={!!errors.city}
                       {...register("city")}
                     />
                     <FieldError errors={[errors.city]} />
                   </FieldContent>
                 </Field>
-
-                {/* <div className="text-primary border border-dashed border-primary/40 p-3 bg-primary/5 rounded-md flex items-start gap-2">
-                  <Info className="w-4 h-4 mt-0.5" />
-                  <p className="text-[11px] font-medium leading-relaxed">
-                    We will send your credentials and link to this email address
-                    24 hours before your selected slot.
-                  </p>
-                </div> */}
               </div>
               <div className="space-y-4">
                 {/* Workshop & Course Details Card */}
                 <div className="bg-slate-50 border rounded-2xl p-5 space-y-4 shadow-sm">
-                  <h3 className="font-headline font-black text-xs text-slate-800  border-b pb-2 flex items-center gap-2">
-                    <Calendar className="w-4.5 h-4.5 text-primary" />Workshop Details
+                  <h3 className="font-headline font-black text-xs text-slate-800 border-b pb-2 flex items-center gap-2">
+                    <Calendar className="w-4.5 h-4.5 text-primary" />{t("workshopDetails")}
                   </h3>
                   <div className="space-y-3 text-sm">
                     <div>
-                      <p className="text-xs text-slate-500">Workshop</p>
+                      <p className="text-xs text-slate-500">{t("workshopLabel")}</p>
                       <p className="font-bold text-slate-900 text-base">
-                        {workshop?.duration}-Hour {courseData?.name} Workshop
+                        {t("workshopTitleFormat", {
+                          duration: workshop?.duration || "",
+                          courseName: `\u2068${courseData?.name || ""}\u2069`,
+                        })}
                       </p>
                     </div>
                     {typeParam && (
                       <div>
-                        <p className="text-xs text-slate-500">Workshop Type</p>
+                        <p className="text-xs text-slate-500">{t("workshopType")}</p>
                         <p className="font-bold text-slate-900 text-base">
-                          {typeParam}
+                          {formatWorkshopType(typeParam)}
                         </p>
                       </div>
                     )}
@@ -423,7 +418,7 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
                 </div>
 
                 <Stepper step={2}>
-                  Payment{" "}
+                  {t("payment")}{" "}
                   <span className="bg-primary/10 px-3 py-1 rounded-full text-sm font-semibold text-primary">
                     <PriceDisplay amount={total_amount} />
                   </span>
@@ -432,14 +427,14 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
                 {/* Fee Breakdown */}
                 <div className="bg-white border rounded-lg p-4 space-y-2 mb-4 text-sm">
                   <div className="flex justify-between items-center text-slate-600">
-                    <span>Workshop Price</span>
+                    <span>{t("workshopPrice")}</span>
                     <span>
                       <PriceDisplay amount={base_price} />
                     </span>
                   </div>
                   {discount_amount > 0 && (
                     <div className="flex justify-between items-center text-emerald-600">
-                      <span>Discount</span>
+                      <span>{t("discount")}</span>
                       <span>
                         - <PriceDisplay amount={discount_amount} />
                       </span>
@@ -449,14 +444,14 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
                     <>
                       {discount_amount > 0 && (
                         <div className="flex justify-between items-center text-slate-600 pt-2 mt-2 border-t">
-                          <span className="font-semibold text-slate-500">Subtotal</span>
+                          <span className="font-semibold text-slate-500">{t("subtotal")}</span>
                           <span>
                             <PriceDisplay amount={subtotal} />
                           </span>
                         </div>
                       )}
                       <div className="flex justify-between items-center text-slate-600">
-                        <span>VAT ({VAT_PERCENT}%)</span>
+                        <span>{t("vat", { percent: VAT_PERCENT })}</span>
                         <span>
                           <PriceDisplay amount={vatAmount} />
                         </span>
@@ -464,7 +459,7 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
                     </>
                   )}
                   <div className="pt-2 mt-2 border-t flex justify-between items-center font-bold text-slate-900 text-base">
-                    <span>Total</span>
+                    <span>{t("total")}</span>
                     <span>
                       <PriceDisplay amount={total_amount} />
                     </span>
@@ -472,7 +467,7 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
                 </div>
 
                 <div className="space-y-3">
-                  <FieldLabel required>Payment Method</FieldLabel>
+                  <FieldLabel required>{t("paymentMethod")}</FieldLabel>
                   <RadioGroup
                     value={selectedPaymentMethod}
                     onValueChange={(val) =>
@@ -491,7 +486,7 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
                     >
                       <RadioGroupItem value="stripe" id="payment-stripe" />
                       <div className="w-full flex items-center justify-between gap-2 ">
-                        <span className="font-semibold">Credit/Debit Card</span>
+                        <span className="font-semibold">{t("creditCard")}</span>
                         <Image
                           src="/images/cards.png"
                           alt="Stripe"
@@ -510,7 +505,6 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
                       )}
                     >
                       <RadioGroupItem value="paypal" id="payment-paypal" />
-                      {/* <span className="font-semibold text-sm">PayPal</span> */}
                       <Image
                         src="/images/paypal-logo.png"
                         alt="PayPal"
@@ -527,12 +521,11 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
                   className="w-full mt-6 py-3"
                   disabled={mutation.isPending}
                 >
-                  {mutation.isPending ? "Processing..." : "I Accept, Pay"}
+                  {mutation.isPending ? t("processing") : t("submit")}
                 </Button>
                 {mutation.isError && (
                   <p className="text-red-500 text-sm mt-2">
-                    There was an error processing your booking. Please try
-                    again.
+                    {t("errorMessage")}
                   </p>
                 )}
               </div>

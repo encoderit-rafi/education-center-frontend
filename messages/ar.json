@@ -4547,5 +4547,68 @@
         ]
       }
     }
+  },
+  "WorkshopRegistration": {
+    "title": "التسجيل في الورشة",
+    "yourInformation": "معلوماتك الشخصية",
+    "firstName": "الاسم الأول",
+    "middleName": "الاسم الأوسط",
+    "lastName": "اسم العائلة",
+    "email": "البريد الإلكتروني",
+    "phone": "رقم الهاتف",
+    "country": "الدولة",
+    "address": "العنوان",
+    "city": "الإمارة / المدينة",
+    "workshopDetails": "تفاصيل الورشة",
+    "workshopLabel": "الورشة",
+    "workshopType": "نوع الورشة",
+    "workshopTitleFormat": "ورشة \u2068{courseName}\u2069 لمدة {duration} ساعات",
+    "payment": "الدفع",
+    "workshopPrice": "سعر الورشة",
+    "discount": "الخصم",
+    "subtotal": "المجموع الفرعي",
+    "vat": "ضريبة القيمة المضافة ({percent}%)",
+    "total": "الإجمالي",
+    "paymentMethod": "طريقة الدفع",
+    "creditCard": "بطاقة ائتمان / خصم مباشر",
+    "paypal": "بايبال",
+    "submit": "أوافق، أدفع",
+    "processing": "جاري المعالجة...",
+    "loading": "جاري تحميل تفاصيل الورشة...",
+    "errorMessage": "حدث خطأ أثناء معالجة حجزك. يرجى المحاولة مرة أخرى.",
+    "placeholders": {
+      "firstName": "جون",
+      "middleName": "ويليام",
+      "lastName": "دو",
+      "email": "أدخل بريدك الإلكتروني",
+      "address": "أدخل عنوانك الكامل",
+      "city": "دبي",
+      "searchCountry": "ابحث عن الدولة..."
+    },
+    "types": {
+      "inPerson": "حضوري",
+      "online": "عبر الإنترنت"
+    },
+    "success": {
+      "title": "تم تأكيد الحجز",
+      "description": "تم استلام تسجيلك في ورشة {name} بنجاح. يرجى التحقق من بريدك الإلكتروني للحصول على مزيد من التعليمات.",
+      "close": "إغلاق"
+    },
+    "validation": {
+      "firstNameRequired": "الاسم الأول مطلوب",
+      "firstNameMin": "يجب أن يتكون الاسم الأول من حرفين على الأقل",
+      "lastNameRequired": "اسم العائلة مطلوب",
+      "emailRequired": "البريد الإلكتروني مطلوب",
+      "emailInvalid": "يرجى إدخال بريد إلكتروني صحيح",
+      "phoneRequired": "رقم الهاتف مطلوب",
+      "addressRequired": "العنوان مطلوب",
+      "cityRequired": "الإمارة / المدينة مطلوبة",
+      "countryRequired": "الدولة مطلوبة"
+    }
+  },
+  "ExamFeesPage": {
+    "title": "رسوم",
+    "titleAccent": "الامتحانات",
+    "subtitle": "إليك تفنيد شامل لجميع رسوم الامتحانات الرسمية ورسوم الخدمات. يضمن هذا الدليل الشفافية في تخطيطك."
   }
 }

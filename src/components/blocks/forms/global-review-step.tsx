@@ -71,6 +71,15 @@ export const translateLabel = (label: string, locale: string) => {
     "reason for test": "السبب من إجراء الاختبار",
     "reason for taking test": "السبب من إجراء الاختبار",
     "reason for taking": "السبب من إجراء الاختبار",
+    "reason for taking toefl": "السبب من إجراء اختبار توفل",
+    "reason for taking ielts": "السبب من إجراء اختبار آيلتس",
+    "reason for taking pte": "السبب من إجراء اختبار بي تي إي",
+    "reason for taking selt": "السبب من إجراء اختبار سيلت",
+    "next level of study": "المستوى التعليمي التالي",
+    "next level of study (if applicable)": "المستوى التعليمي التالي",
+    "intended enrollment date": "تاريخ التسجيل المستهدف",
+    "intended date of enrollment": "تاريخ التسجيل المستهدف",
+    "intended enrollment": "تاريخ التسجيل المستهدف",
     "current situation": "الوضع الحالي",
     "current_situation": "الوضع الحالي",
     "education level": "المستوى التعليمي",
@@ -89,6 +98,46 @@ export const translateLabel = (label: string, locale: string) => {
 export const translateValue = (val: string, locale: string) => {
   if (locale !== "ar") return val;
   let cleanVal = val.trim();
+
+  // Handle Course & Workshop Names
+  const courseWorkshopMapping: Record<string, string> = {
+    "Group Course": "دورة جماعية",
+    "Semi-private Course": "دورة شبه خاصة",
+    "In-person One-to-one": "دورة حضورية شخص لشخص",
+    "Online One-to-one": "دورة عبر الإنترنت شخص لشخص",
+    "Hybrid One-to-one": "دورة هجينة شخص لشخص",
+    "4-Hour Focus Workshop": "ورشة عمل مكثفة لمدة 4 ساعات",
+    "6-Hour IELTS Workshop": "ورشة IELTS لمدة 6 ساعات",
+  };
+  if (courseWorkshopMapping[cleanVal]) return courseWorkshopMapping[cleanVal];
+
+  // Handle Reason for Taking / Test Options
+  const reasonForTakingMapping: Record<string, string> = {
+    "To enter a 2-year college/community college": "للالتحاق بكلية مجتمعية لمدة سنتين",
+    "To enter an undergraduate program": "للالتحاق ببرنامج البكالوريوس",
+    "To enter a graduate program": "للالتحاق ببرنامج الماجستير",
+    "To enter a postgraduate program": "للالتحاق ببرنامج الدراسات العليا",
+    "To enter a graduate/postgraduate program": "للالتحاق ببرنامج الدراسات العليا / الماجستير والدكتوراه",
+    "To enter a secondary school": "للالتحاق بمدرسة ثانوية",
+    "For employment / work": "للتوظيف / العمل",
+    "For immigration / settling in a country": "للهجرة / الاستقرار في بلد",
+    "For professional registration or licensure": "للتسجيل المهني أو الترخيص",
+    "For scholarship or fellowship program": "لبرنامج منحة أو زمالة",
+    "Personal reasons / self-evaluation": "أسباب شخصية / التقييم الذاتي",
+    "Other educational purposes": "أغراض تعليمية أخرى",
+  };
+  if (reasonForTakingMapping[cleanVal]) return reasonForTakingMapping[cleanVal];
+
+  // Handle Study Level options
+  const studyLevelFullMapping: Record<string, string> = {
+    "Graduate/postgraduate program": "برنامج دراسات عليا / ماجستير ودكتوراه",
+    "Undergraduate program": "برنامج بكالوريوس",
+    "Secondary school": "مدرسة ثانوية",
+    "2-year college/community college": "كلية مجتمعية لمدة سنتين",
+    "Undergraduate degree": "درجة البكالوريوس",
+    "Postgraduate degree": "درجة الدراسات العليا",
+  };
+  if (studyLevelFullMapping[cleanVal]) return studyLevelFullMapping[cleanVal];
 
   // Handle Current Situation options
   const situationMapping: Record<string, string> = {
@@ -266,7 +315,7 @@ function SummaryCard({
         </span>
       </div>
       {/* Card Body */}
-      <div className={cn("grid gap-5 p-5", colsClassName)}>
+      <div className={cn("grid gap-5 p-5 min-w-0", colsClassName)}>
         {fields.map((field, i) => {
           const displayLabel = translateLabel(field.label, locale);
           const displayValue = typeof field.value === "string"
@@ -274,13 +323,13 @@ function SummaryCard({
             : field.value;
 
           return (
-            <div key={i} className="flex flex-col space-y-1">
-              <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">
+            <div key={i} className="flex flex-col space-y-1 min-w-0 overflow-hidden">
+              <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider truncate">
                 {displayLabel}
               </span>
               <span
                 className={cn(
-                  "text-sm font-semibold leading-normal",
+                  "text-sm font-semibold leading-normal break-words [overflow-wrap:anywhere]",
                   field.highlight ? "text-[#A11D1D] font-bold" : "text-slate-900",
                 )}
               >

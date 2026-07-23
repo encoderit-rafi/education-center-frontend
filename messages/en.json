@@ -4541,5 +4541,68 @@
       "reasonPersonal": "Personal reasons / self-evaluation",
       "reasonOtherEducational": "Other educational purposes"
     }
+  },
+  "WorkshopRegistration": {
+    "title": "Workshop Registration",
+    "yourInformation": "Your Information",
+    "firstName": "First Name",
+    "middleName": "Middle Name",
+    "lastName": "Family Name",
+    "email": "Email",
+    "phone": "Phone Number",
+    "country": "Country",
+    "address": "Address",
+    "city": "Emirate / City",
+    "workshopDetails": "Workshop Details",
+    "workshopLabel": "Workshop",
+    "workshopType": "Workshop Type",
+    "workshopTitleFormat": "{duration}-Hour {courseName} Workshop",
+    "payment": "Payment",
+    "workshopPrice": "Workshop Price",
+    "discount": "Discount",
+    "subtotal": "Subtotal",
+    "vat": "VAT ({percent}%)",
+    "total": "Total",
+    "paymentMethod": "Payment Method",
+    "creditCard": "Credit/Debit Card",
+    "paypal": "PayPal",
+    "submit": "I Accept, Pay",
+    "processing": "Processing...",
+    "loading": "Loading workshop details...",
+    "errorMessage": "There was an error processing your booking. Please try again.",
+    "placeholders": {
+      "firstName": "John",
+      "middleName": "William",
+      "lastName": "Doe",
+      "email": "example@gmail.com",
+      "address": "123 Main St",
+      "city": "Dubai",
+      "searchCountry": "Search country..."
+    },
+    "types": {
+      "inPerson": "In-Person",
+      "online": "Online"
+    },
+    "success": {
+      "title": "Booking Confirmed",
+      "description": "Your registration for the {name} workshop has been successfully received. Check your email for further instructions.",
+      "close": "Close"
+    },
+    "validation": {
+      "firstNameRequired": "First Name is required",
+      "firstNameMin": "First name must be at least 2 characters",
+      "lastNameRequired": "Family name is required",
+      "emailRequired": "Email Address is required",
+      "emailInvalid": "Please enter a valid email address",
+      "phoneRequired": "Phone number is required",
+      "addressRequired": "Address is required",
+      "cityRequired": "Emirate / City is required",
+      "countryRequired": "Country is required"
+    }
+  },
+  "ExamFeesPage": {
+    "title": "Exam",
+    "titleAccent": "Fees",
+    "subtitle": "Here is a comprehensive breakdown of all official exam fees and service charges. This guide ensures transparency in your planning."
   }
 }

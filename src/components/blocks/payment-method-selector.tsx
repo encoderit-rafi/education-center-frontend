@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslations } from "next-intl";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { FieldLabel, FieldError } from "@/components/ui/field";
 import { cn } from "@/lib/utils";
@@ -15,13 +16,14 @@ export function PaymentMethodSelector({
   onChange,
   error,
 }: PaymentMethodSelectorProps) {
+  const t = useTranslations("FormsShared.GlobalReviewStep");
   return (
     <div className="space-y-3">
-      <FieldLabel required>Payment Method</FieldLabel>
+      <FieldLabel required>{t("paymentMethod")}</FieldLabel>
       <RadioGroup
         value={value}
         onValueChange={onChange}
-        className="grid  gap-3"
+        className="grid gap-3"
       >
         <label
           htmlFor="payment-stripe"
@@ -33,19 +35,13 @@ export function PaymentMethodSelector({
           )}
         >
           <RadioGroupItem value="stripe" id="payment-stripe" />
-          {/* <Image
-            src="/images/stripe-logo.png"
-            alt="Stripe"
-            width={50}
-            height={50}
-          /> */}
-          <span>Credit/Debit Card</span>
+          <span className="font-semibold">{t("creditCard")}</span>
           <Image
             src="/images/cards.png"
             alt="Stripe"
             width={50}
             height={50}
-            className="ml-auto"
+            className="ms-auto"
           />
         </label>
         <label
