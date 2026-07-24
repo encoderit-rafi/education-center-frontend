@@ -63,9 +63,17 @@ export function AcceptPayButton({
     );
   };
 
+  const handleClick = () => {
+    if (selectedLocation === "center") {
+      handleContinue("center");
+      return;
+    }
+    setIsOpen(true);
+  };
+
   return (
     <>
-      <button onClick={() => setIsOpen(true)} className={className}>
+      <button onClick={handleClick} className={className}>
         {children || t("acceptPay")}
       </button>
 

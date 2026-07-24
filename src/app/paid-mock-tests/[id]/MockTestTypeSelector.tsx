@@ -59,7 +59,13 @@ export function MockTestTypeSelector({ data }: MockTestTypeSelectorProps) {
   const [locationOpen, setLocationOpen] = useState(false);
   const [typeOpen, setTypeOpen] = useState(false);
 
-  const triggerClass = "flex h-11 w-full items-center justify-between gap-2 rounded-md border border-slate-200 bg-white px-3 py-2 text-base outline-none focus:border-primary focus:ring-3 focus:ring-ring/30 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm text-left font-medium text-slate-700";
+  const getTriggerClass = (isOpen: boolean) =>
+    cn(
+      "flex h-12 w-full items-center justify-between gap-2 rounded-xl border bg-white px-4 py-2.5 text-sm text-left font-semibold text-slate-800 outline-none shadow-xs transition-all duration-200 cursor-pointer",
+      isOpen
+        ? "border-primary ring-3 ring-primary/15 bg-slate-50/50"
+        : "border-slate-300 hover:border-primary/50 hover:bg-slate-50/30"
+    );
 
   const homePrice = data.price && parseFloat(data.price) > 0 ? parseFloat(data.price) : 350;
   const rawCenterPrice = data.details?.center_price ?? data.center_price;
@@ -100,7 +106,7 @@ export function MockTestTypeSelector({ data }: MockTestTypeSelectorProps) {
           </label>
           <DropdownMenu open={locationOpen} onOpenChange={setLocationOpen}>
             <DropdownMenuTrigger asChild>
-              <button type="button" className={triggerClass}>
+              <button type="button" className={getTriggerClass(locationOpen)}>
                 {selectedLocation === "home" ? (
                   <span className="inline-flex items-center gap-0.5">
                     {t("homeOption")} (
@@ -117,17 +123,17 @@ export function MockTestTypeSelector({ data }: MockTestTypeSelectorProps) {
                 <ChevronDown
                   className={cn(
                     "size-4 text-slate-500 transition-transform duration-200",
-                    locationOpen && "rotate-180"
+                    locationOpen && "rotate-180 text-primary"
                   )}
                 />
               </button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-(--radix-dropdown-menu-trigger-width)">
+            <DropdownMenuContent className="w-(--radix-dropdown-menu-trigger-width) bg-white rounded-xl border border-slate-200 p-1.5 shadow-xl">
               <DropdownMenuRadioGroup
                 value={selectedLocation}
                 onValueChange={(val) => setSelectedLocation(val as "home" | "center")}
               >
-                <DropdownMenuRadioItem value="home">
+                <DropdownMenuRadioItem value="home" className="rounded-lg font-medium cursor-pointer">
                   <span className="inline-flex items-center gap-0.5">
                     {t("homeOption")} (
                     <AED className="size-auto h-[0.85em] fill-current text-primary" />
@@ -135,7 +141,7 @@ export function MockTestTypeSelector({ data }: MockTestTypeSelectorProps) {
                   </span>
                 </DropdownMenuRadioItem>
                 {centerPrice > 0 && (
-                  <DropdownMenuRadioItem value="center">
+                  <DropdownMenuRadioItem value="center" className="rounded-lg font-medium cursor-pointer">
                     <span className="inline-flex items-center gap-0.5">
                       {t("centerOption")} (
                       <AED className="size-auto h-[0.85em] fill-current text-primary" />
@@ -178,22 +184,22 @@ export function MockTestTypeSelector({ data }: MockTestTypeSelectorProps) {
         </label>
         <DropdownMenu open={typeOpen} onOpenChange={setTypeOpen}>
           <DropdownMenuTrigger asChild>
-            <button type="button" className={triggerClass}>
+            <button type="button" className={getTriggerClass(typeOpen)}>
               <span className={cn(!selectedType && "text-slate-400 font-normal")}>
                 {selectedType ? getSelectedTypeDisplay() : chooseExamTypePlaceholder}
               </span>
               <ChevronDown
                 className={cn(
                   "size-4 text-slate-500 transition-transform duration-200",
-                  typeOpen && "rotate-180"
+                  typeOpen && "rotate-180 text-primary"
                 )}
               />
             </button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-(--radix-dropdown-menu-trigger-width)">
+          <DropdownMenuContent className="w-(--radix-dropdown-menu-trigger-width) bg-white rounded-xl border border-slate-200 p-1.5 shadow-xl">
             <DropdownMenuRadioGroup value={selectedType} onValueChange={setSelectedType}>
               {types.map((typeObj) => (
-                <DropdownMenuRadioItem key={typeObj.value} value={typeObj.value}>
+                <DropdownMenuRadioItem key={typeObj.value} value={typeObj.value} className="rounded-lg font-medium cursor-pointer">
                   {getDisplayLabel(typeObj)}
                 </DropdownMenuRadioItem>
               ))}
@@ -211,7 +217,7 @@ export function MockTestTypeSelector({ data }: MockTestTypeSelectorProps) {
             </label>
             <DropdownMenu open={locationOpen} onOpenChange={setLocationOpen}>
               <DropdownMenuTrigger asChild>
-                <button type="button" className={triggerClass}>
+                <button type="button" className={getTriggerClass(locationOpen)}>
                   {selectedLocation === "home" ? (
                     <span className="inline-flex items-center gap-0.5">
                       {t("homeOption")} (
@@ -228,17 +234,17 @@ export function MockTestTypeSelector({ data }: MockTestTypeSelectorProps) {
                   <ChevronDown
                     className={cn(
                       "size-4 text-slate-500 transition-transform duration-200",
-                      locationOpen && "rotate-180"
+                      locationOpen && "rotate-180 text-primary"
                     )}
                   />
                 </button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-(--radix-dropdown-menu-trigger-width)">
+              <DropdownMenuContent className="w-(--radix-dropdown-menu-trigger-width) bg-white rounded-xl border border-slate-200 p-1.5 shadow-xl">
                 <DropdownMenuRadioGroup
                   value={selectedLocation}
                   onValueChange={(val) => setSelectedLocation(val as "home" | "center")}
                 >
-                  <DropdownMenuRadioItem value="home">
+                  <DropdownMenuRadioItem value="home" className="rounded-lg font-medium cursor-pointer">
                     <span className="inline-flex items-center gap-0.5">
                       {t("homeOption")} (
                       <AED className="size-auto h-[0.85em] fill-current text-primary" />
@@ -246,7 +252,7 @@ export function MockTestTypeSelector({ data }: MockTestTypeSelectorProps) {
                     </span>
                   </DropdownMenuRadioItem>
                   {centerPrice > 0 && (
-                    <DropdownMenuRadioItem value="center">
+                    <DropdownMenuRadioItem value="center" className="rounded-lg font-medium cursor-pointer">
                       <span className="inline-flex items-center gap-0.5">
                         {t("centerOption")} (
                         <AED className="size-auto h-[0.85em] fill-current text-primary" />

@@ -243,6 +243,7 @@ function PaidMockTestRegistrationForm({
     const payload = {
       mock_test_id: data?.id || id || formData.mockTestId || "",
       variant: siteLocation,
+      varient: siteLocation,
       mock_test_type_name: mockTestType,
       mock_test_type: mockTestType,
       first_name: formData.firstName,
@@ -268,7 +269,7 @@ function PaidMockTestRegistrationForm({
 
   if (isLoading) {
     return (
-      <div className="min-h-[400px] flex items-center justify-center bg-slate-50 animate-pulse">
+      <div className="min-h-100 flex items-center justify-center bg-slate-50 animate-pulse">
         <div className="text-slate-500 font-medium">
           {t("loadingDetails")}
         </div>

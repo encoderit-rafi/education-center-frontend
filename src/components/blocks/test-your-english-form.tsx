@@ -355,7 +355,7 @@ export default function TestYourEnglishForm({ onSuccess }: { onSuccess?: (val: b
                 <FieldContent>
                   <div className="relative">
                     <User
-                      className="absolute start-3 top-1/2 -translate-y-1/2 text-slate-400"
+                      className="absolute inset-s-3 top-1/2 -translate-y-1/2 text-slate-400"
                       size={16}
                     />
                     <Input
@@ -375,7 +375,7 @@ export default function TestYourEnglishForm({ onSuccess }: { onSuccess?: (val: b
                 <FieldContent>
                   <div className="relative">
                     <Mail
-                      className="absolute start-3 top-1/2 -translate-y-1/2 text-slate-400"
+                      className="absolute inset-s-3 top-1/2 -translate-y-1/2 text-slate-400"
                       size={16}
                     />
                     <Input
@@ -416,7 +416,7 @@ export default function TestYourEnglishForm({ onSuccess }: { onSuccess?: (val: b
                 <FieldContent>
                   <div className="relative">
                     <MapPin
-                      className="absolute start-3 top-1/2 -translate-y-1/2 text-slate-400"
+                      className="absolute inset-s-3 top-1/2 -translate-y-1/2 text-slate-400"
                       size={16}
                     />
                     <Input
