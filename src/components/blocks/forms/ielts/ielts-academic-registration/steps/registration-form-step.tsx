@@ -20,7 +20,7 @@ import {
   FieldContent,
   FieldDescription,
   FieldError,
-  FieldLabel
+  FieldLabel,
 } from "@/components/ui/field";
 import { TIeltsAcademicSchema } from "../_type";
 import { AED } from "@/components/ui/aed";
@@ -46,7 +46,8 @@ export function RegistrationFormStep({
   onBack,
   languages,
   coursesData,
-  workshopsData }: RegistrationFormStepProps) {
+  workshopsData,
+}: RegistrationFormStepProps) {
   const t = useTranslations("FormsShared.FormFields");
   const tIelts = useTranslations("FormsShared.IELTS");
   const tYesNo = useTranslations("FormsShared.GlobalReviewStep");
@@ -57,7 +58,8 @@ export function RegistrationFormStep({
     handleSubmit,
     setValue,
     watch,
-    formState: { errors } } = form;
+    formState: { errors },
+  } = form;
 
   const formData = watch();
 
@@ -79,8 +81,7 @@ export function RegistrationFormStep({
                 {...register("givenNames")}
               />
               <FieldError errors={[errors.givenNames]} />
-              <FieldDescription>{t("nameMatchDesc")}
-              </FieldDescription>
+              <FieldDescription>{t("nameMatchDesc")}</FieldDescription>
             </FieldContent>
           </Field>
 
@@ -97,7 +98,9 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.surnames}>
-            <FieldLabel required={!formData.noSurname}>{t("surname")}</FieldLabel>
+            <FieldLabel required={!formData.noSurname}>
+              {t("surname")}
+            </FieldLabel>
             <FieldContent>
               <Input
                 placeholder={t("asPerPassport")}
@@ -230,7 +233,10 @@ export function RegistrationFormStep({
                   }
                   className="mt-0.5"
                 />
-                <Label htmlFor="smsConsent" className="text-xs font-light leading-normal whitespace-normal text-wrap block">
+                <Label
+                  htmlFor="smsConsent"
+                  className="text-xs font-light leading-normal whitespace-normal text-wrap block"
+                >
                   {t("smsConsent")}
                 </Label>
               </FieldDescription>
@@ -381,7 +387,11 @@ export function RegistrationFormStep({
               <Input
                 {...register("idNumber")}
                 aria-invalid={!!errors.idNumber}
-                placeholder={formData.idType === "emirates_id" ? tIelts("enterIdNumber") : tIelts("enterPassportNumber")}
+                placeholder={
+                  formData.idType === "emirates_id"
+                    ? tIelts("enterIdNumber")
+                    : tIelts("enterPassportNumber")
+                }
               />
               <FieldError errors={[errors.idNumber]} />
             </FieldContent>
@@ -400,7 +410,11 @@ export function RegistrationFormStep({
                 onChange={(date) => setValue("idExpiryDate", date as Date)}
                 aria-invalid={!!errors.idExpiryDate}
                 disabled={(date) => date <= new Date()}
-                placeholder={formData.idType === "emirates_id" ? tIelts("selectIdExpiry") : tIelts("selectPassportExpiry")}
+                placeholder={
+                  formData.idType === "emirates_id"
+                    ? tIelts("selectIdExpiry")
+                    : tIelts("selectPassportExpiry")
+                }
               />
               <FieldError errors={[errors.idExpiryDate]} />
             </FieldContent>
@@ -447,11 +461,11 @@ export function RegistrationFormStep({
                     }}
                   />
                 ) : (
-                  <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-200">
+                  <div className="flex flex-col items-center justify-between gap-3 p-3 rounded-xl border border-green-500/50 bg-green-100/30">
+                    <div className="size-9 rounded-full bg-emerald-100 border border-green-500/50 flex items-center justify-center text-emerald-600">
+                      <Save className="size-[17px]" />
+                    </div>
                     <div className="flex items-center gap-3">
-                      <div className="size-8 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-primary">
-                        <Save className="size-4" />
-                      </div>
                       <div className="flex flex-col">
                         <span className="text-xs font-bold text-slate-700 truncate max-w-50">
                           {(formData.idDocument as File).name}
@@ -464,16 +478,16 @@ export function RegistrationFormStep({
                           MB
                         </span>
                       </div>
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => setValue("idDocument", undefined)}
+                        className="size-8 p-0 rounded-full hover:bg-red-50 hover:text-red-600"
+                      >
+                        <span className="text-lg">×</span>
+                      </Button>
                     </div>
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => setValue("idDocument", undefined)}
-                      className="size-8 p-0 rounded-full hover:bg-red-50 hover:text-red-600"
-                    >
-                      <span className="text-lg">×</span>
-                    </Button>
                   </div>
                 )}
                 <p className="text-[12px] text-slate-900 font-medium">
@@ -496,13 +510,8 @@ export function RegistrationFormStep({
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8">
-          <Field
-            className="md:col-span-2"
-            data-invalid={!!errors.takenBefore}
-          >
-            <FieldLabel required>
-              {tIelts("haveYouTakenBefore")}
-            </FieldLabel>
+          <Field className="md:col-span-2" data-invalid={!!errors.takenBefore}>
+            <FieldLabel required>{tIelts("haveYouTakenBefore")}</FieldLabel>
             <FieldContent className="mt-2">
               <RadioGroup
                 name="takenBefore"
@@ -520,7 +529,10 @@ export function RegistrationFormStep({
                     data-invalid={!!errors.takenBefore}
                     className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive"
                   >
-                    <RadioGroupItem value={opt.value} id={`taken-${opt.value}`} />
+                    <RadioGroupItem
+                      value={opt.value}
+                      id={`taken-${opt.value}`}
+                    />
                     {opt.label}
                   </Label>
                 ))}
@@ -535,7 +547,9 @@ export function RegistrationFormStep({
                 className="md:col-span-2"
                 data-invalid={!!errors.lessThanTwoYears}
               >
-                <FieldLabel required>{tIelts("wasItLessThan2Years")}</FieldLabel>
+                <FieldLabel required>
+                  {tIelts("wasItLessThan2Years")}
+                </FieldLabel>
                 <FieldContent className="mt-2">
                   <RadioGroup
                     name="lessThanTwoYears"
@@ -554,7 +568,10 @@ export function RegistrationFormStep({
                         data-invalid={!!errors.lessThanTwoYears}
                         className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive"
                       >
-                        <RadioGroupItem value={opt.value} id={`less-${opt.value}`} />
+                        <RadioGroupItem
+                          value={opt.value}
+                          id={`less-${opt.value}`}
+                        />
                         {opt.label}
                       </Label>
                     ))}
@@ -567,9 +584,7 @@ export function RegistrationFormStep({
                 className="md:col-span-2"
                 data-invalid={!!errors.existingAccount}
               >
-                <FieldLabel required>
-                  {tIelts("existingAccount")}
-                </FieldLabel>
+                <FieldLabel required>{tIelts("existingAccount")}</FieldLabel>
                 <FieldContent className="mt-2">
                   <RadioGroup
                     name="existingAccount"
@@ -580,7 +595,10 @@ export function RegistrationFormStep({
                     {[
                       { label: tYesNo("yes"), value: "Yes" },
                       { label: tYesNo("no"), value: "No" },
-                      { label: tIelts("forgotAccount"), value: "I forgot my SELT account details" },
+                      {
+                        label: tIelts("forgotAccount"),
+                        value: "I forgot my SELT account details",
+                      },
                     ].map((opt) => (
                       <Label
                         key={opt.value}
@@ -588,7 +606,10 @@ export function RegistrationFormStep({
                         data-invalid={!!errors.existingAccount}
                         className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive"
                       >
-                        <RadioGroupItem value={opt.value} id={`acc-${opt.value}`} />
+                        <RadioGroupItem
+                          value={opt.value}
+                          id={`acc-${opt.value}`}
+                        />
                         {opt.label}
                       </Label>
                     ))}
@@ -618,7 +639,9 @@ export function RegistrationFormStep({
                   <Input
                     placeholder={tIelts("pleaseSpecifyLanguage")}
                     value={formData.firstLanguageOther ?? ""}
-                    onChange={(e) => setValue("firstLanguageOther", e.target.value)}
+                    onChange={(e) =>
+                      setValue("firstLanguageOther", e.target.value)
+                    }
                     className="border-primary/40 focus:border-primary"
                   />
                 </div>
@@ -628,9 +651,7 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.yearsStudyingEnglish}>
-            <FieldLabel required>
-              {tIelts("yearsStudyingEnglish")}
-            </FieldLabel>
+            <FieldLabel required>{tIelts("yearsStudyingEnglish")}</FieldLabel>
             <FieldContent>
               <SearchableDropdown
                 name="yearsStudyingEnglish"
@@ -658,9 +679,7 @@ export function RegistrationFormStep({
             className="md:col-span-2"
             data-invalid={!!errors.educationLevel}
           >
-            <FieldLabel required>
-              {tIelts("educationLevel")}
-            </FieldLabel>
+            <FieldLabel required>{tIelts("educationLevel")}</FieldLabel>
             <FieldContent>
               <RadioGroup
                 name="educationLevel"
@@ -671,19 +690,19 @@ export function RegistrationFormStep({
                 {[
                   {
                     id: "Secondary (up to 16 years)",
-                    label: tIelts("educationSecondaryUpTo16")
+                    label: tIelts("educationSecondaryUpTo16"),
                   },
                   {
                     id: "Secondary (16-19 years)",
-                    label: tIelts("educationSecondary16To19")
+                    label: tIelts("educationSecondary16To19"),
                   },
                   {
                     id: "Degree (or equivalent)",
-                    label: tIelts("educationDegree")
+                    label: tIelts("educationDegree"),
                   },
                   {
                     id: "Post-graduate",
-                    label: tIelts("educationPostGraduate")
+                    label: tIelts("educationPostGraduate"),
                   },
                 ].map((opt) => (
                   <Label
@@ -707,17 +726,26 @@ export function RegistrationFormStep({
               <SearchableDropdown
                 name="occupationLevel"
                 options={[
-                  { label: tIelts("occupationSelfEmployed"), value: "Self-employed" },
-                  { label: tIelts("occupationEmployerPartner"), value: "Employer/Partner" },
+                  {
+                    label: tIelts("occupationSelfEmployed"),
+                    value: "Self-employed",
+                  },
+                  {
+                    label: tIelts("occupationEmployerPartner"),
+                    value: "Employer/Partner",
+                  },
                   {
                     label: tIelts("occupationSeniorLevel"),
-                    value: "Employee (Senior level)"
+                    value: "Employee (Senior level)",
                   },
                   {
                     label: tIelts("occupationMiddleJuniorLevel"),
-                    value: "Employee (Middle/Junior level)"
+                    value: "Employee (Middle/Junior level)",
                   },
-                  { label: tIelts("occupationHomeworker"), value: "Homeworker" },
+                  {
+                    label: tIelts("occupationHomeworker"),
+                    value: "Homeworker",
+                  },
                   { label: tIelts("occupationRetired"), value: "Retired" },
                   { label: tIelts("occupationStudent"), value: "Student" },
                   { label: tIelts("occupationOther"), value: "Other" },
@@ -735,7 +763,9 @@ export function RegistrationFormStep({
                   <Input
                     placeholder={tIelts("pleaseSpecifyOccupationLevel")}
                     value={formData.occupationLevelOther ?? ""}
-                    onChange={(e) => setValue("occupationLevelOther", e.target.value)}
+                    onChange={(e) =>
+                      setValue("occupationLevelOther", e.target.value)
+                    }
                     className="border-primary/40 focus:border-primary"
                   />
                 </div>
@@ -750,25 +780,70 @@ export function RegistrationFormStep({
               <SearchableDropdown
                 name="occupationSector"
                 options={[
-                  { label: tIelts("sectorAdministrative"), value: "Administrative Services" },
-                  { label: tIelts("sectorAgriculture"), value: "Agriculture, Fishing, Forestry, Mining" },
-                  { label: tIelts("sectorArts"), value: "Arts and Entertainment" },
-                  { label: tIelts("sectorBanking"), value: "Banking and Finance" },
-                  { label: tIelts("sectorCatering"), value: "Catering and Leisure" },
-                  { label: tIelts("sectorConstruction"), value: "Construction Industries" },
+                  {
+                    label: tIelts("sectorAdministrative"),
+                    value: "Administrative Services",
+                  },
+                  {
+                    label: tIelts("sectorAgriculture"),
+                    value: "Agriculture, Fishing, Forestry, Mining",
+                  },
+                  {
+                    label: tIelts("sectorArts"),
+                    value: "Arts and Entertainment",
+                  },
+                  {
+                    label: tIelts("sectorBanking"),
+                    value: "Banking and Finance",
+                  },
+                  {
+                    label: tIelts("sectorCatering"),
+                    value: "Catering and Leisure",
+                  },
+                  {
+                    label: tIelts("sectorConstruction"),
+                    value: "Construction Industries",
+                  },
                   { label: tIelts("sectorCraft"), value: "Craft and Design" },
                   { label: tIelts("sectorEducation"), value: "Education" },
-                  { label: tIelts("sectorHealth"), value: "Health and Social Services" },
-                  { label: tIelts("sectorInstallation"), value: "Installation, Maintenance and Repair Services" },
-                  { label: tIelts("sectorLaw"), value: "Law and Legal Services" },
-                  { label: tIelts("sectorManufacturing"), value: "Manufacturing and Assembly Services" },
-                  { label: tIelts("sectorPersonal"), value: "Personal Services" },
+                  {
+                    label: tIelts("sectorHealth"),
+                    value: "Health and Social Services",
+                  },
+                  {
+                    label: tIelts("sectorInstallation"),
+                    value: "Installation, Maintenance and Repair Services",
+                  },
+                  {
+                    label: tIelts("sectorLaw"),
+                    value: "Law and Legal Services",
+                  },
+                  {
+                    label: tIelts("sectorManufacturing"),
+                    value: "Manufacturing and Assembly Services",
+                  },
+                  {
+                    label: tIelts("sectorPersonal"),
+                    value: "Personal Services",
+                  },
                   { label: tIelts("sectorRetail"), value: "Retail Trade" },
-                  { label: tIelts("sectorTechnical"), value: "Technical and Scientific" },
-                  { label: tIelts("sectorTelecoms"), value: "Telecommunications and the Media" },
+                  {
+                    label: tIelts("sectorTechnical"),
+                    value: "Technical and Scientific",
+                  },
+                  {
+                    label: tIelts("sectorTelecoms"),
+                    value: "Telecommunications and the Media",
+                  },
                   { label: tIelts("sectorTransport"), value: "Transport" },
-                  { label: tIelts("sectorUtilities"), value: "Utilities (Gas, Water, Electricity etc)" },
-                  { label: tIelts("sectorWholesale"), value: "Wholesale Trade" },
+                  {
+                    label: tIelts("sectorUtilities"),
+                    value: "Utilities (Gas, Water, Electricity etc)",
+                  },
+                  {
+                    label: tIelts("sectorWholesale"),
+                    value: "Wholesale Trade",
+                  },
                   { label: tIelts("sectorOther"), value: "Other" },
                 ]}
                 placeholder={tIelts("selectSector")}
@@ -784,7 +859,9 @@ export function RegistrationFormStep({
                   <Input
                     placeholder={tIelts("pleaseSpecifyOccupationSector")}
                     value={formData.occupationSectorOther ?? ""}
-                    onChange={(e) => setValue("occupationSectorOther", e.target.value)}
+                    onChange={(e) =>
+                      setValue("occupationSectorOther", e.target.value)
+                    }
                     className="border-primary/40 focus:border-primary"
                   />
                 </div>
@@ -801,21 +878,43 @@ export function RegistrationFormStep({
                 options={[
                   {
                     label: tIelts("reasonHigherEducationExtended"),
-                    value: "Higher education extended course (3 months or more)"
+                    value:
+                      "Higher education extended course (3 months or more)",
                   },
                   {
                     label: tIelts("reasonHigherEducationShort"),
-                    value: "Higher education short course (3 months or less)"
+                    value: "Higher education short course (3 months or less)",
                   },
-                  { label: tIelts("reasonOtherEducational"), value: "Other educational purposes" },
-                  { label: tIelts("reasonDoctor"), value: "Registration as a doctor" },
+                  {
+                    label: tIelts("reasonOtherEducational"),
+                    value: "Other educational purposes",
+                  },
+                  {
+                    label: tIelts("reasonDoctor"),
+                    value: "Registration as a doctor",
+                  },
                   { label: tIelts("reasonImmigration"), value: "Immigration" },
                   { label: tIelts("reasonEmployment"), value: "Employment" },
-                  { label: tIelts("reasonProfessionalRegistration"), value: "Professional registration (not medical)" },
-                  { label: tIelts("reasonPersonal"), value: "Personal reasons" },
-                  { label: tIelts("reasonNurse"), value: "Registration as a nurse (including CGFNS)" },
-                  { label: tIelts("reasonDentist"), value: "Registration as a dentist" },
-                  { label: tIelts("reasonMissingInvalid"), value: "Missing/Invalid" },
+                  {
+                    label: tIelts("reasonProfessionalRegistration"),
+                    value: "Professional registration (not medical)",
+                  },
+                  {
+                    label: tIelts("reasonPersonal"),
+                    value: "Personal reasons",
+                  },
+                  {
+                    label: tIelts("reasonNurse"),
+                    value: "Registration as a nurse (including CGFNS)",
+                  },
+                  {
+                    label: tIelts("reasonDentist"),
+                    value: "Registration as a dentist",
+                  },
+                  {
+                    label: tIelts("reasonMissingInvalid"),
+                    value: "Missing/Invalid",
+                  },
                   { label: tIelts("reasonOther"), value: "other" },
                 ]}
                 placeholder={tIelts("selectReason")}
@@ -831,7 +930,9 @@ export function RegistrationFormStep({
                   <Input
                     placeholder={tIelts("pleaseSpecifyReason")}
                     value={formData.reasonForTakingTestOther ?? ""}
-                    onChange={(e) => setValue("reasonForTakingTestOther", e.target.value)}
+                    onChange={(e) =>
+                      setValue("reasonForTakingTestOther", e.target.value)
+                    }
                     className="border-primary/40 focus:border-primary"
                   />
                 </div>
