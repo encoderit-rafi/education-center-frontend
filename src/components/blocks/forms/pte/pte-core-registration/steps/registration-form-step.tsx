@@ -20,13 +20,16 @@ import {
   FieldContent,
   FieldDescription,
   FieldError,
-  FieldLabel
+  FieldLabel,
 } from "@/components/ui/field";
 import { TPteCoreSchema } from "../_type";
 import { PriceDisplay } from "@/components/ui/price-display";
 import { Badge } from "@/components/ui/badge";
 import { AddonServicesSection } from "@/components/blocks/forms/shared/addon-services-section";
-import { MarketingPreferencesSection, TEPTH_MARKETING_OPTIONS } from "@/components/blocks/forms/shared/marketing-preferences-section";
+import {
+  MarketingPreferencesSection,
+  TEPTH_MARKETING_OPTIONS,
+} from "@/components/blocks/forms/shared/marketing-preferences-section";
 
 interface RegistrationFormStepProps {
   form: UseFormReturn<TPteCoreSchema>;
@@ -45,13 +48,15 @@ export function RegistrationFormStep({
   onBack,
   languages,
   coursesData,
-  workshopsData }: RegistrationFormStepProps) {
+  workshopsData,
+}: RegistrationFormStepProps) {
   const {
     register,
     handleSubmit,
     setValue,
     watch,
-    formState: { errors } } = form;
+    formState: { errors },
+  } = form;
 
   const formData = watch();
   const t = useTranslations("FormsShared.FormFields");
@@ -179,7 +184,8 @@ export function RegistrationFormStep({
                 className="grid grid-cols-2 gap-3"
               >
                 {["male", "female"].map((opt) => {
-                  const label = opt === "male" ? tYesNo("male") : tYesNo("female");
+                  const label =
+                    opt === "male" ? tYesNo("male") : tYesNo("female");
                   return (
                     <Label
                       key={opt}
@@ -303,7 +309,10 @@ export function RegistrationFormStep({
           <Field>
             <FieldLabel>{t("postalCode")}</FieldLabel>
             <FieldContent>
-              <Input placeholder={t("postalCodePlaceholder")} {...register("postcode")} />
+              <Input
+                placeholder={t("postalCodePlaceholder")}
+                {...register("postcode")}
+              />
             </FieldContent>
           </Field>
 
@@ -356,9 +365,7 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.passportCopy}>
-            <FieldLabel required>
-              {tPte("attachPassportCopy")}
-            </FieldLabel>
+            <FieldLabel required>{tPte("attachPassportCopy")}</FieldLabel>
             <FieldContent>
               <div className="flex flex-col gap-2">
                 {!formData.passportCopy ? (
@@ -372,11 +379,11 @@ export function RegistrationFormStep({
                     }}
                   />
                 ) : (
-                  <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-200">
+                  <div className="flex flex-col items-center justify-between gap-3 p-3 rounded-xl border border-green-500/50 bg-green-100/30">
+                    <div className="size-9 rounded-full bg-emerald-100 border border-green-500/50 flex items-center justify-center text-emerald-600">
+                      <Save className="size-[17px]" />
+                    </div>
                     <div className="flex items-center gap-3">
-                      <div className="size-8 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-primary">
-                        <Save className="size-4" />
-                      </div>
                       <div className="flex flex-col">
                         <span className="text-xs font-bold text-slate-700 truncate max-w-50">
                           {(formData.passportCopy as File).name}
@@ -389,16 +396,16 @@ export function RegistrationFormStep({
                           MB
                         </span>
                       </div>
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => setValue("passportCopy", undefined)}
+                        className="size-8 p-0 rounded-full hover:bg-red-50 hover:text-red-600"
+                      >
+                        <span className="text-lg">×</span>
+                      </Button>
                     </div>
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => setValue("passportCopy", undefined)}
-                      className="size-8 p-0 rounded-full hover:bg-red-50 hover:text-red-600"
-                    >
-                      <span className="text-lg">×</span>
-                    </Button>
                   </div>
                 )}
                 <p className="text-[12px] text-slate-900 font-medium">
@@ -437,7 +444,9 @@ export function RegistrationFormStep({
                   <Input
                     placeholder="Please specify your first language"
                     value={formData.homeLanguageOther ?? ""}
-                    onChange={(e) => setValue("homeLanguageOther", e.target.value)}
+                    onChange={(e) =>
+                      setValue("homeLanguageOther", e.target.value)
+                    }
                     className="border-primary/40 focus:border-primary"
                   />
                   <FieldError errors={[errors.homeLanguageOther]} />
@@ -451,12 +460,30 @@ export function RegistrationFormStep({
             <FieldContent>
               <SearchableDropdown
                 options={[
-                  { label: tPte("situationStudentEnglish"), value: "Student - English language" },
-                  { label: tPte("situationStudentUniversity"), value: "Student - In University / College" },
-                  { label: tPte("situationStudentUniversityGraduate"), value: "Student - University / College graduate" },
-                  { label: tPte("situationWorkingFull"), value: "Working - Full time" },
-                  { label: tPte("situationWorkingPart"), value: "Working - Part time" },
-                  { label: tPte("situationNotStudying"), value: "Not studying or working" },
+                  {
+                    label: tPte("situationStudentEnglish"),
+                    value: "Student - English language",
+                  },
+                  {
+                    label: tPte("situationStudentUniversity"),
+                    value: "Student - In University / College",
+                  },
+                  {
+                    label: tPte("situationStudentUniversityGraduate"),
+                    value: "Student - University / College graduate",
+                  },
+                  {
+                    label: tPte("situationWorkingFull"),
+                    value: "Working - Full time",
+                  },
+                  {
+                    label: tPte("situationWorkingPart"),
+                    value: "Working - Part time",
+                  },
+                  {
+                    label: tPte("situationNotStudying"),
+                    value: "Not studying or working",
+                  },
                   { label: tPte("situationOther"), value: "Other" },
                 ]}
                 placeholder={t("selectOne")}
@@ -471,7 +498,9 @@ export function RegistrationFormStep({
                   <Input
                     placeholder="Please specify your current situation"
                     value={formData.currentSituationOther ?? ""}
-                    onChange={(e) => setValue("currentSituationOther", e.target.value)}
+                    onChange={(e) =>
+                      setValue("currentSituationOther", e.target.value)
+                    }
                     className="border-primary/40 focus:border-primary"
                   />
                 </div>
@@ -480,16 +509,23 @@ export function RegistrationFormStep({
             </FieldContent>
           </Field>
 
-          <Field
-            data-invalid={!!errors.reasonForTaking}
-          >
+          <Field data-invalid={!!errors.reasonForTaking}>
             <FieldLabel required>{tPte("reasonForTest")}</FieldLabel>
             <FieldContent>
               <SearchableDropdown
                 options={[
-                  { label: tPte("reasonCanadianImmigration"), value: "canadian_immigration" },
-                  { label: tPte("reasonCanadianCitizenship"), value: "canadian_citizenship" },
-                  { label: tPte("reasonCanadaTempWorker"), value: "temporary_foreign_worker" },
+                  {
+                    label: tPte("reasonCanadianImmigration"),
+                    value: "canadian_immigration",
+                  },
+                  {
+                    label: tPte("reasonCanadianCitizenship"),
+                    value: "canadian_citizenship",
+                  },
+                  {
+                    label: tPte("reasonCanadaTempWorker"),
+                    value: "temporary_foreign_worker",
+                  },
                   { label: tPte("reasonPGWP"), value: "pgwp" },
                   { label: tPte("reasonOther"), value: "other" },
                 ]}
@@ -511,7 +547,9 @@ export function RegistrationFormStep({
                   <Input
                     placeholder="Please specify your reason"
                     value={formData.reasonForTakingOther ?? ""}
-                    onChange={(e) => setValue("reasonForTakingOther", e.target.value)}
+                    onChange={(e) =>
+                      setValue("reasonForTakingOther", e.target.value)
+                    }
                     className="border-primary/40 focus:border-primary"
                   />
                 </div>
@@ -525,13 +563,28 @@ export function RegistrationFormStep({
             <FieldContent>
               <SearchableDropdown
                 options={[
-                  { label: tPte("referralAgentAdvisor"), value: "agent_advisor" },
+                  {
+                    label: tPte("referralAgentAdvisor"),
+                    value: "agent_advisor",
+                  },
                   { label: tPte("referralEducationEvent"), value: "event" },
-                  { label: tPte("referralFriendFamily"), value: "friend_family" },
+                  {
+                    label: tPte("referralFriendFamily"),
+                    value: "friend_family",
+                  },
                   { label: tPte("referralIRCC"), value: "ircc" },
-                  { label: tPte("referralInternetSearch"), value: "internet_search" },
-                  { label: tPte("referralLanguageSchool"), value: "language_school" },
-                  { label: tPte("referralMigrationAgent"), value: "migration_agent" },
+                  {
+                    label: tPte("referralInternetSearch"),
+                    value: "internet_search",
+                  },
+                  {
+                    label: tPte("referralLanguageSchool"),
+                    value: "language_school",
+                  },
+                  {
+                    label: tPte("referralMigrationAgent"),
+                    value: "migration_agent",
+                  },
                   { label: tPte("referralSocialMedia"), value: "social_media" },
                   { label: tPte("referralOther"), value: "other" },
                 ]}
@@ -539,16 +592,26 @@ export function RegistrationFormStep({
                 value={formData.referralSource}
                 onChange={(val) => {
                   setValue("referralSource", val);
-                  const specifyOptions = ["agent_advisor", "event", "migration_agent", "other"];
-                  if (!specifyOptions.includes(val)) setValue("referralSourceOther", "");
+                  const specifyOptions = [
+                    "agent_advisor",
+                    "event",
+                    "migration_agent",
+                    "other",
+                  ];
+                  if (!specifyOptions.includes(val))
+                    setValue("referralSourceOther", "");
                 }}
               />
-              {["agent_advisor", "event", "migration_agent", "other"].includes(formData.referralSource) && (
+              {["agent_advisor", "event", "migration_agent", "other"].includes(
+                formData.referralSource,
+              ) && (
                 <div className="mt-2 animate-in fade-in slide-in-from-top-2 duration-300">
                   <Input
                     placeholder="Please specify"
                     value={formData.referralSourceOther ?? ""}
-                    onChange={(e) => setValue("referralSourceOther", e.target.value)}
+                    onChange={(e) =>
+                      setValue("referralSourceOther", e.target.value)
+                    }
                     className="border-primary/40 focus:border-primary"
                   />
                   <FieldError errors={[errors.referralSourceOther]} />
@@ -563,19 +626,29 @@ export function RegistrationFormStep({
               data-invalid={!!errors.studyLevel}
               className="md:col-span-2 animate-in fade-in slide-in-from-top-2"
             >
-              <FieldLabel required>
-                {tPte("studyLevel")}
-              </FieldLabel>
+              <FieldLabel required>{tPte("studyLevel")}</FieldLabel>
               <FieldContent>
                 <SearchableDropdown
                   options={[
                     { label: tPte("studyLevelPreDegree"), value: "pre_degree" },
-                    { label: tPte("studyLevelUndergraduate"), value: "undergraduate" },
-                    { label: tPte("studyLevelPostgraduate"), value: "postgraduate" },
+                    {
+                      label: tPte("studyLevelUndergraduate"),
+                      value: "undergraduate",
+                    },
+                    {
+                      label: tPte("studyLevelPostgraduate"),
+                      value: "postgraduate",
+                    },
                     { label: tPte("studyLevelDoctorate"), value: "doctorate" },
                     { label: tPte("studyLevelMba"), value: "mba" },
-                    { label: tPte("studyLevelEnglish"), value: "english_language" },
-                    { label: tPte("studyLevelProfessional"), value: "professional" },
+                    {
+                      label: tPte("studyLevelEnglish"),
+                      value: "english_language",
+                    },
+                    {
+                      label: tPte("studyLevelProfessional"),
+                      value: "professional",
+                    },
                     { label: tPte("studyLevelOther"), value: "other" },
                   ]}
                   placeholder={t("selectLevel")}
@@ -594,7 +667,9 @@ export function RegistrationFormStep({
                     <Input
                       placeholder="Please specify your education level"
                       value={formData.studyLevelOther ?? ""}
-                      onChange={(e) => setValue("studyLevelOther", e.target.value)}
+                      onChange={(e) =>
+                        setValue("studyLevelOther", e.target.value)
+                      }
                       className="border-primary/40 focus:border-primary"
                     />
                     <FieldError errors={[errors.studyLevelOther]} />
@@ -614,22 +689,43 @@ export function RegistrationFormStep({
               <FieldContent>
                 <SearchableDropdown
                   options={[
-                    { label: tPte("fieldAccountancyFinance"), value: "accountancy_finance" },
+                    {
+                      label: tPte("fieldAccountancyFinance"),
+                      value: "accountancy_finance",
+                    },
                     { label: tPte("fieldAgriculture"), value: "agriculture" },
                     { label: tPte("fieldArchitecture"), value: "architecture" },
-                    { label: tPte("fieldBusinessManagement"), value: "business_management" },
-                    { label: tPte("fieldCommunicationsMedia"), value: "communications_media" },
+                    {
+                      label: tPte("fieldBusinessManagement"),
+                      value: "business_management",
+                    },
+                    {
+                      label: tPte("fieldCommunicationsMedia"),
+                      value: "communications_media",
+                    },
                     { label: tPte("fieldEducation"), value: "education" },
                     { label: tPte("fieldEngineering"), value: "engineering" },
                     { label: tPte("fieldHealth"), value: "health" },
-                    { label: tPte("fieldHumanitiesArts"), value: "humanities_arts" },
+                    {
+                      label: tPte("fieldHumanitiesArts"),
+                      value: "humanities_arts",
+                    },
                     { label: tPte("fieldIT"), value: "it_computer_sciences" },
                     { label: tPte("fieldLaw"), value: "law" },
                     { label: tPte("fieldMathematics"), value: "mathematics" },
                     { label: tPte("fieldMedicine"), value: "medicine" },
-                    { label: tPte("fieldPhysicalLifeSciences"), value: "physical_life_sciences" },
-                    { label: tPte("fieldSocialSciences"), value: "social_sciences" },
-                    { label: tPte("fieldTourismHospitality"), value: "tourism_hospitality" },
+                    {
+                      label: tPte("fieldPhysicalLifeSciences"),
+                      value: "physical_life_sciences",
+                    },
+                    {
+                      label: tPte("fieldSocialSciences"),
+                      value: "social_sciences",
+                    },
+                    {
+                      label: tPte("fieldTourismHospitality"),
+                      value: "tourism_hospitality",
+                    },
                     { label: tPte("fieldOther"), value: "other" },
                   ]}
                   placeholder={t("selectOne")}
@@ -644,7 +740,9 @@ export function RegistrationFormStep({
                     <Input
                       placeholder="Please specify your field of study"
                       value={formData.fieldOfStudyOther ?? ""}
-                      onChange={(e) => setValue("fieldOfStudyOther", e.target.value)}
+                      onChange={(e) =>
+                        setValue("fieldOfStudyOther", e.target.value)
+                      }
                       className="border-primary/40 focus:border-primary"
                     />
                     <FieldError errors={[errors.fieldOfStudyOther]} />
@@ -663,26 +761,86 @@ export function RegistrationFormStep({
             <FieldContent>
               <SearchableDropdown
                 options={[
-                  { label: tPte("occupationSectorAgriculture"), value: "Agriculture, Fishing, Forestry, Mining" },
-                  { label: tPte("occupationSectorArchitecture"), value: "Architecture" },
-                  { label: tPte("occupationSectorArts"), value: "Arts and Entertainment" },
-                  { label: tPte("occupationSectorBanking"), value: "Banking and Finance" },
-                  { label: tPte("occupationSectorCatering"), value: "Catering and Leisure" },
-                  { label: tPte("occupationSectorConstruction"), value: "Construction Industries" },
-                  { label: tPte("occupationSectorCommunications"), value: "Communications and Media" },
-                  { label: tPte("occupationSectorCraft"), value: "Craft and Design" },
-                  { label: tPte("occupationSectorEducation"), value: "Education" },
-                  { label: tPte("occupationSectorHealth"), value: "Health and Social Services" },
-                  { label: tPte("occupationSectorInstallation"), value: "Installation, Maintenance and Repair Services" },
-                  { label: tPte("occupationSectorLaw"), value: "Law and Legal Services" },
-                  { label: tPte("occupationSectorManufacturing"), value: "Manufacturing and Assembly Services" },
-                  { label: tPte("occupationSectorPersonal"), value: "Personal Services" },
-                  { label: tPte("occupationSectorRetail"), value: "Retail Trade" },
-                  { label: tPte("occupationSectorTechnical"), value: "Technical and Scientific" },
-                  { label: tPte("occupationSectorTelecoms"), value: "Telecommunications and Media" },
-                  { label: tPte("occupationSectorTransport"), value: "Transport" },
-                  { label: tPte("occupationSectorUtilities"), value: "Utilities (Gas, Water, Electricity, etc.)" },
-                  { label: tPte("occupationSectorWholesale"), value: "Wholesale Trade" },
+                  {
+                    label: tPte("occupationSectorAgriculture"),
+                    value: "Agriculture, Fishing, Forestry, Mining",
+                  },
+                  {
+                    label: tPte("occupationSectorArchitecture"),
+                    value: "Architecture",
+                  },
+                  {
+                    label: tPte("occupationSectorArts"),
+                    value: "Arts and Entertainment",
+                  },
+                  {
+                    label: tPte("occupationSectorBanking"),
+                    value: "Banking and Finance",
+                  },
+                  {
+                    label: tPte("occupationSectorCatering"),
+                    value: "Catering and Leisure",
+                  },
+                  {
+                    label: tPte("occupationSectorConstruction"),
+                    value: "Construction Industries",
+                  },
+                  {
+                    label: tPte("occupationSectorCommunications"),
+                    value: "Communications and Media",
+                  },
+                  {
+                    label: tPte("occupationSectorCraft"),
+                    value: "Craft and Design",
+                  },
+                  {
+                    label: tPte("occupationSectorEducation"),
+                    value: "Education",
+                  },
+                  {
+                    label: tPte("occupationSectorHealth"),
+                    value: "Health and Social Services",
+                  },
+                  {
+                    label: tPte("occupationSectorInstallation"),
+                    value: "Installation, Maintenance and Repair Services",
+                  },
+                  {
+                    label: tPte("occupationSectorLaw"),
+                    value: "Law and Legal Services",
+                  },
+                  {
+                    label: tPte("occupationSectorManufacturing"),
+                    value: "Manufacturing and Assembly Services",
+                  },
+                  {
+                    label: tPte("occupationSectorPersonal"),
+                    value: "Personal Services",
+                  },
+                  {
+                    label: tPte("occupationSectorRetail"),
+                    value: "Retail Trade",
+                  },
+                  {
+                    label: tPte("occupationSectorTechnical"),
+                    value: "Technical and Scientific",
+                  },
+                  {
+                    label: tPte("occupationSectorTelecoms"),
+                    value: "Telecommunications and Media",
+                  },
+                  {
+                    label: tPte("occupationSectorTransport"),
+                    value: "Transport",
+                  },
+                  {
+                    label: tPte("occupationSectorUtilities"),
+                    value: "Utilities (Gas, Water, Electricity, etc.)",
+                  },
+                  {
+                    label: tPte("occupationSectorWholesale"),
+                    value: "Wholesale Trade",
+                  },
                   { label: tPte("occupationSectorOther"), value: "Other" },
                 ]}
                 placeholder={t("selectSector")}
@@ -697,7 +855,9 @@ export function RegistrationFormStep({
                   <Input
                     placeholder="Please specify your occupation sector"
                     value={formData.occupationSectorOther ?? ""}
-                    onChange={(e) => setValue("occupationSectorOther", e.target.value)}
+                    onChange={(e) =>
+                      setValue("occupationSectorOther", e.target.value)
+                    }
                     className="border-primary/40 focus:border-primary"
                   />
                   <FieldError errors={[errors.occupationSectorOther]} />
@@ -706,7 +866,6 @@ export function RegistrationFormStep({
               <FieldError errors={[errors.occupationSector]} />
             </FieldContent>
           </Field>
-
         </div>
         <div className="space-y-3 md:col-span-2 animate-in fade-in slide-in-from-top-2">
           <Field data-invalid={!!errors.takenBefore}>
@@ -751,7 +910,8 @@ export function RegistrationFormStep({
                     }
                   >
                     {["yes", "no"].map((opt) => {
-                      const label = opt === "yes" ? tYesNo("yes") : tYesNo("no");
+                      const label =
+                        opt === "yes" ? tYesNo("yes") : tYesNo("no");
                       return (
                         <Label
                           key={opt}
@@ -779,23 +939,25 @@ export function RegistrationFormStep({
                       setValue("hasExistingAccount", val as any)
                     }
                   >
-                    {["yes", "no", "I forgot my PTE account details"].map((opt) => {
-                      let label: string;
-                      if (opt === "yes") label = tYesNo("yes");
-                      else if (opt === "no") label = tYesNo("no");
-                      else label = tPte("forgotAccount");
-                      return (
-                        <Label
-                          key={opt}
-                          htmlFor={`account-${opt}`}
-                          data-invalid={!!errors.hasExistingAccount}
-                          className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive capitalize"
-                        >
-                          <RadioGroupItem value={opt} id={`account-${opt}`} />
-                          {label}
-                        </Label>
-                      );
-                    })}
+                    {["yes", "no", "I forgot my PTE account details"].map(
+                      (opt) => {
+                        let label: string;
+                        if (opt === "yes") label = tYesNo("yes");
+                        else if (opt === "no") label = tYesNo("no");
+                        else label = tPte("forgotAccount");
+                        return (
+                          <Label
+                            key={opt}
+                            htmlFor={`account-${opt}`}
+                            data-invalid={!!errors.hasExistingAccount}
+                            className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive capitalize"
+                          >
+                            <RadioGroupItem value={opt} id={`account-${opt}`} />
+                            {label}
+                          </Label>
+                        );
+                      },
+                    )}
                   </RadioGroup>
                   <FieldError errors={[errors.hasExistingAccount]} />
                 </FieldContent>

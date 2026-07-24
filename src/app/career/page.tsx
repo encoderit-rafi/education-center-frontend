@@ -43,23 +43,21 @@ const careerSchema = z.object({
     .trim()
     .min(1, "Last name is required")
     .min(2, "Last name must be at least 2 characters"),
-  gender: z
-    .string()
-    .trim()
-    .min(1, "Please select your gender"),
+  gender: z.string().trim().min(1, "Please select your gender"),
   dob: z
     .any()
     .refine((val) => val instanceof Date, "Please select your date of birth")
     .refine((val) => {
       if (!(val instanceof Date)) return false;
       const today = new Date();
-      const ageLimitDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+      const ageLimitDate = new Date(
+        today.getFullYear() - 18,
+        today.getMonth(),
+        today.getDate(),
+      );
       return val <= ageLimitDate;
     }, "You must be at least 18 years old"),
-  nationality: z
-    .string()
-    .trim()
-    .min(1, "Please select your nationality"),
+  nationality: z.string().trim().min(1, "Please select your nationality"),
   email: z
     .string()
     .trim()
@@ -75,10 +73,7 @@ const careerSchema = z.object({
     .trim()
     .min(1, "Address is required")
     .min(5, "Address must be at least 5 characters"),
-  city: z
-    .string()
-    .trim()
-    .min(1, "City/Emirate is required"),
+  city: z.string().trim().min(1, "City/Emirate is required"),
   pobox: z.string().optional(),
   resume: z
     .any()
@@ -103,7 +98,6 @@ export default function CareerPage() {
     clearCaptchaError,
     setToken,
   } = useRecaptcha();
-
 
   const form = useForm<CareerFormValues>({
     resolver: zodResolver(careerSchema),
@@ -210,9 +204,11 @@ export default function CareerPage() {
     } catch (error: any) {
       console.error("Submission error:", error);
 
-      let errorMessage = "An unexpected error occurred. Please try again later.";
+      let errorMessage =
+        "An unexpected error occurred. Please try again later.";
       if (error.response?.status === 413) {
-        errorMessage = "The uploaded file is too large. Please upload a file smaller than 5MB.";
+        errorMessage =
+          "The uploaded file is too large. Please upload a file smaller than 5MB.";
       } else if (error.response?.data?.message) {
         errorMessage = error.response.data.message;
       } else if (error.message) {
@@ -230,7 +226,9 @@ export default function CareerPage() {
     const errorFields = Object.keys(errors);
     if (errorFields.length > 0) {
       const firstField = errorFields[0];
-      const errorMessage = (errors[firstField] as any)?.message || "Please fill in all required fields.";
+      const errorMessage =
+        (errors[firstField] as any)?.message ||
+        "Please fill in all required fields.";
       toast.error("Validation Error", {
         description: errorMessage,
       });
@@ -251,8 +249,18 @@ export default function CareerPage() {
             <div className="absolute inset-0 opacity-10 pointer-events-none">
               <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
                 <defs>
-                  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" strokeWidth="1" />
+                  <pattern
+                    id="grid"
+                    width="40"
+                    height="40"
+                    patternUnits="userSpaceOnUse"
+                  >
+                    <path
+                      d="M 40 0 L 0 0 0 40"
+                      fill="none"
+                      stroke="white"
+                      strokeWidth="1"
+                    />
                   </pattern>
                 </defs>
                 <rect width="100%" height="100%" fill="url(#grid)" />
@@ -260,8 +268,15 @@ export default function CareerPage() {
             </div>
 
             <div className="relative mx-auto w-24 h-24 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-md shadow-inner">
-              <Check size={48} className="text-white animate-bounce" strokeWidth={3} />
-              <Star size={16} className="absolute top-2 right-2 text-amber-300 animate-pulse" />
+              <Check
+                size={48}
+                className="text-white animate-bounce"
+                strokeWidth={3}
+              />
+              <Star
+                size={16}
+                className="absolute top-2 right-2 text-amber-300 animate-pulse"
+              />
             </div>
             <div className="space-y-2 relative">
               <h2 className="text-4xl font-black font-heading tracking-tighter text-white">
@@ -297,9 +312,7 @@ export default function CareerPage() {
                   <h2 className="text-3xl font-black text-gray-900 font-heading tracking-tighter mb-4">
                     {t("title")}
                   </h2>
-                  <p className="text-gray-500 text-sm">
-                    {t("description")}
-                  </p>
+                  <p className="text-gray-500 text-sm">{t("description")}</p>
                 </div>
 
                 <form
@@ -352,7 +365,8 @@ export default function CareerPage() {
                     {/* Gender */}
                     <Field data-invalid={!!errors.gender}>
                       <FieldLabel className="text-sm font-medium">
-                        {t("form.gender")} <span className="text-primary font-bold">*</span>
+                        {t("form.gender")}{" "}
+                        <span className="text-primary font-bold">*</span>
                       </FieldLabel>
                       <FieldContent>
                         <Controller
@@ -365,7 +379,13 @@ export default function CareerPage() {
                                   variant="outline"
                                   className="flex h-11 w-full bg-white items-center justify-between whitespace-nowrap rounded-md border border-slate-200 px-3 py-2 text-base outline-none focus:border-primary focus:ring-3 focus:ring-ring/30 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm font-medium hover:border-slate-200 hover:text-inherit hover:bg-white hover:shadow-none transition-none"
                                 >
-                                  <span className={!field.value ? "text-slate-400 font-normal" : ""}>
+                                  <span
+                                    className={
+                                      !field.value
+                                        ? "text-slate-400 font-normal"
+                                        : ""
+                                    }
+                                  >
                                     {field.value
                                       ? field.value === "male"
                                         ? t("form.male")
@@ -400,7 +420,8 @@ export default function CareerPage() {
                     {/* DOB */}
                     <Field data-invalid={!!errors.dob}>
                       <FieldLabel className="text-sm font-medium">
-                        {t("form.dob")} <span className="text-primary font-bold">*</span>
+                        {t("form.dob")}{" "}
+                        <span className="text-primary font-bold">*</span>
                       </FieldLabel>
                       <FieldContent>
                         <Controller
@@ -430,7 +451,8 @@ export default function CareerPage() {
                     {/* Nationality */}
                     <Field data-invalid={!!errors.nationality}>
                       <FieldLabel className="text-sm font-medium">
-                        {t("form.nationality")} <span className="text-primary font-bold">*</span>
+                        {t("form.nationality")}{" "}
+                        <span className="text-primary font-bold">*</span>
                       </FieldLabel>
                       <FieldContent>
                         <Controller
@@ -470,7 +492,8 @@ export default function CareerPage() {
                     {/* Phone */}
                     <Field data-invalid={!!errors.mobile}>
                       <FieldLabel className="text-sm font-medium">
-                        {t("form.mobile")} <span className="text-primary font-bold">*</span>
+                        {t("form.mobile")}{" "}
+                        <span className="text-primary font-bold">*</span>
                       </FieldLabel>
                       <FieldContent>
                         <Controller
@@ -536,7 +559,8 @@ export default function CareerPage() {
                     {/* File Upload */}
                     <Field data-invalid={!!errors.resume}>
                       <FieldLabel className="text-sm font-medium">
-                        {t("form.attachCv")} <span className="text-primary font-bold">*</span>
+                        {t("form.attachCv")}{" "}
+                        <span className="text-primary font-bold">*</span>
                       </FieldLabel>
                       <FieldContent>
                         <Controller
@@ -579,7 +603,7 @@ export default function CareerPage() {
                                 className={cn(
                                   "w-full relative border-2 border-dashed p-6 sm:p-10 flex flex-col items-center justify-center space-y-4 transition-colors cursor-pointer group rounded-none",
                                   file
-                                    ? "border-[#A11D1D]/30 bg-[#A11D1D]/5"
+                                    ? "border-green-500/50 bg-green-100/30"
                                     : "border-gray-200 hover:border-[#A11D1D] bg-gray-50/50",
                                 )}
                               >
@@ -596,17 +620,18 @@ export default function CareerPage() {
                                 />
                                 {file ? (
                                   <div className="flex flex-col items-center space-y-3 w-full text-center min-w-0">
-                                    <div className="w-16 h-16 bg-[#A11D1D]/10 rounded-full flex items-center justify-center text-[#A11D1D] shrink-0">
+                                    <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600 shrink-0">
                                       <CheckCircle2 className="w-8 h-8" />
                                     </div>
                                     <div className="space-y-1 w-full min-w-0 px-2">
-                                      <p className="font-bold text-gray-900 text-sm w-full truncate" dir="ltr">
+                                      <p
+                                        className="font-bold text-gray-900 text-sm w-full truncate"
+                                        dir="ltr"
+                                      >
                                         {file.name}
                                       </p>
                                       <p className="text-xs text-gray-500 font-medium">
-                                        {(file.size / (1024 * 1024)).toFixed(
-                                          2,
-                                        )}{" "}
+                                        {(file.size / (1024 * 1024)).toFixed(2)}{" "}
                                         MB
                                       </p>
                                     </div>
@@ -642,7 +667,9 @@ export default function CareerPage() {
                         />
                       </FieldContent>
                       {errors.resume && (
-                        <FieldError>{errors.resume.message as string}</FieldError>
+                        <FieldError>
+                          {errors.resume.message as string}
+                        </FieldError>
                       )}
                     </Field>
                   </div>
@@ -654,10 +681,7 @@ export default function CareerPage() {
                     setToken={setToken}
                   />
 
-                  <Button
-                    type="submit"
-                    disabled={isSubmitting}
-                  >
+                  <Button type="submit" disabled={isSubmitting}>
                     {isSubmitting ? t("submitting") : t("submit")}
                   </Button>
                 </form>

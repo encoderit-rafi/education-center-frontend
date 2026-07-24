@@ -3,7 +3,13 @@
 import React from "react";
 import { useTranslations } from "next-intl";
 import { UseFormReturn } from "react-hook-form";
-import { Save, Globe, CalendarIcon, ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
+import {
+  Save,
+  Globe,
+  CalendarIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+} from "lucide-react";
 import { AddonServicesSection } from "@/components/blocks/forms/shared/addon-services-section";
 import { MarketingPreferencesSection } from "@/components/blocks/forms/shared/marketing-preferences-section";
 import { Button } from "@/components/ui/button";
@@ -16,7 +22,11 @@ import { SearchableDropdown } from "@/components/ui/searchable-dropdown";
 import { CountryDropdown } from "@/components/ui/country-dropdown";
 import { MultiCountryDropdown } from "@/components/ui/multi-country-dropdown";
 import { DatePicker } from "@/components/blocks/date-picker";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import Stepper from "@/components/stepper";
@@ -25,10 +35,9 @@ import {
   FieldContent,
   FieldDescription,
   FieldError,
-  FieldLabel
+  FieldLabel,
 } from "@/components/ui/field";
 import { TToeflIbtSchema } from "../_type/toefl-ibt";
-
 
 interface RegistrationFormStepProps {
   form: UseFormReturn<TToeflIbtSchema>;
@@ -47,13 +56,15 @@ export function RegistrationFormStep({
   onBack,
   languages,
   coursesData,
-  workshopsData }: RegistrationFormStepProps) {
+  workshopsData,
+}: RegistrationFormStepProps) {
   const {
     register,
     handleSubmit,
     setValue,
     watch,
-    formState: { errors } } = form;
+    formState: { errors },
+  } = form;
 
   const formData = watch();
   const t = useTranslations("FormsShared.FormFields");
@@ -64,81 +75,170 @@ export function RegistrationFormStep({
 
   const DESIRED_FIELDS_OF_STUDY = [
     { label: tToefl("fieldAccounting"), value: "Accounting" },
-    { label: tToefl("fieldAgricultureNatural"), value: "Agriculture & Natural Resources" },
+    {
+      label: tToefl("fieldAgricultureNatural"),
+      value: "Agriculture & Natural Resources",
+    },
     { label: tToefl("fieldArchitecture"), value: "Architecture" },
     { label: tToefl("fieldArtDesign"), value: "Art and Design" },
-    { label: tToefl("fieldBiologicalLifeSciences"), value: "Biological/Life Sciences" },
+    {
+      label: tToefl("fieldBiologicalLifeSciences"),
+      value: "Biological/Life Sciences",
+    },
     { label: tToefl("fieldBuiltEnvironment"), value: "Built Environment" },
-    { label: tToefl("fieldBusinessManagement"), value: "Business & Management" },
+    {
+      label: tToefl("fieldBusinessManagement"),
+      value: "Business & Management",
+    },
     { label: tToefl("fieldChemistry"), value: "Chemistry" },
-    { label: tToefl("fieldCommunicationsMedia"), value: "Communications and Media" },
-    { label: tToefl("fieldComputingIT"), value: "Computing & Information Technology" },
+    {
+      label: tToefl("fieldCommunicationsMedia"),
+      value: "Communications and Media",
+    },
+    {
+      label: tToefl("fieldComputingIT"),
+      value: "Computing & Information Technology",
+    },
     { label: tToefl("fieldCreativeArts"), value: "Creative Arts" },
     { label: tToefl("fieldCulturalStudies"), value: "Cultural Studies" },
     { label: tToefl("fieldDentalStudies"), value: "Dental Studies" },
     { label: tToefl("fieldEconomics"), value: "Economics" },
     { label: tToefl("fieldEducationTraining"), value: "Education & Training" },
     { label: tToefl("fieldEmploymentSkills"), value: "Employment Skills" },
-    { label: tToefl("fieldEnglishLiterature"), value: "English Language/Literature" },
-    { label: tToefl("fieldEngineeringTechnology"), value: "Engineering & Technology" },
-    { label: tToefl("fieldEnvironmentalStudies"), value: "Environmental Studies" },
+    {
+      label: tToefl("fieldEnglishLiterature"),
+      value: "English Language/Literature",
+    },
+    {
+      label: tToefl("fieldEngineeringTechnology"),
+      value: "Engineering & Technology",
+    },
+    {
+      label: tToefl("fieldEnvironmentalStudies"),
+      value: "Environmental Studies",
+    },
     { label: tToefl("fieldFashionDesign"), value: "Fashion and Design" },
     { label: tToefl("fieldFoodHospitality"), value: "Food & Hospitality" },
-    { label: tToefl("fieldForeignLanguage"), value: "Foreign Language/Literature" },
+    {
+      label: tToefl("fieldForeignLanguage"),
+      value: "Foreign Language/Literature",
+    },
     { label: tToefl("fieldGeography"), value: "Geography" },
     { label: tToefl("fieldHealthScience"), value: "Health Science/Studies" },
-    { label: tToefl("fieldHumanitiesSocialSciences"), value: "Humanities & Social Sciences" },
+    {
+      label: tToefl("fieldHumanitiesSocialSciences"),
+      value: "Humanities & Social Sciences",
+    },
     { label: tToefl("fieldJournalism"), value: "Journalism" },
-    { label: tToefl("fieldLanguageLiterature"), value: "Language & Literature" },
+    {
+      label: tToefl("fieldLanguageLiterature"),
+      value: "Language & Literature",
+    },
     { label: tToefl("fieldLaw"), value: "Law" },
     { label: tToefl("fieldLegalStudies"), value: "Legal Studies" },
-    { label: tToefl("fieldLiberalArts"), value: "Liberal Arts/General Studies" },
+    {
+      label: tToefl("fieldLiberalArts"),
+      value: "Liberal Arts/General Studies",
+    },
     { label: tToefl("fieldMarketing"), value: "Marketing" },
     { label: tToefl("fieldMathematics"), value: "Mathematics" },
     { label: tToefl("fieldMedicine"), value: "Medicine" },
-    { label: tToefl("fieldMilitaryTechnologies"), value: "Military Technologies" },
-    { label: tToefl("fieldMultiInterdisciplinary"), value: "Multi/Interdisciplinary Studies" },
+    {
+      label: tToefl("fieldMilitaryTechnologies"),
+      value: "Military Technologies",
+    },
+    {
+      label: tToefl("fieldMultiInterdisciplinary"),
+      value: "Multi/Interdisciplinary Studies",
+    },
     { label: tToefl("fieldMusic"), value: "Music" },
     { label: tToefl("fieldNursing"), value: "Nursing" },
     { label: tToefl("fieldPersonalServices"), value: "Personal Services" },
     { label: tToefl("fieldPharmacy"), value: "Pharmacy" },
-    { label: tToefl("fieldPhilosophyReligion"), value: "Philosophy and Religion" },
+    {
+      label: tToefl("fieldPhilosophyReligion"),
+      value: "Philosophy and Religion",
+    },
     { label: tToefl("fieldPhysicalSciences"), value: "Physical Sciences" },
     { label: tToefl("fieldPhysics"), value: "Physics" },
     { label: tToefl("fieldPoliticalScience"), value: "Political Science" },
     { label: tToefl("fieldPsychology"), value: "Psychology" },
-    { label: tToefl("fieldPublicAdministration"), value: "Public Administration" },
+    {
+      label: tToefl("fieldPublicAdministration"),
+      value: "Public Administration",
+    },
     { label: tToefl("fieldRehabilitation"), value: "Rehabilitation" },
     { label: tToefl("fieldSciences"), value: "Sciences" },
-    { label: tToefl("fieldSocialSciencesHistory"), value: "Social Sciences/History" },
+    {
+      label: tToefl("fieldSocialSciencesHistory"),
+      value: "Social Sciences/History",
+    },
     { label: tToefl("fieldSocialWork"), value: "Social Work" },
-    { label: tToefl("fieldSportLeisure"), value: "Sport, Leisure & Recreation" },
+    {
+      label: tToefl("fieldSportLeisure"),
+      value: "Sport, Leisure & Recreation",
+    },
     { label: tToefl("fieldSurveying"), value: "Surveying" },
     { label: tToefl("fieldTechnology"), value: "Technology" },
     { label: tToefl("fieldTheologicalStudies"), value: "Theological Studies" },
     { label: tToefl("fieldTravelTourism"), value: "Travel and Tourism" },
-    { label: tToefl("fieldVeterinaryStudies"), value: "Veterinary Studies & Animal Care" },
-    { label: tToefl("fieldVisualPerformingArts"), value: "Visual and Performing Arts Care" },
-    { label: tToefl("fieldWelfareCommunity"), value: "Welfare & Community Services" },
+    {
+      label: tToefl("fieldVeterinaryStudies"),
+      value: "Veterinary Studies & Animal Care",
+    },
+    {
+      label: tToefl("fieldVisualPerformingArts"),
+      value: "Visual and Performing Arts Care",
+    },
+    {
+      label: tToefl("fieldWelfareCommunity"),
+      value: "Welfare & Community Services",
+    },
     { label: tToefl("fieldUndecided"), value: "Undecided" },
     { label: tToefl("fieldNotApplicable"), value: "Not applicable" },
     { label: tToefl("fieldOther"), value: "Other" },
   ];
 
   const REASONS_FOR_TAKING_TOEFL = [
-    { label: tToefl("reasonUndergraduate"), value: "To enter an undergraduate program" },
+    {
+      label: tToefl("reasonUndergraduate"),
+      value: "To enter an undergraduate program",
+    },
     { label: tToefl("reasonGraduate"), value: "To enter a graduate program" },
-    { label: tToefl("reasonPostgraduate"), value: "To enter a postgraduate program" },
-    { label: tToefl("reasonSecondarySchool"), value: "To enter a secondary school" },
-    { label: tToefl("reason2YearCollege"), value: "To enter a 2-year college/community college" },
+    {
+      label: tToefl("reasonPostgraduate"),
+      value: "To enter a postgraduate program",
+    },
+    {
+      label: tToefl("reasonSecondarySchool"),
+      value: "To enter a secondary school",
+    },
+    {
+      label: tToefl("reason2YearCollege"),
+      value: "To enter a 2-year college/community college",
+    },
     { label: tToefl("reasonEmployment"), value: "For employment / work" },
-    { label: tToefl("reasonImmigration"), value: "For immigration / settling in a country" },
-    { label: tToefl("reasonProfessionalRegistration"), value: "For professional registration or licensure" },
-    { label: tToefl("reasonScholarship"), value: "For scholarship or fellowship program" },
-    { label: tToefl("reasonPersonal"), value: "Personal reasons / self-evaluation" },
-    { label: tToefl("reasonOtherEducational"), value: "Other educational purposes" },
+    {
+      label: tToefl("reasonImmigration"),
+      value: "For immigration / settling in a country",
+    },
+    {
+      label: tToefl("reasonProfessionalRegistration"),
+      value: "For professional registration or licensure",
+    },
+    {
+      label: tToefl("reasonScholarship"),
+      value: "For scholarship or fellowship program",
+    },
+    {
+      label: tToefl("reasonPersonal"),
+      value: "Personal reasons / self-evaluation",
+    },
+    {
+      label: tToefl("reasonOtherEducational"),
+      value: "Other educational purposes",
+    },
   ];
-
 
   return (
     <form
@@ -159,9 +259,7 @@ export function RegistrationFormStep({
                 {...register("givenNames")}
               />
               <FieldError errors={[errors.givenNames]} />
-              <FieldDescription>
-                {t("nameMatchDesc")}
-              </FieldDescription>
+              <FieldDescription>{t("nameMatchDesc")}</FieldDescription>
             </FieldContent>
           </Field>
 
@@ -178,7 +276,9 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.surnames}>
-            <FieldLabel required={!formData.noSurname}>{t("surname")}</FieldLabel>
+            <FieldLabel required={!formData.noSurname}>
+              {t("surname")}
+            </FieldLabel>
             <FieldContent>
               <Input
                 placeholder={t("asPerPassport")}
@@ -311,7 +411,10 @@ export function RegistrationFormStep({
                   }
                   className="mt-0.5"
                 />
-                <Label htmlFor="smsConsent" className="text-xs font-light leading-normal whitespace-normal text-wrap block">
+                <Label
+                  htmlFor="smsConsent"
+                  className="text-xs font-light leading-normal whitespace-normal text-wrap block"
+                >
                   {tToefl("smsConsent")}
                 </Label>
               </FieldDescription>
@@ -355,9 +458,7 @@ export function RegistrationFormStep({
                 placeholder={t("searchCountry")}
                 value={formData.country}
                 aria-invalid={!!errors.country}
-                onChange={(country) =>
-                  setValue("country", country.name)
-                }
+                onChange={(country) => setValue("country", country.name)}
               />
               <FieldError errors={[errors.country]} />
             </FieldContent>
@@ -449,9 +550,7 @@ export function RegistrationFormStep({
               </RadioGroup>
               <FieldError errors={[errors.idType]} />
             </FieldContent>
-            <FieldDescription>
-              {t("sameIdOnExamDay")}
-            </FieldDescription>
+            <FieldDescription>{t("sameIdOnExamDay")}</FieldDescription>
           </Field>
 
           <Field data-invalid={!!errors.idNumber}>
@@ -464,7 +563,11 @@ export function RegistrationFormStep({
               <Input
                 {...register("idNumber")}
                 aria-invalid={!!errors.idNumber}
-                placeholder={formData.idType === "emirates_id" ? t("enterIdNumber") : t("enterPassportNumber")}
+                placeholder={
+                  formData.idType === "emirates_id"
+                    ? t("enterIdNumber")
+                    : t("enterPassportNumber")
+                }
               />
               <FieldError errors={[errors.idNumber]} />
             </FieldContent>
@@ -483,7 +586,11 @@ export function RegistrationFormStep({
                 onChange={(date) => setValue("idExpiryDate", date as Date)}
                 aria-invalid={!!errors.idExpiryDate}
                 disabled={(date) => date <= new Date()}
-                placeholder={formData.idType === "emirates_id" ? t("selectIdExpiryDate") : t("selectPassportExpiryDate")}
+                placeholder={
+                  formData.idType === "emirates_id"
+                    ? t("selectIdExpiryDate")
+                    : t("selectPassportExpiryDate")
+                }
               />
               <FieldError errors={[errors.idExpiryDate]} />
             </FieldContent>
@@ -503,9 +610,7 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.idDocument}>
-            <FieldLabel required>
-              {t("attachIdCopy")}
-            </FieldLabel>
+            <FieldLabel required>{t("attachIdCopy")}</FieldLabel>
             <FieldContent>
               <div className="flex flex-col gap-2">
                 {!formData.idDocument ? (
@@ -519,11 +624,11 @@ export function RegistrationFormStep({
                     }}
                   />
                 ) : (
-                  <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-200">
+                  <div className="flex flex-col items-center justify-between gap-3 p-3 rounded-xl border border-green-500/50 bg-green-100/30">
+                    <div className="size-9 rounded-full bg-emerald-100 border border-green-500/50 flex items-center justify-center text-emerald-600">
+                      <Save className="size-[17px]" />
+                    </div>{" "}
                     <div className="flex items-center gap-3">
-                      <div className="size-8 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-primary">
-                        <Save className="size-4" />
-                      </div>
                       <div className="flex flex-col">
                         <span className="text-xs font-bold text-slate-700 truncate max-w-50">
                           {(formData.idDocument as File).name}
@@ -536,16 +641,16 @@ export function RegistrationFormStep({
                           MB
                         </span>
                       </div>
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => setValue("idDocument", undefined)}
+                        className="size-8 p-0 rounded-full hover:bg-red-50 hover:text-red-600"
+                      >
+                        <span className="text-lg">×</span>
+                      </Button>
                     </div>
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => setValue("idDocument", undefined)}
-                      className="size-8 p-0 rounded-full hover:bg-red-50 hover:text-red-600"
-                    >
-                      <span className="text-lg">×</span>
-                    </Button>
                   </div>
                 )}
                 <p className="text-[12px] text-slate-900 font-medium">
@@ -568,13 +673,8 @@ export function RegistrationFormStep({
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8">
-          <Field
-            className="md:col-span-2"
-            data-invalid={!!errors.takenBefore}
-          >
-            <FieldLabel required>
-              {tToefl("takenBefore")}
-            </FieldLabel>
+          <Field className="md:col-span-2" data-invalid={!!errors.takenBefore}>
+            <FieldLabel required>{tToefl("takenBefore")}</FieldLabel>
             <FieldContent className="mt-2">
               <RadioGroup
                 name="takenBefore"
@@ -626,7 +726,11 @@ export function RegistrationFormStep({
                         className={`flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive ${formData.lessThanTwoYears === opt ? "border-[#A11D1D] bg-[#A11D1D]/5 ring-1 ring-[#A11D1D]" : ""}`}
                       >
                         <RadioGroupItem value={opt} id={`less-${opt}`} />
-                        {opt === "Yes" ? tYesNo("yes") : opt === "No" ? tYesNo("no") : tToefl("doNotKnow")}
+                        {opt === "Yes"
+                          ? tYesNo("yes")
+                          : opt === "No"
+                            ? tYesNo("no")
+                            : tToefl("doNotKnow")}
                       </Label>
                     ))}
                   </RadioGroup>
@@ -638,9 +742,7 @@ export function RegistrationFormStep({
                 className="md:col-span-2"
                 data-invalid={!!errors.existingAccount}
               >
-                <FieldLabel required>
-                  {tToefl("existingAccount")}
-                </FieldLabel>
+                <FieldLabel required>{tToefl("existingAccount")}</FieldLabel>
                 <FieldContent className="mt-2">
                   <RadioGroup
                     name="existingAccount"
@@ -657,7 +759,11 @@ export function RegistrationFormStep({
                           className={`flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive ${formData.existingAccount === opt ? "border-[#A11D1D] bg-[#A11D1D]/5 ring-1 ring-[#A11D1D]" : ""}`}
                         >
                           <RadioGroupItem value={opt} id={`acc-${opt}`} />
-                          {opt === "Yes" ? tYesNo("yes") : opt === "No" ? tYesNo("no") : tToefl("forgotAccountDetails")}
+                          {opt === "Yes"
+                            ? tYesNo("yes")
+                            : opt === "No"
+                              ? tYesNo("no")
+                              : tToefl("forgotAccountDetails")}
                         </Label>
                       ),
                     )}
@@ -687,7 +793,9 @@ export function RegistrationFormStep({
                   <Input
                     placeholder={tToefl("specifyLanguage")}
                     value={formData.firstLanguageOther ?? ""}
-                    onChange={(e) => setValue("firstLanguageOther", e.target.value)}
+                    onChange={(e) =>
+                      setValue("firstLanguageOther", e.target.value)
+                    }
                     className="border-primary/40 focus:border-primary"
                   />
                 </div>
@@ -697,9 +805,7 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.yearsStudyingEnglish}>
-            <FieldLabel required>
-              {tToefl("yearsStudyingEnglish")}
-            </FieldLabel>
+            <FieldLabel required>{tToefl("yearsStudyingEnglish")}</FieldLabel>
             <FieldContent>
               <SearchableDropdown
                 name="yearsStudyingEnglish"
@@ -729,11 +835,26 @@ export function RegistrationFormStep({
               <SearchableDropdown
                 name="nextLevelOfStudy"
                 options={[
-                  { label: tToefl("studyLevelSecondaryHighSchool"), value: "Secondary school (high school)" },
-                  { label: tToefl("studyLevel2YearCollege"), value: "2 year college/community college" },
-                  { label: tToefl("studyLevelUndergraduate"), value: "Undergraduate program" },
-                  { label: tToefl("studyLevelGraduate"), value: "Graduate/postgraduate program" },
-                  { label: tToefl("studyLevelNotApplicable"), value: "Not applicable" },
+                  {
+                    label: tToefl("studyLevelSecondaryHighSchool"),
+                    value: "Secondary school (high school)",
+                  },
+                  {
+                    label: tToefl("studyLevel2YearCollege"),
+                    value: "2 year college/community college",
+                  },
+                  {
+                    label: tToefl("studyLevelUndergraduate"),
+                    value: "Undergraduate program",
+                  },
+                  {
+                    label: tToefl("studyLevelGraduate"),
+                    value: "Graduate/postgraduate program",
+                  },
+                  {
+                    label: tToefl("studyLevelNotApplicable"),
+                    value: "Not applicable",
+                  },
                   { label: tToefl("studyLevelOther"), value: "Other" },
                 ]}
                 placeholder={tToefl("selectLevel")}
@@ -757,7 +878,9 @@ export function RegistrationFormStep({
                 value={formData.desiredFieldOfStudy}
                 aria-invalid={!!errors.desiredFieldOfStudy}
                 onChange={(val) => {
-                  setValue("desiredFieldOfStudy", val, { shouldValidate: true });
+                  setValue("desiredFieldOfStudy", val, {
+                    shouldValidate: true,
+                  });
                   if (val !== "Other") setValue("desiredFieldOfStudyOther", "");
                 }}
               />
@@ -766,7 +889,11 @@ export function RegistrationFormStep({
                   <Input
                     placeholder={tToefl("specifyFieldOfStudy")}
                     value={formData.desiredFieldOfStudyOther ?? ""}
-                    onChange={(e) => setValue("desiredFieldOfStudyOther", e.target.value, { shouldValidate: true })}
+                    onChange={(e) =>
+                      setValue("desiredFieldOfStudyOther", e.target.value, {
+                        shouldValidate: true,
+                      })
+                    }
                     className="border-primary/40 focus:border-primary"
                   />
                   <FieldError errors={[errors.desiredFieldOfStudyOther]} />
@@ -786,20 +913,25 @@ export function RegistrationFormStep({
                 value={formData.reasonsForTakingToefl}
                 aria-invalid={!!errors.reasonsForTakingToefl}
                 onChange={(val) => {
-                  setValue("reasonsForTakingToefl", val, { shouldValidate: true });
+                  setValue("reasonsForTakingToefl", val, {
+                    shouldValidate: true,
+                  });
                 }}
               />
               <FieldError errors={[errors.reasonsForTakingToefl]} />
             </FieldContent>
           </Field>
 
-
           <Field data-invalid={!!errors.intendedEnrollmentDate}>
             <FieldLabel required>{tToefl("intendedEnrollmentDate")}</FieldLabel>
             <FieldContent>
               <MonthYearPicker
                 value={formData.intendedEnrollmentDate}
-                onChange={(date) => setValue("intendedEnrollmentDate", date, { shouldValidate: true })}
+                onChange={(date) =>
+                  setValue("intendedEnrollmentDate", date, {
+                    shouldValidate: true,
+                  })
+                }
                 error={!!errors.intendedEnrollmentDate}
               />
               <FieldError errors={[errors.intendedEnrollmentDate]} />
@@ -810,9 +942,15 @@ export function RegistrationFormStep({
             <FieldContent>
               <MultiCountryDropdown
                 placeholder={tToefl("selectCountries")}
-                value={formData.destinationCountry ? formData.destinationCountry.split(", ") : []}
+                value={
+                  formData.destinationCountry
+                    ? formData.destinationCountry.split(", ")
+                    : []
+                }
                 onChange={(countries) =>
-                  setValue("destinationCountry", countries.join(", "), { shouldValidate: true })
+                  setValue("destinationCountry", countries.join(", "), {
+                    shouldValidate: true,
+                  })
                 }
               />
               <FieldError errors={[errors.destinationCountry]} />
@@ -854,10 +992,20 @@ export function RegistrationFormStep({
   );
 }
 
-function MonthYearPicker({ value, onChange, error }: { value?: Date; onChange: (date: Date) => void; error?: boolean }) {
+function MonthYearPicker({
+  value,
+  onChange,
+  error,
+}: {
+  value?: Date;
+  onChange: (date: Date) => void;
+  error?: boolean;
+}) {
   const tToefl = useTranslations("FormsShared.TOEFL");
   const [open, setOpen] = React.useState(false);
-  const [pickerYear, setPickerYear] = React.useState(value?.getFullYear() ?? new Date().getFullYear());
+  const [pickerYear, setPickerYear] = React.useState(
+    value?.getFullYear() ?? new Date().getFullYear(),
+  );
 
   const currentDate = new Date();
   const currentYear = currentDate.getFullYear();
@@ -867,25 +1015,33 @@ function MonthYearPicker({ value, onChange, error }: { value?: Date; onChange: (
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger render={
-        <Button
-          variant="ghost"
-          className={cn(
-            "w-full justify-start text-left font-normal rounded-md border border-slate-200 px-3 py-2 text-sm transition-all outline-none focus-visible:border-primary focus-visible:ring-3 focus-visible:ring-ring/30 shadow-none hover:shadow-none hover:bg-transparent aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20",
-            !value && "text-muted-foreground"
-          )}
-          aria-invalid={error}
-        >
-          <CalendarIcon className="mr-2 h-4 w-4 text-slate-400" />
-          {value ? format(value, "MMMM yyyy") : <span className="text-slate-400">{tToefl("selectMonthYear")}</span>}
-        </Button>
-      } />
+      <PopoverTrigger
+        render={
+          <Button
+            variant="ghost"
+            className={cn(
+              "w-full justify-start text-left font-normal rounded-md border border-slate-200 px-3 py-2 text-sm transition-all outline-none focus-visible:border-primary focus-visible:ring-3 focus-visible:ring-ring/30 shadow-none hover:shadow-none hover:bg-transparent aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20",
+              !value && "text-muted-foreground",
+            )}
+            aria-invalid={error}
+          >
+            <CalendarIcon className="mr-2 h-4 w-4 text-slate-400" />
+            {value ? (
+              format(value, "MMMM yyyy")
+            ) : (
+              <span className="text-slate-400">
+                {tToefl("selectMonthYear")}
+              </span>
+            )}
+          </Button>
+        }
+      />
       <PopoverContent className="w-64 p-3" align="start">
         <div className="flex items-center justify-between pt-1 pb-4">
           <Button
             variant="outline"
             className="h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100"
-            onClick={() => setPickerYear(y => y - 1)}
+            onClick={() => setPickerYear((y) => y - 1)}
             disabled={isPrevYearDisabled}
           >
             <ChevronLeftIcon className="h-4 w-4" />
@@ -894,7 +1050,7 @@ function MonthYearPicker({ value, onChange, error }: { value?: Date; onChange: (
           <Button
             variant="outline"
             className="h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100"
-            onClick={() => setPickerYear(y => y + 1)}
+            onClick={() => setPickerYear((y) => y + 1)}
           >
             <ChevronRightIcon className="h-4 w-4" />
           </Button>
@@ -902,8 +1058,11 @@ function MonthYearPicker({ value, onChange, error }: { value?: Date; onChange: (
         <div className="grid grid-cols-3 gap-2">
           {Array.from({ length: 12 }, (_, i) => {
             const date = new Date(pickerYear, i, 1);
-            const isSelected = value?.getMonth() === i && value?.getFullYear() === pickerYear;
-            const isMonthDisabled = pickerYear < currentYear || (pickerYear === currentYear && i < currentMonth);
+            const isSelected =
+              value?.getMonth() === i && value?.getFullYear() === pickerYear;
+            const isMonthDisabled =
+              pickerYear < currentYear ||
+              (pickerYear === currentYear && i < currentMonth);
 
             return (
               <Button

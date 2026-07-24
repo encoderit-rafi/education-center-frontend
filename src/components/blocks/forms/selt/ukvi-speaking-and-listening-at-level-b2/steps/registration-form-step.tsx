@@ -17,7 +17,7 @@ import {
   FieldContent,
   FieldDescription,
   FieldError,
-  FieldLabel
+  FieldLabel,
 } from "@/components/ui/field";
 import { SearchableDropdown } from "@/components/ui/searchable-dropdown";
 import { PriceDisplay } from "@/components/ui/price-display";
@@ -44,7 +44,8 @@ export function RegistrationFormStep({
   onBack,
   languages = [],
   coursesData = {},
-  workshopsData = {} }: RegistrationFormStepProps) {
+  workshopsData = {},
+}: RegistrationFormStepProps) {
   const t = useTranslations("FormsShared.FormFields");
   const tSelt = useTranslations("FormsShared.SELT");
   const tYesNo = useTranslations("FormsShared.GlobalReviewStep");
@@ -56,7 +57,8 @@ export function RegistrationFormStep({
     handleSubmit,
     setValue,
     watch,
-    formState: { errors } } = form;
+    formState: { errors },
+  } = form;
 
   const formData = watch();
 
@@ -78,9 +80,7 @@ export function RegistrationFormStep({
                 {...register("givenNames")}
               />
               <FieldError errors={[errors.givenNames]} />
-              <FieldDescription>
-                {t("nameMatchDesc")}
-              </FieldDescription>
+              <FieldDescription>{t("nameMatchDesc")}</FieldDescription>
             </FieldContent>
           </Field>
 
@@ -332,9 +332,7 @@ export function RegistrationFormStep({
               />
               <FieldError errors={[errors.idNumber]} />
             </FieldContent>
-            <FieldDescription>
-              {t("sameIdOnExamDay")}
-            </FieldDescription>
+            <FieldDescription>{t("sameIdOnExamDay")}</FieldDescription>
           </Field>
 
           <Field data-invalid={!!errors.idExpiryDate}>
@@ -387,9 +385,7 @@ export function RegistrationFormStep({
           </Field>
 
           <Field data-invalid={!!errors.idDocument}>
-            <FieldLabel required>
-              {t("attachIdCopy")}
-            </FieldLabel>
+            <FieldLabel required>{t("attachIdCopy")}</FieldLabel>
             <FieldContent>
               <div className="flex flex-col gap-2">
                 {!formData.idDocument ? (
@@ -403,11 +399,11 @@ export function RegistrationFormStep({
                     }}
                   />
                 ) : (
-                  <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-200">
+                  <div className="flex flex-col items-center justify-between gap-3 p-3 rounded-xl border border-green-500/50 bg-green-100/30">
+                    <div className="size-9 rounded-full bg-emerald-100 border border-green-500/50 flex items-center justify-center text-emerald-600">
+                      <Save className="size-[17px]" />
+                    </div>
                     <div className="flex items-center gap-3">
-                      <div className="size-8 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-primary">
-                        <Save className="size-4" />
-                      </div>
                       <div className="flex flex-col">
                         <span className="text-xs font-bold text-slate-700 truncate max-w-50">
                           {(formData.idDocument as File).name}
@@ -420,16 +416,16 @@ export function RegistrationFormStep({
                           MB
                         </span>
                       </div>
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => setValue("idDocument", undefined)}
+                        className="size-8 p-0 rounded-full hover:bg-red-50 hover:text-red-600"
+                      >
+                        <span className="text-lg">×</span>
+                      </Button>
                     </div>
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => setValue("idDocument", undefined)}
-                      className="size-8 p-0 rounded-full hover:bg-red-50 hover:text-red-600"
-                    >
-                      <span className="text-lg">×</span>
-                    </Button>
                   </div>
                 )}
                 <p className="text-[12px] text-slate-900 font-medium">
@@ -456,9 +452,7 @@ export function RegistrationFormStep({
             className="md:col-span-2 lg:col-span-3"
             data-invalid={!!errors.takenBefore}
           >
-            <FieldLabel required>
-              {tSelt("haveYouTakenBefore")}
-            </FieldLabel>
+            <FieldLabel required>{tSelt("haveYouTakenBefore")}</FieldLabel>
             <FieldContent className="mt-2">
               <RadioGroup
                 name="takenBefore"
@@ -510,7 +504,9 @@ export function RegistrationFormStep({
                         className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive"
                       >
                         <RadioGroupItem value={opt} id={`less-${opt}`} />
-                        {opt === "I do not know" ? tYesNo("iDoNotKnow") : tYesNo(opt.toLowerCase())}
+                        {opt === "I do not know"
+                          ? tYesNo("iDoNotKnow")
+                          : tYesNo(opt.toLowerCase())}
                       </Label>
                     ))}
                   </RadioGroup>
@@ -522,9 +518,7 @@ export function RegistrationFormStep({
                 className="md:col-span-2 lg:col-span-3"
                 data-invalid={!!errors.existingAccount}
               >
-                <FieldLabel required>
-                  {tSelt("existingAccount")}
-                </FieldLabel>
+                <FieldLabel required>{tSelt("existingAccount")}</FieldLabel>
                 <FieldContent className="mt-2">
                   <RadioGroup
                     name="existingAccount"
@@ -532,17 +526,21 @@ export function RegistrationFormStep({
                     value={formData.existingAccount}
                     className="flex flex-col gap-3"
                   >
-                    {["Yes", "No", "I forgot my SELT account details"].map((opt) => (
-                      <Label
-                        key={opt}
-                        htmlFor={`acc-${opt}`}
-                        data-invalid={!!errors.existingAccount}
-                        className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive"
-                      >
-                        <RadioGroupItem value={opt} id={`acc-${opt}`} />
-                        {opt === "I forgot my SELT account details" ? tSelt("forgotAccount") : tYesNo(opt.toLowerCase())}
-                      </Label>
-                    ))}
+                    {["Yes", "No", "I forgot my SELT account details"].map(
+                      (opt) => (
+                        <Label
+                          key={opt}
+                          htmlFor={`acc-${opt}`}
+                          data-invalid={!!errors.existingAccount}
+                          className="flex items-center space-x-3 p-3 rounded-xl border border-slate-100 hover:border-slate-200 transition-all bg-white font-medium cursor-pointer data-[invalid=true]:border-destructive"
+                        >
+                          <RadioGroupItem value={opt} id={`acc-${opt}`} />
+                          {opt === "I forgot my SELT account details"
+                            ? tSelt("forgotAccount")
+                            : tYesNo(opt.toLowerCase())}
+                        </Label>
+                      ),
+                    )}
                   </RadioGroup>
                   <FieldError errors={[errors.existingAccount]} />
                 </FieldContent>
@@ -550,7 +548,10 @@ export function RegistrationFormStep({
             </>
           )}
 
-          <Field className="md:col-span-2 lg:col-span-3" data-invalid={!!errors.reasonForTest}>
+          <Field
+            className="md:col-span-2 lg:col-span-3"
+            data-invalid={!!errors.reasonForTest}
+          >
             <FieldLabel required>{tSelt("reasonForSeltTest")}</FieldLabel>
             <FieldContent className="mt-2">
               <RadioGroup
@@ -563,7 +564,11 @@ export function RegistrationFormStep({
                 className="flex flex-col gap-3"
               >
                 {[
-                  { id: "ukvi", label: tSelt("ukvi"), description: tSelt("ukviDescription") },
+                  {
+                    id: "ukvi",
+                    label: tSelt("ukvi"),
+                    description: tSelt("ukviDescription"),
+                  },
                   { id: "other", label: tSelt("other"), description: "" },
                 ].map((opt) => (
                   <div key={opt.id} className="flex flex-col gap-2">
@@ -575,21 +580,26 @@ export function RegistrationFormStep({
                       <div className="flex flex-col">
                         <span>{opt.label}</span>
                         {opt.description && (
-                          <span className="text-xs text-slate-500 font-light">{opt.description}</span>
+                          <span className="text-xs text-slate-500 font-light">
+                            {opt.description}
+                          </span>
                         )}
                       </div>
                     </Label>
-                    {opt.id === "other" && formData.reasonForTest === "other" && (
-                      <div className="pl-6 animate-in fade-in slide-in-from-top-2 duration-300">
-                        <textarea
-                          placeholder={tSelt("otherReason")}
-                          value={formData.reasonForTestOther ?? ""}
-                          onChange={(e) => setValue("reasonForTestOther", e.target.value)}
-                          className="w-full min-h-20 p-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary text-sm font-light"
-                        />
-                        <FieldError errors={[errors.reasonForTestOther]} />
-                      </div>
-                    )}
+                    {opt.id === "other" &&
+                      formData.reasonForTest === "other" && (
+                        <div className="pl-6 animate-in fade-in slide-in-from-top-2 duration-300">
+                          <textarea
+                            placeholder={tSelt("otherReason")}
+                            value={formData.reasonForTestOther ?? ""}
+                            onChange={(e) =>
+                              setValue("reasonForTestOther", e.target.value)
+                            }
+                            className="w-full min-h-20 p-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary text-sm font-light"
+                          />
+                          <FieldError errors={[errors.reasonForTestOther]} />
+                        </div>
+                      )}
                   </div>
                 ))}
               </RadioGroup>
@@ -611,8 +621,6 @@ export function RegistrationFormStep({
         workshopError={!!errors.selectedWorkshop}
         description={tAddon("saveUpTo")}
       />
-
-
 
       {/* Marketing Preferences */}
       <MarketingPreferencesSection
