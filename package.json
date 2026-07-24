@@ -35,7 +35,7 @@
     "react-google-recaptcha": "^3.1.0",
     "react-hook-form": "^7.72.1",
     "react-phone-number-input": "^3.4.16",
-    "shadcn": "^4.2.0",
+    "shadcn": "^3.8.3",
     "sonner": "^2.0.7",
     "stripe": "^22.0.2",
     "tailwind-merge": "^3.5.0",

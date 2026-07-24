@@ -37,6 +37,7 @@ import Image from "next/image";
 const baseBookingSchema = z.object({
   mockTestId: z.string().min(1, "Please select a mock test"),
   varient: z.string().optional(),
+  testLocation: z.string().optional(),
   firstName: z
     .string()
     .trim()
@@ -125,7 +126,8 @@ function PaidMockTestRegistrationForm({
     resolver: zodResolver(schema),
     defaultValues: {
       mockTestId: id || "",
-      varient: "",
+      varient: searchParams.get("variant") || "",
+      testLocation: searchParams.get("location") || "home",
       paymentMethod: "stripe",
       firstName: "",
       lastName: "",
@@ -137,28 +139,34 @@ function PaidMockTestRegistrationForm({
     },
   });
 
-  // Pre-fill variant from URL query param
+  // Pre-fill variant & location from URL query params
   useEffect(() => {
     const variantFromUrl = searchParams.get("variant");
     if (variantFromUrl) {
       setValue("varient", variantFromUrl, { shouldValidate: false });
+    }
+    const locationFromUrl = searchParams.get("location");
+    if (locationFromUrl) {
+      setValue("testLocation", locationFromUrl, { shouldValidate: false });
     }
   }, [searchParams, setValue]);
 
   const selectedPaymentMethod = watch("paymentMethod");
   const formData = watch();
 
-  const locationParam = searchParams.get("location") || "home";
+  const activeLocation = formData.testLocation || searchParams.get("location") || "home";
   const priceParam = searchParams.get("price");
-  const variantParam = searchParams.get("variant") || "";
+  const variantParam = formData.varient || searchParams.get("variant") || "";
   const rawCenterPrice = data?.details?.center_price ?? data?.center_price;
 
   const parsedPriceParam = priceParam ? parseFloat(priceParam) : 0;
   const defaultHomePrice = data?.price && parseFloat(data.price) > 0 ? parseFloat(data.price) : 350;
   const defaultCenterPrice = rawCenterPrice && parseFloat(String(rawCenterPrice)) > 0 ? parseFloat(String(rawCenterPrice)) : 450;
-  const defaultPrice = locationParam === "center" ? defaultCenterPrice : defaultHomePrice;
+  const defaultPrice = activeLocation === "center" ? defaultCenterPrice : defaultHomePrice;
 
-  const base_price = parsedPriceParam > 0 ? parsedPriceParam : defaultPrice;
+  const base_price = (parsedPriceParam > 0 && activeLocation === (searchParams.get("location") || "home"))
+    ? parsedPriceParam
+    : defaultPrice;
   const selectedCountry = formData.country;
   const isUae =
     selectedCountry?.toLowerCase() === "united arab emirates" ||
@@ -171,23 +179,23 @@ function PaidMockTestRegistrationForm({
     ? data.slug.replace(/-\d+$/, "").toLowerCase().includes("ielts")
       ? "ielts"
       : data.slug.replace(/-\d+$/, "").toLowerCase().includes("pte")
-      ? "pte"
-      : null
+        ? "pte"
+        : null
     : null;
 
   const examTypesLabel =
     examKey === "ielts"
       ? t("ieltsType")
       : examKey === "pte"
-      ? t("pteType")
-      : t("examTypes");
+        ? t("pteType")
+        : t("examTypes");
 
   const examTypeLabel =
     examKey === "ielts"
       ? t("ieltsType")
       : examKey === "pte"
-      ? t("pteType")
-      : t("examType");
+        ? t("pteType")
+        : t("examType");
 
   const paymentMutation = useMutation({
     mutationFn: (body: Record<string, unknown>) =>
@@ -228,10 +236,15 @@ function PaidMockTestRegistrationForm({
   });
 
   const onSubmit = (formData: BookingValues) => {
+    const selectedLocation = formData.testLocation || activeLocation;
+    const siteLocation = selectedLocation === "center" ? "center-based" : "home-based";
+    const mockTestType = formData.varient || variantParam || "";
+
     const payload = {
       mock_test_id: data?.id || id || formData.mockTestId || "",
-      varient: formData.varient || "",
-      mock_test_type_name: formData.varient || "",
+      variant: siteLocation,
+      mock_test_type_name: mockTestType,
+      mock_test_type: mockTestType,
       first_name: formData.firstName,
       last_name: formData.lastName,
       email: formData.email,
@@ -242,9 +255,11 @@ function PaidMockTestRegistrationForm({
       total_amount: PRICE,
       vat_amount: vatAmount,
       price: base_price,
-      location: locationParam,
       payment_methods: formData.paymentMethod,
     };
+
+    console.log("👉 [Mock Test Registration] Form Raw Data:", formData);
+    console.log("👉 [Mock Test Registration] Final Payload Sent to API:", payload);
 
     mutation.mutate(omitEmpty(payload));
   };
@@ -338,6 +353,7 @@ function PaidMockTestRegistrationForm({
                       <FieldLabel required>{examTypesLabel}</FieldLabel>
                       <FieldContent>
                         <Select
+                          value={formData.varient || undefined}
                           onValueChange={(val: string | null) => {
                             if (val) setValue("varient", val, { shouldValidate: true });
                           }}
@@ -463,7 +479,7 @@ function PaidMockTestRegistrationForm({
                       <div>
                         <p className="text-xs text-slate-400">{t("location")}</p>
                         <p className="font-semibold text-slate-700 capitalize">
-                          {locationParam === "center" ? t("testCenter") : t("homeOnline")}
+                          {activeLocation === "center" ? t("testCenter") : t("homeOnline")}
                         </p>
                       </div>
 
