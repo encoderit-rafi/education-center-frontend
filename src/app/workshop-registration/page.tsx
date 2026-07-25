@@ -276,7 +276,7 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
     <div className="bg-white">
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-slate-50 base-px base-py">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <h1 className="text-3xl text-center font-black leading-[1.1] tracking-tight text-slate-900 lg:text-4xl xl:text-5xl mb-4">
             <span className="text-primary">{t("title")}</span>
           </h1>

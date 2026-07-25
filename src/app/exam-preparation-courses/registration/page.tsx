@@ -356,7 +356,7 @@ function CourseRegistrationForm({ className }: { className?: string }) {
     <div className="bg-white">
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-slate-50 base-px base-py">
-        <div className="mx-auto max-w-4xl">
+        <div className="mx-auto max-w-5xl">
           <h1 className="text-3xl mb-12 text-center font-black leading-[1.1] tracking-tight text-slate-900 lg:text-4xl xl:text-5xl">
             {t.rich("title", {
               courseName: courseName,
