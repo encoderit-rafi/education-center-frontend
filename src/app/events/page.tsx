@@ -110,6 +110,7 @@ function EventRegistrationForm({ event, onSuccess }: EventRegistrationFormProps)
         onSuccess: () => {
             toast.success("Successfully registered for the event!", { id: "event-submit" });
             setIsSubmitted(true);
+            form.reset();
             resetCaptcha();
             if (onSuccess) onSuccess();
         },
@@ -140,9 +141,7 @@ function EventRegistrationForm({ event, onSuccess }: EventRegistrationFormProps)
             email: data.email,
             phone: data.mobile,
             country: data.country,
-            city: data.city,
-            price: 0,
-            total_amount: 0,
+            address: data.city,
             payment_methods: "stripe",
             ...(recaptchaToken ? { recaptcha_token: recaptchaToken } : {}),
         });

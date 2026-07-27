@@ -34,6 +34,7 @@ import { FormRecaptcha, useRecaptcha } from "@/components/ui/form-recaptcha";
 type ContactFormValues = {
   firstName: string;
   lastName: string;
+  organization?: string;
   email: string;
   mobile: string;
   city: string;
@@ -87,6 +88,7 @@ export default function ContactForm() {
       .trim()
       .min(1, { message: tForm("validation.lastNameRequired") })
       .min(2, { message: tForm("validation.lastNameMin") }),
+    organization: z.string().trim().optional(),
     email: z
       .string()
       .trim()
@@ -126,6 +128,7 @@ export default function ContactForm() {
     defaultValues: {
       firstName: "",
       lastName: "",
+      organization: "",
       email: "",
       mobile: "",
       city: "",
@@ -145,6 +148,7 @@ export default function ContactForm() {
       const payload = {
         first_name: data.firstName,
         last_name: data.lastName,
+        organization: data.organization || "",
         email: data.email,
         phone: data.mobile,
         address: data.city,
@@ -221,6 +225,21 @@ export default function ContactForm() {
           )}
         </Field>
       </div>
+
+      <div className="w-full bg-slate-100/80 my-4" />
+
+      <Field data-invalid={!!errors.organization}>
+        <FieldLabel>{tForm("organization")}</FieldLabel>
+        <FieldContent>
+          <Input
+            placeholder={tForm("organizationPlaceholder")}
+            {...register("organization")}
+          />
+        </FieldContent>
+        {errors.organization && (
+          <FieldError>{errors.organization.message}</FieldError>
+        )}
+      </Field>
 
       <div className="w-full bg-slate-100/80 my-4" />
 

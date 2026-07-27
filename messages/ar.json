@@ -291,6 +291,8 @@
         "firstNamePlaceholder": "أحمد",
         "lastName": "اسم العائلة",
         "lastNamePlaceholder": "علي",
+        "organization": "المؤسسة / الشركة",
+        "organizationPlaceholder": "اسم الشركة أو المؤسسة (اختياري)",
         "email": "البريد الإلكتروني",
         "emailPlaceholder": "ahmad@example.com",
         "mobile": "رقم الهاتف",

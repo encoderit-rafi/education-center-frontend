@@ -291,6 +291,8 @@
         "firstNamePlaceholder": "John",
         "lastName": "Last Name",
         "lastNamePlaceholder": "Doe",
+        "organization": "Organization",
+        "organizationPlaceholder": "Company or Institution Name (Optional)",
         "email": "Email Address",
         "emailPlaceholder": "john@example.com",
         "mobile": "Phone Number",
