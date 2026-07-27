@@ -291,9 +291,32 @@ export default function EventsPage() {
         }
     });
 
-    const events = eventsResponse?.data?.data || [];
+    const rawEvents = eventsResponse?.data?.data || eventsResponse?.data || [];
+    const events = rawEvents.map((e: any) => {
+        const eTrans = e?.translations?.[locale];
+        return {
+            ...e,
+            title: eTrans?.title || e.title,
+            description: eTrans?.description || e.description,
+            location: eTrans?.location || e.location,
+        };
+    });
+
     const activeEvent = events.find((e: any) => e.id === selectedEventId) || events[0] || null;
     const [heroImageError, setHeroImageError] = useState(false);
+
+    const getLocalizedEventType = (type: string) => {
+        if (!type) return "";
+        if (locale !== "ar") return type;
+        const typeMap: Record<string, string> = {
+            WEBINAR: "ندوة عبر الإنترنت",
+            WORKSHOP: "ورشة عمل",
+            SEMINAR: "ندوة",
+            INFO_SESSION: "جلسة تعريفية",
+            CONFERENCE: "مؤتمر",
+        };
+        return typeMap[type?.toUpperCase()] || type;
+    };
 
     React.useEffect(() => {
         setHeroImageError(false);
@@ -435,7 +458,7 @@ export default function EventsPage() {
                                 {/* Badges */}
                                 <div className="absolute top-5 left-5 flex flex-wrap gap-2 z-10">
                                     <span className="bg-[#A11D1D] text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest shadow">
-                                        {activeEvent.eventType}
+                                        {getLocalizedEventType(activeEvent.eventType)}
                                     </span>
                                 </div>
 
@@ -540,7 +563,7 @@ export default function EventsPage() {
                                                 "px-2.5 py-0.5 text-[9px] font-black tracking-wider uppercase rounded-full text-white shadow-sm",
                                                 event.eventType === "WORKSHOP" ? "bg-[#A11D1D]" : "bg-blue-600"
                                             )}>
-                                                {event.eventType}
+                                                {getLocalizedEventType(event.eventType)}
                                             </span>
                                         </div>
                                     </div>

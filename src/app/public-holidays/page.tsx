@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import api from "@/axios";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 // ────────────────────────────────────────────────────────────────
 // Types
@@ -17,12 +17,13 @@ import { useTranslations } from "next-intl";
 interface Holiday {
   id: string;
   title: string;
-  description: string;
+  description: string | null;
   holidayType: "RELIGIOUS" | "NATIONAL" | "PUBLIC" | string;
   startDate: string;
   endDate: string;
   isRecurring: boolean;
-  country: string;
+  country: string | null;
+  translations?: Record<string, { title?: string; description?: string }>;
   isActive: boolean;
 }
 
@@ -43,10 +44,11 @@ const MONTH_NAMES = [
   "Jul","Aug","Sep","Oct","Nov","Dec",
 ];
 
-function formatDay(dateStr: string) {
+function formatDay(dateStr: string, locale: string = "en") {
   const d = new Date(dateStr);
+  const monthName = d.toLocaleDateString(locale === "ar" ? "ar-EG" : "en-US", { month: "short" });
   return {
-    month: MONTH_NAMES[d.getMonth()],
+    month: monthName,
     day: String(d.getDate()).padStart(2, "0"),
     monthIndex: d.getMonth(),
   };
@@ -57,6 +59,7 @@ function formatDay(dateStr: string) {
 // ────────────────────────────────────────────────────────────────
 export default function PublicHolidaysPage() {
   const t = useTranslations("PublicHolidaysPage");
+  const locale = useLocale();
   const currentYear = new Date().getFullYear();
   const currentMonth = new Date().getMonth(); // 0-indexed
 
@@ -69,12 +72,22 @@ export default function PublicHolidaysPage() {
     api
       .get(`/holidays?year=${currentYear}`)
       .then((res) => {
-        const data: Holiday[] = res.data?.data?.data ?? [];
-        setHolidays(data.filter((h) => h.isActive));
+        const rawData: any[] = res.data?.data?.data ?? res.data?.data ?? [];
+        const mapped = rawData
+          .filter((h) => h.isActive)
+          .map((h) => {
+            const hTrans = h?.translations?.[locale];
+            return {
+              ...h,
+              title: hTrans?.title || h.title,
+              description: hTrans?.description || h.description || "",
+            };
+          });
+        setHolidays(mapped);
       })
       .catch(() => setError(t("errorDefault")))
       .finally(() => setLoading(false));
-  }, [currentYear]);
+  }, [currentYear, locale]);
 
   // All holiday start-dates as Date objects for calendar highlighting
   const holidayDates = holidays.map((h) => new Date(h.startDate));
@@ -142,7 +155,7 @@ export default function PublicHolidaysPage() {
                     </div>
                   ) : (
                     thisMonthHolidays.map((h) => {
-                      const { month, day } = formatDay(h.startDate);
+                      const { month, day } = formatDay(h.startDate, locale);
                       const isNational = h.holidayType === "NATIONAL";
                       return (
                         <div key={h.id} className="flex gap-5 items-center">
@@ -223,8 +236,8 @@ export default function PublicHolidaysPage() {
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {holidays.map((holiday) => {
-                    const { month, day } = formatDay(holiday.startDate);
-                    const endFormatted = formatDay(holiday.endDate);
+                    const { month, day } = formatDay(holiday.startDate, locale);
+                    const endFormatted = formatDay(holiday.endDate, locale);
                     const isSameDay =
                       holiday.startDate.slice(0, 10) ===
                       holiday.endDate.slice(0, 10);
