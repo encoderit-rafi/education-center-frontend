@@ -38,7 +38,7 @@ export default function WhoWeAre() {
             <div className="absolute -inset-4 bg-primary/5 rounded-xl blur-3xl opacity-50 transition-opacity group-hover:opacity-100"></div>
             <div className="relative aspect-4/3 rounded-2xl overflow-hidden shadow-md border border-slate-100 bg-white p-2">
               <Image
-                src="/images/about-us/business-meeting-office.jpg"
+                src="/images/about-us/who-we-are-1.jpg"
                 alt="TEPTH Strategic Collaboration"
                 fill
                 className="object-cover rounded-xl"
@@ -57,7 +57,7 @@ export default function WhoWeAre() {
               {t("NarrativeSection.title")}{t("NarrativeSection.titleAccent")}
             </h2>
             <div className="h-1 w-16 bg-[#A11D1D] rounded-full" />
-            <p 
+            <p
               className="text-slate-650 text-base leading-relaxed text-justify font-medium"
               dangerouslySetInnerHTML={{ __html: t.raw("NarrativeSection.p1") }}
             />
@@ -92,7 +92,7 @@ export default function WhoWeAre() {
           <div className="lg:col-span-6">
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
               {exams.map((exam, idx) => (
-                <div 
+                <div
                   key={idx}
                   className="rounded-2xl border border-slate-100 bg-slate-50/50 p-4 hover:bg-white hover:border-slate-200 hover:shadow-sm transition-all duration-300 flex items-center gap-3 group"
                 >
@@ -113,7 +113,7 @@ export default function WhoWeAre() {
       <section className="py-8 px-6 md:px-8 max-w-screen-2xl mx-auto">
         <div className="relative bg-slate-50/50 border border-slate-100 rounded-3xl p-8 lg:p-12 overflow-hidden hover:bg-white hover:border-slate-200 hover:shadow-md transition-all duration-300">
           <div className="absolute top-0 right-0 w-75 h-75 bg-red-500/5 rounded-full blur-[100px] pointer-events-none" />
-          
+
           <div className="relative z-10 max-w-4xl mx-auto space-y-6">
             <span className="text-[#A11D1D] font-extrabold uppercase tracking-[0.25em] text-xs">
               {t("NarrativeSection.visionBadge")}
