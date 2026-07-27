@@ -96,8 +96,19 @@ export const translateLabel = (label: string, locale: string) => {
 };
 
 export const translateValue = (val: string, locale: string) => {
-  if (locale !== "ar") return val;
   let cleanVal = val.trim();
+  const lower = cleanVal.toLowerCase();
+
+  if (locale !== "ar") {
+    if (lower === "emirates_id" || lower === "emirates id" || lower === "emirates") return "Emirates ID";
+    if (lower === "passport") return "Passport";
+    if (lower === "visa") return "Visa";
+    if (lower === "national_id" || lower === "national id") return "National ID";
+    if (lower === "male") return "Male";
+    if (lower === "female") return "Female";
+    if (lower === "other" || lower === "others") return "Other";
+    return val;
+  }
 
   // Handle Course & Workshop Names
   const courseWorkshopMapping: Record<string, string> = {
@@ -239,8 +250,6 @@ export const translateValue = (val: string, locale: string) => {
   if (cleanVal.includes("Evening Session")) {
     cleanVal = cleanVal.replace("Evening Session", "الجلسة المسائية المتأخرة");
   }
-
-  const lower = cleanVal.toLowerCase();
 
   // Handle genders
   if (lower === "male") return "ذكر";

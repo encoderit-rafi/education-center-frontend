@@ -11,7 +11,7 @@ import {
 import { UseFormReturn } from "react-hook-form";
 import { TToeflIbtSchema } from "../_type/toefl-ibt";
 import { GlobalReviewStep } from "@/components/blocks/forms/global-review-step";
-import { getEducationLevelLabel } from "@/lib/utils";
+import { getEducationLevelLabel, getIdTypeLabel } from "@/lib/utils";
 
 interface ReviewStepProps {
     data: TToeflIbtSchema;
@@ -140,7 +140,7 @@ export function ReviewStep({
                                 {tFields("identificationType")}
                             </span>
                             <span className="text-sm font-bold text-slate-900 capitalize">
-                                {data.idType?.replace("_", " ")}
+                                {getIdTypeLabel(data.idType)}
                             </span>
                         </div>
                         <div className="flex flex-col">

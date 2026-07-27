@@ -79,6 +79,8 @@ export default function FormTOEFLIBTRegistration({
     return {
       id: pkg.id,
       name: pkg.name,
+      title: pkg.title,
+      translations: pkg.translations,
       price: basePrice,
       discounted_price: discountedPrice,
       currency: "AED",
@@ -96,6 +98,9 @@ export default function FormTOEFLIBTRegistration({
     acc[w.id] = {
       id: w.id,
       name: w.name,
+      title: w.title,
+      subTitle: w.subTitle,
+      translations: w.translations,
       duration: w.duration,
       price: discountedPrice,
       currency: "AED",

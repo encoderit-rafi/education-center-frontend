@@ -11,7 +11,7 @@ import {
 import { UseFormReturn } from "react-hook-form";
 import { TIeltsGeneralSchema } from "../_type";
 import { GlobalReviewStep } from "@/components/blocks/forms/global-review-step";
-import { getEducationLevelLabel } from "@/lib/utils";
+import { getEducationLevelLabel, getIdTypeLabel } from "@/lib/utils";
 
 interface ReviewStepProps {
   data: TIeltsGeneralSchema;
@@ -169,7 +169,7 @@ export function ReviewStep({
                   {tFields("identificationType")}
                 </span>
                 <span className="text-sm font-semibold text-black capitalize">
-                  {data.idType?.replace("_", " ")}
+                  {getIdTypeLabel(data.idType)}
                 </span>
               </div>
               <div className="flex flex-col">

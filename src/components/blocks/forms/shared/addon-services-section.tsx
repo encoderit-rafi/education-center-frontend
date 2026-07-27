@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { BookOpen } from "lucide-react";
 import { Field, FieldContent, FieldLabel } from "@/components/ui/field";
 import { SearchableDropdown } from "@/components/ui/searchable-dropdown";
@@ -18,6 +18,48 @@ export interface AddonServicesSectionProps {
   courseError?: boolean;
   workshopError?: boolean;
   description?: string;
+}
+
+const courseWorkshopMapping: Record<string, string> = {
+  "Group Course": "دورة جماعية",
+  "Semi-private Course": "دورة شبه خاصة",
+  "Semi-Private Course": "دورة شبه خاصة",
+  "In-person One-to-one": "دورة حضورية شخص لشخص",
+  "In-Person One-to-One Course": "دورة فردية حضورية",
+  "Online One-to-one": "دورة عبر الإنترنت شخص لشخص",
+  "Online One-to-One Course": "دورة فردية عبر الإنترنت",
+  "Hybrid One-to-one": "دورة هجينة شخص لشخص",
+  "Hybrid One-to-One Course": "دورة فردية هجينة",
+  "2-Hour Workshop": "ورشة عمل مركزة لمدة ساعتين",
+  "2-Hour Targeted Workshop": "ورشة عمل مركزة لمدة ساعتين",
+  "4-Hour Focus Workshop": "ورشة عمل مركزة لمدة 4 ساعات",
+  "6-Hour IELTS Workshop": "ورشة IELTS لمدة 6 ساعات",
+  "6-Hour Intensive Workshop": "ورشة عمل مكثفة لمدة 6 ساعات",
+  "8-Hour Complete Exam Workshop": "ورشة عمل شاملة لمدة 8 ساعات",
+};
+
+export function getLocalizedCourseName(c: any, locale: string): string {
+  if (!c) return "";
+  if (locale === "ar") {
+    const cTrans = c.translations?.ar || c.translations?.[locale];
+    const translated = cTrans?.name || cTrans?.title;
+    if (translated) return translated;
+    if (c.name && courseWorkshopMapping[c.name]) return courseWorkshopMapping[c.name];
+    if (c.title && courseWorkshopMapping[c.title]) return courseWorkshopMapping[c.title];
+  }
+  return c.name || c.title || "";
+}
+
+export function getLocalizedWorkshopLabel(w: any, locale: string): string {
+  if (!w) return "";
+  if (locale === "ar") {
+    const wTrans = w.translations?.ar || w.translations?.[locale];
+    const translated = wTrans?.title || wTrans?.name || wTrans?.sub_title;
+    if (translated) return translated;
+    if (w.name && courseWorkshopMapping[w.name]) return courseWorkshopMapping[w.name];
+    if (w.title && courseWorkshopMapping[w.title]) return courseWorkshopMapping[w.title];
+  }
+  return w.name || w.title || "";
 }
 
 function getDisplayDiscount(courseName: string, actualDiscount: number): number {
@@ -42,6 +84,7 @@ export function AddonServicesSection({
   description,
 }: AddonServicesSectionProps) {
   const t = useTranslations("FormsShared.AddonServices");
+  const locale = useLocale();
   const resolvedDescription = description ?? t("saveUpTo");
   const getCourseEffectivePrice = (c: any) => {
     if (c.discounted_price != null) return c.discounted_price;
@@ -79,7 +122,7 @@ export function AddonServicesSection({
               options={[
                 { label: t("none"), value: "" },
                 ...sortedCourses.map((c: any) => ({
-                  label: c.name,
+                  label: getLocalizedCourseName(c, locale),
                   description: c.discounted_price != null ? (
                     <span className="flex flex-col gap-1.5 mt-1">
                       <span className="inline-flex items-center gap-1">
@@ -90,7 +133,7 @@ export function AddonServicesSection({
                           className="text-primary font-semibold"
                         />
                         <span className="text-primary font-semibold">
-                          ({getDisplayDiscount(c.name, Math.round((1 - c.discounted_price / c.price) * 100))}% OFF)
+                          ({getDisplayDiscount(c.name || c.title || "", Math.round((1 - c.discounted_price / c.price) * 100))}% OFF)
                         </span>
                         <PriceDisplay
                           amount={c.price}
@@ -115,7 +158,7 @@ export function AddonServicesSection({
                           className="text-primary font-semibold"
                         />
                         <span className="text-primary font-semibold">
-                          ({getDisplayDiscount(c.name, c.special_discount)}% OFF)
+                          ({getDisplayDiscount(c.name || c.title || "", c.special_discount)}% OFF)
                         </span>
                         <PriceDisplay
                           amount={c.price}
@@ -156,7 +199,7 @@ export function AddonServicesSection({
               options={[
                 { label: t("none"), value: "" },
                 ...sortedWorkshops.map((w: any) => ({
-                  label: w.name,
+                  label: getLocalizedWorkshopLabel(w, locale),
                   description: w.duration ? (
                     <span className="items-center gap-1">
                       <PriceDisplay

@@ -1,5 +1,6 @@
 import { format } from "date-fns";
 import { EXAM_DETAILE_DATA } from "@/data";
+import { getIdTypeLabel } from "@/lib/utils";
 
 export interface BookingPayloadInput {
   userId?: string | null;
@@ -371,6 +372,13 @@ export function compileBookingPayload(input: BookingPayloadInput) {
           if (reasonMap[valueStr]) {
             mappedValue = reasonMap[valueStr];
           }
+        } else if (key === "idType" || key === "id_type") {
+          mappedValue = getIdTypeLabel(valueStr);
+        } else if (key === "gender" || key === "sex") {
+          const lowerVal = valueStr.toLowerCase();
+          if (lowerVal === "male") mappedValue = "Male";
+          else if (lowerVal === "female") mappedValue = "Female";
+          else if (lowerVal === "other") mappedValue = "Other";
         }
 
         examInfoList.push({
