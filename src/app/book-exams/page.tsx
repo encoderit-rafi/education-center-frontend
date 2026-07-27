@@ -48,7 +48,6 @@ const examPriority = (slug: string) => {
   if (s.startsWith("toefl")) return 3;
   if (s.startsWith("cael")) return 4;
   if (s.startsWith("celpip")) return 5;
-  if (s.startsWith("selt") || s.includes("english") || s.includes("skill")) return 6;
   return 10;
 };
 
@@ -57,24 +56,9 @@ const formatExamName = (name: string) => {
   return name;
 };
 
-const EXAM_ARABIC_NAMES: Record<string, string> = {
-  ielts: "آيلتس",
-  pte: "بي تي إي",
-  toefl: "توفل آي بي تي",
-  "toefl-ibt": "توفل آي بي تي",
-  cael: "كايل",
-  "celpip-general": "سيلبيب العام",
-  celpip: "سيلبيب العام",
-  "skill-for-english-selt": "سكيلز فور إنجلش (سيلت)",
-  "skills-for-english-selt": "سكيلز فور إنجلش (سيلت)",
-  oet: "أو إي تي",
-  gre: "جي آر إي",
-};
-
 export default function BookExamPage() {
   const t = useTranslations("BookExamsPage");
   const locale = useLocale();
-  const isRtl = locale === "ar";
   const { data: examsResponse, isLoading } = useQuery<ApiResponse>({
     queryKey: ["exams", { limit: 100, sort_order: "asc", sort_by: "orderIndex" }],
     queryFn: async () => {
@@ -86,21 +70,8 @@ export default function BookExamPage() {
   });
 
   const getExamName = (exam: Exam) => {
-    const rawName = exam.translations?.[locale]?.name || exam.name;
-    if (isRtl) {
-      const slugKey = exam.slug?.toLowerCase();
-      if (slugKey && EXAM_ARABIC_NAMES[slugKey]) {
-        return EXAM_ARABIC_NAMES[slugKey];
-      }
-      const upper = exam.name?.toUpperCase() || "";
-      if (upper === "IELTS") return "آيلتس";
-      if (upper === "PTE") return "بي تي إي";
-      if (upper.includes("TOEFL")) return "توفل آي بي تي";
-      if (upper === "CAEL") return "كايل";
-      if (upper.includes("CELPIP")) return "سيلبيب العام";
-      if (upper.includes("SKILL")) return "سكيلز فور إنجلش (سيلت)";
-    }
-    return formatExamName(rawName);
+    const transName = exam.translations?.[locale]?.name;
+    return transName || formatExamName(exam.name);
   };
 
   const coreExams =

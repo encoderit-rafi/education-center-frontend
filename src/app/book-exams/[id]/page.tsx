@@ -88,8 +88,16 @@ function buildExamInfo(exam: any, t: any, locale: string) {
     staticMeta?.overview ||
     description;
 
+  const name =
+    exam?.translations?.[locale]?.name ||
+    exam?.translations?.[locale]?.title ||
+    (isAr && localizedMeta.name) ||
+    exam.name ||
+    staticMeta?.name ||
+    "";
+
   return {
-    name: (isAr && localizedMeta.name) || exam.name || staticMeta?.name || "",
+    name,
     slug: exam.slug || staticMeta?.slug || "",
     description,
     overview,

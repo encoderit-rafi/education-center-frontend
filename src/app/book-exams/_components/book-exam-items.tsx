@@ -56,7 +56,10 @@ export default function BookExamItems({ data }: { data: any }) {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {data.items?.map((item: any, index: number) => {
-            const itemName = item.name;
+            const transName =
+              item.translations?.[locale]?.name ||
+              item.translations?.[locale]?.title;
+            const itemName = transName || item.name || item.title || "";
             const href = item?.examFormRedirectUrl || `/book-exams/${item.id}`;
             const isExternal = !!item?.examFormRedirectUrl;
             return (

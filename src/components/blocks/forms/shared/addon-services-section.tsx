@@ -20,46 +20,18 @@ export interface AddonServicesSectionProps {
   description?: string;
 }
 
-const courseWorkshopMapping: Record<string, string> = {
-  "Group Course": "دورة جماعية",
-  "Semi-private Course": "دورة شبه خاصة",
-  "Semi-Private Course": "دورة شبه خاصة",
-  "In-person One-to-one": "دورة حضورية شخص لشخص",
-  "In-Person One-to-One Course": "دورة فردية حضورية",
-  "Online One-to-one": "دورة عبر الإنترنت شخص لشخص",
-  "Online One-to-One Course": "دورة فردية عبر الإنترنت",
-  "Hybrid One-to-one": "دورة هجينة شخص لشخص",
-  "Hybrid One-to-One Course": "دورة فردية هجينة",
-  "2-Hour Workshop": "ورشة عمل مركزة لمدة ساعتين",
-  "2-Hour Targeted Workshop": "ورشة عمل مركزة لمدة ساعتين",
-  "4-Hour Focus Workshop": "ورشة عمل مركزة لمدة 4 ساعات",
-  "6-Hour IELTS Workshop": "ورشة IELTS لمدة 6 ساعات",
-  "6-Hour Intensive Workshop": "ورشة عمل مكثفة لمدة 6 ساعات",
-  "8-Hour Complete Exam Workshop": "ورشة عمل شاملة لمدة 8 ساعات",
-};
-
 export function getLocalizedCourseName(c: any, locale: string): string {
   if (!c) return "";
-  if (locale === "ar") {
-    const cTrans = c.translations?.ar || c.translations?.[locale];
-    const translated = cTrans?.name || cTrans?.title;
-    if (translated) return translated;
-    if (c.name && courseWorkshopMapping[c.name]) return courseWorkshopMapping[c.name];
-    if (c.title && courseWorkshopMapping[c.title]) return courseWorkshopMapping[c.title];
-  }
-  return c.name || c.title || "";
+  const cTrans = c.translations?.[locale];
+  const translated = cTrans?.name || cTrans?.title;
+  return translated || c.title || c.name || "";
 }
 
 export function getLocalizedWorkshopLabel(w: any, locale: string): string {
   if (!w) return "";
-  if (locale === "ar") {
-    const wTrans = w.translations?.ar || w.translations?.[locale];
-    const translated = wTrans?.title || wTrans?.name || wTrans?.sub_title;
-    if (translated) return translated;
-    if (w.name && courseWorkshopMapping[w.name]) return courseWorkshopMapping[w.name];
-    if (w.title && courseWorkshopMapping[w.title]) return courseWorkshopMapping[w.title];
-  }
-  return w.name || w.title || "";
+  const wTrans = w.translations?.[locale];
+  const translated = wTrans?.title || wTrans?.name || wTrans?.sub_title;
+  return translated || w.title || w.name || "";
 }
 
 function getDisplayDiscount(courseName: string, actualDiscount: number): number {

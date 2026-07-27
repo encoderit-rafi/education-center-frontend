@@ -706,27 +706,6 @@ export default function EnglishQuizForm() {
 
   const onSubmit = async (data: QuizFormValues) => {
     try {
-      const questions = QUIZ_QUESTIONS.map((q) => {
-        const selectedOptionId = data.answers[q.id.toString()];
-        const option = q.options.find((o) => o.id === selectedOptionId);
-        return {
-          question: q.question,
-          answer: option ? option.text : "",
-        };
-      });
-
-      const payload = {
-        full_name: data.fullName,
-        email: data.email,
-        phone: data.phoneNumber,
-        country: data.country,
-        city: data.city,
-        follow_up: data.followUp,
-        questions,
-      };
-
-      await api.post("/english-quiz-submissions", payload);
-
       let correctAnswersCount = 0;
       QUIZ_QUESTIONS.forEach((q) => {
         const selectedOptionId =
@@ -739,6 +718,31 @@ export default function EnglishQuizForm() {
       const calculatedScore = Math.round(
         (correctAnswersCount / QUIZ_QUESTIONS.length) * 100
       );
+
+      const questions = QUIZ_QUESTIONS.map((q) => {
+        const selectedOptionId = data.answers[q.id.toString()];
+        const option = q.options.find((o) => o.id === selectedOptionId);
+        return {
+          question: q.question,
+          answer: option ? option.text : "",
+        };
+      });
+
+      const score = `${correctAnswersCount}/${QUIZ_QUESTIONS.length} (${calculatedScore}%)`;
+
+      const payload = {
+        full_name: data.fullName,
+        email: data.email,
+        phone: data.phoneNumber,
+        country: data.country,
+        city: data.city,
+        follow_up: data.followUp,
+        score,
+        questions,
+      };
+
+      await api.post("/english-quiz-submissions", payload);
+
       router.push(`/english-quiz/result?score=${calculatedScore}&correct=${correctAnswersCount}`);
     } catch (error: any) {
       console.error("Error submitting English quiz:", error);
