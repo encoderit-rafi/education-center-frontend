@@ -126,8 +126,8 @@ export default async function WorkshopDetailPage({ params }: PageProps) {
 
   // Apply workshop translation if available
   const wTrans = (workshop as any)?.translations?.[locale];
-  const wTranslatedName = wTrans?.name;
-  const wTranslatedTitle = wTrans?.title;
+  const wTranslatedTitle = wTrans?.title || wTrans?.name || wTrans?.sub_title;
+  const wTranslatedName = wTrans?.name || wTrans?.title || wTrans?.sub_title;
   const wTranslatedDescription = wTrans?.description;
   const wTranslatedShortDescription =
     wTrans?.short_description || wTrans?.shortDescription;
@@ -135,8 +135,8 @@ export default async function WorkshopDetailPage({ params }: PageProps) {
   const wTranslatedRequirements = wTrans?.requirements;
   const wTranslatedBestFor = wTrans?.best_for || wTrans?.bestFor;
 
-  if (wTranslatedName) workshop.name = wTranslatedName;
   if (wTranslatedTitle) workshop.title = wTranslatedTitle;
+  if (wTranslatedName) workshop.name = wTranslatedName;
   if (wTranslatedSubTitle) workshop.subTitle = wTranslatedSubTitle;
   if (wTranslatedDescription) workshop.description = wTranslatedDescription;
   if (wTranslatedShortDescription)

@@ -97,9 +97,29 @@ export default async function PackageDetailPage({ params }: PageProps) {
     notFound();
   }
 
+  // Helper to parse ** bolds
+  const renderPoint = (text: string) => {
+    if (typeof text !== "string") return text;
+    const parts = text.split("**");
+    if (parts.length <= 1) return text;
+    return (
+      <span>
+        {parts.map((part, i) =>
+          i % 2 === 1 ? (
+            <strong key={i} className="font-bold">
+              {part}
+            </strong>
+          ) : (
+            part
+          ),
+        )}
+      </span>
+    );
+  };
+
   // Apply package translation if available
   const pkgTrans = (pkg as any)?.translations?.[locale];
-  const pkgTranslatedName = pkgTrans?.name;
+  const pkgTranslatedName = pkgTrans?.name || pkgTrans?.title;
   const pkgTranslatedDescription = pkgTrans?.description;
   const pkgTranslatedRequirements = pkgTrans?.requirements;
   const pkgTranslatedBestFor = pkgTrans?.best_for || pkgTrans?.bestFor;
@@ -180,10 +200,10 @@ export default async function PackageDetailPage({ params }: PageProps) {
 
               <div className="space-y-4">
                 <h1 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight leading-tight">
-                  {pkg.name}
+                  {renderPoint(pkg.name)}
                 </h1>
                 <p className="text-slate-600 text-base md:text-lg leading-relaxed font-medium text-justify">
-                  {pkg.description}
+                  {renderPoint(pkg.description)}
                 </p>
               </div>
             </div>

@@ -128,12 +128,19 @@ export default async function ExamPreparationDynamicPage({
   // Apply locale-aware description/name for each workshop
   workshops = workshops.map((w) => {
     const wTrans = (w as any)?.translations?.[locale];
-    const wTranslatedName = wTrans?.name;
+    const wTranslatedTitle = wTrans?.title || wTrans?.name || wTrans?.sub_title;
+    const wTranslatedName = wTrans?.name || wTrans?.title || wTrans?.sub_title;
+    const wTranslatedSubTitle = wTrans?.sub_title || wTrans?.subTitle;
     const wTranslatedDescription = wTrans?.description;
+    const wTranslatedShortDescription =
+      wTrans?.short_description || wTrans?.shortDescription;
     return {
       ...w,
-      name: wTranslatedName || w.name,
+      title: wTranslatedTitle || w.title || w.name,
+      name: wTranslatedName || w.name || w.title,
+      subTitle: wTranslatedSubTitle || w.subTitle,
       description: wTranslatedDescription || w.description,
+      shortDescription: wTranslatedShortDescription || w.shortDescription,
     };
   });
 
@@ -160,7 +167,8 @@ export default async function ExamPreparationDynamicPage({
   // Apply locale-aware translations for each package
   packages = packages.map((pkg) => {
     const pkgTrans = (pkg as any)?.translations?.[locale];
-    const pkgTranslatedName = pkgTrans?.name;
+    const pkgTranslatedTitle = pkgTrans?.title || pkgTrans?.name;
+    const pkgTranslatedName = pkgTrans?.name || pkgTrans?.title;
     const pkgTranslatedDescription = pkgTrans?.description;
     const pkgTranslatedRequirements = pkgTrans?.requirements;
     const pkgTranslatedBestFor = pkgTrans?.best_for || pkgTrans?.bestFor;
@@ -182,6 +190,7 @@ export default async function ExamPreparationDynamicPage({
 
     return {
       ...pkg,
+      title: pkgTranslatedTitle || (pkg as any).title || pkg.name,
       name: pkgTranslatedName || pkg.name,
       description: pkgTranslatedDescription || pkg.description,
       requirements: pkgTranslatedRequirements || pkg.requirements,
@@ -195,11 +204,13 @@ export default async function ExamPreparationDynamicPage({
   const mappedExamId = slugToExamId[slug.toLowerCase()] || slug;
   const filteredWorkshops = workshops.filter((w) => {
     if (!course) return false;
+    
 
     // Match by courseId if both exist
     if (w.courseId && course.id && w.courseId === course.id) {
       return true;
     }
+    
 
     // Fallback: Match by subTitle vs slug or course name
     const subTitleLower = w.subTitle?.toLowerCase() || "";
@@ -213,6 +224,7 @@ export default async function ExamPreparationDynamicPage({
       (slugLower === "celpip" && subTitleLower === "celpip-general")
     );
   });
+  console.log("👉 ~ ExamPreparationDynamicPage ~ filteredWorkshops:", filteredWorkshops)
   return (
     <div className="min-h-screen bg-white">
       {/* ── Hero Section ── */}
