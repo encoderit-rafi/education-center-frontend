@@ -206,7 +206,6 @@ export default function FreeConsultationForm() {
     const isRtl = locale === "ar";
     return (
       <div
-        dir={isRtl ? "rtl" : "ltr"}
         className="bg-slate-50 border border-slate-200/60 rounded-2xl p-8 md:p-12 text-center space-y-6 animate-fade-in text-slate-800"
       >
         <div className="mx-auto w-16 h-16 bg-primary/10 text-primary rounded-full flex items-center justify-center">

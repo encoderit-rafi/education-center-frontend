@@ -39,9 +39,8 @@ function Calendar({
     <DayPicker
       showOutsideDays={showOutsideDays}
       locale={calendarLocale}
-      dir={props.dir || (activeLocale === "ar" ? "rtl" : "ltr")}
       className={cn(
-        "bg-background group/calendar p-3 [--cell-size:--spacing(8)] sm:[--cell-size:--spacing(10)] [[data-slot=card-content]_&]:bg-transparent [[data-slot=popover-content]_&]:bg-transparent",
+        "bg-background group/calendar p-3 [--cell-size:--spacing(8)] sm:[--cell-size:--spacing(10)] in-data-[slot=card-content]:bg-transparent in-data-[slot=popover-content]:bg-transparent",
         String.raw`rtl:**:[.rdp-button\_next>svg]:rotate-180`,
         String.raw`rtl:**:[.rdp-button\_previous>svg]:rotate-180`,
         className,
@@ -222,8 +221,8 @@ function CalendarDayButton({
       data-range-middle={modifiers.range_middle}
       className={cn(
         !modifiers.disabled &&
-          "bg-[var(--calendar-available,transparent)] text-[var(--calendar-available-text,inherit)]",
-        "data-[selected-single=true]:bg-[var(--calendar-accent,#A11D1D)] data-[selected-single=true]:text-[var(--calendar-accent-foreground,white)] data-[range-middle=true]:bg-accent data-[range-middle=true]:text-accent-foreground data-[range-start=true]:bg-[var(--calendar-accent,#A11D1D)] data-[range-start=true]:text-[var(--calendar-accent-foreground,white)] data-[range-end=true]:bg-[var(--calendar-accent,#A11D1D)] data-[range-end=true]:text-[var(--calendar-accent-foreground,white)] group-data-[focused=true]/day:border-ring group-data-[focused=true]/day:ring-ring/50 flex aspect-square h-full w-full items-center justify-center gap-1 leading-none font-black text-base group-data-[focused=true]/day:relative group-data-[focused=true]/day:z-10 group-data-[focused=true]/day:ring-[3px] data-[range-end=true]:rounded-md data-[range-end=true]:rounded-r-md data-[range-middle=true]:rounded-none data-[range-start=true]:rounded-md data-[range-start=true]:rounded-l-md [&>span]:text-xs [&>span]:opacity-70 transition-colors",
+          "bg-(--calendar-available,transparent) text-(--calendar-available-text,inherit)",
+        "data-[selected-single=true]:bg-(--calendar-accent,#A11D1D) data-[selected-single=true]:text-(--calendar-accent-foreground,white) data-[range-middle=true]:bg-accent data-[range-middle=true]:text-accent-foreground data-[range-start=true]:bg-(--calendar-accent,#A11D1D) data-[range-start=true]:text-(--calendar-accent-foreground,white) data-[range-end=true]:bg-(--calendar-accent,#A11D1D) data-[range-end=true]:text-(--calendar-accent-foreground,white) group-data-[focused=true]/day:border-ring group-data-[focused=true]/day:ring-ring/50 flex aspect-square h-full w-full items-center justify-center gap-1 leading-none font-black text-base group-data-[focused=true]/day:relative group-data-[focused=true]/day:z-10 group-data-[focused=true]/day:ring-[3px] data-[range-end=true]:rounded-md data-[range-end=true]:rounded-r-md data-[range-middle=true]:rounded-none data-[range-start=true]:rounded-md data-[range-start=true]:rounded-l-md [&>span]:text-xs [&>span]:opacity-70 transition-colors",
         defaultClassNames.day,
         className,
       )}

@@ -29,18 +29,19 @@ export function CampusGallery() {
   const images = t.raw("images") as { name: string }[];
 
   return (
-    <section dir="ltr" className="py-24 bg-background overflow-hidden text-left">
+    <section className="py-24 bg-background overflow-hidden">
       <div className="max-w-7xl mx-auto px-8">
         <div className="mb-16">
-          <h2 className="text-4xl font-headline font-extrabold text-secondary tracking-tight mb-4 text-left">
+          <h2 className="text-4xl font-headline font-extrabold text-secondary tracking-tight mb-4">
             {t("title")}
           </h2>
-          <p className="text-on-surface-variant text-lg max-w-2xl text-left">
+          <p className="text-on-surface-variant text-lg max-w-2xl">
             {t("description")}
           </p>
         </div>
 
         <Carousel
+          dir="ltr"
           opts={{
             align: "start",
             loop: true,
@@ -60,7 +61,7 @@ export function CampusGallery() {
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-8">
-                    <p dir="auto" className="text-white font-medium text-lg">
+                    <p className="text-white font-medium text-lg">
                       {images[index]?.name}
                     </p>
                   </div>

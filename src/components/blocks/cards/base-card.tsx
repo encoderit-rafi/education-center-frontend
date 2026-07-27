@@ -111,11 +111,9 @@ const BaseCardList = ({
   checked?: boolean;
   className?: string;
 }) => {
-  const locale = useLocale();
-  const isRtl = locale === "ar";
   if (!items || !Array.isArray(items)) return null;
   return (
-    <ul dir={isRtl ? "rtl" : "ltr"} className={cn("space-y-2 text-sm text-slate-700", className)}>
+    <ul className={cn("space-y-2 text-sm text-slate-700", className)}>
       {items.map((point, i) => (
         <li key={i} className="flex items-start gap-2">
           {checked ? (

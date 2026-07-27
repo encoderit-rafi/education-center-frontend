@@ -77,7 +77,6 @@ export default function HeroSection() {
           <div className="max-w-md grid grid-cols-2 gap-3 pt-4 animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-500">
             <Link
               href="/book-exams"
-              dir={isRtl ? "rtl" : "ltr"}
               className={buttonVariants({
                 size: "lg",
                 className: "group py-2.5 flex items-center justify-center gap-2",
@@ -93,7 +92,6 @@ export default function HeroSection() {
             </Link>
             <Link
               href="/exam-preparation-courses"
-              dir={isRtl ? "rtl" : "ltr"}
               className={buttonVariants({
                 variant: "light",
                 size: "lg",

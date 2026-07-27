@@ -83,7 +83,7 @@ export default function CourseCard({
       : basePrice - discount;
 
   return (
-    <BaseCard dir={isRtl ? "rtl" : "ltr"} className="p-0 flex flex-col justify-between overflow-hidden border-slate-200 group relative hover:border-primary/30 hover:shadow-2xl transition-all duration-500 ease-out h-full bg-white">
+    <BaseCard className="p-0 flex flex-col justify-between overflow-hidden border-slate-200 group relative hover:border-primary/30 hover:shadow-2xl transition-all duration-500 ease-out h-full bg-white">
       <div className="relative aspect-video w-full overflow-hidden bg-slate-50/50 border-b border-slate-100">
         <Image
           src={pkg.image || "/images/hero/image-3.jpg"}

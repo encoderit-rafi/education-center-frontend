@@ -292,7 +292,6 @@ export default function TestYourEnglishForm({ onSuccess }: { onSuccess?: (val: b
     const isRtl = locale === "ar";
     return (
       <div
-        dir={isRtl ? "rtl" : "ltr"}
         className="max-w-2xl mx-auto bg-white border border-slate-200 shadow-xl rounded-2xl overflow-hidden animate-fade-up"
       >
         {/* Visual Header Banner */}

@@ -343,7 +343,7 @@ export default function SpecialAccommodation() {
                         <p className="text-[10px] uppercase tracking-widest text-slate-400 font-bold">
                           {t("callUsLabel")}
                         </p>
-                        <p className="text-sm font-bold text-white">
+                        <p dir="ltr" className="text-sm font-bold text-white">
                           +971 6 553 1250
                         </p>
                       </div>

@@ -59,7 +59,7 @@ export default function VendorPartnershipsPage() {
                 <Link href="tel:+97165531250">
                   <Button className="bg-primary text-white hover:bg-primary/90 px-5 py-3 rounded-lg font-bold text-sm flex items-center gap-2 cursor-pointer h-10 shadow-md shadow-primary/10 transition-all duration-300">
                     <Phone className="w-4 h-4" />
-                    +971 6 553 1250
+                    <span dir="ltr">+971 6 553 1250</span>
                   </Button>
                 </Link>
                 <Link href="mailto:info@tepth.org">

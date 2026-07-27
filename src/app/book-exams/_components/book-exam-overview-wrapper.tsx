@@ -225,7 +225,7 @@ export default function BookExamOverviewWrapper({
               {exam.name} <span className="text-primary italic">{isRtl ? "اختبار" : "Test"}</span>
             </h1>
             {subtitle && (
-              <p dir={isRtl ? "rtl" : "ltr"} className="text-sm md:text-base font-medium text-secondary text-start">
+              <p className="text-sm md:text-base font-medium text-secondary text-start">
                 {subtitle}
               </p>
             )}
@@ -235,7 +235,6 @@ export default function BookExamOverviewWrapper({
                 setShowForm(true);
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }}
-              dir={isRtl ? "rtl" : "ltr"}
               className="w-fit gap-2"
             >
               <Calendar size={16} /> {isRtl ? "تسجيل" : "Register"}

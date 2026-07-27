@@ -233,7 +233,7 @@ export default async function ExamPreparationDynamicPage({
           <div
             className={`grid ${data.bannerImage ? "lg:grid-cols-[1fr_450px]" : ""} gap-16 items-center`}
           >
-            <div className="max-w-4xl mx-auto text-center lg:text-left">
+            <div className="max-w-4xl mx-auto text-center lg:text-start">
               <h1 className="text-4xl font-black leading-[1.1] tracking-tight text-slate-900 lg:text-6xl mb-6">
                 {data.name}
               </h1>
@@ -320,7 +320,7 @@ export default async function ExamPreparationDynamicPage({
                     : basePrice - discount;
 
                 return (
-                  <BaseCard key={workshop.id} dir={isRtl ? "rtl" : "ltr"}>
+                  <BaseCard key={workshop.id}>
                     <div className="space-y-6">
                       <div className="flex items-center gap-3">
                         <BaseCardIcon className="size-9">

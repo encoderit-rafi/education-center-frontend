@@ -116,7 +116,6 @@ export default function ExamPrepCourses() {
           </div>
           <Link
             href="/exam-preparation-courses"
-            dir={isRtl ? "rtl" : "ltr"}
             className={buttonVariants({
               variant: "default",
               className:

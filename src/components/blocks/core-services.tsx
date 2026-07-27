@@ -17,7 +17,7 @@ import {
   BaseCardIcon,
   BaseCardTitle,
 } from "./cards/base-card";
-import { useTranslations, useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 
 const SERVICE_HREFS = [
   "/paid-mock-tests/ielts",
@@ -45,12 +45,10 @@ const SERVICE_ICONS = [
 
 export default function CoreServices() {
   const t = useTranslations("HomePage.CoreServices");
-  const locale = useLocale();
-  const isRtl = locale === "ar";
   const services = t.raw("services") as { title: string; description: string }[];
 
   return (
-    <section dir={isRtl ? "rtl" : "ltr"} className="base-py">
+    <section className="base-py">
       <div className="base-px section-container space-y-10">
         <div>
           <span className="section-label">{t("label")}</span>

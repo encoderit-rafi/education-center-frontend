@@ -379,7 +379,7 @@ export default function HowToFindUs() {
                   href="tel:+97165531250"
                   className="group/phone flex items-center gap-4"
                 >
-                  <span className="text-2xl md:text-3xl font-black text-white hover:text-white/80 transition-all">
+                  <span dir="ltr" className="text-2xl md:text-3xl font-black text-white hover:text-white/80 transition-all">
                     +971 6 553 1250
                   </span>
                 </Link>

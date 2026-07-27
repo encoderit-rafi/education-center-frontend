@@ -99,10 +99,10 @@ export default function BookAnExamVenuePage() {
       <section className="bg-slate-50 border-t border-slate-200/60 py-16 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-80 h-80 bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
         <div className="max-w-4xl mx-auto px-6 text-center space-y-8 relative z-10">
-          <p dir="auto" className="text-slate-700 text-base md:text-lg leading-relaxed max-w-3xl mx-auto font-medium">
+          <p className="text-slate-700 text-base md:text-lg leading-relaxed max-w-3xl mx-auto font-medium">
             {t.rich("contactInfo", {
               phone: (chunks) => (
-                <a href="tel:+97165531250" className="text-primary font-bold hover:underline inline-block">
+                <a href="tel:+97165531250" dir="ltr" className="text-primary font-bold hover:underline inline-block">
                   {chunks}
                 </a>
               ),

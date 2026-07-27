@@ -30,11 +30,12 @@ function buildExamInfo(exam: any, t: any, locale: string) {
   const staticMeta = EXAM_DETAILE_DATA.find(
     (item: any) =>
       item.id === exam.id ||
+      item.id === exam.slug ||
       item.slug === exam.slug ||
       item.name?.toLowerCase() === exam.name?.toLowerCase(),
   ) as any;
 
-  const examId = staticMeta?.id || exam.id;
+  const examId = staticMeta?.id || exam.slug || exam.id;
   let localizedMeta: any = {};
   if (examId) {
     try {
@@ -45,53 +46,73 @@ function buildExamInfo(exam: any, t: any, locale: string) {
   }
 
   const isAr = locale === "ar";
-  const detailData = {
-    ...staticMeta,
-    ...exam,
-    ...(isAr ? localizedMeta : {}),
-  };
 
-  // Safely merge sections to preserve the static icon property
-  let sections = ((isAr && localizedMeta.sections) || detailData.sections || []).map(
-    (section: any, idx: number) => {
-      const staticSection = staticMeta?.sections?.[idx] || {};
-      return {
-        ...staticSection,
-        ...section,
-      };
-    },
-  );
+  const stats =
+    (isAr && localizedMeta.stats?.length ? localizedMeta.stats : null) ||
+    (exam.stats?.length ? exam.stats : null) ||
+    staticMeta?.stats ||
+    [];
+
+  let sections = (
+    (isAr && localizedMeta.sections?.length ? localizedMeta.sections : null) ||
+    (exam.sections?.length ? exam.sections : null) ||
+    staticMeta?.sections ||
+    []
+  ).map((section: any, idx: number) => {
+    const staticSection = staticMeta?.sections?.[idx] || {};
+    return {
+      ...staticSection,
+      ...section,
+    };
+  });
 
   if (exam.slug === "pte-academic" || exam.slug === "pte-core") {
     sections = [];
   }
 
+  const whoShouldTake =
+    (isAr && localizedMeta.whoShouldTake?.length ? localizedMeta.whoShouldTake : null) ||
+    (exam.whoShouldTake?.length ? exam.whoShouldTake : null) ||
+    staticMeta?.whoShouldTake ||
+    [];
+
+  const acceptedFor =
+    (isAr && localizedMeta.acceptedFor?.length ? localizedMeta.acceptedFor : null) ||
+    (exam.acceptedFor?.length ? exam.acceptedFor : null) ||
+    staticMeta?.acceptedFor ||
+    [];
+
+  const faqs =
+    (isAr && localizedMeta.faqs?.length ? localizedMeta.faqs : null) ||
+    (exam.faqs?.length ? exam.faqs : null) ||
+    staticMeta?.faqs ||
+    [];
+
   const description =
-    exam?.translations?.[locale]?.description ||
     (isAr && localizedMeta.description) ||
+    exam?.translations?.[locale]?.description ||
     exam.description ||
     staticMeta?.description ||
-    detailData.content ||
     "";
 
   const subtitle =
-    exam?.translations?.[locale]?.subtitle ||
     (isAr && localizedMeta.subtitle) ||
+    exam?.translations?.[locale]?.subtitle ||
     exam.subtitle ||
     staticMeta?.subtitle ||
     "";
 
   const overview =
-    exam?.translations?.[locale]?.overview ||
     (isAr && localizedMeta.overview) ||
+    exam?.translations?.[locale]?.overview ||
     exam.overview ||
     staticMeta?.overview ||
     description;
 
   const name =
+    (isAr && localizedMeta.name) ||
     exam?.translations?.[locale]?.name ||
     exam?.translations?.[locale]?.title ||
-    (isAr && localizedMeta.name) ||
     exam.name ||
     staticMeta?.name ||
     "";
@@ -102,11 +123,11 @@ function buildExamInfo(exam: any, t: any, locale: string) {
     description,
     overview,
     subtitle,
-    stats: (isAr && localizedMeta.stats) || detailData.stats || [],
+    stats,
     sections,
-    whoShouldTake: (isAr && localizedMeta.whoShouldTake) || detailData.whoShouldTake || [],
-    acceptedFor: (isAr && localizedMeta.acceptedFor) || detailData.acceptedFor || [],
-    faqs: (isAr && localizedMeta.faqs) || detailData.faqs || [],
+    whoShouldTake,
+    acceptedFor,
+    faqs,
   };
 }
 

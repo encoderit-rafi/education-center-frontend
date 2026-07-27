@@ -224,7 +224,7 @@ export default function ExamProviderPage() {
               className="flex items-center gap-3 px-6 py-4 rounded-xl bg-primary text-white hover:bg-primary-variant font-bold text-sm transition-all duration-300 w-full sm:w-auto justify-center shadow-md shadow-primary/10"
             >
               <Phone className="w-4 h-4" />
-              <span>+971 6 553 1250</span>
+              <span dir="ltr">+971 6 553 1250</span>
             </a>
             <a
               href="mailto:info@tepth.org"

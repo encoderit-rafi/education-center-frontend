@@ -17,7 +17,6 @@ export default function BaseNoteBox({
 
   return (
     <div
-      dir={isRtl ? "rtl" : "ltr"}
       className={cn(
         "bg-primary/5 border border-primary/50 border-dashed rounded-md p-4",
         className

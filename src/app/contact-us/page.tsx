@@ -191,7 +191,7 @@ export default function ContactUs() {
           {/* Right Side: Form */}
           <div className="relative h-full scroll-mt-28">
             <div className="absolute inset-0 bg-primary/5 rounded-[2.5rem] blur-3xl opacity-30 pointer-events-none"></div>
-            <div className="relative bg-white rounded-[1.5rem] sm:rounded-[2.5rem] h-full flex flex-col">
+            <div className="relative bg-white rounded-3xl sm:rounded-[2.5rem] h-full flex flex-col">
               <SectionHeader
                 title={
                   <>

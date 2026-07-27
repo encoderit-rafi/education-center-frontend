@@ -62,12 +62,13 @@ export default function ExamDetails({ data }: { data: any }) {
   const staticMeta = EXAM_DETAILE_DATA.find(
     (item: any) =>
       item.id === data.id ||
+      item.id === data.slug ||
       item.slug === data.slug ||
       item.name?.toLowerCase() === data.name?.toLowerCase(),
   ) as any;
 
   // Look up localized metadata from translations
-  const examId = staticMeta?.id || data.id;
+  const examId = staticMeta?.id || data.slug || data.id;
   let localizedMeta: any = {};
   if (examId) {
     try {
@@ -77,52 +78,79 @@ export default function ExamDetails({ data }: { data: any }) {
     }
   }
 
-  const detailData = {
-    ...staticMeta,
-    ...data,
-    ...(isRtl ? localizedMeta : {}),
-  };
-
-  const stats = (isRtl && localizedMeta.stats) || detailData.stats || [];
+  const stats =
+    (isRtl && localizedMeta.stats?.length ? localizedMeta.stats : null) ||
+    (data.stats?.length ? data.stats : null) ||
+    staticMeta?.stats ||
+    [];
 
   // Safely merge sections to preserve the static icon property
-  let sections = ((isRtl && localizedMeta.sections) || detailData.sections || []).map(
-    (section: any, idx: number) => {
-      const staticSection = staticMeta?.sections?.[idx] || {};
-      return {
-        ...staticSection,
-        ...section,
-      };
-    },
-  );
+  let sections = (
+    (isRtl && localizedMeta.sections?.length ? localizedMeta.sections : null) ||
+    (data.sections?.length ? data.sections : null) ||
+    staticMeta?.sections ||
+    []
+  ).map((section: any, idx: number) => {
+    const staticSection = staticMeta?.sections?.[idx] || {};
+    return {
+      ...staticSection,
+      ...section,
+    };
+  });
 
   if (data.slug === "pte-academic" || data.slug === "pte-core") {
     sections = [];
   }
 
-  const whoShouldTake = (isRtl && localizedMeta.whoShouldTake) || detailData.whoShouldTake || [];
-  const acceptedFor = (isRtl && localizedMeta.acceptedFor) || detailData.acceptedFor || [];
-  const faqs = (isRtl && localizedMeta.faqs) || detailData.faqs || [];
+  const whoShouldTake =
+    (isRtl && localizedMeta.whoShouldTake?.length ? localizedMeta.whoShouldTake : null) ||
+    (data.whoShouldTake?.length ? data.whoShouldTake : null) ||
+    staticMeta?.whoShouldTake ||
+    [];
+
+  const acceptedFor =
+    (isRtl && localizedMeta.acceptedFor?.length ? localizedMeta.acceptedFor : null) ||
+    (data.acceptedFor?.length ? data.acceptedFor : null) ||
+    staticMeta?.acceptedFor ||
+    [];
+
+  const faqs =
+    (isRtl && localizedMeta.faqs?.length ? localizedMeta.faqs : null) ||
+    (data.faqs?.length ? data.faqs : null) ||
+    staticMeta?.faqs ||
+    [];
+
   const description =
-    data.translations?.[locale]?.description ||
     (isRtl && localizedMeta.description) ||
+    data.translations?.[locale]?.description ||
     data.description ||
     staticMeta?.description ||
-    detailData.content ||
+    data.content ||
     "";
+
   const subtitle =
-    data.translations?.[locale]?.subtitle ||
     (isRtl && localizedMeta.subtitle) ||
+    data.translations?.[locale]?.subtitle ||
     data.subtitle ||
     staticMeta?.subtitle ||
     "";
+
   const overview =
-    data.translations?.[locale]?.overview ||
     (isRtl && localizedMeta.overview) ||
+    data.translations?.[locale]?.overview ||
     data.overview ||
     staticMeta?.overview ||
     description;
-  const image = detailData.image || "/images/exams/ielts/ielts-1.jpg";
+
+  const name =
+    (isRtl && localizedMeta.name) ||
+    data.translations?.[locale]?.name ||
+    data.translations?.[locale]?.title ||
+    data.name ||
+    staticMeta?.name ||
+    "";
+  
+  const image = data.image || staticMeta?.image || "/images/exams/ielts/ielts-1.jpg";
 
   const registerUrl = data.examFormRedirectUrl || `/book-exams/${data.slug}`;
   const isExternalRegister = !!data.examFormRedirectUrl;

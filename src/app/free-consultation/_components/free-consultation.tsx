@@ -12,12 +12,12 @@ export default function FreeConsultation() {
   return (
     <GradientBox>
       <div className="relative mx-auto px-6 py-16 lg:px-12 lg:py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 text-center  lg:text-left">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 text-center lg:text-start">
           <div>
             <h2 className="text-4xl font-black text-white lg:text-5xl tracking-tight">
               {t("title")}
             </h2>
-            <p className="mt-6 text-lg leading-relaxed text-white/90 max-w-lg">
+            <p className="mt-6 text-lg leading-relaxed text-white/90 max-w-lg mx-auto lg:mx-0">
               {t("description")}
             </p>
             <Link
@@ -33,13 +33,13 @@ export default function FreeConsultation() {
             </Link>
           </div>
 
-          <div className="flex flex-col!  justify-around gap-4 sm:flex-row w-full sm:w-auto">
+          <div className="flex flex-col justify-center gap-4 lg:items-start">
             {features.map((feature, i) => (
               <span
                 key={i}
                 className="flex items-center gap-3 text-sm font-medium text-white/80"
               >
-                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white/10">
+                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white/10 shrink-0">
                   <Check className="h-3 w-3 text-white" />
                 </span>
                 {feature}

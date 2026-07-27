@@ -52,7 +52,6 @@ export default function TestDayGuidelinesClient() {
 
   return (
     <main
-      dir={isRtl ? "rtl" : "ltr"}
       className="min-h-screen bg-white font-sans selection:bg-primary/10 selection:text-primary"
     >
       {/* ── Premium Hero ── */}
@@ -380,7 +379,7 @@ export default function TestDayGuidelinesClient() {
             {/* Background Accent */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-primary/20 blur-[100px] rounded-full -mr-32 -mt-32" />
 
-            <div className="relative z-10 text-center md:text-left">
+            <div className="relative z-10 text-center md:text-start">
               <h2 className="mb-4 text-3xl font-bold text-white lg:text-5xl">
                 {t("cta.title")}
               </h2>

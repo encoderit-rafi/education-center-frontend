@@ -27,7 +27,6 @@ function QuizResultContent() {
 
   return (
     <div
-      dir={isRtl ? "rtl" : "ltr"}
       className="max-w-4xl mx-auto bg-white border border-slate-200 shadow-xl rounded-2xl overflow-hidden"
     >
       {/* Visual Header Banner */}
