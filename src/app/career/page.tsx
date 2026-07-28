@@ -613,9 +613,30 @@ export default function CareerPage() {
                                   className="hidden"
                                   accept=".pdf,.doc,.docx"
                                   onChange={(e) => {
-                                    if (e.target.files && e.target.files[0]) {
-                                      field.onChange(e.target.files[0]);
+                                    const file = e.target.files?.[0];
+                                    if (!file) return;
+
+                                    const ALLOWED_TYPES = ["application/pdf", "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"];
+                                    const ALLOWED_EXTENSIONS = [".pdf", ".doc", ".docx"];
+                                    const ext = "." + file.name.split(".").pop()?.toLowerCase();
+                                    const typeOk = ALLOWED_TYPES.includes(file.type) || ALLOWED_EXTENSIONS.includes(ext);
+
+                                    if (!typeOk) {
+                                      e.target.value = "";
+                                      field.onChange(undefined);
+                                      form.setError("resume", { message: "Invalid file type. Allowed formats: PDF, DOC, DOCX." });
+                                      return;
                                     }
+
+                                    if (file.size > 5 * 1024 * 1024) {
+                                      e.target.value = "";
+                                      field.onChange(undefined);
+                                      form.setError("resume", { message: `File too large. Max 5MB (your file: ${(file.size / (1024 * 1024)).toFixed(2)}MB).` });
+                                      return;
+                                    }
+
+                                    form.clearErrors("resume");
+                                    field.onChange(file);
                                   }}
                                 />
                                 {file ? (

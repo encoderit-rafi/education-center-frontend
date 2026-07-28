@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { FileUploadField } from "@/components/blocks/forms/shared/file-upload-field";
 import { useTranslations } from "next-intl";
 import { UseFormReturn } from "react-hook-form";
 import { Save, User, Globe, BookOpen } from "lucide-react";
@@ -449,51 +450,13 @@ export function RegistrationFormStep({
           <Field data-invalid={!!errors.idDocument}>
             <FieldLabel required>{t("attachIdCopy")}</FieldLabel>
             <FieldContent>
-              <div className="flex flex-col gap-2">
-                {!formData.idDocument ? (
-                  <Input
-                    type="file"
-                    accept=".pdf,.png,.jpg,.jpeg"
-                    className="h-auto py-2 px-3 border-2 border-dashed border-slate-200 hover:border-primary/50 transition-colors cursor-pointer file:mr-4 file:py-1 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20"
-                    onChange={(e) => {
-                      const file = e.target.files?.[0];
-                      if (file) setValue("idDocument", file);
-                    }}
-                  />
-                ) : (
-                  <div className="flex flex-col items-center justify-between gap-3 p-3 rounded-xl border border-green-500/50 bg-green-100/30">
-                    <div className="size-9 rounded-full bg-emerald-100 border border-green-500/50 flex items-center justify-center text-emerald-600">
-                      <Save className="size-[17px]" />
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <div className="flex flex-col">
-                        <span className="text-xs font-bold text-slate-700 truncate max-w-50">
-                          {(formData.idDocument as File).name}
-                        </span>
-                        <span className="text-[10px] text-slate-400 font-medium">
-                          {(
-                            (formData.idDocument as File).size /
-                            (1024 * 1024)
-                          ).toFixed(2)}{" "}
-                          MB
-                        </span>
-                      </div>
-                      <Button
-                        type="button"
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => setValue("idDocument", undefined)}
-                        className="size-8 p-0 rounded-full hover:bg-red-50 hover:text-red-600"
-                      >
-                        <span className="text-lg">×</span>
-                      </Button>
-                    </div>
-                  </div>
-                )}
-                <p className="text-[12px] text-slate-900 font-medium">
-                  {t("supportedFormats")}
-                </p>
-              </div>
+                            <FileUploadField
+                value={formData.idDocument as File | undefined}
+                onChange={(file) => {
+                  setValue("idDocument", file);
+                }}
+                hint={t("supportedFormats")}
+              />
               <FieldError errors={[errors.idDocument]} />
             </FieldContent>
           </Field>

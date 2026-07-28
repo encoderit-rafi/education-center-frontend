@@ -34,6 +34,7 @@ type InquiryFormValues = {
 export default function SpecialAccommodationForm() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [fileName, setFileName] = useState("");
+  const [fileError, setFileError] = useState<string | null>(null);
   const t = useTranslations("SpecialAccommodationPage");
   const tForm = useTranslations("SpecialAccommodationPage.inquiry.form");
 
@@ -76,15 +77,39 @@ export default function SpecialAccommodationForm() {
     setIsSuccess(true);
   };
 
+  const ALLOWED_TYPES = ["application/pdf", "image/png", "image/jpeg", "image/jpg"];
+  const ALLOWED_EXTENSIONS = [".pdf", ".png", ".jpg", ".jpeg"];
+  const MAX_FILE_SIZE_MB = 10;
+  const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
+
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setFileName(e.target.files[0].name);
-      setValue("document", e.target.files[0]);
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const ext = "." + file.name.split(".").pop()?.toLowerCase();
+    const typeOk = ALLOWED_TYPES.includes(file.type) || ALLOWED_EXTENSIONS.includes(ext);
+    if (!typeOk) {
+      setFileError("Invalid file type. Allowed formats: PDF, PNG, JPG, JPEG.");
+      e.target.value = "";
+      return;
     }
+
+    if (file.size > MAX_FILE_SIZE_BYTES) {
+      setFileError(
+        `File is too large. Maximum allowed size is ${MAX_FILE_SIZE_MB}MB (your file: ${(file.size / (1024 * 1024)).toFixed(2)}MB).`
+      );
+      e.target.value = "";
+      return;
+    }
+
+    setFileError(null);
+    setFileName(file.name);
+    setValue("document", file);
   };
 
   const clearFile = () => {
     setFileName("");
+    setFileError(null);
     setValue("document", undefined);
   };
 
@@ -201,6 +226,11 @@ export default function SpecialAccommodationForm() {
             onChange={handleFileUpload}
           />
         </div>
+        {fileError && (
+          <p className="mt-2 text-[12px] font-semibold text-destructive animate-in fade-in slide-in-from-top-1 duration-200">
+            {fileError}
+          </p>
+        )}
       </div>
 
       <div className="pt-4 space-y-6">
