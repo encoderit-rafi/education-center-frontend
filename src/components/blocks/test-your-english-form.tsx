@@ -254,9 +254,13 @@ export default function TestYourEnglishForm({ onSuccess }: { onSuccess?: (val: b
     }
 
     setStep((prev) => prev + 1);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const handlePrev = () => setStep((prev) => prev - 1);
+  const handlePrev = () => {
+    setStep((prev) => prev - 1);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   const onSubmit = async (data: TestValues) => {
     try {
@@ -275,6 +279,7 @@ export default function TestYourEnglishForm({ onSuccess }: { onSuccess?: (val: b
 
       setIsSuccess(true);
       onSuccess?.(true);
+      window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (error: any) {
       toast.error(t("toast.submitErrorTitle"), {
         description: error.response?.data?.message || t("toast.submitErrorDesc"),

@@ -700,9 +700,13 @@ export default function EnglishQuizForm() {
     }
 
     setStep((prev) => prev + 1);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const handlePrev = () => setStep((prev) => prev - 1);
+  const handlePrev = () => {
+    setStep((prev) => prev - 1);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   const onSubmit = async (data: QuizFormValues) => {
     try {
@@ -728,7 +732,7 @@ export default function EnglishQuizForm() {
         };
       });
 
-      const score = `${correctAnswersCount}/${QUIZ_QUESTIONS.length} (${calculatedScore}%)`;
+      const score = `${correctAnswersCount}/${QUIZ_QUESTIONS.length}`;
 
       const payload = {
         full_name: data.fullName,
