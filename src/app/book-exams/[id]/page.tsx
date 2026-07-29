@@ -105,8 +105,9 @@ function buildExamInfo(exam: any, t: any, locale: string) {
   const overview =
     (isAr && localizedMeta.overview) ||
     exam?.translations?.[locale]?.overview ||
-    exam.overview ||
+    (exam?.overview && exam.overview.length > 150 ? exam.overview : null) ||
     staticMeta?.overview ||
+    exam?.overview ||
     description;
 
   const name =

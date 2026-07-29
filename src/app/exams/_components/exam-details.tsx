@@ -138,8 +138,9 @@ export default function ExamDetails({ data }: { data: any }) {
   const overview =
     (isRtl && localizedMeta.overview) ||
     data.translations?.[locale]?.overview ||
-    data.overview ||
+    (data?.overview && data.overview.length > 150 ? data.overview : null) ||
     staticMeta?.overview ||
+    data?.overview ||
     description;
 
   const name =

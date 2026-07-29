@@ -35,6 +35,51 @@ export interface BookingPayloadInput {
   allFormData: Record<string, any>;
 }
 
+export function formatAddonWithExamPrefix(
+  addonName?: string | null,
+  examId?: string | null,
+  levelName?: string | null
+): string | undefined {
+  if (!addonName || typeof addonName !== "string" || !addonName.trim()) return undefined;
+  let name = addonName.trim();
+
+  let prefix = (levelName || "").trim();
+  const id = (examId || "").trim();
+
+  if (!prefix && id) {
+    const staticMeta = EXAM_DETAILE_DATA.find(
+      (e: any) => e.id === id || e.slug === id
+    );
+    if (staticMeta?.name) {
+      prefix = staticMeta.name;
+    } else if (id.includes("-")) {
+      prefix = id
+        .split("-")
+        .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+        .join(" ");
+    } else {
+      prefix = id.toUpperCase();
+    }
+  }
+
+  if (!prefix) return name;
+
+  if (name.toLowerCase().startsWith(prefix.toLowerCase())) {
+    return name;
+  }
+
+  const basePrefixMatch = name.match(/^(PTE|IELTS|TOEFL|SELT|OET|CELPIP|CAEL|PSI)\s+/i);
+  if (basePrefixMatch) {
+    name = name.slice(basePrefixMatch[0].length).trim();
+  }
+
+  if (name.toLowerCase().startsWith(prefix.toLowerCase())) {
+    return name;
+  }
+
+  return `${prefix} ${name}`;
+}
+
 export function compileBookingPayload(input: BookingPayloadInput) {
   const formatDate = (d: any) => {
     if (!d) return undefined;
@@ -98,6 +143,39 @@ export function compileBookingPayload(input: BookingPayloadInput) {
     return timeStr;
   };
 
+  const rawCourseName =
+    input.allFormData.selected_course_name ||
+    input.allFormData.selectedCourseName ||
+    input.allFormData.selectedCourseObj?.name ||
+    input.allFormData.selectedCourseData?.name ||
+    (typeof input.allFormData.selectedCourse === "string" && !input.allFormData.selectedCourse.includes("-") ? input.allFormData.selectedCourse : undefined);
+
+  const rawWorkshopName =
+    input.allFormData.selected_workshop_name ||
+    input.allFormData.selectedWorkshopName ||
+    input.allFormData.selectedWorkshopObj?.name ||
+    input.allFormData.selectedWorkshopData?.name ||
+    (typeof input.allFormData.selectedWorkshop === "string" && !input.allFormData.selectedWorkshop.includes("-") ? input.allFormData.selectedWorkshop : undefined);
+
+  const formattedCourseName = formatAddonWithExamPrefix(
+    rawCourseName,
+    input.examId,
+    input.allFormData.level_name
+  );
+
+  const formattedWorkshopName = formatAddonWithExamPrefix(
+    rawWorkshopName,
+    input.examId,
+    input.allFormData.level_name
+  );
+
+  if (formattedCourseName) {
+    input.allFormData.selected_course_name = formattedCourseName;
+  }
+  if (formattedWorkshopName) {
+    input.allFormData.selected_workshop_name = formattedWorkshopName;
+  }
+
   const payload: Record<string, any> = {
     user_id: input.userId || undefined,
     exam_id: input.examId,
@@ -130,6 +208,8 @@ export function compileBookingPayload(input: BookingPayloadInput) {
     discount_amount: input.discountAmount || 0,
     vat_amount: input.vatAmount || 0,
     total_amount: input.totalAmount,
+    selected_course_name: formattedCourseName || input.allFormData.selected_course_name || undefined,
+    selected_workshop_name: formattedWorkshopName || input.allFormData.selected_workshop_name || undefined,
   };
 
   const coreKeys = [
