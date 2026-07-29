@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 import { TURNSTILE_SITE_KEY } from "@/consts";
 import { FieldError } from "@/components/ui/field";
+import { cn } from "@/lib/utils";
 
 export function useRecaptcha() {
   const captchaRef = useRef<TurnstileInstance | null>(null);
@@ -51,30 +52,39 @@ type FormRecaptchaProps = {
   error?: string | null;
   onChange?: () => void;
   setToken?: (token: string | null) => void;
+  className?: string;
 };
 
-export function FormRecaptcha({ captchaRef, error, onChange, setToken }: FormRecaptchaProps) {
+export function FormRecaptcha({ captchaRef, error, onChange, setToken, className }: FormRecaptchaProps) {
   if (!TURNSTILE_SITE_KEY) {
     return null;
   }
 
   return (
-    <div className="space-y-2">
-      <Turnstile
-        ref={captchaRef}
-        siteKey={TURNSTILE_SITE_KEY}
-        onSuccess={(token) => {
-          setToken?.(token);
-          onChange?.();
-        }}
-        onExpire={() => {
-          setToken?.(null);
-        }}
-        onError={() => {
-          setToken?.(null);
-        }}
-      />
+    <div className={cn("w-full space-y-2", className)}>
+      <div className="w-full overflow-visible flex justify-center sm:justify-start py-0.5">
+        <div className="transform origin-center sm:origin-left scale-[0.88] min-[360px]:scale-[0.94] min-[390px]:scale-100 transition-transform">
+          <Turnstile
+            ref={captchaRef}
+            siteKey={TURNSTILE_SITE_KEY}
+            options={{
+              size: "normal",
+            }}
+            onSuccess={(token) => {
+              setToken?.(token);
+              onChange?.();
+            }}
+            onExpire={() => {
+              setToken?.(null);
+            }}
+            onError={() => {
+              setToken?.(null);
+            }}
+          />
+        </div>
+      </div>
       {error && <FieldError>{error}</FieldError>}
     </div>
   );
 }
+

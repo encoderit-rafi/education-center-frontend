@@ -471,7 +471,7 @@ export default function EventsPage() {
                             </div>
 
                             {/* Bottom: Details (Left) + Registration Form (Right) */}
-                            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 p-6 lg:p-10">
+                            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 p-4 sm:p-6 lg:p-10">
 
                                 {/* Left Side: Title, Badges, Meta & Description */}
                                 <div className="lg:col-span-7 flex flex-col gap-6">
@@ -522,7 +522,7 @@ export default function EventsPage() {
 
                                 {/* Right Side: Registration Form Card */}
                                 <div className="lg:col-span-5 flex flex-col">
-                                    <div className="bg-gray-50/80 rounded-2xl p-6 lg:p-8 border border-gray-100 flex flex-col gap-6 shadow-xs">
+                                    <div className="bg-gray-50/80 rounded-2xl p-4 sm:p-6 lg:p-8 border border-gray-100 flex flex-col gap-6 shadow-xs">
                                         {/* Total seats chip */}
                                         {activeEvent.totalSeats && (
                                             <div className="flex items-center gap-2 text-xs text-gray-700 font-bold bg-white px-3.5 py-1.5 rounded-full border border-gray-200 self-start shadow-2xs">
