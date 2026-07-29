@@ -1,6 +1,6 @@
-export const VAT_PERCENT = Number(
-  process.env.NEXT_PUBLIC_VAT || process.env.VAT || "5"
-);
+const rawVat = process.env.NEXT_PUBLIC_VAT ?? process.env.VAT;
+export const VAT_PERCENT =
+  rawVat !== undefined && rawVat.trim() !== "" ? Number(rawVat) : 0;
 
 /** Full country name returned by the CountryDropdown for UAE. */
 export const UAE_COUNTRY_NAME = "United Arab Emirates";
