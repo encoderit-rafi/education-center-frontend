@@ -323,21 +323,38 @@ export default function EventsPage() {
     }, [activeEvent?.id]);
 
     const formatEventDate = (dateStr: string) => {
+        if (!dateStr) return "";
         try {
             const date = new Date(dateStr);
+            if (isNaN(date.getTime())) return dateStr;
             return date.toLocaleDateString(locale === "ar" ? "ar-EG" : "en-US", {
-                month: "long", day: "numeric", year: "numeric"
+                month: "long", day: "numeric", year: "numeric", timeZone: "UTC"
             });
         } catch { return dateStr; }
     };
 
-    const formatEventTime = (timeStr: string) => {
+    const formatSingleTime = (timeStr: string) => {
+        if (!timeStr) return "";
         try {
-            const date = new Date(timeStr);
+            let isoStr = timeStr;
+            if (/^\d{2}:\d{2}(:\d{2})?$/.test(timeStr)) {
+                isoStr = `1970-01-01T${timeStr.length === 5 ? timeStr + ":00" : timeStr}.000Z`;
+            }
+            const date = new Date(isoStr);
+            if (isNaN(date.getTime())) return timeStr;
             return date.toLocaleTimeString(locale === "ar" ? "ar-EG" : "en-US", {
-                hour: "2-digit", minute: "2-digit", hour12: true
+                hour: "numeric", minute: "2-digit", hour12: true, timeZone: "UTC"
             });
         } catch { return timeStr; }
+    };
+
+    const formatEventTime = (startTimeStr?: string | null, endTimeStr?: string | null) => {
+        const startFormatted = startTimeStr ? formatSingleTime(startTimeStr) : "";
+        const endFormatted = endTimeStr ? formatSingleTime(endTimeStr) : "";
+        if (startFormatted && endFormatted) {
+            return `${startFormatted} - ${endFormatted}`;
+        }
+        return startFormatted || endFormatted;
     };
 
     const handleSelectEvent = (eventId: string) => {
@@ -440,89 +457,88 @@ export default function EventsPage() {
                             <span className="text-xs font-black uppercase tracking-widest text-gray-500">{t("featuredEvent")}</span>
                         </div>
 
-                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+                        <div className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 flex flex-col">
 
-                            {/* Left: Banner Image */}
-                            <div className="lg:col-span-7 relative aspect-16/10 lg:min-h-100 overflow-hidden bg-slate-100">
-                                {/* Image */}
-                                <Image
+                            {/* Top: Full Width Banner Image (Natural size) */}
+                            <div className="w-full overflow-hidden bg-white">
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                <img
                                     src={heroImageError ? "/images/study.jpg" : getBannerImageUrl(activeEvent.bannerImage)}
                                     alt={activeEvent.title}
-                                    fill
-                                    className="object-cover transition-all duration-700"
+                                    className="w-full h-auto block transition-all duration-700"
                                     onError={() => setHeroImageError(true)}
                                 />
-                                {/* Dark gradient overlay */}
-                                <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/30 to-transparent" />
-
-                                {/* Badges */}
-                                <div className="absolute top-5 left-5 flex flex-wrap gap-2 z-10">
-                                    <span className="bg-[#A11D1D] text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest shadow">
-                                        {getLocalizedEventType(activeEvent.eventType)}
-                                    </span>
-                                </div>
-
-                                {/* Event info overlay at bottom */}
-                                <div className="absolute bottom-0 left-0 right-0 p-6 lg:p-8 z-10">
-                                    <h2 className="text-2xl lg:text-4xl font-black text-white leading-tight tracking-tight mb-4">
-                                        {activeEvent.title}
-                                    </h2>
-                                    <div className="flex flex-wrap gap-3">
-                                        <div className="flex items-center gap-1.5 text-white/90 text-xs font-semibold bg-black/30 backdrop-blur-sm px-3 py-1.5 rounded-full">
-                                            <Calendar className="w-3.5 h-3.5 text-[#ff6b6b]" />
-                                            <span>{formatEventDate(activeEvent.startDate)}</span>
-                                        </div>
-                                        {activeEvent.startTime && (
-                                            <div className="flex items-center gap-1.5 text-white/90 text-xs font-semibold bg-black/30 backdrop-blur-sm px-3 py-1.5 rounded-full">
-                                                <Clock className="w-3.5 h-3.5 text-[#ff6b6b]" />
-                                                <span>{formatEventTime(activeEvent.startTime)}</span>
-                                            </div>
-                                        )}
-                                        <div className="flex items-center gap-1.5 text-white/90 text-xs font-semibold bg-black/30 backdrop-blur-sm px-3 py-1.5 rounded-full">
-                                            <MapPin className="w-3.5 h-3.5 text-[#ff6b6b]" />
-                                            <span>{activeEvent.location || "Online"}</span>
-                                        </div>
-                                        {activeEvent.totalSeats && (
-                                            <div className="flex items-center gap-1.5 text-white/90 text-xs font-semibold bg-black/30 backdrop-blur-sm px-3 py-1.5 rounded-full">
-                                                <Users className="w-3.5 h-3.5 text-[#ff6b6b]" />
-                                                <span>{t("seatsAvailable", { count: activeEvent.totalSeats - activeEvent.bookedSeats })}</span>
-                                            </div>
-                                        )}
-                                    </div>
-                                </div>
                             </div>
 
-                            {/* Right: Details + Form */}
-                            <div className="lg:col-span-5 flex flex-col p-6 lg:p-8 gap-6 overflow-y-auto">
+                            {/* Bottom: Details (Left) + Registration Form (Right) */}
+                            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 p-6 lg:p-10">
 
-                                {/* Seats chip layout */}
-                                {activeEvent.totalSeats && (
-                                    <div className="flex items-center gap-2 text-sm text-gray-700 font-bold bg-gray-50 px-4 py-2 rounded-full border border-gray-200 self-start shadow-sm">
-                                        <span className="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse" />
-                                        {t("totalSeats", { count: activeEvent.totalSeats })}
-                                    </div>
-                                )}
-
-                                {/* Description */}
-                                {activeEvent.description && (
+                                {/* Left Side: Title, Badges, Meta & Description */}
+                                <div className="lg:col-span-7 flex flex-col gap-6">
                                     <div>
-                                        <h3 className="text-xs font-black uppercase tracking-widest text-gray-400 mb-2">{t("aboutThisEvent")}</h3>
-                                        <div
-                                            className="text-sm text-gray-600 leading-relaxed max-h-36 overflow-y-auto pr-1 prose prose-sm text-justify"
-                                            dangerouslySetInnerHTML={{ __html: activeEvent.description }}
-                                        />
+                                        <div className="flex flex-wrap items-center gap-2 mb-3">
+                                            <span className="bg-[#A11D1D] text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest shadow-xs">
+                                                {getLocalizedEventType(activeEvent.eventType)}
+                                            </span>
+                                        </div>
+                                        <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-gray-900 leading-tight tracking-tight mb-4">
+                                            {activeEvent.title}
+                                        </h2>
+                                        <div className="flex flex-wrap gap-2.5">
+                                            <div className="flex items-center gap-1.5 text-gray-700 text-xs font-semibold bg-gray-100 px-3.5 py-1.5 rounded-full border border-gray-200/60">
+                                                <Calendar className="w-3.5 h-3.5 text-[#A11D1D]" />
+                                                <span>{formatEventDate(activeEvent.startDate)}</span>
+                                            </div>
+                                            {(activeEvent.startTime || activeEvent.endTime) && (
+                                                <div className="flex items-center gap-1.5 text-gray-700 text-xs font-semibold bg-gray-100 px-3.5 py-1.5 rounded-full border border-gray-200/60">
+                                                    <Clock className="w-3.5 h-3.5 text-[#A11D1D]" />
+                                                    <span>{formatEventTime(activeEvent.startTime, activeEvent.endTime)}</span>
+                                                </div>
+                                            )}
+                                            <div className="flex items-center gap-1.5 text-gray-700 text-xs font-semibold bg-gray-100 px-3.5 py-1.5 rounded-full border border-gray-200/60">
+                                                <MapPin className="w-3.5 h-3.5 text-[#A11D1D]" />
+                                                <span>{activeEvent.location || "Online"}</span>
+                                            </div>
+                                            {activeEvent.totalSeats && (
+                                                <div className="flex items-center gap-1.5 text-gray-700 text-xs font-semibold bg-gray-100 px-3.5 py-1.5 rounded-full border border-gray-200/60">
+                                                    <Users className="w-3.5 h-3.5 text-[#A11D1D]" />
+                                                    <span>{t("seatsAvailable", { count: activeEvent.totalSeats - activeEvent.bookedSeats })}</span>
+                                                </div>
+                                            )}
+                                        </div>
                                     </div>
-                                )}
 
-                                {/* Divider */}
-                                <div className="border-t border-gray-100" />
-
-                                {/* Registration form */}
-                                <div>
-                                    <h3 className="text-lg font-black text-gray-900 mb-1">{t("registerTitle")}</h3>
-                                    <p className="text-xs text-gray-400 mb-4">{t("registerSubtitle")}</p>
-                                    <EventRegistrationForm event={activeEvent} />
+                                    {/* Description */}
+                                    {activeEvent.description && (
+                                        <div className="pt-6 border-t border-gray-100">
+                                            <h3 className="text-xs font-black uppercase tracking-widest text-gray-400 mb-3">{t("aboutThisEvent")}</h3>
+                                            <div
+                                                className="text-sm text-gray-600 leading-relaxed prose prose-sm max-w-none text-justify"
+                                                dangerouslySetInnerHTML={{ __html: activeEvent.description }}
+                                            />
+                                        </div>
+                                    )}
                                 </div>
+
+                                {/* Right Side: Registration Form Card */}
+                                <div className="lg:col-span-5 flex flex-col">
+                                    <div className="bg-gray-50/80 rounded-2xl p-6 lg:p-8 border border-gray-100 flex flex-col gap-6 shadow-xs">
+                                        {/* Total seats chip */}
+                                        {activeEvent.totalSeats && (
+                                            <div className="flex items-center gap-2 text-xs text-gray-700 font-bold bg-white px-3.5 py-1.5 rounded-full border border-gray-200 self-start shadow-2xs">
+                                                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                                                {t("totalSeats", { count: activeEvent.totalSeats })}
+                                            </div>
+                                        )}
+
+                                        <div>
+                                            <h3 className="text-xl font-black text-gray-900 mb-1">{t("registerTitle")}</h3>
+                                            <p className="text-xs text-gray-500 mb-4">{t("registerSubtitle")}</p>
+                                            <EventRegistrationForm event={activeEvent} />
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -576,10 +592,10 @@ export default function EventsPage() {
                                                 <Calendar className="w-3 h-3 text-[#A11D1D]" />
                                                 <span>{formatEventDate(event.startDate)}</span>
                                             </div>
-                                            {event.startTime && (
+                                            {(event.startTime || event.endTime) && (
                                                 <div className="flex items-center gap-1 text-[10px] font-semibold text-gray-400">
                                                     <Clock className="w-3 h-3 text-[#A11D1D]" />
-                                                    <span>{formatEventTime(event.startTime)}</span>
+                                                    <span>{formatEventTime(event.startTime, event.endTime)}</span>
                                                 </div>
                                             )}
                                             <div className="flex items-center gap-1 text-[10px] font-semibold text-gray-400">
