@@ -22,8 +22,44 @@ const EXAM_ARABIC_NAMES: Record<string, string> = {
   celpip: "سيلبيب",
   "skill-for-english-selt": "سكيلز فور إنجلش (سيلت)",
   oet: "أو إي تي",
-  gre: "جي آر إي",
 };
+
+function isExamDateDisabled(id: string, date: Date): boolean {
+  const now = new Date();
+  const day = date.getDay();
+
+  if (id === "ielts") {
+    if (day !== 0) return true;
+    const checkDate = new Date(date);
+    checkDate.setHours(13, 0, 0, 0);
+    return checkDate.getTime() - now.getTime() < 72 * 60 * 60 * 1000;
+  }
+
+  if (id === "toefl") {
+    if (day !== 3 && day !== 6) return true;
+    const hours = day === 3 ? 18 : 10;
+    const checkDate = new Date(date);
+    checkDate.setHours(hours, 0, 0, 0);
+    return checkDate.getTime() - now.getTime() < 48 * 60 * 60 * 1000;
+  }
+
+  if (id === "skill-for-english-selt") {
+    if (day < 1 || day > 3) return true;
+    const checkDate = new Date(date);
+    checkDate.setHours(17, 30, 0, 0);
+    return checkDate.getTime() - now.getTime() < 24 * 60 * 60 * 1000;
+  }
+
+  if (id === "pte") {
+    if (day === 5) return true; // Friday disabled
+    const checkDate = new Date(date);
+    checkDate.setHours(18, 0, 0, 0);
+    return checkDate.getTime() - now.getTime() < 24 * 60 * 60 * 1000;
+  }
+
+  const isPast = date < new Date(new Date().setHours(0, 0, 0, 0));
+  return isPast;
+}
 
 export default function TestDatesDetailPage() {
   const params = useParams();
@@ -409,37 +445,13 @@ export default function TestDatesDetailPage() {
                     selected={selectedDate || undefined}
                     onSelect={(date) => setSelectedDate(date || null)}
                     modifiers={{
-                      available: (date) =>
-                        (id === "ielts" && date.getDay() === 0) ||
-                        (id === "toefl" && [3, 6].includes(date.getDay())) ||
-                        (id === "skill-for-english-selt" &&
-                          [1, 2, 3].includes(date.getDay())) ||
-                        (id === "pte" &&
-                          [0, 1, 2, 3, 4, 6].includes(date.getDay())),
+                      available: (date) => !isExamDateDisabled(id, date),
                     }}
                     modifiersClassNames={{
                       available:
                         "font-semibold text-primary underline underline-offset-4 decoration-primary",
                     }}
-                    disabled={(date) => {
-                      const isPast =
-                        date < new Date(new Date().setHours(0, 0, 0, 0));
-                      if (id === "ielts") {
-                        return isPast || date.getDay() !== 0;
-                      }
-                      if (id === "toefl") {
-                        return isPast || ![3, 6].includes(date.getDay());
-                      }
-                      if (id === "skill-for-english-selt") {
-                        return isPast || ![1, 2, 3].includes(date.getDay());
-                      }
-                      if (id === "pte") {
-                        return (
-                          isPast || ![0, 1, 2, 3, 4, 6].includes(date.getDay())
-                        );
-                      }
-                      return isPast;
-                    }}
+                    disabled={(date) => isExamDateDisabled(id, date)}
                     className="w-full mx-auto border rounded-md p-4 sm:p-8 bg-white shadow-xl"
                   />
                   <div className="w-full flex flex-col items-center gap-3">

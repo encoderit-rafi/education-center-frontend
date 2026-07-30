@@ -127,15 +127,13 @@ export function DateStep({
                     <div key={slot.id} className="space-y-3">
                       <Label
                         htmlFor={slot.id}
-                        className={`flex items-center justify-between p-4 rounded-xl border-2 transition-all cursor-pointer ${
-                          slot.disabled
+                        className={`flex items-center justify-between p-4 rounded-xl border-2 transition-all cursor-pointer ${slot.disabled
                             ? "opacity-40 cursor-not-allowed pointer-events-none"
                             : ""
-                        } ${
-                          timeSlot === slot.id
+                          } ${timeSlot === slot.id
                             ? "border-primary bg-primary/5 ring-1 ring-primary"
                             : "border-slate-100 bg-white hover:border-slate-200"
-                        }`}
+                          }`}
                       >
                         <div className="flex items-center justify-between w-full overflow-hidden">
                           <div className="flex items-center gap-3">

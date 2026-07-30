@@ -122,13 +122,12 @@ export function DateStep({
                       <div key={slot.id} className="space-y-3">
                         <Label
                           htmlFor={slot.id}
-                          className={`flex items-center justify-between p-4 rounded-xl border-2 transition-all cursor-pointer ${
-                            disabled
+                          className={`flex items-center justify-between p-4 rounded-xl border-2 transition-all cursor-pointer ${disabled
                               ? "border-slate-100 bg-slate-50 opacity-50 pointer-events-none cursor-not-allowed"
                               : timeSlot === slot.id
-                              ? "border-primary bg-primary/5 ring-1 ring-primary"
-                              : "border-slate-100 bg-white hover:border-slate-200"
-                          }`}
+                                ? "border-primary bg-primary/5 ring-1 ring-primary"
+                                : "border-slate-100 bg-white hover:border-slate-200"
+                            }`}
                         >
                           <div className="flex items-center gap-3">
                             <RadioGroupItem value={slot.id} id={slot.id} disabled={disabled} />
