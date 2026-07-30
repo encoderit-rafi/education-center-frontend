@@ -4008,6 +4008,8 @@
     },
     "contactTime": "Preferred Time to Contact You",
     "selectTime": "Select time",
+    "datePreference": "Date Preference",
+    "selectDate": "Select date",
     "times": {
       "morning": "Morning (9:00 AM – 11:30 AM)",
       "afternoon": "Afternoon (12:00 PM – 5:30 PM)",
@@ -4037,6 +4039,7 @@
       "cityRequired": "Emirate / City is required",
       "contactMethodRequired": "Preferred Contact Method is required",
       "contactTimeRequired": "Preferred Time is required",
+      "datePreferenceRequired": "Date Preference is required",
       "answersRequired": "Please select an answer",
       "answersRequiredAll": "Please answer all questions before proceeding",
       "requiredFieldsError": "Please fill in all required fields before proceeding"

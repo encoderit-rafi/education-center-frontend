@@ -373,7 +373,7 @@ export default function FreeConsultationForm() {
                         setIsCalendarOpen(false);
                       }}
                       disabled={(date) =>
-                        date <= new Date() || date < new Date("1900-01-01")
+                        date <= new Date() || date < new Date("1900-01-01") || date.getDay() === 5
                       }
                     />
                   </PopoverContent>

@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import {
   Field,
@@ -23,6 +24,7 @@ import {
   Clock,
   ChevronDown,
   Star,
+  Calendar as CalendarIcon,
 } from "lucide-react";
 import { PhoneInput } from "@/components/ui/phone-input";
 import Stepper from "@/components/stepper";
@@ -34,6 +36,12 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Calendar } from "@/components/ui/calendar";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import api from "@/axios";
 import { toast } from "sonner";
 
@@ -48,6 +56,7 @@ type TestValues = {
   city: string;
   preferredContactMethod: string;
   preferredTime: string;
+  preferredDate: Date;
   answers: Record<string, string>;
   writtenExpression?: string;
 };
@@ -55,6 +64,7 @@ type TestValues = {
 export default function TestYourEnglishForm({ onSuccess }: { onSuccess?: (val: boolean) => void }) {
   const [step, setStep] = useState(1);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   const [attemptId, setAttemptId] = useState<string | null>(null);
   const attemptIdRef = useRef<string | null>(null);
 
@@ -105,6 +115,9 @@ export default function TestYourEnglishForm({ onSuccess }: { onSuccess?: (val: b
       .string()
       .trim()
       .min(1, t("validation.contactTimeRequired")),
+    preferredDate: z.date({
+      message: t("validation.datePreferenceRequired"),
+    }),
     answers: z.record(z.string(), z.string().min(1, t("validation.answersRequired"))),
     writtenExpression: z.string().optional(),
   });
@@ -150,6 +163,7 @@ export default function TestYourEnglishForm({ onSuccess }: { onSuccess?: (val: b
       city: "",
       preferredContactMethod: "",
       preferredTime: "",
+      preferredDate: undefined as unknown as Date,
       answers: {},
       writtenExpression: "",
     },
@@ -177,6 +191,7 @@ export default function TestYourEnglishForm({ onSuccess }: { onSuccess?: (val: b
         "city",
         "preferredContactMethod",
         "preferredTime",
+        "preferredDate",
       ];
     } else if (step === 2) {
       const allAnswered = apiQuestions.every((q) => currentAnswers[q.id]);
@@ -197,9 +212,7 @@ export default function TestYourEnglishForm({ onSuccess }: { onSuccess?: (val: b
     if (step === 1) {
       try {
         const formData = form.getValues();
-        const nameParts = formData.fullName.trim().split(" ");
-        const firstName = nameParts[0];
-        const lastName = nameParts.length > 1 ? nameParts.slice(1).join(" ") : undefined;
+        const fullName = formData.fullName.trim();
 
         let preferredTime = formData.preferredTime;
         if (formData.preferredTime === "Morning") {
@@ -210,15 +223,19 @@ export default function TestYourEnglishForm({ onSuccess }: { onSuccess?: (val: b
           preferredTime = "Evening (6:00 PM – 8:30 PM)";
         }
 
+        const formattedDate = formData.preferredDate
+          ? format(formData.preferredDate, "yyyy-MM-dd")
+          : undefined;
+
         const res = await api.post("/english-test/attempt-start", {
-          first_name: firstName,
-          last_name: lastName,
+          first_name: fullName,
           email: formData.email,
           phone: formData.phoneNumber,
           country: formData.country,
           city: formData.city,
           preferred_contact_method: formData.preferredContactMethod,
           preferred_time_to_contact_you: preferredTime,
+          date_preference: formattedDate,
         });
 
         // Remove debug alerts once structure is confirmed
@@ -551,6 +568,57 @@ export default function TestYourEnglishForm({ onSuccess }: { onSuccess?: (val: b
                   />
                   {errors.preferredTime && (
                     <FieldError>{errors.preferredTime.message}</FieldError>
+                  )}
+                </FieldContent>
+              </Field>
+
+              <Field data-invalid={!!errors.preferredDate}>
+                <FieldLabel required>{t("datePreference")}</FieldLabel>
+                <FieldContent>
+                  <Controller
+                    control={control}
+                    name="preferredDate"
+                    render={({ field }) => (
+                      <Popover open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
+                        <PopoverTrigger
+                          render={
+                            <Button
+                              variant="ghost"
+                              className={cn(
+                                "flex h-10 w-full items-center justify-between overflow-hidden whitespace-nowrap rounded-md border border-slate-200 bg-white px-3 text-base transition-[color,box-shadow,background-color] outline-none focus:border-primary focus:ring-1 focus:ring-ring disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm font-medium",
+                                !field.value && "text-slate-400"
+                              )}
+                            >
+                              <div className="flex items-center gap-2">
+                                <CalendarIcon className="text-slate-400 shrink-0" size={16} />
+                                <span className="truncate">
+                                  {field.value
+                                    ? format(field.value, "PPP")
+                                    : t("selectDate")}
+                                </span>
+                              </div>
+                              <ChevronDown className="h-4 w-4 text-slate-400 shrink-0" />
+                            </Button>
+                          }
+                        />
+                        <PopoverContent className="w-auto p-0" align="start" initialFocus={false}>
+                          <Calendar
+                            mode="single"
+                            selected={field.value}
+                            onSelect={(date) => {
+                              field.onChange(date);
+                              setIsCalendarOpen(false);
+                            }}
+                            disabled={(date) =>
+                              date <= new Date() || date < new Date("1900-01-01") || date.getDay() === 5
+                            }
+                          />
+                        </PopoverContent>
+                      </Popover>
+                    )}
+                  />
+                  {errors.preferredDate && (
+                    <FieldError>{errors.preferredDate.message}</FieldError>
                   )}
                 </FieldContent>
               </Field>

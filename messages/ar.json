@@ -3988,6 +3988,8 @@
     },
     "contactTime": "الوقت المفضل للاتصال بك",
     "selectTime": "اختر الوقت",
+    "datePreference": "التاريخ المفضل",
+    "selectDate": "اختر التاريخ",
     "times": {
       "morning": "الصباح (9:00 صباحاً – 11:30 صباحاً)",
       "afternoon": "بعد الظهر (12:00 ظهراً – 5:30 مساءً)",
@@ -4017,6 +4019,7 @@
       "cityRequired": "الإمارة / المدينة مطلوبة",
       "contactMethodRequired": "طريقة الاتصال المفضلة مطلوبة",
       "contactTimeRequired": "الوقت المفضل مطلوب",
+      "datePreferenceRequired": "التاريخ المفضل مطلوب",
       "answersRequired": "يرجى اختيار إجابة",
       "answersRequiredAll": "يرجى الإجابة على جميع الأسئلة قبل المتابعة",
       "requiredFieldsError": "يرجى ملء جميع الحقول المطلوبة قبل المتابعة"
