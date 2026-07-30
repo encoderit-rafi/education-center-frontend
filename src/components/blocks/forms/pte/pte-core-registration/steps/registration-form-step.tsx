@@ -102,9 +102,11 @@ export function RegistrationFormStep({
                 <Checkbox
                   id="noMiddleName"
                   checked={formData.noMiddleName}
-                  onCheckedChange={(val) =>
-                    setValue("noMiddleName", val as boolean)
-                  }
+                  onCheckedChange={(val) => {
+                    const isChecked = val as boolean;
+                    setValue("noMiddleName", isChecked);
+                    if (isChecked) setValue("middleName", "");
+                  }}
                 />
                 <Label htmlFor="noMiddleName" className="text-xs font-light">
                   {t("noMiddleName")}
@@ -127,9 +129,11 @@ export function RegistrationFormStep({
                 <Checkbox
                   id="noSurname"
                   checked={formData.noSurname}
-                  onCheckedChange={(val) =>
-                    setValue("noSurname", val as boolean)
-                  }
+                  onCheckedChange={(val) => {
+                    const isChecked = val as boolean;
+                    setValue("noSurname", isChecked);
+                    if (isChecked) setValue("surnames", "");
+                  }}
                 />
                 <Label htmlFor="noSurname" className="text-xs font-light">
                   {t("noSurname")}

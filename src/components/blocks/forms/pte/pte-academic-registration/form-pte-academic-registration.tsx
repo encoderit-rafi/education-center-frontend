@@ -289,9 +289,9 @@ export default function FormPTEAcademicRegistration({
           examId,
           paymentMethod:
             ((formData as any).paymentMethod as string) || "stripe",
-          firstName: data.noGivenNames ? "N/A" : data.givenNames || "",
-          middleName: data.middleName || null,
-          lastName: data.noSurname ? "N/A" : data.surnames || null,
+          firstName: data.givenNames || "",
+          middleName: data.middleName || "",
+          lastName: data.surnames || "",
           dateOfBirth: data.dateOfBirth,
           gender: data.gender
             ? data.gender.charAt(0).toUpperCase() + data.gender.slice(1)
@@ -447,7 +447,10 @@ export default function FormPTEAcademicRegistration({
                     label: "Given Names",
                     value: formData.noGivenNames ? "N/A" : formData.givenNames,
                   },
-                  { label: "Middle Name", value: formData.middleName || "N/A" },
+                  {
+                    label: "Middle Name",
+                    value: formData.noMiddleName ? "N/A" : formData.middleName || "N/A",
+                  },
                   {
                     label: "Surnames",
                     value: formData.noSurname ? "N/A" : formData.surnames,

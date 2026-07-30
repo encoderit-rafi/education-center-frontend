@@ -85,7 +85,7 @@ export function ReviewStep({
                   Middle Name
                 </span>
                 <span className="text-sm font-semibold text-black">
-                  {data.middleName || "N/A"}
+                  {data.noMiddleName ? "N/A" : data.middleName || "N/A"}
                 </span>
               </div>
               <div className="flex flex-col">

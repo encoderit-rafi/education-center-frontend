@@ -47,8 +47,8 @@ export default function FormSELTA1Registration({
   const activeExam = initialExamId
     ? examsList.find((e: any) => e.id === initialExamId)
     : examsList.find(
-        (e: any) => e.slug === "ukvi-speaking-and-listening-at-level-a1",
-      );
+      (e: any) => e.slug === "ukvi-speaking-and-listening-at-level-a1",
+    );
 
   const examId = initialExamId || activeExam?.id;
 
@@ -297,9 +297,9 @@ export default function FormSELTA1Registration({
         const compiledPayload = compileBookingPayload({
           examId,
           paymentMethod: data.paymentMethod,
-          firstName: data.givenNames,
-          middleName: data.middleName || null,
-          lastName: data.surnames || null,
+          firstName: data.givenNames || "",
+          middleName: data.middleName || "",
+          lastName: data.surnames || "",
           dateOfBirth: data.dateOfBirth,
           gender: data.sex
             ? data.sex.charAt(0).toUpperCase() + data.sex.slice(1)
@@ -330,7 +330,7 @@ export default function FormSELTA1Registration({
               : undefined,
             selected_workshop_name: data.selectedWorkshop
               ? dbWorkshops.find((w: any) => w.id === data.selectedWorkshop)
-                  ?.name
+                ?.name
               : undefined,
             idDocumentUrl,
           },
@@ -427,8 +427,8 @@ export default function FormSELTA1Registration({
               selectedCourseData={
                 formData.selectedCourse
                   ? coursesData.find(
-                      (c: any) => c.id === formData.selectedCourse,
-                    )
+                    (c: any) => c.id === formData.selectedCourse,
+                  )
                   : undefined
               }
               selectedWorkshopData={

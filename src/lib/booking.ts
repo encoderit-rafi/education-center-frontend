@@ -187,9 +187,9 @@ export function compileBookingPayload(input: BookingPayloadInput) {
     workshop_package_id: input.workshopPackageId || undefined,
     payment_id: input.paymentId || undefined,
     payment_methods: input.paymentMethod || "stripe",
-    first_name: input.firstName,
-    middle_name: input.middleName || undefined,
-    last_name: input.lastName || undefined,
+    first_name: input.firstName || "",
+    middle_name: input.middleName || "",
+    last_name: input.lastName || "",
     date_of_birth: formatDate(input.dateOfBirth),
     gender: input.gender || undefined,
     nationality: input.nationality || undefined,
@@ -496,12 +496,22 @@ export function compileBookingPayload(input: BookingPayloadInput) {
     }
   }
 
+  const examName =
+    input.allFormData?.level_name ||
+    EXAM_DETAILE_DATA.find(
+      (item: any) => item.id === input.examId || item.slug === input.examId,
+    )?.name;
+
   const feesList: Array<{ name: string; label: string; value: string }> = [
-    { name: "exam_fee", label: "Exam Fee", value: String(input.examFee) },
+    {
+      name: "exam_fee",
+      label: examName ? `${examName} Exam Fee` : "Exam Fee",
+      value: String(input.examFee),
+    },
     input.additionalFee
       ? {
         name: "additional_fee",
-        label: "Registration Service Fee",
+        label: examName ? `${examName} Registration Service Fee` : "Registration Service Fee",
         value: String(input.additionalFee),
       }
       : null,

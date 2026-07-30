@@ -299,9 +299,9 @@ export default function FormPTECoreRegistration({
           examId,
           paymentMethod:
             ((formData as any).paymentMethod as string) || "stripe",
-          firstName: data.noGivenNames ? "N/A" : data.givenNames || "",
-          middleName: data.middleName || null,
-          lastName: data.noSurname ? "N/A" : data.surnames || null,
+          firstName: data.givenNames || "",
+          middleName: data.middleName || "",
+          lastName: data.surnames || "",
           dateOfBirth: data.dateOfBirth,
           gender: data.gender
             ? data.gender.charAt(0).toUpperCase() + data.gender.slice(1)
@@ -332,7 +332,7 @@ export default function FormPTECoreRegistration({
               : undefined,
             selected_workshop_name: data.selectedWorkshop
               ? dbWorkshops.find((w: any) => w.id === data.selectedWorkshop)
-                  ?.name
+                ?.name
               : undefined,
             idDocumentUrl,
           },
@@ -434,8 +434,8 @@ export default function FormPTECoreRegistration({
               selectedCourseData={
                 formData.selectedCourse
                   ? coursesData.find(
-                      (c: any) => c.id === formData.selectedCourse,
-                    )
+                    (c: any) => c.id === formData.selectedCourse,
+                  )
                   : undefined
               }
               selectedWorkshopData={
@@ -452,7 +452,10 @@ export default function FormPTECoreRegistration({
                     label: "Given Names",
                     value: formData.noGivenNames ? "N/A" : formData.givenNames,
                   },
-                  { label: "Middle Name", value: formData.middleName || "N/A" },
+                  {
+                    label: "Middle Name",
+                    value: formData.noMiddleName ? "N/A" : formData.middleName || "N/A",
+                  },
                   {
                     label: "Surnames",
                     value: formData.noSurname ? "N/A" : formData.surnames,
@@ -505,11 +508,11 @@ export default function FormPTECoreRegistration({
                   { label: "Address Line 1", value: formData.postalAddress1 },
                   ...(formData.postalAddress2
                     ? [
-                        {
-                          label: "Address Line 2",
-                          value: formData.postalAddress2,
-                        },
-                      ]
+                      {
+                        label: "Address Line 2",
+                        value: formData.postalAddress2,
+                      },
+                    ]
                     : []),
                   { label: "Emirate / City", value: formData.city },
                   {
@@ -522,14 +525,14 @@ export default function FormPTECoreRegistration({
                   },
                   ...(formData.occupationSector
                     ? [
-                        {
-                          label: "Occupation Sector",
-                          value:
-                            formData.occupationSector === "Other"
-                              ? formData.occupationSectorOther || "Other"
-                              : formData.occupationSector,
-                        },
-                      ]
+                      {
+                        label: "Occupation Sector",
+                        value:
+                          formData.occupationSector === "Other"
+                            ? formData.occupationSectorOther || "Other"
+                            : formData.occupationSector,
+                      },
+                    ]
                     : []),
                 ]}
               />

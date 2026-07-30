@@ -303,9 +303,9 @@ export default function FormIeltsAcademicRegistration({
         const compiledPayload = compileBookingPayload({
           examId,
           paymentMethod: data.paymentMethod || "stripe",
-          firstName: data.givenNames,
-          middleName: data.middleName || null,
-          lastName: data.surnames || null,
+          firstName: data.givenNames || "",
+          middleName: data.middleName || "",
+          lastName: data.surnames || "",
           dateOfBirth: data.dateOfBirth,
           gender: data.sex
             ? data.sex.charAt(0).toUpperCase() + data.sex.slice(1)
@@ -429,8 +429,8 @@ export default function FormIeltsAcademicRegistration({
               selectedCourseData={
                 formData.selectedCourse
                   ? coursesData.find(
-                      (c: any) => c.id === formData.selectedCourse,
-                    )
+                    (c: any) => c.id === formData.selectedCourse,
+                  )
                   : undefined
               }
               selectedWorkshopData={
@@ -518,11 +518,11 @@ export default function FormIeltsAcademicRegistration({
                   { label: "Address Line 1", value: formData.postalAddress1 },
                   ...(formData.postalAddress2
                     ? [
-                        {
-                          label: "Address Line 2",
-                          value: formData.postalAddress2,
-                        },
-                      ]
+                      {
+                        label: "Address Line 2",
+                        value: formData.postalAddress2,
+                      },
+                    ]
                     : []),
                   { label: "Emirate / City", value: formData.city },
                   {
@@ -543,7 +543,7 @@ export default function FormIeltsAcademicRegistration({
                     value:
                       formData.occupationLevel === "Other"
                         ? formData.occupationLevelOther ||
-                          "Other (not specified)"
+                        "Other (not specified)"
                         : formData.occupationLevel || "N/A",
                   },
                   {
@@ -551,7 +551,7 @@ export default function FormIeltsAcademicRegistration({
                     value:
                       formData.occupationSector === "Other"
                         ? formData.occupationSectorOther ||
-                          "Other (not specified)"
+                        "Other (not specified)"
                         : formData.occupationSector || "N/A",
                   },
                   {
@@ -559,7 +559,7 @@ export default function FormIeltsAcademicRegistration({
                     value:
                       formData.reasonForTakingTest === "other"
                         ? formData.reasonForTakingTestOther ||
-                          "Other (not specified)"
+                        "Other (not specified)"
                         : formData.reasonForTakingTest || "N/A",
                   },
                   {

@@ -306,9 +306,9 @@ export default function FormIELTSGeneralRegistration({
       const compiledPayload = compileBookingPayload({
         examId,
         paymentMethod: data.paymentMethod || "stripe",
-        firstName: data.givenNames,
-        middleName: data.middleName || null,
-        lastName: data.surnames || null,
+        firstName: data.givenNames || "",
+        middleName: data.middleName || "",
+        lastName: data.surnames || "",
         dateOfBirth: data.dateOfBirth,
         gender: data.sex
           ? data.sex.charAt(0).toUpperCase() + data.sex.slice(1)
@@ -497,11 +497,11 @@ export default function FormIELTSGeneralRegistration({
                 { label: "Address Line 1", value: formData.postalAddress1 },
                 ...(formData.postalAddress2
                   ? [
-                      {
-                        label: "Address Line 2",
-                        value: formData.postalAddress2,
-                      },
-                    ]
+                    {
+                      label: "Address Line 2",
+                      value: formData.postalAddress2,
+                    },
+                  ]
                   : []),
                 { label: "Emirate / City", value: formData.city },
                 {
@@ -529,7 +529,7 @@ export default function FormIELTSGeneralRegistration({
                   value:
                     formData.occupationSector === "Other"
                       ? formData.occupationSectorOther ||
-                        "Other (not specified)"
+                      "Other (not specified)"
                       : formData.occupationSector || "N/A",
                 },
                 {
@@ -537,7 +537,7 @@ export default function FormIELTSGeneralRegistration({
                   value:
                     formData.reasonForTakingTest === "other"
                       ? formData.reasonForTakingTestOther ||
-                        "Other (not specified)"
+                      "Other (not specified)"
                       : formData.reasonForTakingTest || "N/A",
                 },
                 {

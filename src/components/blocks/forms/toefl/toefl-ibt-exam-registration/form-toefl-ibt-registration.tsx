@@ -349,9 +349,9 @@ export default function FormTOEFLIBTRegistration({
           examId,
           paymentMethod:
             ((formData as any).paymentMethod as string) || "stripe",
-          firstName: data.givenNames,
-          middleName: data.middleName || null,
-          lastName: data.surnames || null,
+          firstName: data.givenNames || "",
+          middleName: data.middleName || "",
+          lastName: data.surnames || "",
           dateOfBirth: data.dateOfBirth,
           gender: data.gender
             ? data.gender.charAt(0).toUpperCase() + data.gender.slice(1)

@@ -84,16 +84,14 @@ export function ReviewStep({
                   {data.noGivenNames ? "N/A" : data.givenNames}
                 </span>
               </div>
-              {data.middleName && (
-                <div className="flex flex-col">
-                  <span className="text-[10px] text-slate-400 font-bold uppercase">
-                    Middle Name
-                  </span>
-                  <span className="text-sm font-semibold text-black">
-                    {data.middleName}
-                  </span>
-                </div>
-              )}
+              <div className="flex flex-col">
+                <span className="text-[10px] text-slate-400 font-bold uppercase">
+                  Middle Name
+                </span>
+                <span className="text-sm font-semibold text-black">
+                  {data.noMiddleName ? "N/A" : data.middleName || "N/A"}
+                </span>
+              </div>
               <div className="flex flex-col">
                 <span className="text-[10px] text-slate-400 font-bold uppercase">
                   Surnames
