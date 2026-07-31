@@ -31,15 +31,10 @@ export interface CoursePackage {
   image?: string | null;
 }
 
-function getDisplayDiscount(courseName: string, actualDiscount: number): number {
-  const name = courseName.toLowerCase();
-  if (name.includes("group")) return 10;
-  if (name.includes("semi-private")) return 15;
-  if (name.includes("hybrid")) return 25;
-  if (name.includes("online") && (name.includes("one-to-one") || name.includes("1-to-1") || name.includes("private") || name.includes("vip"))) return 20;
-  if (name.includes("in-person") || name.includes("classroom") || name.includes("one-to-one") || name.includes("1-to-1") || name.includes("vip") || name.includes("private")) return 20;
-  return actualDiscount;
-}
+import {
+  getCourseDiscountPercentage,
+  calculateCourseDiscountedPrice,
+} from "@/lib/course-discount";
 
 export interface CourseCardProps {
   pkg: CoursePackage;
@@ -77,10 +72,13 @@ export default function CourseCard({
     }
   }
 
-  const discountedPrice =
-    discountType === "PERCENTAGE"
-      ? Math.round(basePrice * (1 - discount / 100))
-      : basePrice - discount;
+  const effectiveDiscount = getCourseDiscountPercentage(pkg.name, discount);
+  const discountedPrice = calculateCourseDiscountedPrice(
+    basePrice,
+    pkg.name,
+    discount,
+    discountType
+  );
 
   return (
     <BaseCard className="p-0 flex flex-col justify-between overflow-hidden border-slate-200 group relative hover:border-primary/30 hover:shadow-2xl transition-all duration-500 ease-out h-full bg-white">
@@ -92,12 +90,12 @@ export default function CourseCard({
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="object-contain transition-transform duration-500 group-hover:scale-105"
         />
-        {discount > 0 && (
+        {effectiveDiscount > 0 && (
           <div className={cn("absolute top-4 z-10", isRtl ? "left-4" : "right-4")}>
             <Badge className="py-1 px-3 font-bold shadow-lg">
               <span dir="ltr" className="inline-block">
                 {t("packages.saveInstantCard", {
-                  discount: getDisplayDiscount(pkg.name, discount),
+                  discount: effectiveDiscount,
                   type: discountType === "PERCENTAGE" ? "%" : " AED"
                 })}
               </span>

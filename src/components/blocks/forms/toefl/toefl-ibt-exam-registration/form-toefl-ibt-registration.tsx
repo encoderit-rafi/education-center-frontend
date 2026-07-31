@@ -20,6 +20,7 @@ import { PriceDisplay } from "@/components/ui/price-display";
 import { toast } from "sonner";
 import { getEducationLevelLabel } from "@/lib/utils";
 import { compileBookingPayload } from "@/lib/booking";
+import { calculateCourseDiscountedPrice } from "@/lib/course-discount";
 
 // Import Steps
 import { TermsStep } from "./steps/terms-step";
@@ -71,10 +72,13 @@ export default function FormTOEFLIBTRegistration({
   const coursesData = dbPackages.map((pkg: any) => {
     const basePrice = parseFloat(pkg.price) || 0;
     const discount = parseFloat(pkg.discountValue) || 0;
-    const discountedPrice =
-      pkg.discountType === "PERCENTAGE"
-        ? Math.round(basePrice * (1 - discount / 100))
-        : basePrice - discount;
+    const pkgName = pkg.name || pkg.title || "";
+    const discountedPrice = calculateCourseDiscountedPrice(
+      basePrice,
+      pkgName,
+      discount,
+      pkg.discountType
+    );
 
     return {
       id: pkg.id,

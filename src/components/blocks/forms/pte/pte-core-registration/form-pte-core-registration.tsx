@@ -23,6 +23,7 @@ import { useRegistrationTitle } from "@/lib/translations";
 import { PteCoreSchema, type TPteCoreSchema } from "./_type";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import api from "@/axios";
+import { calculateCourseDiscountedPrice } from "@/lib/course-discount";
 import { VAT_PERCENT, calculateVat } from "@/lib/vat";
 import { compileBookingPayload } from "@/lib/booking";
 
@@ -66,10 +67,13 @@ export default function FormPTECoreRegistration({
   const coursesData = dbPackages.map((pkg: any) => {
     const basePrice = parseFloat(pkg.price) || 0;
     const discount = parseFloat(pkg.discountValue) || 0;
-    const discountedPrice =
-      pkg.discountType === "PERCENTAGE"
-        ? Math.round(basePrice * (1 - discount / 100))
-        : basePrice - discount;
+    const pkgName = pkg.name || pkg.title || "";
+    const discountedPrice = calculateCourseDiscountedPrice(
+      basePrice,
+      pkgName,
+      discount,
+      pkg.discountType
+    );
 
     return {
       id: pkg.id,

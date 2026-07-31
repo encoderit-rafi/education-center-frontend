@@ -22,6 +22,7 @@ import { ReviewStep } from "./steps/review-step";
 import { useRegistrationTitle } from "@/lib/translations";
 import { VAT_PERCENT, calculateVat } from "@/lib/vat";
 import { compileBookingPayload } from "@/lib/booking";
+import { calculateCourseDiscountedPrice } from "@/lib/course-discount";
 
 interface FormProps {
   examId?: string;
@@ -63,10 +64,13 @@ export default function FormPTEAcademicRegistration({
   const coursesData = dbPackages.map((pkg: any) => {
     const basePrice = parseFloat(pkg.price) || 0;
     const discount = parseFloat(pkg.discountValue) || 0;
-    const discountedPrice =
-      pkg.discountType === "PERCENTAGE"
-        ? Math.round(basePrice * (1 - discount / 100))
-        : basePrice - discount;
+    const pkgName = pkg.name || pkg.title || "";
+    const discountedPrice = calculateCourseDiscountedPrice(
+      basePrice,
+      pkgName,
+      discount,
+      pkg.discountType
+    );
 
     return {
       id: pkg.id,

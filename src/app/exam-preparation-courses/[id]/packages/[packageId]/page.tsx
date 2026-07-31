@@ -19,6 +19,7 @@ import api from "@/axios";
 import { buttonVariants } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { PriceDisplay } from "@/components/ui/price-display";
+import { calculateCourseDiscountedPrice } from "@/lib/course-discount";
 import { BaseCard } from "@/components/blocks/cards/base-card";
 import {
   PackageChecklistSection,
@@ -162,10 +163,12 @@ export default async function PackageDetailPage({ params }: PageProps) {
     }
   }
 
-  const discountedPrice =
-    discountType === "PERCENTAGE"
-      ? Math.round(basePrice * (1 - discount / 100))
-      : basePrice - discount;
+  const discountedPrice = calculateCourseDiscountedPrice(
+    basePrice,
+    pkg.name,
+    discount,
+    discountType
+  );
 
   const registrationUrl = `/exam-preparation-courses/registration?examId=${courseSlug}&courseId=${pkg.id}&price=${discountedPrice}&currency=AED`;
 

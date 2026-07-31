@@ -20,6 +20,7 @@ import {
 } from "@/components/blocks/forms/global-review-step";
 import { getEducationLevelLabel } from "@/lib/utils";
 import { compileBookingPayload } from "@/lib/booking";
+import { calculateCourseDiscountedPrice } from "@/lib/course-discount";
 
 // Import steps
 import { TermsStep } from "./steps/terms-step";
@@ -65,10 +66,13 @@ export default function FormIELTSGeneralRegistration({
   const coursesData = dbPackages.map((pkg: any) => {
     const basePrice = parseFloat(pkg.price) || 0;
     const discount = parseFloat(pkg.discountValue) || 0;
-    const discountedPrice =
-      pkg.discountType === "PERCENTAGE"
-        ? Math.round(basePrice * (1 - discount / 100))
-        : basePrice - discount;
+    const pkgName = pkg.name || pkg.title || "";
+    const discountedPrice = calculateCourseDiscountedPrice(
+      basePrice,
+      pkgName,
+      discount,
+      pkg.discountType
+    );
 
     return {
       id: pkg.id,

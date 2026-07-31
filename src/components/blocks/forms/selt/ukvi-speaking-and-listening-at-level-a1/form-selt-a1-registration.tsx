@@ -6,6 +6,7 @@ import {
 } from "@/components/blocks/forms/global-review-step";
 import { compileBookingPayload } from "@/lib/booking";
 import { PriceDisplay } from "@/components/ui/price-display";
+import { calculateCourseDiscountedPrice } from "@/lib/course-discount";
 
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -67,10 +68,13 @@ export default function FormSELTA1Registration({
   const coursesData = dbPackages.map((pkg: any) => {
     const basePrice = parseFloat(pkg.price) || 0;
     const discount = parseFloat(pkg.discountValue) || 0;
-    const discountedPrice =
-      pkg.discountType === "PERCENTAGE"
-        ? Math.round(basePrice * (1 - discount / 100))
-        : basePrice - discount;
+    const pkgName = pkg.name || pkg.title || "";
+    const discountedPrice = calculateCourseDiscountedPrice(
+      basePrice,
+      pkgName,
+      discount,
+      pkg.discountType
+    );
 
     return {
       id: pkg.id,

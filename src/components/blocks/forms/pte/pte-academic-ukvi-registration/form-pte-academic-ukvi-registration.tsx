@@ -25,6 +25,7 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import api from "@/axios";
 import { VAT_PERCENT, calculateVat } from "@/lib/vat";
 import { compileBookingPayload } from "@/lib/booking";
+import { calculateCourseDiscountedPrice } from "@/lib/course-discount";
 
 
 
@@ -68,10 +69,13 @@ export default function FormPTEAcademicUKVIRegistration({
   const coursesData = dbPackages.map((pkg: any) => {
     const basePrice = parseFloat(pkg.price) || 0;
     const discount = parseFloat(pkg.discountValue) || 0;
-    const discountedPrice =
-      pkg.discountType === "PERCENTAGE"
-        ? Math.round(basePrice * (1 - discount / 100))
-        : basePrice - discount;
+    const pkgName = pkg.name || pkg.title || "";
+    const discountedPrice = calculateCourseDiscountedPrice(
+      basePrice,
+      pkgName,
+      discount,
+      pkg.discountType
+    );
 
     return {
       id: pkg.id,

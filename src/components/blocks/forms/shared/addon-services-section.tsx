@@ -8,6 +8,11 @@ import { SearchableDropdown } from "@/components/ui/searchable-dropdown";
 import { PriceDisplay } from "@/components/ui/price-display";
 import { Badge } from "@/components/ui/badge";
 
+import {
+  getCourseDiscountPercentage,
+  calculateCourseDiscountedPrice,
+} from "@/lib/course-discount";
+
 export interface AddonServicesSectionProps {
   coursesData: any;
   workshopsData: any;
@@ -34,16 +39,6 @@ export function getLocalizedWorkshopLabel(w: any, locale: string): string {
   return translated || w.title || w.name || "";
 }
 
-function getDisplayDiscount(courseName: string, actualDiscount: number): number {
-  const name = courseName.toLowerCase();
-  if (name.includes("group")) return 10;
-  if (name.includes("semi-private")) return 15;
-  if (name.includes("hybrid")) return 25;
-  if (name.includes("online") && (name.includes("one-to-one") || name.includes("1-to-1") || name.includes("private") || name.includes("vip"))) return 20;
-  if (name.includes("in-person") || name.includes("classroom") || name.includes("one-to-one") || name.includes("1-to-1") || name.includes("vip") || name.includes("private")) return 20;
-  return actualDiscount;
-}
-
 export function AddonServicesSection({
   coursesData,
   workshopsData,
@@ -60,8 +55,8 @@ export function AddonServicesSection({
   const resolvedDescription = description ?? t("saveUpTo");
   const getCourseEffectivePrice = (c: any) => {
     if (c.discounted_price != null) return c.discounted_price;
-    if (c.special_discount) return c.price * (1 - c.special_discount / 100);
-    return c.price || 0;
+    const name = c.name || c.title || "";
+    return calculateCourseDiscountedPrice(c.price || 0, name, c.special_discount || 0);
   };
 
   const sortedCourses = Object.values(coursesData || {}).sort((a: any, b: any) => {
@@ -93,67 +88,55 @@ export function AddonServicesSection({
               name="selectedCourse"
               options={[
                 { label: t("none"), value: "" },
-                ...sortedCourses.map((c: any) => ({
-                  label: getLocalizedCourseName(c, locale),
-                  description: c.discounted_price != null ? (
-                    <span className="flex flex-col gap-1.5 mt-1">
-                      <span className="inline-flex items-center gap-1">
-                        <PriceDisplay
-                          amount={c.discounted_price}
-                          minimumFractionDigits={2}
-                          maximumFractionDigits={2}
-                          className="text-primary font-semibold"
-                        />
-                        <span className="text-primary font-semibold">
-                          ({getDisplayDiscount(c.name || c.title || "", Math.round((1 - c.discounted_price / c.price) * 100))}% OFF)
+                ...sortedCourses.map((c: any) => {
+                  const name = c.name || c.title || "";
+                  const discPct = getCourseDiscountPercentage(
+                    name,
+                    c.special_discount || 0
+                  );
+                  const effPrice =
+                    c.discounted_price != null
+                      ? c.discounted_price
+                      : calculateCourseDiscountedPrice(c.price, name, c.special_discount || 0);
+                  const hasDiscount = discPct > 0 || effPrice < c.price;
+
+                  return {
+                    label: getLocalizedCourseName(c, locale),
+                    description: hasDiscount ? (
+                      <span className="flex flex-col gap-1.5 mt-1">
+                        <span className="inline-flex items-center gap-1">
+                          <PriceDisplay
+                            amount={effPrice}
+                            minimumFractionDigits={2}
+                            maximumFractionDigits={2}
+                            className="text-primary font-semibold"
+                          />
+                          <span className="text-primary font-semibold">
+                            ({discPct}% OFF)
+                          </span>
+                          <PriceDisplay
+                            amount={c.price}
+                            minimumFractionDigits={2}
+                            maximumFractionDigits={2}
+                            className="line-through text-muted-foreground"
+                          />
                         </span>
-                        <PriceDisplay
-                          amount={c.price}
-                          minimumFractionDigits={2}
-                          maximumFractionDigits={2}
-                          className="line-through text-muted-foreground"
-                        />
-                      </span>
-                      <span className="flex items-center gap-1.5 flex-wrap">
-                        {[t("freePrepMaterial"), t("freeConsultation"), t("freeMockTest")].map((item, index) => (
-                          <Badge key={index}>{item}</Badge>
-                        ))}
-                      </span>
-                    </span>
-                  ) : c.special_discount ? (
-                    <span className="flex flex-col gap-1.5 mt-1">
-                      <span className="inline-flex items-center gap-1">
-                        <PriceDisplay
-                          amount={c.price * (1 - c.special_discount / 100)}
-                          minimumFractionDigits={2}
-                          maximumFractionDigits={2}
-                          className="text-primary font-semibold"
-                        />
-                        <span className="text-primary font-semibold">
-                          ({getDisplayDiscount(c.name || c.title || "", c.special_discount)}% OFF)
+                        <span className="flex items-center gap-1.5 flex-wrap">
+                          {[t("freePrepMaterial"), t("freeConsultation"), t("freeMockTest")].map((item, index) => (
+                            <Badge key={index}>{item}</Badge>
+                          ))}
                         </span>
-                        <PriceDisplay
-                          amount={c.price}
-                          minimumFractionDigits={2}
-                          maximumFractionDigits={2}
-                          className="line-through text-muted-foreground"
-                        />
                       </span>
-                      <span className="flex items-center gap-1.5 flex-wrap">
-                        {[t("freePrepMaterial"), t("freeConsultation"), t("freeMockTest")].map((item, index) => (
-                          <Badge key={index}>{item}</Badge>
-                        ))}
-                      </span>
-                    </span>
-                  ) : (
-                    <PriceDisplay
-                      amount={c.price}
-                      minimumFractionDigits={0}
-                      maximumFractionDigits={0}
-                    />
-                  ),
-                  value: c.id,
-                })),
+                    ) : (
+                      <PriceDisplay
+                        amount={c.price}
+                        minimumFractionDigits={0}
+                        maximumFractionDigits={0}
+                      />
+                    ),
+                    value: c.id,
+                  };
+                }),
               ]}
               placeholder={t("selectCourse")}
               value={selectedCourse}

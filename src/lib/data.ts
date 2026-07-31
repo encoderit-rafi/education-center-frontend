@@ -80,7 +80,7 @@ export const ielts_general_courses = [
     id: "ielts_general_course_2",
     name: "Semi-Private Course",
     price: 2850,
-    discounted_price: 2565,
+    discounted_price: 2422.50,
     currency: "AED",
   },
   {
