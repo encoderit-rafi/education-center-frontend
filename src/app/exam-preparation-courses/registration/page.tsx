@@ -165,10 +165,16 @@ function CourseRegistrationForm({ className }: { className?: string }) {
   const isUae =
     selectedCountry?.toLowerCase() === "united arab emirates" ||
     selectedCountry?.toLowerCase() === "uae";
-  const vatRate = packageData?.vatRate ? parseFloat(packageData.vatRate) : 0;
-  console.log("👉 ~ CourseRegistrationForm ~ vatRate:", vatRate);
+  const vatRateRaw = packageData?.vatRate;
+  const hasPackageVat =
+    vatRateRaw !== undefined && vatRateRaw !== null && vatRateRaw !== "";
+  const parsedVatRate = hasPackageVat ? parseFloat(vatRateRaw) : null;
 
-  const activeVatPercent = vatRate === 0 ? VAT_PERCENT : isUae ? vatRate : 0;
+  const activeVatPercent = isUae
+    ? parsedVatRate !== null
+      ? parsedVatRate
+      : VAT_PERCENT
+    : 0;
   const vatAmount = Number((subtotal * (activeVatPercent / 100)).toFixed(2));
   const total_amount = subtotal + vatAmount;
 
@@ -324,7 +330,17 @@ function CourseRegistrationForm({ className }: { className?: string }) {
       coupon_discount: appliedCoupon ? couponDiscount : null,
     };
 
-    mutation.mutate(omitEmpty(payload));
+    const finalPayload = {
+      ...omitEmpty(payload),
+      coupon_code: appliedCoupon ? appliedCoupon.code : null,
+      coupon: appliedCoupon ? appliedCoupon.code : null,
+      coupon_id: appliedCoupon ? (appliedCoupon.id || appliedCoupon._id || null) : null,
+      coupon_discount: appliedCoupon ? couponDiscount : null,
+    };
+
+    console.log("👉 [Course Registration] Final Payload Sent to API:", finalPayload);
+
+    mutation.mutate(finalPayload);
   };
 
   if (isSuccess) {
