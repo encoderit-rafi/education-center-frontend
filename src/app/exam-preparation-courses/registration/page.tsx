@@ -320,6 +320,8 @@ function CourseRegistrationForm({ className }: { className?: string }) {
       payment_methods: formData.paymentMethod,
       coupon_code: appliedCoupon ? appliedCoupon.code : null,
       coupon: appliedCoupon ? appliedCoupon.code : null,
+      coupon_id: appliedCoupon ? (appliedCoupon.id || appliedCoupon._id || null) : null,
+      coupon_discount: appliedCoupon ? couponDiscount : null,
     };
 
     mutation.mutate(omitEmpty(payload));

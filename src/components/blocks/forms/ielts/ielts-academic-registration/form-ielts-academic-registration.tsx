@@ -9,9 +9,7 @@ import { IeltsAcademicSchema, type TIeltsAcademicSchema } from "./_type";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import api from "@/axios";
 import { format } from "date-fns";
-import { User, ShieldCheck, Globe } from "lucide-react";
-import * as z from "zod";
-import { VAT_PERCENT, calculateVat } from "@/lib/vat";
+import { calculateVat } from "@/lib/vat";
 import { toast } from "sonner";
 import {
   GlobalReviewStep,
@@ -337,6 +335,8 @@ export default function FormIeltsAcademicRegistration({
           },
           courseId: data.selectedCourse ? courseDetail?.id : null,
         });
+
+        console.log("👉 ~ compiledPayload:", compiledPayload);
 
         bookingMutation.mutate(compiledPayload);
       } catch (error: any) {

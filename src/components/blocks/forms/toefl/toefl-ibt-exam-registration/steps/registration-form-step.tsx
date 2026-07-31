@@ -292,9 +292,11 @@ export function RegistrationFormStep({
                 <Checkbox
                   id="noSurname"
                   checked={formData.noSurname}
-                  onCheckedChange={(val) =>
-                    setValue("noSurname", val as boolean)
-                  }
+                  onCheckedChange={(val) => {
+                    const isChecked = val as boolean;
+                    setValue("noSurname", isChecked);
+                    if (isChecked) setValue("surnames", "");
+                  }}
                 />
                 <Label htmlFor="noSurname" className="text-xs font-light">
                   {t("noSurname")}

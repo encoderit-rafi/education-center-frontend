@@ -32,6 +32,9 @@ export interface BookingPayloadInput {
   discountAmount?: number;
   vatAmount?: number;
   totalAmount: number;
+  couponId?: string | null;
+  couponDiscount?: number | null;
+  couponCode?: string | null;
   allFormData: Record<string, any>;
 }
 
@@ -208,6 +211,9 @@ export function compileBookingPayload(input: BookingPayloadInput) {
     discount_amount: input.discountAmount || 0,
     vat_amount: input.vatAmount || 0,
     total_amount: input.totalAmount,
+    coupon_id: input.couponId ?? input.allFormData.coupon_id ?? input.allFormData.couponId ?? null,
+    coupon_discount: input.couponDiscount ?? input.allFormData.coupon_discount ?? input.allFormData.couponDiscount ?? null,
+    coupon_code: input.couponCode ?? input.allFormData.coupon_code ?? input.allFormData.couponCode ?? null,
     selected_course_name: formattedCourseName || input.allFormData.selected_course_name || undefined,
     selected_workshop_name: formattedWorkshopName || input.allFormData.selected_workshop_name || undefined,
   };
@@ -272,6 +278,12 @@ export function compileBookingPayload(input: BookingPayloadInput) {
     "workshop_package_id",
     "paymentId",
     "payment_id",
+    "couponId",
+    "coupon_id",
+    "couponDiscount",
+    "coupon_discount",
+    "couponCode",
+    "coupon_code",
   ];
 
   const keyToLabelMap: Record<string, string> = {
@@ -459,6 +471,16 @@ export function compileBookingPayload(input: BookingPayloadInput) {
           if (lowerVal === "male") mappedValue = "Male";
           else if (lowerVal === "female") mappedValue = "Female";
           else if (lowerVal === "other") mappedValue = "Other";
+        } else if (key === "marketingPreference") {
+          const marketingMap: Record<string, string> = {
+            all: "I am happy to receive updates about products, services and events organised by British Council.",
+            some: "I am happy to receive information from British Council and selected third parties.",
+            none: "Please do not send me any marketing updates.",
+            third_party: "I am happy to receive information from selected third parties.",
+          };
+          if (marketingMap[valueStr]) {
+            mappedValue = marketingMap[valueStr];
+          }
         }
 
         examInfoList.push({
