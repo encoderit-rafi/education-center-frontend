@@ -324,20 +324,17 @@ function CourseRegistrationForm({ className }: { className?: string }) {
       total_amount,
       vat_amount: vatAmount,
       payment_methods: formData.paymentMethod,
-      coupon_code: appliedCoupon ? appliedCoupon.code : null,
-      coupon: appliedCoupon ? appliedCoupon.code : null,
-      coupon_id: appliedCoupon ? (appliedCoupon.id || appliedCoupon._id || null) : null,
-      coupon_discount: appliedCoupon ? couponDiscount : null,
+      ...(appliedCoupon
+        ? {
+            coupon_code: appliedCoupon.code,
+            coupon: appliedCoupon.code,
+            coupon_id: appliedCoupon.id || appliedCoupon._id || undefined,
+            coupon_discount: couponDiscount,
+          }
+        : {}),
     };
 
-    const finalPayload = {
-      ...omitEmpty(payload),
-      coupon_code: appliedCoupon ? appliedCoupon.code : null,
-      coupon: appliedCoupon ? appliedCoupon.code : null,
-      coupon_id: appliedCoupon ? (appliedCoupon.id || appliedCoupon._id || null) : null,
-      coupon_discount: appliedCoupon ? couponDiscount : null,
-    };
-
+    const finalPayload = omitEmpty(payload);
     console.log("👉 [Course Registration] Final Payload Sent to API:", finalPayload);
 
     mutation.mutate(finalPayload);
