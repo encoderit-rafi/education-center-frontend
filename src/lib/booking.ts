@@ -481,6 +481,51 @@ export function compileBookingPayload(input: BookingPayloadInput) {
           if (marketingMap[valueStr]) {
             mappedValue = marketingMap[valueStr];
           }
+        } else if (key === "studyLevel") {
+          const studyLevelMap: Record<string, string> = {
+            pre_degree: "Pre-degree",
+            undergraduate: "Undergraduate",
+            postgraduate: "Postgraduate",
+            doctorate: "Doctorate",
+            mba: "MBA",
+            english_language: "English Language",
+            professional: "Professional",
+            other: "Other",
+          };
+          if (studyLevelMap[valueStr]) {
+            mappedValue = studyLevelMap[valueStr];
+          }
+        } else if (key === "fieldOfStudy") {
+          const fieldOfStudyMap: Record<string, string> = {
+            accountancy_finance: "Accountancy / Finance",
+            agriculture: "Agriculture",
+            architecture: "Architecture",
+            business_management: "Business / Management",
+            communications_media: "Communications / Media",
+            education: "Education",
+            engineering: "Engineering",
+            health: "Health",
+            humanities_arts: "Humanities / Arts",
+            it_computer_sciences: "IT / Computer Sciences",
+            law: "Law",
+            mathematics: "Mathematics",
+            medicine: "Medicine",
+            physical_life_sciences: "Physical / Life Sciences",
+            social_sciences: "Social Sciences",
+            tourism_hospitality: "Tourism / Hospitality",
+            other: "Other",
+          };
+          if (fieldOfStudyMap[valueStr]) {
+            mappedValue = fieldOfStudyMap[valueStr];
+          }
+        } else if (key === "takenBefore" || key === "takenWithinTwoYears" || key === "hasExistingAccount") {
+          // Normalize yes/no to capitalised form
+          if (valueStr === "yes") mappedValue = "Yes";
+          else if (valueStr === "no") mappedValue = "No";
+        } else if (key === "infoCorrect") {
+          // infoCorrect is boolean - already handled above, but guard string case
+          if (valueStr === "yes" || valueStr === "true") mappedValue = "Yes";
+          else if (valueStr === "no" || valueStr === "false") mappedValue = "No";
         }
 
         examInfoList.push({
