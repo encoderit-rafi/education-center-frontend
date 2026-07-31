@@ -238,7 +238,9 @@ export function ReviewStep({
                   First Language
                 </span>
                 <span className="text-sm font-semibold text-black">
-                  {data.homeLanguage || "N/A"}
+                  {data.homeLanguage === "Other"
+                    ? data.homeLanguageOther || "N/A"
+                    : data.homeLanguage || "N/A"}
                 </span>
               </div>
               <div className="flex flex-col">
@@ -246,15 +248,43 @@ export function ReviewStep({
                   Reason for Test
                 </span>
                 <span className="text-sm font-semibold text-black">
-                  {data.reasonForTaking} {data.studyLevel ? `(${data.studyLevel})` : ""}
+                  {data.reasonForTaking === "other"
+                    ? (data.reasonForTakingOther || "Other")
+                    : data.reasonForTaking || "N/A"}
                 </span>
               </div>
+              {data.reasonForTaking === "study" && data.studyLevel && (
+                <div className="flex flex-col">
+                  <span className="text-[10px] text-slate-400 font-bold uppercase">
+                    Study Level
+                  </span>
+                  <span className="text-sm font-semibold text-black">
+                    {data.studyLevel === "other"
+                      ? (data.studyLevelOther || "Other")
+                      : data.studyLevel}
+                  </span>
+                </div>
+              )}
+              {data.reasonForTaking === "study" && data.fieldOfStudy && (
+                <div className="flex flex-col">
+                  <span className="text-[10px] text-slate-400 font-bold uppercase">
+                    Field of Study
+                  </span>
+                  <span className="text-sm font-semibold text-black">
+                    {data.fieldOfStudy === "other"
+                      ? (data.fieldOfStudyOther || "Other")
+                      : data.fieldOfStudy}
+                  </span>
+                </div>
+              )}
               <div className="flex flex-col">
                 <span className="text-[10px] text-slate-400 font-bold uppercase">
                   Current Situation
                 </span>
                 <span className="text-sm font-semibold text-black">
-                  {data.currentSituation}
+                  {data.currentSituation === "Other"
+                    ? (data.currentSituationOther || "Other")
+                    : data.currentSituation || "N/A"}
                 </span>
               </div>
               {data.occupationSector && (
@@ -264,6 +294,56 @@ export function ReviewStep({
                   </span>
                   <span className="text-sm font-semibold text-black">
                     {data.occupationSector === "Other" ? data.occupationSectorOther || "Other" : data.occupationSector}
+                  </span>
+                </div>
+              )}
+              {data.referralSource && (
+                <div className="flex flex-col">
+                  <span className="text-[10px] text-slate-400 font-bold uppercase">
+                    Referral Source
+                  </span>
+                  <span className="text-sm font-semibold text-black">
+                    {data.referralSource === "Other" || data.referralSource === "other"
+                      ? (data.referralSourceOther || "Other")
+                      : data.referralSource}
+                  </span>
+                </div>
+              )}
+              <div className="flex flex-col">
+                <span className="text-[10px] text-slate-400 font-bold uppercase">
+                  Taken Before
+                </span>
+                <span className="text-sm font-semibold text-black capitalize">
+                  {data.takenBefore || "N/A"}
+                </span>
+              </div>
+              {data.takenBefore === "yes" && (
+                <>
+                  <div className="flex flex-col">
+                    <span className="text-[10px] text-slate-400 font-bold uppercase">
+                      Was It Within 2 Years?
+                    </span>
+                    <span className="text-sm font-semibold text-black capitalize">
+                      {data.takenWithinTwoYears || "N/A"}
+                    </span>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-[10px] text-slate-400 font-bold uppercase">
+                      Existing Account
+                    </span>
+                    <span className="text-sm font-semibold text-black capitalize">
+                      {data.hasExistingAccount || "N/A"}
+                    </span>
+                  </div>
+                </>
+              )}
+              {data.marketingPreference && (
+                <div className="flex flex-col">
+                  <span className="text-[10px] text-slate-400 font-bold uppercase">
+                    Marketing Preference
+                  </span>
+                  <span className="text-sm font-semibold text-black">
+                    {data.marketingPreference}
                   </span>
                 </div>
               )}

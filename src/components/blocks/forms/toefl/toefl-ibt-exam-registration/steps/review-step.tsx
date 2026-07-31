@@ -244,7 +244,17 @@ export function ReviewStep({
                                 {tToefl("firstLanguage")}
                             </span>
                             <span className="text-sm font-bold text-slate-900">
-                                {data.firstLanguage || t("na")}
+                                {data.firstLanguage === "Other"
+                                    ? data.firstLanguageOther || t("otherNotSpecified")
+                                    : data.firstLanguage || t("na")}
+                            </span>
+                        </div>
+                        <div className="flex flex-col">
+                            <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">
+                                Years Studying English
+                            </span>
+                            <span className="text-sm font-bold text-slate-900">
+                                {data.yearsStudyingEnglish || t("na")}
                             </span>
                         </div>
                         <div className="flex flex-col">
@@ -255,6 +265,96 @@ export function ReviewStep({
                                 {getEducationLevelLabel(data.educationLevel)}
                             </span>
                         </div>
+                        <div className="flex flex-col">
+                            <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">
+                                Have You Taken TOEFL Before?
+                            </span>
+                            <span className="text-sm font-bold text-slate-900">
+                                {data.takenBefore || t("na")}
+                            </span>
+                        </div>
+                        {data.takenBefore === "Yes" && (
+                            <>
+                                <div className="flex flex-col">
+                                    <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">
+                                        Was It Less Than 2 Years Ago?
+                                    </span>
+                                    <span className="text-sm font-bold text-slate-900">
+                                        {data.lessThanTwoYears || t("na")}
+                                    </span>
+                                </div>
+                                <div className="flex flex-col">
+                                    <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">
+                                        Existing Account
+                                    </span>
+                                    <span className="text-sm font-bold text-slate-900">
+                                        {data.existingAccount || t("na")}
+                                    </span>
+                                </div>
+                            </>
+                        )}
+                        {data.reasonsForTakingToefl && (
+                            <div className="flex flex-col">
+                                <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">
+                                    Reason for Taking TOEFL
+                                </span>
+                                <span className="text-sm font-bold text-slate-900">
+                                    {data.reasonsForTakingToefl}
+                                </span>
+                            </div>
+                        )}
+                        {data.nextLevelOfStudy && (
+                            <div className="flex flex-col">
+                                <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">
+                                    Next Level of Study
+                                </span>
+                                <span className="text-sm font-bold text-slate-900">
+                                    {data.nextLevelOfStudy}
+                                </span>
+                            </div>
+                        )}
+                        {data.desiredFieldOfStudy && (
+                            <div className="flex flex-col">
+                                <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">
+                                    Desired Field of Study
+                                </span>
+                                <span className="text-sm font-bold text-slate-900">
+                                    {data.desiredFieldOfStudy === "Other"
+                                        ? data.desiredFieldOfStudyOther || t("otherNotSpecified")
+                                        : data.desiredFieldOfStudy}
+                                </span>
+                            </div>
+                        )}
+                        {data.intendedEnrollmentDate && (
+                            <div className="flex flex-col">
+                                <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">
+                                    Intended Enrollment Date
+                                </span>
+                                <span className="text-sm font-bold text-slate-900">
+                                    {format(data.intendedEnrollmentDate, "PPP")}
+                                </span>
+                            </div>
+                        )}
+                        {data.destinationCountry && (
+                            <div className="flex flex-col">
+                                <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">
+                                    Destination Country
+                                </span>
+                                <span className="text-sm font-bold text-slate-900">
+                                    {data.destinationCountry}
+                                </span>
+                            </div>
+                        )}
+                        {data.marketingPreference && (
+                            <div className="flex flex-col">
+                                <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">
+                                    Marketing Preference
+                                </span>
+                                <span className="text-sm font-bold text-slate-900">
+                                    {data.marketingPreference}
+                                </span>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
