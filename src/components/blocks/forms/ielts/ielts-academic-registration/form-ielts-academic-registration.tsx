@@ -304,7 +304,7 @@ export default function FormIeltsAcademicRegistration({
           ? coursesData.find((c: any) => c.id === data.selectedCourse)
           : null;
         const selectedWorkshopObj = data.selectedWorkshop
-          ? workshopsData.find((w: any) => w.id === data.selectedWorkshop)
+          ? (workshopsData as any)[data.selectedWorkshop]
           : null;
 
         const compiledPayload = compileBookingPayload({

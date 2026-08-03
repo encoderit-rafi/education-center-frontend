@@ -562,7 +562,7 @@ export function RegistrationFormStep({
                       { label: tYesNo("no"), value: "No" },
                       {
                         label: tIelts("forgotAccount"),
-                        value: "I forgot my SELT account details",
+                        value: "I forgot my IELTS account details",
                       },
                     ].map((opt) => (
                       <Label

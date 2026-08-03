@@ -390,8 +390,8 @@ export default function FormTOEFLIBTRegistration({
                  coursesData.find((c: any) => c.id === data.selectedCourse)?.title)
               : undefined,
             selected_workshop_name: data.selectedWorkshop
-              ? (workshopsData.find((w: any) => w.id === data.selectedWorkshop)?.name ||
-                 workshopsData.find((w: any) => w.id === data.selectedWorkshop)?.title)
+              ? ((workshopsData as any)[data.selectedWorkshop]?.name ||
+                 (workshopsData as any)[data.selectedWorkshop]?.title)
               : undefined,
             idDocumentUrl,
           },
