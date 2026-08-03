@@ -375,7 +375,8 @@ export default function FormTOEFLIBTRegistration({
           idNumber: data.idNumber,
           sessionDate: data.examDate,
           sessionTime: data.examTimeSlot || null,
-          examFee: pricing.baseFeeAED + pricing.expressFeeAED,
+          examFee: pricing.baseFeeAED,
+          expressFee: pricing.expressFeeAED,
           courseFee: pricing.coursePriceAED,
           workshopFee: pricing.workshopPriceAED,
           additionalFee: pricing.registrationServiceFeeAED,
@@ -384,6 +385,7 @@ export default function FormTOEFLIBTRegistration({
           totalAmount: total,
           allFormData: {
             ...data,
+            expressFee: pricing.expressFeeAED,
             level_name: activeExam?.name || "TOEFL iBT",
             selected_course_name: data.selectedCourse
               ? (coursesData.find((c: any) => c.id === data.selectedCourse)?.name ||
@@ -397,6 +399,7 @@ export default function FormTOEFLIBTRegistration({
           },
           courseId: data.selectedCourse ? courseDetail?.id : null,
         });
+        console.log("compiledPayload", compiledPayload)
         bookingMutation.mutate(compiledPayload);
       } catch (error: any) {
         console.error("Form submission error:", error);

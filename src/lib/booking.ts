@@ -26,6 +26,7 @@ export interface BookingPayloadInput {
   sessionDate?: string | Date | null;
   sessionTime?: string | null;
   examFee: number;
+  expressFee?: number;
   courseFee?: number;
   workshopFee?: number;
   additionalFee?: number;
@@ -205,6 +206,7 @@ export function compileBookingPayload(input: BookingPayloadInput) {
     session_date: formatDate(input.sessionDate),
     session_time: formatSessionTime(input.sessionTime),
     exam_fee: input.examFee,
+    express_fee: input.expressFee ?? input.allFormData.expressFee ?? input.allFormData.express_fee ?? 0,
     course_fee: input.courseFee || 0,
     workshop_fee: input.workshopFee || 0,
     additional_fee: input.additionalFee || 0,
@@ -254,6 +256,10 @@ export function compileBookingPayload(input: BookingPayloadInput) {
     "examTime",
     "examFee",
     "exam_fee",
+    "expressFee",
+    "express_fee",
+    "isExpress",
+    "is_express",
     "courseFee",
     "course_fee",
     "workshopFee",
@@ -575,6 +581,13 @@ export function compileBookingPayload(input: BookingPayloadInput) {
       label: examName ? `${examName} Exam Fee` : "Exam Fee",
       value: String(input.examFee),
     },
+    input.expressFee
+      ? {
+        name: "express_fee",
+        label: "Express Fee",
+        value: String(input.expressFee),
+      }
+      : null,
     input.additionalFee
       ? {
         name: "additional_fee",
