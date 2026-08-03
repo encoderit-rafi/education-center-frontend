@@ -103,11 +103,18 @@ export function compileBookingPayload(input: BookingPayloadInput) {
     return "others";
   };
 
+  const isToefl = Boolean(
+    (input.examId || "").toLowerCase().includes("toefl") ||
+    (input.allFormData?.level_name || "").toLowerCase().includes("toefl") ||
+    (input.allFormData?.slug || "").toLowerCase().includes("toefl") ||
+    (input.allFormData?.name || "").toLowerCase().includes("toefl")
+  );
+
   const formatSessionTime = (timeStr?: string | null) => {
     if (!timeStr) return undefined;
     const trimmed = timeStr.trim().toUpperCase();
 
-    if (input.examId?.toLowerCase().includes("toefl")) {
+    if (isToefl) {
       const dateObj = input.sessionDate ? new Date(input.sessionDate) : null;
       if (dateObj && !isNaN(dateObj.getTime())) {
         const day =
@@ -115,12 +122,14 @@ export function compileBookingPayload(input: BookingPayloadInput) {
             input.sessionDate.includes("-")
             ? dateObj.getUTCDay()
             : dateObj.getDay();
-        if (day === 3 && trimmed === "PM") {
+        if (day === 3 && (trimmed === "PM" || trimmed === "6:00 PM" || trimmed === "18:00")) {
           return "18:00";
-        } else if (day === 6 && trimmed === "AM") {
+        } else if (day === 6 && (trimmed === "AM" || trimmed === "10:00 AM" || trimmed === "10:00")) {
           return "10:00";
         }
       }
+      if (trimmed === "PM") return "18:00";
+      if (trimmed === "AM") return "10:00";
     }
 
     if (trimmed === "AM") return "09:00";
@@ -290,6 +299,8 @@ export function compileBookingPayload(input: BookingPayloadInput) {
     "coupon_discount",
     "couponCode",
     "coupon_code",
+    "infoCorrect",
+    "info_correct",
   ];
 
   const keyToLabelMap: Record<string, string> = {
@@ -364,6 +375,11 @@ export function compileBookingPayload(input: BookingPayloadInput) {
       key === "idDocument" ||
       key === "confirmEmail" ||
       key === "passportCopy" ||
+      key === "infoCorrect" ||
+      key === "info_correct" ||
+      key === "termsAccepted" ||
+      key === "terms_accepted" ||
+      coreKeys.includes(key) ||
       (typeof File !== "undefined" && value instanceof File)
     ) {
       continue;
@@ -379,8 +395,9 @@ export function compileBookingPayload(input: BookingPayloadInput) {
     }
 
     if (key === "examTimeSlot" || key === "sessionTime" || key === "examTime") {
-      if (input.examId?.toLowerCase().includes("toefl")) {
+      if (isToefl) {
         const dateObj = input.sessionDate ? new Date(input.sessionDate) : null;
+        let timeSet = false;
         if (dateObj && !isNaN(dateObj.getTime())) {
           const day =
             typeof input.sessionDate === "string" &&
@@ -389,10 +406,19 @@ export function compileBookingPayload(input: BookingPayloadInput) {
               : dateObj.getDay();
           if (day === 3) {
             valueStr = "6:00 PM";
+            timeSet = true;
           } else if (day === 6) {
             valueStr = "10:00 AM";
+            timeSet = true;
           }
         }
+        if (!timeSet) {
+          if (valueStr === "PM") valueStr = "6:00 PM";
+          else if (valueStr === "AM") valueStr = "10:00 AM";
+        }
+      } else {
+        if (valueStr === "AM") valueStr = "09:00 AM";
+        else if (valueStr === "PM") valueStr = "01:00 PM";
       }
     }
 
