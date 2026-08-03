@@ -467,9 +467,19 @@ export default function CareerPage() {
                           render={({ field }) => (
                             <CountryDropdown
                               value={field.value}
-                              onChange={(country) =>
-                                field.onChange(country.name)
-                              }
+                              onChange={(country) => {
+                                const formattedName = country.name
+                                  ? country.name
+                                      .split(" ")
+                                      .map(
+                                        (word) =>
+                                          word.charAt(0).toUpperCase() +
+                                          word.slice(1).toLowerCase(),
+                                      )
+                                      .join(" ")
+                                  : country.name;
+                                field.onChange(formattedName);
+                              }}
                               placeholder={t("form.nationalityPlaceholder")}
                             />
                           )}
