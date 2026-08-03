@@ -215,7 +215,7 @@ export default function FreeConsultationPage() {
 
       {/* ── Section 4: Form ── */}
       <div className="relative h-full bg-white base-px base-py">
-        <div className=" max-w-3xl mx-auto flex flex-col">
+        <div className="max-w-5xl mx-auto flex flex-col">
           <SectionHeader
             title={
               <>

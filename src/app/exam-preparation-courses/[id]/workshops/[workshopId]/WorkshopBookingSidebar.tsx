@@ -94,7 +94,7 @@ export function WorkshopBookingSidebar({
           </SelectTrigger>
           <SelectContent className="bg-white border border-slate-150">
             <SelectItem value="Online">{onlineOptionText}</SelectItem>
-            <SelectItem value="In-Person">{inPersonOptionText}</SelectItem>
+            <SelectItem value="In&#8209;Person">{inPersonOptionText}</SelectItem>
           </SelectContent>
         </Select>
       </div>
