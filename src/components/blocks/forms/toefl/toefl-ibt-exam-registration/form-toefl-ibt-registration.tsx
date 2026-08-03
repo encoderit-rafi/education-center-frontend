@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -38,6 +38,10 @@ export default function FormTOEFLIBTRegistration({
   examId: initialExamId,
 }: FormProps = {}) {
   const [currentStep, setCurrentStep] = useState(0); // 0: Terms, 1: Date, 2: Form, 3: Review
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [currentStep]);
   const titleObj = useRegistrationTitle("toefl-ibt");
   const tReview = useTranslations("FormsShared.GlobalReviewStep");
   const locale = useLocale();
@@ -382,10 +386,12 @@ export default function FormTOEFLIBTRegistration({
             ...data,
             level_name: activeExam?.name || "TOEFL iBT",
             selected_course_name: data.selectedCourse
-              ? coursesData.find((c: any) => c.id === data.selectedCourse)?.name
+              ? (coursesData.find((c: any) => c.id === data.selectedCourse)?.name ||
+                 coursesData.find((c: any) => c.id === data.selectedCourse)?.title)
               : undefined,
             selected_workshop_name: data.selectedWorkshop
-              ? (workshopsData as any)[data.selectedWorkshop]?.name
+              ? (workshopsData.find((w: any) => w.id === data.selectedWorkshop)?.name ||
+                 workshopsData.find((w: any) => w.id === data.selectedWorkshop)?.title)
               : undefined,
             idDocumentUrl,
           },

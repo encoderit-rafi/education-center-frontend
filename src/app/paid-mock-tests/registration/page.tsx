@@ -628,8 +628,11 @@ function PaidMockTestRegistrationForm({
 }
 
 export default function PaidMockTestRegistration() {
+  const t = useTranslations("PaidMockTestsPage");
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<div><Loader2 className="w-4 h-4 animate-spin" />
+                      {t("processing")}
+                    </div>}>
       <PaidMockTestRegistrationForm />
     </Suspense>
   );

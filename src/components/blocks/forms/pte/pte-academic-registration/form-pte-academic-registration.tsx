@@ -5,7 +5,7 @@ import {
   ReviewSummaryGrid,
 } from "@/components/blocks/forms/global-review-step";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "@/components/ui/form";
@@ -32,6 +32,10 @@ export default function FormPTEAcademicRegistration({
   examId: initialExamId,
 }: FormProps = {}) {
   const [currentStep, setCurrentStep] = useState(0); // 0: Terms, 1: Date, 2: Form, 3: Review
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [currentStep]);
   const titleObj = useRegistrationTitle("pte-academic");
 
   const { data: examsResponse } = useQuery({

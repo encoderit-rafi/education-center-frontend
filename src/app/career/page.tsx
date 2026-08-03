@@ -130,6 +130,12 @@ export default function CareerPage() {
     }
   }, [errors]);
 
+  useEffect(() => {
+    if (isSuccess) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [isSuccess]);
+
   const onSubmit = async (data: CareerFormValues) => {
     const recaptchaToken = validateCaptcha(t("validation.captchaRequired"));
     if (recaptchaToken === null) {
@@ -462,7 +468,7 @@ export default function CareerPage() {
                             <CountryDropdown
                               value={field.value}
                               onChange={(country) =>
-                                field.onChange(country.alpha2.toUpperCase())
+                                field.onChange(country.name)
                               }
                               placeholder={t("form.nationalityPlaceholder")}
                             />

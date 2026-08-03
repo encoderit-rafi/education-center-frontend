@@ -8,7 +8,7 @@ import { compileBookingPayload } from "@/lib/booking";
 import { PriceDisplay } from "@/components/ui/price-display";
 import { calculateCourseDiscountedPrice } from "@/lib/course-discount";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "@/components/ui/form";
@@ -35,6 +35,11 @@ export default function FormSELTC1Registration({
   examId: initialExamId,
 }: FormProps = {}) {
   const [currentStep, setCurrentStep] = useState(0);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [currentStep]);
+
   const initialId = "selt-c1";
 
   const { data: examsResponse } = useQuery({

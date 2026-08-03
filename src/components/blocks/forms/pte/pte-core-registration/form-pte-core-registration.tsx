@@ -35,6 +35,11 @@ export default function FormPTECoreRegistration({
   examId: initialExamId,
 }: FormProps = {}) {
   const [currentStep, setCurrentStep] = useState(0); // 0: Terms, 1: Date, 2: Form, 3: Review
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [currentStep]);
+
   const titleObj = useRegistrationTitle("pte-core");
 
   const { data: examsResponse } = useQuery({

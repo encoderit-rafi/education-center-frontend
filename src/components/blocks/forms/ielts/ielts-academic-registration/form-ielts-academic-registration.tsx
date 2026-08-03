@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "@/components/ui/form";
@@ -34,6 +34,11 @@ export default function FormIeltsAcademicRegistration({
   examId: initialExamId,
 }: FormProps = {}) {
   const [currentStep, setCurrentStep] = useState(0); // 0: Terms, 1: Date, 2: Form, 3: Review
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [currentStep]);
+
   const titleObj = useRegistrationTitle("ielts-academic");
 
   const { data: examsResponse } = useQuery({
@@ -299,7 +304,7 @@ export default function FormIeltsAcademicRegistration({
           ? coursesData.find((c: any) => c.id === data.selectedCourse)
           : null;
         const selectedWorkshopObj = data.selectedWorkshop
-          ? (workshopsData as any)[data.selectedWorkshop]
+          ? workshopsData.find((w: any) => w.id === data.selectedWorkshop)
           : null;
 
         const compiledPayload = compileBookingPayload({
@@ -333,8 +338,10 @@ export default function FormIeltsAcademicRegistration({
           allFormData: {
             ...data,
             level_name: activeExam?.name || "IELTS Academic",
-            selected_course_name: selectedCourseObj?.name || undefined,
-            selected_workshop_name: selectedWorkshopObj?.name || undefined,
+            selected_course_name:
+              selectedCourseObj?.name || selectedCourseObj?.title || undefined,
+            selected_workshop_name:
+              selectedWorkshopObj?.name || selectedWorkshopObj?.title || undefined,
             idDocumentUrl,
           },
           courseId: data.selectedCourse ? courseDetail?.id : null,
