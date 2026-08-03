@@ -39,6 +39,7 @@ function resolveExamKey(slug: string): string | null {
 interface MockTestTypeSelectorProps {
   data: {
     slug: string;
+    name?: string;
     price: string;
     center_price?: string;
     details?: {
@@ -168,6 +169,7 @@ export function MockTestTypeSelector({ data }: MockTestTypeSelectorProps) {
           data={data}
           className={cn(buttonVariants(), "w-full")}
           selectedLocation={selectedLocation}
+          selectedType={data.name}
         >
           {t("register")}
         </AcceptPayButton>

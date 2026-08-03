@@ -144,19 +144,21 @@ function PaidMockTestRegistrationForm({
     const variantFromUrl = searchParams.get("variant");
     if (variantFromUrl) {
       setValue("varient", variantFromUrl, { shouldValidate: false });
+    } else if (data?.name) {
+      setValue("varient", data.name, { shouldValidate: false });
     }
     const locationFromUrl = searchParams.get("location");
     if (locationFromUrl) {
       setValue("testLocation", locationFromUrl, { shouldValidate: false });
     }
-  }, [searchParams, setValue]);
+  }, [searchParams, setValue, data?.name]);
 
   const selectedPaymentMethod = watch("paymentMethod");
   const formData = watch();
 
   const activeLocation = formData.testLocation || searchParams.get("location") || "home";
   const priceParam = searchParams.get("price");
-  const variantParam = formData.varient || searchParams.get("variant") || "";
+  const variantParam = formData.varient || searchParams.get("variant") || data?.name || "";
   const rawCenterPrice = data?.details?.center_price ?? data?.center_price;
 
   const parsedPriceParam = priceParam ? parseFloat(priceParam) : 0;
@@ -238,7 +240,7 @@ function PaidMockTestRegistrationForm({
   const onSubmit = (formData: BookingValues) => {
     const selectedLocation = formData.testLocation || activeLocation;
     const siteLocation = selectedLocation === "center" ? "center-based" : "home-based";
-    const mockTestType = formData.varient || variantParam || "";
+    const mockTestType = formData.varient || variantParam || data?.name || "";
 
     const payload = {
       mock_test_id: data?.id || id || formData.mockTestId || "",

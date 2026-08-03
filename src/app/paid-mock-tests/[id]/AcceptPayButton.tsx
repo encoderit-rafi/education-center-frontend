@@ -19,6 +19,7 @@ import Image from "next/image";
 interface AcceptPayButtonProps {
   data: {
     slug: string;
+    name?: string;
     price: string;
     center_price?: string;
     details?: {
@@ -55,8 +56,9 @@ export function AcceptPayButton({
   const handleContinue = (location: "home" | "center") => {
     setIsOpen(false);
     const selectedPrice = location === "center" ? centerPrice : homePrice;
-    const variantParam = selectedType
-      ? `&variant=${encodeURIComponent(selectedType)}`
+    const variantType = selectedType || data.name;
+    const variantParam = variantType
+      ? `&variant=${encodeURIComponent(variantType)}`
       : "";
     router.push(
       `/paid-mock-tests/registration?id=${data.slug}&location=${location}&price=${selectedPrice}${variantParam}`,
