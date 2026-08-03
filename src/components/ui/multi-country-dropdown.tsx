@@ -40,10 +40,23 @@ interface MultiCountryDropdownProps {
   className?: string;
 }
 
-const options: Country[] = countries.all.filter(
-  (country: Country) =>
-    country.emoji && country.status !== "deleted" && country.ioc !== "PRK"
-);
+const formatCountryName = (name: string): string => {
+  if (!name) return name;
+  return name
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(" ");
+};
+
+const options: Country[] = countries.all
+  .filter(
+    (country: Country) =>
+      country.emoji && country.status !== "deleted" && country.ioc !== "PRK",
+  )
+  .map((country: Country) => ({
+    ...country,
+    name: formatCountryName(country.name),
+  }));
 
 const MultiCountryDropdownComponent = (
   {

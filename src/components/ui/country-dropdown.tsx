@@ -52,12 +52,25 @@ interface CountryDropdownProps extends Omit<
   placeholder?: string;
 }
 
+const formatCountryName = (name: string): string => {
+  if (!name) return name;
+  return name
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(" ");
+};
+
 const CountryDropdownComponent = (
   {
-    options = countries.all.filter(
-      (country: Country) =>
-        country.emoji && country.status !== "deleted" && country.ioc !== "PRK",
-    ),
+    options = countries.all
+      .filter(
+        (country: Country) =>
+          country.emoji && country.status !== "deleted" && country.ioc !== "PRK",
+      )
+      .map((country: Country) => ({
+        ...country,
+        name: formatCountryName(country.name),
+      })),
     onChange,
     value,
     disabled = false,
@@ -81,7 +94,8 @@ const CountryDropdownComponent = (
         (country) =>
           country.alpha3 === value ||
           country.alpha2 === value ||
-          country.name === value,
+          country.name === value ||
+          country.name.toLowerCase() === value.toLowerCase(),
       );
       if (initialCountry) {
         setSelectedCountry(initialCountry);
