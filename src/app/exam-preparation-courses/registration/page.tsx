@@ -317,6 +317,7 @@ function CourseRegistrationForm({ className }: { className?: string }) {
 
     const examInfoList = [
       { name: "firstName", label: "First Name", value: formData.firstName },
+      ...(formData.middleName ? [{ name: "middleName", label: "Middle Name", value: formData.middleName }] : []),
       { name: "lastName", label: "Family Name", value: formData.lastName },
       { name: "email", label: "Email", value: formData.email },
       { name: "mobileNumber", label: "Phone Number", value: formData.phone },
@@ -332,6 +333,7 @@ function CourseRegistrationForm({ className }: { className?: string }) {
       sub_course_id: null,
       package_id: packageId || "",
       first_name: formData.firstName,
+      middle_name: formData.middleName || "",
       last_name: formData.lastName,
       email: formData.email,
       phone: formData.phone,

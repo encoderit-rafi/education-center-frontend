@@ -415,6 +415,8 @@ export function compileBookingPayload(input: BookingPayloadInput) {
     occupationSectorOther: "Occupation Sector (Other)",
     reasonForTakingTest: "Reason for Taking Test",
     reasonForTakingTestOther: "Reason for Taking Test (Other)",
+    reasonForTest: "Reason for Test",
+    reasonForTestOther: "Reason for Test (Other)",
     destinationCountry: "Destination Country",
     selectedCourse: "Selected Course",
     selectedWorkshop: "Selected Workshop",
@@ -522,8 +524,14 @@ export function compileBookingPayload(input: BookingPayloadInput) {
           if (referralSourceMap[valueStr]) {
             mappedValue = referralSourceMap[valueStr];
           }
-        } else if (key === "reasonForTaking") {
+        } else if (
+          key === "reasonForTaking" ||
+          key === "reasonForTest" ||
+          key === "reasonForTakingTest"
+        ) {
           const reasonMap: Record<string, string> = {
+            ukvi: "UK Visas and Immigration (UKVI)",
+            UKVI: "UK Visas and Immigration (UKVI)",
             // pte-academic
             study: "Study",
             nursing: "Nursing registration or licensing",
@@ -558,6 +566,8 @@ export function compileBookingPayload(input: BookingPayloadInput) {
           };
           if (reasonMap[valueStr]) {
             mappedValue = reasonMap[valueStr];
+          } else if (valueStr.toLowerCase() === "ukvi") {
+            mappedValue = "UK Visas and Immigration (UKVI)";
           }
         } else if (key === "idType" || key === "id_type") {
           mappedValue = getIdTypeLabel(valueStr);
@@ -802,7 +812,7 @@ export function compileBookingPayload(input: BookingPayloadInput) {
     input.expressFee
       ? {
         name: "express_fee",
-        label: "Express Fee",
+        label: examName ? `${examName} Express Fee` : "Express Fee",
         value: String(input.expressFee),
       }
       : null,

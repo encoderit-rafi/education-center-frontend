@@ -386,8 +386,8 @@ export default function FormTOEFLIBTRegistration({
           allFormData: {
             ...data,
             examDay: data.examDate ? format(new Date(data.examDate as any), "EEEE") : undefined,
-            expressFee: pricing.expressFeeAED,
             level_name: activeExam?.name || "TOEFL iBT",
+            expressFee: pricing.expressFeeAED,
             selected_course_name: data.selectedCourse
               ? (coursesData.find((c: any) => c.id === data.selectedCourse)?.name ||
                  coursesData.find((c: any) => c.id === data.selectedCourse)?.title)

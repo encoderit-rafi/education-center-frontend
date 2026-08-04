@@ -180,6 +180,8 @@ export const translateValue = (val: string, locale: string) => {
 
   // Handle Reason for Test options
   const reasonMapping: Record<string, string> = {
+    "UK Visas and Immigration (UKVI)": "التأشيرات والهجرة المملكة المتحدة (UKVI)",
+    "ukvi": "التأشيرات والهجرة المملكة المتحدة (UKVI)",
     "Nursing registration or licensing": "تسجيل أو ترخيص التمريض",
     "Study": "الدراسة",
     "Australia - MATES visa (India only)": "أستراليا - تأشيرة MATES (الهند فقط)",

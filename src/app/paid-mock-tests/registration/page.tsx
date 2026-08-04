@@ -34,7 +34,7 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import api from "@/axios";
 import Image from "next/image";
 import { format } from "date-fns";
-import { DateTimePicker } from "@/components/ui/date-time-picker";
+import { DatePicker } from "@/components/blocks/date-picker";
 
 const baseBookingSchema = z.object({
   mockTestId: z.string().min(1, "Please select a mock test"),
@@ -58,8 +58,22 @@ const baseBookingSchema = z.object({
     .string()
     .trim()
     .min(1, "Phone number is required"),
-  dateOfBirth: z.any().optional(),
-  gender: z.string().optional(),
+  dateOfBirth: z
+    .any()
+    .optional()
+    .refine((val) => {
+      if (!val) return true;
+      const dob = new Date(val);
+      if (isNaN(dob.getTime())) return true;
+      const today = new Date();
+      let age = today.getFullYear() - dob.getFullYear();
+      const m = today.getMonth() - dob.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+        age--;
+      }
+      return age >= 16;
+    }, "Candidates must be at least 16 years old."),
+  gender: z.string().trim().min(1, "Gender is required"),
   address: z
     .string()
     .trim()
@@ -259,8 +273,8 @@ function PaidMockTestRegistrationForm({
       { name: "lastName", label: "Family Name", value: formData.lastName },
       { name: "email", label: "Email", value: formData.email },
       { name: "mobileNumber", label: "Phone Number", value: formData.phone },
-      ...(formattedDob ? [{ name: "dateOfBirth", label: "Date of Birth", value: formattedDob }] : []),
-      ...(formData.gender ? [{ name: "gender", label: "Gender", value: formData.gender.charAt(0).toUpperCase() + formData.gender.slice(1) }] : []),
+      { name: "dateOfBirth", label: "Date of Birth", value: formattedDob || "" },
+      { name: "gender", label: "Gender", value: formData.gender ? formData.gender.charAt(0).toUpperCase() + formData.gender.slice(1) : "" },
       { name: "country", label: "Country", value: formData.country },
       { name: "city", label: "Town / City", value: formData.city },
       { name: "address", label: "Address", value: formData.address },
@@ -285,11 +299,11 @@ function PaidMockTestRegistrationForm({
       phone_number: formData.phone,
       mobile: formData.phone,
       mobile_number: formData.phone,
-      date_of_birth: formattedDob,
-      dob: formattedDob,
-      dateOfBirth: formattedDob,
-      gender: formData.gender || undefined,
-      sex: formData.gender || undefined,
+      date_of_birth: formattedDob || null,
+      dob: formattedDob || null,
+      dateOfBirth: formattedDob || null,
+      gender: formData.gender || null,
+      sex: formData.gender || null,
       city: formData.city,
       country: formData.country,
       address: formData.address,
@@ -310,7 +324,11 @@ function PaidMockTestRegistrationForm({
     console.log("👉 [Mock Test Registration] Form Raw Data:", formData);
     console.log("👉 [Mock Test Registration] Final Payload Sent to API:", payload);
 
-    mutation.mutate(omitEmpty(payload));
+    mutation.mutate({
+      ...omitEmpty(payload),
+      gender: formData.gender || "",
+      date_of_birth: formattedDob || "",
+    });
   };
 
   const isPending = mutation.isPending || paymentMutation.isPending;
@@ -469,20 +487,29 @@ function PaidMockTestRegistrationForm({
                   <Field data-invalid={!!errors.dateOfBirth}>
                     <FieldLabel>{t("dateOfBirth")}</FieldLabel>
                     <FieldContent>
-                      <DateTimePicker
-                        mode="date"
+                      <DatePicker
+                        name="dateOfBirth"
                         placeholder={t("dateOfBirthPlaceholder")}
                         value={formData.dateOfBirth ? new Date(formData.dateOfBirth) : undefined}
                         onChange={(date) => setValue("dateOfBirth", date, { shouldValidate: true })}
+                        disabled={(date) =>
+                          date >= new Date() || date < new Date("1900-01-01")
+                        }
+                        fromYear={1900}
+                        toYear={new Date().getFullYear()}
                       />
                       <FieldError errors={[errors.dateOfBirth]} />
                     </FieldContent>
                   </Field>
                   <Field data-invalid={!!errors.gender}>
-                    <FieldLabel>{t("gender")}</FieldLabel>
+                    <FieldLabel required>{t("gender")}</FieldLabel>
                     <FieldContent>
                       <Select
-                        value={formData.gender || undefined}
+                        value={
+                          formData.gender
+                            ? formData.gender.charAt(0).toUpperCase() + formData.gender.slice(1).toLowerCase()
+                            : undefined
+                        }
                         onValueChange={(val) => {
                           if (val) setValue("gender", val, { shouldValidate: true });
                         }}
@@ -491,8 +518,8 @@ function PaidMockTestRegistrationForm({
                           <SelectValue placeholder={t("selectGender")} />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="male">{t("male")}</SelectItem>
-                          <SelectItem value="female">{t("female")}</SelectItem>
+                          <SelectItem value="Male">{t("male")}</SelectItem>
+                          <SelectItem value="Female">{t("female")}</SelectItem>
                         </SelectContent>
                       </Select>
                       <FieldError errors={[errors.gender]} />
@@ -714,8 +741,8 @@ export default function PaidMockTestRegistration() {
   const t = useTranslations("PaidMockTestsPage");
   return (
     <Suspense fallback={<div><Loader2 className="w-4 h-4 animate-spin" />
-                      {t("processing")}
-                    </div>}>
+      {t("processing")}
+    </div>}>
       <PaidMockTestRegistrationForm />
     </Suspense>
   );
