@@ -740,7 +740,7 @@ export default function EnglishQuizForm() {
         phone: data.phoneNumber,
         country: data.country,
         city: data.city,
-        follow_up: data.followUp,
+        follow_up: data.followUp === "yes" || data.followUp === "Yes" ? "Yes" : data.followUp === "no" || data.followUp === "No" ? "No" : data.followUp ? data.followUp.charAt(0).toUpperCase() + data.followUp.slice(1) : "",
         score,
         questions,
       };
@@ -898,7 +898,7 @@ export default function EnglishQuizForm() {
                       >
                         <div className="flex items-start gap-2.5 cursor-pointer">
                           <RadioGroupItem
-                            value="yes"
+                            value="Yes"
                             id="followUp-yes"
                             className="mt-0.5 shrink-0"
                           />
@@ -911,7 +911,7 @@ export default function EnglishQuizForm() {
                         </div>
                         <div className="flex items-start gap-2.5 cursor-pointer">
                           <RadioGroupItem
-                            value="no"
+                            value="No"
                             id="followUp-no"
                             className="mt-0.5 shrink-0"
                           />
