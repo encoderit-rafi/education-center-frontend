@@ -324,6 +324,7 @@ export default function FormPTEAcademicRegistration({
           totalAmount: total,
           allFormData: {
             ...data,
+            examDay: data.examDate ? format(new Date(data.examDate as any), "EEEE") : undefined,
             level_name: activeExam?.name || "PTE Academic",
             selected_course_name: data.selectedCourse
               ? coursesData.find((c: any) => c.id === data.selectedCourse)?.name
@@ -506,6 +507,12 @@ export default function FormPTEAcademicRegistration({
                       ? format(new Date(formData.examDate as any), "PPP")
                       : "N/A",
                     highlight: true,
+                  },
+                  {
+                    label: "Exam Day",
+                    value: formData.examDate
+                      ? format(new Date(formData.examDate as any), "EEEE")
+                      : "N/A",
                   },
                   { label: "Time Slot", value: formData.examTime || "N/A" },
                   { label: "Address Line 1", value: formData.postalAddress1 },

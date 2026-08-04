@@ -385,6 +385,7 @@ export default function FormTOEFLIBTRegistration({
           totalAmount: total,
           allFormData: {
             ...data,
+            examDay: data.examDate ? format(new Date(data.examDate as any), "EEEE") : undefined,
             expressFee: pricing.expressFeeAED,
             level_name: activeExam?.name || "TOEFL iBT",
             selected_course_name: data.selectedCourse
@@ -726,6 +727,12 @@ export default function FormTOEFLIBTRegistration({
                       ? format(new Date(formData.examDate as any), "PPP")
                       : "N/A",
                     highlight: true,
+                  },
+                  {
+                    label: "Exam Day",
+                    value: formData.examDate
+                      ? format(new Date(formData.examDate as any), "EEEE")
+                      : "N/A",
                   },
                   {
                     label: "Time Slot",

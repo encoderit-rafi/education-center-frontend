@@ -110,21 +110,46 @@ export function compileBookingPayload(input: BookingPayloadInput) {
     (input.allFormData?.name || "").toLowerCase().includes("toefl")
   );
 
+  const rawSessionDate =
+    input.sessionDate ||
+    input.allFormData?.examDate ||
+    input.allFormData?.sessionDate ||
+    undefined;
+  const formattedSessionDate = formatDate(rawSessionDate);
+
+  let formattedExamDay: string | undefined =
+    input.allFormData?.examDay || input.allFormData?.exam_day || undefined;
+  if (!formattedExamDay && rawSessionDate) {
+    try {
+      const dObj = new Date(rawSessionDate);
+      if (!isNaN(dObj.getTime())) {
+        formattedExamDay = format(dObj, "EEEE");
+      }
+    } catch {
+      // ignore
+    }
+  }
+
   const formatSessionTime = (timeStr?: string | null) => {
     if (!timeStr) return undefined;
     const trimmed = timeStr.trim().toUpperCase();
 
     if (isToefl) {
-      const dateObj = input.sessionDate ? new Date(input.sessionDate) : null;
+      const dateObj = rawSessionDate ? new Date(rawSessionDate) : null;
       if (dateObj && !isNaN(dateObj.getTime())) {
         const day =
-          typeof input.sessionDate === "string" &&
-            input.sessionDate.includes("-")
+          typeof rawSessionDate === "string" && rawSessionDate.includes("-")
             ? dateObj.getUTCDay()
             : dateObj.getDay();
-        if (day === 3 && (trimmed === "PM" || trimmed === "6:00 PM" || trimmed === "18:00")) {
+        if (
+          day === 3 &&
+          (trimmed === "PM" || trimmed === "6:00 PM" || trimmed === "18:00")
+        ) {
           return "18:00";
-        } else if (day === 6 && (trimmed === "AM" || trimmed === "10:00 AM" || trimmed === "10:00")) {
+        } else if (
+          day === 6 &&
+          (trimmed === "AM" || trimmed === "10:00 AM" || trimmed === "10:00")
+        ) {
           return "10:00";
         }
       }
@@ -155,6 +180,50 @@ export function compileBookingPayload(input: BookingPayloadInput) {
 
     return timeStr;
   };
+
+  const rawSessionTime =
+    input.sessionTime ||
+    input.allFormData?.examTimeSlot ||
+    input.allFormData?.examTime ||
+    input.allFormData?.sessionTime ||
+    undefined;
+
+  const formattedSessionTime = formatSessionTime(rawSessionTime);
+
+  const getDisplayTimeSlot = (timeStr?: string | null) => {
+    if (!timeStr) return undefined;
+    const trimmed = timeStr.trim().toUpperCase();
+
+    if (isToefl) {
+      const dateObj = rawSessionDate ? new Date(rawSessionDate) : null;
+      if (dateObj && !isNaN(dateObj.getTime())) {
+        const day =
+          typeof rawSessionDate === "string" && rawSessionDate.includes("-")
+            ? dateObj.getUTCDay()
+            : dateObj.getDay();
+        if (
+          day === 3 &&
+          (trimmed === "PM" || trimmed === "6:00 PM" || trimmed === "18:00")
+        ) {
+          return "6:00 PM";
+        } else if (
+          day === 6 &&
+          (trimmed === "AM" || trimmed === "10:00 AM" || trimmed === "10:00")
+        ) {
+          return "10:00 AM";
+        }
+      }
+      if (trimmed === "PM") return "6:00 PM";
+      if (trimmed === "AM") return "10:00 AM";
+    }
+
+    if (trimmed === "AM") return "09:00 AM";
+    if (trimmed === "PM") return "01:00 PM";
+
+    return timeStr;
+  };
+
+  const displayTimeSlot = getDisplayTimeSlot(rawSessionTime);
 
   const rawCourseName =
     input.allFormData.selected_course_name ||
@@ -212,8 +281,12 @@ export function compileBookingPayload(input: BookingPayloadInput) {
     country: input.country || null,
     id_type: mapIdType(input.idType),
     id_number: input.idNumber || undefined,
-    session_date: formatDate(input.sessionDate),
-    session_time: formatSessionTime(input.sessionTime),
+    session_date: formattedSessionDate,
+    session_time: formattedSessionTime,
+    exam_date: formattedSessionDate,
+    exam_day: formattedExamDay,
+    exam_time_slot: displayTimeSlot || formattedSessionTime,
+    exam_time: formattedSessionTime,
     exam_fee: input.examFee,
     express_fee: input.expressFee ?? input.allFormData.expressFee ?? input.allFormData.express_fee ?? 0,
     course_fee: input.courseFee || 0,
@@ -255,14 +328,6 @@ export function compileBookingPayload(input: BookingPayloadInput) {
     "id_type",
     "idNumber",
     "id_number",
-    "sessionDate",
-    "session_date",
-    "examDate",
-    "exam_date",
-    "sessionTime",
-    "session_time",
-    "examTimeSlot",
-    "examTime",
     "examFee",
     "exam_fee",
     "expressFee",
@@ -352,7 +417,17 @@ export function compileBookingPayload(input: BookingPayloadInput) {
     vatNumber: "VAT Number",
     paymentMethod: "Payment Method",
     examDate: "Exam Date",
+    exam_date: "Exam Date",
+    sessionDate: "Exam Date",
+    session_date: "Exam Date",
+    examDay: "Exam Day",
+    exam_day: "Exam Day",
     examTimeSlot: "Exam Time Slot",
+    exam_time_slot: "Exam Time Slot",
+    sessionTime: "Exam Time Slot",
+    session_time: "Exam Time Slot",
+    examTime: "Exam Time Slot",
+    exam_time: "Exam Time Slot",
     speakingSlot: "Speaking Slot",
     level_name: "Selected Level",
   };
@@ -394,32 +469,16 @@ export function compileBookingPayload(input: BookingPayloadInput) {
       valueStr = String(value);
     }
 
-    if (key === "examTimeSlot" || key === "sessionTime" || key === "examTime") {
-      if (isToefl) {
-        const dateObj = input.sessionDate ? new Date(input.sessionDate) : null;
-        let timeSet = false;
-        if (dateObj && !isNaN(dateObj.getTime())) {
-          const day =
-            typeof input.sessionDate === "string" &&
-              input.sessionDate.includes("-")
-              ? dateObj.getUTCDay()
-              : dateObj.getDay();
-          if (day === 3) {
-            valueStr = "6:00 PM";
-            timeSet = true;
-          } else if (day === 6) {
-            valueStr = "10:00 AM";
-            timeSet = true;
-          }
-        }
-        if (!timeSet) {
-          if (valueStr === "PM") valueStr = "6:00 PM";
-          else if (valueStr === "AM") valueStr = "10:00 AM";
-        }
-      } else {
-        if (valueStr === "AM") valueStr = "09:00 AM";
-        else if (valueStr === "PM") valueStr = "01:00 PM";
-      }
+    if (
+      key === "examTimeSlot" ||
+      key === "sessionTime" ||
+      key === "examTime" ||
+      key === "exam_time_slot" ||
+      key === "exam_time"
+    ) {
+      valueStr = getDisplayTimeSlot(valueStr) || valueStr;
+    } else if (key === "examDay" || key === "exam_day") {
+      valueStr = formattedExamDay || valueStr;
     }
 
     if (key === "idDocumentUrl") {
@@ -593,6 +652,57 @@ export function compileBookingPayload(input: BookingPayloadInput) {
         value: staticMeta.name,
       });
     }
+  }
+
+  if (
+    !examInfoList.some(
+      (item) =>
+        item.name === "examDate" ||
+        item.name === "exam_date" ||
+        item.name === "sessionDate" ||
+        item.label === "Exam Date"
+    ) &&
+    formattedSessionDate
+  ) {
+    examInfoList.push({
+      name: "exam_date",
+      label: "Exam Date",
+      value: formattedSessionDate,
+    });
+  }
+
+  if (
+    !examInfoList.some(
+      (item) =>
+        item.name === "examDay" ||
+        item.name === "exam_day" ||
+        item.label === "Exam Day"
+    ) &&
+    formattedExamDay
+  ) {
+    examInfoList.push({
+      name: "exam_day",
+      label: "Exam Day",
+      value: formattedExamDay,
+    });
+  }
+
+  if (
+    !examInfoList.some(
+      (item) =>
+        item.name === "examTimeSlot" ||
+        item.name === "exam_time_slot" ||
+        item.name === "examTime" ||
+        item.name === "sessionTime" ||
+        item.label === "Exam Time Slot"
+    ) &&
+    (displayTimeSlot || formattedSessionTime)
+  ) {
+    examInfoList.push({
+      name: "exam_time_slot",
+      label: "Exam Time Slot",
+      value: displayTimeSlot || formattedSessionTime || "",
+    });
   }
 
   const examName =

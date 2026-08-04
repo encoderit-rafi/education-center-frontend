@@ -342,6 +342,7 @@ export default function FormIELTSGeneralRegistration({
         totalAmount: total,
         allFormData: {
           ...data,
+          examDay: data.examDate ? format(new Date(data.examDate as any), "EEEE") : undefined,
           level_name: activeExam?.name || "IELTS General",
           selected_course_name:
             selectedCourseObj?.name || selectedCourseObj?.title || undefined,
@@ -492,6 +493,12 @@ export default function FormIELTSGeneralRegistration({
                     ? format(new Date(formData.examDate as any), "PPP")
                     : "N/A",
                   highlight: true,
+                },
+                {
+                  label: "Exam Day",
+                  value: formData.examDate
+                    ? format(new Date(formData.examDate as any), "EEEE")
+                    : "N/A",
                 },
                 {
                   label: "Time Slot",

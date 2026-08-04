@@ -334,6 +334,7 @@ export default function FormSELTA2Registration({
           totalAmount: total,
           allFormData: {
             ...data,
+            examDay: data.examDate ? format(new Date(data.examDate as any), "EEEE") : undefined,
             level_name: activeExam?.name || "SELT A2",
             selected_course_name: data.selectedCourse
               ? coursesData.find((c: any) => c.id === data.selectedCourse)?.name
@@ -609,6 +610,12 @@ export default function FormSELTA2Registration({
                       ? format(new Date(formData.examDate as any), "PPP")
                       : "N/A",
                     highlight: true,
+                  },
+                  {
+                    label: "Exam Day",
+                    value: formData.examDate
+                      ? format(new Date(formData.examDate as any), "EEEE")
+                      : "N/A",
                   },
                   { label: "Time Slot", value: formData.examTimeSlot },
                   {

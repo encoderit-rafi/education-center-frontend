@@ -232,6 +232,14 @@ export function ReviewStep({
             </div>
             <div className="flex flex-col">
               <span className="text-[10px] text-slate-400 font-bold uppercase">
+                Exam Day
+              </span>
+              <span className="text-sm font-semibold text-black">
+                {data.examDate ? format(new Date(data.examDate), "EEEE") : t("na")}
+              </span>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-[10px] text-slate-400 font-bold uppercase">
                 {tIelts("timeSlot")}
               </span>
               <span className="text-sm font-semibold text-black">

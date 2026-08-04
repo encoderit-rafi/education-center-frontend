@@ -52,7 +52,9 @@ export const translateLabel = (label: string, locale: string) => {
     "issuing authority": "جهة الإصدار",
 
     "exam date": "تاريخ الامتحان",
+    "exam day": "يوم الامتحان",
     "time slot": "الموعد",
+    "exam time slot": "الموعد",
     "speaking slot": "طريقة تقديم اختبار المحادثة",
     "address line 1": "العنوان سطر 1",
     "address line 2": "العنوان سطر 2",
@@ -109,6 +111,18 @@ export const translateValue = (val: string, locale: string) => {
     if (lower === "other" || lower === "others") return "Other";
     return val;
   }
+
+  // Handle Days of Week
+  const daysMapping: Record<string, string> = {
+    monday: "الإثنين",
+    tuesday: "الثلاثاء",
+    wednesday: "الأربعاء",
+    thursday: "الخميس",
+    friday: "الجمعة",
+    saturday: "السبت",
+    sunday: "الأحد",
+  };
+  if (daysMapping[lower]) return daysMapping[lower];
 
   // Handle Course & Workshop Names
   const courseWorkshopMapping: Record<string, string> = {
