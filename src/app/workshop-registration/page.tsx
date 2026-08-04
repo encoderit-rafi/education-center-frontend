@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useTranslations } from "next-intl";
+import { format } from "date-fns";
 import { cn, omitEmpty } from "@/lib/utils";
 import { VAT_PERCENT, calculateVat } from "@/lib/vat";
 import {
@@ -204,7 +205,26 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
   });
 
   const onSubmit = (formData: BookingValues) => {
-    const payload = {
+    const formattedDob = (formData as any).dateOfBirth
+      ? typeof (formData as any).dateOfBirth === "string"
+        ? (formData as any).dateOfBirth
+        : format(new Date((formData as any).dateOfBirth), "yyyy-MM-dd")
+      : undefined;
+
+    const examInfoList = [
+      { name: "firstName", label: "First Name", value: formData.firstName },
+      ...(formData.middleName ? [{ name: "middleName", label: "Middle Name", value: formData.middleName }] : []),
+      { name: "lastName", label: "Family Name", value: formData.lastName },
+      { name: "email", label: "Email", value: formData.email },
+      { name: "mobileNumber", label: "Phone Number", value: formData.phone },
+      ...(formattedDob ? [{ name: "dateOfBirth", label: "Date of Birth", value: formattedDob }] : []),
+      ...((formData as any).gender ? [{ name: "gender", label: "Gender", value: (formData as any).gender.charAt(0).toUpperCase() + (formData as any).gender.slice(1) }] : []),
+      { name: "country", label: "Country", value: formData.country },
+      { name: "city", label: "Town / City", value: formData.city },
+      { name: "address", label: "Address", value: formData.address },
+    ];
+
+    const payload: Record<string, any> = {
       course_id: courseData?.id || "",
       workshop_id: workshop?.id || "",
       first_name: formData.firstName,
@@ -212,6 +232,12 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
       last_name: formData.lastName,
       email: formData.email,
       phone: formData.phone,
+      phone_number: formData.phone,
+      mobile: formData.phone,
+      date_of_birth: formattedDob,
+      dob: formattedDob,
+      gender: (formData as any).gender || undefined,
+      sex: (formData as any).gender || undefined,
       country: formData.country,
       city: formData.city,
       address: formData.address,
@@ -224,6 +250,12 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
       vat_amount: vatAmount,
       payment_methods: formData.paymentMethod,
       workshop_type: typeParam || "",
+      form_data: {
+        exam_info: examInfoList,
+      },
+      formData: {
+        exam_info: examInfoList,
+      },
     };
 
     mutation.mutate(omitEmpty(payload));

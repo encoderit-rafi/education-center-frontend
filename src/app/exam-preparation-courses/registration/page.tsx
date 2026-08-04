@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { cn, omitEmpty } from "@/lib/utils";
+import { format } from "date-fns";
 import { VAT_PERCENT } from "@/lib/vat";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import api from "@/axios";
@@ -308,7 +309,25 @@ function CourseRegistrationForm({ className }: { className?: string }) {
   });
 
   const onSubmit = (formData: BookingValues) => {
-    const payload = {
+    const formattedDob = (formData as any).dateOfBirth
+      ? typeof (formData as any).dateOfBirth === "string"
+        ? (formData as any).dateOfBirth
+        : format(new Date((formData as any).dateOfBirth), "yyyy-MM-dd")
+      : undefined;
+
+    const examInfoList = [
+      { name: "firstName", label: "First Name", value: formData.firstName },
+      { name: "lastName", label: "Family Name", value: formData.lastName },
+      { name: "email", label: "Email", value: formData.email },
+      { name: "mobileNumber", label: "Phone Number", value: formData.phone },
+      ...(formattedDob ? [{ name: "dateOfBirth", label: "Date of Birth", value: formattedDob }] : []),
+      ...((formData as any).gender ? [{ name: "gender", label: "Gender", value: (formData as any).gender.charAt(0).toUpperCase() + (formData as any).gender.slice(1) }] : []),
+      { name: "country", label: "Country", value: formData.country },
+      { name: "city", label: "Town / City", value: formData.city },
+      { name: "address", label: "Address", value: formData.address },
+    ];
+
+    const payload: Record<string, any> = {
       course_id: courseData?.id || courseSlug || "",
       sub_course_id: null,
       package_id: packageId || "",
@@ -316,6 +335,12 @@ function CourseRegistrationForm({ className }: { className?: string }) {
       last_name: formData.lastName,
       email: formData.email,
       phone: formData.phone,
+      phone_number: formData.phone,
+      mobile: formData.phone,
+      date_of_birth: formattedDob,
+      dob: formattedDob,
+      gender: (formData as any).gender || undefined,
+      sex: (formData as any).gender || undefined,
       country: formData.country,
       city: formData.city,
       address: formData.address,
@@ -324,6 +349,12 @@ function CourseRegistrationForm({ className }: { className?: string }) {
       total_amount,
       vat_amount: vatAmount,
       payment_methods: formData.paymentMethod,
+      form_data: {
+        exam_info: examInfoList,
+      },
+      formData: {
+        exam_info: examInfoList,
+      },
       ...(appliedCoupon
         ? {
             coupon_code: appliedCoupon.code,

@@ -33,6 +33,8 @@ import { PriceDisplay } from "@/components/ui/price-display";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import api from "@/axios";
 import Image from "next/image";
+import { format } from "date-fns";
+import { DateTimePicker } from "@/components/ui/date-time-picker";
 
 const baseBookingSchema = z.object({
   mockTestId: z.string().min(1, "Please select a mock test"),
@@ -56,6 +58,8 @@ const baseBookingSchema = z.object({
     .string()
     .trim()
     .min(1, "Phone number is required"),
+  dateOfBirth: z.any().optional(),
+  gender: z.string().optional(),
   address: z
     .string()
     .trim()
@@ -127,12 +131,14 @@ function PaidMockTestRegistrationForm({
     defaultValues: {
       mockTestId: id || "",
       varient: searchParams.get("variant") || "",
-      testLocation: searchParams.get("location") || "home",
+      testLocation: searchParams.get("location") || "home-based",
       paymentMethod: "stripe",
       firstName: "",
       lastName: "",
       email: "",
       phone: "",
+      dateOfBirth: undefined,
+      gender: "",
       address: "",
       city: "",
       country: "",
@@ -156,7 +162,7 @@ function PaidMockTestRegistrationForm({
   const selectedPaymentMethod = watch("paymentMethod");
   const formData = watch();
 
-  const activeLocation = formData.testLocation || searchParams.get("location") || "home";
+  const activeLocation = formData.testLocation || searchParams.get("location") || "home-based";
   const priceParam = searchParams.get("price");
   const variantParam = formData.varient || searchParams.get("variant") || data?.name || "";
   const rawCenterPrice = data?.details?.center_price ?? data?.center_price;
@@ -164,9 +170,9 @@ function PaidMockTestRegistrationForm({
   const parsedPriceParam = priceParam ? parseFloat(priceParam) : 0;
   const defaultHomePrice = data?.price && parseFloat(data.price) > 0 ? parseFloat(data.price) : 350;
   const defaultCenterPrice = rawCenterPrice && parseFloat(String(rawCenterPrice)) > 0 ? parseFloat(String(rawCenterPrice)) : 450;
-  const defaultPrice = activeLocation === "center" ? defaultCenterPrice : defaultHomePrice;
+  const defaultPrice = activeLocation === "center-based" ? defaultCenterPrice : defaultHomePrice;
 
-  const base_price = (parsedPriceParam > 0 && activeLocation === (searchParams.get("location") || "home"))
+  const base_price = (parsedPriceParam > 0 && activeLocation === (searchParams.get("location") || "home-based"))
     ? parsedPriceParam
     : defaultPrice;
   const selectedCountry = formData.country;
@@ -239,10 +245,34 @@ function PaidMockTestRegistrationForm({
 
   const onSubmit = (formData: BookingValues) => {
     const selectedLocation = formData.testLocation || activeLocation;
-    const siteLocation = selectedLocation === "center" ? "center-based" : "home-based";
+    const siteLocation = selectedLocation;
     const mockTestType = formData.varient || variantParam || data?.name || "";
 
-    const payload = {
+    const formattedDob = formData.dateOfBirth
+      ? typeof formData.dateOfBirth === "string"
+        ? formData.dateOfBirth
+        : format(new Date(formData.dateOfBirth), "yyyy-MM-dd")
+      : undefined;
+
+    const examInfoList = [
+      { name: "firstName", label: "First Name", value: formData.firstName },
+      { name: "lastName", label: "Family Name", value: formData.lastName },
+      { name: "email", label: "Email", value: formData.email },
+      { name: "mobileNumber", label: "Phone Number", value: formData.phone },
+      ...(formattedDob ? [{ name: "dateOfBirth", label: "Date of Birth", value: formattedDob }] : []),
+      ...(formData.gender ? [{ name: "gender", label: "Gender", value: formData.gender.charAt(0).toUpperCase() + formData.gender.slice(1) }] : []),
+      { name: "country", label: "Country", value: formData.country },
+      { name: "city", label: "Town / City", value: formData.city },
+      { name: "address", label: "Address", value: formData.address },
+    ];
+
+    const feesList = [
+      { name: "price", label: "Price", value: String(base_price) },
+      { name: "vat_amount", label: "VAT", value: String(vatAmount) },
+      { name: "total_amount", label: "Total Amount", value: String(PRICE) },
+    ];
+
+    const payload: Record<string, any> = {
       mock_test_id: data?.id || id || formData.mockTestId || "",
       variant: siteLocation,
       varient: siteLocation,
@@ -252,6 +282,14 @@ function PaidMockTestRegistrationForm({
       last_name: formData.lastName,
       email: formData.email,
       phone: formData.phone,
+      phone_number: formData.phone,
+      mobile: formData.phone,
+      mobile_number: formData.phone,
+      date_of_birth: formattedDob,
+      dob: formattedDob,
+      dateOfBirth: formattedDob,
+      gender: formData.gender || undefined,
+      sex: formData.gender || undefined,
       city: formData.city,
       country: formData.country,
       address: formData.address,
@@ -259,6 +297,14 @@ function PaidMockTestRegistrationForm({
       vat_amount: vatAmount,
       price: base_price,
       payment_methods: formData.paymentMethod,
+      form_data: {
+        fees: feesList,
+        exam_info: examInfoList,
+      },
+      formData: {
+        fees: feesList,
+        exam_info: examInfoList,
+      },
     };
 
     console.log("👉 [Mock Test Registration] Form Raw Data:", formData);
@@ -419,6 +465,41 @@ function PaidMockTestRegistrationForm({
                   </Field>
                 </div>
 
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <Field data-invalid={!!errors.dateOfBirth}>
+                    <FieldLabel>{t("dateOfBirth")}</FieldLabel>
+                    <FieldContent>
+                      <DateTimePicker
+                        mode="date"
+                        placeholder={t("dateOfBirthPlaceholder")}
+                        value={formData.dateOfBirth ? new Date(formData.dateOfBirth) : undefined}
+                        onChange={(date) => setValue("dateOfBirth", date, { shouldValidate: true })}
+                      />
+                      <FieldError errors={[errors.dateOfBirth]} />
+                    </FieldContent>
+                  </Field>
+                  <Field data-invalid={!!errors.gender}>
+                    <FieldLabel>{t("gender")}</FieldLabel>
+                    <FieldContent>
+                      <Select
+                        value={formData.gender || undefined}
+                        onValueChange={(val) => {
+                          if (val) setValue("gender", val, { shouldValidate: true });
+                        }}
+                      >
+                        <SelectTrigger className="w-full">
+                          <SelectValue placeholder={t("selectGender")} />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="male">{t("male")}</SelectItem>
+                          <SelectItem value="female">{t("female")}</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <FieldError errors={[errors.gender]} />
+                    </FieldContent>
+                  </Field>
+                </div>
+
                 <Field data-invalid={!!errors.address}>
                   <FieldLabel required>{t("address")}</FieldLabel>
                   <FieldContent>
@@ -482,7 +563,7 @@ function PaidMockTestRegistrationForm({
                       <div>
                         <p className="text-xs text-slate-400">{t("location")}</p>
                         <p className="font-semibold text-slate-700 capitalize">
-                          {activeLocation === "center" ? t("testCenter") : t("homeOnline")}
+                          {activeLocation === "center-based" ? t("testCenter") : t("homeOnline")}
                         </p>
                       </div>
 

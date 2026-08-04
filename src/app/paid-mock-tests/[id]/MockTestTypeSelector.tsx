@@ -56,7 +56,7 @@ export function MockTestTypeSelector({ data }: MockTestTypeSelectorProps) {
   const types = examKey ? EXAM_TYPES[examKey] : null;
 
   const [selectedType, setSelectedType] = useState<string>("");
-  const [selectedLocation, setSelectedLocation] = useState<"home" | "center">("home");
+  const [selectedLocation, setSelectedLocation] = useState<"home-based" | "center-based">("home-based");
   const [locationOpen, setLocationOpen] = useState(false);
   const [typeOpen, setTypeOpen] = useState(false);
 
@@ -72,7 +72,7 @@ export function MockTestTypeSelector({ data }: MockTestTypeSelectorProps) {
   const rawCenterPrice = data.details?.center_price ?? data.center_price;
   const centerPrice = rawCenterPrice && parseFloat(String(rawCenterPrice)) > 0 ? parseFloat(String(rawCenterPrice)) : 450;
 
-  const activePrice = selectedLocation === "center" ? centerPrice : homePrice;
+  const activePrice = selectedLocation === "center-based" ? centerPrice : homePrice;
 
   const selectTypeLabel =
     examKey === "ielts"
@@ -108,7 +108,7 @@ export function MockTestTypeSelector({ data }: MockTestTypeSelectorProps) {
           <DropdownMenu open={locationOpen} onOpenChange={setLocationOpen}>
             <DropdownMenuTrigger asChild>
               <button type="button" className={getTriggerClass(locationOpen)}>
-                {selectedLocation === "home" ? (
+                {selectedLocation === "home-based" ? (
                   <span className="inline-flex items-center gap-0.5">
                     {t("homeOption")} (
                     <AED className="size-auto h-[0.85em] fill-current text-primary" />
@@ -132,9 +132,9 @@ export function MockTestTypeSelector({ data }: MockTestTypeSelectorProps) {
             <DropdownMenuContent className="w-(--radix-dropdown-menu-trigger-width) bg-white rounded-xl border border-slate-200 p-1.5 shadow-xl">
               <DropdownMenuRadioGroup
                 value={selectedLocation}
-                onValueChange={(val) => setSelectedLocation(val as "home" | "center")}
+                onValueChange={(val) => setSelectedLocation(val as "home-based" | "center-based")}
               >
-                <DropdownMenuRadioItem value="home" className="rounded-lg font-medium cursor-pointer">
+                <DropdownMenuRadioItem value="home-based" className="rounded-lg font-medium cursor-pointer">
                   <span className="inline-flex items-center gap-0.5">
                     {t("homeOption")} (
                     <AED className="size-auto h-[0.85em] fill-current text-primary" />
@@ -142,7 +142,7 @@ export function MockTestTypeSelector({ data }: MockTestTypeSelectorProps) {
                   </span>
                 </DropdownMenuRadioItem>
                 {centerPrice > 0 && (
-                  <DropdownMenuRadioItem value="center" className="rounded-lg font-medium cursor-pointer">
+                  <DropdownMenuRadioItem value="center-based" className="rounded-lg font-medium cursor-pointer">
                     <span className="inline-flex items-center gap-0.5">
                       {t("centerOption")} (
                       <AED className="size-auto h-[0.85em] fill-current text-primary" />
@@ -220,7 +220,7 @@ export function MockTestTypeSelector({ data }: MockTestTypeSelectorProps) {
             <DropdownMenu open={locationOpen} onOpenChange={setLocationOpen}>
               <DropdownMenuTrigger asChild>
                 <button type="button" className={getTriggerClass(locationOpen)}>
-                  {selectedLocation === "home" ? (
+                  {selectedLocation === "home-based" ? (
                     <span className="inline-flex items-center gap-0.5">
                       {t("homeOption")} (
                       <AED className="size-auto h-[0.85em] fill-current text-primary" />
@@ -244,9 +244,9 @@ export function MockTestTypeSelector({ data }: MockTestTypeSelectorProps) {
               <DropdownMenuContent className="w-(--radix-dropdown-menu-trigger-width) bg-white rounded-xl border border-slate-200 p-1.5 shadow-xl">
                 <DropdownMenuRadioGroup
                   value={selectedLocation}
-                  onValueChange={(val) => setSelectedLocation(val as "home" | "center")}
+                  onValueChange={(val) => setSelectedLocation(val as "home-based" | "center-based")}
                 >
-                  <DropdownMenuRadioItem value="home" className="rounded-lg font-medium cursor-pointer">
+                  <DropdownMenuRadioItem value="home-based" className="rounded-lg font-medium cursor-pointer">
                     <span className="inline-flex items-center gap-0.5">
                       {t("homeOption")} (
                       <AED className="size-auto h-[0.85em] fill-current text-primary" />
@@ -254,7 +254,7 @@ export function MockTestTypeSelector({ data }: MockTestTypeSelectorProps) {
                     </span>
                   </DropdownMenuRadioItem>
                   {centerPrice > 0 && (
-                    <DropdownMenuRadioItem value="center" className="rounded-lg font-medium cursor-pointer">
+                    <DropdownMenuRadioItem value="center-based" className="rounded-lg font-medium cursor-pointer">
                       <span className="inline-flex items-center gap-0.5">
                         {t("centerOption")} (
                         <AED className="size-auto h-[0.85em] fill-current text-primary" />
@@ -279,13 +279,13 @@ export function MockTestTypeSelector({ data }: MockTestTypeSelectorProps) {
                 {activePrice}
               </span>
               <span className="text-xs font-semibold bg-[#A11D1D] text-white px-2.5 py-1 rounded-md">
-                {selectedLocation === "center" ? t("centerOption") : t("homeOption")}
+                {selectedLocation === "center-based" ? t("centerOption") : t("homeOption")}
               </span>
             </div>
 
             <div className="flex items-center gap-1.5 text-xs text-emerald-600 font-medium pt-1">
               <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
-              {getSelectedTypeDisplay()} ({selectedLocation === "center" ? t("centerOption") : t("homeOption")}) {t("selected")}
+              {getSelectedTypeDisplay()} ({selectedLocation === "center-based" ? t("centerOption") : t("homeOption")}) {t("selected")}
             </div>
           </div>
 

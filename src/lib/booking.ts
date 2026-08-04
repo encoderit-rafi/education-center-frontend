@@ -273,10 +273,14 @@ export function compileBookingPayload(input: BookingPayloadInput) {
     middle_name: input.middleName || "",
     last_name: input.lastName || "",
     date_of_birth: formatDate(input.dateOfBirth),
+    dob: formatDate(input.dateOfBirth),
     gender: input.gender || undefined,
+    sex: input.gender || undefined,
     nationality: input.nationality || undefined,
     email: input.email,
     phone: input.phone,
+    phone_number: input.phone,
+    mobile_number: input.phone,
     address: input.address || null,
     country: input.country || null,
     id_type: mapIdType(input.idType),
@@ -702,6 +706,84 @@ export function compileBookingPayload(input: BookingPayloadInput) {
       name: "exam_time_slot",
       label: "Exam Time Slot",
       value: displayTimeSlot || formattedSessionTime || "",
+    });
+  }
+
+  const phoneVal =
+    input.phone ||
+    input.allFormData.mobileNumber ||
+    input.allFormData.phoneNumber ||
+    input.allFormData.phone;
+  if (
+    phoneVal &&
+    !examInfoList.some(
+      (item) =>
+        item.name === "phone" ||
+        item.name === "phoneNumber" ||
+        item.name === "mobileNumber" ||
+        item.label === "Phone Number"
+    )
+  ) {
+    examInfoList.push({
+      name: "mobileNumber",
+      label: "Phone Number",
+      value: String(phoneVal),
+    });
+  }
+
+  const rawDob =
+    input.dateOfBirth ||
+    input.allFormData.dateOfBirth ||
+    input.allFormData.date_of_birth ||
+    input.allFormData.dob;
+  const dobVal =
+    formatDate(rawDob) ||
+    (rawDob
+      ? rawDob instanceof Date
+        ? format(rawDob, "yyyy-MM-dd")
+        : String(rawDob)
+      : undefined);
+  if (
+    dobVal &&
+    !examInfoList.some(
+      (item) =>
+        item.name === "dateOfBirth" ||
+        item.name === "date_of_birth" ||
+        item.name === "dob" ||
+        item.label === "Date of Birth"
+    )
+  ) {
+    examInfoList.push({
+      name: "dateOfBirth",
+      label: "Date of Birth",
+      value: String(dobVal),
+    });
+  }
+
+  const genderVal =
+    input.gender ||
+    input.allFormData.sex ||
+    input.allFormData.gender;
+  if (
+    genderVal &&
+    !examInfoList.some(
+      (item) =>
+        item.name === "gender" ||
+        item.name === "sex" ||
+        item.label === "Gender" ||
+        item.label === "Sex"
+    )
+  ) {
+    let formattedGender = String(genderVal);
+    const lowerVal = formattedGender.toLowerCase();
+    if (lowerVal === "male") formattedGender = "Male";
+    else if (lowerVal === "female") formattedGender = "Female";
+    else if (lowerVal === "other") formattedGender = "Other";
+
+    examInfoList.push({
+      name: "gender",
+      label: "Gender",
+      value: formattedGender,
     });
   }
 
