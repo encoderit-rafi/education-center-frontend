@@ -258,6 +258,40 @@ export function compileBookingPayload(input: BookingPayloadInput) {
     input.allFormData.selected_workshop_name = formattedWorkshopName;
   }
 
+  const hasNoGivenName = Boolean(
+    input.allFormData?.noGivenNames ||
+    input.allFormData?.noGivenName ||
+    input.allFormData?.noFirstName
+  );
+  const hasNoMiddleName = Boolean(
+    input.allFormData?.noMiddleName ||
+    input.allFormData?.noMiddleNames
+  );
+  const hasNoSurname = Boolean(
+    input.allFormData?.noSurname ||
+    input.allFormData?.noSurnames ||
+    input.allFormData?.noLastName
+  );
+
+  const rawFirstName = input.firstName ?? input.allFormData?.givenNames ?? input.allFormData?.firstName;
+  const rawMiddleName = input.middleName ?? input.allFormData?.middleName ?? input.allFormData?.middle_name ?? input.allFormData?.middleNames;
+  const rawLastName = input.lastName ?? input.allFormData?.surnames ?? input.allFormData?.lastName ?? input.allFormData?.surname;
+
+  const firstNameVal =
+    !hasNoGivenName && rawFirstName && typeof rawFirstName === "string" && rawFirstName.trim() !== ""
+      ? rawFirstName.trim()
+      : undefined;
+
+  const middleNameVal =
+    !hasNoMiddleName && rawMiddleName && typeof rawMiddleName === "string" && rawMiddleName.trim() !== ""
+      ? rawMiddleName.trim()
+      : undefined;
+
+  const lastNameVal =
+    !hasNoSurname && rawLastName && typeof rawLastName === "string" && rawLastName.trim() !== ""
+      ? rawLastName.trim()
+      : undefined;
+
   const payload: Record<string, any> = {
     user_id: input.userId || undefined,
     exam_id: input.examId,
@@ -269,9 +303,9 @@ export function compileBookingPayload(input: BookingPayloadInput) {
     workshop_package_id: input.workshopPackageId || undefined,
     payment_id: input.paymentId || undefined,
     payment_methods: input.paymentMethod || "stripe",
-    first_name: input.firstName || "",
-    middle_name: input.middleName || "",
-    last_name: input.lastName || "",
+    first_name: firstNameVal,
+    middle_name: middleNameVal,
+    last_name: lastNameVal,
     date_of_birth: formatDate(input.dateOfBirth),
     dob: formatDate(input.dateOfBirth),
     gender: input.gender || undefined,
@@ -375,7 +409,14 @@ export function compileBookingPayload(input: BookingPayloadInput) {
     givenNames: "Given Names",
     middleName: "Middle Name",
     surnames: "Surnames",
+    noGivenNames: "No Given Names",
+    noGivenName: "No Given Names",
+    noFirstName: "No Given Names",
+    noMiddleName: "No Middle Name",
+    noMiddleNames: "No Middle Name",
     noSurname: "No Surname",
+    noSurnames: "No Surname",
+    noLastName: "No Surname",
     birthCity: "City of Birth",
     birthCountry: "Country of Birth",
     postcode: "Post Code",
@@ -464,8 +505,53 @@ export function compileBookingPayload(input: BookingPayloadInput) {
       continue;
     }
 
+    if (
+      (key === "givenNames" || key === "firstName") &&
+      !firstNameVal
+    ) {
+      continue;
+    }
+
+    if (
+      key === "noGivenNames" || key === "noGivenName" || key === "noFirstName"
+    ) {
+      if (firstNameVal) continue;
+    }
+
+    if (
+      (key === "middleName" || key === "middle_name" || key === "middleNames") &&
+      !middleNameVal
+    ) {
+      continue;
+    }
+
+    if (
+      key === "noMiddleName" || key === "noMiddleNames"
+    ) {
+      if (middleNameVal) continue;
+    }
+
+    if (
+      (key === "surnames" || key === "lastName" || key === "surname") &&
+      !lastNameVal
+    ) {
+      continue;
+    }
+
+    if (
+      key === "noSurname" || key === "noSurnames" || key === "noLastName"
+    ) {
+      if (lastNameVal) continue;
+    }
+
     let valueStr = "";
-    if (value instanceof Date) {
+    if (
+      key === "noGivenNames" || key === "noGivenName" || key === "noFirstName" ||
+      key === "noMiddleName" || key === "noMiddleNames" ||
+      key === "noSurname" || key === "noSurnames" || key === "noLastName"
+    ) {
+      valueStr = "Yes";
+    } else if (value instanceof Date) {
       valueStr = format(value, "yyyy-MM-dd");
     } else if (typeof value === "boolean") {
       valueStr = value ? "Yes" : "No";
@@ -795,10 +881,23 @@ export function compileBookingPayload(input: BookingPayloadInput) {
     });
   }
 
-  const middleNameVal =
-    input.middleName ||
-    input.allFormData.middleName ||
-    input.allFormData.middle_name;
+  if (
+    !firstNameVal &&
+    !examInfoList.some(
+      (item) =>
+        item.name === "noGivenNames" ||
+        item.name === "noGivenName" ||
+        item.name === "noFirstName" ||
+        item.label === "No Given Names"
+    )
+  ) {
+    examInfoList.push({
+      name: "noGivenNames",
+      label: "No Given Names",
+      value: "Yes",
+    });
+  }
+
   if (
     middleNameVal &&
     !examInfoList.some(
@@ -812,6 +911,37 @@ export function compileBookingPayload(input: BookingPayloadInput) {
       name: "middleName",
       label: "Middle Name",
       value: String(middleNameVal),
+    });
+  } else if (
+    !middleNameVal &&
+    !examInfoList.some(
+      (item) =>
+        item.name === "noMiddleName" ||
+        item.name === "noMiddleNames" ||
+        item.label === "No Middle Name"
+    )
+  ) {
+    examInfoList.push({
+      name: "noMiddleName",
+      label: "No Middle Name",
+      value: "Yes",
+    });
+  }
+
+  if (
+    !lastNameVal &&
+    !examInfoList.some(
+      (item) =>
+        item.name === "noSurname" ||
+        item.name === "noSurnames" ||
+        item.name === "noLastName" ||
+        item.label === "No Surname"
+    )
+  ) {
+    examInfoList.push({
+      name: "noSurname",
+      label: "No Surname",
+      value: "Yes",
     });
   }
 

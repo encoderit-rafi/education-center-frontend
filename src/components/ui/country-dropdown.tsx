@@ -60,17 +60,19 @@ const formatCountryName = (name: string): string => {
     .join(" ");
 };
 
+const DEFAULT_COUNTRY_OPTIONS: Country[] = countries.all
+  .filter(
+    (country: Country) =>
+      country.emoji && country.status !== "deleted" && country.ioc !== "PRK",
+  )
+  .map((country: Country) => ({
+    ...country,
+    name: formatCountryName(country.name),
+  }));
+
 const CountryDropdownComponent = (
   {
-    options = countries.all
-      .filter(
-        (country: Country) =>
-          country.emoji && country.status !== "deleted" && country.ioc !== "PRK",
-      )
-      .map((country: Country) => ({
-        ...country,
-        name: formatCountryName(country.name),
-      })),
+    options = DEFAULT_COUNTRY_OPTIONS,
     onChange,
     value,
     disabled = false,
@@ -89,24 +91,22 @@ const CountryDropdownComponent = (
   const displayPlaceholder = placeholder || t("placeholder");
 
   useEffect(() => {
+    let initialCountry: Country | undefined = undefined;
     if (value) {
-      const initialCountry = options.find(
+      initialCountry = options.find(
         (country) =>
           country.alpha3 === value ||
           country.alpha2 === value ||
           country.name === value ||
           country.name.toLowerCase() === value.toLowerCase(),
       );
-      if (initialCountry) {
-        setSelectedCountry(initialCountry);
-      } else {
-        // Reset selected country if value is not found
-        setSelectedCountry(undefined);
-      }
-    } else {
-      // Reset selected country if value is undefined or null
-      setSelectedCountry(undefined);
     }
+    setSelectedCountry((prev) => {
+      if (prev?.alpha3 === initialCountry?.alpha3 && prev?.name === initialCountry?.name) {
+        return prev;
+      }
+      return initialCountry;
+    });
   }, [value, options]);
 
   const handleSelect = useCallback(
