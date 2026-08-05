@@ -59,8 +59,8 @@ const slugToExamId: Record<string, string> = {
   toefl: "toefl",
   pte: "pte",
   selt: "psi",
-  cael: "celpip-cael",
-  celpip: "celpip-cael",
+  cael: "cael",
+  celpip: "celpip",
   oet: "oet",
 };
 
