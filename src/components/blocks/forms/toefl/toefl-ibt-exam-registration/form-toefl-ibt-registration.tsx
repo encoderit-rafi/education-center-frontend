@@ -18,7 +18,6 @@ import {
 } from "@/components/blocks/forms/global-review-step";
 import { PriceDisplay } from "@/components/ui/price-display";
 import { toast } from "sonner";
-import { getEducationLevelLabel } from "@/lib/utils";
 import { compileBookingPayload } from "@/lib/booking";
 import { calculateCourseDiscountedPrice } from "@/lib/course-discount";
 
@@ -149,7 +148,6 @@ export default function FormTOEFLIBTRegistration({
       existingAccount: "" as any,
       firstLanguage: "",
       yearsStudyingEnglish: "",
-      educationLevel: "",
       nextLevelOfStudy: "",
       nextLevelOfStudyOther: "",
       desiredFieldOfStudy: "",
@@ -756,10 +754,14 @@ export default function FormTOEFLIBTRegistration({
                         ? formData.firstLanguageOther || "Other"
                         : formData.firstLanguage || "N/A",
                   },
-                  {
-                    label: "Education Level",
-                    value: getEducationLevelLabel(formData.educationLevel),
-                  },
+                  ...(formData.yearsStudyingEnglish
+                    ? [
+                        {
+                          label: "Years Studying English",
+                          value: formData.yearsStudyingEnglish,
+                        },
+                      ]
+                    : []),
                   {
                     label: "Next Level of Study",
                     value:
@@ -787,6 +789,14 @@ export default function FormTOEFLIBTRegistration({
                       )
                       : "N/A",
                   },
+                  ...(formData.destinationCountry
+                    ? [
+                        {
+                          label: "Destination Country",
+                          value: formData.destinationCountry,
+                        },
+                      ]
+                    : []),
                 ]}
               />
             </GlobalReviewStep>

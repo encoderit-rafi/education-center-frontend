@@ -55,7 +55,6 @@ export const ToeflIbtSchema = z
         firstLanguage: z.string().optional(),
         firstLanguageOther: z.string().optional(),
         yearsStudyingEnglish: z.string().optional(),
-        educationLevel: z.string().optional(),
         nextLevelOfStudy: z.string().min(1, "Next level of study is required"),
         nextLevelOfStudyOther: z.string().optional(),
         desiredFieldOfStudy: z.string().min(1, "Desired field of study is required"),

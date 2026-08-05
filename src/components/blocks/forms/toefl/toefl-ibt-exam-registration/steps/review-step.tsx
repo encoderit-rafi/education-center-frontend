@@ -11,7 +11,7 @@ import {
 import { UseFormReturn } from "react-hook-form";
 import { TToeflIbtSchema } from "../_type/toefl-ibt";
 import { GlobalReviewStep } from "@/components/blocks/forms/global-review-step";
-import { getEducationLevelLabel, getIdTypeLabel } from "@/lib/utils";
+import { getIdTypeLabel } from "@/lib/utils";
 
 interface ReviewStepProps {
     data: TToeflIbtSchema;
@@ -171,7 +171,7 @@ export function ReviewStep({
                             <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">
                                 {tFields("attachIdCopy")}
                             </span>
-                            <span className="text-sm font-bold text-slate-900 break-words [overflow-wrap:anywhere]">
+                            <span className="text-sm font-bold text-slate-900 break-words">
                                 {data.idDocument
                                     ? (data.idDocument as File).name
                                     : t("noFileAttached")}
@@ -263,14 +263,6 @@ export function ReviewStep({
                             </span>
                             <span className="text-sm font-bold text-slate-900">
                                 {data.yearsStudyingEnglish || t("na")}
-                            </span>
-                        </div>
-                        <div className="flex flex-col">
-                            <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">
-                                {tToefl("educationLevel")}
-                            </span>
-                            <span className="text-sm font-bold text-slate-900">
-                                {getEducationLevelLabel(data.educationLevel)}
                             </span>
                         </div>
                         <div className="flex flex-col">

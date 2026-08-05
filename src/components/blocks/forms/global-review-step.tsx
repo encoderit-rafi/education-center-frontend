@@ -354,7 +354,7 @@ function SummaryCard({
               </span>
               <span
                 className={cn(
-                  "text-sm font-semibold leading-normal break-words [overflow-wrap:anywhere]",
+                  "text-sm font-semibold leading-normal break-words",
                   field.highlight ? "text-[#A11D1D] font-bold" : "text-slate-900",
                 )}
               >
