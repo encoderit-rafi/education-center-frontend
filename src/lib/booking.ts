@@ -313,8 +313,6 @@ export function compileBookingPayload(input: BookingPayloadInput) {
     "payment_methods",
     "firstName",
     "first_name",
-    "middleName",
-    "middle_name",
     "lastName",
     "last_name",
     "dateOfBirth",
@@ -794,6 +792,26 @@ export function compileBookingPayload(input: BookingPayloadInput) {
       name: "gender",
       label: "Gender",
       value: formattedGender,
+    });
+  }
+
+  const middleNameVal =
+    input.middleName ||
+    input.allFormData.middleName ||
+    input.allFormData.middle_name;
+  if (
+    middleNameVal &&
+    !examInfoList.some(
+      (item) =>
+        item.name === "middleName" ||
+        item.name === "middle_name" ||
+        item.label === "Middle Name"
+    )
+  ) {
+    examInfoList.push({
+      name: "middleName",
+      label: "Middle Name",
+      value: String(middleNameVal),
     });
   }
 
