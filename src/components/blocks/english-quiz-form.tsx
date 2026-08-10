@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { User, Mail, MapPin } from "lucide-react";
+import { User, Mail, MapPin, Loader2 } from "lucide-react";
 import { PhoneInput } from "@/components/ui/phone-input";
 import { CountryDropdown } from "@/components/ui/country-dropdown";
 import {
@@ -613,6 +613,7 @@ export default function EnglishQuizForm() {
   const t = useTranslations("EnglishQuiz");
   const router = useRouter();
   const [step, setStep] = useState(1);
+  const [isCheckingEmail, setIsCheckingEmail] = useState(false);
 
   const quizSchema = z.object({
     fullName: z
@@ -700,21 +701,35 @@ export default function EnglishQuizForm() {
       return;
     }
 
-    if (step === 1 && typeof window !== "undefined") {
+    if (step === 1) {
       const emailVal = watch("email");
+
+      // Check email uniqueness with API
+      setIsCheckingEmail(true);
       try {
-        const submittedEmails = JSON.parse(localStorage.getItem("english_quiz_submitted_emails") || "[]");
-        if (submittedEmails.includes(emailVal)) {
+        const response = await api.post("/english-quiz-submissions/check-email", { email: emailVal });
+        if (response.data?.data?.exists === true) {
           setError("email", {
             type: "manual",
-            message: t("form.emailConflict") || "This email has already been used to take the quiz. Please use a unique email address.",
+            message: "This email has already been used to take the quiz. Please use a unique email address.",
           });
-          toast.error(t("form.emailConflict"));
+          toast.error("This email has already been used to take the quiz. Please use a unique email address.");
+          setIsCheckingEmail(false);
           return;
         }
-      } catch (e) {
-        console.error("Failed to check email in localStorage:", e);
+      } catch (error: any) {
+        console.error("Email verification API error:", error);
+        if (error.response?.data?.data?.exists === true) {
+          setError("email", {
+            type: "manual",
+            message: "This email has already been used to take the quiz. Please use a unique email address.",
+          });
+          toast.error("This email has already been used to take the quiz. Please use a unique email address.");
+          setIsCheckingEmail(false);
+          return;
+        }
       }
+      setIsCheckingEmail(false);
     }
 
     setStep((prev) => prev + 1);
@@ -784,9 +799,9 @@ export default function EnglishQuizForm() {
       if (error.response?.data?.errorCode === "ENGLISH_QUIZ_SUBMISSION_EMAIL_CONFLICT") {
         setError("email", {
           type: "manual",
-          message: t("form.emailConflict") || "This email has already been used to take the quiz. Please use a unique email address.",
+          message: "This email has already been used to take the quiz. Please use a unique email address.",
         });
-        toast.error(t("form.emailConflict"));
+        toast.error("This email has already been used to take the quiz. Please use a unique email address.");
       } else {
         toast.error(t("form.submitErrorTitle") || "Submission failed", {
           description: error.response?.data?.message || t("form.submitErrorDesc") || "An unexpected error occurred. Please try again.",
@@ -974,10 +989,12 @@ export default function EnglishQuizForm() {
             <Button
               type="button"
               onClick={handleNext}
+              disabled={isCheckingEmail}
               size="lg"
-              className="w-full md:w-auto px-5 font-bold"
+              className="w-full md:w-auto px-5 font-bold flex items-center justify-center gap-2"
             >
-              {t("form.startQuiz")}
+              {isCheckingEmail && <Loader2 className="w-4 h-4 animate-spin" />}
+              {isCheckingEmail ? t("form.processing") : t("form.startQuiz")}
             </Button>
           </div>
         )}

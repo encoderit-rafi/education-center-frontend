@@ -1333,7 +1333,7 @@
       },
       "toast": {
         "successTitle": "Free Consultation Request Received",
-        "successDesc": "Thank you for reaching out! Your form has been successfully submitted. Our team will review your details and get back to you within 1 to 2 business days. <italic>Please note our business hours are Saturday through Thursday, 9:00 AM to 9:00 PM.</italic>",
+        "successDesc": "Thank you for reaching out! Your form has been successfully submitted. Our team will review your details and get back to you within 1 to 2 business days. Please note our business hours are Saturday through Thursday, 9:00 AM to 9:00 PM.",
         "errorTitle": "Error",
         "errorDesc": "Failed to submit consultation request.",
         "unexpectedError": "An unexpected error occurred. Please try again later."
@@ -3666,7 +3666,7 @@
     "upgrade": "Upgrade",
     "loadingDetails": "Loading test details...",
     "loading": "Loading...",
-    "regTitle": "Paid Mock Test Registration",
+    "regTitle": "Paid Mock Test Purchase",
     "yourInfo": "Your Information",
     "firstName": "First Name",
     "firstNamePlaceholder": "John",

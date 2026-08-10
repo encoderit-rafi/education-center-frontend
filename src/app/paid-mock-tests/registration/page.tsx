@@ -131,7 +131,7 @@ function PaidMockTestRegistrationForm({
     defaultValues: {
       mockTestId: id || "",
       varient: searchParams.get("variant") || "",
-      testLocation: searchParams.get("location") || "home-based",
+      testLocation: searchParams.get("location")?.toLowerCase() === "center-based" ? "Center-based" : "Home-based",
       paymentMethod: "stripe",
       firstName: "",
       lastName: "",
@@ -155,14 +155,19 @@ function PaidMockTestRegistrationForm({
     }
     const locationFromUrl = searchParams.get("location");
     if (locationFromUrl) {
-      setValue("testLocation", locationFromUrl, { shouldValidate: false });
+      const normalized = locationFromUrl.toLowerCase() === "center-based" ? "Center-based" : "Home-based";
+      setValue("testLocation", normalized, { shouldValidate: false });
     }
   }, [searchParams, setValue, data?.name]);
 
   const selectedPaymentMethod = watch("paymentMethod");
   const formData = watch();
 
-  const activeLocation = formData.testLocation || searchParams.get("location") || "home-based";
+  const activeLocation = formData.testLocation || (
+    searchParams.get("location")?.toLowerCase() === "center-based"
+      ? "Center-based"
+      : "Home-based"
+  );
   const priceParam = searchParams.get("price");
   const variantParam = formData.varient || searchParams.get("variant") || data?.name || "";
   const rawCenterPrice = data?.details?.center_price ?? data?.center_price;
@@ -170,9 +175,9 @@ function PaidMockTestRegistrationForm({
   const parsedPriceParam = priceParam ? parseFloat(priceParam) : 0;
   const defaultHomePrice = data?.price && parseFloat(data.price) > 0 ? parseFloat(data.price) : 350;
   const defaultCenterPrice = rawCenterPrice && parseFloat(String(rawCenterPrice)) > 0 ? parseFloat(String(rawCenterPrice)) : 450;
-  const defaultPrice = activeLocation === "center-based" ? defaultCenterPrice : defaultHomePrice;
+  const defaultPrice = activeLocation === "Center-based" ? defaultCenterPrice : defaultHomePrice;
 
-  const base_price = (parsedPriceParam > 0 && activeLocation === (searchParams.get("location") || "home-based"))
+  const base_price = (parsedPriceParam > 0 && activeLocation.toLowerCase() === (searchParams.get("location") || "Home-based").toLowerCase())
     ? parsedPriceParam
     : defaultPrice;
   const selectedCountry = formData.country;
@@ -531,7 +536,7 @@ function PaidMockTestRegistrationForm({
                       <div>
                         <p className="text-xs text-slate-400">{t("location")}</p>
                         <p className="font-semibold text-slate-700">
-                          {activeLocation === "center-based" ? t("testCenter") : t("homeOnline")}
+                          {activeLocation === "Center-based" ? t("testCenter") : t("homeOnline")}
                         </p>
                       </div>
 

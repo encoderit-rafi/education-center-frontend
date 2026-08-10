@@ -30,8 +30,8 @@ interface AcceptPayButtonProps {
   children?: React.ReactNode;
   /** Optional pre-selected exam type variant (e.g. "PTE Academic", "IELTS Academic") */
   selectedType?: string;
-  /** Optional pre-selected location ("home-based" | "center-based") */
-  selectedLocation?: "home-based" | "center-based";
+  /** Optional pre-selected location ("Home-based" | "Center-based") */
+  selectedLocation?: "Home-based" | "Center-based";
 }
 
 export function AcceptPayButton({
@@ -53,9 +53,9 @@ export function AcceptPayButton({
   const centerPrice = rawCenterPrice && parseFloat(String(rawCenterPrice)) > 0 ? parseFloat(String(rawCenterPrice)) : 450;
   const diffPrice = Math.max(0, centerPrice - homePrice);
 
-  const handleContinue = (location: "home-based" | "center-based") => {
+  const handleContinue = (location: "Home-based" | "Center-based") => {
     setIsOpen(false);
-    const selectedPrice = location === "center-based" ? centerPrice : homePrice;
+    const selectedPrice = location === "Center-based" ? centerPrice : homePrice;
     const variantType = selectedType || data.name;
     const variantParam = variantType
       ? `&variant=${encodeURIComponent(variantType)}`
@@ -66,8 +66,8 @@ export function AcceptPayButton({
   };
 
   const handleClick = () => {
-    if (selectedLocation === "center-based") {
-      handleContinue("center-based");
+    if (selectedLocation === "Center-based") {
+      handleContinue("Center-based");
       return;
     }
     setIsOpen(true);
@@ -82,7 +82,7 @@ export function AcceptPayButton({
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogContent className={cn(
           "p-6 bg-white rounded-2xl shadow-xl overflow-y-auto max-h-[90vh]",
-          selectedLocation === "center-based" ? "max-w-[95vw] md:max-w-md" : "max-w-[95vw] md:max-w-3xl lg:max-w-4xl"
+          selectedLocation === "Center-based" ? "max-w-[95vw] md:max-w-md" : "max-w-[95vw] md:max-w-3xl lg:max-w-4xl"
         )}>
           <DialogHeader className="mb-6">
             <DialogTitle className="text-xl font-extrabold text-slate-900 tracking-tight text-center">
@@ -92,10 +92,10 @@ export function AcceptPayButton({
 
           <div className={cn(
             "grid gap-6 items-stretch",
-            selectedLocation === "center-based" ? "grid-cols-1" : "grid-cols-1 md:grid-cols-2"
+            selectedLocation === "Center-based" ? "grid-cols-1" : "grid-cols-1 md:grid-cols-2"
           )}>
             {/* Left Card: Basic (Home-based) */}
-            {selectedLocation !== "center-based" && (
+            {selectedLocation !== "Center-based" && (
               <div className="relative flex flex-col rounded-2xl border border-slate-200 bg-white shadow-sm flex-1 justify-between overflow-hidden">
                 {/* ── Hero Image Strip ── */}
                 <div className="relative h-44 w-full shrink-0 overflow-hidden">
@@ -173,7 +173,7 @@ export function AcceptPayButton({
 
                     {/* Action Button */}
                     <Button
-                      onClick={() => handleContinue("home-based")}
+                      onClick={() => handleContinue("Home-based")}
                       disabled={!agreed}
                       className="w-full py-5 font-bold"
                     >
@@ -200,7 +200,7 @@ export function AcceptPayButton({
                 <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-black/10" />
 
                 {/* Upgrade badge — top right inside the image */}
-                {selectedLocation !== "center-based" && (
+                {selectedLocation !== "Center-based" && (
                   <div className="absolute top-3 right-3">
                     <span className="bg-primary text-white text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider shadow-md">
                       {t("upgrade")}
@@ -263,23 +263,23 @@ export function AcceptPayButton({
                   {/* Price section */}
                   <div className="bg-emerald-50/50 border border-emerald-100/50 rounded-xl p-3 flex flex-col items-center justify-center text-center">
                     <span className="text-[10px] font-bold text-emerald-700 uppercase tracking-wide">
-                      {selectedLocation === "center-based" ? t("mockTestPrice") : t("upgradeCost")}
+                      {selectedLocation === "Center-based" ? t("mockTestPrice") : t("upgradeCost")}
                     </span>
                     <div className="text-xl font-black text-[#1e824c] mt-0.5 flex items-center gap-1">
-                      {selectedLocation !== "center-based" && <span>+</span>}
-                      <PriceDisplay amount={selectedLocation === "center-based" ? centerPrice : diffPrice} className="text-[#1e824c]" />
+                      {selectedLocation !== "Center-based" && <span>+</span>}
+                      <PriceDisplay amount={selectedLocation === "Center-based" ? centerPrice : diffPrice} className="text-[#1e824c]" />
                     </div>
-                    {selectedLocation !== "center-based" && (
+                    {selectedLocation !== "Center-based" && (
                       <span className="text-[10px] text-slate-400 mt-0.5">{t("additionalPerReg")}</span>
                     )}
                   </div>
 
                   {/* Action Button */}
                   <Button
-                    onClick={() => handleContinue("center-based")}
+                    onClick={() => handleContinue("Center-based")}
                     className="w-full py-5 font-bold"
                   >
-                    {selectedLocation === "center-based"
+                    {selectedLocation === "Center-based"
                       ? (isRtl ? "المتابعة مع الاختبار التجريبي في المركز" : "Continue with Center-based Mock Test")
                       : t("upgradeBtn")}
                   </Button>
