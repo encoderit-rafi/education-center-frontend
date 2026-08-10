@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, Suspense } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -86,9 +87,11 @@ const careerSchema = z.object({
 
 type CareerFormValues = z.infer<typeof careerSchema>;
 
-export default function CareerPage() {
+function CareerPageContent() {
   const t = useTranslations("CareerPage");
-  const [isSuccess, setIsSuccess] = useState(false);
+  const searchParams = useSearchParams();
+  const isSuccess = searchParams.get("success") === "true";
+  const router = useRouter();
   const resumeFileRef = useRef<HTMLInputElement>(null);
   const {
     captchaRef,
@@ -123,6 +126,16 @@ export default function CareerPage() {
     control,
     formState: { errors, isSubmitting },
   } = form;
+
+  // Reset form when isSuccess transitions from true to false (e.g. on navigation click)
+  useEffect(() => {
+    if (!isSuccess) {
+      form.reset();
+      if (resumeFileRef.current) {
+        resumeFileRef.current.value = "";
+      }
+    }
+  }, [isSuccess, form]);
 
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
@@ -197,7 +210,7 @@ export default function CareerPage() {
 
       if (res.data?.success || res.status === 200 || res.status === 201) {
         toast.dismiss("career-submit");
-        setIsSuccess(true);
+        router.push("/career?success=true");
         resetCaptcha();
       } else {
         toast.error("Submission Failed", {
@@ -728,5 +741,13 @@ export default function CareerPage() {
         </div>
       </section>
     </div>
+  );
+}
+
+export default function CareerPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+      <CareerPageContent />
+    </Suspense>
   );
 }

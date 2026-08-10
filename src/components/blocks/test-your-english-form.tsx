@@ -44,6 +44,7 @@ import {
 } from "@/components/ui/popover";
 import api from "@/axios";
 import { toast } from "sonner";
+import { useRouter, useSearchParams } from "next/navigation";
 
 
 import { useTranslations, useLocale } from "next-intl";
@@ -63,7 +64,9 @@ type TestValues = {
 
 export default function TestYourEnglishForm({ onSuccess }: { onSuccess?: (val: boolean) => void }) {
   const [step, setStep] = useState(1);
-  const [isSuccess, setIsSuccess] = useState(false);
+  const searchParams = useSearchParams();
+  const isSuccess = searchParams.get("success") === "true";
+  const router = useRouter();
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   const [attemptId, setAttemptId] = useState<string | null>(null);
   const attemptIdRef = useRef<string | null>(null);
@@ -177,6 +180,16 @@ export default function TestYourEnglishForm({ onSuccess }: { onSuccess?: (val: b
     control,
     formState: { errors },
   } = form;
+
+  // Reset form when isSuccess transitions from true to false (e.g. on navigation click)
+  useEffect(() => {
+    if (!isSuccess) {
+      setStep(1);
+      form.reset();
+      setAttemptId(null);
+      attemptIdRef.current = null;
+    }
+  }, [isSuccess, form]);
 
   const currentAnswers = watch("answers");
 
@@ -294,7 +307,7 @@ export default function TestYourEnglishForm({ onSuccess }: { onSuccess?: (val: b
         answers,
       });
 
-      setIsSuccess(true);
+      router.push("/test-your-english?success=true");
       onSuccess?.(true);
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (error: any) {

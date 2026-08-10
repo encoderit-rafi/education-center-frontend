@@ -124,7 +124,7 @@ export default function FormPTEAcademicRegistration({
       placeOfBirth: "",
       countryOfBirth: "",
       countryOfCitizenship: "",
-      countryOfResidence: "",
+      countryOfResidence: "United Arab Emirates",
       postalAddress1: "",
       postalAddress2: "",
       poBox: "",
