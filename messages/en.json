@@ -3963,7 +3963,8 @@
       "processing": "Processing...",
       "submitQuiz": "Submit Quiz",
       "submitErrorTitle": "Submission failed",
-      "submitErrorDesc": "An unexpected error occurred. Please try again."
+      "submitErrorDesc": "An unexpected error occurred. Please try again.",
+      "emailConflict": "This email has already been used to take the quiz. Please use a unique email address."
     },
     "result": {
       "title": "Quiz Completed!",

@@ -668,6 +668,7 @@ export default function EnglishQuizForm() {
     control,
     trigger,
     watch,
+    setError,
     formState: { errors },
   } = form;
 
@@ -697,6 +698,23 @@ export default function EnglishQuizForm() {
     if (!isValid) {
       toast.error(t("form.requiredFieldsError"));
       return;
+    }
+
+    if (step === 1 && typeof window !== "undefined") {
+      const emailVal = watch("email");
+      try {
+        const submittedEmails = JSON.parse(localStorage.getItem("english_quiz_submitted_emails") || "[]");
+        if (submittedEmails.includes(emailVal)) {
+          setError("email", {
+            type: "manual",
+            message: t("form.emailConflict") || "This email has already been used to take the quiz. Please use a unique email address.",
+          });
+          toast.error(t("form.emailConflict"));
+          return;
+        }
+      } catch (e) {
+        console.error("Failed to check email in localStorage:", e);
+      }
     }
 
     setStep((prev) => prev + 1);
@@ -747,12 +765,33 @@ export default function EnglishQuizForm() {
 
       await api.post("/english-quiz-submissions", payload);
 
+      // Save email in localStorage on successful submission
+      if (typeof window !== "undefined") {
+        try {
+          const submittedEmails = JSON.parse(localStorage.getItem("english_quiz_submitted_emails") || "[]");
+          if (!submittedEmails.includes(data.email)) {
+            submittedEmails.push(data.email);
+            localStorage.setItem("english_quiz_submitted_emails", JSON.stringify(submittedEmails));
+          }
+        } catch (e) {
+          console.error("Failed to save email to localStorage:", e);
+        }
+      }
+
       router.push(`/english-quiz/result?score=${calculatedScore}&correct=${correctAnswersCount}`);
     } catch (error: any) {
       console.error("Error submitting English quiz:", error);
-      toast.error(t("form.submitErrorTitle") || "Submission failed", {
-        description: error.response?.data?.message || t("form.submitErrorDesc") || "An unexpected error occurred. Please try again.",
-      });
+      if (error.response?.data?.errorCode === "ENGLISH_QUIZ_SUBMISSION_EMAIL_CONFLICT") {
+        setError("email", {
+          type: "manual",
+          message: t("form.emailConflict") || "This email has already been used to take the quiz. Please use a unique email address.",
+        });
+        toast.error(t("form.emailConflict"));
+      } else {
+        toast.error(t("form.submitErrorTitle") || "Submission failed", {
+          description: error.response?.data?.message || t("form.submitErrorDesc") || "An unexpected error occurred. Please try again.",
+        });
+      }
     }
   };
 
