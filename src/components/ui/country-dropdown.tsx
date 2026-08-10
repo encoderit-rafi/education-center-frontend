@@ -68,7 +68,8 @@ const DEFAULT_COUNTRY_OPTIONS: Country[] = countries.all
   .map((country: Country) => ({
     ...country,
     name: formatCountryName(country.name),
-  }));
+  }))
+  .sort((a, b) => a.name.localeCompare(b.name));
 
 const CountryDropdownComponent = (
   {

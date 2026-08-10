@@ -80,7 +80,7 @@ export default function FreeConsultationForm() {
 
   const AREAS = [
     { label: tForm("areas.booking"), value: "Exam Booking & Seat Availability" },
-    { label: tForm("areas.prep"), value: "Exam Prep. Course" },
+    { label: tForm("areas.prep"), value: "Exam Prep Course" },
   ];
 
   const TIMES = [
@@ -169,7 +169,7 @@ export default function FreeConsultationForm() {
       if (data.time === "Evening") preferredTime = "Evening (6:00 PM – 8:30 PM)";
 
       const consultationType =
-        data.area === "Exam Prep. Course" ? "exam_preparation_course" : "exam";
+        data.area === "Exam Prep Course" ? "exam_preparation_course" : "exam";
 
       const payload = {
         consultation_type: consultationType,
