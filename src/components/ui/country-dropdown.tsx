@@ -170,16 +170,16 @@ const CountryDropdownComponent = (
         // Prevent Base UI from moving focus into the popup on open,
         // which would cause the browser to scroll to the search input.
         initialFocus={false}
-        className="w-(--anchor-width) min-w-[12rem] p-0"
+        className="w-(--anchor-width) min-w-48 p-0"
       >
-          <Command className="w-full max-h-[300px] overflow-hidden bg-white text-slate-700">
+          <Command className="w-full max-h-75 overflow-hidden bg-white text-slate-700">
             <div className="p-1 border-b border-slate-100">
               <CommandInput
                 placeholder={t("searchPlaceholder")}
                 className="h-9 px-2 outline-none w-full bg-slate-50"
               />
             </div>
-            <CommandList className="max-h-[300px] overflow-y-scroll [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-slate-100 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-slate-300 dark:[&::-webkit-scrollbar-track]:bg-slate-800 dark:[&::-webkit-scrollbar-thumb]:bg-slate-600">
+            <CommandList className="max-h-75 overflow-y-scroll [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-slate-100 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-slate-300 dark:[&::-webkit-scrollbar-track]:bg-slate-800 dark:[&::-webkit-scrollbar-thumb]:bg-slate-600">
               <CommandEmpty className="py-6 text-center text-sm text-slate-500">
                 {t("emptyMessage")}
               </CommandEmpty>

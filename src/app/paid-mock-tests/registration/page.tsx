@@ -34,7 +34,7 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import api from "@/axios";
 import Image from "next/image";
 import { format } from "date-fns";
-import { DatePicker } from "@/components/blocks/date-picker";
+
 
 const baseBookingSchema = z.object({
   mockTestId: z.string().min(1, "Please select a mock test"),
@@ -58,22 +58,8 @@ const baseBookingSchema = z.object({
     .string()
     .trim()
     .min(1, "Phone number is required"),
-  dateOfBirth: z
-    .any()
-    .optional()
-    .refine((val) => {
-      if (!val) return true;
-      const dob = new Date(val);
-      if (isNaN(dob.getTime())) return true;
-      const today = new Date();
-      let age = today.getFullYear() - dob.getFullYear();
-      const m = today.getMonth() - dob.getMonth();
-      if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
-        age--;
-      }
-      return age >= 16;
-    }, "Candidates must be at least 16 years old."),
-  gender: z.string().trim().min(1, "Gender is required"),
+  dateOfBirth: z.any().optional(),
+  gender: z.string().optional(),
   address: z
     .string()
     .trim()
@@ -273,8 +259,6 @@ function PaidMockTestRegistrationForm({
       { name: "lastName", label: "Family Name", value: formData.lastName },
       { name: "email", label: "Email", value: formData.email },
       { name: "mobileNumber", label: "Phone Number", value: formData.phone },
-      { name: "dateOfBirth", label: "Date of Birth", value: formattedDob || "" },
-      { name: "gender", label: "Gender", value: formData.gender ? formData.gender.charAt(0).toUpperCase() + formData.gender.slice(1) : "" },
       { name: "country", label: "Country", value: formData.country },
       { name: "city", label: "Town / City", value: formData.city },
       { name: "address", label: "Address", value: formData.address },
@@ -483,49 +467,6 @@ function PaidMockTestRegistrationForm({
                   </Field>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <Field data-invalid={!!errors.dateOfBirth}>
-                    <FieldLabel>{t("dateOfBirth")}</FieldLabel>
-                    <FieldContent>
-                      <DatePicker
-                        name="dateOfBirth"
-                        placeholder={t("dateOfBirthPlaceholder")}
-                        value={formData.dateOfBirth ? new Date(formData.dateOfBirth) : undefined}
-                        onChange={(date) => setValue("dateOfBirth", date, { shouldValidate: true })}
-                        disabled={(date) =>
-                          date >= new Date() || date < new Date("1900-01-01")
-                        }
-                        fromYear={1900}
-                        toYear={new Date().getFullYear()}
-                      />
-                      <FieldError errors={[errors.dateOfBirth]} />
-                    </FieldContent>
-                  </Field>
-                  <Field data-invalid={!!errors.gender}>
-                    <FieldLabel required>{t("gender")}</FieldLabel>
-                    <FieldContent>
-                      <Select
-                        value={
-                          formData.gender
-                            ? formData.gender.charAt(0).toUpperCase() + formData.gender.slice(1).toLowerCase()
-                            : undefined
-                        }
-                        onValueChange={(val) => {
-                          if (val) setValue("gender", val, { shouldValidate: true });
-                        }}
-                      >
-                        <SelectTrigger className="w-full">
-                          <SelectValue placeholder={t("selectGender")} />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="Male">{t("male")}</SelectItem>
-                          <SelectItem value="Female">{t("female")}</SelectItem>
-                        </SelectContent>
-                      </Select>
-                      <FieldError errors={[errors.gender]} />
-                    </FieldContent>
-                  </Field>
-                </div>
 
                 <Field data-invalid={!!errors.address}>
                   <FieldLabel required>{t("address")}</FieldLabel>
@@ -589,7 +530,7 @@ function PaidMockTestRegistrationForm({
 
                       <div>
                         <p className="text-xs text-slate-400">{t("location")}</p>
-                        <p className="font-semibold text-slate-700 capitalize">
+                        <p className="font-semibold text-slate-700">
                           {activeLocation === "center-based" ? t("testCenter") : t("homeOnline")}
                         </p>
                       </div>
