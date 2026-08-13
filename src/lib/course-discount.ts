@@ -52,3 +52,26 @@ export function calculateCourseDiscountedPrice(
   }
   return basePrice * (1 - discountVal / 100);
 }
+
+export function getDirectCourseDiscountPercentage(
+  courseName: string = "",
+  fallbackDiscount: number = 0
+): number {
+  // When candidates book exam prep course directly, they receive 5% auto discount as welcome discount.
+  return 5;
+}
+
+export function calculateDirectCourseDiscountedPrice(
+  basePrice: number,
+  courseName: string = "",
+  fallbackDiscount: number = 0,
+  discountType: "PERCENTAGE" | "FIXED" | null = "PERCENTAGE"
+): number {
+  if (!basePrice || isNaN(basePrice)) return 0;
+  const discountVal = getDirectCourseDiscountPercentage(courseName, fallbackDiscount);
+  if (discountType === "FIXED") {
+    return Math.max(0, basePrice - discountVal);
+  }
+  return basePrice * (1 - discountVal / 100);
+}
+

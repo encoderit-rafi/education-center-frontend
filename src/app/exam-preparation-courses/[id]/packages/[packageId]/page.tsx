@@ -19,7 +19,7 @@ import api from "@/axios";
 import { buttonVariants } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { PriceDisplay } from "@/components/ui/price-display";
-import { calculateCourseDiscountedPrice } from "@/lib/course-discount";
+import { calculateDirectCourseDiscountedPrice } from "@/lib/course-discount";
 import { BaseCard } from "@/components/blocks/cards/base-card";
 import {
   PackageChecklistSection,
@@ -163,7 +163,7 @@ export default async function PackageDetailPage({ params }: PageProps) {
     }
   }
 
-  const discountedPrice = calculateCourseDiscountedPrice(
+  const discountedPrice = calculateDirectCourseDiscountedPrice(
     basePrice,
     pkg.name,
     discount,

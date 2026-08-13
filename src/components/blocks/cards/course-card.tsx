@@ -32,8 +32,8 @@ export interface CoursePackage {
 }
 
 import {
-  getCourseDiscountPercentage,
-  calculateCourseDiscountedPrice,
+  getDirectCourseDiscountPercentage,
+  calculateDirectCourseDiscountedPrice,
 } from "@/lib/course-discount";
 
 export interface CourseCardProps {
@@ -72,8 +72,8 @@ export default function CourseCard({
     }
   }
 
-  const effectiveDiscount = getCourseDiscountPercentage(pkg.name, discount);
-  const discountedPrice = calculateCourseDiscountedPrice(
+  const effectiveDiscount = getDirectCourseDiscountPercentage(pkg.name, discount);
+  const discountedPrice = calculateDirectCourseDiscountedPrice(
     basePrice,
     pkg.name,
     discount,
