@@ -1375,6 +1375,13 @@
       "emailPlaceholder": "ahmad@example.com",
       "phone": "رقم الهاتف",
       "phonePlaceholder": "يرجى إدخال رقمك",
+      "contactMethod": "طريقة الاتصال المفضلة",
+      "selectContactMethod": "اختر طريقة الاتصال",
+      "contactMethods": {
+        "phone": "مكالمة هاتفية",
+        "email": "البريد الإلكتروني",
+        "whatsapp": "واتساب / تليجرام"
+      },
       "country": "البلد",
       "city": "الإمارة / المدينة",
       "cityPlaceholder": "دبي",
@@ -1405,6 +1412,7 @@
         "emailInvalid": "يرجى إدخال عنوان بريد إلكتروني صالح",
         "phoneRequired": "رقم الهاتف مطلوب",
         "phoneMin": "يرجى إدخال رقم هاتف صالح",
+        "contactMethodRequired": "طريقة الاتصال المفضلة مطلوبة",
         "countryRequired": "البلد مطلوب",
         "cityRequired": "الإمارة / المدينة مطلوبة",
         "areaRequired": "مجال الاستشارة مطلوب",

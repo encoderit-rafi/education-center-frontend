@@ -40,6 +40,7 @@ import {
   Calendar as CalendarIcon,
   ArrowRight,
   ChevronDown,
+  MessageSquare,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Stepper from "@/components/stepper";
@@ -61,6 +62,7 @@ type FormValues = {
   date: Date;
   time: string;
   message?: string;
+  preferredContactMethod: string;
 };
 
 export default function FreeConsultationForm() {
@@ -89,6 +91,12 @@ export default function FreeConsultationForm() {
     { label: tForm("times.evening"), value: "Evening" },
   ];
 
+  const CONTACT_METHODS = [
+    { label: tForm("contactMethods.phone"), value: "Phone Call" },
+    { label: tForm("contactMethods.email"), value: "Email" },
+    { label: tForm("contactMethods.whatsapp"), value: "WhatsApp / Telegram" },
+  ];
+
   const formSchema = z.object({
     fullName: z
       .string()
@@ -105,6 +113,10 @@ export default function FreeConsultationForm() {
       .trim()
       .min(1, tForm("validation.phoneRequired"))
       .min(5, tForm("validation.phoneMin")),
+    preferredContactMethod: z
+      .string()
+      .trim()
+      .min(1, tForm("validation.contactMethodRequired")),
     country: z
       .string()
       .trim()
@@ -147,6 +159,7 @@ export default function FreeConsultationForm() {
       date: undefined,
       time: "",
       message: "",
+      preferredContactMethod: "",
     },
   });
 
@@ -181,6 +194,7 @@ export default function FreeConsultationForm() {
         city: data.city,
         preferred_date: data.date ? format(data.date, "yyyy-MM-dd") : undefined,
         preferred_time: preferredTime,
+        preferred_contact_method: data.preferredContactMethod,
         message: data.message?.trim() || "-",
         ...(recaptchaToken ? { recaptcha_token: recaptchaToken } : {}),
       };
@@ -261,25 +275,74 @@ export default function FreeConsultationForm() {
               <FieldError errors={[errors.email]} />
             </Field>
 
-            <Field data-invalid={!!errors.phone}>
-              <FieldLabel required>{tForm("phone")}</FieldLabel>
-              <FieldContent>
-                <Controller
-                  control={control}
-                  name="phone"
-                  render={({ field }) => (
-                    <PhoneInput
-                      value={field.value}
-                      onChange={field.onChange}
-                      defaultCountry="AE"
-                      placeholder={tForm("phonePlaceholder")}
-                      className="bg-slate-50 border border-slate-200 rounded-md overflow-hidden h-11 focus-within:ring-4 focus-within:ring-primary/5"
-                    />
-                  )}
-                />
-              </FieldContent>
-              <FieldError errors={[errors.phone]} />
-            </Field>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <Field data-invalid={!!errors.phone}>
+                <FieldLabel required>{tForm("phone")}</FieldLabel>
+                <FieldContent>
+                  <Controller
+                    control={control}
+                    name="phone"
+                    render={({ field }) => (
+                      <PhoneInput
+                        value={field.value}
+                        onChange={field.onChange}
+                        defaultCountry="AE"
+                        placeholder={tForm("phonePlaceholder")}
+                        className="bg-slate-50 border border-slate-200 rounded-md overflow-hidden h-11 focus-within:ring-4 focus-within:ring-primary/5"
+                      />
+                    )}
+                  />
+                </FieldContent>
+                <FieldError errors={[errors.phone]} />
+              </Field>
+
+              <Field data-invalid={!!errors.preferredContactMethod}>
+                <FieldLabel required>{tForm("contactMethod")}</FieldLabel>
+                <FieldContent>
+                  <Controller
+                    control={control}
+                    name="preferredContactMethod"
+                    render={({ field }) => (
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button
+                            variant="ghost"
+                            type="button"
+                            className={cn(
+                              "flex h-11 w-full items-center justify-between overflow-hidden whitespace-nowrap rounded-md border border-slate-200 bg-white px-3 text-base transition-[color,box-shadow,background-color] outline-none focus:border-primary focus:ring-3 focus:ring-ring/30 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm font-medium",
+                              !field.value && "text-slate-400"
+                            )}
+                          >
+                            <div className="flex items-center gap-2">
+                              <MessageSquare className="text-slate-400 shrink-0" size={16} />
+                              <span className="truncate">
+                                {field.value
+                                  ? CONTACT_METHODS.find((c) => c.value === field.value)?.label
+                                  : tForm("selectContactMethod")}
+                              </span>
+                            </div>
+                            <ChevronDown className="h-4 w-4 text-slate-400 shrink-0" />
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent className="min-w-(--radix-dropdown-menu-trigger-width) w-auto bg-white">
+                          <DropdownMenuRadioGroup
+                            value={field.value}
+                            onValueChange={field.onChange}
+                          >
+                            {CONTACT_METHODS.map((c) => (
+                              <DropdownMenuRadioItem key={c.value} value={c.value}>
+                                {c.label}
+                              </DropdownMenuRadioItem>
+                            ))}
+                          </DropdownMenuRadioGroup>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    )}
+                  />
+                </FieldContent>
+                <FieldError errors={[errors.preferredContactMethod]} />
+              </Field>
+            </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <Field data-invalid={!!errors.country}>

@@ -1294,6 +1294,13 @@
       "emailPlaceholder": "john@example.com",
       "phone": "Phone Number",
       "phonePlaceholder": "Please Enter Your Number",
+      "contactMethod": "Preferred Contact Method",
+      "selectContactMethod": "Select contact method",
+      "contactMethods": {
+        "phone": "Phone Call",
+        "email": "Email",
+        "whatsapp": "WhatsApp / Telegram"
+      },
       "country": "Country",
       "city": "Emirate / City",
       "cityPlaceholder": "Dubai",
@@ -1324,6 +1331,7 @@
         "emailInvalid": "Please enter a valid email address",
         "phoneRequired": "Phone Number is required",
         "phoneMin": "Please enter a valid phone number",
+        "contactMethodRequired": "Preferred Contact Method is required",
         "countryRequired": "Country is required",
         "cityRequired": "Emirate / City is required",
         "areaRequired": "Area of Consultation is required",
