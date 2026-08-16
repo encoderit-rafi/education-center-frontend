@@ -17,7 +17,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
-import { CheckCircle2, Calendar } from "lucide-react";
+import { CheckCircle2, Calendar, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useSearchParams } from "next/navigation";
 import Stepper from "@/components/stepper";
@@ -260,6 +260,8 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
 
     mutation.mutate(omitEmpty(payload));
   };
+
+  const isPending = mutation.isPending || paymentMutation.isPending;
 
   if (isLoading) {
     return (
@@ -551,9 +553,16 @@ function WorkshopRegistrationForm({ className }: { className?: string }) {
                 <Button
                   type="submit"
                   className="w-full mt-6 py-3"
-                  disabled={mutation.isPending}
+                  disabled={isPending}
                 >
-                  {mutation.isPending ? t("processing") : t("submit")}
+                  {isPending ? (
+                    <span className="flex items-center justify-center gap-2">
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      {t("processing")}
+                    </span>
+                  ) : (
+                    t("submit")
+                  )}
                 </Button>
                 {mutation.isError && (
                   <p className="text-red-500 text-sm mt-2">

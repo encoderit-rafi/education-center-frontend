@@ -4060,6 +4060,7 @@
   },
   "FormsShared": {
     "GlobalReviewStep": {
+      "processing": "جاري المعالجة...",
       "title": "مراجعة تفاصيلك",
       "description": "يرجى تأكيد صحة جميع المعلومات قبل المتابعة إلى الدفع.",
       "editDetails": "تعديل التفاصيل",

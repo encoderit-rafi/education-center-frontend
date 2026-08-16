@@ -449,6 +449,7 @@ export default function FormPTEHomeB1Registration({
 
           {currentStep === 3 && (
             <GlobalReviewStep
+              isPending={bookingMutation.isPending || paymentMutation.isPending}
               onEdit={() => goToStep(2)}
               onSubmit={form.handleSubmit(handleFormSubmit, onInvalid)}
               paymentMethodValue={(formData as any)?.paymentMethod}

@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { Edit3, CreditCard, User, ShieldCheck, Globe } from "lucide-react";
+import { Edit3, CreditCard, User, ShieldCheck, Globe, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PriceDisplay } from "@/components/ui/price-display";
 import Stepper from "@/components/stepper";
@@ -354,7 +354,7 @@ function SummaryCard({
               </span>
               <span
                 className={cn(
-                  "text-sm font-semibold leading-normal break-words",
+                  "text-sm font-semibold leading-normal wrap-break-word",
                   field.highlight ? "text-[#A11D1D] font-bold" : "text-slate-900",
                 )}
               >
@@ -405,6 +405,7 @@ export function ReviewSummaryGrid({
 interface GlobalReviewStepProps {
   onEdit: () => void;
   onSubmit: (e?: React.BaseSyntheticEvent) => Promise<void>;
+  isPending?: boolean;
 
   // Payment Section State
   paymentMethodValue: string;
@@ -431,6 +432,7 @@ interface GlobalReviewStepProps {
 export function GlobalReviewStep({
   onEdit,
   onSubmit,
+  isPending,
   paymentMethodValue,
   onPaymentMethodChange,
   paymentMethodError,
@@ -505,9 +507,17 @@ export function GlobalReviewStep({
             </div>
             <Button
               type="submit"
+              disabled={isPending}
               className="w-full h-14 bg-primary hover:bg-primary/90 text-white font-bold text-lg rounded-xl shadow-lg shadow-primary/20 transition-all flex items-center justify-center gap-2 group mt-4"
             >
-              {t("iAcceptPay")}
+              {isPending ? (
+                <>
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                  {t("processing")}
+                </>
+              ) : (
+                t("iAcceptPay")
+              )}
             </Button>
           </div>
 

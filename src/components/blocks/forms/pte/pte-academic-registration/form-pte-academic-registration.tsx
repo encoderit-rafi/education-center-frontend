@@ -424,6 +424,7 @@ export default function FormPTEAcademicRegistration({
 
           {currentStep === 3 && (
             <GlobalReviewStep
+              isPending={bookingMutation.isPending || paymentMutation.isPending}
               onEdit={() => goToStep(2)}
               onSubmit={form.handleSubmit(handleFormSubmit, onInvalid)}
               paymentMethodValue={(formData as any)?.paymentMethod}

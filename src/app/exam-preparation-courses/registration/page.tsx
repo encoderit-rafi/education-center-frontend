@@ -373,6 +373,8 @@ function CourseRegistrationForm({ className }: { className?: string }) {
     mutation.mutate(finalPayload);
   };
 
+  const isPending = mutation.isPending || paymentMutation.isPending;
+
   if (isSuccess) {
     return (
       <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-[2.5rem] p-10 text-center space-y-6 max-w-2xl mx-auto shadow-2xl animate-in zoom-in-95 duration-500 my-12">
@@ -727,9 +729,16 @@ function CourseRegistrationForm({ className }: { className?: string }) {
                 <Button
                   type="submit"
                   className="w-full mt-6 py-3"
-                  disabled={mutation.isPending}
+                  disabled={isPending}
                 >
-                  {mutation.isPending ? t("processing") : t("submitButton")}
+                  {isPending ? (
+                    <span className="flex items-center justify-center gap-2">
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      {t("processing")}
+                    </span>
+                  ) : (
+                    t("submitButton")
+                  )}
                 </Button>
                 {mutation.isError && (
                   <p className="text-red-500 text-sm mt-2">

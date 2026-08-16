@@ -4080,6 +4080,7 @@
   },
   "FormsShared": {
     "GlobalReviewStep": {
+      "processing": "Processing...",
       "title": "Review Your Details",
       "description": "Please confirm all information is correct before proceeding to payment.",
       "editDetails": "Edit Details",

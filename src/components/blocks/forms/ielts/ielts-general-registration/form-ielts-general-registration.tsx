@@ -423,6 +423,7 @@ export default function FormIELTSGeneralRegistration({
 
         {step === 3 && (
           <GlobalReviewStep
+            isPending={bookingMutation.isPending || paymentMutation.isPending}
             onEdit={() => setStep(2)}
             onSubmit={handleSubmit(onSubmit)}
             paymentMethodValue={(formData as any)?.paymentMethod}
