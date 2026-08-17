@@ -17,6 +17,9 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 export const metadata: Metadata = {
   title: "TEPTH | The Exam Preparation & Testing House",
   description: "Prep Smarter, Score Higher",
+  icons: {
+    icon: "/images/tepth-logo-1.png",
+  },
 };
 
 export default async function RootLayout({
