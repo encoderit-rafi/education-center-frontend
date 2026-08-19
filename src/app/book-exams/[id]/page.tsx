@@ -141,7 +141,7 @@ export default async function BookExamsId({
   const slug = rawSlug === "toefl" ? "toefl-ibt" : rawSlug;
   const locale = await getLocale();
   const t = await getTranslations("ExamDetailsPage");
-  console.log("👉 ~ BookExamsId ~ id/slug:", slug);
+
 
   let exam: any = null;
   let childExams: any[] = [];

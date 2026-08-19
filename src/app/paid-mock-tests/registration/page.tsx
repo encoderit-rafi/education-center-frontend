@@ -310,8 +310,6 @@ function PaidMockTestRegistrationForm({
       },
     };
 
-    console.log("👉 [Mock Test Registration] Form Raw Data:", formData);
-    console.log("👉 [Mock Test Registration] Final Payload Sent to API:", payload);
 
     mutation.mutate({
       ...omitEmpty(payload),

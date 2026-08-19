@@ -59,7 +59,6 @@ export default function FormPartnershipRequest() {
     });
 
     const onSubmit = async (data: PartnershipFormValues) => {
-        console.log("Partnership Request:", data);
         await new Promise((resolve) => setTimeout(resolve, 800));
         setIsSuccess(true);
     };

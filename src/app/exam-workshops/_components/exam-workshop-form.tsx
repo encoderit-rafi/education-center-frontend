@@ -98,7 +98,6 @@ export default function ExamWorkshopForm({
     examData.workshops[0];
 
   const onSubmit = (data: BookingValues) => {
-    console.log("Workshop Booking Data:", data);
     setIsSuccess(true);
   };
 

@@ -167,7 +167,6 @@ export default function FormTOEFLIBTRegistration({
   });
 
   const formData = form.watch();
-  console.log('formData', formData);
 
   const goToStep = (step: number) => {
     setCurrentStep(step);
@@ -398,7 +397,6 @@ export default function FormTOEFLIBTRegistration({
           },
           courseId: data.selectedCourse ? courseDetail?.id : null,
         });
-        console.log("compiledPayload", compiledPayload)
         bookingMutation.mutate(compiledPayload);
       } catch (error: any) {
         console.error("Form submission error:", error);

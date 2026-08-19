@@ -139,7 +139,6 @@ function CareerPageContent() {
 
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
-      console.log("👉 Form Validation Errors:", errors);
     }
   }, [errors]);
 
@@ -185,7 +184,6 @@ function CareerPageContent() {
         ? relativeUrl
         : `${apiHost}${relativeUrl}`;
 
-      console.log("Resume uploaded successfully! URL:", fullResumeUrl);
 
       // 2. Submit the career application
       toast.loading("Submitting application...", { id: "career-submit" });

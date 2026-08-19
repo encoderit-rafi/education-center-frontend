@@ -101,11 +101,11 @@ function CourseRegistrationForm({ className }: { className?: string }) {
     },
     enabled: !!courseSlug,
   });
-  console.log("👉 ~ CourseRegistrationForm ~ courseData:", courseData);
+
 
   const courseName = courseData?.name ?? courseSlug?.toUpperCase() ?? "";
   const packageData = courseData?.packages?.find((p) => p.id === packageId);
-  console.log("👉 ~ CourseRegistrationForm ~ packageData:", packageData);
+
 
   const [isSuccess, setIsSuccess] = useState(false);
   const [couponCodeInput, setCouponCodeInput] = useState("");
@@ -368,7 +368,7 @@ function CourseRegistrationForm({ className }: { className?: string }) {
     };
 
     const finalPayload = omitEmpty(payload);
-    console.log("👉 [Course Registration] Final Payload Sent to API:", finalPayload);
+
 
     mutation.mutate(finalPayload);
   };

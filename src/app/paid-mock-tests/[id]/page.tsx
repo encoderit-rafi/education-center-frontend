@@ -59,7 +59,7 @@ interface PageProps {
 export async function generateStaticParams() {
   try {
     const res = await api.get("/mock-tests");
-    console.log("👉 ~ generateStaticParams ~ res:", res);
+
     if (res.data?.success) {
       return res.data.data.data.map((item: any) => ({
         id: item.slug,
@@ -108,7 +108,7 @@ export default async function PaidMockTestDynamicPage({ params }: PageProps) {
   let data = null;
   try {
     const response = await api.get(`/mock-tests/${id}`);
-    console.log("👉 ~ PaidMockTestDynamicPage ~ response:", response);
+
     if (response.data?.success) {
       data = response.data.data;
     }
@@ -147,7 +147,7 @@ export default async function PaidMockTestDynamicPage({ params }: PageProps) {
           ...fallback,
           ...originalDetails,
         };
-    console.log("👉 ~ PaidMockTestDynamicPage ~ data.details:", data.details);
+
   }
 
   const notesParts = data.details?.notes

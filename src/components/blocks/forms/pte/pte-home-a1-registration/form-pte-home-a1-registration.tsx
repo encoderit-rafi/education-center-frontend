@@ -344,7 +344,6 @@ export default function FormPTEHomeA1Registration({
           },
           courseId: data.selectedCourse ? courseDetail?.id : null,
         });
-        console.log("🚀 ~ handleFormSubmit ~ compiledPayload:", compiledPayload)
         bookingMutation.mutate(compiledPayload);
       } catch (error: any) {
         console.error("Form submission error:", error);

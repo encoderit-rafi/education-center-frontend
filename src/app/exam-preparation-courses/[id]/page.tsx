@@ -103,7 +103,7 @@ export default async function ExamPreparationDynamicPage({
     const courseRes = await api.get<ApiResponse<CourseDetail>>(
       `/courses/${slug}?sort_by=orderIndex&sort_order=desc`,
     );
-    console.log("👉 ~ ExamPreparationDynamicPage ~ courseRes:", courseRes);
+
 
     if (courseRes.data.success) {
       course = courseRes.data.data;
@@ -224,7 +224,7 @@ export default async function ExamPreparationDynamicPage({
       (slugLower === "celpip" && subTitleLower === "celpip-general")
     );
   });
-  console.log("👉 ~ ExamPreparationDynamicPage ~ filteredWorkshops:", filteredWorkshops)
+
   return (
     <div className="min-h-screen bg-white">
       {/* ── Hero Section ── */}

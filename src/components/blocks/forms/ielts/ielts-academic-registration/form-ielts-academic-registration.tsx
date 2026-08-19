@@ -348,7 +348,6 @@ export default function FormIeltsAcademicRegistration({
           courseId: data.selectedCourse ? courseDetail?.id : null,
         });
 
-        console.log("👉 ~ compiledPayload:", compiledPayload);
 
         bookingMutation.mutate(compiledPayload);
       } catch (error: any) {

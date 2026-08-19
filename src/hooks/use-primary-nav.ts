@@ -78,7 +78,7 @@ export function usePrimaryNav() {
       const response = await api.get("/exams", {
         params: { limit: 100, sort_order: "asc", sort_by: "orderIndex" },
       });
-      console.log("👉 ~ usePrimaryNav ~ response:", response.data.data);
+
       return response.data;
     },
   });

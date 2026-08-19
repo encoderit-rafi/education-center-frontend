@@ -72,7 +72,6 @@ export default function SpecialAccommodationForm() {
   });
 
   const onSubmit = async (data: InquiryFormValues) => {
-    console.log("Accommodation Inquiry:", data);
     await new Promise((resolve) => setTimeout(resolve, 800));
     setIsSuccess(true);
   };

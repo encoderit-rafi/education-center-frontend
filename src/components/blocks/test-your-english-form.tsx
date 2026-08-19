@@ -148,7 +148,6 @@ export default function TestYourEnglishForm({ onSuccess }: { onSuccess?: (val: b
         const questions = Array.isArray(data) ? data : data?.questions ?? [];
         if (questions.length > 0) {
           setApiQuestions(questions);
-          console.log("Loaded", questions.length, "questions from API");
         }
       })
       .catch((err) => {
@@ -252,7 +251,7 @@ export default function TestYourEnglishForm({ onSuccess }: { onSuccess?: (val: b
         });
 
         // Remove debug alerts once structure is confirmed
-        console.log("attempt-start full response:", JSON.stringify(res.data, null, 2));
+
 
         // Try multiple possible paths for attempt_id
         const rawData = res.data;
@@ -300,7 +299,7 @@ export default function TestYourEnglishForm({ onSuccess }: { onSuccess?: (val: b
         answer: data.answers[q.id] ?? "",
       }));
 
-      console.log("Submitting:", { attempt_id: attemptIdRef.current, answers });
+
 
       await api.post("/english-test/attempt-submit", {
         attempt_id: attemptIdRef.current,

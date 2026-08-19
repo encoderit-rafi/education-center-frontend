@@ -12,7 +12,7 @@ export default async function ExamDetailPage({
 }) {
   const { id: slug } = await params;
   const locale = await getLocale();
-  console.log("👉 ~ ExamDetailPage ~ id/slug:", slug);
+
 
   let exam: any = null;
   let childExams: any[] = [];

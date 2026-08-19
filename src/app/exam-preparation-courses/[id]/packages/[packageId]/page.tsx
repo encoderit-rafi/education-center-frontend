@@ -77,7 +77,7 @@ export default async function PackageDetailPage({ params }: PageProps) {
     );
     if (response.data.success) {
       course = response.data.data;
-      console.log("👉 ~ PackageDetailPage ~ course:::", course);
+
     }
   } catch (error) {
     console.error("Error fetching course detail:", error);
