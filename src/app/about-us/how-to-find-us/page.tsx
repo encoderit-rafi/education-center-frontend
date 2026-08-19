@@ -168,7 +168,7 @@ export default function HowToFindUs() {
                   <p>
                     {t("Transportation.taxicabDescriptionPart1")}
                     <br /> {t("Transportation.taxicabDescriptionPart2")}{" "}
-                    <span className="text-primary font-semibold">
+                    <span className="text-primary font-semibold" dir="ltr">
                       {t("Transportation.taxicabNumber")}
                     </span>{" "}
                     {t("Transportation.taxicabDescriptionPart3")}

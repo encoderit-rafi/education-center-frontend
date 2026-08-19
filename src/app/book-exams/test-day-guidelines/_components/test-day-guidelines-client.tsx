@@ -392,7 +392,7 @@ export default function TestDayGuidelinesClient() {
                   className="inline-flex items-center gap-2.5 rounded-xl bg-white px-8 py-4 text-sm font-bold text-slate-950 shadow-lg transition-all hover:bg-slate-50 hover:scale-105 active:scale-95"
                 >
                   <Phone className="h-4 w-4 text-primary" />
-                  {t("cta.callButton")}
+                  <span dir="ltr">{t("cta.callButton")}</span>
                 </Link>
                 <Link
                   href="/contact"

@@ -25,7 +25,7 @@ code = code.replace(
               <span>{t("Pdf.addressL1")}</span>
               <span>{t("Pdf.addressL2")}</span>
               <div className="pdf-header-contact-meta">
-                <span><strong>{t("Pdf.tel")}:</strong> +971 6 553 1250</span>
+                <span><strong>{t("Pdf.tel")}:</strong> <span dir="ltr">+971 6 553 1250</span></span>
                 <span><strong>{t("Pdf.web")}:</strong> www.tepth.org</span>`
 );
 
@@ -99,8 +99,8 @@ code = code.replace(
             </div>
 
             <div style={{ marginTop: "0.65rem", fontSize: "11px", lineHeight: 1.65, color: "#475569" }}>
-              <span style={{ fontWeight: 700, color: "#1a1a1a" }}>{t("Pdf.phoneLabel")} </span>+971 6 553 1250<br />
-              <span style={{ fontWeight: 700, color: "#1a1a1a" }}>{t("Pdf.taxiLabel")} </span>600-525-252
+              <span style={{ fontWeight: 700, color: "#1a1a1a" }}>{t("Pdf.phoneLabel")} </span><span dir="ltr">+971 6 553 1250</span><br />
+              <span style={{ fontWeight: 700, color: "#1a1a1a" }}>{t("Pdf.taxiLabel")} </span><span dir="ltr">600-525-252</span>
             </div>`
 );
 
@@ -151,7 +151,7 @@ code = code.replace(
             </div>`,
   `              <div className="pdf-transport-title">{t("Transportation.taxicabTitle")}</div>
               {t("Transportation.taxicabDescriptionPart1")}
-              <strong>{t("Transportation.taxicabNumber")}</strong>
+              <strong dir="ltr">{t("Transportation.taxicabNumber")}</strong>
               {t("Transportation.taxicabDescriptionPart2")}
             </div>
             <div style={{ clear: "both" }} />
@@ -192,7 +192,7 @@ code = code.replace(
               <div className="pdf-header-contact-details">
                 <span>{t("Pdf.addressL1")}, {t("Pdf.addressL2")}</span>
                 <div className="pdf-header-contact-meta">
-                  <span><strong>{t("Pdf.tel")}:</strong> +971 6 553 1250</span>`
+                  <span><strong>{t("Pdf.tel")}:</strong> <span dir="ltr">+971 6 553 1250</span></span>`
 );
 
 code = code.replace(
