@@ -200,9 +200,9 @@
       ]
     },
     "Testimonials": {
-      "title": "يحظى بثقة قادة",
-      "titleAccent": "المستقبل",
-      "description": "اطلع على آراء مرشحينا العالميين حول رحلتهم مع بيت الامتحانات والتحضير للاختبارات.",
+      "title": "نحظى بثقة قادة",
+      "titleAccent": "الغد",
+      "description": "تعرف على ما يقوله طلابنا عن تجربتهم مع بيت الامتحانات والتحضير للاختبارات ذ.م.م.",
       "reviews": {
         "nadine": {
           "name": "نادين مصطفى",
@@ -3119,8 +3119,8 @@
       "PTE Home A1": "بي تي إي المنزلي A1 (PTE Home A1)",
       "PTE Home A2": "بي تي إي المنزلي A2 (PTE Home A2)",
       "PTE Home B1": "بي تي إي المنزلي B1 (PTE Home B1)",
-      "CELPIP General": "سيلبيب العام (CELPIP General)",
-      "CELPIP General LS": "سيلبيب العام لمهارات الاستماع والتحدث (CELPIP General LS)",
+      "CELPIP General": "سيلبيب عام (CELPIP General)",
+      "CELPIP General LS": "سيلبيب عام لمهارات الاستماع والتحدث (CELPIP General LS)",
       "Skills for English": "مهارات اللغة الإنجليزية (Skills for English)",
       "PSI": "بي إس آي (PSI)",
       "PSI UKVI": "بي إس آي للتأشيرات والهجرة البريطانية (PSI UKVI)"

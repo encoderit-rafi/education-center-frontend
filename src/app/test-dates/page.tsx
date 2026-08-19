@@ -17,7 +17,7 @@ const EXAM_ARABIC_NAMES: Record<string, string> = {
   toefl: "توفل آي بي تي",
   "toefl-ibt": "توفل آي بي تي",
   cael: "كايل",
-  "celpip-general": "سيلبيب العام",
+  "celpip-general": "سيلبيب عام",
   celpip: "سيلبيب",
   "skill-for-english-selt": "سكيلز فور إنجلش (سيلت)",
   oet: "أو إي تي",

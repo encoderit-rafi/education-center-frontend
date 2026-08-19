@@ -53,8 +53,8 @@ const EXAM_ARABIC_NAMES: Record<string, string> = {
   toefl: "توفل آي بي تي",
   "toefl-ibt": "توفل آي بي تي",
   cael: "كايل",
-  "celpip-general": "سيلبيب العام",
-  celpip: "سيلبيب العام",
+  "celpip-general": "سيلبيب عام",
+  celpip: "سيلبيب عام",
   "skill-for-english-selt": "سكيلز فور إنجلش (سيلت)",
   "skills-for-english-selt": "سكيلز فور إنجلش (سيلت)",
   oet: "أو إي تي",
@@ -87,7 +87,7 @@ export default function CourseList() {
       if (upper === "PTE") return "بي تي إي";
       if (upper.includes("TOEFL")) return "توفل آي بي تي";
       if (upper === "CAEL") return "كايل";
-      if (upper.includes("CELPIP")) return "سيلبيب العام";
+      if (upper.includes("CELPIP")) return "سيلبيب عام";
       if (upper.includes("SKILL")) return "سكيلز فور إنجلش (سيلت)";
     }
     return formatExamName(rawName);
