@@ -327,7 +327,7 @@ export default function HowToFindUs() {
                   <Car className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tight">
-                  {t("DrivingDirections.parkingTitle1")} <br />
+                  {t("DrivingDirections.parkingTitle1")}{" "}
                   {t("DrivingDirections.parkingTitle2")}
                 </h3>
               </div>
@@ -358,7 +358,7 @@ export default function HowToFindUs() {
                   <div className="space-y-5 pl-5">
                     <p className="text-white/80 text-base leading-relaxed font-medium">
                       {t("DrivingDirections.publicParkingText1")}
-                      <span className="text-white font-black inline-flex items-center gap-1">
+                      <span className="text-white font-black inline">
                         <PriceDisplay amount={2} /> {t("DrivingDirections.publicParkingText2")}
                       </span>
                     </p>

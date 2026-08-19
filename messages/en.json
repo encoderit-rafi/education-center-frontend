@@ -263,7 +263,7 @@
       "badge": "CONTACT US",
       "title": "Get in Touch",
       "titleAccent": " With Us",
-      "description": "Whether you're preparing for an entrance exam or need deep editorial review, we're here to guide you. Our expert team is ready to assist you at every step of your journey."
+      "description": "Whether you're preparing for an international exam or need to take an exam, we're here to guide you. Our expert team is ready to assist you at every step of your journey."
     },
     "ContactDetails": {
       "phone": "+971 6 553 1250",
@@ -395,11 +395,11 @@
         "titleAccent": "Reach Us",
         "description": "We have mapped out the most efficient routes to ensure your journey to our center is as smooth as possible.",
         "taxicabTitle": "By Taxicab",
-        "taxicabDescriptionPart1": "From anywhere in Sharjah, you can hire a taxi and it will take you to your final destination. Call ",
+        "taxicabDescriptionPart1": "From anywhere in Sharjah, you can hire a taxi and it will take you to your final destination.",
         "taxicabNumber": "600-525-252",
-        "taxicabDescriptionPart2": " to book a taxicab with Sharjah Taxi Corporation. Taxicab drivers will pick you up from your specified location and take you to our centre. For location map, please ",
-        "taxicabDescriptionPart3": "",
-        "taxicabLink": "click here",
+        "taxicabDescriptionPart2": "Call ",
+        "taxicabDescriptionPart3": " to book a taxicab with Sharjah Taxi Corporation. Taxicab drivers will pick you up from your specified location and take you to our centre.",
+        "taxicabLink": "",
         "publicBusTitle": "Public Bus",
         "publicBusDescription": "Take a Sharjah public bus towards Al Mamzar or Al Taawun, disembarking at the nearest bus stop to Tabarak Tower. The bus ride will get you within a short walking distance of the center.",
         "metroTitle": "Metro & Bus",
@@ -414,7 +414,7 @@
         "alternativeRoutesTitle": "Alternative Bus Routes:",
         "alternativeRoute1": "E306 Bus Service: Departs from Al Ghubaiba Bus Station in Dubai and arrives at Al Jubail Bus Station in Sharjah.",
         "alternativeRoute2": "E307 Bus Service: Departs from Deira City Centre Bus Station in Dubai and arrives at Al Jubail Bus Station in Sharjah.",
-        "note": "Note: Please allow extra travel time as bus routes can be affected by traffic conditions."
+        "note": "Note: Please allow extra moving time as bus routes can be affected by traffic conditions."
       },
       "DrivingDirections": {
         "badge": "DRIVING DIRECTIONS",
@@ -504,8 +504,8 @@
     "WhoWeAre": {
       "HeroSection": {
         "badge": "ABOUT TEPTH",
-        "title": "UAE's Trusted Exam Testing",
-        "titleAccent": " & Preparation House",
+        "title": "UAE's Trusted Exam Prep",
+        "titleAccent": " & Test Centre",
         "description": "For over a decade, TEPTH has been the go-to destination for international language exam registration, expert preparation courses, and secure proctoring services across the UAE."
       },
       "NarrativeSection": {
