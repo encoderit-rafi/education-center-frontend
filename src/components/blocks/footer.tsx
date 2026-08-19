@@ -113,8 +113,11 @@ export default function Footer() {
       <div className="max-w-8xl mx-auto px-6 pt-20">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-2">
           {/* Column 1: Info Card */}
-          <div className="p-6 rounded-lg relative z-10 bg-white hover:bg-white h-fit">
-            <div className="flex justify-start mb-6">
+          <div
+            dir={isRtl ? "rtl" : "ltr"}
+            className="p-6 rounded-lg relative z-10 bg-white hover:bg-white h-fit"
+          >
+            <div className="flex justify-start mb-6" dir="ltr">
               <Link
                 href="/"
                 className="inline-block transition-transform hover:scale-105 duration-300"
@@ -188,54 +191,54 @@ export default function Footer() {
             <div className="flex flex-col gap-y-4">
               {[...primaryNav, ...SECONDARY_NAV]
                 .filter((nav) => nav.name.toLowerCase() !== "home")
-                  .map((nav) => (
-                    <div key={nav.name}>
-                      {nav.type === "dropdown" && nav.items.length > 0 ? (
-                        <DropdownMenu>
-                          <DropdownMenuTrigger className="flex items-center gap-2 text-sm font-medium text-gray-100 hover:text-white transition-all hover:translate-x-1 group outline-none text-left w-full">
-                            <span className="text-gray-500 scale-75 group-hover:text-red-500 transition-colors">
-                              <ChevronRight className="w-6 h-6" />
-                            </span>
-                            <span className="flex-1">{translateMenuName(nav.name)}</span>
-                            <ChevronDown className="w-3 h-3 text-gray-500 group-hover:text-red-500 transition-transform group-data-[state=open]:rotate-180" />
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent
-                            side="bottom"
-                            align="start"
-                            className="bg-secondary border-white/10! text-white min-w-55 p-2 rounded-xl shadow-2xl animate-in fade-in slide-in-from-top-2 z-60"
-                          >
-                            {nav.items.map((item) => (
-                              <DropdownMenuItem
-                                key={item.name}
-                                asChild
-                                className="focus:bg-red-500/10 focus:text-white rounded-lg cursor-pointer outline-none"
-                              >
-                                <Link
-                                  href={item.href}
-                                  className="flex items-center gap-2 w-full px-2 py-2 text-sm font-medium text-gray-200 hover:text-white group"
-                                >
-                                  <span className="text-gray-500 scale-75 group-hover:text-red-500 transition-colors">
-                                    <ChevronRight className="w-6 h-6" />
-                                  </span>
-                                  {translateMenuName(item.name)}
-                                </Link>
-                              </DropdownMenuItem>
-                            ))}
-                          </DropdownMenuContent>
-                        </DropdownMenu>
-                      ) : (
-                        <Link
-                          href={nav.href || "#"}
-                          className="flex items-center gap-2 text-sm font-medium text-gray-100 hover:text-white transition-all hover:translate-x-1 group"
-                        >
+                .map((nav) => (
+                  <div key={nav.name}>
+                    {nav.type === "dropdown" && nav.items.length > 0 ? (
+                      <DropdownMenu>
+                        <DropdownMenuTrigger className="flex items-center gap-2 text-sm font-medium text-gray-100 hover:text-white transition-all hover:translate-x-1 group outline-none text-left w-full">
                           <span className="text-gray-500 scale-75 group-hover:text-red-500 transition-colors">
                             <ChevronRight className="w-6 h-6" />
                           </span>
-                          {translateMenuName(nav.name)}
-                        </Link>
-                      )}
-                    </div>
-                  ))}
+                          <span className="flex-1">{translateMenuName(nav.name)}</span>
+                          <ChevronDown className="w-3 h-3 text-gray-500 group-hover:text-red-500 transition-transform group-data-[state=open]:rotate-180" />
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent
+                          side="bottom"
+                          align="start"
+                          className="bg-secondary border-white/10! text-white min-w-55 p-2 rounded-xl shadow-2xl animate-in fade-in slide-in-from-top-2 z-60"
+                        >
+                          {nav.items.map((item) => (
+                            <DropdownMenuItem
+                              key={item.name}
+                              asChild
+                              className="focus:bg-red-500/10 focus:text-white rounded-lg cursor-pointer outline-none"
+                            >
+                              <Link
+                                href={item.href}
+                                className="flex items-center gap-2 w-full px-2 py-2 text-sm font-medium text-gray-200 hover:text-white group"
+                              >
+                                <span className="text-gray-500 scale-75 group-hover:text-red-500 transition-colors">
+                                  <ChevronRight className="w-6 h-6" />
+                                </span>
+                                {translateMenuName(item.name)}
+                              </Link>
+                            </DropdownMenuItem>
+                          ))}
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    ) : (
+                      <Link
+                        href={nav.href || "#"}
+                        className="flex items-center gap-2 text-sm font-medium text-gray-100 hover:text-white transition-all hover:translate-x-1 group"
+                      >
+                        <span className="text-gray-500 scale-75 group-hover:text-red-500 transition-colors">
+                          <ChevronRight className="w-6 h-6" />
+                        </span>
+                        {translateMenuName(nav.name)}
+                      </Link>
+                    )}
+                  </div>
+                ))}
             </div>
           </div>
 
@@ -382,7 +385,7 @@ export default function Footer() {
                       fill="currentColor"
                       viewBox="0 0 24 24"
                     >
-                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.98 1.25-5.59 3.69-.53.36-1 .53-1.42.52-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.24.35-.49.96-.75 3.78-1.65 6.31-2.74 7.58-3.27 3.6-1.5 4.35-1.76 4.84-1.77.11 0 .35.03.5.16.12.1.16.24.18.33.02.09.03.26.02.4z"/>
+                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.98 1.25-5.59 3.69-.53.36-1 .53-1.42.52-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.24.35-.49.96-.75 3.78-1.65 6.31-2.74 7.58-3.27 3.6-1.5 4.35-1.76 4.84-1.77.11 0 .35.03.5.16.12.1.16.24.18.33.02.09.03.26.02.4z" />
                     </svg>
                   )}
                 </Link>
