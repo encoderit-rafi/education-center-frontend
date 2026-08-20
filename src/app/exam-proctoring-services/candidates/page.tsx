@@ -11,7 +11,7 @@ import {
 
 import { PriceDisplay } from "@/components/ui/price-display";
 import { INSTITUTIONS_INFO } from "@/data";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 type FeeEntry = {
   duration: string;
@@ -31,7 +31,16 @@ const FEES: FeeEntry[] = [
 
 export default function CandidatesProctoringPage() {
   const t = useTranslations("ExamProctoringServicesPage.CandidatesPage");
+  const locale = useLocale();
   const paymentMethods = t.raw("paymentMethods") as string[];
+
+  const formatDuration = (duration: string) => {
+    if (locale === "ar") {
+      const num = duration.replace(/\D/g, "");
+      return `${num} دقيقة`;
+    }
+    return duration;
+  };
 
   return (
     <div className="flex flex-col min-h-screen bg-slate-50">
@@ -107,7 +116,7 @@ export default function CandidatesProctoringPage() {
                       className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl bg-slate-50 border border-slate-200 text-slate-700 hover:bg-slate-100 transition-colors font-medium"
                     >
                       <Phone className="w-4 h-4 text-primary" />
-                      {INSTITUTIONS_INFO.phone}
+                      <span dir="ltr">+971 6 553 1250</span>
                     </a>
                     <a
                       href={`mailto:${INSTITUTIONS_INFO.email}`}
@@ -156,10 +165,10 @@ export default function CandidatesProctoringPage() {
                 <table className="w-full text-sm">
                   <thead className="bg-slate-50 border-b border-slate-200">
                     <tr>
-                      <th className="py-4 px-5 font-semibold text-secondary text-left">
+                      <th className="py-4 px-5 font-semibold text-secondary text-start">
                         {t("feesColDuration")}
                       </th>
-                      <th className="py-4 px-5 font-semibold text-secondary text-right">
+                      <th className="py-4 px-5 font-semibold text-secondary text-end">
                         {t("feesColFee")}
                       </th>
                     </tr>
@@ -170,13 +179,13 @@ export default function CandidatesProctoringPage() {
                         key={i}
                         className="hover:bg-slate-50/50 transition-colors"
                       >
-                        <td className="py-4 px-5">
+                        <td className="py-4 px-5 text-start">
                           <span className="font-medium text-slate-700">
-                            {row.duration}
+                            {formatDuration(row.duration)}
                           </span>
                         </td>
-                        <td className="py-4 px-5 text-right">
-                          <div className="text-right flex items-center justify-end">
+                        <td className="py-4 px-5 text-end">
+                          <div className="flex items-center justify-end">
                             <PriceDisplay
                               amount={Number(row.fee)}
                               className="text-lg font-semibold text-primary"

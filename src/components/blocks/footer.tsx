@@ -169,8 +169,13 @@ export default function Footer() {
 
               <ContactItem
                 icon={Phone}
-                copyText={INSTITUTIONS_INFO.phone}
-                value={`${t("telLabel")} ${INSTITUTIONS_INFO.phone}`}
+                copyText="+971 6 553 1250"
+                value={
+                  <span>
+                    {t("telLabel")}{" "}
+                    <span dir="ltr">+971 6 553 1250</span>
+                  </span>
+                }
               />
 
               <ContactItem

@@ -204,13 +204,13 @@ export default async function ExamPreparationDynamicPage({
   const mappedExamId = slugToExamId[slug.toLowerCase()] || slug;
   const filteredWorkshops = workshops.filter((w) => {
     if (!course) return false;
-    
+
 
     // Match by courseId if both exist
     if (w.courseId && course.id && w.courseId === course.id) {
       return true;
     }
-    
+
 
     // Fallback: Match by subTitle vs slug or course name
     const subTitleLower = w.subTitle?.toLowerCase() || "";
