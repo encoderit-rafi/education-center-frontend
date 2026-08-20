@@ -318,7 +318,7 @@
   @apply max-w-7xl mx-auto;
 }
 @utility section-label {
-  @apply text-primary text-xs font-bold uppercase tracking-[0.3em] lg:text-xs mb-4 inline-block;
+  @apply text-primary text-xs md:text-sm rtl:text-sm md:rtl:text-base font-bold uppercase tracking-[0.3em] mb-4 inline-block;
 }
 @utility section-title {
   @apply text-xl md:text-2xl lg:text-3xl font-black text-slate-900;

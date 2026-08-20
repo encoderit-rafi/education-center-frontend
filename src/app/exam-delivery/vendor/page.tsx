@@ -28,7 +28,7 @@ export default function VendorPartnershipsPage() {
           {/* Right — content */}
           <div className="order-1 lg:order-2 flex flex-col justify-center">
             {/* Badge */}
-            <div className="inline-flex items-center gap-1.5 py-1 px-2.5 rounded-full text-[11px] font-bold bg-maroon-50 text-maroon-800 border border-maroon-100 mb-5 w-fit">
+            <div className="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full text-xs md:text-sm rtl:text-sm md:rtl:text-base font-bold bg-maroon-50 text-maroon-800 border border-maroon-100 mb-5 w-fit">
               <Handshake className="w-3.5 h-3.5" />
               <span>{t("badge")}</span>
             </div>

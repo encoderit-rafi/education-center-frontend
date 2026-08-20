@@ -106,7 +106,7 @@ export default function ExamProviderPage() {
           <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Left Content Column */}
             <div className="lg:col-span-6 flex flex-col justify-center">
-              <div className="inline-flex items-center gap-1.5 py-1 px-2.5 rounded-full text-[11px] font-bold bg-maroon-50 text-maroon-800 border border-maroon-100 mb-4 w-fit">
+              <div className="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full text-xs md:text-sm rtl:text-sm md:rtl:text-base font-bold bg-maroon-50 text-maroon-800 border border-maroon-100 mb-4 w-fit">
                 <ShieldCheck className="w-3.5 h-3.5" />
                 <span>{t("badge")}</span>
               </div>
@@ -159,7 +159,7 @@ export default function ExamProviderPage() {
       {/* Value Pillars Section - Simple List in One Column */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
         <div className="mb-12 text-center">
-          <span className="text-primary text-[11px] font-bold uppercase tracking-[0.25em] mb-2 inline-block">
+          <span className="text-primary text-xs md:text-sm rtl:text-sm md:rtl:text-base font-bold uppercase tracking-[0.25em] mb-2 inline-block">
             {t("capabilitiesBadge")}
           </span>
           <h2 className="text-2xl md:text-3xl font-headline font-black text-slate-900 tracking-tight">
@@ -189,14 +189,14 @@ export default function ExamProviderPage() {
                     badge.variant === "highlight" ? (
                       <span
                         key={badge.label}
-                        className="inline-flex items-center px-3 py-1 bg-maroon-50/50 border border-maroon-100/50 text-maroon-800 rounded-full text-[11px] font-semibold tracking-wide"
+                        className="inline-flex items-center px-3 py-1 bg-maroon-50/50 border border-maroon-100/50 text-maroon-800 rounded-full text-[11px] rtl:text-[12px] font-semibold tracking-wide"
                       >
                         {badge.label}
                       </span>
                     ) : (
                       <span
                         key={badge.label}
-                        className="inline-flex items-center px-3 py-1 bg-slate-50 border border-slate-100 text-slate-600 rounded-full text-[11px] font-medium tracking-wide"
+                        className="inline-flex items-center px-3 py-1 bg-slate-50 border border-slate-100 text-slate-600 rounded-full text-[11px] rtl:text-[12px] font-medium tracking-wide"
                       >
                         {badge.label}
                       </span>

@@ -174,7 +174,7 @@ export default function ExamWorkshopsIELTS() {
       <section className="relative overflow-hidden bg-slate-50 border-b border-slate-100">
         <div className="container relative mx-auto px-4 py-16 lg:px-8 lg:py-24 max-w-7xl">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs rtl:text-sm font-bold uppercase tracking-widest mb-6">
               <Award className="size-3.5" />
               {ieltsWorkshop.subtitle}
             </div>

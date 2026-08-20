@@ -298,7 +298,7 @@ export default async function ExamPreparationDynamicPage({
         >
           <div className="container px-4 lg:px-8 max-w-7xl mx-auto space-y-16">
             <div className="text-center max-w-3xl mx-auto space-y-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-black uppercase tracking-widest">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-xs md:text-sm rtl:text-sm md:rtl:text-base font-black uppercase tracking-widest">
                 <Sparkles className="size-3" />{" "}
                 {t("workshops.skillsBoostBadge")}
               </div>

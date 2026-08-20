@@ -81,7 +81,7 @@ export default function InstitutionsPage() {
         {/* Core Services Section */}
         <section className="space-y-10">
           <div className="max-w-3xl">
-            <span className="text-[#A11D1D] font-extrabold uppercase tracking-[0.25em] text-xs">
+            <span className="text-[#A11D1D] font-extrabold uppercase tracking-[0.25em] text-xs md:text-sm rtl:text-sm md:rtl:text-base">
               {t("capabilitiesLabel")}
             </span>
             <h2 className="text-3xl lg:text-4xl font-extrabold text-slate-900 mt-2 tracking-tight font-headline">
@@ -115,7 +115,7 @@ export default function InstitutionsPage() {
         {/* Proctoring Options Section */}
         <section className="space-y-10">
           <div className="max-w-3xl">
-            <span className="text-[#A11D1D] font-extrabold uppercase tracking-[0.25em] text-xs">
+            <span className="text-[#A11D1D] font-extrabold uppercase tracking-[0.25em] text-xs md:text-sm rtl:text-sm md:rtl:text-base">
               {t("flexibleDeliveryLabel")}
             </span>
             <h2 className="text-3xl lg:text-4xl font-extrabold text-slate-900 mt-2 tracking-tight font-headline">
@@ -183,7 +183,7 @@ export default function InstitutionsPage() {
             <div className="absolute top-0 right-0 w-75 h-75 bg-red-500/5 rounded-full blur-[100px] pointer-events-none" />
 
             <div className="relative z-10 max-w-4xl mx-auto text-center space-y-6">
-              <span className="text-[#A11D1D] font-extrabold uppercase tracking-[0.25em] text-xs">
+              <span className="text-[#A11D1D] font-extrabold uppercase tracking-[0.25em] text-xs md:text-sm rtl:text-sm md:rtl:text-base">
                 {t("qualityAssuranceLabel")}
               </span>
               <h3 className="text-3xl font-black text-slate-900 tracking-tight font-headline">
