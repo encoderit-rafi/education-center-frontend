@@ -255,7 +255,7 @@ export default async function ExamPreparationDynamicPage({
           </div>
         </div>
       </section>
-      {!["oet", "cael", "celpip"].includes(slug.toLowerCase()) && (
+      {!["oet", "celpip"].includes(slug.toLowerCase()) && (
         <PromoDiscount />
       )}
       {/* ── Packages Section ── */}
@@ -263,8 +263,17 @@ export default async function ExamPreparationDynamicPage({
         <div className="px-4 lg:px-8  mx-auto">
           <div className="mb-12 text-center max-w-3xl mx-auto space-y-4">
             <h2 className="text-4xl font-black text-slate-900 tracking-tight leading-tight">
-              {data.name}{" "}
-              <span className="text-primary">{t("packages.pathSpan")}</span>
+              {isRtl ? (
+                <>
+                  <span className="text-primary">{t("packages.pathSpan")}</span>{" "}
+                  {data.name}
+                </>
+              ) : (
+                <>
+                  {data.name}{" "}
+                  <span className="text-primary">{t("packages.pathSpan")}</span>
+                </>
+              )}
             </h2>
             <p className="text-slate-600 text-lg font-medium leading-relaxed">
               {t("packages.pathSubtitle", { name: data.name })}

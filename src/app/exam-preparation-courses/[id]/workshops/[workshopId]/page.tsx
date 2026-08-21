@@ -94,6 +94,7 @@ export default async function WorkshopDetailPage({ params }: PageProps) {
   const { id: courseSlug, workshopId } = await params;
   const locale = await getLocale();
   const t = await getTranslations("ExamPrepPage");
+  const tMenu = await getTranslations("NavBar.menu");
 
   let course: CourseDetail | null = null;
   try {
@@ -118,6 +119,9 @@ export default async function WorkshopDetailPage({ params }: PageProps) {
   if (courseTranslatedName) course.name = courseTranslatedName;
   if (courseTranslatedDescription)
     course.description = courseTranslatedDescription;
+
+  const courseNameKey = course.name;
+  const translatedCourseName = tMenu.has(courseNameKey) ? tMenu(courseNameKey) : courseNameKey;
 
   const workshop = course.workshops?.find((w) => w.id === workshopId);
   if (!workshop) {
@@ -237,7 +241,7 @@ export default async function WorkshopDetailPage({ params }: PageProps) {
                   </div>
                   <p className="text-slate-600 font-medium text-sm md:text-base leading-relaxed relative z-10">
                     {t.rich("workshops.calloutText", {
-                      courseName: course.name,
+                      courseName: translatedCourseName,
                       tepth: (chunks) => (
                         <span className="font-semibold text-slate-800">
                           {chunks}
@@ -354,7 +358,7 @@ export default async function WorkshopDetailPage({ params }: PageProps) {
               <h3 className="text-3xl font-black text-slate-900 leading-tight">
                 {locale === "ar" ? (
                   <>
-                    ورش عمل مرنة في <span className="text-primary">TEPTH</span>
+                    ورش عمل مرنة في <span className="text-primary">بيت الامتحانات والتحضير للاختبارات (TEPTH)</span>
                   </>
                 ) : (
                   <>
@@ -365,7 +369,7 @@ export default async function WorkshopDetailPage({ params }: PageProps) {
               </h3>
               <p className="text-slate-600 text-lg font-medium leading-relaxed">
                 {locale === "ar"
-                  ? "جميع ورش العمل في TEPTH – بيت التحضير للاختبارات وتقديمها هي:"
+                  ? "تتميز جميع ورش العمل في بيت الامتحانات والتحضير للاختبارات (TEPTH) بما يلي:"
                   : "All workshops at TEPTH – The Exam Preparation & Testing House are:"}
               </p>
             </div>
@@ -374,7 +378,7 @@ export default async function WorkshopDetailPage({ params }: PageProps) {
               {(locale === "ar"
                 ? [
                   "حضورياً وفردياً (واحد لواحد)",
-                  "قابلة للتخصيص بالكامل وفقاً لاحتياجات المرشح",
+                  "قابلة للتخصيص بالكامل وفقاً لاحتياجات المتقدم.",
                   "تركّز على استراتيجيات الامتحان العملية والأداء",
                 ]
                 : [
@@ -441,7 +445,7 @@ export default async function WorkshopDetailPage({ params }: PageProps) {
             </div>
             <p className="text-slate-600 mb-6 font-medium">
               {locale === "ar"
-                ? "يمكن أن تكون ورش العمل مفيدة بشكل خاص للمرشحين الذين:"
+                ? "تُعد ورش العمل مفيدة بشكل خاص للمتقدمين الذين:"
                 : "Workshops can be particularly helpful for candidates who:"}
             </p>
             <ul className="space-y-3">
@@ -470,7 +474,7 @@ export default async function WorkshopDetailPage({ params }: PageProps) {
             <div className="mt-8 p-5 bg-white rounded-xl border border-slate-100 shadow-sm">
               <p className="text-sm font-semibold text-slate-800 leading-relaxed text-center">
                 {locale === "ar"
-                  ? "تتيح هذه الجلسات المركزة للمرشحين الحصول على الوضوح، وتحسين نهجهم، ودخول الامتحان بثقة أكبر."
+                  ? "تتيح هذه الجلسات المركّزة للمتقدمين فهماً أعمق للاختبار، وتطوير أسلوبهم في الحل، ليدخلوا الاختبار بثقة أكبر."
                   : "These focused sessions allow candidates to gain clarity, improve their approach, and walk into the exam with greater confidence."}
               </p>
             </div>
