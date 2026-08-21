@@ -43,8 +43,8 @@ export default function FAQPage() {
                   value={value}
                   className="bg-white border border-slate-150 rounded-2xl shadow-xs overflow-hidden data-open:bg-white! not-last:border-b-0!"
                 >
-                  <AccordionTrigger className="w-full text-left py-5 px-6 md:px-8 hover:no-underline transition-all duration-200 items-center!">
-                    <div className="flex items-center gap-4 text-left">
+                  <AccordionTrigger className="w-full text-start py-5 px-6 md:px-8 hover:no-underline transition-all duration-200 items-center!">
+                    <div className="flex items-center gap-4 text-start">
                       <div className="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center text-primary font-bold shrink-0">
                         {numStr}
                       </div>
@@ -54,7 +54,7 @@ export default function FAQPage() {
                     </div>
                   </AccordionTrigger>
                   <AccordionContent className="px-6 md:px-8 pb-6 text-slate-600 leading-relaxed text-sm md:text-base">
-                    <div className="pl-14 text-slate-600 font-medium">
+                    <div className="ps-14 text-slate-600 font-medium">
                       {faq.answer}
                     </div>
                   </AccordionContent>

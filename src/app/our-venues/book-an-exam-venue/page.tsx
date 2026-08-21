@@ -69,7 +69,7 @@ export default function BookAnExamVenuePage() {
                 value={`item-${index}`}
                 className="bg-white rounded-xl overflow-hidden border border-outline transition-all duration-300 data-[state=open]:border-primary data-[state=open]:shadow-lg h-fit"
               >
-                <AccordionTrigger className="flex items-center justify-between p-6 cursor-pointer hover:no-underline group/trigger text-left">
+                <AccordionTrigger className="flex items-center justify-between p-6 cursor-pointer hover:no-underline group/trigger text-start">
                   <div className="flex items-center gap-4">
                     <item.icon
                       className={cn(

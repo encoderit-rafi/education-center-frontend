@@ -2,16 +2,21 @@ import { Accordion as AccordionPrimitive } from "@base-ui/react/accordion"
 
 import { cn } from "@/lib/utils"
 import { ChevronDownIcon, ChevronUpIcon } from "lucide-react"
+import { useLocale } from "next-intl"
 
 function Accordion({
   className,
   type,
   ...props
 }: AccordionPrimitive.Root.Props & { type?: "single" | "multiple" }) {
+  const locale = useLocale()
+  const dir = locale === "ar" ? "rtl" : "ltr"
+
   return (
     <AccordionPrimitive.Root
       data-slot="accordion"
       multiple={type === "multiple" || props.multiple}
+      dir={dir}
       className={cn(
         "flex w-full flex-col overflow-hidden rounded-2xl border",
         className
@@ -41,7 +46,7 @@ function AccordionTrigger({
       <AccordionPrimitive.Trigger
         data-slot="accordion-trigger"
         className={cn(
-          "group/accordion-trigger relative flex flex-1 items-start justify-between gap-6 border border-transparent p-4 text-left text-sm font-medium transition-all outline-none hover:underline aria-disabled:pointer-events-none aria-disabled:opacity-50 **:data-[slot=accordion-trigger-icon]:ml-auto **:data-[slot=accordion-trigger-icon]:size-4 **:data-[slot=accordion-trigger-icon]:text-muted-foreground",
+          "group/accordion-trigger relative flex flex-1 items-start justify-between gap-6 border border-transparent p-4 text-start text-sm font-medium transition-all outline-none hover:underline aria-disabled:pointer-events-none aria-disabled:opacity-50 **:data-[slot=accordion-trigger-icon]:ms-auto **:data-[slot=accordion-trigger-icon]:size-4 **:data-[slot=accordion-trigger-icon]:text-muted-foreground",
           className
         )}
         {...props}
