@@ -55,7 +55,7 @@ export default async function ExamPreparationCoursesPage() {
         <div className="container mx-auto px-4 lg:px-8 max-w-7xl">
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {courses.map((exam: any, index: number) => {
-              const courseName = exam.translations?.[locale]?.name || exam.name;
+              const courseName = exam.translations?.[locale]?.title || exam.name;
               return (
                 <Link
                   key={exam.id}

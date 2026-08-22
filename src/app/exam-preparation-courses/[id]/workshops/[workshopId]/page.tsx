@@ -93,6 +93,7 @@ const slugToExamId: Record<string, string> = {
 export default async function WorkshopDetailPage({ params }: PageProps) {
   const { id: courseSlug, workshopId } = await params;
   const locale = await getLocale();
+  const isRtl = locale === "ar";
   const t = await getTranslations("ExamPrepPage");
   const tMenu = await getTranslations("NavBar.menu");
 
@@ -113,7 +114,7 @@ export default async function WorkshopDetailPage({ params }: PageProps) {
   }
 
   // Apply course translation if available
-  const courseTranslatedName = (course as any)?.translations?.[locale]?.name;
+  const courseTranslatedName = (course as any)?.translations?.[locale]?.title;
   const courseTranslatedDescription = (course as any)?.translations?.[locale]
     ?.description;
   if (courseTranslatedName) course.name = courseTranslatedName;
@@ -312,11 +313,27 @@ export default async function WorkshopDetailPage({ params }: PageProps) {
             discountType={workshop.discountType}
             baseUrl={registrationUrl}
             pricingTitle={t("workshops.pricingTitle")}
-            saveInstantText={t("workshops.saveInstant", {
-              discount: discountRaw,
-              type:
-                workshop.discountType === "PERCENTAGE" ? "%" : " AED",
-            })}
+            saveInstantText={
+              isRtl ? (
+                <>
+                  وفر{" "}
+                  <span dir="ltr">
+                    {discountRaw}
+                    {workshop.discountType === "PERCENTAGE" ? "%" : " AED"}
+                  </span>{" "}
+                  فوريًا
+                </>
+              ) : (
+                <>
+                  SAVE{" "}
+                  <span dir="ltr">
+                    {discountRaw}
+                    {workshop.discountType === "PERCENTAGE" ? "%" : " AED"}
+                  </span>{" "}
+                  INSTANTLY
+                </>
+              )
+            }
             bookNowText={t("workshops.bookNow")}
             securePaymentText={t("workshops.securePayment")}
             mockTestTypeTitle={t("workshops.mockTestType")}
@@ -407,7 +424,7 @@ export default async function WorkshopDetailPage({ params }: PageProps) {
                     {locale === "ar" ? (
                       <>
                         مؤسسة بيت التحضير للاختبارات وتقديمها ش.ذ.م.م <br />
-                        جناح 701، الطابق السابع، برج تبارك، شارع الكورنيش، الممزر، <br />
+                        مكتب 701، الطابق السابع، برج تبارك، شارع الكورنيش، الممزر، <br />
                         الشارقة، الإمارات العربية المتحدة.
                       </>
                     ) : (

@@ -19,12 +19,12 @@ import {
 const EXAM_TYPES: Record<string, { label: string; labelAr: string; value: string }[]> = {
   pte: [
     { label: "PTE Academic", labelAr: "بي تي إي الأكاديمي", value: "PTE Academic" },
-    { label: "PTE Academic UKVI", labelAr: "بي تي إي الأكاديمي UKVI", value: "PTE Academic UKVI" },
-    { label: "PTE Core", labelAr: "بي تي إي العام", value: "PTE Core" },
+    { label: "PTE Academic UKVI", labelAr: "UKVI بي تي إي الأكاديمي", value: "PTE Academic UKVI" },
+    { label: "PTE Core", labelAr: "(PTE Core)بي تي إي كور", value: "PTE Core" },
   ],
   ielts: [
-    { label: "IELTS Academic", labelAr: "آيلتس الأكاديمي", value: "IELTS Academic" },
-    { label: "IELTS General Training", labelAr: "آيلتس العام", value: "IELTS General Training" },
+    { label: "IELTS Academic", labelAr: "الآيلتس الأكاديمي", value: "IELTS Academic" },
+    { label: "IELTS General Training", labelAr: "الآيلتس العام", value: "IELTS General Training" },
   ],
 };
 

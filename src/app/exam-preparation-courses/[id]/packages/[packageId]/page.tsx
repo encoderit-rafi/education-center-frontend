@@ -68,6 +68,7 @@ interface PageProps {
 export default async function PackageDetailPage({ params }: PageProps) {
   const { id: courseSlug, packageId } = await params;
   const locale = await getLocale();
+  const isRtl = locale === "ar";
   const t = await getTranslations("ExamPrepPage");
 
   let course: CourseDetail | null = null;
@@ -88,7 +89,7 @@ export default async function PackageDetailPage({ params }: PageProps) {
   }
 
   // Apply course translation if available
-  const courseTranslatedName = (course as any)?.translations?.[locale]?.name;
+  const courseTranslatedName = (course as any)?.translations?.[locale]?.title;
   const courseTranslatedDescription = (course as any)?.translations?.[locale]?.description;
   if (courseTranslatedName) course.name = courseTranslatedName;
   if (courseTranslatedDescription) course.description = courseTranslatedDescription;
@@ -272,10 +273,25 @@ export default async function PackageDetailPage({ params }: PageProps) {
               {discount > 0 && (
                 <div className="mt-2.5">
                   <Badge className="py-1 px-3 font-bold shadow-sm bg-emerald-50 text-emerald-600 hover:bg-emerald-50/80 border-emerald-200">
-                    {t("packages.saveInstant", {
-                      discount,
-                      type: discountType === "PERCENTAGE" ? "%" : " AED"
-                    })}
+                    {isRtl ? (
+                      <>
+                        وفر{" "}
+                        <span dir="ltr">
+                          {discount}
+                          {discountType === "PERCENTAGE" ? "%" : " AED"}
+                        </span>{" "}
+                        فوريًا
+                      </>
+                    ) : (
+                      <>
+                        SAVE{" "}
+                        <span dir="ltr">
+                          {discount}
+                          {discountType === "PERCENTAGE" ? "%" : " AED"}
+                        </span>{" "}
+                        INSTANTLY
+                      </>
+                    )}
                   </Badge>
                 </div>
               )}

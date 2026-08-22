@@ -52,9 +52,9 @@ export default function VendorPartnershipsPage() {
 
             {/* Contact CTA */}
             <div className="mt-8 pt-8 border-t border-slate-100">
-              <p className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4">
+              <h3 className="text-lg md:text-xl font-bold text-slate-800 mb-4">
                 {t("contactHeader")}
-              </p>
+              </h3>
               <div className="flex flex-col sm:flex-row gap-3">
                 <Link href="tel:+97165531250">
                   <Button className="bg-primary text-white hover:bg-primary/90 px-5 py-3 rounded-lg font-bold text-sm flex items-center gap-2 cursor-pointer h-10 shadow-md shadow-primary/10 transition-all duration-300">

@@ -137,16 +137,16 @@ export default async function PaidMockTestDynamicPage({ params }: PageProps) {
       {};
     data.details = isRtl
       ? {
-          ...originalDetails,
-          ...fallback,
-          description: fallback.description || originalDetails.description,
-          sub_title: fallback.sub_title || originalDetails.sub_title,
-          content: fallback.content || originalDetails.content,
-        }
+        ...originalDetails,
+        ...fallback,
+        description: fallback.description || originalDetails.description,
+        sub_title: fallback.sub_title || originalDetails.sub_title,
+        content: fallback.content || originalDetails.content,
+      }
       : {
-          ...fallback,
-          ...originalDetails,
-        };
+        ...fallback,
+        ...originalDetails,
+      };
 
   }
 
@@ -156,9 +156,8 @@ export default async function PaidMockTestDynamicPage({ params }: PageProps) {
   const quote = notesParts[0];
   const tagline = notesParts[1] || "";
 
-  const pageDescription = isRtl
-    ? (fallback.description || data.details?.description || data.description)
-    : (data.description || data.details?.description);
+  const pageDescription =
+    fallback.description || data.details?.description || data.description;
 
   const arabicExamName = getExamArabicName(data.slug, data.name);
 
@@ -173,7 +172,7 @@ export default async function PaidMockTestDynamicPage({ params }: PageProps) {
                 {isRtl ? (
                   <>
                     {t("paidMockTest")}{" "}
-                    <span className="text-primary">{arabicExamName}</span>
+                    <span className="text-primary">{arabicExamName} ({data.name})</span>
                   </>
                 ) : (
                   <>
@@ -204,8 +203,8 @@ export default async function PaidMockTestDynamicPage({ params }: PageProps) {
           <div className="mb-10 text-center max-w-3xl mx-auto">
             <h2 className="text-2xl font-black text-slate-900 lg:text-3xl mb-3">
               {t("benefitsTitle")}{" "}
-              <span className="text-primary">
-                {data.details?.sub_title || data.name}
+              <span className="text-primary inline-block">
+                {isRtl ? `${arabicExamName} (${data.name})` : (data.details?.sub_title || data.name)}
               </span>
             </h2>
             <p className="text-slate-600 text-base text-justify">

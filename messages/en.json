@@ -3137,6 +3137,7 @@
       "OET": "OET",
       "IELTS Academic": "IELTS Academic",
       "IELTS General": "IELTS General",
+      "IELTS General Training": "IELTS General Training",
       "IELTS UKVI": "IELTS UKVI",
       "IELTS UKVI Academic": "IELTS UKVI Academic",
       "IELTS UKVI General": "IELTS UKVI General",
@@ -3744,7 +3745,7 @@
     "fallbackDetails": {
       "ielts": {
         "sub_title": "IELTS",
-        "description": "The International English Language Testing System is heavily influenced by time pressure, question familiarity, and writing expectations. Mock tests help in ways that normal practice cannot.",
+        "description": "Elevate your preparation with our CD-IELTS Paid Mock Test, available for both the Academic and General Training modules, serving as a crucial final step before you book your official exam. Unlike standard free mock tests that often lack authenticity and provide only surface-level results, our paid version delivers a fully immersive simulation of the exact computer-delivered test environment. By investing in this premium practice experience, test-takers benefit from detailed, actionable insights across all four skills—particularly in the Writing and Speaking sections where free tests typically fall short. This authentic test-day experience allows candidates to pinpoint specific weaknesses, refine their time-management skills, alleviate test-day anxiety, and confidently adjust their strategies to achieve their target band score.",
         "notes": "By the time they enter the real test room, it feels like just another practice session. — The TEPTH Mock Test Experience",
         "content": [
           {
@@ -3802,7 +3803,7 @@
       },
       "toefl": {
         "sub_title": "TOEFL iBT",
-        "description": "If you are preparing to take the TOEFL iBT to fulfill your study abroad or professional goals, taking a full-length mock test is one of the most effective ways to ensure you are ready for test day. A TOEFL iBT Mock Test is a comprehensive practice exam designed to accurately simulate the format, timing, and difficulty of the official ETS test. Instead of just studying vocabulary words or grammar rules in isolation, a mock test immerses you in the real-world conditions of the exam, helping you build both your language skills and your test-taking confidence.",
+        "description": "If you are taking the TOEFL iBT for academic or career advancement, completing a full-length practice test is a highly effective preparation strategy. These comprehensive mock exams are carefully structured to mirror the exact format, pacing, and difficulty of the official TOEFL iBT Test by ETS . Rather than studying grammar and vocabulary out of context, engaging in a realistic test simulation enhances your practical language abilities and boosts your confidence for exam day.",
         "notes": "Students who only study theory often struggle with these tasks because the challenge is not language difficulty but response efficiency. — Master the Shorter, Faster TOEFL iBT",
         "content": [
           {
@@ -3878,47 +3879,47 @@
         "notes": "PTE mock tests are the only way to understand how the AI scoring system evaluates your performance in real-time. — The TEPTH Digital Experience",
         "content": [
           {
-            "title": "Learning the Computer Interface",
+            "title": "Mastering the Computer-Based Test Interface",
             "icon": "Monitor",
             "description_list": [
-              "Many students lose marks simply because they are unfamiliar with:",
-              "Mock tests allow students to practice with the interface until it becomes automatic.",
-              "microphone timing",
-              "recording countdowns",
-              "typing speed requirements",
-              "highlighting tools"
+              "Many students lose valuable marks for a very simple reason: they are not used to interacting with the automated test system, specifically:",
+              "Here, mock tests offer students the chance for intensive practice on the system's interface, making the use of these tools easy, intuitive, and completely automatic on exam day.",
+              "microphone activation timing (in Speaking sections).",
+              "recording countdown before audio capture starts.",
+              "typing and keyboard speed requirements.",
+              "using text highlighting and selection tools."
             ]
           },
           {
-            "title": "Understanding the Integrated Scoring System",
+            "title": "Understanding the Integrated Evaluation System",
             "icon": "Brain",
             "description_list": [
-              "PTE tasks often contribute to multiple skills simultaneously. For example:",
-              "Mock tests show students which tasks give the highest score impact, allowing smarter preparation.",
-              "Repeat Sentence affects Listening and Speaking",
-              "Reading & Writing Fill in the Blanks affects Reading and Writing"
+              "PTE tasks often contribute to evaluating multiple skills simultaneously. For example:",
+              "Mock tests show students which tasks have the greatest impact on the overall score, allowing them to direct their efforts and prepare smarter and more effectively.",
+              "\"Repeat Sentence\" task: affects both Listening and Speaking scores together.",
+              "\"Reading & Writing Fill in the Blanks\" task: reflects on Reading and Writing scores."
             ]
           },
           {
             "title": "Improving Response Speed",
             "icon": "Zap",
             "description_list": [
-              "PTE is extremely fast-paced. In speaking tasks, you often have only 3–5 seconds to begin speaking. Mock testing trains students to:",
-              "Without mock practice, many candidates freeze during these short preparation windows.",
-              "start speaking immediately",
-              "avoid long pauses",
-              "maintain natural fluency"
+              "The PTE exam is characterized by its extremely fast pace; in speaking tasks, you often have only 3 to 5 seconds to begin speaking. Through mock tests, students train to:",
+              "Without this practical training, many candidates freeze and find themselves unable to speak during these very short preparation windows.",
+              "Start speaking immediately and without hesitation.",
+              "Avoid periods of silence and long pauses.",
+              "Maintain natural fluency and speech flow."
             ]
           },
           {
-            "title": "Building Stamina for the Digital Format",
+            "title": "Strengthening Endurance for the Digital Exam",
             "icon": "Activity",
             "description_list": [
-              "The PTE exam can feel mentally exhausting because everything happens on a computer and requires constant attention. Mock tests prepare students for:",
+              "The PTE exam can be mentally exhausting, since all of its sections are conducted via computer and require continuous attention. Here, mock tests prepare students to efficiently handle:",
               "",
-              "long screen time",
-              "rapid task switching",
-              "Maintaining concentration without breaks."
+              "Sitting for long periods in front of the screen.",
+              "Rapid and continuous transition between different tasks.",
+              "Maintaining high concentration levels without breaks."
             ]
           },
           {

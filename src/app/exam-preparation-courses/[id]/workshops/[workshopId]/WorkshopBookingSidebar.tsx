@@ -22,7 +22,7 @@ interface WorkshopBookingSidebarProps {
   discountType: string;
   baseUrl: string;
   pricingTitle: string;
-  saveInstantText: string;
+  saveInstantText: React.ReactNode;
   bookNowText: string;
   securePaymentText: string;
   mockTestTypeTitle?: string;

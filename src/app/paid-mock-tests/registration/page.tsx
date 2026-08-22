@@ -1,7 +1,7 @@
 "use client";
 
 import { Suspense, useState, useMemo, useEffect } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -98,6 +98,9 @@ function PaidMockTestRegistrationForm({
   className,
 }: MockTestBookingFormProps) {
   const t = useTranslations("PaidMockTestsPage");
+  const tMenu = useTranslations("NavBar.menu");
+  const locale = useLocale();
+  const isRtl = locale === "ar";
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
 
@@ -418,7 +421,7 @@ function PaidMockTestRegistrationForm({
                           <SelectContent>
                             {data.variant.map((variantName: string) => (
                               <SelectItem key={variantName} value={variantName}>
-                                {variantName}
+                                {isRtl ? tMenu(variantName) : variantName}
                               </SelectItem>
                             ))}
                           </SelectContent>
@@ -508,7 +511,7 @@ function PaidMockTestRegistrationForm({
                       <div>
                         <p className="text-xs text-slate-400">{t("mockTest")}</p>
                         <p className="font-bold text-slate-900 text-base">
-                          {data.name}
+                          {isRtl ? tMenu(data.name) : data.name}
                         </p>
                       </div>
 
@@ -526,7 +529,7 @@ function PaidMockTestRegistrationForm({
                         <div>
                           <p className="text-xs text-slate-400">{examTypeLabel}</p>
                           <p className="font-semibold text-primary">
-                            {variantParam}
+                            {isRtl ? tMenu(variantParam) : variantParam}
                           </p>
                         </div>
                       )}

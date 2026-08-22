@@ -118,7 +118,12 @@ export default async function ExamPreparationDynamicPage({
     notFound();
   }
 
-  // Apply locale-aware description: use translations[locale].description when available
+  // Apply locale-aware description and title: use translations[locale] when available
+  const translatedName = (course as any)?.translations?.[locale]?.title;
+  if (translatedName) {
+    course = { ...course, name: translatedName };
+  }
+
   const translatedDescription = (course as any)?.translations?.[locale]
     ?.description;
   if (translatedDescription) {

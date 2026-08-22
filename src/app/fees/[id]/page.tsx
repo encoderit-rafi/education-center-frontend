@@ -132,7 +132,7 @@ export default async function FeesDynamicPage({
   }
 
   // Apply course translation if available
-  const courseTranslatedName = (course as any)?.translations?.[locale]?.name;
+  const courseTranslatedName = (course as any)?.translations?.[locale]?.title;
   const courseTranslatedDescription = (course as any)?.translations?.[locale]?.description;
   if (courseTranslatedName) course.name = courseTranslatedName;
   if (courseTranslatedDescription) course.description = courseTranslatedDescription;

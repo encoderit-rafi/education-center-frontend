@@ -80,10 +80,13 @@ export function AcceptPayButton({
       </button>
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent className={cn(
-          "p-6 bg-white rounded-2xl shadow-xl overflow-y-auto max-h-[90vh]",
-          selectedLocation === "Center-based" ? "max-w-[95vw] md:max-w-md" : "max-w-[95vw] md:max-w-3xl lg:max-w-4xl"
-        )}>
+        <DialogContent
+          dir={isRtl ? "rtl" : "ltr"}
+          className={cn(
+            "p-6 bg-white rounded-2xl shadow-xl overflow-y-auto max-h-[90vh]",
+            selectedLocation === "Center-based" ? "max-w-[95vw] md:max-w-md" : "max-w-[95vw] md:max-w-3xl lg:max-w-4xl"
+          )}
+        >
           <DialogHeader className="mb-6">
             <DialogTitle className="text-xl font-extrabold text-slate-900 tracking-tight text-center">
               {t("chooseOption")}

@@ -93,11 +93,24 @@ export default function CourseCard({
         {effectiveDiscount > 0 && (
           <div className={cn("absolute top-4 z-10", isRtl ? "left-4" : "right-4")}>
             <Badge className="py-1 px-3 font-bold shadow-lg">
-              <span dir="ltr" className="inline-block">
-                {t("packages.saveInstantCard", {
-                  discount: effectiveDiscount,
-                  type: discountType === "PERCENTAGE" ? "%" : " AED"
-                })}
+              <span className="inline-block">
+                {isRtl ? (
+                  <>
+                    وفر{" "}
+                    <span dir="ltr">
+                      {effectiveDiscount}
+                      {discountType === "PERCENTAGE" ? "%" : " AED"}
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    SAVE{" "}
+                    <span dir="ltr">
+                      {effectiveDiscount}
+                      {discountType === "PERCENTAGE" ? "%" : " AED"}
+                    </span>
+                  </>
+                )}
               </span>
             </Badge>
           </div>
