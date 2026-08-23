@@ -84,7 +84,7 @@ export default function FeesTabs({ initialBrand, exams }: FeesTabsProps) {
       brandColor: "bg-primary",
       textColor: "text-primary",
       badgeBg: "bg-rose-50 text-primary border-rose-100",
-      isMultiRow: true,
+      isMultiRow: false,
       items: [
         { key: "toeflIbt", slug: "toefl-ibt", price: "US$340", estimatedAed: 1270 }
       ]
@@ -95,7 +95,7 @@ export default function FeesTabs({ initialBrand, exams }: FeesTabsProps) {
       brandColor: "bg-primary",
       textColor: "text-primary",
       badgeBg: "bg-rose-50 text-primary border-rose-100",
-      isMultiRow: true,
+      isMultiRow: false,
       items: [
         { key: "cael", slug: "cael", price: 1100 }
       ]
@@ -106,7 +106,7 @@ export default function FeesTabs({ initialBrand, exams }: FeesTabsProps) {
       brandColor: "bg-primary",
       textColor: "text-primary",
       badgeBg: "bg-rose-50 text-primary border-rose-100",
-      isMultiRow: true,
+      isMultiRow: false,
       items: [
         { key: "celpipGeneral", slug: "celpip-general", price: 1100 }
       ]
@@ -158,12 +158,19 @@ export default function FeesTabs({ initialBrand, exams }: FeesTabsProps) {
           >
             {/* Top red accent line that curves with rounded corners */}
             <div className={cn("absolute top-0 left-0 right-0 h-1", cat.brandColor)} />
+            <div className="px-6 py-5 bg-slate-50/50 border-b border-slate-100 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <span className={cn("text-lg font-black tracking-tight", cat.textColor)}>
+                  {t(cat.nameKey)}
+                </span>
 
+              </div>
+            </div>
 
             <div className="overflow-x-auto w-full">
               <table className="w-full text-left border-collapse" dir={isRtl ? "rtl" : "ltr"}>
                 <thead>
-                  <tr className="bg-slate-50/60 border-b border-slate-100 text-slate-900 text-sm font-bold tracking-wider uppercase">
+                  <tr className="bg-slate-50/60 border-b border-slate-100 text-slate-500 text-xs font-bold tracking-wider uppercase">
                     <th className="px-6 py-4 text-start font-black">{t("table.module")}</th>
                     <th className="px-6 py-4 text-center font-black w-48 md:w-64">{t("table.fee")}</th>
                     <th className="px-6 py-4 text-center font-black w-36 md:w-48">{t("table.register")}</th>
@@ -177,21 +184,9 @@ export default function FeesTabs({ initialBrand, exams }: FeesTabsProps) {
                         {/* Exam Module Name */}
                         <td className="px-6 py-4.5 text-slate-900 font-bold text-sm md:text-base text-start">
                           <Link
-                            href={
-                              ["toefl", "cael", "celpip"].includes(cat.id)
-                                ? `/exams/${item.slug}`
-                                : linkDetails.href
-                            }
-                            target={
-                              ["toefl", "cael", "celpip"].includes(cat.id)
-                                ? undefined
-                                : (linkDetails.isExternal ? "_blank" : undefined)
-                            }
-                            rel={
-                              ["toefl", "cael", "celpip"].includes(cat.id)
-                                ? undefined
-                                : (linkDetails.isExternal ? "noopener noreferrer" : undefined)
-                            }
+                            href={linkDetails.href}
+                            target={linkDetails.isExternal ? "_blank" : undefined}
+                            rel={linkDetails.isExternal ? "noopener noreferrer" : undefined}
                             className="hover:text-primary transition-colors hover:underline cursor-pointer"
                           >
                             {t(`examNames.${item.key}`)}

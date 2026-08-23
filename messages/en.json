@@ -3105,6 +3105,7 @@
       "Book Exam": "Book Exam",
       "Paid Mock Tests": "Paid Mock Tests",
       "Exam Preparation Courses": "Exam Prep Courses & Workshops",
+      "Exam Fees": "Exam Fees",
       "Fees": "Fees",
       "About Us": "About Us",
       "Who We Are": "Who We Are",
@@ -4636,7 +4637,7 @@
     },
     "table": {
       "module": "Exam Module",
-      "fee": "Official Fee",
+      "fee": "Exam Fee",
       "register": "Registration",
       "estimated": "Estimated",
       "paidExternally": "Paid on Official Portal"

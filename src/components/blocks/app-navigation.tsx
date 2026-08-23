@@ -11,7 +11,7 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 type NavItem = { name: string; href: string };
 type NavSingle = NavItem & { type: "single" };
@@ -26,6 +26,8 @@ export type AppNavigationProps = {
 
 export default function AppNavigation({ navigations, isLoading }: AppNavigationProps) {
   const pathname = usePathname();
+  const locale = useLocale();
+  const isRtl = locale === "ar";
   const t = useTranslations("NavBar.menu");
 
   const translateName = (name: string) => {
@@ -89,7 +91,7 @@ export default function AppNavigation({ navigations, isLoading }: AppNavigationP
                     {translateName(item.name)}
                   </NavigationMenuTrigger>
                   <NavigationMenuContent className="z-50 p-1 min-w-36 border bg-white text-primary rounded-xl shadow-2xl">
-                    <ul className="flex flex-col gap-1">
+                    <ul className="flex flex-col gap-1 text-start" dir={isRtl ? "rtl" : "ltr"}>
                       {item.items.map((child) => {
                           const isSubItemActive = isMatch(child.href);
                           return (
