@@ -26,7 +26,7 @@ export const PriceDisplay = ({
 
   return (
     <span className={cn("inline-flex items-center gap-1", className)} dir="ltr">
-      <AED className={cn("h-[0.8em] w-auto", iconClassName)} />
+      <AED className={cn("h-[0.85em] w-auto relative top-[0.05em]", iconClassName)} />
       <span className={currencyClassName}>{formattedAmount}</span>
     </span>
   );

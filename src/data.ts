@@ -274,7 +274,7 @@ export const PRIMARY_NAV: AppNavigationItem[] = [
 
   {
     type: "dropdown",
-    name: "Fees",
+    name: "Exam Fees",
     href: "/fees",
     items: [],
   },

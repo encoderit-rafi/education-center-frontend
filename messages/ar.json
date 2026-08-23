@@ -4621,6 +4621,56 @@
   "ExamFeesPage": {
     "title": "رسوم",
     "titleAccent": "الاختبارات",
-    "subtitle": "إليك تفصيل شامل لجميع رسوم الاختبارات الرسمية ورسوم الخدمات. يضمن هذا الدليل الشفافية في التخطيط الخاص بك."
+    "subtitle": "إليك تفصيل شامل لجميع رسوم الاختبارات الرسمية. يضمن هذا الدليل الشفافية في التخطيط الخاص بك.",
+    "tabs": {
+      "officialExams": "رسوم الاختبارات الرسمية",
+      "prepCourses": "رسوم الدورات التحضيرية"
+    },
+    "table": {
+      "module": "نوع الاختبار",
+      "fee": "الرسوم الرسمية",
+      "register": "التسجيل",
+      "estimated": "تقديري",
+      "paidExternally": "يُدفع على البوابة الرسمية"
+    },
+    "buttons": {
+      "registerNow": "سجل الآن"
+    },
+    "categories": {
+      "all": "الكل",
+      "ielts": "آيلتس (IELTS)",
+      "pte": "بي تي إي (PTE)",
+      "toefl": "تووفل آي بي تي (TOEFL iBT)",
+      "cael": "كايل (CAEL)",
+      "celpip": "سيلبيب العام (CELPIP)",
+      "selt": "مهارات اللغة الإنجليزية (SELT)",
+      "oet": "أو إي تي (OET)"
+    },
+    "examNames": {
+      "ieltsAcademic": "آيلتس الأكاديمي (IELTS Academic)",
+      "ieltsGeneral": "آيلتس العام (IELTS General)",
+      "ieltsUkviAcademic": "آيلتس الأكاديمي لـ UKVI",
+      "ieltsUkviGeneral": "آيلتس التدريب العام لـ UKVI",
+      "ieltsLifeSkillsA1": "آيلتس مهارات الحياة لـ UKVI A1",
+      "ieltsLifeSkillsA2": "آيلتس مهارات الحياة لـ UKVI A2 (المملكة المتحدة فقط)",
+      "ieltsLifeSkillsB1": "آيلتس مهارات الحياة لـ UKVI B1",
+      "pteAcademic": "بي تي إي الأكاديمي (PTE Academic)",
+      "pteCore": "بي تي إي العام (PTE Core)",
+      "pteUkvi": "بي تي إي الأكاديمي لـ UKVI",
+      "pteHomeA1": "بي تي إي هوم A1",
+      "pteHomeA2": "بي تي إي هوم A2",
+      "pteHomeB1": "بي تي إي هوم B1",
+      "toeflIbt": "تووفل آي بي تي (TOEFL iBT)",
+      "cael": "اختبار كايل (CAEL)",
+      "celpipGeneral": "سيلبيب العام (CELPIP General)",
+      "seltA1": "التحدث والاستماع لـ UKVI - المستوى A1",
+      "seltA2": "التحدث والاستماع لـ UKVI - المستوى A2",
+      "seltB1": "التحدث والاستماع لـ UKVI - المستوى B1",
+      "seltB1RW": "التحدث والاستماع والقراءة والكتابة لـ UKVI B1",
+      "seltB2": "التحدث والاستماع والقراءة والكتابة لـ UKVI B2",
+      "seltC1": "التحدث والاستماع والقراءة والكتابة لـ UKVI C1",
+      "seltC2": "التحدث والاستماع والقراءة والكتابة لـ UKVI C2",
+      "oet": "اختبار اللغة الإنجليزية المهني (OET)"
+    }
   }
 }

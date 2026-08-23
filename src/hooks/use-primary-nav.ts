@@ -144,22 +144,22 @@ export function usePrimaryNav() {
         items: dynamicItems.length > 0 ? dynamicItems : item.items,
       };
     }
-    if (item.name === "Fees" && item.type === "dropdown") {
-      const dynamicItems =
-        coursesResponse?.data?.data
-          ?.map((course) => ({
-            name: formatExamName(course.name),
-            href: `/fees/${course.slug}`,
-            slug: course.slug,
-          }))
-          ?.sort((a, b) => examPriority(a.slug) - examPriority(b.slug))
-          ?.map(({ name, href }) => ({ name, href })) || [];
-
+    if (item.name === "Exam Fees" && item.type === "dropdown") {
       return {
         ...item,
-        items: dynamicItems.length > 0 ? dynamicItems : item.items,
+        items: [
+          { name: "IELTS", href: "/fees?brand=ielts" },
+          { name: "PTE", href: "/fees?brand=pte" },
+          { name: "TOEFL iBT", href: "/fees?brand=toefl" },
+          { name: "CAEL", href: "/fees?brand=cael" },
+          { name: "CELPIP General", href: "/fees?brand=celpip" },
+          { name: "Skills for English (SELT)", href: "/fees?brand=selt" }
+        ]
       };
     }
+
+
+
 
     // We target the Paid Mock Tests dropdown
     if (item.name === "Paid Mock Tests" && item.type === "dropdown") {

@@ -4629,6 +4629,56 @@
   "ExamFeesPage": {
     "title": "Exam",
     "titleAccent": "Fees",
-    "subtitle": "Here is a comprehensive breakdown of all official exam fees and service charges. This guide ensures transparency in your planning."
+    "subtitle": "Here is a comprehensive breakdown of all official exam fees. This guide ensures transparency in your planning.",
+    "tabs": {
+      "officialExams": "Official Exam Fees",
+      "prepCourses": "Preparation Course Fees"
+    },
+    "table": {
+      "module": "Exam Module",
+      "fee": "Official Fee",
+      "register": "Registration",
+      "estimated": "Estimated",
+      "paidExternally": "Paid on Official Portal"
+    },
+    "buttons": {
+      "registerNow": "Register Now"
+    },
+    "categories": {
+      "all": "All",
+      "ielts": "IELTS",
+      "pte": "PTE",
+      "toefl": "TOEFL iBT",
+      "cael": "CAEL",
+      "celpip": "CELPIP General",
+      "selt": "Skills for English (SELT)",
+      "oet": "OET"
+    },
+    "examNames": {
+      "ieltsAcademic": "IELTS Academic",
+      "ieltsGeneral": "IELTS General",
+      "ieltsUkviAcademic": "IELTS for UKVI Academic",
+      "ieltsUkviGeneral": "IELTS for UKVI General Training",
+      "ieltsLifeSkillsA1": "IELTS for UKVI Life Skills A1",
+      "ieltsLifeSkillsA2": "IELTS for UKVI Life Skills A2 (UK only)",
+      "ieltsLifeSkillsB1": "IELTS for UKVI Life Skills B1",
+      "pteAcademic": "PTE Academic",
+      "pteCore": "PTE Core",
+      "pteUkvi": "PTE Academic UKVI",
+      "pteHomeA1": "PTE Home A1",
+      "pteHomeA2": "PTE Home A2",
+      "pteHomeB1": "PTE Home B1",
+      "toeflIbt": "TOEFL iBT",
+      "cael": "CAEL",
+      "celpipGeneral": "CELPIP General",
+      "seltA1": "UKVI Speaking & Listening – Level A1",
+      "seltA2": "UKVI Speaking & Listening – Level A2",
+      "seltB1": "UKVI Speaking & Listening – Level B1",
+      "seltB1RW": "UKVI Speaking, Listening, Reading & Writing B1",
+      "seltB2": "UKVI Speaking, Listening, Reading & Writing B2",
+      "seltC1": "UKVI Speaking, Listening, Reading & Writing C1",
+      "seltC2": "UKVI Speaking, Listening, Reading & Writing C2",
+      "oet": "OET (Occupational English Test)"
+    }
   }
 }

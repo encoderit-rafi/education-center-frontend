@@ -1,63 +1,45 @@
-import Link from "next/link";
 import { getTranslations } from "next-intl/server";
-import {
-  BaseCard,
-  BaseCardTitle,
-  BaseCardIcon,
-  BaseCardArrow,
-} from "@/components/blocks/cards/base-card";
 import api from "@/axios";
+import FeesTabs from "./FeesTabs";
 
-export default async function FeesPage() {
+export default async function FeesPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ brand?: string }>;
+}) {
   const t = await getTranslations("ExamFeesPage");
+  const resolvedParams = await searchParams;
+  const brand = resolvedParams?.brand || "all";
 
-  let courses = [];
+  let exams = [];
+
   try {
-    const response = await api.get("/courses");
-    if (response.data?.success) {
-      courses = response.data.data.data;
+    const examsRes = await api.get("/exams", { params: { limit: 100 } });
+    if (examsRes.data?.success) {
+      exams = examsRes.data.data.data;
     }
   } catch (error) {
-    console.error("Failed to fetch courses:", error);
+    console.error("Failed to fetch exams:", error);
   }
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-white pb-24">
       {/* ── Hero Section ── */}
-      <section className="relative overflow-hidden bg-slate-50 base-py base-px">
-        <div className="max-w-4xl mx-auto text-center space-y-8">
-          <h1 className="section-title">
-            {t("title")} <span className="text-primary italic">{t("titleAccent")}</span>
+      <section className="relative overflow-hidden bg-slate-50 base-py base-px border-b border-slate-100">
+        <div className="max-w-4xl mx-auto text-center space-y-6">
+          <h1 className="text-4xl md:text-6xl font-black leading-[1.1] text-secondary">
+            {t("title")} {t("titleAccent")}
           </h1>
-          <p className="section-subtitle max-w-3xl mx-auto">
+          <p className="text-slate-900 text-sm md:text-base font-bold leading-relaxed max-w-2xl mx-auto">
             {t("subtitle")}
           </p>
         </div>
       </section>
 
-      {/* ── Course Grid ── */}
-      <section id="courses-grid" className="py-24 bg-white relative">
-        <div className="container mx-auto px-4 lg:px-8 max-w-7xl">
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {courses.map((exam: any, index: number) => {
-              return (
-                <Link key={exam.id} href={`/fees/${exam.slug}`}>
-                  <BaseCard>
-                    <div className="flex items-center justify-between mb-10">
-                      <BaseCardIcon>{index + 1}</BaseCardIcon>
-                      <BaseCardArrow className="group-hover:translate-x-2 rtl:group-hover:-translate-x-2 transition-transform duration-500" />
-                    </div>
-
-                    <div className="space-y-5 mb-5">
-                      <BaseCardTitle className="text-2xl font-black text-slate-900 leading-tight">
-                        {exam.name}
-                      </BaseCardTitle>
-                    </div>
-                  </BaseCard>
-                </Link>
-              );
-            })}
-          </div>
+      {/* ── Exam Fees Content ── */}
+      <section className="py-16 bg-white relative">
+        <div className="container mx-auto px-4 max-w-7xl">
+          <FeesTabs initialBrand={brand} exams={exams} />
         </div>
       </section>
     </main>
