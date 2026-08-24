@@ -20,14 +20,10 @@ export function TermsStep({ onNext, examFee, additionalFee }: TermsStepProps) {
     return t.rich(`pte.${idx}`, {
       examName: examName,
       aed_exam: () => (
-        <strong className="font-semibold">
-          <AED className="h-[0.8em] w-auto fill-current inline-block" /> {examFee.toLocaleString()}
-        </strong>
+        <strong className="font-semibold inline-flex items-center gap-1"><AED className="h-[0.8em] w-auto fill-current" /> {examFee.toLocaleString()}</strong>
       ),
       aed_additional: () => (
-        <strong className="font-semibold">
-          <AED className="h-[0.8em] w-auto fill-current inline-block" /> {additionalFee.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-        </strong>
+        <strong className="font-semibold inline-flex items-center gap-1"><AED className="h-[0.8em] w-auto fill-current" /> {additionalFee.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</strong>
       ),
       bold: (chunks) => <strong className="font-semibold">{chunks}</strong>,
     });

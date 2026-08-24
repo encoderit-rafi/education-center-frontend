@@ -26,7 +26,13 @@ export default function ExamItems({ data }: { data: any }) {
       <div className="bg-slate-50">
         <div className="max-w-4xl space-y-6 base-py px-3 md:px-12">
           <h1 className="text-4xl md:text-7xl font-black text-secondary leading-[1.1] tracking-tight">
-            {title} <span className="italic text-primary">{isRtl ? "اختبارات" : "Exams"}</span>
+            {isRtl ? (
+              title
+            ) : (
+              <>
+                {title} <span className="italic text-primary">Exams</span>
+              </>
+            )}
           </h1>
           {description && <p className="text-secondary">{description}</p>}
         </div>
@@ -37,7 +43,7 @@ export default function ExamItems({ data }: { data: any }) {
           <h2 className="section-title">
             {isRtl ? (
               <>
-                اختر اختبار <span>{title}</span> المناسب لك
+                اختر <span>{title}</span> الخاص بك
               </>
             ) : (
               <>
@@ -47,8 +53,8 @@ export default function ExamItems({ data }: { data: any }) {
           </h2>
           <p className="section-subtitle text-center mx-auto">
             {isRtl ? (
-              `تم تصميم كل نوع من اختبارات ${title} لهدف محدد. اختر النوع الذي يناسب هدفك الأكاديمي أو المهني أو التأشيرة.`
-            ) : (
+              `تم تصميم كل نوع من ${title} لغرض محدد. اختر النوع الذي يتوافق مع تأشيرتك أو هدفك الأكاديمي أو المهني.`
+) : (
               `Each ${title} variant is designed for a specific purpose. Select the one that matches your visa, academic, or professional goal.`
             )}
           </p>

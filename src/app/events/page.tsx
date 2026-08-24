@@ -434,9 +434,6 @@ export default function EventsPage() {
             {/* ── Page Header ──────────────────────────────────────────── */}
             <section className="pt-28 pb-10 bg-white border-b border-gray-100">
                 <div className="container px-6 mx-auto sm:px-12 lg:px-24 text-center">
-                    <span className="inline-block text-[#A11D1D] text-xs font-black uppercase tracking-[0.3em] mb-3">
-                        {t("educationCenter")}
-                    </span>
                     <h1 className="text-4xl md:text-6xl font-black text-gray-900 tracking-tighter leading-none mb-4">
                         {t("title")} <span className="text-[#A11D1D]">{t("titleAccent")}</span>
                     </h1>
@@ -575,10 +572,7 @@ export default function EventsPage() {
                                         />
                                         {/* Badges */}
                                         <div className="absolute top-3 left-3 flex flex-wrap gap-1.5 z-10">
-                                            <span className={cn(
-                                                "px-2.5 py-0.5 text-[9px] font-black tracking-wider uppercase rounded-full text-white shadow-sm",
-                                                event.eventType === "WORKSHOP" ? "bg-[#A11D1D]" : "bg-blue-600"
-                                            )}>
+                                            <span className="px-2.5 py-0.5 text-[9px] font-black tracking-wider uppercase rounded-full text-white shadow-sm bg-[#A11D1D]">
                                                 {getLocalizedEventType(event.eventType)}
                                             </span>
                                         </div>
