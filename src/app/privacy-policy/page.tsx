@@ -123,7 +123,7 @@ export default function PrivacyPolicyPage() {
               </p>
             </section>
 
-            <div className="mt-32 pt-16 border-t border-gray-100 italic text-gray-400 text-sm">
+            <div className="mt-32 pt-16 border-t border-gray-100 italic text-black text-base">
               {t("lastUpdated")}
             </div>
           </div>

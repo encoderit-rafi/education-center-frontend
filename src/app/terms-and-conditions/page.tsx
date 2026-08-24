@@ -42,6 +42,22 @@ export default function TermsAndConditionsPage() {
   const rawSections = t.raw("sections") as Record<string, any>;
   const sectionIds = Object.keys(rawSections);
 
+  const renderAmount = (amount: string) => {
+    const match = amount.match(/(\d+%)/);
+    if (match) {
+      const pct = match[1];
+      const parts = amount.split(pct);
+      return (
+        <>
+          {parts[0]}
+          <span dir="ltr">{pct}</span>
+          {parts[1]}
+        </>
+      );
+    }
+    return amount;
+  };
+
   return (
     <div
       className="flex flex-col min-h-screen bg-slate-50/50 pb-24 text-slate-800 font-sans"
@@ -66,7 +82,7 @@ export default function TermsAndConditionsPage() {
             </span>
           </h1>
 
-          <p className="text-slate-500 text-lg max-w-2xl mx-auto font-medium leading-relaxed mb-8">
+          <p className="text-slate-500 text-lg max-w-2xl mx-auto font-medium text-justify leading-relaxed mb-8">
             {t("description")}
           </p>
 
@@ -180,7 +196,7 @@ export default function TermsAndConditionsPage() {
                                     </td>
                                     <td className="px-5 py-4">
                                       <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-bold bg-red-50 text-[#A11D1D]">
-                                        {row.amount}
+                                        {renderAmount(row.amount)}
                                       </span>
                                     </td>
                                   </tr>

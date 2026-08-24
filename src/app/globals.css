@@ -213,6 +213,9 @@
   body {
     @apply bg-background text-foreground;
   }
+  html:lang(ar) {
+    font-size: 100%;
+  }
 }
 @layer utilities {
   .crimson-gradient {

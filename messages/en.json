@@ -1390,7 +1390,7 @@
       },
       {
         "question": "Can I get brochures or flyers?",
-        "answer": "Yes, you can request them via email at info@tepth.org. Content matches our website."
+        "answer": "Yes, you can request them via email at info@tepth.org Content matches our website."
       },
       {
         "question": "Is public transport available nearby?",
@@ -1728,7 +1728,7 @@
         "items": [
           "<strong>Optional Service:</strong> Because this service is entirely voluntary, candidates can choose to book directly with the test provider to avoid this additional fee.",
           "<strong>Limitations:</strong> TEPTH is not responsible for seat availability, exam delivery issues, exam scoring, or the release of results.",
-          "<strong>Cancellations & Rescheduling:</strong> If a seat cannot be secured or an exam is canceled by the provider due to low enrollment, you may request a refund or reschedule to the next available date."
+          "<strong>Cancellations & Rescheduling:</strong> If we are unable to secure a seat for your chosen test, you have the option to request a full refund or transfer your booking to the next available date. Please note that if the official exam provider cancels the test—whether due to low registration or other unforeseen circumstances—TEPTH assumes no liability. In such cases, you must contact the exam provider directly, as they are responsible for relocating your exam to a different venue or assigning a new date."
         ]
       },
       "discounts": {
@@ -1743,7 +1743,7 @@
       },
       "refunds": {
         "title": "Withdrawals, Cancellations & Refunds",
-        "p1": "All refund requests must be submitted using the official, type-written Withdrawal/Refund Request Form and emailed to info@tepth.org. Approved refunds take up to six weeks to process and must be claimed within eight weeks.",
+        "p1": "All refund requests must be submitted using the official, type-written Withdrawal/Refund Request Form and emailed to info@tepth.org Approved refunds take up to six weeks to process and must be claimed within eight weeks.",
         "timelineTitle": "Refund Eligibility Timeline",
         "thNotice": "Notice Given Before Course Start",
         "thRefund": "Refund Amount",
