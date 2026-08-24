@@ -187,7 +187,7 @@ export function DateStep({
                                 {
                                   strong: (chunks) => <strong>{chunks}</strong>,
                                   br: () => <br />,
-                                  phone: INSTITUTIONS_INFO.phone,
+                                  phone: <span dir="ltr">{INSTITUTIONS_INFO.phone}</span> as any,
                                   email: INSTITUTIONS_INFO.email,
                                 },
                               )}
