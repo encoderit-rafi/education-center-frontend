@@ -75,7 +75,7 @@ export default function ExamsPage() {
       if (upper === "PTE") return "بي تي إي";
       if (upper.includes("TOEFL")) return "توفل آي بي تي";
       if (upper === "CAEL") return "كايل";
-      if (upper.includes("CELPIP")) return "سيلبيب عام";
+      if (upper.includes("CELPIP")) return "اختبار السيلبب العام (CELPIP-G)";
       if (upper.includes("SKILL")) return "سكيلز فور إنجلش (سيلت)";
     }
     return rawName;
