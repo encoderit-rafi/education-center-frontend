@@ -3110,8 +3110,8 @@
       "TOEFL iBT": "اختبار التوفل (TOEFL iBT)",
       "CELPIP": "سيلبيب العام (CELPIP)",
       "CAEL": "اختبار كايل (CAEL)",
-      "Skills for English (SELT)": "اختبار المهارات في اللغة الإنجليزية (Skills for English - SELT)",
-      "Skill for English(SELT)": "اختبار المهارات في اللغة الإنجليزية (Skills for English - SELT)",
+      "Skills for English (SELT)": "اختبار (Skills for English - SELT)",
+      "Skill for English(SELT)": "اختبار (Skills for English - SELT)",
       "OET": "اختبار أو إي تي (OET)",
       "IELTS Academic": "الآيلتس الأكاديمي",
       "IELTS General Training": "الآيلتس العام",
@@ -3587,7 +3587,7 @@
         "description": "قم بتنزيل استمارة التسجيل الرسمية لاختبار بيرسون للغة الإنجليزية الأكاديمية (PTE)."
       },
       {
-        "title": "بيت الامتحانات والتحضير للاختبارات - استمارة تسجيل اختبار اختبار (Skills for English - SELT)",
+        "title": "بيت الامتحانات والتحضير للاختبارات - استمارة تسجيل اختبار (Skills for English - SELT)",
         "subtitle": "استمارة التسجيل",
         "description": "قم بتنزيل استمارة التسجيل الرسمية لاختبار مهارات اللغة الإنجليزية (SELT)."
       },
