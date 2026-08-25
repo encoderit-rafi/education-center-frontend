@@ -127,7 +127,7 @@ export function DateStep({
                           <div className="flex items-center gap-3">
                             <RadioGroupItem value={slot.id} id={slot.id} disabled={slot.disabled} />
                             <div>
-                              <p className="text-sm font-medium">
+                              <p className="text-sm font-medium" dir="ltr">
                                 {slot.time}
                               </p>
                             </div>
@@ -187,7 +187,7 @@ export function DateStep({
                                 {
                                   strong: (chunks) => <strong>{chunks}</strong>,
                                   br: () => <br />,
-                                  phone: <span dir="ltr">{INSTITUTIONS_INFO.phone}</span> as any,
+                                  phone: <span dir="ltr" className="inline-block" key="phone">{"\u200E" + INSTITUTIONS_INFO.phone}</span> as any,
                                   email: INSTITUTIONS_INFO.email,
                                 },
                               )}

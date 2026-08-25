@@ -143,7 +143,7 @@ export function DateStep({
                               disabled={slot.disabled}
                             />
                             <div>
-                              <p className="text-sm font-medium">{slot.time}</p>
+                              <p className="text-sm font-medium" dir="ltr">{slot.time}</p>
                             </div>
                           </div>
                         </div>
@@ -201,7 +201,7 @@ export function DateStep({
                                 {
                                   strong: (chunks) => <strong>{chunks}</strong>,
                                   br: () => <br />,
-                                  phone: <span dir="ltr">{INSTITUTIONS_INFO.phone}</span> as any,
+                                  phone: <span dir="ltr" className="inline-block" key="phone">{"\u200E" + INSTITUTIONS_INFO.phone}</span> as any,
                                   email: INSTITUTIONS_INFO.email,
                                 },
                               )}

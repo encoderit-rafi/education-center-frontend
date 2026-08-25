@@ -163,7 +163,7 @@ export default function FeesTabs({ initialBrand, exams }: FeesTabsProps) {
             <div className="overflow-x-auto w-full">
               <table className="w-full text-left border-collapse" dir={isRtl ? "rtl" : "ltr"}>
                 <thead>
-                  <tr className="bg-slate-50/60 border-b border-slate-100 text-slate-900 text-sm font-bold tracking-wider uppercase">
+                  <tr className="bg-slate-50/60 border-b border-slate-100 text-primary text-sm font-bold tracking-wider uppercase">
                     <th className="px-6 py-4 text-start font-black">{t("table.module")}</th>
                     <th className="px-6 py-4 text-center font-black w-48 md:w-64">{t("table.fee")}</th>
                     <th className="px-6 py-4 text-center font-black w-36 md:w-48">{t("table.register")}</th>
@@ -203,11 +203,11 @@ export default function FeesTabs({ initialBrand, exams }: FeesTabsProps) {
                             <PriceDisplay amount={item.price} className="text-base md:text-lg font-black text-primary" />
                           ) : (
                             <div className="flex flex-col items-center justify-center">
-                              <span className="font-black text-slate-800 text-base md:text-lg">
+                              <span className="font-black text-primary text-base md:text-lg">
                                 {item.price === "paidExternally" ? t("table.paidExternally") : item.price}
                               </span>
                               {item.estimatedAed && (
-                                <span className="text-[13px] text-slate-900 font-bold mt-0.5">
+                                <span className="text-[13px] text-primary font-bold mt-0.5">
                                   ({t("table.estimated")}: <PriceDisplay amount={item.estimatedAed} />)
                                 </span>
                               )}
@@ -297,11 +297,11 @@ export default function FeesTabs({ initialBrand, exams }: FeesTabsProps) {
                       <PriceDisplay amount={item.price} className="text-2xl font-black text-primary" />
                     ) : (
                       <div className="flex flex-col items-end">
-                        <span className="font-black text-slate-800 text-xl">
+                        <span className="font-black text-primary text-xl">
                           {item.price === "paidExternally" ? t("table.paidExternally") : item.price}
                         </span>
                         {item.estimatedAed && (
-                          <span className="text-[12px] text-slate-900 font-bold mt-0.5">
+                          <span className="text-[12px] text-primary font-bold mt-0.5">
                             ({t("table.estimated")}: <PriceDisplay amount={item.estimatedAed} />)
                           </span>
                         )}
