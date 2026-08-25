@@ -145,7 +145,7 @@ export function DateStep({
                                 id={slot.id}
                                 disabled={isDisabled}
                               />
-                              <p className="font-bold text-slate-900">
+                              <p className="font-bold text-slate-900" dir="ltr">
                                 {slot.label}
                               </p>
                             </div>

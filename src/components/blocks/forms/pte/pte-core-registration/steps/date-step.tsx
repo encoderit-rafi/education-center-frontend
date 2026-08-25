@@ -138,7 +138,7 @@ export function DateStep({
                         >
                           <div className="flex items-center gap-3">
                             <RadioGroupItem value={slot} id={slot} disabled={isDisabled} />
-                            <p className="text-sm font-medium">{slot}</p>
+                            <p className="text-sm font-medium" dir="ltr">{slot}</p>
                           </div>
                         </Label>
                       );
