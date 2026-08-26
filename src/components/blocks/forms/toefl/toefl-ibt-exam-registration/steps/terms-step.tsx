@@ -15,8 +15,16 @@ interface TermsStepProps {
 export function TermsStep({ onNext, examFee, additionalFee }: TermsStepProps) {
     const t = useTranslations("TermsSteps");
 
-    const notices: (React.ReactNode | string)[] = Array.from({ length: 21 }).map((_, idx) => {
-        return t.rich(`toefl.${idx}`, {
+    let toeflKeys: string[] = [];
+    try {
+        const rawTerms = t.raw("toefl") || {};
+        toeflKeys = Object.keys(rawTerms).sort((a, b) => Number(a) - Number(b));
+    } catch (e) {
+        toeflKeys = Array.from({ length: 21 }, (_, i) => String(i));
+    }
+
+    const notices: (React.ReactNode | string)[] = toeflKeys.map((key) => {
+        return t.rich(`toefl.${key}`, {
             aed_exam: () => (
                 <strong className="font-semibold">
                     <AED className="h-[0.8em] w-auto fill-current inline-block" /> {examFee.toLocaleString()}
