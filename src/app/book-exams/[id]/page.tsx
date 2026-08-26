@@ -24,11 +24,33 @@ import api from "@/axios";
 import CelpipInfo from "@/components/blocks/celpip-info";
 import CaelInfo from "@/components/blocks/cael-info";
 
+const SLUG_TO_STATIC_ID: Record<string, string> = {
+  "ukvi-speaking-and-listening-level-a1": "selt-a1",
+  "ukvi-speaking-and-listening-at-level-a1": "selt-a1",
+  "ukvi-speaking-and-listening-level-a2": "selt-a2",
+  "ukvi-speaking-and-listening-at-level-a2": "selt-a2",
+  "ukvi-speaking-and-listening-level-b1": "selt-b1",
+  "ukvi-speaking-and-listening-at-level-b1": "selt-b1",
+  "ukvi-speaking-listening-reading-and-writing-b1": "selt-b1-r-w",
+  "ukvi-speaking-listening-reading-and-writing-at-level-b1": "selt-b1-r-w",
+  "ukvi-speaking-listening-reading-and-writing-b2": "selt-b2",
+  "ukvi-speaking-listening-reading-and-writing-at-level-b2": "selt-b2",
+  "ukvi-speaking-and-listening-at-level-b2": "selt-b2",
+  "ukvi-speaking-listening-reading-and-writing-c1": "selt-c1",
+  "ukvi-speaking-listening-reading-and-writing-at-level-c1": "selt-c1",
+  "ukvi-speaking-and-listening-at-level-c1": "selt-c1",
+  "ukvi-speaking-listening-reading-and-writing-c2": "selt-c2",
+  "ukvi-speaking-listening-reading-and-writing-at-level-c2": "selt-c2",
+  "ukvi-speaking-and-listening-at-level-c2": "selt-c2",
+};
+
 /** Build a lightweight exam-info object for the overview wrapper by merging
  *  the API response with the static EXAM_DETAILE_DATA fallback and localized strings. */
 function buildExamInfo(exam: any, t: any, locale: string) {
+  const targetId = SLUG_TO_STATIC_ID[exam.slug] || exam.slug || exam.id;
   const staticMeta = EXAM_DETAILE_DATA.find(
     (item: any) =>
+      item.id === targetId ||
       item.id === exam.id ||
       item.id === exam.slug ||
       item.slug === exam.slug ||
@@ -120,6 +142,7 @@ function buildExamInfo(exam: any, t: any, locale: string) {
 
   return {
     name,
+    englishName: exam.name || staticMeta?.name || "",
     slug: exam.slug || staticMeta?.slug || "",
     description,
     overview,
@@ -138,7 +161,34 @@ export default async function BookExamsId({
   params: Promise<{ id: string }>;
 }) {
   const { id: rawSlug } = await params;
-  const slug = rawSlug === "toefl" ? "toefl-ibt" : rawSlug;
+  let slug = rawSlug === "toefl" ? "toefl-ibt" : rawSlug;
+
+  // Map old/alternative/legacy slugs to new slugs to prevent 404 for existing links
+  const SLUG_MAP: Record<string, string> = {
+    "ukvi-speaking-and-listening-at-level-a1": "ukvi-speaking-and-listening-level-a1",
+    "ukvi-speaking-and-listening-at-level-a2": "ukvi-speaking-and-listening-level-a2",
+    "ukvi-speaking-and-listening-at-level-b1": "ukvi-speaking-and-listening-level-b1",
+    "ukvi-speaking-listening-reading-and-writing-at-level-b1": "ukvi-speaking-listening-reading-and-writing-b1",
+    "ukvi-speaking-listening-reading-and-writing-at-level-b1-1": "ukvi-speaking-listening-reading-and-writing-b1",
+    "ukvi-speaking-listening-reading-and-writing-at-level-b2": "ukvi-speaking-listening-reading-and-writing-b2",
+    "ukvi-speaking-and-listening-at-level-b2": "ukvi-speaking-listening-reading-and-writing-b2",
+    "ukvi-speaking-listening-reading-and-writing-at-level-c1": "ukvi-speaking-listening-reading-and-writing-c1",
+    "ukvi-speaking-and-listening-at-level-c1": "ukvi-speaking-listening-reading-and-writing-c1",
+    "ukvi-speaking-listening-reading-and-writing-at-level-c2": "ukvi-speaking-listening-reading-and-writing-c2",
+    "ukvi-speaking-and-listening-at-level-c2": "ukvi-speaking-listening-reading-and-writing-c2",
+    "selt-a1": "ukvi-speaking-and-listening-level-a1",
+    "selt-a2": "ukvi-speaking-and-listening-level-a2",
+    "selt-b1": "ukvi-speaking-and-listening-level-b1",
+    "selt-b1-r-w": "ukvi-speaking-listening-reading-and-writing-b1",
+    "selt-b2": "ukvi-speaking-listening-reading-and-writing-b2",
+    "selt-c1": "ukvi-speaking-listening-reading-and-writing-c1",
+    "selt-c2": "ukvi-speaking-listening-reading-and-writing-c2",
+  };
+
+  if (SLUG_MAP[slug]) {
+    slug = SLUG_MAP[slug];
+  }
+
   const locale = await getLocale();
   const t = await getTranslations("ExamDetailsPage");
 
@@ -271,6 +321,7 @@ export default async function BookExamsId({
       );
     case "selt-a1":
     case "ukvi-speaking-and-listening-at-level-a1":
+    case "ukvi-speaking-and-listening-level-a1":
       return (
         <BookExamOverviewWrapper exam={examInfo}>
           <FormSELTA1Registration examId={exam.id} />
@@ -278,6 +329,7 @@ export default async function BookExamsId({
       );
     case "selt-a2":
     case "ukvi-speaking-and-listening-at-level-a2":
+    case "ukvi-speaking-and-listening-level-a2":
       return (
         <BookExamOverviewWrapper exam={examInfo}>
           <FormSELTA2Registration examId={exam.id} />
@@ -285,6 +337,7 @@ export default async function BookExamsId({
       );
     case "selt-b1":
     case "ukvi-speaking-and-listening-at-level-b1":
+    case "ukvi-speaking-and-listening-level-b1":
       return (
         <BookExamOverviewWrapper exam={examInfo}>
           <FormSELTB1Registration examId={exam.id} />
@@ -294,6 +347,7 @@ export default async function BookExamsId({
     case "ukvi-speaking-and-listening-at-level-b1-r-w":
     case "ukvi-speaking-listening-reading-and-writing-at-level-b1":
     case "ukvi-speaking-listening-reading-and-writing-at-level-b1-1":
+    case "ukvi-speaking-listening-reading-and-writing-b1":
       return (
         <BookExamOverviewWrapper exam={examInfo}>
           <FormSELTB1RWRegistration examId={exam.id} />
@@ -302,6 +356,7 @@ export default async function BookExamsId({
     case "selt-b2":
     case "ukvi-speaking-listening-reading-and-writing-at-level-b2":
     case "ukvi-speaking-and-listening-at-level-b2":
+    case "ukvi-speaking-listening-reading-and-writing-b2":
       return (
         <BookExamOverviewWrapper exam={examInfo}>
           <FormSELTB2Registration examId={exam.id} />
@@ -310,6 +365,7 @@ export default async function BookExamsId({
     case "selt-c1":
     case "ukvi-speaking-listening-reading-and-writing-at-level-c1":
     case "ukvi-speaking-and-listening-at-level-c1":
+    case "ukvi-speaking-listening-reading-and-writing-c1":
       return (
         <BookExamOverviewWrapper exam={examInfo}>
           <FormSELTC1Registration examId={exam.id} />
@@ -318,6 +374,7 @@ export default async function BookExamsId({
     case "selt-c2":
     case "ukvi-speaking-listening-reading-and-writing-at-level-c2":
     case "ukvi-speaking-and-listening-at-level-c2":
+    case "ukvi-speaking-listening-reading-and-writing-c2":
       return (
         <BookExamOverviewWrapper exam={examInfo}>
           <FormSELTC2Registration examId={exam.id} />

@@ -27,7 +27,7 @@ export default function BookExamItems({ data }: { data: any }) {
         <div className="max-w-4xl space-y-6 base-py px-3 md:px-12">
           <h1 className="text-4xl md:text-7xl font-black text-secondary leading-[1.1] tracking-tight">
             {isRtl ? (
-              name
+              `${name} ${data.name && data.name !== name ? `(${data.name})` : ""}`
             ) : (
               <>
                 {name} <span className="italic text-primary">Exams</span>

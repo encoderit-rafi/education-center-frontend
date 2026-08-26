@@ -40,8 +40,6 @@ export default function FormPTECoreRegistration({
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [currentStep]);
 
-  const titleObj = useRegistrationTitle("pte-core");
-
   const { data: examsResponse } = useQuery({
     queryKey: ["exams-list"],
     queryFn: async () => {
@@ -54,6 +52,8 @@ export default function FormPTECoreRegistration({
   const activeExam = initialExamId
     ? examsList.find((e: any) => e.id === initialExamId)
     : examsList.find((e: any) => e.slug === "pte-core");
+
+  const titleObj = useRegistrationTitle("pte-core", activeExam);
 
   const examId = initialExamId || activeExam?.id;
 

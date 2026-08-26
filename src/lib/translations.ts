@@ -14,9 +14,40 @@ export function useCalendarTranslations() {
   };
 }
 
-export function useRegistrationTitle(slug: string) {
+export function useRegistrationTitle(slug: string, dbExam?: any) {
   const locale = useLocale();
   const isAr = locale === "ar";
+
+  // If we have an Arabic name in the database translations and locale is Arabic
+  if (isAr && dbExam?.translations?.[locale]?.name) {
+    const dbName = dbExam.translations[locale].name;
+    // Split into prefix and suffix if possible, to keep design aesthetics
+    if (dbName.startsWith("التسجيل في اختبار")) {
+      return {
+        main: "التسجيل في اختبار",
+        highlight: dbName.replace("التسجيل في اختبار", "").trim(),
+      };
+    }
+    if (dbName.startsWith("التسجيل في")) {
+      return {
+        main: "التسجيل في",
+        highlight: dbName.replace("التسجيل في", "").trim(),
+      };
+    }
+    return {
+      main: dbName,
+      highlight: "",
+    };
+  }
+
+  // If we have a dynamic name in the database and locale is English
+  if (!isAr && dbExam?.name) {
+    const dbName = dbExam.name;
+    return {
+      main: dbName,
+      highlight: "Registration",
+    };
+  }
 
   const cleanSlug = (slug || "").toLowerCase();
 
@@ -69,6 +100,10 @@ export function useRegistrationTitle(slug: string) {
       main: isAr ? "التسجيل في اختبار سيلت" : "SELT A1 (Speaking & Listening)",
       highlight: isAr ? "A1 (التحدث والاستماع)" : "Registration",
     },
+    "ukvi-speaking-and-listening-level-a1": {
+      main: isAr ? "التسجيل في اختبار سيلت" : "SELT A1 (Speaking & Listening)",
+      highlight: isAr ? "A1 (التحدث والاستماع)" : "Registration",
+    },
     "selt-a2": {
       main: isAr ? "التسجيل في اختبار سيلت" : "SELT A2",
       highlight: isAr ? "A2" : "Registration",
@@ -77,11 +112,19 @@ export function useRegistrationTitle(slug: string) {
       main: isAr ? "التسجيل في اختبار سيلت" : "SELT A2 (Speaking & Listening)",
       highlight: isAr ? "A2 (التحدث والاستماع)" : "Registration",
     },
+    "ukvi-speaking-and-listening-level-a2": {
+      main: isAr ? "التسجيل في اختبار سيلت" : "SELT A2 (Speaking & Listening)",
+      highlight: isAr ? "A2 (التحدث والاستماع)" : "Registration",
+    },
     "selt-b1": {
       main: isAr ? "التسجيل في اختبار سيلت" : "SELT B1",
       highlight: isAr ? "B1" : "Registration",
     },
     "ukvi-speaking-and-listening-at-level-b1": {
+      main: isAr ? "التسجيل في اختبار سيلت" : "SELT B1 (Speaking & Listening)",
+      highlight: isAr ? "B1 (التحدث والاستماع)" : "Registration",
+    },
+    "ukvi-speaking-and-listening-level-b1": {
       main: isAr ? "التسجيل في اختبار سيلت" : "SELT B1 (Speaking & Listening)",
       highlight: isAr ? "B1 (التحدث والاستماع)" : "Registration",
     },
@@ -101,6 +144,10 @@ export function useRegistrationTitle(slug: string) {
       main: isAr ? "التسجيل في اختبار سيلت بي 1" : "SELT B1 (Speaking, Listening, Reading & Writing)",
       highlight: isAr ? "(التحدث والاستماع والقراءة والكتابة)" : "Registration",
     },
+    "ukvi-speaking-listening-reading-and-writing-b1": {
+      main: isAr ? "التسجيل في اختبار سيلت بي 1" : "SELT B1 (Speaking, Listening, Reading & Writing)",
+      highlight: isAr ? "(التحدث والاستماع والقراءة والكتابة)" : "Registration",
+    },
     "selt-b2": {
       main: isAr ? "التسجيل في اختبار سيلت" : "SELT B2",
       highlight: isAr ? "B2" : "Registration",
@@ -110,6 +157,10 @@ export function useRegistrationTitle(slug: string) {
       highlight: isAr ? "B2" : "Registration",
     },
     "ukvi-speaking-and-listening-at-level-b2": {
+      main: isAr ? "التسجيل في اختبار سيلت" : "SELT B2",
+      highlight: isAr ? "B2" : "Registration",
+    },
+    "ukvi-speaking-listening-reading-and-writing-b2": {
       main: isAr ? "التسجيل في اختبار سيلت" : "SELT B2",
       highlight: isAr ? "B2" : "Registration",
     },
@@ -125,6 +176,10 @@ export function useRegistrationTitle(slug: string) {
       main: isAr ? "التسجيل في اختبار سيلت" : "SELT C1",
       highlight: isAr ? "C1" : "Registration",
     },
+    "ukvi-speaking-listening-reading-and-writing-c1": {
+      main: isAr ? "التسجيل في اختبار سيلت" : "SELT C1",
+      highlight: isAr ? "C1" : "Registration",
+    },
     "selt-c2": {
       main: isAr ? "التسجيل في اختبار سيلت" : "SELT C2",
       highlight: isAr ? "C2" : "Registration",
@@ -134,6 +189,10 @@ export function useRegistrationTitle(slug: string) {
       highlight: isAr ? "C2" : "Registration",
     },
     "ukvi-speaking-and-listening-at-level-c2": {
+      main: isAr ? "التسجيل في اختبار سيلت" : "SELT C2",
+      highlight: isAr ? "C2" : "Registration",
+    },
+    "ukvi-speaking-listening-reading-and-writing-c2": {
       main: isAr ? "التسجيل في اختبار سيلت" : "SELT C2",
       highlight: isAr ? "C2" : "Registration",
     }

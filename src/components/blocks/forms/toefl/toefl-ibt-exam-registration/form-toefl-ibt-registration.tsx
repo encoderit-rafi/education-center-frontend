@@ -41,7 +41,6 @@ export default function FormTOEFLIBTRegistration({
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [currentStep]);
-  const titleObj = useRegistrationTitle("toefl-ibt");
   const tReview = useTranslations("FormsShared.GlobalReviewStep");
   const locale = useLocale();
 
@@ -57,6 +56,8 @@ export default function FormTOEFLIBTRegistration({
   const activeExam = initialExamId
     ? examsList.find((e: any) => e.id === initialExamId)
     : examsList.find((e: any) => e.slug === "toefl-ibt");
+
+  const titleObj = useRegistrationTitle("toefl-ibt", activeExam);
 
   const examId = initialExamId || activeExam?.id;
 

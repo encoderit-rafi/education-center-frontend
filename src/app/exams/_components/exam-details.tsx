@@ -53,14 +53,36 @@ const IconTile = ({ icon, size = 20 }: { icon: string; size?: number }) => {
   }
 };
 
+const SLUG_TO_STATIC_ID: Record<string, string> = {
+  "ukvi-speaking-and-listening-level-a1": "selt-a1",
+  "ukvi-speaking-and-listening-at-level-a1": "selt-a1",
+  "ukvi-speaking-and-listening-level-a2": "selt-a2",
+  "ukvi-speaking-and-listening-at-level-a2": "selt-a2",
+  "ukvi-speaking-and-listening-level-b1": "selt-b1",
+  "ukvi-speaking-and-listening-at-level-b1": "selt-b1",
+  "ukvi-speaking-listening-reading-and-writing-b1": "selt-b1-r-w",
+  "ukvi-speaking-listening-reading-and-writing-at-level-b1": "selt-b1-r-w",
+  "ukvi-speaking-listening-reading-and-writing-b2": "selt-b2",
+  "ukvi-speaking-listening-reading-and-writing-at-level-b2": "selt-b2",
+  "ukvi-speaking-and-listening-at-level-b2": "selt-b2",
+  "ukvi-speaking-listening-reading-and-writing-c1": "selt-c1",
+  "ukvi-speaking-listening-reading-and-writing-at-level-c1": "selt-c1",
+  "ukvi-speaking-and-listening-at-level-c1": "selt-c1",
+  "ukvi-speaking-listening-reading-and-writing-c2": "selt-c2",
+  "ukvi-speaking-listening-reading-and-writing-at-level-c2": "selt-c2",
+  "ukvi-speaking-and-listening-at-level-c2": "selt-c2",
+};
+
 export default function ExamDetails({ data }: { data: any }) {
   const locale = useLocale();
   const isRtl = locale === "ar";
   const t = useTranslations("ExamDetailsPage");
 
   // Find matching static metadata to enrich the dynamic backend data
+  const targetId = SLUG_TO_STATIC_ID[data.slug] || data.slug || data.id;
   const staticMeta = EXAM_DETAILE_DATA.find(
     (item: any) =>
+      item.id === targetId ||
       item.id === data.id ||
       item.id === data.slug ||
       item.slug === data.slug ||
@@ -150,7 +172,7 @@ export default function ExamDetails({ data }: { data: any }) {
     data.name ||
     staticMeta?.name ||
     "";
-  
+
   const image = data.image || staticMeta?.image || "/images/exams/ielts/ielts-1.jpg";
 
   const registerUrl = data.examFormRedirectUrl || `/book-exams/${data.slug}`;
@@ -162,7 +184,7 @@ export default function ExamDetails({ data }: { data: any }) {
         <div className="section-container base-px w-full">
           <div className="max-w-4xl space-y-3">
             <h1 className="text-3xl md:text-5xl font-black tracking-tight text-secondary leading-tight">
-              {data.name} <span className="text-primary italic">{isRtl ? "اختبار" : "Test"}</span>
+              {name} {isRtl && data.originalName && data.originalName !== name ? `(${data.originalName})` : ""} <span className="text-primary italic">{isRtl ? "اختبار" : "Test"}</span>
             </h1>
             {subtitle && (
               <p className="text-sm md:text-base font-medium text-secondary leading-relaxed">

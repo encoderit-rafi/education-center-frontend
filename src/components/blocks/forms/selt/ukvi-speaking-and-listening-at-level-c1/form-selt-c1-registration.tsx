@@ -55,7 +55,8 @@ export default function FormSELTC1Registration({
     ? examsList.find((e: any) => e.id === initialExamId)
     : examsList.find(
       (e: any) =>
-        e.slug === "ukvi-speaking-listening-reading-and-writing-at-level-c1",
+        e.slug === "ukvi-speaking-listening-reading-and-writing-at-level-c1" ||
+        e.slug === "ukvi-speaking-listening-reading-and-writing-c1",
     );
 
   const examId = initialExamId || activeExam?.id;
@@ -120,7 +121,7 @@ export default function FormSELTC1Registration({
     Object.values(EXAM_IDS_DATA).find((e) => e.id === initialId)?.name ||
     "SELT C1";
 
-  const titleObj = useRegistrationTitle(activeExam?.slug || "ukvi-speaking-listening-reading-and-writing-at-level-c1");
+  const titleObj = useRegistrationTitle(activeExam?.slug || "ukvi-speaking-listening-reading-and-writing-at-level-c1", activeExam);
 
   const form = useForm<TSeltA1Schema>({
     resolver: zodResolver(SeltA1Schema) as any,

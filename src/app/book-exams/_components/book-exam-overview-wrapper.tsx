@@ -155,6 +155,7 @@ function OverviewBody({ text }: { text: string }) {
 interface BookExamOverviewWrapperProps {
   exam: {
     name: string;
+    englishName?: string;
     slug?: string;
     description?: string;
     subtitle?: string;
@@ -222,7 +223,7 @@ export default function BookExamOverviewWrapper({
         <div className="section-container base-px w-full">
           <div className="max-w-4xl space-y-2">
             <h1 className="text-3xl md:text-5xl font-black tracking-tight text-secondary leading-tight">
-              {exam.name} <span className="text-primary italic">{isRtl ? "اختبار" : "Test"}</span>
+              {exam.name} {isRtl && exam.englishName && exam.englishName !== exam.name ? `(${exam.englishName})` : ""} <span className="text-primary italic">{isRtl ? "اختبار" : "Test"}</span>
             </h1>
             {subtitle && (
               <p className="text-sm md:text-base font-medium text-secondary text-start">

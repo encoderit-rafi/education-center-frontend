@@ -119,6 +119,7 @@ export default async function ExamPreparationDynamicPage({
   }
 
   // Apply locale-aware description and title: use translations[locale] when available
+  const originalName = course.name;
   const translatedName = (course as any)?.translations?.[locale]?.title;
   if (translatedName) {
     course = { ...course, name: translatedName };
@@ -129,6 +130,8 @@ export default async function ExamPreparationDynamicPage({
   if (translatedDescription) {
     course = { ...course, description: translatedDescription };
   }
+
+  course = { ...course, originalName } as any;
 
   // Apply locale-aware description/name for each workshop
   workshops = workshops.map((w) => {
@@ -204,7 +207,7 @@ export default async function ExamPreparationDynamicPage({
     };
   });
 
-  const data = course; // For easier mapping
+  const data = course!; // For easier mapping
 
   const mappedExamId = slugToExamId[slug.toLowerCase()] || slug;
   const filteredWorkshops = workshops.filter((w) => {
@@ -240,7 +243,7 @@ export default async function ExamPreparationDynamicPage({
           >
             <div className="max-w-4xl mx-auto text-center lg:text-start">
               <h1 className="text-4xl font-black leading-[1.1] tracking-tight text-slate-900 lg:text-6xl mb-6">
-                {data.name}
+                {data.name} {isRtl && (data as any).originalName && (data as any).originalName !== data.name ? `(${(data as any).originalName})` : ""}
               </h1>
               <p className="text-base text-slate-600 leading-relaxed mb-8 font-medium text-justify">
                 {data.description}

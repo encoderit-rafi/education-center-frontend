@@ -39,8 +39,6 @@ export default function FormIeltsAcademicRegistration({
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [currentStep]);
 
-  const titleObj = useRegistrationTitle("ielts-academic");
-
   const { data: examsResponse } = useQuery({
     queryKey: ["exams-list"],
     queryFn: async () => {
@@ -53,6 +51,8 @@ export default function FormIeltsAcademicRegistration({
   const activeExam = initialExamId
     ? examsList.find((e: any) => e.id === initialExamId)
     : examsList.find((e: any) => e.slug === "ielts-academic");
+
+  const titleObj = useRegistrationTitle("ielts-academic", activeExam);
 
   const examId = initialExamId || activeExam?.id;
 

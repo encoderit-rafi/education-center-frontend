@@ -39,7 +39,6 @@ export default function FormPTEHomeA2Registration({
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [currentStep]);
-  const titleObj = useRegistrationTitle("pte-home-a2");
 
   const { data: examsResponse } = useQuery({
     queryKey: ["exams-list"],
@@ -53,6 +52,8 @@ export default function FormPTEHomeA2Registration({
   const activeExam = initialExamId
     ? examsList.find((e: any) => e.id === initialExamId)
     : examsList.find((e: any) => e.slug === "pte-home-a2");
+
+  const titleObj = useRegistrationTitle("pte-home-a2", activeExam);
 
   const examId = initialExamId || activeExam?.id;
 

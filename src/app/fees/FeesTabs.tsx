@@ -119,13 +119,13 @@ export default function FeesTabs({ initialBrand, exams }: FeesTabsProps) {
       badgeBg: "bg-rose-50 text-primary border-rose-100",
       isMultiRow: true,
       items: [
-        { key: "seltA1", slug: "ukvi-speaking-and-listening-at-level-a1", price: "US$175", estimatedAed: 660 },
-        { key: "seltA2", slug: "ukvi-speaking-and-listening-at-level-a2", price: "US$175", estimatedAed: 660 },
-        { key: "seltB1", slug: "ukvi-speaking-and-listening-at-level-b1", price: "US$175", estimatedAed: 660 },
-        { key: "seltB1RW", slug: "ukvi-speaking-listening-reading-and-writing-at-level-b1", price: "US$235", estimatedAed: 880 },
-        { key: "seltB2", slug: "ukvi-speaking-listening-reading-and-writing-at-level-b2", price: "US$235", estimatedAed: 880 },
-        { key: "seltC1", slug: "ukvi-speaking-listening-reading-and-writing-at-level-c1", price: "US$235", estimatedAed: 880 },
-        { key: "seltC2", slug: "ukvi-speaking-listening-reading-and-writing-at-level-c2", price: "US$235", estimatedAed: 880 }
+        { key: "seltA1", slug: "ukvi-speaking-and-listening-level-a1", price: "US$175", estimatedAed: 660 },
+        { key: "seltA2", slug: "ukvi-speaking-and-listening-level-a2", price: "US$175", estimatedAed: 660 },
+        { key: "seltB1", slug: "ukvi-speaking-and-listening-level-b1", price: "US$175", estimatedAed: 660 },
+        { key: "seltB1RW", slug: "ukvi-speaking-listening-reading-and-writing-b1", price: "US$235", estimatedAed: 880 },
+        { key: "seltB2", slug: "ukvi-speaking-listening-reading-and-writing-b2", price: "US$235", estimatedAed: 880 },
+        { key: "seltC1", slug: "ukvi-speaking-listening-reading-and-writing-c1", price: "US$235", estimatedAed: 880 },
+        { key: "seltC2", slug: "ukvi-speaking-listening-reading-and-writing-c2", price: "US$235", estimatedAed: 880 }
       ]
     }
   ];

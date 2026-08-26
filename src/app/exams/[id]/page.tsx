@@ -5,12 +5,60 @@ import api from "@/axios";
 import { getLocale } from "next-intl/server";
 import { EXAM_DETAILE_DATA } from "@/data";
 
+const SLUG_TO_STATIC_ID: Record<string, string> = {
+  "ukvi-speaking-and-listening-level-a1": "selt-a1",
+  "ukvi-speaking-and-listening-at-level-a1": "selt-a1",
+  "ukvi-speaking-and-listening-level-a2": "selt-a2",
+  "ukvi-speaking-and-listening-at-level-a2": "selt-a2",
+  "ukvi-speaking-and-listening-level-b1": "selt-b1",
+  "ukvi-speaking-and-listening-at-level-b1": "selt-b1",
+  "ukvi-speaking-listening-reading-and-writing-b1": "selt-b1-r-w",
+  "ukvi-speaking-listening-reading-and-writing-at-level-b1": "selt-b1-r-w",
+  "ukvi-speaking-listening-reading-and-writing-b2": "selt-b2",
+  "ukvi-speaking-listening-reading-and-writing-at-level-b2": "selt-b2",
+  "ukvi-speaking-and-listening-at-level-b2": "selt-b2",
+  "ukvi-speaking-listening-reading-and-writing-c1": "selt-c1",
+  "ukvi-speaking-listening-reading-and-writing-at-level-c1": "selt-c1",
+  "ukvi-speaking-and-listening-at-level-c1": "selt-c1",
+  "ukvi-speaking-listening-reading-and-writing-c2": "selt-c2",
+  "ukvi-speaking-listening-reading-and-writing-at-level-c2": "selt-c2",
+  "ukvi-speaking-and-listening-at-level-c2": "selt-c2",
+};
+
 export default async function ExamDetailPage({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const { id: slug } = await params;
+  const { id: rawSlug } = await params;
+  let slug = rawSlug;
+
+  // Map old/alternative/legacy slugs to new slugs to prevent 404 for existing links
+  const SLUG_MAP: Record<string, string> = {
+    "ukvi-speaking-and-listening-at-level-a1": "ukvi-speaking-and-listening-level-a1",
+    "ukvi-speaking-and-listening-at-level-a2": "ukvi-speaking-and-listening-level-a2",
+    "ukvi-speaking-and-listening-at-level-b1": "ukvi-speaking-and-listening-level-b1",
+    "ukvi-speaking-listening-reading-and-writing-at-level-b1": "ukvi-speaking-listening-reading-and-writing-b1",
+    "ukvi-speaking-listening-reading-and-writing-at-level-b1-1": "ukvi-speaking-listening-reading-and-writing-b1",
+    "ukvi-speaking-listening-reading-and-writing-at-level-b2": "ukvi-speaking-listening-reading-and-writing-b2",
+    "ukvi-speaking-and-listening-at-level-b2": "ukvi-speaking-listening-reading-and-writing-b2",
+    "ukvi-speaking-listening-reading-and-writing-at-level-c1": "ukvi-speaking-listening-reading-and-writing-c1",
+    "ukvi-speaking-and-listening-at-level-c1": "ukvi-speaking-listening-reading-and-writing-c1",
+    "ukvi-speaking-listening-reading-and-writing-at-level-c2": "ukvi-speaking-listening-reading-and-writing-c2",
+    "ukvi-speaking-and-listening-at-level-c2": "ukvi-speaking-listening-reading-and-writing-c2",
+    "selt-a1": "ukvi-speaking-and-listening-level-a1",
+    "selt-a2": "ukvi-speaking-and-listening-level-a2",
+    "selt-b1": "ukvi-speaking-and-listening-level-b1",
+    "selt-b1-r-w": "ukvi-speaking-listening-reading-and-writing-b1",
+    "selt-b2": "ukvi-speaking-listening-reading-and-writing-b2",
+    "selt-c1": "ukvi-speaking-listening-reading-and-writing-c1",
+    "selt-c2": "ukvi-speaking-listening-reading-and-writing-c2",
+  };
+
+  if (SLUG_MAP[slug]) {
+    slug = SLUG_MAP[slug];
+  }
+
   const locale = await getLocale();
 
 
@@ -66,8 +114,9 @@ export default async function ExamDetailPage({
 
   // Fallback to static exam details if API request fails (e.g., during rate limiting/429)
   if (!exam) {
+    const targetId = SLUG_TO_STATIC_ID[slug] || slug;
     const staticExam = EXAM_DETAILE_DATA.find(
-      (e: any) => e.id === slug || e.slug === slug
+      (e: any) => e.id === targetId || e.id === slug || e.slug === slug
     );
     if (staticExam) {
       exam = staticExam;
@@ -84,13 +133,20 @@ export default async function ExamDetailPage({
   }
 
   // Apply locale-aware description & name: use translations[locale] when available
+  const originalName = exam?.name;
   const translatedName = exam?.translations?.[locale]?.name;
   const translatedDescription = exam?.translations?.[locale]?.description;
   if (translatedName || translatedDescription) {
     exam = {
       ...exam,
+      originalName,
       ...(translatedName ? { name: translatedName } : {}),
       ...(translatedDescription ? { description: translatedDescription } : {}),
+    };
+  } else {
+    exam = {
+      ...exam,
+      originalName,
     };
   }
 

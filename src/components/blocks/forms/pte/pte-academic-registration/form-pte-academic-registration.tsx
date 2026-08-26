@@ -36,7 +36,6 @@ export default function FormPTEAcademicRegistration({
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [currentStep]);
-  const titleObj = useRegistrationTitle("pte-academic");
 
   const { data: examsResponse } = useQuery({
     queryKey: ["exams-list"],
@@ -50,6 +49,8 @@ export default function FormPTEAcademicRegistration({
   const activeExam = initialExamId
     ? examsList.find((e: any) => e.id === initialExamId)
     : examsList.find((e: any) => e.slug === "pte-academic");
+
+  const titleObj = useRegistrationTitle("pte-academic", activeExam);
 
   const examId = initialExamId || activeExam?.id;
 

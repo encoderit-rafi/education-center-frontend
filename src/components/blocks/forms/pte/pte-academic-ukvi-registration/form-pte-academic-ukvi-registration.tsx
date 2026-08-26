@@ -42,8 +42,6 @@ export default function FormPTEAcademicUKVIRegistration({
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [currentStep]);
 
-  const titleObj = useRegistrationTitle("pte-academic-ukvi");
-
   const { data: examsResponse } = useQuery({
     queryKey: ["exams-list"],
     queryFn: async () => {
@@ -56,6 +54,8 @@ export default function FormPTEAcademicUKVIRegistration({
   const activeExam = initialExamId
     ? examsList.find((e: any) => e.id === initialExamId)
     : examsList.find((e: any) => e.slug === "pte-academic-ukvi");
+
+  const titleObj = useRegistrationTitle("pte-academic-ukvi", activeExam);
 
   const examId = initialExamId || activeExam?.id;
 

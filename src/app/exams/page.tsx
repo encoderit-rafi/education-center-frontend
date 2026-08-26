@@ -64,7 +64,10 @@ export default function ExamsPage() {
   });
 
   const getExamName = (exam: Exam) => {
-    const rawName = exam.translations?.[locale]?.name || exam.name;
+    const dbTrans = exam.translations?.[locale]?.name;
+    if (dbTrans) {
+      return dbTrans;
+    }
     if (isRtl) {
       const slugKey = exam.slug?.toLowerCase();
       if (slugKey && EXAM_ARABIC_NAMES[slugKey]) {
@@ -78,7 +81,7 @@ export default function ExamsPage() {
       if (upper.includes("CELPIP")) return "اختبار السيلبب العام (CELPIP-G)";
       if (upper.includes("SKILL")) return "سكيلز فور إنجلش (سيلت)";
     }
-    return rawName;
+    return exam.name;
   };
 
   const exams =
