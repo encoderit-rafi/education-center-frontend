@@ -3579,17 +3579,17 @@
     "caelDesc": "The CAEL (Canadian Academic English Language) Test is a computer-based test designed to measure the English proficiency of students planning to study at Canadian universities and colleges. Unlike general English tests, CAEL simulates the language use required in a first-year Canadian post-secondary environment, involving tasks like listening to a lecture or writing an essay based on academic readings. The CAEL test is administered at TEPTH Dubai not at our centre in Sharjah. To see the available test dates and book the test directly with the exam provider.",
     "caelNoticeTitle": "Important Notice:",
     "caelNoticeText": "The CAEL test is administered at TEPTH Dubai, not at our Sharjah centre.",
-    "celpipTitle": "CELPIP General Information",
-    "celpipDesc": "The CELPIP-General (Canadian English Language Proficiency Index Program) is a completely computer-delivered English test used primarily for permanent residence applications in Canada and Australia. It assesses your ability to use English in everyday, real-world situations through four key modules: Listening, Reading, Writing, and Speaking. The CELPIP General test is administered at TEPTH Dubai not at our centre in Sharjah. To see the available test dates and book the test directly with the exam provider.",
+    "celpipTitle": "CELPIP-G Information",
+    "celpipDesc": "The CELPIP-G (Canadian English Language Proficiency Index Program) is a completely computer-delivered English test used primarily for permanent residence applications in Canada and Australia. It assesses your ability to use English in everyday, real-world situations through four key modules: Listening, Reading, Writing, and Speaking. The CELPIP-G test is administered at TEPTH Dubai not at our centre in Sharjah. To see the available test dates and book the test directly with the exam provider.",
     "celpipNoticeTitle": "Important Notice:",
-    "celpipNoticeText": "The CELPIP General test is administered at TEPTH Dubai, not at our Sharjah centre.",
+    "celpipNoticeText": "The CELPIP-G test is administered at TEPTH Dubai, not at our Sharjah centre.",
     "questionsContact": "Questions? Call +97165531250 or email info@tepth.org",
     "descriptions": {
       "ielts": "Check upcoming IELTS test dates for Academic and General Training modules in Sharjah and across the UAE.",
       "pte": "View real-time availability for PTE Academic and PTE UKVI tests. Fast results and frequent testing windows.",
       "toefl": "Find available TOEFL iBT test sessions. Select your preferred date and secure your seat for the internet-based test.",
       "cael": "Find CAEL test dates for study and professional registration in Canada. Choose from our available sessions.",
-      "celpip-general": "Upcoming CELPIP General test dates for Canadian immigration and citizenship applications.",
+      "celpip-general": "Upcoming CELPIP-G test dates for Canadian immigration and citizenship applications.",
       "skill-for-english-selt": "Secure English Language Test (SELT) dates for UK visa applications. View upcoming speaking, listening, reading, and writing slots.",
       "oet": "Check available OET test dates for healthcare professionals. Secure your seat for Medicine, Nursing, and other healthcare disciplines."
     }

@@ -45,7 +45,7 @@ export const EXAMS = [
   },
   {
     id: "celpip-general",
-    title: "CELPIP General",
+    title: "CELPIP-G",
     shortTitle: "CELPIP",
     fullName: "Canadian English Language Proficiency Index Program",
     description:

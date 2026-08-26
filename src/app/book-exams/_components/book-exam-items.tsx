@@ -20,6 +20,8 @@ export default function BookExamItems({ data }: { data: any }) {
     data.name;
   const description =
     data.translations?.[locale]?.description || data.description;
+  const rawEng = data.name || "";
+  const displayEng = rawEng.toLowerCase() === "celpip general" || rawEng.toLowerCase() === "celpip-general" ? "CELPIP-G" : rawEng;
 
   return (
     <div className="min-h-screen bg-white">
@@ -27,7 +29,7 @@ export default function BookExamItems({ data }: { data: any }) {
         <div className="max-w-4xl space-y-6 base-py px-3 md:px-12">
           <h1 className="text-4xl md:text-7xl font-black text-secondary leading-[1.1] tracking-tight">
             {isRtl ? (
-              `${name} ${data.name && data.name !== name ? `(${data.name})` : ""}`
+              `${name} ${displayEng && displayEng !== name ? `(${displayEng})` : ""}`
             ) : (
               <>
                 {name} <span className="italic text-primary">Exams</span>

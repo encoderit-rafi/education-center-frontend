@@ -233,6 +233,19 @@ export default async function ExamPreparationDynamicPage({
     );
   });
 
+  const cleanDisplayExamName = (name: string) => {
+    if (!name) return "";
+    const trimmed = name.trim();
+    if (trimmed.toLowerCase() === "celpip general" || trimmed.toLowerCase() === "celpip-general") {
+      return "CELPIP-G";
+    }
+    return trimmed;
+  };
+
+  const courseName = cleanDisplayExamName(data.name);
+  const rawEng = (data as any).originalName || "";
+  const displayEng = cleanDisplayExamName(rawEng);
+
   return (
     <div className="min-h-screen bg-white">
       {/* ── Hero Section ── */}
@@ -243,7 +256,7 @@ export default async function ExamPreparationDynamicPage({
           >
             <div className="max-w-4xl mx-auto text-center lg:text-start">
               <h1 className="text-4xl font-black leading-[1.1] tracking-tight text-slate-900 lg:text-6xl mb-6">
-                {data.name} {isRtl && (data as any).originalName && (data as any).originalName !== data.name ? `(${(data as any).originalName})` : ""}
+                {courseName} {isRtl && displayEng && displayEng !== courseName ? `(${displayEng})` : ""}
               </h1>
               <p className="text-base text-slate-600 leading-relaxed mb-8 font-medium text-justify">
                 {data.description}

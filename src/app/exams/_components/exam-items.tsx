@@ -13,13 +13,26 @@ import { useLocale } from "next-intl";
 export default function ExamItems({ data }: { data: any }) {
   const locale = useLocale();
   const isRtl = locale === "ar";
-  const title =
+  const cleanDisplayExamName = (name: string) => {
+    if (!name) return "";
+    const trimmed = name.trim();
+    if (trimmed.toLowerCase() === "celpip general" || trimmed.toLowerCase() === "celpip-general") {
+      return "CELPIP-G";
+    }
+    return trimmed;
+  };
+
+  const title = cleanDisplayExamName(
     data.translations?.[locale]?.title ||
     data.translations?.[locale]?.name ||
     data.title ||
-    data.name;
+    data.name
+  );
   const description =
     data.translations?.[locale]?.description || data.description;
+
+  const rawEng = data.originalName || "";
+  const displayEng = cleanDisplayExamName(rawEng);
 
   return (
     <div className="min-h-screen bg-white">
@@ -27,7 +40,7 @@ export default function ExamItems({ data }: { data: any }) {
         <div className="max-w-4xl space-y-6 base-py px-3 md:px-12">
           <h1 className="text-4xl md:text-7xl font-black text-secondary leading-[1.1] tracking-tight">
             {isRtl ? (
-              `${title} ${data.originalName && data.originalName !== title ? `(${data.originalName})` : ""}`
+              `${title} ${displayEng && displayEng !== title ? `(${displayEng})` : ""}`
             ) : (
               <>
                 {title} <span className="italic text-primary">Exams</span>

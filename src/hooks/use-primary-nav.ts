@@ -15,7 +15,7 @@ const examPriority = (slug: string) => {
 };
 
 const formatExamName = (name: string) => {
-  if (name === "CELPIP") return "CELPIP General";
+  if (name === "CELPIP" || name === "CELPIP General" || name === "CELPIP-General") return "CELPIP-G";
   return name;
 };
 
@@ -152,7 +152,7 @@ export function usePrimaryNav() {
           { name: "PTE", href: "/fees?brand=pte" },
           { name: "TOEFL iBT", href: "/fees?brand=toefl" },
           { name: "CAEL", href: "/fees?brand=cael" },
-          { name: "CELPIP General", href: "/fees?brand=celpip" },
+          { name: "CELPIP-G", href: "/fees?brand=celpip" },
           { name: "Skills for English (SELT)", href: "/fees?brand=selt" }
         ]
       };

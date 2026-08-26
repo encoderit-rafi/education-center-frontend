@@ -165,18 +165,31 @@ export default function ExamDetails({ data }: { data: any }) {
     data?.overview ||
     description;
 
-  const name =
+  const cleanDisplayExamName = (name: string) => {
+    if (!name) return "";
+    const trimmed = name.trim();
+    if (trimmed.toLowerCase() === "celpip general" || trimmed.toLowerCase() === "celpip-general") {
+      return "CELPIP-G";
+    }
+    return trimmed;
+  };
+
+  const name = cleanDisplayExamName(
     (isRtl && localizedMeta.name) ||
     data.translations?.[locale]?.name ||
     data.translations?.[locale]?.title ||
     data.name ||
     staticMeta?.name ||
-    "";
+    ""
+  );
 
   const image = data.image || staticMeta?.image || "/images/exams/ielts/ielts-1.jpg";
 
   const registerUrl = data.examFormRedirectUrl || `/book-exams/${data.slug}`;
   const isExternalRegister = !!data.examFormRedirectUrl;
+
+  const rawEng = data.originalName || "";
+  const displayEng = cleanDisplayExamName(rawEng);
 
   return (
     <div className="min-h-screen bg-[#FDFDFD]">
@@ -184,7 +197,7 @@ export default function ExamDetails({ data }: { data: any }) {
         <div className="section-container base-px w-full">
           <div className="max-w-4xl space-y-3">
             <h1 className="text-3xl md:text-5xl font-black tracking-tight text-secondary leading-tight">
-              {name} {isRtl && data.originalName && data.originalName !== name ? `(${data.originalName})` : ""} <span className="text-primary italic">{isRtl ? "اختبار" : "Test"}</span>
+              {name} {isRtl && displayEng && displayEng !== name ? `(${displayEng})` : ""} <span className="text-primary italic">{isRtl ? "اختبار" : "Test"}</span>
             </h1>
             {subtitle && (
               <p className="text-sm md:text-base font-medium text-secondary leading-relaxed">
