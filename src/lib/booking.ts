@@ -662,8 +662,8 @@ export function compileBookingPayload(input: BookingPayloadInput) {
           else if (lowerVal === "other") mappedValue = "Other";
         } else if (key === "marketingPreference") {
           const marketingMap: Record<string, string> = {
-            all: "I am happy to receive updates about products, services and events organised by British Council.",
-            some: "I am happy to receive information from British Council and selected third parties.",
+            all: "I am happy to receive updates about products, services and events organised by TEPTH.",
+            some: "I am happy to receive information from TEPTH and selected third parties.",
             none: "Please do not send me any marketing updates.",
             third_party: "I am happy to receive information from selected third parties.",
           };

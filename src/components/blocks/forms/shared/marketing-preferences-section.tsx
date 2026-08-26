@@ -46,7 +46,7 @@ export function MarketingPreferencesSection({
   value,
   onChange,
   error,
-  options = BRITISH_COUNCIL_MARKETING_OPTIONS,
+  options = TEPTH_MARKETING_OPTIONS,
 }: MarketingPreferencesSectionProps) {
   const t = useTranslations("FormsShared.MarketingPreferences");
   return (
