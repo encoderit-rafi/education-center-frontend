@@ -256,7 +256,7 @@ export default async function ExamPreparationDynamicPage({
           >
             <div className="max-w-4xl mx-auto text-center lg:text-start">
               <h1 className="text-4xl font-black leading-[1.1] tracking-tight text-slate-900 lg:text-6xl mb-6">
-                {courseName} {isRtl && displayEng && displayEng !== courseName ? `(${displayEng})` : ""}
+                {courseName} {isRtl && displayEng && !courseName.toLowerCase().includes(displayEng.toLowerCase()) ? `(${displayEng})` : ""}
               </h1>
               <p className="text-base text-slate-600 leading-relaxed mb-8 font-medium text-justify">
                 {data.description}

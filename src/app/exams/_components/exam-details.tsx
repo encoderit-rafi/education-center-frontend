@@ -71,6 +71,7 @@ const SLUG_TO_STATIC_ID: Record<string, string> = {
   "ukvi-speaking-listening-reading-and-writing-c2": "selt-c2",
   "ukvi-speaking-listening-reading-and-writing-at-level-c2": "selt-c2",
   "ukvi-speaking-and-listening-at-level-c2": "selt-c2",
+  "skills-for-english-selt": "selt",
 };
 
 export default function ExamDetails({ data }: { data: any }) {
@@ -91,10 +92,11 @@ export default function ExamDetails({ data }: { data: any }) {
 
   // Look up localized metadata from translations
   const examId = staticMeta?.id || data.slug || data.id;
+  const translationKey = examId === "skill-for-english-selt" ? "selt" : examId;
   let localizedMeta: any = {};
-  if (examId) {
+  if (translationKey) {
     try {
-      localizedMeta = t.raw(examId) || {};
+      localizedMeta = t.raw(translationKey) || {};
     } catch (e) {
       // Graceful fallback to static English data if translation key doesn't exist
     }
@@ -175,6 +177,7 @@ export default function ExamDetails({ data }: { data: any }) {
   };
 
   const name = cleanDisplayExamName(
+    data.resolvedName ||
     (isRtl && localizedMeta.name) ||
     data.translations?.[locale]?.name ||
     data.translations?.[locale]?.title ||
@@ -197,7 +200,7 @@ export default function ExamDetails({ data }: { data: any }) {
         <div className="section-container base-px w-full">
           <div className="max-w-4xl space-y-3">
             <h1 className="text-3xl md:text-5xl font-black tracking-tight text-secondary leading-tight">
-              {name} {isRtl && displayEng && displayEng !== name ? `(${displayEng})` : ""} <span className="text-primary italic">{isRtl ? "اختبار" : "Test"}</span>
+              {name} {isRtl && displayEng && !name.toLowerCase().includes(displayEng.toLowerCase()) ? `(${displayEng})` : ""} <span className="text-primary italic">{isRtl ? "اختبار" : "Test"}</span>
             </h1>
             {subtitle && (
               <p className="text-sm md:text-base font-medium text-secondary leading-relaxed">

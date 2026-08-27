@@ -42,6 +42,7 @@ const SLUG_TO_STATIC_ID: Record<string, string> = {
   "ukvi-speaking-listening-reading-and-writing-c2": "selt-c2",
   "ukvi-speaking-listening-reading-and-writing-at-level-c2": "selt-c2",
   "ukvi-speaking-and-listening-at-level-c2": "selt-c2",
+  "skills-for-english-selt": "selt",
 };
 
 /** Build a lightweight exam-info object for the overview wrapper by merging
@@ -58,10 +59,14 @@ function buildExamInfo(exam: any, t: any, locale: string) {
   ) as any;
 
   const examId = staticMeta?.id || exam.slug || exam.id;
+  const translationKey = examId === "skill-for-english-selt" ? "selt" : examId;
   let localizedMeta: any = {};
-  if (examId) {
+  if (translationKey) {
     try {
-      localizedMeta = t.raw(examId) || {};
+      // Guard with has() to avoid MISSING_MESSAGE throw when key isn't in the namespace
+      if (t.has(translationKey)) {
+        localizedMeta = t.raw(translationKey) || {};
+      }
     } catch (e) {
       // Graceful fallback
     }
@@ -256,17 +261,19 @@ export default async function BookExamsId({
   );
   const isGroup = hasGroupType && childExams.length > 0;
 
+  // Build the exam info object for the overview wrapper using translations and fallback
+  const examInfoBase = buildExamInfo(exam, t, locale);
+  const examInfo = { ...examInfoBase, resolvedName: examInfoBase.name };
+
   if (isGroup) {
     const examWithItems = {
       ...exam,
       type: "items",
       items: childExams,
+      resolvedName: examInfo.name,
     };
     return <BookExamItems data={examWithItems} />;
   }
-
-  // Build the exam info object for the overview wrapper using translations and fallback
-  const examInfo = buildExamInfo(exam, t, locale);
 
   // Otherwise, it is a specific exam. Render the appropriate form based on slug or database UUID
   switch (exam.slug || exam.id) {

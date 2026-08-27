@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import ExamItems from "../_components/exam-items";
 import ExamDetails from "../_components/exam-details";
 import api from "@/axios";
-import { getLocale } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { EXAM_DETAILE_DATA } from "@/data";
 
 const SLUG_TO_STATIC_ID: Record<string, string> = {
@@ -23,6 +23,7 @@ const SLUG_TO_STATIC_ID: Record<string, string> = {
   "ukvi-speaking-listening-reading-and-writing-c2": "selt-c2",
   "ukvi-speaking-listening-reading-and-writing-at-level-c2": "selt-c2",
   "ukvi-speaking-and-listening-at-level-c2": "selt-c2",
+  "skills-for-english-selt": "selt",
 };
 
 export default async function ExamDetailPage({
@@ -60,6 +61,7 @@ export default async function ExamDetailPage({
   }
 
   const locale = await getLocale();
+  const t = await getTranslations("ExamDetailsPage");
 
 
   let exam: any = null;
@@ -161,6 +163,27 @@ export default async function ExamDetailPage({
     };
   });
 
+  // Resolve translation metadata key and name override
+  const targetIdForLookup = SLUG_TO_STATIC_ID[exam?.slug || slug] || exam?.slug || slug;
+  const staticMetaForLookup = EXAM_DETAILE_DATA.find(
+    (e: any) => e.id === targetIdForLookup || e.id === exam?.slug || e.slug === exam?.slug
+  );
+  const examIdForLookup = staticMetaForLookup?.id || exam?.slug || exam?.id || slug;
+  const translationKey = examIdForLookup === "skill-for-english-selt" ? "selt" : examIdForLookup;
+  let localizedMeta: any = {};
+  if (translationKey) {
+    try {
+      localizedMeta = t.raw(translationKey) || {};
+    } catch (e) {}
+  }
+  const resolvedName =
+    (locale === "ar" && localizedMeta.name) ||
+    exam?.translations?.[locale]?.name ||
+    exam?.translations?.[locale]?.title ||
+    exam?.name ||
+    staticMetaForLookup?.name ||
+    "";
+
   // 3. Determine if it is a parent group (has child items or is labeled group/item) or a detail page
   const hasGroupType = exam.examType?.some(
     (et: any) => et.name === "group" || et.name === "item"
@@ -172,12 +195,14 @@ export default async function ExamDetailPage({
       ...exam,
       type: "items",
       items: childExams,
+      resolvedName,
     };
     return <ExamItems data={examWithItems} />;
   } else {
     const examWithDetails = {
       ...exam,
       type: "details",
+      resolvedName,
     };
     return <ExamDetails data={examWithDetails} />;
   }

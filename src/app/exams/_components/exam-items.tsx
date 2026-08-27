@@ -23,6 +23,7 @@ export default function ExamItems({ data }: { data: any }) {
   };
 
   const title = cleanDisplayExamName(
+    data.resolvedName ||
     data.translations?.[locale]?.title ||
     data.translations?.[locale]?.name ||
     data.title ||
@@ -40,7 +41,7 @@ export default function ExamItems({ data }: { data: any }) {
         <div className="max-w-4xl space-y-6 base-py px-3 md:px-12">
           <h1 className="text-4xl md:text-7xl font-black text-secondary leading-[1.1] tracking-tight">
             {isRtl ? (
-              `${title} ${displayEng && displayEng !== title ? `(${displayEng})` : ""}`
+              `${title} ${!data.resolvedName && displayEng && !title.toLowerCase().replace(/[^a-z0-9]/g, "").includes(displayEng.toLowerCase().replace(/[^a-z0-9]/g, "")) ? `(${displayEng})` : ""}`
             ) : (
               <>
                 {title} <span className="italic text-primary">Exams</span>
