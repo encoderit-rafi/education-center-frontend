@@ -43,6 +43,7 @@ const SLUG_TO_STATIC_ID: Record<string, string> = {
   "ukvi-speaking-listening-reading-and-writing-at-level-c2": "selt-c2",
   "ukvi-speaking-and-listening-at-level-c2": "selt-c2",
   "skills-for-english-selt": "selt",
+  "ielts-for-ukvi-life-skills-a2-uk-only": "ielts-for-ukvi-life-skills-a2",
 };
 
 /** Build a lightweight exam-info object for the overview wrapper by merging

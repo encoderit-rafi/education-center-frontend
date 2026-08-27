@@ -24,6 +24,7 @@ const SLUG_TO_STATIC_ID: Record<string, string> = {
   "ukvi-speaking-listening-reading-and-writing-at-level-c2": "selt-c2",
   "ukvi-speaking-and-listening-at-level-c2": "selt-c2",
   "skills-for-english-selt": "selt",
+  "ielts-for-ukvi-life-skills-a2-uk-only": "ielts-for-ukvi-life-skills-a2",
 };
 
 export default async function ExamDetailPage({
@@ -171,10 +172,10 @@ export default async function ExamDetailPage({
   const examIdForLookup = staticMetaForLookup?.id || exam?.slug || exam?.id || slug;
   const translationKey = examIdForLookup === "skill-for-english-selt" ? "selt" : examIdForLookup;
   let localizedMeta: any = {};
-  if (translationKey) {
+  if (translationKey && t.has(translationKey)) {
     try {
       localizedMeta = t.raw(translationKey) || {};
-    } catch (e) {}
+    } catch (e) { }
   }
   const resolvedName =
     (locale === "ar" && localizedMeta.name) ||

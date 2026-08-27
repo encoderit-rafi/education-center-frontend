@@ -72,6 +72,7 @@ const SLUG_TO_STATIC_ID: Record<string, string> = {
   "ukvi-speaking-listening-reading-and-writing-at-level-c2": "selt-c2",
   "ukvi-speaking-and-listening-at-level-c2": "selt-c2",
   "skills-for-english-selt": "selt",
+  "ielts-for-ukvi-life-skills-a2-uk-only": "ielts-for-ukvi-life-skills-a2",
 };
 
 export default function ExamDetails({ data }: { data: any }) {
@@ -94,12 +95,12 @@ export default function ExamDetails({ data }: { data: any }) {
   const examId = staticMeta?.id || data.slug || data.id;
   const translationKey = examId === "skill-for-english-selt" ? "selt" : examId;
   let localizedMeta: any = {};
-  if (translationKey) {
-    try {
-      localizedMeta = t.raw(translationKey) || {};
-    } catch (e) {
-      // Graceful fallback to static English data if translation key doesn't exist
-    }
+  if (translationKey && t.has(translationKey)) {
+     try {
+       localizedMeta = t.raw(translationKey) || {};
+     } catch (e) {
+       // Graceful fallback to static English data if translation key doesn't exist
+     }
   }
 
   const stats =
