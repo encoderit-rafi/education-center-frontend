@@ -34,6 +34,9 @@ export default function ExamItems({ data }: { data: any }) {
 
   const rawEng = data.originalName || "";
   const displayEng = cleanDisplayExamName(rawEng);
+  const displayTitle = isRtl
+    ? `${title} ${displayEng && !title.toLowerCase().replace(/[^a-z0-9]/g, "").includes(displayEng.toLowerCase().replace(/[^a-z0-9]/g, "")) ? `(${displayEng})` : ""}`
+    : title;
 
   return (
     <div className="min-h-screen bg-white">
@@ -41,7 +44,7 @@ export default function ExamItems({ data }: { data: any }) {
         <div className="max-w-4xl space-y-6 base-py px-3 md:px-12">
           <h1 className="text-4xl md:text-7xl font-black text-secondary leading-[1.1] tracking-tight">
             {isRtl ? (
-              `${title} ${!data.resolvedName && displayEng && !title.toLowerCase().replace(/[^a-z0-9]/g, "").includes(displayEng.toLowerCase().replace(/[^a-z0-9]/g, "")) ? `(${displayEng})` : ""}`
+              displayTitle
             ) : (
               <>
                 {title} <span className="italic text-primary">Exams</span>
@@ -57,7 +60,7 @@ export default function ExamItems({ data }: { data: any }) {
           <h2 className="section-title">
             {isRtl ? (
               <>
-                اختر <span>{title}</span> الخاص بك
+                اختر <span>{displayTitle.replace(/^اختبار\s+/, "")}</span> الخاص بك
               </>
             ) : (
               <>
@@ -67,7 +70,7 @@ export default function ExamItems({ data }: { data: any }) {
           </h2>
           <p className="section-subtitle text-center mx-auto">
             {isRtl ? (
-              `تم تصميم كل نوع من ${title} لغرض محدد. اختر النوع الذي يتوافق مع تأشيرتك أو هدفك الأكاديمي أو المهني.`
+              `تم تصميم كل نوع من ${displayTitle} لغرض محدد. اختر النوع الذي يتوافق مع تأشيرتك أو هدفك الأكاديمي أو المهني.`
 ) : (
               `Each ${title} variant is designed for a specific purpose. Select the one that matches your visa, academic, or professional goal.`
             )}

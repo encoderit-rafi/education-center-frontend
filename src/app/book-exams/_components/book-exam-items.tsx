@@ -23,6 +23,9 @@ export default function BookExamItems({ data }: { data: any }) {
     data.translations?.[locale]?.description || data.description;
   const rawEng = data.name || "";
   const displayEng = rawEng.toLowerCase() === "celpip general" || rawEng.toLowerCase() === "celpip-general" ? "CELPIP-G" : rawEng;
+  const displayName = isRtl
+    ? `${name} ${displayEng && !name.toLowerCase().replace(/[^a-z0-9]/g, "").includes(displayEng.toLowerCase().replace(/[^a-z0-9]/g, "")) ? `(${displayEng})` : ""}`
+    : name;
 
   return (
     <div className="min-h-screen bg-white">
@@ -30,7 +33,7 @@ export default function BookExamItems({ data }: { data: any }) {
         <div className="max-w-6xl space-y-6 base-py px-3 md:px-12">
           <h1 className="text-4xl md:text-7xl font-black text-secondary leading-[1.1] tracking-tight">
             {isRtl ? (
-              `${name} ${!data.resolvedName && displayEng && !name.toLowerCase().replace(/[^a-z0-9]/g, "").includes(displayEng.toLowerCase().replace(/[^a-z0-9]/g, "")) ? `(${displayEng})` : ""}`
+              displayName
             ) : (
               <>
                 {name} <span className="italic text-primary">Exams</span>
@@ -46,7 +49,7 @@ export default function BookExamItems({ data }: { data: any }) {
           <h2 className="section-title">
             {isRtl ? (
               <>
-                اختر <span>{name.replace(/^اختبار\s+/, "")}</span> الخاص بك
+                اختر <span>{displayName.replace(/^اختبار\s+/, "")}</span> الخاص بك
               </>
             ) : (
               <>
@@ -56,7 +59,7 @@ export default function BookExamItems({ data }: { data: any }) {
           </h2>
           <p className="section-subtitle text-center mx-auto">
             {isRtl ? (
-              `تم تصميم كل نوع من ${name} لغرض محدد. اختر النوع الذي يتوافق مع تأشيرتك أو هدفك الأكاديمي أو المهني.`
+              `تم تصميم كل نوع من ${displayName} لغرض محدد. اختر النوع الذي يتوافق مع تأشيرتك أو هدفك الأكاديمي أو المهني.`
             ) : (
               `Each ${name} variant is designed for a specific purpose. Select the one that matches your visa, academic, or professional goal.`
             )}

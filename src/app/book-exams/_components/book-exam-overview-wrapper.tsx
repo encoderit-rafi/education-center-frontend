@@ -237,7 +237,7 @@ export default function BookExamOverviewWrapper({
         <div className="section-container base-px w-full">
           <div className="max-w-4xl space-y-2">
             <h1 className="text-3xl md:text-5xl font-black tracking-tight text-secondary leading-tight">
-              {examName} {isRtl && !exam.resolvedName && displayEng && !examName.toLowerCase().replace(/[^a-z0-9]/g, "").includes(displayEng.toLowerCase().replace(/[^a-z0-9]/g, "")) ? `(${displayEng})` : ""} <span className="text-primary italic">{isRtl ? "اختبار" : "Test"}</span>
+              {examName} {isRtl && displayEng && !examName.toLowerCase().replace(/[^a-z0-9]/g, "").includes(displayEng.toLowerCase().replace(/[^a-z0-9]/g, "")) ? `(${displayEng})` : ""} <span className="text-primary italic">{isRtl ? "اختبار" : "Test"}</span>
             </h1>
             {subtitle && (
               <p className="text-sm md:text-base font-medium text-secondary text-start">
