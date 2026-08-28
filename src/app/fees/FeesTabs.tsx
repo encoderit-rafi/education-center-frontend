@@ -218,19 +218,15 @@ export default function FeesTabs({ initialBrand, exams }: FeesTabsProps) {
                         <td className="px-6 py-4.5 text-center">
                           <Link
                             href={linkDetails.href}
-                            target={linkDetails.isExternal ? "_blank" : undefined}
-                            rel={linkDetails.isExternal ? "noopener noreferrer" : undefined}
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className={cn(
                               buttonVariants({ variant: "default", size: "sm" }),
                               "font-black text-xs h-9 px-4 rounded-full transition-all duration-300 inline-flex items-center gap-1.5 text-white hover:opacity-90 cursor-pointer shadow-xs"
                             )}
                           >
                             <span>{t("buttons.registerNow")}</span>
-                            {linkDetails.isExternal ? (
-                              <ExternalLink className="size-3" />
-                            ) : (
-                              <ArrowRight className="size-3 transition-transform group-hover/row:translate-x-1 rtl:group-hover/row:-translate-x-1" />
-                            )}
+                            <ArrowRight className="size-3 transition-transform group-hover/row:translate-x-1 rtl:group-hover/row:-translate-x-1" />
                           </Link>
                         </td>
                       </tr>
@@ -311,19 +307,15 @@ export default function FeesTabs({ initialBrand, exams }: FeesTabsProps) {
 
                   <Link
                     href={linkDetails.href}
-                    target={linkDetails.isExternal ? "_blank" : undefined}
-                    rel={linkDetails.isExternal ? "noopener noreferrer" : undefined}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className={cn(
                       buttonVariants(),
                       "w-full font-black h-11 shadow-sm flex items-center justify-center gap-2 group transition-all duration-300"
                     )}
                   >
                     <span>{t("buttons.registerNow")}</span>
-                    {linkDetails.isExternal ? (
-                      <ExternalLink className="size-4" />
-                    ) : (
-                      <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 rtl:group-hover:-translate-x-1" />
-                    )}
+                    <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 rtl:group-hover:-translate-x-1" />
                   </Link>
                 </div>
               </div>

@@ -189,6 +189,8 @@ export default async function BookExamsId({
     "selt-b2": "ukvi-speaking-listening-reading-and-writing-b2",
     "selt-c1": "ukvi-speaking-listening-reading-and-writing-c1",
     "selt-c2": "ukvi-speaking-listening-reading-and-writing-c2",
+    // Map old Life Skills slugs to actual DB slugs (admin renamed them)
+    "ielts-for-ukvi-life-skills-a2": "ielts-for-ukvi-life-skills-a2-uk-only",
   };
 
   if (SLUG_MAP[slug]) {
@@ -248,6 +250,12 @@ export default async function BookExamsId({
 
   if (!exam) {
     notFound();
+  }
+
+  // If the exam has an external redirect URL (e.g. British Council affiliate link), redirect there immediately
+  if (exam?.examFormRedirectUrl) {
+    const { redirect } = await import("next/navigation");
+    redirect(exam.examFormRedirectUrl);
   }
 
   // Apply locale-aware description
