@@ -170,7 +170,7 @@ export default async function ExamDetailPage({
     (e: any) => e.id === targetIdForLookup || e.id === exam?.slug || e.slug === exam?.slug
   );
   const examIdForLookup = staticMetaForLookup?.id || exam?.slug || exam?.id || slug;
-  const translationKey = examIdForLookup === "skill-for-english-selt" ? "selt" : examIdForLookup;
+  const translationKey = examIdForLookup === "skills-for-english-selt" ? "selt" : examIdForLookup;
   let localizedMeta: any = {};
   if (translationKey && t.has(translationKey)) {
     try {

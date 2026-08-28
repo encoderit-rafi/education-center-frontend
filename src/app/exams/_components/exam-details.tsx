@@ -93,14 +93,14 @@ export default function ExamDetails({ data }: { data: any }) {
 
   // Look up localized metadata from translations
   const examId = staticMeta?.id || data.slug || data.id;
-  const translationKey = examId === "skill-for-english-selt" ? "selt" : examId;
+  const translationKey = examId === "skills-for-english-selt" ? "selt" : examId;
   let localizedMeta: any = {};
   if (translationKey && t.has(translationKey)) {
-     try {
-       localizedMeta = t.raw(translationKey) || {};
-     } catch (e) {
-       // Graceful fallback to static English data if translation key doesn't exist
-     }
+    try {
+      localizedMeta = t.raw(translationKey) || {};
+    } catch (e) {
+      // Graceful fallback to static English data if translation key doesn't exist
+    }
   }
 
   const stats =
@@ -200,8 +200,10 @@ export default function ExamDetails({ data }: { data: any }) {
       <div className="bg-slate-50 base-px base-py">
         <div className="section-container base-px w-full">
           <div className="max-w-4xl space-y-3">
-            <h1 className="text-3xl md:text-5xl font-black tracking-tight text-secondary leading-tight">
-              {name} {isRtl && displayEng && !name.toLowerCase().includes(displayEng.toLowerCase()) ? `(${displayEng})` : ""} <span className="text-primary italic">{isRtl ? "اختبار" : "Test"}</span>
+            <h1 className="text-lg md:text-xl lg:text-2xl font-black tracking-tight text-secondary leading-tight">
+              {isRtl && !name.trim().startsWith("اختبار") && !name.trim().startsWith("امتحان") && <span className="text-primary italic">اختبار </span>}
+              {name} {isRtl && displayEng && !/[a-zA-Z]/.test(name) ? `(${displayEng})` : ""}
+              {!isRtl && <span className="text-primary italic"> Test</span>}
             </h1>
             {subtitle && (
               <p className="text-sm md:text-base font-medium text-secondary leading-relaxed">

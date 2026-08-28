@@ -60,7 +60,7 @@ function buildExamInfo(exam: any, t: any, locale: string) {
   ) as any;
 
   const examId = staticMeta?.id || exam.slug || exam.id;
-  const translationKey = examId === "skill-for-english-selt" ? "selt" : examId;
+  const translationKey = examId === "skills-for-english-selt" ? "selt" : examId;
   let localizedMeta: any = {};
   if (translationKey) {
     try {

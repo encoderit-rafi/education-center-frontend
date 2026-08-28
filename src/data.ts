@@ -93,7 +93,7 @@ export const EXAM_IDS_DATA = {
     name: "CAEL",
   },
   selt: {
-    id: "skill-for-english-selt",
+    id: "skills-for-english-selt",
     name: "Skills for English (SELT)",
   },
   selt_a1: {

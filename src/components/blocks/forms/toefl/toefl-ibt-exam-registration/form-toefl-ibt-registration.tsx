@@ -388,11 +388,11 @@ export default function FormTOEFLIBTRegistration({
             expressFee: pricing.expressFeeAED,
             selected_course_name: data.selectedCourse
               ? (coursesData.find((c: any) => c.id === data.selectedCourse)?.name ||
-                 coursesData.find((c: any) => c.id === data.selectedCourse)?.title)
+                coursesData.find((c: any) => c.id === data.selectedCourse)?.title)
               : undefined,
             selected_workshop_name: data.selectedWorkshop
               ? ((workshopsData as any)[data.selectedWorkshop]?.name ||
-                 (workshopsData as any)[data.selectedWorkshop]?.title)
+                (workshopsData as any)[data.selectedWorkshop]?.title)
               : undefined,
             idDocumentUrl,
           },
@@ -427,7 +427,7 @@ export default function FormTOEFLIBTRegistration({
   return (
     <div className="max-w-7xl mx-auto px-4 py-12">
       <div className="text-center mb-12">
-        <h1 className="text-4xl md:text-5xl font-black text-slate-900 mb-4 tracking-tight uppercase">
+        <h1 className="text-4xl md:text-5xl font-black text-slate-900 mb-4 tracking-tight">
           {titleObj.main} <span className="text-[#A11D1D]">{titleObj.highlight}</span>
         </h1>
       </div>
@@ -756,11 +756,11 @@ export default function FormTOEFLIBTRegistration({
                   },
                   ...(formData.yearsStudyingEnglish
                     ? [
-                        {
-                          label: "Years Studying English",
-                          value: formData.yearsStudyingEnglish,
-                        },
-                      ]
+                      {
+                        label: "Years Studying English",
+                        value: formData.yearsStudyingEnglish,
+                      },
+                    ]
                     : []),
                   {
                     label: "Next Level of Study",
@@ -791,11 +791,11 @@ export default function FormTOEFLIBTRegistration({
                   },
                   ...(formData.destinationCountry
                     ? [
-                        {
-                          label: "Destination Country",
-                          value: formData.destinationCountry,
-                        },
-                      ]
+                      {
+                        label: "Destination Country",
+                        value: formData.destinationCountry,
+                      },
+                    ]
                     : []),
                 ]}
               />

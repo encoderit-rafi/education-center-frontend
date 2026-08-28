@@ -20,7 +20,7 @@ const EXAM_ARABIC_NAMES: Record<string, string> = {
   cael: "كايل",
   "celpip-general": "سيلبيب عام",
   celpip: "سيلبيب",
-  "skill-for-english-selt": "سكيلز فور إنجلش (سيلت)",
+  "skills-for-english-selt": "سكيلز فور إنجلش (سيلت)",
   oet: "أو إي تي",
 };
 
@@ -43,7 +43,7 @@ function isExamDateDisabled(id: string, date: Date): boolean {
     return checkDate.getTime() - now.getTime() < 48 * 60 * 60 * 1000;
   }
 
-  if (id === "skill-for-english-selt") {
+  if (id === "skills-for-english-selt") {
     if (day < 1 || day > 3) return true;
     const checkDate = new Date(date);
     checkDate.setHours(17, 30, 0, 0);
@@ -107,7 +107,8 @@ export default function TestDatesDetailPage() {
     );
   }
 
-  const examDisplayName = isRtl ? (EXAM_ARABIC_NAMES[id] || examMetadata.name) : examMetadata.name;
+  const navT = useTranslations("NavBar.menu");
+  const examDisplayName = navT.has(examMetadata.name) ? navT(examMetadata.name) : examMetadata.name;
 
   return (
     <main className="min-h-screen bg-background">
@@ -238,7 +239,7 @@ export default function TestDatesDetailPage() {
                   </div>
                 </div>
               )}
-              {id === "skill-for-english-selt" && (
+              {id === "skills-for-english-selt" && (
                 <div className="relative overflow-hidden bg-linear-to-br from-white to-red-50/15 border border-red-100/80 rounded-2xl p-6 shadow-md shadow-red-950/5 max-w-xl transition-all duration-300 hover:shadow-lg hover:border-red-200">
                   <div className="flex items-center gap-3 pb-4 mb-5 border-b border-slate-100">
                     <div className="rounded-xl bg-linear-to-br from-primary to-primary/80 text-white p-2.5 shadow-md shadow-primary/20">

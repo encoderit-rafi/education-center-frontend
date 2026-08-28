@@ -236,8 +236,10 @@ export default function BookExamOverviewWrapper({
       <div className="bg-slate-50 base-px base-py">
         <div className="section-container base-px w-full">
           <div className="max-w-4xl space-y-2">
-            <h1 className="text-3xl md:text-5xl font-black tracking-tight text-secondary leading-tight">
-              {examName} {isRtl && displayEng && !examName.toLowerCase().replace(/[^a-z0-9]/g, "").includes(displayEng.toLowerCase().replace(/[^a-z0-9]/g, "")) ? `(${displayEng})` : ""} <span className="text-primary italic">{isRtl ? "اختبار" : "Test"}</span>
+            <h1 className="text-lg md:text-xl lg:text-2xl font-black tracking-tight text-secondary leading-tight">
+              {isRtl && !examName.trim().startsWith("اختبار") && !examName.trim().startsWith("امتحان") && !examName.trim().startsWith("التسجيل") && <span className="text-primary italic">اختبار </span>}
+              {examName} {isRtl && displayEng && !/[a-zA-Z]/.test(examName) ? `(${displayEng})` : ""}
+              {!isRtl && <span className="text-primary italic"> Test</span>}
             </h1>
             {subtitle && (
               <p className="text-sm md:text-base font-medium text-secondary text-start">
@@ -402,51 +404,51 @@ export default function BookExamOverviewWrapper({
                               section.questions ||
                               section.taskTypes ||
                               section.marks) && (
-                              <div className="grid gap-4 sm:grid-cols-2 pt-4 border-t border-slate-100">
-                                {section.format && (
-                                  <div className="space-y-1 sm:col-span-2">
-                                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">
-                                      Format
-                                    </p>
-                                    <p className="text-xs font-medium text-slate-900 leading-relaxed whitespace-pre-line">
-                                      {section.format}
-                                    </p>
-                                  </div>
-                                )}
-                                {section.questions && (
-                                  <div className="space-y-1">
-                                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">
-                                      Questions
-                                    </p>
-                                    <p className="text-sm font-medium text-slate-900 whitespace-pre-line">
-                                      {section.questions}
-                                    </p>
-                                  </div>
-                                )}
-                                {section.taskTypes && (
-                                  <div className="space-y-1 sm:col-span-2">
-                                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">
-                                      Task Types
-                                    </p>
-                                    <p className="text-xs font-medium text-slate-900 leading-relaxed whitespace-pre-line">
-                                      {Array.isArray(section.taskTypes)
-                                        ? section.taskTypes.join(", ")
-                                        : section.taskTypes}
-                                    </p>
-                                  </div>
-                                )}
-                                {section.marks && (
-                                  <div className="space-y-1 sm:col-span-2">
-                                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">
-                                      Marks & Scoring
-                                    </p>
-                                    <p className="text-xs font-medium text-slate-900 leading-relaxed whitespace-pre-line">
-                                      {section.marks}
-                                    </p>
-                                  </div>
-                                )}
-                              </div>
-                            )}
+                                <div className="grid gap-4 sm:grid-cols-2 pt-4 border-t border-slate-100">
+                                  {section.format && (
+                                    <div className="space-y-1 sm:col-span-2">
+                                      <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">
+                                        Format
+                                      </p>
+                                      <p className="text-xs font-medium text-slate-900 leading-relaxed whitespace-pre-line">
+                                        {section.format}
+                                      </p>
+                                    </div>
+                                  )}
+                                  {section.questions && (
+                                    <div className="space-y-1">
+                                      <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">
+                                        Questions
+                                      </p>
+                                      <p className="text-sm font-medium text-slate-900 whitespace-pre-line">
+                                        {section.questions}
+                                      </p>
+                                    </div>
+                                  )}
+                                  {section.taskTypes && (
+                                    <div className="space-y-1 sm:col-span-2">
+                                      <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">
+                                        Task Types
+                                      </p>
+                                      <p className="text-xs font-medium text-slate-900 leading-relaxed whitespace-pre-line">
+                                        {Array.isArray(section.taskTypes)
+                                          ? section.taskTypes.join(", ")
+                                          : section.taskTypes}
+                                      </p>
+                                    </div>
+                                  )}
+                                  {section.marks && (
+                                    <div className="space-y-1 sm:col-span-2">
+                                      <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">
+                                        Marks & Scoring
+                                      </p>
+                                      <p className="text-xs font-medium text-slate-900 leading-relaxed whitespace-pre-line">
+                                        {section.marks}
+                                      </p>
+                                    </div>
+                                  )}
+                                </div>
+                              )}
                           </div>
                         </div>
                       </div>

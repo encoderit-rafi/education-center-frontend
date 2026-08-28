@@ -71,7 +71,7 @@ export default function ExamItems({ data }: { data: any }) {
           <p className="section-subtitle text-center mx-auto">
             {isRtl ? (
               `تم تصميم كل نوع من ${displayTitle} لغرض محدد. اختر النوع الذي يتوافق مع تأشيرتك أو هدفك الأكاديمي أو المهني.`
-) : (
+            ) : (
               `Each ${title} variant is designed for a specific purpose. Select the one that matches your visa, academic, or professional goal.`
             )}
           </p>

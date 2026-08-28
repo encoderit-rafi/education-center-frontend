@@ -41,7 +41,7 @@ export function ExamDateSelector({
           <h3 className="text-sm font-black uppercase tracking-widest">{t.selectExamDate}</h3>
         </div>
 
-        <Card className="border-slate-200 shadow-xl shadow-slate-200/50 rounded-[2rem] overflow-hidden">
+        <Card className="border-slate-200 shadow-xl shadow-slate-200/50 rounded-4xl overflow-hidden">
           <CardContent className="p-4 bg-white">
             <Calendar
               mode="single"

@@ -19,13 +19,14 @@ const EXAM_ARABIC_NAMES: Record<string, string> = {
   cael: "كايل",
   "celpip-general": "سيلبيب عام",
   celpip: "سيلبيب",
-  "skill-for-english-selt": "سكيلز فور إنجلش (سيلت)",
+  "skills-for-english-selt": "سكيلز فور إنجلش (سيلت)",
   oet: "أو إي تي",
   gre: "جي آر إي",
 };
 
 export default function TestDatesPage() {
   const t = useTranslations("TestDatesPage");
+  const navT = useTranslations("NavBar.menu");
   const locale = useLocale();
   const isRtl = locale === "ar";
 
@@ -58,7 +59,7 @@ export default function TestDatesPage() {
                   </div>
                   <div className="flex-1 flex flex-col space-y-2">
                     <BaseCardTitle className="uppercase tracking-tight text-lg leading-snug">
-                      {isRtl ? (EXAM_ARABIC_NAMES[exam.id] || exam.name) : exam.name}
+                      {navT.has(exam.name) ? navT(exam.name) : exam.name}
                     </BaseCardTitle>
                     <BaseCardDescription className="mb-4">
                       {t.has(`descriptions.${exam.id}`) ? t(`descriptions.${exam.id}`) : exam.description}

@@ -17,6 +17,8 @@ export function useCalendarTranslations() {
 export function useRegistrationTitle(slug: string, dbExam?: any) {
   const locale = useLocale();
   const isAr = locale === "ar";
+  const cleanSlug = (slug || "").toLowerCase();
+  const isSelt = cleanSlug.startsWith("selt") || cleanSlug.startsWith("ukvi-") || cleanSlug.includes("speaking-and-listening") || cleanSlug.includes("speaking-listening");
 
   // If we have an Arabic name in the database translations and locale is Arabic
   if (isAr && dbExam?.translations?.[locale]?.name) {
@@ -45,11 +47,9 @@ export function useRegistrationTitle(slug: string, dbExam?: any) {
     const dbName = dbExam.name;
     return {
       main: dbName,
-      highlight: "Registration",
+      highlight: isSelt ? "" : "Registration",
     };
   }
-
-  const cleanSlug = (slug || "").toLowerCase();
 
   const mapping: Record<string, { main: string; highlight: string }> = {
     "ielts-academic": {
@@ -61,8 +61,8 @@ export function useRegistrationTitle(slug: string, dbExam?: any) {
       highlight: isAr ? "العام" : "Registration",
     },
     "toefl-ibt": {
-      main: isAr ? "التسجيل في اختبار توفل" : "TOEFL iBT",
-      highlight: isAr ? "iBT" : "Registration",
+      main: isAr ? "التوفل أي بي تي (TOEFL iBT)" : "TOEFL iBT",
+      highlight: isAr ? "" : "Registration",
     },
     "pte-academic": {
       main: isAr ? "التسجيل في اختبار بي تي إي" : "PTE Academic",
@@ -93,113 +93,122 @@ export function useRegistrationTitle(slug: string, dbExam?: any) {
       highlight: isAr ? "B1" : "Registration",
     },
     "selt-a1": {
-      main: isAr ? "التسجيل في اختبار سيلت" : "SELT A1",
-      highlight: isAr ? "A1" : "Registration",
+      main: isAr ? "التحدث والاستماع لـ UKVI - المستوى A1" : "UKVI Speaking and Listening at Level A1",
+      highlight: isAr ? "إجراءات" : "Procedures",
     },
     "ukvi-speaking-and-listening-at-level-a1": {
-      main: isAr ? "التسجيل في اختبار سيلت" : "SELT A1 (Speaking & Listening)",
-      highlight: isAr ? "A1 (التحدث والاستماع)" : "Registration",
+      main: isAr ? "التحدث والاستماع لـ UKVI - المستوى A1" : "UKVI Speaking and Listening at Level A1",
+      highlight: isAr ? "إجراءات" : "Procedures",
     },
     "ukvi-speaking-and-listening-level-a1": {
-      main: isAr ? "التسجيل في اختبار سيلت" : "SELT A1 (Speaking & Listening)",
-      highlight: isAr ? "A1 (التحدث والاستماع)" : "Registration",
+      main: isAr ? "التحدث والاستماع لـ UKVI - المستوى A1" : "UKVI Speaking and Listening at Level A1",
+      highlight: isAr ? "إجراءات" : "Procedures",
     },
     "selt-a2": {
-      main: isAr ? "التسجيل في اختبار سيلت" : "SELT A2",
-      highlight: isAr ? "A2" : "Registration",
+      main: isAr ? "التحدث والاستماع لـ UKVI - المستوى A2" : "UKVI Speaking and Listening at Level A2",
+      highlight: isAr ? "إجراءات" : "Procedures",
     },
     "ukvi-speaking-and-listening-at-level-a2": {
-      main: isAr ? "التسجيل في اختبار سيلت" : "SELT A2 (Speaking & Listening)",
-      highlight: isAr ? "A2 (التحدث والاستماع)" : "Registration",
+      main: isAr ? "التحدث والاستماع لـ UKVI - المستوى A2" : "UKVI Speaking and Listening at Level A2",
+      highlight: isAr ? "إجراءات" : "Procedures",
     },
     "ukvi-speaking-and-listening-level-a2": {
-      main: isAr ? "التسجيل في اختبار سيلت" : "SELT A2 (Speaking & Listening)",
-      highlight: isAr ? "A2 (التحدث والاستماع)" : "Registration",
+      main: isAr ? "التحدث والاستماع لـ UKVI - المستوى A2" : "UKVI Speaking and Listening at Level A2",
+      highlight: isAr ? "إجراءات" : "Procedures",
     },
     "selt-b1": {
-      main: isAr ? "التسجيل في اختبار سيلت" : "SELT B1",
-      highlight: isAr ? "B1" : "Registration",
+      main: isAr ? "التحدث والاستماع لـ UKVI - المستوى B1" : "UKVI Speaking and Listening at Level B1",
+      highlight: isAr ? "إجراءات" : "Procedures",
     },
     "ukvi-speaking-and-listening-at-level-b1": {
-      main: isAr ? "التسجيل في اختبار سيلت" : "SELT B1 (Speaking & Listening)",
-      highlight: isAr ? "B1 (التحدث والاستماع)" : "Registration",
+      main: isAr ? "التحدث والاستماع لـ UKVI - المستوى B1" : "UKVI Speaking and Listening at Level B1",
+      highlight: isAr ? "إجراءات" : "Procedures",
     },
     "ukvi-speaking-and-listening-level-b1": {
-      main: isAr ? "التسجيل في اختبار سيلت" : "SELT B1 (Speaking & Listening)",
-      highlight: isAr ? "B1 (التحدث والاستماع)" : "Registration",
+      main: isAr ? "التحدث والاستماع لـ UKVI - المستوى B1" : "UKVI Speaking and Listening at Level B1",
+      highlight: isAr ? "إجراءات" : "Procedures",
     },
     "selt-b1-r-w": {
-      main: isAr ? "التسجيل في اختبار سيلت بي 1" : "SELT B1 R&W",
-      highlight: isAr ? "القراءة والكتابة" : "Registration",
+      main: isAr ? "التحدث والاستماع والقراءة والكتابة لـ UKVI B1" : "UKVI Speaking, Listening, Reading and Writing at Level B1",
+      highlight: isAr ? "إجراءات" : "Procedures",
     },
     "ukvi-speaking-and-listening-at-level-b1-r-w": {
-      main: isAr ? "التسجيل في اختبار سيلت بي 1" : "SELT B1 (Speaking, Listening, Reading & Writing)",
-      highlight: isAr ? "(التحدث والاستماع والقراءة والكتابة)" : "Registration",
+      main: isAr ? "التحدث والاستماع والقراءة والكتابة لـ UKVI B1" : "UKVI Speaking, Listening, Reading and Writing at Level B1",
+      highlight: isAr ? "إجراءات" : "Procedures",
     },
     "ukvi-speaking-listening-reading-and-writing-at-level-b1": {
-      main: isAr ? "التسجيل في اختبار سيلت بي 1" : "SELT B1 (Speaking, Listening, Reading & Writing)",
-      highlight: isAr ? "(التحدث والاستماع والقراءة والكتابة)" : "Registration",
+      main: isAr ? "التحدث والاستماع والقراءة والكتابة لـ UKVI B1" : "UKVI Speaking, Listening, Reading and Writing at Level B1",
+      highlight: isAr ? "إجراءات" : "Procedures",
     },
     "ukvi-speaking-listening-reading-and-writing-at-level-b1-1": {
-      main: isAr ? "التسجيل في اختبار سيلت بي 1" : "SELT B1 (Speaking, Listening, Reading & Writing)",
-      highlight: isAr ? "(التحدث والاستماع والقراءة والكتابة)" : "Registration",
+      main: isAr ? "التحدث والاستماع والقراءة والكتابة لـ UKVI B1" : "UKVI Speaking, Listening, Reading and Writing at Level B1",
+      highlight: isAr ? "إجراءات" : "Procedures",
     },
     "ukvi-speaking-listening-reading-and-writing-b1": {
-      main: isAr ? "التسجيل في اختبار سيلت بي 1" : "SELT B1 (Speaking, Listening, Reading & Writing)",
-      highlight: isAr ? "(التحدث والاستماع والقراءة والكتابة)" : "Registration",
+      main: isAr ? "التحدث والاستماع والقراءة والكتابة لـ UKVI B1" : "UKVI Speaking, Listening, Reading and Writing at Level B1",
+      highlight: isAr ? "إجراءات" : "Procedures",
     },
     "selt-b2": {
-      main: isAr ? "التسجيل في اختبار سيلت" : "SELT B2",
-      highlight: isAr ? "B2" : "Registration",
+      main: isAr ? "التحدث والاستماع والقراءة والكتابة لـ UKVI B2" : "UKVI Speaking, Listening, Reading and Writing at Level B2",
+      highlight: isAr ? "إجراءات" : "Procedures",
     },
     "ukvi-speaking-listening-reading-and-writing-at-level-b2": {
-      main: isAr ? "التسجيل في اختبار سيلت" : "SELT B2",
-      highlight: isAr ? "B2" : "Registration",
+      main: isAr ? "التحدث والاستماع والقراءة والكتابة لـ UKVI B2" : "UKVI Speaking, Listening, Reading and Writing at Level B2",
+      highlight: isAr ? "إجراءات" : "Procedures",
     },
     "ukvi-speaking-and-listening-at-level-b2": {
-      main: isAr ? "التسجيل في اختبار سيلت" : "SELT B2",
-      highlight: isAr ? "B2" : "Registration",
+      main: isAr ? "التحدث والاستماع والقراءة والكتابة لـ UKVI B2" : "UKVI Speaking, Listening, Reading and Writing at Level B2",
+      highlight: isAr ? "إجراءات" : "Procedures",
     },
     "ukvi-speaking-listening-reading-and-writing-b2": {
-      main: isAr ? "التسجيل في اختبار سيلت" : "SELT B2",
-      highlight: isAr ? "B2" : "Registration",
+      main: isAr ? "التحدث والاستماع والقراءة والكتابة لـ UKVI B2" : "UKVI Speaking, Listening, Reading and Writing at Level B2",
+      highlight: isAr ? "إجراءات" : "Procedures",
     },
     "selt-c1": {
-      main: isAr ? "التسجيل في اختبار سيلت" : "SELT C1",
-      highlight: isAr ? "C1" : "Registration",
+      main: isAr ? "التحدث والاستماع والقراءة والكتابة لـ UKVI C1" : "UKVI Speaking, Listening, Reading and Writing at Level C1",
+      highlight: isAr ? "إجراءات" : "Procedures",
     },
     "ukvi-speaking-listening-reading-and-writing-at-level-c1": {
-      main: isAr ? "التسجيل في اختبار سيلت" : "SELT C1",
-      highlight: isAr ? "C1" : "Registration",
+      main: isAr ? "التحدث والاستماع والقراءة والكتابة لـ UKVI C1" : "UKVI Speaking, Listening, Reading and Writing at Level C1",
+      highlight: isAr ? "إجراءات" : "Procedures",
     },
     "ukvi-speaking-and-listening-at-level-c1": {
-      main: isAr ? "التسجيل في اختبار سيلت" : "SELT C1",
-      highlight: isAr ? "C1" : "Registration",
+      main: isAr ? "التحدث والاستماع والقراءة والكتابة لـ UKVI C1" : "UKVI Speaking, Listening, Reading and Writing at Level C1",
+      highlight: isAr ? "إجراءات" : "Procedures",
     },
     "ukvi-speaking-listening-reading-and-writing-c1": {
-      main: isAr ? "التسجيل في اختبار سيلت" : "SELT C1",
-      highlight: isAr ? "C1" : "Registration",
+      main: isAr ? "التحدث والاستماع والقراءة والكتابة لـ UKVI C1" : "UKVI Speaking, Listening, Reading and Writing at Level C1",
+      highlight: isAr ? "إجراءات" : "Procedures",
     },
     "selt-c2": {
-      main: isAr ? "التسجيل في اختبار سيلت" : "SELT C2",
-      highlight: isAr ? "C2" : "Registration",
+      main: isAr ? "التحدث والاستماع والقراءة والكتابة لـ UKVI C2" : "UKVI Speaking, Listening, Reading and Writing at Level C2",
+      highlight: isAr ? "إجراءات" : "Procedures",
     },
     "ukvi-speaking-listening-reading-and-writing-at-level-c2": {
-      main: isAr ? "التسجيل في اختبار سيلت" : "SELT C2",
-      highlight: isAr ? "C2" : "Registration",
+      main: isAr ? "التحدث والاستماع والقراءة والكتابة لـ UKVI C2" : "UKVI Speaking, Listening, Reading and Writing at Level C2",
+      highlight: isAr ? "إجراءات" : "Procedures",
     },
     "ukvi-speaking-and-listening-at-level-c2": {
-      main: isAr ? "التسجيل في اختبار سيلت" : "SELT C2",
-      highlight: isAr ? "C2" : "Registration",
+      main: isAr ? "التحدث والاستماع والقراءة والكتابة لـ UKVI C2" : "UKVI Speaking, Listening, Reading and Writing at Level C2",
+      highlight: isAr ? "إجراءات" : "Procedures",
     },
     "ukvi-speaking-listening-reading-and-writing-c2": {
-      main: isAr ? "التسجيل في اختبار سيلت" : "SELT C2",
-      highlight: isAr ? "C2" : "Registration",
+      main: isAr ? "التحدث والاستماع والقراءة والكتابة لـ UKVI C2" : "UKVI Speaking, Listening, Reading and Writing at Level C2",
+      highlight: isAr ? "إجراءات" : "Procedures",
     }
   };
 
-  return mapping[cleanSlug] || {
+  const result = mapping[cleanSlug] || {
     main: isAr ? "تسجيل" : "Exam",
     highlight: isAr ? "الاختبار" : "Registration",
   };
+
+  if (isSelt && (result.highlight === "إجراءات" || result.highlight === "Procedures")) {
+    return {
+      ...result,
+      highlight: "",
+    };
+  }
+
+  return result;
 }
