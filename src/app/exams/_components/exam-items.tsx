@@ -42,7 +42,7 @@ export default function ExamItems({ data }: { data: any }) {
     <div className="min-h-screen bg-white">
       <div className="bg-slate-50">
         <div className="max-w-4xl space-y-6 base-py px-3 md:px-12">
-          <h1 className="text-4xl md:text-7xl font-black text-secondary leading-[1.1] tracking-tight">
+          <h1 className="text-2xl md:text-3xl lg:text-4xl font-black text-secondary leading-[1.1] tracking-tight">
             {isRtl ? (
               displayTitle
             ) : (
@@ -60,7 +60,7 @@ export default function ExamItems({ data }: { data: any }) {
           <h2 className="section-title">
             {isRtl ? (
               <>
-                اختر <span>{displayTitle.replace(/^اختبار\s+/, "")}</span> الخاص بك
+                اختبار <span>{displayTitle.replace(/^اختبار\s+/, "")}</span> الخاص بك
               </>
             ) : (
               <>

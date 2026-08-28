@@ -26,7 +26,7 @@ export default function OtherExamsPage() {
           <span>{t("titleAccent")}</span>
           {t("titleEnd")}
         </h2>
-        <p className="mx-auto section-subtitle text-center">
+        <p className="mx-auto section-subtitle text-justify">
           {t("subtitle")}
         </p>
 

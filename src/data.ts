@@ -1610,7 +1610,7 @@ export const EXAM_DETAILE_DATA = [
     sections: [],
     whoShouldTake: [
       "Assessment Components: The test evaluates your English proficiency across four areas: Listening, Reading, Writing, and Speaking, with the Speaking portion conducted as a face-to-face interview.",
-      "Testing Options & Results: The exam is available in both paper-based and computer-delivered formats at approved UKVI locations. If you choose the computer-delivered option, you can typically expect your results within 3 to 5 days.",
+      "Testing Options & Results: The exam is available in computer-delivered format at approved UKVI locations. If you choose the computer-delivered option, you can typically expect your results within 3 to 5 days.",
       "Score Requirements: Minimum score thresholds depend entirely on your specific visa category. For instance, student visas generally require a minimum score of 5.5 across all components, whereas other immigration routes may only require a 4.0.",
       "Certification Validity: Your official Test Report Form will feature a unique identification prefix confirming it meets UKVI standards. These test results remain valid for exactly two years.",
     ],

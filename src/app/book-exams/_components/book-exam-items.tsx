@@ -49,7 +49,7 @@ export default function BookExamItems({ data }: { data: any }) {
           <h2 className="section-title">
             {isRtl ? (
               <>
-                اختر <span>{displayName.replace(/^اختبار\s+/, "")}</span> الخاص بك
+                اختبار <span>{displayName.replace(/^اختبار\s+/, "")}</span> الخاص بك
               </>
             ) : (
               <>

@@ -200,7 +200,7 @@ export default function ExamDetails({ data }: { data: any }) {
       <div className="bg-slate-50 base-px base-py">
         <div className="section-container base-px w-full">
           <div className="max-w-4xl space-y-3">
-            <h1 className="text-lg md:text-xl lg:text-2xl font-black tracking-tight text-secondary leading-tight">
+            <h1 className="text-xl md:text-2xl lg:text-3xl font-black text-secondary">
               {isRtl && !name.trim().startsWith("اختبار") && !name.trim().startsWith("امتحان") && <span className="text-primary italic">اختبار </span>}
               {name} {isRtl && displayEng && !/[a-zA-Z]/.test(name) ? `(${displayEng})` : ""}
               {!isRtl && <span className="text-primary italic"> Test</span>}
