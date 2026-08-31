@@ -184,7 +184,7 @@ export default function FormIELTSGeneralRegistration({
   const baseFee =
     activeExam?.examFee && parseFloat(activeExam.examFee) > 0
       ? parseFloat(activeExam.examFee)
-      : 1470;
+      : 1590;
   const serviceFee =
     activeExam?.additionalFee && parseFloat(activeExam.additionalFee) > 0
       ? parseFloat(activeExam.additionalFee)

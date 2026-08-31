@@ -53,13 +53,13 @@ export default function FeesTabs({ initialBrand, exams }: FeesTabsProps) {
       badgeBg: "bg-rose-50 text-primary border-rose-100",
       isMultiRow: true,
       items: [
-        { key: "ieltsAcademic", slug: "ielts-academic", price: 1470 },
-        { key: "ieltsGeneral", slug: "ielts-general", price: 1470 },
-        { key: "ieltsUkviAcademic", slug: "ielts-for-ukvi-academic", price: 1570 },
-        { key: "ieltsUkviGeneral", slug: "ielts-for-ukvi-general-training", price: 1570 },
-        { key: "ieltsLifeSkillsA1", slug: "ielts-for-ukvi-life-skills-a1", price: 750 },
+        { key: "ieltsAcademic", slug: "ielts-academic", price: 1590 },
+        { key: "ieltsGeneral", slug: "ielts-general", price: 1590 },
+        { key: "ieltsUkviAcademic", slug: "ielts-for-ukvi-academic", price: 1680 },
+        { key: "ieltsUkviGeneral", slug: "ielts-for-ukvi-general-training", price: 1680 },
+        { key: "ieltsLifeSkillsA1", slug: "ielts-for-ukvi-life-skills-a1", price: 810 },
         { key: "ieltsLifeSkillsA2", slug: "ielts-for-ukvi-life-skills-a2", price: "GBP 182", estimatedAed: 913 },
-        { key: "ieltsLifeSkillsB1", slug: "ielts-for-ukvi-life-skills-b1", price: 750 }
+        { key: "ieltsLifeSkillsB1", slug: "ielts-for-ukvi-life-skills-b1", price: 810 }
       ]
     },
     {
