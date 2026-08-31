@@ -42,6 +42,7 @@ export const PteHomeA2Schema = z.object({
     idType: z.literal("passport"),
     idNumber: z.string().min(1, "ID number is required"),
     idExpiryDate: z.any().refine((val) => !!val, "Expiry date is required"),
+    issuingAuthority: z.string().min(1, "Issuing authority is required"),
     idCountryOfIssue: stringOrObject.optional(),
     passportCopy: z.any()
         .refine((val) => !!val, "Passport copy is required")

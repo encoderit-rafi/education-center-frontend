@@ -178,6 +178,14 @@ export function ReviewStep({
               </div>
               <div className="flex flex-col">
                 <span className="text-[10px] text-slate-400 font-bold uppercase">
+                  Issuing Authority
+                </span>
+                <span className="text-sm font-semibold text-black">
+                  {data.issuingAuthority || "N/A"}
+                </span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] text-slate-400 font-bold uppercase">
                   Identity Document
                 </span>
                 <span className="text-sm font-semibold text-black">

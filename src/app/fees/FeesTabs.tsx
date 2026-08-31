@@ -33,7 +33,7 @@ interface FeesTabsProps {
 export default function FeesTabs({ initialBrand, exams }: FeesTabsProps) {
   const t = useTranslations("ExamFeesPage");
   const locale = useLocale();
-  const isRtl = locale === "ar";
+  const isRtl = locale === "ar" || locale.startsWith("ar");
 
   const [activeBrand, setActiveBrand] = useState<string>(initialBrand || "all");
 
@@ -147,6 +147,33 @@ export default function FeesTabs({ initialBrand, exams }: FeesTabsProps) {
     return { href: `/book-exams/${slug}`, isExternal: false };
   };
 
+  const renderPrice = (amount: number, customClass?: string) => {
+    if (isRtl) {
+      return (
+        <span className={cn("inline-flex items-center gap-1 justify-center", customClass)}>
+          <span>{amount.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+          <span>درهم</span>
+        </span>
+      );
+    }
+    return <PriceDisplay amount={amount} className={customClass} />;
+  };
+
+  const renderEstimatedPrice = (amount: number) => {
+    if (isRtl) {
+      const formatted = amount.toLocaleString("en-US", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      });
+      return <span>ما يقارب {formatted} درهماً</span>;
+    }
+    return (
+      <span>
+        ({t("table.estimated")}: <PriceDisplay amount={amount} />)
+      </span>
+    );
+  };
+
   return (
     <div className="w-full space-y-12">
       {/* ── Multi-Row Exams (IELTS, PTE, SELT) ── */}
@@ -200,7 +227,7 @@ export default function FeesTabs({ initialBrand, exams }: FeesTabsProps) {
                         {/* Fee / Price */}
                         <td className="px-6 py-4.5 text-center">
                           {typeof item.price === "number" ? (
-                            <PriceDisplay amount={item.price} className="text-base md:text-lg font-black text-primary" />
+                            renderPrice(item.price, "text-base md:text-lg font-black text-primary")
                           ) : (
                             <div className="flex flex-col items-center justify-center">
                               <span className="font-black text-primary text-base md:text-lg">
@@ -208,7 +235,7 @@ export default function FeesTabs({ initialBrand, exams }: FeesTabsProps) {
                               </span>
                               {item.estimatedAed && (
                                 <span className="text-[13px] text-primary font-bold mt-0.5">
-                                  ({t("table.estimated")}: <PriceDisplay amount={item.estimatedAed} />)
+                                  {renderEstimatedPrice(item.estimatedAed)}
                                 </span>
                               )}
                             </div>
@@ -290,7 +317,7 @@ export default function FeesTabs({ initialBrand, exams }: FeesTabsProps) {
                   <div className="flex items-baseline justify-between">
                     <span className="text-xs font-bold text-slate-400">{t("table.fee")}</span>
                     {typeof item.price === "number" ? (
-                      <PriceDisplay amount={item.price} className="text-2xl font-black text-primary" />
+                      renderPrice(item.price, "text-2xl font-black text-primary")
                     ) : (
                       <div className="flex flex-col items-end">
                         <span className="font-black text-primary text-xl">
@@ -298,7 +325,7 @@ export default function FeesTabs({ initialBrand, exams }: FeesTabsProps) {
                         </span>
                         {item.estimatedAed && (
                           <span className="text-[12px] text-primary font-bold mt-0.5">
-                            ({t("table.estimated")}: <PriceDisplay amount={item.estimatedAed} />)
+                            {renderEstimatedPrice(item.estimatedAed)}
                           </span>
                         )}
                       </div>

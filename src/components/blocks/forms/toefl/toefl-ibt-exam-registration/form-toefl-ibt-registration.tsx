@@ -142,6 +142,7 @@ export default function FormTOEFLIBTRegistration({
       idType: "" as any,
       idNumber: "",
       idExpiryDate: undefined,
+      issuingAuthority: "",
       nationality: "",
       idDocument: undefined,
       takenBefore: "" as any,
@@ -710,6 +711,10 @@ export default function FormTOEFLIBTRegistration({
                     value: formData.idExpiryDate
                       ? format(new Date(formData.idExpiryDate as any), "PPP")
                       : "N/A",
+                  },
+                  {
+                    label: "Issuing Authority",
+                    value: formData.issuingAuthority || "N/A",
                   },
                   {
                     label: "Identity Document",

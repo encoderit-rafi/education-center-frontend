@@ -41,6 +41,7 @@ export const ToeflIbtSchema = z
         idType: z.enum(["passport", "emirates_id"]).or(z.literal("")),
         idNumber: z.string().optional(),
         idExpiryDate: z.any().optional(),
+        issuingAuthority: z.string().optional(),
         nationality: z.string().min(1, "Country of nationality is required"),
         idDocument: z.any()
         .refine((val) => !!val, "Please upload your ID document")
@@ -124,6 +125,15 @@ export const ToeflIbtSchema = z
                 code: z.ZodIssueCode.custom,
                 message: "Expiry date is required",
                 path: ["idExpiryDate"],
+            });
+        }
+
+        // Issuing authority required
+        if (!data.issuingAuthority || !data.issuingAuthority.trim()) {
+            ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                message: "Issuing authority is required",
+                path: ["issuingAuthority"],
             });
         }
 

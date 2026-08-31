@@ -160,6 +160,7 @@ export default function FormPTEAcademicUKVIRegistration({
       idCountryOfIssue: "",
       idNumber: "",
       idExpiryDate: undefined,
+      issuingAuthority: "",
       selectedCourse: "",
       selectedWorkshop: "",
       passportCopy: undefined,
@@ -530,6 +531,10 @@ export default function FormPTEAcademicUKVIRegistration({
                     value: formData.idExpiryDate
                       ? format(new Date(formData.idExpiryDate as any), "PPP")
                       : "N/A",
+                  },
+                  {
+                    label: "Issuing Authority",
+                    value: formData.issuingAuthority || "N/A",
                   },
                   {
                     label: "Identity Document",

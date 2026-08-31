@@ -356,6 +356,18 @@ export function RegistrationFormStep({
             </FieldContent>
           </Field>
 
+          <Field data-invalid={!!errors.issuingAuthority}>
+            <FieldLabel required>{t("issuingAuthority")}</FieldLabel>
+            <FieldContent>
+              <Input
+                {...register("issuingAuthority")}
+                aria-invalid={!!errors.issuingAuthority}
+                placeholder={t("enterIssuingAuthority")}
+              />
+              <FieldError errors={[errors.issuingAuthority]} />
+            </FieldContent>
+          </Field>
+
           <Field data-invalid={!!errors.countryOfCitizenship}>
             <FieldLabel required>{t("nationality")}</FieldLabel>
             <FieldContent>

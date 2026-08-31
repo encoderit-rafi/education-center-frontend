@@ -200,7 +200,7 @@ export function ReviewStep({
               <span className="text-[10px] text-slate-400 font-bold uppercase">
                 {tFields("attachIdCopy")}
               </span>
-              <span className="text-sm font-semibold text-black break-words">
+              <span className="text-sm font-semibold text-black wrap-break-word">
                 {data.idDocument
                   ? (data.idDocument as File).name
                   : t("noFileAttached")}
