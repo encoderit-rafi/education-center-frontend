@@ -165,10 +165,10 @@ export default function CandidatesProctoringPage() {
                 <table className="w-full text-sm">
                   <thead className="bg-slate-50 border-b border-slate-200">
                     <tr>
-                      <th className="py-4 px-5 font-semibold text-secondary text-start">
+                      <th className="py-4 px-5 font-semibold text-secondary text-center">
                         {t("feesColDuration")}
                       </th>
-                      <th className="py-4 px-5 font-semibold text-secondary text-end">
+                      <th className="py-4 px-5 font-semibold text-secondary text-center">
                         {t("feesColFee")}
                       </th>
                     </tr>
@@ -179,13 +179,13 @@ export default function CandidatesProctoringPage() {
                         key={i}
                         className="hover:bg-slate-50/50 transition-colors"
                       >
-                        <td className="py-4 px-5 text-start">
+                        <td className="py-4 px-5 text-center">
                           <span className="font-medium text-slate-700">
                             {formatDuration(row.duration)}
                           </span>
                         </td>
-                        <td className="py-4 px-5 text-end">
-                          <div className="flex items-center justify-end">
+                        <td className="py-4 px-5 text-center">
+                          <div className="flex items-center justify-center">
                             <PriceDisplay
                               amount={Number(row.fee)}
                               className="text-lg font-semibold text-primary"

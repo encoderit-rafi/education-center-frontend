@@ -1,11 +1,22 @@
 import React from "react";
 import { cn } from "@/lib/utils";
+import { useLocale } from "next-intl";
 
 interface AEDProps extends React.SVGProps<SVGSVGElement> {
   className?: string;
 }
 
 export const AED = ({ className, ...props }: AEDProps) => {
+  const locale = useLocale();
+
+  if (locale === "ar") {
+    return (
+      <span className={cn("inline-block font-sans not-italic text-[0.9em]", className)}>
+        درهم
+      </span>
+    );
+  }
+
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -17,3 +28,4 @@ export const AED = ({ className, ...props }: AEDProps) => {
     </svg>
   );
 };
+
