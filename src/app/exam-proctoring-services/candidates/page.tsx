@@ -20,13 +20,20 @@ type FeeEntry = {
 
 const FEES: FeeEntry[] = [
   { duration: "60 min", fee: "250" },
-  { duration: "120 min", fee: "300" },
-  { duration: "150 min", fee: "350" },
-  { duration: "180 min", fee: "400" },
-  { duration: "210 min", fee: "450" },
-  { duration: "240 min", fee: "500" },
-  { duration: "270 min", fee: "550" },
-  { duration: "300 min", fee: "600" },
+  { duration: "90 min", fee: "300" },
+  { duration: "120 min", fee: "350" },
+  { duration: "150 min", fee: "400" },
+  { duration: "180 min", fee: "450" },
+  { duration: "210 min", fee: "500" },
+  { duration: "240 min", fee: "550" },
+  { duration: "270 min", fee: "600" },
+  { duration: "300 min", fee: "650" },
+  { duration: "330 min", fee: "700" },
+  { duration: "360 min", fee: "750" },
+  { duration: "390 min", fee: "800" },
+  { duration: "420 min", fee: "850" },
+  { duration: "450 min", fee: "900" },
+  { duration: "480 min", fee: "950" },
 ];
 
 export default function CandidatesProctoringPage() {
