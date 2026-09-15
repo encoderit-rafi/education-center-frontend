@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useLocale } from "next-intl";
 import {
   Popover,
   PopoverContent,
@@ -22,6 +23,7 @@ interface SearchableDropdownProps extends Omit<
   options: {
     label: string | React.ReactNode;
     value: string;
+    arabicLabel?: string;
     description?: string | React.ReactNode;
   }[];
   placeholder?: string;
@@ -50,11 +52,19 @@ export const SearchableDropdown = React.forwardRef<
     ref,
   ) => {
     const [open, setOpen] = React.useState(false);
+    const locale = useLocale();
+    const isArabic = locale === "ar";
 
-    const selectedLabel = React.useMemo(
-      () => options.find((opt) => opt.value === value)?.label,
+    const selectedOption = React.useMemo(
+      () => options.find((opt) => opt.value === value),
       [options, value],
     );
+
+    const selectedLabel = React.useMemo(() => {
+      if (!selectedOption) return undefined;
+      if (isArabic && selectedOption.arabicLabel) return selectedOption.arabicLabel;
+      return selectedOption.label;
+    }, [selectedOption, isArabic]);
 
     const handleSelect = React.useCallback(
       (val: string) => {
@@ -131,9 +141,16 @@ export const SearchableDropdown = React.forwardRef<
                       )}
                     />
                     <div className="flex flex-col flex-1 min-w-0">
-                      <span className="truncate font-medium">
-                        {option.label}
-                      </span>
+                      {isArabic && option.arabicLabel ? (
+                        <div className="grid grid-cols-2 gap-1 items-center">
+                          <span className="truncate text-xs text-slate-400">{option.label}</span>
+                          <span className="truncate font-medium text-slate-700 text-right" dir="rtl">{option.arabicLabel}</span>
+                        </div>
+                      ) : (
+                        <span className="truncate font-medium">
+                          {option.label}
+                        </span>
+                      )}
                       {option.description && (
                         <span className="text-sm font-semibold text-primary whitespace-normal">
                           {option.description}

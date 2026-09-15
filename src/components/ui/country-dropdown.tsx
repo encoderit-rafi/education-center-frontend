@@ -1,6 +1,6 @@
 "use client";
-import React, { useCallback, useState, forwardRef, useEffect } from "react";
-import { useTranslations } from "next-intl";
+import React, { useCallback, useState, forwardRef, useEffect, useMemo } from "react";
+import { useTranslations, useLocale } from "next-intl";
 
 // shadcn
 import {
@@ -71,6 +71,17 @@ const DEFAULT_COUNTRY_OPTIONS: Country[] = countries.all
   }))
   .sort((a, b) => a.name.localeCompare(b.name));
 
+/** Get Arabic name for a country given its alpha2 code, or fall back to English name. */
+function getArabicName(alpha2: string, fallback: string): string {
+  try {
+    const displayNames = new Intl.DisplayNames(["ar"], { type: "region" });
+    const name = displayNames.of(alpha2.toUpperCase());
+    return name || fallback;
+  } catch {
+    return fallback;
+  }
+}
+
 const CountryDropdownComponent = (
   {
     options = DEFAULT_COUNTRY_OPTIONS,
@@ -89,7 +100,22 @@ const CountryDropdownComponent = (
     undefined,
   );
   const t = useTranslations("CountryDropdown");
+  const locale = useLocale();
+  const isArabic = locale === "ar";
   const displayPlaceholder = placeholder || t("placeholder");
+
+  // Pre-compute Arabic names for all options once
+  const arabicNamesMap = useMemo(() => {
+    if (!isArabic) return null;
+    const map: Record<string, string> = {};
+    options.forEach((c) => {
+      map[c.alpha2] = getArabicName(c.alpha2, c.name);
+    });
+    return map;
+  }, [isArabic, options]);
+
+  const getDisplayName = (country: Country) =>
+    isArabic && arabicNamesMap ? arabicNamesMap[country.alpha2] || country.name : country.name;
 
   useEffect(() => {
     let initialCountry: Country | undefined = undefined;
@@ -145,8 +171,8 @@ const CountryDropdownComponent = (
                 />
               </div>
               {slim === false && (
-                <span className="truncate font-medium">
-                  {selectedCountry.name}
+                <span className="truncate font-medium" dir={isArabic ? "rtl" : "ltr"}>
+                  {getDisplayName(selectedCountry)}
                 </span>
               )}
             </div>
@@ -186,33 +212,41 @@ const CountryDropdownComponent = (
               <CommandGroup>
                 {options
                   .filter((x) => x.name)
-                  .map((option, key: number) => (
-                    <CommandItem
-                      key={key}
-                      onSelect={() => handleSelect(option)}
-                      className="flex items-center gap-2 rounded text-sm outline-none cursor-default select-none hover:bg-slate-50 focus:bg-slate-50 data-[selected=true]:bg-slate-50"
-                    >
-                      <CheckIcon
-                        className={cn(
-                          "h-4 w-4 shrink-0 text-primary",
-                          option.name === selectedCountry?.name
-                            ? "opacity-100"
-                            : "opacity-0",
-                        )}
-                      />
-                      <div className="flex items-center gap-2 flex-1 truncate text-slate-700">
-                        <div className="inline-flex items-center justify-center w-5 h-5 shrink-0 overflow-hidden rounded-full">
-                          <CircleFlag
-                            countryCode={option.alpha2.toLowerCase()}
-                            height={20}
-                          />
+                  .map((option, key: number) => {
+                    const arabicName = isArabic && arabicNamesMap ? arabicNamesMap[option.alpha2] : null;
+                    return (
+                      <CommandItem
+                        key={key}
+                        onSelect={() => handleSelect(option)}
+                        className="flex items-center gap-2 rounded text-sm outline-none cursor-default select-none hover:bg-slate-50 focus:bg-slate-50 data-[selected=true]:bg-slate-50"
+                      >
+                        <CheckIcon
+                          className={cn(
+                            "h-4 w-4 shrink-0 text-primary",
+                            option.name === selectedCountry?.name
+                              ? "opacity-100"
+                              : "opacity-0",
+                          )}
+                        />
+                        <div className="flex items-center gap-2 flex-1 min-w-0 text-slate-700">
+                          <div className="inline-flex items-center justify-center w-5 h-5 shrink-0 overflow-hidden rounded-full">
+                            <CircleFlag
+                              countryCode={option.alpha2.toLowerCase()}
+                              height={20}
+                            />
+                          </div>
+                          {arabicName ? (
+                            <div className="grid grid-cols-2 flex-1 min-w-0 gap-1 items-center">
+                              <span className="truncate text-xs text-slate-400">{option.name}</span>
+                              <span className="truncate font-medium text-slate-700 text-right" dir="rtl">{arabicName}</span>
+                            </div>
+                          ) : (
+                            <span className="truncate font-medium">{option.name}</span>
+                          )}
                         </div>
-                        <span className="truncate font-medium">
-                          {option.name}
-                        </span>
-                      </div>
-                    </CommandItem>
-                  ))}
+                      </CommandItem>
+                    );
+                  })}
               </CommandGroup>
             </CommandList>
           </Command>
