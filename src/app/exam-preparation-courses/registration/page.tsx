@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { cn, omitEmpty } from "@/lib/utils";
 import { format } from "date-fns";
-import { VAT_PERCENT } from "@/lib/vat";
+import { VAT_PERCENT, calculateVat } from "@/lib/vat";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import api from "@/axios";
 import {
@@ -162,21 +162,21 @@ function CourseRegistrationForm({ className }: { className?: string }) {
 
   const discount_amount = couponDiscount;
   const subtotal = base_price - discount_amount;
+
+  // VAT rules (per billing rules):
+  // - CLASSROOM (Group / Semi-private / In-person): VAT always applied
+  // - ONLINE / HYBRID: VAT only applied when billing country is UAE
   const selectedCountry = formData.country;
   const isUae =
     selectedCountry?.toLowerCase() === "united arab emirates" ||
     selectedCountry?.toLowerCase() === "uae";
-  const vatRateRaw = packageData?.vatRate;
-  const hasPackageVat =
-    vatRateRaw !== undefined && vatRateRaw !== null && vatRateRaw !== "";
-  const parsedVatRate = hasPackageVat ? parseFloat(vatRateRaw) : null;
-
-  const activeVatPercent = isUae
-    ? parsedVatRate !== null
-      ? parsedVatRate
-      : VAT_PERCENT
-    : 0;
-  const vatAmount = Number((subtotal * (activeVatPercent / 100)).toFixed(2));
+  const deliveryType = (packageData?.deliveryType || "").toUpperCase();
+  const isClassroom = deliveryType === "CLASSROOM";
+  const vatAmount = isClassroom
+    ? calculateVat(subtotal)
+    : isUae
+      ? calculateVat(subtotal)
+      : 0;
   const total_amount = subtotal + vatAmount;
 
   const handleApplyCoupon = async (e: React.MouseEvent) => {
@@ -658,7 +658,7 @@ function CourseRegistrationForm({ className }: { className?: string }) {
                         </div>
                       )}
                       <div className="flex justify-between items-center text-slate-600">
-                        <span>VAT ({activeVatPercent}%)</span>
+                        <span>VAT ({VAT_PERCENT}%)</span>
                         <span>
                           <PriceDisplay amount={vatAmount} />
                         </span>

@@ -56,7 +56,11 @@ export default function FormSELTB2Registration({
     : examsList.find(
       (e: any) =>
         e.slug === "ukvi-speaking-listening-reading-and-writing-at-level-b2" ||
-        e.slug === "ukvi-speaking-listening-reading-and-writing-b2",
+        e.slug === "ukvi-speaking-listening-reading-and-writing-b2" ||
+        e.slug === "ukvi-speaking-listening-reading-and-writing-level-b2" ||
+        e.slug === "ukvi-speaking-and-listening-at-level-b2" ||
+        e.slug === "selt-b2" ||
+        e.name?.toLowerCase().includes("b2"),
     );
 
   const examId = initialExamId || activeExam?.id;
@@ -529,6 +533,18 @@ export default function FormSELTB2Registration({
                         </div>
                       ) : null;
                     })()}
+
+                    {pricing.vat > 0 && (
+                      <div className="flex justify-between text-sm">
+                        <span className="text-slate-500 font-medium">
+                          VAT ({VAT_PERCENT}%)
+                        </span>
+                        <PriceDisplay
+                          amount={pricing.vat}
+                          className="font-bold text-slate-900"
+                        />
+                      </div>
+                    )}
 
                   <div className="pt-6 border-t border-slate-200">
                     <div className="flex justify-between items-center">

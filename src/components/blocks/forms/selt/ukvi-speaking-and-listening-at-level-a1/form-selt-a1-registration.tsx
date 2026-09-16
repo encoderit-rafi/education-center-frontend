@@ -54,7 +54,10 @@ export default function FormSELTA1Registration({
     : examsList.find(
       (e: any) =>
         e.slug === "ukvi-speaking-and-listening-at-level-a1" ||
-        e.slug === "ukvi-speaking-and-listening-level-a1",
+        e.slug === "ukvi-speaking-and-listening-level-a1" ||
+        e.slug === "selt-a1" ||
+        e.name?.toLowerCase().includes("level a1") ||
+        e.name?.toLowerCase().includes("level-a1"),
     );
 
   const examId = initialExamId || activeExam?.id;
@@ -527,6 +530,18 @@ export default function FormSELTA1Registration({
                         </div>
                       ) : null;
                     })()}
+
+                    {pricing.vat > 0 && (
+                      <div className="flex justify-between text-sm">
+                        <span className="text-slate-500 font-medium">
+                          VAT ({VAT_PERCENT}%)
+                        </span>
+                        <PriceDisplay
+                          amount={pricing.vat}
+                          className="font-bold text-slate-900"
+                        />
+                      </div>
+                    )}
 
                   <div className="pt-6 border-t border-slate-200">
                     <div className="flex justify-between items-center">

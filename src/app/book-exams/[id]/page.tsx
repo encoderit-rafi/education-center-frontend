@@ -32,14 +32,18 @@ const SLUG_TO_STATIC_ID: Record<string, string> = {
   "ukvi-speaking-and-listening-level-b1": "selt-b1",
   "ukvi-speaking-and-listening-at-level-b1": "selt-b1",
   "ukvi-speaking-listening-reading-and-writing-b1": "selt-b1-r-w",
+  "ukvi-speaking-listening-reading-and-writing-level-b1": "selt-b1-r-w",
   "ukvi-speaking-listening-reading-and-writing-at-level-b1": "selt-b1-r-w",
   "ukvi-speaking-listening-reading-and-writing-b2": "selt-b2",
+  "ukvi-speaking-listening-reading-and-writing-level-b2": "selt-b2",
   "ukvi-speaking-listening-reading-and-writing-at-level-b2": "selt-b2",
   "ukvi-speaking-and-listening-at-level-b2": "selt-b2",
   "ukvi-speaking-listening-reading-and-writing-c1": "selt-c1",
+  "ukvi-speaking-listening-reading-and-writing-level-c1": "selt-c1",
   "ukvi-speaking-listening-reading-and-writing-at-level-c1": "selt-c1",
   "ukvi-speaking-and-listening-at-level-c1": "selt-c1",
   "ukvi-speaking-listening-reading-and-writing-c2": "selt-c2",
+  "ukvi-speaking-listening-reading-and-writing-level-c2": "selt-c2",
   "ukvi-speaking-listening-reading-and-writing-at-level-c2": "selt-c2",
   "ukvi-speaking-and-listening-at-level-c2": "selt-c2",
   "skills-for-english-selt": "selt",
@@ -175,12 +179,16 @@ export default async function BookExamsId({
     "ukvi-speaking-and-listening-at-level-a2": "ukvi-speaking-and-listening-level-a2",
     "ukvi-speaking-and-listening-at-level-b1": "ukvi-speaking-and-listening-level-b1",
     "ukvi-speaking-listening-reading-and-writing-at-level-b1": "ukvi-speaking-listening-reading-and-writing-b1",
+    "ukvi-speaking-listening-reading-and-writing-level-b1": "ukvi-speaking-listening-reading-and-writing-b1",
     "ukvi-speaking-listening-reading-and-writing-at-level-b1-1": "ukvi-speaking-listening-reading-and-writing-b1",
     "ukvi-speaking-listening-reading-and-writing-at-level-b2": "ukvi-speaking-listening-reading-and-writing-b2",
+    "ukvi-speaking-listening-reading-and-writing-level-b2": "ukvi-speaking-listening-reading-and-writing-b2",
     "ukvi-speaking-and-listening-at-level-b2": "ukvi-speaking-listening-reading-and-writing-b2",
     "ukvi-speaking-listening-reading-and-writing-at-level-c1": "ukvi-speaking-listening-reading-and-writing-c1",
+    "ukvi-speaking-listening-reading-and-writing-level-c1": "ukvi-speaking-listening-reading-and-writing-c1",
     "ukvi-speaking-and-listening-at-level-c1": "ukvi-speaking-listening-reading-and-writing-c1",
     "ukvi-speaking-listening-reading-and-writing-at-level-c2": "ukvi-speaking-listening-reading-and-writing-c2",
+    "ukvi-speaking-listening-reading-and-writing-level-c2": "ukvi-speaking-listening-reading-and-writing-c2",
     "ukvi-speaking-and-listening-at-level-c2": "ukvi-speaking-listening-reading-and-writing-c2",
     "selt-a1": "ukvi-speaking-and-listening-level-a1",
     "selt-a2": "ukvi-speaking-and-listening-level-a2",
@@ -362,6 +370,7 @@ export default async function BookExamsId({
     case "selt-b1-r-w":
     case "ukvi-speaking-and-listening-at-level-b1-r-w":
     case "ukvi-speaking-listening-reading-and-writing-at-level-b1":
+    case "ukvi-speaking-listening-reading-and-writing-level-b1":
     case "ukvi-speaking-listening-reading-and-writing-at-level-b1-1":
     case "ukvi-speaking-listening-reading-and-writing-b1":
       return (
@@ -371,6 +380,7 @@ export default async function BookExamsId({
       );
     case "selt-b2":
     case "ukvi-speaking-listening-reading-and-writing-at-level-b2":
+    case "ukvi-speaking-listening-reading-and-writing-level-b2":
     case "ukvi-speaking-and-listening-at-level-b2":
     case "ukvi-speaking-listening-reading-and-writing-b2":
       return (
@@ -380,6 +390,7 @@ export default async function BookExamsId({
       );
     case "selt-c1":
     case "ukvi-speaking-listening-reading-and-writing-at-level-c1":
+    case "ukvi-speaking-listening-reading-and-writing-level-c1":
     case "ukvi-speaking-and-listening-at-level-c1":
     case "ukvi-speaking-listening-reading-and-writing-c1":
       return (
@@ -389,6 +400,7 @@ export default async function BookExamsId({
       );
     case "selt-c2":
     case "ukvi-speaking-listening-reading-and-writing-at-level-c2":
+    case "ukvi-speaking-listening-reading-and-writing-level-c2":
     case "ukvi-speaking-and-listening-at-level-c2":
     case "ukvi-speaking-listening-reading-and-writing-c2":
       return (

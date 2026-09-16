@@ -18,7 +18,11 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+import { useLocale } from "next-intl";
+
 export default function PaymentSuccessClient() {
+  const locale = useLocale();
+  const isAr = locale === "ar";
   const searchParams = useSearchParams();
   const [copied, setCopied] = useState(false);
   const [formattedDate, setFormattedDate] = useState("");
@@ -26,9 +30,9 @@ export default function PaymentSuccessClient() {
 
   // Extract query parameters
   const rawAmount = searchParams.get("amount");
-  const currency = searchParams.get("currency") || "AED";
+  const currency = searchParams.get("currency") || (isAr ? "د.إ" : "AED");
   const examName = searchParams.get("exam") || searchParams.get("course") || searchParams.get("item") || "TEPTH Premium Exam Prep";
-  const paymentMethod = searchParams.get("method") || "Credit / Debit Card";
+  const paymentMethod = searchParams.get("method") || (isAr ? "بطاقة ائتمان / خصم" : "Credit / Debit Card");
 
   // Format amount (e.g. 1250 -> 1,250.00)
   const amount = rawAmount
@@ -47,7 +51,7 @@ export default function PaymentSuccessClient() {
     // Generate current date beautifully on client to avoid hydration mismatch
     const today = new Date();
     setFormattedDate(
-      today.toLocaleDateString(undefined, {
+      today.toLocaleDateString(isAr ? "ar-AE" : "en-US", {
         year: "numeric",
         month: "long",
         day: "numeric",
@@ -55,12 +59,12 @@ export default function PaymentSuccessClient() {
         minute: "2-digit"
       })
     );
-  }, [searchParams]);
+  }, [searchParams, isAr]);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(reference);
     setCopied(true);
-    toast.success("Transaction ID copied to clipboard!");
+    toast.success(isAr ? "تم نسخ رقم المعاملة!" : "Transaction ID copied to clipboard!");
     setTimeout(() => setCopied(false), 2000);
   };
 
@@ -97,17 +101,18 @@ export default function PaymentSuccessClient() {
 
           {/* Heading */}
           <h1 className="font-headline text-3xl font-black text-slate-900 tracking-tight mb-2 animate-fade-up">
-            Payment Successful!
+            {isAr ? "تم الدفع بنجاح!" : "Payment Successful!"}
           </h1>
           <p className="text-slate-500 text-sm max-w-md mx-auto leading-relaxed">
-            Your transaction has been processed securely. A confirmation email and tax invoice are on their way.
+            {isAr
+              ? "تمت معالجة معاملتك بأمان. تم إرسال رسالة تأكيد بالبريد الإلكتروني والفاتورة الضريبية."
+              : "Your transaction has been processed securely. A confirmation email and tax invoice are on their way."}
           </p>
           <div className="w-full mt-4 flex flex-col sm:flex-row gap-3 justify-center items-stretch sm:items-center">
             <Link href="/" className="grow sm:grow-0">
-              <Button
-              >
+              <Button>
                 <Home className="w-4 h-4" />
-                <span>Go to Home</span>
+                <span>{isAr ? "العودة إلى الصفحة الرئيسية" : "Go to Home"}</span>
               </Button>
             </Link>
           </div>

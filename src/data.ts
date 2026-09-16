@@ -98,31 +98,31 @@ export const EXAM_IDS_DATA = {
   },
   selt_a1: {
     id: "selt-a1",
-    name: "UKVI Speaking and listening at level A1",
+    name: "UKVI Speaking and Listening - Level A1",
   },
   selt_a2: {
     id: "selt-a2",
-    name: "UKVI Speaking and listening at level A2",
+    name: "UKVI Speaking and Listening - Level A2",
   },
   selt_b1: {
     id: "selt-b1",
-    name: "UKVI Speaking and listening at level B1",
+    name: "UKVI Speaking and Listening - Level B1",
   },
   selt_b1_r_w: {
     id: "selt-b1-r-w",
-    name: "UKVI Speaking, listening, reading, and writing at level B1",
+    name: "UKVI Speaking, Listening, Reading, and Writing B1",
   },
   selt_b2: {
     id: "selt-b2",
-    name: "UKVI Speaking, listening, reading, and writing at level B2",
+    name: "UKVI Speaking, Listening, Reading, and Writing B2",
   },
   selt_c1: {
     id: "selt-c1",
-    name: "UKVI Speaking, listening, reading, and writing at level C1",
+    name: "UKVI Speaking, Listening, Reading, and Writing C1",
   },
   selt_c2: {
     id: "selt-c2",
-    name: "UKVI Speaking, listening, reading, and writing at level C2",
+    name: "UKVI Speaking, Listening, Reading, and Writing C2",
   },
   oet: {
     id: "oet",

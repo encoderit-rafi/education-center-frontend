@@ -56,7 +56,11 @@ export default function FormSELTC1Registration({
     : examsList.find(
       (e: any) =>
         e.slug === "ukvi-speaking-listening-reading-and-writing-at-level-c1" ||
-        e.slug === "ukvi-speaking-listening-reading-and-writing-c1",
+        e.slug === "ukvi-speaking-listening-reading-and-writing-c1" ||
+        e.slug === "ukvi-speaking-listening-reading-and-writing-level-c1" ||
+        e.slug === "ukvi-speaking-and-listening-at-level-c1" ||
+        e.slug === "selt-c1" ||
+        e.name?.toLowerCase().includes("c1"),
     );
 
   const examId = initialExamId || activeExam?.id;
@@ -529,6 +533,18 @@ export default function FormSELTC1Registration({
                         </div>
                       ) : null;
                     })()}
+
+                    {pricing.vat > 0 && (
+                      <div className="flex justify-between text-sm">
+                        <span className="text-slate-500 font-medium">
+                          VAT ({VAT_PERCENT}%)
+                        </span>
+                        <PriceDisplay
+                          amount={pricing.vat}
+                          className="font-bold text-slate-900"
+                        />
+                      </div>
+                    )}
 
                   <div className="pt-6 border-t border-slate-200">
                     <div className="flex justify-between items-center">

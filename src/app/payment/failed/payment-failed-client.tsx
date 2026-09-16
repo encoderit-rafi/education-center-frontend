@@ -18,7 +18,11 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+import { useLocale } from "next-intl";
+
 export default function PaymentFailedClient() {
+  const locale = useLocale();
+  const isAr = locale === "ar";
   const searchParams = useSearchParams();
   const router = useRouter();
   const [copied, setCopied] = useState(false);
@@ -27,9 +31,9 @@ export default function PaymentFailedClient() {
 
   // Extract query parameters
   const rawAmount = searchParams.get("amount");
-  const currency = searchParams.get("currency") || "AED";
+  const currency = searchParams.get("currency") || (isAr ? "د.إ" : "AED");
   const examName = searchParams.get("exam") || searchParams.get("course") || searchParams.get("item") || "TEPTH Premium Exam Prep";
-  const errorMessage = searchParams.get("error_message") || searchParams.get("reason") || "The transaction was declined by the card issuer or cancelled.";
+  const errorMessage = searchParams.get("error_message") || searchParams.get("reason") || (isAr ? "تم رفض المعاملة من قِبل جهة إصدار البطاقة أو تم إلغاؤها." : "The transaction was declined by the card issuer or cancelled.");
   const retryUrl = searchParams.get("retry_url") || "/exams";
 
   // Format amount
@@ -49,7 +53,7 @@ export default function PaymentFailedClient() {
     // Generate current date beautifully on client
     const today = new Date();
     setFormattedDate(
-      today.toLocaleDateString(undefined, {
+      today.toLocaleDateString(isAr ? "ar-AE" : "en-US", {
         year: "numeric",
         month: "long",
         day: "numeric",
@@ -57,12 +61,12 @@ export default function PaymentFailedClient() {
         minute: "2-digit"
       })
     );
-  }, [searchParams]);
+  }, [searchParams, isAr]);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(reference);
     setCopied(true);
-    toast.success("Support reference ID copied!");
+    toast.success(isAr ? "تم نسخ رقم المرجع!" : "Support reference ID copied!");
     setTimeout(() => setCopied(false), 2000);
   };
 
@@ -101,26 +105,26 @@ export default function PaymentFailedClient() {
 
           {/* Heading */}
           <h1 className="font-headline text-3xl font-black text-slate-900 tracking-tight mb-2">
-            Payment Failed
+            {isAr ? "فشلت عملية الدفع" : "Payment Failed"}
           </h1>
           <p className="text-slate-500 text-sm max-w-md mx-auto leading-relaxed">
-            We were unable to complete your transaction. Don't worry, if any funds were reserved by your bank, they will be released shortly.
+            {isAr
+              ? "تعذر إكمال معاملتك. لا تقلق، إذا تم حجز أي أموال من قِبل البنك الخاص بك، فسيتم إرجاعها قريباً."
+              : "We were unable to complete your transaction. Don't worry, if any funds were reserved by your bank, they will be released shortly."}
           </p>
           {/* Action Buttons */}
           <div className="w-full flex flex-col sm:flex-row gap-3 mt-4 justify-center items-stretch sm:items-center">
             <Link href="/" className="grow sm:grow-0">
               <Button>
                 <Home className="w-4 h-4" />
-                <span>Go to Home</span>
+                <span>{isAr ? "العودة إلى الصفحة الرئيسية" : "Go to Home"}</span>
               </Button>
             </Link>
 
             <Link href="/contact-us" className="grow sm:grow-0">
-              <Button
-                variant="outline"
-              >
+              <Button variant="outline">
                 <Mail className="w-4 h-4" />
-                <span>Contact Support</span>
+                <span>{isAr ? "اتصل بالدعم" : "Contact Support"}</span>
               </Button>
             </Link>
           </div>

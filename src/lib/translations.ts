@@ -148,6 +148,10 @@ export function useRegistrationTitle(slug: string, dbExam?: any) {
       main: isAr ? "التحدث والاستماع والقراءة والكتابة لـ UKVI B1" : "UKVI Speaking, Listening, Reading and Writing at Level B1",
       highlight: isAr ? "إجراءات" : "Procedures",
     },
+    "ukvi-speaking-listening-reading-and-writing-level-b1": {
+      main: isAr ? "التحدث والاستماع والقراءة والكتابة لـ UKVI B1" : "UKVI Speaking, Listening, Reading and Writing at Level B1",
+      highlight: isAr ? "إجراءات" : "Procedures",
+    },
     "selt-b2": {
       main: isAr ? "التحدث والاستماع والقراءة والكتابة لـ UKVI B2" : "UKVI Speaking, Listening, Reading and Writing at Level B2",
       highlight: isAr ? "إجراءات" : "Procedures",
@@ -161,6 +165,10 @@ export function useRegistrationTitle(slug: string, dbExam?: any) {
       highlight: isAr ? "إجراءات" : "Procedures",
     },
     "ukvi-speaking-listening-reading-and-writing-b2": {
+      main: isAr ? "التحدث والاستماع والقراءة والكتابة لـ UKVI B2" : "UKVI Speaking, Listening, Reading and Writing at Level B2",
+      highlight: isAr ? "إجراءات" : "Procedures",
+    },
+    "ukvi-speaking-listening-reading-and-writing-level-b2": {
       main: isAr ? "التحدث والاستماع والقراءة والكتابة لـ UKVI B2" : "UKVI Speaking, Listening, Reading and Writing at Level B2",
       highlight: isAr ? "إجراءات" : "Procedures",
     },
@@ -180,6 +188,10 @@ export function useRegistrationTitle(slug: string, dbExam?: any) {
       main: isAr ? "التحدث والاستماع والقراءة والكتابة لـ UKVI C1" : "UKVI Speaking, Listening, Reading and Writing at Level C1",
       highlight: isAr ? "إجراءات" : "Procedures",
     },
+    "ukvi-speaking-listening-reading-and-writing-level-c1": {
+      main: isAr ? "التحدث والاستماع والقراءة والكتابة لـ UKVI C1" : "UKVI Speaking, Listening, Reading and Writing at Level C1",
+      highlight: isAr ? "إجراءات" : "Procedures",
+    },
     "selt-c2": {
       main: isAr ? "التحدث والاستماع والقراءة والكتابة لـ UKVI C2" : "UKVI Speaking, Listening, Reading and Writing at Level C2",
       highlight: isAr ? "إجراءات" : "Procedures",
@@ -193,6 +205,10 @@ export function useRegistrationTitle(slug: string, dbExam?: any) {
       highlight: isAr ? "إجراءات" : "Procedures",
     },
     "ukvi-speaking-listening-reading-and-writing-c2": {
+      main: isAr ? "التحدث والاستماع والقراءة والكتابة لـ UKVI C2" : "UKVI Speaking, Listening, Reading and Writing at Level C2",
+      highlight: isAr ? "إجراءات" : "Procedures",
+    },
+    "ukvi-speaking-listening-reading-and-writing-level-c2": {
       main: isAr ? "التحدث والاستماع والقراءة والكتابة لـ UKVI C2" : "UKVI Speaking, Listening, Reading and Writing at Level C2",
       highlight: isAr ? "إجراءات" : "Procedures",
     }
