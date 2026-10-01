@@ -98,9 +98,10 @@ export default function VisionAndMission() {
             <h2 className="text-3xl lg:text-4xl font-extrabold text-slate-900 mt-2 tracking-tight font-headline">
               {t("CoreValues.title")}
             </h2>
-            <p className="text-slate-600 text-sm leading-relaxed mt-2 font-medium">
-              {t("CoreValues.subtitle")}
-            </p>
+            <p
+              className="text-slate-600 text-sm leading-relaxed mt-2 font-medium [&_strong]:font-bold [&_strong]:text-slate-900"
+              dangerouslySetInnerHTML={{ __html: t.raw("CoreValues.subtitle") }}
+            />
             <div className="h-1 w-16 bg-[#A11D1D] mt-4 rounded-full" />
           </div>
 
@@ -119,9 +120,10 @@ export default function VisionAndMission() {
                     {value.title}
                   </BaseCardTitle>
 
-                  <BaseCardDescription className="text-slate-600 text-xs leading-relaxed text-justify font-semibold">
-                    {value.text}
-                  </BaseCardDescription>
+                  <BaseCardDescription
+                    className="text-slate-600 text-xs leading-relaxed text-justify font-normal line-clamp-none [&_strong]:font-bold [&_strong]:text-slate-900"
+                    dangerouslySetInnerHTML={{ __html: value.text }}
+                  />
                 </div>
               </BaseCard>
             ))}

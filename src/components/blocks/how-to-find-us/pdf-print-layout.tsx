@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { useTranslations } from "next-intl";
+import { AED } from "@/components/ui/aed";
 
 export function PdfPrintLayout() {
   const t = useTranslations("AboutUsPage.HowToFindUs");
@@ -376,8 +377,8 @@ export function PdfPrintLayout() {
               <span>{t("Pdf.addressL1")}</span>
               <span>{t("Pdf.addressL2")}</span>
               <div className="pdf-header-contact-meta">
-                <span><strong>{t("Pdf.tel")}:</strong> <span dir="ltr">+971 6 553 1250</span></span>
-                <span><strong>{t("Pdf.web")}:</strong> www.tepth.org</span>
+                <span><strong>{t("Pdf.tel")}:</strong> <span dir="ltr">+971 4 333 3616</span></span>
+                <span><strong>{t("Pdf.web")}:</strong> www.tepth.net</span>
               </div>
             </div>
           </div>
@@ -401,8 +402,8 @@ export function PdfPrintLayout() {
             <span className="pdf-section-label">{t("MapSection.badge")}</span>
             <div className="pdf-map-wrap">
               <Image
-                src="/images/about-us/TEPTH-Sharjah-Location-Map.jpg"
-                alt="TEPTH Sharjah Location Map"
+                src="/images/about-us/TEPTH-Dubai-Location-Map.jpg"
+                alt="TEPTH Dubai Location Map"
                 fill
                 className="object-contain"
               />
@@ -441,8 +442,8 @@ export function PdfPrintLayout() {
             </div>
 
             <div style={{ marginTop: "0.65rem", fontSize: "11px", lineHeight: 1.65, color: "#475569" }}>
-              <span style={{ fontWeight: 700, color: "#1a1a1a" }}>{t("Pdf.phoneLabel")} </span><span dir="ltr">+971 6 553 1250</span><br />
-              <span style={{ fontWeight: 700, color: "#1a1a1a" }}>{t("Pdf.taxiLabel")} </span><span dir="ltr">600-525-252</span>
+              <span style={{ fontWeight: 700, color: "#1a1a1a" }}>{t("Pdf.phoneLabel")} </span><span dir="ltr">+971 4 333 3616</span><br />
+              <span style={{ fontWeight: 700, color: "#1a1a1a" }}>{t("Pdf.taxiLabel")} </span><span dir="ltr">04 208 0000 / 800 88088</span>
             </div>
           </div>
         </div>
@@ -478,18 +479,12 @@ export function PdfPrintLayout() {
             <div style={{ clear: "both" }} />
           </div>
 
-          {/* 03 Metro & Bus */}
+          {/* 03 By Dubai Metro */}
           <div className="pdf-transport-item">
             <span className="pdf-transport-num">03</span>
             <div className="pdf-transport-body">
               <div className="pdf-transport-title">{t("Transportation.metroTitle")}</div>
-              <strong>1.</strong> {t("Transportation.metroStep1Text")}<br />
-              <strong>2.</strong> {t("Transportation.metroStep2Text1")} {t("Transportation.metroStep2Text2")}<br />
-              <strong>3.</strong> {t("Transportation.metroStep3Text")}<br />
-              <em>{t("Pdf.alternatives")}</em><br />
-              <span style={{ color: "#d12c2c", fontWeight: 700 }}>
-                {t("Transportation.note")}
-              </span>
+              {t("Transportation.metroDescription")}
             </div>
             <div style={{ clear: "both" }} />
           </div>
@@ -513,7 +508,7 @@ export function PdfPrintLayout() {
               <div className="pdf-header-contact-details">
                 <span>{t("Pdf.addressL1")}, {t("Pdf.addressL2")}</span>
                 <div className="pdf-header-contact-meta">
-                  <span><strong>{t("Pdf.tel")}:</strong> <span dir="ltr">+971 6 553 1250</span></span>
+                  <span><strong>{t("Pdf.tel")}:</strong> <span dir="ltr">+971 4 333 3616</span></span>
                 </div>
               </div>
             </div>
@@ -559,8 +554,9 @@ export function PdfPrintLayout() {
               <span className="pdf-parking-label">{t("DrivingDirections.publicParking")}</span>
             </div>
             <p className="pdf-parking-text">
-              {t("DrivingDirections.publicParkingText1")}
-              <strong>2 AED{t("DrivingDirections.publicParkingText2")}</strong>.
+              {t.rich("DrivingDirections.publicParkingText1", {
+                aed: () => <AED className="h-[0.85em] w-auto fill-current inline-block relative top-[-0.05em] mx-0.5" />,
+              })}
             </p>
 
             <p className="pdf-parking-note">
@@ -575,8 +571,8 @@ export function PdfPrintLayout() {
               {t("Pdf.footerAddress")}
             </div>
             <div style={{ textAlign: "right" }}>
-              <span dir="ltr">+971 6 553 1250</span><br />
-              www.tepth.org
+              <span dir="ltr">+971 4 333 3616</span><br />
+              www.tepth.net
             </div>
           </div>
 

@@ -28,7 +28,14 @@ export default function WhoWeAre() {
                   <span className="text-primary">{t("HeroSection.titleAccent")}</span>
                 </>
               }
-              description={t("HeroSection.description")}
+              description={
+                <span
+                  className="[&_strong]:font-bold [&_strong]:text-slate-900"
+                  dangerouslySetInnerHTML={{
+                    __html: t.raw("HeroSection.description"),
+                  }}
+                />
+              }
               className="space-y-4"
             />
           </div>
@@ -58,7 +65,7 @@ export default function WhoWeAre() {
             </h2>
             <div className="h-1 w-16 bg-[#A11D1D] rounded-full" />
             <p
-              className="text-slate-650 text-base leading-relaxed text-justify font-medium"
+              className="text-slate-650 text-base leading-relaxed text-justify font-medium [&_strong]:font-bold [&_strong]:text-slate-900"
               dangerouslySetInnerHTML={{ __html: t.raw("NarrativeSection.p1") }}
             />
           </div>
@@ -83,9 +90,10 @@ export default function WhoWeAre() {
             <h3 className="text-2xl lg:text-3xl font-extrabold text-slate-900 tracking-tight font-headline border-s-4 border-[#A11D1D] ps-4">
               {t("NarrativeSection.expertTitle")}
             </h3>
-            <p className="text-slate-655 text-sm leading-relaxed text-justify font-medium">
-              {t("NarrativeSection.expertDesc")}
-            </p>
+            <p
+              className="text-slate-655 text-sm leading-relaxed text-justify font-medium [&_strong]:font-bold [&_strong]:text-slate-900"
+              dangerouslySetInnerHTML={{ __html: t.raw("NarrativeSection.expertDesc") }}
+            />
           </div>
 
           {/* Right Block - Exams Pill Grid */}
@@ -99,7 +107,7 @@ export default function WhoWeAre() {
                   <span className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-red-50 text-[#A11D1D] group-hover:bg-[#A11D1D] group-hover:text-white transition-colors duration-200 shadow-xs">
                     <Check className="size-4" />
                   </span>
-                  <span className="font-bold text-slate-900 text-xs tracking-wide">
+                  <span className="font-bold text-slate-900 text-xs tracking-wide whitespace-pre-line leading-relaxed">
                     {exam}
                   </span>
                 </div>
@@ -121,9 +129,9 @@ export default function WhoWeAre() {
             <h3 className="text-2xl lg:text-3xl font-black text-slate-900 tracking-tight font-headline">
               {t("NarrativeSection.visionTitle")}
             </h3>
-            <div className="space-y-6 text-slate-655 text-sm md:text-base leading-relaxed text-justify font-medium">
-              <p>{t("NarrativeSection.visionDesc1")}</p>
-              <p>{t("NarrativeSection.visionDesc2")}</p>
+            <div className="space-y-6 text-slate-655 text-sm md:text-base leading-relaxed text-justify font-medium [&_strong]:font-bold [&_strong]:text-slate-900">
+              <p dangerouslySetInnerHTML={{ __html: t.raw("NarrativeSection.visionDesc1") }} />
+              <p dangerouslySetInnerHTML={{ __html: t.raw("NarrativeSection.visionDesc2") }} />
             </div>
           </div>
         </div>

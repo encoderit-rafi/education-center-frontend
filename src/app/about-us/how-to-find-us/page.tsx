@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { SectionHeader } from "@/components/ui/section-header";
 import { Button } from "@/components/ui/button";
+import { AED } from "@/components/ui/aed";
 import { PriceDisplay } from "@/components/ui/price-display";
 import { PdfPrintLayout } from "@/components/blocks/how-to-find-us/pdf-print-layout";
 import { useTranslations } from "next-intl";
@@ -39,10 +40,10 @@ export default function HowToFindUs() {
             <div className="absolute -inset-4 bg-primary/5 rounded-xl blur-3xl opacity-50 transition-opacity group-hover:opacity-100"></div>
             <div className="relative aspect-4/3 rounded-xl overflow-hidden shadow-2xl">
               <Image
-                src="/images/about-us/Exterior_Building.jpg"
+                src="/images/about-us/exterior-building.jpg"
                 alt="Our Center"
                 fill
-                className="object-cover"
+                className="object-full"
                 priority
               />
             </div>
@@ -67,9 +68,6 @@ export default function HowToFindUs() {
               <p>
                 {t("MapSection.p1")}
               </p>
-              <p>
-                {t("MapSection.p2")}
-              </p>
               <p className="text-slate-900 font-bold">
                 {t("MapSection.p3Start")}
                 <span className="text-primary">
@@ -90,7 +88,7 @@ export default function HowToFindUs() {
           </div>
           <div className="relative aspect-4/3 rounded-xl overflow-hidden print-map-container">
             <Image
-              src="/images/about-us/TEPTH-Sharjah-Location-Map.jpg"
+              src="/images/about-us/TEPTH-Dubai-Location-Map.jpg"
               alt="TEPTH Location Map"
               fill
               className="object-contain"
@@ -114,7 +112,7 @@ export default function HowToFindUs() {
         <div className="relative group rounded-xl overflow-hidden shadow-2xl border border-slate-100">
           <div className="absolute top-6 right-6 z-20">
             <Link
-              href="https://www.google.com/maps/dir//The+Exam+Preparation+and+Testing+House(TEPTH),+Tabarak+Tower+Suite+701+,+7th+Floor+-+Corniche+Rd+-+Al+Mamzar+-+Sharjah+-+United+Arab+Emirates/@25.313693,55.361475,15z"
+              href="https://www.google.com/maps/place/The+Exam+Preparation+and+Testing+House+(TEPTH)/@25.1118091,55.3843817,128m/am=t/data=!3m2!1e3!5s0x3e5f693406eebb91:0xf35b02a92701da1!4m26!1m19!4m18!1m6!1m2!1s0x3e5f5f5fede7964b:0x2a830aa19c1f6d89!2sSharjah+-+United+Arab+Emirates!2m2!1d55.427211!2d25.3561698!1m6!1m2!1s0x3e5f6466278a738d:0x744c65e65f9f1f7b!2sThe+Exam+Preparation+and+Testing+House+(TEPTH),+Apricot+Tower+Suite+703,+7th+floor%26+-+Suite+308,+3rd+floor+-+19a+street+-+Dubai+Silicon+Oasis+-+Dubai+-+United+Arab+Emirates!2m2!1d55.3843719!2d25.1117742!6m3!1i0!2i1!3i0!3m5!1s0x3e5f6466278a738d:0x744c65e65f9f1f7b!8m2!3d25.1117742!4d55.3843719!16s%2Fg%2F11b6gqr41b?entry=ttu&g_ep=EgoyMDI2MDkyOS4wIKXMDSoASAFQAw%3D%3D"
               target="_blank"
               className="bg-white/90 backdrop-blur-md px-6 py-3 rounded-xl flex items-center gap-2 text-sm font-black text-slate-900 shadow-xl hover:bg-white transition-all group/btn"
             >
@@ -124,7 +122,7 @@ export default function HowToFindUs() {
           </div>
           <div className="relative aspect-21/9 min-h-112.5">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3606.2843818318043!2d55.3589000751671!3d25.31369297763539!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f5bdc6cfb106d%3A0x26ff2a834eecd8fe!2sThe%20Exam%20Preparation%20and%20Testing%20House(TEPTH)!5e0!3m2!1sen!2sae!4v1715083800000!5m2!1sen!2sae"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3612.383180424599!2d55.381796975160434!3d25.11177417776401!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f6466278a738d%3A0x744c65e65f9f1f7b!2sThe%20Exam%20Preparation%20and%20Testing%20House%20(TEPTH)!5e0!3m2!1sen!2sae!4v1715083800000!5m2!1sen!2sae"
               width="100%"
               height="100%"
               style={{ border: 0 }}
@@ -183,8 +181,8 @@ export default function HowToFindUs() {
               </div>
               <div className="relative aspect-4/3 rounded-xl overflow-hidden shadow-2xl order-1 lg:order-2 transport-img">
                 <Image
-                  src="/images/about-us/taxi-sharjah.png"
-                  alt="Sharjah Taxi"
+                  src="/images/about-us/dubai-taxi.jpg"
+                  alt="Dubai Taxi"
                   fill
                   className="object-cover"
                 />
@@ -195,8 +193,8 @@ export default function HowToFindUs() {
             <div className="grid lg:grid-cols-2 gap-16 lg:gap-32 items-center transport-grid">
               <div className="relative aspect-4/3 rounded-xl overflow-hidden shadow-2xl transport-img">
                 <Image
-                  src="/images/about-us/sss.png"
-                  alt="Sharjah Public Bus"
+                  src="/images/about-us/dubai-public-bus.jpg"
+                  alt="Dubai Public Bus"
                   fill
                   className="object-cover"
                 />
@@ -232,46 +230,6 @@ export default function HowToFindUs() {
                 <div className="space-y-6 text-base leading-relaxed font-medium">
                   <p>
                     {t("Transportation.metroDescription")}
-                  </p>
-
-                  <div className="space-y-4">
-                    <p className="font-bold">{t("Transportation.metroStep1Title")}</p>
-                    <p>
-                      {t("Transportation.metroStep1Text")}
-                    </p>
-                  </div>
-
-                  <div className="space-y-4">
-                    <p className="font-bold">{t("Transportation.metroStep2Title")}</p>
-                    <p>
-                      {t("Transportation.metroStep2Text1")}
-                    </p>
-                    <p>
-                      {t("Transportation.metroStep2Text2")}
-                    </p>
-                  </div>
-
-                  <div className="space-y-4">
-                    <p className="font-bold">{t("Transportation.metroStep3Title")}</p>
-                    <p>
-                      {t("Transportation.metroStep3Text")}
-                    </p>
-                  </div>
-
-                  <div className="pt-4 border-t border-slate-100">
-                    <p className="font-bold mb-2">{t("Transportation.alternativeRoutesTitle")}</p>
-                    <ul className="list-disc pl-5 space-y-2">
-                      <li>
-                        {t("Transportation.alternativeRoute1")}
-                      </li>
-                      <li>
-                        {t("Transportation.alternativeRoute2")}
-                      </li>
-                    </ul>
-                  </div>
-
-                  <p className="text-[#d12c2c] font-bold">
-                    {t("Transportation.note")}
                   </p>
                 </div>
               </div>
@@ -321,7 +279,7 @@ export default function HowToFindUs() {
             <div className="absolute top-0 right-0 w-80 h-80 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:scale-110 transition-transform duration-700"></div>
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-black/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 group-hover:scale-110 transition-transform duration-700"></div>
 
-            <div className="relative z-10 space-y-10">
+            <div className="relative z-10 space-y-8">
               <div className="flex items-center gap-5">
                 <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center backdrop-blur-sm border border-white/20">
                   <Car className="w-8 h-8 text-white" />
@@ -332,55 +290,51 @@ export default function HowToFindUs() {
                 </h3>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-5 text-sm md:text-base leading-relaxed text-white/90">
+                <p className="leading-relaxed">
+                  – {t("DrivingDirections.allDayParkingText")}
+                </p>
+
                 <div className="space-y-2">
-                  <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 rounded-full bg-white"></div>
-                    <p className="text-white font-black uppercase text-sm tracking-[0.2em]">
-                      {t("DrivingDirections.onSiteParking")}
-                    </p>
-                  </div>
-                  <p className="text-white/80 text-base leading-relaxed font-medium pl-5">
-                    {t("DrivingDirections.onSiteParkingText1")}
-                    <span className="text-white font-black">{t("DrivingDirections.onSiteParkingText2")}</span>
+                  <p className="leading-relaxed">
+                    – <strong className="text-white">{t("DrivingDirections.visitorParkingTitle")}:</strong> {t("DrivingDirections.visitorParkingText")}
                   </p>
+                  <ul className="list-disc list-inside ps-4 space-y-1.5 text-sm text-white/90">
+                    <li>
+                      <strong className="text-white">{t("DrivingDirections.complimentaryLabel")}:</strong> {t("DrivingDirections.complimentaryValue")}
+                    </li>
+                    <li>
+                      <strong className="text-white">{t("DrivingDirections.chargeableLabel")}:</strong>{" "}
+                      {t.rich("DrivingDirections.chargeableValue", {
+                        aed: () => <AED className="h-[0.85em] w-auto fill-current inline-block relative top-[-0.05em] mx-0.5" />,
+                      })}
+                    </li>
+                  </ul>
                 </div>
 
-                <div className="h-px bg-white/20 w-full"></div>
+                <p className="text-sm leading-relaxed text-white/90">
+                  {t("DrivingDirections.permitsInfo")}
+                </p>
 
-                <div className="space-y-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 rounded-full bg-white"></div>
-                    <p className="text-white font-black uppercase text-sm tracking-[0.2em]">
-                      {t("DrivingDirections.publicParking")}
-                    </p>
-                  </div>
-                  <div className="space-y-5 pl-5">
-                    <p className="text-white/80 text-base leading-relaxed font-medium">
-                      {t("DrivingDirections.publicParkingText1")}
-                      <span className="text-white font-black inline">
-                        <PriceDisplay amount={2} /> {t("DrivingDirections.publicParkingText2")}
-                      </span>
-                    </p>
-                    <div className="bg-white/10 p-5 rounded-2xl border border-white/10 backdrop-blur-sm">
-                      <p className="text-white font-medium leading-relaxed italic">
-                        &quot;{t("DrivingDirections.quote")}&quot;
-                      </p>
-                    </div>
-                  </div>
+                <div className="p-4 rounded-2xl bg-white/10 border border-white/10 backdrop-blur-sm text-sm leading-relaxed text-white/95">
+                  <p>
+                    {t.rich("DrivingDirections.streetParking", {
+                      aed: () => <AED className="h-[0.85em] w-auto fill-current inline-block relative top-[-0.05em] mx-0.5" />,
+                    })}
+                  </p>
                 </div>
               </div>
 
-              <div className="p-4 border-t border-white/20">
-                <p className="text-base text-white mb-6">
+              <div className="pt-4 border-t border-white/20">
+                <p className="text-sm text-white/80 mb-2">
                   {t("DrivingDirections.assistance")}
                 </p>
                 <Link
-                  href="tel:+97165531250"
+                  href="tel:+97143333616"
                   className="group/phone flex items-center gap-4"
                 >
                   <span dir="ltr" className="text-2xl md:text-3xl font-black text-white hover:text-white/80 transition-all">
-                    +971 6 553 1250
+                    +971 4 333 3616
                   </span>
                 </Link>
               </div>

@@ -371,22 +371,22 @@
         "badge": "LOCATION GUIDE",
         "title": "How to ",
         "titleAccent": "Find Our Center",
-        "description": "Reaching our center in Sharjah is straightforward. We've compiled this comprehensive guide to help you navigate your journey with ease."
+        "description": "Reaching our center in Dubai Silicon Oasis is straightforward. We've compiled this comprehensive guide to help you navigate your journey with ease."
       },
       "MapSection": {
         "badge": "LOCATION MAP",
-        "title": "Interactive ",
-        "titleAccent": "Navigation",
-        "p1": "Route to our centre is too easy to follow and reach the destination. We have incorporated Google Location Map to make it more understandable for you.",
-        "p2": "From the small box on lower-left corner of the map, you can select to view street map or the satellite imagery. You can also view larger map to be more certain about our location.",
+        "title": "Location ",
+        "titleAccent": "Map",
+        "p1": "Route to our centre is too easy to follow and reach the destination. We have incorporated Google Location Map to make it more understandable for you. From the small box on lower-left corner of the map, you can select to view street map or the satellite imagery. You can also view larger map to be more certain about our location.",
+        "p2": "This visual representation will help you with the driving directions to arrive at The Exam Preparation & Testing House FZCO at Dubai Silicon Oasis.",
         "p3Start": "This visual representation will help you with the driving directions to arrive at ",
-        "p3Highlight": "The Exam Preparation & Testing House L.L.C",
-        "p3End": " in Sharjah.",
+        "p3Highlight": "The Exam Preparation & Testing House FZCO",
+        "p3End": " at Dubai Silicon Oasis.",
         "printButton": "Print Map & Directions"
       },
       "VisitOurCentre": {
         "title": "Visit Our Centre",
-        "description": "Al Mamzar, Sharjah — located in the strategic Tabarak Tower, close to all major transport links. All facilities are wheelchair accessible.",
+        "description": "Dubai Silicon Oasis — located in the strategic Apricot Tower, close to all major transport links. All facilities are wheelchair accessible.",
         "openInMaps": "Open in Maps "
       },
       "Transportation": {
@@ -395,15 +395,15 @@
         "titleAccent": "Reach Us",
         "description": "We have mapped out the most efficient routes to ensure your journey to our center is as smooth as possible.",
         "taxicabTitle": "By Taxicab",
-        "taxicabDescriptionPart1": "From anywhere in Sharjah, you can hire a taxi and it will take you to your final destination.",
-        "taxicabNumber": "600-525-252",
-        "taxicabDescriptionPart2": "Call ",
-        "taxicabDescriptionPart3": " to book a taxicab with Sharjah Taxi Corporation. Taxicab drivers will pick you up from your specified location and take you to our centre.",
-        "taxicabLink": "",
-        "publicBusTitle": "Public Bus",
-        "publicBusDescription": "Take a Sharjah public bus towards Al Mamzar or Al Taawun, disembarking at the nearest bus stop to Tabarak Tower. The bus ride will get you within a short walking distance of the center.",
-        "metroTitle": "Metro & Bus",
-        "metroDescription": "Although Sharjah does not have its own metro, you can combine the Dubai Metro with bus services to reach our Sharjah office.",
+        "taxicabDescriptionPart1": "From anywhere in Dubai, you can hire a taxi and it will take you to your final destination of Silicon Oasis.",
+        "taxicabNumber": "04 208 0000",
+        "taxicabDescriptionPart2": "Call at ",
+        "taxicabDescriptionPart3": " to book with Dubai Taxi Corporation for taxi. Taxicab drivers will pick you up from your specified location and take you to the Silicon Oasis. For location map, please ",
+        "taxicabLink": "click here",
+        "publicBusTitle": "By Public Bus",
+        "publicBusDescription": "From Ghubaiba Bus Station R, Dubai, it will take half an hour to reach Silicon Oasis. With less traffic, you can reach in just 25 minutes. From Ghubaiba Station head north toward 16th St and then turn to left but keep on the same street. Now, turn right onto Khalid Bin Al Waleed Rd/D79 and then left at Al Mina Rd/D92 Merge onto Al Mina Rd/D92 and take left turn onto Sheikh Rashid Rd/D75 leading to the ramp to D78/Umm Hurair St/Deira. Stay on left at the fork to continue toward E66, after half km of distance, keep on right at the fork and then merge onto E66. From here take the exit and keep left following the signs for Al Warqaa/Al Sharjah. Now come to right and take the 2nd exit at the roundabout. After a while with slight left and right, your destination will be on your right",
+        "metroTitle": "By Dubai Metro",
+        "metroDescription": "From your place, Take the Metro to Rashidiya Metro Station that is located near Rashidiya Park. From here, take (RTA) Dubai Bus No. 320.",
         "metroStep1Title": "1. Take the Dubai Metro:",
         "metroStep1Text": "— Board the Red Line and alight at Union Metro Station.",
         "metroStep2Title": "2. Transfer to a Bus:",
@@ -421,47 +421,64 @@
         "title": "Get Directions",
         "routes": [
           {
-            "from": "Dubai",
-            "text": "Take Al Ittihad Road (E11) towards Sharjah. Follow the signs towards Al Mamzar. Turn right onto Al Mamzar Road and continue until you reach Tabarak Tower on your right."
+            "from": "Northern Emirates (Sharjah, Ajman, Umm Al Quwain, Ras Al-Khaimah, Fujairah)",
+            "text": "If you are coming from the Northern Emirates (Sharjah, Ajman, Umm Al Quwain, Ras Al-Khaimah, Fujairah), take Sheikh Mohammad Bin Zayed Road E311 (previously called Emirates Road), keep driving and then Exit 44 taking the direction of Al Ain Road E66, continue in the direction of Al Ain Road until junction 16 where you will see a sign directing you to turn right onto Dubai Academic City Road (D54). Continue along Dubai Academic City Road, passing Hamdan Bin Mohammed Smart University, Zayed University and Higher college of Technology (Dubai Men’s College) on your right, make a U-Turn at the first roundabout, and then take the first right exit, at first roundabout, take the second exit, Apricot Tower is on your right."
           },
           {
-            "from": "Ajman, Umm Al Quwain, or Ras Al Khaimah",
-            "text": "Drive towards Sharjah on Sheikh Mohammed Bin Zayed Road (E311). Take the exit for Al Mamzar, and follow the signs to reach Al Mamzar Road. Tabarak Tower will be on your right."
+            "from": "Emirates Road (E611)",
+            "text": "If you are coming through Emirates Road (E611) (previously called Dubai Bypass Road), keep driving till you see a sign directing you to turn right onto Dubai Academic City Road (D54). Continue along Dubai Academic City Road, passing Hamdan Bin Mohammed Smart University, Zayed University and Higher college of Technology (Dubai Men’s College) on your right, make a U-Turn at the first roundabout, and then take the first right exit, at first roundabout, take the second exit, Apricot Tower is on your right."
+          },
+          {
+            "from": "Al Ain",
+            "text": "If coming from Al Ain, take the Al Ain Road (E66) in the direction of Dubai. Exit at Junction (16), Continue along Dubai Academic City Road (D54) passing Hamdan Bin Mohammed Smart University, Zayed University and Higher college of Technology (Dubai Men’s College) on your right, make a U-Turn at the first roundabout, and then take the first right exit, at first roundabout, take the second exit, Apricot Tower is on your right."
           },
           {
             "from": "Abu Dhabi",
-            "text": "Head towards Dubai on Sheikh Zayed Road (E11). Continue towards Al Ittihad Road (E11) into Sharjah. Follow the signs to Al Mamzar, and turn right onto Al Mamzar Road. Tabarak Tower will be on your right."
+            "text": "If you are coming from Abu Dhabi, take Sheikh Mohammad Bin Zayed Road (E311), continue to Academic City Road (D54). Exit from Dubai Al Ain Road (E66), take the exit toward Dubai Academic City Road (D54), passing Hamdan Bin Mohammed Smart University, Zayed University and Higher college of Technology (Dubai Men’s College) on your right, make a U-turn at the first roundabout, and then take the first right exit, at first roundabout, take the second exit, Apricot Tower is on your right."
+          },
+          {
+            "from": "Main Entrance of Dubai Silicon Oasis",
+            "text": "If you are coming through the main entrance of Dubai Silicon Oasis, go straight at the first roundabout, passing the Dubai Silicon Oasis Authority headquarters on your left, continue driving until you see a sign directing you to turn right onto the Cedar Villas Street, go straight at the first roundabout and then go right on the second roundabout passing the choithrams supermarket on your right, continue driving and then take the first exit at the first roundabout, Apricot Tower is on your right."
           }
         ],
         "parkingTitle1": "Parking",
-        "parkingTitle2": "Information",
-        "onSiteParking": "On-Site Parking",
-        "onSiteParkingText1": "There are visitor parking spaces available in front of ",
-        "onSiteParkingText2": "Tabarak Tower",
-        "publicParking": "Public Parking",
-        "publicParkingText1": "Metered parking is also available near the tower at a rate of ",
-        "publicParkingText2": " per hour. Please check with SRTA in Sharjah for recent updates.",
-        "quote": "This guide is aimed at helping you reach The Exam Preparation & Testing House L.L.C in Sharjah with ease.",
+        "parkingTitle2": "Details:",
+        "allDayParkingText": "All-day parking is available on the left side and in front of Apricot Tower. There are 24 parking lots including 3 accessible parking lots for people with disabilities.",
+        "visitorParkingTitle": "Visitor Parking",
+        "visitorParkingText": "There are 14 parking lots located in back of the building.",
+        "complimentaryLabel": "Complimentary",
+        "complimentaryValue": "No charge within the first 1 hours.",
+        "chargeableLabel": "Chargeable",
+        "chargeableValue": "<aed></aed> 11 per hour",
+        "permitsInfo": "Parking permits/passes are given to visitors by the building security guard and they pay the parking fee on their way out.",
+        "streetParking": "Paid on-street parking is available. The metered parking costs <aed></aed> 4 per hour and the parking fee can be paid by texting SMS or inserting coins. Seasonal pre-paid parking cards are not accepted. (Please double-check with RTA.)",
+        "onSiteParking": "All-Day Parking",
+        "onSiteParkingText1": "All-day parking is available on the left side and in front of Apricot Tower. There are 24 parking lots including 3 accessible parking lots for people with disabilities.",
+        "onSiteParkingText2": "",
+        "publicParking": "Visitor Parking & On-Street Rates",
+        "publicParkingText1": "Visitor parking is located at the back of the building (first hour complimentary, then <aed></aed> 11/hr). Paid on-street parking is <aed></aed> 4 per hour.",
+        "publicParkingText2": "",
+        "quote": "Parking permits/passes are given to visitors by the building security guard and they pay the parking fee on their way out.",
         "assistance": "For Further Assistance"
       },
       "Pdf": {
-        "companyName": "The Exam Preparation & Testing House L.L.C",
-        "addressL1": "Suite 701, 7th Floor, Tabarak Tower",
-        "addressL2": "Corniche Rd, Al Mamzar, Sharjah, UAE",
+        "companyName": "The Exam Preparation & Testing House FZCO",
+        "addressL1": "Suite 703, 7th Floor, Apricot Tower",
+        "addressL2": "Dubai Silicon Oasis, Dubai, UAE",
         "tel": "Tel",
         "web": "Web",
         "destinationPrefix": "Destination: ",
-        "destinationSuffix": ", Sharjah",
+        "destinationSuffix": ", Dubai",
         "fullAddressBadge": "📍 Full Address",
-        "fullAddressL1": "Tabarak Tower, Suite 701, 7th Floor",
-        "fullAddressL2": "Corniche Road, Al Mamzar",
-        "fullAddressL3": "Sharjah, United Arab Emirates",
+        "fullAddressL1": "Apricot Tower, Suite 703, 7th Floor",
+        "fullAddressL2": "Dubai Silicon Oasis, P.O. Box 300109",
+        "fullAddressL3": "Dubai, United Arab Emirates",
         "phoneLabel": "Phone:",
-        "taxiLabel": "Taxi (Sharjah):",
+        "taxiLabel": "Taxi (Dubai):",
         "continued": "How to Find Us — Continued",
-        "footerBrand": "TEPTH — The Exam Preparation & Testing House L.L.C",
-        "footerAddress": "Tabarak Tower, Suite 701, Corniche Rd, Al Mamzar, Sharjah, UAE",
-        "alternatives": "Alternatives: E306 (Al Ghubaiba → Al Jubail) · E307 (Deira City Centre → Al Jubail).",
+        "footerBrand": "TEPTH — The Exam Preparation & Testing House FZCO",
+        "footerAddress": "Apricot Tower, Suite 703, Dubai Silicon Oasis, P.O. Box 300109, Dubai, UAE",
+        "alternatives": "Bus 320 from Centrepoint Metro Station to Silicon Oasis.",
         "from": "From",
         "parkingInfo": "🅿 Parking Information"
       }
@@ -471,50 +488,50 @@
         "badge": "OUR VISION & MISSION",
         "title": "Vision & Mission",
         "titleAccent": "",
-        "description": "TEPTH is dedicated to helping candidates achieve academic excellence and professional growth."
+        "description": "Based in Dubai, United Arab Emirates, The Exam Preparation & Testing House FZCO is fully dedicated to empowering test-takers to achieve outstanding academic excellence and accelerate their professional growth."
       },
       "Vision": {
         "title": "Our Vision",
-        "desc": "The Exam Preparation and Testing House (TEPTH) aspires to be a premier, globally recognized leader in exam counseling and testing services. We were founded with a clear goal: to equip students with the most advanced preparation tools and techniques available. By empowering candidates to achieve excellence in their chosen fields, we enable them to make meaningful contributions to society. Our team is completely dedicated to delivering outstanding, top-tier service to every candidate."
+        "desc": "Headquartered in Dubai, United Arab Emirates, The Exam Preparation & Testing House FZCO (TEPTH) aspires to be a globally recognized leader in exam counseling and comprehensive testing services. We were established with a clear mission: to equip students with the most advanced preparation tools and innovative study techniques available in the region. By empowering test-takers to achieve academic and professional excellence in their chosen fields, we enable them to make meaningful contributions to society. Ultimately, our expert team remains entirely dedicated to delivering outstanding, top-tier educational support to every single candidate."
       },
       "Mission": {
         "title": "Our Mission",
-        "desc": "Our guiding philosophy is to provide comprehensive, end-to-end testing and exam preparation solutions for candidates throughout the United Arab Emirates and the broader Arab World. We are a passionate team committed to supporting and facilitating students through every step of their testing journey."
+        "desc": "Our guiding philosophy at The Exam Preparation & Testing House FZCO, centrally located in Dubai, is to deliver comprehensive, end-to-end testing and exam preparation solutions for test-takers across the United Arab Emirates and the broader Arab World. We operate as a passionate team of experts, deeply committed to supporting and guiding students through every single step of their certification and testing journey."
       },
       "CoreValues": {
         "badge": "Foundational Principles",
         "title": "Our Core Values",
-        "subtitle": "Our work is driven by the following foundational principles:",
+        "subtitle": "Our educational operations at <strong>The Exam Preparation & Testing House FZCO (TEPTH)</strong> in Dubai are driven by the following core foundational principles:",
         "values": [
           {
             "title": "Simplifying the Complex",
-            "text": "We break down complicated testing procedures that can overwhelm candidates and hinder their performance. By utilizing unique resources and innovative technology, we make challenging tasks and concepts much easier to grasp."
+            "text": "To simplify the complexities of testing procedures that often hinder comprehension. At our Dubai-based center, we utilize unique educational resources and cutting-edge technology to help test-takers easily master the most challenging tasks."
           },
           {
             "title": "Shaping a Better Future",
-            "text": "We believe that investing in high-quality education for today's youth is the key to building a brighter, more enlightened society tomorrow."
+            "text": "<strong>The Exam Preparation & Testing House FZCO (TEPTH)</strong> operates as a forward-thinking enterprise dedicated to shaping a brighter future across the United Arab Emirates. We firmly believe that delivering quality education to the youth cultivates a more enlightened and prosperous society."
           },
           {
             "title": "Guiding the Way",
-            "text": "By helping candidates select the ideal exam preparation courses for their specific goals, TEPTH acts as a torchbearer, illuminating the path to knowledge and skill mastery."
+            "text": "By expertly guiding students in selecting the most suitable exam preparation courses, <strong>The Exam Preparation & Testing House FZCO (TEPTH)</strong> serves as a trusted beacon of knowledge and skill development in the region."
           }
         ]
       }
     },
     "WhoWeAre": {
       "HeroSection": {
-        "badge": "ABOUT TEPTH",
-        "title": "UAE's Trusted Exam Prep",
-        "titleAccent": " & Test Centre",
-        "description": "For over a decade, TEPTH has been the go-to destination for international language exam registration, expert preparation courses, and secure proctoring services across the UAE."
+        "badge": "Discover The Exam Preparation & Testing House FZCO",
+        "title": "The Leading and Most Trusted Exam Preparation and Testing Center in the UAE",
+        "titleAccent": "",
+        "description": "For more than ten years, <strong>The Exam Preparation & Testing House FZCO (TEPTH)</strong> has stood as the premier destination across the UAE for international language exam registration, specialized preparation courses, and highly secure proctoring services tailored to empower test-takers."
       },
       "NarrativeSection": {
         "badge": "WHO WE ARE",
-        "title": "Empowering Your",
-        "titleAccent": " Educational Journey",
-        "p1": "Inspired by <strong>John Dewey</strong>’s philosophy that <em>\"Education is not preparation for life; education is life itself,\"</em> <strong>The Exam Preparation & Testing House</strong> is committed to delivering premium educational and exam preparation services. With years of proven experience meeting the dynamic educational needs of the Arab World, we view candidates as the foundation of a thriving society. Our goal is to provide the professional career support you need to turn your ambitions into reality.",
-        "expertTitle": "Expert Preparation for International Exams",
-        "expertDesc": "Navigating international assessments can be challenging, but TEPTH makes the process seamless. Our highly trained instructors are equipped with the latest teaching strategies to help you achieve top scores. We provide expert, cost-effective preparation for a comprehensive range of exams, including:",
+        "title": "Elevating Your Educational Journey in Dubai",
+        "titleAccent": "",
+        "p1": "<strong>At The Exam Preparation & Testing House FZCO (TEPTH)</strong>, centrally located in Dubai, United Arab Emirates, we are dedicated to providing premier educational and test prep services. Driven by the belief that education is the essence of life itself, we proudly empower test-takers across the region to achieve their highest potential. Our mission is to deliver the vital career and academic support you need to transform your ambitions into tangible success.",
+        "expertTitle": "Expert Preparation for International Exams in the UAE",
+        "expertDesc": "Mastering international exams can be demanding, but our expert team in Dubai makes the entire experience effortless. Our highly qualified instructors utilize cutting-edge teaching strategies to ensure you secure top scores. We deliver comprehensive, cost-effective training for a wide array of globally recognized exams, including:",
         "examsList": [
           "IELTS",
           "PTE",
@@ -525,9 +542,9 @@
           "OET"
         ],
         "visionBadge": "Vision & Innovation",
-        "visionTitle": "Our Vision and Innovative Approach",
-        "visionDesc1": "TEPTH aims to be the premier leader in testing and exam preparation, setting new industry benchmarks through our unrivaled services. We are driven by long-term goals designed to benefit both the educational sector and society at large.",
-        "visionDesc2": "By combining innovative IT support with modern teaching methodologies, we have streamlined the learning process. Our advanced techniques are designed to help you study smarter, allowing you to achieve higher scores with greater efficiency. Whatever your certification goals may be, TEPTH is your ultimate, one-stop destination for exam success."
+        "visionTitle": "Our Innovative Vision for Your Success",
+        "visionDesc1": "<strong>The Exam Preparation & Testing House FZCO (TEPTH)</strong> aspires to be the leading test preparation center in the UAE by establishing new industry standards through exceptional service. We seamlessly integrate advanced IT solutions with modern teaching methodologies to optimize your learning experience.",
+        "visionDesc2": "Our innovative study techniques are tailored to help you learn smarter and achieve superior results with maximum efficiency. Ultimately, <strong>The Exam Preparation & Testing House FZCO (TEPTH)</strong> stands as your premier, all-in-one destination for conquering your certification goals."
       }
     },
     "WhyChooseUs": {
