@@ -179,7 +179,7 @@ export default function FormPTEHomeA1Registration({
     const baseFee =
       activeExam?.examFee && parseFloat(activeExam.examFee) > 0
         ? parseFloat(activeExam.examFee)
-        : 1230;
+        : 1290;
     const serviceFee =
       activeExam?.additionalFee && parseFloat(activeExam.additionalFee) > 0
         ? parseFloat(activeExam.additionalFee)

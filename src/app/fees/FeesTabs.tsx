@@ -70,12 +70,12 @@ export default function FeesTabs({ initialBrand, exams }: FeesTabsProps) {
       badgeBg: "bg-rose-50 text-primary border-rose-100",
       isMultiRow: true,
       items: [
-        { key: "pteAcademic", slug: "pte-academic", price: 1450 },
-        { key: "pteCore", slug: "pte-core", price: 1450 },
-        { key: "pteUkvi", slug: "pte-academic-ukvi", price: 1450 },
-        { key: "pteHomeA1", slug: "pte-home-a1", price: 1230 },
-        { key: "pteHomeA2", slug: "pte-home-a2", price: 1230 },
-        { key: "pteHomeB1", slug: "pte-home-b1", price: 1230 }
+        { key: "pteAcademic", slug: "pte-academic", price: 1520 },
+        { key: "pteCore", slug: "pte-core", price: 1520 },
+        { key: "pteUkvi", slug: "pte-academic-ukvi", price: 1520 },
+        { key: "pteHomeA1", slug: "pte-home-a1", price: 1290 },
+        { key: "pteHomeA2", slug: "pte-home-a2", price: 1290 },
+        { key: "pteHomeB1", slug: "pte-home-b1", price: 1290 }
       ]
     },
     {
