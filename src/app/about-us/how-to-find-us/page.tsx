@@ -181,7 +181,7 @@ export default function HowToFindUs() {
               </div>
               <div className="relative aspect-4/3 rounded-xl overflow-hidden shadow-2xl order-1 lg:order-2 transport-img">
                 <Image
-                  src="/images/about-us/dubai-taxi.jpg"
+                  src="/images/about-us/Dubai-taxi.jpeg"
                   alt="Dubai Taxi"
                   fill
                   className="object-cover"
@@ -193,7 +193,7 @@ export default function HowToFindUs() {
             <div className="grid lg:grid-cols-2 gap-16 lg:gap-32 items-center transport-grid">
               <div className="relative aspect-4/3 rounded-xl overflow-hidden shadow-2xl transport-img">
                 <Image
-                  src="/images/about-us/dubai-public-bus.jpg"
+                  src="/images/about-us/Dubai-public-bus.jpg"
                   alt="Dubai Public Bus"
                   fill
                   className="object-cover"
