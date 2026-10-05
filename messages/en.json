@@ -204,45 +204,65 @@
       "titleAccent": "Leaders",
       "description": "See what our candidates have to say about their journey with TEPTH.",
       "reviews": {
-        "nadine": {
-          "name": "Nadine Mustafa",
+        "anastasia": {
+          "name": "Anastasia Batyrova",
           "date": "a year ago",
-          "quote": "Very organised and polite"
+          "quote": "Very organised and polite staff. The testing environment is quiet and perfect for concentration."
         },
-        "rahul": {
-          "name": "Rahul Chauhan",
+        "anvesh": {
+          "name": "Anvesh Chelluboina",
           "date": "2 months ago",
-          "quote": "⭐⭐⭐⭐⭐ TEPTH Sharjah – Prep Smarter, Score Higher TEPTH Sharjah is the go‑to hub for mastering exams such as the IELTS, TOEFL, CELPIP, PTE‑A, OET, PearsonVUE, and CAEL.Expert trainers, a calm and modern test environment, and smooth check‑in make the whole process stress‑free. Their guidance and realistic practice sessions give you the confidence to hit your target score. If you’re serious about results, this is where you should be."
+          "quote": "⭐⭐⭐⭐⭐ TEPTH Dubai – Prep Smarter, Score Higher. TEPTH is the go‑to hub for mastering exams such as IELTS, TOEFL, CELPIP, PTE‑A, OET, Pearson VUE, and CAEL. Expert trainers, a calm and modern test environment, and smooth check‑in make the whole process stress‑free."
         },
-        "sima": {
-          "name": "Sima Al Kanawati",
+        "cindu": {
+          "name": "Cindu",
           "date": "a month ago",
-          "quote": "Calm and clean examination test center Respectful staff Strict rules And has a great location away from highways"
+          "quote": "Calm and clean examination test center. Respectful staff, strict adherence to rules, and located conveniently in Dubai Silicon Oasis."
         },
-        "rahimuddin": {
-          "name": "Rahimuddin Qureshi",
+        "javyn": {
+          "name": "Javyn Kendrick Bellin",
           "date": "9 months ago",
-          "quote": "It was an amazing experience. The staff, the ambience, the procedures all were professional and visitor friendly. Thanks for being part of my success."
+          "quote": "It was an amazing experience. The staff, the ambience, and the procedures were all professional and test-taker friendly. Thanks for being part of my success!"
         },
-        "ayan": {
-          "name": "Ayan Ali khan",
+        "kero": {
+          "name": "Kero Salah",
           "date": "a year ago",
-          "quote": "Gave my GED exam there every thing went smoothly highly recommended !!"
+          "quote": "Took my exam here and everything went smoothly. Highly recommended test center with supportive staff."
         },
-        "mydeen": {
-          "name": "Mydeen Basha",
+        "khaled": {
+          "name": "Khaled Aljamous",
           "date": "a year ago",
-          "quote": "I had a best experience in this center. Those guys in the centre were really helpful and they provide me the rules and regulations in the calm. The centre is very cool and we can't experience any background noise. Overall my experience in this center was very very good. Cheers to the team..!!!"
+          "quote": "I had the best experience at this center. The team was really helpful, guiding through all regulations with patience. The lab is very quiet with no distractions."
         },
-        "depika": {
-          "name": "Deepika Manoj",
-          "date": "a year ago",
-          "quote": "TA made me comfortable and very polite in attitude. Test experience was seamless"
+        "muhammad": {
+          "name": "Muhammad Ahmd",
+          "date": "6 months ago",
+          "quote": "Smooth check-in process and excellent test facilities. The test administrator made sure everyone felt comfortable and well-guided."
         },
-        "kafuka": {
-          "name": "Kafuka Mode",
+        "nelson": {
+          "name": "Nelson Crasto",
           "date": "a year ago",
-          "quote": "Had a great experience there for my examination, and the staff were all friendly and helpful. The place is calm and well-prepared to make the examinee feel stress-free."
+          "quote": "Had a great experience for my examination. The staff were friendly and helpful, and the place is calm and well-equipped."
+        },
+        "pelsen": {
+          "name": "Pelsen Senes",
+          "date": "3 months ago",
+          "quote": "Professional test delivery from start to finish. The workstations and headphones were top quality, making the exam seamless."
+        },
+        "saima": {
+          "name": "Saima Murad",
+          "date": "4 months ago",
+          "quote": "A fantastic and stress-free environment for taking international exams. Very supportive administrators and easy-to-reach location."
+        },
+        "salvador": {
+          "name": "Salvador Cruzana III",
+          "date": "5 months ago",
+          "quote": "Outstanding service and modern computer labs. Everything was organized meticulously according to international standards."
+        },
+        "zaine": {
+          "name": "Zaine A.",
+          "date": "a year ago",
+          "quote": "Seamless exam registration and testing day experience. The staff was courteous and maintained high standards of professionalism."
         }
       }
     },
