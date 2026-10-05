@@ -123,7 +123,7 @@ export default function CandidatesProctoringPage() {
                       className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl bg-slate-50 border border-slate-200 text-slate-700 hover:bg-slate-100 transition-colors font-medium"
                     >
                       <Phone className="w-4 h-4 text-primary" />
-                      <span dir="ltr">+971 6 553 1250</span>
+                      <span dir="ltr">+971 4 333 3616</span>
                     </a>
                     <a
                       href={`mailto:${INSTITUTIONS_INFO.email}`}

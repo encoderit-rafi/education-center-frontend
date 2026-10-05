@@ -169,11 +169,11 @@ export default function Footer() {
 
               <ContactItem
                 icon={Phone}
-                copyText="+971 6 553 1250"
+                copyText="+971 4 333 3616"
                 value={
                   <span>
                     {t("telLabel")}{" "}
-                    <span dir="ltr">+971 6 553 1250</span>
+                    <span dir="ltr">+971 4 333 3616</span>
                   </span>
                 }
               />

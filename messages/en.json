@@ -266,13 +266,13 @@
       "description": "Whether you're preparing for an international exam or need to take an exam, we're here to guide you. Our expert team is ready to assist you at every step of your journey."
     },
     "ContactDetails": {
-      "phone": "+971 6 553 1250",
+      "phone": "+971 4 333 3616",
       "phoneAvailability": "Available Saturday – Thursday, 9:00 AM – 9:00 PM",
-      "email": "info@tepth.org",
+      "email": "info@tepth.net",
       "emailAvailability": "We'll respond to you within 1 to 2 working days.",
-      "addressPart1": "The Exam Preparation & Testing House L.L.C",
-      "addressPart2": "Suite 701, 7th Floor, Tabarak Tower, Corniche Road, Al Mamzar,",
-      "addressPart3": "Sharjah, United Arab Emirates.",
+      "addressPart1": "Suites 308 & 703, Apricot Tower,",
+      "addressPart2": "Dubai Silicon Oasis, P.O. Box 300109,",
+      "addressPart3": "Dubai, United Arab Emirates.",
       "chat": "Chat with us",
       "chatAvailability": "Quick answers via WhatsApp & Telegram"
     },
@@ -465,21 +465,21 @@
       },
       "Pdf": {
         "companyName": "The Exam Preparation & Testing House FZCO",
-        "addressL1": "Suite 703, 7th Floor, Apricot Tower",
+        "addressL1": "Suites 308 & 703, Apricot Tower",
         "addressL2": "Dubai Silicon Oasis, Dubai, UAE",
         "tel": "Tel",
         "web": "Web",
         "destinationPrefix": "Destination: ",
         "destinationSuffix": ", Dubai",
         "fullAddressBadge": "📍 Full Address",
-        "fullAddressL1": "Apricot Tower, Suite 703, 7th Floor",
+        "fullAddressL1": "Suites 308 & 703, Apricot Tower",
         "fullAddressL2": "Dubai Silicon Oasis, P.O. Box 300109",
         "fullAddressL3": "Dubai, United Arab Emirates",
         "phoneLabel": "Phone:",
         "taxiLabel": "Taxi (Dubai):",
         "continued": "How to Find Us — Continued",
         "footerBrand": "TEPTH — The Exam Preparation & Testing House FZCO",
-        "footerAddress": "Apricot Tower, Suite 703, Dubai Silicon Oasis, P.O. Box 300109, Dubai, UAE",
+        "footerAddress": "Suites 308 & 703, Apricot Tower, Dubai Silicon Oasis, P.O. Box 300109, Dubai, UAE",
         "alternatives": "Bus 320 from Centrepoint Metro Station to Silicon Oasis.",
         "from": "From",
         "parkingInfo": "🅿 Parking Information"
@@ -841,9 +841,9 @@
       "title": "Join Our Academic Network",
       "subtitle": "TEPTH Academic Atelier partners with forward-thinking institutions to redefine the value of certification. Let's discuss your organization's specific needs.",
       "directInquiriesTitle": "Direct Inquiries",
-      "directInquiriesText": "info@tepth.org",
+      "directInquiriesText": "info@tepth.net",
       "institutionalSupportTitle": "Institutional Support",
-      "institutionalSupportText": "+97165531250"
+      "institutionalSupportText": "+971 4 333 3616"
     },
     "partnershipLogos": {
       "badge": "Strategic Alliance",
@@ -1409,11 +1409,11 @@
       },
       {
         "question": "Can I get brochures or flyers?",
-        "answer": "Yes, you can request them via email at info@tepth.org Content matches our website."
+        "answer": "Yes, you can request them via email at info@tepth.net Content matches our website."
       },
       {
         "question": "Is public transport available nearby?",
-        "answer": "Yes, Take a Sharjah public bus towards Al Mamzar or Al Taawun, disembarking at the nearest bus stop to Tabarak Tower. The bus ride will get you within a short walking distance of the center."
+        "answer": "Yes, public bus routes like Bus 320 operate to Dubai Silicon Oasis, disembarking within walking distance of Apricot Tower."
       }
     ]
   },
@@ -1490,7 +1490,7 @@
           "description": "We can host up to 28 candidates per exam session, utilizing 23 workstations across two computer labs and an additional 5-seat classroom."
         }
       ],
-      "contactInfo": "Get in touch with us today to discuss your needs, tour our venues online, or schedule an in-person visit. Give us a call at <phone>+97165531250</phone> or email us at <email>info@tepth.org</email>.",
+      "contactInfo": "Get in touch with us today to discuss your needs, tour our venues online, or schedule an in-person visit. Give us a call at <phone>+971 4 333 3616</phone> or email us at <email>info@tepth.net</email>.",
       "contactTitle": "Get in Touch With Us",
       "callUs": "Call Us",
       "emailUs": "Email Us"
@@ -1762,7 +1762,7 @@
       },
       "refunds": {
         "title": "Withdrawals, Cancellations & Refunds",
-        "p1": "All refund requests must be submitted using the official, type-written Withdrawal/Refund Request Form and emailed to info@tepth.org Approved refunds take up to six weeks to process and must be claimed within eight weeks.",
+        "p1": "All refund requests must be submitted using the official, type-written Withdrawal/Refund Request Form and emailed to info@tepth.net Approved refunds take up to six weeks to process and must be claimed within eight weeks.",
         "timelineTitle": "Refund Eligibility Timeline",
         "thNotice": "Notice Given Before Course Start",
         "thRefund": "Refund Amount",
@@ -3306,7 +3306,7 @@
     "workingHoursDays": "Saturday to Thursday",
     "workingHoursTime": "(9:00 AM - 9:00 PM)",
     "addressLabel": "Our Address:",
-    "addressText": "The Exam Preparation & Testing House L.L.C\nSuite 701, 7th Floor, Tabarak Tower, Corniche Road, Al Mamzar,\nSharjah, United Arab Emirates.",
+    "addressText": "Suites 308 & 703, Apricot Tower,\nDubai Silicon Oasis, P.O. Box 300109,\nDubai, United Arab Emirates.",
     "emailLabel": "Email:",
     "telLabel": "Tel:",
     "webLabel": "Web:",
@@ -3642,7 +3642,7 @@
     "cta": {
       "title": "Still Have Questions?",
       "subtitle": "Our support team is here to ensure you have a seamless experience. Contact us Saturday to Thursday, 9:00 AM – 9:00 PM.",
-      "callButton": "+97165531250",
+      "callButton": "+971 4 333 3616",
       "enquiryButton": "Send an Enquiry"
     }
   },
@@ -3703,7 +3703,7 @@
     "celpipDesc": "The CELPIP-G (Canadian English Language Proficiency Index Program) is a completely computer-delivered English test used primarily for permanent residence applications in Canada and Australia. It assesses your ability to use English in everyday, real-world situations through four key modules: Listening, Reading, Writing, and Speaking. The CELPIP-G test is administered at TEPTH Dubai not at our centre in Sharjah. To see the available test dates and book the test directly with the exam provider.",
     "celpipNoticeTitle": "Important Notice:",
     "celpipNoticeText": "The CELPIP-G test is administered at TEPTH Dubai, not at our Sharjah centre.",
-    "questionsContact": "Questions? Call +97165531250 or email info@tepth.org",
+    "questionsContact": "Questions? Call +971 4 333 3616 or email info@tepth.net",
     "descriptions": {
       "ielts": "Check upcoming IELTS test dates for Academic and General Training modules in Sharjah and across the UAE.",
       "pte": "View real-time availability for PTE Academic and PTE UKVI tests. Fast results and frequent testing windows.",
@@ -4277,7 +4277,7 @@
       "next": "Next",
       "expressRegistrationTitle": "Express Registration Fee Applies",
       "expressRegistrationNotice": "Since your selected exam date is 7 days or less from today, an <strong>Express Registration Fee of ${fee} <approx>(Approximately <aed></aed> {aedAmount})</approx></strong> will be automatically applied to your registration total.",
-      "contactNote": "<strong>Note:</strong> You may also reach out to us at <phoneLink>+97165531250</phoneLink> or <emailLink>info@tepth.org</emailLink> and confirm the Test date availability before you proceed with the TOEFL iBT Registration on our website."
+      "contactNote": "<strong>Note:</strong> You may also reach out to us at <phoneLink>+971 4 333 3616</phoneLink> or <emailLink>info@tepth.net</emailLink> and confirm the Test date availability before you proceed with the TOEFL iBT Registration on our website."
     },
     "FormFields": {
       "firstGivenNames": "First / given names",

@@ -102,12 +102,12 @@ export default function BookAnExamVenuePage() {
           <p className="text-slate-700 text-base md:text-lg leading-relaxed max-w-3xl mx-auto font-medium">
             {t.rich("contactInfo", {
               phone: (chunks) => (
-                <a href="tel:+97165531250" dir="ltr" className="text-primary font-bold hover:underline inline-block">
+                <a href="tel:+97143333616" dir="ltr" className="text-primary font-bold hover:underline inline-block">
                   {chunks}
                 </a>
               ),
               email: (chunks) => (
-                <a href="mailto:info@tepth.org" className="text-primary font-bold hover:underline inline-block">
+                <a href="mailto:info@tepth.net" className="text-primary font-bold hover:underline inline-block">
                   {chunks}
                 </a>
               ),
@@ -115,14 +115,14 @@ export default function BookAnExamVenuePage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <a
-              href="tel:+97165531250"
+              href="tel:+97143333616"
               className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl bg-white border border-slate-200 text-slate-800 hover:bg-slate-50 hover:border-primary/30 transition-all font-bold shadow-sm group w-full sm:w-auto"
             >
               <Phone className="w-4.5 h-4.5 text-primary transition-transform group-hover:scale-110" />
               <span>{t("callUs")}</span>
             </a>
             <a
-              href="mailto:info@tepth.org"
+              href="mailto:info@tepth.net"
               className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl bg-white border border-slate-200 text-slate-800 hover:bg-slate-50 hover:border-primary/30 transition-all font-bold shadow-sm group w-full sm:w-auto"
             >
               <Mail className="w-4.5 h-4.5 text-primary transition-transform group-hover:scale-110" />

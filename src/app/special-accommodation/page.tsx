@@ -333,7 +333,7 @@ export default function SpecialAccommodation() {
                   <div className="space-y-3">
                     {/* Phone */}
                     <a
-                      href="tel:+97165531250"
+                      href="tel:+97143333616"
                       className="group/link flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-rose-500/40 transition-all duration-300"
                     >
                       <div className="w-10 h-10 rounded-xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center group-hover/link:bg-rose-500/20 transition-colors">
@@ -344,7 +344,7 @@ export default function SpecialAccommodation() {
                           {t("callUsLabel")}
                         </p>
                         <p dir="ltr" className="text-sm font-bold text-white">
-                          +971 6 553 1250
+                          +971 4 333 3616
                         </p>
                       </div>
                       <ArrowRight className={`w-4 h-4 text-slate-600 ml-auto group-hover/link:text-rose-400 group-hover/link:translate-x-0.5 transition-all ${isRtl ? "rotate-180" : ""}`} />
@@ -352,7 +352,7 @@ export default function SpecialAccommodation() {
 
                     {/* Email */}
                     <a
-                      href="mailto:info@tepth.org"
+                      href="mailto:info@tepth.net"
                       className="group/link flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-rose-500/40 transition-all duration-300"
                     >
                       <div className="w-10 h-10 rounded-xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center group-hover/link:bg-rose-500/20 transition-colors">
@@ -363,7 +363,7 @@ export default function SpecialAccommodation() {
                           {t("emailUsLabel")}
                         </p>
                         <p className="text-sm font-bold text-white">
-                          info@tepth.org
+                          info@tepth.net
                         </p>
                       </div>
                       <ArrowRight className={`w-4 h-4 text-slate-600 ml-auto group-hover/link:text-rose-400 group-hover/link:translate-x-0.5 transition-all ${isRtl ? "rotate-180" : ""}`} />

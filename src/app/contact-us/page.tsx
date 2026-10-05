@@ -53,7 +53,7 @@ export default function ContactUs() {
             {/* Header */}
 
             <div className="relative z-10 space-y-4 animate-fade-up">
-              <Link href="tel:+97165531250" className="block">
+              <Link href="tel:+97143333616" className="block">
                 <div className="group flex flex-row items-center gap-4 p-4 rounded-xl border border-slate-200 bg-white transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-md">
                   <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-slate-50 text-slate-600 transition-all duration-300 group-hover:bg-primary group-hover:text-white">
                     <Phone className="size-4" />
@@ -69,7 +69,7 @@ export default function ContactUs() {
                 </div>
               </Link>
 
-              <Link href="mailto:info@tepth.org" className="block">
+              <Link href="mailto:info@tepth.net" className="block">
                 <div className="group flex flex-row items-center gap-4 p-4 rounded-xl border border-slate-200 bg-white transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-md">
                   <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-slate-50 text-slate-600 transition-all duration-300 group-hover:bg-primary group-hover:text-white">
                     <Mail className="size-4" />
@@ -86,7 +86,7 @@ export default function ContactUs() {
               </Link>
 
               <a
-                href="https://www.google.com/maps/dir//The+Exam+Preparation+and+Testing+House(TEPTH),+Tabarak+Tower+Suite+701+,+7th+Floor+-+Corniche+Rd+-+Al+Mamzar+-+Sharjah+-+United+Arab+Emirates/@25.313693,55.361475,15z"
+                href="https://www.google.com/maps/place/The+Exam+Preparation+and+Testing+House+(TEPTH)/@25.1118091,55.3843817,128m/am=t/data=!3m2!1e3!5s0x3e5f693406eebb91:0xf35b02a92701da1!4m26!1m19!4m18!1m6!1m2!1s0x3e5f5f5fede7964b:0x2a830aa19c1f6d89!2sSharjah+-+United+Arab+Emirates!2m2!1d55.427211!2d25.3561698!1m6!1m2!1s0x3e5f6466278a738d:0x744c65e65f9f1f7b!2sThe+Exam+Preparation+and+Testing+House+(TEPTH),+Apricot+Tower+Suite+703,+7th+floor%26+-+Suite+308,+3rd+floor+-+19a+street+-+Dubai+Silicon+Oasis+-+Dubai+-+United+Arab+Emirates!2m2!1d55.3843719!2d25.1117742!6m3!1i0!2i1!3i0!3m5!1s0x3e5f6466278a738d:0x744c65e65f9f1f7b!8m2!3d25.1117742!4d55.3843719!16s%2Fg%2F11b6gqr41b?entry=ttu&g_ep=EgoyMDI2MDkyOS4wIKXMDSoASAFQAw%3D%3D"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block"

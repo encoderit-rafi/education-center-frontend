@@ -423,15 +423,15 @@ export default async function WorkshopDetailPage({ params }: PageProps) {
                   <p className="text-sm font-semibold text-slate-900">
                     {locale === "ar" ? (
                       <>
-                        مؤسسة بيت التحضير للاختبارات وتقديمها ش.ذ.م.م <br />
-                        مكتب 701، الطابق السابع، برج تبارك، شارع الكورنيش، الممزر، <br />
-                        الشارقة، الإمارات العربية المتحدة.
+                        شركة بيت الامتحانات والتحضير للاختبارات ش م ح <br />
+                        مكتب 308 و 703، برج أبريكوت، واحة دبي للسيليكون، ص.ب 300109، <br />
+                        دبي، الإمارات العربية المتحدة.
                       </>
                     ) : (
                       <>
-                        The Exam Preparation & Testing House L.L.C <br />
-                        Suite 701, 7th Floor, Tabarak Tower, Corniche Road, Al Mamzar, <br />
-                        Sharjah, United Arab Emirates.
+                        Suites 308 & 703, Apricot Tower, <br />
+                        Dubai Silicon Oasis, P.O. Box 300109, <br />
+                        Dubai, United Arab Emirates.
                       </>
                     )}
                   </p>

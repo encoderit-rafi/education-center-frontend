@@ -220,18 +220,18 @@ export default function ExamProviderPage() {
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
             <a
-              href="tel:+97165531250"
+              href="tel:+97143333616"
               className="flex items-center gap-3 px-6 py-4 rounded-xl bg-primary text-white hover:bg-primary-variant font-bold text-sm transition-all duration-300 w-full sm:w-auto justify-center shadow-md shadow-primary/10"
             >
               <Phone className="w-4 h-4" />
-              <span dir="ltr">+971 6 553 1250</span>
+              <span dir="ltr">+971 4 333 3616</span>
             </a>
             <a
-              href="mailto:info@tepth.org"
+              href="mailto:info@tepth.net"
               className="flex items-center gap-3 px-6 py-4 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 hover:bg-slate-100 font-bold text-sm transition-all duration-300 w-full sm:w-auto justify-center"
             >
               <Mail className="w-4 h-4" />
-              <span>info@tepth.org</span>
+              <span>info@tepth.net</span>
             </a>
           </div>
         </div>

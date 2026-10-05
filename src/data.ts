@@ -2351,9 +2351,7 @@ export const EXAM_DETAILE_DATA = [
 // INFORMATION
 
 export const INSTITUTIONS_INFO = {
-  phone: "+97165531250",
-  email: "info@tepth.org",
-  address: `The Exam Preparation & Testing House L.L.C\n
-  Suite 701, 7th Floor, Tabarak Tower, Corniche Road, Al Mamzar,\n
-  Sharjah, United Arab Emirates.`,
+  phone: "+97143333616",
+  email: "info@tepth.net",
+  address: `Suites 308 & 703, Apricot Tower, Dubai Silicon Oasis, P.O. Box 300109, Dubai, United Arab Emirates.`,
 };

@@ -18,7 +18,7 @@ function QuizResultContent() {
   const [copiedPhone, setCopiedPhone] = useState(false);
 
   const handleCopyPhone = () => {
-    navigator.clipboard.writeText("+971 6 553 1250");
+    navigator.clipboard.writeText("+971 4 333 3616");
     setCopiedPhone(true);
     setTimeout(() => {
       setCopiedPhone(false);
@@ -108,7 +108,7 @@ function QuizResultContent() {
                   {isRtl ? "اتصل بنا" : "Call Us"}
                 </span>
                 <span className="block text-xs sm:text-sm font-bold text-slate-700 mt-0.5 rtl:text-right" dir="ltr">
-                  +971 6 553 1250
+                  +971 4 333 3616
                 </span>
               </div>
               <div className="flex items-center justify-center p-2 rounded-md hover:bg-slate-100 text-slate-400 group-hover:text-slate-600 transition-colors shrink-0">
@@ -130,7 +130,7 @@ function QuizResultContent() {
 
             {/* Email Contact Link */}
             <a
-              href="mailto:info@tepth.org"
+              href="mailto:info@tepth.net"
               className="flex items-center gap-3 p-3.5 sm:p-4 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300 transition-all text-start group active:scale-[0.98] w-full"
             >
               <div className="p-2.5 sm:p-3 bg-primary/10 rounded-lg text-primary group-hover:scale-110 transition-transform shrink-0">
@@ -141,7 +141,7 @@ function QuizResultContent() {
                   {isRtl ? "البريد الإلكتروني" : "Email Us"}
                 </span>
                 <span className="block text-xs sm:text-sm font-bold text-slate-700 mt-0.5 whitespace-nowrap">
-                  info@tepth.org
+                  info@tepth.net
                 </span>
               </div>
               <div className="flex items-center justify-center p-2 rounded-md hover:bg-slate-100 text-slate-400 group-hover:text-slate-600 transition-colors shrink-0">

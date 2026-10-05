@@ -56,19 +56,19 @@ export default function VendorPartnershipsPage() {
                 {t("contactHeader")}
               </h3>
               <div className="flex flex-col sm:flex-row gap-3">
-                <Link href="tel:+97165531250">
+                <Link href="tel:+97143333616">
                   <Button className="bg-primary text-white hover:bg-primary/90 px-5 py-3 rounded-lg font-bold text-sm flex items-center gap-2 cursor-pointer h-10 shadow-md shadow-primary/10 transition-all duration-300">
                     <Phone className="w-4 h-4" />
-                    <span dir="ltr">+971 6 553 1250</span>
+                    <span dir="ltr">+971 4 333 3616</span>
                   </Button>
                 </Link>
-                <Link href="mailto:info@tepth.org">
+                <Link href="mailto:info@tepth.net">
                   <Button
                     variant="outline"
                     className="border-slate-200 text-slate-700 hover:bg-slate-50 px-5 py-3 rounded-lg font-bold text-sm flex items-center gap-2 cursor-pointer h-10 transition-all duration-300"
                   >
                     <Mail className="w-4 h-4" />
-                    info@tepth.org
+                    info@tepth.net
                   </Button>
                 </Link>
               </div>

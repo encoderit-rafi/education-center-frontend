@@ -198,7 +198,7 @@ export function DateStep({
                   ),
                   phoneLink: (chunks) => (
                     <a
-                      href="tel:+97165531250"
+                      href="tel:+97143333616"
                       className="text-[#A11D1D] hover:underline font-semibold"
                       dir="ltr"
                     >
@@ -207,7 +207,7 @@ export function DateStep({
                   ),
                   emailLink: (chunks) => (
                     <a
-                      href="mailto:info@tepth.org"
+                      href="mailto:info@tepth.net"
                       className="text-[#A11D1D] hover:underline font-semibold"
                       dir="ltr"
                     >
