@@ -122,7 +122,7 @@ export default function ContactUs() {
                   </div>
                   <div className="flex items-center gap-2.5 sm:gap-3">
                     <a
-                      href="https://wa.me/971555688035"
+                      href="https://wa.me/971525772708"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex-1 inline-flex items-center justify-center gap-1.5 px-2.5 sm:px-4 py-2.5 text-xs font-black text-white bg-[#25D366] hover:bg-[#20ba56] rounded-xl shadow-sm hover:shadow transition-all text-center"

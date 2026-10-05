@@ -1,13 +1,12 @@
 "use client";
 
 import React from "react";
-import { cn } from "@/lib/utils";
 
 export default function WhatsAppSupport() {
   return (
     <div className="fixed bottom-8 left-8 z-50">
       <a
-        href="https://wa.me/971555688035"
+        href="https://wa.me/971525772708"
         target="_blank"
         rel="noopener noreferrer"
         className="w-16 h-16 bg-[#25D366] text-white rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-110 active:scale-95 group relative"
@@ -22,7 +21,7 @@ export default function WhatsAppSupport() {
         </svg>
 
         {/* Tooltip */}
-        <span className="absolute left-full ml-4 px-4 py-2 bg-white text-slate-900 text-sm font-bold rounded-xl shadow-2xl opacity-0 translate-x-[-10px] pointer-events-none transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0 whitespace-nowrap border border-slate-100">
+        <span className="absolute left-full ml-4 px-4 py-2 bg-white text-slate-900 text-sm font-bold rounded-xl shadow-2xl opacity-0 -translate-x-2.5 pointer-events-none transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0 whitespace-nowrap border border-slate-100">
           Chat with us
         </span>
       </a>

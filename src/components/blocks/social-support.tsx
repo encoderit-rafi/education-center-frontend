@@ -6,8 +6,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { cn } from "@/lib/utils";
-import { MessageCircle, Send } from "lucide-react";
+import { MessageCircle } from "lucide-react";
 import { Button } from "../ui/button";
 
 export default function SocialSupport() {
@@ -36,7 +35,7 @@ export default function SocialSupport() {
           <div className="bg-white dark:bg-slate-900">
             <div className="p-2 space-y-2">
               <a
-                href="https://wa.me/971555688035"
+                href="https://wa.me/971525772708"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center p-3 rounded-2xl hover:bg-[#25D366]/10 transition-colors group"
