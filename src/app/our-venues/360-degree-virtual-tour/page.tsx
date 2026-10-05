@@ -34,7 +34,12 @@ export default function OurVenues() {
           </div>
           <div className="grid grid-cols-1 gap-12">
             <iframe
-              src="https://my.matterport.com/show/?m=J3Go7kFamvE"
+              src="https://my.matterport.com/show/?m=MkSss1iWkLp"
+              className="w-full aspect-video rounded-3xl border-0"
+              allowFullScreen
+            />
+            <iframe
+              src="https://my.matterport.com/show/?m=hhsCqZueTbf"
               className="w-full aspect-video rounded-3xl border-0"
               allowFullScreen
             />

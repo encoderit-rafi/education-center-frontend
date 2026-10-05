@@ -49,13 +49,16 @@ export default function Accreditation() {
           <div className="flex-1 space-y-12">
             {/* Feature Blocks */}
             <div className="space-y-16">
-              {/* SEDD */}
+              {/* DSOA */}
               <div className="flex flex-col md:flex-row items-center gap-10 group">
-                <div className="w-full md:flex-1">
+                <div className="w-full md:flex-1 space-y-4">
+                  <h3 className="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">
+                    {t("SEDD.title")}
+                  </h3>
                   <div className="relative w-full aspect-2/1 overflow-hidden transition-all">
                     <Image
-                      src="/images/about-us/goverment.png"
-                      alt="SEDD Logo"
+                      src="/images/about-us/dsoa.jpg"
+                      alt="DSOA Logo"
                       fill
                       className="object-contain"
                     />
@@ -68,18 +71,21 @@ export default function Accreditation() {
                 </div>
               </div>
 
-              {/* SPEA */}
+              {/* KHDA */}
               <div className="flex flex-col md:flex-row items-center gap-10 group">
                 <div className="flex-1 space-y-6">
                   <p className="text-base leading-relaxed font-medium text-justify">
                     {t("SPEA.description")}
                   </p>
                 </div>
-                <div className="w-full md:flex-1">
+                <div className="w-full md:flex-1 space-y-4">
+                  <h3 className="text-2xl md:text-2xl font-bold text-primary tracking-tight">
+                    {t("SPEA.title")}
+                  </h3>
                   <div className="relative w-full aspect-2/1 overflow-hidden transition-all">
                     <Image
-                      src="/images/about-us/private.png"
-                      alt="SPEA Logo"
+                      src="/images/about-us/KHDA_Dubai_logo.png"
+                      alt="KHDA Logo"
                       fill
                       className="object-contain"
                     />

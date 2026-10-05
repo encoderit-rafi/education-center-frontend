@@ -97,12 +97,12 @@ export default function Footer() {
   ];
 
   const socialLinks = [
-    { icon: "facebook", href: "https://www.facebook.com/share/1DVJYA8wvM" },
-    { icon: "instagram", href: "https://www.instagram.com/tepth_sharjah/" },
-    { icon: "twitter", href: "https://x.com/Tepthshj" },
+    { icon: "facebook", href: "https://www.facebook.com/tepth" },
+    { icon: "instagram", href: "https://www.instagram.com/tepth" },
+    { icon: "twitter", href: "http://x.com/TepthFzco" },
     { icon: "tiktok", href: "https://www.tiktok.com/@tepthshj" },
     { icon: "upscrolled", href: "https://share.upscrolled.com/en/user/9486951e-5272-404b-82d8-f9d939192661/" },
-    { icon: "youtube", href: "https://www.youtube.com/@Tepthuae" },
+    { icon: "youtube", href: "https://www.youtube.com/channel/UCCoBD2dFg65xMIryZboVLBA" },
     { icon: "whatsapp", href: "https://wa.me/971555688035" },
     { icon: "telegram", href: "https://t.me/tepth" },
   ];
