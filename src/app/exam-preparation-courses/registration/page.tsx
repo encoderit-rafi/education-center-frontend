@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { cn, omitEmpty } from "@/lib/utils";
 import { format } from "date-fns";
-import { VAT_PERCENT, calculateVat } from "@/lib/vat";
+import { VAT_PERCENT, calculateVat, shouldApplyCourseOrWorkshopVat } from "@/lib/vat";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import api from "@/axios";
 import {
@@ -163,20 +163,16 @@ function CourseRegistrationForm({ className }: { className?: string }) {
   const discount_amount = couponDiscount;
   const subtotal = base_price - discount_amount;
 
-  // VAT rules (per billing rules):
-  // - CLASSROOM (Group / Semi-private / In-person): VAT always applied
-  // - ONLINE / HYBRID: VAT only applied when billing country is UAE
+  // VAT rules (per updated billing rules):
+  // - Group, semi-private, one-to-one in person, hybrid one-to-one: Non-UAE & UAE -> VAT applied (always)
+  // - Online: UAE -> VAT applied, Non-UAE -> No VAT
   const selectedCountry = formData.country;
-  const isUae =
-    selectedCountry?.toLowerCase() === "united arab emirates" ||
-    selectedCountry?.toLowerCase() === "uae";
-  const deliveryType = (packageData?.deliveryType || "").toUpperCase();
-  const isClassroom = deliveryType === "CLASSROOM";
-  const vatAmount = isClassroom
-    ? calculateVat(subtotal)
-    : isUae
-      ? calculateVat(subtotal)
-      : 0;
+  const isVatApplied = shouldApplyCourseOrWorkshopVat(
+    packageData?.deliveryType,
+    selectedCountry,
+    packageData?.name
+  );
+  const vatAmount = isVatApplied ? calculateVat(subtotal) : 0;
   const total_amount = subtotal + vatAmount;
 
   const handleApplyCoupon = async (e: React.MouseEvent) => {
