@@ -227,13 +227,28 @@ export default function FormTOEFLIBTRegistration({
     const workshopPriceUSD =
       workshopPriceAED > 0 ? Math.round(workshopPriceAED / AED_TO_USD_RATE) : 0;
 
+    const examFeeVatAED = calculateVat(baseFeeAED);
+    const examFeeVatUSD = Math.round(examFeeVatAED / AED_TO_USD_RATE);
+
+    const serviceFeeVatAED = calculateVat(registrationServiceFeeAED);
+    const serviceFeeVatUSD = Math.round(serviceFeeVatAED / AED_TO_USD_RATE);
+
+    const expressFeeVatAED = calculateVat(expressFeeAED);
+    const expressFeeVatUSD = Math.round(expressFeeVatAED / AED_TO_USD_RATE);
+
+    const courseFeeVatAED = calculateVat(coursePriceAED);
+    const courseFeeVatUSD = Math.round(courseFeeVatAED / AED_TO_USD_RATE);
+
+    const workshopFeeVatAED = calculateVat(workshopPriceAED);
+    const workshopFeeVatUSD = Math.round(workshopFeeVatAED / AED_TO_USD_RATE);
+
     const subtotalAED =
       baseFeeAED + registrationServiceFeeAED + expressFeeAED + coursePriceAED + workshopPriceAED;
     const subtotalUSD =
       baseFeeUSD + registrationServiceFeeUSD + expressFeeUSD + coursePriceUSD + workshopPriceUSD;
 
-    const vatAED = calculateVat(subtotalAED);
-    const vatUSD = calculateVat(subtotalUSD);
+    const vatAED = examFeeVatAED + serviceFeeVatAED + expressFeeVatAED + courseFeeVatAED + workshopFeeVatAED;
+    const vatUSD = examFeeVatUSD + serviceFeeVatUSD + expressFeeVatUSD + courseFeeVatUSD + workshopFeeVatUSD;
 
     const totalAED = subtotalAED + vatAED;
     const totalUSD = subtotalUSD + vatUSD;
@@ -241,14 +256,24 @@ export default function FormTOEFLIBTRegistration({
     return {
       baseFeeUSD,
       baseFeeAED,
+      examFeeVatAED,
+      examFeeVatUSD,
       registrationServiceFeeAED,
       registrationServiceFeeUSD,
+      serviceFeeVatAED,
+      serviceFeeVatUSD,
       expressFeeUSD,
       expressFeeAED,
+      expressFeeVatAED,
+      expressFeeVatUSD,
       coursePriceUSD,
       coursePriceAED,
+      courseFeeVatAED,
+      courseFeeVatUSD,
       workshopPriceUSD,
       workshopPriceAED,
+      workshopFeeVatAED,
+      workshopFeeVatUSD,
       subtotalAED,
       subtotalUSD,
       vatAED,
@@ -515,83 +540,17 @@ export default function FormTOEFLIBTRegistration({
                       </div>
                     )}
 
-                  <div className="flex justify-between text-sm items-center">
-                    <span className="text-slate-500 font-medium">
-                      {tReview("examRegistrationFee")}
-                    </span>
-                    <span className="font-bold text-slate-900 inline-flex items-center gap-1">
-                      ${pricing.baseFeeUSD}{" "}
-                      <span className="text-slate-400 font-normal text-xs inline-flex items-center gap-0.5">
-                        ({tReview("approximately")}{" "}
-                        <PriceDisplay
-                          amount={pricing.baseFeeAED}
-                          minimumFractionDigits={0}
-                          maximumFractionDigits={0}
-                          className="text-slate-400 font-normal text-xs"
-                        />
-                        )
-                      </span>
-                    </span>
-                  </div>
-
-                  <div className="flex justify-between text-sm items-center">
-                    <span className="text-slate-500 font-medium">
-                      {tReview("registrationServiceFee")}
-                    </span>
-                    <span className="font-bold text-slate-900 inline-flex items-center gap-1">
-                      ${pricing.registrationServiceFeeUSD}{" "}
-                      <span className="text-slate-400 font-normal text-xs inline-flex items-center gap-0.5">
-                        ({tReview("approximately")}{" "}
-                        <PriceDisplay
-                          amount={pricing.registrationServiceFeeAED}
-                          minimumFractionDigits={0}
-                          maximumFractionDigits={0}
-                          className="text-slate-400 font-normal text-xs"
-                        />
-                        )
-                      </span>
-                    </span>
-                  </div>
-
-                  {pricing.isExpress && (
-                    <div className="flex justify-between text-sm items-center animate-in fade-in slide-in-from-top-1 duration-300">
-                      <span className="text-slate-500 font-medium">
-                        {tReview("expressRegistrationFee")}
-                      </span>
-                      <span className="font-bold text-red-700 inline-flex items-center gap-1">
-                        ${pricing.expressFeeUSD}{" "}
-                        <span className="text-red-500/80 font-normal text-xs inline-flex items-center gap-0.5">
-                          ({tReview("approximately")}{" "}
-                          <PriceDisplay
-                            amount={pricing.expressFeeAED}
-                            minimumFractionDigits={0}
-                            maximumFractionDigits={0}
-                            className="text-red-500/80 font-normal text-xs"
-                          />
-                          )
-                        </span>
-                      </span>
-                    </div>
-                  )}
-
-                  {formData.selectedCourse && pricing.coursePriceAED > 0 && (
+                  <div className="space-y-1">
                     <div className="flex justify-between text-sm items-center">
                       <span className="text-slate-500 font-medium">
-                        {tReview("courseFee", {
-                          name: translateValue(
-                            coursesData.find(
-                              (c: any) => c.id === formData.selectedCourse,
-                            )?.name || "",
-                            locale,
-                          ),
-                        })}
+                        {tReview("examRegistrationFee")}
                       </span>
                       <span className="font-bold text-slate-900 inline-flex items-center gap-1">
-                        ${pricing.coursePriceUSD}{" "}
+                        ${pricing.baseFeeUSD}{" "}
                         <span className="text-slate-400 font-normal text-xs inline-flex items-center gap-0.5">
-                          (
+                          ({tReview("approximately")}{" "}
                           <PriceDisplay
-                            amount={pricing.coursePriceAED}
+                            amount={pricing.baseFeeAED}
                             minimumFractionDigits={0}
                             maximumFractionDigits={0}
                             className="text-slate-400 font-normal text-xs"
@@ -600,26 +559,119 @@ export default function FormTOEFLIBTRegistration({
                         </span>
                       </span>
                     </div>
-                  )}
+                    {VAT_PERCENT > 0 && pricing.examFeeVatAED > 0 && (
+                      <div className="flex justify-between text-xs text-slate-500 pl-3 items-center">
+                        <span>{tReview("examFeeVat", { percent: VAT_PERCENT })}</span>
+                        <span className="font-medium text-slate-700 inline-flex items-center gap-1">
+                          ${pricing.examFeeVatUSD}{" "}
+                          <span className="text-slate-400 font-normal text-xs inline-flex items-center gap-0.5">
+                            ({tReview("approximately")}{" "}
+                            <PriceDisplay
+                              amount={pricing.examFeeVatAED}
+                              className="text-slate-400 font-normal text-xs"
+                            />
+                            )
+                          </span>
+                        </span>
+                      </div>
+                    )}
+                  </div>
 
-                  {formData.selectedWorkshop &&
-                    pricing.workshopPriceAED > 0 && (
+                  <div className="space-y-1">
+                    <div className="flex justify-between text-sm items-center">
+                      <span className="text-slate-500 font-medium">
+                        {tReview("registrationServiceFee")}
+                      </span>
+                      <span className="font-bold text-slate-900 inline-flex items-center gap-1">
+                        ${pricing.registrationServiceFeeUSD}{" "}
+                        <span className="text-slate-400 font-normal text-xs inline-flex items-center gap-0.5">
+                          ({tReview("approximately")}{" "}
+                          <PriceDisplay
+                            amount={pricing.registrationServiceFeeAED}
+                            minimumFractionDigits={0}
+                            maximumFractionDigits={0}
+                            className="text-slate-400 font-normal text-xs"
+                          />
+                          )
+                        </span>
+                      </span>
+                    </div>
+                    {VAT_PERCENT > 0 && pricing.serviceFeeVatAED > 0 && (
+                      <div className="flex justify-between text-xs text-slate-500 pl-3 items-center">
+                        <span>{tReview("serviceFeeVat", { percent: VAT_PERCENT })}</span>
+                        <span className="font-medium text-slate-700 inline-flex items-center gap-1">
+                          ${pricing.serviceFeeVatUSD}{" "}
+                          <span className="text-slate-400 font-normal text-xs inline-flex items-center gap-0.5">
+                            ({tReview("approximately")}{" "}
+                            <PriceDisplay
+                              amount={pricing.serviceFeeVatAED}
+                              className="text-slate-400 font-normal text-xs"
+                            />
+                            )
+                          </span>
+                        </span>
+                      </div>
+                    )}
+                  </div>
+
+                  {pricing.isExpress && (
+                    <div className="space-y-1 animate-in fade-in slide-in-from-top-1 duration-300">
                       <div className="flex justify-between text-sm items-center">
                         <span className="text-slate-500 font-medium">
-                          {tReview("workshopFee", {
+                          {tReview("expressRegistrationFee")}
+                        </span>
+                        <span className="font-bold text-red-700 inline-flex items-center gap-1">
+                          ${pricing.expressFeeUSD}{" "}
+                          <span className="text-red-500/80 font-normal text-xs inline-flex items-center gap-0.5">
+                            ({tReview("approximately")}{" "}
+                            <PriceDisplay
+                              amount={pricing.expressFeeAED}
+                              minimumFractionDigits={0}
+                              maximumFractionDigits={0}
+                              className="text-red-500/80 font-normal text-xs"
+                            />
+                            )
+                          </span>
+                        </span>
+                      </div>
+                      {VAT_PERCENT > 0 && pricing.expressFeeVatAED > 0 && (
+                        <div className="flex justify-between text-xs text-slate-500 pl-3 items-center">
+                          <span>{tReview("expressFeeVat", { percent: VAT_PERCENT })}</span>
+                          <span className="font-medium text-slate-700 inline-flex items-center gap-1">
+                            ${pricing.expressFeeVatUSD}{" "}
+                            <span className="text-slate-400 font-normal text-xs inline-flex items-center gap-0.5">
+                              ({tReview("approximately")}{" "}
+                              <PriceDisplay
+                                amount={pricing.expressFeeVatAED}
+                                className="text-slate-400 font-normal text-xs"
+                              />
+                              )
+                            </span>
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {formData.selectedCourse && pricing.coursePriceAED > 0 && (
+                    <div className="space-y-1">
+                      <div className="flex justify-between text-sm items-center">
+                        <span className="text-slate-500 font-medium">
+                          {tReview("courseFee", {
                             name: translateValue(
-                              (workshopsData as any)[formData.selectedWorkshop]
-                                ?.name || "",
+                              coursesData.find(
+                                (c: any) => c.id === formData.selectedCourse,
+                              )?.name || "",
                               locale,
                             ),
                           })}
                         </span>
                         <span className="font-bold text-slate-900 inline-flex items-center gap-1">
-                          ${pricing.workshopPriceUSD}{" "}
+                          ${pricing.coursePriceUSD}{" "}
                           <span className="text-slate-400 font-normal text-xs inline-flex items-center gap-0.5">
                             (
                             <PriceDisplay
-                              amount={pricing.workshopPriceAED}
+                              amount={pricing.coursePriceAED}
                               minimumFractionDigits={0}
                               maximumFractionDigits={0}
                               className="text-slate-400 font-normal text-xs"
@@ -628,27 +680,106 @@ export default function FormTOEFLIBTRegistration({
                           </span>
                         </span>
                       </div>
+                      {VAT_PERCENT > 0 && pricing.courseFeeVatAED > 0 && (
+                        <div className="flex justify-between text-xs text-slate-500 pl-3 items-center">
+                          <span>{tReview("courseFeeVat", { percent: VAT_PERCENT })}</span>
+                          <span className="font-medium text-slate-700 inline-flex items-center gap-1">
+                            ${pricing.courseFeeVatUSD}{" "}
+                            <span className="text-slate-400 font-normal text-xs inline-flex items-center gap-0.5">
+                              ({tReview("approximately")}{" "}
+                              <PriceDisplay
+                                amount={pricing.courseFeeVatAED}
+                                className="text-slate-400 font-normal text-xs"
+                              />
+                              )
+                            </span>
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {formData.selectedWorkshop &&
+                    pricing.workshopPriceAED > 0 && (
+                      <div className="space-y-1">
+                        <div className="flex justify-between text-sm items-center">
+                          <span className="text-slate-500 font-medium">
+                            {tReview("workshopFee", {
+                              name: translateValue(
+                                (workshopsData as any)[formData.selectedWorkshop]
+                                  ?.name || "",
+                                locale,
+                              ),
+                            })}
+                          </span>
+                          <span className="font-bold text-slate-900 inline-flex items-center gap-1">
+                            ${pricing.workshopPriceUSD}{" "}
+                            <span className="text-slate-400 font-normal text-xs inline-flex items-center gap-0.5">
+                              (
+                              <PriceDisplay
+                                amount={pricing.workshopPriceAED}
+                                minimumFractionDigits={0}
+                                maximumFractionDigits={0}
+                                className="text-slate-400 font-normal text-xs"
+                              />
+                              )
+                            </span>
+                          </span>
+                        </div>
+                        {VAT_PERCENT > 0 && pricing.workshopFeeVatAED > 0 && (
+                          <div className="flex justify-between text-xs text-slate-500 pl-3 items-center">
+                            <span>{tReview("workshopFeeVat", { percent: VAT_PERCENT })}</span>
+                            <span className="font-medium text-slate-700 inline-flex items-center gap-1">
+                              ${pricing.workshopFeeVatUSD}{" "}
+                              <span className="text-slate-400 font-normal text-xs inline-flex items-center gap-0.5">
+                                ({tReview("approximately")}{" "}
+                                <PriceDisplay
+                                  amount={pricing.workshopFeeVatAED}
+                                  className="text-slate-400 font-normal text-xs"
+                                />
+                                )
+                              </span>
+                            </span>
+                          </div>
+                        )}
+                      </div>
                     )}
 
                   {VAT_PERCENT > 0 && (
-                    <div className="flex justify-between text-sm items-center pt-4 border-t border-slate-100 mt-2">
-                      <span className="text-slate-500 font-medium">
-                        {tReview("vat", { percent: VAT_PERCENT })}
-                      </span>
-                      <span className="font-bold text-slate-900 inline-flex items-center gap-1">
-                        ${pricing.vatUSD}{" "}
-                        <span className="text-slate-400 font-normal text-xs inline-flex items-center gap-0.5">
-                          ({tReview("approximately")}{" "}
-                          <PriceDisplay
-                            amount={pricing.vatAED}
-                            minimumFractionDigits={0}
-                            maximumFractionDigits={0}
-                            className="text-slate-400 font-normal text-xs"
-                          />
-                          )
+                    <>
+                      <div className="flex justify-between text-sm items-center pt-4 border-t border-slate-100 mt-2">
+                        <span className="text-slate-500 font-semibold">{tReview("subtotal")}</span>
+                        <span className="font-bold text-slate-900 inline-flex items-center gap-1">
+                          ${pricing.subtotalUSD}{" "}
+                          <span className="text-slate-400 font-normal text-xs inline-flex items-center gap-0.5">
+                            ({tReview("approximately")}{" "}
+                            <PriceDisplay
+                              amount={pricing.subtotalAED}
+                              className="text-slate-400 font-normal text-xs"
+                            />
+                            )
+                          </span>
                         </span>
-                      </span>
-                    </div>
+                      </div>
+                      <div className="flex justify-between text-sm items-center">
+                        <span className="text-slate-500 font-medium">
+                          {tReview("totalVat", { percent: VAT_PERCENT })}
+                        </span>
+                        <span className="font-bold text-slate-900 inline-flex items-center gap-1">
+                          ${pricing.vatUSD}{" "}
+                          <span className="text-slate-400 font-normal text-xs inline-flex items-center gap-0.5">
+                            ({tReview("approximately")}{" "}
+                            <PriceDisplay
+                              amount={pricing.vatAED}
+                              minimumFractionDigits={0}
+                              maximumFractionDigits={0}
+                              className="text-slate-400 font-normal text-xs"
+                            />
+                            )
+                          </span>
+                        </span>
+                      </div>
+                    </>
                   )}
 
                   <div className="pt-6 border-t border-slate-200">

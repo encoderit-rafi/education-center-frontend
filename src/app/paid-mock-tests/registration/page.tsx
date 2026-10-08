@@ -271,9 +271,22 @@ function PaidMockTestRegistrationForm({
     ];
 
     const feesList = [
-      { name: "price", label: "Price", value: String(base_price) },
-      { name: "vat_amount", label: "VAT", value: String(vatAmount) },
-      { name: "total_amount", label: "Total Amount", value: String(PRICE) },
+      {
+        name: "price",
+        label: "Price",
+        value: String(base_price),
+        vat: String(vatAmount),
+        vat_percentage: String(VAT_PERCENT),
+        vat_able_amount: String(base_price),
+      },
+      {
+        name: "total_amount",
+        label: "Total Amount",
+        value: String(PRICE),
+        vat: String(vatAmount),
+        vat_percentage: String(VAT_PERCENT),
+        vat_able_amount: String(base_price),
+      },
     ];
 
     const payload: Record<string, any> = {

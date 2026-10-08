@@ -1,6 +1,7 @@
 import { format } from "date-fns";
 import { EXAM_DETAILE_DATA } from "@/data";
 import { getIdTypeLabel } from "@/lib/utils";
+import { calculateVat, VAT_PERCENT, shouldApplyCourseOrWorkshopVat } from "@/lib/vat";
 
 export interface BookingPayloadInput {
   userId?: string | null;
@@ -951,57 +952,121 @@ export function compileBookingPayload(input: BookingPayloadInput) {
       (item: any) => item.id === input.examId || item.slug === input.examId,
     )?.name;
 
-  const feesList: Array<{ name: string; label: string; value: string }> = [
-    {
-      name: "exam_fee",
-      label: examName ? `${examName} Exam Fee` : "Exam Fee",
-      value: String(input.examFee),
-    },
+  const countryVal =
+    input.country ||
+    input.allFormData?.residenceCountry ||
+    input.allFormData?.country;
+
+  const isCourseVatApplicable = shouldApplyCourseOrWorkshopVat(
+    undefined,
+    countryVal,
+    input.allFormData?.selected_course_name
+  );
+
+  const isWorkshopVatApplicable = shouldApplyCourseOrWorkshopVat(
+    undefined,
+    countryVal,
+    input.allFormData?.selected_workshop_name
+  );
+
+  const createFeeItem = (
+    name: string,
+    label: string,
+    amount: number,
+    isVatApplicable: boolean = true
+  ) => {
+    const vatVal = isVatApplicable ? calculateVat(amount) : 0;
+    return {
+      name,
+      label,
+      value: String(amount),
+      vat: String(vatVal),
+      vat_percentage: isVatApplicable ? String(VAT_PERCENT) : "0",
+      vat_able_amount: isVatApplicable ? String(amount) : "0",
+    };
+  };
+
+  const subtotal =
+    (input.examFee || 0) +
+    (input.expressFee || 0) +
+    (input.additionalFee || 0) +
+    (input.courseFee || 0) +
+    (input.workshopFee || 0);
+
+  const totalCalculatedVat =
+    calculateVat(input.examFee || 0) +
+    calculateVat(input.expressFee || 0) +
+    calculateVat(input.additionalFee || 0) +
+    (isCourseVatApplicable ? calculateVat(input.courseFee || 0) : 0) +
+    (isWorkshopVatApplicable ? calculateVat(input.workshopFee || 0) : 0);
+
+  const totalVat = input.vatAmount ?? totalCalculatedVat;
+
+  const totalVatableAmount =
+    (input.examFee || 0) +
+    (input.expressFee || 0) +
+    (input.additionalFee || 0) +
+    (isCourseVatApplicable ? (input.courseFee || 0) : 0) +
+    (isWorkshopVatApplicable ? (input.workshopFee || 0) : 0);
+
+  const feesList: Array<{
+    name: string;
+    label: string;
+    value: string;
+    vat?: string;
+    vat_percentage?: string;
+    vat_able_amount?: string;
+  }> = [
+    createFeeItem(
+      "exam_fee",
+      examName ? `${examName} Exam Fee` : "Exam Fee",
+      input.examFee
+    ),
     input.expressFee
-      ? {
-        name: "express_fee",
-        label: examName ? `${examName} Express Fee` : "Express Fee",
-        value: String(input.expressFee),
-      }
+      ? createFeeItem(
+          "express_fee",
+          examName ? `${examName} Express Fee` : "Express Fee",
+          input.expressFee
+        )
       : null,
     input.additionalFee
-      ? {
-        name: "additional_fee",
-        label: examName ? `${examName} Registration Service Fee` : "Registration Service Fee",
-        value: String(input.additionalFee),
-      }
+      ? createFeeItem(
+          "additional_fee",
+          examName
+            ? `${examName} Registration Service Fee`
+            : "Registration Service Fee",
+          input.additionalFee
+        )
       : null,
     input.courseFee
-      ? {
-        name: "course_fee",
-        label: input.allFormData?.selected_course_name
-          ? `${input.allFormData.selected_course_name}`
-          : "Course Fee",
-        value: String(input.courseFee),
-      }
+      ? createFeeItem(
+          "course_fee",
+          input.allFormData?.selected_course_name
+            ? `${input.allFormData.selected_course_name}`
+            : "Course Fee",
+          input.courseFee,
+          isCourseVatApplicable
+        )
       : null,
     input.workshopFee
-      ? {
-        name: "workshop_fee",
-        label: input.allFormData?.selected_workshop_name
-          ? `${input.allFormData.selected_workshop_name}`
-          : "Workshop Fee",
-        value: String(input.workshopFee),
-      }
-      : null,
-    input.vatAmount
-      ? {
-        name: "vat_amount",
-        label: "VAT",
-        value: String(input.vatAmount),
-      }
+      ? createFeeItem(
+          "workshop_fee",
+          input.allFormData?.selected_workshop_name
+            ? `${input.allFormData.selected_workshop_name}`
+            : "Workshop Fee",
+          input.workshopFee,
+          isWorkshopVatApplicable
+        )
       : null,
     {
       name: "total_amount",
       label: "Total Amount",
       value: String(input.totalAmount),
+      vat: String(totalVat),
+      vat_percentage: String(VAT_PERCENT),
+      vat_able_amount: String(totalVatableAmount),
     },
-  ].filter((item): item is { name: string; label: string; value: string } => item !== null);
+  ].filter((item): item is NonNullable<typeof item> => item !== null);
 
   payload.form_data = {
     fees: feesList,

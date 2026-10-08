@@ -23,7 +23,6 @@ interface ReviewStepProps {
   serviceFee: number;
   vat: number;
   total: number;
-  tax: number;
   selectedCourseData?: any;
   selectedWorkshopData?: any;
 }
@@ -38,7 +37,6 @@ export function ReviewStep({
   serviceFee,
   vat,
   total,
-  tax,
   selectedCourseData,
   selectedWorkshopData,
 }: ReviewStepProps) {

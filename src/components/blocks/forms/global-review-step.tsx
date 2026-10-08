@@ -8,7 +8,7 @@ import { PriceDisplay } from "@/components/ui/price-display";
 import Stepper from "@/components/stepper";
 import { PaymentMethodSelector } from "@/components/blocks/payment-method-selector";
 import { cn } from "@/lib/utils";
-import { VAT_PERCENT, calculateVat } from "@/lib/vat";
+import { VAT_PERCENT, calculateVat, shouldApplyCourseOrWorkshopVat } from "@/lib/vat";
 
 // ─── ReviewSummaryGrid ────────────────────────────────────────────────────────
 
@@ -93,6 +93,14 @@ export const translateLabel = (label: string, locale: string) => {
     "exam fee": "رسوم الاختبار",
     "registration service fee": "رسوم خدمة التسجيل",
     "vat": "ضريبة القيمة المضافة",
+    "exam fee vat": "ضريبة رسوم الاختبار",
+    "exam fee service vat": "ضريبة رسوم خدمة التسجيل",
+    "registration service fee vat": "ضريبة رسوم خدمة التسجيل",
+    "course vat": "ضريبة رسوم الدورة",
+    "workshop vat": "ضريبة رسوم ورشة العمل",
+    "express fee vat": "ضريبة رسوم التسجيل السريع",
+    "express registration fee vat": "ضريبة رسوم التسجيل السريع",
+    "total vat": "إجمالي ضريبة القيمة المضافة",
   };
   return mapping[cleanLabel] || label;
 };
@@ -416,6 +424,9 @@ interface GlobalReviewStepProps {
   examName: string;
   baseFee: number;
   serviceFee: number;
+  expressFee?: number;
+  usdExamFee?: number | string;
+  showApproximately?: boolean;
   total: number;
   selectedCourseData?: any;
   selectedWorkshopData?: any;
@@ -426,6 +437,7 @@ interface GlobalReviewStepProps {
   reviewStepNumber: number;
   paymentStepNumber: number;
 
+  billingCountry?: string;
   customOrderSummary?: React.ReactNode;
 }
 
@@ -439,22 +451,51 @@ export function GlobalReviewStep({
   examName,
   baseFee,
   serviceFee,
+  expressFee = 0,
+  usdExamFee,
+  showApproximately = false,
   total,
   selectedCourseData,
   selectedWorkshopData,
   children,
   reviewStepNumber,
   paymentStepNumber,
+  billingCountry,
   customOrderSummary,
 }: GlobalReviewStepProps) {
   const t = useTranslations("FormsShared.GlobalReviewStep");
+  const locale = useLocale();
+
+  const examFee = baseFee || 0;
+  const examFeeVat = calculateVat(examFee);
+
+  const regServiceFee = serviceFee || 0;
+  const regServiceFeeVat = calculateVat(regServiceFee);
+
+  const expFee = expressFee || 0;
+  const expFeeVat = calculateVat(expFee);
+
   const selectedCoursePrice = selectedCourseData
     ? (selectedCourseData.discounted_price ??
       selectedCourseData.price * (1 - (selectedCourseData.special_discount || 0) / 100))
     : 0;
+  const isCourseVatApplicable = shouldApplyCourseOrWorkshopVat(
+    selectedCourseData?.deliveryType,
+    billingCountry,
+    selectedCourseData?.name || selectedCourseData?.title
+  );
+  const courseVat = isCourseVatApplicable ? calculateVat(selectedCoursePrice) : 0;
+
   const selectedWorkshopPrice = selectedWorkshopData ? selectedWorkshopData.price : 0;
-  const calculatedSubtotal = baseFee + serviceFee + selectedCoursePrice + selectedWorkshopPrice;
-  const vatAmount = calculateVat(calculatedSubtotal);
+  const isWorkshopVatApplicable = shouldApplyCourseOrWorkshopVat(
+    selectedWorkshopData?.type || selectedWorkshopData?.deliveryType,
+    billingCountry,
+    selectedWorkshopData?.name || selectedWorkshopData?.title
+  );
+  const workshopVat = isWorkshopVatApplicable ? calculateVat(selectedWorkshopPrice) : 0;
+
+  const calculatedSubtotal = examFee + regServiceFee + expFee + selectedCoursePrice + selectedWorkshopPrice;
+  const totalVat = examFeeVat + regServiceFeeVat + expFeeVat + courseVat + workshopVat;
 
   return (
     <form onSubmit={onSubmit} className="space-y-8">
@@ -488,12 +529,6 @@ export function GlobalReviewStep({
       <div className="space-y-8">
         <div className="flex items-center justify-between">
           <Stepper step={paymentStepNumber}>{t("payment")}</Stepper>
-          {/* <div className="text-right">
-            <PriceDisplay
-              amount={total}
-              className="text-2xl font-black text-[#A11D1D] flex items-center justify-end"
-            />
-          </div> */}
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -534,49 +569,140 @@ export function GlobalReviewStep({
                 customOrderSummary
               ) : (
                 <>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-slate-500 font-medium">{t("examFee", { name: examName })}</span>
-                    <PriceDisplay
-                      amount={baseFee}
-                      className="font-bold text-slate-900"
-                    />
-                  </div>
-
-                  <div className="flex justify-between text-sm">
-                    <span className="text-slate-500 font-medium">
-                      {t("registrationServiceFee")}
-                    </span>
-                    <PriceDisplay
-                      amount={serviceFee}
-                      className="font-bold text-slate-900"
-                    />
-                  </div>
-
-                  {selectedCourseData && (
+                  {usdExamFee && parseFloat(String(usdExamFee)) > 0 && (
                     <div className="flex justify-between text-sm">
                       <span className="text-slate-500 font-medium">
-                        {t("courseFee", { name: selectedCourseData.name })}
+                        {t("usdExamFee")}
+                      </span>
+                      <span className="font-bold text-slate-900">
+                        ${parseFloat(String(usdExamFee)).toFixed(2)}
+                      </span>
+                    </div>
+                  )}
+
+                  <div className="space-y-1">
+                    <div className="flex justify-between text-sm items-center">
+                      <span className="text-slate-500 font-medium">{t("examFee", { name: examName })}</span>
+                      <div className="flex items-center gap-1">
+                        {showApproximately && (
+                          <span className="text-xs text-slate-400 font-normal">
+                            {t("approximately")}
+                          </span>
+                        )}
+                        <PriceDisplay
+                          amount={examFee}
+                          className="font-bold text-slate-900"
+                        />
+                      </div>
+                    </div>
+                    {VAT_PERCENT > 0 && examFeeVat > 0 && (
+                      <div className="flex justify-between text-xs text-slate-500 pl-3">
+                        <span>{t("examFeeVat", { percent: VAT_PERCENT })}</span>
+                        <PriceDisplay
+                          amount={examFeeVat}
+                          className="font-medium text-slate-700"
+                        />
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="space-y-1">
+                    <div className="flex justify-between text-sm items-center">
+                      <span className="text-slate-500 font-medium">
+                        {t("registrationServiceFee")}
                       </span>
                       <PriceDisplay
-                        amount={
-                          selectedCourseData.discounted_price ??
-                          selectedCourseData.price *
-                          (1 - (selectedCourseData.special_discount || 0) / 100)
-                        }
+                        amount={regServiceFee}
                         className="font-bold text-slate-900"
                       />
+                    </div>
+                    {VAT_PERCENT > 0 && regServiceFeeVat > 0 && (
+                      <div className="flex justify-between text-xs text-slate-500 pl-3">
+                        <span>{t("serviceFeeVat", { percent: VAT_PERCENT })}</span>
+                        <PriceDisplay
+                          amount={regServiceFeeVat}
+                          className="font-medium text-slate-700"
+                        />
+                      </div>
+                    )}
+                  </div>
+
+                  {expFee > 0 && (
+                    <div className="space-y-1 animate-in fade-in slide-in-from-top-1 duration-300">
+                      <div className="flex justify-between text-sm items-center">
+                        <span className="text-slate-500 font-medium">
+                          {t("expressRegistrationFee")}
+                        </span>
+                        <PriceDisplay
+                          amount={expFee}
+                          className="font-bold text-red-700"
+                        />
+                      </div>
+                      {VAT_PERCENT > 0 && expFeeVat > 0 && (
+                        <div className="flex justify-between text-xs text-slate-500 pl-3">
+                          <span>{t("expressFeeVat", { percent: VAT_PERCENT })}</span>
+                          <PriceDisplay
+                            amount={expFeeVat}
+                            className="font-medium text-slate-700"
+                          />
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {selectedCourseData && (
+                    <div className="space-y-1">
+                      <div className="flex justify-between text-sm items-center">
+                        <span className="text-slate-500 font-medium">
+                          {t("courseFee", {
+                            name: translateValue(
+                              selectedCourseData.name || selectedCourseData.title || "",
+                              locale,
+                            ),
+                          })}
+                        </span>
+                        <PriceDisplay
+                          amount={selectedCoursePrice}
+                          className="font-bold text-slate-900"
+                        />
+                      </div>
+                      {VAT_PERCENT > 0 && courseVat > 0 && (
+                        <div className="flex justify-between text-xs text-slate-500 pl-3">
+                          <span>{t("courseFeeVat", { percent: VAT_PERCENT })}</span>
+                          <PriceDisplay
+                            amount={courseVat}
+                            className="font-medium text-slate-700"
+                          />
+                        </div>
+                      )}
                     </div>
                   )}
 
                   {selectedWorkshopData && (
-                    <div className="flex justify-between text-sm">
-                      <span className="text-slate-500 font-medium">
-                        {t("workshopFee", { name: selectedWorkshopData.name })}
-                      </span>
-                      <PriceDisplay
-                        amount={selectedWorkshopData.price}
-                        className="font-bold text-slate-900"
-                      />
+                    <div className="space-y-1">
+                      <div className="flex justify-between text-sm items-center">
+                        <span className="text-slate-500 font-medium">
+                          {t("workshopFee", {
+                            name: translateValue(
+                              selectedWorkshopData.name || selectedWorkshopData.title || "",
+                              locale,
+                            ),
+                          })}
+                        </span>
+                        <PriceDisplay
+                          amount={selectedWorkshopPrice}
+                          className="font-bold text-slate-900"
+                        />
+                      </div>
+                      {VAT_PERCENT > 0 && workshopVat > 0 && (
+                        <div className="flex justify-between text-xs text-slate-500 pl-3">
+                          <span>{t("workshopFeeVat", { percent: VAT_PERCENT })}</span>
+                          <PriceDisplay
+                            amount={workshopVat}
+                            className="font-medium text-slate-700"
+                          />
+                        </div>
+                      )}
                     </div>
                   )}
 
@@ -591,10 +717,10 @@ export function GlobalReviewStep({
                       </div>
                       <div className="flex justify-between text-sm">
                         <span className="text-slate-500 font-medium">
-                          {t("vat", { percent: VAT_PERCENT })}
+                          {t("totalVat", { percent: VAT_PERCENT })}
                         </span>
                         <PriceDisplay
-                          amount={vatAmount}
+                          amount={totalVat}
                           className="font-bold text-slate-900"
                         />
                       </div>

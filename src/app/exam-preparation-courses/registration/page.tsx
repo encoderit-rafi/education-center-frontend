@@ -324,6 +324,25 @@ function CourseRegistrationForm({ className }: { className?: string }) {
       { name: "address", label: "Address", value: formData.address },
     ];
 
+    const feesList = [
+      {
+        name: "course_fee",
+        label: courseData?.name || (courseData as any)?.title || "Course Fee",
+        value: String(base_price),
+        vat: String(vatAmount),
+        vat_percentage: String(VAT_PERCENT),
+        vat_able_amount: String(base_price - discount_amount),
+      },
+      {
+        name: "total_amount",
+        label: "Total Amount",
+        value: String(total_amount),
+        vat: String(vatAmount),
+        vat_percentage: String(VAT_PERCENT),
+        vat_able_amount: String(base_price - discount_amount),
+      },
+    ];
+
     const payload: Record<string, any> = {
       course_id: courseData?.id || courseSlug || "",
       sub_course_id: null,
@@ -348,9 +367,11 @@ function CourseRegistrationForm({ className }: { className?: string }) {
       vat_amount: vatAmount,
       payment_methods: formData.paymentMethod,
       form_data: {
+        fees: feesList,
         exam_info: examInfoList,
       },
       formData: {
+        fees: feesList,
         exam_info: examInfoList,
       },
       ...(appliedCoupon
@@ -362,6 +383,9 @@ function CourseRegistrationForm({ className }: { className?: string }) {
           }
         : {}),
     };
+
+
+
 
     const finalPayload = omitEmpty(payload);
 
