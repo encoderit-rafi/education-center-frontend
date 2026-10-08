@@ -136,7 +136,7 @@ export default function ContactUs() {
                       WhatsApp
                     </a>
                     <a
-                      href="https://t.me/+971555688035"
+                      href="https://t.me/+971525772708"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex-1 inline-flex items-center justify-center gap-1.5 px-2.5 sm:px-4 py-2.5 text-xs font-black text-white bg-[#0088cc] hover:bg-[#0077b5] rounded-xl shadow-sm hover:shadow transition-all text-center"

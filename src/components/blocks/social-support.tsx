@@ -53,7 +53,7 @@ export default function SocialSupport() {
               </a>
 
               <a
-                href="https://t.me/+971555688035"
+                href="https://t.me/+971525772708"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center p-3 rounded-2xl hover:bg-sky-500/10 transition-colors group"
